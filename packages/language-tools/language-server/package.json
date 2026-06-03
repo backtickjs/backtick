@@ -1,0 +1,10 @@
+{
+  "name": "@backtick/language-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@volar/language-server": "^2.4.28"
+  }
+}
