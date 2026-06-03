@@ -1,4 +1,11 @@
 {
   "private": true,
-  "packageManager": "pnpm@11.5.1"
+  "packageManager": "pnpm@11.5.1",
+  "scripts": {
+    "typecheck": "tsc -b"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
+  }
 }
