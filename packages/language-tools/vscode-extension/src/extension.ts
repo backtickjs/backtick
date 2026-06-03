@@ -1,10 +1,11 @@
 import * as serverProtocol from "@volar/language-server/protocol";
 import { activateAutoInsertion, createLabsInfo, getTsdk } from "@volar/vscode";
-import { LanguageClient, TransportKind } from "@volar/vscode/node";
-import type {
+import {
   BaseLanguageClient,
+  LanguageClient,
   LanguageClientOptions,
   ServerOptions,
+  TransportKind,
 } from "@volar/vscode/node";
 import * as vscode from "vscode";
 
@@ -16,7 +17,7 @@ export async function activate(context: vscode.ExtensionContext) {
     "dist",
     "server.js",
   );
-  const runOptions = { execArgv: [] as string[] };
+  const runOptions = { execArgv: <string[]>[] };
   const debugOptions = { execArgv: ["--nolazy", "--inspect=" + 6009] };
   const serverOptions: ServerOptions = {
     run: {
@@ -55,6 +56,6 @@ export async function activate(context: vscode.ExtensionContext) {
   return labsInfo.extensionExports;
 }
 
-export function deactivate(): Thenable<void> | undefined {
+export function deactivate() {
   return client?.stop();
 }
