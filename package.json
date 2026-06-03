@@ -1,6 +1,10 @@
 {
   "private": true,
   "packageManager": "pnpm@11.5.1",
+  "workspaces": [
+    "packages/*",
+    "packages/language-tools/*"
+  ],
   "scripts": {
     "typecheck": "tsc -b"
   },
