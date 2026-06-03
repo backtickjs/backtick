@@ -7,3 +7,5 @@ settings:
 importers:
 
   .: {}
+
+  packages/language-tools/vscode-extension: {}
