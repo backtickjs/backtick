@@ -17,6 +17,8 @@ export default async function build() {
   const config = {
     entryPoints: {
       "dist/node/client": "./src/client.ts",
+      "dist/node/server":
+        "./node_modules/@backtick/language-server/bin/nodeServer.js",
     },
     bundle: true,
     metafile: metaFile,
