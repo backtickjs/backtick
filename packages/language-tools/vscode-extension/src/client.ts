@@ -15,6 +15,7 @@ export async function activate(context: vscode.ExtensionContext) {
   const serverModule = vscode.Uri.joinPath(
     context.extensionUri,
     "dist",
+    "node",
     "server.js",
   );
   const runOptions = { execArgv: <string[]>[] };
