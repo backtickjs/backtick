@@ -15,10 +15,9 @@ const FULL_DATA = {
   verification: true,
 } as const;
 
-export default function getBacktickLanguagePlugin(): LanguagePlugin<
-  URI,
-  BacktickVirtualCode
-> {
+export default function getBacktickLanguagePlugin(
+  ts: typeof import("typescript"),
+): LanguagePlugin<URI, BacktickVirtualCode> {
   return {
     getLanguageId(uri) {
       if (uri.path.endsWith(".bt")) {
@@ -27,7 +26,7 @@ export default function getBacktickLanguagePlugin(): LanguagePlugin<
     },
     createVirtualCode(_uri, languageId, snapshot) {
       if (languageId === "backtick") {
-        return new BacktickVirtualCode(snapshot);
+        return new BacktickVirtualCode(ts, snapshot);
       }
     },
     typescript: {
@@ -58,12 +57,16 @@ export class BacktickVirtualCode implements VirtualCode {
   embeddedCodes: VirtualCode[] = [];
   snapshot: ts.IScriptSnapshot;
 
-  constructor(source: ts.IScriptSnapshot) {
-    // The root *is* the full source with each recognized backtick region
-    // replaced in place by its generated TS (e.g. `1` -> `(() => 1)()`).
-    // Everything outside the backticks is kept verbatim and identity-mapped,
-    // so the whole file type-checks and only the regions are transformed.
-    const { code, mappings } = compile(source.getText(0, source.getLength()));
+  constructor(ts: typeof import("typescript"), source: ts.IScriptSnapshot) {
+    // The root *is* the full source with each backtick region that parses as a
+    // TypeScript expression replaced in place by its generated TS
+    // (e.g. `1` -> `(() => 1)()`). Everything outside the backticks is kept
+    // verbatim and identity-mapped, so the whole file type-checks and only the
+    // regions are transformed.
+    const { code, mappings } = compile(
+      ts,
+      source.getText(0, source.getLength()),
+    );
     this.mappings = mappings;
     this.snapshot = {
       getText: (start, end) => code.substring(start, end),
@@ -77,33 +80,35 @@ const WRAP_PREFIX = "(() => ";
 const WRAP_SUFFIX = ")()";
 
 /**
- * Produces the generated TS by copying the source verbatim and replacing each
- * recognized backtick region in place (e.g. `1` -> `(() => 1)()`). Pass-through
- * text is identity-mapped; the inner content of each region is mapped onto its
- * generated location so hover, diagnostics, completion, etc. line up with the
+ * Produces the generated TS by copying the source verbatim and rewriting the
+ * contents of each backtick region that parses as a TypeScript expression. The
+ * expression is walked recursively; only the numeric literal `1` is rewritten
+ * (to `(() => 1)()`) — every other node is emitted verbatim. Pass-through text
+ * is identity-mapped so hover, diagnostics, completion, etc. line up with the
  * original `.bt` file.
- *
- * For this initial implementation we only recognize the literal `1`.
  */
-function compile(source: string): { code: string; mappings: CodeMapping[] } {
+function compile(
+  ts: typeof import("typescript"),
+  source: string,
+): { code: string; mappings: CodeMapping[] } {
   const mappings: CodeMapping[] = [];
   let code = "";
 
-  // Start of the current verbatim chunk, in source and generated coords.
-  let identityStart = 0;
-  let identityGenStart = 0;
-
-  const flushIdentity = (sourceEnd: number) => {
-    if (sourceEnd <= identityStart) return;
-    const text = source.slice(identityStart, sourceEnd);
+  // Copy [sourceStart, sourceEnd) of the source into the output verbatim, with
+  // an identity mapping.
+  const passThrough = (sourceStart: number, sourceEnd: number) => {
+    if (sourceEnd <= sourceStart) return;
     mappings.push({
-      sourceOffsets: [identityStart],
-      generatedOffsets: [identityGenStart],
-      lengths: [text.length],
+      sourceOffsets: [sourceStart],
+      generatedOffsets: [code.length],
+      lengths: [sourceEnd - sourceStart],
       data: FULL_DATA,
     });
-    code += text;
+    code += source.slice(sourceStart, sourceEnd);
   };
+
+  // Next source offset not yet emitted.
+  let cursor = 0;
 
   let index = 0;
   while (true) {
@@ -119,48 +124,138 @@ function compile(source: string): { code: string; mappings: CodeMapping[] } {
 
     const contentStart = open + 1;
     const content = source.slice(contentStart, close);
+    const expression = parseExpression(ts, content);
 
-    // Keep it simple: only `1` is recognized for now. Any other backtick region
-    // is left untouched (handled by the surrounding identity pass-through).
-    if (content !== "1") {
+    // Leave regions that don't parse as a single expression untouched; the
+    // surrounding pass-through emits them verbatim, backticks included.
+    if (!expression) {
       index = close + 1;
       continue;
     }
 
-    // Emit everything up to the opening backtick verbatim, then replace the
-    // whole `...` literal with the wrapped expression `(() => 1)()`.
-    flushIdentity(open);
+    // Emit up to the opening backtick, then walk the expression. The backticks
+    // are dropped from the output but kept in the mapping below.
+    passThrough(cursor, open);
+    cursor = close + 1;
 
-    const genStart = code.length;
-    code += WRAP_PREFIX;
-    const innerGenStart = code.length;
-    code += content;
-    code += WRAP_SUFFIX;
+    const regionGenStart = code.length;
+    emitExpression(expression, contentStart, content);
 
-    // Two mappings: the whole `1` literal maps onto the whole `(() => 1)()`
-    // expression (source and generated lengths differ), and the inner content
-    // maps `1` -> `1` so positions on it resolve exactly.
+    // Map the whole `...` literal — backticks included — onto the whole
+    // generated region (source and generated lengths differ).
     mappings.push({
       sourceOffsets: [open],
-      generatedOffsets: [genStart],
+      generatedOffsets: [regionGenStart],
       lengths: [close - open + 1],
-      generatedLengths: [code.length - genStart],
-      data: FULL_DATA,
-    });
-    mappings.push({
-      sourceOffsets: [contentStart],
-      generatedOffsets: [innerGenStart],
-      lengths: [content.length],
+      generatedLengths: [code.length - regionGenStart],
       data: FULL_DATA,
     });
 
     index = close + 1;
-    identityStart = index;
-    identityGenStart = code.length;
   }
 
-  // Emit any trailing verbatim text after the last region.
-  flushIdentity(source.length);
+  // Trailing verbatim text after the last region.
+  passThrough(cursor, source.length);
 
   return { code, mappings };
+
+  /**
+   * Recursively walks `node`, emitting its content verbatim except for the
+   * numeric literal `1`, which is rewritten to `(() => 1)()`. `contentStart` is
+   * the source offset of the parsed content; node offsets are relative to it.
+   */
+  function emitExpression(
+    node: ts.Node,
+    contentStart: number,
+    content: string,
+  ): void {
+    const sourceFile = node.getSourceFile();
+
+    // Cursor within `content` tracking what's been emitted so far.
+    let local = 0;
+
+    const emitVerbatimTo = (localEnd: number) => {
+      if (localEnd <= local) return;
+      mappings.push({
+        sourceOffsets: [contentStart + local],
+        generatedOffsets: [code.length],
+        lengths: [localEnd - local],
+        data: FULL_DATA,
+      });
+      code += content.slice(local, localEnd);
+      local = localEnd;
+    };
+
+    const walk = (current: ts.Node) => {
+      if (ts.isNumericLiteral(current) && current.text === "1") {
+        const nodeStart = current.getStart(sourceFile);
+        const nodeEnd = current.getEnd();
+
+        // Emit anything before the literal verbatim.
+        emitVerbatimTo(nodeStart);
+
+        // `1` -> `(() => 1)()`.
+        code += WRAP_PREFIX;
+        const innerGenStart = code.length;
+        code += current.text;
+        code += WRAP_SUFFIX;
+
+        // Map `1` -> `1` so a position on the literal resolves exactly; the
+        // surrounding `(() => … )()` is covered by the region-level mapping.
+        mappings.push({
+          sourceOffsets: [contentStart + nodeStart],
+          generatedOffsets: [innerGenStart],
+          lengths: [nodeEnd - nodeStart],
+          data: FULL_DATA,
+        });
+
+        local = nodeEnd;
+        return;
+      }
+
+      current.forEachChild(walk);
+    };
+
+    walk(node);
+
+    // Emit any trailing content (e.g. whitespace) after the last node.
+    emitVerbatimTo(content.length);
+  }
+}
+
+/**
+ * Parses `content` as a standalone TypeScript expression. Returns the
+ * expression node when it parses without syntax errors into exactly one
+ * expression statement, otherwise `undefined`.
+ */
+function parseExpression(
+  ts: typeof import("typescript"),
+  content: string,
+): ts.Expression | undefined {
+  const sourceFile = ts.createSourceFile(
+    "expression.ts",
+    content,
+    ts.ScriptTarget.Latest,
+    /* setParentNodes */ true,
+    ts.ScriptKind.TS,
+  );
+
+  // `parseDiagnostics` isn't on the public type, but is populated by the parser.
+  const parseDiagnostics = (
+    sourceFile as unknown as { parseDiagnostics?: readonly unknown[] }
+  ).parseDiagnostics;
+  if (parseDiagnostics && parseDiagnostics.length > 0) {
+    return undefined;
+  }
+
+  const [statement] = sourceFile.statements;
+  if (
+    sourceFile.statements.length !== 1 ||
+    !statement ||
+    !ts.isExpressionStatement(statement)
+  ) {
+    return undefined;
+  }
+
+  return statement.expression;
 }

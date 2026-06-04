@@ -20,7 +20,7 @@ connection.onInitialize((params) => {
   return server.initialize(
     params,
     createTypeScriptProject(tsdk.typescript, tsdk.diagnosticMessages, () => ({
-      languagePlugins: getLanguagePlugins(),
+      languagePlugins: getLanguagePlugins(tsdk.typescript),
     })),
     getLanguageServicePlugins(tsdk.typescript),
   );
