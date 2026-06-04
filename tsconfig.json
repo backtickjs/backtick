@@ -2,6 +2,7 @@
   "extends": "./configs/tsconfig.base.json",
   "files": [],
   "references": [
+    { "path": "packages/compiler" },
     { "path": "packages/language-tools/language-server" },
     { "path": "packages/language-tools/vscode-extension" }
   ]

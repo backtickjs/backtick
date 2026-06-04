@@ -15,8 +15,13 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/compiler: {}
+
   packages/language-tools/language-server:
     dependencies:
+      '@backtick/compiler':
+        specifier: ^0.0.0
+        version: link:../../compiler
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28
