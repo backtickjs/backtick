@@ -4,6 +4,7 @@ import {
   type LanguagePlugin,
   type VirtualCode,
 } from "@volar/language-core";
+import { backtick2tsx } from "./backtick2tsx";
 import type { IScriptSnapshot } from "typescript";
 import type * as ts from "typescript";
 import { URI } from "vscode-uri";
@@ -18,9 +19,10 @@ export default function getBacktickLanguagePlugin(): LanguagePlugin<
         return "backtick";
       }
     },
-    createVirtualCode(_uri, languageId, snapshot) {
+    createVirtualCode(uri, languageId, snapshot) {
       if (languageId === "backtick") {
-        return new BacktickVirtualCode(snapshot);
+        const fileName = uri.fsPath.replace(/\\/g, "/");
+        return new BacktickVirtualCode(fileName, snapshot);
       }
     },
     typescript: {
@@ -52,47 +54,31 @@ export class BacktickVirtualCode implements VirtualCode {
   mappings!: CodeMapping[];
   embeddedCodes!: VirtualCode[];
 
-  constructor(public snapshot: IScriptSnapshot) {
-    this.onSnapshotUpdated();
-  }
-
-  update(newSnapshot: IScriptSnapshot) {
-    this.snapshot = newSnapshot;
-    this.onSnapshotUpdated();
-  }
-
-  private onSnapshotUpdated() {
-    const length = this.snapshot.getLength();
-
-    // Identity mapping: the generated code maps 1:1 back onto the original
-    // `.bt` source, so every language feature resolves to the right offset.
-    // As the Backtick syntax grows, source-to-TypeScript transformation and
-    // finer-grained mappings will live here.
+  constructor(
+    public fileName: string,
+    public snapshot: IScriptSnapshot,
+  ) {
     this.mappings = [
       {
         sourceOffsets: [0],
         generatedOffsets: [0],
-        lengths: [length],
+        lengths: [this.snapshot.getLength()],
         data: {
-          completion: true,
-          format: true,
-          navigation: true,
-          semantic: true,
-          structure: true,
           verification: true,
+          completion: true,
+          semantic: true,
+          navigation: true,
+          structure: true,
+          format: true,
         },
       },
     ];
 
-    // For now the whole document is treated as embedded TSX, so the TS
-    // language service powers intellisense (including JSX) inside `.bt` files.
-    this.embeddedCodes = [
-      {
-        id: "tsx",
-        languageId: "typescriptreact",
-        snapshot: this.snapshot,
-        mappings: this.mappings,
-      },
-    ];
+    const tsx = backtick2tsx(
+      this.snapshot.getText(0, this.snapshot.getLength()),
+      this.fileName,
+    );
+
+    this.embeddedCodes = [tsx.virtualCode];
   }
 }
