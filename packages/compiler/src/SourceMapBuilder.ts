@@ -1,5 +1,16 @@
 import type { CodeMapping } from "@volar/language-core";
-import type { MappedSegment } from "./rewriter.js";
+
+/** A source span, expressed as an absolute offset into the original file. */
+export interface SourceSpan {
+  start: number;
+  length: number;
+}
+
+/** A piece of generated code, optionally mapped back to a source span. */
+export interface MappedSegment {
+  virtual: string;
+  source?: SourceSpan;
+}
 
 const FULL_DATA = {
   completion: true,

@@ -34,7 +34,7 @@ export function compile(
       ts.isNoSubstitutionTemplateLiteral(node) ||
       ts.isTemplateExpression(node)
     ) {
-      compileBacktick(node, sourceFile, rewriter, builder);
+      compileBacktick(ts, node, sourceFile, rewriter, builder);
       return;
     }
     node.forEachChild(walk);

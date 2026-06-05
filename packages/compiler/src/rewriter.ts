@@ -1,57 +1,31 @@
 import type * as ts from "typescript";
 
-/** A source span, expressed as an absolute offset into the original file. */
-export interface SourceSpan {
-  start: number;
-  length: number;
-}
-
-/** A piece of generated code, optionally mapped back to a source span. */
-export interface MappedSegment {
-  virtual: string;
-  source?: SourceSpan;
-}
-
-/** The generated segments for a rewritten backtick template. */
-export interface RewrittenTemplate {
-  segments: MappedSegment[];
-}
-
 /**
- * Rewrites a backtick template into `Backtick.lift`/`Backtick.lower` calls:
+ * Rewrites a backtick template into a `Backtick.lift`/`Backtick.lower` call
+ * expression:
  *
  *   `` `${`x`}` `` => Backtick.lift(Backtick.lower(Backtick.lift(x)))
  *
- * The rewrite produces a real TypeScript expression built with `ts.factory`,
- * reusing the original identifier/literal nodes as the call arguments. Emitting
- * then walks that expression: the synthetic call heads are stringified with the
- * printer, while each reused identifier keeps its own source mapping. Only
- * identifiers carry a mapping; calls, punctuation, and literals are unmapped.
+ * The result is a real TypeScript expression built with `ts.factory`, reusing
+ * the original identifier/literal nodes as the call arguments so their source
+ * positions travel with them. Turning the expression into mapped virtual code
+ * is the caller's job.
  */
 export class Rewriter {
   private readonly ts: typeof import("typescript");
-  private readonly printer: ts.Printer;
-  private readonly printFile: ts.SourceFile;
 
   constructor(ts: typeof import("typescript")) {
     this.ts = ts;
-    this.printer = ts.createPrinter();
-    this.printFile = ts.createSourceFile(
-      "print.tsx",
-      "",
-      ts.ScriptTarget.Latest,
-    );
   }
 
   /**
-   * Rewrites a backtick template into its mapped generated segments. Returns
+   * Rewrites a backtick template into its lift/lower call expression. Returns
    * `undefined` when the template body is not a single supported expression.
    */
   rewrite(
     template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
-  ): RewrittenTemplate | undefined {
-    const root = this.rewriteNode(template);
-    return root && { segments: this.emit(root) };
+  ): ts.Expression | undefined {
+    return this.rewriteNode(template);
   }
 
   /**
@@ -158,40 +132,5 @@ export class Rewriter {
       method,
     );
     return factory.createCallExpression(callee, undefined, [argument]);
-  }
-
-  /** Walks the rewritten expression into mapped segments. */
-  private emit(node: ts.Expression): MappedSegment[] {
-    const { ts } = this;
-
-    if (ts.isCallExpression(node)) {
-      const head = this.print(node.expression);
-      const [argument] = node.arguments;
-      return [
-        { virtual: `${head}(` },
-        ...this.emit(argument),
-        { virtual: ")" },
-      ];
-    }
-
-    if (ts.isIdentifier(node)) {
-      const source = { start: node.pos, length: node.end - node.pos };
-      return [{ virtual: node.text, source }];
-    }
-
-    if (ts.isNumericLiteral(node)) {
-      return [{ virtual: node.text }];
-    }
-
-    throw new Error(`Unexpected rewritten node: ${ts.SyntaxKind[node.kind]}`);
-  }
-
-  /** Stringifies a synthetic node (a call head) with the printer. */
-  private print(node: ts.Node): string {
-    return this.printer.printNode(
-      this.ts.EmitHint.Unspecified,
-      node,
-      this.printFile,
-    );
   }
 }
