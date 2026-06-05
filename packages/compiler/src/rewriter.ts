@@ -22,14 +22,25 @@ export interface RewrittenTemplate {
  *
  *   `` `${`x`}` `` => Backtick.lift(Backtick.lower(Backtick.lift(x)))
  *
- * Only identifiers (variables, functions, etc.) carry a source mapping; the
- * generated calls, punctuation, and literals are emitted unmapped.
+ * The rewrite produces a real TypeScript expression built with `ts.factory`,
+ * reusing the original identifier/literal nodes as the call arguments. Emitting
+ * then walks that expression: the synthetic call heads are stringified with the
+ * printer, while each reused identifier keeps its own source mapping. Only
+ * identifiers carry a mapping; calls, punctuation, and literals are unmapped.
  */
 export class Rewriter {
   private readonly ts: typeof import("typescript");
+  private readonly printer: ts.Printer;
+  private readonly printFile: ts.SourceFile;
 
   constructor(ts: typeof import("typescript")) {
     this.ts = ts;
+    this.printer = ts.createPrinter();
+    this.printFile = ts.createSourceFile(
+      "print.tsx",
+      "",
+      ts.ScriptTarget.Latest,
+    );
   }
 
   /**
@@ -39,42 +50,30 @@ export class Rewriter {
   rewrite(
     template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
   ): RewrittenTemplate | undefined {
-    const segments = this.rewriteNode(template, 0);
-    if (!segments) return undefined;
-    return { segments };
+    const root = this.rewriteNode(template);
+    return root && { segments: this.emit(root) };
   }
 
   /**
-   * Rewrites a node into mapped segments. `offset` is added to the node's start
-   * to translate from its source file into the original file — it is `0` for
-   * nodes from the original file and the content offset for expressions parsed
-   * out of a backtick's text.
+   * Rewrites a node into the lift/lower call expression. Leaves are returned
+   * as-is, so this stays purely structural — positions are handled once, when
+   * text is parsed (see `rewriteQuotedText`/`rebase`).
    */
-  private rewriteNode(
-    node: ts.Node,
-    offset: number,
-  ): MappedSegment[] | undefined {
+  private rewriteNode(node: ts.Node): ts.Expression | undefined {
     const { ts } = this;
 
     if (ts.isNoSubstitutionTemplateLiteral(node)) {
-      const start = offset + node.pos;
-      const body = this.rewriteQuotedText(node.text, start + 1);
+      const body = this.rewriteQuotedText(node);
       return body && this.lift(body);
     }
 
     if (ts.isTemplateExpression(node)) {
-      const body = this.rewriteTemplateBody(node, offset);
+      const body = this.rewriteTemplateBody(node);
       return body && this.lift(body);
     }
 
-    if (ts.isIdentifier(node)) {
-      const start = offset + node.pos;
-      const length = node.end - node.pos;
-      return [{ virtual: node.text, source: { start, length } }];
-    }
-
-    if (ts.isNumericLiteral(node)) {
-      return [{ virtual: node.text }];
+    if (ts.isIdentifier(node) || ts.isNumericLiteral(node)) {
+      return node;
     }
 
     return undefined;
@@ -86,8 +85,7 @@ export class Rewriter {
    */
   private rewriteTemplateBody(
     node: ts.TemplateExpression,
-    offset: number,
-  ): MappedSegment[] | undefined {
+  ): ts.Expression | undefined {
     if (node.head.text !== "" || node.templateSpans.length !== 1) {
       return undefined;
     }
@@ -95,18 +93,23 @@ export class Rewriter {
     const [span] = node.templateSpans;
     if (span.literal.text !== "") return undefined;
 
-    const inner = this.rewriteNode(span.expression, offset);
+    const inner = this.rewriteNode(span.expression);
     return inner && this.lower(inner);
   }
 
-  /** Parses a backtick's literal text as an expression and rewrites it. */
+  /**
+   * Parses a backtick's literal text as an expression and rewrites it. The
+   * parsed nodes live in a throwaway source file, so they are first rebased
+   * into the original file's coordinates — the single place offsets are dealt
+   * with.
+   */
   private rewriteQuotedText(
-    text: string,
-    offset: number,
-  ): MappedSegment[] | undefined {
-    const expression = this.parse(text);
+    literal: ts.NoSubstitutionTemplateLiteral,
+  ): ts.Expression | undefined {
+    const expression = this.parse(literal.text);
     if (!expression) return undefined;
-    return this.rewriteNode(expression, offset);
+    this.rebase(expression, literal.pos + 1);
+    return this.rewriteNode(expression);
   }
 
   /** Parses `text` as a single expression, or returns `undefined`. */
@@ -130,17 +133,65 @@ export class Rewriter {
     return statement.expression;
   }
 
-  /** Wraps `body` in an unmapped `Backtick.lift(...)` call. */
-  private lift(body: MappedSegment[]): MappedSegment[] {
-    return this.call("Backtick.lift", body);
+  /** Shifts a parsed subtree's positions into the original file's coordinates. */
+  private rebase(node: ts.Node, offset: number): void {
+    const { ts } = this;
+    ts.setTextRange(node, { pos: node.pos + offset, end: node.end + offset });
+    node.forEachChild((child) => this.rebase(child, offset));
   }
 
-  /** Wraps `body` in an unmapped `Backtick.lower(...)` call. */
-  private lower(body: MappedSegment[]): MappedSegment[] {
-    return this.call("Backtick.lower", body);
+  /** Wraps `argument` in a `Backtick.lift(...)` call. */
+  private lift(argument: ts.Expression): ts.Expression {
+    return this.call("lift", argument);
   }
 
-  private call(method: string, body: MappedSegment[]): MappedSegment[] {
-    return [{ virtual: `${method}(` }, ...body, { virtual: ")" }];
+  /** Wraps `argument` in a `Backtick.lower(...)` call. */
+  private lower(argument: ts.Expression): ts.Expression {
+    return this.call("lower", argument);
+  }
+
+  /** Builds a synthetic `Backtick.<method>(argument)` call expression. */
+  private call(method: string, argument: ts.Expression): ts.CallExpression {
+    const { factory } = this.ts;
+    const callee = factory.createPropertyAccessExpression(
+      factory.createIdentifier("Backtick"),
+      method,
+    );
+    return factory.createCallExpression(callee, undefined, [argument]);
+  }
+
+  /** Walks the rewritten expression into mapped segments. */
+  private emit(node: ts.Expression): MappedSegment[] {
+    const { ts } = this;
+
+    if (ts.isCallExpression(node)) {
+      const head = this.print(node.expression);
+      const [argument] = node.arguments;
+      return [
+        { virtual: `${head}(` },
+        ...this.emit(argument),
+        { virtual: ")" },
+      ];
+    }
+
+    if (ts.isIdentifier(node)) {
+      const source = { start: node.pos, length: node.end - node.pos };
+      return [{ virtual: node.text, source }];
+    }
+
+    if (ts.isNumericLiteral(node)) {
+      return [{ virtual: node.text }];
+    }
+
+    throw new Error(`Unexpected rewritten node: ${ts.SyntaxKind[node.kind]}`);
+  }
+
+  /** Stringifies a synthetic node (a call head) with the printer. */
+  private print(node: ts.Node): string {
+    return this.printer.printNode(
+      this.ts.EmitHint.Unspecified,
+      node,
+      this.printFile,
+    );
   }
 }

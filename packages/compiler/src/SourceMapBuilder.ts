@@ -34,17 +34,17 @@ export default class SourceMapBuilder {
    */
   replaceWith(start: number, end: number, segments: MappedSegment[]): void {
     this.passThroughTo(start);
-    for (const { generated, source } of segments) {
+    for (const { virtual, source } of segments) {
       if (source) {
         this.mappings.push({
           sourceOffsets: [source.start],
           generatedOffsets: [this.virtualCode.length],
           lengths: [source.length],
-          generatedLengths: [generated.length],
+          generatedLengths: [virtual.length],
           data: FULL_DATA,
         });
       }
-      this.virtualCode += generated;
+      this.virtualCode += virtual;
     }
     this.cursor = end;
   }
