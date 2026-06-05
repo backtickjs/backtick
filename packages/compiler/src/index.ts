@@ -1,9 +1,14 @@
-import type { CompileResult } from "./types.js";
+import type { CodeMapping } from "@volar/language-core";
 import compileSourceFile from "./compileSourceFile.js";
 
 export type CompileOptions = {
   filename: string;
 };
+
+export interface CompileResult {
+  virtualCode: string;
+  mappings: CodeMapping[];
+}
 
 export function compile(
   ts: typeof import("typescript"),

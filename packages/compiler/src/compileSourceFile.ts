@@ -1,6 +1,6 @@
 import type ts from "typescript";
-import type { CompileResult } from "./types.js";
 import compileBacktick from "./compileBacktick.js";
+import type { CompileResult } from "./index.js";
 
 export default function compileSourceFile(
   ts: typeof import("typescript"),

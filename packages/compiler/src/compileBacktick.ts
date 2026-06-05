@@ -1,6 +1,7 @@
 import type { CodeMapping } from "@volar/language-core";
 import type * as ts from "typescript";
-import type { CompileResult, RewriteResult } from "./types.js";
+import type { RewriteResult } from "./types.js";
+import type { CompileResult } from "./index.js";
 
 const FULL_DATA = {
   completion: true,
