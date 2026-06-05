@@ -1,4 +1,5 @@
 import type { CodeMapping } from "@volar/language-core";
+import type { MappedSegment } from "./rewriter.js";
 
 const FULL_DATA = {
   completion: true,
@@ -26,17 +27,25 @@ export default class SourceMapBuilder {
     this.cursor = until;
   }
 
-  /** Replaces the source span `[start, end)` with `generated` text. */
-  replace(start: number, end: number, generated: string): void {
+  /**
+   * Replaces the source span `[start, end)` with `segments`, emitting a mapping
+   * for each segment that carries a source span. Segments without one (e.g.
+   * generated punctuation) are still written but left unmapped.
+   */
+  replaceWith(start: number, end: number, segments: MappedSegment[]): void {
     this.passThroughTo(start);
-    this.mappings.push({
-      sourceOffsets: [start],
-      generatedOffsets: [this.virtualCode.length],
-      lengths: [end - start],
-      generatedLengths: [generated.length],
-      data: FULL_DATA,
-    });
-    this.virtualCode += generated;
+    for (const { generated, source } of segments) {
+      if (source) {
+        this.mappings.push({
+          sourceOffsets: [source.start],
+          generatedOffsets: [this.virtualCode.length],
+          lengths: [source.length],
+          generatedLengths: [generated.length],
+          data: FULL_DATA,
+        });
+      }
+      this.virtualCode += generated;
+    }
     this.cursor = end;
   }
 

@@ -15,9 +15,9 @@ export default function compileBacktick(
   const rewritten = rewriter.rewrite(template, sourceFile);
   if (!rewritten) return;
 
-  builder.replace(
+  builder.replaceWith(
     template.getStart(sourceFile),
     template.end,
-    rewritten.virtual,
+    rewritten.segments,
   );
 }

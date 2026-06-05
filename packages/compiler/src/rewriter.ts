@@ -1,76 +1,93 @@
 import type * as ts from "typescript";
 
-/** Printed virtual (and runtime) forms of a rewritten backtick template. */
+/** A source span, expressed as an absolute offset into the original file. */
+export interface SourceSpan {
+  start: number;
+  length: number;
+}
+
+/** A piece of generated code, optionally mapped back to a source span. */
+export interface MappedSegment {
+  generated: string;
+  source?: SourceSpan;
+}
+
+/** The generated segments for a rewritten backtick template. */
 export interface RewrittenTemplate {
-  virtual: string;
+  segments: MappedSegment[];
 }
 
 /**
- * Rewrites a parsed backtick expression into its virtual and runtime
- * forms in a single traversal.
+ * Rewrites a backtick template into `Backtick.lift`/`Backtick.lower` calls:
  *
- * A backtick template is `Backtick.lift`ed and each `${...}` splice within it
- * is `Backtick.lower`ed, so `` `${`1`}` `` becomes
- * `Backtick.lift(Backtick.lower(Backtick.lift(1)))`.
+ *   `` `${`x`}` `` => Backtick.lift(Backtick.lower(Backtick.lift(x)))
+ *
+ * Only identifiers (variables, functions, etc.) carry a source mapping; the
+ * generated calls, punctuation, and literals are emitted unmapped.
  */
 export class Rewriter {
   private readonly ts: typeof import("typescript");
-  private readonly context: ts.TransformationContext;
-  private readonly printer: ts.Printer;
   private expressionSourceFile: ts.SourceFile;
 
   constructor(ts: typeof import("typescript")) {
     this.ts = ts;
-    this.context = captureTransformationContext(ts);
-    this.printer = ts.createPrinter();
     this.expressionSourceFile = ts.createSourceFile(
       "expression.tsx",
       "",
       ts.ScriptTarget.Latest,
-      true, // keep parent pointers so node.getStart()/getSourceFile() work
+      true, // keep parent pointers so node.getStart() works
       ts.ScriptKind.TSX,
     );
   }
 
   /**
-   * Rewrites a backtick template into its virtual (and runtime) forms. Returns
-   * `undefined` when the template body is not a single expression.
+   * Rewrites a backtick template into its mapped generated segments. Returns
+   * `undefined` when the template body is not a single supported expression.
    */
   rewrite(
     template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
-    _sourceFile: ts.SourceFile,
+    sourceFile: ts.SourceFile,
   ): RewrittenTemplate | undefined {
-    const virtual = this.rewriteNode(template);
-    if (!virtual) return undefined;
-    return { virtual: this.print(virtual) };
+    const segments = this.rewriteNode(template, sourceFile, 0);
+    if (!segments) return undefined;
+    return { segments };
   }
 
-  /** Rewrites any node, lifting templates and lowering their splices. */
-  private rewriteNode(node: ts.Node): ts.Expression | undefined {
+  /**
+   * Rewrites a node into mapped segments. `offset` is added to the node's start
+   * to translate from its source file into the original file — it is `0` for
+   * nodes from the original file and the content offset for expressions parsed
+   * out of a backtick's text.
+   */
+  private rewriteNode(
+    node: ts.Node,
+    sourceFile: ts.SourceFile,
+    offset: number,
+  ): MappedSegment[] | undefined {
     const { ts } = this;
 
     if (ts.isNoSubstitutionTemplateLiteral(node)) {
-      const body = this.rewriteQuotedText(node.text);
+      const start = offset + node.getStart(sourceFile);
+      const body = this.rewriteQuotedText(node.text, start + 1);
       return body && this.lift(body);
     }
 
     if (ts.isTemplateExpression(node)) {
-      const body = this.rewriteTemplateBody(node);
+      const body = this.rewriteTemplateBody(node, sourceFile, offset);
       return body && this.lift(body);
     }
 
-    if (ts.isNumericLiteral(node)) {
-      return ts.factory.createNumericLiteral(node.text);
+    if (ts.isIdentifier(node)) {
+      const start = offset + node.getStart(sourceFile);
+      const length = node.end - node.getStart(sourceFile);
+      return [{ generated: node.text, source: { start, length } }];
     }
 
-    return this.rewriteChildren(node);
-  }
+    if (ts.isNumericLiteral(node)) {
+      return [{ generated: node.text }];
+    }
 
-  /** Parses a backtick's literal text as an expression and rewrites it. */
-  private rewriteQuotedText(text: string): ts.Expression | undefined {
-    const expression = this.parse(text);
-    if (!expression) return undefined;
-    return this.rewriteNode(expression);
+    return undefined;
   }
 
   /**
@@ -79,7 +96,9 @@ export class Rewriter {
    */
   private rewriteTemplateBody(
     node: ts.TemplateExpression,
-  ): ts.Expression | undefined {
+    sourceFile: ts.SourceFile,
+    offset: number,
+  ): MappedSegment[] | undefined {
     if (node.head.text !== "" || node.templateSpans.length !== 1) {
       return undefined;
     }
@@ -87,8 +106,18 @@ export class Rewriter {
     const [span] = node.templateSpans;
     if (span.literal.text !== "") return undefined;
 
-    const spliced = this.rewriteNode(span.expression);
-    return spliced && this.lower(spliced);
+    const inner = this.rewriteNode(span.expression, sourceFile, offset);
+    return inner && this.lower(inner);
+  }
+
+  /** Parses a backtick's literal text as an expression and rewrites it. */
+  private rewriteQuotedText(
+    text: string,
+    offset: number,
+  ): MappedSegment[] | undefined {
+    const expression = this.parse(text);
+    if (!expression) return undefined;
+    return this.rewriteNode(expression, this.expressionSourceFile, offset);
   }
 
   /** Parses `text` as a single expression, or returns `undefined`. */
@@ -113,56 +142,22 @@ export class Rewriter {
     return statement.expression;
   }
 
-  private print(node: ts.Node): string {
-    return this.printer.printNode(
-      this.ts.EmitHint.Unspecified,
-      node,
-      this.expressionSourceFile,
-    );
+  /** Wraps `body` in an unmapped `Backtick.lift(...)` call. */
+  private lift(body: MappedSegment[]): MappedSegment[] {
+    return this.call("lift", body);
   }
 
-  private rewriteChildren(node: ts.Node): ts.Expression {
-    const { ts, context } = this;
-    return ts.visitEachChild(
-      node,
-      (child) => this.rewriteNode(child) ?? child,
-      context,
-    ) as ts.Expression;
+  /** Wraps `body` in an unmapped `Backtick.lower(...)` call. */
+  private lower(body: MappedSegment[]): MappedSegment[] {
+    return this.call("lower", body);
   }
 
-  /** Wraps `arg` in `Backtick.lift(...)`. */
-  private lift(arg: ts.Expression): ts.Expression {
-    return this.callBacktick("lift", arg);
+  private call(method: string, body: MappedSegment[]): MappedSegment[] {
+    return [
+      { generated: `Backtick.${method}` },
+      { generated: "(" },
+      ...body,
+      { generated: ")" },
+    ];
   }
-
-  /** Wraps `arg` in `Backtick.lower(...)`. */
-  private lower(arg: ts.Expression): ts.Expression {
-    return this.callBacktick("lower", arg);
-  }
-
-  private callBacktick(method: string, arg: ts.Expression): ts.Expression {
-    const { factory } = this.ts;
-    return factory.createCallExpression(
-      factory.createPropertyAccessExpression(
-        factory.createIdentifier("Backtick"),
-        method,
-      ),
-      undefined,
-      [arg],
-    );
-  }
-}
-
-function captureTransformationContext(
-  ts: typeof import("typescript"),
-): ts.TransformationContext {
-  let captured: ts.TransformationContext | undefined;
-  const dummy = ts.createSourceFile("ctx.ts", "", ts.ScriptTarget.Latest);
-  ts.transform(dummy, [
-    (context) => {
-      captured = context;
-      return (node) => node;
-    },
-  ]).dispose();
-  return captured!;
 }
