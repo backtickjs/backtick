@@ -233,25 +233,16 @@ function parseExpression(
   content: string,
 ): ts.Expression | undefined {
   const sourceFile = ts.createSourceFile(
-    "expression.ts",
+    "expression.tsx",
     content,
     ts.ScriptTarget.Latest,
-    /* setParentNodes */ true,
-    ts.ScriptKind.TS,
+    false, // perf optimization: node.parent left unset
+    ts.ScriptKind.TSX,
   );
-
-  // `parseDiagnostics` isn't on the public type, but is populated by the parser.
-  const parseDiagnostics = (
-    sourceFile as unknown as { parseDiagnostics?: readonly unknown[] }
-  ).parseDiagnostics;
-  if (parseDiagnostics && parseDiagnostics.length > 0) {
-    return undefined;
-  }
 
   const [statement] = sourceFile.statements;
   if (
     sourceFile.statements.length !== 1 ||
-    !statement ||
     !ts.isExpressionStatement(statement)
   ) {
     return undefined;
