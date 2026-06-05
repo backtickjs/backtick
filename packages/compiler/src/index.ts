@@ -1,5 +1,5 @@
 import type { CodeMapping } from "@volar/language-core";
-import compileSourceFile from "./compileSourceFile.js";
+import compileBacktick from "./compileBacktick.js";
 
 export type CompileOptions = {
   filename: string;
@@ -23,5 +23,5 @@ export function compile(
     ts.ScriptKind.TSX,
   );
 
-  return compileSourceFile(ts, sourceFile);
+  return compileBacktick(ts, sourceFile);
 }
