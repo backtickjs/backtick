@@ -1,16 +1,15 @@
-import type { CodeMapping } from "@volar/language-core";
-export type { CompileResult, RewriteResult, RewriteError } from "./compile.js";
-import { compile } from "./compile.js";
+import type { CompileResult } from "./types.js";
+import compileSourceFile from "./compileSourceFile.js";
 
 export type CompileOptions = {
   filename: string;
 };
 
-export function compileToVirtualTSX(
+export function compile(
   ts: typeof import("typescript"),
   source: string,
   options: CompileOptions,
-): { code: string; mappings: CodeMapping[] } {
+): CompileResult {
   const sourceFile = ts.createSourceFile(
     options.filename,
     source,
@@ -19,7 +18,5 @@ export function compileToVirtualTSX(
     ts.ScriptKind.TSX,
   );
 
-  const { virtualCode, mappings } = compile(ts, sourceFile);
-
-  return { code: virtualCode, mappings };
+  return compileSourceFile(ts, sourceFile);
 }

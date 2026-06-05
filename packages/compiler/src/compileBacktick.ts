@@ -1,5 +1,6 @@
 import type { CodeMapping } from "@volar/language-core";
 import type * as ts from "typescript";
+import type { CompileResult, RewriteResult } from "./types.js";
 
 const FULL_DATA = {
   completion: true,
@@ -10,22 +11,6 @@ const FULL_DATA = {
   verification: true,
 };
 
-export interface RewriteError {
-  start: number;
-  length: number;
-  message: string;
-}
-
-export interface RewriteResult {
-  virtual: ts.Node;
-}
-
-export interface CompileResult {
-  virtualCode: string;
-  errors: RewriteError[];
-  mappings: CodeMapping[];
-}
-
 /**
  * Rewrites a parsed backtick expression into its vritual and runtime
  * forms in a single traversal.
@@ -33,7 +18,6 @@ export interface CompileResult {
 class Rewriter {
   private readonly ts: typeof import("typescript");
   private readonly context: ts.TransformationContext;
-  readonly errors: RewriteError[] = [];
 
   constructor(ts: typeof import("typescript")) {
     this.ts = ts;
@@ -88,7 +72,7 @@ class Rewriter {
   }
 }
 
-export function compile(
+export default function compileBacktick(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
 ): CompileResult {
@@ -190,6 +174,5 @@ export function compile(
   return {
     virtualCode,
     mappings,
-    errors: rewriter.errors,
   };
 }

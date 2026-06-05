@@ -1,4 +1,4 @@
-import { compileToVirtualTSX } from "@backtick/compiler";
+import { compile } from "@backtick/compiler";
 import {
   type CodeMapping,
   type LanguagePlugin,
@@ -54,11 +54,11 @@ export class BacktickVirtualCode implements VirtualCode {
   ) {
     const source = snapshot.getText(0, snapshot.getLength());
     const options = { filename };
-    const { code, mappings } = compileToVirtualTSX(ts, source, options);
+    const { virtualCode, mappings } = compile(ts, source, options);
     this.mappings = mappings;
     this.snapshot = {
-      getText: (start, end) => code.substring(start, end),
-      getLength: () => code.length,
+      getText: (start, end) => virtualCode.substring(start, end),
+      getLength: () => virtualCode.length,
       getChangeRange: () => undefined,
     };
   }
