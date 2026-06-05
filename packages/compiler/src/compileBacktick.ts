@@ -14,8 +14,8 @@ export default function compileBacktick(
   rewriter: Rewriter,
   builder: SourceMapBuilder,
 ): void {
-  const expression = rewriter.rewrite(template);
-  if (!expression) return;
+  const rewritten = rewriter.rewrite(template);
+  if (!rewritten) return;
 
   /** Walks the rewritten expression into mapped segments. */
   const emit = (node: ts.Expression): MappedSegment[] => {
@@ -41,6 +41,6 @@ export default function compileBacktick(
   builder.replaceWith(
     template.getStart(sourceFile),
     template.end,
-    emit(expression),
+    emit(rewritten.virtual),
   );
 }

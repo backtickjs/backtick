@@ -1,16 +1,9 @@
 import type * as ts from "typescript";
 
-/**
- * Rewrites a backtick template into a `Backtick.lift`/`Backtick.lower` call
- * expression:
- *
- *   `` `${`x`}` `` => Backtick.lift(Backtick.lower(Backtick.lift(x)))
- *
- * The result is a real TypeScript expression built with `ts.factory`, reusing
- * the original identifier/literal nodes as the call arguments so their source
- * positions travel with them. Turning the expression into mapped virtual code
- * is the caller's job.
- */
+export interface RewriteResult {
+  virtual: ts.Expression;
+}
+
 export class Rewriter {
   private readonly ts: typeof import("typescript");
 
@@ -18,36 +11,27 @@ export class Rewriter {
     this.ts = ts;
   }
 
-  /**
-   * Rewrites a backtick template into its lift/lower call expression. Returns
-   * `undefined` when the template body is not a single supported expression.
-   */
   rewrite(
     template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
-  ): ts.Expression | undefined {
+  ): RewriteResult | undefined {
     return this.rewriteNode(template);
   }
 
-  /**
-   * Rewrites a node into the lift/lower call expression. Leaves are returned
-   * as-is, so this stays purely structural — positions are handled once, when
-   * text is parsed (see `rewriteQuotedText`/`rebase`).
-   */
-  private rewriteNode(node: ts.Node): ts.Expression | undefined {
+  private rewriteNode(node: ts.Node): RewriteResult | undefined {
     const { ts } = this;
 
     if (ts.isNoSubstitutionTemplateLiteral(node)) {
       const body = this.rewriteQuotedText(node);
-      return body && this.lift(body);
+      return body && this.call("lift", body);
     }
 
     if (ts.isTemplateExpression(node)) {
       const body = this.rewriteTemplateBody(node);
-      return body && this.lift(body);
+      return body && this.call("lift", body);
     }
 
     if (ts.isIdentifier(node) || ts.isNumericLiteral(node)) {
-      return node;
+      return { virtual: node };
     }
 
     return undefined;
@@ -59,7 +43,7 @@ export class Rewriter {
    */
   private rewriteTemplateBody(
     node: ts.TemplateExpression,
-  ): ts.Expression | undefined {
+  ): RewriteResult | undefined {
     if (node.head.text !== "" || node.templateSpans.length !== 1) {
       return undefined;
     }
@@ -68,7 +52,7 @@ export class Rewriter {
     if (span.literal.text !== "") return undefined;
 
     const inner = this.rewriteNode(span.expression);
-    return inner && this.lower(inner);
+    return inner && this.call("lower", inner);
   }
 
   /**
@@ -79,7 +63,7 @@ export class Rewriter {
    */
   private rewriteQuotedText(
     literal: ts.NoSubstitutionTemplateLiteral,
-  ): ts.Expression | undefined {
+  ): RewriteResult | undefined {
     const expression = this.parse(literal.text);
     if (!expression) return undefined;
     this.rebase(expression, literal.pos + 1);
@@ -114,23 +98,16 @@ export class Rewriter {
     node.forEachChild((child) => this.rebase(child, offset));
   }
 
-  /** Wraps `argument` in a `Backtick.lift(...)` call. */
-  private lift(argument: ts.Expression): ts.Expression {
-    return this.call("lift", argument);
-  }
-
-  /** Wraps `argument` in a `Backtick.lower(...)` call. */
-  private lower(argument: ts.Expression): ts.Expression {
-    return this.call("lower", argument);
-  }
-
-  /** Builds a synthetic `Backtick.<method>(argument)` call expression. */
-  private call(method: string, argument: ts.Expression): ts.CallExpression {
+  /** Builds a synthetic `Backtick.<method>(argument)` call. */
+  private call(method: string, argument: RewriteResult): RewriteResult {
     const { factory } = this.ts;
     const callee = factory.createPropertyAccessExpression(
       factory.createIdentifier("Backtick"),
       method,
     );
-    return factory.createCallExpression(callee, undefined, [argument]);
+    const virtual = factory.createCallExpression(callee, undefined, [
+      argument.virtual,
+    ]);
+    return { virtual };
   }
 }
