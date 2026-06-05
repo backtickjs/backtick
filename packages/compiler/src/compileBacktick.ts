@@ -12,7 +12,7 @@ export default function compileBacktick(
   rewriter: Rewriter,
   builder: SourceMapBuilder,
 ): void {
-  const rewritten = rewriter.rewrite(template, sourceFile);
+  const rewritten = rewriter.rewrite(template);
   if (!rewritten) return;
 
   builder.replaceWith(

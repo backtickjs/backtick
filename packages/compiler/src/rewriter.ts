@@ -27,17 +27,9 @@ export interface RewrittenTemplate {
  */
 export class Rewriter {
   private readonly ts: typeof import("typescript");
-  private expressionSourceFile: ts.SourceFile;
 
   constructor(ts: typeof import("typescript")) {
     this.ts = ts;
-    this.expressionSourceFile = ts.createSourceFile(
-      "expression.tsx",
-      "",
-      ts.ScriptTarget.Latest,
-      true, // keep parent pointers so node.getStart() works
-      ts.ScriptKind.TSX,
-    );
   }
 
   /**
@@ -46,9 +38,8 @@ export class Rewriter {
    */
   rewrite(
     template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
-    sourceFile: ts.SourceFile,
   ): RewrittenTemplate | undefined {
-    const segments = this.rewriteNode(template, sourceFile, 0);
+    const segments = this.rewriteNode(template, 0);
     if (!segments) return undefined;
     return { segments };
   }
@@ -61,25 +52,24 @@ export class Rewriter {
    */
   private rewriteNode(
     node: ts.Node,
-    sourceFile: ts.SourceFile,
     offset: number,
   ): MappedSegment[] | undefined {
     const { ts } = this;
 
     if (ts.isNoSubstitutionTemplateLiteral(node)) {
-      const start = offset + node.getStart(sourceFile);
+      const start = offset + node.pos;
       const body = this.rewriteQuotedText(node.text, start + 1);
       return body && this.lift(body);
     }
 
     if (ts.isTemplateExpression(node)) {
-      const body = this.rewriteTemplateBody(node, sourceFile, offset);
+      const body = this.rewriteTemplateBody(node, offset);
       return body && this.lift(body);
     }
 
     if (ts.isIdentifier(node)) {
-      const start = offset + node.getStart(sourceFile);
-      const length = node.end - node.getStart(sourceFile);
+      const start = offset + node.pos;
+      const length = node.end - node.pos;
       return [{ generated: node.text, source: { start, length } }];
     }
 
@@ -96,7 +86,6 @@ export class Rewriter {
    */
   private rewriteTemplateBody(
     node: ts.TemplateExpression,
-    sourceFile: ts.SourceFile,
     offset: number,
   ): MappedSegment[] | undefined {
     if (node.head.text !== "" || node.templateSpans.length !== 1) {
@@ -106,7 +95,7 @@ export class Rewriter {
     const [span] = node.templateSpans;
     if (span.literal.text !== "") return undefined;
 
-    const inner = this.rewriteNode(span.expression, sourceFile, offset);
+    const inner = this.rewriteNode(span.expression, offset);
     return inner && this.lower(inner);
   }
 
@@ -117,24 +106,23 @@ export class Rewriter {
   ): MappedSegment[] | undefined {
     const expression = this.parse(text);
     if (!expression) return undefined;
-    return this.rewriteNode(expression, this.expressionSourceFile, offset);
+    return this.rewriteNode(expression, offset);
   }
 
   /** Parses `text` as a single expression, or returns `undefined`. */
   private parse(text: string): ts.Expression | undefined {
     const { ts } = this;
-    this.expressionSourceFile = ts.updateSourceFile(
-      this.expressionSourceFile,
+    const expression = ts.createSourceFile(
+      "backtick.tsx",
       text,
-      ts.createTextChangeRange(
-        ts.createTextSpan(0, this.expressionSourceFile.text.length),
-        text.length,
-      ),
+      ts.ScriptTarget.Latest,
+      false, // perf optimization: node.parent left unset
+      ts.ScriptKind.TSX,
     );
 
-    const [statement] = this.expressionSourceFile.statements;
+    const [statement] = expression.statements;
     if (
-      this.expressionSourceFile.statements.length !== 1 ||
+      expression.statements.length !== 1 ||
       !ts.isExpressionStatement(statement)
     ) {
       return undefined;
