@@ -1,5 +1,8 @@
 import type { CodeMapping } from "@volar/language-core";
+import type * as ts from "typescript";
 import compileBacktick from "./compileBacktick.js";
+import SourceMapBuilder from "./SourceMapBuilder.js";
+import { Rewriter } from "./rewriter.js";
 
 export type CompileOptions = {
   filename: string;
@@ -23,5 +26,21 @@ export function compile(
     ts.ScriptKind.TSX,
   );
 
-  return compileBacktick(ts, sourceFile);
+  const rewriter = new Rewriter(ts);
+  const builder = new SourceMapBuilder(sourceFile.text);
+
+  const walk = (node: ts.Node) => {
+    if (
+      ts.isNoSubstitutionTemplateLiteral(node) ||
+      ts.isTemplateExpression(node)
+    ) {
+      compileBacktick(node, sourceFile, rewriter, builder);
+      return;
+    }
+    node.forEachChild(walk);
+  };
+
+  walk(sourceFile);
+
+  return builder.finish();
 }

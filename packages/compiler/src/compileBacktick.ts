@@ -1,39 +1,23 @@
 import type * as ts from "typescript";
-import type { CompileResult } from "./index.js";
-import SourceMapBuilder from "./SourceMapBuilder.js";
-import { Rewriter } from "./rewriter.js";
+import type SourceMapBuilder from "./SourceMapBuilder.js";
+import type { Rewriter } from "./rewriter.js";
 
+/**
+ * Rewrites a single backtick template and emits the result into `builder`.
+ * No-op when the template body is not a single expression.
+ */
 export default function compileBacktick(
-  ts: typeof import("typescript"),
+  template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
   sourceFile: ts.SourceFile,
-): CompileResult {
-  const rewriter = new Rewriter(ts);
-  const builder = new SourceMapBuilder(sourceFile.text);
+  rewriter: Rewriter,
+  builder: SourceMapBuilder,
+): void {
+  const rewritten = rewriter.rewrite(template, sourceFile);
+  if (!rewritten) return;
 
-  const emitTemplate = (
-    template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
-  ) => {
-    const rewritten = rewriter.rewrite(template, sourceFile);
-    if (!rewritten) return;
-
-    builder.replace(
-      template.getStart(sourceFile),
-      template.end,
-      rewritten.virtual,
-    );
-  };
-
-  const walk = (node: ts.Node) => {
-    if (
-      ts.isNoSubstitutionTemplateLiteral(node) ||
-      ts.isTemplateExpression(node)
-    ) {
-      emitTemplate(node);
-      return;
-    }
-    node.forEachChild(walk);
-  };
-  walk(sourceFile);
-
-  return builder.finish();
+  builder.replace(
+    template.getStart(sourceFile),
+    template.end,
+    rewritten.virtual,
+  );
 }

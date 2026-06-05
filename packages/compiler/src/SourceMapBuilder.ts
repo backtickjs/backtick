@@ -1,5 +1,4 @@
 import type { CodeMapping } from "@volar/language-core";
-import type { CompileResult } from "./index.js";
 
 const FULL_DATA = {
   completion: true,
@@ -13,8 +12,8 @@ const FULL_DATA = {
 /** Accumulates the virtual code source map as a source file is walked. */
 export default class SourceMapBuilder {
   private readonly source: string;
-  private code = "";
-  private readonly mappings: CodeMapping[] = [];
+  private virtualCode = "";
+  private mappings: CodeMapping[] = [];
   private cursor = 0;
 
   constructor(source: string) {
@@ -32,32 +31,37 @@ export default class SourceMapBuilder {
     this.passThroughTo(start);
     this.mappings.push({
       sourceOffsets: [start],
-      generatedOffsets: [this.code.length],
+      generatedOffsets: [this.virtualCode.length],
       lengths: [end - start],
       generatedLengths: [generated.length],
       data: FULL_DATA,
     });
-    this.code += generated;
+    this.virtualCode += generated;
     this.cursor = end;
   }
 
   /** Passes through any remaining source and returns the compiled result. */
-  finish(): CompileResult {
+  finish(): {
+    virtualCode: string;
+    mappings: CodeMapping[];
+  } {
     this.passThroughTo(this.source.length);
     return {
-      virtualCode: this.code,
+      virtualCode: this.virtualCode,
       mappings: this.mappings,
     };
   }
 
   private passThrough(start: number, end: number): void {
-    if (end <= start) return;
+    if (end <= start) {
+      return;
+    }
     this.mappings.push({
       sourceOffsets: [start],
-      generatedOffsets: [this.code.length],
+      generatedOffsets: [this.virtualCode.length],
       lengths: [end - start],
       data: FULL_DATA,
     });
-    this.code += this.source.slice(start, end);
+    this.virtualCode += this.source.slice(start, end);
   }
 }
