@@ -8,7 +8,7 @@ export interface SourceSpan {
 
 /** A piece of generated code, optionally mapped back to a source span. */
 export interface MappedSegment {
-  generated: string;
+  virtual: string;
   source?: SourceSpan;
 }
 
@@ -70,11 +70,11 @@ export class Rewriter {
     if (ts.isIdentifier(node)) {
       const start = offset + node.pos;
       const length = node.end - node.pos;
-      return [{ generated: node.text, source: { start, length } }];
+      return [{ virtual: node.text, source: { start, length } }];
     }
 
     if (ts.isNumericLiteral(node)) {
-      return [{ generated: node.text }];
+      return [{ virtual: node.text }];
     }
 
     return undefined;
@@ -132,20 +132,15 @@ export class Rewriter {
 
   /** Wraps `body` in an unmapped `Backtick.lift(...)` call. */
   private lift(body: MappedSegment[]): MappedSegment[] {
-    return this.call("lift", body);
+    return this.call("Backtick.lift", body);
   }
 
   /** Wraps `body` in an unmapped `Backtick.lower(...)` call. */
   private lower(body: MappedSegment[]): MappedSegment[] {
-    return this.call("lower", body);
+    return this.call("Backtick.lower", body);
   }
 
   private call(method: string, body: MappedSegment[]): MappedSegment[] {
-    return [
-      { generated: `Backtick.${method}` },
-      { generated: "(" },
-      ...body,
-      { generated: ")" },
-    ];
+    return [{ virtual: `${method}(` }, ...body, { virtual: ")" }];
   }
 }
