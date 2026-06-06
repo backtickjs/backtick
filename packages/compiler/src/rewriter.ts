@@ -57,21 +57,19 @@ export class Rewriter {
 
   /**
    * Parses a backtick's literal text as an expression and rewrites it. The
-   * parsed nodes live in a throwaway source file, so they are first rebased
-   * into the original file's coordinates — the single place offsets are dealt
-   * with.
+   * `+ 1` skips the opening backtick so the parsed nodes land at the right
+   * place in the original file.
    */
   private rewriteQuotedText(
     literal: ts.NoSubstitutionTemplateLiteral,
   ): RewriteResult | undefined {
-    const expression = this.parse(literal.text);
+    const expression = this.parse(literal.text, literal.pos + 1);
     if (!expression) return undefined;
-    this.rebase(expression, literal.pos + 1);
     return this.rewriteNode(expression);
   }
 
   /** Parses `text` as a single expression, or returns `undefined`. */
-  private parse(text: string): ts.Expression | undefined {
+  private parse(text: string, offset: number): ts.Expression | undefined {
     const { ts } = this;
     const expression = ts.createSourceFile(
       "backtick.tsx",
@@ -88,6 +86,7 @@ export class Rewriter {
     ) {
       return undefined;
     }
+    this.rebase(statement.expression, offset);
     return statement.expression;
   }
 
