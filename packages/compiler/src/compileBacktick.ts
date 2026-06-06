@@ -17,13 +17,72 @@ export default function compileBacktick(
   const rewritten = rewriter.rewrite(template);
   if (!rewritten) return;
 
+  /** Whether `node` is a synthetic `Backtick.<method>(...)` wrapper call. */
+  const isBacktickCall = (node: ts.Expression): node is ts.CallExpression =>
+    ts.isCallExpression(node) &&
+    ts.isPropertyAccessExpression(node.expression) &&
+    ts.isIdentifier(node.expression.expression) &&
+    node.expression.expression.text === "Backtick";
+
+  /**
+   * Emits a `${...}` splice's content. The user's own expression is emitted
+   * verbatim and mapped 1:1 to its source, except for any backtick nested within
+   * it — those are compiled like the rest of the rewrite. So `x + ` + "`4`" stays
+   * `x + ` while the `` `4` `` becomes `Backtick.lift(4)`.
+   */
+  const emitSplice = (node: ts.Expression): MappedSegment[] => {
+    if (isBacktickCall(node)) return emit(node);
+
+    const segments: MappedSegment[] = [];
+    let cursor = node.getStart(sourceFile);
+    const flush = (until: number) => {
+      if (until <= cursor) return;
+      segments.push({
+        virtual: sourceFile.text.slice(cursor, until),
+        source: { start: cursor, length: until - cursor },
+      });
+      cursor = until;
+    };
+
+    const walk = (inner: ts.Node): void => {
+      if (
+        ts.isNoSubstitutionTemplateLiteral(inner) ||
+        ts.isTemplateExpression(inner)
+      ) {
+        flush(inner.getStart(sourceFile));
+        const nested = rewriter.rewrite(inner);
+        if (nested) segments.push(...emit(nested.virtual));
+        else flush(inner.end);
+        cursor = inner.end;
+        return;
+      }
+      inner.forEachChild(walk);
+    };
+
+    walk(node);
+    flush(node.end);
+    return segments;
+  };
+
   /** Walks the rewritten expression into mapped segments. */
   const emit = (node: ts.Expression): MappedSegment[] => {
-    if (ts.isCallExpression(node)) {
+    if (isBacktickCall(node)) {
       const callee = node.expression as ts.PropertyAccessExpression;
-      const head = `${(callee.expression as ts.Identifier).text}.${callee.name.text}`;
+      const head = `Backtick.${callee.name.text}`;
       const [argument] = node.arguments;
-      return [{ virtual: `${head}(` }, ...emit(argument), { virtual: ")" }];
+      // `lower` wraps a splice, whose content stays as-is unless it's a backtick.
+      const inner =
+        callee.name.text === "lower" ? emitSplice(argument) : emit(argument);
+      return [{ virtual: `${head}(` }, ...inner, { virtual: ")" }];
+    }
+
+    if (ts.isBinaryExpression(node)) {
+      const operator = ts.tokenToString(node.operatorToken.kind) ?? "";
+      return [
+        ...emit(node.left),
+        { virtual: ` ${operator} ` },
+        ...emit(node.right),
+      ];
     }
 
     if (ts.isIdentifier(node)) {
