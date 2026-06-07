@@ -6,10 +6,13 @@
     "packages/language-tools/*"
   ],
   "scripts": {
-    "typecheck": "tsc -b"
+    "typecheck": "tsc -b",
+    "test": "turbo run test",
+    "test:update": "turbo run test:update"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "turbo": "^2.8.15",
     "typescript": "^6.0.3"
   }
 }
