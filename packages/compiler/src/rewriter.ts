@@ -7,6 +7,24 @@ export interface RewriteResult {
   runtime: ts.Expression;
 }
 
+/**
+ * State threaded through {@link Rewriter.rewriteNode} while rewriting a single
+ * backtick. One scope carries the splices in play, the `const` bindings they
+ * are hoisted into, and the free variables referenced along the way.
+ */
+interface Scope {
+  /**
+   * Splice name -> its rewritten reference. Present only for a template with
+   * `${...}` spans; when absent a bare identifier is a free variable rather than
+   * a splice.
+   */
+  splices?: ReadonlyMap<string, RewriteResult>;
+  /** Hoisted splice bindings, keyed by name: `const <name> = <initializer>`. */
+  declaredVars: Map<string, ts.Expression>;
+  /** Free variables referenced in the skeleton, for the runtime metadata. */
+  usedVars: Set<string>;
+}
+
 export class Rewriter {
   private readonly ts: typeof import("typescript");
 
@@ -22,15 +40,14 @@ export class Rewriter {
 
   /**
    * Rewrites a node of *quoted* code into its virtual and runtime forms. When
-   * `splices` is given the node is a template's parsed skeleton, so a bare
+   * `scope.splices` is given the node is a template's parsed skeleton, so a bare
    * identifier must resolve to one of the splices rather than passing through as
    * a free variable. Free variables (outside the skeleton) are collected into
-   * `freeVars` for the runtime metadata.
+   * `scope.usedVars` for the runtime metadata.
    */
   private rewriteNode(
     node: ts.Node,
-    splices?: ReadonlyMap<string, RewriteResult>,
-    freeVars?: Set<string>,
+    scope?: Scope,
   ): RewriteResult | undefined {
     const { ts } = this;
     const { factory } = ts;
@@ -43,8 +60,8 @@ export class Rewriter {
     }
 
     if (ts.isBinaryExpression(node)) {
-      const left = this.rewriteNode(node.left, splices, freeVars);
-      const right = this.rewriteNode(node.right, splices, freeVars);
+      const left = this.rewriteNode(node.left, scope);
+      const right = this.rewriteNode(node.right, scope);
       if (!left || !right) return undefined;
       const operator = ts.tokenToString(node.operatorToken.kind) ?? "";
       return {
@@ -63,8 +80,8 @@ export class Rewriter {
     }
 
     if (ts.isIdentifier(node)) {
-      if (splices) return splices.get(node.text);
-      freeVars?.add(node.text);
+      if (scope?.splices) return scope.splices.get(node.text);
+      scope?.usedVars.add(node.text);
       return {
         virtual: node,
         runtime: this.visit("visitIdentifier", [
@@ -110,10 +127,14 @@ export class Rewriter {
     const { ts } = this;
     const { factory } = ts;
 
-    const splices = new Map<string, RewriteResult>();
-    const spliceDecls: ts.Statement[] = [];
-    const spliceMeta: ts.PropertyAssignment[] = [];
-    const freeVars = new Set<string>();
+    const splices = ts.isTemplateExpression(node)
+      ? new Map<string, RewriteResult>()
+      : undefined;
+    const scope: Scope = {
+      splices,
+      declaredVars: new Map(),
+      usedVars: new Set(),
+    };
 
     let text: string;
     if (ts.isNoSubstitutionTemplateLiteral(node)) {
@@ -125,7 +146,7 @@ export class Rewriter {
         if (!splice) return undefined;
 
         const name = `__splice${i}__`;
-        splices.set(name, {
+        splices!.set(name, {
           virtual: this.backtick("lower", splice.virtual),
           runtime: this.visit("visitSplice", [
             factory.createNull(),
@@ -133,29 +154,19 @@ export class Rewriter {
             factory.createIdentifier(name),
           ]),
         });
-        spliceDecls.push(this.constDeclaration(name, splice.runtime));
-        spliceMeta.push(
-          factory.createPropertyAssignment(
-            name,
-            factory.createIdentifier(name),
-          ),
-        );
+        scope.declaredVars.set(name, splice.runtime);
         text += name + span.literal.text;
       }
     }
 
     const skeleton = this.parse(text, node.pos + 1);
     if (!skeleton) return undefined;
-    const body = this.rewriteNode(
-      skeleton,
-      ts.isTemplateExpression(node) ? splices : undefined,
-      freeVars,
-    );
+    const body = this.rewriteNode(skeleton, scope);
     if (!body) return undefined;
 
     return {
       virtual: this.backtick("lift", body.virtual),
-      runtime: this.iife(spliceDecls, spliceMeta, freeVars, body),
+      runtime: this.iife(scope, body),
     };
   }
 
@@ -232,13 +243,15 @@ export class Rewriter {
   }
 
   /** Builds the runtime `(() => { ...splices; return Backtick.make(...); })()`. */
-  private iife(
-    spliceDecls: ts.Statement[],
-    spliceMeta: ts.PropertyAssignment[],
-    freeVars: ReadonlySet<string>,
-    body: RewriteResult,
-  ): ts.Expression {
+  private iife(scope: Scope, body: RewriteResult): ts.Expression {
     const { factory } = this.ts;
+
+    const spliceDecls = [...scope.declaredVars].map(([name, initializer]) =>
+      this.constDeclaration(name, initializer),
+    );
+    const spliceMeta = [...scope.declaredVars.keys()].map((name) =>
+      factory.createPropertyAssignment(name, factory.createIdentifier(name)),
+    );
 
     const meta = factory.createObjectLiteralExpression(
       [
@@ -249,7 +262,9 @@ export class Rewriter {
         factory.createPropertyAssignment(
           "freeVars",
           factory.createArrayLiteralExpression(
-            [...freeVars].map((name) => factory.createStringLiteral(name)),
+            [...scope.usedVars].map((name) =>
+              factory.createStringLiteral(name),
+            ),
             false,
           ),
         ),
