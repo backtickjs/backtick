@@ -1,7 +1,7 @@
 import type * as ts from "typescript";
 import type SourceMapBuilder from "./SourceMapBuilder.js";
 import type { MappedSegment } from "./SourceMapBuilder.js";
-import type { Rewriter } from "./rewriter.js";
+import { rewrite } from "./rewriter.js";
 
 /**
  * Rewrites a single backtick template and emits the result into `builder`.
@@ -11,10 +11,9 @@ export default function compileBacktick(
   ts: typeof import("typescript"),
   template: ts.TemplateExpression | ts.NoSubstitutionTemplateLiteral,
   sourceFile: ts.SourceFile,
-  rewriter: Rewriter,
   builder: SourceMapBuilder,
 ): void {
-  const rewritten = rewriter.rewrite(template);
+  const rewritten = rewrite(ts, template);
   if (!rewritten) return;
 
   /** Whether `node` is a synthetic `Backtick.<method>(...)` wrapper call. */
@@ -50,7 +49,7 @@ export default function compileBacktick(
         ts.isTemplateExpression(inner)
       ) {
         flush(inner.getStart(sourceFile));
-        const nested = rewriter.rewrite(inner);
+        const nested = rewrite(ts, inner);
         if (nested) segments.push(...emit(nested.virtual));
         else flush(inner.end);
         cursor = inner.end;
