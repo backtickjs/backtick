@@ -1,2 +1,2 @@
-import Backtick from '../../src/Backtick';
+import Backtick from "../../src/Backtick";
 export default v.visitNumber(null, 1);
