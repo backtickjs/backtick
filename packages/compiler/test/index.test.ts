@@ -4,11 +4,10 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import type { CodeMapping } from "@volar/language-core";
 import ts from "typescript";
+import { emit } from "../src/emit.ts";
 import rewrite from "../src/rewrite.ts";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
-
-const printer = ts.createPrinter();
 
 function matchFileSnapshot(actual: string, file: string): void {
   if (process.env.UPDATE_SNAPSHOTS) {
@@ -29,7 +28,7 @@ describe("compileFile", () => {
     it(name, () => {
       const input = readFileSync(join(fixturesDir, `${name}.bt`), "utf8");
 
-      const result = rewrite(ts, `${name}.tsx`, input);
+      const result = emit(ts, rewrite(ts, `${name}.tsx`, input));
 
       matchFileSnapshot(
         result.runtimeCode,

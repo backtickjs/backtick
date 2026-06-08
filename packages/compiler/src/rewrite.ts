@@ -1,19 +1,33 @@
 import type * as ts from "typescript";
-import { type CompilerResult, emit } from "./emit.js";
 
-export type { CompilerResult };
-
-interface CompilationContext {
-  inTemplate: boolean;
-  virtualMapping: Map<ts.Node, ts.Node>;
-  runtimeMapping: Map<ts.Node, ts.Node>;
+export interface RewriteResult {
+  virtualFile: ts.SourceFile;
+  runtimeFile: ts.SourceFile;
+  mappings: NodeMapping[];
 }
 
-export default function compile(
+export interface NodeMapping {
+  sourceOffset: number;
+  sourceLength: number;
+  virtual: ts.Expression;
+}
+
+interface RewrittenNode {
+  virtual: ts.Expression;
+  runtime: ts.Expression;
+}
+
+/** State threaded through the rewrite of a single template. */
+interface TemplateContext {
+  sourceFile: ts.SourceFile;
+  splices: ReadonlyMap<string, RewrittenNode>;
+}
+
+export default function rewrite(
   ts: typeof import("typescript"),
   filename: string,
   source: string,
-): CompilerResult {
+): RewriteResult {
   const sourceFile = ts.createSourceFile(
     filename,
     source,
@@ -22,21 +36,127 @@ export default function compile(
     ts.ScriptKind.TSX,
   );
 
-  const ctx: CompilationContext = {
-    inTemplate: false,
-    virtualMapping: new Map(),
-    runtimeMapping: new Map(),
+  const ctx: TemplateContext = {
+    sourceFile,
+    splices: new Map(),
   };
 
-  processNode(ts, sourceFile, sourceFile, ctx);
+  const mappings: NodeMapping[] = [];
+  const virtualMapping = new Map<ts.Node, ts.Node>();
+  const runtimeMapping = new Map<ts.Node, ts.Node>();
 
-  const virtualFile = substitute(ts, sourceFile, ctx.virtualMapping);
-  const runtimeFile = substitute(ts, sourceFile, ctx.runtimeMapping);
+  const walk = (node: ts.Node): void => {
+    if (
+      ts.isNoSubstitutionTemplateLiteral(node) ||
+      ts.isTemplateExpression(node)
+    ) {
+      const rewritten = compileTemplate(ts, ctx, node);
 
-  return emit(ts, sourceFile, virtualFile, runtimeFile, ctx.virtualMapping);
+      const sourceOffset = node.getStart(sourceFile);
+      mappings.push({
+        sourceOffset,
+        sourceLength: node.getEnd() - sourceOffset,
+        virtual: rewritten.virtual,
+      });
+
+      virtualMapping.set(node, rewritten.virtual);
+      runtimeMapping.set(node, rewritten.runtime);
+      return;
+    }
+
+    ts.forEachChild(node, walk);
+  };
+
+  walk(sourceFile);
+
+  return {
+    virtualFile: substitute(ts, sourceFile, virtualMapping),
+    runtimeFile: substitute(ts, sourceFile, runtimeMapping),
+    mappings,
+  };
 }
 
-/** Replaces mapped nodes throughout `sourceFile`, returning a new file. */
+function compileTemplate(
+  ts: typeof import("typescript"),
+  ctx: TemplateContext,
+  template: ts.NoSubstitutionTemplateLiteral | ts.TemplateExpression,
+): RewrittenNode {
+  let text: string;
+  const splices = new Map<string, RewrittenNode>();
+
+  if (ts.isNoSubstitutionTemplateLiteral(template)) {
+    text = template.text;
+  } else {
+    text = template.head.text;
+    for (let i = 0; i < template.templateSpans.length; i++) {
+      const span = template.templateSpans[i];
+      const name = `$0splice${i}`;
+      const inner = build(ts, ctx, span);
+      splices.set(name, inner);
+      text += name + span.literal.text;
+    }
+  }
+
+  const parsed = ts.createSourceFile(
+    ctx.sourceFile.fileName,
+    text,
+    ts.ScriptTarget.Latest,
+    true,
+  );
+
+  if (
+    parsed.statements.length !== 1 ||
+    !ts.isExpressionStatement(parsed.statements[0])
+  ) {
+    throw "Expected syntax";
+  }
+
+  const statement = parsed.statements[0];
+  return build(ts, ctx, statement.expression);
+}
+
+function build(
+  ts: typeof import("typescript"),
+  ctx: TemplateContext,
+  node: ts.Node,
+): RewrittenNode {
+  const f = ts.factory;
+
+  if (
+    ts.isNoSubstitutionTemplateLiteral(node) ||
+    ts.isTemplateExpression(node)
+  ) {
+    return compileTemplate(ts, ctx, node);
+  }
+
+  if (ts.isTemplateSpan(node)) {
+    const inner = build(ts, ctx, node.expression);
+    return {
+      virtual: inner.virtual,
+      runtime: callV(ts, "visitSplice", [f.createNull(), inner.runtime]),
+    };
+  }
+
+  if (ts.isNumericLiteral(node)) {
+    return {
+      virtual: f.createNumericLiteral(node.text),
+      runtime: callV(ts, "visitNumber", [
+        f.createNull(),
+        f.createNumericLiteral(node.text),
+      ]),
+    };
+  }
+
+  if (ts.isIdentifier(node)) {
+    const splice = ctx.splices.get(node.text);
+    if (splice) {
+      return splice;
+    }
+  }
+
+  throw "Expected syntax";
+}
+
 function substitute(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
@@ -58,83 +178,7 @@ function substitute(
   return result.transformed[0];
 }
 
-function processNode(
-  ts: typeof import("typescript"),
-  node: ts.Node,
-  sourceFile: ts.SourceFile,
-  ctx: CompilationContext,
-): void {
-  if (
-    ts.isNoSubstitutionTemplateLiteral(node) ||
-    ts.isTemplateExpression(node)
-  ) {
-    let text: string;
-
-    if (ts.isNoSubstitutionTemplateLiteral(node)) {
-      text = node.text;
-    } else {
-      text = node.head.text;
-      for (let i = 0; i < node.templateSpans.length; i++) {
-        const span = node.templateSpans[i];
-        const placeholder = `$0splice${i}`;
-        text += placeholder + span.literal.text;
-      }
-    }
-
-    const parsed = ts.createSourceFile(
-      sourceFile.fileName,
-      text,
-      ts.ScriptTarget.Latest,
-      true,
-    );
-
-    if (
-      parsed.statements.length !== 1 ||
-      !ts.isExpressionStatement(parsed.statements[0])
-    ) {
-      throw "Expected syntax";
-    }
-
-    ctx.inTemplate = true;
-    const statement = parsed.statements[0];
-    const rewritten = rewrite(ts, statement.expression);
-    ctx.inTemplate = false;
-
-    ctx.virtualMapping.set(node, rewritten.virtual);
-    ctx.runtimeMapping.set(node, rewritten.runtime);
-
-    return;
-  }
-
-  ts.forEachChild(node, (child) => processNode(ts, child, sourceFile, ctx));
-}
-
-interface RewriteResult {
-  virtual: ts.Node;
-  runtime: ts.Node;
-}
-
-function rewrite(
-  ts: typeof import("typescript"),
-  node: ts.Node,
-): RewriteResult {
-  const f = ts.factory;
-
-  if (ts.isNumericLiteral(node)) {
-    return {
-      virtual: f.createNumericLiteral(node.text),
-      runtime: v(ts, "visitNumber", [
-        f.createNull(),
-        f.createNumericLiteral(node.text),
-      ]),
-    };
-  }
-
-  throw "Expected syntax";
-}
-
-/** Builds a synthetic `v.<method>(...args)` visitor call. */
-function v(
+function callV(
   ts: typeof import("typescript"),
   method: string,
   args: ts.Expression[],

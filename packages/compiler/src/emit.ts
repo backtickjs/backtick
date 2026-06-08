@@ -1,5 +1,6 @@
 import type { CodeInformation, CodeMapping } from "@volar/language-core";
 import type * as ts from "typescript";
+import type { NodeMapping, RewriteResult } from "./rewrite.ts";
 
 export interface CompilerResult {
   virtualCode: string;
@@ -17,18 +18,17 @@ const fullCodeInformation: CodeInformation = {
   verification: true,
 };
 
-/** Prints the rewritten virtual and runtime files and resolves their mappings. */
+/**
+ * Prints the rewritten virtual and runtime trees and resolves their mappings.
+ */
 export function emit(
   ts: typeof import("typescript"),
-  sourceFile: ts.SourceFile,
-  virtualFile: ts.SourceFile,
-  runtimeFile: ts.SourceFile,
-  virtualMapping: Map<ts.Node, ts.Node>,
+  rewritten: RewriteResult,
 ): CompilerResult {
   const printer = ts.createPrinter();
 
-  const virtualCode = printer.printFile(virtualFile);
-  const runtimeCode = printer.printFile(runtimeFile);
+  const virtualCode = printer.printFile(rewritten.virtualFile);
+  const runtimeCode = printer.printFile(rewritten.runtimeFile);
 
   return {
     virtualCode,
@@ -36,39 +36,34 @@ export function emit(
     mappings: buildMappings(
       ts,
       printer,
-      sourceFile,
-      virtualFile,
+      rewritten.virtualFile,
       virtualCode,
-      virtualMapping,
+      rewritten.mappings,
     ),
   };
 }
 
 /**
  * Builds a code mapping for each rewritten node. The source range comes from
- * the original node's position; the generated range is found by locating the
- * generated node's printed text in the virtual code. Entries are iterated in
- * source order (insertion order), which matches the order the regions appear in
- * the output, so a forward-only cursor disambiguates repeated text.
+ * the original node's recorded position; the generated range is found by
+ * locating the generated node's printed text in the virtual code. Entries are
+ * iterated in source order, which matches the order the regions appear in the
+ * output, so a forward-only cursor disambiguates repeated text.
  */
 function buildMappings(
   ts: typeof import("typescript"),
   printer: ts.Printer,
-  sourceFile: ts.SourceFile,
   virtualFile: ts.SourceFile,
   virtualCode: string,
-  virtualMapping: Map<ts.Node, ts.Node>,
+  nodeMappings: NodeMapping[],
 ): CodeMapping[] {
   const mappings: CodeMapping[] = [];
   let cursor = 0;
 
-  for (const [original, generated] of virtualMapping) {
-    const sourceOffset = original.getStart(sourceFile);
-    const sourceLength = original.getEnd() - sourceOffset;
-
+  for (const { sourceOffset, sourceLength, virtual } of nodeMappings) {
     const generatedText = printer.printNode(
       ts.EmitHint.Unspecified,
-      generated,
+      virtual,
       virtualFile,
     );
     const generatedOffset = virtualCode.indexOf(generatedText, cursor);
