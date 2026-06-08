@@ -9,13 +9,16 @@
       "name": "meta.embedded.splice.tsx",
       "begin": "\\$\\{",
       "beginCaptures": {
-        "0": { "name": "punctuation.definition.template-expression.begin.tsx" }
+        "0": { "name": "punctuation.definition.splice.begin.tsx" }
       },
       "end": "\\}",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.template-expression.end.tsx" }
+        "0": { "name": "punctuation.definition.splice.end.tsx" }
       },
-      "patterns": [{ "include": "source.tsx" }]
+      "patterns": [
+        { "include": "backtick.template.injection#template" },
+        { "include": "source.tsx" }
+      ]
     }
   }
 }
