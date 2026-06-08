@@ -25,7 +25,7 @@
       "contentName": "meta.embedded.backtick.tsx",
       "patterns": [
         {
-          "include": "#template"
+          "include": "#splice"
         },
         {
           "include": "source.tsx"
