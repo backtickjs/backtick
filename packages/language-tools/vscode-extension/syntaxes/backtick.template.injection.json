@@ -13,13 +13,13 @@
       "begin": "`",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.definition.backtick.begin.tsx"
+          "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
         }
       },
       "end": "`",
       "endCaptures": {
         "0": {
-          "name": "punctuation.definition.backtick.end.tsx"
+          "name": "string.template.tsx punctuation.definition.string.template.end.tsx"
         }
       },
       "contentName": "meta.embedded.backtick.tsx",
