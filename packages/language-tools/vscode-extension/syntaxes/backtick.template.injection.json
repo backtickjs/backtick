@@ -2,20 +2,35 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Backtick Template",
   "scopeName": "backtick.template.injection",
-  "injectionSelector": "L:source.backtick -meta.embedded.backtick -meta.embedded.splice -comment -string",
-  "patterns": [{ "include": "#template" }],
+  "injectionSelector": "L:source.backtick -meta.embedded.backtick -comment -string",
+  "patterns": [
+    {
+      "include": "#template"
+    }
+  ],
   "repository": {
     "template": {
       "begin": "`",
       "beginCaptures": {
-        "0": { "name": "punctuation.definition.backtick.begin.tsx" }
+        "0": {
+          "name": "punctuation.definition.backtick.begin.tsx"
+        }
       },
       "end": "`",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.backtick.end.tsx" }
+        "0": {
+          "name": "punctuation.definition.backtick.end.tsx"
+        }
       },
       "contentName": "meta.embedded.backtick.tsx",
-      "patterns": [{ "include": "#template" }, { "include": "source.tsx" }]
+      "patterns": [
+        {
+          "include": "#template"
+        },
+        {
+          "include": "source.tsx"
+        }
+      ]
     }
   }
 }

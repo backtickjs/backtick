@@ -30,11 +30,6 @@
         "embeddedLanguages": {
           "meta.embedded.backtick.tsx": "typescriptreact",
           "meta.embedded.splice.tsx": "typescriptreact"
-        },
-        "tokenTypes": {
-          "meta.embedded.backtick.tsx": "other",
-          "meta.embedded.splice.tsx": "other",
-          "string.template.tsx": "other"
         }
       },
       {

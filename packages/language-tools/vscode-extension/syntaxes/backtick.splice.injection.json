@@ -2,22 +2,34 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Backtick Splice",
   "scopeName": "backtick.splice.injection",
-  "injectionSelector": "L:source.backtick meta.embedded.backtick -comment",
-  "patterns": [{ "include": "#splice" }],
+  "injectionSelector": "L:source.backtick -comment -string",
+  "patterns": [
+    {
+      "include": "#splice"
+    }
+  ],
   "repository": {
     "splice": {
-      "name": "meta.embedded.splice.tsx",
+      "name": "meta.template.expression.tsx",
       "begin": "\\$\\{",
       "beginCaptures": {
-        "0": { "name": "punctuation.definition.splice.begin.tsx" }
+        "0": {
+          "name": "punctuation.definition.template-expression.begin.tsx"
+        }
       },
       "end": "\\}",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.splice.end.tsx" }
+        "0": {
+          "name": "punctuation.definition.template-expression.end.tsx"
+        }
       },
       "patterns": [
-        { "include": "backtick.template.injection#template" },
-        { "include": "source.tsx" }
+        {
+          "include": "backtick.template.injection#template"
+        },
+        {
+          "include": "source.tsx"
+        }
       ]
     }
   }
