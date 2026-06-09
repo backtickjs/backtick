@@ -12,13 +12,17 @@ const output = path.join(here, "..", "grammars", "backtick.tsx.json");
 const grammar = JSON.parse(fs.readFileSync(input, "utf8"));
 
 grammar.scopeName = "backtick.tsx";
+// Tagged template literals are claimed by backtick.template#tagged-template, and
+// keeps vanilla TSX string.template scoping.
+//
+// Only UNTAGGED backticks fall through to backtick.template#template and open the
+// embedded backtick language. Both backtick rules live in backtick.template.json so
+// the punctuation scopes are defined once.
 grammar.repository.template = {
-  comment:
-    "PATCHED: every template literal (`...`) defers to our backtick.template " +
-    "instead of string.template. This makes a backtick open our embedded template " +
-    "at ANY depth source.tsx descends to (JSX expressions, blocks, ...), which an " +
-    "injection cannot do without self-colliding on the closing backtick.",
-  patterns: [{ include: "backtick.template#template" }],
+  patterns: [
+    { include: "backtick.template#tagged-template" },
+    { include: "backtick.template#template" },
+  ],
 };
 
 const generated = {

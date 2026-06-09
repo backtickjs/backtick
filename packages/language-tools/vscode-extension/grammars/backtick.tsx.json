@@ -4726,8 +4726,10 @@
       ]
     },
     "template": {
-      "comment": "PATCHED: every template literal (`...`) defers to our backtick.template instead of string.template. This makes a backtick open our embedded template at ANY depth source.tsx descends to (JSX expressions, blocks, ...), which an injection cannot do without self-colliding on the closing backtick.",
       "patterns": [
+        {
+          "include": "backtick.template#tagged-template"
+        },
         {
           "include": "backtick.template#template"
         }

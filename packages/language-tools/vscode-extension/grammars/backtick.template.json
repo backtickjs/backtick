@@ -8,6 +8,29 @@
     }
   ],
   "repository": {
+    "tagged-template": {
+      "begin": "(?<=[$_[:alnum:]\\)\\]>])`",
+      "beginCaptures": {
+        "0": {
+          "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
+        }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": {
+          "name": "string.template.tsx punctuation.definition.string.template.end.tsx"
+        }
+      },
+      "contentName": "string.template.tsx",
+      "patterns": [
+        {
+          "include": "backtick.tsx#template-substitution-element"
+        },
+        {
+          "include": "backtick.tsx#string-character-escape"
+        }
+      ]
+    },
     "template": {
       "begin": "`",
       "beginCaptures": {
