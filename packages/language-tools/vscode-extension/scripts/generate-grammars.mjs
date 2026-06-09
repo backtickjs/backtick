@@ -21,11 +21,11 @@ grammar.repository.template = {
   patterns: [{ include: "backtick.template#template" }],
 };
 
-const vendored = {
+const generated = {
   information_for_contributors: [
     "GENERATED — do not edit by hand. Run scripts/generate-grammars.mjs to regenerate.",
   ],
   ...grammar,
 };
 
-fs.writeFileSync(output, JSON.stringify(vendored, null, 2) + "\n");
+fs.writeFileSync(output, JSON.stringify(generated, null, 2) + "\n");

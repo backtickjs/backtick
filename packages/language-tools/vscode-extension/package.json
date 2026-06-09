@@ -16,7 +16,7 @@
         "extensions": [
           ".bt"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./languages/language-configuration.json"
       }
     ],
     "grammars": [
