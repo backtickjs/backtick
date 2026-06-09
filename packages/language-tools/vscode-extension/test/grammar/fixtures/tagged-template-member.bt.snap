@@ -1,0 +1,8 @@
+>obj.tag`hello`
+#^^^ source.backtick variable.other.object.tsx
+#   ^ source.backtick punctuation.accessor.tsx
+#    ^^^ source.backtick variable.other.property.tsx
+#       ^ source.backtick string.template.tsx punctuation.definition.string.template.begin.tsx
+#        ^^^^^ source.backtick string.template.tsx
+#             ^ source.backtick string.template.tsx punctuation.definition.string.template.end.tsx
+>
