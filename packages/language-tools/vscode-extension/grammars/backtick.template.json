@@ -8,7 +8,18 @@
     }
   ],
   "repository": {
+    "template": {
+      "patterns": [
+        {
+          "include": "#tagged-template"
+        },
+        {
+          "include": "#untagged-template"
+        }
+      ]
+    },
     "tagged-template": {
+      "comment": "Keep vanilla TSX string.template scoping and do NOT open the embedded backtick language.",
       "begin": "(?<=[$_[:alnum:]\\)\\]>])`",
       "beginCaptures": {
         "0": {
@@ -31,7 +42,8 @@
         }
       ]
     },
-    "template": {
+    "untagged-template": {
+      "comment": "Open the embedded backtick language by recursing into the full backtick.tsx grammar.",
       "begin": "`",
       "beginCaptures": {
         "0": {
