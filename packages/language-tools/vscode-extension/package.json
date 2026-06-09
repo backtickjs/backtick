@@ -23,7 +23,7 @@
       {
         "language": "backtick",
         "scopeName": "source.backtick",
-        "path": "./syntaxes/backtick.tmLanguage.json",
+        "path": "./syntaxes/backtick.json",
         "embeddedLanguages": {
           "meta.embedded.backtick.tsx": "typescriptreact",
           "meta.embedded.splice.tsx": "typescriptreact"
@@ -44,7 +44,6 @@
     "@volar/vscode": "^2.4.28",
     "esbuild": "^0.28.0",
     "esbuild-plugin-copy": "^2.1.1",
-    "kleur": "^4.1.5",
-    "tm-grammars": "1.31.15"
+    "kleur": "^4.1.5"
   }
 }
