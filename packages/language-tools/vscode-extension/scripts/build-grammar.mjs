@@ -73,7 +73,7 @@ function buildGrammar() {
       },
     },
     injections: {
-      // `${...}` splices can appear at any depth inside the backticklanguage, so they are
+      // `${...}` splices can appear at any depth inside the backtick language, so they are
       // injected into the grammar's own scope rather than added to a single pattern.
       "L:source.backtick -comment -string": {
         patterns: [
