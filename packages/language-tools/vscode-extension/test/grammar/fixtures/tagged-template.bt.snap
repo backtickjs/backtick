@@ -1,0 +1,5 @@
+>tag`hello`
+#^^^ source.backtick variable.other.readwrite.tsx
+#   ^ source.backtick string.template.tsx punctuation.definition.string.template.begin.tsx
+#    ^^^^^ source.backtick string.template.tsx
+#         ^ source.backtick string.template.tsx punctuation.definition.string.template.end.tsx

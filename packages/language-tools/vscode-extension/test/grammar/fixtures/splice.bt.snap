@@ -1,0 +1,8 @@
+>`${`1`}`
+#^ source.backtick string.template.tsx punctuation.definition.string.template.begin.tsx
+# ^^ source.backtick meta.embedded.backtick.tsx meta.template.expression.tsx punctuation.definition.template-expression.begin.tsx
+#   ^ source.backtick meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#    ^ source.backtick meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.embedded.backtick.tsx constant.numeric.decimal.tsx
+#     ^ source.backtick meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#      ^ source.backtick meta.embedded.backtick.tsx meta.template.expression.tsx punctuation.definition.template-expression.end.tsx
+#       ^ source.backtick string.template.tsx punctuation.definition.string.template.end.tsx

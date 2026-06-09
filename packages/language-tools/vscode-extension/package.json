@@ -35,7 +35,10 @@
     "build": "tsc -b && node scripts/build.mjs -- --minify",
     "dev": "node scripts/build.mjs -- --watch",
     "build:grammar": "node scripts/build-grammar.mjs",
-    "dev:grammar": "node scripts/build-grammar.mjs -- --watch"
+    "dev:grammar": "node scripts/build-grammar.mjs -- --watch",
+    "test": "pnpm test:grammar",
+    "test:update": "pnpm build:grammar && node ./test/grammar/test.mjs --updateSnapshot",
+    "test:grammar": "pnpm build:grammar && node ./test/grammar/test.mjs"
   },
   "devDependencies": {
     "@backtick/language-server": "^0.0.0",
@@ -44,6 +47,7 @@
     "@volar/vscode": "^2.4.28",
     "esbuild": "^0.28.0",
     "esbuild-plugin-copy": "^2.1.1",
-    "kleur": "^4.1.5"
+    "kleur": "^4.1.5",
+    "vscode-tmgrammar-test": "^0.1.3"
   }
 }
