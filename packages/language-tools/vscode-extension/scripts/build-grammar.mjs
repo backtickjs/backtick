@@ -11,7 +11,7 @@ const output = path.join(here, "..", "grammars", "backtick.tsx.json");
 const template = {
   patterns: [
     {
-      // For tagged templates, do NOT open the embedded backtick language.
+      // For tagged templates, do not open the backtick language.
       begin: "(?<=[$_[:alnum:]\\)\\]>])`",
       beginCaptures: {
         0: {
@@ -35,7 +35,7 @@ const template = {
       ],
     },
     {
-      // Open the backtick language
+      // For untagged templates, open the backtick language.
       begin: "`",
       beginCaptures: {
         0: {
@@ -61,15 +61,51 @@ const template = {
   ],
 };
 
+// `${...}` splices can appear at any depth inside the embedded backtick
+// language, so they are injected into the grammar's own scope rather than
+// added to a single pattern.
+const splice = {
+  name: "meta.template.expression.tsx",
+  contentName: "meta.embedded.splice.tsx",
+  begin: "\\$\\{",
+  beginCaptures: {
+    0: {
+      name: "punctuation.definition.template-expression.begin.tsx",
+    },
+  },
+  end: "\\}",
+  endCaptures: {
+    0: {
+      name: "punctuation.definition.template-expression.end.tsx",
+    },
+  },
+  patterns: [
+    {
+      include: "#expression",
+    },
+  ],
+};
+
+const injections = {
+  "L:backtick.tsx -comment -string": {
+    patterns: [
+      {
+        include: "#splice",
+      },
+    ],
+  },
+};
+
 function buildGrammar() {
   const grammar = JSON.parse(fs.readFileSync(input, "utf8"));
 
   grammar.scopeName = "backtick.tsx";
   grammar.repository.template = template;
+  grammar.repository.splice = splice;
+  grammar.injections = injections;
 
   const generated = {
-    comment:
-      "GENERATED — do not edit by hand. Run scripts/build-grammar.mjs to regenerate.",
+    comment: "@generated scripts/build-grammar.mjs",
     ...grammar,
   };
 

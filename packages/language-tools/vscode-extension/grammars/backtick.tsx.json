@@ -1,5 +1,5 @@
 {
-  "comment": "GENERATED — do not edit by hand. Run scripts/build-grammar.mjs to regenerate.",
+  "comment": "@generated scripts/build-grammar.mjs",
   "displayName": "TSX",
   "name": "tsx",
   "patterns": [
@@ -6008,7 +6008,37 @@
           ]
         }
       ]
+    },
+    "splice": {
+      "name": "meta.template.expression.tsx",
+      "contentName": "meta.embedded.splice.tsx",
+      "begin": "\\$\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.template-expression.begin.tsx"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.template-expression.end.tsx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
     }
   },
-  "scopeName": "backtick.tsx"
+  "scopeName": "backtick.tsx",
+  "injections": {
+    "L:backtick.tsx -comment -string": {
+      "patterns": [
+        {
+          "include": "#splice"
+        }
+      ]
+    }
+  }
 }

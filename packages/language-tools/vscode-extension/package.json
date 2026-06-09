@@ -28,13 +28,6 @@
           "meta.embedded.backtick.tsx": "typescriptreact",
           "meta.embedded.splice.tsx": "typescriptreact"
         }
-      },
-      {
-        "scopeName": "backtick.splice",
-        "path": "./grammars/backtick.splice.json",
-        "injectTo": [
-          "backtick.tsx"
-        ]
       }
     ]
   },
