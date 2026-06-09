@@ -19,6 +19,27 @@ function buildGrammar() {
     fileTypes: ["bt"],
     repository: {
       ...tsxGrammar.repository,
+      splice: {
+        name: "meta.template.expression.tsx",
+        contentName: "meta.embedded.splice.tsx",
+        begin: "\\$\\{",
+        beginCaptures: {
+          0: {
+            name: "punctuation.definition.template-expression.begin.tsx",
+          },
+        },
+        end: "\\}",
+        endCaptures: {
+          0: {
+            name: "punctuation.definition.template-expression.end.tsx",
+          },
+        },
+        patterns: [
+          {
+            include: "#expression",
+          },
+        ],
+      },
       template: {
         patterns: [
           {
@@ -71,33 +92,15 @@ function buildGrammar() {
           },
         ],
       },
-    },
-    injections: {
-      // `${...}` splices can appear at any depth inside the backtick language, so they are
-      // injected into the grammar's own scope rather than added to a single pattern.
-      "L:source.backtick -comment -string": {
+      // A `${...}` splice is an expression, so it must only be recognized in expression positions:
+      // (call args, array elements, object values, ternary branches, return values, arrow bodies, etc.)
+      expressionWithoutIdentifiers: {
+        ...tsxGrammar.repository.expressionWithoutIdentifiers,
         patterns: [
           {
-            name: "meta.template.expression.tsx",
-            contentName: "meta.embedded.splice.tsx",
-            begin: "\\$\\{",
-            beginCaptures: {
-              0: {
-                name: "punctuation.definition.template-expression.begin.tsx",
-              },
-            },
-            end: "\\}",
-            endCaptures: {
-              0: {
-                name: "punctuation.definition.template-expression.end.tsx",
-              },
-            },
-            patterns: [
-              {
-                include: "#expression",
-              },
-            ],
+            include: "#splice",
           },
+          ...tsxGrammar.repository.expressionWithoutIdentifiers.patterns,
         ],
       },
     },
