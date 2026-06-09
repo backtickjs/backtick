@@ -55,6 +55,7 @@
     "@volar/vscode": "^2.4.28",
     "esbuild": "^0.28.0",
     "esbuild-plugin-copy": "^2.1.1",
-    "kleur": "^4.1.5"
+    "kleur": "^4.1.5",
+    "tm-grammars": "1.31.15"
   }
 }

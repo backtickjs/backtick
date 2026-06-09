@@ -1,12 +1,11 @@
-// tsx.json is a verbatim copy of:
-// https://github.com/shikijs/textmate-grammars-themes/blob/main/packages/tm-grammars/grammars/tsx.json
-
 import fs from "node:fs";
 import path from "node:path";
+import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
+const require = createRequire(import.meta.url);
 const here = path.dirname(fileURLToPath(import.meta.url));
-const input = path.join(here, "tsx.json");
+const input = require.resolve("tm-grammars/grammars/tsx.json");
 const output = path.join(here, "..", "grammars", "backtick.tsx.json");
 
 function buildGrammar() {
