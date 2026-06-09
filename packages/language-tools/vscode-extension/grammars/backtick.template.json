@@ -59,7 +59,10 @@
       "contentName": "meta.embedded.backtick.tsx",
       "patterns": [
         {
-          "include": "backtick.tsx"
+          "include": "backtick.tsx#decl-block"
+        },
+        {
+          "include": "backtick.tsx#expression"
         }
       ]
     }
