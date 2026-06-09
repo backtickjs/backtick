@@ -8,102 +8,102 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const input = require.resolve("tm-grammars/grammars/tsx.json");
 const output = path.join(here, "..", "syntaxes", "backtick.tmLanguage.json");
 
-const template = {
-  patterns: [
-    {
-      // For tagged templates, do not open the backtick language.
-      begin: "(?<=[$_[:alnum:]\\)\\]>])`",
-      beginCaptures: {
-        0: {
-          name: "string.template.tsx punctuation.definition.string.template.begin.tsx",
-        },
-      },
-      end: "`",
-      endCaptures: {
-        0: {
-          name: "string.template.tsx punctuation.definition.string.template.end.tsx",
-        },
-      },
-      contentName: "string.template.tsx",
-      patterns: [
-        {
-          include: "#template-substitution-element",
-        },
-        {
-          include: "#string-character-escape",
-        },
-      ],
-    },
-    {
-      // For untagged templates, open the backtick language.
-      begin: "`",
-      beginCaptures: {
-        0: {
-          name: "string.template.tsx punctuation.definition.string.template.begin.tsx",
-        },
-      },
-      end: "`",
-      endCaptures: {
-        0: {
-          name: "string.template.tsx punctuation.definition.string.template.end.tsx",
-        },
-      },
-      contentName: "meta.embedded.backtick.tsx",
-      patterns: [
-        {
-          include: "#decl-block",
-        },
-        {
-          include: "#expression",
-        },
-      ],
-    },
-  ],
-};
+function buildGrammar() {
+  const tsxGrammar = JSON.parse(fs.readFileSync(input, "utf8"));
 
-const injections = {
-  // `${...}` splices can appear at any depth inside the backticklanguage, so they are
-  // injected into the grammar's own scope rather than added to a single pattern.
-  "L:source.backtick -comment -string": {
-    patterns: [
-      {
-        name: "meta.template.expression.tsx",
-        contentName: "meta.embedded.splice.tsx",
-        begin: "\\$\\{",
-        beginCaptures: {
-          0: {
-            name: "punctuation.definition.template-expression.begin.tsx",
-          },
-        },
-        end: "\\}",
-        endCaptures: {
-          0: {
-            name: "punctuation.definition.template-expression.end.tsx",
-          },
-        },
+  const backtickGrammar = {
+    ...tsxGrammar,
+    name: "Backtick",
+    displayName: "Backtick",
+    scopeName: "source.backtick",
+    fileTypes: ["bt"],
+    repository: {
+      ...tsxGrammar.repository,
+      template: {
         patterns: [
           {
-            include: "#expression",
+            // For tagged templates, do not open the backtick language.
+            begin: "(?<=[$_[:alnum:]\\)\\]>])`",
+            beginCaptures: {
+              0: {
+                name: "string.template.tsx punctuation.definition.string.template.begin.tsx",
+              },
+            },
+            end: "`",
+            endCaptures: {
+              0: {
+                name: "string.template.tsx punctuation.definition.string.template.end.tsx",
+              },
+            },
+            contentName: "string.template.tsx",
+            patterns: [
+              {
+                include: "#template-substitution-element",
+              },
+              {
+                include: "#string-character-escape",
+              },
+            ],
+          },
+          {
+            // For untagged templates, open the backtick language.
+            begin: "`",
+            beginCaptures: {
+              0: {
+                name: "string.template.tsx punctuation.definition.string.template.begin.tsx",
+              },
+            },
+            end: "`",
+            endCaptures: {
+              0: {
+                name: "string.template.tsx punctuation.definition.string.template.end.tsx",
+              },
+            },
+            contentName: "meta.embedded.backtick.tsx",
+            patterns: [
+              {
+                include: "#decl-block",
+              },
+              {
+                include: "#expression",
+              },
+            ],
           },
         ],
       },
-    ],
-  },
-};
-
-function buildGrammar() {
-  const grammar = JSON.parse(fs.readFileSync(input, "utf8"));
-
-  grammar.scopeName = "source.backtick";
-  grammar.repository.template = template;
-  grammar.injections = injections;
-
-  const generated = {
-    comment: "@generated scripts/build-grammar.mjs",
-    ...grammar,
+    },
+    injections: {
+      // `${...}` splices can appear at any depth inside the backticklanguage, so they are
+      // injected into the grammar's own scope rather than added to a single pattern.
+      "L:source.backtick -comment -string": {
+        patterns: [
+          {
+            name: "meta.template.expression.tsx",
+            contentName: "meta.embedded.splice.tsx",
+            begin: "\\$\\{",
+            beginCaptures: {
+              0: {
+                name: "punctuation.definition.template-expression.begin.tsx",
+              },
+            },
+            end: "\\}",
+            endCaptures: {
+              0: {
+                name: "punctuation.definition.template-expression.end.tsx",
+              },
+            },
+            patterns: [
+              {
+                include: "#expression",
+              },
+            ],
+          },
+        ],
+      },
+    },
   };
 
-  fs.writeFileSync(output, JSON.stringify(generated, null, 2) + "\n");
+  fs.writeFileSync(output, JSON.stringify(backtickGrammar, null, 2) + "\n");
   console.log(`Rebuilt ${path.basename(output)}`);
 }
 

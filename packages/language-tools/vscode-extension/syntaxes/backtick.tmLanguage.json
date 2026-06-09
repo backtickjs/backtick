@@ -1,7 +1,6 @@
 {
-  "comment": "@generated scripts/build-grammar.mjs",
-  "displayName": "TSX",
-  "name": "tsx",
+  "displayName": "Backtick",
+  "name": "Backtick",
   "patterns": [
     {
       "include": "#directives"
@@ -6011,6 +6010,9 @@
     }
   },
   "scopeName": "source.backtick",
+  "fileTypes": [
+    "bt"
+  ],
   "injections": {
     "L:source.backtick -comment -string": {
       "patterns": [
