@@ -1,6 +1,6 @@
 {
   "information_for_contributors": [
-    "GENERATED — do not edit by hand. Run scripts/generate-grammars.mjs to regenerate."
+    "GENERATED — do not edit by hand. Run scripts/build-grammar.mjs to regenerate."
   ],
   "displayName": "TSX",
   "name": "tsx",
