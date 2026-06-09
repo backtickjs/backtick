@@ -25,32 +25,30 @@
     "grammars": [
       {
         "language": "backtick",
-        "scopeName": "source.backtick",
-        "path": "./syntaxes/backtick.tmLanguage.json",
+        "scopeName": "backtick.tsx",
+        "path": "./grammars/backtick.tsx.json",
         "embeddedLanguages": {
           "meta.embedded.backtick.tsx": "typescriptreact",
           "meta.embedded.splice.tsx": "typescriptreact"
         }
       },
       {
-        "scopeName": "backtick.template.injection",
-        "path": "./syntaxes/backtick.template.injection.json",
-        "injectTo": [
-          "source.backtick"
-        ]
+        "scopeName": "backtick.template",
+        "path": "./grammars/backtick.template.json"
       },
       {
-        "scopeName": "backtick.splice.injection",
-        "path": "./syntaxes/backtick.splice.injection.json",
+        "scopeName": "backtick.splice",
+        "path": "./grammars/backtick.splice.json",
         "injectTo": [
-          "source.backtick"
+          "backtick.tsx"
         ]
       }
     ]
   },
   "scripts": {
     "build": "tsc -b && node scripts/build.mjs -- --minify",
-    "dev": "node scripts/build.mjs -- --watch"
+    "dev": "node scripts/build.mjs -- --watch",
+    "generate-grammars": "node scripts/generate-grammars.mjs"
   },
   "devDependencies": {
     "@backtick/language-server": "^0.0.0",

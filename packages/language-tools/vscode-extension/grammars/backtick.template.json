@@ -1,8 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Backtick Template",
-  "scopeName": "backtick.template.injection",
-  "injectionSelector": "L:source.backtick -meta.embedded.backtick -comment -string",
+  "scopeName": "backtick.template",
   "patterns": [
     {
       "include": "#template"
@@ -25,10 +24,7 @@
       "contentName": "meta.embedded.backtick.tsx",
       "patterns": [
         {
-          "include": "#splice"
-        },
-        {
-          "include": "source.tsx"
+          "include": "backtick.tsx"
         }
       ]
     }
