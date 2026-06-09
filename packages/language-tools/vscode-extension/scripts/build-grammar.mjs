@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const input = path.join(here, "tsx.json");
+const input = path.join(here, "..", "vendor", "tsx.json");
 const output = path.join(here, "..", "syntaxes", "backtick.json");
 
 function buildGrammar() {
