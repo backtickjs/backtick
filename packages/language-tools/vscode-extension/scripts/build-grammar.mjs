@@ -61,36 +61,31 @@ const template = {
   ],
 };
 
-// `${...}` splices can appear at any depth inside the embedded backtick
-// language, so they are injected into the grammar's own scope rather than
-// added to a single pattern.
-const splice = {
-  name: "meta.template.expression.tsx",
-  contentName: "meta.embedded.splice.tsx",
-  begin: "\\$\\{",
-  beginCaptures: {
-    0: {
-      name: "punctuation.definition.template-expression.begin.tsx",
-    },
-  },
-  end: "\\}",
-  endCaptures: {
-    0: {
-      name: "punctuation.definition.template-expression.end.tsx",
-    },
-  },
-  patterns: [
-    {
-      include: "#expression",
-    },
-  ],
-};
-
 const injections = {
+  // `${...}` splices can appear at any depth inside the backticklanguage, so they are
+  // injected into the grammar's own scope rather than added to a single pattern.
   "L:source.backtick -comment -string": {
     patterns: [
       {
-        include: "#splice",
+        name: "meta.template.expression.tsx",
+        contentName: "meta.embedded.splice.tsx",
+        begin: "\\$\\{",
+        beginCaptures: {
+          0: {
+            name: "punctuation.definition.template-expression.begin.tsx",
+          },
+        },
+        end: "\\}",
+        endCaptures: {
+          0: {
+            name: "punctuation.definition.template-expression.end.tsx",
+          },
+        },
+        patterns: [
+          {
+            include: "#expression",
+          },
+        ],
       },
     ],
   },
@@ -101,7 +96,6 @@ function buildGrammar() {
 
   grammar.scopeName = "source.backtick";
   grammar.repository.template = template;
-  grammar.repository.splice = splice;
   grammar.injections = injections;
 
   const generated = {

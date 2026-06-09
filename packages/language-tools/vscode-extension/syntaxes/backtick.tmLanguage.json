@@ -6008,27 +6008,6 @@
           ]
         }
       ]
-    },
-    "splice": {
-      "name": "meta.template.expression.tsx",
-      "contentName": "meta.embedded.splice.tsx",
-      "begin": "\\$\\{",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.template-expression.begin.tsx"
-        }
-      },
-      "end": "\\}",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.template-expression.end.tsx"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#expression"
-        }
-      ]
     }
   },
   "scopeName": "source.backtick",
@@ -6036,7 +6015,25 @@
     "L:source.backtick -comment -string": {
       "patterns": [
         {
-          "include": "#splice"
+          "name": "meta.template.expression.tsx",
+          "contentName": "meta.embedded.splice.tsx",
+          "begin": "\\$\\{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.template-expression.begin.tsx"
+            }
+          },
+          "end": "\\}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.template-expression.end.tsx"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ]
         }
       ]
     }
