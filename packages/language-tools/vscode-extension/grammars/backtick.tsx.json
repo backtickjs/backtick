@@ -1,7 +1,5 @@
 {
-  "information_for_contributors": [
-    "GENERATED — do not edit by hand. Run scripts/build-grammar.mjs to regenerate."
-  ],
+  "comment": "GENERATED — do not edit by hand. Run scripts/build-grammar.mjs to regenerate.",
   "displayName": "TSX",
   "name": "tsx",
   "patterns": [
@@ -4728,7 +4726,50 @@
     "template": {
       "patterns": [
         {
-          "include": "backtick.template#template"
+          "begin": "(?<=[$_[:alnum:]\\)\\]>])`",
+          "beginCaptures": {
+            "0": {
+              "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
+            }
+          },
+          "end": "`",
+          "endCaptures": {
+            "0": {
+              "name": "string.template.tsx punctuation.definition.string.template.end.tsx"
+            }
+          },
+          "contentName": "string.template.tsx",
+          "patterns": [
+            {
+              "include": "#template-substitution-element"
+            },
+            {
+              "include": "#string-character-escape"
+            }
+          ]
+        },
+        {
+          "begin": "`",
+          "beginCaptures": {
+            "0": {
+              "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
+            }
+          },
+          "end": "`",
+          "endCaptures": {
+            "0": {
+              "name": "string.template.tsx punctuation.definition.string.template.end.tsx"
+            }
+          },
+          "contentName": "meta.embedded.backtick.tsx",
+          "patterns": [
+            {
+              "include": "#decl-block"
+            },
+            {
+              "include": "#expression"
+            }
+          ]
         }
       ]
     },
