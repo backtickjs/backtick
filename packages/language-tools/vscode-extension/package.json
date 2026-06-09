@@ -22,8 +22,8 @@
     "grammars": [
       {
         "language": "backtick",
-        "scopeName": "backtick.tsx",
-        "path": "./grammars/backtick.tsx.json",
+        "scopeName": "source.backtick",
+        "path": "./syntaxes/backtick.tmLanguage.json",
         "embeddedLanguages": {
           "meta.embedded.backtick.tsx": "typescriptreact",
           "meta.embedded.splice.tsx": "typescriptreact"

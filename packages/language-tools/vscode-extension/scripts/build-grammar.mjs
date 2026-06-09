@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const require = createRequire(import.meta.url);
 const here = path.dirname(fileURLToPath(import.meta.url));
 const input = require.resolve("tm-grammars/grammars/tsx.json");
-const output = path.join(here, "..", "grammars", "backtick.tsx.json");
+const output = path.join(here, "..", "syntaxes", "backtick.tmLanguage.json");
 
 const template = {
   patterns: [
@@ -87,7 +87,7 @@ const splice = {
 };
 
 const injections = {
-  "L:backtick.tsx -comment -string": {
+  "L:source.backtick -comment -string": {
     patterns: [
       {
         include: "#splice",
@@ -99,7 +99,7 @@ const injections = {
 function buildGrammar() {
   const grammar = JSON.parse(fs.readFileSync(input, "utf8"));
 
-  grammar.scopeName = "backtick.tsx";
+  grammar.scopeName = "source.backtick";
   grammar.repository.template = template;
   grammar.repository.splice = splice;
   grammar.injections = injections;

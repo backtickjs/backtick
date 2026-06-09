@@ -6031,9 +6031,9 @@
       ]
     }
   },
-  "scopeName": "backtick.tsx",
+  "scopeName": "source.backtick",
   "injections": {
-    "L:backtick.tsx -comment -string": {
+    "L:source.backtick -comment -string": {
       "patterns": [
         {
           "include": "#splice"
