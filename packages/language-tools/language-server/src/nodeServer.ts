@@ -5,6 +5,7 @@ import {
   loadTsdkByPath,
 } from "@volar/language-server/node";
 import getBacktickLanguagePlugin from "./getBacktickLanguagePlugin.js";
+import getBacktickPrettierService from "./getBacktickPrettierService.js";
 import { create as createTypeScriptServices } from "volar-service-typescript";
 
 const connection = createConnection();
@@ -22,7 +23,10 @@ connection.onInitialize((params) => {
     createTypeScriptProject(tsdk.typescript, tsdk.diagnosticMessages, () => ({
       languagePlugins: [getBacktickLanguagePlugin(tsdk.typescript)],
     })),
-    [...createTypeScriptServices(tsdk.typescript)],
+    [
+      ...createTypeScriptServices(tsdk.typescript),
+      getBacktickPrettierService(connection),
+    ],
   );
 });
 

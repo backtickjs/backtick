@@ -29,12 +29,21 @@ importers:
       '@backtick/compiler':
         specifier: ^0.0.0
         version: link:../../compiler
+      '@backtick/prettier-plugin':
+        specifier: ^0.0.0
+        version: link:../../prettier-plugin
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28
       '@volar/language-server':
         specifier: ^2.4.28
         version: 2.4.28
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      volar-service-prettier:
+        specifier: ^0.0.71
+        version: 0.0.71(@volar/language-service@2.4.28)(prettier@3.8.4)
       volar-service-typescript:
         specifier: ^0.0.71
         version: 0.0.71(@volar/language-service@2.4.28)
@@ -568,6 +577,17 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
+  volar-service-prettier@0.0.71:
+    resolution: {integrity: sha512-Rz7JVH3qD108UCdmIEiZvOBNljMt2nLFdbN8AXcDfn7xD9F5I2aCIsDVqBbXw21PsnxG0b7MfwtNF+zPS/NKUg==}
+    peerDependencies:
+      '@volar/language-service': ~2.4.0
+      prettier: ^2.2 || ^3.0
+    peerDependenciesMeta:
+      '@volar/language-service':
+        optional: true
+      prettier:
+        optional: true
+
   volar-service-typescript@0.0.71:
     resolution: {integrity: sha512-yTtM/BVT6hoyEYnDtaCyAtNhdNeS/mhTTABlBOdw3NNiRBUin3IznFJpgfjer4c6RYopiPjjQjc9VFhxVl1mLw==}
     peerDependencies:
@@ -1050,6 +1070,13 @@ snapshots:
   undici-types@7.24.6: {}
 
   universalify@2.0.1: {}
+
+  volar-service-prettier@0.0.71(@volar/language-service@2.4.28)(prettier@3.8.4):
+    dependencies:
+      vscode-uri: 3.1.0
+    optionalDependencies:
+      '@volar/language-service': 2.4.28
+      prettier: 3.8.4
 
   volar-service-typescript@0.0.71(@volar/language-service@2.4.28):
     dependencies:

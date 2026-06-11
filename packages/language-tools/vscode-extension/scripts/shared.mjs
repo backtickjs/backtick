@@ -10,7 +10,7 @@ const dt = new Intl.DateTimeFormat("en-us", {
  * @type {import('esbuild').Plugin}
  */
 export const rebuildPlugin = {
-  name: "astro:rebuild",
+  name: "backtick:rebuild",
   setup(build) {
     build.onEnd(async (result) => {
       const date = dt.format(new Date());

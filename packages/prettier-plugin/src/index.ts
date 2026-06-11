@@ -1,4 +1,6 @@
-import type { Parser, Printer, SupportLanguage } from "prettier";
+import { doc, type Parser, type Printer, type SupportLanguage } from "prettier";
+
+const { hardline } = doc.builders;
 
 /**
  * Placeholder AST until a real Backtick parser is wired in: the whole file is
@@ -27,11 +29,24 @@ export const parsers: Record<string, Parser<RootNode>> = {
   },
 };
 
+/**
+ * TEST CHANGE: loud banner so it's obvious the plugin ran. Remove once
+ * real formatting is in place.
+ */
+const BANNER = "// 🎀 formatted by @backtick/prettier-plugin 🎀";
+
 export const printers: Record<string, Printer<RootNode>> = {
   backtick: {
-    // Identity printer: emits the source unchanged (modulo a trailing
-    // newline, which prettier adds). Real formatting goes here.
-    print: (path) => path.node.source.replace(/\n$/, ""),
+    // Identity printer plus a visible banner, normalizing the trailing
+    // newline. Real formatting goes here. Stripping an existing banner first
+    // keeps formatting idempotent.
+    print: (path) => {
+      let source = path.node.source.replace(/\n+$/, "");
+      if (source.startsWith(BANNER)) {
+        source = source.slice(BANNER.length).replace(/^\n+/, "");
+      }
+      return [BANNER, hardline, hardline, source, hardline];
+    },
   },
 };
 

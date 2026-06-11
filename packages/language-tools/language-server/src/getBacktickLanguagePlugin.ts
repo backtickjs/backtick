@@ -1,4 +1,3 @@
-import { compile } from "@backtick/compiler";
 import {
   type CodeMapping,
   type LanguagePlugin,
@@ -46,20 +45,29 @@ export class BacktickVirtualCode implements VirtualCode {
   languageId = "typescriptreact";
   mappings: CodeMapping[];
   snapshot: ts.IScriptSnapshot;
+  embeddedCodes: VirtualCode[];
 
   constructor(
-    ts: typeof import("typescript"),
-    filename: string,
+    _ts: typeof import("typescript"),
+    _filename: string,
     snapshot: ts.IScriptSnapshot,
   ) {
-    const source = snapshot.getText(0, snapshot.getLength());
-    const options = { filename };
-    const { virtualCode, mappings } = compile(ts, source, options);
-    this.mappings = mappings;
-    this.snapshot = {
-      getText: (start, end) => virtualCode.substring(start, end),
-      getLength: () => virtualCode.length,
-      getChangeRange: () => undefined,
-    };
+    this.snapshot = snapshot;
+    this.mappings = [
+      {
+        sourceOffsets: [0],
+        generatedOffsets: [0],
+        lengths: [this.snapshot.getLength()],
+        data: {
+          verification: true,
+          completion: true,
+          semantic: true,
+          navigation: true,
+          structure: true,
+          format: true,
+        },
+      },
+    ];
+    this.embeddedCodes = [];
   }
 }
