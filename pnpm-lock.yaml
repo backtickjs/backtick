@@ -18,17 +18,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/compiler:
-    dependencies:
-      '@volar/language-core':
-        specifier: ^2.4.28
-        version: 2.4.28
-
   packages/language-tools/language-server:
     dependencies:
-      '@backtick/compiler':
-        specifier: ^0.0.0
-        version: link:../../compiler
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../prettier-plugin

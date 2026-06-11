@@ -5,7 +5,6 @@
     "sourceMap": true
   },
   "references": [
-    { "path": "../../compiler/tsconfig.build.json" },
     { "path": "../../prettier-plugin/tsconfig.build.json" }
   ]
 }

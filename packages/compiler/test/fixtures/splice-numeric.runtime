@@ -1,2 +1,0 @@
-import Backtick from "../../src/Backtick";
-export default v.visitSplice(null, v.visitNumber(null, 1));

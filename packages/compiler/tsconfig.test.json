@@ -1,5 +1,0 @@
-{
-  "extends": "../../configs/tsconfig.test.json",
-  "include": ["test/**/*.mts", "test/**/*.mjs", "test/**/*.ts"],
-  "references": [{ "path": "./tsconfig.build.json" }]
-}
