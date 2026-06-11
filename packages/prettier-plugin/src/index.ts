@@ -13,7 +13,7 @@ interface RootNode {
 
 export const languages: SupportLanguage[] = [
   {
-    name: "Backtick",
+    name: "backtick",
     parsers: ["backtick"],
     extensions: [".bt"],
     vscodeLanguageIds: ["backtick"],
