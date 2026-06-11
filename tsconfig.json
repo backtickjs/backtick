@@ -4,6 +4,7 @@
   "references": [
     { "path": "packages/compiler" },
     { "path": "packages/language-tools/language-server" },
-    { "path": "packages/language-tools/vscode-extension" }
+    { "path": "packages/language-tools/vscode-extension" },
+    { "path": "packages/prettier-plugin" }
   ]
 }
