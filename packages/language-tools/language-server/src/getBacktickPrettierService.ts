@@ -34,7 +34,12 @@ export default function getBacktickPrettierService(
       }
     },
     {
-      documentSelector: ["backtick"],
+      documentSelector: [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+      ],
       async getFormattingOptions(prettier, document, formatOptions, context) {
         const uri = URI.parse(document.uri);
         const documentURI = context.decodeEmbeddedDocumentUri(uri)?.[0] ?? uri;
@@ -75,13 +80,19 @@ export default function getBacktickPrettierService(
           ...configOptions,
         };
 
+        const parser =
+          document.languageId === "javascript" ||
+          document.languageId === "javascriptreact"
+            ? "babel"
+            : "typescript";
+
         return {
           ...resolvedConfig,
           plugins: [
             ...(await getBacktickPrettierPlugin()),
             ...(resolvedConfig.plugins ?? []),
           ],
-          parser: "backtick",
+          parser,
         };
 
         async function getBacktickPrettierPlugin() {
@@ -89,12 +100,11 @@ export default function getBacktickPrettierService(
             return [];
           }
 
-          const hasPluginLoadedAlready =
-            (await prettier.getSupportInfo()).languages.some(
-              (l: any) => l.name === "backtick",
-            ) || resolvedConfig.plugins?.includes("@backtick/prettier-plugin");
+          const isPluginAlreadyLoaded = resolvedConfig.plugins?.includes(
+            "@backtick/prettier-plugin",
+          );
 
-          return hasPluginLoadedAlready ? [] : [prettierPluginPath];
+          return isPluginAlreadyLoaded ? [] : [prettierPluginPath];
         }
       },
     },

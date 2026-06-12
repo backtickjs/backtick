@@ -1,6 +1,6 @@
 import assert from "node:assert";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import * as prettier from "prettier";
 import * as plugin from "../src/index.ts";
@@ -16,18 +16,28 @@ function matchFileSnapshot(actual: string, file: string): void {
   assert.strictEqual(actual, readFileSync(file, "utf8"));
 }
 
+// Backtick now lives as `c`...`` tagged templates inside JS/TS files, so the
+// plugin is exercised the way the language server invokes it: by formatting a
+// host JS/TS document whose own parser does the work.
+const parserByExtension: Record<string, string> = {
+  ".ts": "typescript",
+  ".tsx": "typescript",
+  ".js": "babel",
+  ".jsx": "babel",
+};
+
 const fixtureNames = readdirSync(fixturesDir)
-  .filter((f) => f.endsWith(".bt"))
-  .map((f) => f.slice(0, -".bt".length))
+  .filter((file) => extname(file) in parserByExtension)
   .sort();
 
 describe("format", () => {
   for (const name of fixtureNames) {
     it(name, async () => {
-      const input = readFileSync(join(fixturesDir, `${name}.bt`), "utf8");
+      const input = readFileSync(join(fixturesDir, name), "utf8");
+      const parser = parserByExtension[extname(name)];
 
       const formatted = await prettier.format(input, {
-        parser: "backtick",
+        parser,
         plugins: [plugin],
       });
 
@@ -35,7 +45,7 @@ describe("format", () => {
 
       // Formatting must be idempotent.
       const reformatted = await prettier.format(formatted, {
-        parser: "backtick",
+        parser,
         plugins: [plugin],
       });
       assert.strictEqual(reformatted, formatted);

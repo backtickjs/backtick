@@ -1,4 +1,0 @@
-// 🎀 formatted by @backtick/prettier-plugin 🎀
-
-import Backtick from '../../src/Backtick';
-export default `${`1`}`;

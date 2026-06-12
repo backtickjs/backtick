@@ -1,53 +1,58 @@
-import { doc, type Parser, type Printer, type SupportLanguage } from "prettier";
-
-const { hardline } = doc.builders;
+import type { AstPath, Doc, Options, Printer } from "prettier";
+import { printers as builtinPrinters } from "prettier/plugins/estree";
 
 /**
- * Placeholder AST until a real Backtick parser is wired in: the whole file is
- * a single root node holding the source text.
+ * Backtick code lives as c`...` tagged templates embedded inside ordinary
+ * JS/TS files, so this plugin doesn't contribute a language of its own.
+ * Instead it wraps Prettier's built-in `estree` printer (used by the
+ * `typescript`/`babel` parsers) and hooks `embed` to take over printing of
+ * those tagged templates.
  */
-interface RootNode {
-  type: "root";
-  source: string;
+const estree: Printer = builtinPrinters.estree;
+const baseEmbed = estree.embed;
+
+function isBacktickTemplate(node: unknown): boolean {
+  return (
+    typeof node === "object" &&
+    node !== null &&
+    (node as { type?: unknown }).type === "TaggedTemplateExpression" &&
+    (node as { tag?: { type?: unknown; name?: unknown } }).tag?.type ===
+      "Identifier" &&
+    (node as { tag?: { name?: unknown } }).tag?.name === "c"
+  );
 }
 
-export const languages: SupportLanguage[] = [
-  {
-    name: "backtick",
-    parsers: ["backtick"],
-    extensions: [".bt"],
-    vscodeLanguageIds: ["backtick"],
-  },
-];
+const embed: NonNullable<Printer["embed"]> = (
+  path: AstPath,
+  options: Options,
+) => {
+  if (!isBacktickTemplate(path.node)) {
+    // Not ours — defer to Prettier's built-in embedding so it can still
+    // format css/graphql/styled-components and the like.
+    return baseEmbed ? baseEmbed.call(estree, path, options) : null;
+  }
 
-export const parsers: Record<string, Parser<RootNode>> = {
-  backtick: {
-    astFormat: "backtick",
-    parse: (text) => ({ type: "root", source: text }),
-    locStart: () => 0,
-    locEnd: (node) => node.source.length,
-  },
+  return (_textToDoc, print) => printBacktickTemplate(print);
 };
 
 /**
- * TEST CHANGE: loud banner so it's obvious the plugin ran. Remove once
- * real formatting is in place.
+ * Print the `c` tag followed by its template literal. Prettier already formats
+ * the `${…}` splice expressions inside the literal; the surrounding Backtick
+ * source is preserved verbatim because Backtick is its own language (it splices
+ * with `${…}` directly inside JSX, so it isn't valid JS/TSX to reformat).
+ *
+ * This is the seam where a real Backtick formatter will plug in: format the
+ * static quasis here once a Backtick parser/printer exists.
  */
-const BANNER = "// 🎀 formatted by @backtick/prettier-plugin 🎀";
+function printBacktickTemplate(print: (selector: string) => Doc): Doc {
+  return ["c", print("quasi")];
+}
 
-export const printers: Record<string, Printer<RootNode>> = {
-  backtick: {
-    // Identity printer plus a visible banner, normalizing the trailing
-    // newline. Real formatting goes here. Stripping an existing banner first
-    // keeps formatting idempotent.
-    print: (path) => {
-      let source = path.node.source.replace(/\n+$/, "");
-      if (source.startsWith(BANNER)) {
-        source = source.slice(BANNER.length).replace(/^\n+/, "");
-      }
-      return [BANNER, hardline, hardline, source, hardline];
-    },
+export const printers: Record<string, Printer> = {
+  estree: {
+    ...estree,
+    embed,
   },
 };
 
-export default { languages, parsers, printers };
+export default { printers };
