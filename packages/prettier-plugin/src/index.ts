@@ -50,14 +50,14 @@ async function printClientScript(
   return ["cs", "`", reinjectSplices(stripTrailingSemicolon(formatted), print), "`"];
 }
 
-// Placeholders are `$cs<n>` identifiers (see the compiler's `placeholderFor`).
-// They survive formatting as their own string leaves, so we map over the Doc and
-// splice the host expression back wherever one appears.
-const PLACEHOLDER = /\$cs(\d+)/g;
+// Placeholders are `$0splice<n>` identifiers (see the compiler's
+// `placeholderFor`). They survive formatting as their own string leaves, so we
+// map over the Doc and splice the host expression back wherever one appears.
+const PLACEHOLDER = /\$0splice(\d+)/g;
 
 function reinjectSplices(formatted: Doc, print: Print): Doc {
   return mapDoc(formatted, (current) => {
-    if (typeof current !== "string" || !current.includes("$cs")) {
+    if (typeof current !== "string" || !current.includes("$0splice")) {
       return current;
     }
 

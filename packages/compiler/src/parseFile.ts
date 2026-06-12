@@ -141,7 +141,7 @@ function isTail(span: ts.TemplateSpan): boolean {
 }
 
 function placeholderFor(index: number): string {
-  return `$cs${index}`;
+  return `$0splice${index}`;
 }
 
 const SCRIPT_KINDS = {
