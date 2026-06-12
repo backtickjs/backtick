@@ -1,9 +1,33 @@
 {
   "scopeName": "source.backtick.injection",
-  "injectionSelector": "L:source.tsx -comment -string, L:source.ts -comment -string",
+  "injectionSelector": "L:source.tsx -comment -string, L:source.ts -comment -string, L:source.js -comment -string",
   "patterns": [
     {
-      "include": "source.backtick#template"
+      "name": "meta.tagged-template.backtick.tsx",
+      "begin": "(?<![$_[:alnum:]])(c)(`)",
+      "beginCaptures": {
+        "1": {
+          "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
+        },
+        "2": {
+          "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
+        }
+      },
+      "end": "`",
+      "endCaptures": {
+        "0": {
+          "name": "string.template.tsx punctuation.definition.string.template.end.tsx"
+        }
+      },
+      "contentName": "meta.embedded.backtick.tsx",
+      "patterns": [
+        {
+          "include": "source.tsx#decl-block"
+        },
+        {
+          "include": "source.tsx#expression"
+        }
+      ]
     }
   ]
 }

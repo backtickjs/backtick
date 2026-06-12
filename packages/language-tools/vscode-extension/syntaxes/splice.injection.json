@@ -1,0 +1,32 @@
+{
+  "scopeName": "source.backtick.splice.injection",
+  "injectionSelector": "L:meta.embedded.backtick.tsx -comment -string",
+  "patterns": [
+    {
+      "include": "#splice"
+    }
+  ],
+  "repository": {
+    "splice": {
+      "name": "meta.template.expression.tsx",
+      "contentName": "meta.embedded.splice.tsx",
+      "begin": "\\$\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.template-expression.begin.tsx"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.template-expression.end.tsx"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.tsx#expression"
+        }
+      ]
+    }
+  }
+}

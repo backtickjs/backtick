@@ -6,9 +6,14 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const grammarDir = resolve(__dirname, "../../syntaxes");
-const grammars = readdirSync(grammarDir)
-  .filter((file) => file.endsWith(".json"))
-  .map((file) => join(grammarDir, file));
+const grammars = [
+  // The base TSX grammar our injection grammar is injected into. Provided by
+  // VS Code at runtime; vendored here so the snapshot tests have a base scope.
+  resolve(__dirname, "../../vendor/tsx.json"),
+  ...readdirSync(grammarDir)
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => join(grammarDir, file)),
+];
 
 /**
  * @param  {Parameters<typeof spawn>} arg
@@ -35,8 +40,8 @@ async function snapShotTest() {
   const args = [
     "vscode-tmgrammar-snap",
     "-s",
-    "source.backtick",
-    "./test/grammar/fixtures/**/*.bt",
+    "source.tsx",
+    "./test/grammar/fixtures/**/*.tsx",
     ...grammars.flatMap((path) => ["-g", path]),
     ...extraArgs,
   ].map((arg) => (isWindows && arg.includes(" ") ? `"${arg}"` : arg));

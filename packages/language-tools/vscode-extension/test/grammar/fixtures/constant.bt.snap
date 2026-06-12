@@ -1,4 +1,0 @@
->`1`
-#^ source.backtick string.template.tsx punctuation.definition.string.template.begin.tsx
-# ^ source.backtick meta.embedded.backtick.tsx constant.numeric.decimal.tsx
-#  ^ source.backtick string.template.tsx punctuation.definition.string.template.end.tsx

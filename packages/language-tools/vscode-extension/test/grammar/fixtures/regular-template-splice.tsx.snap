@@ -1,0 +1,15 @@
+>const z = `hi ${who}`;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#       ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#        ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#         ^ source.tsx meta.var.expr.tsx
+#          ^ source.tsx meta.var.expr.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#           ^^^ source.tsx meta.var.expr.tsx string.template.tsx
+#              ^^ source.tsx meta.var.expr.tsx string.template.tsx meta.template.expression.tsx punctuation.definition.template-expression.begin.tsx
+#                ^^^ source.tsx meta.var.expr.tsx string.template.tsx meta.template.expression.tsx meta.embedded.line.tsx variable.other.readwrite.tsx
+#                   ^ source.tsx meta.var.expr.tsx string.template.tsx meta.template.expression.tsx punctuation.definition.template-expression.end.tsx
+#                    ^ source.tsx meta.var.expr.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                     ^ source.tsx punctuation.terminator.statement.tsx
+>

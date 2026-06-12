@@ -15,18 +15,28 @@
   "contributes": {
     "grammars": [
       {
-        "scopeName": "source.backtick",
-        "path": "./syntaxes/backtick.json"
-      },
-      {
         "scopeName": "source.backtick.injection",
         "path": "./syntaxes/backtick.injection.json",
         "injectTo": [
           "source.ts",
-          "source.tsx"
+          "source.tsx",
+          "source.js",
+          "source.js.jsx"
         ],
         "embeddedLanguages": {
-          "meta.embedded.backtick.tsx": "typescriptreact",
+          "meta.embedded.backtick.tsx": "typescriptreact"
+        }
+      },
+      {
+        "scopeName": "source.backtick.splice.injection",
+        "path": "./syntaxes/splice.injection.json",
+        "injectTo": [
+          "source.ts",
+          "source.tsx",
+          "source.js",
+          "source.js.jsx"
+        ],
+        "embeddedLanguages": {
           "meta.embedded.splice.tsx": "typescriptreact"
         }
       }
@@ -35,11 +45,9 @@
   "scripts": {
     "build": "tsc -b && node scripts/build.mjs -- --minify",
     "dev": "node scripts/build.mjs -- --watch",
-    "build:grammar": "node scripts/build-grammar.mjs",
-    "dev:grammar": "node scripts/build-grammar.mjs -- --watch",
     "test": "pnpm test:grammar",
-    "test:update": "pnpm build:grammar && node ./test/grammar/test.mjs --updateSnapshot",
-    "test:grammar": "pnpm build:grammar && node ./test/grammar/test.mjs"
+    "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
+    "test:grammar": "node ./test/grammar/test.mjs"
   },
   "dependencies": {
     "@backtick/prettier-plugin": "^0.0.0",
