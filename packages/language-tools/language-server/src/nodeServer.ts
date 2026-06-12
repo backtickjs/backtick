@@ -24,8 +24,10 @@ connection.onInitialize((params) => {
       languagePlugins: [getBacktickLanguagePlugin(tsdk.typescript)],
     })),
     [
-      ...createTypeScriptServices(tsdk.typescript),
+      // Prettier and TypeScript both want to format files, but Volar only
+      // lets one win: it uses whichever service is listed first here
       getBacktickPrettierService(connection),
+      ...createTypeScriptServices(tsdk.typescript),
     ],
   );
 });
