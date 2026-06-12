@@ -1,1 +1,1 @@
-const a=1;const b   =c`y`;function f(){return c`z`}
+const a=1;const b   =cs`y`;function f(){return cs`z`}
