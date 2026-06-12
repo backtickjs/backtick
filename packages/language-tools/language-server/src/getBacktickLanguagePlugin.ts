@@ -73,19 +73,21 @@ export class BacktickVirtualCode implements VirtualCode {
     snapshot: ts.IScriptSnapshot,
   ) {
     this.languageId = languageId;
-
-    const source = snapshot.getText(0, snapshot.getLength());
-    if (!source.includes("c`")) {
-      this.mappings = [];
-      this.snapshot = snapshot;
-      return;
-    }
-
-    this.mappings = [];
-    this.snapshot = {
-      getText: (start, end) => source.substring(start, end),
-      getLength: () => source.length,
-      getChangeRange: () => undefined,
-    };
+    this.snapshot = snapshot;
+    this.mappings = [
+      {
+        sourceOffsets: [0],
+        generatedOffsets: [0],
+        lengths: [snapshot.getLength()],
+        data: {
+          verification: true,
+          completion: true,
+          semantic: true,
+          navigation: true,
+          structure: true,
+          format: true,
+        },
+      },
+    ];
   }
 }
