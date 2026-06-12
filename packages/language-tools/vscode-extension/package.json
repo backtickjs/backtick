@@ -28,7 +28,7 @@
         }
       },
       {
-        "scopeName": "source.backtick.splice.injection",
+        "scopeName": "source.splice.injection",
         "path": "./syntaxes/splice.injection.json",
         "injectTo": [
           "source.ts",

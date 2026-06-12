@@ -1,5 +1,5 @@
 {
-  "scopeName": "source.backtick.splice.injection",
+  "scopeName": "source.splice.injection",
   "injectionSelector": "L:meta.embedded.backtick.tsx -comment -string",
   "patterns": [
     {
