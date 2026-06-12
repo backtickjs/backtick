@@ -1,0 +1,1 @@
+const f = cs`[1,2,3].map(n => ${n} + ${ compute(  n ) })`
