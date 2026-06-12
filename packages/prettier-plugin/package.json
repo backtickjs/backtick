@@ -10,9 +10,13 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\""
   },
+  "dependencies": {
+    "@backtick/compiler": "workspace:*"
+  },
   "devDependencies": {
     "@types/estree": "^1.0.9",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "prettier": "^3.0.0"
