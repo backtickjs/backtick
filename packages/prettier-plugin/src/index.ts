@@ -9,7 +9,7 @@ function isBacktick(node: Node | null): node is TaggedTemplateExpression {
     node !== null &&
     node.type === "TaggedTemplateExpression" &&
     node.tag.type === "Identifier" &&
-    node.tag.name === "c"
+    node.tag.name === "cs"
   );
 }
 
@@ -27,7 +27,7 @@ const embed: NonNullable<Printer["embed"]> = (
 };
 
 function printBacktick(print: (selector: string) => Doc): Doc {
-  return ["c", print("quasi")];
+  return ["cs", print("quasi")];
 }
 
 export const printers: Record<string, Printer> = {

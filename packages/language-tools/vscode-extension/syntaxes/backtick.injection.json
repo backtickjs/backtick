@@ -4,10 +4,10 @@
   "patterns": [
     {
       "name": "meta.tagged-template.backtick.tsx",
-      "begin": "(?<![$_[:alnum:]])(c)(`)",
+      "begin": "(?<![$_[:alnum:]])(cs)(`)",
       "beginCaptures": {
         "1": {
-          "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"
+          "name": "entity.name.function.tagged-template.tsx"
         },
         "2": {
           "name": "string.template.tsx punctuation.definition.string.template.begin.tsx"

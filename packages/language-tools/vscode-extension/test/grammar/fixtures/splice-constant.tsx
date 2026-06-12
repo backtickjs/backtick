@@ -1,1 +1,1 @@
-const x = c`${c`1`}`;
+const x = cs`${cs`1`}`;
