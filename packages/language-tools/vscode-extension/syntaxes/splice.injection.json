@@ -3,11 +3,6 @@
   "injectionSelector": "L:meta.embedded.backtick.tsx -comment -string",
   "patterns": [
     {
-      "include": "#splice"
-    }
-  ],
-  "repository": {
-    "splice": {
       "name": "meta.template.expression.tsx",
       "contentName": "meta.embedded.splice.tsx",
       "begin": "\\$\\{",
@@ -28,5 +23,5 @@
         }
       ]
     }
-  }
+  ]
 }
