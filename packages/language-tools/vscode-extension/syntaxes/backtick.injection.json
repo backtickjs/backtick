@@ -1,0 +1,9 @@
+{
+  "scopeName": "source.backtick.injection",
+  "injectionSelector": "L:source.tsx -comment -string, L:source.ts -comment -string",
+  "patterns": [
+    {
+      "include": "source.backtick#template"
+    }
+  ]
+}

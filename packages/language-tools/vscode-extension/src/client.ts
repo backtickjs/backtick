@@ -33,7 +33,12 @@ export async function activate(context: vscode.ExtensionContext) {
     },
   };
   const clientOptions: LanguageClientOptions = {
-    documentSelector: [{ language: "backtick" }],
+    documentSelector: [
+      { language: "javascript" },
+      { language: "javascriptreact" },
+      { language: "typescript" },
+      { language: "typescriptreact" },
+    ],
     initializationOptions: {
       typescript: {
         tsdk: (await getTsdk(context))!.tsdk,
@@ -48,7 +53,10 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   await client.start();
 
-  activateAutoInsertion("backtick", client);
+  activateAutoInsertion(
+    ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    client,
+  );
 
   // support for https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volarjs-labs
   // ref: https://twitter.com/johnsoncodehk/status/1656126976774791168
