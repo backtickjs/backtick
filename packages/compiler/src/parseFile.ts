@@ -12,24 +12,13 @@ export interface ParseResult {
 export interface ClientScript {
   index: number;
   parent: Splice | null;
-  /**
-   * The template body with every splice replaced by its placeholder, ready to
-   * be parsed and formatted as a stand-alone TypeScript program. The client
-   * dialect is syntactically TypeScript, so a tool can hand this straight to a
-   * TypeScript parser; {@link Splice.placeholder} records what to swap back in.
-   */
-  parsed: string;
+  textWithPlaceholders: string;
   splices: Map<ts.TemplateSpan, Splice>;
 }
 
 export interface Splice {
   index: number;
   parent: ClientScript;
-  /**
-   * The identifier substituted into {@link ClientScript.parsed} in place of
-   * this splice's `${…}` hole. Keeping it a plain identifier means the body
-   * stays parseable and the placeholder survives formatting as its own token.
-   */
   placeholder: string;
   scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
 }
@@ -72,11 +61,15 @@ function collectScripts(
       const script: ClientScript = {
         index,
         parent,
-        parsed: "",
+        textWithPlaceholders: "",
         splices: new Map(),
       };
       script.splices = collectSplices(taggedTemplate, sourceFile, script);
-      script.parsed = renderBody(taggedTemplate, sourceFile, script);
+      script.textWithPlaceholders = toTextWithPlaceholder(
+        taggedTemplate,
+        sourceFile,
+        script,
+      );
       return [taggedTemplate, script];
     }),
   );
@@ -108,10 +101,10 @@ function collectSplices(
 
 /**
  * Stitch the template's literal chunks back together with each splice swapped
- * for its placeholder. The raw source text between the backticks/holes is
+ * for its placeholder. The raw source text between the backticks/splices is
  * copied verbatim so formatting sees exactly what the author wrote.
  */
-function renderBody(
+function toTextWithPlaceholder(
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
   script: ClientScript,
@@ -119,25 +112,24 @@ function renderBody(
   const text = sourceFile.text;
   const template = taggedTemplate.template;
 
-  // `+1` skips the leading `` ` `` or `}`; the trailing offset skips the
-  // closing `` ` `` (1 char) or the `${` that opens the next hole (2 chars).
-  const inner = (node: ts.Node, opensHole: boolean): string =>
-    text.slice(node.getStart(sourceFile) + 1, node.getEnd() - (opensHole ? 2 : 1));
+  const start = template.getStart(sourceFile) + 1; // past `
+  const end = template.getEnd() - 1; // before `
 
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
-    return inner(template, false);
+    return text.slice(start, end);
   }
 
-  let body = inner(template.head, true);
+  let body = "";
+  let chunkStart = start;
+
   template.templateSpans.forEach((span) => {
     const splice = script.splices.get(span);
-    body += (splice?.placeholder ?? "") + inner(span.literal, !isTail(span));
+    const dollarBrace = span.expression.getFullStart() - 2; // before ${
+    body += text.slice(chunkStart, dollarBrace) + (splice?.placeholder ?? "");
+    chunkStart = span.literal.getStart(sourceFile) + 1; // past }
   });
-  return body;
-}
 
-function isTail(span: ts.TemplateSpan): boolean {
-  return span.literal.kind === ts.SyntaxKind.TemplateTail;
+  return body + text.slice(chunkStart, end);
 }
 
 function placeholderFor(index: number): string {

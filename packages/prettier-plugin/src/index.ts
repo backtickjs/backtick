@@ -46,8 +46,15 @@ async function printClientScript(
   textToDoc: TextToDoc,
   print: Print,
 ): Promise<Doc> {
-  const formatted = await textToDoc(script.parsed, { parser: "typescript" });
-  return ["cs", "`", reinjectSplices(stripTrailingSemicolon(formatted), print), "`"];
+  const formatted = await textToDoc(script.textWithPlaceholders, {
+    parser: "typescript",
+  });
+  return [
+    "cs",
+    "`",
+    reinjectSplices(stripTrailingSemicolon(formatted), print),
+    "`",
+  ];
 }
 
 // Placeholders are `$0splice<n>` identifiers (see the compiler's
