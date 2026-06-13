@@ -11,6 +11,7 @@ export interface ParseResult {
 }
 
 export interface ClientScript {
+  sourceFile: ts.SourceFile;
   node: ts.TaggedTemplateExpression;
   parent: Splice | null;
   textWithPlaceholders: string;
@@ -18,6 +19,7 @@ export interface ClientScript {
 }
 
 export interface Splice {
+  sourceFile: ts.SourceFile;
   node: ts.TemplateSpan;
   parent: ClientScript;
   placeholder: string;
@@ -74,6 +76,7 @@ function getDirectScripts(
   return new Map(
     taggedTemplates.map((taggedTemplate) => {
       const script: ClientScript = {
+        sourceFile,
         node: taggedTemplate,
         parent,
         textWithPlaceholders: "",
@@ -100,6 +103,7 @@ function getDirectSplices(
   if (ts.isTemplateExpression(template)) {
     template.templateSpans.forEach((span, index) => {
       const splice: Splice = {
+        sourceFile,
         node: span,
         parent,
         placeholder: `$0splice${index}`,

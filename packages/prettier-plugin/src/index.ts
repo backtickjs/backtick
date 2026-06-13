@@ -12,22 +12,19 @@ import { printers as builtinPrinters } from "prettier/plugins/estree";
 const estree: Printer = builtinPrinters.estree;
 const { mapDoc } = prettierDoc.utils;
 
-// `print` is the node-relative printer Prettier hands to `embed`. We use it to
-// render each splice expression as host code, so a `${…}` hole keeps its
-// surrounding-file formatting (and any nested `cs` re-enters `embed` on its own).
 type Print = (selector: Array<string | number>) => Doc;
 type TextToDoc = (text: string, options: Options) => Promise<Doc>;
 
 const embed: NonNullable<Printer["embed"]> = (
-  path: AstPath,
+  path: AstPath<Node>,
   options: Options,
 ) => {
   const node = path.node;
   if (node?.type === "TaggedTemplateExpression") {
-    const script = clientScripts(options).get(startOf(node));
+    const index = getScriptIndex(options);
+    const script = index.get(startOf(node));
     if (script) {
-      return (textToDoc: TextToDoc, print: Print) =>
-        printScript(script, textToDoc, print);
+      return async (textToDoc, print) => printScript(script, textToDoc, print);
     }
   }
 
@@ -36,17 +33,14 @@ const embed: NonNullable<Printer["embed"]> = (
   return estree.embed?.call(estree, path, options) ?? null;
 };
 
-// The compiler hands us each client script's body already reassembled as a
-// parseable TypeScript program (`script.textWithPlaceholders`), with every
-// splice swapped for a placeholder identifier. We format that as TypeScript,
-// then walk the resulting Doc and swap each placeholder back to the splice.
 async function printScript(
   script: ClientScript,
   textToDoc: TextToDoc,
   print: Print,
 ): Promise<Doc> {
+  const parser = parserForFile(script.sourceFile.fileName);
   const docWithPlaceholders = await textToDoc(script.textWithPlaceholders, {
-    parser: "typescript",
+    parser,
   });
   return [
     "cs",
@@ -94,12 +88,10 @@ function stripTrailingSemicolon(doc: Doc): Doc {
   return doc;
 }
 
-let cache: { text: string; scripts: Map<number, ClientScript> } | null = null;
+let cache: { text: string; scriptIndex: Map<number, ClientScript> } | null =
+  null;
 
-// Run the compiler over the whole document once and key every client script it
-// finds (nested ones included) by its start offset. Offsets line up because
-// Prettier and TypeScript both index the same original source by character.
-function clientScripts(options: Options): Map<number, ClientScript> {
+function getScriptIndex(options: Options): Map<number, ClientScript> {
   // `originalText`/`filepath` are populated by Prettier at format time but typed
   // loosely on the public `Options`.
   const { originalText, filepath } = options as {
@@ -108,19 +100,26 @@ function clientScripts(options: Options): Map<number, ClientScript> {
   };
 
   if (cache?.text === originalText) {
-    return cache.scripts;
+    return cache.scriptIndex;
   }
 
   const { sourceFile, allScripts } = parseFile(originalText, {
     fileName: filepath ?? "input.tsx",
   });
 
-  const byStart = new Map<number, ClientScript>(
+  const scriptIndex = new Map<number, ClientScript>(
     allScripts.map((script) => [script.node.getStart(sourceFile), script]),
   );
 
-  cache = { text: originalText, scripts: byStart };
-  return byStart;
+  cache = { text: originalText, scriptIndex };
+  return scriptIndex;
+}
+
+function parserForFile(fileName: string): "babel" | "typescript" {
+  if (fileName?.endsWith(".js") || fileName?.endsWith(".jsx")) {
+    return "babel";
+  }
+  return "typescript";
 }
 
 function startOf(node: Node): number {
