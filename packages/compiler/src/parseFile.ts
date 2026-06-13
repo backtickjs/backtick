@@ -10,14 +10,14 @@ export interface ParseResult {
 }
 
 export interface ClientScript {
-  index: number;
+  node: ts.TaggedTemplateExpression;
   parent: Splice | null;
   textWithPlaceholders: string;
   splices: Map<ts.TemplateSpan, Splice>;
 }
 
 export interface Splice {
-  index: number;
+  node: ts.TemplateSpan;
   parent: ClientScript;
   placeholder: string;
   scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
@@ -33,14 +33,14 @@ export function parseFile(source: string, options: ParseOptions): ParseResult {
     scriptKindFor(fileName),
   );
 
-  return { sourceFile, scripts: collectScripts(sourceFile, sourceFile, null) };
+  return { sourceFile, scripts: collectScripts(null, sourceFile) };
 }
 
 function collectScripts(
-  node: ts.Node,
-  sourceFile: ts.SourceFile,
   parent: Splice | null,
+  sourceFile: ts.SourceFile,
 ): Map<ts.TaggedTemplateExpression, ClientScript> {
+  const node: ts.Node = parent ? parent.node.expression : sourceFile;
   const taggedTemplates: ts.TaggedTemplateExpression[] = [];
 
   const visit = (current: ts.Node): void => {
@@ -57,14 +57,14 @@ function collectScripts(
   visit(node);
 
   return new Map(
-    taggedTemplates.map((taggedTemplate, index) => {
+    taggedTemplates.map((taggedTemplate) => {
       const script: ClientScript = {
-        index,
+        node: taggedTemplate,
         parent,
         textWithPlaceholders: "",
         splices: new Map(),
       };
-      script.splices = collectSplices(taggedTemplate, sourceFile, script);
+      script.splices = collectSplices(script, sourceFile);
       script.textWithPlaceholders = toTextWithPlaceholder(
         taggedTemplate,
         sourceFile,
@@ -76,23 +76,22 @@ function collectScripts(
 }
 
 function collectSplices(
-  taggedTemplate: ts.TaggedTemplateExpression,
-  sourceFile: ts.SourceFile,
   parent: ClientScript,
+  sourceFile: ts.SourceFile,
 ): Map<ts.TemplateSpan, Splice> {
   const splices = new Map<ts.TemplateSpan, Splice>();
 
-  const template = taggedTemplate.template;
+  const template = parent.node.template;
   if (ts.isTemplateExpression(template)) {
     template.templateSpans.forEach((span, index) => {
       const splice: Splice = {
-        index,
+        node: span,
         parent,
-        placeholder: placeholderFor(index),
+        placeholder: `$0splice${index}`,
         scripts: new Map(),
       };
       splices.set(span, splice);
-      splice.scripts = collectScripts(span.expression, sourceFile, splice);
+      splice.scripts = collectScripts(splice, sourceFile);
     });
   }
 
@@ -130,10 +129,6 @@ function toTextWithPlaceholder(
   });
 
   return body + text.slice(chunkStart, end);
-}
-
-function placeholderFor(index: number): string {
-  return `$0splice${index}`;
 }
 
 const SCRIPT_KINDS = {
