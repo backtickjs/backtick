@@ -8,7 +8,6 @@ import {
   type Printer,
 } from "prettier";
 import { printers as builtinPrinters } from "prettier/plugins/estree";
-import type ts from "typescript";
 
 const estree: Printer = builtinPrinters.estree;
 const { mapDoc } = prettierDoc.utils;
@@ -28,7 +27,7 @@ const embed: NonNullable<Printer["embed"]> = (
     const script = clientScripts(options).get(startOf(node));
     if (script) {
       return (textToDoc: TextToDoc, print: Print) =>
-        printClientScript(script, textToDoc, print);
+        printScript(script, textToDoc, print);
     }
   }
 
@@ -38,21 +37,21 @@ const embed: NonNullable<Printer["embed"]> = (
 };
 
 // The compiler hands us each client script's body already reassembled as a
-// parseable TypeScript program (`script.parsed`), with every splice swapped for
-// a placeholder identifier. We format that as TypeScript, then walk the
-// resulting Doc and swap each placeholder back to the host-formatted splice.
-async function printClientScript(
+// parseable TypeScript program (`script.textWithPlaceholders`), with every
+// splice swapped for a placeholder identifier. We format that as TypeScript,
+// then walk the resulting Doc and swap each placeholder back to the splice.
+async function printScript(
   script: ClientScript,
   textToDoc: TextToDoc,
   print: Print,
 ): Promise<Doc> {
-  const formatted = await textToDoc(script.textWithPlaceholders, {
+  const docWithPlaceholders = await textToDoc(script.textWithPlaceholders, {
     parser: "typescript",
   });
   return [
     "cs",
     "`",
-    reinjectSplices(stripTrailingSemicolon(formatted), print),
+    reinjectSplices(stripTrailingSemicolon(docWithPlaceholders), print),
     "`",
   ];
 }
@@ -68,21 +67,15 @@ function reinjectSplices(formatted: Doc, print: Print): Doc {
       return current;
     }
 
-    const parts: Doc[] = [];
-    let last = 0;
-    for (const match of current.matchAll(PLACEHOLDER)) {
-      const at = match.index;
-      if (at > last) {
-        parts.push(current.slice(last, at));
-      }
-      const index = Number(match[1]);
-      parts.push("${", print(["quasi", "expressions", index]), "}");
-      last = at + match[0].length;
-    }
-    if (last < current.length) {
-      parts.push(current.slice(last));
-    }
-    return parts;
+    // Splitting on the capturing group interleaves the literal text (even
+    // indices) with each captured splice number (odd indices).
+    return current
+      .split(PLACEHOLDER)
+      .map((part, i) =>
+        i % 2 === 0
+          ? part
+          : ["${", print(["quasi", "expressions", Number(part)]), "}"],
+      );
   });
 }
 
@@ -90,15 +83,15 @@ function reinjectSplices(formatted: Doc, print: Print): Doc {
 // final expression. It reads as noise inside a client script, so drop one if it
 // is the very last thing printed. Anything else (internal `;`, multi-statement
 // bodies) is left untouched.
-function stripTrailingSemicolon(formatted: Doc): Doc {
-  if (typeof formatted === "string") {
-    return formatted.replace(/;$/, "");
+function stripTrailingSemicolon(doc: Doc): Doc {
+  if (typeof doc === "string") {
+    return doc.replace(/;$/, "");
   }
-  if (Array.isArray(formatted) && formatted.length > 0) {
-    const last = formatted[formatted.length - 1];
-    return [...formatted.slice(0, -1), stripTrailingSemicolon(last)];
+  if (Array.isArray(doc) && doc.length > 0) {
+    const last = doc[doc.length - 1];
+    return [...doc.slice(0, -1), stripTrailingSemicolon(last)];
   }
-  return formatted;
+  return doc;
 }
 
 let cache: { text: string; scripts: Map<number, ClientScript> } | null = null;
@@ -118,23 +111,13 @@ function clientScripts(options: Options): Map<number, ClientScript> {
     return cache.scripts;
   }
 
-  const { sourceFile, scripts } = parseFile(originalText, {
+  const { sourceFile, allScripts } = parseFile(originalText, {
     fileName: filepath ?? "input.tsx",
   });
 
-  const byStart = new Map<number, ClientScript>();
-  const collect = (
-    found: Map<ts.TaggedTemplateExpression, ClientScript>,
-  ): void => {
-    for (const [taggedTemplate, script] of found) {
-      byStart.set(taggedTemplate.getStart(sourceFile), script);
-      // Recurse so `cs` templates nested inside splices are recognised too.
-      for (const splice of script.splices.values()) {
-        collect(splice.scripts);
-      }
-    }
-  };
-  collect(scripts);
+  const byStart = new Map<number, ClientScript>(
+    allScripts.map((script) => [script.node.getStart(sourceFile), script]),
+  );
 
   cache = { text: originalText, scripts: byStart };
   return byStart;

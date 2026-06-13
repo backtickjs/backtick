@@ -6,7 +6,8 @@ export interface ParseOptions {
 
 export interface ParseResult {
   sourceFile: ts.SourceFile;
-  scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
+  rootScripts: Map<ts.TaggedTemplateExpression, ClientScript>;
+  allScripts: ClientScript[];
 }
 
 export interface ClientScript {
@@ -33,10 +34,24 @@ export function parseFile(source: string, options: ParseOptions): ParseResult {
     scriptKindFor(fileName),
   );
 
-  return { sourceFile, scripts: collectScripts(null, sourceFile) };
+  const rootScripts = getDirectScripts(null, sourceFile);
+  return { sourceFile, rootScripts, allScripts: flatten(rootScripts, []) };
 }
 
-function collectScripts(
+function flatten(
+  scripts: Map<ts.TaggedTemplateExpression, ClientScript>,
+  into: ClientScript[],
+): ClientScript[] {
+  for (const script of scripts.values()) {
+    into.push(script);
+    for (const splice of script.splices.values()) {
+      flatten(splice.scripts, into);
+    }
+  }
+  return into;
+}
+
+function getDirectScripts(
   parent: Splice | null,
   sourceFile: ts.SourceFile,
 ): Map<ts.TaggedTemplateExpression, ClientScript> {
@@ -64,7 +79,7 @@ function collectScripts(
         textWithPlaceholders: "",
         splices: new Map(),
       };
-      script.splices = collectSplices(script, sourceFile);
+      script.splices = getDirectSplices(script, sourceFile);
       script.textWithPlaceholders = toTextWithPlaceholder(
         taggedTemplate,
         sourceFile,
@@ -75,7 +90,7 @@ function collectScripts(
   );
 }
 
-function collectSplices(
+function getDirectSplices(
   parent: ClientScript,
   sourceFile: ts.SourceFile,
 ): Map<ts.TemplateSpan, Splice> {
@@ -91,7 +106,7 @@ function collectSplices(
         scripts: new Map(),
       };
       splices.set(span, splice);
-      splice.scripts = collectScripts(splice, sourceFile);
+      splice.scripts = getDirectScripts(splice, sourceFile);
     });
   }
 
