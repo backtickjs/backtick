@@ -6,22 +6,17 @@ export interface ParseOptions {
 
 export interface ParseResult {
   sourceFile: ts.SourceFile;
-  rootScripts: Map<ts.TaggedTemplateExpression, ClientScript>;
   allScripts: ClientScript[];
 }
 
 export interface ClientScript {
-  sourceFile: ts.SourceFile;
   node: ts.TaggedTemplateExpression;
-  parent: Splice | null;
   textWithPlaceholders: string;
   splices: Map<ts.TemplateSpan, Splice>;
 }
 
 export interface Splice {
-  sourceFile: ts.SourceFile;
   node: ts.TemplateSpan;
-  parent: ClientScript;
   placeholder: string;
   scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
 }
@@ -37,7 +32,7 @@ export function parseFile(source: string, options: ParseOptions): ParseResult {
   );
 
   const rootScripts = getDirectScripts(null, sourceFile);
-  return { sourceFile, rootScripts, allScripts: flatten(rootScripts, []) };
+  return { sourceFile, allScripts: flatten(rootScripts, []) };
 }
 
 function flatten(
@@ -76,9 +71,7 @@ function getDirectScripts(
   return new Map(
     taggedTemplates.map((taggedTemplate) => {
       const script: ClientScript = {
-        sourceFile,
         node: taggedTemplate,
-        parent,
         textWithPlaceholders: "",
         splices: new Map(),
       };
@@ -103,9 +96,7 @@ function getDirectSplices(
   if (ts.isTemplateExpression(template)) {
     template.templateSpans.forEach((span, index) => {
       const splice: Splice = {
-        sourceFile,
         node: span,
-        parent,
         placeholder: `$0splice${index}`,
         scripts: new Map(),
       };

@@ -24,7 +24,9 @@ const embed: NonNullable<Printer["embed"]> = (
     const index = getScriptIndex(options);
     const script = index.get(startOf(node));
     if (script) {
-      return async (textToDoc, print) => printScript(script, textToDoc, print);
+      const fileName = filepathOf(options) ?? "input.tsx";
+      return async (textToDoc, print) =>
+        printScript(script, fileName, textToDoc, print);
     }
   }
 
@@ -35,10 +37,11 @@ const embed: NonNullable<Printer["embed"]> = (
 
 async function printScript(
   script: ClientScript,
+  fileName: string,
   textToDoc: TextToDoc,
   print: Print,
 ): Promise<Doc> {
-  const parser = parserForFile(script.sourceFile.fileName);
+  const parser = parserForFile(fileName);
   const docWithPlaceholders = await textToDoc(script.textWithPlaceholders, {
     parser,
   });
@@ -97,19 +100,14 @@ let cache: { text: string; scriptIndex: Map<number, ClientScript> } | null =
   null;
 
 function getScriptIndex(options: Options): Map<number, ClientScript> {
-  // `originalText`/`filepath` are populated by Prettier at format time but typed
-  // loosely on the public `Options`.
-  const { originalText, filepath } = options as {
-    originalText: string;
-    filepath?: string;
-  };
+  const { originalText } = options as { originalText: string };
 
   if (cache?.text === originalText) {
     return cache.scriptIndex;
   }
 
   const { sourceFile, allScripts } = parseFile(originalText, {
-    fileName: filepath ?? "input.tsx",
+    fileName: filepathOf(options) ?? "input.tsx",
   });
 
   const scriptIndex = new Map<number, ClientScript>(
@@ -118,6 +116,10 @@ function getScriptIndex(options: Options): Map<number, ClientScript> {
 
   cache = { text: originalText, scriptIndex };
   return scriptIndex;
+}
+
+function filepathOf(options: Options): string | undefined {
+  return (options as { filepath?: string }).filepath;
 }
 
 function parserForFile(fileName: string): "babel" | "typescript" {
