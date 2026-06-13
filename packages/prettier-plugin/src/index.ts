@@ -50,27 +50,32 @@ async function printScript(
   ];
 }
 
-// Placeholders are `$0splice<n>` identifiers (see the compiler's
-// `placeholderFor`). They survive formatting as their own string leaves, so we
-// map over the Doc and splice the host expression back wherever one appears.
-const PLACEHOLDER = /\$0splice(\d+)/g;
-
 function reinjectSplices(formatted: Doc, print: Print): Doc {
   return mapDoc(formatted, (current) => {
     if (typeof current !== "string" || !current.includes("$0splice")) {
       return current;
     }
-
-    // Splitting on the capturing group interleaves the literal text (even
-    // indices) with each captured splice number (odd indices).
-    return current
-      .split(PLACEHOLDER)
-      .map((part, i) =>
-        i % 2 === 0
-          ? part
-          : ["${", print(["quasi", "expressions", Number(part)]), "}"],
-      );
+    return replacePlaceholders(current, print);
   });
+}
+
+// Rebuild one formatted string leaf, swapping each `$0splice<n>` placeholder for
+// the real host expression `${...}` printed from the original AST. We walk the
+// matches in order, emitting the literal text before each placeholder and then
+// the spliced-in expression, finishing with whatever text trails the last one.
+function replacePlaceholders(text: string, print: Print): Doc {
+  const parts: Doc[] = [];
+  let textStart = 0;
+
+  for (const match of text.matchAll(/\$0splice(\d+)/g)) {
+    const spliceIndex = Number(match[1]);
+    parts.push(text.slice(textStart, match.index));
+    parts.push(["${", print(["quasi", "expressions", spliceIndex]), "}"]);
+    textStart = match.index + match[0].length;
+  }
+
+  parts.push(text.slice(textStart));
+  return parts;
 }
 
 // Formatting the body as a TypeScript program adds a trailing `;` to a bare
