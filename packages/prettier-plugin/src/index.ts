@@ -127,7 +127,7 @@ function collectByStart(
   for (const script of scripts.values()) {
     into.set(script.node.getStart(sourceFile), script);
     for (const splice of script.splices.values()) {
-      indexScripts(splice.scripts, sourceFile, into);
+      collectByStart(splice.scripts, sourceFile, into);
     }
   }
 }
