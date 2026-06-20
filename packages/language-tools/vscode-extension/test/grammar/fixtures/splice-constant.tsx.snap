@@ -5,14 +5,14 @@
 #       ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
 #        ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
 #         ^ source.tsx meta.var.expr.tsx
-#          ^^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx entity.name.function.tagged-template.tsx
-#            ^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
-#             ^^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx meta.template.expression.tsx punctuation.definition.template-expression.begin.tsx
-#               ^^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.backtick.tsx entity.name.function.tagged-template.tsx
-#                 ^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.backtick.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
-#                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx constant.numeric.decimal.tsx
-#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.backtick.tsx string.template.tsx punctuation.definition.string.template.end.tsx
-#                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx meta.embedded.backtick.tsx meta.template.expression.tsx punctuation.definition.template-expression.end.tsx
-#                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.backtick.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#          ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#            ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#             ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.template.expression.tsx punctuation.definition.template-expression.begin.tsx
+#               ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#                 ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx constant.numeric.decimal.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.template.expression.tsx meta.embedded.splice.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.template.expression.tsx punctuation.definition.template-expression.end.tsx
+#                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
 #                      ^ source.tsx punctuation.terminator.statement.tsx
 >

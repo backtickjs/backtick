@@ -1,6 +1,6 @@
 {
   "scopeName": "source.splice.injection",
-  "injectionSelector": "L:meta.embedded.backtick.tsx -comment -string",
+  "injectionSelector": "L:meta.embedded.client-script.tsx -comment -string",
   "patterns": [
     {
       "name": "meta.template.expression.tsx",

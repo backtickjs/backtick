@@ -1,9 +1,9 @@
 {
-  "scopeName": "source.backtick.injection",
+  "scopeName": "source.client-script.injection",
   "injectionSelector": "L:source.tsx -comment -string, L:source.ts -comment -string, L:source.js -comment -string",
   "patterns": [
     {
-      "name": "meta.tagged-template.backtick.tsx",
+      "name": "meta.tagged-template.client-script.tsx",
       "begin": "(?<![$_[:alnum:]])(cs)(`)",
       "beginCaptures": {
         "1": {
@@ -19,7 +19,7 @@
           "name": "string.template.tsx punctuation.definition.string.template.end.tsx"
         }
       },
-      "contentName": "meta.embedded.backtick.tsx",
+      "contentName": "meta.embedded.client-script.tsx",
       "patterns": [
         {
           "include": "source.tsx#decl-block"

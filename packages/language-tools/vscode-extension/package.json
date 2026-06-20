@@ -15,8 +15,8 @@
   "contributes": {
     "grammars": [
       {
-        "scopeName": "source.backtick.injection",
-        "path": "./syntaxes/backtick.injection.json",
+        "scopeName": "source.client-script.injection",
+        "path": "./syntaxes/client-script.injection.json",
         "injectTo": [
           "source.ts",
           "source.tsx",
@@ -24,7 +24,7 @@
           "source.js.jsx"
         ],
         "embeddedLanguages": {
-          "meta.embedded.backtick.tsx": "typescriptreact"
+          "meta.embedded.client-script.tsx": "typescriptreact"
         }
       },
       {
