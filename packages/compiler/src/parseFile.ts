@@ -1,4 +1,4 @@
-import ts from "typescript";
+import type * as ts from "typescript";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
@@ -17,20 +17,25 @@ export interface Splice {
   scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
 }
 
-export function parseFile(fileName: string, sourceText: string): ParsedFile {
+export function parseFile(
+  ts: typeof import("typescript"),
+  fileName: string,
+  sourceText: string,
+): ParsedFile {
   const sourceFile = ts.createSourceFile(
     fileName,
     sourceText,
     ts.ScriptTarget.Latest,
     false,
-    scriptKindFor(fileName),
+    scriptKindFor(ts, fileName),
   );
 
-  const scripts = getDirectScripts(null, sourceFile);
+  const scripts = getDirectScripts(ts, null, sourceFile);
   return { sourceFile, scripts };
 }
 
 function getDirectScripts(
+  ts: typeof import("typescript"),
   parent: Splice | null,
   sourceFile: ts.SourceFile,
 ): Map<ts.TaggedTemplateExpression, ClientScript> {
@@ -57,8 +62,9 @@ function getDirectScripts(
         textWithPlaceholders: "",
         splices: new Map(),
       };
-      script.splices = getDirectSplices(script, sourceFile);
+      script.splices = getDirectSplices(ts, script, sourceFile);
       script.textWithPlaceholders = toTextWithPlaceholder(
+        ts,
         taggedTemplate,
         sourceFile,
         script,
@@ -69,6 +75,7 @@ function getDirectScripts(
 }
 
 function getDirectSplices(
+  ts: typeof import("typescript"),
   parent: ClientScript,
   sourceFile: ts.SourceFile,
 ): Map<ts.TemplateSpan, Splice> {
@@ -83,7 +90,7 @@ function getDirectSplices(
         scripts: new Map(),
       };
       splices.set(span, splice);
-      splice.scripts = getDirectScripts(splice, sourceFile);
+      splice.scripts = getDirectScripts(ts, splice, sourceFile);
     });
   }
 
@@ -96,6 +103,7 @@ function getDirectSplices(
  * copied verbatim so formatting sees exactly what the author wrote.
  */
 function toTextWithPlaceholder(
+  ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
   script: ClientScript,
@@ -123,18 +131,21 @@ function toTextWithPlaceholder(
   return body + text.slice(chunkStart, end);
 }
 
-const SCRIPT_KINDS = {
-  ".tsx": ts.ScriptKind.TSX,
-  ".jsx": ts.ScriptKind.JSX,
-  ".js": ts.ScriptKind.JS,
-  ".mjs": ts.ScriptKind.JS,
-};
-
-function scriptKindFor(fileName: string): ts.ScriptKind {
-  for (const [extension, kind] of Object.entries(SCRIPT_KINDS)) {
-    if (fileName.endsWith(extension)) {
-      return kind;
-    }
+function scriptKindFor(
+  ts: typeof import("typescript"),
+  fileName: string,
+): ts.ScriptKind {
+  if (fileName.endsWith(".tsx")) {
+    return ts.ScriptKind.TSX;
+  }
+  if (fileName.endsWith(".jsx")) {
+    return ts.ScriptKind.JSX;
+  }
+  if (fileName.endsWith(".js")) {
+    return ts.ScriptKind.JS;
+  }
+  if (fileName.endsWith(".mjs")) {
+    return ts.ScriptKind.JS;
   }
   return ts.ScriptKind.TS;
 }

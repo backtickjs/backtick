@@ -10,7 +10,10 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\""
   },
-  "dependencies": {
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
     "typescript": "^6.0.3"
   }
 }

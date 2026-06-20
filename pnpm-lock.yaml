@@ -19,7 +19,7 @@ importers:
         version: 6.0.3
 
   packages/compiler:
-    dependencies:
+    devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

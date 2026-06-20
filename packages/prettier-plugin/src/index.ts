@@ -1,5 +1,5 @@
 import { parseFile, type ClientScript } from "@backtick/compiler";
-import type ts from "typescript";
+import ts from "typescript";
 import type { Node } from "estree";
 import {
   doc as prettierDoc,
@@ -106,6 +106,7 @@ function scriptsByStart(options: Options): Map<number, ClientScript> {
   }
 
   const { sourceFile, scripts } = parseFile(
+    ts,
     filepathOf(options) ?? "input.tsx",
     originalText,
   );
