@@ -1,4 +1,5 @@
 import { parseFile, type ClientScript } from "@backtick/compiler";
+import type ts from "typescript";
 import type { Node } from "estree";
 import {
   doc as prettierDoc,
@@ -21,8 +22,7 @@ const embed: NonNullable<Printer["embed"]> = (
 ) => {
   const node = path.node;
   if (node?.type === "TaggedTemplateExpression") {
-    const index = getScriptIndex(options);
-    const script = index.get(startOf(node));
+    const script = scriptsByStart(options).get(startOf(node));
     if (script) {
       const fileName = filepathOf(options) ?? "input.tsx";
       return async (textToDoc, print) =>
@@ -96,27 +96,40 @@ function stripTrailingSemicolon(doc: Doc): Doc {
   return doc;
 }
 
-let cache: { text: string; scriptIndex: Map<number, ClientScript> } | null =
-  null;
+let cache: { text: string; byStart: Map<number, ClientScript> } | null = null;
 
-function getScriptIndex(options: Options): Map<number, ClientScript> {
+function scriptsByStart(options: Options): Map<number, ClientScript> {
   const { originalText } = options as { originalText: string };
 
   if (cache?.text === originalText) {
-    return cache.scriptIndex;
+    return cache.byStart;
   }
 
-  const { sourceFile, allScripts } = parseFile(
+  const { sourceFile, scripts } = parseFile(
     filepathOf(options) ?? "input.tsx",
     originalText,
   );
 
-  const scriptIndex = new Map<number, ClientScript>(
-    allScripts.map((script) => [script.node.getStart(sourceFile), script]),
-  );
+  const byStart = new Map<number, ClientScript>();
+  collectByStart(scripts, sourceFile, byStart);
 
-  cache = { text: originalText, scriptIndex };
-  return scriptIndex;
+  cache = { text: originalText, byStart };
+  return byStart;
+}
+
+// Walk the nested script/splice tree, keying every script (root and nested)
+// by its start position so `embed` can find it regardless of nesting depth.
+function collectByStart(
+  scripts: Map<ts.TaggedTemplateExpression, ClientScript>,
+  sourceFile: ts.SourceFile,
+  into: Map<number, ClientScript>,
+): void {
+  for (const script of scripts.values()) {
+    into.set(script.node.getStart(sourceFile), script);
+    for (const splice of script.splices.values()) {
+      indexScripts(splice.scripts, sourceFile, into);
+    }
+  }
 }
 
 function filepathOf(options: Options): string | undefined {

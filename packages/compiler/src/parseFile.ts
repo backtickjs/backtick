@@ -2,7 +2,7 @@ import ts from "typescript";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
-  allScripts: ClientScript[];
+  scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
 }
 
 export interface ClientScript {
@@ -26,21 +26,8 @@ export function parseFile(fileName: string, sourceText: string): ParsedFile {
     scriptKindFor(fileName),
   );
 
-  const rootScripts = getDirectScripts(null, sourceFile);
-  return { sourceFile, allScripts: flatten(rootScripts, []) };
-}
-
-function flatten(
-  scripts: Map<ts.TaggedTemplateExpression, ClientScript>,
-  into: ClientScript[],
-): ClientScript[] {
-  for (const script of scripts.values()) {
-    into.push(script);
-    for (const splice of script.splices.values()) {
-      flatten(splice.scripts, into);
-    }
-  }
-  return into;
+  const scripts = getDirectScripts(null, sourceFile);
+  return { sourceFile, scripts };
 }
 
 function getDirectScripts(
