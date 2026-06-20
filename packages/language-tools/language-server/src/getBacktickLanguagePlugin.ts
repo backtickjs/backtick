@@ -1,3 +1,4 @@
+import { virtualizeFile } from "@backtick/compiler";
 import {
   type CodeMapping,
   type LanguagePlugin,
@@ -67,27 +68,21 @@ export class BacktickVirtualCode implements VirtualCode {
   snapshot: ts.IScriptSnapshot;
 
   constructor(
-    _ts: typeof import("typescript"),
-    _uri: URI,
+    ts: typeof import("typescript"),
+    uri: URI,
     languageId: string,
     snapshot: ts.IScriptSnapshot,
   ) {
+    const fileName = uri.fsPath;
+    const sourceText = snapshot.getText(0, snapshot.getLength());
+    const { virtualCode, mappings } = virtualizeFile(ts, fileName, sourceText);
+
     this.languageId = languageId;
-    this.snapshot = snapshot;
-    this.mappings = [
-      {
-        sourceOffsets: [0],
-        generatedOffsets: [0],
-        lengths: [snapshot.getLength()],
-        data: {
-          verification: true,
-          completion: true,
-          semantic: true,
-          navigation: true,
-          structure: true,
-          format: true,
-        },
-      },
-    ];
+    this.snapshot = {
+      getText: (start, end) => virtualCode.substring(start, end),
+      getLength: () => virtualCode.length,
+      getChangeRange: () => undefined,
+    };
+    this.mappings = mappings;
   }
 }
