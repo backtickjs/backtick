@@ -106,9 +106,10 @@ function getScriptIndex(options: Options): Map<number, ClientScript> {
     return cache.scriptIndex;
   }
 
-  const { sourceFile, allScripts } = parseFile(originalText, {
-    fileName: filepathOf(options) ?? "input.tsx",
-  });
+  const { sourceFile, allScripts } = parseFile(
+    filepathOf(options) ?? "input.tsx",
+    originalText,
+  );
 
   const scriptIndex = new Map<number, ClientScript>(
     allScripts.map((script) => [script.node.getStart(sourceFile), script]),

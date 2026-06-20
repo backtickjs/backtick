@@ -1,10 +1,6 @@
 import ts from "typescript";
 
-export interface ParseOptions {
-  fileName: string;
-}
-
-export interface ParseResult {
+export interface ParsedFile {
   sourceFile: ts.SourceFile;
   allScripts: ClientScript[];
 }
@@ -21,11 +17,10 @@ export interface Splice {
   scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
 }
 
-export function parseFile(source: string, options: ParseOptions): ParseResult {
-  const fileName = options.fileName;
+export function parseFile(fileName: string, sourceText: string): ParsedFile {
   const sourceFile = ts.createSourceFile(
     fileName,
-    source,
+    sourceText,
     ts.ScriptTarget.Latest,
     false,
     scriptKindFor(fileName),
