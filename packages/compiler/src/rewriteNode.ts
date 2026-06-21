@@ -1,16 +1,11 @@
 import type ts from "typescript";
 import type { Splice } from "./parseFile.js";
 
-interface RewriteState {
-  sourceFile: ts.SourceFile;
+export interface RewriteState {
+  clientScript: ts.SourceFile;
   splices: { [placeholder: string]: Splice };
-  mappings: NodeMapping[];
-}
-
-interface NodeMapping {
-  sourceOffset: number;
-  sourceLength: number;
-  virtual: ts.Expression;
+  mappings: { [start: number]: RewrittenNode };
+  errors: { [start: number]: string };
 }
 
 interface RewrittenNode {
@@ -18,28 +13,32 @@ interface RewrittenNode {
   runtime: ts.Expression;
 }
 
-export function rewrite(
+export function rewriteNode(
   ts: typeof import("typescript"),
   state: RewriteState,
   node: ts.Expression,
 ): RewrittenNode {
   const rewritten = process(ts, state, node);
-
-  const sourceOffset = node.getStart(state.sourceFile);
-  state.mappings.push({
-    sourceOffset,
-    sourceLength: node.getEnd() - sourceOffset,
-    virtual: rewritten.virtual,
-  });
-
+  const start = node.getStart(state.clientScript);
+  state.mappings[start] = rewritten;
   return rewritten;
 }
 
 function process(
   ts: typeof import("typescript"),
-  _state: RewriteState,
+  state: RewriteState,
   node: ts.Expression,
 ): RewrittenNode {
+  const unchanged = {
+    virtual: node,
+    runtime: node,
+  };
+
+  const flagError = (message: string) => {
+    const start = node.getStart(state.clientScript);
+    state.errors[start] = message;
+  };
+
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
@@ -50,7 +49,8 @@ function process(
     };
   }
 
-  throw "Unexpected syntax";
+  flagError("Unsupported syntax");
+  return unchanged;
 }
 
 function callV(
