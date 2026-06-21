@@ -2,7 +2,7 @@
 const x = cs`${1}`;
 
 // === virtual ===
-const x = cs.lower(1);
+const x = cs.lift((() => cs.lower(1))());
 
 // === runtime ===
 const x = v.visitSplice(null, "$0splice0", $0splice0);
