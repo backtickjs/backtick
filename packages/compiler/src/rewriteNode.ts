@@ -36,10 +36,24 @@ function process(
     state.errors.set(node, message);
   };
 
+  if (ts.isIdentifier(node)) {
+    const splice = state.splices[node.text];
+    if (splice != null) {
+      return {
+        virtual: call(ts, "cs", "lower", [splice.node.expression]),
+        runtime: call(ts, "v", "visitSplice", [
+          ts.factory.createNull(),
+          ts.factory.createStringLiteral(node.text),
+          ts.factory.createIdentifier(node.text),
+        ]),
+      };
+    }
+  }
+
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
-      runtime: callV(ts, "visitNumber", [
+      runtime: call(ts, "v", "visitNumber", [
         ts.factory.createNull(),
         ts.factory.createNumericLiteral(node.text),
       ]),
@@ -50,14 +64,15 @@ function process(
   return unchanged;
 }
 
-function callV(
+function call(
   ts: typeof import("typescript"),
+  receiver: string,
   method: string,
   args: ts.Expression[],
 ): ts.Expression {
   return ts.factory.createCallExpression(
     ts.factory.createPropertyAccessExpression(
-      ts.factory.createIdentifier("v"),
+      ts.factory.createIdentifier(receiver),
       method,
     ),
     undefined,
