@@ -4,30 +4,29 @@ import type { Splice } from "./parseFile.js";
 export interface RewriteState {
   clientScript: ts.SourceFile;
   splices: { [placeholder: string]: Splice };
-  mappings: { [start: number]: RewrittenNode };
-  errors: { [start: number]: string };
+  mappings: Map<ts.Node, RewrittenNode>;
+  errors: Map<ts.Node, string>;
 }
 
-interface RewrittenNode {
-  virtual: ts.Expression;
-  runtime: ts.Expression;
+export interface RewrittenNode {
+  virtual: ts.Node;
+  runtime: ts.Node;
 }
 
 export function rewriteNode(
   ts: typeof import("typescript"),
   state: RewriteState,
-  node: ts.Expression,
+  node: ts.Node,
 ): RewrittenNode {
   const rewritten = process(ts, state, node);
-  const start = node.getStart(state.clientScript);
-  state.mappings[start] = rewritten;
+  state.mappings.set(node, rewritten);
   return rewritten;
 }
 
 function process(
   ts: typeof import("typescript"),
   state: RewriteState,
-  node: ts.Expression,
+  node: ts.Node,
 ): RewrittenNode {
   const unchanged = {
     virtual: node,
@@ -35,8 +34,7 @@ function process(
   };
 
   const flagError = (message: string) => {
-    const start = node.getStart(state.clientScript);
-    state.errors[start] = message;
+    state.errors.set(node, message);
   };
 
   if (ts.isNumericLiteral(node)) {
