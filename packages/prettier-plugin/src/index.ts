@@ -105,14 +105,14 @@ function scriptsByStart(options: Options): Map<number, ClientScript> {
     return cache.byStart;
   }
 
-  const { sourceFile, scripts } = parseFile(
+  const { scripts } = parseFile(
     ts,
     filepathOf(options) ?? "input.tsx",
     originalText,
   );
 
   const byStart = new Map<number, ClientScript>();
-  collectByStart(scripts, sourceFile, byStart);
+  collectByStart(scripts, byStart);
 
   cache = { text: originalText, byStart };
   return byStart;
@@ -121,14 +121,13 @@ function scriptsByStart(options: Options): Map<number, ClientScript> {
 // Walk the nested script/splice tree, keying every script (root and nested)
 // by its start position so `embed` can find it regardless of nesting depth.
 function collectByStart(
-  scripts: Map<ts.TaggedTemplateExpression, ClientScript>,
-  sourceFile: ts.SourceFile,
+  scripts: { [start: number]: ClientScript },
   into: Map<number, ClientScript>,
 ): void {
-  for (const script of scripts.values()) {
-    into.set(script.node.getStart(sourceFile), script);
+  for (const [start, script] of Object.entries(scripts)) {
+    into.set(Number(start), script);
     for (const splice of Object.values(script.splices)) {
-      collectByStart(splice.scripts, sourceFile, into);
+      collectByStart(splice.scripts, into);
     }
   }
 }

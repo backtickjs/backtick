@@ -3,7 +3,7 @@ import { scriptKindFor } from "./scriptKindFor.js";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
-  scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
+  scripts: { [start: number]: ClientScript };
 }
 
 export interface ClientScript {
@@ -15,7 +15,7 @@ export interface ClientScript {
 export interface Splice {
   node: ts.TemplateSpan;
   placeholder: string;
-  scripts: Map<ts.TaggedTemplateExpression, ClientScript>;
+  scripts: { [start: number]: ClientScript };
 }
 
 export function parseFile(
@@ -39,7 +39,7 @@ function getDirectScripts(
   ts: typeof import("typescript"),
   parent: Splice | null,
   sourceFile: ts.SourceFile,
-): Map<ts.TaggedTemplateExpression, ClientScript> {
+): { [start: number]: ClientScript } {
   const node: ts.Node = parent ? parent.node.expression : sourceFile;
   const taggedTemplates: ts.TaggedTemplateExpression[] = [];
 
@@ -56,23 +56,25 @@ function getDirectScripts(
   };
   visit(node);
 
-  return new Map(
-    taggedTemplates.map((taggedTemplate) => {
-      const script: ClientScript = {
-        node: taggedTemplate,
-        textWithPlaceholders: "",
-        splices: {},
-      };
-      script.splices = getDirectSplices(ts, script, sourceFile);
-      script.textWithPlaceholders = toTextWithPlaceholder(
-        ts,
-        taggedTemplate,
-        sourceFile,
-        script,
-      );
-      return [taggedTemplate, script];
-    }),
-  );
+  const scripts: { [start: number]: ClientScript } = {};
+
+  taggedTemplates.forEach((taggedTemplate) => {
+    const script: ClientScript = {
+      node: taggedTemplate,
+      textWithPlaceholders: "",
+      splices: {},
+    };
+    script.splices = getDirectSplices(ts, script, sourceFile);
+    script.textWithPlaceholders = toTextWithPlaceholder(
+      ts,
+      taggedTemplate,
+      sourceFile,
+      script,
+    );
+    scripts[taggedTemplate.getStart(sourceFile)] = script;
+  });
+
+  return scripts;
 }
 
 function getDirectSplices(
@@ -89,7 +91,7 @@ function getDirectSplices(
       const splice: Splice = {
         node: span,
         placeholder,
-        scripts: new Map(),
+        scripts: {},
       };
       splices[placeholder] = splice;
       splice.scripts = getDirectScripts(ts, splice, sourceFile);
