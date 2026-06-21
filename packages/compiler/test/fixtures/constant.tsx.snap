@@ -1,0 +1,8 @@
+// === source ===
+cs`1`;
+
+// === virtual ===
+1;
+
+// === runtime ===
+v.visitNumber(null, 1);
