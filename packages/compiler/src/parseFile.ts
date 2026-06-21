@@ -9,7 +9,7 @@ export interface ParsedFile {
 export interface ClientScript {
   node: ts.TaggedTemplateExpression;
   textWithPlaceholders: string;
-  splices: Map<ts.TemplateSpan, Splice>;
+  splices: { [placeholder: string]: Splice };
 }
 
 export interface Splice {
@@ -61,7 +61,7 @@ function getDirectScripts(
       const script: ClientScript = {
         node: taggedTemplate,
         textWithPlaceholders: "",
-        splices: new Map(),
+        splices: {},
       };
       script.splices = getDirectSplices(ts, script, sourceFile);
       script.textWithPlaceholders = toTextWithPlaceholder(
@@ -79,18 +79,19 @@ function getDirectSplices(
   ts: typeof import("typescript"),
   parent: ClientScript,
   sourceFile: ts.SourceFile,
-): Map<ts.TemplateSpan, Splice> {
-  const splices = new Map<ts.TemplateSpan, Splice>();
+): { [placeholder: string]: Splice } {
+  const splices: { [placeholder: string]: Splice } = {};
 
   const template = parent.node.template;
   if (ts.isTemplateExpression(template)) {
     template.templateSpans.forEach((span, index) => {
+      const placeholder = `$0splice${index}`;
       const splice: Splice = {
         node: span,
-        placeholder: `$0splice${index}`,
+        placeholder,
         scripts: new Map(),
       };
-      splices.set(span, splice);
+      splices[placeholder] = splice;
       splice.scripts = getDirectScripts(ts, splice, sourceFile);
     });
   }
@@ -122,10 +123,11 @@ function toTextWithPlaceholder(
   let body = "";
   let chunkStart = start;
 
-  template.templateSpans.forEach((span) => {
-    const splice = script.splices.get(span);
+  template.templateSpans.forEach((span, index) => {
+    const placeholder = `$0splice${index}`;
+    const splice = script.splices[placeholder];
     const dollarBrace = span.expression.getFullStart() - 2; // before ${
-    body += text.slice(chunkStart, dollarBrace) + (splice?.placeholder ?? "");
+    body += text.slice(chunkStart, dollarBrace) + splice.placeholder;
     chunkStart = span.literal.getStart(sourceFile) + 1; // past }
   });
 
