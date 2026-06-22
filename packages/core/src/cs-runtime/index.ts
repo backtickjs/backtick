@@ -40,7 +40,7 @@ function lower<T extends Spliceable>(_value: T): Lower<T> {
 }
 
 const cs = Object.assign(
-  (_strings: TemplateStringsArray, ..._values: unknown[]): unknown => {
+  (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
     throw new Error(
       "`cs` was not compiled. Is @backtick/core/compiler set up for this project?",
     );

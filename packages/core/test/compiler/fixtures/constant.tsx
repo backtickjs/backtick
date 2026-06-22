@@ -1,2 +1,2 @@
 import { cs } from '@backtick/core';
-cs`1`;
+const num = cs`1`;

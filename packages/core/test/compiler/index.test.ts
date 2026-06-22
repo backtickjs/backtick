@@ -20,21 +20,30 @@ function matchFileSnapshot(actual: string, file: string): void {
 const sourceExtensions = [".ts", ".tsx", ".js", ".jsx"];
 
 const fixtureNames = readdirSync(fixturesDir)
-  .filter((file) => sourceExtensions.includes(extname(file)))
+  .filter(
+    (file) =>
+      sourceExtensions.includes(extname(file)) &&
+      !file.includes(".virtual.tsx") &&
+      !file.includes(".runtime.tsx"),
+  )
   .sort();
 
 describe("rewriteFile", () => {
+  const printer = ts.createPrinter();
+
   for (const name of fixtureNames) {
     it(name, () => {
       const input = readFileSync(join(fixturesDir, name), "utf8");
       const { virtual, runtime } = rewriteFile(ts, parseFile(ts, name, input));
 
-      const printer = ts.createPrinter();
-      const snapshot = `// === source ===\n${input}\n// === virtual ===\n${printer.printFile(
-        virtual,
-      )}\n// === runtime ===\n${printer.printFile(runtime)}`;
-
-      matchFileSnapshot(snapshot, join(fixturesDir, `${name}.snap`));
+      matchFileSnapshot(
+        printer.printFile(virtual),
+        join(fixturesDir, `${name}.virtual.tsx`),
+      );
+      matchFileSnapshot(
+        printer.printFile(runtime),
+        join(fixturesDir, `${name}.runtime.tsx`),
+      );
     });
   }
 });
