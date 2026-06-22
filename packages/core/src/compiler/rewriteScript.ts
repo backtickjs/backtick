@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import type { ClientScript } from "./parseFile.js";
+import type { ClientScript, Splice } from "./parseFile.js";
 import {
   type RewriteState,
   type RewrittenNode,
@@ -30,13 +30,124 @@ export function rewriteScript(
   if (statement && ts.isExpressionStatement(statement)) {
     const body = rewriteNode(ts, state, statement.expression);
     if (state.errors.size === 0) {
-      return { virtual: liftVirtual(ts, body.virtual), runtime: body.runtime };
+      return {
+        virtual: liftVirtual(ts, body.virtual),
+        runtime: createRuntime(ts, clientScript, body.runtime),
+      };
     }
   }
 
   // Nothing we could rewrite — map the script to itself so the transform leaves
   // the `cs`...`` in place but still descends into any nested scripts.
   return { virtual: clientScript.node, runtime: clientScript.node };
+}
+
+/**
+ * Wraps a script's runtime expression in an IIFE that hoists each splice's
+ * value into a local binding, then returns `cs.create(v => v.backtick(...))`.
+ * The visitor receiver `v` matches the calls produced by `rewriteNode`.
+ */
+function createRuntime(
+  ts: typeof import("typescript"),
+  clientScript: ClientScript,
+  runtime: ts.Node,
+): ts.Expression {
+  const { factory } = ts;
+  const splices = Object.values(clientScript.splices);
+
+  // const $0splice0 = <expression>; — one binding per splice, in source order.
+  const bindings = splices.map((splice: Splice) =>
+    factory.createVariableStatement(
+      undefined,
+      factory.createVariableDeclarationList(
+        [
+          factory.createVariableDeclaration(
+            splice.placeholder,
+            undefined,
+            undefined,
+            splice.node.expression,
+          ),
+        ],
+        ts.NodeFlags.Const,
+      ),
+    ),
+  );
+
+  // { splices: { $0splice0: $0splice0, ... }, freeVars: [] }
+  const metadata = factory.createObjectLiteralExpression(
+    [
+      factory.createPropertyAssignment(
+        "splices",
+        factory.createObjectLiteralExpression(
+          splices.map((splice: Splice) =>
+            factory.createPropertyAssignment(
+              splice.placeholder,
+              factory.createIdentifier(splice.placeholder),
+            ),
+          ),
+          false,
+        ),
+      ),
+      factory.createPropertyAssignment(
+        "freeVars",
+        factory.createArrayLiteralExpression([], false),
+      ),
+    ],
+    false,
+  );
+
+  // v => v.backtick(null, metadata, <runtime body>)
+  const visit = factory.createArrowFunction(
+    undefined,
+    undefined,
+    [
+      factory.createParameterDeclaration(
+        undefined,
+        undefined,
+        "v",
+        undefined,
+        undefined,
+        undefined,
+      ),
+    ],
+    undefined,
+    undefined,
+    factory.createCallExpression(
+      factory.createPropertyAccessExpression(
+        factory.createIdentifier("v"),
+        "backtick",
+      ),
+      undefined,
+      [factory.createNull(), metadata, runtime as ts.Expression],
+    ),
+  );
+
+  const createCall = factory.createCallExpression(
+    factory.createPropertyAccessExpression(
+      factory.createIdentifier("cs"),
+      "create",
+    ),
+    undefined,
+    [visit],
+  );
+
+  const iife = factory.createArrowFunction(
+    undefined,
+    undefined,
+    [],
+    undefined,
+    undefined,
+    factory.createBlock(
+      [...bindings, factory.createReturnStatement(createCall)],
+      true,
+    ),
+  );
+
+  return factory.createCallExpression(
+    factory.createParenthesizedExpression(iife),
+    undefined,
+    [],
+  );
 }
 
 /**

@@ -41,7 +41,7 @@ function process(
     if (splice != null) {
       return {
         virtual: call(ts, "cs", "lower", [splice.node.expression]),
-        runtime: call(ts, "v", "visitSplice", [
+        runtime: call(ts, "v", "splice", [
           ts.factory.createNull(),
           ts.factory.createStringLiteral(node.text),
           ts.factory.createIdentifier(node.text),
@@ -53,7 +53,7 @@ function process(
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
-      runtime: call(ts, "v", "visitNumber", [
+      runtime: call(ts, "v", "number", [
         ts.factory.createNull(),
         ts.factory.createNumericLiteral(node.text),
       ]),

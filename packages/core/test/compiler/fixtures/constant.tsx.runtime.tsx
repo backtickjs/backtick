@@ -1,2 +1,4 @@
 import { cs } from "@backtick/core";
-const script = v.visitNumber(null, 1);
+const script = (() => {
+    return cs.create(v => v.backtick(null, { splices: {}, freeVars: [] }, v.number(null, 1)));
+})();
