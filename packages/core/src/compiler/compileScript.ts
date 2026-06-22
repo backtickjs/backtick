@@ -6,6 +6,7 @@ import {
   compileNode,
 } from "./compileNode.js";
 import { scriptKindFor } from "./scriptKindFor.js";
+import { call, iife } from "./nodeFactory.js";
 
 export function compileScript(
   ts: typeof import("typescript"),
@@ -44,8 +45,13 @@ export function compileScript(
   }
 
   const compiled = compileNode(ts, state, node);
+
+  const virtual = ts.isBlock(compiled.virtual)
+    ? iife(ts, compiled.virtual)
+    : (compiled.virtual as ts.Expression);
+
   return {
-    virtual: liftVirtual(ts, compiled.virtual),
+    virtual: call(ts, "cs", "lift", [virtual]),
     runtime: createRuntime(ts, clientScript, state, compiled.runtime),
   };
 }
@@ -119,73 +125,20 @@ function createRuntime(
     ],
     undefined,
     undefined,
-    factory.createCallExpression(
-      factory.createPropertyAccessExpression(
-        factory.createIdentifier("v"),
-        "backtick",
-      ),
-      undefined,
-      [factory.createNull(), metadata, runtime as ts.Expression],
-    ),
+    call(ts, "v", "backtick", [
+      factory.createNull(),
+      metadata,
+      runtime as ts.Expression,
+    ]),
   );
 
-  const createCall = factory.createCallExpression(
-    factory.createPropertyAccessExpression(
-      factory.createIdentifier("cs"),
-      "create",
-    ),
-    undefined,
-    [visit],
-  );
+  const createCall = call(ts, "cs", "create", [visit]);
 
-  const iife = factory.createArrowFunction(
-    undefined,
-    undefined,
-    [],
-    undefined,
-    undefined,
+  return iife(
+    ts,
     factory.createBlock(
       [...bindings, factory.createReturnStatement(createCall)],
       true,
     ),
-  );
-
-  return factory.createCallExpression(
-    factory.createParenthesizedExpression(iife),
-    undefined,
-    [],
-  );
-}
-
-/**
- * Wraps a script's virtual expression in `cs.lift((() => ...)())`, lifting the
- * client value into the type system at the point the script is used.
- */
-function liftVirtual(
-  ts: typeof import("typescript"),
-  virtual: ts.Node,
-): ts.Expression {
-  const iife = ts.factory.createCallExpression(
-    ts.factory.createParenthesizedExpression(
-      ts.factory.createArrowFunction(
-        undefined,
-        undefined,
-        [],
-        undefined,
-        undefined,
-        virtual as ts.ConciseBody,
-      ),
-    ),
-    undefined,
-    [],
-  );
-
-  return ts.factory.createCallExpression(
-    ts.factory.createPropertyAccessExpression(
-      ts.factory.createIdentifier("cs"),
-      "lift",
-    ),
-    undefined,
-    [iife],
   );
 }

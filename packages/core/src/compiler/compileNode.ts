@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import type { Splice } from "./parseFile.js";
+import { call } from "./nodeFactory.js";
 
 export interface CompilerState {
   splices: { [placeholder: string]: Splice };
@@ -207,20 +208,4 @@ function process(
 
   flagError("Unsupported syntax");
   return unchanged;
-}
-
-function call(
-  ts: typeof import("typescript"),
-  receiver: string,
-  method: string,
-  args: ts.Expression[],
-): ts.Expression {
-  return ts.factory.createCallExpression(
-    ts.factory.createPropertyAccessExpression(
-      ts.factory.createIdentifier(receiver),
-      method,
-    ),
-    undefined,
-    args,
-  );
 }
