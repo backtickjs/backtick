@@ -1,2 +1,2 @@
 import { cs } from "@backtick/core";
-const num = v.visitNumber(null, 1);
+const script = v.visitNumber(null, 1);

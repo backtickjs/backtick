@@ -25,14 +25,14 @@ type Lower<T> =
         ? { [Tk in keyof T]: Lower<T[Tk]> }
         : T;
 
-function lift<T extends Spliceable>(_value: T): Client<Lower<T>> {
+function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-function lower<T extends Spliceable>(_value: T): Lower<T> {
+function lower<const T extends Spliceable>(_value: T): Lower<T> {
   throw new Error(
     "Don't call `cs.lower` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
