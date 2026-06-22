@@ -6,7 +6,7 @@ import {
   compileScriptNode,
 } from "./compileScriptNode.js";
 import { scriptKindFor } from "./scriptKindFor.js";
-import { call, iife } from "./nodeFactory.js";
+import { arrow, call, constDecl, iife } from "./nodeFactory.js";
 
 export function compileScript(
   ts: typeof import("typescript"),
@@ -50,58 +50,28 @@ export function compileScript(
     ? iife(ts, compiled.virtual)
     : (compiled.virtual as ts.Expression);
 
-  return {
-    virtual: call(ts, "cs", "lift", [virtual]),
-    runtime: createRuntime(ts, clientScript, state, compiled.runtime),
-  };
-}
-
-function createRuntime(
-  ts: typeof import("typescript"),
-  clientScript: ClientScript,
-  state: CompilerState,
-  runtime: ts.Node,
-): ts.Expression {
-  const { factory } = ts;
   const splices = Object.values(clientScript.splices);
 
-  // const $0splice0 = <expression>; — one binding per splice, in source order.
-  const bindings = splices.map((splice: Splice) =>
-    factory.createVariableStatement(
-      undefined,
-      factory.createVariableDeclarationList(
-        [
-          factory.createVariableDeclaration(
-            splice.placeholder,
-            undefined,
-            undefined,
-            splice.node.expression,
-          ),
-        ],
-        ts.NodeFlags.Const,
-      ),
-    ),
-  );
-
-  // { splices: { $0splice0: $0splice0, ... }, freeVars: [] }
-  const metadata = factory.createObjectLiteralExpression(
+  const metadata = ts.factory.createObjectLiteralExpression(
     [
-      factory.createPropertyAssignment(
+      ts.factory.createPropertyAssignment(
         "splices",
-        factory.createObjectLiteralExpression(
+        ts.factory.createObjectLiteralExpression(
           splices.map((splice: Splice) =>
-            factory.createPropertyAssignment(
+            ts.factory.createPropertyAssignment(
               splice.placeholder,
-              factory.createIdentifier(splice.placeholder),
+              ts.factory.createIdentifier(splice.placeholder),
             ),
           ),
           false,
         ),
       ),
-      factory.createPropertyAssignment(
+      ts.factory.createPropertyAssignment(
         "freeVars",
-        factory.createArrayLiteralExpression(
-          [...state.freeVars].map((name) => factory.createStringLiteral(name)),
+        ts.factory.createArrayLiteralExpression(
+          [...state.freeVars].map((name) =>
+            ts.factory.createStringLiteral(name),
+          ),
           false,
         ),
       ),
@@ -109,36 +79,29 @@ function createRuntime(
     false,
   );
 
-  // v => v.backtick(null, metadata, <runtime body>)
-  const visit = factory.createArrowFunction(
-    undefined,
-    undefined,
-    [
-      factory.createParameterDeclaration(
-        undefined,
-        undefined,
-        "v",
-        undefined,
-        undefined,
-        undefined,
-      ),
-    ],
-    undefined,
-    undefined,
+  const visit = arrow(
+    ts,
+    ["v"],
     call(ts, "v", "backtick", [
-      factory.createNull(),
+      ts.factory.createNull(),
       metadata,
-      runtime as ts.Expression,
+      compiled.runtime as ts.Expression,
     ]),
   );
 
-  const createCall = call(ts, "cs", "create", [visit]);
-
-  return iife(
-    ts,
-    factory.createBlock(
-      [...bindings, factory.createReturnStatement(createCall)],
-      true,
+  return {
+    virtual: call(ts, "cs", "lift", [virtual]),
+    runtime: iife(
+      ts,
+      ts.factory.createBlock(
+        [
+          ...splices.map((splice: Splice) =>
+            constDecl(ts, splice.placeholder, splice.node.expression),
+          ),
+          ts.factory.createReturnStatement(call(ts, "cs", "create", [visit])),
+        ],
+        true,
+      ),
     ),
-  );
+  };
 }

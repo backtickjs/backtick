@@ -17,23 +17,71 @@ export function call(
   );
 }
 
+/** (<params>) => <body> */
+export function arrow(
+  ts: typeof import("typescript"),
+  params: string[],
+  body: ts.ConciseBody,
+): ts.ArrowFunction {
+  return ts.factory.createArrowFunction(
+    undefined,
+    undefined,
+    params.map((name) =>
+      ts.factory.createParameterDeclaration(
+        undefined,
+        undefined,
+        name,
+        undefined,
+        undefined,
+        undefined,
+      ),
+    ),
+    undefined,
+    undefined,
+    body,
+  );
+}
+
 /** (() => <body>)() */
 export function iife(
   ts: typeof import("typescript"),
   body: ts.ConciseBody,
 ): ts.CallExpression {
   return ts.factory.createCallExpression(
-    ts.factory.createParenthesizedExpression(
-      ts.factory.createArrowFunction(
-        undefined,
-        undefined,
-        [],
-        undefined,
-        undefined,
-        body,
-      ),
-    ),
+    ts.factory.createParenthesizedExpression(arrow(ts, [], body)),
     undefined,
     [],
   );
+}
+
+/** <const|let|var> <name> = <initializer>; */
+export function varDecl(
+  ts: typeof import("typescript"),
+  flags: ts.NodeFlags,
+  name: string,
+  initializer: ts.Expression,
+): ts.VariableStatement {
+  return ts.factory.createVariableStatement(
+    undefined,
+    ts.factory.createVariableDeclarationList(
+      [
+        ts.factory.createVariableDeclaration(
+          name,
+          undefined,
+          undefined,
+          initializer,
+        ),
+      ],
+      flags,
+    ),
+  );
+}
+
+/** const <name> = <initializer>; */
+export function constDecl(
+  ts: typeof import("typescript"),
+  name: string,
+  initializer: ts.Expression,
+): ts.VariableStatement {
+  return varDecl(ts, ts.NodeFlags.Const, name, initializer);
 }

@@ -1,6 +1,6 @@
 import type ts from "typescript";
 import type { Splice } from "./parseFile.js";
-import { call } from "./nodeFactory.js";
+import { call, varDecl } from "./nodeFactory.js";
 
 export interface CompilerState {
   splices: { [placeholder: string]: Splice };
@@ -69,19 +69,11 @@ function _compileScriptNode(
       const initializer = compileScriptNode(ts, state, declaration.initializer);
       state.declaredVars.add(name);
       return {
-        virtual: ts.factory.createVariableStatement(
-          undefined,
-          ts.factory.createVariableDeclarationList(
-            [
-              ts.factory.createVariableDeclaration(
-                `$0var_${name}`,
-                undefined,
-                undefined,
-                initializer.virtual as ts.Expression,
-              ),
-            ],
-            node.declarationList.flags,
-          ),
+        virtual: varDecl(
+          ts,
+          node.declarationList.flags,
+          `$0var_${name}`,
+          initializer.virtual as ts.Expression,
         ),
         runtime: call(ts, "v", "assignment", [
           ts.factory.createNull(),
