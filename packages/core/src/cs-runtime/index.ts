@@ -1,5 +1,5 @@
 export interface Client<T> {
-  type: () => T;
+  $$type: () => T;
   visit: <U>(visitor: Visitor<U>) => U;
 }
 
@@ -87,7 +87,7 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
 }
 
 function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
-  return { type: () => {}, visit };
+  return { $$type: () => {}, visit };
 }
 
 const cs = Object.assign(

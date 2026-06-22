@@ -19,7 +19,7 @@ export default class StringifyVisitor implements Visitor<string> {
     if (typeof expression === "string") {
       return this.string(loc, expression);
     }
-    if ("visit" in expression) {
+    if ("$$type" in expression && "visit" in expression) {
       return (expression as Client<unknown>).visit(this);
     }
     if (Array.isArray(expression)) {
