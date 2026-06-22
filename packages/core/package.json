@@ -12,6 +12,10 @@
     "./compiler": {
       "types": "./dist/compiler/index.d.ts",
       "default": "./dist/compiler/index.js"
+    },
+    "./cs-runtime": {
+      "types": "./dist/cs-runtime/index.d.ts",
+      "default": "./dist/cs-runtime/index.js"
     }
   },
   "scripts": {

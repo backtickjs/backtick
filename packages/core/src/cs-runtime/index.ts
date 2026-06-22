@@ -3,7 +3,7 @@ export interface Client<T> {
   visit: <U>(visitor: Visitor<U>) => U;
 }
 
-type Spliceable =
+export type Spliceable =
   | null
   | number
   | boolean
@@ -17,7 +17,7 @@ type Spliceable =
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
-type Lower<T> =
+export type Lower<T> =
   T extends Client<infer U>
     ? U
     : T extends (infer Item)[]
@@ -26,12 +26,12 @@ type Lower<T> =
         ? { [Tk in keyof T]: Lower<T[Tk]> }
         : T;
 
-interface Metadata {
+export interface Metadata {
   splices: { [key: string]: unknown };
   freeVars: string[];
 }
 
-interface Visitor<U> {
+export interface Visitor<U> {
   // e.g. `7`
   backtick(loc: null, metadata: Metadata, expression: U): U;
 
