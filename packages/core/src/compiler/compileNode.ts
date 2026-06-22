@@ -94,6 +94,10 @@ function process(
     }
   }
 
+  if (ts.isParenthesizedExpression(node)) {
+    return compileNode(ts, state, node.expression);
+  }
+
   if (ts.isReturnStatement(node) && node.expression) {
     const expression = compileNode(ts, state, node.expression);
     return {

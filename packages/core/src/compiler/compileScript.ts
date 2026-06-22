@@ -12,6 +12,11 @@ export function compileScript(
   sourceFile: ts.SourceFile,
   clientScript: ClientScript,
 ): CompiledNode {
+  const unchanged = {
+    virtual: clientScript.node,
+    runtime: clientScript.node,
+  };
+
   const scriptWithPlaceholders = ts.createSourceFile(
     sourceFile.fileName,
     clientScript.textWithPlaceholders,
@@ -29,71 +34,20 @@ export function compileScript(
   };
 
   const [statement] = scriptWithPlaceholders.statements;
-  let bodyNode: ts.Expression | ts.Block | undefined;
+  let node: ts.Expression | ts.Block;
   if (statement && ts.isExpressionStatement(statement)) {
-    bodyNode = statement.expression;
+    node = statement.expression;
   } else if (statement && ts.isBlock(statement)) {
-    // `{a: 4}` parses as a block wrapping a labeled statement, but the author
-    // means an object literal. Re-parse the text as a parenthesized expression;
-    // if that yields a clean object literal, prefer it over the block reading.
-    bodyNode =
-      tryParseObjectLiteral(
-        ts,
-        sourceFile.fileName,
-        clientScript.textWithPlaceholders,
-      ) ?? statement;
+    node = statement;
+  } else {
+    return unchanged;
   }
 
-  if (bodyNode) {
-    const body = compileNode(ts, state, bodyNode);
-    if (state.errors.size === 0) {
-      return {
-        virtual: liftVirtual(ts, body.virtual),
-        runtime: createRuntime(ts, clientScript, state, body.runtime),
-      };
-    }
-  }
-
-  return { virtual: clientScript.node, runtime: clientScript.node };
-}
-
-/**
- * Re-parse a script body as `(<text>)` to tell an object literal apart from a
- * block. Both produce an object literal under TypeScript's error recovery, so
- * the parse diagnostics are what distinguish a genuine object (no diagnostics)
- * from a block forced into one (e.g. `{ const x = 0; }`).
- */
-function tryParseObjectLiteral(
-  ts: typeof import("typescript"),
-  fileName: string,
-  text: string,
-): ts.ObjectLiteralExpression | undefined {
-  const wrapped = ts.createSourceFile(
-    fileName,
-    `(${text})`,
-    ts.ScriptTarget.Latest,
-    false,
-    scriptKindFor(ts, fileName),
-  );
-
-  const { parseDiagnostics } = wrapped as ts.SourceFile & {
-    parseDiagnostics?: ts.Diagnostic[];
+  const compiled = compileNode(ts, state, node);
+  return {
+    virtual: liftVirtual(ts, compiled.virtual),
+    runtime: createRuntime(ts, clientScript, state, compiled.runtime),
   };
-  if (parseDiagnostics && parseDiagnostics.length > 0) {
-    return undefined;
-  }
-
-  const [statement] = wrapped.statements;
-  if (
-    statement &&
-    ts.isExpressionStatement(statement) &&
-    ts.isParenthesizedExpression(statement.expression) &&
-    ts.isObjectLiteralExpression(statement.expression.expression)
-  ) {
-    return statement.expression.expression;
-  }
-
-  return undefined;
 }
 
 function createRuntime(

@@ -87,6 +87,6 @@ export default class StringifyVisitor implements Visitor<string> {
     const parts = Object.entries(entries).map(
       ([key, value]) => key + ": " + value,
     );
-    return "{" + parts.join(", ") + "}";
+    return "({" + parts.join(", ") + "})";
   }
 }
