@@ -86,7 +86,7 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
   );
 }
 
-function create(visit: <U>(visitor: Visitor<U>) => U): Client<unknown> {
+function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
   return { type: () => {}, visit };
 }
 
