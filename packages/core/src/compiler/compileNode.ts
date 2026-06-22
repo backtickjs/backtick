@@ -1,34 +1,34 @@
 import type ts from "typescript";
 import type { Splice } from "./parseFile.js";
 
-export interface RewriteState {
+export interface CompilerState {
   splices: { [placeholder: string]: Splice };
-  mappings: Map<ts.Node, RewrittenNode>;
+  mappings: Map<ts.Node, CompiledNode>;
   errors: Map<ts.Node, string>;
   declaredVars: Set<string>;
   freeVars: Set<string>;
 }
 
-export interface RewrittenNode {
+export interface CompiledNode {
   virtual: ts.Node;
   runtime: ts.Node;
 }
 
-export function rewriteNode(
+export function compileNode(
   ts: typeof import("typescript"),
-  state: RewriteState,
+  state: CompilerState,
   node: ts.Node,
-): RewrittenNode {
-  const rewritten = process(ts, state, node);
-  state.mappings.set(node, rewritten);
-  return rewritten;
+): CompiledNode {
+  const compiled = process(ts, state, node);
+  state.mappings.set(node, compiled);
+  return compiled;
 }
 
 function process(
   ts: typeof import("typescript"),
-  state: RewriteState,
+  state: CompilerState,
   node: ts.Node,
-): RewrittenNode {
+): CompiledNode {
   const unchanged = {
     virtual: node,
     runtime: node,
@@ -40,7 +40,7 @@ function process(
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
-      rewriteNode(ts, state, statement),
+      compileNode(ts, state, statement),
     );
     return {
       virtual: ts.factory.createBlock(
@@ -65,7 +65,7 @@ function process(
       declaration.initializer
     ) {
       const name = declaration.name.text;
-      const initializer = rewriteNode(ts, state, declaration.initializer);
+      const initializer = compileNode(ts, state, declaration.initializer);
       state.declaredVars.add(name);
       return {
         virtual: ts.factory.createVariableStatement(
@@ -95,7 +95,7 @@ function process(
   }
 
   if (ts.isReturnStatement(node) && node.expression) {
-    const expression = rewriteNode(ts, state, node.expression);
+    const expression = compileNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
         expression.virtual as ts.Expression,

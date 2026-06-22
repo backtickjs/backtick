@@ -1,17 +1,17 @@
 import type ts from "typescript";
 import type { ClientScript, Splice } from "./parseFile.js";
 import {
-  type RewriteState,
-  type RewrittenNode,
-  rewriteNode,
-} from "./rewriteNode.js";
+  type CompilerState,
+  type CompiledNode,
+  compileNode,
+} from "./compileNode.js";
 import { scriptKindFor } from "./scriptKindFor.js";
 
-export function rewriteScript(
+export function compileScript(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
   clientScript: ClientScript,
-): RewrittenNode {
+): CompiledNode {
   const scriptWithPlaceholders = ts.createSourceFile(
     sourceFile.fileName,
     clientScript.textWithPlaceholders,
@@ -20,7 +20,7 @@ export function rewriteScript(
     scriptKindFor(ts, sourceFile.fileName),
   );
 
-  const state: RewriteState = {
+  const state: CompilerState = {
     splices: clientScript.splices,
     mappings: new Map(),
     errors: new Map(),
@@ -28,8 +28,6 @@ export function rewriteScript(
     freeVars: new Set(),
   };
 
-  // A script's body is either a single expression (`cs`1``) or a block
-  // (`cs`{ ... }``); rewrite whichever the placeholder text parsed into.
   const [statement] = scriptWithPlaceholders.statements;
   const bodyNode =
     statement && ts.isExpressionStatement(statement)
@@ -39,7 +37,7 @@ export function rewriteScript(
         : undefined;
 
   if (bodyNode) {
-    const body = rewriteNode(ts, state, bodyNode);
+    const body = compileNode(ts, state, bodyNode);
     if (state.errors.size === 0) {
       return {
         virtual: liftVirtual(ts, body.virtual),
@@ -48,20 +46,13 @@ export function rewriteScript(
     }
   }
 
-  // Nothing we could rewrite — map the script to itself so the transform leaves
-  // the `cs`...`` in place but still descends into any nested scripts.
   return { virtual: clientScript.node, runtime: clientScript.node };
 }
 
-/**
- * Wraps a script's runtime expression in an IIFE that hoists each splice's
- * value into a local binding, then returns `cs.create(v => v.backtick(...))`.
- * The visitor receiver `v` matches the calls produced by `rewriteNode`.
- */
 function createRuntime(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
-  state: RewriteState,
+  state: CompilerState,
   runtime: ts.Node,
 ): ts.Expression {
   const { factory } = ts;
