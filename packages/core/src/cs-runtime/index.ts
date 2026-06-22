@@ -1,32 +1,53 @@
-/**
- * A compiled backtick client script. Authored as a `` cs`...` `` tagged
- * template and rewritten by `@backtick/core/compiler`; the phantom `T` carries
- * the script's type through the rewrite.
- */
-export type ClientScript<T = unknown> = { readonly __script: T };
-
-interface Cs {
-  (strings: TemplateStringsArray, ...values: unknown[]): ClientScript;
-  /** Lifts a client value into the type system. Used by generated virtual code. */
-  lift<T>(value: T): T;
-  /** Lowers a host value spliced into a script. Used by generated virtual code. */
-  lower<T>(value: T): T;
+interface Client<T> {
+  type: () => T;
 }
 
-/**
- * The `cs` client-script tag. At runtime client scripts are compiled away, so
- * calling the raw tag is a configuration error; `lift`/`lower` exist for the
- * generated virtual code to type-check against and pass their value through.
- */
-const cs: Cs = Object.assign(
-  (_strings: TemplateStringsArray, ..._values: unknown[]): ClientScript => {
+type Spliceable =
+  | null
+  | number
+  | boolean
+  | string
+  | Client<unknown>
+  | Spliceable[]
+  | { [key: string]: Spliceable };
+
+// Recursively lowers a Spliceable type:
+//   Client<U>        -> U
+//   T[]              -> Lower<T>[]
+//   { k: T }         -> { k: Lower<T> }
+//   primitives       -> unchanged
+type Lower<T> =
+  T extends Client<infer U>
+    ? U
+    : T extends (infer Item)[]
+      ? Lower<Item>[]
+      : T extends object
+        ? { [Tk in keyof T]: Lower<T[Tk]> }
+        : T;
+
+function lift<T extends Spliceable>(_value: T): Client<Lower<T>> {
+  throw new Error(
+    "Don't call `cs.lift` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
+function lower<T extends Spliceable>(_value: T): Lower<T> {
+  throw new Error(
+    "Don't call `cs.lower` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
+const cs = Object.assign(
+  (_strings: TemplateStringsArray, ..._values: unknown[]): unknown => {
     throw new Error(
       "`cs` was not compiled. Is @backtick/core/compiler set up for this project?",
     );
   },
   {
-    lift: <T>(value: T): T => value,
-    lower: <T>(value: T): T => value,
+    lift,
+    lower,
   },
 );
 
