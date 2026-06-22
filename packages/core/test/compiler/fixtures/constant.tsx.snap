@@ -1,8 +1,11 @@
 // === source ===
+import { cs } from '@backtick/core';
 cs`1`;
 
 // === virtual ===
+import { cs } from "@backtick/core";
 cs.lift((() => 1)());
 
 // === runtime ===
+import { cs } from "@backtick/core";
 v.visitNumber(null, 1);

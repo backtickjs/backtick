@@ -1,8 +1,11 @@
 // === source ===
-const x = cs`${1}`;
+import { cs } from '@backtick/core';
+cs`${1}`;
 
 // === virtual ===
-const x = cs.lift((() => cs.lower(1))());
+import { cs } from "@backtick/core";
+cs.lift((() => cs.lower(1))());
 
 // === runtime ===
-const x = v.visitSplice(null, "$0splice0", $0splice0);
+import { cs } from "@backtick/core";
+v.visitSplice(null, "$0splice0", $0splice0);

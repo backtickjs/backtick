@@ -1,1 +1,2 @@
-const x = cs`${1}`;
+import { cs } from '@backtick/core';
+cs`${1}`;
