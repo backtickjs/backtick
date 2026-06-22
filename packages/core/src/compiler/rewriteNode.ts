@@ -5,6 +5,8 @@ export interface RewriteState {
   splices: { [placeholder: string]: Splice };
   mappings: Map<ts.Node, RewrittenNode>;
   errors: Map<ts.Node, string>;
+  declaredVars: Set<string>;
+  freeVars: Set<string>;
 }
 
 export interface RewrittenNode {
@@ -36,6 +38,75 @@ function process(
     state.errors.set(node, message);
   };
 
+  if (ts.isBlock(node)) {
+    const statements = node.statements.map((statement) =>
+      rewriteNode(ts, state, statement),
+    );
+    return {
+      virtual: ts.factory.createBlock(
+        statements.map((statement) => statement.virtual as ts.Statement),
+        true,
+      ),
+      runtime: call(ts, "v", "block", [
+        ts.factory.createNull(),
+        ts.factory.createArrayLiteralExpression(
+          statements.map((statement) => statement.runtime as ts.Expression),
+          false,
+        ),
+      ]),
+    };
+  }
+
+  if (ts.isVariableStatement(node)) {
+    const [declaration] = node.declarationList.declarations;
+    if (
+      declaration &&
+      ts.isIdentifier(declaration.name) &&
+      declaration.initializer
+    ) {
+      const name = declaration.name.text;
+      const initializer = rewriteNode(ts, state, declaration.initializer);
+      state.declaredVars.add(name);
+      return {
+        virtual: ts.factory.createVariableStatement(
+          undefined,
+          ts.factory.createVariableDeclarationList(
+            [
+              ts.factory.createVariableDeclaration(
+                name,
+                undefined,
+                undefined,
+                initializer.virtual as ts.Expression,
+              ),
+            ],
+            node.declarationList.flags,
+          ),
+        ),
+        runtime: call(ts, "v", "assignment", [
+          ts.factory.createNull(),
+          call(ts, "v", "identifier", [
+            ts.factory.createNull(),
+            ts.factory.createStringLiteral(name),
+          ]),
+          initializer.runtime as ts.Expression,
+        ]),
+      };
+    }
+  }
+
+  if (ts.isReturnStatement(node) && node.expression) {
+    const expression = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createReturnStatement(
+        expression.virtual as ts.Expression,
+      ),
+      runtime: call(ts, "v", "return", [
+        ts.factory.createNull(),
+        expression.runtime as ts.Expression,
+      ]),
+    };
+  }
+
   if (ts.isIdentifier(node)) {
     const splice = state.splices[node.text];
     if (splice != null) {
@@ -48,6 +119,18 @@ function process(
         ]),
       };
     }
+
+    if (!state.declaredVars.has(node.text)) {
+      state.freeVars.add(node.text);
+    }
+
+    return {
+      virtual: ts.factory.createIdentifier(node.text),
+      runtime: call(ts, "v", "identifier", [
+        ts.factory.createNull(),
+        ts.factory.createStringLiteral(node.text),
+      ]),
+    };
   }
 
   if (ts.isNumericLiteral(node)) {

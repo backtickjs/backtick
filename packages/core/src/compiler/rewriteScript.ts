@@ -24,15 +24,26 @@ export function rewriteScript(
     splices: clientScript.splices,
     mappings: new Map(),
     errors: new Map(),
+    declaredVars: new Set(),
+    freeVars: new Set(),
   };
 
+  // A script's body is either a single expression (`cs`1``) or a block
+  // (`cs`{ ... }``); rewrite whichever the placeholder text parsed into.
   const [statement] = scriptWithPlaceholders.statements;
-  if (statement && ts.isExpressionStatement(statement)) {
-    const body = rewriteNode(ts, state, statement.expression);
+  const bodyNode =
+    statement && ts.isExpressionStatement(statement)
+      ? statement.expression
+      : statement && ts.isBlock(statement)
+        ? statement
+        : undefined;
+
+  if (bodyNode) {
+    const body = rewriteNode(ts, state, bodyNode);
     if (state.errors.size === 0) {
       return {
         virtual: liftVirtual(ts, body.virtual),
-        runtime: createRuntime(ts, clientScript, body.runtime),
+        runtime: createRuntime(ts, clientScript, state, body.runtime),
       };
     }
   }
@@ -50,6 +61,7 @@ export function rewriteScript(
 function createRuntime(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
+  state: RewriteState,
   runtime: ts.Node,
 ): ts.Expression {
   const { factory } = ts;
@@ -90,7 +102,10 @@ function createRuntime(
       ),
       factory.createPropertyAssignment(
         "freeVars",
-        factory.createArrayLiteralExpression([], false),
+        factory.createArrayLiteralExpression(
+          [...state.freeVars].map((name) => factory.createStringLiteral(name)),
+          false,
+        ),
       ),
     ],
     false,
@@ -166,7 +181,7 @@ function liftVirtual(
         [],
         undefined,
         undefined,
-        virtual as ts.Expression,
+        virtual as ts.ConciseBody,
       ),
     ),
     undefined,

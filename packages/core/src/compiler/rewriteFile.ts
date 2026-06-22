@@ -59,7 +59,7 @@ function transform(
       const visit = (node: ts.Node): ts.Node => {
         const replacement = mappings.get(node)?.[kind];
         if (replacement && replacement !== node) {
-          return replacement;
+          return ts.visitEachChild(replacement, visit, context);
         }
         return ts.visitEachChild(node, visit, context);
       };
