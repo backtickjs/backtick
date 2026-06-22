@@ -1,4 +1,4 @@
-import { virtualizeFile } from "@backtick/compiler";
+import { virtualizeFile } from "@backtick/core/compiler";
 import {
   type CodeMapping,
   type LanguagePlugin,

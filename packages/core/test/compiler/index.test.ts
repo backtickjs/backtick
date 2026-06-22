@@ -3,8 +3,8 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { parseFile } from "../dist/parseFile.js";
-import { rewriteFile } from "../dist/rewriteFile.js";
+import { parseFile } from "../../dist/compiler/parseFile.js";
+import { rewriteFile } from "../../dist/compiler/rewriteFile.js";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
 

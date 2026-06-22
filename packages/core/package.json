@@ -1,9 +1,19 @@
 {
-  "name": "@backtick/compiler",
+  "name": "@backtick/core",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./compiler": {
+      "types": "./dist/compiler/index.d.ts",
+      "default": "./dist/compiler/index.js"
+    }
+  },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",

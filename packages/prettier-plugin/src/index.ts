@@ -1,4 +1,4 @@
-import { parseFile, type ClientScript } from "@backtick/compiler";
+import { parseFile, type ClientScript } from "@backtick/core/compiler";
 import ts from "typescript";
 import type { Node } from "estree";
 import {
