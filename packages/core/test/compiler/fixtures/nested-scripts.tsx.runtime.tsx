@@ -5,3 +5,4 @@ const script = (() => {
     })();
     return cs.create(v => v.backtick(null, { splices: { $0splice0: $0splice0 }, freeVars: [] }, v.block(null, [v.assignment(null, v.identifier(null, "x"), v.number(null, 0)), v.return(null, v.splice(null, "$0splice0", $0splice0))])));
 })();
+export default script;

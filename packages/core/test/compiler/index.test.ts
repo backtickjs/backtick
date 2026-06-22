@@ -1,10 +1,14 @@
 import assert from "node:assert";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { register } from "node:module";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 import { parseFile } from "../../dist/compiler/parseFile.js";
 import { rewriteFile } from "../../dist/compiler/rewriteFile.js";
+import StringifyVisitor from "./StringifyVisitor.ts";
+
+register("./tsxLoader.mjs", import.meta.url);
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
 
@@ -33,6 +37,7 @@ describe("rewriteFile", () => {
 
   for (const name of fixtureNames) {
     it(name, () => {
+      // const base = name.slice(0, -extname(name).length);
       const input = readFileSync(join(fixturesDir, name), "utf8");
       const { virtual, runtime } = rewriteFile(ts, parseFile(ts, name, input));
 
@@ -43,6 +48,22 @@ describe("rewriteFile", () => {
       matchFileSnapshot(
         printer.printFile(runtime),
         join(fixturesDir, `${name}.runtime.tsx`),
+      );
+    });
+  }
+});
+
+describe("visit", () => {
+  for (const name of fixtureNames) {
+    it(name, async () => {
+      // const base = name.slice(0, -extname(name).length);
+      const { default: client } = await import(
+        `./fixtures/${name}.runtime.tsx`
+      );
+
+      matchFileSnapshot(
+        client.visit(new StringifyVisitor()),
+        join(fixturesDir, `${name}.stringify`),
       );
     });
   }
