@@ -5,7 +5,7 @@ import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 import { parseFile } from "../../dist/compiler/parseFile.js";
-import { rewriteFile } from "../../dist/compiler/rewriteFile.js";
+import { compileFile } from "../../dist/compiler/compileFile.js";
 import StringifyVisitor from "./StringifyVisitor.ts";
 
 register("./tsxLoader.mjs", import.meta.url);
@@ -32,14 +32,14 @@ const fixtureNames = readdirSync(fixturesDir)
   )
   .sort();
 
-describe("rewriteFile", () => {
+describe("compileFile", () => {
   const printer = ts.createPrinter();
 
   for (const name of fixtureNames) {
     it(name, () => {
       // const base = name.slice(0, -extname(name).length);
       const input = readFileSync(join(fixturesDir, name), "utf8");
-      const { virtual, runtime } = rewriteFile(ts, parseFile(ts, name, input));
+      const { virtual, runtime } = compileFile(ts, parseFile(ts, name, input));
 
       matchFileSnapshot(
         printer.printFile(virtual),

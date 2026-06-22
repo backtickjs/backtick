@@ -73,7 +73,7 @@ function process(
           ts.factory.createVariableDeclarationList(
             [
               ts.factory.createVariableDeclaration(
-                name,
+                `$0var_${name}`,
                 undefined,
                 undefined,
                 initializer.virtual as ts.Expression,
@@ -125,12 +125,70 @@ function process(
     }
 
     return {
-      virtual: ts.factory.createIdentifier(node.text),
+      virtual: ts.factory.createIdentifier(`$0var_${node.text}`),
       runtime: call(ts, "v", "identifier", [
         ts.factory.createNull(),
         ts.factory.createStringLiteral(node.text),
       ]),
     };
+  }
+
+  if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
+    const expression = compileNode(ts, state, node.expression);
+    const name = node.name.text;
+    return {
+      virtual: ts.factory.createPropertyAccessExpression(
+        expression.virtual as ts.Expression,
+        name,
+      ),
+      runtime: call(ts, "v", "propertyAccess", [
+        ts.factory.createNull(),
+        expression.runtime as ts.Expression,
+        ts.factory.createStringLiteral(name),
+      ]),
+    };
+  }
+
+  if (ts.isObjectLiteralExpression(node)) {
+    const properties = node.properties.map((property) => {
+      if (
+        ts.isPropertyAssignment(property) &&
+        (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name))
+      ) {
+        return {
+          name: property.name.text,
+          value: compileNode(ts, state, property.initializer),
+        };
+      }
+      flagError("Unsupported object property");
+      return null;
+    });
+
+    if (properties.every((property) => property != null)) {
+      return {
+        virtual: ts.factory.createObjectLiteralExpression(
+          properties.map((property) =>
+            ts.factory.createPropertyAssignment(
+              property.name,
+              property.value.virtual as ts.Expression,
+            ),
+          ),
+          false,
+        ),
+        runtime: call(ts, "v", "object", [
+          ts.factory.createNull(),
+          ts.factory.createObjectLiteralExpression(
+            properties.map((property) =>
+              ts.factory.createPropertyAssignment(
+                property.name,
+                property.value.runtime as ts.Expression,
+              ),
+            ),
+            false,
+          ),
+        ]),
+      };
+    }
   }
 
   if (ts.isNumericLiteral(node)) {

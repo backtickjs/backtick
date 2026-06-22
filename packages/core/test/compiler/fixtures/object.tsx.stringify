@@ -1,0 +1,4 @@
+cs`{
+  obj = ${cs`{a: 4}`};
+  return ${cs`obj.a`};
+}`
