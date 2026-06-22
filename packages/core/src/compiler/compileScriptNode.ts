@@ -15,17 +15,17 @@ export interface CompiledNode {
   runtime: ts.Node;
 }
 
-export function compileNode(
+export function compileScriptNode(
   ts: typeof import("typescript"),
   state: CompilerState,
   node: ts.Node,
 ): CompiledNode {
-  const compiled = process(ts, state, node);
+  const compiled = _compileScriptNode(ts, state, node);
   state.mappings.set(node, compiled);
   return compiled;
 }
 
-function process(
+function _compileScriptNode(
   ts: typeof import("typescript"),
   state: CompilerState,
   node: ts.Node,
@@ -41,7 +41,7 @@ function process(
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
-      compileNode(ts, state, statement),
+      compileScriptNode(ts, state, statement),
     );
     return {
       virtual: ts.factory.createBlock(
@@ -66,7 +66,7 @@ function process(
       declaration.initializer
     ) {
       const name = declaration.name.text;
-      const initializer = compileNode(ts, state, declaration.initializer);
+      const initializer = compileScriptNode(ts, state, declaration.initializer);
       state.declaredVars.add(name);
       return {
         virtual: ts.factory.createVariableStatement(
@@ -96,11 +96,11 @@ function process(
   }
 
   if (ts.isParenthesizedExpression(node)) {
-    return compileNode(ts, state, node.expression);
+    return compileScriptNode(ts, state, node.expression);
   }
 
   if (ts.isReturnStatement(node) && node.expression) {
-    const expression = compileNode(ts, state, node.expression);
+    const expression = compileScriptNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
         expression.virtual as ts.Expression,
@@ -139,7 +139,7 @@ function process(
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    const expression = compileNode(ts, state, node.expression);
+    const expression = compileScriptNode(ts, state, node.expression);
     const name = node.name.text;
     return {
       virtual: ts.factory.createPropertyAccessExpression(
@@ -162,7 +162,7 @@ function process(
       ) {
         return {
           name: property.name.text,
-          value: compileNode(ts, state, property.initializer),
+          value: compileScriptNode(ts, state, property.initializer),
         };
       }
       flagError("Unsupported object property");

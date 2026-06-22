@@ -3,8 +3,8 @@ import type { ClientScript, Splice } from "./parseFile.js";
 import {
   type CompilerState,
   type CompiledNode,
-  compileNode,
-} from "./compileNode.js";
+  compileScriptNode,
+} from "./compileScriptNode.js";
 import { scriptKindFor } from "./scriptKindFor.js";
 import { call, iife } from "./nodeFactory.js";
 
@@ -44,7 +44,7 @@ export function compileScript(
     return unchanged;
   }
 
-  const compiled = compileNode(ts, state, node);
+  const compiled = compileScriptNode(ts, state, node);
 
   const virtual = ts.isBlock(compiled.virtual)
     ? iife(ts, compiled.virtual)
