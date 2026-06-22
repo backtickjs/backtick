@@ -1,5 +1,6 @@
-interface Client<T> {
+export interface Client<T> {
   type: () => T;
+  visit: <U>(visitor: Visitor<U>) => U;
 }
 
 type Spliceable =
@@ -25,6 +26,52 @@ type Lower<T> =
         ? { [Tk in keyof T]: Lower<T[Tk]> }
         : T;
 
+interface Metadata {
+  splices: { [key: string]: unknown };
+  freeVars: string[];
+}
+
+interface Visitor<U> {
+  // e.g. `7`
+  backtick(loc: null, metadata: Metadata, expression: U): U;
+
+  // e.g. ${ 1 }
+  splice(loc: null, key: string, expression: Spliceable): U;
+
+  // null
+  null(loc: null): U;
+
+  // e.g. 3
+  number(loc: null, value: number): U;
+
+  // e.g. true
+  boolean(loc: null, value: boolean): U;
+
+  // e.g. "Hello World"
+  string(loc: null, value: string): U;
+
+  // e.g. i
+  identifier(loc: null, name: string): U;
+
+  // e.g. { }
+  block(loc: null, statements: U[]): U;
+
+  // e.g. i = 0;
+  assignment(loc: null, name: U, expression: U): U;
+
+  // e.g. return i;
+  return(loc: null, expression: U): U;
+
+  // e.g. obj.a
+  propertyAccess(loc: null, expression: U, name: string): U;
+
+  // e.g. [1, 2, 3]
+  array(loc: null, elements: U[]): U;
+
+  // e.g. { a: 4 }
+  object(loc: null, entries: { [key: string]: U }): U;
+}
+
 function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
@@ -39,16 +86,17 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
   );
 }
 
+function create(visit: <U>(visitor: Visitor<U>) => U): Client<unknown> {
+  return { type: () => {}, visit };
+}
+
 const cs = Object.assign(
   (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
     throw new Error(
       "`cs` was not compiled. Is @backtick/core/compiler set up for this project?",
     );
   },
-  {
-    lift,
-    lower,
-  },
+  { lift, lower, create },
 );
 
 export { cs };
