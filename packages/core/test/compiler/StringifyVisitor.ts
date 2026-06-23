@@ -71,6 +71,19 @@ export default class StringifyVisitor implements Visitor<string> {
     return `${name} = ${expression};`;
   }
 
+  if(
+    _loc: null,
+    condition: string,
+    consequent: string,
+    alternate: string | null,
+  ): string {
+    if (alternate != null) {
+      return `if (${condition}) ${consequent} else ${alternate}`;
+    } else {
+      return `if (${condition}) ${consequent}`;
+    }
+  }
+
   return(_loc: null, expression: string): string {
     return `return ${expression};`;
   }

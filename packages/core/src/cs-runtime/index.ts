@@ -4,6 +4,7 @@ export interface Client<T> {
 }
 
 export type Spliceable =
+  | void
   | null
   | number
   | boolean
@@ -58,6 +59,9 @@ export interface Visitor<U> {
 
   // e.g. i = 0;
   assignment(loc: null, name: U, expression: U): U;
+
+  // e.g. if (c) { ... } else { ... }
+  if(loc: null, condition: U, consequent: U, alternate: U | null): U;
 
   // e.g. return i;
   return(loc: null, expression: U): U;

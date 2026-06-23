@@ -4,8 +4,6 @@ import { call, varDecl } from "./nodeFactory.js";
 
 export interface CompilerState {
   splices: { [placeholder: string]: Splice };
-  declaredVars: Set<string>;
-  freeVars: Set<string>;
   origins: Map<ts.Node, ts.Node>; // virtual node -> script node
   errors: Map<ts.Node, string>; // script node -> message
 }
@@ -63,7 +61,6 @@ function _compileScriptNode(
     ) {
       const name = declaration.name.text;
       const initializer = compileScriptNode(ts, state, declaration.initializer);
-      state.declaredVars.add(name);
       return {
         virtual: varDecl(
           ts,
@@ -81,6 +78,39 @@ function _compileScriptNode(
         ]),
       };
     }
+  }
+
+  if (ts.isIfStatement(node)) {
+    const condition = compileScriptNode(ts, state, node.expression);
+    const consequent = compileScriptNode(ts, state, node.thenStatement);
+    const alternate = node.elseStatement
+      ? compileScriptNode(ts, state, node.elseStatement)
+      : null;
+    return {
+      virtual: ts.factory.createIfStatement(
+        condition.virtual as ts.Expression,
+        consequent.virtual as ts.Statement,
+        alternate ? (alternate.virtual as ts.Statement) : undefined,
+      ),
+      runtime: call(ts, "v", "if", [
+        ts.factory.createNull(),
+        condition.runtime as ts.Expression,
+        consequent.runtime as ts.Expression,
+        alternate
+          ? (alternate.runtime as ts.Expression)
+          : ts.factory.createNull(),
+      ]),
+    };
+  }
+
+  if (ts.isExpressionStatement(node)) {
+    const expression = compileScriptNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createExpressionStatement(
+        expression.virtual as ts.Expression,
+      ),
+      runtime: expression.runtime,
+    };
   }
 
   if (ts.isParenthesizedExpression(node)) {
@@ -111,10 +141,6 @@ function _compileScriptNode(
           ts.factory.createIdentifier(node.text),
         ]),
       };
-    }
-
-    if (!state.declaredVars.has(node.text)) {
-      state.freeVars.add(node.text);
     }
 
     return {
@@ -187,6 +213,25 @@ function _compileScriptNode(
   if (ts.isBinaryExpression(node)) {
     const lhs = compileScriptNode(ts, state, node.left);
     const rhs = compileScriptNode(ts, state, node.right);
+
+    if (
+      node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
+      ts.isIdentifier(node.left)
+    ) {
+      return {
+        virtual: ts.factory.createBinaryExpression(
+          lhs.virtual as ts.Expression,
+          ts.SyntaxKind.EqualsToken,
+          rhs.virtual as ts.Expression,
+        ),
+        runtime: call(ts, "v", "assignment", [
+          ts.factory.createNull(),
+          lhs.runtime as ts.Expression,
+          rhs.runtime as ts.Expression,
+        ]),
+      };
+    }
+
     const operator = ts.tokenToString(node.operatorToken.kind);
     if (operator != null) {
       return {
@@ -213,6 +258,18 @@ function _compileScriptNode(
         ts.factory.createNull(),
         ts.factory.createNumericLiteral(node.text),
       ]),
+    };
+  }
+
+  if (
+    node.kind === ts.SyntaxKind.TrueKeyword ||
+    node.kind === ts.SyntaxKind.FalseKeyword
+  ) {
+    const value = node.kind === ts.SyntaxKind.TrueKeyword;
+    const literal = value ? ts.factory.createTrue() : ts.factory.createFalse();
+    return {
+      virtual: literal,
+      runtime: call(ts, "v", "boolean", [ts.factory.createNull(), literal]),
     };
   }
 
