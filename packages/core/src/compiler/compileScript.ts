@@ -46,10 +46,6 @@ export function compileScript(
 
   const compiled = compileScriptNode(ts, state, node);
 
-  const virtual = ts.isBlock(compiled.virtual)
-    ? iife(ts, compiled.virtual)
-    : (compiled.virtual as ts.Expression);
-
   const splices = Object.values(clientScript.splices);
 
   const metadata = ts.factory.createObjectLiteralExpression(
@@ -79,29 +75,35 @@ export function compileScript(
     false,
   );
 
-  const visit = arrow(
-    ts,
-    ["v"],
-    call(ts, "v", "backtick", [
-      ts.factory.createNull(),
-      metadata,
-      compiled.runtime as ts.Expression,
-    ]),
+  const virtual = call(ts, "cs", "lift", [
+    ts.isBlock(compiled.virtual)
+      ? iife(ts, compiled.virtual)
+      : (compiled.virtual as ts.Expression),
+  ]);
+
+  const spliceDecls = splices.map((splice: Splice) =>
+    constDecl(ts, splice.placeholder, splice.sourceNode.expression),
   );
 
-  return {
-    virtual: call(ts, "cs", "lift", [virtual]),
-    runtime: iife(
+  const create = call(ts, "cs", "create", [
+    arrow(
       ts,
-      ts.factory.createBlock(
-        [
-          ...splices.map((splice: Splice) =>
-            constDecl(ts, splice.placeholder, splice.sourceNode.expression),
-          ),
-          ts.factory.createReturnStatement(call(ts, "cs", "create", [visit])),
-        ],
-        true,
-      ),
+      ["v"],
+      call(ts, "v", "backtick", [
+        ts.factory.createNull(),
+        metadata,
+        compiled.runtime as ts.Expression,
+      ]),
     ),
-  };
+  ]);
+
+  const runtime = iife(
+    ts,
+    ts.factory.createBlock(
+      [...spliceDecls, ts.factory.createReturnStatement(create)],
+      true,
+    ),
+  );
+
+  return { virtual, runtime };
 }
