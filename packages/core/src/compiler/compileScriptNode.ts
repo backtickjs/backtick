@@ -4,10 +4,10 @@ import { call, varDecl } from "./nodeFactory.js";
 
 export interface CompilerState {
   splices: { [placeholder: string]: Splice };
-  mappings: Map<ts.Node, CompiledNode>;
-  errors: Map<ts.Node, string>;
   declaredVars: Set<string>;
   freeVars: Set<string>;
+  origins: Map<ts.Node, ts.Node>; // virtual node -> script node
+  errors: Map<ts.Node, string>; // script node -> message
 }
 
 export interface CompiledNode {
@@ -21,7 +21,7 @@ export function compileScriptNode(
   node: ts.Node,
 ): CompiledNode {
   const compiled = _compileScriptNode(ts, state, node);
-  state.mappings.set(node, compiled);
+  state.origins.set(compiled.virtual, node);
   return compiled;
 }
 

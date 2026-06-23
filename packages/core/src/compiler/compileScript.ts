@@ -18,7 +18,7 @@ export function compileScript(
     runtime: clientScript.sourceNode,
   };
 
-  const scriptWithPlaceholders = ts.createSourceFile(
+  const scriptFile = ts.createSourceFile(
     sourceFile.fileName,
     clientScript.textWithPlaceholders,
     ts.ScriptTarget.Latest,
@@ -28,23 +28,23 @@ export function compileScript(
 
   const state: CompilerState = {
     splices: clientScript.splices,
-    mappings: new Map(),
-    errors: new Map(),
     declaredVars: new Set(),
     freeVars: new Set(),
+    origins: new Map(),
+    errors: new Map(),
   };
 
-  const [statement] = scriptWithPlaceholders.statements;
-  let node: ts.Expression | ts.Block;
+  const [statement] = scriptFile.statements;
+  let scriptNode: ts.Expression | ts.Block;
   if (statement && ts.isExpressionStatement(statement)) {
-    node = statement.expression;
+    scriptNode = statement.expression;
   } else if (statement && ts.isBlock(statement)) {
-    node = statement;
+    scriptNode = statement;
   } else {
     return unchanged;
   }
 
-  const compiled = compileScriptNode(ts, state, node);
+  const compiled = compileScriptNode(ts, state, scriptNode);
 
   const splices = Object.values(clientScript.splices);
 
