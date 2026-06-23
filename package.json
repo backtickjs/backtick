@@ -8,9 +8,12 @@
   "scripts": {
     "typecheck": "tsc -b",
     "test": "turbo run test",
-    "test:update": "turbo run test:update"
+    "test:update": "turbo run test:update",
+    "check": "biome check .",
+    "check:fix": "biome check --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.0",
     "@types/node": "^25.9.1",
     "turbo": "^2.8.15",
     "typescript": "^6.0.3"

@@ -62,8 +62,9 @@ export default async function build() {
 
   if (!isDev) {
     const result = await esbuild.build(config);
-    if (metaFile)
+    if (metaFile) {
       fs.writeFileSync("meta.json", JSON.stringify(result.metafile));
+    }
     return;
   }
 

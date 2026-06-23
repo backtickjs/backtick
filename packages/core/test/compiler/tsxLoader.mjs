@@ -7,13 +7,16 @@ import ts from "typescript";
 export async function load(url, context, nextLoad) {
   if (url.endsWith(".tsx")) {
     const fileName = fileURLToPath(url);
-    const { outputText } = ts.transpileModule(await readFile(fileName, "utf8"), {
-      fileName,
-      compilerOptions: {
-        module: ts.ModuleKind.ESNext,
-        target: ts.ScriptTarget.ESNext,
+    const { outputText } = ts.transpileModule(
+      await readFile(fileName, "utf8"),
+      {
+        fileName,
+        compilerOptions: {
+          module: ts.ModuleKind.ESNext,
+          target: ts.ScriptTarget.ESNext,
+        },
       },
-    });
+    );
     return { format: "module", source: outputText, shortCircuit: true };
   }
   return nextLoad(url, context);

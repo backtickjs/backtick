@@ -27,8 +27,12 @@ export function freeVars(
   // `scopes` is the chain of declared-name sets from the current block out to
   // the script root. A reference bound by any of them is not free.
   const reference = (name: string, scopes: Set<string>[]): void => {
-    if (splices[name] != null) return;
-    if (!scopes.some((scope) => scope.has(name))) free.add(name);
+    if (splices[name] != null) {
+      return;
+    }
+    if (!scopes.some((scope) => scope.has(name))) {
+      free.add(name);
+    }
   };
 
   // Names declared directly in a block. Declarations are hoisted, so they are
@@ -49,7 +53,9 @@ export function freeVars(
 
   const walkBlock = (block: ts.Block, scopes: Set<string>[]): void => {
     const inner = [...scopes, declarations(block)];
-    for (const statement of block.statements) walkStatement(statement, inner);
+    for (const statement of block.statements) {
+      walkStatement(statement, inner);
+    }
   };
 
   const walkStatement = (node: ts.Statement, scopes: Set<string>[]): void => {
@@ -65,9 +71,13 @@ export function freeVars(
     } else if (ts.isIfStatement(node)) {
       walkExpression(node.expression, scopes);
       walkStatement(node.thenStatement, scopes);
-      if (node.elseStatement) walkStatement(node.elseStatement, scopes);
+      if (node.elseStatement) {
+        walkStatement(node.elseStatement, scopes);
+      }
     } else if (ts.isReturnStatement(node)) {
-      if (node.expression) walkExpression(node.expression, scopes);
+      if (node.expression) {
+        walkExpression(node.expression, scopes);
+      }
     } else if (ts.isExpressionStatement(node)) {
       walkExpression(node.expression, scopes);
     }
