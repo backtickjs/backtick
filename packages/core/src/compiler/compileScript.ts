@@ -14,8 +14,8 @@ export function compileScript(
   clientScript: ClientScript,
 ): CompiledNode {
   const unchanged = {
-    virtual: clientScript.node,
-    runtime: clientScript.node,
+    virtual: clientScript.sourceNode,
+    runtime: clientScript.sourceNode,
   };
 
   const scriptWithPlaceholders = ts.createSourceFile(
@@ -96,7 +96,7 @@ export function compileScript(
       ts.factory.createBlock(
         [
           ...splices.map((splice: Splice) =>
-            constDecl(ts, splice.placeholder, splice.node.expression),
+            constDecl(ts, splice.placeholder, splice.sourceNode.expression),
           ),
           ts.factory.createReturnStatement(call(ts, "cs", "create", [visit])),
         ],

@@ -104,7 +104,7 @@ function _compileScriptNode(
     const splice = state.splices[node.text];
     if (splice != null) {
       return {
-        virtual: call(ts, "cs", "lower", [splice.node.expression]),
+        virtual: call(ts, "cs", "lower", [splice.sourceNode.expression]),
         runtime: call(ts, "v", "splice", [
           ts.factory.createNull(),
           ts.factory.createStringLiteral(node.text),

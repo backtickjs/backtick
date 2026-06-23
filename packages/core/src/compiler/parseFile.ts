@@ -7,13 +7,13 @@ export interface ParsedFile {
 }
 
 export interface ClientScript {
-  node: ts.TaggedTemplateExpression;
+  sourceNode: ts.TaggedTemplateExpression;
   textWithPlaceholders: string;
   splices: { [placeholder: string]: Splice };
 }
 
 export interface Splice {
-  node: ts.TemplateSpan;
+  sourceNode: ts.TemplateSpan;
   placeholder: string;
   scripts: { [start: number]: ClientScript };
 }
@@ -40,7 +40,7 @@ function getDirectScripts(
   parent: Splice | null,
   sourceFile: ts.SourceFile,
 ): { [start: number]: ClientScript } {
-  const node: ts.Node = parent ? parent.node.expression : sourceFile;
+  const node: ts.Node = parent ? parent.sourceNode.expression : sourceFile;
   const taggedTemplates: ts.TaggedTemplateExpression[] = [];
 
   const visit = (current: ts.Node): void => {
@@ -60,7 +60,7 @@ function getDirectScripts(
 
   taggedTemplates.forEach((taggedTemplate) => {
     const script: ClientScript = {
-      node: taggedTemplate,
+      sourceNode: taggedTemplate,
       textWithPlaceholders: "",
       splices: {},
     };
@@ -84,12 +84,12 @@ function getDirectSplices(
 ): { [placeholder: string]: Splice } {
   const splices: { [placeholder: string]: Splice } = {};
 
-  const template = parent.node.template;
+  const template = parent.sourceNode.template;
   if (ts.isTemplateExpression(template)) {
     template.templateSpans.forEach((span, index) => {
       const placeholder = `$0splice${index}`;
       const splice: Splice = {
-        node: span,
+        sourceNode: span,
         placeholder,
         scripts: {},
       };
