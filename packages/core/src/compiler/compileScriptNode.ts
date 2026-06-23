@@ -35,10 +35,6 @@ function _compileScriptNode(
     runtime: node,
   };
 
-  const flagError = (message: string) => {
-    state.errors.set(node, message);
-  };
-
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
       compileScriptNode(ts, state, statement),
@@ -157,7 +153,7 @@ function _compileScriptNode(
           value: compileScriptNode(ts, state, property.initializer),
         };
       }
-      flagError("Unsupported object property");
+      state.errors.set(node, "Unsupported object property");
       return null;
     });
 
@@ -207,7 +203,7 @@ function _compileScriptNode(
         ]),
       };
     }
-    flagError("Unsupported operator");
+    state.errors.set(node, "Unsupported operator");
   }
 
   if (ts.isNumericLiteral(node)) {
@@ -220,6 +216,6 @@ function _compileScriptNode(
     };
   }
 
-  flagError("Unsupported syntax");
+  state.errors.set(node, "Unsupported syntax");
   return unchanged;
 }
