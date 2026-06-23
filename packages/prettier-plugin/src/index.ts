@@ -1,14 +1,14 @@
-import { parseFile, type ClientScript } from "@backtick/core/compiler";
-import ts from "typescript";
+import { type ClientScript, parseFile } from "@backtick/core/compiler";
 import type { Node } from "estree";
 import {
-  doc as prettierDoc,
   type AstPath,
   type Doc,
   type Options,
   type Printer,
+  doc as prettierDoc,
 } from "prettier";
 import { printers as builtinPrinters } from "prettier/plugins/estree";
+import ts from "typescript";
 
 const estree: Printer = builtinPrinters.estree;
 const { mapDoc } = prettierDoc.utils;

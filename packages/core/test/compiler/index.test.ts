@@ -4,8 +4,8 @@ import { register } from "node:module";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { parseFile } from "../../dist/compiler/parseFile.js";
 import { compileFile } from "../../dist/compiler/compileFile.js";
+import { parseFile } from "../../dist/compiler/parseFile.js";
 import StringifyVisitor from "./StringifyVisitor.ts";
 
 register("./tsxLoader.mjs", import.meta.url);

@@ -1,11 +1,11 @@
 import { virtualizeFile } from "@backtick/core/compiler";
-import {
-  type CodeMapping,
-  type LanguagePlugin,
-  type VirtualCode,
+import type {
+  CodeMapping,
+  LanguagePlugin,
+  VirtualCode,
 } from "@volar/language-core";
 import type * as ts from "typescript";
-import { URI } from "vscode-uri";
+import type { URI } from "vscode-uri";
 
 export default function getBacktickLanguagePlugin(
   ts: typeof import("typescript"),

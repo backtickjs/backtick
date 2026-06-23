@@ -1,13 +1,13 @@
 import type ts from "typescript";
-import type { ClientScript, Splice } from "./parseFile.js";
 import {
-  type CompilerState,
   type CompiledNode,
+  type CompilerState,
   compileScriptNode,
 } from "./compileScriptNode.js";
-import { scriptKindFor } from "./scriptKindFor.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife } from "./nodeFactory.js";
+import type { ClientScript, Splice } from "./parseFile.js";
+import { scriptKindFor } from "./scriptKindFor.js";
 
 export function compileScript(
   ts: typeof import("typescript"),

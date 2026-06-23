@@ -1,1 +1,1 @@
-export { cs, type Client } from "./cs-runtime/index.js";
+export { type Client, cs } from "./cs-runtime/index.js";

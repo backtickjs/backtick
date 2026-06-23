@@ -1,6 +1,6 @@
 import type ts from "typescript";
-import type { Splice } from "./parseFile.js";
 import { call, varDecl } from "./nodeFactory.js";
+import type { Splice } from "./parseFile.js";
 
 export interface CompilerState {
   splices: { [placeholder: string]: Splice };

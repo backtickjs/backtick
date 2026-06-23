@@ -1,10 +1,10 @@
 import * as serverProtocol from "@volar/language-server/protocol";
 import { activateAutoInsertion, createLabsInfo, getTsdk } from "@volar/vscode";
 import {
-  BaseLanguageClient,
+  type BaseLanguageClient,
   LanguageClient,
-  LanguageClientOptions,
-  ServerOptions,
+  type LanguageClientOptions,
+  type ServerOptions,
   TransportKind,
 } from "@volar/vscode/node";
 import * as vscode from "vscode";

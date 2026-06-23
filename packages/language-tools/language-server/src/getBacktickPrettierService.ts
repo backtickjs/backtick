@@ -1,8 +1,8 @@
 import {
-  MessageType,
-  ShowMessageNotification,
   type Connection,
   type LanguageServicePlugin,
+  MessageType,
+  ShowMessageNotification,
 } from "@volar/language-server";
 import { create as createPrettierService } from "volar-service-prettier";
 import { URI } from "vscode-uri";

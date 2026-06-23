@@ -1,7 +1,7 @@
 import type ts from "typescript";
-import type { ClientScript, ParsedFile } from "./parseFile.js";
-import type { CompiledNode } from "./compileScriptNode.js";
 import { compileScript } from "./compileScript.js";
+import type { CompiledNode } from "./compileScriptNode.js";
+import type { ClientScript, ParsedFile } from "./parseFile.js";
 
 export interface CompiledFile {
   virtual: ts.SourceFile;
