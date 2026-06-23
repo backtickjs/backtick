@@ -65,6 +65,9 @@ export interface Visitor<U> {
   // e.g. obj.a
   propertyAccess(loc: null, expression: U, name: string): U;
 
+  // e.g. a + b
+  binop(loc: null, lhs: U, operator: string, rhs: U): U;
+
   // e.g. [1, 2, 3]
   array(loc: null, elements: U[]): U;
 

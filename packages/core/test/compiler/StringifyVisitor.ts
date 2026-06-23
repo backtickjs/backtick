@@ -79,6 +79,10 @@ export default class StringifyVisitor implements Visitor<string> {
     return `${expression}.${name}`;
   }
 
+  binop(_loc: null, lhs: string, operator: string, rhs: string): string {
+    return `${lhs} ${operator} ${rhs}`;
+  }
+
   array(_loc: null, elements: string[]): string {
     return "[" + elements.join(", ") + "]";
   }

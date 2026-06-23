@@ -188,6 +188,28 @@ function _compileScriptNode(
     }
   }
 
+  if (ts.isBinaryExpression(node)) {
+    const lhs = compileScriptNode(ts, state, node.left);
+    const rhs = compileScriptNode(ts, state, node.right);
+    const operator = ts.tokenToString(node.operatorToken.kind);
+    if (operator != null) {
+      return {
+        virtual: ts.factory.createBinaryExpression(
+          lhs.virtual as ts.Expression,
+          node.operatorToken.kind,
+          rhs.virtual as ts.Expression,
+        ),
+        runtime: call(ts, "v", "binop", [
+          ts.factory.createNull(),
+          lhs.runtime as ts.Expression,
+          ts.factory.createStringLiteral(operator),
+          rhs.runtime as ts.Expression,
+        ]),
+      };
+    }
+    flagError("Unsupported operator");
+  }
+
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
