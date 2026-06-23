@@ -33,7 +33,10 @@
     "rules": {
       "preset": "recommended",
       "style": {
-        "useBlockStatements": "error"
+        "useBlockStatements": {
+          "level": "error",
+          "fix": "safe"
+        }
       }
     }
   }
