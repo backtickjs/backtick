@@ -6,6 +6,7 @@ import {
   compileScriptNode,
 } from "./compileScriptNode.js";
 import { scriptKindFor } from "./scriptKindFor.js";
+import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife } from "./nodeFactory.js";
 
 export function compileScript(
@@ -28,8 +29,6 @@ export function compileScript(
 
   const state: CompilerState = {
     splices: clientScript.splices,
-    declaredVars: new Set(),
-    freeVars: new Set(),
     origins: new Map(),
     errors: new Map(),
   };
@@ -48,6 +47,8 @@ export function compileScript(
 
   const splices = Object.values(clientScript.splices);
 
+  const freeVariables = freeVars(ts, clientScript.splices, scriptNode);
+
   const metadata = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
@@ -65,9 +66,7 @@ export function compileScript(
       ts.factory.createPropertyAssignment(
         "freeVars",
         ts.factory.createArrayLiteralExpression(
-          [...state.freeVars].map((name) =>
-            ts.factory.createStringLiteral(name),
-          ),
+          freeVariables.map((name) => ts.factory.createStringLiteral(name)),
           false,
         ),
       ),
