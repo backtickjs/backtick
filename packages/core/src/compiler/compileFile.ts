@@ -1,6 +1,6 @@
 import type ts from "typescript";
+import type { CompiledNode } from "./compileNode.js";
 import { compileScript } from "./compileScript.js";
-import type { CompiledNode } from "./compileScriptNode.js";
 import { flattenScripts } from "./flattenScripts.js";
 import type { ParsedFile } from "./parseFile.js";
 
