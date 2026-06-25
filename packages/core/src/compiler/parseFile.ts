@@ -65,8 +65,12 @@ function getDirectScripts(
   taggedTemplates.forEach((taggedTemplate) => {
     const start = taggedTemplate.getStart(sourceFile);
     const splices = getDirectSplices(ts, taggedTemplate, sourceFile);
-    const { text: textWithPlaceholders, resolveLocation } =
-      toTextWithPlaceholders(ts, taggedTemplate, sourceFile, splices);
+    const { textWithPlaceholders, segments } = toTextWithPlaceholders(
+      ts,
+      taggedTemplate,
+      sourceFile,
+      splices,
+    );
     const fileWithPlaceholders = ts.createSourceFile(
       sourceFile.fileName,
       textWithPlaceholders,
@@ -74,8 +78,14 @@ function getDirectScripts(
       false,
       scriptKindFor(ts, sourceFile.fileName),
     );
-    const mapPosition = (node: ts.Node): SourceLocation =>
-      resolveLocation(node.getStart(fileWithPlaceholders), node.getEnd());
+    const mapPosition = (node: ts.Node): SourceLocation => ({
+      start: sourceFile.getLineAndCharacterOfPosition(
+        toSourceOffset(segments, node.getStart(fileWithPlaceholders)),
+      ),
+      end: sourceFile.getLineAndCharacterOfPosition(
+        toSourceOffset(segments, node.getEnd()),
+      ),
+    });
     scripts[start] = {
       sourceNode: taggedTemplate,
       textWithPlaceholders,
@@ -112,11 +122,6 @@ function getDirectSplices(
   return splices;
 }
 
-interface TextWithPlaceholders {
-  text: string;
-  resolveLocation: (start: number, end: number) => SourceLocation;
-}
-
 // A run of the stitched text that maps back to the original source. Verbatim
 // chunks are copied char-for-char, so they map linearly; placeholder tokens
 // collapse a whole `${...}` span, so every offset inside one maps to the span's
@@ -124,41 +129,8 @@ interface TextWithPlaceholders {
 interface Segment {
   placeholderStart: number;
   length: number;
-  originalStart: number;
+  sourceStart: number;
   verbatim: boolean;
-}
-
-function makeResolveLocation(
-  sourceFile: ts.SourceFile,
-  segments: Segment[],
-  fallback: number,
-): (start: number, end: number) => SourceLocation {
-  const toOriginalOffset = (pos: number): number => {
-    for (const segment of segments) {
-      if (
-        segment.verbatim &&
-        pos >= segment.placeholderStart &&
-        pos <= segment.placeholderStart + segment.length
-      ) {
-        return segment.originalStart + (pos - segment.placeholderStart);
-      }
-    }
-    for (const segment of segments) {
-      if (
-        !segment.verbatim &&
-        pos >= segment.placeholderStart &&
-        pos <= segment.placeholderStart + segment.length
-      ) {
-        return segment.originalStart;
-      }
-    }
-    return fallback;
-  };
-
-  return (start, end) => ({
-    start: sourceFile.getLineAndCharacterOfPosition(toOriginalOffset(start)),
-    end: sourceFile.getLineAndCharacterOfPosition(toOriginalOffset(end)),
-  });
 }
 
 /**
@@ -173,22 +145,25 @@ function toTextWithPlaceholders(
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
   splices: { [placeholder: string]: Splice },
-): TextWithPlaceholders {
-  const text = sourceFile.text;
+): {
+  textWithPlaceholders: string;
+  segments: Segment[];
+} {
+  const sourceText = sourceFile.text;
   const template = taggedTemplate.template;
 
   const start = template.getStart(sourceFile) + 1; // past `
   const end = template.getEnd() - 1; // before `
 
-  let body = "";
+  let textWithPlaceholders = "";
   const segments: Segment[] = [];
 
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
-    body = text.slice(start, end);
+    textWithPlaceholders = sourceText.slice(start, end);
     segments.push({
       placeholderStart: 0,
-      length: body.length,
-      originalStart: start,
+      length: textWithPlaceholders.length,
+      sourceStart: start,
       verbatim: true,
     });
   } else {
@@ -198,36 +173,56 @@ function toTextWithPlaceholders(
       const placeholder = `$0splice${index}`;
       const splice = splices[placeholder];
       const dollarBrace = span.expression.getFullStart() - 2; // before ${
-      const chunk = text.slice(chunkStart, dollarBrace);
+      const chunk = sourceText.slice(chunkStart, dollarBrace);
       segments.push({
-        placeholderStart: body.length,
+        placeholderStart: textWithPlaceholders.length,
         length: chunk.length,
-        originalStart: chunkStart,
+        sourceStart: chunkStart,
         verbatim: true,
       });
-      body += chunk;
+      textWithPlaceholders += chunk;
       segments.push({
-        placeholderStart: body.length,
+        placeholderStart: textWithPlaceholders.length,
         length: splice.placeholder.length,
-        originalStart: dollarBrace,
+        sourceStart: dollarBrace,
         verbatim: false,
       });
-      body += splice.placeholder;
+      textWithPlaceholders += splice.placeholder;
       chunkStart = span.literal.getStart(sourceFile) + 1; // past }
     });
 
-    const tail = text.slice(chunkStart, end);
+    const tail = sourceText.slice(chunkStart, end);
     segments.push({
-      placeholderStart: body.length,
+      placeholderStart: textWithPlaceholders.length,
       length: tail.length,
-      originalStart: chunkStart,
+      sourceStart: chunkStart,
       verbatim: true,
     });
-    body += tail;
+    textWithPlaceholders += tail;
   }
 
-  return {
-    text: body,
-    resolveLocation: makeResolveLocation(sourceFile, segments, end),
-  };
+  return { textWithPlaceholders, segments };
+}
+
+function toSourceOffset(segments: Segment[], pos: number): number {
+  for (const segment of segments) {
+    if (
+      segment.verbatim &&
+      pos >= segment.placeholderStart &&
+      pos <= segment.placeholderStart + segment.length
+    ) {
+      return segment.sourceStart + (pos - segment.placeholderStart);
+    }
+  }
+  for (const segment of segments) {
+    if (
+      !segment.verbatim &&
+      pos >= segment.placeholderStart &&
+      pos <= segment.placeholderStart + segment.length
+    ) {
+      return segment.sourceStart;
+    }
+  }
+  const last = segments[segments.length - 1];
+  return last.sourceStart + last.length;
 }
