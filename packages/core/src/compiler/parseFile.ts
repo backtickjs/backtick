@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import type { SourceLocation } from "../cs-runtime/index.js";
+import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
 import { scriptKindFor } from "./scriptKindFor.js";
 
 export interface ParsedFile {
@@ -13,6 +13,8 @@ export interface ClientScript {
   fileWithPlaceholders: ts.SourceFile;
   // Maps a node in `fileWithPlaceholders` to its location in the source file.
   toSourceLocation: (node: ts.Node) => SourceLocation;
+  // Maps a node in `fileWithPlaceholders` to its offset range in the source file.
+  toSourceRange: (node: ts.Node) => SourceRange;
   splices: { [placeholder: string]: Splice };
 }
 
@@ -78,20 +80,24 @@ function getDirectScripts(
       false,
       scriptKindFor(ts, sourceFile.fileName),
     );
-    const toSourceLocation = (node: ts.Node): SourceLocation => ({
-      path: sourceFile.fileName,
-      start: sourceFile.getLineAndCharacterOfPosition(
-        toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
-      ),
-      end: sourceFile.getLineAndCharacterOfPosition(
-        toSourceOffset(mappings, node.getEnd()),
-      ),
+    const toSourceRange = (node: ts.Node): SourceRange => ({
+      start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
+      end: toSourceOffset(mappings, node.getEnd()),
     });
+    const toSourceLocation = (node: ts.Node): SourceLocation => {
+      const { start, end } = toSourceRange(node);
+      return {
+        path: sourceFile.fileName,
+        start: sourceFile.getLineAndCharacterOfPosition(start),
+        end: sourceFile.getLineAndCharacterOfPosition(end),
+      };
+    };
     scripts[start] = {
       sourceNode: taggedTemplate,
       textWithPlaceholders,
       fileWithPlaceholders,
       toSourceLocation,
+      toSourceRange,
       splices,
     };
   });

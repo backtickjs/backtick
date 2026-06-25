@@ -33,6 +33,11 @@ export interface Metadata {
   freeVars: string[];
 }
 
+export interface SourceRange {
+  start: number;
+  end: number;
+}
+
 export type SourceLocation = {
   path: string;
   start: { line: number; character: number };
