@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import type { SourceLocation } from "../cs-runtime/index.js";
 import { scriptKindFor } from "./scriptKindFor.js";
 
 export interface ParsedFile {
@@ -8,8 +9,12 @@ export interface ParsedFile {
 
 export interface ClientScript {
   sourceNode: ts.TaggedTemplateExpression;
+  sourceFile: ts.SourceFile;
   textWithPlaceholders: string;
   fileWithPlaceholders: ts.SourceFile;
+  // Maps a node in `fileWithPlaceholders` to a 1-indexed `SourceLocation` in
+  // the original `sourceFile`.
+  mapPosition: (node: ts.Node) => SourceLocation;
   splices: { [placeholder: string]: Splice };
 }
 
@@ -62,12 +67,8 @@ function getDirectScripts(
   taggedTemplates.forEach((taggedTemplate) => {
     const start = taggedTemplate.getStart(sourceFile);
     const splices = getDirectSplices(ts, taggedTemplate, sourceFile);
-    const textWithPlaceholders = toTextWithPlaceholders(
-      ts,
-      taggedTemplate,
-      sourceFile,
-      splices,
-    );
+    const { text: textWithPlaceholders, resolveLocation } =
+      toTextWithPlaceholders(ts, taggedTemplate, sourceFile, splices);
     const fileWithPlaceholders = ts.createSourceFile(
       sourceFile.fileName,
       textWithPlaceholders,
@@ -75,10 +76,14 @@ function getDirectScripts(
       false,
       scriptKindFor(ts, sourceFile.fileName),
     );
+    const mapPosition = (node: ts.Node): SourceLocation =>
+      resolveLocation(node.getStart(fileWithPlaceholders), node.getEnd());
     scripts[start] = {
       sourceNode: taggedTemplate,
+      sourceFile,
       textWithPlaceholders,
       fileWithPlaceholders,
+      mapPosition,
       splices,
     };
   });
@@ -110,25 +115,98 @@ function getDirectSplices(
   return splices;
 }
 
+interface TextWithPlaceholders {
+  text: string;
+  // Maps a start/end offset in the stitched text to a 1-indexed
+  // `SourceLocation` in the original `sourceFile`.
+  resolveLocation: (start: number, end: number) => SourceLocation;
+}
+
+// A run of the stitched text that maps back to the original source. Verbatim
+// chunks are copied char-for-char, so they map linearly; placeholder tokens
+// collapse a whole `${...}` span, so every offset inside one maps to the span's
+// start in the original.
+interface Segment {
+  placeholderStart: number;
+  length: number;
+  originalStart: number;
+  verbatim: boolean;
+}
+
+function makeResolveLocation(
+  sourceFile: ts.SourceFile,
+  segments: Segment[],
+  fallback: number,
+): (start: number, end: number) => SourceLocation {
+  const toOriginalOffset = (pos: number): number => {
+    for (const segment of segments) {
+      if (
+        segment.verbatim &&
+        pos >= segment.placeholderStart &&
+        pos <= segment.placeholderStart + segment.length
+      ) {
+        return segment.originalStart + (pos - segment.placeholderStart);
+      }
+    }
+    for (const segment of segments) {
+      if (
+        !segment.verbatim &&
+        pos >= segment.placeholderStart &&
+        pos <= segment.placeholderStart + segment.length
+      ) {
+        return segment.originalStart;
+      }
+    }
+    return fallback;
+  };
+
+  const toPosition = (pos: number): { line: number; character: number } => {
+    const { line, character } = sourceFile.getLineAndCharacterOfPosition(
+      toOriginalOffset(pos),
+    );
+    // `getLineAndCharacterOfPosition` is 0-based; report 1-based positions.
+    return { line: line + 1, character: character + 1 };
+  };
+
+  return (start, end) => ({
+    start: toPosition(start),
+    end: toPosition(end),
+  });
+}
+
 /**
  * Stitch the template's literal chunks back together with each splice swapped
  * for its placeholder. The raw source text between the backticks/splices is
- * copied verbatim so formatting sees exactly what the author wrote.
+ * copied verbatim so formatting sees exactly what the author wrote. Also build
+ * a map from offsets in the stitched text back to the original source so the
+ * compiler can report locations in the file the author actually wrote.
  */
 function toTextWithPlaceholders(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
   splices: { [placeholder: string]: Splice },
-): string {
+): TextWithPlaceholders {
   const text = sourceFile.text;
   const template = taggedTemplate.template;
 
   const start = template.getStart(sourceFile) + 1; // past `
   const end = template.getEnd() - 1; // before `
 
+  const segments: Segment[] = [];
+
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
-    return text.slice(start, end);
+    const body = text.slice(start, end);
+    segments.push({
+      placeholderStart: 0,
+      length: body.length,
+      originalStart: start,
+      verbatim: true,
+    });
+    return {
+      text: body,
+      resolveLocation: makeResolveLocation(sourceFile, segments, end),
+    };
   }
 
   let body = "";
@@ -138,9 +216,35 @@ function toTextWithPlaceholders(
     const placeholder = `$0splice${index}`;
     const splice = splices[placeholder];
     const dollarBrace = span.expression.getFullStart() - 2; // before ${
-    body += text.slice(chunkStart, dollarBrace) + splice.placeholder;
+    const chunk = text.slice(chunkStart, dollarBrace);
+    segments.push({
+      placeholderStart: body.length,
+      length: chunk.length,
+      originalStart: chunkStart,
+      verbatim: true,
+    });
+    body += chunk;
+    segments.push({
+      placeholderStart: body.length,
+      length: splice.placeholder.length,
+      originalStart: dollarBrace,
+      verbatim: false,
+    });
+    body += splice.placeholder;
     chunkStart = span.literal.getStart(sourceFile) + 1; // past }
   });
 
-  return body + text.slice(chunkStart, end);
+  const tail = text.slice(chunkStart, end);
+  segments.push({
+    placeholderStart: body.length,
+    length: tail.length,
+    originalStart: chunkStart,
+    verbatim: true,
+  });
+  body += tail;
+
+  return {
+    text: body,
+    resolveLocation: makeResolveLocation(sourceFile, segments, end),
+  };
 }

@@ -17,11 +17,10 @@ export function compileScript(
     runtime: clientScript.sourceNode,
   };
 
-  const { fileWithPlaceholders } = clientScript;
+  const { fileWithPlaceholders, mapPosition } = clientScript;
 
   const state: CompilerState = {
-    sourceFile: fileWithPlaceholders,
-    splices: clientScript.splices,
+    script: clientScript,
     origins: new Map(),
     errors: new Map(),
   };
@@ -82,7 +81,7 @@ export function compileScript(
       ts,
       ["v"],
       call(ts, "v", "backtick", [
-        sourceLoc(ts, fileWithPlaceholders, scriptNode),
+        sourceLoc(ts, mapPosition(scriptNode)),
         metadata,
         compiled.runtime as ts.Expression,
       ]),

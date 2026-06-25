@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import type { SourceLocation } from "../cs-runtime/index.js";
 
 /** <receiver>.<method>(...args) */
 export function call(
@@ -86,36 +87,33 @@ export function constDecl(
   return varDecl(ts, ts.NodeFlags.Const, name, initializer);
 }
 
-/** { start: { line, character }, end: { line, character } } */
+/** Builds the object literal for a `SourceLocation`. */
 export function sourceLoc(
   ts: typeof import("typescript"),
-  sourceFile: ts.SourceFile,
-  node: ts.Node,
+  location: SourceLocation,
 ): ts.ObjectLiteralExpression {
-  const position = (pos: number): ts.ObjectLiteralExpression => {
-    const { line, character } = sourceFile.getLineAndCharacterOfPosition(pos);
-    return ts.factory.createObjectLiteralExpression(
+  const position = (point: {
+    line: number;
+    character: number;
+  }): ts.ObjectLiteralExpression =>
+    ts.factory.createObjectLiteralExpression(
       [
         ts.factory.createPropertyAssignment(
           "line",
-          ts.factory.createNumericLiteral(line),
+          ts.factory.createNumericLiteral(point.line),
         ),
         ts.factory.createPropertyAssignment(
           "character",
-          ts.factory.createNumericLiteral(character),
+          ts.factory.createNumericLiteral(point.character),
         ),
       ],
       false,
     );
-  };
 
   return ts.factory.createObjectLiteralExpression(
     [
-      ts.factory.createPropertyAssignment(
-        "start",
-        position(node.getStart(sourceFile)),
-      ),
-      ts.factory.createPropertyAssignment("end", position(node.getEnd())),
+      ts.factory.createPropertyAssignment("start", position(location.start)),
+      ts.factory.createPropertyAssignment("end", position(location.end)),
     ],
     false,
   );

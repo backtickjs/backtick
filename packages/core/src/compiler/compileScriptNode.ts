@@ -1,10 +1,9 @@
 import type ts from "typescript";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
-import type { Splice } from "./parseFile.js";
+import type { ClientScript } from "./parseFile.js";
 
 export interface CompilerState {
-  sourceFile: ts.SourceFile; // the script file the nodes belong to
-  splices: { [placeholder: string]: Splice };
+  script: ClientScript;
   origins: Map<ts.Node, ts.Node>; // virtual node -> script node
   errors: Map<ts.Node, string>; // script node -> message
 }
@@ -34,6 +33,9 @@ function _compileScriptNode(
     runtime: node,
   };
 
+  const loc = (target: ts.Node): ts.Expression =>
+    sourceLoc(ts, state.script.mapPosition(target));
+
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
       compileScriptNode(ts, state, statement),
@@ -44,7 +46,7 @@ function _compileScriptNode(
         true,
       ),
       runtime: call(ts, "v", "block", [
-        sourceLoc(ts, state.sourceFile, node),
+        loc(node),
         ts.factory.createArrayLiteralExpression(
           statements.map((statement) => statement.runtime as ts.Expression),
           false,
@@ -70,9 +72,9 @@ function _compileScriptNode(
           initializer.virtual as ts.Expression,
         ),
         runtime: call(ts, "v", "assignment", [
-          sourceLoc(ts, state.sourceFile, node),
+          loc(node),
           call(ts, "v", "identifier", [
-            sourceLoc(ts, state.sourceFile, declaration.name),
+            loc(declaration.name),
             ts.factory.createStringLiteral(name),
           ]),
           initializer.runtime as ts.Expression,
@@ -94,7 +96,7 @@ function _compileScriptNode(
         alternate ? (alternate.virtual as ts.Statement) : undefined,
       ),
       runtime: call(ts, "v", "if", [
-        sourceLoc(ts, state.sourceFile, node),
+        loc(node),
         condition.runtime as ts.Expression,
         consequent.runtime as ts.Expression,
         alternate
@@ -125,19 +127,19 @@ function _compileScriptNode(
         expression.virtual as ts.Expression,
       ),
       runtime: call(ts, "v", "return", [
-        sourceLoc(ts, state.sourceFile, node),
+        loc(node),
         expression.runtime as ts.Expression,
       ]),
     };
   }
 
   if (ts.isIdentifier(node)) {
-    const splice = state.splices[node.text];
+    const splice = state.script.splices[node.text];
     if (splice != null) {
       return {
         virtual: call(ts, "cs", "lower", [splice.sourceNode.expression]),
         runtime: call(ts, "v", "splice", [
-          sourceLoc(ts, state.sourceFile, node),
+          loc(node),
           ts.factory.createStringLiteral(node.text),
           ts.factory.createIdentifier(node.text),
         ]),
@@ -147,7 +149,7 @@ function _compileScriptNode(
     return {
       virtual: ts.factory.createIdentifier(`$0var_${node.text}`),
       runtime: call(ts, "v", "identifier", [
-        sourceLoc(ts, state.sourceFile, node),
+        loc(node),
         ts.factory.createStringLiteral(node.text),
       ]),
     };
@@ -162,7 +164,7 @@ function _compileScriptNode(
         name,
       ),
       runtime: call(ts, "v", "propertyAccess", [
-        sourceLoc(ts, state.sourceFile, node),
+        loc(node),
         expression.runtime as ts.Expression,
         ts.factory.createStringLiteral(name),
       ]),
@@ -196,7 +198,7 @@ function _compileScriptNode(
           false,
         ),
         runtime: call(ts, "v", "object", [
-          sourceLoc(ts, state.sourceFile, node),
+          loc(node),
           ts.factory.createObjectLiteralExpression(
             properties.map((property) =>
               ts.factory.createPropertyAssignment(
@@ -226,7 +228,7 @@ function _compileScriptNode(
           rhs.virtual as ts.Expression,
         ),
         runtime: call(ts, "v", "assignment", [
-          sourceLoc(ts, state.sourceFile, node),
+          loc(node),
           lhs.runtime as ts.Expression,
           rhs.runtime as ts.Expression,
         ]),
@@ -242,7 +244,7 @@ function _compileScriptNode(
           rhs.virtual as ts.Expression,
         ),
         runtime: call(ts, "v", "binop", [
-          sourceLoc(ts, state.sourceFile, node),
+          loc(node),
           lhs.runtime as ts.Expression,
           ts.factory.createStringLiteral(operator),
           rhs.runtime as ts.Expression,
@@ -256,7 +258,7 @@ function _compileScriptNode(
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
       runtime: call(ts, "v", "number", [
-        sourceLoc(ts, state.sourceFile, node),
+        loc(node),
         ts.factory.createNumericLiteral(node.text),
       ]),
     };
@@ -270,10 +272,7 @@ function _compileScriptNode(
     const literal = value ? ts.factory.createTrue() : ts.factory.createFalse();
     return {
       virtual: literal,
-      runtime: call(ts, "v", "boolean", [
-        sourceLoc(ts, state.sourceFile, node),
-        literal,
-      ]),
+      runtime: call(ts, "v", "boolean", [loc(node), literal]),
     };
   }
 
