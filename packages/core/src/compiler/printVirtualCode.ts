@@ -1,6 +1,6 @@
 import type { CodeInformation, CodeMapping } from "@volar/language-core";
 import type ts from "typescript";
-import type { CompiledNode } from "./compileScriptNode.js";
+import type { CompiledFile } from "./compileFile.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 
 // Mapped regions map verbatim back to a real source range, so every feature is
@@ -34,9 +34,8 @@ interface InternalTs {
   createTextWriter(newLine: string): EmitTextWriter;
 }
 
-type Compiled = Map<ts.Node, CompiledNode>;
 interface Rendered {
-  code: string;
+  virtualCode: string;
   mappings: CodeMapping[];
 }
 
@@ -69,14 +68,14 @@ class Builder {
         generatedOffsets: m.generatedOffsets.map((o) => o + base),
       });
     }
-    this.code += part.code;
+    this.code += part.virtualCode;
   }
 }
 
-export function printVirtual(
+export function printVirtualCode(
   ts: typeof import("typescript"),
   parsedFile: ParsedFile,
-  compiled: Compiled,
+  compiledFile: CompiledFile,
 ): Rendered {
   const { sourceFile } = parsedFile;
   const out = new Builder();
@@ -85,26 +84,12 @@ export function printVirtual(
   for (const script of sorted(sourceFile, parsedFile.scripts)) {
     const start = script.sourceNode.getStart(sourceFile);
     out.verbatim(sourceFile.text, cursor, start - cursor);
-    out.append(renderScript(ts, sourceFile, compiled, script));
+    out.append(renderScript(ts, sourceFile, compiledFile, script));
     cursor = script.sourceNode.getEnd();
   }
   out.verbatim(sourceFile.text, cursor, sourceFile.text.length - cursor);
 
-  return { code: out.code, mappings: out.mappings };
-}
-
-// The runtime output needs no mappings, so we let the printer rewrite the file
-// in place via `substituteNode` rather than reassembling it by hand.
-export function printRuntime(
-  ts: typeof import("typescript"),
-  parsedFile: ParsedFile,
-  compiled: Compiled,
-): string {
-  const printer = ts.createPrinter(
-    {},
-    { substituteNode: (_hint, node) => compiled.get(node)?.runtime ?? node },
-  );
-  return printer.printFile(parsedFile.sourceFile);
+  return { virtualCode: out.code, mappings: out.mappings };
 }
 
 // Renders one script: print its compiled body, then replace each `$0splice<n>`
@@ -112,32 +97,32 @@ export function printRuntime(
 function renderScript(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
-  compiled: Compiled,
+  compiledFile: CompiledFile,
   script: ClientScript,
 ): Rendered {
-  const node = compiled.get(script.sourceNode)?.virtual;
+  const node = compiledFile.scripts.get(script.sourceNode)?.virtual;
   if (!node) {
-    return { code: "", mappings: [] };
+    return { virtualCode: "", mappings: [] };
   }
 
   const body = printBody(ts, node, script.fileWithPlaceholders);
   const out = new Builder();
 
   let cursor = 0;
-  for (const match of body.code.matchAll(/\$0splice\d+/g)) {
+  for (const match of body.virtualCode.matchAll(/\$0splice\d+/g)) {
     const at = match.index;
     if (at === undefined) {
       continue;
     }
     appendBody(out, body, cursor, at);
     out.append(
-      renderSplice(ts, sourceFile, compiled, script.splices[match[0]]),
+      renderSplice(ts, sourceFile, compiledFile, script.splices[match[0]]),
     );
     cursor = at + match[0].length;
   }
-  appendBody(out, body, cursor, body.code.length);
+  appendBody(out, body, cursor, body.virtualCode.length);
 
-  return { code: out.code, mappings: out.mappings };
+  return { virtualCode: out.code, mappings: out.mappings };
 }
 
 // Renders a spliced host expression as verbatim source text, recursing into any
@@ -145,7 +130,7 @@ function renderScript(
 function renderSplice(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
-  compiled: Compiled,
+  compiledFile: CompiledFile,
   splice: Splice,
 ): Rendered {
   const out = new Builder();
@@ -156,12 +141,12 @@ function renderSplice(
   for (const nested of sorted(sourceFile, splice.scripts)) {
     const start = nested.sourceNode.getStart(sourceFile);
     out.verbatim(sourceFile.text, cursor, start - cursor);
-    out.append(renderScript(ts, sourceFile, compiled, nested));
+    out.append(renderScript(ts, sourceFile, compiledFile, nested));
     cursor = nested.sourceNode.getEnd();
   }
   out.verbatim(sourceFile.text, cursor, end - cursor);
 
-  return { code: out.code, mappings: out.mappings };
+  return { virtualCode: out.code, mappings: out.mappings };
 }
 
 // Prints a compiled body node, collecting a mapping for each stamped identifier.
@@ -213,7 +198,7 @@ function printBody(
     writer,
   );
 
-  return { code: writer.getText(), mappings };
+  return { virtualCode: writer.getText(), mappings };
 }
 
 // Appends `body.code[from, to)` and shifts the body mappings within that range
@@ -234,7 +219,7 @@ function appendBody(
       out.mappings.push({ ...m, generatedOffsets: [offset + shift] });
     }
   }
-  out.code += body.code.slice(from, to);
+  out.code += body.virtualCode.slice(from, to);
 }
 
 // Client scripts, ordered by their position in the source file.

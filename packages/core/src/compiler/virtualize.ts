@@ -1,7 +1,7 @@
 import type { CodeMapping } from "@volar/language-core";
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
-import { printVirtual } from "./printers.js";
+import { printVirtualCode } from "./printVirtualCode.js";
 
 export interface Virtualized {
   virtualCode: string;
@@ -15,9 +15,13 @@ export function virtualize(
 ): Virtualized {
   const parsedFile = parseFile(ts, filePath, sourceText);
 
-  const { scripts } = compileFile(ts, parsedFile);
+  const compiledFile = compileFile(ts, parsedFile);
 
-  const { code: virtualCode, mappings } = printVirtual(ts, parsedFile, scripts);
+  const { virtualCode, mappings } = printVirtualCode(
+    ts,
+    parsedFile,
+    compiledFile,
+  );
 
   return { virtualCode, mappings };
 }

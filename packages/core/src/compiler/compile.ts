@@ -1,6 +1,6 @@
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
-import { printRuntime } from "./printers.js";
+import { printRuntimeCode } from "./printRuntimeCode.js";
 
 export interface Compiled {
   runtimeCode: string;
@@ -13,9 +13,9 @@ export function compile(
 ): Compiled {
   const parsedFile = parseFile(ts, filePath, sourceText);
 
-  const { scripts } = compileFile(ts, parsedFile);
+  const compiledFile = compileFile(ts, parsedFile);
 
-  const runtimeCode = printRuntime(ts, parsedFile, scripts);
+  const runtimeCode = printRuntimeCode(ts, parsedFile, compiledFile);
 
   return { runtimeCode };
 }
