@@ -12,7 +12,7 @@ export interface CompiledNode {
   runtime: ts.Node;
 }
 
-export function compileScriptNode(
+export function compileNode(
   ts: typeof import("typescript"),
   state: CompilerState,
   node: ts.Node,
@@ -39,7 +39,7 @@ export function compileScriptNode(
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
-      compileScriptNode(ts, state, statement),
+      compileNode(ts, state, statement),
     );
     return {
       virtual: ts.factory.createBlock(
@@ -64,7 +64,7 @@ export function compileScriptNode(
       declaration.initializer
     ) {
       const name = declaration.name.text;
-      const initializer = compileScriptNode(ts, state, declaration.initializer);
+      const initializer = compileNode(ts, state, declaration.initializer);
       return {
         virtual: varDecl(
           ts,
@@ -85,10 +85,10 @@ export function compileScriptNode(
   }
 
   if (ts.isIfStatement(node)) {
-    const condition = compileScriptNode(ts, state, node.expression);
-    const consequent = compileScriptNode(ts, state, node.thenStatement);
+    const condition = compileNode(ts, state, node.expression);
+    const consequent = compileNode(ts, state, node.thenStatement);
     const alternate = node.elseStatement
-      ? compileScriptNode(ts, state, node.elseStatement)
+      ? compileNode(ts, state, node.elseStatement)
       : null;
     return {
       virtual: ts.factory.createIfStatement(
@@ -108,7 +108,7 @@ export function compileScriptNode(
   }
 
   if (ts.isExpressionStatement(node)) {
-    const expression = compileScriptNode(ts, state, node.expression);
+    const expression = compileNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createExpressionStatement(
         expression.virtual as ts.Expression,
@@ -118,11 +118,11 @@ export function compileScriptNode(
   }
 
   if (ts.isParenthesizedExpression(node)) {
-    return compileScriptNode(ts, state, node.expression);
+    return compileNode(ts, state, node.expression);
   }
 
   if (ts.isReturnStatement(node) && node.expression) {
-    const expression = compileScriptNode(ts, state, node.expression);
+    const expression = compileNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
         expression.virtual as ts.Expression,
@@ -162,7 +162,7 @@ export function compileScriptNode(
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    const expression = compileScriptNode(ts, state, node.expression);
+    const expression = compileNode(ts, state, node.expression);
     const name = node.name.text;
     return {
       virtual: ts.factory.createPropertyAccessExpression(
@@ -185,7 +185,7 @@ export function compileScriptNode(
       ) {
         return {
           name: property.name.text,
-          value: compileScriptNode(ts, state, property.initializer),
+          value: compileNode(ts, state, property.initializer),
         };
       }
       state.errors.set(node, "Unsupported object property");
@@ -220,8 +220,8 @@ export function compileScriptNode(
   }
 
   if (ts.isBinaryExpression(node)) {
-    const lhs = compileScriptNode(ts, state, node.left);
-    const rhs = compileScriptNode(ts, state, node.right);
+    const lhs = compileNode(ts, state, node.left);
+    const rhs = compileNode(ts, state, node.right);
 
     if (
       node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&

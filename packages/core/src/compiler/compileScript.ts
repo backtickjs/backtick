@@ -2,8 +2,8 @@ import type ts from "typescript";
 import {
   type CompiledNode,
   type CompilerState,
-  compileScriptNode,
-} from "./compileScriptNode.js";
+  compileNode,
+} from "./compileNode.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
@@ -34,7 +34,7 @@ export function compileScript(
     return unchanged;
   }
 
-  const compiled = compileScriptNode(ts, state, scriptNode);
+  const compiled = compileNode(ts, state, scriptNode);
 
   const splices = Object.values(clientScript.splices);
 
