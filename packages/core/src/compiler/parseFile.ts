@@ -65,7 +65,7 @@ function getDirectScripts(
   taggedTemplates.forEach((taggedTemplate) => {
     const start = taggedTemplate.getStart(sourceFile);
     const splices = getDirectSplices(ts, taggedTemplate, sourceFile);
-    const { textWithPlaceholders, segments } = toTextWithPlaceholders(
+    const { textWithPlaceholders, mappings } = toTextWithPlaceholders(
       ts,
       taggedTemplate,
       sourceFile,
@@ -80,10 +80,10 @@ function getDirectScripts(
     );
     const mapPosition = (node: ts.Node): SourceLocation => ({
       start: sourceFile.getLineAndCharacterOfPosition(
-        toSourceOffset(segments, node.getStart(fileWithPlaceholders)),
+        toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
       ),
       end: sourceFile.getLineAndCharacterOfPosition(
-        toSourceOffset(segments, node.getEnd()),
+        toSourceOffset(mappings, node.getEnd()),
       ),
     });
     scripts[start] = {
@@ -122,24 +122,13 @@ function getDirectSplices(
   return splices;
 }
 
-// A run of the stitched text that maps back to the original source. Verbatim
-// chunks are copied char-for-char, so they map linearly; placeholder tokens
-// collapse a whole `${...}` span, so every offset inside one maps to the span's
-// start in the original.
-interface Segment {
+interface OffsetMapping {
   placeholderStart: number;
   length: number;
   sourceStart: number;
   verbatim: boolean;
 }
 
-/**
- * Stitch the template's literal chunks back together with each splice swapped
- * for its placeholder. The raw source text between the backticks/splices is
- * copied verbatim so formatting sees exactly what the author wrote. Also build
- * a map from offsets in the stitched text back to the original source so the
- * compiler can report locations in the file the author actually wrote.
- */
 function toTextWithPlaceholders(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
@@ -147,7 +136,7 @@ function toTextWithPlaceholders(
   splices: { [placeholder: string]: Splice },
 ): {
   textWithPlaceholders: string;
-  segments: Segment[];
+  mappings: OffsetMapping[];
 } {
   const sourceText = sourceFile.text;
   const template = taggedTemplate.template;
@@ -156,11 +145,11 @@ function toTextWithPlaceholders(
   const end = template.getEnd() - 1; // before `
 
   let textWithPlaceholders = "";
-  const segments: Segment[] = [];
+  const mappings: OffsetMapping[] = [];
 
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
     textWithPlaceholders = sourceText.slice(start, end);
-    segments.push({
+    mappings.push({
       placeholderStart: 0,
       length: textWithPlaceholders.length,
       sourceStart: start,
@@ -174,14 +163,14 @@ function toTextWithPlaceholders(
       const splice = splices[placeholder];
       const dollarBrace = span.expression.getFullStart() - 2; // before ${
       const chunk = sourceText.slice(chunkStart, dollarBrace);
-      segments.push({
+      mappings.push({
         placeholderStart: textWithPlaceholders.length,
         length: chunk.length,
         sourceStart: chunkStart,
         verbatim: true,
       });
       textWithPlaceholders += chunk;
-      segments.push({
+      mappings.push({
         placeholderStart: textWithPlaceholders.length,
         length: splice.placeholder.length,
         sourceStart: dollarBrace,
@@ -192,7 +181,7 @@ function toTextWithPlaceholders(
     });
 
     const tail = sourceText.slice(chunkStart, end);
-    segments.push({
+    mappings.push({
       placeholderStart: textWithPlaceholders.length,
       length: tail.length,
       sourceStart: chunkStart,
@@ -201,28 +190,28 @@ function toTextWithPlaceholders(
     textWithPlaceholders += tail;
   }
 
-  return { textWithPlaceholders, segments };
+  return { textWithPlaceholders, mappings };
 }
 
-function toSourceOffset(segments: Segment[], pos: number): number {
-  for (const segment of segments) {
+function toSourceOffset(mappings: OffsetMapping[], pos: number): number {
+  for (const mapping of mappings) {
     if (
-      segment.verbatim &&
-      pos >= segment.placeholderStart &&
-      pos <= segment.placeholderStart + segment.length
+      mapping.verbatim &&
+      pos >= mapping.placeholderStart &&
+      pos <= mapping.placeholderStart + mapping.length
     ) {
-      return segment.sourceStart + (pos - segment.placeholderStart);
+      return mapping.sourceStart + (pos - mapping.placeholderStart);
     }
   }
-  for (const segment of segments) {
+  for (const mapping of mappings) {
     if (
-      !segment.verbatim &&
-      pos >= segment.placeholderStart &&
-      pos <= segment.placeholderStart + segment.length
+      !mapping.verbatim &&
+      pos >= mapping.placeholderStart &&
+      pos <= mapping.placeholderStart + mapping.length
     ) {
-      return segment.sourceStart;
+      return mapping.sourceStart;
     }
   }
-  const last = segments[segments.length - 1];
+  const last = mappings[mappings.length - 1];
   return last.sourceStart + last.length;
 }
