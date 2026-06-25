@@ -1,4 +1,4 @@
-import { cs } from '@backtick/core';
+import { cs } from "@backtick/core";
 
 const script = cs.lift((() => {
     const $0var_x = 0;

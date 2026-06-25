@@ -28,28 +28,33 @@ export default function getBacktickLanguagePlugin(
     typescript: {
       extraFileExtensions: [],
       getServiceScript(root) {
+        // TypeScript reads the compiled embedded code, not the source root.
+        const code = root.embeddedCodes?.[0];
+        if (!code) {
+          return;
+        }
         switch (root.languageId) {
           case "javascript":
             return {
-              code: root,
+              code,
               extension: ".js",
               scriptKind: 1 satisfies ts.ScriptKind.JS,
             };
           case "javascriptreact":
             return {
-              code: root,
+              code,
               extension: ".jsx",
               scriptKind: 2 satisfies ts.ScriptKind.JSX,
             };
           case "typescript":
             return {
-              code: root,
+              code,
               extension: ".ts",
               scriptKind: 3 satisfies ts.ScriptKind.TS,
             };
           case "typescriptreact":
             return {
-              code: root,
+              code,
               extension: ".tsx",
               scriptKind: 4 satisfies ts.ScriptKind.TSX,
             };
@@ -66,6 +71,7 @@ export class BacktickVirtualCode implements VirtualCode {
   languageId: string;
   mappings: CodeMapping[];
   snapshot: ts.IScriptSnapshot;
+  embeddedCodes: VirtualCode[];
 
   constructor(
     ts: typeof import("typescript"),
@@ -78,11 +84,32 @@ export class BacktickVirtualCode implements VirtualCode {
     const { virtualCode, mappings } = virtualize(ts, fileName, sourceText);
 
     this.languageId = languageId;
-    this.snapshot = {
-      getText: (start, end) => virtualCode.substring(start, end),
-      getLength: () => virtualCode.length,
-      getChangeRange: () => undefined,
-    };
-    this.mappings = mappings;
+
+    // The root mirrors the original source 1:1. Prettier (with the Backtick
+    // plugin) formats this, so on save the file stays as Backtick source
+    this.snapshot = snapshot;
+    this.mappings = [
+      {
+        sourceOffsets: [0],
+        generatedOffsets: [0],
+        lengths: [sourceText.length],
+        data: { format: true },
+      },
+    ];
+
+    // The compiled TypeScript lives in an embedded child that the TS service
+    // reads for IntelliSense
+    this.embeddedCodes = [
+      {
+        id: "compiled",
+        languageId,
+        snapshot: {
+          getText: (start, end) => virtualCode.substring(start, end),
+          getLength: () => virtualCode.length,
+          getChangeRange: () => undefined,
+        },
+        mappings,
+      },
+    ];
   }
 }

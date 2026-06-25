@@ -1,6 +1,6 @@
 import { cs } from "@backtick/core";
 const obj = (() => {
-    return cs.create(v => v.backtick({ path: "object.tsx", start: { line: 3, character: 16 }, end: { line: 3, character: 24 } }, { splices: {}, freeVars: [] }, v.object({ path: "object.tsx", start: { line: 3, character: 17 }, end: { line: 3, character: 23 } }, { a: v.number({ path: "object.tsx", start: { line: 3, character: 21 }, end: { line: 3, character: 22 } }, 4) })));
+    return cs.create(v => v.backtick({ path: "object.tsx", start: { line: 3, character: 16 }, end: { line: 3, character: 26 } }, { splices: {}, freeVars: [] }, v.object({ path: "object.tsx", start: { line: 3, character: 17 }, end: { line: 3, character: 25 } }, { a: v.number({ path: "object.tsx", start: { line: 3, character: 22 }, end: { line: 3, character: 23 } }, 4) })));
 })();
 const script = (() => {
     const $0splice0 = obj;

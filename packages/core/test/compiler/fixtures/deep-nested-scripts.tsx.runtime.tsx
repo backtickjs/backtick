@@ -3,7 +3,7 @@ function add(lhs: Client<number>, rhs: Client<number>): Client<number> {
     return (() => {
         const $0splice0 = lhs;
         const $0splice1 = rhs;
-        return cs.create(v => v.backtick({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 15 }, end: { line: 4, character: 30 } }, { splices: { $0splice0: $0splice0, $0splice1: $0splice1 }, freeVars: [] }, v.binop({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 15 }, end: { line: 4, character: 30 } }, v.splice({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 15 }, end: { line: 4, character: 21 } }, "$0splice0", $0splice0), "+", v.splice({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 24 }, end: { line: 4, character: 30 } }, "$0splice1", $0splice1))));
+        return cs.create(v => v.backtick({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 13 }, end: { line: 4, character: 28 } }, { splices: { $0splice0: $0splice0, $0splice1: $0splice1 }, freeVars: [] }, v.binop({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 13 }, end: { line: 4, character: 28 } }, v.splice({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 13 }, end: { line: 4, character: 19 } }, "$0splice0", $0splice0), "+", v.splice({ path: "deep-nested-scripts.tsx", start: { line: 4, character: 22 }, end: { line: 4, character: 28 } }, "$0splice1", $0splice1))));
     })();
 }
 const script = (() => {

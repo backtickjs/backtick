@@ -1,4 +1,4 @@
-import { cs } from '@backtick/core';
+import { cs } from "@backtick/core";
 
 const obj = cs.lift({ a: 4 });
 const script = cs.lift((() => {
