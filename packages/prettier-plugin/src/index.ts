@@ -1,4 +1,8 @@
-import { type ClientScript, parseFile } from "@backtick/core/compiler";
+import {
+  type ClientScript,
+  flattenScripts,
+  parseFile,
+} from "@backtick/core/compiler";
 import type { Node } from "estree";
 import {
   type AstPath,
@@ -105,31 +109,20 @@ function scriptsByStart(options: Options): Map<number, ClientScript> {
     return cache.byStart;
   }
 
-  const { scripts } = parseFile(
+  const { sourceFile, scripts } = parseFile(
     ts,
     filepathOf(options) ?? "input.tsx",
     originalText,
   );
 
   const byStart = new Map<number, ClientScript>();
-  collectByStart(scripts, byStart);
+  for (const script of flattenScripts(scripts)) {
+    const start = script.sourceNode.getStart(sourceFile);
+    byStart.set(start, script);
+  }
 
   cache = { text: originalText, byStart };
   return byStart;
-}
-
-// Walk the nested script/splice tree, keying every script (root and nested)
-// by its start position so `embed` can find it regardless of nesting depth.
-function collectByStart(
-  scripts: { [start: number]: ClientScript },
-  into: Map<number, ClientScript>,
-): void {
-  for (const [start, script] of Object.entries(scripts)) {
-    into.set(Number(start), script);
-    for (const splice of Object.values(script.splices)) {
-      collectByStart(splice.scripts, into);
-    }
-  }
 }
 
 function filepathOf(options: Options): string | undefined {

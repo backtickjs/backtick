@@ -81,7 +81,7 @@ export function printVirtualCode(
   const out = new Builder();
 
   let cursor = 0;
-  for (const script of sorted(sourceFile, parsedFile.scripts)) {
+  for (const script of parsedFile.scripts) {
     const start = script.sourceNode.getStart(sourceFile);
     out.verbatim(sourceFile.text, cursor, start - cursor);
     out.append(renderScript(ts, sourceFile, compiledFile, script));
@@ -138,7 +138,7 @@ function renderSplice(
   const end = expression.getEnd();
 
   let cursor = expression.getStart(sourceFile);
-  for (const nested of sorted(sourceFile, splice.scripts)) {
+  for (const nested of splice.scripts) {
     const start = nested.sourceNode.getStart(sourceFile);
     out.verbatim(sourceFile.text, cursor, start - cursor);
     out.append(renderScript(ts, sourceFile, compiledFile, nested));
@@ -220,15 +220,4 @@ function appendBody(
     }
   }
   out.code += body.virtualCode.slice(from, to);
-}
-
-// Client scripts, ordered by their position in the source file.
-function sorted(
-  sourceFile: ts.SourceFile,
-  scripts: { [start: number]: ClientScript },
-): ClientScript[] {
-  return Object.values(scripts).sort(
-    (a, b) =>
-      a.sourceNode.getStart(sourceFile) - b.sourceNode.getStart(sourceFile),
-  );
 }

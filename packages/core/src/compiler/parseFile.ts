@@ -4,24 +4,23 @@ import { scriptKindFor } from "./scriptKindFor.js";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
-  scripts: { [start: number]: ClientScript };
+  scripts: ClientScript[];
 }
 
 export interface ClientScript {
   sourceNode: ts.TaggedTemplateExpression;
   textWithPlaceholders: string;
   fileWithPlaceholders: ts.SourceFile;
-  // Maps a node in `fileWithPlaceholders` to its location in the source file.
-  toSourceLocation: (node: ts.Node) => SourceLocation;
-  // Maps a node in `fileWithPlaceholders` to its offset range in the source file.
-  toSourceRange: (node: ts.Node) => SourceRange;
   splices: { [placeholder: string]: Splice };
+
+  toSourceLocation: (node: ts.Node) => SourceLocation;
+  toSourceRange: (node: ts.Node) => SourceRange;
 }
 
 export interface Splice {
   sourceNode: ts.TemplateSpan;
   placeholder: string;
-  scripts: { [start: number]: ClientScript };
+  scripts: ClientScript[];
 }
 
 export function parseFile(
@@ -45,7 +44,7 @@ function getDirectScripts(
   ts: typeof import("typescript"),
   parent: Splice | null,
   sourceFile: ts.SourceFile,
-): { [start: number]: ClientScript } {
+): ClientScript[] {
   const node: ts.Node = parent ? parent.sourceNode.expression : sourceFile;
   const taggedTemplates: ts.TaggedTemplateExpression[] = [];
 
@@ -62,10 +61,9 @@ function getDirectScripts(
   };
   visit(node);
 
-  const scripts: { [start: number]: ClientScript } = {};
+  const scripts: ClientScript[] = [];
 
   taggedTemplates.forEach((taggedTemplate) => {
-    const start = taggedTemplate.getStart(sourceFile);
     const splices = getDirectSplices(ts, taggedTemplate, sourceFile);
     const { textWithPlaceholders, mappings } = toTextWithPlaceholders(
       ts,
@@ -92,14 +90,14 @@ function getDirectScripts(
         end: sourceFile.getLineAndCharacterOfPosition(end),
       };
     };
-    scripts[start] = {
+    scripts.push({
       sourceNode: taggedTemplate,
       textWithPlaceholders,
       fileWithPlaceholders,
       toSourceLocation,
       toSourceRange,
       splices,
-    };
+    });
   });
 
   return scripts;
@@ -119,7 +117,7 @@ function getDirectSplices(
       const splice: Splice = {
         sourceNode: span,
         placeholder,
-        scripts: {},
+        scripts: [],
       };
       splices[placeholder] = splice;
       splice.scripts = getDirectScripts(ts, splice, sourceFile);
