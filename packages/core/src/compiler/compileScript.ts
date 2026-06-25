@@ -7,11 +7,9 @@ import {
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
-import { scriptKindFor } from "./scriptKindFor.js";
 
 export function compileScript(
   ts: typeof import("typescript"),
-  sourceFile: ts.SourceFile,
   clientScript: ClientScript,
 ): CompiledNode {
   const unchanged = {
@@ -19,13 +17,7 @@ export function compileScript(
     runtime: clientScript.sourceNode,
   };
 
-  const scriptFile = ts.createSourceFile(
-    sourceFile.fileName,
-    clientScript.textWithPlaceholders,
-    ts.ScriptTarget.Latest,
-    false,
-    scriptKindFor(ts, sourceFile.fileName),
-  );
+  const { fileWithPlaceholders } = clientScript;
 
   const state: CompilerState = {
     splices: clientScript.splices,
@@ -33,7 +25,7 @@ export function compileScript(
     errors: new Map(),
   };
 
-  const [statement] = scriptFile.statements;
+  const [statement] = fileWithPlaceholders.statements;
   let scriptNode: ts.Expression | ts.Block;
   if (statement && ts.isExpressionStatement(statement)) {
     scriptNode = statement.expression;

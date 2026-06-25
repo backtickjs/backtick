@@ -16,7 +16,7 @@ export function compileFile(
 
   const mappings = new Map<ts.Node, CompiledNode>();
   for (const script of eachScript(scripts)) {
-    mappings.set(script.sourceNode, compileScript(ts, sourceFile, script));
+    mappings.set(script.sourceNode, compileScript(ts, script));
   }
 
   return {

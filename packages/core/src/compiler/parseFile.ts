@@ -9,6 +9,7 @@ export interface ParsedFile {
 export interface ClientScript {
   sourceNode: ts.TaggedTemplateExpression;
   textWithPlaceholders: string;
+  fileWithPlaceholders: ts.SourceFile;
   splices: { [placeholder: string]: Splice };
 }
 
@@ -59,19 +60,27 @@ function getDirectScripts(
   const scripts: { [start: number]: ClientScript } = {};
 
   taggedTemplates.forEach((taggedTemplate) => {
-    const script: ClientScript = {
-      sourceNode: taggedTemplate,
-      textWithPlaceholders: "",
-      splices: {},
-    };
-    script.splices = getDirectSplices(ts, script, sourceFile);
-    script.textWithPlaceholders = toTextWithPlaceholder(
+    const start = taggedTemplate.getStart(sourceFile);
+    const splices = getDirectSplices(ts, taggedTemplate, sourceFile);
+    const textWithPlaceholders = toTextWithPlaceholders(
       ts,
       taggedTemplate,
       sourceFile,
-      script,
+      splices,
     );
-    scripts[taggedTemplate.getStart(sourceFile)] = script;
+    const fileWithPlaceholders = ts.createSourceFile(
+      sourceFile.fileName,
+      textWithPlaceholders,
+      ts.ScriptTarget.Latest,
+      false,
+      scriptKindFor(ts, sourceFile.fileName),
+    );
+    scripts[start] = {
+      sourceNode: taggedTemplate,
+      textWithPlaceholders,
+      fileWithPlaceholders,
+      splices,
+    };
   });
 
   return scripts;
@@ -79,12 +88,12 @@ function getDirectScripts(
 
 function getDirectSplices(
   ts: typeof import("typescript"),
-  parent: ClientScript,
+  taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
 ): { [placeholder: string]: Splice } {
   const splices: { [placeholder: string]: Splice } = {};
 
-  const template = parent.sourceNode.template;
+  const template = taggedTemplate.template;
   if (ts.isTemplateExpression(template)) {
     template.templateSpans.forEach((span, index) => {
       const placeholder = `$0splice${index}`;
@@ -106,11 +115,11 @@ function getDirectSplices(
  * for its placeholder. The raw source text between the backticks/splices is
  * copied verbatim so formatting sees exactly what the author wrote.
  */
-function toTextWithPlaceholder(
+function toTextWithPlaceholders(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
-  script: ClientScript,
+  splices: { [placeholder: string]: Splice },
 ): string {
   const text = sourceFile.text;
   const template = taggedTemplate.template;
@@ -127,7 +136,7 @@ function toTextWithPlaceholder(
 
   template.templateSpans.forEach((span, index) => {
     const placeholder = `$0splice${index}`;
-    const splice = script.splices[placeholder];
+    const splice = splices[placeholder];
     const dollarBrace = span.expression.getFullStart() - 2; // before ${
     body += text.slice(chunkStart, dollarBrace) + splice.placeholder;
     chunkStart = span.literal.getStart(sourceFile) + 1; // past }
