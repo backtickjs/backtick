@@ -24,9 +24,6 @@
     "test": "node --test \"test/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\""
   },
-  "dependencies": {
-    "@volar/language-core": "^2.4.28"
-  },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },

@@ -97,8 +97,6 @@ export class BacktickVirtualCode implements VirtualCode {
       },
     ];
 
-    // The compiled TypeScript lives in an embedded child that the TS service
-    // reads for IntelliSense
     this.embeddedCodes = [
       {
         id: "compiled",
@@ -108,7 +106,19 @@ export class BacktickVirtualCode implements VirtualCode {
           getLength: () => virtualCode.length,
           getChangeRange: () => undefined,
         },
-        mappings,
+        mappings: mappings.map((mapping) => ({
+          ...mapping,
+          // Every feature is enabled except `format`, which is routed to the
+          // root so the file isn't overwritten with compiled output on save.
+          data: {
+            completion: true,
+            format: false,
+            navigation: true,
+            semantic: true,
+            structure: true,
+            verification: true,
+          },
+        })),
       },
     ];
   }

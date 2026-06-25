@@ -22,10 +22,6 @@ importers:
         version: 6.0.3
 
   packages/core:
-    dependencies:
-      '@volar/language-core':
-        specifier: ^2.4.28
-        version: 2.4.28
     devDependencies:
       typescript:
         specifier: ^6.0.3

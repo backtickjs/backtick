@@ -1,11 +1,10 @@
-import type { CodeMapping } from "@volar/language-core";
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
-import { printVirtualCode } from "./printVirtualCode.js";
+import { printVirtualCode, type SourceMapping } from "./printVirtualCode.js";
 
 export interface Virtualized {
   virtualCode: string;
-  mappings: CodeMapping[];
+  mappings: SourceMapping[];
 }
 
 export function virtualize(

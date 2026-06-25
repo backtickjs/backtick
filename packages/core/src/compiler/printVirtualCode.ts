@@ -1,18 +1,13 @@
-import type { CodeInformation, CodeMapping } from "@volar/language-core";
 import type ts from "typescript";
 import type { CompiledFile } from "./compileFile.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 
-// Mapped regions map verbatim back to a real source range, so every feature is
-// enabled across the board.
-const CODE_INFORMATION: CodeInformation = {
-  completion: true,
-  format: false,
-  navigation: true,
-  semantic: true,
-  structure: true,
-  verification: true,
-};
+export interface SourceMapping {
+  sourceOffsets: number[];
+  generatedOffsets: number[];
+  lengths: number[];
+  generatedLengths: number[];
+}
 
 // `writeNode` and `createTextWriter` are internal to TypeScript but available at
 // runtime; we use them to observe where each node lands in the printed body.
@@ -34,15 +29,15 @@ interface InternalTs {
   createTextWriter(newLine: string): EmitTextWriter;
 }
 
-interface Rendered {
+interface VirtualizedFile {
   virtualCode: string;
-  mappings: CodeMapping[];
+  mappings: SourceMapping[];
 }
 
 // Accumulates assembled virtual code and the mappings back into the source.
 class Builder {
   code = "";
-  mappings: CodeMapping[] = [];
+  mappings: SourceMapping[] = [];
 
   // Append source text `[start, start + length)` and map it 1:1 back to source.
   verbatim(sourceText: string, start: number, length: number): void {
@@ -54,13 +49,12 @@ class Builder {
       generatedOffsets: [this.code.length],
       lengths: [length],
       generatedLengths: [length],
-      data: CODE_INFORMATION,
     });
     this.code += sourceText.slice(start, start + length);
   }
 
   // Append an already-rendered fragment, shifting its mappings into place.
-  append(part: Rendered): void {
+  append(part: VirtualizedFile): void {
     const base = this.code.length;
     for (const m of part.mappings) {
       this.mappings.push({
@@ -76,7 +70,7 @@ export function printVirtualCode(
   ts: typeof import("typescript"),
   parsedFile: ParsedFile,
   compiledFile: CompiledFile,
-): Rendered {
+): VirtualizedFile {
   const { sourceFile } = parsedFile;
   const out = new Builder();
 
@@ -99,7 +93,7 @@ function renderScript(
   sourceFile: ts.SourceFile,
   compiledFile: CompiledFile,
   script: ClientScript,
-): Rendered {
+): VirtualizedFile {
   const node = compiledFile.scripts.get(script.sourceNode)?.virtual;
   if (!node) {
     return { virtualCode: "", mappings: [] };
@@ -132,7 +126,7 @@ function renderSplice(
   sourceFile: ts.SourceFile,
   compiledFile: CompiledFile,
   splice: Splice,
-): Rendered {
+): VirtualizedFile {
   const out = new Builder();
   const expression = splice.sourceNode.expression;
   const end = expression.getEnd();
@@ -156,8 +150,8 @@ function printBody(
   ts: typeof import("typescript"),
   node: ts.Node,
   fileWithPlaceholders: ts.SourceFile,
-): Rendered {
-  const mappings: CodeMapping[] = [];
+): VirtualizedFile {
+  const mappings: SourceMapping[] = [];
   const writer = (ts as unknown as InternalTs).createTextWriter("\n");
 
   const printer = ts.createPrinter(
@@ -185,7 +179,6 @@ function printBody(
           generatedOffsets: [start],
           lengths: [range.end - range.pos],
           generatedLengths: [end - start],
-          data: CODE_INFORMATION,
         });
       },
     },
@@ -205,7 +198,7 @@ function printBody(
 // to their new home in the output.
 function appendBody(
   out: Builder,
-  body: Rendered,
+  body: VirtualizedFile,
   from: number,
   to: number,
 ): void {
