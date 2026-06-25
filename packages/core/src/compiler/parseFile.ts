@@ -24,15 +24,15 @@ export interface Splice {
 
 export function parseFile(
   ts: typeof import("typescript"),
-  fileName: string,
+  filePath: string,
   sourceText: string,
 ): ParsedFile {
   const sourceFile = ts.createSourceFile(
-    fileName,
+    filePath,
     sourceText,
     ts.ScriptTarget.Latest,
     false,
-    scriptKindFor(ts, fileName),
+    scriptKindFor(ts, filePath),
   );
 
   const scripts = getDirectScripts(ts, null, sourceFile);
@@ -79,6 +79,7 @@ function getDirectScripts(
       scriptKindFor(ts, sourceFile.fileName),
     );
     const toSourceLocation = (node: ts.Node): SourceLocation => ({
+      path: sourceFile.fileName,
       start: sourceFile.getLineAndCharacterOfPosition(
         toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
       ),

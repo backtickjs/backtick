@@ -34,6 +34,7 @@ export interface Metadata {
 }
 
 export type SourceLocation = {
+  path: string;
   start: { line: number; character: number };
   end: { line: number; character: number };
 };

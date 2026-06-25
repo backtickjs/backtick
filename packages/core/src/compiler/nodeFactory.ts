@@ -91,28 +91,44 @@ export function sourceLoc(
   ts: typeof import("typescript"),
   location: SourceLocation,
 ): ts.ObjectLiteralExpression {
-  const position = (point: {
-    line: number;
-    character: number;
-  }): ts.ObjectLiteralExpression =>
-    ts.factory.createObjectLiteralExpression(
-      [
-        ts.factory.createPropertyAssignment(
-          "line",
-          ts.factory.createNumericLiteral(point.line + 1),
-        ),
-        ts.factory.createPropertyAssignment(
-          "character",
-          ts.factory.createNumericLiteral(point.character + 1),
-        ),
-      ],
-      false,
-    );
-
   return ts.factory.createObjectLiteralExpression(
     [
-      ts.factory.createPropertyAssignment("start", position(location.start)),
-      ts.factory.createPropertyAssignment("end", position(location.end)),
+      ts.factory.createPropertyAssignment(
+        "path",
+        ts.factory.createStringLiteral(location.path),
+      ),
+      ts.factory.createPropertyAssignment(
+        "start",
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "line",
+              ts.factory.createNumericLiteral(location.start.line + 1),
+            ),
+            ts.factory.createPropertyAssignment(
+              "character",
+              ts.factory.createNumericLiteral(location.start.character + 1),
+            ),
+          ],
+          false,
+        ),
+      ),
+      ts.factory.createPropertyAssignment(
+        "end",
+        ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "line",
+              ts.factory.createNumericLiteral(location.end.line + 1),
+            ),
+            ts.factory.createPropertyAssignment(
+              "character",
+              ts.factory.createNumericLiteral(location.end.character + 1),
+            ),
+          ],
+          false,
+        ),
+      ),
     ],
     false,
   );
