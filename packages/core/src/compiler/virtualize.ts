@@ -1,7 +1,7 @@
 import type { CodeMapping } from "@volar/language-core";
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
-import { printVirtual } from "./printVirtual.js";
+import { printVirtual } from "./printers.js";
 
 export interface Virtualized {
   virtualCode: string;

@@ -1,6 +1,6 @@
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
-import { printRuntime } from "./printVirtual.js";
+import { printRuntime } from "./printers.js";
 
 export interface Compiled {
   runtimeCode: string;
