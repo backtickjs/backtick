@@ -12,8 +12,7 @@ export interface ClientScript {
   sourceFile: ts.SourceFile;
   textWithPlaceholders: string;
   fileWithPlaceholders: ts.SourceFile;
-  // Maps a node in `fileWithPlaceholders` to a 1-indexed `SourceLocation` in
-  // the original `sourceFile`.
+  // Maps a node in `fileWithPlaceholders` to a `SourceLocation` in the `sourceFile`.
   mapPosition: (node: ts.Node) => SourceLocation;
   splices: { [placeholder: string]: Splice };
 }
@@ -117,7 +116,6 @@ function getDirectSplices(
 
 interface TextWithPlaceholders {
   text: string;
-  // Maps a start/end offset in the stitched text to a 1-indexed
   // `SourceLocation` in the original `sourceFile`.
   resolveLocation: (start: number, end: number) => SourceLocation;
 }
@@ -160,17 +158,9 @@ function makeResolveLocation(
     return fallback;
   };
 
-  const toPosition = (pos: number): { line: number; character: number } => {
-    const { line, character } = sourceFile.getLineAndCharacterOfPosition(
-      toOriginalOffset(pos),
-    );
-    // `getLineAndCharacterOfPosition` is 0-based; report 1-based positions.
-    return { line: line + 1, character: character + 1 };
-  };
-
   return (start, end) => ({
-    start: toPosition(start),
-    end: toPosition(end),
+    start: sourceFile.getLineAndCharacterOfPosition(toOriginalOffset(start)),
+    end: sourceFile.getLineAndCharacterOfPosition(toOriginalOffset(end)),
   });
 }
 

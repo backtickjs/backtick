@@ -87,7 +87,6 @@ export function constDecl(
   return varDecl(ts, ts.NodeFlags.Const, name, initializer);
 }
 
-/** Builds the object literal for a `SourceLocation`. */
 export function sourceLoc(
   ts: typeof import("typescript"),
   location: SourceLocation,
@@ -100,11 +99,11 @@ export function sourceLoc(
       [
         ts.factory.createPropertyAssignment(
           "line",
-          ts.factory.createNumericLiteral(point.line),
+          ts.factory.createNumericLiteral(point.line + 1),
         ),
         ts.factory.createPropertyAssignment(
           "character",
-          ts.factory.createNumericLiteral(point.character),
+          ts.factory.createNumericLiteral(point.character + 1),
         ),
       ],
       false,
