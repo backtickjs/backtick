@@ -4,25 +4,19 @@ import type { CompiledNode } from "./compileScriptNode.js";
 import type { ClientScript, ParsedFile } from "./parseFile.js";
 
 export interface CompiledFile {
-  virtual: ts.SourceFile;
-  runtime: ts.SourceFile;
+  scripts: Map<ts.TaggedTemplateExpression, CompiledNode>;
 }
 
 export function compileFile(
   ts: typeof import("typescript"),
   parsedFile: ParsedFile,
 ): CompiledFile {
-  const { sourceFile, scripts } = parsedFile;
-
-  const mappings = new Map<ts.Node, CompiledNode>();
-  for (const script of eachScript(scripts)) {
-    mappings.set(script.sourceNode, compileScript(ts, script));
+  const scripts = new Map<ts.TaggedTemplateExpression, CompiledNode>();
+  for (const script of eachScript(parsedFile.scripts)) {
+    scripts.set(script.sourceNode, compileScript(ts, script));
   }
 
-  return {
-    virtual: transform(ts, sourceFile, mappings, "virtual"),
-    runtime: transform(ts, sourceFile, mappings, "runtime"),
-  };
+  return { scripts };
 }
 
 /** Yields every client script in the tree, descending through splices. */
@@ -35,25 +29,4 @@ function* eachScript(scripts: {
       yield* eachScript(splice.scripts);
     }
   }
-}
-
-function transform(
-  ts: typeof import("typescript"),
-  sourceFile: ts.SourceFile,
-  mappings: Map<ts.Node, CompiledNode>,
-  kind: keyof CompiledNode,
-): ts.SourceFile {
-  const transformer =
-    (context: ts.TransformationContext) => (root: ts.SourceFile) => {
-      const visit = (node: ts.Node): ts.Node => {
-        const replacement = mappings.get(node)?.[kind];
-        if (replacement && replacement !== node) {
-          return ts.visitEachChild(replacement, visit, context);
-        }
-        return ts.visitEachChild(node, visit, context);
-      };
-      return ts.visitNode(root, visit) as ts.SourceFile;
-    };
-
-  return ts.transform(sourceFile, [transformer]).transformed[0];
 }

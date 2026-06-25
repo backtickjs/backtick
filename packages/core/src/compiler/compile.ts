@@ -1,6 +1,7 @@
 import type { CodeMapping } from "@volar/language-core";
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
+import { printRuntime, printVirtual } from "./printVirtual.js";
 
 export interface Compiled {
   virtualCode: string;
@@ -15,13 +16,11 @@ export function compile(
 ): Compiled {
   const parsedFile = parseFile(ts, filePath, sourceText);
 
-  const compiledFile = compileFile(ts, parsedFile);
+  const { scripts } = compileFile(ts, parsedFile);
 
-  const printer = ts.createPrinter();
+  const { code: virtualCode, mappings } = printVirtual(ts, parsedFile, scripts);
 
-  return {
-    virtualCode: printer.printFile(compiledFile.virtual),
-    runtimeCode: printer.printFile(compiledFile.runtime),
-    mappings: [],
-  };
+  const runtimeCode = printRuntime(ts, parsedFile, scripts);
+
+  return { virtualCode, runtimeCode, mappings };
 }

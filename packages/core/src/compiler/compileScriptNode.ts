@@ -17,24 +17,6 @@ export function compileScriptNode(
   state: CompilerState,
   node: ts.Node,
 ): CompiledNode {
-  const compiled = _compileScriptNode(ts, state, node);
-  const sourceRange = state.script.toSourceRange(node);
-
-  // HACK - Stamp the virtual node with its source range. The printer
-  // reads this back to emit Volar code mappings
-  ts.setSourceMapRange(compiled.virtual, {
-    pos: sourceRange.start,
-    end: sourceRange.end,
-  });
-
-  return compiled;
-}
-
-function _compileScriptNode(
-  ts: typeof import("typescript"),
-  state: CompilerState,
-  node: ts.Node,
-): CompiledNode {
   const unchanged = {
     virtual: node,
     runtime: node,
@@ -42,6 +24,18 @@ function _compileScriptNode(
 
   const loc = (target: ts.Node): ts.Expression =>
     sourceLoc(ts, state.script.toSourceLocation(target));
+
+  // Stamps `virtual` with the source range of `target`. The printer reads this
+  // back (via `ts.getSourceMapRange`) to emit a Volar code mapping. We stamp the
+  // renamed `$0var_*` identifiers, whose generated text differs from source so
+  // they can't be mapped verbatim by the assembler. Everything else (splices,
+  // surrounding code) is spliced in as verbatim source text and mapped 1:1
+  // there, so it needs no stamp.
+  const mapTo = <T extends ts.Node>(virtual: T, target: ts.Node): T => {
+    const range = state.script.toSourceRange(target);
+    ts.setSourceMapRange(virtual, { pos: range.start, end: range.end });
+    return virtual;
+  };
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
@@ -143,8 +137,13 @@ function _compileScriptNode(
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
+      // Keep the `$0splice<n>` placeholder; the assembler replaces it with the
+      // host expression's verbatim source text (mapped 1:1), recursing into any
+      // nested `cs` scripts it contains.
       return {
-        virtual: call(ts, "cs", "lower", [splice.sourceNode.expression]),
+        virtual: call(ts, "cs", "lower", [
+          ts.factory.createIdentifier(node.text),
+        ]),
         runtime: call(ts, "v", "splice", [
           loc(node),
           ts.factory.createStringLiteral(node.text),
@@ -154,7 +153,7 @@ function _compileScriptNode(
     }
 
     return {
-      virtual: ts.factory.createIdentifier(`$0var_${node.text}`),
+      virtual: mapTo(ts.factory.createIdentifier(`$0var_${node.text}`), node),
       runtime: call(ts, "v", "identifier", [
         loc(node),
         ts.factory.createStringLiteral(node.text),
