@@ -4,7 +4,6 @@ import type { ClientScript } from "./parseFile.js";
 
 export interface CompilerState {
   script: ClientScript;
-  origins: Map<ts.Node, ts.Node>; // virtual node -> script node
   errors: Map<ts.Node, string>; // script node -> message
 }
 
@@ -19,7 +18,15 @@ export function compileScriptNode(
   node: ts.Node,
 ): CompiledNode {
   const compiled = _compileScriptNode(ts, state, node);
-  state.origins.set(compiled.virtual, node);
+  const sourceRange = state.script.toSourceRange(node);
+
+  // HACK - Stamp the virtual node with its source range. The printer
+  // reads this back to emit Volar code mappings
+  ts.setSourceMapRange(compiled.virtual, {
+    pos: sourceRange.start,
+    end: sourceRange.end,
+  });
+
   return compiled;
 }
 

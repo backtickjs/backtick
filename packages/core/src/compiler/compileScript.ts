@@ -21,7 +21,6 @@ export function compileScript(
 
   const state: CompilerState = {
     script: clientScript,
-    origins: new Map(),
     errors: new Map(),
   };
 
