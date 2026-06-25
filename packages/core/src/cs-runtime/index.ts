@@ -33,51 +33,56 @@ export interface Metadata {
   freeVars: string[];
 }
 
+export type SourceLocation = {
+  start: { line: number; character: number };
+  end: { line: number; character: number };
+};
+
 export interface Visitor<U> {
   // e.g. `7`
-  backtick(loc: null, metadata: Metadata, expression: U): U;
+  backtick(loc: SourceLocation, metadata: Metadata, expression: U): U;
 
   // e.g. ${ 1 }
-  splice(loc: null, key: string, expression: Spliceable): U;
+  splice(loc: SourceLocation, key: string, expression: Spliceable): U;
 
   // null
-  null(loc: null): U;
+  null(loc: SourceLocation): U;
 
   // e.g. 3
-  number(loc: null, value: number): U;
+  number(loc: SourceLocation, value: number): U;
 
   // e.g. true
-  boolean(loc: null, value: boolean): U;
+  boolean(loc: SourceLocation, value: boolean): U;
 
   // e.g. "Hello World"
-  string(loc: null, value: string): U;
+  string(loc: SourceLocation, value: string): U;
 
   // e.g. i
-  identifier(loc: null, name: string): U;
+  identifier(loc: SourceLocation, name: string): U;
 
   // e.g. { }
-  block(loc: null, statements: U[]): U;
+  block(loc: SourceLocation, statements: U[]): U;
 
   // e.g. i = 0;
-  assignment(loc: null, name: U, expression: U): U;
+  assignment(loc: SourceLocation, name: U, expression: U): U;
 
   // e.g. if (c) { ... } else { ... }
-  if(loc: null, condition: U, consequent: U, alternate: U | null): U;
+  if(loc: SourceLocation, condition: U, consequent: U, alternate: U | null): U;
 
   // e.g. return i;
-  return(loc: null, expression: U): U;
+  return(loc: SourceLocation, expression: U): U;
 
   // e.g. obj.a
-  propertyAccess(loc: null, expression: U, name: string): U;
+  propertyAccess(loc: SourceLocation, expression: U, name: string): U;
 
   // e.g. a + b
-  binop(loc: null, lhs: U, operator: string, rhs: U): U;
+  binop(loc: SourceLocation, lhs: U, operator: string, rhs: U): U;
 
   // e.g. [1, 2, 3]
-  array(loc: null, elements: U[]): U;
+  array(loc: SourceLocation, elements: U[]): U;
 
   // e.g. { a: 4 }
-  object(loc: null, entries: { [key: string]: U }): U;
+  object(loc: SourceLocation, entries: { [key: string]: U }): U;
 }
 
 function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {

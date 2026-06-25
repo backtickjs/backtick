@@ -1,12 +1,13 @@
 import type {
   Client,
   Metadata,
+  SourceLocation,
   Spliceable,
   Visitor,
 } from "@backtick/core/cs-runtime";
 
 export default class StringifyVisitor implements Visitor<string> {
-  lift(loc: null, expression: Spliceable): string {
+  lift(loc: SourceLocation, expression: Spliceable): string {
     if (expression == null) {
       return this.null(loc);
     }
@@ -35,44 +36,48 @@ export default class StringifyVisitor implements Visitor<string> {
     return this.object(loc, entries);
   }
 
-  backtick(_loc: null, _metadata: Metadata, expression: string): string {
+  backtick(
+    _loc: SourceLocation,
+    _metadata: Metadata,
+    expression: string,
+  ): string {
     return `cs\`${expression}\``;
   }
 
-  splice(loc: null, _key: string, expression: Spliceable): string {
+  splice(loc: SourceLocation, _key: string, expression: Spliceable): string {
     return `\${${this.lift(loc, expression)}}`;
   }
 
-  null(_loc: null): string {
+  null(_loc: SourceLocation): string {
     return "null";
   }
 
-  number(_loc: null, value: number): string {
+  number(_loc: SourceLocation, value: number): string {
     return value.toString();
   }
 
-  boolean(_loc: null, value: boolean): string {
+  boolean(_loc: SourceLocation, value: boolean): string {
     return value ? "true" : "false";
   }
 
-  string(_loc: null, value: string): string {
+  string(_loc: SourceLocation, value: string): string {
     return `"${value}"`;
   }
 
-  identifier(_loc: null, name: string): string {
+  identifier(_loc: SourceLocation, name: string): string {
     return name;
   }
 
-  block(_loc: null, statements: string[]): string {
+  block(_loc: SourceLocation, statements: string[]): string {
     return `{\n${statements.map((line) => `  ${line}`).join("\n")}\n}`;
   }
 
-  assignment(_loc: null, name: string, expression: string): string {
+  assignment(_loc: SourceLocation, name: string, expression: string): string {
     return `${name} = ${expression};`;
   }
 
   if(
-    _loc: null,
+    _loc: SourceLocation,
     condition: string,
     consequent: string,
     alternate: string | null,
@@ -84,23 +89,32 @@ export default class StringifyVisitor implements Visitor<string> {
     }
   }
 
-  return(_loc: null, expression: string): string {
+  return(_loc: SourceLocation, expression: string): string {
     return `return ${expression};`;
   }
 
-  propertyAccess(_loc: null, expression: string, name: string): string {
+  propertyAccess(
+    _loc: SourceLocation,
+    expression: string,
+    name: string,
+  ): string {
     return `${expression}.${name}`;
   }
 
-  binop(_loc: null, lhs: string, operator: string, rhs: string): string {
+  binop(
+    _loc: SourceLocation,
+    lhs: string,
+    operator: string,
+    rhs: string,
+  ): string {
     return `${lhs} ${operator} ${rhs}`;
   }
 
-  array(_loc: null, elements: string[]): string {
+  array(_loc: SourceLocation, elements: string[]): string {
     return `[${elements.join(", ")}]`;
   }
 
-  object(_loc: null, entries: { [key: string]: string }): string {
+  object(_loc: SourceLocation, entries: { [key: string]: string }): string {
     const parts = Object.entries(entries).map(
       ([key, value]) => `${key}: ${value}`,
     );

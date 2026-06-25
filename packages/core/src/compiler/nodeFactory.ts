@@ -85,3 +85,38 @@ export function constDecl(
 ): ts.VariableStatement {
   return varDecl(ts, ts.NodeFlags.Const, name, initializer);
 }
+
+/** { start: { line, character }, end: { line, character } } */
+export function sourceLoc(
+  ts: typeof import("typescript"),
+  sourceFile: ts.SourceFile,
+  node: ts.Node,
+): ts.ObjectLiteralExpression {
+  const position = (pos: number): ts.ObjectLiteralExpression => {
+    const { line, character } = sourceFile.getLineAndCharacterOfPosition(pos);
+    return ts.factory.createObjectLiteralExpression(
+      [
+        ts.factory.createPropertyAssignment(
+          "line",
+          ts.factory.createNumericLiteral(line),
+        ),
+        ts.factory.createPropertyAssignment(
+          "character",
+          ts.factory.createNumericLiteral(character),
+        ),
+      ],
+      false,
+    );
+  };
+
+  return ts.factory.createObjectLiteralExpression(
+    [
+      ts.factory.createPropertyAssignment(
+        "start",
+        position(node.getStart(sourceFile)),
+      ),
+      ts.factory.createPropertyAssignment("end", position(node.getEnd())),
+    ],
+    false,
+  );
+}
