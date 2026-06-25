@@ -1,4 +1,4 @@
-import { compile } from "@backtick/core/compiler";
+import { virtualize } from "@backtick/core/compiler";
 import type {
   CodeMapping,
   LanguagePlugin,
@@ -75,7 +75,7 @@ export class BacktickVirtualCode implements VirtualCode {
   ) {
     const fileName = uri.fsPath;
     const sourceText = snapshot.getText(0, snapshot.getLength());
-    const { virtualCode, mappings } = compile(ts, fileName, sourceText);
+    const { virtualCode, mappings } = virtualize(ts, fileName, sourceText);
 
     this.languageId = languageId;
     this.snapshot = {
