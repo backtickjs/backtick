@@ -34,7 +34,7 @@ function _compileScriptNode(
   };
 
   const loc = (target: ts.Node): ts.Expression =>
-    sourceLoc(ts, state.script.mapPosition(target));
+    sourceLoc(ts, state.script.toSourceLocation(target));
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>

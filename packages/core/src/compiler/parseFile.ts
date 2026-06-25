@@ -11,8 +11,8 @@ export interface ClientScript {
   sourceNode: ts.TaggedTemplateExpression;
   textWithPlaceholders: string;
   fileWithPlaceholders: ts.SourceFile;
-  // Maps a node in `fileWithPlaceholders` to a `SourceLocation` in the `sourceFile`.
-  mapPosition: (node: ts.Node) => SourceLocation;
+  // Maps a node in `fileWithPlaceholders` to its location in the source file.
+  toSourceLocation: (node: ts.Node) => SourceLocation;
   splices: { [placeholder: string]: Splice };
 }
 
@@ -78,7 +78,7 @@ function getDirectScripts(
       false,
       scriptKindFor(ts, sourceFile.fileName),
     );
-    const mapPosition = (node: ts.Node): SourceLocation => ({
+    const toSourceLocation = (node: ts.Node): SourceLocation => ({
       start: sourceFile.getLineAndCharacterOfPosition(
         toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
       ),
@@ -90,7 +90,7 @@ function getDirectScripts(
       sourceNode: taggedTemplate,
       textWithPlaceholders,
       fileWithPlaceholders,
-      mapPosition,
+      toSourceLocation,
       splices,
     };
   });
