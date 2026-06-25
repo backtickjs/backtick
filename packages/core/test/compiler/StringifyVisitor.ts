@@ -23,7 +23,7 @@ export default class StringifyVisitor implements Visitor<string> {
       return (expression as Client<unknown>).visit(this);
     }
     if (Array.isArray(expression)) {
-      const elements = expression.map((item) => this.lift(loc, expression));
+      const elements = expression.map((item) => this.lift(loc, item));
       return this.array(loc, elements);
     }
     const entries = Object.fromEntries(
@@ -36,11 +36,11 @@ export default class StringifyVisitor implements Visitor<string> {
   }
 
   backtick(_loc: null, _metadata: Metadata, expression: string): string {
-    return "cs`" + expression + "`";
+    return `cs\`${expression}\``;
   }
 
   splice(loc: null, _key: string, expression: Spliceable): string {
-    return "${" + this.lift(loc, expression) + "}";
+    return `\${${this.lift(loc, expression)}}`;
   }
 
   null(_loc: null): string {
@@ -56,7 +56,7 @@ export default class StringifyVisitor implements Visitor<string> {
   }
 
   string(_loc: null, value: string): string {
-    return '"' + value + '"';
+    return `"${value}"`;
   }
 
   identifier(_loc: null, name: string): string {
@@ -64,7 +64,7 @@ export default class StringifyVisitor implements Visitor<string> {
   }
 
   block(_loc: null, statements: string[]): string {
-    return "{\n" + statements.map((line) => "  " + line).join("\n") + "\n}";
+    return `{\n${statements.map((line) => `  ${line}`).join("\n")}\n}`;
   }
 
   assignment(_loc: null, name: string, expression: string): string {
@@ -97,13 +97,13 @@ export default class StringifyVisitor implements Visitor<string> {
   }
 
   array(_loc: null, elements: string[]): string {
-    return "[" + elements.join(", ") + "]";
+    return `[${elements.join(", ")}]`;
   }
 
   object(_loc: null, entries: { [key: string]: string }): string {
     const parts = Object.entries(entries).map(
-      ([key, value]) => key + ": " + value,
+      ([key, value]) => `${key}: ${value}`,
     );
-    return "({" + parts.join(", ") + "})";
+    return `({${parts.join(", ")}})`;
   }
 }

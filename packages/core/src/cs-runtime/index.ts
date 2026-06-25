@@ -4,6 +4,7 @@ export interface Client<T> {
 }
 
 export type Spliceable =
+  // biome-ignore lint/suspicious/noConfusingVoidType: a script can yield no value (e.g. a block that never returns)
   | void
   | null
   | number
@@ -93,6 +94,7 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
   );
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
   return { $$type: () => {}, visit };
 }

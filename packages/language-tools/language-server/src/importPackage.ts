@@ -35,7 +35,7 @@ export function getPackageInfo(
   }
 
   try {
-    const packageJSON = require.resolve(packageName + "/package.json", {
+    const packageJSON = require.resolve(`${packageName}/package.json`, {
       paths,
     });
     return {

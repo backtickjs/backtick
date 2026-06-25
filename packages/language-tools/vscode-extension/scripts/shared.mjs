@@ -14,7 +14,7 @@ export const rebuildPlugin = {
   setup(build) {
     build.onEnd(async (result) => {
       const date = dt.format(new Date());
-      if (result && result.errors.length) {
+      if (result?.errors.length) {
         console.error(
           dim(`[${date}] `) +
             red(result.errors.map((error) => error.text).join("\n")),
@@ -23,7 +23,7 @@ export const rebuildPlugin = {
         if (result.warnings.length) {
           console.info(
             dim(`[${date}] `) +
-              yellow("⚠ updated with warnings:\n" + result.warnings.join("\n")),
+              yellow(`⚠ updated with warnings:\n${result.warnings.join("\n")}`),
           );
         }
         console.info(dim(`[${date}] `) + green("✔ updated"));

@@ -19,7 +19,7 @@ export async function activate(context: vscode.ExtensionContext) {
     "server.js",
   );
   const runOptions = { execArgv: <string[]>[] };
-  const debugOptions = { execArgv: ["--nolazy", "--inspect=" + 6009] };
+  const debugOptions = { execArgv: ["--nolazy", `--inspect=${6009}`] };
   const serverOptions: ServerOptions = {
     run: {
       module: serverModule.fsPath,
@@ -41,7 +41,7 @@ export async function activate(context: vscode.ExtensionContext) {
     ],
     initializationOptions: {
       typescript: {
-        tsdk: (await getTsdk(context))!.tsdk,
+        tsdk: (await getTsdk(context))?.tsdk,
       },
     },
   };
