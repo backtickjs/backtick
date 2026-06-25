@@ -9,7 +9,6 @@ export interface ParsedFile {
 
 export interface ClientScript {
   sourceNode: ts.TaggedTemplateExpression;
-  sourceFile: ts.SourceFile;
   textWithPlaceholders: string;
   fileWithPlaceholders: ts.SourceFile;
   // Maps a node in `fileWithPlaceholders` to a `SourceLocation` in the `sourceFile`.
@@ -79,7 +78,6 @@ function getDirectScripts(
       resolveLocation(node.getStart(fileWithPlaceholders), node.getEnd());
     scripts[start] = {
       sourceNode: taggedTemplate,
-      sourceFile,
       textWithPlaceholders,
       fileWithPlaceholders,
       mapPosition,
@@ -116,7 +114,6 @@ function getDirectSplices(
 
 interface TextWithPlaceholders {
   text: string;
-  // `SourceLocation` in the original `sourceFile`.
   resolveLocation: (start: number, end: number) => SourceLocation;
 }
 
@@ -183,55 +180,51 @@ function toTextWithPlaceholders(
   const start = template.getStart(sourceFile) + 1; // past `
   const end = template.getEnd() - 1; // before `
 
+  let body = "";
   const segments: Segment[] = [];
 
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
-    const body = text.slice(start, end);
+    body = text.slice(start, end);
     segments.push({
       placeholderStart: 0,
       length: body.length,
       originalStart: start,
       verbatim: true,
     });
-    return {
-      text: body,
-      resolveLocation: makeResolveLocation(sourceFile, segments, end),
-    };
-  }
+  } else {
+    let chunkStart = start;
 
-  let body = "";
-  let chunkStart = start;
+    template.templateSpans.forEach((span, index) => {
+      const placeholder = `$0splice${index}`;
+      const splice = splices[placeholder];
+      const dollarBrace = span.expression.getFullStart() - 2; // before ${
+      const chunk = text.slice(chunkStart, dollarBrace);
+      segments.push({
+        placeholderStart: body.length,
+        length: chunk.length,
+        originalStart: chunkStart,
+        verbatim: true,
+      });
+      body += chunk;
+      segments.push({
+        placeholderStart: body.length,
+        length: splice.placeholder.length,
+        originalStart: dollarBrace,
+        verbatim: false,
+      });
+      body += splice.placeholder;
+      chunkStart = span.literal.getStart(sourceFile) + 1; // past }
+    });
 
-  template.templateSpans.forEach((span, index) => {
-    const placeholder = `$0splice${index}`;
-    const splice = splices[placeholder];
-    const dollarBrace = span.expression.getFullStart() - 2; // before ${
-    const chunk = text.slice(chunkStart, dollarBrace);
+    const tail = text.slice(chunkStart, end);
     segments.push({
       placeholderStart: body.length,
-      length: chunk.length,
+      length: tail.length,
       originalStart: chunkStart,
       verbatim: true,
     });
-    body += chunk;
-    segments.push({
-      placeholderStart: body.length,
-      length: splice.placeholder.length,
-      originalStart: dollarBrace,
-      verbatim: false,
-    });
-    body += splice.placeholder;
-    chunkStart = span.literal.getStart(sourceFile) + 1; // past }
-  });
-
-  const tail = text.slice(chunkStart, end);
-  segments.push({
-    placeholderStart: body.length,
-    length: tail.length,
-    originalStart: chunkStart,
-    verbatim: true,
-  });
-  body += tail;
+    body += tail;
+  }
 
   return {
     text: body,
