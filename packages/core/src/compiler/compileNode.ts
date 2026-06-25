@@ -25,13 +25,8 @@ export function compileNode(
   const loc = (target: ts.Node): ts.Expression =>
     sourceLoc(ts, state.script.toSourceLocation(target));
 
-  // Stamps `virtual` with the source range of `target`. The printer reads this
-  // back (via `ts.getSourceMapRange`) to emit a Volar code mapping. We stamp the
-  // renamed `$0var_*` identifiers, whose generated text differs from source so
-  // they can't be mapped verbatim by the assembler. Everything else (splices,
-  // surrounding code) is spliced in as verbatim source text and mapped 1:1
-  // there, so it needs no stamp.
-  const mapTo = <T extends ts.Node>(virtual: T, target: ts.Node): T => {
+  // For hover types, code completion, etc.
+  const setSourceMap = <T extends ts.Node>(virtual: T, target: ts.Node): T => {
     const range = state.script.toSourceRange(target);
     ts.setSourceMapRange(virtual, { pos: range.start, end: range.end });
     return virtual;
@@ -63,20 +58,20 @@ export function compileNode(
       ts.isIdentifier(declaration.name) &&
       declaration.initializer
     ) {
-      const name = declaration.name.text;
+      const name = declaration.name;
       const initializer = compileNode(ts, state, declaration.initializer);
       return {
         virtual: varDecl(
           ts,
           node.declarationList.flags,
-          `$0var_${name}`,
+          setSourceMap(ts.factory.createIdentifier(`$0var_${name.text}`), name),
           initializer.virtual as ts.Expression,
         ),
         runtime: call(ts, "v", "assignment", [
           loc(node),
           call(ts, "v", "identifier", [
             loc(declaration.name),
-            ts.factory.createStringLiteral(name),
+            ts.factory.createStringLiteral(name.text),
           ]),
           initializer.runtime as ts.Expression,
         ]),
@@ -153,7 +148,10 @@ export function compileNode(
     }
 
     return {
-      virtual: mapTo(ts.factory.createIdentifier(`$0var_${node.text}`), node),
+      virtual: setSourceMap(
+        ts.factory.createIdentifier(`$0var_${node.text}`),
+        node,
+      ),
       runtime: call(ts, "v", "identifier", [
         loc(node),
         ts.factory.createStringLiteral(node.text),

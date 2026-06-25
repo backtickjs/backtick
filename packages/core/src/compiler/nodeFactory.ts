@@ -59,7 +59,7 @@ export function iife(
 export function varDecl(
   ts: typeof import("typescript"),
   flags: ts.NodeFlags,
-  name: string,
+  name: string | ts.BindingName,
   initializer: ts.Expression,
 ): ts.VariableStatement {
   return ts.factory.createVariableStatement(
