@@ -1,6 +1,5 @@
 import assert from "node:assert";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { register } from "node:module";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
@@ -9,8 +8,6 @@ import { printRuntimeCode } from "../../dist/compiler/printRuntimeCode.js";
 import { printVirtualCode } from "../../dist/compiler/printVirtualCode.js";
 import { rewriteFile } from "../../dist/compiler/rewriteFile.js";
 import StringifyVisitor from "./StringifyVisitor.ts";
-
-register("./tsxLoader.mjs", import.meta.url);
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
 

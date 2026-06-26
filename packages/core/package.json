@@ -21,13 +21,14 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
-    "test": "node --test \"test/**/*.test.ts\"",
-    "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\""
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "test:update": "UPDATE_SNAPSHOTS=1 node --import tsx --test \"test/**/*.test.ts\""
   },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
 }

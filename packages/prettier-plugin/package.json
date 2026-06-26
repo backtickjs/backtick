@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
-    "test": "node --test \"test/**/*.test.ts\"",
-    "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\""
+    "test": "node --import tsx --test \"test/**/*.test.ts\"",
+    "test:update": "UPDATE_SNAPSHOTS=1 node --import tsx --test \"test/**/*.test.ts\""
   },
   "dependencies": {
     "@backtick/core": "workspace:*"
@@ -16,6 +16,7 @@
   "devDependencies": {
     "@types/estree": "^1.0.9",
     "prettier": "^3.6.2",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
