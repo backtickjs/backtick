@@ -1,17 +1,17 @@
 import type ts from "typescript";
-import {
-  type CompiledNode,
-  type CompilerState,
-  compileNode,
-} from "./compileNode.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
+import {
+  type RewriteState,
+  type RewrittenNode,
+  rewriteNode,
+} from "./rewriteNode.js";
 
-export function compileScript(
+export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
-): CompiledNode {
+): RewrittenNode {
   const unchanged = {
     virtual: clientScript.sourceNode,
     runtime: clientScript.sourceNode,
@@ -19,7 +19,7 @@ export function compileScript(
 
   const { fileWithPlaceholders, toSourceLocation } = clientScript;
 
-  const state: CompilerState = {
+  const state: RewriteState = {
     script: clientScript,
     errors: new Map(),
   };
@@ -34,7 +34,7 @@ export function compileScript(
     return unchanged;
   }
 
-  const compiled = compileNode(ts, state, scriptNode);
+  const rewritten = rewriteNode(ts, state, scriptNode);
 
   const splices = Object.values(clientScript.splices);
 
@@ -66,9 +66,9 @@ export function compileScript(
   );
 
   const virtual = call(ts, "cs", "lift", [
-    ts.isBlock(compiled.virtual)
-      ? iife(ts, compiled.virtual)
-      : (compiled.virtual as ts.Expression),
+    ts.isBlock(rewritten.virtual)
+      ? iife(ts, rewritten.virtual)
+      : (rewritten.virtual as ts.Expression),
   ]);
 
   const spliceDecls = splices.map((splice: Splice) =>
@@ -82,7 +82,7 @@ export function compileScript(
       call(ts, "v", "backtick", [
         sourceLoc(ts, toSourceLocation(scriptNode)),
         metadata,
-        compiled.runtime as ts.Expression,
+        rewritten.runtime as ts.Expression,
       ]),
     ),
   ]);

@@ -4,10 +4,10 @@ import { register } from "node:module";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { compileFile } from "../../dist/compiler/compileFile.js";
 import { parseFile } from "../../dist/compiler/parseFile.js";
+import { printRuntimeCode } from "../../dist/compiler/printRuntimeCode.js";
 import { printVirtualCode } from "../../dist/compiler/printVirtualCode.js";
-import { printRuntimeCode } from "../../src/compiler/printRuntimeCode.ts";
+import { rewriteFile } from "../../dist/compiler/rewriteFile.js";
 import StringifyVisitor from "./StringifyVisitor.ts";
 
 register("./tsxLoader.mjs", import.meta.url);
@@ -40,14 +40,14 @@ describe("compileFile", () => {
       // const base = name.slice(0, -extname(name).length);
       const input = readFileSync(join(fixturesDir, name), "utf8");
       const parsed = parseFile(ts, name, input);
-      const compiled = compileFile(ts, parsed);
+      const rewritten = rewriteFile(ts, parsed);
 
       matchFileSnapshot(
-        printVirtualCode(ts, parsed, compiled).virtualCode,
+        printVirtualCode(ts, parsed, rewritten).virtualCode,
         join(fixturesDir, `${name}.virtual.tsx`),
       );
       matchFileSnapshot(
-        printRuntimeCode(ts, parsed, compiled),
+        printRuntimeCode(ts, rewritten),
         join(fixturesDir, `${name}.runtime.tsx`),
       );
     });

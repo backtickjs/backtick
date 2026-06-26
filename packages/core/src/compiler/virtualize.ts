@@ -1,7 +1,7 @@
 import type { SourceMapping } from "./buildMappings.js";
-import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
 import { printVirtualCode } from "./printVirtualCode.js";
+import { rewriteFile } from "./rewriteFile.js";
 
 export interface Virtualized {
   virtualCode: string;
@@ -15,12 +15,12 @@ export function virtualize(
 ): Virtualized {
   const parsedFile = parseFile(ts, filePath, sourceText);
 
-  const compiledFile = compileFile(ts, parsedFile);
+  const rewrittenFile = rewriteFile(ts, parsedFile);
 
   const { virtualCode, mappings } = printVirtualCode(
     ts,
     parsedFile,
-    compiledFile,
+    rewrittenFile,
   );
 
   return { virtualCode, mappings };

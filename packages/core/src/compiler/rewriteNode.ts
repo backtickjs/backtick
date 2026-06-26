@@ -2,21 +2,21 @@ import type ts from "typescript";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 
-export interface CompilerState {
+export interface RewriteState {
   script: ClientScript;
   errors: Map<ts.Node, string>; // script node -> message
 }
 
-export interface CompiledNode {
+export interface RewrittenNode {
   virtual: ts.Node;
   runtime: ts.Node;
 }
 
-export function compileNode(
+export function rewriteNode(
   ts: typeof import("typescript"),
-  state: CompilerState,
+  state: RewriteState,
   node: ts.Node,
-): CompiledNode {
+): RewrittenNode {
   const unchanged = {
     virtual: node,
     runtime: node,
@@ -34,7 +34,7 @@ export function compileNode(
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
-      compileNode(ts, state, statement),
+      rewriteNode(ts, state, statement),
     );
     return {
       virtual: ts.factory.createBlock(
@@ -59,7 +59,7 @@ export function compileNode(
       declaration.initializer
     ) {
       const name = declaration.name;
-      const initializer = compileNode(ts, state, declaration.initializer);
+      const initializer = rewriteNode(ts, state, declaration.initializer);
       return {
         virtual: varDecl(
           ts,
@@ -80,10 +80,10 @@ export function compileNode(
   }
 
   if (ts.isIfStatement(node)) {
-    const condition = compileNode(ts, state, node.expression);
-    const consequent = compileNode(ts, state, node.thenStatement);
+    const condition = rewriteNode(ts, state, node.expression);
+    const consequent = rewriteNode(ts, state, node.thenStatement);
     const alternate = node.elseStatement
-      ? compileNode(ts, state, node.elseStatement)
+      ? rewriteNode(ts, state, node.elseStatement)
       : null;
     return {
       virtual: ts.factory.createIfStatement(
@@ -103,7 +103,7 @@ export function compileNode(
   }
 
   if (ts.isExpressionStatement(node)) {
-    const expression = compileNode(ts, state, node.expression);
+    const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createExpressionStatement(
         expression.virtual as ts.Expression,
@@ -113,11 +113,11 @@ export function compileNode(
   }
 
   if (ts.isParenthesizedExpression(node)) {
-    return compileNode(ts, state, node.expression);
+    return rewriteNode(ts, state, node.expression);
   }
 
   if (ts.isReturnStatement(node) && node.expression) {
-    const expression = compileNode(ts, state, node.expression);
+    const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
         expression.virtual as ts.Expression,
@@ -160,7 +160,7 @@ export function compileNode(
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    const expression = compileNode(ts, state, node.expression);
+    const expression = rewriteNode(ts, state, node.expression);
     const name = node.name.text;
     return {
       virtual: ts.factory.createPropertyAccessExpression(
@@ -183,7 +183,7 @@ export function compileNode(
       ) {
         return {
           name: property.name.text,
-          value: compileNode(ts, state, property.initializer),
+          value: rewriteNode(ts, state, property.initializer),
         };
       }
       state.errors.set(node, "Unsupported object property");
@@ -218,8 +218,8 @@ export function compileNode(
   }
 
   if (ts.isBinaryExpression(node)) {
-    const lhs = compileNode(ts, state, node.left);
-    const rhs = compileNode(ts, state, node.right);
+    const lhs = rewriteNode(ts, state, node.left);
+    const rhs = rewriteNode(ts, state, node.right);
 
     if (
       node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&

@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
-import type { CompiledFile } from "./compileFile.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
+import type { RewrittenFile } from "./rewriteFile.js";
 import { type Segment, segmentsToString } from "./segmentsToString.js";
 
 interface VirtualizedFile {
@@ -12,7 +12,7 @@ interface VirtualizedFile {
 export function printVirtualCode(
   ts: typeof import("typescript"),
   parsedFile: ParsedFile,
-  compiledFile: CompiledFile,
+  rewrittenFile: RewrittenFile,
 ): VirtualizedFile {
   const { sourceFile } = parsedFile;
   const segments: Segment[] = [];
@@ -21,7 +21,7 @@ export function printVirtualCode(
   for (const script of parsedFile.scripts) {
     const start = script.sourceNode.getStart(sourceFile);
     segments.push(...renderVerbatim(sourceFile.text, cursor, start - cursor));
-    segments.push(...renderScript(ts, sourceFile, compiledFile, script));
+    segments.push(...renderScript(ts, sourceFile, rewrittenFile, script));
     cursor = script.sourceNode.getEnd();
   }
   segments.push(
@@ -39,10 +39,10 @@ export function printVirtualCode(
 function renderScript(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
-  compiledFile: CompiledFile,
+  rewrittenFile: RewrittenFile,
   script: ClientScript,
 ): Segment[] {
-  const node = compiledFile.scripts.get(script.sourceNode)?.virtual;
+  const node = rewrittenFile.scripts.get(script.sourceNode)?.virtual;
   if (!node) {
     return [];
   }
@@ -93,7 +93,7 @@ function renderScript(
 
   return segments.flatMap((segment) =>
     typeof segment === "string"
-      ? reinjectSplices(ts, sourceFile, compiledFile, script, segment)
+      ? reinjectSplices(ts, sourceFile, rewrittenFile, script, segment)
       : [segment],
   );
 }
@@ -101,7 +101,7 @@ function renderScript(
 function reinjectSplices(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
-  compiledFile: CompiledFile,
+  rewrittenFile: RewrittenFile,
   script: ClientScript,
   text: string,
 ): Segment[] {
@@ -111,7 +111,7 @@ function reinjectSplices(
   for (const match of text.matchAll(/\$0splice\d+/g)) {
     segments.push(text.slice(textStart, match.index));
     segments.push(
-      ...renderSplice(ts, sourceFile, compiledFile, script.splices[match[0]]),
+      ...renderSplice(ts, sourceFile, rewrittenFile, script.splices[match[0]]),
     );
     textStart = match.index + match[0].length;
   }
@@ -123,7 +123,7 @@ function reinjectSplices(
 function renderSplice(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
-  compiledFile: CompiledFile,
+  rewrittenFile: RewrittenFile,
   splice: Splice,
 ): Segment[] {
   const segments: Segment[] = [];
@@ -134,7 +134,7 @@ function renderSplice(
   for (const nested of splice.scripts) {
     const start = nested.sourceNode.getStart(sourceFile);
     segments.push(...renderVerbatim(sourceFile.text, cursor, start - cursor));
-    segments.push(...renderScript(ts, sourceFile, compiledFile, nested));
+    segments.push(...renderScript(ts, sourceFile, rewrittenFile, nested));
     cursor = nested.sourceNode.getEnd();
   }
   segments.push(...renderVerbatim(sourceFile.text, cursor, end - cursor));

@@ -1,6 +1,6 @@
-import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
 import { printRuntimeCode } from "./printRuntimeCode.js";
+import { rewriteFile } from "./rewriteFile.js";
 
 export interface Compiled {
   runtimeCode: string;
@@ -13,9 +13,9 @@ export function compile(
 ): Compiled {
   const parsedFile = parseFile(ts, filePath, sourceText);
 
-  const compiledFile = compileFile(ts, parsedFile);
+  const rewrittenFile = rewriteFile(ts, parsedFile);
 
-  const runtimeCode = printRuntimeCode(ts, parsedFile, compiledFile);
+  const runtimeCode = printRuntimeCode(ts, rewrittenFile);
 
   return { runtimeCode };
 }
