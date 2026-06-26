@@ -8,6 +8,7 @@ export interface ParsedFile {
 }
 
 export interface ClientScript {
+  sourceFile: ts.SourceFile;
   sourceNode: ts.TaggedTemplateExpression;
   textWithPlaceholders: string;
   fileWithPlaceholders: ts.SourceFile;
@@ -91,6 +92,7 @@ function getDirectScripts(
       };
     };
     scripts.push({
+      sourceFile,
       sourceNode: taggedTemplate,
       textWithPlaceholders,
       fileWithPlaceholders,

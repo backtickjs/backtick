@@ -36,7 +36,7 @@ export default class StringifyVisitor implements Visitor<string> {
     return this.object(loc, entries);
   }
 
-  backtick(
+  clientScript(
     _loc: SourceLocation,
     _metadata: Metadata,
     expression: string,

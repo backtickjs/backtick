@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import type { SourceLocation } from "../cs-runtime/index.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
@@ -12,12 +13,12 @@ export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
 ): RewrittenNode {
-  const unchanged = {
-    virtual: clientScript.sourceNode,
-    runtime: clientScript.sourceNode,
-  };
+  const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
-  const { fileWithPlaceholders, toSourceLocation } = clientScript;
+  const unchanged = {
+    virtual: sourceNode,
+    runtime: sourceNode,
+  };
 
   const state: RewriteState = {
     script: clientScript,
@@ -75,12 +76,20 @@ export function rewriteScript(
     constDecl(ts, splice.placeholder, splice.sourceNode.expression),
   );
 
+  const scriptLocation: SourceLocation = {
+    path: sourceFile.fileName,
+    start: sourceFile.getLineAndCharacterOfPosition(
+      sourceNode.getStart(sourceFile),
+    ),
+    end: sourceFile.getLineAndCharacterOfPosition(sourceNode.getEnd()),
+  };
+
   const create = call(ts, "cs", "create", [
     arrow(
       ts,
       ["v"],
-      call(ts, "v", "backtick", [
-        sourceLoc(ts, toSourceLocation(scriptNode)),
+      call(ts, "v", "clientScript", [
+        sourceLoc(ts, scriptLocation),
         metadata,
         rewritten.runtime as ts.Expression,
       ]),

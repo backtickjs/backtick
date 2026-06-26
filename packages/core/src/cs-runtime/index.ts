@@ -45,8 +45,8 @@ export type SourceLocation = {
 };
 
 export interface Visitor<U> {
-  // e.g. `7`
-  backtick(loc: SourceLocation, metadata: Metadata, expression: U): U;
+  // e.g. cs`7`
+  clientScript(loc: SourceLocation, metadata: Metadata, expression: U): U;
 
   // e.g. ${ 1 }
   splice(loc: SourceLocation, key: string, expression: Spliceable): U;
