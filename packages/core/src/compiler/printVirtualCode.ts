@@ -1,69 +1,12 @@
 import type ts from "typescript";
+import { buildMappings, type SourceMapping } from "./buildMappings.js";
 import type { CompiledFile } from "./compileFile.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
-
-export interface SourceMapping {
-  sourceOffsets: number[];
-  generatedOffsets: number[];
-  lengths: number[];
-  generatedLengths: number[];
-}
-
-// `writeNode` and `createTextWriter` are internal to TypeScript but available at
-// runtime; we use them to observe where each node lands in the printed body.
-interface EmitTextWriter {
-  getText(): string;
-  getTextPos(): number;
-}
-
-interface InternalPrinter extends ts.Printer {
-  writeNode(
-    hint: ts.EmitHint,
-    node: ts.Node,
-    sourceFile: ts.SourceFile,
-    writer: EmitTextWriter,
-  ): void;
-}
-
-interface InternalTs {
-  createTextWriter(newLine: string): EmitTextWriter;
-}
+import { type Segment, segmentsToString } from "./segmentsToString.js";
 
 interface VirtualizedFile {
   virtualCode: string;
   mappings: SourceMapping[];
-}
-
-// Accumulates assembled virtual code and the mappings back into the source.
-class Builder {
-  code = "";
-  mappings: SourceMapping[] = [];
-
-  // Append source text `[start, start + length)` and map it 1:1 back to source.
-  verbatim(sourceText: string, start: number, length: number): void {
-    if (length <= 0) {
-      return;
-    }
-    this.mappings.push({
-      sourceOffsets: [start],
-      generatedOffsets: [this.code.length],
-      lengths: [length],
-      generatedLengths: [length],
-    });
-    this.code += sourceText.slice(start, start + length);
-  }
-
-  // Append an already-rendered fragment, shifting its mappings into place.
-  append(part: VirtualizedFile): void {
-    const base = this.code.length;
-    for (const m of part.mappings) {
-      this.mappings.push({
-        ...m,
-        generatedOffsets: m.generatedOffsets.map((o) => o + base),
-      });
-    }
-    this.code += part.virtualCode;
-  }
 }
 
 export function printVirtualCode(
@@ -72,18 +15,23 @@ export function printVirtualCode(
   compiledFile: CompiledFile,
 ): VirtualizedFile {
   const { sourceFile } = parsedFile;
-  const out = new Builder();
+  const segments: Segment[] = [];
 
   let cursor = 0;
   for (const script of parsedFile.scripts) {
     const start = script.sourceNode.getStart(sourceFile);
-    out.verbatim(sourceFile.text, cursor, start - cursor);
-    out.append(renderScript(ts, sourceFile, compiledFile, script));
+    segments.push(...renderVerbatim(sourceFile.text, cursor, start - cursor));
+    segments.push(...renderScript(ts, sourceFile, compiledFile, script));
     cursor = script.sourceNode.getEnd();
   }
-  out.verbatim(sourceFile.text, cursor, sourceFile.text.length - cursor);
+  segments.push(
+    ...renderVerbatim(sourceFile.text, cursor, sourceFile.text.length - cursor),
+  );
 
-  return { virtualCode: out.code, mappings: out.mappings };
+  return {
+    virtualCode: segmentsToString(segments),
+    mappings: buildMappings(segments),
+  };
 }
 
 // Renders one script: print its compiled body, then replace each `$0splice<n>`
@@ -93,124 +41,115 @@ function renderScript(
   sourceFile: ts.SourceFile,
   compiledFile: CompiledFile,
   script: ClientScript,
-): VirtualizedFile {
+): Segment[] {
   const node = compiledFile.scripts.get(script.sourceNode)?.virtual;
   if (!node) {
-    return { virtualCode: "", mappings: [] };
+    return [];
   }
 
-  const body = printBody(ts, node, script.fileWithPlaceholders);
-  const out = new Builder();
+  const identifiersWithSourceMap: Segment[] = [];
 
+  const printer = ts.createPrinter(
+    {},
+    {
+      substituteNode(_hint, emitted) {
+        const range = ts.getSourceMapRange(emitted);
+
+        const hasSourceMap = range !== emitted && range.end > range.pos;
+        if (hasSourceMap && ts.isIdentifier(emitted)) {
+          identifiersWithSourceMap.push([
+            emitted.text,
+            undefined,
+            range.pos,
+            range.end - range.pos,
+          ]);
+          const index = identifiersWithSourceMap.length - 1;
+          return ts.factory.createIdentifier(`$0id${index}`);
+        }
+
+        return emitted;
+      },
+    },
+  );
+
+  const text = printer.printNode(
+    ts.EmitHint.Unspecified,
+    node,
+    script.fileWithPlaceholders,
+  );
+
+  const segments: Segment[] = [];
   let cursor = 0;
-  for (const match of body.virtualCode.matchAll(/\$0splice\d+/g)) {
-    const at = match.index;
-    if (at === undefined) {
-      continue;
+  for (const match of text.matchAll(/\$0id(\d+)/g)) {
+    if (match.index > cursor) {
+      segments.push(text.slice(cursor, match.index));
     }
-    appendBody(out, body, cursor, at);
-    out.append(
-      renderSplice(ts, sourceFile, compiledFile, script.splices[match[0]]),
-    );
-    cursor = at + match[0].length;
+    segments.push(identifiersWithSourceMap[Number(match[1])]);
+    cursor = match.index + match[0].length;
   }
-  appendBody(out, body, cursor, body.virtualCode.length);
+  if (cursor < text.length) {
+    segments.push(text.slice(cursor));
+  }
 
-  return { virtualCode: out.code, mappings: out.mappings };
+  return segments.flatMap((segment) =>
+    typeof segment === "string"
+      ? reinjectSplices(ts, sourceFile, compiledFile, script, segment)
+      : [segment],
+  );
 }
 
-// Renders a spliced host expression as verbatim source text, recursing into any
-// nested `cs` scripts it contains.
+function reinjectSplices(
+  ts: typeof import("typescript"),
+  sourceFile: ts.SourceFile,
+  compiledFile: CompiledFile,
+  script: ClientScript,
+  text: string,
+): Segment[] {
+  const segments: Segment[] = [];
+  let textStart = 0;
+
+  for (const match of text.matchAll(/\$0splice\d+/g)) {
+    segments.push(text.slice(textStart, match.index));
+    segments.push(
+      ...renderSplice(ts, sourceFile, compiledFile, script.splices[match[0]]),
+    );
+    textStart = match.index + match[0].length;
+  }
+
+  segments.push(text.slice(textStart));
+  return segments;
+}
+
 function renderSplice(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
   compiledFile: CompiledFile,
   splice: Splice,
-): VirtualizedFile {
-  const out = new Builder();
+): Segment[] {
+  const segments: Segment[] = [];
   const expression = splice.sourceNode.expression;
   const end = expression.getEnd();
 
   let cursor = expression.getStart(sourceFile);
   for (const nested of splice.scripts) {
     const start = nested.sourceNode.getStart(sourceFile);
-    out.verbatim(sourceFile.text, cursor, start - cursor);
-    out.append(renderScript(ts, sourceFile, compiledFile, nested));
+    segments.push(...renderVerbatim(sourceFile.text, cursor, start - cursor));
+    segments.push(...renderScript(ts, sourceFile, compiledFile, nested));
     cursor = nested.sourceNode.getEnd();
   }
-  out.verbatim(sourceFile.text, cursor, end - cursor);
+  segments.push(...renderVerbatim(sourceFile.text, cursor, end - cursor));
 
-  return { virtualCode: out.code, mappings: out.mappings };
+  return segments;
 }
 
-// Prints a compiled body node, collecting a mapping for each stamped identifier.
-// Printing against `fileWithPlaceholders` keeps any passed-through nodes pointing
-// at text they can be read from.
-function printBody(
-  ts: typeof import("typescript"),
-  node: ts.Node,
-  fileWithPlaceholders: ts.SourceFile,
-): VirtualizedFile {
-  const mappings: SourceMapping[] = [];
-  const writer = (ts as unknown as InternalTs).createTextWriter("\n");
-
-  const printer = ts.createPrinter(
-    {},
-    {
-      isEmitNotificationEnabled: () => true,
-      onEmitNode(hint, emitted, emit) {
-        const range = ts.getSourceMapRange(emitted);
-
-        // `compileScriptNode` stamps a source range onto each renamed identifier;
-        // only those get a mapping. An unstamped node reports its own pos/end
-        // (`getSourceMapRange` returns the node itself), which we leave alone.
-        const stamped = (range as ts.Node) !== emitted && range.end > range.pos;
-        if (!stamped) {
-          emit(hint, emitted);
-          return;
-        }
-
-        const start = writer.getTextPos();
-        emit(hint, emitted);
-        const end = writer.getTextPos();
-
-        mappings.push({
-          sourceOffsets: [range.pos],
-          generatedOffsets: [start],
-          lengths: [range.end - range.pos],
-          generatedLengths: [end - start],
-        });
-      },
-    },
-  ) as InternalPrinter;
-
-  printer.writeNode(
-    ts.EmitHint.Unspecified,
-    node,
-    fileWithPlaceholders,
-    writer,
-  );
-
-  return { virtualCode: writer.getText(), mappings };
-}
-
-// Appends `body.code[from, to)` and shifts the body mappings within that range
-// to their new home in the output.
-function appendBody(
-  out: Builder,
-  body: VirtualizedFile,
-  from: number,
-  to: number,
-): void {
-  if (to <= from) {
-    return;
+// Append source text `[start, start + length)` mapped 1:1 back to source.
+function renderVerbatim(
+  sourceText: string,
+  start: number,
+  length: number,
+): Segment[] {
+  if (length <= 0) {
+    return [];
   }
-  const shift = out.code.length - from;
-  for (const m of body.mappings) {
-    const offset = m.generatedOffsets[0];
-    if (offset >= from && offset < to) {
-      out.mappings.push({ ...m, generatedOffsets: [offset + shift] });
-    }
-  }
-  out.code += body.virtualCode.slice(from, to);
+  return [[sourceText.slice(start, start + length), undefined, start, length]];
 }

@@ -1,6 +1,7 @@
+import type { SourceMapping } from "./buildMappings.js";
 import { compileFile } from "./compileFile.js";
 import { parseFile } from "./parseFile.js";
-import { printVirtualCode, type SourceMapping } from "./printVirtualCode.js";
+import { printVirtualCode } from "./printVirtualCode.js";
 
 export interface Virtualized {
   virtualCode: string;
