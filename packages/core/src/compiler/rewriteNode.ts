@@ -1,10 +1,12 @@
 import type ts from "typescript";
+import type { SourceRange } from "../cs-runtime/index.js";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 
 export interface RewriteState {
   script: ClientScript;
-  errors: Map<ts.Node, string>; // script node -> message
+  errors: Map<ts.Node, string>;
+  sourceMaps: Map<ts.Identifier, SourceRange>;
 }
 
 export interface RewrittenNode {
@@ -26,10 +28,9 @@ export function rewriteNode(
     sourceLoc(ts, state.script.toSourceLocation(target));
 
   // For hover types, code completion, etc.
-  const setSourceMap = <T extends ts.Node>(virtual: T, target: ts.Node): T => {
+  const setSourceMap = (virtual: ts.Identifier, target: ts.Node): void => {
     const range = state.script.toSourceRange(target);
-    ts.setSourceMapRange(virtual, { pos: range.start, end: range.end });
-    return virtual;
+    state.sourceMaps.set(virtual, range);
   };
 
   if (ts.isBlock(node)) {
@@ -60,11 +61,13 @@ export function rewriteNode(
     ) {
       const name = declaration.name;
       const initializer = rewriteNode(ts, state, declaration.initializer);
+      const identifier = ts.factory.createIdentifier(`$0var_${name.text}`);
+      setSourceMap(identifier, name);
       return {
         virtual: varDecl(
           ts,
           node.declarationList.flags,
-          setSourceMap(ts.factory.createIdentifier(`$0var_${name.text}`), name),
+          identifier,
           initializer.virtual as ts.Expression,
         ),
         runtime: call(ts, "v", "assignment", [
@@ -147,11 +150,11 @@ export function rewriteNode(
       };
     }
 
+    const identifier = ts.factory.createIdentifier(`$0var_${node.text}`);
+    setSourceMap(identifier, node);
+
     return {
-      virtual: setSourceMap(
-        ts.factory.createIdentifier(`$0var_${node.text}`),
-        node,
-      ),
+      virtual: identifier,
       runtime: call(ts, "v", "identifier", [
         loc(node),
         ts.factory.createStringLiteral(node.text),

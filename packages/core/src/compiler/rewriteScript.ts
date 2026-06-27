@@ -1,28 +1,26 @@
 import type ts from "typescript";
-import type { SourceLocation } from "../cs-runtime/index.js";
+import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
-import {
-  type RewriteState,
-  type RewrittenNode,
-  rewriteNode,
-} from "./rewriteNode.js";
+import { type RewriteState, rewriteNode } from "./rewriteNode.js";
+
+export interface RewrittenScript {
+  virtual: ts.Node;
+  runtime: ts.Node;
+  sourceMaps: Map<ts.Identifier, SourceRange>; // virtual -> source range
+}
 
 export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
-): RewrittenNode {
+): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
-
-  const unchanged = {
-    virtual: sourceNode,
-    runtime: sourceNode,
-  };
 
   const state: RewriteState = {
     script: clientScript,
     errors: new Map(),
+    sourceMaps: new Map(),
   };
 
   const [statement] = fileWithPlaceholders.statements;
@@ -32,7 +30,11 @@ export function rewriteScript(
   } else if (statement && ts.isBlock(statement)) {
     scriptNode = statement;
   } else {
-    return unchanged;
+    return {
+      virtual: sourceNode,
+      runtime: sourceNode,
+      sourceMaps: new Map(),
+    };
   }
 
   const rewritten = rewriteNode(ts, state, scriptNode);
@@ -104,5 +106,5 @@ export function rewriteScript(
     ),
   );
 
-  return { virtual, runtime };
+  return { virtual, runtime, sourceMaps: state.sourceMaps };
 }

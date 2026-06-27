@@ -53,18 +53,18 @@ function renderScript(
     {},
     {
       substituteNode(_hint, emitted) {
-        const range = ts.getSourceMapRange(emitted);
-
-        const hasSourceMap = range !== emitted && range.end > range.pos;
-        if (hasSourceMap && ts.isIdentifier(emitted)) {
-          identifiersWithSourceMap.push([
-            emitted.text,
-            undefined,
-            range.pos,
-            range.end - range.pos,
-          ]);
-          const index = identifiersWithSourceMap.length - 1;
-          return ts.factory.createIdentifier(`$0id${index}`);
+        if (ts.isIdentifier(emitted)) {
+          const range = rewrittenFile.sourceMaps.get(emitted);
+          if (range != null) {
+            identifiersWithSourceMap.push([
+              emitted.text,
+              undefined,
+              range.start,
+              range.end - range.start,
+            ]);
+            const index = identifiersWithSourceMap.length - 1;
+            return ts.factory.createIdentifier(`$0id${index}`);
+          }
         }
 
         return emitted;
