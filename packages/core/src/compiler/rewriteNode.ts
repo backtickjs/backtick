@@ -54,7 +54,7 @@ export function rewriteNode(
     ) {
       const name = declaration.name;
       const initializer = rewriteNode(ts, state, declaration.initializer);
-      const identifier = ts.factory.createIdentifier(`$0var_${name.text}`);
+      const identifier = ts.factory.createIdentifier(`$0client_${name.text}`);
       state.mappings.set(name, identifier);
       return {
         virtual: varDecl(
@@ -143,7 +143,7 @@ export function rewriteNode(
       };
     }
 
-    const identifier = ts.factory.createIdentifier(`$0var_${node.text}`);
+    const identifier = ts.factory.createIdentifier(`$0client_${node.text}`);
     state.mappings.set(node, identifier);
 
     return {

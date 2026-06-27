@@ -1,6 +1,6 @@
-const MANGLE_RE = /\$0var_/g;
+const MANGLE_RE = /\$0client_/g;
 
-// Strip the compiler's virtual `$0var_` identifier prefix
+// Strip the compiler's virtual `$0client_` identifier prefix
 export function unmangle(text: string): string {
   return text.replace(MANGLE_RE, "");
 }

@@ -2,8 +2,8 @@ import { cs } from "@backtick/core";
 
 const obj = cs.lift({ a: 4 });
 const script = cs.lift((() => {
-    const $0var_obj = cs.lower(obj);
-    return cs.lower(cs.lift($0var_obj.a));
+    const $0client_obj = cs.lower(obj);
+    return cs.lower(cs.lift($0client_obj.a));
 })());
 
 export default script;
