@@ -1,3 +1,4 @@
+import type { Diagnostic } from "@backtick/core/compiler";
 import { virtualize } from "@backtick/core/compiler";
 import type {
   CodeMapping,
@@ -72,6 +73,7 @@ export class BacktickVirtualCode implements VirtualCode {
   mappings: CodeMapping[];
   snapshot: ts.IScriptSnapshot;
   embeddedCodes: VirtualCode[];
+  diagnostics: Diagnostic[];
 
   constructor(
     ts: typeof import("typescript"),
@@ -81,9 +83,14 @@ export class BacktickVirtualCode implements VirtualCode {
   ) {
     const fileName = uri.fsPath;
     const sourceText = snapshot.getText(0, snapshot.getLength());
-    const { virtualCode, mappings } = virtualize(ts, fileName, sourceText);
+    const { virtualCode, mappings, diagnostics } = virtualize(
+      ts,
+      fileName,
+      sourceText,
+    );
 
     this.languageId = languageId;
+    this.diagnostics = diagnostics;
 
     // The root mirrors the original source 1:1. Prettier (with the Backtick
     // plugin) formats this, so on save the file stays as Backtick source
@@ -93,7 +100,7 @@ export class BacktickVirtualCode implements VirtualCode {
         sourceOffsets: [0],
         generatedOffsets: [0],
         lengths: [sourceText.length],
-        data: { format: true },
+        data: { format: true, verification: true },
       },
     ];
 

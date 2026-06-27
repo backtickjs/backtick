@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
+import type { Diagnostic } from "./diagnostics.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
@@ -9,6 +10,7 @@ export interface RewrittenScript {
   virtual: ts.Node;
   runtime: ts.Node;
   sourceMaps: Map<ts.Identifier, SourceRange>; // virtual -> source range
+  diagnostics: Diagnostic[];
 }
 
 export function rewriteScript(
@@ -20,7 +22,7 @@ export function rewriteScript(
   const state: RewriteState = {
     script: clientScript,
     errors: new Map(),
-    sourceMaps: new Map(),
+    mappings: new Map(),
   };
 
   const [statement] = fileWithPlaceholders.statements;
@@ -34,10 +36,23 @@ export function rewriteScript(
       virtual: sourceNode,
       runtime: sourceNode,
       sourceMaps: new Map(),
+      diagnostics: [],
     };
   }
 
   const rewritten = rewriteNode(ts, state, scriptNode);
+
+  const sourceMaps: Map<ts.Identifier, SourceRange> = new Map();
+  for (const [source, virtual] of state.mappings) {
+    const range = clientScript.toSourceRange(source);
+    sourceMaps.set(virtual, range);
+  }
+
+  const diagnostics: Diagnostic[] = [];
+  for (const [node, message] of state.errors) {
+    const range = clientScript.toSourceRange(node);
+    diagnostics.push({ range, message, severity: 1 });
+  }
 
   const splices = Object.values(clientScript.splices);
 
@@ -106,5 +121,5 @@ export function rewriteScript(
     ),
   );
 
-  return { virtual, runtime, sourceMaps: state.sourceMaps };
+  return { virtual, runtime, sourceMaps, diagnostics };
 }

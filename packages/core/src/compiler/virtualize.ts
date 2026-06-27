@@ -1,4 +1,5 @@
 import type { SourceMapping } from "./buildMappings.js";
+import type { Diagnostic } from "./diagnostics.js";
 import { parseFile } from "./parseFile.js";
 import { printVirtualCode } from "./printVirtualCode.js";
 import { rewriteFile } from "./rewriteFile.js";
@@ -6,6 +7,7 @@ import { rewriteFile } from "./rewriteFile.js";
 export interface Virtualized {
   virtualCode: string;
   mappings: SourceMapping[];
+  diagnostics: Diagnostic[];
 }
 
 export function virtualize(
@@ -23,5 +25,5 @@ export function virtualize(
     rewrittenFile,
   );
 
-  return { virtualCode, mappings };
+  return { virtualCode, mappings, diagnostics: rewrittenFile.diagnostics };
 }

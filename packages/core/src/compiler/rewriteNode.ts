@@ -1,12 +1,11 @@
 import type ts from "typescript";
-import type { SourceRange } from "../cs-runtime/index.js";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 
 export interface RewriteState {
   script: ClientScript;
   errors: Map<ts.Node, string>;
-  sourceMaps: Map<ts.Identifier, SourceRange>;
+  mappings: Map<ts.Identifier, ts.Identifier>;
 }
 
 export interface RewrittenNode {
@@ -26,12 +25,6 @@ export function rewriteNode(
 
   const loc = (target: ts.Node): ts.Expression =>
     sourceLoc(ts, state.script.toSourceLocation(target));
-
-  // For hover types, code completion, etc.
-  const setSourceMap = (virtual: ts.Identifier, target: ts.Node): void => {
-    const range = state.script.toSourceRange(target);
-    state.sourceMaps.set(virtual, range);
-  };
 
   if (ts.isBlock(node)) {
     const statements = node.statements.map((statement) =>
@@ -62,7 +55,7 @@ export function rewriteNode(
       const name = declaration.name;
       const initializer = rewriteNode(ts, state, declaration.initializer);
       const identifier = ts.factory.createIdentifier(`$0var_${name.text}`);
-      setSourceMap(identifier, name);
+      state.mappings.set(name, identifier);
       return {
         virtual: varDecl(
           ts,
@@ -151,7 +144,7 @@ export function rewriteNode(
     }
 
     const identifier = ts.factory.createIdentifier(`$0var_${node.text}`);
-    setSourceMap(identifier, node);
+    state.mappings.set(node, identifier);
 
     return {
       virtual: identifier,
@@ -189,7 +182,10 @@ export function rewriteNode(
           value: rewriteNode(ts, state, property.initializer),
         };
       }
-      state.errors.set(node, "Unsupported object property");
+      state.errors.set(
+        property,
+        "This object property isn't supported in a `cs` client script.",
+      );
       return null;
     });
 
@@ -218,6 +214,8 @@ export function rewriteNode(
         ]),
       };
     }
+
+    return unchanged;
   }
 
   if (ts.isBinaryExpression(node)) {
@@ -258,7 +256,10 @@ export function rewriteNode(
         ]),
       };
     }
-    state.errors.set(node, "Unsupported operator");
+    state.errors.set(
+      node,
+      "This operator isn't supported in a `cs` client script.",
+    );
   }
 
   if (ts.isNumericLiteral(node)) {
@@ -283,6 +284,9 @@ export function rewriteNode(
     };
   }
 
-  state.errors.set(node, "Unsupported syntax");
+  state.errors.set(
+    node,
+    "This syntax isn't supported in a `cs` client script.",
+  );
   return unchanged;
 }

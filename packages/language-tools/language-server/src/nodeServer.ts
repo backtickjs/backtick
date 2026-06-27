@@ -5,6 +5,7 @@ import {
   loadTsdkByPath,
 } from "@volar/language-server/node";
 import { create as createTypeScriptServices } from "volar-service-typescript";
+import getBacktickDiagnosticService from "./getBacktickDiagnosticService.js";
 import getBacktickLanguagePlugin from "./getBacktickLanguagePlugin.js";
 import getBacktickPrettierService from "./getBacktickPrettierService.js";
 
@@ -27,6 +28,7 @@ connection.onInitialize((params) => {
       // Prettier and TypeScript both want to format files, but Volar only
       // lets one win: it uses whichever service is listed first here
       getBacktickPrettierService(connection),
+      getBacktickDiagnosticService(),
       ...createTypeScriptServices(tsdk.typescript),
     ],
   );
