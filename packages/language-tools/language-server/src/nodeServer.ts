@@ -8,7 +8,7 @@ import { create as createTypeScriptServices } from "volar-service-typescript";
 import getBacktickDiagnosticService from "./getBacktickDiagnosticService.js";
 import getBacktickLanguagePlugin from "./getBacktickLanguagePlugin.js";
 import getBacktickPrettierService from "./getBacktickPrettierService.js";
-import sanitizeHovers from "./sanitizeHovers.js";
+import unmangleOutput from "./unmangleOutput.js";
 
 const connection = createConnection();
 const server = createServer(connection);
@@ -30,7 +30,7 @@ connection.onInitialize((params) => {
       // lets one win: it uses whichever service is listed first here
       getBacktickPrettierService(connection),
       getBacktickDiagnosticService(),
-      ...sanitizeHovers(createTypeScriptServices(tsdk.typescript)),
+      ...unmangleOutput(createTypeScriptServices(tsdk.typescript)),
     ],
   );
 });
