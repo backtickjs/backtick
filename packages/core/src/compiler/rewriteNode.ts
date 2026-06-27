@@ -158,10 +158,12 @@ export function rewriteNode(
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const expression = rewriteNode(ts, state, node.expression);
     const name = node.name.text;
+    const nameIdentifier = ts.factory.createIdentifier(name);
+    state.mappings.set(node.name, nameIdentifier);
     return {
       virtual: ts.factory.createPropertyAccessExpression(
         expression.virtual as ts.Expression,
-        name,
+        nameIdentifier,
       ),
       runtime: call(ts, "v", "propertyAccess", [
         loc(node),
