@@ -6,7 +6,7 @@ import unmangleCompletionItem from "./unmangleCompletionItem.js";
 import unmangleDiagnostic from "./unmangleDiagnostic.js";
 import unmangleHover from "./unmangleHover.js";
 
-export default function unmangleOutput(
+export default function unmanglePluginResponses(
   plugins: LanguageServicePlugin[],
 ): LanguageServicePlugin[] {
   return plugins.map((plugin) => ({
