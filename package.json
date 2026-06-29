@@ -6,6 +6,7 @@
     "packages/language-tools/*"
   ],
   "scripts": {
+    "build": "turbo run build",
     "typecheck": "tsc -b",
     "test": "turbo run test",
     "test:update": "turbo run test:update",

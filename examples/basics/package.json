@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tspc -p tsconfig.json"
+    "build": "tspc -p tsconfig.json",
+    "start": "node --enable-source-maps dist/index.js"
   },
   "dependencies": {
     "@backtick/core": "workspace:*"
