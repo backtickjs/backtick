@@ -6,12 +6,12 @@ export function transform(
   ts: typeof import("typescript"),
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
-    const parsed = parseFile(ts, sourceFile.fileName, sourceFile.text);
-    if (parsed.scripts.length === 0) {
+    const parsedFile = parseFile(ts, sourceFile.fileName, sourceFile.text);
+    if (parsedFile.scripts.length === 0) {
       return sourceFile;
     }
 
-    const rewrittenFile = rewriteFile(ts, parsed);
+    const rewrittenFile = rewriteFile(ts, parsedFile);
 
     const byStart = new Map<number, ts.Node>();
     for (const [template, script] of rewrittenFile.scripts) {

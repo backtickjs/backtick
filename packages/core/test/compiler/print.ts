@@ -6,7 +6,11 @@ import type {
   Visitor,
 } from "@backtick/core/cs-runtime";
 
-export default class StringifyVisitor implements Visitor<string> {
+export function print(script: Client<unknown>): void {
+  process.stdout.write(script.visit(new StringifyVisitor()));
+}
+
+class StringifyVisitor implements Visitor<string> {
   lift(loc: SourceLocation, expression: Spliceable): string {
     if (expression == null) {
       return this.null(loc);

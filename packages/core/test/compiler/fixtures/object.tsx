@@ -1,4 +1,5 @@
 import { cs } from "@backtick/core";
+import { print } from "../print.ts";
 
 const obj = cs`({ a: 4 })`;
 const script = cs`{
@@ -6,4 +7,4 @@ const script = cs`{
   return ${cs`obj.a`};
 }`;
 
-export default script;
+print(script);

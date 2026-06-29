@@ -1,11 +1,11 @@
 import assert from "node:assert";
+import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 import { compile } from "../../dist/compiler/compile.js";
 import { virtualize } from "../../dist/compiler/virtualize.js";
-import StringifyVisitor from "./StringifyVisitor.ts";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
 
@@ -34,7 +34,7 @@ const fixtureNames = readdirSync(fixturesDir)
   )
   .sort();
 
-describe("compileFile", () => {
+describe("compile", () => {
   for (const fileName of fixtureNames) {
     it(fileName, () => {
       const base = fileName.slice(0, -extname(fileName).length);
@@ -42,7 +42,7 @@ describe("compileFile", () => {
 
       matchFileSnapshot(
         virtualize(ts, fileName, sourceText).virtualCode,
-        join(fixturesDir, `${fileName}.virtual.tsx`),
+        join(fixturesDir, `${base}.virtual.tsx`),
       );
       matchFileSnapshot(
         compile(ts, fileName, sourceText, COMPILER_OPTIONS).runtimeCode,
@@ -52,16 +52,21 @@ describe("compileFile", () => {
   }
 });
 
-describe("visit", () => {
+describe("print", () => {
   for (const name of fixtureNames) {
-    it(name, async () => {
+    it(name, () => {
       const base = name.slice(0, -extname(name).length);
-      const { default: client } = await import(`./fixtures/${base}.js`);
 
-      matchFileSnapshot(
-        client.visit(new StringifyVisitor()),
-        join(fixturesDir, `${name}.stringify`),
+      // The compiled fixture calls print(script) at module scope, writing the
+      // stringified client script to stdout. Run it in its own process so we
+      // capture only the fixture's output (not the test runner's).
+      const output = execFileSync(
+        process.execPath,
+        [join(fixturesDir, `${base}.js`)],
+        { encoding: "utf8" },
       );
+
+      matchFileSnapshot(output, join(fixturesDir, `${base}.stringify`));
     });
   }
 });
