@@ -1,0 +1,17 @@
+{
+  "name": "@backtick/example-node-minimal",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tspc -p tsconfig.json",
+    "start": "node --enable-source-maps dist/index.js"
+  },
+  "dependencies": {
+    "@backtick/core": "workspace:*"
+  },
+  "devDependencies": {
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  }
+}

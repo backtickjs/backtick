@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { transpile } from "../../dist/compiler/compile.js";
+import { transpile } from "../../dist/compiler/transpile.js";
 import { virtualize } from "../../dist/compiler/virtualize.js";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
