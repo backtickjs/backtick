@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { compile } from "../../dist/compiler/compile.js";
+import { transpile } from "../../dist/compiler/compile.js";
 import { virtualize } from "../../dist/compiler/virtualize.js";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
@@ -45,7 +45,7 @@ describe("compile", () => {
         join(fixturesDir, `${base}.virtual.tsx`),
       );
       matchFileSnapshot(
-        compile(ts, fileName, sourceText, COMPILER_OPTIONS).runtimeCode,
+        transpile(ts, fileName, sourceText, COMPILER_OPTIONS).outputText,
         join(fixturesDir, `${base}.js`),
       );
     });
