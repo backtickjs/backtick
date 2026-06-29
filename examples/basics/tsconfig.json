@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true,
+
+    // Registers the backtick transformer. `tspc` (from ts-patch) applies it
+    // during emit; plain `tsc` ignores `plugins` transforms.
+    "plugins": [{ "transform": "@backtick/core/transform" }]
+  },
+  "include": ["src"]
+}
