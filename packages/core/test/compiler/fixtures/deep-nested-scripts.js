@@ -1,5 +1,5 @@
-import { cs, type Client } from "@backtick/core";
-function add(lhs: Client<number>, rhs: Client<number>): Client<number> {
+import { cs } from "@backtick/core";
+function add(lhs, rhs) {
     return (() => {
         const $0splice0 = lhs;
         const $0splice1 = rhs;

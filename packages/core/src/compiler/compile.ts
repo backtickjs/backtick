@@ -1,27 +1,25 @@
-import { scriptKindFor } from "./scriptKindFor.js";
+import type { CompilerOptions } from "typescript";
 import { transform } from "./transform.js";
 
 export interface Compiled {
   runtimeCode: string;
+  sourceMap: string | undefined;
 }
 
 export function compile(
   ts: typeof import("typescript"),
   fileName: string,
   sourceText: string,
+  compilerOptions: CompilerOptions,
 ): Compiled {
-  const sourceFile = ts.createSourceFile(
+  const { outputText, sourceMapText } = ts.transpileModule(sourceText, {
     fileName,
-    sourceText,
-    ts.ScriptTarget.Latest,
-    true,
-    scriptKindFor(ts, fileName),
-  );
+    compilerOptions: compilerOptions,
+    transformers: { before: [transform(ts)] },
+  });
 
-  const result = ts.transform(sourceFile, [transform(ts)]);
-  const [transformed] = result.transformed;
-  const runtimeCode = ts.createPrinter().printFile(transformed);
-  result.dispose();
-
-  return { runtimeCode };
+  return {
+    runtimeCode: outputText,
+    sourceMap: sourceMapText,
+  };
 }
