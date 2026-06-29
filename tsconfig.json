@@ -3,6 +3,7 @@
   "files": [],
   "references": [
     { "path": "packages/core" },
+    { "path": "packages/language-tools/language-plugin" },
     { "path": "packages/language-tools/language-server" },
     { "path": "packages/language-tools/vscode-extension" },
     { "path": "packages/prettier-plugin" }

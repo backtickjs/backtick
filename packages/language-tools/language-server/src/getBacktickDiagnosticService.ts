@@ -1,6 +1,6 @@
+import { BacktickVirtualCode } from "@backtick/language-plugin";
 import type { LanguageServicePlugin } from "@volar/language-server";
 import { URI } from "vscode-uri";
-import { BacktickVirtualCode } from "./getBacktickLanguagePlugin.js";
 
 // Surfaces Backtick's own compiler diagnostics (e.g. unsupported syntax inside
 // a `cs` client script) to the editor. TypeScript diagnostics already flow

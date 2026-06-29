@@ -1,0 +1,28 @@
+{
+  "name": "@backtick/language-plugin",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch"
+  },
+  "dependencies": {
+    "@backtick/core": "workspace:*",
+    "@volar/language-core": "^2.4.28"
+  },
+  "devDependencies": {
+    "@volar/typescript": "^2.4.28",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

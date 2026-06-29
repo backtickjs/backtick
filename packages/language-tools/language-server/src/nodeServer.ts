@@ -1,3 +1,4 @@
+import { getBacktickLanguagePlugin } from "@backtick/language-plugin";
 import {
   createConnection,
   createServer,
@@ -5,8 +6,8 @@ import {
   loadTsdkByPath,
 } from "@volar/language-server/node";
 import { create as createTypeScriptServices } from "volar-service-typescript";
+import type { URI } from "vscode-uri";
 import getBacktickDiagnosticService from "./getBacktickDiagnosticService.js";
-import getBacktickLanguagePlugin from "./getBacktickLanguagePlugin.js";
 import getBacktickPrettierService from "./getBacktickPrettierService.js";
 import unmanglePluginResponses from "./unmanglePluginResponses.js";
 
@@ -23,7 +24,9 @@ connection.onInitialize((params) => {
   return server.initialize(
     params,
     createTypeScriptProject(tsdk.typescript, tsdk.diagnosticMessages, () => ({
-      languagePlugins: [getBacktickLanguagePlugin(tsdk.typescript)],
+      languagePlugins: [
+        getBacktickLanguagePlugin<URI>(tsdk.typescript, (uri) => uri.fsPath),
+      ],
     })),
     [
       // Prettier and TypeScript both want to format files, but Volar only

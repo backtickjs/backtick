@@ -30,17 +30,30 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/language-tools/language-server:
+  packages/language-tools/language-plugin:
     dependencies:
       '@backtick/core':
-        specifier: ^0.0.0
+        specifier: workspace:*
         version: link:../../core
-      '@backtick/prettier-plugin':
-        specifier: ^0.0.0
-        version: link:../../prettier-plugin
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28
+    devDependencies:
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/language-server:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: ^0.0.0
+        version: link:../language-plugin
+      '@backtick/prettier-plugin':
+        specifier: ^0.0.0
+        version: link:../../prettier-plugin
       '@volar/language-server':
         specifier: ^2.4.28
         version: 2.4.28
