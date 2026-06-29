@@ -7,7 +7,7 @@ import type {
 } from "@backtick/core/cs-runtime";
 
 export function print(script: Client<unknown>): void {
-  process.stdout.write(script.visit(new StringifyVisitor()));
+  process.stdout.write(`${script.visit(new StringifyVisitor())}\n`);
 }
 
 class StringifyVisitor implements Visitor<string> {
