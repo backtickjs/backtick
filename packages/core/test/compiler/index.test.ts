@@ -3,10 +3,8 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { parseFile } from "../../dist/compiler/parseFile.js";
-import { printRuntimeCode } from "../../dist/compiler/printRuntimeCode.js";
-import { printVirtualCode } from "../../dist/compiler/printVirtualCode.js";
-import { rewriteFile } from "../../dist/compiler/rewriteFile.js";
+import { compile } from "../../dist/compiler/compile.js";
+import { virtualize } from "../../src/compiler/virtualize.ts";
 import StringifyVisitor from "./StringifyVisitor.ts";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
@@ -32,20 +30,18 @@ const fixtureNames = readdirSync(fixturesDir)
   .sort();
 
 describe("compileFile", () => {
-  for (const name of fixtureNames) {
-    it(name, () => {
+  for (const fileName of fixtureNames) {
+    it(fileName, () => {
       // const base = name.slice(0, -extname(name).length);
-      const input = readFileSync(join(fixturesDir, name), "utf8");
-      const parsed = parseFile(ts, name, input);
-      const rewritten = rewriteFile(ts, parsed);
+      const sourceText = readFileSync(join(fixturesDir, fileName), "utf8");
 
       matchFileSnapshot(
-        printVirtualCode(ts, parsed, rewritten).virtualCode,
-        join(fixturesDir, `${name}.virtual.tsx`),
+        virtualize(ts, fileName, sourceText).virtualCode,
+        join(fixturesDir, `${fileName}.virtual.tsx`),
       );
       matchFileSnapshot(
-        printRuntimeCode(ts, rewritten),
-        join(fixturesDir, `${name}.runtime.tsx`),
+        compile(ts, fileName, sourceText).runtimeCode,
+        join(fixturesDir, `${fileName}.runtime.tsx`),
       );
     });
   }

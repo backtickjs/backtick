@@ -1,6 +1,5 @@
-import { parseFile } from "./parseFile.js";
-import { printRuntimeCode } from "./printRuntimeCode.js";
-import { rewriteFile } from "./rewriteFile.js";
+import { scriptKindFor } from "./scriptKindFor.js";
+import { transform } from "./transform.js";
 
 export interface Compiled {
   runtimeCode: string;
@@ -8,14 +7,21 @@ export interface Compiled {
 
 export function compile(
   ts: typeof import("typescript"),
-  filePath: string,
+  fileName: string,
   sourceText: string,
 ): Compiled {
-  const parsedFile = parseFile(ts, filePath, sourceText);
+  const sourceFile = ts.createSourceFile(
+    fileName,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true,
+    scriptKindFor(ts, fileName),
+  );
 
-  const rewrittenFile = rewriteFile(ts, parsedFile);
-
-  const runtimeCode = printRuntimeCode(ts, rewrittenFile);
+  const result = ts.transform(sourceFile, [transform(ts)]);
+  const [transformed] = result.transformed;
+  const runtimeCode = ts.createPrinter().printFile(transformed);
+  result.dispose();
 
   return { runtimeCode };
 }
