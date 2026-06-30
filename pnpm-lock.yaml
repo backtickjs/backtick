@@ -30,9 +30,6 @@ importers:
         specifier: ^0.0.0
         version: link:../../packages/core
     devDependencies:
-      '@backtick/editor-plugin':
-        specifier: ^0.0.0
-        version: link:../../packages/language-tools/editor-plugin
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
@@ -55,9 +52,6 @@ importers:
         specifier: ^0.0.0
         version: link:../../packages/tspatch-plugin
     devDependencies:
-      '@backtick/editor-plugin':
-        specifier: ^0.0.0
-        version: link:../../packages/language-tools/editor-plugin
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
