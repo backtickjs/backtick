@@ -5,6 +5,5 @@
     "test/**/*.mjs",
     "test/**/*.ts",
     ".vscode-test.*"
-  ],
-  "references": [{ "path": "./tsconfig.build.json" }]
+  ]
 }

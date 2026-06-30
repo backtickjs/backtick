@@ -2,7 +2,7 @@
   "version": "0.0.0",
   "configurations": [
     {
-      "name": "Launch Client",
+      "name": "Launch Extension",
       "type": "extensionHost",
       "request": "launch",
       "runtimeExecutable": "${execPath}",
@@ -11,21 +11,6 @@
         "--extensionDevelopmentPath=${workspaceRoot}/packages/language-tools/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]
-    },
-    {
-      "name": "Attach to Server",
-      "type": "node",
-      "request": "attach",
-      "port": 6009,
-      "restart": true,
-      "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"],
-      "skipFiles": ["<node_internals>/**"]
-    }
-  ],
-  "compounds": [
-    {
-      "name": "Launch Extension",
-      "configurations": ["Launch Client", "Attach to Server"]
     }
   ]
 }

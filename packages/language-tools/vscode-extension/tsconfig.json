@@ -1,5 +1,5 @@
 {
   "extends": "../../../configs/tsconfig.base.json",
-  "include": ["./scripts/*.mjs"],
-  "references": [{ "path": "./tsconfig.build.json" }]
+  "files": ["./package.json"],
+  "references": [{ "path": "./tsconfig.test.json" }]
 }
