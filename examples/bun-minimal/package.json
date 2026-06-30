@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "bun --preload ./bun-preload.ts run.ts"
+    "start": "bun --preload ./bun-preload.ts src/index.ts"
   },
   "dependencies": {
     "@backtick/core": "workspace:*"
