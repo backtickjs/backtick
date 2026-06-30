@@ -42,6 +42,9 @@ importers:
       '@backtick/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@backtick/tspatch-plugin':
+        specifier: workspace:*
+        version: link:../../packages/tspatch-plugin
     devDependencies:
       ts-patch:
         specifier: ^4.0.1
@@ -51,11 +54,10 @@ importers:
         version: 6.0.3
 
   packages/bun-plugin:
-    dependencies:
+    devDependencies:
       '@backtick/core':
         specifier: workspace:*
         version: link:../core
-    devDependencies:
       '@types/bun':
         specifier: ^1.3.14
         version: 1.3.14
@@ -144,11 +146,10 @@ importers:
         version: 0.1.3
 
   packages/prettier-plugin:
-    dependencies:
+    devDependencies:
       '@backtick/core':
         specifier: workspace:*
         version: link:../core
-    devDependencies:
       '@types/estree':
         specifier: ^1.0.9
         version: 1.0.9
@@ -158,6 +159,18 @@ importers:
       tsx:
         specifier: ^4.22.4
         version: 4.22.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/tspatch-plugin:
+    devDependencies:
+      '@backtick/core':
+        specifier: workspace:*
+        version: link:../core
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

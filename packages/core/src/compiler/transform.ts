@@ -36,17 +36,3 @@ export function transform(
     return ts.visitNode(sourceFile, visit, ts.isSourceFile) as ts.SourceFile;
   };
 }
-
-export default function transformer(
-  _program?: unknown,
-  _config?: unknown,
-  extras?: { ts?: typeof import("typescript") },
-): ts.TransformerFactory<ts.SourceFile> {
-  const tsInstance = extras?.ts;
-  if (!tsInstance) {
-    throw new Error(
-      "@backtick/core/transform: the plugin host did not provide a TypeScript instance.",
-    );
-  }
-  return transform(tsInstance);
-}

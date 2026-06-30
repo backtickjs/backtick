@@ -13,10 +13,6 @@
       "types": "./dist/compiler/index.d.ts",
       "default": "./dist/compiler/index.js"
     },
-    "./transform": {
-      "types": "./dist/compiler/transform.d.ts",
-      "default": "./dist/compiler/transform.js"
-    },
     "./cs-runtime": {
       "types": "./dist/cs-runtime/index.d.ts",
       "default": "./dist/cs-runtime/index.js"

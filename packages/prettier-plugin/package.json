@@ -10,16 +10,15 @@
     "test": "node --import tsx --test \"test/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 node --import tsx --test \"test/**/*.test.ts\""
   },
-  "dependencies": {
-    "@backtick/core": "workspace:*"
-  },
   "devDependencies": {
+    "@backtick/core": "workspace:*",
     "@types/estree": "^1.0.9",
     "prettier": "^3.6.2",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
+    "@backtick/core": "workspace:*",
     "prettier": "^3.0.0",
     "typescript": "^6.0.3"
   }

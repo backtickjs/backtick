@@ -6,7 +6,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
-    "plugins": [{ "transform": "@backtick/core/transform" }]
+    "plugins": [{ "transform": "@backtick/tspatch-plugin" }]
   },
   "include": ["src"]
 }
