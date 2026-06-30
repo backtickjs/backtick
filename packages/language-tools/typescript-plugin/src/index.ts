@@ -1,0 +1,33 @@
+import { createAsyncLanguageServicePlugin } from "@volar/typescript/lib/quickstart/createAsyncLanguageServicePlugin.js";
+import type * as ts from "typescript";
+import { decorateWithUnmangle } from "./decorateLanguageService.js";
+
+const init = createAsyncLanguageServicePlugin(
+  // No extra file extensions: backtick virtualizes standard .ts/.tsx/.js/.jsx in
+  // place, so Volar's `resolveFileLanguageId` already supplies the languageId.
+  [],
+  // ts.ScriptKind.Deferred — let the language plugin own the script kind.
+  7,
+  async (ts) => {
+    const { getBacktickLanguagePlugin } =
+      await import("@backtick/language-plugin");
+    return {
+      languagePlugins: [
+        getBacktickLanguagePlugin<string>(ts, (fileName) => fileName),
+      ],
+    };
+  },
+);
+
+const plugin: ts.server.PluginModuleFactory = (mod) => {
+  const pluginModule = init(mod);
+  const { create } = pluginModule;
+  return {
+    ...pluginModule,
+    create(info) {
+      return decorateWithUnmangle(create(info));
+    },
+  };
+};
+
+export = plugin;

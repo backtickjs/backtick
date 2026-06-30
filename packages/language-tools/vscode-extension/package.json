@@ -13,6 +13,12 @@
     "onLanguage:typescriptreact"
   ],
   "contributes": {
+    "typescriptServerPlugins": [
+      {
+        "name": "@backtick/typescript-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      }
+    ],
     "grammars": [
       {
         "scopeName": "source.client-script.injection",
@@ -49,6 +55,9 @@
     "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
     "test:grammar": "node ./test/grammar/test.mjs",
     "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtick/typescript-plugin": "workspace:*"
   },
   "devDependencies": {
     "@backtick/language-server": "^0.0.0",

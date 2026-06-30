@@ -107,14 +107,28 @@ importers:
       '@volar/language-server':
         specifier: ^2.4.28
         version: 2.4.28
-      volar-service-typescript:
-        specifier: ^0.0.71
-        version: 0.0.71(@volar/language-service@2.4.28)
       vscode-uri:
         specifier: ^3.1.0
         version: 3.1.0
 
+  packages/language-tools/typescript-plugin:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/language-tools/vscode-extension:
+    dependencies:
+      '@backtick/typescript-plugin':
+        specifier: workspace:*
+        version: link:../typescript-plugin
     devDependencies:
       '@backtick/language-server':
         specifier: ^0.0.0
@@ -779,9 +793,6 @@ packages:
     resolution: {integrity: sha512-NqgRQy6j6dPYcdSdv0q1g9QsZg7SWg87RERM8otw/1AtKU2yTFVClOM7cbwKzOonZr/Ek1blTBucw64L9H0Bwg==}
     hasBin: true
 
-  typescript-auto-import-cache@0.3.6:
-    resolution: {integrity: sha512-RpuHXrknHdVdK7wv/8ug3Fr0WNsNi5l5aB8MYYuXhq2UH5lnEB1htJ1smhtD5VeCsGr2p8mUDtd83LCQDFVgjQ==}
-
   typescript@6.0.3:
     resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
@@ -793,14 +804,6 @@ packages:
   universalify@2.0.1:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
-
-  volar-service-typescript@0.0.71:
-    resolution: {integrity: sha512-yTtM/BVT6hoyEYnDtaCyAtNhdNeS/mhTTABlBOdw3NNiRBUin3IznFJpgfjer4c6RYopiPjjQjc9VFhxVl1mLw==}
-    peerDependencies:
-      '@volar/language-service': ~2.4.0
-    peerDependenciesMeta:
-      '@volar/language-service':
-        optional: true
 
   vscode-jsonrpc@8.2.0:
     resolution: {integrity: sha512-C+r0eKJUIfiDIfwJhria30+TYWPtuHJXHtI7J0YlOmKAo7ogxP20T0zxB7HZQIFhIyvoBPwWskjxrvAtfjyZfA==}
@@ -1375,26 +1378,11 @@ snapshots:
       '@turbo/windows-64': 2.9.16
       '@turbo/windows-arm64': 2.9.16
 
-  typescript-auto-import-cache@0.3.6:
-    dependencies:
-      semver: 7.8.1
-
   typescript@6.0.3: {}
 
   undici-types@7.24.6: {}
 
   universalify@2.0.1: {}
-
-  volar-service-typescript@0.0.71(@volar/language-service@2.4.28):
-    dependencies:
-      path-browserify: 1.0.1
-      semver: 7.8.1
-      typescript-auto-import-cache: 0.3.6
-      vscode-languageserver-textdocument: 1.0.12
-      vscode-nls: 5.2.0
-      vscode-uri: 3.1.0
-    optionalDependencies:
-      '@volar/language-service': 2.4.28
 
   vscode-jsonrpc@8.2.0: {}
 
