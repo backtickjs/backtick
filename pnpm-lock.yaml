@@ -30,12 +30,12 @@ importers:
         specifier: ^0.0.0
         version: link:../../packages/core
     devDependencies:
+      '@backtick/editor-plugin':
+        specifier: ^0.0.0
+        version: link:../../packages/language-tools/editor-plugin
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
-      '@backtick/typescript-plugin':
-        specifier: ^0.0.0
-        version: link:../../packages/language-tools/typescript-plugin
       '@types/bun':
         specifier: ^1.3.14
         version: 1.3.14
@@ -55,12 +55,12 @@ importers:
         specifier: ^0.0.0
         version: link:../../packages/tspatch-plugin
     devDependencies:
+      '@backtick/editor-plugin':
+        specifier: ^0.0.0
+        version: link:../../packages/language-tools/editor-plugin
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
-      '@backtick/typescript-plugin':
-        specifier: ^0.0.0
-        version: link:../../packages/language-tools/typescript-plugin
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -84,6 +84,19 @@ importers:
         version: 6.0.3
 
   packages/core:
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/editor-plugin:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
     devDependencies:
       typescript:
         specifier: ^6.0.3
@@ -117,24 +130,11 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
 
-  packages/language-tools/typescript-plugin:
-    dependencies:
-      '@backtick/language-plugin':
-        specifier: workspace:*
-        version: link:../language-plugin
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/language-tools/vscode-extension:
     dependencies:
-      '@backtick/typescript-plugin':
+      '@backtick/editor-plugin':
         specifier: workspace:*
-        version: link:../typescript-plugin
+        version: link:../editor-plugin
     devDependencies:
       '@backtick/language-server':
         specifier: ^0.0.0

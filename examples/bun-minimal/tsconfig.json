@@ -7,7 +7,7 @@
     "types": ["bun"],
     "plugins": [
       // Cmd+Shift+P → "TypeScript: Select TypeScript Version" → "Use Workspace Version"
-      { "name": "@backtick/typescript-plugin" }
+      { "name": "@backtick/editor-plugin" }
     ]
   },
   "include": ["src"]

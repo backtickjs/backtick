@@ -15,7 +15,7 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "@backtick/typescript-plugin",
+        "name": "@backtick/editor-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ],
@@ -57,7 +57,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/typescript-plugin": "workspace:*"
+    "@backtick/editor-plugin": "workspace:*"
   },
   "devDependencies": {
     "@backtick/language-server": "^0.0.0",

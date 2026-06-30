@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/typescript-plugin",
+  "name": "@backtick/editor-plugin",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/index.js",

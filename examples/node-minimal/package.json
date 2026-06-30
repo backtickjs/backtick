@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@backtick/prettier-plugin": "^0.0.0",
-    "@backtick/typescript-plugin": "^0.0.0",
+    "@backtick/editor-plugin": "^0.0.0",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
