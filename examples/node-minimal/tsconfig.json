@@ -6,7 +6,11 @@
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
-    "plugins": [{ "transform": "@backtick/tspatch-plugin" }]
+    "plugins": [
+      // Cmd+Shift+P → "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+      { "name": "@backtick/typescript-plugin" },
+      { "transform": "@backtick/tspatch-plugin" }
+    ]
   },
   "include": ["src"]
 }

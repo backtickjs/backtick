@@ -4,7 +4,11 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["bun"]
+    "types": ["bun"],
+    "plugins": [
+      // Cmd+Shift+P → "TypeScript: Select TypeScript Version" → "Use Workspace Version"
+      { "name": "@backtick/typescript-plugin" }
+    ]
   },
   "include": ["src"]
 }

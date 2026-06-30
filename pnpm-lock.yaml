@@ -33,6 +33,9 @@ importers:
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
+      '@backtick/typescript-plugin':
+        specifier: ^0.0.0
+        version: link:../../packages/language-tools/typescript-plugin
       '@types/bun':
         specifier: ^1.3.14
         version: 1.3.14
@@ -55,6 +58,9 @@ importers:
       '@backtick/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
+      '@backtick/typescript-plugin':
+        specifier: ^0.0.0
+        version: link:../../packages/language-tools/typescript-plugin
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
