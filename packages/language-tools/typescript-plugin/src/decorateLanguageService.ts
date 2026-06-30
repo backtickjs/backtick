@@ -1,5 +1,10 @@
 import type * as ts from "typescript";
-import { CLIENT_PREFIX, unmangle } from "./mangle.js";
+import { CLIENT_PREFIX } from "./unmangle.js";
+import {
+  unmangleCompletionEntryDetails,
+  unmangleCompletionInfo,
+} from "./unmangleCompletions.js";
+import { unmangleDiagnostic } from "./unmangleDiagnostics.js";
 
 export function decorateLanguageService(
   inner: ts.LanguageService,
@@ -14,75 +19,28 @@ export function decorateLanguageService(
     getSuggestionDiagnostics: (fileName) =>
       inner.getSuggestionDiagnostics(fileName).map(unmangleDiagnostic),
 
-    getCompletionsAtPosition: (
-      fileName,
-      position,
-      options,
-      formattingSettings,
-    ) => {
+    getCompletionsAtPosition: (fileName, position, options, settings) => {
       const completions = inner.getCompletionsAtPosition(
         fileName,
         position,
         options,
-        formattingSettings,
+        settings,
       );
-      if (!completions) {
-        return completions;
-      }
-      return {
-        ...completions,
-        entries: completions.entries.map((entry) =>
-          entry.name.includes(CLIENT_PREFIX)
-            ? {
-                ...entry,
-                name: unmangle(entry.name),
-                insertText: unmangle(entry.insertText ?? entry.name),
-              }
-            : entry,
-        ),
-      };
+      return completions && unmangleCompletionInfo(completions);
     },
 
-    getCompletionEntryDetails: (
-      fileName,
-      position,
-      entryName,
-      formatOptions,
-      source,
-      preferences,
-      data,
-    ) => {
-      // The editor hands back the unmangled `name` we returned above, but the
-      // virtual code is keyed by the mangled name; look that up, falling back to
-      // the name as given for genuine (never-mangled) host-scope symbols.
+    getCompletionEntryDetails: (fileName, position, name, ...rest) => {
+      // The editor echoes back the unmangled `name` we returned above, but the
+      // virtual code is keyed by the mangled name; look that up first, falling
+      // back to the name as given for genuine (never-mangled) host symbols.
       const details =
         inner.getCompletionEntryDetails(
           fileName,
           position,
-          CLIENT_PREFIX + entryName,
-          formatOptions,
-          source,
-          preferences,
-          data,
-        ) ??
-        inner.getCompletionEntryDetails(
-          fileName,
-          position,
-          entryName,
-          formatOptions,
-          source,
-          preferences,
-          data,
-        );
-      if (!details) {
-        return details;
-      }
-      return {
-        ...details,
-        name: unmangle(details.name),
-        displayParts: details.displayParts.map(unmangleDisplayPart),
-        documentation: details.documentation?.map(unmangleDisplayPart),
-      };
+          CLIENT_PREFIX + name,
+          ...rest,
+        ) ?? inner.getCompletionEntryDetails(fileName, position, name, ...rest);
+      return details && unmangleCompletionEntryDetails(details);
     },
   };
 
@@ -93,34 +51,4 @@ export function decorateLanguageService(
         : Reflect.get(target, property, receiver);
     },
   });
-}
-
-function unmangleDiagnostic<T extends ts.Diagnostic>(diagnostic: T): T {
-  return {
-    ...diagnostic,
-    messageText: unmangleMessageText(diagnostic.messageText),
-    relatedInformation: diagnostic.relatedInformation?.map((info) => ({
-      ...info,
-      messageText: unmangleMessageText(info.messageText),
-    })),
-  };
-}
-
-function unmangleMessageText(
-  messageText: string | ts.DiagnosticMessageChain,
-): string | ts.DiagnosticMessageChain {
-  if (typeof messageText === "string") {
-    return unmangle(messageText);
-  }
-  return {
-    ...messageText,
-    messageText: unmangle(messageText.messageText),
-    next: messageText.next?.map(
-      (chain) => unmangleMessageText(chain) as ts.DiagnosticMessageChain,
-    ),
-  };
-}
-
-function unmangleDisplayPart(part: ts.SymbolDisplayPart): ts.SymbolDisplayPart {
-  return { ...part, text: unmangle(part.text) };
 }

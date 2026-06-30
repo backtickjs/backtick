@@ -9,8 +9,9 @@ const init = createAsyncLanguageServicePlugin(
   // ts.ScriptKind.Deferred — let the language plugin own the script kind.
   7,
   async (ts) => {
-    const { getBacktickLanguagePlugin } =
-      await import("@backtick/language-plugin");
+    const { getBacktickLanguagePlugin } = await import(
+      "@backtick/language-plugin"
+    );
     return {
       languagePlugins: [
         getBacktickLanguagePlugin<string>(ts, (fileName) => fileName),
