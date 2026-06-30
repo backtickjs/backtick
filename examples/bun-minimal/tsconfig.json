@@ -4,11 +4,9 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["bun"]
-
-    // No `plugins` entry: Bun never runs `tsc`/`tspc`. The backtick transform is
-    // applied at load time by `bun-preload.ts`. This config exists for the
-    // editor and `tsc --noEmit` type checking only.
+    "types": ["bun"],
+    "inlineSources": true,
+    "inlineSourceMap": true
   },
-  "include": ["src", "run.ts", "bun-preload.ts"]
+  "include": ["src", "bun-preload.ts"]
 }
