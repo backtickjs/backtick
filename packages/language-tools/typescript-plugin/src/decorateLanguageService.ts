@@ -1,54 +1,126 @@
 import type * as ts from "typescript";
-import unmangleCompletionEntryDetails from "./unmangleCompletionEntryDetails.js";
-import unmangleDiagnostic from "./unmangleDiagnostic.js";
-import unmangleQuickInfo from "./unmangleQuickInfo.js";
+import { CLIENT_PREFIX, unmangle } from "./mangle.js";
 
-type DiagnosticGetter = (fileName: string) => ts.Diagnostic[];
-
-const DIAGNOSTIC_METHODS = new Set<PropertyKey>([
-  "getSemanticDiagnostics",
-  "getSyntacticDiagnostics",
-  "getSuggestionDiagnostics",
-]);
-
-// Wrap the `ts.LanguageService` that Volar hands back so the `$0client_` prefix
-// the backtick compiler adds to virtual identifiers never leaks into editor UI.
-//
-// Only the user-facing *reads* are patched. We deliberately do NOT unmangle the
-// `name` of completion-list entries: tsserver round-trips that exact string back
-// through `getCompletionEntryDetails`, so rewriting it there would break the
-// detail lookup. (Mangled names only appear strictly inside `cs` code, which is
-// not yet reachable through the source mapping, so this is latent correctness.)
-export function decorateWithUnmangle(
-  languageService: ts.LanguageService,
+export function decorateLanguageService(
+  inner: ts.LanguageService,
 ): ts.LanguageService {
-  return new Proxy(languageService, {
-    get(target, key, receiver) {
-      if (key === "getQuickInfoAtPosition") {
-        const original = target.getQuickInfoAtPosition.bind(target);
-        return (
-          ...args: Parameters<ts.LanguageService["getQuickInfoAtPosition"]>
-        ) => {
-          const info = original(...args);
-          return info && unmangleQuickInfo(info);
-        };
+  const overrides: Partial<ts.LanguageService> = {
+    getSemanticDiagnostics: (fileName) =>
+      inner.getSemanticDiagnostics(fileName).map(unmangleDiagnostic),
+
+    getSyntacticDiagnostics: (fileName) =>
+      inner.getSyntacticDiagnostics(fileName).map(unmangleDiagnostic),
+
+    getSuggestionDiagnostics: (fileName) =>
+      inner.getSuggestionDiagnostics(fileName).map(unmangleDiagnostic),
+
+    getCompletionsAtPosition: (
+      fileName,
+      position,
+      options,
+      formattingSettings,
+    ) => {
+      const completions = inner.getCompletionsAtPosition(
+        fileName,
+        position,
+        options,
+        formattingSettings,
+      );
+      if (!completions) {
+        return completions;
       }
-      if (key === "getCompletionEntryDetails") {
-        const original = target.getCompletionEntryDetails.bind(target);
-        return (
-          ...args: Parameters<ts.LanguageService["getCompletionEntryDetails"]>
-        ) => {
-          const details = original(...args);
-          return details && unmangleCompletionEntryDetails(details);
-        };
+      return {
+        ...completions,
+        entries: completions.entries.map((entry) =>
+          entry.name.includes(CLIENT_PREFIX)
+            ? {
+                ...entry,
+                name: unmangle(entry.name),
+                insertText: unmangle(entry.insertText ?? entry.name),
+              }
+            : entry,
+        ),
+      };
+    },
+
+    getCompletionEntryDetails: (
+      fileName,
+      position,
+      entryName,
+      formatOptions,
+      source,
+      preferences,
+      data,
+    ) => {
+      // The editor hands back the unmangled `name` we returned above, but the
+      // virtual code is keyed by the mangled name; look that up, falling back to
+      // the name as given for genuine (never-mangled) host-scope symbols.
+      const details =
+        inner.getCompletionEntryDetails(
+          fileName,
+          position,
+          CLIENT_PREFIX + entryName,
+          formatOptions,
+          source,
+          preferences,
+          data,
+        ) ??
+        inner.getCompletionEntryDetails(
+          fileName,
+          position,
+          entryName,
+          formatOptions,
+          source,
+          preferences,
+          data,
+        );
+      if (!details) {
+        return details;
       }
-      if (DIAGNOSTIC_METHODS.has(key)) {
-        const original = (
-          target[key as keyof ts.LanguageService] as unknown as DiagnosticGetter
-        ).bind(target);
-        return (fileName: string) => original(fileName).map(unmangleDiagnostic);
-      }
-      return Reflect.get(target, key, receiver);
+      return {
+        ...details,
+        name: unmangle(details.name),
+        displayParts: details.displayParts.map(unmangleDisplayPart),
+        documentation: details.documentation?.map(unmangleDisplayPart),
+      };
+    },
+  };
+
+  return new Proxy(inner, {
+    get(target, property, receiver) {
+      return Object.hasOwn(overrides, property)
+        ? overrides[property as keyof ts.LanguageService]
+        : Reflect.get(target, property, receiver);
     },
   });
+}
+
+function unmangleDiagnostic<T extends ts.Diagnostic>(diagnostic: T): T {
+  return {
+    ...diagnostic,
+    messageText: unmangleMessageText(diagnostic.messageText),
+    relatedInformation: diagnostic.relatedInformation?.map((info) => ({
+      ...info,
+      messageText: unmangleMessageText(info.messageText),
+    })),
+  };
+}
+
+function unmangleMessageText(
+  messageText: string | ts.DiagnosticMessageChain,
+): string | ts.DiagnosticMessageChain {
+  if (typeof messageText === "string") {
+    return unmangle(messageText);
+  }
+  return {
+    ...messageText,
+    messageText: unmangle(messageText.messageText),
+    next: messageText.next?.map(
+      (chain) => unmangleMessageText(chain) as ts.DiagnosticMessageChain,
+    ),
+  };
+}
+
+function unmangleDisplayPart(part: ts.SymbolDisplayPart): ts.SymbolDisplayPart {
+  return { ...part, text: unmangle(part.text) };
 }

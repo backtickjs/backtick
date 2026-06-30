@@ -1,6 +1,6 @@
 import { createAsyncLanguageServicePlugin } from "@volar/typescript/lib/quickstart/createAsyncLanguageServicePlugin.js";
-import type * as ts from "typescript";
-import { decorateWithUnmangle } from "./decorateLanguageService.js";
+import type ts from "typescript";
+import { decorateLanguageService } from "./decorateLanguageService.js";
 
 const init = createAsyncLanguageServicePlugin(
   // No extra file extensions: backtick virtualizes standard .ts/.tsx/.js/.jsx in
@@ -21,11 +21,10 @@ const init = createAsyncLanguageServicePlugin(
 
 const plugin: ts.server.PluginModuleFactory = (mod) => {
   const pluginModule = init(mod);
-  const { create } = pluginModule;
   return {
     ...pluginModule,
     create(info) {
-      return decorateWithUnmangle(create(info));
+      return decorateLanguageService(pluginModule.create(info));
     },
   };
 };
