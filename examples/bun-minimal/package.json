@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "start": "bun src/index.ts",
-    "clean": "rm -rf node_modules dist .turbo"
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "clean": "rm -rf node_modules"
   },
   "dependencies": {
     "@backtick/bun-plugin": "workspace:*",
