@@ -1,0 +1,8 @@
+{
+  "extends": "../../configs/tsconfig.build.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "types": ["node", "bun"]
+  }
+}

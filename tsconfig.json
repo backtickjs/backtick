@@ -2,6 +2,7 @@
   "extends": "./configs/tsconfig.base.json",
   "files": [],
   "references": [
+    { "path": "packages/bun-plugin" },
     { "path": "packages/core" },
     { "path": "packages/language-tools/language-plugin" },
     { "path": "packages/language-tools/language-server" },

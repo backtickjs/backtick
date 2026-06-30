@@ -4,9 +4,7 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["bun"],
-    "inlineSources": true,
-    "inlineSourceMap": true
+    "types": ["bun"]
   },
-  "include": ["src", "bun-preload.ts"]
+  "include": ["src"]
 }

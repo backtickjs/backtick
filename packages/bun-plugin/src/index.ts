@@ -1,28 +1,43 @@
 import { readFileSync } from "node:fs";
+import path from "node:path";
 import { transform } from "@backtick/core/compiler";
 import { plugin } from "bun";
 import ts from "typescript";
 
-const { config } = ts.readConfigFile(
-  `${import.meta.dir}/tsconfig.json`,
-  ts.sys.readFile,
-);
+const compilerOptions = loadCompilerOptions();
 
-const { options: compilerOptions } = ts.convertCompilerOptionsFromJson(
-  config.compilerOptions,
-  import.meta.dir,
-);
-
+/**
+ * Use it from a `bunfig.toml`:
+ *
+ * ```toml
+ * preload = ["@backtick/bun-plugin"]
+ * ```
+ *
+ * or from the command line:
+ *
+ * ```sh
+ * bun --preload @backtick/bun-plugin ./src/index.ts
+ * ```
+ */
 plugin({
   name: "backtick",
   setup(build) {
-    build.onLoad({ filter: /[/\\]src[/\\].*\.tsx?$/ }, (args) => {
+    build.onLoad({ filter: /\.tsx?$/ }, (args) => {
+      if (args.path.includes("node_modules")) {
+        return undefined;
+      }
+
       const source = readFileSync(args.path, "utf8");
+      if (!source.includes("cs`")) {
+        return undefined;
+      }
+
       const { outputText } = ts.transpileModule(source, {
         fileName: args.path,
         compilerOptions,
         transformers: { before: [transform(ts), addBunPragma(ts)] },
       });
+
       return {
         contents: outputText,
         loader: args.path.endsWith(".tsx") ? "jsx" : "js",
@@ -30,6 +45,32 @@ plugin({
     });
   },
 });
+
+function loadCompilerOptions(): ts.CompilerOptions {
+  const configPath = ts.findConfigFile(
+    process.cwd(),
+    ts.sys.fileExists,
+    "tsconfig.json",
+  );
+
+  let compilerOptions: ts.CompilerOptions = {};
+  if (configPath) {
+    const { config } = ts.readConfigFile(configPath, ts.sys.readFile);
+    ({ options: compilerOptions } = ts.convertCompilerOptionsFromJson(
+      config?.compilerOptions,
+      path.dirname(configPath),
+    ));
+  }
+
+  // The `// @bun` pragma trick (see addBunPragma) only works with an inline
+  // source map, so force it on regardless of the project's configuration.
+  return {
+    ...compilerOptions,
+    sourceMap: false,
+    inlineSourceMap: true,
+    inlineSources: true,
+  };
+}
 
 // HACK: stamp a `// @bun` pragma at the top of the output to trick Bun into
 // using our inline source map.
