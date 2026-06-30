@@ -1,5 +1,5 @@
 import type * as ts from "typescript";
-import { unmangle } from "./unmangle.js";
+import { unmangle, unmangleDisplayPart } from "./unmangle.js";
 
 export function unmangleCompletionInfo<T extends ts.CompletionInfo>(
   completions: T,
@@ -23,8 +23,4 @@ export function unmangleCompletionEntryDetails(
     displayParts: details.displayParts.map(unmangleDisplayPart),
     documentation: details.documentation?.map(unmangleDisplayPart),
   };
-}
-
-function unmangleDisplayPart(part: ts.SymbolDisplayPart): ts.SymbolDisplayPart {
-  return { ...part, text: unmangle(part.text) };
 }

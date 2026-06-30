@@ -5,6 +5,7 @@ import {
   unmangleCompletionInfo,
 } from "./unmangleCompletions.js";
 import { unmangleDiagnostic } from "./unmangleDiagnostics.js";
+import { unmangleQuickInfo } from "./unmangleQuickInfo.js";
 
 export function decorateLanguageService(
   inner: ts.LanguageService,
@@ -18,6 +19,11 @@ export function decorateLanguageService(
 
     getSuggestionDiagnostics: (fileName) =>
       inner.getSuggestionDiagnostics(fileName).map(unmangleDiagnostic),
+
+    getQuickInfoAtPosition: (fileName, position) => {
+      const quickInfo = inner.getQuickInfoAtPosition(fileName, position);
+      return quickInfo && unmangleQuickInfo(quickInfo);
+    },
 
     getCompletionsAtPosition: (fileName, position, options, settings) => {
       const completions = inner.getCompletionsAtPosition(
