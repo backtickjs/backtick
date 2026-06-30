@@ -24,14 +24,14 @@ importers:
   examples/bun-minimal:
     dependencies:
       '@backtick/bun-plugin':
-        specifier: workspace:*
+        specifier: ^0.0.0
         version: link:../../packages/bun-plugin
       '@backtick/core':
-        specifier: workspace:*
+        specifier: ^0.0.0
         version: link:../../packages/core
     devDependencies:
       '@backtick/prettier-plugin':
-        specifier: workspace:*
+        specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
       '@types/bun':
         specifier: ^1.3.14
@@ -46,14 +46,14 @@ importers:
   examples/node-minimal:
     dependencies:
       '@backtick/core':
-        specifier: workspace:*
+        specifier: ^0.0.0
         version: link:../../packages/core
       '@backtick/tspatch-plugin':
-        specifier: workspace:*
+        specifier: ^0.0.0
         version: link:../../packages/tspatch-plugin
     devDependencies:
       '@backtick/prettier-plugin':
-        specifier: workspace:*
+        specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
       prettier:
         specifier: ^3.6.2

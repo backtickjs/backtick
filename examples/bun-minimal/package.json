@@ -10,11 +10,11 @@
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
-    "@backtick/bun-plugin": "workspace:*",
-    "@backtick/core": "workspace:*"
+    "@backtick/bun-plugin": "^0.0.0",
+    "@backtick/core": "^0.0.0"
   },
   "devDependencies": {
-    "@backtick/prettier-plugin": "workspace:*",
+    "@backtick/prettier-plugin": "^0.0.0",
     "@types/bun": "^1.3.14",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
