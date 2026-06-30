@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tspc -p tsconfig.json",
+    "build": "tspc",
     "start": "node --enable-source-maps dist/index.js",
     "format": "prettier --write src",
     "clean": "rm -rf node_modules dist"
