@@ -4,12 +4,7 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["bun"],
-    "plugins": [
-      // Editor features require workspace TS:
-      // Cmd+Shift+P → "TypeScript: Select TypeScript Version" → "Use Workspace Version"
-      { "name": "@backtick/editor-plugin" }
-    ]
+    "types": ["bun"]
   },
   "include": ["src"]
 }

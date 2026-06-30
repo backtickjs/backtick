@@ -7,9 +7,6 @@
     "outDir": "dist",
     "sourceMap": true,
     "plugins": [
-      // Editor features require workspace TS:
-      // Cmd+Shift+P → "TypeScript: Select TypeScript Version" → "Use Workspace Version"
-      { "name": "@backtick/editor-plugin" },
       // Build with `tspc`, not `tsc`.
       { "transform": "@backtick/tspatch-plugin" }
     ]
