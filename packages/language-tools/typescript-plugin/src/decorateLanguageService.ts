@@ -1,5 +1,4 @@
 import type * as ts from "typescript";
-import { CLIENT_PREFIX } from "./unmangle.js";
 import {
   unmangleCompletionEntryDetails,
   unmangleCompletionInfo,
@@ -43,7 +42,7 @@ export function decorateLanguageService(
         inner.getCompletionEntryDetails(
           fileName,
           position,
-          CLIENT_PREFIX + name,
+          `$0client_${name}`,
           ...rest,
         ) ?? inner.getCompletionEntryDetails(fileName, position, name, ...rest);
       return details && unmangleCompletionEntryDetails(details);
