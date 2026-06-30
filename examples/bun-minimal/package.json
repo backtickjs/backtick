@@ -6,7 +6,6 @@
   "scripts": {
     "start": "bun src/index.ts",
     "format": "prettier --write src",
-    "format:check": "prettier --check src",
     "clean": "rm -rf node_modules"
   },
   "dependencies": {
