@@ -6,7 +6,6 @@ import {
   loadTsdkByPath,
 } from "@volar/language-server/node";
 import type { URI } from "vscode-uri";
-import getBacktickDiagnosticService from "./getBacktickDiagnosticService.js";
 
 const connection = createConnection();
 const server = createServer(connection);
@@ -25,7 +24,7 @@ connection.onInitialize((params) => {
         getBacktickLanguagePlugin<URI>(tsdk.typescript, (uri) => uri.fsPath),
       ],
     })),
-    [getBacktickDiagnosticService()],
+    [],
   );
 });
 

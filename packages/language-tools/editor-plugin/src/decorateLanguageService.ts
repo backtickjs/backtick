@@ -1,4 +1,6 @@
+import type { Language } from "@volar/language-core";
 import type * as ts from "typescript";
+import { getBacktickDiagnostics } from "./getBacktickDiagnostics.js";
 import {
   unmangleCompletionEntryDetails,
   unmangleCompletionInfo,
@@ -7,11 +9,15 @@ import { unmangleDiagnostic } from "./unmangleDiagnostics.js";
 import { unmangleQuickInfo } from "./unmangleQuickInfo.js";
 
 export function decorateLanguageService(
+  ts: typeof import("typescript"),
   inner: ts.LanguageService,
+  languageHolder: { current?: Language<string> },
 ): ts.LanguageService {
   const overrides: Partial<ts.LanguageService> = {
-    getSemanticDiagnostics: (fileName) =>
-      inner.getSemanticDiagnostics(fileName).map(unmangleDiagnostic),
+    getSemanticDiagnostics: (fileName) => [
+      ...inner.getSemanticDiagnostics(fileName).map(unmangleDiagnostic),
+      ...getBacktickDiagnostics(ts, inner, languageHolder.current, fileName),
+    ],
 
     getSyntacticDiagnostics: (fileName) =>
       inner.getSyntacticDiagnostics(fileName).map(unmangleDiagnostic),

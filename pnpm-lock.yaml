@@ -88,6 +88,9 @@ importers:
       '@backtick/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
+      '@volar/language-core':
+        specifier: ^2.4.28
+        version: 2.4.28
       '@volar/typescript':
         specifier: ^2.4.28
         version: 2.4.28
