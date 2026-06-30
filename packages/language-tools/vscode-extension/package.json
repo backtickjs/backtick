@@ -47,7 +47,8 @@
     "dev": "node scripts/build.mjs -- --watch",
     "test": "pnpm test:grammar",
     "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
-    "test:grammar": "node ./test/grammar/test.mjs"
+    "test:grammar": "node ./test/grammar/test.mjs",
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
     "@backtick/prettier-plugin": "^0.0.0",

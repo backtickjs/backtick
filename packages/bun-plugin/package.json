@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "tsc -b",
-    "dev": "tsc -b --watch"
+    "dev": "tsc -b --watch",
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "peerDependencies": {
     "@backtick/core": "workspace:*",

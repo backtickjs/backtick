@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tspc -p tsconfig.json",
-    "start": "node --enable-source-maps dist/index.js"
+    "start": "node --enable-source-maps dist/index.js",
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
     "@backtick/core": "workspace:*",

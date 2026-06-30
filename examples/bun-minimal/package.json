@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "bun src/index.ts"
+    "start": "bun src/index.ts",
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
     "@backtick/bun-plugin": "workspace:*",

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "tsc -b --watch"
+    "dev": "tsc -b --watch",
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
     "@backtick/language-plugin": "^0.0.0",

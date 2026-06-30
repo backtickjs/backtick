@@ -11,6 +11,9 @@
     "test:update": {
       "dependsOn": ["build"],
       "cache": false
+    },
+    "clean": {
+      "cache": false
     }
   }
 }
