@@ -27,15 +27,13 @@ export class BacktickVirtualCode implements VirtualCode {
     this.languageId = languageId;
     this.diagnostics = diagnostics;
 
-    // The root mirrors the original source 1:1. Prettier (with the Backtick
-    // plugin) formats this, so on save the file stays as Backtick source
     this.snapshot = snapshot;
     this.mappings = [
       {
         sourceOffsets: [0],
         generatedOffsets: [0],
         lengths: [sourceText.length],
-        data: { format: true, verification: true },
+        data: { format: false, verification: true },
       },
     ];
 
@@ -50,8 +48,6 @@ export class BacktickVirtualCode implements VirtualCode {
         },
         mappings: mappings.map((mapping) => ({
           ...mapping,
-          // Every feature is enabled except `format`, which is routed to the
-          // root so the file isn't overwritten with compiled output on save.
           data: {
             completion: true,
             format: false,

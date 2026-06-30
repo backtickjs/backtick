@@ -13,6 +13,8 @@
     "@backtick/tspatch-plugin": "workspace:*"
   },
   "devDependencies": {
+    "@backtick/prettier-plugin": "workspace:*",
+    "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   }

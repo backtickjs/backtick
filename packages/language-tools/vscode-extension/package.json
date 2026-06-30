@@ -50,10 +50,6 @@
     "test:grammar": "node ./test/grammar/test.mjs",
     "clean": "rm -rf node_modules dist .turbo"
   },
-  "dependencies": {
-    "@backtick/prettier-plugin": "^0.0.0",
-    "prettier": "^3.6.2"
-  },
   "devDependencies": {
     "@backtick/language-server": "^0.0.0",
     "@types/vscode": "^1.120.0",

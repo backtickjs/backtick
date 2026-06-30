@@ -8,7 +8,6 @@ import {
 import { create as createTypeScriptServices } from "volar-service-typescript";
 import type { URI } from "vscode-uri";
 import getBacktickDiagnosticService from "./getBacktickDiagnosticService.js";
-import getBacktickPrettierService from "./getBacktickPrettierService.js";
 import unmanglePluginResponses from "./unmanglePluginResponses.js";
 
 const connection = createConnection();
@@ -29,9 +28,6 @@ connection.onInitialize((params) => {
       ],
     })),
     [
-      // Prettier and TypeScript both want to format files, but Volar only
-      // lets one win: it uses whichever service is listed first here
-      getBacktickPrettierService(connection),
       getBacktickDiagnosticService(),
       ...unmanglePluginResponses(createTypeScriptServices(tsdk.typescript)),
     ],
