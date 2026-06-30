@@ -2,6 +2,9 @@ packages:
   - "packages/**/*"
   - "examples/*"
 
+onlyBuiltDependencies:
+  - esbuild
+
 linkWorkspacePackages: true
 preferWorkspacePackages: true
 saveWorkspaceProtocol: false # `pnpm add` writes "^2.16.9", not "workspace:^"
