@@ -1,19 +1,21 @@
-import { BacktickVirtualCode } from "@backtick/language-plugin";
 import type { Language } from "@volar/language-core";
 import type * as ts from "typescript";
+import { BacktickVirtualCode } from "./BacktickVirtualCode.js";
 
 // Surfaces Backtick's own compiler diagnostics (e.g. unsupported syntax inside
-// a `cs` client script) to the editor. TypeScript diagnostics already flow
-// through the compiled embedded code; these are the errors Backtick itself
-// produces, which TypeScript knows nothing about.
+// a `cs` client script) — the errors Backtick itself produces, which TypeScript
+// knows nothing about. TypeScript's diagnostics already flow through the
+// compiled embedded code; these are additive.
 //
-// The diagnostics are stored on the root virtual code in source coordinates.
-// `getSemanticDiagnostics` reports against the user's file (whose text mirrors
-// the source 1:1), so the offsets map straight through with no translation.
+// The diagnostics are stored on the root virtual code in source coordinates,
+// and `file`'s text mirrors the source 1:1, so the offsets map straight through
+// with no translation. Works against any consumer that can supply the
+// `Language` and the file's `SourceFile` — a language service (editor) or a
+// program (command-line `tsc`).
 export function getBacktickDiagnostics(
   ts: typeof import("typescript"),
-  inner: ts.LanguageService,
   language: Language<string> | undefined,
+  file: ts.SourceFile | undefined,
   fileName: string,
 ): ts.Diagnostic[] {
   const root = language?.scripts.get(fileName)?.generated?.root;
@@ -21,7 +23,6 @@ export function getBacktickDiagnostics(
     return [];
   }
 
-  const file = inner.getProgram()?.getSourceFile(fileName);
   return root.diagnostics.map((diagnostic) => ({
     file,
     start: diagnostic.range.start,

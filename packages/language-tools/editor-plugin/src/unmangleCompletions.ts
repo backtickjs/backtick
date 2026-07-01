@@ -1,5 +1,5 @@
+import { unmangle, unmangleDisplayPart } from "@backtick/language-plugin";
 import type * as ts from "typescript";
-import { unmangle, unmangleDisplayPart } from "./unmangle.js";
 
 export function unmangleCompletionInfo<T extends ts.CompletionInfo>(
   completions: T,

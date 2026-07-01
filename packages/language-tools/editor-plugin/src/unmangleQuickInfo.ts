@@ -1,5 +1,5 @@
+import { unmangleDisplayPart } from "@backtick/language-plugin";
 import type * as ts from "typescript";
-import { unmangleDisplayPart } from "./unmangle.js";
 
 export function unmangleQuickInfo(quickInfo: ts.QuickInfo): ts.QuickInfo {
   return {
