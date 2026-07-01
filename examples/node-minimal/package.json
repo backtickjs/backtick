@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tspc",
+    "typecheck": "backtick-tsc --noEmit",
     "start": "node --enable-source-maps dist/index.js",
     "format": "prettier --write src",
     "clean": "rm -rf node_modules dist"
@@ -15,6 +16,7 @@
   },
   "devDependencies": {
     "@backtick/prettier-plugin": "^0.0.0",
+    "@backtick/tsc": "^0.0.0",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"

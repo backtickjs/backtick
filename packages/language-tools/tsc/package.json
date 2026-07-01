@@ -1,0 +1,24 @@
+{
+  "name": "@backtick/tsc",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "backtick-tsc": "./bin/backtick-tsc.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtick/language-plugin": "workspace:*",
+    "@volar/typescript": "^2.4.28"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
