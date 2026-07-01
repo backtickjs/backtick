@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "typecheck": "tsc -b",
+    "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:update": "turbo run test:update",
     "check": "biome check .",
