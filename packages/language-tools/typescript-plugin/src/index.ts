@@ -1,7 +1,7 @@
 import type { Language } from "@volar/language-core";
 import { createAsyncLanguageServicePlugin } from "@volar/typescript/lib/quickstart/createAsyncLanguageServicePlugin.js";
 import type ts from "typescript";
-import { decorateLanguageService } from "./decorateLanguageService.js";
+import { decorateLanguageService } from "@backtick/language-service";
 
 const plugin: ts.server.PluginModuleFactory = (mod) => {
   // Captured during async init so the decorated language service can reach the

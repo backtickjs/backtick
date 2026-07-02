@@ -6,8 +6,5 @@
     "verbatimModuleSyntax": false,
     "erasableSyntaxOnly": false
   },
-  "references": [
-    { "path": "../language-plugin/tsconfig.build.json" },
-    { "path": "../language-service/tsconfig.build.json" }
-  ]
+  "references": [{ "path": "../language-plugin/tsconfig.build.json" }]
 }

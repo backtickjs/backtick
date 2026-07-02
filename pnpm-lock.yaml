@@ -123,14 +123,27 @@ importers:
         specifier: ^3.0.8
         version: 3.1.0
 
+  packages/language-tools/language-service:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/language-core':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/language-tools/tsc:
     dependencies:
       '@backtick/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
-      '@backtick/typescript-plugin':
+      '@backtick/language-service':
         specifier: workspace:*
-        version: link:../typescript-plugin
+        version: link:../language-service
       '@volar/typescript':
         specifier: ^2.4.28
         version: 2.4.28
@@ -144,6 +157,9 @@ importers:
       '@backtick/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
+      '@backtick/language-service':
+        specifier: workspace:*
+        version: link:../language-service
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28

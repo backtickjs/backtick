@@ -1,10 +1,14 @@
 {
-  "name": "@backtick/tsc",
+  "name": "@backtick/language-service",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
-  "bin": {
-    "backtick-tsc": "./bin/backtick-tsc.js"
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "scripts": {
     "build": "tsc -b",
@@ -12,14 +16,13 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/language-service": "workspace:*",
     "@backtick/language-plugin": "workspace:*",
-    "@volar/typescript": "^2.4.28"
-  },
-  "peerDependencies": {
-    "typescript": "^6.0.3"
+    "@volar/language-core": "^2.4.28"
   },
   "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
     "typescript": "^6.0.3"
   }
 }
