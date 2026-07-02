@@ -12,6 +12,9 @@ const { runTsc } = require("@volar/typescript/lib/quickstart/runTsc.js");
 const ts = require("typescript");
 
 const decorateProgramModule = require("@volar/typescript/lib/node/decorateProgram.js");
+const {
+  fillSourceFileText,
+} = require("@volar/typescript/lib/node/transform.js");
 const volarDecorateProgram = decorateProgramModule.decorateProgram;
 decorateProgramModule.decorateProgram = (language, program) => {
   volarDecorateProgram(language, program);
@@ -28,23 +31,10 @@ decorateProgramModule.decorateProgram = (language, program) => {
           file,
           file.fileName,
         );
-        if (diagnostics.length === 0) {
-          return [];
+        if (diagnostics.length > 0) {
+          fillSourceFileText(language, file);
         }
-        const snapshot = language.scripts.get(file.fileName)?.snapshot;
-        if (snapshot == null) {
-          return [];
-        }
-        const sourceText = snapshot.getText(0, snapshot.getLength());
-        const sourceFile = ts.createSourceFile(
-          file.fileName,
-          sourceText,
-          ts.ScriptTarget.Latest,
-        );
-        return diagnostics.map((diagnostic) => ({
-          ...diagnostic,
-          file: sourceFile,
-        }));
+        return diagnostics;
       }),
     ];
   };
