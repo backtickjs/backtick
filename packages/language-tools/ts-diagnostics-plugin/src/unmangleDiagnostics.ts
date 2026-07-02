@@ -1,5 +1,5 @@
+import { unmangle } from "@backtick/volar-plugins";
 import type * as ts from "typescript";
-import { unmangle } from "./unmangle.js";
 
 export function unmangleDiagnostic<T extends ts.Diagnostic>(diagnostic: T): T {
   return {

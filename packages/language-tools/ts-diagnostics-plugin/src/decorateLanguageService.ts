@@ -1,9 +1,7 @@
-import {
-  getBacktickDiagnostics,
-  unmangleDiagnostic,
-} from "@backtick/volar-plugins";
+import { getBacktickDiagnostics } from "@backtick/volar-plugins";
 import type { Language } from "@volar/language-core";
 import type * as ts from "typescript";
+import { unmangleDiagnostic } from "./unmangleDiagnostics.js";
 
 export function decorateLanguageService(
   ts: typeof import("typescript"),

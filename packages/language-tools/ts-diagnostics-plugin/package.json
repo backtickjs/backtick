@@ -4,6 +4,16 @@
   "private": true,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./unmangleDiagnostics": {
+      "types": "./dist/unmangleDiagnostics.d.ts",
+      "default": "./dist/unmangleDiagnostics.js"
+    }
+  },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",

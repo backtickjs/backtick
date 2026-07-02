@@ -120,6 +120,9 @@ importers:
 
   packages/language-tools/tsc:
     dependencies:
+      '@backtick/ts-diagnostics-plugin':
+        specifier: workspace:*
+        version: link:../ts-diagnostics-plugin
       '@backtick/volar-plugins':
         specifier: workspace:*
         version: link:../volar-plugins

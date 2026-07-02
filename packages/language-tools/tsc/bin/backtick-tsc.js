@@ -4,10 +4,12 @@ import { createRequire } from "node:module";
 import {
   getBacktickDiagnostics,
   getBacktickLanguagePlugin,
-  unmangleDiagnostic,
 } from "@backtick/volar-plugins";
 
 const require = createRequire(import.meta.url);
+const {
+  unmangleDiagnostic,
+} = require("@backtick/ts-diagnostics-plugin/unmangleDiagnostics");
 const { runTsc } = require("@volar/typescript/lib/quickstart/runTsc.js");
 const ts = require("typescript");
 
