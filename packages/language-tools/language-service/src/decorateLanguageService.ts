@@ -1,4 +1,4 @@
-import { mangle } from "@backtick/language-plugin";
+import { mangle } from "@backtick/core/compiler";
 import type { Language } from "@volar/language-core";
 import type * as ts from "typescript";
 import { getBacktickDiagnostics } from "./getBacktickDiagnostics.js";
