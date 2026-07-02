@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import type { SourceRange } from "../cs-runtime/index.js";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 import type { RewrittenFile } from "./rewriteFile.js";
@@ -91,11 +92,57 @@ function renderScript(
     segments.push(text.slice(cursor));
   }
 
-  return segments.flatMap((segment) =>
+  const rendered = segments.flatMap((segment) =>
     typeof segment === "string"
       ? reinjectSplices(ts, sourceFile, rewrittenFile, script, segment)
       : [segment],
   );
+
+  const range = rewrittenFile.sourceMaps.get(node);
+  return range ? fillGaps(rendered, range) : rendered;
+}
+
+// Map each unmapped (synthetic) span to the slice of `range` between the
+// already-mapped segments that surround it, keeping every mapping distinct and
+// non-overlapping.
+function fillGaps(segments: Segment[], range: SourceRange): Segment[] {
+  // Merge adjacent plain-string segments so each synthetic gap is a single
+  // segment bounded by mapped (specific) segments.
+  const merged: Segment[] = [];
+  for (const segment of segments) {
+    const last = merged[merged.length - 1];
+    if (typeof segment === "string" && typeof last === "string") {
+      merged[merged.length - 1] = last + segment;
+    } else {
+      merged.push(segment);
+    }
+  }
+
+  // Source offset just past the previous specific (already-mapped) segment.
+  let sourceCursor = range.start;
+  return merged.map((segment, index) => {
+    if (typeof segment !== "string") {
+      const [, , sourceOffset, sourceLength] = segment;
+      sourceCursor = Math.max(sourceCursor, sourceOffset + sourceLength);
+      return segment;
+    }
+    if (segment.length === 0) {
+      return segment;
+    }
+    // This gap maps up to where the next specific segment begins, or to the end
+    // of the script if none follows.
+    let gapEnd = range.end;
+    for (let i = index + 1; i < merged.length; i++) {
+      const next = merged[i];
+      if (typeof next !== "string") {
+        gapEnd = next[2];
+        break;
+      }
+    }
+    const start = sourceCursor;
+    const end = Math.max(start, gapEnd);
+    return [segment, undefined, start, end - start];
+  });
 }
 
 function reinjectSplices(

@@ -1,0 +1,12 @@
+cs.lift(cs.lower(  → cs`${
+lhs                → lhs
+) + cs.lower(      → } + ${
+rhs                → rhs
+))                 → }`
+cs.lift(cs.lower(  → cs`${
+add(               → add(
+cs.lift(1)         → cs`1`
+,                  → , 
+cs.lift(2)         → cs`2`
+)                  → )
+))                 → }`

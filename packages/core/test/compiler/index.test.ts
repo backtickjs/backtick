@@ -6,6 +6,7 @@ import { describe, it } from "node:test";
 import ts from "typescript";
 import { transform } from "../../dist/compiler/transform.js";
 import { virtualize } from "../../dist/compiler/virtualize.js";
+import { renderMappings } from "./renderMappings.ts";
 
 const fixturesDir = join(import.meta.dirname, "fixtures");
 
@@ -40,9 +41,11 @@ describe("compile", () => {
       const base = fileName.slice(0, -extname(fileName).length);
       const sourceText = readFileSync(join(fixturesDir, fileName), "utf8");
 
+      const { virtualCode, mappings } = virtualize(ts, fileName, sourceText);
+      matchFileSnapshot(virtualCode, join(fixturesDir, `${base}.virtual.tsx`));
       matchFileSnapshot(
-        virtualize(ts, fileName, sourceText).virtualCode,
-        join(fixturesDir, `${base}.virtual.tsx`),
+        renderMappings(fileName, virtualCode, sourceText, mappings),
+        join(fixturesDir, `${base}.sourcemap`),
       );
       matchFileSnapshot(
         ts.transpileModule(sourceText, {

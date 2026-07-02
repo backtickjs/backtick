@@ -1,0 +1,12 @@
+cs.lift({ a: 4 })             → cs`({ a: 4 })`
+cs.lift((() => {\n    const   → cs`{\n  const 
+__cs_obj                      → obj
+ = cs.lower(                  →  = ${
+obj                           → obj
+);\n    return cs.lower(      → };\n  return ${
+cs.lift(                      → cs`
+__cs_obj                      → obj
+.                             → .
+a                             → a
+)                             → `
+);\n})())                     → };\n}`

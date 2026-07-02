@@ -1,0 +1,67 @@
+import ts from "typescript";
+import type { SourceMapping } from "../../dist/compiler/buildMappings.js";
+import { parseFile } from "../../dist/compiler/parseFile.js";
+
+// The source spans covered by top-level `cs` templates (which enclose any
+// nested scripts). Used to drop the identity mappings for the surrounding code,
+// so the snapshot only shows how the compiled scripts map back to source.
+function scriptRanges(
+  fileName: string,
+  sourceText: string,
+): Array<[start: number, end: number]> {
+  const { sourceFile, scripts } = parseFile(ts, fileName, sourceText);
+  return scripts.map((script) => [
+    script.sourceNode.getStart(sourceFile),
+    script.sourceNode.getEnd(),
+  ]);
+}
+
+// Render each source-map entry as `<generated>  → <source>`, escaping newlines
+// so a mapping stays on a single line and aligning the arrows into a column.
+// Identity mappings for the code surrounding the `cs` scripts are dropped.
+export function renderMappings(
+  fileName: string,
+  virtualCode: string,
+  sourceText: string,
+  mappings: SourceMapping[],
+): string {
+  const ranges = scriptRanges(fileName, sourceText);
+
+  const escape = (text: string): string =>
+    text
+      .replace(/\\/g, "\\\\")
+      .replace(/\n/g, "\\n")
+      .replace(/\r/g, "\\r")
+      .replace(/\t/g, "\\t");
+
+  const inScript = (offset: number): boolean =>
+    ranges.some(([start, end]) => offset >= start && offset < end);
+
+  const rows: Array<
+    [generatedOffset: number, generated: string, source: string]
+  > = [];
+  for (const mapping of mappings) {
+    for (let i = 0; i < mapping.generatedOffsets.length; i++) {
+      if (!inScript(mapping.sourceOffsets[i])) {
+        continue;
+      }
+      const generatedOffset = mapping.generatedOffsets[i];
+      const generated = virtualCode.slice(
+        generatedOffset,
+        generatedOffset + mapping.generatedLengths[i],
+      );
+      const source = sourceText.slice(
+        mapping.sourceOffsets[i],
+        mapping.sourceOffsets[i] + mapping.lengths[i],
+      );
+      rows.push([generatedOffset, escape(generated), escape(source)]);
+    }
+  }
+  rows.sort((a, b) => a[0] - b[0]);
+
+  const width =
+    Math.max(0, ...rows.map(([, generated]) => generated.length)) + 2;
+  return `${rows
+    .map(([, generated, source]) => `${generated.padEnd(width)}→ ${source}`)
+    .join("\n")}\n`;
+}
