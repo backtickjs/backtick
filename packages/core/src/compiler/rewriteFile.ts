@@ -8,7 +8,7 @@ import { type RewrittenScript, rewriteScript } from "./rewriteScript.js";
 export interface RewrittenFile {
   sourceFile: ts.SourceFile;
   scripts: Map<ts.TaggedTemplateExpression, RewrittenScript>;
-  sourceMaps: Map<ts.Identifier, SourceRange>;
+  sourceMaps: Map<ts.Node, SourceRange>;
   diagnostics: Diagnostic[];
 }
 
@@ -19,14 +19,14 @@ export function rewriteFile(
   const sourceFile = parsedFile.sourceFile;
 
   const scripts = new Map<ts.TaggedTemplateExpression, RewrittenScript>();
-  const sourceMaps = new Map<ts.Identifier, SourceRange>();
+  const sourceMaps = new Map<ts.Node, SourceRange>();
   const diagnostics: Diagnostic[] = [];
 
   for (const script of flattenScripts(parsedFile.scripts)) {
     const rewritten = rewriteScript(ts, script);
     scripts.set(script.sourceNode, rewritten);
-    for (const [identifier, range] of rewritten.sourceMaps) {
-      sourceMaps.set(identifier, range);
+    for (const [node, range] of rewritten.sourceMaps) {
+      sourceMaps.set(node, range);
     }
     diagnostics.push(...rewritten.diagnostics);
   }

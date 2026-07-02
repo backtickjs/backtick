@@ -6,7 +6,7 @@ import { mangle } from "./unmangle.js";
 export interface RewriteState {
   script: ClientScript;
   errors: Map<ts.Node, string>;
-  mappings: Map<ts.Identifier, ts.Identifier>;
+  mappings: Map<ts.Node, ts.Node>;
 }
 
 export interface RewrittenNode {

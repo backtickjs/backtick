@@ -10,7 +10,7 @@ import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 export interface RewrittenScript {
   virtual: ts.Node;
   runtime: ts.Node;
-  sourceMaps: Map<ts.Identifier, SourceRange>; // virtual -> source range
+  sourceMaps: Map<ts.Node, SourceRange>; // virtual -> source range
   diagnostics: Diagnostic[];
 }
 
@@ -43,7 +43,7 @@ export function rewriteScript(
 
   const rewritten = rewriteNode(ts, state, scriptNode);
 
-  const sourceMaps: Map<ts.Identifier, SourceRange> = new Map();
+  const sourceMaps: Map<ts.Node, SourceRange> = new Map();
   for (const [source, virtual] of state.mappings) {
     const range = clientScript.toSourceRange(source);
     sourceMaps.set(virtual, range);
@@ -95,17 +95,22 @@ export function rewriteScript(
       : (rewritten.virtual as ts.Expression),
   ]);
 
-  const spliceDecls = splices.map((splice: Splice) =>
-    constDecl(ts, splice.placeholder, splice.sourceNode.expression),
-  );
+  const scriptRange: SourceRange = {
+    start: sourceNode.getStart(sourceFile),
+    end: sourceNode.getEnd(),
+  };
+
+  sourceMaps.set(virtual, scriptRange);
 
   const scriptLocation: SourceLocation = {
     path: sourceFile.fileName,
-    start: sourceFile.getLineAndCharacterOfPosition(
-      sourceNode.getStart(sourceFile),
-    ),
-    end: sourceFile.getLineAndCharacterOfPosition(sourceNode.getEnd()),
+    start: sourceFile.getLineAndCharacterOfPosition(scriptRange.start),
+    end: sourceFile.getLineAndCharacterOfPosition(scriptRange.end),
   };
+
+  const spliceDecls = splices.map((splice: Splice) =>
+    constDecl(ts, splice.placeholder, splice.sourceNode.expression),
+  );
 
   const create = call(ts, "cs", "create", [
     arrow(
