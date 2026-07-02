@@ -123,7 +123,23 @@ importers:
         specifier: ^3.0.8
         version: 3.1.0
 
-  packages/language-tools/ts-diagnostics-plugin:
+  packages/language-tools/tsc:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@backtick/typescript-plugin':
+        specifier: workspace:*
+        version: link:../typescript-plugin
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/typescript-plugin:
     dependencies:
       '@backtick/language-plugin':
         specifier: workspace:*
@@ -139,43 +155,11 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/language-tools/ts-intellisense-plugin:
-    dependencies:
-      '@backtick/language-plugin':
-        specifier: workspace:*
-        version: link:../language-plugin
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language-tools/tsc:
-    dependencies:
-      '@backtick/language-plugin':
-        specifier: workspace:*
-        version: link:../language-plugin
-      '@backtick/ts-diagnostics-plugin':
-        specifier: workspace:*
-        version: link:../ts-diagnostics-plugin
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/language-tools/vscode-extension:
     dependencies:
-      '@backtick/ts-diagnostics-plugin':
+      '@backtick/typescript-plugin':
         specifier: workspace:*
-        version: link:../ts-diagnostics-plugin
-      '@backtick/ts-intellisense-plugin':
-        specifier: workspace:*
-        version: link:../ts-intellisense-plugin
+        version: link:../typescript-plugin
     devDependencies:
       '@backtick/language-server':
         specifier: workspace:*

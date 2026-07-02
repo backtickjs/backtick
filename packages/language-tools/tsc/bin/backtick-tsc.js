@@ -6,10 +6,10 @@ import { getBacktickLanguagePlugin } from "@backtick/language-plugin";
 const require = createRequire(import.meta.url);
 const {
   getBacktickDiagnostics,
-} = require("@backtick/ts-diagnostics-plugin/getBacktickDiagnostics");
+} = require("@backtick/typescript-plugin/getBacktickDiagnostics");
 const {
   unmangleDiagnostic,
-} = require("@backtick/ts-diagnostics-plugin/unmangleDiagnostics");
+} = require("@backtick/typescript-plugin/unmangleDiagnostics");
 const { runTsc } = require("@volar/typescript/lib/quickstart/runTsc.js");
 const ts = require("typescript");
 

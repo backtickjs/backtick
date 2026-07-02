@@ -12,7 +12,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/ts-diagnostics-plugin": "workspace:*",
+    "@backtick/typescript-plugin": "workspace:*",
     "@backtick/language-plugin": "workspace:*",
     "@volar/typescript": "^2.4.28"
   },
