@@ -28,7 +28,7 @@ export function getBacktickDiagnostics(
     length: diagnostic.range.end - diagnostic.range.start,
     messageText: diagnostic.message,
     category: diagnostic.category,
-    code: 0,
+    code: diagnostic.code,
     source: "backtick",
   }));
 }

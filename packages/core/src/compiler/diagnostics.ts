@@ -5,4 +5,5 @@ export interface Diagnostic {
   range: SourceRange;
   message: string;
   category: DiagnosticCategory;
+  code: number;
 }

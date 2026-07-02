@@ -52,7 +52,12 @@ export function rewriteScript(
   const diagnostics: Diagnostic[] = [];
   for (const [node, message] of state.errors) {
     const range = clientScript.toSourceRange(node);
-    diagnostics.push({ range, message, category: DiagnosticCategory.Error });
+    diagnostics.push({
+      range,
+      message,
+      category: DiagnosticCategory.Error,
+      code: 0,
+    });
   }
 
   const splices = Object.values(clientScript.splices);
