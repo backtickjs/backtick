@@ -1,6 +1,5 @@
 import type ts from "typescript";
 import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
-import { scriptKindFor } from "./scriptKindFor.js";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
@@ -34,7 +33,6 @@ export function parseFile(
     sourceText,
     ts.ScriptTarget.Latest,
     false,
-    scriptKindFor(ts, filePath),
   );
 
   const scripts = getDirectScripts(ts, null, sourceFile);
@@ -77,7 +75,6 @@ function getDirectScripts(
       textWithPlaceholders,
       ts.ScriptTarget.Latest,
       false,
-      scriptKindFor(ts, sourceFile.fileName),
     );
     const toSourceRange = (node: ts.Node): SourceRange => ({
       start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
