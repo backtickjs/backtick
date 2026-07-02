@@ -1,0 +1,4 @@
+{
+  "extends": "../../../configs/tsconfig.language-tools.json",
+  "references": [{ "path": "../language-server/tsconfig.json" }]
+}

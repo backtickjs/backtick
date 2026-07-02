@@ -5,6 +5,7 @@
     { "path": "packages/bun-plugin" },
     { "path": "packages/core" },
     { "path": "packages/language-tools/volar-plugins" },
+    { "path": "packages/language-tools/language-server" },
     { "path": "packages/language-tools/ts-diagnostics-plugin" },
     { "path": "packages/language-tools/ts-intellisense-plugin" },
     { "path": "packages/language-tools/tsc" },

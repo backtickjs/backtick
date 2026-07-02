@@ -2,9 +2,16 @@
   "name": "@backtick/vscode-extension",
   "version": "0.0.0",
   "private": true,
+  "main": "./dist/node/client.js",
   "engines": {
     "vscode": "^1.90.0"
   },
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
   "contributes": {
     "typescriptServerPlugins": [
       {
@@ -46,7 +53,8 @@
     ]
   },
   "scripts": {
-    "build": "tsc -b",
+    "build": "tsc -b && node scripts/build.mjs -- --minify",
+    "dev": "node scripts/build.mjs -- --watch",
     "test": "pnpm test:grammar",
     "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
     "test:grammar": "node ./test/grammar/test.mjs",
@@ -57,6 +65,13 @@
     "@backtick/ts-intellisense-plugin": "workspace:*"
   },
   "devDependencies": {
+    "@backtick/language-server": "workspace:*",
+    "@types/vscode": "^1.120.0",
+    "@volar/language-server": "^2.4.28",
+    "@volar/vscode": "^2.4.28",
+    "esbuild": "^0.28.0",
+    "esbuild-plugin-copy": "^2.1.1",
+    "kleur": "^4.1.5",
     "vscode-tmgrammar-test": "^0.1.3"
   }
 }

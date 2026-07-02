@@ -1,0 +1,15 @@
+{
+  "name": "@backtick/language-server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtick/volar-plugins": "workspace:*",
+    "@volar/language-server": "^2.4.28",
+    "vscode-uri": "^3.0.8"
+  }
+}
