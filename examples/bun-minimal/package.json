@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "bun src/index.ts",
-    "typecheck": "backtick-tsc --noEmit",
     "format": "prettier --write src",
+    "typecheck": "backtick-tsc --noEmit",
+    "start": "bun src/index.ts",
     "clean": "rm -rf node_modules"
   },
   "dependencies": {

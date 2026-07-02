@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tspc",
-    "typecheck": "backtick-tsc --noEmit",
-    "start": "node --enable-source-maps dist/index.js",
     "format": "prettier --write src",
+    "typecheck": "backtick-tsc --noEmit",
+    "build": "tspc --noCheck --declaration",
+    "start": "node --enable-source-maps dist/index.js",
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
