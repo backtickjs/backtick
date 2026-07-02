@@ -1,3 +1,3 @@
 export { mangle, unmangle } from "@backtick/core/compiler";
-export { getBacktickDiagnostics } from "./getBacktickDiagnostics.js";
+export { BacktickVirtualCode } from "./BacktickVirtualCode.js";
 export { getBacktickLanguagePlugin } from "./getBacktickLanguagePlugin.js";

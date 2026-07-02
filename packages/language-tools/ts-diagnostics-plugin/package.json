@@ -9,6 +9,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./getBacktickDiagnostics": {
+      "types": "./dist/getBacktickDiagnostics.d.ts",
+      "default": "./dist/getBacktickDiagnostics.js"
+    },
     "./unmangleDiagnostics": {
       "types": "./dist/unmangleDiagnostics.d.ts",
       "default": "./dist/unmangleDiagnostics.js"

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 import { createRequire } from "node:module";
-import {
-  getBacktickDiagnostics,
-  getBacktickLanguagePlugin,
-} from "@backtick/volar-plugins";
+import { getBacktickLanguagePlugin } from "@backtick/volar-plugins";
 
 const require = createRequire(import.meta.url);
+const {
+  getBacktickDiagnostics,
+} = require("@backtick/ts-diagnostics-plugin/getBacktickDiagnostics");
 const {
   unmangleDiagnostic,
 } = require("@backtick/ts-diagnostics-plugin/unmangleDiagnostics");
