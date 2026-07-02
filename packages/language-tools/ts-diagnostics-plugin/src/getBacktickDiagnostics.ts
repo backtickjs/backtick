@@ -1,4 +1,4 @@
-import { BacktickVirtualCode } from "@backtick/volar-plugins";
+import { BacktickVirtualCode } from "@backtick/language-plugin";
 import type { Language } from "@volar/language-core";
 import type * as ts from "typescript";
 

@@ -1,4 +1,4 @@
-import { unmangle } from "@backtick/volar-plugins";
+import { unmangle } from "@backtick/language-plugin";
 import type * as ts from "typescript";
 import { unmangleDisplayPart } from "./unmangleDisplayPart";
 

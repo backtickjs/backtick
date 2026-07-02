@@ -1,4 +1,4 @@
-import { mangle } from "@backtick/volar-plugins";
+import { mangle } from "@backtick/language-plugin";
 import type * as ts from "typescript";
 import {
   unmangleCompletionEntryDetails,

@@ -8,7 +8,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/volar-plugins": "workspace:*",
+    "@backtick/language-plugin": "workspace:*",
     "@volar/language-server": "^2.4.28",
     "vscode-uri": "^3.0.8"
   }

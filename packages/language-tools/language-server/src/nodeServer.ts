@@ -1,4 +1,4 @@
-import { getBacktickLanguagePlugin } from "@backtick/volar-plugins";
+import { getBacktickLanguagePlugin } from "@backtick/language-plugin";
 import {
   createConnection,
   createServer,

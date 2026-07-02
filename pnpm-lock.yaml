@@ -89,64 +89,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/language-tools/language-server:
-    dependencies:
-      '@backtick/volar-plugins':
-        specifier: workspace:*
-        version: link:../volar-plugins
-      '@volar/language-server':
-        specifier: ^2.4.28
-        version: 2.4.28
-      vscode-uri:
-        specifier: ^3.0.8
-        version: 3.1.0
-
-  packages/language-tools/ts-diagnostics-plugin:
-    dependencies:
-      '@backtick/volar-plugins':
-        specifier: workspace:*
-        version: link:../volar-plugins
-      '@volar/language-core':
-        specifier: ^2.4.28
-        version: 2.4.28
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language-tools/ts-intellisense-plugin:
-    dependencies:
-      '@backtick/volar-plugins':
-        specifier: workspace:*
-        version: link:../volar-plugins
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language-tools/tsc:
-    dependencies:
-      '@backtick/ts-diagnostics-plugin':
-        specifier: workspace:*
-        version: link:../ts-diagnostics-plugin
-      '@backtick/volar-plugins':
-        specifier: workspace:*
-        version: link:../volar-plugins
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language-tools/volar-plugins:
+  packages/language-tools/language-plugin:
     dependencies:
       '@backtick/core':
         specifier: workspace:*
@@ -164,6 +107,63 @@ importers:
       '@volar/typescript':
         specifier: ^2.4.28
         version: 2.4.28
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/language-server:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/language-server':
+        specifier: ^2.4.28
+        version: 2.4.28
+      vscode-uri:
+        specifier: ^3.0.8
+        version: 3.1.0
+
+  packages/language-tools/ts-diagnostics-plugin:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/language-core':
+        specifier: ^2.4.28
+        version: 2.4.28
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/ts-intellisense-plugin:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/tsc:
+    dependencies:
+      '@backtick/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@backtick/ts-diagnostics-plugin':
+        specifier: workspace:*
+        version: link:../ts-diagnostics-plugin
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

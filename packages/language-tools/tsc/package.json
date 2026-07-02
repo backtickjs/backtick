@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@backtick/ts-diagnostics-plugin": "workspace:*",
-    "@backtick/volar-plugins": "workspace:*",
+    "@backtick/language-plugin": "workspace:*",
     "@volar/typescript": "^2.4.28"
   },
   "peerDependencies": {

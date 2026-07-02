@@ -12,10 +12,8 @@ import * as vscode from "vscode";
 let client: BaseLanguageClient | undefined;
 
 export async function activate(context: vscode.ExtensionContext) {
-  // The standalone language server exists only so the Volar Labs extension can
-  // inspect virtual code. Normal editor features come from the TS server
-  // plugins, so only start the client when the extension is launched for
-  // development (F5 / --extensionDevelopmentPath), not in a normal session.
+  // The standalone language server exists only for developers to inspect
+  // virtual code using the Volar Labs extension.
   if (context.extensionMode !== vscode.ExtensionMode.Development) {
     return;
   }

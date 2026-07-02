@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createRequire } from "node:module";
-import { getBacktickLanguagePlugin } from "@backtick/volar-plugins";
+import { getBacktickLanguagePlugin } from "@backtick/language-plugin";
 
 const require = createRequire(import.meta.url);
 const {
