@@ -18,7 +18,9 @@ import type ts from "typescript";
 export default function transformer(
   _program: ts.Program,
   _config: PluginConfig,
-  { ts }: TransformerExtras,
+  { ts, addDiagnostic }: TransformerExtras,
 ): ts.TransformerFactory<ts.SourceFile> {
-  return transform(ts);
+  return transform(ts, (diagnostic) => {
+    addDiagnostic(diagnostic);
+  });
 }

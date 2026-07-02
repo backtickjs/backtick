@@ -4,6 +4,7 @@ import { rewriteFile } from "./rewriteFile.js";
 
 export function transform(
   ts: typeof import("typescript"),
+  onDiagnostic: (diagnostic: ts.Diagnostic) => void,
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
     const parsedFile = parseFile(ts, sourceFile.fileName, sourceFile.text);
@@ -12,6 +13,18 @@ export function transform(
     }
 
     const rewrittenFile = rewriteFile(ts, parsedFile);
+
+    for (const diagnostic of rewrittenFile.diagnostics) {
+      onDiagnostic({
+        file: sourceFile,
+        start: diagnostic.range.start,
+        length: diagnostic.range.end - diagnostic.range.start,
+        messageText: diagnostic.message,
+        category: diagnostic.category,
+        code: diagnostic.code,
+        source: "backtick",
+      });
+    }
 
     const byStart = new Map<number, ts.Node>();
     for (const [template, script] of rewrittenFile.scripts) {

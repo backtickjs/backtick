@@ -19,10 +19,10 @@ export function rewriteNode(
   state: RewriteState,
   node: ts.Node,
 ): RewrittenNode {
-  const unchanged = {
+  const unsupported = (): RewrittenNode => ({
     virtual: node,
-    runtime: node,
-  };
+    runtime: call(ts, "v", "null", [loc(node)]),
+  });
 
   const loc = (target: ts.Node): ts.Expression =>
     sourceLoc(ts, state.script.toSourceLocation(target));
@@ -218,7 +218,7 @@ export function rewriteNode(
       };
     }
 
-    return unchanged;
+    return unsupported();
   }
 
   if (ts.isBinaryExpression(node)) {
@@ -291,5 +291,5 @@ export function rewriteNode(
     node,
     "This syntax isn't supported in a `cs` client script.",
   );
-  return unchanged;
+  return unsupported();
 }
