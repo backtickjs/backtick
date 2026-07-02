@@ -13,7 +13,6 @@ import type * as ts from "typescript";
 // `Language` and the file's `SourceFile` — a language service (editor) or a
 // program (command-line `tsc`).
 export function getBacktickDiagnostics(
-  ts: typeof import("typescript"),
   language: Language<string> | undefined,
   file: ts.SourceFile | undefined,
   fileName: string,
@@ -28,7 +27,7 @@ export function getBacktickDiagnostics(
     start: diagnostic.range.start,
     length: diagnostic.range.end - diagnostic.range.start,
     messageText: diagnostic.message,
-    category: ts.DiagnosticCategory.Error,
+    category: diagnostic.category,
     code: 0,
     source: "backtick",
   }));

@@ -17,9 +17,8 @@ const plugin: ts.server.PluginModuleFactory = (mod) => {
     // ts.ScriptKind.Deferred — let the language plugin own the script kind.
     7,
     async (ts) => {
-      const { getBacktickLanguagePlugin } = await import(
-        "@backtick/language-plugin"
-      );
+      const { getBacktickLanguagePlugin } =
+        await import("@backtick/language-plugin");
       return {
         languagePlugins: [
           getBacktickLanguagePlugin<string>(ts, (fileName) => fileName),
@@ -35,11 +34,7 @@ const plugin: ts.server.PluginModuleFactory = (mod) => {
   return {
     ...pluginModule,
     create(info) {
-      return decorateLanguageService(
-        mod.typescript,
-        pluginModule.create(info),
-        languageHolder,
-      );
+      return decorateLanguageService(pluginModule.create(info), languageHolder);
     },
   };
 };

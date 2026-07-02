@@ -10,7 +10,6 @@ import { unmangleDiagnostic } from "./unmangleDiagnostics.js";
 import { unmangleQuickInfo } from "./unmangleQuickInfo.js";
 
 export function decorateLanguageService(
-  ts: typeof import("typescript"),
   inner: ts.LanguageService,
   languageHolder: { current?: Language<string> },
 ): ts.LanguageService {
@@ -18,7 +17,6 @@ export function decorateLanguageService(
     getSemanticDiagnostics: (fileName) => [
       ...inner.getSemanticDiagnostics(fileName).map(unmangleDiagnostic),
       ...getBacktickDiagnostics(
-        ts,
         languageHolder.current,
         inner.getProgram()?.getSourceFile(fileName),
         fileName,

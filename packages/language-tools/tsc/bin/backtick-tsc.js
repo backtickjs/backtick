@@ -26,7 +26,6 @@ decorateProgramModule.decorateProgram = (language, program) => {
       ),
       ...files.flatMap((file) => {
         const diagnostics = getBacktickDiagnostics(
-          ts,
           language,
           file,
           file.fileName,

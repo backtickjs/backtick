@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import { DiagnosticCategory } from "typescript";
 import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { freeVars } from "./freeVars.js";
@@ -51,7 +52,7 @@ export function rewriteScript(
   const diagnostics: Diagnostic[] = [];
   for (const [node, message] of state.errors) {
     const range = clientScript.toSourceRange(node);
-    diagnostics.push({ range, message, severity: 1 });
+    diagnostics.push({ range, message, category: DiagnosticCategory.Error });
   }
 
   const splices = Object.values(clientScript.splices);
