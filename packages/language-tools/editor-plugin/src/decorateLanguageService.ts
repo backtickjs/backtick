@@ -1,7 +1,7 @@
 import {
   getBacktickDiagnostics,
   unmangleDiagnostic,
-} from "@backtick/language-plugin";
+} from "@backtick/volar-plugins";
 import type { Language } from "@volar/language-core";
 import type * as ts from "typescript";
 import {

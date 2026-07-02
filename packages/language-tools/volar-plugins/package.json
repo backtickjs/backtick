@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/language-plugin",
+  "name": "@backtick/volar-plugins",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@backtick/core": "workspace:*",
-    "@volar/language-core": "^2.4.28"
+    "@volar/language-core": "^2.4.28",
+    "vscode-uri": "^3.0.8"
   },
   "devDependencies": {
+    "@volar/language-server": "^2.4.28",
     "@volar/typescript": "^2.4.28",
     "typescript": "^6.0.3"
   },

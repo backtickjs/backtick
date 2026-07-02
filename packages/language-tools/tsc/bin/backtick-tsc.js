@@ -5,7 +5,7 @@ import {
   getBacktickDiagnostics,
   getBacktickLanguagePlugin,
   unmangleDiagnostic,
-} from "@backtick/language-plugin";
+} from "@backtick/volar-plugins";
 
 const require = createRequire(import.meta.url);
 const { runTsc } = require("@volar/typescript/lib/quickstart/runTsc.js");

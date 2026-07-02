@@ -1,4 +1,4 @@
-import { unmangleDisplayPart } from "@backtick/language-plugin";
+import { unmangleDisplayPart } from "@backtick/volar-plugins";
 import type * as ts from "typescript";
 
 export function unmangleQuickInfo(quickInfo: ts.QuickInfo): ts.QuickInfo {

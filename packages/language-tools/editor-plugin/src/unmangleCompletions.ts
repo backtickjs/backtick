@@ -1,4 +1,4 @@
-import { unmangle, unmangleDisplayPart } from "@backtick/language-plugin";
+import { unmangle, unmangleDisplayPart } from "@backtick/volar-plugins";
 import type * as ts from "typescript";
 
 export function unmangleCompletionInfo<T extends ts.CompletionInfo>(

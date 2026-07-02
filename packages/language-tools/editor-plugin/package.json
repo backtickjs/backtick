@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/language-plugin": "workspace:*",
+    "@backtick/volar-plugins": "workspace:*",
     "@volar/language-core": "^2.4.28",
     "@volar/typescript": "^2.4.28"
   },

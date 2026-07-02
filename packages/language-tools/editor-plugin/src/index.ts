@@ -18,7 +18,7 @@ const plugin: ts.server.PluginModuleFactory = (mod) => {
     7,
     async (ts) => {
       const { getBacktickLanguagePlugin } = await import(
-        "@backtick/language-plugin"
+        "@backtick/volar-plugins"
       );
       return {
         languagePlugins: [
