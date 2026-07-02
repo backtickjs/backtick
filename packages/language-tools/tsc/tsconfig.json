@@ -1,4 +1,5 @@
 {
   "extends": "../../../configs/tsconfig.base.json",
-  "files": ["./bin/backtick-tsc.js", "./package.json"]
+  "files": ["./bin/backtick-tsc.js", "./package.json"],
+  "references": [{ "path": "./tsconfig.build.json" }]
 }
