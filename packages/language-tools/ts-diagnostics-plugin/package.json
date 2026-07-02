@@ -1,0 +1,23 @@
+{
+  "name": "@backtick/ts-diagnostics-plugin",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtick/volar-plugins": "workspace:*",
+    "@volar/language-core": "^2.4.28",
+    "@volar/typescript": "^2.4.28"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  }
+}

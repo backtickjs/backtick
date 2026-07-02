@@ -54,7 +54,7 @@ decorateProgramModule.decorateProgram = (language, program) => {
 runTsc(
   require.resolve("typescript/lib/tsc.js"),
   // No extra file extensions: Backtick virtualizes standard .ts/.tsx/.js/.jsx
-  // in place, matching the editor-plugin (which also passes []).
+  // in place, matching the TS server plugins (which also pass []).
   [],
   () => ({
     languagePlugins: [getBacktickLanguagePlugin(ts, (fileName) => fileName)],

@@ -8,7 +8,11 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "@backtick/editor-plugin",
+        "name": "@backtick/ts-diagnostics-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
+      },
+      {
+        "name": "@backtick/ts-intellisense-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ],
@@ -49,7 +53,8 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/editor-plugin": "workspace:*"
+    "@backtick/ts-diagnostics-plugin": "workspace:*",
+    "@backtick/ts-intellisense-plugin": "workspace:*"
   },
   "devDependencies": {
     "vscode-tmgrammar-test": "^0.1.3"

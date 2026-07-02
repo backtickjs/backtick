@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/editor-plugin",
+  "name": "@backtick/ts-intellisense-plugin",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@backtick/volar-plugins": "workspace:*",
-    "@volar/language-core": "^2.4.28",
     "@volar/typescript": "^2.4.28"
   },
   "devDependencies": {

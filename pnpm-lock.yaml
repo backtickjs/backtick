@@ -89,7 +89,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/language-tools/editor-plugin:
+  packages/language-tools/ts-diagnostics-plugin:
     dependencies:
       '@backtick/volar-plugins':
         specifier: workspace:*
@@ -97,6 +97,19 @@ importers:
       '@volar/language-core':
         specifier: ^2.4.28
         version: 2.4.28
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-tools/ts-intellisense-plugin:
+    dependencies:
+      '@backtick/volar-plugins':
+        specifier: workspace:*
+        version: link:../volar-plugins
       '@volar/typescript':
         specifier: ^2.4.28
         version: 2.4.28
@@ -142,9 +155,12 @@ importers:
 
   packages/language-tools/vscode-extension:
     dependencies:
-      '@backtick/editor-plugin':
+      '@backtick/ts-diagnostics-plugin':
         specifier: workspace:*
-        version: link:../editor-plugin
+        version: link:../ts-diagnostics-plugin
+      '@backtick/ts-intellisense-plugin':
+        specifier: workspace:*
+        version: link:../ts-intellisense-plugin
     devDependencies:
       vscode-tmgrammar-test:
         specifier: ^0.1.3
