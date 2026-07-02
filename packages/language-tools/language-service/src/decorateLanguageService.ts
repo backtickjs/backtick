@@ -11,13 +11,13 @@ import { unmangleQuickInfo } from "./unmangleQuickInfo.js";
 
 export function decorateLanguageService(
   inner: ts.LanguageService,
-  languageHolder: { current?: Language<string> },
+  language: Language<string>,
 ): ts.LanguageService {
   const overrides: Partial<ts.LanguageService> = {
     getSemanticDiagnostics: (fileName) => [
       ...inner.getSemanticDiagnostics(fileName).map(unmangleDiagnostic),
       ...getBacktickDiagnostics(
-        languageHolder.current,
+        language,
         inner.getProgram()?.getSourceFile(fileName),
         fileName,
       ),
