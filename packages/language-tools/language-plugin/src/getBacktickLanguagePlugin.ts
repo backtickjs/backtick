@@ -16,13 +16,13 @@ export function getBacktickLanguagePlugin<T>(
         case "javascript":
         case "javascriptreact":
         case "typescript":
-        case "typescriptreact":
-          return new BacktickVirtualCode(
-            ts,
-            getFileName(uri),
-            languageId,
-            snapshot,
-          );
+        case "typescriptreact": {
+          const fileName = getFileName(uri);
+          if (fileName.endsWith(".d.ts")) {
+            return;
+          }
+          return new BacktickVirtualCode(ts, fileName, languageId, snapshot);
+        }
         default:
           return;
       }
