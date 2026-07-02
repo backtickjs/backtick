@@ -1,3 +1,4 @@
+import { mangle } from "@backtick/volar-plugins";
 import type * as ts from "typescript";
 import {
   unmangleCompletionEntryDetails,
@@ -32,7 +33,7 @@ export function decorateLanguageService(
         inner.getCompletionEntryDetails(
           fileName,
           position,
-          `$0client_${name}`,
+          mangle(name),
           ...rest,
         ) ?? inner.getCompletionEntryDetails(fileName, position, name, ...rest);
       return details && unmangleCompletionEntryDetails(details);
