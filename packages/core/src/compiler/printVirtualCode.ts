@@ -1,9 +1,15 @@
 import type ts from "typescript";
 import type { SourceRange } from "../cs-runtime/index.js";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
+import { printMarkedNode, scanMarkers } from "./markers.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 import type { RewrittenFile } from "./rewriteFile.js";
 import { type Segment, segmentsToString } from "./segmentsToString.js";
+
+// An enclosing mapped node: its source `range`, and a `cursor` tracking how far
+// into that range has already been attributed (advanced past nested children so
+// a parent only claims the source its children didn't).
+type Frame = { range: SourceRange; cursor: number };
 
 interface VirtualizedFile {
   virtualCode: string;
@@ -35,18 +41,6 @@ export function printVirtualCode(
   };
 }
 
-// A boundary discovered in the printed virtual code: the start/end of a mapped
-// node, or a `$0splice<n>` placeholder. Positions are offsets into the
-// marker-free virtual code.
-type MarkerEvent =
-  | { type: "open"; pos: number; id: number }
-  | { type: "close"; pos: number; id: number }
-  | { type: "splice"; pos: number; placeholder: string };
-
-// Renders one script. Every mapped virtual node is printed wrapped in a pair of
-// marker comments so we can recover its generated span, then those spans are
-// flattened into distinct, non-overlapping source mappings (a nested node's
-// range wins over its ancestors', which fill only the surrounding gaps).
 function renderScript(
   ts: typeof import("typescript"),
   sourceFile: ts.SourceFile,
@@ -58,151 +52,61 @@ function renderScript(
     return [];
   }
 
-  // Tag each mapped node with `/*$0S<id>*/ … /*$0E<id>*/`. The printer emits a
-  // single space next to each marker comment, which `scanMarkers` strips to
-  // reproduce the exact virtual code.
-  const spans: SourceRange[] = [];
-  const markers = new Map<ts.Node, number>();
-  const printer = ts.createPrinter(
-    {},
-    {
-      substituteNode(_hint, emitted) {
-        const range = rewrittenFile.sourceMaps.get(emitted);
-        if (range != null && !markers.has(emitted)) {
-          const id = spans.length;
-          spans.push(range);
-          markers.set(emitted, id);
-          ts.addSyntheticLeadingComment(
-            emitted,
-            ts.SyntaxKind.MultiLineCommentTrivia,
-            `$0S${id}`,
-            false,
-          );
-          ts.addSyntheticTrailingComment(
-            emitted,
-            ts.SyntaxKind.MultiLineCommentTrivia,
-            `$0E${id}`,
-            false,
-          );
-        }
-        return emitted;
-      },
-    },
-  );
-
-  const marked = printer.printNode(
-    ts.EmitHint.Unspecified,
+  const { marked, spans } = printMarkedNode(
+    ts,
     node,
     script.fileWithPlaceholders,
+    rewrittenFile.sourceMaps,
   );
 
   const { text, events } = scanMarkers(marked);
-  return assemble(ts, sourceFile, rewrittenFile, script, text, events, spans);
-}
-
-// Strip the marker comments (and the single space the printer pads them with),
-// returning the clean virtual code plus the ordered boundaries within it.
-function scanMarkers(marked: string): {
-  text: string;
-  events: MarkerEvent[];
-} {
-  // A single pass jumps marker-to-marker, copying the verbatim gaps in bulk.
-  // The alternatives are tried in order (open, then close, then splice), which
-  // — together with each open/close marker consuming its pad space — matches
-  // exactly what the code being scanned emitted. Groups 1/2 hold the open/close
-  // ids; a match with neither group set is a splice placeholder.
-  const marker = /\/\*\$0S(\d+)\*\/ | \/\*\$0E(\d+)\*\/|\$0splice\d+/g;
-
-  let text = "";
-  const events: MarkerEvent[] = [];
-  let lastIndex = 0;
-  for (
-    let match = marker.exec(marked);
-    match !== null;
-    match = marker.exec(marked)
-  ) {
-    text += marked.slice(lastIndex, match.index);
-    if (match[1] !== undefined) {
-      events.push({ type: "open", pos: text.length, id: Number(match[1]) });
-    } else if (match[2] !== undefined) {
-      events.push({ type: "close", pos: text.length, id: Number(match[2]) });
-    } else {
-      events.push({ type: "splice", pos: text.length, placeholder: match[0] });
-      text += match[0];
-    }
-    lastIndex = marker.lastIndex;
-  }
-  text += marked.slice(lastIndex);
-  return { text, events };
-}
-
-// Walk the boundaries left to right, maintaining a stack of the enclosing mapped
-// nodes. Text between boundaries is attributed to the innermost node on the
-// stack, sliced from the part of its source range not claimed by a child.
-function assemble(
-  ts: typeof import("typescript"),
-  sourceFile: ts.SourceFile,
-  rewrittenFile: RewrittenFile,
-  script: ClientScript,
-  text: string,
-  events: MarkerEvent[],
-  spans: SourceRange[],
-): Segment[] {
   const segments: Segment[] = [];
-  const stack: Array<{ range: SourceRange; cursor: number }> = [];
+  const stack: Frame[] = [];
   let lastPos = 0;
 
-  for (const event of events) {
-    const top = stack[stack.length - 1];
-
-    // Where, in source, the upcoming boundary sits. The gap text before it is
-    // attributed to `top` up to this point.
-    const boundary =
-      event.type === "open"
-        ? spans[event.id].start
-        : event.type === "splice"
-          ? script.splices[event.placeholder].sourceNode.expression.getStart(
-              sourceFile,
-            )
-          : top?.range.end;
-
-    if (event.pos > lastPos) {
-      const chunk = text.slice(lastPos, event.pos);
+  // Emit the generated text `[lastPos, pos)` and advance. When it sits inside a
+  // mapped node, attribute it to that node's still-unclaimed source
+  // `[cursor, boundary)`; otherwise emit it unmapped.
+  const flush = (top: Frame | undefined, pos: number, boundary?: number) => {
+    if (pos > lastPos) {
+      const chunk = text.slice(lastPos, pos);
       if (top && boundary != null) {
-        const start = top.cursor;
-        const end = Math.max(start, boundary);
-        segments.push([chunk, undefined, start, end - start]);
+        const end = Math.max(top.cursor, boundary);
+        segments.push([chunk, undefined, top.cursor, end - top.cursor]);
       } else {
         segments.push(chunk);
       }
     }
-    lastPos = event.pos;
+    lastPos = pos;
+  };
+
+  for (const event of events) {
+    const top = stack[stack.length - 1];
 
     if (event.type === "open") {
       const range = spans[event.id];
+      flush(top, event.pos, range.start);
+      // The child claims its whole range, so the parent skips past it.
       if (top) {
         top.cursor = Math.max(top.cursor, range.end);
       }
       stack.push({ range, cursor: range.start });
     } else if (event.type === "close") {
+      flush(top, event.pos, top?.range.end);
       stack.pop();
     } else {
       const splice = script.splices[event.placeholder];
+      const { expression } = splice.sourceNode;
+      flush(top, event.pos, expression.getStart(sourceFile));
       segments.push(...renderSplice(ts, sourceFile, rewrittenFile, splice));
       if (top) {
-        top.cursor = Math.max(
-          top.cursor,
-          splice.sourceNode.expression.getEnd(),
-        );
+        top.cursor = Math.max(top.cursor, expression.getEnd());
       }
       lastPos = event.pos + event.placeholder.length;
     }
   }
 
-  if (lastPos < text.length) {
-    segments.push(text.slice(lastPos));
-  }
-
+  flush(undefined, text.length);
   return segments;
 }
 
@@ -228,7 +132,6 @@ function renderSplice(
   return segments;
 }
 
-// Append source text `[start, start + length)` mapped 1:1 back to source.
 function renderVerbatim(
   sourceText: string,
   start: number,
