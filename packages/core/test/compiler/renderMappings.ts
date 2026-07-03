@@ -27,7 +27,7 @@ export function renderMappings(
 ): string {
   const ranges = scriptRanges(fileName, sourceText);
 
-  const escape = (text: string): string =>
+  const escapeText = (text: string): string =>
     text
       .replace(/\\/g, "\\\\")
       .replace(/\n/g, "\\n")
@@ -54,7 +54,7 @@ export function renderMappings(
         mapping.sourceOffsets[i],
         mapping.sourceOffsets[i] + mapping.lengths[i],
       );
-      rows.push([generatedOffset, escape(generated), escape(source)]);
+      rows.push([generatedOffset, escapeText(generated), escapeText(source)]);
     }
   }
   rows.sort((a, b) => a[0] - b[0]);

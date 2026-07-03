@@ -106,43 +106,33 @@ function scanMarkers(marked: string): {
   text: string;
   events: MarkerEvent[];
 } {
-  const openMarker = /\/\*\$0S(\d+)\*\/ /y;
-  const closeMarker = / \/\*\$0E(\d+)\*\//y;
-  const splice = /\$0splice\d+/y;
+  // A single pass jumps marker-to-marker, copying the verbatim gaps in bulk.
+  // The alternatives are tried in order (open, then close, then splice), which
+  // — together with each open/close marker consuming its pad space — matches
+  // exactly what the code being scanned emitted. Groups 1/2 hold the open/close
+  // ids; a match with neither group set is a splice placeholder.
+  const marker = /\/\*\$0S(\d+)\*\/ | \/\*\$0E(\d+)\*\/|\$0splice\d+/g;
 
   let text = "";
   const events: MarkerEvent[] = [];
-  let index = 0;
-  while (index < marked.length) {
-    openMarker.lastIndex = index;
-    const open = openMarker.exec(marked);
-    if (open) {
-      events.push({ type: "open", pos: text.length, id: Number(open[1]) });
-      index = openMarker.lastIndex;
-      continue;
+  let lastIndex = 0;
+  for (
+    let match = marker.exec(marked);
+    match !== null;
+    match = marker.exec(marked)
+  ) {
+    text += marked.slice(lastIndex, match.index);
+    if (match[1] !== undefined) {
+      events.push({ type: "open", pos: text.length, id: Number(match[1]) });
+    } else if (match[2] !== undefined) {
+      events.push({ type: "close", pos: text.length, id: Number(match[2]) });
+    } else {
+      events.push({ type: "splice", pos: text.length, placeholder: match[0] });
+      text += match[0];
     }
-    closeMarker.lastIndex = index;
-    const close = closeMarker.exec(marked);
-    if (close) {
-      events.push({ type: "close", pos: text.length, id: Number(close[1]) });
-      index = closeMarker.lastIndex;
-      continue;
-    }
-    splice.lastIndex = index;
-    const placeholder = splice.exec(marked);
-    if (placeholder) {
-      events.push({
-        type: "splice",
-        pos: text.length,
-        placeholder: placeholder[0],
-      });
-      text += placeholder[0];
-      index = splice.lastIndex;
-      continue;
-    }
-    text += marked[index];
-    index += 1;
+    lastIndex = marker.lastIndex;
   }
+  text += marked.slice(lastIndex);
   return { text, events };
 }
 
