@@ -1,4 +1,4 @@
-import { cs, type Client } from "@backtick/core";
+import { cs, type Client } from "@backtickjs/core";
 import { print } from "../print.ts";
 
 function add(lhs: Client<number>, rhs: Client<number>): Client<number> {

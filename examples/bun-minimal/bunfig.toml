@@ -1,1 +1,1 @@
-preload = ["@backtick/bun-plugin"]
+preload = ["@backtickjs/bun-plugin"]

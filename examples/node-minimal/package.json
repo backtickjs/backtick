@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/example-node-minimal",
+  "name": "@backtickjs/example-node-minimal",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,12 +11,12 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
-    "@backtick/core": "^0.0.0",
-    "@backtick/tspatch-plugin": "^0.0.0"
+    "@backtickjs/core": "^0.0.0",
+    "@backtickjs/tspatch-plugin": "^0.0.0"
   },
   "devDependencies": {
-    "@backtick/prettier-plugin": "^0.0.0",
-    "@backtick/tsc": "^0.0.0",
+    "@backtickjs/prettier-plugin": "^0.0.0",
+    "@backtickjs/tsc": "^0.0.0",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"

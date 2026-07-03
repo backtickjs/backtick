@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/typescript-plugin",
+  "name": "@backtickjs/typescript-plugin",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -16,8 +16,8 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/language-plugin": "workspace:*",
-    "@backtick/language-service": "workspace:*",
+    "@backtickjs/language-plugin": "workspace:*",
+    "@backtickjs/language-service": "workspace:*",
     "@volar/language-core": "^2.4.28",
     "@volar/typescript": "^2.4.28"
   },

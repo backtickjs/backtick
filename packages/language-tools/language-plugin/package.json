@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/language-plugin",
+  "name": "@backtickjs/language-plugin",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -16,7 +16,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "@volar/language-core": "^2.4.28",
     "vscode-uri": "^3.0.8"
   },

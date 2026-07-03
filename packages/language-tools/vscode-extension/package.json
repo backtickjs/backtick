@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/vscode-extension",
+  "name": "@backtickjs/vscode-extension",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/node/client.js",
@@ -15,7 +15,7 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "@backtick/typescript-plugin",
+        "name": "@backtickjs/typescript-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ],
@@ -57,10 +57,10 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/typescript-plugin": "workspace:*"
+    "@backtickjs/typescript-plugin": "workspace:*"
   },
   "devDependencies": {
-    "@backtick/language-server": "workspace:*",
+    "@backtickjs/language-server": "workspace:*",
     "@types/vscode": "^1.120.0",
     "@volar/language-server": "^2.4.28",
     "@volar/vscode": "^2.4.28",

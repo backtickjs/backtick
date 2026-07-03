@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/tspatch-plugin",
+  "name": "@backtickjs/tspatch-plugin",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -16,12 +16,12 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "peerDependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   }

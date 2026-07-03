@@ -23,17 +23,17 @@ importers:
 
   examples/bun-minimal:
     dependencies:
-      '@backtick/bun-plugin':
+      '@backtickjs/bun-plugin':
         specifier: ^0.0.0
         version: link:../../packages/bun-plugin
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: ^0.0.0
         version: link:../../packages/core
     devDependencies:
-      '@backtick/prettier-plugin':
+      '@backtickjs/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
-      '@backtick/tsc':
+      '@backtickjs/tsc':
         specifier: ^0.0.0
         version: link:../../packages/language-tools/tsc
       '@types/bun':
@@ -48,17 +48,17 @@ importers:
 
   examples/node-minimal:
     dependencies:
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: ^0.0.0
         version: link:../../packages/core
-      '@backtick/tspatch-plugin':
+      '@backtickjs/tspatch-plugin':
         specifier: ^0.0.0
         version: link:../../packages/tspatch-plugin
     devDependencies:
-      '@backtick/prettier-plugin':
+      '@backtickjs/prettier-plugin':
         specifier: ^0.0.0
         version: link:../../packages/prettier-plugin
-      '@backtick/tsc':
+      '@backtickjs/tsc':
         specifier: ^0.0.0
         version: link:../../packages/language-tools/tsc
       prettier:
@@ -73,7 +73,7 @@ importers:
 
   packages/bun-plugin:
     devDependencies:
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
       '@types/bun':
@@ -91,7 +91,7 @@ importers:
 
   packages/language-tools/language-plugin:
     dependencies:
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: workspace:*
         version: link:../../core
       '@volar/language-core':
@@ -113,7 +113,7 @@ importers:
 
   packages/language-tools/language-server:
     dependencies:
-      '@backtick/language-plugin':
+      '@backtickjs/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
       '@volar/language-server':
@@ -125,10 +125,10 @@ importers:
 
   packages/language-tools/language-service:
     dependencies:
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: workspace:*
         version: link:../../core
-      '@backtick/language-plugin':
+      '@backtickjs/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
       '@volar/language-core':
@@ -141,10 +141,10 @@ importers:
 
   packages/language-tools/tsc:
     dependencies:
-      '@backtick/language-plugin':
+      '@backtickjs/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
-      '@backtick/language-service':
+      '@backtickjs/language-service':
         specifier: workspace:*
         version: link:../language-service
       '@volar/typescript':
@@ -157,10 +157,10 @@ importers:
 
   packages/language-tools/typescript-plugin:
     dependencies:
-      '@backtick/language-plugin':
+      '@backtickjs/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
-      '@backtick/language-service':
+      '@backtickjs/language-service':
         specifier: workspace:*
         version: link:../language-service
       '@volar/language-core':
@@ -176,11 +176,11 @@ importers:
 
   packages/language-tools/vscode-extension:
     dependencies:
-      '@backtick/typescript-plugin':
+      '@backtickjs/typescript-plugin':
         specifier: workspace:*
         version: link:../typescript-plugin
     devDependencies:
-      '@backtick/language-server':
+      '@backtickjs/language-server':
         specifier: workspace:*
         version: link:../language-server
       '@types/vscode':
@@ -207,7 +207,7 @@ importers:
 
   packages/prettier-plugin:
     devDependencies:
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
       '@types/estree':
@@ -225,7 +225,7 @@ importers:
 
   packages/tspatch-plugin:
     devDependencies:
-      '@backtick/core':
+      '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
       ts-patch:

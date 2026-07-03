@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { transform } from "@backtick/core/compiler";
+import { transform } from "@backtickjs/core/compiler";
 import { plugin } from "bun";
 import ts from "typescript";
 
@@ -10,13 +10,13 @@ const compilerOptions = loadCompilerOptions();
  * Use it from a `bunfig.toml`:
  *
  * ```toml
- * preload = ["@backtick/bun-plugin"]
+ * preload = ["@backtickjs/bun-plugin"]
  * ```
  *
  * or from the command line:
  *
  * ```sh
- * bun --preload @backtick/bun-plugin ./src/index.ts
+ * bun --preload @backtickjs/bun-plugin ./src/index.ts
  * ```
  */
 plugin({

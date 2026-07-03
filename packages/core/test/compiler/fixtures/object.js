@@ -1,4 +1,4 @@
-import { cs } from "@backtick/core";
+import { cs } from "@backtickjs/core";
 import { print } from "../print.ts";
 const obj = (() => {
     return cs.create(v => v.clientScript({ path: "object.tsx", start: { line: 4, character: 13 }, end: { line: 4, character: 27 } }, { splices: {}, freeVars: [] }, v.object({ path: "object.tsx", start: { line: 4, character: 17 }, end: { line: 4, character: 25 } }, { a: v.number({ path: "object.tsx", start: { line: 4, character: 22 }, end: { line: 4, character: 23 } }, 4) })));

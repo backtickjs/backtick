@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/prettier-plugin",
+  "name": "@backtickjs/prettier-plugin",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,14 +12,14 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "devDependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "@types/estree": "^1.0.9",
     "prettier": "^3.6.2",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "prettier": "^3.0.0",
     "typescript": "^6.0.3"
   }

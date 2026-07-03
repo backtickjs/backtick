@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/bun-plugin",
+  "name": "@backtickjs/bun-plugin",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -16,11 +16,11 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "peerDependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtick/core": "workspace:*",
+    "@backtickjs/core": "workspace:*",
     "@types/bun": "^1.3.14",
     "typescript": "^6.0.3"
   }

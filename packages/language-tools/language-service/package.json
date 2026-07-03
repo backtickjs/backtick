@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/language-service",
+  "name": "@backtickjs/language-service",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -16,8 +16,8 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/core": "workspace:*",
-    "@backtick/language-plugin": "workspace:*",
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/language-plugin": "workspace:*",
     "@volar/language-core": "^2.4.28"
   },
   "devDependencies": {

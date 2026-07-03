@@ -1,4 +1,4 @@
-import { cs } from "@backtick/core";
+import { cs } from "@backtickjs/core";
 import { print } from "../print.ts";
 const script = (() => {
     const $0splice0 = 1;

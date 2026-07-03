@@ -1,5 +1,5 @@
-import type { Diagnostic } from "@backtick/core/compiler";
-import { virtualize } from "@backtick/core/compiler";
+import type { Diagnostic } from "@backtickjs/core/compiler";
+import { virtualize } from "@backtickjs/core/compiler";
 import type { CodeMapping, VirtualCode } from "@volar/language-core";
 import type * as ts from "typescript";
 

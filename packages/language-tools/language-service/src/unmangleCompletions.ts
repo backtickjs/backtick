@@ -1,4 +1,4 @@
-import { unmangle } from "@backtick/core/compiler";
+import { unmangle } from "@backtickjs/core/compiler";
 import type * as ts from "typescript";
 import { unmangleDisplayPart } from "./unmangleDisplayPart";
 

@@ -1,4 +1,4 @@
-import { getBacktickLanguagePlugin } from "@backtick/language-plugin";
+import { getBacktickLanguagePlugin } from "@backtickjs/language-plugin";
 import {
   createConnection,
   createServer,

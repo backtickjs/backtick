@@ -1,4 +1,4 @@
-import { cs } from "@backtick/core";
+import { cs } from "@backtickjs/core";
 
 const one = cs`1`;
 const two = cs`2`;

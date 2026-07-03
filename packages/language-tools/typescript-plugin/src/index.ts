@@ -1,5 +1,5 @@
-import { getBacktickLanguagePlugin } from "@backtick/language-plugin";
-import { decorateLanguageService } from "@backtick/language-service";
+import { getBacktickLanguagePlugin } from "@backtickjs/language-plugin";
+import { decorateLanguageService } from "@backtickjs/language-service";
 import { createLanguageServicePlugin } from "@volar/typescript/lib/quickstart/createLanguageServicePlugin.js";
 import type ts from "typescript";
 

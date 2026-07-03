@@ -4,7 +4,7 @@ import type {
   SourceLocation,
   Spliceable,
   Visitor,
-} from "@backtick/core/cs-runtime";
+} from "@backtickjs/core/cs-runtime";
 
 export function print(script: Client<unknown>): void {
   process.stdout.write(`${script.visit(new StringifyVisitor())}\n`);

@@ -1,4 +1,4 @@
-import { transform } from "@backtick/core/compiler";
+import { transform } from "@backtickjs/core/compiler";
 import type { PluginConfig, TransformerExtras } from "ts-patch";
 import type ts from "typescript";
 
@@ -8,7 +8,7 @@ import type ts from "typescript";
  * ```json
  * {
  *   "compilerOptions": {
- *     "plugins": [{ "transform": "@backtick/tspatch-plugin" }]
+ *     "plugins": [{ "transform": "@backtickjs/tspatch-plugin" }]
  *   }
  * }
  * ```

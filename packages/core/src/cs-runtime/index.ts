@@ -113,7 +113,7 @@ function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
 const cs = Object.assign(
   (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
     throw new Error(
-      "`cs` was not compiled. Is @backtick/core/compiler set up for this project?",
+      "`cs` was not compiled. Is @backtickjs/core/compiler set up for this project?",
     );
   },
   { lift, lower, create },

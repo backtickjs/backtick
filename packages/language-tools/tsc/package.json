@@ -1,5 +1,5 @@
 {
-  "name": "@backtick/tsc",
+  "name": "@backtickjs/tsc",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,8 +12,8 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtick/language-service": "workspace:*",
-    "@backtick/language-plugin": "workspace:*",
+    "@backtickjs/language-service": "workspace:*",
+    "@backtickjs/language-plugin": "workspace:*",
     "@volar/typescript": "^2.4.28"
   },
   "peerDependencies": {

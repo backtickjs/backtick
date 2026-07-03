@@ -8,7 +8,7 @@
     "sourceMap": true,
     "plugins": [
       // Build with `tspc`, not `tsc`.
-      { "transform": "@backtick/tspatch-plugin" }
+      { "transform": "@backtickjs/tspatch-plugin" }
     ]
   },
   "include": ["src"]
