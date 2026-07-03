@@ -1,5 +1,5 @@
 export interface Client<T> {
-  $$type: () => T;
+  $$type: T;
   visit: <U>(visitor: Visitor<U>) => U;
 }
 
@@ -107,7 +107,7 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
 
 // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
-  return { $$type: () => {}, visit };
+  return { $$type: undefined, visit };
 }
 
 const cs = Object.assign(

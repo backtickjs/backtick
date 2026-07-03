@@ -13,7 +13,7 @@ class Color implements Client<Color> {
     this.b = b;
   }
 
-  $$type = (): Color => this;
+  $$type = this;
 
   visit<U>(visitor: Visitor<U>): U {
     return cs`({ r: ${this.r}, g: ${this.g}, b: ${this.b} })`.visit(visitor);

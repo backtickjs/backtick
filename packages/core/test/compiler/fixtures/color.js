@@ -9,7 +9,7 @@ class Color {
         this.g = g;
         this.b = b;
     }
-    $$type = () => this;
+    $$type = this;
     visit(visitor) {
         return (() => {
             const $0splice0 = this.r;
