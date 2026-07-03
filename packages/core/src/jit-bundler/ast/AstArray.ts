@@ -1,5 +1,6 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
+import { debugPrinter } from "../debugPrinter.js";
 
 export class AstArray implements AstNode {
   private readonly elements: readonly AstNode[];
@@ -9,6 +10,6 @@ export class AstArray implements AstNode {
   }
 
   debugPrint(): string {
-    return `[${this.elements.map((element) => element.debugPrint()).join(", ")}]`;
+    return debugPrinter(this.elements);
   }
 }

@@ -9,6 +9,6 @@ export class AstReturn implements AstNode {
   }
 
   debugPrint(): string {
-    return `return ${this.expression.debugPrint()}`;
+    return `return ${this.expression.debugPrint()};`;
   }
 }

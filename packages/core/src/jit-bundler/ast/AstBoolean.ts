@@ -1,5 +1,6 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
+import { debugPrinter } from "../debugPrinter.js";
 
 export class AstBoolean implements AstNode {
   private readonly value: boolean;
@@ -9,6 +10,6 @@ export class AstBoolean implements AstNode {
   }
 
   debugPrint(): string {
-    return this.value ? "true" : "false";
+    return debugPrinter(this.value);
   }
 }

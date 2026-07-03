@@ -1,5 +1,6 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
+import { debugPrinter } from "../debugPrinter.js";
 
 export class AstNumber implements AstNode {
   private readonly value: number;
@@ -9,6 +10,6 @@ export class AstNumber implements AstNode {
   }
 
   debugPrint(): string {
-    return this.value.toString();
+    return debugPrinter(this.value);
   }
 }

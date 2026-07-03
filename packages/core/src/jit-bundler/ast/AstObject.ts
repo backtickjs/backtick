@@ -1,5 +1,6 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
+import { debugPrinter } from "../debugPrinter.js";
 
 export class AstObject implements AstNode {
   private readonly entries: Readonly<Record<string, AstNode>>;
@@ -9,13 +10,6 @@ export class AstObject implements AstNode {
   }
 
   debugPrint(): string {
-    const entries = Object.entries(this.entries);
-    if (entries.length === 0) {
-      return "{}";
-    }
-    const body = entries
-      .map(([key, value]) => `${key}: ${value.debugPrint()}`)
-      .join(", ");
-    return `{ ${body} }`;
+    return debugPrinter(this.entries);
   }
 }

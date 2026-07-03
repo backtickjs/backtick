@@ -11,6 +11,6 @@ export class AstAssignment implements AstNode {
   }
 
   debugPrint(): string {
-    return `${this.name.debugPrint()} = ${this.expression.debugPrint()}`;
+    return `${this.name.debugPrint()} = ${this.expression.debugPrint()};`;
   }
 }

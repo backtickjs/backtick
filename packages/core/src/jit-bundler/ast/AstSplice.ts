@@ -1,14 +1,15 @@
 import type { SourceLocation, Spliceable } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
+import { debugPrinter } from "../debugPrinter.js";
 
 export class AstSplice implements AstNode {
-  private readonly key: string;
+  private readonly expression: Spliceable;
 
-  constructor(_loc: SourceLocation, key: string, _expression: Spliceable) {
-    this.key = key;
+  constructor(_loc: SourceLocation, _key: string, expression: Spliceable) {
+    this.expression = expression;
   }
 
   debugPrint(): string {
-    return `\${${this.key}}`;
+    return `\${${debugPrinter(this.expression)}}`;
   }
 }

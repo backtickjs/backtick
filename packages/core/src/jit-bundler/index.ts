@@ -1,1 +1,1 @@
-export { bundle } from "./bundle.js";
+export { buildAst } from "./buildAst.js";
