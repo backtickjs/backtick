@@ -9,6 +9,7 @@ import { AstAssignment } from "./AstAssignment.js";
 import { AstBinop } from "./AstBinop.js";
 import { AstBlock } from "./AstBlock.js";
 import { AstBoolean } from "./AstBoolean.js";
+import { AstCall } from "./AstCall.js";
 import { AstClientScript } from "./AstClientScript.js";
 import { AstIdentifier } from "./AstIdentifier.js";
 import { AstIf } from "./AstIf.js";
@@ -102,5 +103,9 @@ export class AstBuilder implements Visitor<AstNode> {
 
   object(loc: SourceLocation, entries: { [key: string]: AstNode }): AstObject {
     return new AstObject(loc, entries);
+  }
+
+  call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstCall {
+    return new AstCall(loc, callee, args);
   }
 }

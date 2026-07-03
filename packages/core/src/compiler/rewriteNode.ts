@@ -181,6 +181,26 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isCallExpression(node)) {
+    const callee = rewriteNode(ts, state, node.expression);
+    const args = node.arguments.map((arg) => rewriteNode(ts, state, arg));
+    return {
+      virtual: ts.factory.createCallExpression(
+        callee.virtual as ts.Expression,
+        undefined,
+        args.map((arg) => arg.virtual as ts.Expression),
+      ),
+      runtime: call(ts, "v", "call", [
+        loc(node),
+        callee.runtime as ts.Expression,
+        ts.factory.createArrayLiteralExpression(
+          args.map((arg) => arg.runtime as ts.Expression),
+          false,
+        ),
+      ]),
+    };
+  }
+
   if (ts.isObjectLiteralExpression(node)) {
     const properties = node.properties.map((property) => {
       if (

@@ -1,0 +1,4 @@
+cs`{
+  greeting = "Hello";
+  return greeting.concat(", ", "World").toUpperCase();
+}`

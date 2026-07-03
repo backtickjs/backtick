@@ -89,6 +89,9 @@ export interface Visitor<U> {
 
   // e.g. { a: 4 }
   object(loc: SourceLocation, entries: { [key: string]: U }): U;
+
+  // e.g. s.concat("!")
+  call(loc: SourceLocation, callee: U, args: U[]): U;
 }
 
 function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {

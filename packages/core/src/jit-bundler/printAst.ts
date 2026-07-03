@@ -1,13 +1,14 @@
 import type { Client, Spliceable } from "../cs-runtime/index.js";
-import type { AstNode } from "./ast/AstNode.js";
 import { AstArray } from "./ast/AstArray.js";
 import { AstAssignment } from "./ast/AstAssignment.js";
 import { AstBinop } from "./ast/AstBinop.js";
 import { AstBlock } from "./ast/AstBlock.js";
 import { AstBoolean } from "./ast/AstBoolean.js";
+import { AstCall } from "./ast/AstCall.js";
 import { AstClientScript } from "./ast/AstClientScript.js";
 import { AstIdentifier } from "./ast/AstIdentifier.js";
 import { AstIf } from "./ast/AstIf.js";
+import type { AstNode } from "./ast/AstNode.js";
 import { AstNull } from "./ast/AstNull.js";
 import { AstNumber } from "./ast/AstNumber.js";
 import { AstObject } from "./ast/AstObject.js";
@@ -34,6 +35,9 @@ export function printAst(node: AstNode): string {
   }
   if (node instanceof AstBoolean) {
     return node.value ? "true" : "false";
+  }
+  if (node instanceof AstCall) {
+    return `${printAst(node.callee)}(${node.args.map(printAst).join(", ")})`;
   }
   if (node instanceof AstClientScript) {
     return `cs\`${printAst(node.expression)}\``;
