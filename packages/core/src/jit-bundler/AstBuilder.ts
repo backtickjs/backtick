@@ -1,52 +1,106 @@
-import type { SourceLocation, Visitor } from "../cs-runtime/index.js";
-import type { AstNode } from "./ast/AstNode.js";
-import { StringLiteral } from "./ast/StringLiteral.js";
+import type {
+  Metadata,
+  SourceLocation,
+  Spliceable,
+  Visitor,
+} from "../cs-runtime/index.js";
+import type { AstNode } from "./AstNode.js";
+import { AstArray } from "./ast/AstArray.js";
+import { AstAssignment } from "./ast/AstAssignment.js";
+import { AstBinop } from "./ast/AstBinop.js";
+import { AstBlock } from "./ast/AstBlock.js";
+import { AstBoolean } from "./ast/AstBoolean.js";
+import { AstClientScript } from "./ast/AstClientScript.js";
+import { AstIdentifier } from "./ast/AstIdentifier.js";
+import { AstIf } from "./ast/AstIf.js";
+import { AstNull } from "./ast/AstNull.js";
+import { AstNumber } from "./ast/AstNumber.js";
+import { AstObject } from "./ast/AstObject.js";
+import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
+import { AstReturn } from "./ast/AstReturn.js";
+import { AstSplice } from "./ast/AstSplice.js";
+import { AstString } from "./ast/AstString.js";
 
 export class AstBuilder implements Visitor<AstNode> {
-  string(loc: SourceLocation, value: string): StringLiteral {
-    return new StringLiteral(loc, value);
+  clientScript(
+    loc: SourceLocation,
+    metadata: Metadata,
+    expression: AstNode,
+  ): AstClientScript {
+    return new AstClientScript(loc, metadata, expression);
   }
 
-  clientScript(): AstNode {
-    throw new Error("jit-bundler: `clientScript` is not implemented yet");
+  splice(loc: SourceLocation, key: string, expression: Spliceable): AstSplice {
+    return new AstSplice(loc, key, expression);
   }
-  splice(): AstNode {
-    throw new Error("jit-bundler: `splice` is not implemented yet");
+
+  null(loc: SourceLocation): AstNull {
+    return new AstNull(loc);
   }
-  null(): AstNode {
-    throw new Error("jit-bundler: `null` is not implemented yet");
+
+  number(loc: SourceLocation, value: number): AstNumber {
+    return new AstNumber(loc, value);
   }
-  number(): AstNode {
-    throw new Error("jit-bundler: `number` is not implemented yet");
+
+  boolean(loc: SourceLocation, value: boolean): AstBoolean {
+    return new AstBoolean(loc, value);
   }
-  boolean(): AstNode {
-    throw new Error("jit-bundler: `boolean` is not implemented yet");
+
+  string(loc: SourceLocation, value: string): AstString {
+    return new AstString(loc, value);
   }
-  identifier(): AstNode {
-    throw new Error("jit-bundler: `identifier` is not implemented yet");
+
+  identifier(loc: SourceLocation, name: string): AstIdentifier {
+    return new AstIdentifier(loc, name);
   }
-  block(): AstNode {
-    throw new Error("jit-bundler: `block` is not implemented yet");
+
+  block(loc: SourceLocation, statements: AstNode[]): AstBlock {
+    return new AstBlock(loc, statements);
   }
-  assignment(): AstNode {
-    throw new Error("jit-bundler: `assignment` is not implemented yet");
+
+  assignment(
+    loc: SourceLocation,
+    name: AstNode,
+    expression: AstNode,
+  ): AstAssignment {
+    return new AstAssignment(loc, name, expression);
   }
-  if(): AstNode {
-    throw new Error("jit-bundler: `if` is not implemented yet");
+
+  if(
+    loc: SourceLocation,
+    condition: AstNode,
+    consequent: AstNode,
+    alternate: AstNode | null,
+  ): AstIf {
+    return new AstIf(loc, condition, consequent, alternate);
   }
-  return(): AstNode {
-    throw new Error("jit-bundler: `return` is not implemented yet");
+
+  return(loc: SourceLocation, expression: AstNode): AstReturn {
+    return new AstReturn(loc, expression);
   }
-  propertyAccess(): AstNode {
-    throw new Error("jit-bundler: `propertyAccess` is not implemented yet");
+
+  propertyAccess(
+    loc: SourceLocation,
+    expression: AstNode,
+    name: string,
+  ): AstPropertyAccess {
+    return new AstPropertyAccess(loc, expression, name);
   }
-  binop(): AstNode {
-    throw new Error("jit-bundler: `binop` is not implemented yet");
+
+  binop(
+    loc: SourceLocation,
+    lhs: AstNode,
+    operator: string,
+    rhs: AstNode,
+  ): AstBinop {
+    return new AstBinop(loc, lhs, operator, rhs);
   }
-  array(): AstNode {
-    throw new Error("jit-bundler: `array` is not implemented yet");
+
+  array(loc: SourceLocation, elements: AstNode[]): AstArray {
+    return new AstArray(loc, elements);
   }
-  object(): AstNode {
-    throw new Error("jit-bundler: `object` is not implemented yet");
+
+  object(loc: SourceLocation, entries: { [key: string]: AstNode }): AstObject {
+    return new AstObject(loc, entries);
   }
 }

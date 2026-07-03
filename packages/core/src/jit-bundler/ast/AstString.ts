@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode } from "./AstNode.js";
+import type { AstNode } from "../AstNode.js";
 
-export class StringLiteral implements AstNode {
+export class AstString implements AstNode {
   private readonly value: string;
 
   constructor(_loc: SourceLocation, value: string) {
