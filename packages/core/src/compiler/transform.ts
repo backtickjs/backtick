@@ -4,7 +4,7 @@ import { rewriteFile } from "./rewriteFile.js";
 
 export function transform(
   ts: typeof import("typescript"),
-  onDiagnostic?: (diagnostic: ts.Diagnostic) => void,
+  addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
     const parsedFile = parseFile(ts, sourceFile.fileName, sourceFile.text);
@@ -14,9 +14,9 @@ export function transform(
 
     const rewrittenFile = rewriteFile(ts, parsedFile);
 
-    if (onDiagnostic) {
+    if (addDiagnostic) {
       for (const diagnostic of rewrittenFile.diagnostics) {
-        onDiagnostic({
+        addDiagnostic({
           file: sourceFile,
           start: diagnostic.range.start,
           length: diagnostic.range.end - diagnostic.range.start,
