@@ -282,6 +282,16 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isStringLiteral(node)) {
+    return {
+      virtual: ts.factory.createStringLiteral(node.text),
+      runtime: call(ts, "v", "string", [
+        loc(node),
+        ts.factory.createStringLiteral(node.text),
+      ]),
+    };
+  }
+
   if (
     node.kind === ts.SyntaxKind.TrueKeyword ||
     node.kind === ts.SyntaxKind.FalseKeyword
