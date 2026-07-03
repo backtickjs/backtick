@@ -10,6 +10,16 @@ export function print(script: Client<unknown>): void {
   process.stdout.write(`${script.visit(new StringifyVisitor())}\n`);
 }
 
+// Indents every line of a (possibly multi-line) statement by two spaces, so
+// nested blocks accumulate indentation instead of only shifting their first
+// line.
+function indent(text: string): string {
+  return text
+    .split("\n")
+    .map((line) => `  ${line}`)
+    .join("\n");
+}
+
 class StringifyVisitor implements Visitor<string> {
   lift(loc: SourceLocation, expression: Spliceable): string {
     if (expression == null) {
@@ -73,7 +83,8 @@ class StringifyVisitor implements Visitor<string> {
   }
 
   block(_loc: SourceLocation, statements: string[]): string {
-    return `{\n${statements.map((line) => `  ${line}`).join("\n")}\n}`;
+    const body = statements.map((statement) => indent(statement)).join("\n");
+    return `{\n${body}\n}`;
   }
 
   assignment(_loc: SourceLocation, name: string, expression: string): string {
