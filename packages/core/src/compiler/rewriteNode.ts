@@ -182,21 +182,53 @@ function rewriteNodeImpl(
   }
 
   if (ts.isCallExpression(node)) {
-    const callee = rewriteNode(ts, state, node.expression);
     const args = node.arguments.map((arg) => rewriteNode(ts, state, arg));
+    const virtualArgs = ts.factory.createArrayLiteralExpression(
+      args.map((arg) => arg.virtual as ts.Expression),
+      false,
+    );
+    const runtimeArgs = ts.factory.createArrayLiteralExpression(
+      args.map((arg) => arg.runtime as ts.Expression),
+      false,
+    );
+
+    if (
+      ts.isPropertyAccessExpression(node.expression) &&
+      ts.isIdentifier(node.expression.name)
+    ) {
+      const access = node.expression;
+      const receiver = rewriteNode(ts, state, access.expression);
+      const name = access.name.text;
+      const nameLiteral = ts.factory.createStringLiteral(name);
+      state.mappings.set(access.name, nameLiteral);
+      return {
+        virtual: call(ts, "cs", "method", [
+          receiver.virtual as ts.Expression,
+          nameLiteral,
+          virtualArgs,
+        ]),
+        runtime: call(ts, "v", "call", [
+          loc(node),
+          call(ts, "v", "propertyAccess", [
+            loc(access),
+            receiver.runtime as ts.Expression,
+            ts.factory.createStringLiteral(name),
+          ]),
+          runtimeArgs,
+        ]),
+      };
+    }
+
+    const callee = rewriteNode(ts, state, node.expression);
     return {
-      virtual: ts.factory.createCallExpression(
+      virtual: call(ts, "cs", "call", [
         callee.virtual as ts.Expression,
-        undefined,
-        args.map((arg) => arg.virtual as ts.Expression),
-      ),
+        virtualArgs,
+      ]),
       runtime: call(ts, "v", "call", [
         loc(node),
         callee.runtime as ts.Expression,
-        ts.factory.createArrayLiteralExpression(
-          args.map((arg) => arg.runtime as ts.Expression),
-          false,
-        ),
+        runtimeArgs,
       ]),
     };
   }

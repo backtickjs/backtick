@@ -108,6 +108,43 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
   );
 }
 
+function call<A extends unknown[], R>(_callee: (...args: A) => R, _args: A): R {
+  throw new Error(
+    "Don't call `cs.call` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
+/**
+ * The allowlist of methods a `string` receiver may call inside a `cs` client
+ * script. The compiler rewrites `s.method(...)` to `cs.method(s, "method", […])`,
+ * which resolves against this interface — so a method absent here is a type
+ * error at the call site. Add a signature to support another method.
+ */
+export interface CSString {
+  concat(...strings: string[]): string;
+  toUpperCase(): string;
+  toLowerCase(): string;
+}
+
+/**
+ * Maps a receiver's virtual type to the interface listing the methods it may
+ * call in a client script. A type with no entry resolves to `never`, so none
+ * of its methods are callable.
+ */
+export type CSMethods<T> = T extends string ? CSString : never;
+
+function method<T, M extends keyof CSMethods<T>>(
+  _receiver: T,
+  _name: M,
+  _args: CSMethods<T>[M] extends (...args: infer A) => unknown ? A : never,
+): CSMethods<T>[M] extends (...args: never[]) => infer R ? R : never {
+  throw new Error(
+    "Don't call `cs.method` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
   return { $$type: undefined, visit };
@@ -119,7 +156,7 @@ const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs/core/compiler set up for this project?",
     );
   },
-  { lift, lower, create },
+  { lift, lower, call, method, create },
 );
 
 export { cs };

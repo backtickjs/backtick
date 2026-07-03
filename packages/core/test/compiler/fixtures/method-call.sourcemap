@@ -6,14 +6,18 @@ __cs_greeting           → greeting
 ;                       → ;
 \n                      → \n  
 return                  → return 
+cs.method(              → 
+cs.method(              → 
 __cs_greeting           → greeting
-.concat                 → .concat
-(                       → (
+,                       → .
+"concat"                → concat
+, [                     → (
 ", "                    → ", "
 ,                       → , 
 "World"                 → "World"
-)                       → )
-.toUpperCase            → .toUpperCase
-()                      → ()
+])                      → )
+,                       → .
+"toUpperCase"           → toUpperCase
+, [])                   → ()
 ;                       → ;
 \n})())                 → \n}`
