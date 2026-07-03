@@ -1,0 +1,52 @@
+cs.lift(                → cs`
+{ r:                    → ({ r: 
+cs.lower(               → ${
+this.r                  → this.r
+)                       → }
+, g:                    → , g: 
+cs.lower(               → ${
+this.g                  → this.g
+)                       → }
+, b:                    → , b: 
+cs.lower(               → ${
+this.b                  → this.b
+)                       → }
+ }                      →  })
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_c                  → c
+ =                      →  = 
+cs.lower(               → ${
+color                   → color
+)                       → }
+;                       → ;
+\n                      → \n  
+const                   → const 
+__cs_brightness         → brightness
+ =                      →  = 
+__cs_c                  → c
+.r                      → .r
+ +                      →  + 
+__cs_c                  → c
+.g                      → .g
+ +                      →  + 
+__cs_c                  → c
+.b                      → .b
+;                       → ;
+\n                      → \n  
+if (                    → if (
+__cs_brightness         → brightness
+ >                      →  > 
+382                     → 382
+)                       → ) 
+{\n                     → {\n    
+return                  → return 
+"light"                 → "light"
+;                       → ;
+\n    }                 → \n  }
+\n                      → \n  
+return                  → return 
+"dark"                  → "dark"
+;                       → ;
+\n})())                 → \n}`
