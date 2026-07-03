@@ -1,3 +1,5 @@
+import type { SourceLocation } from "../cs-runtime/index.js";
+
 export interface AstNode {
-  debugPrint(): string;
+  readonly loc: SourceLocation;
 }

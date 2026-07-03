@@ -2,13 +2,11 @@ import type { Metadata, SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
 
 export class AstClientScript implements AstNode {
-  private readonly expression: AstNode;
+  readonly loc: SourceLocation;
+  readonly expression: AstNode;
 
-  constructor(_loc: SourceLocation, _metadata: Metadata, expression: AstNode) {
+  constructor(loc: SourceLocation, _metadata: Metadata, expression: AstNode) {
+    this.loc = loc;
     this.expression = expression;
-  }
-
-  debugPrint(): string {
-    return `cs\`${this.expression.debugPrint()}\``;
   }
 }

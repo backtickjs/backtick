@@ -1,15 +1,12 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "../AstNode.js";
-import { debugPrinter } from "../debugPrinter.js";
 
 export class AstNumber implements AstNode {
-  private readonly value: number;
+  readonly loc: SourceLocation;
+  readonly value: number;
 
-  constructor(_loc: SourceLocation, value: number) {
+  constructor(loc: SourceLocation, value: number) {
+    this.loc = loc;
     this.value = value;
-  }
-
-  debugPrint(): string {
-    return debugPrinter(this.value);
   }
 }
