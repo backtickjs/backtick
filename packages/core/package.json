@@ -16,6 +16,10 @@
     "./cs-runtime": {
       "types": "./dist/cs-runtime/index.d.ts",
       "default": "./dist/cs-runtime/index.js"
+    },
+    "./jit-bundler": {
+      "types": "./dist/jit-bundler/index.d.ts",
+      "default": "./dist/jit-bundler/index.js"
     }
   },
   "scripts": {
