@@ -1,12 +1,22 @@
-cs.lift(cs.lower(  → cs`${
-lhs                → lhs
-) + cs.lower(      → } + ${
-rhs                → rhs
-))                 → }`
-cs.lift(cs.lower(  → cs`${
-add(               → add(
-cs.lift(1)         → cs`1`
-,                  → , 
-cs.lift(2)         → cs`2`
-)                  → )
-))                 → }`
+cs.lift(   → cs`
+cs.lower(  → ${
+lhs        → lhs
+)          → }
+ +         →  + 
+cs.lower(  → ${
+rhs        → rhs
+)          → }
+)          → `
+cs.lift(   → cs`
+cs.lower(  → ${
+add(       → add(
+cs.lift(   → cs`
+1          → 1
+)          → `
+,          → , 
+cs.lift(   → cs`
+2          → 2
+)          → `
+)          → )
+)          → }
+)          → `

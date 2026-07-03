@@ -1,1 +1,3 @@
-cs.lift(1)  → cs`1`
+cs.lift(  → cs`
+1         → 1
+)         → `

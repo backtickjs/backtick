@@ -1,3 +1,5 @@
-cs.lift(cs.lower(  → cs`${
-1                  → 1
-))                 → }`
+cs.lift(   → cs`
+cs.lower(  → ${
+1          → 1
+)          → }
+)          → `

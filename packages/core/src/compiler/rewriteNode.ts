@@ -19,6 +19,18 @@ export function rewriteNode(
   state: RewriteState,
   node: ts.Node,
 ): RewrittenNode {
+  const rewritten = rewriteNodeImpl(ts, state, node);
+  if (rewritten.virtual.pos < 0) {
+    state.mappings.set(node, rewritten.virtual);
+  }
+  return rewritten;
+}
+
+function rewriteNodeImpl(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  node: ts.Node,
+): RewrittenNode {
   const unsupported = (): RewrittenNode => ({
     virtual: node,
     runtime: call(ts, "v", "null", [loc(node)]),
@@ -144,11 +156,8 @@ export function rewriteNode(
       };
     }
 
-    const identifier = ts.factory.createIdentifier(mangle(node.text));
-    state.mappings.set(node, identifier);
-
     return {
-      virtual: identifier,
+      virtual: ts.factory.createIdentifier(mangle(node.text)),
       runtime: call(ts, "v", "identifier", [
         loc(node),
         ts.factory.createStringLiteral(node.text),
@@ -159,12 +168,10 @@ export function rewriteNode(
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const expression = rewriteNode(ts, state, node.expression);
     const name = node.name.text;
-    const nameIdentifier = ts.factory.createIdentifier(name);
-    state.mappings.set(node.name, nameIdentifier);
     return {
       virtual: ts.factory.createPropertyAccessExpression(
         expression.virtual as ts.Expression,
-        nameIdentifier,
+        ts.factory.createIdentifier(name),
       ),
       runtime: call(ts, "v", "propertyAccess", [
         loc(node),

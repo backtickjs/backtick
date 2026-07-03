@@ -1,7 +1,15 @@
-cs.lift((() => {\n    const   → cs`{\n  const 
-__cs_x                        → x
- = 0;\n    return cs.lower(   →  = 0;\n  return ${
-cs.lift(                      → cs`
-__cs_x                        → x
-)                             → `
-);\n})())                     → };\n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_x                  → x
+ =                      →  = 
+0                       → 0
+;                       → ;
+\n                      → \n  
+return                  → return 
+cs.lower(               → ${
+cs.lift(                → cs`
+__cs_x                  → x
+)                       → `
+)                       → }
+;                       → ;
+\n})())                 → \n}`
