@@ -3,23 +3,23 @@ import type {
   SourceLocation,
   Spliceable,
   Visitor,
-} from "../cs-runtime/index.js";
+} from "../../cs-runtime/index.js";
+import { AstArray } from "./AstArray.js";
+import { AstAssignment } from "./AstAssignment.js";
+import { AstBinop } from "./AstBinop.js";
+import { AstBlock } from "./AstBlock.js";
+import { AstBoolean } from "./AstBoolean.js";
+import { AstClientScript } from "./AstClientScript.js";
+import { AstIdentifier } from "./AstIdentifier.js";
+import { AstIf } from "./AstIf.js";
 import type { AstNode } from "./AstNode.js";
-import { AstArray } from "./ast/AstArray.js";
-import { AstAssignment } from "./ast/AstAssignment.js";
-import { AstBinop } from "./ast/AstBinop.js";
-import { AstBlock } from "./ast/AstBlock.js";
-import { AstBoolean } from "./ast/AstBoolean.js";
-import { AstClientScript } from "./ast/AstClientScript.js";
-import { AstIdentifier } from "./ast/AstIdentifier.js";
-import { AstIf } from "./ast/AstIf.js";
-import { AstNull } from "./ast/AstNull.js";
-import { AstNumber } from "./ast/AstNumber.js";
-import { AstObject } from "./ast/AstObject.js";
-import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
-import { AstReturn } from "./ast/AstReturn.js";
-import { AstSplice } from "./ast/AstSplice.js";
-import { AstString } from "./ast/AstString.js";
+import { AstNull } from "./AstNull.js";
+import { AstNumber } from "./AstNumber.js";
+import { AstObject } from "./AstObject.js";
+import { AstPropertyAccess } from "./AstPropertyAccess.js";
+import { AstReturn } from "./AstReturn.js";
+import { AstSplice } from "./AstSplice.js";
+import { AstString } from "./AstString.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   clientScript(

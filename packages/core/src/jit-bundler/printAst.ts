@@ -1,5 +1,5 @@
 import type { Client, Spliceable } from "../cs-runtime/index.js";
-import type { AstNode } from "./AstNode.js";
+import type { AstNode } from "./ast/AstNode.js";
 import { AstArray } from "./ast/AstArray.js";
 import { AstAssignment } from "./ast/AstAssignment.js";
 import { AstBinop } from "./ast/AstBinop.js";
