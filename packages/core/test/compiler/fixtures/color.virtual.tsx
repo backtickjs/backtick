@@ -18,14 +18,23 @@ class Color implements Client<Color> {
   visit<U>(visitor: Visitor<U>): U {
     return cs.lift({ r: cs.lower(this.r), g: cs.lower(this.g), b: cs.lower(this.b) }).visit(visitor);
   }
+
+  // Client methods take and return `Client<…>` values. Called from host code
+  // they build a client script; called inside a `cs` script they virtualize.
+  brightness(): Client<number> {
+    return cs.lift(cs.lower(this.r) + cs.lower(this.g) + cs.lower(this.b));
+  }
+
+  isBrighterThan(threshold: Client<number>): Client<boolean> {
+    return cs.lift(cs.lower(this.brightness()) > cs.lower(threshold));
+  }
 }
 
 const color = new Color(30, 144, 255);
 
 const script = cs.lift((() => {
     const __cs_c = cs.lower(color);
-    const __cs_brightness = __cs_c.r + __cs_c.g + __cs_c.b;
-    if (__cs_brightness > 382) {
+    if (cs.lower(cs.method(__cs_c, "isBrighterThan", [cs.lift(382)]))) {
         return "light";
     }
     return "dark";

@@ -13,6 +13,28 @@ this.b                  → this.b
 )                       → }
  }                      →  })
 )                       → `
+cs.lift(                → cs`
+cs.lower(               → ${
+this.r                  → this.r
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+this.g                  → this.g
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+this.b                  → this.b
+)                       → }
+)                       → `
+cs.lift(                → cs`
+cs.lower(               → ${
+this.brightness()       → this.brightness()
+)                       → }
+ >                      →  > 
+cs.lower(               → ${
+threshold               → threshold
+)                       → }
+)                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_c                  → c
@@ -22,23 +44,14 @@ color                   → color
 )                       → }
 ;                       → ;
 \n                      → \n  
-const                   → const 
-__cs_brightness         → brightness
- =                      →  = 
-__cs_c                  → c
-.r                      → .r
- +                      →  + 
-__cs_c                  → c
-.g                      → .g
- +                      →  + 
-__cs_c                  → c
-.b                      → .b
-;                       → ;
-\n                      → \n  
 if (                    → if (
-__cs_brightness         → brightness
- >                      →  > 
+cs.lower(cs.method(     → 
+__cs_c                  → c
+,                       → .
+"isBrighterThan"        → isBrighterThan
+, [cs.lift(             → (
 382                     → 382
+)]))                    → )
 )                       → ) 
 {\n                     → {\n    
 return                  → return 
