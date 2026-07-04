@@ -3,11 +3,11 @@ import type { Client, Visitor } from "@backtickjs/core/cs-runtime";
 import { print } from "../print.ts";
 
 class Color implements Client<Color> {
-  readonly r: number;
-  readonly g: number;
-  readonly b: number;
+  readonly r: Client<number>;
+  readonly g: Client<number>;
+  readonly b: Client<number>;
 
-  constructor(r: number, g: number, b: number) {
+  constructor(r: Client<number>, g: Client<number>, b: Client<number>) {
     this.r = r;
     this.g = g;
     this.b = b;
@@ -30,10 +30,8 @@ class Color implements Client<Color> {
   }
 }
 
-const color = new Color(30, 144, 255);
-
 const script = cs`{
-  const c = ${color};
+  const c = new Color(30, 144, 255);
   if (c.isBrighterThan(382)) {
     return "light";
   }

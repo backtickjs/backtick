@@ -51,9 +51,15 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_c                  → c
  =                      →  = 
-cs.lower(               → ${
-color                   → color
-)                       → }
+cs.lower(new            → new 
+Color                   → Color
+(cs.lift(               → (
+30                      → 30
+), cs.lift(             → , 
+144                     → 144
+), cs.lift(             → , 
+255                     → 255
+)))                     → )
 ;                       → ;
 \n                      → \n  
 if (                    → if (

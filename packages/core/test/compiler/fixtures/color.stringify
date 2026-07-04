@@ -1,5 +1,5 @@
 cs`{
-  c = ${cs`({r: this.r, g: this.g, b: this.b})`};
+  c = new Color(30, 144, 255);
   if (c.isBrighterThan(382)) {
     return "light";
   }

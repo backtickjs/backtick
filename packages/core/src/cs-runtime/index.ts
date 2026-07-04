@@ -107,6 +107,9 @@ export interface Visitor<U> {
 
   // e.g. s.concat("!")
   call(loc: SourceLocation, callee: U, args: U[]): U;
+
+  // e.g. new Color(30, 144, 255)
+  new: (loc: SourceLocation, callee: U, args: U[]) => U;
 }
 
 function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {

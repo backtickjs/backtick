@@ -9,6 +9,7 @@ import { AstClientScript } from "./ast/AstClientScript.js";
 import { AstIdentifier } from "./ast/AstIdentifier.js";
 import { AstIf } from "./ast/AstIf.js";
 import type { AstNode } from "./ast/AstNode.js";
+import { AstNew } from "./ast/AstNew.js";
 import { AstNull } from "./ast/AstNull.js";
 import { AstNumber } from "./ast/AstNumber.js";
 import { AstObject } from "./ast/AstObject.js";
@@ -51,6 +52,9 @@ export function printAst(node: AstNode): string {
     return node.alternate === null
       ? head
       : `${head} else ${printAst(node.alternate)}`;
+  }
+  if (node instanceof AstNew) {
+    return `new ${printAst(node.callee)}(${node.args.map(printAst).join(", ")})`;
   }
   if (node instanceof AstNull) {
     return "null";

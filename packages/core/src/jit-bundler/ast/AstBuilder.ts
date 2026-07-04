@@ -15,6 +15,7 @@ import { AstClientScript } from "./AstClientScript.js";
 import { AstIdentifier } from "./AstIdentifier.js";
 import { AstIf } from "./AstIf.js";
 import type { AstNode } from "./AstNode.js";
+import { AstNew } from "./AstNew.js";
 import { AstNull } from "./AstNull.js";
 import { AstNumber } from "./AstNumber.js";
 import { AstObject } from "./AstObject.js";
@@ -113,5 +114,9 @@ export class AstBuilder implements Visitor<AstNode> {
 
   call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstCall {
     return new AstCall(loc, callee, args);
+  }
+
+  new(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstNew {
+    return new AstNew(loc, callee, args);
   }
 }

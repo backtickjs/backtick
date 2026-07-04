@@ -270,6 +270,41 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isNewExpression(node) && ts.isIdentifier(node.expression)) {
+    const className = node.expression.text;
+    const args = (node.arguments ?? []).map((arg) =>
+      rewriteNode(ts, state, arg),
+    );
+
+    // Lift each argument so the constructor receives `Client<…>` values,
+    // matching how a client class declares its constructor parameters.
+    const virtualArgs = args.map((arg) =>
+      call(ts, "cs", "lift", [arg.virtual as ts.Expression]),
+    );
+
+    const classIdentifier = ts.factory.createIdentifier(className);
+    state.mappings.set(node.expression, classIdentifier);
+
+    // The result is a `Client<…>`, so lower it back to a raw value that flows
+    // into the surrounding script.
+    return {
+      virtual: call(ts, "cs", "lower", [
+        ts.factory.createNewExpression(classIdentifier, undefined, virtualArgs),
+      ]),
+      runtime: call(ts, "v", "new", [
+        loc(node),
+        call(ts, "v", "identifier", [
+          loc(node.expression),
+          ts.factory.createStringLiteral(className),
+        ]),
+        ts.factory.createArrayLiteralExpression(
+          args.map((arg) => arg.runtime as ts.Expression),
+          false,
+        ),
+      ]),
+    };
+  }
+
   if (ts.isObjectLiteralExpression(node)) {
     const properties = node.properties.map((property) => {
       if (
