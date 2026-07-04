@@ -16,13 +16,13 @@ class Color implements Client<Color> {
   $$type = this;
 
   visit<U>(visitor: Visitor<U>): U {
-    return cs`({ r: ${this.r}, g: ${this.g}, b: ${this.b} })`.visit(visitor);
+    return cs`({ r: this.r, g: this.g, b: this.b })`.visit(visitor);
   }
 
   // Client methods take and return `Client<…>` values. Called from host code
   // they build a client script; called inside a `cs` script they virtualize.
   brightness(): Client<number> {
-    return cs`${this.r} + ${this.g} + ${this.b}`;
+    return cs`this.r + this.g + this.b`;
   }
 
   isBrighterThan(threshold: Client<number>): Client<boolean> {

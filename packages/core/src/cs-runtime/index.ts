@@ -93,6 +93,9 @@ export interface Visitor<U> {
   // e.g. obj.a
   propertyAccess(loc: SourceLocation, expression: U, name: string): U;
 
+  // this
+  this(loc: SourceLocation, instance: Client<unknown>): U;
+
   // e.g. a + b
   binop(loc: SourceLocation, lhs: U, operator: string, rhs: U): U;
 

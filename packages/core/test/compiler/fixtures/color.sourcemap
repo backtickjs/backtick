@@ -1,30 +1,42 @@
 cs.lift(                → cs`
 { r:                    → ({ r: 
-cs.lower(               → ${
-this.r                  → this.r
-)                       → }
+cs.lower(               → 
+this                    → this
+.                       → .
+r                       → r
+)                       → 
 , g:                    → , g: 
-cs.lower(               → ${
-this.g                  → this.g
-)                       → }
+cs.lower(               → 
+this                    → this
+.                       → .
+g                       → g
+)                       → 
 , b:                    → , b: 
-cs.lower(               → ${
-this.b                  → this.b
-)                       → }
+cs.lower(               → 
+this                    → this
+.                       → .
+b                       → b
+)                       → 
  }                      →  })
 )                       → `
 cs.lift(                → cs`
-cs.lower(               → ${
-this.r                  → this.r
-)                       → }
+cs.lower(               → 
+this                    → this
+.                       → .
+r                       → r
+)                       → 
  +                      →  + 
-cs.lower(               → ${
-this.g                  → this.g
-)                       → }
+cs.lower(               → 
+this                    → this
+.                       → .
+g                       → g
+)                       → 
  +                      →  + 
-cs.lower(               → ${
-this.b                  → this.b
-)                       → }
+cs.lower(               → 
+this                    → this
+.                       → .
+b                       → b
+)                       → 
 )                       → `
 cs.lift(                → cs`
 cs.lower(               → ${

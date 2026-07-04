@@ -1,5 +1,5 @@
 cs`{
-  c = ${cs`({r: ${30}, g: ${144}, b: ${255}})`};
+  c = ${cs`({r: this.r, g: this.g, b: this.b})`};
   if (c.isBrighterThan(382)) {
     return "light";
   }

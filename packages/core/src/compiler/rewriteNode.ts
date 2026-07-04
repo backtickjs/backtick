@@ -166,8 +166,32 @@ function rewriteNodeImpl(
   }
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
-    const expression = rewriteNode(ts, state, node.expression);
     const name = node.name.text;
+
+    if (node.expression.kind === ts.SyntaxKind.ThisKeyword) {
+      const thisExpression = ts.factory.createThis();
+      const propertyName = ts.factory.createIdentifier(name);
+      state.mappings.set(node.expression, thisExpression);
+      state.mappings.set(node.name, propertyName);
+      return {
+        virtual: call(ts, "cs", "lower", [
+          ts.factory.createPropertyAccessExpression(
+            thisExpression,
+            propertyName,
+          ),
+        ]),
+        runtime: call(ts, "v", "propertyAccess", [
+          loc(node),
+          call(ts, "v", "this", [
+            loc(node.expression),
+            ts.factory.createThis(),
+          ]),
+          ts.factory.createStringLiteral(name),
+        ]),
+      };
+    }
+
+    const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createPropertyAccessExpression(
         expression.virtual as ts.Expression,

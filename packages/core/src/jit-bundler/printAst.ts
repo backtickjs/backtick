@@ -16,6 +16,7 @@ import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
 import { AstReturn } from "./ast/AstReturn.js";
 import { AstSplice } from "./ast/AstSplice.js";
 import { AstString } from "./ast/AstString.js";
+import { AstThis } from "./ast/AstThis.js";
 import { buildAst } from "./buildAst.js";
 
 // Renders any AST node to its debug string. Children are rendered recursively;
@@ -61,6 +62,9 @@ export function printAst(node: AstNode): string {
     return printObject(node.entries);
   }
   if (node instanceof AstPropertyAccess) {
+    if (node.expression instanceof AstThis) {
+      return `this.${node.name}`;
+    }
     return `${printAst(node.expression)}.${node.name}`;
   }
   if (node instanceof AstReturn) {
@@ -68,6 +72,9 @@ export function printAst(node: AstNode): string {
   }
   if (node instanceof AstSplice) {
     return `\${${printValue(node.expression)}}`;
+  }
+  if (node instanceof AstThis) {
+    return printValue(node.instance);
   }
   if (node instanceof AstString) {
     return `"${node.value}"`;

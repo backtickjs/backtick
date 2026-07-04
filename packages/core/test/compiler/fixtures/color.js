@@ -12,20 +12,14 @@ class Color {
     $$type = this;
     visit(visitor) {
         return (() => {
-            const $0splice0 = this.r;
-            const $0splice1 = this.g;
-            const $0splice2 = this.b;
-            return cs.create(v => v.clientScript({ path: "color.tsx", start: { line: 19, character: 12 }, end: { line: 19, character: 62 } }, { splices: { $0splice0: $0splice0, $0splice1: $0splice1, $0splice2: $0splice2 }, freeVars: [] }, v.object({ path: "color.tsx", start: { line: 19, character: 16 }, end: { line: 19, character: 60 } }, { r: v.splice({ path: "color.tsx", start: { line: 19, character: 21 }, end: { line: 19, character: 30 } }, "$0splice0", $0splice0), g: v.splice({ path: "color.tsx", start: { line: 19, character: 35 }, end: { line: 19, character: 44 } }, "$0splice1", $0splice1), b: v.splice({ path: "color.tsx", start: { line: 19, character: 49 }, end: { line: 19, character: 58 } }, "$0splice2", $0splice2) })));
+            return cs.create(v => v.clientScript({ path: "color.tsx", start: { line: 19, character: 12 }, end: { line: 19, character: 53 } }, { splices: {}, freeVars: [] }, v.object({ path: "color.tsx", start: { line: 19, character: 16 }, end: { line: 19, character: 51 } }, { r: v.propertyAccess({ path: "color.tsx", start: { line: 19, character: 21 }, end: { line: 19, character: 27 } }, v.this({ path: "color.tsx", start: { line: 19, character: 21 }, end: { line: 19, character: 25 } }, this), "r"), g: v.propertyAccess({ path: "color.tsx", start: { line: 19, character: 32 }, end: { line: 19, character: 38 } }, v.this({ path: "color.tsx", start: { line: 19, character: 32 }, end: { line: 19, character: 36 } }, this), "g"), b: v.propertyAccess({ path: "color.tsx", start: { line: 19, character: 43 }, end: { line: 19, character: 49 } }, v.this({ path: "color.tsx", start: { line: 19, character: 43 }, end: { line: 19, character: 47 } }, this), "b") })));
         })().visit(visitor);
     }
     // Client methods take and return `Client<…>` values. Called from host code
     // they build a client script; called inside a `cs` script they virtualize.
     brightness() {
         return (() => {
-            const $0splice0 = this.r;
-            const $0splice1 = this.g;
-            const $0splice2 = this.b;
-            return cs.create(v => v.clientScript({ path: "color.tsx", start: { line: 25, character: 12 }, end: { line: 25, character: 49 } }, { splices: { $0splice0: $0splice0, $0splice1: $0splice1, $0splice2: $0splice2 }, freeVars: [] }, v.binop({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 48 } }, v.binop({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 36 } }, v.splice({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 24 } }, "$0splice0", $0splice0), "+", v.splice({ path: "color.tsx", start: { line: 25, character: 27 }, end: { line: 25, character: 36 } }, "$0splice1", $0splice1)), "+", v.splice({ path: "color.tsx", start: { line: 25, character: 39 }, end: { line: 25, character: 48 } }, "$0splice2", $0splice2))));
+            return cs.create(v => v.clientScript({ path: "color.tsx", start: { line: 25, character: 12 }, end: { line: 25, character: 40 } }, { splices: {}, freeVars: [] }, v.binop({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 39 } }, v.binop({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 30 } }, v.propertyAccess({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 21 } }, v.this({ path: "color.tsx", start: { line: 25, character: 15 }, end: { line: 25, character: 19 } }, this), "r"), "+", v.propertyAccess({ path: "color.tsx", start: { line: 25, character: 24 }, end: { line: 25, character: 30 } }, v.this({ path: "color.tsx", start: { line: 25, character: 24 }, end: { line: 25, character: 28 } }, this), "g")), "+", v.propertyAccess({ path: "color.tsx", start: { line: 25, character: 33 }, end: { line: 25, character: 39 } }, v.this({ path: "color.tsx", start: { line: 25, character: 33 }, end: { line: 25, character: 37 } }, this), "b"))));
         })();
     }
     isBrighterThan(threshold) {

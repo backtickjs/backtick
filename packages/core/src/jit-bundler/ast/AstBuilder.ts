@@ -1,4 +1,5 @@
 import type {
+  Client,
   Metadata,
   SourceLocation,
   Spliceable,
@@ -21,6 +22,7 @@ import { AstPropertyAccess } from "./AstPropertyAccess.js";
 import { AstReturn } from "./AstReturn.js";
 import { AstSplice } from "./AstSplice.js";
 import { AstString } from "./AstString.js";
+import { AstThis } from "./AstThis.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   clientScript(
@@ -86,6 +88,10 @@ export class AstBuilder implements Visitor<AstNode> {
     name: string,
   ): AstPropertyAccess {
     return new AstPropertyAccess(loc, expression, name);
+  }
+
+  this(loc: SourceLocation, instance: Client<unknown>): AstThis {
+    return new AstThis(loc, instance);
   }
 
   binop(
