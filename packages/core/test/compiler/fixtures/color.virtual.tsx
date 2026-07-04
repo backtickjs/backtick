@@ -26,7 +26,7 @@ class Color implements Client<Color> {
   }
 
   isBrighterThan(threshold: Client<number>): Client<boolean> {
-    return cs.lift(cs.lower(this.brightness()) > cs.lower(threshold));
+    return cs.lift(cs.lower(cs.method(this, "brightness", [])) > cs.lower(threshold));
   }
 }
 

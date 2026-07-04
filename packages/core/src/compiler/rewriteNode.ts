@@ -165,6 +165,13 @@ function rewriteNodeImpl(
     };
   }
 
+  if (node.kind === ts.SyntaxKind.ThisKeyword) {
+    return {
+      virtual: ts.factory.createThis(),
+      runtime: call(ts, "v", "this", [loc(node), ts.factory.createThis()]),
+    };
+  }
+
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const name = node.name.text;
 

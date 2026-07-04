@@ -24,9 +24,8 @@ class Color {
     }
     isBrighterThan(threshold) {
         return (() => {
-            const $0splice0 = this.brightness();
-            const $0splice1 = threshold;
-            return cs.create(v => v.clientScript({ path: "color.tsx", start: { line: 29, character: 12 }, end: { line: 29, character: 51 } }, { splices: { $0splice0: $0splice0, $0splice1: $0splice1 }, freeVars: [] }, v.binop({ path: "color.tsx", start: { line: 29, character: 15 }, end: { line: 29, character: 50 } }, v.splice({ path: "color.tsx", start: { line: 29, character: 15 }, end: { line: 29, character: 35 } }, "$0splice0", $0splice0), ">", v.splice({ path: "color.tsx", start: { line: 29, character: 38 }, end: { line: 29, character: 50 } }, "$0splice1", $0splice1))));
+            const $0splice0 = threshold;
+            return cs.create(v => v.clientScript({ path: "color.tsx", start: { line: 29, character: 12 }, end: { line: 29, character: 48 } }, { splices: { $0splice0: $0splice0 }, freeVars: [] }, v.binop({ path: "color.tsx", start: { line: 29, character: 15 }, end: { line: 29, character: 47 } }, v.call({ path: "color.tsx", start: { line: 29, character: 15 }, end: { line: 29, character: 32 } }, v.propertyAccess({ path: "color.tsx", start: { line: 29, character: 15 }, end: { line: 29, character: 30 } }, v.this({ path: "color.tsx", start: { line: 29, character: 15 }, end: { line: 29, character: 19 } }, this), "brightness"), []), ">", v.splice({ path: "color.tsx", start: { line: 29, character: 35 }, end: { line: 29, character: 47 } }, "$0splice0", $0splice0))));
         })();
     }
 }

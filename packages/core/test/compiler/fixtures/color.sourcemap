@@ -39,9 +39,11 @@ b                       → b
 )                       → 
 )                       → `
 cs.lift(                → cs`
-cs.lower(               → ${
-this.brightness()       → this.brightness()
-)                       → }
+cs.lower(cs.method(     → 
+this                    → this
+,                       → .
+"brightness"            → brightness
+, []))                  → ()
  >                      →  > 
 cs.lower(               → ${
 threshold               → threshold

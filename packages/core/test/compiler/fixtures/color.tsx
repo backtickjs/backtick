@@ -26,7 +26,7 @@ class Color implements Client<Color> {
   }
 
   isBrighterThan(threshold: Client<number>): Client<boolean> {
-    return cs`${this.brightness()} > ${threshold}`;
+    return cs`this.brightness() > ${threshold}`;
   }
 }
 
