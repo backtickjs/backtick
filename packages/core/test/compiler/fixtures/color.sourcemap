@@ -39,11 +39,11 @@ b                       → b
 )                       → 
 )                       → `
 cs.lift(                → cs`
-cs.lower(cs.method(     → 
+cs.lower(               → 
 this                    → this
-,                       → .
-"brightness"            → brightness
-, []))                  → ()
+.                       → .
+brightness              → brightness
+())                     → ()
  >                      →  > 
 cs.lower(               → ${
 threshold               → threshold
@@ -65,13 +65,13 @@ Color                   → Color
 ;                       → ;
 \n                      → \n  
 if (                    → if (
-cs.lower(cs.method(     → 
+cs.lower(               → 
 __cs_c                  → c
-,                       → .
-"isBrighterThan"        → isBrighterThan
-, [cs.lift(             → (
+.                       → .
+isBrighterThan          → isBrighterThan
+(cs.lift(               → (
 382                     → 382
-)]))                    → )
+)))                     → )
 )                       → ) 
 {\n                     → {\n    
 return                  → return 

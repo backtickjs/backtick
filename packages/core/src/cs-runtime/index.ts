@@ -1,15 +1,3 @@
-import type { ClientArray } from "./types/ClientArray.js";
-import type { ClientBoolean } from "./types/ClientBoolean.js";
-import type { ClientNumber } from "./types/ClientNumber.js";
-import type { ClientObject } from "./types/ClientObject.js";
-import type { ClientString } from "./types/ClientString.js";
-
-export type { ClientArray } from "./types/ClientArray.js";
-export type { ClientBoolean } from "./types/ClientBoolean.js";
-export type { ClientNumber } from "./types/ClientNumber.js";
-export type { ClientObject } from "./types/ClientObject.js";
-export type { ClientString } from "./types/ClientString.js";
-
 export interface Client<T> {
   $$type: T;
   visit: <U>(visitor: Visitor<U>) => U;
@@ -133,39 +121,6 @@ function call<A extends unknown[], R>(_callee: (...args: A) => R, _args: A): R {
   );
 }
 
-/**
- * Resolves a receiver's virtual type to the type describing which methods it
- * may call in a client script — a standard-library class for built-ins, or the
- * user's own client class for values that carry `$$type`/`visit`.
- *
- * The `Client` branch must precede the `object` branch (a client class is an
- * object), and the array branch must precede both (an array is an object).
- */
-export type ClientMethods<T> = T extends string
-  ? ClientString
-  : T extends number
-    ? ClientNumber
-    : T extends boolean
-      ? ClientBoolean
-      : T extends (infer E)[]
-        ? ClientArray<E>
-        : T extends Client<unknown>
-          ? Omit<T, keyof Client<unknown>>
-          : T extends object
-            ? ClientObject<T>
-            : never;
-
-function method<T, M extends keyof ClientMethods<T>>(
-  _receiver: T,
-  _name: M,
-  _args: ClientMethods<T>[M] extends (...args: infer A) => unknown ? A : never,
-): ClientMethods<T>[M] extends (...args: never[]) => infer R ? R : never {
-  throw new Error(
-    "Don't call `cs.method` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
 // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
   return { $$type: undefined, visit };
@@ -177,7 +132,7 @@ const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs/core/compiler set up for this project?",
     );
   },
-  { lift, lower, call, method, create },
+  { lift, lower, call, create },
 );
 
 export { cs };

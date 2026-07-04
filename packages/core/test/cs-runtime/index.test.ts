@@ -20,10 +20,3 @@ test("cs.call throws when called directly", () => {
     /Don't call `cs\.call`/,
   );
 });
-
-test("cs.method throws when called directly", () => {
-  assert.throws(
-    () => cs.method("Hello", "toUpperCase", []),
-    /Don't call `cs\.method`/,
-  );
-});
