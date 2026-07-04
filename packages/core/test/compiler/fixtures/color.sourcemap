@@ -43,7 +43,7 @@ cs.lower(               →
 this                    → this
 .                       → .
 brightness              → brightness
-())                     → ()
+)()                     → ()
  >                      →  > 
 cs.lower(               → ${
 threshold               → threshold
@@ -69,9 +69,9 @@ cs.lower(               →
 __cs_c                  → c
 .                       → .
 isBrighterThan          → isBrighterThan
-(cs.lift(               → (
+)(                      → (
 382                     → 382
-)))                     → )
+)                       → )
 )                       → ) 
 {\n                     → {\n    
 return                  → return 

@@ -26,13 +26,13 @@ class Color implements Client<Color> {
   }
 
   isBrighterThan(threshold: Client<number>): Client<boolean> {
-    return cs.lift(cs.lower(this.brightness()) > cs.lower(threshold));
+    return cs.lift(cs.lower(this.brightness)() > cs.lower(threshold));
   }
 }
 
 const script = cs.lift((() => {
     const __cs_c = cs.lower(new Color(cs.lift(30), cs.lift(144), cs.lift(255)));
-    if (cs.lower(__cs_c.isBrighterThan(cs.lift(382)))) {
+    if (cs.lower(__cs_c.isBrighterThan)(382)) {
         return "light";
     }
     return "dark";

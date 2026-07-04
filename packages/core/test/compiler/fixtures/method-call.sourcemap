@@ -11,13 +11,13 @@ cs.lower(               →
 __cs_greeting           → greeting
 .                       → .
 concat                  → concat
-(cs.lift(               → (
+)(                      → (
 ", "                    → ", "
-), cs.lift(             → , 
+,                       → , 
 "World"                 → "World"
-)))                     → )
+)                       → )
 .                       → .
 toUpperCase             → toUpperCase
-())                     → ()
+)()                     → ()
 ;                       → ;
 \n})())                 → \n}`

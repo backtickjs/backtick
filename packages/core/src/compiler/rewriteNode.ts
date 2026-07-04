@@ -232,25 +232,18 @@ function rewriteNodeImpl(
       const name = access.name.text;
       const propertyName = ts.factory.createIdentifier(name);
       state.mappings.set(access.name, propertyName);
-      // Lift each argument so a method receives `Client<…>` values, matching how
-      // user-defined client methods declare their parameters.
-      const liftedArgs = args.map((arg) =>
-        call(ts, "cs", "lift", [arg.virtual as ts.Expression]),
-      );
-      // A client method returns a `Client<…>`, so lower the result back to a
-      // raw value — letting it chain into another method and flow into the
-      // surrounding script.
+
       return {
-        virtual: call(ts, "cs", "lower", [
-          ts.factory.createCallExpression(
+        virtual: ts.factory.createCallExpression(
+          call(ts, "cs", "lower", [
             ts.factory.createPropertyAccessExpression(
               receiver.virtual as ts.Expression,
               propertyName,
             ),
-            undefined,
-            liftedArgs,
-          ),
-        ]),
+          ]),
+          undefined,
+          args.map((arg) => arg.virtual as ts.Expression),
+        ),
         runtime: call(ts, "v", "call", [
           loc(node),
           call(ts, "v", "propertyAccess", [

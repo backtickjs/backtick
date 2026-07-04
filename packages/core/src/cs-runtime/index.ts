@@ -14,19 +14,33 @@ export type Spliceable =
   | Spliceable[]
   | { [key: string]: Spliceable };
 
-// Recursively lowers a Spliceable type:
+// Recursively lowers a Spliceable (or method) type:
 //   Client<U>        -> U
+//   (...A) => R      -> (...Lower<A>) => Lower<R>   (a virtualized method)
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
+//
+// A method lowers to a callable whose parameters and return are both lowered, so
+// it's invoked with the raw values already flowing through the surrounding
+// script and yields a raw value back. A user client method's `Client<…>` params
+// lower to their underlying values and a built-in's raw params stay raw — so
+// either way the call site passes plain arguments, not `cs.lift(…)` wrappers.
 export type Lower<T> =
   T extends Client<infer U>
     ? U
-    : T extends (infer Item)[]
-      ? Lower<Item>[]
-      : T extends object
-        ? { [Tk in keyof T]: Lower<T[Tk]> }
-        : T;
+    : T extends (...args: infer A) => infer R
+      ? (...args: { [K in keyof A]: Lower<A[K]> }) => Lower<R>
+      : T extends (infer Item)[]
+        ? Lower<Item>[]
+        : T extends object
+          ? { [Tk in keyof T]: Lower<T[Tk]> }
+          : T;
+
+// A method reference (`receiver.method`) captured for virtualization. It isn't a
+// `Spliceable`, so `cs.lift`/`cs.lower` admit it explicitly: `cs.lower` turns it
+// into a callable (see `Lower`) invoked with the script's raw values.
+type Method = (...args: never[]) => unknown;
 
 export interface Metadata {
   splices: { [key: string]: unknown };
@@ -100,14 +114,16 @@ export interface Visitor<U> {
   new: (loc: SourceLocation, callee: U, args: U[]) => U;
 }
 
-function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {
+function lift<const T extends Spliceable | Method>(
+  _value: T,
+): Client<Lower<T>> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-function lower<const T extends Spliceable>(_value: T): Lower<T> {
+function lower<const T extends Spliceable | Method>(_value: T): Lower<T> {
   throw new Error(
     "Don't call `cs.lower` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
