@@ -1,6 +1,6 @@
-export { buildAst } from "./buildAst.js";
-export { buildIr } from "./buildIr.js";
+export { buildAst } from "./ast/buildAst.js";
+export { buildIr } from "./ir/buildIr.js";
 export { bundle } from "./bundle.js";
-export type { IrPayload } from "./Payload.js";
-export { printAst } from "./printAst.js";
-export { serialize } from "./serialize.js";
+export type { IrPayload } from "./ir/Payload.js";
+export { printAst } from "./ast/printAst.js";
+export { serialize } from "./serializer/serialize.js";

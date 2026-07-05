@@ -1,21 +1,21 @@
 import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
-import type { AstNode } from "./AstNode.js";
-import { SourceArray } from "./SourceArray.js";
-import { SourceArrow } from "./SourceArrow.js";
-import { SourceAssignment } from "./SourceAssignment.js";
-import { SourceBinop } from "./SourceBinop.js";
-import { SourceBlock } from "./SourceBlock.js";
-import { SourceBoolean } from "./SourceBoolean.js";
-import { SourceCall } from "./SourceCall.js";
-import { SourceIdentifier } from "./SourceIdentifier.js";
-import { SourceIf } from "./SourceIf.js";
-import { SourceNull } from "./SourceNull.js";
-import { SourceNumber } from "./SourceNumber.js";
-import { SourceObject } from "./SourceObject.js";
-import { SourcePropertyAccess } from "./SourcePropertyAccess.js";
-import { SourceReturn } from "./SourceReturn.js";
-import { SourceSplice } from "./SourceSplice.js";
-import { SourceString } from "./SourceString.js";
+import type { AstNode } from "./nodes/AstNode.js";
+import { SourceArray } from "./nodes/SourceArray.js";
+import { SourceArrow } from "./nodes/SourceArrow.js";
+import { SourceAssignment } from "./nodes/SourceAssignment.js";
+import { SourceBinop } from "./nodes/SourceBinop.js";
+import { SourceBlock } from "./nodes/SourceBlock.js";
+import { SourceBoolean } from "./nodes/SourceBoolean.js";
+import { SourceCall } from "./nodes/SourceCall.js";
+import { SourceIdentifier } from "./nodes/SourceIdentifier.js";
+import { SourceIf } from "./nodes/SourceIf.js";
+import { SourceNull } from "./nodes/SourceNull.js";
+import { SourceNumber } from "./nodes/SourceNumber.js";
+import { SourceObject } from "./nodes/SourceObject.js";
+import { SourcePropertyAccess } from "./nodes/SourcePropertyAccess.js";
+import { SourceReturn } from "./nodes/SourceReturn.js";
+import { SourceSplice } from "./nodes/SourceSplice.js";
+import { SourceString } from "./nodes/SourceString.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   splice(loc: SourceLocation, index: number): SourceSplice {

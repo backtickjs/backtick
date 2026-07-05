@@ -1,4 +1,4 @@
-import type { SourceLocation } from "../../cs-runtime/index.js";
+import type { SourceLocation } from "../../../cs-runtime/index.js";
 
 export class SourceSplice {
   readonly loc: SourceLocation;

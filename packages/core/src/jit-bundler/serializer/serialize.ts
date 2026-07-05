@@ -1,13 +1,13 @@
-import { IrArray } from "./ir/IrArray.js";
-import { IrBoolean } from "./ir/IrBoolean.js";
-import { IrFunctionRef } from "./ir/IrFunctionRef.js";
-import { IrNull } from "./ir/IrNull.js";
-import { IrNumber } from "./ir/IrNumber.js";
-import { IrObject } from "./ir/IrObject.js";
-import { IrString } from "./ir/IrString.js";
-import type { IrValue } from "./ir/IrValue.js";
-import type { IrPayload } from "./Payload.js";
-import { printAst } from "./printAst.js";
+import { IrArray } from "../ir/nodes/IrArray.js";
+import { IrBoolean } from "../ir/nodes/IrBoolean.js";
+import { IrFunctionRef } from "../ir/nodes/IrFunctionRef.js";
+import { IrNull } from "../ir/nodes/IrNull.js";
+import { IrNumber } from "../ir/nodes/IrNumber.js";
+import { IrObject } from "../ir/nodes/IrObject.js";
+import { IrString } from "../ir/nodes/IrString.js";
+import type { IrValue } from "../ir/nodes/IrValue.js";
+import type { IrPayload } from "../ir/Payload.js";
+import { printAst } from "../ast/printAst.js";
 
 // Serializes a payload to a string: the function table (one line per entry,
 // splices shown as `${...}` holes in each body) followed by the root reference

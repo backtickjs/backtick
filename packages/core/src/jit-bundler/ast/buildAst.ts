@@ -2,10 +2,10 @@ import {
   type Client,
   isClientScript,
   type SourceLocation,
-} from "../cs-runtime/index.js";
-import { AstBuilder } from "./ast/AstBuilder.js";
-import type { AstNode } from "./ast/AstNode.js";
-import { SourceClientScript } from "./ast/SourceClientScript.js";
+} from "../../cs-runtime/index.js";
+import { AstBuilder } from "./AstBuilder.js";
+import type { AstNode } from "./nodes/AstNode.js";
+import { SourceClientScript } from "./nodes/SourceClientScript.js";
 import { buildSplice } from "./buildSplice.js";
 
 const cache = new Map<string, SourceClientScript>();

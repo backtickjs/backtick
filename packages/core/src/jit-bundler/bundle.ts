@@ -1,7 +1,7 @@
 import type { Client } from "../cs-runtime/index.js";
-import { buildAst } from "./buildAst.js";
-import { buildIr } from "./buildIr.js";
-import { serialize } from "./serialize.js";
+import { buildAst } from "./ast/buildAst.js";
+import { buildIr } from "./ir/buildIr.js";
+import { serialize } from "./serializer/serialize.js";
 
 export function bundle(client: Client<unknown>): string {
   const ast = buildAst(client);

@@ -1,5 +1,5 @@
-import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode } from "../ast/AstNode.js";
+import type { SourceLocation } from "../../../cs-runtime/index.js";
+import type { AstNode } from "../../ast/nodes/AstNode.js";
 
 // One entry in the payload's function table: a single client script hoisted out
 // of the tree. `body` is the script's source expression, in which splices
