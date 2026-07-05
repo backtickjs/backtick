@@ -23,13 +23,17 @@ plugin({
   name: "backtick",
   setup(build) {
     build.onLoad({ filter: /\.tsx?$/ }, (args) => {
-      if (args.path.includes("node_modules")) {
-        return undefined;
-      }
-
       const source = readFileSync(args.path, "utf8");
-      if (!source.includes("cs`")) {
-        return undefined;
+
+      // Only first-party files that actually use `cs`...`` need rewriting;
+      // everything else is passed through untouched. Returning `undefined` here
+      // throws on Bun >= 1.3 ("onLoad() expects an object returned"), so hand
+      // back the original source with a plain TS/TSX loader instead.
+      if (args.path.includes("node_modules") || !source.includes("cs`")) {
+        return {
+          contents: source,
+          loader: args.path.endsWith(".tsx") ? "tsx" : "ts",
+        };
       }
 
       const { outputText } = ts.transpileModule(source, {
