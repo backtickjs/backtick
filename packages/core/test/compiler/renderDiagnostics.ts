@@ -21,7 +21,8 @@ export function renderDiagnostics(
   );
 
   const position = (offset: number): string => {
-    const { line, character } = sourceFile.getLineAndCharacterOfPosition(offset);
+    const { line, character } =
+      sourceFile.getLineAndCharacterOfPosition(offset);
     return `${line + 1}:${character + 1}`;
   };
 
