@@ -11,9 +11,9 @@
     "test": "turbo run test",
     "test:update": "turbo run test:update",
     "format": "turbo run format",
+    "format:check": "turbo run format:check",
     "check": "biome check .",
     "check:fix": "biome check --write .",
-    "verify": "turbo run format:check && pnpm run check && turbo run typecheck",
     "clean": "turbo run clean && rm -rf node_modules .turbo"
   },
   "devDependencies": {
