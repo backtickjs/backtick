@@ -1,5 +1,4 @@
 import type {
-  Client,
   Metadata,
   SourceLocation,
   Spliceable,
@@ -15,7 +14,6 @@ import { AstClientScript } from "./AstClientScript.js";
 import { AstIdentifier } from "./AstIdentifier.js";
 import { AstIf } from "./AstIf.js";
 import type { AstNode } from "./AstNode.js";
-import { AstNew } from "./AstNew.js";
 import { AstNull } from "./AstNull.js";
 import { AstNumber } from "./AstNumber.js";
 import { AstObject } from "./AstObject.js";
@@ -23,7 +21,6 @@ import { AstPropertyAccess } from "./AstPropertyAccess.js";
 import { AstReturn } from "./AstReturn.js";
 import { AstSplice } from "./AstSplice.js";
 import { AstString } from "./AstString.js";
-import { AstThis } from "./AstThis.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   clientScript(
@@ -91,10 +88,6 @@ export class AstBuilder implements Visitor<AstNode> {
     return new AstPropertyAccess(loc, expression, name);
   }
 
-  this(loc: SourceLocation, instance: Client<unknown>): AstThis {
-    return new AstThis(loc, instance);
-  }
-
   binop(
     loc: SourceLocation,
     lhs: AstNode,
@@ -114,9 +107,5 @@ export class AstBuilder implements Visitor<AstNode> {
 
   call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstCall {
     return new AstCall(loc, callee, args);
-  }
-
-  new(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstNew {
-    return new AstNew(loc, callee, args);
   }
 }

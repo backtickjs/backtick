@@ -9,7 +9,6 @@ import { AstClientScript } from "./ast/AstClientScript.js";
 import { AstIdentifier } from "./ast/AstIdentifier.js";
 import { AstIf } from "./ast/AstIf.js";
 import type { AstNode } from "./ast/AstNode.js";
-import { AstNew } from "./ast/AstNew.js";
 import { AstNull } from "./ast/AstNull.js";
 import { AstNumber } from "./ast/AstNumber.js";
 import { AstObject } from "./ast/AstObject.js";
@@ -17,7 +16,6 @@ import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
 import { AstReturn } from "./ast/AstReturn.js";
 import { AstSplice } from "./ast/AstSplice.js";
 import { AstString } from "./ast/AstString.js";
-import { AstThis } from "./ast/AstThis.js";
 import { buildAst } from "./buildAst.js";
 
 // Renders any AST node to its debug string. Children are rendered recursively;
@@ -53,9 +51,6 @@ export function printAst(node: AstNode): string {
       ? head
       : `${head} else ${printAst(node.alternate)}`;
   }
-  if (node instanceof AstNew) {
-    return `new ${printAst(node.callee)}(${node.args.map(printAst).join(", ")})`;
-  }
   if (node instanceof AstNull) {
     return "null";
   }
@@ -66,9 +61,6 @@ export function printAst(node: AstNode): string {
     return printObject(node.entries);
   }
   if (node instanceof AstPropertyAccess) {
-    if (node.expression instanceof AstThis) {
-      return `this.${node.name}`;
-    }
     return `${printAst(node.expression)}.${node.name}`;
   }
   if (node instanceof AstReturn) {
@@ -76,9 +68,6 @@ export function printAst(node: AstNode): string {
   }
   if (node instanceof AstSplice) {
     return `\${${printValue(node.expression)}}`;
-  }
-  if (node instanceof AstThis) {
-    return printValue(node.instance);
   }
   if (node instanceof AstString) {
     return `"${node.value}"`;

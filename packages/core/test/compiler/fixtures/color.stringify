@@ -1,6 +1,7 @@
 cs`{
-  c = new Color(30, 144, 255);
-  if (c.isBrighterThan(382)) {
+  c = ${cs`({r: ${30}, g: ${144}, b: ${255}})`};
+  brightness = c.r + c.g + c.b;
+  if (brightness > 382) {
     return "light";
   }
   return "dark";

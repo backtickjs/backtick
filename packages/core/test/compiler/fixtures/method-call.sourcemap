@@ -6,18 +6,16 @@ __cs_greeting           → greeting
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.lower(               → 
-cs.lower(               → 
 __cs_greeting           → greeting
 .                       → .
 concat                  → concat
-)(                      → (
+(                       → (
 ", "                    → ", "
 ,                       → , 
 "World"                 → "World"
 )                       → )
 .                       → .
 toUpperCase             → toUpperCase
-)()                     → ()
+()                      → ()
 ;                       → ;
 \n})())                 → \n}`

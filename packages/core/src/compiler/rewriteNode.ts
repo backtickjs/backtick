@@ -165,38 +165,8 @@ function rewriteNodeImpl(
     };
   }
 
-  if (node.kind === ts.SyntaxKind.ThisKeyword) {
-    return {
-      virtual: ts.factory.createThis(),
-      runtime: call(ts, "v", "this", [loc(node), ts.factory.createThis()]),
-    };
-  }
-
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const name = node.name.text;
-
-    if (node.expression.kind === ts.SyntaxKind.ThisKeyword) {
-      const thisExpression = ts.factory.createThis();
-      const propertyName = ts.factory.createIdentifier(name);
-      state.mappings.set(node.expression, thisExpression);
-      state.mappings.set(node.name, propertyName);
-      return {
-        virtual: call(ts, "cs", "lower", [
-          ts.factory.createPropertyAccessExpression(
-            thisExpression,
-            propertyName,
-          ),
-        ]),
-        runtime: call(ts, "v", "propertyAccess", [
-          loc(node),
-          call(ts, "v", "this", [
-            loc(node.expression),
-            ts.factory.createThis(),
-          ]),
-          ts.factory.createStringLiteral(name),
-        ]),
-      };
-    }
 
     const expression = rewriteNode(ts, state, node.expression);
     return {
@@ -235,12 +205,10 @@ function rewriteNodeImpl(
 
       return {
         virtual: ts.factory.createCallExpression(
-          call(ts, "cs", "lower", [
-            ts.factory.createPropertyAccessExpression(
-              receiver.virtual as ts.Expression,
-              propertyName,
-            ),
-          ]),
+          ts.factory.createPropertyAccessExpression(
+            receiver.virtual as ts.Expression,
+            propertyName,
+          ),
           undefined,
           args.map((arg) => arg.virtual as ts.Expression),
         ),
@@ -266,41 +234,6 @@ function rewriteNodeImpl(
         loc(node),
         callee.runtime as ts.Expression,
         runtimeArgs,
-      ]),
-    };
-  }
-
-  if (ts.isNewExpression(node) && ts.isIdentifier(node.expression)) {
-    const className = node.expression.text;
-    const args = (node.arguments ?? []).map((arg) =>
-      rewriteNode(ts, state, arg),
-    );
-
-    // Lift each argument so the constructor receives `Client<…>` values,
-    // matching how a client class declares its constructor parameters.
-    const virtualArgs = args.map((arg) =>
-      call(ts, "cs", "lift", [arg.virtual as ts.Expression]),
-    );
-
-    const classIdentifier = ts.factory.createIdentifier(className);
-    state.mappings.set(node.expression, classIdentifier);
-
-    // The result is a `Client<…>`, so lower it back to a raw value that flows
-    // into the surrounding script.
-    return {
-      virtual: call(ts, "cs", "lower", [
-        ts.factory.createNewExpression(classIdentifier, undefined, virtualArgs),
-      ]),
-      runtime: call(ts, "v", "new", [
-        loc(node),
-        call(ts, "v", "identifier", [
-          loc(node.expression),
-          ts.factory.createStringLiteral(className),
-        ]),
-        ts.factory.createArrayLiteralExpression(
-          args.map((arg) => arg.runtime as ts.Expression),
-          false,
-        ),
       ]),
     };
   }

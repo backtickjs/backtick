@@ -13,10 +13,3 @@ test("cs.lift throws when called directly", () => {
 test("cs.lower throws when called directly", () => {
   assert.throws(() => cs.lower("Hello World!"), /Don't call `cs\.lower`/);
 });
-
-test("cs.call throws when called directly", () => {
-  assert.throws(
-    () => cs.call((x: string) => x, ["Hello World!"]),
-    /Don't call `cs\.call`/,
-  );
-});
