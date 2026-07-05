@@ -1,7 +1,6 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { SourceNode } from "./AstNode.js";
 
-export class SourceSplice implements SourceNode {
+export class SourceSplice {
   readonly loc: SourceLocation;
   readonly index: number;
 

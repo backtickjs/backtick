@@ -98,7 +98,8 @@ export function printAst(node: AstNode): string {
   if (node instanceof RuntimeObject) {
     return printObject(node.entries);
   }
-  throw new Error(`Unhandled AST node: ${JSON.stringify(node)}`);
+  const unhandled: never = node;
+  throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);
 }
 
 function printBlock(statements: readonly AstNode[]): string {

@@ -1,7 +1,6 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { SourceNode } from "./AstNode.js";
 
-export class SourceBoolean implements SourceNode {
+export class SourceBoolean {
   readonly loc: SourceLocation;
   readonly value: boolean;
 

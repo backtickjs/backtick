@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode, SourceNode } from "./AstNode.js";
+import type { AstNode } from "./AstNode.js";
 
-export class SourceClientScript implements SourceNode {
+export class SourceClientScript {
   readonly loc: SourceLocation;
   readonly splices: AstNode[];
   readonly freeVars: string[];

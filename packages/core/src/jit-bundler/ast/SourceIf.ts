@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode, SourceNode } from "./AstNode.js";
+import type { AstNode } from "./AstNode.js";
 
-export class SourceIf implements SourceNode {
+export class SourceIf {
   readonly loc: SourceLocation;
   readonly condition: AstNode;
   readonly consequent: AstNode;

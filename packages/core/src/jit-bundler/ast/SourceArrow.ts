@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode, SourceNode } from "./AstNode.js";
+import type { AstNode } from "./AstNode.js";
 
-export class SourceArrow implements SourceNode {
+export class SourceArrow {
   readonly loc: SourceLocation;
   readonly params: readonly string[];
   readonly body: AstNode;
