@@ -9,6 +9,7 @@
     "includes": [
       "**",
       "!examples",
+      "!e2e",
       "!**/dist",
       "!**/.turbo",
       "!**/test/**/fixtures",
