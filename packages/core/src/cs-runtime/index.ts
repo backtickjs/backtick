@@ -32,7 +32,7 @@ export type Lower<T> =
         : T;
 
 export interface Metadata {
-  splices: { [key: string]: unknown };
+  splices: Spliceable[];
   freeVars: string[];
 }
 
@@ -49,7 +49,7 @@ export type SourceLocation = {
 
 export interface Visitor<U> {
   // e.g. ${ 1 }
-  splice(loc: SourceLocation, key: string, expression: Spliceable): U;
+  splice(loc: SourceLocation, index: number): U;
 
   // null
   null(loc: SourceLocation): U;

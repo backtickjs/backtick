@@ -68,12 +68,9 @@ export function rewriteScript(
     [
       ts.factory.createPropertyAssignment(
         "splices",
-        ts.factory.createObjectLiteralExpression(
+        ts.factory.createArrayLiteralExpression(
           splices.map((splice: Splice) =>
-            ts.factory.createPropertyAssignment(
-              splice.placeholder,
-              ts.factory.createIdentifier(splice.placeholder),
-            ),
+            ts.factory.createIdentifier(splice.placeholder),
           ),
           false,
         ),

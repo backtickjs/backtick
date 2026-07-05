@@ -20,6 +20,7 @@ export interface ClientScript {
 export interface Splice {
   sourceNode: ts.TemplateSpan;
   placeholder: string;
+  index: number;
   scripts: ClientScript[];
 }
 
@@ -116,6 +117,7 @@ function getDirectSplices(
       const splice: Splice = {
         sourceNode: span,
         placeholder,
+        index,
         scripts: [],
       };
       splices[placeholder] = splice;

@@ -150,8 +150,7 @@ function rewriteNodeImpl(
         ]),
         runtime: call(ts, "v", "splice", [
           loc(node),
-          ts.factory.createStringLiteral(node.text),
-          ts.factory.createIdentifier(node.text),
+          ts.factory.createNumericLiteral(splice.index),
         ]),
       };
     }

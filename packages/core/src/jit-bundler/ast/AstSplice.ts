@@ -1,12 +1,12 @@
-import type { SourceLocation, Spliceable } from "../../cs-runtime/index.js";
+import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode } from "./AstNode.js";
 
 export class AstSplice implements AstNode {
   readonly loc: SourceLocation;
-  readonly expression: Spliceable;
+  readonly index: number;
 
-  constructor(loc: SourceLocation, _key: string, expression: Spliceable) {
+  constructor(loc: SourceLocation, index: number) {
     this.loc = loc;
-    this.expression = expression;
+    this.index = index;
   }
 }

@@ -1,4 +1,3 @@
-import { isClient, type Spliceable } from "../cs-runtime/index.js";
 import { AstArray } from "./ast/AstArray.js";
 import { AstArrow } from "./ast/AstArrow.js";
 import { AstAssignment } from "./ast/AstAssignment.js";
@@ -17,7 +16,6 @@ import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
 import { AstReturn } from "./ast/AstReturn.js";
 import { AstSplice } from "./ast/AstSplice.js";
 import { AstString } from "./ast/AstString.js";
-import { buildAst } from "./buildAst.js";
 
 // Renders any AST node to its debug string. Children are rendered recursively;
 // splices carry raw runtime values, which are rendered by `printValue`.
@@ -71,7 +69,7 @@ export function printAst(node: AstNode): string {
     return `return ${printAst(node.expression)};`;
   }
   if (node instanceof AstSplice) {
-    return `\${${printValue(node.expression)}}`;
+    return `\${...}`;
   }
   if (node instanceof AstString) {
     return `"${node.value}"`;
@@ -97,33 +95,6 @@ function printBlock(statements: readonly AstNode[]): string {
 function printObject(entries: Readonly<Record<string, AstNode>>): string {
   const body = Object.entries(entries)
     .map(([key, value]) => `${key}: ${printAst(value)}`)
-    .join(", ");
-  return `({${body}})`;
-}
-
-// Renders a raw runtime splice value: a primitive, a nested client script
-// (expanded through the AST), or an array/object of either.
-function printValue(value: Spliceable): string {
-  if (value == null) {
-    return "null";
-  }
-  if (typeof value === "number") {
-    return value.toString();
-  }
-  if (typeof value === "boolean") {
-    return value ? "true" : "false";
-  }
-  if (typeof value === "string") {
-    return `"${value}"`;
-  }
-  if (Array.isArray(value)) {
-    return `[${value.map(printValue).join(", ")}]`;
-  }
-  if (isClient(value)) {
-    return printAst(buildAst(value));
-  }
-  const body = Object.entries(value)
-    .map(([key, item]) => `${key}: ${printValue(item)}`)
     .join(", ");
   return `({${body}})`;
 }

@@ -1,8 +1,4 @@
-import type {
-  SourceLocation,
-  Spliceable,
-  Visitor,
-} from "../../cs-runtime/index.js";
+import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
 import { AstArray } from "./AstArray.js";
 import { AstArrow } from "./AstArrow.js";
 import { AstAssignment } from "./AstAssignment.js";
@@ -22,8 +18,8 @@ import { AstSplice } from "./AstSplice.js";
 import { AstString } from "./AstString.js";
 
 export class AstBuilder implements Visitor<AstNode> {
-  splice(loc: SourceLocation, key: string, expression: Spliceable): AstSplice {
-    return new AstSplice(loc, key, expression);
+  splice(loc: SourceLocation, index: number): AstSplice {
+    return new AstSplice(loc, index);
   }
 
   null(loc: SourceLocation): AstNull {
