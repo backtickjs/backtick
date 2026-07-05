@@ -1,7 +1,7 @@
 import { printAst } from "../ast/printAst.js";
 import { IrArray } from "../ir/nodes/IrArray.js";
 import { IrBoolean } from "../ir/nodes/IrBoolean.js";
-import { IrFunctionRef } from "../ir/nodes/IrFunctionRef.js";
+import { IrCall } from "../ir/nodes/IrCall.js";
 import { IrNull } from "../ir/nodes/IrNull.js";
 import { IrNumber } from "../ir/nodes/IrNumber.js";
 import { IrObject } from "../ir/nodes/IrObject.js";
@@ -10,14 +10,15 @@ import type { IrValue } from "../ir/nodes/IrValue.js";
 import type { IrPayload } from "../ir/Payload.js";
 
 // Serializes a payload to a JSON string. The envelope holds the function table
-// (each entry carries its free variables and its body rendered as source, with
-// splices shown as `${...}` holes) alongside the root reference into that table.
-// Values are encoded as a discriminated union so refs, arrays, and objects stay
-// unambiguous when the payload is re-parsed.
+// (each entry carries its arity, its captured variables, and its body rendered
+// as source with splices shown as `${...}` holes) alongside the root call into
+// that table. Values are encoded as a discriminated union so calls, arrays, and
+// objects stay unambiguous when the payload is re-parsed.
 export function serialize(payload: IrPayload): string {
   const json = {
     functions: payload.functions.map((fn) => ({
-      freeVars: fn.freeVars,
+      arity: fn.arity,
+      captures: fn.captures,
       body: printAst(fn.body),
     })),
     root: encodeValue(payload.root),
@@ -26,10 +27,10 @@ export function serialize(payload: IrPayload): string {
 }
 
 function encodeValue(value: IrValue): unknown {
-  if (value instanceof IrFunctionRef) {
+  if (value instanceof IrCall) {
     return {
-      kind: "ref",
-      index: value.index,
+      kind: "call",
+      target: value.target,
       args: value.args.map(encodeValue),
     };
   }

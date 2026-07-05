@@ -1,26 +1,28 @@
 {
   "functions": [
     {
-      "freeVars": [],
+      "arity": 2,
+      "captures": [],
       "body": "({a: ${...}, b: ${...}})"
     },
     {
-      "freeVars": [],
+      "arity": 0,
+      "captures": [],
       "body": "7"
     }
   ],
   "root": {
-    "kind": "ref",
-    "index": 0,
+    "kind": "call",
+    "target": 0,
     "args": [
       {
-        "kind": "ref",
-        "index": 1,
+        "kind": "call",
+        "target": 1,
         "args": []
       },
       {
-        "kind": "ref",
-        "index": 1,
+        "kind": "call",
+        "target": 1,
         "args": []
       }
     ]

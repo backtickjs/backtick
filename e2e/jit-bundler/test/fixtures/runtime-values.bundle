@@ -1,13 +1,14 @@
 {
   "functions": [
     {
-      "freeVars": [],
+      "arity": 2,
+      "captures": [],
       "body": "({list: ${...}, obj: ${...}})"
     }
   ],
   "root": {
-    "kind": "ref",
-    "index": 0,
+    "kind": "call",
+    "target": 0,
     "args": [
       {
         "kind": "array",

@@ -1,13 +1,14 @@
 {
   "functions": [
     {
-      "freeVars": [],
+      "arity": 0,
+      "captures": [],
       "body": "1"
     }
   ],
   "root": {
-    "kind": "ref",
-    "index": 0,
+    "kind": "call",
+    "target": 0,
     "args": []
   }
 }

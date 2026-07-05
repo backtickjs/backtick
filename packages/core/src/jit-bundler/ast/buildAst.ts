@@ -1,8 +1,5 @@
-import {
-  type Client,
-  isClientScript,
-  type SourceLocation,
-} from "../../cs-runtime/index.js";
+import { type Client, isClientScript } from "../../cs-runtime/index.js";
+import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { buildSplice } from "./buildSplice.js";
 import type { AstNode } from "./nodes/AstNode.js";
@@ -10,14 +7,10 @@ import { SourceClientScript } from "./nodes/SourceClientScript.js";
 
 const cache = new Map<string, SourceClientScript>();
 
-function cacheKey(loc: SourceLocation): string {
-  return `${loc.path}:${loc.start.line}:${loc.start.character}:${loc.end.line}:${loc.end.character}`;
-}
-
 export function buildAst(client: Client<unknown>): AstNode {
   if (isClientScript(client)) {
     const splices = client.metadata.splices.map(buildSplice);
-    const key = cacheKey(client.loc);
+    const key = locKey(client.loc);
     const cached = cache.get(key);
     if (cached) {
       const expression = cached.expression;

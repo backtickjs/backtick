@@ -1,23 +1,25 @@
 {
   "functions": [
     {
-      "freeVars": [],
+      "arity": 1,
+      "captures": [],
       "body": "{\n  x = 0;\n  return ${...};\n}"
     },
     {
-      "freeVars": [
+      "arity": 0,
+      "captures": [
         "x"
       ],
       "body": "x"
     }
   ],
   "root": {
-    "kind": "ref",
-    "index": 0,
+    "kind": "call",
+    "target": 0,
     "args": [
       {
-        "kind": "ref",
-        "index": 1,
+        "kind": "call",
+        "target": 1,
         "args": []
       }
     ]
