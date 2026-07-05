@@ -1,14 +1,21 @@
-import type { Metadata, SourceLocation } from "../../cs-runtime/index.js";
+import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { AstNode, SourceNode } from "./AstNode.js";
 
 export class SourceClientScript implements SourceNode {
   readonly loc: SourceLocation;
-  readonly metadata: Metadata;
+  readonly splices: AstNode[];
+  readonly freeVars: string[];
   readonly expression: AstNode;
 
-  constructor(loc: SourceLocation, metadata: Metadata, expression: AstNode) {
+  constructor(
+    loc: SourceLocation,
+    splices: AstNode[],
+    freeVars: string[],
+    expression: AstNode,
+  ) {
     this.loc = loc;
-    this.metadata = metadata;
+    this.splices = splices;
+    this.freeVars = freeVars;
     this.expression = expression;
   }
 }
