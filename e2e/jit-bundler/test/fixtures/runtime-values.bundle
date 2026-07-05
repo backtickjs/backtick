@@ -1,0 +1,4 @@
+functions {
+  0: () => ({list: ${...}, obj: ${...}})
+}
+root #0([1, "two", true, null], ({k: 3}))

@@ -1,4 +1,4 @@
-import type { Client, SourceLocation } from "../cs-runtime/index.js";
+import type { SourceLocation } from "../cs-runtime/index.js";
 import type { AstNode } from "./ast/AstNode.js";
 import { RuntimeArray } from "./ast/RuntimeArray.js";
 import { RuntimeBoolean } from "./ast/RuntimeBoolean.js";
@@ -7,7 +7,6 @@ import { RuntimeNumber } from "./ast/RuntimeNumber.js";
 import { RuntimeObject } from "./ast/RuntimeObject.js";
 import { RuntimeString } from "./ast/RuntimeString.js";
 import { SourceClientScript } from "./ast/SourceClientScript.js";
-import { buildAst } from "./buildAst.js";
 import { IrArray } from "./ir/IrArray.js";
 import { IrBoolean } from "./ir/IrBoolean.js";
 import { IrFunction } from "./ir/IrFunction.js";
@@ -17,17 +16,17 @@ import { IrNumber } from "./ir/IrNumber.js";
 import { IrObject } from "./ir/IrObject.js";
 import { IrString } from "./ir/IrString.js";
 import type { IrValue } from "./ir/IrValue.js";
-import type { Payload } from "./Payload.js";
+import type { IrPayload } from "./Payload.js";
 
 function cacheKey(loc: SourceLocation): string {
   return `${loc.path}:${loc.start.line}:${loc.start.character}:${loc.end.line}:${loc.end.character}`;
 }
 
-// Bundles a client script into a payload: a flat function table with one entry
-// per distinct client script (deduplicated by source location) plus a reference
-// to the entrypoint. Nested scripts, wherever they appear in the splice values,
-// are hoisted into the table and replaced by `IrFunctionRef`s.
-export function buildPayload(client: Client<unknown>): Payload {
+// Builds the IR payload from a client script's AST: a flat function table with
+// one entry per distinct client script (deduplicated by source location) plus a
+// reference to the entrypoint. Nested scripts, wherever they appear in the
+// splice values, are hoisted into the table and replaced by `IrFunctionRef`s.
+export function buildIr(node: AstNode): IrPayload {
   const functions: IrFunction[] = [];
   const indexByLoc = new Map<string, number>();
 
@@ -79,10 +78,9 @@ export function buildPayload(client: Client<unknown>): Payload {
     );
   }
 
-  const rootAst = buildAst(client);
-  if (!(rootAst instanceof SourceClientScript)) {
+  if (!(node instanceof SourceClientScript)) {
     throw new Error("A payload's entrypoint must be a client script.");
   }
-  const root = new IrFunctionRef(intern(rootAst), rootAst.splices.map(lower));
+  const root = new IrFunctionRef(intern(node), node.splices.map(lower));
   return { functions, root };
 }

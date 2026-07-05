@@ -6,13 +6,13 @@ import { IrNumber } from "./ir/IrNumber.js";
 import { IrObject } from "./ir/IrObject.js";
 import { IrString } from "./ir/IrString.js";
 import type { IrValue } from "./ir/IrValue.js";
-import type { Payload } from "./Payload.js";
+import type { IrPayload } from "./Payload.js";
 import { printAst } from "./printAst.js";
 
-// Renders a payload to its debug string: the function table (one line per
-// entry, splices shown as `${...}` holes in each body) followed by the root
-// reference into that table.
-export function printPayload(payload: Payload): string {
+// Serializes a payload to a string: the function table (one line per entry,
+// splices shown as `${...}` holes in each body) followed by the root reference
+// into that table.
+export function serialize(payload: IrPayload): string {
   const table = payload.functions
     .map(
       (fn, index) =>
