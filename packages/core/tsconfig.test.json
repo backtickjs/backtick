@@ -7,5 +7,6 @@
     "test/**/*.runtime.tsx",
     "test/**/*.virtual.tsx"
   ],
+  "exclude": ["test/**/*.error.virtual.tsx"],
   "references": [{ "path": "./tsconfig.build.json" }]
 }
