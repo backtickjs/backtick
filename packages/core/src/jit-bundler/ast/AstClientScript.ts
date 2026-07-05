@@ -3,10 +3,12 @@ import type { AstNode } from "./AstNode.js";
 
 export class AstClientScript implements AstNode {
   readonly loc: SourceLocation;
+  readonly metadata: Metadata;
   readonly expression: AstNode;
 
-  constructor(loc: SourceLocation, _metadata: Metadata, expression: AstNode) {
+  constructor(loc: SourceLocation, metadata: Metadata, expression: AstNode) {
     this.loc = loc;
+    this.metadata = metadata;
     this.expression = expression;
   }
 }
