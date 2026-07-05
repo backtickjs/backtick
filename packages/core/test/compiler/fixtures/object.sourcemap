@@ -1,22 +1,57 @@
-cs.lift(                → cs`
-{ a:                    → ({ a: 
-4                       → 4
- }                      →  })
-)                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
-__cs_obj                → obj
+__cs_color              → color
+ =                      →  = 
+{                       → {\n    
+r                       → r
+:                       → : 
+1                       → 1
+,                       → ,\n    
+g                       → g
+:                       → : 
+2                       → 2
+,                       → ,\n    
+b                       → b
+:                       → : 
+3                       → 3
+,                       → ,\n    
+brightness              → brightness
+:                       → : 
+() => {\n               → () => {\n      
+return                  → return 
+__cs_color              → color
+.r                      → .r
+ +                      →  + 
+__cs_color              → color
+.g                      → .g
+ +                      →  + 
+__cs_color              → color
+.b                      → .b
+;                       → ;
+\n        }             → \n    }
+ }                      → ,\n  }
+;                       → ;
+\n                      → \n  
+return                  → return 
+__cs_color              → color
+;                       → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_c                  → c
  =                      →  = 
 cs.lower(               → ${
-obj                     → obj
+color                   → color
 )                       → }
 ;                       → ;
 \n                      → \n  
 return                  → return 
 cs.lower(               → ${
 cs.lift(                → cs`
-__cs_obj                → obj
-.a                      → .a
+__cs_c                  → c
+.                       → .
+brightness              → brightness
+()                      → ()
 )                       → `
 )                       → }
 ;                       → ;

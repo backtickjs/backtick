@@ -95,7 +95,7 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: string[], body: U): U;
 }
 
-function lift<T>(_value: T): Client<T> {
+function lift<const T>(_value: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

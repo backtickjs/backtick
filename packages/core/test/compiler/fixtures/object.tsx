@@ -1,10 +1,21 @@
 import { cs } from "@backtickjs/core";
 import { print } from "../print.ts";
 
-const obj = cs`({ a: 4 })`;
+const color = cs`{
+  const color = {
+    r: 1,
+    g: 2,
+    b: 3,
+    brightness: () => {
+      return color.r + color.g + color.b;
+    },
+  };
+  return color;
+}`;
+
 const script = cs`{
-  const obj = ${obj};
-  return ${cs`obj.a`};
+  const c = ${color};
+  return ${cs`c.brightness()`};
 }`;
 
 print(script);

@@ -1,4 +1,9 @@
 cs`{
-  obj = ${cs`({a: 4})`};
-  return ${cs`obj.a`};
+  c = ${cs`{
+    color = ({r: 1, g: 2, b: 3, brightness: () => {
+      return color.r + color.g + color.b;
+    }});
+    return color;
+  }`};
+  return ${cs`c.brightness()`};
 }`

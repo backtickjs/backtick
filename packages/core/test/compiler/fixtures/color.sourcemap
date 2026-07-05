@@ -1,13 +1,19 @@
 cs.lift(                → cs`
-{ r:                    → ({ r: 
+{                       → ({ 
+r                       → r
+:                       → : 
 cs.lower(               → ${
 this.r                  → this.r
 )                       → }
-, g:                    → , g: 
+,                       → , 
+g                       → g
+:                       → : 
 cs.lower(               → ${
 this.g                  → this.g
 )                       → }
-, b:                    → , b: 
+,                       → , 
+b                       → b
+:                       → : 
 cs.lower(               → ${
 this.b                  → this.b
 )                       → }

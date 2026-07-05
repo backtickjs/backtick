@@ -294,8 +294,12 @@ function rewriteNodeImpl(
         ts.isPropertyAssignment(property) &&
         (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name))
       ) {
+        const name = ts.isIdentifier(property.name)
+          ? ts.factory.createIdentifier(property.name.text)
+          : ts.factory.createStringLiteral(property.name.text);
+        state.mappings.set(property.name, name);
         return {
-          name: property.name.text,
+          name,
           value: rewriteNode(ts, state, property.initializer),
         };
       }
@@ -322,7 +326,7 @@ function rewriteNodeImpl(
           ts.factory.createObjectLiteralExpression(
             properties.map((property) =>
               ts.factory.createPropertyAssignment(
-                property.name,
+                property.name.text,
                 property.value.runtime as ts.Expression,
               ),
             ),
