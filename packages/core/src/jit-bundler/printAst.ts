@@ -16,6 +16,12 @@ import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
 import { AstReturn } from "./ast/AstReturn.js";
 import { AstSplice } from "./ast/AstSplice.js";
 import { AstString } from "./ast/AstString.js";
+import { RuntimeArray } from "./ast/RuntimeArray.js";
+import { RuntimeBoolean } from "./ast/RuntimeBoolean.js";
+import { RuntimeNull } from "./ast/RuntimeNull.js";
+import { RuntimeNumber } from "./ast/RuntimeNumber.js";
+import { RuntimeObject } from "./ast/RuntimeObject.js";
+import { RuntimeString } from "./ast/RuntimeString.js";
 
 // Renders any AST node to its debug string. Children are rendered recursively;
 // splices carry raw runtime values, which are rendered by `printValue`.
@@ -73,6 +79,24 @@ export function printAst(node: AstNode): string {
   }
   if (node instanceof AstString) {
     return `"${node.value}"`;
+  }
+  if (node instanceof RuntimeNull) {
+    return "null";
+  }
+  if (node instanceof RuntimeNumber) {
+    return node.value.toString();
+  }
+  if (node instanceof RuntimeBoolean) {
+    return node.value ? "true" : "false";
+  }
+  if (node instanceof RuntimeString) {
+    return `"${node.value}"`;
+  }
+  if (node instanceof RuntimeArray) {
+    return `[${node.elements.map(printAst).join(", ")}]`;
+  }
+  if (node instanceof RuntimeObject) {
+    return printObject(node.entries);
   }
   throw new Error(`Unhandled AST node: ${JSON.stringify(node)}`);
 }

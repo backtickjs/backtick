@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode } from "./AstNode.js";
+import type { AstNode, SourceNode } from "./AstNode.js";
 
-export class AstAssignment implements AstNode {
+export class AstAssignment implements SourceNode {
   readonly loc: SourceLocation;
   readonly name: AstNode;
   readonly expression: AstNode;
