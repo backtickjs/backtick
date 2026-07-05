@@ -5,6 +5,7 @@ import type {
   Visitor,
 } from "../../cs-runtime/index.js";
 import { AstArray } from "./AstArray.js";
+import { AstArrow } from "./AstArrow.js";
 import { AstAssignment } from "./AstAssignment.js";
 import { AstBinop } from "./AstBinop.js";
 import { AstBlock } from "./AstBlock.js";
@@ -107,5 +108,9 @@ export class AstBuilder implements Visitor<AstNode> {
 
   call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstCall {
     return new AstCall(loc, callee, args);
+  }
+
+  arrow(loc: SourceLocation, params: string[], body: AstNode): AstArrow {
+    return new AstArrow(loc, params, body);
   }
 }

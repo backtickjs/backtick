@@ -1,5 +1,6 @@
 import type { Client, Spliceable } from "../cs-runtime/index.js";
 import { AstArray } from "./ast/AstArray.js";
+import { AstArrow } from "./ast/AstArrow.js";
 import { AstAssignment } from "./ast/AstAssignment.js";
 import { AstBinop } from "./ast/AstBinop.js";
 import { AstBlock } from "./ast/AstBlock.js";
@@ -23,6 +24,9 @@ import { buildAst } from "./buildAst.js";
 export function printAst(node: AstNode): string {
   if (node instanceof AstArray) {
     return `[${node.elements.map(printAst).join(", ")}]`;
+  }
+  if (node instanceof AstArrow) {
+    return `(${node.params.join(", ")}) => ${printAst(node.body)}`;
   }
   if (node instanceof AstAssignment) {
     return `${printAst(node.name)} = ${printAst(node.expression)};`;

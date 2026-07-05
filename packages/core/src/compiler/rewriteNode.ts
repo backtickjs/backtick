@@ -238,6 +238,56 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isArrowFunction(node)) {
+    const params = node.parameters.map((param) => {
+      if (ts.isIdentifier(param.name)) {
+        return { name: param.name, type: param.type };
+      }
+      state.errors.set(
+        param,
+        "This parameter isn't supported in a `cs` client script.",
+      );
+      return null;
+    });
+
+    if (params.every((param) => param != null)) {
+      const virtualParams = params.map((param) => {
+        const identifier = ts.factory.createIdentifier(mangle(param.name.text));
+        state.mappings.set(param.name, identifier);
+        return ts.factory.createParameterDeclaration(
+          undefined,
+          undefined,
+          identifier,
+          undefined,
+          param.type,
+        );
+      });
+      const body = rewriteNode(ts, state, node.body);
+      return {
+        virtual: ts.factory.createArrowFunction(
+          undefined,
+          undefined,
+          virtualParams,
+          undefined,
+          ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
+          body.virtual as ts.ConciseBody,
+        ),
+        runtime: call(ts, "v", "arrow", [
+          loc(node),
+          ts.factory.createArrayLiteralExpression(
+            params.map((param) =>
+              ts.factory.createStringLiteral(param.name.text),
+            ),
+            false,
+          ),
+          body.runtime as ts.Expression,
+        ]),
+      };
+    }
+
+    return unsupported();
+  }
+
   if (ts.isObjectLiteralExpression(node)) {
     const properties = node.properties.map((property) => {
       if (

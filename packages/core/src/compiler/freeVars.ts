@@ -99,6 +99,20 @@ export function freeVars(
         walkExpression(node.left, scopes);
       }
       walkExpression(node.right, scopes);
+    } else if (ts.isArrowFunction(node)) {
+      // Parameters bind within the arrow body, so they are not free.
+      const params = new Set<string>();
+      for (const param of node.parameters) {
+        if (ts.isIdentifier(param.name)) {
+          params.add(param.name.text);
+        }
+      }
+      const inner = [...scopes, params];
+      if (ts.isBlock(node.body)) {
+        walkBlock(node.body, inner);
+      } else {
+        walkExpression(node.body, inner);
+      }
     } else if (ts.isObjectLiteralExpression(node)) {
       for (const property of node.properties) {
         if (ts.isPropertyAssignment(property)) {

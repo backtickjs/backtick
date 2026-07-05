@@ -4,8 +4,6 @@ export interface Client<T> {
 }
 
 export type Spliceable =
-  // biome-ignore lint/suspicious/noConfusingVoidType: a script can yield no value (e.g. a block that never returns)
-  | void
   | null
   | number
   | boolean
@@ -92,9 +90,12 @@ export interface Visitor<U> {
 
   // e.g. s.concat("!")
   call(loc: SourceLocation, callee: U, args: U[]): U;
+
+  // e.g. (r, g, b) => { ... }
+  arrow(loc: SourceLocation, params: string[], body: U): U;
 }
 
-function lift<const T extends Spliceable>(_value: T): Client<Lower<T>> {
+function lift<T>(_value: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

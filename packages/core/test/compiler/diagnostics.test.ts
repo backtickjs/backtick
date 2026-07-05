@@ -9,7 +9,7 @@ function diagnose(source: string) {
 
 describe("diagnostics", () => {
   it("reports unsupported syntax inside a `cs` script", () => {
-    const source = "const x = cs`x => x`;";
+    const source = "const x = cs`typeof x`;";
     const diagnostics = diagnose(source);
 
     assert.strictEqual(diagnostics.length, 1);
@@ -19,7 +19,7 @@ describe("diagnostics", () => {
     // The range points at the offending node in the original source.
     assert.strictEqual(
       source.slice(diagnostic.range.start, diagnostic.range.end),
-      "x => x",
+      "typeof x",
     );
   });
 
