@@ -5,6 +5,12 @@
       "dependsOn": ["^build", "typecheck"],
       "outputs": ["dist/**"]
     },
+    "format": {
+      "dependsOn": ["^build"]
+    },
+    "format:check": {
+      "dependsOn": ["^build"]
+    },
     "typecheck": {
       "dependsOn": ["^build"]
     },

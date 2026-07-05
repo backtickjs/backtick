@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write test",
+    "format:check": "prettier --check test",
     "typecheck": "backtick-tsc --noEmit",
     "test": "bun test",
     "clean": "rm -rf node_modules"
