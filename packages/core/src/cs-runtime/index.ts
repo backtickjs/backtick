@@ -3,6 +3,11 @@ export interface Client<T> {
   visit: <U>(visitor: Visitor<U>) => U;
 }
 
+export interface ClientScript<T> extends Client<T> {
+  loc: SourceLocation;
+  metadata: Metadata;
+}
+
 export type Spliceable =
   | null
   | number
@@ -43,9 +48,6 @@ export type SourceLocation = {
 };
 
 export interface Visitor<U> {
-  // e.g. cs`7`
-  clientScript(loc: SourceLocation, metadata: Metadata, expression: U): U;
-
   // e.g. ${ 1 }
   splice(loc: SourceLocation, key: string, expression: Spliceable): U;
 
@@ -95,6 +97,21 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: string[], body: U): U;
 }
 
+export function isClient(value: unknown): value is Client<unknown> {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "visit" in value &&
+    typeof value.visit === "function"
+  );
+}
+
+export function isClientScript(
+  value: Client<unknown>,
+): value is ClientScript<unknown> {
+  return "loc" in value && "metadata" in value;
+}
+
 function lift<const T>(_value: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
@@ -109,9 +126,18 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
   );
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
-function create(visit: <U>(visitor: Visitor<U>) => U): Client<any> {
-  return { $$type: undefined, visit };
+function create(
+  loc: SourceLocation,
+  metadata: Metadata,
+  visit: <U>(visitor: Visitor<U>) => U,
+  // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
+): ClientScript<any> {
+  return {
+    $$type: undefined,
+    loc,
+    metadata,
+    visit,
+  };
 }
 
 const cs = Object.assign(

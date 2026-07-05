@@ -1,5 +1,4 @@
 import type {
-  Metadata,
   SourceLocation,
   Spliceable,
   Visitor,
@@ -11,7 +10,6 @@ import { AstBinop } from "./AstBinop.js";
 import { AstBlock } from "./AstBlock.js";
 import { AstBoolean } from "./AstBoolean.js";
 import { AstCall } from "./AstCall.js";
-import { AstClientScript } from "./AstClientScript.js";
 import { AstIdentifier } from "./AstIdentifier.js";
 import { AstIf } from "./AstIf.js";
 import type { AstNode } from "./AstNode.js";
@@ -24,14 +22,6 @@ import { AstSplice } from "./AstSplice.js";
 import { AstString } from "./AstString.js";
 
 export class AstBuilder implements Visitor<AstNode> {
-  clientScript(
-    loc: SourceLocation,
-    metadata: Metadata,
-    expression: AstNode,
-  ): AstClientScript {
-    return new AstClientScript(loc, metadata, expression);
-  }
-
   splice(loc: SourceLocation, key: string, expression: Spliceable): AstSplice {
     return new AstSplice(loc, key, expression);
   }

@@ -1,4 +1,4 @@
-import type { Client, Spliceable } from "../cs-runtime/index.js";
+import { isClient, type Spliceable } from "../cs-runtime/index.js";
 import { AstArray } from "./ast/AstArray.js";
 import { AstArrow } from "./ast/AstArrow.js";
 import { AstAssignment } from "./ast/AstAssignment.js";
@@ -119,8 +119,8 @@ function printValue(value: Spliceable): string {
   if (Array.isArray(value)) {
     return `[${value.map(printValue).join(", ")}]`;
   }
-  if ("$$type" in value && "visit" in value) {
-    return printAst(buildAst(value as Client<unknown>));
+  if (isClient(value)) {
+    return printAst(buildAst(value));
   }
   const body = Object.entries(value)
     .map(([key, item]) => `${key}: ${printValue(item)}`)

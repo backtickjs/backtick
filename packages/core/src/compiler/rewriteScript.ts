@@ -113,15 +113,9 @@ export function rewriteScript(
   );
 
   const create = call(ts, "cs", "create", [
-    arrow(
-      ts,
-      ["v"],
-      call(ts, "v", "clientScript", [
-        sourceLoc(ts, scriptLocation),
-        metadata,
-        rewritten.runtime as ts.Expression,
-      ]),
-    ),
+    sourceLoc(ts, scriptLocation),
+    metadata,
+    arrow(ts, ["v"], rewritten.runtime as ts.Expression),
   ]);
 
   const runtime = iife(
