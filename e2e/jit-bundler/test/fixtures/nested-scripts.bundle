@@ -1,8 +1,25 @@
-functions {
-  0: () => {
-    x = 0;
-    return ${...};
+{
+  "functions": [
+    {
+      "freeVars": [],
+      "body": "{\n  x = 0;\n  return ${...};\n}"
+    },
+    {
+      "freeVars": [
+        "x"
+      ],
+      "body": "x"
+    }
+  ],
+  "root": {
+    "kind": "ref",
+    "index": 0,
+    "args": [
+      {
+        "kind": "ref",
+        "index": 1,
+        "args": []
+      }
+    ]
   }
-  1: (x) => x
 }
-root #0(#1())

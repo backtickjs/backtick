@@ -1,4 +1,43 @@
-functions {
-  0: () => ({list: ${...}, obj: ${...}})
+{
+  "functions": [
+    {
+      "freeVars": [],
+      "body": "({list: ${...}, obj: ${...}})"
+    }
+  ],
+  "root": {
+    "kind": "ref",
+    "index": 0,
+    "args": [
+      {
+        "kind": "array",
+        "elements": [
+          {
+            "kind": "number",
+            "value": 1
+          },
+          {
+            "kind": "string",
+            "value": "two"
+          },
+          {
+            "kind": "boolean",
+            "value": true
+          },
+          {
+            "kind": "null"
+          }
+        ]
+      },
+      {
+        "kind": "object",
+        "entries": {
+          "k": {
+            "kind": "number",
+            "value": 3
+          }
+        }
+      }
+    ]
+  }
 }
-root #0([1, "two", true, null], ({k: 3}))

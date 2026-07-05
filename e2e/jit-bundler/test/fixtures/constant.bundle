@@ -1,4 +1,13 @@
-functions {
-  0: () => 1
+{
+  "functions": [
+    {
+      "freeVars": [],
+      "body": "1"
+    }
+  ],
+  "root": {
+    "kind": "ref",
+    "index": 0,
+    "args": []
+  }
 }
-root #0()

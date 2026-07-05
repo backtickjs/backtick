@@ -8,6 +8,7 @@
     "format:check": "prettier --check test",
     "typecheck": "backtick-tsc --noEmit",
     "test": "bun test",
+    "test:update": "UPDATE_SNAPSHOTS=1 bun test",
     "clean": "rm -rf node_modules"
   },
   "dependencies": {

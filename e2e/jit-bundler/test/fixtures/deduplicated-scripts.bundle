@@ -1,5 +1,28 @@
-functions {
-  0: () => ({a: ${...}, b: ${...}})
-  1: () => 7
+{
+  "functions": [
+    {
+      "freeVars": [],
+      "body": "({a: ${...}, b: ${...}})"
+    },
+    {
+      "freeVars": [],
+      "body": "7"
+    }
+  ],
+  "root": {
+    "kind": "ref",
+    "index": 0,
+    "args": [
+      {
+        "kind": "ref",
+        "index": 1,
+        "args": []
+      },
+      {
+        "kind": "ref",
+        "index": 1,
+        "args": []
+      }
+    ]
+  }
 }
-root #0(#1(), #1())

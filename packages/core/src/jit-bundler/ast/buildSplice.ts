@@ -1,4 +1,5 @@
 import { isClient, type Spliceable } from "../../cs-runtime/index.js";
+import { buildAst } from "./buildAst.js";
 import type { AstNode } from "./nodes/AstNode.js";
 import { RuntimeArray } from "./nodes/RuntimeArray.js";
 import { RuntimeBoolean } from "./nodes/RuntimeBoolean.js";
@@ -6,7 +7,6 @@ import { RuntimeNull } from "./nodes/RuntimeNull.js";
 import { RuntimeNumber } from "./nodes/RuntimeNumber.js";
 import { RuntimeObject } from "./nodes/RuntimeObject.js";
 import { RuntimeString } from "./nodes/RuntimeString.js";
-import { buildAst } from "./buildAst.js";
 
 // Lowers a value spliced into a client script to an AST node. Nested client
 // scripts become their own AST (a `SourceNode`); every other value is a raw
