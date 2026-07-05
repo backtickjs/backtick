@@ -1,12 +1,12 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { SourceNode } from "./AstNode.js";
 
-export class AstString implements SourceNode {
+export class SourceIdentifier implements SourceNode {
   readonly loc: SourceLocation;
-  readonly value: string;
+  readonly name: string;
 
-  constructor(loc: SourceLocation, value: string) {
+  constructor(loc: SourceLocation, name: string) {
     this.loc = loc;
-    this.value = value;
+    this.name = name;
   }
 }

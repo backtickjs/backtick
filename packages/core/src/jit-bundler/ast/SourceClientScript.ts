@@ -1,7 +1,7 @@
 import type { Metadata, SourceLocation } from "../../cs-runtime/index.js";
-import type { AstNode } from "./AstNode.js";
+import type { AstNode, SourceNode } from "./AstNode.js";
 
-export class AstClientScript implements AstNode {
+export class SourceClientScript implements SourceNode {
   readonly loc: SourceLocation;
   readonly metadata: Metadata;
   readonly expression: AstNode;

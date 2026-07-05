@@ -1,10 +1,12 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 import type { SourceNode } from "./AstNode.js";
 
-export class AstNull implements SourceNode {
+export class SourceBoolean implements SourceNode {
   readonly loc: SourceLocation;
+  readonly value: boolean;
 
-  constructor(loc: SourceLocation) {
+  constructor(loc: SourceLocation, value: boolean) {
     this.loc = loc;
+    this.value = value;
   }
 }

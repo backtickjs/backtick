@@ -1,83 +1,83 @@
-import { AstArray } from "./ast/AstArray.js";
-import { AstArrow } from "./ast/AstArrow.js";
-import { AstAssignment } from "./ast/AstAssignment.js";
-import { AstBinop } from "./ast/AstBinop.js";
-import { AstBlock } from "./ast/AstBlock.js";
-import { AstBoolean } from "./ast/AstBoolean.js";
-import { AstCall } from "./ast/AstCall.js";
-import { AstClientScript } from "./ast/AstClientScript.js";
-import { AstIdentifier } from "./ast/AstIdentifier.js";
-import { AstIf } from "./ast/AstIf.js";
 import type { AstNode } from "./ast/AstNode.js";
-import { AstNull } from "./ast/AstNull.js";
-import { AstNumber } from "./ast/AstNumber.js";
-import { AstObject } from "./ast/AstObject.js";
-import { AstPropertyAccess } from "./ast/AstPropertyAccess.js";
-import { AstReturn } from "./ast/AstReturn.js";
-import { AstSplice } from "./ast/AstSplice.js";
-import { AstString } from "./ast/AstString.js";
 import { RuntimeArray } from "./ast/RuntimeArray.js";
 import { RuntimeBoolean } from "./ast/RuntimeBoolean.js";
 import { RuntimeNull } from "./ast/RuntimeNull.js";
 import { RuntimeNumber } from "./ast/RuntimeNumber.js";
 import { RuntimeObject } from "./ast/RuntimeObject.js";
 import { RuntimeString } from "./ast/RuntimeString.js";
+import { SourceArray } from "./ast/SourceArray.js";
+import { SourceArrow } from "./ast/SourceArrow.js";
+import { SourceAssignment } from "./ast/SourceAssignment.js";
+import { SourceBinop } from "./ast/SourceBinop.js";
+import { SourceBlock } from "./ast/SourceBlock.js";
+import { SourceBoolean } from "./ast/SourceBoolean.js";
+import { SourceCall } from "./ast/SourceCall.js";
+import { SourceClientScript } from "./ast/SourceClientScript.js";
+import { SourceIdentifier } from "./ast/SourceIdentifier.js";
+import { SourceIf } from "./ast/SourceIf.js";
+import { SourceNull } from "./ast/SourceNull.js";
+import { SourceNumber } from "./ast/SourceNumber.js";
+import { SourceObject } from "./ast/SourceObject.js";
+import { SourcePropertyAccess } from "./ast/SourcePropertyAccess.js";
+import { SourceReturn } from "./ast/SourceReturn.js";
+import { SourceSplice } from "./ast/SourceSplice.js";
+import { SourceString } from "./ast/SourceString.js";
 
 // Renders any AST node to its debug string. Children are rendered recursively;
 // splices carry raw runtime values, which are rendered by `printValue`.
 export function printAst(node: AstNode): string {
-  if (node instanceof AstArray) {
+  if (node instanceof SourceArray) {
     return `[${node.elements.map(printAst).join(", ")}]`;
   }
-  if (node instanceof AstArrow) {
+  if (node instanceof SourceArrow) {
     return `(${node.params.join(", ")}) => ${printAst(node.body)}`;
   }
-  if (node instanceof AstAssignment) {
+  if (node instanceof SourceAssignment) {
     return `${printAst(node.name)} = ${printAst(node.expression)};`;
   }
-  if (node instanceof AstBinop) {
+  if (node instanceof SourceBinop) {
     return `${printAst(node.lhs)} ${node.operator} ${printAst(node.rhs)}`;
   }
-  if (node instanceof AstBlock) {
+  if (node instanceof SourceBlock) {
     return printBlock(node.statements);
   }
-  if (node instanceof AstBoolean) {
+  if (node instanceof SourceBoolean) {
     return node.value ? "true" : "false";
   }
-  if (node instanceof AstCall) {
+  if (node instanceof SourceCall) {
     return `${printAst(node.callee)}(${node.args.map(printAst).join(", ")})`;
   }
-  if (node instanceof AstClientScript) {
+  if (node instanceof SourceClientScript) {
     return `cs\`${printAst(node.expression)}\``;
   }
-  if (node instanceof AstIdentifier) {
+  if (node instanceof SourceIdentifier) {
     return node.name;
   }
-  if (node instanceof AstIf) {
+  if (node instanceof SourceIf) {
     const head = `if (${printAst(node.condition)}) ${printAst(node.consequent)}`;
     return node.alternate === null
       ? head
       : `${head} else ${printAst(node.alternate)}`;
   }
-  if (node instanceof AstNull) {
+  if (node instanceof SourceNull) {
     return "null";
   }
-  if (node instanceof AstNumber) {
+  if (node instanceof SourceNumber) {
     return node.value.toString();
   }
-  if (node instanceof AstObject) {
+  if (node instanceof SourceObject) {
     return printObject(node.entries);
   }
-  if (node instanceof AstPropertyAccess) {
+  if (node instanceof SourcePropertyAccess) {
     return `${printAst(node.expression)}.${node.name}`;
   }
-  if (node instanceof AstReturn) {
+  if (node instanceof SourceReturn) {
     return `return ${printAst(node.expression)};`;
   }
-  if (node instanceof AstSplice) {
+  if (node instanceof SourceSplice) {
     return `\${...}`;
   }
-  if (node instanceof AstString) {
+  if (node instanceof SourceString) {
     return `"${node.value}"`;
   }
   if (node instanceof RuntimeNull) {
