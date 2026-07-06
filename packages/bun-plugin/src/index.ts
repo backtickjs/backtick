@@ -36,8 +36,12 @@ plugin({
         };
       }
 
+      const fileName =
+        path.relative(process.cwd(), args.path).split(path.sep).join("/") ||
+        args.path;
+
       const { outputText } = ts.transpileModule(source, {
-        fileName: args.path,
+        fileName,
         compilerOptions,
         transformers: { before: [transform(ts), addBunPragma(ts)] },
       });
