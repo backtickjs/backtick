@@ -33,7 +33,7 @@ export type Lower<T> =
 
 export interface Metadata {
   splices: Spliceable[];
-  freeVars: string[];
+  captures: string[]; // binding keys
 }
 
 export interface SourceRange {

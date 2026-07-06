@@ -50,7 +50,7 @@ class IrBuilder {
       new IrFunction(
         script.loc,
         script.splices.length,
-        script.freeVars,
+        script.captures,
         script.expression,
       ),
     );

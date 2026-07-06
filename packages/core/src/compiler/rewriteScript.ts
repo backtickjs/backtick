@@ -84,7 +84,7 @@ export function rewriteScript(
         ),
       ),
       ts.factory.createPropertyAssignment(
-        "freeVars",
+        "captures",
         ts.factory.createArrayLiteralExpression(
           freeVariables.map((name) => ts.factory.createStringLiteral(name)),
           false,

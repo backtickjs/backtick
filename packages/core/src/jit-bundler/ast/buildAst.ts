@@ -17,7 +17,7 @@ export function buildAst(client: Client<unknown>): AstNode {
       return new SourceClientScript(
         client.loc,
         splices,
-        client.metadata.freeVars,
+        client.metadata.captures,
         expression,
       );
     } else {
@@ -25,7 +25,7 @@ export function buildAst(client: Client<unknown>): AstNode {
       const node = new SourceClientScript(
         client.loc,
         splices,
-        client.metadata.freeVars,
+        client.metadata.captures,
         expression,
       );
       cache.set(key, node);
