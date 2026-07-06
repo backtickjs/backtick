@@ -1,14 +1,6 @@
 {
-  "functions": [
-    {
-      "arity": 0,
-      "captures": [],
-      "body": "1"
-    }
-  ],
-  "root": {
-    "kind": "call",
-    "target": 0,
-    "args": []
-  }
+  "functions": {
+    "#f0": "() => 1"
+  },
+  "root": "#f0()"
 }

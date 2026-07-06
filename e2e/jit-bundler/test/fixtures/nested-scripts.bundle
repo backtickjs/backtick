@@ -1,27 +1,7 @@
 {
-  "functions": [
-    {
-      "arity": 1,
-      "captures": [],
-      "body": "{\n  x = 0;\n  return ${...};\n}"
-    },
-    {
-      "arity": 0,
-      "captures": [
-        "x"
-      ],
-      "body": "x"
-    }
-  ],
-  "root": {
-    "kind": "call",
-    "target": 0,
-    "args": [
-      {
-        "kind": "call",
-        "target": 1,
-        "args": []
-      }
-    ]
-  }
+  "functions": {
+    "#f0": "() => { x = 0; return #f1(x); }",
+    "#f1": "(x) => x"
+  },
+  "root": "#f0()"
 }

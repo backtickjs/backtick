@@ -1,44 +1,6 @@
 {
-  "functions": [
-    {
-      "arity": 2,
-      "captures": [],
-      "body": "({list: ${...}, obj: ${...}})"
-    }
-  ],
-  "root": {
-    "kind": "call",
-    "target": 0,
-    "args": [
-      {
-        "kind": "array",
-        "elements": [
-          {
-            "kind": "number",
-            "value": 1
-          },
-          {
-            "kind": "string",
-            "value": "two"
-          },
-          {
-            "kind": "boolean",
-            "value": true
-          },
-          {
-            "kind": "null"
-          }
-        ]
-      },
-      {
-        "kind": "object",
-        "entries": {
-          "k": {
-            "kind": "number",
-            "value": 3
-          }
-        }
-      }
-    ]
-  }
+  "functions": {
+    "#f0": "() => ({list: [1, \"two\", true, null], obj: { k: 3 }})"
+  },
+  "root": "#f0()"
 }
