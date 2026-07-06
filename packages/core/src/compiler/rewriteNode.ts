@@ -68,7 +68,15 @@ function rewriteNodeImpl(
       return unsupported();
     }
     const keyword = flags === ts.NodeFlags.Const ? "const" : "let";
-    const [declaration] = node.declarationList.declarations;
+    const declarations = node.declarationList.declarations;
+    if (declarations.length !== 1) {
+      state.errors.set(
+        node,
+        "A client script variable declaration must declare a single variable.",
+      );
+      return unsupported();
+    }
+    const [declaration] = declarations;
     if (
       declaration &&
       ts.isIdentifier(declaration.name) &&
