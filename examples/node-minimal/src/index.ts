@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { bundle, cs } from "@backtickjs/core";
 
 const one = cs`1`;
 const two = cs`2`;
@@ -6,4 +6,5 @@ const two = cs`2`;
 // Compose nested client scripts with `${...}` splices.
 const sum = cs`${one} + ${two}`;
 
-export default sum;
+// Bundle the composed client script into its portable payload and print it.
+console.log(bundle(sum));
