@@ -1,5 +1,0 @@
-cs.lift((() => {\n    const a = 1, b = 2;\n      → cs`{\n  const a = 1, b = 2;\n  
-return                                           → return 
-__cs_a                                           → a
-;                                                → ;
-\n})())                                          → \n}`

@@ -36,25 +36,38 @@ const fixtureNames = readdirSync(fixturesDir)
   )
   .sort();
 
-describe("compile", () => {
-  for (const fileName of fixtureNames) {
-    it(fileName, () => {
-      const base = fileName.slice(0, -extname(fileName).length);
-      const sourceText = readFileSync(join(fixturesDir, fileName), "utf8");
+// Virtualize every fixture once up front so both the `compile` and `print`
+// suites can consult its diagnostics. A fixture that reports an error only
+// snapshots its diagnostics: there is no meaningful virtual code, source map,
+// emitted JS, or stringified output for source the compiler rejected.
+const fixtures = fixtureNames.map((fileName) => {
+  const sourceText = readFileSync(join(fixturesDir, fileName), "utf8");
+  const result = virtualize(ts, fileName, sourceText);
+  const hasError = result.diagnostics.some(
+    (diagnostic) => diagnostic.category === ts.DiagnosticCategory.Error,
+  );
+  return { fileName, sourceText, hasError, ...result };
+});
 
-      const { virtualCode, mappings, diagnostics } = virtualize(
-        ts,
-        fileName,
-        sourceText,
+describe("compile", () => {
+  for (const fixture of fixtures) {
+    it(fixture.fileName, () => {
+      const { fileName, sourceText, virtualCode, mappings, diagnostics } =
+        fixture;
+      const base = fileName.slice(0, -extname(fileName).length);
+
+      matchFileSnapshot(
+        renderDiagnostics(fileName, sourceText, diagnostics),
+        join(fixturesDir, `${base}.diagnostics`),
       );
+      if (fixture.hasError) {
+        return;
+      }
+
       matchFileSnapshot(virtualCode, join(fixturesDir, `${base}.virtual.tsx`));
       matchFileSnapshot(
         renderMappings(fileName, virtualCode, sourceText, mappings),
         join(fixturesDir, `${base}.sourcemap`),
-      );
-      matchFileSnapshot(
-        renderDiagnostics(fileName, sourceText, diagnostics),
-        join(fixturesDir, `${base}.diagnostics`),
       );
       matchFileSnapshot(
         ts.transpileModule(sourceText, {
@@ -69,9 +82,12 @@ describe("compile", () => {
 });
 
 describe("print", () => {
-  for (const name of fixtureNames) {
-    it(name, () => {
-      const base = name.slice(0, -extname(name).length);
+  for (const fixture of fixtures) {
+    if (fixture.hasError) {
+      continue;
+    }
+    it(fixture.fileName, () => {
+      const base = fixture.fileName.slice(0, -extname(fixture.fileName).length);
 
       // The compiled fixture calls print(script) at module scope, writing the
       // stringified client script to stdout. Run it in its own process so we
