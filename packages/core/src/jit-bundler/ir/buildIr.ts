@@ -25,14 +25,25 @@ import type { IrPayload } from "./Payload.js";
 class IrBuilder {
   readonly functions: IrFunction[] = [];
   private readonly indexByLoc = new Map<string, number>();
+  private readonly callByScript = new Map<SourceClientScript, IrCall>();
 
   // Lowers a client script to a call that targets its function-table entry,
-  // interning the entry and lowering its splices into positional arguments.
+  // interning the entry and lowering its splices into positional arguments. A
+  // script shared across several splice paths is one node (see `buildAst`), so
+  // memoizing by that node lowers each shared subtree once — without this, a
+  // diamond composition re-lowers its shared arm on every path, fanning out into
+  // an exponentially large call tree.
   call(script: SourceClientScript): IrCall {
-    return new IrCall(
+    const shared = this.callByScript.get(script);
+    if (shared) {
+      return shared;
+    }
+    const irCall = new IrCall(
       this.intern(script),
       script.splices.map((n) => this.lower(n)),
     );
+    this.callByScript.set(script, irCall);
+    return irCall;
   }
 
   // Returns the table index of a script's entry, adding it on first sight.
