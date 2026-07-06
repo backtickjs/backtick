@@ -203,8 +203,8 @@ function boundNames(node: AstNode): Set<string> {
       }
       visit(current.expression);
     } else if (current instanceof SourceArrow) {
-      for (const binding of current.bindings) {
-        names.add(binding);
+      for (const param of current.params) {
+        names.add(param.bindingKey);
       }
       visit(current.body);
     } else if (current instanceof SourceBlock) {
@@ -254,7 +254,8 @@ export function serializeScript(
     return `[${node.elements.map(s).join(", ")}]`;
   }
   if (node instanceof SourceArrow) {
-    return `(${node.bindings.join(", ")}) => ${s(node.body)}`;
+    const params = node.params.map((param) => param.bindingKey).join(", ");
+    return `(${params}) => ${s(node.body)}`;
   }
   if (node instanceof SourceAssignment) {
     return `${s(node.name)} = ${s(node.expression)};`;

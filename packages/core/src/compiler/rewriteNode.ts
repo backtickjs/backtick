@@ -307,13 +307,11 @@ function rewriteNodeImpl(
           loc(node),
           ts.factory.createArrayLiteralExpression(
             params.map((param) =>
-              ts.factory.createStringLiteral(param.name.text),
-            ),
-            false,
-          ),
-          ts.factory.createArrayLiteralExpression(
-            params.map((param) =>
-              ts.factory.createStringLiteral(bindingKey(state, param.name)),
+              call(ts, "v", "identifier", [
+                loc(param.name),
+                ts.factory.createStringLiteral(param.name.text),
+                ts.factory.createStringLiteral(bindingKey(state, param.name)),
+              ]),
             ),
             false,
           ),

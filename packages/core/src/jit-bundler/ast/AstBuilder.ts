@@ -113,12 +113,7 @@ export class AstBuilder implements Visitor<AstNode> {
     return new SourceCall(loc, callee, args);
   }
 
-  arrow(
-    loc: SourceLocation,
-    params: string[],
-    bindings: string[],
-    body: AstNode,
-  ): SourceArrow {
-    return new SourceArrow(loc, params, bindings, body);
+  arrow(loc: SourceLocation, params: AstNode[], body: AstNode): SourceArrow {
+    return new SourceArrow(loc, params as SourceIdentifier[], body);
   }
 }

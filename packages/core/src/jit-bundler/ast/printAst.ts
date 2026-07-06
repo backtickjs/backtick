@@ -31,7 +31,8 @@ export function printAst(node: AstNode): string {
     return `[${node.elements.map(printAst).join(", ")}]`;
   }
   if (node instanceof SourceArrow) {
-    return `(${node.params.join(", ")}) => ${printAst(node.body)}`;
+    const params = node.params.map((param) => param.name).join(", ");
+    return `(${params}) => ${printAst(node.body)}`;
   }
   if (node instanceof SourceAssignment) {
     return `${printAst(node.name)} = ${printAst(node.expression)};`;
