@@ -1,12 +1,21 @@
 import type ts from "typescript";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
+import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
 
 export interface RewriteState {
   script: ClientScript;
+  bindings: BindingResolution;
   errors: Map<ts.Node, string>;
   mappings: Map<ts.Node, ts.Node>;
+}
+
+// The globally unique binding key the resolver assigned this identifier. Only
+// bound variables get a key; a free host capture is absent from the map and
+// keeps its original text, which is how the runtime scope provides it.
+function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
+  return state.bindings.get(identifier) ?? identifier.text;
 }
 
 export interface RewrittenNode {
@@ -102,6 +111,7 @@ function rewriteNodeImpl(
           call(ts, "v", "identifier", [
             loc(declaration.name),
             ts.factory.createStringLiteral(name.text),
+            ts.factory.createStringLiteral(bindingKey(state, name)),
           ]),
           initializer.runtime as ts.Expression,
         ]),
@@ -181,6 +191,7 @@ function rewriteNodeImpl(
       runtime: call(ts, "v", "identifier", [
         loc(node),
         ts.factory.createStringLiteral(node.text),
+        ts.factory.createStringLiteral(bindingKey(state, node)),
       ]),
     };
   }
@@ -297,6 +308,12 @@ function rewriteNodeImpl(
           ts.factory.createArrayLiteralExpression(
             params.map((param) =>
               ts.factory.createStringLiteral(param.name.text),
+            ),
+            false,
+          ),
+          ts.factory.createArrayLiteralExpression(
+            params.map((param) =>
+              ts.factory.createStringLiteral(bindingKey(state, param.name)),
             ),
             false,
           ),

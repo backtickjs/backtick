@@ -5,6 +5,7 @@ import type { Diagnostic } from "./diagnostics.js";
 import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
+import type { BindingResolution } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
 
 export interface RewrittenScript {
@@ -17,11 +18,13 @@ export interface RewrittenScript {
 export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
+  bindings: BindingResolution,
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
   const state: RewriteState = {
     script: clientScript,
+    bindings,
     errors: new Map(),
     mappings: new Map(),
   };
@@ -62,7 +65,12 @@ export function rewriteScript(
 
   const splices = Object.values(clientScript.splices);
 
-  const freeVariables = freeVars(ts, clientScript.splices, scriptNode);
+  const freeVariables = freeVars(
+    ts,
+    clientScript.splices,
+    scriptNode,
+    bindings,
+  );
 
   const metadata = ts.factory.createObjectLiteralExpression(
     [

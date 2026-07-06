@@ -13,12 +13,15 @@ function captures(source: string): string[] {
     false,
     ts.ScriptKind.TS,
   );
+  // No binding resolution: every free identifier keeps its own text, which is
+  // what these cases assert.
+  const bindings = new Map();
   const [statement] = sourceFile.statements;
   if (statement && ts.isExpressionStatement(statement)) {
-    return freeVars(ts, {}, statement.expression);
+    return freeVars(ts, {}, statement.expression, bindings);
   }
   if (statement && ts.isBlock(statement)) {
-    return freeVars(ts, {}, statement);
+    return freeVars(ts, {}, statement, bindings);
   }
   throw new Error("expected an expression or block script");
 }

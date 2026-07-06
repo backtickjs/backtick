@@ -3,6 +3,7 @@ import type { SourceRange } from "../cs-runtime/index.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { flattenScripts } from "./flattenScripts.js";
 import type { ParsedFile } from "./parseFile.js";
+import { resolveBindings } from "./resolveBindings.js";
 import { type RewrittenScript, rewriteScript } from "./rewriteScript.js";
 
 export interface RewrittenFile {
@@ -22,8 +23,14 @@ export function rewriteFile(
   const sourceMaps = new Map<ts.Node, SourceRange>();
   const diagnostics: Diagnostic[] = [];
 
+  // Resolve variable bindings once across the whole file: each binding gets a
+  // globally unique key and references (including those in nested scripts)
+  // resolve to the enclosing binding, so independently rewritten scripts stay
+  // consistent and composed fragments never collide.
+  const bindings = resolveBindings(ts, parsedFile.scripts, sourceFile.fileName);
+
   for (const script of flattenScripts(parsedFile.scripts)) {
-    const rewritten = rewriteScript(ts, script);
+    const rewritten = rewriteScript(ts, script, bindings);
     scripts.set(script.sourceNode, rewritten);
     for (const [node, range] of rewritten.sourceMaps) {
       sourceMaps.set(node, range);

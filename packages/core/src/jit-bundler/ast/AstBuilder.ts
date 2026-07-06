@@ -39,8 +39,12 @@ export class AstBuilder implements Visitor<AstNode> {
     return new SourceString(loc, value);
   }
 
-  identifier(loc: SourceLocation, name: string): SourceIdentifier {
-    return new SourceIdentifier(loc, name);
+  identifier(
+    loc: SourceLocation,
+    name: string,
+    bindingKey: string,
+  ): SourceIdentifier {
+    return new SourceIdentifier(loc, name, bindingKey);
   }
 
   block(loc: SourceLocation, statements: AstNode[]): SourceBlock {
@@ -109,7 +113,12 @@ export class AstBuilder implements Visitor<AstNode> {
     return new SourceCall(loc, callee, args);
   }
 
-  arrow(loc: SourceLocation, params: string[], body: AstNode): SourceArrow {
-    return new SourceArrow(loc, params, body);
+  arrow(
+    loc: SourceLocation,
+    params: string[],
+    bindings: string[],
+    body: AstNode,
+  ): SourceArrow {
+    return new SourceArrow(loc, params, bindings, body);
   }
 }

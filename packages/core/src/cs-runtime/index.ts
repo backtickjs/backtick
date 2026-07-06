@@ -63,8 +63,11 @@ export interface Visitor<U> {
   // e.g. "Hello World"
   string(loc: SourceLocation, value: string): U;
 
-  // e.g. i
-  identifier(loc: SourceLocation, name: string): U;
+  // e.g. i — `name` is the identifier as written in source; `bindingKey` is the
+  // globally unique key of the binding it refers to, so two references to the
+  // same binding share a `bindingKey` and shadowed bindings never collide. A
+  // free reference resolved by the host runtime has `bindingKey` equal to `name`.
+  identifier(loc: SourceLocation, name: string, bindingKey: string): U;
 
   // e.g. { }
   block(loc: SourceLocation, statements: U[]): U;
@@ -101,8 +104,10 @@ export interface Visitor<U> {
   // e.g. s.concat("!")
   call(loc: SourceLocation, callee: U, args: U[]): U;
 
-  // e.g. (r, g, b) => { ... }
-  arrow(loc: SourceLocation, params: string[], body: U): U;
+  // e.g. (r, g, b) => { ... } — `params` are the parameter names as written;
+  // `bindings` are their globally unique binding keys (see `identifier`),
+  // index-aligned with `params`.
+  arrow(loc: SourceLocation, params: string[], bindings: string[], body: U): U;
 }
 
 export function isClient(value: unknown): value is Client<unknown> {

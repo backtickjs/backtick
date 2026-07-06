@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import type { Splice } from "./parseFile.js";
+import type { BindingResolution } from "./resolveBindings.js";
 
 /**
  * Computes a script's free variables: identifiers referenced (read or written)
@@ -21,6 +22,7 @@ export function freeVars(
   ts: typeof import("typescript"),
   splices: { [placeholder: string]: Splice },
   node: ts.Expression | ts.Block,
+  bindings: BindingResolution,
 ): string[] {
   const free = new Set<string>();
 
@@ -131,15 +133,20 @@ export function freeVars(
     walkExpression(node, []);
   }
 
-  return orderByFirstUse(ts, node, free);
+  return orderByFirstUse(ts, node, free, bindings);
 }
 
 // Membership is decided by the scope walk above; this just emits the free
 // variables in the order they first appear, so the metadata reads naturally.
+// Each name is emitted as its resolved binding key (matching the identifiers in
+// the emitted body), so the serializer threads a capture under the same key the
+// body reads it by; a genuinely free host name is absent from `bindings` and
+// keeps its own text.
 function orderByFirstUse(
   ts: typeof import("typescript"),
   node: ts.Node,
   free: Set<string>,
+  bindings: BindingResolution,
 ): string[] {
   const ordered: string[] = [];
   const seen = new Set<string>();
@@ -150,9 +157,12 @@ function orderByFirstUse(
       return;
     }
     if (ts.isIdentifier(current)) {
-      if (free.has(current.text) && !seen.has(current.text)) {
-        seen.add(current.text);
-        ordered.push(current.text);
+      if (free.has(current.text)) {
+        const binding = bindings.get(current) ?? current.text;
+        if (!seen.has(binding)) {
+          seen.add(binding);
+          ordered.push(binding);
+        }
       }
       return;
     }
