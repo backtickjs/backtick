@@ -23,14 +23,20 @@ export function rewriteFile(
   const sourceMaps = new Map<ts.Node, SourceRange>();
   const diagnostics: Diagnostic[] = [];
 
-  const { bindings, captures } = resolveBindings(
+  const { bindings, captures, declarations } = resolveBindings(
     ts,
     parsedFile.scripts,
     sourceFile.text,
   );
 
   for (const script of flattenScripts(parsedFile.scripts)) {
-    const rewritten = rewriteScript(ts, script, bindings, captures.get(script));
+    const rewritten = rewriteScript(
+      ts,
+      script,
+      bindings,
+      captures.get(script),
+      declarations.get(script),
+    );
     scripts.set(script.sourceNode, rewritten);
     for (const [node, range] of rewritten.sourceMaps) {
       sourceMaps.set(node, range);

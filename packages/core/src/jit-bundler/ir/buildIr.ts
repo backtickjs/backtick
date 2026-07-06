@@ -51,6 +51,7 @@ class IrBuilder {
         script.loc,
         script.splices.length,
         script.captures,
+        script.declarations,
         script.expression,
       ),
     );

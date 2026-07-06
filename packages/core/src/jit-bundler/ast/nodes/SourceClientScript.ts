@@ -5,17 +5,20 @@ export class SourceClientScript {
   readonly loc: SourceLocation;
   readonly splices: AstNode[];
   readonly captures: string[];
+  readonly declarations: string[];
   readonly expression: AstNode;
 
   constructor(
     loc: SourceLocation,
     splices: AstNode[],
     captures: string[],
+    declarations: string[],
     expression: AstNode,
   ) {
     this.loc = loc;
     this.splices = splices;
     this.captures = captures;
+    this.declarations = declarations;
     this.expression = expression;
   }
 }

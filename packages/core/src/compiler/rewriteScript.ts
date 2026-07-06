@@ -19,6 +19,7 @@ export function rewriteScript(
   clientScript: ClientScript,
   bindings: BindingResolution,
   captures: string[] = [],
+  declarations: string[] = [],
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -80,6 +81,13 @@ export function rewriteScript(
         "captures",
         ts.factory.createArrayLiteralExpression(
           captures.map((name) => ts.factory.createStringLiteral(name)),
+          false,
+        ),
+      ),
+      ts.factory.createPropertyAssignment(
+        "declarations",
+        ts.factory.createArrayLiteralExpression(
+          declarations.map((name) => ts.factory.createStringLiteral(name)),
           false,
         ),
       ),

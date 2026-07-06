@@ -3,7 +3,7 @@ import type { ClientScript } from "./parseFile.js";
 
 /**
  * A single lexical-scope pass over every client script in a file. It produces
- * two things from the one walk:
+ * three things from the one walk:
  *
  *  - `bindings`: every *bound* variable identifier — a declaration, an arrow
  *    parameter, or a reference that resolves to one of those — mapped to a
@@ -15,6 +15,11 @@ import type { ClientScript } from "./parseFile.js";
  *    itself declare — the values it must capture from the enclosing scope, as
  *    binding keys (a free host name, bound by nothing, keeps its own text). They
  *    are ordered by first use, which falls out of the source-order walk.
+ *
+ *  - `declarations`: for each script, the binding keys it declares itself — every
+ *    variable declaration and arrow parameter, at any depth, but not those of
+ *    nested scripts (each owns its own). The complement of `captures`, and what
+ *    the serializer uses to tell which of an entry's captures it binds locally.
  *
  * The two answers come from one traversal because they are the same analysis:
  * a reference is free for the script it appears in exactly when the binding it
@@ -42,6 +47,7 @@ export type BindingResolution = Map<ts.Identifier, string>;
 export interface ResolvedScopes {
   bindings: BindingResolution;
   captures: Map<ClientScript, string[]>;
+  declarations: Map<ClientScript, string[]>;
 }
 
 // A scope's in-scope names mapped to the binding key of their declaration.
@@ -62,6 +68,10 @@ export function resolveBindings(
   const captured = new Map<ClientScript, Set<string>>();
   const owner = new Map<string, ClientScript>();
 
+  // Per-script declared binding keys, in declaration order. Every `declare`
+  // appends the fresh key to its script; keys are unique, so no dedup is needed.
+  const declarations = new Map<ClientScript, string[]>();
+
   const capture = (script: ClientScript, name: string): void => {
     const seen = captured.get(script);
     if (seen && !seen.has(name)) {
@@ -78,6 +88,7 @@ export function resolveBindings(
   const declare = (name: string, script: ClientScript): string => {
     const unique = `${name}$${salt}$${next++}`;
     owner.set(unique, script);
+    declarations.get(script)?.push(unique);
     return unique;
   };
 
@@ -137,6 +148,7 @@ export function resolveBindings(
     if (!captures.has(script)) {
       captures.set(script, []);
       captured.set(script, new Set());
+      declarations.set(script, []);
     }
     const root = scriptRoot(ts, script);
     if (!root) {
@@ -251,7 +263,7 @@ export function resolveBindings(
     walkScript(script, []);
   }
 
-  return { bindings, captures };
+  return { bindings, captures, declarations };
 }
 
 function scriptRoot(

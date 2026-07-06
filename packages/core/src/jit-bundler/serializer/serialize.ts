@@ -58,9 +58,10 @@ export function serializePayload(payload: IrPayload): string {
   const fns = payload.functions;
 
   // Names each entry's body declares (variable declarations and arrow
-  // parameters, at any depth). A capture an entry binds itself is supplied by
-  // that entry, not received as a parameter.
-  const binds = fns.map((fn) => boundNames(fn.body));
+  // parameters, at any depth), computed once by the compiler and carried on the
+  // entry. A capture an entry binds itself is supplied by that entry, not
+  // received as a parameter.
+  const declaredKeys = fns.map((fn) => new Set(fn.declarations));
 
   // The splice arguments each entry is called with, taken from the first call
   // that reaches it (see the shared-entry note above). Also delimits the set of
@@ -79,9 +80,9 @@ export function serializePayload(payload: IrPayload): string {
 
   // The captures an entry must receive as parameters: its own free variables
   // plus every capture its spliced-in children need, minus the ones it binds
-  // itself (those it supplies rather than receives). Names are globally unique,
-  // so a capture is identified by name alone. Returned in a stable order (own
-  // captures first, then children's); memoized, with a cycle guard for
+  // itself (those it supplies rather than receives). Binding keys are globally
+  // unique, so a capture is identified by key alone. Returned in a stable order
+  // (own captures first, then children's); memoized, with a cycle guard for
   // self-referential scripts.
   const needCache = new Map<number, string[]>();
   const needStack = new Set<number>();
@@ -96,21 +97,21 @@ export function serializePayload(payload: IrPayload): string {
     needStack.add(i);
     const order: string[] = [];
     const seen = new Set<string>();
-    const add = (name: string): void => {
-      if (!seen.has(name)) {
-        seen.add(name);
-        order.push(name);
+    const add = (key: string): void => {
+      if (!seen.has(key)) {
+        seen.add(key);
+        order.push(key);
       }
     };
-    for (const name of fns[i].captures) {
-      add(name);
+    for (const key of fns[i].captures) {
+      add(key);
     }
     for (const child of nestedCalls(argsOf.get(i) ?? [])) {
-      for (const name of need(child.target)) {
-        add(name);
+      for (const key of need(child.target)) {
+        add(key);
       }
     }
-    const result = order.filter((name) => !binds[i].has(name));
+    const result = order.filter((key) => !declaredKeys[i].has(key));
     needStack.delete(i);
     needCache.set(i, result);
     return result;
@@ -189,54 +190,6 @@ function nestedCalls(values: readonly IrValue[]): IrCall[] {
   };
   values.forEach(visit);
   return calls;
-}
-
-// Every variable name a script body declares — variable declarations and arrow
-// parameters, at any depth. Splice holes are not descended into; a spliced-in
-// nested script is a separate entry with its own scope.
-function boundNames(node: AstNode): Set<string> {
-  const names = new Set<string>();
-  const visit = (current: AstNode): void => {
-    if (current instanceof SourceVariableDeclaration) {
-      if (current.name instanceof SourceIdentifier) {
-        names.add(current.name.bindingKey);
-      }
-      visit(current.expression);
-    } else if (current instanceof SourceArrow) {
-      for (const param of current.params) {
-        names.add(param.bindingKey);
-      }
-      visit(current.body);
-    } else if (current instanceof SourceBlock) {
-      current.statements.forEach(visit);
-    } else if (current instanceof SourceArray) {
-      current.elements.forEach(visit);
-    } else if (current instanceof SourceObject) {
-      Object.values(current.entries).forEach(visit);
-    } else if (current instanceof SourceCall) {
-      visit(current.callee);
-      current.args.forEach(visit);
-    } else if (current instanceof SourceBinop) {
-      visit(current.lhs);
-      visit(current.rhs);
-    } else if (current instanceof SourceAssignment) {
-      visit(current.name);
-      visit(current.expression);
-    } else if (current instanceof SourceIf) {
-      visit(current.condition);
-      visit(current.consequent);
-      if (current.alternate) {
-        visit(current.alternate);
-      }
-    } else if (current instanceof SourceReturn) {
-      visit(current.expression);
-    } else if (current instanceof SourcePropertyAccess) {
-      visit(current.expression);
-    }
-    // Identifiers, literals, splices, and nested client scripts declare nothing.
-  };
-  visit(node);
-  return names;
 }
 
 // Renders a client script's AST body to a single-line JavaScript expression.

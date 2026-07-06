@@ -18,6 +18,7 @@ export function buildAst(client: Client<unknown>): AstNode {
         client.loc,
         splices,
         client.metadata.captures,
+        client.metadata.declarations,
         expression,
       );
     } else {
@@ -26,6 +27,7 @@ export function buildAst(client: Client<unknown>): AstNode {
         client.loc,
         splices,
         client.metadata.captures,
+        client.metadata.declarations,
         expression,
       );
       cache.set(key, node);

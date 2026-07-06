@@ -33,7 +33,10 @@ export type Lower<T> =
 
 export interface Metadata {
   splices: Spliceable[];
-  captures: string[]; // binding keys
+  // binding keys the script captures from an enclosing scope
+  captures: string[];
+  // binding keys the script declares itself
+  declarations: string[];
 }
 
 export interface SourceRange {
