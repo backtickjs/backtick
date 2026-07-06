@@ -29,7 +29,10 @@ class IrBuilder {
   // Lowers a client script to a call that targets its function-table entry,
   // interning the entry and lowering its splices into positional arguments.
   call(script: SourceClientScript): IrCall {
-    return new IrCall(this.intern(script), script.splices.map((n) => this.lower(n)));
+    return new IrCall(
+      this.intern(script),
+      script.splices.map((n) => this.lower(n)),
+    );
   }
 
   // Returns the table index of a script's entry, adding it on first sight.

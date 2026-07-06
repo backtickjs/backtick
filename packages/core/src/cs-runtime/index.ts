@@ -72,6 +72,14 @@ export interface Visitor<U> {
   // e.g. i = 0;
   assignment(loc: SourceLocation, name: U, expression: U): U;
 
+  // e.g. const i = 0;
+  variableDeclaration(
+    loc: SourceLocation,
+    keyword: "let" | "const",
+    name: U,
+    expression: U,
+  ): U;
+
   // e.g. if (c) { ... } else { ... }
   if(loc: SourceLocation, condition: U, consequent: U, alternate: U | null): U;
 

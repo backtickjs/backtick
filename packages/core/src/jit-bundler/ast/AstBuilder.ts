@@ -16,6 +16,7 @@ import { SourcePropertyAccess } from "./nodes/SourcePropertyAccess.js";
 import { SourceReturn } from "./nodes/SourceReturn.js";
 import { SourceSplice } from "./nodes/SourceSplice.js";
 import { SourceString } from "./nodes/SourceString.js";
+import { SourceVariableDeclaration } from "./nodes/SourceVariableDeclaration.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   splice(loc: SourceLocation, index: number): SourceSplice {
@@ -52,6 +53,15 @@ export class AstBuilder implements Visitor<AstNode> {
     expression: AstNode,
   ): SourceAssignment {
     return new SourceAssignment(loc, name, expression);
+  }
+
+  variableDeclaration(
+    loc: SourceLocation,
+    keyword: "let" | "const",
+    name: AstNode,
+    expression: AstNode,
+  ): SourceVariableDeclaration {
+    return new SourceVariableDeclaration(loc, keyword, name, expression);
   }
 
   if(

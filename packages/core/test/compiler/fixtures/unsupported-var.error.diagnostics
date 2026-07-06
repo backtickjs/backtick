@@ -1,0 +1,1 @@
+5:3-5:13 error TS0: `var` isn't supported in a client script; use `const` or `let`.

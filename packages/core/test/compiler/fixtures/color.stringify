@@ -1,6 +1,6 @@
 cs`{
-  c = ${...};
-  brightness = c.r + c.g + c.b;
+  const c = ${...};
+  const brightness = c.r + c.g + c.b;
   if (brightness > 382) {
     return "light";
   }

@@ -21,6 +21,7 @@ import type { SourcePropertyAccess } from "./SourcePropertyAccess.js";
 import type { SourceReturn } from "./SourceReturn.js";
 import type { SourceSplice } from "./SourceSplice.js";
 import type { SourceString } from "./SourceString.js";
+import type { SourceVariableDeclaration } from "./SourceVariableDeclaration.js";
 
 // A node parsed from a client script's source text. Every source node carries
 // the source location it was parsed from.
@@ -41,7 +42,8 @@ export type SourceNode =
   | SourcePropertyAccess
   | SourceReturn
   | SourceSplice
-  | SourceString;
+  | SourceString
+  | SourceVariableDeclaration;
 
 // A node built from a value spliced into a client script. Splice values are
 // resolved at runtime and have no source text, so a `RuntimeNode` never has a

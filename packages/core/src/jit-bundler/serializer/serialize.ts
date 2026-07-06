@@ -22,6 +22,7 @@ import { SourcePropertyAccess } from "../ast/nodes/SourcePropertyAccess.js";
 import { SourceReturn } from "../ast/nodes/SourceReturn.js";
 import { SourceSplice } from "../ast/nodes/SourceSplice.js";
 import { SourceString } from "../ast/nodes/SourceString.js";
+import { SourceVariableDeclaration } from "../ast/nodes/SourceVariableDeclaration.js";
 import { IrArray } from "../ir/nodes/IrArray.js";
 import { IrBoolean } from "../ir/nodes/IrBoolean.js";
 import { IrCall } from "../ir/nodes/IrCall.js";
@@ -58,9 +59,8 @@ export function serializePayload(payload: IrPayload): string {
     const fn = payload.functions[call.target];
     if (!bodies.has(call.target)) {
       bodies.set(call.target, ""); // reserve the slot to break reference cycles
-      const body = serializeScript(
-        fn.body,
-        (index) => renderValue(call.args[index]),
+      const body = serializeScript(fn.body, (index) =>
+        renderValue(call.args[index]),
       );
       bodies.set(call.target, `(${fn.captures.join(", ")}) => ${body}`);
     }
@@ -166,6 +166,9 @@ export function serializeScript(
   }
   if (node instanceof SourceString) {
     return `"${node.value}"`;
+  }
+  if (node instanceof SourceVariableDeclaration) {
+    return `${node.keyword} ${s(node.name)} = ${s(node.expression)};`;
   }
   if (node instanceof RuntimeNull) {
     return "null";

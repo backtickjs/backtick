@@ -22,6 +22,7 @@ import { SourcePropertyAccess } from "./nodes/SourcePropertyAccess.js";
 import { SourceReturn } from "./nodes/SourceReturn.js";
 import { SourceSplice } from "./nodes/SourceSplice.js";
 import { SourceString } from "./nodes/SourceString.js";
+import { SourceVariableDeclaration } from "./nodes/SourceVariableDeclaration.js";
 
 // Renders any AST node to its debug string. Children are rendered recursively;
 // splices carry raw runtime values, which are rendered by `printValue`.
@@ -79,6 +80,9 @@ export function printAst(node: AstNode): string {
   }
   if (node instanceof SourceString) {
     return `"${node.value}"`;
+  }
+  if (node instanceof SourceVariableDeclaration) {
+    return `${node.keyword} ${printAst(node.name)} = ${printAst(node.expression)};`;
   }
   if (node instanceof RuntimeNull) {
     return "null";

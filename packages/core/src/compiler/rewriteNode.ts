@@ -59,6 +59,15 @@ function rewriteNodeImpl(
   }
 
   if (ts.isVariableStatement(node)) {
+    const flags = node.declarationList.flags;
+    if (flags !== ts.NodeFlags.Const && flags !== ts.NodeFlags.Let) {
+      state.errors.set(
+        node,
+        "`var` isn't supported in a client script; use `const` or `let`.",
+      );
+      return unsupported();
+    }
+    const keyword = flags === ts.NodeFlags.Const ? "const" : "let";
     const [declaration] = node.declarationList.declarations;
     if (
       declaration &&
@@ -76,8 +85,9 @@ function rewriteNodeImpl(
           identifier,
           initializer.virtual as ts.Expression,
         ),
-        runtime: call(ts, "v", "assignment", [
+        runtime: call(ts, "v", "variableDeclaration", [
           loc(node),
+          ts.factory.createStringLiteral(keyword),
           call(ts, "v", "identifier", [
             loc(declaration.name),
             ts.factory.createStringLiteral(name.text),

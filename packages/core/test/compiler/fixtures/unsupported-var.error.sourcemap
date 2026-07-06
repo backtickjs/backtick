@@ -1,0 +1,5 @@
+cs.lift((() => {\n    var x = 0;\n      → cs`{\n  var x = 0;\n  
+return                                  → return 
+__cs_x                                  → x
+;                                       → ;
+\n})())                                 → \n}`
