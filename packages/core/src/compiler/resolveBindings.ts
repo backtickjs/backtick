@@ -50,7 +50,7 @@ type Scope = Map<string, string>;
 export function resolveBindings(
   ts: typeof import("typescript"),
   scripts: ClientScript[],
-  fileName: string,
+  sourceText: string,
 ): ResolvedScopes {
   const bindings: BindingResolution = new Map();
 
@@ -70,13 +70,13 @@ export function resolveBindings(
     }
   };
 
-  const salt = hashPath(fileName);
+  const salt = hashPath(sourceText);
 
   // A per-file counter, incremented in source order, makes each binding's name
   // unique within the file and stable across runs.
   let next = 0;
   const declare = (name: string, script: ClientScript): string => {
-    const unique = `${name}$${salt}_${next++}`;
+    const unique = `${name}$${salt}$${next++}`;
     owner.set(unique, script);
     return unique;
   };
@@ -268,13 +268,10 @@ function scriptRoot(
   return undefined;
 }
 
-// A short, stable, identifier-safe salt for a file. Hashing the *path* (not the
-// contents) keeps a file's names steady as its body is edited, and paths are
-// unique by construction so two files never share a salt. FNV-1a, base36.
-function hashPath(path: string): string {
+function hashPath(input: string): string {
   let hash = 0x811c9dc5;
-  for (let i = 0; i < path.length; i++) {
-    hash ^= path.charCodeAt(i);
+  for (let i = 0; i < input.length; i++) {
+    hash ^= input.charCodeAt(i);
     hash = Math.imul(hash, 0x01000193);
   }
   return (hash >>> 0).toString(36);

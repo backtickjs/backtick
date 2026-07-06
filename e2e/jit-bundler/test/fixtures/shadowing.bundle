@@ -1,8 +1,8 @@
 {
   "functions": {
-    "#f0": "() => { const total$1vq2eey_0 = 1; return #f1(total$1vq2eey_0); }",
-    "#f1": "(total$1vq2eey_0) => { let total$1vq2eey_1 = 0; total$1vq2eey_1 = total$1vq2eey_1 + #f2(total$1vq2eey_0); total$1vq2eey_1 = total$1vq2eey_1 + 100; return total$1vq2eey_1; }",
-    "#f2": "(total$1vq2eey_0) => total$1vq2eey_0"
+    "#f0": "() => { const total$bo5quj$0 = 1; return #f1(total$bo5quj$0); }",
+    "#f1": "(total$bo5quj$0) => { let total$bo5quj$1 = 0; total$bo5quj$1 = total$bo5quj$1 + #f2(total$bo5quj$0); total$bo5quj$1 = total$bo5quj$1 + 100; return total$bo5quj$1; }",
+    "#f2": "(total$bo5quj$0) => total$bo5quj$0"
   },
   "root": "#f0()"
 }

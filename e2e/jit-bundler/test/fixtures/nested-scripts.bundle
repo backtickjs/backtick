@@ -1,7 +1,7 @@
 {
   "functions": {
-    "#f0": "() => { const x$1yhm1em_0 = 0; return #f1(x$1yhm1em_0); }",
-    "#f1": "(x$1yhm1em_0) => x$1yhm1em_0"
+    "#f0": "() => { const x$1603vuu$0 = 0; return #f1(x$1603vuu$0); }",
+    "#f1": "(x$1603vuu$0) => x$1603vuu$0"
   },
   "root": "#f0()"
 }

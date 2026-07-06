@@ -26,7 +26,7 @@ export function rewriteFile(
   const { bindings, captures } = resolveBindings(
     ts,
     parsedFile.scripts,
-    sourceFile.fileName,
+    sourceFile.text,
   );
 
   for (const script of flattenScripts(parsedFile.scripts)) {
