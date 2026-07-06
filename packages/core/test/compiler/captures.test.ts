@@ -1,32 +1,18 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { freeVars } from "../../dist/compiler/freeVars.js";
+import { parseFile } from "../../dist/compiler/parseFile.js";
+import { resolveBindings } from "../../dist/compiler/resolveBindings.js";
 
-// Parse a script body the way compileScript does and run the free-variable
-// analysis over it. Scripts are either a single expression or a block.
-function captures(source: string): string[] {
-  const sourceFile = ts.createSourceFile(
-    "test.ts",
-    source,
-    ts.ScriptTarget.Latest,
-    false,
-    ts.ScriptKind.TS,
-  );
-  // No binding resolution: every free identifier keeps its own text, which is
-  // what these cases assert.
-  const bindings = new Map();
-  const [statement] = sourceFile.statements;
-  if (statement && ts.isExpressionStatement(statement)) {
-    return freeVars(ts, {}, statement.expression, bindings);
-  }
-  if (statement && ts.isBlock(statement)) {
-    return freeVars(ts, {}, statement, bindings);
-  }
-  throw new Error("expected an expression or block script");
+function captures(body: string): string[] {
+  const source = `const script = cs\`${body}\`;`;
+  const parsed = parseFile(ts, "test.ts", source);
+  const { captures } = resolveBindings(ts, parsed.scripts, "test.ts");
+  const [script] = parsed.scripts;
+  return captures.get(script) ?? [];
 }
 
-describe("freeVars", () => {
+describe("captures", () => {
   describe("declarations bind (with hoisting)", () => {
     it("a declared variable is not free", () => {
       assert.deepStrictEqual(captures("{ const x = 1; return x; }"), []);
@@ -92,6 +78,22 @@ describe("freeVars", () => {
         captures("{ if (cond) { const x = 1; } return x; }"),
         ["cond", "x"],
       );
+    });
+  });
+
+  describe("calls", () => {
+    it("a free callee and a free argument are both captured", () => {
+      assert.deepStrictEqual(captures("{ return foo(x); }"), ["foo", "x"]);
+    });
+
+    it("a free method receiver and argument are captured", () => {
+      assert.deepStrictEqual(captures("{ return s.concat(y); }"), ["s", "y"]);
+    });
+
+    it("a local receiver leaves only the free argument", () => {
+      assert.deepStrictEqual(captures("{ const s = 1; return s.concat(y); }"), [
+        "y",
+      ]);
     });
   });
 });

@@ -2,7 +2,6 @@ import type ts from "typescript";
 import { DiagnosticCategory } from "typescript";
 import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
 import type { Diagnostic } from "./diagnostics.js";
-import { freeVars } from "./freeVars.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -19,6 +18,7 @@ export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
   bindings: BindingResolution,
+  captures: string[] = [],
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -65,13 +65,6 @@ export function rewriteScript(
 
   const splices = Object.values(clientScript.splices);
 
-  const freeVariables = freeVars(
-    ts,
-    clientScript.splices,
-    scriptNode,
-    bindings,
-  );
-
   const metadata = ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
@@ -86,7 +79,7 @@ export function rewriteScript(
       ts.factory.createPropertyAssignment(
         "captures",
         ts.factory.createArrayLiteralExpression(
-          freeVariables.map((name) => ts.factory.createStringLiteral(name)),
+          captures.map((name) => ts.factory.createStringLiteral(name)),
           false,
         ),
       ),

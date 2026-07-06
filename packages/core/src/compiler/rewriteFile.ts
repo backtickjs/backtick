@@ -23,14 +23,14 @@ export function rewriteFile(
   const sourceMaps = new Map<ts.Node, SourceRange>();
   const diagnostics: Diagnostic[] = [];
 
-  // Resolve variable bindings once across the whole file: each binding gets a
-  // globally unique key and references (including those in nested scripts)
-  // resolve to the enclosing binding, so independently rewritten scripts stay
-  // consistent and composed fragments never collide.
-  const bindings = resolveBindings(ts, parsedFile.scripts, sourceFile.fileName);
+  const { bindings, captures } = resolveBindings(
+    ts,
+    parsedFile.scripts,
+    sourceFile.fileName,
+  );
 
   for (const script of flattenScripts(parsedFile.scripts)) {
-    const rewritten = rewriteScript(ts, script, bindings);
+    const rewritten = rewriteScript(ts, script, bindings, captures.get(script));
     scripts.set(script.sourceNode, rewritten);
     for (const [node, range] of rewritten.sourceMaps) {
       sourceMaps.set(node, range);

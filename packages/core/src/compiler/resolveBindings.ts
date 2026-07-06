@@ -2,28 +2,47 @@ import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
 
 /**
- * Maps every *bound* client-script variable identifier — a declaration, an arrow
- * parameter, or a reference that resolves to one of those — to a stable,
- * globally unique binding key. This key is what the emitted runtime carries as an
- * identifier's `binding` (`v.identifier`, `v.variableDeclaration`, `v.arrow`
- * params); the virtual code the type-checker sees is untouched.
+ * A single lexical-scope pass over every client script in a file. It produces
+ * two things from the one walk:
  *
- * Uniqueness has two axes. A per-file counter distinguishes bindings *within* a
- * file; a salt derived from the file path distinguishes bindings *across* files
- * — necessary because the compiler runs one file at a time and so cannot hand
- * out globally coordinated numbers. Together `<name>$<salt>_<n>` is unique across
- * the whole program, so fragments composed from different scripts (even different
- * files) never collide, and the serializer no longer has to rename captures to
- * dodge a same-named binding they thread through.
+ *  - `bindings`: every *bound* variable identifier — a declaration, an arrow
+ *    parameter, or a reference that resolves to one of those — mapped to a
+ *    stable, globally unique binding key. This key is what the emitted runtime
+ *    carries as an identifier's `binding` (`v.identifier`, `v.variableDeclaration`,
+ *    `v.arrow` params); the virtual code the type-checker sees is untouched.
+ *
+ *  - `captures`: for each script, the free variables it references but does not
+ *    itself declare — the values it must capture from the enclosing scope, as
+ *    binding keys (a free host name, bound by nothing, keeps its own text). They
+ *    are ordered by first use, which falls out of the source-order walk.
+ *
+ * The two answers come from one traversal because they are the same analysis:
+ * a reference is free for the script it appears in exactly when the binding it
+ * resolves to was declared in an *enclosing* script (or in none at all). Every
+ * binding is therefore tagged with its declaring script, and a reference is a
+ * capture of the current script whenever that tag differs.
+ *
+ * Uniqueness of keys has two axes. A per-file counter distinguishes bindings
+ * *within* a file; a salt derived from the file path distinguishes bindings
+ * *across* files — necessary because the compiler runs one file at a time and so
+ * cannot hand out globally coordinated numbers. Together `<name>$<salt>_<n>` is
+ * unique across the whole program, so fragments composed from different scripts
+ * (even different files) never collide, and the serializer never has to rename a
+ * capture to dodge a same-named binding it threads through.
  *
  * Resolution spans scripts: a reference in a nested script
  * (`cs`{ const x = 0; return ${cs`x`}; }``) resolves to the enclosing binding
  * and so shares its key, keeping independently rewritten scripts consistent. A
- * reference that resolves to no binding is a free host capture; it is left out of
- * the map so it keeps its original name, which is how the host runtime provides
- * it.
+ * splice placeholder is not a variable — it evaluates host code in the enclosing
+ * scope — so it is never captured, though the pass descends into any scripts
+ * nested inside it so their references resolve against this scope chain.
  */
 export type BindingResolution = Map<ts.Identifier, string>;
+
+export interface ResolvedScopes {
+  bindings: BindingResolution;
+  captures: Map<ClientScript, string[]>;
+}
 
 // A scope's in-scope names mapped to the binding key of their declaration.
 type Scope = Map<string, string>;
@@ -32,15 +51,35 @@ export function resolveBindings(
   ts: typeof import("typescript"),
   scripts: ClientScript[],
   fileName: string,
-): BindingResolution {
+): ResolvedScopes {
   const bindings: BindingResolution = new Map();
+
+  // Per-script free variables, in first-use order, deduplicated. `owner` records
+  // which script declared each binding key, so a reference can tell whether the
+  // binding it resolves to is local (declared in the same script) or captured
+  // from an enclosing one.
+  const captures = new Map<ClientScript, string[]>();
+  const captured = new Map<ClientScript, Set<string>>();
+  const owner = new Map<string, ClientScript>();
+
+  const capture = (script: ClientScript, name: string): void => {
+    const seen = captured.get(script);
+    if (seen && !seen.has(name)) {
+      seen.add(name);
+      captures.get(script)?.push(name);
+    }
+  };
 
   const salt = hashPath(fileName);
 
   // A per-file counter, incremented in source order, makes each binding's name
   // unique within the file and stable across runs.
   let next = 0;
-  const fresh = (name: string): string => `${name}$${salt}_${next++}`;
+  const declare = (name: string, script: ClientScript): string => {
+    const unique = `${name}$${salt}_${next++}`;
+    owner.set(unique, script);
+    return unique;
+  };
 
   // `scopes` is the chain from the current scope out to the file root, innermost
   // last. A reference bound by any of them uses that binding's unique name; one
@@ -55,10 +94,29 @@ export function resolveBindings(
     return null;
   };
 
+  // Records a reference to `name` from within `script`: maps the identifier to
+  // its binding key (if bound) and captures it when the binding is not the
+  // script's own — an enclosing binding or a free host name.
+  const reference = (
+    node: ts.Identifier,
+    script: ClientScript,
+    scopes: Scope[],
+  ): void => {
+    const bound = resolve(node.text, scopes);
+    if (bound == null) {
+      capture(script, node.text);
+      return;
+    }
+    bindings.set(node, bound);
+    if (owner.get(bound) !== script) {
+      capture(script, bound);
+    }
+  };
+
   // Names declared directly in a block. Declarations are hoisted, so they are
   // allocated before the body is walked; a reference before its declaration
   // still resolves to the local binding.
-  const declareBlock = (block: ts.Block): Scope => {
+  const declareBlock = (block: ts.Block, script: ClientScript): Scope => {
     const scope: Scope = new Map();
     for (const statement of block.statements) {
       if (ts.isVariableStatement(statement)) {
@@ -66,7 +124,7 @@ export function resolveBindings(
         if (declaration && ts.isIdentifier(declaration.name)) {
           const name = declaration.name.text;
           // One binding per name per block, even if (illegally) redeclared.
-          const unique = scope.get(name) ?? fresh(name);
+          const unique = scope.get(name) ?? declare(name, script);
           scope.set(name, unique);
           bindings.set(declaration.name, unique);
         }
@@ -76,6 +134,10 @@ export function resolveBindings(
   };
 
   const walkScript = (script: ClientScript, scopes: Scope[]): void => {
+    if (!captures.has(script)) {
+      captures.set(script, []);
+      captured.set(script, new Set());
+    }
     const root = scriptRoot(ts, script);
     if (!root) {
       return;
@@ -92,7 +154,7 @@ export function resolveBindings(
     block: ts.Block,
     scopes: Scope[],
   ): void => {
-    const inner = [...scopes, declareBlock(block)];
+    const inner = [...scopes, declareBlock(block, script)];
     for (const statement of block.statements) {
       walkStatement(script, statement, inner);
     }
@@ -145,10 +207,7 @@ export function resolveBindings(
         }
         return;
       }
-      const bound = resolve(node.text, scopes);
-      if (bound != null) {
-        bindings.set(node, bound);
-      }
+      reference(node, script, scopes);
     } else if (ts.isPropertyAccessExpression(node)) {
       walkExpression(script, node.expression, scopes); // the name is not a variable
     } else if (ts.isCallExpression(node)) {
@@ -165,7 +224,7 @@ export function resolveBindings(
       const params: Scope = new Map();
       for (const param of node.parameters) {
         if (ts.isIdentifier(param.name)) {
-          const unique = fresh(param.name.text);
+          const unique = declare(param.name.text, script);
           params.set(param.name.text, unique);
           bindings.set(param.name, unique);
         }
@@ -181,10 +240,7 @@ export function resolveBindings(
         if (ts.isPropertyAssignment(property)) {
           walkExpression(script, property.initializer, scopes); // key isn't a variable
         } else if (ts.isShorthandPropertyAssignment(property)) {
-          const bound = resolve(property.name.text, scopes);
-          if (bound != null) {
-            bindings.set(property.name, bound);
-          }
+          reference(property.name, script, scopes);
         }
       }
     }
@@ -195,7 +251,7 @@ export function resolveBindings(
     walkScript(script, []);
   }
 
-  return bindings;
+  return { bindings, captures };
 }
 
 function scriptRoot(
