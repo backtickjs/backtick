@@ -1,9 +1,9 @@
 {
   "functions": {
-    "#f0": "() => { const base$1peecez$0 = 10; return #f1(base$1peecez$0); }",
-    "#f1": "(base$1peecez$0) => { const base$1peecez$1 = 1; return base$1peecez$1 + #f2(base$1peecez$0); }",
-    "#f2": "(base$1peecez$0) => { const base$1peecez$2 = 2; return base$1peecez$2 * #f3(base$1peecez$0); }",
-    "#f3": "(base$1peecez$0) => base$1peecez$0"
+    "#f0": "() => { const base = 10; return #f1(base); }",
+    "#f1": "(base) => { const base2 = 1; return base2 + #f2(base); }",
+    "#f2": "(base) => { const base3 = 2; return base3 * #f3(base); }",
+    "#f3": "(base) => base"
   },
   "root": "#f0()"
 }

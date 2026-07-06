@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "#f0": "() => { const c = #f1(); return #f2(c); }",
+    "#f1": "() => { const color = ({r: 1, g: 2, b: 3, brightness: () => { return color.r + color.g + color.b; }}); return color; }",
+    "#f2": "(c) => c.brightness()"
+  },
+  "root": "#f0()"
+}

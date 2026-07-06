@@ -36,6 +36,16 @@ import type { IrPayload } from "../ir/Payload.js";
 // Fills a splice hole in a script body with the value passed for that position.
 type RenderSplice = (index: number) => string;
 
+// Maps a binding key to the name it is printed under (see `displayName`).
+type Mangle = (key: string) => string;
+
+// Recovers the source name from a binding key `<name>$<salt>$<n>` by dropping
+// the salt/counter suffix the compiler appends for global uniqueness. A free
+// host reference carries no such suffix and is returned unchanged.
+function sourceName(key: string): string {
+  return key.replace(/\$[0-9a-z]+\$\d+$/, "");
+}
+
 // Serializes a payload to a JSON envelope `{ functions, root }`. `functions`
 // maps each label (`#fi`) to its source as an arrow `(captures) => body`, where
 // every splice hole is inlined in place — a nested-script argument as a call
@@ -56,6 +66,32 @@ type RenderSplice = (index: number) => string;
 // distinct script's splices are constant, as with the compiler's output today).
 export function serializePayload(payload: IrPayload): string {
   const fns = payload.functions;
+
+  // Maps each binding key to a readable display name — its source name with the
+  // uniqueness suffix (`$<salt>$<n>`) dropped — so the bundle reads like the
+  // script it came from rather than exposing internal keys. A numeric suffix is
+  // reattached only when distinct bindings share a source name (a shadowed or
+  // threaded variable). The mapping is a bijection: the same key always renders
+  // identically (so threaded captures still line up between a call site and its
+  // parameter) and two different bindings never collapse onto one name (so no
+  // accidental shadowing). Free host references carry no suffix and pass through
+  // unchanged.
+  const displayNames = new Map<string, string>();
+  const usedNames = new Set<string>();
+  const displayName = (key: string): string => {
+    const existing = displayNames.get(key);
+    if (existing !== undefined) {
+      return existing;
+    }
+    const base = sourceName(key);
+    let name = base;
+    for (let n = 2; usedNames.has(name); n++) {
+      name = `${base}${n}`;
+    }
+    usedNames.add(name);
+    displayNames.set(key, name);
+    return name;
+  };
 
   // Names each entry's body declares (variable declarations and arrow
   // parameters, at any depth), computed once by the compiler and carried on the
@@ -126,14 +162,16 @@ export function serializePayload(payload: IrPayload): string {
   const renderCall = (target: number): string => {
     if (!bodies.has(target)) {
       bodies.set(target, ""); // reserve the slot to break reference cycles
-      const params = need(target);
+      const params = need(target).map(displayName);
       const args = argsOf.get(target) ?? [];
-      const body = serializeScript(fns[target].body, (index) =>
-        renderValue(args[index]),
+      const body = serializeScript(
+        fns[target].body,
+        (index) => renderValue(args[index]),
+        displayName,
       );
       bodies.set(target, `(${params.join(", ")}) => ${body}`);
     }
-    return `#f${target}(${need(target).join(", ")})`;
+    return `#f${target}(${need(target).map(displayName).join(", ")})`;
   };
 
   // Renders an IR value as a JavaScript expression: a call becomes
@@ -195,19 +233,24 @@ function nestedCalls(values: readonly IrValue[]): IrCall[] {
 // Renders a client script's AST body to a single-line JavaScript expression.
 // Mirrors `printAst`, but formats for embedding: blocks stay on one line and
 // splice holes are filled by `renderSplice` (with the arguments passed to the
-// script) rather than shown as `${...}` placeholders. Identifiers keep their
-// (globally unique) names verbatim — a captured variable is received as a
-// parameter of the same name, so no renaming is needed.
+// script) rather than shown as `${...}` placeholders. Every binding key is
+// printed under its `mangle`d display name — the source name, disambiguated only
+// where needed — and a captured variable is received as a parameter under that
+// same name, so the reference and its parameter still line up.
 export function serializeScript(
   node: AstNode,
   renderSplice: RenderSplice,
+  mangle: Mangle,
 ): string {
-  const s = (child: AstNode): string => serializeScript(child, renderSplice);
+  const s = (child: AstNode): string =>
+    serializeScript(child, renderSplice, mangle);
   if (node instanceof SourceArray) {
     return `[${node.elements.map(s).join(", ")}]`;
   }
   if (node instanceof SourceArrow) {
-    const params = node.params.map((param) => param.bindingKey).join(", ");
+    const params = node.params
+      .map((param) => mangle(param.bindingKey))
+      .join(", ");
     return `(${params}) => ${s(node.body)}`;
   }
   if (node instanceof SourceAssignment) {
@@ -217,7 +260,7 @@ export function serializeScript(
     return `${s(node.lhs)} ${node.operator} ${s(node.rhs)}`;
   }
   if (node instanceof SourceBlock) {
-    return serializeBlock(node.statements, renderSplice);
+    return serializeBlock(node.statements, renderSplice, mangle);
   }
   if (node instanceof SourceBoolean) {
     return node.value ? "true" : "false";
@@ -229,7 +272,7 @@ export function serializeScript(
     return `cs\`${s(node.expression)}\``;
   }
   if (node instanceof SourceIdentifier) {
-    return node.bindingKey;
+    return mangle(node.bindingKey);
   }
   if (node instanceof SourceIf) {
     const head = `if (${s(node.condition)}) ${s(node.consequent)}`;
@@ -286,12 +329,13 @@ export function serializeScript(
 function serializeBlock(
   statements: readonly AstNode[],
   renderSplice: RenderSplice,
+  mangle: Mangle,
 ): string {
   if (statements.length === 0) {
     return "{}";
   }
   const body = statements
-    .map((statement) => serializeScript(statement, renderSplice))
+    .map((statement) => serializeScript(statement, renderSplice, mangle))
     .join(" ");
   return `{ ${body} }`;
 }

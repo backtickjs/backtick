@@ -1,8 +1,8 @@
 {
   "functions": {
-    "#f0": "() => { const total$bo5quj$0 = 1; return #f1(total$bo5quj$0); }",
-    "#f1": "(total$bo5quj$0) => { let total$bo5quj$1 = 0; total$bo5quj$1 = total$bo5quj$1 + #f2(total$bo5quj$0); total$bo5quj$1 = total$bo5quj$1 + 100; return total$bo5quj$1; }",
-    "#f2": "(total$bo5quj$0) => total$bo5quj$0"
+    "#f0": "() => { const total = 1; return #f1(total); }",
+    "#f1": "(total) => { let total2 = 0; total2 = total2 + #f2(total); total2 = total2 + 100; return total2; }",
+    "#f2": "(total) => total"
   },
   "root": "#f0()"
 }
