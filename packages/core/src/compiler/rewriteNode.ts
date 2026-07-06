@@ -77,11 +77,14 @@ function rewriteNodeImpl(
       return unsupported();
     }
     const [declaration] = declarations;
-    if (
-      declaration &&
-      ts.isIdentifier(declaration.name) &&
-      declaration.initializer
-    ) {
+    if (declaration && ts.isIdentifier(declaration.name)) {
+      if (!declaration.initializer) {
+        state.errors.set(
+          node,
+          "A client script variable declaration must have an initializer.",
+        );
+        return unsupported();
+      }
       const name = declaration.name;
       const initializer = rewriteNode(ts, state, declaration.initializer);
       const identifier = ts.factory.createIdentifier(mangle(name.text));

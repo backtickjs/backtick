@@ -1,0 +1,1 @@
+5:3-5:9 error TS0: A client script variable declaration must have an initializer.
