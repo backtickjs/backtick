@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "#f0": "() => { const total = 1; return #f1(total); }",
+    "#f1": "(total$0) => { let total = 0; total = total + #f2(total$0); total = total + 100; return total; }",
+    "#f2": "(total$0) => total$0"
+  },
+  "root": "#f0()"
+}

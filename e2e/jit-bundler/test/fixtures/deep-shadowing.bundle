@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "#f0": "() => { const base = 10; return #f1(base); }",
+    "#f1": "(base$0) => { const base = 1; return base + #f2(base$0); }",
+    "#f2": "(base$0) => { const base = 2; return base * #f3(base$0); }",
+    "#f3": "(base$0) => base$0"
+  },
+  "root": "#f0()"
+}
