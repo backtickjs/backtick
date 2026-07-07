@@ -61,7 +61,6 @@ class BundleBuilder {
     this.scripts.push(
       new BundledScript(
         script.loc,
-        script.splices.length,
         script.captures,
         script.declarations,
         script.expression,
