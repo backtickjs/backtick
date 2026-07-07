@@ -10,12 +10,6 @@ import { locKey } from "../locKey.js";
 import type { Bundle } from "./Bundle.js";
 import type { Argument } from "./nodes/Argument.js";
 import { BundledScript } from "./nodes/BundledScript.js";
-import { ConstArray } from "./nodes/ConstArray.js";
-import { ConstBoolean } from "./nodes/ConstBoolean.js";
-import { ConstNull } from "./nodes/ConstNull.js";
-import { ConstNumber } from "./nodes/ConstNumber.js";
-import { ConstObject } from "./nodes/ConstObject.js";
-import { ConstString } from "./nodes/ConstString.js";
 import { ScriptRef } from "./nodes/ScriptRef.js";
 
 // Lowers an AST into a flat script table: one `BundledScript` per distinct
@@ -77,26 +71,26 @@ class BundleBuilder {
       return this.reference(node);
     }
     if (node instanceof RuntimeArray) {
-      return new ConstArray(node.elements.map((n) => this.lower(n)));
+      return node.elements.map((n) => this.lower(n));
     }
     if (node instanceof RuntimeObject) {
       const entries: Record<string, Argument> = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = this.lower(value);
       }
-      return new ConstObject(entries);
+      return entries;
     }
     if (node instanceof RuntimeNumber) {
-      return new ConstNumber(node.value);
+      return node.value;
     }
     if (node instanceof RuntimeString) {
-      return new ConstString(node.value);
+      return node.value;
     }
     if (node instanceof RuntimeBoolean) {
-      return new ConstBoolean(node.value);
+      return node.value;
     }
     if (node instanceof RuntimeNull) {
-      return new ConstNull();
+      return null;
     }
     throw new Error(
       `Cannot lower ${node.constructor.name} into a bundle; only client ` +

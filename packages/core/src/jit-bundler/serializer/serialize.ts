@@ -25,12 +25,6 @@ import { SourceString } from "../ast/nodes/SourceString.js";
 import { SourceVariableDeclaration } from "../ast/nodes/SourceVariableDeclaration.js";
 import type { Bundle } from "../bundle/Bundle.js";
 import type { Argument } from "../bundle/nodes/Argument.js";
-import { ConstArray } from "../bundle/nodes/ConstArray.js";
-import { ConstBoolean } from "../bundle/nodes/ConstBoolean.js";
-import { ConstNull } from "../bundle/nodes/ConstNull.js";
-import { ConstNumber } from "../bundle/nodes/ConstNumber.js";
-import { ConstObject } from "../bundle/nodes/ConstObject.js";
-import { ConstString } from "../bundle/nodes/ConstString.js";
 import { ScriptRef } from "../bundle/nodes/ScriptRef.js";
 
 // Fills a splice hole in a script body with the value passed for that position.
@@ -182,26 +176,26 @@ export function serializeBundle(bundle: Bundle): string {
     if (value instanceof ScriptRef) {
       return renderRef(value.target);
     }
-    if (value instanceof ConstArray) {
-      return `[${value.elements.map(renderArgument).join(", ")}]`;
+    if (value === null) {
+      return "null";
     }
-    if (value instanceof ConstObject) {
-      const entries = Object.entries(value.entries).map(
+    if (typeof value === "number") {
+      return value.toString();
+    }
+    if (typeof value === "string") {
+      return `"${value}"`;
+    }
+    if (typeof value === "boolean") {
+      return value ? "true" : "false";
+    }
+    if (Array.isArray(value)) {
+      return `[${value.map(renderArgument).join(", ")}]`;
+    }
+    if (typeof value === "object") {
+      const entries = Object.entries(value).map(
         ([key, entry]) => `${key}: ${renderArgument(entry)}`,
       );
       return entries.length === 0 ? "{}" : `{ ${entries.join(", ")} }`;
-    }
-    if (value instanceof ConstNumber) {
-      return value.value.toString();
-    }
-    if (value instanceof ConstString) {
-      return JSON.stringify(value.value);
-    }
-    if (value instanceof ConstBoolean) {
-      return value.value ? "true" : "false";
-    }
-    if (value instanceof ConstNull) {
-      return "null";
     }
     const unhandled: never = value;
     throw new Error(`Unhandled bundle argument: ${JSON.stringify(unhandled)}`);
@@ -223,10 +217,10 @@ function nestedRefs(values: readonly Argument[]): ScriptRef[] {
   const visit = (value: Argument): void => {
     if (value instanceof ScriptRef) {
       refs.push(value);
-    } else if (value instanceof ConstArray) {
-      value.elements.forEach(visit);
-    } else if (value instanceof ConstObject) {
-      Object.values(value.entries).forEach(visit);
+    } else if (Array.isArray(value)) {
+      value.forEach(visit);
+    } else if (value !== null && typeof value === "object") {
+      Object.values(value).forEach(visit);
     }
   };
   values.forEach(visit);

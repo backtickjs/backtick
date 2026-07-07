@@ -9,11 +9,11 @@ export interface ClientScript<T> extends Client<T> {
 }
 
 export type Spliceable =
+  | Client<unknown>
   | null
   | number
   | boolean
   | string
-  | Client<unknown>
   | Spliceable[]
   | { [key: string]: Spliceable };
 
