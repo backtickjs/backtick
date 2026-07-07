@@ -1,7 +1,7 @@
 import {
   type ClientScript,
   flattenScripts,
-  parseFile,
+  parseSourceText,
 } from "@backtickjs/core/compiler";
 import type { Node } from "estree";
 import {
@@ -109,7 +109,7 @@ function scriptsByStart(options: Options): Map<number, ClientScript> {
     return cache.byStart;
   }
 
-  const { sourceFile, scripts } = parseFile(
+  const { sourceFile, scripts } = parseSourceText(
     ts,
     filepathOf(options) ?? "input.tsx",
     originalText,

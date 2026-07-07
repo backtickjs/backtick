@@ -17,7 +17,6 @@ export function renderDiagnostics(
     fileName,
     sourceText,
     ts.ScriptTarget.ESNext,
-    true,
   );
 
   const position = (offset: number): string => {

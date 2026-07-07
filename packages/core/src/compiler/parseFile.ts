@@ -24,7 +24,7 @@ export interface Splice {
   scripts: ClientScript[];
 }
 
-export function parseFile(
+export function parseSourceText(
   ts: typeof import("typescript"),
   filePath: string,
   sourceText: string,
@@ -33,9 +33,14 @@ export function parseFile(
     filePath,
     sourceText,
     ts.ScriptTarget.Latest,
-    false,
   );
+  return parseSourceFile(ts, sourceFile);
+}
 
+export function parseSourceFile(
+  ts: typeof import("typescript"),
+  sourceFile: ts.SourceFile,
+): ParsedFile {
   const scripts = getDirectScripts(ts, null, sourceFile);
   return { sourceFile, scripts };
 }
@@ -75,7 +80,6 @@ function getDirectScripts(
       sourceFile.fileName,
       textWithPlaceholders,
       ts.ScriptTarget.Latest,
-      false,
     );
     const toSourceRange = (node: ts.Node): SourceRange => ({
       start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),

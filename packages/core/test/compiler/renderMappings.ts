@@ -1,6 +1,6 @@
 import ts from "typescript";
 import type { SourceMapping } from "../../dist/compiler/buildMappings.js";
-import { parseFile } from "../../dist/compiler/parseFile.js";
+import { parseSourceText } from "../../dist/compiler/parseFile.js";
 
 // The source spans covered by top-level `cs` templates (which enclose any
 // nested scripts). Used to drop the identity mappings for the surrounding code,
@@ -9,7 +9,7 @@ function scriptRanges(
   fileName: string,
   sourceText: string,
 ): Array<[start: number, end: number]> {
-  const { sourceFile, scripts } = parseFile(ts, fileName, sourceText);
+  const { sourceFile, scripts } = parseSourceText(ts, fileName, sourceText);
   return scripts.map((script) => [
     script.sourceNode.getStart(sourceFile),
     script.sourceNode.getEnd(),

@@ -1,12 +1,12 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { parseFile } from "../../dist/compiler/parseFile.js";
+import { parseSourceText } from "../../dist/compiler/parseFile.js";
 import { resolveBindings } from "../../dist/compiler/resolveBindings.js";
 
 function captures(body: string): string[] {
   const source = `const script = cs\`${body}\`;`;
-  const parsed = parseFile(ts, "test.ts", source);
+  const parsed = parseSourceText(ts, "test.ts", source);
   const { captures } = resolveBindings(ts, parsed.scripts, source);
   const [script] = parsed.scripts;
   return captures.get(script) ?? [];

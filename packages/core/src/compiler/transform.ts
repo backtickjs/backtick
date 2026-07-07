@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import { parseFile } from "./parseFile.js";
+import { parseSourceFile } from "./parseFile.js";
 import { rewriteFile } from "./rewriteFile.js";
 
 export function transform(
@@ -7,7 +7,7 @@ export function transform(
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
 ): ts.TransformerFactory<ts.SourceFile> {
   return (context) => (sourceFile) => {
-    const parsedFile = parseFile(ts, sourceFile.fileName, sourceFile.text);
+    const parsedFile = parseSourceFile(ts, sourceFile);
     if (parsedFile.scripts.length === 0) {
       return sourceFile;
     }

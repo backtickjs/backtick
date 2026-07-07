@@ -1,6 +1,6 @@
 import type { SourceMapping } from "./buildMappings.js";
 import type { Diagnostic } from "./diagnostics.js";
-import { parseFile } from "./parseFile.js";
+import { parseSourceText } from "./parseFile.js";
 import { printVirtualCode } from "./printVirtualCode.js";
 import { rewriteFile } from "./rewriteFile.js";
 
@@ -15,7 +15,7 @@ export function virtualize(
   filePath: string,
   sourceText: string,
 ): Virtualized {
-  const parsedFile = parseFile(ts, filePath, sourceText);
+  const parsedFile = parseSourceText(ts, filePath, sourceText);
 
   const rewrittenFile = rewriteFile(ts, parsedFile);
 
