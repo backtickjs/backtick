@@ -20,19 +20,13 @@ const bodyByLoc = new Map<string, AstNode>();
 const nodeByClient = new WeakMap<Client<unknown>, SourceClientScript>();
 
 export function buildAst(client: Client<unknown>): AstNode {
+  if (!isClientScript(client)) {
+    return buildSplice(client);
+  }
+
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;
-  }
-
-  if (!isClientScript(client)) {
-    if (typeof client !== "object") {
-      throw new Error(
-        "Cannot lower a `Client` that is neither a cs`` script nor a data " +
-          "object with keys and values.",
-      );
-    }
-    return buildSplice(client);
   }
 
   const key = locKey(client.loc);

@@ -108,14 +108,16 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }
 
-export function isClient(value: unknown): value is Client<unknown> {
-  return typeof value === "object" && value !== null && "$$type" in value;
-}
-
 export function isClientScript(
-  value: Client<unknown>,
+  value: Spliceable,
 ): value is ClientScript<unknown> {
-  return "loc" in value && "metadata" in value && "visit" in value;
+  return (
+    value !== null &&
+    typeof value === "object" &&
+    "loc" in value &&
+    "metadata" in value &&
+    "visit" in value
+  );
 }
 
 function lift<const T>(_value: T): Client<T> {
