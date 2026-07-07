@@ -41,9 +41,7 @@ function sourceName(key: string): string {
 }
 
 // Serializes a bundle to a JSON envelope `{ functions, root }`. `functions`
-// maps each label (`#fi`) to its source as an arrow `(captures) => body`, where
-// every splice hole is inlined in place — a nested-script argument as a call
-// `#fj(...)`, a runtime-value argument as a literal.
+// maps each label (`#fi`) to its source as an arrow `(params) => body`.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -54,10 +52,19 @@ function sourceName(key: string): string {
 // intermediate entry that binds a same-looking variable has a different unique
 // name, so there is nothing to disambiguate and nothing to rename.
 //
-// Because splice arguments are inlined into the callee's body, an entry is
-// rendered with the arguments from the first call that reaches it; this assumes
-// a shared entry is always called with the same arguments (true whenever a
-// distinct script's splices are constant, as with the compiler's output today).
+// A splice hole is filled one of two ways, chosen per entry:
+//
+//   - Monomorphic entry — every reference to it passes structurally identical
+//     splice arguments. The arguments are inlined directly into the body (a
+//     nested-script argument as a call `#fj(...)`, a runtime value as a literal),
+//     so the entry takes no splice parameters.
+//   - Polymorphic entry — the same body (one source location) is reached with
+//     differing splice arguments, as when a host helper builds a fragment from
+//     its parameters and is called more than once (see the `splice-sharing`
+//     fixture). Its splices can't be baked in, so each becomes a parameter
+//     `$i`: the body fills the hole with `$i()` and every reference passes that
+//     call's argument as a thunk. This threads splices exactly like captures,
+//     just positionally.
 export function serializeBundle(bundle: Bundle): string {
   const fns = bundle.scripts;
 
@@ -93,29 +100,57 @@ export function serializeBundle(bundle: Bundle): string {
   // received as a parameter.
   const declaredKeys = fns.map((fn) => new Set(fn.declarations));
 
-  // The splice arguments each entry is called with, taken from the first call
-  // that reaches it (see the shared-entry note above). Also delimits the set of
-  // reachable entries.
-  const argsOf = new Map<number, readonly Argument[]>();
-  const collectArgs = (ref: ScriptRef): void => {
-    if (argsOf.has(ref.target)) {
-      return;
+  // Every reference reaching each entry, grouped by target. Walking from the
+  // root's argument tree reaches the whole table, since each nested script is
+  // lowered to a reference nested in some entry's splice arguments.
+  const refsByTarget = new Map<number, ScriptRef[]>();
+  const seenRefs = new Set<ScriptRef>();
+  const collectRefs = (ref: ScriptRef): void => {
+    const list = refsByTarget.get(ref.target);
+    if (list) {
+      list.push(ref);
+    } else {
+      refsByTarget.set(ref.target, [ref]);
     }
-    argsOf.set(ref.target, ref.args);
+    if (seenRefs.has(ref)) {
+      return; // a shared reference (a diamond arm) is descended into only once
+    }
+    seenRefs.add(ref);
     for (const child of nestedRefs(ref.args)) {
-      collectArgs(child);
+      collectRefs(child);
     }
   };
   for (const ref of nestedRefs([bundle.root])) {
-    collectArgs(ref);
+    collectRefs(ref);
   }
 
+  // An entry is polymorphic when it is reached by more than one distinct
+  // reference: its body (one source location) is shared across call sites that
+  // pass different splices, so the splices can't be inlined and must be threaded
+  // as parameters instead. `buildBundle` interns one reference per source node,
+  // so "more than one reference object" means the entry is reached from more than
+  // one splice site — the only way its arguments can vary. Comparing reference
+  // identity keeps this O(1) per entry; comparing the arguments structurally
+  // would re-expand shared subtrees and cost 2^depth on a diamond.
+  const polymorphic = new Set<number>();
+  for (const [target, refs] of refsByTarget) {
+    if (new Set(refs).size > 1) {
+      polymorphic.add(target);
+    }
+  }
+
+  // A representative splice-argument list for an entry. For a monomorphic entry
+  // every reference agrees, so any list stands in for all of them.
+  const monoArgs = (target: number): readonly Argument[] =>
+    refsByTarget.get(target)?.[0]?.args ?? [];
+
   // The captures an entry must receive as parameters: its own free variables
-  // plus every capture its spliced-in children need, minus the ones it binds
-  // itself (those it supplies rather than receives). Binding keys are globally
-  // unique, so a capture is identified by key alone. Returned in a stable order
-  // (own captures first, then children's); memoized, with a cycle guard for
-  // self-referential scripts.
+  // plus, for a monomorphic entry, the captures free in the arguments it inlines
+  // — minus the ones it binds itself. A polymorphic entry inlines nothing (its
+  // arguments arrive as thunks bound at the call site), so it needs only its own
+  // free variables. Binding keys are globally unique, so a capture is identified
+  // by key alone. Returned in a stable order (own captures first); memoized, with
+  // a cycle guard for self-referential scripts.
   const needCache = new Map<number, string[]>();
   const needStack = new Set<number>();
   const need = (i: number): string[] => {
@@ -138,9 +173,11 @@ export function serializeBundle(bundle: Bundle): string {
     for (const key of fns[i].captures) {
       add(key);
     }
-    for (const child of nestedRefs(argsOf.get(i) ?? [])) {
-      for (const key of need(child.target)) {
-        add(key);
+    if (!polymorphic.has(i)) {
+      for (const arg of monoArgs(i)) {
+        for (const key of freeCaps(arg)) {
+          add(key);
+        }
       }
     }
     const result = order.filter((key) => !declaredKeys[i].has(key));
@@ -149,32 +186,80 @@ export function serializeBundle(bundle: Bundle): string {
     return result;
   };
 
-  const bodies = new Map<number, string>();
-
-  // Renders a reference to an entry as `#ftarget(captures)`, materializing the
-  // target's inlined body into `bodies` the first time it is reached. Each
-  // capture is passed by its unique name — a binding in the calling scope, or a
-  // parameter the caller itself received under that same name.
-  const renderRef = (target: number): string => {
-    if (!bodies.has(target)) {
-      bodies.set(target, ""); // reserve the slot to break reference cycles
-      const params = need(target).map(displayName);
-      const args = argsOf.get(target) ?? [];
-      const body = serializeScript(
-        fns[target].body,
-        (index) => renderArgument(args[index]),
-        displayName,
-      );
-      bodies.set(target, `(${params.join(", ")}) => ${body}`);
+  // The captures that the rendered form of a splice argument refers to in the
+  // enclosing scope: whatever its target still needs, plus — when the target is
+  // polymorphic — the captures of the thunks passed for its splices, since those
+  // thunks are written inline at this call site.
+  const freeCaps = (value: Argument): string[] => {
+    if (value instanceof ScriptRef) {
+      const keys = [...need(value.target)];
+      if (polymorphic.has(value.target)) {
+        for (const arg of value.args) {
+          keys.push(...freeCaps(arg));
+        }
+      }
+      return keys;
     }
-    return `#f${target}(${need(target).map(displayName).join(", ")})`;
+    if (Array.isArray(value)) {
+      return value.flatMap(freeCaps);
+    }
+    if (value !== null && typeof value === "object") {
+      return Object.values(value).flatMap(freeCaps);
+    }
+    return [];
   };
 
-  // Renders a bundle argument as a JavaScript expression: a script reference
-  // becomes `#ftarget(...)`, every other value its literal form.
-  const renderArgument = (value: Argument): string => {
+  const bodies = new Map<number, string>();
+
+  // Materializes an entry's arrow into `bodies` the first time it is reached. A
+  // polymorphic entry takes a `$i` parameter per splice (its holes render as
+  // `$i()`) ahead of its captures; a monomorphic entry inlines its splice
+  // arguments and takes only captures.
+  const materialize = (target: number): void => {
+    if (bodies.has(target)) {
+      return;
+    }
+    bodies.set(target, ""); // reserve the slot to break reference cycles
+    const captureParams = need(target).map(displayName);
+    let params: string[];
+    let renderSplice: RenderSplice;
+    if (polymorphic.has(target)) {
+      const arity = monoArgs(target).length;
+      const spliceParams = Array.from({ length: arity }, (_, i) => `$${i}`);
+      params = [...spliceParams, ...captureParams];
+      renderSplice = (index) => `$${index}()`;
+    } else {
+      params = captureParams;
+      const args = monoArgs(target);
+      renderSplice = (index) => renderValue(args[index]);
+    }
+    const body = serializeScript(fns[target].body, renderSplice, displayName);
+    bodies.set(target, `(${params.join(", ")}) => ${body}`);
+  };
+
+  // The arguments passed when calling an entry: for a polymorphic target, one
+  // thunk per splice (bound to this reference's arguments) ahead of its
+  // captures; for a monomorphic target, just its captures.
+  const callArgs = (ref: ScriptRef): string[] => {
+    const parts: string[] = [];
+    if (polymorphic.has(ref.target)) {
+      for (const arg of ref.args) {
+        parts.push(renderThunk(arg));
+      }
+    }
+    for (const key of need(ref.target)) {
+      parts.push(displayName(key));
+    }
+    return parts;
+  };
+
+  // Renders a bundle argument in value position — as the value it evaluates to.
+  // A script reference becomes a call `#ftarget(...)`; every other value its
+  // literal form.
+  const renderValue = (value: Argument): string => {
     if (value instanceof ScriptRef) {
-      return renderRef(value.target);
+      materialize(value.target);
+      return `#f${value.target}(${callArgs(value).join(", ")})`;
     }
     if (value === null) {
       return "null";
@@ -189,11 +274,11 @@ export function serializeBundle(bundle: Bundle): string {
       return value ? "true" : "false";
     }
     if (Array.isArray(value)) {
-      return `[${value.map(renderArgument).join(", ")}]`;
+      return `[${value.map(renderValue).join(", ")}]`;
     }
     if (typeof value === "object") {
       const entries = Object.entries(value).map(
-        ([key, entry]) => `${key}: ${renderArgument(entry)}`,
+        ([key, entry]) => `${key}: ${renderValue(entry)}`,
       );
       return entries.length === 0 ? "{}" : `{ ${entries.join(", ")} }`;
     }
@@ -201,7 +286,22 @@ export function serializeBundle(bundle: Bundle): string {
     throw new Error(`Unhandled bundle argument: ${JSON.stringify(unhandled)}`);
   };
 
-  const root = renderArgument(bundle.root);
+  // Renders a splice argument in thunk position — as a nullary function that
+  // yields the value — so a polymorphic entry evaluates it lazily at the hole,
+  // mirroring an inlined splice. A referenced entry that already takes no
+  // arguments is a nullary thunk as-is; anything else is wrapped in an arrow.
+  const renderThunk = (value: Argument): string => {
+    if (value instanceof ScriptRef) {
+      materialize(value.target);
+      const args = callArgs(value);
+      return args.length === 0
+        ? `#f${value.target}`
+        : `() => #f${value.target}(${args.join(", ")})`;
+    }
+    return `() => ${renderValue(value)}`;
+  };
+
+  const root = renderValue(bundle.root);
   const functions: Record<string, string> = {};
   for (const index of [...bodies.keys()].sort((a, b) => a - b)) {
     functions[`#f${index}`] = bodies.get(index) ?? "";
