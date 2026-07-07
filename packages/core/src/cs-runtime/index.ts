@@ -1,7 +1,5 @@
-const MARKER = "@backtickjs";
-
 export interface Client<T> {
-  [MARKER]: T;
+  "@backtickjs": T;
 }
 
 export interface ClientScript<T> extends Client<T> {
@@ -111,7 +109,7 @@ export interface Visitor<U> {
 }
 
 export function isClient(value: unknown): value is Client<unknown> {
-  return typeof value === "object" && value !== null && MARKER in value;
+  return typeof value === "object" && value !== null && "@backtickjs" in value;
 }
 
 export function isClientScript(value: unknown): value is ClientScript<unknown> {
@@ -141,7 +139,7 @@ function create(
   // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 ): ClientScript<any> {
   return {
-    [MARKER]: true,
+    "@backtickjs": true,
     loc,
     metadata,
     visit,

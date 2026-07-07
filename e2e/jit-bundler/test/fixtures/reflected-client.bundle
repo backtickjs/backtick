@@ -1,6 +1,7 @@
 {
   "functions": {
-    "#f0": "() => { const a = { x: 1, y: 2 }; const b = { x: 3, y: 4 }; return a.x + b.y; }"
+    "#f0": "() => { const a = { valid: #f1(() => 1, () => 2) }; const b = { valid: #f1(() => 3, () => 4) }; return a.x + b.y; }",
+    "#f1": "($0, $1) => () => $0() + $1()"
   },
   "root": "#f0()"
 }
