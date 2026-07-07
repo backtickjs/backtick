@@ -26,7 +26,13 @@ export function buildAst(client: Client<unknown>): AstNode {
   }
 
   if (!isClientScript(client)) {
-    throw new Error("A spliced value has `$$type` but is not a cs`` script.");
+    if (typeof client !== "object") {
+      throw new Error(
+        "Cannot lower a `Client` that is neither a cs`` script nor a data " +
+          "object with keys and values.",
+      );
+    }
+    return buildSplice(client);
   }
 
   const key = locKey(client.loc);

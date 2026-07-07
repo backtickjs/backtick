@@ -112,7 +112,9 @@ export function serializeBundle(bundle: Bundle): string {
       collectArgs(child);
     }
   };
-  collectArgs(bundle.root);
+  for (const ref of nestedRefs([bundle.root])) {
+    collectArgs(ref);
+  }
 
   // The captures an entry must receive as parameters: its own free variables
   // plus every capture its spliced-in children need, minus the ones it binds
@@ -205,7 +207,7 @@ export function serializeBundle(bundle: Bundle): string {
     throw new Error(`Unhandled bundle argument: ${JSON.stringify(unhandled)}`);
   };
 
-  const root = renderRef(bundle.root.target);
+  const root = renderArgument(bundle.root);
   const functions: Record<string, string> = {};
   for (const index of [...bodies.keys()].sort((a, b) => a - b)) {
     functions[`#f${index}`] = bodies.get(index) ?? "";

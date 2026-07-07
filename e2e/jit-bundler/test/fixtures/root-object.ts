@@ -1,4 +1,3 @@
-import { cs } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core/cs-runtime";
 
 class Color implements Client<Color> {
@@ -11,7 +10,4 @@ class Color implements Client<Color> {
   ) {}
 }
 
-export default cs`{
-  const c = ${new Color(1, 2, 3)};
-  return c.r + c.g + c.b;
-}`;
+export default new Color(1, 2, 3);

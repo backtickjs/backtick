@@ -69,9 +69,10 @@ class BundleBuilder {
     return index;
   }
 
-  // Lowers a spliced-in value: nested scripts become references, everything else
-  // is a runtime constant carried through as data.
-  private lower(node: AstNode): Argument {
+  // Lowers a value into a bundle argument: nested scripts become references,
+  // everything else is a runtime constant carried through as data. Also lowers
+  // the bundle's entrypoint, which may be either.
+  lower(node: AstNode): Argument {
     if (node instanceof SourceClientScript) {
       return this.reference(node);
     }
@@ -104,15 +105,13 @@ class BundleBuilder {
   }
 }
 
-// Builds the bundle from a client script's AST: a flat script table with one
-// entry per distinct client script (deduplicated by source location) plus a
-// reference naming the entrypoint. Nested scripts, wherever they appear in the
-// splice values, are hoisted into the table and replaced by `ScriptRef`s.
+// Builds the bundle from a client's AST: a flat script table with one entry per
+// distinct client script (deduplicated by source location) plus the lowered
+// entrypoint. The entrypoint is usually a `ScriptRef`, but a data client (an
+// object of fields) lowers to a runtime constant instead. Nested scripts,
+// wherever they appear, are hoisted into the table and replaced by `ScriptRef`s.
 export function buildBundle(node: AstNode): Bundle {
-  if (!(node instanceof SourceClientScript)) {
-    throw new Error("A bundle's entrypoint must be a client script.");
-  }
   const builder = new BundleBuilder();
-  const root = builder.reference(node);
+  const root = builder.lower(node);
   return { scripts: builder.scripts, root };
 }
