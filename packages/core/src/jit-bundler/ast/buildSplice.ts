@@ -35,6 +35,18 @@ export function buildSplice(value: Spliceable): AstNode {
   if (Array.isArray(value)) {
     return new RuntimeArray(value.map(buildSplice));
   }
+  // Only plain objects reflect structurally. A class instance without the
+  // "@backtickjs" marker would land here and half-work — own fields reflect,
+  // getters silently vanish — so fail loudly instead.
+  const prototype = Object.getPrototypeOf(value);
+  if (prototype !== Object.prototype && prototype !== null) {
+    const name = value.constructor?.name ?? "an unknown class";
+    throw new Error(
+      `Can't splice this \`${name}\` instance: only plain objects and classes ` +
+        'declaring the "@backtickjs" marker field (`implements Client<T>`) ' +
+        "can cross into a client script.",
+    );
+  }
   const entries: { [key: string]: AstNode } = {};
   for (const [key, entry] of Object.entries(value)) {
     entries[key] = buildSplice(entry);
