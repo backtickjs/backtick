@@ -1,14 +1,14 @@
 import { cs } from "@backtickjs/core";
-import { ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client } from "@backtickjs/core/cs-runtime";
 
-class Color extends ClientObject {
+class Color implements Client<Color> {
+  declare $$type: Color;
+
   constructor(
     readonly r: number,
     readonly g: number,
     readonly b: number,
-  ) {
-    super();
-  }
+  ) {}
 }
 
 export default cs`{

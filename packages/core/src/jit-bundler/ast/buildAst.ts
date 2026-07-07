@@ -25,16 +25,8 @@ export function buildAst(client: Client<unknown>): AstNode {
     return shared;
   }
 
-  // Only cs`` scripts reach here: `buildSplice` routes a `ClientObject` through
-  // its own object branch (an instance carries no runtime `$$type`, so `isClient`
-  // does not match it). A `Client` that has `$$type` but is not a script has no
-  // splice frame to resolve, so lowering it would produce dangling splice holes;
-  // fail loudly instead.
   if (!isClientScript(client)) {
-    throw new Error(
-      "A spliced value has `$$type` but is not a cs`` script. Author a custom " +
-        "client by extending `ClientObject` or returning a cs`` script.",
-    );
+    throw new Error("A spliced value has `$$type` but is not a cs`` script.");
   }
 
   const key = locKey(client.loc);

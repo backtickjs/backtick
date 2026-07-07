@@ -118,8 +118,6 @@ export function isClientScript(
   return "loc" in value && "metadata" in value && "visit" in value;
 }
 
-export { ClientObject } from "./ClientObject.js";
-
 function lift<const T>(_value: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +

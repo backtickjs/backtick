@@ -1,13 +1,13 @@
 import { cs } from "@backtickjs/core";
-import { ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client } from "@backtickjs/core/cs-runtime";
 
-class Point extends ClientObject {
+class Point implements Client<Point> {
+  declare $$type: Point;
+
   constructor(
     readonly x: number,
     readonly y: number,
-  ) {
-    super();
-  }
+  ) {}
 }
 
 export default cs`{
