@@ -4,12 +4,12 @@ import { print } from "../print.ts";
 
 class Color implements Client<Color> {
   "@backtickjs": Color;
-  
-  readonly r: number;
-  readonly g: number;
-  readonly b: number;
 
-  constructor(r: number, g: number, b: number) {
+  readonly r: Client<number>;
+  readonly g: Client<number>;
+  readonly b: Client<number>;
+
+  constructor(r: Client<number>, g: Client<number>, b: Client<number>) {
     this.r = r;
     this.g = g;
     this.b = b;
@@ -17,7 +17,7 @@ class Color implements Client<Color> {
 }
 
 const script = cs.lift((() => {
-    const __cs_c = cs.lower(new Color(30, 144, 255));
+    const __cs_c = cs.lower(new Color(cs.lift(30), cs.lift(144), cs.lift(255)));
     const __cs_brightness = __cs_c.r + __cs_c.g + __cs_c.b;
     if (__cs_brightness > 382) {
         return "light";

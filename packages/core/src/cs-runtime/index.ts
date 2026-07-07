@@ -17,14 +17,26 @@ export type Spliceable =
   | Spliceable[]
   | { [key: string]: Spliceable };
 
+// The client-facing shape of a class authored using `implements Client<T>`: keep
+// exactly the members whose type is Client-marked, lower each, and drop the
+// phantom marker.
+export type ReflectShape<T> = {
+  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Client<unknown>
+    ? K
+    : never]: Lower<T[K]>;
+};
+
 // Recursively lowers a Spliceable type:
-//   Client<U>        -> U
-//   T[]              -> Lower<T>[]
-//   { k: T }         -> { k: Lower<T> }
-//   primitives       -> unchanged
+//   U implements Client<U> -> ReflectShape<U>
+//   Client<U>              -> U
+//   T[]                    -> Lower<T>[]
+//   { k: T }               -> { k: Lower<T> }
+//   primitives             -> unchanged
 export type Lower<T> =
   T extends Client<infer U>
-    ? U
+    ? U extends Client<unknown>
+      ? ReflectShape<U>
+      : U
     : T extends (infer Item)[]
       ? Lower<Item>[]
       : T extends object

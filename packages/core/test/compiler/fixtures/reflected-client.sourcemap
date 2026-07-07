@@ -1,0 +1,79 @@
+cs.lift(                → cs`
+() =>                   → () => 
+cs.lower(               → ${
+this.x                  → this.x
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+this.y                  → this.y
+)                       → }
+)                       → `
+cs.lift(                → cs`
+() =>                   → () => 
+cs.lower(               → ${
+this.from.x             → this.from.x
+)                       → }
+ ===                    →  === 
+cs.lower(               → ${
+this.to.x               → this.to.x
+)                       → }
+)                       → `
+cs.lift(                → cs`
+1                       → 1
+)                       → `
+cs.lift(                → cs`
+2                       → 2
+)                       → `
+cs.lift(                → cs`
+1                       → 1
+)                       → `
+cs.lift(                → cs`
+8                       → 8
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_s                  → s
+ =                      →  = 
+cs.lower(               → ${
+segment                 → segment
+)                       → }
+;                       → ;
+\n                      → \n  
+const                   → const 
+__cs_rise               → rise
+ =                      →  = 
+__cs_s                  → s
+.to                     → .to
+.y                      → .y
+ -                      →  - 
+__cs_s                  → s
+.from                   → .from
+.y                      → .y
+;                       → ;
+\n                      → \n  
+if (                    → if (
+__cs_s                  → s
+.                       → .
+vertical                → vertical
+()                      → ()
+)                       → ) 
+{\n                     → {\n    
+return                  → return 
+__cs_rise               → rise
+;                       → ;
+\n    }                 → \n  }
+\n                      → \n  
+return                  → return 
+__cs_s                  → s
+.to                     → .to
+.                       → .
+sum                     → sum
+()                      → ()
+ -                      →  - 
+__cs_s                  → s
+.from                   → .from
+.                       → .
+sum                     → sum
+()                      → ()
+;                       → ;
+\n})())                 → \n}`

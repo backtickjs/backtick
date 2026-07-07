@@ -5,9 +5,8 @@ class Point implements Client<Point> {
   "@backtickjs": Point;
 
   constructor(
-    readonly x: number,
-    readonly y: number,
-    readonly z: Client<string>[],
+    readonly x: Client<number>,
+    readonly y: Client<number>,
   ) {}
 
   get valid() {
@@ -20,7 +19,7 @@ class Point implements Client<Point> {
 }
 
 export default cs`{
-  const a = ${new Point(1, 2, [])};
-  const b = ${new Point(3, 4, [])};
-  return a.x + b.y;
+  const a = ${new Point(cs`1`, cs`2`)};
+  const b = ${new Point(cs`3`, cs`4`)};
+  a.valid();
 }`;
