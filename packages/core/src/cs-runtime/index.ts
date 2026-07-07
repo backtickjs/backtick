@@ -1,11 +1,11 @@
 export interface Client<T> {
   $$type: T;
-  visit: <U>(visitor: Visitor<U>) => U;
 }
 
 export interface ClientScript<T> extends Client<T> {
   loc: SourceLocation;
   metadata: Metadata;
+  visit: <U>(visitor: Visitor<U>) => U;
 }
 
 export type Spliceable =
@@ -109,18 +109,13 @@ export interface Visitor<U> {
 }
 
 export function isClient(value: unknown): value is Client<unknown> {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "visit" in value &&
-    typeof value.visit === "function"
-  );
+  return typeof value === "object" && value !== null && "$$type" in value;
 }
 
 export function isClientScript(
   value: Client<unknown>,
 ): value is ClientScript<unknown> {
-  return "loc" in value && "metadata" in value;
+  return "loc" in value && "metadata" in value && "visit" in value;
 }
 
 export { ClientObject } from "./ClientObject.js";

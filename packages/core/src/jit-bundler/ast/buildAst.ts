@@ -1,14 +1,8 @@
-import {
-  type Client,
-  ClientObject,
-  isClientScript,
-  type Spliceable,
-} from "../../cs-runtime/index.js";
+import { type Client, isClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { buildSplice } from "./buildSplice.js";
 import type { AstNode } from "./nodes/AstNode.js";
-import { RuntimeObject } from "./nodes/RuntimeObject.js";
 import { SourceClientScript } from "./nodes/SourceClientScript.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
@@ -23,7 +17,7 @@ const bodyByLoc = new Map<string, AstNode>();
 // tree with exponentially many nodes. Safe to share because nodes are immutable,
 // and safe to cache forever because a client object's lowering never changes;
 // keyed weakly so entries vanish with their client objects.
-const nodeByClient = new WeakMap<Client<unknown>, AstNode>();
+const nodeByClient = new WeakMap<Client<unknown>, SourceClientScript>();
 
 export function buildAst(client: Client<unknown>): AstNode {
   const shared = nodeByClient.get(client);
@@ -31,25 +25,15 @@ export function buildAst(client: Client<unknown>): AstNode {
     return shared;
   }
 
-  if (client instanceof ClientObject) {
-    const fields = client as unknown as Record<string, Spliceable>;
-    const entries: Record<string, AstNode> = {};
-    for (const key of Object.keys(fields)) {
-      entries[key] = buildSplice(fields[key]);
-    }
-    const node = new RuntimeObject(entries);
-    nodeByClient.set(client, node);
-    return node;
-  }
-
-  // Anything else reaching here must be a cs`` script. A bare `Client` that only
-  // implements `visit` has no splice frame to resolve, so lowering it would
-  // silently produce dangling splice holes; fail loudly instead.
+  // Only cs`` scripts reach here: `buildSplice` routes a `ClientObject` through
+  // its own object branch (an instance carries no runtime `$$type`, so `isClient`
+  // does not match it). A `Client` that has `$$type` but is not a script has no
+  // splice frame to resolve, so lowering it would produce dangling splice holes;
+  // fail loudly instead.
   if (!isClientScript(client)) {
     throw new Error(
-      "A spliced value lowered to a `Client` that is neither a cs`` script nor " +
-        "a `ClientObject`. Author a custom client by extending `ClientObject` " +
-        "or returning a cs`` script.",
+      "A spliced value has `$$type` but is not a cs`` script. Author a custom " +
+        "client by extending `ClientObject` or returning a cs`` script.",
     );
   }
 
