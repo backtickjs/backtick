@@ -23,15 +23,15 @@ import { SourceReturn } from "../ast/nodes/SourceReturn.js";
 import { SourceSplice } from "../ast/nodes/SourceSplice.js";
 import { SourceString } from "../ast/nodes/SourceString.js";
 import { SourceVariableDeclaration } from "../ast/nodes/SourceVariableDeclaration.js";
-import { IrArray } from "../ir/nodes/IrArray.js";
-import { IrBoolean } from "../ir/nodes/IrBoolean.js";
-import { IrCall } from "../ir/nodes/IrCall.js";
-import { IrNull } from "../ir/nodes/IrNull.js";
-import { IrNumber } from "../ir/nodes/IrNumber.js";
-import { IrObject } from "../ir/nodes/IrObject.js";
-import { IrString } from "../ir/nodes/IrString.js";
-import type { IrValue } from "../ir/nodes/IrValue.js";
-import type { IrPayload } from "../ir/Payload.js";
+import type { Bundle } from "../bundle/Bundle.js";
+import type { Argument } from "../bundle/nodes/Argument.js";
+import { ConstArray } from "../bundle/nodes/ConstArray.js";
+import { ConstBoolean } from "../bundle/nodes/ConstBoolean.js";
+import { ConstNull } from "../bundle/nodes/ConstNull.js";
+import { ConstNumber } from "../bundle/nodes/ConstNumber.js";
+import { ConstObject } from "../bundle/nodes/ConstObject.js";
+import { ConstString } from "../bundle/nodes/ConstString.js";
+import { ScriptRef } from "../bundle/nodes/ScriptRef.js";
 
 // Fills a splice hole in a script body with the value passed for that position.
 type RenderSplice = (index: number) => string;
@@ -46,7 +46,7 @@ function sourceName(key: string): string {
   return key.replace(/\$[0-9a-z]+\$\d+$/, "");
 }
 
-// Serializes a payload to a JSON envelope `{ functions, root }`. `functions`
+// Serializes a bundle to a JSON envelope `{ functions, root }`. `functions`
 // maps each label (`#fi`) to its source as an arrow `(captures) => body`, where
 // every splice hole is inlined in place — a nested-script argument as a call
 // `#fj(...)`, a runtime-value argument as a literal.
@@ -64,8 +64,8 @@ function sourceName(key: string): string {
 // rendered with the arguments from the first call that reaches it; this assumes
 // a shared entry is always called with the same arguments (true whenever a
 // distinct script's splices are constant, as with the compiler's output today).
-export function serializePayload(payload: IrPayload): string {
-  const fns = payload.functions;
+export function serializeBundle(bundle: Bundle): string {
+  const fns = bundle.scripts;
 
   // Maps each binding key to a readable display name — its source name with the
   // uniqueness suffix (`$<salt>$<n>`) dropped — so the bundle reads like the
@@ -102,17 +102,17 @@ export function serializePayload(payload: IrPayload): string {
   // The splice arguments each entry is called with, taken from the first call
   // that reaches it (see the shared-entry note above). Also delimits the set of
   // reachable entries.
-  const argsOf = new Map<number, readonly IrValue[]>();
-  const collectArgs = (call: IrCall): void => {
-    if (argsOf.has(call.target)) {
+  const argsOf = new Map<number, readonly Argument[]>();
+  const collectArgs = (ref: ScriptRef): void => {
+    if (argsOf.has(ref.target)) {
       return;
     }
-    argsOf.set(call.target, call.args);
-    for (const child of nestedCalls(call.args)) {
+    argsOf.set(ref.target, ref.args);
+    for (const child of nestedRefs(ref.args)) {
       collectArgs(child);
     }
   };
-  collectArgs(payload.root);
+  collectArgs(bundle.root);
 
   // The captures an entry must receive as parameters: its own free variables
   // plus every capture its spliced-in children need, minus the ones it binds
@@ -142,7 +142,7 @@ export function serializePayload(payload: IrPayload): string {
     for (const key of fns[i].captures) {
       add(key);
     }
-    for (const child of nestedCalls(argsOf.get(i) ?? [])) {
+    for (const child of nestedRefs(argsOf.get(i) ?? [])) {
       for (const key of need(child.target)) {
         add(key);
       }
@@ -159,14 +159,14 @@ export function serializePayload(payload: IrPayload): string {
   // target's inlined body into `bodies` the first time it is reached. Each
   // capture is passed by its unique name — a binding in the calling scope, or a
   // parameter the caller itself received under that same name.
-  const renderCall = (target: number): string => {
+  const renderRef = (target: number): string => {
     if (!bodies.has(target)) {
       bodies.set(target, ""); // reserve the slot to break reference cycles
       const params = need(target).map(displayName);
       const args = argsOf.get(target) ?? [];
       const body = serializeScript(
         fns[target].body,
-        (index) => renderValue(args[index]),
+        (index) => renderArgument(args[index]),
         displayName,
       );
       bodies.set(target, `(${params.join(", ")}) => ${body}`);
@@ -174,38 +174,38 @@ export function serializePayload(payload: IrPayload): string {
     return `#f${target}(${need(target).map(displayName).join(", ")})`;
   };
 
-  // Renders an IR value as a JavaScript expression: a call becomes
-  // `#ftarget(...)`, every other value its literal form.
-  const renderValue = (value: IrValue): string => {
-    if (value instanceof IrCall) {
-      return renderCall(value.target);
+  // Renders a bundle argument as a JavaScript expression: a script reference
+  // becomes `#ftarget(...)`, every other value its literal form.
+  const renderArgument = (value: Argument): string => {
+    if (value instanceof ScriptRef) {
+      return renderRef(value.target);
     }
-    if (value instanceof IrArray) {
-      return `[${value.elements.map(renderValue).join(", ")}]`;
+    if (value instanceof ConstArray) {
+      return `[${value.elements.map(renderArgument).join(", ")}]`;
     }
-    if (value instanceof IrObject) {
+    if (value instanceof ConstObject) {
       const entries = Object.entries(value.entries).map(
-        ([key, entry]) => `${key}: ${renderValue(entry)}`,
+        ([key, entry]) => `${key}: ${renderArgument(entry)}`,
       );
       return entries.length === 0 ? "{}" : `{ ${entries.join(", ")} }`;
     }
-    if (value instanceof IrNumber) {
+    if (value instanceof ConstNumber) {
       return value.value.toString();
     }
-    if (value instanceof IrString) {
+    if (value instanceof ConstString) {
       return JSON.stringify(value.value);
     }
-    if (value instanceof IrBoolean) {
+    if (value instanceof ConstBoolean) {
       return value.value ? "true" : "false";
     }
-    if (value instanceof IrNull) {
+    if (value instanceof ConstNull) {
       return "null";
     }
     const unhandled: never = value;
-    throw new Error(`Unhandled IR node: ${JSON.stringify(unhandled)}`);
+    throw new Error(`Unhandled bundle argument: ${JSON.stringify(unhandled)}`);
   };
 
-  const root = renderCall(payload.root.target);
+  const root = renderRef(bundle.root.target);
   const functions: Record<string, string> = {};
   for (const index of [...bodies.keys()].sort((a, b) => a - b)) {
     functions[`#f${index}`] = bodies.get(index) ?? "";
@@ -213,21 +213,22 @@ export function serializePayload(payload: IrPayload): string {
   return JSON.stringify({ functions, root }, null, 2);
 }
 
-// Collects every IR call reachable inside a list of splice arguments, descending
-// into array and object values (a nested script may be spliced anywhere).
-function nestedCalls(values: readonly IrValue[]): IrCall[] {
-  const calls: IrCall[] = [];
-  const visit = (value: IrValue): void => {
-    if (value instanceof IrCall) {
-      calls.push(value);
-    } else if (value instanceof IrArray) {
+// Collects every script reference reachable inside a list of splice arguments,
+// descending into array and object values (a nested script may be spliced
+// anywhere).
+function nestedRefs(values: readonly Argument[]): ScriptRef[] {
+  const refs: ScriptRef[] = [];
+  const visit = (value: Argument): void => {
+    if (value instanceof ScriptRef) {
+      refs.push(value);
+    } else if (value instanceof ConstArray) {
       value.elements.forEach(visit);
-    } else if (value instanceof IrObject) {
+    } else if (value instanceof ConstObject) {
       Object.values(value.entries).forEach(visit);
     }
   };
   values.forEach(visit);
-  return calls;
+  return refs;
 }
 
 // Renders a client script's AST body to a single-line JavaScript expression.

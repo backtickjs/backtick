@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 import type { AstNode } from "../../ast/nodes/AstNode.js";
 
-export class IrFunction {
+export class BundledScript {
   readonly loc: SourceLocation;
   readonly arity: number;
   readonly captures: string[];

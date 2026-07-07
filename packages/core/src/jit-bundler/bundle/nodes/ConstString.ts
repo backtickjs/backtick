@@ -1,4 +1,4 @@
-export class IrString {
+export class ConstString {
   readonly value: string;
 
   constructor(value: string) {

@@ -1,4 +1,4 @@
-export class IrBoolean {
+export class ConstBoolean {
   readonly value: boolean;
 
   constructor(value: boolean) {

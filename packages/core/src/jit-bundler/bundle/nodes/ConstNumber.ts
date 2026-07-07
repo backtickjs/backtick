@@ -1,4 +1,4 @@
-export class IrNumber {
+export class ConstNumber {
   readonly value: number;
 
   constructor(value: number) {
