@@ -1,5 +1,7 @@
+const MARKER = "@backtickjs";
+
 export interface Client<T> {
-  $$type: T;
+  [MARKER]: T;
 }
 
 export interface ClientScript<T> extends Client<T> {
@@ -108,15 +110,13 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }
 
-export function isClientScript(
-  value: Spliceable,
-): value is ClientScript<unknown> {
+export function isClient(value: unknown): value is Client<unknown> {
+  return typeof value === "object" && value !== null && MARKER in value;
+}
+
+export function isClientScript(value: unknown): value is ClientScript<unknown> {
   return (
-    value !== null &&
-    typeof value === "object" &&
-    "loc" in value &&
-    "metadata" in value &&
-    "visit" in value
+    isClient(value) && "loc" in value && "metadata" in value && "visit" in value
   );
 }
 
@@ -141,7 +141,7 @@ function create(
   // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 ): ClientScript<any> {
   return {
-    $$type: undefined,
+    [MARKER]: true,
     loc,
     metadata,
     visit,

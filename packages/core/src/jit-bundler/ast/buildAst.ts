@@ -1,6 +1,7 @@
 import { type Client, isClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
+import { buildObject } from "./buildObject.js";
 import { buildSplice } from "./buildSplice.js";
 import type { AstNode } from "./nodes/AstNode.js";
 import { SourceClientScript } from "./nodes/SourceClientScript.js";
@@ -21,7 +22,7 @@ const nodeByClient = new WeakMap<Client<unknown>, SourceClientScript>();
 
 export function buildAst(client: Client<unknown>): AstNode {
   if (!isClientScript(client)) {
-    return buildSplice(client);
+    return buildObject(client);
   }
 
   const shared = nodeByClient.get(client);

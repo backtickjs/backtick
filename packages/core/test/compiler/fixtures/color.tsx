@@ -3,7 +3,8 @@ import { cs } from "@backtickjs/core";
 import { print } from "../print.ts";
 
 class Color implements Client<Color> {
-  declare $$type: Color;
+  "@backtickjs": Color;
+  
   readonly r: number;
   readonly g: number;
   readonly b: number;

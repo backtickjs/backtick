@@ -1,4 +1,8 @@
-import { isClientScript, type Spliceable } from "../../cs-runtime/index.js";
+import {
+  isClient,
+  isClientScript,
+  type Spliceable,
+} from "../../cs-runtime/index.js";
 import { buildAst } from "./buildAst.js";
 import { buildObject } from "./buildObject.js";
 import type { AstNode } from "./nodes/AstNode.js";
@@ -6,6 +10,7 @@ import { RuntimeArray } from "./nodes/RuntimeArray.js";
 import { RuntimeBoolean } from "./nodes/RuntimeBoolean.js";
 import { RuntimeNull } from "./nodes/RuntimeNull.js";
 import { RuntimeNumber } from "./nodes/RuntimeNumber.js";
+import { RuntimeObject } from "./nodes/RuntimeObject.js";
 import { RuntimeString } from "./nodes/RuntimeString.js";
 
 // Lowers a value spliced into a client script to an AST node. Nested client
@@ -14,6 +19,9 @@ import { RuntimeString } from "./nodes/RuntimeString.js";
 export function buildSplice(value: Spliceable): AstNode {
   if (isClientScript(value)) {
     return buildAst(value);
+  }
+  if (isClient(value)) {
+    return buildObject(value);
   }
   if (value === null) {
     return new RuntimeNull();
@@ -30,5 +38,9 @@ export function buildSplice(value: Spliceable): AstNode {
   if (Array.isArray(value)) {
     return new RuntimeArray(value.map(buildSplice));
   }
-  return buildObject(value);
+  const entries: { [key: string]: AstNode } = {};
+  for (const [key, entry] of Object.entries(value)) {
+    entries[key] = buildSplice(entry);
+  }
+  return new RuntimeObject(entries);
 }

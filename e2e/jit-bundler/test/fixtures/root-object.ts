@@ -1,7 +1,7 @@
 import type { Client } from "@backtickjs/core/cs-runtime";
 
 class Color implements Client<Color> {
-  declare $$type: Color;
+  "@backtickjs": Color;
 
   constructor(
     readonly r: number,

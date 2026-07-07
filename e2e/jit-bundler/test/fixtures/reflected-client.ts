@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core/cs-runtime";
 
 class Point implements Client<Point> {
-  declare $$type: Point;
+  "@backtickjs": Point;
 
   constructor(
     readonly x: number,
