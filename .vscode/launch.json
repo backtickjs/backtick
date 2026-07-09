@@ -7,7 +7,7 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "${workspaceRoot}/examples/node-minimal",
+        "${workspaceRoot}/e2e",
         "--extensionDevelopmentPath=${workspaceRoot}/packages/language-tools/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]
