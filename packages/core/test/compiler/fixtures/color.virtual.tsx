@@ -1,6 +1,5 @@
 import type { Client, AsObject } from "@backtickjs/core/cs-runtime";
 import { cs } from "@backtickjs/core";
-import { print } from "../print.ts";
 
 class Color implements Client<AsObject<Color>> {
   "@backtickjs": AsObject<Color>;
@@ -24,5 +23,3 @@ const script = cs.lift((() => {
     }
     return "dark";
 })());
-
-print(script);

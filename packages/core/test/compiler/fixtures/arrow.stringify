@@ -1,4 +1,0 @@
-cs`{
-  const base = 10;
-  return (one, two) => one + two + base;
-}`

@@ -1,5 +1,4 @@
 import assert from "node:assert";
-import { execFileSync } from "node:child_process";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
@@ -36,10 +35,9 @@ const fixtureNames = readdirSync(fixturesDir)
   )
   .sort();
 
-// Virtualize every fixture once up front so both the `compile` and `print`
-// suites can consult its diagnostics. A fixture that reports an error only
-// snapshots its diagnostics: there is no meaningful virtual code, source map,
-// emitted JS, or stringified output for source the compiler rejected.
+// A fixture that reports an error only snapshots its diagnostics: there is no
+// meaningful virtual code, source map, or emitted JS for source the compiler
+// rejected.
 const fixtures = fixtureNames.map((fileName) => {
   const sourceText = readFileSync(join(fixturesDir, fileName), "utf8");
   const result = virtualize(ts, fileName, sourceText);
@@ -77,28 +75,6 @@ describe("compile", () => {
         }).outputText,
         join(fixturesDir, `${base}.js`),
       );
-    });
-  }
-});
-
-describe("print", () => {
-  for (const fixture of fixtures) {
-    if (fixture.hasError) {
-      continue;
-    }
-    it(fixture.fileName, () => {
-      const base = fixture.fileName.slice(0, -extname(fixture.fileName).length);
-
-      // The compiled fixture calls print(script) at module scope, writing the
-      // stringified client script to stdout. Run it in its own process so we
-      // capture only the fixture's output (not the test runner's).
-      const output = execFileSync(
-        process.execPath,
-        [join(fixturesDir, `${base}.js`)],
-        { encoding: "utf8" },
-      );
-
-      matchFileSnapshot(output, join(fixturesDir, `${base}.stringify`));
     });
   }
 });

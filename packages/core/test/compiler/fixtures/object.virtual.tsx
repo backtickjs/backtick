@@ -1,5 +1,4 @@
 import { cs } from "@backtickjs/core";
-import { print } from "../print.ts";
 
 const color = cs.lift((() => {
     const __cs_color = { r: 1, g: 2, b: 3, brightness: () => {
@@ -12,5 +11,3 @@ const script = cs.lift((() => {
     const __cs_c = cs.lower(color);
     return cs.lower(cs.lift(__cs_c.brightness()));
 })());
-
-print(script);

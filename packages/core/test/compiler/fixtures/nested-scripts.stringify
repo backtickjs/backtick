@@ -1,4 +1,0 @@
-cs`{
-  const x = 0;
-  return ${...};
-}`

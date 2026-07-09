@@ -1,6 +1,5 @@
 import type { Client, AsObject } from "@backtickjs/core/cs-runtime";
 import { cs } from "@backtickjs/core";
-import { print } from "../print.ts";
 
 class Point implements Client<AsObject<Point>> {
   "@backtickjs": AsObject<Point>;
@@ -47,5 +46,3 @@ const script = cs.lift((() => {
     }
     return __cs_s.to.sum() - __cs_s.from.sum();
 })());
-
-print(script);

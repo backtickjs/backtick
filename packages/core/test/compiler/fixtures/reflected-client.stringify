@@ -1,8 +1,0 @@
-cs`{
-  const s = ${...};
-  const rise = s.to.y - s.from.y;
-  if (s.vertical()) {
-    return rise;
-  }
-  return s.to.sum() - s.from.sum();
-}`

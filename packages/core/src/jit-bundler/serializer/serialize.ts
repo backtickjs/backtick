@@ -327,13 +327,13 @@ function nestedRefs(values: readonly Argument[]): ScriptRef[] {
   return refs;
 }
 
-// Renders a client script's AST body to a single-line JavaScript expression.
-// Mirrors `printAst`, but formats for embedding: blocks stay on one line and
-// splice holes are filled by `renderSplice` (with the arguments passed to the
-// script) rather than shown as `${...}` placeholders. Every binding key is
-// printed under its `mangle`d display name — the source name, disambiguated only
-// where needed — and a captured variable is received as a parameter under that
-// same name, so the reference and its parameter still line up.
+// Renders a client script's AST body to a single-line JavaScript expression,
+// formatted for embedding: blocks stay on one line and splice holes are filled
+// by `renderSplice` (with the arguments passed to the script). Every binding
+// key is printed under its `mangle`d display name — the source name,
+// disambiguated only where needed — and a captured variable is received as a
+// parameter under that same name, so the reference and its parameter still
+// line up.
 export function serializeScript(
   node: AstNode,
   renderSplice: RenderSplice,

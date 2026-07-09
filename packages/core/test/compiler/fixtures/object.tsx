@@ -1,5 +1,4 @@
 import { cs } from "@backtickjs/core";
-import { print } from "../print.ts";
 
 const color = cs`{
   const color = {
@@ -17,5 +16,3 @@ const script = cs`{
   const c = ${color};
   return ${cs`c.brightness()`};
 }`;
-
-print(script);
