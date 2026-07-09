@@ -1,5 +1,6 @@
 import type { RuntimeArray } from "./RuntimeArray.js";
 import type { RuntimeBoolean } from "./RuntimeBoolean.js";
+import type { RuntimeJSXElement } from "./RuntimeJSXElement.js";
 import type { RuntimeNull } from "./RuntimeNull.js";
 import type { RuntimeNumber } from "./RuntimeNumber.js";
 import type { RuntimeObject } from "./RuntimeObject.js";
@@ -51,6 +52,7 @@ export type SourceNode =
 export type RuntimeNode =
   | RuntimeArray
   | RuntimeBoolean
+  | RuntimeJSXElement
   | RuntimeNull
   | RuntimeNumber
   | RuntimeObject

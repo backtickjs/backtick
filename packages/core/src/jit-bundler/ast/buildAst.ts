@@ -1,10 +1,12 @@
 import {
   isClient,
   isClientScript,
+  isJSXElement,
   type Spliceable,
 } from "../../cs-runtime/index.js";
 import { buildClassAsObject } from "./buildClassAsObject.js";
 import { buildClientScript } from "./buildClientScript.js";
+import { buildJSXElement } from "./buildJSXElement.js";
 import type { AstRoot } from "./nodes/AstNode.js";
 import { RuntimeArray } from "./nodes/RuntimeArray.js";
 import { RuntimeBoolean } from "./nodes/RuntimeBoolean.js";
@@ -16,6 +18,9 @@ import { RuntimeString } from "./nodes/RuntimeString.js";
 export function buildAst(value: Spliceable): AstRoot {
   if (isClientScript(value)) {
     return buildClientScript(value);
+  }
+  if (isJSXElement(value)) {
+    return buildJSXElement(value);
   }
   if (isClient(value)) {
     return buildClassAsObject(value);
