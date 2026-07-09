@@ -280,7 +280,7 @@ export function serializeBundle(bundle: Bundle): string {
       const entries = Object.entries(value).map(
         ([key, entry]) => `${key}: ${renderValue(entry)}`,
       );
-      return entries.length === 0 ? "{}" : `{ ${entries.join(", ")} }`;
+      return entries.length === 0 ? "({})" : `({ ${entries.join(", ")} })`;
     }
     const unhandled: never = value;
     throw new Error(`Unhandled bundle argument: ${JSON.stringify(unhandled)}`);
