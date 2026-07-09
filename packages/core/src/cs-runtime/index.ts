@@ -19,6 +19,19 @@ export interface ClientScript<T extends ClientUnknown> extends Client<T> {
   visit: <U>(visitor: Visitor<U>) => U;
 }
 
+export type Prop<T extends ClientUnknown> = T | Client<T>;
+
+// Client scripts can pass elements around but not look inside one.
+// biome-ignore lint/complexity/noBannedTypes: `{}` is the point
+export type Element = {};
+
+export interface ClientElement extends Client<Element> {
+  "@backtickjs": Element;
+  readonly type: string;
+  readonly key: string | number | null;
+  readonly props: { [key: string]: unknown };
+}
+
 export type Spliceable =
   | Client<ClientUnknown>
   | null
@@ -134,6 +147,12 @@ export function isClientScript(
 ): value is ClientScript<ClientUnknown> {
   return (
     isClient(value) && "loc" in value && "metadata" in value && "visit" in value
+  );
+}
+
+export function isClientElement(value: unknown): value is ClientElement {
+  return (
+    isClient(value) && "type" in value && "key" in value && "props" in value
   );
 }
 
