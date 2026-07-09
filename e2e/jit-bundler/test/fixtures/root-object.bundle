@@ -1,4 +1,4 @@
 {
   "functions": {},
-  "root": "{}"
+  "root": "{ r: 1, g: 2, b: 3 }"
 }

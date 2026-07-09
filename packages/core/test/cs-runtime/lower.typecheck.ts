@@ -1,13 +1,13 @@
-// Type-level assertions for `Lower`'s class reflection (`ReflectShape`).
+// Type-level assertions for `Lower` and the explicit `ClientObject` marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
-import type { Client, Lower } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject, Lower } from "@backtickjs/core/cs-runtime";
 
 declare function lower<T>(value: T): Lower<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
-class Point implements Client<Point> {
-  "@backtickjs": Point;
+class Point implements Client<ClientObject<Point>> {
+  "@backtickjs": ClientObject<Point>;
 
   readonly x: Client<number>;
   readonly y: Client<number>;
@@ -30,12 +30,12 @@ class Point implements Client<Point> {
   }
 }
 
-class Segment implements Client<Segment> {
-  "@backtickjs": Segment;
+class Segment implements Client<ClientObject<Segment>> {
+  "@backtickjs": ClientObject<Segment>;
 
   readonly from: Point;
   readonly to: Point;
-  // raw host data: never crosses into the client
+  // plain data lowers by the same rule as a plain object member
   readonly label: string;
 
   constructor(from: Point, to: Point, label: string) {
@@ -73,8 +73,8 @@ const segment = lower(
 segment.from.x satisfies number;
 segment.to.sum() satisfies number;
 
-// @ts-expect-error — raw host data isn't reflected.
-segment.label;
+// Plain data crosses into the client unchanged, like a plain object member.
+segment.label satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 lower(clientArrow)() satisfies number;

@@ -17,26 +17,21 @@ export type Spliceable =
   | Spliceable[]
   | { [key: string]: Spliceable };
 
-// The client-facing shape of a class authored using `implements Client<T>`: keep
-// exactly the members whose type is Client-marked, lower each, and drop the
-// phantom marker.
-export type ReflectShape<T> = {
-  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Client<unknown>
+export type ClientObject<T> = {
+  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
     ? K
     : never]: Lower<T[K]>;
 };
 
 // Recursively lowers a Spliceable type:
-//   U implements Client<U> -> ReflectShape<U>
-//   Client<U>              -> U
-//   T[]                    -> Lower<T>[]
-//   { k: T }               -> { k: Lower<T> }
-//   primitives             -> unchanged
+//   Client<U>        -> U
+//   T[]              -> Lower<T>[]
+//   { k: T }         -> { k: Lower<T> }
+//   primitives       -> unchanged
+
 export type Lower<T> =
   T extends Client<infer U>
-    ? U extends Client<unknown>
-      ? ReflectShape<U>
-      : U
+    ? U
     : T extends (infer Item)[]
       ? Lower<Item>[]
       : T extends object
@@ -127,6 +122,61 @@ export function isClient(value: unknown): value is Client<unknown> {
 export function isClientScript(value: unknown): value is ClientScript<unknown> {
   return (
     isClient(value) && "loc" in value && "metadata" in value && "visit" in value
+  );
+}
+
+export function spliceableEntries(
+  value: Client<unknown>,
+): [string, Spliceable][] {
+  const entries: [string, Spliceable][] = [];
+  for (const key of objectKeys(value)) {
+    if (key === "@backtickjs") {
+      continue;
+    }
+    const entry = (value as unknown as Record<string, unknown>)[key];
+    if (isSpliceable(entry)) {
+      entries.push([key, entry]);
+    }
+  }
+  return entries;
+}
+
+function objectKeys(value: Client<unknown>): string[] {
+  const keys: string[] = [];
+  const seen = new Set<string>();
+  let current: object | null = value;
+  while (current && current !== Object.prototype) {
+    for (const key of Object.getOwnPropertyNames(current)) {
+      if (!seen.has(key)) {
+        seen.add(key);
+        keys.push(key);
+      }
+    }
+    current = Object.getPrototypeOf(current);
+  }
+  return keys;
+}
+
+export function isSpliceable(value: unknown): value is Spliceable {
+  if (value === undefined) {
+    return false;
+  }
+  if (
+    isClient(value) ||
+    value === null ||
+    typeof value === "number" ||
+    typeof value === "boolean" ||
+    typeof value === "string"
+  ) {
+    return true;
+  }
+  if (Array.isArray(value)) {
+    return value.every(isSpliceable);
+  }
+  const prototype = Object.getPrototypeOf(value);
+  return (
+    (prototype === Object.prototype || prototype === null) &&
+    Object.values(value).every(isSpliceable)
   );
 }
 
