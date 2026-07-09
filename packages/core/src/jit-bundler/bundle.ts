@@ -5,6 +5,6 @@ import { serializeBundle } from "./serializer/serializeBundle.js";
 
 export function bundle(client: Client<ClientUnknown>): string {
   const ast = buildAst(client);
-  const bundled = buildBundle(ast);
-  return serializeBundle(bundled);
+  const bundle = buildBundle(ast);
+  return serializeBundle(bundle);
 }
