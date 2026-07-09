@@ -1,15 +1,26 @@
-export interface Client<T> {
+export type ClientUnknown =
+  // biome-ignore lint/suspicious/noConfusingVoidType: script whose block completes without a `return`
+  | void
+  | null
+  | number
+  | boolean
+  | string
+  | ((...args: never[]) => ClientUnknown)
+  | ClientUnknown[]
+  | { [key: string]: ClientUnknown };
+
+export interface Client<T extends ClientUnknown> {
   "@backtickjs": T;
 }
 
-export interface ClientScript<T> extends Client<T> {
+export interface ClientScript<T extends ClientUnknown> extends Client<T> {
   loc: SourceLocation;
   metadata: Metadata;
   visit: <U>(visitor: Visitor<U>) => U;
 }
 
 export type Spliceable =
-  | Client<unknown>
+  | Client<ClientUnknown>
   | null
   | number
   | boolean
@@ -28,7 +39,6 @@ export type AsObject<T> = {
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
-
 export type Lower<T> =
   T extends Client<infer U>
     ? U
@@ -115,18 +125,20 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }
 
-export function isClient(value: unknown): value is Client<unknown> {
+export function isClient(value: unknown): value is Client<ClientUnknown> {
   return typeof value === "object" && value !== null && "@backtickjs" in value;
 }
 
-export function isClientScript(value: unknown): value is ClientScript<unknown> {
+export function isClientScript(
+  value: unknown,
+): value is ClientScript<ClientUnknown> {
   return (
     isClient(value) && "loc" in value && "metadata" in value && "visit" in value
   );
 }
 
 export function spliceableEntries(
-  value: Client<unknown>,
+  value: Client<ClientUnknown>,
 ): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
   for (const key of objectKeys(value)) {
@@ -141,7 +153,7 @@ export function spliceableEntries(
   return entries;
 }
 
-function objectKeys(value: Client<unknown>): string[] {
+function objectKeys(value: Client<ClientUnknown>): string[] {
   const keys: string[] = [];
   const seen = new Set<string>();
   let current: object | null = value;
@@ -180,7 +192,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
   );
 }
 
-function lift<const T>(_value: T): Client<T> {
+function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -209,7 +221,10 @@ function create(
 }
 
 const cs = Object.assign(
-  (_strings: TemplateStringsArray, ..._values: unknown[]): Client<unknown> => {
+  (
+    _strings: TemplateStringsArray,
+    ..._values: unknown[]
+  ): Client<ClientUnknown> => {
     throw new Error(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );

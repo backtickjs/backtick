@@ -1,11 +1,15 @@
-import { type Client, spliceableEntries } from "../../cs-runtime/index.js";
+import {
+  type Client,
+  type ClientUnknown,
+  spliceableEntries,
+} from "../../cs-runtime/index.js";
 import { buildSplice } from "./buildSplice.js";
 import type { AstNode } from "./nodes/AstNode.js";
 import { RuntimeObject } from "./nodes/RuntimeObject.js";
 
-const nodeByInstance = new WeakMap<Client<unknown>, RuntimeObject>();
+const nodeByInstance = new WeakMap<Client<ClientUnknown>, RuntimeObject>();
 
-export function buildClassAsObject(value: Client<unknown>): AstNode {
+export function buildClassAsObject(value: Client<ClientUnknown>): AstNode {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;

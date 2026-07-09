@@ -1,5 +1,6 @@
 import {
   type Client,
+  type ClientUnknown,
   isClient,
   isClientScript,
 } from "../../cs-runtime/index.js";
@@ -8,7 +9,7 @@ import { buildClientScript } from "./buildClientScript.js";
 import { buildSplice } from "./buildSplice.js";
 import type { AstNode } from "./nodes/AstNode.js";
 
-export function buildAst(client: Client<unknown>): AstNode {
+export function buildAst(client: Client<ClientUnknown>): AstNode {
   if (isClientScript(client)) {
     return buildClientScript(client);
   }

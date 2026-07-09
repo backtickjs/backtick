@@ -1,6 +1,6 @@
 // Type-level assertions for `Lower` and the explicit `AsObject` marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
-import type { Client, AsObject, Lower } from "@backtickjs/core/cs-runtime";
+import type { AsObject, Client, Lower } from "@backtickjs/core/cs-runtime";
 
 declare function lower<T>(value: T): Lower<T>;
 declare const clientNumber: Client<number>;

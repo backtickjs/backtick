@@ -2,7 +2,7 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { expect, test } from "bun:test";
 import { bundle } from "@backtickjs/core";
-import type { Client } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientUnknown } from "@backtickjs/core/cs-runtime";
 
 // End-to-end snapshot tests, mirroring the compiler fixtures: each `*.ts`
 // fixture exports a client script (compiled at import time by the bun plugin),
@@ -26,7 +26,7 @@ for (const file of fixtures) {
   test(file, async () => {
     const base = file.slice(0, -extname(file).length);
     const { default: script } = (await import(join(fixturesDir, file))) as {
-      default: Client<unknown>;
+      default: Client<ClientUnknown>;
     };
     matchFileSnapshot(bundle(script), join(fixturesDir, `${base}.bundle`));
   });
