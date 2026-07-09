@@ -2,5 +2,9 @@
   "functions": {
     "#f0": "() => ({list: [1, \"two\", true, null], obj: ({k: 3})})"
   },
-  "root": "#f0()"
+  "trees": {},
+  "root": {
+    "$call": "#f0",
+    "args": []
+  }
 }

@@ -1,12 +1,44 @@
 import type { Bundle } from "../bundle/Bundle.js";
 import type { Argument } from "../bundle/nodes/Argument.js";
+import { BundledElement } from "../bundle/nodes/BundledElement.js";
+import type { BundledTree } from "../bundle/nodes/BundledTree.js";
 import { ScriptRef } from "../bundle/nodes/ScriptRef.js";
+import { TreeRef } from "../bundle/nodes/TreeRef.js";
 import {
   serializeArray,
   serializeObject,
   serializePrimitive,
 } from "./literals.js";
 import { type RenderSplice, serializeScript } from "./serializeScript.js";
+
+// A JSON expression: what a tree entry and the bundle root are made of. Plain
+// JSON carries itself; composition uses the tagged forms listed on
+// `serializeBundle`.
+export type JsonExpr =
+  | null
+  | boolean
+  | number
+  | string
+  | JsonExpr[]
+  | { [key: string]: JsonExpr };
+
+// The keys that tag a JSON expression's non-literal forms. A plain data object
+// using one of them would be indistinguishable from a tag to the loader, so
+// serialization rejects it.
+const RESERVED_KEYS = new Set(["$slot", "$call", "$thunk", "$global"]);
+
+// Whether a plain object would parse as an element node: exactly the element
+// keys, with a string `type`.
+function isElementShaped(value: { [key: string]: Argument }): boolean {
+  const keys = Object.keys(value);
+  return (
+    keys.length === 3 &&
+    "type" in value &&
+    "key" in value &&
+    "props" in value &&
+    typeof value.type === "string"
+  );
+}
 
 // Recovers the source name from a binding key `<name>$<salt>$<n>` by dropping
 // the salt/counter suffix the compiler appends for global uniqueness. A free
@@ -15,8 +47,34 @@ function sourceName(key: string): string {
   return key.replace(/\$[0-9a-z]+\$\d+$/, "");
 }
 
-// Serializes a bundle to a JSON envelope `{ functions, root }`. `functions`
-// maps each label (`#fi`) to its source as an arrow `(params) => body`.
+// A capture key without the compiler's uniqueness suffix is a free host
+// reference (e.g. `console`): not a binding of any scope, it resolves on the
+// global object wherever it is used.
+function isHostRef(key: string): boolean {
+  return sourceName(key) === key;
+}
+
+// Serializes a bundle to a JSON envelope `{ functions, trees, root }`.
+// `functions` maps each label (`#fi`) to its source as an arrow
+// `(params) => body`; `trees` maps each label (`#ti`) to a JSON value
+// describing a JSX tree; `root` is a JSON expression naming the entrypoint.
+// Computation ships as source, composition as data: a tree (and the root) is
+// plain JSON plus the tagged forms
+//
+//   {"$slot": n}                     the enclosing tree's n-th parameter
+//   {"$global": name}                a free host reference, resolved globally
+//   {"$call": label, "args": [...]}  apply a `functions` or `trees` entry
+//   {"$thunk": expr}                 a splice argument, evaluated lazily
+//   {type, key, props}               a JSX element node
+//
+// so a tree is parseable and inspectable without evaluating any source.
+//
+// A tree entry is an implicit function of its slots: instantiating it supplies
+// one value per slot, exactly as calling a `functions` entry supplies its
+// captures. The slot signature is derived, not stored (see `treeSlots`). A
+// reference to a tree from source position renders as a call `#ti(...)`
+// passing those captures by name; from JSON position it is a `$call` whose
+// arguments are `$slot`/`$global` expressions of the enclosing entry.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -77,9 +135,12 @@ export function serializeBundle(bundle: Bundle): string {
 
   // Every reference reaching each entry, grouped by target. Walking from the
   // root's argument tree reaches the whole table, since each nested script is
-  // lowered to a reference nested in some entry's splice arguments.
+  // lowered to a reference nested in some entry's splice arguments or in a
+  // tree entry's props. The tree set is shared across the walk so each tree
+  // entry's contents are collected once.
   const refsByTarget = new Map<number, ScriptRef[]>();
   const seenRefs = new Set<ScriptRef>();
+  const seenTrees = new Set<number>();
   const collectRefs = (ref: ScriptRef): void => {
     const list = refsByTarget.get(ref.target);
     if (list) {
@@ -91,11 +152,11 @@ export function serializeBundle(bundle: Bundle): string {
       return; // a shared reference (a diamond arm) is descended into only once
     }
     seenRefs.add(ref);
-    for (const child of nestedRefs(ref.args)) {
+    for (const child of nestedRefs(ref.args, bundle.trees, seenTrees)) {
       collectRefs(child);
     }
   };
-  for (const ref of nestedRefs([bundle.root])) {
+  for (const ref of nestedRefs([bundle.root], bundle.trees, seenTrees)) {
     collectRefs(ref);
   }
 
@@ -164,7 +225,8 @@ export function serializeBundle(bundle: Bundle): string {
   // The captures that the rendered form of a splice argument refers to in the
   // enclosing scope: whatever its target still needs, plus — when the target is
   // polymorphic — the captures of the thunks passed for its splices, since those
-  // thunks are written inline at this call site.
+  // thunks are written inline at this call site. A tree reference needs its
+  // slot values; an inline element whatever its props need.
   const freeCaps = (value: Argument): string[] => {
     if (value instanceof ScriptRef) {
       const keys = [...need(value.target)];
@@ -175,6 +237,12 @@ export function serializeBundle(bundle: Bundle): string {
       }
       return keys;
     }
+    if (value instanceof TreeRef) {
+      return treeSlots(value.target);
+    }
+    if (value instanceof BundledElement) {
+      return Object.values(value.props).flatMap(freeCaps);
+    }
     if (Array.isArray(value)) {
       return value.flatMap(freeCaps);
     }
@@ -182,6 +250,33 @@ export function serializeBundle(bundle: Bundle): string {
       return Object.values(value).flatMap(freeCaps);
     }
     return [];
+  };
+
+  // The slot signature of a tree entry: the capture keys its wiring needs from
+  // whichever scope instantiates it, in first-need order. These are the
+  // entry's implicit parameters — a reference to the tree passes one value per
+  // key, exactly as captures thread between functions. Free host references
+  // are excluded: inside tree JSON they resolve as `$global` leaves instead of
+  // threading through the instance. Memoized; no cycle guard is needed because
+  // the element graph is acyclic (children exist before their parent).
+  const treeSlotsCache = new Map<number, string[]>();
+  const treeSlots = (target: number): string[] => {
+    const cached = treeSlotsCache.get(target);
+    if (cached) {
+      return cached;
+    }
+    const order: string[] = [];
+    const seen = new Set<string>();
+    for (const value of Object.values(bundle.trees[target].element.props)) {
+      for (const key of freeCaps(value)) {
+        if (!isHostRef(key) && !seen.has(key)) {
+          seen.add(key);
+          order.push(key);
+        }
+      }
+    }
+    treeSlotsCache.set(target, order);
+    return order;
   };
 
   const bodies = new Map<number, string>();
@@ -229,12 +324,23 @@ export function serializeBundle(bundle: Bundle): string {
   };
 
   // Renders a bundle argument in value position — as the value it evaluates to.
-  // A script reference becomes a call `#ftarget(...)`; every other value its
+  // A script reference becomes a call `#ftarget(...)`, a tree reference a call
+  // `#ttarget(...)` passing the tree's slot captures; every other value its
   // literal form.
   const renderValue = (value: Argument): string => {
     if (value instanceof ScriptRef) {
       materialize(value.target);
       return `#f${value.target}(${callArgs(value).join(", ")})`;
+    }
+    if (value instanceof TreeRef) {
+      materializeTree(value.target);
+      const args = treeSlots(value.target).map(displayName);
+      return `#t${value.target}(${args.join(", ")})`;
+    }
+    if (value instanceof BundledElement) {
+      // The builder inlines an element only inside a tree entry, which renders
+      // through `renderExpr`; value position always sees a `TreeRef`.
+      throw new Error("An inline element can't appear outside a tree entry.");
     }
     if (
       value === null ||
@@ -266,25 +372,159 @@ export function serializeBundle(bundle: Bundle): string {
         ? `#f${value.target}`
         : `() => #f${value.target}(${args.join(", ")})`;
     }
+    if (value instanceof TreeRef) {
+      materializeTree(value.target);
+      const args = treeSlots(value.target).map(displayName);
+      return args.length === 0
+        ? `#t${value.target}`
+        : `() => #t${value.target}(${args.join(", ")})`;
+    }
     return `() => ${renderValue(value)}`;
   };
 
-  const root = renderValue(bundle.root);
+  const treeJsons = new Map<number, JsonExpr>();
+
+  // Materializes a tree entry into `treeJsons` the first time it is reached:
+  // its element rendered as a JSON expression against the entry's own slot
+  // indices, under an `element` wrapper so instance-scoped additions
+  // (per-instance state declarations) can land as sibling fields.
+  const materializeTree = (target: number): void => {
+    if (treeJsons.has(target)) {
+      return;
+    }
+    const keys = treeSlots(target);
+    const slots = new Map(keys.map((key, index) => [key, index] as const));
+    treeJsons.set(target, {
+      element: renderExpr(bundle.trees[target].element, slots),
+    });
+  };
+
+  // Renders a capture in JSON position: a free host reference resolves
+  // globally; anything else must be a slot of the enclosing tree. At the
+  // bundle root there is no enclosing instance, so a suffixed capture reaching
+  // it can't be threaded from anywhere.
+  const capExpr = (key: string, slots: Map<string, number>): JsonExpr => {
+    if (isHostRef(key)) {
+      return { $global: key };
+    }
+    const index = slots.get(key);
+    if (index === undefined) {
+      throw new Error(
+        `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
+          "this reference to supply it.",
+      );
+    }
+    return { $slot: index };
+  };
+
+  // The arguments of a `$call` to a function entry, mirroring `callArgs`: for
+  // a polymorphic target, one `$thunk` per splice ahead of its captures.
+  const exprCallArgs = (
+    ref: ScriptRef,
+    slots: Map<string, number>,
+  ): JsonExpr[] => {
+    const parts: JsonExpr[] = [];
+    if (polymorphic.has(ref.target)) {
+      for (const arg of ref.args) {
+        parts.push({ $thunk: renderExpr(arg, slots) });
+      }
+    }
+    for (const key of need(ref.target)) {
+      parts.push(capExpr(key, slots));
+    }
+    return parts;
+  };
+
+  // Renders a bundle argument in JSON position — the form used inside tree
+  // entries and for the bundle root, where composition is data rather than
+  // source. The mirror of `renderValue`.
+  const renderExpr = (
+    value: Argument,
+    slots: Map<string, number>,
+  ): JsonExpr => {
+    if (value instanceof ScriptRef) {
+      materialize(value.target);
+      return { $call: `#f${value.target}`, args: exprCallArgs(value, slots) };
+    }
+    if (value instanceof TreeRef) {
+      materializeTree(value.target);
+      return {
+        $call: `#t${value.target}`,
+        args: treeSlots(value.target).map((key) => capExpr(key, slots)),
+      };
+    }
+    if (value instanceof BundledElement) {
+      const props: { [key: string]: JsonExpr } = {};
+      for (const [key, entry] of Object.entries(value.props)) {
+        props[key] = renderExpr(entry, slots);
+      }
+      return { type: value.type, key: value.key, props };
+    }
+    if (
+      value === null ||
+      typeof value === "boolean" ||
+      typeof value === "number" ||
+      typeof value === "string"
+    ) {
+      return value;
+    }
+    if (Array.isArray(value)) {
+      return value.map((entry) => renderExpr(entry, slots));
+    }
+    // A plain data object passes through, but not one whose shape the loader
+    // would mistake for a tagged form or an element node.
+    const reserved = Object.keys(value).find((key) => RESERVED_KEYS.has(key));
+    if (reserved !== undefined) {
+      throw new Error(
+        `Can't bundle this object: the \`${reserved}\` key is reserved for ` +
+          "the bundle's JSON expressions.",
+      );
+    }
+    if (isElementShaped(value)) {
+      throw new Error(
+        "Can't bundle this object: a plain object with exactly `type`, " +
+          "`key`, and `props` keys would read as a JSX element node.",
+      );
+    }
+    const entries: { [key: string]: JsonExpr } = {};
+    for (const [key, entry] of Object.entries(value)) {
+      entries[key] = renderExpr(entry, slots);
+    }
+    return entries;
+  };
+
+  const root = renderExpr(bundle.root, new Map());
   const functions: Record<string, string> = {};
   for (const index of [...bodies.keys()].sort((a, b) => a - b)) {
     functions[`#f${index}`] = bodies.get(index) ?? "";
   }
-  return JSON.stringify({ functions, root }, null, 2);
+  const trees: Record<string, JsonExpr> = {};
+  for (const index of [...treeJsons.keys()].sort((a, b) => a - b)) {
+    trees[`#t${index}`] = treeJsons.get(index) ?? null;
+  }
+  return JSON.stringify({ functions, trees, root }, null, 2);
 }
 
-// Collects every script reference reachable inside a list of splice arguments,
-// descending into array and object values (a nested script may be spliced
-// anywhere).
-function nestedRefs(values: readonly Argument[]): ScriptRef[] {
+// Collects every script reference reachable inside a list of arguments,
+// descending into array and object values, inline elements, and — through the
+// tree table — tree references, each entry once per `seenTrees` set (a nested
+// script may be spliced anywhere).
+function nestedRefs(
+  values: readonly Argument[],
+  trees: readonly BundledTree[],
+  seenTrees: Set<number>,
+): ScriptRef[] {
   const refs: ScriptRef[] = [];
   const visit = (value: Argument): void => {
     if (value instanceof ScriptRef) {
       refs.push(value);
+    } else if (value instanceof TreeRef) {
+      if (!seenTrees.has(value.target)) {
+        seenTrees.add(value.target);
+        visit(trees[value.target].element);
+      }
+    } else if (value instanceof BundledElement) {
+      Object.values(value.props).forEach(visit);
     } else if (Array.isArray(value)) {
       value.forEach(visit);
     } else if (value !== null && typeof value === "object") {

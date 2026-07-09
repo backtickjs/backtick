@@ -4,5 +4,9 @@
     "#f1": "(total) => { let total2 = 0; total2 = total2 + #f2(total); total2 = total2 + 100; return total2; }",
     "#f2": "(total) => total"
   },
-  "root": "#f0()"
+  "trees": {},
+  "root": {
+    "$call": "#f0",
+    "args": []
+  }
 }

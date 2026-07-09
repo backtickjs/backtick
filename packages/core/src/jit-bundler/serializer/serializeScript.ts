@@ -1,6 +1,7 @@
 import type { AstNode } from "../ast/nodes/AstNode.js";
 import { RuntimeArray } from "../ast/nodes/RuntimeArray.js";
 import { RuntimeBoolean } from "../ast/nodes/RuntimeBoolean.js";
+import { RuntimeJSXElement } from "../ast/nodes/RuntimeJSXElement.js";
 import { RuntimeNull } from "../ast/nodes/RuntimeNull.js";
 import { RuntimeNumber } from "../ast/nodes/RuntimeNumber.js";
 import { RuntimeObject } from "../ast/nodes/RuntimeObject.js";
@@ -79,6 +80,11 @@ export function serializeScript(
   }
   if (node instanceof SourceIdentifier) {
     return mangle(node.bindingKey);
+  }
+  if (node instanceof RuntimeJSXElement) {
+    // An element reaches the bundle as a splice value and lowers into the tree
+    // table (see `buildBundle`); a parsed script body never contains one.
+    throw new Error("A JSX element can't appear in a script body.");
   }
   if (node instanceof SourceIf) {
     const head = `if (${s(node.condition)}) ${s(node.consequent)}`;

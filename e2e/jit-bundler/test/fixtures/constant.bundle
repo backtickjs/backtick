@@ -2,5 +2,9 @@
   "functions": {
     "#f0": "() => 1"
   },
-  "root": "#f0()"
+  "trees": {},
+  "root": {
+    "$call": "#f0",
+    "args": []
+  }
 }

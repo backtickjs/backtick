@@ -5,5 +5,9 @@
     "#f2": "(base) => { const base3 = 2; return base3 * #f3(base); }",
     "#f3": "(base) => base"
   },
-  "root": "#f0()"
+  "trees": {},
+  "root": {
+    "$call": "#f0",
+    "args": []
+  }
 }
