@@ -1,6 +1,6 @@
 {
   "functions": {
-    "#f0": "() => ({list: [1, \"two\", true, null], obj: { k: 3 }})"
+    "#f0": "() => ({list: [1, \"two\", true, null], obj: ({k: 3})})"
   },
   "root": "#f0()"
 }
