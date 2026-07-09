@@ -17,7 +17,7 @@ export type Spliceable =
   | Spliceable[]
   | { [key: string]: Spliceable };
 
-export type ClientObject<T> = {
+export type AsObject<T> = {
   [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
     ? K
     : never]: Lower<T[K]>;

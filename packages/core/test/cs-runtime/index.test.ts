@@ -40,7 +40,7 @@ test("isSpliceable rejects host-only values, including nested ones", () => {
   assert.equal(isSpliceable({ a: { b: undefined } }), false);
 });
 
-test("clientObjectEntries keeps spliceable members, own or inherited", () => {
+test("spliceableEntries keeps spliceable members, own or inherited", () => {
   class Base {
     "@backtickjs" = true;
 

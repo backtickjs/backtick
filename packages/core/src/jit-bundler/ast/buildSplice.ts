@@ -42,7 +42,7 @@ export function buildSplice(value: Spliceable): AstNode {
   if (prototype !== Object.prototype && prototype !== null) {
     const name = value.constructor?.name ?? "an unknown class";
     throw new Error(
-      `Can't splice this \`${name}\` instance: only plain objects and classes` +
+      `Can't splice this \`${name}\` instance: only plain objects and classes ` +
         'declaring the "@backtickjs" marker can be spliced into a client script.',
     );
   }
