@@ -3,7 +3,7 @@ import {
   type ClientUnknown,
   spliceableEntries,
 } from "../../cs-runtime/index.js";
-import { buildSplice } from "./buildSplice.js";
+import { buildAst } from "./buildAst.js";
 import type { AstNode } from "./nodes/AstNode.js";
 import { RuntimeObject } from "./nodes/RuntimeObject.js";
 
@@ -19,7 +19,7 @@ export function buildClassAsObject(
 
   const entries: { [key: string]: AstNode } = {};
   for (const [key, entry] of spliceableEntries(value)) {
-    entries[key] = buildSplice(entry);
+    entries[key] = buildAst(entry);
   }
 
   const node = new RuntimeObject(entries);

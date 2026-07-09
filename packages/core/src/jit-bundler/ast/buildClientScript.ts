@@ -5,7 +5,7 @@ import type {
 } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
-import { buildSplice } from "./buildSplice.js";
+import { buildAst } from "./buildAst.js";
 import type { AstNode } from "./nodes/AstNode.js";
 import { SourceClientScript } from "./nodes/SourceClientScript.js";
 
@@ -43,7 +43,7 @@ export function buildClientScript(
   // node cannot recurse back into this same object.
   const node = new SourceClientScript(
     client.loc,
-    client.metadata.splices.map(buildSplice),
+    client.metadata.splices.map(buildAst),
     client.metadata.captures,
     client.metadata.declarations,
     expression,
