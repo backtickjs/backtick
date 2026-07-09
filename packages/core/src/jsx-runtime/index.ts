@@ -1,11 +1,16 @@
-import type { ClientElement, Element, Prop } from "../cs-runtime/index.js";
+import type {
+  Client,
+  JSXElement,
+  Prop,
+  UIElement,
+} from "../cs-runtime/index.js";
 
 export declare namespace JSX {
-  export type Element = ClientElement;
+  export type Element = Client<UIElement>;
   export interface IntrinsicElements {
     flexbox: {
       direction?: Prop<"row" | "column">;
-      children?: ClientElement | readonly ClientElement[];
+      children?: Element | readonly Element[];
     };
   }
   export interface ElementChildrenAttribute {
@@ -20,12 +25,12 @@ export function jsx(
   type: string,
   props: { [key: string]: unknown },
   key?: unknown,
-): ClientElement {
+): JSXElement {
   if (key !== undefined && typeof key !== "string" && typeof key !== "number") {
     throw new Error("Key must be a string or a number");
   }
   return {
-    "@backtickjs": true as unknown as Element,
+    "@backtickjs": true as unknown as UIElement,
     type,
     key: key ?? null,
     props,

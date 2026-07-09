@@ -23,10 +23,10 @@ export type Prop<T extends ClientUnknown> = T | Client<T>;
 
 // Client scripts can pass elements around but not look inside one.
 // biome-ignore lint/complexity/noBannedTypes: `{}` is the point
-export type Element = {};
+export type UIElement = {};
 
-export interface ClientElement extends Client<Element> {
-  "@backtickjs": Element;
+export interface JSXElement extends Client<UIElement> {
+  "@backtickjs": UIElement;
   readonly type: string;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
@@ -150,7 +150,7 @@ export function isClientScript(
   );
 }
 
-export function isClientElement(value: unknown): value is ClientElement {
+export function isJSXElement(value: unknown): value is JSXElement {
   return (
     isClient(value) && "type" in value && "key" in value && "props" in value
   );
