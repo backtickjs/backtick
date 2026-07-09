@@ -25,7 +25,7 @@ const nodeByClient = new WeakMap<Client<ClientUnknown>, SourceClientScript>();
 
 export function buildClientScript(
   client: ClientScript<ClientUnknown>,
-): AstNode {
+): SourceClientScript {
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;

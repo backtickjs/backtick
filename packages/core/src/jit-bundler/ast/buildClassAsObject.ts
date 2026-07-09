@@ -9,7 +9,9 @@ import { RuntimeObject } from "./nodes/RuntimeObject.js";
 
 const nodeByInstance = new WeakMap<Client<ClientUnknown>, RuntimeObject>();
 
-export function buildClassAsObject(value: Client<ClientUnknown>): AstNode {
+export function buildClassAsObject(
+  value: Client<ClientUnknown>,
+): RuntimeObject {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;

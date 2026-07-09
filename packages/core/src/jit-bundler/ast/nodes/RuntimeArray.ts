@@ -1,9 +1,9 @@
-import type { AstNode } from "./AstNode.js";
+import type { AstRoot } from "./AstNode.js";
 
 export class RuntimeArray {
-  readonly elements: readonly AstNode[];
+  readonly elements: readonly AstRoot[];
 
-  constructor(elements: AstNode[]) {
+  constructor(elements: AstRoot[]) {
     this.elements = elements;
   }
 }

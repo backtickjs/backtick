@@ -57,3 +57,5 @@ export type RuntimeNode =
   | RuntimeString;
 
 export type AstNode = SourceNode | RuntimeNode;
+
+export type AstRoot = SourceClientScript | RuntimeNode;

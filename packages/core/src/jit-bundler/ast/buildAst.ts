@@ -6,15 +6,15 @@ import {
 } from "../../cs-runtime/index.js";
 import { buildClassAsObject } from "./buildClassAsObject.js";
 import { buildClientScript } from "./buildClientScript.js";
-import { buildSplice } from "./buildSplice.js";
-import type { AstNode } from "./nodes/AstNode.js";
+import type { AstRoot } from "./nodes/AstNode.js";
 
-export function buildAst(client: Client<ClientUnknown>): AstNode {
+export function buildAst(client: Client<ClientUnknown>): AstRoot {
   if (isClientScript(client)) {
     return buildClientScript(client);
   }
   if (isClient(client)) {
     return buildClassAsObject(client);
   }
-  return buildSplice(client);
+  const unhandled: never = client;
+  throw new Error(`Cannot build AST for: ${JSON.stringify(unhandled)}`);
 }
