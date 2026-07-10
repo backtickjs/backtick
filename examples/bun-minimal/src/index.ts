@@ -7,4 +7,4 @@ const two = cs`2`;
 const sum = cs`${one} + ${two}`;
 
 // Bundle the composed client script into its portable payload and print it.
-console.log(bundle(sum));
+console.log(JSON.stringify(bundle(sum), null, 2));

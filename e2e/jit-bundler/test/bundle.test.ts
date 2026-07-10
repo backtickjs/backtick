@@ -28,6 +28,9 @@ for (const file of fixtures) {
     const { default: script } = (await import(join(fixturesDir, file))) as {
       default: Client<ClientUnknown>;
     };
-    matchFileSnapshot(bundle(script), join(fixturesDir, `${base}.bundle`));
+    matchFileSnapshot(
+      JSON.stringify(bundle(script), null, 2),
+      join(fixturesDir, `${base}.bundle`),
+    );
   });
 }

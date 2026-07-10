@@ -268,7 +268,7 @@ function generate(sizes) {
   w(`}\`;`);
   w(``);
   w(`const t0 = performance.now();`);
-  w(`const payload = bundle(root);`);
+  w(`const payload = JSON.stringify(bundle(root), null, 2);`);
   w(`const t1 = performance.now();`);
   w(`console.log(payload);`);
   w(`console.error(JSON.stringify({ bundleMs: +(t1 - t0).toFixed(1) }));`);

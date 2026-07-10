@@ -30,9 +30,6 @@ test("a string splice inlined into a body is escaped as JS source", () => {
     { splices: [value], captures: [], declarations: [] },
     (v) => v.splice(loc, 0),
   );
-  const envelope = JSON.parse(bundle(client));
-  assert.strictEqual(
-    envelope.functions["#f0"],
-    `() => ${JSON.stringify(value)}`,
-  );
+  const { functions } = bundle(client);
+  assert.strictEqual(functions["#f0"], `() => ${JSON.stringify(value)}`);
 });
