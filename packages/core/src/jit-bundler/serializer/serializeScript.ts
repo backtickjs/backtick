@@ -34,7 +34,7 @@ import {
 export type RenderSplice = (index: number) => string;
 
 // Maps a binding key to the name it is printed under (see `displayName` in
-// `serializeBundle`).
+// `buildEnvelope`).
 export type Mangle = (key: string) => string;
 
 // Renders a client script's AST body to a single-line JavaScript expression,

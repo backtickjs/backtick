@@ -1,7 +1,10 @@
+// A primitive as JavaScript source. A string goes through `JSON.stringify`,
+// which escapes quotes, backslashes, and control characters — a JSON string
+// literal is a valid JS string literal.
 export function serializePrimitive(
   value: null | boolean | number | string,
 ): string {
-  return typeof value === "string" ? `"${value}"` : String(value);
+  return typeof value === "string" ? JSON.stringify(value) : String(value);
 }
 
 export function serializeArray<T>(

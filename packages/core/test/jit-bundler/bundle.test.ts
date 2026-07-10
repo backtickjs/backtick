@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { cs } from "../../dist/cs-runtime/index.js";
 import { bundle } from "../../dist/jit-bundler/index.js";
 import { jsx } from "../../dist/jsx-runtime/index.js";
 
@@ -14,4 +15,24 @@ test("a plain object prop can't use a reserved key", () => {
 test("a plain object prop can't look like an element node", () => {
   const element = jsx("flexbox", { data: { type: "x", key: null, props: {} } });
   assert.throws(() => bundle(element), /element node/);
+});
+
+test("a string splice inlined into a body is escaped as JS source", () => {
+  const value = 'say "hi"\n\\done';
+  const loc = {
+    path: "test.ts",
+    start: { line: 1, character: 1 },
+    end: { line: 1, character: 9 },
+  };
+  const client = cs.create(
+    loc,
+    "hash",
+    { splices: [value], captures: [], declarations: [] },
+    (v) => v.splice(loc, 0),
+  );
+  const envelope = JSON.parse(bundle(client));
+  assert.strictEqual(
+    envelope.functions["#f0"],
+    `() => ${JSON.stringify(value)}`,
+  );
 });

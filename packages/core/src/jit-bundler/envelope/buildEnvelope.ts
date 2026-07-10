@@ -8,23 +8,17 @@ import {
   serializeArray,
   serializeObject,
   serializePrimitive,
-} from "./literals.js";
-import { type RenderSplice, serializeScript } from "./serializeScript.js";
-
-// A JSON expression: what a tree entry and the bundle root are made of. Plain
-// JSON carries itself; composition uses the tagged forms listed on
-// `serializeBundle`.
-export type JsonExpr =
-  | null
-  | boolean
-  | number
-  | string
-  | JsonExpr[]
-  | { [key: string]: JsonExpr };
+} from "../serializer/literals.js";
+import {
+  type RenderSplice,
+  serializeScript,
+} from "../serializer/serializeScript.js";
+import type { Envelope } from "./nodes/Envelope.js";
+import type { JsonExpr } from "./nodes/JsonExpr.js";
 
 // The keys that tag a JSON expression's non-literal forms. A plain data object
 // using one of them would be indistinguishable from a tag to the loader, so
-// serialization rejects it.
+// envelope construction rejects it.
 const RESERVED_KEYS = new Set(["#slot", "#call", "#thunk", "#global"]);
 
 // Whether a plain object would parse as an element node: exactly the element
@@ -54,7 +48,7 @@ function isHostRef(key: string): boolean {
   return sourceName(key) === key;
 }
 
-// Serializes a bundle to a JSON envelope `{ functions, trees, root }`.
+// Builds a bundle's JSON envelope `{ functions, trees, root }` as plain data.
 // `functions` maps each label (`#fi`) to its source as an arrow
 // `(params) => body`; `trees` maps each label (`#ti`) to a JSON value
 // describing a JSX tree; `root` is a JSON expression naming the entrypoint.
@@ -98,7 +92,7 @@ function isHostRef(key: string): boolean {
 //     `$i`: the body fills the hole with `$i()` and every reference passes that
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
-export function serializeBundle(bundle: Bundle): string {
+export function buildEnvelope(bundle: Bundle): Envelope {
   const fns = bundle.scripts;
 
   // Maps each binding key to a readable display name — its source name with the
@@ -436,7 +430,7 @@ export function serializeBundle(bundle: Bundle): string {
   };
 
   // Renders a bundle argument in JSON position — the form used inside tree
-  // entries and for the bundle root, where composition is data rather than
+  // entries and for the envelope root, where composition is data rather than
   // source. The mirror of `renderValue`.
   const renderExpr = (
     value: BundledArgument,
@@ -505,7 +499,7 @@ export function serializeBundle(bundle: Bundle): string {
   for (const index of [...treeJsons.keys()].sort((a, b) => a - b)) {
     trees[`#t${index}`] = treeJsons.get(index) ?? null;
   }
-  return JSON.stringify({ functions, trees, root }, null, 2);
+  return { functions, trees, root };
 }
 
 // Collects every script reference reachable inside a list of arguments,
