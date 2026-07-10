@@ -13,8 +13,16 @@ import {
   type RenderSplice,
   serializeScript,
 } from "../serializer/serializeScript.js";
-import type { Bundle } from "./nodes/Bundle.js";
-import type { JsonExpr } from "./nodes/JsonExpr.js";
+import type {
+  Bundle,
+  BundleElement,
+  BundleExpr,
+  BundleGlobal,
+  BundleSlot,
+  BundleTree,
+  FunctionLabel,
+  TreeLabel,
+} from "./nodes/Bundle.js";
 
 // The keys that tag a JSON expression's non-literal forms. A plain data object
 // using one of them would be indistinguishable from a tag to the loader, so
@@ -48,20 +56,10 @@ function isHostRef(key: string): boolean {
   return sourceName(key) === key;
 }
 
-// Builds the bundle `{ functions, trees, root }` as plain data.
-// `functions` maps each label (`#fi`) to its source as an arrow
-// `(params) => body`; `trees` maps each label (`#ti`) to a JSON value
-// describing a JSX tree; `root` is a JSON expression naming the entrypoint.
-// Computation ships as source, composition as data: a tree (and the root) is
-// plain JSON plus the tagged forms
-//
-//   {"#slot": n}                     the enclosing tree's n-th parameter
-//   {"#global": name}                a free host reference, resolved globally
-//   {"#call": label, "args": [...]}  apply a `functions` or `trees` entry
-//   {"#thunk": expr}                 a splice argument, evaluated lazily
-//   {type, key, props}               a JSX element node
-//
-// so a tree is parseable and inspectable without evaluating any source.
+// Builds the bundle `{ functions, trees, root }` as plain data. The output
+// shapes — the tables, the tagged expression forms, and their evaluation
+// contract — are documented on the `Bundle` types; this file documents how
+// they are derived.
 //
 // A tree entry is an implicit function of its slots: instantiating it supplies
 // one value per slot, exactly as calling a `functions` entry supplies its
@@ -376,12 +374,11 @@ export function buildBundle(bundle: Ir): Bundle {
     return `() => ${renderValue(value)}`;
   };
 
-  const treeJsons = new Map<number, JsonExpr>();
+  const treeJsons = new Map<number, BundleTree>();
 
   // Materializes a tree entry into `treeJsons` the first time it is reached:
-  // its element rendered as a JSON expression against the entry's own slot
-  // indices, under an `element` wrapper so instance-scoped additions
-  // (per-instance state declarations) can land as sibling fields.
+  // its element rendered as a bundle expression against the entry's own slot
+  // indices.
   const materializeTree = (target: number): void => {
     if (treeJsons.has(target)) {
       return;
@@ -389,7 +386,7 @@ export function buildBundle(bundle: Ir): Bundle {
     const keys = treeSlots(target);
     const slots = new Map(keys.map((key, index) => [key, index] as const));
     treeJsons.set(target, {
-      element: renderExpr(bundle.trees[target].element, slots),
+      element: renderElement(bundle.trees[target].element, slots),
     });
   };
 
@@ -397,7 +394,10 @@ export function buildBundle(bundle: Ir): Bundle {
   // globally; anything else must be a slot of the enclosing tree. At the
   // bundle root there is no enclosing instance, so a suffixed capture reaching
   // it can't be threaded from anywhere.
-  const capExpr = (key: string, slots: Map<string, number>): JsonExpr => {
+  const capExpr = (
+    key: string,
+    slots: Map<string, number>,
+  ): BundleSlot | BundleGlobal => {
     if (isHostRef(key)) {
       return { "#global": key };
     }
@@ -416,8 +416,8 @@ export function buildBundle(bundle: Ir): Bundle {
   const exprCallArgs = (
     ref: IrScriptRef,
     slots: Map<string, number>,
-  ): JsonExpr[] => {
-    const parts: JsonExpr[] = [];
+  ): BundleExpr[] => {
+    const parts: BundleExpr[] = [];
     if (polymorphic.has(ref.target)) {
       for (const arg of ref.args) {
         parts.push({ "#thunk": renderExpr(arg, slots) });
@@ -429,13 +429,26 @@ export function buildBundle(bundle: Ir): Bundle {
     return parts;
   };
 
-  // Renders a bundle argument in JSON position — the form used inside tree
+  // Renders an inline element: static structure carried as data, each prop a
+  // bundle expression against the enclosing tree's slots.
+  const renderElement = (
+    element: IrElement,
+    slots: Map<string, number>,
+  ): BundleElement => {
+    const props: { [key: string]: BundleExpr } = {};
+    for (const [key, entry] of Object.entries(element.props)) {
+      props[key] = renderExpr(entry, slots);
+    }
+    return { type: element.type, key: element.key, props };
+  };
+
+  // Renders an IR argument in expression position — the form used inside tree
   // entries and for the bundle root, where composition is data rather than
   // source. The mirror of `renderValue`.
   const renderExpr = (
     value: IrArgument,
     slots: Map<string, number>,
-  ): JsonExpr => {
+  ): BundleExpr => {
     if (value instanceof IrScriptRef) {
       materialize(value.target);
       return {
@@ -451,11 +464,7 @@ export function buildBundle(bundle: Ir): Bundle {
       };
     }
     if (value instanceof IrElement) {
-      const props: { [key: string]: JsonExpr } = {};
-      for (const [key, entry] of Object.entries(value.props)) {
-        props[key] = renderExpr(entry, slots);
-      }
-      return { type: value.type, key: value.key, props };
+      return renderElement(value, slots);
     }
     if (
       value === null ||
@@ -483,7 +492,7 @@ export function buildBundle(bundle: Ir): Bundle {
           "`key`, and `props` keys would read as a JSX element node.",
       );
     }
-    const entries: { [key: string]: JsonExpr } = {};
+    const entries: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(value)) {
       entries[key] = renderExpr(entry, slots);
     }
@@ -491,13 +500,13 @@ export function buildBundle(bundle: Ir): Bundle {
   };
 
   const root = renderExpr(bundle.root, new Map());
-  const functions: Record<string, string> = {};
-  for (const index of [...bodies.keys()].sort((a, b) => a - b)) {
-    functions[`#f${index}`] = bodies.get(index) ?? "";
+  const functions: Record<FunctionLabel, string> = {};
+  for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
+    functions[`#f${index}`] = body;
   }
-  const trees: Record<string, JsonExpr> = {};
-  for (const index of [...treeJsons.keys()].sort((a, b) => a - b)) {
-    trees[`#t${index}`] = treeJsons.get(index) ?? null;
+  const trees: Record<TreeLabel, BundleTree> = {};
+  for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
+    trees[`#t${index}`] = tree;
   }
   return { functions, trees, root };
 }
