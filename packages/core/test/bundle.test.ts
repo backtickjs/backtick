@@ -9,8 +9,6 @@ import {
 import { basename, extname, join } from "node:path";
 import { describe, it, test } from "node:test";
 import { pathToFileURL } from "node:url";
-import ts from "typescript";
-import { transform } from "../dist/compiler/transform.js";
 import {
   type Client,
   type ClientUnknown,
@@ -21,6 +19,7 @@ import { jsx } from "../dist/jsx-runtime/index.js";
 import { evaluate } from "../dist/test-client/index.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderValue } from "./renderValue.ts";
+import { transpileFixture } from "./transpileFixture.ts";
 
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a
 // client — a script or a JSX tree — compiled here with the same transform the
@@ -39,14 +38,6 @@ const validDir = join(fixturesRoot, "valid");
 const bundleErrorDir = join(fixturesRoot, "bundle-error");
 const cacheDir = join(import.meta.dirname, "../.cache/jit-bundler");
 
-const COMPILER_OPTIONS: ts.CompilerOptions = {
-  target: ts.ScriptTarget.ESNext,
-  module: ts.ModuleKind.ESNext,
-  jsx: ts.JsxEmit.ReactJSX,
-  jsxImportSource: "@backtickjs/core",
-  sourceMap: false,
-};
-
 rmSync(cacheDir, { recursive: true, force: true });
 
 function listFixtures(dir: string): string[] {
@@ -64,11 +55,7 @@ async function importFixture(
   file: string,
 ): Promise<Client<ClientUnknown>> {
   const sourceText = readFileSync(join(dir, file), "utf8");
-  const { outputText } = ts.transpileModule(sourceText, {
-    fileName: file,
-    compilerOptions: COMPILER_OPTIONS,
-    transformers: { before: [transform(ts)] },
-  });
+  const outputText = transpileFixture(file, sourceText);
   const base = file.slice(0, -extname(file).length);
   const compiled = join(cacheDir, basename(dir), `${base}.js`);
   mkdirSync(join(cacheDir, basename(dir)), { recursive: true });

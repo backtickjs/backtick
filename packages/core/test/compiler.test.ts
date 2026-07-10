@@ -3,23 +3,19 @@ import { readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { transform } from "../dist/compiler/transform.js";
 import { virtualize } from "../dist/compiler/virtualize.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
+import { transpileFixture } from "./transpileFixture.ts";
 
 // The fixture corpus is shared with the jit-bundler suite: this suite
 // snapshots the compiler artifacts (diagnostics, virtual code, source map,
 // emitted JS), while `test/bundle.test.ts` snapshots the bundled payload of
-// the same sources.
+// the same sources. The `*.js` snapshot is emitted with the shared
+// `transpileFixture` options, so it is exactly the module the bundle suite
+// imports and executes.
 const fixturesRoot = join(import.meta.dirname, "fixtures");
-
-const COMPILER_OPTIONS: ts.CompilerOptions = {
-  target: ts.ScriptTarget.ESNext,
-  module: ts.ModuleKind.ESNext,
-  sourceMap: false,
-};
 
 const sourceExtensions = [".ts", ".tsx", ".jsx"];
 
@@ -70,11 +66,7 @@ describe("compile", () => {
           join(dir, `${base}.sourcemap`),
         );
         matchFileSnapshot(
-          ts.transpileModule(sourceText, {
-            fileName,
-            compilerOptions: COMPILER_OPTIONS,
-            transformers: { before: [transform(ts)] },
-          }).outputText,
+          transpileFixture(fileName, sourceText),
           join(dir, `${base}.js`),
         );
       });
