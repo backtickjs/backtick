@@ -1,35 +1,35 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "call",
+        "#kind": "call",
         "callee": {
-          "kind": "entry",
+          "#kind": "entry",
           "label": "#f1"
         },
         "args": []
       }
     },
     "#f1": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "binop",
+        "#kind": "binop",
         "operator": "+",
         "left": {
-          "kind": "call",
+          "#kind": "call",
           "callee": {
-            "kind": "entry",
+            "#kind": "entry",
             "label": "#f2"
           },
           "args": []
         },
         "right": {
-          "kind": "call",
+          "#kind": "call",
           "callee": {
-            "kind": "entry",
+            "#kind": "entry",
             "label": "#f3"
           },
           "args": []
@@ -37,25 +37,26 @@
       }
     },
     "#f2": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "value",
+        "#kind": "value",
         "value": 1
       }
     },
     "#f3": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "value",
+        "#kind": "value",
         "value": 2
       }
     }
   },
   "trees": {},
   "root": {
-    "#call": "#f0",
+    "#kind": "apply",
+    "label": "#f0",
     "args": []
   }
 }

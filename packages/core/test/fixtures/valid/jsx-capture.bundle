@@ -1,34 +1,34 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "arrow",
+        "#kind": "arrow",
         "params": [],
         "body": {
-          "kind": "block",
+          "#kind": "block",
           "statements": [
             {
-              "kind": "declaration",
+              "#kind": "declaration",
               "keyword": "const",
               "name": "x",
               "expression": {
-                "kind": "value",
+                "#kind": "value",
                 "value": 1
               }
             },
             {
-              "kind": "return",
+              "#kind": "return",
               "expression": {
-                "kind": "call",
+                "#kind": "call",
                 "callee": {
-                  "kind": "entry",
+                  "#kind": "entry",
                   "label": "#t0"
                 },
                 "args": [
                   {
-                    "kind": "identifier",
+                    "#kind": "identifier",
                     "name": "x"
                   }
                 ]
@@ -39,15 +39,15 @@
       }
     },
     "#f1": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [
         "x"
       ],
       "body": {
-        "kind": "arrow",
+        "#kind": "arrow",
         "params": [],
         "body": {
-          "kind": "identifier",
+          "#kind": "identifier",
           "name": "x"
         }
       }
@@ -56,14 +56,17 @@
   "trees": {
     "#t0": {
       "element": {
+        "#kind": "element",
         "type": "button",
         "key": null,
         "props": {
           "onClick": {
-            "#call": "#f1",
+            "#kind": "apply",
+            "label": "#f1",
             "args": [
               {
-                "#slot": 0
+                "#kind": "slot",
+                "index": 0
               }
             ]
           }
@@ -72,7 +75,8 @@
     }
   },
   "root": {
-    "#call": "#f0",
+    "#kind": "apply",
+    "label": "#f0",
     "args": []
   }
 }

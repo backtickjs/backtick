@@ -1,23 +1,23 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "object",
+        "#kind": "object",
         "entries": {
           "a": {
-            "kind": "call",
+            "#kind": "call",
             "callee": {
-              "kind": "entry",
+              "#kind": "entry",
               "label": "#f1"
             },
             "args": []
           },
           "b": {
-            "kind": "call",
+            "#kind": "call",
             "callee": {
-              "kind": "entry",
+              "#kind": "entry",
               "label": "#f1"
             },
             "args": []
@@ -26,17 +26,18 @@
       }
     },
     "#f1": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "value",
+        "#kind": "value",
         "value": 7
       }
     }
   },
   "trees": {},
   "root": {
-    "#call": "#f0",
+    "#kind": "apply",
+    "label": "#f0",
     "args": []
   }
 }

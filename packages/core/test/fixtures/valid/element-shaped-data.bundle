@@ -4,17 +4,13 @@
     "#t0": {
       "element": {
         "#kind": "element",
-        "type": "flexbox",
+        "type": "button",
         "key": null,
         "props": {
-          "direction": "row",
-          "children": {
-            "#kind": "element",
-            "type": "label",
-            "key": "a",
-            "props": {
-              "text": "hi"
-            }
+          "data": {
+            "type": "x",
+            "key": null,
+            "props": {}
           }
         }
       }

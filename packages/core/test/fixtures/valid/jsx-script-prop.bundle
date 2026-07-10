@@ -1,26 +1,26 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [
         "console"
       ],
       "body": {
-        "kind": "arrow",
+        "#kind": "arrow",
         "params": [],
         "body": {
-          "kind": "call",
+          "#kind": "call",
           "callee": {
-            "kind": "property",
+            "#kind": "property",
             "object": {
-              "kind": "identifier",
+              "#kind": "identifier",
               "name": "console"
             },
             "name": "log"
           },
           "args": [
             {
-              "kind": "value",
+              "#kind": "value",
               "value": "hi"
             }
           ]
@@ -31,14 +31,17 @@
   "trees": {
     "#t0": {
       "element": {
+        "#kind": "element",
         "type": "button",
         "key": null,
         "props": {
           "onClick": {
-            "#call": "#f0",
+            "#kind": "apply",
+            "label": "#f0",
             "args": [
               {
-                "#global": "console"
+                "#kind": "global",
+                "name": "console"
               }
             ]
           }
@@ -47,7 +50,8 @@
     }
   },
   "root": {
-    "#call": "#t0",
+    "#kind": "apply",
+    "label": "#t0",
     "args": []
   }
 }

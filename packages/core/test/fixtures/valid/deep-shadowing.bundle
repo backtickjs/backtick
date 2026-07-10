@@ -1,31 +1,31 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "block",
+        "#kind": "block",
         "statements": [
           {
-            "kind": "declaration",
+            "#kind": "declaration",
             "keyword": "const",
             "name": "base",
             "expression": {
-              "kind": "value",
+              "#kind": "value",
               "value": 10
             }
           },
           {
-            "kind": "return",
+            "#kind": "return",
             "expression": {
-              "kind": "call",
+              "#kind": "call",
               "callee": {
-                "kind": "entry",
+                "#kind": "entry",
                 "label": "#f1"
               },
               "args": [
                 {
-                  "kind": "identifier",
+                  "#kind": "identifier",
                   "name": "base"
                 }
               ]
@@ -35,40 +35,40 @@
       }
     },
     "#f1": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [
         "base"
       ],
       "body": {
-        "kind": "block",
+        "#kind": "block",
         "statements": [
           {
-            "kind": "declaration",
+            "#kind": "declaration",
             "keyword": "const",
             "name": "base2",
             "expression": {
-              "kind": "value",
+              "#kind": "value",
               "value": 1
             }
           },
           {
-            "kind": "return",
+            "#kind": "return",
             "expression": {
-              "kind": "binop",
+              "#kind": "binop",
               "operator": "+",
               "left": {
-                "kind": "identifier",
+                "#kind": "identifier",
                 "name": "base2"
               },
               "right": {
-                "kind": "call",
+                "#kind": "call",
                 "callee": {
-                  "kind": "entry",
+                  "#kind": "entry",
                   "label": "#f2"
                 },
                 "args": [
                   {
-                    "kind": "identifier",
+                    "#kind": "identifier",
                     "name": "base"
                   }
                 ]
@@ -79,40 +79,40 @@
       }
     },
     "#f2": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [
         "base"
       ],
       "body": {
-        "kind": "block",
+        "#kind": "block",
         "statements": [
           {
-            "kind": "declaration",
+            "#kind": "declaration",
             "keyword": "const",
             "name": "base3",
             "expression": {
-              "kind": "value",
+              "#kind": "value",
               "value": 2
             }
           },
           {
-            "kind": "return",
+            "#kind": "return",
             "expression": {
-              "kind": "binop",
+              "#kind": "binop",
               "operator": "*",
               "left": {
-                "kind": "identifier",
+                "#kind": "identifier",
                 "name": "base3"
               },
               "right": {
-                "kind": "call",
+                "#kind": "call",
                 "callee": {
-                  "kind": "entry",
+                  "#kind": "entry",
                   "label": "#f3"
                 },
                 "args": [
                   {
-                    "kind": "identifier",
+                    "#kind": "identifier",
                     "name": "base"
                   }
                 ]
@@ -123,19 +123,20 @@
       }
     },
     "#f3": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [
         "base"
       ],
       "body": {
-        "kind": "identifier",
+        "#kind": "identifier",
         "name": "base"
       }
     }
   },
   "trees": {},
   "root": {
-    "#call": "#f0",
+    "#kind": "apply",
+    "label": "#f0",
     "args": []
   }
 }

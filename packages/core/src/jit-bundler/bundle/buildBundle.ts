@@ -19,27 +19,6 @@ import type {
   TreeLabel,
 } from "./nodes/Bundle.js";
 
-// The keys that tag a JSON expression's non-literal forms. A plain data object
-// using one of them would be indistinguishable from a tag to the loader, so
-// bundle construction rejects it.
-const RESERVED_KEYS = new Set(["#slot", "#call", "#thunk", "#global"]);
-
-// Whether a plain data object would parse as an element node once rendered:
-// exactly the element keys, with a string `type`.
-function isElementShaped(
-  entries: Readonly<Record<string, IrArgument>>,
-): boolean {
-  const type = entries.type;
-  return (
-    Object.keys(entries).length === 3 &&
-    type !== undefined &&
-    "key" in entries &&
-    "props" in entries &&
-    type.kind === "IrValue" &&
-    typeof type.value === "string"
-  );
-}
-
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
 // A free host reference carries no such suffix and is returned unchanged.
@@ -280,9 +259,9 @@ export function buildBundle(ir: Ir): Bundle {
     }
     // Reserve the slot to break reference cycles; overwritten below.
     bodies.set(target, {
-      kind: "arrow",
+      "#kind": "arrow",
       params: [],
-      body: { kind: "value", value: null },
+      body: { "#kind": "value", value: null },
     });
     const captureParams = need(target).map(displayName);
     let params: string[];
@@ -292,8 +271,8 @@ export function buildBundle(ir: Ir): Bundle {
       const spliceParams = Array.from({ length: arity }, (_, i) => `$${i}`);
       params = [...spliceParams, ...captureParams];
       renderSplice = (index) => ({
-        kind: "call",
-        callee: { kind: "identifier", name: `$${index}` },
+        "#kind": "call",
+        callee: { "#kind": "identifier", name: `$${index}` },
         args: [],
       });
     } else {
@@ -302,7 +281,7 @@ export function buildBundle(ir: Ir): Bundle {
       renderSplice = (index) => renderValue(args[index]);
     }
     const body = buildScriptNode(fns[target].body, renderSplice, displayName);
-    bodies.set(target, { kind: "arrow", params, body });
+    bodies.set(target, { "#kind": "arrow", params, body });
   };
 
   // The arguments passed when calling an entry: for a polymorphic target, one
@@ -316,7 +295,7 @@ export function buildBundle(ir: Ir): Bundle {
       }
     }
     for (const key of need(ref.target)) {
-      parts.push({ kind: "identifier", name: displayName(key) });
+      parts.push({ "#kind": "identifier", name: displayName(key) });
     }
     return parts;
   };
@@ -330,32 +309,32 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrScriptRef":
         materialize(value.target);
         return {
-          kind: "call",
-          callee: { kind: "entry", label: `#f${value.target}` },
+          "#kind": "call",
+          callee: { "#kind": "entry", label: `#f${value.target}` },
           args: callArgs(value),
         };
       case "IrTreeRef":
         materializeTree(value.target);
         return {
-          kind: "call",
-          callee: { kind: "entry", label: `#t${value.target}` },
+          "#kind": "call",
+          callee: { "#kind": "entry", label: `#t${value.target}` },
           args: treeSlots(value.target).map((key) => ({
-            kind: "identifier",
+            "#kind": "identifier",
             name: displayName(key),
           })),
         };
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
       case "IrValue":
-        return { kind: "value", value: value.value };
+        return { "#kind": "value", value: value.value };
       case "IrArray":
-        return { kind: "array", elements: value.elements.map(renderValue) };
+        return { "#kind": "array", elements: value.elements.map(renderValue) };
       case "IrObject": {
         const entries: { [key: string]: BundleNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
           entries[key] = renderValue(entry);
         }
-        return { kind: "object", entries };
+        return { "#kind": "object", entries };
       }
     }
   };
@@ -369,35 +348,38 @@ export function buildBundle(ir: Ir): Bundle {
       materialize(value.target);
       const args = callArgs(value);
       const entry = {
-        kind: "entry",
+        "#kind": "entry",
         label: `#f${value.target}`,
       } as const satisfies BundleNode;
       return args.length === 0
         ? entry
         : {
-            kind: "arrow",
+            "#kind": "arrow",
             params: [],
-            body: { kind: "call", callee: entry, args },
+            body: { "#kind": "call", callee: entry, args },
           };
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       const args = treeSlots(value.target).map(
-        (key): BundleNode => ({ kind: "identifier", name: displayName(key) }),
+        (key): BundleNode => ({
+          "#kind": "identifier",
+          name: displayName(key),
+        }),
       );
       const entry = {
-        kind: "entry",
+        "#kind": "entry",
         label: `#t${value.target}`,
       } as const satisfies BundleNode;
       return args.length === 0
         ? entry
         : {
-            kind: "arrow",
+            "#kind": "arrow",
             params: [],
-            body: { kind: "call", callee: entry, args },
+            body: { "#kind": "call", callee: entry, args },
           };
     }
-    return { kind: "arrow", params: [], body: renderValue(value) };
+    return { "#kind": "arrow", params: [], body: renderValue(value) };
   };
 
   const treeJsons = new Map<number, BundleTree>();
@@ -425,7 +407,7 @@ export function buildBundle(ir: Ir): Bundle {
     slots: Map<string, number>,
   ): BundleSlot | BundleGlobal => {
     if (isHostRef(key)) {
-      return { "#global": key };
+      return { "#kind": "global", name: key };
     }
     const index = slots.get(key);
     if (index === undefined) {
@@ -434,7 +416,7 @@ export function buildBundle(ir: Ir): Bundle {
           "this reference to supply it.",
       );
     }
-    return { "#slot": index };
+    return { "#kind": "slot", index };
   };
 
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
@@ -446,7 +428,7 @@ export function buildBundle(ir: Ir): Bundle {
     const parts: BundleExpr[] = [];
     if (polymorphic.has(ref.target)) {
       for (const arg of ref.args) {
-        parts.push({ "#thunk": renderExpr(arg, slots) });
+        parts.push({ "#kind": "thunk", expression: renderExpr(arg, slots) });
       }
     }
     for (const key of need(ref.target)) {
@@ -465,7 +447,7 @@ export function buildBundle(ir: Ir): Bundle {
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = renderExpr(entry, slots);
     }
-    return { type: element.type, key: element.key, props };
+    return { "#kind": "element", type: element.type, key: element.key, props };
   };
 
   // Renders an IR argument in expression position — the form used inside tree
@@ -478,14 +460,16 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       return {
-        "#call": `#f${value.target}`,
+        "#kind": "apply",
+        label: `#f${value.target}`,
         args: exprCallArgs(value, slots),
       };
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       return {
-        "#call": `#t${value.target}`,
+        "#kind": "apply",
+        label: `#t${value.target}`,
         args: treeSlots(value.target).map((key) => capExpr(key, slots)),
       };
     }
@@ -498,21 +482,13 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind === "IrArray") {
       return value.elements.map((entry) => renderExpr(entry, slots));
     }
-    // A plain data object passes through, but not one whose shape the loader
-    // would mistake for a tagged form or an element node.
-    const reserved = Object.keys(value.entries).find((key) =>
-      RESERVED_KEYS.has(key),
-    );
-    if (reserved !== undefined) {
+    // A plain data object passes through. `#kind` is the bundle's one
+    // reserved key — the discriminant of every structured form — so an object
+    // carrying it would be indistinguishable from structure to the loader.
+    if ("#kind" in value.entries) {
       throw new Error(
-        `Can't bundle this object: the \`${reserved}\` key is reserved for ` +
-          "the bundle's JSON expressions.",
-      );
-    }
-    if (isElementShaped(value.entries)) {
-      throw new Error(
-        "Can't bundle this object: a plain object with exactly `type`, " +
-          "`key`, and `props` keys would read as a JSX element node.",
+        "Can't bundle this object: the `#kind` key is reserved for the " +
+          "bundle's structured forms.",
       );
     }
     const entries: { [key: string]: BundleExpr } = {};

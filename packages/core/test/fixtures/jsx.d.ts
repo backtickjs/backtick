@@ -12,6 +12,7 @@ declare module "@backtickjs/core/jsx-runtime" {
         onClick?: unknown;
         onA?: unknown;
         onB?: unknown;
+        data?: unknown;
       };
       label: {
         key?: string | number;

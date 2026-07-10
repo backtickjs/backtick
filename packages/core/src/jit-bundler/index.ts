@@ -2,12 +2,12 @@ export { buildAst } from "./ast/buildAst.js";
 export { buildBundle } from "./bundle/buildBundle.js";
 export type {
   Bundle,
+  BundleApply,
   BundleArrayNode,
   BundleArrowNode,
   BundleAssignmentNode,
   BundleBinopNode,
   BundleBlockNode,
-  BundleCall,
   BundleCallNode,
   BundleDeclarationNode,
   BundleElement,

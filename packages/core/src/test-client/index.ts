@@ -1,8 +1,12 @@
 import type {
   Bundle,
+  BundleApply,
   BundleElement,
   BundleExpr,
+  BundleGlobal,
   BundleNode,
+  BundleSlot,
+  BundleThunk,
   FunctionLabel,
   TreeLabel,
 } from "../jit-bundler/index.js";
@@ -164,9 +168,10 @@ function evaluateElement(
   return new TestElement(element.type, element.key, props);
 }
 
-// A tree expression (also the root): plain JSON carries itself; the tagged
-// forms and element nodes compose. Bundling rejects plain data that mimics a
-// tag or the element shape, so the tagged reading is unambiguous.
+// A tree expression (also the root): plain JSON carries itself; the
+// `#kind`-discriminated forms compose. Bundling rejects plain data carrying
+// `#kind` — the bundle's one reserved key — so the structured reading is
+// unambiguous.
 function evaluateExpr(
   bundle: Bundle,
   expr: BundleExpr,
@@ -178,26 +183,31 @@ function evaluateExpr(
   if (Array.isArray(expr)) {
     return expr.map((element) => evaluateExpr(bundle, element, slots));
   }
-  if ("#slot" in expr) {
-    return slots[expr["#slot"] as number];
-  }
-  if ("#global" in expr) {
-    return globals()[expr["#global"] as string];
-  }
-  if ("#call" in expr) {
-    const args = (expr.args as BundleExpr[]).map((arg) =>
-      evaluateExpr(bundle, arg, slots),
-    );
-    return entryFunction(
-      bundle,
-      expr["#call"] as FunctionLabel | TreeLabel,
-    )(...args);
-  }
-  if ("#thunk" in expr) {
-    return () => evaluateExpr(bundle, expr["#thunk"] as BundleExpr, slots);
-  }
-  if (typeof expr.type === "string" && "key" in expr && "props" in expr) {
-    return evaluateElement(bundle, expr as unknown as BundleElement, slots);
+  if ("#kind" in expr) {
+    const form = expr as
+      | BundleSlot
+      | BundleGlobal
+      | BundleApply
+      | BundleThunk
+      | BundleElement;
+    switch (form["#kind"]) {
+      case "slot": {
+        return slots[form.index];
+      }
+      case "global": {
+        return globals()[form.name];
+      }
+      case "apply": {
+        const args = form.args.map((arg) => evaluateExpr(bundle, arg, slots));
+        return entryFunction(bundle, form.label)(...args);
+      }
+      case "thunk": {
+        return () => evaluateExpr(bundle, form.expression, slots);
+      }
+      case "element": {
+        return evaluateElement(bundle, form, slots);
+      }
+    }
   }
   const object: { [key: string]: unknown } = {};
   for (const [key, value] of Object.entries(expr)) {
@@ -221,13 +231,13 @@ function executeStatement(
   node: BundleNode,
   scope: Scope,
 ): Completion {
-  switch (node.kind) {
+  switch (node["#kind"]) {
     case "block": {
       const frame: Scope = { parent: scope, bindings: new Map() };
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `undefined`), never outward.
       for (const statement of node.statements) {
-        if (statement.kind === "declaration") {
+        if (statement["#kind"] === "declaration") {
           frame.bindings.set(statement.name, undefined);
         }
       }
@@ -283,7 +293,7 @@ function evaluateNode(
   node: BundleNode,
   scope: Scope | null,
 ): unknown {
-  switch (node.kind) {
+  switch (node["#kind"]) {
     case "value": {
       return node.value;
     }
@@ -312,7 +322,7 @@ function evaluateNode(
     case "call": {
       const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
-      if (node.callee.kind === "property") {
+      if (node.callee["#kind"] === "property") {
         const object = evaluateNode(bundle, node.callee.object, scope) as {
           [name: string]: unknown;
         };
@@ -343,14 +353,16 @@ function evaluateNode(
         node.params.forEach((param, index) => {
           frame.bindings.set(param, args[index]);
         });
-        if (node.body.kind === "block") {
+        if (node.body["#kind"] === "block") {
           return executeStatement(bundle, node.body, frame).value;
         }
         return evaluateNode(bundle, node.body, frame);
       };
     }
     default: {
-      throw new Error(`unexpected ${node.kind} node in expression position`);
+      throw new Error(
+        `unexpected ${node["#kind"]} node in expression position`,
+      );
     }
   }
 }

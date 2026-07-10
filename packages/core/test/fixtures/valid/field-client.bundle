@@ -1,38 +1,38 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "block",
+        "#kind": "block",
         "statements": [
           {
-            "kind": "declaration",
+            "#kind": "declaration",
             "keyword": "const",
             "name": "c",
             "expression": {
-              "kind": "object",
+              "#kind": "object",
               "entries": {
                 "r": {
-                  "kind": "call",
+                  "#kind": "call",
                   "callee": {
-                    "kind": "entry",
+                    "#kind": "entry",
                     "label": "#f1"
                   },
                   "args": []
                 },
                 "g": {
-                  "kind": "call",
+                  "#kind": "call",
                   "callee": {
-                    "kind": "entry",
+                    "#kind": "entry",
                     "label": "#f2"
                   },
                   "args": []
                 },
                 "b": {
-                  "kind": "call",
+                  "#kind": "call",
                   "callee": {
-                    "kind": "entry",
+                    "#kind": "entry",
                     "label": "#f3"
                   },
                   "args": []
@@ -41,36 +41,36 @@
             }
           },
           {
-            "kind": "declaration",
+            "#kind": "declaration",
             "keyword": "const",
             "name": "brightness",
             "expression": {
-              "kind": "binop",
+              "#kind": "binop",
               "operator": "+",
               "left": {
-                "kind": "binop",
+                "#kind": "binop",
                 "operator": "+",
                 "left": {
-                  "kind": "property",
+                  "#kind": "property",
                   "object": {
-                    "kind": "identifier",
+                    "#kind": "identifier",
                     "name": "c"
                   },
                   "name": "r"
                 },
                 "right": {
-                  "kind": "property",
+                  "#kind": "property",
                   "object": {
-                    "kind": "identifier",
+                    "#kind": "identifier",
                     "name": "c"
                   },
                   "name": "g"
                 }
               },
               "right": {
-                "kind": "property",
+                "#kind": "property",
                 "object": {
-                  "kind": "identifier",
+                  "#kind": "identifier",
                   "name": "c"
                 },
                 "name": "b"
@@ -78,26 +78,26 @@
             }
           },
           {
-            "kind": "if",
+            "#kind": "if",
             "condition": {
-              "kind": "binop",
+              "#kind": "binop",
               "operator": ">",
               "left": {
-                "kind": "identifier",
+                "#kind": "identifier",
                 "name": "brightness"
               },
               "right": {
-                "kind": "value",
+                "#kind": "value",
                 "value": 382
               }
             },
             "consequent": {
-              "kind": "block",
+              "#kind": "block",
               "statements": [
                 {
-                  "kind": "return",
+                  "#kind": "return",
                   "expression": {
-                    "kind": "value",
+                    "#kind": "value",
                     "value": "light"
                   }
                 }
@@ -106,9 +106,9 @@
             "alternate": null
           },
           {
-            "kind": "return",
+            "#kind": "return",
             "expression": {
-              "kind": "value",
+              "#kind": "value",
               "value": "dark"
             }
           }
@@ -116,33 +116,34 @@
       }
     },
     "#f1": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "value",
+        "#kind": "value",
         "value": 30
       }
     },
     "#f2": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "value",
+        "#kind": "value",
         "value": 144
       }
     },
     "#f3": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "value",
+        "#kind": "value",
         "value": 255
       }
     }
   },
   "trees": {},
   "root": {
-    "#call": "#f0",
+    "#kind": "apply",
+    "label": "#f0",
     "args": []
   }
 }

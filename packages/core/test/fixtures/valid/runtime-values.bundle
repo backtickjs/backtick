@@ -1,37 +1,37 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [],
       "body": {
-        "kind": "object",
+        "#kind": "object",
         "entries": {
           "list": {
-            "kind": "array",
+            "#kind": "array",
             "elements": [
               {
-                "kind": "value",
+                "#kind": "value",
                 "value": 1
               },
               {
-                "kind": "value",
+                "#kind": "value",
                 "value": "two"
               },
               {
-                "kind": "value",
+                "#kind": "value",
                 "value": true
               },
               {
-                "kind": "value",
+                "#kind": "value",
                 "value": null
               }
             ]
           },
           "obj": {
-            "kind": "object",
+            "#kind": "object",
             "entries": {
               "k": {
-                "kind": "value",
+                "#kind": "value",
                 "value": 3
               }
             }
@@ -42,7 +42,8 @@
   },
   "trees": {},
   "root": {
-    "#call": "#f0",
+    "#kind": "apply",
+    "label": "#f0",
     "args": []
   }
 }

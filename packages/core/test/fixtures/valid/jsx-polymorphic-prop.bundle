@@ -1,17 +1,17 @@
 {
   "functions": {
     "#f0": {
-      "kind": "arrow",
+      "#kind": "arrow",
       "params": [
         "$0"
       ],
       "body": {
-        "kind": "arrow",
+        "#kind": "arrow",
         "params": [],
         "body": {
-          "kind": "call",
+          "#kind": "call",
           "callee": {
-            "kind": "identifier",
+            "#kind": "identifier",
             "name": "$0"
           },
           "args": []
@@ -22,22 +22,27 @@
   "trees": {
     "#t0": {
       "element": {
+        "#kind": "element",
         "type": "button",
         "key": null,
         "props": {
           "onA": {
-            "#call": "#f0",
+            "#kind": "apply",
+            "label": "#f0",
             "args": [
               {
-                "#thunk": 1
+                "#kind": "thunk",
+                "expression": 1
               }
             ]
           },
           "onB": {
-            "#call": "#f0",
+            "#kind": "apply",
+            "label": "#f0",
             "args": [
               {
-                "#thunk": 2
+                "#kind": "thunk",
+                "expression": 2
               }
             ]
           }
@@ -46,7 +51,8 @@
     }
   },
   "root": {
-    "#call": "#t0",
+    "#kind": "apply",
+    "label": "#t0",
     "args": []
   }
 }
