@@ -1,9 +1,9 @@
-import type { Bundle } from "../bundle/Bundle.js";
-import type { Argument } from "../bundle/nodes/Argument.js";
+import type { Bundle } from "../bundle/nodes/Bundle.js";
+import type { BundledArgument } from "../bundle/nodes/BundledArgument.js";
 import { BundledElement } from "../bundle/nodes/BundledElement.js";
-import type { BundledTree } from "../bundle/nodes/BundledTree.js";
-import { ScriptRef } from "../bundle/nodes/ScriptRef.js";
-import { TreeRef } from "../bundle/nodes/TreeRef.js";
+import { BundledScriptRef } from "../bundle/nodes/BundledScriptRef.js";
+import type { BundledTreeEntry } from "../bundle/nodes/BundledTreeEntry.js";
+import { BundledTreeRef } from "../bundle/nodes/BundledTreeRef.js";
 import {
   serializeArray,
   serializeObject,
@@ -29,7 +29,7 @@ const RESERVED_KEYS = new Set(["#slot", "#call", "#thunk", "#global"]);
 
 // Whether a plain object would parse as an element node: exactly the element
 // keys, with a string `type`.
-function isElementShaped(value: { [key: string]: Argument }): boolean {
+function isElementShaped(value: { [key: string]: BundledArgument }): boolean {
   const keys = Object.keys(value);
   return (
     keys.length === 3 &&
@@ -138,10 +138,10 @@ export function serializeBundle(bundle: Bundle): string {
   // lowered to a reference nested in some entry's splice arguments or in a
   // tree entry's props. The tree set is shared across the walk so each tree
   // entry's contents are collected once.
-  const refsByTarget = new Map<number, ScriptRef[]>();
-  const seenRefs = new Set<ScriptRef>();
+  const refsByTarget = new Map<number, BundledScriptRef[]>();
+  const seenRefs = new Set<BundledScriptRef>();
   const seenTrees = new Set<number>();
-  const collectRefs = (ref: ScriptRef): void => {
+  const collectRefs = (ref: BundledScriptRef): void => {
     const list = refsByTarget.get(ref.target);
     if (list) {
       list.push(ref);
@@ -177,7 +177,7 @@ export function serializeBundle(bundle: Bundle): string {
 
   // A representative splice-argument list for an entry. For a monomorphic entry
   // every reference agrees, so any list stands in for all of them.
-  const monoArgs = (target: number): readonly Argument[] =>
+  const monoArgs = (target: number): readonly BundledArgument[] =>
     refsByTarget.get(target)?.[0]?.args ?? [];
 
   // The captures an entry must receive as parameters: its own free variables
@@ -227,8 +227,8 @@ export function serializeBundle(bundle: Bundle): string {
   // polymorphic — the captures of the thunks passed for its splices, since those
   // thunks are written inline at this call site. A tree reference needs its
   // slot values; an inline element whatever its props need.
-  const freeCaps = (value: Argument): string[] => {
-    if (value instanceof ScriptRef) {
+  const freeCaps = (value: BundledArgument): string[] => {
+    if (value instanceof BundledScriptRef) {
       const keys = [...need(value.target)];
       if (polymorphic.has(value.target)) {
         for (const arg of value.args) {
@@ -237,7 +237,7 @@ export function serializeBundle(bundle: Bundle): string {
       }
       return keys;
     }
-    if (value instanceof TreeRef) {
+    if (value instanceof BundledTreeRef) {
       return treeSlots(value.target);
     }
     if (value instanceof BundledElement) {
@@ -310,7 +310,7 @@ export function serializeBundle(bundle: Bundle): string {
   // The arguments passed when calling an entry: for a polymorphic target, one
   // thunk per splice (bound to this reference's arguments) ahead of its
   // captures; for a monomorphic target, just its captures.
-  const callArgs = (ref: ScriptRef): string[] => {
+  const callArgs = (ref: BundledScriptRef): string[] => {
     const parts: string[] = [];
     if (polymorphic.has(ref.target)) {
       for (const arg of ref.args) {
@@ -327,19 +327,19 @@ export function serializeBundle(bundle: Bundle): string {
   // A script reference becomes a call `#ftarget(...)`, a tree reference a call
   // `#ttarget(...)` passing the tree's slot captures; every other value its
   // literal form.
-  const renderValue = (value: Argument): string => {
-    if (value instanceof ScriptRef) {
+  const renderValue = (value: BundledArgument): string => {
+    if (value instanceof BundledScriptRef) {
       materialize(value.target);
       return `#f${value.target}(${callArgs(value).join(", ")})`;
     }
-    if (value instanceof TreeRef) {
+    if (value instanceof BundledTreeRef) {
       materializeTree(value.target);
       const args = treeSlots(value.target).map(displayName);
       return `#t${value.target}(${args.join(", ")})`;
     }
     if (value instanceof BundledElement) {
       // The builder inlines an element only inside a tree entry, which renders
-      // through `renderExpr`; value position always sees a `TreeRef`.
+      // through `renderExpr`; value position always sees a `BundledTreeRef`.
       throw new Error("An inline element can't appear outside a tree entry.");
     }
     if (
@@ -364,15 +364,15 @@ export function serializeBundle(bundle: Bundle): string {
   // yields the value — so a polymorphic entry evaluates it lazily at the hole,
   // mirroring an inlined splice. A referenced entry that already takes no
   // arguments is a nullary thunk as-is; anything else is wrapped in an arrow.
-  const renderThunk = (value: Argument): string => {
-    if (value instanceof ScriptRef) {
+  const renderThunk = (value: BundledArgument): string => {
+    if (value instanceof BundledScriptRef) {
       materialize(value.target);
       const args = callArgs(value);
       return args.length === 0
         ? `#f${value.target}`
         : `() => #f${value.target}(${args.join(", ")})`;
     }
-    if (value instanceof TreeRef) {
+    if (value instanceof BundledTreeRef) {
       materializeTree(value.target);
       const args = treeSlots(value.target).map(displayName);
       return args.length === 0
@@ -420,7 +420,7 @@ export function serializeBundle(bundle: Bundle): string {
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
   // a polymorphic target, one `#thunk` per splice ahead of its captures.
   const exprCallArgs = (
-    ref: ScriptRef,
+    ref: BundledScriptRef,
     slots: Map<string, number>,
   ): JsonExpr[] => {
     const parts: JsonExpr[] = [];
@@ -439,17 +439,17 @@ export function serializeBundle(bundle: Bundle): string {
   // entries and for the bundle root, where composition is data rather than
   // source. The mirror of `renderValue`.
   const renderExpr = (
-    value: Argument,
+    value: BundledArgument,
     slots: Map<string, number>,
   ): JsonExpr => {
-    if (value instanceof ScriptRef) {
+    if (value instanceof BundledScriptRef) {
       materialize(value.target);
       return {
         "#call": `#f${value.target}`,
         args: exprCallArgs(value, slots),
       };
     }
-    if (value instanceof TreeRef) {
+    if (value instanceof BundledTreeRef) {
       materializeTree(value.target);
       return {
         "#call": `#t${value.target}`,
@@ -513,15 +513,15 @@ export function serializeBundle(bundle: Bundle): string {
 // tree table — tree references, each entry once per `seenTrees` set (a nested
 // script may be spliced anywhere).
 function nestedRefs(
-  values: readonly Argument[],
-  trees: readonly BundledTree[],
+  values: readonly BundledArgument[],
+  trees: readonly BundledTreeEntry[],
   seenTrees: Set<number>,
-): ScriptRef[] {
-  const refs: ScriptRef[] = [];
-  const visit = (value: Argument): void => {
-    if (value instanceof ScriptRef) {
+): BundledScriptRef[] {
+  const refs: BundledScriptRef[] = [];
+  const visit = (value: BundledArgument): void => {
+    if (value instanceof BundledScriptRef) {
       refs.push(value);
-    } else if (value instanceof TreeRef) {
+    } else if (value instanceof BundledTreeRef) {
       if (!seenTrees.has(value.target)) {
         seenTrees.add(value.target);
         visit(trees[value.target].element);

@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 import type { AstNode } from "../../ast/nodes/AstNode.js";
 
-export class BundledScript {
+export class BundledScriptEntry {
   readonly loc: SourceLocation;
   readonly captures: string[];
   readonly declarations: string[];
