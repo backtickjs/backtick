@@ -1,14 +1,3 @@
-{
-  "type": "flexbox",
-  "key": null,
-  "props": {
-    "direction": "row",
-    "children": {
-      "type": "label",
-      "key": "a",
-      "props": {
-        "text": "hi"
-      }
-    }
-  }
-}
+<flexbox direction="row">
+  <label key="a" text="hi" />
+</flexbox>

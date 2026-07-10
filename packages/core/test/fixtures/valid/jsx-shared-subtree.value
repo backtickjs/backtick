@@ -1,23 +1,4 @@
-{
-  "type": "flexbox",
-  "key": null,
-  "props": {
-    "direction": "column",
-    "children": [
-      {
-        "type": "label",
-        "key": null,
-        "props": {
-          "text": "hi"
-        }
-      },
-      {
-        "type": "label",
-        "key": null,
-        "props": {
-          "text": "hi"
-        }
-      }
-    ]
-  }
-}
+<flexbox direction="column">
+  <label text="hi" />
+  <label text="hi" />
+</flexbox>

@@ -1,7 +1,1 @@
-{
-  "type": "button",
-  "key": null,
-  "props": {
-    "onClick": [function]
-  }
-}
+<button onClick={[function]} />

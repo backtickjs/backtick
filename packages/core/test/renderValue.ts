@@ -1,6 +1,9 @@
+import { renderMarkup, TestElement } from "../dist/test-client/index.js";
+
 // Renders a runtime value produced by the test-client into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,
-// undefined, circular references) rendered as bracketed placeholders.
+// undefined, circular references) rendered as bracketed placeholders, and
+// elements rendered as markup with their client scripts evaluated.
 export function renderValue(value: unknown): string {
   return render(value, "", new Set());
 }
@@ -17,6 +20,9 @@ function render(value: unknown, indent: string, seen: Set<object>): string {
   }
   if (typeof value === "function") {
     return "[function]";
+  }
+  if (value instanceof TestElement) {
+    return renderMarkup(value, indent);
   }
   if (typeof value !== "object") {
     return String(value);

@@ -14,15 +14,100 @@ import type {
 // runtime behavior instead of only snapshotting its shape.
 
 // What a `BundleElement` evaluates to: the element with its props reduced to
-// runtime values (a script prop becomes a callable function).
-export interface TestElement {
-  type: string;
-  key: string | number | null;
-  props: { [prop: string]: unknown };
+// runtime values (a script prop becomes a callable function). `renderMarkup`
+// turns it into markup with those scripts evaluated.
+export class TestElement {
+  readonly type: string;
+  readonly key: string | number | null;
+  readonly props: { [prop: string]: unknown };
+
+  constructor(
+    type: string,
+    key: string | number | null,
+    props: { [prop: string]: unknown },
+  ) {
+    this.type = type;
+    this.key = key;
+    this.props = props;
+  }
 }
 
 export function evaluate(bundle: Bundle): unknown {
   return evaluateExpr(bundle, bundle.root, []);
+}
+
+// Renders an evaluated element as JSX-like markup: `children` renders as the
+// element's body, the other props render as attributes. The element's client
+// scripts were already evaluated when the tree was instantiated, so a script
+// prop holds the script's value — a handler stays a function and renders as
+// `[function]`; rendering never invokes it.
+export function renderMarkup(element: TestElement, indent = ""): string {
+  const attributes: string[] = [];
+  if (element.key !== null) {
+    attributes.push(` key=${renderAttribute(element.key, indent)}`);
+  }
+  let children: unknown[] = [];
+  for (const [prop, value] of Object.entries(element.props)) {
+    if (prop === "children") {
+      children = Array.isArray(value) ? value.flat(Infinity) : [value];
+      continue;
+    }
+    attributes.push(` ${prop}=${renderAttribute(value, indent)}`);
+  }
+  const opening = `<${element.type}${attributes.join("")}`;
+  if (children.length === 0) {
+    return `${opening} />`;
+  }
+  const inner = `${indent}  `;
+  const body = children
+    .map((child) => `${inner}${renderChild(child, inner)}`)
+    .join("\n");
+  return `${opening}>\n${body}\n${indent}</${element.type}>`;
+}
+
+function renderAttribute(value: unknown, indent: string): string {
+  if (typeof value === "string") {
+    return JSON.stringify(value);
+  }
+  if (value instanceof TestElement) {
+    return `{${renderMarkup(value, indent)}}`;
+  }
+  return `{${renderInline(value)}}`;
+}
+
+function renderChild(child: unknown, indent: string): string {
+  if (child instanceof TestElement) {
+    return renderMarkup(child, indent);
+  }
+  return `{${renderInline(child)}}`;
+}
+
+function renderInline(value: unknown): string {
+  if (value === undefined) {
+    return "undefined";
+  }
+  if (value === null) {
+    return "null";
+  }
+  if (typeof value === "string") {
+    return JSON.stringify(value);
+  }
+  if (typeof value === "function") {
+    return "[function]";
+  }
+  if (Array.isArray(value)) {
+    return `[${value.map(renderInline).join(", ")}]`;
+  }
+  if (value instanceof TestElement) {
+    return renderMarkup(value);
+  }
+  if (typeof value === "object") {
+    const entries = Object.entries(value).map(
+      ([key, item]) => `${JSON.stringify(key)}: ${renderInline(item)}`,
+    );
+    return `{ ${entries.join(", ")} }`;
+  }
+  return String(value);
 }
 
 // One frame per arrow application or block. Names are pre-resolved by the
@@ -76,7 +161,7 @@ function evaluateElement(
   for (const [prop, expr] of Object.entries(element.props)) {
     props[prop] = evaluateExpr(bundle, expr, slots);
   }
-  return { type: element.type, key: element.key, props };
+  return new TestElement(element.type, element.key, props);
 }
 
 // A tree expression (also the root): plain JSON carries itself; the tagged

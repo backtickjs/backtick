@@ -1,8 +1,1 @@
-{
-  "type": "button",
-  "key": null,
-  "props": {
-    "onA": [function],
-    "onB": [function]
-  }
-}
+<button onA={[function]} onB={[function]} />
