@@ -17,6 +17,18 @@ test("a plain object prop can't look like an element node", () => {
   assert.throws(() => bundle(element), /element node/);
 });
 
+test("a plain object prop that mimics an IR node stays data", () => {
+  const element = jsx("flexbox", { data: { kind: "IrScriptRef", target: 0 } });
+  const { trees } = bundle(element);
+  assert.deepStrictEqual(trees["#t0"], {
+    element: {
+      type: "flexbox",
+      key: null,
+      props: { data: { kind: "IrScriptRef", target: 0 } },
+    },
+  });
+});
+
 test("a runtime string splice inlines as a value node", () => {
   const value = 'say "hi"\n\\done';
   const loc = {

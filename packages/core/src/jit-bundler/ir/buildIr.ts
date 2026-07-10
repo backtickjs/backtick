@@ -5,13 +5,15 @@ import type {
   AstScript,
 } from "../ast/AstNode.js";
 import { locKey } from "../locKey.js";
-import type { Ir } from "./nodes/Ir.js";
-import type { IrArgument } from "./nodes/IrArgument.js";
-import { IrElement } from "./nodes/IrElement.js";
-import { IrScriptEntry } from "./nodes/IrScriptEntry.js";
-import { IrScriptRef } from "./nodes/IrScriptRef.js";
-import { IrTreeEntry } from "./nodes/IrTreeEntry.js";
-import { IrTreeRef } from "./nodes/IrTreeRef.js";
+import type {
+  Ir,
+  IrArgument,
+  IrElement,
+  IrScriptEntry,
+  IrScriptRef,
+  IrTreeEntry,
+  IrTreeRef,
+} from "./Ir.js";
 
 // Lowers an AST into flat tables: one `IrScriptEntry` per distinct client
 // script (deduplicated by source location) and one `IrTreeEntry` per hoisted
@@ -46,10 +48,11 @@ class IrBuilder {
     if (shared) {
       return shared;
     }
-    const ref = new IrScriptRef(
-      this.intern(script),
-      script.splices.map((n) => this.lower(n)),
-    );
+    const ref: IrScriptRef = {
+      kind: "IrScriptRef",
+      target: this.intern(script),
+      args: script.splices.map((n) => this.lower(n)),
+    };
     this.refByScript.set(script, ref);
     return ref;
   }
@@ -65,14 +68,13 @@ class IrBuilder {
     // references itself resolves to a stable index rather than recursing.
     const index = this.scripts.length;
     this.indexByLoc.set(key, index);
-    this.scripts.push(
-      new IrScriptEntry(
-        script.loc,
-        script.captures,
-        script.declarations,
-        script.expression,
-      ),
-    );
+    this.scripts.push({
+      kind: "IrScriptEntry",
+      loc: script.loc,
+      captures: script.captures,
+      declarations: script.declarations,
+      body: script.expression,
+    });
     return index;
   }
 
@@ -87,8 +89,11 @@ class IrBuilder {
     if (shared) {
       return shared;
     }
-    const tree = new IrTreeEntry(this.lowerElement(element));
-    const ref = new IrTreeRef(this.trees.length);
+    const tree: IrTreeEntry = {
+      kind: "IrTreeEntry",
+      element: this.lowerElement(element),
+    };
+    const ref: IrTreeRef = { kind: "IrTreeRef", target: this.trees.length };
     this.trees.push(tree);
     this.refByElement.set(element, ref);
     return ref;
@@ -101,7 +106,12 @@ class IrBuilder {
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = this.lowerInTree(entry);
     }
-    return new IrElement(element.type, element.key, props);
+    return {
+      kind: "IrElement",
+      type: element.type,
+      key: element.key,
+      props,
+    };
   }
 
   // Lowers a value in tree position — inside an element's props — where an
@@ -115,14 +125,17 @@ class IrBuilder {
         : this.referenceTree(node);
     }
     if (node.kind === "AstArray") {
-      return node.elements.map((n) => this.lowerInTree(n));
+      return {
+        kind: "IrArray",
+        elements: node.elements.map((n) => this.lowerInTree(n)),
+      };
     }
     if (node.kind === "AstObject") {
       const entries: Record<string, IrArgument> = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = this.lowerInTree(value);
       }
-      return entries;
+      return { kind: "IrObject", entries };
     }
     return this.lower(node);
   }
@@ -138,20 +151,23 @@ class IrBuilder {
       case "AstElement":
         return this.referenceTree(node);
       case "AstArray":
-        return node.elements.map((n) => this.lower(n));
+        return {
+          kind: "IrArray",
+          elements: node.elements.map((n) => this.lower(n)),
+        };
       case "AstObject": {
         const entries: Record<string, IrArgument> = {};
         for (const [key, value] of Object.entries(node.entries)) {
           entries[key] = this.lower(value);
         }
-        return entries;
+        return { kind: "IrObject", entries };
       }
       case "AstNumber":
       case "AstString":
       case "AstBoolean":
-        return node.value;
+        return { kind: "IrValue", value: node.value };
       case "AstNull":
-        return null;
+        return { kind: "IrValue", value: null };
       default: {
         const unhandled: never = node;
         throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);

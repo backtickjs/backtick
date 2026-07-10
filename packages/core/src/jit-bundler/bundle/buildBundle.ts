@@ -1,9 +1,10 @@
-import type { Ir } from "../ir/nodes/Ir.js";
-import type { IrArgument } from "../ir/nodes/IrArgument.js";
-import { IrElement } from "../ir/nodes/IrElement.js";
-import { IrScriptRef } from "../ir/nodes/IrScriptRef.js";
-import type { IrTreeEntry } from "../ir/nodes/IrTreeEntry.js";
-import { IrTreeRef } from "../ir/nodes/IrTreeRef.js";
+import type {
+  Ir,
+  IrArgument,
+  IrElement,
+  IrScriptRef,
+  IrTreeEntry,
+} from "../ir/Ir.js";
 import { buildScriptNode, type RenderSplice } from "./buildScriptNode.js";
 import type {
   Bundle,
@@ -23,16 +24,19 @@ import type {
 // bundle construction rejects it.
 const RESERVED_KEYS = new Set(["#slot", "#call", "#thunk", "#global"]);
 
-// Whether a plain object would parse as an element node: exactly the element
-// keys, with a string `type`.
-function isElementShaped(value: { [key: string]: IrArgument }): boolean {
-  const keys = Object.keys(value);
+// Whether a plain data object would parse as an element node once rendered:
+// exactly the element keys, with a string `type`.
+function isElementShaped(
+  entries: Readonly<Record<string, IrArgument>>,
+): boolean {
+  const type = entries.type;
   return (
-    keys.length === 3 &&
-    "type" in value &&
-    "key" in value &&
-    "props" in value &&
-    typeof value.type === "string"
+    Object.keys(entries).length === 3 &&
+    type !== undefined &&
+    "key" in entries &&
+    "props" in entries &&
+    type.kind === "IrValue" &&
+    typeof type.value === "string"
   );
 }
 
@@ -214,28 +218,27 @@ export function buildBundle(ir: Ir): Bundle {
   // thunks are written inline at this call site. A tree reference needs its
   // slot values; an inline element whatever its props need.
   const freeCaps = (value: IrArgument): string[] => {
-    if (value instanceof IrScriptRef) {
-      const keys = [...need(value.target)];
-      if (polymorphic.has(value.target)) {
-        for (const arg of value.args) {
-          keys.push(...freeCaps(arg));
+    switch (value.kind) {
+      case "IrScriptRef": {
+        const keys = [...need(value.target)];
+        if (polymorphic.has(value.target)) {
+          for (const arg of value.args) {
+            keys.push(...freeCaps(arg));
+          }
         }
+        return keys;
       }
-      return keys;
+      case "IrTreeRef":
+        return treeSlots(value.target);
+      case "IrElement":
+        return Object.values(value.props).flatMap(freeCaps);
+      case "IrArray":
+        return value.elements.flatMap(freeCaps);
+      case "IrObject":
+        return Object.values(value.entries).flatMap(freeCaps);
+      case "IrValue":
+        return [];
     }
-    if (value instanceof IrTreeRef) {
-      return treeSlots(value.target);
-    }
-    if (value instanceof IrElement) {
-      return Object.values(value.props).flatMap(freeCaps);
-    }
-    if (Array.isArray(value)) {
-      return value.flatMap(freeCaps);
-    }
-    if (value !== null && typeof value === "object") {
-      return Object.values(value).flatMap(freeCaps);
-    }
-    return [];
   };
 
   // The slot signature of a tree entry: the capture keys its wiring needs from
@@ -323,50 +326,38 @@ export function buildBundle(ir: Ir): Bundle {
   // reference a call of its `#ti` entry passing the tree's slot captures;
   // every other value its literal form.
   const renderValue = (value: IrArgument): BundleNode => {
-    if (value instanceof IrScriptRef) {
-      materialize(value.target);
-      return {
-        kind: "call",
-        callee: { kind: "entry", label: `#f${value.target}` },
-        args: callArgs(value),
-      };
-    }
-    if (value instanceof IrTreeRef) {
-      materializeTree(value.target);
-      return {
-        kind: "call",
-        callee: { kind: "entry", label: `#t${value.target}` },
-        args: treeSlots(value.target).map((key) => ({
-          kind: "identifier",
-          name: displayName(key),
-        })),
-      };
-    }
-    if (value instanceof IrElement) {
-      // The builder inlines an element only inside a tree entry, which renders
-      // through `renderExpr`; value position always sees an `IrTreeRef`.
-      throw new Error("An inline element can't appear outside a tree entry.");
-    }
-    if (
-      value === null ||
-      typeof value === "boolean" ||
-      typeof value === "number" ||
-      typeof value === "string"
-    ) {
-      return { kind: "value", value };
-    }
-    if (Array.isArray(value)) {
-      return { kind: "array", elements: value.map(renderValue) };
-    }
-    if (typeof value === "object") {
-      const entries: { [key: string]: BundleNode } = {};
-      for (const [key, entry] of Object.entries(value)) {
-        entries[key] = renderValue(entry);
+    switch (value.kind) {
+      case "IrScriptRef":
+        materialize(value.target);
+        return {
+          kind: "call",
+          callee: { kind: "entry", label: `#f${value.target}` },
+          args: callArgs(value),
+        };
+      case "IrTreeRef":
+        materializeTree(value.target);
+        return {
+          kind: "call",
+          callee: { kind: "entry", label: `#t${value.target}` },
+          args: treeSlots(value.target).map((key) => ({
+            kind: "identifier",
+            name: displayName(key),
+          })),
+        };
+      case "IrElement":
+        throw new Error("An inline element can't appear outside a tree entry.");
+      case "IrValue":
+        return { kind: "value", value: value.value };
+      case "IrArray":
+        return { kind: "array", elements: value.elements.map(renderValue) };
+      case "IrObject": {
+        const entries: { [key: string]: BundleNode } = {};
+        for (const [key, entry] of Object.entries(value.entries)) {
+          entries[key] = renderValue(entry);
+        }
+        return { kind: "object", entries };
       }
-      return { kind: "object", entries };
     }
-    const unhandled: never = value;
-    throw new Error(`Unhandled IR argument: ${JSON.stringify(unhandled)}`);
   };
 
   // Renders a splice argument in thunk position — as a nullary function that
@@ -374,7 +365,7 @@ export function buildBundle(ir: Ir): Bundle {
   // mirroring an inlined splice. A referenced entry that already takes no
   // arguments is a nullary thunk as-is; anything else is wrapped in an arrow.
   const renderThunk = (value: IrArgument): BundleNode => {
-    if (value instanceof IrScriptRef) {
+    if (value.kind === "IrScriptRef") {
       materialize(value.target);
       const args = callArgs(value);
       const entry = {
@@ -389,7 +380,7 @@ export function buildBundle(ir: Ir): Bundle {
             body: { kind: "call", callee: entry, args },
           };
     }
-    if (value instanceof IrTreeRef) {
+    if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       const args = treeSlots(value.target).map(
         (key): BundleNode => ({ kind: "identifier", name: displayName(key) }),
@@ -484,51 +475,48 @@ export function buildBundle(ir: Ir): Bundle {
     value: IrArgument,
     slots: Map<string, number>,
   ): BundleExpr => {
-    if (value instanceof IrScriptRef) {
+    if (value.kind === "IrScriptRef") {
       materialize(value.target);
       return {
         "#call": `#f${value.target}`,
         args: exprCallArgs(value, slots),
       };
     }
-    if (value instanceof IrTreeRef) {
+    if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       return {
         "#call": `#t${value.target}`,
         args: treeSlots(value.target).map((key) => capExpr(key, slots)),
       };
     }
-    if (value instanceof IrElement) {
+    if (value.kind === "IrElement") {
       return renderElement(value, slots);
     }
-    if (
-      value === null ||
-      typeof value === "boolean" ||
-      typeof value === "number" ||
-      typeof value === "string"
-    ) {
-      return value;
+    if (value.kind === "IrValue") {
+      return value.value;
     }
-    if (Array.isArray(value)) {
-      return value.map((entry) => renderExpr(entry, slots));
+    if (value.kind === "IrArray") {
+      return value.elements.map((entry) => renderExpr(entry, slots));
     }
     // A plain data object passes through, but not one whose shape the loader
     // would mistake for a tagged form or an element node.
-    const reserved = Object.keys(value).find((key) => RESERVED_KEYS.has(key));
+    const reserved = Object.keys(value.entries).find((key) =>
+      RESERVED_KEYS.has(key),
+    );
     if (reserved !== undefined) {
       throw new Error(
         `Can't bundle this object: the \`${reserved}\` key is reserved for ` +
           "the bundle's JSON expressions.",
       );
     }
-    if (isElementShaped(value)) {
+    if (isElementShaped(value.entries)) {
       throw new Error(
         "Can't bundle this object: a plain object with exactly `type`, " +
           "`key`, and `props` keys would read as a JSX element node.",
       );
     }
     const entries: { [key: string]: BundleExpr } = {};
-    for (const [key, entry] of Object.entries(value)) {
+    for (const [key, entry] of Object.entries(value.entries)) {
       entries[key] = renderExpr(entry, slots);
     }
     return entries;
@@ -557,19 +545,19 @@ function nestedRefs(
 ): IrScriptRef[] {
   const refs: IrScriptRef[] = [];
   const visit = (value: IrArgument): void => {
-    if (value instanceof IrScriptRef) {
+    if (value.kind === "IrScriptRef") {
       refs.push(value);
-    } else if (value instanceof IrTreeRef) {
+    } else if (value.kind === "IrTreeRef") {
       if (!seenTrees.has(value.target)) {
         seenTrees.add(value.target);
         visit(trees[value.target].element);
       }
-    } else if (value instanceof IrElement) {
+    } else if (value.kind === "IrElement") {
       Object.values(value.props).forEach(visit);
-    } else if (Array.isArray(value)) {
-      value.forEach(visit);
-    } else if (value !== null && typeof value === "object") {
-      Object.values(value).forEach(visit);
+    } else if (value.kind === "IrArray") {
+      value.elements.forEach(visit);
+    } else if (value.kind === "IrObject") {
+      Object.values(value.entries).forEach(visit);
     }
   };
   values.forEach(visit);

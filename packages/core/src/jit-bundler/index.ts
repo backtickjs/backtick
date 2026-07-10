@@ -29,4 +29,4 @@ export type {
 } from "./bundle/nodes/Bundle.js";
 export { bundle } from "./bundle.js";
 export { buildIr } from "./ir/buildIr.js";
-export type { Ir } from "./ir/nodes/Ir.js";
+export type { Ir } from "./ir/Ir.js";
