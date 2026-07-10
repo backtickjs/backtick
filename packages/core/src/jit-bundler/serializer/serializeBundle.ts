@@ -40,9 +40,9 @@ function isElementShaped(value: { [key: string]: Argument }): boolean {
   );
 }
 
-// Recovers the source name from a binding key `<name>$<salt>$<n>` by dropping
-// the salt/counter suffix the compiler appends for global uniqueness. A free
-// host reference carries no such suffix and is returned unchanged.
+// Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
+// dropping the hash/counter suffix the compiler appends for global uniqueness.
+// A free host reference carries no such suffix and is returned unchanged.
 function sourceName(key: string): string {
   return key.replace(/\$[0-9a-z]+\$\d+$/, "");
 }
@@ -102,7 +102,7 @@ export function serializeBundle(bundle: Bundle): string {
   const fns = bundle.scripts;
 
   // Maps each binding key to a readable display name — its source name with the
-  // uniqueness suffix (`$<salt>$<n>`) dropped — so the bundle reads like the
+  // uniqueness suffix (`$<fileHash>$<n>`) dropped — so the bundle reads like the
   // script it came from rather than exposing internal keys. A numeric suffix is
   // reattached only when distinct bindings share a source name (a shadowed or
   // threaded variable). The mapping is a bijection: the same key always renders

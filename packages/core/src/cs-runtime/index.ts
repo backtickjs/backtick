@@ -14,6 +14,7 @@ export interface Client<T extends ClientUnknown> {
 }
 
 export interface ClientScript<T extends ClientUnknown> extends Client<T> {
+  fileHash: string;
   loc: SourceLocation;
   metadata: Metadata;
   visit: <U>(visitor: Visitor<U>) => U;
@@ -146,7 +147,11 @@ export function isClientScript(
   value: unknown,
 ): value is ClientScript<ClientUnknown> {
   return (
-    isClient(value) && "loc" in value && "metadata" in value && "visit" in value
+    isClient(value) &&
+    "fileHash" in value &&
+    "loc" in value &&
+    "metadata" in value &&
+    "visit" in value
   );
 }
 
@@ -227,6 +232,7 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
 
 function create(
   loc: SourceLocation,
+  fileHash: string,
   metadata: Metadata,
   visit: <U>(visitor: Visitor<U>) => U,
   // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
@@ -234,6 +240,7 @@ function create(
   return {
     "@backtickjs": true,
     loc,
+    fileHash,
     metadata,
     visit,
   };

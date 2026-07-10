@@ -7,7 +7,7 @@ import { resolveBindings } from "../../dist/compiler/resolveBindings.js";
 function captures(body: string): string[] {
   const source = `const script = cs\`${body}\`;`;
   const parsed = parseSourceText(ts, "test.ts", source);
-  const { captures } = resolveBindings(ts, parsed.scripts, source);
+  const { captures } = resolveBindings(ts, parsed.scripts, "hash");
   const [script] = parsed.scripts;
   return captures.get(script) ?? [];
 }

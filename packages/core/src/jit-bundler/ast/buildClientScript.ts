@@ -31,7 +31,7 @@ export function buildClientScript(
     return shared;
   }
 
-  const key = locKey(client.loc);
+  const key = locKey(client.fileHash, client.loc);
   let expression = bodyByLoc.get(key);
   if (!expression) {
     expression = client.visit(new AstBuilder());
@@ -43,6 +43,7 @@ export function buildClientScript(
   // node cannot recurse back into this same object.
   const node = new SourceClientScript(
     client.loc,
+    client.fileHash,
     client.metadata.splices.map(buildAst),
     client.metadata.captures,
     client.metadata.declarations,

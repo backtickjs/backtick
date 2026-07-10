@@ -28,9 +28,10 @@ import type { ClientScript } from "./parseFile.js";
  * capture of the current script whenever that tag differs.
  *
  * Uniqueness of keys has two axes. A per-file counter distinguishes bindings
- * *within* a file; a salt derived from the file path distinguishes bindings
- * *across* files — necessary because the compiler runs one file at a time and so
- * cannot hand out globally coordinated numbers. Together `<name>$<salt>_<n>` is
+ * *within* a file; a hash of the file's text (see `hashText`) distinguishes
+ * bindings *across* files — necessary because the compiler runs one file at a
+ * time and so cannot hand out globally coordinated numbers. Together
+ * `<name>$<fileHash>$<n>` is
  * unique across the whole program, so fragments composed from different scripts
  * (even different files) never collide, and the serializer never has to rename a
  * capture to dodge a same-named binding it threads through.
@@ -56,7 +57,7 @@ type Scope = Map<string, string>;
 export function resolveBindings(
   ts: typeof import("typescript"),
   scripts: ClientScript[],
-  sourceText: string,
+  fileHash: string,
 ): ResolvedScopes {
   const bindings: BindingResolution = new Map();
 
@@ -80,13 +81,11 @@ export function resolveBindings(
     }
   };
 
-  const salt = hashPath(sourceText);
-
   // A per-file counter, incremented in source order, makes each binding's name
   // unique within the file and stable across runs.
   let next = 0;
   const declare = (name: string, script: ClientScript): string => {
-    const unique = `${name}$${salt}$${next++}`;
+    const unique = `${name}$${fileHash}$${next++}`;
     owner.set(unique, script);
     declarations.get(script)?.push(unique);
     return unique;
@@ -278,13 +277,4 @@ function scriptRoot(
     return statement;
   }
   return undefined;
-}
-
-function hashPath(input: string): string {
-  let hash = 0x811c9dc5;
-  for (let i = 0; i < input.length; i++) {
-    hash ^= input.charCodeAt(i);
-    hash = Math.imul(hash, 0x01000193);
-  }
-  return (hash >>> 0).toString(36);
 }

@@ -59,7 +59,7 @@ class BundleBuilder {
 
   // Returns the table index of a script's entry, adding it on first sight.
   private intern(script: SourceClientScript): number {
-    const key = locKey(script.loc);
+    const key = locKey(script.fileHash, script.loc);
     const existing = this.indexByLoc.get(key);
     if (existing !== undefined) {
       return existing;

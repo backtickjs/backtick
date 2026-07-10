@@ -16,6 +16,7 @@ export interface RewrittenScript {
 export function rewriteScript(
   ts: typeof import("typescript"),
   clientScript: ClientScript,
+  fileHash: string,
   bindings: BindingResolution,
   captures: string[] = [],
   declarations: string[] = [],
@@ -119,6 +120,7 @@ export function rewriteScript(
 
   const create = call(ts, "cs", "create", [
     sourceLoc(ts, scriptLocation),
+    ts.factory.createStringLiteral(fileHash),
     metadata,
     arrow(ts, ["v"], rewritten.runtime as ts.Expression),
   ]);
