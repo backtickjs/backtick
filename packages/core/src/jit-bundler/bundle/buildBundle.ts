@@ -90,8 +90,8 @@ function isHostRef(key: string): boolean {
 //     `$i`: the body fills the hole with `$i()` and every reference passes that
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
-export function buildBundle(bundle: Ir): Bundle {
-  const fns = bundle.scripts;
+export function buildBundle(ir: Ir): Bundle {
+  const fns = ir.scripts;
 
   // Maps each binding key to a readable display name — its source name with the
   // uniqueness suffix (`$<fileHash>$<n>`) dropped — so the bundle reads like the
@@ -144,11 +144,11 @@ export function buildBundle(bundle: Ir): Bundle {
       return; // a shared reference (a diamond arm) is descended into only once
     }
     seenRefs.add(ref);
-    for (const child of nestedRefs(ref.args, bundle.trees, seenTrees)) {
+    for (const child of nestedRefs(ref.args, ir.trees, seenTrees)) {
       collectRefs(child);
     }
   };
-  for (const ref of nestedRefs([bundle.root], bundle.trees, seenTrees)) {
+  for (const ref of nestedRefs([ir.root], ir.trees, seenTrees)) {
     collectRefs(ref);
   }
 
@@ -259,7 +259,7 @@ export function buildBundle(bundle: Ir): Bundle {
     }
     const order: string[] = [];
     const seen = new Set<string>();
-    for (const value of Object.values(bundle.trees[target].element.props)) {
+    for (const value of Object.values(ir.trees[target].element.props)) {
       for (const key of freeCaps(value)) {
         if (!isHostRef(key) && !seen.has(key)) {
           seen.add(key);
@@ -386,7 +386,7 @@ export function buildBundle(bundle: Ir): Bundle {
     const keys = treeSlots(target);
     const slots = new Map(keys.map((key, index) => [key, index] as const));
     treeJsons.set(target, {
-      element: renderElement(bundle.trees[target].element, slots),
+      element: renderElement(ir.trees[target].element, slots),
     });
   };
 
@@ -499,7 +499,7 @@ export function buildBundle(bundle: Ir): Bundle {
     return entries;
   };
 
-  const root = renderExpr(bundle.root, new Map());
+  const root = renderExpr(ir.root, new Map());
   const functions: Record<FunctionLabel, string> = {};
   for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
     functions[`#f${index}`] = body;
