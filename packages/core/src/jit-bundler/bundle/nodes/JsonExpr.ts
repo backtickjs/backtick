@@ -1,6 +1,6 @@
-// A JSON expression: what a tree entry and the envelope root are made of.
+// A JSON expression: what a tree entry and the bundle root are made of.
 // Plain JSON carries itself; composition uses the tagged forms listed on
-// `buildEnvelope`.
+// `buildBundle`.
 export type JsonExpr =
   | null
   | boolean

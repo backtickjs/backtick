@@ -34,7 +34,7 @@ import {
 export type RenderSplice = (index: number) => string;
 
 // Maps a binding key to the name it is printed under (see `displayName` in
-// `buildEnvelope`).
+// `buildBundle`).
 export type Mangle = (key: string) => string;
 
 // Renders a client script's AST body to a single-line JavaScript expression,
@@ -83,7 +83,7 @@ export function serializeScript(
   }
   if (node instanceof RuntimeJSXElement) {
     // An element reaches the bundle as a splice value and lowers into the tree
-    // table (see `buildBundle`); a parsed script body never contains one.
+    // table (see `buildIr`); a parsed script body never contains one.
     throw new Error("A JSX element can't appear in a script body.");
   }
   if (node instanceof SourceIf) {
