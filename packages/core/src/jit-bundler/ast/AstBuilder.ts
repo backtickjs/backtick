@@ -1,6 +1,5 @@
 import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
 import type {
-  AstNode,
   AstScriptArray,
   AstScriptArrow,
   AstScriptAssignment,
@@ -10,6 +9,7 @@ import type {
   AstScriptCall,
   AstScriptIdentifier,
   AstScriptIf,
+  AstScriptNode,
   AstScriptNull,
   AstScriptNumber,
   AstScriptObject,
@@ -18,9 +18,9 @@ import type {
   AstScriptSplice,
   AstScriptString,
   AstScriptVariableDeclaration,
-} from "./AstNode.js";
+} from "./Ast.js";
 
-export class AstBuilder implements Visitor<AstNode> {
+export class AstBuilder implements Visitor<AstScriptNode> {
   splice(loc: SourceLocation, index: number): AstScriptSplice {
     return { kind: "AstScriptSplice", loc, index };
   }
@@ -49,14 +49,14 @@ export class AstBuilder implements Visitor<AstNode> {
     return { kind: "AstScriptIdentifier", loc, name, bindingKey };
   }
 
-  block(loc: SourceLocation, statements: AstNode[]): AstScriptBlock {
+  block(loc: SourceLocation, statements: AstScriptNode[]): AstScriptBlock {
     return { kind: "AstScriptBlock", loc, statements };
   }
 
   assignment(
     loc: SourceLocation,
-    name: AstNode,
-    expression: AstNode,
+    name: AstScriptIdentifier,
+    expression: AstScriptNode,
   ): AstScriptAssignment {
     return { kind: "AstScriptAssignment", loc, name, expression };
   }
@@ -64,8 +64,8 @@ export class AstBuilder implements Visitor<AstNode> {
   variableDeclaration(
     loc: SourceLocation,
     keyword: "let" | "const",
-    name: AstNode,
-    expression: AstNode,
+    name: AstScriptIdentifier,
+    expression: AstScriptNode,
   ): AstScriptVariableDeclaration {
     return {
       kind: "AstScriptVariableDeclaration",
@@ -78,20 +78,20 @@ export class AstBuilder implements Visitor<AstNode> {
 
   if(
     loc: SourceLocation,
-    condition: AstNode,
-    consequent: AstNode,
-    alternate: AstNode | null,
+    condition: AstScriptNode,
+    consequent: AstScriptNode,
+    alternate: AstScriptNode | null,
   ): AstScriptIf {
     return { kind: "AstScriptIf", loc, condition, consequent, alternate };
   }
 
-  return(loc: SourceLocation, expression: AstNode): AstScriptReturn {
+  return(loc: SourceLocation, expression: AstScriptNode): AstScriptReturn {
     return { kind: "AstScriptReturn", loc, expression };
   }
 
   propertyAccess(
     loc: SourceLocation,
-    expression: AstNode,
+    expression: AstScriptNode,
     name: string,
   ): AstScriptPropertyAccess {
     return { kind: "AstScriptPropertyAccess", loc, expression, name };
@@ -99,29 +99,37 @@ export class AstBuilder implements Visitor<AstNode> {
 
   binop(
     loc: SourceLocation,
-    lhs: AstNode,
+    lhs: AstScriptNode,
     operator: string,
-    rhs: AstNode,
+    rhs: AstScriptNode,
   ): AstScriptBinop {
     return { kind: "AstScriptBinop", loc, lhs, operator, rhs };
   }
 
-  array(loc: SourceLocation, elements: AstNode[]): AstScriptArray {
+  array(loc: SourceLocation, elements: AstScriptNode[]): AstScriptArray {
     return { kind: "AstScriptArray", loc, elements };
   }
 
   object(
     loc: SourceLocation,
-    entries: { [key: string]: AstNode },
+    entries: { [key: string]: AstScriptNode },
   ): AstScriptObject {
     return { kind: "AstScriptObject", loc, entries };
   }
 
-  call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstScriptCall {
+  call(
+    loc: SourceLocation,
+    callee: AstScriptNode,
+    args: AstScriptNode[],
+  ): AstScriptCall {
     return { kind: "AstScriptCall", loc, callee, args };
   }
 
-  arrow(loc: SourceLocation, params: AstNode[], body: AstNode): AstScriptArrow {
+  arrow(
+    loc: SourceLocation,
+    params: AstScriptNode[],
+    body: AstScriptNode,
+  ): AstScriptArrow {
     return {
       kind: "AstScriptArrow",
       loc,

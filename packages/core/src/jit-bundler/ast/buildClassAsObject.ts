@@ -3,7 +3,7 @@ import {
   type ClientUnknown,
   spliceableEntries,
 } from "../../cs-runtime/index.js";
-import type { AstObject, AstRoot } from "./AstNode.js";
+import type { Ast, AstObject } from "./Ast.js";
 import { buildAst } from "./buildAst.js";
 
 const nodeByInstance = new WeakMap<Client<ClientUnknown>, AstObject>();
@@ -14,7 +14,7 @@ export function buildClassAsObject(value: Client<ClientUnknown>): AstObject {
     return shared;
   }
 
-  const entries: { [key: string]: AstRoot } = {};
+  const entries: { [key: string]: Ast } = {};
   for (const [key, entry] of spliceableEntries(value)) {
     entries[key] = buildAst(entry);
   }

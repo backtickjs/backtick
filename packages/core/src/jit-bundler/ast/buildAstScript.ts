@@ -4,15 +4,15 @@ import type {
   ClientUnknown,
 } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
+import type { AstScript, AstScriptNode } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
-import type { AstNode, AstScript } from "./AstNode.js";
 import { buildAst } from "./buildAst.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
 // objects at the same location — a script inside a host function, instantiated
 // with different splices at different call sites — share one parsed body but
 // still get their own node (their splices differ).
-const bodyByLoc = new Map<string, AstNode>();
+const bodyByLoc = new Map<string, AstScriptNode>();
 
 // The lowered node for each client object, keyed by identity. A script reached
 // through several splice paths (a diamond) is the same object each time, so it

@@ -1,9 +1,4 @@
-import type {
-  AstElement,
-  AstNode,
-  AstRoot,
-  AstScript,
-} from "../ast/AstNode.js";
+import type { Ast, AstElement, AstScript } from "../ast/Ast.js";
 import { locKey } from "../locKey.js";
 import type {
   Ir,
@@ -118,7 +113,7 @@ class IrBuilder {
   // element referenced only here inlines as data instead of hoisting. In value
   // position (`lower`) an element always hoists: a script body or the IR
   // root embeds a tree by reference, never structurally.
-  private lowerInTree(node: AstRoot): IrArgument {
+  private lowerInTree(node: Ast): IrArgument {
     if (node.kind === "AstElement") {
       return this.elementRefs.get(node) === 1
         ? this.lowerElement(node)
@@ -144,7 +139,7 @@ class IrBuilder {
   // hoisted elements tree references, everything else a runtime constant
   // carried through as data. Also lowers the IR's entrypoint, which may be
   // any of the three.
-  lower(node: AstRoot): IrArgument {
+  lower(node: Ast): IrArgument {
     switch (node.kind) {
       case "AstScript":
         return this.referenceScript(node);
@@ -180,10 +175,10 @@ class IrBuilder {
 // props, a script's splice arguments, or the IR root. A shared script (one
 // node, many paths) is walked once — the IR holds one entry for it — and a
 // shared element's contents likewise count once.
-function countElementReferences(root: AstRoot): Map<AstElement, number> {
+function countElementReferences(root: Ast): Map<AstElement, number> {
   const counts = new Map<AstElement, number>();
   const seenScripts = new Set<AstScript>();
-  const visit = (node: AstNode): void => {
+  const visit = (node: Ast): void => {
     if (node.kind === "AstScript") {
       if (seenScripts.has(node)) {
         return;
@@ -221,7 +216,7 @@ function countElementReferences(root: AstRoot): Map<AstElement, number> {
 // hoisted into the script table; an element hoists when it is the entrypoint,
 // spliced into a script, or shared, and inlines into its parent's entry
 // otherwise.
-export function buildIr(ast: AstRoot): Ir {
+export function buildIr(ast: Ast): Ir {
   const builder = new IrBuilder(countElementReferences(ast));
   const root = builder.lower(ast);
   return { scripts: builder.scripts, trees: builder.trees, root };

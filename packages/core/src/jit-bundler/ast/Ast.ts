@@ -1,9 +1,21 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
 
+// A node built from a value spliced into a client script. Splice values are
+// resolved at runtime and have no source text, so a value node never has a
+// location.
+export type Ast =
+  | AstScript
+  | AstArray
+  | AstBoolean
+  | AstElement
+  | AstNull
+  | AstNumber
+  | AstObject
+  | AstString;
+
 // A node parsed from a client script's source text. Every script node carries
 // the source location it was parsed from.
 export type AstScriptNode =
-  | AstScript
   | AstScriptArray
   | AstScriptArrow
   | AstScriptAssignment
@@ -22,64 +34,48 @@ export type AstScriptNode =
   | AstScriptString
   | AstScriptVariableDeclaration;
 
-// A node built from a value spliced into a client script. Splice values are
-// resolved at runtime and have no source text, so a value node never has a
-// location.
-export type AstValueNode =
-  | AstArray
-  | AstBoolean
-  | AstElement
-  | AstNull
-  | AstNumber
-  | AstObject
-  | AstString;
-
-export type AstNode = AstScriptNode | AstValueNode;
-
-export type AstRoot = AstScript | AstValueNode;
-
 export interface AstScript {
   readonly kind: "AstScript";
   readonly loc: SourceLocation;
   readonly fileHash: string;
-  readonly splices: readonly AstRoot[];
+  readonly splices: readonly Ast[];
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
-  readonly expression: AstNode;
+  readonly expression: AstScriptNode;
 }
 
 export interface AstScriptArray {
   readonly kind: "AstScriptArray";
   readonly loc: SourceLocation;
-  readonly elements: readonly AstNode[];
+  readonly elements: readonly AstScriptNode[];
 }
 
 export interface AstScriptArrow {
   readonly kind: "AstScriptArrow";
   readonly loc: SourceLocation;
   readonly params: readonly AstScriptIdentifier[];
-  readonly body: AstNode;
+  readonly body: AstScriptNode;
 }
 
 export interface AstScriptAssignment {
   readonly kind: "AstScriptAssignment";
   readonly loc: SourceLocation;
-  readonly name: AstNode;
-  readonly expression: AstNode;
+  readonly name: AstScriptIdentifier;
+  readonly expression: AstScriptNode;
 }
 
 export interface AstScriptBinop {
   readonly kind: "AstScriptBinop";
   readonly loc: SourceLocation;
-  readonly lhs: AstNode;
+  readonly lhs: AstScriptNode;
   readonly operator: string;
-  readonly rhs: AstNode;
+  readonly rhs: AstScriptNode;
 }
 
 export interface AstScriptBlock {
   readonly kind: "AstScriptBlock";
   readonly loc: SourceLocation;
-  readonly statements: readonly AstNode[];
+  readonly statements: readonly AstScriptNode[];
 }
 
 export interface AstScriptBoolean {
@@ -91,8 +87,8 @@ export interface AstScriptBoolean {
 export interface AstScriptCall {
   readonly kind: "AstScriptCall";
   readonly loc: SourceLocation;
-  readonly callee: AstNode;
-  readonly args: readonly AstNode[];
+  readonly callee: AstScriptNode;
+  readonly args: readonly AstScriptNode[];
 }
 
 export interface AstScriptIdentifier {
@@ -105,9 +101,9 @@ export interface AstScriptIdentifier {
 export interface AstScriptIf {
   readonly kind: "AstScriptIf";
   readonly loc: SourceLocation;
-  readonly condition: AstNode;
-  readonly consequent: AstNode;
-  readonly alternate: AstNode | null;
+  readonly condition: AstScriptNode;
+  readonly consequent: AstScriptNode;
+  readonly alternate: AstScriptNode | null;
 }
 
 export interface AstScriptNull {
@@ -124,20 +120,20 @@ export interface AstScriptNumber {
 export interface AstScriptObject {
   readonly kind: "AstScriptObject";
   readonly loc: SourceLocation;
-  readonly entries: Readonly<Record<string, AstNode>>;
+  readonly entries: Readonly<Record<string, AstScriptNode>>;
 }
 
 export interface AstScriptPropertyAccess {
   readonly kind: "AstScriptPropertyAccess";
   readonly loc: SourceLocation;
-  readonly expression: AstNode;
+  readonly expression: AstScriptNode;
   readonly name: string;
 }
 
 export interface AstScriptReturn {
   readonly kind: "AstScriptReturn";
   readonly loc: SourceLocation;
-  readonly expression: AstNode;
+  readonly expression: AstScriptNode;
 }
 
 export interface AstScriptSplice {
@@ -156,13 +152,13 @@ export interface AstScriptVariableDeclaration {
   readonly kind: "AstScriptVariableDeclaration";
   readonly loc: SourceLocation;
   readonly keyword: "let" | "const";
-  readonly name: AstNode;
-  readonly expression: AstNode;
+  readonly name: AstScriptIdentifier;
+  readonly expression: AstScriptNode;
 }
 
 export interface AstArray {
   readonly kind: "AstArray";
-  readonly elements: readonly AstRoot[];
+  readonly elements: readonly Ast[];
 }
 
 export interface AstBoolean {
@@ -174,7 +170,7 @@ export interface AstElement {
   readonly kind: "AstElement";
   readonly type: string;
   readonly key: string | number | null;
-  readonly props: Readonly<Record<string, AstRoot>>;
+  readonly props: Readonly<Record<string, Ast>>;
 }
 
 export interface AstNull {
@@ -188,7 +184,7 @@ export interface AstNumber {
 
 export interface AstObject {
   readonly kind: "AstObject";
-  readonly entries: Readonly<Record<string, AstRoot>>;
+  readonly entries: Readonly<Record<string, Ast>>;
 }
 
 export interface AstString {

@@ -1,4 +1,4 @@
-import type { AstNode } from "../ast/AstNode.js";
+import type { AstScriptIdentifier, AstScriptNode } from "../ast/Ast.js";
 import type { BundleNode } from "./nodes/Bundle.js";
 
 // Fills a splice hole in a script body with the node passed for that position.
@@ -14,15 +14,14 @@ export type Mangle = (key: string) => string;
 // name, disambiguated only where needed — so a captured variable's reference
 // and the parameter that receives it still line up.
 export function buildScriptNode(
-  node: AstNode,
+  node: AstScriptNode,
   renderSplice: RenderSplice,
   mangle: Mangle,
 ): BundleNode {
-  const s = (child: AstNode): BundleNode =>
+  const s = (child: AstScriptNode): BundleNode =>
     buildScriptNode(child, renderSplice, mangle);
   switch (node.kind) {
     case "AstScriptArray":
-    case "AstArray":
       return { kind: "array", elements: node.elements.map(s) };
     case "AstScriptArrow":
       return {
@@ -46,20 +45,11 @@ export function buildScriptNode(
     case "AstScriptBlock":
       return { kind: "block", statements: node.statements.map(s) };
     case "AstScriptBoolean":
-    case "AstBoolean":
       return { kind: "value", value: node.value };
     case "AstScriptCall":
       return { kind: "call", callee: s(node.callee), args: node.args.map(s) };
-    case "AstScript":
-      // `buildIr` hoists every nested script into the function table; a script
-      // reaches a body only as a splice argument, rendered as an entry call.
-      throw new Error("A nested script can't appear in a script body.");
     case "AstScriptIdentifier":
       return { kind: "identifier", name: mangle(node.bindingKey) };
-    case "AstElement":
-      // An element reaches the bundle as a splice value and lowers into the
-      // tree table (see `buildIr`); a parsed script body never contains one.
-      throw new Error("A JSX element can't appear in a script body.");
     case "AstScriptIf":
       return {
         kind: "if",
@@ -68,13 +58,10 @@ export function buildScriptNode(
         alternate: node.alternate === null ? null : s(node.alternate),
       };
     case "AstScriptNull":
-    case "AstNull":
       return { kind: "value", value: null };
     case "AstScriptNumber":
-    case "AstNumber":
       return { kind: "value", value: node.value };
-    case "AstScriptObject":
-    case "AstObject": {
+    case "AstScriptObject": {
       const entries: { [key: string]: BundleNode } = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = s(value);
@@ -88,7 +75,6 @@ export function buildScriptNode(
     case "AstScriptSplice":
       return renderSplice(node.index);
     case "AstScriptString":
-    case "AstString":
       return { kind: "value", value: node.value };
     case "AstScriptVariableDeclaration":
       return {
@@ -106,9 +92,6 @@ export function buildScriptNode(
 
 // A declaration or assignment target, flattened to its display name — the
 // compiler only produces identifier targets.
-function targetName(node: AstNode, mangle: Mangle): string {
-  if (node.kind === "AstScriptIdentifier") {
-    return mangle(node.bindingKey);
-  }
-  throw new Error("A binding target must be an identifier.");
+function targetName(node: AstScriptIdentifier, mangle: Mangle): string {
+  return mangle(node.bindingKey);
 }

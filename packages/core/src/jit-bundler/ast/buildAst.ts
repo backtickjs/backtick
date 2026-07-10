@@ -4,12 +4,12 @@ import {
   isJSXElement,
   type Spliceable,
 } from "../../cs-runtime/index.js";
-import type { AstRoot } from "./AstNode.js";
+import type { Ast } from "./Ast.js";
 import { buildAstScript } from "./buildAstScript.js";
 import { buildClassAsObject } from "./buildClassAsObject.js";
 import { buildJSXElement } from "./buildJSXElement.js";
 
-export function buildAst(value: Spliceable): AstRoot {
+export function buildAst(value: Spliceable): Ast {
   if (isClientScript(value)) {
     return buildAstScript(value);
   }
@@ -45,7 +45,7 @@ export function buildAst(value: Spliceable): AstRoot {
         'declaring the "@backtickjs" marker can be spliced into a client script.',
     );
   }
-  const entries: { [key: string]: AstRoot } = {};
+  const entries: { [key: string]: Ast } = {};
   for (const [key, entry] of Object.entries(value)) {
     entries[key] = buildAst(entry);
   }
