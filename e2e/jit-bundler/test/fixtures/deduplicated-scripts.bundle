@@ -5,7 +5,7 @@
   },
   "trees": {},
   "root": {
-    "$call": "#f0",
+    "#call": "#f0",
     "args": []
   }
 }

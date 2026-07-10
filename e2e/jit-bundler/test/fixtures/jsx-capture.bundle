@@ -10,10 +10,10 @@
         "key": null,
         "props": {
           "onClick": {
-            "$call": "#f1",
+            "#call": "#f1",
             "args": [
               {
-                "$slot": 0
+                "#slot": 0
               }
             ]
           }
@@ -22,7 +22,7 @@
     }
   },
   "root": {
-    "$call": "#f0",
+    "#call": "#f0",
     "args": []
   }
 }

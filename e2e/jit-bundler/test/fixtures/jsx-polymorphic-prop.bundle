@@ -9,18 +9,18 @@
         "key": null,
         "props": {
           "onA": {
-            "$call": "#f0",
+            "#call": "#f0",
             "args": [
               {
-                "$thunk": 1
+                "#thunk": 1
               }
             ]
           },
           "onB": {
-            "$call": "#f0",
+            "#call": "#f0",
             "args": [
               {
-                "$thunk": 2
+                "#thunk": 2
               }
             ]
           }
@@ -29,7 +29,7 @@
     }
   },
   "root": {
-    "$call": "#t0",
+    "#call": "#t0",
     "args": []
   }
 }

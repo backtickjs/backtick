@@ -25,7 +25,7 @@ export type JsonExpr =
 // The keys that tag a JSON expression's non-literal forms. A plain data object
 // using one of them would be indistinguishable from a tag to the loader, so
 // serialization rejects it.
-const RESERVED_KEYS = new Set(["$slot", "$call", "$thunk", "$global"]);
+const RESERVED_KEYS = new Set(["#slot", "#call", "#thunk", "#global"]);
 
 // Whether a plain object would parse as an element node: exactly the element
 // keys, with a string `type`.
@@ -61,10 +61,10 @@ function isHostRef(key: string): boolean {
 // Computation ships as source, composition as data: a tree (and the root) is
 // plain JSON plus the tagged forms
 //
-//   {"$slot": n}                     the enclosing tree's n-th parameter
-//   {"$global": name}                a free host reference, resolved globally
-//   {"$call": label, "args": [...]}  apply a `functions` or `trees` entry
-//   {"$thunk": expr}                 a splice argument, evaluated lazily
+//   {"#slot": n}                     the enclosing tree's n-th parameter
+//   {"#global": name}                a free host reference, resolved globally
+//   {"#call": label, "args": [...]}  apply a `functions` or `trees` entry
+//   {"#thunk": expr}                 a splice argument, evaluated lazily
 //   {type, key, props}               a JSX element node
 //
 // so a tree is parseable and inspectable without evaluating any source.
@@ -73,8 +73,8 @@ function isHostRef(key: string): boolean {
 // one value per slot, exactly as calling a `functions` entry supplies its
 // captures. The slot signature is derived, not stored (see `treeSlots`). A
 // reference to a tree from source position renders as a call `#ti(...)`
-// passing those captures by name; from JSON position it is a `$call` whose
-// arguments are `$slot`/`$global` expressions of the enclosing entry.
+// passing those captures by name; from JSON position it is a `#call` whose
+// arguments are `#slot`/`#global` expressions of the enclosing entry.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -256,7 +256,7 @@ export function serializeBundle(bundle: Bundle): string {
   // whichever scope instantiates it, in first-need order. These are the
   // entry's implicit parameters — a reference to the tree passes one value per
   // key, exactly as captures thread between functions. Free host references
-  // are excluded: inside tree JSON they resolve as `$global` leaves instead of
+  // are excluded: inside tree JSON they resolve as `#global` leaves instead of
   // threading through the instance. Memoized; no cycle guard is needed because
   // the element graph is acyclic (children exist before their parent).
   const treeSlotsCache = new Map<number, string[]>();
@@ -405,7 +405,7 @@ export function serializeBundle(bundle: Bundle): string {
   // it can't be threaded from anywhere.
   const capExpr = (key: string, slots: Map<string, number>): JsonExpr => {
     if (isHostRef(key)) {
-      return { $global: key };
+      return { "#global": key };
     }
     const index = slots.get(key);
     if (index === undefined) {
@@ -414,11 +414,11 @@ export function serializeBundle(bundle: Bundle): string {
           "this reference to supply it.",
       );
     }
-    return { $slot: index };
+    return { "#slot": index };
   };
 
-  // The arguments of a `$call` to a function entry, mirroring `callArgs`: for
-  // a polymorphic target, one `$thunk` per splice ahead of its captures.
+  // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
+  // a polymorphic target, one `#thunk` per splice ahead of its captures.
   const exprCallArgs = (
     ref: ScriptRef,
     slots: Map<string, number>,
@@ -426,7 +426,7 @@ export function serializeBundle(bundle: Bundle): string {
     const parts: JsonExpr[] = [];
     if (polymorphic.has(ref.target)) {
       for (const arg of ref.args) {
-        parts.push({ $thunk: renderExpr(arg, slots) });
+        parts.push({ "#thunk": renderExpr(arg, slots) });
       }
     }
     for (const key of need(ref.target)) {
@@ -444,12 +444,15 @@ export function serializeBundle(bundle: Bundle): string {
   ): JsonExpr => {
     if (value instanceof ScriptRef) {
       materialize(value.target);
-      return { $call: `#f${value.target}`, args: exprCallArgs(value, slots) };
+      return {
+        "#call": `#f${value.target}`,
+        args: exprCallArgs(value, slots),
+      };
     }
     if (value instanceof TreeRef) {
       materializeTree(value.target);
       return {
-        $call: `#t${value.target}`,
+        "#call": `#t${value.target}`,
         args: treeSlots(value.target).map((key) => capExpr(key, slots)),
       };
     }

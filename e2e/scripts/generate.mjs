@@ -147,7 +147,7 @@ function generate(sizes) {
 
   // --- Widgets: one distinct script prop each -----------------------------
   w(`// ${widgets} widgets, each with a DISTINCT handler script (a distinct`);
-  w(`// source location), so the function table gets one \`$call\`ed entry per`);
+  w(`// source location), so the function table gets one \`#call\`ed entry per`);
   w(`// widget.`);
   for (let i = 0; i < widgets; i++) {
     w(
@@ -158,7 +158,7 @@ function generate(sizes) {
 
   // --- Polymorphic handler ------------------------------------------------
   w(`// One handler body instantiated with a different splice per call site:`);
-  w(`// a single polymorphic entry, every reference passing a \`$thunk\`.`);
+  w(`// a single polymorphic entry, every reference passing a \`#thunk\`.`);
   w(`function mk(n: number): Client<() => number> {`);
   w(`  return cs\`() => \${n}\`;`);
   w(`}`);
@@ -171,7 +171,7 @@ function generate(sizes) {
   w(``);
 
   // --- Free host reference ------------------------------------------------
-  w(`// A free host reference renders as a \`$global\` leaf in the tree JSON.`);
+  w(`// A free host reference renders as a \`#global\` leaf in the tree JSON.`);
   w(`// @ts-expect-error -- the compiler transform supports free host`);
   w(`// references, but its typechecker can't resolve them inside a script`);
   w(`// body yet; drop this once it can.`);
@@ -186,7 +186,7 @@ function generate(sizes) {
   // doubly-referenced ones hoist, so both paths run at scale.
   w(`// ${rows} rows. Interior widgets are referenced once (inline); each row`);
   w(`// also borrows the next row's first widget (shared, hoisted). The inline`);
-  w(`// button gives every row two \`$thunk\` call sites on the one polymorphic`);
+  w(`// button gives every row two \`#thunk\` call sites on the one polymorphic`);
   w(`// handler.`);
   const perRow = Math.max(1, Math.floor(widgets / rows));
   const rowNames = [];
@@ -234,7 +234,7 @@ function generate(sizes) {
 
   // --- Page ----------------------------------------------------------------
   w(`// The page inlines every row into one large tree entry; the hoisted`);
-  w(`// widgets and the badge become \`$call\`s into their own entries.`);
+  w(`// widgets and the badge become \`#call\`s into their own entries.`);
   w(`const page = (`);
   w(`  <flexbox direction="column">`);
   w(`    {[globalWidget, ${rowNames.join(", ")}]}`);

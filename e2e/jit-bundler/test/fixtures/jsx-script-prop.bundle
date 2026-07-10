@@ -9,10 +9,10 @@
         "key": null,
         "props": {
           "onClick": {
-            "$call": "#f0",
+            "#call": "#f0",
             "args": [
               {
-                "$global": "console"
+                "#global": "console"
               }
             ]
           }
@@ -21,7 +21,7 @@
     }
   },
   "root": {
-    "$call": "#t0",
+    "#call": "#t0",
     "args": []
   }
 }

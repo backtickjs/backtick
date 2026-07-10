@@ -7,7 +7,7 @@ import { jsx } from "../../dist/jsx-runtime/index.js";
 // fixtures; only the fail-loudly cases live here.
 
 test("a plain object prop can't use a reserved key", () => {
-  const element = jsx("flexbox", { data: { $call: "#f0" } });
+  const element = jsx("flexbox", { data: { "#call": "#f0" } });
   assert.throws(() => bundle(element), /reserved/);
 });
 

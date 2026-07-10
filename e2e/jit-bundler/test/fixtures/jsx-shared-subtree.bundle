@@ -18,11 +18,11 @@
           "direction": "column",
           "children": [
             {
-              "$call": "#t0",
+              "#call": "#t0",
               "args": []
             },
             {
-              "$call": "#t0",
+              "#call": "#t0",
               "args": []
             }
           ]
@@ -31,7 +31,7 @@
     }
   },
   "root": {
-    "$call": "#t1",
+    "#call": "#t1",
     "args": []
   }
 }
