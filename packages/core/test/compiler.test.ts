@@ -3,16 +3,16 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { transform } from "../../dist/compiler/transform.js";
-import { virtualize } from "../../dist/compiler/virtualize.js";
+import { transform } from "../dist/compiler/transform.js";
+import { virtualize } from "../dist/compiler/virtualize.js";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
 
 // The fixture corpus is shared with the jit-bundler suite: this suite
 // snapshots the compiler artifacts (diagnostics, virtual code, source map,
-// emitted JS), while `test/jit-bundler/fixtures.test.ts` snapshots the
-// bundled payload of the same sources.
-const fixturesRoot = join(import.meta.dirname, "../fixtures");
+// emitted JS), while `test/bundle.test.ts` snapshots the bundled payload of
+// the same sources.
+const fixturesRoot = join(import.meta.dirname, "fixtures");
 
 const COMPILER_OPTIONS: ts.CompilerOptions = {
   target: ts.ScriptTarget.ESNext,

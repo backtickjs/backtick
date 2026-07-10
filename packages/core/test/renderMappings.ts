@@ -1,6 +1,6 @@
 import ts from "typescript";
-import type { SourceMapping } from "../../dist/compiler/buildMappings.js";
-import { parseSourceText } from "../../dist/compiler/parseFile.js";
+import type { SourceMapping } from "../dist/compiler/buildMappings.js";
+import { parseSourceText } from "../dist/compiler/parseFile.js";
 
 // The source spans covered by top-level `cs` templates (which enclose any
 // nested scripts). Used to drop the identity mappings for the surrounding code,

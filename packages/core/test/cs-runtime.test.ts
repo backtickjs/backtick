@@ -4,7 +4,7 @@ import {
   cs,
   isSpliceable,
   spliceableEntries,
-} from "../../dist/cs-runtime/index.js";
+} from "../dist/cs-runtime/index.js";
 
 test("cs`...` throws when used without the compiler", () => {
   assert.throws(() => cs`"Hello World!"`, /was not compiled/);

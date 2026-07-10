@@ -1,8 +1,8 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
 import ts from "typescript";
-import { parseSourceText } from "../../dist/compiler/parseFile.js";
-import { resolveBindings } from "../../dist/compiler/resolveBindings.js";
+import { parseSourceText } from "../dist/compiler/parseFile.js";
+import { resolveBindings } from "../dist/compiler/resolveBindings.js";
 
 function captures(body: string): string[] {
   const source = `const script = cs\`${body}\`;`;

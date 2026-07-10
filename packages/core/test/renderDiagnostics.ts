@@ -1,5 +1,5 @@
 import ts from "typescript";
-import type { Diagnostic } from "../../dist/compiler/diagnostics.js";
+import type { Diagnostic } from "../dist/compiler/diagnostics.js";
 
 // Render each diagnostic as `<line>:<col>-<line>:<col> <category> <code>: <message>`,
 // with line/column numbers 1-based to match editor conventions. When there are no
