@@ -99,7 +99,10 @@ export type BundleExpr =
 // refer to parameters of an enclosing arrow (including the entry itself),
 // locals declared in an enclosing block, or — when neither binds them —
 // properties of the global object.
-export type BundleNode =
+export type BundleNode = BundleStatementNode;
+
+// A body node that yields a value.
+export type BundleExpressionNode =
   | BundleValueNode
   | BundleArrayNode
   | BundleObjectNode
@@ -108,12 +111,21 @@ export type BundleNode =
   | BundleCallNode
   | BundlePropertyNode
   | BundleBinopNode
-  | BundleArrowNode
+  | BundleArrowNode;
+
+// A body node a block runs in order: control flow, bindings, or an
+// expression evaluated for its effect.
+export type BundleStatementNode =
+  | BundleExpressionNode
   | BundleBlockNode
   | BundleDeclarationNode
   | BundleAssignmentNode
   | BundleIfNode
   | BundleReturnNode;
+
+// The body of an arrow: a block, or an expression whose value is implicitly
+// returned.
+export type BundleBody = BundleExpressionNode | BundleBlockNode;
 
 // A primitive constant: evaluates to `value` itself. Serves source literals
 // and inlined runtime primitives alike.
@@ -127,13 +139,13 @@ export interface BundleValueNode {
 // leaves.
 export interface BundleArrayNode {
   "#": "array";
-  elements: BundleNode[];
+  elements: BundleExpressionNode[];
 }
 
 // An object: evaluates each entry's value under its key.
 export interface BundleObjectNode {
   "#": "object";
-  entries: { [key: string]: BundleNode };
+  entries: { [key: string]: BundleExpressionNode };
 }
 
 // A variable reference: resolves `name` in the enclosing scope, or on the
@@ -158,14 +170,14 @@ export interface BundleEntryNode {
 // order.
 export interface BundleCallNode {
   "#": "call";
-  callee: BundleNode;
-  args: BundleNode[];
+  callee: BundleExpressionNode;
+  args: BundleExpressionNode[];
 }
 
 // A static property access: `object.name`.
 export interface BundlePropertyNode {
   "#": "property";
-  object: BundleNode;
+  object: BundleExpressionNode;
   name: string;
 }
 
@@ -173,8 +185,8 @@ export interface BundlePropertyNode {
 export interface BundleBinopNode {
   "#": "binop";
   operator: string;
-  left: BundleNode;
-  right: BundleNode;
+  left: BundleExpressionNode;
+  right: BundleExpressionNode;
 }
 
 // An arrow function: evaluates to a closure over the enclosing scope. The
@@ -183,7 +195,7 @@ export interface BundleBinopNode {
 export interface BundleArrowNode {
   "#": "arrow";
   params: string[];
-  body: BundleNode;
+  body: BundleBody;
 }
 
 // A statement block: executes statements in order; a `return` yields the
@@ -192,7 +204,7 @@ export interface BundleArrowNode {
 // local).
 export interface BundleBlockNode {
   "#": "block";
-  statements: BundleNode[];
+  statements: BundleStatementNode[];
 }
 
 // A variable declaration: binds `name` in the enclosing block.
@@ -200,26 +212,26 @@ export interface BundleDeclarationNode {
   "#": "declaration";
   keyword: "let" | "const";
   name: string;
-  expression: BundleNode;
+  expression: BundleExpressionNode;
 }
 
 // An assignment to a resolved name (targets are always identifiers).
 export interface BundleAssignmentNode {
   "#": "assignment";
   name: string;
-  expression: BundleNode;
+  expression: BundleExpressionNode;
 }
 
 // An if statement; `alternate` is null when there is no else branch.
 export interface BundleIfNode {
   "#": "if";
-  condition: BundleNode;
-  consequent: BundleNode;
-  alternate: BundleNode | null;
+  condition: BundleExpressionNode;
+  consequent: BundleStatementNode;
+  alternate: BundleStatementNode | null;
 }
 
 // Returns the expression's value from the enclosing arrow.
 export interface BundleReturnNode {
   "#": "return";
-  expression: BundleNode;
+  expression: BundleExpressionNode;
 }

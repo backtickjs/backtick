@@ -1,96 +1,144 @@
-import type { AstScriptIdentifier, AstScriptNode } from "../ast/Ast.js";
-import type { BundleNode } from "./Bundle.js";
+import type {
+  AstScriptBlock,
+  AstScriptBody,
+  AstScriptExpression,
+  AstScriptIdentifier,
+  AstScriptStatement,
+} from "../ast/Ast.js";
+import type {
+  BundleBlockNode,
+  BundleBody,
+  BundleExpressionNode,
+  BundleStatementNode,
+} from "./Bundle.js";
 
-// Fills a splice hole in a script body with the node passed for that position.
-export type RenderSplice = (index: number) => BundleNode;
+// Fills a splice hole in a script body with the node passed for that
+// position. A hole sits in expression position, so what fills it must be an
+// expression.
+export type RenderSplice = (index: number) => BundleExpressionNode;
 
 // Maps a binding key to the name it is printed under (see `displayName` in
 // `buildBundle`).
 export type Mangle = (key: string) => string;
 
-// Lowers a script's AST body to a wire `BundleNode` tree: splice holes are
+// Lowers a script's AST body to its wire `BundleBody`: splice holes are
 // filled by `renderSplice` (with the arguments passed to the script), and
 // every binding key is printed under its `mangle`d display name — the source
 // name, disambiguated only where needed — so a captured variable's reference
-// and the parameter that receives it still line up.
+// and the parameter that receives it still line up. The mapping mirrors the
+// grammar: expressions lower to expressions, statements to statements.
 export function buildScriptNode(
-  node: AstScriptNode,
+  node: AstScriptBody,
   renderSplice: RenderSplice,
   mangle: Mangle,
-): BundleNode {
-  const s = (child: AstScriptNode): BundleNode =>
-    buildScriptNode(child, renderSplice, mangle);
+): BundleBody {
+  if (node.kind === "AstScriptBlock") {
+    return buildBlock(node, renderSplice, mangle);
+  }
+  return buildExpression(node, renderSplice, mangle);
+}
+
+function buildBlock(
+  node: AstScriptBlock,
+  renderSplice: RenderSplice,
+  mangle: Mangle,
+): BundleBlockNode {
+  return {
+    "#": "block",
+    statements: node.statements.map((statement) =>
+      buildStatement(statement, renderSplice, mangle),
+    ),
+  };
+}
+
+function buildStatement(
+  node: AstScriptStatement,
+  renderSplice: RenderSplice,
+  mangle: Mangle,
+): BundleStatementNode {
   switch (node.kind) {
-    case "AstScriptArray":
-      return { "#": "array", elements: node.elements.map(s) };
-    case "AstScriptArrow":
-      return {
-        "#": "arrow",
-        params: node.params.map((param) => mangle(param.bindingKey)),
-        body: s(node.body),
-      };
     case "AstScriptAssignment":
       return {
         "#": "assignment",
         name: targetName(node.name, mangle),
-        expression: s(node.expression),
-      };
-    case "AstScriptBinop":
-      return {
-        "#": "binop",
-        operator: node.operator,
-        left: s(node.lhs),
-        right: s(node.rhs),
+        expression: buildExpression(node.expression, renderSplice, mangle),
       };
     case "AstScriptBlock":
-      return { "#": "block", statements: node.statements.map(s) };
-    case "AstScriptBoolean":
-      return { "#": "value", value: node.value };
-    case "AstScriptCall":
-      return {
-        "#": "call",
-        callee: s(node.callee),
-        args: node.args.map(s),
-      };
-    case "AstScriptIdentifier":
-      return { "#": "identifier", name: mangle(node.bindingKey) };
+      return buildBlock(node, renderSplice, mangle);
     case "AstScriptIf":
       return {
         "#": "if",
-        condition: s(node.condition),
-        consequent: s(node.consequent),
-        alternate: node.alternate === null ? null : s(node.alternate),
-      };
-    case "AstScriptNull":
-      return { "#": "value", value: null };
-    case "AstScriptNumber":
-      return { "#": "value", value: node.value };
-    case "AstScriptObject": {
-      const entries: { [key: string]: BundleNode } = {};
-      for (const [key, value] of Object.entries(node.entries)) {
-        entries[key] = s(value);
-      }
-      return { "#": "object", entries };
-    }
-    case "AstScriptPropertyAccess":
-      return {
-        "#": "property",
-        object: s(node.expression),
-        name: node.name,
+        condition: buildExpression(node.condition, renderSplice, mangle),
+        consequent: buildStatement(node.consequent, renderSplice, mangle),
+        alternate:
+          node.alternate === null
+            ? null
+            : buildStatement(node.alternate, renderSplice, mangle),
       };
     case "AstScriptReturn":
-      return { "#": "return", expression: s(node.expression) };
-    case "AstScriptSplice":
-      return renderSplice(node.index);
-    case "AstScriptString":
-      return { "#": "value", value: node.value };
+      return {
+        "#": "return",
+        expression: buildExpression(node.expression, renderSplice, mangle),
+      };
     case "AstScriptVariableDeclaration":
       return {
         "#": "declaration",
         keyword: node.keyword,
         name: targetName(node.name, mangle),
-        expression: s(node.expression),
+        expression: buildExpression(node.expression, renderSplice, mangle),
       };
+    default:
+      // Every remaining kind is an expression, evaluated for its effect.
+      return buildExpression(node, renderSplice, mangle);
+  }
+}
+
+function buildExpression(
+  node: AstScriptExpression,
+  renderSplice: RenderSplice,
+  mangle: Mangle,
+): BundleExpressionNode {
+  const e = (child: AstScriptExpression): BundleExpressionNode =>
+    buildExpression(child, renderSplice, mangle);
+  switch (node.kind) {
+    case "AstScriptArray":
+      return { "#": "array", elements: node.elements.map(e) };
+    case "AstScriptArrow":
+      return {
+        "#": "arrow",
+        params: node.params.map((param) => mangle(param.bindingKey)),
+        body: buildScriptNode(node.body, renderSplice, mangle),
+      };
+    case "AstScriptBinop":
+      return {
+        "#": "binop",
+        operator: node.operator,
+        left: e(node.lhs),
+        right: e(node.rhs),
+      };
+    case "AstScriptBoolean":
+      return { "#": "value", value: node.value };
+    case "AstScriptCall":
+      return { "#": "call", callee: e(node.callee), args: node.args.map(e) };
+    case "AstScriptIdentifier":
+      return { "#": "identifier", name: mangle(node.bindingKey) };
+    case "AstScriptNull":
+      return { "#": "value", value: null };
+    case "AstScriptNumber":
+      return { "#": "value", value: node.value };
+    case "AstScriptObject": {
+      const entries: { [key: string]: BundleExpressionNode } = {};
+      for (const [key, value] of Object.entries(node.entries)) {
+        entries[key] = e(value);
+      }
+      return { "#": "object", entries };
+    }
+    case "AstScriptPropertyAccess":
+      return { "#": "property", object: e(node.expression), name: node.name };
+    case "AstScriptSplice":
+      return renderSplice(node.index);
+    case "AstScriptString":
+      return { "#": "value", value: node.value };
     default: {
       const unhandled: never = node;
       throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);

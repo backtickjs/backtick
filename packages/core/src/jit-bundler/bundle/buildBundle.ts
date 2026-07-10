@@ -10,8 +10,8 @@ import type {
   BundleArrowNode,
   BundleElement,
   BundleExpr,
+  BundleExpressionNode,
   BundleGlobal,
-  BundleNode,
   BundleSlot,
   BundleTree,
   FunctionLabel,
@@ -287,8 +287,8 @@ export function buildBundle(ir: Ir): Bundle {
   // The arguments passed when calling an entry: for a polymorphic target, one
   // thunk per splice (bound to this reference's arguments) ahead of its
   // captures; for a monomorphic target, just its captures.
-  const callArgs = (ref: IrScriptRef): BundleNode[] => {
-    const parts: BundleNode[] = [];
+  const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
+    const parts: BundleExpressionNode[] = [];
     if (polymorphic.has(ref.target)) {
       for (const arg of ref.args) {
         parts.push(renderThunk(arg));
@@ -304,7 +304,7 @@ export function buildBundle(ir: Ir): Bundle {
   // evaluates to. A script reference becomes a call of its `#fi` entry, a tree
   // reference a call of its `#ti` entry passing the tree's slot captures;
   // every other value its literal form.
-  const renderValue = (value: IrArgument): BundleNode => {
+  const renderValue = (value: IrArgument): BundleExpressionNode => {
     switch (value.kind) {
       case "IrScriptRef":
         materialize(value.target);
@@ -330,7 +330,7 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrArray":
         return { "#": "array", elements: value.elements.map(renderValue) };
       case "IrObject": {
-        const entries: { [key: string]: BundleNode } = {};
+        const entries: { [key: string]: BundleExpressionNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
           entries[key] = renderValue(entry);
         }
@@ -343,14 +343,14 @@ export function buildBundle(ir: Ir): Bundle {
   // yields the value — so a polymorphic entry evaluates it lazily at the hole,
   // mirroring an inlined splice. A referenced entry that already takes no
   // arguments is a nullary thunk as-is; anything else is wrapped in an arrow.
-  const renderThunk = (value: IrArgument): BundleNode => {
+  const renderThunk = (value: IrArgument): BundleExpressionNode => {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       const args = callArgs(value);
       const entry = {
         "#": "entry",
         label: `#f${value.target}`,
-      } as const satisfies BundleNode;
+      } as const satisfies BundleExpressionNode;
       return args.length === 0
         ? entry
         : {
@@ -362,7 +362,7 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       const args = treeSlots(value.target).map(
-        (key): BundleNode => ({
+        (key): BundleExpressionNode => ({
           "#": "identifier",
           name: displayName(key),
         }),
@@ -370,7 +370,7 @@ export function buildBundle(ir: Ir): Bundle {
       const entry = {
         "#": "entry",
         label: `#t${value.target}`,
-      } as const satisfies BundleNode;
+      } as const satisfies BundleExpressionNode;
       return args.length === 0
         ? entry
         : {

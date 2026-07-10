@@ -1,5 +1,5 @@
 import type { SourceLocation } from "../../cs-runtime/index.js";
-import type { AstScriptNode } from "../ast/Ast.js";
+import type { AstScriptBody } from "../ast/Ast.js";
 
 export interface Ir {
   scripts: IrScriptEntry[];
@@ -12,7 +12,7 @@ export interface IrScriptEntry {
   readonly loc: SourceLocation;
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
-  readonly body: AstScriptNode;
+  readonly body: AstScriptBody;
 }
 
 // A tree-table entry. A wrapper rather than the element itself so

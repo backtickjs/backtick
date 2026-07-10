@@ -3,9 +3,10 @@ import type {
   BundleApply,
   BundleElement,
   BundleExpr,
+  BundleExpressionNode,
   BundleGlobal,
-  BundleNode,
   BundleSlot,
+  BundleStatementNode,
   BundleThunk,
   FunctionLabel,
   TreeLabel,
@@ -228,7 +229,7 @@ const advanced: Completion = { returned: false, value: undefined };
 
 function executeStatement(
   bundle: Bundle,
-  node: BundleNode,
+  node: BundleStatementNode,
   scope: Scope,
 ): Completion {
   switch (node["#"]) {
@@ -282,6 +283,7 @@ function executeStatement(
       };
     }
     default: {
+      // Every remaining kind is an expression, evaluated for its effect.
       evaluateNode(bundle, node, scope);
       return advanced;
     }
@@ -290,7 +292,7 @@ function executeStatement(
 
 function evaluateNode(
   bundle: Bundle,
-  node: BundleNode,
+  node: BundleExpressionNode,
   scope: Scope | null,
 ): unknown {
   switch (node["#"]) {
@@ -359,17 +361,14 @@ function evaluateNode(
         return evaluateNode(bundle, node.body, frame);
       };
     }
-    default: {
-      throw new Error(`unexpected ${node["#"]} node in expression position`);
-    }
   }
 }
 
 function evaluateBinop(
   bundle: Bundle,
   operator: string,
-  leftNode: BundleNode,
-  rightNode: BundleNode,
+  leftNode: BundleExpressionNode,
+  rightNode: BundleExpressionNode,
   scope: Scope | null,
 ): unknown {
   const left = evaluateNode(bundle, leftNode, scope);
