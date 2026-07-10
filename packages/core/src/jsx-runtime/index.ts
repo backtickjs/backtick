@@ -30,7 +30,7 @@ export function jsx(
     throw new Error("Key must be a string or a number");
   }
   return {
-    "@backtickjs": true as unknown as UIElement,
+    "@backtickjs": {},
     type,
     key: key ?? null,
     props,
