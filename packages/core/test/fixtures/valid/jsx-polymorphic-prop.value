@@ -1,0 +1,8 @@
+{
+  "type": "button",
+  "key": null,
+  "props": {
+    "onA": [function],
+    "onB": [function]
+  }
+}

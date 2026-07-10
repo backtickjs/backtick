@@ -18,13 +18,16 @@ import {
 } from "../dist/cs-runtime/index.js";
 import { bundle } from "../dist/jit-bundler/index.js";
 import { jsx } from "../dist/jsx-runtime/index.js";
+import { evaluate } from "../dist/test-client/index.js";
+import { renderValue } from "./renderValue.ts";
 
 // End-to-end snapshot tests over the shared fixtures: each valid fixture
 // exports a client — a script or a JSX tree — compiled here with the same
 // transform the compiler suite snapshots as `*.js`, then executed by
-// importing the emitted module, and its bundled payload is snapshotted to a
-// sibling `*.bundle` file. Run with UPDATE_SNAPSHOTS=1 to (re)generate the
-// snapshots.
+// importing the emitted module. The bundled payload is snapshotted to a
+// sibling `*.bundle` file, then executed by the reference test-client and
+// the resulting runtime value snapshotted to `*.value`. Run with
+// UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
 //
 // The emitted modules land in a cache directory inside the package so their
 // `@backtickjs/core` imports resolve through node's package self-reference.
@@ -73,9 +76,14 @@ describe("bundle", () => {
       const { default: script } = (await import(
         pathToFileURL(compiled).href
       )) as { default: Client<ClientUnknown> };
+      const payload = bundle(script);
       matchFileSnapshot(
-        JSON.stringify(bundle(script), null, 2),
+        JSON.stringify(payload, null, 2),
         join(fixturesDir, `${base}.bundle`),
+      );
+      matchFileSnapshot(
+        `${renderValue(evaluate(payload))}\n`,
+        join(fixturesDir, `${base}.value`),
       );
     });
   }
