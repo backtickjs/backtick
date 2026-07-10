@@ -1,7 +1,4 @@
-export class AstNumber {
+export interface AstNumber {
+  readonly kind: "AstNumber";
   readonly value: number;
-
-  constructor(value: number) {
-    this.value = value;
-  }
 }

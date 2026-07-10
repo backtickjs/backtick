@@ -7,13 +7,7 @@ import {
 import { buildAstScript } from "./buildAstScript.js";
 import { buildClassAsObject } from "./buildClassAsObject.js";
 import { buildJSXElement } from "./buildJSXElement.js";
-import { AstArray } from "./nodes/AstArray.js";
-import { AstBoolean } from "./nodes/AstBoolean.js";
 import type { AstRoot } from "./nodes/AstNode.js";
-import { AstNull } from "./nodes/AstNull.js";
-import { AstNumber } from "./nodes/AstNumber.js";
-import { AstObject } from "./nodes/AstObject.js";
-import { AstString } from "./nodes/AstString.js";
 
 export function buildAst(value: Spliceable): AstRoot {
   if (isClientScript(value)) {
@@ -26,19 +20,19 @@ export function buildAst(value: Spliceable): AstRoot {
     return buildClassAsObject(value);
   }
   if (value === null) {
-    return new AstNull();
+    return { kind: "AstNull" };
   }
   if (typeof value === "number") {
-    return new AstNumber(value);
+    return { kind: "AstNumber", value };
   }
   if (typeof value === "boolean") {
-    return new AstBoolean(value);
+    return { kind: "AstBoolean", value };
   }
   if (typeof value === "string") {
-    return new AstString(value);
+    return { kind: "AstString", value };
   }
   if (Array.isArray(value)) {
-    return new AstArray(value.map(buildAst));
+    return { kind: "AstArray", elements: value.map(buildAst) };
   }
   // Only plain objects reflect structurally. A class instance without the
   // "@backtickjs" marker would land here and half-work — own fields reflect,
@@ -55,5 +49,5 @@ export function buildAst(value: Spliceable): AstRoot {
   for (const [key, entry] of Object.entries(value)) {
     entries[key] = buildAst(entry);
   }
-  return new AstObject(entries);
+  return { kind: "AstObject", entries };
 }

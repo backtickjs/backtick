@@ -4,8 +4,8 @@ import {
   spliceableEntries,
 } from "../../cs-runtime/index.js";
 import { buildAst } from "./buildAst.js";
-import type { AstNode } from "./nodes/AstNode.js";
-import { AstObject } from "./nodes/AstObject.js";
+import type { AstRoot } from "./nodes/AstNode.js";
+import type { AstObject } from "./nodes/AstObject.js";
 
 const nodeByInstance = new WeakMap<Client<ClientUnknown>, AstObject>();
 
@@ -15,12 +15,12 @@ export function buildClassAsObject(value: Client<ClientUnknown>): AstObject {
     return shared;
   }
 
-  const entries: { [key: string]: AstNode } = {};
+  const entries: { [key: string]: AstRoot } = {};
   for (const [key, entry] of spliceableEntries(value)) {
     entries[key] = buildAst(entry);
   }
 
-  const node = new AstObject(entries);
+  const node: AstObject = { kind: "AstObject", entries };
   nodeByInstance.set(value, node);
   return node;
 }

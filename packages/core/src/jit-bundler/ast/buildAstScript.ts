@@ -7,7 +7,7 @@ import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { buildAst } from "./buildAst.js";
 import type { AstNode } from "./nodes/AstNode.js";
-import { AstScript } from "./nodes/AstScript.js";
+import type { AstScript } from "./nodes/AstScript.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
 // objects at the same location — a script inside a host function, instantiated
@@ -39,14 +39,15 @@ export function buildAstScript(client: ClientScript<ClientUnknown>): AstScript {
   // The client object graph is acyclic — a script's splices are host values that
   // exist before the script itself — so lowering the splices before caching the
   // node cannot recurse back into this same object.
-  const node = new AstScript(
-    client.loc,
-    client.fileHash,
-    client.metadata.splices.map(buildAst),
-    client.metadata.captures,
-    client.metadata.declarations,
+  const node: AstScript = {
+    kind: "AstScript",
+    loc: client.loc,
+    fileHash: client.fileHash,
+    splices: client.metadata.splices.map(buildAst),
+    captures: client.metadata.captures,
+    declarations: client.metadata.declarations,
     expression,
-  );
+  };
   nodeByClient.set(client, node);
   return node;
 }

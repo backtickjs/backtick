@@ -3,14 +3,14 @@ import type { AstNode } from "../../ast/nodes/AstNode.js";
 
 export class IrScriptEntry {
   readonly loc: SourceLocation;
-  readonly captures: string[];
-  readonly declarations: string[];
+  readonly captures: readonly string[];
+  readonly declarations: readonly string[];
   readonly body: AstNode;
 
   constructor(
     loc: SourceLocation,
-    captures: string[],
-    declarations: string[],
+    captures: readonly string[],
+    declarations: readonly string[],
     body: AstNode,
   ) {
     this.loc = loc;

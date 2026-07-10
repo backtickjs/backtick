@@ -1,42 +1,42 @@
 import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
 import type { AstNode } from "./nodes/AstNode.js";
-import { AstScriptArray } from "./nodes/AstScriptArray.js";
-import { AstScriptArrow } from "./nodes/AstScriptArrow.js";
-import { AstScriptAssignment } from "./nodes/AstScriptAssignment.js";
-import { AstScriptBinop } from "./nodes/AstScriptBinop.js";
-import { AstScriptBlock } from "./nodes/AstScriptBlock.js";
-import { AstScriptBoolean } from "./nodes/AstScriptBoolean.js";
-import { AstScriptCall } from "./nodes/AstScriptCall.js";
-import { AstScriptIdentifier } from "./nodes/AstScriptIdentifier.js";
-import { AstScriptIf } from "./nodes/AstScriptIf.js";
-import { AstScriptNull } from "./nodes/AstScriptNull.js";
-import { AstScriptNumber } from "./nodes/AstScriptNumber.js";
-import { AstScriptObject } from "./nodes/AstScriptObject.js";
-import { AstScriptPropertyAccess } from "./nodes/AstScriptPropertyAccess.js";
-import { AstScriptReturn } from "./nodes/AstScriptReturn.js";
-import { AstScriptSplice } from "./nodes/AstScriptSplice.js";
-import { AstScriptString } from "./nodes/AstScriptString.js";
-import { AstScriptVariableDeclaration } from "./nodes/AstScriptVariableDeclaration.js";
+import type { AstScriptArray } from "./nodes/AstScriptArray.js";
+import type { AstScriptArrow } from "./nodes/AstScriptArrow.js";
+import type { AstScriptAssignment } from "./nodes/AstScriptAssignment.js";
+import type { AstScriptBinop } from "./nodes/AstScriptBinop.js";
+import type { AstScriptBlock } from "./nodes/AstScriptBlock.js";
+import type { AstScriptBoolean } from "./nodes/AstScriptBoolean.js";
+import type { AstScriptCall } from "./nodes/AstScriptCall.js";
+import type { AstScriptIdentifier } from "./nodes/AstScriptIdentifier.js";
+import type { AstScriptIf } from "./nodes/AstScriptIf.js";
+import type { AstScriptNull } from "./nodes/AstScriptNull.js";
+import type { AstScriptNumber } from "./nodes/AstScriptNumber.js";
+import type { AstScriptObject } from "./nodes/AstScriptObject.js";
+import type { AstScriptPropertyAccess } from "./nodes/AstScriptPropertyAccess.js";
+import type { AstScriptReturn } from "./nodes/AstScriptReturn.js";
+import type { AstScriptSplice } from "./nodes/AstScriptSplice.js";
+import type { AstScriptString } from "./nodes/AstScriptString.js";
+import type { AstScriptVariableDeclaration } from "./nodes/AstScriptVariableDeclaration.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   splice(loc: SourceLocation, index: number): AstScriptSplice {
-    return new AstScriptSplice(loc, index);
+    return { kind: "AstScriptSplice", loc, index };
   }
 
   null(loc: SourceLocation): AstScriptNull {
-    return new AstScriptNull(loc);
+    return { kind: "AstScriptNull", loc };
   }
 
   number(loc: SourceLocation, value: number): AstScriptNumber {
-    return new AstScriptNumber(loc, value);
+    return { kind: "AstScriptNumber", loc, value };
   }
 
   boolean(loc: SourceLocation, value: boolean): AstScriptBoolean {
-    return new AstScriptBoolean(loc, value);
+    return { kind: "AstScriptBoolean", loc, value };
   }
 
   string(loc: SourceLocation, value: string): AstScriptString {
-    return new AstScriptString(loc, value);
+    return { kind: "AstScriptString", loc, value };
   }
 
   identifier(
@@ -44,11 +44,11 @@ export class AstBuilder implements Visitor<AstNode> {
     name: string,
     bindingKey: string,
   ): AstScriptIdentifier {
-    return new AstScriptIdentifier(loc, name, bindingKey);
+    return { kind: "AstScriptIdentifier", loc, name, bindingKey };
   }
 
   block(loc: SourceLocation, statements: AstNode[]): AstScriptBlock {
-    return new AstScriptBlock(loc, statements);
+    return { kind: "AstScriptBlock", loc, statements };
   }
 
   assignment(
@@ -56,7 +56,7 @@ export class AstBuilder implements Visitor<AstNode> {
     name: AstNode,
     expression: AstNode,
   ): AstScriptAssignment {
-    return new AstScriptAssignment(loc, name, expression);
+    return { kind: "AstScriptAssignment", loc, name, expression };
   }
 
   variableDeclaration(
@@ -65,7 +65,13 @@ export class AstBuilder implements Visitor<AstNode> {
     name: AstNode,
     expression: AstNode,
   ): AstScriptVariableDeclaration {
-    return new AstScriptVariableDeclaration(loc, keyword, name, expression);
+    return {
+      kind: "AstScriptVariableDeclaration",
+      loc,
+      keyword,
+      name,
+      expression,
+    };
   }
 
   if(
@@ -74,11 +80,11 @@ export class AstBuilder implements Visitor<AstNode> {
     consequent: AstNode,
     alternate: AstNode | null,
   ): AstScriptIf {
-    return new AstScriptIf(loc, condition, consequent, alternate);
+    return { kind: "AstScriptIf", loc, condition, consequent, alternate };
   }
 
   return(loc: SourceLocation, expression: AstNode): AstScriptReturn {
-    return new AstScriptReturn(loc, expression);
+    return { kind: "AstScriptReturn", loc, expression };
   }
 
   propertyAccess(
@@ -86,7 +92,7 @@ export class AstBuilder implements Visitor<AstNode> {
     expression: AstNode,
     name: string,
   ): AstScriptPropertyAccess {
-    return new AstScriptPropertyAccess(loc, expression, name);
+    return { kind: "AstScriptPropertyAccess", loc, expression, name };
   }
 
   binop(
@@ -95,25 +101,30 @@ export class AstBuilder implements Visitor<AstNode> {
     operator: string,
     rhs: AstNode,
   ): AstScriptBinop {
-    return new AstScriptBinop(loc, lhs, operator, rhs);
+    return { kind: "AstScriptBinop", loc, lhs, operator, rhs };
   }
 
   array(loc: SourceLocation, elements: AstNode[]): AstScriptArray {
-    return new AstScriptArray(loc, elements);
+    return { kind: "AstScriptArray", loc, elements };
   }
 
   object(
     loc: SourceLocation,
     entries: { [key: string]: AstNode },
   ): AstScriptObject {
-    return new AstScriptObject(loc, entries);
+    return { kind: "AstScriptObject", loc, entries };
   }
 
   call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstScriptCall {
-    return new AstScriptCall(loc, callee, args);
+    return { kind: "AstScriptCall", loc, callee, args };
   }
 
   arrow(loc: SourceLocation, params: AstNode[], body: AstNode): AstScriptArrow {
-    return new AstScriptArrow(loc, params as AstScriptIdentifier[], body);
+    return {
+      kind: "AstScriptArrow",
+      loc,
+      params: params as AstScriptIdentifier[],
+      body,
+    };
   }
 }

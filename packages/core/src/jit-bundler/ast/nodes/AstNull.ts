@@ -1,1 +1,3 @@
-export class AstNull {}
+export interface AstNull {
+  readonly kind: "AstNull";
+}

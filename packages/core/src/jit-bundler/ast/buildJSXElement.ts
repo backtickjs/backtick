@@ -1,6 +1,6 @@
 import { isSpliceable, type JSXElement } from "../../cs-runtime/index.js";
 import { buildAst } from "./buildAst.js";
-import { AstElement } from "./nodes/AstElement.js";
+import type { AstElement } from "./nodes/AstElement.js";
 import type { AstRoot } from "./nodes/AstNode.js";
 
 const nodeByElement = new WeakMap<JSXElement, AstElement>();
@@ -21,7 +21,12 @@ export function buildJSXElement(value: JSXElement): AstElement {
     }
     props[key] = buildAst(entry);
   }
-  const node = new AstElement(value.type, value.key, props);
+  const node: AstElement = {
+    kind: "AstElement",
+    type: value.type,
+    key: value.key,
+    props,
+  };
   nodeByElement.set(value, node);
   return node;
 }

@@ -1,7 +1,4 @@
-export class AstString {
+export interface AstString {
+  readonly kind: "AstString";
   readonly value: string;
-
-  constructor(value: string) {
-    this.value = value;
-  }
 }

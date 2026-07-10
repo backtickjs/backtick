@@ -1,12 +1,6 @@
-import { AstArray } from "../ast/nodes/AstArray.js";
-import { AstBoolean } from "../ast/nodes/AstBoolean.js";
-import { AstElement } from "../ast/nodes/AstElement.js";
+import type { AstElement } from "../ast/nodes/AstElement.js";
 import type { AstNode, AstRoot } from "../ast/nodes/AstNode.js";
-import { AstNull } from "../ast/nodes/AstNull.js";
-import { AstNumber } from "../ast/nodes/AstNumber.js";
-import { AstObject } from "../ast/nodes/AstObject.js";
-import { AstScript } from "../ast/nodes/AstScript.js";
-import { AstString } from "../ast/nodes/AstString.js";
+import type { AstScript } from "../ast/nodes/AstScript.js";
 import { locKey } from "../locKey.js";
 import type { Ir } from "./nodes/Ir.js";
 import type { IrArgument } from "./nodes/IrArgument.js";
@@ -112,15 +106,15 @@ class IrBuilder {
   // position (`lower`) an element always hoists: a script body or the IR
   // root embeds a tree by reference, never structurally.
   private lowerInTree(node: AstRoot): IrArgument {
-    if (node instanceof AstElement) {
+    if (node.kind === "AstElement") {
       return this.elementRefs.get(node) === 1
         ? this.lowerElement(node)
         : this.referenceTree(node);
     }
-    if (node instanceof AstArray) {
+    if (node.kind === "AstArray") {
       return node.elements.map((n) => this.lowerInTree(n));
     }
-    if (node instanceof AstObject) {
+    if (node.kind === "AstObject") {
       const entries: Record<string, IrArgument> = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = this.lowerInTree(value);
@@ -135,36 +129,31 @@ class IrBuilder {
   // carried through as data. Also lowers the IR's entrypoint, which may be
   // any of the three.
   lower(node: AstRoot): IrArgument {
-    if (node instanceof AstScript) {
-      return this.referenceScript(node);
-    }
-    if (node instanceof AstElement) {
-      return this.referenceTree(node);
-    }
-    if (node instanceof AstArray) {
-      return node.elements.map((n) => this.lower(n));
-    }
-    if (node instanceof AstObject) {
-      const entries: Record<string, IrArgument> = {};
-      for (const [key, value] of Object.entries(node.entries)) {
-        entries[key] = this.lower(value);
+    switch (node.kind) {
+      case "AstScript":
+        return this.referenceScript(node);
+      case "AstElement":
+        return this.referenceTree(node);
+      case "AstArray":
+        return node.elements.map((n) => this.lower(n));
+      case "AstObject": {
+        const entries: Record<string, IrArgument> = {};
+        for (const [key, value] of Object.entries(node.entries)) {
+          entries[key] = this.lower(value);
+        }
+        return entries;
       }
-      return entries;
+      case "AstNumber":
+      case "AstString":
+      case "AstBoolean":
+        return node.value;
+      case "AstNull":
+        return null;
+      default: {
+        const unhandled: never = node;
+        throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);
+      }
     }
-    if (node instanceof AstNumber) {
-      return node.value;
-    }
-    if (node instanceof AstString) {
-      return node.value;
-    }
-    if (node instanceof AstBoolean) {
-      return node.value;
-    }
-    if (node instanceof AstNull) {
-      return null;
-    }
-    const unhandled: never = node;
-    throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);
   }
 }
 
@@ -176,7 +165,7 @@ function countElementReferences(root: AstRoot): Map<AstElement, number> {
   const counts = new Map<AstElement, number>();
   const seenScripts = new Set<AstScript>();
   const visit = (node: AstNode): void => {
-    if (node instanceof AstScript) {
+    if (node.kind === "AstScript") {
       if (seenScripts.has(node)) {
         return;
       }
@@ -184,7 +173,7 @@ function countElementReferences(root: AstRoot): Map<AstElement, number> {
       node.splices.forEach(visit);
       return;
     }
-    if (node instanceof AstElement) {
+    if (node.kind === "AstElement") {
       const count = counts.get(node) ?? 0;
       counts.set(node, count + 1);
       if (count === 0) {
@@ -192,11 +181,11 @@ function countElementReferences(root: AstRoot): Map<AstElement, number> {
       }
       return;
     }
-    if (node instanceof AstArray) {
+    if (node.kind === "AstArray") {
       node.elements.forEach(visit);
       return;
     }
-    if (node instanceof AstObject) {
+    if (node.kind === "AstObject") {
       Object.values(node.entries).forEach(visit);
     }
   };

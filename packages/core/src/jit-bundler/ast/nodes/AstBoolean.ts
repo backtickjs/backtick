@@ -1,7 +1,4 @@
-export class AstBoolean {
+export interface AstBoolean {
+  readonly kind: "AstBoolean";
   readonly value: boolean;
-
-  constructor(value: boolean) {
-    this.value = value;
-  }
 }
