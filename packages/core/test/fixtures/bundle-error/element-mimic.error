@@ -1,0 +1,1 @@
+Can't bundle this object: a plain object with exactly `type`, `key`, and `props` keys would read as a JSX element node.

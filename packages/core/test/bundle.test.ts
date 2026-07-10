@@ -6,7 +6,7 @@ import {
   rmSync,
   writeFileSync,
 } from "node:fs";
-import { extname, join } from "node:path";
+import { basename, extname, join } from "node:path";
 import { describe, it, test } from "node:test";
 import { pathToFileURL } from "node:url";
 import ts from "typescript";
@@ -22,17 +22,21 @@ import { evaluate } from "../dist/test-client/index.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderValue } from "./renderValue.ts";
 
-// End-to-end snapshot tests over the shared fixtures: each valid fixture
-// exports a client — a script or a JSX tree — compiled here with the same
-// transform the compiler suite snapshots as `*.js`, then executed by
-// importing the emitted module. The bundled payload is snapshotted to a
-// sibling `*.bundle` file, then executed by the reference test-client and
-// the resulting runtime value snapshotted to `*.value`. Run with
-// UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
+// End-to-end snapshot tests over the shared fixtures: each fixture exports a
+// client — a script or a JSX tree — compiled here with the same transform the
+// compiler suite snapshots as `*.js`, then executed by importing the emitted
+// module. A `valid/` fixture's bundled payload is snapshotted to a sibling
+// `*.bundle` file, then executed by the reference test-client and the
+// resulting runtime value snapshotted to `*.value`. A `bundle-error/`
+// fixture compiles and imports cleanly but exports a client the bundler must
+// reject: its error message is snapshotted to a sibling `*.error` file. Run
+// with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
 //
 // The emitted modules land in a cache directory inside the package so their
 // `@backtickjs/core` imports resolve through node's package self-reference.
-const fixturesDir = join(import.meta.dirname, "fixtures/valid");
+const fixturesRoot = join(import.meta.dirname, "fixtures");
+const validDir = join(fixturesRoot, "valid");
+const bundleErrorDir = join(fixturesRoot, "bundle-error");
 const cacheDir = join(import.meta.dirname, "../.cache/jit-bundler");
 
 const COMPILER_OPTIONS: ts.CompilerOptions = {
@@ -44,55 +48,83 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
 };
 
 rmSync(cacheDir, { recursive: true, force: true });
-mkdirSync(cacheDir, { recursive: true });
 
-const fixtures = readdirSync(fixturesDir)
-  .filter(
-    (file) =>
-      [".ts", ".tsx"].includes(extname(file)) && !file.includes(".virtual.tsx"),
-  )
-  .sort();
+function listFixtures(dir: string): string[] {
+  return readdirSync(dir)
+    .filter(
+      (file) =>
+        [".ts", ".tsx"].includes(extname(file)) &&
+        !file.includes(".virtual.tsx"),
+    )
+    .sort();
+}
+
+async function importFixture(
+  dir: string,
+  file: string,
+): Promise<Client<ClientUnknown>> {
+  const sourceText = readFileSync(join(dir, file), "utf8");
+  const { outputText } = ts.transpileModule(sourceText, {
+    fileName: file,
+    compilerOptions: COMPILER_OPTIONS,
+    transformers: { before: [transform(ts)] },
+  });
+  const base = file.slice(0, -extname(file).length);
+  const compiled = join(cacheDir, basename(dir), `${base}.js`);
+  mkdirSync(join(cacheDir, basename(dir)), { recursive: true });
+  writeFileSync(compiled, outputText);
+  const { default: script } = (await import(pathToFileURL(compiled).href)) as {
+    default: Client<ClientUnknown>;
+  };
+  return script;
+}
 
 describe("bundle", () => {
-  for (const file of fixtures) {
-    it(file, async () => {
-      const base = file.slice(0, -extname(file).length);
-      const sourceText = readFileSync(join(fixturesDir, file), "utf8");
-      const { outputText } = ts.transpileModule(sourceText, {
-        fileName: file,
-        compilerOptions: COMPILER_OPTIONS,
-        transformers: { before: [transform(ts)] },
+  describe("valid", () => {
+    for (const file of listFixtures(validDir)) {
+      it(file, async () => {
+        const base = file.slice(0, -extname(file).length);
+        const script = await importFixture(validDir, file);
+        const payload = bundle(script);
+        matchFileSnapshot(
+          JSON.stringify(payload, null, 2),
+          join(validDir, `${base}.bundle`),
+        );
+        matchFileSnapshot(
+          `${renderValue(evaluate(payload))}\n`,
+          join(validDir, `${base}.value`),
+        );
       });
-      const compiled = join(cacheDir, `${base}.js`);
-      writeFileSync(compiled, outputText);
-      const { default: script } = (await import(
-        pathToFileURL(compiled).href
-      )) as { default: Client<ClientUnknown> };
-      const payload = bundle(script);
-      matchFileSnapshot(
-        JSON.stringify(payload, null, 2),
-        join(fixturesDir, `${base}.bundle`),
-      );
-      matchFileSnapshot(
-        `${renderValue(evaluate(payload))}\n`,
-        join(fixturesDir, `${base}.value`),
-      );
-    });
-  }
+    }
+  });
+
+  describe("bundle-error", () => {
+    for (const file of listFixtures(bundleErrorDir)) {
+      it(file, async () => {
+        const base = file.slice(0, -extname(file).length);
+        const script = await importFixture(bundleErrorDir, file);
+        let message: string | null = null;
+        try {
+          bundle(script);
+        } catch (error) {
+          message = error instanceof Error ? error.message : String(error);
+        }
+        assert.ok(
+          message !== null,
+          "a bundle-error fixture must fail to bundle; move it to valid/",
+        );
+        matchFileSnapshot(
+          `${message}\n`,
+          join(bundleErrorDir, `${base}.error`),
+        );
+      });
+    }
+  });
 });
 
-// The happy paths are covered end-to-end by the fixture snapshots above; only
-// the fail-loudly cases live here.
-
-test("a plain object prop can't use a reserved key", () => {
-  const element = jsx("flexbox", { data: { "#call": "#f0" } });
-  assert.throws(() => bundle(element), /reserved/);
-});
-
-test("a plain object prop can't look like an element node", () => {
-  const element = jsx("flexbox", { data: { type: "x", key: null, props: {} } });
-  assert.throws(() => bundle(element), /element node/);
-});
+// The happy paths and the fail-loudly cases are covered by the fixture
+// snapshots above; only cases that need a hand-built client (direct `jsx` or
+// `cs.create` calls) live here.
 
 test("a plain object prop that mimics an IR node stays data", () => {
   const element = jsx("flexbox", { data: { kind: "IrScriptRef", target: 0 } });

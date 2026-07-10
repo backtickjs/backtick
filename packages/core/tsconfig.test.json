@@ -11,6 +11,10 @@
     "test/**/*.runtime.tsx",
     "test/**/*.virtual.tsx"
   ],
-  "exclude": ["test/fixtures/valid/*.ts", "test/fixtures/invalid/*.ts"],
+  "exclude": [
+    "test/fixtures/valid/*.ts",
+    "test/fixtures/compile-error/*.ts",
+    "test/fixtures/bundle-error/*.ts"
+  ],
   "references": [{ "path": "./tsconfig.build.json" }]
 }

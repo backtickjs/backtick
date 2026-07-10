@@ -57,7 +57,7 @@ describe("compile", () => {
         );
         assert.ok(
           !fixture.hasError,
-          `a valid fixture must compile without errors; move it to invalid/ or fix it:\n${renderedDiagnostics}`,
+          `a valid fixture must compile without errors; move it to compile-error/ or fix it:\n${renderedDiagnostics}`,
         );
 
         matchFileSnapshot(
@@ -81,10 +81,10 @@ describe("compile", () => {
     }
   });
 
-  // An invalid fixture only snapshots its diagnostics: there is no meaningful
+  // A compile-error fixture only snapshots its diagnostics: there is no meaningful
   // virtual code, source map, or emitted JS for source the compiler rejected.
-  describe("invalid", () => {
-    const dir = join(fixturesRoot, "invalid");
+  describe("compile-error", () => {
+    const dir = join(fixturesRoot, "compile-error");
     for (const fixture of loadFixtures(dir)) {
       it(fixture.fileName, () => {
         const { fileName, sourceText, diagnostics } = fixture;
@@ -92,7 +92,7 @@ describe("compile", () => {
 
         assert.ok(
           fixture.hasError,
-          "an invalid fixture must report a compiler error; move it to valid/",
+          "a compile-error fixture must report a compiler error; move it to valid/",
         );
         matchFileSnapshot(
           renderDiagnostics(fileName, sourceText, diagnostics),
