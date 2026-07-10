@@ -4,8 +4,7 @@ import {
   spliceableEntries,
 } from "../../cs-runtime/index.js";
 import { buildAst } from "./buildAst.js";
-import type { AstRoot } from "./nodes/AstNode.js";
-import type { AstObject } from "./nodes/AstObject.js";
+import type { AstObject, AstRoot } from "./nodes/AstNode.js";
 
 const nodeByInstance = new WeakMap<Client<ClientUnknown>, AstObject>();
 

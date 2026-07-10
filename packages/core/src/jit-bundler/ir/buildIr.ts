@@ -1,6 +1,9 @@
-import type { AstElement } from "../ast/nodes/AstElement.js";
-import type { AstNode, AstRoot } from "../ast/nodes/AstNode.js";
-import type { AstScript } from "../ast/nodes/AstScript.js";
+import type {
+  AstElement,
+  AstNode,
+  AstRoot,
+  AstScript,
+} from "../ast/nodes/AstNode.js";
 import { locKey } from "../locKey.js";
 import type { Ir } from "./nodes/Ir.js";
 import type { IrArgument } from "./nodes/IrArgument.js";

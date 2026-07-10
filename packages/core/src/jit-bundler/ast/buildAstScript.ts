@@ -6,8 +6,7 @@ import type {
 import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { buildAst } from "./buildAst.js";
-import type { AstNode } from "./nodes/AstNode.js";
-import type { AstScript } from "./nodes/AstScript.js";
+import type { AstNode, AstScript } from "./nodes/AstNode.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
 // objects at the same location — a script inside a host function, instantiated

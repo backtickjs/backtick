@@ -1,22 +1,24 @@
 import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
-import type { AstNode } from "./nodes/AstNode.js";
-import type { AstScriptArray } from "./nodes/AstScriptArray.js";
-import type { AstScriptArrow } from "./nodes/AstScriptArrow.js";
-import type { AstScriptAssignment } from "./nodes/AstScriptAssignment.js";
-import type { AstScriptBinop } from "./nodes/AstScriptBinop.js";
-import type { AstScriptBlock } from "./nodes/AstScriptBlock.js";
-import type { AstScriptBoolean } from "./nodes/AstScriptBoolean.js";
-import type { AstScriptCall } from "./nodes/AstScriptCall.js";
-import type { AstScriptIdentifier } from "./nodes/AstScriptIdentifier.js";
-import type { AstScriptIf } from "./nodes/AstScriptIf.js";
-import type { AstScriptNull } from "./nodes/AstScriptNull.js";
-import type { AstScriptNumber } from "./nodes/AstScriptNumber.js";
-import type { AstScriptObject } from "./nodes/AstScriptObject.js";
-import type { AstScriptPropertyAccess } from "./nodes/AstScriptPropertyAccess.js";
-import type { AstScriptReturn } from "./nodes/AstScriptReturn.js";
-import type { AstScriptSplice } from "./nodes/AstScriptSplice.js";
-import type { AstScriptString } from "./nodes/AstScriptString.js";
-import type { AstScriptVariableDeclaration } from "./nodes/AstScriptVariableDeclaration.js";
+import type {
+  AstNode,
+  AstScriptArray,
+  AstScriptArrow,
+  AstScriptAssignment,
+  AstScriptBinop,
+  AstScriptBlock,
+  AstScriptBoolean,
+  AstScriptCall,
+  AstScriptIdentifier,
+  AstScriptIf,
+  AstScriptNull,
+  AstScriptNumber,
+  AstScriptObject,
+  AstScriptPropertyAccess,
+  AstScriptReturn,
+  AstScriptSplice,
+  AstScriptString,
+  AstScriptVariableDeclaration,
+} from "./nodes/AstNode.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   splice(loc: SourceLocation, index: number): AstScriptSplice {
