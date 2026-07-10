@@ -1,0 +1,37 @@
+{
+  "functions": {},
+  "trees": {
+    "#t0": {
+      "element": {
+        "type": "label",
+        "key": null,
+        "props": {
+          "text": "hi"
+        }
+      }
+    },
+    "#t1": {
+      "element": {
+        "type": "flexbox",
+        "key": null,
+        "props": {
+          "direction": "column",
+          "children": [
+            {
+              "$call": "#t0",
+              "args": []
+            },
+            {
+              "$call": "#t0",
+              "args": []
+            }
+          ]
+        }
+      }
+    }
+  },
+  "root": {
+    "$call": "#t1",
+    "args": []
+  }
+}

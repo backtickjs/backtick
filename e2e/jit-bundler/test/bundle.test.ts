@@ -4,10 +4,10 @@ import { expect, test } from "bun:test";
 import { bundle } from "@backtickjs/core";
 import type { Client, ClientUnknown } from "@backtickjs/core/cs-runtime";
 
-// End-to-end snapshot tests, mirroring the compiler fixtures: each `*.ts`
-// fixture exports a client script (compiled at import time by the bun plugin),
-// and its bundled payload is snapshotted to a sibling `*.bundle` file. Run with
-// UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
+// End-to-end snapshot tests, mirroring the compiler fixtures: each `*.ts(x)`
+// fixture exports a client — a script or a JSX tree — compiled at import time
+// by the bun plugin, and its bundled payload is snapshotted to a sibling
+// `*.bundle` file. Run with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
 const fixturesDir = join(import.meta.dir, "fixtures");
 
 function matchFileSnapshot(actual: string, file: string): void {
@@ -19,7 +19,7 @@ function matchFileSnapshot(actual: string, file: string): void {
 }
 
 const fixtures = readdirSync(fixturesDir)
-  .filter((file) => extname(file) === ".ts")
+  .filter((file) => [".ts", ".tsx"].includes(extname(file)))
   .sort();
 
 for (const file of fixtures) {

@@ -1,0 +1,28 @@
+{
+  "functions": {
+    "#f0": "() => () => { const x = 1; return #t0(x); }",
+    "#f1": "(x) => () => x"
+  },
+  "trees": {
+    "#t0": {
+      "element": {
+        "type": "button",
+        "key": null,
+        "props": {
+          "onClick": {
+            "$call": "#f1",
+            "args": [
+              {
+                "$slot": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "root": {
+    "$call": "#f0",
+    "args": []
+  }
+}

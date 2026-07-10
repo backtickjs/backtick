@@ -1,0 +1,27 @@
+{
+  "functions": {
+    "#f0": "(console) => () => console.log(\"hi\")"
+  },
+  "trees": {
+    "#t0": {
+      "element": {
+        "type": "button",
+        "key": null,
+        "props": {
+          "onClick": {
+            "$call": "#f0",
+            "args": [
+              {
+                "$global": "console"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "root": {
+    "$call": "#t0",
+    "args": []
+  }
+}
