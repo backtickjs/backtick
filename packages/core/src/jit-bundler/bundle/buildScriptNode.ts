@@ -1,4 +1,4 @@
-import type { AstNode } from "../ast/nodes/AstNode.js";
+import type { AstNode } from "../ast/AstNode.js";
 import type { BundleNode } from "./nodes/Bundle.js";
 
 // Fills a splice hole in a script body with the node passed for that position.

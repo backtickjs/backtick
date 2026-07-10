@@ -1,6 +1,6 @@
 import { isSpliceable, type JSXElement } from "../../cs-runtime/index.js";
+import type { AstElement, AstRoot } from "./AstNode.js";
 import { buildAst } from "./buildAst.js";
-import type { AstElement, AstRoot } from "./nodes/AstNode.js";
 
 const nodeByElement = new WeakMap<JSXElement, AstElement>();
 

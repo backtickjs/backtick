@@ -1,4 +1,4 @@
-import type { SourceLocation } from "../../../cs-runtime/index.js";
+import type { SourceLocation } from "../../cs-runtime/index.js";
 
 // A node parsed from a client script's source text. Every script node carries
 // the source location it was parsed from.
@@ -42,8 +42,6 @@ export interface AstScript {
   readonly kind: "AstScript";
   readonly loc: SourceLocation;
   readonly fileHash: string;
-  // Splice values are host data lowered by `buildAst`, so they are roots —
-  // never bare script-body nodes.
   readonly splices: readonly AstRoot[];
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
@@ -100,10 +98,7 @@ export interface AstScriptCall {
 export interface AstScriptIdentifier {
   readonly kind: "AstScriptIdentifier";
   readonly loc: SourceLocation;
-  // The identifier as written in source (e.g. `total`).
   readonly name: string;
-  // The globally unique key of the binding this identifier refers to (e.g.
-  // `total$1vq2eey_0`); equal to `name` for a free host reference.
   readonly bindingKey: string;
 }
 

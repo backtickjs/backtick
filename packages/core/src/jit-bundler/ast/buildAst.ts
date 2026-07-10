@@ -4,10 +4,10 @@ import {
   isJSXElement,
   type Spliceable,
 } from "../../cs-runtime/index.js";
+import type { AstRoot } from "./AstNode.js";
 import { buildAstScript } from "./buildAstScript.js";
 import { buildClassAsObject } from "./buildClassAsObject.js";
 import { buildJSXElement } from "./buildJSXElement.js";
-import type { AstRoot } from "./nodes/AstNode.js";
 
 export function buildAst(value: Spliceable): AstRoot {
   if (isClientScript(value)) {

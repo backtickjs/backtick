@@ -3,7 +3,7 @@ import type {
   AstNode,
   AstRoot,
   AstScript,
-} from "../ast/nodes/AstNode.js";
+} from "../ast/AstNode.js";
 import { locKey } from "../locKey.js";
 import type { Ir } from "./nodes/Ir.js";
 import type { IrArgument } from "./nodes/IrArgument.js";

@@ -1,5 +1,5 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
-import type { AstNode } from "../../ast/nodes/AstNode.js";
+import type { AstNode } from "../../ast/AstNode.js";
 
 export class IrScriptEntry {
   readonly loc: SourceLocation;

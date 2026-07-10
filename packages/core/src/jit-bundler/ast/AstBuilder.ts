@@ -18,7 +18,7 @@ import type {
   AstScriptSplice,
   AstScriptString,
   AstScriptVariableDeclaration,
-} from "./nodes/AstNode.js";
+} from "./AstNode.js";
 
 export class AstBuilder implements Visitor<AstNode> {
   splice(loc: SourceLocation, index: number): AstScriptSplice {
