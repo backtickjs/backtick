@@ -1,4 +1,5 @@
 export type ClientUnknown =
+  | UIElement
   // biome-ignore lint/suspicious/noConfusingVoidType: script whose block completes without a `return`
   | void
   | null
@@ -22,9 +23,13 @@ export interface ClientScript<T extends ClientUnknown> extends Client<T> {
 
 export type Prop<T extends ClientUnknown> = T | Client<T>;
 
+declare const element: unique symbol;
+
 // Client scripts can pass elements around but not look inside one.
-// biome-ignore lint/complexity/noBannedTypes: `{}` is the point
-export type UIElement = {};
+// The only way to produce a `UIElement` is lowering `JSXElement`.
+export interface UIElement {
+  readonly [element]: typeof element;
+}
 
 export interface JSXElement {
   "@backtickjs/JSXElement": undefined;
