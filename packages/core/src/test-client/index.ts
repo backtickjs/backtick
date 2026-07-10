@@ -12,7 +12,7 @@ import type {
 } from "../jit-bundler/index.js";
 
 // A reference client: the interpreter the bundle wire format is specified
-// against (see `jit-bundler/bundle/nodes/Bundle.ts`). It evaluates a bundle's
+// against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's
 // `root` against its `functions` and `trees` tables and returns the resulting
 // JavaScript value, so tests can execute a bundled payload and observe its
 // runtime behavior instead of only snapshotting its shape.

@@ -1,5 +1,5 @@
 import type { AstScriptIdentifier, AstScriptNode } from "../ast/Ast.js";
-import type { BundleNode } from "./nodes/Bundle.js";
+import type { BundleNode } from "./Bundle.js";
 
 // Fills a splice hole in a script body with the node passed for that position.
 export type RenderSplice = (index: number) => BundleNode;

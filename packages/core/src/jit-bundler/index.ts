@@ -1,5 +1,4 @@
 export { buildAst } from "./ast/buildAst.js";
-export { buildBundle } from "./bundle/buildBundle.js";
 export type {
   Bundle,
   BundleApply,
@@ -26,7 +25,8 @@ export type {
   BundleValueNode,
   FunctionLabel,
   TreeLabel,
-} from "./bundle/nodes/Bundle.js";
+} from "./bundle/Bundle.js";
+export { buildBundle } from "./bundle/buildBundle.js";
 export { bundle } from "./bundle.js";
 export { buildIr } from "./ir/buildIr.js";
 export type { Ir } from "./ir/Ir.js";

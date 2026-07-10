@@ -5,7 +5,6 @@ import type {
   IrScriptRef,
   IrTreeEntry,
 } from "../ir/Ir.js";
-import { buildScriptNode, type RenderSplice } from "./buildScriptNode.js";
 import type {
   Bundle,
   BundleArrowNode,
@@ -17,7 +16,8 @@ import type {
   BundleTree,
   FunctionLabel,
   TreeLabel,
-} from "./nodes/Bundle.js";
+} from "./Bundle.js";
+import { buildScriptNode, type RenderSplice } from "./buildScriptNode.js";
 
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
