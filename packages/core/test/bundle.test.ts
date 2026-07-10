@@ -19,6 +19,7 @@ import {
 import { bundle } from "../dist/jit-bundler/index.js";
 import { jsx } from "../dist/jsx-runtime/index.js";
 import { evaluate } from "../dist/test-client/index.js";
+import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderValue } from "./renderValue.ts";
 
 // End-to-end snapshot tests over the shared fixtures: each valid fixture
@@ -41,15 +42,6 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
   jsxImportSource: "@backtickjs/core",
   sourceMap: false,
 };
-
-function matchFileSnapshot(actual: string, file: string): void {
-  if (process.env.UPDATE_SNAPSHOTS) {
-    writeFileSync(file, actual);
-    return;
-  }
-
-  assert.strictEqual(actual, readFileSync(file, "utf8"));
-}
 
 rmSync(cacheDir, { recursive: true, force: true });
 mkdirSync(cacheDir, { recursive: true });

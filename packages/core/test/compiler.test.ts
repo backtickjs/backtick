@@ -1,10 +1,11 @@
 import assert from "node:assert";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
 import ts from "typescript";
 import { transform } from "../dist/compiler/transform.js";
 import { virtualize } from "../dist/compiler/virtualize.js";
+import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
 
@@ -19,15 +20,6 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
   module: ts.ModuleKind.ESNext,
   sourceMap: false,
 };
-
-function matchFileSnapshot(actual: string, file: string): void {
-  if (process.env.UPDATE_SNAPSHOTS) {
-    writeFileSync(file, actual);
-    return;
-  }
-
-  assert.strictEqual(actual, readFileSync(file, "utf8"));
-}
 
 const sourceExtensions = [".ts", ".tsx", ".jsx"];
 
