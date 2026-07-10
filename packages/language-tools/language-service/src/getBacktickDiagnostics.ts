@@ -1,6 +1,6 @@
 import { BacktickVirtualCode } from "@backtickjs/language-plugin";
 import type { Language } from "@volar/language-core";
-import type * as ts from "typescript";
+import type ts from "typescript";
 
 // Surfaces Backtick's own compiler diagnostics (e.g. unsupported syntax inside
 // a `cs` client script) — the errors Backtick itself produces, which TypeScript

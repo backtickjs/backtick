@@ -1,5 +1,4 @@
 import type ts from "typescript";
-import { DiagnosticCategory } from "typescript";
 import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
@@ -59,7 +58,7 @@ export function rewriteScript(
     diagnostics.push({
       range,
       message,
-      category: DiagnosticCategory.Error,
+      category: ts.DiagnosticCategory.Error,
       code: 0,
     });
   }

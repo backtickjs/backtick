@@ -1,5 +1,5 @@
 import { unmangle } from "@backtickjs/core/compiler";
-import type * as ts from "typescript";
+import type ts from "typescript";
 import { unmangleDisplayPart } from "./unmangleDisplayPart";
 
 export function unmangleCompletionInfo<T extends ts.CompletionInfo>(

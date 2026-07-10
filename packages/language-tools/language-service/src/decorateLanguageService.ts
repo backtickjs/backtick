@@ -1,6 +1,6 @@
 import { mangle } from "@backtickjs/core/compiler";
 import type { Language } from "@volar/language-core";
-import type * as ts from "typescript";
+import type ts from "typescript";
 import { getBacktickDiagnostics } from "./getBacktickDiagnostics.js";
 import {
   unmangleCompletionEntryDetails,

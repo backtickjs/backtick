@@ -1,6 +1,6 @@
 /// <reference types="@volar/typescript" />
 import type { LanguagePlugin } from "@volar/language-core";
-import type * as ts from "typescript";
+import type ts from "typescript";
 import { BacktickVirtualCode } from "./BacktickVirtualCode.js";
 
 export function getBacktickLanguagePlugin<T>(

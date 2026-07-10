@@ -1,5 +1,5 @@
 import { unmangle } from "@backtickjs/core/compiler";
-import type * as ts from "typescript";
+import type ts from "typescript";
 
 export function unmangleDiagnostic<T extends ts.Diagnostic>(diagnostic: T): T {
   return {
