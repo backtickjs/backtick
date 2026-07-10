@@ -24,112 +24,124 @@ import { AstScriptSplice } from "../ast/nodes/AstScriptSplice.js";
 import { AstScriptString } from "../ast/nodes/AstScriptString.js";
 import { AstScriptVariableDeclaration } from "../ast/nodes/AstScriptVariableDeclaration.js";
 import { AstString } from "../ast/nodes/AstString.js";
-import {
-  serializeArray,
-  serializeObject,
-  serializePrimitive,
-} from "./literals.js";
+import type { BundleNode } from "./nodes/Bundle.js";
 
-// Fills a splice hole in a script body with the value passed for that position.
-export type RenderSplice = (index: number) => string;
+// Fills a splice hole in a script body with the node passed for that position.
+export type RenderSplice = (index: number) => BundleNode;
 
 // Maps a binding key to the name it is printed under (see `displayName` in
 // `buildBundle`).
 export type Mangle = (key: string) => string;
 
-// Renders a client script's AST body to a single-line JavaScript expression,
-// formatted for embedding: blocks stay on one line and splice holes are filled
-// by `renderSplice` (with the arguments passed to the script). Every binding
-// key is printed under its `mangle`d display name — the source name,
-// disambiguated only where needed — and a captured variable is received as a
-// parameter under that same name, so the reference and its parameter still
-// line up.
-export function serializeScript(
+// Lowers a script's AST body to a wire `BundleNode` tree: splice holes are
+// filled by `renderSplice` (with the arguments passed to the script), and
+// every binding key is printed under its `mangle`d display name — the source
+// name, disambiguated only where needed — so a captured variable's reference
+// and the parameter that receives it still line up.
+export function buildScriptNode(
   node: AstNode,
   renderSplice: RenderSplice,
   mangle: Mangle,
-): string {
-  const s = (child: AstNode): string =>
-    serializeScript(child, renderSplice, mangle);
+): BundleNode {
+  const s = (child: AstNode): BundleNode =>
+    buildScriptNode(child, renderSplice, mangle);
   if (node instanceof AstScriptArray || node instanceof AstArray) {
-    return serializeArray(node.elements, s);
+    return { kind: "array", elements: node.elements.map(s) };
   }
   if (node instanceof AstScriptArrow) {
-    const params = node.params
-      .map((param) => mangle(param.bindingKey))
-      .join(", ");
-    return `(${params}) => ${s(node.body)}`;
+    return {
+      kind: "arrow",
+      params: node.params.map((param) => mangle(param.bindingKey)),
+      body: s(node.body),
+    };
   }
   if (node instanceof AstScriptAssignment) {
-    return `${s(node.name)} = ${s(node.expression)};`;
+    return {
+      kind: "assignment",
+      name: targetName(node.name, mangle),
+      expression: s(node.expression),
+    };
   }
   if (node instanceof AstScriptBinop) {
-    return `${s(node.lhs)} ${node.operator} ${s(node.rhs)}`;
+    return {
+      kind: "binop",
+      operator: node.operator,
+      left: s(node.lhs),
+      right: s(node.rhs),
+    };
   }
   if (node instanceof AstScriptBlock) {
-    return serializeBlock(node.statements, renderSplice, mangle);
+    return { kind: "block", statements: node.statements.map(s) };
   }
   if (node instanceof AstScriptBoolean || node instanceof AstBoolean) {
-    return serializePrimitive(node.value);
+    return { kind: "value", value: node.value };
   }
   if (node instanceof AstScriptCall) {
-    return `${s(node.callee)}(${node.args.map(s).join(", ")})`;
+    return { kind: "call", callee: s(node.callee), args: node.args.map(s) };
   }
   if (node instanceof AstScript) {
-    return `cs\`${s(node.expression)}\``;
+    // `buildIr` hoists every nested script into the function table; a script
+    // reaches a body only as a splice argument, rendered as an entry call.
+    throw new Error("A nested script can't appear in a script body.");
   }
   if (node instanceof AstScriptIdentifier) {
-    return mangle(node.bindingKey);
+    return { kind: "identifier", name: mangle(node.bindingKey) };
   }
   if (node instanceof AstElement) {
-    // An element reaches the bundle as a splice value and lowers into the tree
-    // table (see `buildIr`); a parsed script body never contains one.
+    // An element reaches the bundle as a splice value and lowers into the
+    // tree table (see `buildIr`); a parsed script body never contains one.
     throw new Error("A JSX element can't appear in a script body.");
   }
   if (node instanceof AstScriptIf) {
-    const head = `if (${s(node.condition)}) ${s(node.consequent)}`;
-    return node.alternate === null ? head : `${head} else ${s(node.alternate)}`;
+    return {
+      kind: "if",
+      condition: s(node.condition),
+      consequent: s(node.consequent),
+      alternate: node.alternate === null ? null : s(node.alternate),
+    };
   }
   if (node instanceof AstScriptNull || node instanceof AstNull) {
-    return serializePrimitive(null);
+    return { kind: "value", value: null };
   }
   if (node instanceof AstScriptNumber || node instanceof AstNumber) {
-    return serializePrimitive(node.value);
+    return { kind: "value", value: node.value };
   }
   if (node instanceof AstScriptObject || node instanceof AstObject) {
-    return serializeObject(node.entries, s);
+    const entries: { [key: string]: BundleNode } = {};
+    for (const [key, value] of Object.entries(node.entries)) {
+      entries[key] = s(value);
+    }
+    return { kind: "object", entries };
   }
   if (node instanceof AstScriptPropertyAccess) {
-    return `${s(node.expression)}.${node.name}`;
+    return { kind: "property", object: s(node.expression), name: node.name };
   }
   if (node instanceof AstScriptReturn) {
-    return `return ${s(node.expression)};`;
+    return { kind: "return", expression: s(node.expression) };
   }
   if (node instanceof AstScriptSplice) {
     return renderSplice(node.index);
   }
   if (node instanceof AstScriptString || node instanceof AstString) {
-    return serializePrimitive(node.value);
+    return { kind: "value", value: node.value };
   }
   if (node instanceof AstScriptVariableDeclaration) {
-    return `${node.keyword} ${s(node.name)} = ${s(node.expression)};`;
+    return {
+      kind: "declaration",
+      keyword: node.keyword,
+      name: targetName(node.name, mangle),
+      expression: s(node.expression),
+    };
   }
   const unhandled: never = node;
   throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);
 }
 
-// A block on a single line: `{ a; b; }`. Statements already carry their own
-// terminators, so they are simply joined by spaces.
-function serializeBlock(
-  statements: readonly AstNode[],
-  renderSplice: RenderSplice,
-  mangle: Mangle,
-): string {
-  if (statements.length === 0) {
-    return "{}";
+// A declaration or assignment target, flattened to its display name — the
+// compiler only produces identifier targets.
+function targetName(node: AstNode, mangle: Mangle): string {
+  if (node instanceof AstScriptIdentifier) {
+    return mangle(node.bindingKey);
   }
-  const body = statements
-    .map((statement) => serializeScript(statement, renderSplice, mangle))
-    .join(" ");
-  return `{ ${body} }`;
+  throw new Error("A binding target must be an identifier.");
 }

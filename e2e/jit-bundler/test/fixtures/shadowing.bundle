@@ -1,8 +1,117 @@
 {
   "functions": {
-    "#f0": "() => { const total = 1; return #f1(total); }",
-    "#f1": "(total) => { let total2 = 0; total2 = total2 + #f2(total); total2 = total2 + 100; return total2; }",
-    "#f2": "(total) => total"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "total",
+            "expression": {
+              "kind": "value",
+              "value": 1
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "entry",
+                "label": "#f1"
+              },
+              "args": [
+                {
+                  "kind": "identifier",
+                  "name": "total"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [
+        "total"
+      ],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "let",
+            "name": "total2",
+            "expression": {
+              "kind": "value",
+              "value": 0
+            }
+          },
+          {
+            "kind": "assignment",
+            "name": "total2",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "identifier",
+                "name": "total2"
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f2"
+                },
+                "args": [
+                  {
+                    "kind": "identifier",
+                    "name": "total"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "kind": "assignment",
+            "name": "total2",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "identifier",
+                "name": "total2"
+              },
+              "right": {
+                "kind": "value",
+                "value": 100
+              }
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "identifier",
+              "name": "total2"
+            }
+          }
+        ]
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [
+        "total"
+      ],
+      "body": {
+        "kind": "identifier",
+        "name": "total"
+      }
+    }
   },
   "trees": {},
   "root": {

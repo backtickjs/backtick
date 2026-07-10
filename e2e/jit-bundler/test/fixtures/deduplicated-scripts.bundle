@@ -1,7 +1,38 @@
 {
   "functions": {
-    "#f0": "() => ({a: #f1(), b: #f1()})",
-    "#f1": "() => 7"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "object",
+        "entries": {
+          "a": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "b": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          }
+        }
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 7
+      }
+    }
   },
   "trees": {},
   "root": {

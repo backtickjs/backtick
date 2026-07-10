@@ -1,18 +1,19 @@
 // The bundle: the JIT bundler's wire format, as plain data — what ships is
 // exactly `JSON.stringify` of this. These types are the contract an
 // interpreter implements: evaluate `root` against the `functions` and `trees`
-// tables. Computation ships as source (a `functions` entry is JavaScript),
-// composition as data (a tree and the root are `BundleExpr` values), so a
-// tree is parseable and inspectable without evaluating any source.
+// tables. Computation ships as `BundleNode` ASTs (no JavaScript parsing
+// required), composition as data (a tree and the root are `BundleExpr`
+// values), so the whole bundle is parseable and inspectable as JSON.
 export interface Bundle {
-  // Each entry is the source of an arrow `(params) => body`. A monomorphic
-  // entry (one call site, or identical arguments everywhere) has its splice
-  // arguments inlined into the body and takes only its captures as
-  // parameters. A polymorphic entry additionally takes one nullary-thunk
-  // parameter per splice hole, ahead of its captures; the body invokes the
-  // thunk at the hole. A `BundleCall` targeting the entry passes arguments in
-  // that same order.
-  functions: Record<FunctionLabel, string>;
+  // Each entry is an arrow node — evaluating it yields a function, exactly
+  // as for an arrow nested inside a body. A monomorphic entry (one call
+  // site, or identical arguments everywhere) has its splice arguments
+  // inlined into the body and takes only its captures as parameters. A
+  // polymorphic entry additionally takes one nullary-thunk parameter per
+  // splice hole (named `$0`, `$1`, …), ahead of its captures; the body
+  // invokes the thunk at the hole. A `BundleCall` targeting the entry passes
+  // arguments in that same order.
+  functions: Record<FunctionLabel, BundleArrowNode>;
   trees: Record<TreeLabel, BundleTree>;
   root: BundleExpr;
 }
@@ -80,3 +81,136 @@ export type BundleExpr =
   | BundleThunk
   | BundleElement
   | { [key: string]: BundleExpr };
+
+// A node of a function body's AST, discriminated by `kind`. Bodies are the
+// inverse of tree expressions: all structure, with plain data as the
+// exception — every object in a body is a node, and raw JSON only ever
+// appears under a `value` node's `value` field, so nodes can never collide
+// with user data. Scoping is lexical and names are pre-resolved: identifiers
+// refer to parameters of an enclosing arrow (including the entry itself),
+// locals declared in an enclosing block, or — when neither binds them —
+// properties of the global object.
+export type BundleNode =
+  | BundleValueNode
+  | BundleArrayNode
+  | BundleObjectNode
+  | BundleIdentifierNode
+  | BundleEntryNode
+  | BundleCallNode
+  | BundlePropertyNode
+  | BundleBinopNode
+  | BundleArrowNode
+  | BundleBlockNode
+  | BundleDeclarationNode
+  | BundleAssignmentNode
+  | BundleIfNode
+  | BundleReturnNode;
+
+// A primitive constant: evaluates to `value` itself. Serves source literals
+// and inlined runtime primitives alike.
+export interface BundleValueNode {
+  kind: "value";
+  value: null | boolean | number | string;
+}
+
+// An array: evaluates each element in order. Containers recurse as nodes —
+// an inlined runtime array can contain entry calls — so only primitives are
+// leaves.
+export interface BundleArrayNode {
+  kind: "array";
+  elements: BundleNode[];
+}
+
+// An object: evaluates each entry's value under its key.
+export interface BundleObjectNode {
+  kind: "object";
+  entries: { [key: string]: BundleNode };
+}
+
+// A variable reference: resolves `name` in the enclosing scope, or on the
+// global object when no parameter or declaration binds it.
+export interface BundleIdentifierNode {
+  kind: "identifier";
+  name: string;
+}
+
+// A `functions` or `trees` entry as a value: the function the entry
+// evaluates to. Calling it applies the entry; passed bare it is already a
+// nullary thunk.
+export interface BundleEntryNode {
+  kind: "entry";
+  label: FunctionLabel | TreeLabel;
+}
+
+// A call: evaluates the callee to a function and applies it. When the callee
+// is an `entry` node targeting a function, `args` mirrors that entry's
+// parameters (thunks for a polymorphic entry's splices first, then one value
+// per capture); targeting a tree, `args` supplies the tree's slots in index
+// order.
+export interface BundleCallNode {
+  kind: "call";
+  callee: BundleNode;
+  args: BundleNode[];
+}
+
+// A static property access: `object.name`.
+export interface BundlePropertyNode {
+  kind: "property";
+  object: BundleNode;
+  name: string;
+}
+
+// A binary operation with JavaScript semantics for `operator`.
+export interface BundleBinopNode {
+  kind: "binop";
+  operator: string;
+  left: BundleNode;
+  right: BundleNode;
+}
+
+// An arrow function: evaluates to a closure over the enclosing scope. The
+// body is an expression node (implicit return) or a `block`. Every
+// `functions` entry is an arrow node.
+export interface BundleArrowNode {
+  kind: "arrow";
+  params: string[];
+  body: BundleNode;
+}
+
+// A statement block: executes statements in order; a `return` yields the
+// enclosing arrow's result. Declarations are hoisted to the block, matching
+// the compiler's scoping (a use before its declaration resolves to the
+// local).
+export interface BundleBlockNode {
+  kind: "block";
+  statements: BundleNode[];
+}
+
+// A variable declaration: binds `name` in the enclosing block.
+export interface BundleDeclarationNode {
+  kind: "declaration";
+  keyword: "let" | "const";
+  name: string;
+  expression: BundleNode;
+}
+
+// An assignment to a resolved name (targets are always identifiers).
+export interface BundleAssignmentNode {
+  kind: "assignment";
+  name: string;
+  expression: BundleNode;
+}
+
+// An if statement; `alternate` is null when there is no else branch.
+export interface BundleIfNode {
+  kind: "if";
+  condition: BundleNode;
+  consequent: BundleNode;
+  alternate: BundleNode | null;
+}
+
+// Returns the expression's value from the enclosing arrow.
+export interface BundleReturnNode {
+  kind: "return";
+  expression: BundleNode;
+}

@@ -1,6 +1,23 @@
 {
   "functions": {
-    "#f0": "($0) => () => $0()"
+    "#f0": {
+      "kind": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "call",
+          "callee": {
+            "kind": "identifier",
+            "name": "$0"
+          },
+          "args": []
+        }
+      }
+    }
   },
   "trees": {
     "#t0": {

@@ -1,7 +1,49 @@
 {
   "functions": {
-    "#f0": "() => { const x = 0; return #f1(x); }",
-    "#f1": "(x) => x"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "x",
+            "expression": {
+              "kind": "value",
+              "value": 0
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "entry",
+                "label": "#f1"
+              },
+              "args": [
+                {
+                  "kind": "identifier",
+                  "name": "x"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [
+        "x"
+      ],
+      "body": {
+        "kind": "identifier",
+        "name": "x"
+      }
+    }
   },
   "trees": {},
   "root": {

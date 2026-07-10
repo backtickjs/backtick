@@ -1,11 +1,107 @@
 {
   "functions": {
-    "#f0": "() => ({x: #f1(#f2, #f3), y: #f1(#f4, #f5)})",
-    "#f1": "($0, $1) => $0() + $1()",
-    "#f2": "() => 1",
-    "#f3": "() => 2",
-    "#f4": "() => 3",
-    "#f5": "() => 4"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "object",
+        "entries": {
+          "x": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "kind": "entry",
+                "label": "#f2"
+              },
+              {
+                "kind": "entry",
+                "label": "#f3"
+              }
+            ]
+          },
+          "y": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "kind": "entry",
+                "label": "#f4"
+              },
+              {
+                "kind": "entry",
+                "label": "#f5"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "kind": "binop",
+        "operator": "+",
+        "left": {
+          "kind": "call",
+          "callee": {
+            "kind": "identifier",
+            "name": "$0"
+          },
+          "args": []
+        },
+        "right": {
+          "kind": "call",
+          "callee": {
+            "kind": "identifier",
+            "name": "$1"
+          },
+          "args": []
+        }
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 1
+      }
+    },
+    "#f3": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 2
+      }
+    },
+    "#f4": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 3
+      }
+    },
+    "#f5": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 4
+      }
+    }
   },
   "trees": {},
   "root": {

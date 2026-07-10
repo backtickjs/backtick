@@ -1,10 +1,141 @@
 {
   "functions": {
-    "#f0": "() => { return #f1() + #f1(); }",
-    "#f1": "() => { return #f2() + #f2(); }",
-    "#f2": "() => { return #f3() + #f3(); }",
-    "#f3": "() => { return #f4() + #f4(); }",
-    "#f4": "() => 1"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f1"
+                },
+                "args": []
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f1"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f2"
+                },
+                "args": []
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f2"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f3"
+                },
+                "args": []
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f3"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f3": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f4"
+                },
+                "args": []
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f4"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f4": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 1
+      }
+    }
   },
   "trees": {},
   "root": {

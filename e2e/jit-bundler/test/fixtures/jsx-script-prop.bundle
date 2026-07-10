@@ -1,6 +1,32 @@
 {
   "functions": {
-    "#f0": "(console) => () => console.log(\"hi\")"
+    "#f0": {
+      "kind": "arrow",
+      "params": [
+        "console"
+      ],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "call",
+          "callee": {
+            "kind": "property",
+            "object": {
+              "kind": "identifier",
+              "name": "console"
+            },
+            "name": "log"
+          },
+          "args": [
+            {
+              "kind": "value",
+              "value": "hi"
+            }
+          ]
+        }
+      }
+    }
   },
   "trees": {
     "#t0": {

@@ -1,8 +1,143 @@
 {
   "functions": {
-    "#f0": "() => { const c = #f1(); return #f2(c); }",
-    "#f1": "() => { const color = ({r: 1, g: 2, b: 3, brightness: () => { return color.r + color.g + color.b; }}); return color; }",
-    "#f2": "(c) => c.brightness()"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "c",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "entry",
+                "label": "#f1"
+              },
+              "args": []
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "entry",
+                "label": "#f2"
+              },
+              "args": [
+                {
+                  "kind": "identifier",
+                  "name": "c"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "color",
+            "expression": {
+              "kind": "object",
+              "entries": {
+                "r": {
+                  "kind": "value",
+                  "value": 1
+                },
+                "g": {
+                  "kind": "value",
+                  "value": 2
+                },
+                "b": {
+                  "kind": "value",
+                  "value": 3
+                },
+                "brightness": {
+                  "kind": "arrow",
+                  "params": [],
+                  "body": {
+                    "kind": "block",
+                    "statements": [
+                      {
+                        "kind": "return",
+                        "expression": {
+                          "kind": "binop",
+                          "operator": "+",
+                          "left": {
+                            "kind": "binop",
+                            "operator": "+",
+                            "left": {
+                              "kind": "property",
+                              "object": {
+                                "kind": "identifier",
+                                "name": "color"
+                              },
+                              "name": "r"
+                            },
+                            "right": {
+                              "kind": "property",
+                              "object": {
+                                "kind": "identifier",
+                                "name": "color"
+                              },
+                              "name": "g"
+                            }
+                          },
+                          "right": {
+                            "kind": "property",
+                            "object": {
+                              "kind": "identifier",
+                              "name": "color"
+                            },
+                            "name": "b"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "identifier",
+              "name": "color"
+            }
+          }
+        ]
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [
+        "c"
+      ],
+      "body": {
+        "kind": "call",
+        "callee": {
+          "kind": "property",
+          "object": {
+            "kind": "identifier",
+            "name": "c"
+          },
+          "name": "brightness"
+        },
+        "args": []
+      }
+    }
   },
   "trees": {},
   "root": {

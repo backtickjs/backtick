@@ -1,7 +1,57 @@
 {
   "functions": {
-    "#f0": "() => () => { const x = 1; return #t0(x); }",
-    "#f1": "(x) => () => x"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "block",
+          "statements": [
+            {
+              "kind": "declaration",
+              "keyword": "const",
+              "name": "x",
+              "expression": {
+                "kind": "value",
+                "value": 1
+              }
+            },
+            {
+              "kind": "return",
+              "expression": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#t0"
+                },
+                "args": [
+                  {
+                    "kind": "identifier",
+                    "name": "x"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [
+        "x"
+      ],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "identifier",
+          "name": "x"
+        }
+      }
+    }
   },
   "trees": {
     "#t0": {

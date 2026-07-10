@@ -17,7 +17,7 @@ test("a plain object prop can't look like an element node", () => {
   assert.throws(() => bundle(element), /element node/);
 });
 
-test("a string splice inlined into a body is escaped as JS source", () => {
+test("a runtime string splice inlines as a value node", () => {
   const value = 'say "hi"\n\\done';
   const loc = {
     path: "test.ts",
@@ -31,5 +31,9 @@ test("a string splice inlined into a body is escaped as JS source", () => {
     (v) => v.splice(loc, 0),
   );
   const { functions } = bundle(client);
-  assert.strictEqual(functions["#f0"], `() => ${JSON.stringify(value)}`);
+  assert.deepStrictEqual(functions["#f0"], {
+    kind: "arrow",
+    params: [],
+    body: { kind: "value", value },
+  });
 });

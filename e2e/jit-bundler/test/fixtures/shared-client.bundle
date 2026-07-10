@@ -1,11 +1,185 @@
 {
   "functions": {
-    "#f0": "() => #f1() + #f5()",
-    "#f1": "() => { const p = ({x: #f2(), y: #f3(), sum: #f4()}); return p.sum(); }",
-    "#f2": "() => 1",
-    "#f3": "() => 2",
-    "#f4": "() => () => #f2() + #f3()",
-    "#f5": "() => { const p2 = ({x: #f2(), y: #f3(), sum: #f4()}); return p2.x; }"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "binop",
+        "operator": "+",
+        "left": {
+          "kind": "call",
+          "callee": {
+            "kind": "entry",
+            "label": "#f1"
+          },
+          "args": []
+        },
+        "right": {
+          "kind": "call",
+          "callee": {
+            "kind": "entry",
+            "label": "#f5"
+          },
+          "args": []
+        }
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "p",
+            "expression": {
+              "kind": "object",
+              "entries": {
+                "x": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f2"
+                  },
+                  "args": []
+                },
+                "y": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f3"
+                  },
+                  "args": []
+                },
+                "sum": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f4"
+                  },
+                  "args": []
+                }
+              }
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "property",
+                "object": {
+                  "kind": "identifier",
+                  "name": "p"
+                },
+                "name": "sum"
+              },
+              "args": []
+            }
+          }
+        ]
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 1
+      }
+    },
+    "#f3": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 2
+      }
+    },
+    "#f4": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "binop",
+          "operator": "+",
+          "left": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f2"
+            },
+            "args": []
+          },
+          "right": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f3"
+            },
+            "args": []
+          }
+        }
+      }
+    },
+    "#f5": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "p2",
+            "expression": {
+              "kind": "object",
+              "entries": {
+                "x": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f2"
+                  },
+                  "args": []
+                },
+                "y": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f3"
+                  },
+                  "args": []
+                },
+                "sum": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f4"
+                  },
+                  "args": []
+                }
+              }
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "property",
+              "object": {
+                "kind": "identifier",
+                "name": "p2"
+              },
+              "name": "x"
+            }
+          }
+        ]
+      }
+    }
   },
   "trees": {},
   "root": {

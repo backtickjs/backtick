@@ -1,9 +1,137 @@
 {
   "functions": {
-    "#f0": "() => { const base = 10; return #f1(base); }",
-    "#f1": "(base) => { const base2 = 1; return base2 + #f2(base); }",
-    "#f2": "(base) => { const base3 = 2; return base3 * #f3(base); }",
-    "#f3": "(base) => base"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "base",
+            "expression": {
+              "kind": "value",
+              "value": 10
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "entry",
+                "label": "#f1"
+              },
+              "args": [
+                {
+                  "kind": "identifier",
+                  "name": "base"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [
+        "base"
+      ],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "base2",
+            "expression": {
+              "kind": "value",
+              "value": 1
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "+",
+              "left": {
+                "kind": "identifier",
+                "name": "base2"
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f2"
+                },
+                "args": [
+                  {
+                    "kind": "identifier",
+                    "name": "base"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [
+        "base"
+      ],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "base3",
+            "expression": {
+              "kind": "value",
+              "value": 2
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "*",
+              "left": {
+                "kind": "identifier",
+                "name": "base3"
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "entry",
+                  "label": "#f3"
+                },
+                "args": [
+                  {
+                    "kind": "identifier",
+                    "name": "base"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f3": {
+      "kind": "arrow",
+      "params": [
+        "base"
+      ],
+      "body": {
+        "kind": "identifier",
+        "name": "base"
+      }
+    }
   },
   "trees": {},
   "root": {

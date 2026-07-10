@@ -4,20 +4,14 @@ import { IrElement } from "../ir/nodes/IrElement.js";
 import { IrScriptRef } from "../ir/nodes/IrScriptRef.js";
 import type { IrTreeEntry } from "../ir/nodes/IrTreeEntry.js";
 import { IrTreeRef } from "../ir/nodes/IrTreeRef.js";
-import {
-  serializeArray,
-  serializeObject,
-  serializePrimitive,
-} from "../serializer/literals.js";
-import {
-  type RenderSplice,
-  serializeScript,
-} from "../serializer/serializeScript.js";
+import { buildScriptNode, type RenderSplice } from "./buildScriptNode.js";
 import type {
   Bundle,
+  BundleArrowNode,
   BundleElement,
   BundleExpr,
   BundleGlobal,
+  BundleNode,
   BundleSlot,
   BundleTree,
   FunctionLabel,
@@ -271,17 +265,22 @@ export function buildBundle(ir: Ir): Bundle {
     return order;
   };
 
-  const bodies = new Map<number, string>();
+  const bodies = new Map<number, BundleArrowNode>();
 
-  // Materializes an entry's arrow into `bodies` the first time it is reached. A
-  // polymorphic entry takes a `$i` parameter per splice (its holes render as
-  // `$i()`) ahead of its captures; a monomorphic entry inlines its splice
-  // arguments and takes only captures.
+  // Materializes an entry's arrow node into `bodies` the first time it is
+  // reached. A polymorphic entry takes a `$i` parameter per splice (its holes
+  // render as calls `$i()`) ahead of its captures; a monomorphic entry inlines
+  // its splice arguments and takes only captures.
   const materialize = (target: number): void => {
     if (bodies.has(target)) {
       return;
     }
-    bodies.set(target, ""); // reserve the slot to break reference cycles
+    // Reserve the slot to break reference cycles; overwritten below.
+    bodies.set(target, {
+      kind: "arrow",
+      params: [],
+      body: { kind: "value", value: null },
+    });
     const captureParams = need(target).map(displayName);
     let params: string[];
     let renderSplice: RenderSplice;
@@ -289,45 +288,59 @@ export function buildBundle(ir: Ir): Bundle {
       const arity = monoArgs(target).length;
       const spliceParams = Array.from({ length: arity }, (_, i) => `$${i}`);
       params = [...spliceParams, ...captureParams];
-      renderSplice = (index) => `$${index}()`;
+      renderSplice = (index) => ({
+        kind: "call",
+        callee: { kind: "identifier", name: `$${index}` },
+        args: [],
+      });
     } else {
       params = captureParams;
       const args = monoArgs(target);
       renderSplice = (index) => renderValue(args[index]);
     }
-    const body = serializeScript(fns[target].body, renderSplice, displayName);
-    bodies.set(target, `(${params.join(", ")}) => ${body}`);
+    const body = buildScriptNode(fns[target].body, renderSplice, displayName);
+    bodies.set(target, { kind: "arrow", params, body });
   };
 
   // The arguments passed when calling an entry: for a polymorphic target, one
   // thunk per splice (bound to this reference's arguments) ahead of its
   // captures; for a monomorphic target, just its captures.
-  const callArgs = (ref: IrScriptRef): string[] => {
-    const parts: string[] = [];
+  const callArgs = (ref: IrScriptRef): BundleNode[] => {
+    const parts: BundleNode[] = [];
     if (polymorphic.has(ref.target)) {
       for (const arg of ref.args) {
         parts.push(renderThunk(arg));
       }
     }
     for (const key of need(ref.target)) {
-      parts.push(displayName(key));
+      parts.push({ kind: "identifier", name: displayName(key) });
     }
     return parts;
   };
 
-  // Renders a bundle argument in value position — as the value it evaluates to.
-  // A script reference becomes a call `#ftarget(...)`, a tree reference a call
-  // `#ttarget(...)` passing the tree's slot captures; every other value its
-  // literal form.
-  const renderValue = (value: IrArgument): string => {
+  // Renders an IR argument in value position — as the node for the value it
+  // evaluates to. A script reference becomes a call of its `#fi` entry, a tree
+  // reference a call of its `#ti` entry passing the tree's slot captures;
+  // every other value its literal form.
+  const renderValue = (value: IrArgument): BundleNode => {
     if (value instanceof IrScriptRef) {
       materialize(value.target);
-      return `#f${value.target}(${callArgs(value).join(", ")})`;
+      return {
+        kind: "call",
+        callee: { kind: "entry", label: `#f${value.target}` },
+        args: callArgs(value),
+      };
     }
     if (value instanceof IrTreeRef) {
       materializeTree(value.target);
-      const args = treeSlots(value.target).map(displayName);
-      return `#t${value.target}(${args.join(", ")})`;
+      return {
+        kind: "call",
+        callee: { kind: "entry", label: `#t${value.target}` },
+        args: treeSlots(value.target).map((key) => ({
+          kind: "identifier",
+          name: displayName(key),
+        })),
+      };
     }
     if (value instanceof IrElement) {
       // The builder inlines an element only inside a tree entry, which renders
@@ -340,38 +353,60 @@ export function buildBundle(ir: Ir): Bundle {
       typeof value === "number" ||
       typeof value === "string"
     ) {
-      return serializePrimitive(value);
+      return { kind: "value", value };
     }
     if (Array.isArray(value)) {
-      return serializeArray(value, renderValue);
+      return { kind: "array", elements: value.map(renderValue) };
     }
     if (typeof value === "object") {
-      return serializeObject(value, renderValue);
+      const entries: { [key: string]: BundleNode } = {};
+      for (const [key, entry] of Object.entries(value)) {
+        entries[key] = renderValue(entry);
+      }
+      return { kind: "object", entries };
     }
     const unhandled: never = value;
-    throw new Error(`Unhandled bundle argument: ${JSON.stringify(unhandled)}`);
+    throw new Error(`Unhandled IR argument: ${JSON.stringify(unhandled)}`);
   };
 
   // Renders a splice argument in thunk position — as a nullary function that
   // yields the value — so a polymorphic entry evaluates it lazily at the hole,
   // mirroring an inlined splice. A referenced entry that already takes no
   // arguments is a nullary thunk as-is; anything else is wrapped in an arrow.
-  const renderThunk = (value: IrArgument): string => {
+  const renderThunk = (value: IrArgument): BundleNode => {
     if (value instanceof IrScriptRef) {
       materialize(value.target);
       const args = callArgs(value);
+      const entry = {
+        kind: "entry",
+        label: `#f${value.target}`,
+      } as const satisfies BundleNode;
       return args.length === 0
-        ? `#f${value.target}`
-        : `() => #f${value.target}(${args.join(", ")})`;
+        ? entry
+        : {
+            kind: "arrow",
+            params: [],
+            body: { kind: "call", callee: entry, args },
+          };
     }
     if (value instanceof IrTreeRef) {
       materializeTree(value.target);
-      const args = treeSlots(value.target).map(displayName);
+      const args = treeSlots(value.target).map(
+        (key): BundleNode => ({ kind: "identifier", name: displayName(key) }),
+      );
+      const entry = {
+        kind: "entry",
+        label: `#t${value.target}`,
+      } as const satisfies BundleNode;
       return args.length === 0
-        ? `#t${value.target}`
-        : `() => #t${value.target}(${args.join(", ")})`;
+        ? entry
+        : {
+            kind: "arrow",
+            params: [],
+            body: { kind: "call", callee: entry, args },
+          };
     }
-    return `() => ${renderValue(value)}`;
+    return { kind: "arrow", params: [], body: renderValue(value) };
   };
 
   const treeJsons = new Map<number, BundleTree>();
@@ -500,7 +535,7 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   const root = renderExpr(ir.root, new Map());
-  const functions: Record<FunctionLabel, string> = {};
+  const functions: Record<FunctionLabel, BundleArrowNode> = {};
   for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
     functions[`#f${index}`] = body;
   }

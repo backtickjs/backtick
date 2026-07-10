@@ -1,6 +1,44 @@
 {
   "functions": {
-    "#f0": "() => ({list: [1, \"two\", true, null], obj: ({k: 3})})"
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "object",
+        "entries": {
+          "list": {
+            "kind": "array",
+            "elements": [
+              {
+                "kind": "value",
+                "value": 1
+              },
+              {
+                "kind": "value",
+                "value": "two"
+              },
+              {
+                "kind": "value",
+                "value": true
+              },
+              {
+                "kind": "value",
+                "value": null
+              }
+            ]
+          },
+          "obj": {
+            "kind": "object",
+            "entries": {
+              "k": {
+                "kind": "value",
+                "value": 3
+              }
+            }
+          }
+        }
+      }
+    }
   },
   "trees": {},
   "root": {
