@@ -10,7 +10,7 @@ export type ClientUnknown =
   | { [key: string]: ClientUnknown };
 
 export interface Client<T extends ClientUnknown> {
-  "@backtickjs": T;
+  "@backtickjs/Client": T;
 }
 
 export interface ClientScript<T extends ClientUnknown> extends Client<T> {
@@ -27,7 +27,7 @@ export type Prop<T extends ClientUnknown> = T | Client<T>;
 export type UIElement = {};
 
 export interface JSXElement extends Client<UIElement> {
-  "@backtickjs": UIElement;
+  "@backtickjs/Client": UIElement;
   readonly type: string;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
@@ -43,7 +43,7 @@ export type Spliceable =
   | { [key: string]: Spliceable };
 
 export type AsObject<T> = {
-  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
+  [K in Exclude<keyof T, "@backtickjs/Client"> as T[K] extends Spliceable
     ? K
     : never]: Lower<T[K]>;
 };
@@ -140,7 +140,9 @@ export interface Visitor<U> {
 }
 
 export function isClient(value: unknown): value is Client<ClientUnknown> {
-  return typeof value === "object" && value !== null && "@backtickjs" in value;
+  return (
+    typeof value === "object" && value !== null && "@backtickjs/Client" in value
+  );
 }
 
 export function isClientScript(
@@ -166,7 +168,7 @@ export function spliceableEntries(
 ): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
   for (const key of objectKeys(value)) {
-    if (key === "@backtickjs") {
+    if (key === "@backtickjs/Client") {
       continue;
     }
     const entry = (value as unknown as Record<string, unknown>)[key];
@@ -238,7 +240,7 @@ function create(
   // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 ): ClientScript<any> {
   return {
-    "@backtickjs": true,
+    "@backtickjs/Client": true,
     loc,
     fileHash,
     metadata,

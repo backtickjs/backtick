@@ -1,5 +1,5 @@
 class Color {
-    "@backtickjs";
+    "@backtickjs/Client";
     r;
     g;
     b;

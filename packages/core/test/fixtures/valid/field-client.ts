@@ -2,7 +2,7 @@ import type { Client, AsObject } from "@backtickjs/core/cs-runtime";
 import { cs } from "@backtickjs/core";
 
 class Color implements Client<AsObject<Color>> {
-  "@backtickjs": AsObject<Color>;
+  "@backtickjs/Client": AsObject<Color>;
 
   readonly r: Client<number>;
   readonly g: Client<number>;
