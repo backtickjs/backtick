@@ -1,29 +1,29 @@
+import { AstArray } from "../ast/nodes/AstArray.js";
+import { AstBoolean } from "../ast/nodes/AstBoolean.js";
+import { AstElement } from "../ast/nodes/AstElement.js";
 import type { AstNode } from "../ast/nodes/AstNode.js";
-import { RuntimeArray } from "../ast/nodes/RuntimeArray.js";
-import { RuntimeBoolean } from "../ast/nodes/RuntimeBoolean.js";
-import { RuntimeJSXElement } from "../ast/nodes/RuntimeJSXElement.js";
-import { RuntimeNull } from "../ast/nodes/RuntimeNull.js";
-import { RuntimeNumber } from "../ast/nodes/RuntimeNumber.js";
-import { RuntimeObject } from "../ast/nodes/RuntimeObject.js";
-import { RuntimeString } from "../ast/nodes/RuntimeString.js";
-import { SourceArray } from "../ast/nodes/SourceArray.js";
-import { SourceArrow } from "../ast/nodes/SourceArrow.js";
-import { SourceAssignment } from "../ast/nodes/SourceAssignment.js";
-import { SourceBinop } from "../ast/nodes/SourceBinop.js";
-import { SourceBlock } from "../ast/nodes/SourceBlock.js";
-import { SourceBoolean } from "../ast/nodes/SourceBoolean.js";
-import { SourceCall } from "../ast/nodes/SourceCall.js";
-import { SourceClientScript } from "../ast/nodes/SourceClientScript.js";
-import { SourceIdentifier } from "../ast/nodes/SourceIdentifier.js";
-import { SourceIf } from "../ast/nodes/SourceIf.js";
-import { SourceNull } from "../ast/nodes/SourceNull.js";
-import { SourceNumber } from "../ast/nodes/SourceNumber.js";
-import { SourceObject } from "../ast/nodes/SourceObject.js";
-import { SourcePropertyAccess } from "../ast/nodes/SourcePropertyAccess.js";
-import { SourceReturn } from "../ast/nodes/SourceReturn.js";
-import { SourceSplice } from "../ast/nodes/SourceSplice.js";
-import { SourceString } from "../ast/nodes/SourceString.js";
-import { SourceVariableDeclaration } from "../ast/nodes/SourceVariableDeclaration.js";
+import { AstNull } from "../ast/nodes/AstNull.js";
+import { AstNumber } from "../ast/nodes/AstNumber.js";
+import { AstObject } from "../ast/nodes/AstObject.js";
+import { AstScript } from "../ast/nodes/AstScript.js";
+import { AstScriptArray } from "../ast/nodes/AstScriptArray.js";
+import { AstScriptArrow } from "../ast/nodes/AstScriptArrow.js";
+import { AstScriptAssignment } from "../ast/nodes/AstScriptAssignment.js";
+import { AstScriptBinop } from "../ast/nodes/AstScriptBinop.js";
+import { AstScriptBlock } from "../ast/nodes/AstScriptBlock.js";
+import { AstScriptBoolean } from "../ast/nodes/AstScriptBoolean.js";
+import { AstScriptCall } from "../ast/nodes/AstScriptCall.js";
+import { AstScriptIdentifier } from "../ast/nodes/AstScriptIdentifier.js";
+import { AstScriptIf } from "../ast/nodes/AstScriptIf.js";
+import { AstScriptNull } from "../ast/nodes/AstScriptNull.js";
+import { AstScriptNumber } from "../ast/nodes/AstScriptNumber.js";
+import { AstScriptObject } from "../ast/nodes/AstScriptObject.js";
+import { AstScriptPropertyAccess } from "../ast/nodes/AstScriptPropertyAccess.js";
+import { AstScriptReturn } from "../ast/nodes/AstScriptReturn.js";
+import { AstScriptSplice } from "../ast/nodes/AstScriptSplice.js";
+import { AstScriptString } from "../ast/nodes/AstScriptString.js";
+import { AstScriptVariableDeclaration } from "../ast/nodes/AstScriptVariableDeclaration.js";
+import { AstString } from "../ast/nodes/AstString.js";
 import {
   serializeArray,
   serializeObject,
@@ -51,67 +51,67 @@ export function serializeScript(
 ): string {
   const s = (child: AstNode): string =>
     serializeScript(child, renderSplice, mangle);
-  if (node instanceof SourceArray || node instanceof RuntimeArray) {
+  if (node instanceof AstScriptArray || node instanceof AstArray) {
     return serializeArray(node.elements, s);
   }
-  if (node instanceof SourceArrow) {
+  if (node instanceof AstScriptArrow) {
     const params = node.params
       .map((param) => mangle(param.bindingKey))
       .join(", ");
     return `(${params}) => ${s(node.body)}`;
   }
-  if (node instanceof SourceAssignment) {
+  if (node instanceof AstScriptAssignment) {
     return `${s(node.name)} = ${s(node.expression)};`;
   }
-  if (node instanceof SourceBinop) {
+  if (node instanceof AstScriptBinop) {
     return `${s(node.lhs)} ${node.operator} ${s(node.rhs)}`;
   }
-  if (node instanceof SourceBlock) {
+  if (node instanceof AstScriptBlock) {
     return serializeBlock(node.statements, renderSplice, mangle);
   }
-  if (node instanceof SourceBoolean || node instanceof RuntimeBoolean) {
+  if (node instanceof AstScriptBoolean || node instanceof AstBoolean) {
     return serializePrimitive(node.value);
   }
-  if (node instanceof SourceCall) {
+  if (node instanceof AstScriptCall) {
     return `${s(node.callee)}(${node.args.map(s).join(", ")})`;
   }
-  if (node instanceof SourceClientScript) {
+  if (node instanceof AstScript) {
     return `cs\`${s(node.expression)}\``;
   }
-  if (node instanceof SourceIdentifier) {
+  if (node instanceof AstScriptIdentifier) {
     return mangle(node.bindingKey);
   }
-  if (node instanceof RuntimeJSXElement) {
+  if (node instanceof AstElement) {
     // An element reaches the bundle as a splice value and lowers into the tree
     // table (see `buildIr`); a parsed script body never contains one.
     throw new Error("A JSX element can't appear in a script body.");
   }
-  if (node instanceof SourceIf) {
+  if (node instanceof AstScriptIf) {
     const head = `if (${s(node.condition)}) ${s(node.consequent)}`;
     return node.alternate === null ? head : `${head} else ${s(node.alternate)}`;
   }
-  if (node instanceof SourceNull || node instanceof RuntimeNull) {
+  if (node instanceof AstScriptNull || node instanceof AstNull) {
     return serializePrimitive(null);
   }
-  if (node instanceof SourceNumber || node instanceof RuntimeNumber) {
+  if (node instanceof AstScriptNumber || node instanceof AstNumber) {
     return serializePrimitive(node.value);
   }
-  if (node instanceof SourceObject || node instanceof RuntimeObject) {
+  if (node instanceof AstScriptObject || node instanceof AstObject) {
     return serializeObject(node.entries, s);
   }
-  if (node instanceof SourcePropertyAccess) {
+  if (node instanceof AstScriptPropertyAccess) {
     return `${s(node.expression)}.${node.name}`;
   }
-  if (node instanceof SourceReturn) {
+  if (node instanceof AstScriptReturn) {
     return `return ${s(node.expression)};`;
   }
-  if (node instanceof SourceSplice) {
+  if (node instanceof AstScriptSplice) {
     return renderSplice(node.index);
   }
-  if (node instanceof SourceString || node instanceof RuntimeString) {
+  if (node instanceof AstScriptString || node instanceof AstString) {
     return serializePrimitive(node.value);
   }
-  if (node instanceof SourceVariableDeclaration) {
+  if (node instanceof AstScriptVariableDeclaration) {
     return `${node.keyword} ${s(node.name)} = ${s(node.expression)};`;
   }
   const unhandled: never = node;

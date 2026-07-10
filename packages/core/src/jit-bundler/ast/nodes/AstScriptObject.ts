@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 import type { AstNode } from "./AstNode.js";
 
-export class SourceObject {
+export class AstScriptObject {
   readonly loc: SourceLocation;
   readonly entries: Readonly<Record<string, AstNode>>;
 

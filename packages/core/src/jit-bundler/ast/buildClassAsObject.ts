@@ -5,13 +5,11 @@ import {
 } from "../../cs-runtime/index.js";
 import { buildAst } from "./buildAst.js";
 import type { AstNode } from "./nodes/AstNode.js";
-import { RuntimeObject } from "./nodes/RuntimeObject.js";
+import { AstObject } from "./nodes/AstObject.js";
 
-const nodeByInstance = new WeakMap<Client<ClientUnknown>, RuntimeObject>();
+const nodeByInstance = new WeakMap<Client<ClientUnknown>, AstObject>();
 
-export function buildClassAsObject(
-  value: Client<ClientUnknown>,
-): RuntimeObject {
+export function buildClassAsObject(value: Client<ClientUnknown>): AstObject {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;
@@ -22,7 +20,7 @@ export function buildClassAsObject(
     entries[key] = buildAst(entry);
   }
 
-  const node = new RuntimeObject(entries);
+  const node = new AstObject(entries);
   nodeByInstance.set(value, node);
   return node;
 }

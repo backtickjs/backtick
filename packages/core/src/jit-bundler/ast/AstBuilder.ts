@@ -1,62 +1,62 @@
 import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
 import type { AstNode } from "./nodes/AstNode.js";
-import { SourceArray } from "./nodes/SourceArray.js";
-import { SourceArrow } from "./nodes/SourceArrow.js";
-import { SourceAssignment } from "./nodes/SourceAssignment.js";
-import { SourceBinop } from "./nodes/SourceBinop.js";
-import { SourceBlock } from "./nodes/SourceBlock.js";
-import { SourceBoolean } from "./nodes/SourceBoolean.js";
-import { SourceCall } from "./nodes/SourceCall.js";
-import { SourceIdentifier } from "./nodes/SourceIdentifier.js";
-import { SourceIf } from "./nodes/SourceIf.js";
-import { SourceNull } from "./nodes/SourceNull.js";
-import { SourceNumber } from "./nodes/SourceNumber.js";
-import { SourceObject } from "./nodes/SourceObject.js";
-import { SourcePropertyAccess } from "./nodes/SourcePropertyAccess.js";
-import { SourceReturn } from "./nodes/SourceReturn.js";
-import { SourceSplice } from "./nodes/SourceSplice.js";
-import { SourceString } from "./nodes/SourceString.js";
-import { SourceVariableDeclaration } from "./nodes/SourceVariableDeclaration.js";
+import { AstScriptArray } from "./nodes/AstScriptArray.js";
+import { AstScriptArrow } from "./nodes/AstScriptArrow.js";
+import { AstScriptAssignment } from "./nodes/AstScriptAssignment.js";
+import { AstScriptBinop } from "./nodes/AstScriptBinop.js";
+import { AstScriptBlock } from "./nodes/AstScriptBlock.js";
+import { AstScriptBoolean } from "./nodes/AstScriptBoolean.js";
+import { AstScriptCall } from "./nodes/AstScriptCall.js";
+import { AstScriptIdentifier } from "./nodes/AstScriptIdentifier.js";
+import { AstScriptIf } from "./nodes/AstScriptIf.js";
+import { AstScriptNull } from "./nodes/AstScriptNull.js";
+import { AstScriptNumber } from "./nodes/AstScriptNumber.js";
+import { AstScriptObject } from "./nodes/AstScriptObject.js";
+import { AstScriptPropertyAccess } from "./nodes/AstScriptPropertyAccess.js";
+import { AstScriptReturn } from "./nodes/AstScriptReturn.js";
+import { AstScriptSplice } from "./nodes/AstScriptSplice.js";
+import { AstScriptString } from "./nodes/AstScriptString.js";
+import { AstScriptVariableDeclaration } from "./nodes/AstScriptVariableDeclaration.js";
 
 export class AstBuilder implements Visitor<AstNode> {
-  splice(loc: SourceLocation, index: number): SourceSplice {
-    return new SourceSplice(loc, index);
+  splice(loc: SourceLocation, index: number): AstScriptSplice {
+    return new AstScriptSplice(loc, index);
   }
 
-  null(loc: SourceLocation): SourceNull {
-    return new SourceNull(loc);
+  null(loc: SourceLocation): AstScriptNull {
+    return new AstScriptNull(loc);
   }
 
-  number(loc: SourceLocation, value: number): SourceNumber {
-    return new SourceNumber(loc, value);
+  number(loc: SourceLocation, value: number): AstScriptNumber {
+    return new AstScriptNumber(loc, value);
   }
 
-  boolean(loc: SourceLocation, value: boolean): SourceBoolean {
-    return new SourceBoolean(loc, value);
+  boolean(loc: SourceLocation, value: boolean): AstScriptBoolean {
+    return new AstScriptBoolean(loc, value);
   }
 
-  string(loc: SourceLocation, value: string): SourceString {
-    return new SourceString(loc, value);
+  string(loc: SourceLocation, value: string): AstScriptString {
+    return new AstScriptString(loc, value);
   }
 
   identifier(
     loc: SourceLocation,
     name: string,
     bindingKey: string,
-  ): SourceIdentifier {
-    return new SourceIdentifier(loc, name, bindingKey);
+  ): AstScriptIdentifier {
+    return new AstScriptIdentifier(loc, name, bindingKey);
   }
 
-  block(loc: SourceLocation, statements: AstNode[]): SourceBlock {
-    return new SourceBlock(loc, statements);
+  block(loc: SourceLocation, statements: AstNode[]): AstScriptBlock {
+    return new AstScriptBlock(loc, statements);
   }
 
   assignment(
     loc: SourceLocation,
     name: AstNode,
     expression: AstNode,
-  ): SourceAssignment {
-    return new SourceAssignment(loc, name, expression);
+  ): AstScriptAssignment {
+    return new AstScriptAssignment(loc, name, expression);
   }
 
   variableDeclaration(
@@ -64,8 +64,8 @@ export class AstBuilder implements Visitor<AstNode> {
     keyword: "let" | "const",
     name: AstNode,
     expression: AstNode,
-  ): SourceVariableDeclaration {
-    return new SourceVariableDeclaration(loc, keyword, name, expression);
+  ): AstScriptVariableDeclaration {
+    return new AstScriptVariableDeclaration(loc, keyword, name, expression);
   }
 
   if(
@@ -73,20 +73,20 @@ export class AstBuilder implements Visitor<AstNode> {
     condition: AstNode,
     consequent: AstNode,
     alternate: AstNode | null,
-  ): SourceIf {
-    return new SourceIf(loc, condition, consequent, alternate);
+  ): AstScriptIf {
+    return new AstScriptIf(loc, condition, consequent, alternate);
   }
 
-  return(loc: SourceLocation, expression: AstNode): SourceReturn {
-    return new SourceReturn(loc, expression);
+  return(loc: SourceLocation, expression: AstNode): AstScriptReturn {
+    return new AstScriptReturn(loc, expression);
   }
 
   propertyAccess(
     loc: SourceLocation,
     expression: AstNode,
     name: string,
-  ): SourcePropertyAccess {
-    return new SourcePropertyAccess(loc, expression, name);
+  ): AstScriptPropertyAccess {
+    return new AstScriptPropertyAccess(loc, expression, name);
   }
 
   binop(
@@ -94,26 +94,26 @@ export class AstBuilder implements Visitor<AstNode> {
     lhs: AstNode,
     operator: string,
     rhs: AstNode,
-  ): SourceBinop {
-    return new SourceBinop(loc, lhs, operator, rhs);
+  ): AstScriptBinop {
+    return new AstScriptBinop(loc, lhs, operator, rhs);
   }
 
-  array(loc: SourceLocation, elements: AstNode[]): SourceArray {
-    return new SourceArray(loc, elements);
+  array(loc: SourceLocation, elements: AstNode[]): AstScriptArray {
+    return new AstScriptArray(loc, elements);
   }
 
   object(
     loc: SourceLocation,
     entries: { [key: string]: AstNode },
-  ): SourceObject {
-    return new SourceObject(loc, entries);
+  ): AstScriptObject {
+    return new AstScriptObject(loc, entries);
   }
 
-  call(loc: SourceLocation, callee: AstNode, args: AstNode[]): SourceCall {
-    return new SourceCall(loc, callee, args);
+  call(loc: SourceLocation, callee: AstNode, args: AstNode[]): AstScriptCall {
+    return new AstScriptCall(loc, callee, args);
   }
 
-  arrow(loc: SourceLocation, params: AstNode[], body: AstNode): SourceArrow {
-    return new SourceArrow(loc, params as SourceIdentifier[], body);
+  arrow(loc: SourceLocation, params: AstNode[], body: AstNode): AstScriptArrow {
+    return new AstScriptArrow(loc, params as AstScriptIdentifier[], body);
   }
 }

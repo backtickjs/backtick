@@ -1,6 +1,6 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 
-export class SourceNull {
+export class AstScriptNull {
   readonly loc: SourceLocation;
 
   constructor(loc: SourceLocation) {

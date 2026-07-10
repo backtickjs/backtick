@@ -1,4 +1,4 @@
-export class RuntimeBoolean {
+export class AstBoolean {
   readonly value: boolean;
 
   constructor(value: boolean) {

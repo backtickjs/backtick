@@ -1,10 +1,10 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 
-export class SourceBoolean {
+export class AstScriptNumber {
   readonly loc: SourceLocation;
-  readonly value: boolean;
+  readonly value: number;
 
-  constructor(loc: SourceLocation, value: boolean) {
+  constructor(loc: SourceLocation, value: number) {
     this.loc = loc;
     this.value = value;
   }

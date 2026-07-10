@@ -1,4 +1,4 @@
-export class RuntimeNumber {
+export class AstNumber {
   readonly value: number;
 
   constructor(value: number) {

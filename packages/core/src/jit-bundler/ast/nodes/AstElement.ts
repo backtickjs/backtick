@@ -1,6 +1,6 @@
 import type { AstRoot } from "./AstNode.js";
 
-export class RuntimeJSXElement {
+export class AstElement {
   readonly type: string;
   readonly key: string | number | null;
   readonly props: Readonly<Record<string, AstRoot>>;

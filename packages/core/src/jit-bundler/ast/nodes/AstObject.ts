@@ -1,6 +1,6 @@
 import type { AstRoot } from "./AstNode.js";
 
-export class RuntimeObject {
+export class AstObject {
   readonly entries: Readonly<Record<string, AstRoot>>;
 
   constructor(entries: Record<string, AstRoot>) {

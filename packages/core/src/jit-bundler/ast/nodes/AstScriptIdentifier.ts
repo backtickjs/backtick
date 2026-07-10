@@ -1,6 +1,6 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 
-export class SourceIdentifier {
+export class AstScriptIdentifier {
   readonly loc: SourceLocation;
   // The identifier as written in source (e.g. `total`).
   readonly name: string;

@@ -7,7 +7,7 @@ import { locKey } from "../locKey.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { buildAst } from "./buildAst.js";
 import type { AstNode } from "./nodes/AstNode.js";
-import { SourceClientScript } from "./nodes/SourceClientScript.js";
+import { AstScript } from "./nodes/AstScript.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
 // objects at the same location — a script inside a host function, instantiated
@@ -21,11 +21,9 @@ const bodyByLoc = new Map<string, AstNode>();
 // tree with exponentially many nodes. Safe to share because nodes are immutable,
 // and safe to cache forever because a client object's lowering never changes;
 // keyed weakly so entries vanish with their client objects.
-const nodeByClient = new WeakMap<Client<ClientUnknown>, SourceClientScript>();
+const nodeByClient = new WeakMap<Client<ClientUnknown>, AstScript>();
 
-export function buildClientScript(
-  client: ClientScript<ClientUnknown>,
-): SourceClientScript {
+export function buildAstScript(client: ClientScript<ClientUnknown>): AstScript {
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;
@@ -41,7 +39,7 @@ export function buildClientScript(
   // The client object graph is acyclic — a script's splices are host values that
   // exist before the script itself — so lowering the splices before caching the
   // node cannot recurse back into this same object.
-  const node = new SourceClientScript(
+  const node = new AstScript(
     client.loc,
     client.fileHash,
     client.metadata.splices.map(buildAst),

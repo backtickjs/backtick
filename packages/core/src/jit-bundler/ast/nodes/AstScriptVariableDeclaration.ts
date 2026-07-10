@@ -1,7 +1,7 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 import type { AstNode } from "./AstNode.js";
 
-export class SourceVariableDeclaration {
+export class AstScriptVariableDeclaration {
   readonly loc: SourceLocation;
   readonly keyword: "let" | "const";
   readonly name: AstNode;

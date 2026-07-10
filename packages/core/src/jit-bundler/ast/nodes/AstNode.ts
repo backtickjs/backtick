@@ -1,63 +1,63 @@
-import type { RuntimeArray } from "./RuntimeArray.js";
-import type { RuntimeBoolean } from "./RuntimeBoolean.js";
-import type { RuntimeJSXElement } from "./RuntimeJSXElement.js";
-import type { RuntimeNull } from "./RuntimeNull.js";
-import type { RuntimeNumber } from "./RuntimeNumber.js";
-import type { RuntimeObject } from "./RuntimeObject.js";
-import type { RuntimeString } from "./RuntimeString.js";
-import type { SourceArray } from "./SourceArray.js";
-import type { SourceArrow } from "./SourceArrow.js";
-import type { SourceAssignment } from "./SourceAssignment.js";
-import type { SourceBinop } from "./SourceBinop.js";
-import type { SourceBlock } from "./SourceBlock.js";
-import type { SourceBoolean } from "./SourceBoolean.js";
-import type { SourceCall } from "./SourceCall.js";
-import type { SourceClientScript } from "./SourceClientScript.js";
-import type { SourceIdentifier } from "./SourceIdentifier.js";
-import type { SourceIf } from "./SourceIf.js";
-import type { SourceNull } from "./SourceNull.js";
-import type { SourceNumber } from "./SourceNumber.js";
-import type { SourceObject } from "./SourceObject.js";
-import type { SourcePropertyAccess } from "./SourcePropertyAccess.js";
-import type { SourceReturn } from "./SourceReturn.js";
-import type { SourceSplice } from "./SourceSplice.js";
-import type { SourceString } from "./SourceString.js";
-import type { SourceVariableDeclaration } from "./SourceVariableDeclaration.js";
+import type { AstArray } from "./AstArray.js";
+import type { AstBoolean } from "./AstBoolean.js";
+import type { AstElement } from "./AstElement.js";
+import type { AstNull } from "./AstNull.js";
+import type { AstNumber } from "./AstNumber.js";
+import type { AstObject } from "./AstObject.js";
+import type { AstScript } from "./AstScript.js";
+import type { AstScriptArray } from "./AstScriptArray.js";
+import type { AstScriptArrow } from "./AstScriptArrow.js";
+import type { AstScriptAssignment } from "./AstScriptAssignment.js";
+import type { AstScriptBinop } from "./AstScriptBinop.js";
+import type { AstScriptBlock } from "./AstScriptBlock.js";
+import type { AstScriptBoolean } from "./AstScriptBoolean.js";
+import type { AstScriptCall } from "./AstScriptCall.js";
+import type { AstScriptIdentifier } from "./AstScriptIdentifier.js";
+import type { AstScriptIf } from "./AstScriptIf.js";
+import type { AstScriptNull } from "./AstScriptNull.js";
+import type { AstScriptNumber } from "./AstScriptNumber.js";
+import type { AstScriptObject } from "./AstScriptObject.js";
+import type { AstScriptPropertyAccess } from "./AstScriptPropertyAccess.js";
+import type { AstScriptReturn } from "./AstScriptReturn.js";
+import type { AstScriptSplice } from "./AstScriptSplice.js";
+import type { AstScriptString } from "./AstScriptString.js";
+import type { AstScriptVariableDeclaration } from "./AstScriptVariableDeclaration.js";
+import type { AstString } from "./AstString.js";
 
-// A node parsed from a client script's source text. Every source node carries
+// A node parsed from a client script's source text. Every script node carries
 // the source location it was parsed from.
-export type SourceNode =
-  | SourceArray
-  | SourceArrow
-  | SourceAssignment
-  | SourceBinop
-  | SourceBlock
-  | SourceBoolean
-  | SourceCall
-  | SourceClientScript
-  | SourceIdentifier
-  | SourceIf
-  | SourceNull
-  | SourceNumber
-  | SourceObject
-  | SourcePropertyAccess
-  | SourceReturn
-  | SourceSplice
-  | SourceString
-  | SourceVariableDeclaration;
+export type AstScriptNode =
+  | AstScriptArray
+  | AstScriptArrow
+  | AstScriptAssignment
+  | AstScriptBinop
+  | AstScriptBlock
+  | AstScriptBoolean
+  | AstScriptCall
+  | AstScript
+  | AstScriptIdentifier
+  | AstScriptIf
+  | AstScriptNull
+  | AstScriptNumber
+  | AstScriptObject
+  | AstScriptPropertyAccess
+  | AstScriptReturn
+  | AstScriptSplice
+  | AstScriptString
+  | AstScriptVariableDeclaration;
 
 // A node built from a value spliced into a client script. Splice values are
-// resolved at runtime and have no source text, so a `RuntimeNode` never has a
+// resolved at runtime and have no source text, so a value node never has a
 // location.
-export type RuntimeNode =
-  | RuntimeArray
-  | RuntimeBoolean
-  | RuntimeJSXElement
-  | RuntimeNull
-  | RuntimeNumber
-  | RuntimeObject
-  | RuntimeString;
+export type AstValueNode =
+  | AstArray
+  | AstBoolean
+  | AstElement
+  | AstNull
+  | AstNumber
+  | AstObject
+  | AstString;
 
-export type AstNode = SourceNode | RuntimeNode;
+export type AstNode = AstScriptNode | AstValueNode;
 
-export type AstRoot = SourceClientScript | RuntimeNode;
+export type AstRoot = AstScript | AstValueNode;

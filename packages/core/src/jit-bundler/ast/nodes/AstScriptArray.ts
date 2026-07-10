@@ -1,12 +1,12 @@
 import type { SourceLocation } from "../../../cs-runtime/index.js";
 import type { AstNode } from "./AstNode.js";
 
-export class SourceReturn {
+export class AstScriptArray {
   readonly loc: SourceLocation;
-  readonly expression: AstNode;
+  readonly elements: readonly AstNode[];
 
-  constructor(loc: SourceLocation, expression: AstNode) {
+  constructor(loc: SourceLocation, elements: AstNode[]) {
     this.loc = loc;
-    this.expression = expression;
+    this.elements = elements;
   }
 }

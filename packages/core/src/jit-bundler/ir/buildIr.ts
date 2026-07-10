@@ -1,12 +1,12 @@
+import { AstArray } from "../ast/nodes/AstArray.js";
+import { AstBoolean } from "../ast/nodes/AstBoolean.js";
+import { AstElement } from "../ast/nodes/AstElement.js";
 import type { AstNode, AstRoot } from "../ast/nodes/AstNode.js";
-import { RuntimeArray } from "../ast/nodes/RuntimeArray.js";
-import { RuntimeBoolean } from "../ast/nodes/RuntimeBoolean.js";
-import { RuntimeJSXElement } from "../ast/nodes/RuntimeJSXElement.js";
-import { RuntimeNull } from "../ast/nodes/RuntimeNull.js";
-import { RuntimeNumber } from "../ast/nodes/RuntimeNumber.js";
-import { RuntimeObject } from "../ast/nodes/RuntimeObject.js";
-import { RuntimeString } from "../ast/nodes/RuntimeString.js";
-import { SourceClientScript } from "../ast/nodes/SourceClientScript.js";
+import { AstNull } from "../ast/nodes/AstNull.js";
+import { AstNumber } from "../ast/nodes/AstNumber.js";
+import { AstObject } from "../ast/nodes/AstObject.js";
+import { AstScript } from "../ast/nodes/AstScript.js";
+import { AstString } from "../ast/nodes/AstString.js";
 import { locKey } from "../locKey.js";
 import type { Ir } from "./nodes/Ir.js";
 import type { IrArgument } from "./nodes/IrArgument.js";
@@ -27,14 +27,14 @@ class IrBuilder {
   readonly scripts: IrScriptEntry[] = [];
   readonly trees: IrTreeEntry[] = [];
   private readonly indexByLoc = new Map<string, number>();
-  private readonly refByScript = new Map<SourceClientScript, IrScriptRef>();
-  private readonly refByElement = new Map<RuntimeJSXElement, IrTreeRef>();
+  private readonly refByScript = new Map<AstScript, IrScriptRef>();
+  private readonly refByElement = new Map<AstElement, IrTreeRef>();
   // How many places reference each element node, counted up front so lowering
   // can decide locally whether a nested element inlines into its parent's
   // entry (one reference) or hoists into its own (shared).
-  private readonly elementRefs: Map<RuntimeJSXElement, number>;
+  private readonly elementRefs: Map<AstElement, number>;
 
-  constructor(elementRefs: Map<RuntimeJSXElement, number>) {
+  constructor(elementRefs: Map<AstElement, number>) {
     this.elementRefs = elementRefs;
   }
 
@@ -44,7 +44,7 @@ class IrBuilder {
   // memoizing by that node lowers each shared subtree once — without this, a
   // diamond composition re-lowers its shared arm on every path, fanning out into
   // an exponentially large reference tree.
-  referenceScript(script: SourceClientScript): IrScriptRef {
+  referenceScript(script: AstScript): IrScriptRef {
     const shared = this.refByScript.get(script);
     if (shared) {
       return shared;
@@ -58,7 +58,7 @@ class IrBuilder {
   }
 
   // Returns the table index of a script's entry, adding it on first sight.
-  private intern(script: SourceClientScript): number {
+  private intern(script: AstScript): number {
     const key = locKey(script.fileHash, script.loc);
     const existing = this.indexByLoc.get(key);
     if (existing !== undefined) {
@@ -85,7 +85,7 @@ class IrBuilder {
   // location. The element graph is acyclic (children exist before their
   // parent), so lowering the entry before caching the reference can't recurse
   // back into this element; subtrees hoisted along the way take lower indices.
-  referenceTree(element: RuntimeJSXElement): IrTreeRef {
+  referenceTree(element: AstElement): IrTreeRef {
     const shared = this.refByElement.get(element);
     if (shared) {
       return shared;
@@ -99,7 +99,7 @@ class IrBuilder {
 
   // Lowers an element's props into an IR element, keeping structure as
   // data: only a script or a shared subtree interrupts it.
-  private lowerElement(element: RuntimeJSXElement): IrElement {
+  private lowerElement(element: AstElement): IrElement {
     const props: Record<string, IrArgument> = {};
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = this.lowerInTree(entry);
@@ -112,15 +112,15 @@ class IrBuilder {
   // position (`lower`) an element always hoists: a script body or the IR
   // root embeds a tree by reference, never structurally.
   private lowerInTree(node: AstRoot): IrArgument {
-    if (node instanceof RuntimeJSXElement) {
+    if (node instanceof AstElement) {
       return this.elementRefs.get(node) === 1
         ? this.lowerElement(node)
         : this.referenceTree(node);
     }
-    if (node instanceof RuntimeArray) {
+    if (node instanceof AstArray) {
       return node.elements.map((n) => this.lowerInTree(n));
     }
-    if (node instanceof RuntimeObject) {
+    if (node instanceof AstObject) {
       const entries: Record<string, IrArgument> = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = this.lowerInTree(value);
@@ -135,32 +135,32 @@ class IrBuilder {
   // carried through as data. Also lowers the IR's entrypoint, which may be
   // any of the three.
   lower(node: AstRoot): IrArgument {
-    if (node instanceof SourceClientScript) {
+    if (node instanceof AstScript) {
       return this.referenceScript(node);
     }
-    if (node instanceof RuntimeJSXElement) {
+    if (node instanceof AstElement) {
       return this.referenceTree(node);
     }
-    if (node instanceof RuntimeArray) {
+    if (node instanceof AstArray) {
       return node.elements.map((n) => this.lower(n));
     }
-    if (node instanceof RuntimeObject) {
+    if (node instanceof AstObject) {
       const entries: Record<string, IrArgument> = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = this.lower(value);
       }
       return entries;
     }
-    if (node instanceof RuntimeNumber) {
+    if (node instanceof AstNumber) {
       return node.value;
     }
-    if (node instanceof RuntimeString) {
+    if (node instanceof AstString) {
       return node.value;
     }
-    if (node instanceof RuntimeBoolean) {
+    if (node instanceof AstBoolean) {
       return node.value;
     }
-    if (node instanceof RuntimeNull) {
+    if (node instanceof AstNull) {
       return null;
     }
     const unhandled: never = node;
@@ -172,11 +172,11 @@ class IrBuilder {
 // props, a script's splice arguments, or the IR root. A shared script (one
 // node, many paths) is walked once — the IR holds one entry for it — and a
 // shared element's contents likewise count once.
-function countElementReferences(root: AstRoot): Map<RuntimeJSXElement, number> {
-  const counts = new Map<RuntimeJSXElement, number>();
-  const seenScripts = new Set<SourceClientScript>();
+function countElementReferences(root: AstRoot): Map<AstElement, number> {
+  const counts = new Map<AstElement, number>();
+  const seenScripts = new Set<AstScript>();
   const visit = (node: AstNode): void => {
-    if (node instanceof SourceClientScript) {
+    if (node instanceof AstScript) {
       if (seenScripts.has(node)) {
         return;
       }
@@ -184,7 +184,7 @@ function countElementReferences(root: AstRoot): Map<RuntimeJSXElement, number> {
       node.splices.forEach(visit);
       return;
     }
-    if (node instanceof RuntimeJSXElement) {
+    if (node instanceof AstElement) {
       const count = counts.get(node) ?? 0;
       counts.set(node, count + 1);
       if (count === 0) {
@@ -192,11 +192,11 @@ function countElementReferences(root: AstRoot): Map<RuntimeJSXElement, number> {
       }
       return;
     }
-    if (node instanceof RuntimeArray) {
+    if (node instanceof AstArray) {
       node.elements.forEach(visit);
       return;
     }
-    if (node instanceof RuntimeObject) {
+    if (node instanceof AstObject) {
       Object.values(node.entries).forEach(visit);
     }
   };

@@ -1,4 +1,4 @@
-export class RuntimeString {
+export class AstString {
   readonly value: string;
 
   constructor(value: string) {
