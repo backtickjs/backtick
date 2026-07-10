@@ -1,12 +1,7 @@
-import type {
-  Client,
-  JSXElement,
-  Prop,
-  UIElement,
-} from "../cs-runtime/index.js";
+import type { JSXElement, Prop } from "../cs-runtime/index.js";
 
 export declare namespace JSX {
-  export type Element = Client<UIElement>;
+  export type Element = JSXElement;
   export interface IntrinsicElements {
     flexbox: {
       direction?: Prop<"row" | "column">;
@@ -30,7 +25,7 @@ export function jsx(
     throw new Error("Key must be a string or a number");
   }
   return {
-    "@backtickjs/Client": {},
+    "@backtickjs/JSXElement": undefined,
     type,
     key: key ?? null,
     props,

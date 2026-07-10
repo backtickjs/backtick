@@ -26,14 +26,15 @@ export type Prop<T extends ClientUnknown> = T | Client<T>;
 // biome-ignore lint/complexity/noBannedTypes: `{}` is the point
 export type UIElement = {};
 
-export interface JSXElement extends Client<UIElement> {
-  "@backtickjs/Client": UIElement;
+export interface JSXElement {
+  "@backtickjs/JSXElement": undefined;
   readonly type: string;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
 }
 
 export type Spliceable =
+  | JSXElement
   | Client<ClientUnknown>
   | null
   | number
@@ -49,12 +50,14 @@ export type AsObject<T> = {
 };
 
 // Recursively lowers a Spliceable type:
+//   JSXElement       -> UIElement
 //   Client<U>        -> U
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
-export type Lower<T> =
-  T extends Client<infer U>
+export type Lower<T> = T extends JSXElement
+  ? UIElement
+  : T extends Client<infer U>
     ? U
     : T extends (infer Item)[]
       ? Lower<Item>[]
@@ -159,7 +162,9 @@ export function isClientScript(
 
 export function isJSXElement(value: unknown): value is JSXElement {
   return (
-    isClient(value) && "type" in value && "key" in value && "props" in value
+    typeof value === "object" &&
+    value !== null &&
+    "@backtickjs/JSXElement" in value
   );
 }
 
@@ -200,6 +205,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
     return false;
   }
   if (
+    isJSXElement(value) ||
     isClient(value) ||
     value === null ||
     typeof value === "number" ||
@@ -240,7 +246,7 @@ function create(
   // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
 ): ClientScript<any> {
   return {
-    "@backtickjs/Client": true,
+    "@backtickjs/Client": undefined,
     loc,
     fileHash,
     metadata,
