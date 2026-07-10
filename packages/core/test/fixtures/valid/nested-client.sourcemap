@@ -1,0 +1,49 @@
+cs.lift(                → cs`
+() =>                   → () => 
+cs.lower(               → ${
+this.x                  → this.x
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+this.y                  → this.y
+)                       → }
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_s                  → s
+ =                      →  = 
+cs.lower(               → ${
+new Segment(new Point(  → new Segment(new Point(
+cs.lift(                → cs`
+1                       → 1
+)                       → `
+,                       → , 
+cs.lift(                → cs`
+2                       → 2
+)                       → `
+), new Point(           → ), new Point(
+cs.lift(                → cs`
+3                       → 3
+)                       → `
+,                       → , 
+cs.lift(                → cs`
+4                       → 4
+)                       → `
+))                      → ))
+)                       → }
+;                       → ;
+\n                      → \n  
+return                  → return 
+__cs_s                  → s
+.to                     → .to
+.                       → .
+sum                     → sum
+()                      → ()
+ -                      →  - 
+__cs_s                  → s
+.from                   → .from
+.                       → .
+sum                     → sum
+()                      → ()
+;                       → ;
+\n})())                 → \n}`

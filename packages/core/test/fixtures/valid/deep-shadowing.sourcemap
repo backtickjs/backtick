@@ -1,0 +1,47 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_base               → base
+ =                      →  = 
+10                      → 10
+;                       → ;
+\n                      → \n  
+return                  → return 
+cs.lower(               → ${
+outer(                  → outer(
+cs.lift(                → cs`
+__cs_base               → base
+)                       → `
+)                       → )
+)                       → }
+;                       → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_base               → base
+ =                      →  = 
+1                       → 1
+;                       → ;
+\n                      → \n    
+return                  → return 
+__cs_base               → base
+ +                      →  + 
+cs.lower(               → ${
+middle(inner)           → middle(inner)
+)                       → }
+;                       → ;
+\n})())                 → \n  }`
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_base               → base
+ =                      →  = 
+2                       → 2
+;                       → ;
+\n                      → \n    
+return                  → return 
+__cs_base               → base
+ *                      →  * 
+cs.lower(               → ${
+inner                   → inner
+)                       → }
+;                       → ;
+\n})())                 → \n  }`

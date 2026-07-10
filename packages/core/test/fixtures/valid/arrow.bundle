@@ -1,0 +1,57 @@
+{
+  "functions": {
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "base",
+            "expression": {
+              "kind": "value",
+              "value": 10
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "arrow",
+              "params": [
+                "one",
+                "two"
+              ],
+              "body": {
+                "kind": "binop",
+                "operator": "+",
+                "left": {
+                  "kind": "binop",
+                  "operator": "+",
+                  "left": {
+                    "kind": "identifier",
+                    "name": "one"
+                  },
+                  "right": {
+                    "kind": "identifier",
+                    "name": "two"
+                  }
+                },
+                "right": {
+                  "kind": "identifier",
+                  "name": "base"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#call": "#f0",
+    "args": []
+  }
+}

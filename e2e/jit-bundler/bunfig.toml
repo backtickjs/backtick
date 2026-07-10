@@ -1,4 +1,0 @@
-preload = ["@backtickjs/bun-plugin"]
-
-[test]
-preload = ["@backtickjs/bun-plugin"]

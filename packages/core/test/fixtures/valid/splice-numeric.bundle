@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 1
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#call": "#f0",
+    "args": []
+  }
+}

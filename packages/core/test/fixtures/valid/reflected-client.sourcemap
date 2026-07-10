@@ -1,0 +1,49 @@
+cs.lift(                → cs`
+() =>                   → () => 
+cs.lower(               → ${
+this.x                  → this.x
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+this.y                  → this.y
+)                       → }
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_a                  → a
+ =                      →  = 
+cs.lower(               → ${
+new Point(              → new Point(
+cs.lift(                → cs`
+1                       → 1
+)                       → `
+,                       → , 
+cs.lift(                → cs`
+2                       → 2
+)                       → `
+)                       → )
+)                       → }
+;                       → ;
+\n                      → \n  
+const                   → const 
+__cs_b                  → b
+ =                      →  = 
+cs.lower(               → ${
+new Point(              → new Point(
+cs.lift(                → cs`
+3                       → 3
+)                       → `
+,                       → , 
+cs.lift(                → cs`
+4                       → 4
+)                       → `
+)                       → )
+)                       → }
+;                       → ;
+\n                      → \n  
+__cs_a                  → a
+.                       → .
+valid                   → valid
+()                      → ()
+;                       → ;
+\n})())                 → \n}`

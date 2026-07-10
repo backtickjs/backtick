@@ -1,0 +1,9 @@
+cs.lift(      → cs`
+() =>         → () => 
+__cs_console  → console
+.             → .
+log           → log
+(             → (
+"hi"          → "hi"
+)             → )
+)             → `

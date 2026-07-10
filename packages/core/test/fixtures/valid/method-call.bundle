@@ -1,0 +1,59 @@
+{
+  "functions": {
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "greeting",
+            "expression": {
+              "kind": "value",
+              "value": "Hello"
+            }
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "call",
+              "callee": {
+                "kind": "property",
+                "object": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "property",
+                    "object": {
+                      "kind": "identifier",
+                      "name": "greeting"
+                    },
+                    "name": "concat"
+                  },
+                  "args": [
+                    {
+                      "kind": "value",
+                      "value": ", "
+                    },
+                    {
+                      "kind": "value",
+                      "value": "World"
+                    }
+                  ]
+                },
+                "name": "toUpperCase"
+              },
+              "args": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#call": "#f0",
+    "args": []
+  }
+}

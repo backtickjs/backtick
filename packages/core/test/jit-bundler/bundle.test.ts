@@ -4,8 +4,8 @@ import { cs } from "../../dist/cs-runtime/index.js";
 import { bundle } from "../../dist/jit-bundler/index.js";
 import { jsx } from "../../dist/jsx-runtime/index.js";
 
-// The happy paths are covered end-to-end by the `e2e/jit-bundler` snapshot
-// fixtures; only the fail-loudly cases live here.
+// The happy paths are covered end-to-end by the fixture snapshots in
+// `fixtures.test.ts`; only the fail-loudly cases live here.
 
 test("a plain object prop can't use a reserved key", () => {
   const element = jsx("flexbox", { data: { "#call": "#f0" } });

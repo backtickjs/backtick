@@ -1,0 +1,46 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_total              → total
+ =                      →  = 
+1                       → 1
+;                       → ;
+\n                      → \n  
+return                  → return 
+cs.lower(               → ${
+add(                    → add(
+cs.lift(                → cs`
+__cs_total              → total
+)                       → `
+, 100)                  → , 100)
+)                       → }
+;                       → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n    
+let                     → let 
+__cs_total              → total
+ =                      →  = 
+0                       → 0
+;                       → ;
+\n                      → \n    
+__cs_total              → total
+ =                      →  = 
+__cs_total              → total
+ +                      →  + 
+cs.lower(               → ${
+lhs                     → lhs
+)                       → }
+;                       → ;
+\n                      → \n    
+__cs_total              → total
+ =                      →  = 
+__cs_total              → total
+ +                      →  + 
+cs.lower(               → ${
+rhs                     → rhs
+)                       → }
+;                       → ;
+\n                      → \n    
+return                  → return 
+__cs_total              → total
+;                       → ;
+\n})())                 → \n  }`

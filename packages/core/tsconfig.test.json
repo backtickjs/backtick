@@ -1,5 +1,9 @@
 {
   "extends": "../../configs/tsconfig.test.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/core"
+  },
   "include": [
     "test/**/*.mts",
     "test/**/*.mjs",
@@ -7,6 +11,6 @@
     "test/**/*.runtime.tsx",
     "test/**/*.virtual.tsx"
   ],
-  "exclude": ["test/**/*.error.virtual.tsx"],
+  "exclude": ["test/fixtures/valid/*.ts", "test/fixtures/invalid/*.ts"],
   "references": [{ "path": "./tsconfig.build.json" }]
 }

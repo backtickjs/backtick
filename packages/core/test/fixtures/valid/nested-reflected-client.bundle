@@ -1,0 +1,303 @@
+{
+  "functions": {
+    "#f0": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "block",
+        "statements": [
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "s",
+            "expression": {
+              "kind": "object",
+              "entries": {
+                "from": {
+                  "kind": "object",
+                  "entries": {
+                    "x": {
+                      "kind": "call",
+                      "callee": {
+                        "kind": "entry",
+                        "label": "#f1"
+                      },
+                      "args": []
+                    },
+                    "y": {
+                      "kind": "call",
+                      "callee": {
+                        "kind": "entry",
+                        "label": "#f2"
+                      },
+                      "args": []
+                    },
+                    "sum": {
+                      "kind": "call",
+                      "callee": {
+                        "kind": "entry",
+                        "label": "#f3"
+                      },
+                      "args": [
+                        {
+                          "kind": "entry",
+                          "label": "#f1"
+                        },
+                        {
+                          "kind": "entry",
+                          "label": "#f2"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "to": {
+                  "kind": "object",
+                  "entries": {
+                    "x": {
+                      "kind": "call",
+                      "callee": {
+                        "kind": "entry",
+                        "label": "#f4"
+                      },
+                      "args": []
+                    },
+                    "y": {
+                      "kind": "call",
+                      "callee": {
+                        "kind": "entry",
+                        "label": "#f5"
+                      },
+                      "args": []
+                    },
+                    "sum": {
+                      "kind": "call",
+                      "callee": {
+                        "kind": "entry",
+                        "label": "#f3"
+                      },
+                      "args": [
+                        {
+                          "kind": "entry",
+                          "label": "#f4"
+                        },
+                        {
+                          "kind": "entry",
+                          "label": "#f5"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "vertical": {
+                  "kind": "call",
+                  "callee": {
+                    "kind": "entry",
+                    "label": "#f6"
+                  },
+                  "args": []
+                }
+              }
+            }
+          },
+          {
+            "kind": "declaration",
+            "keyword": "const",
+            "name": "rise",
+            "expression": {
+              "kind": "binop",
+              "operator": "-",
+              "left": {
+                "kind": "property",
+                "object": {
+                  "kind": "property",
+                  "object": {
+                    "kind": "identifier",
+                    "name": "s"
+                  },
+                  "name": "to"
+                },
+                "name": "y"
+              },
+              "right": {
+                "kind": "property",
+                "object": {
+                  "kind": "property",
+                  "object": {
+                    "kind": "identifier",
+                    "name": "s"
+                  },
+                  "name": "from"
+                },
+                "name": "y"
+              }
+            }
+          },
+          {
+            "kind": "if",
+            "condition": {
+              "kind": "call",
+              "callee": {
+                "kind": "property",
+                "object": {
+                  "kind": "identifier",
+                  "name": "s"
+                },
+                "name": "vertical"
+              },
+              "args": []
+            },
+            "consequent": {
+              "kind": "block",
+              "statements": [
+                {
+                  "kind": "return",
+                  "expression": {
+                    "kind": "identifier",
+                    "name": "rise"
+                  }
+                }
+              ]
+            },
+            "alternate": null
+          },
+          {
+            "kind": "return",
+            "expression": {
+              "kind": "binop",
+              "operator": "-",
+              "left": {
+                "kind": "call",
+                "callee": {
+                  "kind": "property",
+                  "object": {
+                    "kind": "property",
+                    "object": {
+                      "kind": "identifier",
+                      "name": "s"
+                    },
+                    "name": "to"
+                  },
+                  "name": "sum"
+                },
+                "args": []
+              },
+              "right": {
+                "kind": "call",
+                "callee": {
+                  "kind": "property",
+                  "object": {
+                    "kind": "property",
+                    "object": {
+                      "kind": "identifier",
+                      "name": "s"
+                    },
+                    "name": "from"
+                  },
+                  "name": "sum"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 1
+      }
+    },
+    "#f2": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 2
+      }
+    },
+    "#f3": {
+      "kind": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "binop",
+          "operator": "+",
+          "left": {
+            "kind": "call",
+            "callee": {
+              "kind": "identifier",
+              "name": "$0"
+            },
+            "args": []
+          },
+          "right": {
+            "kind": "call",
+            "callee": {
+              "kind": "identifier",
+              "name": "$1"
+            },
+            "args": []
+          }
+        }
+      }
+    },
+    "#f4": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 1
+      }
+    },
+    "#f5": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "value",
+        "value": 8
+      }
+    },
+    "#f6": {
+      "kind": "arrow",
+      "params": [],
+      "body": {
+        "kind": "arrow",
+        "params": [],
+        "body": {
+          "kind": "binop",
+          "operator": "===",
+          "left": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "right": {
+            "kind": "call",
+            "callee": {
+              "kind": "entry",
+              "label": "#f4"
+            },
+            "args": []
+          }
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#call": "#f0",
+    "args": []
+  }
+}

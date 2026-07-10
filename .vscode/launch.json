@@ -7,7 +7,7 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "${workspaceRoot}/e2e",
+        "${workspaceRoot}/packages/core/test",
         "--extensionDevelopmentPath=${workspaceRoot}/packages/language-tools/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]

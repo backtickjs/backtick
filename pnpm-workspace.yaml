@@ -1,7 +1,6 @@
 packages:
   - "packages/**/*"
   - "examples/*"
-  - "e2e/*"
 
 linkWorkspacePackages: true
 preferWorkspacePackages: true

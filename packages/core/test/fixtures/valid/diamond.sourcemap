@@ -1,0 +1,47 @@
+cs.lift(                → cs`
+1                       → 1
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+return                  → return 
+cs.lower(               → ${
+d0                      → d0
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+d0                      → d0
+)                       → }
+;                       → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n  
+return                  → return 
+cs.lower(               → ${
+d1                      → d1
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+d1                      → d1
+)                       → }
+;                       → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n  
+return                  → return 
+cs.lower(               → ${
+d2                      → d2
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+d2                      → d2
+)                       → }
+;                       → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n  
+return                  → return 
+cs.lower(               → ${
+d3                      → d3
+)                       → }
+ +                      →  + 
+cs.lower(               → ${
+d3                      → d3
+)                       → }
+;                       → ;
+\n})())                 → \n}`
