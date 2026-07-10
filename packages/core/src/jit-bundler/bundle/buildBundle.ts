@@ -21,8 +21,8 @@ import { BundledTreeRef } from "./nodes/BundledTreeRef.js";
 // JSX element (deduplicated by node identity), where a nested script becomes a
 // `BundledScriptRef` and a hoisted element a `BundledTreeRef` into the respective table. The
 // builder owns the tables and the dedup indices so the entrypoint and every
-// nested reference are produced by the same `reference()`/`referenceTree()`
-// path.
+// nested reference are produced by the same `referenceScript()`/
+// `referenceTree()` path.
 class BundleBuilder {
   readonly scripts: BundledScriptEntry[] = [];
   readonly trees: BundledTreeEntry[] = [];
@@ -47,7 +47,7 @@ class BundleBuilder {
   // memoizing by that node lowers each shared subtree once — without this, a
   // diamond composition re-lowers its shared arm on every path, fanning out into
   // an exponentially large reference tree.
-  reference(script: SourceClientScript): BundledScriptRef {
+  referenceScript(script: SourceClientScript): BundledScriptRef {
     const shared = this.refByScript.get(script);
     if (shared) {
       return shared;
@@ -139,7 +139,7 @@ class BundleBuilder {
   // any of the three.
   lower(node: AstRoot): BundledArgument {
     if (node instanceof SourceClientScript) {
-      return this.reference(node);
+      return this.referenceScript(node);
     }
     if (node instanceof RuntimeJSXElement) {
       return this.referenceTree(node);
