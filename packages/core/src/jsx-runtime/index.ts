@@ -24,7 +24,7 @@ export declare namespace JSX {
 export function jsx(
   type: string,
   props: { [key: string]: unknown },
-  key?: unknown,
+  key?: string | number,
 ): JSXElement {
   if (key !== undefined && typeof key !== "string" && typeof key !== "number") {
     throw new Error("Key must be a string or a number");

@@ -31,6 +31,7 @@ test("jsxs keeps a static children array", () => {
 
 test("jsx rejects a key that isn't a string or number", () => {
   assert.throws(
+    // @ts-expect-error -- deliberately bypasses the key type to hit the runtime check
     () => jsx("flexbox", {}, {}),
     /Key must be a string or a number/,
   );

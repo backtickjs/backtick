@@ -127,13 +127,13 @@ export class AstBuilder implements Visitor<AstScriptNode> {
 
   arrow(
     loc: SourceLocation,
-    params: AstScriptNode[],
+    params: AstScriptIdentifier[],
     body: AstScriptNode,
   ): AstScriptArrow {
     return {
       kind: "AstScriptArrow",
       loc,
-      params: params as AstScriptIdentifier[],
+      params: params,
       body,
     };
   }
