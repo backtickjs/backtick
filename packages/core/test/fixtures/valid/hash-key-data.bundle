@@ -3,7 +3,7 @@
   "trees": {
     "#t0": {
       "element": {
-        "#kind": "element",
+        "#": "element",
         "type": "button",
         "key": null,
         "props": {
@@ -15,7 +15,7 @@
     }
   },
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#t0",
     "args": []
   }

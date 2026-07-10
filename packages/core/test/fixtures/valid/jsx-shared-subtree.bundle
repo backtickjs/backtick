@@ -3,7 +3,7 @@
   "trees": {
     "#t0": {
       "element": {
-        "#kind": "element",
+        "#": "element",
         "type": "label",
         "key": null,
         "props": {
@@ -13,19 +13,19 @@
     },
     "#t1": {
       "element": {
-        "#kind": "element",
+        "#": "element",
         "type": "flexbox",
         "key": null,
         "props": {
           "direction": "column",
           "children": [
             {
-              "#kind": "apply",
+              "#": "apply",
               "label": "#t0",
               "args": []
             },
             {
-              "#kind": "apply",
+              "#": "apply",
               "label": "#t0",
               "args": []
             }
@@ -35,7 +35,7 @@
     }
   },
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#t1",
     "args": []
   }

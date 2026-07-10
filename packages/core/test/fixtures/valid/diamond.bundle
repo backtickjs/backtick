@@ -1,28 +1,28 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "binop",
+              "#": "binop",
               "operator": "+",
               "left": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f1"
                 },
                 "args": []
               },
               "right": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f1"
                 },
                 "args": []
@@ -33,28 +33,28 @@
       }
     },
     "#f1": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "binop",
+              "#": "binop",
               "operator": "+",
               "left": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f2"
                 },
                 "args": []
               },
               "right": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f2"
                 },
                 "args": []
@@ -65,28 +65,28 @@
       }
     },
     "#f2": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "binop",
+              "#": "binop",
               "operator": "+",
               "left": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f3"
                 },
                 "args": []
               },
               "right": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f3"
                 },
                 "args": []
@@ -97,28 +97,28 @@
       }
     },
     "#f3": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "binop",
+              "#": "binop",
               "operator": "+",
               "left": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f4"
                 },
                 "args": []
               },
               "right": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f4"
                 },
                 "args": []
@@ -129,17 +129,17 @@
       }
     },
     "#f4": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "value",
+        "#": "value",
         "value": 1
       }
     }
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

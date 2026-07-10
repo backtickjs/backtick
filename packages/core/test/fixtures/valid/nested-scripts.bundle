@@ -1,31 +1,31 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "const",
             "name": "x",
             "expression": {
-              "#kind": "value",
+              "#": "value",
               "value": 0
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "call",
+              "#": "call",
               "callee": {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f1"
               },
               "args": [
                 {
-                  "#kind": "identifier",
+                  "#": "identifier",
                   "name": "x"
                 }
               ]
@@ -35,19 +35,19 @@
       }
     },
     "#f1": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [
         "x"
       ],
       "body": {
-        "#kind": "identifier",
+        "#": "identifier",
         "name": "x"
       }
     }
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

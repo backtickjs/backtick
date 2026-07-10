@@ -169,8 +169,8 @@ function evaluateElement(
 }
 
 // A tree expression (also the root): plain JSON carries itself; the
-// `#kind`-discriminated forms compose. Bundling rejects plain data carrying
-// `#kind` — the bundle's one reserved key — so the structured reading is
+// `#`-discriminated forms compose. Bundling rejects plain data carrying
+// `#` — the bundle's one reserved key — so the structured reading is
 // unambiguous.
 function evaluateExpr(
   bundle: Bundle,
@@ -183,14 +183,14 @@ function evaluateExpr(
   if (Array.isArray(expr)) {
     return expr.map((element) => evaluateExpr(bundle, element, slots));
   }
-  if ("#kind" in expr) {
+  if ("#" in expr) {
     const form = expr as
       | BundleSlot
       | BundleGlobal
       | BundleApply
       | BundleThunk
       | BundleElement;
-    switch (form["#kind"]) {
+    switch (form["#"]) {
       case "slot": {
         return slots[form.index];
       }
@@ -231,13 +231,13 @@ function executeStatement(
   node: BundleNode,
   scope: Scope,
 ): Completion {
-  switch (node["#kind"]) {
+  switch (node["#"]) {
     case "block": {
       const frame: Scope = { parent: scope, bindings: new Map() };
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `undefined`), never outward.
       for (const statement of node.statements) {
-        if (statement["#kind"] === "declaration") {
+        if (statement["#"] === "declaration") {
           frame.bindings.set(statement.name, undefined);
         }
       }
@@ -293,7 +293,7 @@ function evaluateNode(
   node: BundleNode,
   scope: Scope | null,
 ): unknown {
-  switch (node["#kind"]) {
+  switch (node["#"]) {
     case "value": {
       return node.value;
     }
@@ -322,7 +322,7 @@ function evaluateNode(
     case "call": {
       const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
-      if (node.callee["#kind"] === "property") {
+      if (node.callee["#"] === "property") {
         const object = evaluateNode(bundle, node.callee.object, scope) as {
           [name: string]: unknown;
         };
@@ -353,16 +353,14 @@ function evaluateNode(
         node.params.forEach((param, index) => {
           frame.bindings.set(param, args[index]);
         });
-        if (node.body["#kind"] === "block") {
+        if (node.body["#"] === "block") {
           return executeStatement(bundle, node.body, frame).value;
         }
         return evaluateNode(bundle, node.body, frame);
       };
     }
     default: {
-      throw new Error(
-        `unexpected ${node["#kind"]} node in expression position`,
-      );
+      throw new Error(`unexpected ${node["#"]} node in expression position`);
     }
   }
 }

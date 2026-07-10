@@ -1,41 +1,41 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "object",
+        "#": "object",
         "entries": {
           "x": {
-            "#kind": "call",
+            "#": "call",
             "callee": {
-              "#kind": "entry",
+              "#": "entry",
               "label": "#f1"
             },
             "args": [
               {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f2"
               },
               {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f3"
               }
             ]
           },
           "y": {
-            "#kind": "call",
+            "#": "call",
             "callee": {
-              "#kind": "entry",
+              "#": "entry",
               "label": "#f1"
             },
             "args": [
               {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f4"
               },
               {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f5"
               }
             ]
@@ -44,26 +44,26 @@
       }
     },
     "#f1": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [
         "$0",
         "$1"
       ],
       "body": {
-        "#kind": "binop",
+        "#": "binop",
         "operator": "+",
         "left": {
-          "#kind": "call",
+          "#": "call",
           "callee": {
-            "#kind": "identifier",
+            "#": "identifier",
             "name": "$0"
           },
           "args": []
         },
         "right": {
-          "#kind": "call",
+          "#": "call",
           "callee": {
-            "#kind": "identifier",
+            "#": "identifier",
             "name": "$1"
           },
           "args": []
@@ -71,41 +71,41 @@
       }
     },
     "#f2": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "value",
+        "#": "value",
         "value": 1
       }
     },
     "#f3": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "value",
+        "#": "value",
         "value": 2
       }
     },
     "#f4": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "value",
+        "#": "value",
         "value": 3
       }
     },
     "#f5": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "value",
+        "#": "value",
         "value": 4
       }
     }
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

@@ -1,31 +1,31 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "const",
             "name": "total",
             "expression": {
-              "#kind": "value",
+              "#": "value",
               "value": 1
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "call",
+              "#": "call",
               "callee": {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f1"
               },
               "args": [
                 {
-                  "#kind": "identifier",
+                  "#": "identifier",
                   "name": "total"
                 }
               ]
@@ -35,41 +35,41 @@
       }
     },
     "#f1": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [
         "total"
       ],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "let",
             "name": "total2",
             "expression": {
-              "#kind": "value",
+              "#": "value",
               "value": 0
             }
           },
           {
-            "#kind": "assignment",
+            "#": "assignment",
             "name": "total2",
             "expression": {
-              "#kind": "binop",
+              "#": "binop",
               "operator": "+",
               "left": {
-                "#kind": "identifier",
+                "#": "identifier",
                 "name": "total2"
               },
               "right": {
-                "#kind": "call",
+                "#": "call",
                 "callee": {
-                  "#kind": "entry",
+                  "#": "entry",
                   "label": "#f2"
                 },
                 "args": [
                   {
-                    "#kind": "identifier",
+                    "#": "identifier",
                     "name": "total"
                   }
                 ]
@@ -77,25 +77,25 @@
             }
           },
           {
-            "#kind": "assignment",
+            "#": "assignment",
             "name": "total2",
             "expression": {
-              "#kind": "binop",
+              "#": "binop",
               "operator": "+",
               "left": {
-                "#kind": "identifier",
+                "#": "identifier",
                 "name": "total2"
               },
               "right": {
-                "#kind": "value",
+                "#": "value",
                 "value": 100
               }
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "identifier",
+              "#": "identifier",
               "name": "total2"
             }
           }
@@ -103,19 +103,19 @@
       }
     },
     "#f2": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [
         "total"
       ],
       "body": {
-        "#kind": "identifier",
+        "#": "identifier",
         "name": "total"
       }
     }
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

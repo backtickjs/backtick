@@ -1,43 +1,43 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "const",
             "name": "greeting",
             "expression": {
-              "#kind": "value",
+              "#": "value",
               "value": "Hello"
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "call",
+              "#": "call",
               "callee": {
-                "#kind": "property",
+                "#": "property",
                 "object": {
-                  "#kind": "call",
+                  "#": "call",
                   "callee": {
-                    "#kind": "property",
+                    "#": "property",
                     "object": {
-                      "#kind": "identifier",
+                      "#": "identifier",
                       "name": "greeting"
                     },
                     "name": "concat"
                   },
                   "args": [
                     {
-                      "#kind": "value",
+                      "#": "value",
                       "value": ", "
                     },
                     {
-                      "#kind": "value",
+                      "#": "value",
                       "value": "World"
                     }
                   ]
@@ -53,7 +53,7 @@
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

@@ -1,45 +1,45 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "const",
             "name": "base",
             "expression": {
-              "#kind": "value",
+              "#": "value",
               "value": 10
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "arrow",
+              "#": "arrow",
               "params": [
                 "one",
                 "two"
               ],
               "body": {
-                "#kind": "binop",
+                "#": "binop",
                 "operator": "+",
                 "left": {
-                  "#kind": "binop",
+                  "#": "binop",
                   "operator": "+",
                   "left": {
-                    "#kind": "identifier",
+                    "#": "identifier",
                     "name": "one"
                   },
                   "right": {
-                    "#kind": "identifier",
+                    "#": "identifier",
                     "name": "two"
                   }
                 },
                 "right": {
-                  "#kind": "identifier",
+                  "#": "identifier",
                   "name": "base"
                 }
               }
@@ -51,7 +51,7 @@
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

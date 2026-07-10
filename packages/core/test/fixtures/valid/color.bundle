@@ -1,35 +1,35 @@
 {
   "functions": {
     "#f0": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "const",
             "name": "c",
             "expression": {
-              "#kind": "call",
+              "#": "call",
               "callee": {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f1"
               },
               "args": []
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "call",
+              "#": "call",
               "callee": {
-                "#kind": "entry",
+                "#": "entry",
                 "label": "#f2"
               },
               "args": [
                 {
-                  "#kind": "identifier",
+                  "#": "identifier",
                   "name": "c"
                 }
               ]
@@ -39,65 +39,65 @@
       }
     },
     "#f1": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [],
       "body": {
-        "#kind": "block",
+        "#": "block",
         "statements": [
           {
-            "#kind": "declaration",
+            "#": "declaration",
             "keyword": "const",
             "name": "color",
             "expression": {
-              "#kind": "object",
+              "#": "object",
               "entries": {
                 "r": {
-                  "#kind": "value",
+                  "#": "value",
                   "value": 1
                 },
                 "g": {
-                  "#kind": "value",
+                  "#": "value",
                   "value": 2
                 },
                 "b": {
-                  "#kind": "value",
+                  "#": "value",
                   "value": 3
                 },
                 "brightness": {
-                  "#kind": "arrow",
+                  "#": "arrow",
                   "params": [],
                   "body": {
-                    "#kind": "block",
+                    "#": "block",
                     "statements": [
                       {
-                        "#kind": "return",
+                        "#": "return",
                         "expression": {
-                          "#kind": "binop",
+                          "#": "binop",
                           "operator": "+",
                           "left": {
-                            "#kind": "binop",
+                            "#": "binop",
                             "operator": "+",
                             "left": {
-                              "#kind": "property",
+                              "#": "property",
                               "object": {
-                                "#kind": "identifier",
+                                "#": "identifier",
                                 "name": "color"
                               },
                               "name": "r"
                             },
                             "right": {
-                              "#kind": "property",
+                              "#": "property",
                               "object": {
-                                "#kind": "identifier",
+                                "#": "identifier",
                                 "name": "color"
                               },
                               "name": "g"
                             }
                           },
                           "right": {
-                            "#kind": "property",
+                            "#": "property",
                             "object": {
-                              "#kind": "identifier",
+                              "#": "identifier",
                               "name": "color"
                             },
                             "name": "b"
@@ -111,9 +111,9 @@
             }
           },
           {
-            "#kind": "return",
+            "#": "return",
             "expression": {
-              "#kind": "identifier",
+              "#": "identifier",
               "name": "color"
             }
           }
@@ -121,16 +121,16 @@
       }
     },
     "#f2": {
-      "#kind": "arrow",
+      "#": "arrow",
       "params": [
         "c"
       ],
       "body": {
-        "#kind": "call",
+        "#": "call",
         "callee": {
-          "#kind": "property",
+          "#": "property",
           "object": {
-            "#kind": "identifier",
+            "#": "identifier",
             "name": "c"
           },
           "name": "brightness"
@@ -141,7 +141,7 @@
   },
   "trees": {},
   "root": {
-    "#kind": "apply",
+    "#": "apply",
     "label": "#f0",
     "args": []
   }

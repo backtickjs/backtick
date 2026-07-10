@@ -33,7 +33,7 @@ export interface BundleTree {
 // A JSX element node: static structure carried as data, each prop a
 // `BundleExpr` evaluated against the enclosing tree's slots.
 export interface BundleElement {
-  "#kind": "element";
+  "#": "element";
   type: string;
   key: string | number | null;
   props: { [prop: string]: BundleExpr };
@@ -42,13 +42,13 @@ export interface BundleElement {
 // The enclosing tree's n-th slot: resolves to the value supplied for that
 // position when the tree was instantiated.
 export interface BundleSlot {
-  "#kind": "slot";
+  "#": "slot";
   index: number;
 }
 
 // A free host reference: resolves `name` on the global object.
 export interface BundleGlobal {
-  "#kind": "global";
+  "#": "global";
   name: string;
 }
 
@@ -59,7 +59,7 @@ export interface BundleGlobal {
 // node has a different schema — it evaluates a `callee` node — while this
 // form targets a table entry by label.)
 export interface BundleApply {
-  "#kind": "apply";
+  "#": "apply";
   label: FunctionLabel | TreeLabel;
   args: BundleExpr[];
 }
@@ -68,12 +68,12 @@ export interface BundleApply {
 // interpreter passes it as a nullary function yielding the expression's
 // value, so the hole evaluates it exactly like an inlined splice.
 export interface BundleThunk {
-  "#kind": "thunk";
+  "#": "thunk";
   expression: BundleExpr;
 }
 
 // A bundle expression: what a tree entry and the root are made of. Plain JSON
-// carries itself; the `#kind`-discriminated forms compose. `#kind` is the
+// carries itself; the `#`-discriminated forms compose. `#` is the
 // bundle's one reserved key — a plain data object never uses it (bundling
 // rejects it), so the structured reading is unambiguous.
 export type BundleExpr =
@@ -89,7 +89,7 @@ export type BundleExpr =
   | BundleElement
   | { [key: string]: BundleExpr };
 
-// A node of a function body's AST, discriminated by `#kind` — a reserved key
+// A node of a function body's AST, discriminated by `#` — a reserved key
 // like the tagged expression forms, so a node can never be confused with
 // user data anywhere in the bundle. Bodies are the
 // inverse of tree expressions: all structure, with plain data as the
@@ -118,7 +118,7 @@ export type BundleNode =
 // A primitive constant: evaluates to `value` itself. Serves source literals
 // and inlined runtime primitives alike.
 export interface BundleValueNode {
-  "#kind": "value";
+  "#": "value";
   value: null | boolean | number | string;
 }
 
@@ -126,20 +126,20 @@ export interface BundleValueNode {
 // an inlined runtime array can contain entry calls — so only primitives are
 // leaves.
 export interface BundleArrayNode {
-  "#kind": "array";
+  "#": "array";
   elements: BundleNode[];
 }
 
 // An object: evaluates each entry's value under its key.
 export interface BundleObjectNode {
-  "#kind": "object";
+  "#": "object";
   entries: { [key: string]: BundleNode };
 }
 
 // A variable reference: resolves `name` in the enclosing scope, or on the
 // global object when no parameter or declaration binds it.
 export interface BundleIdentifierNode {
-  "#kind": "identifier";
+  "#": "identifier";
   name: string;
 }
 
@@ -147,7 +147,7 @@ export interface BundleIdentifierNode {
 // evaluates to. Calling it applies the entry; passed bare it is already a
 // nullary thunk.
 export interface BundleEntryNode {
-  "#kind": "entry";
+  "#": "entry";
   label: FunctionLabel | TreeLabel;
 }
 
@@ -157,21 +157,21 @@ export interface BundleEntryNode {
 // per capture); targeting a tree, `args` supplies the tree's slots in index
 // order.
 export interface BundleCallNode {
-  "#kind": "call";
+  "#": "call";
   callee: BundleNode;
   args: BundleNode[];
 }
 
 // A static property access: `object.name`.
 export interface BundlePropertyNode {
-  "#kind": "property";
+  "#": "property";
   object: BundleNode;
   name: string;
 }
 
 // A binary operation with JavaScript semantics for `operator`.
 export interface BundleBinopNode {
-  "#kind": "binop";
+  "#": "binop";
   operator: string;
   left: BundleNode;
   right: BundleNode;
@@ -181,7 +181,7 @@ export interface BundleBinopNode {
 // body is an expression node (implicit return) or a `block`. Every
 // `functions` entry is an arrow node.
 export interface BundleArrowNode {
-  "#kind": "arrow";
+  "#": "arrow";
   params: string[];
   body: BundleNode;
 }
@@ -191,13 +191,13 @@ export interface BundleArrowNode {
 // the compiler's scoping (a use before its declaration resolves to the
 // local).
 export interface BundleBlockNode {
-  "#kind": "block";
+  "#": "block";
   statements: BundleNode[];
 }
 
 // A variable declaration: binds `name` in the enclosing block.
 export interface BundleDeclarationNode {
-  "#kind": "declaration";
+  "#": "declaration";
   keyword: "let" | "const";
   name: string;
   expression: BundleNode;
@@ -205,14 +205,14 @@ export interface BundleDeclarationNode {
 
 // An assignment to a resolved name (targets are always identifiers).
 export interface BundleAssignmentNode {
-  "#kind": "assignment";
+  "#": "assignment";
   name: string;
   expression: BundleNode;
 }
 
 // An if statement; `alternate` is null when there is no else branch.
 export interface BundleIfNode {
-  "#kind": "if";
+  "#": "if";
   condition: BundleNode;
   consequent: BundleNode;
   alternate: BundleNode | null;
@@ -220,6 +220,6 @@ export interface BundleIfNode {
 
 // Returns the expression's value from the enclosing arrow.
 export interface BundleReturnNode {
-  "#kind": "return";
+  "#": "return";
   expression: BundleNode;
 }

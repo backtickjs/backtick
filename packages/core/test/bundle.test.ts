@@ -118,7 +118,7 @@ test("a plain object prop that mimics an IR node stays data", () => {
   const { trees } = bundle(element);
   assert.deepStrictEqual(trees["#t0"], {
     element: {
-      "#kind": "element",
+      "#": "element",
       type: "flexbox",
       key: null,
       props: { data: { kind: "IrScriptRef", target: 0 } },
@@ -141,8 +141,8 @@ test("a runtime string splice inlines as a value node", () => {
   );
   const { functions } = bundle(client);
   assert.deepStrictEqual(functions["#f0"], {
-    "#kind": "arrow",
+    "#": "arrow",
     params: [],
-    body: { "#kind": "value", value },
+    body: { "#": "value", value },
   });
 });
