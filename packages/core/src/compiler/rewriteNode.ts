@@ -362,7 +362,7 @@ function rewriteNodeImpl(
           ts.factory.createObjectLiteralExpression(
             properties.map((property) =>
               ts.factory.createPropertyAssignment(
-                property.name.text,
+                property.name,
                 property.value.runtime as ts.Expression,
               ),
             ),
