@@ -1,0 +1,26 @@
+10:33-10:40 error TS2344: Type 'unknown' does not satisfy the constraint 'ClientUnknown'.
+10:51-10:77 error TS2344: Type '(flag: boolean) => unknown' does not satisfy the constraint 'ClientUnknown'.
+    Type '(flag: boolean) => unknown' is not assignable to type '(...args: never[]) => ClientUnknown'.
+      Type 'unknown' is not assignable to type 'ClientUnknown'.
+13:25-13:33 error TS2345: Argument of type 'Client<unknown>' is not assignable to parameter of type 'Spliceable'.
+    Type 'Client<unknown>' is not assignable to type 'Client<ClientUnknown>'.
+      Type 'unknown' is not assignable to type 'ClientUnknown'.
+19:20-19:29 error TS2304: Cannot find name '__cs_JSON'.
+20:24-20:33 error TS2304: Cannot find name '__cs_JSON'.
+22:24-22:123 error TS2345: Argument of type '{ taken: Client<ClientUnknown>; skipped: Client<ClientUnknown>; }' is not assignable to parameter of type 'ClientUnknown'.
+    Types of property 'taken' are incompatible.
+      Type 'Client<ClientUnknown>' is not assignable to type 'ClientUnknown | undefined'.
+        Type 'Client<ClientUnknown>' is not assignable to type '{ [key: string]: ClientUnknown; }'.
+          Index signature for type 'string' is missing in type 'Client<ClientUnknown>'.
+22:50-22:59 error TS2345: Argument of type 'Client<(flag: boolean) => unknown>' is not assignable to parameter of type 'Spliceable'.
+    Type 'Client<(flag: boolean) => unknown>' is not assignable to type 'Client<ClientUnknown>'.
+      Type '(flag: boolean) => unknown' is not assignable to type 'ClientUnknown'.
+        Type '(flag: boolean) => unknown' is not assignable to type '(...args: never[]) => ClientUnknown'.
+          Type 'unknown' is not assignable to type 'ClientUnknown'.
+22:63-22:67 error TS2322: Type 'boolean' is not assignable to type 'string'.
+22:97-22:110 error TS2345: Argument of type 'Client<(flag: boolean) => unknown>' is not assignable to parameter of type 'Spliceable'.
+    Type 'Client<(flag: boolean) => unknown>' is not assignable to type 'Client<ClientUnknown>'.
+      Type '(flag: boolean) => unknown' is not assignable to type 'ClientUnknown'.
+        Type '(flag: boolean) => unknown' is not assignable to type '(...args: never[]) => ClientUnknown'.
+          Type 'unknown' is not assignable to type 'ClientUnknown'.
+22:114-22:119 error TS2322: Type 'boolean' is not assignable to type 'string'.

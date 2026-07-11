@@ -1,0 +1,172 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [
+        "JSON"
+      ],
+      "body": {
+        "taken": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "#": "arrow",
+                "params": [],
+                "body": {
+                  "#": "call",
+                  "callee": {
+                    "#": "entry",
+                    "label": "#f2"
+                  },
+                  "args": [
+                    {
+                      "#": "identifier",
+                      "name": "JSON"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "args": [
+            true
+          ]
+        },
+        "skipped": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "#": "arrow",
+                "params": [],
+                "body": {
+                  "#": "call",
+                  "callee": {
+                    "#": "entry",
+                    "label": "#f3"
+                  },
+                  "args": [
+                    {
+                      "#": "identifier",
+                      "name": "JSON"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "args": [
+            false
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "flag"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "if",
+              "condition": {
+                "#": "identifier",
+                "name": "flag"
+              },
+              "consequent": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "return",
+                    "expression": {
+                      "#": "call",
+                      "callee": {
+                        "#": "identifier",
+                        "name": "$0"
+                      },
+                      "args": []
+                    }
+                  }
+                ]
+              },
+              "alternate": null
+            },
+            {
+              "#": "return",
+              "expression": "skipped"
+            }
+          ]
+        }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [
+        "JSON"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "JSON"
+          },
+          "name": "parse"
+        },
+        "args": [
+          "[1]"
+        ]
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [
+        "JSON"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "JSON"
+          },
+          "name": "parse"
+        },
+        "args": [
+          "{"
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": [
+      {
+        "#": "global",
+        "name": "JSON"
+      }
+    ]
+  }
+}
