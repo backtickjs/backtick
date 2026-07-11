@@ -126,7 +126,7 @@ test("a plain object prop that mimics an IR node stays data", () => {
   });
 });
 
-test("a runtime string splice inlines as a value node", () => {
+test("a runtime string splice inlines as itself", () => {
   const value = 'say "hi"\n\\done';
   const loc = {
     path: "test.ts",
@@ -143,6 +143,6 @@ test("a runtime string splice inlines as a value node", () => {
   assert.deepStrictEqual(functions["#f0"], {
     "#": "arrow",
     params: [],
-    body: { "#": "value", value },
+    body: value,
   });
 });

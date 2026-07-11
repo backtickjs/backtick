@@ -4,38 +4,14 @@
       "#": "arrow",
       "params": [],
       "body": {
-        "#": "object",
-        "entries": {
-          "list": {
-            "#": "array",
-            "elements": [
-              {
-                "#": "value",
-                "value": 1
-              },
-              {
-                "#": "value",
-                "value": "two"
-              },
-              {
-                "#": "value",
-                "value": true
-              },
-              {
-                "#": "value",
-                "value": null
-              }
-            ]
-          },
-          "obj": {
-            "#": "object",
-            "entries": {
-              "k": {
-                "#": "value",
-                "value": 3
-              }
-            }
-          }
+        "list": [
+          1,
+          "two",
+          true,
+          null
+        ],
+        "obj": {
+          "k": 3
         }
       }
     }

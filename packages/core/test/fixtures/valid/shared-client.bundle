@@ -35,32 +35,29 @@
             "keyword": "const",
             "name": "p",
             "expression": {
-              "#": "object",
-              "entries": {
-                "x": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f2"
-                  },
-                  "args": []
+              "x": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f2"
                 },
-                "y": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f3"
-                  },
-                  "args": []
+                "args": []
+              },
+              "y": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f3"
                 },
-                "sum": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f4"
-                  },
-                  "args": []
-                }
+                "args": []
+              },
+              "sum": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f4"
+                },
+                "args": []
               }
             }
           },
@@ -85,18 +82,12 @@
     "#f2": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 1
-      }
+      "body": 1
     },
     "#f3": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 2
-      }
+      "body": 2
     },
     "#f4": {
       "#": "arrow",
@@ -137,32 +128,29 @@
             "keyword": "const",
             "name": "p2",
             "expression": {
-              "#": "object",
-              "entries": {
-                "x": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f2"
-                  },
-                  "args": []
+              "x": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f2"
                 },
-                "y": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f3"
-                  },
-                  "args": []
+                "args": []
+              },
+              "y": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f3"
                 },
-                "sum": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f4"
-                  },
-                  "args": []
-                }
+                "args": []
+              },
+              "sum": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f4"
+                },
+                "args": []
               }
             }
           },

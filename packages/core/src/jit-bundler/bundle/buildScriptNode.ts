@@ -102,7 +102,7 @@ function buildExpression(
     buildExpression(child, renderSplice, mangle);
   switch (node.kind) {
     case "AstScriptArray":
-      return { "#": "array", elements: node.elements.map(e) };
+      return node.elements.map(e);
     case "AstScriptArrow":
       return {
         "#": "arrow",
@@ -117,28 +117,33 @@ function buildExpression(
         right: e(node.rhs),
       };
     case "AstScriptBoolean":
-      return { "#": "value", value: node.value };
+      return node.value;
     case "AstScriptCall":
       return { "#": "call", callee: e(node.callee), args: node.args.map(e) };
     case "AstScriptIdentifier":
       return { "#": "identifier", name: mangle(node.bindingKey) };
     case "AstScriptNull":
-      return { "#": "value", value: null };
+      return null;
     case "AstScriptNumber":
-      return { "#": "value", value: node.value };
+      return node.value;
     case "AstScriptObject": {
+      // An object literal serializes as the plain object it spells, so `#` —
+      // the bundle's one reserved key — would read as a node.
+      if ("#" in node.entries) {
+        throw new Error("Can't bundle this object: the `#` key is reserved.");
+      }
       const entries: { [key: string]: BundleExpressionNode } = {};
       for (const [key, value] of Object.entries(node.entries)) {
         entries[key] = e(value);
       }
-      return { "#": "object", entries };
+      return entries;
     }
     case "AstScriptPropertyAccess":
       return { "#": "property", object: e(node.expression), name: node.name };
     case "AstScriptSplice":
       return renderSplice(node.index);
     case "AstScriptString":
-      return { "#": "value", value: node.value };
+      return node.value;
     default: {
       const unhandled: never = node;
       throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);

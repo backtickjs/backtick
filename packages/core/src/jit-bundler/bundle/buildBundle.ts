@@ -258,11 +258,7 @@ export function buildBundle(ir: Ir): Bundle {
       return;
     }
     // Reserve the slot to break reference cycles; overwritten below.
-    bodies.set(target, {
-      "#": "arrow",
-      params: [],
-      body: { "#": "value", value: null },
-    });
+    bodies.set(target, { "#": "arrow", params: [], body: null });
     const captureParams = need(target).map(displayName);
     let params: string[];
     let renderSplice: RenderSplice;
@@ -326,15 +322,22 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
       case "IrValue":
-        return { "#": "value", value: value.value };
+        return value.value;
       case "IrArray":
-        return { "#": "array", elements: value.elements.map(renderValue) };
+        return value.elements.map(renderValue);
       case "IrObject": {
+        // A plain data object passes through, exactly as in `renderExpr`, so
+        // it can't carry `#` — the bundle's one reserved key.
+        if ("#" in value.entries) {
+          throw new Error(
+            "Can't bundle this object: the `#` key is reserved.",
+          );
+        }
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
           entries[key] = renderValue(entry);
         }
-        return { "#": "object", entries };
+        return entries;
       }
     }
   };
@@ -483,13 +486,10 @@ export function buildBundle(ir: Ir): Bundle {
       return value.elements.map((entry) => renderExpr(entry, slots));
     }
     // A plain data object passes through. `#` is the bundle's one
-    // reserved key — the discriminant of every structured form — so an object
-    // carrying it would be indistinguishable from structure to the loader.
+    // reserved key — the discriminant of every node — so an object
+    // carrying it would be indistinguishable from a node to the loader.
     if ("#" in value.entries) {
-      throw new Error(
-        "Can't bundle this object: the `#` key is reserved for the " +
-          "bundle's structured forms.",
-      );
+      throw new Error("Can't bundle this object: the `#` key is reserved.");
     }
     const entries: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(value.entries)) {

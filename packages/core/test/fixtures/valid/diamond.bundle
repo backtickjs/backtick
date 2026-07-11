@@ -131,10 +131,7 @@
     "#f4": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 1
-      }
+      "body": 1
     }
   },
   "trees": {},

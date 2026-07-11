@@ -2,7 +2,6 @@ export { buildAst } from "./ast/buildAst.js";
 export type {
   Bundle,
   BundleApply,
-  BundleArrayNode,
   BundleArrowNode,
   BundleAssignmentNode,
   BundleBinaryOperator,
@@ -19,14 +18,12 @@ export type {
   BundleIdentifierNode,
   BundleIfNode,
   BundleNode,
-  BundleObjectNode,
   BundlePropertyNode,
   BundleReturnNode,
   BundleSlot,
   BundleStatementNode,
   BundleThunk,
   BundleTree,
-  BundleValueNode,
   FunctionLabel,
   TreeLabel,
 } from "./bundle/Bundle.js";

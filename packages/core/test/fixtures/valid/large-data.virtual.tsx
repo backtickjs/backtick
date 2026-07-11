@@ -1,7 +1,9 @@
+import { cs } from "@backtickjs/core";
+
 // A realistic data-heavy tree: one element carrying a sizable dataset as a
 // plain data prop, so the wire cost of the `value`/`array`/`object`
 // envelopes shows up at scale rather than on toy literals.
-const orders = Array.from({ length: 40 }, (_, i) => ({
+const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,
   customer: {
     name: `Customer ${i}`,
@@ -16,4 +18,4 @@ const orders = Array.from({ length: 40 }, (_, i) => ({
   coupon: i % 5 === 0 ? `SAVE${i}` : null,
 }));
 
-export default <button data={{ orders, currency: "CAD" }} />;
+export default <button data={orders} onA={cs.lift(() => cs.lower({ orders, currency: "CAD" }))} />;

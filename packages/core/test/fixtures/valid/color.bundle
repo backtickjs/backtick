@@ -49,50 +49,30 @@
             "keyword": "const",
             "name": "color",
             "expression": {
-              "#": "object",
-              "entries": {
-                "r": {
-                  "#": "value",
-                  "value": 1
-                },
-                "g": {
-                  "#": "value",
-                  "value": 2
-                },
-                "b": {
-                  "#": "value",
-                  "value": 3
-                },
-                "brightness": {
-                  "#": "arrow",
-                  "params": [],
-                  "body": {
-                    "#": "block",
-                    "statements": [
-                      {
-                        "#": "return",
-                        "expression": {
+              "r": 1,
+              "g": 2,
+              "b": 3,
+              "brightness": {
+                "#": "arrow",
+                "params": [],
+                "body": {
+                  "#": "block",
+                  "statements": [
+                    {
+                      "#": "return",
+                      "expression": {
+                        "#": "binop",
+                        "operator": "+",
+                        "left": {
                           "#": "binop",
                           "operator": "+",
                           "left": {
-                            "#": "binop",
-                            "operator": "+",
-                            "left": {
-                              "#": "property",
-                              "object": {
-                                "#": "identifier",
-                                "name": "color"
-                              },
-                              "name": "r"
+                            "#": "property",
+                            "object": {
+                              "#": "identifier",
+                              "name": "color"
                             },
-                            "right": {
-                              "#": "property",
-                              "object": {
-                                "#": "identifier",
-                                "name": "color"
-                              },
-                              "name": "g"
-                            }
+                            "name": "r"
                           },
                           "right": {
                             "#": "property",
@@ -100,12 +80,20 @@
                               "#": "identifier",
                               "name": "color"
                             },
-                            "name": "b"
+                            "name": "g"
                           }
+                        },
+                        "right": {
+                          "#": "property",
+                          "object": {
+                            "#": "identifier",
+                            "name": "color"
+                          },
+                          "name": "b"
                         }
                       }
-                    ]
-                  }
+                    }
+                  ]
                 }
               }
             }

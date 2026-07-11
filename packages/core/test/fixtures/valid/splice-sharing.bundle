@@ -4,42 +4,39 @@
       "#": "arrow",
       "params": [],
       "body": {
-        "#": "object",
-        "entries": {
-          "x": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
-            },
-            "args": [
-              {
-                "#": "entry",
-                "label": "#f2"
-              },
-              {
-                "#": "entry",
-                "label": "#f3"
-              }
-            ]
+        "x": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
           },
-          "y": {
-            "#": "call",
-            "callee": {
+          "args": [
+            {
               "#": "entry",
-              "label": "#f1"
+              "label": "#f2"
             },
-            "args": [
-              {
-                "#": "entry",
-                "label": "#f4"
-              },
-              {
-                "#": "entry",
-                "label": "#f5"
-              }
-            ]
-          }
+            {
+              "#": "entry",
+              "label": "#f3"
+            }
+          ]
+        },
+        "y": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
+          },
+          "args": [
+            {
+              "#": "entry",
+              "label": "#f4"
+            },
+            {
+              "#": "entry",
+              "label": "#f5"
+            }
+          ]
         }
       }
     },
@@ -73,34 +70,22 @@
     "#f2": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 1
-      }
+      "body": 1
     },
     "#f3": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 2
-      }
+      "body": 2
     },
     "#f4": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 3
-      }
+      "body": 3
     },
     "#f5": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 4
-      }
+      "body": 4
     }
   },
   "trees": {},

@@ -13,10 +13,7 @@
               "#": "declaration",
               "keyword": "const",
               "name": "x",
-              "expression": {
-                "#": "value",
-                "value": 1
-              }
+              "expression": 1
             },
             {
               "#": "return",

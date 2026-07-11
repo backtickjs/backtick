@@ -11,32 +11,29 @@
             "keyword": "const",
             "name": "c",
             "expression": {
-              "#": "object",
-              "entries": {
-                "r": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f1"
-                  },
-                  "args": []
+              "r": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
                 },
-                "g": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f2"
-                  },
-                  "args": []
+                "args": []
+              },
+              "g": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f2"
                 },
-                "b": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f3"
-                  },
-                  "args": []
-                }
+                "args": []
+              },
+              "b": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f3"
+                },
+                "args": []
               }
             }
           },
@@ -86,20 +83,14 @@
                 "#": "identifier",
                 "name": "brightness"
               },
-              "right": {
-                "#": "value",
-                "value": 382
-              }
+              "right": 382
             },
             "consequent": {
               "#": "block",
               "statements": [
                 {
                   "#": "return",
-                  "expression": {
-                    "#": "value",
-                    "value": "light"
-                  }
+                  "expression": "light"
                 }
               ]
             },
@@ -107,10 +98,7 @@
           },
           {
             "#": "return",
-            "expression": {
-              "#": "value",
-              "value": "dark"
-            }
+            "expression": "dark"
           }
         ]
       }
@@ -118,26 +106,17 @@
     "#f1": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 30
-      }
+      "body": 30
     },
     "#f2": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 144
-      }
+      "body": 144
     },
     "#f3": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 255
-      }
+      "body": 255
     }
   },
   "trees": {},

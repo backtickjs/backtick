@@ -171,8 +171,8 @@ function evaluateElement(
 }
 
 // A tree expression (also the root): plain JSON carries itself; the
-// `#`-discriminated forms compose. Bundling rejects plain data carrying
-// `#` — the bundle's one reserved key — so the structured reading is
+// `#`-discriminated nodes compose. Bundling rejects plain data carrying
+// `#` — the bundle's one reserved key — so the node reading is
 // unambiguous.
 function evaluateExpr(
   bundle: Bundle,
@@ -218,6 +218,20 @@ function evaluateExpr(
   return object;
 }
 
+// A `#`-discriminated node, as opposed to plain JSON carrying itself.
+// Bundling rejects plain data carrying `#` — the bundle's one reserved key —
+// so the node reading is unambiguous.
+function isNode(
+  node: BundleStatementNode,
+): node is Extract<BundleStatementNode, { "#": string }> {
+  return (
+    typeof node === "object" &&
+    node !== null &&
+    !Array.isArray(node) &&
+    "#" in node
+  );
+}
+
 // The statement outcome of a block or one of its statements: `returned`
 // signals that a `return` executed and the enclosing arrow's result is
 // `value`.
@@ -233,13 +247,19 @@ function executeStatement(
   node: BundleStatementNode,
   scope: Scope,
 ): Completion {
+  if (!isNode(node)) {
+    // Plain JSON in statement position is an expression evaluated for its
+    // effect.
+    evaluateNode(bundle, node, scope);
+    return advanced;
+  }
   switch (node["#"]) {
     case "block": {
       const frame: Scope = { parent: scope, bindings: new Map() };
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `undefined`), never outward.
       for (const statement of node.statements) {
-        if (statement["#"] === "declaration") {
+        if (isNode(statement) && statement["#"] === "declaration") {
           frame.bindings.set(statement.name, undefined);
         }
       }
@@ -291,27 +311,28 @@ function executeStatement(
   }
 }
 
+// A body expression: as in a tree expression, plain JSON carries itself and
+// the `#`-discriminated forms compose. Containers recurse as expressions —
+// a spliced runtime array can hold entry calls.
 function evaluateNode(
   bundle: Bundle,
   node: BundleExpressionNode,
   scope: Scope | null,
 ): unknown {
+  if (!isNode(node)) {
+    if (node === null || typeof node !== "object") {
+      return node;
+    }
+    if (Array.isArray(node)) {
+      return node.map((element) => evaluateNode(bundle, element, scope));
+    }
+    const object: { [key: string]: unknown } = {};
+    for (const [key, value] of Object.entries(node)) {
+      object[key] = evaluateNode(bundle, value, scope);
+    }
+    return object;
+  }
   switch (node["#"]) {
-    case "value": {
-      return node.value;
-    }
-    case "array": {
-      return node.elements.map((element) =>
-        evaluateNode(bundle, element, scope),
-      );
-    }
-    case "object": {
-      const object: { [key: string]: unknown } = {};
-      for (const [key, value] of Object.entries(node.entries)) {
-        object[key] = evaluateNode(bundle, value, scope);
-      }
-      return object;
-    }
     case "identifier": {
       const frame = lookup(scope, node.name);
       if (frame === null) {
@@ -325,7 +346,7 @@ function evaluateNode(
     case "call": {
       const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
-      if (node.callee["#"] === "property") {
+      if (isNode(node.callee) && node.callee["#"] === "property") {
         const object = evaluateNode(bundle, node.callee.object, scope) as {
           [name: string]: unknown;
         };
@@ -356,10 +377,12 @@ function evaluateNode(
         node.params.forEach((param, index) => {
           frame.bindings.set(param, args[index]);
         });
-        if (node.body["#"] === "block") {
-          return executeStatement(bundle, node.body, frame).value;
+        const body = node.body;
+        if (isNode(body) && body["#"] === "block") {
+          return executeStatement(bundle, body, frame).value;
         }
-        return evaluateNode(bundle, node.body, frame);
+        // A non-block body is an expression, implicitly returned.
+        return evaluateNode(bundle, body as BundleExpressionNode, frame);
       };
     }
   }

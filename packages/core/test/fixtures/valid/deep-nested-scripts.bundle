@@ -39,18 +39,12 @@
     "#f2": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 1
-      }
+      "body": 1
     },
     "#f3": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 2
-      }
+      "body": 2
     }
   },
   "trees": {},

@@ -73,9 +73,9 @@ export interface BundleThunk {
 }
 
 // A bundle expression: what a tree entry and the root are made of. Plain JSON
-// carries itself; the `#`-discriminated forms compose. `#` is the
+// carries itself; the `#`-discriminated nodes compose. `#` is the
 // bundle's one reserved key — a plain data object never uses it (bundling
-// rejects it), so the structured reading is unambiguous.
+// rejects it), so the node reading is unambiguous.
 export type BundleExpr =
   | null
   | boolean
@@ -91,21 +91,25 @@ export type BundleExpr =
 
 // A node of a function body's AST, discriminated by `#` — a reserved key
 // like the tagged expression forms, so a node can never be confused with
-// user data anywhere in the bundle. Bodies are the
-// inverse of tree expressions: all structure, with plain data as the
-// exception — every object in a body is a node, and raw JSON only ever
-// appears under a `value` node's `value` field, so nodes can never collide
-// with user data. Scoping is lexical and names are pre-resolved: identifiers
-// refer to parameters of an enclosing arrow (including the entry itself),
-// locals declared in an enclosing block, or — when neither binds them —
-// properties of the global object.
+// user data anywhere in the bundle. Bodies carry data exactly as tree
+// expressions do: plain JSON carries itself — a source literal or spliced
+// runtime data serializes as the JSON it spells — and every composing form
+// is a `#`-discriminated node. Scoping is lexical and names are
+// pre-resolved: identifiers refer to parameters of an enclosing arrow
+// (including the entry itself), locals declared in an enclosing block, or —
+// when neither binds them — properties of the global object.
 export type BundleNode = BundleStatementNode;
 
-// A body node that yields a value.
+// A body node that yields a value. Plain JSON carries itself; containers
+// recurse as expressions — a spliced runtime array can hold entry calls —
+// so a `#`-less object is the data it spells, never a node.
 export type BundleExpressionNode =
-  | BundleValueNode
-  | BundleArrayNode
-  | BundleObjectNode
+  | null
+  | boolean
+  | number
+  | string
+  | BundleExpressionNode[]
+  | { [key: string]: BundleExpressionNode }
   | BundleIdentifierNode
   | BundleEntryNode
   | BundleCallNode
@@ -126,27 +130,6 @@ export type BundleStatementNode =
 // The body of an arrow: a block, or an expression whose value is implicitly
 // returned.
 export type BundleBody = BundleExpressionNode | BundleBlockNode;
-
-// A primitive constant: evaluates to `value` itself. Serves source literals
-// and inlined runtime primitives alike.
-export interface BundleValueNode {
-  "#": "value";
-  value: null | boolean | number | string;
-}
-
-// An array: evaluates each element in order. Containers recurse as nodes —
-// an inlined runtime array can contain entry calls — so only primitives are
-// leaves.
-export interface BundleArrayNode {
-  "#": "array";
-  elements: BundleExpressionNode[];
-}
-
-// An object: evaluates each entry's value under its key.
-export interface BundleObjectNode {
-  "#": "object";
-  entries: { [key: string]: BundleExpressionNode };
-}
 
 // A variable reference: resolves `name` in the enclosing scope, or on the
 // global object when no parameter or declaration binds it.

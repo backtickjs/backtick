@@ -10,10 +10,7 @@
             "#": "declaration",
             "keyword": "const",
             "name": "base",
-            "expression": {
-              "#": "value",
-              "value": 10
-            }
+            "expression": 10
           },
           {
             "#": "return",

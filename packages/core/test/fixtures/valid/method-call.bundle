@@ -10,10 +10,7 @@
             "#": "declaration",
             "keyword": "const",
             "name": "greeting",
-            "expression": {
-              "#": "value",
-              "value": "Hello"
-            }
+            "expression": "Hello"
           },
           {
             "#": "return",
@@ -32,14 +29,8 @@
                     "name": "concat"
                   },
                   "args": [
-                    {
-                      "#": "value",
-                      "value": ", "
-                    },
-                    {
-                      "#": "value",
-                      "value": "World"
-                    }
+                    ", ",
+                    "World"
                   ]
                 },
                 "name": "toUpperCase"

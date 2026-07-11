@@ -4,34 +4,28 @@
       "#": "arrow",
       "params": [],
       "body": {
-        "#": "object",
-        "entries": {
-          "a": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
-            },
-            "args": []
+        "a": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
           },
-          "b": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
-            },
-            "args": []
-          }
+          "args": []
+        },
+        "b": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
+          },
+          "args": []
         }
       }
     },
     "#f1": {
       "#": "arrow",
       "params": [],
-      "body": {
-        "#": "value",
-        "value": 7
-      }
+      "body": 7
     }
   },
   "trees": {},

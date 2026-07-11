@@ -19,10 +19,7 @@
             "name": "log"
           },
           "args": [
-            {
-              "#": "value",
-              "value": "hi"
-            }
+            "hi"
           ]
         }
       }

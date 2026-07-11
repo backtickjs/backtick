@@ -1,1 +1,6 @@
-
+cs.lift(                     → cs`
+() =>                        → () => 
+cs.lower(                    → ${
+{ orders, currency: "CAD" }  → { orders, currency: "CAD" }
+)                            → }
+)                            → `
