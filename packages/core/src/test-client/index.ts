@@ -1,6 +1,7 @@
 import type {
   Bundle,
   BundleApply,
+  BundleBinaryOperator,
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
@@ -366,7 +367,7 @@ function evaluateNode(
 
 function evaluateBinop(
   bundle: Bundle,
-  operator: string,
+  operator: BundleBinaryOperator,
   leftNode: BundleExpressionNode,
   rightNode: BundleExpressionNode,
   scope: Scope | null,
@@ -407,7 +408,9 @@ function evaluateBinop(
       return (left as number) > (right as number);
     case ">=":
       return (left as number) >= (right as number);
-    default:
+    default: {
+      operator satisfies never;
       throw new Error(`unsupported binary operator ${operator}`);
+    }
   }
 }

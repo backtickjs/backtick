@@ -89,6 +89,22 @@ export type SourceLocation = {
   end: { line: number; character: number };
 };
 
+export type BinaryOperator =
+  | "&&"
+  | "||"
+  | "??"
+  | "+"
+  | "-"
+  | "*"
+  | "/"
+  | "%"
+  | "==="
+  | "!=="
+  | "<"
+  | "<="
+  | ">"
+  | ">=";
+
 export interface Visitor<U> {
   // e.g. ${ 1 }
   splice(loc: SourceLocation, index: number): U;
@@ -132,7 +148,7 @@ export interface Visitor<U> {
   propertyAccess(loc: SourceLocation, expression: U, name: string): U;
 
   // e.g. a + b
-  binop(loc: SourceLocation, lhs: U, operator: string, rhs: U): U;
+  binop(loc: SourceLocation, lhs: U, operator: BinaryOperator, rhs: U): U;
 
   // e.g. [1, 2, 3]
   array(loc: SourceLocation, elements: U[]): U;

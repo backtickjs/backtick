@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import { isSupportedBinop } from "./binop.js";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -397,7 +398,7 @@ function rewriteNodeImpl(
     }
 
     const operator = ts.tokenToString(node.operatorToken.kind);
-    if (operator != null) {
+    if (operator != null && isSupportedBinop(operator)) {
       return {
         virtual: ts.factory.createBinaryExpression(
           lhs.virtual as ts.Expression,
@@ -416,6 +417,7 @@ function rewriteNodeImpl(
       node,
       "This operator isn't supported in a `cs` client script.",
     );
+    return unsupported();
   }
 
   if (ts.isNumericLiteral(node)) {

@@ -1,4 +1,8 @@
-import type { SourceLocation, Visitor } from "../../cs-runtime/index.js";
+import type {
+  BinaryOperator,
+  SourceLocation,
+  Visitor,
+} from "../../cs-runtime/index.js";
 import type {
   AstScriptArray,
   AstScriptArrow,
@@ -106,7 +110,7 @@ export class AstBuilder implements Visitor<AstScriptNode> {
   binop(
     loc: SourceLocation,
     lhs: AstScriptExpression,
-    operator: string,
+    operator: BinaryOperator,
     rhs: AstScriptExpression,
   ): AstScriptBinop {
     return { kind: "AstScriptBinop", loc, lhs, operator, rhs };

@@ -181,10 +181,29 @@ export interface BundlePropertyNode {
   name: string;
 }
 
+// The closed set of binary operators, part of the wire contract: a client
+// implements exactly these, with JavaScript semantics (`&&`/`||`/`??`
+// short-circuit). The compiler rejects any other operator in a script.
+export type BundleBinaryOperator =
+  | "&&"
+  | "||"
+  | "??"
+  | "+"
+  | "-"
+  | "*"
+  | "/"
+  | "%"
+  | "==="
+  | "!=="
+  | "<"
+  | "<="
+  | ">"
+  | ">=";
+
 // A binary operation with JavaScript semantics for `operator`.
 export interface BundleBinopNode {
   "#": "binop";
-  operator: string;
+  operator: BundleBinaryOperator;
   left: BundleExpressionNode;
   right: BundleExpressionNode;
 }

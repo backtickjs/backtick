@@ -5,6 +5,7 @@ export type {
   BundleArrayNode,
   BundleArrowNode,
   BundleAssignmentNode,
+  BundleBinaryOperator,
   BundleBinopNode,
   BundleBlockNode,
   BundleBody,

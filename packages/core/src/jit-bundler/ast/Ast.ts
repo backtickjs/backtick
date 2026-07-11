@@ -1,4 +1,4 @@
-import type { SourceLocation } from "../../cs-runtime/index.js";
+import type { BinaryOperator, SourceLocation } from "../../cs-runtime/index.js";
 
 // A node built from a value spliced into a client script. Splice values are
 // resolved at runtime and have no source text, so a value node never has a
@@ -81,7 +81,7 @@ export interface AstScriptBinop {
   readonly kind: "AstScriptBinop";
   readonly loc: SourceLocation;
   readonly lhs: AstScriptExpression;
-  readonly operator: string;
+  readonly operator: BinaryOperator;
   readonly rhs: AstScriptExpression;
 }
 
