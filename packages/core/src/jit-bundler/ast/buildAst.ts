@@ -35,14 +35,15 @@ export function buildAst(value: Spliceable): Ast {
     return { kind: "AstArray", elements: value.map(buildAst) };
   }
   // Only plain objects reflect structurally. A class instance without the
-  // "@backtickjs/Client" marker would land here and half-work — own fields reflect,
+  // "@backtickjs" marker would land here and half-work — own fields reflect,
   // getters silently vanish — so fail loudly instead.
   const prototype = Object.getPrototypeOf(value);
   if (prototype !== Object.prototype && prototype !== null) {
     const name = value.constructor?.name ?? "an unknown class";
     throw new Error(
       `Can't splice this \`${name}\` instance: only plain objects and classes ` +
-        'declaring the "@backtickjs/Client" marker can be spliced into a client script.',
+        'declaring the `"@backtickjs": "ClientObject"` marker can be spliced ' +
+        "into a client script.",
     );
   }
   const entries: { [key: string]: Ast } = {};

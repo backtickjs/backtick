@@ -19,16 +19,16 @@ export interface Client<T extends ClientUnknown> {
   readonly [client]: T;
 }
 
-// The explicit opt-in for reflected host classes: declaring the
-// "@backtickjs/Client" marker makes an instance spliceable, reflected as a
-// plain object of its spliceable members — `Lower` derives that shape from
-// the class itself (see `AsObject`).
+// The explicit opt-in for reflected host classes: declaring the marker
+// (`readonly "@backtickjs" = "ClientObject";`) makes an instance spliceable,
+// reflected as a plain object of its spliceable members — `Lower` derives
+// that shape from the class itself (see `AsObject`).
 export interface ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs": "ClientObject";
 }
 
 export interface ClientScript {
-  "@backtickjs/ClientScript": undefined;
+  readonly "@backtickjs": "ClientScript";
   fileHash: string;
   loc: SourceLocation;
   metadata: Metadata;
@@ -46,7 +46,7 @@ export interface UIElement {
 }
 
 export interface JSXElement {
-  "@backtickjs/JSXElement": undefined;
+  readonly "@backtickjs": "JSXElement";
   readonly type: string;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
@@ -64,7 +64,7 @@ export type Spliceable =
   | { [key: string]: Spliceable };
 
 export type AsObject<T> = {
-  [K in Exclude<keyof T, "@backtickjs/Client"> as T[K] extends Spliceable
+  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
     ? K
     : never]: Lower<T[K]>;
 };
@@ -187,32 +187,33 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }
 
-export function isClientObject(value: unknown): value is ClientObject {
+// The one marker key every backtick object carries; its value names the
+// kind, so a single key discriminates the tagged shapes.
+function hasMarker(value: unknown, kind: string): boolean {
   return (
-    typeof value === "object" && value !== null && "@backtickjs/Client" in value
+    typeof value === "object" &&
+    value !== null &&
+    "@backtickjs" in value &&
+    (value as { "@backtickjs": unknown })["@backtickjs"] === kind
   );
+}
+
+export function isClientObject(value: unknown): value is ClientObject {
+  return hasMarker(value, "ClientObject");
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
-  return (
-    value != null &&
-    typeof value === "object" &&
-    "@backtickjs/ClientScript" in value
-  );
+  return hasMarker(value, "ClientScript");
 }
 
 export function isJSXElement(value: unknown): value is JSXElement {
-  return (
-    value != null &&
-    typeof value === "object" &&
-    "@backtickjs/JSXElement" in value
-  );
+  return hasMarker(value, "JSXElement");
 }
 
 export function spliceableEntries(value: ClientObject): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
   for (const key of objectKeys(value)) {
-    if (key === "@backtickjs/Client") {
+    if (key === "@backtickjs") {
       continue;
     }
     const entry = (value as unknown as Record<string, unknown>)[key];
@@ -285,7 +286,7 @@ function create(
   visit: <U>(visitor: Visitor<U>) => U,
 ): ClientScript {
   return {
-    "@backtickjs/ClientScript": undefined,
+    "@backtickjs": "ClientScript",
     loc,
     fileHash,
     metadata,

@@ -25,7 +25,7 @@ export function jsx(
     throw new Error("Key must be a string or a number");
   }
   return {
-    "@backtickjs/JSXElement": undefined,
+    "@backtickjs": "JSXElement",
     type,
     key: key ?? null,
     props,

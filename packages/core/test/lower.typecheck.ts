@@ -7,7 +7,7 @@ declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
 class Point implements ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs" = "ClientObject";
 
   readonly x: Client<number>;
   readonly y: Client<number>;
@@ -31,7 +31,7 @@ class Point implements ClientObject {
 }
 
 class Segment implements ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs" = "ClientObject";
 
   readonly from: Point;
   readonly to: Point;
@@ -58,8 +58,8 @@ point.reflectsNothing;
 // @ts-expect-error — host-only methods don't exist on the client.
 point.scaled;
 
-// @ts-expect-error — the phantom marker doesn't exist on the client.
-point["@backtickjs/Client"];
+// @ts-expect-error — the marker doesn't exist on the client.
+point["@backtickjs"];
 
 const segment = lower(
   new Segment(

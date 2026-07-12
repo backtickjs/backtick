@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
 
 class Point implements ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs" = "ClientObject";
 
   readonly x: Client<number>;
   readonly y: Client<number>;
@@ -20,7 +20,7 @@ class Point implements ClientObject {
 // A client object nested inside another: `Segment` reflects its `Point`
 // members recursively, so the script reaches `s.to.sum` two levels deep.
 class Segment implements ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs" = "ClientObject";
 
   readonly from: Point;
   readonly to: Point;

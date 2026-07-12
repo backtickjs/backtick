@@ -1,5 +1,5 @@
 class Color {
-    "@backtickjs/Client";
+    "@backtickjs" = "ClientObject";
     r;
     g;
     b;

@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
 
 class Point implements ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs" = "ClientObject";
 
   readonly x: Client<number>;
   readonly y: Client<number>;

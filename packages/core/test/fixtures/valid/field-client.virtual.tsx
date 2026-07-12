@@ -2,7 +2,7 @@ import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
 import { cs } from "@backtickjs/core";
 
 class Color implements ClientObject {
-  "@backtickjs/Client": undefined;
+  readonly "@backtickjs" = "ClientObject";
 
   readonly r: Client<number>;
   readonly g: Client<number>;
