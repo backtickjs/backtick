@@ -1,0 +1,23 @@
+{
+  "functions": {},
+  "trees": {
+    "#t0": {
+      "element": {
+        "#": "element",
+        "type": "button",
+        "key": null,
+        "props": {
+          "data": {
+            "kind": "IrScriptRef",
+            "target": 0
+          }
+        }
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t0",
+    "args": []
+  }
+}

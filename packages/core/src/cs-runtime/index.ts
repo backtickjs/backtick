@@ -14,7 +14,8 @@ export interface Client<T extends ClientUnknown> {
   "@backtickjs/Client": T;
 }
 
-export interface ClientScript<T extends ClientUnknown> extends Client<T> {
+export interface ClientScript {
+  "@backtickjs/ClientScript": undefined;
   fileHash: string;
   loc: SourceLocation;
   metadata: Metadata;
@@ -175,22 +176,18 @@ export function isClient(value: unknown): value is Client<ClientUnknown> {
   );
 }
 
-export function isClientScript(
-  value: unknown,
-): value is ClientScript<ClientUnknown> {
+export function isClientScript(value: unknown): value is ClientScript {
   return (
-    isClient(value) &&
-    "fileHash" in value &&
-    "loc" in value &&
-    "metadata" in value &&
-    "visit" in value
+    value != null &&
+    typeof value === "object" &&
+    "@backtickjs/ClientScript" in value
   );
 }
 
 export function isJSXElement(value: unknown): value is JSXElement {
   return (
+    value != null &&
     typeof value === "object" &&
-    value !== null &&
     "@backtickjs/JSXElement" in value
   );
 }
@@ -234,6 +231,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
   if (
     isJSXElement(value) ||
     isClient(value) ||
+    isClientScript(value) ||
     value === null ||
     typeof value === "number" ||
     typeof value === "boolean" ||
@@ -270,10 +268,9 @@ function create(
   fileHash: string,
   metadata: Metadata,
   visit: <U>(visitor: Visitor<U>) => U,
-  // biome-ignore lint/suspicious/noExplicitAny: runtime value; the real type comes from `cs.lift`
-): ClientScript<any> {
+): ClientScript {
   return {
-    "@backtickjs/Client": undefined,
+    "@backtickjs/ClientScript": undefined,
     loc,
     fileHash,
     metadata,

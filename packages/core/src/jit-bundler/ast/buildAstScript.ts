@@ -1,8 +1,4 @@
-import type {
-  Client,
-  ClientScript,
-  ClientUnknown,
-} from "../../cs-runtime/index.js";
+import type { ClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import type { AstScript, AstScriptBody, AstScriptNode } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
@@ -36,9 +32,9 @@ function scriptBody(node: AstScriptNode): AstScriptBody {
 // tree with exponentially many nodes. Safe to share because nodes are immutable,
 // and safe to cache forever because a client object's lowering never changes;
 // keyed weakly so entries vanish with their client objects.
-const nodeByClient = new WeakMap<Client<ClientUnknown>, AstScript>();
+const nodeByClient = new WeakMap<ClientScript, AstScript>();
 
-export function buildAstScript(client: ClientScript<ClientUnknown>): AstScript {
+export function buildAstScript(client: ClientScript): AstScript {
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;

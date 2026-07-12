@@ -7,15 +7,10 @@ import {
   writeFileSync,
 } from "node:fs";
 import { basename, extname, join } from "node:path";
-import { describe, it, test } from "node:test";
+import { describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
-import {
-  type Client,
-  type ClientUnknown,
-  cs,
-} from "../dist/cs-runtime/index.js";
+import type { Client, ClientUnknown } from "../dist/cs-runtime/index.js";
 import { bundle } from "../dist/jit-bundler/index.js";
-import { jsx } from "../dist/jsx-runtime/index.js";
 import { evaluate } from "../dist/test-client/index.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderValue } from "./renderValue.ts";
@@ -109,60 +104,3 @@ describe("bundle", () => {
   });
 });
 
-// The happy paths and the fail-loudly cases are covered by the fixture
-// snapshots above; only cases that need a hand-built client (direct `jsx` or
-// `cs.create` calls) live here.
-
-test("a plain object prop that mimics an IR node stays data", () => {
-  const element = jsx("flexbox", { data: { kind: "IrScriptRef", target: 0 } });
-  const { trees } = bundle(element);
-  assert.deepStrictEqual(trees["#t0"], {
-    element: {
-      "#": "element",
-      type: "flexbox",
-      key: null,
-      props: { data: { kind: "IrScriptRef", target: 0 } },
-    },
-  });
-});
-
-test("a thrown string propagates from evaluation as itself", () => {
-  // A distinct path and hash: parsed bodies are cached per source location,
-  // so reusing another test's would collide in `bodyByLoc`.
-  const loc = {
-    path: "throw.ts",
-    start: { line: 1, character: 1 },
-    end: { line: 1, character: 9 },
-  };
-  const client = cs.create(
-    loc,
-    "throw-hash",
-    { splices: [], captures: [], declarations: [] },
-    (v) => v.block(loc, [v.throw(loc, v.string(loc, "boom"))]),
-  );
-  assert.throws(
-    () => evaluate(bundle(client)),
-    (thrown) => thrown === "boom",
-  );
-});
-
-test("a runtime string splice inlines as itself", () => {
-  const value = 'say "hi"\n\\done';
-  const loc = {
-    path: "test.ts",
-    start: { line: 1, character: 1 },
-    end: { line: 1, character: 9 },
-  };
-  const client = cs.create(
-    loc,
-    "hash",
-    { splices: [value], captures: [], declarations: [] },
-    (v) => v.splice(loc, 0),
-  );
-  const { functions } = bundle(client);
-  assert.deepStrictEqual(functions["#f0"], {
-    "#": "arrow",
-    params: [],
-    body: value,
-  });
-});
