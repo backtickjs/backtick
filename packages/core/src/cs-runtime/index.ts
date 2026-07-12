@@ -10,7 +10,19 @@ export type ClientUnknown =
   | ClientUnknown[]
   | { [key: string]: ClientUnknown };
 
+// Only `cs` mints a `Client` — the tag itself, or `cs.lift` in the virtual
+// code it compiles to. The brand is a module-private symbol, so no structural
+// value can forge one.
+declare const client: unique symbol;
+
 export interface Client<T extends ClientUnknown> {
+  readonly [client]: T;
+}
+
+// The explicit opt-in for reflected host classes: declaring the
+// "@backtickjs/Client" marker makes an instance spliceable, reflected as a
+// plain object of its spliceable members (see `AsObject`).
+export interface ClientObject<T extends ClientUnknown> {
   "@backtickjs/Client": T;
 }
 
@@ -42,6 +54,7 @@ export interface JSXElement {
 export type Spliceable =
   | JSXElement
   | Client<ClientUnknown>
+  | ClientObject<ClientUnknown>
   | null
   | number
   | boolean
@@ -58,6 +71,7 @@ export type AsObject<T> = {
 // Recursively lowers a Spliceable type:
 //   JSXElement       -> UIElement
 //   Client<U>        -> U
+//   ClientObject<U>  -> U
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
@@ -65,11 +79,13 @@ export type Lower<T> = T extends JSXElement
   ? UIElement
   : T extends Client<infer U>
     ? U
-    : T extends (infer Item)[]
-      ? Lower<Item>[]
-      : T extends object
-        ? { [Tk in keyof T]: Lower<T[Tk]> }
-        : T;
+    : T extends ClientObject<infer U>
+      ? U
+      : T extends (infer Item)[]
+        ? Lower<Item>[]
+        : T extends object
+          ? { [Tk in keyof T]: Lower<T[Tk]> }
+          : T;
 
 export interface Metadata {
   splices: Spliceable[];
@@ -170,7 +186,9 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }
 
-export function isClient(value: unknown): value is Client<ClientUnknown> {
+export function isClientObject(
+  value: unknown,
+): value is ClientObject<ClientUnknown> {
   return (
     typeof value === "object" && value !== null && "@backtickjs/Client" in value
   );
@@ -193,7 +211,7 @@ export function isJSXElement(value: unknown): value is JSXElement {
 }
 
 export function spliceableEntries(
-  value: Client<ClientUnknown>,
+  value: ClientObject<ClientUnknown>,
 ): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
   for (const key of objectKeys(value)) {
@@ -208,7 +226,7 @@ export function spliceableEntries(
   return entries;
 }
 
-function objectKeys(value: Client<ClientUnknown>): string[] {
+function objectKeys(value: ClientObject<ClientUnknown>): string[] {
   const keys: string[] = [];
   const seen = new Set<string>();
   let current: object | null = value;
@@ -230,7 +248,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
   }
   if (
     isJSXElement(value) ||
-    isClient(value) ||
+    isClientObject(value) ||
     isClientScript(value) ||
     value === null ||
     typeof value === "number" ||

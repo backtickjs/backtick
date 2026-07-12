@@ -1,5 +1,5 @@
 import {
-  isClient,
+  isClientObject,
   isClientScript,
   isJSXElement,
   type Spliceable,
@@ -16,7 +16,7 @@ export function buildAst(value: Spliceable): Ast {
   if (isJSXElement(value)) {
     return buildJSXElement(value);
   }
-  if (isClient(value)) {
+  if (isClientObject(value)) {
     return buildClassAsObject(value);
   }
   if (value === null) {

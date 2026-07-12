@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
-import type { Client, AsObject } from "@backtickjs/core/cs-runtime";
+import type { AsObject, Client, ClientObject } from "@backtickjs/core/cs-runtime";
 
-class Point implements Client<AsObject<Point>> {
+class Point implements ClientObject<AsObject<Point>> {
   "@backtickjs/Client": AsObject<Point>;
 
   readonly x: Client<number>;
