@@ -1,5 +1,9 @@
 export type { Client } from "./Client.js";
-export { type ClientObject, isClientObject } from "./ClientObject.js";
+export {
+  type AsObject,
+  type ClientObject,
+  isClientObject,
+} from "./ClientObject.js";
 export {
   type ClientScript,
   isClientScript,
@@ -15,7 +19,6 @@ export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export {
-  type AsObject,
   isSpliceable,
   type Lower,
   type Spliceable,

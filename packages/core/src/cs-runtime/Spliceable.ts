@@ -1,5 +1,9 @@
 import type { Client } from "./Client.js";
-import { type ClientObject, isClientObject } from "./ClientObject.js";
+import {
+  type AsObject,
+  type ClientObject,
+  isClientObject,
+} from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
 import { isClientUIElement } from "./ClientUIElement.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
@@ -13,12 +17,6 @@ export type Spliceable =
   | string
   | Spliceable[]
   | { [key: string]: Spliceable };
-
-export type AsObject<T> = {
-  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
-    ? K
-    : never]: Lower<T[K]>;
-};
 
 // Recursively lowers a Spliceable type:
 //   Client<U>        -> U (a `ClientUIElement`'s `UIElement` included)
