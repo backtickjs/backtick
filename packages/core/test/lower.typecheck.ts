@@ -1,13 +1,13 @@
-// Type-level assertions for `Lower` and the explicit `AsObject` marker.
+// Type-level assertions for `Lower` and the `ClientObject` reflection marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
-import type { AsObject, Client, ClientObject, Lower } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject, Lower } from "@backtickjs/core/cs-runtime";
 
 declare function lower<T>(value: T): Lower<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
-class Point implements ClientObject<AsObject<Point>> {
-  "@backtickjs/Client": AsObject<Point>;
+class Point implements ClientObject {
+  "@backtickjs/Client": undefined;
 
   readonly x: Client<number>;
   readonly y: Client<number>;
@@ -30,8 +30,8 @@ class Point implements ClientObject<AsObject<Point>> {
   }
 }
 
-class Segment implements ClientObject<AsObject<Segment>> {
-  "@backtickjs/Client": AsObject<Segment>;
+class Segment implements ClientObject {
+  "@backtickjs/Client": undefined;
 
   readonly from: Point;
   readonly to: Point;

@@ -42,7 +42,7 @@ test("isSpliceable rejects host-only values, including nested ones", () => {
 
 test("spliceableEntries keeps spliceable members, own or inherited", () => {
   class Base {
-    "@backtickjs/Client" = true;
+    "@backtickjs/Client": undefined;
 
     get inherited() {
       return "base";

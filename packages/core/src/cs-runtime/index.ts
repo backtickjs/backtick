@@ -21,9 +21,10 @@ export interface Client<T extends ClientUnknown> {
 
 // The explicit opt-in for reflected host classes: declaring the
 // "@backtickjs/Client" marker makes an instance spliceable, reflected as a
-// plain object of its spliceable members (see `AsObject`).
-export interface ClientObject<T extends ClientUnknown> {
-  "@backtickjs/Client": T;
+// plain object of its spliceable members — `Lower` derives that shape from
+// the class itself (see `AsObject`).
+export interface ClientObject {
+  "@backtickjs/Client": undefined;
 }
 
 export interface ClientScript {
@@ -54,7 +55,7 @@ export interface JSXElement {
 export type Spliceable =
   | JSXElement
   | Client<ClientUnknown>
-  | ClientObject<ClientUnknown>
+  | ClientObject
   | null
   | number
   | boolean
@@ -71,7 +72,7 @@ export type AsObject<T> = {
 // Recursively lowers a Spliceable type:
 //   JSXElement       -> UIElement
 //   Client<U>        -> U
-//   ClientObject<U>  -> U
+//   ClientObject     -> AsObject of the class
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
@@ -79,8 +80,8 @@ export type Lower<T> = T extends JSXElement
   ? UIElement
   : T extends Client<infer U>
     ? U
-    : T extends ClientObject<infer U>
-      ? U
+    : T extends ClientObject
+      ? AsObject<T>
       : T extends (infer Item)[]
         ? Lower<Item>[]
         : T extends object
@@ -186,9 +187,7 @@ export interface Visitor<U> {
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }
 
-export function isClientObject(
-  value: unknown,
-): value is ClientObject<ClientUnknown> {
+export function isClientObject(value: unknown): value is ClientObject {
   return (
     typeof value === "object" && value !== null && "@backtickjs/Client" in value
   );
@@ -210,9 +209,7 @@ export function isJSXElement(value: unknown): value is JSXElement {
   );
 }
 
-export function spliceableEntries(
-  value: ClientObject<ClientUnknown>,
-): [string, Spliceable][] {
+export function spliceableEntries(value: ClientObject): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
   for (const key of objectKeys(value)) {
     if (key === "@backtickjs/Client") {
@@ -226,7 +223,7 @@ export function spliceableEntries(
   return entries;
 }
 
-function objectKeys(value: ClientObject<ClientUnknown>): string[] {
+function objectKeys(value: ClientObject): string[] {
   const keys: string[] = [];
   const seen = new Set<string>();
   let current: object | null = value;
