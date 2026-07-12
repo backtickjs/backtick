@@ -18,25 +18,25 @@ export type Spliceable =
   | Spliceable[]
   | { [key: string]: Spliceable };
 
-// Recursively lowers a Spliceable type:
+// What a spliceable becomes on the client — recursively lowered:
 //   Client<U>        -> U (a `ClientUIElement`'s `UIElement` included)
-//   ClientObject     -> `Lower` of its `lower()` result when the class
+//   ClientObject     -> `Spliced` of its `spliced()` result when the class
 //                       defines the escape hatch (the method returns a
 //                       host-terms spliceable), else AsObject of the class
-//   T[]              -> Lower<T>[]
-//   { k: T }         -> { k: Lower<T> }
+//   T[]              -> Spliced<T>[]
+//   { k: T }         -> { k: Spliced<T> }
 //   primitives       -> unchanged
-export type Lower<T> =
+export type Spliced<T> =
   T extends Client<infer U>
     ? U
     : T extends ClientObject
-      ? T extends { lower(): infer R }
-        ? Lower<R>
+      ? T extends { spliced(): infer R }
+        ? Spliced<R>
         : AsObject<T>
       : T extends (infer Item)[]
-        ? Lower<Item>[]
+        ? Spliced<Item>[]
         : T extends object
-          ? { [Tk in keyof T]: Lower<T[Tk]> }
+          ? { [Tk in keyof T]: Spliced<T[Tk]> }
           : T;
 
 export function isSpliceable(value: unknown): value is Spliceable {

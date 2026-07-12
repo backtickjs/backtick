@@ -14,10 +14,10 @@ export function buildClientObject(value: ClientObject): Ast {
     return shared;
   }
 
-  // The `lower()` escape hatch: the instance splices as the spliceable it
+  // The `spliced()` escape hatch: the instance splices as the spliceable it
   // returns — lowered by the normal rules — instead of being reflected.
-  if (typeof value.lower === "function") {
-    const node = buildAst(value.lower());
+  if (typeof value.spliced === "function") {
+    const node = buildAst(value.spliced());
     nodeByInstance.set(value, node);
     return node;
   }

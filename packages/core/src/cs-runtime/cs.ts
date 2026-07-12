@@ -1,7 +1,7 @@
 import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-import type { Lower, Spliceable } from "./Spliceable.js";
+import type { Spliceable, Spliced } from "./Spliceable.js";
 
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(
@@ -10,7 +10,7 @@ function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   );
 }
 
-function lower<const T extends Spliceable>(_value: T): Lower<T> {
+function lower<const T extends Spliceable>(_value: T): Spliced<T> {
   throw new Error(
     "Don't call `cs.lower` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

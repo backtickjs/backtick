@@ -1,8 +1,8 @@
-// Type-level assertions for `Lower` and the `ClientObject` reflection marker.
+// Type-level assertions for `Spliced` and the `ClientObject` reflection marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
-import type { Client, ClientObject, Lower } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject, Spliced } from "@backtickjs/core/cs-runtime";
 
-declare function lower<T>(value: T): Lower<T>;
+declare function spliced<T>(value: T): Spliced<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -45,7 +45,7 @@ class Segment implements ClientObject {
   }
 }
 
-const point = lower(new Point(clientNumber, clientNumber));
+const point = spliced(new Point(clientNumber, clientNumber));
 
 // Client-typed fields lower to their payload type.
 point.x satisfies number;
@@ -61,7 +61,7 @@ point.scaled;
 // @ts-expect-error — the marker doesn't exist on the client.
 point["@backtickjs"];
 
-const segment = lower(
+const segment = spliced(
   new Segment(
     new Point(clientNumber, clientNumber),
     new Point(clientNumber, clientNumber),
@@ -77,9 +77,9 @@ segment.to.sum() satisfies number;
 segment.label satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
-lower(clientArrow)() satisfies number;
+spliced(clientArrow)() satisfies number;
 
-// `lower()` overrides reflection: the instance lowers to the spliceable it
+// `spliced()` overrides reflection: the instance lowers to the spliceable it
 // returns, itself lowered by the normal rules.
 class Custom implements ClientObject {
   readonly "@backtickjs" = "ClientObject";
@@ -90,12 +90,12 @@ class Custom implements ClientObject {
     this.celsius = celsius;
   }
 
-  lower() {
+  spliced() {
     return { unit: "C", value: this.celsius };
   }
 }
 
-const custom = lower(new Custom(clientNumber));
+const custom = spliced(new Custom(clientNumber));
 custom.value satisfies number;
 custom.unit satisfies string;
 

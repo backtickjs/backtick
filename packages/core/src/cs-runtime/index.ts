@@ -20,7 +20,7 @@ export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export {
   isSpliceable,
-  type Lower,
+  type Spliced,
   type Spliceable,
 } from "./Spliceable.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
