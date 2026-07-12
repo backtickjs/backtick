@@ -25,6 +25,7 @@ import type {
   AstScriptStatement,
   AstScriptString,
   AstScriptThrow,
+  AstScriptTry,
   AstScriptVariableDeclaration,
 } from "./Ast.js";
 
@@ -102,6 +103,15 @@ export class AstBuilder implements Visitor<AstScriptNode> {
 
   throw(loc: SourceLocation, expression: AstScriptExpression): AstScriptThrow {
     return { kind: "AstScriptThrow", loc, expression };
+  }
+
+  try(
+    loc: SourceLocation,
+    block: AstScriptBlock,
+    param: AstScriptIdentifier | null,
+    handler: AstScriptBlock,
+  ): AstScriptTry {
+    return { kind: "AstScriptTry", loc, block, param, handler };
   }
 
   propertyAccess(

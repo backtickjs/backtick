@@ -85,6 +85,13 @@ function buildStatement(
         "#": "throw",
         expression: buildExpression(node.expression, renderSplice, mangle),
       };
+    case "AstScriptTry":
+      return {
+        "#": "try",
+        block: buildBlock(node.block, renderSplice, mangle),
+        param: node.param === null ? null : mangle(node.param.bindingKey),
+        handler: buildBlock(node.handler, renderSplice, mangle),
+      };
     case "AstScriptVariableDeclaration":
       return {
         "#": "declaration",

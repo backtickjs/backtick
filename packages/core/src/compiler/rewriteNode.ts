@@ -183,6 +183,66 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isTryStatement(node)) {
+    if (node.finallyBlock) {
+      state.errors.set(
+        node.finallyBlock,
+        "`finally` isn't supported in a `cs` client script.",
+      );
+      return unsupported();
+    }
+    const clause = node.catchClause;
+    if (!clause) {
+      state.errors.set(
+        node,
+        "A `try` statement must have a `catch` clause in a `cs` client " +
+          "script.",
+      );
+      return unsupported();
+    }
+    const declaration = clause.variableDeclaration;
+    if (declaration && !ts.isIdentifier(declaration.name)) {
+      state.errors.set(
+        declaration,
+        "This catch binding isn't supported in a `cs` client script.",
+      );
+      return unsupported();
+    }
+    const block = rewriteNode(ts, state, node.tryBlock);
+    let param: { virtual: ts.Identifier; runtime: ts.Expression } | null =
+      null;
+    if (declaration && ts.isIdentifier(declaration.name)) {
+      const name = declaration.name;
+      const identifier = ts.factory.createIdentifier(mangle(name.text));
+      state.mappings.set(name, identifier);
+      param = {
+        virtual: identifier,
+        runtime: call(ts, "v", "identifier", [
+          loc(name),
+          ts.factory.createStringLiteral(name.text),
+          ts.factory.createStringLiteral(bindingKey(state, name)),
+        ]),
+      };
+    }
+    const handler = rewriteNode(ts, state, clause.block);
+    return {
+      virtual: ts.factory.createTryStatement(
+        block.virtual as ts.Block,
+        ts.factory.createCatchClause(
+          param?.virtual,
+          handler.virtual as ts.Block,
+        ),
+        undefined,
+      ),
+      runtime: call(ts, "v", "try", [
+        loc(node),
+        block.runtime as ts.Expression,
+        param ? param.runtime : ts.factory.createNull(),
+        handler.runtime as ts.Expression,
+      ]),
+    };
+  }
+
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
@@ -201,7 +261,12 @@ function rewriteNodeImpl(
     }
 
     return {
-      virtual: ts.factory.createIdentifier(mangle(node.text)),
+      // Only a bound identifier is mangled: a free host reference (e.g.
+      // `String`) keeps its name so the virtual code resolves it against the
+      // environment, mirroring the runtime's global-object fallback.
+      virtual: ts.factory.createIdentifier(
+        state.bindings.has(node) ? mangle(node.text) : node.text,
+      ),
       runtime: call(ts, "v", "identifier", [
         loc(node),
         ts.factory.createStringLiteral(node.text),

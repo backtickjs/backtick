@@ -1,0 +1,6 @@
+import { cs } from "@backtickjs/core";
+// A `catch` without a binding: the try node's `param` is null and the
+// handler runs with no new binding in scope.
+export default (() => {
+    return cs.create({ path: "bindingless-catch.ts", start: { line: 5, character: 16 }, end: { line: 11, character: 3 } }, "1cnlnw4", { splices: [], captures: [], declarations: [] }, v => v.block({ path: "bindingless-catch.ts", start: { line: 5, character: 19 }, end: { line: 11, character: 2 } }, [v.try({ path: "bindingless-catch.ts", start: { line: 6, character: 3 }, end: { line: 10, character: 4 } }, v.block({ path: "bindingless-catch.ts", start: { line: 6, character: 7 }, end: { line: 8, character: 4 } }, [v.throw({ path: "bindingless-catch.ts", start: { line: 7, character: 5 }, end: { line: 7, character: 18 } }, v.string({ path: "bindingless-catch.ts", start: { line: 7, character: 11 }, end: { line: 7, character: 17 } }, "boom"))]), null, v.block({ path: "bindingless-catch.ts", start: { line: 8, character: 11 }, end: { line: 10, character: 4 } }, [v.return({ path: "bindingless-catch.ts", start: { line: 9, character: 5 }, end: { line: 9, character: 21 } }, v.string({ path: "bindingless-catch.ts", start: { line: 9, character: 12 }, end: { line: 9, character: 20 } }, "caught"))]))]));
+})();

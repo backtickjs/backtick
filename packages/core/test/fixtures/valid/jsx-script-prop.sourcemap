@@ -1,9 +1,9 @@
-cs.lift(      → cs`
-() =>         → () => 
-__cs_console  → console
-.             → .
-log           → log
-(             → (
-"hi"          → "hi"
-)             → )
-)             → `
+cs.lift(  → cs`
+() =>     → () => 
+console   → console
+.         → .
+log       → log
+(         → (
+"hi"      → "hi"
+)         → )
+)         → `

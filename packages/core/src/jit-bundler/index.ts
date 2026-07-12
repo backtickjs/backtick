@@ -24,6 +24,7 @@ export type {
   BundleStatementNode,
   BundleThrowNode,
   BundleThunk,
+  BundleTryNode,
   BundleTree,
   FunctionLabel,
   TreeLabel,

@@ -1,0 +1,74 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [
+        "String"
+      ],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "message",
+            "expression": "boom"
+          },
+          {
+            "#": "try",
+            "block": {
+              "#": "block",
+              "statements": [
+                {
+                  "#": "throw",
+                  "expression": {
+                    "#": "identifier",
+                    "name": "message"
+                  }
+                }
+              ]
+            },
+            "param": "error",
+            "handler": {
+              "#": "block",
+              "statements": [
+                {
+                  "#": "return",
+                  "expression": {
+                    "#": "binop",
+                    "operator": "+",
+                    "left": "caught ",
+                    "right": {
+                      "#": "call",
+                      "callee": {
+                        "#": "identifier",
+                        "name": "String"
+                      },
+                      "args": [
+                        {
+                          "#": "identifier",
+                          "name": "error"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": [
+      {
+        "#": "global",
+        "name": "String"
+      }
+    ]
+  }
+}

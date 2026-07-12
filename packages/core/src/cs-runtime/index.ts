@@ -147,6 +147,9 @@ export interface Visitor<U> {
   // e.g. throw "message";
   throw(loc: SourceLocation, expression: U): U;
 
+  // e.g. try { ... } catch (e) { ... } — `param` is null for `catch { ... }`
+  try(loc: SourceLocation, block: U, param: U | null, handler: U): U;
+
   // e.g. obj.a
   propertyAccess(loc: SourceLocation, expression: U, name: string): U;
 

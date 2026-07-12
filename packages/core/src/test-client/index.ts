@@ -306,6 +306,19 @@ function executeStatement(
     case "throw": {
       throw evaluateNode(bundle, node.expression, scope);
     }
+    case "try": {
+      try {
+        return executeStatement(bundle, node.block, scope);
+      } catch (thrown) {
+        // The catch binding scopes over the handler only, like an arrow
+        // parameter over its body.
+        const frame: Scope = { parent: scope, bindings: new Map() };
+        if (node.param !== null) {
+          frame.bindings.set(node.param, thrown);
+        }
+        return executeStatement(bundle, node.handler, frame);
+      }
+    }
     default: {
       // Every remaining kind is an expression, evaluated for its effect.
       evaluateNode(bundle, node, scope);

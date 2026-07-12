@@ -37,6 +37,7 @@ export type AstScriptStatement =
   | AstScriptIf
   | AstScriptReturn
   | AstScriptThrow
+  | AstScriptTry
   | AstScriptVariableDeclaration;
 
 // The body of a script or an arrow: a block, or an expression whose value is
@@ -166,6 +167,14 @@ export interface AstScriptThrow {
   readonly kind: "AstScriptThrow";
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
+}
+
+export interface AstScriptTry {
+  readonly kind: "AstScriptTry";
+  readonly loc: SourceLocation;
+  readonly block: AstScriptBlock;
+  readonly param: AstScriptIdentifier | null;
+  readonly handler: AstScriptBlock;
 }
 
 export interface AstScriptVariableDeclaration {

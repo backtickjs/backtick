@@ -126,7 +126,8 @@ export type BundleStatementNode =
   | BundleAssignmentNode
   | BundleIfNode
   | BundleReturnNode
-  | BundleThrowNode;
+  | BundleThrowNode
+  | BundleTryNode;
 
 // The body of an arrow: a block, or an expression whose value is implicitly
 // returned.
@@ -244,4 +245,15 @@ export interface BundleReturnNode {
 export interface BundleThrowNode {
   "#": "throw";
   expression: BundleExpressionNode;
+}
+
+// A try statement: executes `block`; when it throws, binds the thrown value
+// to `param` (null for a bindingless `catch`) and executes `handler`. The
+// binding scopes over the handler only. There is no `finally` — the compiler
+// rejects it.
+export interface BundleTryNode {
+  "#": "try";
+  block: BundleBlockNode;
+  param: string | null;
+  handler: BundleBlockNode;
 }

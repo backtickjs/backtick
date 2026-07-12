@@ -195,6 +195,26 @@ export function resolveBindings(
       if (node.expression) {
         walkExpression(script, node.expression, scopes);
       }
+    } else if (ts.isThrowStatement(node)) {
+      walkExpression(script, node.expression, scopes);
+    } else if (ts.isTryStatement(node)) {
+      walkBlock(script, node.tryBlock, scopes);
+      const clause = node.catchClause;
+      if (clause) {
+        // The catch binding scopes over the handler only, like an arrow
+        // parameter over its body.
+        const scope: Scope = new Map();
+        const declaration = clause.variableDeclaration;
+        if (declaration && ts.isIdentifier(declaration.name)) {
+          const unique = declare(declaration.name.text, script);
+          scope.set(declaration.name.text, unique);
+          bindings.set(declaration.name, unique);
+        }
+        walkBlock(script, clause.block, [...scopes, scope]);
+      }
+      if (node.finallyBlock) {
+        walkBlock(script, node.finallyBlock, scopes);
+      }
     } else if (ts.isExpressionStatement(node)) {
       walkExpression(script, node.expression, scopes);
     }

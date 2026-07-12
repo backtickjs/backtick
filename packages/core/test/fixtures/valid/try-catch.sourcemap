@@ -1,0 +1,27 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_message            → message
+ =                      →  = 
+"boom"                  → "boom"
+;                       → ;
+\n                      → \n  
+try                     → try 
+{\n                     → {\n    
+throw                   → throw 
+__cs_message            → message
+;                       → ;
+\n    }                 → \n  }
+\n    catch (           →  catch (
+__cs_error              → error
+)                       → ) 
+{\n                     → {\n    
+return                  → return 
+"caught "               → "caught "
+ +                      →  + 
+String                  → String
+(                       → (
+__cs_error              → error
+)                       → )
+;                       → ;
+\n    }                 → \n  }
+\n})())                 → \n}`
