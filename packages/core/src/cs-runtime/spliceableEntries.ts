@@ -1,6 +1,6 @@
-import { isClientElement } from "./ClientElement.js";
 import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
+import { isClientUIElement } from "./ClientUIElement.js";
 import type { Spliceable } from "./cs.js";
 
 export function spliceableEntries(value: ClientObject): [string, Spliceable][] {
@@ -22,7 +22,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
     return false;
   }
   if (
-    isClientElement(value) ||
+    isClientUIElement(value) ||
     isClientObject(value) ||
     isClientScript(value) ||
     value === null ||

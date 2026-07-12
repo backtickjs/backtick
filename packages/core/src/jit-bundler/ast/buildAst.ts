@@ -1,7 +1,7 @@
 import {
-  isClientElement,
   isClientObject,
   isClientScript,
+  isClientUIElement,
   type Spliceable,
 } from "../../cs-runtime/index.js";
 import type { Ast } from "./Ast.js";
@@ -13,7 +13,7 @@ export function buildAst(value: Spliceable): Ast {
   if (isClientScript(value)) {
     return buildAstScript(value);
   }
-  if (isClientElement(value)) {
+  if (isClientUIElement(value)) {
     return buildJSXElement(value);
   }
   if (isClientObject(value)) {

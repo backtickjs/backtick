@@ -8,19 +8,19 @@ export interface UIElement {
   readonly [element]: typeof element;
 }
 
-export interface ClientElement extends Client<UIElement> {
-  readonly "@backtickjs": "ClientElement";
+export interface ClientUIElement extends Client<UIElement> {
+  readonly "@backtickjs": "ClientUIElement";
   readonly type: string;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
 }
 
-export function isClientElement(value: unknown): value is ClientElement {
+export function isClientUIElement(value: unknown): value is ClientUIElement {
   return (
     typeof value === "object" &&
     value !== null &&
     "@backtickjs" in value &&
-    value["@backtickjs"] === "ClientElement"
+    value["@backtickjs"] === "ClientUIElement"
   );
 }
 
@@ -28,14 +28,14 @@ export function create(
   type: string,
   props: { [key: string]: unknown },
   key?: string | number,
-): ClientElement {
+): ClientUIElement {
   if (key !== undefined && typeof key !== "string" && typeof key !== "number") {
     throw new Error("Key must be a string or a number");
   }
   return {
-    "@backtickjs": "ClientElement",
+    "@backtickjs": "ClientUIElement",
     type,
     key: key ?? null,
     props,
-  } as unknown as ClientElement;
+  } as unknown as ClientUIElement;
 }
