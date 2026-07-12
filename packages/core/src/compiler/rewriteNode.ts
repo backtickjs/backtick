@@ -170,6 +170,19 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isThrowStatement(node)) {
+    const expression = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createThrowStatement(
+        expression.virtual as ts.Expression,
+      ),
+      runtime: call(ts, "v", "throw", [
+        loc(node),
+        expression.runtime as ts.Expression,
+      ]),
+    };
+  }
+
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
@@ -216,10 +229,6 @@ function rewriteNodeImpl(
 
   if (ts.isCallExpression(node)) {
     const args = node.arguments.map((arg) => rewriteNode(ts, state, arg));
-    const virtualArgs = ts.factory.createArrayLiteralExpression(
-      args.map((arg) => arg.virtual as ts.Expression),
-      false,
-    );
     const runtimeArgs = ts.factory.createArrayLiteralExpression(
       args.map((arg) => arg.runtime as ts.Expression),
       false,
@@ -258,10 +267,11 @@ function rewriteNodeImpl(
 
     const callee = rewriteNode(ts, state, node.expression);
     return {
-      virtual: call(ts, "cs", "call", [
+      virtual: ts.factory.createCallExpression(
         callee.virtual as ts.Expression,
-        virtualArgs,
-      ]),
+        undefined,
+        args.map((arg) => arg.virtual as ts.Expression),
+      ),
       runtime: call(ts, "v", "call", [
         loc(node),
         callee.runtime as ts.Expression,

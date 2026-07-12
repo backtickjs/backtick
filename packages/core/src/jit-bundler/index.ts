@@ -22,6 +22,7 @@ export type {
   BundleReturnNode,
   BundleSlot,
   BundleStatementNode,
+  BundleThrowNode,
   BundleThunk,
   BundleTree,
   FunctionLabel,

@@ -2,9 +2,7 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [
-        "JSON"
-      ],
+      "params": [],
       "body": {
         "taken": {
           "#": "call",
@@ -16,21 +14,8 @@
             },
             "args": [
               {
-                "#": "arrow",
-                "params": [],
-                "body": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f2"
-                  },
-                  "args": [
-                    {
-                      "#": "identifier",
-                      "name": "JSON"
-                    }
-                  ]
-                }
+                "#": "entry",
+                "label": "#f2"
               }
             ]
           },
@@ -48,21 +33,8 @@
             },
             "args": [
               {
-                "#": "arrow",
-                "params": [],
-                "body": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f3"
-                  },
-                  "args": [
-                    {
-                      "#": "identifier",
-                      "name": "JSON"
-                    }
-                  ]
-                }
+                "#": "entry",
+                "label": "#f3"
               }
             ]
           },
@@ -119,41 +91,19 @@
     },
     "#f2": {
       "#": "arrow",
-      "params": [
-        "JSON"
-      ],
-      "body": {
-        "#": "call",
-        "callee": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "JSON"
-          },
-          "name": "parse"
-        },
-        "args": [
-          "[1]"
-        ]
-      }
+      "params": [],
+      "body": "evaluated"
     },
     "#f3": {
       "#": "arrow",
-      "params": [
-        "JSON"
-      ],
+      "params": [],
       "body": {
-        "#": "call",
-        "callee": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "JSON"
-          },
-          "name": "parse"
-        },
-        "args": [
-          "{"
+        "#": "block",
+        "statements": [
+          {
+            "#": "throw",
+            "expression": "the guarded fragment must never evaluate"
+          }
         ]
       }
     }
@@ -162,11 +112,6 @@
   "root": {
     "#": "apply",
     "label": "#f0",
-    "args": [
-      {
-        "#": "global",
-        "name": "JSON"
-      }
-    ]
+    "args": []
   }
 }

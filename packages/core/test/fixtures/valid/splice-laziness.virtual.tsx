@@ -7,7 +7,7 @@ import { cs, type Client } from "@backtickjs/core";
 // reaches its hole, so the broken fragment must never evaluate — passed
 // eagerly (by value instead of by thunk) it would throw before `flag` was
 // even tested.
-function guard(fragment: Client<unknown>): Client<(flag: boolean) => unknown> {
+function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.lift((__cs_flag: boolean) => {
     if (__cs_flag) {
         return cs.lower(fragment);
@@ -16,7 +16,9 @@ function guard(fragment: Client<unknown>): Client<(flag: boolean) => unknown> {
 });
 }
 
-const ok = cs.lift(__cs_JSON.parse("[1]"));
-const broken = cs.lift(__cs_JSON.parse("{"));
+const ok = cs.lift("evaluated");
+const broken = cs.lift((() => {
+    throw "the guarded fragment must never evaluate";
+})());
 
-export default cs.lift({ taken: cs.call(cs.lower(guard(ok)), [true]), skipped: cs.call(cs.lower(guard(broken)), [false]) });
+export default cs.lift({ taken: cs.lower(guard(ok))(true), skipped: cs.lower(guard(broken))(false) });

@@ -7,7 +7,7 @@ import { cs, type Client } from "@backtickjs/core";
 // reaches its hole, so the broken fragment must never evaluate — passed
 // eagerly (by value instead of by thunk) it would throw before `flag` was
 // even tested.
-function guard(fragment: Client<unknown>): Client<(flag: boolean) => unknown> {
+function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs`(flag: boolean) => {
     if (flag) {
       return ${fragment};
@@ -16,8 +16,8 @@ function guard(fragment: Client<unknown>): Client<(flag: boolean) => unknown> {
   }`;
 }
 
-const ok = cs`JSON.parse("[1]")`;
-const broken = cs`JSON.parse("{")`;
+const ok = cs`"evaluated"`;
+const broken = cs`{ throw "the guarded fragment must never evaluate"; }`;
 
 export default cs`({
   taken: ${guard(ok)}(true),

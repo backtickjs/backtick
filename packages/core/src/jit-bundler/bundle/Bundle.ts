@@ -125,7 +125,8 @@ export type BundleStatementNode =
   | BundleDeclarationNode
   | BundleAssignmentNode
   | BundleIfNode
-  | BundleReturnNode;
+  | BundleReturnNode
+  | BundleThrowNode;
 
 // The body of an arrow: a block, or an expression whose value is implicitly
 // returned.
@@ -235,5 +236,12 @@ export interface BundleIfNode {
 // Returns the expression's value from the enclosing arrow.
 export interface BundleReturnNode {
   "#": "return";
+  expression: BundleExpressionNode;
+}
+
+// Throws the expression's value, with JavaScript `throw` semantics: the value
+// is thrown as-is (`throw "message"` throws the string itself).
+export interface BundleThrowNode {
+  "#": "throw";
   expression: BundleExpressionNode;
 }

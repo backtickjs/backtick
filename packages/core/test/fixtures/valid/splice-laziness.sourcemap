@@ -1,59 +1,49 @@
-cs.lift(               → cs`
-(                      → (
-__cs_flag              → flag
-: boolean) => {\n      → : boolean) => {\n    
-if (                   → if (
-__cs_flag              → flag
-)                      → ) 
-{\n                    → {\n      
-return                 → return 
-cs.lower(              → ${
-fragment               → fragment
-)                      → }
-;                      → ;
-\n    }                → \n    }
-\n                     → \n    
-return                 → return 
-"skipped"              → "skipped"
-;                      → ;
-\n}                    → \n  }
-)                      → `
-cs.lift(               → cs`
-__cs_JSON              → JSON
-.                      → .
-parse                  → parse
-(                      → (
-"[1]"                  → "[1]"
-)                      → )
-)                      → `
-cs.lift(               → cs`
-__cs_JSON              → JSON
-.                      → .
-parse                  → parse
-(                      → (
-"{"                    → "{"
-)                      → )
-)                      → `
-cs.lift(               → cs`
-{                      → ({\n  
-taken                  → taken
-:                      → : 
-cs.call(               → 
-cs.lower(              → ${
-guard(ok)              → guard(ok)
-)                      → }
-, [                    → (
-true                   → true
-])                     → )
-,                      → ,\n  
-skipped                → skipped
-:                      → : 
-cs.call(               → 
-cs.lower(              → ${
-guard(broken)          → guard(broken)
-)                      → }
-, [                    → (
-false                  → false
-])                     → )
- }                     → ,\n})
-)                      → `
+cs.lift(                                    → cs`
+(                                           → (
+__cs_flag                                   → flag
+: boolean) => {\n                           → : boolean) => {\n    
+if (                                        → if (
+__cs_flag                                   → flag
+)                                           → ) 
+{\n                                         → {\n      
+return                                      → return 
+cs.lower(                                   → ${
+fragment                                    → fragment
+)                                           → }
+;                                           → ;
+\n    }                                     → \n    }
+\n                                          → \n    
+return                                      → return 
+"skipped"                                   → "skipped"
+;                                           → ;
+\n}                                         → \n  }
+)                                           → `
+cs.lift(                                    → cs`
+"evaluated"                                 → "evaluated"
+)                                           → `
+cs.lift((() => {\n                          → cs`{ 
+throw                                       → throw 
+"the guarded fragment must never evaluate"  → "the guarded fragment must never evaluate"
+;                                           → ;
+\n})())                                     →  }`
+cs.lift(                                    → cs`
+{                                           → ({\n  
+taken                                       → taken
+:                                           → : 
+cs.lower(                                   → ${
+guard(ok)                                   → guard(ok)
+)                                           → }
+(                                           → (
+true                                        → true
+)                                           → )
+,                                           → ,\n  
+skipped                                     → skipped
+:                                           → : 
+cs.lower(                                   → ${
+guard(broken)                               → guard(broken)
+)                                           → }
+(                                           → (
+false                                       → false
+)                                           → )
+ }                                          → ,\n})
+)                                           → `

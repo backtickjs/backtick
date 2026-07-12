@@ -303,6 +303,9 @@ function executeStatement(
         value: evaluateNode(bundle, node.expression, scope),
       };
     }
+    case "throw": {
+      throw evaluateNode(bundle, node.expression, scope);
+    }
     default: {
       // Every remaining kind is an expression, evaluated for its effect.
       evaluateNode(bundle, node, scope);

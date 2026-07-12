@@ -144,6 +144,9 @@ export interface Visitor<U> {
   // e.g. return i;
   return(loc: SourceLocation, expression: U): U;
 
+  // e.g. throw "message";
+  throw(loc: SourceLocation, expression: U): U;
+
   // e.g. obj.a
   propertyAccess(loc: SourceLocation, expression: U, name: string): U;
 

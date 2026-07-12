@@ -126,6 +126,26 @@ test("a plain object prop that mimics an IR node stays data", () => {
   });
 });
 
+test("a thrown string propagates from evaluation as itself", () => {
+  // A distinct path and hash: parsed bodies are cached per source location,
+  // so reusing another test's would collide in `bodyByLoc`.
+  const loc = {
+    path: "throw.ts",
+    start: { line: 1, character: 1 },
+    end: { line: 1, character: 9 },
+  };
+  const client = cs.create(
+    loc,
+    "throw-hash",
+    { splices: [], captures: [], declarations: [] },
+    (v) => v.block(loc, [v.throw(loc, v.string(loc, "boom"))]),
+  );
+  assert.throws(
+    () => evaluate(bundle(client)),
+    (thrown) => thrown === "boom",
+  );
+});
+
 test("a runtime string splice inlines as itself", () => {
   const value = 'say "hi"\n\\done';
   const loc = {

@@ -21,6 +21,7 @@ function scriptBody(node: AstScriptNode): AstScriptBody {
     case "AstScriptAssignment":
     case "AstScriptIf":
     case "AstScriptReturn":
+    case "AstScriptThrow":
     case "AstScriptVariableDeclaration":
       throw new Error(`a ${node.kind} can't be a script's body`);
     default:

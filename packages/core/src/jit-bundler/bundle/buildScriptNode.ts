@@ -80,6 +80,11 @@ function buildStatement(
         "#": "return",
         expression: buildExpression(node.expression, renderSplice, mangle),
       };
+    case "AstScriptThrow":
+      return {
+        "#": "throw",
+        expression: buildExpression(node.expression, renderSplice, mangle),
+      };
     case "AstScriptVariableDeclaration":
       return {
         "#": "declaration",
