@@ -1,0 +1,100 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "pick",
+            "expression": {
+              "#": "arrow",
+              "params": [
+                "c"
+              ],
+              "body": {
+                "#": "binop",
+                "operator": "+",
+                "left": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "c"
+                  },
+                  "name": "r"
+                },
+                "right": 1
+              }
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "call",
+              "callee": {
+                "#": "identifier",
+                "name": "pick"
+              },
+              "args": [
+                {
+                  "r": {
+                    "#": "call",
+                    "callee": {
+                      "#": "entry",
+                      "label": "#f1"
+                    },
+                    "args": []
+                  },
+                  "hex": "#123",
+                  "update": {
+                    "#": "call",
+                    "callee": {
+                      "#": "entry",
+                      "label": "#f2"
+                    },
+                    "args": []
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": 7
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": {
+          "#": "binop",
+          "operator": "+",
+          "left": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "right": 2
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

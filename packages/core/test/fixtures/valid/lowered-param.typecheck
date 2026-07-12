@@ -1,0 +1,3 @@
+24:42-24:54 error TS2365: Operator '+' cannot be applied to types 'Client<number>' and 'number'.
+25:22-25:61 error TS2345: Argument of type 'AsObject<Color>' is not assignable to parameter of type 'Color'.
+    Property '"@backtickjs"' is missing in type 'AsObject<Color>' but required in type 'Color'.
