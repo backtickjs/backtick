@@ -7,7 +7,7 @@ import { buildAst } from "./buildAst.js";
 
 const nodeByInstance = new WeakMap<ClientObject, AstObject>();
 
-export function buildClassAsObject(value: ClientObject): AstObject {
+export function buildClientObject(value: ClientObject): AstObject {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;

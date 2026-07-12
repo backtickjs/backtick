@@ -4,7 +4,7 @@ import { buildAst } from "./buildAst.js";
 
 const nodeByElement = new WeakMap<ClientUIElement, AstElement>();
 
-export function buildJSXElement(value: ClientUIElement): AstElement {
+export function buildClientUIElement(value: ClientUIElement): AstElement {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;

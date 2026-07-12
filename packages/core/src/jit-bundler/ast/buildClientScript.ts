@@ -1,6 +1,6 @@
 import type { ClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
-import type { AstScript, AstScriptBody, AstScriptNode } from "./Ast.js";
+import type { AstScript, AstScriptBody } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { buildAst } from "./buildAst.js";
 
@@ -10,22 +10,6 @@ import { buildAst } from "./buildAst.js";
 // still get their own node (their splices differ).
 const bodyByLoc = new Map<string, AstScriptBody>();
 
-// The compiler only emits a block or an expression as a script's top level;
-// any bare statement reaching here is a malformed visit.
-function scriptBody(node: AstScriptNode): AstScriptBody {
-  switch (node.kind) {
-    case "AstScriptAssignment":
-    case "AstScriptIf":
-    case "AstScriptReturn":
-    case "AstScriptThrow":
-    case "AstScriptTry":
-    case "AstScriptVariableDeclaration":
-      throw new Error(`a ${node.kind} can't be a script's body`);
-    default:
-      return node;
-  }
-}
-
 // The lowered node for each client object, keyed by identity. A script reached
 // through several splice paths (a diamond) is the same object each time, so it
 // lowers once and is shared: the AST stays a DAG instead of fanning out into a
@@ -34,7 +18,7 @@ function scriptBody(node: AstScriptNode): AstScriptBody {
 // keyed weakly so entries vanish with their client objects.
 const nodeByClient = new WeakMap<ClientScript, AstScript>();
 
-export function buildAstScript(client: ClientScript): AstScript {
+export function buildClientScript(client: ClientScript): AstScript {
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;
@@ -43,7 +27,7 @@ export function buildAstScript(client: ClientScript): AstScript {
   const key = locKey(client.fileHash, client.loc);
   let expression = bodyByLoc.get(key);
   if (!expression) {
-    expression = scriptBody(client.visit(new AstBuilder()));
+    expression = client.visit(new AstBuilder()) as AstScriptBody;
     bodyByLoc.set(key, expression);
   }
 

@@ -5,19 +5,19 @@ import {
   type Spliceable,
 } from "../../cs-runtime/index.js";
 import type { Ast } from "./Ast.js";
-import { buildAstScript } from "./buildAstScript.js";
-import { buildClassAsObject } from "./buildClassAsObject.js";
-import { buildJSXElement } from "./buildJSXElement.js";
+import { buildClientObject } from "./buildClientObject.js";
+import { buildClientScript } from "./buildClientScript.js";
+import { buildClientUIElement } from "./buildClientUIElement.js";
 
 export function buildAst(value: Spliceable): Ast {
   if (isClientScript(value)) {
-    return buildAstScript(value);
+    return buildClientScript(value);
   }
   if (isClientUIElement(value)) {
-    return buildJSXElement(value);
+    return buildClientUIElement(value);
   }
   if (isClientObject(value)) {
-    return buildClassAsObject(value);
+    return buildClientObject(value);
   }
   if (value === null) {
     return { kind: "AstNull" };
