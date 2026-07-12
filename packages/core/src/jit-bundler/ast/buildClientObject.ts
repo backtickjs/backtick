@@ -6,12 +6,20 @@ import {
 import type { Ast, AstObject } from "./Ast.js";
 import { buildAst } from "./buildAst.js";
 
-const nodeByInstance = new WeakMap<ClientObject, AstObject>();
+const nodeByInstance = new WeakMap<ClientObject, Ast>();
 
-export function buildClientObject(value: ClientObject): AstObject {
+export function buildClientObject(value: ClientObject): Ast {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;
+  }
+
+  // The `lower()` escape hatch: the instance splices as the spliceable it
+  // returns — lowered by the normal rules — instead of being reflected.
+  if (typeof value.lower === "function") {
+    const node = buildAst(value.lower());
+    nodeByInstance.set(value, node);
+    return node;
   }
 
   const entries: { [key: string]: Ast } = {};

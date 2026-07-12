@@ -1,9 +1,9 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject, Lower } from "@backtickjs/core/cs-runtime";
 
-// A script parameter annotated with a host class type: inside the script the
-// value is the *lowered* shape — `c.r` is a number, not a `Client<number>` —
-// so the returned sum only typechecks if the annotation is lowered too.
+// Annotations pass into the virtual verbatim, so a parameter receiving a
+// spliced instance is written in lowered terms: `Lower<Color>` is the plain
+// object the client sees — `c.r` is a number, not a `Client<number>`.
 class Color implements ClientObject {
   readonly "@backtickjs" = "ClientObject";
 
@@ -21,6 +21,6 @@ class Color implements ClientObject {
 }
 
 export default cs.lift((() => {
-    const __cs_pick = (__cs_c: Color) => __cs_c.r + 1;
+    const __cs_pick = (__cs_c: Lower<Color>) => __cs_c.r + 1;
     return __cs_pick(cs.lower(new Color(cs.lift(7), "#123")));
 })());

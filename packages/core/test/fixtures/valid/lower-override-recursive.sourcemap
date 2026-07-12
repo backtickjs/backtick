@@ -1,0 +1,5 @@
+cs.lift(     → cs`
+cs.lower(    → ${
+new Outer()  → new Outer()
+)            → }
+)            → `

@@ -1,0 +1,12 @@
+cs.lift(          → cs`
+cs.lower(         → ${
+new Temperature(  → new Temperature(
+cs.lift(          → cs`
+21                → 21
+)                 → `
+)                 → )
+)                 → }
+.value            → .value
+ +                →  + 
+1                 → 1
+)                 → `

@@ -21,8 +21,10 @@ export type AsObject<T> = {
 };
 
 // Recursively lowers a Spliceable type:
-//   Client<U>        -> U
-//   ClientObject     -> AsObject of the class
+//   Client<U>        -> U (a `ClientUIElement`'s `UIElement` included)
+//   ClientObject     -> `Lower` of its `lower()` result when the class
+//                       defines the escape hatch (the method returns a
+//                       host-terms spliceable), else AsObject of the class
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
@@ -30,7 +32,9 @@ export type Lower<T> =
   T extends Client<infer U>
     ? U
     : T extends ClientObject
-      ? AsObject<T>
+      ? T extends { lower(): infer R }
+        ? Lower<R>
+        : AsObject<T>
       : T extends (infer Item)[]
         ? Lower<Item>[]
         : T extends object
