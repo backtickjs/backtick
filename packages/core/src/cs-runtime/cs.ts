@@ -1,31 +1,7 @@
 import type { Client } from "./Client.js";
-import type { ClientObject } from "./ClientObject.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-import type { Spliceable } from "./Spliceable.js";
-
-export type AsObject<T> = {
-  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
-    ? K
-    : never]: Lower<T[K]>;
-};
-
-// Recursively lowers a Spliceable type:
-//   Client<U>        -> U
-//   ClientObject     -> AsObject of the class
-//   T[]              -> Lower<T>[]
-//   { k: T }         -> { k: Lower<T> }
-//   primitives       -> unchanged
-export type Lower<T> =
-  T extends Client<infer U>
-    ? U
-    : T extends ClientObject
-      ? AsObject<T>
-      : T extends (infer Item)[]
-        ? Lower<Item>[]
-        : T extends object
-          ? { [Tk in keyof T]: Lower<T[Tk]> }
-          : T;
+import type { Lower, Spliceable } from "./Spliceable.js";
 
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(

@@ -1,10 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import {
-  cs,
-  isSpliceable,
-  spliceableEntries,
-} from "../dist/cs-runtime/index.js";
+import { cs, isSpliceable } from "../dist/cs-runtime/index.js";
+import { buildAst } from "../dist/jit-bundler/index.js";
 
 test("cs`...` throws when used without the compiler", () => {
   assert.throws(() => cs`"Hello World!"`, /was not compiled/);
@@ -40,7 +37,7 @@ test("isSpliceable rejects host-only values, including nested ones", () => {
   assert.equal(isSpliceable({ a: { b: undefined } }), false);
 });
 
-test("spliceableEntries keeps spliceable members, own or inherited", () => {
+test("a reflected instance keeps spliceable members, own or inherited", () => {
   class Base {
     readonly "@backtickjs" = "ClientObject";
 
@@ -66,9 +63,12 @@ test("spliceableEntries keeps spliceable members, own or inherited", () => {
     }
   }
 
-  assert.deepEqual(spliceableEntries(new Derived()), [
-    ["field", 3],
-    ["shadowed", "derived"],
-    ["inherited", "base"],
-  ]);
+  assert.deepEqual(buildAst(new Derived()), {
+    kind: "AstObject",
+    entries: {
+      field: { kind: "AstNumber", value: 3 },
+      shadowed: { kind: "AstString", value: "derived" },
+      inherited: { kind: "AstString", value: "base" },
+    },
+  });
 });
