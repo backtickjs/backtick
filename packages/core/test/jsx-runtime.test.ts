@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { isJSXElement } from "../dist/cs-runtime/index.js";
+import { isClientElement } from "../dist/cs-runtime/index.js";
 import { jsx, jsxs } from "../dist/jsx-runtime/index.js";
 
 test("jsx builds a flexbox element", () => {
   const element = jsx("flexbox", { direction: "row" });
-  assert.ok(isJSXElement(element));
+  assert.ok(isClientElement(element));
   assert.equal(element.type, "flexbox");
   assert.equal(element.key, null);
   assert.deepEqual(element.props, { direction: "row" });

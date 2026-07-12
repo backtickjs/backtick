@@ -1,4 +1,4 @@
-import type { UIElement } from "./JSXElement.js";
+import type { UIElement } from "./ClientElement.ts";
 
 export type ClientUnknown =
   | UIElement

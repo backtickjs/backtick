@@ -1,10 +1,10 @@
-import { isSpliceable, type JSXElement } from "../../cs-runtime/index.js";
+import { type ClientElement, isSpliceable } from "../../cs-runtime/index.js";
 import type { Ast, AstElement } from "./Ast.js";
 import { buildAst } from "./buildAst.js";
 
-const nodeByElement = new WeakMap<JSXElement, AstElement>();
+const nodeByElement = new WeakMap<ClientElement, AstElement>();
 
-export function buildJSXElement(value: JSXElement): AstElement {
+export function buildJSXElement(value: ClientElement): AstElement {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;

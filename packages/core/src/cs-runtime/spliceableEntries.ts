@@ -1,7 +1,7 @@
+import { isClientElement } from "./ClientElement.js";
 import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
 import type { Spliceable } from "./cs.js";
-import { isJSXElement } from "./JSXElement.js";
 
 export function spliceableEntries(value: ClientObject): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
@@ -22,7 +22,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
     return false;
   }
   if (
-    isJSXElement(value) ||
+    isClientElement(value) ||
     isClientObject(value) ||
     isClientScript(value) ||
     value === null ||

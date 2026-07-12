@@ -2,10 +2,8 @@ import type { Client } from "./Client.js";
 import type { ClientObject } from "./ClientObject.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-import type { JSXElement, UIElement } from "./JSXElement.js";
 
 export type Spliceable =
-  | JSXElement
   | Client<ClientUnknown>
   | ClientObject
   | null
@@ -22,15 +20,13 @@ export type AsObject<T> = {
 };
 
 // Recursively lowers a Spliceable type:
-//   JSXElement       -> UIElement
 //   Client<U>        -> U
 //   ClientObject     -> AsObject of the class
 //   T[]              -> Lower<T>[]
 //   { k: T }         -> { k: Lower<T> }
 //   primitives       -> unchanged
-export type Lower<T> = T extends JSXElement
-  ? UIElement
-  : T extends Client<infer U>
+export type Lower<T> =
+  T extends Client<infer U>
     ? U
     : T extends ClientObject
       ? AsObject<T>
