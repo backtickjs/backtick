@@ -1,4 +1,5 @@
 import type { JSXElement, Prop } from "../cs-runtime/index.js";
+import { create } from "../cs-runtime/JSXElement.js";
 
 export declare namespace JSX {
   export type Element = JSXElement;
@@ -21,15 +22,7 @@ export function jsx(
   props: { [key: string]: unknown },
   key?: string | number,
 ): JSXElement {
-  if (key !== undefined && typeof key !== "string" && typeof key !== "number") {
-    throw new Error("Key must be a string or a number");
-  }
-  return {
-    "@backtickjs": "JSXElement",
-    type,
-    key: key ?? null,
-    props,
-  };
+  return create(type, props, key);
 }
 
 export const jsxs = jsx;

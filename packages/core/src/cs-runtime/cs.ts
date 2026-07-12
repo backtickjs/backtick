@@ -1,9 +1,44 @@
 import type { Client } from "./Client.js";
-import type { ClientScript, Metadata } from "./ClientScript.js";
+import type { ClientObject } from "./ClientObject.js";
+import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-import type { SourceLocation } from "./SourceLocation.js";
-import type { Lower, Spliceable } from "./Spliceable.js";
-import type { Visitor } from "./Visitor.js";
+import type { JSXElement, UIElement } from "./JSXElement.js";
+
+export type Spliceable =
+  | JSXElement
+  | Client<ClientUnknown>
+  | ClientObject
+  | null
+  | number
+  | boolean
+  | string
+  | Spliceable[]
+  | { [key: string]: Spliceable };
+
+export type AsObject<T> = {
+  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
+    ? K
+    : never]: Lower<T[K]>;
+};
+
+// Recursively lowers a Spliceable type:
+//   JSXElement       -> UIElement
+//   Client<U>        -> U
+//   ClientObject     -> AsObject of the class
+//   T[]              -> Lower<T>[]
+//   { k: T }         -> { k: Lower<T> }
+//   primitives       -> unchanged
+export type Lower<T> = T extends JSXElement
+  ? UIElement
+  : T extends Client<infer U>
+    ? U
+    : T extends ClientObject
+      ? AsObject<T>
+      : T extends (infer Item)[]
+        ? Lower<Item>[]
+        : T extends object
+          ? { [Tk in keyof T]: Lower<T[Tk]> }
+          : T;
 
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(
@@ -17,21 +52,6 @@ function lower<const T extends Spliceable>(_value: T): Lower<T> {
     "Don't call `cs.lower` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
-}
-
-function create(
-  loc: SourceLocation,
-  fileHash: string,
-  metadata: Metadata,
-  visit: <U>(visitor: Visitor<U>) => U,
-): ClientScript {
-  return {
-    "@backtickjs": "ClientScript",
-    loc,
-    fileHash,
-    metadata,
-    visit,
-  };
 }
 
 export const cs = Object.assign(

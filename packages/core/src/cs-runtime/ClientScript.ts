@@ -1,5 +1,5 @@
+import type { Spliceable } from "./cs.js";
 import type { SourceLocation } from "./SourceLocation.js";
-import type { Spliceable } from "./Spliceable.js";
 import type { Visitor } from "./Visitor.js";
 
 export interface Metadata {
@@ -25,4 +25,19 @@ export function isClientScript(value: unknown): value is ClientScript {
     "@backtickjs" in value &&
     value["@backtickjs"] === "ClientScript"
   );
+}
+
+export function create(
+  loc: SourceLocation,
+  fileHash: string,
+  metadata: Metadata,
+  visit: <U>(visitor: Visitor<U>) => U,
+): ClientScript {
+  return {
+    "@backtickjs": "ClientScript",
+    loc,
+    fileHash,
+    metadata,
+    visit,
+  };
 }

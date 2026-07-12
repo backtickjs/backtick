@@ -23,3 +23,19 @@ export function isJSXElement(value: unknown): value is JSXElement {
     value["@backtickjs"] === "JSXElement"
   );
 }
+
+export function create(
+  type: string,
+  props: { [key: string]: unknown },
+  key?: string | number,
+): JSXElement {
+  if (key !== undefined && typeof key !== "string" && typeof key !== "number") {
+    throw new Error("Key must be a string or a number");
+  }
+  return {
+    "@backtickjs": "JSXElement",
+    type,
+    key: key ?? null,
+    props,
+  };
+}
