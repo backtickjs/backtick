@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import type { SourceRange } from "../cs-runtime/index.js";
+import type { SourceRange } from "./SourceRange.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { flattenScripts } from "./flattenScripts.js";
 import { hashText } from "./hashText.js";

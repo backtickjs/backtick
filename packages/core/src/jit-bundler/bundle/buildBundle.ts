@@ -329,9 +329,7 @@ export function buildBundle(ir: Ir): Bundle {
         // A plain data object passes through, exactly as in `renderExpr`, so
         // it can't carry `#` — the bundle's one reserved key.
         if ("#" in value.entries) {
-          throw new Error(
-            "Can't bundle this object: the `#` key is reserved.",
-          );
+          throw new Error("Can't bundle this object: the `#` key is reserved.");
         }
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {

@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import type { SourceRange } from "../cs-runtime/index.js";
+import type { SourceRange } from "./SourceRange.js";
 
 // A boundary discovered in the printed virtual code: the start/end of a mapped
 // node, or a `$0splice<n>` placeholder. Positions are offsets into the

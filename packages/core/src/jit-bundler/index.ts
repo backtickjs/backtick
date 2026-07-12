@@ -24,8 +24,8 @@ export type {
   BundleStatementNode,
   BundleThrowNode,
   BundleThunk,
-  BundleTryNode,
   BundleTree,
+  BundleTryNode,
   FunctionLabel,
   TreeLabel,
 } from "./bundle/Bundle.js";

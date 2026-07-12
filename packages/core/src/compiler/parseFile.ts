@@ -1,5 +1,6 @@
 import type ts from "typescript";
-import type { SourceLocation, SourceRange } from "../cs-runtime/index.js";
+import type { SourceLocation } from "../cs-runtime/index.js";
+import type { SourceRange } from "./SourceRange.js";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;

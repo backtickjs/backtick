@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import type { SourceRange } from "../cs-runtime/index.js";
+import type { SourceRange } from "./SourceRange.js";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
 import { printMarkedNode, scanMarkers } from "./markers.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";

@@ -1,5 +1,5 @@
 import type { DiagnosticCategory } from "typescript";
-import type { SourceRange } from "../cs-runtime/index.js";
+import type { SourceRange } from "./SourceRange.js";
 
 export interface Diagnostic {
   range: SourceRange;

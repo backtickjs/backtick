@@ -209,8 +209,7 @@ function rewriteNodeImpl(
       return unsupported();
     }
     const block = rewriteNode(ts, state, node.tryBlock);
-    let param: { virtual: ts.Identifier; runtime: ts.Expression } | null =
-      null;
+    let param: { virtual: ts.Identifier; runtime: ts.Expression } | null = null;
     if (declaration && ts.isIdentifier(declaration.name)) {
       const name = declaration.name;
       const identifier = ts.factory.createIdentifier(mangle(name.text));
