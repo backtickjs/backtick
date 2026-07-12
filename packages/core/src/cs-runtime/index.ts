@@ -12,7 +12,8 @@ export {
   type UIElement,
 } from "./ClientUIElement.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
-export { type AsObject, cs, type Lower, type Spliceable } from "./cs.js";
+export { type AsObject, cs, type Lower } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
-export { isSpliceable, spliceableEntries } from "./spliceableEntries.js";
+export { isSpliceable, type Spliceable } from "./Spliceable.js";
+export { spliceableEntries } from "./spliceableEntries.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";

@@ -2,16 +2,7 @@ import type { Client } from "./Client.js";
 import type { ClientObject } from "./ClientObject.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-
-export type Spliceable =
-  | Client<ClientUnknown>
-  | ClientObject
-  | null
-  | number
-  | boolean
-  | string
-  | Spliceable[]
-  | { [key: string]: Spliceable };
+import type { Spliceable } from "./Spliceable.js";
 
 export type AsObject<T> = {
   [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable

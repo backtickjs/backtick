@@ -1,5 +1,5 @@
-import type { Spliceable } from "./cs.js";
 import type { SourceLocation } from "./SourceLocation.js";
+import type { Spliceable } from "./Spliceable.js";
 import type { Visitor } from "./Visitor.js";
 
 export interface Metadata {

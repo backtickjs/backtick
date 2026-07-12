@@ -1,7 +1,5 @@
-import { type ClientObject, isClientObject } from "./ClientObject.js";
-import { isClientScript } from "./ClientScript.js";
-import { isClientUIElement } from "./ClientUIElement.js";
-import type { Spliceable } from "./cs.js";
+import type { ClientObject } from "./ClientObject.js";
+import { isSpliceable, type Spliceable } from "./Spliceable.js";
 
 export function spliceableEntries(value: ClientObject): [string, Spliceable][] {
   const entries: [string, Spliceable][] = [];
@@ -15,31 +13,6 @@ export function spliceableEntries(value: ClientObject): [string, Spliceable][] {
     }
   }
   return entries;
-}
-
-export function isSpliceable(value: unknown): value is Spliceable {
-  if (value === undefined) {
-    return false;
-  }
-  if (
-    isClientUIElement(value) ||
-    isClientObject(value) ||
-    isClientScript(value) ||
-    value === null ||
-    typeof value === "number" ||
-    typeof value === "boolean" ||
-    typeof value === "string"
-  ) {
-    return true;
-  }
-  if (Array.isArray(value)) {
-    return value.every(isSpliceable);
-  }
-  const prototype = Object.getPrototypeOf(value);
-  return (
-    (prototype === Object.prototype || prototype === null) &&
-    Object.values(value).every(isSpliceable)
-  );
 }
 
 function objectKeys(value: ClientObject): string[] {
