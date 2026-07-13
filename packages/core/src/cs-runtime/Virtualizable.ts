@@ -18,9 +18,13 @@ export type Virtualized<T> =
     ? U
     : T extends ClientObject
       ? {
-          [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Virtualizable
-            ? K
-            : never]: Virtualized<T[K]>;
+          // Keep the constraint homomorphic (`keyof T`, filtering in `as`) so
+          // properties stay linked to their declarations for go-to-definition.
+          [K in keyof T as K extends "@backtickjs"
+            ? never
+            : T[K] extends Virtualizable
+              ? K
+              : never]: Virtualized<T[K]>;
         }
       : T extends (...args: never[]) => unknown
         ? T
