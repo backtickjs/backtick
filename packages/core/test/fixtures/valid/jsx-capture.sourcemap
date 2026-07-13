@@ -7,7 +7,7 @@ __cs_x              → x
 ;                   → ;
 \n                  → \n  
 return              → return 
-cs.lower(           → ${
+cs.splice(          → ${
 (<button onClick={  → (<button onClick={
 cs.lift(            → cs`
 () =>               → () => 

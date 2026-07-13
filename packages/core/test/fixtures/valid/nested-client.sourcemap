@@ -1,10 +1,10 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.lower(               → ${
+cs.splice(              → ${
 this.x                  → this.x
 )                       → }
  +                      →  + 
-cs.lower(               → ${
+cs.splice(              → ${
 this.y                  → this.y
 )                       → }
 )                       → `
@@ -17,7 +17,7 @@ __cs_arg0               → arg0
 : Point,                → : Point, 
 __cs_arg1               → arg1
 : Point) =>             → : Point) => 
-cs.lower(               → ${
+cs.splice(              → ${
 new Segment(            → new Segment(
 cs.lift(                → cs`
 __cs_arg0               → arg0
@@ -33,10 +33,10 @@ __cs_arg1               → arg1
 const                   → const 
 __cs_s                  → s
  =                      →  = 
-cs.lower(               → ${
+cs.splice(              → ${
 new Segment(            → new Segment(
 cs.lift(                → cs`
-cs.lower(               → ${
+cs.splice(              → ${
 new Point(              → new Point(
 cs.lift(                → cs`
 1                       → 1
@@ -50,7 +50,7 @@ cs.lift(                → cs`
 )                       → `
 ,                       → , 
 cs.lift(                → cs`
-cs.lower(               → ${
+cs.splice(              → ${
 new Point(              → new Point(
 cs.lift(                → cs`
 3                       → 3

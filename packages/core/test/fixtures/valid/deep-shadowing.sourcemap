@@ -6,7 +6,7 @@ __cs_base               → base
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.lower(               → ${
+cs.splice(              → ${
 outer(                  → outer(
 cs.lift(                → cs`
 __cs_base               → base
@@ -25,7 +25,7 @@ __cs_base               → base
 return                  → return 
 __cs_base               → base
  +                      →  + 
-cs.lower(               → ${
+cs.splice(              → ${
 middle(inner)           → middle(inner)
 )                       → }
 ;                       → ;
@@ -40,7 +40,7 @@ __cs_base               → base
 return                  → return 
 __cs_base               → base
  *                      →  * 
-cs.lower(               → ${
+cs.splice(              → ${
 inner                   → inner
 )                       → }
 ;                       → ;

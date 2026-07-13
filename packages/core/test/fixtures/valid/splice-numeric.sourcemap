@@ -1,5 +1,5 @@
-cs.lift(   → cs`
-cs.lower(  → ${
-1          → 1
-)          → }
-)          → `
+cs.lift(    → cs`
+cs.splice(  → ${
+1           → 1
+)           → }
+)           → `

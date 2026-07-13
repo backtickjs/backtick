@@ -7,7 +7,7 @@ __cs_flag                                   → flag
 )                                           → ) 
 {\n                                         → {\n      
 return                                      → return 
-cs.lower(                                   → ${
+cs.splice(                                  → ${
 fragment                                    → fragment
 )                                           → }
 ;                                           → ;
@@ -30,7 +30,7 @@ cs.lift(                                    → cs`
 {                                           → ({\n  
 taken                                       → taken
 :                                           → : 
-cs.lower(                                   → ${
+cs.splice(                                  → ${
 guard(ok)                                   → guard(ok)
 )                                           → }
 (                                           → (
@@ -39,7 +39,7 @@ true                                        → true
 ,                                           → ,\n  
 skipped                                     → skipped
 :                                           → : 
-cs.lower(                                   → ${
+cs.splice(                                  → ${
 guard(broken)                               → guard(broken)
 )                                           → }
 (                                           → (

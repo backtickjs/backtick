@@ -1,20 +1,20 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.lower(               → ${
+cs.splice(              → ${
 this.x                  → this.x
 )                       → }
  +                      →  + 
-cs.lower(               → ${
+cs.splice(              → ${
 this.y                  → this.y
 )                       → }
 )                       → `
 cs.lift(                → cs`
 () =>                   → () => 
-cs.lower(               → ${
+cs.splice(              → ${
 this.from.x             → this.from.x
 )                       → }
  ===                    →  === 
-cs.lower(               → ${
+cs.splice(              → ${
 this.to.x               → this.to.x
 )                       → }
 )                       → `
@@ -34,7 +34,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_s                  → s
  =                      →  = 
-cs.lower(               → ${
+cs.splice(              → ${
 segment                 → segment
 )                       → }
 ;                       → ;

@@ -1,18 +1,18 @@
-cs.lift(   → cs`
-7          → 7
-)          → `
-cs.lift(   → cs`
-{          → ({ 
-a          → a
-:          → : 
-cs.lower(  → ${
-leaf       → leaf
-)          → }
-,          → , 
-b          → b
-:          → : 
-cs.lower(  → ${
-leaf       → leaf
-)          → }
- }         →  })
-)          → `
+cs.lift(    → cs`
+7           → 7
+)           → `
+cs.lift(    → cs`
+{           → ({ 
+a           → a
+:           → : 
+cs.splice(  → ${
+leaf        → leaf
+)           → }
+,           → , 
+b           → b
+:           → : 
+cs.splice(  → ${
+leaf        → leaf
+)           → }
+ }          →  })
+)           → `

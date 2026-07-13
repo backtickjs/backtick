@@ -11,9 +11,9 @@ function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   );
 }
 
-function lower<const T extends Spliceable>(_value: T): Spliced<T> {
+function splice<const T extends Spliceable>(_value: T): Spliced<T> {
   throw new Error(
-    "Don't call `cs.lower` directly; it's used to generate virtual " +
+    "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -39,5 +39,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  { lift, lower, virtualize, create },
+  { lift, splice, virtualize, create },
 );

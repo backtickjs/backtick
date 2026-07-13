@@ -249,7 +249,7 @@ function rewriteNodeImpl(
       // host expression's verbatim source text (mapped 1:1), recursing into any
       // nested `cs` scripts it contains.
       return {
-        virtual: call(ts, "cs", "lower", [
+        virtual: call(ts, "cs", "splice", [
           ts.factory.createIdentifier(node.text),
         ]),
         runtime: call(ts, "v", "splice", [

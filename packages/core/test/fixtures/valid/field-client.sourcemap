@@ -2,7 +2,7 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_c                  → c
  =                      →  = 
-cs.lower(               → ${
+cs.splice(              → ${
 new Color(              → new Color(
 cs.lift(                → cs`
 30                      → 30

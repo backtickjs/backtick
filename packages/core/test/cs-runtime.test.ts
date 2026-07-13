@@ -11,8 +11,8 @@ test("cs.lift throws when called directly", () => {
   assert.throws(() => cs.lift("Hello World!"), /Don't call `cs\.lift`/);
 });
 
-test("cs.lower throws when called directly", () => {
-  assert.throws(() => cs.lower("Hello World!"), /Don't call `cs\.lower`/);
+test("cs.splice throws when called directly", () => {
+  assert.throws(() => cs.splice("Hello World!"), /Don't call `cs\.splice`/);
 });
 
 test("isSpliceable accepts primitives, clients, and containers of them", () => {

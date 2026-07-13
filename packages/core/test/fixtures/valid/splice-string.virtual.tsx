@@ -4,4 +4,4 @@ import { cs } from "@backtickjs/core";
 // backslashes intact.
 const value = 'say "hi"\n\\done';
 
-export default cs.lift(cs.lower(value));
+export default cs.lift(cs.splice(value));

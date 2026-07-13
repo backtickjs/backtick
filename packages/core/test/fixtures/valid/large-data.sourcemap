@@ -1,6 +1,6 @@
 cs.lift(                     → cs`
 () =>                        → () => 
-cs.lower(                    → ${
+cs.splice(                   → ${
 { orders, currency: "CAD" }  → { orders, currency: "CAD" }
 )                            → }
 )                            → `

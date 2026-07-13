@@ -2,13 +2,13 @@ cs.lift(                → cs`
 {                       → ({ 
 list                    → list
 :                       → : 
-cs.lower(               → ${
+cs.splice(              → ${
 [1, "two", true, null]  → [1, "two", true, null]
 )                       → }
 ,                       → , 
 obj                     → obj
 :                       → : 
-cs.lower(               → ${
+cs.splice(              → ${
 { k: 3 }                → { k: 3 }
 )                       → }
  }                      →  })

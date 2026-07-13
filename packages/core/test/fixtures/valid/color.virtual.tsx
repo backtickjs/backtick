@@ -8,6 +8,6 @@ const color = cs.lift((() => {
 })());
 
 export default cs.lift((() => {
-    const __cs_c = cs.lower(color);
-    return cs.lower(cs.lift(cs.virtualize(__cs_c).brightness()));
+    const __cs_c = cs.splice(color);
+    return cs.splice(cs.lift(cs.virtualize(__cs_c).brightness()));
 })());

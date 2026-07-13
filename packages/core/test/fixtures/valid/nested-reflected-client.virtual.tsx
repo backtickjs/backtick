@@ -13,7 +13,7 @@ class Point implements ClientObject {
   }
 
   get sum() {
-    return cs.lift(() => cs.lower(this.x) + cs.lower(this.y));
+    return cs.lift(() => cs.splice(this.x) + cs.splice(this.y));
   }
 }
 
@@ -29,14 +29,14 @@ class Segment implements ClientObject {
   }
 
   get vertical() {
-    return cs.lift(() => cs.lower(this.from.x) === cs.lower(this.to.x));
+    return cs.lift(() => cs.splice(this.from.x) === cs.splice(this.to.x));
   }
 }
 
 const segment = new Segment(new Point(cs.lift(1), cs.lift(2)), new Point(cs.lift(1), cs.lift(8)));
 
 export default cs.lift((() => {
-    const __cs_s = cs.lower(segment);
+    const __cs_s = cs.splice(segment);
     const __cs_rise = cs.virtualize(cs.virtualize(__cs_s).to).y - cs.virtualize(cs.virtualize(__cs_s).from).y;
     if (cs.virtualize(__cs_s).vertical()) {
         return __cs_rise;

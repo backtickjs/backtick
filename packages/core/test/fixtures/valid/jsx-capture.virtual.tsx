@@ -7,6 +7,6 @@ import type { Client, UIElement } from "@backtickjs/core/cs-runtime";
 // handler with `#slot`.
 const script: Client<() => UIElement> = cs.lift(() => {
     const __cs_x = 1;
-    return cs.lower((<button onClick={cs.lift(() => __cs_x)} />));
+    return cs.splice((<button onClick={cs.lift(() => __cs_x)} />));
 });
 export default script;
