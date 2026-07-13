@@ -14,7 +14,7 @@ export type Spliceable =
   | Spliceable[]
   | { [key: string]: Spliceable };
 
-// What a spliceable becomes on the client — recursively lowered:
+// What a spliceable becomes on the client:
 //   Client<U>                 -> U
 //   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]

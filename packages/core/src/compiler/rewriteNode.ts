@@ -278,7 +278,7 @@ function rewriteNodeImpl(
     const name = node.name.text;
 
     const expression = rewriteNode(ts, state, node.expression);
-    // Member access is virtualized: the receiver is viewed as `Virtualize<T>`
+    // Member access is virtualized: the receiver is viewed as `Virtualized<T>`
     // via `cs.virtualize`, so a host-typed receiver's members read as what
     // the client receives, while the access itself stays a real property
     // access (hover, rename, and completions on the name keep working).

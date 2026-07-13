@@ -5,11 +5,12 @@ import type {
   ClientObject,
   Spliceable,
   Spliced,
-  Virtualize,
+  Virtualizable,
+  Virtualized,
 } from "@backtickjs/core/cs-runtime";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
-declare function virtualize<T>(value: T): Virtualize<T>;
+declare function virtualize<T extends Virtualizable>(value: T): Virtualized<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -62,13 +63,15 @@ point satisfies Point;
 virtualize(point).x satisfies number;
 virtualize(point).sum() satisfies number;
 
-// The view doesn't filter members: host-only members keep their host types
-// (they aren't shipped at runtime — reflection only carries spliceable
-// members — so using them fails at bundle time, not in the typechecker),
-// and the marker stays visible.
-virtualize(point).reflectsNothing satisfies undefined;
+// The view filters a `ClientObject`'s members to the virtualizable ones,
+// like reflection does at bundle time — with one structural limit: a bare
+// function member is indistinguishable from a client callable, so a
+// host-only method stays visible and misusing it fails at bundle time.
+// @ts-expect-error — a getter reflecting no data doesn't exist on the client.
+virtualize(point).reflectsNothing;
 virtualize(point).scaled satisfies (factor: number) => Point;
-virtualize(point)["@backtickjs"] satisfies "ClientObject";
+// @ts-expect-error — the marker doesn't exist on the client.
+virtualize(point)["@backtickjs"];
 
 const segment = spliced(
   new Segment(
@@ -78,8 +81,9 @@ const segment = spliced(
   ),
 );
 
-// Nested client objects stay nominal and virtualize per access.
-virtualize(segment).from satisfies Point;
+// A `ClientObject` member virtualizes eagerly — the view is already
+// usable — and re-virtualizing through a chained access is idempotent.
+virtualize(segment).from.x satisfies number;
 virtualize(virtualize(segment).from).x satisfies number;
 virtualize(virtualize(segment).to).sum() satisfies number;
 
@@ -88,3 +92,14 @@ virtualize(segment).label satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;
+
+// Member access on a free host reference is outside `Virtualizable`: a
+// script may call a host global but not reach into one.
+// @ts-expect-error — `console` is a host interface, not a client value.
+virtualize(console);
+
+// An array of fragments virtualizes element-wise: the view is `number[]`,
+// so array members like `length` read normally.
+declare const clientNumbers: Client<number>[];
+virtualize(clientNumbers) satisfies number[];
+virtualize(clientNumbers).length satisfies number;

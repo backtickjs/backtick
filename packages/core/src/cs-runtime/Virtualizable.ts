@@ -1,14 +1,33 @@
 import type { Client } from "./Client.js";
+import type { ClientObject } from "./ClientObject.js";
+import type { ClientUnknown } from "./ClientUnknown.js";
 
-// The member-access view: what `cs.virtualize` wraps a `.` receiver in.
-// A `Client`-typed member unwraps to its payload — `point.x` reads as
-// `number` even though the field is declared `Client<number>` — and every
-// other member stays as declared, so free host references (`console.log`)
-// and primitive receivers (`greeting.concat`) keep their real surface. A
-// `Client`-typed receiver unwraps first, then virtualizes.
-export type Virtualize<T> =
+export type Virtualizable =
+  | Client<ClientUnknown>
+  | ClientObject
+  | null
+  | number
+  | boolean
+  | string
+  | ((...args: never[]) => ClientUnknown)
+  | Virtualizable[]
+  | { [key: string]: Virtualizable };
+
+export type VirtualizedClientObject<T extends ClientObject> = {
+  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Virtualizable
+    ? K
+    : never]: Virtualized<T[K]>;
+};
+
+export type Virtualized<T> =
   T extends Client<infer U>
-    ? Virtualize<U>
-    : T extends object
-      ? { [K in keyof T]: T[K] extends Client<infer U> ? U : T[K] }
-      : T;
+    ? U
+    : T extends ClientObject
+      ? VirtualizedClientObject<T>
+      : T extends (...args: never[]) => unknown
+        ? T
+        : T extends (infer Item)[]
+          ? Virtualized<Item>[]
+          : T extends object
+            ? { [K in keyof T]: Virtualized<T[K]> }
+            : T;
