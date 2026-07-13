@@ -1,9 +1,5 @@
 import type { Client } from "./Client.js";
-import {
-  type AsObject,
-  type ClientObject,
-  isClientObject,
-} from "./ClientObject.js";
+import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
 import { isClientUIElement } from "./ClientUIElement.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
@@ -20,24 +16,19 @@ export type Spliceable =
 
 // What a spliceable becomes on the client — recursively lowered:
 //   Client<U>                 -> U
-//   T implements ClientObject -> AsObject<T>: the plain object of the
-//                                instance's spliceable members, lowered
+//   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
-export type Spliced<T extends Spliceable> =
+export type Spliced<T> =
   T extends Client<infer U>
     ? U
     : T extends ClientObject
-      ? AsObject<T>
-      : T extends (infer Item extends Spliceable)[]
+      ? T
+      : T extends (infer Item)[]
         ? Spliced<Item>[]
         : T extends object
-          ? {
-              [Tk in keyof T]: T[Tk] extends infer V extends Spliceable
-                ? Spliced<V>
-                : never;
-            }
+          ? { [K in keyof T]: Spliced<T[K]> }
           : T;
 
 export function isSpliceable(value: unknown): value is Spliceable {
