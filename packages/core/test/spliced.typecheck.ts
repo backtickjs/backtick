@@ -5,9 +5,11 @@ import type {
   ClientObject,
   Spliceable,
   Spliced,
+  Virtualize,
 } from "@backtickjs/core/cs-runtime";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
+declare function virtualize<T>(value: T): Virtualize<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -52,19 +54,21 @@ class Segment implements ClientObject {
 
 const point = spliced(new Point(clientNumber, clientNumber));
 
-// Client-typed fields lower to their payload type.
-point.x satisfies number;
-// Getter scripts lower to callable members.
-point.sum() satisfies number;
+// A spliced instance keeps its nominal type — hovers and errors say `Point`.
+point satisfies Point;
 
-// @ts-expect-error — a getter reflecting no data doesn't exist on the client.
-point.reflectsNothing;
+// Members unwrap at access time, through the member-access view: a
+// `Client`-typed field or getter reads as its payload.
+virtualize(point).x satisfies number;
+virtualize(point).sum() satisfies number;
 
-// @ts-expect-error — host-only methods don't exist on the client.
-point.scaled;
-
-// @ts-expect-error — the marker doesn't exist on the client.
-point["@backtickjs"];
+// The view doesn't filter members: host-only members keep their host types
+// (they aren't shipped at runtime — reflection only carries spliceable
+// members — so using them fails at bundle time, not in the typechecker),
+// and the marker stays visible.
+virtualize(point).reflectsNothing satisfies undefined;
+virtualize(point).scaled satisfies (factor: number) => Point;
+virtualize(point)["@backtickjs"] satisfies "ClientObject";
 
 const segment = spliced(
   new Segment(
@@ -74,12 +78,13 @@ const segment = spliced(
   ),
 );
 
-// Nested client objects lower recursively.
-segment.from.x satisfies number;
-segment.to.sum() satisfies number;
+// Nested client objects stay nominal and virtualize per access.
+virtualize(segment).from satisfies Point;
+virtualize(virtualize(segment).from).x satisfies number;
+virtualize(virtualize(segment).to).sum() satisfies number;
 
 // Plain data crosses into the client unchanged, like a plain object member.
-segment.label satisfies string;
+virtualize(segment).label satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;

@@ -10,10 +10,34 @@ this.y                  → this.y
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
+__cs_init               → init
+ =                      →  = 
+(                       → (
+__cs_arg0               → arg0
+: Point,                → : Point, 
+__cs_arg1               → arg1
+: Point) =>             → : Point) => 
+cs.lower(               → ${
+new Segment(            → new Segment(
+cs.lift(                → cs`
+__cs_arg0               → arg0
+)                       → `
+,                       → , 
+cs.lift(                → cs`
+__cs_arg1               → arg1
+)                       → `
+)                       → )
+)                       → }
+;                       → ;
+\n                      → \n  
+const                   → const 
 __cs_s                  → s
  =                      →  = 
 cs.lower(               → ${
-new Segment(new Point(  → new Segment(new Point(
+new Segment(            → new Segment(
+cs.lift(                → cs`
+cs.lower(               → ${
+new Point(              → new Point(
 cs.lift(                → cs`
 1                       → 1
 )                       → `
@@ -21,7 +45,13 @@ cs.lift(                → cs`
 cs.lift(                → cs`
 2                       → 2
 )                       → `
-), new Point(           → ), new Point(
+)                       → )
+)                       → }
+)                       → `
+,                       → , 
+cs.lift(                → cs`
+cs.lower(               → ${
+new Point(              → new Point(
 cs.lift(                → cs`
 3                       → 3
 )                       → `
@@ -29,20 +59,29 @@ cs.lift(                → cs`
 cs.lift(                → cs`
 4                       → 4
 )                       → `
-))                      → ))
+)                       → )
+)                       → }
+)                       → `
+)                       → )
 )                       → }
 ;                       → ;
 \n                      → \n  
 return                  → return 
+cs.virtualize(          → 
+cs.virtualize(          → 
 __cs_s                  → s
-.to                     → .to
-.                       → .
+).                      → .
+to                      → to
+).                      → .
 sum                     → sum
 ()                      → ()
  -                      →  - 
+cs.virtualize(          → 
+cs.virtualize(          → 
 __cs_s                  → s
-.from                   → .from
-.                       → .
+).                      → .
+from                    → from
+).                      → .
 sum                     → sum
 ()                      → ()
 ;                       → ;

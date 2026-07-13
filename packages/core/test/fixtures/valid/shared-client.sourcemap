@@ -24,8 +24,9 @@ shared                  → shared
 ;                       → ;
 \n                      → \n  
 return                  → return 
+cs.virtualize(          → 
 __cs_p                  → p
-.                       → .
+).                      → .
 sum                     → sum
 ()                      → ()
 ;                       → ;
@@ -40,8 +41,10 @@ shared                  → shared
 ;                       → ;
 \n                      → \n  
 return                  → return 
+cs.virtualize(          → 
 __cs_p                  → p
-.x                      → .x
+).                      → .
+x                       → x
 ;                       → ;
 \n})())                 → \n}`
 cs.lift(                → cs`

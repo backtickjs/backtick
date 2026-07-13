@@ -22,14 +22,20 @@ cs.lift(                → cs`
 const                   → const 
 __cs_brightness         → brightness
  =                      →  = 
+cs.virtualize(          → 
 __cs_c                  → c
-.r                      → .r
+).                      → .
+r                       → r
  +                      →  + 
+cs.virtualize(          → 
 __cs_c                  → c
-.g                      → .g
+).                      → .
+g                       → g
  +                      →  + 
+cs.virtualize(          → 
 __cs_c                  → c
-.b                      → .b
+).                      → .
+b                       → b
 ;                       → ;
 \n                      → \n  
 if (                    → if (

@@ -12,9 +12,11 @@ __cs_pick               → pick
  =                      →  = 
 (                       → (
 __cs_c                  → c
-: Spliced<Color>) =>    → : Spliced<Color>) => 
+: Color) =>             → : Color) => 
+cs.virtualize(          → 
 __cs_c                  → c
-.r                      → .r
+).                      → .
+r                       → r
  +                      →  + 
 1                       → 1
 ;                       → ;

@@ -278,10 +278,16 @@ function rewriteNodeImpl(
     const name = node.name.text;
 
     const expression = rewriteNode(ts, state, node.expression);
+    // Member access is virtualized: the receiver is viewed as `Virtualize<T>`
+    // via `cs.virtualize`, so a host-typed receiver's members read as what
+    // the client receives, while the access itself stays a real property
+    // access (hover, rename, and completions on the name keep working).
+    const propertyName = ts.factory.createIdentifier(name);
+    state.mappings.set(node.name, propertyName);
     return {
       virtual: ts.factory.createPropertyAccessExpression(
-        expression.virtual as ts.Expression,
-        ts.factory.createIdentifier(name),
+        call(ts, "cs", "virtualize", [expression.virtual as ts.Expression]),
+        propertyName,
       ),
       runtime: call(ts, "v", "propertyAccess", [
         loc(node),
@@ -305,13 +311,17 @@ function rewriteNodeImpl(
       const access = node.expression;
       const receiver = rewriteNode(ts, state, access.expression);
       const name = access.name.text;
+      // A method call goes through the same virtualized access: the member
+      // is read off `cs.virtualize(receiver)`, then the call checks its
+      // arguments and yields its return type. The runtime keeps the direct
+      // property call, so receiver binding is unchanged.
       const propertyName = ts.factory.createIdentifier(name);
       state.mappings.set(access.name, propertyName);
 
       return {
         virtual: ts.factory.createCallExpression(
           ts.factory.createPropertyAccessExpression(
-            receiver.virtual as ts.Expression,
+            call(ts, "cs", "virtualize", [receiver.virtual as ts.Expression]),
             propertyName,
           ),
           undefined,

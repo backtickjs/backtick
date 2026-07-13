@@ -19,14 +19,20 @@ brightness              → brightness
 :                       → : 
 () => {\n               → () => {\n      
 return                  → return 
+cs.virtualize(          → 
 __cs_color              → color
-.r                      → .r
+).                      → .
+r                       → r
  +                      →  + 
+cs.virtualize(          → 
 __cs_color              → color
-.g                      → .g
+).                      → .
+g                       → g
  +                      →  + 
+cs.virtualize(          → 
 __cs_color              → color
-.b                      → .b
+).                      → .
+b                       → b
 ;                       → ;
 \n        }             → \n    }
  }                      → ,\n  }
@@ -48,8 +54,9 @@ color                   → color
 return                  → return 
 cs.lower(               → ${
 cs.lift(                → cs`
+cs.virtualize(          → 
 __cs_c                  → c
-.                       → .
+).                      → .
 brightness              → brightness
 ()                      → ()
 )                       → `

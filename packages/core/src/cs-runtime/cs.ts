@@ -2,6 +2,7 @@ import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
+import type { Virtualize } from "./Virtualizable.js";
 
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(
@@ -17,6 +18,18 @@ function lower<const T extends Spliceable>(_value: T): Spliced<T> {
   );
 }
 
+// Virtualized member access: the receiver of a `.` in a script is viewed as
+// `Virtualize<T>`, so `Client`-typed members read as their payloads — what
+// the client receives — without the script naming any lowered type. `T` is
+// unconstrained because receivers include free host references
+// (`console.log`) with arbitrary host interface types.
+function virtualize<T>(_value: T): Virtualize<T> {
+  throw new Error(
+    "Don't call `cs.virtualize` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -26,5 +39,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  { lift, lower, create },
+  { lift, lower, virtualize, create },
 );

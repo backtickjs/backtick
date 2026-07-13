@@ -42,18 +42,27 @@ segment                 → segment
 const                   → const 
 __cs_rise               → rise
  =                      →  = 
+cs.virtualize(          → 
+cs.virtualize(          → 
 __cs_s                  → s
-.to                     → .to
-.y                      → .y
+).                      → .
+to                      → to
+).                      → .
+y                       → y
  -                      →  - 
+cs.virtualize(          → 
+cs.virtualize(          → 
 __cs_s                  → s
-.from                   → .from
-.y                      → .y
+).                      → .
+from                    → from
+).                      → .
+y                       → y
 ;                       → ;
 \n                      → \n  
 if (                    → if (
+cs.virtualize(          → 
 __cs_s                  → s
-.                       → .
+).                      → .
 vertical                → vertical
 ()                      → ()
 )                       → ) 
@@ -64,15 +73,21 @@ __cs_rise               → rise
 \n    }                 → \n  }
 \n                      → \n  
 return                  → return 
+cs.virtualize(          → 
+cs.virtualize(          → 
 __cs_s                  → s
-.to                     → .to
-.                       → .
+).                      → .
+to                      → to
+).                      → .
 sum                     → sum
 ()                      → ()
  -                      →  - 
+cs.virtualize(          → 
+cs.virtualize(          → 
 __cs_s                  → s
-.from                   → .from
-.                       → .
+).                      → .
+from                    → from
+).                      → .
 sum                     → sum
 ()                      → ()
 ;                       → ;

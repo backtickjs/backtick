@@ -23,12 +23,12 @@ const shared = new Point(cs.lift(1), cs.lift(2));
 
 const left = cs.lift((() => {
     const __cs_p = cs.lower(shared);
-    return __cs_p.sum();
+    return cs.virtualize(__cs_p).sum();
 })());
 
 const right = cs.lift((() => {
     const __cs_p = cs.lower(shared);
-    return __cs_p.x;
+    return cs.virtualize(__cs_p).x;
 })());
 
 export default cs.lift(cs.lower(left) + cs.lower(right));

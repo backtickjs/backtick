@@ -1,9 +1,10 @@
-cs.lift(  → cs`
-() =>     → () => 
-console   → console
-.         → .
-log       → log
-(         → (
-"hi"      → "hi"
-)         → )
-)         → `
+cs.lift(        → cs`
+() =>           → () => 
+cs.virtualize(  → 
+console         → console
+).              → .
+log             → log
+(               → (
+"hi"            → "hi"
+)               → )
+)               → `

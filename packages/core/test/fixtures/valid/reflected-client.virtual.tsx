@@ -24,5 +24,5 @@ class Point implements ClientObject {
 export default cs.lift((() => {
     const __cs_a = cs.lower(new Point(cs.lift(1), cs.lift(2)));
     const __cs_b = cs.lower(new Point(cs.lift(3), cs.lift(4)));
-    __cs_a.valid();
+    cs.virtualize(__cs_a).valid();
 })());
