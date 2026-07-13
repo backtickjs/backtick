@@ -1,55 +1,55 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_c                  → c
- =                      →  = 
-cs.splice(              → ${
-new Color(              → new Color(
-cs.lift(                → cs`
-30                      → 30
-)                       → `
-,                       → , 
-cs.lift(                → cs`
-144                     → 144
-)                       → `
-,                       → , 
-cs.lift(                → cs`
-255                     → 255
-)                       → `
-)                       → )
-)                       → }
-;                       → ;
-\n                      → \n  
-const                   → const 
-__cs_brightness         → brightness
- =                      →  = 
-cs.virtualize(          → 
-__cs_c                  → c
-).                      → .
-r                       → r
- +                      →  + 
-cs.virtualize(          → 
-__cs_c                  → c
-).                      → .
-g                       → g
- +                      →  + 
-cs.virtualize(          → 
-__cs_c                  → c
-).                      → .
-b                       → b
-;                       → ;
-\n                      → \n  
-if (                    → if (
-__cs_brightness         → brightness
- >                      →  > 
-382                     → 382
-)                       → ) 
-{\n                     → {\n    
-return                  → return 
-"light"                 → "light"
-;                       → ;
-\n    }                 → \n  }
-\n                      → \n  
-return                  → return 
-"dark"                  → "dark"
-;                       → ;
-\n})())                 → \n}`
+cs.lift((() => {\n         → cs`{\n  
+const                      → const 
+__cs_c                     → c
+ =                         →  = 
+cs.splice(                 → ${
+new Color(                 → new Color(
+cs.lift(                   → cs`
+30                         → 30
+)                          → `
+,                          → , 
+cs.lift(                   → cs`
+144                        → 144
+)                          → `
+,                          → , 
+cs.lift(                   → cs`
+255                        → 255
+)                          → `
+)                          → )
+)                          → }
+;                          → ;
+\n                         → \n  
+const                      → const 
+__cs_brightness            → brightness
+ =                         →  = 
+cs.virtualize(cs.autobox(  → 
+__cs_c                     → c
+)).                        → .
+r                          → r
+ +                         →  + 
+cs.virtualize(cs.autobox(  → 
+__cs_c                     → c
+)).                        → .
+g                          → g
+ +                         →  + 
+cs.virtualize(cs.autobox(  → 
+__cs_c                     → c
+)).                        → .
+b                          → b
+;                          → ;
+\n                         → \n  
+if (                       → if (
+__cs_brightness            → brightness
+ >                         →  > 
+382                        → 382
+)                          → ) 
+{\n                        → {\n    
+return                     → return 
+"light"                    → "light"
+;                          → ;
+\n    }                    → \n  }
+\n                         → \n  
+return                     → return 
+"dark"                     → "dark"
+;                          → ;
+\n})())                    → \n}`

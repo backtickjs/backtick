@@ -1,6 +1,7 @@
 // Type-level assertions for `Spliced` and the `ClientObject` reflection marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
 import type {
+  Autoboxed,
   Client,
   ClientObject,
   Spliceable,
@@ -11,6 +12,7 @@ import type {
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare function virtualize<T extends Virtualizable>(value: T): Virtualized<T>;
+declare function autobox<T>(value: T): Autoboxed<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -89,6 +91,15 @@ virtualize(virtualize(segment).to).sum() satisfies number;
 
 // Plain data crosses into the client unchanged, like a plain object member.
 virtualize(segment).label satisfies string;
+
+// A primitive receiver autoboxes before it virtualizes — the compiler wraps
+// every receiver as `cs.virtualize(cs.autobox(x))` — so members resolve
+// against the client wrapper's view, not the host lib's.
+virtualize(autobox(virtualize(segment).label)).concat("!") satisfies string;
+// @ts-expect-error — `padStart` isn't part of the client string API.
+virtualize(autobox(virtualize(segment).label)).padStart;
+virtualize(autobox(virtualize(point).x)).toString(2) satisfies string;
+virtualize(autobox(true)).toString() satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;

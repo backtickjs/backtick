@@ -1,58 +1,58 @@
-cs.lift(                → cs`
-() =>                   → () => 
-cs.splice(              → ${
-this.x                  → this.x
-)                       → }
- +                      →  + 
-cs.splice(              → ${
-this.y                  → this.y
-)                       → }
-)                       → `
-cs.lift(                → cs`
-1                       → 1
-)                       → `
-cs.lift(                → cs`
-2                       → 2
-)                       → `
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_p                  → p
- =                      →  = 
-cs.splice(              → ${
-shared                  → shared
-)                       → }
-;                       → ;
-\n                      → \n  
-return                  → return 
-cs.virtualize(          → 
-__cs_p                  → p
-).                      → .
-sum                     → sum
-()                      → ()
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_p                  → p
- =                      →  = 
-cs.splice(              → ${
-shared                  → shared
-)                       → }
-;                       → ;
-\n                      → \n  
-return                  → return 
-cs.virtualize(          → 
-__cs_p                  → p
-).                      → .
-x                       → x
-;                       → ;
-\n})())                 → \n}`
-cs.lift(                → cs`
-cs.splice(              → ${
-left                    → left
-)                       → }
- +                      →  + 
-cs.splice(              → ${
-right                   → right
-)                       → }
-)                       → `
+cs.lift(                   → cs`
+() =>                      → () => 
+cs.splice(                 → ${
+this.x                     → this.x
+)                          → }
+ +                         →  + 
+cs.splice(                 → ${
+this.y                     → this.y
+)                          → }
+)                          → `
+cs.lift(                   → cs`
+1                          → 1
+)                          → `
+cs.lift(                   → cs`
+2                          → 2
+)                          → `
+cs.lift((() => {\n         → cs`{\n  
+const                      → const 
+__cs_p                     → p
+ =                         →  = 
+cs.splice(                 → ${
+shared                     → shared
+)                          → }
+;                          → ;
+\n                         → \n  
+return                     → return 
+cs.virtualize(cs.autobox(  → 
+__cs_p                     → p
+)).                        → .
+sum                        → sum
+()                         → ()
+;                          → ;
+\n})())                    → \n}`
+cs.lift((() => {\n         → cs`{\n  
+const                      → const 
+__cs_p                     → p
+ =                         →  = 
+cs.splice(                 → ${
+shared                     → shared
+)                          → }
+;                          → ;
+\n                         → \n  
+return                     → return 
+cs.virtualize(cs.autobox(  → 
+__cs_p                     → p
+)).                        → .
+x                          → x
+;                          → ;
+\n})())                    → \n}`
+cs.lift(                   → cs`
+cs.splice(                 → ${
+left                       → left
+)                          → }
+ +                         →  + 
+cs.splice(                 → ${
+right                      → right
+)                          → }
+)                          → `

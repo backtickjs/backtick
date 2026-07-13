@@ -286,7 +286,9 @@ function rewriteNodeImpl(
     state.mappings.set(node.name, propertyName);
     return {
       virtual: ts.factory.createPropertyAccessExpression(
-        call(ts, "cs", "virtualize", [expression.virtual as ts.Expression]),
+        call(ts, "cs", "virtualize", [
+          call(ts, "cs", "autobox", [expression.virtual as ts.Expression]),
+        ]),
         propertyName,
       ),
       runtime: call(ts, "v", "propertyAccess", [
@@ -321,7 +323,9 @@ function rewriteNodeImpl(
       return {
         virtual: ts.factory.createCallExpression(
           ts.factory.createPropertyAccessExpression(
-            call(ts, "cs", "virtualize", [receiver.virtual as ts.Expression]),
+            call(ts, "cs", "virtualize", [
+              call(ts, "cs", "autobox", [receiver.virtual as ts.Expression]),
+            ]),
             propertyName,
           ),
           undefined,

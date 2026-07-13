@@ -1,3 +1,4 @@
+import type { Autoboxed } from "./Autoboxed.js";
 import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
@@ -25,6 +26,13 @@ function virtualize<T extends Virtualizable>(_value: T): Virtualized<T> {
   );
 }
 
+function autobox<T>(_value: T): Autoboxed<T> {
+  throw new Error(
+    "Don't call `cs.autobox` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -34,5 +42,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  { lift, splice, virtualize, create },
+  { lift, splice, virtualize, autobox, create },
 );

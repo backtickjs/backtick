@@ -1,65 +1,65 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_color              → color
- =                      →  = 
-{                       → {\n    
-r                       → r
-:                       → : 
-1                       → 1
-,                       → ,\n    
-g                       → g
-:                       → : 
-2                       → 2
-,                       → ,\n    
-b                       → b
-:                       → : 
-3                       → 3
-,                       → ,\n    
-brightness              → brightness
-:                       → : 
-() => {\n               → () => {\n      
-return                  → return 
-cs.virtualize(          → 
-__cs_color              → color
-).                      → .
-r                       → r
- +                      →  + 
-cs.virtualize(          → 
-__cs_color              → color
-).                      → .
-g                       → g
- +                      →  + 
-cs.virtualize(          → 
-__cs_color              → color
-).                      → .
-b                       → b
-;                       → ;
-\n        }             → \n    }
- }                      → ,\n  }
-;                       → ;
-\n                      → \n  
-return                  → return 
-__cs_color              → color
-;                       → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_c                  → c
- =                      →  = 
-cs.splice(              → ${
-color                   → color
-)                       → }
-;                       → ;
-\n                      → \n  
-return                  → return 
-cs.splice(              → ${
-cs.lift(                → cs`
-cs.virtualize(          → 
-__cs_c                  → c
-).                      → .
-brightness              → brightness
-()                      → ()
-)                       → `
-)                       → }
-;                       → ;
-\n})())                 → \n}`
+cs.lift((() => {\n         → cs`{\n  
+const                      → const 
+__cs_color                 → color
+ =                         →  = 
+{                          → {\n    
+r                          → r
+:                          → : 
+1                          → 1
+,                          → ,\n    
+g                          → g
+:                          → : 
+2                          → 2
+,                          → ,\n    
+b                          → b
+:                          → : 
+3                          → 3
+,                          → ,\n    
+brightness                 → brightness
+:                          → : 
+() => {\n                  → () => {\n      
+return                     → return 
+cs.virtualize(cs.autobox(  → 
+__cs_color                 → color
+)).                        → .
+r                          → r
+ +                         →  + 
+cs.virtualize(cs.autobox(  → 
+__cs_color                 → color
+)).                        → .
+g                          → g
+ +                         →  + 
+cs.virtualize(cs.autobox(  → 
+__cs_color                 → color
+)).                        → .
+b                          → b
+;                          → ;
+\n        }                → \n    }
+ }                         → ,\n  }
+;                          → ;
+\n                         → \n  
+return                     → return 
+__cs_color                 → color
+;                          → ;
+\n})())                    → \n}`
+cs.lift((() => {\n         → cs`{\n  
+const                      → const 
+__cs_c                     → c
+ =                         →  = 
+cs.splice(                 → ${
+color                      → color
+)                          → }
+;                          → ;
+\n                         → \n  
+return                     → return 
+cs.splice(                 → ${
+cs.lift(                   → cs`
+cs.virtualize(cs.autobox(  → 
+__cs_c                     → c
+)).                        → .
+brightness                 → brightness
+()                         → ()
+)                          → `
+)                          → }
+;                          → ;
+\n})())                    → \n}`
