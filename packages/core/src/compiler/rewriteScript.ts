@@ -1,11 +1,11 @@
 import type ts from "typescript";
 import type { SourceLocation } from "../cs-runtime/index.js";
-import type { SourceRange } from "./SourceRange.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
+import type { SourceRange } from "./SourceRange.js";
 
 export interface RewrittenScript {
   virtual: ts.Node;

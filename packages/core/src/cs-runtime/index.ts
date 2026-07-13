@@ -18,9 +18,5 @@ export {
 export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
-export {
-  isSpliceable,
-  type Spliced,
-  type Spliceable,
-} from "./Spliceable.js";
+export { isSpliceable, type Spliceable, type Spliced } from "./Spliceable.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";

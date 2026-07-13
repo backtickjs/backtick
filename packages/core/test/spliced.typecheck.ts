@@ -1,8 +1,13 @@
 // Type-level assertions for `Spliced` and the `ClientObject` reflection marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
-import type { Client, ClientObject, Spliced } from "@backtickjs/core/cs-runtime";
+import type {
+  Client,
+  ClientObject,
+  Spliceable,
+  Spliced,
+} from "@backtickjs/core/cs-runtime";
 
-declare function spliced<T>(value: T): Spliced<T>;
+declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 

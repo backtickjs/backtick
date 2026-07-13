@@ -16,9 +16,11 @@ export interface ClientObject {
 // members, each lowered, minus the marker. Defining `spliced()` replaces
 // this wholesale with `Spliced` of whatever the method returns.
 export type AsObject<T extends ClientObject> = {
+  // The `as`-clause filter doesn't narrow `T[K]` for `Spliced`'s
+  // constraint, so the value re-infers it as a `Spliceable`.
   [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Spliceable
     ? K
-    : never]: Spliced<T[K]>;
+    : never]: T[K] extends infer V extends Spliceable ? Spliced<V> : never;
 };
 
 export function isClientObject(value: unknown): value is ClientObject {

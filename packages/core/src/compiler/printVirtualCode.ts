@@ -1,9 +1,9 @@
 import type ts from "typescript";
-import type { SourceRange } from "./SourceRange.js";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
 import { printMarkedNode, scanMarkers } from "./markers.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 import type { RewrittenFile } from "./rewriteFile.js";
+import type { SourceRange } from "./SourceRange.js";
 import { type Segment, segmentsToString } from "./segmentsToString.js";
 
 // An enclosing mapped node: its source `range`, and a `cursor` tracking how far

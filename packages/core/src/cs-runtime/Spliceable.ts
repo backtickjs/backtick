@@ -26,17 +26,21 @@ export type Spliceable =
 //   T[]              -> Spliced<T>[]
 //   { k: T }         -> { k: Spliced<T> }
 //   primitives       -> unchanged
-export type Spliced<T> =
+export type Spliced<T extends Spliceable> =
   T extends Client<infer U>
     ? U
     : T extends ClientObject
-      ? T extends { spliced(): infer R }
+      ? T extends { spliced(): infer R extends Spliceable }
         ? Spliced<R>
         : AsObject<T>
-      : T extends (infer Item)[]
+      : T extends (infer Item extends Spliceable)[]
         ? Spliced<Item>[]
         : T extends object
-          ? { [Tk in keyof T]: Spliced<T[Tk]> }
+          ? {
+              [Tk in keyof T]: T[Tk] extends infer V extends Spliceable
+                ? Spliced<V>
+                : never;
+            }
           : T;
 
 export function isSpliceable(value: unknown): value is Spliceable {

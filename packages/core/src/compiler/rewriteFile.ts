@@ -1,11 +1,11 @@
 import type ts from "typescript";
-import type { SourceRange } from "./SourceRange.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { flattenScripts } from "./flattenScripts.js";
 import { hashText } from "./hashText.js";
 import type { ParsedFile } from "./parseFile.js";
 import { resolveBindings } from "./resolveBindings.js";
 import { type RewrittenScript, rewriteScript } from "./rewriteScript.js";
+import type { SourceRange } from "./SourceRange.js";
 
 export interface RewrittenFile {
   sourceFile: ts.SourceFile;
