@@ -13,17 +13,15 @@ export type Virtualizable =
   | Virtualizable[]
   | { [key: string]: Virtualizable };
 
-export type VirtualizedClientObject<T extends ClientObject> = {
-  [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Virtualizable
-    ? K
-    : never]: Virtualized<T[K]>;
-};
-
 export type Virtualized<T> =
   T extends Client<infer U>
     ? U
     : T extends ClientObject
-      ? VirtualizedClientObject<T>
+      ? {
+          [K in Exclude<keyof T, "@backtickjs"> as T[K] extends Virtualizable
+            ? K
+            : never]: Virtualized<T[K]>;
+        }
       : T extends (...args: never[]) => unknown
         ? T
         : T extends (infer Item)[]
