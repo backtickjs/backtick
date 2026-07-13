@@ -6,20 +6,12 @@ import {
 import type { Ast, AstObject } from "./Ast.js";
 import { buildAst } from "./buildAst.js";
 
-const nodeByInstance = new WeakMap<ClientObject, Ast>();
+const nodeByInstance = new WeakMap<ClientObject, AstObject>();
 
-export function buildClientObject(value: ClientObject): Ast {
+export function buildClientObject(value: ClientObject): AstObject {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;
-  }
-
-  // The `spliced()` escape hatch: the instance splices as the spliceable it
-  // returns — lowered by the normal rules — instead of being reflected.
-  if (typeof value.spliced === "function") {
-    const node = buildAst(value.spliced());
-    nodeByInstance.set(value, node);
-    return node;
   }
 
   const entries: { [key: string]: Ast } = {};

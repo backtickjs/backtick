@@ -19,20 +19,17 @@ export type Spliceable =
   | { [key: string]: Spliceable };
 
 // What a spliceable becomes on the client — recursively lowered:
-//   Client<U>        -> U (a `ClientUIElement`'s `UIElement` included)
-//   ClientObject     -> `Spliced` of its `spliced()` result when the class
-//                       defines the escape hatch (the method returns a
-//                       host-terms spliceable), else AsObject of the class
-//   T[]              -> Spliced<T>[]
-//   { k: T }         -> { k: Spliced<T> }
-//   primitives       -> unchanged
+//   Client<U>                 -> U
+//   T implements ClientObject -> AsObject<T>: the plain object of the
+//                                instance's spliceable members, lowered
+//   T[]                       -> Spliced<T>[]
+//   { k: T }                  -> { k: Spliced<T> }
+//   primitives                -> unchanged
 export type Spliced<T extends Spliceable> =
   T extends Client<infer U>
     ? U
     : T extends ClientObject
-      ? T extends { spliced(): infer R extends Spliceable }
-        ? Spliced<R>
-        : AsObject<T>
+      ? AsObject<T>
       : T extends (infer Item extends Spliceable)[]
         ? Spliced<Item>[]
         : T extends object

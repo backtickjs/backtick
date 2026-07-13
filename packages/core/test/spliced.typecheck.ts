@@ -83,26 +83,3 @@ segment.label satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;
-
-// `spliced()` overrides reflection: the instance lowers to the spliceable it
-// returns, itself lowered by the normal rules.
-class Custom implements ClientObject {
-  readonly "@backtickjs" = "ClientObject";
-
-  readonly celsius: Client<number>;
-
-  constructor(celsius: Client<number>) {
-    this.celsius = celsius;
-  }
-
-  spliced() {
-    return { unit: "C", value: this.celsius };
-  }
-}
-
-const custom = spliced(new Custom(clientNumber));
-custom.value satisfies number;
-custom.unit satisfies string;
-
-// @ts-expect-error — an overriding class's members don't reflect.
-custom.celsius;

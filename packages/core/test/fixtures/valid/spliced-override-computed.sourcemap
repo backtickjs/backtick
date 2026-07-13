@@ -1,6 +1,0 @@
-cs.lift(             → cs`
-cs.lower(            → ${
-new Fahrenheit(212)  → new Fahrenheit(212)
-)                    → }
-.celsius             → .celsius
-)                    → `
