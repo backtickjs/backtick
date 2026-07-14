@@ -6,6 +6,7 @@ import type {
   BundleExpr,
   BundleExpressionNode,
   BundleGlobal,
+  BundleIdentifierNode,
   BundleSlot,
   BundleStatementNode,
   BundleThunk,
@@ -178,17 +179,19 @@ function evaluateExpr(
   bundle: Bundle,
   expr: BundleExpr,
   slots: unknown[],
+  env: Scope | null = null,
 ): unknown {
   if (expr === null || typeof expr !== "object") {
     return expr;
   }
   if (Array.isArray(expr)) {
-    return expr.map((element) => evaluateExpr(bundle, element, slots));
+    return expr.map((element) => evaluateExpr(bundle, element, slots, env));
   }
   if ("#" in expr) {
     const form = expr as
       | BundleSlot
       | BundleGlobal
+      | BundleIdentifierNode
       | BundleApply
       | BundleThunk
       | BundleElement;
@@ -199,12 +202,35 @@ function evaluateExpr(
       case "global": {
         return globals()[form.name];
       }
+      case "identifier": {
+        // A parameter of an enclosing thunk, with the body identifier's
+        // global fallback.
+        const frame = lookup(env, form.name);
+        if (frame === null) {
+          return globals()[form.name];
+        }
+        return frame.bindings.get(form.name);
+      }
       case "apply": {
-        const args = form.args.map((arg) => evaluateExpr(bundle, arg, slots));
+        const args = form.args.map((arg) =>
+          evaluateExpr(bundle, arg, slots, env),
+        );
         return entryFunction(bundle, form.label)(...args);
       }
       case "thunk": {
-        return () => evaluateExpr(bundle, form.expression, slots);
+        const params = form.params;
+        if (!params || params.length === 0) {
+          return () => evaluateExpr(bundle, form.expression, slots, env);
+        }
+        // The hole call supplies the entry-scoped bindings the splice
+        // captures, one value per parameter, over the enclosing frame.
+        return (...args: unknown[]) => {
+          const frame: Scope = { parent: env, bindings: new Map() };
+          params.forEach((param, index) => {
+            frame.bindings.set(param, args[index]);
+          });
+          return evaluateExpr(bundle, form.expression, slots, frame);
+        };
       }
       case "element": {
         return evaluateElement(bundle, form, slots);
@@ -213,7 +239,7 @@ function evaluateExpr(
   }
   const object: { [key: string]: unknown } = {};
   for (const [key, value] of Object.entries(expr)) {
-    object[key] = evaluateExpr(bundle, value, slots);
+    object[key] = evaluateExpr(bundle, value, slots, env);
   }
   return object;
 }

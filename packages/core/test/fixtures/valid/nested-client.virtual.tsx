@@ -1,5 +1,9 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type {
+  Client,
+  ClientObject,
+  ClientUnknown,
+} from "@backtickjs/core/cs-runtime";
 
 class Point implements ClientObject {
   readonly "@backtickjs" = "ClientObject";
@@ -31,8 +35,27 @@ class Segment implements ClientObject {
   }
 }
 
+function new0<T extends ClientObject>(Cls: new () => T): Client<() => T> {
+  return cs.lift(() => cs.splice(new Cls()));
+}
+
+function new1<TObject extends ClientObject, TArg0 extends ClientUnknown>(
+  Obj: new (arg0: Client<TArg0>) => TObject,
+): Client<(arg0: TArg0) => TObject> {
+  return cs.lift((__cs_arg0: TArg0) => cs.splice(new Obj(cs.lift(__cs_arg0))));
+}
+
+function new2<
+  TObject extends ClientObject,
+  TArg0 extends ClientUnknown,
+  TArg1 extends ClientUnknown,
+>(
+  Obj: new (arg0: Client<TArg0>, arg1: Client<TArg1>) => TObject,
+): Client<(arg0: TArg0, arg1: TArg1) => TObject> {
+  return cs.lift((__cs_arg0: TArg0, __cs_arg1: TArg1) => cs.splice(new Obj(cs.lift(__cs_arg0), cs.lift(__cs_arg1))));
+}
+
 export default cs.lift((() => {
-    const __cs_init = (__cs_arg0: Point, __cs_arg1: Point) => cs.splice(new Segment(cs.lift(__cs_arg0), cs.lift(__cs_arg1)));
-    const __cs_s = cs.splice(new Segment(cs.lift(cs.splice(new Point(cs.lift(1), cs.lift(2)))), cs.lift(cs.splice(new Point(cs.lift(3), cs.lift(4))))));
+    const __cs_s = cs.splice(new2(Segment))(cs.splice(new2(Point))(1, 2), cs.splice(new2(Point))(1, 2));
     return cs.virtualize(cs.virtualize(__cs_s).to).sum() - cs.virtualize(cs.virtualize(__cs_s).from).sum();
 })());

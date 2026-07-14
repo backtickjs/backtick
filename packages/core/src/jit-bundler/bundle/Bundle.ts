@@ -9,10 +9,11 @@ export interface Bundle {
   // as for an arrow nested inside a body. A monomorphic entry (one call
   // site, or identical arguments everywhere) has its splice arguments
   // inlined into the body and takes only its captures as parameters. A
-  // polymorphic entry additionally takes one nullary-thunk parameter per
-  // splice hole (named `$0`, `$1`, …), ahead of its captures; the body
-  // invokes the thunk at the hole. A `BundleApply` targeting the entry passes
-  // arguments in that same order.
+  // polymorphic entry additionally takes one thunk parameter per splice
+  // hole (named `$0`, `$1`, …), ahead of its captures; the body invokes the
+  // thunk at the hole, passing the entry-scoped bindings the splice
+  // captures — a spliced fragment sees the bindings in scope at its hole. A
+  // `BundleApply` targeting the entry passes arguments in that same order.
   functions: Record<FunctionLabel, BundleArrowNode>;
   trees: Record<TreeLabel, BundleTree>;
   root: BundleExpr;
@@ -65,10 +66,15 @@ export interface BundleApply {
 }
 
 // A splice argument passed to a polymorphic entry, evaluated lazily: the
-// interpreter passes it as a nullary function yielding the expression's
-// value, so the hole evaluates it exactly like an inlined splice.
+// interpreter passes it as a function yielding the expression's value, so
+// the hole evaluates it exactly like an inlined splice. `params` — present
+// when the splice captures bindings the entry itself declares — names the
+// values the hole call supplies; an `identifier` in the expression resolves
+// against the enclosing thunk parameters, then the global object, exactly
+// like a body identifier.
 export interface BundleThunk {
   "#": "thunk";
+  params?: string[];
   expression: BundleExpr;
 }
 
@@ -84,6 +90,7 @@ export type BundleExpr =
   | BundleExpr[]
   | BundleSlot
   | BundleGlobal
+  | BundleIdentifierNode
   | BundleApply
   | BundleThunk
   | BundleElement

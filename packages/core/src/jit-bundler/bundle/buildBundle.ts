@@ -12,6 +12,7 @@ import type {
   BundleExpr,
   BundleExpressionNode,
   BundleGlobal,
+  BundleIdentifierNode,
   BundleSlot,
   BundleTree,
   FunctionLabel,
@@ -196,13 +197,36 @@ export function buildBundle(ir: Ir): Bundle {
   // polymorphic — the captures of the thunks passed for its splices, since those
   // thunks are written inline at this call site. A tree reference needs its
   // slot values; an inline element whatever its props need.
+  // Memoized per argument — the IR is immutable and this fans out from
+  // `need`, `passKeys`, and `treeSlots`. A result computed while a `need` is
+  // in flight can reflect that cycle guard's partial answer, so it is only
+  // cached when no `need` computation is active.
+  const freeCapsCache = new Map<IrArgument, string[]>();
   const freeCaps = (value: IrArgument): string[] => {
+    const cached = freeCapsCache.get(value);
+    if (cached) {
+      return cached;
+    }
+    const result = freeCapsImpl(value);
+    if (needStack.size === 0) {
+      freeCapsCache.set(value, result);
+    }
+    return result;
+  };
+
+  const freeCapsImpl = (value: IrArgument): string[] => {
     switch (value.kind) {
       case "IrScriptRef": {
         const keys = [...need(value.target)];
         if (polymorphic.has(value.target)) {
           for (const arg of value.args) {
-            keys.push(...freeCaps(arg));
+            // A capture the entry itself declares is supplied by the hole
+            // call (see `passKeys`), not by the call site.
+            for (const key of freeCaps(arg)) {
+              if (!declaredKeys[value.target].has(key)) {
+                keys.push(key);
+              }
+            }
           }
         }
         return keys;
@@ -218,6 +242,36 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrValue":
         return [];
     }
+  };
+
+  // The entry-declared bindings a polymorphic entry's hole must feed its
+  // thunk: whatever the splice arguments passed for that hole capture from
+  // the entry's own scope, across every reference — the body's hole call and
+  // every thunk's parameter list must agree positionally, so the union is
+  // taken and ordered by the entry's declaration order (stable across
+  // applications). This is what makes a spliced fragment see the bindings in
+  // scope at its hole even though the thunk is written at the call site.
+  const passKeysCache = new Map<string, string[]>();
+  const passKeys = (target: number, hole: number): string[] => {
+    const cacheKey = `${target}:${hole}`;
+    const cached = passKeysCache.get(cacheKey);
+    if (cached) {
+      return cached;
+    }
+    const keys = new Set<string>();
+    for (const ref of refsByTarget.get(target) ?? []) {
+      const arg = ref.args[hole];
+      if (arg) {
+        for (const key of freeCaps(arg)) {
+          if (declaredKeys[target].has(key)) {
+            keys.add(key);
+          }
+        }
+      }
+    }
+    const order = fns[target].declarations.filter((key) => keys.has(key));
+    passKeysCache.set(cacheKey, order);
+    return order;
   };
 
   // The slot signature of a tree entry: the capture keys its wiring needs from
@@ -269,7 +323,10 @@ export function buildBundle(ir: Ir): Bundle {
       renderSplice = (index) => ({
         "#": "call",
         callee: { "#": "identifier", name: `$${index}` },
-        args: [],
+        args: passKeys(target, index).map((key) => ({
+          "#": "identifier",
+          name: displayName(key),
+        })),
       });
     } else {
       params = captureParams;
@@ -286,9 +343,9 @@ export function buildBundle(ir: Ir): Bundle {
   const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
     const parts: BundleExpressionNode[] = [];
     if (polymorphic.has(ref.target)) {
-      for (const arg of ref.args) {
-        parts.push(renderThunk(arg));
-      }
+      ref.args.forEach((arg, index) => {
+        parts.push(renderThunk(arg, ref.target, index));
+      });
     }
     for (const key of need(ref.target)) {
       parts.push({ "#": "identifier", name: displayName(key) });
@@ -340,11 +397,22 @@ export function buildBundle(ir: Ir): Bundle {
     }
   };
 
-  // Renders a splice argument in thunk position — as a nullary function that
-  // yields the value — so a polymorphic entry evaluates it lazily at the hole,
-  // mirroring an inlined splice. A referenced entry that already takes no
-  // arguments is a nullary thunk as-is; anything else is wrapped in an arrow.
-  const renderThunk = (value: IrArgument): BundleExpressionNode => {
+  // Renders a splice argument in thunk position — as a function yielding the
+  // value — so a polymorphic entry evaluates it lazily at the hole, mirroring
+  // an inlined splice. When the splice captures bindings the entry declares,
+  // the thunk takes them as parameters and the hole call supplies them (see
+  // `passKeys`); the body's identifiers then resolve through the thunk frame.
+  // Otherwise a referenced entry that takes no arguments is a nullary thunk
+  // as-is; anything else is wrapped in an arrow.
+  const renderThunk = (
+    value: IrArgument,
+    target: number,
+    hole: number,
+  ): BundleExpressionNode => {
+    const params = passKeys(target, hole).map(displayName);
+    if (params.length > 0) {
+      return { "#": "arrow", params, body: renderValue(value) };
+    }
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       const args = callArgs(value);
@@ -395,18 +463,23 @@ export function buildBundle(ir: Ir): Bundle {
     const keys = treeSlots(target);
     const slots = new Map(keys.map((key, index) => [key, index] as const));
     treeJsons.set(target, {
-      element: renderElement(ir.trees[target].element, slots),
+      element: renderElement(ir.trees[target].element, slots, new Set()),
     });
   };
 
-  // Renders a capture in JSON position: a free host reference resolves
-  // globally; anything else must be a slot of the enclosing tree. At the
-  // bundle root there is no enclosing instance, so a suffixed capture reaching
-  // it can't be threaded from anywhere.
+  // Renders a capture in JSON position: a parameter of an enclosing thunk
+  // resolves by name; a free host reference resolves globally; anything else
+  // must be a slot of the enclosing tree. At the bundle root there is no
+  // enclosing instance, so a suffixed capture reaching it can't be threaded
+  // from anywhere.
   const capExpr = (
     key: string,
     slots: Map<string, number>,
-  ): BundleSlot | BundleGlobal => {
+    params: ReadonlySet<string> = new Set(),
+  ): BundleSlot | BundleGlobal | BundleIdentifierNode => {
+    if (params.has(key)) {
+      return { "#": "identifier", name: displayName(key) };
+    }
     if (isHostRef(key)) {
       return { "#": "global", name: key };
     }
@@ -425,15 +498,31 @@ export function buildBundle(ir: Ir): Bundle {
   const exprCallArgs = (
     ref: IrScriptRef,
     slots: Map<string, number>,
+    params: ReadonlySet<string>,
   ): BundleExpr[] => {
     const parts: BundleExpr[] = [];
     if (polymorphic.has(ref.target)) {
-      for (const arg of ref.args) {
-        parts.push({ "#": "thunk", expression: renderExpr(arg, slots) });
-      }
+      ref.args.forEach((arg, index) => {
+        const passed = passKeys(ref.target, index);
+        if (passed.length === 0) {
+          parts.push({
+            "#": "thunk",
+            expression: renderExpr(arg, slots, params),
+          });
+          return;
+        }
+        // The thunk's parameters extend the enclosing ones, like a nested
+        // frame: the expression sees both.
+        const inner = new Set([...params, ...passed]);
+        parts.push({
+          "#": "thunk",
+          params: passed.map(displayName),
+          expression: renderExpr(arg, slots, inner),
+        });
+      });
     }
     for (const key of need(ref.target)) {
-      parts.push(capExpr(key, slots));
+      parts.push(capExpr(key, slots, params));
     }
     return parts;
   };
@@ -443,10 +532,11 @@ export function buildBundle(ir: Ir): Bundle {
   const renderElement = (
     element: IrElement,
     slots: Map<string, number>,
+    params: ReadonlySet<string>,
   ): BundleElement => {
     const props: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(element.props)) {
-      props[key] = renderExpr(entry, slots);
+      props[key] = renderExpr(entry, slots, params);
     }
     return { "#": "element", type: element.type, key: element.key, props };
   };
@@ -457,13 +547,14 @@ export function buildBundle(ir: Ir): Bundle {
   const renderExpr = (
     value: IrArgument,
     slots: Map<string, number>,
+    params: ReadonlySet<string> = new Set(),
   ): BundleExpr => {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       return {
         "#": "apply",
         label: `#f${value.target}`,
-        args: exprCallArgs(value, slots),
+        args: exprCallArgs(value, slots, params),
       };
     }
     if (value.kind === "IrTreeRef") {
@@ -471,17 +562,17 @@ export function buildBundle(ir: Ir): Bundle {
       return {
         "#": "apply",
         label: `#t${value.target}`,
-        args: treeSlots(value.target).map((key) => capExpr(key, slots)),
+        args: treeSlots(value.target).map((key) => capExpr(key, slots, params)),
       };
     }
     if (value.kind === "IrElement") {
-      return renderElement(value, slots);
+      return renderElement(value, slots, params);
     }
     if (value.kind === "IrValue") {
       return value.value;
     }
     if (value.kind === "IrArray") {
-      return value.elements.map((entry) => renderExpr(entry, slots));
+      return value.elements.map((entry) => renderExpr(entry, slots, params));
     }
     // A plain data object passes through. `#` is the bundle's one
     // reserved key — the discriminant of every node — so an object
@@ -491,7 +582,7 @@ export function buildBundle(ir: Ir): Bundle {
     }
     const entries: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(value.entries)) {
-      entries[key] = renderExpr(entry, slots);
+      entries[key] = renderExpr(entry, slots, params);
     }
     return entries;
   };

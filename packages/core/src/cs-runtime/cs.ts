@@ -1,4 +1,5 @@
 import type { Client } from "./Client.js";
+import type { ClientObject } from "./ClientObject.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
@@ -11,7 +12,14 @@ function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   );
 }
 
-function splice<const T extends Spliceable>(_value: T): Spliced<T> {
+// The `ClientObject` overload keeps `Spliced` out of user-facing types:
+// `Spliced<T>`'s `ClientObject` branch is the identity, but a conditional
+// type never reduces over an unresolved type parameter, so generic code
+// splicing a `T extends ClientObject` would read as the internal
+// `Spliced<T>` instead of `T`.
+function splice<T extends ClientObject>(_value: T): T;
+function splice<const T extends Spliceable>(_value: T): Spliced<T>;
+function splice(_value: Spliceable): unknown {
   throw new Error(
     "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

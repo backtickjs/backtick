@@ -1,0 +1,20 @@
+cs.lift(       → cs`
+(              → (
+__cs_base      → base
+: number) =>   → : number) => 
+cs.splice(     → ${
+cs.lift(       → cs`
+__cs_base      → base
+)              → `
+)              → }
+ +             →  + 
+cs.splice(     → ${
+by             → by
+)              → }
+)              → `
+cs.lift(       → cs`
+1              → 1
+)              → `
+cs.lift(       → cs`
+2              → 2
+)              → `
