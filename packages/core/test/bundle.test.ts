@@ -13,6 +13,7 @@ import type { Client, ClientUnknown } from "../dist/cs-runtime/index.js";
 import { bundle } from "../dist/jit-bundler/index.js";
 import { evaluate } from "../dist/test-client/index.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
+import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderValue } from "./renderValue.ts";
 import { transpileFixture } from "./transpileFixture.ts";
 
@@ -20,8 +21,10 @@ import { transpileFixture } from "./transpileFixture.ts";
 // client — a script or a JSX tree — compiled here with the same transform the
 // compiler suite snapshots as `*.js`, then executed by importing the emitted
 // module. A `valid/` fixture's bundled payload is snapshotted to a sibling
-// `*.bundle` file, then executed by the reference test-client and the
-// resulting runtime value snapshotted to `*.value`. A `bundle-error/`
+// `*.bundle` file (with a human-readable rendering of the same payload in
+// `*.bundle-debug` — see `renderBundleDebug`), then executed by the
+// reference test-client and the resulting runtime value snapshotted to
+// `*.value`. A `bundle-error/`
 // fixture compiles and imports cleanly but exports a client the bundler must
 // reject: its error message is snapshotted to a sibling `*.error` file. Run
 // with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
@@ -71,6 +74,10 @@ describe("bundle", () => {
         matchFileSnapshot(
           JSON.stringify(payload, null, 2),
           join(validDir, `${base}.bundle`),
+        );
+        matchFileSnapshot(
+          renderBundleDebug(payload),
+          join(validDir, `${base}.bundle-debug`),
         );
         matchFileSnapshot(
           `${renderValue(evaluate(payload))}\n`,

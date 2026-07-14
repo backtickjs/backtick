@@ -1,0 +1,12 @@
+#t0 = <label
+  text={"hi"}
+/>
+
+#t1 = <flexbox
+  direction={"column"}
+>
+  {#t0()}
+  {#t0()}
+</flexbox>
+
+root = #t1()

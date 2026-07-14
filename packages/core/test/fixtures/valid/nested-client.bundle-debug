@@ -1,0 +1,22 @@
+#f0 = () => {
+  const s = #f1((arg0, arg1) => { "from": #f2(arg0), "to": #f3(arg1) })(#f1((arg0, arg1) => {
+    "x": #f2(arg0),
+    "y": #f3(arg1),
+    "sum": #f4(() => #f2(arg0), () => #f3(arg1))
+  })(1, 2), #f1((arg0, arg1) => {
+    "x": #f2(arg0),
+    "y": #f3(arg1),
+    "sum": #f4(() => #f2(arg0), () => #f3(arg1))
+  })(1, 2));
+  return s.to.sum() - s.from.sum();
+}
+
+#f1 = ($0) => (arg0, arg1) => $0(arg0, arg1)
+
+#f2 = (arg0) => arg0
+
+#f3 = (arg1) => arg1
+
+#f4 = ($0, $1) => () => $0() + $1()
+
+root = #f0()

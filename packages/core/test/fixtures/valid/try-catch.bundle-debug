@@ -1,0 +1,10 @@
+#f0 = (String) => {
+  const message = "boom";
+  try {
+    throw message;
+  } catch (error) {
+    return "caught " + String(error);
+  }
+}
+
+root = #f0(String)

@@ -1,0 +1,5 @@
+#t0 = <button
+  data={{ "#call": "#f0" }}
+/>
+
+root = #t0()

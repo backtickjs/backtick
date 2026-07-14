@@ -1,0 +1,5 @@
+#t0 = <button
+  data={{ "type": "x", "key": null, "props": {} }}
+/>
+
+root = #t0()

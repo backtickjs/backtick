@@ -1,0 +1,16 @@
+#f0 = () => {
+  const c = { "r": #f1(), "g": #f2(), "b": #f3() };
+  const brightness = c.r + c.g + c.b;
+  if (brightness > 382) {
+    return "light";
+  }
+  return "dark";
+}
+
+#f1 = () => 30
+
+#f2 = () => 144
+
+#f3 = () => 255
+
+root = #f0()

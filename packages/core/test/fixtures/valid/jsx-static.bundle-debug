@@ -1,0 +1,10 @@
+#t0 = <flexbox
+  direction={"row"}
+>
+  {<label
+    key={"a"}
+    text={"hi"}
+  />}
+</flexbox>
+
+root = #t0()

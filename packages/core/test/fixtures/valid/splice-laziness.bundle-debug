@@ -1,0 +1,16 @@
+#f0 = () => { "taken": #f1(#f2)(true), "skipped": #f1(#f3)(false) }
+
+#f1 = ($0) => (flag) => {
+  if (flag) {
+    return $0();
+  }
+  return "skipped";
+}
+
+#f2 = () => "evaluated"
+
+#f3 = () => {
+  throw "the guarded fragment must never evaluate";
+}
+
+root = #f0()

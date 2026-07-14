@@ -1,0 +1,6 @@
+#f0 = () => {
+  const greeting = "Hello";
+  return greeting.concat(", ", "World").toUpperCase();
+}
+
+root = #f0()
