@@ -1,10 +1,16 @@
 import type { Client } from "./Client.js";
+import type { ClientBoolean } from "./ClientBoolean.js";
+import type { ClientNumber } from "./ClientNumber.js";
 import type { ClientObject } from "./ClientObject.js";
+import type { ClientString } from "./ClientString.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 
 export type Virtualizable =
   | Client<ClientUnknown>
   | ClientObject
+  | ClientNumber
+  | ClientBoolean
+  | ClientString
   | null
   | number
   | boolean

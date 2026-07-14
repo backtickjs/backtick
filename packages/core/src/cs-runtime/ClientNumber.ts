@@ -1,15 +1,31 @@
-import type { Client } from "./Client.js";
-import type { ClientObject } from "./ClientObject.js";
-import { cs } from "./cs.js";
+/**
+ * The client number API: what a script may reach on an autoboxed number.
+ */
+export interface ClientNumber {
+  /**
+   * Returns a string representation of an object.
+   * @param radix Specifies a radix for converting numeric values to strings. This value is only used for numbers.
+   */
+  toString(radix?: number): string;
 
-// The client number API: what a script may reach on an autoboxed number.
-export class ClientNumber implements ClientObject {
-  readonly "@backtickjs": "ClientObject";
+  /**
+   * Returns a string representing a number in fixed-point notation.
+   * @param fractionDigits Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.
+   */
+  toFixed(fractionDigits?: number): string;
 
-  get toString(): Client<(radix?: number) => string> {
-    // @ts-expect-error
-    return cs`(radix?: number) => {
-      throw "\`toString\` not implemented yet.";
-    }`;
-  }
+  /**
+   * Returns a string containing a number represented in exponential notation.
+   * @param fractionDigits Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.
+   */
+  toExponential(fractionDigits?: number): string;
+
+  /**
+   * Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.
+   * @param precision Number of significant digits. Must be in the range 1 - 21, inclusive.
+   */
+  toPrecision(precision?: number): string;
+
+  /** Returns the primitive value of the specified object. */
+  valueOf(): number;
 }
