@@ -7,8 +7,9 @@ export class ClientNumber implements ClientObject {
   readonly "@backtickjs": "ClientObject";
 
   get toString(): Client<(radix?: number) => string> {
-    return cs`{
+    // @ts-expect-error
+    return cs`(radix?: number) => {
       throw "\`toString\` not implemented yet.";
-    }` as Client<(radix?: number) => string>;
+    }`;
   }
 }

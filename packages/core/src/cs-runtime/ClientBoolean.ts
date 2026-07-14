@@ -7,8 +7,9 @@ export class ClientBoolean implements ClientObject {
   readonly "@backtickjs": "ClientObject";
 
   get toString(): Client<() => string> {
-    return cs`{
+    // @ts-expect-error
+    return cs`() => {
       throw "\`toString\` not implemented yet.";
-    }` as Client<() => string>;
+    }`;
   }
 }

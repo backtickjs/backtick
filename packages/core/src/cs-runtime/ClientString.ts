@@ -7,14 +7,16 @@ export class ClientString implements ClientObject {
   readonly "@backtickjs": "ClientObject";
 
   get concat(): Client<(...strings: string[]) => string> {
-    return cs`{
+    // @ts-expect-error
+    return cs`(...strings: string[]) => {
       throw "\`concat\` not implemented yet.";
-    }` as Client<(...strings: string[]) => string>;
+    }`;
   }
 
   get toUpperCase(): Client<() => string> {
-    return cs`{
+    // @ts-expect-error
+    return cs`() => {
       throw "\`toUpperCase\` not implemented yet.";
-    }` as Client<() => string>;
+    }`;
   }
 }
