@@ -15,7 +15,8 @@ __cs_c                  → c
 : Color) =>             → : Color) => 
 cs.virtualize(          → 
 __cs_c                  → c
-).                      → .
+)                       → 
+.                       → .
 r                       → r
  +                      →  + 
 1                       → 1

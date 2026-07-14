@@ -43,7 +43,8 @@ cs.lift(                → cs`
 \n                      → \n  
 cs.virtualize(          → 
 __cs_a                  → a
-).                      → .
+)                       → 
+.                       → .
 valid                   → valid
 ()                      → ()
 ;                       → ;

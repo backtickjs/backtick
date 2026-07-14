@@ -12,8 +12,10 @@ cs.lift(        → cs`
 )               → `
 ])              → ])
 )               → }
-).              → .
+)               → 
+.               → .
 coins           → coins
-).              → .
+)               → 
+.               → .
 length          → length
 )               → `

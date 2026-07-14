@@ -49,7 +49,7 @@ export function rewriteScript(
   const rewritten = rewriteNode(ts, state, scriptNode);
 
   const sourceMaps: Map<ts.Node, SourceRange> = new Map();
-  for (const [source, virtual] of state.mappings) {
+  for (const [virtual, source] of state.mappings) {
     const range = clientScript.toSourceRange(source);
     sourceMaps.set(virtual, range);
   }

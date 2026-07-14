@@ -70,18 +70,22 @@ return                  → return
 cs.virtualize(          → 
 cs.virtualize(          → 
 __cs_s                  → s
-).                      → .
+)                       → 
+.                       → .
 to                      → to
-).                      → .
+)                       → 
+.                       → .
 sum                     → sum
 ()                      → ()
  -                      →  - 
 cs.virtualize(          → 
 cs.virtualize(          → 
 __cs_s                  → s
-).                      → .
+)                       → 
+.                       → .
 from                    → from
-).                      → .
+)                       → 
+.                       → .
 sum                     → sum
 ()                      → ()
 ;                       → ;

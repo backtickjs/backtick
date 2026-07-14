@@ -9,14 +9,16 @@ return                  → return
 cs.virtualize(          → 
 cs.virtualize(          → 
 __cs_greeting           → greeting
-).                      → .
+)                       → 
+.                       → .
 concat                  → concat
 (                       → (
 ", "                    → ", "
 ,                       → , 
 "World"                 → "World"
 )                       → )
-).                      → .
+)                       → 
+.                       → .
 toUpperCase             → toUpperCase
 ()                      → ()
 ;                       → ;

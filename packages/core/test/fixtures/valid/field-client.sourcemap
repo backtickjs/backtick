@@ -24,17 +24,20 @@ __cs_brightness         → brightness
  =                      →  = 
 cs.virtualize(          → 
 __cs_c                  → c
-).                      → .
+)                       → 
+.                       → .
 r                       → r
  +                      →  + 
 cs.virtualize(          → 
 __cs_c                  → c
-).                      → .
+)                       → 
+.                       → .
 g                       → g
  +                      →  + 
 cs.virtualize(          → 
 __cs_c                  → c
-).                      → .
+)                       → 
+.                       → .
 b                       → b
 ;                       → ;
 \n                      → \n  

@@ -9,7 +9,7 @@ export interface RewriteState {
   script: ClientScript;
   bindings: BindingResolution;
   errors: Map<ts.Node, string>;
-  mappings: Map<ts.Node, ts.Node>;
+  mappings: Map<ts.Node, ts.Node>; // virtual -> source
 }
 
 // The globally unique binding key the resolver assigned this identifier. Only
@@ -31,7 +31,7 @@ export function rewriteNode(
 ): RewrittenNode {
   const rewritten = rewriteNodeImpl(ts, state, node);
   if (rewritten.virtual.pos < 0) {
-    state.mappings.set(node, rewritten.virtual);
+    state.mappings.set(rewritten.virtual, node);
   }
   return rewritten;
 }
@@ -98,7 +98,7 @@ function rewriteNodeImpl(
       const name = declaration.name;
       const initializer = rewriteNode(ts, state, declaration.initializer);
       const identifier = ts.factory.createIdentifier(mangle(name.text));
-      state.mappings.set(name, identifier);
+      state.mappings.set(identifier, name);
       return {
         virtual: varDecl(
           ts,
@@ -213,7 +213,7 @@ function rewriteNodeImpl(
     if (declaration && ts.isIdentifier(declaration.name)) {
       const name = declaration.name;
       const identifier = ts.factory.createIdentifier(mangle(name.text));
-      state.mappings.set(name, identifier);
+      state.mappings.set(identifier, name);
       param = {
         virtual: identifier,
         runtime: call(ts, "v", "identifier", [
@@ -283,10 +283,14 @@ function rewriteNodeImpl(
     // the client receives, while the access itself stays a real property
     // access (hover, rename, and completions on the name keep working).
     const propertyName = ts.factory.createIdentifier(name);
-    state.mappings.set(node.name, propertyName);
+    state.mappings.set(propertyName, node.name);
+    const virtualReceiver = call(ts, "cs", "virtualize", [
+      expression.virtual as ts.Expression,
+    ]);
+    state.mappings.set(virtualReceiver, node.expression);
     return {
       virtual: ts.factory.createPropertyAccessExpression(
-        call(ts, "cs", "virtualize", [expression.virtual as ts.Expression]),
+        virtualReceiver,
         propertyName,
       ),
       runtime: call(ts, "v", "propertyAccess", [
@@ -316,12 +320,16 @@ function rewriteNodeImpl(
       // arguments and yields its return type. The runtime keeps the direct
       // property call, so receiver binding is unchanged.
       const propertyName = ts.factory.createIdentifier(name);
-      state.mappings.set(access.name, propertyName);
+      state.mappings.set(propertyName, access.name);
+      const virtualReceiver = call(ts, "cs", "virtualize", [
+        receiver.virtual as ts.Expression,
+      ]);
+      state.mappings.set(virtualReceiver, access.expression);
 
       return {
         virtual: ts.factory.createCallExpression(
           ts.factory.createPropertyAccessExpression(
-            call(ts, "cs", "virtualize", [receiver.virtual as ts.Expression]),
+            virtualReceiver,
             propertyName,
           ),
           undefined,
@@ -369,7 +377,7 @@ function rewriteNodeImpl(
     if (params.every((param) => param != null)) {
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
-        state.mappings.set(param.name, identifier);
+        state.mappings.set(identifier, param.name);
         return ts.factory.createParameterDeclaration(
           undefined,
           undefined,
@@ -417,7 +425,7 @@ function rewriteNodeImpl(
         const name = ts.isIdentifier(property.name)
           ? ts.factory.createIdentifier(property.name.text)
           : ts.factory.createStringLiteral(property.name.text);
-        state.mappings.set(property.name, name);
+        state.mappings.set(name, property.name);
         return {
           name,
           value: rewriteNode(ts, state, property.initializer),
