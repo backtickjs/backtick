@@ -13,4 +13,4 @@ class Wallet implements ClientObject {
   }
 }
 
-export default cs.lift(cs.virtualize(cs.autobox(cs.virtualize(cs.autobox(cs.splice(new Wallet([cs.lift(1), cs.lift(2)])))).coins)).length);
+export default cs.lift(cs.virtualize(cs.virtualize(cs.splice(new Wallet([cs.lift(1), cs.lift(2)]))).coins).length);

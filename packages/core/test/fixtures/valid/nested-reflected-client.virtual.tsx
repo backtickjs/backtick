@@ -37,9 +37,9 @@ const segment = new Segment(new Point(cs.lift(1), cs.lift(2)), new Point(cs.lift
 
 export default cs.lift((() => {
     const __cs_s = cs.splice(segment);
-    const __cs_rise = cs.virtualize(cs.autobox(cs.virtualize(cs.autobox(__cs_s)).to)).y - cs.virtualize(cs.autobox(cs.virtualize(cs.autobox(__cs_s)).from)).y;
-    if (cs.virtualize(cs.autobox(__cs_s)).vertical()) {
+    const __cs_rise = cs.virtualize(cs.virtualize(__cs_s).to).y - cs.virtualize(cs.virtualize(__cs_s).from).y;
+    if (cs.virtualize(__cs_s).vertical()) {
         return __cs_rise;
     }
-    return cs.virtualize(cs.autobox(cs.virtualize(cs.autobox(__cs_s)).to)).sum() - cs.virtualize(cs.autobox(cs.virtualize(cs.autobox(__cs_s)).from)).sum();
+    return cs.virtualize(cs.virtualize(__cs_s).to).sum() - cs.virtualize(cs.virtualize(__cs_s).from).sum();
 })());

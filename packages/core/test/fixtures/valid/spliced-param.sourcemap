@@ -1,36 +1,36 @@
-cs.lift(                   → cs`
-() =>                      → () => 
-cs.splice(                 → ${
-this.r                     → this.r
-)                          → }
- +                         →  + 
-2                          → 2
-)                          → `
-cs.lift((() => {\n         → cs`{\n  
-const                      → const 
-__cs_pick                  → pick
- =                         →  = 
-(                          → (
-__cs_c                     → c
-: Color) =>                → : Color) => 
-cs.virtualize(cs.autobox(  → 
-__cs_c                     → c
-)).                        → .
-r                          → r
- +                         →  + 
-1                          → 1
-;                          → ;
-\n                         → \n  
-return                     → return 
-__cs_pick                  → pick
-(                          → (
-cs.splice(                 → ${
-new Color(                 → new Color(
-cs.lift(                   → cs`
-7                          → 7
-)                          → `
-, "#123")                  → , "#123")
-)                          → }
-)                          → )
-;                          → ;
-\n})())                    → \n}`
+cs.lift(                → cs`
+() =>                   → () => 
+cs.splice(              → ${
+this.r                  → this.r
+)                       → }
+ +                      →  + 
+2                       → 2
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_pick               → pick
+ =                      →  = 
+(                       → (
+__cs_c                  → c
+: Color) =>             → : Color) => 
+cs.virtualize(          → 
+__cs_c                  → c
+).                      → .
+r                       → r
+ +                      →  + 
+1                       → 1
+;                       → ;
+\n                      → \n  
+return                  → return 
+__cs_pick               → pick
+(                       → (
+cs.splice(              → ${
+new Color(              → new Color(
+cs.lift(                → cs`
+7                       → 7
+)                       → `
+, "#123")               → , "#123")
+)                       → }
+)                       → )
+;                       → ;
+\n})())                 → \n}`

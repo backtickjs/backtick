@@ -1,9 +1,8 @@
-import type { Autoboxed } from "./Autoboxed.js";
 import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
-import type { Virtualizable, Virtualized } from "./Virtualizable.js";
+import type { Virtualized } from "./Virtualizable.js";
 
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(
@@ -19,16 +18,9 @@ function splice<const T extends Spliceable>(_value: T): Spliced<T> {
   );
 }
 
-function virtualize<T extends Virtualizable>(_value: T): Virtualized<T> {
+function virtualize<T extends ClientUnknown>(_value: T): Virtualized<T> {
   throw new Error(
     "Don't call `cs.virtualize` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
-function autobox<T>(_value: T): Autoboxed<T> {
-  throw new Error(
-    "Don't call `cs.autobox` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -42,5 +34,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  { lift, splice, virtualize, autobox, create },
+  { lift, splice, virtualize, create },
 );

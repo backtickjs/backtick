@@ -1,18 +1,16 @@
 // Type-level assertions for `Spliced` and the `ClientObject` reflection marker.
 // Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
 import type {
-  Autoboxed,
   Client,
   ClientObject,
+  ClientUnknown,
   Spliceable,
   Spliced,
-  Virtualizable,
   Virtualized,
 } from "@backtickjs/core/cs-runtime";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
-declare function virtualize<T extends Virtualizable>(value: T): Virtualized<T>;
-declare function autobox<T>(value: T): Autoboxed<T>;
+declare function virtualize<T extends ClientUnknown>(value: T): Virtualized<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -65,13 +63,15 @@ point satisfies Point;
 virtualize(point).x satisfies number;
 virtualize(point).sum() satisfies number;
 
-// The view filters a `ClientObject`'s members to the virtualizable ones,
-// like reflection does at bundle time — with one structural limit: a bare
-// function member is indistinguishable from a client callable, so a
-// host-only method stays visible and misusing it fails at bundle time.
+// The view filters a `ClientObject`'s members to the spliceable ones, like
+// reflection does at bundle time. A bare function member isn't spliceable —
+// a client-callable member is declared as a `Client` function, like `sum` —
+// so a host-only method doesn't exist on the client.
 // @ts-expect-error — a getter reflecting no data doesn't exist on the client.
 virtualize(point).reflectsNothing;
-virtualize(point).scaled satisfies (factor: number) => Point;
+// @ts-expect-error — a host method isn't a client function; declare it as a
+// `Client<(factor: number) => Point>` member to call it from a script.
+virtualize(point).scaled;
 // @ts-expect-error — the marker doesn't exist on the client.
 virtualize(point)["@backtickjs"];
 
@@ -83,23 +83,25 @@ const segment = spliced(
   ),
 );
 
-// A `ClientObject` member virtualizes eagerly — the view is already
-// usable — and re-virtualizing through a chained access is idempotent.
-virtualize(segment).from.x satisfies number;
+// A `ClientObject` member stays nominal, by `Spliced`'s rule — hovers and
+// errors say `Point` — and unwraps at the next access, where the compiler
+// virtualizes the receiver again.
+virtualize(segment).from satisfies Point;
 virtualize(virtualize(segment).from).x satisfies number;
 virtualize(virtualize(segment).to).sum() satisfies number;
 
 // Plain data crosses into the client unchanged, like a plain object member.
 virtualize(segment).label satisfies string;
 
-// A primitive receiver autoboxes before it virtualizes — the compiler wraps
-// every receiver as `cs.virtualize(cs.autobox(x))` — so members resolve
-// against the client wrapper's view, not the host lib's.
-virtualize(autobox(virtualize(segment).label)).concat("!") satisfies string;
+// A primitive receiver autoboxes to its client wrapper's view: members
+// resolve against the explicit client API, not the host lib's. The wrapper
+// applies to the receiver only — a primitive VALUE crosses unchanged (see
+// `label` above), so re-virtualizing stays idempotent.
+virtualize(virtualize(segment).label).concat("!") satisfies string;
 // @ts-expect-error — `padStart` isn't part of the client string API.
-virtualize(autobox(virtualize(segment).label)).padStart;
-virtualize(autobox(virtualize(point).x)).toString(2) satisfies string;
-virtualize(autobox(true)).toString() satisfies string;
+virtualize(virtualize(segment).label).padStart;
+virtualize(virtualize(point).x).toString(2) satisfies string;
+virtualize(true).toString() satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;
@@ -109,8 +111,13 @@ spliced(clientArrow)() satisfies number;
 // @ts-expect-error — `console` is a host interface, not a client value.
 virtualize(console);
 
-// An array of fragments virtualizes element-wise: the view is `number[]`,
-// so array members like `length` read normally.
+// An array reaches a receiver position already unwrapped — `Spliced` maps a
+// fragment array elementwise before it crosses — and then passes through
+// unchanged, so array members like `length` read normally off the host
+// array.
 declare const clientNumbers: Client<number>[];
-virtualize(clientNumbers) satisfies number[];
-virtualize(clientNumbers).length satisfies number;
+spliced(clientNumbers) satisfies number[];
+virtualize(spliced(clientNumbers)) satisfies number[];
+virtualize(spliced(clientNumbers)).length satisfies number;
+// @ts-expect-error — a raw fragment array is a host value, not a client one.
+virtualize(clientNumbers);

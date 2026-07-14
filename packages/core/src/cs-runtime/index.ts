@@ -1,4 +1,3 @@
-export type { Autoboxed } from "./Autoboxed.js";
 export type { Client } from "./Client.js";
 export type { ClientBoolean } from "./ClientBoolean.js";
 export type { ClientNumber } from "./ClientNumber.js";
@@ -19,5 +18,5 @@ export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export { isSpliceable, type Spliceable, type Spliced } from "./Spliceable.js";
-export type { Virtualizable, Virtualized } from "./Virtualizable.js";
+export type { Virtualized } from "./Virtualizable.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
