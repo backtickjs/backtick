@@ -1,0 +1,27 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_p                  → p
+ =                      →  = 
+cs.splice(new (         → new 
+Point                   → Point
+)(cs.lift(              → (
+1                       → 1
+), cs.lift(             → , 
+2                       → 2
+)))                     → )
+;                       → ;
+\n                      → \n  
+return                  → return 
+cs.virtualize(          → 
+__cs_p                  → p
+)                       → 
+.                       → .
+x                       → x
+ +                      →  + 
+cs.virtualize(          → 
+__cs_p                  → p
+)                       → 
+.                       → .
+y                       → y
+;                       → ;
+\n})())                 → \n}`

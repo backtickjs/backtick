@@ -156,6 +156,8 @@ function buildExpression(
       return renderSplice(node.index);
     case "AstScriptString":
       return node.value;
+    case "AstScriptNew":
+      return "Class";
     default: {
       const unhandled: never = node;
       throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);

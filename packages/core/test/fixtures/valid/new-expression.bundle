@@ -1,0 +1,58 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "p",
+            "expression": {
+              "#": "new",
+              "callee": {
+                "#": "identifier",
+                "name": "Point"
+              },
+              "args": [
+                1,
+                2
+              ]
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "binop",
+              "operator": "+",
+              "left": {
+                "#": "property",
+                "object": {
+                  "#": "identifier",
+                  "name": "p"
+                },
+                "name": "x"
+              },
+              "right": {
+                "#": "property",
+                "object": {
+                  "#": "identifier",
+                  "name": "p"
+                },
+                "name": "y"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

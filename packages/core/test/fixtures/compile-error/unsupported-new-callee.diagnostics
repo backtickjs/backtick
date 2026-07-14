@@ -1,0 +1,1 @@
+7:25-7:40 error TS0: `new` must construct a spliced class in a `cs` client script, e.g. `new ${MyClass}(...)`.

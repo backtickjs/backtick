@@ -76,6 +76,9 @@ export interface Visitor<U> {
   // e.g. s.concat("!")
   call(loc: SourceLocation, callee: U, args: U[]): U;
 
+  // e.g. new ${Foo}(1)
+  "new"(loc: SourceLocation, callee: U, args: U[]): U;
+
   // e.g. (r, g, b) => { ... }
   arrow(loc: SourceLocation, params: U[], body: U): U;
 }

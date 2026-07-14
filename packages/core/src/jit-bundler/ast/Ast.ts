@@ -21,6 +21,7 @@ export type AstScriptExpression =
   | AstScriptBoolean
   | AstScriptCall
   | AstScriptIdentifier
+  | AstScriptNew
   | AstScriptNull
   | AstScriptNumber
   | AstScriptObject
@@ -119,6 +120,13 @@ export interface AstScriptIf {
   readonly condition: AstScriptExpression;
   readonly consequent: AstScriptStatement;
   readonly alternate: AstScriptStatement | null;
+}
+
+export interface AstScriptNew {
+  readonly kind: "AstScriptNew";
+  readonly loc: SourceLocation;
+  readonly callee: AstScriptExpression;
+  readonly args: readonly AstScriptExpression[];
 }
 
 export interface AstScriptNull {

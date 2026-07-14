@@ -1,0 +1,6 @@
+#f0 = () => {
+  const p = new Point(1, 2);
+  return p.x + p.y;
+}
+
+root = #f0()

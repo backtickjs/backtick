@@ -15,6 +15,7 @@ import type {
   AstScriptExpression,
   AstScriptIdentifier,
   AstScriptIf,
+  AstScriptNew,
   AstScriptNode,
   AstScriptNull,
   AstScriptNumber,
@@ -148,6 +149,14 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     args: AstScriptExpression[],
   ): AstScriptCall {
     return { kind: "AstScriptCall", loc, callee, args };
+  }
+
+  new(
+    loc: SourceLocation,
+    callee: AstScriptExpression,
+    args: AstScriptExpression[],
+  ): AstScriptNew {
+    return { kind: "AstScriptNew", loc, callee, args };
   }
 
   arrow(
