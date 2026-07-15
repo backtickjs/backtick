@@ -245,12 +245,15 @@ function rewriteNodeImpl(
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
-      // The identifier prints the splice's placeholder. For a braced splice
-      // that is the `$0splice<n>` the assembler replaces with the host
-      // expression's verbatim source text (mapped 1:1), recursing into any
-      // nested `cs` scripts it contains; for an unbraced splice it is the
-      // host binding the shorthand names, printed as-is.
-      const identifier = ts.factory.createIdentifier(splice.placeholder);
+      // A braced splice prints its `$0splice<n>` key; the assembler replaces
+      // it with the host expression's verbatim source text (mapped 1:1),
+      // recursing into any nested `cs` scripts it contains. An unbraced
+      // splice prints its expression — the host binding the shorthand
+      // names — as a fresh identifier, because `splice.expression` already
+      // sits in the emitted runtime's metadata tree.
+      const identifier = ts.factory.createIdentifier(
+        splice.kind === "braced" ? splice.key : splice.expression.text,
+      );
       if (splice.kind === "unbraced") {
         state.mappings.set(identifier, node);
       }
@@ -258,7 +261,7 @@ function rewriteNodeImpl(
         virtual: call(ts, "cs", "splice", [identifier]),
         runtime: call(ts, "v", "splice", [
           loc(node),
-          ts.factory.createStringLiteral(splice.placeholder),
+          ts.factory.createStringLiteral(splice.key),
         ]),
       };
     }
@@ -399,7 +402,12 @@ function rewriteNodeImpl(
       call(ts, "cs", "lift", [arg.virtual as ts.Expression]),
     );
 
-    const classIdentifier = ts.factory.createIdentifier(callee.text);
+    // Same as an identifier splice: a braced callee prints its key for the
+    // assembler to substitute; an unbraced callee prints the host binding
+    // its shorthand names.
+    const classIdentifier = ts.factory.createIdentifier(
+      splice.kind === "braced" ? splice.key : splice.expression.text,
+    );
     state.mappings.set(classIdentifier, callee);
 
     return {
@@ -414,7 +422,7 @@ function rewriteNodeImpl(
         loc(node),
         call(ts, "v", "splice", [
           loc(callee),
-          ts.factory.createStringLiteral(splice.placeholder),
+          ts.factory.createStringLiteral(splice.key),
         ]),
         ts.factory.createArrayLiteralExpression(
           rewrittenArgs.map((arg) => arg.runtime as ts.Expression),
