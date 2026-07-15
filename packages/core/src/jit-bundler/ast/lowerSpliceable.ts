@@ -42,6 +42,15 @@ export function lowerSpliceable(value: Spliceable): Ast {
   if (Array.isArray(value)) {
     return { kind: "AstArray", elements: value.map(lowerSpliceable) };
   }
+  // A class splices only as a `new` callee: its slot holds its bundle-time
+  // expansion (see `expandMacros`), never the class itself, so one reaching
+  // value position was spliced without being constructed.
+  if (typeof value === "function") {
+    throw new Error(
+      "Can't splice a class as a value: a spliced class can only be " +
+        "constructed with `new` in the client script.",
+    );
+  }
   // Only plain objects reflect structurally. A class instance without the
   // "@backtickjs" marker would land here and half-work — own fields reflect,
   // getters silently vanish — so fail loudly instead.

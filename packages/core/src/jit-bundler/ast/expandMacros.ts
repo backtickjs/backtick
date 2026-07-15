@@ -1,8 +1,4 @@
-import type {
-  Client,
-  ClientUnknown,
-  Spliceable,
-} from "../../cs-runtime/index.js";
+import type { Spliceable } from "../../cs-runtime/index.js";
 import type { AstExpansion, AstScriptNew, AstScriptStatement } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
@@ -24,9 +20,13 @@ export function expandMacros(
 ): ReadonlyMap<number, AstExpansion> {
   const expansions = new Map<number, AstExpansion>();
   forEachMacro(body, (node) => {
-    const splicedClass = splices[node.callee.index] as unknown as new (
-      ...args: Client<ClientUnknown>[]
-    ) => Spliceable;
+    const splicedClass = splices[node.callee.index];
+    if (typeof splicedClass !== "function") {
+      throw new Error(
+        "Can't expand this construction: the spliced `new` callee isn't a " +
+          "class.",
+      );
+    }
     const params = node.args.map((_, position) => `$${position}`);
     expansions.set(node.callee.index, {
       kind: "AstExpansion",
