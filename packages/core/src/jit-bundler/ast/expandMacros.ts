@@ -3,191 +3,104 @@ import type {
   ClientUnknown,
   Spliceable,
 } from "../../cs-runtime/index.js";
-import type {
-  AstExpansion,
-  AstScriptBlock,
-  AstScriptBody,
-  AstScriptCall,
-  AstScriptExpression,
-  AstScriptNew,
-  AstScriptStatement,
-} from "./Ast.js";
+import type { AstExpansion, AstScriptNew, AstScriptStatement } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
-export interface MacroExpandedBody {
-  readonly body: AstScriptBody;
-  // Expansions in source order; the expansion at position `i` fills splice
-  // slot `splices.length + i`, the slot its expanded node calls.
-  readonly expansions: readonly AstExpansion[];
-  // Splice slots consumed by an expansion (a `new` callee): the raw value —
-  // a class, which isn't spliceable — stays on the host, so the slot
-  // serializes as null.
-  readonly consumedSplices: ReadonlySet<number>;
-}
-
-// Rewrites every macro node (`AstScriptNew`) in a parsed body into a call of
-// a synthetic splice slot, and lowers each expansion into the `AstExpansion`
-// that fills its slot — like its `lower*` siblings, every host reference
-// consumed comes back as serializable data. Expanding evaluates live host
-// values — which differ per script instance even at one source location — so
-// the parsed body is shared but this pass runs once per client. A macro-free
-// body comes back unchanged, by identity.
+// Expands every macro node (`AstScriptNew`) in a parsed body: the callee's
+// splice value — a class, live only on the host — runs once with one opaque
+// hole per argument, and the instance it returns lowers into the
+// `AstExpansion` that fills the callee's own splice slot, which the class
+// leaves free by staying on the host. The body itself is never touched — a
+// macro node serializes as a call of its slot (see `lowerScriptBody`), so
+// expansion is pure slot data:
+// new ${Point}(1, 2) -> (($0, $1) => new Point($0, $1))(1, 2)
+// Expanding evaluates live host values — which differ per script instance
+// even at one source location — so every client shares the one parsed body
+// but walks it with its own splices.
 export function expandMacros(
-  body: AstScriptBody,
+  body: AstScriptStatement,
   splices: readonly Spliceable[],
-): MacroExpandedBody {
-  const expander = new MacroExpander(splices);
-  return {
-    body: expander.body(body),
-    expansions: expander.expansions,
-    consumedSplices: expander.consumedSplices,
-  };
-}
-
-class MacroExpander {
-  readonly expansions: AstExpansion[] = [];
-  readonly consumedSplices = new Set<number>();
-  private readonly splices: readonly Spliceable[];
-
-  constructor(splices: readonly Spliceable[]) {
-    this.splices = splices;
-  }
-
-  body(node: AstScriptBody): AstScriptBody {
-    return node.kind === "AstScriptBlock"
-      ? this.block(node)
-      : this.expression(node);
-  }
-
-  private block(node: AstScriptBlock): AstScriptBlock {
-    const statements = mapNodes(node.statements, (s) => this.statement(s));
-    return statements === node.statements ? node : { ...node, statements };
-  }
-
-  private statement(node: AstScriptStatement): AstScriptStatement {
-    switch (node.kind) {
-      case "AstScriptAssignment":
-      case "AstScriptReturn":
-      case "AstScriptThrow":
-      case "AstScriptVariableDeclaration": {
-        const expression = this.expression(node.expression);
-        return expression === node.expression ? node : { ...node, expression };
-      }
-      case "AstScriptBlock":
-        return this.block(node);
-      case "AstScriptIf": {
-        const condition = this.expression(node.condition);
-        const consequent = this.statement(node.consequent);
-        const alternate =
-          node.alternate === null ? null : this.statement(node.alternate);
-        return condition === node.condition &&
-          consequent === node.consequent &&
-          alternate === node.alternate
-          ? node
-          : { ...node, condition, consequent, alternate };
-      }
-      case "AstScriptTry": {
-        const block = this.block(node.block);
-        const handler = this.block(node.handler);
-        return block === node.block && handler === node.handler
-          ? node
-          : { ...node, block, handler };
-      }
-      default:
-        // Every remaining kind is an expression, evaluated for its effect.
-        return this.expression(node);
-    }
-  }
-
-  private expression(node: AstScriptExpression): AstScriptExpression {
-    switch (node.kind) {
-      case "AstScriptNew":
-        return this.expand(node);
-      case "AstScriptArray": {
-        const elements = mapNodes(node.elements, (e) => this.expression(e));
-        return elements === node.elements ? node : { ...node, elements };
-      }
-      case "AstScriptArrow": {
-        const body = this.body(node.body);
-        return body === node.body ? node : { ...node, body };
-      }
-      case "AstScriptBinop": {
-        const lhs = this.expression(node.lhs);
-        const rhs = this.expression(node.rhs);
-        return lhs === node.lhs && rhs === node.rhs
-          ? node
-          : { ...node, lhs, rhs };
-      }
-      case "AstScriptCall": {
-        const callee = this.expression(node.callee);
-        const args = mapNodes(node.args, (arg) => this.expression(arg));
-        return callee === node.callee && args === node.args
-          ? node
-          : { ...node, callee, args };
-      }
-      case "AstScriptObject": {
-        let changed = false;
-        const entries: { [key: string]: AstScriptExpression } = {};
-        for (const [key, value] of Object.entries(node.entries)) {
-          const expanded = this.expression(value);
-          if (expanded !== value) {
-            changed = true;
-          }
-          entries[key] = expanded;
-        }
-        return changed ? { ...node, entries } : node;
-      }
-      case "AstScriptPropertyAccess": {
-        const expression = this.expression(node.expression);
-        return expression === node.expression ? node : { ...node, expression };
-      }
-      default:
-        // Literals, identifiers, and splices carry no children.
-        return node;
-    }
-  }
-
-  // The constructor — the callee's splice value, live on the host — runs
-  // once with one opaque hole per argument, and the instance it returns
-  // lowers into the `AstExpansion` filling a synthetic splice slot as a
-  // function of those holes. The rewritten node reads as an ordinary call of
-  // that slot:
-  // new ${Point}(1, 2) -> (($0, $1) => new Point($0, $1))(1, 2)
-  private expand(node: AstScriptNew): AstScriptCall {
-    // Arguments expand first, so nested macros take lower slots — the same
-    // bottom-up order the builder visits in.
-    const args = mapNodes(node.args, (arg) => this.expression(arg));
-    const splicedClass = this.splices[node.callee.index] as unknown as new (
+): ReadonlyMap<number, AstExpansion> {
+  const expansions = new Map<number, AstExpansion>();
+  forEachMacro(body, (node) => {
+    const splicedClass = splices[node.callee.index] as unknown as new (
       ...args: Client<ClientUnknown>[]
     ) => Spliceable;
     const params = node.args.map((_, position) => `$${position}`);
-    const index = this.splices.length + this.expansions.length;
-    this.expansions.push({
+    expansions.set(node.callee.index, {
       kind: "AstExpansion",
       params,
       body: lowerSpliceable(new splicedClass(...params.map(createHole))),
     });
-    this.consumedSplices.add(node.callee.index);
-    return {
-      kind: "AstScriptCall",
-      loc: node.loc,
-      callee: { kind: "AstScriptSplice", loc: node.callee.loc, index },
-      args,
-    };
-  }
+  });
+  return expansions;
 }
 
-// Maps a node list, returning the input array untouched when no element
-// changed so an unchanged subtree keeps its identity.
-function mapNodes<T>(nodes: readonly T[], map: (node: T) => T): readonly T[] {
-  let changed = false;
-  const mapped = nodes.map((node) => {
-    const result = map(node);
-    if (result !== node) {
-      changed = true;
+// Walks a body in source order, calling back on each macro node. Each
+// template placeholder occurs exactly once in a script's source, so distinct
+// macro nodes always name distinct slots. A macro's arguments may nest
+// further macros, so the walk recurses into them too.
+function forEachMacro(
+  node: AstScriptStatement,
+  callback: (node: AstScriptNew) => void,
+): void {
+  const visit = (child: AstScriptStatement): void =>
+    forEachMacro(child, callback);
+  switch (node.kind) {
+    case "AstScriptNew":
+      callback(node);
+      node.args.forEach(visit);
+      return;
+    case "AstScriptAssignment":
+    case "AstScriptReturn":
+    case "AstScriptThrow":
+    case "AstScriptVariableDeclaration":
+    case "AstScriptPropertyAccess":
+      visit(node.expression);
+      return;
+    case "AstScriptBlock":
+      node.statements.forEach(visit);
+      return;
+    case "AstScriptIf":
+      visit(node.condition);
+      visit(node.consequent);
+      if (node.alternate !== null) {
+        visit(node.alternate);
+      }
+      return;
+    case "AstScriptTry":
+      visit(node.block);
+      visit(node.handler);
+      return;
+    case "AstScriptArray":
+      node.elements.forEach(visit);
+      return;
+    case "AstScriptArrow":
+      visit(node.body);
+      return;
+    case "AstScriptBinop":
+      visit(node.lhs);
+      visit(node.rhs);
+      return;
+    case "AstScriptCall":
+      visit(node.callee);
+      node.args.forEach(visit);
+      return;
+    case "AstScriptObject":
+      Object.values(node.entries).forEach(visit);
+      return;
+    case "AstScriptBoolean":
+    case "AstScriptIdentifier":
+    case "AstScriptNull":
+    case "AstScriptNumber":
+    case "AstScriptSplice":
+    case "AstScriptString":
+      // Literals, identifiers, and splices carry no children.
+      return;
+    default: {
+      const unhandled: never = node;
+      throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);
     }
-    return result;
-  });
-  return changed ? mapped : nodes;
+  }
 }

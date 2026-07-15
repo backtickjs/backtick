@@ -33,12 +33,8 @@ export function lowerClientScript(client: ClientScript): AstScript {
   }
 
   // Macros expand against the client's live splices — per-instance values —
-  // so expansion runs per client over the shared parsed body; a macro-free
-  // body passes through untouched.
-  const { body, expansions, consumedSplices } = expandMacros(
-    parsed,
-    client.metadata.splices,
-  );
+  // so expansion runs per client over the shared parsed body.
+  const expansions = expandMacros(parsed, client.metadata.splices);
 
   // The client object graph is acyclic — a script's splices are host values that
   // exist before the script itself — so lowering the splices before caching the
@@ -47,21 +43,15 @@ export function lowerClientScript(client: ClientScript): AstScript {
     kind: "AstScript",
     loc: client.loc,
     fileHash: client.fileHash,
-    // A slot consumed by an expansion (a `new` callee) holds the raw class,
-    // which stays on the host and serializes as null. The expansions fill
-    // the synthetic slots their expanded nodes call, appended after the real
-    // splices in the same order `expandMacros` assigned their indices.
-    splices: [
-      ...client.metadata.splices.map((splice, index) =>
-        consumedSplices.has(index)
-          ? { kind: "AstNull" as const }
-          : lowerSpliceable(splice),
-      ),
-      ...expansions,
-    ],
+    // A macro's slot (a `new` callee) holds the class's expansion rather
+    // than the class, which stays on the host; the macro node reads as a
+    // call of that slot.
+    splices: client.metadata.splices.map(
+      (splice, index) => expansions.get(index) ?? lowerSpliceable(splice),
+    ),
     captures: client.metadata.captures,
     declarations: client.metadata.declarations,
-    expression: body,
+    expression: parsed,
   };
   nodeByClient.set(client, node);
   return node;
