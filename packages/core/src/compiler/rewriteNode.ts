@@ -245,13 +245,17 @@ function rewriteNodeImpl(
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
-      // Keep the `$0splice<n>` placeholder; the assembler replaces it with the
-      // host expression's verbatim source text (mapped 1:1), recursing into any
-      // nested `cs` scripts it contains.
+      // The identifier prints the splice's placeholder. For a braced splice
+      // that is the `$0splice<n>` the assembler replaces with the host
+      // expression's verbatim source text (mapped 1:1), recursing into any
+      // nested `cs` scripts it contains; for an unbraced splice it is the
+      // host binding the shorthand names, printed as-is.
+      const identifier = ts.factory.createIdentifier(splice.placeholder);
+      if (splice.kind === "unbraced") {
+        state.mappings.set(identifier, node);
+      }
       return {
-        virtual: call(ts, "cs", "splice", [
-          ts.factory.createIdentifier(node.text),
-        ]),
+        virtual: call(ts, "cs", "splice", [identifier]),
         runtime: call(ts, "v", "splice", [
           loc(node),
           ts.factory.createStringLiteral(splice.placeholder),

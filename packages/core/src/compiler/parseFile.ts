@@ -21,9 +21,10 @@ export interface ClientScript {
 // A host value read into a client script: braced — a `${...}` template
 // span — or unbraced, the `$x` shorthand, sugar for splicing the host
 // binding named without the sigil (`$x` reads as `${x}`). Both stand in the
-// placeholder text as an identifier (`placeholder`) — the key the runtime
-// metadata carries the value under — and evaluate a host expression
-// (`expression`).
+// placeholder text as an identifier and evaluate a host expression
+// (`expression`), carried by the runtime metadata under `placeholder`: the
+// identifier itself for a braced splice, the name without its sigil for an
+// unbraced one.
 export type Splice = BracedSplice | UnbracedSplice;
 
 export interface BracedSplice {
@@ -40,7 +41,8 @@ export interface UnbracedSplice {
   kind: "unbraced";
   // the host binding the shorthand names (synthesized, e.g. `x` for `$x`)
   expression: ts.Identifier;
-  // the `$x` itself: already an identifier, it stands for itself
+  // the host binding's name (`x` for `$x`) — the metadata key; the splice
+  // dictionary still keys the splice by the `$x` spelling it stands as
   placeholder: string;
   // a shorthand names a single binding, so it nests no scripts
   scripts: [];
@@ -103,14 +105,14 @@ function getDirectScripts(
     );
     // The dictionary's insertion order is evaluation order: emitted as the
     // script's metadata object literal, the splices' host expressions run
-    // first to last when the `cs` expression itself evaluates, like a real
-    // template literal's spans — settled before the runtime tree ever runs.
-    // Braced splices go first, in span order, then unbraced ones, so an
-    // unbraced read can observe a later braced splice's side effects.
-    const splices: { [placeholder: string]: Splice } = {
-      ...getDirectBracedSplices(ts, taggedTemplate, sourceFile),
-      ...getDirectUnbracedSplices(ts, fileWithPlaceholders),
-    };
+    // first to last when the `cs` expression itself evaluates — left to
+    // right in source order, like a real template literal's spans.
+    const splices = getDirectSplices(
+      ts,
+      taggedTemplate,
+      sourceFile,
+      fileWithPlaceholders,
+    );
     const toSourceRange = (node: ts.Node): SourceRange => ({
       start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
       end: toSourceOffset(mappings, node.getEnd()),
@@ -137,44 +139,34 @@ function getDirectScripts(
   return scripts;
 }
 
-// One braced splice per `${...}` template span, in source order, each
-// recursing into the client scripts its host expression nests.
-function getDirectBracedSplices(
+// A splice per first reference in the placeholder text, in source order: a
+// `$0splice<n>` placeholder resolves to its template span's braced splice,
+// and any other `$x` identifier mints an unbraced splice, deduplicated by
+// spelling. Property names and declaration names are not references (a
+// `$`-prefixed declaration is rejected at rewrite time), and nested scripts
+// are already placeholders in this text, so the walk scans only the
+// script's own body.
+function getDirectSplices(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
-): { [placeholder: string]: BracedSplice } {
-  const splices: { [placeholder: string]: BracedSplice } = {};
+  fileWithPlaceholders: ts.SourceFile,
+): { [placeholder: string]: Splice } {
+  const splices: { [placeholder: string]: Splice } = {};
 
   const template = taggedTemplate.template;
-  if (ts.isTemplateExpression(template)) {
-    template.templateSpans.forEach((span, index) => {
-      const splice: BracedSplice = {
-        kind: "braced",
-        expression: span.expression,
-        placeholder: `$0splice${index}`,
-        scripts: [],
-      };
-      splices[splice.placeholder] = splice;
-      splice.scripts = getDirectScripts(ts, splice, sourceFile);
-    });
-  }
+  const spans = ts.isTemplateExpression(template) ? template.templateSpans : [];
 
-  return splices;
-}
-
-// An unbraced splice for every `$x` shorthand referenced in the placeholder
-// text, deduplicated by spelling. Property names and declaration names are
-// not references (a `$`-prefixed declaration is rejected at rewrite time),
-// and nested scripts are already placeholders in this text, so the walk
-// scans only the script's own body. A braced placeholder is itself a
-// `$`-prefixed identifier in expression position, so its `$0splice` prefix
-// is excluded — it already names a braced splice.
-function getDirectUnbracedSplices(
-  ts: typeof import("typescript"),
-  fileWithPlaceholders: ts.SourceFile,
-): { [placeholder: string]: UnbracedSplice } {
-  const splices: { [placeholder: string]: UnbracedSplice } = {};
+  const addBraced = (placeholder: string, span: ts.TemplateSpan): void => {
+    const splice: BracedSplice = {
+      kind: "braced",
+      expression: span.expression,
+      placeholder,
+      scripts: [],
+    };
+    splices[placeholder] = splice;
+    splice.scripts = getDirectScripts(ts, splice, sourceFile);
+  };
 
   const visit = (node: ts.Node): void => {
     if (ts.isPropertyAccessExpression(node)) {
@@ -202,20 +194,41 @@ function getDirectUnbracedSplices(
       ts.isIdentifier(node) &&
       node.text.startsWith("$") &&
       node.text.length > 1 &&
-      !node.text.startsWith("$0splice") &&
       splices[node.text] === undefined
     ) {
-      splices[node.text] = {
-        kind: "unbraced",
-        expression: ts.factory.createIdentifier(node.text.slice(1)),
-        placeholder: node.text,
-        scripts: [],
-      };
+      if (node.text.startsWith("$0splice")) {
+        // Only the exact spellings `toTextWithPlaceholders` substituted
+        // resolve to a span; any other `$0`-prefixed identifier can't name
+        // a host binding either, so it is no splice at all.
+        const index = Number(node.text.slice("$0splice".length));
+        const span = spans[index];
+        if (span !== undefined && node.text === `$0splice${index}`) {
+          addBraced(node.text, span);
+        }
+      } else {
+        const name = node.text.slice(1);
+        splices[node.text] = {
+          kind: "unbraced",
+          expression: ts.factory.createIdentifier(name),
+          placeholder: name,
+          scripts: [],
+        };
+      }
       return;
     }
     node.forEachChild(visit);
   };
   visit(fileWithPlaceholders);
+
+  // A placeholder the walk never reached — sitting in a name position, or
+  // mangled by parse-error recovery — still gets its splice, appended after
+  // the source-ordered ones.
+  spans.forEach((span, index) => {
+    const placeholder = `$0splice${index}`;
+    if (splices[placeholder] === undefined) {
+      addBraced(placeholder, span);
+    }
+  });
 
   return splices;
 }

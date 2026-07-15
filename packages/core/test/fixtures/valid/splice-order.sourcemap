@@ -1,13 +1,15 @@
-cs.lift(           → cs`
-{                  → ({ 
-a                  → a
-:                  → : 
-cs.splice($count)  → $count
-,                  → , 
-b                  → b
-:                  → : 
-cs.splice(         → ${
-count++            → count++
-)                  → }
- }                 →  })
-)                  → `
+cs.lift(    → cs`
+{           → ({ 
+a           → a
+:           → : 
+cs.splice(  → 
+count       → $count
+)           → 
+,           → , 
+b           → b
+:           → : 
+cs.splice(  → ${
+++count     → ++count
+)           → }
+ }          →  })
+)           → `
