@@ -199,21 +199,17 @@ export class AstBuilder implements Visitor<AstScriptNode> {
   // new ${Point}(1, 2) -> (($0, $1) => new Point($0, $1))(1, 2)
   new(
     loc: SourceLocation,
-    callee: AstScriptExpression,
+    callee: AstScriptSplice,
     args: AstScriptExpression[],
   ): AstScriptCall {
-    if (callee.kind !== "AstScriptSplice") {
-      // The compiler only emits a `new` node for a spliced callee.
-      throw new Error("`new` must construct a spliced class.");
-    }
-    const constructor = this.splices[callee.index] as unknown as new (
+    const splicedClass = this.splices[callee.index] as unknown as new (
       ...args: Client<ClientUnknown>[]
     ) => Spliceable;
     const params = args.map((_, position) => `$${position}`);
     const index = this.splices.length + this.expansions.length;
     this.expansions.push({
       params,
-      value: new constructor(...params.map(createHole)),
+      value: new splicedClass(...params.map(createHole)),
     });
     this.consumedSplices.add(callee.index);
     return {
