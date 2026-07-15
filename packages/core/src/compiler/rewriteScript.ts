@@ -75,7 +75,7 @@ export function rewriteScript(
           splices.map((splice: Splice) =>
             ts.factory.createPropertyAssignment(
               splice.placeholder,
-              splice.sourceNode.expression,
+              splice.expression,
             ),
           ),
           false,

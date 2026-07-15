@@ -96,7 +96,7 @@ function renderScript(
       stack.pop();
     } else {
       const splice = script.splices[event.placeholder];
-      const { expression } = splice.sourceNode;
+      const { expression } = splice;
       flush(top, event.pos, expression.getStart(sourceFile));
       segments.push(...renderSplice(ts, sourceFile, rewrittenFile, splice));
       if (top) {
@@ -117,7 +117,7 @@ function renderSplice(
   splice: Splice,
 ): Segment[] {
   const segments: Segment[] = [];
-  const expression = splice.sourceNode.expression;
+  const expression = splice.expression;
   const end = expression.getEnd();
 
   let cursor = expression.getStart(sourceFile);

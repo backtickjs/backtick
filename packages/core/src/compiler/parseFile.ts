@@ -18,10 +18,32 @@ export interface ClientScript {
   toSourceRange: (node: ts.Node) => SourceRange;
 }
 
-export interface Splice {
-  sourceNode: ts.TemplateSpan;
+// A host value read into a client script: braced — a `${...}` template
+// span — or unbraced, the `$x` shorthand, sugar for splicing the host
+// binding named without the sigil (`$x` reads as `${x}`). Both stand in the
+// placeholder text as an identifier (`placeholder`) — the key the runtime
+// metadata carries the value under — and evaluate a host expression
+// (`expression`).
+export type Splice = BracedSplice | UnbracedSplice;
+
+export interface BracedSplice {
+  kind: "braced";
+  // the template span's host expression
+  expression: ts.Expression;
+  // the `$0splice<n>` identifier in `textWithPlaceholders`
   placeholder: string;
+  // client scripts nested in the host expression
   scripts: ClientScript[];
+}
+
+export interface UnbracedSplice {
+  kind: "unbraced";
+  // the host binding the shorthand names (synthesized, e.g. `x` for `$x`)
+  expression: ts.Identifier;
+  // the `$x` itself: already an identifier, it stands for itself
+  placeholder: string;
+  // a shorthand names a single binding, so it nests no scripts
+  scripts: [];
 }
 
 export function parseSourceText(
@@ -50,7 +72,7 @@ function getDirectScripts(
   parent: Splice | null,
   sourceFile: ts.SourceFile,
 ): ClientScript[] {
-  const node: ts.Node = parent ? parent.sourceNode.expression : sourceFile;
+  const node: ts.Node = parent ? parent.expression : sourceFile;
   const taggedTemplates: ts.TaggedTemplateExpression[] = [];
 
   const visit = (current: ts.Node): void => {
@@ -69,17 +91,18 @@ function getDirectScripts(
   const scripts: ClientScript[] = [];
 
   taggedTemplates.forEach((taggedTemplate) => {
-    const splices = getDirectSplices(ts, taggedTemplate, sourceFile);
-    const { textWithPlaceholders, mappings } = toTextWithPlaceholders(
-      ts,
-      taggedTemplate,
-      sourceFile,
-      splices,
-    );
+    const { textWithPlaceholders, mappings, expressions } =
+      toTextWithPlaceholders(ts, taggedTemplate, sourceFile);
     const fileWithPlaceholders = ts.createSourceFile(
       sourceFile.fileName,
       textWithPlaceholders,
       ts.ScriptTarget.Latest,
+    );
+    const splices = findSplices(
+      ts,
+      sourceFile,
+      fileWithPlaceholders,
+      expressions,
     );
     const toSourceRange = (node: ts.Node): SourceRange => ({
       start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
@@ -107,26 +130,71 @@ function getDirectScripts(
   return scripts;
 }
 
-function getDirectSplices(
+// A script's splices: one braced splice per `${...}` span — `expressions`
+// maps each substituted placeholder to its span's host expression — plus an
+// unbraced splice for every `$x` shorthand referenced in the placeholder
+// text, deduplicated by spelling. Property names and declaration names are
+// not references (a `$`-prefixed declaration is rejected at rewrite time),
+// and nested scripts are already placeholders in this text, so the walk
+// scans only the script's own body.
+function findSplices(
   ts: typeof import("typescript"),
-  taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
+  fileWithPlaceholders: ts.SourceFile,
+  expressions: { [placeholder: string]: ts.Expression },
 ): { [placeholder: string]: Splice } {
   const splices: { [placeholder: string]: Splice } = {};
 
-  const template = taggedTemplate.template;
-  if (ts.isTemplateExpression(template)) {
-    template.templateSpans.forEach((span, index) => {
-      const placeholder = `$0splice${index}`;
-      const splice: Splice = {
-        sourceNode: span,
-        placeholder,
+  for (const [placeholder, expression] of Object.entries(expressions)) {
+    const splice: BracedSplice = {
+      kind: "braced",
+      expression,
+      placeholder,
+      scripts: [],
+    };
+    splices[placeholder] = splice;
+    splice.scripts = getDirectScripts(ts, splice, sourceFile);
+  }
+
+  const visit = (node: ts.Node): void => {
+    if (ts.isPropertyAccessExpression(node)) {
+      visit(node.expression); // the name is not a reference
+      return;
+    }
+    if (ts.isPropertyAssignment(node)) {
+      if (ts.isComputedPropertyName(node.name)) {
+        visit(node.name);
+      }
+      visit(node.initializer);
+      return;
+    }
+    if (ts.isVariableDeclaration(node) || ts.isParameter(node)) {
+      if (node.initializer) {
+        visit(node.initializer);
+      }
+      return;
+    }
+    if (ts.isCatchClause(node)) {
+      visit(node.block); // the catch binding is not a reference
+      return;
+    }
+    if (
+      ts.isIdentifier(node) &&
+      node.text.startsWith("$") &&
+      node.text.length > 1 &&
+      splices[node.text] === undefined
+    ) {
+      splices[node.text] = {
+        kind: "unbraced",
+        expression: ts.factory.createIdentifier(node.text.slice(1)),
+        placeholder: node.text,
         scripts: [],
       };
-      splices[placeholder] = splice;
-      splice.scripts = getDirectScripts(ts, splice, sourceFile);
-    });
-  }
+      return;
+    }
+    node.forEachChild(visit);
+  };
+  visit(fileWithPlaceholders);
 
   return splices;
 }
@@ -138,14 +206,17 @@ interface OffsetMapping {
   verbatim: boolean;
 }
 
+// Substitutes a `$0splice<n>` placeholder identifier for each `${...}` span
+// so the template's contents parse as ordinary code, mapping every chunk
+// back to its source offsets.
 function toTextWithPlaceholders(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
   sourceFile: ts.SourceFile,
-  splices: { [placeholder: string]: Splice },
 ): {
   textWithPlaceholders: string;
   mappings: OffsetMapping[];
+  expressions: { [placeholder: string]: ts.Expression };
 } {
   const sourceText = sourceFile.text;
   const template = taggedTemplate.template;
@@ -155,6 +226,7 @@ function toTextWithPlaceholders(
 
   let textWithPlaceholders = "";
   const mappings: OffsetMapping[] = [];
+  const expressions: { [placeholder: string]: ts.Expression } = {};
 
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
     textWithPlaceholders = sourceText.slice(start, end);
@@ -169,7 +241,7 @@ function toTextWithPlaceholders(
 
     template.templateSpans.forEach((span, index) => {
       const placeholder = `$0splice${index}`;
-      const splice = splices[placeholder];
+      expressions[placeholder] = span.expression;
       const dollarBrace = span.expression.getFullStart() - 2; // before ${
       const chunk = sourceText.slice(chunkStart, dollarBrace);
       mappings.push({
@@ -181,11 +253,11 @@ function toTextWithPlaceholders(
       textWithPlaceholders += chunk;
       mappings.push({
         placeholderStart: textWithPlaceholders.length,
-        length: splice.placeholder.length,
+        length: placeholder.length,
         sourceStart: dollarBrace,
         verbatim: false,
       });
-      textWithPlaceholders += splice.placeholder;
+      textWithPlaceholders += placeholder;
       chunkStart = span.literal.getStart(sourceFile) + 1; // past }
     });
 
@@ -199,7 +271,7 @@ function toTextWithPlaceholders(
     textWithPlaceholders += tail;
   }
 
-  return { textWithPlaceholders, mappings };
+  return { textWithPlaceholders, mappings, expressions };
 }
 
 function toSourceOffset(mappings: OffsetMapping[], pos: number): number {
