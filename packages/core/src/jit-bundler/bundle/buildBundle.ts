@@ -310,13 +310,12 @@ export function buildBundle(ir: Ir): Bundle {
 
   const bodies = new Map<number, BundleArrowNode>();
 
-  // A construction's expansion compiles as its own `functions` entry,
-  // labeled after the script entries (script indices are reserved whether or
-  // not they materialize). The entry is an arrow over the expansion's holes;
-  // the construction's call site applies it to the client arguments.
-  // Interned by node identity: `expandConstructions` shares one expansion
-  // per class and arity, so it is one entry however many instances construct
-  // the class.
+  // A class's expansion compiles as its own `functions` entry, labeled
+  // after the script entries (script indices are reserved whether or not
+  // they materialize). The entry is an arrow over the expansion's holes; a
+  // construction's call site applies it to the client arguments. Interned
+  // by node identity: `lowerSpliceable` shares one expansion per class, so
+  // it is one entry however many instances construct the class.
   const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
   const expansionEntry = (expansion: IrExpansion): BundleEntryNode => {

@@ -134,11 +134,13 @@ function buildExpression(
     case "AstScriptIdentifier":
       return { "#": "identifier", name: mangle(node.bindingKey) };
     case "AstScriptNew":
-      // A construction's callee slot holds its expansion (see
-      // `expandConstructions`), so it reads as an ordinary call of that slot.
+      // Here `new` expands: a spliced class lowers to a function with one
+      // hole per constructor parameter (see `lowerSpliceable`), so a
+      // construction serializes as an ordinary call of its callee, binding
+      // the client's argument values to the holes when it runs.
       return {
         "#": "call",
-        callee: renderSplice(node.callee.key),
+        callee: e(node.callee),
         args: node.args.map(e),
       };
     case "AstScriptNull":

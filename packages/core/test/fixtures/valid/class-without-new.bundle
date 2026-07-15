@@ -1,0 +1,59 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "C",
+            "expression": {
+              "#": "entry",
+              "label": "#f1"
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "call",
+              "callee": {
+                "#": "identifier",
+                "name": "C"
+              },
+              "args": [
+                1,
+                2
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "x": {
+          "#": "identifier",
+          "name": "$0"
+        },
+        "y": {
+          "#": "identifier",
+          "name": "$1"
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

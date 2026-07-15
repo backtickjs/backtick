@@ -13,12 +13,11 @@ class Point implements ClientObject {
   }
 }
 
-// A construction reaches its class through the callee's splice slot: the
-// bundler expands `new` at bundle time by running the spliced class, which
-// never ships to the client. A local holding the spliced class compiles,
-// but the construction's callee is then a plain binding — no slot to expand
-// through — so the bundler rejects it.
+// A spliced class lowers to a function with one hole per constructor
+// parameter, and a construction is a plain call of that value — so the
+// class can pass through a local and be instantiated on another line.
 export default cs`{
   const C = ${Point};
-  return new C(1, 2);
+  const p = new C(1, 2);
+  return p.x + p.y;
 }`;

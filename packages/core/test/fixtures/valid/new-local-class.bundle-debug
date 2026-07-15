@@ -1,0 +1,9 @@
+#f0 = () => {
+  const C = #f1;
+  const p = C(1, 2);
+  return p.x + p.y;
+}
+
+#f1 = ($0, $1) => { "x": $0, "y": $1 }
+
+root = #f0()

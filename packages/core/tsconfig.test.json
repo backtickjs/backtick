@@ -14,7 +14,10 @@
   "exclude": [
     "test/fixtures/valid/*.ts",
     "test/fixtures/compile-error/*.ts",
-    "test/fixtures/bundle-error/*.ts"
+    "test/fixtures/bundle-error/*.ts",
+    // Pins a deliberate type error — calling a spliced class without
+    // `new` — which the typecheck suite snapshots; the build skips it.
+    "test/fixtures/valid/class-without-new.virtual.tsx"
   ],
   "references": [{ "path": "./tsconfig.build.json" }]
 }

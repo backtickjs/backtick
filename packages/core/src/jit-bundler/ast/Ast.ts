@@ -124,14 +124,15 @@ export interface AstScriptIf {
   readonly alternate: AstScriptStatement | null;
 }
 
-// e.g. new ${Point}(1, 2) — the construction of a spliced class; the callee
-// is always a splice because the class only exists on the host. The class
-// never fills the callee's slot: its bundle-time expansion does (see
-// `expandConstructions`), and the node serializes as a call of that slot.
+// e.g. new ${Point}(1, 2) — a construction, mirrored 1:1 from the source.
+// The class only exists on the host: its splice lowers to its expansion — a
+// function with one hole per constructor parameter (see `lowerSpliceable`) —
+// so the bundler expands the construction into a plain call of its callee
+// (see `lowerScriptBody`).
 export interface AstScriptNew {
   readonly kind: "AstScriptNew";
   readonly loc: SourceLocation;
-  readonly callee: AstScriptSplice;
+  readonly callee: AstScriptExpression;
   readonly args: readonly AstScriptExpression[];
 }
 
@@ -216,12 +217,12 @@ export interface AstElement {
   readonly props: Readonly<Record<string, Ast>>;
 }
 
-// A construction's bundle-time expansion: the spliceable the constructor
-// returned when applied to one opaque hole per parameter (see `createHole`),
-// read as an arrow over `params`. It fills the splice slot the
-// `AstScriptNew` calls, so the construction's arguments — client expressions
-// with no bundle-time value — bind to the holes only when the client
-// evaluates the call.
+// A spliced class's bundle-time expansion: the spliceable the constructor
+// returned when applied to one opaque hole per declared parameter (see
+// `createHole`), read as an arrow over `params`. It is what the class's
+// splice slot holds (see `lowerSpliceable`), so a construction — compiled as
+// a plain call of the slot — binds its arguments, client expressions with no
+// bundle-time value, to the holes only when the client evaluates the call.
 export interface AstExpansion {
   readonly kind: "AstExpansion";
   readonly params: readonly string[];
