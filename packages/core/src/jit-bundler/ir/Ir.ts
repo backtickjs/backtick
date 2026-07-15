@@ -55,6 +55,21 @@ export interface IrElement {
   readonly props: Readonly<Record<string, IrArgument>>;
 }
 
+// A macro expansion carried through the IR: an arrow over `params` whose
+// body is the expanded spliceable, with `IrHole` leaves where the client
+// arguments bind (see `AstExpansion`).
+export interface IrExpansion {
+  readonly kind: "IrExpansion";
+  readonly params: readonly string[];
+  readonly body: IrArgument;
+}
+
+// A reference to the enclosing expansion's parameter of that name.
+export interface IrHole {
+  readonly kind: "IrHole";
+  readonly name: string;
+}
+
 // A runtime primitive carried through the IR as data.
 export interface IrValue {
   readonly kind: "IrValue";
@@ -85,6 +100,8 @@ export type IrArgument =
   | IrValue
   | IrArray
   | IrObject
+  | IrExpansion
+  | IrHole
   | IrScriptRef
   | IrTreeRef
   | IrElement;

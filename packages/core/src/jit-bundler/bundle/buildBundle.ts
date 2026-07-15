@@ -2,6 +2,7 @@ import type {
   Ir,
   IrArgument,
   IrElement,
+  IrExpansion,
   IrScriptRef,
   IrTreeEntry,
 } from "../ir/Ir.js";
@@ -9,6 +10,7 @@ import type {
   Bundle,
   BundleArrowNode,
   BundleElement,
+  BundleEntryNode,
   BundleExpr,
   BundleExpressionNode,
   BundleGlobal,
@@ -239,7 +241,12 @@ export function buildBundle(ir: Ir): Bundle {
         return value.elements.flatMap(freeCaps);
       case "IrObject":
         return Object.values(value.entries).flatMap(freeCaps);
+      // An expansion's holes are bound by its own params, not captures; only
+      // spliceables nested in its body can capture.
+      case "IrExpansion":
+        return freeCaps(value.body);
       case "IrValue":
+      case "IrHole":
         return [];
     }
   };
@@ -302,6 +309,29 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   const bodies = new Map<number, BundleArrowNode>();
+
+  // A macro expansion compiles as its own `functions` entry — one per class
+  // reference — labeled after the script entries (script indices are
+  // reserved whether or not they materialize). The entry is an arrow over
+  // the expansion's holes; the macro's call site applies it to the client
+  // arguments. Interned by node identity: each script instance carries its
+  // own expansion, so one reference is one entry however many splice paths
+  // reach it.
+  const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
+  const expansionLabels = new Map<IrExpansion, FunctionLabel>();
+  const expansionEntry = (expansion: IrExpansion): BundleEntryNode => {
+    let label = expansionLabels.get(expansion);
+    if (label === undefined) {
+      label = `#f${fns.length + expansionLabels.size}`;
+      expansionLabels.set(expansion, label);
+      expansionBodies.set(label, {
+        "#": "arrow",
+        params: [...expansion.params],
+        body: renderValue(expansion.body),
+      });
+    }
+    return { "#": "entry", label };
+  };
 
   // Materializes an entry's arrow node into `bodies` the first time it is
   // reached. A polymorphic entry takes a `$i` parameter per splice (its holes
@@ -380,6 +410,13 @@ export function buildBundle(ir: Ir): Bundle {
         throw new Error("An inline element can't appear outside a tree entry.");
       case "IrValue":
         return value.value;
+      // An expansion in value position is its `functions` entry: passed
+      // bare it is the function itself, which the macro's call site applies
+      // to the client arguments.
+      case "IrExpansion":
+        return expansionEntry(value);
+      case "IrHole":
+        return { "#": "identifier", name: value.name };
       case "IrArray":
         return value.elements.map(renderValue);
       case "IrObject": {
@@ -571,6 +608,20 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind === "IrValue") {
       return value.value;
     }
+    // In JSON position a parameterized `#thunk` is the arrow form: the
+    // expansion's holes become its parameters, supplied by the macro's call.
+    // The tree grammar has no entry-as-value node, so here the expansion is
+    // written inline instead of referencing its `functions` entry.
+    if (value.kind === "IrExpansion") {
+      return {
+        "#": "thunk",
+        params: [...value.params],
+        expression: renderExpr(value.body, slots, params),
+      };
+    }
+    if (value.kind === "IrHole") {
+      return { "#": "identifier", name: value.name };
+    }
     if (value.kind === "IrArray") {
       return value.elements.map((entry) => renderExpr(entry, slots, params));
     }
@@ -591,6 +642,9 @@ export function buildBundle(ir: Ir): Bundle {
   const functions: Record<FunctionLabel, BundleArrowNode> = {};
   for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
     functions[`#f${index}`] = body;
+  }
+  for (const [label, body] of expansionBodies) {
+    functions[label] = body;
   }
   const trees: Record<TreeLabel, BundleTree> = {};
   for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
@@ -623,6 +677,8 @@ function nestedRefs(
       value.elements.forEach(visit);
     } else if (value.kind === "IrObject") {
       Object.values(value.entries).forEach(visit);
+    } else if (value.kind === "IrExpansion") {
+      visit(value.body);
     }
   };
   values.forEach(visit);

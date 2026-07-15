@@ -11,10 +11,10 @@
             "keyword": "const",
             "name": "p",
             "expression": {
-              "#": "new",
+              "#": "call",
               "callee": {
-                "#": "identifier",
-                "name": "Point"
+                "#": "entry",
+                "label": "#f1"
               },
               "args": [
                 1,
@@ -46,6 +46,23 @@
             }
           }
         ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "x": {
+          "#": "identifier",
+          "name": "$0"
+        },
+        "y": {
+          "#": "identifier",
+          "name": "$1"
+        }
       }
     }
   },

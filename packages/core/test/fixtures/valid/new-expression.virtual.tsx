@@ -1,11 +1,12 @@
 import { cs } from "@backtickjs/core";
 import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
 
-// A client-constructible class. The compiled script passes the class itself
-// to `v.new`, and the bundle carries its name — the client resolves that
-// name on its global object, so the class is registered there for the test
-// client. The constructor parameters are `Client<…>`-typed for the script's
-// type-level view; at client runtime they receive the evaluated raw values.
+// A client-constructible class. The bundler expands the construction as a
+// macro: at bundle time the constructor runs once with one opaque hole per
+// argument, and the instance it returns is serialized with the holes marking
+// where the client's argument values bind. The constructor parameters are
+// `Client<…>`-typed to say exactly that: the values are opaque on the host —
+// stored, never computed with — and exist only when the client runs.
 class Point implements ClientObject {
   readonly "@backtickjs" = "ClientObject";
 

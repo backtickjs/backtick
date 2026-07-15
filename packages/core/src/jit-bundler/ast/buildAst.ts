@@ -8,8 +8,16 @@ import type { Ast } from "./Ast.js";
 import { buildClientObject } from "./buildClientObject.js";
 import { buildClientScript } from "./buildClientScript.js";
 import { buildClientUIElement } from "./buildClientUIElement.js";
+import { holeName } from "./holes.js";
 
 export function buildAst(value: Spliceable): Ast {
+  // A hole sentinel a macro's `expand` stored somewhere in its result: the
+  // client argument it stands for has no value until the client runs, so it
+  // serializes as a reference to the enclosing expansion's parameter.
+  const hole = holeName(value);
+  if (hole !== undefined) {
+    return { kind: "AstHole", name: hole };
+  }
   if (isClientScript(value)) {
     return buildClientScript(value);
   }

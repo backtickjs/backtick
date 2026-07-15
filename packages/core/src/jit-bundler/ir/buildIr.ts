@@ -163,6 +163,14 @@ class IrBuilder {
         return { kind: "IrValue", value: node.value };
       case "AstNull":
         return { kind: "IrValue", value: null };
+      case "AstExpansion":
+        return {
+          kind: "IrExpansion",
+          params: node.params,
+          body: this.lower(node.body),
+        };
+      case "AstHole":
+        return { kind: "IrHole", name: node.name };
       default: {
         const unhandled: never = node;
         throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);
@@ -201,6 +209,10 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
     }
     if (node.kind === "AstObject") {
       Object.values(node.entries).forEach(visit);
+      return;
+    }
+    if (node.kind === "AstExpansion") {
+      visit(node.body);
     }
   };
   visit(root);

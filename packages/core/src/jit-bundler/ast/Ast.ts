@@ -1,10 +1,4 @@
-import type {
-  BinaryOperator,
-  Client,
-  ClientUnknown,
-  SourceLocation,
-  Spliceable,
-} from "../../cs-runtime/index.js";
+import type { BinaryOperator, SourceLocation } from "../../cs-runtime/index.js";
 
 // A node built from a value spliced into a client script. Splice values are
 // resolved at runtime and have no source text, so a value node never has a
@@ -14,6 +8,8 @@ export type Ast =
   | AstArray
   | AstBoolean
   | AstElement
+  | AstExpansion
+  | AstHole
   | AstNull
   | AstNumber
   | AstObject
@@ -27,7 +23,6 @@ export type AstScriptExpression =
   | AstScriptBoolean
   | AstScriptCall
   | AstScriptIdentifier
-  | AstScriptMacro
   | AstScriptNull
   | AstScriptNumber
   | AstScriptObject
@@ -128,18 +123,6 @@ export interface AstScriptIf {
   readonly alternate: AstScriptStatement | null;
 }
 
-// A node the compiler synthesizes rather than parses — `loc` is null because
-// no source text is its own. `expand` packages syntax only the host can
-// evaluate (constructing a spliced class) as a live host function of the
-// node's arguments; applying it yields the spliceable value the node stands
-// for.
-export interface AstScriptMacro {
-  readonly kind: "AstScriptMacro";
-  readonly loc: null;
-  readonly expand: (...args: Client<ClientUnknown>[]) => Spliceable;
-  readonly args: readonly AstScriptExpression[];
-}
-
 export interface AstScriptNull {
   readonly kind: "AstScriptNull";
   readonly loc: SourceLocation;
@@ -219,6 +202,25 @@ export interface AstElement {
   readonly type: string;
   readonly key: string | number | null;
   readonly props: Readonly<Record<string, Ast>>;
+}
+
+// A macro's bundle-time expansion: the spliceable its `expand` returned when
+// applied to one opaque hole per parameter (see `createHole`), read as an
+// arrow over `params`. It fills the synthetic splice slot an
+// `AstScriptMacro` calls, so the macro's arguments — client expressions with
+// no bundle-time value — bind to the holes only when the client evaluates
+// the call.
+export interface AstExpansion {
+  readonly kind: "AstExpansion";
+  readonly params: readonly string[];
+  readonly body: Ast;
+}
+
+// Where a hole surfaced in an expansion's result: a reference to the
+// enclosing expansion's parameter of that name.
+export interface AstHole {
+  readonly kind: "AstHole";
+  readonly name: string;
 }
 
 export interface AstNull {

@@ -1,6 +1,8 @@
 #f0 = () => {
-  const p = new Point(1, 2);
+  const p = #f1(1, 2);
   return p.x + p.y;
 }
+
+#f1 = ($0, $1) => { "x": $0, "y": $1 }
 
 root = #f0()

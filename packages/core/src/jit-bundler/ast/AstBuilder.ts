@@ -18,7 +18,6 @@ import type {
   AstScriptExpression,
   AstScriptIdentifier,
   AstScriptIf,
-  AstScriptMacro,
   AstScriptNode,
   AstScriptNull,
   AstScriptNumber,
@@ -32,8 +31,33 @@ import type {
   AstScriptTry,
   AstScriptVariableDeclaration,
 } from "./Ast.js";
+import { createHole } from "./holes.js";
+
+// A macro's raw expansion: the spliceable a bundle-time evaluation returned
+// when applied to one hole per parameter. `buildClientScript` serializes the
+// value into the `AstExpansion` filling the synthetic splice slot the
+// expanded node calls.
+export interface MacroExpansion {
+  readonly params: readonly string[];
+  readonly value: Spliceable;
+}
 
 export class AstBuilder implements Visitor<AstScriptNode> {
+  // Expansions collected by `new`, in visit order; the expansion at position
+  // `i` occupies splice slot `splices.length + i`. Expanding evaluates live
+  // host values (which differ per script instance even at one source
+  // location), so a builder must visit on behalf of a single client.
+  readonly expansions: MacroExpansion[] = [];
+  // Splice slots consumed by an expansion (a `new` callee): the raw value —
+  // a class, which isn't spliceable — stays on the host, so the slot
+  // serializes as null.
+  readonly consumedSplices = new Set<number>();
+  private readonly splices: readonly Spliceable[];
+
+  constructor(splices: readonly Spliceable[]) {
+    this.splices = splices;
+  }
+
   splice(loc: SourceLocation, index: number): AstScriptSplice {
     return { kind: "AstScriptSplice", loc, index };
   }
@@ -167,11 +191,36 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     };
   }
 
-  macro(
-    loc: null,
-    expand: (...args: Client<ClientUnknown>[]) => Spliceable,
+  // The construction is a macro, expanded here: the constructor — the
+  // callee's splice value, live on the host — runs once with one opaque hole
+  // per argument, and the instance it returns fills a synthetic splice slot
+  // as a function of those holes (see `AstExpansion`). The node itself reads
+  // as an ordinary call of that slot:
+  // new ${Point}(1, 2) -> (($0, $1) => new Point($0, $1))(1, 2)
+  new(
+    loc: SourceLocation,
+    callee: AstScriptExpression,
     args: AstScriptExpression[],
-  ): AstScriptMacro {
-    return { kind: "AstScriptMacro", loc, expand, args };
+  ): AstScriptCall {
+    if (callee.kind !== "AstScriptSplice") {
+      // The compiler only emits a `new` node for a spliced callee.
+      throw new Error("`new` must construct a spliced class.");
+    }
+    const constructor = this.splices[callee.index] as unknown as new (
+      ...args: Client<ClientUnknown>[]
+    ) => Spliceable;
+    const params = args.map((_, position) => `$${position}`);
+    const index = this.splices.length + this.expansions.length;
+    this.expansions.push({
+      params,
+      value: new constructor(...params.map(createHole)),
+    });
+    this.consumedSplices.add(callee.index);
+    return {
+      kind: "AstScriptCall",
+      loc,
+      callee: { kind: "AstScriptSplice", loc: callee.loc, index },
+      args,
+    };
   }
 }
