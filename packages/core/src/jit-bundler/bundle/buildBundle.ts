@@ -241,12 +241,18 @@ export function buildBundle(ir: Ir): Bundle {
         return value.elements.flatMap(freeCaps);
       case "IrObject":
         return Object.values(value.entries).flatMap(freeCaps);
-      // An expansion's holes are bound by its own params, not captures; only
-      // spliceables nested in its body can capture.
+      // An expansion's holes are bound by its own params: only what its
+      // body captures beyond them threads outward.
       case "IrExpansion":
-        return freeCaps(value.body);
-      case "IrValue":
+        return freeCaps(value.body).filter(
+          (key) => !value.params.includes(key),
+        );
+      // A hole threads like a capture — a free variable the enclosing
+      // expansion's parameter binds — so a script entry hoisted out of the
+      // expansion receives it as a parameter instead of escaping its scope.
       case "IrHole":
+        return [value.name];
+      case "IrValue":
         return [];
     }
   };
@@ -628,10 +634,16 @@ export function buildBundle(ir: Ir): Bundle {
     // here the expansion is written inline instead of referencing its
     // `functions` entry.
     if (value.kind === "IrExpansion") {
+      // The expansion's params extend the enclosing ones, like a nested
+      // frame, so a hole threading into the body resolves by name.
       return {
         "#": "thunk",
         params: [...value.params],
-        expression: renderExpr(value.body, slots, params),
+        expression: renderExpr(
+          value.body,
+          slots,
+          new Set([...params, ...value.params]),
+        ),
       };
     }
     if (value.kind === "IrHole") {

@@ -35,27 +35,7 @@ class Segment implements ClientObject {
   }
 }
 
-function new0<T extends ClientObject>(Cls: new () => T): Client<() => T> {
-  return cs.lift(() => cs.splice(new Cls()));
-}
-
-function new1<TObject extends ClientObject, TArg0 extends ClientUnknown>(
-  Obj: new (arg0: Client<TArg0>) => TObject,
-): Client<(arg0: TArg0) => TObject> {
-  return cs.lift((__cs_arg0: TArg0) => cs.splice(new Obj(cs.lift(__cs_arg0))));
-}
-
-function new2<
-  TObject extends ClientObject,
-  TArg0 extends ClientUnknown,
-  TArg1 extends ClientUnknown,
->(
-  Obj: new (arg0: Client<TArg0>, arg1: Client<TArg1>) => TObject,
-): Client<(arg0: TArg0, arg1: TArg1) => TObject> {
-  return cs.lift((__cs_arg0: TArg0, __cs_arg1: TArg1) => cs.splice(new Obj(cs.lift(__cs_arg0), cs.lift(__cs_arg1))));
-}
-
 export default cs.lift((() => {
-    const __cs_s = cs.splice(new2(Segment))(cs.splice(new2(Point))(1, 2), cs.splice(new2(Point))(1, 2));
+    const __cs_s = new (cs.splice(Segment))(cs.lift(new (cs.splice(Point))(cs.lift(1), cs.lift(2))), cs.lift(new (cs.splice(Point))(cs.lift(1), cs.lift(2))));
     return cs.virtualize(cs.virtualize(__cs_s).to).sum() - cs.virtualize(cs.virtualize(__cs_s).from).sum();
 })());

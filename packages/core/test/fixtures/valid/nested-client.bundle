@@ -13,138 +13,15 @@
             "expression": {
               "#": "call",
               "callee": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
-                },
-                "args": [
-                  {
-                    "#": "arrow",
-                    "params": [
-                      "arg0",
-                      "arg1"
-                    ],
-                    "body": {
-                      "from": {
-                        "#": "call",
-                        "callee": {
-                          "#": "entry",
-                          "label": "#f2"
-                        },
-                        "args": [
-                          {
-                            "#": "identifier",
-                            "name": "arg0"
-                          }
-                        ]
-                      },
-                      "to": {
-                        "#": "call",
-                        "callee": {
-                          "#": "entry",
-                          "label": "#f3"
-                        },
-                        "args": [
-                          {
-                            "#": "identifier",
-                            "name": "arg1"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                ]
+                "#": "entry",
+                "label": "#f2"
               },
               "args": [
                 {
                   "#": "call",
                   "callee": {
-                    "#": "call",
-                    "callee": {
-                      "#": "entry",
-                      "label": "#f1"
-                    },
-                    "args": [
-                      {
-                        "#": "arrow",
-                        "params": [
-                          "arg0",
-                          "arg1"
-                        ],
-                        "body": {
-                          "x": {
-                            "#": "call",
-                            "callee": {
-                              "#": "entry",
-                              "label": "#f2"
-                            },
-                            "args": [
-                              {
-                                "#": "identifier",
-                                "name": "arg0"
-                              }
-                            ]
-                          },
-                          "y": {
-                            "#": "call",
-                            "callee": {
-                              "#": "entry",
-                              "label": "#f3"
-                            },
-                            "args": [
-                              {
-                                "#": "identifier",
-                                "name": "arg1"
-                              }
-                            ]
-                          },
-                          "sum": {
-                            "#": "call",
-                            "callee": {
-                              "#": "entry",
-                              "label": "#f4"
-                            },
-                            "args": [
-                              {
-                                "#": "arrow",
-                                "params": [],
-                                "body": {
-                                  "#": "call",
-                                  "callee": {
-                                    "#": "entry",
-                                    "label": "#f2"
-                                  },
-                                  "args": [
-                                    {
-                                      "#": "identifier",
-                                      "name": "arg0"
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "#": "arrow",
-                                "params": [],
-                                "body": {
-                                  "#": "call",
-                                  "callee": {
-                                    "#": "entry",
-                                    "label": "#f3"
-                                  },
-                                  "args": [
-                                    {
-                                      "#": "identifier",
-                                      "name": "arg1"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    ]
+                    "#": "entry",
+                    "label": "#f3"
                   },
                   "args": [
                     1,
@@ -154,91 +31,8 @@
                 {
                   "#": "call",
                   "callee": {
-                    "#": "call",
-                    "callee": {
-                      "#": "entry",
-                      "label": "#f1"
-                    },
-                    "args": [
-                      {
-                        "#": "arrow",
-                        "params": [
-                          "arg0",
-                          "arg1"
-                        ],
-                        "body": {
-                          "x": {
-                            "#": "call",
-                            "callee": {
-                              "#": "entry",
-                              "label": "#f2"
-                            },
-                            "args": [
-                              {
-                                "#": "identifier",
-                                "name": "arg0"
-                              }
-                            ]
-                          },
-                          "y": {
-                            "#": "call",
-                            "callee": {
-                              "#": "entry",
-                              "label": "#f3"
-                            },
-                            "args": [
-                              {
-                                "#": "identifier",
-                                "name": "arg1"
-                              }
-                            ]
-                          },
-                          "sum": {
-                            "#": "call",
-                            "callee": {
-                              "#": "entry",
-                              "label": "#f4"
-                            },
-                            "args": [
-                              {
-                                "#": "arrow",
-                                "params": [],
-                                "body": {
-                                  "#": "call",
-                                  "callee": {
-                                    "#": "entry",
-                                    "label": "#f2"
-                                  },
-                                  "args": [
-                                    {
-                                      "#": "identifier",
-                                      "name": "arg0"
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "#": "arrow",
-                                "params": [],
-                                "body": {
-                                  "#": "call",
-                                  "callee": {
-                                    "#": "entry",
-                                    "label": "#f3"
-                                  },
-                                  "args": [
-                                    {
-                                      "#": "identifier",
-                                      "name": "arg1"
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          }
-                        }
-                      }
-                    ]
+                    "#": "entry",
+                    "label": "#f3"
                   },
                   "args": [
                     1,
@@ -293,56 +87,6 @@
     "#f1": {
       "#": "arrow",
       "params": [
-        "$0"
-      ],
-      "body": {
-        "#": "arrow",
-        "params": [
-          "arg0",
-          "arg1"
-        ],
-        "body": {
-          "#": "call",
-          "callee": {
-            "#": "identifier",
-            "name": "$0"
-          },
-          "args": [
-            {
-              "#": "identifier",
-              "name": "arg0"
-            },
-            {
-              "#": "identifier",
-              "name": "arg1"
-            }
-          ]
-        }
-      }
-    },
-    "#f2": {
-      "#": "arrow",
-      "params": [
-        "arg0"
-      ],
-      "body": {
-        "#": "identifier",
-        "name": "arg0"
-      }
-    },
-    "#f3": {
-      "#": "arrow",
-      "params": [
-        "arg1"
-      ],
-      "body": {
-        "#": "identifier",
-        "name": "arg1"
-      }
-    },
-    "#f4": {
-      "#": "arrow",
-      "params": [
         "$0",
         "$1"
       ],
@@ -353,21 +97,64 @@
           "#": "binop",
           "operator": "+",
           "left": {
-            "#": "call",
-            "callee": {
+            "#": "identifier",
+            "name": "$0"
+          },
+          "right": {
+            "#": "identifier",
+            "name": "$1"
+          }
+        }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "from": {
+          "#": "identifier",
+          "name": "$0"
+        },
+        "to": {
+          "#": "identifier",
+          "name": "$1"
+        }
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "x": {
+          "#": "identifier",
+          "name": "$0"
+        },
+        "y": {
+          "#": "identifier",
+          "name": "$1"
+        },
+        "sum": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
+          },
+          "args": [
+            {
               "#": "identifier",
               "name": "$0"
             },
-            "args": []
-          },
-          "right": {
-            "#": "call",
-            "callee": {
+            {
               "#": "identifier",
               "name": "$1"
-            },
-            "args": []
-          }
+            }
+          ]
         }
       }
     }

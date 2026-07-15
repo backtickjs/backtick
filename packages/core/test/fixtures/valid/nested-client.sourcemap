@@ -8,68 +8,35 @@ cs.splice(              → ${
 this.y                  → this.y
 )                       → }
 )                       → `
-cs.lift(                → cs`
-() =>                   → () => 
-cs.splice(              → ${
-new Cls()               → new Cls()
-)                       → }
-)                       → `
-cs.lift(                → cs`
-(                       → (
-__cs_arg0               → arg0
-: TArg0) =>             → : TArg0) => 
-cs.splice(              → ${
-new Obj(                → new Obj(
-cs.lift(                → cs`
-__cs_arg0               → arg0
-)                       → `
-)                       → )
-)                       → }
-)                       → `
-cs.lift(                → cs`
-(                       → (
-__cs_arg0               → arg0
-: TArg0,                → : TArg0, 
-__cs_arg1               → arg1
-: TArg1) =>             → : TArg1) => 
-cs.splice(              → ${
-new Obj(                → new Obj(
-cs.lift(                → cs`
-__cs_arg0               → arg0
-)                       → `
-,                       → , 
-cs.lift(                → cs`
-__cs_arg1               → arg1
-)                       → `
-)                       → )
-)                       → }
-)                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_s                  → s
  =                      →  = 
-cs.splice(              → ${
-new2(Segment)           → new2(Segment)
-)                       → }
-(                       → (
-cs.splice(              → ${
-new2(Point)             → new2(Point)
-)                       → }
-(                       → (
+new (                   → new 
+cs.splice(              → 
+Segment                 → $Segment
+)                       → 
+)(cs.lift(              → (
+new (                   → new 
+cs.splice(              → 
+Point                   → $Point
+)                       → 
+)(cs.lift(              → (
 1                       → 1
-,                       → , 
+), cs.lift(             → , 
 2                       → 2
-)                       → )
-,                       → , 
-cs.splice(              → ${
-new2(Point)             → new2(Point)
-)                       → }
-(                       → (
+))                      → )
+), cs.lift(             → , 
+new (                   → new 
+cs.splice(              → 
+Point                   → $Point
+)                       → 
+)(cs.lift(              → (
 1                       → 1
-,                       → , 
+), cs.lift(             → , 
 2                       → 2
-)                       → )
-)                       → )
+))                      → )
+))                      → )
 ;                       → ;
 \n                      → \n  
 return                  → return 
