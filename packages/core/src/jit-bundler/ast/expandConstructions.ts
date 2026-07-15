@@ -1,10 +1,19 @@
 import type {
-  ClientObjectConstructor,
+  Client,
+  ClientObject,
+  ClientUnknown,
   Spliceable,
 } from "../../cs-runtime/index.js";
 import type { AstExpansion, AstScriptNew } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
+
+// The call side of `ClientObjectConstructor`: that type's `never[]`
+// parameters accept any concrete class but let nothing be passed, so the
+// expansion casts to this hole-taking form to invoke the constructor.
+type ConstructibleClass = new (
+  ...args: Client<ClientUnknown>[]
+) => ClientObject;
 
 // One expansion per class and argument count, ever: a constructor sees only
 // opaque holes — never the client's live argument values — so its expansion
@@ -14,7 +23,7 @@ import { lowerSpliceable } from "./lowerSpliceable.js";
 // the node also dedups downstream: the IR interns one entry per expansion
 // node however many instances construct the class.
 const expansionsByClass = new WeakMap<
-  ClientObjectConstructor,
+  ConstructibleClass,
   Map<number, AstExpansion>
 >();
 
@@ -35,13 +44,16 @@ export function expandConstructions(
 ): ReadonlyMap<string, AstExpansion> {
   const expansions = new Map<string, AstExpansion>();
   for (const node of constructions) {
-    const splicedClass = splices[node.callee.key];
-    if (typeof splicedClass !== "function") {
+    const spliced = splices[node.callee.key];
+    if (typeof spliced !== "function") {
       throw new Error(
         "Can't expand this construction: the spliced `new` callee isn't a " +
           "class.",
       );
     }
+    // A construction's callee splice always holds a client-constructible
+    // class, so past the guard the value speaks the call-side form.
+    const splicedClass = spliced as ConstructibleClass;
     let byArity = expansionsByClass.get(splicedClass);
     if (byArity === undefined) {
       byArity = new Map();

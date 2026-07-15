@@ -20,7 +20,7 @@ class Square implements ClientObject {
 // ONE template, ONE source location — but each call splices a different
 // class into it.
 function make(Shape: new (size: Client<number>) => Circle | Square) {
-  return cs.lift(cs.splice(new (Shape)(cs.lift(5))));
+  return cs.lift(new (cs.splice(Shape))(cs.lift(5)));
 }
 
 const a = make(Circle);

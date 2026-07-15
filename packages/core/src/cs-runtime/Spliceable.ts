@@ -21,7 +21,9 @@ export type Spliceable =
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   ClientObjectConstructor   -> never (a class splices only as a `new` callee)
+//   ClientObjectConstructor   -> T: it splices only as a `new` callee, and
+//                                its constructor already takes `Client<…>`
+//                                arguments, so the signature carries over
 //   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
@@ -30,7 +32,7 @@ export type Spliced<T> =
   T extends Client<infer U>
     ? U
     : T extends ClientObjectConstructor
-      ? never
+      ? T
       : T extends ClientObject
         ? T
         : T extends (infer Item)[]

@@ -1,9 +1,11 @@
 cs.lift(                → cs`
-cs.splice(new (         → new 
+new (                   → new 
+cs.splice(              → ${
 Shape                   → Shape
+)                       → }
 )(cs.lift(              → (
 5                       → 5
-)))                     → )
+))                      → )
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 return                  → return 

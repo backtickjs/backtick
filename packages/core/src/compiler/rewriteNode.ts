@@ -369,61 +369,29 @@ function rewriteNodeImpl(
     };
   }
 
-  // A construction of a spliced class: `new ${MyClass}(...)`. The class only
-  // exists on the host, so the callee is its splice; the runtime node
-  // mirrors the source 1:1, and the bundler expands the construction into a
-  // function of its arguments (see `expandConstructions`).
   if (ts.isNewExpression(node)) {
-    const callee = node.expression;
-    const splice = ts.isIdentifier(callee)
-      ? state.script.splices[callee.text]
-      : undefined;
-    if (!ts.isIdentifier(callee) || splice == null) {
-      state.errors.set(
-        node,
-        "`new` must construct a spliced class in a `cs` client script, " +
-          // biome-ignore lint/suspicious/noTemplateCurlyInString: show syntax
-          "e.g. `new ${MyClass}(...)`.",
-      );
-      return unsupported();
-    }
+    const rewrittenCallee = rewriteNode(ts, state, node.expression);
 
     const rewrittenArgs = (node.arguments ?? []).map((arg) =>
       rewriteNode(ts, state, arg),
     );
 
-    // Lift each argument so the constructor receives `Client<…>` values,
-    // matching how a client class declares its constructor parameters. The
-    // callee placeholder prints verbatim, parenthesized: `new`'s callee
-    // grammar is stricter than the expression a splice can hold, so without
-    // parens a substituted `${getClass()}` would reparse as
-    // `(new getClass())(...)`.
+    // Lift each argument so the constructor receives `Client<…>` values
     const liftedArgs = rewrittenArgs.map((arg) =>
       call(ts, "cs", "lift", [arg.virtual as ts.Expression]),
     );
 
-    // Same as an identifier splice: a braced callee prints its key for the
-    // assembler to substitute; an unbraced callee prints the host binding
-    // its shorthand names.
-    const classIdentifier = ts.factory.createIdentifier(
-      splice.kind === "braced" ? splice.key : splice.expression.text,
-    );
-    state.mappings.set(classIdentifier, callee);
-
     return {
-      virtual: call(ts, "cs", "splice", [
-        ts.factory.createNewExpression(
-          ts.factory.createParenthesizedExpression(classIdentifier),
-          undefined,
-          liftedArgs,
+      virtual: ts.factory.createNewExpression(
+        ts.factory.createParenthesizedExpression(
+          rewrittenCallee.virtual as ts.Expression,
         ),
-      ]),
+        undefined,
+        liftedArgs,
+      ),
       runtime: call(ts, "v", "new", [
         loc(node),
-        call(ts, "v", "splice", [
-          loc(callee),
-          ts.factory.createStringLiteral(splice.key),
-        ]),
+        rewrittenCallee.runtime as ts.Expression,
         ts.factory.createArrayLiteralExpression(
           rewrittenArgs.map((arg) => arg.runtime as ts.Expression),
           false,
