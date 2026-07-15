@@ -91,19 +91,26 @@ function getDirectScripts(
   const scripts: ClientScript[] = [];
 
   taggedTemplates.forEach((taggedTemplate) => {
-    const { textWithPlaceholders, mappings, expressions } =
-      toTextWithPlaceholders(ts, taggedTemplate, sourceFile);
+    const { textWithPlaceholders, mappings } = toTextWithPlaceholders(
+      ts,
+      taggedTemplate,
+      sourceFile,
+    );
     const fileWithPlaceholders = ts.createSourceFile(
       sourceFile.fileName,
       textWithPlaceholders,
       ts.ScriptTarget.Latest,
     );
-    const splices = findSplices(
-      ts,
-      sourceFile,
-      fileWithPlaceholders,
-      expressions,
-    );
+    // The dictionary's insertion order is evaluation order: emitted as the
+    // script's metadata object literal, the splices' host expressions run
+    // first to last when the `cs` expression itself evaluates, like a real
+    // template literal's spans — settled before the runtime tree ever runs.
+    // Braced splices go first, in span order, then unbraced ones, so an
+    // unbraced read can observe a later braced splice's side effects.
+    const splices: { [placeholder: string]: Splice } = {
+      ...getDirectBracedSplices(ts, taggedTemplate, sourceFile),
+      ...getDirectUnbracedSplices(ts, fileWithPlaceholders),
+    };
     const toSourceRange = (node: ts.Node): SourceRange => ({
       start: toSourceOffset(mappings, node.getStart(fileWithPlaceholders)),
       end: toSourceOffset(mappings, node.getEnd()),
@@ -130,31 +137,44 @@ function getDirectScripts(
   return scripts;
 }
 
-// A script's splices: one braced splice per `${...}` span — `expressions`
-// maps each substituted placeholder to its span's host expression — plus an
-// unbraced splice for every `$x` shorthand referenced in the placeholder
+// One braced splice per `${...}` template span, in source order, each
+// recursing into the client scripts its host expression nests.
+function getDirectBracedSplices(
+  ts: typeof import("typescript"),
+  taggedTemplate: ts.TaggedTemplateExpression,
+  sourceFile: ts.SourceFile,
+): { [placeholder: string]: BracedSplice } {
+  const splices: { [placeholder: string]: BracedSplice } = {};
+
+  const template = taggedTemplate.template;
+  if (ts.isTemplateExpression(template)) {
+    template.templateSpans.forEach((span, index) => {
+      const splice: BracedSplice = {
+        kind: "braced",
+        expression: span.expression,
+        placeholder: `$0splice${index}`,
+        scripts: [],
+      };
+      splices[splice.placeholder] = splice;
+      splice.scripts = getDirectScripts(ts, splice, sourceFile);
+    });
+  }
+
+  return splices;
+}
+
+// An unbraced splice for every `$x` shorthand referenced in the placeholder
 // text, deduplicated by spelling. Property names and declaration names are
 // not references (a `$`-prefixed declaration is rejected at rewrite time),
 // and nested scripts are already placeholders in this text, so the walk
-// scans only the script's own body.
-function findSplices(
+// scans only the script's own body. A braced placeholder is itself a
+// `$`-prefixed identifier in expression position, so its `$0splice` prefix
+// is excluded — it already names a braced splice.
+function getDirectUnbracedSplices(
   ts: typeof import("typescript"),
-  sourceFile: ts.SourceFile,
   fileWithPlaceholders: ts.SourceFile,
-  expressions: { [placeholder: string]: ts.Expression },
-): { [placeholder: string]: Splice } {
-  const splices: { [placeholder: string]: Splice } = {};
-
-  for (const [placeholder, expression] of Object.entries(expressions)) {
-    const splice: BracedSplice = {
-      kind: "braced",
-      expression,
-      placeholder,
-      scripts: [],
-    };
-    splices[placeholder] = splice;
-    splice.scripts = getDirectScripts(ts, splice, sourceFile);
-  }
+): { [placeholder: string]: UnbracedSplice } {
+  const splices: { [placeholder: string]: UnbracedSplice } = {};
 
   const visit = (node: ts.Node): void => {
     if (ts.isPropertyAccessExpression(node)) {
@@ -182,6 +202,7 @@ function findSplices(
       ts.isIdentifier(node) &&
       node.text.startsWith("$") &&
       node.text.length > 1 &&
+      !node.text.startsWith("$0splice") &&
       splices[node.text] === undefined
     ) {
       splices[node.text] = {
@@ -206,9 +227,6 @@ interface OffsetMapping {
   verbatim: boolean;
 }
 
-// Substitutes a `$0splice<n>` placeholder identifier for each `${...}` span
-// so the template's contents parse as ordinary code, mapping every chunk
-// back to its source offsets.
 function toTextWithPlaceholders(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
@@ -216,7 +234,6 @@ function toTextWithPlaceholders(
 ): {
   textWithPlaceholders: string;
   mappings: OffsetMapping[];
-  expressions: { [placeholder: string]: ts.Expression };
 } {
   const sourceText = sourceFile.text;
   const template = taggedTemplate.template;
@@ -226,7 +243,6 @@ function toTextWithPlaceholders(
 
   let textWithPlaceholders = "";
   const mappings: OffsetMapping[] = [];
-  const expressions: { [placeholder: string]: ts.Expression } = {};
 
   if (ts.isNoSubstitutionTemplateLiteral(template)) {
     textWithPlaceholders = sourceText.slice(start, end);
@@ -241,7 +257,6 @@ function toTextWithPlaceholders(
 
     template.templateSpans.forEach((span, index) => {
       const placeholder = `$0splice${index}`;
-      expressions[placeholder] = span.expression;
       const dollarBrace = span.expression.getFullStart() - 2; // before ${
       const chunk = sourceText.slice(chunkStart, dollarBrace);
       mappings.push({
@@ -271,7 +286,7 @@ function toTextWithPlaceholders(
     textWithPlaceholders += tail;
   }
 
-  return { textWithPlaceholders, mappings, expressions };
+  return { textWithPlaceholders, mappings };
 }
 
 function toSourceOffset(mappings: OffsetMapping[], pos: number): number {
