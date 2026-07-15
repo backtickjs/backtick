@@ -5,7 +5,7 @@ import {
   type Spliceable,
 } from "../../cs-runtime/index.js";
 import type { Ast } from "./Ast.js";
-import { expandClass } from "./expandClass.js";
+import { expandFunction } from "./expandFunction.js";
 import { holeName } from "./holes.js";
 import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
@@ -47,7 +47,7 @@ export function lowerSpliceable(value: Spliceable): Ast {
   // constructor parameters — wherever it appears, so a construction (or a
   // local holding the class) just calls the slot's value.
   if (typeof value === "function") {
-    return expandClass(value);
+    return expandFunction(value);
   }
   // Only plain objects reflect structurally. A class instance without the
   // "@backtickjs" marker would land here and half-work — own fields reflect,
