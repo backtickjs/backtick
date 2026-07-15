@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import type { SourceLocation } from "../cs-runtime/index.js";
 import type { Diagnostic } from "./diagnostics.js";
-import { arrow, call, constDecl, iife, sourceLoc } from "./nodeFactory.js";
+import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
@@ -71,9 +71,12 @@ export function rewriteScript(
     [
       ts.factory.createPropertyAssignment(
         "splices",
-        ts.factory.createArrayLiteralExpression(
+        ts.factory.createObjectLiteralExpression(
           splices.map((splice: Splice) =>
-            ts.factory.createIdentifier(splice.placeholder),
+            ts.factory.createPropertyAssignment(
+              splice.placeholder,
+              splice.sourceNode.expression,
+            ),
           ),
           false,
         ),
@@ -115,24 +118,12 @@ export function rewriteScript(
     end: sourceFile.getLineAndCharacterOfPosition(scriptRange.end),
   };
 
-  const spliceDecls = splices.map((splice: Splice) =>
-    constDecl(ts, splice.placeholder, splice.sourceNode.expression),
-  );
-
-  const create = call(ts, "cs", "create", [
+  const runtime = call(ts, "cs", "create", [
     sourceLoc(ts, scriptLocation),
     ts.factory.createStringLiteral(fileHash),
     metadata,
     arrow(ts, ["v"], rewritten.runtime as ts.Expression),
   ]);
-
-  const runtime = iife(
-    ts,
-    ts.factory.createBlock(
-      [...spliceDecls, ts.factory.createReturnStatement(create)],
-      true,
-    ),
-  );
 
   return { virtual, runtime, sourceMaps, diagnostics };
 }

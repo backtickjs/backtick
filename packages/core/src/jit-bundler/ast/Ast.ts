@@ -56,7 +56,7 @@ export interface AstScript {
   readonly kind: "AstScript";
   readonly loc: SourceLocation;
   readonly fileHash: string;
-  readonly splices: readonly Ast[];
+  readonly splices: Readonly<Record<string, Ast>>;
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
   readonly expression: AstScriptBody;
@@ -168,7 +168,7 @@ export interface AstScriptReturn {
 export interface AstScriptSplice {
   readonly kind: "AstScriptSplice";
   readonly loc: SourceLocation;
-  readonly index: number;
+  readonly key: string;
 }
 
 export interface AstScriptString {

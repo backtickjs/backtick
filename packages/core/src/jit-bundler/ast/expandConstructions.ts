@@ -31,11 +31,11 @@ const expansionsByClass = new WeakMap<
 // `AstBuilder` indexed at parse time but expands them with its own splices.
 export function expandConstructions(
   constructions: readonly AstScriptNew[],
-  splices: readonly Spliceable[],
-): ReadonlyMap<number, AstExpansion> {
-  const expansions = new Map<number, AstExpansion>();
+  splices: { readonly [key: string]: Spliceable },
+): ReadonlyMap<string, AstExpansion> {
+  const expansions = new Map<string, AstExpansion>();
   for (const node of constructions) {
-    const splicedClass = splices[node.callee.index];
+    const splicedClass = splices[node.callee.key];
     if (typeof splicedClass !== "function") {
       throw new Error(
         "Can't expand this construction: the spliced `new` callee isn't a " +
@@ -57,7 +57,7 @@ export function expandConstructions(
       };
       byArity.set(node.args.length, expansion);
     }
-    expansions.set(node.callee.index, expansion);
+    expansions.set(node.callee.key, expansion);
   }
   return expansions;
 }

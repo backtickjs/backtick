@@ -42,8 +42,8 @@ export class AstBuilder implements Visitor<AstScriptNode> {
   // syntax shared by every client at the source location.
   readonly constructions: AstScriptNew[] = [];
 
-  splice(loc: SourceLocation, index: number): AstScriptSplice {
-    return { kind: "AstScriptSplice", loc, index };
+  splice(loc: SourceLocation, key: string): AstScriptSplice {
+    return { kind: "AstScriptSplice", loc, key };
   }
 
   null(loc: SourceLocation): AstScriptNull {

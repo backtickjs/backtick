@@ -254,7 +254,7 @@ function rewriteNodeImpl(
         ]),
         runtime: call(ts, "v", "splice", [
           loc(node),
-          ts.factory.createNumericLiteral(splice.index),
+          ts.factory.createStringLiteral(splice.placeholder),
         ]),
       };
     }
@@ -410,7 +410,7 @@ function rewriteNodeImpl(
         loc(node),
         call(ts, "v", "splice", [
           loc(callee),
-          ts.factory.createNumericLiteral(splice.index),
+          ts.factory.createStringLiteral(splice.placeholder),
         ]),
         ts.factory.createArrayLiteralExpression(
           rewrittenArgs.map((arg) => arg.runtime as ts.Expression),

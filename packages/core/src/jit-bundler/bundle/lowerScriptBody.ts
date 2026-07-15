@@ -12,10 +12,9 @@ import type {
   BundleStatementNode,
 } from "./Bundle.js";
 
-// Fills a splice hole in a script body with the node passed for that
-// position. A hole sits in expression position, so what fills it must be an
-// expression.
-export type RenderSplice = (index: number) => BundleExpressionNode;
+// Fills a splice hole in a script body with the node for its key. A hole
+// sits in expression position, so what fills it must be an expression.
+export type RenderSplice = (key: string) => BundleExpressionNode;
 
 // Maps a binding key to the name it is printed under (see `displayName` in
 // `buildBundle`).
@@ -139,7 +138,7 @@ function buildExpression(
       // `expandConstructions`), so it reads as an ordinary call of that slot.
       return {
         "#": "call",
-        callee: renderSplice(node.callee.index),
+        callee: renderSplice(node.callee.key),
         args: node.args.map(e),
       };
     case "AstScriptNull":
@@ -161,7 +160,7 @@ function buildExpression(
     case "AstScriptPropertyAccess":
       return { "#": "property", object: e(node.expression), name: node.name };
     case "AstScriptSplice":
-      return renderSplice(node.index);
+      return renderSplice(node.key);
     case "AstScriptString":
       return node.value;
     default: {

@@ -344,24 +344,39 @@ export function buildBundle(ir: Ir): Bundle {
     // Reserve the slot to break reference cycles; overwritten below.
     bodies.set(target, { "#": "arrow", params: [], body: null });
     const captureParams = need(target).map(displayName);
+    // The body references holes by key; a reference's `args` are
+    // positional in the entry's `splices` order, so this maps between them.
+    const holes = new Map(
+      fns[target].splices.map((key, index) => [key, index]),
+    );
+    const holeIndex = (key: string): number => {
+      const index = holes.get(key);
+      if (index === undefined) {
+        throw new Error(`This script has no \`${key}\` splice.`);
+      }
+      return index;
+    };
     let params: string[];
     let renderSplice: RenderSplice;
     if (polymorphic.has(target)) {
       const arity = monoArgs(target).length;
       const spliceParams = Array.from({ length: arity }, (_, i) => `$${i}`);
       params = [...spliceParams, ...captureParams];
-      renderSplice = (index) => ({
-        "#": "call",
-        callee: { "#": "identifier", name: `$${index}` },
-        args: passKeys(target, index).map((key) => ({
-          "#": "identifier",
-          name: displayName(key),
-        })),
-      });
+      renderSplice = (key) => {
+        const index = holeIndex(key);
+        return {
+          "#": "call",
+          callee: { "#": "identifier", name: `$${index}` },
+          args: passKeys(target, index).map((key) => ({
+            "#": "identifier",
+            name: displayName(key),
+          })),
+        };
+      };
     } else {
       params = captureParams;
       const args = monoArgs(target);
-      renderSplice = (index) => renderValue(args[index]);
+      renderSplice = (key) => renderValue(args[holeIndex(key)]);
     }
     const body = lowerScriptBody(fns[target].body, renderSplice, displayName);
     bodies.set(target, { "#": "arrow", params, body });

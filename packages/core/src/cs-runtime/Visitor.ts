@@ -17,8 +17,8 @@ export type BinaryOperator =
   | ">=";
 
 export interface Visitor<U> {
-  // e.g. ${ 1 }
-  splice(loc: SourceLocation, index: number): U;
+  // e.g. ${ 1 } — `key` names the value in the script's `splices` metadata
+  splice(loc: SourceLocation, key: string): U;
 
   // null
   null(loc: SourceLocation): U;
@@ -79,8 +79,6 @@ export interface Visitor<U> {
   // e.g. (r, g, b) => { ... }
   arrow(loc: SourceLocation, params: U[], body: U): U;
 
-  // e.g. new ${Foo}(1) — the callee is always a splice (the constructed
-  // class); the bundler expands the construction into a function of its
-  // arguments: (($0) => new Foo($0))(1)
+  // e.g. new $Foo(1)
   "new"(loc: SourceLocation, callee: U, args: U[]): U;
 }

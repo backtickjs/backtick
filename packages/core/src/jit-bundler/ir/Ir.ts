@@ -10,6 +10,7 @@ export interface Ir {
 export interface IrScriptEntry {
   readonly kind: "IrScriptEntry";
   readonly loc: SourceLocation;
+  readonly splices: readonly string[];
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
   readonly body: AstScriptBody;

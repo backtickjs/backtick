@@ -51,7 +51,7 @@ class IrBuilder {
     const ref: IrScriptRef = {
       kind: "IrScriptRef",
       target: this.intern(script),
-      args: script.splices.map((n) => this.lower(n)),
+      args: Object.values(script.splices).map((n) => this.lower(n)),
     };
     this.refByScript.set(script, ref);
     return ref;
@@ -71,6 +71,7 @@ class IrBuilder {
     this.scripts.push({
       kind: "IrScriptEntry",
       loc: script.loc,
+      splices: Object.keys(script.splices),
       captures: script.captures,
       declarations: script.declarations,
       body: script.expression,
@@ -207,7 +208,7 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
         return;
       }
       seenScripts.add(node);
-      node.splices.forEach(visit);
+      Object.values(node.splices).forEach(visit);
       return;
     }
     if (node.kind === "AstElement") {

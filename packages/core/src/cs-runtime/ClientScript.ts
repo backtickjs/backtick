@@ -3,7 +3,8 @@ import type { Spliceable } from "./Spliceable.js";
 import type { Visitor } from "./Visitor.js";
 
 export interface Metadata {
-  splices: Spliceable[];
+  // spliced host values, under the keys the body uses (see `Visitor.splice`)
+  splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope
   captures: string[];
   // binding keys the script declares itself

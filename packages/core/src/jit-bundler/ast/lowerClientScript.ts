@@ -59,8 +59,11 @@ export function lowerClientScript(client: ClientScript): AstScript {
     // A construction's slot (its `new` callee) holds the class's expansion
     // rather than the class, which stays on the host; the construction
     // reads as a call of that slot.
-    splices: client.metadata.splices.map(
-      (splice, index) => expansions.get(index) ?? lowerSpliceable(splice),
+    splices: Object.fromEntries(
+      Object.entries(client.metadata.splices).map(([key, splice]) => [
+        key,
+        expansions.get(key) ?? lowerSpliceable(splice),
+      ]),
     ),
     captures: client.metadata.captures,
     declarations: client.metadata.declarations,
