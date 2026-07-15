@@ -8,8 +8,8 @@ import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // One expansion per class and argument count, ever: a constructor sees only
 // opaque holes — never the client's live argument values — so its expansion
-// is a function of the class and its arity alone. (This bakes in the macro
-// purity the holes already enforce: a constructor reading *mutable host*
+// is a function of the class and its arity alone. (This bakes in the
+// constructor purity the holes already enforce: one reading *mutable host*
 // state at expansion time would get its first expansion replayed.) Sharing
 // the node also dedups downstream: the IR interns one entry per expansion
 // node however many instances construct the class.
@@ -18,23 +18,23 @@ const expansionsByClass = new WeakMap<
   Map<number, AstExpansion>
 >();
 
-// Expands every macro node (`AstScriptNew`) in a parsed body: the callee's
+// Expands every construction (`AstScriptNew`) in a parsed body: the callee's
 // splice value — a class, live only on the host — runs once with one opaque
 // hole per argument, and the instance it returns lowers into the
 // `AstExpansion` that fills the callee's own splice slot, which the class
 // leaves free by staying on the host. The body itself is never touched — a
-// macro node serializes as a call of its slot (see `lowerScriptBody`), so
+// construction serializes as a call of its slot (see `lowerScriptBody`), so
 // expansion is pure slot data:
 // new ${Point}(1, 2) -> (($0, $1) => new Point($0, $1))(1, 2)
 // Expanding evaluates live host values — which differ per script instance
 // even at one source location — so every client shares the one parsed body
 // but walks it with its own splices.
-export function expandMacros(
+export function expandConstructions(
   body: AstScriptStatement,
   splices: readonly Spliceable[],
 ): ReadonlyMap<number, AstExpansion> {
   const expansions = new Map<number, AstExpansion>();
-  forEachMacro(body, (node) => {
+  forEachConstruction(body, (node) => {
     const splicedClass = splices[node.callee.index];
     if (typeof splicedClass !== "function") {
       throw new Error(
@@ -62,16 +62,16 @@ export function expandMacros(
   return expansions;
 }
 
-// Walks a body in source order, calling back on each macro node. Each
+// Walks a body in source order, calling back on each construction. Each
 // template placeholder occurs exactly once in a script's source, so distinct
-// macro nodes always name distinct slots. A macro's arguments may nest
-// further macros, so the walk recurses into them too.
-function forEachMacro(
+// constructions always name distinct slots. A construction's arguments may
+// nest further constructions, so the walk recurses into them too.
+function forEachConstruction(
   node: AstScriptStatement,
   callback: (node: AstScriptNew) => void,
 ): void {
   const visit = (child: AstScriptStatement): void =>
-    forEachMacro(child, callback);
+    forEachConstruction(child, callback);
   switch (node.kind) {
     case "AstScriptNew":
       callback(node);

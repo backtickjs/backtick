@@ -14,9 +14,9 @@ export interface Bundle {
   // thunk at the hole, passing the entry-scoped bindings the splice
   // captures — a spliced fragment sees the bindings in scope at its hole. A
   // `BundleApply` targeting the entry passes arguments in that same order.
-  // A macro expansion (e.g. a `new` construction) is also an entry — one per
-  // class reference, labeled after the script entries — an arrow over the
-  // macro's holes, applied by its call site to the client arguments.
+  // A construction's expansion is also an entry — one per class, labeled
+  // after the script entries — an arrow over the expansion's holes, applied
+  // by its call site to the client arguments.
   functions: Record<FunctionLabel, BundleArrowNode>;
   trees: Record<TreeLabel, BundleTree>;
   root: BundleExpr;

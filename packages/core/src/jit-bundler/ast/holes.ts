@@ -1,10 +1,10 @@
 import type { Client, ClientUnknown } from "../../cs-runtime/index.js";
 
-// The hole sentinels a macro's `expand` is applied to in place of its client
-// arguments, which have no value until the client runs. Where a sentinel
-// surfaces in the expansion's result, serialization emits a reference to the
-// expansion's parameter of the same name (see `AstHole`), recognized here by
-// identity.
+// The hole sentinels a spliced class's constructor is applied to in place
+// of its client arguments, which have no value until the client runs. Where
+// a sentinel surfaces in the expansion's result, serialization emits a
+// reference to the expansion's parameter of the same name (see `AstHole`),
+// recognized here by identity.
 const names = new WeakMap<object, string>();
 
 export function createHole(name: string): Client<ClientUnknown> {
@@ -17,14 +17,14 @@ export function createHole(name: string): Client<ClientUnknown> {
       get(_target, property) {
         throw new Error(
           `Can't read \`${String(property)}\` of a client value during ` +
-            "macro expansion: the value only exists on the client — store " +
+            "construction: the value only exists on the client — store " +
             "it, don't compute with it.",
         );
       },
       set(_target, property) {
         throw new Error(
           `Can't assign \`${String(property)}\` of a client value during ` +
-            "macro expansion: the value only exists on the client — store " +
+            "construction: the value only exists on the client — store " +
             "it, don't compute with it.",
         );
       },

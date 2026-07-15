@@ -49,7 +49,7 @@ function renderNode(node: BundleStatementNode, indent: string): string {
     case "call": {
       const args = node.args.map((arg) => renderNode(arg, indent));
       const callee = renderNode(node.callee, indent);
-      // An arrow callee (a macro expansion applied to its arguments) binds
+      // An arrow callee (an expansion applied to its arguments) binds
       // looser than the call — parenthesize so the text reads as it runs.
       const target =
         isNode(node.callee) && node.callee["#"] === "arrow"

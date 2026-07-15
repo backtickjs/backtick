@@ -127,7 +127,7 @@ export interface AstScriptIf {
 // e.g. new ${Point}(1, 2) — the construction of a spliced class; the callee
 // is always a splice because the class only exists on the host. The class
 // never fills the callee's slot: its bundle-time expansion does (see
-// `expandMacros`), and the node serializes as a call of that slot.
+// `expandConstructions`), and the node serializes as a call of that slot.
 export interface AstScriptNew {
   readonly kind: "AstScriptNew";
   readonly loc: SourceLocation;
@@ -216,11 +216,12 @@ export interface AstElement {
   readonly props: Readonly<Record<string, Ast>>;
 }
 
-// A macro's bundle-time expansion: the spliceable its constructor returned
-// when applied to one opaque hole per parameter (see `createHole`), read as
-// an arrow over `params`. It fills the splice slot the `AstScriptNew` calls,
-// so the macro's arguments — client expressions with no bundle-time value —
-// bind to the holes only when the client evaluates the call.
+// A construction's bundle-time expansion: the spliceable the constructor
+// returned when applied to one opaque hole per parameter (see `createHole`),
+// read as an arrow over `params`. It fills the splice slot the
+// `AstScriptNew` calls, so the construction's arguments — client expressions
+// with no bundle-time value — bind to the holes only when the client
+// evaluates the call.
 export interface AstExpansion {
   readonly kind: "AstExpansion";
   readonly params: readonly string[];

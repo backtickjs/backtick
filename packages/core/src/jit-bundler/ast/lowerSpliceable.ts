@@ -11,7 +11,7 @@ import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientUIElement } from "./lowerClientUIElement.js";
 
 export function lowerSpliceable(value: Spliceable): Ast {
-  // A hole sentinel a macro's `expand` stored somewhere in its result: the
+  // A hole sentinel a constructor stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.
   const hole = holeName(value);
@@ -43,8 +43,8 @@ export function lowerSpliceable(value: Spliceable): Ast {
     return { kind: "AstArray", elements: value.map(lowerSpliceable) };
   }
   // A class splices only as a `new` callee: its slot holds its bundle-time
-  // expansion (see `expandMacros`), never the class itself, so one reaching
-  // value position was spliced without being constructed.
+  // expansion (see `expandConstructions`), never the class itself, so one
+  // reaching value position was spliced without being constructed.
   if (typeof value === "function") {
     throw new Error(
       "Can't splice a class as a value: a spliced class can only be " +

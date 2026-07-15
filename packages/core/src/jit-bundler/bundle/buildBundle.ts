@@ -310,13 +310,13 @@ export function buildBundle(ir: Ir): Bundle {
 
   const bodies = new Map<number, BundleArrowNode>();
 
-  // A macro expansion compiles as its own `functions` entry — one per class
-  // reference — labeled after the script entries (script indices are
-  // reserved whether or not they materialize). The entry is an arrow over
-  // the expansion's holes; the macro's call site applies it to the client
-  // arguments. Interned by node identity: each script instance carries its
-  // own expansion, so one reference is one entry however many splice paths
-  // reach it.
+  // A construction's expansion compiles as its own `functions` entry,
+  // labeled after the script entries (script indices are reserved whether or
+  // not they materialize). The entry is an arrow over the expansion's holes;
+  // the construction's call site applies it to the client arguments.
+  // Interned by node identity: `expandConstructions` shares one expansion
+  // per class and arity, so it is one entry however many instances construct
+  // the class.
   const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
   const expansionEntry = (expansion: IrExpansion): BundleEntryNode => {
@@ -411,8 +411,8 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrValue":
         return value.value;
       // An expansion in value position is its `functions` entry: passed
-      // bare it is the function itself, which the macro's call site applies
-      // to the client arguments.
+      // bare it is the function itself, which the construction's call site
+      // applies to the client arguments.
       case "IrExpansion":
         return expansionEntry(value);
       case "IrHole":
@@ -609,9 +609,10 @@ export function buildBundle(ir: Ir): Bundle {
       return value.value;
     }
     // In JSON position a parameterized `#thunk` is the arrow form: the
-    // expansion's holes become its parameters, supplied by the macro's call.
-    // The tree grammar has no entry-as-value node, so here the expansion is
-    // written inline instead of referencing its `functions` entry.
+    // expansion's holes become its parameters, supplied by the
+    // construction's call. The tree grammar has no entry-as-value node, so
+    // here the expansion is written inline instead of referencing its
+    // `functions` entry.
     if (value.kind === "IrExpansion") {
       return {
         "#": "thunk",

@@ -365,7 +365,7 @@ function rewriteNodeImpl(
   // A construction of a spliced class: `new ${MyClass}(...)`. The class only
   // exists on the host, so the callee is its splice; the runtime node
   // mirrors the source 1:1, and the bundler expands the construction into a
-  // function of its arguments (see `expandMacros`).
+  // function of its arguments (see `expandConstructions`).
   if (ts.isNewExpression(node)) {
     const callee = node.expression;
     const splice = ts.isIdentifier(callee)

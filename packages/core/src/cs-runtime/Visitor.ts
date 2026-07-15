@@ -81,6 +81,6 @@ export interface Visitor<U> {
 
   // e.g. new ${Foo}(1) — the callee is always a splice (the constructed
   // class); the bundler expands the construction into a function of its
-  // arguments: macro(($0) => new Foo($0), [1])
+  // arguments: (($0) => new Foo($0))(1)
   "new"(loc: SourceLocation, callee: U, args: U[]): U;
 }

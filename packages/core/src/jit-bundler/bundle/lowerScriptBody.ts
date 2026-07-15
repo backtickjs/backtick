@@ -135,8 +135,8 @@ function buildExpression(
     case "AstScriptIdentifier":
       return { "#": "identifier", name: mangle(node.bindingKey) };
     case "AstScriptNew":
-      // A macro node: its callee's slot holds the construction's expansion
-      // (see `expandMacros`), so it reads as an ordinary call of that slot.
+      // A construction's callee slot holds its expansion (see
+      // `expandConstructions`), so it reads as an ordinary call of that slot.
       return {
         "#": "call",
         callee: renderSplice(node.callee.index),

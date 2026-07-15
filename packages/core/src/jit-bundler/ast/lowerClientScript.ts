@@ -2,7 +2,7 @@ import type { ClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import type { AstScript, AstScriptBody } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
-import { expandMacros } from "./expandMacros.js";
+import { expandConstructions } from "./expandConstructions.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
@@ -32,9 +32,9 @@ export function lowerClientScript(client: ClientScript): AstScript {
     bodyByLoc.set(key, parsed);
   }
 
-  // Macros expand against the client's live splices — per-instance values —
-  // so expansion runs per client over the shared parsed body.
-  const expansions = expandMacros(parsed, client.metadata.splices);
+  // Constructions expand against the client's live splices — per-instance
+  // values — so expansion runs per client over the shared parsed body.
+  const expansions = expandConstructions(parsed, client.metadata.splices);
 
   // The client object graph is acyclic — a script's splices are host values that
   // exist before the script itself — so lowering the splices before caching the
@@ -43,9 +43,9 @@ export function lowerClientScript(client: ClientScript): AstScript {
     kind: "AstScript",
     loc: client.loc,
     fileHash: client.fileHash,
-    // A macro's slot (a `new` callee) holds the class's expansion rather
-    // than the class, which stays on the host; the macro node reads as a
-    // call of that slot.
+    // A construction's slot (its `new` callee) holds the class's expansion
+    // rather than the class, which stays on the host; the construction
+    // reads as a call of that slot.
     splices: client.metadata.splices.map(
       (splice, index) => expansions.get(index) ?? lowerSpliceable(splice),
     ),

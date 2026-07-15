@@ -24,9 +24,9 @@ class IrBuilder {
   private readonly indexByLoc = new Map<string, number>();
   private readonly refByScript = new Map<AstScript, IrScriptRef>();
   private readonly refByElement = new Map<AstElement, IrTreeRef>();
-  // A macro expansion shared across script instances (`expandMacros` caches
-  // per class) is one node, so it lowers to one `IrExpansion` — the identity
-  // `buildBundle` interns function entries by.
+  // A construction's expansion shared across script instances
+  // (`expandConstructions` caches per class) is one node, so it lowers to
+  // one `IrExpansion` — the identity `buildBundle` interns entries by.
   private readonly expansionByNode = new Map<AstExpansion, IrExpansion>();
   // How many places reference each element node, counted up front so lowering
   // can decide locally whether a nested element inlines into its parent's
