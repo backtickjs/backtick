@@ -23,6 +23,7 @@ export type AstScriptExpression =
   | AstScriptBoolean
   | AstScriptCall
   | AstScriptIdentifier
+  | AstScriptNew
   | AstScriptNull
   | AstScriptNumber
   | AstScriptObject
@@ -123,6 +124,15 @@ export interface AstScriptIf {
   readonly alternate: AstScriptStatement | null;
 }
 
+// e.g. new ${Point}(1, 2) — the construction of a spliced class; the callee
+// is always a splice because the class only exists on the host.
+export interface AstScriptNew {
+  readonly kind: "AstScriptNew";
+  readonly loc: SourceLocation;
+  readonly callee: AstScriptSplice;
+  readonly args: readonly AstScriptExpression[];
+}
+
 export interface AstScriptNull {
   readonly kind: "AstScriptNull";
   readonly loc: SourceLocation;
@@ -206,8 +216,8 @@ export interface AstElement {
 
 // A macro's bundle-time expansion: the spliceable its `expand` returned when
 // applied to one opaque hole per parameter (see `createHole`), read as an
-// arrow over `params`. It fills the synthetic splice slot an
-// `AstScriptMacro` calls, so the macro's arguments — client expressions with
+// arrow over `params`. It fills the synthetic splice slot an expanded
+// `AstScriptNew` calls, so the macro's arguments — client expressions with
 // no bundle-time value — bind to the holes only when the client evaluates
 // the call.
 export interface AstExpansion {

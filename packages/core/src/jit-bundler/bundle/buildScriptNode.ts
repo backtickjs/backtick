@@ -134,6 +134,10 @@ function buildExpression(
       return { "#": "call", callee: e(node.callee), args: node.args.map(e) };
     case "AstScriptIdentifier":
       return { "#": "identifier", name: mangle(node.bindingKey) };
+    case "AstScriptNew":
+      // A macro node: `expandMacros` rewrites every construction into a call
+      // of its expansion's slot before a body reaches serialization.
+      throw new Error("Unexpanded construction reached serialization.");
     case "AstScriptNull":
       return null;
     case "AstScriptNumber":

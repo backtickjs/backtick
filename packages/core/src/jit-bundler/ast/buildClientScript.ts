@@ -1,20 +1,15 @@
 import type { ClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import type { AstExpansion, AstScript, AstScriptBody } from "./Ast.js";
-import { AstBuilder, type MacroExpansion } from "./AstBuilder.js";
+import { AstBuilder } from "./AstBuilder.js";
 import { buildAst } from "./buildAst.js";
+import { expandMacros } from "./expandMacros.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
 // objects at the same location — a script inside a host function, instantiated
 // with different splices at different call sites — share one parsed body but
 // still get their own node (their splices differ).
 const bodyByLoc = new Map<string, AstScriptBody>();
-
-// Source locations whose body contains a macro. A macro's `expand` is a live
-// closure over the instance's splices, so its expansion is per-instance data:
-// a cached body still stands (macro nodes carry only stable slot indices),
-// but each client must re-visit to run its own expansions.
-const macroLocs = new Set<string>();
 
 // The lowered node for each client object, keyed by identity. A script reached
 // through several splice paths (a diamond) is the same object each time, so it
@@ -31,22 +26,19 @@ export function buildClientScript(client: ClientScript): AstScript {
   }
 
   const key = locKey(client.fileHash, client.loc);
-  let expression = bodyByLoc.get(key);
-  let expansions: readonly MacroExpansion[] = [];
-  let consumedSplices: ReadonlySet<number> = new Set();
-  if (expression === undefined || macroLocs.has(key)) {
-    const builder = new AstBuilder(client.metadata.splices);
-    const built = client.visit(builder) as AstScriptBody;
-    expansions = builder.expansions;
-    consumedSplices = builder.consumedSplices;
-    if (expression === undefined) {
-      if (expansions.length > 0) {
-        macroLocs.add(key);
-      }
-      bodyByLoc.set(key, built);
-      expression = built;
-    }
+  let parsed = bodyByLoc.get(key);
+  if (parsed === undefined) {
+    parsed = client.visit(new AstBuilder()) as AstScriptBody;
+    bodyByLoc.set(key, parsed);
   }
+
+  // Macros expand against the client's live splices — per-instance values —
+  // so expansion runs per client over the shared parsed body; a macro-free
+  // body passes through untouched.
+  const { body, expansions, consumedSplices } = expandMacros(
+    parsed,
+    client.metadata.splices,
+  );
 
   // The client object graph is acyclic — a script's splices are host values that
   // exist before the script itself — so lowering the splices before caching the
@@ -58,7 +50,7 @@ export function buildClientScript(client: ClientScript): AstScript {
     // A slot consumed by an expansion (a `new` callee) holds the raw class,
     // which stays on the host and serializes as null. The expansions fill
     // the synthetic slots their expanded nodes call, appended after the real
-    // splices in the same order `AstBuilder.new` assigned their indices.
+    // splices in the same order `expandMacros` assigned their indices.
     splices: [
       ...client.metadata.splices.map((splice, index) =>
         consumedSplices.has(index) ? { kind: "AstNull" as const } : buildAst(splice),
@@ -73,7 +65,7 @@ export function buildClientScript(client: ClientScript): AstScript {
     ],
     captures: client.metadata.captures,
     declarations: client.metadata.declarations,
-    expression,
+    expression: body,
   };
   nodeByClient.set(client, node);
   return node;
