@@ -1,0 +1,197 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "p",
+            "expression": {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#f2"
+              },
+              "args": [
+                1,
+                2
+              ]
+            }
+          },
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "s",
+            "expression": {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#f3"
+              },
+              "args": [
+                3,
+                4
+              ]
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "binop",
+              "operator": "+",
+              "left": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "p"
+                  },
+                  "name": "sum"
+                },
+                "args": []
+              },
+              "right": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "s"
+                  },
+                  "name": "sum"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": {
+          "#": "binop",
+          "operator": "+",
+          "left": {
+            "#": "call",
+            "callee": {
+              "#": "identifier",
+              "name": "$0"
+            },
+            "args": []
+          },
+          "right": {
+            "#": "call",
+            "callee": {
+              "#": "identifier",
+              "name": "$1"
+            },
+            "args": []
+          }
+        }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "x": {
+          "#": "identifier",
+          "name": "$0"
+        },
+        "y": {
+          "#": "identifier",
+          "name": "$1"
+        },
+        "sum": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
+          },
+          "args": [
+            {
+              "#": "arrow",
+              "params": [],
+              "body": {
+                "#": "identifier",
+                "name": "$0"
+              }
+            },
+            {
+              "#": "arrow",
+              "params": [],
+              "body": {
+                "#": "identifier",
+                "name": "$1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [
+        "$0",
+        "$1"
+      ],
+      "body": {
+        "width": {
+          "#": "identifier",
+          "name": "$0"
+        },
+        "height": {
+          "#": "identifier",
+          "name": "$1"
+        },
+        "sum": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f1"
+          },
+          "args": [
+            {
+              "#": "arrow",
+              "params": [],
+              "body": {
+                "#": "identifier",
+                "name": "$0"
+              }
+            },
+            {
+              "#": "arrow",
+              "params": [],
+              "body": {
+                "#": "identifier",
+                "name": "$1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}
