@@ -32,10 +32,16 @@ import type {
 
 // Mirrors a client script's source 1:1: each visitor method returns the node
 // for the construct it was called with, so the built body is pure syntax —
-// stateless, client-independent, and cacheable by source location. Even a
-// construction (`new`) mirrors as parsed; the per-client expansion pass
-// fills its slot (see `expandConstructions`).
+// client-independent and cacheable by source location. Even a construction
+// (`new`) mirrors as parsed; the per-client expansion pass fills its slot
+// (see `expandConstructions`). One builder serves one visit: `new` also
+// records each construction in `constructions`, the index that spares the
+// expansion pass a walk of the body.
 export class AstBuilder implements Visitor<AstScriptNode> {
+  // Construction nodes in visit order — like the body they sit in, pure
+  // syntax shared by every client at the source location.
+  readonly constructions: AstScriptNew[] = [];
+
   splice(loc: SourceLocation, index: number): AstScriptSplice {
     return { kind: "AstScriptSplice", loc, index };
   }
@@ -174,6 +180,8 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     callee: AstScriptSplice,
     args: AstScriptExpression[],
   ): AstScriptNew {
-    return { kind: "AstScriptNew", loc, callee, args };
+    const node: AstScriptNew = { kind: "AstScriptNew", loc, callee, args };
+    this.constructions.push(node);
+    return node;
   }
 }
