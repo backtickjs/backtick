@@ -1,55 +1,15 @@
 import {
-  type Client,
-  type ClientObject,
-  type ClientUnknown,
   isClientObject,
   isClientScript,
   isClientUIElement,
   type Spliceable,
 } from "../../cs-runtime/index.js";
-import type { Ast, AstExpansion } from "./Ast.js";
-import { createHole, holeName } from "./holes.js";
+import type { Ast } from "./Ast.js";
+import { expandClass } from "./expandClass.js";
+import { holeName } from "./holes.js";
 import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientUIElement } from "./lowerClientUIElement.js";
-
-// The call side of `ClientObjectConstructor`: that type's `never[]`
-// parameters accept any concrete class but let nothing be passed, so the
-// expansion casts to this hole-taking form to invoke the constructor.
-type ConstructibleClass = new (
-  ...args: Client<ClientUnknown>[]
-) => ClientObject;
-
-// One expansion per class, ever: a constructor sees only opaque holes —
-// never the client's live argument values — so its expansion is a function
-// of the class alone. (This bakes in the constructor purity the holes
-// already enforce: one reading *mutable host* state at expansion time would
-// get its first expansion replayed.) Sharing the node also dedups
-// downstream: the IR interns one entry per expansion node however many
-// instances construct the class.
-const expansionByClass = new WeakMap<ConstructibleClass, AstExpansion>();
-
-// A spliced class expands to a function with holes: the constructor runs
-// once with one opaque hole per declared parameter (`length`), and the
-// spliceable it returns lowers into the expansion's body — the class itself
-// never leaves the host. A construction compiles as a plain call of the
-// slot, binding the client's argument values to the holes when it runs.
-function expandClass(splicedClass: ConstructibleClass): AstExpansion {
-  let expansion = expansionByClass.get(splicedClass);
-  if (expansion === undefined) {
-    const params = Array.from(
-      { length: splicedClass.length },
-      (_, position) => `$${position}`,
-    );
-    expansion = {
-      kind: "AstExpansion",
-      params,
-      body: lowerSpliceable(new splicedClass(...params.map(createHole))),
-    };
-    expansionByClass.set(splicedClass, expansion);
-  }
-  return expansion;
-}
 
 export function lowerSpliceable(value: Spliceable): Ast {
   // A hole sentinel a constructor stored somewhere in its result: the
@@ -87,7 +47,7 @@ export function lowerSpliceable(value: Spliceable): Ast {
   // constructor parameters — wherever it appears, so a construction (or a
   // local holding the class) just calls the slot's value.
   if (typeof value === "function") {
-    return expandClass(value as ConstructibleClass);
+    return expandClass(value);
   }
   // Only plain objects reflect structurally. A class instance without the
   // "@backtickjs" marker would land here and half-work — own fields reflect,
