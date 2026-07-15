@@ -1,6 +1,9 @@
 import type {
   BinaryOperator,
+  Client,
+  ClientUnknown,
   SourceLocation,
+  Spliceable,
   Visitor,
 } from "../../cs-runtime/index.js";
 import type {
@@ -15,7 +18,7 @@ import type {
   AstScriptExpression,
   AstScriptIdentifier,
   AstScriptIf,
-  AstScriptNew,
+  AstScriptMacro,
   AstScriptNode,
   AstScriptNull,
   AstScriptNumber,
@@ -151,14 +154,6 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     return { kind: "AstScriptCall", loc, callee, args };
   }
 
-  new(
-    loc: SourceLocation,
-    callee: AstScriptExpression,
-    args: AstScriptExpression[],
-  ): AstScriptNew {
-    return { kind: "AstScriptNew", loc, callee, args };
-  }
-
   arrow(
     loc: SourceLocation,
     params: AstScriptIdentifier[],
@@ -170,5 +165,13 @@ export class AstBuilder implements Visitor<AstScriptNode> {
       params: params,
       body,
     };
+  }
+
+  macro(
+    loc: null,
+    expand: (...args: Client<ClientUnknown>[]) => Spliceable,
+    args: AstScriptExpression[],
+  ): AstScriptMacro {
+    return { kind: "AstScriptMacro", loc, expand, args };
   }
 }

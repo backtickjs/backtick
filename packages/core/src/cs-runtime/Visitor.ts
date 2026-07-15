@@ -1,4 +1,7 @@
+import type { Client } from "./Client.js";
+import type { ClientUnknown } from "./ClientUnknown.js";
 import type { SourceLocation } from "./SourceLocation.js";
+import type { Spliceable } from "./Spliceable.js";
 
 export type BinaryOperator =
   | "&&"
@@ -76,9 +79,18 @@ export interface Visitor<U> {
   // e.g. s.concat("!")
   call(loc: SourceLocation, callee: U, args: U[]): U;
 
-  // e.g. new ${Foo}(1)
-  "new"(loc: SourceLocation, callee: U, args: U[]): U;
-
   // e.g. (r, g, b) => { ... }
   arrow(loc: SourceLocation, params: U[], body: U): U;
+
+  // A node the compiler synthesizes rather than parses — `loc` is null
+  // because no source text is its own. `expand` packages syntax only the
+  // host can evaluate (e.g. constructing a spliced class) as a function of
+  // the node's arguments; applying it yields the spliceable value the node
+  // stands for.
+  // e.g. new ${Foo}(1) -> macro(($0) => new Foo($0), [1])
+  macro(
+    loc: null,
+    expand: (...args: Client<ClientUnknown>[]) => Spliceable,
+    args: U[],
+  ): U;
 }

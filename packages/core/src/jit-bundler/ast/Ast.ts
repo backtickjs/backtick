@@ -1,4 +1,10 @@
-import type { BinaryOperator, SourceLocation } from "../../cs-runtime/index.js";
+import type {
+  BinaryOperator,
+  Client,
+  ClientUnknown,
+  SourceLocation,
+  Spliceable,
+} from "../../cs-runtime/index.js";
 
 // A node built from a value spliced into a client script. Splice values are
 // resolved at runtime and have no source text, so a value node never has a
@@ -21,7 +27,7 @@ export type AstScriptExpression =
   | AstScriptBoolean
   | AstScriptCall
   | AstScriptIdentifier
-  | AstScriptNew
+  | AstScriptMacro
   | AstScriptNull
   | AstScriptNumber
   | AstScriptObject
@@ -122,10 +128,15 @@ export interface AstScriptIf {
   readonly alternate: AstScriptStatement | null;
 }
 
-export interface AstScriptNew {
-  readonly kind: "AstScriptNew";
-  readonly loc: SourceLocation;
-  readonly callee: AstScriptExpression;
+// A node the compiler synthesizes rather than parses — `loc` is null because
+// no source text is its own. `expand` packages syntax only the host can
+// evaluate (constructing a spliced class) as a live host function of the
+// node's arguments; applying it yields the spliceable value the node stands
+// for.
+export interface AstScriptMacro {
+  readonly kind: "AstScriptMacro";
+  readonly loc: null;
+  readonly expand: (...args: Client<ClientUnknown>[]) => Spliceable;
   readonly args: readonly AstScriptExpression[];
 }
 

@@ -1,6 +1,6 @@
 import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
-import { call, sourceLoc, varDecl } from "./nodeFactory.js";
+import { arrow, call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
@@ -363,9 +363,10 @@ function rewriteNodeImpl(
   }
 
   // A construction of a spliced class: `new ${MyClass}(...)`. The class only
-  // exists on the host, so the callee is its splice — the live class
-  // reference travels as a splice value, per instance like any other, and
-  // the bundle carries its name.
+  // exists on the host, so the construction is packaged as a macro — a host
+  // function closing over the spliced class, applied to the rewritten
+  // arguments:
+  // new ${Point}(1, 2) -> macro(($0, $1) => new Point($0, $1), [1, 2])
   if (ts.isNewExpression(node)) {
     const callee = node.expression;
     const splice = ts.isIdentifier(callee)
@@ -406,12 +407,19 @@ function rewriteNodeImpl(
           liftedArgs,
         ),
       ]),
-      runtime: call(ts, "v", "new", [
-        loc(node),
-        call(ts, "v", "splice", [
-          loc(callee),
-          ts.factory.createNumericLiteral(splice.index),
-        ]),
+      runtime: call(ts, "v", "macro", [
+        ts.factory.createNull(),
+        arrow(
+          ts,
+          rewrittenArgs.map((_, index) => `$${index}`),
+          ts.factory.createNewExpression(
+            ts.factory.createIdentifier(callee.text),
+            undefined,
+            rewrittenArgs.map((_, index) =>
+              ts.factory.createIdentifier(`$${index}`),
+            ),
+          ),
+        ),
         ts.factory.createArrayLiteralExpression(
           rewrittenArgs.map((arg) => arg.runtime as ts.Expression),
           false,
