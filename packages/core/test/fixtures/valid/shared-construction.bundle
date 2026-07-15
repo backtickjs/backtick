@@ -1,0 +1,136 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "return",
+            "expression": {
+              "first": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": [
+                  {
+                    "#": "arrow",
+                    "params": [],
+                    "body": {
+                      "#": "entry",
+                      "label": "#f2"
+                    }
+                  }
+                ]
+              },
+              "second": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": [
+                  {
+                    "#": "arrow",
+                    "params": [],
+                    "body": {
+                      "#": "entry",
+                      "label": "#f3"
+                    }
+                  }
+                ]
+              },
+              "third": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": [
+                  {
+                    "#": "arrow",
+                    "params": [],
+                    "body": {
+                      "#": "entry",
+                      "label": "#f3"
+                    }
+                  }
+                ]
+              },
+              "fourth": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": [
+                  {
+                    "#": "arrow",
+                    "params": [],
+                    "body": {
+                      "#": "entry",
+                      "label": "#f3"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "call",
+          "callee": {
+            "#": "identifier",
+            "name": "$0"
+          },
+          "args": []
+        },
+        "args": [
+          5
+        ]
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "r": {
+          "#": "identifier",
+          "name": "$0"
+        }
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "side": {
+          "#": "identifier",
+          "name": "$0"
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

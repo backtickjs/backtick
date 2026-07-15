@@ -1,0 +1,36 @@
+cs.lift(                → cs`
+cs.splice(new (         → new 
+Shape                   → Shape
+)(cs.lift(              → (
+5                       → 5
+)))                     → )
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+return                  → return 
+{                       → { 
+first                   → first
+:                       → : 
+cs.splice(              → ${
+a                       → a
+)                       → }
+,                       → , 
+second                  → second
+:                       → : 
+cs.splice(              → ${
+b                       → b
+)                       → }
+,                       → , 
+third                   → third
+:                       → : 
+cs.splice(              → ${
+c                       → c
+)                       → }
+,                       → , 
+fourth                  → fourth
+:                       → : 
+cs.splice(              → ${
+d                       → d
+)                       → }
+ }                      →  }
+;                       → ;
+\n})())                 → \n}`

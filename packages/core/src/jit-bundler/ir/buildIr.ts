@@ -1,9 +1,10 @@
-import type { Ast, AstElement, AstScript } from "../ast/Ast.js";
+import type { Ast, AstElement, AstExpansion, AstScript } from "../ast/Ast.js";
 import { locKey } from "../locKey.js";
 import type {
   Ir,
   IrArgument,
   IrElement,
+  IrExpansion,
   IrScriptEntry,
   IrScriptRef,
   IrTreeEntry,
@@ -23,6 +24,10 @@ class IrBuilder {
   private readonly indexByLoc = new Map<string, number>();
   private readonly refByScript = new Map<AstScript, IrScriptRef>();
   private readonly refByElement = new Map<AstElement, IrTreeRef>();
+  // A macro expansion shared across script instances (`expandMacros` caches
+  // per class) is one node, so it lowers to one `IrExpansion` — the identity
+  // `buildBundle` interns function entries by.
+  private readonly expansionByNode = new Map<AstExpansion, IrExpansion>();
   // How many places reference each element node, counted up front so lowering
   // can decide locally whether a nested element inlines into its parent's
   // entry (one reference) or hoists into its own (shared).
@@ -163,12 +168,19 @@ class IrBuilder {
         return { kind: "IrValue", value: node.value };
       case "AstNull":
         return { kind: "IrValue", value: null };
-      case "AstExpansion":
-        return {
+      case "AstExpansion": {
+        const shared = this.expansionByNode.get(node);
+        if (shared) {
+          return shared;
+        }
+        const expansion: IrExpansion = {
           kind: "IrExpansion",
           params: node.params,
           body: this.lower(node.body),
         };
+        this.expansionByNode.set(node, expansion);
+        return expansion;
+      }
       case "AstHole":
         return { kind: "IrHole", name: node.name };
       default: {
@@ -186,6 +198,9 @@ class IrBuilder {
 function countElementReferences(root: Ast): Map<AstElement, number> {
   const counts = new Map<AstElement, number>();
   const seenScripts = new Set<AstScript>();
+  // A per-class expansion shared across script instances lowers once, so its
+  // contents count once too.
+  const seenExpansions = new Set<AstExpansion>();
   const visit = (node: Ast): void => {
     if (node.kind === "AstScript") {
       if (seenScripts.has(node)) {
@@ -211,7 +226,8 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
       Object.values(node.entries).forEach(visit);
       return;
     }
-    if (node.kind === "AstExpansion") {
+    if (node.kind === "AstExpansion" && !seenExpansions.has(node)) {
+      seenExpansions.add(node);
       visit(node.body);
     }
   };
