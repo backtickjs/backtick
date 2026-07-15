@@ -1,6 +1,6 @@
 import type { ClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
-import type { AstExpansion, AstScript, AstScriptBody } from "./Ast.js";
+import type { AstScript, AstScriptBody } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { expandMacros } from "./expandMacros.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
@@ -57,13 +57,7 @@ export function lowerClientScript(client: ClientScript): AstScript {
           ? { kind: "AstNull" as const }
           : lowerSpliceable(splice),
       ),
-      ...expansions.map(
-        (expansion): AstExpansion => ({
-          kind: "AstExpansion",
-          params: expansion.params,
-          body: lowerSpliceable(expansion.value),
-        }),
-      ),
+      ...expansions,
     ],
     captures: client.metadata.captures,
     declarations: client.metadata.declarations,

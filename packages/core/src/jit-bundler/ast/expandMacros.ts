@@ -4,6 +4,7 @@ import type {
   Spliceable,
 } from "../../cs-runtime/index.js";
 import type {
+  AstExpansion,
   AstScriptBlock,
   AstScriptBody,
   AstScriptCall,
@@ -12,21 +13,13 @@ import type {
   AstScriptStatement,
 } from "./Ast.js";
 import { createHole } from "./holes.js";
-
-// A macro's raw expansion: the spliceable a bundle-time evaluation returned
-// when applied to one hole per parameter. `lowerClientScript` serializes the
-// value into the `AstExpansion` filling the synthetic splice slot the
-// expanded node calls.
-export interface MacroExpansion {
-  readonly params: readonly string[];
-  readonly value: Spliceable;
-}
+import { lowerSpliceable } from "./lowerSpliceable.js";
 
 export interface MacroExpandedBody {
   readonly body: AstScriptBody;
-  // Expansions in source order; the expansion at position `i` occupies
-  // splice slot `splices.length + i`.
-  readonly expansions: readonly MacroExpansion[];
+  // Expansions in source order; the expansion at position `i` fills splice
+  // slot `splices.length + i`, the slot its expanded node calls.
+  readonly expansions: readonly AstExpansion[];
   // Splice slots consumed by an expansion (a `new` callee): the raw value —
   // a class, which isn't spliceable — stays on the host, so the slot
   // serializes as null.
@@ -34,10 +27,12 @@ export interface MacroExpandedBody {
 }
 
 // Rewrites every macro node (`AstScriptNew`) in a parsed body into a call of
-// a synthetic splice slot. Expanding evaluates live host values — which
-// differ per script instance even at one source location — so the parsed
-// body is shared but this pass runs once per client. A macro-free body comes
-// back unchanged, by identity.
+// a synthetic splice slot, and lowers each expansion into the `AstExpansion`
+// that fills its slot — like its `lower*` siblings, every host reference
+// consumed comes back as serializable data. Expanding evaluates live host
+// values — which differ per script instance even at one source location — so
+// the parsed body is shared but this pass runs once per client. A macro-free
+// body comes back unchanged, by identity.
 export function expandMacros(
   body: AstScriptBody,
   splices: readonly Spliceable[],
@@ -51,7 +46,7 @@ export function expandMacros(
 }
 
 class MacroExpander {
-  readonly expansions: MacroExpansion[] = [];
+  readonly expansions: AstExpansion[] = [];
   readonly consumedSplices = new Set<number>();
   private readonly splices: readonly Spliceable[];
 
@@ -155,9 +150,9 @@ class MacroExpander {
 
   // The constructor — the callee's splice value, live on the host — runs
   // once with one opaque hole per argument, and the instance it returns
-  // fills a synthetic splice slot as a function of those holes (see
-  // `AstExpansion`). The rewritten node reads as an ordinary call of that
-  // slot:
+  // lowers into the `AstExpansion` filling a synthetic splice slot as a
+  // function of those holes. The rewritten node reads as an ordinary call of
+  // that slot:
   // new ${Point}(1, 2) -> (($0, $1) => new Point($0, $1))(1, 2)
   private expand(node: AstScriptNew): AstScriptCall {
     // Arguments expand first, so nested macros take lower slots — the same
@@ -169,8 +164,9 @@ class MacroExpander {
     const params = node.args.map((_, position) => `$${position}`);
     const index = this.splices.length + this.expansions.length;
     this.expansions.push({
+      kind: "AstExpansion",
       params,
-      value: new splicedClass(...params.map(createHole)),
+      body: lowerSpliceable(new splicedClass(...params.map(createHole))),
     });
     this.consumedSplices.add(node.callee.index);
     return {
