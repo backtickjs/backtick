@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { cs, isSpliceable } from "../dist/cs-runtime/index.js";
-import { buildAst } from "../dist/jit-bundler/index.js";
+import { lowerSpliceable } from "../dist/jit-bundler/index.js";
 
 test("cs`...` throws when used without the compiler", () => {
   assert.throws(() => cs`"Hello World!"`, /was not compiled/);
@@ -63,7 +63,7 @@ test("a reflected instance keeps spliceable members, own or inherited", () => {
     }
   }
 
-  assert.deepEqual(buildAst(new Derived()), {
+  assert.deepEqual(lowerSpliceable(new Derived()), {
     kind: "AstObject",
     entries: {
       field: { kind: "AstNumber", value: 3 },

@@ -14,7 +14,7 @@ import type {
 import { createHole } from "./holes.js";
 
 // A macro's raw expansion: the spliceable a bundle-time evaluation returned
-// when applied to one hole per parameter. `buildClientScript` serializes the
+// when applied to one hole per parameter. `lowerClientScript` serializes the
 // value into the `AstExpansion` filling the synthetic splice slot the
 // expanded node calls.
 export interface MacroExpansion {

@@ -4,11 +4,11 @@ import {
   type Spliceable,
 } from "../../cs-runtime/index.js";
 import type { Ast, AstObject } from "./Ast.js";
-import { buildAst } from "./buildAst.js";
+import { lowerSpliceable } from "./lowerSpliceable.js";
 
 const nodeByInstance = new WeakMap<ClientObject, AstObject>();
 
-export function buildClientObject(value: ClientObject): AstObject {
+export function lowerClientObject(value: ClientObject): AstObject {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;
@@ -16,7 +16,7 @@ export function buildClientObject(value: ClientObject): AstObject {
 
   const entries: { [key: string]: Ast } = {};
   for (const [key, entry] of spliceableEntries(value)) {
-    entries[key] = buildAst(entry);
+    entries[key] = lowerSpliceable(entry);
   }
 
   const node: AstObject = { kind: "AstObject", entries };

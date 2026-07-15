@@ -5,12 +5,12 @@ import {
   type Spliceable,
 } from "../../cs-runtime/index.js";
 import type { Ast } from "./Ast.js";
-import { buildClientObject } from "./buildClientObject.js";
-import { buildClientScript } from "./buildClientScript.js";
-import { buildClientUIElement } from "./buildClientUIElement.js";
 import { holeName } from "./holes.js";
+import { lowerClientObject } from "./lowerClientObject.js";
+import { lowerClientScript } from "./lowerClientScript.js";
+import { lowerClientUIElement } from "./lowerClientUIElement.js";
 
-export function buildAst(value: Spliceable): Ast {
+export function lowerSpliceable(value: Spliceable): Ast {
   // A hole sentinel a macro's `expand` stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.
@@ -19,13 +19,13 @@ export function buildAst(value: Spliceable): Ast {
     return { kind: "AstHole", name: hole };
   }
   if (isClientScript(value)) {
-    return buildClientScript(value);
+    return lowerClientScript(value);
   }
   if (isClientUIElement(value)) {
-    return buildClientUIElement(value);
+    return lowerClientUIElement(value);
   }
   if (isClientObject(value)) {
-    return buildClientObject(value);
+    return lowerClientObject(value);
   }
   if (value === null) {
     return { kind: "AstNull" };
@@ -40,7 +40,7 @@ export function buildAst(value: Spliceable): Ast {
     return { kind: "AstString", value };
   }
   if (Array.isArray(value)) {
-    return { kind: "AstArray", elements: value.map(buildAst) };
+    return { kind: "AstArray", elements: value.map(lowerSpliceable) };
   }
   // Only plain objects reflect structurally. A class instance without the
   // "@backtickjs" marker would land here and half-work — own fields reflect,
@@ -56,7 +56,7 @@ export function buildAst(value: Spliceable): Ast {
   }
   const entries: { [key: string]: Ast } = {};
   for (const [key, entry] of Object.entries(value)) {
-    entries[key] = buildAst(entry);
+    entries[key] = lowerSpliceable(entry);
   }
   return { kind: "AstObject", entries };
 }

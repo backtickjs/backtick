@@ -27,7 +27,7 @@ export type Mangle = (key: string) => string;
 // name, disambiguated only where needed — so a captured variable's reference
 // and the parameter that receives it still line up. The mapping mirrors the
 // grammar: expressions lower to expressions, statements to statements.
-export function buildScriptNode(
+export function lowerScriptBody(
   node: AstScriptBody,
   renderSplice: RenderSplice,
   mangle: Mangle,
@@ -119,7 +119,7 @@ function buildExpression(
       return {
         "#": "arrow",
         params: node.params.map((param) => mangle(param.bindingKey)),
-        body: buildScriptNode(node.body, renderSplice, mangle),
+        body: lowerScriptBody(node.body, renderSplice, mangle),
       };
     case "AstScriptBinop":
       return {

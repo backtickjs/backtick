@@ -1,4 +1,4 @@
-export { buildAst } from "./ast/buildAst.js";
+export { lowerSpliceable } from "./ast/lowerSpliceable.js";
 export type {
   Bundle,
   BundleApply,

@@ -20,7 +20,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
-import { buildScriptNode, type RenderSplice } from "./buildScriptNode.js";
+import { lowerScriptBody, type RenderSplice } from "./lowerScriptBody.js";
 
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
@@ -363,7 +363,7 @@ export function buildBundle(ir: Ir): Bundle {
       const args = monoArgs(target);
       renderSplice = (index) => renderValue(args[index]);
     }
-    const body = buildScriptNode(fns[target].body, renderSplice, displayName);
+    const body = lowerScriptBody(fns[target].body, renderSplice, displayName);
     bodies.set(target, { "#": "arrow", params, body });
   };
 

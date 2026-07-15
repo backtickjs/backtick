@@ -1,10 +1,10 @@
 import { type ClientUIElement, isSpliceable } from "../../cs-runtime/index.js";
 import type { Ast, AstElement } from "./Ast.js";
-import { buildAst } from "./buildAst.js";
+import { lowerSpliceable } from "./lowerSpliceable.js";
 
 const nodeByElement = new WeakMap<ClientUIElement, AstElement>();
 
-export function buildClientUIElement(value: ClientUIElement): AstElement {
+export function lowerClientUIElement(value: ClientUIElement): AstElement {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;
@@ -18,7 +18,7 @@ export function buildClientUIElement(value: ClientUIElement): AstElement {
           "isn't spliceable.",
       );
     }
-    props[key] = buildAst(entry);
+    props[key] = lowerSpliceable(entry);
   }
   const node: AstElement = {
     kind: "AstElement",

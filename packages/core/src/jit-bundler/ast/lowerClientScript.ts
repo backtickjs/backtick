@@ -2,8 +2,8 @@ import type { ClientScript } from "../../cs-runtime/index.js";
 import { locKey } from "../locKey.js";
 import type { AstExpansion, AstScript, AstScriptBody } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
-import { buildAst } from "./buildAst.js";
 import { expandMacros } from "./expandMacros.js";
+import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The parsed body of each distinct script, keyed by source location. Two client
 // objects at the same location — a script inside a host function, instantiated
@@ -19,7 +19,7 @@ const bodyByLoc = new Map<string, AstScriptBody>();
 // keyed weakly so entries vanish with their client objects.
 const nodeByClient = new WeakMap<ClientScript, AstScript>();
 
-export function buildClientScript(client: ClientScript): AstScript {
+export function lowerClientScript(client: ClientScript): AstScript {
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;
@@ -53,13 +53,15 @@ export function buildClientScript(client: ClientScript): AstScript {
     // splices in the same order `expandMacros` assigned their indices.
     splices: [
       ...client.metadata.splices.map((splice, index) =>
-        consumedSplices.has(index) ? { kind: "AstNull" as const } : buildAst(splice),
+        consumedSplices.has(index)
+          ? { kind: "AstNull" as const }
+          : lowerSpliceable(splice),
       ),
       ...expansions.map(
         (expansion): AstExpansion => ({
           kind: "AstExpansion",
           params: expansion.params,
-          body: buildAst(expansion.value),
+          body: lowerSpliceable(expansion.value),
         }),
       ),
     ],

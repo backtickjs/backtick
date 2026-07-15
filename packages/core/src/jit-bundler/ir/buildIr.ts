@@ -34,7 +34,7 @@ class IrBuilder {
 
   // Lowers a client script to a reference that targets its table entry,
   // interning the entry and lowering its splices into positional arguments. A
-  // script shared across several splice paths is one node (see `buildAst`), so
+  // script shared across several splice paths is one node (see `lowerSpliceable`), so
   // memoizing by that node lowers each shared subtree once — without this, a
   // diamond composition re-lowers its shared arm on every path, fanning out into
   // an exponentially large reference tree.
