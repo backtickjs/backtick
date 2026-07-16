@@ -1,7 +1,7 @@
 cs.lift(               → cs`
-cs.splice(             → ${
+cs.splice(             → 
 await fetchGreeting()  → await fetchGreeting()
-)                      → }
+)                      → 
  +                     →  + 
 "!"                    → "!"
 )                      → `

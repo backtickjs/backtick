@@ -1,12 +1,12 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.splice(              → ${
+cs.splice(              → 
 this.x                  → this.x
-)                       → }
+)                       → 
  +                      →  + 
-cs.splice(              → ${
+cs.splice(              → 
 this.y                  → this.y
-)                       → }
+)                       → 
 )                       → `
 cs.lift(                → cs`
 1                       → 1
@@ -18,9 +18,9 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_p                  → p
  =                      →  = 
-cs.splice(              → ${
+cs.splice(              → 
 shared                  → shared
-)                       → }
+)                       → 
 ;                       → ;
 \n                      → \n  
 return                  → return 
@@ -36,9 +36,9 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_p                  → p
  =                      →  = 
-cs.splice(              → ${
+cs.splice(              → 
 shared                  → shared
-)                       → }
+)                       → 
 ;                       → ;
 \n                      → \n  
 return                  → return 
@@ -50,11 +50,11 @@ x                       → x
 ;                       → ;
 \n})())                 → \n}`
 cs.lift(                → cs`
-cs.splice(              → ${
+cs.splice(              → 
 left                    → left
-)                       → }
+)                       → 
  +                      →  + 
-cs.splice(              → ${
+cs.splice(              → 
 right                   → right
-)                       → }
+)                       → 
 )                       → `

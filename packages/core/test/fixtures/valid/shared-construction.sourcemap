@@ -1,8 +1,8 @@
 cs.lift(                → cs`
 new (                   → new 
-cs.splice(              → ${
+cs.splice(              → 
 Shape                   → Shape
-)                       → }
+)                       → 
 )(cs.lift(              → (
 5                       → 5
 ))                      → )
@@ -12,27 +12,27 @@ return                  → return
 {                       → { 
 first                   → first
 :                       → : 
-cs.splice(              → ${
+cs.splice(              → 
 a                       → a
-)                       → }
+)                       → 
 ,                       → , 
 second                  → second
 :                       → : 
-cs.splice(              → ${
+cs.splice(              → 
 b                       → b
-)                       → }
+)                       → 
 ,                       → , 
 third                   → third
 :                       → : 
-cs.splice(              → ${
+cs.splice(              → 
 c                       → c
-)                       → }
+)                       → 
 ,                       → , 
 fourth                  → fourth
 :                       → : 
-cs.splice(              → ${
+cs.splice(              → 
 d                       → d
-)                       → }
+)                       → 
  }                      →  }
 ;                       → ;
 \n})())                 → \n}`

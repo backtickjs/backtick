@@ -97,10 +97,17 @@ function renderScript(
     } else {
       const splice = script.splices[event.placeholder];
       const { expression } = splice;
+      // The cursor jumps over the `${`/`}` delimiters, which exist in the
+      // source only: no virtual text claims them, and `cs.splice(` and `)`
+      // attribute to zero-width ranges at the expression's edges.
+      if (top) {
+        top.cursor = Math.max(top.cursor, expression.getStart(sourceFile));
+      }
       flush(top, event.pos, expression.getStart(sourceFile));
       segments.push(...renderSplice(ts, sourceFile, rewrittenFile, splice));
       if (top) {
-        top.cursor = Math.max(top.cursor, expression.getEnd());
+        const brace = sourceFile.text.indexOf("}", expression.getEnd());
+        top.cursor = Math.max(top.cursor, brace + 1);
       }
       lastPos = event.pos + event.placeholder.length;
     }

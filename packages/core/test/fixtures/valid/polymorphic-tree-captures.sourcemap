@@ -2,15 +2,15 @@ cs.lift(       → cs`
 (              → (
 __cs_base      → base
 : number) =>   → : number) => 
-cs.splice(     → ${
+cs.splice(     → 
 cs.lift(       → cs`
 __cs_base      → base
 )              → `
-)              → }
+)              → 
  +             →  + 
-cs.splice(     → ${
+cs.splice(     → 
 by             → by
-)              → }
+)              → 
 )              → `
 cs.lift(       → cs`
 1              → 1

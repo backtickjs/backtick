@@ -1,8 +1,8 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.splice(              → ${
+cs.splice(              → 
 this.r                  → this.r
-)                       → }
+)                       → 
  +                      →  + 
 2                       → 2
 )                       → `
@@ -25,13 +25,13 @@ r                       → r
 return                  → return 
 __cs_pick               → pick
 (                       → (
-cs.splice(              → ${
+cs.splice(              → 
 new Color(              → new Color(
 cs.lift(                → cs`
 7                       → 7
 )                       → `
 , "#123")               → , "#123")
-)                       → }
+)                       → 
 )                       → )
 ;                       → ;
 \n})())                 → \n}`

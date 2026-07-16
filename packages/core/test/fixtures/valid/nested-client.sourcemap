@@ -1,12 +1,12 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.splice(              → ${
+cs.splice(              → 
 this.x                  → this.x
-)                       → }
+)                       → 
  +                      →  + 
-cs.splice(              → ${
+cs.splice(              → 
 this.y                  → this.y
-)                       → }
+)                       → 
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 

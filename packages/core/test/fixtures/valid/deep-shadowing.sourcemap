@@ -6,13 +6,13 @@ __cs_base               → base
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.splice(              → ${
+cs.splice(              → 
 outer(                  → outer(
 cs.lift(                → cs`
 __cs_base               → base
 )                       → `
 )                       → )
-)                       → }
+)                       → 
 ;                       → ;
 \n})())                 → \n}`
 cs.lift((() => {\n      → cs`{\n    
@@ -25,9 +25,9 @@ __cs_base               → base
 return                  → return 
 __cs_base               → base
  +                      →  + 
-cs.splice(              → ${
+cs.splice(              → 
 middle(inner)           → middle(inner)
-)                       → }
+)                       → 
 ;                       → ;
 \n})())                 → \n  }`
 cs.lift((() => {\n      → cs`{\n    
@@ -40,8 +40,8 @@ __cs_base               → base
 return                  → return 
 __cs_base               → base
  *                      →  * 
-cs.splice(              → ${
+cs.splice(              → 
 inner                   → inner
-)                       → }
+)                       → 
 ;                       → ;
 \n})())                 → \n  }`

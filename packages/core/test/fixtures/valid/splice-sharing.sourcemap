@@ -1,17 +1,17 @@
 cs.lift(    → cs`
-cs.splice(  → ${
+cs.splice(  → 
 lhs         → lhs
-)           → }
+)           → 
  +          →  + 
-cs.splice(  → ${
+cs.splice(  → 
 rhs         → rhs
-)           → }
+)           → 
 )           → `
 cs.lift(    → cs`
 {           → ({\n  
 x           → x
 :           → : 
-cs.splice(  → ${
+cs.splice(  → 
 add(        → add(
 cs.lift(    → cs`
 1           → 1
@@ -21,11 +21,11 @@ cs.lift(    → cs`
 2           → 2
 )           → `
 )           → )
-)           → }
+)           → 
 ,           → ,\n  
 y           → y
 :           → : 
-cs.splice(  → ${
+cs.splice(  → 
 add(        → add(
 cs.lift(    → cs`
 3           → 3
@@ -35,6 +35,6 @@ cs.lift(    → cs`
 4           → 4
 )           → `
 )           → )
-)           → }
+)           → 
  }          → ,\n})
 )           → `

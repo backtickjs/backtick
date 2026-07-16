@@ -8,8 +8,8 @@ count       → $count
 ,           → , 
 b           → b
 :           → : 
-cs.splice(  → ${
+cs.splice(  → 
 ++count     → ++count
-)           → }
+)           → 
  }          →  })
 )           → `
