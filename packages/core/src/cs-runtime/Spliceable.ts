@@ -36,12 +36,19 @@ export type Spliced<T> =
             ? { [K in keyof T]: Spliced<T[K]> }
             : T;
 
-// No function arm, though `Spliceable` admits `ClientConstructor`:
-// reflection uses this to filter members, where a class is
-// indistinguishable from a host method. A directly spliced class never
-// reaches this guard.
 export function isSpliceable(value: unknown): value is Spliceable {
   if (value === undefined) {
+    return false;
+  }
+  if (typeof value === "function") {
+    // A deliberately spliced `ClientConstructor` never hits this check —
+    // the bundler expands it directly. A function can only land here while
+    // the bundler scans an object's members (or an element's props)
+    // deciding what ships to the client: usually a host method, which must
+    // not ship, but possibly a `ClientConstructor` stored in a field. At
+    // runtime the two can look identical — a build tool may compile a
+    // class into a plain function — so rather than guess, every function
+    // is skipped. To ship a `ClientConstructor`, splice it directly.
     return false;
   }
   if (

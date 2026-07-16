@@ -76,8 +76,8 @@ virtualize(point).reflectsNothing;
 virtualize(point).scaled;
 // @ts-expect-error — the marker doesn't exist on the client.
 virtualize(point)["@backtickjs"];
-// @ts-expect-error — a class member doesn't reflect: at runtime it is
-// indistinguishable from a host method, so reflection filters both.
+// @ts-expect-error — a class member doesn't reflect: reflection filters it
+// like a host method (see `isSpliceable`).
 virtualize(point).cls;
 
 const segment = spliced(

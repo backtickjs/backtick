@@ -20,8 +20,8 @@ export type Virtualized<T extends ClientUnknown> =
           ? {
               // Keep the constraint homomorphic (`keyof T`, filtering in `as`) so
               // properties stay linked to their declarations for go-to-definition.
-              // A class member doesn't reflect: at runtime it is
-              // indistinguishable from a host method (see `isSpliceable`).
+              // A class member doesn't reflect, mirroring `isSpliceable`'s
+              // function guard.
               [K in keyof T as K extends "@backtickjs"
                 ? never
                 : T[K] extends ClientConstructor<ClientObject>
