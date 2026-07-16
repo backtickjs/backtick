@@ -1,23 +1,17 @@
-import type {
-  ClientConstructor,
-  ClientObject,
-} from "../../cs-runtime/index.js";
+import type { ClientConstructor } from "../../cs-runtime/index.js";
 import type { AstExpansion } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // One expansion per class, ever: a constructor only ever sees opaque
 // holes, so its expansion is a function of the class alone.
-const expansionByConstructor = new WeakMap<
-  ClientConstructor<ClientObject>,
-  AstExpansion
->();
+const expansionByConstructor = new WeakMap<ClientConstructor, AstExpansion>();
 
 // Runs the constructor once with one opaque hole per declared parameter
 // and lowers the instance it returns; the class itself never leaves the
 // host, and call sites bind the client's argument values to the holes.
 export function expandClientConstructor(
-  value: ClientConstructor<ClientObject>,
+  value: ClientConstructor,
 ): AstExpansion {
   let expansion = expansionByConstructor.get(value);
   if (expansion === undefined) {

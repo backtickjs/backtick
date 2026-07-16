@@ -7,7 +7,7 @@ import type { ClientUnknown } from "./ClientUnknown.js";
 
 export type Spliceable =
   | Client<ClientUnknown>
-  | ClientConstructor<ClientObject>
+  | ClientConstructor
   | ClientObject
   | null
   | number
@@ -18,7 +18,7 @@ export type Spliceable =
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   ClientConstructor<C>      -> typeof C
+//   ClientConstructor         -> typeof C, the spliced class C itself
 //   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
@@ -26,7 +26,7 @@ export type Spliceable =
 export type Spliced<T> =
   T extends Client<infer U>
     ? U
-    : T extends ClientConstructor<ClientObject>
+    : T extends ClientConstructor
       ? T
       : T extends ClientObject
         ? T

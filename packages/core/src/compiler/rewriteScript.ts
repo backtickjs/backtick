@@ -73,10 +73,7 @@ export function rewriteScript(
         "splices",
         ts.factory.createObjectLiteralExpression(
           splices.map((splice: Splice) =>
-            ts.factory.createPropertyAssignment(
-              splice.key,
-              splice.expression,
-            ),
+            ts.factory.createPropertyAssignment(splice.key, splice.expression),
           ),
           false,
         ),
