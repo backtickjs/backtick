@@ -3,7 +3,7 @@ cs.lift(    → cs`
 a           → a
 :           → : 
 cs.splice(  → 
-count       → $count
+(count)     → $count
 )           → 
 ,           → , 
 b           → b

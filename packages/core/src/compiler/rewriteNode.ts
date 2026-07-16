@@ -255,20 +255,30 @@ function rewriteNodeImpl(
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
-      // A braced splice prints its `$0splice<n>` key; the assembler replaces
-      // it with the host expression's verbatim source text (mapped 1:1),
-      // recursing into any nested `cs` scripts it contains. An unbraced
-      // splice prints its expression — the host binding the shorthand
-      // names — as a fresh identifier, because `splice.expression` already
-      // sits in the emitted runtime's metadata tree.
-      const identifier = ts.factory.createIdentifier(
-        splice.kind === "braced" ? splice.key : splice.expression.text,
-      );
-      if (splice.kind === "unbraced") {
-        state.mappings.set(identifier, node);
+      let argument: ts.Expression;
+      if (splice.kind === "braced") {
+        // A braced splice prints its `$0splice<n>` key; the assembler
+        // replaces it with the host expression's verbatim source text
+        // (mapped 1:1), recursing into any nested `cs` scripts it contains.
+        argument = ts.factory.createIdentifier(splice.key);
+      } else {
+        // An unbraced splice prints the host binding its shorthand names —
+        // a fresh identifier, because `splice.expression` already sits in
+        // the emitted runtime's metadata tree.
+        //
+        // It prints parenthesized, as 1-char padding: offset translation
+        // inside a mapped span is start-anchored, and `(count)` against
+        // source `$count` starts the identifier at offset 1 — mirroring the
+        // `$` sigil — so a completion's replacement span round-trips to the
+        // bare name and the editor filters what follows the sigil against
+        // the host entries (`$Po` matches `Point`).
+        argument = ts.factory.createParenthesizedExpression(
+          ts.factory.createIdentifier(splice.expression.text),
+        );
+        state.mappings.set(argument, node);
       }
       return {
-        virtual: call(ts, "cs", "splice", [identifier]),
+        virtual: call(ts, "cs", "splice", [argument]),
         runtime: call(ts, "v", "splice", [
           loc(node),
           ts.factory.createStringLiteral(splice.key),

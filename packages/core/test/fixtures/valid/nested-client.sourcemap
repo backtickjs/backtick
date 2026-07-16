@@ -14,12 +14,12 @@ __cs_s                  → s
  =                      →  = 
 new (                   → new 
 cs.splice(              → 
-Segment                 → $Segment
+(Segment)               → $Segment
 )                       → 
 )(cs.lift(              → (
 new (                   → new 
 cs.splice(              → 
-Point                   → $Point
+(Point)                 → $Point
 )                       → 
 )(cs.lift(              → (
 1                       → 1
@@ -29,7 +29,7 @@ Point                   → $Point
 ), cs.lift(             → , 
 new (                   → new 
 cs.splice(              → 
-Point                   → $Point
+(Point)                 → $Point
 )                       → 
 )(cs.lift(              → (
 1                       → 1
