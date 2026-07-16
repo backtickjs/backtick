@@ -3,7 +3,9 @@
   "files": [],
   "references": [
     { "path": "packages/bun-plugin" },
+    { "path": "packages/compiler" },
     { "path": "packages/core" },
+    { "path": "packages/cs-runtime" },
     { "path": "packages/language-tools/language-plugin" },
     { "path": "packages/language-tools/language-server" },
     { "path": "packages/language-tools/language-service" },

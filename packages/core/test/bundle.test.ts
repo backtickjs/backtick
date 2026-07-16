@@ -9,7 +9,7 @@ import {
 import { basename, extname, join } from "node:path";
 import { describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
-import type { Client, ClientUnknown } from "../dist/cs-runtime/index.js";
+import type { Client, ClientUnknown } from "@backtickjs/cs-runtime";
 import { bundle } from "../dist/jit-bundler/index.js";
 import { evaluate } from "../dist/test-client/index.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";

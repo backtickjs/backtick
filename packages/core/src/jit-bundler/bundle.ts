@@ -1,4 +1,4 @@
-import type { Client, ClientUnknown } from "../cs-runtime/index.js";
+import type { Client, ClientUnknown } from "@backtickjs/cs-runtime";
 import { lowerSpliceable } from "./ast/lowerSpliceable.js";
 import type { Bundle } from "./bundle/Bundle.js";
 import { buildBundle } from "./bundle/buildBundle.js";

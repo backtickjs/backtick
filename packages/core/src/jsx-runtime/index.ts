@@ -1,5 +1,5 @@
-import { create } from "../cs-runtime/ClientUIElement.js";
-import type { ClientUIElement, Prop } from "../cs-runtime/index.js";
+import type { ClientUIElement, Prop } from "@backtickjs/cs-runtime";
+import { create } from "@backtickjs/cs-runtime/ClientUIElement";
 
 export declare namespace JSX {
   export type Element = ClientUIElement;

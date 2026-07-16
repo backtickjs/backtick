@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/language-plugin",
+  "name": "@backtickjs/cs-runtime",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,6 +8,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./ClientUIElement": {
+      "types": "./dist/ClientUIElement.d.ts",
+      "default": "./dist/ClientUIElement.js"
     }
   },
   "scripts": {
@@ -15,17 +19,7 @@
     "dev": "tsc -b --watch",
     "clean": "rm -rf node_modules dist .turbo"
   },
-  "dependencies": {
-    "@backtickjs/compiler": "workspace:*",
-    "@volar/language-core": "^2.4.28",
-    "vscode-uri": "^3.0.8"
-  },
   "devDependencies": {
-    "@volar/language-server": "^2.4.28",
-    "@volar/typescript": "^2.4.28",
-    "typescript": "^6.0.3"
-  },
-  "peerDependencies": {
     "typescript": "^6.0.3"
   }
 }

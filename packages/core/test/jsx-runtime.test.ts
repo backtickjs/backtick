@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { isClientUIElement } from "../dist/cs-runtime/index.js";
+import { isClientUIElement } from "@backtickjs/cs-runtime";
 import { jsx, jsxs } from "../dist/jsx-runtime/index.js";
 
 test("jsx builds a flexbox element", () => {

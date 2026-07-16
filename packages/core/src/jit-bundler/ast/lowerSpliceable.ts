@@ -3,7 +3,7 @@ import {
   isClientScript,
   isClientUIElement,
   type Spliceable,
-} from "../../cs-runtime/index.js";
+} from "@backtickjs/cs-runtime";
 import type { Ast } from "./Ast.js";
 import { expandClientConstructor } from "./expandClientConstructor.js";
 import { holeName } from "./holes.js";

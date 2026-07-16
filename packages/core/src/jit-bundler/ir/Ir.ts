@@ -1,4 +1,4 @@
-import type { SourceLocation } from "../../cs-runtime/index.js";
+import type { SourceLocation } from "@backtickjs/cs-runtime";
 import type { AstScriptBody } from "../ast/Ast.js";
 
 export interface Ir {

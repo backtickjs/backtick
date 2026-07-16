@@ -20,5 +20,8 @@
     "test/fixtures/typecheck-error/*.ts",
     "test/fixtures/typecheck-error/*.virtual.tsx"
   ],
-  "references": [{ "path": "./tsconfig.build.json" }]
+  "references": [
+    { "path": "./tsconfig.build.json" },
+    { "path": "../compiler/tsconfig.build.json" }
+  ]
 }

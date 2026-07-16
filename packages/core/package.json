@@ -9,13 +9,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./compiler": {
-      "types": "./dist/compiler/index.d.ts",
-      "default": "./dist/compiler/index.js"
-    },
     "./cs-runtime": {
-      "types": "./dist/cs-runtime/index.d.ts",
-      "default": "./dist/cs-runtime/index.js"
+      "types": "./dist/cs-runtime.d.ts",
+      "default": "./dist/cs-runtime.js"
     },
     "./jit-bundler": {
       "types": "./dist/jit-bundler/index.d.ts",
@@ -41,10 +37,15 @@
     "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo"
   },
+  "dependencies": {
+    "@backtickjs/cs-runtime": "workspace:*"
+  },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@backtickjs/compiler": "workspace:*",
+    "@backtickjs/prettier-plugin": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

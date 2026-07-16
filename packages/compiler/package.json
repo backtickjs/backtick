@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/language-plugin",
+  "name": "@backtickjs/compiler",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,6 +8,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./resolveBindings": {
+      "types": "./dist/resolveBindings.d.ts",
+      "default": "./dist/resolveBindings.js"
     }
   },
   "scripts": {
@@ -16,16 +20,12 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/compiler": "workspace:*",
-    "@volar/language-core": "^2.4.28",
-    "vscode-uri": "^3.0.8"
-  },
-  "devDependencies": {
-    "@volar/language-server": "^2.4.28",
-    "@volar/typescript": "^2.4.28",
-    "typescript": "^6.0.3"
+    "@backtickjs/cs-runtime": "workspace:*"
   },
   "peerDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
     "typescript": "^6.0.3"
   }
 }

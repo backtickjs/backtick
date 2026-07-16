@@ -16,7 +16,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/core": "workspace:*",
+    "@backtickjs/compiler": "workspace:*",
     "@backtickjs/language-plugin": "workspace:*",
     "@volar/language-core": "^2.4.28"
   },

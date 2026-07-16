@@ -1,4 +1,4 @@
-import type { Client } from "../../cs-runtime/index.js";
+import type { Client } from "@backtickjs/cs-runtime";
 
 // The hole sentinels a spliced class's constructor is applied to in place
 // of its client arguments, which have no value until the client runs. Where

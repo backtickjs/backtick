@@ -1,4 +1,4 @@
-import { transform } from "@backtickjs/core/compiler";
+import { transform } from "@backtickjs/compiler";
 import type { PluginConfig, TransformerExtras } from "ts-patch";
 import type ts from "typescript";
 

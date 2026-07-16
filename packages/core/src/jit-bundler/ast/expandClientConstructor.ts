@@ -1,4 +1,4 @@
-import type { ClientConstructor } from "../../cs-runtime/index.js";
+import type { ClientConstructor } from "@backtickjs/cs-runtime";
 import type { AstExpansion } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";

@@ -2,8 +2,8 @@ import assert from "node:assert";
 import { readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
+import { virtualize } from "@backtickjs/compiler";
 import ts from "typescript";
-import { virtualize } from "../dist/compiler/virtualize.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 
 // Typechecks each fixture's virtual code and snapshots the diagnostics to a

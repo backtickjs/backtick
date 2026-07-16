@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { cs, isSpliceable } from "../dist/cs-runtime/index.js";
+import { cs, isSpliceable } from "@backtickjs/cs-runtime";
 import { lowerSpliceable } from "../dist/jit-bundler/index.js";
 
 test("cs`...` throws when used without the compiler", () => {

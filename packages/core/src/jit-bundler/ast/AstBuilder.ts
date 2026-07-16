@@ -2,7 +2,7 @@ import type {
   BinaryOperator,
   SourceLocation,
   Visitor,
-} from "../../cs-runtime/index.js";
+} from "@backtickjs/cs-runtime";
 import type {
   AstScriptArray,
   AstScriptArrow,

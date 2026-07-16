@@ -1,4 +1,4 @@
-import { type ClientUIElement, isSpliceable } from "../../cs-runtime/index.js";
+import { type ClientUIElement, isSpliceable } from "@backtickjs/cs-runtime";
 import type { Ast, AstElement } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 

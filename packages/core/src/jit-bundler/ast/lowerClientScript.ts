@@ -1,4 +1,4 @@
-import type { ClientScript } from "../../cs-runtime/index.js";
+import type { ClientScript } from "@backtickjs/cs-runtime";
 import { locKey } from "../locKey.js";
 import type { AstScript, AstScriptBody } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";

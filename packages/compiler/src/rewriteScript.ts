@@ -1,5 +1,5 @@
+import type { SourceLocation } from "@backtickjs/cs-runtime";
 import type ts from "typescript";
-import type { SourceLocation } from "../cs-runtime/index.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";

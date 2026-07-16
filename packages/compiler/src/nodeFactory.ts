@@ -1,5 +1,5 @@
+import type { SourceLocation } from "@backtickjs/cs-runtime";
 import type ts from "typescript";
-import type { SourceLocation } from "../cs-runtime/index.js";
 
 /** <receiver>.<method>(...args) */
 export function call(

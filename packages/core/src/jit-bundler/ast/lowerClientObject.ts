@@ -2,7 +2,7 @@ import {
   type ClientObject,
   isSpliceable,
   type Spliceable,
-} from "../../cs-runtime/index.js";
+} from "@backtickjs/cs-runtime";
 import type { Ast, AstObject } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 

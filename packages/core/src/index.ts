@@ -1,2 +1,2 @@
-export { type Client, cs } from "./cs-runtime/index.js";
+export { type Client, cs } from "@backtickjs/cs-runtime";
 export { bundle } from "./jit-bundler/index.js";

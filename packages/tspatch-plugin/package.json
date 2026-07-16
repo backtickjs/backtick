@@ -16,12 +16,12 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "peerDependencies": {
-    "@backtickjs/core": "workspace:*",
+    "@backtickjs/compiler": "workspace:*",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/core": "workspace:*",
+    "@backtickjs/compiler": "workspace:*",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   }

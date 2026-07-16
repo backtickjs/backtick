@@ -2,7 +2,7 @@ import {
   type ClientScript,
   flattenScripts,
   parseSourceText,
-} from "@backtickjs/core/compiler";
+} from "@backtickjs/compiler";
 import type { Expression, Node } from "estree";
 import {
   type AstPath,
@@ -94,10 +94,7 @@ function replacePlaceholders(
     const expression = expressions[spliceIndex];
     // A braced splice holding a bare identifier prints as its unbraced
     // shorthand: `${x}` reads as `$x`. A `$`-led name keeps its braces.
-    if (
-      expression?.type === "Identifier" &&
-      !expression.name.startsWith("$")
-    ) {
+    if (expression?.type === "Identifier" && !expression.name.startsWith("$")) {
       parts.push(`$${expression.name}`);
     } else {
       parts.push(["${", print(["quasi", "expressions", spliceIndex]), "}"]);

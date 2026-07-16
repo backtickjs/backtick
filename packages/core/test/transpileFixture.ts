@@ -1,6 +1,6 @@
+import { transform } from "@backtickjs/compiler";
 import prettier from "prettier";
 import ts from "typescript";
-import { transform } from "../dist/compiler/transform.js";
 
 // The one set of options every suite compiles fixtures with, so the `*.js`
 // snapshots the compiler suite writes are byte-for-byte the modules the
