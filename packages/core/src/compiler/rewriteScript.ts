@@ -71,8 +71,29 @@ export function rewriteScript(
 
   const splices = Object.values(clientScript.splices);
 
+  const scriptRange: SourceRange = {
+    start: sourceNode.getStart(sourceFile),
+    end: sourceNode.getEnd(),
+  };
+  const from = sourceFile.getLineAndCharacterOfPosition(scriptRange.start);
+  const to = sourceFile.getLineAndCharacterOfPosition(scriptRange.end);
+  const scriptLocation: SourceLocation = [
+    from.line,
+    from.character,
+    to.line,
+    to.character,
+  ];
+
   const metadata = ts.factory.createObjectLiteralExpression(
     [
+      ts.factory.createPropertyAssignment(
+        "filePath",
+        ts.factory.createStringLiteral(sourceFile.fileName),
+      ),
+      ts.factory.createPropertyAssignment(
+        "fileHash",
+        ts.factory.createStringLiteral(fileHash),
+      ),
       ts.factory.createPropertyAssignment(
         "splices",
         ts.factory.createObjectLiteralExpression(
@@ -106,22 +127,10 @@ export function rewriteScript(
       : (rewritten.virtual as ts.Expression),
   ]);
 
-  const scriptRange: SourceRange = {
-    start: sourceNode.getStart(sourceFile),
-    end: sourceNode.getEnd(),
-  };
-
   sourceMaps.set(virtual, scriptRange);
-
-  const scriptLocation: SourceLocation = {
-    path: sourceFile.fileName,
-    start: sourceFile.getLineAndCharacterOfPosition(scriptRange.start),
-    end: sourceFile.getLineAndCharacterOfPosition(scriptRange.end),
-  };
 
   const runtime = call(ts, "cs", "create", [
     sourceLoc(ts, scriptLocation),
-    ts.factory.createStringLiteral(fileHash),
     metadata,
     arrow(ts, ["v"], rewritten.runtime as ts.Expression),
   ]);

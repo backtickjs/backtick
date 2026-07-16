@@ -24,7 +24,7 @@ export function lowerClientScript(client: ClientScript): AstScript {
     return shared;
   }
 
-  const key = locKey(client.fileHash, client.loc);
+  const key = locKey(client.metadata.fileHash, client.loc);
   let body = parsedByLoc.get(key);
   if (body === undefined) {
     body = client.visit(new AstBuilder()) as AstScriptBody;
@@ -37,7 +37,7 @@ export function lowerClientScript(client: ClientScript): AstScript {
   const node: AstScript = {
     kind: "AstScript",
     loc: client.loc,
-    fileHash: client.fileHash,
+    fileHash: client.metadata.fileHash,
     splices: Object.fromEntries(
       Object.entries(client.metadata.splices).map(([key, splice]) => [
         key,

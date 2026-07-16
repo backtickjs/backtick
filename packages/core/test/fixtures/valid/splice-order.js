@@ -3,4 +3,4 @@ import { cs } from "@backtickjs/core";
 // order, like a real template literal's spans — braced and unbraced alike:
 // the `$count` read sees 0 before `${++count}` bumps it to 1.
 let count = 0;
-export default cs.create({ path: "splice-order.ts", start: { line: 8, character: 16 }, end: { line: 8, character: 50 } }, "1hw5m8e", { splices: { $count: count, $0splice0: ++count }, captures: [], declarations: [] }, v => v.object({ path: "splice-order.ts", start: { line: 8, character: 20 }, end: { line: 8, character: 48 } }, { a: v.splice({ path: "splice-order.ts", start: { line: 8, character: 25 }, end: { line: 8, character: 31 } }, "$count"), b: v.splice({ path: "splice-order.ts", start: { line: 8, character: 36 }, end: { line: 8, character: 46 } }, "$0splice0") }));
+export default cs.create([8, 16, 8, 50], { filePath: "splice-order.ts", fileHash: "1hw5m8e", splices: { $count: count, $0splice0: ++count }, captures: [], declarations: [] }, v => v.object([8, 20, 8, 48], { a: v.splice([8, 25, 8, 31], "$count"), b: v.splice([8, 36, 8, 46], "$0splice0") }));

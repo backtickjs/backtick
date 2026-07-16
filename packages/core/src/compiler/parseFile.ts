@@ -119,11 +119,9 @@ function getDirectScripts(
     });
     const toSourceLocation = (node: ts.Node): SourceLocation => {
       const { start, end } = toSourceRange(node);
-      return {
-        path: sourceFile.fileName,
-        start: sourceFile.getLineAndCharacterOfPosition(start),
-        end: sourceFile.getLineAndCharacterOfPosition(end),
-      };
+      const from = sourceFile.getLineAndCharacterOfPosition(start);
+      const to = sourceFile.getLineAndCharacterOfPosition(end);
+      return [from.line, from.character, to.line, to.character];
     };
     scripts.push({
       sourceFile,

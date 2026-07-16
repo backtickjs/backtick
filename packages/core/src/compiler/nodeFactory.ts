@@ -87,49 +87,14 @@ export function constDecl(
   return varDecl(ts, ts.NodeFlags.Const, name, initializer);
 }
 
+// The compiler's positions are 0-based; the emitted tuple is 1-based, the
+// way a stack trace prints them.
 export function sourceLoc(
   ts: typeof import("typescript"),
   location: SourceLocation,
-): ts.ObjectLiteralExpression {
-  return ts.factory.createObjectLiteralExpression(
-    [
-      ts.factory.createPropertyAssignment(
-        "path",
-        ts.factory.createStringLiteral(location.path),
-      ),
-      ts.factory.createPropertyAssignment(
-        "start",
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "line",
-              ts.factory.createNumericLiteral(location.start.line + 1),
-            ),
-            ts.factory.createPropertyAssignment(
-              "character",
-              ts.factory.createNumericLiteral(location.start.character + 1),
-            ),
-          ],
-          false,
-        ),
-      ),
-      ts.factory.createPropertyAssignment(
-        "end",
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              "line",
-              ts.factory.createNumericLiteral(location.end.line + 1),
-            ),
-            ts.factory.createPropertyAssignment(
-              "character",
-              ts.factory.createNumericLiteral(location.end.character + 1),
-            ),
-          ],
-          false,
-        ),
-      ),
-    ],
+): ts.ArrayLiteralExpression {
+  return ts.factory.createArrayLiteralExpression(
+    location.map((position) => ts.factory.createNumericLiteral(position + 1)),
     false,
   );
 }
