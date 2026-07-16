@@ -96,6 +96,16 @@ function rewriteNodeImpl(
         return unsupported();
       }
       const name = declaration.name;
+      // `$`-prefixed names splice host bindings, so a client script can't
+      // declare one: the declaration would shadow the shorthand.
+      if (name.text.startsWith("$")) {
+        state.errors.set(
+          name,
+          "`$`-prefixed names are reserved for unbraced splices in a `cs` " +
+            "client script.",
+        );
+        return unsupported();
+      }
       const initializer = rewriteNode(ts, state, declaration.initializer);
       const identifier = ts.factory.createIdentifier(mangle(name.text));
       state.mappings.set(identifier, name);
