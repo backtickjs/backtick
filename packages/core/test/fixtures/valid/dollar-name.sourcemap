@@ -1,0 +1,24 @@
+cs.lift(                → cs`
+cs.splice(              → ${
+lhs                     → lhs
+)                       → }
+ +                      →  + 
+2                       → 2
+)                       → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_foo$               → foo$
+ =                      →  = 
+1                       → 1
+;                       → ;
+\n                      → \n  
+return                  → return 
+cs.splice(              → ${
+add(                    → add(
+cs.lift(                → cs`
+__cs_foo$               → foo$
+)                       → `
+)                       → )
+)                       → }
+;                       → ;
+\n})())                 → \n}`

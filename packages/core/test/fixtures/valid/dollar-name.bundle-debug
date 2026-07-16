@@ -1,0 +1,10 @@
+#f0 = () => {
+  const foo$ = 1;
+  return #f1(foo$);
+}
+
+#f1 = (foo$) => #f2(foo$) + 2
+
+#f2 = (foo$) => foo$
+
+root = #f0()

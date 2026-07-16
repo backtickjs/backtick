@@ -1,0 +1,75 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "foo$",
+            "expression": 1
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#f1"
+              },
+              "args": [
+                {
+                  "#": "identifier",
+                  "name": "foo$"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "foo$"
+      ],
+      "body": {
+        "#": "binop",
+        "operator": "+",
+        "left": {
+          "#": "call",
+          "callee": {
+            "#": "entry",
+            "label": "#f2"
+          },
+          "args": [
+            {
+              "#": "identifier",
+              "name": "foo$"
+            }
+          ]
+        },
+        "right": 2
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [
+        "foo$"
+      ],
+      "body": {
+        "#": "identifier",
+        "name": "foo$"
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}
