@@ -3,6 +3,7 @@
   "injectionSelector": "L:meta.embedded.client-script.tsx -comment -string",
   "patterns": [
     {
+      "comment": "A braced splice: `${expr}`, scoped like the template expression it reads as.",
       "name": "meta.template.expression.tsx",
       "contentName": "meta.embedded.splice.tsx",
       "begin": "\\$\\{",
@@ -22,6 +23,19 @@
           "include": "source.tsx#expression"
         }
       ]
+    },
+    {
+      "comment": "An unbraced splice: `$x`, its sigil scoped like the braced `${` so both color alike.",
+      "name": "meta.template.expression.tsx",
+      "match": "(?<![_$[:alnum:]])(\\$)([_[:alpha:]][_$[:alnum:]]*)",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.template-expression.begin.tsx"
+        },
+        "2": {
+          "name": "meta.embedded.splice.tsx variable.other.readwrite.tsx"
+        }
+      }
     }
   ]
 }
