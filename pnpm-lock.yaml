@@ -85,6 +85,9 @@ importers:
 
   packages/core:
     devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

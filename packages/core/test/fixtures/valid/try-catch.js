@@ -1,2 +1,64 @@
 import { cs } from "@backtickjs/core";
-export default cs.create([3, 16, 10, 3], { filePath: "try-catch.ts", fileHash: "6ilvrnfy42ws", splices: {}, captures: ["String"], declarations: ["message$6ilvrnfy42ws$0", "error$6ilvrnfy42ws$1"] }, v => v.block([3, 19, 10, 2], [v.variableDeclaration([4, 3, 4, 26], "const", v.identifier([4, 9, 4, 16], "message", "message$6ilvrnfy42ws$0"), v.string([4, 19, 4, 25], "boom")), v.try([5, 3, 9, 4], v.block([5, 7, 7, 4], [v.throw([6, 5, 6, 19], v.identifier([6, 11, 6, 18], "message", "message$6ilvrnfy42ws$0"))]), v.identifier([7, 12, 7, 17], "error", "error$6ilvrnfy42ws$1"), v.block([7, 19, 9, 4], [v.return([8, 5, 8, 38], v.binop([8, 12, 8, 37], v.string([8, 12, 8, 21], "caught "), "+", v.call([8, 24, 8, 37], v.identifier([8, 24, 8, 30], "String", "String"), [v.identifier([8, 31, 8, 36], "error", "error$6ilvrnfy42ws$1")])))]))]));
+export default cs.create(
+  [3, 16, 10, 3],
+  {
+    filePath: "try-catch.ts",
+    fileHash: "6ilvrnfy42ws",
+    splices: {},
+    captures: ["String"],
+    declarations: ["message$6ilvrnfy42ws$0", "error$6ilvrnfy42ws$1"],
+  },
+  (v) =>
+    v.block(
+      [3, 19, 10, 2],
+      [
+        v.variableDeclaration(
+          [4, 3, 4, 26],
+          "const",
+          v.identifier([4, 9, 4, 16], "message", "message$6ilvrnfy42ws$0"),
+          v.string([4, 19, 4, 25], "boom"),
+        ),
+        v.try(
+          [5, 3, 9, 4],
+          v.block(
+            [5, 7, 7, 4],
+            [
+              v.throw(
+                [6, 5, 6, 19],
+                v.identifier(
+                  [6, 11, 6, 18],
+                  "message",
+                  "message$6ilvrnfy42ws$0",
+                ),
+              ),
+            ],
+          ),
+          v.identifier([7, 12, 7, 17], "error", "error$6ilvrnfy42ws$1"),
+          v.block(
+            [7, 19, 9, 4],
+            [
+              v.return(
+                [8, 5, 8, 38],
+                v.binop(
+                  [8, 12, 8, 37],
+                  v.string([8, 12, 8, 21], "caught "),
+                  "+",
+                  v.call(
+                    [8, 24, 8, 37],
+                    v.identifier([8, 24, 8, 30], "String", "String"),
+                    [
+                      v.identifier(
+                        [8, 31, 8, 36],
+                        "error",
+                        "error$6ilvrnfy42ws$1",
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+);

@@ -1,10 +1,10 @@
 import { cs } from "@backtickjs/core";
 class Point {
-    "@backtickjs" = "ClientObject";
-    x;
-    constructor(x) {
-        this.x = x;
-    }
+  "@backtickjs" = "ClientObject";
+  x;
+  constructor(x) {
+    this.x = x;
+  }
 }
 // A host helper generic over the client object it splices: `Spliced<T>`
 // defers over the unresolved type parameter, so the annotated return type
@@ -12,6 +12,48 @@ class Point {
 // identity overload. A concretely typed splice reduces fine (see
 // `spliced-param`), and the runtime is unaffected either way.
 function wrap(value) {
-    return cs.create([20, 10, 20, 28], { filePath: "spliced-generic.ts", fileHash: "3vmqfbzmu78ru", splices: { $0splice0: value }, captures: [], declarations: [] }, v => v.arrow([20, 13, 20, 27], [], v.splice([20, 19, 20, 27], "$0splice0")));
+  return cs.create(
+    [20, 10, 20, 28],
+    {
+      filePath: "spliced-generic.ts",
+      fileHash: "3vmqfbzmu78ru",
+      splices: { $0splice0: value },
+      captures: [],
+      declarations: [],
+    },
+    (v) =>
+      v.arrow([20, 13, 20, 27], [], v.splice([20, 19, 20, 27], "$0splice0")),
+  );
 }
-export default cs.create([23, 16, 23, 49], { filePath: "spliced-generic.ts", fileHash: "3vmqfbzmu78ru", splices: { $0splice0: wrap(new Point(cs.create([23, 36, 23, 41], { filePath: "spliced-generic.ts", fileHash: "3vmqfbzmu78ru", splices: {}, captures: [], declarations: [] }, v => v.number([23, 39, 23, 40], 7)))) }, captures: [], declarations: [] }, v => v.propertyAccess([23, 19, 23, 48], v.call([23, 19, 23, 46], v.splice([23, 19, 23, 44], "$0splice0"), []), "x"));
+export default cs.create(
+  [23, 16, 23, 49],
+  {
+    filePath: "spliced-generic.ts",
+    fileHash: "3vmqfbzmu78ru",
+    splices: {
+      $0splice0: wrap(
+        new Point(
+          cs.create(
+            [23, 36, 23, 41],
+            {
+              filePath: "spliced-generic.ts",
+              fileHash: "3vmqfbzmu78ru",
+              splices: {},
+              captures: [],
+              declarations: [],
+            },
+            (v) => v.number([23, 39, 23, 40], 7),
+          ),
+        ),
+      ),
+    },
+    captures: [],
+    declarations: [],
+  },
+  (v) =>
+    v.propertyAccess(
+      [23, 19, 23, 48],
+      v.call([23, 19, 23, 46], v.splice([23, 19, 23, 44], "$0splice0"), []),
+      "x",
+    ),
+);

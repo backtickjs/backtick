@@ -52,7 +52,7 @@ async function importFixture(
   file: string,
 ): Promise<Client<ClientUnknown>> {
   const sourceText = readFileSync(join(dir, file), "utf8");
-  const outputText = transpileFixture(file, sourceText);
+  const outputText = await transpileFixture(file, sourceText);
   const base = file.slice(0, -extname(file).length);
   const compiled = join(cacheDir, basename(dir), `${base}.js`);
   mkdirSync(join(cacheDir, basename(dir)), { recursive: true });

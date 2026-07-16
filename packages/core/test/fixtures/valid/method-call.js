@@ -1,2 +1,50 @@
 import { cs } from "@backtickjs/core";
-export default cs.create([3, 16, 6, 3], { filePath: "method-call.ts", fileHash: "190iczdl07b3h", splices: {}, captures: [], declarations: ["greeting$190iczdl07b3h$0"] }, v => v.block([3, 19, 6, 2], [v.variableDeclaration([4, 3, 4, 28], "const", v.identifier([4, 9, 4, 17], "greeting", "greeting$190iczdl07b3h$0"), v.string([4, 20, 4, 27], "Hello")), v.return([5, 3, 5, 55], v.call([5, 10, 5, 54], v.propertyAccess([5, 10, 5, 52], v.call([5, 10, 5, 40], v.propertyAccess([5, 10, 5, 25], v.identifier([5, 10, 5, 18], "greeting", "greeting$190iczdl07b3h$0"), "concat"), [v.string([5, 26, 5, 30], ", "), v.string([5, 32, 5, 39], "World")]), "toUpperCase"), []))]));
+export default cs.create(
+  [3, 16, 6, 3],
+  {
+    filePath: "method-call.ts",
+    fileHash: "190iczdl07b3h",
+    splices: {},
+    captures: [],
+    declarations: ["greeting$190iczdl07b3h$0"],
+  },
+  (v) =>
+    v.block(
+      [3, 19, 6, 2],
+      [
+        v.variableDeclaration(
+          [4, 3, 4, 28],
+          "const",
+          v.identifier([4, 9, 4, 17], "greeting", "greeting$190iczdl07b3h$0"),
+          v.string([4, 20, 4, 27], "Hello"),
+        ),
+        v.return(
+          [5, 3, 5, 55],
+          v.call(
+            [5, 10, 5, 54],
+            v.propertyAccess(
+              [5, 10, 5, 52],
+              v.call(
+                [5, 10, 5, 40],
+                v.propertyAccess(
+                  [5, 10, 5, 25],
+                  v.identifier(
+                    [5, 10, 5, 18],
+                    "greeting",
+                    "greeting$190iczdl07b3h$0",
+                  ),
+                  "concat",
+                ),
+                [
+                  v.string([5, 26, 5, 30], ", "),
+                  v.string([5, 32, 5, 39], "World"),
+                ],
+              ),
+              "toUpperCase",
+            ),
+            [],
+          ),
+        ),
+      ],
+    ),
+);

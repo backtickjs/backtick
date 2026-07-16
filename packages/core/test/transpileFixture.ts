@@ -1,3 +1,4 @@
+import prettier from "prettier";
 import ts from "typescript";
 import { transform } from "../dist/compiler/transform.js";
 
@@ -12,10 +13,16 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
   sourceMap: false,
 };
 
-export function transpileFixture(fileName: string, sourceText: string): string {
-  return ts.transpileModule(sourceText, {
+export async function transpileFixture(
+  fileName: string,
+  sourceText: string,
+): Promise<string> {
+  const { outputText } = ts.transpileModule(sourceText, {
     fileName,
     compilerOptions: COMPILER_OPTIONS,
     transformers: { before: [transform(ts)] },
-  }).outputText;
+  });
+  // The emitted runtime tree prints as one long line per script; formatted,
+  // the snapshot reads like code.
+  return prettier.format(outputText, { parser: "typescript" });
 }

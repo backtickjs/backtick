@@ -45,7 +45,7 @@ describe("compile", () => {
     describe(dirName, () => {
       const dir = join(fixturesRoot, dirName);
       for (const fixture of loadFixtures(dir)) {
-        it(fixture.fileName, () => {
+        it(fixture.fileName, async () => {
           const { fileName, sourceText, virtualCode, mappings, diagnostics } =
             fixture;
           const base = fileName.slice(0, -extname(fileName).length);
@@ -70,7 +70,7 @@ describe("compile", () => {
             join(dir, `${base}.sourcemap`),
           );
           matchFileSnapshot(
-            transpileFixture(fileName, sourceText),
+            await transpileFixture(fileName, sourceText),
             join(dir, `${base}.js`),
           );
         });
