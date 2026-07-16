@@ -1,15 +1,17 @@
 import type ts from "typescript";
 import { buildMappings, type SourceMapping } from "./buildMappings.js";
+import type { CodeInformation } from "./CodeInformation.js";
 import { printMarkedNode, scanMarkers } from "./markers.js";
 import type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 import type { RewrittenFile } from "./rewriteFile.js";
 import type { SourceRange } from "./SourceRange.js";
 import { type Segment, segmentsToString } from "./segmentsToString.js";
 
-// An enclosing mapped node: its source `range`, and a `cursor` tracking how far
+// An enclosing mapped node: its source `range`, a `cursor` tracking how far
 // into that range has already been attributed (advanced past nested children so
-// a parent only claims the source its children didn't).
-type Frame = { range: SourceRange; cursor: number };
+// a parent only claims the source its children didn't), and the editor
+// behavior of the node's mapping.
+type Frame = { range: SourceRange; cursor: number; data?: CodeInformation };
 
 interface VirtualizedFile {
   virtualCode: string;
@@ -52,11 +54,12 @@ function renderScript(
     return [];
   }
 
-  const { marked, spans } = printMarkedNode(
+  const { marked, spans, datas } = printMarkedNode(
     ts,
     node,
     script.fileWithPlaceholders,
     rewrittenFile.sourceMaps,
+    rewrittenFile.codeInformation,
   );
 
   const { text, events } = scanMarkers(marked);
@@ -79,7 +82,7 @@ function renderScript(
           undefined,
           top.cursor,
           end - top.cursor,
-          top.range.data,
+          top.data,
         ]);
       } else {
         segments.push(chunk);
@@ -98,7 +101,7 @@ function renderScript(
       if (top) {
         top.cursor = Math.max(top.cursor, range.end);
       }
-      stack.push({ range, cursor: range.start });
+      stack.push({ range, cursor: range.start, data: datas[event.id] });
     } else if (event.type === "close") {
       flush(top, event.pos, top?.range.end);
       stack.pop();

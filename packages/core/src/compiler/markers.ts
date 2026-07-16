@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import type { CodeInformation } from "./CodeInformation.js";
 import type { SourceRange } from "./SourceRange.js";
 
 // A boundary discovered in the printed virtual code: the start/end of a mapped
@@ -11,16 +12,23 @@ export type MarkerEvent =
 
 // Print `node`, wrapping every mapped virtual node in a pair of marker comments
 // `/*$0S<id>*/ … /*$0E<id>*/` so its generated span can be recovered afterwards.
-// Returns the raw printed text plus the source range behind each `<id>`.
+// Returns the raw printed text plus, behind each `<id>`, the source range and
+// the editor behavior of the node's mapping (index-aligned with `spans`).
 export function printMarkedNode(
   ts: typeof import("typescript"),
   node: ts.Node,
   fileWithPlaceholders: ts.SourceFile,
   sourceMaps: Map<ts.Node, SourceRange>,
-): { marked: string; spans: SourceRange[] } {
+  codeInformation: Map<ts.Node, CodeInformation>,
+): {
+  marked: string;
+  spans: SourceRange[];
+  datas: (CodeInformation | undefined)[];
+} {
   // The printer emits a single space next to each marker comment, which
   // `scanMarkers` strips to reproduce the exact virtual code.
   const spans: SourceRange[] = [];
+  const datas: (CodeInformation | undefined)[] = [];
   const markers = new Map<ts.Node, number>();
   const printer = ts.createPrinter(
     {},
@@ -30,6 +38,7 @@ export function printMarkedNode(
         if (range != null && !markers.has(emitted)) {
           const id = spans.length;
           spans.push(range);
+          datas.push(codeInformation.get(emitted));
           markers.set(emitted, id);
           ts.addSyntheticLeadingComment(
             emitted,
@@ -55,7 +64,7 @@ export function printMarkedNode(
     fileWithPlaceholders,
   );
 
-  return { marked, spans };
+  return { marked, spans, datas };
 }
 
 // Strip the marker comments (and the single space the printer pads them with),

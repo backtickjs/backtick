@@ -1,4 +1,5 @@
 import type ts from "typescript";
+import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { flattenScripts } from "./flattenScripts.js";
 import { hashText } from "./hashText.js";
@@ -11,6 +12,7 @@ export interface RewrittenFile {
   sourceFile: ts.SourceFile;
   scripts: Map<ts.TaggedTemplateExpression, RewrittenScript>;
   sourceMaps: Map<ts.Node, SourceRange>;
+  codeInformation: Map<ts.Node, CodeInformation>;
   diagnostics: Diagnostic[];
 }
 
@@ -22,6 +24,7 @@ export function rewriteFile(
 
   const scripts = new Map<ts.TaggedTemplateExpression, RewrittenScript>();
   const sourceMaps = new Map<ts.Node, SourceRange>();
+  const codeInformation = new Map<ts.Node, CodeInformation>();
   const diagnostics: Diagnostic[] = [];
 
   // One hash per file, shared by binding keys and script locations: both need
@@ -47,8 +50,11 @@ export function rewriteFile(
     for (const [node, range] of rewritten.sourceMaps) {
       sourceMaps.set(node, range);
     }
+    for (const [node, data] of rewritten.codeInformation) {
+      codeInformation.set(node, data);
+    }
     diagnostics.push(...rewritten.diagnostics);
   }
 
-  return { sourceFile, scripts, sourceMaps, diagnostics };
+  return { sourceFile, scripts, sourceMaps, codeInformation, diagnostics };
 }

@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import type { SourceLocation } from "../cs-runtime/index.js";
+import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
@@ -11,6 +12,8 @@ export interface RewrittenScript {
   virtual: ts.Node;
   runtime: ts.Node;
   sourceMaps: Map<ts.Node, SourceRange>; // virtual -> source range
+  // virtual nodes whose mappings carry non-default editor behavior
+  codeInformation: Map<ts.Node, CodeInformation>;
   diagnostics: Diagnostic[];
 }
 
@@ -43,6 +46,7 @@ export function rewriteScript(
       virtual: sourceNode,
       runtime: sourceNode,
       sourceMaps: new Map(),
+      codeInformation: new Map(),
       diagnostics: [],
     };
   }
@@ -51,9 +55,7 @@ export function rewriteScript(
 
   const sourceMaps: Map<ts.Node, SourceRange> = new Map();
   for (const [virtual, source] of state.mappings) {
-    const range: SourceRange = clientScript.toSourceRange(source);
-    const data = state.codeInformation.get(virtual);
-    sourceMaps.set(virtual, data ? { ...range, data } : range);
+    sourceMaps.set(virtual, clientScript.toSourceRange(source));
   }
 
   const diagnostics: Diagnostic[] = [];
@@ -124,5 +126,11 @@ export function rewriteScript(
     arrow(ts, ["v"], rewritten.runtime as ts.Expression),
   ]);
 
-  return { virtual, runtime, sourceMaps, diagnostics };
+  return {
+    virtual,
+    runtime,
+    sourceMaps,
+    codeInformation: state.codeInformation,
+    diagnostics,
+  };
 }

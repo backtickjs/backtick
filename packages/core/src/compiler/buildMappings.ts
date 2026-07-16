@@ -17,12 +17,7 @@ export function buildMappings(segments: Segment[]): SourceMapping[] {
       generatedOffset += segment.length;
       continue;
     }
-    const [text, , sourceOffset, sourceLength, segmentData] = segment;
-    // Text claiming no source at all maps for position bookkeeping only:
-    // its zero-width boundary touches neighboring code, and hover must not
-    // resolve through it.
-    const data =
-      segmentData ?? (sourceLength === 0 ? { semantic: false } : undefined);
+    const [text, , sourceOffset, sourceLength, data] = segment;
     mappings.push({
       sourceOffsets: [sourceOffset],
       generatedOffsets: [generatedOffset],
