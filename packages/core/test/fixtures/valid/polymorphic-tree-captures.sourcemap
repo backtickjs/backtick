@@ -8,9 +8,9 @@ __cs_base      → base
 )              → `
 )              → }
  +             →  + 
-cs.splice(     → ${
-by             → by
-)              → }
+cs.splice(     → 
+(by)           → $by
+)              → 
 )              → `
 cs.lift(       → cs`
 1              → 1

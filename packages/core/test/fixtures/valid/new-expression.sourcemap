@@ -3,9 +3,9 @@ const                   → const
 __cs_p                  → p
  =                      →  = 
 new (                   → new 
-cs.splice(              → ${
-Point                   → Point
-)                       → }
+cs.splice(              → 
+(Point)                 → $Point
+)                       → 
 )(cs.lift(              → (
 1                       → 1
 ), cs.lift(             → , 

@@ -12,7 +12,7 @@ class Point {
       [16, 12, 16, 43],
       {
         filePath: "nested-reflected-client.ts",
-        fileHash: "3a892bm3qvv3m",
+        fileHash: "10fb5ei7cy352",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -44,7 +44,7 @@ class Segment {
       [32, 12, 32, 53],
       {
         filePath: "nested-reflected-client.ts",
-        fileHash: "3a892bm3qvv3m",
+        fileHash: "10fb5ei7cy352",
         splices: { $0splice0: this.from.x, $0splice1: this.to.x },
         captures: [],
         declarations: [],
@@ -69,7 +69,7 @@ const segment = new Segment(
       [36, 39, 36, 44],
       {
         filePath: "nested-reflected-client.ts",
-        fileHash: "3a892bm3qvv3m",
+        fileHash: "10fb5ei7cy352",
         splices: {},
         captures: [],
         declarations: [],
@@ -80,7 +80,7 @@ const segment = new Segment(
       [36, 46, 36, 51],
       {
         filePath: "nested-reflected-client.ts",
-        fileHash: "3a892bm3qvv3m",
+        fileHash: "10fb5ei7cy352",
         splices: {},
         captures: [],
         declarations: [],
@@ -93,7 +93,7 @@ const segment = new Segment(
       [36, 64, 36, 69],
       {
         filePath: "nested-reflected-client.ts",
-        fileHash: "3a892bm3qvv3m",
+        fileHash: "10fb5ei7cy352",
         splices: {},
         captures: [],
         declarations: [],
@@ -104,7 +104,7 @@ const segment = new Segment(
       [36, 71, 36, 76],
       {
         filePath: "nested-reflected-client.ts",
-        fileHash: "3a892bm3qvv3m",
+        fileHash: "10fb5ei7cy352",
         splices: {},
         captures: [],
         declarations: [],
@@ -117,32 +117,32 @@ export default cs.create(
   [38, 16, 45, 3],
   {
     filePath: "nested-reflected-client.ts",
-    fileHash: "3a892bm3qvv3m",
-    splices: { $0splice0: segment },
+    fileHash: "10fb5ei7cy352",
+    splices: { $segment: segment },
     captures: [],
-    declarations: ["s$3a892bm3qvv3m$0", "rise$3a892bm3qvv3m$1"],
+    declarations: ["s$10fb5ei7cy352$0", "rise$10fb5ei7cy352$1"],
   },
   (v) =>
     v.block(
       [38, 19, 45, 2],
       [
         v.variableDeclaration(
-          [39, 3, 39, 24],
+          [39, 3, 39, 22],
           "const",
-          v.identifier([39, 9, 39, 10], "s", "s$3a892bm3qvv3m$0"),
-          v.splice([39, 13, 39, 23], "$0splice0"),
+          v.identifier([39, 9, 39, 10], "s", "s$10fb5ei7cy352$0"),
+          v.splice([39, 13, 39, 21], "$segment"),
         ),
         v.variableDeclaration(
           [40, 3, 40, 34],
           "const",
-          v.identifier([40, 9, 40, 13], "rise", "rise$3a892bm3qvv3m$1"),
+          v.identifier([40, 9, 40, 13], "rise", "rise$10fb5ei7cy352$1"),
           v.binop(
             [40, 16, 40, 33],
             v.propertyAccess(
               [40, 16, 40, 22],
               v.propertyAccess(
                 [40, 16, 40, 20],
-                v.identifier([40, 16, 40, 17], "s", "s$3a892bm3qvv3m$0"),
+                v.identifier([40, 16, 40, 17], "s", "s$10fb5ei7cy352$0"),
                 "to",
               ),
               "y",
@@ -152,7 +152,7 @@ export default cs.create(
               [40, 25, 40, 33],
               v.propertyAccess(
                 [40, 25, 40, 31],
-                v.identifier([40, 25, 40, 26], "s", "s$3a892bm3qvv3m$0"),
+                v.identifier([40, 25, 40, 26], "s", "s$10fb5ei7cy352$0"),
                 "from",
               ),
               "y",
@@ -165,7 +165,7 @@ export default cs.create(
             [41, 7, 41, 19],
             v.propertyAccess(
               [41, 7, 41, 17],
-              v.identifier([41, 7, 41, 8], "s", "s$3a892bm3qvv3m$0"),
+              v.identifier([41, 7, 41, 8], "s", "s$10fb5ei7cy352$0"),
               "vertical",
             ),
             [],
@@ -175,7 +175,7 @@ export default cs.create(
             [
               v.return(
                 [42, 5, 42, 17],
-                v.identifier([42, 12, 42, 16], "rise", "rise$3a892bm3qvv3m$1"),
+                v.identifier([42, 12, 42, 16], "rise", "rise$10fb5ei7cy352$1"),
               ),
             ],
           ),
@@ -191,7 +191,7 @@ export default cs.create(
                 [44, 10, 44, 18],
                 v.propertyAccess(
                   [44, 10, 44, 14],
-                  v.identifier([44, 10, 44, 11], "s", "s$3a892bm3qvv3m$0"),
+                  v.identifier([44, 10, 44, 11], "s", "s$10fb5ei7cy352$0"),
                   "to",
                 ),
                 "sum",
@@ -205,7 +205,7 @@ export default cs.create(
                 [44, 23, 44, 33],
                 v.propertyAccess(
                   [44, 23, 44, 29],
-                  v.identifier([44, 23, 44, 24], "s", "s$3a892bm3qvv3m$0"),
+                  v.identifier([44, 23, 44, 24], "s", "s$10fb5ei7cy352$0"),
                   "from",
                 ),
                 "sum",

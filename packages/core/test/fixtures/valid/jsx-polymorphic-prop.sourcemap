@@ -1,6 +1,6 @@
 cs.lift(    → cs`
 () =>       → () => 
-cs.splice(  → ${
-n           → n
-)           → }
+cs.splice(  → 
+(n)         → $n
+)           → 
 )           → `

@@ -5,15 +5,15 @@ import { cs } from "@backtickjs/core";
 // parameter, and each prop's `#call` passes its own splice as a `#thunk`.
 function make(n) {
   return cs.create(
-    [7, 10, 7, 24],
+    [7, 10, 7, 22],
     {
       filePath: "jsx-polymorphic-prop.tsx",
-      fileHash: "2pi99he9snag3",
-      splices: { $0splice0: n },
+      fileHash: "2utzrnix6a7i5",
+      splices: { $n: n },
       captures: [],
       declarations: [],
     },
-    (v) => v.arrow([7, 13, 7, 23], [], v.splice([7, 19, 7, 23], "$0splice0")),
+    (v) => v.arrow([7, 13, 7, 21], [], v.splice([7, 19, 7, 21], "$n")),
   );
 }
 export default _jsx("button", { onA: make(1), onB: make(2) });

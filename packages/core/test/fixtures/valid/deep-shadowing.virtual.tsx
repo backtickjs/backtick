@@ -19,6 +19,6 @@ function outer(inner: Client<number>): Client<number> {
 function middle(inner: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = 2;
-    return __cs_base * cs.splice(inner);
+    return __cs_base * cs.splice((inner));
 })());
 }

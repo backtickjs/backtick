@@ -6,7 +6,7 @@ import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
 // entry goes polymorphic, and each expansion body passes its own holes as
 // thunks written where they are in scope.
 function sum(a: Client<number>, b: Client<number>): Client<() => number> {
-  return cs.lift(() => cs.splice(a) + cs.splice(b));
+  return cs.lift(() => cs.splice((a)) + cs.splice((b)));
 }
 
 class Point implements ClientObject {
@@ -42,7 +42,7 @@ class Size implements ClientObject {
 }
 
 export default cs.lift((() => {
-    const __cs_p = new (cs.splice(Point))(cs.lift(1), cs.lift(2));
-    const __cs_s = new (cs.splice(Size))(cs.lift(3), cs.lift(4));
+    const __cs_p = new (cs.splice((Point)))(cs.lift(1), cs.lift(2));
+    const __cs_s = new (cs.splice((Size)))(cs.lift(3), cs.lift(4));
     return cs.virtualize(__cs_p).sum() + cs.virtualize(__cs_s).sum();
 })());

@@ -13,23 +13,22 @@ class Point {
 // `spliced-param`), and the runtime is unaffected either way.
 function wrap(value) {
   return cs.create(
-    [20, 10, 20, 28],
+    [20, 10, 20, 26],
     {
       filePath: "spliced-generic.ts",
-      fileHash: "3vmqfbzmu78ru",
-      splices: { $0splice0: value },
+      fileHash: "1d9k7u5bmno9u",
+      splices: { $value: value },
       captures: [],
       declarations: [],
     },
-    (v) =>
-      v.arrow([20, 13, 20, 27], [], v.splice([20, 19, 20, 27], "$0splice0")),
+    (v) => v.arrow([20, 13, 20, 25], [], v.splice([20, 19, 20, 25], "$value")),
   );
 }
 export default cs.create(
   [23, 16, 23, 49],
   {
     filePath: "spliced-generic.ts",
-    fileHash: "3vmqfbzmu78ru",
+    fileHash: "1d9k7u5bmno9u",
     splices: {
       $0splice0: wrap(
         new Point(
@@ -37,7 +36,7 @@ export default cs.create(
             [23, 36, 23, 41],
             {
               filePath: "spliced-generic.ts",
-              fileHash: "3vmqfbzmu78ru",
+              fileHash: "1d9k7u5bmno9u",
               splices: {},
               captures: [],
               declarations: [],

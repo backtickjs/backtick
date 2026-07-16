@@ -40,8 +40,8 @@ __cs_base               → base
 return                  → return 
 __cs_base               → base
  *                      →  * 
-cs.splice(              → ${
-inner                   → inner
-)                       → }
+cs.splice(              → 
+(inner)                 → $inner
+)                       → 
 ;                       → ;
 \n})())                 → \n  }`

@@ -20,15 +20,15 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 export default _jsx("button", {
   data: orders,
   onA: cs.create(
-    [21, 43, 21, 83],
+    [22, 30, 22, 70],
     {
       filePath: "large-data.tsx",
-      fileHash: "r6oqmhujyw1x",
+      fileHash: "28jw3q04x943a",
       splices: { $0splice0: { orders, currency: "CAD" } },
       captures: [],
       declarations: [],
     },
     (v) =>
-      v.arrow([21, 46, 21, 82], [], v.splice([21, 52, 21, 82], "$0splice0")),
+      v.arrow([22, 33, 22, 69], [], v.splice([22, 39, 22, 69], "$0splice0")),
   ),
 });

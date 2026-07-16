@@ -12,7 +12,7 @@ class Point {
       [16, 12, 16, 43],
       {
         filePath: "shared-client.ts",
-        fileHash: "35oezixq0fkxm",
+        fileHash: "1ysfruwygj6t6",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -38,7 +38,7 @@ const shared = new Point(
     [22, 26, 22, 31],
     {
       filePath: "shared-client.ts",
-      fileHash: "35oezixq0fkxm",
+      fileHash: "1ysfruwygj6t6",
       splices: {},
       captures: [],
       declarations: [],
@@ -49,7 +49,7 @@ const shared = new Point(
     [22, 33, 22, 38],
     {
       filePath: "shared-client.ts",
-      fileHash: "35oezixq0fkxm",
+      fileHash: "1ysfruwygj6t6",
       splices: {},
       captures: [],
       declarations: [],
@@ -61,20 +61,20 @@ const left = cs.create(
   [24, 14, 27, 3],
   {
     filePath: "shared-client.ts",
-    fileHash: "35oezixq0fkxm",
-    splices: { $0splice0: shared },
+    fileHash: "1ysfruwygj6t6",
+    splices: { $shared: shared },
     captures: [],
-    declarations: ["p$35oezixq0fkxm$0"],
+    declarations: ["p$1ysfruwygj6t6$0"],
   },
   (v) =>
     v.block(
       [24, 17, 27, 2],
       [
         v.variableDeclaration(
-          [25, 3, 25, 23],
+          [25, 3, 25, 21],
           "const",
-          v.identifier([25, 9, 25, 10], "p", "p$35oezixq0fkxm$0"),
-          v.splice([25, 13, 25, 22], "$0splice0"),
+          v.identifier([25, 9, 25, 10], "p", "p$1ysfruwygj6t6$0"),
+          v.splice([25, 13, 25, 20], "$shared"),
         ),
         v.return(
           [26, 3, 26, 18],
@@ -82,7 +82,7 @@ const left = cs.create(
             [26, 10, 26, 17],
             v.propertyAccess(
               [26, 10, 26, 15],
-              v.identifier([26, 10, 26, 11], "p", "p$35oezixq0fkxm$0"),
+              v.identifier([26, 10, 26, 11], "p", "p$1ysfruwygj6t6$0"),
               "sum",
             ),
             [],
@@ -95,26 +95,26 @@ const right = cs.create(
   [29, 15, 32, 3],
   {
     filePath: "shared-client.ts",
-    fileHash: "35oezixq0fkxm",
-    splices: { $0splice0: shared },
+    fileHash: "1ysfruwygj6t6",
+    splices: { $shared: shared },
     captures: [],
-    declarations: ["p$35oezixq0fkxm$1"],
+    declarations: ["p$1ysfruwygj6t6$1"],
   },
   (v) =>
     v.block(
       [29, 18, 32, 2],
       [
         v.variableDeclaration(
-          [30, 3, 30, 23],
+          [30, 3, 30, 21],
           "const",
-          v.identifier([30, 9, 30, 10], "p", "p$35oezixq0fkxm$1"),
-          v.splice([30, 13, 30, 22], "$0splice0"),
+          v.identifier([30, 9, 30, 10], "p", "p$1ysfruwygj6t6$1"),
+          v.splice([30, 13, 30, 20], "$shared"),
         ),
         v.return(
           [31, 3, 31, 14],
           v.propertyAccess(
             [31, 10, 31, 13],
-            v.identifier([31, 10, 31, 11], "p", "p$35oezixq0fkxm$1"),
+            v.identifier([31, 10, 31, 11], "p", "p$1ysfruwygj6t6$1"),
             "x",
           ),
         ),
@@ -122,19 +122,19 @@ const right = cs.create(
     ),
 );
 export default cs.create(
-  [34, 16, 34, 38],
+  [34, 16, 34, 34],
   {
     filePath: "shared-client.ts",
-    fileHash: "35oezixq0fkxm",
-    splices: { $0splice0: left, $0splice1: right },
+    fileHash: "1ysfruwygj6t6",
+    splices: { $left: left, $right: right },
     captures: [],
     declarations: [],
   },
   (v) =>
     v.binop(
-      [34, 19, 34, 37],
-      v.splice([34, 19, 34, 26], "$0splice0"),
+      [34, 19, 34, 33],
+      v.splice([34, 19, 34, 24], "$left"),
       "+",
-      v.splice([34, 29, 34, 37], "$0splice1"),
+      v.splice([34, 27, 34, 33], "$right"),
     ),
 );

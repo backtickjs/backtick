@@ -7,7 +7,7 @@ const d0 = cs.create(
   [7, 12, 7, 17],
   {
     filePath: "diamond.ts",
-    fileHash: "3mdtmwgs5x5rz",
+    fileHash: "1ukdw57m42wun",
     splices: {},
     captures: [],
     declarations: [],
@@ -18,8 +18,8 @@ const d1 = cs.create(
   [8, 12, 10, 3],
   {
     filePath: "diamond.ts",
-    fileHash: "3mdtmwgs5x5rz",
-    splices: { $0splice0: d0, $0splice1: d0 },
+    fileHash: "1ukdw57m42wun",
+    splices: { $d0: d0 },
     captures: [],
     declarations: [],
   },
@@ -28,12 +28,12 @@ const d1 = cs.create(
       [8, 15, 10, 2],
       [
         v.return(
-          [9, 3, 9, 24],
+          [9, 3, 9, 20],
           v.binop(
-            [9, 10, 9, 23],
-            v.splice([9, 10, 9, 15], "$0splice0"),
+            [9, 10, 9, 19],
+            v.splice([9, 10, 9, 13], "$d0"),
             "+",
-            v.splice([9, 18, 9, 23], "$0splice1"),
+            v.splice([9, 16, 9, 19], "$d0"),
           ),
         ),
       ],
@@ -43,8 +43,8 @@ const d2 = cs.create(
   [11, 12, 13, 3],
   {
     filePath: "diamond.ts",
-    fileHash: "3mdtmwgs5x5rz",
-    splices: { $0splice0: d1, $0splice1: d1 },
+    fileHash: "1ukdw57m42wun",
+    splices: { $d1: d1 },
     captures: [],
     declarations: [],
   },
@@ -53,12 +53,12 @@ const d2 = cs.create(
       [11, 15, 13, 2],
       [
         v.return(
-          [12, 3, 12, 24],
+          [12, 3, 12, 20],
           v.binop(
-            [12, 10, 12, 23],
-            v.splice([12, 10, 12, 15], "$0splice0"),
+            [12, 10, 12, 19],
+            v.splice([12, 10, 12, 13], "$d1"),
             "+",
-            v.splice([12, 18, 12, 23], "$0splice1"),
+            v.splice([12, 16, 12, 19], "$d1"),
           ),
         ),
       ],
@@ -68,8 +68,8 @@ const d3 = cs.create(
   [14, 12, 16, 3],
   {
     filePath: "diamond.ts",
-    fileHash: "3mdtmwgs5x5rz",
-    splices: { $0splice0: d2, $0splice1: d2 },
+    fileHash: "1ukdw57m42wun",
+    splices: { $d2: d2 },
     captures: [],
     declarations: [],
   },
@@ -78,12 +78,12 @@ const d3 = cs.create(
       [14, 15, 16, 2],
       [
         v.return(
-          [15, 3, 15, 24],
+          [15, 3, 15, 20],
           v.binop(
-            [15, 10, 15, 23],
-            v.splice([15, 10, 15, 15], "$0splice0"),
+            [15, 10, 15, 19],
+            v.splice([15, 10, 15, 13], "$d2"),
             "+",
-            v.splice([15, 18, 15, 23], "$0splice1"),
+            v.splice([15, 16, 15, 19], "$d2"),
           ),
         ),
       ],
@@ -93,8 +93,8 @@ const d4 = cs.create(
   [17, 12, 19, 3],
   {
     filePath: "diamond.ts",
-    fileHash: "3mdtmwgs5x5rz",
-    splices: { $0splice0: d3, $0splice1: d3 },
+    fileHash: "1ukdw57m42wun",
+    splices: { $d3: d3 },
     captures: [],
     declarations: [],
   },
@@ -103,12 +103,12 @@ const d4 = cs.create(
       [17, 15, 19, 2],
       [
         v.return(
-          [18, 3, 18, 24],
+          [18, 3, 18, 20],
           v.binop(
-            [18, 10, 18, 23],
-            v.splice([18, 10, 18, 15], "$0splice0"),
+            [18, 10, 18, 19],
+            v.splice([18, 10, 18, 13], "$d3"),
             "+",
-            v.splice([18, 18, 18, 23], "$0splice1"),
+            v.splice([18, 16, 18, 19], "$d3"),
           ),
         ),
       ],

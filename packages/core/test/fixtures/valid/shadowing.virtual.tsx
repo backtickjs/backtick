@@ -8,8 +8,8 @@ export default cs.lift((() => {
 function add(lhs: Client<number>, rhs: number): Client<number> {
   return cs.lift((() => {
     let __cs_total = 0;
-    __cs_total = __cs_total + cs.splice(lhs);
-    __cs_total = __cs_total + cs.splice(rhs);
+    __cs_total = __cs_total + cs.splice((lhs));
+    __cs_total = __cs_total + cs.splice((rhs));
     return __cs_total;
 })());
 }

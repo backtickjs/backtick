@@ -17,7 +17,7 @@ class Point implements ClientObject {
 // parameter, and a construction is a plain call of that value — so the
 // class can pass through a local and be instantiated on another line.
 export default cs.lift((() => {
-    const __cs_C = cs.splice(Point);
+    const __cs_C = cs.splice((Point));
     const __cs_p = new (__cs_C)(cs.lift(1), cs.lift(2));
     return cs.virtualize(__cs_p).x + cs.virtualize(__cs_p).y;
 })());

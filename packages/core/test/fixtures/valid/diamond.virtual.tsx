@@ -6,16 +6,16 @@ import { cs } from "@backtickjs/core";
 // per level (linear) — not one per path, which would blow up as 2^depth.
 const d0 = cs.lift(1);
 const d1 = cs.lift((() => {
-    return cs.splice(d0) + cs.splice(d0);
+    return cs.splice((d0)) + cs.splice((d0));
 })());
 const d2 = cs.lift((() => {
-    return cs.splice(d1) + cs.splice(d1);
+    return cs.splice((d1)) + cs.splice((d1));
 })());
 const d3 = cs.lift((() => {
-    return cs.splice(d2) + cs.splice(d2);
+    return cs.splice((d2)) + cs.splice((d2));
 })());
 const d4 = cs.lift((() => {
-    return cs.splice(d3) + cs.splice(d3);
+    return cs.splice((d3)) + cs.splice((d3));
 })());
 
 export default d4;

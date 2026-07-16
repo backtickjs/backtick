@@ -20,6 +20,6 @@ class Point implements ClientObject {
 }
 
 export default cs`{
-  const p = new ${Point}(1, 2);
+  const p = new $Point(1, 2);
   return p.x + p.y;
 }`;

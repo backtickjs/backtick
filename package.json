@@ -10,15 +10,13 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:update": "turbo run test:update",
-    "format": "turbo run format",
-    "format:check": "turbo run format:check",
-    "check": "biome check .",
-    "check:fix": "biome check --write .",
+    "format": "turbo run format && prettier --write --ignore-unknown .",
+    "format:check": "turbo run format:check && prettier --check --ignore-unknown .",
     "clean": "turbo run clean && rm -rf node_modules .turbo"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.0",
     "@types/node": "^25.9.1",
+    "prettier": "^3.6.2",
     "turbo": "^2.8.15",
     "typescript": "^6.0.3"
   }

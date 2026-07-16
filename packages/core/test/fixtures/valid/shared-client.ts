@@ -22,13 +22,13 @@ class Point implements ClientObject {
 const shared = new Point(cs`1`, cs`2`);
 
 const left = cs`{
-  const p = ${shared};
+  const p = $shared;
   return p.sum();
 }`;
 
 const right = cs`{
-  const p = ${shared};
+  const p = $shared;
   return p.x;
 }`;
 
-export default cs`${left} + ${right}`;
+export default cs`$left + $right`;

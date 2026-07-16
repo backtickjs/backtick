@@ -17,7 +17,7 @@ class Point implements ClientObject {
 // parameter, and a construction is a plain call of that value — so the
 // class can pass through a local and be instantiated on another line.
 export default cs`{
-  const C = ${Point};
+  const C = $Point;
   const p = new C(1, 2);
   return p.x + p.y;
 }`;

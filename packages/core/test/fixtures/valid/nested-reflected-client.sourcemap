@@ -34,9 +34,9 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_s                  → s
  =                      →  = 
-cs.splice(              → ${
-segment                 → segment
-)                       → }
+cs.splice(              → 
+(segment)               → $segment
+)                       → 
 ;                       → ;
 \n                      → \n  
 const                   → const 

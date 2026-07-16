@@ -13,6 +13,6 @@ const color = cs`{
 }`;
 
 export default cs`{
-  const c = ${color};
+  const c = $color;
   return ${cs`c.brightness()`};
 }`;

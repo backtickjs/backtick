@@ -36,7 +36,7 @@ class Segment implements ClientObject {
 const segment = new Segment(new Point(cs`1`, cs`2`), new Point(cs`1`, cs`8`));
 
 export default cs`{
-  const s = ${segment};
+  const s = $segment;
   const rise = s.to.y - s.from.y;
   if (s.vertical()) {
     return rise;

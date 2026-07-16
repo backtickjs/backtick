@@ -1,8 +1,8 @@
 cs.lift(         → cs`
 () =>            → () => 
-cs.splice(       → ${
-value            → value
-)                → }
+cs.splice(       → 
+(value)          → $value
+)                → 
 )                → `
 cs.lift(         → cs`
 cs.virtualize(   → 

@@ -8,8 +8,8 @@ export default cs`{
 function add(lhs: Client<number>, rhs: number): Client<number> {
   return cs`{
     let total = 0;
-    total = total + ${lhs};
-    total = total + ${rhs};
+    total = total + $lhs;
+    total = total + $rhs;
     return total;
   }`;
 }

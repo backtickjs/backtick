@@ -51,6 +51,8 @@
   "scripts": {
     "build": "tsc -b && node scripts/build.mjs -- --minify",
     "dev": "node scripts/build.mjs -- --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
     "test": "pnpm test:grammar",
     "test:update": "node ./test/grammar/test.mjs --updateSnapshot",
     "test:grammar": "node ./test/grammar/test.mjs",
@@ -67,6 +69,7 @@
     "esbuild": "^0.28.0",
     "esbuild-plugin-copy": "^2.1.1",
     "kleur": "^4.1.5",
+    "prettier": "^3.6.2",
     "vscode-tmgrammar-test": "^0.1.3"
   }
 }

@@ -18,4 +18,6 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
   coupon: i % 5 === 0 ? `SAVE${i}` : null,
 }));
 
-export default <button data={orders} onA={cs`() => ${{ orders, currency: "CAD" }}`} />;
+export default (
+  <button data={orders} onA={cs`() => ${{ orders, currency: "CAD" }}`} />
+);

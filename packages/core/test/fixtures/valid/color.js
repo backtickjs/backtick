@@ -3,10 +3,10 @@ const color = cs.create(
   [3, 15, 13, 3],
   {
     filePath: "color.ts",
-    fileHash: "q63q2yy8z65w",
+    fileHash: "1oa0e8phvjnqk",
     splices: {},
     captures: [],
-    declarations: ["color$q63q2yy8z65w$0"],
+    declarations: ["color$1oa0e8phvjnqk$0"],
   },
   (v) =>
     v.block(
@@ -15,7 +15,7 @@ const color = cs.create(
         v.variableDeclaration(
           [4, 3, 11, 5],
           "const",
-          v.identifier([4, 9, 4, 14], "color", "color$q63q2yy8z65w$0"),
+          v.identifier([4, 9, 4, 14], "color", "color$1oa0e8phvjnqk$0"),
           v.object([4, 17, 11, 4], {
             r: v.number([5, 8, 5, 9], 1),
             g: v.number([6, 8, 6, 9], 2),
@@ -37,7 +37,7 @@ const color = cs.create(
                           v.identifier(
                             [9, 14, 9, 19],
                             "color",
-                            "color$q63q2yy8z65w$0",
+                            "color$1oa0e8phvjnqk$0",
                           ),
                           "r",
                         ),
@@ -47,7 +47,7 @@ const color = cs.create(
                           v.identifier(
                             [9, 24, 9, 29],
                             "color",
-                            "color$q63q2yy8z65w$0",
+                            "color$1oa0e8phvjnqk$0",
                           ),
                           "g",
                         ),
@@ -58,7 +58,7 @@ const color = cs.create(
                         v.identifier(
                           [9, 34, 9, 39],
                           "color",
-                          "color$q63q2yy8z65w$0",
+                          "color$1oa0e8phvjnqk$0",
                         ),
                         "b",
                       ),
@@ -71,7 +71,7 @@ const color = cs.create(
         ),
         v.return(
           [12, 3, 12, 16],
-          v.identifier([12, 10, 12, 15], "color", "color$q63q2yy8z65w$0"),
+          v.identifier([12, 10, 12, 15], "color", "color$1oa0e8phvjnqk$0"),
         ),
       ],
     ),
@@ -80,16 +80,16 @@ export default cs.create(
   [15, 16, 18, 3],
   {
     filePath: "color.ts",
-    fileHash: "q63q2yy8z65w",
+    fileHash: "1oa0e8phvjnqk",
     splices: {
-      $0splice0: color,
-      $0splice1: cs.create(
+      $color: color,
+      $0splice0: cs.create(
         [17, 12, 17, 30],
         {
           filePath: "color.ts",
-          fileHash: "q63q2yy8z65w",
+          fileHash: "1oa0e8phvjnqk",
           splices: {},
-          captures: ["c$q63q2yy8z65w$1"],
+          captures: ["c$1oa0e8phvjnqk$1"],
           declarations: [],
         },
         (v) =>
@@ -97,7 +97,7 @@ export default cs.create(
             [17, 15, 17, 29],
             v.propertyAccess(
               [17, 15, 17, 27],
-              v.identifier([17, 15, 17, 16], "c", "c$q63q2yy8z65w$1"),
+              v.identifier([17, 15, 17, 16], "c", "c$1oa0e8phvjnqk$1"),
               "brightness",
             ),
             [],
@@ -105,19 +105,19 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: ["c$q63q2yy8z65w$1"],
+    declarations: ["c$1oa0e8phvjnqk$1"],
   },
   (v) =>
     v.block(
       [15, 19, 18, 2],
       [
         v.variableDeclaration(
-          [16, 3, 16, 22],
+          [16, 3, 16, 20],
           "const",
-          v.identifier([16, 9, 16, 10], "c", "c$q63q2yy8z65w$1"),
-          v.splice([16, 13, 16, 21], "$0splice0"),
+          v.identifier([16, 9, 16, 10], "c", "c$1oa0e8phvjnqk$1"),
+          v.splice([16, 13, 16, 19], "$color"),
         ),
-        v.return([17, 3, 17, 32], v.splice([17, 10, 17, 31], "$0splice1")),
+        v.return([17, 3, 17, 32], v.splice([17, 10, 17, 31], "$0splice0")),
       ],
     ),
 );

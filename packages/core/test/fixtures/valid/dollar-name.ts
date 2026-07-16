@@ -5,7 +5,7 @@ import { cs, type Client } from "@backtickjs/core";
 // `<name>$<fileHash>$<n>` binding key still parses from the right, and the
 // threaded capture's display name recovers `foo$` intact.
 function add(lhs: Client<number>): Client<number> {
-  return cs`${lhs} + 2`;
+  return cs`$lhs + 2`;
 }
 
 export default cs`{

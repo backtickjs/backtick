@@ -10,14 +10,16 @@ import { cs, type Client } from "@backtickjs/core";
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs`(flag: boolean) => {
     if (flag) {
-      return ${fragment};
+      return $fragment;
     }
     return "skipped";
   }`;
 }
 
 const ok = cs`"evaluated"`;
-const broken = cs`{ throw "the guarded fragment must never evaluate"; }`;
+const broken = cs`{
+  throw "the guarded fragment must never evaluate";
+}`;
 
 export default cs`({
   taken: ${guard(ok)}(true),

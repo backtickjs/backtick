@@ -5,14 +5,14 @@ cs.lift(    → cs`
 {           → ({ 
 a           → a
 :           → : 
-cs.splice(  → ${
-leaf        → leaf
-)           → }
+cs.splice(  → 
+(leaf)      → $leaf
+)           → 
 ,           → , 
 b           → b
 :           → : 
-cs.splice(  → ${
-leaf        → leaf
-)           → }
+cs.splice(  → 
+(leaf)      → $leaf
+)           → 
  }          →  })
 )           → `

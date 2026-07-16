@@ -7,6 +7,8 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
     "test": "node --import tsx --test \"test/**/*.test.ts\"",
     "test:update": "UPDATE_SNAPSHOTS=1 node --import tsx --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo"

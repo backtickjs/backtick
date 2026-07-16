@@ -1,11 +1,11 @@
 cs.lift(    → cs`
-cs.splice(  → ${
-lhs         → lhs
-)           → }
+cs.splice(  → 
+(lhs)       → $lhs
+)           → 
  +          →  + 
-cs.splice(  → ${
-rhs         → rhs
-)           → }
+cs.splice(  → 
+(rhs)       → $rhs
+)           → 
 )           → `
 cs.lift(    → cs`
 {           → ({\n  

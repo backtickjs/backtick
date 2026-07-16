@@ -5,20 +5,20 @@ import { cs } from "@backtickjs/core";
 // threaded capture's display name recovers `foo$` intact.
 function add(lhs) {
   return cs.create(
-    [8, 10, 8, 24],
+    [8, 10, 8, 22],
     {
       filePath: "dollar-name.ts",
-      fileHash: "2nb10w8f954am",
-      splices: { $0splice0: lhs },
+      fileHash: "3r8prbdxxrtje",
+      splices: { $lhs: lhs },
       captures: [],
       declarations: [],
     },
     (v) =>
       v.binop(
-        [8, 13, 8, 23],
-        v.splice([8, 13, 8, 19], "$0splice0"),
+        [8, 13, 8, 21],
+        v.splice([8, 13, 8, 17], "$lhs"),
         "+",
-        v.number([8, 22, 8, 23], 2),
+        v.number([8, 20, 8, 21], 2),
       ),
   );
 }
@@ -26,24 +26,24 @@ export default cs.create(
   [11, 16, 14, 3],
   {
     filePath: "dollar-name.ts",
-    fileHash: "2nb10w8f954am",
+    fileHash: "3r8prbdxxrtje",
     splices: {
       $0splice0: add(
         cs.create(
           [13, 16, 13, 24],
           {
             filePath: "dollar-name.ts",
-            fileHash: "2nb10w8f954am",
+            fileHash: "3r8prbdxxrtje",
             splices: {},
-            captures: ["foo$$2nb10w8f954am$0"],
+            captures: ["foo$$3r8prbdxxrtje$0"],
             declarations: [],
           },
-          (v) => v.identifier([13, 19, 13, 23], "foo$", "foo$$2nb10w8f954am$0"),
+          (v) => v.identifier([13, 19, 13, 23], "foo$", "foo$$3r8prbdxxrtje$0"),
         ),
       ),
     },
     captures: [],
-    declarations: ["foo$$2nb10w8f954am$0"],
+    declarations: ["foo$$3r8prbdxxrtje$0"],
   },
   (v) =>
     v.block(
@@ -52,7 +52,7 @@ export default cs.create(
         v.variableDeclaration(
           [12, 3, 12, 18],
           "const",
-          v.identifier([12, 9, 12, 13], "foo$", "foo$$2nb10w8f954am$0"),
+          v.identifier([12, 9, 12, 13], "foo$", "foo$$3r8prbdxxrtje$0"),
           v.number([12, 16, 12, 17], 1),
         ),
         v.return([13, 3, 13, 27], v.splice([13, 10, 13, 26], "$0splice0")),

@@ -1,20 +1,20 @@
 import { cs } from "@backtickjs/core";
 function add(lhs, rhs) {
   return cs.create(
-    [4, 10, 4, 29],
+    [4, 10, 4, 25],
     {
       filePath: "splice-sharing.ts",
-      fileHash: "3741c9i9cztrz",
-      splices: { $0splice0: lhs, $0splice1: rhs },
+      fileHash: "2veya8r3aoo5f",
+      splices: { $lhs: lhs, $rhs: rhs },
       captures: [],
       declarations: [],
     },
     (v) =>
       v.binop(
-        [4, 13, 4, 28],
-        v.splice([4, 13, 4, 19], "$0splice0"),
+        [4, 13, 4, 24],
+        v.splice([4, 13, 4, 17], "$lhs"),
         "+",
-        v.splice([4, 22, 4, 28], "$0splice1"),
+        v.splice([4, 20, 4, 24], "$rhs"),
       ),
   );
 }
@@ -22,14 +22,14 @@ export default cs.create(
   [7, 16, 10, 4],
   {
     filePath: "splice-sharing.ts",
-    fileHash: "3741c9i9cztrz",
+    fileHash: "2veya8r3aoo5f",
     splices: {
       $0splice0: add(
         cs.create(
           [8, 12, 8, 17],
           {
             filePath: "splice-sharing.ts",
-            fileHash: "3741c9i9cztrz",
+            fileHash: "2veya8r3aoo5f",
             splices: {},
             captures: [],
             declarations: [],
@@ -40,7 +40,7 @@ export default cs.create(
           [8, 19, 8, 24],
           {
             filePath: "splice-sharing.ts",
-            fileHash: "3741c9i9cztrz",
+            fileHash: "2veya8r3aoo5f",
             splices: {},
             captures: [],
             declarations: [],
@@ -53,7 +53,7 @@ export default cs.create(
           [9, 12, 9, 17],
           {
             filePath: "splice-sharing.ts",
-            fileHash: "3741c9i9cztrz",
+            fileHash: "2veya8r3aoo5f",
             splices: {},
             captures: [],
             declarations: [],
@@ -64,7 +64,7 @@ export default cs.create(
           [9, 19, 9, 24],
           {
             filePath: "splice-sharing.ts",
-            fileHash: "3741c9i9cztrz",
+            fileHash: "2veya8r3aoo5f",
             splices: {},
             captures: [],
             declarations: [],

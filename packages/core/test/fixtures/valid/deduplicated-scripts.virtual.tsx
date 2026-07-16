@@ -4,4 +4,4 @@ import { cs } from "@backtickjs/core";
 // into a single function-table entry referenced twice.
 const leaf = cs.lift(7);
 
-export default cs.lift({ a: cs.splice(leaf), b: cs.splice(leaf) });
+export default cs.lift({ a: cs.splice((leaf)), b: cs.splice((leaf)) });

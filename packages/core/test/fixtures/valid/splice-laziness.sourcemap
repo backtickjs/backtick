@@ -7,9 +7,9 @@ __cs_flag                                   → flag
 )                                           → ) 
 {\n                                         → {\n      
 return                                      → return 
-cs.splice(                                  → ${
-fragment                                    → fragment
-)                                           → }
+cs.splice(                                  → 
+(fragment)                                  → $fragment
+)                                           → 
 ;                                           → ;
 \n    }                                     → \n    }
 \n                                          → \n    
@@ -21,11 +21,11 @@ return                                      → return
 cs.lift(                                    → cs`
 "evaluated"                                 → "evaluated"
 )                                           → `
-cs.lift((() => {\n                          → cs`{ 
+cs.lift((() => {\n                          → cs`{\n  
 throw                                       → throw 
 "the guarded fragment must never evaluate"  → "the guarded fragment must never evaluate"
 ;                                           → ;
-\n})())                                     →  }`
+\n})())                                     → \n}`
 cs.lift(                                    → cs`
 {                                           → ({\n  
 taken                                       → taken

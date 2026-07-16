@@ -19,6 +19,6 @@ function outer(inner: Client<number>): Client<number> {
 function middle(inner: Client<number>): Client<number> {
   return cs`{
     const base = 2;
-    return base * ${inner};
+    return base * $inner;
   }`;
 }

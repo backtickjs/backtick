@@ -49,9 +49,9 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_c                  → c
  =                      →  = 
-cs.splice(              → ${
-color                   → color
-)                       → }
+cs.splice(              → 
+(color)                 → $color
+)                       → 
 ;                       → ;
 \n                      → \n  
 return                  → return 

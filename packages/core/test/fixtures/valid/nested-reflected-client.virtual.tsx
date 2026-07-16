@@ -36,7 +36,7 @@ class Segment implements ClientObject {
 const segment = new Segment(new Point(cs.lift(1), cs.lift(2)), new Point(cs.lift(1), cs.lift(8)));
 
 export default cs.lift((() => {
-    const __cs_s = cs.splice(segment);
+    const __cs_s = cs.splice((segment));
     const __cs_rise = cs.virtualize(cs.virtualize(__cs_s).to).y - cs.virtualize(cs.virtualize(__cs_s).from).y;
     if (cs.virtualize(__cs_s).vertical()) {
         return __cs_rise;

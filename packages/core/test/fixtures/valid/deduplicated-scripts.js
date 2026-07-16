@@ -5,7 +5,7 @@ const leaf = cs.create(
   [5, 14, 5, 19],
   {
     filePath: "deduplicated-scripts.ts",
-    fileHash: "q4az884wofrr",
+    fileHash: "xr1ijhq5mxaf",
     splices: {},
     captures: [],
     declarations: [],
@@ -13,17 +13,17 @@ const leaf = cs.create(
   (v) => v.number([5, 17, 5, 18], 7),
 );
 export default cs.create(
-  [7, 16, 7, 48],
+  [7, 16, 7, 44],
   {
     filePath: "deduplicated-scripts.ts",
-    fileHash: "q4az884wofrr",
-    splices: { $0splice0: leaf, $0splice1: leaf },
+    fileHash: "xr1ijhq5mxaf",
+    splices: { $leaf: leaf },
     captures: [],
     declarations: [],
   },
   (v) =>
-    v.object([7, 20, 7, 46], {
-      a: v.splice([7, 25, 7, 32], "$0splice0"),
-      b: v.splice([7, 37, 7, 44], "$0splice1"),
+    v.object([7, 20, 7, 42], {
+      a: v.splice([7, 25, 7, 30], "$leaf"),
+      b: v.splice([7, 35, 7, 40], "$leaf"),
     }),
 );

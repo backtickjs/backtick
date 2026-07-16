@@ -17,7 +17,7 @@ class Point implements ClientObject {
 // identity overload. A concretely typed splice reduces fine (see
 // `spliced-param`), and the runtime is unaffected either way.
 function wrap<T extends ClientObject>(value: T): Client<() => T> {
-  return cs.lift(() => cs.splice(value));
+  return cs.lift(() => cs.splice((value)));
 }
 
 export default cs.lift(cs.virtualize(cs.splice(wrap(new Point(cs.lift(7))))()).x);

@@ -5,36 +5,36 @@ import { cs } from "@backtickjs/core";
 // `params`, so `base` threads from the entry's scope into the splice.
 function offset(by) {
   return cs.create(
-    [8, 10, 8, 51],
+    [8, 10, 8, 49],
     {
       filePath: "polymorphic-tree-captures.tsx",
-      fileHash: "1i1w4jfjuodch",
+      fileHash: "1exi31ovz97e7",
       splices: {
         $0splice0: cs.create(
           [8, 33, 8, 41],
           {
             filePath: "polymorphic-tree-captures.tsx",
-            fileHash: "1i1w4jfjuodch",
+            fileHash: "1exi31ovz97e7",
             splices: {},
-            captures: ["base$1i1w4jfjuodch$0"],
+            captures: ["base$1exi31ovz97e7$0"],
             declarations: [],
           },
-          (v) => v.identifier([8, 36, 8, 40], "base", "base$1i1w4jfjuodch$0"),
+          (v) => v.identifier([8, 36, 8, 40], "base", "base$1exi31ovz97e7$0"),
         ),
-        $0splice1: by,
+        $by: by,
       },
       captures: [],
-      declarations: ["base$1i1w4jfjuodch$0"],
+      declarations: ["base$1exi31ovz97e7$0"],
     },
     (v) =>
       v.arrow(
-        [8, 13, 8, 50],
-        [v.identifier([8, 14, 8, 18], "base", "base$1i1w4jfjuodch$0")],
+        [8, 13, 8, 48],
+        [v.identifier([8, 14, 8, 18], "base", "base$1exi31ovz97e7$0")],
         v.binop(
-          [8, 31, 8, 50],
+          [8, 31, 8, 48],
           v.splice([8, 31, 8, 42], "$0splice0"),
           "+",
-          v.splice([8, 45, 8, 50], "$0splice1"),
+          v.splice([8, 45, 8, 48], "$by"),
         ),
       ),
   );
@@ -45,7 +45,7 @@ export default _jsx("button", {
       [11, 36, 11, 41],
       {
         filePath: "polymorphic-tree-captures.tsx",
-        fileHash: "1i1w4jfjuodch",
+        fileHash: "1exi31ovz97e7",
         splices: {},
         captures: [],
         declarations: [],
@@ -58,7 +58,7 @@ export default _jsx("button", {
       [11, 56, 11, 61],
       {
         filePath: "polymorphic-tree-captures.tsx",
-        fileHash: "1i1w4jfjuodch",
+        fileHash: "1exi31ovz97e7",
         splices: {},
         captures: [],
         declarations: [],

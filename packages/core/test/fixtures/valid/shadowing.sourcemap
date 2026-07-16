@@ -26,18 +26,18 @@ __cs_total              → total
  =                      →  = 
 __cs_total              → total
  +                      →  + 
-cs.splice(              → ${
-lhs                     → lhs
-)                       → }
+cs.splice(              → 
+(lhs)                   → $lhs
+)                       → 
 ;                       → ;
 \n                      → \n    
 __cs_total              → total
  =                      →  = 
 __cs_total              → total
  +                      →  + 
-cs.splice(              → ${
-rhs                     → rhs
-)                       → }
+cs.splice(              → 
+(rhs)                   → $rhs
+)                       → 
 ;                       → ;
 \n                      → \n    
 return                  → return 

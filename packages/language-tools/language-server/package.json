@@ -5,11 +5,16 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
     "@backtickjs/language-plugin": "workspace:*",
     "@volar/language-server": "^2.4.28",
     "vscode-uri": "^3.0.8"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
   }
 }
