@@ -2,7 +2,7 @@ const items = [1, 2, 3];
 return (
   <expr
     children={cs`{
-      return ${items}.map((item) => ${(<text text={cs`item`} />)});
+      return $items.map((item) => ${(<text text={cs`item`} />)});
     }`}
   />
 );

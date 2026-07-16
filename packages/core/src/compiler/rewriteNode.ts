@@ -258,6 +258,20 @@ function rewriteNodeImpl(
   if (ts.isIdentifier(node)) {
     const splice = state.script.splices[node.text];
     if (splice != null) {
+      // A `$`-prefixed host binding has no shorthand: `$$x` stacks sigils
+      // unreadably, so it splices braced.
+      if (
+        splice.kind === "unbraced" &&
+        splice.expression.text.startsWith("$")
+      ) {
+        state.errors.set(
+          node,
+          `Can't splice \`${splice.expression.text}\` unbraced: a ` +
+            "`$`-prefixed host binding splices with braces, e.g. " +
+            `\`\${${splice.expression.text}}\`.`,
+        );
+        return unsupported();
+      }
       let argument: ts.Expression;
       if (splice.kind === "braced") {
         // A braced splice prints its `$0splice<n>` key; the assembler

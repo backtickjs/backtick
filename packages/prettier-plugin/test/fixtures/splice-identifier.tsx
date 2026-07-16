@@ -1,0 +1,3 @@
+const x = 1;
+const $z = 2;
+const y = cs`${x} + ${x + 1} + ${(x)} + $w + ${$z}`;

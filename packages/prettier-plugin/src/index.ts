@@ -3,7 +3,7 @@ import {
   flattenScripts,
   parseSourceText,
 } from "@backtickjs/core/compiler";
-import type { Node } from "estree";
+import type { Expression, Node } from "estree";
 import {
   type AstPath,
   type Doc,
@@ -29,8 +29,9 @@ const embed: NonNullable<Printer["embed"]> = (
     const script = scriptsByStart(options).get(startOf(node));
     if (script) {
       const fileName = filepathOf(options) ?? "input.tsx";
+      const expressions = node.quasi.expressions;
       return async (textToDoc, print) =>
-        printScript(script, fileName, textToDoc, print);
+        printScript(script, fileName, expressions, textToDoc, print);
     }
   }
 
@@ -42,6 +43,7 @@ const embed: NonNullable<Printer["embed"]> = (
 async function printScript(
   script: ClientScript,
   fileName: string,
+  expressions: readonly Expression[],
   textToDoc: TextToDoc,
   print: Print,
 ): Promise<Doc> {
@@ -52,17 +54,25 @@ async function printScript(
   return [
     "cs",
     "`",
-    reinjectSplices(stripTrailingSemicolon(docWithPlaceholders), print),
+    reinjectSplices(
+      stripTrailingSemicolon(docWithPlaceholders),
+      expressions,
+      print,
+    ),
     "`",
   ];
 }
 
-function reinjectSplices(formatted: Doc, print: Print): Doc {
+function reinjectSplices(
+  formatted: Doc,
+  expressions: readonly Expression[],
+  print: Print,
+): Doc {
   return mapDoc(formatted, (current) => {
     if (typeof current !== "string" || !current.includes("$0splice")) {
       return current;
     }
-    return replacePlaceholders(current, print);
+    return replacePlaceholders(current, expressions, print);
   });
 }
 
@@ -70,14 +80,28 @@ function reinjectSplices(formatted: Doc, print: Print): Doc {
 // the real host expression `${...}` printed from the original AST. We walk the
 // matches in order, emitting the literal text before each placeholder and then
 // the spliced-in expression, finishing with whatever text trails the last one.
-function replacePlaceholders(text: string, print: Print): Doc {
+function replacePlaceholders(
+  text: string,
+  expressions: readonly Expression[],
+  print: Print,
+): Doc {
   const parts: Doc[] = [];
   let textStart = 0;
 
   for (const match of text.matchAll(/\$0splice(\d+)/g)) {
     const spliceIndex = Number(match[1]);
     parts.push(text.slice(textStart, match.index));
-    parts.push(["${", print(["quasi", "expressions", spliceIndex]), "}"]);
+    const expression = expressions[spliceIndex];
+    // A braced splice holding a bare identifier prints as its unbraced
+    // shorthand: `${x}` reads as `$x`. A `$`-led name keeps its braces.
+    if (
+      expression?.type === "Identifier" &&
+      !expression.name.startsWith("$")
+    ) {
+      parts.push(`$${expression.name}`);
+    } else {
+      parts.push(["${", print(["quasi", "expressions", spliceIndex]), "}"]);
+    }
     textStart = match.index + match[0].length;
   }
 

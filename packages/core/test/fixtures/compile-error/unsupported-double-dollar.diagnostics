@@ -1,0 +1,1 @@
+7:19-7:22 error TS0: Can't splice `$x` unbraced: a `$`-prefixed host binding splices with braces, e.g. `${$x}`.
