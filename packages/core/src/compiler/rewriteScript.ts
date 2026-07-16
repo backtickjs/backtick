@@ -29,6 +29,7 @@ export function rewriteScript(
     bindings,
     errors: new Map(),
     mappings: new Map(),
+    codeInformation: new Map(),
   };
 
   const [statement] = fileWithPlaceholders.statements;
@@ -50,8 +51,9 @@ export function rewriteScript(
 
   const sourceMaps: Map<ts.Node, SourceRange> = new Map();
   for (const [virtual, source] of state.mappings) {
-    const range = clientScript.toSourceRange(source);
-    sourceMaps.set(virtual, range);
+    const range: SourceRange = clientScript.toSourceRange(source);
+    const data = state.codeInformation.get(virtual);
+    sourceMaps.set(virtual, data ? { ...range, data } : range);
   }
 
   const diagnostics: Diagnostic[] = [];

@@ -6,13 +6,13 @@ __cs_total              → total
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.splice(              → 
+cs.splice(              → ${
 add(                    → add(
 cs.lift(                → cs`
 __cs_total              → total
 )                       → `
 , 100)                  → , 100)
-)                       → 
+)                       → }
 ;                       → ;
 \n})())                 → \n}`
 cs.lift((() => {\n      → cs`{\n    
@@ -26,18 +26,18 @@ __cs_total              → total
  =                      →  = 
 __cs_total              → total
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 lhs                     → lhs
-)                       → 
+)                       → }
 ;                       → ;
 \n                      → \n    
 __cs_total              → total
  =                      →  = 
 __cs_total              → total
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 rhs                     → rhs
-)                       → 
+)                       → }
 ;                       → ;
 \n                      → \n    
 return                  → return 

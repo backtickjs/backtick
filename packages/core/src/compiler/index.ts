@@ -1,4 +1,5 @@
 export type { SourceMapping } from "./buildMappings.js";
+export type { CodeInformation } from "./CodeInformation.js";
 export type { Diagnostic } from "./diagnostics.js";
 export { flattenScripts } from "./flattenScripts.js";
 export type { ClientScript, ParsedFile, Splice } from "./parseFile.js";

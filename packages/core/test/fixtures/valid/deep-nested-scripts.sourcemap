@@ -1,14 +1,14 @@
 cs.lift(    → cs`
-cs.splice(  → 
+cs.splice(  → ${
 lhs         → lhs
-)           → 
+)           → }
  +          →  + 
-cs.splice(  → 
+cs.splice(  → ${
 rhs         → rhs
-)           → 
+)           → }
 )           → `
 cs.lift(    → cs`
-cs.splice(  → 
+cs.splice(  → ${
 add(        → add(
 cs.lift(    → cs`
 1           → 1
@@ -18,5 +18,5 @@ cs.lift(    → cs`
 2           → 2
 )           → `
 )           → )
-)           → 
+)           → }
 )           → `

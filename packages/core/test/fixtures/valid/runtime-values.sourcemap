@@ -2,14 +2,14 @@ cs.lift(                → cs`
 {                       → ({ 
 list                    → list
 :                       → : 
-cs.splice(              → 
+cs.splice(              → ${
 [1, "two", true, null]  → [1, "two", true, null]
-)                       → 
+)                       → }
 ,                       → , 
 obj                     → obj
 :                       → : 
-cs.splice(              → 
+cs.splice(              → ${
 { k: 3 }                → { k: 3 }
-)                       → 
+)                       → }
  }                      →  })
 )                       → `

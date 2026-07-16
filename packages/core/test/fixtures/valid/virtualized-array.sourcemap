@@ -1,7 +1,7 @@
 cs.lift(        → cs`
 cs.virtualize(  → 
 cs.virtualize(  → 
-cs.splice(      → 
+cs.splice(      → ${
 new Wallet([    → new Wallet([
 cs.lift(        → cs`
 1               → 1
@@ -11,7 +11,7 @@ cs.lift(        → cs`
 2               → 2
 )               → `
 ])              → ])
-)               → 
+)               → }
 )               → 
 .               → .
 coins           → coins

@@ -48,6 +48,9 @@ export class BacktickVirtualCode implements VirtualCode {
         },
         mappings: mappings.map((mapping) => ({
           ...mapping,
+          // The compiler's own flags (e.g. `semantic: false` on a
+          // `cs.splice(...)` wrapper, so hover doesn't resolve through it)
+          // override the defaults.
           data: {
             completion: true,
             format: false,
@@ -55,6 +58,7 @@ export class BacktickVirtualCode implements VirtualCode {
             semantic: true,
             structure: true,
             verification: true,
+            ...mapping.data,
           },
         })),
       },

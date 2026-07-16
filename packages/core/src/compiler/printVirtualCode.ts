@@ -66,13 +66,21 @@ function renderScript(
 
   // Emit the generated text `[lastPos, pos)` and advance. When it sits inside a
   // mapped node, attribute it to that node's still-unclaimed source
-  // `[cursor, boundary)`; otherwise emit it unmapped.
+  // `[cursor, boundary)` — carrying the node's editor behavior, since text
+  // flushed directly against a frame is that node's own — and otherwise
+  // emit it unmapped.
   const flush = (top: Frame | undefined, pos: number, boundary?: number) => {
     if (pos > lastPos) {
       const chunk = text.slice(lastPos, pos);
       if (top && boundary != null) {
         const end = Math.max(top.cursor, boundary);
-        segments.push([chunk, undefined, top.cursor, end - top.cursor]);
+        segments.push([
+          chunk,
+          undefined,
+          top.cursor,
+          end - top.cursor,
+          top.range.data,
+        ]);
       } else {
         segments.push(chunk);
       }
@@ -97,17 +105,10 @@ function renderScript(
     } else {
       const splice = script.splices[event.placeholder];
       const { expression } = splice;
-      // The cursor jumps over the `${`/`}` delimiters, which exist in the
-      // source only: no virtual text claims them, and `cs.splice(` and `)`
-      // attribute to zero-width ranges at the expression's edges.
-      if (top) {
-        top.cursor = Math.max(top.cursor, expression.getStart(sourceFile));
-      }
       flush(top, event.pos, expression.getStart(sourceFile));
       segments.push(...renderSplice(ts, sourceFile, rewrittenFile, splice));
       if (top) {
-        const brace = sourceFile.text.indexOf("}", expression.getEnd());
-        top.cursor = Math.max(top.cursor, brace + 1);
+        top.cursor = Math.max(top.cursor, expression.getEnd());
       }
       lastPos = event.pos + event.placeholder.length;
     }

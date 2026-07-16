@@ -1,18 +1,18 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.splice(              → 
+cs.splice(              → ${
 this.x                  → this.x
-)                       → 
+)                       → }
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 this.y                  → this.y
-)                       → 
+)                       → }
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_a                  → a
  =                      →  = 
-cs.splice(              → 
+cs.splice(              → ${
 new Point(              → new Point(
 cs.lift(                → cs`
 1                       → 1
@@ -22,13 +22,13 @@ cs.lift(                → cs`
 2                       → 2
 )                       → `
 )                       → )
-)                       → 
+)                       → }
 ;                       → ;
 \n                      → \n  
 const                   → const 
 __cs_b                  → b
  =                      →  = 
-cs.splice(              → 
+cs.splice(              → ${
 new Point(              → new Point(
 cs.lift(                → cs`
 3                       → 3
@@ -38,7 +38,7 @@ cs.lift(                → cs`
 4                       → 4
 )                       → `
 )                       → )
-)                       → 
+)                       → }
 ;                       → ;
 \n                      → \n  
 cs.virtualize(          → 

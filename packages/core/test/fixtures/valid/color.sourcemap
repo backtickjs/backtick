@@ -49,13 +49,13 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_c                  → c
  =                      →  = 
-cs.splice(              → 
+cs.splice(              → ${
 color                   → color
-)                       → 
+)                       → }
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.splice(              → 
+cs.splice(              → ${
 cs.lift(                → cs`
 cs.virtualize(          → 
 __cs_c                  → c
@@ -64,6 +64,6 @@ __cs_c                  → c
 brightness              → brightness
 ()                      → ()
 )                       → `
-)                       → 
+)                       → }
 ;                       → ;
 \n})())                 → \n}`

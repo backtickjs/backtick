@@ -3,45 +3,45 @@ cs.lift(                → cs`
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 return                  → return 
-cs.splice(              → 
+cs.splice(              → ${
 d0                      → d0
-)                       → 
+)                       → }
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 d0                      → d0
-)                       → 
+)                       → }
 ;                       → ;
 \n})())                 → \n}`
 cs.lift((() => {\n      → cs`{\n  
 return                  → return 
-cs.splice(              → 
+cs.splice(              → ${
 d1                      → d1
-)                       → 
+)                       → }
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 d1                      → d1
-)                       → 
+)                       → }
 ;                       → ;
 \n})())                 → \n}`
 cs.lift((() => {\n      → cs`{\n  
 return                  → return 
-cs.splice(              → 
+cs.splice(              → ${
 d2                      → d2
-)                       → 
+)                       → }
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 d2                      → d2
-)                       → 
+)                       → }
 ;                       → ;
 \n})())                 → \n}`
 cs.lift((() => {\n      → cs`{\n  
 return                  → return 
-cs.splice(              → 
+cs.splice(              → ${
 d3                      → d3
-)                       → 
+)                       → }
  +                      →  + 
-cs.splice(              → 
+cs.splice(              → ${
 d3                      → d3
-)                       → 
+)                       → }
 ;                       → ;
 \n})())                 → \n}`

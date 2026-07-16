@@ -1,5 +1,6 @@
 import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
+import type { CodeInformation } from "./CodeInformation.js";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -10,6 +11,8 @@ export interface RewriteState {
   bindings: BindingResolution;
   errors: Map<ts.Node, string>;
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
+  // virtual nodes whose mappings carry non-default editor behavior
+  codeInformation: Map<ts.Node, CodeInformation>;
 }
 
 // The globally unique binding key the resolver assigned this identifier. Only
@@ -277,8 +280,12 @@ function rewriteNodeImpl(
         );
         state.mappings.set(argument, node);
       }
+      // The wrapper's frame claims only the splice delimiters (`${`/`}`,
+      // or nothing for `$x`): hover must not resolve through it.
+      const virtual = call(ts, "cs", "splice", [argument]);
+      state.codeInformation.set(virtual, { semantic: false });
       return {
-        virtual: call(ts, "cs", "splice", [argument]),
+        virtual,
         runtime: call(ts, "v", "splice", [
           loc(node),
           ts.factory.createStringLiteral(splice.key),

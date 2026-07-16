@@ -1,3 +1,4 @@
+import type { CodeInformation } from "./CodeInformation.js";
 import type { Segment } from "./segmentsToString.js";
 
 export interface SourceMapping {
@@ -5,6 +6,7 @@ export interface SourceMapping {
   generatedOffsets: number[];
   lengths: number[];
   generatedLengths: number[];
+  data?: CodeInformation;
 }
 
 export function buildMappings(segments: Segment[]): SourceMapping[] {
@@ -15,12 +17,18 @@ export function buildMappings(segments: Segment[]): SourceMapping[] {
       generatedOffset += segment.length;
       continue;
     }
-    const [text, , sourceOffset, sourceLength] = segment;
+    const [text, , sourceOffset, sourceLength, segmentData] = segment;
+    // Text claiming no source at all maps for position bookkeeping only:
+    // its zero-width boundary touches neighboring code, and hover must not
+    // resolve through it.
+    const data =
+      segmentData ?? (sourceLength === 0 ? { semantic: false } : undefined);
     mappings.push({
       sourceOffsets: [sourceOffset],
       generatedOffsets: [generatedOffset],
       lengths: [sourceLength],
       generatedLengths: [text.length],
+      ...(data && { data }),
     });
     generatedOffset += text.length;
   }
