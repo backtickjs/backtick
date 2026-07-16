@@ -1,4 +1,4 @@
-import type { Client, ClientUnknown } from "../../cs-runtime/index.js";
+import type { Client } from "../../cs-runtime/index.js";
 
 // The hole sentinels a spliced class's constructor is applied to in place
 // of its client arguments, which have no value until the client runs. Where
@@ -7,7 +7,7 @@ import type { Client, ClientUnknown } from "../../cs-runtime/index.js";
 // recognized here by identity.
 const names = new WeakMap<object, string>();
 
-export function createHole(name: string): Client<ClientUnknown> {
+export function createHole(name: string): Client<never> {
   // Any read or write throws: a client value is opaque on the host, so a
   // constructor that computes or branches with one would otherwise bake the
   // result of probing a placeholder into the bundle.
@@ -31,7 +31,7 @@ export function createHole(name: string): Client<ClientUnknown> {
     },
   );
   names.set(hole, name);
-  return hole as unknown as Client<ClientUnknown>;
+  return hole as unknown as Client<never>;
 }
 
 export function holeName(value: unknown): string | undefined {

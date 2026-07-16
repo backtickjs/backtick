@@ -17,6 +17,8 @@ declare const clientArrow: Client<() => number>;
 class Point implements ClientObject {
   readonly "@backtickjs" = "ClientObject";
 
+  readonly cls: typeof Point = Point;
+
   readonly x: Client<number>;
   readonly y: Client<number>;
 
@@ -74,6 +76,9 @@ virtualize(point).reflectsNothing;
 virtualize(point).scaled;
 // @ts-expect-error — the marker doesn't exist on the client.
 virtualize(point)["@backtickjs"];
+// @ts-expect-error — a class member doesn't reflect: at runtime it is
+// indistinguishable from a host method, so reflection filters both.
+virtualize(point).cls;
 
 const segment = spliced(
   new Segment(

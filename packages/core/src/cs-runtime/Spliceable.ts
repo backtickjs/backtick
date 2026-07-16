@@ -1,16 +1,13 @@
 import type { Client } from "./Client.js";
-import {
-  type ClientObject,
-  type ClientObjectConstructor,
-  isClientObject,
-} from "./ClientObject.js";
+import type { ClientConstructor } from "./ClientConstructor.js";
+import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
 import { isClientUIElement } from "./ClientUIElement.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 
 export type Spliceable =
   | Client<ClientUnknown>
-  | ClientObjectConstructor
+  | ClientConstructor<ClientObject>
   | ClientObject
   | null
   | number
@@ -21,9 +18,7 @@ export type Spliceable =
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   ClientObjectConstructor   -> T: it splices only as a `new` callee, and
-//                                its constructor already takes `Client<…>`
-//                                arguments, so the signature carries over
+//   ClientConstructor<C>      -> typeof C
 //   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
@@ -31,7 +26,7 @@ export type Spliceable =
 export type Spliced<T> =
   T extends Client<infer U>
     ? U
-    : T extends ClientObjectConstructor
+    : T extends ClientConstructor<ClientObject>
       ? T
       : T extends ClientObject
         ? T
@@ -41,6 +36,10 @@ export type Spliced<T> =
             ? { [K in keyof T]: Spliced<T[K]> }
             : T;
 
+// No function arm, though `Spliceable` admits `ClientConstructor`:
+// reflection uses this to filter members, where a class is
+// indistinguishable from a host method. A directly spliced class never
+// reaches this guard.
 export function isSpliceable(value: unknown): value is Spliceable {
   if (value === undefined) {
     return false;

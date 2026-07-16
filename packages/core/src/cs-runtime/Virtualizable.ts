@@ -3,6 +3,7 @@ import type { ClientNumber } from "./ClientNumber.js";
 import type { ClientObject } from "./ClientObject.js";
 import type { ClientString } from "./ClientString.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
+import type { ClientConstructor } from "./ClientConstructor.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 
 // What a member-access receiver reads as.
@@ -19,10 +20,14 @@ export type Virtualized<T extends ClientUnknown> =
           ? {
               // Keep the constraint homomorphic (`keyof T`, filtering in `as`) so
               // properties stay linked to their declarations for go-to-definition.
+              // A class member doesn't reflect: at runtime it is
+              // indistinguishable from a host method (see `isSpliceable`).
               [K in keyof T as K extends "@backtickjs"
                 ? never
-                : T[K] extends Spliceable
-                  ? K
-                  : never]: Spliced<T[K]>;
+                : T[K] extends ClientConstructor<ClientObject>
+                  ? never
+                  : T[K] extends Spliceable
+                    ? K
+                    : never]: Spliced<T[K]>;
             }
           : T;

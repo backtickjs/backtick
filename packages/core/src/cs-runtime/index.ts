@@ -1,11 +1,8 @@
 export type { Client } from "./Client.js";
 export type { ClientBoolean } from "./ClientBoolean.js";
+export type { ClientConstructor } from "./ClientConstructor.js";
 export type { ClientNumber } from "./ClientNumber.js";
-export {
-  type ClientObject,
-  type ClientObjectConstructor,
-  isClientObject,
-} from "./ClientObject.js";
+export { type ClientObject, isClientObject } from "./ClientObject.js";
 export {
   type ClientScript,
   isClientScript,
