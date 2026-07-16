@@ -17,4 +17,4 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
     paid: i % 4 !== 0,
     coupon: i % 5 === 0 ? `SAVE${i}` : null,
 }));
-export default _jsx("button", { data: orders, onA: cs.create([21, 43, 21, 83], { filePath: "large-data.tsx", fileHash: "1ws93k5", splices: { $0splice0: { orders, currency: "CAD" } }, captures: [], declarations: [] }, v => v.arrow([21, 46, 21, 82], [], v.splice([21, 52, 21, 82], "$0splice0"))) });
+export default _jsx("button", { data: orders, onA: cs.create([21, 43, 21, 83], { filePath: "large-data.tsx", fileHash: "r6oqmhujyw1x", splices: { $0splice0: { orders, currency: "CAD" } }, captures: [], declarations: [] }, v => v.arrow([21, 46, 21, 82], [], v.splice([21, 52, 21, 82], "$0splice0"))) });
