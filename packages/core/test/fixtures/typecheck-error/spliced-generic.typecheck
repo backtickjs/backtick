@@ -1,0 +1,6 @@
+20:3-20:9 error TS2322: Type 'Client<() => Spliced<T>>' is not assignable to type 'Client<() => T>'.
+    Type '() => Spliced<T>' is not assignable to type '() => T'.
+      Type 'Spliced<T>' is not assignable to type 'T'.
+        'Spliced<T>' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint 'ClientObject'.
+          Type 'ClientObject' is not assignable to type 'T'.
+            'ClientObject' is assignable to the constraint of type 'T', but 'T' could be instantiated with a different subtype of constraint 'ClientObject'.

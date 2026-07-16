@@ -6,11 +6,13 @@ import ts from "typescript";
 import { virtualize } from "../dist/compiler/virtualize.js";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 
-// Typechecks each valid fixture's virtual code and snapshots the diagnostics
-// to a sibling `*.typecheck` file. This is the type-level view of the corpus:
-// what `backtick-tsc` reports for a fixture is what plain tsc reports for its
-// virtual code, so typechecking the virtualized fixtures simulates the
-// language tooling without depending on it.
+// Typechecks each fixture's virtual code and snapshots the diagnostics to a
+// sibling `*.typecheck` file, for the `valid` fixtures (whose snapshots stay
+// clean) and the `typecheck-error` ones (which pin deliberate type errors).
+// This is the type-level view of the corpus: what `backtick-tsc` reports for
+// a fixture is what plain tsc reports for its virtual code, so typechecking
+// the virtualized fixtures simulates the language tooling without depending
+// on it.
 //
 // The virtual code is produced in-memory from the fixture sources — not read
 // from the `*.virtual.tsx` snapshots, whose (re)generation order in an
@@ -18,7 +20,8 @@ import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 // snapshot paths, so diagnostics land on the same file names and module
 // resolution walks the same directories. The compiler suite separately
 // asserts that those snapshots match this same virtualization.
-const fixturesDir = join(import.meta.dirname, "fixtures/valid");
+const fixturesRoot = join(import.meta.dirname, "fixtures");
+const dirNames = ["valid", "typecheck-error"];
 
 const COMPILER_OPTIONS: ts.CompilerOptions = {
   target: ts.ScriptTarget.ESNext,
@@ -32,23 +35,34 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
   types: [],
 };
 
-const fixtures = readdirSync(fixturesDir)
-  .filter(
-    (file) =>
-      [".ts", ".tsx"].includes(extname(file)) && !file.includes(".virtual.tsx"),
-  )
-  .sort();
+const fixturesByDir = new Map(
+  dirNames.map((dirName) => [
+    dirName,
+    readdirSync(join(fixturesRoot, dirName))
+      .filter(
+        (file) =>
+          [".ts", ".tsx"].includes(extname(file)) &&
+          !file.includes(".virtual.tsx"),
+      )
+      .sort(),
+  ]),
+);
 
-const virtualFile = (base: string): string =>
-  join(fixturesDir, `${base}.virtual.tsx`);
+const virtualFile = (dirName: string, base: string): string =>
+  join(fixturesRoot, dirName, `${base}.virtual.tsx`);
 
 const virtualSources = new Map<string, string>(
-  fixtures.map((file) => {
-    const base = file.slice(0, -extname(file).length);
-    const sourceText = readFileSync(join(fixturesDir, file), "utf8");
-    const { virtualCode } = virtualize(ts, file, sourceText);
-    return [virtualFile(base), virtualCode];
-  }),
+  [...fixturesByDir].flatMap(([dirName, files]) =>
+    files.map((file): [string, string] => {
+      const base = file.slice(0, -extname(file).length);
+      const sourceText = readFileSync(
+        join(fixturesRoot, dirName, file),
+        "utf8",
+      );
+      const { virtualCode } = virtualize(ts, file, sourceText);
+      return [virtualFile(dirName, base), virtualCode];
+    }),
+  ),
 );
 
 // One program covers every fixture's virtual code; the test-only intrinsic
@@ -110,15 +124,19 @@ function renderTypecheck(sourceFile: ts.SourceFile): string {
 }
 
 describe("typecheck", () => {
-  for (const file of fixtures) {
-    it(file, () => {
-      const base = file.slice(0, -extname(file).length);
-      const sourceFile = program.getSourceFile(virtualFile(base));
-      assert.ok(sourceFile, `missing virtual code for ${file}`);
-      matchFileSnapshot(
-        renderTypecheck(sourceFile),
-        join(fixturesDir, `${base}.typecheck`),
-      );
+  for (const [dirName, files] of fixturesByDir) {
+    describe(dirName, () => {
+      for (const file of files) {
+        it(file, () => {
+          const base = file.slice(0, -extname(file).length);
+          const sourceFile = program.getSourceFile(virtualFile(dirName, base));
+          assert.ok(sourceFile, `missing virtual code for ${file}`);
+          matchFileSnapshot(
+            renderTypecheck(sourceFile),
+            join(fixturesRoot, dirName, `${base}.typecheck`),
+          );
+        });
+      }
     });
   }
 

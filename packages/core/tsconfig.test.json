@@ -15,9 +15,10 @@
     "test/fixtures/valid/*.ts",
     "test/fixtures/compile-error/*.ts",
     "test/fixtures/bundle-error/*.ts",
-    // Pins a deliberate type error — calling a spliced class without
-    // `new` — which the typecheck suite snapshots; the build skips it.
-    "test/fixtures/valid/class-without-new.virtual.tsx"
+    // Fixtures pinning deliberate type errors, which the typecheck suite
+    // snapshots; the build skips their sources and virtual code.
+    "test/fixtures/typecheck-error/*.ts",
+    "test/fixtures/typecheck-error/*.virtual.tsx"
   ],
   "references": [{ "path": "./tsconfig.build.json" }]
 }

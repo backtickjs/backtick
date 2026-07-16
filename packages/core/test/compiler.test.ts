@@ -38,40 +38,45 @@ function loadFixtures(dir: string) {
 }
 
 describe("compile", () => {
-  describe("valid", () => {
-    const dir = join(fixturesRoot, "valid");
-    for (const fixture of loadFixtures(dir)) {
-      it(fixture.fileName, () => {
-        const { fileName, sourceText, virtualCode, mappings, diagnostics } =
-          fixture;
-        const base = fileName.slice(0, -extname(fileName).length);
+  // `typecheck-error` fixtures pin deliberate type errors; any compiler
+  // diagnostics they carry are snapshotted like everything else, so only
+  // `valid` fixtures assert a clean compile.
+  for (const dirName of ["valid", "typecheck-error"]) {
+    describe(dirName, () => {
+      const dir = join(fixturesRoot, dirName);
+      for (const fixture of loadFixtures(dir)) {
+        it(fixture.fileName, () => {
+          const { fileName, sourceText, virtualCode, mappings, diagnostics } =
+            fixture;
+          const base = fileName.slice(0, -extname(fileName).length);
 
-        const renderedDiagnostics = renderDiagnostics(
-          fileName,
-          sourceText,
-          diagnostics,
-        );
-        assert.ok(
-          !fixture.hasError,
-          `a valid fixture must compile without errors; move it to compile-error/ or fix it:\n${renderedDiagnostics}`,
-        );
+          const renderedDiagnostics = renderDiagnostics(
+            fileName,
+            sourceText,
+            diagnostics,
+          );
+          assert.ok(
+            dirName !== "valid" || !fixture.hasError,
+            `a valid fixture must compile without errors; move it to compile-error/ or fix it:\n${renderedDiagnostics}`,
+          );
 
-        matchFileSnapshot(
-          renderedDiagnostics,
-          join(dir, `${base}.diagnostics`),
-        );
-        matchFileSnapshot(virtualCode, join(dir, `${base}.virtual.tsx`));
-        matchFileSnapshot(
-          renderMappings(fileName, virtualCode, sourceText, mappings),
-          join(dir, `${base}.sourcemap`),
-        );
-        matchFileSnapshot(
-          transpileFixture(fileName, sourceText),
-          join(dir, `${base}.js`),
-        );
-      });
-    }
-  });
+          matchFileSnapshot(
+            renderedDiagnostics,
+            join(dir, `${base}.diagnostics`),
+          );
+          matchFileSnapshot(virtualCode, join(dir, `${base}.virtual.tsx`));
+          matchFileSnapshot(
+            renderMappings(fileName, virtualCode, sourceText, mappings),
+            join(dir, `${base}.sourcemap`),
+          );
+          matchFileSnapshot(
+            transpileFixture(fileName, sourceText),
+            join(dir, `${base}.js`),
+          );
+        });
+      }
+    });
+  }
 
   // A compile-error fixture only snapshots its diagnostics: there is no meaningful
   // virtual code, source map, or emitted JS for source the compiler rejected.

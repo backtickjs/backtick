@@ -32,7 +32,6 @@ import { transpileFixture } from "./transpileFixture.ts";
 // The emitted modules land in a cache directory inside the package so their
 // `@backtickjs/core` imports resolve through node's package self-reference.
 const fixturesRoot = join(import.meta.dirname, "fixtures");
-const validDir = join(fixturesRoot, "valid");
 const bundleErrorDir = join(fixturesRoot, "bundle-error");
 const cacheDir = join(import.meta.dirname, "../.cache/jit-bundler");
 
@@ -66,22 +65,23 @@ async function importFixture(
 
 describe("bundle", () => {
   describe("valid", () => {
-    for (const file of listFixtures(validDir)) {
+    const dir = join(fixturesRoot, "valid");
+    for (const file of listFixtures(dir)) {
       it(file, async () => {
         const base = file.slice(0, -extname(file).length);
-        const script = await importFixture(validDir, file);
+        const script = await importFixture(dir, file);
         const payload = bundle(script);
         matchFileSnapshot(
           JSON.stringify(payload, null, 2),
-          join(validDir, `${base}.bundle`),
+          join(dir, `${base}.bundle`),
         );
         matchFileSnapshot(
           renderBundleDebug(payload),
-          join(validDir, `${base}.bundle-debug`),
+          join(dir, `${base}.bundle-debug`),
         );
         matchFileSnapshot(
           `${renderValue(evaluate(payload))}\n`,
-          join(validDir, `${base}.value`),
+          join(dir, `${base}.value`),
         );
       });
     }
