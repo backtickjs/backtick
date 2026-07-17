@@ -16,7 +16,7 @@ function wrap(value) {
     [20, 10, 20, 26],
     {
       filePath: "spliced-generic.ts",
-      fileHash: "1d9k7u5bmno9u",
+      fileHash: "2o6jybvu3qwcy",
       splices: { $value: value },
       captures: [],
       declarations: [],
@@ -28,7 +28,7 @@ export default cs.create(
   [23, 16, 23, 49],
   {
     filePath: "spliced-generic.ts",
-    fileHash: "1d9k7u5bmno9u",
+    fileHash: "2o6jybvu3qwcy",
     splices: {
       $0splice0: wrap(
         new Point(
@@ -36,7 +36,7 @@ export default cs.create(
             [23, 36, 23, 41],
             {
               filePath: "spliced-generic.ts",
-              fileHash: "1d9k7u5bmno9u",
+              fileHash: "2o6jybvu3qwcy",
               splices: {},
               captures: [],
               declarations: [],

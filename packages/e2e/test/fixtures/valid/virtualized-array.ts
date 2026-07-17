@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject } from "@backtickjs/core";
 
 // A member holding an array of fragments: the script reaches through it —
 // `coins` virtualizes to `number[]`, so `length` reads normally.

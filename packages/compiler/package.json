@@ -8,10 +8,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./resolveBindings": {
-      "types": "./dist/resolveBindings.d.ts",
-      "default": "./dist/resolveBindings.js"
     }
   },
   "scripts": {

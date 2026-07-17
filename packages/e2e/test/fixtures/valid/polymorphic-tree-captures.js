@@ -8,28 +8,28 @@ function offset(by) {
     [8, 10, 8, 49],
     {
       filePath: "polymorphic-tree-captures.tsx",
-      fileHash: "1exi31ovz97e7",
+      fileHash: "1kuzggq2rup5b",
       splices: {
         $0splice0: cs.create(
           [8, 33, 8, 41],
           {
             filePath: "polymorphic-tree-captures.tsx",
-            fileHash: "1exi31ovz97e7",
+            fileHash: "1kuzggq2rup5b",
             splices: {},
-            captures: ["base$1exi31ovz97e7$0"],
+            captures: ["base$1kuzggq2rup5b$0"],
             declarations: [],
           },
-          (v) => v.identifier([8, 36, 8, 40], "base", "base$1exi31ovz97e7$0"),
+          (v) => v.identifier([8, 36, 8, 40], "base", "base$1kuzggq2rup5b$0"),
         ),
         $by: by,
       },
       captures: [],
-      declarations: ["base$1exi31ovz97e7$0"],
+      declarations: ["base$1kuzggq2rup5b$0"],
     },
     (v) =>
       v.arrow(
         [8, 13, 8, 48],
-        [v.identifier([8, 14, 8, 18], "base", "base$1exi31ovz97e7$0")],
+        [v.identifier([8, 14, 8, 18], "base", "base$1kuzggq2rup5b$0")],
         v.binop(
           [8, 31, 8, 48],
           v.splice([8, 31, 8, 42], "$0splice0"),
@@ -45,7 +45,7 @@ export default _jsx("button", {
       [11, 36, 11, 41],
       {
         filePath: "polymorphic-tree-captures.tsx",
-        fileHash: "1exi31ovz97e7",
+        fileHash: "1kuzggq2rup5b",
         splices: {},
         captures: [],
         declarations: [],
@@ -58,7 +58,7 @@ export default _jsx("button", {
       [11, 56, 11, 61],
       {
         filePath: "polymorphic-tree-captures.tsx",
-        fileHash: "1exi31ovz97e7",
+        fileHash: "1kuzggq2rup5b",
         splices: {},
         captures: [],
         declarations: [],

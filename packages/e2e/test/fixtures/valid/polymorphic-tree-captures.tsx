@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client } from "@backtickjs/core/cs-runtime";
+import type { Client } from "@backtickjs/core";
 
 // A polymorphic fragment whose splice captures the template's own binding,
 // referenced from tree props: the hole's thunk ships in JSON position with

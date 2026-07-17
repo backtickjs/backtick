@@ -15,7 +15,7 @@ class Color {
       [19, 12, 19, 35],
       {
         filePath: "spliced-param.ts",
-        fileHash: "3qbcp9hquhj60",
+        fileHash: "22eb8gy7ghfko",
         splices: { $0splice0: this.r },
         captures: [],
         declarations: [],
@@ -38,14 +38,14 @@ export default cs.create(
   [23, 16, 26, 3],
   {
     filePath: "spliced-param.ts",
-    fileHash: "3qbcp9hquhj60",
+    fileHash: "22eb8gy7ghfko",
     splices: {
       $0splice0: new Color(
         cs.create(
           [25, 27, 25, 32],
           {
             filePath: "spliced-param.ts",
-            fileHash: "3qbcp9hquhj60",
+            fileHash: "22eb8gy7ghfko",
             splices: {},
             captures: [],
             declarations: [],
@@ -56,7 +56,7 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: ["pick$3qbcp9hquhj60$0", "c$3qbcp9hquhj60$1"],
+    declarations: ["pick$22eb8gy7ghfko$0", "c$22eb8gy7ghfko$1"],
   },
   (v) =>
     v.block(
@@ -65,15 +65,15 @@ export default cs.create(
         v.variableDeclaration(
           [24, 3, 24, 38],
           "const",
-          v.identifier([24, 9, 24, 13], "pick", "pick$3qbcp9hquhj60$0"),
+          v.identifier([24, 9, 24, 13], "pick", "pick$22eb8gy7ghfko$0"),
           v.arrow(
             [24, 16, 24, 37],
-            [v.identifier([24, 17, 24, 18], "c", "c$3qbcp9hquhj60$1")],
+            [v.identifier([24, 17, 24, 18], "c", "c$22eb8gy7ghfko$1")],
             v.binop(
               [24, 30, 24, 37],
               v.propertyAccess(
                 [24, 30, 24, 33],
-                v.identifier([24, 30, 24, 31], "c", "c$3qbcp9hquhj60$1"),
+                v.identifier([24, 30, 24, 31], "c", "c$22eb8gy7ghfko$1"),
                 "r",
               ),
               "+",
@@ -85,7 +85,7 @@ export default cs.create(
           [25, 3, 25, 44],
           v.call(
             [25, 10, 25, 43],
-            v.identifier([25, 10, 25, 14], "pick", "pick$3qbcp9hquhj60$0"),
+            v.identifier([25, 10, 25, 14], "pick", "pick$22eb8gy7ghfko$0"),
             [v.splice([25, 15, 25, 42], "$0splice0")],
           ),
         ),

@@ -9,12 +9,11 @@ import {
 import { basename, extname, join } from "node:path";
 import { describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
-import type { Client, ClientUnknown } from "@backtickjs/core";
-import { bundle } from "@backtickjs/core/jit-bundler";
-import { evaluate } from "@backtickjs/core/test-client";
+import { bundle, type Client, type ClientUnknown } from "@backtickjs/core";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderValue } from "./renderValue.ts";
+import { evaluate } from "./test-client/index.ts";
 import { transpileFixture } from "./transpileFixture.ts";
 
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a

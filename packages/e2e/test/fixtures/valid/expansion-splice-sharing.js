@@ -8,7 +8,7 @@ function sum(a, b) {
     [9, 10, 9, 27],
     {
       filePath: "expansion-splice-sharing.ts",
-      fileHash: "flati7v8zwie",
+      fileHash: "2kc5czyfqafly",
       splices: { $a: a, $b: b },
       captures: [],
       declarations: [],
@@ -54,10 +54,10 @@ export default cs.create(
   [44, 16, 48, 3],
   {
     filePath: "expansion-splice-sharing.ts",
-    fileHash: "flati7v8zwie",
+    fileHash: "2kc5czyfqafly",
     splices: { $Point: Point, $Size: Size },
     captures: [],
-    declarations: ["p$flati7v8zwie$0", "s$flati7v8zwie$1"],
+    declarations: ["p$2kc5czyfqafly$0", "s$2kc5czyfqafly$1"],
   },
   (v) =>
     v.block(
@@ -66,7 +66,7 @@ export default cs.create(
         v.variableDeclaration(
           [45, 3, 45, 30],
           "const",
-          v.identifier([45, 9, 45, 10], "p", "p$flati7v8zwie$0"),
+          v.identifier([45, 9, 45, 10], "p", "p$2kc5czyfqafly$0"),
           v.new([45, 13, 45, 29], v.splice([45, 17, 45, 23], "$Point"), [
             v.number([45, 24, 45, 25], 1),
             v.number([45, 27, 45, 28], 2),
@@ -75,7 +75,7 @@ export default cs.create(
         v.variableDeclaration(
           [46, 3, 46, 29],
           "const",
-          v.identifier([46, 9, 46, 10], "s", "s$flati7v8zwie$1"),
+          v.identifier([46, 9, 46, 10], "s", "s$2kc5czyfqafly$1"),
           v.new([46, 13, 46, 28], v.splice([46, 17, 46, 22], "$Size"), [
             v.number([46, 23, 46, 24], 3),
             v.number([46, 26, 46, 27], 4),
@@ -89,7 +89,7 @@ export default cs.create(
               [47, 10, 47, 17],
               v.propertyAccess(
                 [47, 10, 47, 15],
-                v.identifier([47, 10, 47, 11], "p", "p$flati7v8zwie$0"),
+                v.identifier([47, 10, 47, 11], "p", "p$2kc5czyfqafly$0"),
                 "sum",
               ),
               [],
@@ -99,7 +99,7 @@ export default cs.create(
               [47, 20, 47, 27],
               v.propertyAccess(
                 [47, 20, 47, 25],
-                v.identifier([47, 20, 47, 21], "s", "s$flati7v8zwie$1"),
+                v.identifier([47, 20, 47, 21], "s", "s$2kc5czyfqafly$1"),
                 "sum",
               ),
               [],

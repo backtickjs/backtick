@@ -18,10 +18,10 @@ export default cs.create(
   [22, 16, 25, 3],
   {
     filePath: "new-expression.ts",
-    fileHash: "31ns4rsyx3z8q",
+    fileHash: "y9r0n74bbbwa",
     splices: { $Point: Point },
     captures: [],
-    declarations: ["p$31ns4rsyx3z8q$0"],
+    declarations: ["p$y9r0n74bbbwa$0"],
   },
   (v) =>
     v.block(
@@ -30,7 +30,7 @@ export default cs.create(
         v.variableDeclaration(
           [23, 3, 23, 30],
           "const",
-          v.identifier([23, 9, 23, 10], "p", "p$31ns4rsyx3z8q$0"),
+          v.identifier([23, 9, 23, 10], "p", "p$y9r0n74bbbwa$0"),
           v.new([23, 13, 23, 29], v.splice([23, 17, 23, 23], "$Point"), [
             v.number([23, 24, 23, 25], 1),
             v.number([23, 27, 23, 28], 2),
@@ -42,13 +42,13 @@ export default cs.create(
             [24, 10, 24, 19],
             v.propertyAccess(
               [24, 10, 24, 13],
-              v.identifier([24, 10, 24, 11], "p", "p$31ns4rsyx3z8q$0"),
+              v.identifier([24, 10, 24, 11], "p", "p$y9r0n74bbbwa$0"),
               "x",
             ),
             "+",
             v.propertyAccess(
               [24, 16, 24, 19],
-              v.identifier([24, 16, 24, 17], "p", "p$31ns4rsyx3z8q$0"),
+              v.identifier([24, 16, 24, 17], "p", "p$y9r0n74bbbwa$0"),
               "y",
             ),
           ),

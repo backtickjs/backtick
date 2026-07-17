@@ -9,18 +9,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./cs-runtime": {
-      "types": "./dist/cs-runtime.d.ts",
-      "default": "./dist/cs-runtime.js"
-    },
-    "./jit-bundler": {
-      "types": "./dist/jit-bundler/index.d.ts",
-      "default": "./dist/jit-bundler/index.js"
-    },
-    "./test-client": {
-      "types": "./dist/test-client/index.d.ts",
-      "default": "./dist/test-client/index.js"
-    },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime/index.d.ts",
       "default": "./dist/jsx-runtime/index.js"

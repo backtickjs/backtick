@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject } from "@backtickjs/core";
 
 // A script parameter annotated with the host class directly: the spliced
 // argument stays typed `Color`, and member access virtualizes — `c.r` reads

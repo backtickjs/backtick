@@ -5,7 +5,7 @@ import type {
   BundleExpr,
   BundleExpressionNode,
   BundleStatementNode,
-} from "@backtickjs/core/jit-bundler";
+} from "@backtickjs/core";
 
 // Renders a bundle as a human-readable debug view: each `functions` entry as
 // pseudo-JS, each `trees` entry as pseudo-JSX, and the root as the

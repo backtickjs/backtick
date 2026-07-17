@@ -1,7 +1,6 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { parseSourceText } from "@backtickjs/compiler";
-import { resolveBindings } from "@backtickjs/compiler/resolveBindings";
+import { parseSourceText, resolveBindings } from "@backtickjs/compiler";
 import ts from "typescript";
 
 function captures(body: string): string[] {

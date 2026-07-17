@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject } from "@backtickjs/core";
 
 class Point implements ClientObject {
   readonly "@backtickjs" = "ClientObject";

@@ -7,7 +7,7 @@ import type {
   Spliceable,
   Spliced,
   Virtualized,
-} from "@backtickjs/core/cs-runtime";
+} from "@backtickjs/core";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare function virtualize<T extends ClientUnknown>(value: T): Virtualized<T>;

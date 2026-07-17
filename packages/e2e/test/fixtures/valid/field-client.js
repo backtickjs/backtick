@@ -14,14 +14,14 @@ export default cs.create(
   [18, 16, 25, 3],
   {
     filePath: "field-client.ts",
-    fileHash: "241uh6e4843k4",
+    fileHash: "3o65fk6h8ba4e",
     splices: {
       $0splice0: new Color(
         cs.create(
           [19, 25, 19, 31],
           {
             filePath: "field-client.ts",
-            fileHash: "241uh6e4843k4",
+            fileHash: "3o65fk6h8ba4e",
             splices: {},
             captures: [],
             declarations: [],
@@ -32,7 +32,7 @@ export default cs.create(
           [19, 33, 19, 40],
           {
             filePath: "field-client.ts",
-            fileHash: "241uh6e4843k4",
+            fileHash: "3o65fk6h8ba4e",
             splices: {},
             captures: [],
             declarations: [],
@@ -43,7 +43,7 @@ export default cs.create(
           [19, 42, 19, 49],
           {
             filePath: "field-client.ts",
-            fileHash: "241uh6e4843k4",
+            fileHash: "3o65fk6h8ba4e",
             splices: {},
             captures: [],
             declarations: [],
@@ -53,7 +53,7 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: ["c$241uh6e4843k4$0", "brightness$241uh6e4843k4$1"],
+    declarations: ["c$3o65fk6h8ba4e$0", "brightness$3o65fk6h8ba4e$1"],
   },
   (v) =>
     v.block(
@@ -62,7 +62,7 @@ export default cs.create(
         v.variableDeclaration(
           [19, 3, 19, 52],
           "const",
-          v.identifier([19, 9, 19, 10], "c", "c$241uh6e4843k4$0"),
+          v.identifier([19, 9, 19, 10], "c", "c$3o65fk6h8ba4e$0"),
           v.splice([19, 13, 19, 51], "$0splice0"),
         ),
         v.variableDeclaration(
@@ -71,7 +71,7 @@ export default cs.create(
           v.identifier(
             [20, 9, 20, 19],
             "brightness",
-            "brightness$241uh6e4843k4$1",
+            "brightness$3o65fk6h8ba4e$1",
           ),
           v.binop(
             [20, 22, 20, 37],
@@ -79,20 +79,20 @@ export default cs.create(
               [20, 22, 20, 31],
               v.propertyAccess(
                 [20, 22, 20, 25],
-                v.identifier([20, 22, 20, 23], "c", "c$241uh6e4843k4$0"),
+                v.identifier([20, 22, 20, 23], "c", "c$3o65fk6h8ba4e$0"),
                 "r",
               ),
               "+",
               v.propertyAccess(
                 [20, 28, 20, 31],
-                v.identifier([20, 28, 20, 29], "c", "c$241uh6e4843k4$0"),
+                v.identifier([20, 28, 20, 29], "c", "c$3o65fk6h8ba4e$0"),
                 "g",
               ),
             ),
             "+",
             v.propertyAccess(
               [20, 34, 20, 37],
-              v.identifier([20, 34, 20, 35], "c", "c$241uh6e4843k4$0"),
+              v.identifier([20, 34, 20, 35], "c", "c$3o65fk6h8ba4e$0"),
               "b",
             ),
           ),
@@ -104,7 +104,7 @@ export default cs.create(
             v.identifier(
               [21, 7, 21, 17],
               "brightness",
-              "brightness$241uh6e4843k4$1",
+              "brightness$3o65fk6h8ba4e$1",
             ),
             ">",
             v.number([21, 20, 21, 23], 382),

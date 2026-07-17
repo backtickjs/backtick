@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject } from "@backtickjs/core";
 
 // One helper builds the fragment for both classes, so the script is a single
 // source location referenced from two expansions with different holes: the

@@ -20,7 +20,7 @@ function make(Shape) {
     [23, 10, 23, 27],
     {
       filePath: "shared-construction.ts",
-      fileHash: "21m028ex39nc0",
+      fileHash: "3cp3uvwlsfvqo",
       splices: { $Shape: Shape },
       captures: [],
       declarations: [],
@@ -39,7 +39,7 @@ export default cs.create(
   [31, 16, 33, 3],
   {
     filePath: "shared-construction.ts",
-    fileHash: "21m028ex39nc0",
+    fileHash: "3cp3uvwlsfvqo",
     splices: { $a: a, $b: b, $c: c, $d: d },
     captures: [],
     declarations: [],

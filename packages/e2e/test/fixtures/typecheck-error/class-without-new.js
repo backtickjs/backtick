@@ -16,10 +16,10 @@ export default cs.create(
   [20, 16, 23, 3],
   {
     filePath: "class-without-new.tsx",
-    fileHash: "3hk829hcezl8z",
+    fileHash: "1n6hvxiblc91f",
     splices: { $Point: Point },
     captures: [],
-    declarations: ["C$3hk829hcezl8z$0"],
+    declarations: ["C$1n6hvxiblc91f$0"],
   },
   (v) =>
     v.block(
@@ -28,14 +28,14 @@ export default cs.create(
         v.variableDeclaration(
           [21, 3, 21, 20],
           "const",
-          v.identifier([21, 9, 21, 10], "C", "C$3hk829hcezl8z$0"),
+          v.identifier([21, 9, 21, 10], "C", "C$1n6hvxiblc91f$0"),
           v.splice([21, 13, 21, 19], "$Point"),
         ),
         v.return(
           [22, 3, 22, 18],
           v.call(
             [22, 10, 22, 17],
-            v.identifier([22, 10, 22, 11], "C", "C$3hk829hcezl8z$0"),
+            v.identifier([22, 10, 22, 11], "C", "C$1n6hvxiblc91f$0"),
             [v.number([22, 12, 22, 13], 1), v.number([22, 15, 22, 16], 2)],
           ),
         ),

@@ -12,14 +12,14 @@ export default cs.create(
   [16, 16, 16, 62],
   {
     filePath: "virtualized-array.ts",
-    fileHash: "sqp7j2hvfkon",
+    fileHash: "2se071q56i4uf",
     splices: {
       $0splice0: new Wallet([
         cs.create(
           [16, 33, 16, 38],
           {
             filePath: "virtualized-array.ts",
-            fileHash: "sqp7j2hvfkon",
+            fileHash: "2se071q56i4uf",
             splices: {},
             captures: [],
             declarations: [],
@@ -30,7 +30,7 @@ export default cs.create(
           [16, 40, 16, 45],
           {
             filePath: "virtualized-array.ts",
-            fileHash: "sqp7j2hvfkon",
+            fileHash: "2se071q56i4uf",
             splices: {},
             captures: [],
             declarations: [],

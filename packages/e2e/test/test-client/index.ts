@@ -12,7 +12,7 @@ import type {
   BundleThunk,
   FunctionLabel,
   TreeLabel,
-} from "../jit-bundler/index.js";
+} from "@backtickjs/core";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's

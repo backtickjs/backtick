@@ -1,4 +1,4 @@
-import type { ClientObject } from "@backtickjs/core/cs-runtime";
+import type { ClientObject } from "@backtickjs/core";
 
 class Color implements ClientObject {
   readonly "@backtickjs" = "ClientObject";

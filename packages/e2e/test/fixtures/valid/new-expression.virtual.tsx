@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client, ClientObject } from "@backtickjs/core/cs-runtime";
+import type { Client, ClientObject } from "@backtickjs/core";
 
 // A client-constructible class. The bundler expands the construction at
 // bundle time: the constructor runs once with one opaque hole per
