@@ -4,9 +4,6 @@ export {
   type ClientUnknown,
   type UIElement,
   type Prop,
-  type Spliceable,
-  type Spliced,
-  type Virtualized,
   cs,
 } from "@backtickjs/cs-runtime";
 export { bundle } from "@backtickjs/jit-bundler";

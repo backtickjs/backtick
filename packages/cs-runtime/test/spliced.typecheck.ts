@@ -1,5 +1,5 @@
 // Type-level assertions for `Spliced` and the `ClientObject` reflection marker.
-// Never executed — typechecked by `tsc -b` alongside the virtual snapshots.
+// Never executed — typechecked by `tsc -b`.
 import type {
   Client,
   ClientObject,
@@ -7,7 +7,7 @@ import type {
   Spliceable,
   Spliced,
   Virtualized,
-} from "@backtickjs/core";
+} from "@backtickjs/cs-runtime";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare function virtualize<T extends ClientUnknown>(value: T): Virtualized<T>;
