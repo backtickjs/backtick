@@ -19,6 +19,7 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
+    "test": "node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {

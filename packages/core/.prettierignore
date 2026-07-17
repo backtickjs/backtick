@@ -1,3 +1,2 @@
 dist/
 .cache/
-test/fixtures/**/*.virtual.tsx

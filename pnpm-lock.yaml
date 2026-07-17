@@ -105,12 +105,6 @@ importers:
         specifier: workspace:*
         version: link:../cs-runtime
     devDependencies:
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../compiler
-      '@backtickjs/prettier-plugin':
-        specifier: workspace:*
-        version: link:../prettier-plugin
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -120,6 +114,24 @@ importers:
 
   packages/cs-runtime:
     devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/e2e:
+    devDependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@backtickjs/prettier-plugin':
+        specifier: workspace:*
+        version: link:../prettier-plugin
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

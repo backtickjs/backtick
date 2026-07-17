@@ -46,14 +46,7 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/compiler": "workspace:*",
-    "@backtickjs/prettier-plugin": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
-  },
-  "prettier": {
-    "plugins": [
-      "@backtickjs/prettier-plugin"
-    ]
   }
 }

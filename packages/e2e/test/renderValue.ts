@@ -1,4 +1,4 @@
-import { renderMarkup, TestElement } from "../dist/test-client/index.js";
+import { renderMarkup, TestElement } from "@backtickjs/core/test-client";
 
 // Renders a runtime value produced by the test-client into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,

@@ -1,0 +1,27 @@
+{
+  "extends": "../../configs/tsconfig.test.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/core"
+  },
+  "include": [
+    "test/**/*.mts",
+    "test/**/*.mjs",
+    "test/**/*.ts",
+    "test/**/*.runtime.tsx",
+    "test/**/*.virtual.tsx"
+  ],
+  "exclude": [
+    "test/fixtures/valid/*.ts",
+    "test/fixtures/compile-error/*.ts",
+    "test/fixtures/bundle-error/*.ts",
+    // Fixtures pinning deliberate type errors, which the typecheck suite
+    // snapshots; the build skips their sources and virtual code.
+    "test/fixtures/typecheck-error/*.ts",
+    "test/fixtures/typecheck-error/*.virtual.tsx"
+  ],
+  "references": [
+    { "path": "../compiler/tsconfig.build.json" },
+    { "path": "../core/tsconfig.build.json" }
+  ]
+}

@@ -9,9 +9,9 @@ import {
 import { basename, extname, join } from "node:path";
 import { describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
-import type { Client, ClientUnknown } from "@backtickjs/cs-runtime";
-import { bundle } from "../dist/jit-bundler/index.js";
-import { evaluate } from "../dist/test-client/index.js";
+import type { Client, ClientUnknown } from "@backtickjs/core";
+import { bundle } from "@backtickjs/core/jit-bundler";
+import { evaluate } from "@backtickjs/core/test-client";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderValue } from "./renderValue.ts";
@@ -30,7 +30,7 @@ import { transpileFixture } from "./transpileFixture.ts";
 // with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
 //
 // The emitted modules land in a cache directory inside the package so their
-// `@backtickjs/core` imports resolve through node's package self-reference.
+// `@backtickjs/core` imports resolve through this package's node_modules.
 const fixturesRoot = join(import.meta.dirname, "fixtures");
 const bundleErrorDir = join(fixturesRoot, "bundle-error");
 const cacheDir = join(import.meta.dirname, "../.cache/jit-bundler");
