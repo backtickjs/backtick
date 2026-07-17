@@ -1,8 +1,8 @@
-import type { ClientUIElement, Prop } from "@backtickjs/cs-runtime";
-import { create } from "@backtickjs/cs-runtime/ClientUIElement";
+import type { ClientElement, Prop } from "@backtickjs/cs-runtime";
+import { _jsx } from "@backtickjs/cs-runtime";
 
 export declare namespace JSX {
-  export type Element = ClientUIElement;
+  export type Element = ClientElement;
   export interface IntrinsicElements {
     flexbox: {
       direction?: Prop<"row" | "column">;
@@ -21,8 +21,8 @@ export function jsx(
   type: string,
   props: { [key: string]: unknown },
   key?: string | number,
-): ClientUIElement {
-  return create(type, props, key);
+): ClientElement {
+  return _jsx(type, props, key);
 }
 
 export const jsxs = jsx;

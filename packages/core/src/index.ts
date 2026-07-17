@@ -2,7 +2,6 @@ export {
   type Client,
   type ClientObject,
   type ClientUnknown,
-  type UIElement,
   type Prop,
   cs,
 } from "@backtickjs/cs-runtime";

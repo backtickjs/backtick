@@ -1,10 +1,10 @@
-import { type ClientUIElement, isSpliceable } from "@backtickjs/cs-runtime";
+import { type ClientElement, isSpliceable } from "@backtickjs/cs-runtime";
 import type { Ast, AstElement } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
-const nodeByElement = new WeakMap<ClientUIElement, AstElement>();
+const nodeByElement = new WeakMap<ClientElement, AstElement>();
 
-export function lowerClientUIElement(value: ClientUIElement): AstElement {
+export function lowerClientElement(value: ClientElement): AstElement {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;

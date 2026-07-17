@@ -1,7 +1,7 @@
 import {
   isClientObject,
   isClientScript,
-  isClientUIElement,
+  isClientElement,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
 import type { Ast } from "./Ast.js";
@@ -9,7 +9,7 @@ import { expandClientConstructor } from "./expandClientConstructor.js";
 import { holeName } from "./holes.js";
 import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
-import { lowerClientUIElement } from "./lowerClientUIElement.js";
+import { lowerClientElement } from "./lowerClientElement.js";
 
 export function lowerSpliceable(value: Spliceable): Ast {
   // A hole sentinel a constructor stored somewhere in its result: the
@@ -22,8 +22,8 @@ export function lowerSpliceable(value: Spliceable): Ast {
   if (isClientScript(value)) {
     return lowerClientScript(value);
   }
-  if (isClientUIElement(value)) {
-    return lowerClientUIElement(value);
+  if (isClientElement(value)) {
+    return lowerClientElement(value);
   }
   if (isClientObject(value)) {
     return lowerClientObject(value);

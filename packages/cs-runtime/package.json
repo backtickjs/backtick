@@ -8,10 +8,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./ClientUIElement": {
-      "types": "./dist/ClientUIElement.d.ts",
-      "default": "./dist/ClientUIElement.js"
     }
   },
   "scripts": {

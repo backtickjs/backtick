@@ -2,11 +2,12 @@ import type { Client } from "./Client.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
 import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
-import { isClientUIElement } from "./ClientUIElement.js";
+import { type ClientElement, isClientElement } from "./ClientElement.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 
 export type Spliceable =
   | Client<ClientUnknown>
+  | ClientElement
   | ClientConstructor
   | ClientObject
   | null
@@ -18,6 +19,7 @@ export type Spliceable =
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
+//   ClientElement             -> JSX.Element
 //   ClientConstructor         -> typeof C, the spliced class C itself
 //   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]
@@ -26,15 +28,17 @@ export type Spliceable =
 export type Spliced<T> =
   T extends Client<infer U>
     ? U
-    : T extends ClientConstructor
+    : T extends ClientElement
       ? T
-      : T extends ClientObject
+      : T extends ClientConstructor
         ? T
-        : T extends (infer Item)[]
-          ? Spliced<Item>[]
-          : T extends object
-            ? { [K in keyof T]: Spliced<T[K]> }
-            : T;
+        : T extends ClientObject
+          ? T
+          : T extends (infer Item)[]
+            ? Spliced<Item>[]
+            : T extends object
+              ? { [K in keyof T]: Spliced<T[K]> }
+              : T;
 
 export function isSpliceable(value: unknown): value is Spliceable {
   if (value === undefined) {
@@ -52,7 +56,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
     return false;
   }
   if (
-    isClientUIElement(value) ||
+    isClientElement(value) ||
     isClientObject(value) ||
     isClientScript(value) ||
     value === null ||
