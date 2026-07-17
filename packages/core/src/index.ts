@@ -9,7 +9,7 @@ export {
   type Virtualized,
   cs,
 } from "@backtickjs/cs-runtime";
-export { bundle } from "./jit-bundler/index.js";
+export { bundle } from "@backtickjs/jit-bundler";
 export type {
   Bundle,
   BundleApply,
@@ -39,4 +39,4 @@ export type {
   BundleTryNode,
   FunctionLabel,
   TreeLabel,
-} from "./jit-bundler/index.js";
+} from "@backtickjs/jit-bundler";

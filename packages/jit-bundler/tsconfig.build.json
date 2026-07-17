@@ -4,8 +4,5 @@
     "emitDeclarationOnly": false,
     "sourceMap": true
   },
-  "references": [
-    { "path": "../cs-runtime/tsconfig.build.json" },
-    { "path": "../jit-bundler/tsconfig.build.json" }
-  ]
+  "references": [{ "path": "../cs-runtime/tsconfig.build.json" }]
 }

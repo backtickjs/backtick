@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/cs-runtime",
+  "name": "@backtickjs/jit-bundler",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,10 +8,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./ClientUIElement": {
-      "types": "./dist/ClientUIElement.d.ts",
-      "default": "./dist/ClientUIElement.js"
     }
   },
   "scripts": {
@@ -21,6 +17,9 @@
     "format:check": "prettier --check --ignore-unknown .",
     "test": "node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtickjs/cs-runtime": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

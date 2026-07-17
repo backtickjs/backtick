@@ -104,6 +104,9 @@ importers:
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
+      '@backtickjs/jit-bundler':
+        specifier: workspace:*
+        version: link:../jit-bundler
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -132,6 +135,19 @@ importers:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../prettier-plugin
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/jit-bundler:
+    dependencies:
+      '@backtickjs/cs-runtime':
+        specifier: workspace:*
+        version: link:../cs-runtime
+    devDependencies:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
