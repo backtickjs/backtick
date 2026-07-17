@@ -1,0 +1,48 @@
+import type { ClientBoolean } from "./ClientBoolean.js";
+import type { ClientConstructor } from "./ClientConstructor.js";
+import type { ClientElement } from "./ClientElement.js";
+import type { ClientNumber } from "./ClientNumber.js";
+import type { ClientObject } from "./ClientObject.js";
+import type { ClientString } from "./ClientString.js";
+import type { ClientUnknown } from "./ClientUnknown.js";
+import type { Spliceable, Spliced } from "./Spliceable.js";
+
+// A primitive receiver autoboxes to its client type, so its members resolve
+// against the explicit client API.
+type Autoboxed<T> = T extends string
+  ? ClientString
+  : T extends number
+    ? ClientNumber
+    : T extends boolean
+      ? ClientBoolean
+      : never;
+
+// A `ClientObject`'s spliceable members, each read as what it splices to.
+// Kept homomorphic (`keyof T`, filtering in `as`) so properties stay linked
+// to their declarations for go-to-definition. The `@backtickjs` brand and
+// class members are dropped, mirroring `isSpliceable`'s function guard.
+type SplicedMembers<T extends ClientObject> = {
+  [K in keyof T as K extends "@backtickjs"
+    ? never
+    : T[K] extends ClientConstructor
+      ? never
+      : T[K] extends Spliceable
+        ? K
+        : never]: Spliced<T[K]>;
+};
+
+// What a member-access receiver reads as:
+//   string | number | boolean -> Autoboxed<T>, the client API
+//   ClientElement             -> {}: opaque
+//   ClientObject              -> SplicedMembers<T>
+//   anything else             -> unchanged
+export type Virtualized<T extends ClientUnknown> = T extends
+  | string
+  | number
+  | boolean
+  ? Autoboxed<T>
+  : T extends ClientElement
+    ? {}
+    : T extends ClientObject
+      ? SplicedMembers<T>
+      : T;

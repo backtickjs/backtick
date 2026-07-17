@@ -18,6 +18,6 @@ export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export { isSpliceable, type Spliceable, type Spliced } from "./Spliceable.js";
-export type { Virtualized } from "./Virtualizable.js";
+export type { Virtualized } from "./Virtualized.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
 export { create as _jsx } from "./ClientElement.js";

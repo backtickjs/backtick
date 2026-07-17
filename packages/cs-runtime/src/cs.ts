@@ -2,7 +2,7 @@ import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
-import type { Virtualized } from "./Virtualizable.js";
+import type { Virtualized } from "./Virtualized.js";
 
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(

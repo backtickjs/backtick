@@ -112,8 +112,9 @@ virtualize(true).toString() satisfies string;
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;
 
-// Member access on a free host reference is outside `Virtualizable`: a
-// script may call a host global but not reach into one.
+// Member access on a free host reference is outside `ClientUnknown`, so it
+// can't be virtualized: a script may call a host global but not reach into
+// one.
 // @ts-expect-error — `console` is a host interface, not a client value.
 virtualize(console);
 
