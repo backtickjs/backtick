@@ -1,4 +1,3 @@
-export { lowerSpliceable } from "./ast/lowerSpliceable.js";
 export type {
   Bundle,
   BundleApply,
@@ -29,7 +28,4 @@ export type {
   FunctionLabel,
   TreeLabel,
 } from "./bundle/Bundle.js";
-export { buildBundle } from "./bundle/buildBundle.js";
 export { bundle } from "./bundle.js";
-export { buildIr } from "./ir/buildIr.js";
-export type { Ir } from "./ir/Ir.js";

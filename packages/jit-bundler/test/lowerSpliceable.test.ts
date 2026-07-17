@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { lowerSpliceable } from "@backtickjs/jit-bundler";
+import { lowerSpliceable } from "../dist/ast/lowerSpliceable.js";
 
 test("a reflected instance keeps spliceable members, own or inherited", () => {
   class Base {
