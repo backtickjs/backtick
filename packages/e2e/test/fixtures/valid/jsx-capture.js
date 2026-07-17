@@ -8,29 +8,29 @@ const script = cs.create(
   [8, 43, 11, 3],
   {
     filePath: "jsx-capture.tsx",
-    fileHash: "3cdcp699j37p6",
+    fileHash: "2r64m27t17uon",
     splices: {
       $0splice0: _jsx("button", {
         onClick: cs.create(
           [10, 30, 10, 41],
           {
             filePath: "jsx-capture.tsx",
-            fileHash: "3cdcp699j37p6",
+            fileHash: "2r64m27t17uon",
             splices: {},
-            captures: ["x$3cdcp699j37p6$0"],
+            captures: ["x$2r64m27t17uon$0"],
             declarations: [],
           },
           (v) =>
             v.arrow(
               [10, 33, 10, 40],
               [],
-              v.identifier([10, 39, 10, 40], "x", "x$3cdcp699j37p6$0"),
+              v.identifier([10, 39, 10, 40], "x", "x$2r64m27t17uon$0"),
             ),
         ),
       }),
     },
     captures: [],
-    declarations: ["x$3cdcp699j37p6$0"],
+    declarations: ["x$2r64m27t17uon$0"],
   },
   (v) =>
     v.arrow(
@@ -42,7 +42,7 @@ const script = cs.create(
           v.variableDeclaration(
             [9, 3, 9, 15],
             "const",
-            v.identifier([9, 9, 9, 10], "x", "x$3cdcp699j37p6$0"),
+            v.identifier([9, 9, 9, 10], "x", "x$2r64m27t17uon$0"),
             v.number([9, 13, 9, 14], 1),
           ),
           v.return([10, 3, 10, 48], v.splice([10, 10, 10, 47], "$0splice0")),

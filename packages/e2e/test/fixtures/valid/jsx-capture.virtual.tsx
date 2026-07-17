@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import type { Client } from "@backtickjs/core";
+import type { Client, JSX } from "@backtickjs/core";
 
 // A binding declared in an enclosing script and captured by a script inside a
 // spliced tree threads through the tree's slot signature: the outer body

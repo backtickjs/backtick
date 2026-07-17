@@ -5,6 +5,7 @@ export {
   type Prop,
   cs,
 } from "@backtickjs/cs-runtime";
+export type { JSX } from "./jsx-runtime/index.js";
 export { bundle } from "@backtickjs/jit-bundler";
 export type {
   Bundle,
