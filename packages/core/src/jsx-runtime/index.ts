@@ -2,7 +2,9 @@ import type { ClientElement, Prop } from "@backtickjs/cs-runtime";
 import { _jsx } from "@backtickjs/cs-runtime";
 
 export declare namespace JSX {
-  export type Element = ClientElement;
+  // An interface, not an alias: aliases erase in displays, and this is the
+  // name hovers and errors should say — `ClientElement` stays internal.
+  export interface Element extends ClientElement {}
   export interface IntrinsicElements {
     flexbox: {
       direction?: Prop<"row" | "column">;
@@ -21,7 +23,7 @@ export function jsx(
   type: string,
   props: { [key: string]: unknown },
   key?: string | number,
-): ClientElement {
+): JSX.Element {
   return _jsx(type, props, key);
 }
 

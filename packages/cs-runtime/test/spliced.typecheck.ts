@@ -2,6 +2,7 @@
 // Never executed — typechecked by `tsc -b`.
 import type {
   Client,
+  ClientElement,
   ClientObject,
   ClientUnknown,
   Spliceable,
@@ -126,3 +127,17 @@ virtualize(spliced(clientNumbers)) satisfies number[];
 virtualize(spliced(clientNumbers)).length satisfies number;
 // @ts-expect-error — a raw fragment array is a host value, not a client one.
 virtualize(clientNumbers);
+
+// An element is opaque in a script: it splices in whole — the payload stays
+// `ClientElement` — and no member reflects on the client.
+declare const element: ClientElement;
+spliced(element) satisfies ClientElement;
+// @ts-expect-error — an element's structure belongs to the client runtime,
+// not the script.
+virtualize(element).type;
+// @ts-expect-error — see `type` above.
+virtualize(element).key;
+// @ts-expect-error — see `type` above.
+virtualize(element).props;
+// @ts-expect-error — the marker doesn't exist on the client.
+virtualize(element)["@backtickjs"];

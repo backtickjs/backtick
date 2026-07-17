@@ -1,5 +1,6 @@
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
+import type { ClientElement } from "./ClientElement.js";
 import type { ClientNumber } from "./ClientNumber.js";
 import type { ClientObject } from "./ClientObject.js";
 import type { ClientString } from "./ClientString.js";
@@ -16,18 +17,22 @@ export type Virtualized<T extends ClientUnknown> =
       ? ClientNumber
       : T extends boolean
         ? ClientBoolean
-        : T extends ClientObject
-          ? {
-              // Keep the constraint homomorphic (`keyof T`, filtering in `as`) so
-              // properties stay linked to their declarations for go-to-definition.
-              // A class member doesn't reflect, mirroring `isSpliceable`'s
-              // function guard.
-              [K in keyof T as K extends "@backtickjs"
-                ? never
-                : T[K] extends ClientConstructor
+        : T extends ClientElement
+          ? // An element is opaque in a script: it splices in whole, and no
+            // member reflects.
+            {}
+          : T extends ClientObject
+            ? {
+                // Keep the constraint homomorphic (`keyof T`, filtering in `as`) so
+                // properties stay linked to their declarations for go-to-definition.
+                // A class member doesn't reflect, mirroring `isSpliceable`'s
+                // function guard.
+                [K in keyof T as K extends "@backtickjs"
                   ? never
-                  : T[K] extends Spliceable
-                    ? K
-                    : never]: Spliced<T[K]>;
-            }
-          : T;
+                  : T[K] extends ClientConstructor
+                    ? never
+                    : T[K] extends Spliceable
+                      ? K
+                      : never]: Spliced<T[K]>;
+              }
+            : T;
