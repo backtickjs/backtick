@@ -63,13 +63,22 @@ function runBacktickTsc(): string {
       encoding: "utf8",
     });
   } catch (error) {
-    // tsc exits nonzero when it reports diagnostics; the output still
-    // carries them.
-    const { stdout } = error as { stdout?: string };
-    if (typeof stdout !== "string") {
-      throw error;
+    // tsc exits 2 when it reports diagnostics; the output still carries
+    // them. Any other failure — a crash exits 1 with an empty stdout —
+    // must not read as "no diagnostics" (an UPDATE_SNAPSHOTS run would
+    // silently blank every snapshot).
+    const { status, stdout, stderr } = error as {
+      status?: number;
+      stdout?: string;
+      stderr?: string;
+    };
+    if (status === 2 && typeof stdout === "string") {
+      return stdout;
     }
-    return stdout;
+    throw new Error(
+      `backtick-tsc failed (status ${status}): ${stderr || stdout}`,
+      { cause: error },
+    );
   }
 }
 
