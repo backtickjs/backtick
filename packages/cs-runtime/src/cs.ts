@@ -4,6 +4,13 @@ import type { ClientUnknown } from "./ClientUnknown.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 import type { Virtualized } from "./Virtualized.js";
 
+function condition(_condition: boolean): boolean {
+  throw new Error(
+    "Don't call `cs.condition` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 function lift<const T extends ClientUnknown>(_value: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
@@ -34,5 +41,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  { lift, splice, virtualize, create },
+  { condition, lift, splice, virtualize, create },
 );

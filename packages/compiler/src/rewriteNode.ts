@@ -13,6 +13,92 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
+  // set while rewriting a condition's bare duplicate — the unmapped copy
+  // that carries the checker's narrowing — so it gets no checks of its own
+  conditionDup?: boolean;
+}
+
+// A condition whose virtual code is boolean by construction needs no check:
+// a comparison yields boolean, `&&`/`||` check their own operands (so they
+// always yield boolean), and a boolean literal is one. `??` is absent — its
+// type is the union of its operands.
+function isBooleanByConstruction(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+): boolean {
+  while (ts.isParenthesizedExpression(node)) {
+    node = node.expression;
+  }
+  if (
+    node.kind === ts.SyntaxKind.TrueKeyword ||
+    node.kind === ts.SyntaxKind.FalseKeyword
+  ) {
+    return true;
+  }
+  if (ts.isBinaryExpression(node)) {
+    switch (ts.tokenToString(node.operatorToken.kind)) {
+      case "&&":
+      case "||":
+      case "===":
+      case "!==":
+      case "<":
+      case "<=":
+      case ">":
+      case ">=": {
+        return true;
+      }
+      default: {
+        return false;
+      }
+    }
+  }
+  return false;
+}
+
+// A tested position — an `if` condition, an operand of `&&`/`||` — must be
+// boolean: the language has no truthiness. The check can't simply wrap the
+// condition — a call around it would defeat the checker's control-flow
+// narrowing in the code the condition guards — so the position becomes
+// `(cs.condition(<condition>) && <dup>)`, the checked real copy conjoined
+// with an unmapped bare duplicate. The duplicate's conjunct carries the
+// narrowing; being unmapped, its diagnostics never resolve to source. The
+// real copy keeps its mappings, so the boolean mismatch — and every other
+// diagnostic inside the condition — reports exactly once. The duplicate
+// sits second because a first operand that is always truthy (a spliced
+// `true`, say) would draw TS2872; a trailing operand isn't flagged.
+function checkedCondition(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  source: ts.Expression,
+  virtual: ts.Expression,
+): ts.Expression {
+  // A source-positioned virtual is the unsupported-syntax fallback, already
+  // carrying its own error.
+  if (
+    state.conditionDup ||
+    isBooleanByConstruction(ts, source) ||
+    virtual.pos >= 0
+  ) {
+    return virtual;
+  }
+  const dupState: RewriteState = {
+    ...state,
+    conditionDup: true,
+    errors: new Map(),
+    mappings: new Map(),
+    codeInformation: new Map(),
+  };
+  const dup = rewriteNode(ts, dupState, source).virtual as ts.Expression;
+  if (dup.pos >= 0) {
+    return virtual;
+  }
+  return ts.factory.createParenthesizedExpression(
+    ts.factory.createBinaryExpression(
+      call(ts, "cs", "condition", [virtual]),
+      ts.SyntaxKind.AmpersandAmpersandToken,
+      dup,
+    ),
+  );
 }
 
 // The globally unique binding key the resolver assigned this identifier. Only
@@ -141,7 +227,12 @@ function rewriteNodeImpl(
       : null;
     return {
       virtual: ts.factory.createIfStatement(
-        condition.virtual as ts.Expression,
+        checkedCondition(
+          ts,
+          state,
+          node.expression,
+          condition.virtual as ts.Expression,
+        ),
         consequent.virtual as ts.Statement,
         alternate ? (alternate.virtual as ts.Statement) : undefined,
       ),
@@ -570,11 +661,17 @@ function rewriteNodeImpl(
 
     const operator = ts.tokenToString(node.operatorToken.kind);
     if (operator != null && isSupportedBinop(operator)) {
+      let virtualLeft = lhs.virtual as ts.Expression;
+      let virtualRight = rhs.virtual as ts.Expression;
+      if (operator === "&&" || operator === "||") {
+        virtualLeft = checkedCondition(ts, state, node.left, virtualLeft);
+        virtualRight = checkedCondition(ts, state, node.right, virtualRight);
+      }
       return {
         virtual: ts.factory.createBinaryExpression(
-          lhs.virtual as ts.Expression,
+          virtualLeft,
           node.operatorToken.kind,
-          rhs.virtual as ts.Expression,
+          virtualRight,
         ),
         runtime: call(ts, "v", "binop", [
           loc(node),

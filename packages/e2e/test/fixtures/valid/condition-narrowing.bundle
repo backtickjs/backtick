@@ -1,0 +1,250 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [
+        "undefined"
+      ],
+      "body": {
+        "missing": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "#": "identifier",
+                "name": "undefined"
+              }
+            ]
+          },
+          "args": [
+            {
+              "#": "identifier",
+              "name": "undefined"
+            },
+            true
+          ]
+        },
+        "loud": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "#": "identifier",
+                "name": "undefined"
+              }
+            ]
+          },
+          "args": [
+            "!hi",
+            true
+          ]
+        },
+        "quiet": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "#": "identifier",
+                "name": "undefined"
+              }
+            ]
+          },
+          "args": [
+            "!hi",
+            false
+          ]
+        },
+        "plain": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": [
+              {
+                "#": "identifier",
+                "name": "undefined"
+              }
+            ]
+          },
+          "args": [
+            "zz",
+            false
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "undefined"
+      ],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "text",
+          "upper"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "if",
+              "condition": {
+                "#": "binop",
+                "operator": "&&",
+                "left": {
+                  "#": "identifier",
+                  "name": "upper"
+                },
+                "right": {
+                  "#": "binop",
+                  "operator": "!==",
+                  "left": {
+                    "#": "identifier",
+                    "name": "text"
+                  },
+                  "right": {
+                    "#": "identifier",
+                    "name": "undefined"
+                  }
+                }
+              },
+              "consequent": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "return",
+                    "expression": {
+                      "#": "call",
+                      "callee": {
+                        "#": "property",
+                        "object": {
+                          "#": "identifier",
+                          "name": "text"
+                        },
+                        "name": "toUpperCase"
+                      },
+                      "args": []
+                    }
+                  }
+                ]
+              },
+              "alternate": null
+            },
+            {
+              "#": "if",
+              "condition": {
+                "#": "binop",
+                "operator": "&&",
+                "left": {
+                  "#": "binop",
+                  "operator": "&&",
+                  "left": {
+                    "#": "call",
+                    "callee": {
+                      "#": "entry",
+                      "label": "#f2"
+                    },
+                    "args": []
+                  },
+                  "right": {
+                    "#": "binop",
+                    "operator": "!==",
+                    "left": {
+                      "#": "identifier",
+                      "name": "text"
+                    },
+                    "right": {
+                      "#": "identifier",
+                      "name": "undefined"
+                    }
+                  }
+                },
+                "right": {
+                  "#": "binop",
+                  "operator": "===",
+                  "left": {
+                    "#": "call",
+                    "callee": {
+                      "#": "property",
+                      "object": {
+                        "#": "identifier",
+                        "name": "text"
+                      },
+                      "name": "charAt"
+                    },
+                    "args": [
+                      0
+                    ]
+                  },
+                  "right": "!"
+                }
+              },
+              "consequent": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "return",
+                    "expression": {
+                      "#": "call",
+                      "callee": {
+                        "#": "property",
+                        "object": {
+                          "#": "identifier",
+                          "name": "text"
+                        },
+                        "name": "concat"
+                      },
+                      "args": [
+                        "?"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "alternate": null
+            },
+            {
+              "#": "return",
+              "expression": "none"
+            }
+          ]
+        }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [],
+      "body": true
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": [
+      {
+        "#": "global",
+        "name": "undefined"
+      }
+    ]
+  }
+}

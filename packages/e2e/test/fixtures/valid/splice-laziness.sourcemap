@@ -2,9 +2,9 @@ cs.lift(                                    → cs`
 (                                           → (
 __cs_flag                                   → flag
 : boolean) => {\n                           → : boolean) => {\n    
-if (                                        → if (
+if ((cs.condition(                          → if (
 __cs_flag                                   → flag
-)                                           → ) 
+) && __cs_flag))                            → ) 
 {\n                                         → {\n      
 return                                      → return 
 cs.splice(                                  → 

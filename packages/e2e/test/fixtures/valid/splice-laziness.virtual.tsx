@@ -9,7 +9,7 @@ import { cs, type Client } from "@backtickjs/core";
 // even tested.
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.lift((__cs_flag: boolean) => {
-    if (__cs_flag) {
+    if ((cs.condition(__cs_flag) && __cs_flag)) {
         return cs.splice((fragment));
     }
     return "skipped";

@@ -1,0 +1,18 @@
+cs.lift(              → cs`
+(                     → (
+__cs_name             → name
+: string) => {\n      → : string) => {\n  
+if ((cs.condition(    → if (
+__cs_name             → name
+) && __cs_name))      → ) 
+{\n                   → {\n    
+return                → return 
+__cs_name             → name
+;                     → ;
+\n    }               → \n  }
+\n                    → \n  
+return                → return 
+"anonymous"           → "anonymous"
+;                     → ;
+\n}                   → \n}
+)                     → `

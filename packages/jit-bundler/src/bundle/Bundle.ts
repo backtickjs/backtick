@@ -177,8 +177,12 @@ export interface BundlePropertyNode {
 }
 
 // The closed set of binary operators, part of the wire contract: a client
-// implements exactly these, with JavaScript semantics (`&&`/`||`/`??`
-// short-circuit). The compiler rejects any other operator in a script.
+// implements exactly these, with JavaScript semantics. The language has no
+// truthiness: the typechecker requires both operands of `&&`/`||` to be
+// boolean, so they always yield a boolean and a client tests the left
+// operand directly — short-circuiting (skipping the right operand's
+// effects) without ToBoolean rules. `??` short-circuits on null/undefined.
+// The compiler rejects any other operator in a script.
 export type BundleBinaryOperator =
   | "&&"
   | "||"
@@ -236,7 +240,9 @@ export interface BundleAssignmentNode {
   expression: BundleExpressionNode;
 }
 
-// An if statement; `alternate` is null when there is no else branch.
+// An if statement; `alternate` is null when there is no else branch. The
+// condition is boolean — the typechecker rejects a non-boolean condition,
+// so a client tests it directly, without truthiness rules.
 export interface BundleIfNode {
   "#": "if";
   condition: BundleExpressionNode;
