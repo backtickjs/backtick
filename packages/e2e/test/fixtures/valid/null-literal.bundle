@@ -1,0 +1,89 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "missing": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            null
+          ]
+        },
+        "present": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            "hi"
+          ]
+        },
+        "bare": null
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "value"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "if",
+              "condition": {
+                "#": "binop",
+                "operator": "===",
+                "left": {
+                  "#": "identifier",
+                  "name": "value"
+                },
+                "right": null
+              },
+              "consequent": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "return",
+                    "expression": "-"
+                  }
+                ]
+              },
+              "alternate": null
+            },
+            {
+              "#": "return",
+              "expression": {
+                "#": "identifier",
+                "name": "value"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

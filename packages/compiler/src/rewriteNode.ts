@@ -694,6 +694,13 @@ function rewriteNodeImpl(
     return unsupported();
   }
 
+  if (node.kind === ts.SyntaxKind.NullKeyword) {
+    return {
+      virtual: ts.factory.createNull(),
+      runtime: call(ts, "v", "null", [loc(node)]),
+    };
+  }
+
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),

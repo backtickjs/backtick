@@ -1,0 +1,10 @@
+#f0 = () => { "missing": #f1()(null), "present": #f1()("hi"), "bare": null }
+
+#f1 = () => (value) => {
+  if (value === null) {
+    return "-";
+  }
+  return value;
+}
+
+root = #f0()
