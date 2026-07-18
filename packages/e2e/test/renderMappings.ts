@@ -16,6 +16,20 @@ function scriptRanges(
   ]);
 }
 
+// A mapping's non-default editor behavior, rendered as `[-flag …]`: `-` is
+// the flag off, `+` on. A `cs.splice(...)` wrapper hides hover
+// (`[-semantic]`); a condition's bare duplicate turns every feature off.
+// Rows without data carry the defaults (everything on) and render bare.
+function renderData(data: SourceMapping["data"]): string {
+  if (!data) {
+    return "";
+  }
+  const flags = Object.entries(data)
+    .map(([flag, value]) => `${value ? "+" : "-"}${flag}`)
+    .join(" ");
+  return ` [${flags}]`;
+}
+
 // Render each source-map entry as `<generated>  → <source>`, escaping newlines
 // so a mapping stays on a single line and aligning the arrows into a column.
 // Identity mappings for the code surrounding the `cs` scripts are dropped.
@@ -38,7 +52,7 @@ export function renderMappings(
     ranges.some(([start, end]) => offset >= start && offset < end);
 
   const rows: Array<
-    [generatedOffset: number, generated: string, source: string]
+    [generatedOffset: number, generated: string, source: string, data: string]
   > = [];
   for (const mapping of mappings) {
     for (let i = 0; i < mapping.generatedOffsets.length; i++) {
@@ -54,14 +68,27 @@ export function renderMappings(
         mapping.sourceOffsets[i],
         mapping.sourceOffsets[i] + mapping.lengths[i],
       );
-      rows.push([generatedOffset, escapeText(generated), escapeText(source)]);
+      rows.push([
+        generatedOffset,
+        escapeText(generated),
+        escapeText(source),
+        renderData(mapping.data),
+      ]);
     }
   }
   rows.sort((a, b) => a[0] - b[0]);
 
+  // Align the arrows, but let a rare long row overflow the column rather
+  // than pushing every arrow far right.
   const width =
-    Math.max(0, ...rows.map(([, generated]) => generated.length)) + 2;
+    Math.min(
+      40,
+      Math.max(0, ...rows.map(([, generated]) => generated.length)),
+    ) + 2;
   return `${rows
-    .map(([, generated, source]) => `${generated.padEnd(width)}→ ${source}`)
+    .map(
+      ([, generated, source, data]) =>
+        `${generated.padEnd(width)}→ ${source}${data}`,
+    )
     .join("\n")}\n`;
 }

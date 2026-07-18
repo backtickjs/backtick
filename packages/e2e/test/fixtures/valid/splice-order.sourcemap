@@ -2,14 +2,14 @@ cs.lift(    → cs`
 {           → ({ 
 a           → a
 :           → : 
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (count)     → $count
-)           → 
+)           →  [-semantic]
 ,           → , 
 b           → b
 :           → : 
-cs.splice(  → ${
+cs.splice(  → ${ [-semantic]
 ++count     → ++count
-)           → }
+)           → } [-semantic]
  }          →  })
 )           → `

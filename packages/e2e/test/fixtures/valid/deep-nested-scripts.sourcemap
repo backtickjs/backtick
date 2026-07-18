@@ -1,14 +1,14 @@
 cs.lift(    → cs`
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (lhs)       → $lhs
-)           → 
+)           →  [-semantic]
  +          →  + 
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (rhs)       → $rhs
-)           → 
+)           →  [-semantic]
 )           → `
 cs.lift(    → cs`
-cs.splice(  → ${
+cs.splice(  → ${ [-semantic]
 add(        → add(
 cs.lift(    → cs`
 1           → 1
@@ -18,5 +18,5 @@ cs.lift(    → cs`
 2           → 2
 )           → `
 )           → )
-)           → }
+)           → } [-semantic]
 )           → `

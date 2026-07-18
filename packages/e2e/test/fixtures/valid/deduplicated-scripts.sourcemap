@@ -5,14 +5,14 @@ cs.lift(    → cs`
 {           → ({ 
 a           → a
 :           → : 
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (leaf)      → $leaf
-)           → 
+)           →  [-semantic]
 ,           → , 
 b           → b
 :           → : 
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (leaf)      → $leaf
-)           → 
+)           →  [-semantic]
  }          →  })
 )           → `

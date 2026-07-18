@@ -5,7 +5,7 @@ __cs_name             → name
 if ((cs.condition(    → if (
 __cs_name             → name
 ) &&                  → 
-__cs_name             → name
+__cs_name             → name [-semantic -completion -navigation -verification]
 ))                    → ) 
 {\n                   → {\n    
 return                → return 

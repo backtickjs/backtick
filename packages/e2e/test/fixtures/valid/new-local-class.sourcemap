@@ -2,9 +2,9 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_C                  → C
  =                      →  = 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (Point)                 → $Point
-)                       → 
+)                       →  [-semantic]
 ;                       → ;
 \n                      → \n  
 const                   → const 

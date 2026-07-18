@@ -1,26 +1,26 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic]
 this.x                  → this.x
-)                       → }
+)                       → } [-semantic]
  +                      →  + 
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic]
 this.y                  → this.y
-)                       → }
+)                       → } [-semantic]
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_s                  → s
  =                      →  = 
 new (                   → new 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (Segment)               → $Segment
-)                       → 
+)                       →  [-semantic]
 )(cs.lift(              → (
 new (                   → new 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (Point)                 → $Point
-)                       → 
+)                       →  [-semantic]
 )(cs.lift(              → (
 1                       → 1
 ), cs.lift(             → , 
@@ -28,9 +28,9 @@ cs.splice(              →
 ))                      → )
 ), cs.lift(             → , 
 new (                   → new 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (Point)                 → $Point
-)                       → 
+)                       →  [-semantic]
 )(cs.lift(              → (
 1                       → 1
 ), cs.lift(             → , 

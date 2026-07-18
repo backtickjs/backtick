@@ -11,7 +11,7 @@ if (                    → if (
 (cs.condition(          → 
 __cs_upper              → upper
 ) &&                    → 
-__cs_upper              → upper
+__cs_upper              → upper [-semantic -completion -navigation -verification]
 ) &&                    →  && 
 __cs_text               → text
  !==                    →  !== 
@@ -30,13 +30,13 @@ toUpperCase             → toUpperCase
 \n                      → \n  
 if (                    → if (
 (cs.condition(          → 
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic]
 flags.strict            → flags.strict
-)                       → }
+)                       → } [-semantic]
 ) &&                    → 
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic -completion -navigation -verification]
 flags.strict            → flags.strict
-)                       → }
+)                       → } [-semantic -completion -navigation -verification]
 ) &&                    →  && 
 __cs_text               → text
  !==                    →  !== 
@@ -75,9 +75,9 @@ cs.lift(                → cs`
 {                       → ({\n  
 missing                 → missing
 :                       → : 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (label)                 → $label
-)                       → 
+)                       →  [-semantic]
 (                       → (
 undefined               → undefined
 ,                       → , 
@@ -86,9 +86,9 @@ true                    → true
 ,                       → ,\n  
 loud                    → loud
 :                       → : 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (label)                 → $label
-)                       → 
+)                       →  [-semantic]
 (                       → (
 "!hi"                   → "!hi"
 ,                       → , 
@@ -97,9 +97,9 @@ true                    → true
 ,                       → ,\n  
 quiet                   → quiet
 :                       → : 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (label)                 → $label
-)                       → 
+)                       →  [-semantic]
 (                       → (
 "!hi"                   → "!hi"
 ,                       → , 
@@ -108,9 +108,9 @@ false                   → false
 ,                       → ,\n  
 plain                   → plain
 :                       → : 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (label)                 → $label
-)                       → 
+)                       →  [-semantic]
 (                       → (
 "zz"                    → "zz"
 ,                       → , 

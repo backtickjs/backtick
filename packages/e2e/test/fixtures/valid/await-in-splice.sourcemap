@@ -1,7 +1,7 @@
 cs.lift(               → cs`
-cs.splice(             → ${
+cs.splice(             → ${ [-semantic]
 await fetchGreeting()  → await fetchGreeting()
-)                      → }
+)                      → } [-semantic]
  +                     →  + 
 "!"                    → "!"
 )                      → `

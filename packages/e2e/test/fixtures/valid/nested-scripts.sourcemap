@@ -6,10 +6,10 @@ __cs_x                  → x
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic]
 cs.lift(                → cs`
 __cs_x                  → x
 )                       → `
-)                       → }
+)                       → } [-semantic]
 ;                       → ;
 \n})())                 → \n}`

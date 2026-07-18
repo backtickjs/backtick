@@ -1,17 +1,17 @@
 cs.lift(    → cs`
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (lhs)       → $lhs
-)           → 
+)           →  [-semantic]
  +          →  + 
-cs.splice(  → 
+cs.splice(  →  [-semantic]
 (rhs)       → $rhs
-)           → 
+)           →  [-semantic]
 )           → `
 cs.lift(    → cs`
 {           → ({\n  
 x           → x
 :           → : 
-cs.splice(  → ${
+cs.splice(  → ${ [-semantic]
 add(        → add(
 cs.lift(    → cs`
 1           → 1
@@ -21,11 +21,11 @@ cs.lift(    → cs`
 2           → 2
 )           → `
 )           → )
-)           → }
+)           → } [-semantic]
 ,           → ,\n  
 y           → y
 :           → : 
-cs.splice(  → ${
+cs.splice(  → ${ [-semantic]
 add(        → add(
 cs.lift(    → cs`
 3           → 3
@@ -35,6 +35,6 @@ cs.lift(    → cs`
 4           → 4
 )           → `
 )           → )
-)           → }
+)           → } [-semantic]
  }          → ,\n})
 )           → `

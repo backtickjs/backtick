@@ -19,15 +19,15 @@ __cs_keep                    → keep
 (cs.condition(               → 
 __cs_a                       → a
 ) &&                         → 
-__cs_a                       → a
+__cs_a                       → a [-semantic -completion -navigation -verification]
 ) && (cs.condition(          →  && 
 __cs_b                       → b
 ) &&                         → 
-__cs_b                       → b
+__cs_b                       → b [-semantic -completion -navigation -verification]
 )                            → 
 )                            → )
 ) &&                         → 
-__cs_keep(__cs_a && __cs_b)  → keep(a && b)
+__cs_keep(__cs_a && __cs_b)  → keep(a && b) [-semantic -completion -navigation -verification]
 ))                           → ) 
 {\n                          → {\n    
 return                       → return 
@@ -44,9 +44,9 @@ cs.lift(                     → cs`
 {                            → ({\n  
 both                         → both
 :                            → : 
-cs.splice(                   → 
+cs.splice(                   →  [-semantic]
 (gate)                       → $gate
-)                            → 
+)                            →  [-semantic]
 (                            → (
 true                         → true
 ,                            → , 
@@ -55,9 +55,9 @@ true                         → true
 ,                            → ,\n  
 one                          → one
 :                            → : 
-cs.splice(                   → 
+cs.splice(                   →  [-semantic]
 (gate)                       → $gate
-)                            → 
+)                            →  [-semantic]
 (                            → (
 true                         → true
 ,                            → , 

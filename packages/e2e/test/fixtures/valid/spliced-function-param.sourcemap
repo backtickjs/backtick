@@ -14,12 +14,12 @@ __cs_f                  → f
 return                  → return 
 __cs_apply              → apply
 (                       → (
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic]
 cs.lift(                → cs`
 () =>                   → () => 
 2                       → 2
 )                       → `
-)                       → }
+)                       → } [-semantic]
 )                       → )
 ;                       → ;
 \n})())                 → \n}`

@@ -1,7 +1,7 @@
 cs.lift(                → cs`
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (lhs)                   → $lhs
-)                       → 
+)                       →  [-semantic]
  +                      →  + 
 2                       → 2
 )                       → `
@@ -13,12 +13,12 @@ __cs_foo$               → foo$
 ;                       → ;
 \n                      → \n  
 return                  → return 
-cs.splice(              → ${
+cs.splice(              → ${ [-semantic]
 add(                    → add(
 cs.lift(                → cs`
 __cs_foo$               → foo$
 )                       → `
 )                       → )
-)                       → }
+)                       → } [-semantic]
 ;                       → ;
 \n})())                 → \n}`

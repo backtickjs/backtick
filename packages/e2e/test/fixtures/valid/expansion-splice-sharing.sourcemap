@@ -1,21 +1,21 @@
 cs.lift(                → cs`
 () =>                   → () => 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (a)                     → $a
-)                       → 
+)                       →  [-semantic]
  +                      →  + 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (b)                     → $b
-)                       → 
+)                       →  [-semantic]
 )                       → `
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_p                  → p
  =                      →  = 
 new (                   → new 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (Point)                 → $Point
-)                       → 
+)                       →  [-semantic]
 )(cs.lift(              → (
 1                       → 1
 ), cs.lift(             → , 
@@ -27,9 +27,9 @@ const                   → const
 __cs_s                  → s
  =                      →  = 
 new (                   → new 
-cs.splice(              → 
+cs.splice(              →  [-semantic]
 (Size)                  → $Size
-)                       → 
+)                       →  [-semantic]
 )(cs.lift(              → (
 3                       → 3
 ), cs.lift(             → , 
