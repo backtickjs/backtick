@@ -13,15 +13,14 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
-  // set while rewriting a condition's bare duplicate — the suppressed copy
-  // that carries the checker's narrowing — so it gets no checks of its own
+  // set while rewriting a condition's bare duplicate, so the duplicate
+  // gets no checks of its own
   conditionDup?: boolean;
 }
 
-// A condition whose virtual code is boolean by construction needs no check:
-// a comparison yields boolean, `&&`/`||` check their own operands (so they
-// always yield boolean), and a boolean literal is one. `??` is absent — its
-// type is the union of its operands.
+// Boolean by construction, so no check needed: a comparison yields boolean,
+// `&&`/`||` check their own operands, and a boolean literal is one. `??` is
+// absent — its type is the union of its operands.
 function isBooleanByConstruction(
   ts: typeof import("typescript"),
   node: ts.Node,
@@ -56,20 +55,12 @@ function isBooleanByConstruction(
 }
 
 // A tested position — an `if` condition, an operand of `&&`/`||` — must be
-// boolean: the language has no truthiness. The check can't simply wrap the
-// condition — a call around it would defeat the checker's control-flow
-// narrowing in the code the condition guards — so the position becomes
-// `(cs.condition(<condition>) && <dup>)`, the checked real copy conjoined
-// with a bare duplicate. The duplicate's conjunct carries the narrowing;
-// its one mapping spans the whole copy with every feature off, so its
-// diagnostics are dropped rather than attributed to the enclosing frame's
-// leftover source (text without a frame of its own falls to the enclosing
-// mapped node, which would pin the duplicate's errors on the source after
-// the condition). The real copy keeps its mappings, so the boolean
-// mismatch — and every other diagnostic inside the condition — reports
-// exactly once. The duplicate sits second because a first operand that is
-// always truthy (a spliced `true`, say) would draw TS2872; a trailing
-// operand isn't flagged.
+// boolean: the language has no truthiness. Wrapping the condition in the
+// check would defeat the checker's narrowing in the code it guards, so the
+// position becomes `(cs.condition(<condition>) && <dup>)`: the checked real
+// copy, then a bare duplicate whose conjunct carries the narrowing. The
+// duplicate sits second because a leading always-truthy operand (a spliced
+// `true`, say) would draw TS2872; a trailing operand isn't flagged.
 function checkedCondition(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -96,6 +87,10 @@ function checkedCondition(
   if (dup.pos >= 0) {
     return virtual;
   }
+  // The duplicate's shield: unmapped text is attributed to the enclosing
+  // frame's leftover source — the duplicate's diagnostics would pin just
+  // after the condition — so one all-off mapping claims the whole copy and
+  // drops them; the real copy's own mappings report each diagnostic once.
   state.mappings.set(dup, source);
   state.codeInformation.set(dup, {
     semantic: false,
