@@ -1,0 +1,9 @@
+#f0 = () => {
+  const count = 1;
+  if (count === 1) {
+    return "one";
+  }
+  return "many";
+}
+
+root = #f0()

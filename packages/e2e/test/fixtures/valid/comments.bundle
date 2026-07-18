@@ -1,0 +1,51 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "count",
+            "expression": 1
+          },
+          {
+            "#": "if",
+            "condition": {
+              "#": "binop",
+              "operator": "===",
+              "left": {
+                "#": "identifier",
+                "name": "count"
+              },
+              "right": 1
+            },
+            "consequent": {
+              "#": "block",
+              "statements": [
+                {
+                  "#": "return",
+                  "expression": "one"
+                }
+              ]
+            },
+            "alternate": null
+          },
+          {
+            "#": "return",
+            "expression": "many"
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}
