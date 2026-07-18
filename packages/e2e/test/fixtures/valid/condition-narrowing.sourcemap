@@ -10,7 +10,9 @@ __cs_upper              → upper
 if (                    → if (
 (cs.condition(          → 
 __cs_upper              → upper
-) && __cs_upper) &&     →  && 
+) &&                    → 
+__cs_upper              → upper
+) &&                    →  && 
 __cs_text               → text
  !==                    →  !== 
 undefined               → undefined
@@ -31,9 +33,11 @@ if (                    → if (
 cs.splice(              → ${
 flags.strict            → flags.strict
 )                       → }
-) && cs.splice(         → 
+) &&                    → 
+cs.splice(              → ${
 flags.strict            → flags.strict
-)) &&                   →  && 
+)                       → }
+) &&                    →  && 
 __cs_text               → text
  !==                    →  !== 
 undefined               → undefined

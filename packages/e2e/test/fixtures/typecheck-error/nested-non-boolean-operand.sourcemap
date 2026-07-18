@@ -1,0 +1,39 @@
+cs.lift(                                 → cs`
+(                                        → (
+__cs_count                               → count
+: number) => {\n                         → : number) => {\n  
+const                                    → const 
+__cs_keep                                → keep
+ =                                       →  = 
+(                                        → (
+__cs_on                                  → on
+: boolean) =>                            → : boolean) => 
+__cs_on                                  → on
+;                                        → ;
+\n                                       → \n  
+if ((cs.condition(                       → if (
+__cs_keep                                → keep
+(                                        → (
+(cs.condition(                           → 
+__cs_count                               → count
+) &&                                     → 
+__cs_count                               → count
+) &&                                     →  && 
+__cs_count                               → count
+ >                                       →  > 
+0                                        → 0
+)                                        → )
+) &&                                     → 
+__cs_keep(__cs_count && __cs_count > 0)  → keep(count && count > 0)
+))                                       → ) 
+{\n                                      → {\n    
+return                                   → return 
+"kept"                                   → "kept"
+;                                        → ;
+\n    }                                  → \n  }
+\n                                       → \n  
+return                                   → return 
+"dropped"                                → "dropped"
+;                                        → ;
+\n}                                      → \n}
+)                                        → `

@@ -1,1 +1,1 @@
-22:12-22:24 error TS2348: Value of type 'typeof Point' is not callable. Did you mean to include 'new'?
+22:10 error TS2348: Value of type 'typeof Point' is not callable. Did you mean to include 'new'?

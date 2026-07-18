@@ -1,0 +1,11 @@
+#f0 = () => { "both": #f1()(true, true), "one": #f1()(true, false) }
+
+#f1 = () => (a, b) => {
+  const keep = (on) => on;
+  if (keep(a && b)) {
+    return "kept";
+  }
+  return "dropped";
+}
+
+root = #f0()

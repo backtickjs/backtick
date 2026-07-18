@@ -1,0 +1,115 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "both": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            true,
+            true
+          ]
+        },
+        "one": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            true,
+            false
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "a",
+          "b"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "declaration",
+              "keyword": "const",
+              "name": "keep",
+              "expression": {
+                "#": "arrow",
+                "params": [
+                  "on"
+                ],
+                "body": {
+                  "#": "identifier",
+                  "name": "on"
+                }
+              }
+            },
+            {
+              "#": "if",
+              "condition": {
+                "#": "call",
+                "callee": {
+                  "#": "identifier",
+                  "name": "keep"
+                },
+                "args": [
+                  {
+                    "#": "binop",
+                    "operator": "&&",
+                    "left": {
+                      "#": "identifier",
+                      "name": "a"
+                    },
+                    "right": {
+                      "#": "identifier",
+                      "name": "b"
+                    }
+                  }
+                ]
+              },
+              "consequent": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "return",
+                    "expression": "kept"
+                  }
+                ]
+              },
+              "alternate": null
+            },
+            {
+              "#": "return",
+              "expression": "dropped"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

@@ -1,0 +1,67 @@
+cs.lift(                     → cs`
+(                            → (\n  
+__cs_a                       → a
+: boolean,                   → : boolean,\n  
+__cs_b                       → b
+: boolean) => {\n            → : boolean,\n) => {\n  
+const                        → const 
+__cs_keep                    → keep
+ =                           →  = 
+(                            → (
+__cs_on                      → on
+: boolean) =>                → : boolean) => 
+__cs_on                      → on
+;                            → ;
+\n                           → \n  
+if ((cs.condition(           → if (
+__cs_keep                    → keep
+(                            → (
+(cs.condition(               → 
+__cs_a                       → a
+) &&                         → 
+__cs_a                       → a
+) && (cs.condition(          →  && 
+__cs_b                       → b
+) &&                         → 
+__cs_b                       → b
+)                            → 
+)                            → )
+) &&                         → 
+__cs_keep(__cs_a && __cs_b)  → keep(a && b)
+))                           → ) 
+{\n                          → {\n    
+return                       → return 
+"kept"                       → "kept"
+;                            → ;
+\n    }                      → \n  }
+\n                           → \n  
+return                       → return 
+"dropped"                    → "dropped"
+;                            → ;
+\n}                          → \n}
+)                            → `
+cs.lift(                     → cs`
+{                            → ({\n  
+both                         → both
+:                            → : 
+cs.splice(                   → 
+(gate)                       → $gate
+)                            → 
+(                            → (
+true                         → true
+,                            → , 
+true                         → true
+)                            → )
+,                            → ,\n  
+one                          → one
+:                            → : 
+cs.splice(                   → 
+(gate)                       → $gate
+)                            → 
+(                            → (
+true                         → true
+,                            → , 
+false                        → false
+)                            → )
+ }                           → ,\n})
+)                            → `

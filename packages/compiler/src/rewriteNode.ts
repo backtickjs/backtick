@@ -13,7 +13,7 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
-  // set while rewriting a condition's bare duplicate — the unmapped copy
+  // set while rewriting a condition's bare duplicate — the suppressed copy
   // that carries the checker's narrowing — so it gets no checks of its own
   conditionDup?: boolean;
 }
@@ -60,12 +60,16 @@ function isBooleanByConstruction(
 // condition — a call around it would defeat the checker's control-flow
 // narrowing in the code the condition guards — so the position becomes
 // `(cs.condition(<condition>) && <dup>)`, the checked real copy conjoined
-// with an unmapped bare duplicate. The duplicate's conjunct carries the
-// narrowing; being unmapped, its diagnostics never resolve to source. The
-// real copy keeps its mappings, so the boolean mismatch — and every other
-// diagnostic inside the condition — reports exactly once. The duplicate
-// sits second because a first operand that is always truthy (a spliced
-// `true`, say) would draw TS2872; a trailing operand isn't flagged.
+// with a bare duplicate. The duplicate's conjunct carries the narrowing;
+// its one mapping spans the whole copy with every feature off, so its
+// diagnostics are dropped rather than attributed to the enclosing frame's
+// leftover source (text without a frame of its own falls to the enclosing
+// mapped node, which would pin the duplicate's errors on the source after
+// the condition). The real copy keeps its mappings, so the boolean
+// mismatch — and every other diagnostic inside the condition — reports
+// exactly once. The duplicate sits second because a first operand that is
+// always truthy (a spliced `true`, say) would draw TS2872; a trailing
+// operand isn't flagged.
 function checkedCondition(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -92,6 +96,13 @@ function checkedCondition(
   if (dup.pos >= 0) {
     return virtual;
   }
+  state.mappings.set(dup, source);
+  state.codeInformation.set(dup, {
+    semantic: false,
+    completion: false,
+    navigation: false,
+    verification: false,
+  });
   return ts.factory.createParenthesizedExpression(
     ts.factory.createBinaryExpression(
       call(ts, "cs", "condition", [virtual]),

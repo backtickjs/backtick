@@ -16,6 +16,7 @@
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
+    "@backtickjs/tsc": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   },

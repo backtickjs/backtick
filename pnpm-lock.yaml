@@ -135,6 +135,9 @@ importers:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../prettier-plugin
+      '@backtickjs/tsc':
+        specifier: workspace:*
+        version: link:../language-tools/tsc
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
