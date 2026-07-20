@@ -1,8 +1,13 @@
 import { cs } from "@backtickjs/core";
 
-// A value function must return on every path — syntactically enforced for
-// arrows: a partial return's `undefined` sits in function-return position,
-// where the `ClientValue` constraint can't see it.
+// A value body must return on every path.
+const script = cs`{
+  let n = 1;
+  if (n === 2) {
+    return "some";
+  }
+}`;
+
 const arrow = cs`(b: boolean) => {
   if (b) {
     return "taken";

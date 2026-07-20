@@ -563,7 +563,7 @@ function rewriteNodeImpl(
       ) {
         state.errors.set(
           node.body,
-          "A value function must `return` on every path.",
+          "Not all code paths return a value.",
         );
         return unsupported();
       }

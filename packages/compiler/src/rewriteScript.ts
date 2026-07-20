@@ -53,15 +53,32 @@ export function rewriteScript(
     };
   }
 
-  const rewritten = rewriteNode(ts, state, scriptNode);
-
   // A block that returns or throws is a value script;
   // one that completes without returning is an action script.
-  const root = ts.isBlock(scriptNode)
-    ? ownReturn(ts, scriptNode) || terminates(ts, scriptNode)
-      ? "value"
-      : "action"
-    : "value";
+  let root: "value" | "action" = "value";
+  if (ts.isBlock(scriptNode)) {
+    const hasReturn = ownReturn(ts, scriptNode);
+    const exits = terminates(ts, scriptNode);
+    root = hasReturn || exits ? "value" : "action";
+    if (hasReturn && !exits) {
+      return {
+        virtual: sourceNode,
+        runtime: sourceNode,
+        sourceMaps: new Map(),
+        codeInformation: new Map(),
+        diagnostics: [
+          {
+            range: clientScript.toSourceRange(scriptNode),
+            message: "Not all code paths return a value.",
+            category: ts.DiagnosticCategory.Error,
+            code: 0,
+          },
+        ],
+      };
+    }
+  }
+
+  const rewritten = rewriteNode(ts, state, scriptNode);
 
   const sourceMaps: Map<ts.Node, SourceRange> = new Map();
   for (const [virtual, source] of state.mappings) {

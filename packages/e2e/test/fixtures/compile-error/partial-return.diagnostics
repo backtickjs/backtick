@@ -1,1 +1,2 @@
-6:34-10:2 error TS0: A value function must `return` on every path.
+4:19-9:2 error TS0: Not all code paths return a value.
+11:34-15:2 error TS0: Not all code paths return a value.
