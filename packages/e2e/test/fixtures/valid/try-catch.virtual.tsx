@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 
-export default cs.lift((() => {
+export default cs.value((() => {
     const __cs_message = "boom";
     try {
         throw __cs_message;

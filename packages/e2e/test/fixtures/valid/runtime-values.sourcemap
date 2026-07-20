@@ -1,4 +1,4 @@
-cs.lift(                → cs`
+cs.value(               → cs`
 {                       → ({ 
 list                    → list
 :                       → : 

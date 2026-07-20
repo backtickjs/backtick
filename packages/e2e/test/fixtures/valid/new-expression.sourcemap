@@ -1,29 +1,29 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_p                  → p
- =                      →  = 
-new (                   → new 
-cs.splice(              →  [-semantic]
-(Point)                 → $Point
-)                       →  [-semantic]
-)(cs.lift(              → (
-1                       → 1
-), cs.lift(             → , 
-2                       → 2
-))                      → )
-;                       → ;
-\n                      → \n  
-return                  → return 
-cs.virtualize(          → 
-__cs_p                  → p
-)                       → 
-.                       → .
-x                       → x
- +                      →  + 
-cs.virtualize(          → 
-__cs_p                  → p
-)                       → 
-.                       → .
-y                       → y
-;                       → ;
-\n})())                 → \n}`
+cs.value((() => {\n      → cs`{\n  
+const                    → const 
+__cs_p                   → p
+ =                       →  = 
+new (                    → new 
+cs.splice(               →  [-semantic]
+(Point)                  → $Point
+)                        →  [-semantic]
+)(cs.value(              → (
+1                        → 1
+), cs.value(             → , 
+2                        → 2
+))                       → )
+;                        → ;
+\n                       → \n  
+return                   → return 
+cs.virtualize(           → 
+__cs_p                   → p
+)                        → 
+.                        → .
+x                        → x
+ +                       →  + 
+cs.virtualize(           → 
+__cs_p                   → p
+)                        → 
+.                        → .
+y                        → y
+;                        → ;
+\n})())                  → \n}`

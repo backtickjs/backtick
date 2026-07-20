@@ -2,8 +2,10 @@ import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
+import { ownReturn } from "./ownReturn.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
+import { terminates } from "./terminates.js";
 import { mangle } from "./unmangle.js";
 
 export interface RewriteState {
@@ -514,9 +516,10 @@ function rewriteNodeImpl(
       rewriteNode(ts, state, arg),
     );
 
-    // Lift each argument so the constructor receives `Client<…>` values
+    // Lift each argument so the constructor receives `Client<…>` values;
+    // `cs.value` keeps a bare action from riding in as data.
     const liftedArgs = rewrittenArgs.map((arg) =>
-      call(ts, "cs", "lift", [arg.virtual as ts.Expression]),
+      call(ts, "cs", "value", [arg.virtual as ts.Expression]),
     );
 
     return {
@@ -551,6 +554,19 @@ function rewriteNodeImpl(
     });
 
     if (params.every((param) => param != null)) {
+      // Checked here syntactically: a partial return's `undefined` sits in
+      // return position, where the `cs.value` constraint can't see it.
+      if (
+        ts.isBlock(node.body) &&
+        ownReturn(ts, node.body) &&
+        !terminates(ts, node.body)
+      ) {
+        state.errors.set(
+          node.body,
+          "A value function must `return` on every path.",
+        );
+        return unsupported();
+      }
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);

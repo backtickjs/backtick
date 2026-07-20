@@ -7,7 +7,7 @@ import { cs } from "@backtickjs/core";
 // verification off, dropping its copy of the argument mismatch, and it
 // stays check-free — a duplicate that re-checked its operands would pin
 // the `count` mismatch a second time.
-export default cs.lift((__cs_count: number) => {
+export default cs.value((__cs_count: number) => {
     const __cs_keep = (__cs_on: boolean) => __cs_on;
     if ((cs.condition(__cs_keep((cs.condition(__cs_count) && __cs_count) && __cs_count > 0)) && __cs_keep(__cs_count && __cs_count > 0))) {
         return "kept";

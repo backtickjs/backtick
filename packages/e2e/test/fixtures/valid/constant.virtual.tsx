@@ -1,3 +1,3 @@
 import { cs } from "@backtickjs/core";
 
-export default cs.lift(1);
+export default cs.value(1);

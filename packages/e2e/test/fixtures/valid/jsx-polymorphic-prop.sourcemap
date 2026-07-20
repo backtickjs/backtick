@@ -1,4 +1,4 @@
-cs.lift(    → cs`
+cs.value(   → cs`
 () =>       → () => 
 cs.splice(  →  [-semantic]
 (n)         → $n

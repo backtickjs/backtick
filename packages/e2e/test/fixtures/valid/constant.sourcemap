@@ -1,3 +1,3 @@
-cs.lift(  → cs`
-1         → 1
-)         → `
+cs.value(  → cs`
+1          → 1
+)          → `

@@ -7,9 +7,9 @@ import { cs, type Client } from "@backtickjs/core";
 // each checked shape: a bare boolean identifier, a braced splice (whose
 // duplicate re-renders the host expression), and comparison/`&&` forms that
 // are boolean by construction and need no check.
-const flags = { strict: cs.lift(true) };
+const flags = { strict: cs.value(true) };
 
-const label: Client<(text: string | undefined, upper: boolean) => string> = cs.lift((__cs_text: string | undefined, __cs_upper: boolean) => {
+const label: Client<(text: string | undefined, upper: boolean) => string> = cs.value((__cs_text: string | undefined, __cs_upper: boolean) => {
     if ((cs.condition(__cs_upper) && __cs_upper) && __cs_text !== undefined) {
         return cs.virtualize(__cs_text).toUpperCase();
     }
@@ -19,4 +19,4 @@ const label: Client<(text: string | undefined, upper: boolean) => string> = cs.l
     return "none";
 });
 
-export default cs.lift({ missing: cs.splice((label))(undefined, true), loud: cs.splice((label))("!hi", true), quiet: cs.splice((label))("!hi", false), plain: cs.splice((label))("zz", false) });
+export default cs.value({ missing: cs.splice((label))(undefined, true), loud: cs.splice((label))("!hi", true), quiet: cs.splice((label))("!hi", false), plain: cs.splice((label))("zz", false) });

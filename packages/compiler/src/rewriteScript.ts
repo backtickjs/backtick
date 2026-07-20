@@ -5,7 +5,9 @@ import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
+import { ownReturn } from "./ownReturn.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
+import { terminates } from "./terminates.js";
 import type { SourceRange } from "./SourceRange.js";
 
 export interface RewrittenScript {
@@ -52,6 +54,14 @@ export function rewriteScript(
   }
 
   const rewritten = rewriteNode(ts, state, scriptNode);
+
+  // A block that returns or throws is a value script;
+  // one that completes without returning is an action script.
+  const root = ts.isBlock(scriptNode)
+    ? ownReturn(ts, scriptNode) || terminates(ts, scriptNode)
+      ? "value"
+      : "action"
+    : "value";
 
   const sourceMaps: Map<ts.Node, SourceRange> = new Map();
   for (const [virtual, source] of state.mappings) {
@@ -121,7 +131,7 @@ export function rewriteScript(
     false,
   );
 
-  const virtual = call(ts, "cs", "lift", [
+  const virtual = call(ts, "cs", root, [
     ts.isBlock(rewritten.virtual)
       ? iife(ts, rewritten.virtual)
       : (rewritten.virtual as ts.Expression),

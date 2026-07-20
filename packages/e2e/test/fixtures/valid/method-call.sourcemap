@@ -1,25 +1,25 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_greeting           → greeting
- =                      →  = 
-"Hello"                 → "Hello"
-;                       → ;
-\n                      → \n  
-return                  → return 
-cs.virtualize(          → 
-cs.virtualize(          → 
-__cs_greeting           → greeting
-)                       → 
-.                       → .
-concat                  → concat
-(                       → (
-", "                    → ", "
-,                       → , 
-"World"                 → "World"
-)                       → )
-)                       → 
-.                       → .
-toUpperCase             → toUpperCase
-()                      → ()
-;                       → ;
-\n})())                 → \n}`
+cs.value((() => {\n      → cs`{\n  
+const                    → const 
+__cs_greeting            → greeting
+ =                       →  = 
+"Hello"                  → "Hello"
+;                        → ;
+\n                       → \n  
+return                   → return 
+cs.virtualize(           → 
+cs.virtualize(           → 
+__cs_greeting            → greeting
+)                        → 
+.                        → .
+concat                   → concat
+(                        → (
+", "                     → ", "
+,                        → , 
+"World"                  → "World"
+)                        → )
+)                        → 
+.                        → .
+toUpperCase              → toUpperCase
+()                       → ()
+;                        → ;
+\n})())                  → \n}`

@@ -1,13 +1,13 @@
-cs.lift(        → cs`
+cs.value(       → cs`
 cs.virtualize(  → 
 cs.virtualize(  → 
 cs.splice(      → ${ [-semantic]
 new Wallet([    → new Wallet([
-cs.lift(        → cs`
+cs.value(       → cs`
 1               → 1
 )               → `
 ,               → , 
-cs.lift(        → cs`
+cs.value(       → cs`
 2               → 2
 )               → `
 ])              → ])

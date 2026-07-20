@@ -1,4 +1,4 @@
-cs.lift(            → cs`
+cs.value(           → cs`
 () => {\n           → () => {\n  
 const               → const 
 __cs_x              → x
@@ -9,7 +9,7 @@ __cs_x              → x
 return              → return 
 cs.splice(          → ${ [-semantic]
 (<button onClick={  → (<button onClick={
-cs.lift(            → cs`
+cs.value(           → cs`
 () =>               → () => 
 __cs_x              → x
 )                   → `

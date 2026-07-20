@@ -421,7 +421,8 @@ function evaluateNode(
         });
         const body = node.body;
         if (isNode(body) && body["#"] === "block") {
-          return executeStatement(bundle, body, frame).value;
+          const completion = executeStatement(bundle, body, frame);
+          return completion.returned ? completion.value : null;
         }
         // A non-block body is an expression, implicitly returned.
         return evaluateNode(bundle, body as BundleExpressionNode, frame);
