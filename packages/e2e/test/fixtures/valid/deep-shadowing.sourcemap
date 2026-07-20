@@ -1,47 +1,47 @@
-cs.value((() => {\n      → cs`{\n  
-const                    → const 
-__cs_base                → base
- =                       →  = 
-10                       → 10
-;                        → ;
-\n                       → \n  
-return                   → return 
-cs.splice(               → ${ [-semantic]
-outer(                   → outer(
-cs.value(                → cs`
-__cs_base                → base
-)                        → `
-)                        → )
-)                        → } [-semantic]
-;                        → ;
-\n})())                  → \n}`
-cs.value((() => {\n      → cs`{\n    
-const                    → const 
-__cs_base                → base
- =                       →  = 
-1                        → 1
-;                        → ;
-\n                       → \n    
-return                   → return 
-__cs_base                → base
- +                       →  + 
-cs.splice(               → ${ [-semantic]
-middle(inner)            → middle(inner)
-)                        → } [-semantic]
-;                        → ;
-\n})())                  → \n  }`
-cs.value((() => {\n      → cs`{\n    
-const                    → const 
-__cs_base                → base
- =                       →  = 
-2                        → 2
-;                        → ;
-\n                       → \n    
-return                   → return 
-__cs_base                → base
- *                       →  * 
-cs.splice(               →  [-semantic]
-(inner)                  → $inner
-)                        →  [-semantic]
-;                        → ;
-\n})())                  → \n  }`
+cs.liftValue((() => {\n      → cs`{\n  
+const                        → const 
+__cs_base                    → base
+ =                           →  = 
+10                           → 10
+;                            → ;
+\n                           → \n  
+return                       → return 
+cs.splice(                   → ${ [-semantic]
+outer(                       → outer(
+cs.liftValue(                → cs`
+__cs_base                    → base
+)                            → `
+)                            → )
+)                            → } [-semantic]
+;                            → ;
+\n})())                      → \n}`
+cs.liftValue((() => {\n      → cs`{\n    
+const                        → const 
+__cs_base                    → base
+ =                           →  = 
+1                            → 1
+;                            → ;
+\n                           → \n    
+return                       → return 
+__cs_base                    → base
+ +                           →  + 
+cs.splice(                   → ${ [-semantic]
+middle(inner)                → middle(inner)
+)                            → } [-semantic]
+;                            → ;
+\n})())                      → \n  }`
+cs.liftValue((() => {\n      → cs`{\n    
+const                        → const 
+__cs_base                    → base
+ =                           →  = 
+2                            → 2
+;                            → ;
+\n                           → \n    
+return                       → return 
+__cs_base                    → base
+ *                           →  * 
+cs.splice(                   →  [-semantic]
+(inner)                      → $inner
+)                            →  [-semantic]
+;                            → ;
+\n})())                      → \n  }`

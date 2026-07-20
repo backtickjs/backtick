@@ -13,7 +13,7 @@ class Point implements ClientObject {
   }
 
   get valid() {
-    return cs.value(() => cs.splice(this.x) + cs.splice(this.y));
+    return cs.liftValue(() => cs.splice(this.x) + cs.splice(this.y));
   }
 
   get invalid() {
@@ -21,8 +21,8 @@ class Point implements ClientObject {
   }
 }
 
-export default cs.action((() => {
-    const __cs_a = cs.splice(new Point(cs.value(1), cs.value(2)));
-    const __cs_b = cs.splice(new Point(cs.value(3), cs.value(4)));
+export default cs.liftAction((() => {
+    const __cs_a = cs.splice(new Point(cs.liftValue(1), cs.liftValue(2)));
+    const __cs_b = cs.splice(new Point(cs.liftValue(3), cs.liftValue(4)));
     cs.virtualize(__cs_a).valid();
 })());

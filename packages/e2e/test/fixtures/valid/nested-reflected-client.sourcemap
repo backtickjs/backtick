@@ -1,4 +1,4 @@
-cs.value(                         → cs`
+cs.liftValue(                     → cs`
 () =>                             → () => 
 cs.splice(                        → ${ [-semantic]
 this.x                            → this.x
@@ -8,7 +8,7 @@ cs.splice(                        → ${ [-semantic]
 this.y                            → this.y
 )                                 → } [-semantic]
 )                                 → `
-cs.value(                         → cs`
+cs.liftValue(                     → cs`
 () =>                             → () => 
 cs.splice(                        → ${ [-semantic]
 this.from.x                       → this.from.x
@@ -18,19 +18,19 @@ cs.splice(                        → ${ [-semantic]
 this.to.x                         → this.to.x
 )                                 → } [-semantic]
 )                                 → `
-cs.value(                         → cs`
+cs.liftValue(                     → cs`
 1                                 → 1
 )                                 → `
-cs.value(                         → cs`
+cs.liftValue(                     → cs`
 2                                 → 2
 )                                 → `
-cs.value(                         → cs`
+cs.liftValue(                     → cs`
 1                                 → 1
 )                                 → `
-cs.value(                         → cs`
+cs.liftValue(                     → cs`
 8                                 → 8
 )                                 → `
-cs.value((() => {\n               → cs`{\n  
+cs.liftValue((() => {\n           → cs`{\n  
 const                             → const 
 __cs_s                            → s
  =                                →  = 

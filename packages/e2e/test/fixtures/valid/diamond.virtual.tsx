@@ -4,17 +4,17 @@ import { cs } from "@backtickjs/core";
 // diamond lattice with exponentially many root-to-leaf paths. The bundler shares
 // each script rather than re-expanding it per path, so the payload has one entry
 // per level (linear) — not one per path, which would blow up as 2^depth.
-const d0 = cs.value(1);
-const d1 = cs.value((() => {
+const d0 = cs.liftValue(1);
+const d1 = cs.liftValue((() => {
     return cs.splice((d0)) + cs.splice((d0));
 })());
-const d2 = cs.value((() => {
+const d2 = cs.liftValue((() => {
     return cs.splice((d1)) + cs.splice((d1));
 })());
-const d3 = cs.value((() => {
+const d3 = cs.liftValue((() => {
     return cs.splice((d2)) + cs.splice((d2));
 })());
-const d4 = cs.value((() => {
+const d4 = cs.liftValue((() => {
     return cs.splice((d3)) + cs.splice((d3));
 })());
 

@@ -1,4 +1,4 @@
-cs.value(                                 → cs`
+cs.liftValue(                             → cs`
 (                                         → (
 __cs_flag                                 → flag
 : boolean) => {\n                         → : boolean) => {\n    
@@ -20,15 +20,15 @@ return                                    → return
 ;                                         → ;
 \n}                                       → \n  }
 )                                         → `
-cs.value(                                 → cs`
+cs.liftValue(                             → cs`
 "evaluated"                               → "evaluated"
 )                                         → `
-cs.value((() => {\n                       → cs`{\n  
+cs.liftValue((() => {\n                   → cs`{\n  
 throw                                     → throw 
 "the guarded fragment must never evaluate"→ "the guarded fragment must never evaluate"
 ;                                         → ;
 \n})())                                   → \n}`
-cs.value(                                 → cs`
+cs.liftValue(                             → cs`
 {                                         → ({\n  
 taken                                     → taken
 :                                         → : 

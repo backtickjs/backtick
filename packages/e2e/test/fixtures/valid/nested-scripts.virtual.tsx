@@ -1,6 +1,6 @@
 import { cs } from "@backtickjs/core";
 
-export default cs.value((() => {
+export default cs.liftValue((() => {
     const __cs_x = 0;
-    return cs.splice(cs.value(__cs_x));
+    return cs.splice(cs.liftValue(__cs_x));
 })());

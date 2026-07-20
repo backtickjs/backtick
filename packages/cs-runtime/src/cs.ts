@@ -5,9 +5,18 @@ import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 import type { Virtualized } from "./Virtualized.js";
 
-function condition(_condition: boolean): boolean {
+// The root of a value script — a block whose every path `return`s
+function liftValue<const T extends ClientValue>(_value: T): Client<T> {
   throw new Error(
-    "Don't call `cs.condition` directly; it's used to generate virtual " +
+    "Don't call `cs.liftValue` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
+// The root of an action — a block with no `return`
+function liftAction(_body: void): Client<void> {
+  throw new Error(
+    "Don't call `cs.liftAction` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -19,25 +28,16 @@ function splice<const T extends Spliceable>(_value: T): Spliced<T> {
   );
 }
 
+function condition(_condition: boolean): boolean {
+  throw new Error(
+    "Don't call `cs.condition` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 function virtualize<T extends ClientUnknown>(_value: T): Virtualized<T> {
   throw new Error(
     "Don't call `cs.virtualize` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
-// The root of a value script — a block whose every path `return`s
-function value<const T extends ClientValue>(_value: T): Client<T> {
-  throw new Error(
-    "Don't call `cs.value` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
-// The root of an action — a block with no `return`
-function action(_body: void): Client<void> {
-  throw new Error(
-    "Don't call `cs.action` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -51,5 +51,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  { action, condition, splice, value, virtualize, create },
+  { create, liftValue, liftAction, splice, condition, virtualize },
 );

@@ -1,14 +1,14 @@
-cs.value((() => {\n      → cs`{\n  
-try                      → try 
-{\n                      → {\n    
-throw                    → throw 
-"boom"                   → "boom"
-;                        → ;
-\n    }                  → \n  }
-\n    catch              →  catch 
-{\n                      → {\n    
-return                   → return 
-"caught"                 → "caught"
-;                        → ;
-\n    }                  → \n  }
-\n})())                  → \n}`
+cs.liftValue((() => {\n      → cs`{\n  
+try                          → try 
+{\n                          → {\n    
+throw                        → throw 
+"boom"                       → "boom"
+;                            → ;
+\n    }                      → \n  }
+\n    catch                  →  catch 
+{\n                          → {\n    
+return                       → return 
+"caught"                     → "caught"
+;                            → ;
+\n    }                      → \n  }
+\n})())                      → \n}`

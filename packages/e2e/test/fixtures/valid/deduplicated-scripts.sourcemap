@@ -1,18 +1,18 @@
-cs.value(   → cs`
-7           → 7
-)           → `
-cs.value(   → cs`
-{           → ({ 
-a           → a
-:           → : 
-cs.splice(  →  [-semantic]
-(leaf)      → $leaf
-)           →  [-semantic]
-,           → , 
-b           → b
-:           → : 
-cs.splice(  →  [-semantic]
-(leaf)      → $leaf
-)           →  [-semantic]
- }          →  })
-)           → `
+cs.liftValue(  → cs`
+7              → 7
+)              → `
+cs.liftValue(  → cs`
+{              → ({ 
+a              → a
+:              → : 
+cs.splice(     →  [-semantic]
+(leaf)         → $leaf
+)              →  [-semantic]
+,              → , 
+b              → b
+:              → : 
+cs.splice(     →  [-semantic]
+(leaf)         → $leaf
+)              →  [-semantic]
+ }             →  })
+)              → `

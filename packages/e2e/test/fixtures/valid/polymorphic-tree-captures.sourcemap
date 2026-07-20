@@ -1,9 +1,9 @@
-cs.value(      → cs`
+cs.liftValue(  → cs`
 (              → (
 __cs_base      → base
 : number) =>   → : number) => 
 cs.splice(     → ${ [-semantic]
-cs.value(      → cs`
+cs.liftValue(  → cs`
 __cs_base      → base
 )              → `
 )              → } [-semantic]
@@ -12,9 +12,9 @@ cs.splice(     →  [-semantic]
 (by)           → $by
 )              →  [-semantic]
 )              → `
-cs.value(      → cs`
+cs.liftValue(  → cs`
 1              → 1
 )              → `
-cs.value(      → cs`
+cs.liftValue(  → cs`
 2              → 2
 )              → `

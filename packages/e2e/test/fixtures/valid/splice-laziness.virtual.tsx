@@ -8,7 +8,7 @@ import { cs, type Client } from "@backtickjs/core";
 // eagerly (by value instead of by thunk) it would throw before `flag` was
 // even tested.
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
-  return cs.value((__cs_flag: boolean) => {
+  return cs.liftValue((__cs_flag: boolean) => {
     if ((cs.condition(__cs_flag) && __cs_flag)) {
         return cs.splice((fragment));
     }
@@ -16,9 +16,9 @@ function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
 });
 }
 
-const ok = cs.value("evaluated");
-const broken = cs.value((() => {
+const ok = cs.liftValue("evaluated");
+const broken = cs.liftValue((() => {
     throw "the guarded fragment must never evaluate";
 })());
 
-export default cs.value({ taken: cs.splice(guard(ok))(true), skipped: cs.splice(guard(broken))(false) });
+export default cs.liftValue({ taken: cs.splice(guard(ok))(true), skipped: cs.splice(guard(broken))(false) });

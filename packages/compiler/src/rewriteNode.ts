@@ -519,7 +519,7 @@ function rewriteNodeImpl(
     // Lift each argument so the constructor receives `Client<…>` values;
     // `cs.value` keeps a bare action from riding in as data.
     const liftedArgs = rewrittenArgs.map((arg) =>
-      call(ts, "cs", "value", [arg.virtual as ts.Expression]),
+      call(ts, "cs", "liftValue", [arg.virtual as ts.Expression]),
     );
 
     return {
@@ -561,10 +561,7 @@ function rewriteNodeImpl(
         ownReturn(ts, node.body) &&
         !terminates(ts, node.body)
       ) {
-        state.errors.set(
-          node.body,
-          "Not all code paths return a value.",
-        );
+        state.errors.set(node.body, "Not all code paths return a value.");
         return unsupported();
       }
       const virtualParams = params.map((param) => {

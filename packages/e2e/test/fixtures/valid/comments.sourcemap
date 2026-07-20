@@ -1,22 +1,22 @@
-cs.value((() => {\n      → cs`{\n  // leading line comment\n  
-const                    → const 
-__cs_count               → count
- =                       →  = 
-1                        → 1
-;                        → ;
-\n                       →  // trailing line comment\n  /* block comment */\n  
-if (                     → if (
-__cs_count               → count
- ===                     →  === 
-1                        → 1
-)                        → ) 
-{\n                      → {\n    // branch comment\n    
-return                   → return 
-"one"                    → "one"
-;                        → ;
-\n    }                  → \n  }
-\n                       → \n  /**\n   * doc comment\n   */\n  
-return                   → return 
-"many"                   → "many"
-;                        → ;
-\n})())                  → \n}`
+cs.liftValue((() => {\n      → cs`{\n  // leading line comment\n  
+const                        → const 
+__cs_count                   → count
+ =                           →  = 
+1                            → 1
+;                            → ;
+\n                           →  // trailing line comment\n  /* block comment */\n  
+if (                         → if (
+__cs_count                   → count
+ ===                         →  === 
+1                            → 1
+)                            → ) 
+{\n                          → {\n    // branch comment\n    
+return                       → return 
+"one"                        → "one"
+;                            → ;
+\n    }                      → \n  }
+\n                           → \n  /**\n   * doc comment\n   */\n  
+return                       → return 
+"many"                       → "many"
+;                            → ;
+\n})())                      → \n}`

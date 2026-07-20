@@ -1,55 +1,55 @@
-cs.value(                → cs`
-() =>                    → () => 
-cs.splice(               →  [-semantic]
-(a)                      → $a
-)                        →  [-semantic]
- +                       →  + 
-cs.splice(               →  [-semantic]
-(b)                      → $b
-)                        →  [-semantic]
-)                        → `
-cs.value((() => {\n      → cs`{\n  
-const                    → const 
-__cs_p                   → p
- =                       →  = 
-new (                    → new 
-cs.splice(               →  [-semantic]
-(Point)                  → $Point
-)                        →  [-semantic]
-)(cs.value(              → (
-1                        → 1
-), cs.value(             → , 
-2                        → 2
-))                       → )
-;                        → ;
-\n                       → \n  
-const                    → const 
-__cs_s                   → s
- =                       →  = 
-new (                    → new 
-cs.splice(               →  [-semantic]
-(Size)                   → $Size
-)                        →  [-semantic]
-)(cs.value(              → (
-3                        → 3
-), cs.value(             → , 
-4                        → 4
-))                       → )
-;                        → ;
-\n                       → \n  
-return                   → return 
-cs.virtualize(           → 
-__cs_p                   → p
-)                        → 
-.                        → .
-sum                      → sum
-()                       → ()
- +                       →  + 
-cs.virtualize(           → 
-__cs_s                   → s
-)                        → 
-.                        → .
-sum                      → sum
-()                       → ()
-;                        → ;
-\n})())                  → \n}`
+cs.liftValue(                → cs`
+() =>                        → () => 
+cs.splice(                   →  [-semantic]
+(a)                          → $a
+)                            →  [-semantic]
+ +                           →  + 
+cs.splice(                   →  [-semantic]
+(b)                          → $b
+)                            →  [-semantic]
+)                            → `
+cs.liftValue((() => {\n      → cs`{\n  
+const                        → const 
+__cs_p                       → p
+ =                           →  = 
+new (                        → new 
+cs.splice(                   →  [-semantic]
+(Point)                      → $Point
+)                            →  [-semantic]
+)(cs.liftValue(              → (
+1                            → 1
+), cs.liftValue(             → , 
+2                            → 2
+))                           → )
+;                            → ;
+\n                           → \n  
+const                        → const 
+__cs_s                       → s
+ =                           →  = 
+new (                        → new 
+cs.splice(                   →  [-semantic]
+(Size)                       → $Size
+)                            →  [-semantic]
+)(cs.liftValue(              → (
+3                            → 3
+), cs.liftValue(             → , 
+4                            → 4
+))                           → )
+;                            → ;
+\n                           → \n  
+return                       → return 
+cs.virtualize(               → 
+__cs_p                       → p
+)                            → 
+.                            → .
+sum                          → sum
+()                           → ()
+ +                           →  + 
+cs.virtualize(               → 
+__cs_s                       → s
+)                            → 
+.                            → .
+sum                          → sum
+()                           → ()
+;                            → ;
+\n})())                      → \n}`

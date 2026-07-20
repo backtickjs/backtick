@@ -1,7 +1,7 @@
-cs.value(               → cs`
+cs.liftValue(           → cs`
 true                    → true
 )                       → `
-cs.value(               → cs`
+cs.liftValue(           → cs`
 (                       → (\n  
 __cs_text               → text
 : string | undefined,   → : string | undefined,\n  
@@ -71,7 +71,7 @@ return                  → return
 ;                       → ;
 \n}                     → \n}
 )                       → `
-cs.value(               → cs`
+cs.liftValue(           → cs`
 {                       → ({\n  
 missing                 → missing
 :                       → : 

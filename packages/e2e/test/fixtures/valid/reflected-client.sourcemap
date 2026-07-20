@@ -1,51 +1,51 @@
-cs.value(                 → cs`
-() =>                     → () => 
-cs.splice(                → ${ [-semantic]
-this.x                    → this.x
-)                         → } [-semantic]
- +                        →  + 
-cs.splice(                → ${ [-semantic]
-this.y                    → this.y
-)                         → } [-semantic]
-)                         → `
-cs.action((() => {\n      → cs`{\n  
-const                     → const 
-__cs_a                    → a
- =                        →  = 
-cs.splice(                → ${ [-semantic]
-new Point(                → new Point(
-cs.value(                 → cs`
-1                         → 1
-)                         → `
-,                         → , 
-cs.value(                 → cs`
-2                         → 2
-)                         → `
-)                         → )
-)                         → } [-semantic]
-;                         → ;
-\n                        → \n  
-const                     → const 
-__cs_b                    → b
- =                        →  = 
-cs.splice(                → ${ [-semantic]
-new Point(                → new Point(
-cs.value(                 → cs`
-3                         → 3
-)                         → `
-,                         → , 
-cs.value(                 → cs`
-4                         → 4
-)                         → `
-)                         → )
-)                         → } [-semantic]
-;                         → ;
-\n                        → \n  
-cs.virtualize(            → 
-__cs_a                    → a
-)                         → 
-.                         → .
-valid                     → valid
-()                        → ()
-;                         → ;
-\n})())                   → \n}`
+cs.liftValue(                 → cs`
+() =>                         → () => 
+cs.splice(                    → ${ [-semantic]
+this.x                        → this.x
+)                             → } [-semantic]
+ +                            →  + 
+cs.splice(                    → ${ [-semantic]
+this.y                        → this.y
+)                             → } [-semantic]
+)                             → `
+cs.liftAction((() => {\n      → cs`{\n  
+const                         → const 
+__cs_a                        → a
+ =                            →  = 
+cs.splice(                    → ${ [-semantic]
+new Point(                    → new Point(
+cs.liftValue(                 → cs`
+1                             → 1
+)                             → `
+,                             → , 
+cs.liftValue(                 → cs`
+2                             → 2
+)                             → `
+)                             → )
+)                             → } [-semantic]
+;                             → ;
+\n                            → \n  
+const                         → const 
+__cs_b                        → b
+ =                            →  = 
+cs.splice(                    → ${ [-semantic]
+new Point(                    → new Point(
+cs.liftValue(                 → cs`
+3                             → 3
+)                             → `
+,                             → , 
+cs.liftValue(                 → cs`
+4                             → 4
+)                             → `
+)                             → )
+)                             → } [-semantic]
+;                             → ;
+\n                            → \n  
+cs.virtualize(                → 
+__cs_a                        → a
+)                             → 
+.                             → .
+valid                         → valid
+()                            → ()
+;                             → ;
+\n})())                       → \n}`

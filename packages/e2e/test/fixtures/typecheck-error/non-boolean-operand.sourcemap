@@ -1,4 +1,4 @@
-cs.value(              → cs`
+cs.liftValue(          → cs`
 (                      → (
 __cs_count             → count
 : number,              → : number, 

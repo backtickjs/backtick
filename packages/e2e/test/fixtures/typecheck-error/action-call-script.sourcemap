@@ -1,27 +1,27 @@
-cs.value(                 → cs`
-() => {\n                 → () => {\n  
-const                     → const 
-__cs_x                    → x
- =                        →  = 
-1                         → 1
-;                         → ;
-\n}                       → \n}
-)                         → `
-cs.value(                 → cs`
-cs.splice(                →  [-semantic]
-(ping)                    → $ping
-)                         →  [-semantic]
-()                        → ()
-)                         → `
-cs.action((() => {\n      → cs`{\n  
-const                     → const 
-__cs_x                    → x
- =                        →  = 
-1                         → 1
-;                         → ;
-\n})())                   → \n}`
-cs.value(                 → cs`
-cs.splice(                →  [-semantic]
-(action)                  → $action
-)                         →  [-semantic]
-)                         → `
+cs.liftValue(                 → cs`
+() => {\n                     → () => {\n  
+const                         → const 
+__cs_x                        → x
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n}                           → \n}
+)                             → `
+cs.liftValue(                 → cs`
+cs.splice(                    →  [-semantic]
+(ping)                        → $ping
+)                             →  [-semantic]
+()                            → ()
+)                             → `
+cs.liftAction((() => {\n      → cs`{\n  
+const                         → const 
+__cs_x                        → x
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n})())                       → \n}`
+cs.liftValue(                 → cs`
+cs.splice(                    →  [-semantic]
+(action)                      → $action
+)                             →  [-semantic]
+)                             → `

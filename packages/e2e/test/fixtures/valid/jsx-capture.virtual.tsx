@@ -5,8 +5,8 @@ import type { Client, JSX } from "@backtickjs/core";
 // spliced tree threads through the tree's slot signature: the outer body
 // instantiates the tree with `#t0(x)` and the tree wires the capture into the
 // handler with `#slot`.
-const script: Client<() => JSX.Element> = cs.value(() => {
+const script: Client<() => JSX.Element> = cs.liftValue(() => {
     const __cs_x = 1;
-    return cs.splice((<button onClick={cs.value(() => __cs_x)} />));
+    return cs.splice((<button onClick={cs.liftValue(() => __cs_x)} />));
 });
 export default script;
