@@ -13,7 +13,7 @@ class Point implements ClientObject {
   }
 
   get sum() {
-    return cs.liftValue(() => cs.splice(this.x) + cs.splice(this.y));
+    return cs.liftValue(() => cs.spliceValue(this.x) + cs.spliceValue(this.y));
   }
 }
 
@@ -32,6 +32,6 @@ class Segment implements ClientObject {
 }
 
 export default cs.liftValue((() => {
-    const __cs_s = new (cs.splice((Segment)))(cs.liftValue(new (cs.splice((Point)))(cs.liftValue(1), cs.liftValue(2))), cs.liftValue(new (cs.splice((Point)))(cs.liftValue(1), cs.liftValue(2))));
+    const __cs_s = new (cs.spliceValue((Segment)))(cs.liftValue(new (cs.spliceValue((Point)))(cs.liftValue(1), cs.liftValue(2))), cs.liftValue(new (cs.spliceValue((Point)))(cs.liftValue(1), cs.liftValue(2))));
     return cs.virtualize(cs.virtualize(__cs_s).to).sum() - cs.virtualize(cs.virtualize(__cs_s).from).sum();
 })());

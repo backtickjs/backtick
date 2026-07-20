@@ -18,6 +18,6 @@ const action = cs.liftAction((() => {
 })());
 
 export const held = cs.liftValue((() => {
-    const __cs_h = new (cs.splice((Holder)))(cs.liftValue(cs.splice((action))));
+    const __cs_h = new (cs.spliceValue((Holder)))(cs.liftValue(cs.spliceValue((action))));
     return 1;
 })());

@@ -1,5 +1,5 @@
-cs.liftValue(  → cs`
-cs.splice(     →  [-semantic]
-(value)        → $value
-)              →  [-semantic]
-)              → `
+cs.liftValue(    → cs`
+cs.spliceValue(  →  [-semantic]
+(value)          → $value
+)                →  [-semantic]
+)                → `

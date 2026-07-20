@@ -49,13 +49,13 @@ cs.liftValue((() => {\n      → cs`{\n
 const                        → const 
 __cs_c                       → c
  =                           →  = 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (color)                      → $color
 )                            →  [-semantic]
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.splice(                   → ${ [-semantic]
+cs.spliceValue(              → ${ [-semantic]
 cs.liftValue(                → cs`
 cs.virtualize(               → 
 __cs_c                       → c

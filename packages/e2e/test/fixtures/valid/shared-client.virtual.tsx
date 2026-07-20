@@ -13,7 +13,7 @@ class Point implements ClientObject {
   }
 
   get sum() {
-    return cs.liftValue(() => cs.splice(this.x) + cs.splice(this.y));
+    return cs.liftValue(() => cs.spliceValue(this.x) + cs.spliceValue(this.y));
   }
 }
 
@@ -22,13 +22,13 @@ class Point implements ClientObject {
 const shared = new Point(cs.liftValue(1), cs.liftValue(2));
 
 const left = cs.liftValue((() => {
-    const __cs_p = cs.splice((shared));
+    const __cs_p = cs.spliceValue((shared));
     return cs.virtualize(__cs_p).sum();
 })());
 
 const right = cs.liftValue((() => {
-    const __cs_p = cs.splice((shared));
+    const __cs_p = cs.spliceValue((shared));
     return cs.virtualize(__cs_p).x;
 })());
 
-export default cs.liftValue(cs.splice((left)) + cs.splice((right)));
+export default cs.liftValue(cs.spliceValue((left)) + cs.spliceValue((right)));

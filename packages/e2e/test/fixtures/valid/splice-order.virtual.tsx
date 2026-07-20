@@ -5,4 +5,4 @@ import { cs } from "@backtickjs/core";
 // the `$count` read sees 0 before `${++count}` bumps it to 1.
 let count = 0;
 
-export default cs.liftValue({ a: cs.splice((count)), b: cs.splice(++count) });
+export default cs.liftValue({ a: cs.spliceValue((count)), b: cs.spliceValue(++count) });

@@ -1,0 +1,50 @@
+cs.liftAction((() => {\n      → cs`{\n  
+const                         → const 
+__cs_x                        → x
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n})())                       → \n}`
+cs.liftValue((() => {\n       → cs`{\n  
+const                         → const 
+__cs_captured                 → captured
+ =                            →  = 
+cs.spliceValue(               →  [-semantic]
+(action)                      → $action
+)                             →  [-semantic]
+;                             → ;
+\n                            → \n  
+return                        → return 
+1                             → 1
+;                             → ;
+\n})())                       → \n}`
+cs.liftValue((() => {\n       → cs`{\n  
+return                        → return 
+cs.spliceValue(               →  [-semantic]
+(action)                      → $action
+)                             →  [-semantic]
+;                             → ;
+\n})())                       → \n}`
+cs.liftValue((() => {\n       → cs`{\n  
+try                           → try 
+{\n                           → {\n    
+return                        → return 
+1                             → 1
+;                             → ;
+\n    }                       → \n  }
+\n    catch (                 →  catch (
+__cs_e                        → e
+)                             → ) 
+{\n                           → {\n    
+__cs_e                        → e
+ =                            →  = 
+cs.spliceValue(               →  [-semantic]
+(action)                      → $action
+)                             →  [-semantic]
+;                             → ;
+\n                            → \n    
+return                        → return 
+2                             → 2
+;                             → ;
+\n    }                       → \n  }
+\n})())                       → \n}`

@@ -10,11 +10,11 @@ const                         → const
 __cs_h                        → h
  =                            →  = 
 new (                         → new 
-cs.splice(                    →  [-semantic]
+cs.spliceValue(               →  [-semantic]
 (Holder)                      → $Holder
 )                             →  [-semantic]
 )(cs.liftValue(               → (
-cs.splice(                    →  [-semantic]
+cs.spliceValue(               →  [-semantic]
 (action)                      → $action
 )                             →  [-semantic]
 ))                            → )

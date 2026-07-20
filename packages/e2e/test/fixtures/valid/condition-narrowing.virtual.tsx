@@ -13,10 +13,10 @@ const label: Client<(text: string | undefined, upper: boolean) => string> = cs.l
     if ((cs.condition(__cs_upper) && __cs_upper) && __cs_text !== undefined) {
         return cs.virtualize(__cs_text).toUpperCase();
     }
-    if ((cs.condition(cs.splice(flags.strict)) && cs.splice(flags.strict)) && __cs_text !== undefined && cs.virtualize(__cs_text).charAt(0) === "!") {
+    if ((cs.condition(cs.spliceValue(flags.strict)) && cs.spliceValue(flags.strict)) && __cs_text !== undefined && cs.virtualize(__cs_text).charAt(0) === "!") {
         return cs.virtualize(__cs_text).concat("?");
     }
     return "none";
 });
 
-export default cs.liftValue({ missing: cs.splice((label))(undefined, true), loud: cs.splice((label))("!hi", true), quiet: cs.splice((label))("!hi", false), plain: cs.splice((label))("zz", false) });
+export default cs.liftValue({ missing: cs.spliceValue((label))(undefined, true), loud: cs.spliceValue((label))("!hi", true), quiet: cs.spliceValue((label))("!hi", false), plain: cs.spliceValue((label))("zz", false) });

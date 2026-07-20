@@ -7,7 +7,7 @@ __cs_x              → x
 ;                   → ;
 \n                  → \n  
 return              → return 
-cs.splice(          → ${ [-semantic]
+cs.spliceValue(     → ${ [-semantic]
 (<button onClick={  → (<button onClick={
 cs.liftValue(       → cs`
 () =>               → () => 

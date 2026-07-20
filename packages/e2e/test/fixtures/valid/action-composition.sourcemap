@@ -6,13 +6,13 @@ __cs_x                        → x
 ;                             → ;
 \n})())                       → \n}`
 cs.liftAction((() => {\n      → cs`{\n  
-cs.splice(                    →  [-semantic]
+cs.spliceAction(              →  [-semantic]
 (effects)                     → $effects
 )                             →  [-semantic]
 ;                             → ;
 \n})())                       → \n}`
 cs.liftAction((() => {\n      → cs`{\n  
-cs.splice(                    →  [-semantic]
+cs.spliceAction(              →  [-semantic]
 (composed)                    → $composed
 )                             →  [-semantic]
 ;                             → ;

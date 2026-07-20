@@ -8,6 +8,6 @@ const color = cs.liftValue((() => {
 })());
 
 export default cs.liftValue((() => {
-    const __cs_c = cs.splice((color));
-    return cs.splice(cs.liftValue(cs.virtualize(__cs_c).brightness()));
+    const __cs_c = cs.spliceValue((color));
+    return cs.spliceValue(cs.liftValue(cs.virtualize(__cs_c).brightness()));
 })());

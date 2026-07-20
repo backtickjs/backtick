@@ -2,7 +2,7 @@ import {
   isClientObject,
   isClientScript,
   isClientElement,
-  type Spliceable,
+  type SpliceableUnknown,
 } from "@backtickjs/cs-runtime";
 import type { Ast } from "./Ast.js";
 import { expandClientConstructor } from "./expandClientConstructor.js";
@@ -11,7 +11,7 @@ import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientElement } from "./lowerClientElement.js";
 
-export function lowerSpliceable(value: Spliceable): Ast {
+export function lowerSpliceable(value: SpliceableUnknown): Ast {
   // A hole sentinel a constructor stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.

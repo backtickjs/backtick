@@ -6,7 +6,7 @@ __cs_base                    → base
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.splice(                   → ${ [-semantic]
+cs.spliceValue(              → ${ [-semantic]
 outer(                       → outer(
 cs.liftValue(                → cs`
 __cs_base                    → base
@@ -25,7 +25,7 @@ __cs_base                    → base
 return                       → return 
 __cs_base                    → base
  +                           →  + 
-cs.splice(                   → ${ [-semantic]
+cs.spliceValue(              → ${ [-semantic]
 middle(inner)                → middle(inner)
 )                            → } [-semantic]
 ;                            → ;
@@ -40,7 +40,7 @@ __cs_base                    → base
 return                       → return 
 __cs_base                    → base
  *                           →  * 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (inner)                      → $inner
 )                            →  [-semantic]
 ;                            → ;

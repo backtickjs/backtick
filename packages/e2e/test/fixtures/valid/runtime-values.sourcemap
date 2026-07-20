@@ -2,13 +2,13 @@ cs.liftValue(           → cs`
 {                       → ({ 
 list                    → list
 :                       → : 
-cs.splice(              → ${ [-semantic]
+cs.spliceValue(         → ${ [-semantic]
 [1, "two", true, null]  → [1, "two", true, null]
 )                       → } [-semantic]
 ,                       → , 
 obj                     → obj
 :                       → : 
-cs.splice(              → ${ [-semantic]
+cs.spliceValue(         → ${ [-semantic]
 { k: 3 }                → { k: 3 }
 )                       → } [-semantic]
  }                      →  })

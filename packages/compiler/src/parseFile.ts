@@ -57,6 +57,7 @@ export function parseSourceText(
     filePath,
     sourceText,
     ts.ScriptTarget.Latest,
+    true,
   );
   return parseSourceFile(ts, sourceFile);
 }
@@ -102,6 +103,7 @@ function getDirectScripts(
       sourceFile.fileName,
       textWithPlaceholders,
       ts.ScriptTarget.Latest,
+      true,
     );
     // The dictionary's insertion order is evaluation order: emitted as the
     // script's metadata object literal, the splices' host expressions run

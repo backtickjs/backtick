@@ -10,7 +10,7 @@ import { cs, type Client } from "@backtickjs/core";
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.liftValue((__cs_flag: boolean) => {
     if ((cs.condition(__cs_flag) && __cs_flag)) {
-        return cs.splice((fragment));
+        return cs.spliceValue((fragment));
     }
     return "skipped";
 });
@@ -21,4 +21,4 @@ const broken = cs.liftValue((() => {
     throw "the guarded fragment must never evaluate";
 })());
 
-export default cs.liftValue({ taken: cs.splice(guard(ok))(true), skipped: cs.splice(guard(broken))(false) });
+export default cs.liftValue({ taken: cs.spliceValue(guard(ok))(true), skipped: cs.spliceValue(guard(broken))(false) });

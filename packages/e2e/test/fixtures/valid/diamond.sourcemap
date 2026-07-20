@@ -3,44 +3,44 @@ cs.liftValue(                → cs`
 )                            → `
 cs.liftValue((() => {\n      → cs`{\n  
 return                       → return 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d0)                         → $d0
 )                            →  [-semantic]
  +                           →  + 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d0)                         → $d0
 )                            →  [-semantic]
 ;                            → ;
 \n})())                      → \n}`
 cs.liftValue((() => {\n      → cs`{\n  
 return                       → return 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d1)                         → $d1
 )                            →  [-semantic]
  +                           →  + 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d1)                         → $d1
 )                            →  [-semantic]
 ;                            → ;
 \n})())                      → \n}`
 cs.liftValue((() => {\n      → cs`{\n  
 return                       → return 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d2)                         → $d2
 )                            →  [-semantic]
  +                           →  + 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d2)                         → $d2
 )                            →  [-semantic]
 ;                            → ;
 \n})())                      → \n}`
 cs.liftValue((() => {\n      → cs`{\n  
 return                       → return 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d3)                         → $d3
 )                            →  [-semantic]
  +                           →  + 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d3)                         → $d3
 )                            →  [-semantic]
 ;                            → ;

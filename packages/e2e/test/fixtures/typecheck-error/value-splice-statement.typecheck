@@ -1,0 +1,2 @@
+8:4 error TS2345: Argument of type 'Client<1>' is not assignable to parameter of type 'Client<void>'.
+  Type 'number' is not assignable to type 'void'.

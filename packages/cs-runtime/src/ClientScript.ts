@@ -1,5 +1,5 @@
 import type { SourceLocation } from "./SourceLocation.js";
-import type { Spliceable } from "./Spliceable.js";
+import type { SpliceableUnknown } from "./Spliceable.js";
 import type { Visitor } from "./Visitor.js";
 
 export interface Metadata {
@@ -7,7 +7,7 @@ export interface Metadata {
   // distinguishes same-named files across codebases (see `locKey`)
   fileHash: string;
   // spliced host values, under the keys the body uses (see `Visitor.splice`)
-  splices: { [key: string]: Spliceable };
+  splices: { [key: string]: SpliceableUnknown };
   // binding keys the script captures from an enclosing scope
   captures: string[];
   // binding keys the script declares itself

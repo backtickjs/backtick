@@ -1,6 +1,6 @@
 cs.liftValue(                → cs`
 new (                        → new 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (Shape)                      → $Shape
 )                            →  [-semantic]
 )(cs.liftValue(              → (
@@ -12,25 +12,25 @@ return                       → return
 {                            → { 
 first                        → first
 :                            → : 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (a)                          → $a
 )                            →  [-semantic]
 ,                            → , 
 second                       → second
 :                            → : 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (b)                          → $b
 )                            →  [-semantic]
 ,                            → , 
 third                        → third
 :                            → : 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (c)                          → $c
 )                            →  [-semantic]
 ,                            → , 
 fourth                       → fourth
 :                            → : 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (d)                          → $d
 )                            →  [-semantic]
  }                           →  }

@@ -6,7 +6,7 @@ __cs_total                   → total
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.splice(                   → ${ [-semantic]
+cs.spliceValue(              → ${ [-semantic]
 add(                         → add(
 cs.liftValue(                → cs`
 __cs_total                   → total
@@ -26,7 +26,7 @@ __cs_total                   → total
  =                           →  = 
 __cs_total                   → total
  +                           →  + 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (lhs)                        → $lhs
 )                            →  [-semantic]
 ;                            → ;
@@ -35,7 +35,7 @@ __cs_total                   → total
  =                           →  = 
 __cs_total                   → total
  +                           →  + 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (rhs)                        → $rhs
 )                            →  [-semantic]
 ;                            → ;

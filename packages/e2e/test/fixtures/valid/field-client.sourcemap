@@ -2,7 +2,7 @@ cs.liftValue((() => {\n      → cs`{\n
 const                        → const 
 __cs_c                       → c
  =                           →  = 
-cs.splice(                   → ${ [-semantic]
+cs.spliceValue(              → ${ [-semantic]
 new Color(                   → new Color(
 cs.liftValue(                → cs`
 30                           → 30

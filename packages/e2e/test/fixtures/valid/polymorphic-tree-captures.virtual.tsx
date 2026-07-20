@@ -5,7 +5,7 @@ import type { Client } from "@backtickjs/core";
 // referenced from tree props: the hole's thunk ships in JSON position with
 // `params`, so `base` threads from the entry's scope into the splice.
 function offset(by: Client<number>): Client<(base: number) => number> {
-  return cs.liftValue((__cs_base: number) => cs.splice(cs.liftValue(__cs_base)) + cs.splice((by)));
+  return cs.liftValue((__cs_base: number) => cs.spliceValue(cs.liftValue(__cs_base)) + cs.spliceValue((by)));
 }
 
 export default <button onA={offset(cs.liftValue(1))} onB={offset(cs.liftValue(2))} />;

@@ -5,12 +5,12 @@ import type {
   ClientElement,
   ClientObject,
   ClientUnknown,
-  Spliceable,
+  SpliceableUnknown,
   Spliced,
   Virtualized,
 } from "@backtickjs/cs-runtime";
 
-declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
+declare function spliced<T extends SpliceableUnknown>(value: T): Spliced<T>;
 declare function virtualize<T extends ClientUnknown>(value: T): Virtualized<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;

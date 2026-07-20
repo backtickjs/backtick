@@ -1,7 +1,7 @@
 import {
   type ClientObject,
   isSpliceable,
-  type Spliceable,
+  type SpliceableUnknown,
 } from "@backtickjs/cs-runtime";
 import type { Ast, AstObject } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
@@ -24,8 +24,8 @@ export function lowerClientObject(value: ClientObject): AstObject {
   return node;
 }
 
-function spliceableEntries(value: ClientObject): [string, Spliceable][] {
-  const entries: [string, Spliceable][] = [];
+function spliceableEntries(value: ClientObject): [string, SpliceableUnknown][] {
+  const entries: [string, SpliceableUnknown][] = [];
   for (const key of objectKeys(value)) {
     if (key === "@backtickjs") {
       continue;

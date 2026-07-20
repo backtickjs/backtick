@@ -4,7 +4,7 @@ import { type Client, cs } from "@backtickjs/core";
 // the JSX analogue of the `splice-sharing` fixture. The entry takes a thunk
 // parameter, and each prop's `#call` passes its own splice as a `#thunk`.
 function make(n: number): Client<() => number> {
-  return cs.liftValue(() => cs.splice((n)));
+  return cs.liftValue(() => cs.spliceValue((n)));
 }
 
 export default <button onA={make(1)} onB={make(2)} />;

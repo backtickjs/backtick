@@ -22,7 +22,7 @@ cs.liftValue(                → cs`
 {                            → ({\n  
 missing                      → missing
 :                            → : 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (orDash)                     → $orDash
 )                            →  [-semantic]
 (                            → (
@@ -31,7 +31,7 @@ null                         → null
 ,                            → ,\n  
 present                      → present
 :                            → : 
-cs.splice(                   →  [-semantic]
+cs.spliceValue(              →  [-semantic]
 (orDash)                     → $orDash
 )                            →  [-semantic]
 (                            → (

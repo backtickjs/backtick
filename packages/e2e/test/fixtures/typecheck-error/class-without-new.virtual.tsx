@@ -18,6 +18,6 @@ class Point implements ClientObject {
 // what keeps them apart: the virtual code types a spliced class as the
 // class itself, and calling a constructor without `new` is a type error.
 export default cs.liftValue((() => {
-    const __cs_C = cs.splice((Point));
+    const __cs_C = cs.spliceValue((Point));
     return __cs_C(1, 2);
 })());
