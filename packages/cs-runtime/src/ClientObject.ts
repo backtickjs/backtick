@@ -1,4 +1,4 @@
-export interface ClientObject /* extends Client<this> */ {
+export interface ClientObject {
   readonly "@backtickjs": "ClientObject";
 }
 
