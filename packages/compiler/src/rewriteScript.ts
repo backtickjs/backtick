@@ -55,7 +55,7 @@ export function rewriteScript(
 
   // A block that returns or throws is a value script;
   // one that completes without returning is an action script.
-  let root: "liftValue" | "liftAction" = "liftValue";
+  let root = "liftValue";
   if (ts.isBlock(scriptNode)) {
     const hasReturn = ownReturn(ts, scriptNode);
     const exits = terminates(ts, scriptNode);

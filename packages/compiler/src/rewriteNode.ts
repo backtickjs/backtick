@@ -18,8 +18,8 @@ export interface RewriteState {
   // set while rewriting a condition's bare duplicate, so the duplicate
   // gets no checks of its own
   conditionDup?: boolean;
-  // set while rewriting a value body's statements: a value script computes,
-  // so a statement's expression must be a value
+  // set while rewriting the statements of a body that returns a value,
+  // where side effects — expression statements — are banned
   valueBody?: boolean;
 }
 
@@ -259,6 +259,23 @@ function rewriteNodeImpl(
   }
 
   if (ts.isExpressionStatement(node)) {
+    let inner = node.expression;
+    while (ts.isParenthesizedExpression(inner)) {
+      inner = inner.expression;
+    }
+    const assignment =
+      ts.isBinaryExpression(inner) &&
+      inner.operatorToken.kind === ts.SyntaxKind.EqualsToken;
+    // An expression statement is a side effect (or dead code). It still
+    // rewrites so its splices don't dangle into "Cannot find name"
+    // cascades.
+    if (state.valueBody && !assignment) {
+      state.errors.set(
+        node,
+        "A script that returns a value can't have side effects; run them " +
+          "in an action — a block without `return`.",
+      );
+    }
     const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createExpressionStatement(
@@ -399,9 +416,9 @@ function rewriteNodeImpl(
       // The wrapper's frame claims only the splice delimiters (`${`/`}`,
       // or nothing for `$x`): hover must not resolve through it.
       // A splice whose parent (through parens) is a statement in a block
-      // sits in statement position — the action position, unless this is a
-      // value body. The block check matters: a bare-splice script is a
-      // statement of the file itself, which is composition.
+      // sits in statement position — the action position. The block check
+      // matters: a bare-splice script is a statement of the file itself,
+      // which is composition.
       let parent: ts.Node | undefined = node.parent;
       while (parent != null && ts.isParenthesizedExpression(parent)) {
         parent = parent.parent;
@@ -413,7 +430,7 @@ function rewriteNodeImpl(
       const virtual = call(
         ts,
         "cs",
-        statementPosition && !state.valueBody ? "spliceAction" : "spliceValue",
+        statementPosition ? "spliceAction" : "spliceValue",
         [argument],
       );
       state.codeInformation.set(virtual, { semantic: false });
