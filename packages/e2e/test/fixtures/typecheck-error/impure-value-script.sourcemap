@@ -1,0 +1,66 @@
+cs.liftAction((() => {\n      → cs`{\n  
+const                         → const 
+__cs_x                        → x
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n})())                       → \n}`
+cs.liftValue(                 → cs`
+() => {\n                     → () => {\n  
+const                         → const 
+__cs_x                        → x
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n}                           → \n}
+)                             → `
+cs.liftValue((() => {\n       → cs`{\n  
+cs.spliceValue(               →  [-semantic]
+(action)                      → $action
+)                             →  [-semantic]
+;                             → ;
+\n                            → \n  
+return                        → return 
+1                             → 1
+;                             → ;
+\n})())                       → \n}`
+cs.liftValue(                 → cs`
+(                             → (
+__cs_b                        → b
+: boolean) => {\n             → : boolean) => {\n  
+let                           → let 
+__cs_n                        → n
+ =                            →  = 
+0                             → 0
+;                             → ;
+\n                            → \n  
+if ((cs.condition(            → if (
+__cs_b                        → b
+) &&                          → 
+__cs_b                        → b [-semantic -completion -navigation -verification]
+))                            → ) 
+{\n                           → {\n    
+cs.liftValue(                 → 
+cs.spliceValue(               →  [-semantic]
+(ping)                        → $ping
+)                             →  [-semantic]
+()                            → ()
+);                            → ;
+\n                            → \n    
+__cs_n                        → n
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n    }                       → \n  }
+\n                            → \n  
+cs.liftValue(                 → 
+__cs_n                        → n
+ +                            →  + 
+1                             → 1
+);                            → ;
+\n                            → \n  
+return                        → return 
+__cs_n                        → n
+;                             → ;
+\n}                           → \n}
+)                             → `

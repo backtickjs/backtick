@@ -60,6 +60,7 @@ export function rewriteScript(
     const hasReturn = ownReturn(ts, scriptNode);
     const exits = terminates(ts, scriptNode);
     root = hasReturn || exits ? "liftValue" : "liftAction";
+    state.valueBody = hasReturn || exits;
     if (hasReturn && !exits) {
       return {
         virtual: sourceNode,

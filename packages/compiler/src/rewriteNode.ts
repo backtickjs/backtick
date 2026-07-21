@@ -18,6 +18,9 @@ export interface RewriteState {
   // set while rewriting a condition's bare duplicate, so the duplicate
   // gets no checks of its own
   conditionDup?: boolean;
+  // set while rewriting a value body's statements: a value script computes,
+  // so a statement's expression must be a value
+  valueBody?: boolean;
 }
 
 // Boolean by construction, so no check needed: a comparison yields boolean,
@@ -395,23 +398,22 @@ function rewriteNodeImpl(
       }
       // The wrapper's frame claims only the splice delimiters (`${`/`}`,
       // or nothing for `$x`): hover must not resolve through it.
-      // A bare splice in statement position is the action position — its
-      // parent, through any parens, is an expression statement in a block.
-      // (A bare-splice expression script is also an expression statement,
-      // but of the placeholder file itself: that is composition, not
-      // statement position.)
+      // A splice whose parent (through parens) is a statement in a block
+      // sits in statement position — the action position, unless this is a
+      // value body. The block check matters: a bare-splice script is a
+      // statement of the file itself, which is composition.
       let parent: ts.Node | undefined = node.parent;
       while (parent != null && ts.isParenthesizedExpression(parent)) {
         parent = parent.parent;
       }
+      const statementPosition =
+        parent != null &&
+        ts.isExpressionStatement(parent) &&
+        ts.isBlock(parent.parent);
       const virtual = call(
         ts,
         "cs",
-        parent != null &&
-          ts.isExpressionStatement(parent) &&
-          ts.isBlock(parent.parent)
-          ? "spliceAction"
-          : "spliceValue",
+        statementPosition && !state.valueBody ? "spliceAction" : "spliceValue",
         [argument],
       );
       state.codeInformation.set(virtual, { semantic: false });
@@ -572,15 +574,15 @@ function rewriteNodeImpl(
     });
 
     if (params.every((param) => param != null)) {
-      // Checked here syntactically: a partial return's `undefined` sits in
-      // return position, where the `cs.value` constraint can't see it.
-      if (
-        ts.isBlock(node.body) &&
-        ownReturn(ts, node.body) &&
-        !terminates(ts, node.body)
-      ) {
-        state.errors.set(node.body, "Not all code paths return a value.");
-        return unsupported();
+      let bodyState = { ...state };
+      if (ts.isBlock(node.body)) {
+        const hasReturn = ownReturn(ts, node.body);
+        const exits = terminates(ts, node.body);
+        bodyState.valueBody = hasReturn || exits;
+        if (hasReturn && !exits) {
+          state.errors.set(node.body, "Not all code paths return a value.");
+          return unsupported();
+        }
       }
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
@@ -593,7 +595,7 @@ function rewriteNodeImpl(
           param.type,
         );
       });
-      const body = rewriteNode(ts, state, node.body);
+      const body = rewriteNode(ts, bodyState, node.body);
       return {
         virtual: ts.factory.createArrowFunction(
           undefined,
