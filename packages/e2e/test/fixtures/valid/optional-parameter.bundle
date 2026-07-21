@@ -124,37 +124,21 @@
           "#": "block",
           "statements": [
             {
-              "#": "if",
-              "condition": {
-                "#": "binop",
-                "operator": "!==",
-                "left": {
-                  "#": "identifier",
-                  "name": "cb"
-                },
-                "right": null
-              },
-              "consequent": {
-                "#": "block",
-                "statements": [
-                  {
-                    "#": "return",
-                    "expression": {
-                      "#": "call",
-                      "callee": {
-                        "#": "identifier",
-                        "name": "cb"
-                      },
-                      "args": []
-                    }
-                  }
-                ]
-              },
-              "alternate": null
-            },
-            {
               "#": "return",
-              "expression": 0
+              "expression": {
+                "#": "binop",
+                "operator": "??",
+                "left": {
+                  "#": "call",
+                  "callee": {
+                    "#": "identifier",
+                    "name": "cb"
+                  },
+                  "args": [],
+                  "optional": true
+                },
+                "right": 0
+              }
             }
           ]
         }

@@ -155,11 +155,14 @@ export interface BundleEntryNode {
 // is an `entry` node targeting a function, `args` mirrors that entry's
 // parameters (thunks for a polymorphic entry's splices first, then one value
 // per capture); targeting a tree, `args` supplies the tree's slots in index
-// order.
+// order. When `optional` (`callee?.(…)`), a null callee yields null — the
+// language's absent value; `undefined` never arises — and the arguments are
+// not evaluated.
 export interface BundleCallNode {
   "#": "call";
   callee: BundleExpressionNode;
   args: BundleExpressionNode[];
+  optional?: true;
 }
 
 // A static property access: `object.name`. When `optional` (`object?.name`),

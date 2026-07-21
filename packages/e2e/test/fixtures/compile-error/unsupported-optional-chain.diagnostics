@@ -1,2 +1,1 @@
-6:19-6:20 error TS0: `.` after `?.` isn't supported in a `cs` client script; use `?.` for each access in the chain.
-10:10-10:15 error TS0: `?.()` isn't supported in a `cs` client script; use `?.` on a property access instead.
+4:19-4:20 error TS0: `.` after `?.` isn't supported in a `cs` client script; use `?.` for each access in the chain.

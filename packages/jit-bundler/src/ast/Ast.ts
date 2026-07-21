@@ -107,6 +107,7 @@ export interface AstScriptCall {
   readonly loc: SourceLocation;
   readonly callee: AstScriptExpression;
   readonly args: readonly AstScriptExpression[];
+  readonly optional: boolean;
 }
 
 export interface AstScriptIdentifier {

@@ -10,10 +10,7 @@ const greet = cs.liftValue((__cs_name: string | null = null) => {
 const double = cs.liftValue(() => 2);
 
 const call = cs.liftValue((__cs_cb: (() => number) | null = null) => {
-    if (__cs_cb !== null) {
-        return __cs_cb();
-    }
-    return 0;
+    return __cs_cb?.() ?? 0;
 });
 
 export default cs.liftValue({ named: cs.spliceValue((greet))("hi"), omitted: cs.spliceValue((greet))(), explicit: cs.spliceValue((greet))(null), supplied: cs.spliceValue((call))(cs.spliceValue((double))), fallback: cs.spliceValue((call))() });

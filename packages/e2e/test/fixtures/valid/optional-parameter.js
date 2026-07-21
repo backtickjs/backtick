@@ -5,15 +5,15 @@ const greet = cs.create(
   [5, 15, 7, 3],
   {
     filePath: "optional-parameter.ts",
-    fileHash: "1ydjf78z1l2ru",
+    fileHash: "3rhwjto9jja73",
     splices: {},
     captures: [],
-    declarations: ["name$1ydjf78z1l2ru$0"],
+    declarations: ["name$3rhwjto9jja73$0"],
   },
   (v) =>
     v.arrow(
       [5, 18, 7, 2],
-      [v.identifier([5, 19, 5, 23], "name", "name$1ydjf78z1l2ru$0")],
+      [v.identifier([5, 19, 5, 23], "name", "name$3rhwjto9jja73$0")],
       v.block(
         [5, 37, 7, 2],
         [
@@ -23,7 +23,7 @@ const greet = cs.create(
               [6, 10, 6, 27],
               v.propertyAccess(
                 [6, 10, 6, 22],
-                v.identifier([6, 10, 6, 14], "name", "name$1ydjf78z1l2ru$0"),
+                v.identifier([6, 10, 6, 14], "name", "name$3rhwjto9jja73$0"),
                 "concat",
                 true,
               ),
@@ -39,7 +39,7 @@ const double = cs.create(
   [10, 16, 10, 27],
   {
     filePath: "optional-parameter.ts",
-    fileHash: "1ydjf78z1l2ru",
+    fileHash: "3rhwjto9jja73",
     splices: {},
     captures: [],
     declarations: [],
@@ -47,77 +47,67 @@ const double = cs.create(
   (v) => v.arrow([10, 19, 10, 26], [], v.number([10, 25, 10, 26], 2)),
 );
 const call = cs.create(
-  [12, 14, 17, 3],
+  [12, 14, 14, 3],
   {
     filePath: "optional-parameter.ts",
-    fileHash: "1ydjf78z1l2ru",
+    fileHash: "3rhwjto9jja73",
     splices: {},
     captures: [],
-    declarations: ["cb$1ydjf78z1l2ru$1"],
+    declarations: ["cb$3rhwjto9jja73$1"],
   },
   (v) =>
     v.arrow(
-      [12, 17, 17, 2],
-      [v.identifier([12, 18, 12, 20], "cb", "cb$1ydjf78z1l2ru$1")],
+      [12, 17, 14, 2],
+      [v.identifier([12, 18, 12, 20], "cb", "cb$3rhwjto9jja73$1")],
       v.block(
-        [12, 40, 17, 2],
+        [12, 40, 14, 2],
         [
-          v.if(
-            [13, 3, 15, 4],
+          v.return(
+            [13, 3, 13, 22],
             v.binop(
-              [13, 7, 13, 18],
-              v.identifier([13, 7, 13, 9], "cb", "cb$1ydjf78z1l2ru$1"),
-              "!==",
-              v.null([13, 14, 13, 18]),
+              [13, 10, 13, 21],
+              v.call(
+                [13, 10, 13, 16],
+                v.identifier([13, 10, 13, 12], "cb", "cb$3rhwjto9jja73$1"),
+                [],
+                true,
+              ),
+              "??",
+              v.number([13, 20, 13, 21], 0),
             ),
-            v.block(
-              [13, 20, 15, 4],
-              [
-                v.return(
-                  [14, 5, 14, 17],
-                  v.call(
-                    [14, 12, 14, 16],
-                    v.identifier([14, 12, 14, 14], "cb", "cb$1ydjf78z1l2ru$1"),
-                    [],
-                  ),
-                ),
-              ],
-            ),
-            null,
           ),
-          v.return([16, 3, 16, 12], v.number([16, 10, 16, 11], 0)),
         ],
       ),
     ),
 );
 export default cs.create(
-  [19, 16, 25, 4],
+  [16, 16, 22, 4],
   {
     filePath: "optional-parameter.ts",
-    fileHash: "1ydjf78z1l2ru",
+    fileHash: "3rhwjto9jja73",
     splices: { $greet: greet, $call: call, $double: double },
     captures: [],
     declarations: [],
   },
   (v) =>
-    v.object([19, 20, 25, 2], {
-      named: v.call([20, 10, 20, 22], v.splice([20, 10, 20, 16], "$greet"), [
-        v.string([20, 17, 20, 21], "hi"),
+    v.object([16, 20, 22, 2], {
+      named: v.call([17, 10, 17, 22], v.splice([17, 10, 17, 16], "$greet"), [
+        v.string([17, 17, 17, 21], "hi"),
       ]),
       omitted: v.call(
-        [21, 12, 21, 20],
-        v.splice([21, 12, 21, 18], "$greet"),
+        [18, 12, 18, 20],
+        v.splice([18, 12, 18, 18], "$greet"),
         [],
       ),
-      explicit: v.call([22, 13, 22, 25], v.splice([22, 13, 22, 19], "$greet"), [
-        v.null([22, 20, 22, 24]),
+      explicit: v.call([19, 13, 19, 25], v.splice([19, 13, 19, 19], "$greet"), [
+        v.null([19, 20, 19, 24]),
       ]),
-      supplied: v.call([23, 13, 23, 27], v.splice([23, 13, 23, 18], "$call"), [
-        v.splice([23, 19, 23, 26], "$double"),
+      supplied: v.call([20, 13, 20, 27], v.splice([20, 13, 20, 18], "$call"), [
+        v.splice([20, 19, 20, 26], "$double"),
       ]),
       fallback: v.call(
-        [24, 13, 24, 20],
-        v.splice([24, 13, 24, 18], "$call"),
+        [21, 13, 21, 20],
+        v.splice([21, 13, 21, 18], "$call"),
         [],
       ),
     }),

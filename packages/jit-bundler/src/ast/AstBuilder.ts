@@ -151,8 +151,9 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     loc: SourceLocation,
     callee: AstScriptExpression,
     args: AstScriptExpression[],
+    optional = false,
   ): AstScriptCall {
-    return { kind: "AstScriptCall", loc, callee, args };
+    return { kind: "AstScriptCall", loc, callee, args, optional };
   }
 
   arrow(

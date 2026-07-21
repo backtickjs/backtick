@@ -112,6 +112,28 @@ function checkedCondition(
   );
 }
 
+// Whether `node` is the left operand of a `??` (through parens). That `??`
+// already coalesces the `undefined` an optional chain produces, so the
+// chain's auto `?? null` would nest as `(a ?? null) ?? b` — same meaning,
+// but flagged by TypeScript (TS2871) — and is skipped.
+function nullCoalescedLeft(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+): boolean {
+  let child: ts.Node = node;
+  let parent: ts.Node | undefined = node.parent;
+  while (parent != null && ts.isParenthesizedExpression(parent)) {
+    child = parent;
+    parent = parent.parent;
+  }
+  return (
+    parent != null &&
+    ts.isBinaryExpression(parent) &&
+    parent.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken &&
+    parent.left === child
+  );
+}
+
 // The globally unique binding key the resolver assigned this identifier. An
 // unbound name (a "Cannot find name" error) keeps its original text.
 function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
@@ -561,23 +583,28 @@ function rewriteNodeImpl(
     ]);
     state.mappings.set(virtualReceiver, node.expression);
     // `a?.b` reads as null when `a` is null — the language has no
-    // `undefined` — so the optional access carries `?? null`.
-    const virtual = optional
-      ? ts.factory.createParenthesizedExpression(
-          ts.factory.createBinaryExpression(
-            ts.factory.createPropertyAccessChain(
-              virtualReceiver,
-              ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
-              propertyName,
-            ),
-            ts.SyntaxKind.QuestionQuestionToken,
-            ts.factory.createNull(),
-          ),
+    // `undefined` — so the optional access carries `?? null`, unless a
+    // user-written `??` already coalesces it.
+    const access = optional
+      ? ts.factory.createPropertyAccessChain(
+          virtualReceiver,
+          ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
+          propertyName,
         )
       : ts.factory.createPropertyAccessExpression(
           virtualReceiver,
           propertyName,
         );
+    const virtual =
+      optional && !nullCoalescedLeft(ts, node)
+        ? ts.factory.createParenthesizedExpression(
+            ts.factory.createBinaryExpression(
+              access,
+              ts.SyntaxKind.QuestionQuestionToken,
+              ts.factory.createNull(),
+            ),
+          )
+        : access;
     return {
       virtual,
       runtime: call(ts, "v", "propertyAccess", [
@@ -590,21 +617,9 @@ function rewriteNodeImpl(
   }
 
   if (ts.isCallExpression(node)) {
-    // `a.b?.()` — an optional call — has no client semantics; `?.` belongs
-    // on the access whose receiver may be null. Rewritten as `null` — its
-    // null-receiver result — so the one error stands alone, with no raw
-    // identifiers leaking into the virtual code.
-    if (node.questionDotToken) {
-      state.errors.set(
-        node,
-        "`?.()` isn't supported in a `cs` client script; use `?.` on a " +
-          "property access instead.",
-      );
-      return {
-        virtual: ts.factory.createNull(),
-        runtime: call(ts, "v", "null", [loc(node)]),
-      };
-    }
+    // `cb?.()` — an optional call: a null callee yields null, the
+    // arguments unevaluated, mirroring an optional access.
+    const optionalCall = node.questionDotToken != null;
     const args = node.arguments.map((arg) => rewriteNode(ts, state, arg));
     const runtimeArgs = ts.factory.createArrayLiteralExpression(
       args.map((arg) => arg.runtime as ts.Expression),
@@ -642,31 +657,41 @@ function rewriteNodeImpl(
       ]);
       state.mappings.set(virtualReceiver, access.expression);
 
-      const virtual = optional
-        ? ts.factory.createParenthesizedExpression(
-            ts.factory.createBinaryExpression(
-              ts.factory.createCallChain(
-                ts.factory.createPropertyAccessChain(
-                  virtualReceiver,
-                  ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
-                  propertyName,
-                ),
-                undefined,
-                undefined,
-                args.map((arg) => arg.virtual as ts.Expression),
-              ),
-              ts.SyntaxKind.QuestionQuestionToken,
-              ts.factory.createNull(),
-            ),
+      const calleeAccess = optional
+        ? ts.factory.createPropertyAccessChain(
+            virtualReceiver,
+            ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
+            propertyName,
+          )
+        : ts.factory.createPropertyAccessExpression(
+            virtualReceiver,
+            propertyName,
+          );
+      const inChain = optional || optionalCall;
+      const virtualCall = inChain
+        ? ts.factory.createCallChain(
+            calleeAccess,
+            optionalCall
+              ? ts.factory.createToken(ts.SyntaxKind.QuestionDotToken)
+              : undefined,
+            undefined,
+            args.map((arg) => arg.virtual as ts.Expression),
           )
         : ts.factory.createCallExpression(
-            ts.factory.createPropertyAccessExpression(
-              virtualReceiver,
-              propertyName,
-            ),
+            calleeAccess,
             undefined,
             args.map((arg) => arg.virtual as ts.Expression),
           );
+      const virtual =
+        inChain && !nullCoalescedLeft(ts, node)
+          ? ts.factory.createParenthesizedExpression(
+              ts.factory.createBinaryExpression(
+                virtualCall,
+                ts.SyntaxKind.QuestionQuestionToken,
+                ts.factory.createNull(),
+              ),
+            )
+          : virtualCall;
       return {
         virtual,
         runtime: call(ts, "v", "call", [
@@ -678,21 +703,40 @@ function rewriteNodeImpl(
             ...(optional ? [ts.factory.createTrue()] : []),
           ]),
           runtimeArgs,
+          ...(optionalCall ? [ts.factory.createTrue()] : []),
         ]),
       };
     }
 
     const callee = rewriteNode(ts, state, node.expression);
+    const virtualCall = optionalCall
+      ? ts.factory.createCallChain(
+          callee.virtual as ts.Expression,
+          ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
+          undefined,
+          args.map((arg) => arg.virtual as ts.Expression),
+        )
+      : ts.factory.createCallExpression(
+          callee.virtual as ts.Expression,
+          undefined,
+          args.map((arg) => arg.virtual as ts.Expression),
+        );
     return {
-      virtual: ts.factory.createCallExpression(
-        callee.virtual as ts.Expression,
-        undefined,
-        args.map((arg) => arg.virtual as ts.Expression),
-      ),
+      virtual:
+        optionalCall && !nullCoalescedLeft(ts, node)
+          ? ts.factory.createParenthesizedExpression(
+              ts.factory.createBinaryExpression(
+                virtualCall,
+                ts.SyntaxKind.QuestionQuestionToken,
+                ts.factory.createNull(),
+              ),
+            )
+          : virtualCall,
       runtime: call(ts, "v", "call", [
         loc(node),
         callee.runtime as ts.Expression,
         runtimeArgs,
+        ...(optionalCall ? [ts.factory.createTrue()] : []),
       ]),
     };
   }

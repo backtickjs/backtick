@@ -129,8 +129,14 @@ function buildExpression(
       };
     case "AstScriptBoolean":
       return node.value;
-    case "AstScriptCall":
-      return { "#": "call", callee: e(node.callee), args: node.args.map(e) };
+    case "AstScriptCall": {
+      return {
+        "#": "call",
+        callee: e(node.callee),
+        args: node.args.map(e),
+        optional: node.optional ? true : undefined,
+      };
+    }
     case "AstScriptIdentifier":
       return { "#": "identifier", name: mangle(node.bindingKey) };
     case "AstScriptNew":

@@ -10,10 +10,7 @@ const greet = cs`(name?: string) => {
 const double = cs`() => 2`;
 
 const call = cs`(cb?: () => number) => {
-  if (cb !== null) {
-    return cb();
-  }
-  return 0;
+  return cb?.() ?? 0;
 }`;
 
 export default cs`({

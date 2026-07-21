@@ -55,7 +55,7 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         isNode(node.callee) && node.callee["#"] === "arrow"
           ? `(${callee})`
           : callee;
-      return `${target}(${args.join(", ")})`;
+      return `${target}${node.optional ? "?." : ""}(${args.join(", ")})`;
     }
     case "property":
       return `${renderNode(node.object, indent)}${node.optional ? "?." : "."}${node.name}`;

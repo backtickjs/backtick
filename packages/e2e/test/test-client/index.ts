@@ -387,17 +387,28 @@ function evaluateNode(
           return null;
         }
         const method = object[node.callee.name];
+        // An optional call (`a.b?.(…)`) short-circuits a null method the
+        // same way, arguments unevaluated.
+        if (node.optional && method === null) {
+          return null;
+        }
         if (typeof method !== "function") {
           throw new Error(`${node.callee.name} is not a function`);
         }
         const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
         return method.apply(object, args);
       }
-      const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
+      // The callee evaluates before the arguments; an optional call
+      // (`cb?.(…)`) short-circuits a null callee to null, arguments
+      // unevaluated.
       const callee = evaluateNode(bundle, node.callee, scope);
+      if (node.optional && callee === null) {
+        return null;
+      }
       if (typeof callee !== "function") {
         throw new Error("callee is not a function");
       }
+      const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
       return callee(...args);
     }
     case "property": {

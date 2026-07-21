@@ -11,10 +11,7 @@
 }
 
 #f2 = () => (cb) => {
-  if (cb !== null) {
-    return cb();
-  }
-  return 0;
+  return cb?.() ?? 0;
 }
 
 #f3 = () => () => 2

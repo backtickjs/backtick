@@ -79,8 +79,9 @@ export interface Visitor<U> {
   // e.g. { a: 4 }
   object(loc: SourceLocation, entries: { [key: string]: U }): U;
 
-  // e.g. s.concat("!")
-  call(loc: SourceLocation, callee: U, args: U[]): U;
+  // e.g. s.concat("!") — `optional` for `cb?.(…)`, which yields null (never
+  // `undefined`) for a null callee, the arguments unevaluated
+  call(loc: SourceLocation, callee: U, args: U[], optional?: boolean): U;
 
   // e.g. (r, g, b) => { ... }
   arrow(loc: SourceLocation, params: U[], body: U): U;

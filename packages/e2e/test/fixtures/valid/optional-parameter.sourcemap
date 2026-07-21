@@ -23,19 +23,10 @@ cs.liftValue(                             → cs`
 (                                         → (
 __cs_cb                                   → cb
 : (() => number) | null = null) => {\n    → ?: () => number) => {\n  
-if (                                      → if (
-__cs_cb                                   → cb
- !==                                      →  !== 
-null                                      → null
-)                                         → ) 
-{\n                                       → {\n    
 return                                    → return 
 __cs_cb                                   → cb
-()                                        → ()
-;                                         → ;
-\n    }                                   → \n  }
-\n                                        → \n  
-return                                    → return 
+?.()                                      → ?.()
+ ??                                       →  ?? 
 0                                         → 0
 ;                                         → ;
 \n}                                       → \n}
