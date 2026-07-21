@@ -13,3 +13,11 @@ const declared = cs`{
 }`;
 
 const parameter = cs`(undefined: number) => 3`;
+
+const caught = cs`{
+  try {
+    return 4;
+  } catch (undefined) {
+    return 5;
+  }
+}`;
