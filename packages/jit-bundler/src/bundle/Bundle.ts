@@ -162,11 +162,16 @@ export interface BundleCallNode {
   args: BundleExpressionNode[];
 }
 
-// A static property access: `object.name`.
+// A static property access: `object.name`. When `optional` (`object?.name`),
+// a null object yields null — the language's absent value; `undefined` never
+// arises — instead of reading. As a call's callee, an optional access also
+// short-circuits the call: a null object yields null and the arguments are
+// not evaluated.
 export interface BundlePropertyNode {
   "#": "property";
   object: BundleExpressionNode;
   name: string;
+  optional?: true;
 }
 
 // The closed set of binary operators, part of the wire contract: a client
@@ -202,7 +207,10 @@ export interface BundleBinopNode {
 
 // An arrow function: evaluates to a closure over the enclosing scope. The
 // body is an expression node (implicit return) or a `block`. Every
-// `functions` entry is an arrow node.
+// `functions` entry is an arrow node. Applying an arrow with fewer
+// arguments than `params` binds the missing ones to null — the language's
+// absent value; `undefined` never arises — which is how an omitted
+// optional parameter reads as null.
 export interface BundleArrowNode {
   "#": "arrow";
   params: string[];

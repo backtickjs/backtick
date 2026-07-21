@@ -1,0 +1,214 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "found": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "x": 5
+            }
+          ]
+        },
+        "missing": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            null
+          ]
+        },
+        "deep": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f2"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "inner": {
+                "z": 7
+              }
+            }
+          ]
+        },
+        "cut": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f2"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "inner": null
+            }
+          ]
+        },
+        "top": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f2"
+            },
+            "args": []
+          },
+          "args": [
+            null
+          ]
+        },
+        "loud": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f3"
+            },
+            "args": []
+          },
+          "args": [
+            "hi"
+          ]
+        },
+        "silent": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f3"
+            },
+            "args": []
+          },
+          "args": [
+            null
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "p"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "return",
+              "expression": {
+                "#": "property",
+                "object": {
+                  "#": "identifier",
+                  "name": "p"
+                },
+                "name": "x",
+                "optional": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "o"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "return",
+              "expression": {
+                "#": "property",
+                "object": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "o"
+                  },
+                  "name": "inner",
+                  "optional": true
+                },
+                "name": "z",
+                "optional": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "s"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "return",
+              "expression": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "s"
+                  },
+                  "name": "concat",
+                  "optional": true
+                },
+                "args": [
+                  "!"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

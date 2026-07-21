@@ -1,0 +1,135 @@
+cs.liftValue(                             → cs`
+(                                         → (
+__cs_p                                    → p
+: {\n    x: number;\n} | null) => {\n     → : { x: number } | null) => {\n  
+return                                    → return 
+(                                         → 
+cs.virtualize(                            → 
+__cs_p                                    → p
+)                                         → 
+?.                                        → ?.
+x                                         → x
+ ?? null)                                 → 
+;                                         → ;
+\n}                                       → \n}
+)                                         → `
+cs.liftValue(                             → cs`
+(                                         → (
+__cs_o                                    → o
+: {\n    inner: {\n        z: number;\n    } | null;\n} | null) => {\n    → : { inner: { z: number } | null } | null) => {\n  
+return                                    → return 
+(                                         → 
+cs.virtualize(                            → 
+(                                         → 
+cs.virtualize(                            → 
+__cs_o                                    → o
+)                                         → 
+?.                                        → ?.
+inner                                     → inner
+ ?? null)                                 → 
+)                                         → 
+?.                                        → ?.
+z                                         → z
+ ?? null)                                 → 
+;                                         → ;
+\n}                                       → \n}
+)                                         → `
+cs.liftValue(                             → cs`
+(                                         → (
+__cs_s                                    → s
+: string | null) => {\n                   → : string | null) => {\n  
+return                                    → return 
+(                                         → 
+cs.virtualize(                            → 
+__cs_s                                    → s
+)                                         → 
+?.                                        → ?.
+concat                                    → concat
+(                                         → (
+"!"                                       → "!"
+) ?? null)                                → )
+;                                         → ;
+\n}                                       → \n}
+)                                         → `
+cs.liftValue(                             → cs`
+{                                         → ({\n  
+found                                     → found
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(pick)                                    → $pick
+)                                         →  [-semantic]
+(                                         → (
+{                                         → { 
+x                                         → x
+:                                         → : 
+5                                         → 5
+ }                                        →  }
+)                                         → )
+,                                         → ,\n  
+missing                                   → missing
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(pick)                                    → $pick
+)                                         →  [-semantic]
+(                                         → (
+null                                      → null
+)                                         → )
+,                                         → ,\n  
+deep                                      → deep
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(deep)                                    → $deep
+)                                         →  [-semantic]
+(                                         → (
+{                                         → { 
+inner                                     → inner
+:                                         → : 
+{                                         → { 
+z                                         → z
+:                                         → : 
+7                                         → 7
+ }                                        →  }
+ }                                        →  }
+)                                         → )
+,                                         → ,\n  
+cut                                       → cut
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(deep)                                    → $deep
+)                                         →  [-semantic]
+(                                         → (
+{                                         → { 
+inner                                     → inner
+:                                         → : 
+null                                      → null
+ }                                        →  }
+)                                         → )
+,                                         → ,\n  
+top                                       → top
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(deep)                                    → $deep
+)                                         →  [-semantic]
+(                                         → (
+null                                      → null
+)                                         → )
+,                                         → ,\n  
+loud                                      → loud
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(shout)                                   → $shout
+)                                         →  [-semantic]
+(                                         → (
+"hi"                                      → "hi"
+)                                         → )
+,                                         → ,\n  
+silent                                    → silent
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(shout)                                   → $shout
+)                                         →  [-semantic]
+(                                         → (
+null                                      → null
+)                                         → )
+ }                                        → ,\n})
+)                                         → `

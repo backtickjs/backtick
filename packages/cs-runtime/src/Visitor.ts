@@ -61,8 +61,14 @@ export interface Visitor<U> {
   // e.g. try { ... } catch (e) { ... } — `param` is null for `catch { ... }`
   try(loc: SourceLocation, block: U, param: U | null, handler: U): U;
 
-  // e.g. obj.a
-  propertyAccess(loc: SourceLocation, expression: U, name: string): U;
+  // e.g. obj.a — `optional` for `obj?.a`, which reads as null (the
+  // language's absent value, never `undefined`) when the receiver is null
+  propertyAccess(
+    loc: SourceLocation,
+    expression: U,
+    name: string,
+    optional?: boolean,
+  ): U;
 
   // e.g. a + b
   binop(loc: SourceLocation, lhs: U, operator: BinaryOperator, rhs: U): U;

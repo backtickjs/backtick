@@ -159,8 +159,14 @@ function buildExpression(
       }
       return entries;
     }
-    case "AstScriptPropertyAccess":
-      return { "#": "property", object: e(node.expression), name: node.name };
+    case "AstScriptPropertyAccess": {
+      return {
+        "#": "property",
+        object: e(node.expression),
+        name: node.name,
+        optional: node.optional ? true : undefined,
+      };
+    }
     case "AstScriptSplice":
       return renderSplice(node.key);
     case "AstScriptString":

@@ -122,8 +122,9 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     loc: SourceLocation,
     expression: AstScriptExpression,
     name: string,
+    optional = false,
   ): AstScriptPropertyAccess {
-    return { kind: "AstScriptPropertyAccess", loc, expression, name };
+    return { kind: "AstScriptPropertyAccess", loc, expression, name, optional };
   }
 
   binop(

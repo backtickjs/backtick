@@ -1,0 +1,45 @@
+cs.liftValue(                         → cs`
+(                                     → (
+__cs_name                             → name
+: (string) | null = null) => {\n      → ?: string) => {\n  
+return                                → return 
+(                                     → 
+cs.virtualize(                        → 
+__cs_name                             → name
+)                                     → 
+?.                                    → ?.
+concat                                → concat
+(                                     → (
+"!"                                   → "!"
+) ?? null)                            → )
+;                                     → ;
+\n}                                   → \n}
+)                                     → `
+cs.liftValue(                         → cs`
+{                                     → ({\n  
+named                                 → named
+:                                     → : 
+cs.spliceValue(                       →  [-semantic]
+(greet)                               → $greet
+)                                     →  [-semantic]
+(                                     → (
+"hi"                                  → "hi"
+)                                     → )
+,                                     → ,\n  
+omitted                               → omitted
+:                                     → : 
+cs.spliceValue(                       →  [-semantic]
+(greet)                               → $greet
+)                                     →  [-semantic]
+()                                    → ()
+,                                     → ,\n  
+explicit                              → explicit
+:                                     → : 
+cs.spliceValue(                       →  [-semantic]
+(greet)                               → $greet
+)                                     →  [-semantic]
+(                                     → (
+null                                  → null
+)                                     → )
+ }                                    → ,\n})
+)                                     → `

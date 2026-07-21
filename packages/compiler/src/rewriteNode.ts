@@ -536,6 +536,19 @@ function rewriteNodeImpl(
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const name = node.name.text;
 
+    // `?.` propagates null one step, so each access in a chain handles the
+    // null its receiver may produce; a plain `.` after `?.` (which
+    // JavaScript short-circuits past) has no meaning here. Rewritten as
+    // `?.` — the suggested fix — so the one error stands alone.
+    if (ts.isOptionalChain(node) && !node.questionDotToken) {
+      state.errors.set(
+        node.name,
+        "`.` after `?.` isn't supported in a `cs` client script; use `?.` " +
+          "for each access in the chain.",
+      );
+    }
+    const optional = ts.isOptionalChain(node);
+
     const expression = rewriteNode(ts, state, node.expression);
     // Member access is virtualized: the receiver is viewed as `Virtualized<T>`
     // via `cs.virtualize`, so a host-typed receiver's members read as what
@@ -547,20 +560,51 @@ function rewriteNodeImpl(
       expression.virtual as ts.Expression,
     ]);
     state.mappings.set(virtualReceiver, node.expression);
+    // `a?.b` reads as null when `a` is null — the language has no
+    // `undefined` — so the optional access carries `?? null`.
+    const virtual = optional
+      ? ts.factory.createParenthesizedExpression(
+          ts.factory.createBinaryExpression(
+            ts.factory.createPropertyAccessChain(
+              virtualReceiver,
+              ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
+              propertyName,
+            ),
+            ts.SyntaxKind.QuestionQuestionToken,
+            ts.factory.createNull(),
+          ),
+        )
+      : ts.factory.createPropertyAccessExpression(
+          virtualReceiver,
+          propertyName,
+        );
     return {
-      virtual: ts.factory.createPropertyAccessExpression(
-        virtualReceiver,
-        propertyName,
-      ),
+      virtual,
       runtime: call(ts, "v", "propertyAccess", [
         loc(node),
         expression.runtime as ts.Expression,
         ts.factory.createStringLiteral(name),
+        ...(optional ? [ts.factory.createTrue()] : []),
       ]),
     };
   }
 
   if (ts.isCallExpression(node)) {
+    // `a.b?.()` — an optional call — has no client semantics; `?.` belongs
+    // on the access whose receiver may be null. Rewritten as `null` — its
+    // null-receiver result — so the one error stands alone, with no raw
+    // identifiers leaking into the virtual code.
+    if (node.questionDotToken) {
+      state.errors.set(
+        node,
+        "`?.()` isn't supported in a `cs` client script; use `?.` on a " +
+          "property access instead.",
+      );
+      return {
+        virtual: ts.factory.createNull(),
+        runtime: call(ts, "v", "null", [loc(node)]),
+      };
+    }
     const args = node.arguments.map((arg) => rewriteNode(ts, state, arg));
     const runtimeArgs = ts.factory.createArrayLiteralExpression(
       args.map((arg) => arg.runtime as ts.Expression),
@@ -572,12 +616,25 @@ function rewriteNodeImpl(
       ts.isIdentifier(node.expression.name)
     ) {
       const access = node.expression;
+      // The same one-step rule as the property branch: this access is
+      // consumed inline, so it needs its own copy of the check (and the
+      // same rewrite-as-`?.` recovery).
+      if (ts.isOptionalChain(access) && !access.questionDotToken) {
+        state.errors.set(
+          access.name,
+          "`.` after `?.` isn't supported in a `cs` client script; use " +
+            "`?.` for each access in the chain.",
+        );
+      }
+      const optional = ts.isOptionalChain(access);
       const receiver = rewriteNode(ts, state, access.expression);
       const name = access.name.text;
       // A method call goes through the same virtualized access: the member
       // is read off `cs.virtualize(receiver)`, then the call checks its
       // arguments and yields its return type. The runtime keeps the direct
-      // property call, so receiver binding is unchanged.
+      // property call, so receiver binding is unchanged. An optional
+      // receiver (`a?.b(…)`) short-circuits a null `a` to null, so the
+      // call carries `?? null` like an optional access.
       const propertyName = ts.factory.createIdentifier(name);
       state.mappings.set(propertyName, access.name);
       const virtualReceiver = call(ts, "cs", "virtualize", [
@@ -585,21 +642,40 @@ function rewriteNodeImpl(
       ]);
       state.mappings.set(virtualReceiver, access.expression);
 
+      const virtual = optional
+        ? ts.factory.createParenthesizedExpression(
+            ts.factory.createBinaryExpression(
+              ts.factory.createCallChain(
+                ts.factory.createPropertyAccessChain(
+                  virtualReceiver,
+                  ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
+                  propertyName,
+                ),
+                undefined,
+                undefined,
+                args.map((arg) => arg.virtual as ts.Expression),
+              ),
+              ts.SyntaxKind.QuestionQuestionToken,
+              ts.factory.createNull(),
+            ),
+          )
+        : ts.factory.createCallExpression(
+            ts.factory.createPropertyAccessExpression(
+              virtualReceiver,
+              propertyName,
+            ),
+            undefined,
+            args.map((arg) => arg.virtual as ts.Expression),
+          );
       return {
-        virtual: ts.factory.createCallExpression(
-          ts.factory.createPropertyAccessExpression(
-            virtualReceiver,
-            propertyName,
-          ),
-          undefined,
-          args.map((arg) => arg.virtual as ts.Expression),
-        ),
+        virtual,
         runtime: call(ts, "v", "call", [
           loc(node),
           call(ts, "v", "propertyAccess", [
             loc(access),
             receiver.runtime as ts.Expression,
             ts.factory.createStringLiteral(name),
+            ...(optional ? [ts.factory.createTrue()] : []),
           ]),
           runtimeArgs,
         ]),
@@ -655,9 +731,30 @@ function rewriteNodeImpl(
 
   if (ts.isArrowFunction(node)) {
     const params = node.parameters.map((param) => {
+      // A rest parameter or a default would be silently dropped from the
+      // bundle — a miscompile, not a restriction to lift later.
+      if (param.dotDotDotToken) {
+        state.errors.set(
+          param,
+          "A rest parameter isn't supported in a `cs` client script.",
+        );
+        return null;
+      }
+      if (param.initializer) {
+        state.errors.set(
+          param,
+          "A parameter default isn't supported in a `cs` client script; " +
+            "use `?` and handle `null` instead.",
+        );
+        return null;
+      }
       if (ts.isIdentifier(param.name)) {
         bannedUndefined(state, param.name, "parameter");
-        return { name: param.name, type: param.type };
+        return {
+          name: param.name,
+          type: param.type,
+          optional: param.questionToken != null,
+        };
       }
       state.errors.set(
         param,
@@ -680,12 +777,21 @@ function rewriteNodeImpl(
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
+        // `?` marks a nullable parameter: the virtual is `(T) | null = null`,
+        // so callers may omit the argument and the body reads `T | null` —
+        // the `= null` absorbs `undefined`, which the language doesn't have.
         return ts.factory.createParameterDeclaration(
           undefined,
           undefined,
           identifier,
           undefined,
-          param.type,
+          param.optional && param.type
+            ? ts.factory.createUnionTypeNode([
+                ts.factory.createParenthesizedType(param.type),
+                ts.factory.createLiteralTypeNode(ts.factory.createNull()),
+              ])
+            : param.type,
+          param.optional ? ts.factory.createNull() : undefined,
         );
       });
       const body = rewriteNode(ts, bodyState, node.body);

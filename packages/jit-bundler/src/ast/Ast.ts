@@ -158,6 +158,7 @@ export interface AstScriptPropertyAccess {
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly name: string;
+  readonly optional: boolean;
 }
 
 export interface AstScriptReturn {

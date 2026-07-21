@@ -1,0 +1,89 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "named": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            "hi"
+          ]
+        },
+        "omitted": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": []
+        },
+        "explicit": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            null
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "name"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "return",
+              "expression": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "name"
+                  },
+                  "name": "concat",
+                  "optional": true
+                },
+                "args": [
+                  "!"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

@@ -1,0 +1,7 @@
+#f0 = () => { "named": #f1()("hi"), "omitted": #f1()(), "explicit": #f1()(null) }
+
+#f1 = () => (name) => {
+  return name?.concat("!");
+}
+
+root = #f0()

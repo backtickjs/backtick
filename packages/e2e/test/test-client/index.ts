@@ -375,18 +375,25 @@ function evaluateNode(
       return entryFunction(bundle, node.label);
     }
     case "call": {
-      const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
+      // The receiver evaluates before the arguments; an optional receiver
+      // (`a?.b(…)`) short-circuits a null object to null, arguments
+      // unevaluated.
       if (isNode(node.callee) && node.callee["#"] === "property") {
         const object = evaluateNode(bundle, node.callee.object, scope) as {
           [name: string]: unknown;
         };
+        if (node.callee.optional && object === null) {
+          return null;
+        }
         const method = object[node.callee.name];
         if (typeof method !== "function") {
           throw new Error(`${node.callee.name} is not a function`);
         }
+        const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
         return method.apply(object, args);
       }
+      const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
       const callee = evaluateNode(bundle, node.callee, scope);
       if (typeof callee !== "function") {
         throw new Error("callee is not a function");
@@ -397,6 +404,9 @@ function evaluateNode(
       const object = evaluateNode(bundle, node.object, scope) as {
         [name: string]: unknown;
       };
+      if (node.optional && object === null) {
+        return null;
+      }
       return object[node.name];
     }
     case "binop": {
@@ -405,8 +415,11 @@ function evaluateNode(
     case "arrow": {
       return (...args: unknown[]) => {
         const frame: Scope = { parent: scope, bindings: new Map() };
+        // A missing argument binds as null — the language's absent value;
+        // `undefined` never arises (an omitted optional parameter reads
+        // as null).
         node.params.forEach((param, index) => {
-          frame.bindings.set(param, args[index]);
+          frame.bindings.set(param, index < args.length ? args[index] : null);
         });
         const body = node.body;
         if (isNode(body) && body["#"] === "block") {

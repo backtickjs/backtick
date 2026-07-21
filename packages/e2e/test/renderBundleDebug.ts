@@ -58,7 +58,7 @@ function renderNode(node: BundleStatementNode, indent: string): string {
       return `${target}(${args.join(", ")})`;
     }
     case "property":
-      return `${renderNode(node.object, indent)}.${node.name}`;
+      return `${renderNode(node.object, indent)}${node.optional ? "?." : "."}${node.name}`;
     case "binop":
       return `${renderNode(node.left, indent)} ${node.operator} ${renderNode(
         node.right,

@@ -1,0 +1,23 @@
+#f0 = () => {
+  "found": #f1()({ "x": 5 }),
+  "missing": #f1()(null),
+  "deep": #f2()({ "inner": { "z": 7 } }),
+  "cut": #f2()({ "inner": null }),
+  "top": #f2()(null),
+  "loud": #f3()("hi"),
+  "silent": #f3()(null)
+}
+
+#f1 = () => (p) => {
+  return p?.x;
+}
+
+#f2 = () => (o) => {
+  return o?.inner?.z;
+}
+
+#f3 = () => (s) => {
+  return s?.concat("!");
+}
+
+root = #f0()
