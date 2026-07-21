@@ -163,6 +163,34 @@ function bannedUndefined(
   return true;
 }
 
+// `undefined` and `void` name no client value: an in-script annotation
+// spells the absent value `null`. This catches the keywords with a precise
+// span; a host alias can still smuggle them past the syntax.
+function bannedTypeKeywords(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  type: ts.Node,
+): boolean {
+  if (
+    type.kind === ts.SyntaxKind.UndefinedKeyword ||
+    type.kind === ts.SyntaxKind.VoidKeyword
+  ) {
+    state.errors.set(
+      type,
+      type.kind === ts.SyntaxKind.UndefinedKeyword
+        ? "`undefined` isn't supported in a `cs` client script; use `null` " +
+            "instead."
+        : "`void` isn't supported in a `cs` client script.",
+    );
+    return true;
+  }
+  let found = false;
+  ts.forEachChild(type, (child) => {
+    found = bannedTypeKeywords(ts, state, child) || found;
+  });
+  return found;
+}
+
 // The initializer's first reference to the binding it declares (e.g. a
 // method closing over the object that holds it) — rejected: checked value
 // positions would force resolving the binding mid-inference (TS7022), and
@@ -809,9 +837,15 @@ function rewriteNodeImpl(
       }
       if (ts.isIdentifier(param.name)) {
         bannedUndefined(state, param.name, "parameter");
+        let type = param.type;
+        // Rewritten as `any` — the keyword error stands alone; the
+        // `ClientValue` boundary check would otherwise repeat it coarsely.
+        if (type && bannedTypeKeywords(ts, state, type)) {
+          type = ts.factory.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
+        }
         return {
           name: param.name,
-          type: param.type,
+          type,
           optional: param.questionToken != null,
         };
       }
