@@ -11,3 +11,5 @@ const declared = cs`{
   const undefined = 1;
   return 2;
 }`;
+
+const parameter = cs`(undefined: number) => 3`;

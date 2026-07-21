@@ -120,14 +120,24 @@ function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
 }
 
 // `undefined` doesn't exist in the language — `null` is the absent value.
-function bannedUndefined(state: RewriteState, name: ts.Identifier): boolean {
+// A value use hints the fix; a name use gets TypeScript's own
+// not-allowed-as-a-name wording.
+function bannedUndefined(
+  state: RewriteState,
+  name: ts.Identifier,
+  position: "value" | "declaration" | "parameter",
+): boolean {
   if (name.text !== "undefined") {
     return false;
   }
   state.errors.set(
     name,
-    "`undefined` isn't supported in a `cs` client script; use `null` " +
-      "instead.",
+    position === "value"
+      ? "`undefined` isn't supported in a `cs` client script; use `null` " +
+          "instead."
+      : `\`undefined\` is not allowed as a ${
+          position === "declaration" ? "variable declaration" : "parameter"
+        } name.`,
   );
   return true;
 }
@@ -235,7 +245,7 @@ function rewriteNodeImpl(
         );
         return unsupported();
       }
-      bannedUndefined(state, name);
+      bannedUndefined(state, name, "declaration");
       // The declaration still rewrites: self-reference produces valid
       // virtual code, so the one error stands alone.
       const reference = selfReference(
@@ -386,7 +396,7 @@ function rewriteNodeImpl(
       return unsupported();
     }
     if (declaration && ts.isIdentifier(declaration.name)) {
-      bannedUndefined(state, declaration.name);
+      bannedUndefined(state, declaration.name, "declaration");
     }
     const block = rewriteNode(ts, state, node.tryBlock);
     let param: { virtual: ts.Identifier; runtime: ts.Expression } | null = null;
@@ -493,7 +503,7 @@ function rewriteNodeImpl(
 
     // Rewritten as `null` — the suggested fix — so the one error stands
     // alone, with no `undefined` type cascading into the value checks.
-    if (bannedUndefined(state, node)) {
+    if (bannedUndefined(state, node, "value")) {
       return {
         virtual: ts.factory.createNull(),
         runtime: call(ts, "v", "null", [loc(node)]),
@@ -638,7 +648,7 @@ function rewriteNodeImpl(
   if (ts.isArrowFunction(node)) {
     const params = node.parameters.map((param) => {
       if (ts.isIdentifier(param.name)) {
-        bannedUndefined(state, param.name);
+        bannedUndefined(state, param.name, "parameter");
         return { name: param.name, type: param.type };
       }
       state.errors.set(
