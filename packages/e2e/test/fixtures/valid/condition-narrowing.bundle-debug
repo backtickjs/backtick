@@ -1,15 +1,15 @@
-#f0 = (undefined) => {
-  "missing": #f1(undefined)(undefined, true),
-  "loud": #f1(undefined)("!hi", true),
-  "quiet": #f1(undefined)("!hi", false),
-  "plain": #f1(undefined)("zz", false)
+#f0 = () => {
+  "missing": #f1()(null, true),
+  "loud": #f1()("!hi", true),
+  "quiet": #f1()("!hi", false),
+  "plain": #f1()("zz", false)
 }
 
-#f1 = (undefined) => (text, upper) => {
-  if (upper && text !== undefined) {
+#f1 = () => (text, upper) => {
+  if (upper && text !== null) {
     return text.toUpperCase();
   }
-  if (#f2() && text !== undefined && text.charAt(0) === "!") {
+  if (#f2() && text !== null && text.charAt(0) === "!") {
     return text.concat("?");
   }
   return "none";
@@ -17,4 +17,4 @@
 
 #f2 = () => true
 
-root = #f0(undefined)
+root = #f0()

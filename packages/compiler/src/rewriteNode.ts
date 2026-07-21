@@ -119,6 +119,19 @@ function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
   return state.bindings.get(identifier) ?? identifier.text;
 }
 
+// `undefined` doesn't exist in the language — `null` is the absent value.
+function bannedUndefined(state: RewriteState, name: ts.Identifier): boolean {
+  if (name.text !== "undefined") {
+    return false;
+  }
+  state.errors.set(
+    name,
+    "`undefined` isn't supported in a `cs` client script; use `null` " +
+      "instead.",
+  );
+  return true;
+}
+
 // The initializer's first reference to the binding it declares (e.g. a
 // method closing over the object that holds it) — rejected: checked value
 // positions would force resolving the binding mid-inference (TS7022), and
@@ -222,6 +235,7 @@ function rewriteNodeImpl(
         );
         return unsupported();
       }
+      bannedUndefined(state, name);
       // The declaration still rewrites: self-reference produces valid
       // virtual code, so the one error stands alone.
       const reference = selfReference(
@@ -371,6 +385,9 @@ function rewriteNodeImpl(
       );
       return unsupported();
     }
+    if (declaration && ts.isIdentifier(declaration.name)) {
+      bannedUndefined(state, declaration.name);
+    }
     const block = rewriteNode(ts, state, node.tryBlock);
     let param: { virtual: ts.Identifier; runtime: ts.Expression } | null = null;
     if (declaration && ts.isIdentifier(declaration.name)) {
@@ -471,6 +488,15 @@ function rewriteNodeImpl(
           loc(node),
           ts.factory.createStringLiteral(splice.key),
         ]),
+      };
+    }
+
+    // Rewritten as `null` — the suggested fix — so the one error stands
+    // alone, with no `undefined` type cascading into the value checks.
+    if (bannedUndefined(state, node)) {
+      return {
+        virtual: ts.factory.createNull(),
+        runtime: call(ts, "v", "null", [loc(node)]),
       };
     }
 
@@ -612,6 +638,7 @@ function rewriteNodeImpl(
   if (ts.isArrowFunction(node)) {
     const params = node.parameters.map((param) => {
       if (ts.isIdentifier(param.name)) {
+        bannedUndefined(state, param.name);
         return { name: param.name, type: param.type };
       }
       state.errors.set(

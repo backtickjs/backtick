@@ -1,0 +1,3 @@
+4:17-4:26 error TS0: `undefined` isn't supported in a `cs` client script; use `null` instead.
+7:10-7:19 error TS0: `undefined` isn't supported in a `cs` client script; use `null` instead.
+11:9-11:18 error TS0: `undefined` isn't supported in a `cs` client script; use `null` instead.

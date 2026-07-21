@@ -1,120 +1,120 @@
-cs.liftValue(           → cs`
-true                    → true
-)                       → `
-cs.liftValue(           → cs`
-(                       → (\n  
-__cs_text               → text
-: string | undefined,   → : string | undefined,\n  
-__cs_upper              → upper
-: boolean) => {\n       → : boolean,\n) => {\n  
-if (                    → if (
-(cs.condition(          → 
-__cs_upper              → upper
-) &&                    → 
-__cs_upper              → upper [-semantic -completion -navigation -verification]
-) &&                    →  && 
-__cs_text               → text
- !==                    →  !== 
-undefined               → undefined
-)                       → ) 
-{\n                     → {\n    
-return                  → return 
-cs.virtualize(          → 
-__cs_text               → text
-)                       → 
-.                       → .
-toUpperCase             → toUpperCase
-()                      → ()
-;                       → ;
-\n    }                 → \n  }
-\n                      → \n  
-if (                    → if (
-(cs.condition(          → 
-cs.spliceValue(         → ${ [-semantic]
-flags.strict            → flags.strict
-)                       → } [-semantic]
-) &&                    → 
-cs.spliceValue(         → ${ [-semantic -completion -navigation -verification]
-flags.strict            → flags.strict
-)                       → } [-semantic -completion -navigation -verification]
-) &&                    →  && 
-__cs_text               → text
- !==                    →  !== 
-undefined               → undefined
- &&                     →  && 
-cs.virtualize(          → 
-__cs_text               → text
-)                       → 
-.                       → .
-charAt                  → charAt
-(                       → (
-0                       → 0
-)                       → )
- ===                    →  === 
-"!"                     → "!"
-)                       → ) 
-{\n                     → {\n    
-return                  → return 
-cs.virtualize(          → 
-__cs_text               → text
-)                       → 
-.                       → .
-concat                  → concat
-(                       → (
-"?"                     → "?"
-)                       → )
-;                       → ;
-\n    }                 → \n  }
-\n                      → \n  
-return                  → return 
-"none"                  → "none"
-;                       → ;
-\n}                     → \n}
-)                       → `
-cs.liftValue(           → cs`
-{                       → ({\n  
-missing                 → missing
-:                       → : 
-cs.spliceValue(         →  [-semantic]
-(label)                 → $label
-)                       →  [-semantic]
-(                       → (
-undefined               → undefined
-,                       → , 
-true                    → true
-)                       → )
-,                       → ,\n  
-loud                    → loud
-:                       → : 
-cs.spliceValue(         →  [-semantic]
-(label)                 → $label
-)                       →  [-semantic]
-(                       → (
-"!hi"                   → "!hi"
-,                       → , 
-true                    → true
-)                       → )
-,                       → ,\n  
-quiet                   → quiet
-:                       → : 
-cs.spliceValue(         →  [-semantic]
-(label)                 → $label
-)                       →  [-semantic]
-(                       → (
-"!hi"                   → "!hi"
-,                       → , 
-false                   → false
-)                       → )
-,                       → ,\n  
-plain                   → plain
-:                       → : 
-cs.spliceValue(         →  [-semantic]
-(label)                 → $label
-)                       →  [-semantic]
-(                       → (
-"zz"                    → "zz"
-,                       → , 
-false                   → false
-)                       → )
- }                      → ,\n})
-)                       → `
+cs.liftValue(          → cs`
+true                   → true
+)                      → `
+cs.liftValue(          → cs`
+(                      → (\n  
+__cs_text              → text
+: string | null,       → : string | null,\n  
+__cs_upper             → upper
+: boolean) => {\n      → : boolean,\n) => {\n  
+if (                   → if (
+(cs.condition(         → 
+__cs_upper             → upper
+) &&                   → 
+__cs_upper             → upper [-semantic -completion -navigation -verification]
+) &&                   →  && 
+__cs_text              → text
+ !==                   →  !== 
+null                   → null
+)                      → ) 
+{\n                    → {\n    
+return                 → return 
+cs.virtualize(         → 
+__cs_text              → text
+)                      → 
+.                      → .
+toUpperCase            → toUpperCase
+()                     → ()
+;                      → ;
+\n    }                → \n  }
+\n                     → \n  
+if (                   → if (
+(cs.condition(         → 
+cs.spliceValue(        → ${ [-semantic]
+flags.strict           → flags.strict
+)                      → } [-semantic]
+) &&                   → 
+cs.spliceValue(        → ${ [-semantic -completion -navigation -verification]
+flags.strict           → flags.strict
+)                      → } [-semantic -completion -navigation -verification]
+) &&                   →  && 
+__cs_text              → text
+ !==                   →  !== 
+null                   → null
+ &&                    →  && 
+cs.virtualize(         → 
+__cs_text              → text
+)                      → 
+.                      → .
+charAt                 → charAt
+(                      → (
+0                      → 0
+)                      → )
+ ===                   →  === 
+"!"                    → "!"
+)                      → ) 
+{\n                    → {\n    
+return                 → return 
+cs.virtualize(         → 
+__cs_text              → text
+)                      → 
+.                      → .
+concat                 → concat
+(                      → (
+"?"                    → "?"
+)                      → )
+;                      → ;
+\n    }                → \n  }
+\n                     → \n  
+return                 → return 
+"none"                 → "none"
+;                      → ;
+\n}                    → \n}
+)                      → `
+cs.liftValue(          → cs`
+{                      → ({\n  
+missing                → missing
+:                      → : 
+cs.spliceValue(        →  [-semantic]
+(label)                → $label
+)                      →  [-semantic]
+(                      → (
+null                   → null
+,                      → , 
+true                   → true
+)                      → )
+,                      → ,\n  
+loud                   → loud
+:                      → : 
+cs.spliceValue(        →  [-semantic]
+(label)                → $label
+)                      →  [-semantic]
+(                      → (
+"!hi"                  → "!hi"
+,                      → , 
+true                   → true
+)                      → )
+,                      → ,\n  
+quiet                  → quiet
+:                      → : 
+cs.spliceValue(        →  [-semantic]
+(label)                → $label
+)                      →  [-semantic]
+(                      → (
+"!hi"                  → "!hi"
+,                      → , 
+false                  → false
+)                      → )
+,                      → ,\n  
+plain                  → plain
+:                      → : 
+cs.spliceValue(        →  [-semantic]
+(label)                → $label
+)                      →  [-semantic]
+(                      → (
+"zz"                   → "zz"
+,                      → , 
+false                  → false
+)                      → )
+ }                     → ,\n})
+)                      → `

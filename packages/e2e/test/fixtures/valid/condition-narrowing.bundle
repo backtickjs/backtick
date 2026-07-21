@@ -2,9 +2,7 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [
-        "undefined"
-      ],
+      "params": [],
       "body": {
         "missing": {
           "#": "call",
@@ -14,18 +12,10 @@
               "#": "entry",
               "label": "#f1"
             },
-            "args": [
-              {
-                "#": "identifier",
-                "name": "undefined"
-              }
-            ]
+            "args": []
           },
           "args": [
-            {
-              "#": "identifier",
-              "name": "undefined"
-            },
+            null,
             true
           ]
         },
@@ -37,12 +27,7 @@
               "#": "entry",
               "label": "#f1"
             },
-            "args": [
-              {
-                "#": "identifier",
-                "name": "undefined"
-              }
-            ]
+            "args": []
           },
           "args": [
             "!hi",
@@ -57,12 +42,7 @@
               "#": "entry",
               "label": "#f1"
             },
-            "args": [
-              {
-                "#": "identifier",
-                "name": "undefined"
-              }
-            ]
+            "args": []
           },
           "args": [
             "!hi",
@@ -77,12 +57,7 @@
               "#": "entry",
               "label": "#f1"
             },
-            "args": [
-              {
-                "#": "identifier",
-                "name": "undefined"
-              }
-            ]
+            "args": []
           },
           "args": [
             "zz",
@@ -93,9 +68,7 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [
-        "undefined"
-      ],
+      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -121,10 +94,7 @@
                     "#": "identifier",
                     "name": "text"
                   },
-                  "right": {
-                    "#": "identifier",
-                    "name": "undefined"
-                  }
+                  "right": null
                 }
               },
               "consequent": {
@@ -172,10 +142,7 @@
                       "#": "identifier",
                       "name": "text"
                     },
-                    "right": {
-                      "#": "identifier",
-                      "name": "undefined"
-                    }
+                    "right": null
                   }
                 },
                 "right": {
@@ -240,11 +207,6 @@
   "root": {
     "#": "apply",
     "label": "#f0",
-    "args": [
-      {
-        "#": "global",
-        "name": "undefined"
-      }
-    ]
+    "args": []
   }
 }
