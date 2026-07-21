@@ -112,9 +112,8 @@ function checkedCondition(
   );
 }
 
-// The globally unique binding key the resolver assigned this identifier. Only
-// bound variables get a key; a free host capture is absent from the map and
-// keeps its original text, which is how the runtime scope provides it.
+// The globally unique binding key the resolver assigned this identifier. An
+// unbound name (a "Cannot find name" error) keeps its original text.
 function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
   return state.bindings.get(identifier) ?? identifier.text;
 }
@@ -510,10 +509,19 @@ function rewriteNodeImpl(
       };
     }
 
+    // There are no globals: a name the resolver didn't bind belongs to no
+    // scope, whether it's a host binding or a lib global like `String`.
+    if (!state.bindings.has(node)) {
+      state.errors.set(
+        node,
+        `Cannot find name '${node.text}'. A client script can only ` +
+          "reference its own variables; splice host values with `${...}`.",
+      );
+    }
+
     return {
-      // Only a bound identifier is mangled: a free host reference (e.g.
-      // `String`) keeps its name so the virtual code resolves it against the
-      // environment, mirroring the runtime's global-object fallback.
+      // An unbound name (an error, above) keeps its unmangled text: a lib
+      // name resolves in the virtual code, so the one error stands alone.
       virtual: ts.factory.createIdentifier(
         state.bindings.has(node) ? mangle(node.text) : node.text,
       ),

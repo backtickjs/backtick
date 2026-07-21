@@ -6,6 +6,6 @@ const script = cs`{
   } catch (_error) {
     return 2;
   } finally {
-    console.log("done");
+    return 3;
   }
 }`;

@@ -5,6 +5,9 @@ export default cs`{
   try {
     throw message;
   } catch (error) {
-    return "caught " + String(error);
+    if (error === message) {
+      return "caught boom";
+    }
+    return "caught something else";
   }
 }`;

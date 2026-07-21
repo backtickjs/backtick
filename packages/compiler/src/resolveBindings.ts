@@ -13,8 +13,9 @@ import type { ClientScript } from "./parseFile.js";
  *
  *  - `captures`: for each script, the free variables it references but does not
  *    itself declare — the values it must capture from the enclosing scope, as
- *    binding keys (a free host name, bound by nothing, keeps its own text). They
- *    are ordered by first use, which falls out of the source-order walk.
+ *    binding keys. They are ordered by first use, which falls out of the
+ *    source-order walk. A name bound by no script at all is not a capture:
+ *    there are no globals, and the rewrite reports it as unresolvable.
  *
  *  - `declarations`: for each script, the binding keys it declares itself — every
  *    variable declaration and arrow parameter, at any depth, but not those of
@@ -93,7 +94,7 @@ export function resolveBindings(
 
   // `scopes` is the chain from the current scope out to the file root, innermost
   // last. A reference bound by any of them uses that binding's unique name; one
-  // bound by none is a free host capture (returns null; keeps its own name).
+  // bound by none returns null (unresolvable — there are no globals).
   const resolve = (name: string, scopes: Scope[]): string | null => {
     for (let i = scopes.length - 1; i >= 0; i--) {
       const found = scopes[i].get(name);
@@ -106,7 +107,7 @@ export function resolveBindings(
 
   // Records a reference to `name` from within `script`: maps the identifier to
   // its binding key (if bound) and captures it when the binding is not the
-  // script's own — an enclosing binding or a free host name.
+  // script's own but an enclosing script's.
   const reference = (
     node: ts.Identifier,
     script: ClientScript,
@@ -114,7 +115,8 @@ export function resolveBindings(
   ): void => {
     const bound = resolve(node.text, scopes);
     if (bound == null) {
-      capture(script, node.text);
+      // Bound by nothing: there are no globals, so the rewrite reports
+      // "Cannot find name" — nothing to capture.
       return;
     }
     bindings.set(node, bound);
@@ -255,7 +257,7 @@ export function resolveBindings(
       }
     } else if (ts.isBinaryExpression(node)) {
       // A bare identifier on either side is a reference, read (`a + b`) or
-      // assigned (`x = ...`); an undeclared target is still a free capture.
+      // assigned (`x = ...`); an undeclared target is unresolvable.
       walkExpression(script, node.left, scopes);
       walkExpression(script, node.right, scopes);
     } else if (ts.isArrowFunction(node)) {

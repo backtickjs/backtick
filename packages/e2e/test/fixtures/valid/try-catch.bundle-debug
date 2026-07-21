@@ -1,10 +1,13 @@
-#f0 = (String) => {
+#f0 = () => {
   const message = "boom";
   try {
     throw message;
   } catch (error) {
-    return "caught " + String(error);
+    if (error === message) {
+      return "caught boom";
+    }
+    return "caught something else";
   }
 }
 
-root = #f0(String)
+root = #f0()

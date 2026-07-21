@@ -15,13 +15,19 @@ __cs_message                 → message
 __cs_error                   → error
 )                            → ) 
 {\n                          → {\n    
-return                       → return 
-"caught "                    → "caught "
- +                           →  + 
-String                       → String
-(                            → (
+if (                         → if (
 __cs_error                   → error
-)                            → )
+ ===                         →  === 
+__cs_message                 → message
+)                            → ) 
+{\n                          → {\n      
+return                       → return 
+"caught boom"                → "caught boom"
+;                            → ;
+\n        }                  → \n    }
+\n                           → \n    
+return                       → return 
+"caught something else"      → "caught something else"
 ;                            → ;
 \n    }                      → \n  }
 \n})())                      → \n}`

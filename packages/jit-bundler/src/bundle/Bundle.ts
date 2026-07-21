@@ -50,12 +50,6 @@ export interface BundleSlot {
   index: number;
 }
 
-// A free host reference: resolves `name` on the global object.
-export interface BundleGlobal {
-  "#": "global";
-  name: string;
-}
-
 // Applies a `functions` or `trees` entry. For a function target, `args`
 // mirrors the entry's parameters: thunks for a polymorphic entry's splices
 // first, then one value per capture. For a tree target, `args` supplies the
@@ -73,8 +67,7 @@ export interface BundleApply {
 // the hole evaluates it exactly like an inlined splice. `params` — present
 // when the splice captures bindings the entry itself declares — names the
 // values the hole call supplies; an `identifier` in the expression resolves
-// against the enclosing thunk parameters, then the global object, exactly
-// like a body identifier.
+// against the enclosing thunk parameters, exactly like a body identifier.
 export interface BundleThunk {
   "#": "thunk";
   params?: string[];
@@ -92,7 +85,6 @@ export type BundleExpr =
   | string
   | BundleExpr[]
   | BundleSlot
-  | BundleGlobal
   | BundleIdentifierNode
   | BundleApply
   | BundleThunk
@@ -106,8 +98,9 @@ export type BundleExpr =
 // runtime data serializes as the JSON it spells — and every composing form
 // is a `#`-discriminated node. Scoping is lexical and names are
 // pre-resolved: identifiers refer to parameters of an enclosing arrow
-// (including the entry itself), locals declared in an enclosing block, or —
-// when neither binds them — properties of the global object.
+// (including the entry itself) or locals declared in an enclosing block.
+// There are no globals — every name is bound, and an unresolved name is a
+// malformed bundle.
 export type BundleNode = BundleStatementNode;
 
 // A body node that yields a value. Plain JSON carries itself; containers
@@ -143,8 +136,8 @@ export type BundleStatementNode =
 // returned.
 export type BundleBody = BundleExpressionNode | BundleBlockNode;
 
-// A variable reference: resolves `name` in the enclosing scope, or on the
-// global object when no parameter or declaration binds it.
+// A variable reference: resolves `name` in the enclosing scope. Every name
+// is bound; an unresolved name is a malformed bundle.
 export interface BundleIdentifierNode {
   "#": "identifier";
   name: string;

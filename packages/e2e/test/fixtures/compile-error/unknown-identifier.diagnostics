@@ -1,0 +1,4 @@
+4:16-4:22 error TS0: Cannot find name 'String'. A client script can only reference its own variables; splice host values with `${...}`.
+6:19-6:23 error TS0: Cannot find name 'Math'. A client script can only reference its own variables; splice host values with `${...}`.
+11:10-11:19 error TS0: Cannot find name 'hostValue'. A client script can only reference its own variables; splice host values with `${...}`.
+15:3-15:8 error TS0: Cannot find name 'count'. A client script can only reference its own variables; splice host values with `${...}`.

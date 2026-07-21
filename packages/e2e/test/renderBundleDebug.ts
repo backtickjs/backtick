@@ -127,8 +127,6 @@ function renderExpr(expr: BundleExpr, indent: string): string {
   switch (expr["#"]) {
     case "slot":
       return `slots[${expr.index}]`;
-    case "global":
-      return expr.name;
     case "apply": {
       const args = expr.args.map((arg) => renderExpr(arg, indent));
       return `${expr.label}(${args.join(", ")})`;

@@ -1,25 +1,25 @@
 import { cs } from "@backtickjs/core";
 export default cs.create(
-  [3, 16, 10, 3],
+  [3, 16, 13, 3],
   {
     filePath: "try-catch.ts",
-    fileHash: "6ilvrnfy42ws",
+    fileHash: "2osmwga78xnj6",
     splices: {},
-    captures: ["String"],
-    declarations: ["message$6ilvrnfy42ws$0", "error$6ilvrnfy42ws$1"],
+    captures: [],
+    declarations: ["message$2osmwga78xnj6$0", "error$2osmwga78xnj6$1"],
   },
   (v) =>
     v.block(
-      [3, 19, 10, 2],
+      [3, 19, 13, 2],
       [
         v.variableDeclaration(
           [4, 3, 4, 26],
           "const",
-          v.identifier([4, 9, 4, 16], "message", "message$6ilvrnfy42ws$0"),
+          v.identifier([4, 9, 4, 16], "message", "message$2osmwga78xnj6$0"),
           v.string([4, 19, 4, 25], "boom"),
         ),
         v.try(
-          [5, 3, 9, 4],
+          [5, 3, 12, 4],
           v.block(
             [5, 7, 7, 4],
             [
@@ -28,33 +28,41 @@ export default cs.create(
                 v.identifier(
                   [6, 11, 6, 18],
                   "message",
-                  "message$6ilvrnfy42ws$0",
+                  "message$2osmwga78xnj6$0",
                 ),
               ),
             ],
           ),
-          v.identifier([7, 12, 7, 17], "error", "error$6ilvrnfy42ws$1"),
+          v.identifier([7, 12, 7, 17], "error", "error$2osmwga78xnj6$1"),
           v.block(
-            [7, 19, 9, 4],
+            [7, 19, 12, 4],
             [
-              v.return(
-                [8, 5, 8, 38],
+              v.if(
+                [8, 5, 10, 6],
                 v.binop(
-                  [8, 12, 8, 37],
-                  v.string([8, 12, 8, 21], "caught "),
-                  "+",
-                  v.call(
-                    [8, 24, 8, 37],
-                    v.identifier([8, 24, 8, 30], "String", "String"),
-                    [
-                      v.identifier(
-                        [8, 31, 8, 36],
-                        "error",
-                        "error$6ilvrnfy42ws$1",
-                      ),
-                    ],
+                  [8, 9, 8, 26],
+                  v.identifier([8, 9, 8, 14], "error", "error$2osmwga78xnj6$1"),
+                  "===",
+                  v.identifier(
+                    [8, 19, 8, 26],
+                    "message",
+                    "message$2osmwga78xnj6$0",
                   ),
                 ),
+                v.block(
+                  [8, 28, 10, 6],
+                  [
+                    v.return(
+                      [9, 7, 9, 28],
+                      v.string([9, 14, 9, 27], "caught boom"),
+                    ),
+                  ],
+                ),
+                null,
+              ),
+              v.return(
+                [11, 5, 11, 36],
+                v.string([11, 12, 11, 35], "caught something else"),
               ),
             ],
           ),

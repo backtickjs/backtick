@@ -2,9 +2,7 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [
-        "String"
-      ],
+      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -33,25 +31,33 @@
               "#": "block",
               "statements": [
                 {
-                  "#": "return",
-                  "expression": {
+                  "#": "if",
+                  "condition": {
                     "#": "binop",
-                    "operator": "+",
-                    "left": "caught ",
+                    "operator": "===",
+                    "left": {
+                      "#": "identifier",
+                      "name": "error"
+                    },
                     "right": {
-                      "#": "call",
-                      "callee": {
-                        "#": "identifier",
-                        "name": "String"
-                      },
-                      "args": [
-                        {
-                          "#": "identifier",
-                          "name": "error"
-                        }
-                      ]
+                      "#": "identifier",
+                      "name": "message"
                     }
-                  }
+                  },
+                  "consequent": {
+                    "#": "block",
+                    "statements": [
+                      {
+                        "#": "return",
+                        "expression": "caught boom"
+                      }
+                    ]
+                  },
+                  "alternate": null
+                },
+                {
+                  "#": "return",
+                  "expression": "caught something else"
                 }
               ]
             }
@@ -64,11 +70,6 @@
   "root": {
     "#": "apply",
     "label": "#f0",
-    "args": [
-      {
-        "#": "global",
-        "name": "String"
-      }
-    ]
+    "args": []
   }
 }

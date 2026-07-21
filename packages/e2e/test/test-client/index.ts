@@ -5,7 +5,6 @@ import type {
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
-  BundleGlobal,
   BundleIdentifierNode,
   BundleSlot,
   BundleStatementNode,
@@ -118,8 +117,8 @@ function renderInline(value: unknown): string {
 }
 
 // One frame per arrow application or block. Names are pre-resolved by the
-// bundler: resolution either finds a binding in the chain or falls through to
-// the host global object.
+// bundler and there are no globals: a name no frame binds is a malformed
+// bundle.
 interface Scope {
   parent: Scope | null;
   bindings: Map<string, unknown>;
@@ -132,10 +131,6 @@ function lookup(scope: Scope | null, name: string): Scope | null {
     }
   }
   return null;
-}
-
-function globals(): Record<string, unknown> {
-  return globalThis as unknown as Record<string, unknown>;
 }
 
 // Applies a `functions` or `trees` entry as a function: a function entry is
@@ -190,7 +185,6 @@ function evaluateExpr(
   if ("#" in expr) {
     const form = expr as
       | BundleSlot
-      | BundleGlobal
       | BundleIdentifierNode
       | BundleApply
       | BundleThunk
@@ -199,15 +193,11 @@ function evaluateExpr(
       case "slot": {
         return slots[form.index];
       }
-      case "global": {
-        return globals()[form.name];
-      }
       case "identifier": {
-        // A parameter of an enclosing thunk, with the body identifier's
-        // global fallback.
+        // A parameter of an enclosing thunk.
         const frame = lookup(env, form.name);
         if (frame === null) {
-          return globals()[form.name];
+          throw new Error(`unknown identifier ${form.name}`);
         }
         return frame.bindings.get(form.name);
       }
@@ -308,10 +298,9 @@ function executeStatement(
       const value = evaluateNode(bundle, node.expression, scope);
       const frame = lookup(scope, node.name);
       if (frame === null) {
-        globals()[node.name] = value;
-      } else {
-        frame.bindings.set(node.name, value);
+        throw new Error(`unknown assignment target ${node.name}`);
       }
+      frame.bindings.set(node.name, value);
       return advanced;
     }
     case "if": {
@@ -378,7 +367,7 @@ function evaluateNode(
     case "identifier": {
       const frame = lookup(scope, node.name);
       if (frame === null) {
-        return globals()[node.name];
+        throw new Error(`unknown identifier ${node.name}`);
       }
       return frame.bindings.get(node.name);
     }

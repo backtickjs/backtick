@@ -6,6 +6,9 @@ export default cs.liftValue((() => {
         throw __cs_message;
     }
     catch (__cs_error) {
-        return "caught " + String(__cs_error);
+        if (__cs_error === __cs_message) {
+            return "caught boom";
+        }
+        return "caught something else";
     }
 })());

@@ -13,7 +13,6 @@ export type {
   BundleEntryNode,
   BundleExpr,
   BundleExpressionNode,
-  BundleGlobal,
   BundleIdentifierNode,
   BundleIfNode,
   BundleNode,

@@ -13,7 +13,6 @@ import type {
   BundleEntryNode,
   BundleExpr,
   BundleExpressionNode,
-  BundleGlobal,
   BundleIdentifierNode,
   BundleSlot,
   BundleTree,
@@ -24,16 +23,8 @@ import { lowerScriptBody, type RenderSplice } from "./lowerScriptBody.js";
 
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
-// A free host reference carries no such suffix and is returned unchanged.
 function sourceName(key: string): string {
   return key.replace(/\$[0-9a-z]+\$\d+$/, "");
-}
-
-// A capture key without the compiler's uniqueness suffix is a free host
-// reference (e.g. `console`): not a binding of any scope, it resolves on the
-// global object wherever it is used.
-function isHostRef(key: string): boolean {
-  return sourceName(key) === key;
 }
 
 // Builds the bundle `{ functions, trees, root }` as plain data. The output
@@ -46,7 +37,7 @@ function isHostRef(key: string): boolean {
 // captures. The slot signature is derived, not stored (see `treeSlots`). A
 // reference to a tree from source position renders as a call `#ti(...)`
 // passing those captures by name; from JSON position it is a `#call` whose
-// arguments are `#slot`/`#global` expressions of the enclosing entry.
+// arguments are `#slot` expressions of the enclosing entry.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -290,10 +281,9 @@ export function buildBundle(ir: Ir): Bundle {
   // The slot signature of a tree entry: the capture keys its wiring needs from
   // whichever scope instantiates it, in first-need order. These are the
   // entry's implicit parameters — a reference to the tree passes one value per
-  // key, exactly as captures thread between functions. Free host references
-  // are excluded: inside tree JSON they resolve as `#global` leaves instead of
-  // threading through the instance. Memoized; no cycle guard is needed because
-  // the element graph is acyclic (children exist before their parent).
+  // key, exactly as captures thread between functions. Memoized; no cycle
+  // guard is needed because the element graph is acyclic (children exist
+  // before their parent).
   const treeSlotsCache = new Map<number, string[]>();
   const treeSlots = (target: number): string[] => {
     const cached = treeSlotsCache.get(target);
@@ -304,7 +294,7 @@ export function buildBundle(ir: Ir): Bundle {
     const seen = new Set<string>();
     for (const value of Object.values(ir.trees[target].element.props)) {
       for (const key of freeCaps(value)) {
-        if (!isHostRef(key) && !seen.has(key)) {
+        if (!seen.has(key)) {
           seen.add(key);
           order.push(key);
         }
@@ -525,20 +515,16 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
-  // resolves by name; a free host reference resolves globally; anything else
-  // must be a slot of the enclosing tree. At the bundle root there is no
-  // enclosing instance, so a suffixed capture reaching it can't be threaded
-  // from anywhere.
+  // resolves by name; anything else must be a slot of the enclosing tree. At
+  // the bundle root there is no enclosing instance, so a capture reaching it
+  // can't be threaded from anywhere.
   const capExpr = (
     key: string,
     slots: Map<string, number>,
     params: ReadonlySet<string> = new Set(),
-  ): BundleSlot | BundleGlobal | BundleIdentifierNode => {
+  ): BundleSlot | BundleIdentifierNode => {
     if (params.has(key)) {
       return { "#": "identifier", name: displayName(key) };
-    }
-    if (isHostRef(key)) {
-      return { "#": "global", name: key };
     }
     const index = slots.get(key);
     if (index === undefined) {
