@@ -43,6 +43,39 @@
           "args": [
             null
           ]
+        },
+        "supplied": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f2"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#f3"
+              },
+              "args": []
+            }
+          ]
+        },
+        "fallback": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f2"
+            },
+            "args": []
+          },
+          "args": []
         }
       }
     },
@@ -77,6 +110,63 @@
             }
           ]
         }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "cb"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "if",
+              "condition": {
+                "#": "binop",
+                "operator": "!==",
+                "left": {
+                  "#": "identifier",
+                  "name": "cb"
+                },
+                "right": null
+              },
+              "consequent": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "return",
+                    "expression": {
+                      "#": "call",
+                      "callee": {
+                        "#": "identifier",
+                        "name": "cb"
+                      },
+                      "args": []
+                    }
+                  }
+                ]
+              },
+              "alternate": null
+            },
+            {
+              "#": "return",
+              "expression": 0
+            }
+          ]
+        }
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": 2
       }
     }
   },

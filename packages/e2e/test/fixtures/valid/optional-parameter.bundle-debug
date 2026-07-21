@@ -1,7 +1,22 @@
-#f0 = () => { "named": #f1()("hi"), "omitted": #f1()(), "explicit": #f1()(null) }
+#f0 = () => {
+  "named": #f1()("hi"),
+  "omitted": #f1()(),
+  "explicit": #f1()(null),
+  "supplied": #f2()(#f3()),
+  "fallback": #f2()()
+}
 
 #f1 = () => (name) => {
   return name?.concat("!");
 }
+
+#f2 = () => (cb) => {
+  if (cb !== null) {
+    return cb();
+  }
+  return 0;
+}
+
+#f3 = () => () => 2
 
 root = #f0()

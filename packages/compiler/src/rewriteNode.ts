@@ -791,9 +791,12 @@ function rewriteNodeImpl(
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
-        // `?` marks a nullable parameter: the virtual is `(T) | null = null`,
+        // `?` marks a nullable parameter: the virtual is `T | null = null`,
         // so callers may omit the argument and the body reads `T | null` —
         // the `= null` absorbs `undefined`, which the language doesn't have.
+        // The union factory parenthesizes constituents only where the
+        // grammar needs it (`(() => number) | null`), so keyword types stay
+        // bare in hover.
         return ts.factory.createParameterDeclaration(
           undefined,
           undefined,
@@ -801,7 +804,7 @@ function rewriteNodeImpl(
           undefined,
           param.optional && param.type
             ? ts.factory.createUnionTypeNode([
-                ts.factory.createParenthesizedType(param.type),
+                param.type,
                 ts.factory.createLiteralTypeNode(ts.factory.createNull()),
               ])
             : param.type,

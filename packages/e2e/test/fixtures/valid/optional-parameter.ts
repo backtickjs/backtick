@@ -6,8 +6,20 @@ const greet = cs`(name?: string) => {
   return name?.concat("!");
 }`;
 
+// A function-typed annotation unions parenthesized: `(() => number) | null`.
+const double = cs`() => 2`;
+
+const call = cs`(cb?: () => number) => {
+  if (cb !== null) {
+    return cb();
+  }
+  return 0;
+}`;
+
 export default cs`({
   named: $greet("hi"),
   omitted: $greet(),
   explicit: $greet(null),
+  supplied: $call($double),
+  fallback: $call(),
 })`;
