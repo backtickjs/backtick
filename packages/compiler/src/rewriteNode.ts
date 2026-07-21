@@ -780,13 +780,15 @@ function rewriteNodeImpl(
     let sawOptional = false;
     const params = node.parameters.map((param) => {
       // A rest parameter or a default would be silently dropped from the
-      // bundle — a miscompile, not a restriction to lift later.
+      // bundle — a miscompile, not a restriction to lift later. The
+      // parameter still rewrites (without the `...`/initializer), so the
+      // one error stands alone and the script keeps its mangled, mapped
+      // virtual — a raw-source bail would lose highlighting and hover.
       if (param.dotDotDotToken) {
         state.errors.set(
           param,
           "A rest parameter isn't supported in a `cs` client script.",
         );
-        return null;
       }
       if (param.initializer) {
         state.errors.set(
@@ -794,7 +796,6 @@ function rewriteNodeImpl(
           "A parameter default isn't supported in a `cs` client script; " +
             "use `?` and handle `null` instead.",
         );
-        return null;
       }
       if (param.questionToken != null) {
         sawOptional = true;
