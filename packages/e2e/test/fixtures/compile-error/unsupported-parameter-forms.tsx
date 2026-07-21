@@ -9,3 +9,7 @@ const rest = cs`(...values: number[]) => {
 const defaulted = cs`(n: number = 2) => {
   return n;
 }`;
+
+const trailingRequired = cs`(name?: string, x: number) => {
+  return x;
+}`;

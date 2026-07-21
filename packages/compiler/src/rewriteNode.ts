@@ -730,6 +730,10 @@ function rewriteNodeImpl(
   }
 
   if (ts.isArrowFunction(node)) {
+    // TypeScript's own rule (TS1016), enforced here because the checker
+    // never sees the script source — and the virtual's `= null` rewrite of
+    // `?` would otherwise legalize the shape with the wrong arity.
+    let sawOptional = false;
     const params = node.parameters.map((param) => {
       // A rest parameter or a default would be silently dropped from the
       // bundle — a miscompile, not a restriction to lift later.
@@ -747,6 +751,16 @@ function rewriteNodeImpl(
             "use `?` and handle `null` instead.",
         );
         return null;
+      }
+      if (param.questionToken != null) {
+        sawOptional = true;
+      } else if (sawOptional) {
+        // The one error stands alone: the parameter stays required, which
+        // is legal in the virtual after the preceding `= null` rewrite.
+        state.errors.set(
+          param.name,
+          "A required parameter cannot follow an optional parameter.",
+        );
       }
       if (ts.isIdentifier(param.name)) {
         bannedUndefined(state, param.name, "parameter");
