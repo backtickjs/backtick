@@ -1,0 +1,180 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "coins",
+            "expression": [
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "four",
+            "expression": 4
+          },
+          {
+            "#": "return",
+            "expression": {
+              "count": {
+                "#": "property",
+                "object": {
+                  "#": "identifier",
+                  "name": "coins"
+                },
+                "name": "length"
+              },
+              "all": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "concat"
+                },
+                "args": [
+                  [
+                    {
+                      "#": "identifier",
+                      "name": "four"
+                    }
+                  ]
+                ]
+              },
+              "part": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "slice"
+                },
+                "args": [
+                  0,
+                  2
+                ]
+              },
+              "where": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "indexOf"
+                },
+                "args": [
+                  2
+                ]
+              },
+              "has": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "includes"
+                },
+                "args": [
+                  3
+                ]
+              },
+              "text": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "join"
+                },
+                "args": [
+                  "-"
+                ]
+              },
+              "doubled": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "map"
+                },
+                "args": [
+                  {
+                    "#": "arrow",
+                    "params": [
+                      "n"
+                    ],
+                    "body": {
+                      "#": "binop",
+                      "operator": "*",
+                      "left": {
+                        "#": "identifier",
+                        "name": "n"
+                      },
+                      "right": 2
+                    }
+                  }
+                ]
+              },
+              "small": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "coins"
+                  },
+                  "name": "filter"
+                },
+                "args": [
+                  {
+                    "#": "arrow",
+                    "params": [
+                      "n2"
+                    ],
+                    "body": {
+                      "#": "binop",
+                      "operator": "<",
+                      "left": {
+                        "#": "identifier",
+                        "name": "n2"
+                      },
+                      "right": 3
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

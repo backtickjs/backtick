@@ -2,6 +2,7 @@
 // Never executed — typechecked by `tsc -b`.
 import type {
   Client,
+  ClientArray,
   ClientElement,
   ClientObject,
   ClientUnknown,
@@ -119,13 +120,15 @@ spliced(clientArrow)() satisfies number;
 virtualize(console);
 
 // An array reaches a receiver position already unwrapped — `Spliced` maps a
-// fragment array elementwise before it crosses — and then passes through
-// unchanged, so array members like `length` read normally off the host
-// array.
+// fragment array elementwise before it crosses — and then reads as the
+// curated `ClientArray` API: pure members only, no mutators, nothing
+// producing `undefined`.
 declare const clientNumbers: Client<number>[];
 spliced(clientNumbers) satisfies number[];
-virtualize(spliced(clientNumbers)) satisfies number[];
+virtualize(spliced(clientNumbers)) satisfies ClientArray<number>;
 virtualize(spliced(clientNumbers)).length satisfies number;
+// @ts-expect-error — mutators aren't part of the client array API.
+virtualize(spliced(clientNumbers)).pop;
 // @ts-expect-error — a raw fragment array is a host value, not a client one.
 virtualize(clientNumbers);
 

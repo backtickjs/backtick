@@ -886,6 +886,25 @@ function rewriteNodeImpl(
     return unsupported();
   }
 
+  if (ts.isArrayLiteralExpression(node)) {
+    const elements = node.elements.map((element) =>
+      rewriteNode(ts, state, element),
+    );
+    return {
+      virtual: ts.factory.createArrayLiteralExpression(
+        elements.map((element) => element.virtual as ts.Expression),
+        false,
+      ),
+      runtime: call(ts, "v", "array", [
+        loc(node),
+        ts.factory.createArrayLiteralExpression(
+          elements.map((element) => element.runtime as ts.Expression),
+          false,
+        ),
+      ]),
+    };
+  }
+
   if (ts.isObjectLiteralExpression(node)) {
     const properties = node.properties.map((property) => {
       if (

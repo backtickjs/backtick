@@ -1,3 +1,4 @@
+import type { ClientArray } from "./ClientArray.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
 import type { ClientElement } from "./ClientElement.js";
@@ -7,7 +8,7 @@ import type { ClientString } from "./ClientString.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { SpliceableUnknown, Spliced } from "./Spliceable.js";
 
-// A primitive receiver autoboxes to its client type, so its members resolve
+// A built-in receiver autoboxes to its client type, so its members resolve
 // against the explicit client API.
 type Autoboxed<T> = T extends string
   ? ClientString
@@ -15,7 +16,9 @@ type Autoboxed<T> = T extends string
     ? ClientNumber
     : T extends boolean
       ? ClientBoolean
-      : never;
+      : T extends readonly (infer E)[]
+        ? ClientArray<E>
+        : never;
 
 // A `ClientObject`'s spliceable members, each read as what it splices to.
 // Kept homomorphic (`keyof T`, filtering in `as`) so properties stay linked
@@ -32,14 +35,15 @@ type SplicedMembers<T extends ClientObject> = {
 };
 
 // What a member-access receiver reads as:
-//   string | number | boolean -> Autoboxed<T>, the client API
-//   ClientElement             -> {}: opaque
-//   ClientObject              -> SplicedMembers<T>
-//   anything else             -> unchanged
+//   string | number | boolean | E[] -> Autoboxed<T>, the client API
+//   ClientElement                   -> {}: opaque
+//   ClientObject                    -> SplicedMembers<T>
+//   anything else                   -> unchanged
 export type Virtualized<T extends ClientUnknown> = T extends
   | string
   | number
   | boolean
+  | readonly unknown[]
   ? Autoboxed<T>
   : T extends ClientElement
     ? {}

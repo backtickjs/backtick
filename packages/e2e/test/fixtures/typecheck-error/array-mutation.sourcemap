@@ -1,0 +1,49 @@
+cs.liftValue((() => {\n       → cs`{\n  
+const                         → const 
+__cs_coins                    → coins
+ =                            →  = 
+[                             → [
+1                             → 1
+,                             → , 
+2                             → 2
+,                             → , 
+3                             → 3
+]                             → ]
+;                             → ;
+\n                            → \n  
+const                         → const 
+__cs_last                     → last
+ =                            →  = 
+cs.virtualize(                → 
+__cs_coins                    → coins
+)                             → 
+.                             → .
+pop                           → pop
+()                            → ()
+;                             → ;
+\n                            → \n  
+return                        → return 
+1                             → 1
+;                             → ;
+\n})())                       → \n}`
+cs.liftAction((() => {\n      → cs`{\n  
+const                         → const 
+__cs_coins                    → coins
+ =                            →  = 
+[                             → [
+1                             → 1
+,                             → , 
+2                             → 2
+]                             → ]
+;                             → ;
+\n                            → \n  
+cs.virtualize(                → 
+__cs_coins                    → coins
+)                             → 
+.                             → .
+push                          → push
+(                             → (
+3                             → 3
+)                             → )
+;                             → ;
+\n})())                       → \n}`

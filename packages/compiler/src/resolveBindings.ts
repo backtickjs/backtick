@@ -275,6 +275,10 @@ export function resolveBindings(
       } else {
         walkExpression(script, node.body, inner);
       }
+    } else if (ts.isArrayLiteralExpression(node)) {
+      for (const element of node.elements) {
+        walkExpression(script, element, scopes);
+      }
     } else if (ts.isObjectLiteralExpression(node)) {
       for (const property of node.properties) {
         if (ts.isPropertyAssignment(property)) {
