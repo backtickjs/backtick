@@ -119,6 +119,22 @@ function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
   return state.bindings.get(identifier) ?? identifier.text;
 }
 
+// The initializer's first reference to the binding it declares (e.g. a
+// method closing over the object that holds it) — rejected: checked value
+// positions would force resolving the binding mid-inference (TS7022), and
+// the pattern is spelled as a host `ClientObject` class instead.
+function selfReference(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  node: ts.Node,
+  key: string,
+): ts.Identifier | undefined {
+  if (ts.isIdentifier(node) && state.bindings.get(node) === key) {
+    return node;
+  }
+  return ts.forEachChild(node, (child) => selfReference(ts, state, child, key));
+}
+
 export interface RewrittenNode {
   virtual: ts.Node;
   runtime: ts.Node;
@@ -205,6 +221,21 @@ function rewriteNodeImpl(
             "client script.",
         );
         return unsupported();
+      }
+      // The declaration still rewrites: self-reference produces valid
+      // virtual code, so the one error stands alone.
+      const reference = selfReference(
+        ts,
+        state,
+        declaration.initializer,
+        bindingKey(state, name),
+      );
+      if (reference) {
+        state.errors.set(
+          reference,
+          "A client script variable can't be referenced in its own " +
+            "initializer.",
+        );
       }
       const initializer = rewriteNode(ts, state, declaration.initializer);
       const identifier = ts.factory.createIdentifier(mangle(name.text));

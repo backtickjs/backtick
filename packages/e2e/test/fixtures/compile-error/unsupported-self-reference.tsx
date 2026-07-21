@@ -1,6 +1,8 @@
 import { cs } from "@backtickjs/core";
 
-const color = cs`{
+// An object whose methods read the object is spelled as a host
+// `ClientObject` class instead.
+const script = cs`{
   const color = {
     r: 1,
     g: 2,
@@ -10,9 +12,4 @@ const color = cs`{
     },
   };
   return color;
-}`;
-
-export default cs`{
-  const c = $color;
-  return ${cs`c.brightness()`};
 }`;

@@ -1,0 +1,1 @@
+11:14-11:19 error TS0: A client script variable can't be referenced in its own initializer.
