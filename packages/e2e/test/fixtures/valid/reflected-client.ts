@@ -24,5 +24,5 @@ class Point implements ClientObject {
 export default cs`{
   const a = ${new Point(cs`1`, cs`2`)};
   const b = ${new Point(cs`3`, cs`4`)};
-  a.valid();
+  const sum = a.valid() + b.valid();
 }`;

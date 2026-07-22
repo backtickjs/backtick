@@ -1,0 +1,92 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "handlers",
+            "expression": {
+              "tap": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": []
+              },
+              "hold": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": []
+              }
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "identifier",
+              "name": "handlers"
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "id"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#f2"
+              },
+              "args": []
+            }
+          ]
+        }
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "let",
+            "name": "n",
+            "expression": 0
+          },
+          {
+            "#": "assignment",
+            "name": "n",
+            "expression": 1
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

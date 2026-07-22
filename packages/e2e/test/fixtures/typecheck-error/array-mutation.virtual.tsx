@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 // `pop` would also produce `undefined`, which the language doesn't have.
 const script = cs.liftValue((() => {
     const __cs_coins = [1, 2, 3];
-    const __cs_last = cs.receiver(__cs_coins).pop();
+    const __cs_last = (cs.value(cs.receiver(__cs_coins).pop()), cs.receiver(__cs_coins).pop());
     return 1;
 })());
 

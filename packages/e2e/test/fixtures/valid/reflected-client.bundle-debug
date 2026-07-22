@@ -1,7 +1,7 @@
 #f0 = () => {
   const a = { "x": #f1(), "y": #f2(), "valid": #f3(#f1, #f2) };
   const b = { "x": #f4(), "y": #f5(), "valid": #f3(#f4, #f5) };
-  a.valid();
+  const sum = a.valid() + b.valid();
 }
 
 #f1 = () => 1

@@ -87,16 +87,37 @@
             }
           },
           {
-            "#": "call",
-            "callee": {
-              "#": "property",
-              "object": {
-                "#": "identifier",
-                "name": "a"
+            "#": "declaration",
+            "keyword": "const",
+            "name": "sum",
+            "expression": {
+              "#": "binop",
+              "operator": "+",
+              "left": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "a"
+                  },
+                  "name": "valid"
+                },
+                "args": []
               },
-              "name": "valid"
-            },
-            "args": []
+              "right": {
+                "#": "call",
+                "callee": {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "b"
+                  },
+                  "name": "valid"
+                },
+                "args": []
+              }
+            }
           }
         ]
       }

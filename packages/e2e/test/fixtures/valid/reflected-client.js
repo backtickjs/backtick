@@ -12,7 +12,7 @@ class Point {
       [16, 12, 16, 43],
       {
         filePath: "reflected-client.ts",
-        fileHash: "1i6qt711gcclp",
+        fileHash: "1n3zukooyw7a6",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -38,14 +38,14 @@ export default cs.create(
   [24, 16, 28, 3],
   {
     filePath: "reflected-client.ts",
-    fileHash: "1i6qt711gcclp",
+    fileHash: "1n3zukooyw7a6",
     splices: {
       $0splice0: new Point(
         cs.create(
           [25, 25, 25, 30],
           {
             filePath: "reflected-client.ts",
-            fileHash: "1i6qt711gcclp",
+            fileHash: "1n3zukooyw7a6",
             splices: {},
             captures: [],
             declarations: [],
@@ -56,7 +56,7 @@ export default cs.create(
           [25, 32, 25, 37],
           {
             filePath: "reflected-client.ts",
-            fileHash: "1i6qt711gcclp",
+            fileHash: "1n3zukooyw7a6",
             splices: {},
             captures: [],
             declarations: [],
@@ -69,7 +69,7 @@ export default cs.create(
           [26, 25, 26, 30],
           {
             filePath: "reflected-client.ts",
-            fileHash: "1i6qt711gcclp",
+            fileHash: "1n3zukooyw7a6",
             splices: {},
             captures: [],
             declarations: [],
@@ -80,7 +80,7 @@ export default cs.create(
           [26, 32, 26, 37],
           {
             filePath: "reflected-client.ts",
-            fileHash: "1i6qt711gcclp",
+            fileHash: "1n3zukooyw7a6",
             splices: {},
             captures: [],
             declarations: [],
@@ -90,7 +90,11 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: ["a$1i6qt711gcclp$0", "b$1i6qt711gcclp$1"],
+    declarations: [
+      "a$1n3zukooyw7a6$0",
+      "b$1n3zukooyw7a6$1",
+      "sum$1n3zukooyw7a6$2",
+    ],
   },
   (v) =>
     v.block(
@@ -99,23 +103,41 @@ export default cs.create(
         v.variableDeclaration(
           [25, 3, 25, 40],
           "const",
-          v.identifier([25, 9, 25, 10], "a", "a$1i6qt711gcclp$0"),
+          v.identifier([25, 9, 25, 10], "a", "a$1n3zukooyw7a6$0"),
           v.splice([25, 13, 25, 39], "$0splice0"),
         ),
         v.variableDeclaration(
           [26, 3, 26, 40],
           "const",
-          v.identifier([26, 9, 26, 10], "b", "b$1i6qt711gcclp$1"),
+          v.identifier([26, 9, 26, 10], "b", "b$1n3zukooyw7a6$1"),
           v.splice([26, 13, 26, 39], "$0splice1"),
         ),
-        v.call(
-          [27, 3, 27, 12],
-          v.propertyAccess(
-            [27, 3, 27, 10],
-            v.identifier([27, 3, 27, 4], "a", "a$1i6qt711gcclp$0"),
-            "valid",
+        v.variableDeclaration(
+          [27, 3, 27, 37],
+          "const",
+          v.identifier([27, 9, 27, 12], "sum", "sum$1n3zukooyw7a6$2"),
+          v.binop(
+            [27, 15, 27, 36],
+            v.call(
+              [27, 15, 27, 24],
+              v.propertyAccess(
+                [27, 15, 27, 22],
+                v.identifier([27, 15, 27, 16], "a", "a$1n3zukooyw7a6$0"),
+                "valid",
+              ),
+              [],
+            ),
+            "+",
+            v.call(
+              [27, 27, 27, 36],
+              v.propertyAccess(
+                [27, 27, 27, 34],
+                v.identifier([27, 27, 27, 28], "b", "b$1n3zukooyw7a6$1"),
+                "valid",
+              ),
+              [],
+            ),
           ),
-          [],
         ),
       ],
     ),

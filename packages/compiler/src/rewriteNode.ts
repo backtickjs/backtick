@@ -15,9 +15,9 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
-  // set while rewriting a condition's bare duplicate, so the duplicate
-  // gets no checks of its own
-  conditionDup?: boolean;
+  // set while rewriting a check's bare duplicate (a condition's or an
+  // initializer's), so the duplicate gets no checks of its own
+  dup?: boolean;
   // set while rewriting the statements of a body that returns a value,
   // where side effects — expression statements — are banned
   valueBody?: boolean;
@@ -74,16 +74,12 @@ function checkedCondition(
 ): ts.Expression {
   // A source-positioned virtual is the unsupported-syntax fallback, already
   // carrying its own error.
-  if (
-    state.conditionDup ||
-    isBooleanByConstruction(ts, source) ||
-    virtual.pos >= 0
-  ) {
+  if (state.dup || isBooleanByConstruction(ts, source) || virtual.pos >= 0) {
     return virtual;
   }
   const dupState: RewriteState = {
     ...state,
-    conditionDup: true,
+    dup: true,
     errors: new Map(),
     mappings: new Map(),
     codeInformation: new Map(),
@@ -112,10 +108,86 @@ function checkedCondition(
   );
 }
 
-// Whether `node` is the left operand of a `??` (through parens). That `??`
-// already coalesces the `undefined` an optional chain produces, so the
-// chain's auto `?? null` would nest as `(a ?? null) ?? b` — same meaning,
-// but flagged by TypeScript (TS2871) — and is skipped.
+// Provably a value, so no check needed: splices were checked by
+// `cs.spliceValue`, identifiers by their declarations; containers recurse.
+// Only calls and member accesses can produce `void`.
+function isValueByConstruction(
+  ts: typeof import("typescript"),
+  node: ts.Node,
+): boolean {
+  while (ts.isParenthesizedExpression(node)) {
+    node = node.expression;
+  }
+  if (
+    ts.isStringLiteral(node) ||
+    ts.isNumericLiteral(node) ||
+    node.kind === ts.SyntaxKind.TrueKeyword ||
+    node.kind === ts.SyntaxKind.FalseKeyword ||
+    node.kind === ts.SyntaxKind.NullKeyword ||
+    ts.isIdentifier(node) ||
+    ts.isArrowFunction(node) ||
+    ts.isBinaryExpression(node) ||
+    ts.isNewExpression(node)
+  ) {
+    return true;
+  }
+  if (ts.isObjectLiteralExpression(node)) {
+    return node.properties.every(
+      (property) =>
+        !ts.isPropertyAssignment(property) ||
+        isValueByConstruction(ts, property.initializer),
+    );
+  }
+  if (ts.isArrayLiteralExpression(node)) {
+    return node.elements.every((element) => isValueByConstruction(ts, element));
+  }
+  return false;
+}
+
+// An initializer must hold a value, but a call can produce `void`. Wrapping
+// would replace the inferred type, so the position becomes
+// `(cs.value(<real>), <dup>)` — the declaration reads the dup's type.
+function checkedValue(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  source: ts.Expression,
+  virtual: ts.Expression,
+): ts.Expression {
+  // A source-positioned virtual is the unsupported-syntax fallback, already
+  // carrying its own error.
+  if (state.dup || isValueByConstruction(ts, source) || virtual.pos >= 0) {
+    return virtual;
+  }
+  const dupState: RewriteState = {
+    ...state,
+    dup: true,
+    errors: new Map(),
+    mappings: new Map(),
+    codeInformation: new Map(),
+  };
+  const dup = rewriteNode(ts, dupState, source).virtual as ts.Expression;
+  if (dup.pos >= 0) {
+    return virtual;
+  }
+  // The duplicate's shield, exactly as in `checkedCondition`.
+  state.mappings.set(dup, source);
+  state.codeInformation.set(dup, {
+    semantic: false,
+    completion: false,
+    navigation: false,
+    verification: false,
+  });
+  return ts.factory.createParenthesizedExpression(
+    ts.factory.createBinaryExpression(
+      call(ts, "cs", "value", [virtual]),
+      ts.SyntaxKind.CommaToken,
+      dup,
+    ),
+  );
+}
+
+// The left operand of a `??` (through parens): that `??` already coalesces
+// an optional chain's `undefined`, so the auto `?? null` skips (TS2871).
 function nullCoalescedLeft(
   ts: typeof import("typescript"),
   node: ts.Node,
@@ -163,9 +235,8 @@ function bannedUndefined(
   return true;
 }
 
-// `undefined` and `void` name no client value: an in-script annotation
-// spells the absent value `null`. This catches the keywords with a precise
-// span; a host alias can still smuggle them past the syntax.
+// `undefined`/`void` name no client value — `null` is the absent value.
+// Keyword check with a precise span; a host alias can still smuggle them.
 function bannedTypeKeywords(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -318,7 +389,12 @@ function rewriteNodeImpl(
           ts,
           node.declarationList.flags,
           identifier,
-          initializer.virtual as ts.Expression,
+          checkedValue(
+            ts,
+            state,
+            declaration.initializer,
+            initializer.virtual as ts.Expression,
+          ),
         ),
         runtime: call(ts, "v", "variableDeclaration", [
           loc(node),
@@ -586,10 +662,8 @@ function rewriteNodeImpl(
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const name = node.name.text;
 
-    // `?.` propagates null one step, so each access in a chain handles the
-    // null its receiver may produce; a plain `.` after `?.` (which
-    // JavaScript short-circuits past) has no meaning here. Rewritten as
-    // `?.` — the suggested fix — so the one error stands alone.
+    // `?.` propagates null one step, so a plain `.` after it has no
+    // meaning. Rewritten as `?.` so the one error stands alone.
     if (ts.isOptionalChain(node) && !node.questionDotToken) {
       state.errors.set(
         node.name,
@@ -600,20 +674,17 @@ function rewriteNodeImpl(
     const optional = ts.isOptionalChain(node);
 
     const expression = rewriteNode(ts, state, node.expression);
-    // Member access reads off the receiver's client-side view: `cs.receiver`
-    // types it as `Receiver<T>`, so a host-typed receiver's members read
-    // as what the client receives, while the access itself stays a real
-    // property access (hover, rename, and completions on the name keep
-    // working).
+    // The receiver reads as its client-side view (`Receiver<T>`), while the
+    // access stays a real property access so hover, rename, and completions
+    // on the name keep working.
     const propertyName = ts.factory.createIdentifier(name);
     state.mappings.set(propertyName, node.name);
     const virtualReceiver = call(ts, "cs", "receiver", [
       expression.virtual as ts.Expression,
     ]);
     state.mappings.set(virtualReceiver, node.expression);
-    // `a?.b` reads as null when `a` is null — the language has no
-    // `undefined` — so the optional access carries `?? null`, unless a
-    // user-written `??` already coalesces it.
+    // `a?.b` reads as null for a null `a` — never `undefined` — so the
+    // access carries `?? null` unless a user `??` already coalesces it.
     const access = optional
       ? ts.factory.createPropertyAccessChain(
           virtualReceiver,
@@ -660,9 +731,8 @@ function rewriteNodeImpl(
       ts.isIdentifier(node.expression.name)
     ) {
       const access = node.expression;
-      // The same one-step rule as the property branch: this access is
-      // consumed inline, so it needs its own copy of the check (and the
-      // same rewrite-as-`?.` recovery).
+      // The property branch's one-step rule, copied: this access is
+      // consumed inline.
       if (ts.isOptionalChain(access) && !access.questionDotToken) {
         state.errors.set(
           access.name,
@@ -673,12 +743,10 @@ function rewriteNodeImpl(
       const optional = ts.isOptionalChain(access);
       const receiver = rewriteNode(ts, state, access.expression);
       const name = access.name.text;
-      // A method call goes through the same client-side view: the member
-      // is read off `cs.receiver(...)`, then the call checks its
-      // arguments and yields its return type. The runtime keeps the direct
-      // property call, so receiver binding is unchanged. An optional
-      // receiver (`a?.b(…)`) short-circuits a null `a` to null, so the
-      // call carries `?? null` like an optional access.
+      // A method call reads the member off `cs.receiver(...)`; the runtime
+      // keeps the direct property call, so receiver binding is unchanged.
+      // An optional receiver or callee short-circuits null, so the call
+      // carries `?? null` like an optional access.
       const propertyName = ts.factory.createIdentifier(name);
       state.mappings.set(propertyName, access.name);
       const virtualReceiver = call(ts, "cs", "receiver", [
@@ -803,16 +871,13 @@ function rewriteNodeImpl(
   }
 
   if (ts.isArrowFunction(node)) {
-    // TypeScript's own rule (TS1016), enforced here because the checker
-    // never sees the script source — and the virtual's `= null` rewrite of
-    // `?` would otherwise legalize the shape with the wrong arity.
+    // TypeScript's TS1016, enforced here: the `= null` rewrite of `?`
+    // would otherwise legalize the shape with the wrong arity.
     let sawOptional = false;
     const params = node.parameters.map((param) => {
       // A rest parameter or a default would be silently dropped from the
-      // bundle — a miscompile, not a restriction to lift later. The
-      // parameter still rewrites (without the `...`/initializer), so the
-      // one error stands alone and the script keeps its mangled, mapped
-      // virtual — a raw-source bail would lose highlighting and hover.
+      // bundle — a miscompile. The parameter still rewrites (without the
+      // `...`/initializer), keeping the virtual mangled and mapped.
       if (param.dotDotDotToken) {
         state.errors.set(
           param,
@@ -829,8 +894,8 @@ function rewriteNodeImpl(
       if (param.questionToken != null) {
         sawOptional = true;
       } else if (sawOptional) {
-        // The one error stands alone: the parameter stays required, which
-        // is legal in the virtual after the preceding `= null` rewrite.
+        // The parameter stays required — legal in the virtual after the
+        // preceding `= null` rewrite — so the one error stands alone.
         state.errors.set(
           param.name,
           "A required parameter cannot follow an optional parameter.",
@@ -871,12 +936,9 @@ function rewriteNodeImpl(
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
-        // `?` marks a nullable parameter: the virtual is `T | null = null`,
-        // so callers may omit the argument and the body reads `T | null` —
-        // the `= null` absorbs `undefined`, which the language doesn't have.
-        // The union factory parenthesizes constituents only where the
-        // grammar needs it (`(() => number) | null`), so keyword types stay
-        // bare in hover.
+        // `?` marks a nullable parameter: the virtual `T | null = null`
+        // lets callers omit the argument while the `= null` absorbs
+        // `undefined`. The union factory parenthesizes only where needed.
         return ts.factory.createParameterDeclaration(
           undefined,
           undefined,

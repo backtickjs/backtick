@@ -41,8 +41,18 @@ cs.liftValue(                 → cs`
 )                             → } [-semantic]
 ;                             → ;
 \n                            → \n  
+const                         → const 
+__cs_sum                      → sum
+ =                            →  = 
 cs.receiver(                  → 
 __cs_a                        → a
+)                             → 
+.                             → .
+valid                         → valid
+()                            → ()
+ +                            →  + 
+cs.receiver(                  → 
+__cs_b                        → b
 )                             → 
 .                             → .
 valid                         → valid

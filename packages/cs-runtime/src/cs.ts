@@ -6,7 +6,7 @@ import type { SpliceableValue, Spliced } from "./Spliceable.js";
 import type { Receiver } from "./Receiver.js";
 
 // The root of a value script — a block whose every path `return`s
-function liftValue<const T extends ClientValue>(_value: T): Client<T> {
+function liftValue<const T extends ClientValue>(_: T): Client<T> {
   throw new Error(
     "Don't call `cs.liftValue` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -14,7 +14,7 @@ function liftValue<const T extends ClientValue>(_value: T): Client<T> {
 }
 
 // The root of an action — a block with no `return`
-function liftAction(_body: void): Client<void> {
+function liftAction(_: void): Client<void> {
   throw new Error(
     "Don't call `cs.liftAction` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -22,7 +22,7 @@ function liftAction(_body: void): Client<void> {
 }
 
 // A splice in any value position
-function spliceValue<const T extends SpliceableValue>(_value: T): Spliced<T> {
+function spliceValue<const T extends SpliceableValue>(_: T): Spliced<T> {
   throw new Error(
     "Don't call `cs.spliceValue` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -30,21 +30,28 @@ function spliceValue<const T extends SpliceableValue>(_value: T): Spliced<T> {
 }
 
 // A splice in statement position
-function spliceAction(_value: Client<void>): void {
+function spliceAction(_: Client<void>): void {
   throw new Error(
     "Don't call `cs.spliceAction` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-function condition(_condition: boolean): boolean {
+function condition(_: boolean): boolean {
   throw new Error(
     "Don't call `cs.condition` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-function receiver<T extends ClientUnknown>(_value: T): Receiver<T> {
+function value(_: ClientValue): ClientValue {
+  throw new Error(
+    "Don't call `cs.value` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
+function receiver<T extends ClientUnknown>(_: T): Receiver<T> {
   throw new Error(
     "Don't call `cs.receiver` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -67,6 +74,7 @@ export const cs = Object.assign(
     spliceValue,
     spliceAction,
     condition,
+    value,
     receiver,
   },
 );

@@ -1,0 +1,15 @@
+#f0 = () => {
+  const handlers = { "tap": #f1(), "hold": #f1() };
+  return handlers;
+}
+
+#f1 = () => (id) => {
+  #f2();
+}
+
+#f2 = () => {
+  let n = 0;
+  n = 1;
+}
+
+root = #f0()
