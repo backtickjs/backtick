@@ -8,7 +8,7 @@ const action = cs.liftAction((() => {
 })());
 
 export const stored = cs.liftValue((() => {
-    const __cs_captured = cs.spliceValue((action));
+    const __cs_captured = (cs.value(cs.spliceValue((action))), cs.spliceValue((action)));
     return 1;
 })());
 
@@ -21,7 +21,7 @@ export const assigned = cs.liftValue((() => {
         return 1;
     }
     catch (__cs_e) {
-        __cs_e = cs.spliceValue((action));
+        __cs_e = (cs.value(cs.spliceValue((action))), cs.spliceValue((action)));
         return 2;
     }
 })());

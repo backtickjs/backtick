@@ -1,7 +1,7 @@
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_c                       → c
- =                           →  = 
+ = (cs.value(                →  = 
 cs.spliceValue(              → ${ [-semantic]
 new Color(                   → new Color(
 cs.liftValue(                → cs`
@@ -17,7 +17,23 @@ cs.liftValue(                → cs`
 )                            → `
 )                            → )
 )                            → } [-semantic]
-;                            → ;
+),                           → 
+cs.spliceValue(              → ${ [-semantic -completion -navigation -verification]
+new Color(                   → new Color(
+cs.liftValue(                → cs`
+30                           → 30
+)                            → `
+,                            → , 
+cs.liftValue(                → cs`
+144                          → 144
+)                            → `
+,                            → , 
+cs.liftValue(                → cs`
+255                          → 255
+)                            → `
+)                            → )
+)                            → } [-semantic -completion -navigation -verification]
+);                           → ;
 \n                           → \n  
 const                        → const 
 __cs_brightness              → brightness

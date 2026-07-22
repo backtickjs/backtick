@@ -1,45 +1,47 @@
-cs.liftAction((() => {\n      → cs`{\n  
-let                           → let 
-__cs_n                        → n
- =                            →  = 
-0                             → 0
-;                             → ;
-\n                            → \n  
-__cs_n                        → n
- =                            →  = 
-1                             → 1
-;                             → ;
-\n})())                       → \n}`
-cs.liftValue(                 → cs`
-(                             → (
-__cs_id                       → id
-: number) => {\n              → : number) => {\n  
-cs.spliceAction(              →  [-semantic]
-(beep)                        → $beep
-)                             →  [-semantic]
-;                             → ;
-\n}                           → \n}
-)                             → `
-cs.liftValue((() => {\n       → cs`{\n  
-const                         → const 
-__cs_handlers                 → handlers
- =                            →  = 
-{                             → {\n    
-tap                           → tap
-:                             → : 
-cs.spliceValue(               →  [-semantic]
-(onTap)                       → $onTap
-)                             →  [-semantic]
-,                             → ,\n    
-hold                          → hold
-:                             → : 
-cs.spliceValue(               →  [-semantic]
-(onTap)                       → $onTap
-)                             →  [-semantic]
- }                            → ,\n  }
-;                             → ;
-\n                            → \n  
-return                        → return 
-__cs_handlers                 → handlers
-;                             → ;
-\n})())                       → \n}`
+cs.liftAction((() => {\n                  → cs`{\n  
+let                                       → let 
+__cs_n                                    → n
+ =                                        →  = 
+0                                         → 0
+;                                         → ;
+\n                                        → \n  
+__cs_n                                    → n
+ =                                        →  = 
+1                                         → 1
+;                                         → ;
+\n})())                                   → \n}`
+cs.liftValue(                             → cs`
+(                                         → (
+__cs_id                                   → id
+: number) => {\n                          → : number) => {\n  
+cs.spliceAction(                          →  [-semantic]
+(beep)                                    → $beep
+)                                         →  [-semantic]
+;                                         → ;
+\n}                                       → \n}
+)                                         → `
+cs.liftValue((() => {\n                   → cs`{\n  
+const                                     → const 
+__cs_handlers                             → handlers
+ = (cs.value(                             →  = 
+{                                         → {\n    
+tap                                       → tap
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(onTap)                                   → $onTap
+)                                         →  [-semantic]
+,                                         → ,\n    
+hold                                      → hold
+:                                         → : 
+cs.spliceValue(                           →  [-semantic]
+(onTap)                                   → $onTap
+)                                         →  [-semantic]
+ }                                        → ,\n  }
+),                                        → 
+{ tap: cs.spliceValue((onTap)), hold: cs.spliceValue((onTap)) }→ {\n    tap: $onTap,\n    hold: $onTap,\n  } [-semantic -completion -navigation -verification]
+);                                        → ;
+\n                                        → \n  
+return                                    → return 
+__cs_handlers                             → handlers
+;                                         → ;
+\n})())                                   → \n}`

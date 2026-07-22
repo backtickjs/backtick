@@ -108,15 +108,20 @@ function checkedCondition(
   );
 }
 
-// Provably a value, so no check needed: splices were checked by
-// `cs.spliceValue`, identifiers by their declarations; containers recurse.
-// Only calls and member accesses can produce `void`.
+// Provably a value, so no check needed: identifiers were checked by their
+// declarations; containers recurse. Splices aren't trusted — the splice
+// checks are kind-loose — so they take the check like calls and member
+// accesses.
 function isValueByConstruction(
   ts: typeof import("typescript"),
+  state: RewriteState,
   node: ts.Node,
 ): boolean {
   while (ts.isParenthesizedExpression(node)) {
     node = node.expression;
+  }
+  if (ts.isIdentifier(node)) {
+    return state.script.splices[node.text] == null;
   }
   if (
     ts.isStringLiteral(node) ||
@@ -124,7 +129,6 @@ function isValueByConstruction(
     node.kind === ts.SyntaxKind.TrueKeyword ||
     node.kind === ts.SyntaxKind.FalseKeyword ||
     node.kind === ts.SyntaxKind.NullKeyword ||
-    ts.isIdentifier(node) ||
     ts.isArrowFunction(node) ||
     ts.isBinaryExpression(node) ||
     ts.isNewExpression(node)
@@ -135,11 +139,13 @@ function isValueByConstruction(
     return node.properties.every(
       (property) =>
         !ts.isPropertyAssignment(property) ||
-        isValueByConstruction(ts, property.initializer),
+        isValueByConstruction(ts, state, property.initializer),
     );
   }
   if (ts.isArrayLiteralExpression(node)) {
-    return node.elements.every((element) => isValueByConstruction(ts, element));
+    return node.elements.every((element) =>
+      isValueByConstruction(ts, state, element),
+    );
   }
   return false;
 }
@@ -155,7 +161,11 @@ function checkedValue(
 ): ts.Expression {
   // A source-positioned virtual is the unsupported-syntax fallback, already
   // carrying its own error.
-  if (state.dup || isValueByConstruction(ts, source) || virtual.pos >= 0) {
+  if (
+    state.dup ||
+    isValueByConstruction(ts, state, source) ||
+    virtual.pos >= 0
+  ) {
     return virtual;
   }
   const dupState: RewriteState = {
@@ -1061,11 +1071,13 @@ function rewriteNodeImpl(
       node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
       ts.isIdentifier(node.left)
     ) {
+      // The right-hand side is a value position like an initializer — an
+      // `unknown`-typed target (a catch binding) would absorb `void`.
       return {
         virtual: ts.factory.createBinaryExpression(
           lhs.virtual as ts.Expression,
           ts.SyntaxKind.EqualsToken,
-          rhs.virtual as ts.Expression,
+          checkedValue(ts, state, node.right, rhs.virtual as ts.Expression),
         ),
         runtime: call(ts, "v", "assignment", [
           loc(node),

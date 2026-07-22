@@ -33,11 +33,13 @@ cs.liftValue(                   → cs`
 cs.liftValue((() => {\n         → cs`{\n  
 const                           → const 
 __cs_s                          → s
- =                              →  = 
+ = (cs.value(                   →  = 
 cs.spliceValue(                 →  [-semantic]
 (segment)                       → $segment
 )                               →  [-semantic]
-;                               → ;
+),                              → 
+cs.spliceValue((segment))       → $segment [-semantic -completion -navigation -verification]
+);                              → ;
 \n                              → \n  
 const                           → const 
 __cs_rise                       → rise

@@ -22,12 +22,12 @@ class Point implements ClientObject {
 const shared = new Point(cs.liftValue(1), cs.liftValue(2));
 
 const left = cs.liftValue((() => {
-    const __cs_p = cs.spliceValue((shared));
+    const __cs_p = (cs.value(cs.spliceValue((shared))), cs.spliceValue((shared)));
     return cs.receiver(__cs_p).sum();
 })());
 
 const right = cs.liftValue((() => {
-    const __cs_p = cs.spliceValue((shared));
+    const __cs_p = (cs.value(cs.spliceValue((shared))), cs.spliceValue((shared)));
     return cs.receiver(__cs_p).x;
 })());
 

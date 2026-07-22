@@ -12,6 +12,6 @@ const onTap: Client<(id: number) => void> = cs.liftValue((__cs_id: number) => {
 });
 
 export default cs.liftValue((() => {
-    const __cs_handlers = { tap: cs.spliceValue((onTap)), hold: cs.spliceValue((onTap)) };
+    const __cs_handlers = (cs.value({ tap: cs.spliceValue((onTap)), hold: cs.spliceValue((onTap)) }), { tap: cs.spliceValue((onTap)), hold: cs.spliceValue((onTap)) });
     return __cs_handlers;
 })());

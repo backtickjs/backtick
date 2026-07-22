@@ -1,6 +1,4 @@
-21:25 error TS2345: Argument of type 'Client<ClientValue | (ClientValue | (ClientValue | (ClientValue | (ClientValue | (ClientValue | (ClientValue | ... 1 more ... | { ...; })[] | { ...; })[] | { ...; })[] | { ...; })[] | { ...; })[] | { ...; })[] | { ...; }>' is not assignable to parameter of type 'Client<void>'.
-  Type 'ClientValue | (ClientValue | (ClientValue | (ClientValue | (ClientValue | (ClientValue | (ClientValue | ... 1 more ... | { ...; })[] | { ...; })[] | { ...; })[] | { ...; })[] | { ...; })[] | { ...; })[] | { ...; }' is not assignable to type 'void'.
+21:25 error TS2345: Argument of type 'void' is not assignable to parameter of type 'ClientValue'.
+21:25 error TS2345: Argument of type 'Client<ClientValue>' is not assignable to parameter of type 'Client<void>'.
+  Type 'ClientValue' is not assignable to type 'void'.
     Type 'null' is not assignable to type 'void'.
-21:26 error TS2345: Argument of type 'Client<void>' is not assignable to parameter of type 'SpliceableValue'.
-  Type 'Client<void>' is not assignable to type 'Client<ClientValue>'.
-    Type 'void' is not assignable to type 'ClientValue'.

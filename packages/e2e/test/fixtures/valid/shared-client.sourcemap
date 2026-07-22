@@ -17,11 +17,13 @@ cs.liftValue(                → cs`
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_p                       → p
- =                           →  = 
+ = (cs.value(                →  = 
 cs.spliceValue(              →  [-semantic]
 (shared)                     → $shared
 )                            →  [-semantic]
-;                            → ;
+),                           → 
+cs.spliceValue((shared))     → $shared [-semantic -completion -navigation -verification]
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.receiver(                 → 
@@ -35,11 +37,13 @@ sum                          → sum
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_p                       → p
- =                           →  = 
+ = (cs.value(                →  = 
 cs.spliceValue(              →  [-semantic]
 (shared)                     → $shared
 )                            →  [-semantic]
-;                            → ;
+),                           → 
+cs.spliceValue((shared))     → $shared [-semantic -completion -navigation -verification]
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.receiver(                 → 

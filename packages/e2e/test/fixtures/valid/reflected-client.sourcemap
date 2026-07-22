@@ -11,7 +11,7 @@ this.y                        → this.y
 cs.liftAction((() => {\n      → cs`{\n  
 const                         → const 
 __cs_a                        → a
- =                            →  = 
+ = (cs.value(                 →  = 
 cs.spliceValue(               → ${ [-semantic]
 new Point(                    → new Point(
 cs.liftValue(                 → cs`
@@ -23,11 +23,23 @@ cs.liftValue(                 → cs`
 )                             → `
 )                             → )
 )                             → } [-semantic]
-;                             → ;
+),                            → 
+cs.spliceValue(               → ${ [-semantic -completion -navigation -verification]
+new Point(                    → new Point(
+cs.liftValue(                 → cs`
+1                             → 1
+)                             → `
+,                             → , 
+cs.liftValue(                 → cs`
+2                             → 2
+)                             → `
+)                             → )
+)                             → } [-semantic -completion -navigation -verification]
+);                            → ;
 \n                            → \n  
 const                         → const 
 __cs_b                        → b
- =                            →  = 
+ = (cs.value(                 →  = 
 cs.spliceValue(               → ${ [-semantic]
 new Point(                    → new Point(
 cs.liftValue(                 → cs`
@@ -39,7 +51,19 @@ cs.liftValue(                 → cs`
 )                             → `
 )                             → )
 )                             → } [-semantic]
-;                             → ;
+),                            → 
+cs.spliceValue(               → ${ [-semantic -completion -navigation -verification]
+new Point(                    → new Point(
+cs.liftValue(                 → cs`
+3                             → 3
+)                             → `
+,                             → , 
+cs.liftValue(                 → cs`
+4                             → 4
+)                             → `
+)                             → )
+)                             → } [-semantic -completion -navigation -verification]
+);                            → ;
 \n                            → \n  
 const                         → const 
 __cs_sum                      → sum
