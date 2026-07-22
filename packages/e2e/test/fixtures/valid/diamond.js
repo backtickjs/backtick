@@ -8,6 +8,7 @@ const d0 = cs.create(
   {
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -19,6 +20,7 @@ const d1 = cs.create(
   {
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
+    kind: "value",
     splices: { $d0: d0 },
     captures: [],
     declarations: [],
@@ -44,6 +46,7 @@ const d2 = cs.create(
   {
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
+    kind: "value",
     splices: { $d1: d1 },
     captures: [],
     declarations: [],
@@ -69,6 +72,7 @@ const d3 = cs.create(
   {
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
+    kind: "value",
     splices: { $d2: d2 },
     captures: [],
     declarations: [],
@@ -94,6 +98,7 @@ const d4 = cs.create(
   {
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
+    kind: "value",
     splices: { $d3: d3 },
     captures: [],
     declarations: [],

@@ -6,6 +6,7 @@ export default cs.create(
   {
     filePath: "bindingless-catch.ts",
     fileHash: "1jo3526bq0xmc",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],

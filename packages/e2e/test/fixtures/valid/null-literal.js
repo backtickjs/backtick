@@ -6,6 +6,7 @@ const orDash = cs.create(
   {
     filePath: "null-literal.ts",
     fileHash: "2albtvza6nmmn",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["value$2albtvza6nmmn$0"],
@@ -44,6 +45,7 @@ export default cs.create(
   {
     filePath: "null-literal.ts",
     fileHash: "2albtvza6nmmn",
+    kind: "value",
     splices: { $orDash: orDash },
     captures: [],
     declarations: [],

@@ -7,6 +7,7 @@ export default cs.create(
   {
     filePath: "splice-string.ts",
     fileHash: "21eeyebjke79q",
+    kind: "value",
     splices: { $value: value },
     captures: [],
     declarations: [],

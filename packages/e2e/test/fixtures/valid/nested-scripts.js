@@ -4,12 +4,14 @@ export default cs.create(
   {
     filePath: "nested-scripts.ts",
     fileHash: "3d1j5mxf94bs6",
+    kind: "value",
     splices: {
       $0splice0: cs.create(
         [5, 12, 5, 17],
         {
           filePath: "nested-scripts.ts",
           fileHash: "3d1j5mxf94bs6",
+          kind: "value",
           splices: {},
           captures: ["x$3d1j5mxf94bs6$0"],
           declarations: [],

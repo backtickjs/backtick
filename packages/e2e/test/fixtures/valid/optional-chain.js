@@ -7,6 +7,7 @@ const pick = cs.create(
   {
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["p$1k96f1nwptp9k$0"],
@@ -36,6 +37,7 @@ const deep = cs.create(
   {
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["o$1k96f1nwptp9k$1"],
@@ -70,6 +72,7 @@ const shout = cs.create(
   {
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["s$1k96f1nwptp9k$2"],
@@ -103,6 +106,7 @@ export default cs.create(
   {
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
+    kind: "value",
     splices: { $pick: pick, $deep: deep, $shout: shout },
     captures: [],
     declarations: [],

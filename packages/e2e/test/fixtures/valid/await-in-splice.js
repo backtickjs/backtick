@@ -10,6 +10,7 @@ export default cs.create(
   {
     filePath: "await-in-splice.ts",
     fileHash: "3872sh2awxtu6",
+    kind: "value",
     splices: { $0splice0: await fetchGreeting() },
     captures: [],
     declarations: [],

@@ -6,6 +6,7 @@ const script = cs.create(
   {
     filePath: "array-mutation.ts",
     fileHash: "3m6roaxdg127n",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["coins$3m6roaxdg127n$0", "last$3m6roaxdg127n$1"],
@@ -50,6 +51,7 @@ const action = cs.create(
   {
     filePath: "array-mutation.ts",
     fileHash: "3m6roaxdg127n",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["coins$3m6roaxdg127n$2"],

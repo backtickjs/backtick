@@ -4,6 +4,7 @@ export default cs.create(
   {
     filePath: "runtime-values.ts",
     fileHash: "1rjo8fz06u9rg",
+    kind: "value",
     splices: { $0splice0: [1, "two", true, null], $0splice1: { k: 3 } },
     captures: [],
     declarations: [],

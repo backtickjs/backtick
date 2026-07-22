@@ -7,6 +7,7 @@ const action = cs.create(
   {
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["x$8tx5qho0had8$0"],
@@ -29,6 +30,7 @@ export const stored = cs.create(
   {
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
+    kind: "value",
     splices: { $action: action },
     captures: [],
     declarations: ["captured$8tx5qho0had8$1"],
@@ -52,6 +54,7 @@ export const returned = cs.create(
   {
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
+    kind: "value",
     splices: { $action: action },
     captures: [],
     declarations: [],
@@ -67,6 +70,7 @@ export const assigned = cs.create(
   {
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
+    kind: "value",
     splices: { $action: action },
     captures: [],
     declarations: ["e$8tx5qho0had8$2"],

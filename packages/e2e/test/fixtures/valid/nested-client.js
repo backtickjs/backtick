@@ -13,6 +13,7 @@ class Point {
       {
         filePath: "nested-client.ts",
         fileHash: "3b7boqu5f3cse",
+        kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -47,6 +48,7 @@ export default cs.create(
   {
     filePath: "nested-client.ts",
     fileHash: "3b7boqu5f3cse",
+    kind: "value",
     splices: { $Segment: Segment, $Point: Point },
     captures: [],
     declarations: ["s$3b7boqu5f3cse$0"],

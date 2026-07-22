@@ -13,6 +13,7 @@ class Point {
       {
         filePath: "reflected-client.ts",
         fileHash: "1n3zukooyw7a6",
+        kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -39,6 +40,7 @@ export default cs.create(
   {
     filePath: "reflected-client.ts",
     fileHash: "1n3zukooyw7a6",
+    kind: "action",
     splices: {
       $0splice0: new Point(
         cs.create(
@@ -46,6 +48,7 @@ export default cs.create(
           {
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],
@@ -57,6 +60,7 @@ export default cs.create(
           {
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],
@@ -70,6 +74,7 @@ export default cs.create(
           {
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],
@@ -81,6 +86,7 @@ export default cs.create(
           {
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],

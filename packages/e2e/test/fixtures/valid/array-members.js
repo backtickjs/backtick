@@ -6,6 +6,7 @@ export default cs.create(
   {
     filePath: "array-members.ts",
     fileHash: "3kt9mhwly650i",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [

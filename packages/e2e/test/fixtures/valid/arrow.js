@@ -4,6 +4,7 @@ export default cs.create(
   {
     filePath: "arrow.ts",
     fileHash: "357jk2g9zktff",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [

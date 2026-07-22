@@ -10,6 +10,7 @@ const gate = cs.create(
   {
     filePath: "nested-condition-check.ts",
     fileHash: "2nymys98gllff",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [
@@ -69,6 +70,7 @@ export default cs.create(
   {
     filePath: "nested-condition-check.ts",
     fileHash: "2nymys98gllff",
+    kind: "value",
     splices: { $gate: gate },
     captures: [],
     declarations: [],

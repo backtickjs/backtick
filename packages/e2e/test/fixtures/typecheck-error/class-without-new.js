@@ -17,6 +17,7 @@ export default cs.create(
   {
     filePath: "class-without-new.tsx",
     fileHash: "1n6hvxiblc91f",
+    kind: "value",
     splices: { $Point: Point },
     captures: [],
     declarations: ["C$1n6hvxiblc91f$0"],

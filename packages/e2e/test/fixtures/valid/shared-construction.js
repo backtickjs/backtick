@@ -21,6 +21,7 @@ function make(Shape) {
     {
       filePath: "shared-construction.ts",
       fileHash: "3cp3uvwlsfvqo",
+      kind: "value",
       splices: { $Shape: Shape },
       captures: [],
       declarations: [],
@@ -40,6 +41,7 @@ export default cs.create(
   {
     filePath: "shared-construction.ts",
     fileHash: "3cp3uvwlsfvqo",
+    kind: "value",
     splices: { $a: a, $b: b, $c: c, $d: d },
     captures: [],
     declarations: [],

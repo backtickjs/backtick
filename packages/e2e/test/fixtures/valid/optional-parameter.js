@@ -6,6 +6,7 @@ const greet = cs.create(
   {
     filePath: "optional-parameter.ts",
     fileHash: "3rhwjto9jja73",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["name$3rhwjto9jja73$0"],
@@ -40,6 +41,7 @@ const double = cs.create(
   {
     filePath: "optional-parameter.ts",
     fileHash: "3rhwjto9jja73",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -51,6 +53,7 @@ const call = cs.create(
   {
     filePath: "optional-parameter.ts",
     fileHash: "3rhwjto9jja73",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["cb$3rhwjto9jja73$1"],
@@ -85,6 +88,7 @@ export default cs.create(
   {
     filePath: "optional-parameter.ts",
     fileHash: "3rhwjto9jja73",
+    kind: "value",
     splices: { $greet: greet, $call: call, $double: double },
     captures: [],
     declarations: [],

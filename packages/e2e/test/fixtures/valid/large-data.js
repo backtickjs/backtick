@@ -24,6 +24,7 @@ export default _jsx("button", {
     {
       filePath: "large-data.tsx",
       fileHash: "28jw3q04x943a",
+      kind: "value",
       splices: { $0splice0: { orders, currency: "CAD" } },
       captures: [],
       declarations: [],

@@ -6,6 +6,7 @@ export default cs.create(
   {
     filePath: "non-boolean-condition.ts",
     fileHash: "7s4lkv4w2ddn",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["name$7s4lkv4w2ddn$0"],

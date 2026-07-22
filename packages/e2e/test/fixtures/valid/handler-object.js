@@ -6,6 +6,7 @@ const beep = cs.create(
   {
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["n$gyja921xjk87$0"],
@@ -33,6 +34,7 @@ const onTap = cs.create(
   {
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
+    kind: "value",
     splices: { $beep: beep },
     captures: [],
     declarations: ["id$gyja921xjk87$1"],
@@ -49,6 +51,7 @@ export default cs.create(
   {
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
+    kind: "value",
     splices: { $onTap: onTap },
     captures: [],
     declarations: ["handlers$gyja921xjk87$2"],

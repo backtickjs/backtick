@@ -19,6 +19,7 @@ export default cs.create(
   {
     filePath: "new-expression.ts",
     fileHash: "y9r0n74bbbwa",
+    kind: "value",
     splices: { $Point: Point },
     captures: [],
     declarations: ["p$y9r0n74bbbwa$0"],

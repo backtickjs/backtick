@@ -16,6 +16,7 @@ class Color {
       {
         filePath: "spliced-param.ts",
         fileHash: "22eb8gy7ghfko",
+        kind: "value",
         splices: { $0splice0: this.r },
         captures: [],
         declarations: [],
@@ -39,6 +40,7 @@ export default cs.create(
   {
     filePath: "spliced-param.ts",
     fileHash: "22eb8gy7ghfko",
+    kind: "value",
     splices: {
       $0splice0: new Color(
         cs.create(
@@ -46,6 +48,7 @@ export default cs.create(
           {
             filePath: "spliced-param.ts",
             fileHash: "22eb8gy7ghfko",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],

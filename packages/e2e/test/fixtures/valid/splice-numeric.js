@@ -4,6 +4,7 @@ export default cs.create(
   {
     filePath: "splice-numeric.ts",
     fileHash: "1hiwar7pcwq4d",
+    kind: "value",
     splices: { $0splice0: 1 },
     captures: [],
     declarations: [],

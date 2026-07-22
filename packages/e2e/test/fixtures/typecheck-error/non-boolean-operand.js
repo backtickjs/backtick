@@ -7,6 +7,7 @@ export default cs.create(
   {
     filePath: "non-boolean-operand.ts",
     fileHash: "3kpojr67liy8x",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["count$3kpojr67liy8x$0", "flag$3kpojr67liy8x$1"],

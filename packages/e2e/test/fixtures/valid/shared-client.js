@@ -13,6 +13,7 @@ class Point {
       {
         filePath: "shared-client.ts",
         fileHash: "2dmd79xnh14ui",
+        kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -39,6 +40,7 @@ const shared = new Point(
     {
       filePath: "shared-client.ts",
       fileHash: "2dmd79xnh14ui",
+      kind: "value",
       splices: {},
       captures: [],
       declarations: [],
@@ -50,6 +52,7 @@ const shared = new Point(
     {
       filePath: "shared-client.ts",
       fileHash: "2dmd79xnh14ui",
+      kind: "value",
       splices: {},
       captures: [],
       declarations: [],
@@ -62,6 +65,7 @@ const left = cs.create(
   {
     filePath: "shared-client.ts",
     fileHash: "2dmd79xnh14ui",
+    kind: "value",
     splices: { $shared: shared },
     captures: [],
     declarations: ["p$2dmd79xnh14ui$0"],
@@ -96,6 +100,7 @@ const right = cs.create(
   {
     filePath: "shared-client.ts",
     fileHash: "2dmd79xnh14ui",
+    kind: "value",
     splices: { $shared: shared },
     captures: [],
     declarations: ["p$2dmd79xnh14ui$1"],
@@ -126,6 +131,7 @@ export default cs.create(
   {
     filePath: "shared-client.ts",
     fileHash: "2dmd79xnh14ui",
+    kind: "value",
     splices: { $left: left, $right: right },
     captures: [],
     declarations: [],

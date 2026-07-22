@@ -6,6 +6,7 @@ const count = cs.create(
   {
     filePath: "value-splice-statement.ts",
     fileHash: "2xzewragy8kyn",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -17,6 +18,7 @@ export const script = cs.create(
   {
     filePath: "value-splice-statement.ts",
     fileHash: "2xzewragy8kyn",
+    kind: "action",
     splices: { $count: count },
     captures: [],
     declarations: [],

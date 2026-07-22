@@ -13,6 +13,7 @@ const action = cs.create(
   {
     filePath: "action-constructor-arg.ts",
     fileHash: "t3cg066e2mwt",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["x$t3cg066e2mwt$0"],
@@ -35,6 +36,7 @@ export const held = cs.create(
   {
     filePath: "action-constructor-arg.ts",
     fileHash: "t3cg066e2mwt",
+    kind: "value",
     splices: { $Holder: Holder, $action: action },
     captures: [],
     declarations: ["h$t3cg066e2mwt$1"],

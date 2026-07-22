@@ -4,6 +4,7 @@ export default cs.create(
   {
     filePath: "try-catch.ts",
     fileHash: "2osmwga78xnj6",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["message$2osmwga78xnj6$0", "error$2osmwga78xnj6$1"],

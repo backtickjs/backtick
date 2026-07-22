@@ -7,6 +7,7 @@ const ping = cs.create(
   {
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["x$17wdcvct95tpn$0"],
@@ -33,6 +34,7 @@ export const called = cs.create(
   {
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
+    kind: "value",
     splices: { $ping: ping },
     captures: [],
     declarations: [],
@@ -44,6 +46,7 @@ const action = cs.create(
   {
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["x$17wdcvct95tpn$1"],
@@ -66,6 +69,7 @@ export const spliced = cs.create(
   {
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
+    kind: "value",
     splices: { $action: action },
     captures: [],
     declarations: [],

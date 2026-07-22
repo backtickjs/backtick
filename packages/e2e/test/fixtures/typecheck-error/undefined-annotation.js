@@ -4,6 +4,7 @@ const stored = cs.create(
   {
     filePath: "undefined-annotation.ts",
     fileHash: "18uwl3j62c30b",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["x$18uwl3j62c30b$0", "y$18uwl3j62c30b$1"],
@@ -31,6 +32,7 @@ const written = cs.create(
   {
     filePath: "undefined-annotation.ts",
     fileHash: "18uwl3j62c30b",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["x$18uwl3j62c30b$2", "y$18uwl3j62c30b$3"],

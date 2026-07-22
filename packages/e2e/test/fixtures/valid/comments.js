@@ -6,6 +6,7 @@ export default cs.create(
   {
     filePath: "comments.ts",
     fileHash: "rbes3su3s43l",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["count$rbes3su3s43l$0"],

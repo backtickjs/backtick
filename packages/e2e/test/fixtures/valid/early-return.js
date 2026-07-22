@@ -5,6 +5,7 @@ export default cs.create(
   {
     filePath: "early-return.ts",
     fileHash: "3slc08eszz0br",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["n$3slc08eszz0br$0"],

@@ -9,6 +9,7 @@ function make(n) {
     {
       filePath: "jsx-polymorphic-prop.tsx",
       fileHash: "2utzrnix6a7i5",
+      kind: "value",
       splices: { $n: n },
       captures: [],
       declarations: [],

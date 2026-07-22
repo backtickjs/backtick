@@ -9,12 +9,14 @@ function offset(by) {
     {
       filePath: "polymorphic-tree-captures.tsx",
       fileHash: "1kuzggq2rup5b",
+      kind: "value",
       splices: {
         $0splice0: cs.create(
           [8, 33, 8, 41],
           {
             filePath: "polymorphic-tree-captures.tsx",
             fileHash: "1kuzggq2rup5b",
+            kind: "value",
             splices: {},
             captures: ["base$1kuzggq2rup5b$0"],
             declarations: [],
@@ -46,6 +48,7 @@ export default _jsx("button", {
       {
         filePath: "polymorphic-tree-captures.tsx",
         fileHash: "1kuzggq2rup5b",
+        kind: "value",
         splices: {},
         captures: [],
         declarations: [],
@@ -59,6 +62,7 @@ export default _jsx("button", {
       {
         filePath: "polymorphic-tree-captures.tsx",
         fileHash: "1kuzggq2rup5b",
+        kind: "value",
         splices: {},
         captures: [],
         declarations: [],

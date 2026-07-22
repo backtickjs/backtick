@@ -13,6 +13,7 @@ class Point {
       {
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
+        kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
@@ -45,6 +46,7 @@ class Segment {
       {
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
+        kind: "value",
         splices: { $0splice0: this.from.x, $0splice1: this.to.x },
         captures: [],
         declarations: [],
@@ -70,6 +72,7 @@ const segment = new Segment(
       {
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
+        kind: "value",
         splices: {},
         captures: [],
         declarations: [],
@@ -81,6 +84,7 @@ const segment = new Segment(
       {
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
+        kind: "value",
         splices: {},
         captures: [],
         declarations: [],
@@ -94,6 +98,7 @@ const segment = new Segment(
       {
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
+        kind: "value",
         splices: {},
         captures: [],
         declarations: [],
@@ -105,6 +110,7 @@ const segment = new Segment(
       {
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
+        kind: "value",
         splices: {},
         captures: [],
         declarations: [],
@@ -118,6 +124,7 @@ export default cs.create(
   {
     filePath: "nested-reflected-client.ts",
     fileHash: "marvm6ddqnqk",
+    kind: "value",
     splices: { $segment: segment },
     captures: [],
     declarations: ["s$marvm6ddqnqk$0", "rise$marvm6ddqnqk$1"],

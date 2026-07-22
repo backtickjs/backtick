@@ -12,6 +12,7 @@ function guard(fragment) {
     {
       filePath: "splice-laziness.ts",
       fileHash: "23k9adtpaouck",
+      kind: "value",
       splices: { $fragment: fragment },
       captures: [],
       declarations: ["flag$23k9adtpaouck$0"],
@@ -48,6 +49,7 @@ const ok = cs.create(
   {
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -59,6 +61,7 @@ const broken = cs.create(
   {
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -79,6 +82,7 @@ export default cs.create(
   {
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
+    kind: "value",
     splices: { $0splice0: guard(ok), $0splice1: guard(broken) },
     captures: [],
     declarations: [],

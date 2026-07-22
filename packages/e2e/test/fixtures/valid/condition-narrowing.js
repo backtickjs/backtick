@@ -12,6 +12,7 @@ const flags = {
     {
       filePath: "condition-narrowing.ts",
       fileHash: "3ciy5yb38f51h",
+      kind: "value",
       splices: {},
       captures: [],
       declarations: [],
@@ -24,6 +25,7 @@ const label = cs.create(
   {
     filePath: "condition-narrowing.ts",
     fileHash: "3ciy5yb38f51h",
+    kind: "value",
     splices: { $0splice0: flags.strict },
     captures: [],
     declarations: ["text$3ciy5yb38f51h$0", "upper$3ciy5yb38f51h$1"],
@@ -146,6 +148,7 @@ export default cs.create(
   {
     filePath: "condition-narrowing.ts",
     fileHash: "3ciy5yb38f51h",
+    kind: "value",
     splices: { $label: label },
     captures: [],
     declarations: [],

@@ -9,6 +9,7 @@ function sum(a, b) {
     {
       filePath: "expansion-splice-sharing.ts",
       fileHash: "2kc5czyfqafly",
+      kind: "value",
       splices: { $a: a, $b: b },
       captures: [],
       declarations: [],
@@ -55,6 +56,7 @@ export default cs.create(
   {
     filePath: "expansion-splice-sharing.ts",
     fileHash: "2kc5czyfqafly",
+    kind: "value",
     splices: { $Point: Point, $Size: Size },
     captures: [],
     declarations: ["p$2kc5czyfqafly$0", "s$2kc5czyfqafly$1"],

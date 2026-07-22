@@ -7,6 +7,7 @@ const getValue = cs.create(
   {
     filePath: "discarded-value.ts",
     fileHash: "1y1jdbv3pfwln",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -26,6 +27,7 @@ const ping = cs.create(
   {
     filePath: "discarded-value.ts",
     fileHash: "1y1jdbv3pfwln",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["n$1y1jdbv3pfwln$0"],
@@ -57,6 +59,7 @@ const action = cs.create(
   {
     filePath: "discarded-value.ts",
     fileHash: "1y1jdbv3pfwln",
+    kind: "action",
     splices: { $ping: ping, $getValue: getValue },
     captures: [],
     declarations: [],

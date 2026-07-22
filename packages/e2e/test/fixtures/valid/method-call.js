@@ -4,6 +4,7 @@ export default cs.create(
   {
     filePath: "method-call.ts",
     fileHash: "190iczdl07b3h",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: ["greeting$190iczdl07b3h$0"],

@@ -6,6 +6,7 @@ const effects = cs.create(
   {
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
+    kind: "action",
     splices: {},
     captures: [],
     declarations: ["x$agkxao2hual4$0"],
@@ -28,6 +29,7 @@ const composed = cs.create(
   {
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
+    kind: "action",
     splices: { $effects: effects },
     captures: [],
     declarations: [],
@@ -39,6 +41,7 @@ export default cs.create(
   {
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
+    kind: "action",
     splices: { $composed: composed },
     captures: [],
     declarations: [],

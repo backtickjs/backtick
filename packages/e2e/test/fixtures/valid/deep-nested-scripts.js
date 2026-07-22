@@ -5,6 +5,7 @@ function add(lhs, rhs) {
     {
       filePath: "deep-nested-scripts.ts",
       fileHash: "jmxp905pbgk8",
+      kind: "value",
       splices: { $lhs: lhs, $rhs: rhs },
       captures: [],
       declarations: [],
@@ -23,6 +24,7 @@ export default cs.create(
   {
     filePath: "deep-nested-scripts.ts",
     fileHash: "jmxp905pbgk8",
+    kind: "value",
     splices: {
       $0splice0: add(
         cs.create(
@@ -30,6 +32,7 @@ export default cs.create(
           {
             filePath: "deep-nested-scripts.ts",
             fileHash: "jmxp905pbgk8",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],
@@ -41,6 +44,7 @@ export default cs.create(
           {
             filePath: "deep-nested-scripts.ts",
             fileHash: "jmxp905pbgk8",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],

@@ -55,7 +55,7 @@ export function rewriteScript(
 
   // A block that returns or throws is a value script;
   // one that completes without returning is an action script.
-  let value = true;
+  let kind: "value" | "action" = "value";
   if (ts.isBlock(scriptNode)) {
     // A valued `return` makes a value script, as does exiting every path
     // with no `return` at all (a throw-only block). Bare returns are an
@@ -63,8 +63,8 @@ export function rewriteScript(
     const returns = ownReturn(ts, scriptNode);
     const valued = ownReturn(ts, scriptNode, true);
     const exits = terminates(ts, scriptNode);
-    value = valued || (exits && !returns);
-    state.valueBody = value;
+    kind = valued || (exits && !returns) ? "value" : "action";
+    state.valueBody = kind === "value";
     if (valued && !exits) {
       return {
         virtual: sourceNode,
@@ -127,6 +127,10 @@ export function rewriteScript(
         ts.factory.createStringLiteral(fileHash),
       ),
       ts.factory.createPropertyAssignment(
+        "kind",
+        ts.factory.createStringLiteral(kind),
+      ),
+      ts.factory.createPropertyAssignment(
         "splices",
         ts.factory.createObjectLiteralExpression(
           splices.map((splice: Splice) =>
@@ -159,7 +163,7 @@ export function rewriteScript(
     ? iife(ts, rewritten.virtual)
     : (rewritten.virtual as ts.Expression);
   const virtual = call(ts, "cs", "lift", [
-    value ? call(ts, "cs", "const", [payload]) : payload,
+    kind === "value" ? call(ts, "cs", "const", [payload]) : payload,
   ]);
 
   sourceMaps.set(virtual, scriptRange);

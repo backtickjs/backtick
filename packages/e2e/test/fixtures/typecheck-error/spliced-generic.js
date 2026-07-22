@@ -17,6 +17,7 @@ function wrap(value) {
     {
       filePath: "spliced-generic.ts",
       fileHash: "2o6jybvu3qwcy",
+      kind: "value",
       splices: { $value: value },
       captures: [],
       declarations: [],
@@ -29,6 +30,7 @@ export default cs.create(
   {
     filePath: "spliced-generic.ts",
     fileHash: "2o6jybvu3qwcy",
+    kind: "value",
     splices: {
       $0splice0: wrap(
         new Point(
@@ -37,6 +39,7 @@ export default cs.create(
             {
               filePath: "spliced-generic.ts",
               fileHash: "2o6jybvu3qwcy",
+              kind: "value",
               splices: {},
               captures: [],
               declarations: [],

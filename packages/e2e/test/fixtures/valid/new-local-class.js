@@ -16,6 +16,7 @@ export default cs.create(
   {
     filePath: "new-local-class.tsx",
     fileHash: "2pik4a0v1yd8w",
+    kind: "value",
     splices: { $Point: Point },
     captures: [],
     declarations: ["C$2pik4a0v1yd8w$0", "p$2pik4a0v1yd8w$1"],

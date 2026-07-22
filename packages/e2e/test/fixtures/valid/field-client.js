@@ -15,6 +15,7 @@ export default cs.create(
   {
     filePath: "field-client.ts",
     fileHash: "3o65fk6h8ba4e",
+    kind: "value",
     splices: {
       $0splice0: new Color(
         cs.create(
@@ -22,6 +23,7 @@ export default cs.create(
           {
             filePath: "field-client.ts",
             fileHash: "3o65fk6h8ba4e",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],
@@ -33,6 +35,7 @@ export default cs.create(
           {
             filePath: "field-client.ts",
             fileHash: "3o65fk6h8ba4e",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],
@@ -44,6 +47,7 @@ export default cs.create(
           {
             filePath: "field-client.ts",
             fileHash: "3o65fk6h8ba4e",
+            kind: "value",
             splices: {},
             captures: [],
             declarations: [],

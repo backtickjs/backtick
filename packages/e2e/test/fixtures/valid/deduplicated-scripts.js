@@ -6,6 +6,7 @@ const leaf = cs.create(
   {
     filePath: "deduplicated-scripts.ts",
     fileHash: "xr1ijhq5mxaf",
+    kind: "value",
     splices: {},
     captures: [],
     declarations: [],
@@ -17,6 +18,7 @@ export default cs.create(
   {
     filePath: "deduplicated-scripts.ts",
     fileHash: "xr1ijhq5mxaf",
+    kind: "value",
     splices: { $leaf: leaf },
     captures: [],
     declarations: [],
