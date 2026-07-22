@@ -51,6 +51,14 @@ function value(_: ClientValue): ClientValue {
   );
 }
 
+// A statement discards its expression, which is only silent for `void`
+function statement(_: void): void {
+  throw new Error(
+    "Don't call `cs.statement` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 function receiver<T extends ClientUnknown>(_: T): Receiver<T> {
   throw new Error(
     "Don't call `cs.receiver` directly; it's used to generate virtual " +
@@ -75,6 +83,7 @@ export const cs = Object.assign(
     spliceAction,
     condition,
     value,
+    statement,
     receiver,
   },
 );

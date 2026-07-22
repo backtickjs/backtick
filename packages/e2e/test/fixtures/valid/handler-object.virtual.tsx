@@ -8,7 +8,7 @@ const beep: Client<void> = cs.liftAction((() => {
 })());
 
 const onTap: Client<(id: number) => void> = cs.liftValue((__cs_id: number) => {
-    cs.spliceAction((beep));
+    cs.statement(cs.spliceAction((beep)));
 });
 
 export default cs.liftValue((() => {

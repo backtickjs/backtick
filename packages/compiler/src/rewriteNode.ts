@@ -467,10 +467,14 @@ function rewriteNodeImpl(
       );
     }
     const expression = rewriteNode(ts, state, node.expression);
+    // A statement discards its expression, which is only silent for
+    // `void`. Assignments are language statements.
+    const checked =
+      assignment || state.dup
+        ? (expression.virtual as ts.Expression)
+        : call(ts, "cs", "statement", [expression.virtual as ts.Expression]);
     return {
-      virtual: ts.factory.createExpressionStatement(
-        expression.virtual as ts.Expression,
-      ),
+      virtual: ts.factory.createExpressionStatement(checked),
       runtime: expression.runtime,
     };
   }

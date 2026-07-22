@@ -1,0 +1,36 @@
+cs.liftValue(                 → cs`
+() => {\n                     → () => {\n  
+return                        → return 
+1                             → 1
+;                             → ;
+\n}                           → \n}
+)                             → `
+cs.liftValue(                 → cs`
+() => {\n                     → () => {\n  
+let                           → let 
+__cs_n                        → n
+ =                            →  = 
+0                             → 0
+;                             → ;
+\n                            → \n  
+__cs_n                        → n
+ =                            →  = 
+1                             → 1
+;                             → ;
+\n}                           → \n}
+)                             → `
+cs.liftAction((() => {\n      → cs`{\n  
+cs.statement(                 → 
+cs.spliceValue(               →  [-semantic]
+(ping)                        → $ping
+)                             →  [-semantic]
+()                            → ()
+);                            → ;
+\n                            → \n  
+cs.statement(                 → 
+cs.spliceValue(               →  [-semantic]
+(getValue)                    → $getValue
+)                             →  [-semantic]
+()                            → ()
+);                            → ;
+\n})())                       → \n}`

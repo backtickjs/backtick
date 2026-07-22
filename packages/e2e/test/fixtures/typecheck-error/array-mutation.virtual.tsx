@@ -10,5 +10,5 @@ const script = cs.liftValue((() => {
 
 const action = cs.liftAction((() => {
     const __cs_coins = [1, 2];
-    cs.receiver(__cs_coins).push(3);
+    cs.statement(cs.receiver(__cs_coins).push(3));
 })());

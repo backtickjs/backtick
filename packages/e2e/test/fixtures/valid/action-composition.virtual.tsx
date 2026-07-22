@@ -7,9 +7,9 @@ const effects: Client<void> = cs.liftAction((() => {
 })());
 
 const composed: Client<void> = cs.liftAction((() => {
-    cs.spliceAction((effects));
+    cs.statement(cs.spliceAction((effects)));
 })());
 
 export default cs.liftAction((() => {
-    cs.spliceAction((composed));
+    cs.statement(cs.spliceAction((composed)));
 })());

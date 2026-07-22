@@ -14,10 +14,11 @@ cs.liftValue(                             → cs`
 (                                         → (
 __cs_id                                   → id
 : number) => {\n                          → : number) => {\n  
+cs.statement(                             → 
 cs.spliceAction(                          →  [-semantic]
 (beep)                                    → $beep
 )                                         →  [-semantic]
-;                                         → ;
+);                                        → ;
 \n}                                       → \n}
 )                                         → `
 cs.liftValue((() => {\n                   → cs`{\n  
