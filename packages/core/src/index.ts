@@ -2,7 +2,9 @@ export {
   type Client,
   type ClientObject,
   type ClientUnknown,
+  type ClientValue,
   type Prop,
+  type Spliceable,
   cs,
 } from "@backtickjs/cs-runtime";
 export type { JSX } from "./jsx-runtime/index.js";

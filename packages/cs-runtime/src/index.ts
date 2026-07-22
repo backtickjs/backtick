@@ -15,6 +15,7 @@ export {
   isClientElement,
   type Prop,
 } from "./ClientElement.js";
+export type { ClientValue } from "./ClientValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
