@@ -155,7 +155,7 @@ export function rewriteScript(
     ? iife(ts, rewritten.virtual)
     : (rewritten.virtual as ts.Expression);
   const virtual = call(ts, "cs", "lift", [
-    value ? call(ts, "cs", "value", [payload]) : payload,
+    value ? call(ts, "cs", "const", [payload]) : payload,
   ]);
 
   sourceMaps.set(virtual, scriptRange);

@@ -13,4 +13,4 @@ class Wallet implements ClientObject {
   }
 }
 
-export default cs.lift(cs.value(cs.receiver(cs.receiver(cs.splice(new Wallet([cs.lift(cs.value(1)), cs.lift(cs.value(2))]))).coins).length));
+export default cs.lift(cs.const(cs.receiver(cs.receiver(cs.splice(new Wallet([cs.lift(cs.const(1)), cs.lift(cs.const(2))]))).coins).length));

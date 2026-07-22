@@ -1,21 +1,21 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 cs.splice(                       →  [-semantic]
 (lhs)                            → $lhs
 )                                →  [-semantic]
  +                               →  + 
 2                                → 2
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_foo$                        → foo$
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 );                               → ;
 \n                               → \n  
 return                           → return 
 cs.splice(                       → ${ [-semantic]
 add(                             → add(
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 __cs_foo$                        → foo$
 ))                               → `
 )                                → )

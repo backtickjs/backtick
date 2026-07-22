@@ -311,9 +311,10 @@ function rewriteNodeImpl(
           ts,
           node.declarationList.flags,
           identifier,
-          call(ts, "cs", keyword === "let" ? "widen" : "value", [
-            initializer.virtual as ts.Expression,
-          ]),
+          // A value position must hold a value — a call can produce
+          // `void`. The check mirrors the keyword: `cs.const` reads the
+          // exact type, `cs.let` widens, as unwrapped they would.
+          call(ts, "cs", keyword, [initializer.virtual as ts.Expression]),
         ),
         runtime: call(ts, "v", "variableDeclaration", [
           loc(node),
@@ -752,10 +753,10 @@ function rewriteNodeImpl(
     );
 
     // Lift each argument so the constructor receives `Client<…>` values;
-    // `cs.value` keeps a bare action from riding in as data.
+    // `cs.const` keeps a bare action from riding in as data.
     const liftedArgs = rewrittenArgs.map((arg) =>
       call(ts, "cs", "lift", [
-        call(ts, "cs", "value", [arg.virtual as ts.Expression]),
+        call(ts, "cs", "const", [arg.virtual as ts.Expression]),
       ]),
     );
 
@@ -973,7 +974,7 @@ function rewriteNodeImpl(
         virtual: ts.factory.createBinaryExpression(
           lhs.virtual as ts.Expression,
           ts.SyntaxKind.EqualsToken,
-          call(ts, "cs", "value", [rhs.virtual as ts.Expression]),
+          call(ts, "cs", "const", [rhs.virtual as ts.Expression]),
         ),
         runtime: call(ts, "v", "assignment", [
           loc(node),

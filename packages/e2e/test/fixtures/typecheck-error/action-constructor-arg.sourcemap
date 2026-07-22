@@ -1,19 +1,19 @@
 cs.lift((() => {\n               → cs`{\n  
 const                            → const 
 __cs_x                           → x
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 );                               → ;
 \n})())                          → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_h                           → h
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Holder)                         → $Holder
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 cs.splice(                       →  [-semantic]
 (action)                         → $action
 )                                →  [-semantic]

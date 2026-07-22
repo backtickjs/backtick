@@ -1,4 +1,4 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 cs.splice(                       →  [-semantic]
 (a)                              → $a
@@ -8,31 +8,31 @@ cs.splice(                       →  [-semantic]
 (b)                              → $b
 )                                →  [-semantic]
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_p                           → p
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Point)                          → $Point
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 1                                → 1
-)), cs.lift(cs.value(            → , 
+)), cs.lift(cs.const(            → , 
 2                                → 2
 )))                              → )
 );                               → ;
 \n                               → \n  
 const                            → const 
 __cs_s                           → s
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Size)                           → $Size
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 3                                → 3
-)), cs.lift(cs.value(            → , 
+)), cs.lift(cs.const(            → , 
 4                                → 4
 )))                              → )
 );                               → ;

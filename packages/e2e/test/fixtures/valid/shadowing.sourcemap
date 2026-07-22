@@ -1,29 +1,29 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_total                       → total
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 );                               → ;
 \n                               → \n  
 return                           → return 
 cs.splice(                       → ${ [-semantic]
 add(                             → add(
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 __cs_total                       → total
 ))                               → `
 , 100)                           → , 100)
 )                                → } [-semantic]
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n    
+cs.lift(cs.const((() => {\n      → cs`{\n    
 let                              → let 
 __cs_total                       → total
- = cs.widen(                     →  = 
+ = cs.let(                       →  = 
 0                                → 0
 );                               → ;
 \n                               → \n    
 __cs_total                       → total
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 __cs_total                       → total
  +                               →  + 
 cs.splice(                       →  [-semantic]
@@ -33,7 +33,7 @@ cs.splice(                       →  [-semantic]
 ;                                → ;
 \n                               → \n    
 __cs_total                       → total
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 __cs_total                       → total
  +                               →  + 
 cs.splice(                       →  [-semantic]

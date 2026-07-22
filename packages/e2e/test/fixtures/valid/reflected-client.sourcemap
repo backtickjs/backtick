@@ -1,4 +1,4 @@
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 () =>                   → () => 
 cs.splice(              → ${ [-semantic]
 this.x                  → this.x
@@ -11,14 +11,14 @@ this.y                  → this.y
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_a                  → a
- = cs.value(            →  = 
+ = cs.const(            →  = 
 cs.splice(              → ${ [-semantic]
 new Point(              → new Point(
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 1                       → 1
 ))                      → `
 ,                       → , 
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 2                       → 2
 ))                      → `
 )                       → )
@@ -27,14 +27,14 @@ cs.lift(cs.value(       → cs`
 \n                      → \n  
 const                   → const 
 __cs_b                  → b
- = cs.value(            →  = 
+ = cs.const(            →  = 
 cs.splice(              → ${ [-semantic]
 new Point(              → new Point(
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 3                       → 3
 ))                      → `
 ,                       → , 
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 4                       → 4
 ))                      → `
 )                       → )
@@ -43,7 +43,7 @@ cs.lift(cs.value(       → cs`
 \n                      → \n  
 const                   → const 
 __cs_sum                → sum
- = cs.value(            →  = 
+ = cs.const(            →  = 
 cs.receiver(            → 
 __cs_a                  → a
 )                       → 

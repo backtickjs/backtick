@@ -1,7 +1,7 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  // leading line comment\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  // leading line comment\n  
 const                            → const 
 __cs_count                       → count
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 );                               → ;
 \n                               →  // trailing line comment\n  /* block comment */\n  

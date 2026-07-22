@@ -15,9 +15,9 @@ class Color implements ClientObject {
   }
 }
 
-export default cs.lift(cs.value((() => {
-    const __cs_c = cs.value(cs.splice(new Color(cs.lift(cs.value(30)), cs.lift(cs.value(144)), cs.lift(cs.value(255)))));
-    const __cs_brightness = cs.value(cs.receiver(__cs_c).r + cs.receiver(__cs_c).g + cs.receiver(__cs_c).b);
+export default cs.lift(cs.const((() => {
+    const __cs_c = cs.const(cs.splice(new Color(cs.lift(cs.const(30)), cs.lift(cs.const(144)), cs.lift(cs.const(255)))));
+    const __cs_brightness = cs.const(cs.receiver(__cs_c).r + cs.receiver(__cs_c).g + cs.receiver(__cs_c).b);
     if (__cs_brightness > 382) {
         return "light";
     }

@@ -16,8 +16,8 @@ class Point implements ClientObject {
 // A spliced class lowers to a function with one hole per constructor
 // parameter, and a construction is a plain call of that value — so the
 // class can pass through a local and be instantiated on another line.
-export default cs.lift(cs.value((() => {
-    const __cs_C = cs.value(cs.splice((Point)));
-    const __cs_p = cs.value(new (__cs_C)(cs.lift(cs.value(1)), cs.lift(cs.value(2))));
+export default cs.lift(cs.const((() => {
+    const __cs_C = cs.const(cs.splice((Point)));
+    const __cs_p = cs.const(new (__cs_C)(cs.lift(cs.const(1)), cs.lift(cs.const(2))));
     return cs.receiver(__cs_p).x + cs.receiver(__cs_p).y;
 })()));

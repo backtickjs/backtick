@@ -2,8 +2,8 @@ import { cs } from "@backtickjs/core";
 
 // Comments in a client script are trivia: they survive formatting but are
 // dropped from the virtual code and the bundle.
-export default cs.lift(cs.value((() => {
-    const __cs_count = cs.value(1);
+export default cs.lift(cs.const((() => {
+    const __cs_count = cs.const(1);
     if (__cs_count === 1) {
         return "one";
     }

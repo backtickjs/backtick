@@ -1,7 +1,7 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_apply                       → apply
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 (                                → (
 __cs_f                           → f
 : () => number) =>               → : () => number) => 
@@ -15,7 +15,7 @@ return                           → return
 __cs_apply                       → apply
 (                                → (
 cs.splice(                       → ${ [-semantic]
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 2                                → 2
 ))                               → `

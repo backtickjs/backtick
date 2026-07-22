@@ -1,14 +1,14 @@
 cs.lift((() => {\n               → cs`{\n  
 const                            → const 
 __cs_x                           → x
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 );                               → ;
 \n})())                          → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_captured                    → captured
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (action)                         → $action
 )                                →  [-semantic]
@@ -18,14 +18,14 @@ return                           → return
 1                                → 1
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 return                           → return 
 cs.splice(                       →  [-semantic]
 (action)                         → $action
 )                                →  [-semantic]
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 try                              → try 
 {\n                              → {\n    
 return                           → return 
@@ -37,7 +37,7 @@ __cs_e                           → e
 )                                → ) 
 {\n                              → {\n    
 __cs_e                           → e
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (action)                         → $action
 )                                →  [-semantic]

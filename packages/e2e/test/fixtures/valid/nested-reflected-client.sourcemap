@@ -1,4 +1,4 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 cs.splice(                       → ${ [-semantic]
 this.x                           → this.x
@@ -8,7 +8,7 @@ cs.splice(                       → ${ [-semantic]
 this.y                           → this.y
 )                                → } [-semantic]
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 cs.splice(                       → ${ [-semantic]
 this.from.x                      → this.from.x
@@ -18,22 +18,22 @@ cs.splice(                       → ${ [-semantic]
 this.to.x                        → this.to.x
 )                                → } [-semantic]
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 1                                → 1
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 2                                → 2
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 1                                → 1
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 8                                → 8
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_s                           → s
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (segment)                        → $segment
 )                                →  [-semantic]
@@ -41,7 +41,7 @@ cs.splice(                       →  [-semantic]
 \n                               → \n  
 const                            → const 
 __cs_rise                        → rise
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.receiver(                     → 
 cs.receiver(                     → 
 __cs_s                           → s

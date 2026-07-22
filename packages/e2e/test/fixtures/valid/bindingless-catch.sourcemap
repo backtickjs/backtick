@@ -1,4 +1,4 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 try                              → try 
 {\n                              → {\n    
 throw                            → throw 

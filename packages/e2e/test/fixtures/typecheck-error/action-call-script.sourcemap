@@ -1,13 +1,13 @@
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 () => {\n               → () => {\n  
 const                   → const 
 __cs_x                  → x
- = cs.value(            →  = 
+ = cs.const(            →  = 
 1                       → 1
 );                      → ;
 \n}                     → \n}
 ))                      → `
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 cs.splice(              →  [-semantic]
 (ping)                  → $ping
 )                       →  [-semantic]
@@ -16,11 +16,11 @@ cs.splice(              →  [-semantic]
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
 __cs_x                  → x
- = cs.value(            →  = 
+ = cs.const(            →  = 
 1                       → 1
 );                      → ;
 \n})())                 → \n}`
-cs.lift(cs.value(       → cs`
+cs.lift(cs.const(       → cs`
 cs.splice(              →  [-semantic]
 (action)                → $action
 )                       →  [-semantic]

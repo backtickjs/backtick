@@ -1,4 +1,4 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 cs.splice(                       → ${ [-semantic]
 this.x                           → this.x
@@ -8,32 +8,32 @@ cs.splice(                       → ${ [-semantic]
 this.y                           → this.y
 )                                → } [-semantic]
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_s                           → s
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Segment)                        → $Segment
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Point)                          → $Point
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 1                                → 1
-)), cs.lift(cs.value(            → , 
+)), cs.lift(cs.const(            → , 
 2                                → 2
 )))                              → )
-)), cs.lift(cs.value(            → , 
+)), cs.lift(cs.const(            → , 
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Point)                          → $Point
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 1                                → 1
-)), cs.lift(cs.value(            → , 
+)), cs.lift(cs.const(            → , 
 2                                → 2
 )))                              → )
 )))                              → )

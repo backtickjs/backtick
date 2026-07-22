@@ -1,4 +1,4 @@
-cs.lift(cs.value(            → cs`
+cs.lift(cs.const(            → cs`
 (                            → (\n  
 __cs_a                       → a
 : boolean,                   → : boolean,\n  
@@ -6,7 +6,7 @@ __cs_b                       → b
 : boolean) => {\n            → : boolean,\n) => {\n  
 const                        → const 
 __cs_keep                    → keep
- = cs.value(                 →  = 
+ = cs.const(                 →  = 
 (                            → (
 __cs_on                      → on
 : boolean) =>                → : boolean) => 
@@ -40,7 +40,7 @@ return                       → return
 ;                            → ;
 \n}                          → \n}
 ))                           → `
-cs.lift(cs.value(            → cs`
+cs.lift(cs.const(            → cs`
 {                            → ({\n  
 both                         → both
 :                            → : 

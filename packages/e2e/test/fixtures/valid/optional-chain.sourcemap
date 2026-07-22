@@ -1,4 +1,4 @@
-cs.lift(cs.value(                         → cs`
+cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_p                                    → p
 : {\n    x: number;\n} | null) => {\n     → : { x: number } | null) => {\n  
@@ -13,7 +13,7 @@ x                                         → x
 ;                                         → ;
 \n}                                       → \n}
 ))                                        → `
-cs.lift(cs.value(                         → cs`
+cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_o                                    → o
 : {\n    inner: {\n        z: number;\n    } | null;\n} | null) => {\n    → : { inner: { z: number } | null } | null) => {\n  
@@ -34,7 +34,7 @@ z                                         → z
 ;                                         → ;
 \n}                                       → \n}
 ))                                        → `
-cs.lift(cs.value(                         → cs`
+cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_s                                    → s
 : string | null) => {\n                   → : string | null) => {\n  
@@ -51,7 +51,7 @@ concat                                    → concat
 ;                                         → ;
 \n}                                       → \n}
 ))                                        → `
-cs.lift(cs.value(                         → cs`
+cs.lift(cs.const(                         → cs`
 {                                         → ({\n  
 found                                     → found
 :                                         → : 

@@ -1,4 +1,4 @@
-cs.lift(cs.value(  → cs`
+cs.lift(cs.const(  → cs`
 cs.splice(         →  [-semantic]
 (value)            → $value
 )                  →  [-semantic]

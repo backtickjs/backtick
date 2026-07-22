@@ -1,10 +1,10 @@
-cs.lift(cs.value(                        → cs`
+cs.lift(cs.const(                        → cs`
 (                                        → (
 __cs_count                               → count
 : number) => {\n                         → : number) => {\n  
 const                                    → const 
 __cs_keep                                → keep
- = cs.value(                             →  = 
+ = cs.const(                             →  = 
 (                                        → (
 __cs_on                                  → on
 : boolean) =>                            → : boolean) => 

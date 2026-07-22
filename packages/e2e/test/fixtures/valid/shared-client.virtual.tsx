@@ -13,22 +13,22 @@ class Point implements ClientObject {
   }
 
   get sum() {
-    return cs.lift(cs.value(() => cs.splice(this.x) + cs.splice(this.y)));
+    return cs.lift(cs.const(() => cs.splice(this.x) + cs.splice(this.y)));
   }
 }
 
 // The same instance spliced through two scripts: it must lower once and be
 // shared (its getters evaluated a single time), not re-expanded per path.
-const shared = new Point(cs.lift(cs.value(1)), cs.lift(cs.value(2)));
+const shared = new Point(cs.lift(cs.const(1)), cs.lift(cs.const(2)));
 
-const left = cs.lift(cs.value((() => {
-    const __cs_p = cs.value(cs.splice((shared)));
+const left = cs.lift(cs.const((() => {
+    const __cs_p = cs.const(cs.splice((shared)));
     return cs.receiver(__cs_p).sum();
 })()));
 
-const right = cs.lift(cs.value((() => {
-    const __cs_p = cs.value(cs.splice((shared)));
+const right = cs.lift(cs.const((() => {
+    const __cs_p = cs.const(cs.splice((shared)));
     return cs.receiver(__cs_p).x;
 })()));
 
-export default cs.lift(cs.value(cs.splice((left)) + cs.splice((right))));
+export default cs.lift(cs.const(cs.splice((left)) + cs.splice((right))));

@@ -5,9 +5,8 @@ import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 import type { Receiver } from "./Receiver.js";
 
-// The root of a script: what the tag's expression evaluates to. A value
-// root's payload is checked by `cs.value`; an action root's is `void`.
-function lift<const T extends ClientUnknown>(_: T): Client<T> {
+// The root of a script
+function _lift<const T extends ClientUnknown>(_: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -15,31 +14,29 @@ function lift<const T extends ClientUnknown>(_: T): Client<T> {
 }
 
 // A spliced host value, read as what it becomes on the client
-function splice<const T extends Spliceable>(_: T): Spliced<T> {
+function _splice<const T extends Spliceable>(_: T): Spliced<T> {
   throw new Error(
     "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-function condition(_: boolean): boolean {
+// Used to remove truthiness from the language
+function _condition(_: boolean): boolean {
   throw new Error(
     "Don't call `cs.condition` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-// A checked value position; identity, so the position reads the
-// expression's own type
-function value<T extends ClientValue>(_: T): T {
+// A value with `const` semantics
+function _const<T extends ClientValue>(_: T): T {
   throw new Error(
-    "Don't call `cs.value` directly; it's used to generate virtual " +
+    "Don't call `cs.const` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-// A `let` initializer's literal widens, as unwrapped it would —
-// `ClientValue`'s literal-bearing constraint blocks inference widening
 type Widen<T> = T extends number
   ? number
   : T extends string
@@ -48,23 +45,24 @@ type Widen<T> = T extends number
       ? boolean
       : T;
 
-// A checked value position for a `let` initializer
-function widen<T extends ClientValue>(_: T): Widen<T> {
+// A value with `let` semantics
+function _let<T extends ClientValue>(_: T): Widen<T> {
   throw new Error(
-    "Don't call `cs.widen` directly; it's used to generate virtual " +
+    "Don't call `cs.let` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-// A statement discards its expression, which is only silent for `void`
-function statement(_: void): void {
+// Statements should always evaluate to `void`.
+// Use `_ = ...` to ignore a return value
+function _statement(_: void): void {
   throw new Error(
     "Don't call `cs.statement` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-function receiver<T extends ClientUnknown>(_: T): Receiver<T> {
+function _receiver<T extends ClientUnknown>(_: T): Receiver<T> {
   throw new Error(
     "Don't call `cs.receiver` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
@@ -82,12 +80,12 @@ export const cs = Object.assign(
   },
   {
     create,
-    lift,
-    splice,
-    condition,
-    value,
-    widen,
-    statement,
-    receiver,
+    lift: _lift,
+    splice: _splice,
+    condition: _condition,
+    const: _const,
+    let: _let,
+    statement: _statement,
+    receiver: _receiver,
   },
 );

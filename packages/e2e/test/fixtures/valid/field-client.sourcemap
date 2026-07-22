@@ -1,18 +1,18 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_c                           → c
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       → ${ [-semantic]
 new Color(                       → new Color(
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 30                               → 30
 ))                               → `
 ,                                → , 
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 144                              → 144
 ))                               → `
 ,                                → , 
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 255                              → 255
 ))                               → `
 )                                → )
@@ -21,7 +21,7 @@ cs.lift(cs.value(                → cs`
 \n                               → \n  
 const                            → const 
 __cs_brightness                  → brightness
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.receiver(                     → 
 __cs_c                           → c
 )                                → 

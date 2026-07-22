@@ -13,7 +13,7 @@ class Point implements ClientObject {
   }
 
   get valid() {
-    return cs.lift(cs.value(() => cs.splice(this.x) + cs.splice(this.y)));
+    return cs.lift(cs.const(() => cs.splice(this.x) + cs.splice(this.y)));
   }
 
   get invalid() {
@@ -22,7 +22,7 @@ class Point implements ClientObject {
 }
 
 export default cs.lift((() => {
-    const __cs_a = cs.value(cs.splice(new Point(cs.lift(cs.value(1)), cs.lift(cs.value(2)))));
-    const __cs_b = cs.value(cs.splice(new Point(cs.lift(cs.value(3)), cs.lift(cs.value(4)))));
-    const __cs_sum = cs.value(cs.receiver(__cs_a).valid() + cs.receiver(__cs_b).valid());
+    const __cs_a = cs.const(cs.splice(new Point(cs.lift(cs.const(1)), cs.lift(cs.const(2)))));
+    const __cs_b = cs.const(cs.splice(new Point(cs.lift(cs.const(3)), cs.lift(cs.const(4)))));
+    const __cs_sum = cs.const(cs.receiver(__cs_a).valid() + cs.receiver(__cs_b).valid());
 })());

@@ -1,13 +1,13 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_x                           → x
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 0                                → 0
 );                               → ;
 \n                               → \n  
 return                           → return 
 cs.splice(                       → ${ [-semantic]
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 __cs_x                           → x
 ))                               → `
 )                                → } [-semantic]

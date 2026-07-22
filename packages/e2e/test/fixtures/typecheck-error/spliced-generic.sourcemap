@@ -1,14 +1,14 @@
-cs.lift(cs.value(  → cs`
+cs.lift(cs.const(  → cs`
 () =>              → () => 
 cs.splice(         →  [-semantic]
 (value)            → $value
 )                  →  [-semantic]
 ))                 → `
-cs.lift(cs.value(  → cs`
+cs.lift(cs.const(  → cs`
 cs.receiver(       → 
 cs.splice(         → ${ [-semantic]
 wrap(new Point(    → wrap(new Point(
-cs.lift(cs.value(  → cs`
+cs.lift(cs.const(  → cs`
 7                  → 7
 ))                 → `
 ))                 → ))

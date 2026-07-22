@@ -1,22 +1,22 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () => {\n                        → () => {\n  
 let                              → let 
 __cs_n                           → n
- = cs.widen(                     →  = 
+ = cs.let(                       →  = 
 0                                → 0
 );                               → ;
 \n                               → \n  
 __cs_n                           → n
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 )                                → 
 ;                                → ;
 \n}                              → \n}
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_x                           → x
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (ping)                           → $ping
 )                                →  [-semantic]
@@ -30,14 +30,14 @@ return                           → return
 cs.lift((() => {\n               → cs`{\n  
 const                            → const 
 __cs_x                           → x
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (ping)                           → $ping
 )                                →  [-semantic]
 ()                               → ()
 );                               → ;
 \n})())                          → \n}`
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 (                                → (
 __cs_text                        → text
 : string) => {\n                 → : string) => {\n  
@@ -46,10 +46,10 @@ __cs_text                        → text
 ;                                → ;
 \n}                              → \n}
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_x                           → x
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (label)                          → $label
 )                                →  [-semantic]

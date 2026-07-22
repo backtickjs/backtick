@@ -1,7 +1,7 @@
-cs.lift(cs.value(  → cs`
+cs.lift(cs.const(  → cs`
 7                  → 7
 ))                 → `
-cs.lift(cs.value(  → cs`
+cs.lift(cs.const(  → cs`
 {                  → ({ 
 a                  → a
 :                  → : 

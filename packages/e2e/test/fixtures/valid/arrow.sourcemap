@@ -1,7 +1,7 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_base                        → base
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 10                               → 10
 );                               → ;
 \n                               → \n  

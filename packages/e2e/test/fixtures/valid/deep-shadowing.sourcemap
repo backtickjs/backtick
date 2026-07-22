@@ -1,24 +1,24 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_base                        → base
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 10                               → 10
 );                               → ;
 \n                               → \n  
 return                           → return 
 cs.splice(                       → ${ [-semantic]
 outer(                           → outer(
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 __cs_base                        → base
 ))                               → `
 )                                → )
 )                                → } [-semantic]
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n    
+cs.lift(cs.const((() => {\n      → cs`{\n    
 const                            → const 
 __cs_base                        → base
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 );                               → ;
 \n                               → \n    
@@ -30,10 +30,10 @@ middle(inner)                    → middle(inner)
 )                                → } [-semantic]
 ;                                → ;
 \n})()))                         → \n  }`
-cs.lift(cs.value((() => {\n      → cs`{\n    
+cs.lift(cs.const((() => {\n      → cs`{\n    
 const                            → const 
 __cs_base                        → base
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 2                                → 2
 );                               → ;
 \n                               → \n    

@@ -1,13 +1,13 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 new (                            → new 
 cs.splice(                       →  [-semantic]
 (Shape)                          → $Shape
 )                                →  [-semantic]
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 5                                → 5
 )))                              → )
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 return                           → return 
 {                                → { 
 first                            → first

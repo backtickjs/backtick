@@ -1,4 +1,4 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 cs.splice(                       → ${ [-semantic]
 this.r                           → this.r
@@ -6,10 +6,10 @@ this.r                           → this.r
  +                               →  + 
 2                                → 2
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_pick                        → pick
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 (                                → (
 __cs_c                           → c
 : Color) =>                      → : Color) => 
@@ -27,7 +27,7 @@ __cs_pick                        → pick
 (                                → (
 cs.splice(                       → ${ [-semantic]
 new Color(                       → new Color(
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 7                                → 7
 ))                               → `
 , "#123")                        → , "#123")

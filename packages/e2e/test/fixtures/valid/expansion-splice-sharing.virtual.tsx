@@ -6,7 +6,7 @@ import type { Client, ClientObject } from "@backtickjs/core";
 // entry goes polymorphic, and each expansion body passes its own holes as
 // thunks written where they are in scope.
 function sum(a: Client<number>, b: Client<number>): Client<() => number> {
-  return cs.lift(cs.value(() => cs.splice((a)) + cs.splice((b))));
+  return cs.lift(cs.const(() => cs.splice((a)) + cs.splice((b))));
 }
 
 class Point implements ClientObject {
@@ -41,8 +41,8 @@ class Size implements ClientObject {
   }
 }
 
-export default cs.lift(cs.value((() => {
-    const __cs_p = cs.value(new (cs.splice((Point)))(cs.lift(cs.value(1)), cs.lift(cs.value(2))));
-    const __cs_s = cs.value(new (cs.splice((Size)))(cs.lift(cs.value(3)), cs.lift(cs.value(4))));
+export default cs.lift(cs.const((() => {
+    const __cs_p = cs.const(new (cs.splice((Point)))(cs.lift(cs.const(1)), cs.lift(cs.const(2))));
+    const __cs_s = cs.const(new (cs.splice((Size)))(cs.lift(cs.const(3)), cs.lift(cs.const(4))));
     return cs.receiver(__cs_p).sum() + cs.receiver(__cs_s).sum();
 })()));

@@ -1,4 +1,4 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 () =>                            → () => 
 cs.splice(                       → ${ [-semantic]
 this.x                           → this.x
@@ -8,16 +8,16 @@ cs.splice(                       → ${ [-semantic]
 this.y                           → this.y
 )                                → } [-semantic]
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 1                                → 1
 ))                               → `
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 2                                → 2
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_p                           → p
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (shared)                         → $shared
 )                                →  [-semantic]
@@ -32,10 +32,10 @@ sum                              → sum
 ()                               → ()
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_p                           → p
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (shared)                         → $shared
 )                                →  [-semantic]
@@ -49,7 +49,7 @@ __cs_p                           → p
 x                                → x
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 cs.splice(                       →  [-semantic]
 (left)                           → $left
 )                                →  [-semantic]

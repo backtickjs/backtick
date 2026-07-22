@@ -1,17 +1,17 @@
 cs.lift((() => {\n               → cs`{\n  
 let                              → let 
 __cs_n                           → n
- = cs.widen(                     →  = 
+ = cs.let(                       →  = 
 0                                → 0
 );                               → ;
 \n                               → \n  
 __cs_n                           → n
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 1                                → 1
 )                                → 
 ;                                → ;
 \n})())                          → \n}`
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 (                                → (
 __cs_id                          → id
 : number) => {\n                 → : number) => {\n  
@@ -22,10 +22,10 @@ cs.splice(                       →  [-semantic]
 );                               → ;
 \n}                              → \n}
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_handlers                    → handlers
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 {                                → {\n    
 tap                              → tap
 :                                → : 

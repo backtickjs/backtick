@@ -1,7 +1,7 @@
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 const                            → const 
 __cs_C                           → C
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 cs.splice(                       →  [-semantic]
 (Point)                          → $Point
 )                                →  [-semantic]
@@ -9,12 +9,12 @@ cs.splice(                       →  [-semantic]
 \n                               → \n  
 const                            → const 
 __cs_p                           → p
- = cs.value(                     →  = 
+ = cs.const(                     →  = 
 new (                            → new 
 __cs_C                           → C
-)(cs.lift(cs.value(              → (
+)(cs.lift(cs.const(              → (
 1                                → 1
-)), cs.lift(cs.value(            → , 
+)), cs.lift(cs.const(            → , 
 2                                → 2
 )))                              → )
 );                               → ;

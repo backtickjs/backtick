@@ -1,7 +1,7 @@
-cs.lift(cs.value(                → cs`
+cs.lift(cs.const(                → cs`
 1                                → 1
 ))                               → `
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 return                           → return 
 cs.splice(                       →  [-semantic]
 (d0)                             → $d0
@@ -12,7 +12,7 @@ cs.splice(                       →  [-semantic]
 )                                →  [-semantic]
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 return                           → return 
 cs.splice(                       →  [-semantic]
 (d1)                             → $d1
@@ -23,7 +23,7 @@ cs.splice(                       →  [-semantic]
 )                                →  [-semantic]
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 return                           → return 
 cs.splice(                       →  [-semantic]
 (d2)                             → $d2
@@ -34,7 +34,7 @@ cs.splice(                       →  [-semantic]
 )                                →  [-semantic]
 ;                                → ;
 \n})()))                         → \n}`
-cs.lift(cs.value((() => {\n      → cs`{\n  
+cs.lift(cs.const((() => {\n      → cs`{\n  
 return                           → return 
 cs.splice(                       →  [-semantic]
 (d3)                             → $d3
