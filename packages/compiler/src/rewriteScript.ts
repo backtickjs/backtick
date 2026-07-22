@@ -57,11 +57,15 @@ export function rewriteScript(
   // one that completes without returning is an action script.
   let value = true;
   if (ts.isBlock(scriptNode)) {
-    const hasReturn = ownReturn(ts, scriptNode);
+    // A valued `return` makes a value script, as does exiting every path
+    // with no `return` at all (a throw-only block). Bare returns are an
+    // action's early exit.
+    const returns = ownReturn(ts, scriptNode);
+    const valued = ownReturn(ts, scriptNode, true);
     const exits = terminates(ts, scriptNode);
-    value = hasReturn || exits;
+    value = valued || (exits && !returns);
     state.valueBody = value;
-    if (hasReturn && !exits) {
+    if (valued && !exits) {
       return {
         virtual: sourceNode,
         runtime: sourceNode,

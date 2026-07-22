@@ -393,6 +393,27 @@ function rewriteNodeImpl(
     return rewriteNode(ts, state, node.expression);
   }
 
+  if (ts.isReturnStatement(node) && !node.expression) {
+    // A bare `return` exits an action early. In a value script it returns
+    // nothing where a value is due — rewritten as `return null`, the
+    // suggested fix, so the one error stands alone.
+    if (state.valueBody && !state.dup) {
+      state.errors.set(
+        node,
+        "A script that returns a value can't `return` without one.",
+      );
+    }
+    return {
+      virtual: state.valueBody
+        ? ts.factory.createReturnStatement(ts.factory.createNull())
+        : ts.factory.createReturnStatement(),
+      runtime: call(ts, "v", "return", [
+        loc(node),
+        call(ts, "v", "null", [loc(node)]),
+      ]),
+    };
+  }
+
   if (ts.isReturnStatement(node) && node.expression) {
     const expression = rewriteNode(ts, state, node.expression);
     return {
@@ -834,10 +855,13 @@ function rewriteNodeImpl(
     if (params.every((param) => param != null)) {
       let bodyState = { ...state };
       if (ts.isBlock(node.body)) {
-        const hasReturn = ownReturn(ts, node.body);
+        // The script classifier's rule: valued returns (or throw-only)
+        // make a value body; bare returns are an action's early exit.
+        const returns = ownReturn(ts, node.body);
+        const valued = ownReturn(ts, node.body, true);
         const exits = terminates(ts, node.body);
-        bodyState.valueBody = hasReturn || exits;
-        if (hasReturn && !exits) {
+        bodyState.valueBody = valued || (exits && !returns);
+        if (valued && !exits) {
           state.errors.set(node.body, "Not all code paths return a value.");
           return unsupported();
         }

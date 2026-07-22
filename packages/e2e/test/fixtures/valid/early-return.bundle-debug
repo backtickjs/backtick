@@ -1,0 +1,9 @@
+#f0 = () => {
+  let n = 0;
+  if (n === 0) {
+    return null;
+  }
+  n = 1;
+}
+
+root = #f0()

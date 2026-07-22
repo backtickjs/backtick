@@ -1,0 +1,22 @@
+cs.lift((() => {\n      → cs`{\n  
+let                     → let 
+__cs_n                  → n
+ = cs.let(              →  = 
+0                       → 0
+);                      → ;
+\n                      → \n  
+if (                    → if (
+__cs_n                  → n
+ ===                    →  === 
+0                       → 0
+)                       → ) 
+{\n                     → {\n    
+return;                 → return;
+\n    }                 → \n  }
+\n                      → \n  
+__cs_n                  → n
+ = cs.const(            →  = 
+1                       → 1
+)                       → 
+;                       → ;
+\n})())                 → \n}`

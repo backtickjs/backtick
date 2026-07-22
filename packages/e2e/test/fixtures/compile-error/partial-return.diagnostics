@@ -1,2 +1,3 @@
 4:19-9:2 error TS0: Not all code paths return a value.
 11:34-15:2 error TS0: Not all code paths return a value.
+23:3-23:10 error TS0: A script that returns a value can't `return` without one.

@@ -1,0 +1,52 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "let",
+            "name": "n",
+            "expression": 0
+          },
+          {
+            "#": "if",
+            "condition": {
+              "#": "binop",
+              "operator": "===",
+              "left": {
+                "#": "identifier",
+                "name": "n"
+              },
+              "right": 0
+            },
+            "consequent": {
+              "#": "block",
+              "statements": [
+                {
+                  "#": "return",
+                  "expression": null
+                }
+              ]
+            },
+            "alternate": null
+          },
+          {
+            "#": "assignment",
+            "name": "n",
+            "expression": 1
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}
