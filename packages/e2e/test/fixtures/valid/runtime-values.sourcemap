@@ -1,4 +1,4 @@
-cs.liftValue(           → cs`
+cs.lift(cs.value(       → cs`
 {                       → ({ 
 list                    → list
 :                       → : 
@@ -12,4 +12,4 @@ cs.splice(              → ${ [-semantic]
 { k: 3 }                → { k: 3 }
 )                       → } [-semantic]
  }                      →  })
-)                       → `
+))                      → `

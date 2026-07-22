@@ -1,15 +1,15 @@
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_x                       → x
- = cs.value(                 →  = 
-0                            → 0
-);                           → ;
-\n                           → \n  
-return                       → return 
-cs.splice(                   → ${ [-semantic]
-cs.liftValue(                → cs`
-__cs_x                       → x
-)                            → `
-)                            → } [-semantic]
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_x                           → x
+ = cs.value(                     →  = 
+0                                → 0
+);                               → ;
+\n                               → \n  
+return                           → return 
+cs.splice(                       → ${ [-semantic]
+cs.lift(cs.value(                → cs`
+__cs_x                           → x
+))                               → `
+)                                → } [-semantic]
+;                                → ;
+\n})()))                         → \n}`

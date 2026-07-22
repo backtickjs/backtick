@@ -16,11 +16,11 @@ class Color implements ClientObject {
   }
 
   get update() {
-    return cs.liftValue(() => cs.splice(this.r) + 2);
+    return cs.lift(cs.value(() => cs.splice(this.r) + 2));
   }
 }
 
-export default cs.liftValue((() => {
+export default cs.lift(cs.value((() => {
     const __cs_pick = cs.value((__cs_c: Color) => cs.receiver(__cs_c).r + 1);
-    return __cs_pick(cs.splice(new Color(cs.liftValue(7), "#123")));
-})());
+    return __cs_pick(cs.splice(new Color(cs.lift(cs.value(7)), "#123")));
+})()));

@@ -5,18 +5,11 @@ import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 import type { Receiver } from "./Receiver.js";
 
-// The root of a value script — a block whose every path `return`s
-function liftValue<const T extends ClientValue>(_: T): Client<T> {
+// The root of a script: what the tag's expression evaluates to. A value
+// root's payload is checked by `cs.value`; an action root's is `void`.
+function lift<const T extends ClientUnknown>(_: T): Client<T> {
   throw new Error(
-    "Don't call `cs.liftValue` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
-// The root of an action — a block with no `return`
-function liftAction(_: void): Client<void> {
-  throw new Error(
-    "Don't call `cs.liftAction` directly; it's used to generate virtual " +
+    "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -89,8 +82,7 @@ export const cs = Object.assign(
   },
   {
     create,
-    liftValue,
-    liftAction,
+    lift,
     splice,
     condition,
     value,

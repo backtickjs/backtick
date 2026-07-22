@@ -7,4 +7,4 @@ async function fetchGreeting() {
 // A spliced host expression evaluates in the template's own scope — the
 // compiled output wraps it in no function — so `await` works wherever the
 // template itself may await, here at module top level.
-export default cs.liftValue(cs.splice(await fetchGreeting()) + "!");
+export default cs.lift(cs.value(cs.splice(await fetchGreeting()) + "!"));

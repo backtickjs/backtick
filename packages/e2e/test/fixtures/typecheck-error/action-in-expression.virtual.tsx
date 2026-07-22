@@ -3,20 +3,20 @@ import { cs } from "@backtickjs/core";
 // An action only splices in statement position: any value-consuming splice
 // fails right at the splice — a stored one, a returned one, even one
 // assigned to an `unknown`-typed catch binding.
-const action = cs.liftAction((() => {
+const action = cs.lift((() => {
     const __cs_x = cs.value(1);
 })());
 
-export const stored = cs.liftValue((() => {
+export const stored = cs.lift(cs.value((() => {
     const __cs_captured = cs.value(cs.splice((action)));
     return 1;
-})());
+})()));
 
-export const returned = cs.liftValue((() => {
+export const returned = cs.lift(cs.value((() => {
     return cs.splice((action));
-})());
+})()));
 
-export const assigned = cs.liftValue((() => {
+export const assigned = cs.lift(cs.value((() => {
     try {
         return 1;
     }
@@ -24,4 +24,4 @@ export const assigned = cs.liftValue((() => {
         __cs_e = cs.value(cs.splice((action)));
         return 2;
     }
-})());
+})()));

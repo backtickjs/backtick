@@ -1,4 +1,4 @@
-cs.liftValue(         → cs`
+cs.lift(cs.value(     → cs`
 (                     → (
 __cs_name             → name
 : string) => {\n      → : string) => {\n  
@@ -17,4 +17,4 @@ return                → return
 "anonymous"           → "anonymous"
 ;                     → ;
 \n}                   → \n}
-)                     → `
+))                    → `

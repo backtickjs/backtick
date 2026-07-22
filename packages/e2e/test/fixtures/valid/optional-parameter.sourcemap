@@ -1,4 +1,4 @@
-cs.liftValue(                             → cs`
+cs.lift(cs.value(                         → cs`
 (                                         → (
 __cs_name                                 → name
 : string | null = null) => {\n            → ?: string) => {\n  
@@ -14,12 +14,12 @@ concat                                    → concat
 ) ?? null)                                → )
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
-cs.liftValue(                             → cs`
+))                                        → `
+cs.lift(cs.value(                         → cs`
 () =>                                     → () => 
 2                                         → 2
-)                                         → `
-cs.liftValue(                             → cs`
+))                                        → `
+cs.lift(cs.value(                         → cs`
 (                                         → (
 __cs_cb                                   → cb
 : (() => number) | null = null) => {\n    → ?: () => number) => {\n  
@@ -30,8 +30,8 @@ __cs_cb                                   → cb
 0                                         → 0
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
-cs.liftValue(                             → cs`
+))                                        → `
+cs.lift(cs.value(                         → cs`
 {                                         → ({\n  
 named                                     → named
 :                                         → : 
@@ -76,4 +76,4 @@ cs.splice(                                →  [-semantic]
 )                                         →  [-semantic]
 ()                                        → ()
  }                                        → ,\n})
-)                                         → `
+))                                        → `

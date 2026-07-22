@@ -1,4 +1,4 @@
-cs.liftValue(                             → cs`
+cs.lift(cs.value(                         → cs`
 (                                         → (
 __cs_p                                    → p
 : {\n    x: number;\n} | null) => {\n     → : { x: number } | null) => {\n  
@@ -12,8 +12,8 @@ x                                         → x
  ?? null)                                 → 
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
-cs.liftValue(                             → cs`
+))                                        → `
+cs.lift(cs.value(                         → cs`
 (                                         → (
 __cs_o                                    → o
 : {\n    inner: {\n        z: number;\n    } | null;\n} | null) => {\n    → : { inner: { z: number } | null } | null) => {\n  
@@ -33,8 +33,8 @@ z                                         → z
  ?? null)                                 → 
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
-cs.liftValue(                             → cs`
+))                                        → `
+cs.lift(cs.value(                         → cs`
 (                                         → (
 __cs_s                                    → s
 : string | null) => {\n                   → : string | null) => {\n  
@@ -50,8 +50,8 @@ concat                                    → concat
 ) ?? null)                                → )
 ;                                         → ;
 \n}                                       → \n}
-)                                         → `
-cs.liftValue(                             → cs`
+))                                        → `
+cs.lift(cs.value(                         → cs`
 {                                         → ({\n  
 found                                     → found
 :                                         → : 
@@ -132,4 +132,4 @@ cs.splice(                                →  [-semantic]
 null                                      → null
 )                                         → )
  }                                        → ,\n})
-)                                         → `
+))                                        → `

@@ -1,60 +1,60 @@
-cs.liftValue(                → cs`
-() =>                        → () => 
-cs.splice(                   → ${ [-semantic]
-this.x                       → this.x
-)                            → } [-semantic]
- +                           →  + 
-cs.splice(                   → ${ [-semantic]
-this.y                       → this.y
-)                            → } [-semantic]
-)                            → `
-cs.liftValue(                → cs`
-1                            → 1
-)                            → `
-cs.liftValue(                → cs`
-2                            → 2
-)                            → `
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_p                       → p
- = cs.value(                 →  = 
-cs.splice(                   →  [-semantic]
-(shared)                     → $shared
-)                            →  [-semantic]
-);                           → ;
-\n                           → \n  
-return                       → return 
-cs.receiver(                 → 
-__cs_p                       → p
-)                            → 
-.                            → .
-sum                          → sum
-()                           → ()
-;                            → ;
-\n})())                      → \n}`
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_p                       → p
- = cs.value(                 →  = 
-cs.splice(                   →  [-semantic]
-(shared)                     → $shared
-)                            →  [-semantic]
-);                           → ;
-\n                           → \n  
-return                       → return 
-cs.receiver(                 → 
-__cs_p                       → p
-)                            → 
-.                            → .
-x                            → x
-;                            → ;
-\n})())                      → \n}`
-cs.liftValue(                → cs`
-cs.splice(                   →  [-semantic]
-(left)                       → $left
-)                            →  [-semantic]
- +                           →  + 
-cs.splice(                   →  [-semantic]
-(right)                      → $right
-)                            →  [-semantic]
-)                            → `
+cs.lift(cs.value(                → cs`
+() =>                            → () => 
+cs.splice(                       → ${ [-semantic]
+this.x                           → this.x
+)                                → } [-semantic]
+ +                               →  + 
+cs.splice(                       → ${ [-semantic]
+this.y                           → this.y
+)                                → } [-semantic]
+))                               → `
+cs.lift(cs.value(                → cs`
+1                                → 1
+))                               → `
+cs.lift(cs.value(                → cs`
+2                                → 2
+))                               → `
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_p                           → p
+ = cs.value(                     →  = 
+cs.splice(                       →  [-semantic]
+(shared)                         → $shared
+)                                →  [-semantic]
+);                               → ;
+\n                               → \n  
+return                           → return 
+cs.receiver(                     → 
+__cs_p                           → p
+)                                → 
+.                                → .
+sum                              → sum
+()                               → ()
+;                                → ;
+\n})()))                         → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_p                           → p
+ = cs.value(                     →  = 
+cs.splice(                       →  [-semantic]
+(shared)                         → $shared
+)                                →  [-semantic]
+);                               → ;
+\n                               → \n  
+return                           → return 
+cs.receiver(                     → 
+__cs_p                           → p
+)                                → 
+.                                → .
+x                                → x
+;                                → ;
+\n})()))                         → \n}`
+cs.lift(cs.value(                → cs`
+cs.splice(                       →  [-semantic]
+(left)                           → $left
+)                                →  [-semantic]
+ +                               →  + 
+cs.splice(                       →  [-semantic]
+(right)                          → $right
+)                                →  [-semantic]
+))                               → `

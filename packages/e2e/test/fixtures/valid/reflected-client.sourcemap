@@ -1,61 +1,61 @@
-cs.liftValue(                 → cs`
-() =>                         → () => 
-cs.splice(                    → ${ [-semantic]
-this.x                        → this.x
-)                             → } [-semantic]
- +                            →  + 
-cs.splice(                    → ${ [-semantic]
-this.y                        → this.y
-)                             → } [-semantic]
-)                             → `
-cs.liftAction((() => {\n      → cs`{\n  
-const                         → const 
-__cs_a                        → a
- = cs.value(                  →  = 
-cs.splice(                    → ${ [-semantic]
-new Point(                    → new Point(
-cs.liftValue(                 → cs`
-1                             → 1
-)                             → `
-,                             → , 
-cs.liftValue(                 → cs`
-2                             → 2
-)                             → `
-)                             → )
-)                             → } [-semantic]
-);                            → ;
-\n                            → \n  
-const                         → const 
-__cs_b                        → b
- = cs.value(                  →  = 
-cs.splice(                    → ${ [-semantic]
-new Point(                    → new Point(
-cs.liftValue(                 → cs`
-3                             → 3
-)                             → `
-,                             → , 
-cs.liftValue(                 → cs`
-4                             → 4
-)                             → `
-)                             → )
-)                             → } [-semantic]
-);                            → ;
-\n                            → \n  
-const                         → const 
-__cs_sum                      → sum
- = cs.value(                  →  = 
-cs.receiver(                  → 
-__cs_a                        → a
-)                             → 
-.                             → .
-valid                         → valid
-()                            → ()
- +                            →  + 
-cs.receiver(                  → 
-__cs_b                        → b
-)                             → 
-.                             → .
-valid                         → valid
-()                            → ()
-);                            → ;
-\n})())                       → \n}`
+cs.lift(cs.value(       → cs`
+() =>                   → () => 
+cs.splice(              → ${ [-semantic]
+this.x                  → this.x
+)                       → } [-semantic]
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+this.y                  → this.y
+)                       → } [-semantic]
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_a                  → a
+ = cs.value(            →  = 
+cs.splice(              → ${ [-semantic]
+new Point(              → new Point(
+cs.lift(cs.value(       → cs`
+1                       → 1
+))                      → `
+,                       → , 
+cs.lift(cs.value(       → cs`
+2                       → 2
+))                      → `
+)                       → )
+)                       → } [-semantic]
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_b                  → b
+ = cs.value(            →  = 
+cs.splice(              → ${ [-semantic]
+new Point(              → new Point(
+cs.lift(cs.value(       → cs`
+3                       → 3
+))                      → `
+,                       → , 
+cs.lift(cs.value(       → cs`
+4                       → 4
+))                      → `
+)                       → )
+)                       → } [-semantic]
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_sum                → sum
+ = cs.value(            →  = 
+cs.receiver(            → 
+__cs_a                  → a
+)                       → 
+.                       → .
+valid                   → valid
+()                      → ()
+ +                      →  + 
+cs.receiver(            → 
+__cs_b                  → b
+)                       → 
+.                       → .
+valid                   → valid
+()                      → ()
+);                      → ;
+\n})())                 → \n}`

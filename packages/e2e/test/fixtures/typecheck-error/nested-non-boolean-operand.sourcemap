@@ -1,4 +1,4 @@
-cs.liftValue(                            → cs`
+cs.lift(cs.value(                        → cs`
 (                                        → (
 __cs_count                               → count
 : number) => {\n                         → : number) => {\n  
@@ -36,4 +36,4 @@ return                                   → return
 "dropped"                                → "dropped"
 ;                                        → ;
 \n}                                      → \n}
-)                                        → `
+))                                       → `

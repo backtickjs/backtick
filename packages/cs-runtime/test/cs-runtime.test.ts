@@ -6,15 +6,8 @@ test("cs`...` throws when used without the compiler", () => {
   assert.throws(() => cs`"Hello World!"`, /was not compiled/);
 });
 
-test("cs.liftValue throws when called directly", () => {
-  assert.throws(
-    () => cs.liftValue("Hello World!"),
-    /Don't call `cs\.liftValue`/,
-  );
-});
-
-test("cs.liftAction throws when called directly", () => {
-  assert.throws(() => cs.liftAction(undefined), /Don't call `cs\.liftAction`/);
+test("cs.lift throws when called directly", () => {
+  assert.throws(() => cs.lift("Hello World!"), /Don't call `cs\.lift`/);
 });
 
 test("cs.splice throws when called directly", () => {

@@ -1,20 +1,20 @@
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_base                    → base
- = cs.value(                 →  = 
-10                           → 10
-);                           → ;
-\n                           → \n  
-return                       → return 
-(                            → (
-__cs_one                     → one
-: number,                    → : number, 
-__cs_two                     → two
-: number) =>                 → : number) => 
-__cs_one                     → one
- +                           →  + 
-__cs_two                     → two
- +                           →  + 
-__cs_base                    → base
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_base                        → base
+ = cs.value(                     →  = 
+10                               → 10
+);                               → ;
+\n                               → \n  
+return                           → return 
+(                                → (
+__cs_one                         → one
+: number,                        → : number, 
+__cs_two                         → two
+: number) =>                     → : number) => 
+__cs_one                         → one
+ +                               →  + 
+__cs_two                         → two
+ +                               →  + 
+__cs_base                        → base
+;                                → ;
+\n})()))                         → \n}`

@@ -55,12 +55,12 @@ export function rewriteScript(
 
   // A block that returns or throws is a value script;
   // one that completes without returning is an action script.
-  let root = "liftValue";
+  let value = true;
   if (ts.isBlock(scriptNode)) {
     const hasReturn = ownReturn(ts, scriptNode);
     const exits = terminates(ts, scriptNode);
-    root = hasReturn || exits ? "liftValue" : "liftAction";
-    state.valueBody = hasReturn || exits;
+    value = hasReturn || exits;
+    state.valueBody = value;
     if (hasReturn && !exits) {
       return {
         virtual: sourceNode,
@@ -149,10 +149,13 @@ export function rewriteScript(
     false,
   );
 
-  const virtual = call(ts, "cs", root, [
-    ts.isBlock(rewritten.virtual)
-      ? iife(ts, rewritten.virtual)
-      : (rewritten.virtual as ts.Expression),
+  // A value root's payload takes the value check; an action root lifts its
+  // `void` completion directly.
+  const payload = ts.isBlock(rewritten.virtual)
+    ? iife(ts, rewritten.virtual)
+    : (rewritten.virtual as ts.Expression);
+  const virtual = call(ts, "cs", "lift", [
+    value ? call(ts, "cs", "value", [payload]) : payload,
   ]);
 
   sourceMaps.set(virtual, scriptRange);

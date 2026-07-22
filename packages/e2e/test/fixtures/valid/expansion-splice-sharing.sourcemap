@@ -1,55 +1,55 @@
-cs.liftValue(                → cs`
-() =>                        → () => 
-cs.splice(                   →  [-semantic]
-(a)                          → $a
-)                            →  [-semantic]
- +                           →  + 
-cs.splice(                   →  [-semantic]
-(b)                          → $b
-)                            →  [-semantic]
-)                            → `
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_p                       → p
- = cs.value(                 →  = 
-new (                        → new 
-cs.splice(                   →  [-semantic]
-(Point)                      → $Point
-)                            →  [-semantic]
-)(cs.liftValue(              → (
-1                            → 1
-), cs.liftValue(             → , 
-2                            → 2
-))                           → )
-);                           → ;
-\n                           → \n  
-const                        → const 
-__cs_s                       → s
- = cs.value(                 →  = 
-new (                        → new 
-cs.splice(                   →  [-semantic]
-(Size)                       → $Size
-)                            →  [-semantic]
-)(cs.liftValue(              → (
-3                            → 3
-), cs.liftValue(             → , 
-4                            → 4
-))                           → )
-);                           → ;
-\n                           → \n  
-return                       → return 
-cs.receiver(                 → 
-__cs_p                       → p
-)                            → 
-.                            → .
-sum                          → sum
-()                           → ()
- +                           →  + 
-cs.receiver(                 → 
-__cs_s                       → s
-)                            → 
-.                            → .
-sum                          → sum
-()                           → ()
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value(                → cs`
+() =>                            → () => 
+cs.splice(                       →  [-semantic]
+(a)                              → $a
+)                                →  [-semantic]
+ +                               →  + 
+cs.splice(                       →  [-semantic]
+(b)                              → $b
+)                                →  [-semantic]
+))                               → `
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_p                           → p
+ = cs.value(                     →  = 
+new (                            → new 
+cs.splice(                       →  [-semantic]
+(Point)                          → $Point
+)                                →  [-semantic]
+)(cs.lift(cs.value(              → (
+1                                → 1
+)), cs.lift(cs.value(            → , 
+2                                → 2
+)))                              → )
+);                               → ;
+\n                               → \n  
+const                            → const 
+__cs_s                           → s
+ = cs.value(                     →  = 
+new (                            → new 
+cs.splice(                       →  [-semantic]
+(Size)                           → $Size
+)                                →  [-semantic]
+)(cs.lift(cs.value(              → (
+3                                → 3
+)), cs.lift(cs.value(            → , 
+4                                → 4
+)))                              → )
+);                               → ;
+\n                               → \n  
+return                           → return 
+cs.receiver(                     → 
+__cs_p                           → p
+)                                → 
+.                                → .
+sum                              → sum
+()                               → ()
+ +                               →  + 
+cs.receiver(                     → 
+__cs_s                           → s
+)                                → 
+.                                → .
+sum                              → sum
+()                               → ()
+;                                → ;
+\n})()))                         → \n}`

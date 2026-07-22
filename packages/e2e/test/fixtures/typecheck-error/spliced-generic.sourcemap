@@ -1,20 +1,20 @@
-cs.liftValue(    → cs`
-() =>            → () => 
-cs.splice(       →  [-semantic]
-(value)          → $value
-)                →  [-semantic]
-)                → `
-cs.liftValue(    → cs`
-cs.receiver(     → 
-cs.splice(       → ${ [-semantic]
-wrap(new Point(  → wrap(new Point(
-cs.liftValue(    → cs`
-7                → 7
-)                → `
-))               → ))
-)                → } [-semantic]
-()               → ()
-)                → 
-.                → .
-x                → x
-)                → `
+cs.lift(cs.value(  → cs`
+() =>              → () => 
+cs.splice(         →  [-semantic]
+(value)            → $value
+)                  →  [-semantic]
+))                 → `
+cs.lift(cs.value(  → cs`
+cs.receiver(       → 
+cs.splice(         → ${ [-semantic]
+wrap(new Point(    → wrap(new Point(
+cs.lift(cs.value(  → cs`
+7                  → 7
+))                 → `
+))                 → ))
+)                  → } [-semantic]
+()                 → ()
+)                  → 
+.                  → .
+x                  → x
+))                 → `

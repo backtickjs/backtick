@@ -1,6 +1,6 @@
-cs.liftValue(  → cs`
-() =>          → () => 
-cs.splice(     →  [-semantic]
-(n)            → $n
-)              →  [-semantic]
-)              → `
+cs.lift(cs.value(  → cs`
+() =>              → () => 
+cs.splice(         →  [-semantic]
+(n)                → $n
+)                  →  [-semantic]
+))                 → `

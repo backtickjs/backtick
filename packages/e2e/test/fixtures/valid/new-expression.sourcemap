@@ -1,29 +1,29 @@
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_p                       → p
- = cs.value(                 →  = 
-new (                        → new 
-cs.splice(                   →  [-semantic]
-(Point)                      → $Point
-)                            →  [-semantic]
-)(cs.liftValue(              → (
-1                            → 1
-), cs.liftValue(             → , 
-2                            → 2
-))                           → )
-);                           → ;
-\n                           → \n  
-return                       → return 
-cs.receiver(                 → 
-__cs_p                       → p
-)                            → 
-.                            → .
-x                            → x
- +                           →  + 
-cs.receiver(                 → 
-__cs_p                       → p
-)                            → 
-.                            → .
-y                            → y
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_p                           → p
+ = cs.value(                     →  = 
+new (                            → new 
+cs.splice(                       →  [-semantic]
+(Point)                          → $Point
+)                                →  [-semantic]
+)(cs.lift(cs.value(              → (
+1                                → 1
+)), cs.lift(cs.value(            → , 
+2                                → 2
+)))                              → )
+);                               → ;
+\n                               → \n  
+return                           → return 
+cs.receiver(                     → 
+__cs_p                           → p
+)                                → 
+.                                → .
+x                                → x
+ +                               →  + 
+cs.receiver(                     → 
+__cs_p                           → p
+)                                → 
+.                                → .
+y                                → y
+;                                → ;
+\n})()))                         → \n}`

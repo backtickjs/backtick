@@ -1,10 +1,10 @@
-cs.liftValue(                 → cs`
-1                             → 1
-)                             → `
-cs.liftAction((() => {\n      → cs`{\n  
-cs.statement(                 → 
-cs.splice(                    →  [-semantic]
-(count)                       → $count
-)                             →  [-semantic]
-);                            → ;
-\n})())                       → \n}`
+cs.lift(cs.value(       → cs`
+1                       → 1
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+cs.statement(           → 
+cs.splice(              →  [-semantic]
+(count)                 → $count
+)                       →  [-semantic]
+);                      → ;
+\n})())                 → \n}`

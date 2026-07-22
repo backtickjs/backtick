@@ -1,26 +1,26 @@
-cs.liftAction((() => {\n      → cs`{\n  
-const                         → const 
-__cs_x                        → x
- = cs.value(                  →  = 
-1                             → 1
-);                            → ;
-\n})())                       → \n}`
-cs.liftValue((() => {\n       → cs`{\n  
-const                         → const 
-__cs_h                        → h
- = cs.value(                  →  = 
-new (                         → new 
-cs.splice(                    →  [-semantic]
-(Holder)                      → $Holder
-)                             →  [-semantic]
-)(cs.liftValue(               → (
-cs.splice(                    →  [-semantic]
-(action)                      → $action
-)                             →  [-semantic]
-))                            → )
-);                            → ;
-\n                            → \n  
-return                        → return 
-1                             → 1
-;                             → ;
-\n})())                       → \n}`
+cs.lift((() => {\n               → cs`{\n  
+const                            → const 
+__cs_x                           → x
+ = cs.value(                     →  = 
+1                                → 1
+);                               → ;
+\n})())                          → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_h                           → h
+ = cs.value(                     →  = 
+new (                            → new 
+cs.splice(                       →  [-semantic]
+(Holder)                         → $Holder
+)                                →  [-semantic]
+)(cs.lift(cs.value(              → (
+cs.splice(                       →  [-semantic]
+(action)                         → $action
+)                                →  [-semantic]
+)))                              → )
+);                               → ;
+\n                               → \n  
+return                           → return 
+1                                → 1
+;                                → ;
+\n})()))                         → \n}`

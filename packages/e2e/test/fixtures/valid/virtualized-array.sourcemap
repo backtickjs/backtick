@@ -1,21 +1,21 @@
-cs.liftValue(  → cs`
-cs.receiver(   → 
-cs.receiver(   → 
-cs.splice(     → ${ [-semantic]
-new Wallet([   → new Wallet([
-cs.liftValue(  → cs`
-1              → 1
-)              → `
-,              → , 
-cs.liftValue(  → cs`
-2              → 2
-)              → `
-])             → ])
-)              → } [-semantic]
-)              → 
-.              → .
-coins          → coins
-)              → 
-.              → .
-length         → length
-)              → `
+cs.lift(cs.value(  → cs`
+cs.receiver(       → 
+cs.receiver(       → 
+cs.splice(         → ${ [-semantic]
+new Wallet([       → new Wallet([
+cs.lift(cs.value(  → cs`
+1                  → 1
+))                 → `
+,                  → , 
+cs.lift(cs.value(  → cs`
+2                  → 2
+))                 → `
+])                 → ])
+)                  → } [-semantic]
+)                  → 
+.                  → .
+coins              → coins
+)                  → 
+.                  → .
+length             → length
+))                 → `

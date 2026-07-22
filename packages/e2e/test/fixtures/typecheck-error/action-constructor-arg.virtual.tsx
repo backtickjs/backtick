@@ -13,11 +13,11 @@ class Holder implements ClientObject {
   }
 }
 
-const action = cs.liftAction((() => {
+const action = cs.lift((() => {
     const __cs_x = cs.value(1);
 })());
 
-export const held = cs.liftValue((() => {
-    const __cs_h = cs.value(new (cs.splice((Holder)))(cs.liftValue(cs.splice((action)))));
+export const held = cs.lift(cs.value((() => {
+    const __cs_h = cs.value(new (cs.splice((Holder)))(cs.lift(cs.value(cs.splice((action))))));
     return 1;
-})());
+})()));

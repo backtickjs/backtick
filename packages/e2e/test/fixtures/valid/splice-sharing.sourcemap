@@ -1,40 +1,40 @@
-cs.liftValue(  → cs`
-cs.splice(     →  [-semantic]
-(lhs)          → $lhs
-)              →  [-semantic]
- +             →  + 
-cs.splice(     →  [-semantic]
-(rhs)          → $rhs
-)              →  [-semantic]
-)              → `
-cs.liftValue(  → cs`
-{              → ({\n  
-x              → x
-:              → : 
-cs.splice(     → ${ [-semantic]
-add(           → add(
-cs.liftValue(  → cs`
-1              → 1
-)              → `
-,              → , 
-cs.liftValue(  → cs`
-2              → 2
-)              → `
-)              → )
-)              → } [-semantic]
-,              → ,\n  
-y              → y
-:              → : 
-cs.splice(     → ${ [-semantic]
-add(           → add(
-cs.liftValue(  → cs`
-3              → 3
-)              → `
-,              → , 
-cs.liftValue(  → cs`
-4              → 4
-)              → `
-)              → )
-)              → } [-semantic]
- }             → ,\n})
-)              → `
+cs.lift(cs.value(  → cs`
+cs.splice(         →  [-semantic]
+(lhs)              → $lhs
+)                  →  [-semantic]
+ +                 →  + 
+cs.splice(         →  [-semantic]
+(rhs)              → $rhs
+)                  →  [-semantic]
+))                 → `
+cs.lift(cs.value(  → cs`
+{                  → ({\n  
+x                  → x
+:                  → : 
+cs.splice(         → ${ [-semantic]
+add(               → add(
+cs.lift(cs.value(  → cs`
+1                  → 1
+))                 → `
+,                  → , 
+cs.lift(cs.value(  → cs`
+2                  → 2
+))                 → `
+)                  → )
+)                  → } [-semantic]
+,                  → ,\n  
+y                  → y
+:                  → : 
+cs.splice(         → ${ [-semantic]
+add(               → add(
+cs.lift(cs.value(  → cs`
+3                  → 3
+))                 → `
+,                  → , 
+cs.lift(cs.value(  → cs`
+4                  → 4
+))                 → `
+)                  → )
+)                  → } [-semantic]
+ }                 → ,\n})
+))                 → `

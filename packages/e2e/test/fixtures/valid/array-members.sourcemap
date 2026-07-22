@@ -1,120 +1,120 @@
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_coins                   → coins
- = cs.value(                 →  = 
-[                            → [
-1                            → 1
-,                            → , 
-2                            → 2
-,                            → , 
-3                            → 3
-]                            → ]
-);                           → ;
-\n                           → \n  
-const                        → const 
-__cs_four                    → four
- = cs.value(                 →  = 
-4                            → 4
-);                           → ;
-\n                           → \n  
-return                       → return 
-{                            → {\n    
-count                        → count
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-length                       → length
-,                            → ,\n    
-all                          → all
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-concat                       → concat
-(                            → (
-[                            → [
-__cs_four                    → four
-]                            → ]
-)                            → )
-,                            → ,\n    
-part                         → part
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-slice                        → slice
-(                            → (
-0                            → 0
-,                            → , 
-2                            → 2
-)                            → )
-,                            → ,\n    
-where                        → where
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-indexOf                      → indexOf
-(                            → (
-2                            → 2
-)                            → )
-,                            → ,\n    
-has                          → has
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-includes                     → includes
-(                            → (
-3                            → 3
-)                            → )
-,                            → ,\n    
-text                         → text
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-join                         → join
-(                            → (
-"-"                          → "-"
-)                            → )
-,                            → ,\n    
-doubled                      → doubled
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-map                          → map
-(                            → (
-__cs_n                       → n
- =>                          → ) => 
-__cs_n                       → n
- *                           →  * 
-2                            → 2
-)                            → )
-,                            → ,\n    
-small                        → small
-:                            → : 
-cs.receiver(                 → 
-__cs_coins                   → coins
-)                            → 
-.                            → .
-filter                       → filter
-(                            → (
-__cs_n                       → n
- =>                          → ) => 
-__cs_n                       → n
- <                           →  < 
-3                            → 3
-)                            → )
- }                           → ,\n  }
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_coins                       → coins
+ = cs.value(                     →  = 
+[                                → [
+1                                → 1
+,                                → , 
+2                                → 2
+,                                → , 
+3                                → 3
+]                                → ]
+);                               → ;
+\n                               → \n  
+const                            → const 
+__cs_four                        → four
+ = cs.value(                     →  = 
+4                                → 4
+);                               → ;
+\n                               → \n  
+return                           → return 
+{                                → {\n    
+count                            → count
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+length                           → length
+,                                → ,\n    
+all                              → all
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+concat                           → concat
+(                                → (
+[                                → [
+__cs_four                        → four
+]                                → ]
+)                                → )
+,                                → ,\n    
+part                             → part
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+slice                            → slice
+(                                → (
+0                                → 0
+,                                → , 
+2                                → 2
+)                                → )
+,                                → ,\n    
+where                            → where
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+indexOf                          → indexOf
+(                                → (
+2                                → 2
+)                                → )
+,                                → ,\n    
+has                              → has
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+includes                         → includes
+(                                → (
+3                                → 3
+)                                → )
+,                                → ,\n    
+text                             → text
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+join                             → join
+(                                → (
+"-"                              → "-"
+)                                → )
+,                                → ,\n    
+doubled                          → doubled
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+map                              → map
+(                                → (
+__cs_n                           → n
+ =>                              → ) => 
+__cs_n                           → n
+ *                               →  * 
+2                                → 2
+)                                → )
+,                                → ,\n    
+small                            → small
+:                                → : 
+cs.receiver(                     → 
+__cs_coins                       → coins
+)                                → 
+.                                → .
+filter                           → filter
+(                                → (
+__cs_n                           → n
+ =>                              → ) => 
+__cs_n                           → n
+ <                               →  < 
+3                                → 3
+)                                → )
+ }                               → ,\n  }
+;                                → ;
+\n})()))                         → \n}`

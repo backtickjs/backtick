@@ -1,18 +1,18 @@
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_C                       → C
- = cs.value(                 →  = 
-cs.splice(                   →  [-semantic]
-(Point)                      → $Point
-)                            →  [-semantic]
-);                           → ;
-\n                           → \n  
-return                       → return 
-__cs_C                       → C
-(                            → (
-1                            → 1
-,                            → , 
-2                            → 2
-)                            → )
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_C                           → C
+ = cs.value(                     →  = 
+cs.splice(                       →  [-semantic]
+(Point)                          → $Point
+)                                →  [-semantic]
+);                               → ;
+\n                               → \n  
+return                           → return 
+__cs_C                           → C
+(                                → (
+1                                → 1
+,                                → , 
+2                                → 2
+)                                → )
+;                                → ;
+\n})()))                         → \n}`

@@ -1,4 +1,4 @@
-cs.liftValue(          → cs`
+cs.lift(cs.value(      → cs`
 (                      → (
 __cs_count             → count
 : number,              → : number, 
@@ -21,4 +21,4 @@ __cs_flag              → flag [-semantic -completion -navigation -verification
 )                      → 
 ;                      → ;
 \n}                    → \n}
-)                      → `
+))                     → `

@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 // as data — but an annotation can still name a function type: the parameter
 // receives a client-born function (here, a spliced script), already client
 // currency, and passes through the annotation untouched.
-export default cs.liftValue((() => {
+export default cs.lift(cs.value((() => {
     const __cs_apply = cs.value((__cs_f: () => number) => __cs_f() + 1);
-    return __cs_apply(cs.splice(cs.liftValue(() => 2)));
-})());
+    return __cs_apply(cs.splice(cs.lift(cs.value(() => 2))));
+})()));

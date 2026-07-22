@@ -1,4 +1,4 @@
-cs.liftValue(                → cs`
+cs.lift(cs.value(            → cs`
 (                            → (\n  
 __cs_value                   → value
 : string | null) => {\n      → : string | null,\n) => {\n  
@@ -17,8 +17,8 @@ return                       → return
 __cs_value                   → value
 ;                            → ;
 \n}                          → \n}
-)                            → `
-cs.liftValue(                → cs`
+))                           → `
+cs.lift(cs.value(            → cs`
 {                            → ({\n  
 missing                      → missing
 :                            → : 
@@ -42,4 +42,4 @@ bare                         → bare
 :                            → : 
 null                         → null
  }                           → ,\n})
-)                            → `
+))                           → `

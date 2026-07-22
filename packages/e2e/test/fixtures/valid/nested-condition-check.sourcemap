@@ -1,4 +1,4 @@
-cs.liftValue(                → cs`
+cs.lift(cs.value(            → cs`
 (                            → (\n  
 __cs_a                       → a
 : boolean,                   → : boolean,\n  
@@ -39,8 +39,8 @@ return                       → return
 "dropped"                    → "dropped"
 ;                            → ;
 \n}                          → \n}
-)                            → `
-cs.liftValue(                → cs`
+))                           → `
+cs.lift(cs.value(            → cs`
 {                            → ({\n  
 both                         → both
 :                            → : 
@@ -64,4 +64,4 @@ true                         → true
 false                        → false
 )                            → )
  }                           → ,\n})
-)                            → `
+))                           → `

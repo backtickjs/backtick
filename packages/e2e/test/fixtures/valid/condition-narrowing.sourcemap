@@ -1,7 +1,7 @@
-cs.liftValue(          → cs`
+cs.lift(cs.value(      → cs`
 true                   → true
-)                      → `
-cs.liftValue(          → cs`
+))                     → `
+cs.lift(cs.value(      → cs`
 (                      → (\n  
 __cs_text              → text
 : string | null,       → : string | null,\n  
@@ -70,8 +70,8 @@ return                 → return
 "none"                 → "none"
 ;                      → ;
 \n}                    → \n}
-)                      → `
-cs.liftValue(          → cs`
+))                     → `
+cs.lift(cs.value(      → cs`
 {                      → ({\n  
 missing                → missing
 :                      → : 
@@ -117,4 +117,4 @@ cs.splice(             →  [-semantic]
 false                  → false
 )                      → )
  }                     → ,\n})
-)                      → `
+))                     → `

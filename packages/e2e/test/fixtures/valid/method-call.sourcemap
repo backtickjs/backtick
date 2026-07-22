@@ -1,25 +1,25 @@
-cs.liftValue((() => {\n      → cs`{\n  
-const                        → const 
-__cs_greeting                → greeting
- = cs.value(                 →  = 
-"Hello"                      → "Hello"
-);                           → ;
-\n                           → \n  
-return                       → return 
-cs.receiver(                 → 
-cs.receiver(                 → 
-__cs_greeting                → greeting
-)                            → 
-.                            → .
-concat                       → concat
-(                            → (
-", "                         → ", "
-,                            → , 
-"World"                      → "World"
-)                            → )
-)                            → 
-.                            → .
-toUpperCase                  → toUpperCase
-()                           → ()
-;                            → ;
-\n})())                      → \n}`
+cs.lift(cs.value((() => {\n      → cs`{\n  
+const                            → const 
+__cs_greeting                    → greeting
+ = cs.value(                     →  = 
+"Hello"                          → "Hello"
+);                               → ;
+\n                               → \n  
+return                           → return 
+cs.receiver(                     → 
+cs.receiver(                     → 
+__cs_greeting                    → greeting
+)                                → 
+.                                → .
+concat                           → concat
+(                                → (
+", "                             → ", "
+,                                → , 
+"World"                          → "World"
+)                                → )
+)                                → 
+.                                → .
+toUpperCase                      → toUpperCase
+()                               → ()
+;                                → ;
+\n})()))                         → \n}`

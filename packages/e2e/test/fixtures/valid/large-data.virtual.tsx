@@ -19,5 +19,5 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 }));
 
 export default (
-  <button data={orders} onA={cs.liftValue(() => cs.splice({ orders, currency: "CAD" }))} />
+  <button data={orders} onA={cs.lift(cs.value(() => cs.splice({ orders, currency: "CAD" })))} />
 );

@@ -1,15 +1,15 @@
-cs.liftValue(  → cs`
-{              → ({ 
-a              → a
-:              → : 
-cs.splice(     →  [-semantic]
-(count)        → $count
-)              →  [-semantic]
-,              → , 
-b              → b
-:              → : 
-cs.splice(     → ${ [-semantic]
-++count        → ++count
-)              → } [-semantic]
- }             →  })
-)              → `
+cs.lift(cs.value(  → cs`
+{                  → ({ 
+a                  → a
+:                  → : 
+cs.splice(         →  [-semantic]
+(count)            → $count
+)                  →  [-semantic]
+,                  → , 
+b                  → b
+:                  → : 
+cs.splice(         → ${ [-semantic]
+++count            → ++count
+)                  → } [-semantic]
+ }                 →  })
+))                 → `
