@@ -1,0 +1,36 @@
+cs.lift(cs.const(    → cs`
+(                    → (
+__cs_x               → x
+: Maybe) => {\n      → : Maybe) => {\n  
+const                → const 
+__cs_y               → y
+ = cs.const(         →  = 
+__cs_x               → x
+);                   → ;
+\n                   → \n  
+return               → return 
+1                    → 1
+;                    → ;
+\n}                  → \n}
+))                   → `
+cs.lift(cs.const(    → cs`
+(                    → (
+__cs_x               → x
+: Maybe) => {\n      → : Maybe) => {\n  
+let                  → let 
+__cs_y               → y
+ = cs.let(           →  = 
+""                   → ""
+);                   → ;
+\n                   → \n  
+__cs_y               → y
+ = cs.const(         →  = 
+__cs_x               → x
+)                    → 
+;                    → ;
+\n                   → \n  
+return               → return 
+1                    → 1
+;                    → ;
+\n}                  → \n}
+))                   → `

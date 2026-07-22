@@ -37,16 +37,16 @@ function _const<T extends ClientValue>(_: T): T {
   );
 }
 
-type Widen<T> = T extends number
+// A value with `let` semantics
+function _let<T extends ClientValue>(
+  _: T,
+): T extends number
   ? number
   : T extends string
     ? string
     : T extends boolean
       ? boolean
-      : T;
-
-// A value with `let` semantics
-function _let<T extends ClientValue>(_: T): Widen<T> {
+      : T {
   throw new Error(
     "Don't call `cs.let` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
