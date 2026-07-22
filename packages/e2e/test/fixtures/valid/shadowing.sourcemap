@@ -1,9 +1,9 @@
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_total                   → total
- =                           →  = 
+ = cs.value(                 →  = 
 1                            → 1
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.spliceValue(              → ${ [-semantic]
@@ -18,26 +18,28 @@ __cs_total                   → total
 cs.liftValue((() => {\n      → cs`{\n    
 let                          → let 
 __cs_total                   → total
- =                           →  = 
+ = cs.widen(                 →  = 
 0                            → 0
-;                            → ;
+);                           → ;
 \n                           → \n    
 __cs_total                   → total
- =                           →  = 
+ = cs.value(                 →  = 
 __cs_total                   → total
  +                           →  + 
 cs.spliceValue(              →  [-semantic]
 (lhs)                        → $lhs
 )                            →  [-semantic]
+)                            → 
 ;                            → ;
 \n                           → \n    
 __cs_total                   → total
- =                           →  = 
+ = cs.value(                 →  = 
 __cs_total                   → total
  +                           →  + 
 cs.spliceValue(              →  [-semantic]
 (rhs)                        → $rhs
 )                            →  [-semantic]
+)                            → 
 ;                            → ;
 \n                           → \n    
 return                       → return 

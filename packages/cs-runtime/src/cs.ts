@@ -44,9 +44,29 @@ function condition(_: boolean): boolean {
   );
 }
 
-function value(_: ClientValue): ClientValue {
+// A checked value position; identity, so the position reads the
+// expression's own type
+function value<T extends ClientValue>(_: T): T {
   throw new Error(
     "Don't call `cs.value` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
+// A `let` initializer's literal widens, as unwrapped it would —
+// `ClientValue`'s literal-bearing constraint blocks inference widening
+type Widen<T> = T extends number
+  ? number
+  : T extends string
+    ? string
+    : T extends boolean
+      ? boolean
+      : T;
+
+// A checked value position for a `let` initializer
+function widen<T extends ClientValue>(_: T): Widen<T> {
+  throw new Error(
+    "Don't call `cs.widen` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -83,6 +103,7 @@ export const cs = Object.assign(
     spliceAction,
     condition,
     value,
+    widen,
     statement,
     receiver,
   },

@@ -9,6 +9,6 @@ function add(lhs: Client<number>): Client<number> {
 }
 
 export default cs.liftValue((() => {
-    const __cs_foo$ = 1;
+    const __cs_foo$ = cs.value(1);
     return cs.spliceValue(add(cs.liftValue(__cs_foo$)));
 })());

@@ -1,9 +1,9 @@
 cs.liftValue((() => {\n      → cs`{\n  // leading line comment\n  
 const                        → const 
 __cs_count                   → count
- =                           →  = 
+ = cs.value(                 →  = 
 1                            → 1
-;                            → ;
+);                           → ;
 \n                           →  // trailing line comment\n  /* block comment */\n  
 if (                         → if (
 __cs_count                   → count

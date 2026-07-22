@@ -8,8 +8,8 @@ const getValue = cs.liftValue(() => {
 });
 
 const ping = cs.liftValue(() => {
-    let __cs_n = 0;
-    __cs_n = 1;
+    let __cs_n = cs.widen(0);
+    __cs_n = cs.value(1);
 });
 
 const action = cs.liftAction((() => {

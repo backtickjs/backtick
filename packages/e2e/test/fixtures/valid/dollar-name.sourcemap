@@ -8,9 +8,9 @@ cs.spliceValue(              →  [-semantic]
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_foo$                    → foo$
- =                           →  = 
+ = cs.value(                 →  = 
 1                            → 1
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.spliceValue(              → ${ [-semantic]

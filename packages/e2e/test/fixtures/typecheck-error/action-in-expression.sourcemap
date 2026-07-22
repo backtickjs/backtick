@@ -1,19 +1,17 @@
 cs.liftAction((() => {\n      → cs`{\n  
 const                         → const 
 __cs_x                        → x
- =                            →  = 
+ = cs.value(                  →  = 
 1                             → 1
-;                             → ;
+);                            → ;
 \n})())                       → \n}`
 cs.liftValue((() => {\n       → cs`{\n  
 const                         → const 
 __cs_captured                 → captured
- = (cs.value(                 →  = 
+ = cs.value(                  →  = 
 cs.spliceValue(               →  [-semantic]
 (action)                      → $action
 )                             →  [-semantic]
-),                            → 
-cs.spliceValue((action))      → $action [-semantic -completion -navigation -verification]
 );                            → ;
 \n                            → \n  
 return                        → return 
@@ -39,12 +37,10 @@ __cs_e                        → e
 )                             → ) 
 {\n                           → {\n    
 __cs_e                        → e
- = (cs.value(                 →  = 
+ = cs.value(                  →  = 
 cs.spliceValue(               →  [-semantic]
 (action)                      → $action
 )                             →  [-semantic]
-),                            → 
-cs.spliceValue((action))      → $action [-semantic -completion -navigation -verification]
 )                             → 
 ;                             → ;
 \n                            → \n    

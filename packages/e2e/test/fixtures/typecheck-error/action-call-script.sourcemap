@@ -2,9 +2,9 @@ cs.liftValue(                 → cs`
 () => {\n                     → () => {\n  
 const                         → const 
 __cs_x                        → x
- =                            →  = 
+ = cs.value(                  →  = 
 1                             → 1
-;                             → ;
+);                            → ;
 \n}                           → \n}
 )                             → `
 cs.liftValue(                 → cs`
@@ -16,9 +16,9 @@ cs.spliceValue(               →  [-semantic]
 cs.liftAction((() => {\n      → cs`{\n  
 const                         → const 
 __cs_x                        → x
- =                            →  = 
+ = cs.value(                  →  = 
 1                             → 1
-;                             → ;
+);                            → ;
 \n})())                       → \n}`
 cs.liftValue(                 → cs`
 cs.spliceValue(               →  [-semantic]

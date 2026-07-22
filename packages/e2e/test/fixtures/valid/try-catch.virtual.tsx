@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 
 export default cs.liftValue((() => {
-    const __cs_message = "boom";
+    const __cs_message = cs.value("boom");
     try {
         throw __cs_message;
     }

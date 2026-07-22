@@ -6,12 +6,12 @@ __cs_b                       → b
 : boolean) => {\n            → : boolean,\n) => {\n  
 const                        → const 
 __cs_keep                    → keep
- =                           →  = 
+ = cs.value(                 →  = 
 (                            → (
 __cs_on                      → on
 : boolean) =>                → : boolean) => 
 __cs_on                      → on
-;                            → ;
+);                           → ;
 \n                           → \n  
 if ((cs.condition(           → if (
 __cs_keep                    → keep

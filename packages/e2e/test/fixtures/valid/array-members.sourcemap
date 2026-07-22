@@ -1,7 +1,7 @@
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_coins                   → coins
- =                           →  = 
+ = cs.value(                 →  = 
 [                            → [
 1                            → 1
 ,                            → , 
@@ -9,13 +9,13 @@ __cs_coins                   → coins
 ,                            → , 
 3                            → 3
 ]                            → ]
-;                            → ;
+);                           → ;
 \n                           → \n  
 const                        → const 
 __cs_four                    → four
- =                           →  = 
+ = cs.value(                 →  = 
 4                            → 4
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 {                            → {\n    

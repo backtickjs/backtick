@@ -1,7 +1,7 @@
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_apply                   → apply
- =                           →  = 
+ = cs.value(                 →  = 
 (                            → (
 __cs_f                       → f
 : () => number) =>           → : () => number) => 
@@ -9,7 +9,7 @@ __cs_f                       → f
 ()                           → ()
  +                           →  + 
 1                            → 1
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 __cs_apply                   → apply

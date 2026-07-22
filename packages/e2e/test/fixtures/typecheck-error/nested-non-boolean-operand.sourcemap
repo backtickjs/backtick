@@ -4,12 +4,12 @@ __cs_count                               → count
 : number) => {\n                         → : number) => {\n  
 const                                    → const 
 __cs_keep                                → keep
- =                                       →  = 
+ = cs.value(                             →  = 
 (                                        → (
 __cs_on                                  → on
 : boolean) =>                            → : boolean) => 
 __cs_on                                  → on
-;                                        → ;
+);                                       → ;
 \n                                       → \n  
 if ((cs.condition(                       → if (
 __cs_keep                                → keep

@@ -2,9 +2,9 @@ cs.liftValue(       → cs`
 () => {\n           → () => {\n  
 const               → const 
 __cs_x              → x
- =                  →  = 
+ = cs.value(        →  = 
 1                   → 1
-;                   → ;
+);                  → ;
 \n                  → \n  
 return              → return 
 cs.spliceValue(     → ${ [-semantic]

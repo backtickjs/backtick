@@ -4,13 +4,13 @@ import { cs } from "@backtickjs/core";
 // effectful call belongs in an action block, cs`{ $ping(); }`, and an
 // action composes as cs`{ $action; }`, never as the expression itself.
 const ping = cs.liftValue(() => {
-    const __cs_x = 1;
+    const __cs_x = cs.value(1);
 });
 
 export const called = cs.liftValue(cs.spliceValue((ping))());
 
 const action = cs.liftAction((() => {
-    const __cs_x = 1;
+    const __cs_x = cs.value(1);
 })());
 
 export const spliced = cs.liftValue(cs.spliceValue((action)));

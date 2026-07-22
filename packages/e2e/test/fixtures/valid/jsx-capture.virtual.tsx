@@ -6,7 +6,7 @@ import type { Client, JSX } from "@backtickjs/core";
 // instantiates the tree with `#t0(x)` and the tree wires the capture into the
 // handler with `#slot`.
 const script: Client<() => JSX.Element> = cs.liftValue(() => {
-    const __cs_x = 1;
+    const __cs_x = cs.value(1);
     return cs.spliceValue((<button onClick={cs.liftValue(() => __cs_x)} />));
 });
 export default script;

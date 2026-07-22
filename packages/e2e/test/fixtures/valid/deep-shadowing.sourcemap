@@ -1,9 +1,9 @@
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_base                    → base
- =                           →  = 
+ = cs.value(                 →  = 
 10                           → 10
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.spliceValue(              → ${ [-semantic]
@@ -18,9 +18,9 @@ __cs_base                    → base
 cs.liftValue((() => {\n      → cs`{\n    
 const                        → const 
 __cs_base                    → base
- =                           →  = 
+ = cs.value(                 →  = 
 1                            → 1
-;                            → ;
+);                           → ;
 \n                           → \n    
 return                       → return 
 __cs_base                    → base
@@ -33,9 +33,9 @@ middle(inner)                → middle(inner)
 cs.liftValue((() => {\n      → cs`{\n    
 const                        → const 
 __cs_base                    → base
- =                           →  = 
+ = cs.value(                 →  = 
 2                            → 2
-;                            → ;
+);                           → ;
 \n                           → \n    
 return                       → return 
 __cs_base                    → base

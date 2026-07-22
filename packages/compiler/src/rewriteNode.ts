@@ -108,94 +108,6 @@ function checkedCondition(
   );
 }
 
-// Provably a value, so no check needed: identifiers were checked by their
-// declarations; containers recurse. Splices aren't trusted — the splice
-// checks are kind-loose — so they take the check like calls and member
-// accesses.
-function isValueByConstruction(
-  ts: typeof import("typescript"),
-  state: RewriteState,
-  node: ts.Node,
-): boolean {
-  while (ts.isParenthesizedExpression(node)) {
-    node = node.expression;
-  }
-  if (ts.isIdentifier(node)) {
-    return state.script.splices[node.text] == null;
-  }
-  if (
-    ts.isStringLiteral(node) ||
-    ts.isNumericLiteral(node) ||
-    node.kind === ts.SyntaxKind.TrueKeyword ||
-    node.kind === ts.SyntaxKind.FalseKeyword ||
-    node.kind === ts.SyntaxKind.NullKeyword ||
-    ts.isArrowFunction(node) ||
-    ts.isBinaryExpression(node) ||
-    ts.isNewExpression(node)
-  ) {
-    return true;
-  }
-  if (ts.isObjectLiteralExpression(node)) {
-    return node.properties.every(
-      (property) =>
-        !ts.isPropertyAssignment(property) ||
-        isValueByConstruction(ts, state, property.initializer),
-    );
-  }
-  if (ts.isArrayLiteralExpression(node)) {
-    return node.elements.every((element) =>
-      isValueByConstruction(ts, state, element),
-    );
-  }
-  return false;
-}
-
-// An initializer must hold a value, but a call can produce `void`. Wrapping
-// would replace the inferred type, so the position becomes
-// `(cs.value(<real>), <dup>)` — the declaration reads the dup's type.
-function checkedValue(
-  ts: typeof import("typescript"),
-  state: RewriteState,
-  source: ts.Expression,
-  virtual: ts.Expression,
-): ts.Expression {
-  // A source-positioned virtual is the unsupported-syntax fallback, already
-  // carrying its own error.
-  if (
-    state.dup ||
-    isValueByConstruction(ts, state, source) ||
-    virtual.pos >= 0
-  ) {
-    return virtual;
-  }
-  const dupState: RewriteState = {
-    ...state,
-    dup: true,
-    errors: new Map(),
-    mappings: new Map(),
-    codeInformation: new Map(),
-  };
-  const dup = rewriteNode(ts, dupState, source).virtual as ts.Expression;
-  if (dup.pos >= 0) {
-    return virtual;
-  }
-  // The duplicate's shield, exactly as in `checkedCondition`.
-  state.mappings.set(dup, source);
-  state.codeInformation.set(dup, {
-    semantic: false,
-    completion: false,
-    navigation: false,
-    verification: false,
-  });
-  return ts.factory.createParenthesizedExpression(
-    ts.factory.createBinaryExpression(
-      call(ts, "cs", "value", [virtual]),
-      ts.SyntaxKind.CommaToken,
-      dup,
-    ),
-  );
-}
-
 // The left operand of a `??` (through parens): that `??` already coalesces
 // an optional chain's `undefined`, so the auto `?? null` skips (TS2871).
 function nullCoalescedLeft(
@@ -399,12 +311,9 @@ function rewriteNodeImpl(
           ts,
           node.declarationList.flags,
           identifier,
-          checkedValue(
-            ts,
-            state,
-            declaration.initializer,
+          call(ts, "cs", keyword === "let" ? "widen" : "value", [
             initializer.virtual as ts.Expression,
-          ),
+          ]),
         ),
         runtime: call(ts, "v", "variableDeclaration", [
           loc(node),
@@ -1075,13 +984,11 @@ function rewriteNodeImpl(
       node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
       ts.isIdentifier(node.left)
     ) {
-      // The right-hand side is a value position like an initializer — an
-      // `unknown`-typed target (a catch binding) would absorb `void`.
       return {
         virtual: ts.factory.createBinaryExpression(
           lhs.virtual as ts.Expression,
           ts.SyntaxKind.EqualsToken,
-          checkedValue(ts, state, node.right, rhs.virtual as ts.Expression),
+          call(ts, "cs", "value", [rhs.virtual as ts.Expression]),
         ),
         runtime: call(ts, "v", "assignment", [
           loc(node),

@@ -42,7 +42,7 @@ class Size implements ClientObject {
 }
 
 export default cs.liftValue((() => {
-    const __cs_p = new (cs.spliceValue((Point)))(cs.liftValue(1), cs.liftValue(2));
-    const __cs_s = new (cs.spliceValue((Size)))(cs.liftValue(3), cs.liftValue(4));
+    const __cs_p = cs.value(new (cs.spliceValue((Point)))(cs.liftValue(1), cs.liftValue(2)));
+    const __cs_s = cs.value(new (cs.spliceValue((Size)))(cs.liftValue(3), cs.liftValue(4)));
     return cs.receiver(__cs_p).sum() + cs.receiver(__cs_s).sum();
 })());

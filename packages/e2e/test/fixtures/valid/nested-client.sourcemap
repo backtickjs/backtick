@@ -11,7 +11,7 @@ this.y                       → this.y
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_s                       → s
- =                           →  = 
+ = cs.value(                 →  = 
 new (                        → new 
 cs.spliceValue(              →  [-semantic]
 (Segment)                    → $Segment
@@ -37,7 +37,7 @@ cs.spliceValue(              →  [-semantic]
 2                            → 2
 ))                           → )
 ))                           → )
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.receiver(                 → 

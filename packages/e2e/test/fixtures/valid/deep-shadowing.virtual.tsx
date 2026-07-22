@@ -5,20 +5,20 @@ import { cs, type Client } from "@backtickjs/core";
 // must reach the leaf untouched, so the threaded channel is renamed away from
 // every `base` it passes through.
 export default cs.liftValue((() => {
-    const __cs_base = 10;
+    const __cs_base = cs.value(10);
     return cs.spliceValue(outer(cs.liftValue(__cs_base)));
 })());
 
 function outer(inner: Client<number>): Client<number> {
   return cs.liftValue((() => {
-    const __cs_base = 1;
+    const __cs_base = cs.value(1);
     return __cs_base + cs.spliceValue(middle(inner));
 })());
 }
 
 function middle(inner: Client<number>): Client<number> {
   return cs.liftValue((() => {
-    const __cs_base = 2;
+    const __cs_base = cs.value(2);
     return __cs_base * cs.spliceValue((inner));
 })());
 }

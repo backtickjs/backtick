@@ -9,7 +9,7 @@ this.r                       → this.r
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_pick                    → pick
- =                           →  = 
+ = cs.value(                 →  = 
 (                            → (
 __cs_c                       → c
 : Color) =>                  → : Color) => 
@@ -20,7 +20,7 @@ __cs_c                       → c
 r                            → r
  +                           →  + 
 1                            → 1
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 __cs_pick                    → pick

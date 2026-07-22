@@ -1,9 +1,9 @@
 cs.liftValue((() => {\n      → cs`{\n  
 const                        → const 
 __cs_greeting                → greeting
- =                           →  = 
+ = cs.value(                 →  = 
 "Hello"                      → "Hello"
-;                            → ;
+);                           → ;
 \n                           → \n  
 return                       → return 
 cs.receiver(                 → 
