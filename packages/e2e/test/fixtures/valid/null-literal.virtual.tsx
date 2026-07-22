@@ -9,4 +9,4 @@ const orDash: Client<(value: string | null) => string> = cs.liftValue((__cs_valu
     return __cs_value;
 });
 
-export default cs.liftValue({ missing: cs.spliceValue((orDash))(null), present: cs.spliceValue((orDash))("hi"), bare: null });
+export default cs.liftValue({ missing: cs.splice((orDash))(null), present: cs.splice((orDash))("hi"), bare: null });

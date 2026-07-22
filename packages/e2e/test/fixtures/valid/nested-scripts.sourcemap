@@ -6,7 +6,7 @@ __cs_x                       → x
 );                           → ;
 \n                           → \n  
 return                       → return 
-cs.spliceValue(              → ${ [-semantic]
+cs.splice(                   → ${ [-semantic]
 cs.liftValue(                → cs`
 __cs_x                       → x
 )                            → `

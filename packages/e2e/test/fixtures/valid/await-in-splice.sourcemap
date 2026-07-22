@@ -1,5 +1,5 @@
 cs.liftValue(          → cs`
-cs.spliceValue(        → ${ [-semantic]
+cs.splice(             → ${ [-semantic]
 await fetchGreeting()  → await fetchGreeting()
 )                      → } [-semantic]
  +                     →  + 

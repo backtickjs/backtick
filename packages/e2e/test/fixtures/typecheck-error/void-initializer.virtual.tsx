@@ -8,12 +8,12 @@ const ping = cs.liftValue(() => {
 });
 
 const script = cs.liftValue((() => {
-    const __cs_x = cs.value(cs.spliceValue((ping))());
+    const __cs_x = cs.value(cs.splice((ping))());
     return 1;
 })());
 
 const action = cs.liftAction((() => {
-    const __cs_x = cs.value(cs.spliceValue((ping))());
+    const __cs_x = cs.value(cs.splice((ping))());
 })());
 
 // An error inside a checked initializer reports once: the duplicate copy
@@ -23,6 +23,6 @@ const label = cs.liftValue((__cs_text: string) => {
 });
 
 const wrongArgument = cs.liftValue((() => {
-    const __cs_x = cs.value(cs.spliceValue((label))(true));
+    const __cs_x = cs.value(cs.splice((label))(true));
     return 1;
 })());

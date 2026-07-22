@@ -521,24 +521,7 @@ function rewriteNodeImpl(
       }
       // The wrapper's frame claims only the splice delimiters (`${`/`}`,
       // or nothing for `$x`): hover must not resolve through it.
-      // A splice whose parent (through parens) is a statement in a block
-      // sits in statement position — the action position. The block check
-      // matters: a bare-splice script is a statement of the file itself,
-      // which is composition.
-      let parent: ts.Node | undefined = node.parent;
-      while (parent != null && ts.isParenthesizedExpression(parent)) {
-        parent = parent.parent;
-      }
-      const statementPosition =
-        parent != null &&
-        ts.isExpressionStatement(parent) &&
-        ts.isBlock(parent.parent);
-      const virtual = call(
-        ts,
-        "cs",
-        statementPosition ? "spliceAction" : "spliceValue",
-        [argument],
-      );
+      const virtual = call(ts, "cs", "splice", [argument]);
       state.codeInformation.set(virtual, { semantic: false });
       return {
         virtual,

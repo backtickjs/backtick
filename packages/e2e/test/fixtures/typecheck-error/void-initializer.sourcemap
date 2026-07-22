@@ -17,7 +17,7 @@ cs.liftValue((() => {\n       → cs`{\n
 const                         → const 
 __cs_x                        → x
  = cs.value(                  →  = 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (ping)                        → $ping
 )                             →  [-semantic]
 ()                            → ()
@@ -31,7 +31,7 @@ cs.liftAction((() => {\n      → cs`{\n
 const                         → const 
 __cs_x                        → x
  = cs.value(                  →  = 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (ping)                        → $ping
 )                             →  [-semantic]
 ()                            → ()
@@ -50,7 +50,7 @@ cs.liftValue((() => {\n       → cs`{\n
 const                         → const 
 __cs_x                        → x
  = cs.value(                  →  = 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (label)                       → $label
 )                             →  [-semantic]
 (                             → (

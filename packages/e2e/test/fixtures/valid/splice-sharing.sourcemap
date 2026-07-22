@@ -1,40 +1,40 @@
-cs.liftValue(    → cs`
-cs.spliceValue(  →  [-semantic]
-(lhs)            → $lhs
-)                →  [-semantic]
- +               →  + 
-cs.spliceValue(  →  [-semantic]
-(rhs)            → $rhs
-)                →  [-semantic]
-)                → `
-cs.liftValue(    → cs`
-{                → ({\n  
-x                → x
-:                → : 
-cs.spliceValue(  → ${ [-semantic]
-add(             → add(
-cs.liftValue(    → cs`
-1                → 1
-)                → `
-,                → , 
-cs.liftValue(    → cs`
-2                → 2
-)                → `
-)                → )
-)                → } [-semantic]
-,                → ,\n  
-y                → y
-:                → : 
-cs.spliceValue(  → ${ [-semantic]
-add(             → add(
-cs.liftValue(    → cs`
-3                → 3
-)                → `
-,                → , 
-cs.liftValue(    → cs`
-4                → 4
-)                → `
-)                → )
-)                → } [-semantic]
- }               → ,\n})
-)                → `
+cs.liftValue(  → cs`
+cs.splice(     →  [-semantic]
+(lhs)          → $lhs
+)              →  [-semantic]
+ +             →  + 
+cs.splice(     →  [-semantic]
+(rhs)          → $rhs
+)              →  [-semantic]
+)              → `
+cs.liftValue(  → cs`
+{              → ({\n  
+x              → x
+:              → : 
+cs.splice(     → ${ [-semantic]
+add(           → add(
+cs.liftValue(  → cs`
+1              → 1
+)              → `
+,              → , 
+cs.liftValue(  → cs`
+2              → 2
+)              → `
+)              → )
+)              → } [-semantic]
+,              → ,\n  
+y              → y
+:              → : 
+cs.splice(     → ${ [-semantic]
+add(           → add(
+cs.liftValue(  → cs`
+3              → 3
+)              → `
+,              → , 
+cs.liftValue(  → cs`
+4              → 4
+)              → `
+)              → )
+)              → } [-semantic]
+ }             → ,\n})
+)              → `

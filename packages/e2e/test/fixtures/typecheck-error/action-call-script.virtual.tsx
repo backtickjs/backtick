@@ -7,10 +7,10 @@ const ping = cs.liftValue(() => {
     const __cs_x = cs.value(1);
 });
 
-export const called = cs.liftValue(cs.spliceValue((ping))());
+export const called = cs.liftValue(cs.splice((ping))());
 
 const action = cs.liftAction((() => {
     const __cs_x = cs.value(1);
 })());
 
-export const spliced = cs.liftValue(cs.spliceValue((action)));
+export const spliced = cs.liftValue(cs.splice((action)));

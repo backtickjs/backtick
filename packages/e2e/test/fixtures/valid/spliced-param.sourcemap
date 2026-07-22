@@ -1,6 +1,6 @@
 cs.liftValue(                → cs`
 () =>                        → () => 
-cs.spliceValue(              → ${ [-semantic]
+cs.splice(                   → ${ [-semantic]
 this.r                       → this.r
 )                            → } [-semantic]
  +                           →  + 
@@ -25,7 +25,7 @@ r                            → r
 return                       → return 
 __cs_pick                    → pick
 (                            → (
-cs.spliceValue(              → ${ [-semantic]
+cs.splice(                   → ${ [-semantic]
 new Color(                   → new Color(
 cs.liftValue(                → cs`
 7                            → 7

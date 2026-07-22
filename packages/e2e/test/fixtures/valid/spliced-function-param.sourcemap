@@ -14,7 +14,7 @@ __cs_f                       → f
 return                       → return 
 __cs_apply                   → apply
 (                            → (
-cs.spliceValue(              → ${ [-semantic]
+cs.splice(                   → ${ [-semantic]
 cs.liftValue(                → cs`
 () =>                        → () => 
 2                            → 2

@@ -16,7 +16,7 @@ cs.liftValue(                 → cs`
 __cs_id                       → id
 : number) => {\n              → : number) => {\n  
 cs.statement(                 → 
-cs.spliceAction(              →  [-semantic]
+cs.splice(                    →  [-semantic]
 (beep)                        → $beep
 )                             →  [-semantic]
 );                            → ;
@@ -29,13 +29,13 @@ __cs_handlers                 → handlers
 {                             → {\n    
 tap                           → tap
 :                             → : 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (onTap)                       → $onTap
 )                             →  [-semantic]
 ,                             → ,\n    
 hold                          → hold
 :                             → : 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (onTap)                       → $onTap
 )                             →  [-semantic]
  }                            → ,\n  }

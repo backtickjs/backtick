@@ -9,7 +9,7 @@ __cs_flag                                 → flag [-semantic -completion -navig
 ))                                        → ) 
 {\n                                       → {\n      
 return                                    → return 
-cs.spliceValue(                           →  [-semantic]
+cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
 )                                         →  [-semantic]
 ;                                         → ;
@@ -32,7 +32,7 @@ cs.liftValue(                             → cs`
 {                                         → ({\n  
 taken                                     → taken
 :                                         → : 
-cs.spliceValue(                           → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 guard(ok)                                 → guard(ok)
 )                                         → } [-semantic]
 (                                         → (
@@ -41,7 +41,7 @@ true                                      → true
 ,                                         → ,\n  
 skipped                                   → skipped
 :                                         → : 
-cs.spliceValue(                           → ${ [-semantic]
+cs.splice(                                → ${ [-semantic]
 guard(broken)                             → guard(broken)
 )                                         → } [-semantic]
 (                                         → (

@@ -44,7 +44,7 @@ cs.liftValue(                → cs`
 {                            → ({\n  
 both                         → both
 :                            → : 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (gate)                       → $gate
 )                            →  [-semantic]
 (                            → (
@@ -55,7 +55,7 @@ true                         → true
 ,                            → ,\n  
 one                          → one
 :                            → : 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (gate)                       → $gate
 )                            →  [-semantic]
 (                            → (

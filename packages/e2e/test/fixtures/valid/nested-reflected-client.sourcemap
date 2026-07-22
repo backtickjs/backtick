@@ -1,20 +1,20 @@
 cs.liftValue(                   → cs`
 () =>                           → () => 
-cs.spliceValue(                 → ${ [-semantic]
+cs.splice(                      → ${ [-semantic]
 this.x                          → this.x
 )                               → } [-semantic]
  +                              →  + 
-cs.spliceValue(                 → ${ [-semantic]
+cs.splice(                      → ${ [-semantic]
 this.y                          → this.y
 )                               → } [-semantic]
 )                               → `
 cs.liftValue(                   → cs`
 () =>                           → () => 
-cs.spliceValue(                 → ${ [-semantic]
+cs.splice(                      → ${ [-semantic]
 this.from.x                     → this.from.x
 )                               → } [-semantic]
  ===                            →  === 
-cs.spliceValue(                 → ${ [-semantic]
+cs.splice(                      → ${ [-semantic]
 this.to.x                       → this.to.x
 )                               → } [-semantic]
 )                               → `
@@ -34,7 +34,7 @@ cs.liftValue((() => {\n         → cs`{\n
 const                           → const 
 __cs_s                          → s
  = cs.value(                    →  = 
-cs.spliceValue(                 →  [-semantic]
+cs.splice(                      →  [-semantic]
 (segment)                       → $segment
 )                               →  [-semantic]
 );                              → ;

@@ -22,14 +22,14 @@ __cs_n                        → n
 )                             → `
 cs.liftAction((() => {\n      → cs`{\n  
 cs.statement(                 → 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (ping)                        → $ping
 )                             →  [-semantic]
 ()                            → ()
 );                            → ;
 \n                            → \n  
 cs.statement(                 → 
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (getValue)                    → $getValue
 )                             →  [-semantic]
 ()                            → ()

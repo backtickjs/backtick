@@ -14,4 +14,4 @@ const gate: Client<(a: boolean, b: boolean) => string> = cs.liftValue((__cs_a: b
     return "dropped";
 });
 
-export default cs.liftValue({ both: cs.spliceValue((gate))(true, true), one: cs.spliceValue((gate))(true, false) });
+export default cs.liftValue({ both: cs.splice((gate))(true, true), one: cs.splice((gate))(true, false) });

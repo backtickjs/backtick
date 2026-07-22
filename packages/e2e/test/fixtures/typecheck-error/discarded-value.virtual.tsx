@@ -13,6 +13,6 @@ const ping = cs.liftValue(() => {
 });
 
 const action = cs.liftAction((() => {
-    cs.statement(cs.spliceValue((ping))());
-    cs.statement(cs.spliceValue((getValue))());
+    cs.statement(cs.splice((ping))());
+    cs.statement(cs.splice((getValue))());
 })());

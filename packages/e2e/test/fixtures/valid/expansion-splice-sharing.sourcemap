@@ -1,10 +1,10 @@
 cs.liftValue(                → cs`
 () =>                        → () => 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (a)                          → $a
 )                            →  [-semantic]
  +                           →  + 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (b)                          → $b
 )                            →  [-semantic]
 )                            → `
@@ -13,7 +13,7 @@ const                        → const
 __cs_p                       → p
  = cs.value(                 →  = 
 new (                        → new 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (Point)                      → $Point
 )                            →  [-semantic]
 )(cs.liftValue(              → (
@@ -27,7 +27,7 @@ const                        → const
 __cs_s                       → s
  = cs.value(                 →  = 
 new (                        → new 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (Size)                       → $Size
 )                            →  [-semantic]
 )(cs.liftValue(              → (

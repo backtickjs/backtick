@@ -1,10 +1,10 @@
 cs.liftValue(                 → cs`
 () =>                         → () => 
-cs.spliceValue(               → ${ [-semantic]
+cs.splice(                    → ${ [-semantic]
 this.x                        → this.x
 )                             → } [-semantic]
  +                            →  + 
-cs.spliceValue(               → ${ [-semantic]
+cs.splice(                    → ${ [-semantic]
 this.y                        → this.y
 )                             → } [-semantic]
 )                             → `
@@ -12,7 +12,7 @@ cs.liftAction((() => {\n      → cs`{\n
 const                         → const 
 __cs_a                        → a
  = cs.value(                  →  = 
-cs.spliceValue(               → ${ [-semantic]
+cs.splice(                    → ${ [-semantic]
 new Point(                    → new Point(
 cs.liftValue(                 → cs`
 1                             → 1
@@ -28,7 +28,7 @@ cs.liftValue(                 → cs`
 const                         → const 
 __cs_b                        → b
  = cs.value(                  →  = 
-cs.spliceValue(               → ${ [-semantic]
+cs.splice(                    → ${ [-semantic]
 new Point(                    → new Point(
 cs.liftValue(                 → cs`
 3                             → 3

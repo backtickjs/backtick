@@ -3,7 +3,7 @@ const                        → const
 __cs_p                       → p
  = cs.value(                 →  = 
 new (                        → new 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (Point)                      → $Point
 )                            →  [-semantic]
 )(cs.liftValue(              → (

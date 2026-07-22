@@ -3,7 +3,7 @@ cs.liftValue(                 → cs`
 )                             → `
 cs.liftAction((() => {\n      → cs`{\n  
 cs.statement(                 → 
-cs.spliceAction(              →  [-semantic]
+cs.splice(                    →  [-semantic]
 (count)                       → $count
 )                             →  [-semantic]
 );                            → ;

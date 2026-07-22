@@ -17,18 +17,8 @@ test("cs.liftAction throws when called directly", () => {
   assert.throws(() => cs.liftAction(undefined), /Don't call `cs\.liftAction`/);
 });
 
-test("cs.spliceValue throws when called directly", () => {
-  assert.throws(
-    () => cs.spliceValue("Hello World!"),
-    /Don't call `cs\.spliceValue`/,
-  );
-});
-
-test("cs.spliceAction throws when called directly", () => {
-  assert.throws(
-    () => cs.spliceAction(undefined as never),
-    /Don't call `cs\.spliceAction`/,
-  );
+test("cs.splice throws when called directly", () => {
+  assert.throws(() => cs.splice("Hello World!"), /Don't call `cs\.splice`/);
 });
 
 test("isSpliceable accepts primitives, clients, and containers of them", () => {

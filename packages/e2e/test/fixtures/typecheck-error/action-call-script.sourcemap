@@ -8,7 +8,7 @@ __cs_x                        → x
 \n}                           → \n}
 )                             → `
 cs.liftValue(                 → cs`
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (ping)                        → $ping
 )                             →  [-semantic]
 ()                            → ()
@@ -21,7 +21,7 @@ __cs_x                        → x
 );                            → ;
 \n})())                       → \n}`
 cs.liftValue(                 → cs`
-cs.spliceValue(               →  [-semantic]
+cs.splice(                    →  [-semantic]
 (action)                      → $action
 )                             →  [-semantic]
 )                             → `

@@ -2,7 +2,7 @@ import type { Client } from "./Client.js";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { ClientValue } from "./ClientValue.js";
-import type { SpliceableUnknown, Spliced } from "./Spliceable.js";
+import type { Spliceable, Spliced } from "./Spliceable.js";
 import type { Receiver } from "./Receiver.js";
 
 // The root of a value script — a block whose every path `return`s
@@ -21,18 +21,10 @@ function liftAction(_: void): Client<void> {
   );
 }
 
-// A splice in any value position
-function spliceValue<const T extends SpliceableUnknown>(_: T): Spliced<T> {
+// A spliced host value, read as what it becomes on the client
+function splice<const T extends Spliceable>(_: T): Spliced<T> {
   throw new Error(
-    "Don't call `cs.spliceValue` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
-// A splice in statement position
-function spliceAction<const T extends SpliceableUnknown>(_: T): Spliced<T> {
-  throw new Error(
-    "Don't call `cs.spliceAction` directly; it's used to generate virtual " +
+    "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -99,8 +91,7 @@ export const cs = Object.assign(
     create,
     liftValue,
     liftAction,
-    spliceValue,
-    spliceAction,
+    splice,
     condition,
     value,
     widen,

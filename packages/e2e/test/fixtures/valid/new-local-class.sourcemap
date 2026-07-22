@@ -2,7 +2,7 @@ cs.liftValue((() => {\n      → cs`{\n
 const                        → const 
 __cs_C                       → C
  = cs.value(                 →  = 
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (Point)                      → $Point
 )                            →  [-semantic]
 );                           → ;

@@ -30,11 +30,11 @@ toUpperCase            → toUpperCase
 \n                     → \n  
 if (                   → if (
 (cs.condition(         → 
-cs.spliceValue(        → ${ [-semantic]
+cs.splice(             → ${ [-semantic]
 flags.strict           → flags.strict
 )                      → } [-semantic]
 ) &&                   → 
-cs.spliceValue(        → ${ [-semantic -completion -navigation -verification]
+cs.splice(             → ${ [-semantic -completion -navigation -verification]
 flags.strict           → flags.strict
 )                      → } [-semantic -completion -navigation -verification]
 ) &&                   →  && 
@@ -75,7 +75,7 @@ cs.liftValue(          → cs`
 {                      → ({\n  
 missing                → missing
 :                      → : 
-cs.spliceValue(        →  [-semantic]
+cs.splice(             →  [-semantic]
 (label)                → $label
 )                      →  [-semantic]
 (                      → (
@@ -86,7 +86,7 @@ true                   → true
 ,                      → ,\n  
 loud                   → loud
 :                      → : 
-cs.spliceValue(        →  [-semantic]
+cs.splice(             →  [-semantic]
 (label)                → $label
 )                      →  [-semantic]
 (                      → (
@@ -97,7 +97,7 @@ true                   → true
 ,                      → ,\n  
 quiet                  → quiet
 :                      → : 
-cs.spliceValue(        →  [-semantic]
+cs.splice(             →  [-semantic]
 (label)                → $label
 )                      →  [-semantic]
 (                      → (
@@ -108,7 +108,7 @@ false                  → false
 ,                      → ,\n  
 plain                  → plain
 :                      → : 
-cs.spliceValue(        →  [-semantic]
+cs.splice(             →  [-semantic]
 (label)                → $label
 )                      →  [-semantic]
 (                      → (

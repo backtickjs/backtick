@@ -5,5 +5,5 @@ import { cs } from "@backtickjs/core";
 const count = cs.liftValue(1);
 
 export const script = cs.liftAction((() => {
-    cs.statement(cs.spliceAction((count)));
+    cs.statement(cs.splice((count)));
 })());

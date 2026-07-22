@@ -21,4 +21,4 @@ const shout = cs.liftValue((__cs_s: string | null) => {
     return (cs.receiver(__cs_s)?.concat("!") ?? null);
 });
 
-export default cs.liftValue({ found: cs.spliceValue((pick))({ x: 5 }), missing: cs.spliceValue((pick))(null), deep: cs.spliceValue((deep))({ inner: { z: 7 } }), cut: cs.spliceValue((deep))({ inner: null }), top: cs.spliceValue((deep))(null), loud: cs.spliceValue((shout))("hi"), silent: cs.spliceValue((shout))(null) });
+export default cs.liftValue({ found: cs.splice((pick))({ x: 5 }), missing: cs.splice((pick))(null), deep: cs.splice((deep))({ inner: { z: 7 } }), cut: cs.splice((deep))({ inner: null }), top: cs.splice((deep))(null), loud: cs.splice((shout))("hi"), silent: cs.splice((shout))(null) });

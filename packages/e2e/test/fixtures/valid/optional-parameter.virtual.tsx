@@ -13,4 +13,4 @@ const call = cs.liftValue((__cs_cb: (() => number) | null = null) => {
     return __cs_cb?.() ?? 0;
 });
 
-export default cs.liftValue({ named: cs.spliceValue((greet))("hi"), omitted: cs.spliceValue((greet))(), explicit: cs.spliceValue((greet))(null), supplied: cs.spliceValue((call))(cs.spliceValue((double))), fallback: cs.spliceValue((call))() });
+export default cs.liftValue({ named: cs.splice((greet))("hi"), omitted: cs.splice((greet))(), explicit: cs.splice((greet))(null), supplied: cs.splice((call))(cs.splice((double))), fallback: cs.splice((call))() });

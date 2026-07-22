@@ -4,10 +4,11 @@ import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
 import { type ClientElement, isClientElement } from "./ClientElement.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-import type { ClientValue } from "./ClientValue.js";
 
-export type SpliceableValue =
-  | Client<ClientValue>
+// Everything spliceable — a value or an action; kinds are checked at the
+// positions that use them, not at the splice.
+export type Spliceable =
+  | Client<ClientUnknown>
   | ClientElement
   | ClientConstructor
   | ClientObject
@@ -15,11 +16,8 @@ export type SpliceableValue =
   | number
   | boolean
   | string
-  | SpliceableValue[]
-  | { [key: string]: SpliceableValue };
-
-// Everything spliceable — a value, or an action
-export type SpliceableUnknown = SpliceableValue | Client<ClientUnknown>;
+  | Spliceable[]
+  | { [key: string]: Spliceable };
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
@@ -44,7 +42,7 @@ export type Spliced<T> =
               ? { [K in keyof T]: Spliced<T[K]> }
               : T;
 
-export function isSpliceable(value: unknown): value is SpliceableUnknown {
+export function isSpliceable(value: unknown): value is Spliceable {
   if (value === undefined) {
     return false;
   }

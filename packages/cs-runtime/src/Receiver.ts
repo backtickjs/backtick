@@ -6,7 +6,7 @@ import type { ClientNumber } from "./ClientNumber.js";
 import type { ClientObject } from "./ClientObject.js";
 import type { ClientString } from "./ClientString.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
-import type { SpliceableUnknown, Spliced } from "./Spliceable.js";
+import type { Spliceable, Spliced } from "./Spliceable.js";
 
 // A built-in receiver autoboxes to its client type, so its members resolve
 // against the explicit client API.
@@ -29,7 +29,7 @@ type SplicedMembers<T extends ClientObject> = {
     ? never
     : T[K] extends ClientConstructor
       ? never
-      : T[K] extends SpliceableUnknown
+      : T[K] extends Spliceable
         ? K
         : never]: Spliced<T[K]>;
 };

@@ -1,5 +1,5 @@
 cs.liftValue(                → cs`
-cs.spliceValue(              →  [-semantic]
+cs.splice(                   →  [-semantic]
 (lhs)                        → $lhs
 )                            →  [-semantic]
  +                           →  + 
@@ -13,7 +13,7 @@ __cs_foo$                    → foo$
 );                           → ;
 \n                           → \n  
 return                       → return 
-cs.spliceValue(              → ${ [-semantic]
+cs.splice(                   → ${ [-semantic]
 add(                         → add(
 cs.liftValue(                → cs`
 __cs_foo$                    → foo$
