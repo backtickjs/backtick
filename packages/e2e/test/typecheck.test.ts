@@ -40,6 +40,11 @@ function runBacktickTsc(): string {
     require.resolve("@backtickjs/tsc/bin/backtick-tsc.js"),
     "--noEmit",
     "--ignoreConfig",
+    // Plain output always: under an interactive turbo run (a TTY, or the
+    // FORCE_COLOR it sets), tsc auto-enables pretty colored diagnostics,
+    // which parse as nothing below.
+    "--pretty",
+    "false",
     "--target",
     "esnext",
     "--module",
@@ -108,6 +113,15 @@ const unexpected: string[] = [];
     } else {
       current = null;
     }
+  }
+  // Output that doesn't parse must abort an update run before any snapshot
+  // is written: unparsed diagnostics would blank every snapshot to
+  // "No diagnostics.".
+  if (process.env.UPDATE_SNAPSHOTS && unexpected.length > 0) {
+    throw new Error(
+      `backtick-tsc output didn't parse; refusing to update snapshots:\n` +
+        unexpected.slice(0, 5).join("\n"),
+    );
   }
 }
 
