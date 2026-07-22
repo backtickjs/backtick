@@ -21,7 +21,7 @@ return                       → return
 {                            → {\n    
 count                        → count
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -29,7 +29,7 @@ length                       → length
 ,                            → ,\n    
 all                          → all
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -42,7 +42,7 @@ __cs_four                    → four
 ,                            → ,\n    
 part                         → part
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -55,7 +55,7 @@ slice                        → slice
 ,                            → ,\n    
 where                        → where
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -66,7 +66,7 @@ indexOf                      → indexOf
 ,                            → ,\n    
 has                          → has
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -77,7 +77,7 @@ includes                     → includes
 ,                            → ,\n    
 text                         → text
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -88,7 +88,7 @@ join                         → join
 ,                            → ,\n    
 doubled                      → doubled
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .
@@ -103,7 +103,7 @@ __cs_n                       → n
 ,                            → ,\n    
 small                        → small
 :                            → : 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_coins                   → coins
 )                            → 
 .                            → .

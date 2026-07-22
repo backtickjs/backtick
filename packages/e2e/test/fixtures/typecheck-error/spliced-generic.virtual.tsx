@@ -20,4 +20,4 @@ function wrap<T extends ClientObject>(value: T): Client<() => T> {
   return cs.liftValue(() => cs.spliceValue((value)));
 }
 
-export default cs.liftValue(cs.virtualize(cs.spliceValue(wrap(new Point(cs.liftValue(7))))()).x);
+export default cs.liftValue(cs.receiver(cs.spliceValue(wrap(new Point(cs.liftValue(7))))()).x);

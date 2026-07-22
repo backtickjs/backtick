@@ -6,7 +6,7 @@ import { cs } from "@backtickjs/core";
 const pick = cs.liftValue((__cs_p: {
     x: number;
 } | null) => {
-    return (cs.virtualize(__cs_p)?.x ?? null);
+    return (cs.receiver(__cs_p)?.x ?? null);
 });
 
 const deep = cs.liftValue((__cs_o: {
@@ -14,11 +14,11 @@ const deep = cs.liftValue((__cs_o: {
         z: number;
     } | null;
 } | null) => {
-    return (cs.virtualize((cs.virtualize(__cs_o)?.inner ?? null))?.z ?? null);
+    return (cs.receiver((cs.receiver(__cs_o)?.inner ?? null))?.z ?? null);
 });
 
 const shout = cs.liftValue((__cs_s: string | null) => {
-    return (cs.virtualize(__cs_s)?.concat("!") ?? null);
+    return (cs.receiver(__cs_s)?.concat("!") ?? null);
 });
 
 export default cs.liftValue({ found: cs.spliceValue((pick))({ x: 5 }), missing: cs.spliceValue((pick))(null), deep: cs.spliceValue((deep))({ inner: { z: 7 } }), cut: cs.spliceValue((deep))({ inner: null }), top: cs.spliceValue((deep))(null), loud: cs.spliceValue((shout))("hi"), silent: cs.spliceValue((shout))(null) });

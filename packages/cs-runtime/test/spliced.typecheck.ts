@@ -8,11 +8,11 @@ import type {
   ClientUnknown,
   SpliceableUnknown,
   Spliced,
-  Virtualized,
+  Receiver,
 } from "@backtickjs/cs-runtime";
 
 declare function spliced<T extends SpliceableUnknown>(value: T): Spliced<T>;
-declare function virtualize<T extends ClientUnknown>(value: T): Virtualized<T>;
+declare function receiver<T extends ClientUnknown>(value: T): Receiver<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 
@@ -64,23 +64,23 @@ point satisfies Point;
 
 // Members unwrap at access time, through the member-access view: a
 // `Client`-typed field or getter reads as its payload.
-virtualize(point).x satisfies number;
-virtualize(point).sum() satisfies number;
+receiver(point).x satisfies number;
+receiver(point).sum() satisfies number;
 
 // The view filters a `ClientObject`'s members to the spliceable ones, like
 // reflection does at bundle time. A bare function member isn't spliceable —
 // a client-callable member is declared as a `Client` function, like `sum` —
 // so a host-only method doesn't exist on the client.
 // @ts-expect-error — a getter reflecting no data doesn't exist on the client.
-virtualize(point).reflectsNothing;
+receiver(point).reflectsNothing;
 // @ts-expect-error — a host method isn't a client function; declare it as a
 // `Client<(factor: number) => Point>` member to call it from a script.
-virtualize(point).scaled;
+receiver(point).scaled;
 // @ts-expect-error — the marker doesn't exist on the client.
-virtualize(point)["@backtickjs"];
+receiver(point)["@backtickjs"];
 // @ts-expect-error — a class member doesn't reflect: reflection filters it
 // like a host method (see `isSpliceable`).
-virtualize(point).cls;
+receiver(point).cls;
 
 const segment = spliced(
   new Segment(
@@ -92,32 +92,32 @@ const segment = spliced(
 
 // A `ClientObject` member stays nominal, by `Spliced`'s rule — hovers and
 // errors say `Point` — and unwraps at the next access, where the compiler
-// virtualizes the receiver again.
-virtualize(segment).from satisfies Point;
-virtualize(virtualize(segment).from).x satisfies number;
-virtualize(virtualize(segment).to).sum() satisfies number;
+// views the receiver again.
+receiver(segment).from satisfies Point;
+receiver(receiver(segment).from).x satisfies number;
+receiver(receiver(segment).to).sum() satisfies number;
 
 // Plain data crosses into the client unchanged, like a plain object member.
-virtualize(segment).label satisfies string;
+receiver(segment).label satisfies string;
 
 // A primitive receiver autoboxes to its client wrapper's view: members
 // resolve against the explicit client API, not the host lib's. The wrapper
 // applies to the receiver only — a primitive VALUE crosses unchanged (see
 // `label` above), so re-virtualizing stays idempotent.
-virtualize(virtualize(segment).label).concat("!") satisfies string;
+receiver(receiver(segment).label).concat("!") satisfies string;
 // @ts-expect-error — `padStart` isn't part of the client string API.
-virtualize(virtualize(segment).label).padStart;
-virtualize(virtualize(point).x).toString(2) satisfies string;
-virtualize(true).toString() satisfies string;
+receiver(receiver(segment).label).padStart;
+receiver(receiver(point).x).toString(2) satisfies string;
+receiver(true).toString() satisfies string;
 
 // A `cs` script's payload type passes through unchanged.
 spliced(clientArrow)() satisfies number;
 
 // Member access on a free host reference is outside `ClientUnknown`, so it
-// can't be virtualized: a script may call a host global but not reach into
+// has no receiver view: a script may call a host global but not reach into
 // one.
 // @ts-expect-error — `console` is a host interface, not a client value.
-virtualize(console);
+receiver(console);
 
 // An array reaches a receiver position already unwrapped — `Spliced` maps a
 // fragment array elementwise before it crosses — and then reads as the
@@ -125,12 +125,12 @@ virtualize(console);
 // producing `undefined`.
 declare const clientNumbers: Client<number>[];
 spliced(clientNumbers) satisfies number[];
-virtualize(spliced(clientNumbers)) satisfies ClientArray<number>;
-virtualize(spliced(clientNumbers)).length satisfies number;
+receiver(spliced(clientNumbers)) satisfies ClientArray<number>;
+receiver(spliced(clientNumbers)).length satisfies number;
 // @ts-expect-error — mutators aren't part of the client array API.
-virtualize(spliced(clientNumbers)).pop;
+receiver(spliced(clientNumbers)).pop;
 // @ts-expect-error — a raw fragment array is a host value, not a client one.
-virtualize(clientNumbers);
+receiver(clientNumbers);
 
 // An element is opaque in a script: it splices in whole — the payload stays
 // `ClientElement` — and no member reflects on the client.
@@ -138,10 +138,10 @@ declare const element: ClientElement;
 spliced(element) satisfies ClientElement;
 // @ts-expect-error — an element's structure belongs to the client runtime,
 // not the script.
-virtualize(element).type;
+receiver(element).type;
 // @ts-expect-error — see `type` above.
-virtualize(element).key;
+receiver(element).key;
 // @ts-expect-error — see `type` above.
-virtualize(element).props;
+receiver(element).props;
 // @ts-expect-error — the marker doesn't exist on the client.
-virtualize(element)["@backtickjs"];
+receiver(element)["@backtickjs"];

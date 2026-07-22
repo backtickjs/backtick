@@ -19,5 +19,5 @@ class Point implements ClientObject {
 export default cs.liftValue((() => {
     const __cs_C = cs.spliceValue((Point));
     const __cs_p = new (__cs_C)(cs.liftValue(1), cs.liftValue(2));
-    return cs.virtualize(__cs_p).x + cs.virtualize(__cs_p).y;
+    return cs.receiver(__cs_p).x + cs.receiver(__cs_p).y;
 })());

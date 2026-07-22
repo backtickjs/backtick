@@ -600,13 +600,14 @@ function rewriteNodeImpl(
     const optional = ts.isOptionalChain(node);
 
     const expression = rewriteNode(ts, state, node.expression);
-    // Member access is virtualized: the receiver is viewed as `Virtualized<T>`
-    // via `cs.virtualize`, so a host-typed receiver's members read as what
-    // the client receives, while the access itself stays a real property
-    // access (hover, rename, and completions on the name keep working).
+    // Member access reads off the receiver's client-side view: `cs.receiver`
+    // types it as `Receiver<T>`, so a host-typed receiver's members read
+    // as what the client receives, while the access itself stays a real
+    // property access (hover, rename, and completions on the name keep
+    // working).
     const propertyName = ts.factory.createIdentifier(name);
     state.mappings.set(propertyName, node.name);
-    const virtualReceiver = call(ts, "cs", "virtualize", [
+    const virtualReceiver = call(ts, "cs", "receiver", [
       expression.virtual as ts.Expression,
     ]);
     state.mappings.set(virtualReceiver, node.expression);
@@ -672,15 +673,15 @@ function rewriteNodeImpl(
       const optional = ts.isOptionalChain(access);
       const receiver = rewriteNode(ts, state, access.expression);
       const name = access.name.text;
-      // A method call goes through the same virtualized access: the member
-      // is read off `cs.virtualize(receiver)`, then the call checks its
+      // A method call goes through the same client-side view: the member
+      // is read off `cs.receiver(...)`, then the call checks its
       // arguments and yields its return type. The runtime keeps the direct
       // property call, so receiver binding is unchanged. An optional
       // receiver (`a?.b(…)`) short-circuits a null `a` to null, so the
       // call carries `?? null` like an optional access.
       const propertyName = ts.factory.createIdentifier(name);
       state.mappings.set(propertyName, access.name);
-      const virtualReceiver = call(ts, "cs", "virtualize", [
+      const virtualReceiver = call(ts, "cs", "receiver", [
         receiver.virtual as ts.Expression,
       ]);
       state.mappings.set(virtualReceiver, access.expression);

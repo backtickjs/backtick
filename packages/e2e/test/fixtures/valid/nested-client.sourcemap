@@ -40,8 +40,8 @@ cs.spliceValue(              →  [-semantic]
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.virtualize(               → 
-cs.virtualize(               → 
+cs.receiver(                 → 
+cs.receiver(                 → 
 __cs_s                       → s
 )                            → 
 .                            → .
@@ -51,8 +51,8 @@ to                           → to
 sum                          → sum
 ()                           → ()
  -                           →  - 
-cs.virtualize(               → 
-cs.virtualize(               → 
+cs.receiver(                 → 
+cs.receiver(                 → 
 __cs_s                       → s
 )                            → 
 .                            → .

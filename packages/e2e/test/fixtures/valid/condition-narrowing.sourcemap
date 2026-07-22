@@ -19,7 +19,7 @@ null                   → null
 )                      → ) 
 {\n                    → {\n    
 return                 → return 
-cs.virtualize(         → 
+cs.receiver(           → 
 __cs_text              → text
 )                      → 
 .                      → .
@@ -42,7 +42,7 @@ __cs_text              → text
  !==                   →  !== 
 null                   → null
  &&                    →  && 
-cs.virtualize(         → 
+cs.receiver(           → 
 __cs_text              → text
 )                      → 
 .                      → .
@@ -55,7 +55,7 @@ charAt                 → charAt
 )                      → ) 
 {\n                    → {\n    
 return                 → return 
-cs.virtualize(         → 
+cs.receiver(           → 
 __cs_text              → text
 )                      → 
 .                      → .

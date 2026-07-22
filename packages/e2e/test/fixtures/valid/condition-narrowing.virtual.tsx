@@ -11,10 +11,10 @@ const flags = { strict: cs.liftValue(true) };
 
 const label: Client<(text: string | null, upper: boolean) => string> = cs.liftValue((__cs_text: string | null, __cs_upper: boolean) => {
     if ((cs.condition(__cs_upper) && __cs_upper) && __cs_text !== null) {
-        return cs.virtualize(__cs_text).toUpperCase();
+        return cs.receiver(__cs_text).toUpperCase();
     }
-    if ((cs.condition(cs.spliceValue(flags.strict)) && cs.spliceValue(flags.strict)) && __cs_text !== null && cs.virtualize(__cs_text).charAt(0) === "!") {
-        return cs.virtualize(__cs_text).concat("?");
+    if ((cs.condition(cs.spliceValue(flags.strict)) && cs.spliceValue(flags.strict)) && __cs_text !== null && cs.receiver(__cs_text).charAt(0) === "!") {
+        return cs.receiver(__cs_text).concat("?");
     }
     return "none";
 });

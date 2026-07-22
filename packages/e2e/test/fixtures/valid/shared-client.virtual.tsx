@@ -23,12 +23,12 @@ const shared = new Point(cs.liftValue(1), cs.liftValue(2));
 
 const left = cs.liftValue((() => {
     const __cs_p = cs.spliceValue((shared));
-    return cs.virtualize(__cs_p).sum();
+    return cs.receiver(__cs_p).sum();
 })());
 
 const right = cs.liftValue((() => {
     const __cs_p = cs.spliceValue((shared));
-    return cs.virtualize(__cs_p).x;
+    return cs.receiver(__cs_p).x;
 })());
 
 export default cs.liftValue(cs.spliceValue((left)) + cs.spliceValue((right)));

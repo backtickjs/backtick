@@ -24,7 +24,7 @@ cs.spliceValue(              →  [-semantic]
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_p                       → p
 )                            → 
 .                            → .
@@ -42,7 +42,7 @@ cs.spliceValue(              →  [-semantic]
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_p                       → p
 )                            → 
 .                            → .

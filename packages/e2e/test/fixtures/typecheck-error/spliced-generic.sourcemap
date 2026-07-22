@@ -5,7 +5,7 @@ cs.spliceValue(  →  [-semantic]
 )                →  [-semantic]
 )                → `
 cs.liftValue(    → cs`
-cs.virtualize(   → 
+cs.receiver(     → 
 cs.spliceValue(  → ${ [-semantic]
 wrap(new Point(  → wrap(new Point(
 cs.liftValue(    → cs`

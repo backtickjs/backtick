@@ -14,7 +14,7 @@ __cs_coins                    → coins
 const                         → const 
 __cs_last                     → last
  =                            →  = 
-cs.virtualize(                → 
+cs.receiver(                  → 
 __cs_coins                    → coins
 )                             → 
 .                             → .
@@ -37,7 +37,7 @@ __cs_coins                    → coins
 ]                             → ]
 ;                             → ;
 \n                            → \n  
-cs.virtualize(                → 
+cs.receiver(                  → 
 __cs_coins                    → coins
 )                             → 
 .                             → .

@@ -39,7 +39,7 @@ type SplicedMembers<T extends ClientObject> = {
 //   ClientElement                   -> {}: opaque
 //   ClientObject                    -> SplicedMembers<T>
 //   anything else                   -> unchanged
-export type Virtualized<T extends ClientUnknown> = T extends
+export type Receiver<T extends ClientUnknown> = T extends
   | string
   | number
   | boolean

@@ -1,6 +1,6 @@
 cs.liftValue(    → cs`
-cs.virtualize(   → 
-cs.virtualize(   → 
+cs.receiver(     → 
+cs.receiver(     → 
 cs.spliceValue(  → ${ [-semantic]
 new Wallet([     → new Wallet([
 cs.liftValue(    → cs`

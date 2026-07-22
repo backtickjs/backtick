@@ -33,5 +33,5 @@ class Segment implements ClientObject {
 
 export default cs.liftValue((() => {
     const __cs_s = new (cs.spliceValue((Segment)))(cs.liftValue(new (cs.spliceValue((Point)))(cs.liftValue(1), cs.liftValue(2))), cs.liftValue(new (cs.spliceValue((Point)))(cs.liftValue(1), cs.liftValue(2))));
-    return cs.virtualize(cs.virtualize(__cs_s).to).sum() - cs.virtualize(cs.virtualize(__cs_s).from).sum();
+    return cs.receiver(cs.receiver(__cs_s).to).sum() - cs.receiver(cs.receiver(__cs_s).from).sum();
 })());

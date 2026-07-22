@@ -41,7 +41,7 @@ cs.liftValue(                 → cs`
 )                             → } [-semantic]
 ;                             → ;
 \n                            → \n  
-cs.virtualize(                → 
+cs.receiver(                  → 
 __cs_a                        → a
 )                             → 
 .                             → .

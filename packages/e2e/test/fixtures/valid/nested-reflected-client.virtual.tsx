@@ -37,9 +37,9 @@ const segment = new Segment(new Point(cs.liftValue(1), cs.liftValue(2)), new Poi
 
 export default cs.liftValue((() => {
     const __cs_s = cs.spliceValue((segment));
-    const __cs_rise = cs.virtualize(cs.virtualize(__cs_s).to).y - cs.virtualize(cs.virtualize(__cs_s).from).y;
-    if ((cs.condition(cs.virtualize(__cs_s).vertical()) && cs.virtualize(__cs_s).vertical())) {
+    const __cs_rise = cs.receiver(cs.receiver(__cs_s).to).y - cs.receiver(cs.receiver(__cs_s).from).y;
+    if ((cs.condition(cs.receiver(__cs_s).vertical()) && cs.receiver(__cs_s).vertical())) {
         return __cs_rise;
     }
-    return cs.virtualize(cs.virtualize(__cs_s).to).sum() - cs.virtualize(cs.virtualize(__cs_s).from).sum();
+    return cs.receiver(cs.receiver(__cs_s).to).sum() - cs.receiver(cs.receiver(__cs_s).from).sum();
 })());

@@ -3,7 +3,7 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { SpliceableValue, Spliced } from "./Spliceable.js";
-import type { Virtualized } from "./Virtualized.js";
+import type { Receiver } from "./Receiver.js";
 
 // The root of a value script — a block whose every path `return`s
 function liftValue<const T extends ClientValue>(_value: T): Client<T> {
@@ -44,9 +44,9 @@ function condition(_condition: boolean): boolean {
   );
 }
 
-function virtualize<T extends ClientUnknown>(_value: T): Virtualized<T> {
+function receiver<T extends ClientUnknown>(_value: T): Receiver<T> {
   throw new Error(
-    "Don't call `cs.virtualize` directly; it's used to generate virtual " +
+    "Don't call `cs.receiver` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -67,6 +67,6 @@ export const cs = Object.assign(
     spliceValue,
     spliceAction,
     condition,
-    virtualize,
+    receiver,
   },
 );

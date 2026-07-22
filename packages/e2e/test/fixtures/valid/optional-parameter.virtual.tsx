@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // `?` marks a nullable parameter: an omitted argument binds as null — the
 // language's absent value; `undefined` never arises.
 const greet = cs.liftValue((__cs_name: string | null = null) => {
-    return (cs.virtualize(__cs_name)?.concat("!") ?? null);
+    return (cs.receiver(__cs_name)?.concat("!") ?? null);
 });
 
 // A function-typed annotation unions parenthesized: `(() => number) | null`.

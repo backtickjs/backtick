@@ -22,19 +22,19 @@ cs.liftValue(                → cs`
 const                        → const 
 __cs_brightness              → brightness
  =                           →  = 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_c                       → c
 )                            → 
 .                            → .
 r                            → r
  +                           →  + 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_c                       → c
 )                            → 
 .                            → .
 g                            → g
  +                           →  + 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_c                       → c
 )                            → 
 .                            → .

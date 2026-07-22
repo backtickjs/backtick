@@ -13,7 +13,7 @@ __cs_pick                    → pick
 (                            → (
 __cs_c                       → c
 : Color) =>                  → : Color) => 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_c                       → c
 )                            → 
 .                            → .

@@ -21,6 +21,6 @@ class Color implements ClientObject {
 }
 
 export default cs.liftValue((() => {
-    const __cs_pick = (__cs_c: Color) => cs.virtualize(__cs_c).r + 1;
+    const __cs_pick = (__cs_c: Color) => cs.receiver(__cs_c).r + 1;
     return __cs_pick(cs.spliceValue(new Color(cs.liftValue(7), "#123")));
 })());

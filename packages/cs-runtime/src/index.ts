@@ -23,6 +23,6 @@ export {
   type SpliceableUnknown,
   type Spliced,
 } from "./Spliceable.js";
-export type { Virtualized } from "./Virtualized.js";
+export type { Receiver } from "./Receiver.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
 export { create as _jsx } from "./ClientElement.js";

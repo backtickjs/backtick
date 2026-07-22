@@ -20,13 +20,13 @@ __cs_C                       → C
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_p                       → p
 )                            → 
 .                            → .
 x                            → x
  +                           →  + 
-cs.virtualize(               → 
+cs.receiver(                 → 
 __cs_p                       → p
 )                            → 
 .                            → .

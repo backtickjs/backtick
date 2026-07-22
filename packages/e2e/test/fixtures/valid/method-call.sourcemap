@@ -6,8 +6,8 @@ __cs_greeting                → greeting
 ;                            → ;
 \n                           → \n  
 return                       → return 
-cs.virtualize(               → 
-cs.virtualize(               → 
+cs.receiver(                 → 
+cs.receiver(                 → 
 __cs_greeting                → greeting
 )                            → 
 .                            → .
