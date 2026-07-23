@@ -1,0 +1,82 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "let",
+            "name": "count",
+            "expression": 0
+          },
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "bump",
+            "expression": {
+              "#": "arrow",
+              "params": [],
+              "body": {
+                "#": "block",
+                "statements": [
+                  {
+                    "#": "assignment",
+                    "name": "count",
+                    "expression": {
+                      "#": "binop",
+                      "operator": "+",
+                      "left": {
+                        "#": "identifier",
+                        "name": "count"
+                      },
+                      "right": 1
+                    }
+                  },
+                  {
+                    "#": "return",
+                    "expression": {
+                      "#": "identifier",
+                      "name": "count"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "binop",
+              "operator": "+",
+              "left": {
+                "#": "call",
+                "callee": {
+                  "#": "identifier",
+                  "name": "bump"
+                },
+                "args": []
+              },
+              "right": {
+                "#": "call",
+                "callee": {
+                  "#": "identifier",
+                  "name": "bump"
+                },
+                "args": []
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

@@ -21,6 +21,9 @@ export interface RewriteState {
   // set while rewriting the statements of a body that returns a value,
   // where side effects — expression statements — are banned
   valueBody?: boolean;
+  // the binding keys this script captures from enclosing scripts — not
+  // assignable: a nested script captures the value, not the variable
+  captures?: Set<string>;
 }
 
 // Boolean by construction, so no check needed: a comparison yields boolean,
@@ -993,6 +996,18 @@ function rewriteNodeImpl(
       node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
       ts.isIdentifier(node.left)
     ) {
+      // A script's own variables are assignable anywhere within it, but a
+      // captured one isn't: the write would mutate the nested script's
+      // copy and silently not propagate. An unresolved target keeps the
+      // resolver's own "Cannot find name".
+      const target = state.bindings.get(node.left);
+      if (target != null && !state.dup && state.captures?.has(target)) {
+        state.errors.set(
+          node.left,
+          "Can't assign to a variable captured from an enclosing script: " +
+            "a nested script captures the value, not the variable.",
+        );
+      }
       return {
         virtual: ts.factory.createBinaryExpression(
           lhs.virtual as ts.Expression,

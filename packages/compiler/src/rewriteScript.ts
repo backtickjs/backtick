@@ -53,6 +53,10 @@ export function rewriteScript(
     };
   }
 
+  // A captured binding can be read but not assigned; the assignment
+  // branch checks membership.
+  state.captures = new Set(captures);
+
   // A block that returns or throws is a value script;
   // one that completes without returning is an action script.
   let kind: "value" | "action" = "value";

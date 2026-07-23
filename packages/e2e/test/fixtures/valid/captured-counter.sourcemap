@@ -1,0 +1,33 @@
+cs.lift(cs.const((() => {\n      → cs`{\n  
+let                              → let 
+__cs_count                       → count
+ = cs.let(                       →  = 
+0                                → 0
+);                               → ;
+\n                               → \n  
+const                            → const 
+__cs_bump                        → bump
+ = cs.const(                     →  = 
+() => {\n                        → () => {\n    
+__cs_count                       → count
+ = cs.const(                     →  = 
+__cs_count                       → count
+ +                               →  + 
+1                                → 1
+)                                → 
+;                                → ;
+\n                               → \n    
+return                           → return 
+__cs_count                       → count
+;                                → ;
+\n    }                          → \n  }
+);                               → ;
+\n                               → \n  
+return                           → return 
+__cs_bump                        → bump
+()                               → ()
+ +                               →  + 
+__cs_bump                        → bump
+()                               → ()
+;                                → ;
+\n})()))                         → \n}`
