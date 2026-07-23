@@ -15,8 +15,8 @@ export interface RewriteState {
   mappings: Map<ts.Node, ts.Node>; // virtual -> source
   // virtual nodes whose mappings carry non-default editor behavior
   codeInformation: Map<ts.Node, CodeInformation>;
-  // set while rewriting a check's bare duplicate (a condition's or an
-  // initializer's), so the duplicate gets no checks of its own
+  // set while rewriting a condition's bare duplicate, so nested conditions
+  // aren't re-duplicated (the copy would otherwise grow exponentially)
   dup?: boolean;
   // set while rewriting the statements of a body that returns a value,
   // where side effects — expression statements — are banned
@@ -382,10 +382,9 @@ function rewriteNodeImpl(
     const expression = rewriteNode(ts, state, node.expression);
     // A statement discards its expression, which is only silent for
     // `void`. Assignments are language statements.
-    const checked =
-      assignment || state.dup
-        ? (expression.virtual as ts.Expression)
-        : call(ts, "cs", "statement", [expression.virtual as ts.Expression]);
+    const checked = assignment
+      ? (expression.virtual as ts.Expression)
+      : call(ts, "cs", "statement", [expression.virtual as ts.Expression]);
     return {
       virtual: ts.factory.createExpressionStatement(checked),
       runtime: expression.runtime,
@@ -400,7 +399,7 @@ function rewriteNodeImpl(
     // A bare `return` exits an action early. In a value script it returns
     // nothing where a value is due — rewritten as `return null`, the
     // suggested fix, so the one error stands alone.
-    if (state.valueBody && !state.dup) {
+    if (state.valueBody) {
       state.errors.set(
         node,
         "A script that returns a value can't `return` without one.",
@@ -421,7 +420,7 @@ function rewriteNodeImpl(
     const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
-        state.valueBody && !state.dup
+        state.valueBody
           ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
           : (expression.virtual as ts.Expression),
       ),
@@ -1003,7 +1002,7 @@ function rewriteNodeImpl(
       // copy and silently not propagate. An unresolved target keeps the
       // resolver's own "Cannot find name".
       const target = state.bindings.get(node.left);
-      if (target != null && !state.dup && state.captures?.has(target)) {
+      if (target != null && state.captures?.has(target)) {
         state.errors.set(
           node.left,
           "Can't assign to a variable captured from an enclosing script: " +
