@@ -5,9 +5,8 @@ import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
 import type { ClientScript, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
-import { ownReturn } from "./ownReturn.js";
+import { bodyKind } from "./bodyKind.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
-import { terminates } from "./terminates.js";
 import type { SourceRange } from "./SourceRange.js";
 
 export interface RewrittenScript {
@@ -29,14 +28,6 @@ export function rewriteScript(
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
-  const state: RewriteState = {
-    script: clientScript,
-    bindings,
-    errors: new Map(),
-    mappings: new Map(),
-    codeInformation: new Map(),
-  };
-
   const [statement] = fileWithPlaceholders.statements;
   let scriptNode: ts.Expression | ts.Block;
   if (statement && ts.isExpressionStatement(statement)) {
@@ -53,39 +44,15 @@ export function rewriteScript(
     };
   }
 
-  // A captured binding can be read but not assigned; the assignment
-  // branch checks membership.
-  state.captures = new Set(captures);
-
-  // A block that returns or throws is a value script;
-  // one that completes without returning is an action script.
-  let kind: "value" | "action" = "value";
-  if (ts.isBlock(scriptNode)) {
-    // A valued `return` makes a value script, as does exiting every path
-    // with no `return` at all (a throw-only block). Bare returns are an
-    // action's early exit.
-    const returns = ownReturn(ts, scriptNode);
-    const valued = ownReturn(ts, scriptNode, true);
-    const exits = terminates(ts, scriptNode);
-    kind = valued || (exits && !returns) ? "value" : "action";
-    state.valueBody = kind === "value";
-    if (valued && !exits) {
-      return {
-        virtual: sourceNode,
-        runtime: sourceNode,
-        sourceMaps: new Map(),
-        codeInformation: new Map(),
-        diagnostics: [
-          {
-            range: clientScript.toSourceRange(scriptNode),
-            message: "Not all code paths return a value.",
-            category: ts.DiagnosticCategory.Error,
-            code: 0,
-          },
-        ],
-      };
-    }
-  }
+  const state: RewriteState = {
+    script: clientScript,
+    bindings,
+    errors: new Map(),
+    mappings: new Map(),
+    codeInformation: new Map(),
+    captures: new Set(captures),
+    bodyKind: ts.isBlock(scriptNode) ? bodyKind(ts, scriptNode) : "value",
+  };
 
   const rewritten = rewriteNode(ts, state, scriptNode);
 
@@ -132,7 +99,7 @@ export function rewriteScript(
       ),
       ts.factory.createPropertyAssignment(
         "kind",
-        ts.factory.createStringLiteral(kind),
+        ts.factory.createStringLiteral(state.bodyKind),
       ),
       ts.factory.createPropertyAssignment(
         "splices",

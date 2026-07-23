@@ -2,10 +2,9 @@ import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { call, sourceLoc, varDecl } from "./nodeFactory.js";
-import { ownReturn } from "./ownReturn.js";
+import { bodyKind, partialReturn } from "./bodyKind.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
-import { terminates } from "./terminates.js";
 import { mangle } from "./unmangle.js";
 
 export interface RewriteState {
@@ -18,9 +17,9 @@ export interface RewriteState {
   // set while rewriting a condition's bare duplicate, so nested conditions
   // aren't re-duplicated (the copy would otherwise grow exponentially)
   dup?: boolean;
-  // set while rewriting the statements of a body that returns a value,
-  // where side effects — expression statements — are banned
-  valueBody?: boolean;
+  // the enclosing body's classification: a value body bans side-effect
+  // statements, and its returns take the value check
+  bodyKind: "value" | "action";
   // the binding keys this script captures from enclosing scripts — not
   // assignable: a nested script captures the value, not the variable
   captures?: Set<string>;
@@ -234,6 +233,12 @@ function rewriteNodeImpl(
     sourceLoc(ts, state.script.toSourceLocation(target));
 
   if (ts.isBlock(node)) {
+    if (
+      (ts.isSourceFile(node.parent) || ts.isArrowFunction(node.parent)) &&
+      partialReturn(ts, node)
+    ) {
+      state.errors.set(node, "Not all code paths return a value.");
+    }
     const statements = node.statements.map((statement) =>
       rewriteNode(ts, state, statement),
     );
@@ -372,7 +377,7 @@ function rewriteNodeImpl(
     // An expression statement is a side effect (or dead code). It still
     // rewrites so its splices don't dangle into "Cannot find name"
     // cascades.
-    if (state.valueBody && !assignment) {
+    if (state.bodyKind === "value" && !assignment) {
       state.errors.set(
         node,
         "A script that returns a value can't have side effects; run them " +
@@ -399,14 +404,14 @@ function rewriteNodeImpl(
     // A bare `return` exits an action early. In a value script it returns
     // nothing where a value is due — rewritten as `return null`, the
     // suggested fix, so the one error stands alone.
-    if (state.valueBody) {
+    if (state.bodyKind === "value") {
       state.errors.set(
         node,
         "A script that returns a value can't `return` without one.",
       );
     }
     return {
-      virtual: state.valueBody
+      virtual: state.bodyKind === "value"
         ? ts.factory.createReturnStatement(ts.factory.createNull())
         : ts.factory.createReturnStatement(),
       runtime: call(ts, "v", "return", [
@@ -420,7 +425,7 @@ function rewriteNodeImpl(
     const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
-        state.valueBody
+        state.bodyKind === "value"
           ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
           : (expression.virtual as ts.Expression),
       ),
@@ -855,19 +860,14 @@ function rewriteNodeImpl(
     });
 
     if (params.every((param) => param != null)) {
-      let bodyState = { ...state };
-      if (ts.isBlock(node.body)) {
-        // The script classifier's rule: valued returns (or throw-only)
-        // make a value body; bare returns are an action's early exit.
-        const returns = ownReturn(ts, node.body);
-        const valued = ownReturn(ts, node.body, true);
-        const exits = terminates(ts, node.body);
-        bodyState.valueBody = valued || (exits && !returns);
-        if (valued && !exits) {
-          state.errors.set(node.body, "Not all code paths return a value.");
-          return unsupported();
-        }
-      }
+      // An arrow's body classifies on its own — never inherited from the
+      // enclosing body. An expression body implicitly returns its
+      // expression, so it's a value body (today the kind only drives
+      // statement-level checks, which an expression body can't contain).
+      const bodyState: RewriteState = {
+        ...state,
+        bodyKind: ts.isBlock(node.body) ? bodyKind(ts, node.body) : "value",
+      };
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
