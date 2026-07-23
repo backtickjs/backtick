@@ -12,7 +12,8 @@ __cs_pick                        → pick
  = cs.const(                     →  = 
 (                                → (
 __cs_c                           → c
-: Color) =>                      → : Color) => 
+: Color                          → : Color
+) =>                             → ) => 
 cs.receiver(                     → 
 __cs_c                           → c
 )                                → 

@@ -1,79 +1,76 @@
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_name                                 → name
-: string | null = null) => {\n            → ?: string) => {\n  
-return                                    → return 
-(                                         → 
-cs.receiver(                              → 
-__cs_name                                 → name
-)                                         → 
-?.                                        → ?.
-concat                                    → concat
-(                                         → (
-"!"                                       → "!"
-) ?? null)                                → )
-;                                         → ;
-\n}                                       → \n}
-))                                        → `
-cs.lift(cs.const(                         → cs`
-() =>                                     → () => 
-2                                         → 2
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_cb                                   → cb
-: (() => number) | null = null) => {\n    → ?: () => number) => {\n  
-return                                    → return 
-__cs_cb                                   → cb
-?.()                                      → ?.()
- ??                                       →  ?? 
-0                                         → 0
-;                                         → ;
-\n}                                       → \n}
-))                                        → `
-cs.lift(cs.const(                         → cs`
-{                                         → ({\n  
-named                                     → named
-:                                         → : 
-cs.splice(                                →  [-semantic]
-(greet)                                   → $greet
-)                                         →  [-semantic]
-(                                         → (
-"hi"                                      → "hi"
-)                                         → )
-,                                         → ,\n  
-omitted                                   → omitted
-:                                         → : 
-cs.splice(                                →  [-semantic]
-(greet)                                   → $greet
-)                                         →  [-semantic]
-()                                        → ()
-,                                         → ,\n  
-explicit                                  → explicit
-:                                         → : 
-cs.splice(                                →  [-semantic]
-(greet)                                   → $greet
-)                                         →  [-semantic]
-(                                         → (
-null                                      → null
-)                                         → )
-,                                         → ,\n  
-supplied                                  → supplied
-:                                         → : 
-cs.splice(                                →  [-semantic]
-(call)                                    → $call
-)                                         →  [-semantic]
-(                                         → (
-cs.splice(                                →  [-semantic]
-(double)                                  → $double
-)                                         →  [-semantic]
-)                                         → )
-,                                         → ,\n  
-fallback                                  → fallback
-:                                         → : 
-cs.splice(                                →  [-semantic]
-(call)                                    → $call
-)                                         →  [-semantic]
-()                                        → ()
- }                                        → ,\n})
-))                                        → `
+cs.lift(cs.const(        → cs`
+(                        → (
+__cs_name                → name
+: string | null          → ?: string
+) => {\n                 → ) => {\n  
+return                   → return 
+(                        → 
+cs.receiver(             → 
+__cs_name                → name
+)                        → 
+?.                       → ?.
+concat                   → concat
+(                        → (
+"!"                      → "!"
+) ?? null)               → )
+;                        → ;
+\n}                      → \n}
+))                       → `
+cs.lift(cs.const(        → cs`
+() =>                    → () => 
+2                        → 2
+))                       → `
+cs.lift(cs.const(        → cs`
+(                        → (
+__cs_cb                  → cb
+: (() => number) | null  → ?: () => number
+) => {\n                 → ) => {\n  
+return                   → return 
+__cs_cb                  → cb
+?.()                     → ?.()
+ ??                      →  ?? 
+0                        → 0
+;                        → ;
+\n}                      → \n}
+))                       → `
+cs.lift(cs.const(        → cs`
+{                        → ({\n  
+named                    → named
+:                        → : 
+cs.splice(               →  [-semantic]
+(greet)                  → $greet
+)                        →  [-semantic]
+(                        → (
+"hi"                     → "hi"
+)                        → )
+,                        → ,\n  
+explicit                 → explicit
+:                        → : 
+cs.splice(               →  [-semantic]
+(greet)                  → $greet
+)                        →  [-semantic]
+(                        → (
+null                     → null
+)                        → )
+,                        → ,\n  
+supplied                 → supplied
+:                        → : 
+cs.splice(               →  [-semantic]
+(call)                   → $call
+)                        →  [-semantic]
+(                        → (
+cs.splice(               →  [-semantic]
+(double)                 → $double
+)                        →  [-semantic]
+)                        → )
+,                        → ,\n  
+fallback                 → fallback
+:                        → : 
+cs.splice(               →  [-semantic]
+(call)                   → $call
+)                        →  [-semantic]
+(                        → (
+null                     → null
+)                        → )
+ }                       → ,\n})
+))                       → `

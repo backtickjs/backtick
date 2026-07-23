@@ -1,7 +1,7 @@
 import { cs } from "@backtickjs/core";
 
-// `?` marks a nullable parameter: an omitted argument binds as null — the
-// language's absent value; `undefined` never arises.
+// `?` marks a nullable parameter — sugar for `T | null`, not an optional
+// argument: callers pass `null` explicitly, and `undefined` never arises.
 const greet = cs`(name?: string) => {
   return name?.concat("!");
 }`;
@@ -15,8 +15,7 @@ const call = cs`(cb?: () => number) => {
 
 export default cs`({
   named: $greet("hi"),
-  omitted: $greet(),
   explicit: $greet(null),
   supplied: $call($double),
-  fallback: $call(),
+  fallback: $call(null),
 })`;

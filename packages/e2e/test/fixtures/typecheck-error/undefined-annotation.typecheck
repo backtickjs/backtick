@@ -1,5 +1,15 @@
+8:19 error TS2345: Argument of type '(x: Maybe) => number' is not assignable to parameter of type 'ClientValue'.
+  Type '(x: Maybe) => number' is not assignable to type '(...args: ClientValue[]) => ClientUnknown'.
+    Types of parameters 'x' and 'args' are incompatible.
+      Type 'ClientValue' is not assignable to type 'Maybe'.
+        Type 'null' is not assignable to type 'Maybe'.
 9:13 error TS2345: Argument of type 'Maybe' is not assignable to parameter of type 'ClientValue'.
   Type 'undefined' is not assignable to type 'ClientValue'.
+13:20 error TS2345: Argument of type '(x: Maybe) => number' is not assignable to parameter of type 'ClientValue'.
+  Type '(x: Maybe) => number' is not assignable to type '(...args: ClientValue[]) => ClientUnknown'.
+    Types of parameters 'x' and 'args' are incompatible.
+      Type 'ClientValue' is not assignable to type 'Maybe'.
+        Type 'null' is not assignable to type 'Maybe'.
 15:3 error TS2322: Type 'ClientValue' is not assignable to type 'string'.
   Type 'null' is not assignable to type 'string'.
 15:7 error TS2345: Argument of type 'Maybe' is not assignable to parameter of type 'ClientValue'.

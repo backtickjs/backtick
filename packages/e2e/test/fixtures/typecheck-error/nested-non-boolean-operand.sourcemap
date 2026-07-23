@@ -1,13 +1,15 @@
 cs.lift(cs.const(                        → cs`
 (                                        → (
 __cs_count                               → count
-: number) => {\n                         → : number) => {\n  
+: number                                 → : number
+) => {\n                                 → ) => {\n  
 const                                    → const 
 __cs_keep                                → keep
  = cs.const(                             →  = 
 (                                        → (
 __cs_on                                  → on
-: boolean) =>                            → : boolean) => 
+: boolean                                → : boolean
+) =>                                     → ) => 
 __cs_on                                  → on
 );                                       → ;
 \n                                       → \n  

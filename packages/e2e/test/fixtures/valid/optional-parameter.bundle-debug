@@ -1,9 +1,8 @@
 #f0 = () => {
   "named": #f1()("hi"),
-  "omitted": #f1()(),
   "explicit": #f1()(null),
   "supplied": #f2()(#f3()),
-  "fallback": #f2()()
+  "fallback": #f2()(null)
 }
 
 #f1 = () => (name) => {

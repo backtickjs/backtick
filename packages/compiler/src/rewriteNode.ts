@@ -801,8 +801,6 @@ function rewriteNodeImpl(
   }
 
   if (ts.isArrowFunction(node)) {
-    // TypeScript's TS1016, enforced here: the `= null` rewrite of `?`
-    // would otherwise legalize the shape with the wrong arity.
     let sawOptional = false;
     const params = node.parameters.map((param) => {
       // A rest parameter or a default would be silently dropped from the
@@ -821,11 +819,10 @@ function rewriteNodeImpl(
             "use `?` and handle `null` instead.",
         );
       }
+      // TypeScript's TS1016, enforced here to stay aligned with TS
       if (param.questionToken != null) {
         sawOptional = true;
       } else if (sawOptional) {
-        // The parameter stays required — legal in the virtual after the
-        // preceding `= null` rewrite — so the one error stands alone.
         state.errors.set(
           param.name,
           "A required parameter cannot follow an optional parameter.",
@@ -840,6 +837,7 @@ function rewriteNodeImpl(
           type = ts.factory.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
         }
         return {
+          source: param,
           name: param.name,
           type,
           optional: param.questionToken != null,
@@ -869,10 +867,9 @@ function rewriteNodeImpl(
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
-        // `?` marks a nullable parameter: the virtual `T | null = null`
-        // lets callers omit the argument while the `= null` absorbs
-        // `undefined`. The union factory parenthesizes only where needed.
-        return ts.factory.createParameterDeclaration(
+        // `?` marks a nullable parameter — sugar for `T | null`, not an
+        // optional argument: the virtual parameter stays required
+        const declaration = ts.factory.createParameterDeclaration(
           undefined,
           undefined,
           identifier,
@@ -883,8 +880,10 @@ function rewriteNodeImpl(
                 ts.factory.createLiteralTypeNode(ts.factory.createNull()),
               ])
             : param.type,
-          param.optional ? ts.factory.createNull() : undefined,
+          undefined,
         );
+        state.mappings.set(declaration, param.source);
+        return declaration;
       });
       const body = rewriteNode(ts, bodyState, node.body);
       return {

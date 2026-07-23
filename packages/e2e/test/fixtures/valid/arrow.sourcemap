@@ -8,9 +8,11 @@ __cs_base                        → base
 return                           → return 
 (                                → (
 __cs_one                         → one
-: number,                        → : number, 
+: number                         → : number
+,                                → , 
 __cs_two                         → two
-: number) =>                     → : number) => 
+: number                         → : number
+) =>                             → ) => 
 __cs_one                         → one
  +                               →  + 
 __cs_two                         → two

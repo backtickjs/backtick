@@ -1,7 +1,8 @@
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_base          → base
-: number) =>       → : number) => 
+: number           → : number
+) =>               → ) => 
 cs.splice(         → ${ [-semantic]
 cs.lift(cs.const(  → cs`
 __cs_base          → base

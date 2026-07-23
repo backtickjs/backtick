@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_p                                    → p
-: {\n    x: number;\n} | null) => {\n     → : { x: number } | null) => {\n  
+: {\n    x: number;\n} | null             → : { x: number } | null
+) => {\n                                  → ) => {\n  
 return                                    → return 
 (                                         → 
 cs.receiver(                              → 
@@ -16,7 +17,8 @@ x                                         → x
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_o                                    → o
-: {\n    inner: {\n        z: number;\n    } | null;\n} | null) => {\n    → : { inner: { z: number } | null } | null) => {\n  
+: {\n    inner: {\n        z: number;\n    } | null;\n} | null→ : { inner: { z: number } | null } | null
+) => {\n                                  → ) => {\n  
 return                                    → return 
 (                                         → 
 cs.receiver(                              → 
@@ -37,7 +39,8 @@ z                                         → z
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_s                                    → s
-: string | null) => {\n                   → : string | null) => {\n  
+: string | null                           → : string | null
+) => {\n                                  → ) => {\n  
 return                                    → return 
 (                                         → 
 cs.receiver(                              → 

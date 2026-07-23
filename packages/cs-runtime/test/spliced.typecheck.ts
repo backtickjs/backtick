@@ -165,6 +165,9 @@ receiver(button).nickname;
 // optionally omitted.
 declare function asValue<T extends ClientValue>(_: T): T;
 asValue((n: number) => n + 1);
+asValue((name: string | null) => name ?? "you");
+// @ts-expect-error — an optional parameter puts `undefined` in the
+// function's type; declare `name: T | null` instead.
 asValue((name?: string | null) => name ?? "you");
 declare const onTap: (id: number) => void;
 asValue({ tap: onTap, label: "x" });

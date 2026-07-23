@@ -4,7 +4,8 @@ __cs_apply                       → apply
  = cs.const(                     →  = 
 (                                → (
 __cs_f                           → f
-: () => number) =>               → : () => number) => 
+: () => number                   → : () => number
+) =>                             → ) => 
 __cs_f                           → f
 ()                               → ()
  +                               →  + 
