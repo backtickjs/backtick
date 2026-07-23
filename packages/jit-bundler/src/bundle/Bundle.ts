@@ -4,6 +4,26 @@
 // tables. Computation ships as `BundleNode` ASTs (no JavaScript parsing
 // required), composition as data (a tree and the root are `BundleExpr`
 // values), so the whole bundle is parseable and inspectable as JSON.
+//
+// Two guarantees an interpreter may rely on, and must uphold:
+//
+// `undefined` never arises in evaluation — `null` is the language's only
+// absent value. The closed set of rules that makes it so:
+//   - a missing argument binds `null` (parameters are otherwise required:
+//     compiled call sites always pass every argument);
+//   - `?.` on a null receiver yields `null` — for a call, the arguments
+//     unevaluated;
+//   - reading an absent property yields `null`;
+//   - an arrow body that completes without `return` completes with `null`;
+//   - a capture is a value, never a variable: a nested script reads its
+//     captures but can't assign them.
+//
+// Evaluation is effect-free and deterministic: materializing the root, a
+// tree, or any entry a data position references runs no effects — an
+// action never ships as data — so re-evaluating any value is unobservable.
+// This is the caching license: an interpreter may cache, re-run, or share
+// evaluations freely. Effects happen only when the client itself invokes a
+// function value it holds.
 export interface Bundle {
   // Each entry is an arrow node — evaluating it yields a function, exactly
   // as for an arrow nested inside a body. A monomorphic entry (one call
