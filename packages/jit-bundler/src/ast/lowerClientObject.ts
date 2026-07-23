@@ -1,5 +1,6 @@
 import {
   type ClientObject,
+  isClientScript,
   isSpliceable,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
@@ -31,6 +32,13 @@ function spliceableEntries(value: ClientObject): [string, Spliceable][] {
       continue;
     }
     const entry = (value as unknown as Record<string, unknown>)[key];
+    if (isClientScript(entry) && entry.metadata.kind === "action") {
+      // An action member doesn't ship — it would run when the `ClientObject`
+      // instantiates on the client, which is never the desired behavior.
+      // This is almost always an error; the right fix is to declare the
+      // member as a zero-arg function `Client<() => void>`.
+      continue;
+    }
     if (isSpliceable(entry)) {
       entries.push([key, entry]);
     }

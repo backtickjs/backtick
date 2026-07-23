@@ -9,7 +9,7 @@ import {
 import { basename, extname, join } from "node:path";
 import { describe, it } from "node:test";
 import { pathToFileURL } from "node:url";
-import { bundle, type Client, type ClientUnknown } from "@backtickjs/core";
+import { bundle, type Client, type ClientValue } from "@backtickjs/core";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderValue } from "./renderValue.ts";
@@ -49,7 +49,7 @@ function listFixtures(dir: string): string[] {
 async function importFixture(
   dir: string,
   file: string,
-): Promise<Client<ClientUnknown>> {
+): Promise<Client<ClientValue> | Client<void>> {
   const sourceText = readFileSync(join(dir, file), "utf8");
   const outputText = await transpileFixture(file, sourceText);
   const base = file.slice(0, -extname(file).length);
@@ -57,7 +57,7 @@ async function importFixture(
   mkdirSync(join(cacheDir, basename(dir)), { recursive: true });
   writeFileSync(compiled, outputText);
   const { default: script } = (await import(pathToFileURL(compiled).href)) as {
-    default: Client<ClientUnknown>;
+    default: Client<ClientValue> | Client<void>;
   };
   return script;
 }

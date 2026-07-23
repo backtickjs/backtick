@@ -1,0 +1,56 @@
+cs.lift((() => {\n               → cs`{\n  
+const                            → const 
+__cs_x                           → x
+ = cs.const(                     →  = 
+1                                → 1
+);                               → ;
+\n})())                          → \n}`
+cs.lift(cs.const((() => {\n      → cs`{\n  
+const                            → const 
+__cs_button                      → button
+ = cs.const(                     →  = 
+cs.splice(                       → ${ [-semantic]
+new Button(                      → new Button(
+cs.lift(cs.const(                → cs`
+"OK"                             → "OK"
+))                               → `
+, press)                         → , press)
+)                                → } [-semantic]
+);                               → ;
+\n                               → \n  
+const                            → const 
+__cs_handler                     → handler
+ = cs.const(                     →  = 
+cs.receiver(                     → 
+__cs_button                      → button
+)                                → 
+.                                → .
+press                            → press
+);                               → ;
+\n                               → \n  
+return                           → return 
+1                                → 1
+;                                → ;
+\n})()))                         → \n}`
+cs.lift((() => {\n               → cs`{\n  
+const                            → const 
+__cs_button                      → button
+ = cs.const(                     →  = 
+cs.splice(                       → ${ [-semantic]
+new Button(                      → new Button(
+cs.lift(cs.const(                → cs`
+"OK"                             → "OK"
+))                               → `
+, press)                         → , press)
+)                                → } [-semantic]
+);                               → ;
+\n                               → \n  
+cs.statement(                    → 
+cs.receiver(                     → 
+__cs_button                      → button
+)                                → 
+.                                → .
+press                            → press
+()                               → ()
+);                               → ;
+\n})())                          → \n}`

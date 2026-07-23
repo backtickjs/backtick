@@ -132,6 +132,34 @@ receiver(spliced(clientNumbers)).pop;
 // @ts-expect-error — a raw fragment array is a host value, not a client one.
 receiver(clientNumbers);
 
+// An action member doesn't ship — a data slot invokes its entry when the
+// container materializes, which for an action would run the effect — so
+// reflection skips it like a host method. A throw-only member
+// (`Client<never>`) is a value script and still reflects.
+declare const clientString: Client<string>;
+declare const clientAction: Client<void>;
+declare const clientThrows: Client<never>;
+declare const clientMaybe: Client<string | undefined>;
+
+class Button implements ClientObject {
+  readonly "@backtickjs" = "ClientObject";
+
+  readonly label: Client<string> = clientString;
+  readonly press: Client<void> = clientAction;
+  readonly fail: Client<never> = clientThrows;
+  // rides the `undefined ≤ void` door into `ClientUnknown`, but fits
+  // neither arm of `Spliceable`, so it never reflects
+  readonly nickname: Client<string | undefined> = clientMaybe;
+}
+
+const button = spliced(new Button());
+receiver(button).label satisfies string;
+receiver(button).fail satisfies never;
+// @ts-expect-error — an action member doesn't ship, so it can't be read.
+receiver(button).press;
+// @ts-expect-error — an `undefined`-bearing member isn't spliceable.
+receiver(button).nickname;
+
 // An element is opaque in a script: it splices in whole — the payload stays
 // `ClientElement` — and no member reflects on the client.
 declare const element: ClientElement;

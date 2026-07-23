@@ -1,0 +1,50 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "block",
+        "statements": [
+          {
+            "#": "declaration",
+            "keyword": "const",
+            "name": "button",
+            "expression": {
+              "label": {
+                "#": "call",
+                "callee": {
+                  "#": "entry",
+                  "label": "#f1"
+                },
+                "args": []
+              }
+            }
+          },
+          {
+            "#": "return",
+            "expression": {
+              "#": "property",
+              "object": {
+                "#": "identifier",
+                "name": "button"
+              },
+              "name": "label"
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": "OK"
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}

@@ -1,0 +1,8 @@
+#f0 = () => {
+  const button = { "label": #f1() };
+  return button.label;
+}
+
+#f1 = () => "OK"
+
+root = #f0()

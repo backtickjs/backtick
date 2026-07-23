@@ -1,3 +1,4 @@
+import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
@@ -8,8 +9,7 @@ import type { ClientString } from "./ClientString.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 
-// A built-in receiver autoboxes to its client type, so its members resolve
-// against the explicit client API.
+// A built-in receiver autoboxes to its client type
 type Autoboxed<T> = T extends string
   ? ClientString
   : T extends number
@@ -20,17 +20,20 @@ type Autoboxed<T> = T extends string
         ? ClientArray<E>
         : never;
 
-// A `ClientObject`'s spliceable members, each read as what it splices to.
-// Kept homomorphic (`keyof T`, filtering in `as`) so properties stay linked
-// to their declarations for go-to-definition. The `@backtickjs` brand and
-// class members are dropped, mirroring `isSpliceable`'s function guard.
+// A `ClientObject`'s spliceable members (see `lowerClientObject`)
 type SplicedMembers<T extends ClientObject> = {
   [K in keyof T as K extends "@backtickjs"
     ? never
     : T[K] extends ClientConstructor
       ? never
       : T[K] extends Spliceable
-        ? K
+        ? T[K] extends Client<infer U>
+          ? [U] extends [never]
+            ? K
+            : [U] extends [void]
+              ? never
+              : K
+          : K
         : never]: Spliced<T[K]>;
 };
 
