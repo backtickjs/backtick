@@ -11,7 +11,7 @@ const onTap: Client<(id: number) => void> = cs.lift(cs.const((__cs_id: number) =
     cs.statement(cs.splice((beep)));
 }));
 
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_handlers = cs.const({ tap: cs.splice((onTap)), hold: cs.splice((onTap)) });
-    return __cs_handlers;
-})()));
+    return cs.const(__cs_handlers);
+})());

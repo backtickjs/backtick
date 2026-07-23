@@ -10,8 +10,8 @@ type Maybe = string | undefined;
 
 const lying: Client<() => Maybe> = cs.lift(cs.const(() => "hi"));
 
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_stored = cs.const(cs.splice((lying)));
     const __cs_caught = cs.const(cs.splice((lying))());
-    return 1;
-})()));
+    return cs.const(1);
+})());

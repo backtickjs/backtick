@@ -35,11 +35,11 @@ class Segment implements ClientObject {
 
 const segment = new Segment(new Point(cs.lift(cs.const(1)), cs.lift(cs.const(2))), new Point(cs.lift(cs.const(1)), cs.lift(cs.const(8))));
 
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_s = cs.const(cs.splice((segment)));
     const __cs_rise = cs.const(cs.receiver(cs.receiver(__cs_s).to).y - cs.receiver(cs.receiver(__cs_s).from).y);
     if ((cs.condition(cs.receiver(__cs_s).vertical()) && cs.receiver(__cs_s).vertical())) {
-        return __cs_rise;
+        return cs.const(__cs_rise);
     }
-    return cs.receiver(cs.receiver(__cs_s).to).sum() - cs.receiver(cs.receiver(__cs_s).from).sum();
-})()));
+    return cs.const(cs.receiver(cs.receiver(__cs_s).to).sum() - cs.receiver(cs.receiver(__cs_s).from).sum());
+})());

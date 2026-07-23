@@ -9,13 +9,13 @@ __cs_name           → name
 __cs_name           → name [-semantic -completion -navigation -verification]
 ))                  → ) 
 {\n                 → {\n    
-return              → return 
+return cs.const(    → return 
 __cs_name           → name
-;                   → ;
+);                  → ;
 \n    }             → \n  }
 \n                  → \n  
-return              → return 
+return cs.const(    → return 
 "anonymous"         → "anonymous"
-;                   → ;
+);                  → ;
 \n}                 → \n}
 ))                  → `

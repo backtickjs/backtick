@@ -9,7 +9,7 @@ const read = cs.lift(cs.const((__cs_o: {
         z?: number;
     };
 }) => {
-    return [cs.receiver(__cs_o).label, cs.receiver(cs.receiver(__cs_o).inner)?.z ?? 0];
+    return cs.const([cs.receiver(__cs_o).label, cs.receiver(cs.receiver(__cs_o).inner)?.z ?? 0]);
 }));
 
 export default cs.lift(cs.const({ present: cs.splice((read))({ label: "a", inner: { z: 3 } }), partial: cs.splice((read))({ label: "b", inner: {} }), omitted: cs.splice((read))({ label: "c" }) }));

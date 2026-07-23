@@ -8,7 +8,7 @@ function add(lhs: Client<number>): Client<number> {
   return cs.lift(cs.const(cs.splice((lhs)) + 2));
 }
 
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_foo$ = cs.const(1);
-    return cs.splice(add(cs.lift(cs.const(__cs_foo$))));
-})()));
+    return cs.const(cs.splice(add(cs.lift(cs.const(__cs_foo$)))));
+})());

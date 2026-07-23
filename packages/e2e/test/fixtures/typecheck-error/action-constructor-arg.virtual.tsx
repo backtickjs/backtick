@@ -17,7 +17,7 @@ const action = cs.lift((() => {
     const __cs_x = cs.const(1);
 })());
 
-export const held = cs.lift(cs.const((() => {
+export const held = cs.lift((() => {
     const __cs_h = cs.const(new (cs.splice((Holder)))(cs.lift(cs.const(cs.splice((action))))));
-    return 1;
-})()));
+    return cs.const(1);
+})());

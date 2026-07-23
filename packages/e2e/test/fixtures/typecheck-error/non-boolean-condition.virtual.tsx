@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 // string tested directly is a type error.
 export default cs.lift(cs.const((__cs_name: string) => {
     if ((cs.condition(__cs_name) && __cs_name)) {
-        return __cs_name;
+        return cs.const(__cs_name);
     }
-    return "anonymous";
+    return cs.const("anonymous");
 }));

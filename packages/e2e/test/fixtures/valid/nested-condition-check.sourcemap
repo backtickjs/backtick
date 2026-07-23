@@ -33,14 +33,14 @@ __cs_b                       → b [-semantic -completion -navigation -verificat
 __cs_keep(__cs_a && __cs_b)  → keep(a && b) [-semantic -completion -navigation -verification]
 ))                           → ) 
 {\n                          → {\n    
-return                       → return 
+return cs.const(             → return 
 "kept"                       → "kept"
-;                            → ;
+);                           → ;
 \n    }                      → \n  }
 \n                           → \n  
-return                       → return 
+return cs.const(             → return 
 "dropped"                    → "dropped"
-;                            → ;
+);                           → ;
 \n}                          → \n}
 ))                           → `
 cs.lift(cs.const(            → cs`

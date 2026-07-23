@@ -29,13 +29,13 @@ __cs_count                               → count
 __cs_keep(__cs_count && __cs_count > 0)  → keep(count && count > 0) [-semantic -completion -navigation -verification]
 ))                                       → ) 
 {\n                                      → {\n    
-return                                   → return 
+return cs.const(                         → return 
 "kept"                                   → "kept"
-;                                        → ;
+);                                       → ;
 \n    }                                  → \n  }
 \n                                       → \n  
-return                                   → return 
+return cs.const(                         → return 
 "dropped"                                → "dropped"
-;                                        → ;
+);                                       → ;
 \n}                                      → \n}
 ))                                       → `

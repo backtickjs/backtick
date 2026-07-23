@@ -7,6 +7,6 @@ import type { Client, JSX } from "@backtickjs/core";
 // handler with `#slot`.
 const script: Client<() => JSX.Element> = cs.lift(cs.const(() => {
     const __cs_x = cs.const(1);
-    return cs.splice((<button onClick={cs.lift(cs.const(() => __cs_x))} />));
+    return cs.const(cs.splice((<button onClick={cs.lift(cs.const(() => __cs_x))} />)));
 }));
 export default script;

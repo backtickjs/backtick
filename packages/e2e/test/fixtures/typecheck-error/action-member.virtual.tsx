@@ -19,11 +19,11 @@ const press = cs.lift((() => {
     const __cs_x = cs.const(1);
 })());
 
-export const stored = cs.lift(cs.const((() => {
+export const stored = cs.lift((() => {
     const __cs_button = cs.const(cs.splice(new Button(cs.lift(cs.const("OK")), press)));
     const __cs_handler = cs.const(cs.receiver(__cs_button).press);
-    return 1;
-})()));
+    return cs.const(1);
+})());
 
 export const performed = cs.lift((() => {
     const __cs_button = cs.const(cs.splice(new Button(cs.lift(cs.const("OK")), press)));

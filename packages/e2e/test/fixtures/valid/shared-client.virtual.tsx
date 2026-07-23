@@ -21,14 +21,14 @@ class Point implements ClientObject {
 // shared (its getters evaluated a single time), not re-expanded per path.
 const shared = new Point(cs.lift(cs.const(1)), cs.lift(cs.const(2)));
 
-const left = cs.lift(cs.const((() => {
+const left = cs.lift((() => {
     const __cs_p = cs.const(cs.splice((shared)));
-    return cs.receiver(__cs_p).sum();
-})()));
+    return cs.const(cs.receiver(__cs_p).sum());
+})());
 
-const right = cs.lift(cs.const((() => {
+const right = cs.lift((() => {
     const __cs_p = cs.const(cs.splice((shared)));
-    return cs.receiver(__cs_p).x;
-})()));
+    return cs.const(cs.receiver(__cs_p).x);
+})());
 
 export default cs.lift(cs.const(cs.splice((left)) + cs.splice((right))));

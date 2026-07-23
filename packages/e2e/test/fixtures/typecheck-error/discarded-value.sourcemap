@@ -1,8 +1,8 @@
 cs.lift(cs.const(       → cs`
 () => {\n               → () => {\n  
-return                  → return 
+return cs.const(        → return 
 1                       → 1
-;                       → ;
+);                      → ;
 \n}                     → \n}
 ))                      → `
 cs.lift(cs.const(       → cs`

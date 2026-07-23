@@ -9,9 +9,9 @@ __cs_y             → y
 __cs_x             → x
 );                 → ;
 \n                 → \n  
-return             → return 
+return cs.const(   → return 
 1                  → 1
-;                  → ;
+);                 → ;
 \n}                → \n}
 ))                 → `
 cs.lift(cs.const(  → cs`
@@ -31,8 +31,8 @@ __cs_x             → x
 )                  → 
 ;                  → ;
 \n                 → \n  
-return             → return 
+return cs.const(   → return 
 1                  → 1
-;                  → ;
+);                 → ;
 \n}                → \n}
 ))                 → `

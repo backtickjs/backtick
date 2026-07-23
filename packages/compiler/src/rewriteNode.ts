@@ -421,7 +421,9 @@ function rewriteNodeImpl(
     const expression = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createReturnStatement(
-        expression.virtual as ts.Expression,
+        state.valueBody && !state.dup
+          ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
+          : (expression.virtual as ts.Expression),
       ),
       runtime: call(ts, "v", "return", [
         loc(node),

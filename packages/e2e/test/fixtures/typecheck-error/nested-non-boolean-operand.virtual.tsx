@@ -10,7 +10,7 @@ import { cs } from "@backtickjs/core";
 export default cs.lift(cs.const((__cs_count: number) => {
     const __cs_keep = cs.const((__cs_on: boolean) => __cs_on);
     if ((cs.condition(__cs_keep((cs.condition(__cs_count) && __cs_count) && __cs_count > 0)) && __cs_keep(__cs_count && __cs_count > 0))) {
-        return "kept";
+        return cs.const("kept");
     }
-    return "dropped";
+    return cs.const("dropped");
 }));

@@ -19,7 +19,7 @@ const press = cs.lift((() => {
     const __cs_x = cs.const(1);
 })());
 
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_button = cs.const(cs.splice(new Button(cs.lift(cs.const("OK")), press)));
-    return cs.receiver(__cs_button).label;
-})()));
+    return cs.const(cs.receiver(__cs_button).label);
+})());

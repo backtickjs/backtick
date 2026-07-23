@@ -9,14 +9,14 @@ __cs_value         → value
 null               → null
 )                  → ) 
 {\n                → {\n    
-return             → return 
+return cs.const(   → return 
 "-"                → "-"
-;                  → ;
+);                 → ;
 \n    }            → \n  }
 \n                 → \n  
-return             → return 
+return cs.const(   → return 
 __cs_value         → value
-;                  → ;
+);                 → ;
 \n}                → \n}
 ))                 → `
 cs.lift(cs.const(  → cs`

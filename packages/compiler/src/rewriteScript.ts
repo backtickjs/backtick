@@ -161,13 +161,10 @@ export function rewriteScript(
     false,
   );
 
-  // A value root's payload takes the value check; an action root lifts its
-  // `void` completion directly.
-  const payload = ts.isBlock(rewritten.virtual)
-    ? iife(ts, rewritten.virtual)
-    : (rewritten.virtual as ts.Expression);
   const virtual = call(ts, "cs", "lift", [
-    kind === "value" ? call(ts, "cs", "const", [payload]) : payload,
+    ts.isBlock(rewritten.virtual)
+      ? iife(ts, rewritten.virtual)
+      : call(ts, "cs", "const", [rewritten.virtual as ts.Expression]),
   ]);
 
   sourceMaps.set(virtual, scriptRange);

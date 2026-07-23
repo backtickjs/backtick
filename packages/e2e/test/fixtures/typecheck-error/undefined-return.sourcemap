@@ -1,26 +1,26 @@
-cs.lift(cs.const(                → cs`
-() =>                            → () => 
-"hi"                             → "hi"
-))                               → `
-cs.lift(cs.const((() => {\n      → cs`{\n  
-const                            → const 
-__cs_stored                      → stored
- = cs.const(                     →  = 
-cs.splice(                       →  [-semantic]
-(lying)                          → $lying
-)                                →  [-semantic]
-);                               → ;
-\n                               → \n  
-const                            → const 
-__cs_caught                      → caught
- = cs.const(                     →  = 
-cs.splice(                       →  [-semantic]
-(lying)                          → $lying
-)                                →  [-semantic]
-()                               → ()
-);                               → ;
-\n                               → \n  
-return                           → return 
-1                                → 1
-;                                → ;
-\n})()))                         → \n}`
+cs.lift(cs.const(       → cs`
+() =>                   → () => 
+"hi"                    → "hi"
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_stored             → stored
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(lying)                 → $lying
+)                       →  [-semantic]
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_caught             → caught
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(lying)                 → $lying
+)                       →  [-semantic]
+()                      → ()
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+1                       → 1
+);                      → ;
+\n})())                 → \n}`

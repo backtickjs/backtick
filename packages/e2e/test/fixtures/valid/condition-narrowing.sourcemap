@@ -20,14 +20,14 @@ __cs_text          → text
 null               → null
 )                  → ) 
 {\n                → {\n    
-return             → return 
+return cs.const(   → return 
 cs.receiver(       → 
 __cs_text          → text
 )                  → 
 .                  → .
 toUpperCase        → toUpperCase
 ()                 → ()
-;                  → ;
+);                 → ;
 \n    }            → \n  }
 \n                 → \n  
 if (               → if (
@@ -56,7 +56,7 @@ charAt             → charAt
 "!"                → "!"
 )                  → ) 
 {\n                → {\n    
-return             → return 
+return cs.const(   → return 
 cs.receiver(       → 
 __cs_text          → text
 )                  → 
@@ -65,12 +65,12 @@ concat             → concat
 (                  → (
 "?"                → "?"
 )                  → )
-;                  → ;
+);                 → ;
 \n    }            → \n  }
 \n                 → \n  
-return             → return 
+return cs.const(   → return 
 "none"             → "none"
-;                  → ;
+);                 → ;
 \n}                → \n}
 ))                 → `
 cs.lift(cs.const(  → cs`

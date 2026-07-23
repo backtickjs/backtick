@@ -9,26 +9,26 @@ __cs_flag                                 → flag
 __cs_flag                                 → flag [-semantic -completion -navigation -verification]
 ))                                        → ) 
 {\n                                       → {\n      
-return                                    → return 
+return cs.const(                          → return 
 cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
 )                                         →  [-semantic]
-;                                         → ;
+);                                        → ;
 \n    }                                   → \n    }
 \n                                        → \n    
-return                                    → return 
+return cs.const(                          → return 
 "skipped"                                 → "skipped"
-;                                         → ;
+);                                        → ;
 \n}                                       → \n  }
 ))                                        → `
 cs.lift(cs.const(                         → cs`
 "evaluated"                               → "evaluated"
 ))                                        → `
-cs.lift(cs.const((() => {\n               → cs`{\n  
+cs.lift((() => {\n                        → cs`{\n  
 throw                                     → throw 
 "the guarded fragment must never evaluate"→ "the guarded fragment must never evaluate"
 ;                                         → ;
-\n})()))                                  → \n}`
+\n})())                                   → \n}`
 cs.lift(cs.const(                         → cs`
 {                                         → ({\n  
 taken                                     → taken

@@ -6,7 +6,7 @@ __cs_count           → count
 __cs_flag            → flag
 : boolean            → : boolean
 ) => {\n             → ) => {\n  
-return               → return 
+return cs.const(     → return 
 (cs.condition(       → (
 __cs_count           → count
 ) &&                 → 
@@ -21,6 +21,6 @@ __cs_flag            → flag [-semantic -completion -navigation -verification]
 ) &&                 → 
 "none"               → "none" [-semantic -completion -navigation -verification]
 )                    → 
-;                    → ;
+);                   → ;
 \n}                  → \n}
 ))                   → `

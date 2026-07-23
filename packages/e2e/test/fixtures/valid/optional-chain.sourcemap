@@ -3,7 +3,7 @@ cs.lift(cs.const(                         → cs`
 __cs_p                                    → p
 : {\n    x: number;\n} | null             → : { x: number } | null
 ) => {\n                                  → ) => {\n  
-return                                    → return 
+return cs.const(                          → return 
 (                                         → 
 cs.receiver(                              → 
 __cs_p                                    → p
@@ -11,7 +11,7 @@ __cs_p                                    → p
 ?.                                        → ?.
 x                                         → x
  ?? null)                                 → 
-;                                         → ;
+);                                        → ;
 \n}                                       → \n}
 ))                                        → `
 cs.lift(cs.const(                         → cs`
@@ -19,7 +19,7 @@ cs.lift(cs.const(                         → cs`
 __cs_o                                    → o
 : {\n    inner: {\n        z: number;\n    } | null;\n} | null→ : { inner: { z: number } | null } | null
 ) => {\n                                  → ) => {\n  
-return                                    → return 
+return cs.const(                          → return 
 (                                         → 
 cs.receiver(                              → 
 (                                         → 
@@ -33,7 +33,7 @@ inner                                     → inner
 ?.                                        → ?.
 z                                         → z
  ?? null)                                 → 
-;                                         → ;
+);                                        → ;
 \n}                                       → \n}
 ))                                        → `
 cs.lift(cs.const(                         → cs`
@@ -41,7 +41,7 @@ cs.lift(cs.const(                         → cs`
 __cs_s                                    → s
 : string | null                           → : string | null
 ) => {\n                                  → ) => {\n  
-return                                    → return 
+return cs.const(                          → return 
 (                                         → 
 cs.receiver(                              → 
 __cs_s                                    → s
@@ -51,7 +51,7 @@ concat                                    → concat
 (                                         → (
 "!"                                       → "!"
 ) ?? null)                                → )
-;                                         → ;
+);                                        → ;
 \n}                                       → \n}
 ))                                        → `
 cs.lift(cs.const(                         → cs`

@@ -1,35 +1,35 @@
-cs.lift(cs.const((() => {\n      → cs`{\n  
-const                            → const 
-__cs_C                           → C
- = cs.const(                     →  = 
-cs.splice(                       →  [-semantic]
-(Point)                          → $Point
-)                                →  [-semantic]
-);                               → ;
-\n                               → \n  
-const                            → const 
-__cs_p                           → p
- = cs.const(                     →  = 
-new (                            → new 
-__cs_C                           → C
-)(cs.lift(cs.const(              → (
-1                                → 1
-)), cs.lift(cs.const(            → , 
-2                                → 2
-)))                              → )
-);                               → ;
-\n                               → \n  
-return                           → return 
-cs.receiver(                     → 
-__cs_p                           → p
-)                                → 
-.                                → .
-x                                → x
- +                               →  + 
-cs.receiver(                     → 
-__cs_p                           → p
-)                                → 
-.                                → .
-y                                → y
-;                                → ;
-\n})()))                         → \n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_C                  → C
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(Point)                 → $Point
+)                       →  [-semantic]
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_p                  → p
+ = cs.const(            →  = 
+new (                   → new 
+__cs_C                  → C
+)(cs.lift(cs.const(     → (
+1                       → 1
+)), cs.lift(cs.const(   → , 
+2                       → 2
+)))                     → )
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+cs.receiver(            → 
+__cs_p                  → p
+)                       → 
+.                       → .
+x                       → x
+ +                      →  + 
+cs.receiver(            → 
+__cs_p                  → p
+)                       → 
+.                       → .
+y                       → y
+);                      → ;
+\n})())                 → \n}`

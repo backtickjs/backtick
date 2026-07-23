@@ -28,6 +28,6 @@ const b = make(Square);
 const c = make(Square);
 const d = make(Square);
 
-export default cs.lift(cs.const((() => {
-    return { first: cs.splice((a)), second: cs.splice((b)), third: cs.splice((c)), fourth: cs.splice((d)) };
-})()));
+export default cs.lift((() => {
+    return cs.const({ first: cs.splice((a)), second: cs.splice((b)), third: cs.splice((c)), fourth: cs.splice((d)) });
+})());

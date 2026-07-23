@@ -11,12 +11,12 @@ const flags = { strict: cs.lift(cs.const(true)) };
 
 const label: Client<(text: string | null, upper: boolean) => string> = cs.lift(cs.const((__cs_text: string | null, __cs_upper: boolean) => {
     if ((cs.condition(__cs_upper) && __cs_upper) && __cs_text !== null) {
-        return cs.receiver(__cs_text).toUpperCase();
+        return cs.const(cs.receiver(__cs_text).toUpperCase());
     }
     if ((cs.condition(cs.splice(flags.strict)) && cs.splice(flags.strict)) && __cs_text !== null && cs.receiver(__cs_text).charAt(0) === "!") {
-        return cs.receiver(__cs_text).concat("?");
+        return cs.const(cs.receiver(__cs_text).concat("?"));
     }
-    return "none";
+    return cs.const("none");
 }));
 
 export default cs.lift(cs.const({ missing: cs.splice((label))(null, true), loud: cs.splice((label))("!hi", true), quiet: cs.splice((label))("!hi", false), plain: cs.splice((label))("zz", false) }));

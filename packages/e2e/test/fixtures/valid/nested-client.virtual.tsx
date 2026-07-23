@@ -31,7 +31,7 @@ class Segment implements ClientObject {
   }
 }
 
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_s = cs.const(new (cs.splice((Segment)))(cs.lift(cs.const(new (cs.splice((Point)))(cs.lift(cs.const(1)), cs.lift(cs.const(2))))), cs.lift(cs.const(new (cs.splice((Point)))(cs.lift(cs.const(1)), cs.lift(cs.const(2)))))));
-    return cs.receiver(cs.receiver(__cs_s).to).sum() - cs.receiver(cs.receiver(__cs_s).from).sum();
-})()));
+    return cs.const(cs.receiver(cs.receiver(__cs_s).to).sum() - cs.receiver(cs.receiver(__cs_s).from).sum());
+})());

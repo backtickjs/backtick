@@ -1,58 +1,58 @@
-cs.lift(cs.const((() => {\n      → cs`{\n  
-const                            → const 
-__cs_c                           → c
- = cs.const(                     →  = 
-cs.splice(                       → ${ [-semantic]
-new Color(                       → new Color(
-cs.lift(cs.const(                → cs`
-30                               → 30
-))                               → `
-,                                → , 
-cs.lift(cs.const(                → cs`
-144                              → 144
-))                               → `
-,                                → , 
-cs.lift(cs.const(                → cs`
-255                              → 255
-))                               → `
-)                                → )
-)                                → } [-semantic]
-);                               → ;
-\n                               → \n  
-const                            → const 
-__cs_brightness                  → brightness
- = cs.const(                     →  = 
-cs.receiver(                     → 
-__cs_c                           → c
-)                                → 
-.                                → .
-r                                → r
- +                               →  + 
-cs.receiver(                     → 
-__cs_c                           → c
-)                                → 
-.                                → .
-g                                → g
- +                               →  + 
-cs.receiver(                     → 
-__cs_c                           → c
-)                                → 
-.                                → .
-b                                → b
-);                               → ;
-\n                               → \n  
-if (                             → if (
-__cs_brightness                  → brightness
- >                               →  > 
-382                              → 382
-)                                → ) 
-{\n                              → {\n    
-return                           → return 
-"light"                          → "light"
-;                                → ;
-\n    }                          → \n  }
-\n                               → \n  
-return                           → return 
-"dark"                           → "dark"
-;                                → ;
-\n})()))                         → \n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_c                  → c
+ = cs.const(            →  = 
+cs.splice(              → ${ [-semantic]
+new Color(              → new Color(
+cs.lift(cs.const(       → cs`
+30                      → 30
+))                      → `
+,                       → , 
+cs.lift(cs.const(       → cs`
+144                     → 144
+))                      → `
+,                       → , 
+cs.lift(cs.const(       → cs`
+255                     → 255
+))                      → `
+)                       → )
+)                       → } [-semantic]
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_brightness         → brightness
+ = cs.const(            →  = 
+cs.receiver(            → 
+__cs_c                  → c
+)                       → 
+.                       → .
+r                       → r
+ +                      →  + 
+cs.receiver(            → 
+__cs_c                  → c
+)                       → 
+.                       → .
+g                       → g
+ +                      →  + 
+cs.receiver(            → 
+__cs_c                  → c
+)                       → 
+.                       → .
+b                       → b
+);                      → ;
+\n                      → \n  
+if (                    → if (
+__cs_brightness         → brightness
+ >                      →  > 
+382                     → 382
+)                       → ) 
+{\n                     → {\n    
+return cs.const(        → return 
+"light"                 → "light"
+);                      → ;
+\n    }                 → \n  }
+\n                      → \n  
+return cs.const(        → return 
+"dark"                  → "dark"
+);                      → ;
+\n})())                 → \n}`

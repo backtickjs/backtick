@@ -1,65 +1,65 @@
-cs.lift(cs.const(                → cs`
-() => {\n                        → () => {\n  
-let                              → let 
-__cs_n                           → n
- = cs.let(                       →  = 
-0                                → 0
-);                               → ;
-\n                               → \n  
-__cs_n                           → n
- = cs.const(                     →  = 
-1                                → 1
-)                                → 
-;                                → ;
-\n}                              → \n}
-))                               → `
-cs.lift(cs.const((() => {\n      → cs`{\n  
-const                            → const 
-__cs_x                           → x
- = cs.const(                     →  = 
-cs.splice(                       →  [-semantic]
-(ping)                           → $ping
-)                                →  [-semantic]
-()                               → ()
-);                               → ;
-\n                               → \n  
-return                           → return 
-1                                → 1
-;                                → ;
-\n})()))                         → \n}`
-cs.lift((() => {\n               → cs`{\n  
-const                            → const 
-__cs_x                           → x
- = cs.const(                     →  = 
-cs.splice(                       →  [-semantic]
-(ping)                           → $ping
-)                                →  [-semantic]
-()                               → ()
-);                               → ;
-\n})())                          → \n}`
-cs.lift(cs.const(                → cs`
-(                                → (
-__cs_text                        → text
-: string                         → : string
-) => {\n                         → ) => {\n  
-return                           → return 
-__cs_text                        → text
-;                                → ;
-\n}                              → \n}
-))                               → `
-cs.lift(cs.const((() => {\n      → cs`{\n  
-const                            → const 
-__cs_x                           → x
- = cs.const(                     →  = 
-cs.splice(                       →  [-semantic]
-(label)                          → $label
-)                                →  [-semantic]
-(                                → (
-true                             → true
-)                                → )
-);                               → ;
-\n                               → \n  
-return                           → return 
-1                                → 1
-;                                → ;
-\n})()))                         → \n}`
+cs.lift(cs.const(       → cs`
+() => {\n               → () => {\n  
+let                     → let 
+__cs_n                  → n
+ = cs.let(              →  = 
+0                       → 0
+);                      → ;
+\n                      → \n  
+__cs_n                  → n
+ = cs.const(            →  = 
+1                       → 1
+)                       → 
+;                       → ;
+\n}                     → \n}
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_x                  → x
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(ping)                  → $ping
+)                       →  [-semantic]
+()                      → ()
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+1                       → 1
+);                      → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_x                  → x
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(ping)                  → $ping
+)                       →  [-semantic]
+()                      → ()
+);                      → ;
+\n})())                 → \n}`
+cs.lift(cs.const(       → cs`
+(                       → (
+__cs_text               → text
+: string                → : string
+) => {\n                → ) => {\n  
+return cs.const(        → return 
+__cs_text               → text
+);                      → ;
+\n}                     → \n}
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_x                  → x
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(label)                 → $label
+)                       →  [-semantic]
+(                       → (
+true                    → true
+)                       → )
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+1                       → 1
+);                      → ;
+\n})())                 → \n}`

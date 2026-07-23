@@ -4,21 +4,21 @@ import { cs, type Client } from "@backtickjs/core";
 // functions that each shadow `base` with their own binding. The captured value
 // must reach the leaf untouched, so the threaded channel is renamed away from
 // every `base` it passes through.
-export default cs.lift(cs.const((() => {
+export default cs.lift((() => {
     const __cs_base = cs.const(10);
-    return cs.splice(outer(cs.lift(cs.const(__cs_base))));
-})()));
+    return cs.const(cs.splice(outer(cs.lift(cs.const(__cs_base)))));
+})());
 
 function outer(inner: Client<number>): Client<number> {
-  return cs.lift(cs.const((() => {
+  return cs.lift((() => {
     const __cs_base = cs.const(1);
-    return __cs_base + cs.splice(middle(inner));
-})()));
+    return cs.const(__cs_base + cs.splice(middle(inner)));
+})());
 }
 
 function middle(inner: Client<number>): Client<number> {
-  return cs.lift(cs.const((() => {
+  return cs.lift((() => {
     const __cs_base = cs.const(2);
-    return __cs_base * cs.splice((inner));
-})()));
+    return cs.const(__cs_base * cs.splice((inner)));
+})());
 }

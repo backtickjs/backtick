@@ -4,7 +4,7 @@ import { cs } from "@backtickjs/core";
 // action's result. Discarding a value is a mistake; calling an action is
 // the point.
 const getValue = cs.lift(cs.const(() => {
-    return 1;
+    return cs.const(1);
 }));
 
 const ping = cs.lift(cs.const(() => {

@@ -3,7 +3,7 @@ cs.lift(cs.const(        → cs`
 __cs_name                → name
 : string | null          → ?: string
 ) => {\n                 → ) => {\n  
-return                   → return 
+return cs.const(         → return 
 (                        → 
 cs.receiver(             → 
 __cs_name                → name
@@ -13,7 +13,7 @@ concat                   → concat
 (                        → (
 "!"                      → "!"
 ) ?? null)               → )
-;                        → ;
+);                       → ;
 \n}                      → \n}
 ))                       → `
 cs.lift(cs.const(        → cs`
@@ -25,12 +25,12 @@ cs.lift(cs.const(        → cs`
 __cs_cb                  → cb
 : (() => number) | null  → ?: () => number
 ) => {\n                 → ) => {\n  
-return                   → return 
+return cs.const(         → return 
 __cs_cb                  → cb
 ?.()                     → ?.()
  ??                      →  ?? 
 0                        → 0
-;                        → ;
+);                       → ;
 \n}                      → \n}
 ))                       → `
 cs.lift(cs.const(        → cs`

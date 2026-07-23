@@ -1,38 +1,38 @@
-cs.lift(cs.const(                → cs`
-new (                            → new 
-cs.splice(                       →  [-semantic]
-(Shape)                          → $Shape
-)                                →  [-semantic]
-)(cs.lift(cs.const(              → (
-5                                → 5
-)))                              → )
-))                               → `
-cs.lift(cs.const((() => {\n      → cs`{\n  
-return                           → return 
-{                                → { 
-first                            → first
-:                                → : 
-cs.splice(                       →  [-semantic]
-(a)                              → $a
-)                                →  [-semantic]
-,                                → , 
-second                           → second
-:                                → : 
-cs.splice(                       →  [-semantic]
-(b)                              → $b
-)                                →  [-semantic]
-,                                → , 
-third                            → third
-:                                → : 
-cs.splice(                       →  [-semantic]
-(c)                              → $c
-)                                →  [-semantic]
-,                                → , 
-fourth                           → fourth
-:                                → : 
-cs.splice(                       →  [-semantic]
-(d)                              → $d
-)                                →  [-semantic]
- }                               →  }
-;                                → ;
-\n})()))                         → \n}`
+cs.lift(cs.const(       → cs`
+new (                   → new 
+cs.splice(              →  [-semantic]
+(Shape)                 → $Shape
+)                       →  [-semantic]
+)(cs.lift(cs.const(     → (
+5                       → 5
+)))                     → )
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+return cs.const(        → return 
+{                       → { 
+first                   → first
+:                       → : 
+cs.splice(              →  [-semantic]
+(a)                     → $a
+)                       →  [-semantic]
+,                       → , 
+second                  → second
+:                       → : 
+cs.splice(              →  [-semantic]
+(b)                     → $b
+)                       →  [-semantic]
+,                       → , 
+third                   → third
+:                       → : 
+cs.splice(              →  [-semantic]
+(c)                     → $c
+)                       →  [-semantic]
+,                       → , 
+fourth                  → fourth
+:                       → : 
+cs.splice(              →  [-semantic]
+(d)                     → $d
+)                       →  [-semantic]
+ }                      →  }
+);                      → ;
+\n})())                 → \n}`

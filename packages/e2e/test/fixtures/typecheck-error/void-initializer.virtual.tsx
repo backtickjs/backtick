@@ -7,10 +7,10 @@ const ping = cs.lift(cs.const(() => {
     __cs_n = cs.const(1);
 }));
 
-const script = cs.lift(cs.const((() => {
+const script = cs.lift((() => {
     const __cs_x = cs.const(cs.splice((ping))());
-    return 1;
-})()));
+    return cs.const(1);
+})());
 
 const action = cs.lift((() => {
     const __cs_x = cs.const(cs.splice((ping))());
@@ -19,10 +19,10 @@ const action = cs.lift((() => {
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
 const label = cs.lift(cs.const((__cs_text: string) => {
-    return __cs_text;
+    return cs.const(__cs_text);
 }));
 
-const wrongArgument = cs.lift(cs.const((() => {
+const wrongArgument = cs.lift((() => {
     const __cs_x = cs.const(cs.splice((label))(true));
-    return 1;
-})()));
+    return cs.const(1);
+})());

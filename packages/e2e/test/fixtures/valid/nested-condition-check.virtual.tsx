@@ -9,9 +9,9 @@ import { cs, type Client } from "@backtickjs/core";
 const gate: Client<(a: boolean, b: boolean) => string> = cs.lift(cs.const((__cs_a: boolean, __cs_b: boolean) => {
     const __cs_keep = cs.const((__cs_on: boolean) => __cs_on);
     if ((cs.condition(__cs_keep((cs.condition(__cs_a) && __cs_a) && (cs.condition(__cs_b) && __cs_b))) && __cs_keep(__cs_a && __cs_b))) {
-        return "kept";
+        return cs.const("kept");
     }
-    return "dropped";
+    return cs.const("dropped");
 }));
 
 export default cs.lift(cs.const({ both: cs.splice((gate))(true, true), one: cs.splice((gate))(true, false) }));

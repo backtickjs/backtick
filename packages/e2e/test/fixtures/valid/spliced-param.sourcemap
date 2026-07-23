@@ -1,38 +1,38 @@
-cs.lift(cs.const(                → cs`
-() =>                            → () => 
-cs.splice(                       → ${ [-semantic]
-this.r                           → this.r
-)                                → } [-semantic]
- +                               →  + 
-2                                → 2
-))                               → `
-cs.lift(cs.const((() => {\n      → cs`{\n  
-const                            → const 
-__cs_pick                        → pick
- = cs.const(                     →  = 
-(                                → (
-__cs_c                           → c
-: Color                          → : Color
-) =>                             → ) => 
-cs.receiver(                     → 
-__cs_c                           → c
-)                                → 
-.                                → .
-r                                → r
- +                               →  + 
-1                                → 1
-);                               → ;
-\n                               → \n  
-return                           → return 
-__cs_pick                        → pick
-(                                → (
-cs.splice(                       → ${ [-semantic]
-new Color(                       → new Color(
-cs.lift(cs.const(                → cs`
-7                                → 7
-))                               → `
-, "#123")                        → , "#123")
-)                                → } [-semantic]
-)                                → )
-;                                → ;
-\n})()))                         → \n}`
+cs.lift(cs.const(       → cs`
+() =>                   → () => 
+cs.splice(              → ${ [-semantic]
+this.r                  → this.r
+)                       → } [-semantic]
+ +                      →  + 
+2                       → 2
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_pick               → pick
+ = cs.const(            →  = 
+(                       → (
+__cs_c                  → c
+: Color                 → : Color
+) =>                    → ) => 
+cs.receiver(            → 
+__cs_c                  → c
+)                       → 
+.                       → .
+r                       → r
+ +                      →  + 
+1                       → 1
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+__cs_pick               → pick
+(                       → (
+cs.splice(              → ${ [-semantic]
+new Color(              → new Color(
+cs.lift(cs.const(       → cs`
+7                       → 7
+))                      → `
+, "#123")               → , "#123")
+)                       → } [-semantic]
+)                       → )
+);                      → ;
+\n})())                 → \n}`

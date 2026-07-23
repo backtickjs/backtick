@@ -7,21 +7,21 @@ const action = cs.lift((() => {
     const __cs_x = cs.const(1);
 })());
 
-export const stored = cs.lift(cs.const((() => {
+export const stored = cs.lift((() => {
     const __cs_captured = cs.const(cs.splice((action)));
-    return 1;
-})()));
+    return cs.const(1);
+})());
 
-export const returned = cs.lift(cs.const((() => {
-    return cs.splice((action));
-})()));
+export const returned = cs.lift((() => {
+    return cs.const(cs.splice((action)));
+})());
 
-export const assigned = cs.lift(cs.const((() => {
+export const assigned = cs.lift((() => {
     try {
-        return 1;
+        return cs.const(1);
     }
     catch (__cs_e) {
         __cs_e = cs.const(cs.splice((action)));
-        return 2;
+        return cs.const(2);
     }
-})()));
+})());
