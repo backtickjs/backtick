@@ -64,6 +64,11 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         node.right,
         indent,
       )}`;
+    case "ternary":
+      return `${renderNode(node.condition, indent)} ? ${renderNode(
+        node.consequent,
+        indent,
+      )} : ${renderNode(node.alternate, indent)}`;
     case "arrow":
       return `(${node.params.join(", ")}) => ${renderBody(node.body, indent)}`;
     case "block": {

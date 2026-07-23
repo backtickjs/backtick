@@ -20,6 +20,7 @@ export type {
   BundleReturnNode,
   BundleSlot,
   BundleStatementNode,
+  BundleTernaryNode,
   BundleThrowNode,
   BundleThunk,
   BundleTree,

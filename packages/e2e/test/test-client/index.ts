@@ -425,6 +425,13 @@ function evaluateNode(
     case "binop": {
       return evaluateBinop(bundle, node.operator, node.left, node.right, scope);
     }
+    case "ternary": {
+      // The condition is boolean by construction — no ToBoolean rules —
+      // and only the taken branch evaluates.
+      return evaluateNode(bundle, node.condition, scope)
+        ? evaluateNode(bundle, node.consequent, scope)
+        : evaluateNode(bundle, node.alternate, scope);
+    }
     case "arrow": {
       return (...args: unknown[]) => {
         const frame: Scope = { parent: scope, bindings: new Map() };

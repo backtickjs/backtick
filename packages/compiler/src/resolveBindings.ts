@@ -260,6 +260,10 @@ export function resolveBindings(
       // assigned (`x = ...`); an undeclared target is unresolvable.
       walkExpression(script, node.left, scopes);
       walkExpression(script, node.right, scopes);
+    } else if (ts.isConditionalExpression(node)) {
+      walkExpression(script, node.condition, scopes);
+      walkExpression(script, node.whenTrue, scopes);
+      walkExpression(script, node.whenFalse, scopes);
     } else if (ts.isArrowFunction(node)) {
       const params: Scope = new Map();
       for (const param of node.parameters) {

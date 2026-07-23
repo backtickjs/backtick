@@ -138,6 +138,7 @@ export type BundleExpressionNode =
   | BundleCallNode
   | BundlePropertyNode
   | BundleBinopNode
+  | BundleTernaryNode
   | BundleArrowNode;
 
 // A body node a block runs in order: control flow, bindings, or an
@@ -227,6 +228,16 @@ export interface BundleBinopNode {
   operator: BundleBinaryOperator;
   left: BundleExpressionNode;
   right: BundleExpressionNode;
+}
+
+// A ternary: `condition ? consequent : alternate`. The condition is boolean
+// — the typechecker requires it, no truthiness — and only the taken
+// branch evaluates (the other branch's effects are skipped).
+export interface BundleTernaryNode {
+  "#": "ternary";
+  condition: BundleExpressionNode;
+  consequent: BundleExpressionNode;
+  alternate: BundleExpressionNode;
 }
 
 // An arrow function: evaluates to a closure over the enclosing scope. The

@@ -1,0 +1,39 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_n             → n
+: number | null    → : number | null
+) => {\n           → ) => {\n  
+return cs.const(   → return 
+__cs_n             → n
+ ===               →  === 
+null               → null
+ ?                 →  ? 
+0                  → 0
+ :                 →  : 
+__cs_n             → n
+ +                 →  + 
+1                  → 1
+);                 → ;
+\n}                → \n}
+))                 → `
+cs.lift(cs.const(  → cs`
+{                  → ({\n  
+absent             → absent
+:                  → : 
+cs.splice(         →  [-semantic]
+(pick)             → $pick
+)                  →  [-semantic]
+(                  → (
+null               → null
+)                  → )
+,                  → ,\n  
+present            → present
+:                  → : 
+cs.splice(         →  [-semantic]
+(pick)             → $pick
+)                  →  [-semantic]
+(                  → (
+4                  → 4
+)                  → )
+ }                 → ,\n})
+))                 → `

@@ -25,6 +25,7 @@ import type {
   AstScriptSplice,
   AstScriptStatement,
   AstScriptString,
+  AstScriptTernary,
   AstScriptThrow,
   AstScriptTry,
   AstScriptVariableDeclaration,
@@ -134,6 +135,15 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     rhs: AstScriptExpression,
   ): AstScriptBinop {
     return { kind: "AstScriptBinop", loc, lhs, operator, rhs };
+  }
+
+  ternary(
+    loc: SourceLocation,
+    condition: AstScriptExpression,
+    consequent: AstScriptExpression,
+    alternate: AstScriptExpression,
+  ): AstScriptTernary {
+    return { kind: "AstScriptTernary", loc, condition, consequent, alternate };
   }
 
   array(loc: SourceLocation, elements: AstScriptExpression[]): AstScriptArray {

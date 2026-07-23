@@ -73,6 +73,10 @@ export interface Visitor<U> {
   // e.g. a + b
   binop(loc: SourceLocation, lhs: U, operator: BinaryOperator, rhs: U): U;
 
+  // e.g. c ? 1 : 2 — the condition is boolean (no truthiness), and only
+  // the taken branch evaluates
+  ternary(loc: SourceLocation, condition: U, consequent: U, alternate: U): U;
+
   // e.g. [1, 2, 3]
   array(loc: SourceLocation, elements: U[]): U;
 

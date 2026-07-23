@@ -987,6 +987,32 @@ function rewriteNodeImpl(
     return unsupported();
   }
 
+  if (ts.isConditionalExpression(node)) {
+    const condition = rewriteNode(ts, state, node.condition);
+    const consequent = rewriteNode(ts, state, node.whenTrue);
+    const alternate = rewriteNode(ts, state, node.whenFalse);
+    return {
+      virtual: ts.factory.createConditionalExpression(
+        checkedCondition(
+          ts,
+          state,
+          node.condition,
+          condition.virtual as ts.Expression,
+        ),
+        ts.factory.createToken(ts.SyntaxKind.QuestionToken),
+        consequent.virtual as ts.Expression,
+        ts.factory.createToken(ts.SyntaxKind.ColonToken),
+        alternate.virtual as ts.Expression,
+      ),
+      runtime: call(ts, "v", "ternary", [
+        loc(node),
+        condition.runtime as ts.Expression,
+        consequent.runtime as ts.Expression,
+        alternate.runtime as ts.Expression,
+      ]),
+    };
+  }
+
   if (ts.isBinaryExpression(node)) {
     const lhs = rewriteNode(ts, state, node.left);
     const rhs = rewriteNode(ts, state, node.right);

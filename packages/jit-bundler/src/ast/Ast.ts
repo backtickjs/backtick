@@ -29,7 +29,8 @@ export type AstScriptExpression =
   | AstScriptObject
   | AstScriptPropertyAccess
   | AstScriptSplice
-  | AstScriptString;
+  | AstScriptString
+  | AstScriptTernary;
 
 // A script node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.
@@ -88,6 +89,14 @@ export interface AstScriptBinop {
   readonly lhs: AstScriptExpression;
   readonly operator: BinaryOperator;
   readonly rhs: AstScriptExpression;
+}
+
+export interface AstScriptTernary {
+  readonly kind: "AstScriptTernary";
+  readonly loc: SourceLocation;
+  readonly condition: AstScriptExpression;
+  readonly consequent: AstScriptExpression;
+  readonly alternate: AstScriptExpression;
 }
 
 export interface AstScriptBlock {

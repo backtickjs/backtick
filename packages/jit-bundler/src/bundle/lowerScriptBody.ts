@@ -127,6 +127,13 @@ function buildExpression(
         left: e(node.lhs),
         right: e(node.rhs),
       };
+    case "AstScriptTernary":
+      return {
+        "#": "ternary",
+        condition: e(node.condition),
+        consequent: e(node.consequent),
+        alternate: e(node.alternate),
+      };
     case "AstScriptBoolean":
       return node.value;
     case "AstScriptCall": {

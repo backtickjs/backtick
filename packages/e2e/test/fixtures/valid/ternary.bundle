@@ -1,0 +1,84 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "absent": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            null
+          ]
+        },
+        "present": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            4
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "n"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "return",
+              "expression": {
+                "#": "ternary",
+                "condition": {
+                  "#": "binop",
+                  "operator": "===",
+                  "left": {
+                    "#": "identifier",
+                    "name": "n"
+                  },
+                  "right": null
+                },
+                "consequent": 0,
+                "alternate": {
+                  "#": "binop",
+                  "operator": "+",
+                  "left": {
+                    "#": "identifier",
+                    "name": "n"
+                  },
+                  "right": 1
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}
