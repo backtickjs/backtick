@@ -5,14 +5,14 @@ import type {
   ClientArray,
   ClientElement,
   ClientObject,
-  ClientUnknown,
+  ClientValue,
+  Receiver,
   Spliceable,
   Spliced,
-  Receiver,
 } from "@backtickjs/cs-runtime";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
-declare function receiver<T extends ClientUnknown>(value: T): Receiver<T>;
+declare function receiver<T extends ClientValue>(value: T): Receiver<T>;
 declare const clientNumber: Client<number>;
 declare const clientArrow: Client<() => number>;
 

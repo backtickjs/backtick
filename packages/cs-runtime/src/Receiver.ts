@@ -5,7 +5,7 @@ import type { ClientElement } from "./ClientElement.js";
 import type { ClientNumber } from "./ClientNumber.js";
 import type { ClientObject } from "./ClientObject.js";
 import type { ClientString } from "./ClientString.js";
-import type { ClientUnknown } from "./ClientUnknown.js";
+import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 
 // A built-in receiver autoboxes to its client type, so its members resolve
@@ -39,7 +39,7 @@ type SplicedMembers<T extends ClientObject> = {
 //   ClientElement                   -> {}: opaque
 //   ClientObject                    -> SplicedMembers<T>
 //   anything else                   -> unchanged
-export type Receiver<T extends ClientUnknown> = T extends
+export type Receiver<T extends ClientValue> = T extends
   | string
   | number
   | boolean

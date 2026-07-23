@@ -1,7 +1,7 @@
 import type { Client } from "./Client.ts";
-import type { ClientUnknown } from "./ClientUnknown.ts";
+import type { ClientValue } from "./ClientValue.js";
 
-export type Prop<T extends ClientUnknown> = T | Client<T>;
+export type Prop<T extends ClientValue> = T | Client<T>;
 
 export interface ClientElement {
   readonly "@backtickjs": "ClientElement";

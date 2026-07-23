@@ -3,12 +3,10 @@ import type { ClientConstructor } from "./ClientConstructor.js";
 import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
 import { type ClientElement, isClientElement } from "./ClientElement.js";
-import type { ClientUnknown } from "./ClientUnknown.js";
+import type { ClientValue } from "./ClientValue.js";
 
-// Everything spliceable — a value or an action; kinds are checked at the
-// positions that use them, not at the splice.
-export type Spliceable =
-  | Client<ClientUnknown>
+export type SpliceableValue =
+  | Client<ClientValue>
   | ClientElement
   | ClientConstructor
   | ClientObject
@@ -16,8 +14,11 @@ export type Spliceable =
   | number
   | boolean
   | string
-  | Spliceable[]
-  | { [key: string]: Spliceable };
+  | SpliceableValue[]
+  | { [key: string]: SpliceableValue };
+
+// Everything spliceable — a value or an action
+export type Spliceable = SpliceableValue | Client<void>;
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
@@ -27,8 +28,11 @@ export type Spliceable =
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
-export type Spliced<T> =
-  T extends Client<infer U>
+// A failed splice instantiates with the whole constraint; collapse that
+// fallback to ClientValue so only the splice's own error reports.
+export type Spliced<T> = [Spliceable] extends [T]
+  ? ClientValue
+  : T extends Client<infer U>
     ? U
     : T extends ClientElement
       ? T

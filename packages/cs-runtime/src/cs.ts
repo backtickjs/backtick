@@ -62,7 +62,7 @@ function _statement(_: void): void {
   );
 }
 
-function _receiver<T extends ClientUnknown>(_: T): Receiver<T> {
+function _receiver<T extends ClientValue>(_: T): Receiver<T> {
   throw new Error(
     "Don't call `cs.receiver` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
