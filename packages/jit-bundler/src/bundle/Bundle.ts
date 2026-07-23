@@ -167,9 +167,10 @@ export interface BundleCallNode {
 
 // A static property access: `object.name`. When `optional` (`object?.name`),
 // a null object yields null — the language's absent value; `undefined` never
-// arises — instead of reading. As a call's callee, an optional access also
-// short-circuits the call: a null object yields null and the arguments are
-// not evaluated.
+// arises — instead of reading. Reading an absent member also yields null,
+// the same family as a missing argument binding null. As a call's callee,
+// an optional access also short-circuits the call: a null object yields
+// null and the arguments are not evaluated.
 export interface BundlePropertyNode {
   "#": "property";
   object: BundleExpressionNode;

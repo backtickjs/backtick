@@ -1,0 +1,11 @@
+#f0 = () => {
+  "present": #f1()({ "label": "a", "inner": { "z": 3 } }),
+  "partial": #f1()({ "label": "b", "inner": {} }),
+  "omitted": #f1()({ "label": "c" })
+}
+
+#f1 = () => (o) => {
+  return [o.label, o.inner?.z ?? 0];
+}
+
+root = #f0()

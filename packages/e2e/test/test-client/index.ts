@@ -418,7 +418,9 @@ function evaluateNode(
       if (node.optional && object === null) {
         return null;
       }
-      return object[node.name];
+      // An absent member reads as null — the language's absent value;
+      // `undefined` never arises.
+      return object[node.name] ?? null;
     }
     case "binop": {
       return evaluateBinop(bundle, node.operator, node.left, node.right, scope);

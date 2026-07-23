@@ -1,5 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
+import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
 import type { ClientElement } from "./ClientElement.js";
@@ -37,10 +38,20 @@ type SplicedMembers<T extends ClientObject> = {
         : never]: Spliced<T[K]>;
 };
 
+// A plain object's members as a script reads them: `?` means omittable —
+// an absent member reads as `null`, so an optional member's `undefined`
+// never surfaces; a required member reads unchanged.
+type ReadMembers<T extends object> = {
+  [K in keyof T]-?: {} extends Pick<T, K>
+    ? Exclude<T[K], undefined> | null
+    : T[K];
+};
+
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
 //   ClientElement                   -> {}: opaque
 //   ClientObject                    -> SplicedMembers<T>
+//   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue> = T extends
   | string
@@ -52,4 +63,8 @@ export type Receiver<T extends ClientValue> = T extends
     ? {}
     : T extends ClientObject
       ? SplicedMembers<T>
-      : T;
+      : T extends ClientConstructor | ClientFunction
+        ? T
+        : T extends object
+          ? ReadMembers<T>
+          : T;

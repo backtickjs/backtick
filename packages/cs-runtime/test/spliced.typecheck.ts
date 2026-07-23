@@ -176,6 +176,14 @@ asValue((d: Date) => 1);
 // @ts-expect-error — same, a host collection parameter.
 asValue((s: Set<number>) => 1);
 
+// `?` on a plain object's member means omittable: a read scrubs the
+// member's `undefined` to `null`; a required member reads unchanged.
+declare const preferences: { label: string; nickname?: string };
+receiver(preferences).label satisfies string;
+receiver(preferences).nickname satisfies string | null;
+// @ts-expect-error — an optional member never reads `undefined`.
+receiver(preferences).nickname satisfies string | undefined;
+
 // An element is opaque in a script: it splices in whole — the payload stays
 // `ClientElement` — and no member reflects on the client.
 declare const element: ClientElement;

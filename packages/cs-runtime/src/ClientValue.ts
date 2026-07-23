@@ -13,4 +13,4 @@ export type ClientValue =
   | string
   | ClientFunction
   | ClientValue[]
-  | { [key: string]: ClientValue };
+  | { [key: string]: ClientValue | undefined };

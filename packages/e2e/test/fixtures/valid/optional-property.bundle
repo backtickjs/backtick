@@ -1,0 +1,114 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "present": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "label": "a",
+              "inner": {
+                "z": 3
+              }
+            }
+          ]
+        },
+        "partial": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "label": "b",
+              "inner": {}
+            }
+          ]
+        },
+        "omitted": {
+          "#": "call",
+          "callee": {
+            "#": "call",
+            "callee": {
+              "#": "entry",
+              "label": "#f1"
+            },
+            "args": []
+          },
+          "args": [
+            {
+              "label": "c"
+            }
+          ]
+        }
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [
+          "o"
+        ],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "return",
+              "expression": [
+                {
+                  "#": "property",
+                  "object": {
+                    "#": "identifier",
+                    "name": "o"
+                  },
+                  "name": "label"
+                },
+                {
+                  "#": "binop",
+                  "operator": "??",
+                  "left": {
+                    "#": "property",
+                    "object": {
+                      "#": "property",
+                      "object": {
+                        "#": "identifier",
+                        "name": "o"
+                      },
+                      "name": "inner"
+                    },
+                    "name": "z",
+                    "optional": true
+                  },
+                  "right": 0
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {},
+  "root": {
+    "#": "apply",
+    "label": "#f0",
+    "args": []
+  }
+}
