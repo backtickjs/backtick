@@ -1,7 +1,7 @@
 import type { ClientConstructor } from "./ClientConstructor.js";
+import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientElement } from "./ClientElement.js";
 import type { ClientObject } from "./ClientObject.js";
-import type { ClientUnknown } from "./ClientUnknown.js";
 
 export type ClientValue =
   | ClientElement
@@ -11,6 +11,6 @@ export type ClientValue =
   | number
   | boolean
   | string
-  | ((...args: never[]) => ClientUnknown)
+  | ClientFunction
   | ClientValue[]
   | { [key: string]: ClientValue };

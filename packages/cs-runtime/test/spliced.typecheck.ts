@@ -160,6 +160,19 @@ receiver(button).press;
 // @ts-expect-error — an `undefined`-bearing member isn't spliceable.
 receiver(button).nickname;
 
+// A function is a value only if a client could call it: parameters must be
+// client values (checked bivariantly — narrower params stay assignable),
+// optionally omitted.
+declare function asValue<T extends ClientValue>(_: T): T;
+asValue((n: number) => n + 1);
+asValue((name?: string | null) => name ?? "you");
+declare const onTap: (id: number) => void;
+asValue({ tap: onTap, label: "x" });
+// @ts-expect-error — a host-typed parameter isn't a client value.
+asValue((d: Date) => 1);
+// @ts-expect-error — same, a host collection parameter.
+asValue((s: Set<number>) => 1);
+
 // An element is opaque in a script: it splices in whole — the payload stays
 // `ClientElement` — and no member reflects on the client.
 declare const element: ClientElement;
