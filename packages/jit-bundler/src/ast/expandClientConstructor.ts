@@ -22,7 +22,10 @@ export function expandClientConstructor(
     expansion = {
       kind: "AstExpansion",
       params,
-      body: lowerSpliceable(new value(...params.map(createHole))),
+      body: lowerSpliceable(
+        new value(...params.map(createHole)),
+        "ClientValue",
+      ),
     };
     expansionByConstructor.set(value, expansion);
   }

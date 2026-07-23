@@ -41,7 +41,7 @@ export function lowerClientScript(client: ClientScript): AstScript {
     splices: Object.fromEntries(
       Object.entries(client.metadata.splices).map(([key, splice]) => [
         key,
-        lowerSpliceable(splice),
+        lowerSpliceable(splice, "ClientUnknown"),
       ]),
     ),
     captures: client.metadata.captures,

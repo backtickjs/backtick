@@ -11,7 +11,11 @@ import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientElement } from "./lowerClientElement.js";
 
-export function lowerSpliceable(value: Spliceable): Ast {
+export function lowerSpliceable(
+  value: Spliceable,
+  // The kind of position being lowered
+  position: "ClientUnknown" | "ClientValue",
+): Ast {
   // A hole sentinel a constructor stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.
@@ -20,6 +24,13 @@ export function lowerSpliceable(value: Spliceable): Ast {
     return { kind: "AstHole", name: hole };
   }
   if (isClientScript(value)) {
+    // Backstop for untyped callers
+    if (position === "ClientValue" && value.metadata.kind === "action") {
+      throw new Error(
+        "Can't bundle an action `Client<void>` as data. " +
+          "Use a callback `Client<() => void>` instead.",
+      );
+    }
     return lowerClientScript(value);
   }
   if (isClientElement(value)) {
@@ -41,7 +52,10 @@ export function lowerSpliceable(value: Spliceable): Ast {
     return { kind: "AstString", value };
   }
   if (Array.isArray(value)) {
-    return { kind: "AstArray", elements: value.map(lowerSpliceable) };
+    return {
+      kind: "AstArray",
+      elements: value.map((element) => lowerSpliceable(element, "ClientValue")),
+    };
   }
   // A spliced class lowers to its expansion — a function of its declared
   // constructor parameters — wherever it appears, so a construction (or a
@@ -63,7 +77,7 @@ export function lowerSpliceable(value: Spliceable): Ast {
   }
   const entries: { [key: string]: Ast } = {};
   for (const [key, entry] of Object.entries(value)) {
-    entries[key] = lowerSpliceable(entry);
+    entries[key] = lowerSpliceable(entry, "ClientValue");
   }
   return { kind: "AstObject", entries };
 }

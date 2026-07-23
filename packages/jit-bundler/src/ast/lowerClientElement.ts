@@ -18,7 +18,7 @@ export function lowerClientElement(value: ClientElement): AstElement {
           "isn't spliceable.",
       );
     }
-    props[key] = lowerSpliceable(entry);
+    props[key] = lowerSpliceable(entry, "ClientValue");
   }
   const node: AstElement = {
     kind: "AstElement",

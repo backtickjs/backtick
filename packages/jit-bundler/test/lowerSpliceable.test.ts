@@ -28,7 +28,7 @@ test("a reflected instance keeps spliceable members, own or inherited", () => {
     }
   }
 
-  assert.deepEqual(lowerSpliceable(new Derived()), {
+  assert.deepEqual(lowerSpliceable(new Derived(), "ClientUnknown"), {
     kind: "AstObject",
     entries: {
       field: { kind: "AstNumber", value: 3 },

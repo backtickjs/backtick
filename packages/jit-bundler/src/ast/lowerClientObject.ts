@@ -17,7 +17,7 @@ export function lowerClientObject(value: ClientObject): AstObject {
 
   const entries: { [key: string]: Ast } = {};
   for (const [key, entry] of spliceableEntries(value)) {
-    entries[key] = lowerSpliceable(entry);
+    entries[key] = lowerSpliceable(entry, "ClientValue");
   }
 
   const node: AstObject = { kind: "AstObject", entries };

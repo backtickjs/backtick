@@ -6,7 +6,7 @@ import type { Client, ClientValue } from "@backtickjs/cs-runtime";
 
 // The bundle is plain data; serialize it with `JSON.stringify`.
 export function bundle(value: Client<ClientValue> | Client<void>): Bundle {
-  const ast = lowerSpliceable(value);
+  const ast = lowerSpliceable(value, "ClientUnknown");
   const ir = buildIr(ast);
   return buildBundle(ir);
 }
