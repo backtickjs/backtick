@@ -50,16 +50,20 @@ function terminates(
   return false;
 }
 
-// The classifier: a valued `return` makes a value body, as does exiting
-// every path with no `return` at all (a throw-only block). Bare returns
-// are an action's early exit.
+// The classifier. An expression body implicitly returns its expression —
+// a value body. In a block, a valued `return` makes a value body, as does
+// exiting every path with no `return` at all (a throw-only block); bare
+// returns are an action's early exit.
 export function bodyKind(
   ts: typeof import("typescript"),
-  block: ts.Block,
+  body: ts.Block | ts.Expression,
 ): "value" | "action" {
-  const returns = ownReturn(ts, block);
-  const valued = ownReturn(ts, block, true);
-  const exits = terminates(ts, block);
+  if (!ts.isBlock(body)) {
+    return "value";
+  }
+  const returns = ownReturn(ts, body);
+  const valued = ownReturn(ts, body, true);
+  const exits = terminates(ts, body);
   return valued || (exits && !returns) ? "value" : "action";
 }
 

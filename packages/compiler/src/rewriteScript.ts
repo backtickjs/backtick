@@ -51,7 +51,7 @@ export function rewriteScript(
     mappings: new Map(),
     codeInformation: new Map(),
     captures: new Set(captures),
-    bodyKind: ts.isBlock(scriptNode) ? bodyKind(ts, scriptNode) : "value",
+    bodyKind: bodyKind(ts, scriptNode),
   };
 
   const rewritten = rewriteNode(ts, state, scriptNode);

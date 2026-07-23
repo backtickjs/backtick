@@ -861,12 +861,10 @@ function rewriteNodeImpl(
 
     if (params.every((param) => param != null)) {
       // An arrow's body classifies on its own — never inherited from the
-      // enclosing body. An expression body implicitly returns its
-      // expression, so it's a value body (today the kind only drives
-      // statement-level checks, which an expression body can't contain).
+      // enclosing body.
       const bodyState: RewriteState = {
         ...state,
-        bodyKind: ts.isBlock(node.body) ? bodyKind(ts, node.body) : "value",
+        bodyKind: bodyKind(ts, node.body),
       };
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
