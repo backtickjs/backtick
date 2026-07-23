@@ -1,3 +1,4 @@
 5:18-5:37 error TS0: A rest parameter isn't supported in a `cs` client script.
 9:23-9:36 error TS0: A parameter default isn't supported in a `cs` client script; use `?` and handle `null` instead.
 13:45-13:46 error TS0: A required parameter cannot follow an optional parameter.
+17:26-17:46 error TS0: This parameter isn't supported in a `cs` client script.

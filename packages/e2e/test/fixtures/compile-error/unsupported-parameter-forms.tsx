@@ -13,3 +13,7 @@ const defaulted = cs`(n: number = 2) => {
 const trailingRequired = cs`(name?: string, x: number) => {
   return x;
 }`;
+
+const destructured = cs`({ a }: { a: number }) => {
+  return 1;
+}`;
