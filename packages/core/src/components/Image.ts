@@ -1,12 +1,15 @@
 import type { ClientComponent, Prop } from "@backtickjs/cs-runtime";
+import type { ImageSource } from "./ImageSource.js";
 import type { Style } from "./Style.js";
 
+type ResizeMode = "cover" | "contain" | "stretch" | "repeat" | "center";
+
 type Props = {
-  source: Prop<string>;
+  source: ImageSource;
   style?: Style;
+  resizeMode?: Prop<ResizeMode>;
 };
 
-/** Displays an image, addressed by URI. */
 export const Image: ClientComponent<Props> = (props) => ({
   "@backtickjs": "ClientElement",
   id: "Image",

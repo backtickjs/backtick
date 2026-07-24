@@ -1,0 +1,20 @@
+#f0 = () => () => {
+
+}
+
+#t0 = <View
+  style={{ "padding": 8 }}
+>
+  {<Text
+    style={{ "fontSize": 12 }}
+    onPress={#f0()}
+  >
+    {"hi"}
+  </Text>}
+  {<Image
+    source={{ "uri": "https://example.com/a.png" }}
+    resizeMode={"cover"}
+  />}
+</View>
+
+root = #t0()

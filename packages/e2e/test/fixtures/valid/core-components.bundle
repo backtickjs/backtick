@@ -1,0 +1,64 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": {
+          "#": "block",
+          "statements": []
+        }
+      }
+    }
+  },
+  "trees": {
+    "#t0": {
+      "element": {
+        "#": "element",
+        "id": "View",
+        "key": null,
+        "props": {
+          "style": {
+            "padding": 8
+          },
+          "children": [
+            {
+              "#": "element",
+              "id": "Text",
+              "key": null,
+              "props": {
+                "style": {
+                  "fontSize": 12
+                },
+                "onPress": {
+                  "#": "apply",
+                  "label": "#f0",
+                  "args": []
+                },
+                "children": "hi"
+              }
+            },
+            {
+              "#": "element",
+              "id": "Image",
+              "key": null,
+              "props": {
+                "source": {
+                  "uri": "https://example.com/a.png"
+                },
+                "resizeMode": "cover"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t0",
+    "args": []
+  }
+}

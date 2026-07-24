@@ -8,7 +8,6 @@ type Props = {
   style?: Style;
 };
 
-/** A container. Lays out its children; carries no content of its own. */
 export const View: ClientComponent<Props> = (props) => ({
   "@backtickjs": "ClientElement",
   id: "View",
