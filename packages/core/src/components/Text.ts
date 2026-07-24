@@ -1,10 +1,10 @@
 import type { Client, ClientComponent, Prop } from "@backtickjs/cs-runtime";
 import type { Children } from "./Children.js";
-import type { Style } from "./Style.js";
+import type { TextStyle } from "./style/index.js";
 
 type Props = {
   children?: Children<Prop<string>>;
-  style?: Style;
+  style?: TextStyle;
   onPress?: Client<() => void>;
 };
 

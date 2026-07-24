@@ -14,8 +14,8 @@ export type SpliceableValue =
   | number
   | boolean
   | string
-  | SpliceableValue[]
-  | { [key: string]: SpliceableValue };
+  | readonly SpliceableValue[]
+  | { readonly [key: string]: SpliceableValue };
 
 // Everything spliceable — a value or an action
 export type Spliceable = SpliceableValue | Client<void>;

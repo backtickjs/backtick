@@ -12,5 +12,5 @@ export type ClientValue =
   | boolean
   | string
   | ClientFunction
-  | ClientValue[]
-  | { [key: string]: ClientValue | undefined };
+  | readonly ClientValue[]
+  | { readonly [key: string]: ClientValue | undefined };

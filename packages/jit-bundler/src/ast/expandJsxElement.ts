@@ -51,6 +51,7 @@ async function buildElement(jsx: JsxElement): Promise<AstElement> {
       ),
     ),
   );
+
   return {
     kind: "AstElement",
     id: element.id,
