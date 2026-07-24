@@ -7,6 +7,7 @@ export {
   type Spliceable,
   cs,
 } from "@backtickjs/cs-runtime";
+export { Image, Text, View } from "./components/index.js";
 export type { JSX } from "./jsx-runtime/index.js";
 export { bundle } from "@backtickjs/jit-bundler";
 export type {

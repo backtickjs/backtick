@@ -1,8 +1,4 @@
-/** What a client component returns: the element it names, and its props. */
-export interface ElementDescriptor {
-  readonly type: string;
-  readonly props: object;
-}
+import type { ClientElement } from "./ClientElement.js";
 
 /**
  * A component that names an element the interpreter renders — the only kind
@@ -15,4 +11,4 @@ export interface ElementDescriptor {
  */
 export type ClientComponent<P extends object = object> = (
   props: P,
-) => ElementDescriptor;
+) => ClientElement;

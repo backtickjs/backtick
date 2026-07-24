@@ -5,7 +5,7 @@
 
 #f1 = (x) => () => x
 
-#t0 = <button
+#t0 = <Button
   onClick={#f1(slots[0])}
 />
 

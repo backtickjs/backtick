@@ -1,1 +1,1 @@
-<button data={{ "#call": "#f0" }} />
+<Button data={{ "#call": "#f0" }} />

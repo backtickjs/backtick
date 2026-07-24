@@ -8,7 +8,7 @@ __cs_x              → x
 \n                  → \n  
 return cs.const(    → return 
 cs.splice(          → ${ [-semantic]
-(<button onClick={  → (<button onClick={
+(<Button onClick={  → (<Button onClick={
 cs.lift(cs.const(   → cs`
 () =>               → () => 
 __cs_x              → x

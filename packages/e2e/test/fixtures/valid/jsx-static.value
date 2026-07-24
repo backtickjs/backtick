@@ -1,3 +1,3 @@
-<flexbox direction="row">
-  <label key="a" text="hi" />
-</flexbox>
+<Flexbox direction="row">
+  <Label key="a" text="hi" />
+</Flexbox>

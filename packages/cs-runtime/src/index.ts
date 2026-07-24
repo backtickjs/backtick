@@ -21,9 +21,7 @@ export { isSpliceable, type Spliceable, type Spliced } from "./Spliceable.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
-export {
-  type ClientComponent,
-  type ElementDescriptor,
-} from "./ClientComponent.js";
+export type { ClientComponent } from "./ClientComponent.js";
+export { type ClientElement, isClientElement } from "./ClientElement.js";
 export { version } from "./version.js";
 export { create as _jsx } from "./JsxElement.js";

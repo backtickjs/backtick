@@ -1,4 +1,8 @@
-import { type JsxElement, isSpliceable } from "@backtickjs/cs-runtime";
+import {
+  isClientElement,
+  type JsxElement,
+  isSpliceable,
+} from "@backtickjs/cs-runtime";
 import type { Ast, AstElement } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
@@ -19,36 +23,38 @@ export function expandJsxElement(value: JsxElement): Promise<AstElement> {
   return node;
 }
 
-async function buildElement(value: JsxElement): Promise<AstElement> {
+async function buildElement(jsx: JsxElement): Promise<AstElement> {
   // Where the tag runs, and the one suspension point in the whole lowering.
-  const result = value.component(value.props as never);
+  const element = jsx.component(jsx.props as never);
 
   // A server component resolves to another element asynchronously: awaited
-  // here, on the host, and the element it built is what the bundle carries.
-  if (result instanceof Promise) {
-    return expandJsxElement(await result);
+  // here, on the host, and the element it built is what the bundle carries. A
+  // client component returns a marked `ClientElement` synchronously instead.
+  if (!isClientElement(element)) {
+    return expandJsxElement(await element);
   }
 
   // A client component names the element the interpreter renders, and the props
   // it hands back are the ones the element carries.
-  const { type } = result;
   const props = Object.fromEntries(
     await Promise.all(
-      Object.entries(result.props).map(async ([key, entry]): Promise<[string, Ast]> => {
-        if (!isSpliceable(entry)) {
-          throw new Error(
-            `Can't bundle this <${type} /> element: the \`${key}\` prop ` +
-              "isn't spliceable.",
-          );
-        }
-        return [key, await lowerSpliceable(entry, "ClientValue")];
-      }),
+      Object.entries(element.props).map(
+        async ([key, entry]): Promise<[string, Ast]> => {
+          if (!isSpliceable(entry)) {
+            throw new Error(
+              `Can't bundle this <${element.id} /> element: the \`${key}\` ` +
+                "prop isn't spliceable.",
+            );
+          }
+          return [key, await lowerSpliceable(entry, "ClientValue")];
+        },
+      ),
     ),
   );
   return {
     kind: "AstElement",
-    type,
-    key: value.key,
+    id: element.id,
+    key: jsx.key,
     props,
   };
 }

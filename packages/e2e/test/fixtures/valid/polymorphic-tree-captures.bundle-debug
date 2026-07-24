@@ -6,7 +6,7 @@
 
 #f3 = () => 2
 
-#t0 = <button
+#t0 = <Button
   onA={#f0((base) => #f1(base), () => #f2())}
   onB={#f0((base) => #f1(base), () => #f3())}
 />

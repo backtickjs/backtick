@@ -109,7 +109,7 @@ class IrBuilder {
     }
     return {
       kind: "IrElement",
-      type: element.type,
+      id: element.id,
       key: element.key,
       props,
     };

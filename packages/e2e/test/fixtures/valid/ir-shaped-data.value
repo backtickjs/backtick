@@ -1,1 +1,1 @@
-<button data={{ "kind": "IrScriptRef", "target": 0 }} />
+<Button data={{ "kind": "IrScriptRef", "target": 0 }} />

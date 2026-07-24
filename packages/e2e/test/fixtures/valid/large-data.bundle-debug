@@ -59,7 +59,7 @@
   "currency": "CAD"
 }
 
-#t0 = <button
+#t0 = <Button
   data={[
     {
       "id": "ord-1000",

@@ -1,4 +1,4 @@
-<flexbox direction="column">
-  <label text="hi" />
-  <label text="hi" />
-</flexbox>
+<Flexbox direction="column">
+  <Label text="hi" />
+  <Label text="hi" />
+</Flexbox>

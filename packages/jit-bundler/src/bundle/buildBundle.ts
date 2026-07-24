@@ -581,7 +581,12 @@ export function buildBundle(ir: Ir): Bundle {
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = renderExpr(entry, slots, params);
     }
-    return { "#": "element", type: element.type, key: element.key, props };
+    return {
+      "#": "element",
+      id: element.id,
+      key: element.key,
+      props,
+    };
   };
 
   // Renders an IR argument in expression position — the form used inside tree

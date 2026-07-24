@@ -1,4 +1,4 @@
-#t0 = <button
+#t0 = <Button
   data={{ "#call": "#f0" }}
 />
 

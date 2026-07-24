@@ -23,16 +23,16 @@ import type {
 // runtime values (a script prop becomes a callable function). `renderMarkup`
 // turns it into markup with those scripts evaluated.
 export class TestElement {
-  readonly type: string;
+  readonly id: string;
   readonly key: string | number | null;
   readonly props: { [prop: string]: unknown };
 
   constructor(
-    type: string,
+    id: string,
     key: string | number | null,
     props: { [prop: string]: unknown },
   ) {
-    this.type = type;
+    this.id = id;
     this.key = key;
     this.props = props;
   }
@@ -60,7 +60,7 @@ export function renderMarkup(element: TestElement, indent = ""): string {
     }
     attributes.push(` ${prop}=${renderAttribute(value, indent)}`);
   }
-  const opening = `<${element.type}${attributes.join("")}`;
+  const opening = `<${element.id}${attributes.join("")}`;
   if (children.length === 0) {
     return `${opening} />`;
   }
@@ -68,7 +68,7 @@ export function renderMarkup(element: TestElement, indent = ""): string {
   const body = children
     .map((child) => `${inner}${renderChild(child, inner)}`)
     .join("\n");
-  return `${opening}>\n${body}\n${indent}</${element.type}>`;
+  return `${opening}>\n${body}\n${indent}</${element.id}>`;
 }
 
 function renderAttribute(value: unknown, indent: string): string {
@@ -163,7 +163,7 @@ function evaluateElement(
   for (const [prop, expr] of Object.entries(element.props)) {
     props[prop] = evaluateExpr(bundle, expr, slots);
   }
-  return new TestElement(element.type, element.key, props);
+  return new TestElement(element.id, element.key, props);
 }
 
 // A tree expression (also the root): plain JSON carries itself; the

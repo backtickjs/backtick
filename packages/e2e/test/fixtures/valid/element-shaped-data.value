@@ -1,1 +1,1 @@
-<button data={{ "type": "x", "key": null, "props": {  } }} />
+<Button data={{ "type": "x", "key": null, "props": {  } }} />

@@ -51,7 +51,7 @@ export interface IrTreeRef {
 // unshared inside another appears inline as an `IrElement` prop.
 export interface IrElement {
   readonly kind: "IrElement";
-  readonly type: string;
+  readonly id: string;
   readonly key: string | number | null;
   readonly props: Readonly<Record<string, IrArgument>>;
 }

@@ -58,7 +58,7 @@ export interface BundleTree {
 // `BundleExpr` evaluated against the enclosing tree's slots.
 export interface BundleElement {
   "#": "element";
-  type: string;
+  id: string;
   key: string | number | null;
   props: { [prop: string]: BundleExpr };
 }

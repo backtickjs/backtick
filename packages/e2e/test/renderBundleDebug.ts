@@ -165,15 +165,15 @@ function renderJsx(element: BundleElement, indent: string): string {
   }
   const opening =
     attributes.length === 0
-      ? `<${element.type}`
-      : `<${element.type}\n${attributes.join("\n")}\n${indent}`;
+      ? `<${element.id}`
+      : `<${element.id}\n${attributes.join("\n")}\n${indent}`;
   if (children.length === 0) {
     return `${opening}${attributes.length === 0 ? " " : ""}/>`;
   }
   const body = children
     .map((child) => `${inner}{${renderExpr(child, inner)}}`)
     .join("\n");
-  return `${opening}>\n${body}\n${indent}</${element.type}>`;
+  return `${opening}>\n${body}\n${indent}</${element.id}>`;
 }
 
 // A container stays on one line while it fits the column budget; a large one

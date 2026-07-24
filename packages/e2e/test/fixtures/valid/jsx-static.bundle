@@ -4,13 +4,13 @@
     "#t0": {
       "element": {
         "#": "element",
-        "type": "flexbox",
+        "id": "Flexbox",
         "key": null,
         "props": {
           "direction": "row",
           "children": {
             "#": "element",
-            "type": "label",
+            "id": "Label",
             "key": "a",
             "props": {
               "text": "hi"

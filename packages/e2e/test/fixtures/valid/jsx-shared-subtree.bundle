@@ -4,7 +4,7 @@
     "#t0": {
       "element": {
         "#": "element",
-        "type": "label",
+        "id": "Label",
         "key": null,
         "props": {
           "text": "hi"
@@ -14,7 +14,7 @@
     "#t1": {
       "element": {
         "#": "element",
-        "type": "flexbox",
+        "id": "Flexbox",
         "key": null,
         "props": {
           "direction": "column",

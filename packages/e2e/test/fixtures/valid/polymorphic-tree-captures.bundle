@@ -63,7 +63,7 @@
     "#t0": {
       "element": {
         "#": "element",
-        "type": "button",
+        "id": "Button",
         "key": null,
         "props": {
           "onA": {

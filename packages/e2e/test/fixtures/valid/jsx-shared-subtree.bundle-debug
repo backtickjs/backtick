@@ -1,12 +1,12 @@
-#t0 = <label
+#t0 = <Label
   text={"hi"}
 />
 
-#t1 = <flexbox
+#t1 = <Flexbox
   direction={"column"}
 >
   {#t0()}
   {#t0()}
-</flexbox>
+</Flexbox>
 
 root = #t1()

@@ -1,5 +1,11 @@
 import { cs } from "@backtickjs/core";
 
+const Button = (props: { data?: unknown; onA?: unknown }) => ({
+  "@backtickjs": "ClientElement" as const,
+  id: "Button",
+  props,
+});
+
 // A realistic data-heavy tree: one element carrying a sizable dataset as a
 // plain data prop, so the wire cost of the `value`/`array`/`object`
 // envelopes shows up at scale rather than on toy literals.
@@ -19,5 +25,5 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 }));
 
 export default (
-  <button data={orders} onA={cs.lift(cs.const(() => cs.splice({ orders, currency: "CAD" })))} />
+  <Button data={orders} onA={cs.lift(cs.const(() => cs.splice({ orders, currency: "CAD" })))} />
 );

@@ -1,38 +1,40 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { isJsxElement } from "@backtickjs/cs-runtime";
+import { View } from "../dist/index.js";
 import { jsx, jsxs } from "../dist/jsx-runtime/index.js";
 
-test("jsx builds a flexbox element", () => {
-  const element = jsx("flexbox", { direction: "row" });
+test("jsx builds an element from a component", () => {
+  const element = jsx(View, { style: { padding: 8 } });
   assert.ok(isJsxElement(element));
-  assert.equal(element.type, "flexbox");
+  // the tag is stored as written; bundling is what resolves it to a name
+  assert.equal(element.component, View);
   assert.equal(element.key, null);
-  assert.deepEqual(element.props, { direction: "row" });
+  assert.deepEqual(element.props, { style: { padding: 8 } });
 });
 
 test("jsx carries an element key", () => {
-  assert.equal(jsx("flexbox", {}, "a").key, "a");
-  assert.equal(jsx("flexbox", {}, 0).key, 0);
+  assert.equal(jsx(View, {}, "a").key, "a");
+  assert.equal(jsx(View, {}, 0).key, 0);
 });
 
 test("jsx keeps children as a prop", () => {
-  const child = jsx("flexbox", {});
-  const element = jsx("flexbox", { children: child });
+  const child = jsx(View, {});
+  const element = jsx(View, { children: child });
   assert.deepEqual(element.props, { children: child });
 });
 
 test("jsxs keeps a static children array", () => {
-  const one = jsx("flexbox", {});
-  const two = jsx("flexbox", {});
-  const element = jsxs("flexbox", { children: [one, two] });
+  const one = jsx(View, {});
+  const two = jsx(View, {});
+  const element = jsxs(View, { children: [one, two] });
   assert.deepEqual(element.props.children, [one, two]);
 });
 
 test("jsx rejects a key that isn't a string or number", () => {
   assert.throws(
     // @ts-expect-error -- deliberately bypasses the key type to hit the runtime check
-    () => jsx("flexbox", {}, {}),
+    () => jsx(View, {}, {}),
     /Key must be a string or a number/,
   );
 });
