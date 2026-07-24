@@ -1,4 +1,4 @@
-import { checkVersion } from "./checkVersion.js";
+import { assertVersion } from "./assertVersion.js";
 import type { SourceLocation } from "./SourceLocation.js";
 import type { Spliceable } from "./Spliceable.js";
 import type { Visitor } from "./Visitor.js";
@@ -42,7 +42,7 @@ export function create(
   metadata: Metadata,
   visit: <U>(visitor: Visitor<U>) => U,
 ): ClientScript {
-  checkVersion(metadata.version);
+  assertVersion(metadata.version);
   return {
     "@backtickjs": "ClientScript",
     loc,
