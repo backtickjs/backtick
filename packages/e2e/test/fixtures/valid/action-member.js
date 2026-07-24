@@ -13,6 +13,7 @@ class Button {
 const press = cs.create(
   [18, 15, 20, 3],
   {
+    version: "0.0.0",
     filePath: "action-member.ts",
     fileHash: "1w48eutzbucnb",
     kind: "action",
@@ -36,6 +37,7 @@ const press = cs.create(
 export default cs.create(
   [22, 16, 25, 3],
   {
+    version: "0.0.0",
     filePath: "action-member.ts",
     fileHash: "1w48eutzbucnb",
     kind: "value",
@@ -44,6 +46,7 @@ export default cs.create(
         cs.create(
           [23, 31, 23, 39],
           {
+            version: "0.0.0",
             filePath: "action-member.ts",
             fileHash: "1w48eutzbucnb",
             kind: "value",

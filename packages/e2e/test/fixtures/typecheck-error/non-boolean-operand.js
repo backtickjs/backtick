@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [6, 16, 8, 3],
   {
+    version: "0.0.0",
     filePath: "non-boolean-operand.ts",
     fileHash: "3kpojr67liy8x",
     kind: "value",

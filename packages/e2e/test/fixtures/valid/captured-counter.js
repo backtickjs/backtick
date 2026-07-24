@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [5, 16, 12, 3],
   {
+    version: "0.0.0",
     filePath: "captured-counter.ts",
     fileHash: "31t2pc3vo9x5y",
     kind: "value",

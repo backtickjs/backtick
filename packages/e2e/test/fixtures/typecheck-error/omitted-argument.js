@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const greet = cs.create(
   [5, 15, 7, 3],
   {
+    version: "0.0.0",
     filePath: "omitted-argument.ts",
     fileHash: "1gqqin78x7yev",
     kind: "value",
@@ -38,6 +39,7 @@ const greet = cs.create(
 export default cs.create(
   [9, 16, 11, 3],
   {
+    version: "0.0.0",
     filePath: "omitted-argument.ts",
     fileHash: "1gqqin78x7yev",
     kind: "value",

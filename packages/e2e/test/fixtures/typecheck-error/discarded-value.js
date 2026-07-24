@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 const getValue = cs.create(
   [6, 18, 8, 3],
   {
+    version: "0.0.0",
     filePath: "discarded-value.ts",
     fileHash: "1y1jdbv3pfwln",
     kind: "value",
@@ -25,6 +26,7 @@ const getValue = cs.create(
 const ping = cs.create(
   [10, 14, 13, 3],
   {
+    version: "0.0.0",
     filePath: "discarded-value.ts",
     fileHash: "1y1jdbv3pfwln",
     kind: "value",
@@ -57,6 +59,7 @@ const ping = cs.create(
 const action = cs.create(
   [15, 16, 18, 3],
   {
+    version: "0.0.0",
     filePath: "discarded-value.ts",
     fileHash: "1y1jdbv3pfwln",
     kind: "action",

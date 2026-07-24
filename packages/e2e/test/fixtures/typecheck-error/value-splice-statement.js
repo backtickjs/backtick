@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const count = cs.create(
   [5, 15, 5, 20],
   {
+    version: "0.0.0",
     filePath: "value-splice-statement.ts",
     fileHash: "2xzewragy8kyn",
     kind: "value",
@@ -16,6 +17,7 @@ const count = cs.create(
 export const script = cs.create(
   [7, 23, 9, 3],
   {
+    version: "0.0.0",
     filePath: "value-splice-statement.ts",
     fileHash: "2xzewragy8kyn",
     kind: "action",

@@ -2,6 +2,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [3, 16, 6, 3],
   {
+    version: "0.0.0",
     filePath: "method-call.ts",
     fileHash: "190iczdl07b3h",
     kind: "value",

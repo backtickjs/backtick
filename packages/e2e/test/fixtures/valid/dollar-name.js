@@ -7,6 +7,7 @@ function add(lhs) {
   return cs.create(
     [8, 10, 8, 22],
     {
+      version: "0.0.0",
       filePath: "dollar-name.ts",
       fileHash: "3r8prbdxxrtje",
       kind: "value",
@@ -26,6 +27,7 @@ function add(lhs) {
 export default cs.create(
   [11, 16, 14, 3],
   {
+    version: "0.0.0",
     filePath: "dollar-name.ts",
     fileHash: "3r8prbdxxrtje",
     kind: "value",
@@ -34,6 +36,7 @@ export default cs.create(
         cs.create(
           [13, 16, 13, 24],
           {
+            version: "0.0.0",
             filePath: "dollar-name.ts",
             fileHash: "3r8prbdxxrtje",
             kind: "value",

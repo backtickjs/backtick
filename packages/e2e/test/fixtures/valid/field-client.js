@@ -13,6 +13,7 @@ class Color {
 export default cs.create(
   [18, 16, 25, 3],
   {
+    version: "0.0.0",
     filePath: "field-client.ts",
     fileHash: "3o65fk6h8ba4e",
     kind: "value",
@@ -21,6 +22,7 @@ export default cs.create(
         cs.create(
           [19, 25, 19, 31],
           {
+            version: "0.0.0",
             filePath: "field-client.ts",
             fileHash: "3o65fk6h8ba4e",
             kind: "value",
@@ -33,6 +35,7 @@ export default cs.create(
         cs.create(
           [19, 33, 19, 40],
           {
+            version: "0.0.0",
             filePath: "field-client.ts",
             fileHash: "3o65fk6h8ba4e",
             kind: "value",
@@ -45,6 +48,7 @@ export default cs.create(
         cs.create(
           [19, 42, 19, 49],
           {
+            version: "0.0.0",
             filePath: "field-client.ts",
             fileHash: "3o65fk6h8ba4e",
             kind: "value",

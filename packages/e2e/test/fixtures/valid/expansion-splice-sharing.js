@@ -7,6 +7,7 @@ function sum(a, b) {
   return cs.create(
     [9, 10, 9, 27],
     {
+      version: "0.0.0",
       filePath: "expansion-splice-sharing.ts",
       fileHash: "2kc5czyfqafly",
       kind: "value",
@@ -54,6 +55,7 @@ class Size {
 export default cs.create(
   [44, 16, 48, 3],
   {
+    version: "0.0.0",
     filePath: "expansion-splice-sharing.ts",
     fileHash: "2kc5czyfqafly",
     kind: "value",

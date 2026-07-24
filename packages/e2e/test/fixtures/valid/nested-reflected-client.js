@@ -11,6 +11,7 @@ class Point {
     return cs.create(
       [16, 12, 16, 43],
       {
+        version: "0.0.0",
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
         kind: "value",
@@ -44,6 +45,7 @@ class Segment {
     return cs.create(
       [32, 12, 32, 53],
       {
+        version: "0.0.0",
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
         kind: "value",
@@ -70,6 +72,7 @@ const segment = new Segment(
     cs.create(
       [36, 39, 36, 44],
       {
+        version: "0.0.0",
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
         kind: "value",
@@ -82,6 +85,7 @@ const segment = new Segment(
     cs.create(
       [36, 46, 36, 51],
       {
+        version: "0.0.0",
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
         kind: "value",
@@ -96,6 +100,7 @@ const segment = new Segment(
     cs.create(
       [36, 64, 36, 69],
       {
+        version: "0.0.0",
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
         kind: "value",
@@ -108,6 +113,7 @@ const segment = new Segment(
     cs.create(
       [36, 71, 36, 76],
       {
+        version: "0.0.0",
         filePath: "nested-reflected-client.ts",
         fileHash: "marvm6ddqnqk",
         kind: "value",
@@ -122,6 +128,7 @@ const segment = new Segment(
 export default cs.create(
   [38, 16, 45, 3],
   {
+    version: "0.0.0",
     filePath: "nested-reflected-client.ts",
     fileHash: "marvm6ddqnqk",
     kind: "value",

@@ -11,6 +11,7 @@ class Point {
     return cs.create(
       [16, 12, 16, 43],
       {
+        version: "0.0.0",
         filePath: "shared-client.ts",
         fileHash: "2dmd79xnh14ui",
         kind: "value",
@@ -38,6 +39,7 @@ const shared = new Point(
   cs.create(
     [22, 26, 22, 31],
     {
+      version: "0.0.0",
       filePath: "shared-client.ts",
       fileHash: "2dmd79xnh14ui",
       kind: "value",
@@ -50,6 +52,7 @@ const shared = new Point(
   cs.create(
     [22, 33, 22, 38],
     {
+      version: "0.0.0",
       filePath: "shared-client.ts",
       fileHash: "2dmd79xnh14ui",
       kind: "value",
@@ -63,6 +66,7 @@ const shared = new Point(
 const left = cs.create(
   [24, 14, 27, 3],
   {
+    version: "0.0.0",
     filePath: "shared-client.ts",
     fileHash: "2dmd79xnh14ui",
     kind: "value",
@@ -98,6 +102,7 @@ const left = cs.create(
 const right = cs.create(
   [29, 15, 32, 3],
   {
+    version: "0.0.0",
     filePath: "shared-client.ts",
     fileHash: "2dmd79xnh14ui",
     kind: "value",
@@ -129,6 +134,7 @@ const right = cs.create(
 export default cs.create(
   [34, 16, 34, 34],
   {
+    version: "0.0.0",
     filePath: "shared-client.ts",
     fileHash: "2dmd79xnh14ui",
     kind: "value",

@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 const ping = cs.create(
   [6, 14, 8, 3],
   {
+    version: "0.0.0",
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
     kind: "value",
@@ -32,6 +33,7 @@ const ping = cs.create(
 export const called = cs.create(
   [10, 23, 10, 34],
   {
+    version: "0.0.0",
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
     kind: "value",
@@ -44,6 +46,7 @@ export const called = cs.create(
 const action = cs.create(
   [12, 16, 14, 3],
   {
+    version: "0.0.0",
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
     kind: "action",
@@ -67,6 +70,7 @@ const action = cs.create(
 export const spliced = cs.create(
   [16, 24, 16, 35],
   {
+    version: "0.0.0",
     filePath: "action-call-script.ts",
     fileHash: "17wdcvct95tpn",
     kind: "value",

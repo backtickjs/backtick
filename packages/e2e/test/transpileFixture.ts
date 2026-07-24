@@ -22,7 +22,15 @@ export async function transpileFixture(
     compilerOptions: COMPILER_OPTIONS,
     transformers: { before: [transform(ts)] },
   });
+  // Every script's metadata carries the toolchain version, which would rewrite
+  // all of these snapshots on each release. Pinned to one value so a version
+  // bump doesn't bury the diff that release actually made. Matched on a semver
+  // shape so a fixture of its own with a `version` property is left alone.
+  const pinned = outputText.replace(
+    /version: "\d+\.\d+\.\d+[^"]*"/g,
+    'version: "0.0.0"',
+  );
   // The emitted runtime tree prints as one long line per script; formatted,
   // the snapshot reads like code.
-  return prettier.format(outputText, { parser: "typescript" });
+  return prettier.format(pinned, { parser: "typescript" });
 }

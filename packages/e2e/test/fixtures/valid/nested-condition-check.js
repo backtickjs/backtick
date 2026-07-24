@@ -8,6 +8,7 @@ import { cs } from "@backtickjs/core";
 const gate = cs.create(
   [9, 58, 18, 3],
   {
+    version: "0.0.0",
     filePath: "nested-condition-check.ts",
     fileHash: "2nymys98gllff",
     kind: "value",
@@ -68,6 +69,7 @@ const gate = cs.create(
 export default cs.create(
   [20, 16, 23, 4],
   {
+    version: "0.0.0",
     filePath: "nested-condition-check.ts",
     fileHash: "2nymys98gllff",
     kind: "value",

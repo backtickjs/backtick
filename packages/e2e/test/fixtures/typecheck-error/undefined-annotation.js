@@ -2,6 +2,7 @@ import { cs } from "@backtickjs/core";
 const stored = cs.create(
   [8, 16, 11, 3],
   {
+    version: "0.0.0",
     filePath: "undefined-annotation.ts",
     fileHash: "18uwl3j62c30b",
     kind: "value",
@@ -30,6 +31,7 @@ const stored = cs.create(
 const written = cs.create(
   [13, 17, 17, 3],
   {
+    version: "0.0.0",
     filePath: "undefined-annotation.ts",
     fileHash: "18uwl3j62c30b",
     kind: "value",

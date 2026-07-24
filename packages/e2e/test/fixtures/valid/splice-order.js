@@ -6,6 +6,7 @@ let count = 0;
 export default cs.create(
   [8, 16, 8, 50],
   {
+    version: "0.0.0",
     filePath: "splice-order.ts",
     fileHash: "6o3erh5ve8um",
     kind: "value",

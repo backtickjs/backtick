@@ -10,6 +10,7 @@ const flags = {
   strict: cs.create(
     [10, 25, 10, 33],
     {
+      version: "0.0.0",
       filePath: "condition-narrowing.ts",
       fileHash: "3ciy5yb38f51h",
       kind: "value",
@@ -23,6 +24,7 @@ const flags = {
 const label = cs.create(
   [12, 72, 23, 3],
   {
+    version: "0.0.0",
     filePath: "condition-narrowing.ts",
     fileHash: "3ciy5yb38f51h",
     kind: "value",
@@ -146,6 +148,7 @@ const label = cs.create(
 export default cs.create(
   [25, 16, 30, 4],
   {
+    version: "0.0.0",
     filePath: "condition-narrowing.ts",
     fileHash: "3ciy5yb38f51h",
     kind: "value",

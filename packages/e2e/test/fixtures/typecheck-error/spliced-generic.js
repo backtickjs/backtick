@@ -15,6 +15,7 @@ function wrap(value) {
   return cs.create(
     [20, 10, 20, 26],
     {
+      version: "0.0.0",
       filePath: "spliced-generic.ts",
       fileHash: "2o6jybvu3qwcy",
       kind: "value",
@@ -28,6 +29,7 @@ function wrap(value) {
 export default cs.create(
   [23, 16, 23, 49],
   {
+    version: "0.0.0",
     filePath: "spliced-generic.ts",
     fileHash: "2o6jybvu3qwcy",
     kind: "value",
@@ -37,6 +39,7 @@ export default cs.create(
           cs.create(
             [23, 36, 23, 41],
             {
+              version: "0.0.0",
               filePath: "spliced-generic.ts",
               fileHash: "2o6jybvu3qwcy",
               kind: "value",

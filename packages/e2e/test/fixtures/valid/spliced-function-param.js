@@ -6,6 +6,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [7, 16, 10, 3],
   {
+    version: "0.0.0",
     filePath: "spliced-function-param.ts",
     fileHash: "22dvza3e0b85b",
     kind: "value",
@@ -13,6 +14,7 @@ export default cs.create(
       $0splice0: cs.create(
         [9, 18, 9, 29],
         {
+          version: "0.0.0",
           filePath: "spliced-function-param.ts",
           fileHash: "22dvza3e0b85b",
           kind: "value",

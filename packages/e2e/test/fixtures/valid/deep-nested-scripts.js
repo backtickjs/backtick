@@ -3,6 +3,7 @@ function add(lhs, rhs) {
   return cs.create(
     [4, 10, 4, 25],
     {
+      version: "0.0.0",
       filePath: "deep-nested-scripts.ts",
       fileHash: "jmxp905pbgk8",
       kind: "value",
@@ -22,6 +23,7 @@ function add(lhs, rhs) {
 export default cs.create(
   [7, 16, 7, 40],
   {
+    version: "0.0.0",
     filePath: "deep-nested-scripts.ts",
     fileHash: "jmxp905pbgk8",
     kind: "value",
@@ -30,6 +32,7 @@ export default cs.create(
         cs.create(
           [7, 25, 7, 30],
           {
+            version: "0.0.0",
             filePath: "deep-nested-scripts.ts",
             fileHash: "jmxp905pbgk8",
             kind: "value",
@@ -42,6 +45,7 @@ export default cs.create(
         cs.create(
           [7, 32, 7, 37],
           {
+            version: "0.0.0",
             filePath: "deep-nested-scripts.ts",
             fileHash: "jmxp905pbgk8",
             kind: "value",

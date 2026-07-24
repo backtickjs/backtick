@@ -2,6 +2,7 @@ import { cs } from "@backtickjs/core";
 const lying = cs.create(
   [11, 36, 11, 50],
   {
+    version: "0.0.0",
     filePath: "undefined-return.ts",
     fileHash: "19ws50ksjspoc",
     kind: "value",
@@ -14,6 +15,7 @@ const lying = cs.create(
 export default cs.create(
   [13, 16, 17, 3],
   {
+    version: "0.0.0",
     filePath: "undefined-return.ts",
     fileHash: "19ws50ksjspoc",
     kind: "value",

@@ -2,6 +2,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [3, 16, 6, 3],
   {
+    version: "0.0.0",
     filePath: "shadowing.ts",
     fileHash: "wjl0rp4901n3",
     kind: "value",
@@ -10,6 +11,7 @@ export default cs.create(
         cs.create(
           [5, 16, 5, 25],
           {
+            version: "0.0.0",
             filePath: "shadowing.ts",
             fileHash: "wjl0rp4901n3",
             kind: "value",
@@ -43,6 +45,7 @@ function add(lhs, rhs) {
   return cs.create(
     [9, 10, 14, 5],
     {
+      version: "0.0.0",
       filePath: "shadowing.ts",
       fileHash: "wjl0rp4901n3",
       kind: "value",

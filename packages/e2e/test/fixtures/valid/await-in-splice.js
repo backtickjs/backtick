@@ -8,6 +8,7 @@ async function fetchGreeting() {
 export default cs.create(
   [10, 16, 10, 50],
   {
+    version: "0.0.0",
     filePath: "await-in-splice.ts",
     fileHash: "3872sh2awxtu6",
     kind: "value",

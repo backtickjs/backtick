@@ -11,6 +11,7 @@ class Point {
     return cs.create(
       [16, 12, 16, 43],
       {
+        version: "0.0.0",
         filePath: "nested-client.ts",
         fileHash: "3b7boqu5f3cse",
         kind: "value",
@@ -46,6 +47,7 @@ class Segment {
 export default cs.create(
   [34, 16, 37, 3],
   {
+    version: "0.0.0",
     filePath: "nested-client.ts",
     fileHash: "3b7boqu5f3cse",
     kind: "value",

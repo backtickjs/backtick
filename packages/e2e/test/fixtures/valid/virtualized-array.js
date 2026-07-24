@@ -11,6 +11,7 @@ class Wallet {
 export default cs.create(
   [16, 16, 16, 62],
   {
+    version: "0.0.0",
     filePath: "virtualized-array.ts",
     fileHash: "2se071q56i4uf",
     kind: "value",
@@ -19,6 +20,7 @@ export default cs.create(
         cs.create(
           [16, 33, 16, 38],
           {
+            version: "0.0.0",
             filePath: "virtualized-array.ts",
             fileHash: "2se071q56i4uf",
             kind: "value",
@@ -31,6 +33,7 @@ export default cs.create(
         cs.create(
           [16, 40, 16, 45],
           {
+            version: "0.0.0",
             filePath: "virtualized-array.ts",
             fileHash: "2se071q56i4uf",
             kind: "value",

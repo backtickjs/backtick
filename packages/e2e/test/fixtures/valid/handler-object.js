@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const beep = cs.create(
   [5, 28, 8, 3],
   {
+    version: "0.0.0",
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
     kind: "action",
@@ -32,6 +33,7 @@ const beep = cs.create(
 const onTap = cs.create(
   [10, 45, 12, 3],
   {
+    version: "0.0.0",
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
     kind: "value",
@@ -49,6 +51,7 @@ const onTap = cs.create(
 export default cs.create(
   [14, 16, 20, 3],
   {
+    version: "0.0.0",
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
     kind: "value",

@@ -3,6 +3,7 @@ import { cs } from "@backtickjs/core";
 const count = cs.create(
   [4, 15, 4, 20],
   {
+    version: "0.0.0",
     filePath: "ternary-condition.ts",
     fileHash: "29t6y9s27ti4b",
     kind: "value",
@@ -15,6 +16,7 @@ const count = cs.create(
 export default cs.create(
   [6, 16, 6, 44],
   {
+    version: "0.0.0",
     filePath: "ternary-condition.ts",
     fileHash: "29t6y9s27ti4b",
     kind: "value",

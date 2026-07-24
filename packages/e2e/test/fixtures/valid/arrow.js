@@ -2,6 +2,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [3, 16, 6, 3],
   {
+    version: "0.0.0",
     filePath: "arrow.ts",
     fileHash: "357jk2g9zktff",
     kind: "value",

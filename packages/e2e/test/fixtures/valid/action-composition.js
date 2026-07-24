@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const effects = cs.create(
   [5, 31, 7, 3],
   {
+    version: "0.0.0",
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
     kind: "action",
@@ -27,6 +28,7 @@ const effects = cs.create(
 const composed = cs.create(
   [9, 32, 11, 3],
   {
+    version: "0.0.0",
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
     kind: "action",
@@ -39,6 +41,7 @@ const composed = cs.create(
 export default cs.create(
   [13, 16, 15, 3],
   {
+    version: "0.0.0",
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
     kind: "action",

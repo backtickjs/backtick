@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 const action = cs.create(
   [6, 16, 8, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
     kind: "action",
@@ -28,6 +29,7 @@ const action = cs.create(
 export const stored = cs.create(
   [10, 23, 13, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
     kind: "value",
@@ -52,6 +54,7 @@ export const stored = cs.create(
 export const returned = cs.create(
   [15, 25, 17, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
     kind: "value",
@@ -68,6 +71,7 @@ export const returned = cs.create(
 export const assigned = cs.create(
   [19, 25, 26, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
     kind: "value",

@@ -10,6 +10,7 @@ function guard(fragment) {
   return cs.create(
     [11, 10, 16, 5],
     {
+      version: "0.0.0",
       filePath: "splice-laziness.ts",
       fileHash: "23k9adtpaouck",
       kind: "value",
@@ -47,6 +48,7 @@ function guard(fragment) {
 const ok = cs.create(
   [19, 12, 19, 27],
   {
+    version: "0.0.0",
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
     kind: "value",
@@ -59,6 +61,7 @@ const ok = cs.create(
 const broken = cs.create(
   [20, 16, 22, 3],
   {
+    version: "0.0.0",
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
     kind: "value",
@@ -80,6 +83,7 @@ const broken = cs.create(
 export default cs.create(
   [24, 16, 27, 4],
   {
+    version: "0.0.0",
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
     kind: "value",

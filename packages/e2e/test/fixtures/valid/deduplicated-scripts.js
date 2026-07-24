@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const leaf = cs.create(
   [5, 14, 5, 19],
   {
+    version: "0.0.0",
     filePath: "deduplicated-scripts.ts",
     fileHash: "xr1ijhq5mxaf",
     kind: "value",
@@ -16,6 +17,7 @@ const leaf = cs.create(
 export default cs.create(
   [7, 16, 7, 44],
   {
+    version: "0.0.0",
     filePath: "deduplicated-scripts.ts",
     fileHash: "xr1ijhq5mxaf",
     kind: "value",

@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const ping = cs.create(
   [5, 14, 8, 3],
   {
+    version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
     kind: "value",
@@ -36,6 +37,7 @@ const ping = cs.create(
 const script = cs.create(
   [10, 16, 13, 3],
   {
+    version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
     kind: "value",
@@ -60,6 +62,7 @@ const script = cs.create(
 const action = cs.create(
   [15, 16, 17, 3],
   {
+    version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
     kind: "action",
@@ -85,6 +88,7 @@ const action = cs.create(
 const label = cs.create(
   [21, 15, 23, 3],
   {
+    version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
     kind: "value",
@@ -110,6 +114,7 @@ const label = cs.create(
 const wrongArgument = cs.create(
   [25, 23, 28, 3],
   {
+    version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
     kind: "value",

@@ -1,5 +1,6 @@
 import type { SourceLocation } from "@backtickjs/cs-runtime";
 import type ts from "typescript";
+import pkg from "../package.json" with { type: "json" };
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
@@ -89,6 +90,10 @@ export function rewriteScript(
 
   const metadata = ts.factory.createObjectLiteralExpression(
     [
+      ts.factory.createPropertyAssignment(
+        "version",
+        ts.factory.createStringLiteral(pkg.version),
+      ),
       ts.factory.createPropertyAssignment(
         "filePath",
         ts.factory.createStringLiteral(sourceFile.fileName),

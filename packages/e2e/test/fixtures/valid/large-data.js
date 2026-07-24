@@ -22,6 +22,7 @@ export default _jsx("button", {
   onA: cs.create(
     [22, 30, 22, 70],
     {
+      version: "0.0.0",
       filePath: "large-data.tsx",
       fileHash: "28jw3q04x943a",
       kind: "value",

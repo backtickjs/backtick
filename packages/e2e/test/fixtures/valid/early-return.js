@@ -3,6 +3,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [4, 16, 10, 3],
   {
+    version: "0.0.0",
     filePath: "early-return.ts",
     fileHash: "3slc08eszz0br",
     kind: "action",

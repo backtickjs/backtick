@@ -6,6 +6,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [7, 16, 10, 3],
   {
+    version: "0.0.0",
     filePath: "deep-shadowing.ts",
     fileHash: "1q50brt6ov79t",
     kind: "value",
@@ -14,6 +15,7 @@ export default cs.create(
         cs.create(
           [9, 18, 9, 26],
           {
+            version: "0.0.0",
             filePath: "deep-shadowing.ts",
             fileHash: "1q50brt6ov79t",
             kind: "value",
@@ -46,6 +48,7 @@ function outer(inner) {
   return cs.create(
     [13, 10, 16, 5],
     {
+      version: "0.0.0",
       filePath: "deep-shadowing.ts",
       fileHash: "1q50brt6ov79t",
       kind: "value",
@@ -80,6 +83,7 @@ function middle(inner) {
   return cs.create(
     [20, 10, 23, 5],
     {
+      version: "0.0.0",
       filePath: "deep-shadowing.ts",
       fileHash: "1q50brt6ov79t",
       kind: "value",

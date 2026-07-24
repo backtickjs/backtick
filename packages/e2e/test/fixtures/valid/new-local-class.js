@@ -14,6 +14,7 @@ class Point {
 export default cs.create(
   [19, 16, 23, 3],
   {
+    version: "0.0.0",
     filePath: "new-local-class.tsx",
     fileHash: "2pik4a0v1yd8w",
     kind: "value",

@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const orDash = cs.create(
   [5, 58, 12, 3],
   {
+    version: "0.0.0",
     filePath: "null-literal.ts",
     fileHash: "2albtvza6nmmn",
     kind: "value",
@@ -43,6 +44,7 @@ const orDash = cs.create(
 export default cs.create(
   [14, 16, 18, 4],
   {
+    version: "0.0.0",
     filePath: "null-literal.ts",
     fileHash: "2albtvza6nmmn",
     kind: "value",

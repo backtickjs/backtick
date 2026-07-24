@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [5, 16, 17, 3],
   {
+    version: "0.0.0",
     filePath: "comments.ts",
     fileHash: "rbes3su3s43l",
     kind: "value",

@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [5, 16, 11, 3],
   {
+    version: "0.0.0",
     filePath: "bindingless-catch.ts",
     fileHash: "1jo3526bq0xmc",
     kind: "value",

@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 export default cs.create(
   [5, 16, 18, 3],
   {
+    version: "0.0.0",
     filePath: "array-members.ts",
     fileHash: "3kt9mhwly650i",
     kind: "value",

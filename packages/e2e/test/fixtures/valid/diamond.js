@@ -6,6 +6,7 @@ import { cs } from "@backtickjs/core";
 const d0 = cs.create(
   [7, 12, 7, 17],
   {
+    version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
     kind: "value",
@@ -18,6 +19,7 @@ const d0 = cs.create(
 const d1 = cs.create(
   [8, 12, 10, 3],
   {
+    version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
     kind: "value",
@@ -44,6 +46,7 @@ const d1 = cs.create(
 const d2 = cs.create(
   [11, 12, 13, 3],
   {
+    version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
     kind: "value",
@@ -70,6 +73,7 @@ const d2 = cs.create(
 const d3 = cs.create(
   [14, 12, 16, 3],
   {
+    version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
     kind: "value",
@@ -96,6 +100,7 @@ const d3 = cs.create(
 const d4 = cs.create(
   [17, 12, 19, 3],
   {
+    version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
     kind: "value",

@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const script = cs.create(
   [5, 16, 9, 3],
   {
+    version: "0.0.0",
     filePath: "array-mutation.ts",
     fileHash: "3m6roaxdg127n",
     kind: "value",
@@ -49,6 +50,7 @@ const script = cs.create(
 const action = cs.create(
   [11, 16, 14, 3],
   {
+    version: "0.0.0",
     filePath: "array-mutation.ts",
     fileHash: "3m6roaxdg127n",
     kind: "action",

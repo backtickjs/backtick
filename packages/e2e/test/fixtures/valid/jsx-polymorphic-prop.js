@@ -7,6 +7,7 @@ function make(n) {
   return cs.create(
     [7, 10, 7, 22],
     {
+      version: "0.0.0",
       filePath: "jsx-polymorphic-prop.tsx",
       fileHash: "2utzrnix6a7i5",
       kind: "value",

@@ -17,6 +17,7 @@ class Point {
 export default cs.create(
   [22, 16, 25, 3],
   {
+    version: "0.0.0",
     filePath: "new-expression.ts",
     fileHash: "y9r0n74bbbwa",
     kind: "value",

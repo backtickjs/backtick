@@ -7,6 +7,7 @@ import { cs } from "@backtickjs/core";
 const script = cs.create(
   [8, 43, 11, 3],
   {
+    version: "0.0.0",
     filePath: "jsx-capture.tsx",
     fileHash: "2r64m27t17uon",
     kind: "value",
@@ -15,6 +16,7 @@ const script = cs.create(
         onClick: cs.create(
           [10, 30, 10, 41],
           {
+            version: "0.0.0",
             filePath: "jsx-capture.tsx",
             fileHash: "2r64m27t17uon",
             kind: "value",

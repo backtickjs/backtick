@@ -14,6 +14,7 @@ class Color {
     return cs.create(
       [19, 12, 19, 35],
       {
+        version: "0.0.0",
         filePath: "spliced-param.ts",
         fileHash: "22eb8gy7ghfko",
         kind: "value",
@@ -38,6 +39,7 @@ class Color {
 export default cs.create(
   [23, 16, 26, 3],
   {
+    version: "0.0.0",
     filePath: "spliced-param.ts",
     fileHash: "22eb8gy7ghfko",
     kind: "value",
@@ -46,6 +48,7 @@ export default cs.create(
         cs.create(
           [25, 27, 25, 32],
           {
+            version: "0.0.0",
             filePath: "spliced-param.ts",
             fileHash: "22eb8gy7ghfko",
             kind: "value",

@@ -3,6 +3,9 @@ import type { Spliceable } from "./Spliceable.js";
 import type { Visitor } from "./Visitor.js";
 
 export interface Metadata {
+  // the version of the toolchain that emitted this script
+  version: string;
+  // names the source file for humans; identity comes from `fileHash` and `loc`
   filePath: string;
   // distinguishes same-named files across codebases (see `locKey`)
   fileHash: string;

@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 const pick = cs.create(
   [6, 14, 8, 3],
   {
+    version: "0.0.0",
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
     kind: "value",
@@ -35,6 +36,7 @@ const pick = cs.create(
 const deep = cs.create(
   [10, 14, 12, 3],
   {
+    version: "0.0.0",
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
     kind: "value",
@@ -70,6 +72,7 @@ const deep = cs.create(
 const shout = cs.create(
   [14, 15, 16, 3],
   {
+    version: "0.0.0",
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
     kind: "value",
@@ -104,6 +107,7 @@ const shout = cs.create(
 export default cs.create(
   [18, 16, 26, 4],
   {
+    version: "0.0.0",
     filePath: "optional-chain.ts",
     fileHash: "1k96f1nwptp9k",
     kind: "value",

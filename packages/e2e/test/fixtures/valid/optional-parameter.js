@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const greet = cs.create(
   [5, 15, 7, 3],
   {
+    version: "0.0.0",
     filePath: "optional-parameter.ts",
     fileHash: "hlti23avj5mo",
     kind: "value",
@@ -39,6 +40,7 @@ const greet = cs.create(
 const double = cs.create(
   [10, 16, 10, 27],
   {
+    version: "0.0.0",
     filePath: "optional-parameter.ts",
     fileHash: "hlti23avj5mo",
     kind: "value",
@@ -51,6 +53,7 @@ const double = cs.create(
 const call = cs.create(
   [12, 14, 14, 3],
   {
+    version: "0.0.0",
     filePath: "optional-parameter.ts",
     fileHash: "hlti23avj5mo",
     kind: "value",
@@ -86,6 +89,7 @@ const call = cs.create(
 export default cs.create(
   [16, 16, 21, 4],
   {
+    version: "0.0.0",
     filePath: "optional-parameter.ts",
     fileHash: "hlti23avj5mo",
     kind: "value",

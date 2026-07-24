@@ -11,6 +11,7 @@ class Point {
     return cs.create(
       [16, 12, 16, 43],
       {
+        version: "0.0.0",
         filePath: "reflected-client.ts",
         fileHash: "1n3zukooyw7a6",
         kind: "value",
@@ -38,6 +39,7 @@ class Point {
 export default cs.create(
   [24, 16, 28, 3],
   {
+    version: "0.0.0",
     filePath: "reflected-client.ts",
     fileHash: "1n3zukooyw7a6",
     kind: "action",
@@ -46,6 +48,7 @@ export default cs.create(
         cs.create(
           [25, 25, 25, 30],
           {
+            version: "0.0.0",
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
             kind: "value",
@@ -58,6 +61,7 @@ export default cs.create(
         cs.create(
           [25, 32, 25, 37],
           {
+            version: "0.0.0",
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
             kind: "value",
@@ -72,6 +76,7 @@ export default cs.create(
         cs.create(
           [26, 25, 26, 30],
           {
+            version: "0.0.0",
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
             kind: "value",
@@ -84,6 +89,7 @@ export default cs.create(
         cs.create(
           [26, 32, 26, 37],
           {
+            version: "0.0.0",
             filePath: "reflected-client.ts",
             fileHash: "1n3zukooyw7a6",
             kind: "value",

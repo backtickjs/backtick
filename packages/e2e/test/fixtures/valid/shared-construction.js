@@ -19,6 +19,7 @@ function make(Shape) {
   return cs.create(
     [23, 10, 23, 27],
     {
+      version: "0.0.0",
       filePath: "shared-construction.ts",
       fileHash: "3cp3uvwlsfvqo",
       kind: "value",
@@ -39,6 +40,7 @@ const d = make(Square);
 export default cs.create(
   [31, 16, 33, 3],
   {
+    version: "0.0.0",
     filePath: "shared-construction.ts",
     fileHash: "3cp3uvwlsfvqo",
     kind: "value",

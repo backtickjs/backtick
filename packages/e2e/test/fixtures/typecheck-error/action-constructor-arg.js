@@ -11,6 +11,7 @@ class Holder {
 const action = cs.create(
   [16, 16, 18, 3],
   {
+    version: "0.0.0",
     filePath: "action-constructor-arg.ts",
     fileHash: "t3cg066e2mwt",
     kind: "action",
@@ -34,6 +35,7 @@ const action = cs.create(
 export const held = cs.create(
   [20, 21, 23, 3],
   {
+    version: "0.0.0",
     filePath: "action-constructor-arg.ts",
     fileHash: "t3cg066e2mwt",
     kind: "value",

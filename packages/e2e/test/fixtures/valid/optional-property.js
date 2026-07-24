@@ -5,6 +5,7 @@ import { cs } from "@backtickjs/core";
 const read = cs.create(
   [6, 14, 8, 3],
   {
+    version: "0.0.0",
     filePath: "optional-property.ts",
     fileHash: "10vcjd80vhoob",
     kind: "value",
@@ -54,6 +55,7 @@ const read = cs.create(
 export default cs.create(
   [10, 16, 14, 4],
   {
+    version: "0.0.0",
     filePath: "optional-property.ts",
     fileHash: "10vcjd80vhoob",
     kind: "value",

@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const pick = cs.create(
   [5, 14, 7, 3],
   {
+    version: "0.0.0",
     filePath: "ternary.ts",
     fileHash: "2bgu1tn5wjo9o",
     kind: "value",
@@ -44,6 +45,7 @@ const pick = cs.create(
 export default cs.create(
   [9, 16, 12, 4],
   {
+    version: "0.0.0",
     filePath: "ternary.ts",
     fileHash: "2bgu1tn5wjo9o",
     kind: "value",

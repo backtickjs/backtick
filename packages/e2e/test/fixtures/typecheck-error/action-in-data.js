@@ -4,6 +4,7 @@ import { cs } from "@backtickjs/core";
 const action = cs.create(
   [5, 16, 7, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-data.ts",
     fileHash: "1937kl3l6y7n7",
     kind: "action",
@@ -27,6 +28,7 @@ const action = cs.create(
 export const listed = cs.create(
   [9, 23, 12, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-data.ts",
     fileHash: "1937kl3l6y7n7",
     kind: "value",
@@ -51,6 +53,7 @@ export const listed = cs.create(
 export const keyed = cs.create(
   [14, 22, 17, 3],
   {
+    version: "0.0.0",
     filePath: "action-in-data.ts",
     fileHash: "1937kl3l6y7n7",
     kind: "value",
