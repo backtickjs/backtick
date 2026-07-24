@@ -7,8 +7,9 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "check:versions": "node scripts/checkVersions.mjs",
     "typecheck": "turbo run typecheck",
-    "test": "turbo run test",
+    "test": "pnpm check:versions && turbo run test",
     "test:update": "turbo run test:update",
     "format": "turbo run format && prettier --write --ignore-unknown .",
     "format:check": "turbo run format:check && prettier --check --ignore-unknown .",

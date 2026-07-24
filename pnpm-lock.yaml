@@ -24,17 +24,17 @@ importers:
   examples/bun-minimal:
     dependencies:
       '@backtickjs/bun-plugin':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/bun-plugin
       '@backtickjs/core':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/core
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/language-tools/tsc
       '@types/bun':
         specifier: ^1.3.14
@@ -49,17 +49,17 @@ importers:
   examples/node-minimal:
     dependencies:
       '@backtickjs/core':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/core
       '@backtickjs/tspatch-plugin':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
     devDependencies:
       '@backtickjs/prettier-plugin':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/prettier-plugin
       '@backtickjs/tsc':
-        specifier: ^0.0.0
+        specifier: ^0.1.0
         version: link:../../packages/language-tools/tsc
       prettier:
         specifier: ^3.6.2
@@ -72,6 +72,10 @@ importers:
         version: 6.0.3
 
   packages/bun-plugin:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:^
+        version: link:../core
     devDependencies:
       '@backtickjs/compiler':
         specifier: workspace:*
@@ -312,6 +316,10 @@ importers:
         version: 6.0.3
 
   packages/tspatch-plugin:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:^
+        version: link:../core
     devDependencies:
       '@backtickjs/compiler':
         specifier: workspace:*

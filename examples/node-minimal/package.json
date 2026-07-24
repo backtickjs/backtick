@@ -12,12 +12,12 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
-    "@backtickjs/core": "^0.0.0",
-    "@backtickjs/tspatch-plugin": "^0.0.0"
+    "@backtickjs/core": "^0.1.0",
+    "@backtickjs/tspatch-plugin": "^0.1.0"
   },
   "devDependencies": {
-    "@backtickjs/prettier-plugin": "^0.0.0",
-    "@backtickjs/tsc": "^0.0.0",
+    "@backtickjs/prettier-plugin": "^0.1.0",
+    "@backtickjs/tsc": "^0.1.0",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
