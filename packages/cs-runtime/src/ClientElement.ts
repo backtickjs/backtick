@@ -1,3 +1,5 @@
+import type { SpliceableValue } from "./Spliceable.js";
+
 /**
  * What a client component evaluates to: the element that reaches the client.
  * `id` is what the client dispatches on to pick a native component. The key
@@ -6,7 +8,7 @@
 export interface ClientElement {
   readonly "@backtickjs": "ClientElement";
   readonly id: string;
-  readonly props: object;
+  readonly props: { [key: string]: SpliceableValue };
 }
 
 export function isClientElement(value: unknown): value is ClientElement {
