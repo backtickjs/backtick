@@ -32,5 +32,5 @@ export function create(
     component,
     key: key ?? null,
     props,
-  } as unknown as JsxElement;
+  };
 }
