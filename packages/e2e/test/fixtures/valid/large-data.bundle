@@ -40,31 +40,24 @@
                       "children": "Montréal"
                     }
                   },
-                  {
-                    "#": "element",
-                    "id": "View",
-                    "key": null,
-                    "props": {
-                      "children": [
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-0-A",
-                          "props": {
-                            "children": "SKU-0-A x1"
-                          }
-                        },
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-0-B",
-                          "props": {
-                            "children": "SKU-0-B x1"
-                          }
-                        }
-                      ]
+                  [
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-0-A",
+                      "props": {
+                        "children": "SKU-0-A x1"
+                      }
+                    },
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-0-B",
+                      "props": {
+                        "children": "SKU-0-B x1"
+                      }
                     }
-                  },
+                  ],
                   {
                     "#": "element",
                     "id": "Text",
@@ -108,31 +101,24 @@
                       "children": "Toronto"
                     }
                   },
-                  {
-                    "#": "element",
-                    "id": "View",
-                    "key": null,
-                    "props": {
-                      "children": [
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-1-A",
-                          "props": {
-                            "children": "SKU-1-A x2"
-                          }
-                        },
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-1-B",
-                          "props": {
-                            "children": "SKU-1-B x1"
-                          }
-                        }
-                      ]
+                  [
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-1-A",
+                      "props": {
+                        "children": "SKU-1-A x2"
+                      }
+                    },
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-1-B",
+                      "props": {
+                        "children": "SKU-1-B x1"
+                      }
                     }
-                  },
+                  ],
                   {
                     "#": "element",
                     "id": "Text",
@@ -176,31 +162,24 @@
                       "children": "Montréal"
                     }
                   },
-                  {
-                    "#": "element",
-                    "id": "View",
-                    "key": null,
-                    "props": {
-                      "children": [
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-2-A",
-                          "props": {
-                            "children": "SKU-2-A x3"
-                          }
-                        },
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-2-B",
-                          "props": {
-                            "children": "SKU-2-B x1"
-                          }
-                        }
-                      ]
+                  [
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-2-A",
+                      "props": {
+                        "children": "SKU-2-A x3"
+                      }
+                    },
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-2-B",
+                      "props": {
+                        "children": "SKU-2-B x1"
+                      }
                     }
-                  },
+                  ],
                   {
                     "#": "element",
                     "id": "Text",
@@ -244,31 +223,24 @@
                       "children": "Toronto"
                     }
                   },
-                  {
-                    "#": "element",
-                    "id": "View",
-                    "key": null,
-                    "props": {
-                      "children": [
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-3-A",
-                          "props": {
-                            "children": "SKU-3-A x1"
-                          }
-                        },
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-3-B",
-                          "props": {
-                            "children": "SKU-3-B x1"
-                          }
-                        }
-                      ]
+                  [
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-3-A",
+                      "props": {
+                        "children": "SKU-3-A x1"
+                      }
+                    },
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-3-B",
+                      "props": {
+                        "children": "SKU-3-B x1"
+                      }
                     }
-                  },
+                  ],
                   {
                     "#": "element",
                     "id": "Text",
@@ -312,31 +284,24 @@
                       "children": "Montréal"
                     }
                   },
-                  {
-                    "#": "element",
-                    "id": "View",
-                    "key": null,
-                    "props": {
-                      "children": [
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-4-A",
-                          "props": {
-                            "children": "SKU-4-A x2"
-                          }
-                        },
-                        {
-                          "#": "element",
-                          "id": "Text",
-                          "key": "SKU-4-B",
-                          "props": {
-                            "children": "SKU-4-B x1"
-                          }
-                        }
-                      ]
+                  [
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-4-A",
+                      "props": {
+                        "children": "SKU-4-A x2"
+                      }
+                    },
+                    {
+                      "#": "element",
+                      "id": "Text",
+                      "key": "SKU-4-B",
+                      "props": {
+                        "children": "SKU-4-B x1"
+                      }
                     }
-                  },
+                  ],
                   {
                     "#": "element",
                     "id": "Text",

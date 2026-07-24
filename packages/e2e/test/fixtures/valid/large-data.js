@@ -2,7 +2,8 @@ import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
 import { Image, Text, View } from "@backtickjs/core";
 // A data-heavy tree: a dataset rendered into a View/Text/Image component tree,
 // one card per order, so the wire cost of a real rendered list shows up at
-// scale rather than on toy literals.
+// scale rather than on toy literals. The per-item `map` sits beside sibling
+// elements — nested children, no hand-flattening (see `Children`).
 const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,
   customer: {
@@ -26,11 +27,9 @@ export default _jsx(View, {
           }),
           _jsx(Text, { children: order.customer.name }),
           _jsx(Text, { children: order.customer.city }),
-          _jsx(View, {
-            children: order.items.map((item) =>
-              _jsx(Text, { children: `${item.sku} x${item.qty}` }, item.sku),
-            ),
-          }),
+          order.items.map((item) =>
+            _jsx(Text, { children: `${item.sku} x${item.qty}` }, item.sku),
+          ),
           _jsx(Text, { children: `$${order.total.toFixed(2)}` }),
         ],
       },

@@ -7,14 +7,12 @@
     <Text>
       {"Montréal"}
     </Text>
-    <View>
-      <Text key="SKU-0-A">
-        {"SKU-0-A x1"}
-      </Text>
-      <Text key="SKU-0-B">
-        {"SKU-0-B x1"}
-      </Text>
-    </View>
+    <Text key="SKU-0-A">
+      {"SKU-0-A x1"}
+    </Text>
+    <Text key="SKU-0-B">
+      {"SKU-0-B x1"}
+    </Text>
     <Text>
       {"$45.23"}
     </Text>
@@ -27,14 +25,12 @@
     <Text>
       {"Toronto"}
     </Text>
-    <View>
-      <Text key="SKU-1-A">
-        {"SKU-1-A x2"}
-      </Text>
-      <Text key="SKU-1-B">
-        {"SKU-1-B x1"}
-      </Text>
-    </View>
+    <Text key="SKU-1-A">
+      {"SKU-1-A x2"}
+    </Text>
+    <Text key="SKU-1-B">
+      {"SKU-1-B x1"}
+    </Text>
     <Text>
       {"$46.23"}
     </Text>
@@ -47,14 +43,12 @@
     <Text>
       {"Montréal"}
     </Text>
-    <View>
-      <Text key="SKU-2-A">
-        {"SKU-2-A x3"}
-      </Text>
-      <Text key="SKU-2-B">
-        {"SKU-2-B x1"}
-      </Text>
-    </View>
+    <Text key="SKU-2-A">
+      {"SKU-2-A x3"}
+    </Text>
+    <Text key="SKU-2-B">
+      {"SKU-2-B x1"}
+    </Text>
     <Text>
       {"$47.23"}
     </Text>
@@ -67,14 +61,12 @@
     <Text>
       {"Toronto"}
     </Text>
-    <View>
-      <Text key="SKU-3-A">
-        {"SKU-3-A x1"}
-      </Text>
-      <Text key="SKU-3-B">
-        {"SKU-3-B x1"}
-      </Text>
-    </View>
+    <Text key="SKU-3-A">
+      {"SKU-3-A x1"}
+    </Text>
+    <Text key="SKU-3-B">
+      {"SKU-3-B x1"}
+    </Text>
     <Text>
       {"$48.23"}
     </Text>
@@ -87,14 +79,12 @@
     <Text>
       {"Montréal"}
     </Text>
-    <View>
-      <Text key="SKU-4-A">
-        {"SKU-4-A x2"}
-      </Text>
-      <Text key="SKU-4-B">
-        {"SKU-4-B x1"}
-      </Text>
-    </View>
+    <Text key="SKU-4-A">
+      {"SKU-4-A x2"}
+    </Text>
+    <Text key="SKU-4-B">
+      {"SKU-4-B x1"}
+    </Text>
     <Text>
       {"$49.23"}
     </Text>
