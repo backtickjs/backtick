@@ -1,9 +1,5 @@
-const Button = (props: { data?: unknown }) => ({
-  "@backtickjs": "ClientElement" as const,
-  id: "Button",
-  props,
-});
+import { cs } from "@backtickjs/core";
 
-// `#` is the bundle's one reserved key — the discriminant of every node — so
-// a plain data object can't carry it.
-export default <Button data={{ "#": "value" }} />;
+// `#` is the bundle's one reserved key — the discriminant of every node — so a
+// plain data object can't carry it.
+export default cs`() => ${{ "#": "value" }}`;

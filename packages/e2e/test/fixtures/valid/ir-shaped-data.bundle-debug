@@ -1,5 +1,0 @@
-#t0 = <Button
-  data={{ "kind": "IrScriptRef", "target": 0 }}
-/>
-
-root = #t0()

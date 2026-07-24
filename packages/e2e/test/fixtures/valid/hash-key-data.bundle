@@ -1,22 +1,21 @@
 {
-  "functions": {},
-  "trees": {
-    "#t0": {
-      "element": {
-        "#": "element",
-        "id": "Button",
-        "key": null,
-        "props": {
-          "data": {
-            "#call": "#f0"
-          }
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": {
+          "#call": "#f0"
         }
       }
     }
   },
+  "trees": {},
   "root": {
     "#": "apply",
-    "label": "#t0",
+    "label": "#f0",
     "args": []
   }
 }

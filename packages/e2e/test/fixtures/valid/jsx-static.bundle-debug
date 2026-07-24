@@ -1,10 +1,9 @@
-#t0 = <Flexbox
-  direction={"row"}
->
-  {<Label
+#t0 = <View>
+  {<Text
     key={"a"}
-    text={"hi"}
-  />}
-</Flexbox>
+  >
+    {"hi"}
+  </Text>}
+</View>
 
 root = #t0()

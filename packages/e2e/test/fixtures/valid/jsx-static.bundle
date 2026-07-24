@@ -4,16 +4,15 @@
     "#t0": {
       "element": {
         "#": "element",
-        "id": "Flexbox",
+        "id": "View",
         "key": null,
         "props": {
-          "direction": "row",
           "children": {
             "#": "element",
-            "id": "Label",
+            "id": "Text",
             "key": "a",
             "props": {
-              "text": "hi"
+              "children": "hi"
             }
           }
         }

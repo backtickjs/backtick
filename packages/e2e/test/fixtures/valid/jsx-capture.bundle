@@ -54,10 +54,10 @@
     "#t0": {
       "element": {
         "#": "element",
-        "id": "Button",
+        "id": "Text",
         "key": null,
         "props": {
-          "onClick": {
+          "onPress": {
             "#": "apply",
             "label": "#f1",
             "args": [

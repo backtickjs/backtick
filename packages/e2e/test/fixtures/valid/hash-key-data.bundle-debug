@@ -1,5 +1,3 @@
-#t0 = <Button
-  data={{ "#call": "#f0" }}
-/>
+#f0 = () => () => { "#call": "#f0" }
 
-root = #t0()
+root = #f0()

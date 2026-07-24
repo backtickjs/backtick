@@ -1,9 +1,5 @@
-const Button = (props: { data?: unknown }) => ({
-  "@backtickjs": "ClientElement" as const,
-  id: "Button",
-  props,
-});
+import { cs } from "@backtickjs/core";
 
 // Only the bare `#` key is reserved: a plain data object is free to use keys
-// that merely start with `#`, even ones spelled like the old tagged forms.
-export default <Button data={{ "#call": "#f0" }} />;
+// that merely start with `#`, even ones spelled like the tagged forms.
+export default cs.lift(cs.const(() => cs.splice({ "#call": "#f0" })));

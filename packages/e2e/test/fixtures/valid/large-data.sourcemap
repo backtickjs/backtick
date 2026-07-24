@@ -1,6 +1,1 @@
-cs.lift(cs.const(            → cs`
-() =>                        → () => 
-cs.splice(                   → ${ [-semantic]
-{ orders, currency: "CAD" }  → { orders, currency: "CAD" }
-)                            → } [-semantic]
-))                           → `
+

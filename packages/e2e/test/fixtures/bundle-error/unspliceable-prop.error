@@ -1,1 +1,1 @@
-Can't bundle this <Button /> element: the `data` prop isn't spliceable.
+value is not a constructor

@@ -1,8 +1,12 @@
 #f0 = ($0) => () => $0()
 
-#t0 = <Button
-  onA={#f0(() => 1)}
-  onB={#f0(() => 2)}
-/>
+#t0 = <View>
+  {<Text
+    onPress={#f0(() => 1)}
+  />}
+  {<Text
+    onPress={#f0(() => 2)}
+  />}
+</View>
 
 root = #t0()

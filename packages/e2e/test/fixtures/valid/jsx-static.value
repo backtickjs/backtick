@@ -1,3 +1,5 @@
-<Flexbox direction="row">
-  <Label key="a" text="hi" />
-</Flexbox>
+<View>
+  <Text key="a">
+    {"hi"}
+  </Text>
+</View>

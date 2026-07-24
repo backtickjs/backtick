@@ -23,29 +23,45 @@
     "#t0": {
       "element": {
         "#": "element",
-        "id": "Button",
+        "id": "View",
         "key": null,
         "props": {
-          "onA": {
-            "#": "apply",
-            "label": "#f0",
-            "args": [
-              {
-                "#": "thunk",
-                "expression": 1
+          "children": [
+            {
+              "#": "element",
+              "id": "Text",
+              "key": null,
+              "props": {
+                "onPress": {
+                  "#": "apply",
+                  "label": "#f0",
+                  "args": [
+                    {
+                      "#": "thunk",
+                      "expression": 1
+                    }
+                  ]
+                }
               }
-            ]
-          },
-          "onB": {
-            "#": "apply",
-            "label": "#f0",
-            "args": [
-              {
-                "#": "thunk",
-                "expression": 2
+            },
+            {
+              "#": "element",
+              "id": "Text",
+              "key": null,
+              "props": {
+                "onPress": {
+                  "#": "apply",
+                  "label": "#f0",
+                  "args": [
+                    {
+                      "#": "thunk",
+                      "expression": 2
+                    }
+                  ]
+                }
               }
-            ]
-          }
+            }
+          ]
         }
       }
     }

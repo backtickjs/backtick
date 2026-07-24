@@ -1,4 +1,8 @@
-<Flexbox direction="column">
-  <Label text="hi" />
-  <Label text="hi" />
-</Flexbox>
+<View>
+  <Text>
+    {"hi"}
+  </Text>
+  <Text>
+    {"hi"}
+  </Text>
+</View>
