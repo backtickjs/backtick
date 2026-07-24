@@ -11,7 +11,7 @@ export {
 } from "./ClientScript.js";
 export type { ClientString } from "./ClientString.js";
 export { type JsxElement, isJsxElement } from "./JsxElement.js";
-export type { JsxElementType } from "./JsxElementType.js";
+export type { Component } from "./Component.js";
 export type { Prop } from "./Prop.js";
 export type { ClientValue } from "./ClientValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";

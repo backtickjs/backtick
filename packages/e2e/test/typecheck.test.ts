@@ -16,7 +16,8 @@ import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 //
 // One invocation covers every fixture, mirroring `fixtures/tsconfig.json` on
 // the command line (`--ignoreConfig` skips the file itself, which exists for
-// the editor); the test-only intrinsic elements come from `fixtures/jsx.d.ts`.
+// the editor). There are no intrinsic
+// elements: fixtures that use JSX declare their own components.
 const fixturesRoot = join(import.meta.dirname, "fixtures");
 const dirNames = ["valid", "typecheck-error"];
 
@@ -57,7 +58,6 @@ function runBacktickTsc(): string {
     "@backtickjs/core",
     "--strict",
     "--skipLibCheck",
-    "jsx.d.ts",
     ...[...fixturesByDir].flatMap(([dirName, files]) =>
       files.map((file) => `${dirName}/${file}`),
     ),

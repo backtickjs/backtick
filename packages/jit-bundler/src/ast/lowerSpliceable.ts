@@ -9,7 +9,7 @@ import { expandClientConstructor } from "./expandClientConstructor.js";
 import { holeName } from "./holes.js";
 import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
-import { lowerJsxElement } from "./lowerJsxElement.js";
+import { expandJsxElement } from "./expandJsxElement.js";
 
 export async function lowerSpliceable(
   value: Spliceable,
@@ -34,7 +34,7 @@ export async function lowerSpliceable(
     return lowerClientScript(value);
   }
   if (isJsxElement(value)) {
-    return lowerJsxElement(value);
+    return expandJsxElement(value);
   }
   if (isClientObject(value)) {
     return lowerClientObject(value);

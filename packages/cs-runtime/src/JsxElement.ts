@@ -1,11 +1,11 @@
-import type { JsxElementType } from "./JsxElementType.js";
+import type { Component } from "./Component.js";
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it.
  */
 export interface JsxElement {
   readonly "@backtickjs": "JsxElement";
-  readonly type: JsxElementType;
+  readonly component: Component;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
 }
@@ -20,7 +20,7 @@ export function isJsxElement(value: unknown): value is JsxElement {
 }
 
 export function create(
-  type: JsxElementType,
+  component: Component,
   props: { [key: string]: unknown },
   key?: string | number,
 ): JsxElement {
@@ -29,7 +29,7 @@ export function create(
   }
   return {
     "@backtickjs": "JsxElement",
-    type,
+    component,
     key: key ?? null,
     props,
   } as unknown as JsxElement;

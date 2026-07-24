@@ -1,4 +1,4 @@
-import type { JsxElement, JsxElementType, Prop } from "@backtickjs/cs-runtime";
+import type { Component, JsxElement } from "@backtickjs/cs-runtime";
 import { _jsx } from "@backtickjs/cs-runtime";
 
 export declare namespace JSX {
@@ -9,13 +9,7 @@ export declare namespace JSX {
   // component builds one. There are no intrinsic elements, so
   // `IntrinsicElements` is deliberately absent rather than empty: declaring
   // it, even empty, lets a consumer augment intrinsics back in.
-  export type ElementType = JsxElementType;
-  export interface IntrinsicElements {
-    flexbox: {
-      direction?: Prop<"row" | "column">;
-      children?: Element | readonly Element[];
-    };
-  }
+  export type ElementType = Component;
   export interface ElementChildrenAttribute {
     children: unknown;
   }
