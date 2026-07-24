@@ -10,17 +10,20 @@ export {
   type Metadata,
 } from "./ClientScript.js";
 export type { ClientString } from "./ClientString.js";
-export {
-  type ClientElement,
-  isClientElement,
-  type Prop,
-} from "./ClientElement.js";
+export { type JsxElement, isJsxElement } from "./JsxElement.js";
+export type { JsxElementType } from "./JsxElementType.js";
+export type { Prop } from "./Prop.js";
 export type { ClientValue } from "./ClientValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export { isSpliceable, type Spliceable, type Spliced } from "./Spliceable.js";
 export type { Receiver } from "./Receiver.js";
+export type { ServerComponent } from "./ServerComponent.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
+export {
+  type ClientComponent,
+  type ElementDescriptor,
+} from "./ClientComponent.js";
 export { version } from "./version.js";
-export { create as _jsx } from "./ClientElement.js";
+export { create as _jsx } from "./JsxElement.js";

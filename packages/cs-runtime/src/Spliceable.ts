@@ -2,12 +2,12 @@ import type { Client } from "./Client.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
 import { type ClientObject, isClientObject } from "./ClientObject.js";
 import { isClientScript } from "./ClientScript.js";
-import { type ClientElement, isClientElement } from "./ClientElement.js";
+import { type JsxElement, isJsxElement } from "./JsxElement.js";
 import type { ClientValue } from "./ClientValue.js";
 
 export type SpliceableValue =
   | Client<ClientValue>
-  | ClientElement
+  | JsxElement
   | ClientConstructor
   | ClientObject
   | null
@@ -22,7 +22,7 @@ export type Spliceable = SpliceableValue | Client<void>;
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   ClientElement             -> JSX.Element
+//   JsxElement                -> JSX.Element
 //   ClientConstructor         -> typeof C, the spliced class C itself
 //   T implements ClientObject -> T
 //   T[]                       -> Spliced<T>[]
@@ -34,7 +34,7 @@ export type Spliced<T> = [Spliceable] extends [T]
   ? ClientValue
   : T extends Client<infer U>
     ? U
-    : T extends ClientElement
+    : T extends JsxElement
       ? T
       : T extends ClientConstructor
         ? T
@@ -62,7 +62,7 @@ export function isSpliceable(value: unknown): value is Spliceable {
     return false;
   }
   if (
-    isClientElement(value) ||
+    isJsxElement(value) ||
     isClientObject(value) ||
     isClientScript(value) ||
     value === null ||

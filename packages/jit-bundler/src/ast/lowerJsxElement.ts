@@ -1,12 +1,12 @@
-import { type ClientElement, isSpliceable } from "@backtickjs/cs-runtime";
+import { type JsxElement, isSpliceable } from "@backtickjs/cs-runtime";
 import type { AstElement } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the lowering
 // instead of racing into duplicate subtrees (see `lowerClientObject`).
-const nodeByElement = new WeakMap<ClientElement, Promise<AstElement>>();
+const nodeByElement = new WeakMap<JsxElement, Promise<AstElement>>();
 
-export function lowerClientElement(value: ClientElement): Promise<AstElement> {
+export function lowerJsxElement(value: JsxElement): Promise<AstElement> {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;
@@ -16,7 +16,7 @@ export function lowerClientElement(value: ClientElement): Promise<AstElement> {
   return node;
 }
 
-async function buildElement(value: ClientElement): Promise<AstElement> {
+async function buildElement(value: JsxElement): Promise<AstElement> {
   const props = Object.fromEntries(
     await Promise.all(
       Object.entries(value.props).map(async ([key, entry]) => {
@@ -32,7 +32,7 @@ async function buildElement(value: ClientElement): Promise<AstElement> {
   );
   return {
     kind: "AstElement",
-    type: value.type,
+    type: value.type as string,
     key: value.key,
     props,
   };

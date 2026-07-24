@@ -1,36 +1,36 @@
-import type { Client } from "./Client.ts";
-import type { ClientValue } from "./ClientValue.js";
+import type { JsxElementType } from "./JsxElementType.js";
 
-export type Prop<T extends ClientValue> = T | Client<T>;
-
-export interface ClientElement {
-  readonly "@backtickjs": "ClientElement";
-  readonly type: string;
+/**
+ * What a JSX tag evaluates to on the host, before bundling resolves it.
+ */
+export interface JsxElement {
+  readonly "@backtickjs": "JsxElement";
+  readonly type: JsxElementType;
   readonly key: string | number | null;
   readonly props: { [key: string]: unknown };
 }
 
-export function isClientElement(value: unknown): value is ClientElement {
+export function isJsxElement(value: unknown): value is JsxElement {
   return (
     typeof value === "object" &&
     value !== null &&
     "@backtickjs" in value &&
-    value["@backtickjs"] === "ClientElement"
+    value["@backtickjs"] === "JsxElement"
   );
 }
 
 export function create(
-  type: string,
+  type: JsxElementType,
   props: { [key: string]: unknown },
   key?: string | number,
-): ClientElement {
+): JsxElement {
   if (key !== undefined && typeof key !== "string" && typeof key !== "number") {
     throw new Error("Key must be a string or a number");
   }
   return {
-    "@backtickjs": "ClientElement",
+    "@backtickjs": "JsxElement",
     type,
     key: key ?? null,
     props,
-  } as unknown as ClientElement;
+  } as unknown as JsxElement;
 }

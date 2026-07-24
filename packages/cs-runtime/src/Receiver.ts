@@ -3,7 +3,7 @@ import type { ClientArray } from "./ClientArray.js";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
-import type { ClientElement } from "./ClientElement.js";
+import type { JsxElement } from "./JsxElement.js";
 import type { ClientNumber } from "./ClientNumber.js";
 import type { ClientObject } from "./ClientObject.js";
 import type { ClientString } from "./ClientString.js";
@@ -49,7 +49,7 @@ type ReadMembers<T extends object> = {
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
-//   ClientElement                   -> {}: opaque
+//   JsxElement                      -> {}: opaque
 //   ClientObject                    -> SplicedMembers<T>
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
@@ -59,7 +59,7 @@ export type Receiver<T extends ClientValue> = T extends
   | boolean
   | readonly unknown[]
   ? Autoboxed<T>
-  : T extends ClientElement
+  : T extends JsxElement
     ? {}
     : T extends ClientObject
       ? SplicedMembers<T>

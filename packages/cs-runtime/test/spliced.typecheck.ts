@@ -3,7 +3,7 @@
 import type {
   Client,
   ClientArray,
-  ClientElement,
+  JsxElement,
   ClientObject,
   ClientValue,
   Receiver,
@@ -185,9 +185,9 @@ receiver(preferences).nickname satisfies string | null;
 receiver(preferences).nickname satisfies string | undefined;
 
 // An element is opaque in a script: it splices in whole — the payload stays
-// `ClientElement` — and no member reflects on the client.
-declare const element: ClientElement;
-spliced(element) satisfies ClientElement;
+// `JsxElement` — and no member reflects on the client.
+declare const element: JsxElement;
+spliced(element) satisfies JsxElement;
 // @ts-expect-error — an element's structure belongs to the client runtime,
 // not the script.
 receiver(element).type;

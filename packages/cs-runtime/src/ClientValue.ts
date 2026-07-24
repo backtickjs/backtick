@@ -1,10 +1,10 @@
 import type { ClientConstructor } from "./ClientConstructor.js";
 import type { ClientFunction } from "./ClientFunction.js";
-import type { ClientElement } from "./ClientElement.js";
+import type { JsxElement } from "./JsxElement.js";
 import type { ClientObject } from "./ClientObject.js";
 
 export type ClientValue =
-  | ClientElement
+  | JsxElement
   | ClientObject
   | ClientConstructor
   | null
