@@ -411,9 +411,10 @@ function rewriteNodeImpl(
       );
     }
     return {
-      virtual: state.bodyKind === "value"
-        ? ts.factory.createReturnStatement(ts.factory.createNull())
-        : ts.factory.createReturnStatement(),
+      virtual:
+        state.bodyKind === "value"
+          ? ts.factory.createReturnStatement(ts.factory.createNull())
+          : ts.factory.createReturnStatement(),
       runtime: call(ts, "v", "return", [
         loc(node),
         call(ts, "v", "null", [loc(node)]),
