@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { lowerSpliceable } from "../dist/ast/lowerSpliceable.js";
 
-test("a reflected instance keeps spliceable members, own or inherited", () => {
+test("a reflected instance keeps spliceable members, own or inherited", async () => {
   class Base {
     readonly "@backtickjs" = "ClientObject";
 
@@ -28,7 +28,7 @@ test("a reflected instance keeps spliceable members, own or inherited", () => {
     }
   }
 
-  assert.deepEqual(lowerSpliceable(new Derived(), "ClientUnknown"), {
+  assert.deepEqual(await lowerSpliceable(new Derived(), "ClientUnknown"), {
     kind: "AstObject",
     entries: {
       field: { kind: "AstNumber", value: 3 },

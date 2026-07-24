@@ -5,8 +5,10 @@ import { buildIr } from "./ir/buildIr.js";
 import type { Client, ClientValue } from "@backtickjs/cs-runtime";
 
 // The bundle is plain data; serialize it with `JSON.stringify`.
-export function bundle(value: Client<ClientValue> | Client<void>): Bundle {
-  const ast = lowerSpliceable(value, "ClientUnknown");
+export async function bundle(
+  value: Client<ClientValue> | Client<void>,
+): Promise<Bundle> {
+  const ast = await lowerSpliceable(value, "ClientUnknown");
   const ir = buildIr(ast);
   return buildBundle(ir);
 }

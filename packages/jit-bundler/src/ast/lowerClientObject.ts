@@ -4,25 +4,36 @@ import {
   isSpliceable,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
-import type { Ast, AstObject } from "./Ast.js";
+import type { AstObject } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
-const nodeByInstance = new WeakMap<ClientObject, AstObject>();
+// Holds the in-flight promise, not the finished node: a second reference
+// reaching this instance while it is still lowering joins the same work rather
+// than starting a duplicate, which is what keeps the AST a DAG under
+// concurrent lowering.
+const nodeByInstance = new WeakMap<ClientObject, Promise<AstObject>>();
 
-export function lowerClientObject(value: ClientObject): AstObject {
+export function lowerClientObject(value: ClientObject): Promise<AstObject> {
   const shared = nodeByInstance.get(value);
   if (shared) {
     return shared;
   }
-
-  const entries: { [key: string]: Ast } = {};
-  for (const [key, entry] of spliceableEntries(value)) {
-    entries[key] = lowerSpliceable(entry, "ClientValue");
-  }
-
-  const node: AstObject = { kind: "AstObject", entries };
+  // memoized before the first await, so concurrent callers always see it
+  const node = buildObject(value);
   nodeByInstance.set(value, node);
   return node;
+}
+
+async function buildObject(value: ClientObject): Promise<AstObject> {
+  const entries = Object.fromEntries(
+    await Promise.all(
+      spliceableEntries(value).map(async ([key, entry]) => [
+        key,
+        await lowerSpliceable(entry, "ClientValue"),
+      ]),
+    ),
+  );
+  return { kind: "AstObject", entries };
 }
 
 function spliceableEntries(value: ClientObject): [string, Spliceable][] {

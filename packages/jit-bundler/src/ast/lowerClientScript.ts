@@ -1,6 +1,6 @@
 import type { ClientScript } from "@backtickjs/cs-runtime";
 import { locKey } from "../locKey.js";
-import type { AstScript, AstScriptBody } from "./Ast.js";
+import type { Ast, AstScript, AstScriptBody } from "./Ast.js";
 import { AstBuilder } from "./AstBuilder.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
@@ -16,14 +16,21 @@ const parsedByLoc = new Map<string, AstScriptBody>();
 // tree with exponentially many nodes. Safe to share because nodes are immutable,
 // and safe to cache forever because a client object's lowering never changes;
 // keyed weakly so entries vanish with their client objects.
-const nodeByClient = new WeakMap<ClientScript, AstScript>();
+const nodeByClient = new WeakMap<ClientScript, Promise<AstScript>>();
 
-export function lowerClientScript(client: ClientScript): AstScript {
+export function lowerClientScript(client: ClientScript): Promise<AstScript> {
   const shared = nodeByClient.get(client);
   if (shared) {
     return shared;
   }
+  // memoized before the first await, so a script reached again while this one
+  // is still lowering joins it instead of lowering a second copy
+  const node = buildScript(client);
+  nodeByClient.set(client, node);
+  return node;
+}
 
+async function buildScript(client: ClientScript): Promise<AstScript> {
   const key = locKey(client.metadata.fileHash, client.loc);
   let body = parsedByLoc.get(key);
   if (body === undefined) {
@@ -31,23 +38,23 @@ export function lowerClientScript(client: ClientScript): AstScript {
     parsedByLoc.set(key, body);
   }
 
-  // The client object graph is acyclic — a script's splices are host values that
-  // exist before the script itself — so lowering the splices before caching the
-  // node cannot recurse back into this same object.
+  const splices: { [key: string]: Ast } = Object.fromEntries(
+    await Promise.all(
+      Object.entries(client.metadata.splices).map(async ([key, splice]) => [
+        key,
+        await lowerSpliceable(splice, "ClientUnknown"),
+      ]),
+    ),
+  );
+
   const node: AstScript = {
     kind: "AstScript",
     loc: client.loc,
     fileHash: client.metadata.fileHash,
-    splices: Object.fromEntries(
-      Object.entries(client.metadata.splices).map(([key, splice]) => [
-        key,
-        lowerSpliceable(splice, "ClientUnknown"),
-      ]),
-    ),
+    splices,
     captures: client.metadata.captures,
     declarations: client.metadata.declarations,
     expression: body,
   };
-  nodeByClient.set(client, node);
   return node;
 }

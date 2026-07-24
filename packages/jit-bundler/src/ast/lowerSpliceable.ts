@@ -11,11 +11,11 @@ import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientElement } from "./lowerClientElement.js";
 
-export function lowerSpliceable(
+export async function lowerSpliceable(
   value: Spliceable,
   // The kind of position being lowered
   position: "ClientUnknown" | "ClientValue",
-): Ast {
+): Promise<Ast> {
   // A hole sentinel a constructor stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.
@@ -54,7 +54,9 @@ export function lowerSpliceable(
   if (Array.isArray(value)) {
     return {
       kind: "AstArray",
-      elements: value.map((element) => lowerSpliceable(element, "ClientValue")),
+      elements: await Promise.all(
+        value.map((element) => lowerSpliceable(element, "ClientValue")),
+      ),
     };
   }
   // A spliced class lowers to its expansion — a function of its declared
@@ -75,9 +77,13 @@ export function lowerSpliceable(
         "into a client script.",
     );
   }
-  const entries: { [key: string]: Ast } = {};
-  for (const [key, entry] of Object.entries(value)) {
-    entries[key] = lowerSpliceable(entry, "ClientValue");
-  }
+  const entries: { [key: string]: Ast } = Object.fromEntries(
+    await Promise.all(
+      Object.entries(value).map(async ([key, entry]) => [
+        key,
+        await lowerSpliceable(entry, "ClientValue"),
+      ]),
+    ),
+  );
   return { kind: "AstObject", entries };
 }
