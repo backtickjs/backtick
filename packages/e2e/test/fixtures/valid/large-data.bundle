@@ -1,326 +1,457 @@
 {
-  "functions": {},
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": [
+            {
+              "id": "ord-1000",
+              "customer": {
+                "name": "Customer 0",
+                "city": "Montréal"
+              },
+              "items": [
+                {
+                  "sku": "SKU-0-A",
+                  "qty": 1
+                },
+                {
+                  "sku": "SKU-0-B",
+                  "qty": 1
+                }
+              ],
+              "total": 45.23
+            },
+            {
+              "id": "ord-1001",
+              "customer": {
+                "name": "Customer 1",
+                "city": "Toronto"
+              },
+              "items": [
+                {
+                  "sku": "SKU-1-A",
+                  "qty": 2
+                },
+                {
+                  "sku": "SKU-1-B",
+                  "qty": 1
+                }
+              ],
+              "total": 46.23
+            },
+            {
+              "id": "ord-1002",
+              "customer": {
+                "name": "Customer 2",
+                "city": "Montréal"
+              },
+              "items": [
+                {
+                  "sku": "SKU-2-A",
+                  "qty": 3
+                },
+                {
+                  "sku": "SKU-2-B",
+                  "qty": 1
+                }
+              ],
+              "total": 47.23
+            },
+            {
+              "id": "ord-1003",
+              "customer": {
+                "name": "Customer 3",
+                "city": "Toronto"
+              },
+              "items": [
+                {
+                  "sku": "SKU-3-A",
+                  "qty": 1
+                },
+                {
+                  "sku": "SKU-3-B",
+                  "qty": 1
+                }
+              ],
+              "total": 48.23
+            },
+            {
+              "id": "ord-1004",
+              "customer": {
+                "name": "Customer 4",
+                "city": "Montréal"
+              },
+              "items": [
+                {
+                  "sku": "SKU-4-A",
+                  "qty": 2
+                },
+                {
+                  "sku": "SKU-4-B",
+                  "qty": 1
+                }
+              ],
+              "total": 49.23
+            }
+          ],
+          "name": "map"
+        },
+        "args": [
+          {
+            "#": "arrow",
+            "params": [
+              "order"
+            ],
+            "body": {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#t1"
+              },
+              "args": [
+                {
+                  "#": "identifier",
+                  "name": "order"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "order"
+      ],
+      "body": {
+        "#": "property",
+        "object": {
+          "#": "identifier",
+          "name": "order"
+        },
+        "name": "id"
+      }
+    },
+    "#f2": {
+      "#": "arrow",
+      "params": [
+        "order"
+      ],
+      "body": {
+        "#": "binop",
+        "operator": "+",
+        "left": {
+          "#": "binop",
+          "operator": "+",
+          "left": "https://img.example.com/",
+          "right": {
+            "#": "property",
+            "object": {
+              "#": "identifier",
+              "name": "order"
+            },
+            "name": "id"
+          }
+        },
+        "right": ".png"
+      }
+    },
+    "#f3": {
+      "#": "arrow",
+      "params": [
+        "order"
+      ],
+      "body": {
+        "#": "property",
+        "object": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "order"
+          },
+          "name": "customer"
+        },
+        "name": "name"
+      }
+    },
+    "#f4": {
+      "#": "arrow",
+      "params": [
+        "order"
+      ],
+      "body": {
+        "#": "property",
+        "object": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "order"
+          },
+          "name": "customer"
+        },
+        "name": "city"
+      }
+    },
+    "#f5": {
+      "#": "arrow",
+      "params": [
+        "order"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": {
+            "#": "property",
+            "object": {
+              "#": "identifier",
+              "name": "order"
+            },
+            "name": "items"
+          },
+          "name": "map"
+        },
+        "args": [
+          {
+            "#": "arrow",
+            "params": [
+              "item"
+            ],
+            "body": {
+              "#": "call",
+              "callee": {
+                "#": "entry",
+                "label": "#t0"
+              },
+              "args": [
+                {
+                  "#": "identifier",
+                  "name": "item"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "#f6": {
+      "#": "arrow",
+      "params": [
+        "item"
+      ],
+      "body": {
+        "#": "property",
+        "object": {
+          "#": "identifier",
+          "name": "item"
+        },
+        "name": "sku"
+      }
+    },
+    "#f7": {
+      "#": "arrow",
+      "params": [
+        "item"
+      ],
+      "body": {
+        "#": "binop",
+        "operator": "+",
+        "left": {
+          "#": "binop",
+          "operator": "+",
+          "left": {
+            "#": "property",
+            "object": {
+              "#": "identifier",
+              "name": "item"
+            },
+            "name": "sku"
+          },
+          "right": " x"
+        },
+        "right": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "item"
+          },
+          "name": "qty"
+        }
+      }
+    },
+    "#f8": {
+      "#": "arrow",
+      "params": [
+        "order"
+      ],
+      "body": {
+        "#": "binop",
+        "operator": "+",
+        "left": "$",
+        "right": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "order"
+          },
+          "name": "total"
+        }
+      }
+    }
+  },
   "trees": {
     "#t0": {
+      "element": {
+        "#": "element",
+        "id": "Text",
+        "key": {
+          "#": "apply",
+          "label": "#f6",
+          "args": [
+            {
+              "#": "slot",
+              "index": 0
+            }
+          ]
+        },
+        "props": {
+          "children": {
+            "#": "apply",
+            "label": "#f7",
+            "args": [
+              {
+                "#": "slot",
+                "index": 0
+              }
+            ]
+          }
+        }
+      }
+    },
+    "#t1": {
+      "element": {
+        "#": "element",
+        "id": "View",
+        "key": {
+          "#": "apply",
+          "label": "#f1",
+          "args": [
+            {
+              "#": "slot",
+              "index": 0
+            }
+          ]
+        },
+        "props": {
+          "children": [
+            {
+              "#": "element",
+              "id": "Image",
+              "key": null,
+              "props": {
+                "source": {
+                  "uri": {
+                    "#": "apply",
+                    "label": "#f2",
+                    "args": [
+                      {
+                        "#": "slot",
+                        "index": 0
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "#": "element",
+              "id": "Text",
+              "key": null,
+              "props": {
+                "children": {
+                  "#": "apply",
+                  "label": "#f3",
+                  "args": [
+                    {
+                      "#": "slot",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "#": "element",
+              "id": "Text",
+              "key": null,
+              "props": {
+                "children": {
+                  "#": "apply",
+                  "label": "#f4",
+                  "args": [
+                    {
+                      "#": "slot",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "#": "apply",
+              "label": "#f5",
+              "args": [
+                {
+                  "#": "slot",
+                  "index": 0
+                }
+              ]
+            },
+            {
+              "#": "element",
+              "id": "Text",
+              "key": null,
+              "props": {
+                "children": {
+                  "#": "apply",
+                  "label": "#f8",
+                  "args": [
+                    {
+                      "#": "slot",
+                      "index": 0
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "#t2": {
       "element": {
         "#": "element",
         "id": "View",
         "key": null,
         "props": {
-          "children": [
-            {
-              "#": "element",
-              "id": "View",
-              "key": "ord-1000",
-              "props": {
-                "children": [
-                  {
-                    "#": "element",
-                    "id": "Image",
-                    "key": null,
-                    "props": {
-                      "source": {
-                        "uri": "https://img.example.com/ord-1000.png"
-                      }
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Customer 0"
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Montréal"
-                    }
-                  },
-                  [
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-0-A",
-                      "props": {
-                        "children": "SKU-0-A x1"
-                      }
-                    },
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-0-B",
-                      "props": {
-                        "children": "SKU-0-B x1"
-                      }
-                    }
-                  ],
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "$45.23"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "#": "element",
-              "id": "View",
-              "key": "ord-1001",
-              "props": {
-                "children": [
-                  {
-                    "#": "element",
-                    "id": "Image",
-                    "key": null,
-                    "props": {
-                      "source": {
-                        "uri": "https://img.example.com/ord-1001.png"
-                      }
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Customer 1"
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Toronto"
-                    }
-                  },
-                  [
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-1-A",
-                      "props": {
-                        "children": "SKU-1-A x2"
-                      }
-                    },
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-1-B",
-                      "props": {
-                        "children": "SKU-1-B x1"
-                      }
-                    }
-                  ],
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "$46.23"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "#": "element",
-              "id": "View",
-              "key": "ord-1002",
-              "props": {
-                "children": [
-                  {
-                    "#": "element",
-                    "id": "Image",
-                    "key": null,
-                    "props": {
-                      "source": {
-                        "uri": "https://img.example.com/ord-1002.png"
-                      }
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Customer 2"
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Montréal"
-                    }
-                  },
-                  [
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-2-A",
-                      "props": {
-                        "children": "SKU-2-A x3"
-                      }
-                    },
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-2-B",
-                      "props": {
-                        "children": "SKU-2-B x1"
-                      }
-                    }
-                  ],
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "$47.23"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "#": "element",
-              "id": "View",
-              "key": "ord-1003",
-              "props": {
-                "children": [
-                  {
-                    "#": "element",
-                    "id": "Image",
-                    "key": null,
-                    "props": {
-                      "source": {
-                        "uri": "https://img.example.com/ord-1003.png"
-                      }
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Customer 3"
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Toronto"
-                    }
-                  },
-                  [
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-3-A",
-                      "props": {
-                        "children": "SKU-3-A x1"
-                      }
-                    },
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-3-B",
-                      "props": {
-                        "children": "SKU-3-B x1"
-                      }
-                    }
-                  ],
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "$48.23"
-                    }
-                  }
-                ]
-              }
-            },
-            {
-              "#": "element",
-              "id": "View",
-              "key": "ord-1004",
-              "props": {
-                "children": [
-                  {
-                    "#": "element",
-                    "id": "Image",
-                    "key": null,
-                    "props": {
-                      "source": {
-                        "uri": "https://img.example.com/ord-1004.png"
-                      }
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Customer 4"
-                    }
-                  },
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "Montréal"
-                    }
-                  },
-                  [
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-4-A",
-                      "props": {
-                        "children": "SKU-4-A x2"
-                      }
-                    },
-                    {
-                      "#": "element",
-                      "id": "Text",
-                      "key": "SKU-4-B",
-                      "props": {
-                        "children": "SKU-4-B x1"
-                      }
-                    }
-                  ],
-                  {
-                    "#": "element",
-                    "id": "Text",
-                    "key": null,
-                    "props": {
-                      "children": "$49.23"
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "children": {
+            "#": "apply",
+            "label": "#f0",
+            "args": []
+          }
         }
       }
     }
   },
   "root": {
     "#": "apply",
-    "label": "#t0",
+    "label": "#t2",
     "args": []
   }
 }

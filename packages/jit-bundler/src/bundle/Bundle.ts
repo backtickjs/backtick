@@ -59,7 +59,7 @@ export interface BundleTree {
 export interface BundleElement {
   "#": "element";
   id: string;
-  key: string | number | null;
+  key: BundleExpr;
   props: { [prop: string]: BundleExpr };
 }
 

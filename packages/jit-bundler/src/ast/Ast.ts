@@ -224,7 +224,7 @@ export interface AstBoolean {
 export interface AstElement {
   readonly kind: "AstElement";
   readonly id: string;
-  readonly key: string | number | null;
+  readonly key: Ast;
   readonly props: Readonly<Record<string, Ast>>;
 }
 

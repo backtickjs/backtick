@@ -1,4 +1,4 @@
-import type { Component, JsxElement } from "@backtickjs/cs-runtime";
+import type { Component, JsxElement, Key } from "@backtickjs/cs-runtime";
 import { _jsx } from "@backtickjs/cs-runtime";
 
 export declare namespace JSX {
@@ -14,14 +14,14 @@ export declare namespace JSX {
     children: unknown;
   }
   export interface IntrinsicAttributes {
-    key?: string | number;
+    key?: Key;
   }
 }
 
 export function jsx(
   type: JSX.ElementType,
   props: { [key: string]: unknown },
-  key?: string | number,
+  key?: Key,
 ): JSX.Element {
   // The tag is stored as written: bundling is what runs it, so a server
   // component never runs for a tree nobody bundles.

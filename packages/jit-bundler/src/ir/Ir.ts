@@ -52,7 +52,7 @@ export interface IrTreeRef {
 export interface IrElement {
   readonly kind: "IrElement";
   readonly id: string;
-  readonly key: string | number | null;
+  readonly key: IrArgument;
   readonly props: Readonly<Record<string, IrArgument>>;
 }
 

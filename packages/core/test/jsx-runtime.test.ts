@@ -31,10 +31,10 @@ test("jsxs keeps a static children array", () => {
   assert.deepEqual(element.props.children, [one, two]);
 });
 
-test("jsx rejects a key that isn't a string or number", () => {
+test("jsx rejects a key that isn't a string, number, or client value", () => {
   assert.throws(
-    // @ts-expect-error -- deliberately bypasses the key type to hit the runtime check
-    () => jsx(View, {}, {}),
-    /Key must be a string or a number/,
+    // @ts-expect-error -- a symbol is neither a primitive key nor spliceable
+    () => jsx(View, {}, Symbol("nope")),
+    /Key must be a string, a number, or a client value/,
   );
 });

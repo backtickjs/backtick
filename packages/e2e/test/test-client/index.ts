@@ -159,11 +159,15 @@ function evaluateElement(
   element: BundleElement,
   slots: unknown[],
 ): TestElement {
+  const key = evaluateExpr(bundle, element.key, slots) as
+    | string
+    | number
+    | null;
   const props: { [prop: string]: unknown } = {};
   for (const [prop, expr] of Object.entries(element.props)) {
     props[prop] = evaluateExpr(bundle, expr, slots);
   }
-  return new TestElement(element.id, element.key, props);
+  return new TestElement(element.id, key, props);
 }
 
 // A tree expression (also the root): plain JSON carries itself; the

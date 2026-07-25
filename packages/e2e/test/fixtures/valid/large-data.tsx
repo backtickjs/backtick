@@ -1,9 +1,5 @@
-import { Image, Text, View } from "@backtickjs/core";
+import { cs, Image, Text, View } from "@backtickjs/core";
 
-// A data-heavy tree: a dataset rendered into a View/Text/Image component tree,
-// one card per order, so the wire cost of a real rendered list shows up at
-// scale rather than on toy literals. The per-item `map` sits beside sibling
-// elements — nested children, no hand-flattening (see `Children`).
 const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,
   customer: {
@@ -17,18 +13,34 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
   total: 45.23 + i,
 }));
 
+// The dataset ships once and the list expands on the client: one card template
+// with holes for each order's fields (and a nested item list), mapped at
+// runtime. The bundle carries the data plus a single card, not five expanded
+// copies. The root View stays static; only its children map on the client.
 export default (
   <View>
-    {orders.map((order) => (
-      <View key={order.id}>
-        <Image source={{ uri: `https://img.example.com/${order.id}.png` }} />
-        <Text>{order.customer.name}</Text>
-        <Text>{order.customer.city}</Text>
-        {order.items.map((item) => (
-          <Text key={item.sku}>{`${item.sku} x${item.qty}`}</Text>
-        ))}
-        <Text>{`$${order.total.toFixed(2)}`}</Text>
-      </View>
-    ))}
+    {cs`$orders.map(
+      (order) =>
+        ${(
+          <View key={cs`order.id`}>
+            <Image
+              source={{
+                uri: cs`"https://img.example.com/" + order.id + ".png"`,
+              }}
+            />
+            <Text>{cs`order.customer.name`}</Text>
+            <Text>{cs`order.customer.city`}</Text>
+            {cs`order.items.map(
+              (item) =>
+                ${(
+                  <Text key={cs`item.sku`}>
+                    {cs`item.sku + " x" + item.qty`}
+                  </Text>
+                )},
+            )`}
+            <Text>{cs`"$" + order.total`}</Text>
+          </View>
+        )},
+    )`}
   </View>
 );

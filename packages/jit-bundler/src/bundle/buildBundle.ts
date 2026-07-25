@@ -577,6 +577,7 @@ export function buildBundle(ir: Ir): Bundle {
     slots: Map<string, number>,
     params: ReadonlySet<string>,
   ): BundleElement => {
+    const key = renderExpr(element.key, slots, params);
     const props: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = renderExpr(entry, slots, params);
@@ -584,7 +585,7 @@ export function buildBundle(ir: Ir): Bundle {
     return {
       "#": "element",
       id: element.id,
-      key: element.key,
+      key,
       props,
     };
   };

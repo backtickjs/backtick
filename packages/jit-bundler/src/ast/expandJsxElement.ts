@@ -34,6 +34,10 @@ async function buildElement(jsx: JsxElement): Promise<AstElement> {
     return expandJsxElement(await element);
   }
 
+  // The key lowers like a prop: a static key to its literal node, a client
+  // key to its script (evaluated per instance). A missing key lowers null.
+  const key = await lowerSpliceable(jsx.key, "ClientValue");
+
   // A client component names the element the interpreter renders, and the props
   // it hands back are the ones the element carries.
   const props = Object.fromEntries(
@@ -55,7 +59,7 @@ async function buildElement(jsx: JsxElement): Promise<AstElement> {
   return {
     kind: "AstElement",
     id: element.id,
-    key: jsx.key,
+    key,
     props,
   };
 }

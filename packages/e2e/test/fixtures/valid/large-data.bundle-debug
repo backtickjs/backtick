@@ -1,144 +1,78 @@
-#t0 = <View>
-  {<View
-    key={"ord-1000"}
-  >
-    {<Image
-      source={{ "uri": "https://img.example.com/ord-1000.png" }}
-    />}
-    {<Text>
-      {"Customer 0"}
-    </Text>}
-    {<Text>
-      {"Montréal"}
-    </Text>}
-    {[
-      <Text
-        key={"SKU-0-A"}
-      >
-        {"SKU-0-A x1"}
-      </Text>,
-      <Text
-        key={"SKU-0-B"}
-      >
-        {"SKU-0-B x1"}
-      </Text>
-    ]}
-    {<Text>
-      {"$45.23"}
-    </Text>}
-  </View>}
-  {<View
-    key={"ord-1001"}
-  >
-    {<Image
-      source={{ "uri": "https://img.example.com/ord-1001.png" }}
-    />}
-    {<Text>
-      {"Customer 1"}
-    </Text>}
-    {<Text>
-      {"Toronto"}
-    </Text>}
-    {[
-      <Text
-        key={"SKU-1-A"}
-      >
-        {"SKU-1-A x2"}
-      </Text>,
-      <Text
-        key={"SKU-1-B"}
-      >
-        {"SKU-1-B x1"}
-      </Text>
-    ]}
-    {<Text>
-      {"$46.23"}
-    </Text>}
-  </View>}
-  {<View
-    key={"ord-1002"}
-  >
-    {<Image
-      source={{ "uri": "https://img.example.com/ord-1002.png" }}
-    />}
-    {<Text>
-      {"Customer 2"}
-    </Text>}
-    {<Text>
-      {"Montréal"}
-    </Text>}
-    {[
-      <Text
-        key={"SKU-2-A"}
-      >
-        {"SKU-2-A x3"}
-      </Text>,
-      <Text
-        key={"SKU-2-B"}
-      >
-        {"SKU-2-B x1"}
-      </Text>
-    ]}
-    {<Text>
-      {"$47.23"}
-    </Text>}
-  </View>}
-  {<View
-    key={"ord-1003"}
-  >
-    {<Image
-      source={{ "uri": "https://img.example.com/ord-1003.png" }}
-    />}
-    {<Text>
-      {"Customer 3"}
-    </Text>}
-    {<Text>
-      {"Toronto"}
-    </Text>}
-    {[
-      <Text
-        key={"SKU-3-A"}
-      >
-        {"SKU-3-A x1"}
-      </Text>,
-      <Text
-        key={"SKU-3-B"}
-      >
-        {"SKU-3-B x1"}
-      </Text>
-    ]}
-    {<Text>
-      {"$48.23"}
-    </Text>}
-  </View>}
-  {<View
-    key={"ord-1004"}
-  >
-    {<Image
-      source={{ "uri": "https://img.example.com/ord-1004.png" }}
-    />}
-    {<Text>
-      {"Customer 4"}
-    </Text>}
-    {<Text>
-      {"Montréal"}
-    </Text>}
-    {[
-      <Text
-        key={"SKU-4-A"}
-      >
-        {"SKU-4-A x2"}
-      </Text>,
-      <Text
-        key={"SKU-4-B"}
-      >
-        {"SKU-4-B x1"}
-      </Text>
-    ]}
-    {<Text>
-      {"$49.23"}
-    </Text>}
-  </View>}
+#f0 = () => [
+  {
+    "id": "ord-1000",
+    "customer": { "name": "Customer 0", "city": "Montréal" },
+    "items": [{ "sku": "SKU-0-A", "qty": 1 }, { "sku": "SKU-0-B", "qty": 1 }],
+    "total": 45.23
+  },
+  {
+    "id": "ord-1001",
+    "customer": { "name": "Customer 1", "city": "Toronto" },
+    "items": [{ "sku": "SKU-1-A", "qty": 2 }, { "sku": "SKU-1-B", "qty": 1 }],
+    "total": 46.23
+  },
+  {
+    "id": "ord-1002",
+    "customer": { "name": "Customer 2", "city": "Montréal" },
+    "items": [{ "sku": "SKU-2-A", "qty": 3 }, { "sku": "SKU-2-B", "qty": 1 }],
+    "total": 47.23
+  },
+  {
+    "id": "ord-1003",
+    "customer": { "name": "Customer 3", "city": "Toronto" },
+    "items": [{ "sku": "SKU-3-A", "qty": 1 }, { "sku": "SKU-3-B", "qty": 1 }],
+    "total": 48.23
+  },
+  {
+    "id": "ord-1004",
+    "customer": { "name": "Customer 4", "city": "Montréal" },
+    "items": [{ "sku": "SKU-4-A", "qty": 2 }, { "sku": "SKU-4-B", "qty": 1 }],
+    "total": 49.23
+  }
+].map((order) => #t1(order))
+
+#f1 = (order) => order.id
+
+#f2 = (order) => "https://img.example.com/" + order.id + ".png"
+
+#f3 = (order) => order.customer.name
+
+#f4 = (order) => order.customer.city
+
+#f5 = (order) => order.items.map((item) => #t0(item))
+
+#f6 = (item) => item.sku
+
+#f7 = (item) => item.sku + " x" + item.qty
+
+#f8 = (order) => "$" + order.total
+
+#t0 = <Text
+  key={{"#":"apply","label":"#f6","args":[{"#":"slot","index":0}]}}
+>
+  {#f7(slots[0])}
+</Text>
+
+#t1 = <View
+  key={{"#":"apply","label":"#f1","args":[{"#":"slot","index":0}]}}
+>
+  {<Image
+    source={{ "uri": #f2(slots[0]) }}
+  />}
+  {<Text>
+    {#f3(slots[0])}
+  </Text>}
+  {<Text>
+    {#f4(slots[0])}
+  </Text>}
+  {#f5(slots[0])}
+  {<Text>
+    {#f8(slots[0])}
+  </Text>}
 </View>
 
-root = #t0()
+#t2 = <View>
+  {#f0()}
+</View>
+
+root = #t2()
