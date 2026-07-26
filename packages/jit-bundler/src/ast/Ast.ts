@@ -9,8 +9,8 @@ export type Ast =
   | AstBoolean
   | AstElement
   | AstExpansion
-  | AstFragment
   | AstHole
+  | AstInstance
   | AstNull
   | AstNumber
   | AstObject
@@ -24,6 +24,7 @@ export type Ast =
 export interface AstState {
   readonly kind: "AstState";
   readonly initial: Ast;
+  readonly declaredIn: AstInstance;
 }
 
 // A script node that yields a value.
@@ -239,10 +240,13 @@ export interface AstElement {
   readonly props: Readonly<Record<string, Ast>>;
 }
 
-export interface AstFragment {
-  readonly kind: "AstFragment";
+// A server component's invocation, wrapping what it resolved to. One node per
+// invocation rather than per component: the node is what owns the cells its
+// component declares, so it can't depend on how often the component is named.
+export interface AstInstance {
+  readonly kind: "AstInstance";
   readonly key: Ast;
-  readonly child: AstFragment | AstElement;
+  child: AstInstance | AstElement | null;
 }
 
 // A spliced class's bundle-time expansion: the spliceable the constructor

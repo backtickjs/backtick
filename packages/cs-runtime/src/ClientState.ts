@@ -1,10 +1,10 @@
-import type { JsxElement } from "./JsxElement.js";
+import type { Instance } from "./Instance.js";
 import type { SpliceableValue } from "./Spliceable.js";
 
 export interface ClientState<T extends SpliceableValue> {
   readonly "@backtickjs": "ClientState";
   readonly initial: T;
-  readonly declaredIn: JsxElement;
+  readonly declaredIn: Instance;
 }
 
 export function isClientState(

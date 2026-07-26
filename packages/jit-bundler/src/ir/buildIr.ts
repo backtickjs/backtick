@@ -2,7 +2,7 @@ import type {
   Ast,
   AstElement,
   AstExpansion,
-  AstFragment,
+  AstInstance,
   AstScript,
 } from "../ast/Ast.js";
 import { locKey } from "../locKey.js";
@@ -30,9 +30,9 @@ class IrBuilder {
   private readonly indexByLoc = new Map<string, number>();
   private readonly refByScript = new Map<AstScript, IrScriptRef>();
   private readonly refByElement = new Map<AstElement, IrTreeRef>();
-  // One entry per invocation, interned by node identity so a fragment reached
+  // One entry per invocation, interned by node identity so an instance reached
   // twice is one entry instantiated twice.
-  private readonly refByFragment = new Map<AstFragment, IrTreeRef>();
+  private readonly refByInstance = new Map<AstInstance, IrTreeRef>();
   // A class's expansion shared across script instances (`lowerSpliceable`
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
@@ -112,22 +112,28 @@ class IrBuilder {
   // Lowers an invocation to a reference into the tree table. Unlike an element
   // this happens however many places reference it: the entry is the instance,
   // so what it owns can't depend on how often it is mentioned.
-  referenceFragment(fragment: AstFragment): IrTreeRef {
-    const shared = this.refByFragment.get(fragment);
+  referenceInstance(instance: AstInstance): IrTreeRef {
+    const shared = this.refByInstance.get(instance);
     if (shared) {
       return shared;
     }
-    const child = fragment.child;
+    const child = instance.child;
+    // The component rendered nothing. Every tree entry has content — the table
+    // has no empty form — so this stops here rather than standing in something
+    // that renders.
+    if (child === null) {
+      throw new Error("Can't bundle a component that renders nothing yet.");
+    }
     const tree: IrTreeEntry = {
       kind: "IrTreeEntry",
       content:
-        child.kind === "AstFragment"
-          ? this.referenceFragment(child)
+        child.kind === "AstInstance"
+          ? this.referenceInstance(child)
           : this.lowerElement(child),
     };
     const ref: IrTreeRef = { kind: "IrTreeRef", target: this.trees.length };
     this.trees.push(tree);
-    this.refByFragment.set(fragment, ref);
+    this.refByInstance.set(instance, ref);
     return ref;
   }
 
@@ -152,8 +158,8 @@ class IrBuilder {
   // position (`lower`) an element always hoists: a script body or the IR
   // root embeds a tree by reference, never structurally.
   private lowerInTree(node: Ast): IrArgument {
-    if (node.kind === "AstFragment") {
-      return this.referenceFragment(node);
+    if (node.kind === "AstInstance") {
+      return this.referenceInstance(node);
     }
     if (node.kind === "AstElement") {
       return this.elementRefs.get(node) === 1
@@ -186,8 +192,8 @@ class IrBuilder {
         return this.referenceScript(node);
       case "AstElement":
         return this.referenceTree(node);
-      case "AstFragment":
-        return this.referenceFragment(node);
+      case "AstInstance":
+        return this.referenceInstance(node);
       case "AstArray":
         return {
           kind: "IrArray",
@@ -252,8 +258,10 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
       Object.values(node.splices).forEach(visit);
       return;
     }
-    if (node.kind === "AstFragment") {
-      visit(node.child);
+    if (node.kind === "AstInstance") {
+      if (node.child !== null) {
+        visit(node.child);
+      }
       return;
     }
     if (node.kind === "AstElement") {

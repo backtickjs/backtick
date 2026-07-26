@@ -1,6 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientState } from "./ClientState.js";
-import { getJsxElement } from "./getJsxElement.js";
+import { getInstance } from "./Instance.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { SpliceableValue, Spliced } from "./Spliceable.js";
 import type { Widen } from "./Widen.js";
@@ -17,7 +17,7 @@ export function state<const T extends SpliceableValue>(
   const cell: ClientState<T> = {
     "@backtickjs": "ClientState",
     initial,
-    declaredIn: getJsxElement(),
+    declaredIn: getInstance(),
   };
   return cell as unknown as Client<State<Widen<Spliced<T>>>>;
 }

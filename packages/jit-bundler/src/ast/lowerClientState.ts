@@ -1,5 +1,5 @@
 import type { ClientState, SpliceableValue } from "@backtickjs/cs-runtime";
-import type { AstState } from "./Ast.js";
+import type { AstInstance, AstState } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // One node per cell, ever: identity is the cell object, so a cell spliced
@@ -32,5 +32,6 @@ async function buildClientState(
   return {
     kind: "AstState",
     initial: await lowerSpliceable(value.initial, "ClientValue"),
+    declaredIn: value.declaredIn as AstInstance,
   };
 }

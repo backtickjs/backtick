@@ -23,7 +23,7 @@ export {
   type Spliced,
 } from "./Spliceable.js";
 export { type ClientState, isClientState } from "./ClientState.js";
-export { withJsxElement } from "./getJsxElement.js";
+export { type Instance, withInstance } from "./Instance.js";
 export { state, type State } from "./state.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";
