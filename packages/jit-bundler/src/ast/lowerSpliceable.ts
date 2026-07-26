@@ -1,6 +1,7 @@
 import {
   isClientObject,
   isClientScript,
+  isClientState,
   isJsxElement,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
@@ -9,6 +10,7 @@ import { expandClientConstructor } from "./expandClientConstructor.js";
 import { holeName } from "./holes.js";
 import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
+import { lowerClientState } from "./lowerClientState.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 
 export async function lowerSpliceable(
@@ -35,6 +37,9 @@ export async function lowerSpliceable(
   }
   if (isJsxElement(value)) {
     return expandJsxElement(value);
+  }
+  if (isClientState(value)) {
+    return lowerClientState(value);
   }
   if (isClientObject(value)) {
     return lowerClientObject(value);

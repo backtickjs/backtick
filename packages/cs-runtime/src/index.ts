@@ -17,7 +17,12 @@ export type { ClientValue } from "./ClientValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
-export { isSpliceable, type Spliceable, type Spliced } from "./Spliceable.js";
+export {
+  isSpliceable,
+  type Spliceable,
+  type SpliceableValue,
+  type Spliced,
+} from "./Spliceable.js";
 export { type ClientState, isClientState } from "./ClientState.js";
 export { state, type State } from "./state.js";
 export type { Receiver } from "./Receiver.js";

@@ -13,7 +13,17 @@ export type Ast =
   | AstNull
   | AstNumber
   | AstObject
+  | AstState
   | AstString;
+
+// A state cell (`state(initial)`): the client owns the storage, allocated per
+// instance of the tree that declares the cell; what ships is the initial
+// value. One node per cell — identity is the cell object — so every splice of
+// one cell reaches the same storage.
+export interface AstState {
+  readonly kind: "AstState";
+  readonly initial: Ast;
+}
 
 // A script node that yields a value.
 export type AstScriptExpression =

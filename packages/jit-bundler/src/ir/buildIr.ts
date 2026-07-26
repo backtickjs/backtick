@@ -185,6 +185,10 @@ class IrBuilder {
       }
       case "AstHole":
         return { kind: "IrHole", name: node.name };
+      // A cell lowers to the AST but has no IR entry yet: the state table and
+      // the tree that declares the cell come with the IR step.
+      case "AstState":
+        throw new Error("Can't bundle a state cell yet.");
       default: {
         const unhandled: never = node;
         throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);
