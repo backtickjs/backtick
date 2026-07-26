@@ -2,6 +2,7 @@ import {
   isClientElement,
   type JsxElement,
   isSpliceable,
+  withJsxElement,
 } from "@backtickjs/cs-runtime";
 import type { Ast, AstElement, AstFragment } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
@@ -32,7 +33,9 @@ async function buildElement(
   jsx: JsxElement,
 ): Promise<AstFragment | AstElement> {
   // Where the tag runs, and the one suspension point in the whole lowering.
-  const element = jsx.component(jsx.props as never);
+  const element = withJsxElement(jsx, () =>
+    jsx.component(jsx.props as never),
+  );
 
   // The key lowers like a prop: a static key to its literal node, a client
   // key to its script (evaluated per instance). A missing key lowers null.
