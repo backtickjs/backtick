@@ -11,7 +11,6 @@ export {
 } from "./ClientScript.js";
 export type { ClientString } from "./ClientString.js";
 export { type JsxElement, isJsxElement, type Key } from "./JsxElement.js";
-export type { Component } from "./Component.js";
 export type { Prop } from "./Prop.js";
 export type { ClientValue } from "./ClientValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
@@ -29,7 +28,10 @@ export { state, type State } from "./state.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";
 export type { BinaryOperator, Visitor } from "./Visitor.js";
-export type { ClientComponent } from "./ClientComponent.js";
-export { type ClientElement, isClientElement } from "./ClientElement.js";
+export {
+  type ClientElement,
+  createClientElement,
+  isClientElement,
+} from "./ClientElement.js";
 export { version } from "./version.js";
-export { create as _jsx } from "./JsxElement.js";
+export { createJsxElement } from "./JsxElement.js";

@@ -8,7 +8,7 @@ test("jsx builds an element from a component", () => {
   const element = jsx(View, { style: { padding: 8 } });
   assert.ok(isJsxElement(element));
   // the tag is stored as written; bundling is what resolves it to a name
-  assert.equal(element.component, View);
+  assert.equal(element.type, View);
   assert.equal(element.key, null);
   assert.deepEqual(element.props, { style: { padding: 8 } });
 });

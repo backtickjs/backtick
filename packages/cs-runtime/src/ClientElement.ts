@@ -1,14 +1,12 @@
 import type { SpliceableValue } from "./Spliceable.js";
 
-/**
- * What a client component evaluates to: the element that reaches the client.
- * `id` is what the client dispatches on to pick a native component. The key
- * stays on the `JsxElement`, so this is the component's contribution to it.
- */
-export interface ClientElement {
+// A component's props: an object whose every value the bundler can lower.
+type Props = { [key: string]: SpliceableValue };
+
+export interface ClientElement<P extends Props = Props> {
+  (props: P): never;
   readonly "@backtickjs": "ClientElement";
   readonly id: string;
-  readonly props: { [key: string]: SpliceableValue };
 }
 
 export function isClientElement(value: unknown): value is ClientElement {
@@ -18,4 +16,13 @@ export function isClientElement(value: unknown): value is ClientElement {
     "@backtickjs" in value &&
     value["@backtickjs"] === "ClientElement"
   );
+}
+
+export function createClientElement<P extends Props>(
+  id: string,
+): ClientElement<P> {
+  return {
+    "@backtickjs": "ClientElement",
+    id,
+  } as unknown as ClientElement<P>;
 }

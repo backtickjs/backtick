@@ -1,5 +1,6 @@
-import type { Component } from "./Component.js";
+import type { ClientElement } from "./ClientElement.js";
 import type { Prop } from "./Prop.js";
+import type { ServerComponent } from "./ServerComponent.js";
 import { isSpliceable } from "./Spliceable.js";
 
 export type Key = Prop<string | number>;
@@ -9,7 +10,7 @@ export type Key = Prop<string | number>;
  */
 export interface JsxElement {
   readonly "@backtickjs": "JsxElement";
-  readonly component: Component;
+  readonly type: ClientElement<never> | ServerComponent<never>;
   readonly key: Key | null;
   readonly props: { [key: string]: unknown };
 }
@@ -23,8 +24,8 @@ export function isJsxElement(value: unknown): value is JsxElement {
   );
 }
 
-export function create(
-  component: Component,
+export function createJsxElement(
+  type: ClientElement<never> | ServerComponent<never>,
   props: { [key: string]: unknown },
   key?: Key,
 ): JsxElement {
@@ -33,7 +34,7 @@ export function create(
   }
   return {
     "@backtickjs": "JsxElement",
-    component,
+    type,
     key: key ?? null,
     props,
   };
