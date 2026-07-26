@@ -5,7 +5,9 @@ export {
   type ClientValue,
   type Prop,
   type Spliceable,
+  type State,
   cs,
+  state,
 } from "@backtickjs/cs-runtime";
 export { Image, Text, View } from "./components/index.js";
 export type { JSX } from "./jsx-runtime/index.js";

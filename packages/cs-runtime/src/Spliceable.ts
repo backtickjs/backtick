@@ -28,9 +28,7 @@ export type Spliceable = SpliceableValue | Client<void>;
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
-// A failed splice instantiates with the whole constraint; collapse that
-// fallback to ClientValue so only the splice's own error reports.
-export type Spliced<T> = [Spliceable] extends [T]
+export type Spliced<T> = [SpliceableValue] extends [T]
   ? ClientValue
   : T extends Client<infer U>
     ? U
