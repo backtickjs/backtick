@@ -1,0 +1,14 @@
+#t0 = <Text>
+  {"one"}
+</Text>
+
+#t1 = <Text>
+  {"two"}
+</Text>
+
+#t2 = <View>
+  {#t0()}
+  {#t1()}
+</View>
+
+root = #t2()

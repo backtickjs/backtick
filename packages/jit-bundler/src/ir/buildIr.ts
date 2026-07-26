@@ -122,7 +122,10 @@ class IrBuilder {
   // root embeds a tree by reference, never structurally.
   private lowerInTree(node: Ast): IrArgument {
     if (node.kind === "AstElement") {
-      return this.elementRefs.get(node) === 1
+      // A component invocation always hoists: its entry is the instance
+      // boundary, so what it owns doesn't depend on how many places happen to
+      // reference the element.
+      return !node.boundary && this.elementRefs.get(node) === 1
         ? this.lowerElement(node)
         : this.referenceTree(node);
     }

@@ -1,0 +1,8 @@
+<View>
+  <Text>
+    {"one"}
+  </Text>
+  <Text>
+    {"two"}
+  </Text>
+</View>

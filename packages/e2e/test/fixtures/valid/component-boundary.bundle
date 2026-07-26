@@ -1,0 +1,51 @@
+{
+  "functions": {},
+  "trees": {
+    "#t0": {
+      "element": {
+        "#": "element",
+        "id": "Text",
+        "key": null,
+        "props": {
+          "children": "one"
+        }
+      }
+    },
+    "#t1": {
+      "element": {
+        "#": "element",
+        "id": "Text",
+        "key": null,
+        "props": {
+          "children": "two"
+        }
+      }
+    },
+    "#t2": {
+      "element": {
+        "#": "element",
+        "id": "View",
+        "key": null,
+        "props": {
+          "children": [
+            {
+              "#": "apply",
+              "label": "#t0",
+              "args": []
+            },
+            {
+              "#": "apply",
+              "label": "#t1",
+              "args": []
+            }
+          ]
+        }
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t2",
+    "args": []
+  }
+}

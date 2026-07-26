@@ -236,6 +236,11 @@ export interface AstElement {
   readonly id: string;
   readonly key: Ast;
   readonly props: Readonly<Record<string, Ast>>;
+  // Set when this element is where a server component's invocation bottomed
+  // out. That invocation is the instance, so the element hoists into a tree
+  // entry of its own however many places reference it. Host side only: no
+  // trace of the component reaches the wire.
+  readonly boundary?: true;
 }
 
 // A spliced class's bundle-time expansion: the spliceable the constructor

@@ -30,8 +30,14 @@ async function buildElement(jsx: JsxElement): Promise<AstElement> {
   // A server component resolves to another element asynchronously: awaited
   // here, on the host, and the element it built is what the bundle carries. A
   // client component returns a marked `ClientElement` synchronously instead.
+  //
+  // The invocation is an instance boundary, so the element it resolved to is
+  // marked as one. Marking a copy rather than the resolved node keeps the
+  // boundary attached to this invocation: the same element reached another way
+  // is a different instance and keeps its own answer.
   if (!isClientElement(element)) {
-    return expandJsxElement(await element);
+    const resolved = await expandJsxElement(await element);
+    return { ...resolved, boundary: true };
   }
 
   // The key lowers like a prop: a static key to its literal node, a client
