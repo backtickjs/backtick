@@ -24,7 +24,10 @@ export interface IrScriptEntry {
 // since that inner invocation is an instance of its own.
 export interface IrTreeEntry {
   readonly kind: "IrTreeEntry";
-  readonly content: IrElement | IrTreeRef;
+  // Null when the instance renders nothing. The entry still exists — it is what
+  // owns the instance's state and what a re-render re-evaluates — so what is
+  // absent is the content, not the entry.
+  readonly content: IrElement | IrTreeRef | null;
 }
 
 // A reference into the IR's script table — how one script entry embeds

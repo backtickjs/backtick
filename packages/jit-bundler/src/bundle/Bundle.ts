@@ -51,9 +51,12 @@ export type TreeLabel = `#t${number}`;
 // function of its slots: instantiating it supplies one value per `BundleSlot`
 // index, exactly as calling a `functions` entry supplies its captures.
 export interface BundleTree {
-  // What this instance renders: the element, or a reference to another instance
-  // when this one is a component that renders a component.
-  content: BundleElement | BundleApply;
+  // What this instance renders: the element, a reference to another instance
+  // when this one is a component that renders a component, or null when it
+  // renders nothing. A null-content entry is still an instance — it holds the
+  // state its component declared, and a re-render may give it content — so an
+  // interpreter instantiates it as usual and renders nothing for it.
+  content: BundleElement | BundleApply | null;
 }
 
 // A JSX element node: static structure carried as data, each prop a

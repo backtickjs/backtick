@@ -282,10 +282,14 @@ export function buildBundle(ir: Ir): Bundle {
   // What to scan for an entry's needs: an element contributes its key and its
   // props — a key may be a script, so it captures like any other value — and a
   // reference contributes itself, so the inner instance's slots thread through.
-  const contentValues = (content: IrElement | IrTreeRef): IrArgument[] =>
-    content.kind === "IrElement"
-      ? [content.key, ...Object.values(content.props)]
-      : [content];
+  const contentValues = (
+    content: IrElement | IrTreeRef | null,
+  ): IrArgument[] =>
+    content === null
+      ? [] // renders nothing, so there is no wiring to thread
+      : content.kind === "IrElement"
+        ? [content.key, ...Object.values(content.props)]
+        : [content];
 
   // The slot signature of a tree entry: the capture keys its wiring needs from
   // whichever scope instantiates it, in first-need order. These are the
@@ -521,6 +525,11 @@ export function buildBundle(ir: Ir): Bundle {
     const keys = treeSlots(target);
     const slots = new Map(keys.map((key, index) => [key, index] as const));
     const content = ir.trees[target].content;
+    // An instance that renders nothing: the entry stays, with nothing under it.
+    if (content === null) {
+      treeJsons.set(target, { content: null });
+      return;
+    }
     if (content.kind === "IrElement") {
       treeJsons.set(target, {
         content: renderElement(content, slots, new Set()),
@@ -713,7 +722,10 @@ function nestedRefs(
     } else if (value.kind === "IrTreeRef") {
       if (!seenTrees.has(value.target)) {
         seenTrees.add(value.target);
-        visit(trees[value.target].content);
+        const content = trees[value.target].content;
+        if (content !== null) {
+          visit(content);
+        }
       }
     } else if (value.kind === "IrElement") {
       Object.values(value.props).forEach(visit);

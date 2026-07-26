@@ -1,0 +1,7 @@
+#t0 = null
+
+#t1 = <View>
+  {#t0()}
+</View>
+
+root = #t1()

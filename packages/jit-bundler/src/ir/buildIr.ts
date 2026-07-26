@@ -118,18 +118,16 @@ class IrBuilder {
       return shared;
     }
     const child = instance.child;
-    // The component rendered nothing. Every tree entry has content — the table
-    // has no empty form — so this stops here rather than standing in something
-    // that renders.
-    if (child === null) {
-      throw new Error("Can't bundle a component that renders nothing yet.");
-    }
+    // A component that rendered nothing still gets its entry — the entry is the
+    // instance, and it owns state whether or not it has content.
     const tree: IrTreeEntry = {
       kind: "IrTreeEntry",
       content:
-        child.kind === "AstInstance"
-          ? this.referenceInstance(child)
-          : this.lowerElement(child),
+        child === null
+          ? null
+          : child.kind === "AstInstance"
+            ? this.referenceInstance(child)
+            : this.lowerElement(child),
     };
     const ref: IrTreeRef = { kind: "IrTreeRef", target: this.trees.length };
     this.trees.push(tree);
