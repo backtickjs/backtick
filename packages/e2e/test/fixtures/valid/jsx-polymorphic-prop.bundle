@@ -21,7 +21,7 @@
   },
   "trees": {
     "#t0": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "View",
         "key": null,

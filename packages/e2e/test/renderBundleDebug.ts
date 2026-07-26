@@ -17,7 +17,7 @@ export function renderBundleDebug(bundle: Bundle): string {
     sections.push(`${label} = ${renderNode(arrow, "")}`);
   }
   for (const [label, tree] of Object.entries(bundle.trees)) {
-    sections.push(`${label} = ${renderExpr(tree.element, "")}`);
+    sections.push(`${label} = ${renderExpr(tree.content, "")}`);
   }
   sections.push(`root = ${renderExpr(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;
@@ -153,7 +153,7 @@ function renderJsx(element: BundleElement, indent: string): string {
   const inner = `${indent}  `;
   const attributes: string[] = [];
   if (element.key !== null) {
-    attributes.push(`${inner}key={${JSON.stringify(element.key)}}`);
+    attributes.push(`${inner}key={${renderExpr(element.key, inner)}}`);
   }
   let children: BundleExpr[] = [];
   for (const [prop, value] of Object.entries(element.props)) {

@@ -48,13 +48,13 @@
 #f8 = (order) => "$" + order.total
 
 #t0 = <Text
-  key={{"#":"apply","label":"#f6","args":[{"#":"slot","index":0}]}}
+  key={#f6(slots[0])}
 >
   {#f7(slots[0])}
 </Text>
 
 #t1 = <View
-  key={{"#":"apply","label":"#f1","args":[{"#":"slot","index":0}]}}
+  key={#f1(slots[0])}
 >
   {<Image
     source={{ "uri": #f2(slots[0]) }}

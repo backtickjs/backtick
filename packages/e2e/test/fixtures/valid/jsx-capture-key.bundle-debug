@@ -1,0 +1,12 @@
+#f0 = () => () => {
+  const x = 1;
+  return #t0(x);
+}
+
+#f1 = (x) => x
+
+#t0 = <Text
+  key={#f1(slots[0])}
+/>
+
+root = #f0()

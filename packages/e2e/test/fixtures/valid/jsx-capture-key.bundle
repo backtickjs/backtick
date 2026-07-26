@@ -41,12 +41,8 @@
         "x"
       ],
       "body": {
-        "#": "arrow",
-        "params": [],
-        "body": {
-          "#": "identifier",
-          "name": "x"
-        }
+        "#": "identifier",
+        "name": "x"
       }
     }
   },
@@ -55,19 +51,17 @@
       "content": {
         "#": "element",
         "id": "Text",
-        "key": null,
-        "props": {
-          "onPress": {
-            "#": "apply",
-            "label": "#f1",
-            "args": [
-              {
-                "#": "slot",
-                "index": 0
-              }
-            ]
-          }
-        }
+        "key": {
+          "#": "apply",
+          "label": "#f1",
+          "args": [
+            {
+              "#": "slot",
+              "index": 0
+            }
+          ]
+        },
+        "props": {}
       }
     }
   },

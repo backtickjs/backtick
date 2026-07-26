@@ -2,6 +2,7 @@ import type {
   Ir,
   IrArgument,
   IrElement,
+  IrTreeRef,
   IrExpansion,
   IrScriptRef,
   IrTreeEntry,
@@ -278,6 +279,14 @@ export function buildBundle(ir: Ir): Bundle {
     return order;
   };
 
+  // What to scan for an entry's needs: an element contributes its key and its
+  // props — a key may be a script, so it captures like any other value — and a
+  // reference contributes itself, so the inner instance's slots thread through.
+  const contentValues = (content: IrElement | IrTreeRef): IrArgument[] =>
+    content.kind === "IrElement"
+      ? [content.key, ...Object.values(content.props)]
+      : [content];
+
   // The slot signature of a tree entry: the capture keys its wiring needs from
   // whichever scope instantiates it, in first-need order. These are the
   // entry's implicit parameters — a reference to the tree passes one value per
@@ -292,7 +301,9 @@ export function buildBundle(ir: Ir): Bundle {
     }
     const order: string[] = [];
     const seen = new Set<string>();
-    for (const value of Object.values(ir.trees[target].element.props)) {
+    // An entry whose content is a reference needs whatever that inner instance
+    // needs, so the walk starts from the content rather than from props.
+    for (const value of contentValues(ir.trees[target].content)) {
       for (const key of freeCaps(value)) {
         if (!seen.has(key)) {
           seen.add(key);
@@ -509,8 +520,22 @@ export function buildBundle(ir: Ir): Bundle {
     }
     const keys = treeSlots(target);
     const slots = new Map(keys.map((key, index) => [key, index] as const));
+    const content = ir.trees[target].content;
+    if (content.kind === "IrElement") {
+      treeJsons.set(target, {
+        content: renderElement(content, slots, new Set()),
+      });
+      return;
+    }
+    // An instance that renders another instance: applying the inner entry,
+    // passing whatever its slots need from this one's.
+    materializeTree(content.target);
     treeJsons.set(target, {
-      element: renderElement(ir.trees[target].element, slots, new Set()),
+      content: {
+        "#": "apply",
+        label: `#t${content.target}`,
+        args: treeSlots(content.target).map((key) => capExpr(key, slots)),
+      },
     });
   };
 
@@ -688,7 +713,7 @@ function nestedRefs(
     } else if (value.kind === "IrTreeRef") {
       if (!seenTrees.has(value.target)) {
         seenTrees.add(value.target);
-        visit(trees[value.target].element);
+        visit(trees[value.target].content);
       }
     } else if (value.kind === "IrElement") {
       Object.values(value.props).forEach(visit);

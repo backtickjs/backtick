@@ -2,7 +2,7 @@
   "functions": {},
   "trees": {
     "#t0": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "Text",
         "key": null,
@@ -12,7 +12,7 @@
       }
     },
     "#t1": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "Text",
         "key": null,
@@ -22,7 +22,7 @@
       }
     },
     "#t2": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "View",
         "key": null,

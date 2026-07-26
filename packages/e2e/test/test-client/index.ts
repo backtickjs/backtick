@@ -151,7 +151,7 @@ function entryFunction(
   if (tree === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
-  return (...slots: unknown[]) => evaluateElement(bundle, tree.element, slots);
+  return (...slots: unknown[]) => evaluateExpr(bundle, tree.content, slots);
 }
 
 function evaluateElement(

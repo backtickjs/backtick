@@ -19,9 +19,12 @@ export interface IrScriptEntry {
 // A tree-table entry. A wrapper rather than the element itself so
 // instance-scoped additions — per-instance state declarations — can land as
 // sibling fields without reshaping the table.
+// A tree-table entry: one instance's content. Usually the element it renders;
+// a reference when the instance is a component that renders another component,
+// since that inner invocation is an instance of its own.
 export interface IrTreeEntry {
   readonly kind: "IrTreeEntry";
-  readonly element: IrElement;
+  readonly content: IrElement | IrTreeRef;
 }
 
 // A reference into the IR's script table — how one script entry embeds

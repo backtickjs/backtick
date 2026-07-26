@@ -7,35 +7,35 @@
         "id": "Text",
         "key": null,
         "props": {
-          "children": "hi"
+          "children": "x"
         }
       }
     },
     "#t1": {
       "content": {
+        "#": "apply",
+        "label": "#t0",
+        "args": []
+      }
+    },
+    "#t2": {
+      "content": {
         "#": "element",
         "id": "View",
         "key": null,
         "props": {
-          "children": [
-            {
-              "#": "apply",
-              "label": "#t0",
-              "args": []
-            },
-            {
-              "#": "apply",
-              "label": "#t0",
-              "args": []
-            }
-          ]
+          "children": {
+            "#": "apply",
+            "label": "#t1",
+            "args": []
+          }
         }
       }
     }
   },
   "root": {
     "#": "apply",
-    "label": "#t1",
+    "label": "#t2",
     "args": []
   }
 }

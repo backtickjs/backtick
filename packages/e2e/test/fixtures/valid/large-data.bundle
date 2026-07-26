@@ -307,7 +307,7 @@
   },
   "trees": {
     "#t0": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "Text",
         "key": {
@@ -335,7 +335,7 @@
       }
     },
     "#t1": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "View",
         "key": {
@@ -435,7 +435,7 @@
       }
     },
     "#t2": {
-      "element": {
+      "content": {
         "#": "element",
         "id": "View",
         "key": null,
