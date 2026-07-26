@@ -4,6 +4,7 @@ import type { ClientUnknown } from "./ClientUnknown.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
 import type { Receiver } from "./Receiver.js";
+import type { Widen } from "./Widen.js";
 
 // The root of a script
 function _lift<const T extends ClientUnknown>(_: T): Client<T> {
@@ -38,15 +39,7 @@ function _const<T extends ClientValue>(_: T): T {
 }
 
 // A value with `let` semantics
-function _let<T extends ClientValue>(
-  _: T,
-): T extends number
-  ? number
-  : T extends string
-    ? string
-    : T extends boolean
-      ? boolean
-      : T {
+function _let<T extends ClientValue>(_: T): Widen<T> {
   throw new Error(
     "Don't call `cs.let` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
