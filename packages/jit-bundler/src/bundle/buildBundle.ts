@@ -38,6 +38,20 @@ function cellIndex(key: string): number {
   return Number(key.slice(2));
 }
 
+// What a tree expression renders against: the entry being materialized, and the
+// slot index of each capture it threads in. The two travel together because a
+// `cell` node means storage on the enclosing entry, so resolving one takes both
+// the key and whose entry it is landing in. `target` is null where no instance
+// encloses the expression — the bundle root, and a cell's initial.
+interface TreeScope {
+  readonly target: number | null;
+  readonly slots: Map<string, number>;
+}
+
+// Renders in no instance: nothing is in scope, and a cell reaching here has
+// nowhere to resolve against.
+const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
+
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
 function sourceName(key: string): string {
@@ -572,7 +586,10 @@ export function buildBundle(ir: Ir): Bundle {
       return;
     }
     const keys = treeSlots(target);
-    const slots = new Map(keys.map((key, index) => [key, index] as const));
+    const scope: TreeScope = {
+      target,
+      slots: new Map(keys.map((key, index) => [key, index] as const)),
+    };
     const content = ir.trees[target].content;
     // A cell's initial is data the entry carries, evaluated in no instance: it
     // can't read a slot or another cell, so it renders against an empty scope.
@@ -581,7 +598,7 @@ export function buildBundle(ir: Ir): Bundle {
     for (const key of cells) {
       state[displayName(key)] = renderExpr(
         ir.states[cellIndex(key)].initial,
-        new Map(),
+        noInstance(),
       );
     }
     const declared = cells.length === 0 ? {} : { state };
@@ -592,7 +609,7 @@ export function buildBundle(ir: Ir): Bundle {
     }
     if (content.kind === "IrElement") {
       treeJsons.set(target, {
-        content: renderElement(content, slots, new Set()),
+        content: renderElement(content, scope, new Set()),
         ...declared,
       });
       return;
@@ -604,7 +621,7 @@ export function buildBundle(ir: Ir): Bundle {
       content: {
         "#": "apply",
         label: `#t${content.target}`,
-        args: treeSlots(content.target).map((key) => capExpr(key, slots)),
+        args: treeSlots(content.target).map((key) => capExpr(key, scope)),
       },
       ...declared,
     });
@@ -616,7 +633,7 @@ export function buildBundle(ir: Ir): Bundle {
   // can't be threaded from anywhere.
   const capExpr = (
     key: string,
-    slots: Map<string, number>,
+    scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
   ): BundleSlot | BundleCell | BundleIdentifierNode => {
     if (params.has(key)) {
@@ -624,11 +641,32 @@ export function buildBundle(ir: Ir): Bundle {
     }
     // Before the cell case: a cell this entry doesn't own arrives as a slot, and
     // only one it owns resolves against the instance.
-    const index = slots.get(key);
+    const index = scope.slots.get(key);
     if (index !== undefined) {
       return { "#": "slot", index };
     }
     if (isCellKey(key)) {
+      // The one place a `cell` node is made, so the rule `Bundle.ts` states —
+      // a cell only means anything inside the entry declaring it — is enforced
+      // by this comparison rather than by rescanning the finished bundle.
+      // Reaching here off its owner means the cell threaded outward as a slot
+      // until nothing was left to supply it.
+      if (scope.target === null) {
+        throw new Error(
+          `Can't read the state cell \`${sourceName(key)}\` here: its ` +
+            "storage belongs to a component instance, and this is evaluated " +
+            "where there is none — a cell's initial value, or the bundle's " +
+            "root. Read it from a script the component renders instead.",
+        );
+      }
+      if (cellOwner.get(key) !== scope.target) {
+        throw new Error(
+          `Can't read the state cell \`${sourceName(key)}\` here: a cell's ` +
+            "storage belongs to the component instance that declared it, so " +
+            "it reaches another component only by being passed down as a " +
+            "prop. Pass it down, or declare a cell where it is read.",
+        );
+      }
       return { "#": "cell", name: displayName(key) };
     }
     throw new Error(
@@ -641,7 +679,7 @@ export function buildBundle(ir: Ir): Bundle {
   // a polymorphic target, one `#thunk` per splice ahead of its captures.
   const exprCallArgs = (
     ref: IrScriptRef,
-    slots: Map<string, number>,
+    scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleExpr[] => {
     const parts: BundleExpr[] = [];
@@ -651,7 +689,7 @@ export function buildBundle(ir: Ir): Bundle {
         if (passed.length === 0) {
           parts.push({
             "#": "thunk",
-            expression: renderExpr(arg, slots, params),
+            expression: renderExpr(arg, scope, params),
           });
           return;
         }
@@ -661,12 +699,12 @@ export function buildBundle(ir: Ir): Bundle {
         parts.push({
           "#": "thunk",
           params: passed.map(displayName),
-          expression: renderExpr(arg, slots, inner),
+          expression: renderExpr(arg, scope, inner),
         });
       });
     }
     for (const key of need(ref.target)) {
-      parts.push(capExpr(key, slots, params));
+      parts.push(capExpr(key, scope, params));
     }
     return parts;
   };
@@ -675,13 +713,13 @@ export function buildBundle(ir: Ir): Bundle {
   // bundle expression against the enclosing tree's slots.
   const renderElement = (
     element: IrElement,
-    slots: Map<string, number>,
+    scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleElement => {
-    const key = renderExpr(element.key, slots, params);
+    const key = renderExpr(element.key, scope, params);
     const props: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(element.props)) {
-      props[key] = renderExpr(entry, slots, params);
+      props[key] = renderExpr(entry, scope, params);
     }
     return {
       "#": "element",
@@ -696,7 +734,7 @@ export function buildBundle(ir: Ir): Bundle {
   // source. The mirror of `renderValue`.
   const renderExpr = (
     value: IrArgument,
-    slots: Map<string, number>,
+    scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
   ): BundleExpr => {
     if (value.kind === "IrScriptRef") {
@@ -704,7 +742,7 @@ export function buildBundle(ir: Ir): Bundle {
       return {
         "#": "apply",
         label: `#f${value.target}`,
-        args: exprCallArgs(value, slots, params),
+        args: exprCallArgs(value, scope, params),
       };
     }
     if (value.kind === "IrTreeRef") {
@@ -712,16 +750,16 @@ export function buildBundle(ir: Ir): Bundle {
       return {
         "#": "apply",
         label: `#t${value.target}`,
-        args: treeSlots(value.target).map((key) => capExpr(key, slots, params)),
+        args: treeSlots(value.target).map((key) => capExpr(key, scope, params)),
       };
     }
     if (value.kind === "IrElement") {
-      return renderElement(value, slots, params);
+      return renderElement(value, scope, params);
     }
     // A handle in tree position resolves against the instance, exactly as a
     // slot resolves against the instantiation arguments.
     if (value.kind === "IrStateRef") {
-      return capExpr(cellKey(value.target), slots, params);
+      return capExpr(cellKey(value.target), scope, params);
     }
     if (value.kind === "IrValue") {
       return value.value;
@@ -739,7 +777,7 @@ export function buildBundle(ir: Ir): Bundle {
         params: [...value.params],
         expression: renderExpr(
           value.body,
-          slots,
+          scope,
           new Set([...params, ...value.params]),
         ),
       };
@@ -748,7 +786,7 @@ export function buildBundle(ir: Ir): Bundle {
       return { "#": "identifier", name: value.name };
     }
     if (value.kind === "IrArray") {
-      return value.elements.map((entry) => renderExpr(entry, slots, params));
+      return value.elements.map((entry) => renderExpr(entry, scope, params));
     }
     // A plain data object passes through. `#` is the bundle's one
     // reserved key — the discriminant of every node — so an object
@@ -758,12 +796,13 @@ export function buildBundle(ir: Ir): Bundle {
     }
     const entries: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(value.entries)) {
-      entries[key] = renderExpr(entry, slots, params);
+      entries[key] = renderExpr(entry, scope, params);
     }
     return entries;
   };
 
-  const root = renderExpr(ir.root, new Map());
+  // Nothing encloses the root, so it can hold no cell at all.
+  const root = renderExpr(ir.root, noInstance());
   const functions: Record<FunctionLabel, BundleArrowNode> = {};
   for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
     functions[`#f${index}`] = body;
