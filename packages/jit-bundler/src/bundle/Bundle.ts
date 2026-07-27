@@ -38,7 +38,8 @@ export interface Bundle {
   // hole (named `$0`, `$1`, …), ahead of its captures; the body invokes the
   // thunk at the hole, passing the entry-scoped bindings the splice
   // captures — a spliced fragment sees the bindings in scope at its hole. A
-  // `BundleApply` targeting the entry passes arguments in that same order.
+  // `BundleApplyFunction` targeting the entry passes arguments in that same
+  // order.
   // A construction's expansion is also an entry — one per class, labeled
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
@@ -53,19 +54,21 @@ export type TreeLabel = `#t${number}`;
 // A tree entry: a JSX tree as data. The element sits under an `element`
 // wrapper so instance-scoped additions (per-instance state declarations) can
 // land as sibling fields without reshaping the table. A tree is an implicit
-// function of its slots: instantiating it supplies one value per `BundleSlot`
-// index, exactly as calling a `functions` entry supplies its captures.
+// function of its slots: instantiating it supplies one value per
+// `BundleGetSlot` index, exactly as calling a `functions` entry supplies its
+// captures.
 export interface BundleTree {
   // What this instance renders: the element, a reference to another instance
   // when this one is a component that renders a component, or null when it
   // renders nothing. A null-content entry is still an instance — it holds the
   // state its component declared, and a re-render may give it content — so an
   // interpreter instantiates it as usual and renders nothing for it.
-  [NodeField.content]: BundleElement | BundleApply | null;
+  [NodeField.content]: BundleElement | BundleApplyTree | null;
   // The per-instance cells this entry declares, each named entry's value the
   // cell's initial. Instantiating allocates fresh storage for each, so two
-  // instances never share a cell; a `BundleCell` resolves against that storage
-  // exactly as a `BundleSlot` resolves against the supplied slot values.
+  // instances never share a cell; a `BundleGetState` resolves against that
+  // storage exactly as a `BundleGetSlot` resolves against the supplied slot
+  // values.
   // Additive: an interpreter that ignores it renders a tree with no state.
   [NodeField.state]?: { [name: string]: BundleExpr };
 }
@@ -113,35 +116,49 @@ export const NodeField = {
   state: "z",
 } as const;
 
-// Every node kind, as the number `"#"` carries. Numbers rather than names
-// because a bundle is read far more often than it is written, and `"identifier"`
-// costs twelve bytes on every one of them — 18% of an uncompressed payload
-// across the fixtures.
+// Every node kind, as the number `"#"` carries. A number rather than a name
+// because a bundle is mostly nodes, and `"identifier"` costs twelve bytes on
+// each — 18% of an uncompressed payload across the fixtures.
 //
-// Append to add a kind; never renumber. A reader implements the numbers it
-// knows, so a value moving means every bundle it ever read was misparsed. The
-// names here are for people — a bundle carries only the number, and
-// `renderBundleDebug` maps it back.
+// Two groups: this format's own from 0, JavaScript's from 1000. So `kind <
+// 1000` is the test for "a node only this format defines"; the rest an
+// implementer dispatches as the JavaScript they mirror. The wide gap lets
+// either group grow without renumbering, at four digits per JavaScript node
+// (+2111 bytes raw across the fixtures, +165 gzipped).
+//
+// Append within a group; never renumber. A reader implements the numbers it
+// knows, so a moved value silently misparses every bundle already written.
+// `renderBundleDebug` maps a number back to its name.
 export const NodeKind = {
-  Apply: 0,
-  Arrow: 1,
-  Assignment: 2,
-  Binop: 3,
-  Block: 4,
-  Call: 5,
-  Cell: 6,
-  Declaration: 7,
-  Element: 8,
-  Entry: 9,
-  Identifier: 10,
-  If: 11,
-  Property: 12,
-  Return: 13,
-  Slot: 14,
-  Ternary: 15,
-  Throw: 16,
-  Thunk: 17,
-  Try: 18,
+  // A `get` resolves something already in reach: this instance's slots and
+  // state, or a row of either table. An `apply` runs a row — for a tree, that
+  // means instantiating it. The kind names the table, so a label is only an
+  // index into it.
+  Element: 0,
+  GetSlot: 1,
+  GetState: 2,
+  GetTree: 3,
+  GetFunction: 4,
+  ApplyTree: 5,
+  ApplyFunction: 6,
+  Thunk: 7,
+
+  // Mirrors of JavaScript, with two differences: no truthiness — a condition
+  // and the operands of `&&`/`||` are boolean — and `null` as the only absent
+  // value.
+  Identifier: 1000,
+  Call: 1001,
+  Property: 1002,
+  Binop: 1003,
+  Ternary: 1004,
+  Arrow: 1005,
+  Block: 1006,
+  Declaration: 1007,
+  Assignment: 1008,
+  If: 1009,
+  Return: 1010,
+  Throw: 1011,
+  Try: 1012,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -157,37 +174,47 @@ export interface BundleElement {
 
 // The enclosing tree's n-th slot: resolves to the value supplied for that
 // position when the tree was instantiated.
-export interface BundleSlot {
-  "#": typeof NodeKind.Slot;
+export interface BundleGetSlot {
+  "#": typeof NodeKind.GetSlot;
   [NodeField.index]: number;
 }
 
 // A cell declared by the enclosing tree entry's `state`: resolves to the handle
 // for this instance's storage — an object with `read()`, `write(value)` and
-// `update(updater)`. Like a `BundleSlot` it means nothing outside the entry that
-// declares it, and nothing outside a single instance.
+// `update(updater)`. It resolves to the handle, not the value — reading is one
+// of three things the handle does. Like a `BundleGetSlot` it means nothing
+// outside the entry that declares it, and nothing outside a single instance.
 //
 // A cell reaches a function entry as an ordinary argument, so a body never
 // carries this node: the entry takes the handle as a parameter and reads it by
 // name. That keeps bodies lexically scoped — a shared entry can't resolve a free
 // name differently per call site.
-export interface BundleCell {
-  "#": typeof NodeKind.Cell;
+export interface BundleGetState {
+  "#": typeof NodeKind.GetState;
   [NodeField.name]: string;
 }
 
-// Applies a `functions` or `trees` entry. For a function target, `args`
-// mirrors the entry's parameters: thunks for a polymorphic entry's splices
-// first, then one value per capture. For a tree target, `args` supplies the
-// tree's slots in index order. (Named `apply` on the wire: a body's `call`
-// node has a different schema — it evaluates a `callee` node — while this
-// form targets a table entry by label.)
-export interface BundleApply {
-  "#": typeof NodeKind.Apply;
-  [NodeField.label]: FunctionLabel | TreeLabel;
+// Instantiates a `trees` entry: `args` supplies the tree's slots in index
+// order, and `key` identifies the instance among its siblings so it survives a
+// re-render that reorders them. Only a tree can be keyed — only a tree has
+// state to keep. (Applying names a table row by label; a body `call` evaluates
+// a `callee` node instead, so the two are separate kinds.)
+export interface BundleApplyTree {
+  "#": typeof NodeKind.ApplyTree;
+  [NodeField.label]: TreeLabel;
   [NodeField.args]?: BundleExpr[];
   [NodeField.key]?: BundleExpr;
 }
+
+// Applies a `functions` entry: `args` mirrors the entry's parameters — thunks
+// for a polymorphic entry's splices first, then one value per capture.
+export interface BundleApplyFunction {
+  "#": typeof NodeKind.ApplyFunction;
+  [NodeField.label]: FunctionLabel;
+  [NodeField.args]?: BundleExpr[];
+}
+
+export type BundleApply = BundleApplyTree | BundleApplyFunction;
 
 // A splice argument passed to a polymorphic entry, evaluated lazily: the
 // interpreter passes it as a function yielding the expression's value, so
@@ -211,8 +238,8 @@ export type BundleExpr =
   | number
   | string
   | BundleExpr[]
-  | BundleSlot
-  | BundleCell
+  | BundleGetSlot
+  | BundleGetState
   | BundleIdentifierNode
   | BundleApply
   | BundleThunk
@@ -242,7 +269,7 @@ export type BundleExpressionNode =
   | BundleExpressionNode[]
   | { [key: string]: BundleExpressionNode }
   | BundleIdentifierNode
-  | BundleEntryNode
+  | BundleGetEntry
   | BundleCallNode
   | BundlePropertyNode
   | BundleBinopNode
@@ -272,13 +299,20 @@ export interface BundleIdentifierNode {
   [NodeField.name]: string;
 }
 
-// A `functions` or `trees` entry as a value: the function the entry
-// evaluates to. Calling it applies the entry; passed bare it is already a
-// nullary thunk.
-export interface BundleEntryNode {
-  "#": typeof NodeKind.Entry;
-  [NodeField.label]: FunctionLabel | TreeLabel;
+// An entry as a value, not applied: the function it evaluates to. Calling that
+// applies the entry; passed bare it is already a nullary thunk. A tree entry's
+// function takes its slots and yields the instantiated element.
+export interface BundleGetFunction {
+  "#": typeof NodeKind.GetFunction;
+  [NodeField.label]: FunctionLabel;
 }
+
+export interface BundleGetTree {
+  "#": typeof NodeKind.GetTree;
+  [NodeField.label]: TreeLabel;
+}
+
+export type BundleGetEntry = BundleGetFunction | BundleGetTree;
 
 // A call: evaluates the callee to a function and applies it. When the callee
 // is an `entry` node targeting a function, `args` mirrors that entry's

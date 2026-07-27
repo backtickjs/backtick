@@ -2,22 +2,22 @@ import type {
   Ir,
   IrArgument,
   IrElement,
-  IrTreeRef,
   IrExpansion,
   IrScriptRef,
+  IrTreeRef,
 } from "../ir/Ir.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
   BundleArrowNode,
-  BundleCell,
   BundleElement,
-  BundleEntryNode,
+  BundleGetEntry,
   BundleExpr,
   BundleExpressionNode,
   BundleIdentifierNode,
-  BundleSlot,
   BundleTree,
+  BundleGetState,
+  BundleGetSlot,
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
@@ -399,7 +399,7 @@ export function buildBundle(ir: Ir): Bundle {
   // it is one entry however many instances construct the class.
   const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
-  const expansionEntry = (expansion: IrExpansion): BundleEntryNode => {
+  const expansionEntry = (expansion: IrExpansion): BundleGetEntry => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
       label = `#f${fns.length + expansionLabels.size}`;
@@ -411,7 +411,7 @@ export function buildBundle(ir: Ir): Bundle {
         [NodeField.body]: renderValue(expansion.body),
       });
     }
-    return { "#": NodeKind.Entry, [NodeField.label]: label };
+    return { "#": NodeKind.GetFunction, [NodeField.label]: label };
   };
 
   // Materializes an entry's arrow node into `bodies` the first time it is
@@ -517,7 +517,7 @@ export function buildBundle(ir: Ir): Bundle {
         return {
           "#": NodeKind.Call,
           [NodeField.callee]: {
-            "#": NodeKind.Entry,
+            "#": NodeKind.GetFunction,
             [NodeField.label]: `#f${value.target}`,
           },
           ...(args.length === 0 ? {} : { [NodeField.args]: args }),
@@ -533,7 +533,7 @@ export function buildBundle(ir: Ir): Bundle {
         return {
           "#": NodeKind.Call,
           [NodeField.callee]: {
-            "#": NodeKind.Entry,
+            "#": NodeKind.GetTree,
             [NodeField.label]: `#t${value.target}`,
           },
           ...(args.length === 0 ? {} : { [NodeField.args]: args }),
@@ -598,7 +598,7 @@ export function buildBundle(ir: Ir): Bundle {
       materialize(value.target);
       const args = callArgs(value);
       const entry = {
-        "#": NodeKind.Entry,
+        "#": NodeKind.GetFunction,
         [NodeField.label]: `#f${value.target}`,
       } as const satisfies BundleExpressionNode;
       return args.length === 0
@@ -618,7 +618,7 @@ export function buildBundle(ir: Ir): Bundle {
         }),
       );
       const entry = {
-        "#": NodeKind.Entry,
+        "#": NodeKind.GetTree,
         [NodeField.label]: `#t${value.target}`,
       } as const satisfies BundleExpressionNode;
       return args.length === 0
@@ -676,7 +676,7 @@ export function buildBundle(ir: Ir): Bundle {
     const args = treeSlots(content.target).map((key) => capExpr(key, scope));
     treeJsons.set(target, {
       [NodeField.content]: {
-        "#": NodeKind.Apply,
+        "#": NodeKind.ApplyTree,
         [NodeField.label]: `#t${content.target}`,
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         ...(passedKey === null ? {} : { [NodeField.key]: passedKey }),
@@ -693,7 +693,7 @@ export function buildBundle(ir: Ir): Bundle {
     key: string,
     scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
-  ): BundleSlot | BundleCell | BundleIdentifierNode => {
+  ): BundleGetSlot | BundleGetState | BundleIdentifierNode => {
     if (params.has(key)) {
       return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
@@ -701,7 +701,7 @@ export function buildBundle(ir: Ir): Bundle {
     // only one it owns resolves against the instance.
     const index = scope.slots.get(key);
     if (index !== undefined) {
-      return { "#": NodeKind.Slot, [NodeField.index]: index };
+      return { "#": NodeKind.GetSlot, [NodeField.index]: index };
     }
     if (isCellKey(key)) {
       // The one place a `cell` node is made, so the rule `Bundle.ts` states —
@@ -725,7 +725,7 @@ export function buildBundle(ir: Ir): Bundle {
             "prop. Pass it down, or declare a cell where it is read.",
         );
       }
-      return { "#": NodeKind.Cell, [NodeField.name]: displayName(key) };
+      return { "#": NodeKind.GetState, [NodeField.name]: displayName(key) };
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -799,7 +799,7 @@ export function buildBundle(ir: Ir): Bundle {
       materialize(value.target);
       const args = exprCallArgs(value, scope, params);
       return {
-        "#": NodeKind.Apply,
+        "#": NodeKind.ApplyFunction,
         [NodeField.label]: `#f${value.target}`,
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
       };
@@ -811,7 +811,7 @@ export function buildBundle(ir: Ir): Bundle {
         capExpr(key, scope, params),
       );
       return {
-        "#": NodeKind.Apply,
+        "#": NodeKind.ApplyTree,
         [NodeField.label]: `#t${value.target}`,
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         ...(keyed === null ? {} : { [NodeField.key]: keyed }),

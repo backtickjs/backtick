@@ -51,7 +51,8 @@ function renderNode(node: BundleStatementNode, indent: string): string {
   switch (node["#"]) {
     case NodeKind.Identifier:
       return node[NodeField.name];
-    case NodeKind.Entry:
+    case NodeKind.GetFunction:
+    case NodeKind.GetTree:
       return node[NodeField.label];
     case NodeKind.Call: {
       const args = (node[NodeField.args] ?? []).map((arg) =>
@@ -143,11 +144,17 @@ function renderExpr(expr: BundleExpr, indent: string): string {
     return renderData(expr, indent, renderExpr);
   }
   switch (expr["#"]) {
-    case NodeKind.Slot:
+    case NodeKind.GetSlot:
       return `slots[${expr[NodeField.index]}]`;
-    case NodeKind.Cell:
+    case NodeKind.GetState:
       return `cells.${expr[NodeField.name]}`;
-    case NodeKind.Apply: {
+    case NodeKind.ApplyFunction: {
+      const args = (expr[NodeField.args] ?? []).map((arg) =>
+        renderExpr(arg, indent),
+      );
+      return `${expr[NodeField.label]}(${args.join(", ")})`;
+    }
+    case NodeKind.ApplyTree: {
       const args = (expr[NodeField.args] ?? []).map((arg) =>
         renderExpr(arg, indent),
       );

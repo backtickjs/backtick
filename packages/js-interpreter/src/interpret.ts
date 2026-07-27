@@ -3,15 +3,15 @@ import type {
   Bundle,
   BundleApply,
   BundleBinaryOperator,
-  BundleCell,
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
   BundleIdentifierNode,
-  BundleSlot,
   BundleStatementNode,
   BundleThunk,
   BundleTree,
+  BundleGetState,
+  BundleGetSlot,
   FunctionLabel,
   TreeLabel,
 } from "@backtickjs/core";
@@ -175,21 +175,25 @@ function lookup(scope: Scope | null, name: string): Scope | null {
   return null;
 }
 
-// Applies a `functions` or `trees` entry as a function: a function entry is
-// its arrow evaluated at the top level; a tree entry takes its slot values
-// and instantiates the element.
-function entryFunction(
+// A `functions` entry as a function: its arrow, evaluated at the top level.
+function getFunction(
   bundle: Bundle,
-  label: FunctionLabel | TreeLabel,
+  label: FunctionLabel,
 ): (...args: Value[]) => Value {
-  if (label.startsWith("#f")) {
-    const arrow = bundle.functions[label as FunctionLabel];
-    if (arrow === undefined) {
-      throw new Error(`unknown function entry ${label}`);
-    }
-    return evaluateNode(bundle, arrow, null) as (...args: Value[]) => Value;
+  const arrow = bundle.functions[label];
+  if (arrow === undefined) {
+    throw new Error(`unknown function entry ${label}`);
   }
-  const tree = bundle.trees[label as TreeLabel];
+  return evaluateNode(bundle, arrow, null) as (...args: Value[]) => Value;
+}
+
+// A `trees` entry as a function: it takes its slot values and instantiates the
+// element.
+function getTree(
+  bundle: Bundle,
+  label: TreeLabel,
+): (...slots: Value[]) => Value {
+  const tree = bundle.trees[label];
   if (tree === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
@@ -244,17 +248,17 @@ function evaluateExpr(
   }
   if ("#" in expr) {
     const form = expr as
-      | BundleSlot
-      | BundleCell
+      | BundleGetSlot
+      | BundleGetState
       | BundleIdentifierNode
       | BundleApply
       | BundleThunk
       | BundleElement;
     switch (form["#"]) {
-      case NodeKind.Slot: {
+      case NodeKind.GetSlot: {
         return slots[form[NodeField.index]];
       }
-      case NodeKind.Cell: {
+      case NodeKind.GetState: {
         // A cell is declared by the enclosing entry, so it is only meaningful
         // inside an instance of it.
         if (instance === null) {
@@ -272,27 +276,36 @@ function evaluateExpr(
         }
         return frame.bindings.get(form[NodeField.name]) ?? null;
       }
-      case NodeKind.Apply: {
+      case NodeKind.ApplyFunction: {
         const args = (form[NodeField.args] ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
+        return getFunction(bundle, form[NodeField.label])(...args);
+      }
+      case NodeKind.ApplyTree: {
+        const label = form[NodeField.label];
+        const args = (form[NodeField.args] ?? []).map((arg) =>
+          evaluateExpr(bundle, arg, slots, env, instance),
+        );
+        // Outside an instance there is nothing to persist against, so the
+        // entry applies as a plain function.
+        if (instance === null) {
+          return getTree(bundle, label)(...args);
+        }
+        const tree = bundle.trees[label];
+        if (tree === undefined) {
+          throw new Error(`unknown tree entry ${label}`);
+        }
         // A nested instance persists across the parent's re-renders, keyed by
         // this node — its position in the parent.
-        if (instance !== null && form[NodeField.label].startsWith("#t")) {
-          const tree = bundle.trees[form[NodeField.label] as TreeLabel];
-          if (tree === undefined) {
-            throw new Error(`unknown tree entry ${form[NodeField.label]}`);
-          }
-          const child = instance.children.get(form);
-          if (child !== undefined) {
-            child.slots = args;
-            return render(child);
-          }
-          const created = instantiate(bundle, tree, args);
-          instance.children.set(form, created);
-          return created.element;
+        const child = instance.children.get(form);
+        if (child !== undefined) {
+          child.slots = args;
+          return render(child);
         }
-        return entryFunction(bundle, form[NodeField.label])(...args);
+        const created = instantiate(bundle, tree, args);
+        instance.children.set(form, created);
+        return created.element;
       }
       case NodeKind.Thunk: {
         const params = form[NodeField.params];
@@ -477,8 +490,11 @@ function evaluateNode(
       }
       return frame.bindings.get(node[NodeField.name]) ?? null;
     }
-    case NodeKind.Entry: {
-      return entryFunction(bundle, node[NodeField.label]);
+    case NodeKind.GetFunction: {
+      return getFunction(bundle, node[NodeField.label]);
+    }
+    case NodeKind.GetTree: {
+      return getTree(bundle, node[NodeField.label]);
     }
     case NodeKind.Call: {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
