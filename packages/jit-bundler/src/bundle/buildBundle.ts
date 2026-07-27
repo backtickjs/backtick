@@ -338,45 +338,53 @@ export function buildBundle(ir: Ir): Bundle {
     cellOwner.set(cellKey(index), entry.owner);
   });
 
-  // Everything an entry's wiring needs, slots and cells alike, in first-need
-  // order. An entry whose content is a reference needs whatever that inner
-  // instance needs, so the walk starts from the content rather than from props.
+  // What an entry's wiring needs, split by where it comes from:
+  //
+  //   slots — the capture keys it takes from whichever scope instantiates it,
+  //     in first-need order. These are the entry's implicit parameters, and a
+  //     reference passes one value per key, exactly as captures thread between
+  //     functions. A cell the entry doesn't own is one of them: it threads down
+  //     from its owner like any other value.
+  //   cells — the cells it owns, and so declares. Every instance of the entry
+  //     allocates its own storage for each.
+  //
+  // Split here rather than by filtering a combined list, so the rule is stated
+  // once and the two can't drift into overlapping or leaving a key out.
+  //
+  // An entry whose content is a reference needs whatever that inner instance
+  // needs, so the walk starts from the content rather than from props.
   // Memoized; no cycle guard is needed because the entry graph is acyclic —
   // a child is always built before its parent.
-  const treeNeedsCache = new Map<number, string[]>();
-  const treeNeeds = (target: number): string[] => {
+  interface TreeNeeds {
+    readonly slots: string[];
+    readonly cells: string[];
+  }
+  const treeNeedsCache = new Map<number, TreeNeeds>();
+  const treeNeeds = (target: number): TreeNeeds => {
     const cached = treeNeedsCache.get(target);
     if (cached) {
       return cached;
     }
-    const order: string[] = [];
+    const needs: TreeNeeds = { slots: [], cells: [] };
     const seen = new Set<string>();
     for (const value of contentValues(ir.trees[target].content)) {
       for (const key of freeCaps(value)) {
-        if (!seen.has(key)) {
-          seen.add(key);
-          order.push(key);
+        if (seen.has(key)) {
+          continue;
         }
+        seen.add(key);
+        // Only a cell is ever owned, so a binding key falls through to a slot
+        // without needing to be recognized as one.
+        const owned = cellOwner.get(key) === target;
+        (owned ? needs.cells : needs.slots).push(key);
       }
     }
-    treeNeedsCache.set(target, order);
-    return order;
+    treeNeedsCache.set(target, needs);
+    return needs;
   };
 
-  // The slot signature of a tree entry: the capture keys its wiring needs from
-  // whichever scope instantiates it, in first-need order. These are the
-  // entry's implicit parameters — a reference to the tree passes one value per
-  // key, exactly as captures thread between functions. A cell it does not own
-  // is one of them: it threads down from its owner like any other value.
-  const treeSlots = (target: number): string[] =>
-    treeNeeds(target).filter(
-      (key) => !isCellKey(key) || cellOwner.get(key) !== target,
-    );
-
-  // The cells a tree entry declares: the ones it owns. Every instance of the
-  // entry allocates its own storage for each.
-  const treeCells = (target: number): string[] =>
-    treeNeeds(target).filter((key) => cellOwner.get(key) === target);
+  const treeSlots = (target: number): string[] => treeNeeds(target).slots;
+  const treeCells = (target: number): string[] => treeNeeds(target).cells;
 
   const bodies = new Map<number, BundleArrowNode>();
 
