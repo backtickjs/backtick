@@ -2,17 +2,14 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "call",
           "callee": {
             "#": "entry",
             "label": "#t2"
-          },
-          "args": []
+          }
         }
       }
     }
@@ -45,13 +42,11 @@
             {
               "#": "apply",
               "label": "#t0",
-              "args": [],
               "key": "a"
             },
             {
               "#": "apply",
               "label": "#t1",
-              "args": [],
               "key": "b"
             }
           ]
@@ -61,7 +56,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

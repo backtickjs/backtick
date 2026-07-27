@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -60,8 +59,7 @@
                     "name": "to"
                   },
                   "name": "sum"
-                },
-                "args": []
+                }
               },
               "right": {
                 "#": "call",
@@ -76,8 +74,7 @@
                     "name": "from"
                   },
                   "name": "sum"
-                },
-                "args": []
+                }
               }
             }
           }
@@ -92,7 +89,6 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "binop",
           "operator": "+",
@@ -162,7 +158,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

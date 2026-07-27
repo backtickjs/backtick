@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -16,24 +15,21 @@
                 "callee": {
                   "#": "entry",
                   "label": "#f1"
-                },
-                "args": []
+                }
               },
               "g": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f2"
-                },
-                "args": []
+                }
               },
               "b": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f3"
-                },
-                "args": []
+                }
               }
             }
           },
@@ -105,24 +101,20 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": 30
     },
     "#f2": {
       "#": "arrow",
-      "params": [],
       "body": 144
     },
     "#f3": {
       "#": "arrow",
-      "params": [],
       "body": 255
     }
   },
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

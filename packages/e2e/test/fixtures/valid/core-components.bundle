@@ -2,13 +2,10 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
-          "#": "block",
-          "statements": []
+          "#": "block"
         }
       }
     }
@@ -32,8 +29,7 @@
                 },
                 "onPress": {
                   "#": "apply",
-                  "label": "#f0",
-                  "args": []
+                  "label": "#f0"
                 },
                 "children": "hi"
               }
@@ -55,7 +51,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t0",
-    "args": []
+    "label": "#t0"
   }
 }

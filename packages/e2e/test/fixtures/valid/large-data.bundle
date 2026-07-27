@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "call",
         "callee": {
@@ -437,8 +436,7 @@
         "props": {
           "children": {
             "#": "apply",
-            "label": "#f0",
-            "args": []
+            "label": "#f0"
           }
         }
       }
@@ -446,7 +444,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t2",
-    "args": []
+    "label": "#t2"
   }
 }

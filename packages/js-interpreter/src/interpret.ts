@@ -213,7 +213,7 @@ function evaluateElement(
           | number
           | null);
   const props: { [prop: string]: Value } = {};
-  for (const [prop, expr] of Object.entries(element.props)) {
+  for (const [prop, expr] of Object.entries(element.props ?? {})) {
     props[prop] = evaluateExpr(bundle, expr, slots, null, instance);
   }
   return new Element(element.id, key, props);
@@ -269,7 +269,7 @@ function evaluateExpr(
         return frame.bindings.get(form.name) ?? null;
       }
       case "apply": {
-        const args = form.args.map((arg) =>
+        const args = (form.args ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
         // A nested instance persists across the parent's re-renders, keyed by
@@ -358,12 +358,12 @@ function executeStatement(
       const frame: Scope = { parent: scope, bindings: new Map() };
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward.
-      for (const statement of node.statements) {
+      for (const statement of node.statements ?? []) {
         if (isNode(statement) && statement["#"] === "declaration") {
           frame.bindings.set(statement.name, null);
         }
       }
-      for (const statement of node.statements) {
+      for (const statement of node.statements ?? []) {
         const completion = executeStatement(bundle, statement, frame);
         if (completion.returned) {
           return completion;
@@ -479,7 +479,9 @@ function evaluateNode(
         if (typeof method !== "function") {
           throw new Error(`${node.callee.name} is not a function`);
         }
-        const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
+        const args = (node.args ?? []).map((arg) =>
+          evaluateNode(bundle, arg, scope),
+        );
         return method.apply(object, args);
       }
       // The callee evaluates before the arguments; an optional call
@@ -492,7 +494,9 @@ function evaluateNode(
       if (typeof callee !== "function") {
         throw new Error("callee is not a function");
       }
-      const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
+      const args = (node.args ?? []).map((arg) =>
+        evaluateNode(bundle, arg, scope),
+      );
       return callee(...args);
     }
     case "property": {
@@ -526,7 +530,7 @@ function evaluateNode(
         // A missing argument binds as null — the language's absent value;
         // `undefined` never arises (an omitted optional parameter reads
         // as null).
-        node.params.forEach((param, index) => {
+        (node.params ?? []).forEach((param, index) => {
           frame.bindings.set(param, index < args.length ? args[index] : null);
         });
         const body = node.body;

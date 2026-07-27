@@ -13,8 +13,7 @@
     "#t1": {
       "content": {
         "#": "apply",
-        "label": "#t0",
-        "args": []
+        "label": "#t0"
       }
     },
     "#t2": {
@@ -24,8 +23,7 @@
         "props": {
           "children": {
             "#": "apply",
-            "label": "#t1",
-            "args": []
+            "label": "#t1"
           }
         }
       }
@@ -33,7 +31,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t2",
-    "args": []
+    "label": "#t2"
   }
 }

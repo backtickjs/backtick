@@ -2,36 +2,31 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "a": {
           "#": "call",
           "callee": {
             "#": "entry",
             "label": "#f1"
-          },
-          "args": []
+          }
         },
         "b": {
           "#": "call",
           "callee": {
             "#": "entry",
             "label": "#f1"
-          },
-          "args": []
+          }
         }
       }
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": 7
     }
   },
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

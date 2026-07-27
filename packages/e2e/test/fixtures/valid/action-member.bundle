@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -16,8 +15,7 @@
                 "callee": {
                   "#": "entry",
                   "label": "#f1"
-                },
-                "args": []
+                }
               }
             }
           },
@@ -37,14 +35,12 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": "OK"
     }
   },
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

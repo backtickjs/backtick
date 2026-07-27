@@ -14,12 +14,10 @@
             "callee": {
               "#": "identifier",
               "name": "$0"
-            },
-            "args": []
+            }
           },
           "name": "read"
-        },
-        "args": []
+        }
       }
     },
     "#f1": {
@@ -29,7 +27,6 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "block",
           "statements": [
@@ -42,8 +39,7 @@
                   "callee": {
                     "#": "identifier",
                     "name": "$0"
-                  },
-                  "args": []
+                  }
                 },
                 "name": "write"
               },
@@ -60,12 +56,10 @@
                         "callee": {
                           "#": "identifier",
                           "name": "$0"
-                        },
-                        "args": []
+                        }
                       },
                       "name": "read"
-                    },
-                    "args": []
+                    }
                   },
                   "right": 1
                 }
@@ -165,13 +159,11 @@
           "children": [
             {
               "#": "apply",
-              "label": "#t0",
-              "args": []
+              "label": "#t0"
             },
             {
               "#": "apply",
-              "label": "#t1",
-              "args": []
+              "label": "#t1"
             }
           ]
         }
@@ -180,7 +172,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t2",
-    "args": []
+    "label": "#t2"
   }
 }

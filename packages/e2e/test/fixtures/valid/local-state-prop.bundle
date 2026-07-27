@@ -14,12 +14,10 @@
             "callee": {
               "#": "identifier",
               "name": "$0"
-            },
-            "args": []
+            }
           },
           "name": "read"
-        },
-        "args": []
+        }
       }
     },
     "#f1": {
@@ -29,7 +27,6 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "block",
           "statements": [
@@ -42,8 +39,7 @@
                   "callee": {
                     "#": "identifier",
                     "name": "$0"
-                  },
-                  "args": []
+                  }
                 },
                 "name": "write"
               },
@@ -60,12 +56,10 @@
                         "callee": {
                           "#": "identifier",
                           "name": "$0"
-                        },
-                        "args": []
+                        }
                       },
                       "name": "read"
-                    },
-                    "args": []
+                    }
                   },
                   "right": 1
                 }
@@ -187,7 +181,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t2",
-    "args": []
+    "label": "#t2"
   }
 }

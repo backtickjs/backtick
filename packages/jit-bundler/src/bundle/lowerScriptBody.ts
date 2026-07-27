@@ -42,11 +42,13 @@ function buildBlock(
   renderSplice: RenderSplice,
   mangle: Mangle,
 ): BundleBlockNode {
+  const statements = node.statements.map((statement) =>
+    buildStatement(statement, renderSplice, mangle),
+  );
   return {
     "#": "block",
-    statements: node.statements.map((statement) =>
-      buildStatement(statement, renderSplice, mangle),
-    ),
+    // An empty container is left out rather than spelled out (see `Bundle.ts`).
+    ...(statements.length === 0 ? {} : { statements }),
   };
 }
 
@@ -114,12 +116,14 @@ function buildExpression(
   switch (node.kind) {
     case "AstScriptArray":
       return node.elements.map(e);
-    case "AstScriptArrow":
+    case "AstScriptArrow": {
+      const params = node.params.map((param) => mangle(param.bindingKey));
       return {
         "#": "arrow",
-        params: node.params.map((param) => mangle(param.bindingKey)),
+        ...(params.length === 0 ? {} : { params }),
         body: lowerScriptBody(node.body, renderSplice, mangle),
       };
+    }
     case "AstScriptBinop":
       return {
         "#": "binop",
@@ -137,25 +141,33 @@ function buildExpression(
     case "AstScriptBoolean":
       return node.value;
     case "AstScriptCall": {
+      // The callee is built before the arguments, because building one can
+      // mint a `functions` entry and the labels run in the order they are
+      // taken. Binding them here keeps that order explicit.
+      const callee = e(node.callee);
+      const args = node.args.map(e);
       return {
         "#": "call",
-        callee: e(node.callee),
-        args: node.args.map(e),
+        callee,
+        ...(args.length === 0 ? {} : { args }),
         optional: node.optional ? true : undefined,
       };
     }
     case "AstScriptIdentifier":
       return { "#": "identifier", name: mangle(node.bindingKey) };
-    case "AstScriptNew":
+    case "AstScriptNew": {
       // Here `new` expands: a spliced class lowers to a function with one
       // hole per constructor parameter (see `lowerSpliceable`), so a
       // construction serializes as an ordinary call of its callee, binding
       // the client's argument values to the holes when it runs.
+      const callee = e(node.callee);
+      const args = node.args.map(e);
       return {
         "#": "call",
-        callee: e(node.callee),
-        args: node.args.map(e),
+        callee,
+        ...(args.length === 0 ? {} : { args }),
       };
+    }
     case "AstScriptNull":
       return null;
     case "AstScriptNumber":

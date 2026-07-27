@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": "third"
     }
   },
@@ -43,23 +42,19 @@
             {
               "#": "apply",
               "label": "#t0",
-              "args": [],
               "key": "first"
             },
             {
               "#": "apply",
               "label": "#t1",
-              "args": [],
               "key": 2
             },
             {
               "#": "apply",
               "label": "#t2",
-              "args": [],
               "key": {
                 "#": "apply",
-                "label": "#f0",
-                "args": []
+                "label": "#f0"
               }
             }
           ]
@@ -69,7 +64,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t3",
-    "args": []
+    "label": "#t3"
   }
 }

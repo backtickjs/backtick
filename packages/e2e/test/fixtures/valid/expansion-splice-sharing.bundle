@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -52,8 +51,7 @@
                     "name": "p"
                   },
                   "name": "sum"
-                },
-                "args": []
+                }
               },
               "right": {
                 "#": "call",
@@ -64,8 +62,7 @@
                     "name": "s"
                   },
                   "name": "sum"
-                },
-                "args": []
+                }
               }
             }
           }
@@ -80,7 +77,6 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "binop",
           "operator": "+",
@@ -89,16 +85,14 @@
             "callee": {
               "#": "identifier",
               "name": "$0"
-            },
-            "args": []
+            }
           },
           "right": {
             "#": "call",
             "callee": {
               "#": "identifier",
               "name": "$1"
-            },
-            "args": []
+            }
           }
         }
       }
@@ -127,7 +121,6 @@
           "args": [
             {
               "#": "arrow",
-              "params": [],
               "body": {
                 "#": "identifier",
                 "name": "$0"
@@ -135,7 +128,6 @@
             },
             {
               "#": "arrow",
-              "params": [],
               "body": {
                 "#": "identifier",
                 "name": "$1"
@@ -169,7 +161,6 @@
           "args": [
             {
               "#": "arrow",
-              "params": [],
               "body": {
                 "#": "identifier",
                 "name": "$0"
@@ -177,7 +168,6 @@
             },
             {
               "#": "arrow",
-              "params": [],
               "body": {
                 "#": "identifier",
                 "name": "$1"
@@ -191,7 +181,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

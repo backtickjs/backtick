@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "found": {
           "#": "call",
@@ -11,8 +10,7 @@
             "callee": {
               "#": "entry",
               "label": "#f1"
-            },
-            "args": []
+            }
           },
           "args": [
             {
@@ -27,8 +25,7 @@
             "callee": {
               "#": "entry",
               "label": "#f1"
-            },
-            "args": []
+            }
           },
           "args": [
             null
@@ -41,8 +38,7 @@
             "callee": {
               "#": "entry",
               "label": "#f2"
-            },
-            "args": []
+            }
           },
           "args": [
             {
@@ -59,8 +55,7 @@
             "callee": {
               "#": "entry",
               "label": "#f2"
-            },
-            "args": []
+            }
           },
           "args": [
             {
@@ -75,8 +70,7 @@
             "callee": {
               "#": "entry",
               "label": "#f2"
-            },
-            "args": []
+            }
           },
           "args": [
             null
@@ -89,8 +83,7 @@
             "callee": {
               "#": "entry",
               "label": "#f3"
-            },
-            "args": []
+            }
           },
           "args": [
             "hi"
@@ -103,8 +96,7 @@
             "callee": {
               "#": "entry",
               "label": "#f3"
-            },
-            "args": []
+            }
           },
           "args": [
             null
@@ -114,7 +106,6 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -141,7 +132,6 @@
     },
     "#f2": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -173,7 +163,6 @@
     },
     "#f3": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -208,7 +197,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -34,8 +33,7 @@
                   ]
                 },
                 "name": "toUpperCase"
-              },
-              "args": []
+              }
             }
           }
         ]
@@ -45,7 +43,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

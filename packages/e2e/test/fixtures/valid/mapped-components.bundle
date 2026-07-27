@@ -37,19 +37,16 @@
             {
               "#": "apply",
               "label": "#t0",
-              "args": [],
               "key": 0
             },
             {
               "#": "apply",
               "label": "#t1",
-              "args": [],
               "key": 1
             },
             {
               "#": "apply",
               "label": "#t2",
-              "args": [],
               "key": 2
             }
           ]
@@ -59,7 +56,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t3",
-    "args": []
+    "label": "#t3"
   }
 }

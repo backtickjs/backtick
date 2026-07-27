@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "named": {
           "#": "call",
@@ -11,8 +10,7 @@
             "callee": {
               "#": "entry",
               "label": "#f1"
-            },
-            "args": []
+            }
           },
           "args": [
             "hi"
@@ -25,8 +23,7 @@
             "callee": {
               "#": "entry",
               "label": "#f1"
-            },
-            "args": []
+            }
           },
           "args": [
             null
@@ -39,8 +36,7 @@
             "callee": {
               "#": "entry",
               "label": "#f2"
-            },
-            "args": []
+            }
           },
           "args": [
             {
@@ -48,8 +44,7 @@
               "callee": {
                 "#": "entry",
                 "label": "#f3"
-              },
-              "args": []
+              }
             }
           ]
         },
@@ -60,8 +55,7 @@
             "callee": {
               "#": "entry",
               "label": "#f2"
-            },
-            "args": []
+            }
           },
           "args": [
             null
@@ -71,7 +65,6 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -104,7 +97,6 @@
     },
     "#f2": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -124,7 +116,6 @@
                     "#": "identifier",
                     "name": "cb"
                   },
-                  "args": [],
                   "optional": true
                 },
                 "right": 0
@@ -136,10 +127,8 @@
     },
     "#f3": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": 2
       }
     }
@@ -147,7 +136,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

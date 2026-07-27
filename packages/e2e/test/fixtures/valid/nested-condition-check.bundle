@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "both": {
           "#": "call",
@@ -11,8 +10,7 @@
             "callee": {
               "#": "entry",
               "label": "#f1"
-            },
-            "args": []
+            }
           },
           "args": [
             true,
@@ -26,8 +24,7 @@
             "callee": {
               "#": "entry",
               "label": "#f1"
-            },
-            "args": []
+            }
           },
           "args": [
             true,
@@ -38,7 +35,6 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
         "params": [
@@ -109,7 +105,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

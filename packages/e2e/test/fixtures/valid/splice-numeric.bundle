@@ -2,14 +2,12 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": 1
     }
   },
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

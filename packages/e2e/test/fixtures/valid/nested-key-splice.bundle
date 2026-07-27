@@ -2,19 +2,16 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "call",
         "callee": {
           "#": "entry",
           "label": "#f1"
-        },
-        "args": []
+        }
       }
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": 1
     }
   },
@@ -29,8 +26,7 @@
             "id": "Text",
             "key": {
               "#": "apply",
-              "label": "#f0",
-              "args": []
+              "label": "#f0"
             },
             "props": {
               "children": "x"
@@ -42,7 +38,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t0",
-    "args": []
+    "label": "#t0"
   }
 }

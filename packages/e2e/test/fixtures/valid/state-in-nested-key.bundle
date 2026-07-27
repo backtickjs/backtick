@@ -14,8 +14,7 @@
             "name": "s0"
           },
           "name": "read"
-        },
-        "args": []
+        }
       }
     }
   },
@@ -63,7 +62,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t1",
-    "args": []
+    "label": "#t1"
   }
 }

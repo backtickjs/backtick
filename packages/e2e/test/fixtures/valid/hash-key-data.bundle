@@ -2,10 +2,8 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#call": "#f0"
         }
@@ -15,7 +13,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

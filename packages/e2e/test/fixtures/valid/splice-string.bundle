@@ -2,14 +2,12 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": "say \"hi\"\n\\done"
     }
   },
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

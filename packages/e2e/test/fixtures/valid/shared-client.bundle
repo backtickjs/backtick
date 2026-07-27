@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "binop",
         "operator": "+",
@@ -11,22 +10,19 @@
           "callee": {
             "#": "entry",
             "label": "#f1"
-          },
-          "args": []
+          }
         },
         "right": {
           "#": "call",
           "callee": {
             "#": "entry",
             "label": "#f5"
-          },
-          "args": []
+          }
         }
       }
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -40,24 +36,21 @@
                 "callee": {
                   "#": "entry",
                   "label": "#f2"
-                },
-                "args": []
+                }
               },
               "y": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f3"
-                },
-                "args": []
+                }
               },
               "sum": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f4"
-                },
-                "args": []
+                }
               }
             }
           },
@@ -72,8 +65,7 @@
                   "name": "p"
                 },
                 "name": "sum"
-              },
-              "args": []
+              }
             }
           }
         ]
@@ -81,20 +73,16 @@
     },
     "#f2": {
       "#": "arrow",
-      "params": [],
       "body": 1
     },
     "#f3": {
       "#": "arrow",
-      "params": [],
       "body": 2
     },
     "#f4": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "binop",
           "operator": "+",
@@ -103,23 +91,20 @@
             "callee": {
               "#": "entry",
               "label": "#f2"
-            },
-            "args": []
+            }
           },
           "right": {
             "#": "call",
             "callee": {
               "#": "entry",
               "label": "#f3"
-            },
-            "args": []
+            }
           }
         }
       }
     },
     "#f5": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -133,24 +118,21 @@
                 "callee": {
                   "#": "entry",
                   "label": "#f2"
-                },
-                "args": []
+                }
               },
               "y": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f3"
-                },
-                "args": []
+                }
               },
               "sum": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f4"
-                },
-                "args": []
+                }
               }
             }
           },
@@ -172,7 +154,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

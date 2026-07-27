@@ -34,7 +34,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t0",
-    "args": []
+    "label": "#t0"
   }
 }

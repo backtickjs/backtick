@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -18,7 +17,6 @@
             "name": "bump",
             "expression": {
               "#": "arrow",
-              "params": [],
               "body": {
                 "#": "block",
                 "statements": [
@@ -56,16 +54,14 @@
                 "callee": {
                   "#": "identifier",
                   "name": "bump"
-                },
-                "args": []
+                }
               },
               "right": {
                 "#": "call",
                 "callee": {
                   "#": "identifier",
                   "name": "bump"
-                },
-                "args": []
+                }
               }
             }
           }
@@ -76,7 +72,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

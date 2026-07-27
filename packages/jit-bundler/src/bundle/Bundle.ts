@@ -18,6 +18,11 @@
 //   - a capture is a value, never a variable: a nested script reads its
 //     captures but can't assign them.
 //
+// An empty container is omitted rather than spelled out: a node carries `args`,
+// `params`, `statements` or `props` only when it has some. Absent means empty,
+// everywhere, so a client reads them the same way each time. A spliced empty
+// array or object is untouched — that is data the client asked for.
+//
 // Evaluation is effect-free and deterministic: materializing the root, a
 // tree, or any entry a data position references runs no effects — an
 // action never ships as data — so re-evaluating any value is unobservable.
@@ -71,7 +76,7 @@ export interface BundleElement {
   "#": "element";
   id: string;
   key?: BundleExpr;
-  props: { [prop: string]: BundleExpr };
+  props?: { [prop: string]: BundleExpr };
 }
 
 // The enclosing tree's n-th slot: resolves to the value supplied for that
@@ -104,7 +109,7 @@ export interface BundleCell {
 export interface BundleApply {
   "#": "apply";
   label: FunctionLabel | TreeLabel;
-  args: BundleExpr[];
+  args?: BundleExpr[];
   key?: BundleExpr;
 }
 
@@ -209,7 +214,7 @@ export interface BundleEntryNode {
 export interface BundleCallNode {
   "#": "call";
   callee: BundleExpressionNode;
-  args: BundleExpressionNode[];
+  args?: BundleExpressionNode[];
   optional?: true;
 }
 
@@ -275,7 +280,7 @@ export interface BundleTernaryNode {
 // optional parameter reads as null.
 export interface BundleArrowNode {
   "#": "arrow";
-  params: string[];
+  params?: string[];
   body: BundleBody;
 }
 
@@ -285,7 +290,7 @@ export interface BundleArrowNode {
 // local).
 export interface BundleBlockNode {
   "#": "block";
-  statements: BundleStatementNode[];
+  statements?: BundleStatementNode[];
 }
 
 // A variable declaration: binds `name` in the enclosing block.

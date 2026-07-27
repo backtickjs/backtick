@@ -14,8 +14,7 @@
             "name": "s0"
           },
           "name": "read"
-        },
-        "args": []
+        }
       }
     },
     "#f1": {
@@ -25,7 +24,6 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "block",
           "statements": [
@@ -100,7 +98,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t0",
-    "args": []
+    "label": "#t0"
   }
 }

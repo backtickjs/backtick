@@ -403,9 +403,10 @@ export function buildBundle(ir: Ir): Bundle {
     if (label === undefined) {
       label = `#f${fns.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
+      const params = [...expansion.params];
       expansionBodies.set(label, {
         "#": "arrow",
-        params: [...expansion.params],
+        ...(params.length === 0 ? {} : { params }),
         body: renderValue(expansion.body),
       });
     }
@@ -421,7 +422,7 @@ export function buildBundle(ir: Ir): Bundle {
       return;
     }
     // Reserve the slot to break reference cycles; overwritten below.
-    bodies.set(target, { "#": "arrow", params: [], body: null });
+    bodies.set(target, { "#": "arrow", body: null });
     const captureParams = need(target).map(displayName);
     // The body references holes by key; a reference's `args` are
     // positional in the entry's `splices` order, so this maps between them.
@@ -443,13 +444,14 @@ export function buildBundle(ir: Ir): Bundle {
       params = [...spliceParams, ...captureParams];
       renderSplice = (key) => {
         const index = holeIndex(key);
+        const args = passKeys(target, index).map((key) => ({
+          "#": "identifier" as const,
+          name: displayName(key),
+        }));
         return {
           "#": "call",
           callee: { "#": "identifier", name: `$${index}` },
-          args: passKeys(target, index).map((key) => ({
-            "#": "identifier",
-            name: displayName(key),
-          })),
+          ...(args.length === 0 ? {} : { args }),
         };
       };
     } else {
@@ -458,7 +460,11 @@ export function buildBundle(ir: Ir): Bundle {
       renderSplice = (key) => renderValue(args[holeIndex(key)]);
     }
     const body = lowerScriptBody(fns[target].body, renderSplice, displayName);
-    bodies.set(target, { "#": "arrow", params, body });
+    bodies.set(target, {
+      "#": "arrow",
+      ...(params.length === 0 ? {} : { params }),
+      body,
+    });
   };
 
   // The arguments passed when calling an entry: for a polymorphic target, one
@@ -498,24 +504,28 @@ export function buildBundle(ir: Ir): Bundle {
   // every other value its literal form.
   const renderValue = (value: IrArgument): BundleExpressionNode => {
     switch (value.kind) {
-      case "IrScriptRef":
+      case "IrScriptRef": {
         materialize(value.target);
+        const args = callArgs(value);
         return {
           "#": "call",
           callee: { "#": "entry", label: `#f${value.target}` },
-          args: callArgs(value),
+          ...(args.length === 0 ? {} : { args }),
         };
-      case "IrTreeRef":
+      }
+      case "IrTreeRef": {
         materializeTree(value.target);
         requireUnkeyed(value);
+        const args = treeSlots(value.target).map((key) => ({
+          "#": "identifier" as const,
+          name: displayName(key),
+        }));
         return {
           "#": "call",
           callee: { "#": "entry", label: `#t${value.target}` },
-          args: treeSlots(value.target).map((key) => ({
-            "#": "identifier",
-            name: displayName(key),
-          })),
+          ...(args.length === 0 ? {} : { args }),
         };
+      }
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
       // In a body the handle is already in scope: the entry received it as a
@@ -562,7 +572,11 @@ export function buildBundle(ir: Ir): Bundle {
   ): BundleExpressionNode => {
     const params = passKeys(target, hole).map(displayName);
     if (params.length > 0) {
-      return { "#": "arrow", params, body: renderValue(value) };
+      return {
+        "#": "arrow",
+        ...(params.length === 0 ? {} : { params }),
+        body: renderValue(value),
+      };
     }
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
@@ -575,7 +589,6 @@ export function buildBundle(ir: Ir): Bundle {
         ? entry
         : {
             "#": "arrow",
-            params: [],
             body: { "#": "call", callee: entry, args },
           };
     }
@@ -596,11 +609,10 @@ export function buildBundle(ir: Ir): Bundle {
         ? entry
         : {
             "#": "arrow",
-            params: [],
             body: { "#": "call", callee: entry, args },
           };
     }
-    return { "#": "arrow", params: [], body: renderValue(value) };
+    return { "#": "arrow", body: renderValue(value) };
   };
 
   const treeJsons = new Map<number, BundleTree>();
@@ -645,11 +657,12 @@ export function buildBundle(ir: Ir): Bundle {
     // passing whatever its slots need from this one's.
     materializeTree(content.target);
     const passedKey = renderExpr(content.key, scope);
+    const args = treeSlots(content.target).map((key) => capExpr(key, scope));
     treeJsons.set(target, {
       content: {
         "#": "apply",
         label: `#t${content.target}`,
-        args: treeSlots(content.target).map((key) => capExpr(key, scope)),
+        ...(args.length === 0 ? {} : { args }),
         ...(passedKey === null ? {} : { key: passedKey }),
       },
       ...declared,
@@ -754,7 +767,7 @@ export function buildBundle(ir: Ir): Bundle {
       "#": "element",
       id: element.id,
       ...(key === null ? {} : { key }),
-      props,
+      ...(Object.keys(props).length === 0 ? {} : { props }),
     };
   };
 
@@ -768,19 +781,23 @@ export function buildBundle(ir: Ir): Bundle {
   ): BundleExpr => {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
+      const args = exprCallArgs(value, scope, params);
       return {
         "#": "apply",
         label: `#f${value.target}`,
-        args: exprCallArgs(value, scope, params),
+        ...(args.length === 0 ? {} : { args }),
       };
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       const keyed = renderExpr(value.key, scope, params);
+      const args = treeSlots(value.target).map((key) =>
+        capExpr(key, scope, params),
+      );
       return {
         "#": "apply",
         label: `#t${value.target}`,
-        args: treeSlots(value.target).map((key) => capExpr(key, scope, params)),
+        ...(args.length === 0 ? {} : { args }),
         ...(keyed === null ? {} : { key: keyed }),
       };
     }

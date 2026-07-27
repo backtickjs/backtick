@@ -7,14 +7,12 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "call",
           "callee": {
             "#": "identifier",
             "name": "$0"
-          },
-          "args": []
+          }
         }
       }
     }
@@ -65,7 +63,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t0",
-    "args": []
+    "label": "#t0"
   }
 }

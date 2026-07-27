@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "taken": {
           "#": "call",
@@ -73,8 +72,7 @@
                       "callee": {
                         "#": "identifier",
                         "name": "$0"
-                      },
-                      "args": []
+                      }
                     }
                   }
                 ]
@@ -91,12 +89,10 @@
     },
     "#f2": {
       "#": "arrow",
-      "params": [],
       "body": "evaluated"
     },
     "#f3": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -111,7 +107,6 @@
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }

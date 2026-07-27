@@ -53,7 +53,7 @@ function renderNode(node: BundleStatementNode, indent: string): string {
     case "entry":
       return node.label;
     case "call": {
-      const args = node.args.map((arg) => renderNode(arg, indent));
+      const args = (node.args ?? []).map((arg) => renderNode(arg, indent));
       const callee = renderNode(node.callee, indent);
       // An arrow callee (an expansion applied to its arguments) binds
       // looser than the call — parenthesize so the text reads as it runs.
@@ -76,9 +76,9 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         indent,
       )} : ${renderNode(node.alternate, indent)}`;
     case "arrow":
-      return `(${node.params.join(", ")}) => ${renderBody(node.body, indent)}`;
+      return `(${(node.params ?? []).join(", ")}) => ${renderBody(node.body, indent)}`;
     case "block": {
-      const statements = node.statements.map(
+      const statements = (node.statements ?? []).map(
         (statement) => `${inner}${renderStatement(statement, inner)}`,
       );
       return `{\n${statements.join("\n")}\n${indent}}`;
@@ -141,7 +141,7 @@ function renderExpr(expr: BundleExpr, indent: string): string {
     case "cell":
       return `cells.${expr.name}`;
     case "apply": {
-      const args = expr.args.map((arg) => renderExpr(arg, indent));
+      const args = (expr.args ?? []).map((arg) => renderExpr(arg, indent));
       // A keyed instantiation reads as a suffix, since the key identifies the
       // instance rather than being one of the entry's arguments.
       const key =
@@ -168,7 +168,7 @@ function renderJsx(element: BundleElement, indent: string): string {
     attributes.push(`${inner}key={${renderExpr(element.key, inner)}}`);
   }
   let children: BundleExpr[] = [];
-  for (const [prop, value] of Object.entries(element.props)) {
+  for (const [prop, value] of Object.entries(element.props ?? {})) {
     if (prop === "children") {
       children = Array.isArray(value) ? value : [value];
       continue;

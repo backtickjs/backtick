@@ -11,8 +11,7 @@
         "props": {
           "children": {
             "#": "apply",
-            "label": "#t0",
-            "args": []
+            "label": "#t0"
           }
         }
       }
@@ -20,7 +19,6 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t1",
-    "args": []
+    "label": "#t1"
   }
 }

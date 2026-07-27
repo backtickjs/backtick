@@ -2,7 +2,6 @@
   "functions": {
     "#f0": {
       "#": "arrow",
-      "params": [],
       "body": {
         "#": "block",
         "statements": [
@@ -16,16 +15,14 @@
                 "callee": {
                   "#": "entry",
                   "label": "#f1"
-                },
-                "args": []
+                }
               },
               "y": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f2"
-                },
-                "args": []
+                }
               },
               "valid": {
                 "#": "call",
@@ -56,16 +53,14 @@
                 "callee": {
                   "#": "entry",
                   "label": "#f4"
-                },
-                "args": []
+                }
               },
               "y": {
                 "#": "call",
                 "callee": {
                   "#": "entry",
                   "label": "#f5"
-                },
-                "args": []
+                }
               },
               "valid": {
                 "#": "call",
@@ -102,8 +97,7 @@
                     "name": "a"
                   },
                   "name": "valid"
-                },
-                "args": []
+                }
               },
               "right": {
                 "#": "call",
@@ -114,8 +108,7 @@
                     "name": "b"
                   },
                   "name": "valid"
-                },
-                "args": []
+                }
               }
             }
           }
@@ -124,12 +117,10 @@
     },
     "#f1": {
       "#": "arrow",
-      "params": [],
       "body": 1
     },
     "#f2": {
       "#": "arrow",
-      "params": [],
       "body": 2
     },
     "#f3": {
@@ -140,7 +131,6 @@
       ],
       "body": {
         "#": "arrow",
-        "params": [],
         "body": {
           "#": "binop",
           "operator": "+",
@@ -149,35 +139,30 @@
             "callee": {
               "#": "identifier",
               "name": "$0"
-            },
-            "args": []
+            }
           },
           "right": {
             "#": "call",
             "callee": {
               "#": "identifier",
               "name": "$1"
-            },
-            "args": []
+            }
           }
         }
       }
     },
     "#f4": {
       "#": "arrow",
-      "params": [],
       "body": 3
     },
     "#f5": {
       "#": "arrow",
-      "params": [],
       "body": 4
     }
   },
   "trees": {},
   "root": {
     "#": "apply",
-    "label": "#f0",
-    "args": []
+    "label": "#f0"
   }
 }
