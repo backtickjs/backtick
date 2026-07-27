@@ -1,0 +1,14 @@
+#f0 = (s0) => s0.read()
+
+#f1 = (s0) => () => {
+  s0.write(s0.read() + 1);
+}
+
+#t0 state { s0 = 16 } = <Text
+  style={{ "fontSize": #f0(cells.s0) }}
+  onPress={#f1(cells.s0)}
+>
+  {"press"}
+</Text>
+
+root = #t0()

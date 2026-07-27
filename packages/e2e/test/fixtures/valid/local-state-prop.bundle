@@ -1,0 +1,196 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": {
+            "#": "call",
+            "callee": {
+              "#": "identifier",
+              "name": "$0"
+            },
+            "args": []
+          },
+          "name": "read"
+        },
+        "args": []
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "$0"
+      ],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "call",
+              "callee": {
+                "#": "property",
+                "object": {
+                  "#": "call",
+                  "callee": {
+                    "#": "identifier",
+                    "name": "$0"
+                  },
+                  "args": []
+                },
+                "name": "write"
+              },
+              "args": [
+                {
+                  "#": "binop",
+                  "operator": "+",
+                  "left": {
+                    "#": "call",
+                    "callee": {
+                      "#": "property",
+                      "object": {
+                        "#": "call",
+                        "callee": {
+                          "#": "identifier",
+                          "name": "$0"
+                        },
+                        "args": []
+                      },
+                      "name": "read"
+                    },
+                    "args": []
+                  },
+                  "right": 1
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {
+    "#t0": {
+      "content": {
+        "#": "element",
+        "id": "Text",
+        "key": null,
+        "props": {
+          "style": {
+            "fontSize": {
+              "#": "apply",
+              "label": "#f0",
+              "args": [
+                {
+                  "#": "thunk",
+                  "expression": {
+                    "#": "slot",
+                    "index": 0
+                  }
+                }
+              ]
+            }
+          },
+          "onPress": {
+            "#": "apply",
+            "label": "#f1",
+            "args": [
+              {
+                "#": "thunk",
+                "expression": {
+                  "#": "slot",
+                  "index": 0
+                }
+              }
+            ]
+          },
+          "children": "press"
+        }
+      }
+    },
+    "#t1": {
+      "content": {
+        "#": "element",
+        "id": "Text",
+        "key": null,
+        "props": {
+          "style": {
+            "fontSize": {
+              "#": "apply",
+              "label": "#f0",
+              "args": [
+                {
+                  "#": "thunk",
+                  "expression": {
+                    "#": "slot",
+                    "index": 0
+                  }
+                }
+              ]
+            }
+          },
+          "onPress": {
+            "#": "apply",
+            "label": "#f1",
+            "args": [
+              {
+                "#": "thunk",
+                "expression": {
+                  "#": "slot",
+                  "index": 0
+                }
+              }
+            ]
+          },
+          "children": "press"
+        }
+      }
+    },
+    "#t2": {
+      "content": {
+        "#": "element",
+        "id": "View",
+        "key": null,
+        "props": {
+          "children": [
+            {
+              "#": "apply",
+              "label": "#t0",
+              "args": [
+                {
+                  "#": "cell",
+                  "name": "s0"
+                }
+              ]
+            },
+            {
+              "#": "apply",
+              "label": "#t1",
+              "args": [
+                {
+                  "#": "cell",
+                  "name": "s0"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "state": {
+        "s0": 16
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t2",
+    "args": []
+  }
+}

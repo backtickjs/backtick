@@ -1,0 +1,8 @@
+<View>
+  <Text style={{ "fontSize": 16 }} onPress={[function]}>
+    {"press"}
+  </Text>
+  <Text style={{ "fontSize": 16 }} onPress={[function]}>
+    {"press"}
+  </Text>
+</View>

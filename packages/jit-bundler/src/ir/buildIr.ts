@@ -4,6 +4,7 @@ import type {
   AstExpansion,
   AstInstance,
   AstScript,
+  AstState,
 } from "../ast/Ast.js";
 import { locKey } from "../locKey.js";
 import type {
@@ -13,6 +14,8 @@ import type {
   IrExpansion,
   IrScriptEntry,
   IrScriptRef,
+  IrStateEntry,
+  IrStateRef,
   IrTreeEntry,
   IrTreeRef,
 } from "./Ir.js";
@@ -33,6 +36,16 @@ class IrBuilder {
   // One entry per invocation, interned by node identity so an instance reached
   // twice is one entry instantiated twice.
   private readonly refByInstance = new Map<AstInstance, IrTreeRef>();
+  // One entry per cell, interned by node identity — `lowerClientState` shares
+  // one node per cell — so every splice of a cell is the same reference. The
+  // initial and the declaring instance are held apart until `buildIr` can
+  // resolve that instance to the entry it became.
+  private readonly refByState = new Map<AstState, IrStateRef>();
+  private readonly initialByState: IrArgument[] = [];
+  private readonly declaredByState: AstInstance[] = [];
+  // Which entry each invocation became, so a cell's declaring instance resolves
+  // to the entry that owns its storage.
+  private readonly entryByInstance = new Map<AstInstance, number>();
   // A class's expansion shared across script instances (`lowerSpliceable`
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
@@ -131,8 +144,50 @@ class IrBuilder {
     };
     const ref: IrTreeRef = { kind: "IrTreeRef", target: this.trees.length };
     this.trees.push(tree);
+    this.entryByInstance.set(instance, ref.target);
     this.refByInstance.set(instance, ref);
     return ref;
+  }
+
+  // Lowers a state cell to a reference into the state table, adding its entry
+  // on first sight. The initial lowers in value position — it is data the
+  // owning entry carries, not a tree prop.
+  referenceState(node: AstState): IrStateRef {
+    const shared = this.refByState.get(node);
+    if (shared) {
+      return shared;
+    }
+    const ref: IrStateRef = {
+      kind: "IrStateRef",
+      target: this.initialByState.length,
+    };
+    // Reserved before lowering the initial so a cell whose initial somehow
+    // reaches itself resolves to a stable index rather than recursing.
+    this.initialByState.push({ kind: "IrValue", value: null });
+    this.declaredByState.push(node.declaredIn);
+    this.refByState.set(node, ref);
+    this.initialByState[ref.target] = this.lower(node.initial);
+    return ref;
+  }
+
+  // The state table, once every invocation has an entry to own its cells.
+  // Resolved at the end because an invocation's entry index is only final after
+  // its subtree has been pushed, and its cells are interned during that subtree.
+  states(): IrStateEntry[] {
+    return this.initialByState.map((initial, index) => {
+      const declaredIn = this.declaredByState[index];
+      const owner = this.entryByInstance.get(declaredIn);
+      if (owner === undefined) {
+        // `state()` records the invocation it ran inside, and every invocation
+        // reached by lowering became an entry — so this is a cell whose
+        // component isn't in the tree its readers are.
+        throw new Error(
+          "Can't own this state cell: the component that declared it isn't " +
+            "part of the tree being bundled.",
+        );
+      }
+      return { kind: "IrStateEntry", initial, owner };
+    });
   }
 
   // Lowers an element's props into an IR element, keeping structure as
@@ -228,7 +283,7 @@ class IrBuilder {
       // A cell lowers to the AST but has no IR entry yet: the state table and
       // the tree that declares the cell come with the IR step.
       case "AstState":
-        throw new Error("Can't bundle a state cell yet.");
+        return this.referenceState(node);
       default: {
         const unhandled: never = node;
         throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);
@@ -247,6 +302,9 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
   // A per-class expansion shared across script instances lowers once, so its
   // contents count once too.
   const seenExpansions = new Set<AstExpansion>();
+  // A cell is one node however many splices reach it, so its initial's contents
+  // count once.
+  const seenCells = new Set<AstState>();
   const visit = (node: Ast): void => {
     if (node.kind === "AstScript") {
       if (seenScripts.has(node)) {
@@ -267,6 +325,13 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
       counts.set(node, count + 1);
       if (count === 0) {
         Object.values(node.props).forEach(visit);
+      }
+      return;
+    }
+    if (node.kind === "AstState") {
+      if (!seenCells.has(node)) {
+        seenCells.add(node);
+        visit(node.initial);
       }
       return;
     }
@@ -299,5 +364,10 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
 export function buildIr(ast: Ast): Ir {
   const builder = new IrBuilder(countElementReferences(ast));
   const root = builder.lower(ast);
-  return { scripts: builder.scripts, trees: builder.trees, root };
+  return {
+    scripts: builder.scripts,
+    trees: builder.trees,
+    states: builder.states(),
+    root,
+  };
 }

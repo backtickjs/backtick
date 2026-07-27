@@ -1,0 +1,109 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [
+        "s0"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "s0"
+          },
+          "name": "read"
+        },
+        "args": []
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [
+        "s0"
+      ],
+      "body": {
+        "#": "arrow",
+        "params": [],
+        "body": {
+          "#": "block",
+          "statements": [
+            {
+              "#": "call",
+              "callee": {
+                "#": "property",
+                "object": {
+                  "#": "identifier",
+                  "name": "s0"
+                },
+                "name": "write"
+              },
+              "args": [
+                {
+                  "#": "binop",
+                  "operator": "+",
+                  "left": {
+                    "#": "call",
+                    "callee": {
+                      "#": "property",
+                      "object": {
+                        "#": "identifier",
+                        "name": "s0"
+                      },
+                      "name": "read"
+                    },
+                    "args": []
+                  },
+                  "right": 1
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "trees": {
+    "#t0": {
+      "content": {
+        "#": "element",
+        "id": "Text",
+        "key": null,
+        "props": {
+          "style": {
+            "fontSize": {
+              "#": "apply",
+              "label": "#f0",
+              "args": [
+                {
+                  "#": "cell",
+                  "name": "s0"
+                }
+              ]
+            }
+          },
+          "onPress": {
+            "#": "apply",
+            "label": "#f1",
+            "args": [
+              {
+                "#": "cell",
+                "name": "s0"
+              }
+            ]
+          },
+          "children": "press"
+        }
+      },
+      "state": {
+        "s0": 16
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t0",
+    "args": []
+  }
+}

@@ -1,20 +1,13 @@
 import assert from "node:assert/strict";
-import {
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
-import { basename, extname, join } from "node:path";
+import { readdirSync } from "node:fs";
+import { extname, join } from "node:path";
 import { describe, it } from "node:test";
-import { pathToFileURL } from "node:url";
-import { bundle, type Client, type ClientValue } from "@backtickjs/core";
+import { bundle } from "@backtickjs/core";
+import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
 import { renderValue } from "./renderValue.ts";
 import { evaluate } from "./test-client/index.ts";
-import { transpileFixture } from "./transpileFixture.ts";
 
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a
 // client — a script or a JSX tree — compiled here with the same transform the
@@ -28,13 +21,8 @@ import { transpileFixture } from "./transpileFixture.ts";
 // reject: its error message is snapshotted to a sibling `*.error` file. Run
 // with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
 //
-// The emitted modules land in a cache directory inside the package so their
-// `@backtickjs/core` imports resolve through this package's node_modules.
-const fixturesRoot = join(import.meta.dirname, "fixtures");
 const bundleErrorDir = join(fixturesRoot, "bundle-error");
-const cacheDir = join(import.meta.dirname, "../.cache/jit-bundler");
-
-rmSync(cacheDir, { recursive: true, force: true });
+const importFixture = createFixtureLoader("jit-bundler");
 
 function listFixtures(dir: string): string[] {
   return readdirSync(dir)
@@ -44,22 +32,6 @@ function listFixtures(dir: string): string[] {
         !file.includes(".virtual.tsx"),
     )
     .sort();
-}
-
-async function importFixture(
-  dir: string,
-  file: string,
-): Promise<Client<ClientValue> | Client<void>> {
-  const sourceText = readFileSync(join(dir, file), "utf8");
-  const outputText = await transpileFixture(file, sourceText);
-  const base = file.slice(0, -extname(file).length);
-  const compiled = join(cacheDir, basename(dir), `${base}.js`);
-  mkdirSync(join(cacheDir, basename(dir)), { recursive: true });
-  writeFileSync(compiled, outputText);
-  const { default: script } = (await import(pathToFileURL(compiled).href)) as {
-    default: Client<ClientValue> | Client<void>;
-  };
-  return script;
 }
 
 describe("bundle", () => {

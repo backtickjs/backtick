@@ -2,6 +2,7 @@ import type {
   Bundle,
   BundleApply,
   BundleBinaryOperator,
+  BundleCell,
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
@@ -9,6 +10,7 @@ import type {
   BundleSlot,
   BundleStatementNode,
   BundleThunk,
+  BundleTree,
   FunctionLabel,
   TreeLabel,
 } from "@backtickjs/core";
@@ -24,8 +26,11 @@ import type {
 // turns it into markup with those scripts evaluated.
 export class TestElement {
   readonly id: string;
-  readonly key: string | number | null;
-  readonly props: { [prop: string]: unknown };
+  // Mutable because an instance re-renders in place when one of its cells is
+  // written: the element a holder has is the instance, so it observes the new
+  // render rather than a detached copy.
+  key: string | number | null;
+  props: { [prop: string]: unknown };
 
   constructor(
     id: string,
@@ -40,6 +45,93 @@ export class TestElement {
 
 export function evaluate(bundle: Bundle): unknown {
   return evaluateExpr(bundle, bundle.root, []);
+}
+
+// A tree instance: what persists on the client. `cells` is the storage the
+// entry's `state` declares, allocated fresh per instance, and `children` keys
+// nested instances by the `apply` node that created them — the node is the
+// child's position, so a re-render reuses the instance instead of resetting its
+// cells.
+interface Instance {
+  readonly bundle: Bundle;
+  readonly tree: BundleTree;
+  slots: unknown[];
+  readonly cells: Map<string, unknown>;
+  readonly children: Map<BundleApply, Instance>;
+  element: TestElement | null;
+}
+
+function instantiate(
+  bundle: Bundle,
+  tree: BundleTree,
+  slots: unknown[],
+): Instance {
+  const instance: Instance = {
+    bundle,
+    tree,
+    slots,
+    cells: new Map(),
+    children: new Map(),
+    element: null,
+  };
+  // A cell's initial is evaluated in no instance: it can't read a slot or
+  // another cell, so nothing is in scope for it.
+  for (const [name, initial] of Object.entries(tree.state ?? {})) {
+    instance.cells.set(name, evaluateExpr(bundle, initial, []));
+  }
+  render(instance);
+  return instance;
+}
+
+// Renders an instance, refreshing the element in place on a re-render so every
+// holder observes the new props. The whole instance re-renders; nested
+// instances survive it via `children`.
+//
+// A pass-through component — one whose content is an apply rather than an
+// element — renders no element of its own, so evaluating its content yields its
+// child's element and the two alias deliberately. Re-rendering it re-renders
+// that child rather than instantiating a new one, which is what keeps the
+// child's cells alive. An instance whose content is null renders nothing.
+function render(instance: Instance): TestElement | null {
+  const rendered = evaluateExpr(
+    instance.bundle,
+    instance.tree.content,
+    instance.slots,
+    null,
+    instance,
+  ) as TestElement | null;
+  const existing = instance.element;
+  if (existing === null || rendered === null || existing === rendered) {
+    instance.element = rendered;
+    return rendered;
+  }
+  existing.key = rendered.key;
+  existing.props = rendered.props;
+  return existing;
+}
+
+// A cell's handle, as a script reads it. `read` observes the instance's current
+// storage; `write` replaces it and re-renders — the two rules per-instance state
+// adds. A handle a handler captured keeps working across re-renders because it
+// resolves the cell by name at call time.
+function cellHandle(instance: Instance, name: string): unknown {
+  const storage = (): Map<string, unknown> => {
+    if (!instance.cells.has(name)) {
+      throw new Error(`unknown state cell ${name}`);
+    }
+    return instance.cells;
+  };
+  const write = (value: unknown): void => {
+    storage().set(name, value);
+    render(instance);
+  };
+  return {
+    read: () => storage().get(name),
+    write,
+    // A write derived from the current value: one write, so one re-render.
+    update: (updater: (value: unknown) => unknown) =>
+      write(updater(storage().get(name))),
+  };
 }
 
 // Renders an evaluated element as JSX-like markup: `children` renders as the
@@ -151,21 +243,24 @@ function entryFunction(
   if (tree === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
-  return (...slots: unknown[]) => evaluateExpr(bundle, tree.content, slots);
+  return (...slots: unknown[]) => instantiate(bundle, tree, slots).element;
 }
 
+// An inline element renders in its enclosing instance: it is part of that entry,
+// so it reads the same slots and the same cells.
 function evaluateElement(
   bundle: Bundle,
   element: BundleElement,
   slots: unknown[],
+  instance: Instance | null = null,
 ): TestElement {
-  const key = evaluateExpr(bundle, element.key, slots) as
+  const key = evaluateExpr(bundle, element.key, slots, null, instance) as
     | string
     | number
     | null;
   const props: { [prop: string]: unknown } = {};
   for (const [prop, expr] of Object.entries(element.props)) {
-    props[prop] = evaluateExpr(bundle, expr, slots);
+    props[prop] = evaluateExpr(bundle, expr, slots, null, instance);
   }
   return new TestElement(element.id, key, props);
 }
@@ -179,16 +274,22 @@ function evaluateExpr(
   expr: BundleExpr,
   slots: unknown[],
   env: Scope | null = null,
+  // The enclosing instance, when there is one: what `cell` resolves against, and
+  // what a nested `apply` keys its child instance under.
+  instance: Instance | null = null,
 ): unknown {
   if (expr === null || typeof expr !== "object") {
     return expr;
   }
   if (Array.isArray(expr)) {
-    return expr.map((element) => evaluateExpr(bundle, element, slots, env));
+    return expr.map((element) =>
+      evaluateExpr(bundle, element, slots, env, instance),
+    );
   }
   if ("#" in expr) {
     const form = expr as
       | BundleSlot
+      | BundleCell
       | BundleIdentifierNode
       | BundleApply
       | BundleThunk
@@ -196,6 +297,14 @@ function evaluateExpr(
     switch (form["#"]) {
       case "slot": {
         return slots[form.index];
+      }
+      case "cell": {
+        // A cell is declared by the enclosing entry, so it is only meaningful
+        // inside an instance of it.
+        if (instance === null) {
+          throw new Error(`no instance to resolve state cell ${form.name}`);
+        }
+        return cellHandle(instance, form.name);
       }
       case "identifier": {
         // A parameter of an enclosing thunk.
@@ -207,14 +316,31 @@ function evaluateExpr(
       }
       case "apply": {
         const args = form.args.map((arg) =>
-          evaluateExpr(bundle, arg, slots, env),
+          evaluateExpr(bundle, arg, slots, env, instance),
         );
+        // A nested instance persists across the parent's re-renders, keyed by
+        // this node — its position in the parent.
+        if (instance !== null && form.label.startsWith("#t")) {
+          const tree = bundle.trees[form.label as TreeLabel];
+          if (tree === undefined) {
+            throw new Error(`unknown tree entry ${form.label}`);
+          }
+          const child = instance.children.get(form);
+          if (child !== undefined) {
+            child.slots = args;
+            return render(child);
+          }
+          const created = instantiate(bundle, tree, args);
+          instance.children.set(form, created);
+          return created.element;
+        }
         return entryFunction(bundle, form.label)(...args);
       }
       case "thunk": {
         const params = form.params;
         if (!params || params.length === 0) {
-          return () => evaluateExpr(bundle, form.expression, slots, env);
+          return () =>
+            evaluateExpr(bundle, form.expression, slots, env, instance);
         }
         // The hole call supplies the entry-scoped bindings the splice
         // captures, one value per parameter, over the enclosing frame.
@@ -223,17 +349,17 @@ function evaluateExpr(
           params.forEach((param, index) => {
             frame.bindings.set(param, args[index]);
           });
-          return evaluateExpr(bundle, form.expression, slots, frame);
+          return evaluateExpr(bundle, form.expression, slots, frame, instance);
         };
       }
       case "element": {
-        return evaluateElement(bundle, form, slots);
+        return evaluateElement(bundle, form, slots, instance);
       }
     }
   }
   const object: { [key: string]: unknown } = {};
   for (const [key, value] of Object.entries(expr)) {
-    object[key] = evaluateExpr(bundle, value, slots, env);
+    object[key] = evaluateExpr(bundle, value, slots, env, instance);
   }
   return object;
 }

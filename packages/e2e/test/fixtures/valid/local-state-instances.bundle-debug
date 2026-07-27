@@ -1,0 +1,26 @@
+#f0 = ($0) => $0().read()
+
+#f1 = ($0) => () => {
+  $0().write($0().read() + 1);
+}
+
+#t0 state { s0 = 16 } = <Text
+  style={{ "fontSize": #f0(() => cells.s0) }}
+  onPress={#f1(() => cells.s0)}
+>
+  {"press"}
+</Text>
+
+#t1 state { s1 = 16 } = <Text
+  style={{ "fontSize": #f0(() => cells.s1) }}
+  onPress={#f1(() => cells.s1)}
+>
+  {"press"}
+</Text>
+
+#t2 = <View>
+  {#t0()}
+  {#t1()}
+</View>
+
+root = #t2()

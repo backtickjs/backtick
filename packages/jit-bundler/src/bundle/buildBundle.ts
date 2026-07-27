@@ -5,11 +5,11 @@ import type {
   IrTreeRef,
   IrExpansion,
   IrScriptRef,
-  IrTreeEntry,
 } from "../ir/Ir.js";
 import type {
   Bundle,
   BundleArrowNode,
+  BundleCell,
   BundleElement,
   BundleEntryNode,
   BundleExpr,
@@ -22,9 +22,28 @@ import type {
 } from "./Bundle.js";
 import { lowerScriptBody, type RenderSplice } from "./lowerScriptBody.js";
 
+// A state cell threads into entries exactly like a capture — an entry that
+// reads a cell receives its handle as a parameter — so a cell travels as a
+// capture key. `#` starts the key because it can't appear in a binding key
+// (or in a JS identifier), so the two namespaces can't collide.
+function cellKey(index: number): string {
+  return `#s${index}`;
+}
+
+function isCellKey(key: string): boolean {
+  return key.startsWith("#s");
+}
+
+function cellIndex(key: string): number {
+  return Number(key.slice(2));
+}
+
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
 function sourceName(key: string): string {
+  if (isCellKey(key)) {
+    return key.slice(1);
+  }
   return key.replace(/\$[0-9a-z]+\$\d+$/, "");
 }
 
@@ -105,6 +124,7 @@ export function buildBundle(ir: Ir): Bundle {
   const refsByTarget = new Map<number, IrScriptRef[]>();
   const seenRefs = new Set<IrScriptRef>();
   const seenTrees = new Set<number>();
+  const seenCells = new Set<number>();
   const collectRefs = (ref: IrScriptRef): void => {
     const list = refsByTarget.get(ref.target);
     if (list) {
@@ -116,11 +136,11 @@ export function buildBundle(ir: Ir): Bundle {
       return; // a shared reference (a diamond arm) is descended into only once
     }
     seenRefs.add(ref);
-    for (const child of nestedRefs(ref.args, ir.trees, seenTrees)) {
+    for (const child of nestedRefs(ref.args, ir, seenTrees, seenCells)) {
       collectRefs(child);
     }
   };
-  for (const ref of nestedRefs([ir.root], ir.trees, seenTrees)) {
+  for (const ref of nestedRefs([ir.root], ir, seenTrees, seenCells)) {
     collectRefs(ref);
   }
 
@@ -226,7 +246,12 @@ export function buildBundle(ir: Ir): Bundle {
         return keys;
       }
       case "IrTreeRef":
+        // An entry supplies the cells it owns, so only its slots thread out.
         return treeSlots(value.target);
+      // A cell threads like a capture: the entry reading it takes the handle as
+      // a parameter, and its owner supplies it.
+      case "IrStateRef":
+        return [cellKey(value.target)];
       case "IrElement":
         return Object.values(value.props).flatMap(freeCaps);
       case "IrArray":
@@ -291,22 +316,27 @@ export function buildBundle(ir: Ir): Bundle {
         ? [content.key, ...Object.values(content.props)]
         : [content];
 
-  // The slot signature of a tree entry: the capture keys its wiring needs from
-  // whichever scope instantiates it, in first-need order. These are the
-  // entry's implicit parameters — a reference to the tree passes one value per
-  // key, exactly as captures thread between functions. Memoized; no cycle
-  // guard is needed because the element graph is acyclic (children exist
-  // before their parent).
-  const treeSlotsCache = new Map<number, string[]>();
-  const treeSlots = (target: number): string[] => {
-    const cached = treeSlotsCache.get(target);
+  // Where each cell's storage lives: the entry the declaring component's
+  // invocation became. `state()` recorded which invocation declared it, so
+  // there is nothing to infer from where the cell is read.
+  const cellOwner = new Map<string, number>();
+  ir.states.forEach((entry, index) => {
+    cellOwner.set(cellKey(index), entry.owner);
+  });
+
+  // Everything an entry's wiring needs, slots and cells alike, in first-need
+  // order. An entry whose content is a reference needs whatever that inner
+  // instance needs, so the walk starts from the content rather than from props.
+  // Memoized; no cycle guard is needed because the entry graph is acyclic —
+  // a child is always built before its parent.
+  const treeNeedsCache = new Map<number, string[]>();
+  const treeNeeds = (target: number): string[] => {
+    const cached = treeNeedsCache.get(target);
     if (cached) {
       return cached;
     }
     const order: string[] = [];
     const seen = new Set<string>();
-    // An entry whose content is a reference needs whatever that inner instance
-    // needs, so the walk starts from the content rather than from props.
     for (const value of contentValues(ir.trees[target].content)) {
       for (const key of freeCaps(value)) {
         if (!seen.has(key)) {
@@ -315,9 +345,24 @@ export function buildBundle(ir: Ir): Bundle {
         }
       }
     }
-    treeSlotsCache.set(target, order);
+    treeNeedsCache.set(target, order);
     return order;
   };
+
+  // The slot signature of a tree entry: the capture keys its wiring needs from
+  // whichever scope instantiates it, in first-need order. These are the
+  // entry's implicit parameters — a reference to the tree passes one value per
+  // key, exactly as captures thread between functions. A cell it does not own
+  // is one of them: it threads down from its owner like any other value.
+  const treeSlots = (target: number): string[] =>
+    treeNeeds(target).filter(
+      (key) => !isCellKey(key) || cellOwner.get(key) !== target,
+    );
+
+  // The cells a tree entry declares: the ones it owns. Every instance of the
+  // entry allocates its own storage for each.
+  const treeCells = (target: number): string[] =>
+    treeNeeds(target).filter((key) => cellOwner.get(key) === target);
 
   const bodies = new Map<number, BundleArrowNode>();
 
@@ -433,6 +478,10 @@ export function buildBundle(ir: Ir): Bundle {
         };
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
+      // In a body the handle is already in scope: the entry received it as a
+      // parameter (see `freeCaps`), so it reads by name like any capture.
+      case "IrStateRef":
+        return { "#": "identifier", name: displayName(cellKey(value.target)) };
       case "IrValue":
         return value.value;
       // An expansion in value position is its `functions` entry: passed
@@ -525,14 +574,26 @@ export function buildBundle(ir: Ir): Bundle {
     const keys = treeSlots(target);
     const slots = new Map(keys.map((key, index) => [key, index] as const));
     const content = ir.trees[target].content;
+    // A cell's initial is data the entry carries, evaluated in no instance: it
+    // can't read a slot or another cell, so it renders against an empty scope.
+    const cells = treeCells(target);
+    const state: { [name: string]: BundleExpr } = {};
+    for (const key of cells) {
+      state[displayName(key)] = renderExpr(
+        ir.states[cellIndex(key)].initial,
+        new Map(),
+      );
+    }
+    const declared = cells.length === 0 ? {} : { state };
     // An instance that renders nothing: the entry stays, with nothing under it.
     if (content === null) {
-      treeJsons.set(target, { content: null });
+      treeJsons.set(target, { content: null, ...declared });
       return;
     }
     if (content.kind === "IrElement") {
       treeJsons.set(target, {
         content: renderElement(content, slots, new Set()),
+        ...declared,
       });
       return;
     }
@@ -545,6 +606,7 @@ export function buildBundle(ir: Ir): Bundle {
         label: `#t${content.target}`,
         args: treeSlots(content.target).map((key) => capExpr(key, slots)),
       },
+      ...declared,
     });
   };
 
@@ -556,18 +618,23 @@ export function buildBundle(ir: Ir): Bundle {
     key: string,
     slots: Map<string, number>,
     params: ReadonlySet<string> = new Set(),
-  ): BundleSlot | BundleIdentifierNode => {
+  ): BundleSlot | BundleCell | BundleIdentifierNode => {
     if (params.has(key)) {
       return { "#": "identifier", name: displayName(key) };
     }
+    // Before the cell case: a cell this entry doesn't own arrives as a slot, and
+    // only one it owns resolves against the instance.
     const index = slots.get(key);
-    if (index === undefined) {
-      throw new Error(
-        `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
-          "this reference to supply it.",
-      );
+    if (index !== undefined) {
+      return { "#": "slot", index };
     }
-    return { "#": "slot", index };
+    if (isCellKey(key)) {
+      return { "#": "cell", name: displayName(key) };
+    }
+    throw new Error(
+      `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
+        "this reference to supply it.",
+    );
   };
 
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
@@ -651,6 +718,11 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind === "IrElement") {
       return renderElement(value, slots, params);
     }
+    // A handle in tree position resolves against the instance, exactly as a
+    // slot resolves against the instantiation arguments.
+    if (value.kind === "IrStateRef") {
+      return capExpr(cellKey(value.target), slots, params);
+    }
     if (value.kind === "IrValue") {
       return value.value;
     }
@@ -708,12 +780,13 @@ export function buildBundle(ir: Ir): Bundle {
 
 // Collects every script reference reachable inside a list of arguments,
 // descending into array and object values, inline elements, and — through the
-// tree table — tree references, each entry once per `seenTrees` set (a nested
-// script may be spliced anywhere).
+// tree and state tables — tree and cell references, each entry once per `seen`
+// set (a nested script may be spliced anywhere).
 function nestedRefs(
   values: readonly IrArgument[],
-  trees: readonly IrTreeEntry[],
+  ir: Ir,
   seenTrees: Set<number>,
+  seenCells: Set<number>,
 ): IrScriptRef[] {
   const refs: IrScriptRef[] = [];
   const visit = (value: IrArgument): void => {
@@ -722,10 +795,17 @@ function nestedRefs(
     } else if (value.kind === "IrTreeRef") {
       if (!seenTrees.has(value.target)) {
         seenTrees.add(value.target);
-        const content = trees[value.target].content;
+        const content = ir.trees[value.target].content;
         if (content !== null) {
           visit(content);
         }
+      }
+    } else if (value.kind === "IrStateRef") {
+      // A cell's initial is carried by its owning entry, so scripts spliced
+      // into it are reachable only through here.
+      if (!seenCells.has(value.target)) {
+        seenCells.add(value.target);
+        visit(ir.states[value.target].initial);
       }
     } else if (value.kind === "IrElement") {
       Object.values(value.props).forEach(visit);

@@ -1,0 +1,35 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(size)             → $size
+)                  →  [-semantic]
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+))                 → `
+cs.lift(cs.const(  → cs`
+() => {\n          → () => {\n        
+cs.statement(      → 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(size)             → $size
+)                  →  [-semantic]
+)                  → 
+.                  → .
+write              → write
+(                  → (
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(size)             → $size
+)                  →  [-semantic]
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+ +                 →  + 
+1                  → 1
+)                  → )
+);                 → ;
+\n}                → \n      }
+))                 → `

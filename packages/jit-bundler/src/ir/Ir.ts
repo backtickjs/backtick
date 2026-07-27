@@ -4,7 +4,24 @@ import type { AstScriptBody } from "../ast/Ast.js";
 export interface Ir {
   scripts: IrScriptEntry[];
   trees: IrTreeEntry[];
+  states: IrStateEntry[];
   root: IrArgument;
+}
+
+// A state-table entry: a cell's initial value, and the entry that owns its
+// storage — the one the declaring component's invocation became. Ownership is
+// recorded rather than inferred, so it doesn't depend on where the cell is read.
+export interface IrStateEntry {
+  readonly kind: "IrStateEntry";
+  readonly initial: IrArgument;
+  readonly owner: number;
+}
+
+// A reference into the IR's state table. Every splice of one cell is the same
+// reference, so every reader and writer shares the storage.
+export interface IrStateRef {
+  readonly kind: "IrStateRef";
+  readonly target: number;
 }
 
 export interface IrScriptEntry {
@@ -111,4 +128,5 @@ export type IrArgument =
   | IrHole
   | IrScriptRef
   | IrTreeRef
+  | IrStateRef
   | IrElement;
