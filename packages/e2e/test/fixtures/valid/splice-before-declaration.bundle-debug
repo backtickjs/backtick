@@ -1,0 +1,14 @@
+#f0 = () => #f1(#f2) + #f1(#f3)
+
+#f1 = ($0) => {
+  const before = 1;
+  const spliced = $0();
+  const after = 2;
+  return before + spliced + after;
+}
+
+#f2 = () => 10
+
+#f3 = () => 20
+
+root = #f0()
