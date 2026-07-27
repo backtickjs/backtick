@@ -2,26 +2,26 @@
   "functions": {},
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": {
-            "#": "element",
-            "id": "Fragment",
-            "props": {
+            "#": 8,
+            "a": "Fragment",
+            "c": {
               "children": [
                 {
-                  "#": "element",
-                  "id": "Text",
-                  "props": {
+                  "#": 8,
+                  "a": "Text",
+                  "c": {
                     "children": "a"
                   }
                 },
                 {
-                  "#": "element",
-                  "id": "Text",
-                  "props": {
+                  "#": 8,
+                  "a": "Text",
+                  "c": {
                     "children": "b"
                   }
                 }
@@ -33,7 +33,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t0"
+    "#": 0,
+    "f": "#t0"
   }
 }

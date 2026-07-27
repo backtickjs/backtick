@@ -1,28 +1,28 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "x",
-            "expression": 0
+            "#": 7,
+            "u": "const",
+            "e": "x",
+            "i": 0
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#f1"
+            "#": 13,
+            "i": {
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#f1"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "identifier",
-                  "name": "x"
+                  "#": 10,
+                  "e": "x"
                 }
               ]
             }
@@ -31,19 +31,19 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "x"
       ],
-      "body": {
-        "#": "identifier",
-        "name": "x"
+      "s": {
+        "#": 10,
+        "e": "x"
       }
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

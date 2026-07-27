@@ -1,56 +1,56 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "handlers",
-            "expression": {
+            "#": 7,
+            "u": "const",
+            "e": "handlers",
+            "i": {
               "tap": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               },
               "hold": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               }
             }
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "identifier",
-              "name": "handlers"
+            "#": 13,
+            "i": {
+              "#": 10,
+              "e": "handlers"
             }
           }
         ]
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "id"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#f2"
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#f2"
               }
             }
           ]
@@ -58,20 +58,20 @@
       }
     },
     "#f2": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "let",
-            "name": "n",
-            "expression": 0
+            "#": 7,
+            "u": "let",
+            "e": "n",
+            "i": 0
           },
           {
-            "#": "assignment",
-            "name": "n",
-            "expression": 1
+            "#": 2,
+            "e": "n",
+            "i": 1
           }
         ]
       }
@@ -79,7 +79,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

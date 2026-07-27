@@ -1,27 +1,27 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               }
             }
@@ -30,27 +30,27 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 }
               }
             }
@@ -59,27 +59,27 @@
       }
     },
     "#f2": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f3"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f3"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f3"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f3"
                 }
               }
             }
@@ -88,27 +88,27 @@
       }
     },
     "#f3": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f4"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f4"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f4"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f4"
                 }
               }
             }
@@ -117,13 +117,13 @@
       }
     },
     "#f4": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

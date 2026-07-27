@@ -1,67 +1,67 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "$0"
       ],
-      "body": {
-        "#": "call",
-        "callee": {
-          "#": "property",
-          "object": {
-            "#": "call",
-            "callee": {
-              "#": "identifier",
-              "name": "$0"
+      "s": {
+        "#": 5,
+        "j": {
+          "#": 12,
+          "k": {
+            "#": 5,
+            "j": {
+              "#": 10,
+              "e": "$0"
             }
           },
-          "name": "read"
+          "e": "read"
         }
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "$0"
       ],
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "block",
-          "statements": [
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "call",
-              "callee": {
-                "#": "property",
-                "object": {
-                  "#": "call",
-                  "callee": {
-                    "#": "identifier",
-                    "name": "$0"
+              "#": 5,
+              "j": {
+                "#": 12,
+                "k": {
+                  "#": 5,
+                  "j": {
+                    "#": 10,
+                    "e": "$0"
                   }
                 },
-                "name": "write"
+                "e": "write"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "binop",
-                  "operator": "+",
-                  "left": {
-                    "#": "call",
-                    "callee": {
-                      "#": "property",
-                      "object": {
-                        "#": "call",
-                        "callee": {
-                          "#": "identifier",
-                          "name": "$0"
+                  "#": 3,
+                  "m": "+",
+                  "n": {
+                    "#": 5,
+                    "j": {
+                      "#": 12,
+                      "k": {
+                        "#": 5,
+                        "j": {
+                          "#": 10,
+                          "e": "$0"
                         }
                       },
-                      "name": "read"
+                      "e": "read"
                     }
                   },
-                  "right": 1
+                  "o": 1
                 }
               ]
             }
@@ -72,34 +72,34 @@
   },
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "c": {
           "style": {
             "fontSize": {
-              "#": "apply",
-              "label": "#f0",
-              "args": [
+              "#": 0,
+              "f": "#f0",
+              "g": [
                 {
-                  "#": "thunk",
-                  "expression": {
-                    "#": "slot",
-                    "index": 0
+                  "#": 17,
+                  "i": {
+                    "#": 14,
+                    "d": 0
                   }
                 }
               ]
             }
           },
           "onPress": {
-            "#": "apply",
-            "label": "#f1",
-            "args": [
+            "#": 0,
+            "f": "#f1",
+            "g": [
               {
-                "#": "thunk",
-                "expression": {
-                  "#": "slot",
-                  "index": 0
+                "#": 17,
+                "i": {
+                  "#": 14,
+                  "d": 0
                 }
               }
             ]
@@ -109,34 +109,34 @@
       }
     },
     "#t1": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "c": {
           "style": {
             "fontSize": {
-              "#": "apply",
-              "label": "#f0",
-              "args": [
+              "#": 0,
+              "f": "#f0",
+              "g": [
                 {
-                  "#": "thunk",
-                  "expression": {
-                    "#": "slot",
-                    "index": 0
+                  "#": 17,
+                  "i": {
+                    "#": 14,
+                    "d": 0
                   }
                 }
               ]
             }
           },
           "onPress": {
-            "#": "apply",
-            "label": "#f1",
-            "args": [
+            "#": 0,
+            "f": "#f1",
+            "g": [
               {
-                "#": "thunk",
-                "expression": {
-                  "#": "slot",
-                  "index": 0
+                "#": 17,
+                "i": {
+                  "#": 14,
+                  "d": 0
                 }
               }
             ]
@@ -146,41 +146,41 @@
       }
     },
     "#t2": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": [
             {
-              "#": "apply",
-              "label": "#t0",
-              "args": [
+              "#": 0,
+              "f": "#t0",
+              "g": [
                 {
-                  "#": "cell",
-                  "name": "s0"
+                  "#": 6,
+                  "e": "s0"
                 }
               ]
             },
             {
-              "#": "apply",
-              "label": "#t1",
-              "args": [
+              "#": 0,
+              "f": "#t1",
+              "g": [
                 {
-                  "#": "cell",
-                  "name": "s0"
+                  "#": 6,
+                  "e": "s0"
                 }
               ]
             }
           ]
         }
       },
-      "state": {
+      "z": {
         "s0": 16
       }
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t2"
+    "#": 0,
+    "f": "#t2"
   }
 }

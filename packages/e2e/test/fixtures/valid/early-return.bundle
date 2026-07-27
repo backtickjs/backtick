@@ -1,42 +1,42 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "let",
-            "name": "n",
-            "expression": 0
+            "#": 7,
+            "u": "let",
+            "e": "n",
+            "i": 0
           },
           {
-            "#": "if",
-            "condition": {
-              "#": "binop",
-              "operator": "===",
-              "left": {
-                "#": "identifier",
-                "name": "n"
+            "#": 11,
+            "p": {
+              "#": 3,
+              "m": "===",
+              "n": {
+                "#": 10,
+                "e": "n"
               },
-              "right": 0
+              "o": 0
             },
-            "consequent": {
-              "#": "block",
-              "statements": [
+            "q": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "return",
-                  "expression": null
+                  "#": 13,
+                  "i": null
                 }
               ]
             },
-            "alternate": null
+            "r": null
           },
           {
-            "#": "assignment",
-            "name": "n",
-            "expression": 1
+            "#": 2,
+            "e": "n",
+            "i": 1
           }
         ]
       }
@@ -44,7 +44,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

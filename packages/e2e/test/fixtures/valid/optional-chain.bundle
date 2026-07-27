@@ -1,46 +1,46 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "found": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             {
               "x": 5
             }
           ]
         },
         "missing": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             null
           ]
         },
         "deep": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f2"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f2"
             }
           },
-          "args": [
+          "g": [
             {
               "inner": {
                 "z": 7
@@ -49,81 +49,81 @@
           ]
         },
         "cut": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f2"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f2"
             }
           },
-          "args": [
+          "g": [
             {
               "inner": null
             }
           ]
         },
         "top": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f2"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f2"
             }
           },
-          "args": [
+          "g": [
             null
           ]
         },
         "loud": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f3"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f3"
             }
           },
-          "args": [
+          "g": [
             "hi"
           ]
         },
         "silent": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f3"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f3"
             }
           },
-          "args": [
+          "g": [
             null
           ]
         }
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "p"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "return",
-              "expression": {
-                "#": "property",
-                "object": {
-                  "#": "identifier",
-                  "name": "p"
+              "#": 13,
+              "i": {
+                "#": 12,
+                "k": {
+                  "#": 10,
+                  "e": "p"
                 },
-                "name": "x",
-                "optional": true
+                "e": "x",
+                "l": true
               }
             }
           ]
@@ -131,30 +131,30 @@
       }
     },
     "#f2": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "o"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "return",
-              "expression": {
-                "#": "property",
-                "object": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "o"
+              "#": 13,
+              "i": {
+                "#": 12,
+                "k": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "o"
                   },
-                  "name": "inner",
-                  "optional": true
+                  "e": "inner",
+                  "l": true
                 },
-                "name": "z",
-                "optional": true
+                "e": "z",
+                "l": true
               }
             }
           ]
@@ -162,29 +162,29 @@
       }
     },
     "#f3": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "s"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "return",
-              "expression": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "s"
+              "#": 13,
+              "i": {
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "s"
                   },
-                  "name": "concat",
-                  "optional": true
+                  "e": "concat",
+                  "l": true
                 },
-                "args": [
+                "g": [
                   "!"
                 ]
               }
@@ -196,7 +196,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

@@ -1,43 +1,43 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "let",
-            "name": "count",
-            "expression": 0
+            "#": 7,
+            "u": "let",
+            "e": "count",
+            "i": 0
           },
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "bump",
-            "expression": {
-              "#": "arrow",
-              "body": {
-                "#": "block",
-                "statements": [
+            "#": 7,
+            "u": "const",
+            "e": "bump",
+            "i": {
+              "#": 1,
+              "s": {
+                "#": 4,
+                "t": [
                   {
-                    "#": "assignment",
-                    "name": "count",
-                    "expression": {
-                      "#": "binop",
-                      "operator": "+",
-                      "left": {
-                        "#": "identifier",
-                        "name": "count"
+                    "#": 2,
+                    "e": "count",
+                    "i": {
+                      "#": 3,
+                      "m": "+",
+                      "n": {
+                        "#": 10,
+                        "e": "count"
                       },
-                      "right": 1
+                      "o": 1
                     }
                   },
                   {
-                    "#": "return",
-                    "expression": {
-                      "#": "identifier",
-                      "name": "count"
+                    "#": 13,
+                    "i": {
+                      "#": 10,
+                      "e": "count"
                     }
                   }
                 ]
@@ -45,22 +45,22 @@
             }
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "identifier",
-                  "name": "bump"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 10,
+                  "e": "bump"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "identifier",
-                  "name": "bump"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 10,
+                  "e": "bump"
                 }
               }
             }
@@ -71,7 +71,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

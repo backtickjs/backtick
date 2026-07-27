@@ -1,28 +1,28 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "base",
-            "expression": 10
+            "#": 7,
+            "u": "const",
+            "e": "base",
+            "i": 10
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#f1"
+            "#": 13,
+            "i": {
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#f1"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "identifier",
-                  "name": "base"
+                  "#": 10,
+                  "e": "base"
                 }
               ]
             }
@@ -31,38 +31,38 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "base"
       ],
-      "body": {
-        "#": "block",
-        "statements": [
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "base2",
-            "expression": 1
+            "#": 7,
+            "u": "const",
+            "e": "base2",
+            "i": 1
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "identifier",
-                "name": "base2"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 10,
+                "e": "base2"
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "identifier",
-                    "name": "base"
+                    "#": 10,
+                    "e": "base"
                   }
                 ]
               }
@@ -72,38 +72,38 @@
       }
     },
     "#f2": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "base"
       ],
-      "body": {
-        "#": "block",
-        "statements": [
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "base3",
-            "expression": 2
+            "#": 7,
+            "u": "const",
+            "e": "base3",
+            "i": 2
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "*",
-              "left": {
-                "#": "identifier",
-                "name": "base3"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "*",
+              "n": {
+                "#": 10,
+                "e": "base3"
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f3"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f3"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "identifier",
-                    "name": "base"
+                    "#": 10,
+                    "e": "base"
                   }
                 ]
               }
@@ -113,19 +113,19 @@
       }
     },
     "#f3": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "base"
       ],
-      "body": {
-        "#": "identifier",
-        "name": "base"
+      "s": {
+        "#": 10,
+        "e": "base"
       }
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

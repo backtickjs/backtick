@@ -1,113 +1,113 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "a",
-            "expression": {
+            "#": 7,
+            "u": "const",
+            "e": "a",
+            "i": {
               "x": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               },
               "y": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 }
               },
               "valid": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f3"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f3"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "entry",
-                    "label": "#f1"
+                    "#": 9,
+                    "f": "#f1"
                   },
                   {
-                    "#": "entry",
-                    "label": "#f2"
+                    "#": 9,
+                    "f": "#f2"
                   }
                 ]
               }
             }
           },
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "b",
-            "expression": {
+            "#": 7,
+            "u": "const",
+            "e": "b",
+            "i": {
               "x": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f4"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f4"
                 }
               },
               "y": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f5"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f5"
                 }
               },
               "valid": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f3"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f3"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "entry",
-                    "label": "#f4"
+                    "#": 9,
+                    "f": "#f4"
                   },
                   {
-                    "#": "entry",
-                    "label": "#f5"
+                    "#": 9,
+                    "f": "#f5"
                   }
                 ]
               }
             }
           },
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "sum",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "a"
+            "#": 7,
+            "u": "const",
+            "e": "sum",
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "a"
                   },
-                  "name": "valid"
+                  "e": "valid"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "b"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "b"
                   },
-                  "name": "valid"
+                  "e": "valid"
                 }
               }
             }
@@ -116,53 +116,53 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     },
     "#f2": {
-      "#": "arrow",
-      "body": 2
+      "#": 1,
+      "s": 2
     },
     "#f3": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "$0",
         "$1"
       ],
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "binop",
-          "operator": "+",
-          "left": {
-            "#": "call",
-            "callee": {
-              "#": "identifier",
-              "name": "$0"
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 3,
+          "m": "+",
+          "n": {
+            "#": 5,
+            "j": {
+              "#": 10,
+              "e": "$0"
             }
           },
-          "right": {
-            "#": "call",
-            "callee": {
-              "#": "identifier",
-              "name": "$1"
+          "o": {
+            "#": 5,
+            "j": {
+              "#": 10,
+              "e": "$1"
             }
           }
         }
       }
     },
     "#f4": {
-      "#": "arrow",
-      "body": 3
+      "#": 1,
+      "s": 3
     },
     "#f5": {
-      "#": "arrow",
-      "body": 4
+      "#": 1,
+      "s": 4
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

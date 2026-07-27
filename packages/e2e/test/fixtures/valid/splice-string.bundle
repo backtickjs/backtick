@@ -1,13 +1,13 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": "say \"hi\"\n\\done"
+      "#": 1,
+      "s": "say \"hi\"\n\\done"
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

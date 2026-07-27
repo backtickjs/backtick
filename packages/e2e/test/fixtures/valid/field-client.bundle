@@ -1,120 +1,120 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "c",
-            "expression": {
+            "#": 7,
+            "u": "const",
+            "e": "c",
+            "i": {
               "r": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               },
               "g": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 }
               },
               "b": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f3"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f3"
                 }
               }
             }
           },
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "brightness",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "binop",
-                "operator": "+",
-                "left": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "c"
+            "#": 7,
+            "u": "const",
+            "e": "brightness",
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 3,
+                "m": "+",
+                "n": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "c"
                   },
-                  "name": "r"
+                  "e": "r"
                 },
-                "right": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "c"
+                "o": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "c"
                   },
-                  "name": "g"
+                  "e": "g"
                 }
               },
-              "right": {
-                "#": "property",
-                "object": {
-                  "#": "identifier",
-                  "name": "c"
+              "o": {
+                "#": 12,
+                "k": {
+                  "#": 10,
+                  "e": "c"
                 },
-                "name": "b"
+                "e": "b"
               }
             }
           },
           {
-            "#": "if",
-            "condition": {
-              "#": "binop",
-              "operator": ">",
-              "left": {
-                "#": "identifier",
-                "name": "brightness"
+            "#": 11,
+            "p": {
+              "#": 3,
+              "m": ">",
+              "n": {
+                "#": 10,
+                "e": "brightness"
               },
-              "right": 382
+              "o": 382
             },
-            "consequent": {
-              "#": "block",
-              "statements": [
+            "q": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "return",
-                  "expression": "light"
+                  "#": 13,
+                  "i": "light"
                 }
               ]
             },
-            "alternate": null
+            "r": null
           },
           {
-            "#": "return",
-            "expression": "dark"
+            "#": 13,
+            "i": "dark"
           }
         ]
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": 30
+      "#": 1,
+      "s": 30
     },
     "#f2": {
-      "#": "arrow",
-      "body": 144
+      "#": 1,
+      "s": 144
     },
     "#f3": {
-      "#": "arrow",
-      "body": 255
+      "#": 1,
+      "s": 255
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

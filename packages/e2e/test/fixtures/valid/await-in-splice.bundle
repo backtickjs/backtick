@@ -1,18 +1,18 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "binop",
-        "operator": "+",
-        "left": "hello",
-        "right": "!"
+      "#": 1,
+      "s": {
+        "#": 3,
+        "m": "+",
+        "n": "hello",
+        "o": "!"
       }
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

@@ -2,36 +2,36 @@
   "functions": {},
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "c": {
           "children": "one"
         }
       }
     },
     "#t1": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "c": {
           "children": "two"
         }
       }
     },
     "#t2": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": [
             {
-              "#": "apply",
-              "label": "#t0"
+              "#": 0,
+              "f": "#t0"
             },
             {
-              "#": "apply",
-              "label": "#t1"
+              "#": 0,
+              "f": "#t1"
             }
           ]
         }
@@ -39,7 +39,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t2"
+    "#": 0,
+    "f": "#t2"
   }
 }

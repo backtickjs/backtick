@@ -2,15 +2,15 @@
   "functions": {},
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": {
-            "#": "element",
-            "id": "Text",
-            "key": "a",
-            "props": {
+            "#": 8,
+            "a": "Text",
+            "b": "a",
+            "c": {
               "children": "hi"
             }
           }
@@ -19,7 +19,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t0"
+    "#": 0,
+    "f": "#t0"
   }
 }

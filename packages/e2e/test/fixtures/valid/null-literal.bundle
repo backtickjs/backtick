@@ -1,31 +1,31 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "missing": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             null
           ]
         },
         "present": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             "hi"
           ]
         },
@@ -33,42 +33,42 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "value"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "if",
-              "condition": {
-                "#": "binop",
-                "operator": "===",
-                "left": {
-                  "#": "identifier",
-                  "name": "value"
+              "#": 11,
+              "p": {
+                "#": 3,
+                "m": "===",
+                "n": {
+                  "#": 10,
+                  "e": "value"
                 },
-                "right": null
+                "o": null
               },
-              "consequent": {
-                "#": "block",
-                "statements": [
+              "q": {
+                "#": 4,
+                "t": [
                   {
-                    "#": "return",
-                    "expression": "-"
+                    "#": 13,
+                    "i": "-"
                   }
                 ]
               },
-              "alternate": null
+              "r": null
             },
             {
-              "#": "return",
-              "expression": {
-                "#": "identifier",
-                "name": "value"
+              "#": 13,
+              "i": {
+                "#": 10,
+                "e": "value"
               }
             }
           ]
@@ -78,7 +78,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

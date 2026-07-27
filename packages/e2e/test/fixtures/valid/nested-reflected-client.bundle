@@ -1,183 +1,183 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "s",
-            "expression": {
+            "#": 7,
+            "u": "const",
+            "e": "s",
+            "i": {
               "from": {
                 "x": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f1"
+                  "#": 5,
+                  "j": {
+                    "#": 9,
+                    "f": "#f1"
                   }
                 },
                 "y": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f2"
+                  "#": 5,
+                  "j": {
+                    "#": 9,
+                    "f": "#f2"
                   }
                 },
                 "sum": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f3"
+                  "#": 5,
+                  "j": {
+                    "#": 9,
+                    "f": "#f3"
                   },
-                  "args": [
+                  "g": [
                     {
-                      "#": "entry",
-                      "label": "#f1"
+                      "#": 9,
+                      "f": "#f1"
                     },
                     {
-                      "#": "entry",
-                      "label": "#f2"
+                      "#": 9,
+                      "f": "#f2"
                     }
                   ]
                 }
               },
               "to": {
                 "x": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f4"
+                  "#": 5,
+                  "j": {
+                    "#": 9,
+                    "f": "#f4"
                   }
                 },
                 "y": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f5"
+                  "#": 5,
+                  "j": {
+                    "#": 9,
+                    "f": "#f5"
                   }
                 },
                 "sum": {
-                  "#": "call",
-                  "callee": {
-                    "#": "entry",
-                    "label": "#f3"
+                  "#": 5,
+                  "j": {
+                    "#": 9,
+                    "f": "#f3"
                   },
-                  "args": [
+                  "g": [
                     {
-                      "#": "entry",
-                      "label": "#f4"
+                      "#": 9,
+                      "f": "#f4"
                     },
                     {
-                      "#": "entry",
-                      "label": "#f5"
+                      "#": 9,
+                      "f": "#f5"
                     }
                   ]
                 }
               },
               "vertical": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f6"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f6"
                 }
               }
             }
           },
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "rise",
-            "expression": {
-              "#": "binop",
-              "operator": "-",
-              "left": {
-                "#": "property",
-                "object": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "s"
+            "#": 7,
+            "u": "const",
+            "e": "rise",
+            "i": {
+              "#": 3,
+              "m": "-",
+              "n": {
+                "#": 12,
+                "k": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "s"
                   },
-                  "name": "to"
+                  "e": "to"
                 },
-                "name": "y"
+                "e": "y"
               },
-              "right": {
-                "#": "property",
-                "object": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "s"
+              "o": {
+                "#": 12,
+                "k": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "s"
                   },
-                  "name": "from"
+                  "e": "from"
                 },
-                "name": "y"
+                "e": "y"
               }
             }
           },
           {
-            "#": "if",
-            "condition": {
-              "#": "call",
-              "callee": {
-                "#": "property",
-                "object": {
-                  "#": "identifier",
-                  "name": "s"
+            "#": 11,
+            "p": {
+              "#": 5,
+              "j": {
+                "#": 12,
+                "k": {
+                  "#": 10,
+                  "e": "s"
                 },
-                "name": "vertical"
+                "e": "vertical"
               }
             },
-            "consequent": {
-              "#": "block",
-              "statements": [
+            "q": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "return",
-                  "expression": {
-                    "#": "identifier",
-                    "name": "rise"
+                  "#": 13,
+                  "i": {
+                    "#": 10,
+                    "e": "rise"
                   }
                 }
               ]
             },
-            "alternate": null
+            "r": null
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "binop",
-              "operator": "-",
-              "left": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "property",
-                    "object": {
-                      "#": "identifier",
-                      "name": "s"
+            "#": 13,
+            "i": {
+              "#": 3,
+              "m": "-",
+              "n": {
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 12,
+                    "k": {
+                      "#": 10,
+                      "e": "s"
                     },
-                    "name": "to"
+                    "e": "to"
                   },
-                  "name": "sum"
+                  "e": "sum"
                 }
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "property",
-                    "object": {
-                      "#": "identifier",
-                      "name": "s"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 12,
+                    "k": {
+                      "#": 10,
+                      "e": "s"
                     },
-                    "name": "from"
+                    "e": "from"
                   },
-                  "name": "sum"
+                  "e": "sum"
                 }
               }
             }
@@ -186,68 +186,68 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     },
     "#f2": {
-      "#": "arrow",
-      "body": 2
+      "#": 1,
+      "s": 2
     },
     "#f3": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "$0",
         "$1"
       ],
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "binop",
-          "operator": "+",
-          "left": {
-            "#": "call",
-            "callee": {
-              "#": "identifier",
-              "name": "$0"
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 3,
+          "m": "+",
+          "n": {
+            "#": 5,
+            "j": {
+              "#": 10,
+              "e": "$0"
             }
           },
-          "right": {
-            "#": "call",
-            "callee": {
-              "#": "identifier",
-              "name": "$1"
+          "o": {
+            "#": 5,
+            "j": {
+              "#": 10,
+              "e": "$1"
             }
           }
         }
       }
     },
     "#f4": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     },
     "#f5": {
-      "#": "arrow",
-      "body": 8
+      "#": 1,
+      "s": 8
     },
     "#f6": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "binop",
-          "operator": "===",
-          "left": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+      "#": 1,
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 3,
+          "m": "===",
+          "n": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "right": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f4"
+          "o": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f4"
             }
           }
         }
@@ -256,7 +256,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

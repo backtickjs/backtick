@@ -2,32 +2,32 @@
   "functions": {},
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": [
             {
-              "#": "element",
-              "id": "Text",
-              "key": 0,
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "b": 0,
+              "c": {
                 "children": "alpha"
               }
             },
             {
-              "#": "element",
-              "id": "Text",
-              "key": 1,
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "b": 1,
+              "c": {
                 "children": "beta"
               }
             },
             {
-              "#": "element",
-              "id": "Text",
-              "key": 2,
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "b": 2,
+              "c": {
                 "children": "gamma"
               }
             }
@@ -37,7 +37,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t0"
+    "#": 0,
+    "f": "#t0"
   }
 }

@@ -5,6 +5,7 @@ import type {
   AstScriptIdentifier,
   AstScriptStatement,
 } from "../ast/Ast.js";
+import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   BundleBlockNode,
   BundleBody,
@@ -46,9 +47,9 @@ function buildBlock(
     buildStatement(statement, renderSplice, mangle),
   );
   return {
-    "#": "block",
+    "#": NodeKind.Block,
     // An empty container is left out rather than spelled out (see `Bundle.ts`).
-    ...(statements.length === 0 ? {} : { statements }),
+    ...(statements.length === 0 ? {} : { [NodeField.statements]: statements }),
   };
 }
 
@@ -60,45 +61,70 @@ function buildStatement(
   switch (node.kind) {
     case "AstScriptAssignment":
       return {
-        "#": "assignment",
-        name: targetName(node.name, mangle),
-        expression: buildExpression(node.expression, renderSplice, mangle),
+        "#": NodeKind.Assignment,
+        [NodeField.name]: targetName(node.name, mangle),
+        [NodeField.expression]: buildExpression(
+          node.expression,
+          renderSplice,
+          mangle,
+        ),
       };
     case "AstScriptBlock":
       return buildBlock(node, renderSplice, mangle);
     case "AstScriptIf":
       return {
-        "#": "if",
-        condition: buildExpression(node.condition, renderSplice, mangle),
-        consequent: buildStatement(node.consequent, renderSplice, mangle),
-        alternate:
+        "#": NodeKind.If,
+        [NodeField.condition]: buildExpression(
+          node.condition,
+          renderSplice,
+          mangle,
+        ),
+        [NodeField.consequent]: buildStatement(
+          node.consequent,
+          renderSplice,
+          mangle,
+        ),
+        [NodeField.alternate]:
           node.alternate === null
             ? null
             : buildStatement(node.alternate, renderSplice, mangle),
       };
     case "AstScriptReturn":
       return {
-        "#": "return",
-        expression: buildExpression(node.expression, renderSplice, mangle),
+        "#": NodeKind.Return,
+        [NodeField.expression]: buildExpression(
+          node.expression,
+          renderSplice,
+          mangle,
+        ),
       };
     case "AstScriptThrow":
       return {
-        "#": "throw",
-        expression: buildExpression(node.expression, renderSplice, mangle),
+        "#": NodeKind.Throw,
+        [NodeField.expression]: buildExpression(
+          node.expression,
+          renderSplice,
+          mangle,
+        ),
       };
     case "AstScriptTry":
       return {
-        "#": "try",
-        block: buildBlock(node.block, renderSplice, mangle),
-        param: node.param === null ? null : mangle(node.param.bindingKey),
-        handler: buildBlock(node.handler, renderSplice, mangle),
+        "#": NodeKind.Try,
+        [NodeField.block]: buildBlock(node.block, renderSplice, mangle),
+        [NodeField.param]:
+          node.param === null ? null : mangle(node.param.bindingKey),
+        [NodeField.handler]: buildBlock(node.handler, renderSplice, mangle),
       };
     case "AstScriptVariableDeclaration":
       return {
-        "#": "declaration",
-        keyword: node.keyword,
-        name: targetName(node.name, mangle),
-        expression: buildExpression(node.expression, renderSplice, mangle),
+        "#": NodeKind.Declaration,
+        [NodeField.keyword]: node.keyword,
+        [NodeField.name]: targetName(node.name, mangle),
+        [NodeField.expression]: buildExpression(
+          node.expression,
+          renderSplice,
+          mangle,
+        ),
       };
     default:
       // Every remaining kind is an expression, evaluated for its effect.
@@ -119,24 +145,24 @@ function buildExpression(
     case "AstScriptArrow": {
       const params = node.params.map((param) => mangle(param.bindingKey));
       return {
-        "#": "arrow",
-        ...(params.length === 0 ? {} : { params }),
-        body: lowerScriptBody(node.body, renderSplice, mangle),
+        "#": NodeKind.Arrow,
+        ...(params.length === 0 ? {} : { [NodeField.params]: params }),
+        [NodeField.body]: lowerScriptBody(node.body, renderSplice, mangle),
       };
     }
     case "AstScriptBinop":
       return {
-        "#": "binop",
-        operator: node.operator,
-        left: e(node.lhs),
-        right: e(node.rhs),
+        "#": NodeKind.Binop,
+        [NodeField.operator]: node.operator,
+        [NodeField.left]: e(node.lhs),
+        [NodeField.right]: e(node.rhs),
       };
     case "AstScriptTernary":
       return {
-        "#": "ternary",
-        condition: e(node.condition),
-        consequent: e(node.consequent),
-        alternate: e(node.alternate),
+        "#": NodeKind.Ternary,
+        [NodeField.condition]: e(node.condition),
+        [NodeField.consequent]: e(node.consequent),
+        [NodeField.alternate]: e(node.alternate),
       };
     case "AstScriptBoolean":
       return node.value;
@@ -147,14 +173,17 @@ function buildExpression(
       const callee = e(node.callee);
       const args = node.args.map(e);
       return {
-        "#": "call",
-        callee,
-        ...(args.length === 0 ? {} : { args }),
-        optional: node.optional ? true : undefined,
+        "#": NodeKind.Call,
+        [NodeField.callee]: callee,
+        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+        [NodeField.optional]: node.optional ? true : undefined,
       };
     }
     case "AstScriptIdentifier":
-      return { "#": "identifier", name: mangle(node.bindingKey) };
+      return {
+        "#": NodeKind.Identifier,
+        [NodeField.name]: mangle(node.bindingKey),
+      };
     case "AstScriptNew": {
       // Here `new` expands: a spliced class lowers to a function with one
       // hole per constructor parameter (see `lowerSpliceable`), so a
@@ -163,9 +192,9 @@ function buildExpression(
       const callee = e(node.callee);
       const args = node.args.map(e);
       return {
-        "#": "call",
-        callee,
-        ...(args.length === 0 ? {} : { args }),
+        "#": NodeKind.Call,
+        [NodeField.callee]: callee,
+        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
       };
     }
     case "AstScriptNull":
@@ -186,10 +215,10 @@ function buildExpression(
     }
     case "AstScriptPropertyAccess": {
       return {
-        "#": "property",
-        object: e(node.expression),
-        name: node.name,
-        optional: node.optional ? true : undefined,
+        "#": NodeKind.Property,
+        [NodeField.object]: e(node.expression),
+        [NodeField.name]: node.name,
+        [NodeField.optional]: node.optional ? true : undefined,
       };
     }
     case "AstScriptSplice":

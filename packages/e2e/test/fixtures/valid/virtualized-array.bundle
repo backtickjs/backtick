@@ -1,46 +1,46 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "property",
-        "object": {
-          "#": "property",
-          "object": {
+      "#": 1,
+      "s": {
+        "#": 12,
+        "k": {
+          "#": 12,
+          "k": {
             "coins": [
               {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               },
               {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 }
               }
             ]
           },
-          "name": "coins"
+          "e": "coins"
         },
-        "name": "length"
+        "e": "length"
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     },
     "#f2": {
-      "#": "arrow",
-      "body": 2
+      "#": 1,
+      "s": 2
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

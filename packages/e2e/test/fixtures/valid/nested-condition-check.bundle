@@ -1,32 +1,32 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "both": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             true,
             true
           ]
         },
         "one": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             true,
             false
           ]
@@ -34,68 +34,68 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "a",
           "b"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "declaration",
-              "keyword": "const",
-              "name": "keep",
-              "expression": {
-                "#": "arrow",
-                "params": [
+              "#": 7,
+              "u": "const",
+              "e": "keep",
+              "i": {
+                "#": 1,
+                "h": [
                   "on"
                 ],
-                "body": {
-                  "#": "identifier",
-                  "name": "on"
+                "s": {
+                  "#": 10,
+                  "e": "on"
                 }
               }
             },
             {
-              "#": "if",
-              "condition": {
-                "#": "call",
-                "callee": {
-                  "#": "identifier",
-                  "name": "keep"
+              "#": 11,
+              "p": {
+                "#": 5,
+                "j": {
+                  "#": 10,
+                  "e": "keep"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "binop",
-                    "operator": "&&",
-                    "left": {
-                      "#": "identifier",
-                      "name": "a"
+                    "#": 3,
+                    "m": "&&",
+                    "n": {
+                      "#": 10,
+                      "e": "a"
                     },
-                    "right": {
-                      "#": "identifier",
-                      "name": "b"
+                    "o": {
+                      "#": 10,
+                      "e": "b"
                     }
                   }
                 ]
               },
-              "consequent": {
-                "#": "block",
-                "statements": [
+              "q": {
+                "#": 4,
+                "t": [
                   {
-                    "#": "return",
-                    "expression": "kept"
+                    "#": 13,
+                    "i": "kept"
                   }
                 ]
               },
-              "alternate": null
+              "r": null
             },
             {
-              "#": "return",
-              "expression": "dropped"
+              "#": 13,
+              "i": "dropped"
             }
           ]
         }
@@ -104,7 +104,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

@@ -1,13 +1,13 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

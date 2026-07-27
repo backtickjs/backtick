@@ -1,34 +1,34 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "call",
-        "callee": {
-          "#": "entry",
-          "label": "#f1"
+      "#": 1,
+      "s": {
+        "#": 5,
+        "j": {
+          "#": 9,
+          "f": "#f1"
         }
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": 1
+      "#": 1,
+      "s": 1
     }
   },
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": {
-            "#": "element",
-            "id": "Text",
-            "key": {
-              "#": "apply",
-              "label": "#f0"
+            "#": 8,
+            "a": "Text",
+            "b": {
+              "#": 0,
+              "f": "#f0"
             },
-            "props": {
+            "c": {
               "children": "x"
             }
           }
@@ -37,7 +37,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t0"
+    "#": 0,
+    "f": "#t0"
   }
 }

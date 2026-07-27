@@ -1,165 +1,165 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "coins",
-            "expression": [
+            "#": 7,
+            "u": "const",
+            "e": "coins",
+            "i": [
               1,
               2,
               3
             ]
           },
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "four",
-            "expression": 4
+            "#": 7,
+            "u": "const",
+            "e": "four",
+            "i": 4
           },
           {
-            "#": "return",
-            "expression": {
+            "#": 13,
+            "i": {
               "count": {
-                "#": "property",
-                "object": {
-                  "#": "identifier",
-                  "name": "coins"
+                "#": 12,
+                "k": {
+                  "#": 10,
+                  "e": "coins"
                 },
-                "name": "length"
+                "e": "length"
               },
               "all": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "concat"
+                  "e": "concat"
                 },
-                "args": [
+                "g": [
                   [
                     {
-                      "#": "identifier",
-                      "name": "four"
+                      "#": 10,
+                      "e": "four"
                     }
                   ]
                 ]
               },
               "part": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "slice"
+                  "e": "slice"
                 },
-                "args": [
+                "g": [
                   0,
                   2
                 ]
               },
               "where": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "indexOf"
+                  "e": "indexOf"
                 },
-                "args": [
+                "g": [
                   2
                 ]
               },
               "has": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "includes"
+                  "e": "includes"
                 },
-                "args": [
+                "g": [
                   3
                 ]
               },
               "text": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "join"
+                  "e": "join"
                 },
-                "args": [
+                "g": [
                   "-"
                 ]
               },
               "doubled": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "map"
+                  "e": "map"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "arrow",
-                    "params": [
+                    "#": 1,
+                    "h": [
                       "n"
                     ],
-                    "body": {
-                      "#": "binop",
-                      "operator": "*",
-                      "left": {
-                        "#": "identifier",
-                        "name": "n"
+                    "s": {
+                      "#": 3,
+                      "m": "*",
+                      "n": {
+                        "#": 10,
+                        "e": "n"
                       },
-                      "right": 2
+                      "o": 2
                     }
                   }
                 ]
               },
               "small": {
-                "#": "call",
-                "callee": {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "coins"
+                "#": 5,
+                "j": {
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "coins"
                   },
-                  "name": "filter"
+                  "e": "filter"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "arrow",
-                    "params": [
+                    "#": 1,
+                    "h": [
                       "n2"
                     ],
-                    "body": {
-                      "#": "binop",
-                      "operator": "<",
-                      "left": {
-                        "#": "identifier",
-                        "name": "n2"
+                    "s": {
+                      "#": 3,
+                      "m": "<",
+                      "n": {
+                        "#": 10,
+                        "e": "n2"
                       },
-                      "right": 3
+                      "o": 3
                     }
                   }
                 ]
@@ -172,7 +172,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

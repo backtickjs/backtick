@@ -1,43 +1,43 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "s0"
       ],
-      "body": {
-        "#": "call",
-        "callee": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "s0"
+      "s": {
+        "#": 5,
+        "j": {
+          "#": 12,
+          "k": {
+            "#": 10,
+            "e": "s0"
           },
-          "name": "read"
+          "e": "read"
         }
       }
     }
   },
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": {
-            "#": "element",
-            "id": "Text",
-            "key": {
-              "#": "apply",
-              "label": "#f0",
-              "args": [
+            "#": 8,
+            "a": "Text",
+            "b": {
+              "#": 0,
+              "f": "#f0",
+              "g": [
                 {
-                  "#": "slot",
-                  "index": 0
+                  "#": 14,
+                  "d": 0
                 }
               ]
             },
-            "props": {
+            "c": {
               "children": "press"
             }
           }
@@ -45,23 +45,23 @@
       }
     },
     "#t1": {
-      "content": {
-        "#": "apply",
-        "label": "#t0",
-        "args": [
+      "y": {
+        "#": 0,
+        "f": "#t0",
+        "g": [
           {
-            "#": "cell",
-            "name": "s0"
+            "#": 6,
+            "e": "s0"
           }
         ]
       },
-      "state": {
+      "z": {
         "s0": 16
       }
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t1"
+    "#": 0,
+    "f": "#t1"
   }
 }

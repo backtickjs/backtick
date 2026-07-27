@@ -1,12 +1,12 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "call",
-        "callee": {
-          "#": "property",
-          "object": [
+      "#": 1,
+      "s": {
+        "#": 5,
+        "j": {
+          "#": 12,
+          "k": [
             {
               "id": "ord-1000",
               "customer": {
@@ -98,24 +98,24 @@
               "total": 49.23
             }
           ],
-          "name": "map"
+          "e": "map"
         },
-        "args": [
+        "g": [
           {
-            "#": "arrow",
-            "params": [
+            "#": 1,
+            "h": [
               "order"
             ],
-            "body": {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#t1"
+            "s": {
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#t1"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "identifier",
-                  "name": "order"
+                  "#": 10,
+                  "e": "order"
                 }
               ]
             }
@@ -124,114 +124,114 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "order"
       ],
-      "body": {
-        "#": "property",
-        "object": {
-          "#": "identifier",
-          "name": "order"
+      "s": {
+        "#": 12,
+        "k": {
+          "#": 10,
+          "e": "order"
         },
-        "name": "id"
+        "e": "id"
       }
     },
     "#f2": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "order"
       ],
-      "body": {
-        "#": "binop",
-        "operator": "+",
-        "left": {
-          "#": "binop",
-          "operator": "+",
-          "left": "https://img.example.com/",
-          "right": {
-            "#": "property",
-            "object": {
-              "#": "identifier",
-              "name": "order"
+      "s": {
+        "#": 3,
+        "m": "+",
+        "n": {
+          "#": 3,
+          "m": "+",
+          "n": "https://img.example.com/",
+          "o": {
+            "#": 12,
+            "k": {
+              "#": 10,
+              "e": "order"
             },
-            "name": "id"
+            "e": "id"
           }
         },
-        "right": ".png"
+        "o": ".png"
       }
     },
     "#f3": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "order"
       ],
-      "body": {
-        "#": "property",
-        "object": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "order"
+      "s": {
+        "#": 12,
+        "k": {
+          "#": 12,
+          "k": {
+            "#": 10,
+            "e": "order"
           },
-          "name": "customer"
+          "e": "customer"
         },
-        "name": "name"
+        "e": "name"
       }
     },
     "#f4": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "order"
       ],
-      "body": {
-        "#": "property",
-        "object": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "order"
+      "s": {
+        "#": 12,
+        "k": {
+          "#": 12,
+          "k": {
+            "#": 10,
+            "e": "order"
           },
-          "name": "customer"
+          "e": "customer"
         },
-        "name": "city"
+        "e": "city"
       }
     },
     "#f5": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "order"
       ],
-      "body": {
-        "#": "call",
-        "callee": {
-          "#": "property",
-          "object": {
-            "#": "property",
-            "object": {
-              "#": "identifier",
-              "name": "order"
+      "s": {
+        "#": 5,
+        "j": {
+          "#": 12,
+          "k": {
+            "#": 12,
+            "k": {
+              "#": 10,
+              "e": "order"
             },
-            "name": "items"
+            "e": "items"
           },
-          "name": "map"
+          "e": "map"
         },
-        "args": [
+        "g": [
           {
-            "#": "arrow",
-            "params": [
+            "#": 1,
+            "h": [
               "item"
             ],
-            "body": {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#t0"
+            "s": {
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#t0"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "identifier",
-                  "name": "item"
+                  "#": 10,
+                  "e": "item"
                 }
               ]
             }
@@ -240,93 +240,93 @@
       }
     },
     "#f6": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "item"
       ],
-      "body": {
-        "#": "property",
-        "object": {
-          "#": "identifier",
-          "name": "item"
+      "s": {
+        "#": 12,
+        "k": {
+          "#": 10,
+          "e": "item"
         },
-        "name": "sku"
+        "e": "sku"
       }
     },
     "#f7": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "item"
       ],
-      "body": {
-        "#": "binop",
-        "operator": "+",
-        "left": {
-          "#": "binop",
-          "operator": "+",
-          "left": {
-            "#": "property",
-            "object": {
-              "#": "identifier",
-              "name": "item"
+      "s": {
+        "#": 3,
+        "m": "+",
+        "n": {
+          "#": 3,
+          "m": "+",
+          "n": {
+            "#": 12,
+            "k": {
+              "#": 10,
+              "e": "item"
             },
-            "name": "sku"
+            "e": "sku"
           },
-          "right": " x"
+          "o": " x"
         },
-        "right": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "item"
+        "o": {
+          "#": 12,
+          "k": {
+            "#": 10,
+            "e": "item"
           },
-          "name": "qty"
+          "e": "qty"
         }
       }
     },
     "#f8": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "order"
       ],
-      "body": {
-        "#": "binop",
-        "operator": "+",
-        "left": "$",
-        "right": {
-          "#": "property",
-          "object": {
-            "#": "identifier",
-            "name": "order"
+      "s": {
+        "#": 3,
+        "m": "+",
+        "n": "$",
+        "o": {
+          "#": 12,
+          "k": {
+            "#": 10,
+            "e": "order"
           },
-          "name": "total"
+          "e": "total"
         }
       }
     }
   },
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "key": {
-          "#": "apply",
-          "label": "#f6",
-          "args": [
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "b": {
+          "#": 0,
+          "f": "#f6",
+          "g": [
             {
-              "#": "slot",
-              "index": 0
+              "#": 14,
+              "d": 0
             }
           ]
         },
-        "props": {
+        "c": {
           "children": {
-            "#": "apply",
-            "label": "#f7",
-            "args": [
+            "#": 0,
+            "f": "#f7",
+            "g": [
               {
-                "#": "slot",
-                "index": 0
+                "#": 14,
+                "d": 0
               }
             ]
           }
@@ -334,33 +334,33 @@
       }
     },
     "#t1": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "key": {
-          "#": "apply",
-          "label": "#f1",
-          "args": [
+      "y": {
+        "#": 8,
+        "a": "View",
+        "b": {
+          "#": 0,
+          "f": "#f1",
+          "g": [
             {
-              "#": "slot",
-              "index": 0
+              "#": 14,
+              "d": 0
             }
           ]
         },
-        "props": {
+        "c": {
           "children": [
             {
-              "#": "element",
-              "id": "Image",
-              "props": {
+              "#": 8,
+              "a": "Image",
+              "c": {
                 "source": {
                   "uri": {
-                    "#": "apply",
-                    "label": "#f2",
-                    "args": [
+                    "#": 0,
+                    "f": "#f2",
+                    "g": [
                       {
-                        "#": "slot",
-                        "index": 0
+                        "#": 14,
+                        "d": 0
                       }
                     ]
                   }
@@ -368,58 +368,58 @@
               }
             },
             {
-              "#": "element",
-              "id": "Text",
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "c": {
                 "children": {
-                  "#": "apply",
-                  "label": "#f3",
-                  "args": [
+                  "#": 0,
+                  "f": "#f3",
+                  "g": [
                     {
-                      "#": "slot",
-                      "index": 0
+                      "#": 14,
+                      "d": 0
                     }
                   ]
                 }
               }
             },
             {
-              "#": "element",
-              "id": "Text",
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "c": {
                 "children": {
-                  "#": "apply",
-                  "label": "#f4",
-                  "args": [
+                  "#": 0,
+                  "f": "#f4",
+                  "g": [
                     {
-                      "#": "slot",
-                      "index": 0
+                      "#": 14,
+                      "d": 0
                     }
                   ]
                 }
               }
             },
             {
-              "#": "apply",
-              "label": "#f5",
-              "args": [
+              "#": 0,
+              "f": "#f5",
+              "g": [
                 {
-                  "#": "slot",
-                  "index": 0
+                  "#": 14,
+                  "d": 0
                 }
               ]
             },
             {
-              "#": "element",
-              "id": "Text",
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "c": {
                 "children": {
-                  "#": "apply",
-                  "label": "#f8",
-                  "args": [
+                  "#": 0,
+                  "f": "#f8",
+                  "g": [
                     {
-                      "#": "slot",
-                      "index": 0
+                      "#": 14,
+                      "d": 0
                     }
                   ]
                 }
@@ -430,20 +430,20 @@
       }
     },
     "#t2": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": {
-            "#": "apply",
-            "label": "#f0"
+            "#": 0,
+            "f": "#f0"
           }
         }
       }
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t2"
+    "#": 0,
+    "f": "#t2"
   }
 }

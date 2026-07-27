@@ -1,3 +1,4 @@
+export { NodeKind, NodeField } from "./bundle/Bundle.js";
 export type {
   Bundle,
   BundleApply,

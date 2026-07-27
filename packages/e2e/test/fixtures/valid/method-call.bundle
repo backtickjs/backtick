@@ -1,38 +1,38 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "greeting",
-            "expression": "Hello"
+            "#": 7,
+            "u": "const",
+            "e": "greeting",
+            "i": "Hello"
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "call",
-              "callee": {
-                "#": "property",
-                "object": {
-                  "#": "call",
-                  "callee": {
-                    "#": "property",
-                    "object": {
-                      "#": "identifier",
-                      "name": "greeting"
+            "#": 13,
+            "i": {
+              "#": 5,
+              "j": {
+                "#": 12,
+                "k": {
+                  "#": 5,
+                  "j": {
+                    "#": 12,
+                    "k": {
+                      "#": 10,
+                      "e": "greeting"
                     },
-                    "name": "concat"
+                    "e": "concat"
                   },
-                  "args": [
+                  "g": [
                     ", ",
                     "World"
                   ]
                 },
-                "name": "toUpperCase"
+                "e": "toUpperCase"
               }
             }
           }
@@ -42,7 +42,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

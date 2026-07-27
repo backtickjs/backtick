@@ -1,28 +1,28 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "try",
-            "block": {
-              "#": "block",
-              "statements": [
+            "#": 18,
+            "v": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "throw",
-                  "expression": "boom"
+                  "#": 16,
+                  "i": "boom"
                 }
               ]
             },
-            "param": null,
-            "handler": {
-              "#": "block",
-              "statements": [
+            "x": null,
+            "w": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "return",
-                  "expression": "caught"
+                  "#": 13,
+                  "i": "caught"
                 }
               ]
             }
@@ -33,7 +33,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

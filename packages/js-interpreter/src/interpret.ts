@@ -1,3 +1,4 @@
+import { NodeKind, NodeField } from "@backtickjs/core";
 import type {
   Bundle,
   BundleApply,
@@ -80,7 +81,7 @@ function instantiate(
   };
   // A cell's initial is evaluated in no instance: it can't read a slot or
   // another cell, so nothing is in scope for it.
-  for (const [name, initial] of Object.entries(tree.state ?? {})) {
+  for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
     instance.cells.set(name, evaluateExpr(bundle, initial, []));
   }
   render(instance);
@@ -104,7 +105,7 @@ function render(instance: Instance): Element | null {
     () =>
       evaluateExpr(
         instance.bundle,
-        instance.tree.content,
+        instance.tree[NodeField.content],
         instance.slots,
         null,
         instance,
@@ -205,18 +206,19 @@ function evaluateElement(
 ): Element {
   // An absent key is no key, exactly as a null one was — the wire omits it
   // rather than spelling it out.
+  const elementKey = element[NodeField.key];
   const key =
-    element.key === undefined
+    elementKey === undefined
       ? null
-      : (evaluateExpr(bundle, element.key, slots, null, instance) as
+      : (evaluateExpr(bundle, elementKey, slots, null, instance) as
           | string
           | number
           | null);
   const props: { [prop: string]: Value } = {};
-  for (const [prop, expr] of Object.entries(element.props ?? {})) {
+  for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
     props[prop] = evaluateExpr(bundle, expr, slots, null, instance);
   }
-  return new Element(element.id, key, props);
+  return new Element(element[NodeField.id], key, props);
 }
 
 // A tree expression (also the root): plain JSON carries itself; the
@@ -249,35 +251,37 @@ function evaluateExpr(
       | BundleThunk
       | BundleElement;
     switch (form["#"]) {
-      case "slot": {
-        return slots[form.index];
+      case NodeKind.Slot: {
+        return slots[form[NodeField.index]];
       }
-      case "cell": {
+      case NodeKind.Cell: {
         // A cell is declared by the enclosing entry, so it is only meaningful
         // inside an instance of it.
         if (instance === null) {
-          throw new Error(`no instance to resolve state cell ${form.name}`);
+          throw new Error(
+            `no instance to resolve state cell ${form[NodeField.name]}`,
+          );
         }
-        return cellHandle(instance, form.name);
+        return cellHandle(instance, form[NodeField.name]);
       }
-      case "identifier": {
+      case NodeKind.Identifier: {
         // A parameter of an enclosing thunk.
-        const frame = lookup(env, form.name);
+        const frame = lookup(env, form[NodeField.name]);
         if (frame === null) {
-          throw new Error(`unknown identifier ${form.name}`);
+          throw new Error(`unknown identifier ${form[NodeField.name]}`);
         }
-        return frame.bindings.get(form.name) ?? null;
+        return frame.bindings.get(form[NodeField.name]) ?? null;
       }
-      case "apply": {
-        const args = (form.args ?? []).map((arg) =>
+      case NodeKind.Apply: {
+        const args = (form[NodeField.args] ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
         // A nested instance persists across the parent's re-renders, keyed by
         // this node — its position in the parent.
-        if (instance !== null && form.label.startsWith("#t")) {
-          const tree = bundle.trees[form.label as TreeLabel];
+        if (instance !== null && form[NodeField.label].startsWith("#t")) {
+          const tree = bundle.trees[form[NodeField.label] as TreeLabel];
           if (tree === undefined) {
-            throw new Error(`unknown tree entry ${form.label}`);
+            throw new Error(`unknown tree entry ${form[NodeField.label]}`);
           }
           const child = instance.children.get(form);
           if (child !== undefined) {
@@ -288,13 +292,19 @@ function evaluateExpr(
           instance.children.set(form, created);
           return created.element;
         }
-        return entryFunction(bundle, form.label)(...args);
+        return entryFunction(bundle, form[NodeField.label])(...args);
       }
-      case "thunk": {
-        const params = form.params;
+      case NodeKind.Thunk: {
+        const params = form[NodeField.params];
         if (!params || params.length === 0) {
           return () =>
-            evaluateExpr(bundle, form.expression, slots, env, instance);
+            evaluateExpr(
+              bundle,
+              form[NodeField.expression],
+              slots,
+              env,
+              instance,
+            );
         }
         // The hole call supplies the entry-scoped bindings the splice
         // captures, one value per parameter, over the enclosing frame.
@@ -303,10 +313,16 @@ function evaluateExpr(
           params.forEach((param, index) => {
             frame.bindings.set(param, args[index]);
           });
-          return evaluateExpr(bundle, form.expression, slots, frame, instance);
+          return evaluateExpr(
+            bundle,
+            form[NodeField.expression],
+            slots,
+            frame,
+            instance,
+          );
         };
       }
-      case "element": {
+      case NodeKind.Element: {
         return evaluateElement(bundle, form, slots, instance);
       }
     }
@@ -323,7 +339,7 @@ function evaluateExpr(
 // so the node reading is unambiguous.
 function isNode(
   node: BundleStatementNode,
-): node is Extract<BundleStatementNode, { "#": string }> {
+): node is Extract<BundleStatementNode, { "#": NodeKind }> {
   return (
     typeof node === "object" &&
     node !== null &&
@@ -354,16 +370,16 @@ function executeStatement(
     return advanced;
   }
   switch (node["#"]) {
-    case "block": {
+    case NodeKind.Block: {
       const frame: Scope = { parent: scope, bindings: new Map() };
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward.
-      for (const statement of node.statements ?? []) {
-        if (isNode(statement) && statement["#"] === "declaration") {
-          frame.bindings.set(statement.name, null);
+      for (const statement of node[NodeField.statements] ?? []) {
+        if (isNode(statement) && statement["#"] === NodeKind.Declaration) {
+          frame.bindings.set(statement[NodeField.name], null);
         }
       }
-      for (const statement of node.statements ?? []) {
+      for (const statement of node[NodeField.statements] ?? []) {
         const completion = executeStatement(bundle, statement, frame);
         if (completion.returned) {
           return completion;
@@ -371,51 +387,57 @@ function executeStatement(
       }
       return advanced;
     }
-    case "declaration": {
+    case NodeKind.Declaration: {
       scope.bindings.set(
-        node.name,
-        evaluateNode(bundle, node.expression, scope),
+        node[NodeField.name],
+        evaluateNode(bundle, node[NodeField.expression], scope),
       );
       return advanced;
     }
-    case "assignment": {
-      const value = evaluateNode(bundle, node.expression, scope);
-      const frame = lookup(scope, node.name);
+    case NodeKind.Assignment: {
+      const value = evaluateNode(bundle, node[NodeField.expression], scope);
+      const frame = lookup(scope, node[NodeField.name]);
       if (frame === null) {
-        throw new Error(`unknown assignment target ${node.name}`);
+        throw new Error(`unknown assignment target ${node[NodeField.name]}`);
       }
-      frame.bindings.set(node.name, value);
+      frame.bindings.set(node[NodeField.name], value);
       return advanced;
     }
-    case "if": {
-      if (condition(evaluateNode(bundle, node.condition, scope), "an `if`")) {
-        return executeStatement(bundle, node.consequent, scope);
+    case NodeKind.If: {
+      if (
+        condition(
+          evaluateNode(bundle, node[NodeField.condition], scope),
+          "an `if`",
+        )
+      ) {
+        return executeStatement(bundle, node[NodeField.consequent], scope);
       }
-      if (node.alternate !== null) {
-        return executeStatement(bundle, node.alternate, scope);
+      if (node[NodeField.alternate] !== null) {
+        return executeStatement(bundle, node[NodeField.alternate], scope);
       }
       return advanced;
     }
-    case "return": {
+    case NodeKind.Return: {
       return {
         returned: true,
-        value: evaluateNode(bundle, node.expression, scope),
+        value: evaluateNode(bundle, node[NodeField.expression], scope),
       };
     }
-    case "throw": {
-      throw evaluateNode(bundle, node.expression, scope);
+    case NodeKind.Throw: {
+      throw evaluateNode(bundle, node[NodeField.expression], scope);
     }
-    case "try": {
+    case NodeKind.Try: {
       try {
-        return executeStatement(bundle, node.block, scope);
+        return executeStatement(bundle, node[NodeField.block], scope);
       } catch (thrown) {
         // The catch binding scopes over the handler only, like an arrow
         // parameter over its body.
         const frame: Scope = { parent: scope, bindings: new Map() };
-        if (node.param !== null) {
-          frame.bindings.set(node.param, thrown as Value);
+        const caught = node[NodeField.param];
+        if (caught !== null) {
+          frame.bindings.set(caught, thrown as Value);
         }
-        return executeStatement(bundle, node.handler, frame);
+        return executeStatement(bundle, node[NodeField.handler], frame);
       }
     }
     default: {
@@ -448,38 +470,43 @@ function evaluateNode(
     return object;
   }
   switch (node["#"]) {
-    case "identifier": {
-      const frame = lookup(scope, node.name);
+    case NodeKind.Identifier: {
+      const frame = lookup(scope, node[NodeField.name]);
       if (frame === null) {
-        throw new Error(`unknown identifier ${node.name}`);
+        throw new Error(`unknown identifier ${node[NodeField.name]}`);
       }
-      return frame.bindings.get(node.name) ?? null;
+      return frame.bindings.get(node[NodeField.name]) ?? null;
     }
-    case "entry": {
-      return entryFunction(bundle, node.label);
+    case NodeKind.Entry: {
+      return entryFunction(bundle, node[NodeField.label]);
     }
-    case "call": {
+    case NodeKind.Call: {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
       // The receiver evaluates before the arguments; an optional receiver
       // (`a?.b(…)`) short-circuits a null object to null, arguments
       // unevaluated.
-      if (isNode(node.callee) && node.callee["#"] === "property") {
-        const object = evaluateNode(bundle, node.callee.object, scope) as {
+      const callee = node[NodeField.callee];
+      if (isNode(callee) && callee["#"] === NodeKind.Property) {
+        const object = evaluateNode(
+          bundle,
+          callee[NodeField.object],
+          scope,
+        ) as {
           [name: string]: Value;
         };
-        if (node.callee.optional && object === null) {
+        if (callee[NodeField.optional] && object === null) {
           return null;
         }
-        const method = object[node.callee.name];
+        const method = object[callee[NodeField.name]];
         // An optional call (`a.b?.(…)`) short-circuits a null method the
         // same way, arguments unevaluated.
-        if (node.optional && method === null) {
+        if (node[NodeField.optional] && method === null) {
           return null;
         }
         if (typeof method !== "function") {
-          throw new Error(`${node.callee.name} is not a function`);
+          throw new Error(`${callee[NodeField.name]} is not a function`);
         }
-        const args = (node.args ?? []).map((arg) =>
+        const args = (node[NodeField.args] ?? []).map((arg) =>
           evaluateNode(bundle, arg, scope),
         );
         return method.apply(object, args);
@@ -487,54 +514,60 @@ function evaluateNode(
       // The callee evaluates before the arguments; an optional call
       // (`cb?.(…)`) short-circuits a null callee to null, arguments
       // unevaluated.
-      const callee = evaluateNode(bundle, node.callee, scope);
-      if (node.optional && callee === null) {
+      const value = evaluateNode(bundle, callee, scope);
+      if (node[NodeField.optional] && value === null) {
         return null;
       }
-      if (typeof callee !== "function") {
+      if (typeof value !== "function") {
         throw new Error("callee is not a function");
       }
-      const args = (node.args ?? []).map((arg) =>
+      const args = (node[NodeField.args] ?? []).map((arg) =>
         evaluateNode(bundle, arg, scope),
       );
-      return callee(...args);
+      return value(...args);
     }
-    case "property": {
-      const object = evaluateNode(bundle, node.object, scope) as {
+    case NodeKind.Property: {
+      const object = evaluateNode(bundle, node[NodeField.object], scope) as {
         [name: string]: Value;
       };
-      if (node.optional && object === null) {
+      if (node[NodeField.optional] && object === null) {
         return null;
       }
       // An absent member reads as null — the language's absent value;
       // `undefined` never arises.
-      return object[node.name] ?? null;
+      return object[node[NodeField.name]] ?? null;
     }
-    case "binop": {
-      return evaluateBinop(bundle, node.operator, node.left, node.right, scope);
+    case NodeKind.Binop: {
+      return evaluateBinop(
+        bundle,
+        node[NodeField.operator],
+        node[NodeField.left],
+        node[NodeField.right],
+        scope,
+      );
     }
-    case "ternary": {
+    case NodeKind.Ternary: {
       // Only the taken branch evaluates.
       const taken = condition(
-        evaluateNode(bundle, node.condition, scope),
+        evaluateNode(bundle, node[NodeField.condition], scope),
         "a ternary condition",
       );
       if (taken) {
-        return evaluateNode(bundle, node.consequent, scope);
+        return evaluateNode(bundle, node[NodeField.consequent], scope);
       }
-      return evaluateNode(bundle, node.alternate, scope);
+      return evaluateNode(bundle, node[NodeField.alternate], scope);
     }
-    case "arrow": {
+    case NodeKind.Arrow: {
       return (...args: Value[]) => {
         const frame: Scope = { parent: scope, bindings: new Map() };
         // A missing argument binds as null — the language's absent value;
         // `undefined` never arises (an omitted optional parameter reads
         // as null).
-        (node.params ?? []).forEach((param, index) => {
+        (node[NodeField.params] ?? []).forEach((param, index) => {
           frame.bindings.set(param, index < args.length ? args[index] : null);
         });
-        const body = node.body;
-        if (isNode(body) && body["#"] === "block") {
+        const body = node[NodeField.body];
+        if (isNode(body) && body["#"] === NodeKind.Block) {
           const completion = executeStatement(bundle, body, frame);
           return completion.returned ? completion.value : null;
         }

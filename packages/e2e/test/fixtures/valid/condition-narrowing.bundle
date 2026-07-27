@@ -1,60 +1,60 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "missing": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             null,
             true
           ]
         },
         "loud": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             "!hi",
             true
           ]
         },
         "quiet": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             "!hi",
             false
           ]
         },
         "plain": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             "zz",
             false
           ]
@@ -62,141 +62,141 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "text",
           "upper"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "if",
-              "condition": {
-                "#": "binop",
-                "operator": "&&",
-                "left": {
-                  "#": "identifier",
-                  "name": "upper"
+              "#": 11,
+              "p": {
+                "#": 3,
+                "m": "&&",
+                "n": {
+                  "#": 10,
+                  "e": "upper"
                 },
-                "right": {
-                  "#": "binop",
-                  "operator": "!==",
-                  "left": {
-                    "#": "identifier",
-                    "name": "text"
+                "o": {
+                  "#": 3,
+                  "m": "!==",
+                  "n": {
+                    "#": 10,
+                    "e": "text"
                   },
-                  "right": null
+                  "o": null
                 }
               },
-              "consequent": {
-                "#": "block",
-                "statements": [
+              "q": {
+                "#": 4,
+                "t": [
                   {
-                    "#": "return",
-                    "expression": {
-                      "#": "call",
-                      "callee": {
-                        "#": "property",
-                        "object": {
-                          "#": "identifier",
-                          "name": "text"
+                    "#": 13,
+                    "i": {
+                      "#": 5,
+                      "j": {
+                        "#": 12,
+                        "k": {
+                          "#": 10,
+                          "e": "text"
                         },
-                        "name": "toUpperCase"
+                        "e": "toUpperCase"
                       }
                     }
                   }
                 ]
               },
-              "alternate": null
+              "r": null
             },
             {
-              "#": "if",
-              "condition": {
-                "#": "binop",
-                "operator": "&&",
-                "left": {
-                  "#": "binop",
-                  "operator": "&&",
-                  "left": {
-                    "#": "call",
-                    "callee": {
-                      "#": "entry",
-                      "label": "#f2"
+              "#": 11,
+              "p": {
+                "#": 3,
+                "m": "&&",
+                "n": {
+                  "#": 3,
+                  "m": "&&",
+                  "n": {
+                    "#": 5,
+                    "j": {
+                      "#": 9,
+                      "f": "#f2"
                     }
                   },
-                  "right": {
-                    "#": "binop",
-                    "operator": "!==",
-                    "left": {
-                      "#": "identifier",
-                      "name": "text"
+                  "o": {
+                    "#": 3,
+                    "m": "!==",
+                    "n": {
+                      "#": 10,
+                      "e": "text"
                     },
-                    "right": null
+                    "o": null
                   }
                 },
-                "right": {
-                  "#": "binop",
-                  "operator": "===",
-                  "left": {
-                    "#": "call",
-                    "callee": {
-                      "#": "property",
-                      "object": {
-                        "#": "identifier",
-                        "name": "text"
+                "o": {
+                  "#": 3,
+                  "m": "===",
+                  "n": {
+                    "#": 5,
+                    "j": {
+                      "#": 12,
+                      "k": {
+                        "#": 10,
+                        "e": "text"
                       },
-                      "name": "charAt"
+                      "e": "charAt"
                     },
-                    "args": [
+                    "g": [
                       0
                     ]
                   },
-                  "right": "!"
+                  "o": "!"
                 }
               },
-              "consequent": {
-                "#": "block",
-                "statements": [
+              "q": {
+                "#": 4,
+                "t": [
                   {
-                    "#": "return",
-                    "expression": {
-                      "#": "call",
-                      "callee": {
-                        "#": "property",
-                        "object": {
-                          "#": "identifier",
-                          "name": "text"
+                    "#": 13,
+                    "i": {
+                      "#": 5,
+                      "j": {
+                        "#": 12,
+                        "k": {
+                          "#": 10,
+                          "e": "text"
                         },
-                        "name": "concat"
+                        "e": "concat"
                       },
-                      "args": [
+                      "g": [
                         "?"
                       ]
                     }
                   }
                 ]
               },
-              "alternate": null
+              "r": null
             },
             {
-              "#": "return",
-              "expression": "none"
+              "#": 13,
+              "i": "none"
             }
           ]
         }
       }
     },
     "#f2": {
-      "#": "arrow",
-      "body": true
+      "#": 1,
+      "s": true
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

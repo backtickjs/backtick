@@ -1,30 +1,30 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "block",
-          "statements": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "declaration",
-              "keyword": "const",
-              "name": "x",
-              "expression": 1
+              "#": 7,
+              "u": "const",
+              "e": "x",
+              "i": 1
             },
             {
-              "#": "return",
-              "expression": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#t0"
+              "#": 13,
+              "i": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#t0"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "identifier",
-                    "name": "x"
+                    "#": 10,
+                    "e": "x"
                   }
                 ]
               }
@@ -34,32 +34,32 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "x"
       ],
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "identifier",
-          "name": "x"
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 10,
+          "e": "x"
         }
       }
     }
   },
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "c": {
           "onPress": {
-            "#": "apply",
-            "label": "#f1",
-            "args": [
+            "#": 0,
+            "f": "#f1",
+            "g": [
               {
-                "#": "slot",
-                "index": 0
+                "#": 14,
+                "d": 0
               }
             ]
           }
@@ -68,7 +68,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

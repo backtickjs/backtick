@@ -1,46 +1,46 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "button",
-            "expression": {
+            "#": 7,
+            "u": "const",
+            "e": "button",
+            "i": {
               "label": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f1"
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f1"
                 }
               }
             }
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "property",
-              "object": {
-                "#": "identifier",
-                "name": "button"
+            "#": 13,
+            "i": {
+              "#": 12,
+              "k": {
+                "#": 10,
+                "e": "button"
               },
-              "name": "label"
+              "e": "label"
             }
           }
         ]
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": "OK"
+      "#": 1,
+      "s": "OK"
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

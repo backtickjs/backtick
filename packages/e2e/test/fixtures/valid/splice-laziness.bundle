@@ -1,104 +1,104 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "taken": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             },
-            "args": [
+            "g": [
               {
-                "#": "entry",
-                "label": "#f2"
+                "#": 9,
+                "f": "#f2"
               }
             ]
           },
-          "args": [
+          "g": [
             true
           ]
         },
         "skipped": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             },
-            "args": [
+            "g": [
               {
-                "#": "entry",
-                "label": "#f3"
+                "#": 9,
+                "f": "#f3"
               }
             ]
           },
-          "args": [
+          "g": [
             false
           ]
         }
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "$0"
       ],
-      "body": {
-        "#": "arrow",
-        "params": [
+      "s": {
+        "#": 1,
+        "h": [
           "flag"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "if",
-              "condition": {
-                "#": "identifier",
-                "name": "flag"
+              "#": 11,
+              "p": {
+                "#": 10,
+                "e": "flag"
               },
-              "consequent": {
-                "#": "block",
-                "statements": [
+              "q": {
+                "#": 4,
+                "t": [
                   {
-                    "#": "return",
-                    "expression": {
-                      "#": "call",
-                      "callee": {
-                        "#": "identifier",
-                        "name": "$0"
+                    "#": 13,
+                    "i": {
+                      "#": 5,
+                      "j": {
+                        "#": 10,
+                        "e": "$0"
                       }
                     }
                   }
                 ]
               },
-              "alternate": null
+              "r": null
             },
             {
-              "#": "return",
-              "expression": "skipped"
+              "#": 13,
+              "i": "skipped"
             }
           ]
         }
       }
     },
     "#f2": {
-      "#": "arrow",
-      "body": "evaluated"
+      "#": 1,
+      "s": "evaluated"
     },
     "#f3": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "throw",
-            "expression": "the guarded fragment must never evaluate"
+            "#": 16,
+            "i": "the guarded fragment must never evaluate"
           }
         ]
       }
@@ -106,7 +106,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

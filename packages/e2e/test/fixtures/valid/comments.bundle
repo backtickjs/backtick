@@ -1,41 +1,41 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "count",
-            "expression": 1
+            "#": 7,
+            "u": "const",
+            "e": "count",
+            "i": 1
           },
           {
-            "#": "if",
-            "condition": {
-              "#": "binop",
-              "operator": "===",
-              "left": {
-                "#": "identifier",
-                "name": "count"
+            "#": 11,
+            "p": {
+              "#": 3,
+              "m": "===",
+              "n": {
+                "#": 10,
+                "e": "count"
               },
-              "right": 1
+              "o": 1
             },
-            "consequent": {
-              "#": "block",
-              "statements": [
+            "q": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "return",
-                  "expression": "one"
+                  "#": 13,
+                  "i": "one"
                 }
               ]
             },
-            "alternate": null
+            "r": null
           },
           {
-            "#": "return",
-            "expression": "many"
+            "#": 13,
+            "i": "many"
           }
         ]
       }
@@ -43,7 +43,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

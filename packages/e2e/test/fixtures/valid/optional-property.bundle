@@ -1,18 +1,18 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "present": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             {
               "label": "a",
               "inner": {
@@ -22,15 +22,15 @@
           ]
         },
         "partial": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             {
               "label": "b",
               "inner": {}
@@ -38,15 +38,15 @@
           ]
         },
         "omitted": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             {
               "label": "c"
             }
@@ -55,43 +55,43 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "o"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "return",
-              "expression": [
+              "#": 13,
+              "i": [
                 {
-                  "#": "property",
-                  "object": {
-                    "#": "identifier",
-                    "name": "o"
+                  "#": 12,
+                  "k": {
+                    "#": 10,
+                    "e": "o"
                   },
-                  "name": "label"
+                  "e": "label"
                 },
                 {
-                  "#": "binop",
-                  "operator": "??",
-                  "left": {
-                    "#": "property",
-                    "object": {
-                      "#": "property",
-                      "object": {
-                        "#": "identifier",
-                        "name": "o"
+                  "#": 3,
+                  "m": "??",
+                  "n": {
+                    "#": 12,
+                    "k": {
+                      "#": 12,
+                      "k": {
+                        "#": 10,
+                        "e": "o"
                       },
-                      "name": "inner"
+                      "e": "inner"
                     },
-                    "name": "z",
-                    "optional": true
+                    "e": "z",
+                    "l": true
                   },
-                  "right": 0
+                  "o": 0
                 }
               ]
             }
@@ -102,7 +102,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

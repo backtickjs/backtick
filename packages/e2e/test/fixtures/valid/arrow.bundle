@@ -1,42 +1,42 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "base",
-            "expression": 10
+            "#": 7,
+            "u": "const",
+            "e": "base",
+            "i": 10
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "arrow",
-              "params": [
+            "#": 13,
+            "i": {
+              "#": 1,
+              "h": [
                 "one",
                 "two"
               ],
-              "body": {
-                "#": "binop",
-                "operator": "+",
-                "left": {
-                  "#": "binop",
-                  "operator": "+",
-                  "left": {
-                    "#": "identifier",
-                    "name": "one"
+              "s": {
+                "#": 3,
+                "m": "+",
+                "n": {
+                  "#": 3,
+                  "m": "+",
+                  "n": {
+                    "#": 10,
+                    "e": "one"
                   },
-                  "right": {
-                    "#": "identifier",
-                    "name": "two"
+                  "o": {
+                    "#": 10,
+                    "e": "two"
                   }
                 },
-                "right": {
-                  "#": "identifier",
-                  "name": "base"
+                "o": {
+                  "#": 10,
+                  "e": "base"
                 }
               }
             }
@@ -47,7 +47,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

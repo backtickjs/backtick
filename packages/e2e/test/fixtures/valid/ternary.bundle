@@ -1,68 +1,68 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
+      "#": 1,
+      "s": {
         "absent": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             null
           ]
         },
         "present": {
-          "#": "call",
-          "callee": {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+          "#": 5,
+          "j": {
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           },
-          "args": [
+          "g": [
             4
           ]
         }
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "arrow",
-        "params": [
+      "#": 1,
+      "s": {
+        "#": 1,
+        "h": [
           "n"
         ],
-        "body": {
-          "#": "block",
-          "statements": [
+        "s": {
+          "#": 4,
+          "t": [
             {
-              "#": "return",
-              "expression": {
-                "#": "ternary",
-                "condition": {
-                  "#": "binop",
-                  "operator": "===",
-                  "left": {
-                    "#": "identifier",
-                    "name": "n"
+              "#": 13,
+              "i": {
+                "#": 15,
+                "p": {
+                  "#": 3,
+                  "m": "===",
+                  "n": {
+                    "#": 10,
+                    "e": "n"
                   },
-                  "right": null
+                  "o": null
                 },
-                "consequent": 0,
-                "alternate": {
-                  "#": "binop",
-                  "operator": "+",
-                  "left": {
-                    "#": "identifier",
-                    "name": "n"
+                "q": 0,
+                "r": {
+                  "#": 3,
+                  "m": "+",
+                  "n": {
+                    "#": 10,
+                    "e": "n"
                   },
-                  "right": 1
+                  "o": 1
                 }
               }
             }
@@ -73,7 +73,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

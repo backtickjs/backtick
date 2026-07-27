@@ -1,28 +1,28 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "total",
-            "expression": 1
+            "#": 7,
+            "u": "const",
+            "e": "total",
+            "i": 1
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#f1"
+            "#": 13,
+            "i": {
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#f1"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "identifier",
-                  "name": "total"
+                  "#": 10,
+                  "e": "total"
                 }
               ]
             }
@@ -31,81 +31,81 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "total"
       ],
-      "body": {
-        "#": "block",
-        "statements": [
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "let",
-            "name": "total2",
-            "expression": 0
+            "#": 7,
+            "u": "let",
+            "e": "total2",
+            "i": 0
           },
           {
-            "#": "assignment",
-            "name": "total2",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "identifier",
-                "name": "total2"
+            "#": 2,
+            "e": "total2",
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 10,
+                "e": "total2"
               },
-              "right": {
-                "#": "call",
-                "callee": {
-                  "#": "entry",
-                  "label": "#f2"
+              "o": {
+                "#": 5,
+                "j": {
+                  "#": 9,
+                  "f": "#f2"
                 },
-                "args": [
+                "g": [
                   {
-                    "#": "identifier",
-                    "name": "total"
+                    "#": 10,
+                    "e": "total"
                   }
                 ]
               }
             }
           },
           {
-            "#": "assignment",
-            "name": "total2",
-            "expression": {
-              "#": "binop",
-              "operator": "+",
-              "left": {
-                "#": "identifier",
-                "name": "total2"
+            "#": 2,
+            "e": "total2",
+            "i": {
+              "#": 3,
+              "m": "+",
+              "n": {
+                "#": 10,
+                "e": "total2"
               },
-              "right": 100
+              "o": 100
             }
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "identifier",
-              "name": "total2"
+            "#": 13,
+            "i": {
+              "#": 10,
+              "e": "total2"
             }
           }
         ]
       }
     },
     "#f2": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "total"
       ],
-      "body": {
-        "#": "identifier",
-        "name": "total"
+      "s": {
+        "#": 10,
+        "e": "total"
       }
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

@@ -1,17 +1,17 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "$0"
       ],
-      "body": {
-        "#": "arrow",
-        "body": {
-          "#": "call",
-          "callee": {
-            "#": "identifier",
-            "name": "$0"
+      "s": {
+        "#": 1,
+        "s": {
+          "#": 5,
+          "j": {
+            "#": 10,
+            "e": "$0"
           }
         }
       }
@@ -19,38 +19,38 @@
   },
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": [
             {
-              "#": "element",
-              "id": "Text",
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "c": {
                 "onPress": {
-                  "#": "apply",
-                  "label": "#f0",
-                  "args": [
+                  "#": 0,
+                  "f": "#f0",
+                  "g": [
                     {
-                      "#": "thunk",
-                      "expression": 1
+                      "#": 17,
+                      "i": 1
                     }
                   ]
                 }
               }
             },
             {
-              "#": "element",
-              "id": "Text",
-              "props": {
+              "#": 8,
+              "a": "Text",
+              "c": {
                 "onPress": {
-                  "#": "apply",
-                  "label": "#f0",
-                  "args": [
+                  "#": 0,
+                  "f": "#f0",
+                  "g": [
                     {
-                      "#": "thunk",
-                      "expression": 2
+                      "#": 17,
+                      "i": 2
                     }
                   ]
                 }
@@ -62,7 +62,7 @@
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t0"
+    "#": 0,
+    "f": "#t0"
   }
 }

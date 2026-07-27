@@ -2,35 +2,35 @@
   "functions": {},
   "trees": {
     "#t0": {
-      "content": {
-        "#": "element",
-        "id": "Text",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "Text",
+        "c": {
           "children": "x"
         }
       }
     },
     "#t1": {
-      "content": {
-        "#": "apply",
-        "label": "#t0"
+      "y": {
+        "#": 0,
+        "f": "#t0"
       }
     },
     "#t2": {
-      "content": {
-        "#": "element",
-        "id": "View",
-        "props": {
+      "y": {
+        "#": 8,
+        "a": "View",
+        "c": {
           "children": {
-            "#": "apply",
-            "label": "#t1"
+            "#": 0,
+            "f": "#t1"
           }
         }
       }
     }
   },
   "root": {
-    "#": "apply",
-    "label": "#t2"
+    "#": 0,
+    "f": "#t2"
   }
 }

@@ -1,62 +1,62 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "message",
-            "expression": "boom"
+            "#": 7,
+            "u": "const",
+            "e": "message",
+            "i": "boom"
           },
           {
-            "#": "try",
-            "block": {
-              "#": "block",
-              "statements": [
+            "#": 18,
+            "v": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "throw",
-                  "expression": {
-                    "#": "identifier",
-                    "name": "message"
+                  "#": 16,
+                  "i": {
+                    "#": 10,
+                    "e": "message"
                   }
                 }
               ]
             },
-            "param": "error",
-            "handler": {
-              "#": "block",
-              "statements": [
+            "x": "error",
+            "w": {
+              "#": 4,
+              "t": [
                 {
-                  "#": "if",
-                  "condition": {
-                    "#": "binop",
-                    "operator": "===",
-                    "left": {
-                      "#": "identifier",
-                      "name": "error"
+                  "#": 11,
+                  "p": {
+                    "#": 3,
+                    "m": "===",
+                    "n": {
+                      "#": 10,
+                      "e": "error"
                     },
-                    "right": {
-                      "#": "identifier",
-                      "name": "message"
+                    "o": {
+                      "#": 10,
+                      "e": "message"
                     }
                   },
-                  "consequent": {
-                    "#": "block",
-                    "statements": [
+                  "q": {
+                    "#": 4,
+                    "t": [
                       {
-                        "#": "return",
-                        "expression": "caught boom"
+                        "#": 13,
+                        "i": "caught boom"
                       }
                     ]
                   },
-                  "alternate": null
+                  "r": null
                 },
                 {
-                  "#": "return",
-                  "expression": "caught something else"
+                  "#": 13,
+                  "i": "caught something else"
                 }
               ]
             }
@@ -67,7 +67,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

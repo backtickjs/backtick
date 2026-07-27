@@ -1,45 +1,45 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f1"
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f1"
             }
           }
         ]
       }
     },
     "#f1": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "call",
-            "callee": {
-              "#": "entry",
-              "label": "#f2"
+            "#": 5,
+            "j": {
+              "#": 9,
+              "f": "#f2"
             }
           }
         ]
       }
     },
     "#f2": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "x",
-            "expression": 1
+            "#": 7,
+            "u": "const",
+            "e": "x",
+            "i": 1
           }
         ]
       }
@@ -47,7 +47,7 @@
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }

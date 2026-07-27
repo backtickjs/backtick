@@ -1,28 +1,28 @@
 {
   "functions": {
     "#f0": {
-      "#": "arrow",
-      "body": {
-        "#": "block",
-        "statements": [
+      "#": 1,
+      "s": {
+        "#": 4,
+        "t": [
           {
-            "#": "declaration",
-            "keyword": "const",
-            "name": "foo$",
-            "expression": 1
+            "#": 7,
+            "u": "const",
+            "e": "foo$",
+            "i": 1
           },
           {
-            "#": "return",
-            "expression": {
-              "#": "call",
-              "callee": {
-                "#": "entry",
-                "label": "#f1"
+            "#": 13,
+            "i": {
+              "#": 5,
+              "j": {
+                "#": 9,
+                "f": "#f1"
               },
-              "args": [
+              "g": [
                 {
-                  "#": "identifier",
-                  "name": "foo$"
+                  "#": 10,
+                  "e": "foo$"
                 }
               ]
             }
@@ -31,43 +31,43 @@
       }
     },
     "#f1": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "foo$"
       ],
-      "body": {
-        "#": "binop",
-        "operator": "+",
-        "left": {
-          "#": "call",
-          "callee": {
-            "#": "entry",
-            "label": "#f2"
+      "s": {
+        "#": 3,
+        "m": "+",
+        "n": {
+          "#": 5,
+          "j": {
+            "#": 9,
+            "f": "#f2"
           },
-          "args": [
+          "g": [
             {
-              "#": "identifier",
-              "name": "foo$"
+              "#": 10,
+              "e": "foo$"
             }
           ]
         },
-        "right": 2
+        "o": 2
       }
     },
     "#f2": {
-      "#": "arrow",
-      "params": [
+      "#": 1,
+      "h": [
         "foo$"
       ],
-      "body": {
-        "#": "identifier",
-        "name": "foo$"
+      "s": {
+        "#": 10,
+        "e": "foo$"
       }
     }
   },
   "trees": {},
   "root": {
-    "#": "apply",
-    "label": "#f0"
+    "#": 0,
+    "f": "#f0"
   }
 }
