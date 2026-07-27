@@ -15,7 +15,7 @@ import type {
 export function renderBundleDebug(bundle: Bundle): string {
   const sections: string[] = [];
   for (const [label, arrow] of Object.entries(bundle.functions)) {
-    sections.push(`${label} = ${renderNode(arrow, "")}`);
+    sections.push(`${fnLabel(label)} = ${renderNode(arrow, "")}`);
   }
   for (const [label, tree] of Object.entries(bundle.trees)) {
     // The entry's cells read as a header on its label — storage it allocates
@@ -23,12 +23,19 @@ export function renderBundleDebug(bundle: Bundle): string {
     const cells = Object.entries(tree[NodeField.state] ?? {})
       .map(([name, initial]) => `${name} = ${renderExpr(initial, "")}`)
       .join(", ");
-    const header = cells === "" ? label : `${label} state { ${cells} }`;
+    const named = treeLabel(label);
+    const header = cells === "" ? named : `${named} state { ${cells} }`;
     sections.push(`${header} = ${renderExpr(tree[NodeField.content], "")}`);
   }
   sections.push(`root = ${renderExpr(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;
 }
+
+// A label as this view names it. The wire carries a bare index — the node kind
+// says which table — but a debug file is read without one in hand, so the two
+// tables are spelled apart here.
+const fnLabel = (label: string): string => `#f${label}`;
+const treeLabel = (label: string): string => `#t${label}`;
 
 // A `#`-discriminated node, as opposed to plain JSON carrying itself.
 function isNode(
@@ -52,8 +59,9 @@ function renderNode(node: BundleStatementNode, indent: string): string {
     case NodeKind.Identifier:
       return node[NodeField.name];
     case NodeKind.GetFunction:
+      return fnLabel(node[NodeField.label]);
     case NodeKind.GetTree:
-      return node[NodeField.label];
+      return treeLabel(node[NodeField.label]);
     case NodeKind.Call: {
       const args = (node[NodeField.args] ?? []).map((arg) =>
         renderNode(arg, indent),
@@ -152,7 +160,7 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       const args = (expr[NodeField.args] ?? []).map((arg) =>
         renderExpr(arg, indent),
       );
-      return `${expr[NodeField.label]}(${args.join(", ")})`;
+      return `${fnLabel(expr[NodeField.label])}(${args.join(", ")})`;
     }
     case NodeKind.ApplyTree: {
       const args = (expr[NodeField.args] ?? []).map((arg) =>
@@ -163,7 +171,7 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       const applyKey = expr[NodeField.key];
       const key =
         applyKey === undefined ? "" : ` key=${renderExpr(applyKey, indent)}`;
-      return `${expr[NodeField.label]}(${args.join(", ")})${key}`;
+      return `${treeLabel(expr[NodeField.label])}(${args.join(", ")})${key}`;
     }
     case NodeKind.Thunk: {
       const params = expr[NodeField.params] ?? [];

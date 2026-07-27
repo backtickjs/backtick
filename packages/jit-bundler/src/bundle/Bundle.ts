@@ -48,8 +48,8 @@ export interface Bundle {
   root: BundleExpr;
 }
 
-export type FunctionLabel = `#f${number}`;
-export type TreeLabel = `#t${number}`;
+export type FunctionLabel = string;
+export type TreeLabel = string;
 
 // A tree entry: a JSX tree as data. The element sits under an `element`
 // wrapper so instance-scoped additions (per-instance state declarations) can

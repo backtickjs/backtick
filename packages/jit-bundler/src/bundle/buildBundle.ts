@@ -70,7 +70,7 @@ function sourceName(key: string): string {
 // A tree entry is an implicit function of its slots: instantiating it supplies
 // one value per slot, exactly as calling a `functions` entry supplies its
 // captures. The slot signature is derived, not stored (see `treeSlots`). A
-// reference to a tree from source position renders as a call `#ti(...)`
+// reference to a tree from source position renders as a call of its entry
 // passing those captures by name; from JSON position it is a `#call` whose
 // arguments are `#slot` expressions of the enclosing entry.
 //
@@ -87,7 +87,8 @@ function sourceName(key: string): string {
 //
 //   - Monomorphic entry — every reference to it passes structurally identical
 //     splice arguments. The arguments are inlined directly into the body (a
-//     nested-script argument as a call `#fj(...)`, a runtime value as a literal),
+//     nested-script argument as a call of its entry, a runtime value as a
+//     literal),
 //     so the entry takes no splice parameters.
 //   - Polymorphic entry — the same body (one source location) is reached with
 //     differing splice arguments, as when a host helper builds a fragment from
@@ -402,7 +403,7 @@ export function buildBundle(ir: Ir): Bundle {
   const expansionEntry = (expansion: IrExpansion): BundleGetEntry => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
-      label = `#f${fns.length + expansionLabels.size}`;
+      label = `${fns.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       expansionBodies.set(label, {
@@ -506,8 +507,8 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // Renders an IR argument in value position — as the node for the value it
-  // evaluates to. A script reference becomes a call of its `#fi` entry, a tree
-  // reference a call of its `#ti` entry passing the tree's slot captures;
+  // evaluates to. A script reference becomes a call of its `functions` entry, a
+  // tree reference a call of its `trees` entry passing the tree's slot captures;
   // every other value its literal form.
   const renderValue = (value: IrArgument): BundleExpressionNode => {
     switch (value.kind) {
@@ -518,7 +519,7 @@ export function buildBundle(ir: Ir): Bundle {
           "#": NodeKind.Call,
           [NodeField.callee]: {
             "#": NodeKind.GetFunction,
-            [NodeField.label]: `#f${value.target}`,
+            [NodeField.label]: `${value.target}`,
           },
           ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         };
@@ -534,7 +535,7 @@ export function buildBundle(ir: Ir): Bundle {
           "#": NodeKind.Call,
           [NodeField.callee]: {
             "#": NodeKind.GetTree,
-            [NodeField.label]: `#t${value.target}`,
+            [NodeField.label]: `${value.target}`,
           },
           ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         };
@@ -599,7 +600,7 @@ export function buildBundle(ir: Ir): Bundle {
       const args = callArgs(value);
       const entry = {
         "#": NodeKind.GetFunction,
-        [NodeField.label]: `#f${value.target}`,
+        [NodeField.label]: `${value.target}`,
       } as const satisfies BundleExpressionNode;
       return args.length === 0
         ? entry
@@ -619,7 +620,7 @@ export function buildBundle(ir: Ir): Bundle {
       );
       const entry = {
         "#": NodeKind.GetTree,
-        [NodeField.label]: `#t${value.target}`,
+        [NodeField.label]: `${value.target}`,
       } as const satisfies BundleExpressionNode;
       return args.length === 0
         ? entry
@@ -677,7 +678,7 @@ export function buildBundle(ir: Ir): Bundle {
     treeJsons.set(target, {
       [NodeField.content]: {
         "#": NodeKind.ApplyTree,
-        [NodeField.label]: `#t${content.target}`,
+        [NodeField.label]: `${content.target}`,
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         ...(passedKey === null ? {} : { [NodeField.key]: passedKey }),
       },
@@ -800,7 +801,7 @@ export function buildBundle(ir: Ir): Bundle {
       const args = exprCallArgs(value, scope, params);
       return {
         "#": NodeKind.ApplyFunction,
-        [NodeField.label]: `#f${value.target}`,
+        [NodeField.label]: `${value.target}`,
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
       };
     }
@@ -812,7 +813,7 @@ export function buildBundle(ir: Ir): Bundle {
       );
       return {
         "#": NodeKind.ApplyTree,
-        [NodeField.label]: `#t${value.target}`,
+        [NodeField.label]: `${value.target}`,
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         ...(keyed === null ? {} : { [NodeField.key]: keyed }),
       };
@@ -869,14 +870,14 @@ export function buildBundle(ir: Ir): Bundle {
   const root = renderExpr(ir.root, noInstance());
   const functions: Record<FunctionLabel, BundleArrowNode> = {};
   for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
-    functions[`#f${index}`] = body;
+    functions[`${index}`] = body;
   }
   for (const [label, body] of expansionBodies) {
     functions[label] = body;
   }
   const trees: Record<TreeLabel, BundleTree> = {};
   for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
-    trees[`#t${index}`] = tree;
+    trees[`${index}`] = tree;
   }
   return { functions, trees, root };
 }
