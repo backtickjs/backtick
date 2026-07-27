@@ -603,8 +603,23 @@ function evaluateBinop(
   }
   const right = evaluateNode(bundle, rightNode, scope);
   switch (operator) {
-    case "+":
-      return (left as number) + (right as number);
+    case "+": {
+      // Two numbers add; a string on either side concatenates. Written out
+      // because the cast the other arithmetic uses would be a lie here: it
+      // erases, and JavaScript's `+` then does whichever the operands imply.
+      // A client not written in JavaScript has to make the same choice, so the
+      // choice belongs in the open.
+      if (typeof left === "number" && typeof right === "number") {
+        return left + right;
+      }
+      if (typeof left === "string" || typeof right === "string") {
+        return `${left as string | number}${right as string | number}`;
+      }
+      throw new Error(
+        "`+` adds two numbers or concatenates with a string; this bundle " +
+          `produced ${typeof left} + ${typeof right}.`,
+      );
+    }
     case "-":
       return (left as number) - (right as number);
     case "*":
