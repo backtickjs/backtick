@@ -1,0 +1,49 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "entry",
+          "label": "#f1"
+        },
+        "args": []
+      }
+    },
+    "#f1": {
+      "#": "arrow",
+      "params": [],
+      "body": 1
+    }
+  },
+  "trees": {
+    "#t0": {
+      "content": {
+        "#": "element",
+        "id": "View",
+        "key": null,
+        "props": {
+          "children": {
+            "#": "element",
+            "id": "Text",
+            "key": {
+              "#": "apply",
+              "label": "#f0",
+              "args": []
+            },
+            "props": {
+              "children": "x"
+            }
+          }
+        }
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t0",
+    "args": []
+  }
+}

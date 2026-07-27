@@ -1,0 +1,70 @@
+{
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [
+        "s0"
+      ],
+      "body": {
+        "#": "call",
+        "callee": {
+          "#": "property",
+          "object": {
+            "#": "identifier",
+            "name": "s0"
+          },
+          "name": "read"
+        },
+        "args": []
+      }
+    }
+  },
+  "trees": {
+    "#t0": {
+      "content": {
+        "#": "element",
+        "id": "View",
+        "key": null,
+        "props": {
+          "children": {
+            "#": "element",
+            "id": "Text",
+            "key": {
+              "#": "apply",
+              "label": "#f0",
+              "args": [
+                {
+                  "#": "slot",
+                  "index": 0
+                }
+              ]
+            },
+            "props": {
+              "children": "press"
+            }
+          }
+        }
+      }
+    },
+    "#t1": {
+      "content": {
+        "#": "apply",
+        "label": "#t0",
+        "args": [
+          {
+            "#": "cell",
+            "name": "s0"
+          }
+        ]
+      },
+      "state": {
+        "s0": 16
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t1",
+    "args": []
+  }
+}

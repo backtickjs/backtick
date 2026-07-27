@@ -267,7 +267,7 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrStateRef":
         return [cellKey(value.target)];
       case "IrElement":
-        return Object.values(value.props).flatMap(freeCaps);
+        return [value.key, ...Object.values(value.props)].flatMap(freeCaps);
       case "IrArray":
         return value.elements.flatMap(freeCaps);
       case "IrObject":
@@ -847,6 +847,7 @@ function nestedRefs(
         visit(ir.states[value.target].initial);
       }
     } else if (value.kind === "IrElement") {
+      visit(value.key);
       Object.values(value.props).forEach(visit);
     } else if (value.kind === "IrArray") {
       value.elements.forEach(visit);

@@ -1,0 +1,5 @@
+<View>
+  <Text key={1}>
+    {"x"}
+  </Text>
+</View>
