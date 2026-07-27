@@ -8,6 +8,7 @@ export type {
   BundleBlockNode,
   BundleBody,
   BundleCallNode,
+  BundleCell,
   BundleDeclarationNode,
   BundleElement,
   BundleEntryNode,

@@ -57,6 +57,12 @@ export interface BundleTree {
   // state its component declared, and a re-render may give it content — so an
   // interpreter instantiates it as usual and renders nothing for it.
   content: BundleElement | BundleApply | null;
+  // The per-instance cells this entry declares, each named entry's value the
+  // cell's initial. Instantiating allocates fresh storage for each, so two
+  // instances never share a cell; a `BundleCell` resolves against that storage
+  // exactly as a `BundleSlot` resolves against the supplied slot values.
+  // Additive: an interpreter that ignores it renders a tree with no state.
+  state?: { [name: string]: BundleExpr };
 }
 
 // A JSX element node: static structure carried as data, each prop a
@@ -73,6 +79,20 @@ export interface BundleElement {
 export interface BundleSlot {
   "#": "slot";
   index: number;
+}
+
+// A cell declared by the enclosing tree entry's `state`: resolves to the handle
+// for this instance's storage — an object with `read()`, `write(value)` and
+// `update(updater)`. Like a `BundleSlot` it means nothing outside the entry that
+// declares it, and nothing outside a single instance.
+//
+// A cell reaches a function entry as an ordinary argument, so a body never
+// carries this node: the entry takes the handle as a parameter and reads it by
+// name. That keeps bodies lexically scoped — a shared entry can't resolve a free
+// name differently per call site.
+export interface BundleCell {
+  "#": "cell";
+  name: string;
 }
 
 // Applies a `functions` or `trees` entry. For a function target, `args`
@@ -110,6 +130,7 @@ export type BundleExpr =
   | string
   | BundleExpr[]
   | BundleSlot
+  | BundleCell
   | BundleIdentifierNode
   | BundleApply
   | BundleThunk

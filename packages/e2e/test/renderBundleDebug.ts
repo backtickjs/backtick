@@ -17,7 +17,13 @@ export function renderBundleDebug(bundle: Bundle): string {
     sections.push(`${label} = ${renderNode(arrow, "")}`);
   }
   for (const [label, tree] of Object.entries(bundle.trees)) {
-    sections.push(`${label} = ${renderExpr(tree.content, "")}`);
+    // The entry's cells read as a header on its label — storage it allocates
+    // per instance, before the content renders.
+    const cells = Object.entries(tree.state ?? {})
+      .map(([name, initial]) => `${name} = ${renderExpr(initial, "")}`)
+      .join(", ");
+    const header = cells === "" ? label : `${label} state { ${cells} }`;
+    sections.push(`${header} = ${renderExpr(tree.content, "")}`);
   }
   sections.push(`root = ${renderExpr(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;
@@ -132,6 +138,8 @@ function renderExpr(expr: BundleExpr, indent: string): string {
   switch (expr["#"]) {
     case "slot":
       return `slots[${expr.index}]`;
+    case "cell":
+      return `cells.${expr.name}`;
     case "apply": {
       const args = expr.args.map((arg) => renderExpr(arg, indent));
       return `${expr.label}(${args.join(", ")})`;
