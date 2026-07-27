@@ -1,0 +1,12 @@
+#t0 = <View>
+  {<Fragment>
+    {<Text>
+      {"a"}
+    </Text>}
+    {<Text>
+      {"b"}
+    </Text>}
+  </Fragment>}
+</View>
+
+root = #t0()

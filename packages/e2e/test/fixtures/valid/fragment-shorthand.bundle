@@ -1,0 +1,40 @@
+{
+  "functions": {},
+  "trees": {
+    "#t0": {
+      "content": {
+        "#": "element",
+        "id": "View",
+        "props": {
+          "children": {
+            "#": "element",
+            "id": "Fragment",
+            "props": {
+              "children": [
+                {
+                  "#": "element",
+                  "id": "Text",
+                  "props": {
+                    "children": "a"
+                  }
+                },
+                {
+                  "#": "element",
+                  "id": "Text",
+                  "props": {
+                    "children": "b"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "root": {
+    "#": "apply",
+    "label": "#t0",
+    "args": []
+  }
+}

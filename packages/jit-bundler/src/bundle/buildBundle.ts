@@ -485,7 +485,9 @@ export function buildBundle(ir: Ir): Bundle {
       throw new Error(
         "Can't splice a keyed component into a script: a key identifies an " +
           "instance among siblings, and a script instantiates one on its own. " +
-          "Move the key to where the element is placed in a tree.",
+          "Wrap it in a fragment, or drop the key. An array won't do — only " +
+          "an element survives a splice, and its children are what land in " +
+          "tree position, where a key means something.",
       );
     }
   };

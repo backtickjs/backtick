@@ -1,0 +1,16 @@
+#f0 = () => () => #t2()
+
+#t0 = <Text>
+  {"one"}
+</Text>
+
+#t1 = <Text>
+  {"two"}
+</Text>
+
+#t2 = <Fragment>
+  {#t0() key="a"}
+  {#t1() key="b"}
+</Fragment>
+
+root = #f0()
