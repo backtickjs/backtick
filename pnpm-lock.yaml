@@ -136,6 +136,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      '@backtickjs/js-interpreter':
+        specifier: workspace:*
+        version: link:../js-interpreter
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../prettier-plugin
@@ -154,6 +157,19 @@ importers:
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/js-interpreter:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
     devDependencies:
       prettier:
         specifier: ^3.6.2

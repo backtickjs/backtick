@@ -15,6 +15,7 @@
   "devDependencies": {
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
+    "@backtickjs/js-interpreter": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",
     "prettier": "^3.6.2",

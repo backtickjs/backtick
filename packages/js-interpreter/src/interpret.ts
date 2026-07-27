@@ -1,0 +1,633 @@
+import type {
+  Bundle,
+  BundleApply,
+  BundleBinaryOperator,
+  BundleCell,
+  BundleElement,
+  BundleExpr,
+  BundleExpressionNode,
+  BundleIdentifierNode,
+  BundleSlot,
+  BundleStatementNode,
+  BundleThunk,
+  BundleTree,
+  FunctionLabel,
+  TreeLabel,
+} from "@backtickjs/core";
+import { Element } from "./Element.js";
+import type { Value } from "./Value.js";
+
+// A reference client: the interpreter the bundle wire format is specified
+// against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's
+// `root` against its `functions` and `trees` tables and returns the resulting
+// JavaScript value — an `Element` tree for a JSX client — so a host can render
+// it, and tests can observe runtime behavior rather than only snapshotting
+// shape.
+
+// Who to notify after a write has re-rendered — set while an evaluation or a
+// re-render is in flight, and captured by each instance created during it, so
+// two mounts in one process notify their own hosts rather than the last one to
+// start. Ambient rather than threaded because every instance is created deep
+// inside the evaluation, and only this one thing needs to reach them.
+let notifying: (() => void) | null = null;
+
+function whileNotifying<T>(notify: (() => void) | null, run: () => T): T {
+  const previous = notifying;
+  notifying = notify;
+  try {
+    return run();
+  } finally {
+    notifying = previous;
+  }
+}
+
+export function evaluate(bundle: Bundle, onChange?: () => void): Value {
+  return whileNotifying(onChange ?? null, () =>
+    evaluateExpr(bundle, bundle.root, []),
+  );
+}
+
+// A tree instance: what persists on the client. `cells` is the storage the
+// entry's `state` declares, allocated fresh per instance, and `children` keys
+// nested instances by the `apply` node that created them — the node is the
+// child's position, so a re-render reuses the instance instead of resetting its
+// cells.
+interface Instance {
+  readonly bundle: Bundle;
+  readonly tree: BundleTree;
+  slots: Value[];
+  readonly cells: Map<string, Value>;
+  readonly children: Map<BundleApply, Instance>;
+  // The host that mounted this instance, captured when it was created — a
+  // child created during a later re-render inherits it the same way.
+  readonly notify: (() => void) | null;
+  element: Element | null;
+}
+
+function instantiate(
+  bundle: Bundle,
+  tree: BundleTree,
+  slots: Value[],
+): Instance {
+  const instance: Instance = {
+    bundle,
+    tree,
+    slots,
+    cells: new Map(),
+    children: new Map(),
+    notify: notifying,
+    element: null,
+  };
+  // A cell's initial is evaluated in no instance: it can't read a slot or
+  // another cell, so nothing is in scope for it.
+  for (const [name, initial] of Object.entries(tree.state ?? {})) {
+    instance.cells.set(name, evaluateExpr(bundle, initial, []));
+  }
+  render(instance);
+  return instance;
+}
+
+// Renders an instance, refreshing the element in place on a re-render so every
+// holder observes the new props. The whole instance re-renders; nested
+// instances survive it via `children`.
+//
+// A pass-through component — one whose content is an apply rather than an
+// element — renders no element of its own, so evaluating its content yields its
+// child's element and the two alias deliberately. Re-rendering it re-renders
+// that child rather than instantiating a new one, which is what keeps the
+// child's cells alive. An instance whose content is null renders nothing.
+function render(instance: Instance): Element | null {
+  // Under this instance's host, so a child instantiated for the first time
+  // during a re-render notifies the same one rather than nothing.
+  const rendered = whileNotifying(
+    instance.notify,
+    () =>
+      evaluateExpr(
+        instance.bundle,
+        instance.tree.content,
+        instance.slots,
+        null,
+        instance,
+      ) as Element | null,
+  );
+  const existing = instance.element;
+  if (existing === null || rendered === null || existing === rendered) {
+    instance.element = rendered;
+    return rendered;
+  }
+  existing.key = rendered.key;
+  existing.props = rendered.props;
+  return existing;
+}
+
+// A cell's handle, as a script reads it: an ordinary object of functions, so it
+// is a `Value` like anything else the interpreter hands a script. `read`
+// observes the instance's current storage; `write` replaces it and re-renders —
+// the two rules per-instance state adds. A handle a handler captured keeps
+// working across re-renders because it resolves the cell by name at call time.
+//
+// The writers yield `null` rather than nothing. `void` is not a value this
+// language has, and a function that returned one couldn't be passed where a
+// value is expected — which a handle's members are.
+function cellHandle(instance: Instance, name: string): Value {
+  const storage = (): Map<string, Value> => {
+    if (!instance.cells.has(name)) {
+      throw new Error(`unknown state cell ${name}`);
+    }
+    return instance.cells;
+  };
+  const read = () => {
+    return storage().get(name) ?? null;
+  };
+  const write = (value: Value): Value => {
+    storage().set(name, value);
+    render(instance);
+    // The element refreshed in place, so the host re-reads rather than being
+    // handed anything: this only says that something moved.
+    instance.notify?.();
+    return null;
+  };
+  const update = (updater: (current: Value) => Value): Value => {
+    return write(updater(storage().get(name) ?? null));
+  };
+  return {
+    read,
+    write,
+    update: update as Value,
+  };
+}
+
+// One frame per arrow application or block. Names are pre-resolved by the
+// bundler and there are no globals: a name no frame binds is a malformed
+// bundle.
+interface Scope {
+  parent: Scope | null;
+  bindings: Map<string, Value>;
+}
+
+function lookup(scope: Scope | null, name: string): Scope | null {
+  for (let frame = scope; frame !== null; frame = frame.parent) {
+    if (frame.bindings.has(name)) {
+      return frame;
+    }
+  }
+  return null;
+}
+
+// Applies a `functions` or `trees` entry as a function: a function entry is
+// its arrow evaluated at the top level; a tree entry takes its slot values
+// and instantiates the element.
+function entryFunction(
+  bundle: Bundle,
+  label: FunctionLabel | TreeLabel,
+): (...args: Value[]) => Value {
+  if (label.startsWith("#f")) {
+    const arrow = bundle.functions[label as FunctionLabel];
+    if (arrow === undefined) {
+      throw new Error(`unknown function entry ${label}`);
+    }
+    return evaluateNode(bundle, arrow, null) as (...args: Value[]) => Value;
+  }
+  const tree = bundle.trees[label as TreeLabel];
+  if (tree === undefined) {
+    throw new Error(`unknown tree entry ${label}`);
+  }
+  return (...slots: Value[]) => instantiate(bundle, tree, slots).element;
+}
+
+// An inline element renders in its enclosing instance: it is part of that entry,
+// so it reads the same slots and the same cells.
+function evaluateElement(
+  bundle: Bundle,
+  element: BundleElement,
+  slots: Value[],
+  instance: Instance | null = null,
+): Element {
+  // An absent key is no key, exactly as a null one was — the wire omits it
+  // rather than spelling it out.
+  const key =
+    element.key === undefined
+      ? null
+      : (evaluateExpr(bundle, element.key, slots, null, instance) as
+          | string
+          | number
+          | null);
+  const props: { [prop: string]: Value } = {};
+  for (const [prop, expr] of Object.entries(element.props)) {
+    props[prop] = evaluateExpr(bundle, expr, slots, null, instance);
+  }
+  return new Element(element.id, key, props);
+}
+
+// A tree expression (also the root): plain JSON carries itself; the
+// `#`-discriminated nodes compose. Bundling rejects plain data carrying
+// `#` — the bundle's one reserved key — so the node reading is
+// unambiguous.
+function evaluateExpr(
+  bundle: Bundle,
+  expr: BundleExpr,
+  slots: Value[],
+  env: Scope | null = null,
+  // The enclosing instance, when there is one: what `cell` resolves against, and
+  // what a nested `apply` keys its child instance under.
+  instance: Instance | null = null,
+): Value {
+  if (expr === null || typeof expr !== "object") {
+    return expr;
+  }
+  if (Array.isArray(expr)) {
+    return expr.map((element) =>
+      evaluateExpr(bundle, element, slots, env, instance),
+    );
+  }
+  if ("#" in expr) {
+    const form = expr as
+      | BundleSlot
+      | BundleCell
+      | BundleIdentifierNode
+      | BundleApply
+      | BundleThunk
+      | BundleElement;
+    switch (form["#"]) {
+      case "slot": {
+        return slots[form.index];
+      }
+      case "cell": {
+        // A cell is declared by the enclosing entry, so it is only meaningful
+        // inside an instance of it.
+        if (instance === null) {
+          throw new Error(`no instance to resolve state cell ${form.name}`);
+        }
+        return cellHandle(instance, form.name);
+      }
+      case "identifier": {
+        // A parameter of an enclosing thunk.
+        const frame = lookup(env, form.name);
+        if (frame === null) {
+          throw new Error(`unknown identifier ${form.name}`);
+        }
+        return frame.bindings.get(form.name) ?? null;
+      }
+      case "apply": {
+        const args = form.args.map((arg) =>
+          evaluateExpr(bundle, arg, slots, env, instance),
+        );
+        // A nested instance persists across the parent's re-renders, keyed by
+        // this node — its position in the parent.
+        if (instance !== null && form.label.startsWith("#t")) {
+          const tree = bundle.trees[form.label as TreeLabel];
+          if (tree === undefined) {
+            throw new Error(`unknown tree entry ${form.label}`);
+          }
+          const child = instance.children.get(form);
+          if (child !== undefined) {
+            child.slots = args;
+            return render(child);
+          }
+          const created = instantiate(bundle, tree, args);
+          instance.children.set(form, created);
+          return created.element;
+        }
+        return entryFunction(bundle, form.label)(...args);
+      }
+      case "thunk": {
+        const params = form.params;
+        if (!params || params.length === 0) {
+          return () =>
+            evaluateExpr(bundle, form.expression, slots, env, instance);
+        }
+        // The hole call supplies the entry-scoped bindings the splice
+        // captures, one value per parameter, over the enclosing frame.
+        return (...args: Value[]) => {
+          const frame: Scope = { parent: env, bindings: new Map() };
+          params.forEach((param, index) => {
+            frame.bindings.set(param, args[index]);
+          });
+          return evaluateExpr(bundle, form.expression, slots, frame, instance);
+        };
+      }
+      case "element": {
+        return evaluateElement(bundle, form, slots, instance);
+      }
+    }
+  }
+  const object: { [key: string]: Value } = {};
+  for (const [key, value] of Object.entries(expr)) {
+    object[key] = evaluateExpr(bundle, value, slots, env, instance);
+  }
+  return object;
+}
+
+// A `#`-discriminated node, as opposed to plain JSON carrying itself.
+// Bundling rejects plain data carrying `#` — the bundle's one reserved key —
+// so the node reading is unambiguous.
+function isNode(
+  node: BundleStatementNode,
+): node is Extract<BundleStatementNode, { "#": string }> {
+  return (
+    typeof node === "object" &&
+    node !== null &&
+    !Array.isArray(node) &&
+    "#" in node
+  );
+}
+
+// The statement outcome of a block or one of its statements: `returned`
+// signals that a `return` executed and the enclosing arrow's result is
+// `value`.
+interface Completion {
+  returned: boolean;
+  value: Value;
+}
+
+const advanced: Completion = { returned: false, value: null };
+
+function executeStatement(
+  bundle: Bundle,
+  node: BundleStatementNode,
+  scope: Scope,
+): Completion {
+  if (!isNode(node)) {
+    // Plain JSON in statement position is an expression evaluated for its
+    // effect.
+    evaluateNode(bundle, node, scope);
+    return advanced;
+  }
+  switch (node["#"]) {
+    case "block": {
+      const frame: Scope = { parent: scope, bindings: new Map() };
+      // Declarations hoist to the block: a use before its declaration
+      // resolves to the local (with value `null`), never outward.
+      for (const statement of node.statements) {
+        if (isNode(statement) && statement["#"] === "declaration") {
+          frame.bindings.set(statement.name, null);
+        }
+      }
+      for (const statement of node.statements) {
+        const completion = executeStatement(bundle, statement, frame);
+        if (completion.returned) {
+          return completion;
+        }
+      }
+      return advanced;
+    }
+    case "declaration": {
+      scope.bindings.set(
+        node.name,
+        evaluateNode(bundle, node.expression, scope),
+      );
+      return advanced;
+    }
+    case "assignment": {
+      const value = evaluateNode(bundle, node.expression, scope);
+      const frame = lookup(scope, node.name);
+      if (frame === null) {
+        throw new Error(`unknown assignment target ${node.name}`);
+      }
+      frame.bindings.set(node.name, value);
+      return advanced;
+    }
+    case "if": {
+      if (condition(evaluateNode(bundle, node.condition, scope), "an `if`")) {
+        return executeStatement(bundle, node.consequent, scope);
+      }
+      if (node.alternate !== null) {
+        return executeStatement(bundle, node.alternate, scope);
+      }
+      return advanced;
+    }
+    case "return": {
+      return {
+        returned: true,
+        value: evaluateNode(bundle, node.expression, scope),
+      };
+    }
+    case "throw": {
+      throw evaluateNode(bundle, node.expression, scope);
+    }
+    case "try": {
+      try {
+        return executeStatement(bundle, node.block, scope);
+      } catch (thrown) {
+        // The catch binding scopes over the handler only, like an arrow
+        // parameter over its body.
+        const frame: Scope = { parent: scope, bindings: new Map() };
+        if (node.param !== null) {
+          frame.bindings.set(node.param, thrown as Value);
+        }
+        return executeStatement(bundle, node.handler, frame);
+      }
+    }
+    default: {
+      // Every remaining kind is an expression, evaluated for its effect.
+      evaluateNode(bundle, node, scope);
+      return advanced;
+    }
+  }
+}
+
+// A body expression: as in a tree expression, plain JSON carries itself and
+// the `#`-discriminated forms compose. Containers recurse as expressions —
+// a spliced runtime array can hold entry calls.
+function evaluateNode(
+  bundle: Bundle,
+  node: BundleExpressionNode,
+  scope: Scope | null,
+): Value {
+  if (!isNode(node)) {
+    if (node === null || typeof node !== "object") {
+      return node;
+    }
+    if (Array.isArray(node)) {
+      return node.map((element) => evaluateNode(bundle, element, scope));
+    }
+    const object: { [key: string]: Value } = {};
+    for (const [key, value] of Object.entries(node)) {
+      object[key] = evaluateNode(bundle, value, scope);
+    }
+    return object;
+  }
+  switch (node["#"]) {
+    case "identifier": {
+      const frame = lookup(scope, node.name);
+      if (frame === null) {
+        throw new Error(`unknown identifier ${node.name}`);
+      }
+      return frame.bindings.get(node.name) ?? null;
+    }
+    case "entry": {
+      return entryFunction(bundle, node.label);
+    }
+    case "call": {
+      // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
+      // The receiver evaluates before the arguments; an optional receiver
+      // (`a?.b(…)`) short-circuits a null object to null, arguments
+      // unevaluated.
+      if (isNode(node.callee) && node.callee["#"] === "property") {
+        const object = evaluateNode(bundle, node.callee.object, scope) as {
+          [name: string]: Value;
+        };
+        if (node.callee.optional && object === null) {
+          return null;
+        }
+        const method = object[node.callee.name];
+        // An optional call (`a.b?.(…)`) short-circuits a null method the
+        // same way, arguments unevaluated.
+        if (node.optional && method === null) {
+          return null;
+        }
+        if (typeof method !== "function") {
+          throw new Error(`${node.callee.name} is not a function`);
+        }
+        const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
+        return method.apply(object, args);
+      }
+      // The callee evaluates before the arguments; an optional call
+      // (`cb?.(…)`) short-circuits a null callee to null, arguments
+      // unevaluated.
+      const callee = evaluateNode(bundle, node.callee, scope);
+      if (node.optional && callee === null) {
+        return null;
+      }
+      if (typeof callee !== "function") {
+        throw new Error("callee is not a function");
+      }
+      const args = node.args.map((arg) => evaluateNode(bundle, arg, scope));
+      return callee(...args);
+    }
+    case "property": {
+      const object = evaluateNode(bundle, node.object, scope) as {
+        [name: string]: Value;
+      };
+      if (node.optional && object === null) {
+        return null;
+      }
+      // An absent member reads as null — the language's absent value;
+      // `undefined` never arises.
+      return object[node.name] ?? null;
+    }
+    case "binop": {
+      return evaluateBinop(bundle, node.operator, node.left, node.right, scope);
+    }
+    case "ternary": {
+      // Only the taken branch evaluates.
+      const taken = condition(
+        evaluateNode(bundle, node.condition, scope),
+        "a ternary condition",
+      );
+      if (taken) {
+        return evaluateNode(bundle, node.consequent, scope);
+      }
+      return evaluateNode(bundle, node.alternate, scope);
+    }
+    case "arrow": {
+      return (...args: Value[]) => {
+        const frame: Scope = { parent: scope, bindings: new Map() };
+        // A missing argument binds as null — the language's absent value;
+        // `undefined` never arises (an omitted optional parameter reads
+        // as null).
+        node.params.forEach((param, index) => {
+          frame.bindings.set(param, index < args.length ? args[index] : null);
+        });
+        const body = node.body;
+        if (isNode(body) && body["#"] === "block") {
+          const completion = executeStatement(bundle, body, frame);
+          return completion.returned ? completion.value : null;
+        }
+        // A non-block body is an expression, implicitly returned.
+        return evaluateNode(bundle, body as BundleExpressionNode, frame);
+      };
+    }
+  }
+}
+
+// Reads a value the language guarantees is boolean: a condition, or an operand
+// of `&&`/`||`. The compiler rejects anything else — `cs.condition` exists to
+// remove truthiness, and `non-boolean-condition`, `non-boolean-operand`,
+// `nested-non-boolean-operand` and `ternary-condition` pin it — so this fires
+// only on a bundle no toolchain produced.
+//
+// It is the interpreter's one runtime type check, and the one thing `load`
+// could never take over: whether an operand is boolean is a property of what an
+// expression evaluated to, not of the bundle's shape. Checking beats borrowing
+// JavaScript's falsiness, which would quietly accept `0` and `""` and give a
+// reference implementation the wrong rule to port.
+function condition(value: Value, what: string): boolean {
+  if (value === true || value === false) {
+    return value;
+  }
+  throw new Error(
+    `${what} must be \`true\` or \`false\`: this language has no truthiness, ` +
+      `and this bundle produced ${JSON.stringify(value) ?? typeof value}.`,
+  );
+}
+
+function evaluateBinop(
+  bundle: Bundle,
+  operator: BundleBinaryOperator,
+  leftNode: BundleExpressionNode,
+  rightNode: BundleExpressionNode,
+  scope: Scope | null,
+): Value {
+  const left = evaluateNode(bundle, leftNode, scope);
+  // The logical operators evaluate their right operand lazily, and both
+  // operands are boolean — so `&&` and `||` yield one. Checking only the left
+  // would still branch correctly and then return whatever the right side was,
+  // letting a non-boolean leak out as the result.
+  //
+  // `??` is the exception at both ends: it asks whether a value is absent, not
+  // whether it is false, so either side may be any value.
+  switch (operator) {
+    case "&&": {
+      if (!condition(left, "the left operand of `&&`")) {
+        return false;
+      }
+      const right = evaluateNode(bundle, rightNode, scope);
+      return condition(right, "the right operand of `&&`");
+    }
+    case "||": {
+      if (condition(left, "the left operand of `||`")) {
+        return true;
+      }
+      const right = evaluateNode(bundle, rightNode, scope);
+      return condition(right, "the right operand of `||`");
+    }
+    case "??": {
+      if (left !== null) {
+        return left;
+      }
+      return evaluateNode(bundle, rightNode, scope);
+    }
+    default:
+      break;
+  }
+  const right = evaluateNode(bundle, rightNode, scope);
+  switch (operator) {
+    case "+":
+      return (left as number) + (right as number);
+    case "-":
+      return (left as number) - (right as number);
+    case "*":
+      return (left as number) * (right as number);
+    case "/":
+      return (left as number) / (right as number);
+    case "%":
+      return (left as number) % (right as number);
+    case "===":
+      return left === right;
+    case "!==":
+      return left !== right;
+    case "<":
+      return (left as number) < (right as number);
+    case "<=":
+      return (left as number) <= (right as number);
+    case ">":
+      return (left as number) > (right as number);
+    case ">=":
+      return (left as number) >= (right as number);
+  }
+  // No `default`: the switch covers `BundleBinaryOperator`, so adding an
+  // operator to the format is a compile error here rather than a throw at
+  // evaluation.
+  operator satisfies never;
+}

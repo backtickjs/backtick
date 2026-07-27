@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, TestElement } from "./test-client/index.ts";
+import { evaluate, Element } from "./test-client/index.ts";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
 // wire shape, and these drive the reference client through it — a write has to
@@ -12,30 +12,30 @@ import { evaluate, TestElement } from "./test-client/index.ts";
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("state");
 
-async function render(file: string): Promise<TestElement> {
+async function render(file: string): Promise<Element> {
   const script = await importFixture(validDir, file);
   const element = evaluate(await bundle(script));
-  assert.ok(element instanceof TestElement, "expected a rendered element");
+  assert.ok(element instanceof Element, "expected a rendered element");
   return element;
 }
 
 // The handler a prop holds, as the host would invoke it.
-function handler(element: TestElement): () => void {
+function handler(element: Element): () => void {
   const onPress = element.props.onPress;
   assert.equal(typeof onPress, "function", "expected an onPress handler");
   return onPress as () => void;
 }
 
-function fontSize(element: TestElement): unknown {
+function fontSize(element: Element): unknown {
   const style = element.props.style;
   assert.ok(style !== null && typeof style === "object", "expected a style");
   return (style as { fontSize?: unknown }).fontSize;
 }
 
-function children(element: TestElement): TestElement[] {
+function children(element: Element): Element[] {
   const value = element.props.children;
   assert.ok(Array.isArray(value), "expected several children");
-  return value.flat(Infinity) as TestElement[];
+  return value.flat(Infinity) as Element[];
 }
 
 describe("local state", () => {
