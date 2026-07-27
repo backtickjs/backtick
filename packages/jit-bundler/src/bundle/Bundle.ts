@@ -70,7 +70,7 @@ export interface BundleTree {
 export interface BundleElement {
   "#": "element";
   id: string;
-  key: BundleExpr;
+  key?: BundleExpr;
   props: { [prop: string]: BundleExpr };
 }
 
@@ -105,6 +105,7 @@ export interface BundleApply {
   "#": "apply";
   label: FunctionLabel | TreeLabel;
   args: BundleExpr[];
+  key?: BundleExpr;
 }
 
 // A splice argument passed to a polymorphic entry, evaluated lazily: the

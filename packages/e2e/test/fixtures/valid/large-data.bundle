@@ -353,7 +353,6 @@
             {
               "#": "element",
               "id": "Image",
-              "key": null,
               "props": {
                 "source": {
                   "uri": {
@@ -372,7 +371,6 @@
             {
               "#": "element",
               "id": "Text",
-              "key": null,
               "props": {
                 "children": {
                   "#": "apply",
@@ -389,7 +387,6 @@
             {
               "#": "element",
               "id": "Text",
-              "key": null,
               "props": {
                 "children": {
                   "#": "apply",
@@ -416,7 +413,6 @@
             {
               "#": "element",
               "id": "Text",
-              "key": null,
               "props": {
                 "children": {
                   "#": "apply",
@@ -438,7 +434,6 @@
       "content": {
         "#": "element",
         "id": "View",
-        "key": null,
         "props": {
           "children": {
             "#": "apply",

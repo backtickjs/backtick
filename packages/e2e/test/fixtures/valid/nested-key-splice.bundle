@@ -23,7 +23,6 @@
       "content": {
         "#": "element",
         "id": "View",
-        "key": null,
         "props": {
           "children": {
             "#": "element",

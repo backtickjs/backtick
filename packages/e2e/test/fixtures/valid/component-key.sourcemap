@@ -1,0 +1,3 @@
+cs.lift(cs.const(  → cs`
+"third"            → "third"
+))                 → `

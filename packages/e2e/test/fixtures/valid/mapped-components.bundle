@@ -6,7 +6,7 @@
         "#": "element",
         "id": "Text",
         "props": {
-          "children": "one"
+          "children": "alpha"
         }
       }
     },
@@ -15,11 +15,20 @@
         "#": "element",
         "id": "Text",
         "props": {
-          "children": "two"
+          "children": "beta"
         }
       }
     },
     "#t2": {
+      "content": {
+        "#": "element",
+        "id": "Text",
+        "props": {
+          "children": "gamma"
+        }
+      }
+    },
+    "#t3": {
       "content": {
         "#": "element",
         "id": "View",
@@ -28,12 +37,20 @@
             {
               "#": "apply",
               "label": "#t0",
-              "args": []
+              "args": [],
+              "key": 0
             },
             {
               "#": "apply",
               "label": "#t1",
-              "args": []
+              "args": [],
+              "key": 1
+            },
+            {
+              "#": "apply",
+              "label": "#t2",
+              "args": [],
+              "key": 2
             }
           ]
         }
@@ -42,7 +59,7 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t2",
+    "label": "#t3",
     "args": []
   }
 }

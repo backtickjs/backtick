@@ -116,7 +116,11 @@ class IrBuilder {
       kind: "IrTreeEntry",
       content: this.lowerElement(element),
     };
-    const ref: IrTreeRef = { kind: "IrTreeRef", target: this.trees.length };
+    const ref: IrTreeRef = {
+      kind: "IrTreeRef",
+      target: this.trees.length,
+      key: { kind: "IrValue", value: null },
+    };
     this.trees.push(tree);
     this.refByElement.set(element, ref);
     return ref;
@@ -142,7 +146,11 @@ class IrBuilder {
             ? this.referenceInstance(child)
             : this.lowerElement(child),
     };
-    const ref: IrTreeRef = { kind: "IrTreeRef", target: this.trees.length };
+    const ref: IrTreeRef = {
+      kind: "IrTreeRef",
+      target: this.trees.length,
+      key: this.lower(instance.key),
+    };
     this.trees.push(tree);
     this.entryByInstance.set(instance, ref.target);
     this.refByInstance.set(instance, ref);

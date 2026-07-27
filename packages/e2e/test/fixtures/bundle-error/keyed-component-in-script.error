@@ -1,0 +1,1 @@
+Can't splice a keyed component into a script: a key identifies an instance among siblings, and a script instantiates one on its own. Move the key to where the element is placed in a tree.

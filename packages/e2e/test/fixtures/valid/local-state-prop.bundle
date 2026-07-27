@@ -81,7 +81,6 @@
       "content": {
         "#": "element",
         "id": "Text",
-        "key": null,
         "props": {
           "style": {
             "fontSize": {
@@ -119,7 +118,6 @@
       "content": {
         "#": "element",
         "id": "Text",
-        "key": null,
         "props": {
           "style": {
             "fontSize": {
@@ -157,7 +155,6 @@
       "content": {
         "#": "element",
         "id": "View",
-        "key": null,
         "props": {
           "children": [
             {

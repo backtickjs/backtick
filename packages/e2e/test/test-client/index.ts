@@ -254,10 +254,15 @@ function evaluateElement(
   slots: unknown[],
   instance: Instance | null = null,
 ): TestElement {
-  const key = evaluateExpr(bundle, element.key, slots, null, instance) as
-    | string
-    | number
-    | null;
+  // An absent key is no key, exactly as a null one was — the wire omits it
+  // rather than spelling it out.
+  const key =
+    element.key === undefined
+      ? null
+      : (evaluateExpr(bundle, element.key, slots, null, instance) as
+          | string
+          | number
+          | null);
   const props: { [prop: string]: unknown } = {};
   for (const [prop, expr] of Object.entries(element.props)) {
     props[prop] = evaluateExpr(bundle, expr, slots, null, instance);

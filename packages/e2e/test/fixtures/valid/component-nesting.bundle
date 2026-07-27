@@ -5,7 +5,6 @@
       "content": {
         "#": "element",
         "id": "Text",
-        "key": null,
         "props": {
           "children": "x"
         }
@@ -22,7 +21,6 @@
       "content": {
         "#": "element",
         "id": "View",
-        "key": null,
         "props": {
           "children": {
             "#": "apply",

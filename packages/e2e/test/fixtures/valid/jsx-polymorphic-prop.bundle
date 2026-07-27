@@ -24,13 +24,11 @@
       "content": {
         "#": "element",
         "id": "View",
-        "key": null,
         "props": {
           "children": [
             {
               "#": "element",
               "id": "Text",
-              "key": null,
               "props": {
                 "onPress": {
                   "#": "apply",
@@ -47,7 +45,6 @@
             {
               "#": "element",
               "id": "Text",
-              "key": null,
               "props": {
                 "onPress": {
                   "#": "apply",

@@ -69,7 +69,6 @@
       "content": {
         "#": "element",
         "id": "Text",
-        "key": null,
         "props": {
           "style": {
             "fontSize": {

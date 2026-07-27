@@ -142,7 +142,11 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       return `cells.${expr.name}`;
     case "apply": {
       const args = expr.args.map((arg) => renderExpr(arg, indent));
-      return `${expr.label}(${args.join(", ")})`;
+      // A keyed instantiation reads as a suffix, since the key identifies the
+      // instance rather than being one of the entry's arguments.
+      const key =
+        expr.key === undefined ? "" : ` key=${renderExpr(expr.key, indent)}`;
+      return `${expr.label}(${args.join(", ")})${key}`;
     }
     case "thunk": {
       const params = expr.params ?? [];
@@ -160,7 +164,7 @@ function renderExpr(expr: BundleExpr, indent: string): string {
 function renderJsx(element: BundleElement, indent: string): string {
   const inner = `${indent}  `;
   const attributes: string[] = [];
-  if (element.key !== null) {
+  if (element.key !== undefined) {
     attributes.push(`${inner}key={${renderExpr(element.key, inner)}}`);
   }
   let children: BundleExpr[] = [];

@@ -261,7 +261,9 @@ export function buildBundle(ir: Ir): Bundle {
       }
       case "IrTreeRef":
         // An entry supplies the cells it owns, so only its slots thread out.
-        return treeSlots(value.target);
+        // The key belongs to this reference rather than the entry, so it
+        // captures here, alongside them.
+        return [...freeCaps(value.key), ...treeSlots(value.target)];
       // A cell threads like a capture: the entry reading it takes the handle as
       // a parameter, and its owner supplies it.
       case "IrStateRef":
@@ -475,6 +477,19 @@ export function buildBundle(ir: Ir): Bundle {
     return parts;
   };
 
+  // A body instantiates a tree with a plain call, which carries no key — so a
+  // keyed component spliced into a script would lose it. Refused rather than
+  // dropped; the key only means something where siblings are compared.
+  const requireUnkeyed = (value: IrTreeRef): void => {
+    if (!(value.key.kind === "IrValue" && value.key.value === null)) {
+      throw new Error(
+        "Can't splice a keyed component into a script: a key identifies an " +
+          "instance among siblings, and a script instantiates one on its own. " +
+          "Move the key to where the element is placed in a tree.",
+      );
+    }
+  };
+
   // Renders an IR argument in value position — as the node for the value it
   // evaluates to. A script reference becomes a call of its `#fi` entry, a tree
   // reference a call of its `#ti` entry passing the tree's slot captures;
@@ -490,6 +505,7 @@ export function buildBundle(ir: Ir): Bundle {
         };
       case "IrTreeRef":
         materializeTree(value.target);
+        requireUnkeyed(value);
         return {
           "#": "call",
           callee: { "#": "entry", label: `#t${value.target}` },
@@ -563,6 +579,7 @@ export function buildBundle(ir: Ir): Bundle {
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
+      requireUnkeyed(value);
       const args = treeSlots(value.target).map(
         (key): BundleExpressionNode => ({
           "#": "identifier",
@@ -625,11 +642,13 @@ export function buildBundle(ir: Ir): Bundle {
     // An instance that renders another instance: applying the inner entry,
     // passing whatever its slots need from this one's.
     materializeTree(content.target);
+    const passedKey = renderExpr(content.key, scope);
     treeJsons.set(target, {
       content: {
         "#": "apply",
         label: `#t${content.target}`,
         args: treeSlots(content.target).map((key) => capExpr(key, scope)),
+        ...(passedKey === null ? {} : { key: passedKey }),
       },
       ...declared,
     });
@@ -732,7 +751,7 @@ export function buildBundle(ir: Ir): Bundle {
     return {
       "#": "element",
       id: element.id,
-      key,
+      ...(key === null ? {} : { key }),
       props,
     };
   };
@@ -755,10 +774,12 @@ export function buildBundle(ir: Ir): Bundle {
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
+      const keyed = renderExpr(value.key, scope, params);
       return {
         "#": "apply",
         label: `#t${value.target}`,
         args: treeSlots(value.target).map((key) => capExpr(key, scope, params)),
+        ...(keyed === null ? {} : { key: keyed }),
       };
     }
     if (value.kind === "IrElement") {
@@ -840,6 +861,9 @@ function nestedRefs(
     if (value.kind === "IrScriptRef") {
       refs.push(value);
     } else if (value.kind === "IrTreeRef") {
+      // The key is this reference's own, so it is walked per reference rather
+      // than once per entry.
+      visit(value.key);
       if (!seenTrees.has(value.target)) {
         seenTrees.add(value.target);
         const content = ir.trees[value.target].content;

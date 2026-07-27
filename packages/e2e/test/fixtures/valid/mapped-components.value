@@ -1,0 +1,11 @@
+<View>
+  <Text>
+    {"alpha"}
+  </Text>
+  <Text>
+    {"beta"}
+  </Text>
+  <Text>
+    {"gamma"}
+  </Text>
+</View>

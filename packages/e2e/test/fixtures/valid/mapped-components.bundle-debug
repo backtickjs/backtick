@@ -1,0 +1,19 @@
+#t0 = <Text>
+  {"alpha"}
+</Text>
+
+#t1 = <Text>
+  {"beta"}
+</Text>
+
+#t2 = <Text>
+  {"gamma"}
+</Text>
+
+#t3 = <View>
+  {#t0() key=0}
+  {#t1() key=1}
+  {#t2() key=2}
+</View>
+
+root = #t3()

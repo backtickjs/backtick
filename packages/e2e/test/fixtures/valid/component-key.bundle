@@ -1,5 +1,11 @@
 {
-  "functions": {},
+  "functions": {
+    "#f0": {
+      "#": "arrow",
+      "params": [],
+      "body": "third"
+    }
+  },
   "trees": {
     "#t0": {
       "content": {
@@ -22,18 +28,39 @@
     "#t2": {
       "content": {
         "#": "element",
+        "id": "Text",
+        "props": {
+          "children": "three"
+        }
+      }
+    },
+    "#t3": {
+      "content": {
+        "#": "element",
         "id": "View",
         "props": {
           "children": [
             {
               "#": "apply",
               "label": "#t0",
-              "args": []
+              "args": [],
+              "key": "first"
             },
             {
               "#": "apply",
               "label": "#t1",
-              "args": []
+              "args": [],
+              "key": 2
+            },
+            {
+              "#": "apply",
+              "label": "#t2",
+              "args": [],
+              "key": {
+                "#": "apply",
+                "label": "#f0",
+                "args": []
+              }
             }
           ]
         }
@@ -42,7 +69,7 @@
   },
   "root": {
     "#": "apply",
-    "label": "#t2",
+    "label": "#t3",
     "args": []
   }
 }

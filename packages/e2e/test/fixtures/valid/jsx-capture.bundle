@@ -55,7 +55,6 @@
       "content": {
         "#": "element",
         "id": "Text",
-        "key": null,
         "props": {
           "onPress": {
             "#": "apply",
