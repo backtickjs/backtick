@@ -1,7 +1,7 @@
-import type { LayoutProps } from "./layout.js";
+import type { LayoutStyleProps } from "./layout.js";
 import type { Color, Dimension, Styled } from "./values.js";
 
-type ImageProps = LayoutProps & {
+type ImageStyleProps = LayoutStyleProps & {
   backgroundColor: Color;
   opacity: number;
   backfaceVisibility: "visible" | "hidden";
@@ -20,4 +20,4 @@ type ImageProps = LayoutProps & {
   overlayColor: string;
 };
 
-export type ImageStyle = Styled<ImageProps>;
+export type ImageStyle = Styled<ImageStyleProps>;

@@ -1,6 +1,6 @@
 import type { Dimension } from "./values.js";
 
-export type LayoutProps = {
+export type LayoutStyleProps = {
   flex: number;
   flexDirection: "row" | "row-reverse" | "column" | "column-reverse";
   flexWrap: "wrap" | "nowrap" | "wrap-reverse";

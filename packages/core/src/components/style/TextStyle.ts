@@ -1,7 +1,7 @@
-import type { ViewProps } from "./ViewStyle.js";
+import type { ViewStyleProps } from "./ViewStyle.js";
 import type { Color, Styled } from "./values.js";
 
-type TextProps = ViewProps & {
+type TextStyleProps = ViewStyleProps & {
   color: Color;
   fontFamily: string;
   fontSize: number;
@@ -47,4 +47,4 @@ type TextProps = ViewProps & {
   userSelect: "auto" | "text" | "none" | "contain" | "all";
 };
 
-export type TextStyle = Styled<TextProps>;
+export type TextStyle = Styled<TextStyleProps>;

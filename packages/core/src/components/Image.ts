@@ -8,8 +8,11 @@ import type { ImageStyle } from "./style/index.js";
 
 type ResizeMode = "cover" | "contain" | "stretch" | "repeat" | "center";
 
-export const Image: ClientElement<{
+export type ImageProps = {
   source: ImageSource;
   style?: ImageStyle;
   resizeMode?: Prop<ResizeMode>;
-}> = createClientElement("Image");
+  testID?: string;
+};
+
+export const Image: ClientElement<ImageProps> = createClientElement("Image");

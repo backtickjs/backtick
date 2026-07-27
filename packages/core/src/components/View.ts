@@ -6,7 +6,10 @@ import type { JSX } from "../jsx-runtime/index.js";
 import type { Children } from "./Children.js";
 import type { ViewStyle } from "./style/index.js";
 
-export const View: ClientElement<{
+export type ViewProps = {
   children?: Children<JSX.Element>;
   style?: ViewStyle;
-}> = createClientElement("View");
+  testID?: string;
+};
+
+export const View: ClientElement<ViewProps> = createClientElement("View");

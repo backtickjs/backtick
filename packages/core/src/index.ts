@@ -9,7 +9,14 @@ export {
   cs,
   state,
 } from "@backtickjs/cs-runtime";
-export { Image, Text, View } from "./components/index.js";
+export {
+  Image,
+  type ImageProps,
+  Text,
+  type TextProps,
+  View,
+  type ViewProps,
+} from "./components/index.js";
 export type { JSX } from "./jsx-runtime/index.js";
 export { bundle } from "@backtickjs/jit-bundler";
 export type {

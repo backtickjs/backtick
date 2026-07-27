@@ -6,8 +6,11 @@ import {
 import type { Children } from "./Children.js";
 import type { TextStyle } from "./style/index.js";
 
-export const Text: ClientElement<{
+export type TextProps = {
   children?: Children<string>;
   style?: TextStyle;
   onPress?: Client<() => void>;
-}> = createClientElement("Text");
+  testID?: string;
+};
+
+export const Text: ClientElement<TextProps> = createClientElement("Text");

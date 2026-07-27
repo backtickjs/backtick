@@ -1,3 +1,3 @@
-export { Image } from "./Image.js";
-export { Text } from "./Text.js";
-export { View } from "./View.js";
+export { Image, type ImageProps } from "./Image.js";
+export { Text, type TextProps } from "./Text.js";
+export { View, type ViewProps } from "./View.js";

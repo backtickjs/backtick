@@ -1,8 +1,8 @@
-import type { LayoutProps } from "./layout.js";
+import type { LayoutStyleProps } from "./layout.js";
 import type { Transform } from "./Transform.js";
 import type { Color, Dimension, Styled } from "./values.js";
 
-export type ViewProps = LayoutProps & {
+export type ViewStyleProps = LayoutStyleProps & {
   backgroundColor: Color;
   opacity: number;
 
@@ -39,4 +39,4 @@ export type ViewProps = LayoutProps & {
   transform: readonly Transform[];
 };
 
-export type ViewStyle = Styled<ViewProps>;
+export type ViewStyle = Styled<ViewStyleProps>;
