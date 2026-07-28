@@ -1,0 +1,21 @@
+xrqzjp57nqfg:31:16 = ($0, $1) => $0() + $1()
+
+xrqzjp57nqfg:14:10 = ($0, $1) => {
+  const outer = $0();
+  return $1(outer);
+}
+
+xrqzjp57nqfg:31:26 = () => 1
+
+xrqzjp57nqfg:24:10 = ($0) => $0() + 1
+
+xrqzjp57nqfg:16:18 = ($0, $1) => {
+  const middle = 10;
+  return middle + $0($1);
+}
+
+xrqzjp57nqfg:18:30 = ($0) => $0
+
+xrqzjp57nqfg:31:43 = () => 2
+
+root = xrqzjp57nqfg:31:16(() => xrqzjp57nqfg:14:10(xrqzjp57nqfg:31:26, (outer) => xrqzjp57nqfg:24:10(() => xrqzjp57nqfg:16:18(xrqzjp57nqfg:18:30, outer))), () => xrqzjp57nqfg:14:10(xrqzjp57nqfg:31:43, (outer) => xrqzjp57nqfg:24:10(() => xrqzjp57nqfg:16:18(xrqzjp57nqfg:18:30, outer))))
