@@ -6,7 +6,13 @@ import type {
   IrScriptRef,
   IrTreeRef,
 } from "../ir/Ir.js";
-import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
+import {
+  cellIndex,
+  cellKey,
+  isCellKey,
+  sourceName,
+  envKey,
+} from "./bindingKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
@@ -23,7 +29,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
-import { compileEntry, envKey } from "./compileEntry.js";
+import { lowerScriptBody } from "./lowerScriptBody.js";
 
 // What a tree expression renders against: the entry being materialized, and the
 // slot index of each capture it threads in. The two travel together because a
@@ -382,7 +388,17 @@ export function buildBundle(ir: Ir): Bundle {
     if (bodies.has(target)) {
       return;
     }
-    bodies.set(target, compileEntry(fns[target]));
+    const script = fns[target];
+    const params = [
+      ...script.splices.map((_, index) => `$${index}`),
+      ...(script.captures.length === 0 ? [] : ['$env']),
+    ];
+    const arrow = {
+      "#": NodeKind.Arrow,
+      ...(params.length === 0 ? {} : { [NodeField.params]: params }),
+      [NodeField.body]: lowerScriptBody(script),
+    };
+    bodies.set(target, arrow);
   };
 
   // The arguments passed when calling an entry: one thunk per splice, bound to
