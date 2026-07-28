@@ -30,7 +30,7 @@ import type {
 class IrBuilder {
   readonly scripts: IrScriptEntry[] = [];
   readonly trees: IrTreeEntry[] = [];
-  private readonly indexByLoc = new Map<string, number>();
+  private readonly entryByLoc = new Map<string, IrScriptEntry>();
   private readonly refByScript = new Map<AstScript, IrScriptRef>();
   private readonly refByElement = new Map<AstElement, IrTreeRef>();
   // One entry per invocation, interned by node identity so an instance reached
@@ -79,18 +79,18 @@ class IrBuilder {
     return ref;
   }
 
-  // Returns the table index of a script's entry, adding it on first sight.
-  private intern(script: AstScript): number {
+  // Returns a script's entry, adding it to the table on first sight. Two
+  // scripts written at one source location are one entry, so this is what makes
+  // a reference to a shared script a reference to the same object.
+  private intern(script: AstScript): IrScriptEntry {
     const key = locKey(script.fileHash, script.loc);
-    const existing = this.indexByLoc.get(key);
+    const existing = this.entryByLoc.get(key);
     if (existing !== undefined) {
       return existing;
     }
-    // Reserve the slot before lowering splices so a script that (transitively)
-    // references itself resolves to a stable index rather than recursing.
-    const index = this.scripts.length;
-    this.indexByLoc.set(key, index);
-    this.scripts.push({
+    // Recorded before lowering splices so a script that (transitively)
+    // references itself resolves to this entry rather than recursing.
+    const entry: IrScriptEntry = {
       kind: "IrScriptEntry",
       loc: script.loc,
       fileHash: script.fileHash,
@@ -98,8 +98,10 @@ class IrBuilder {
       captures: script.captures,
       spliceParams: script.spliceParams,
       body: script.expression,
-    });
-    return index;
+    };
+    this.entryByLoc.set(key, entry);
+    this.scripts.push(entry);
+    return entry;
   }
 
   // Lowers a JSX element to a reference into the tree table, adding its entry

@@ -48,14 +48,15 @@ export interface IrTreeEntry {
   readonly content: IrElement | IrTreeRef | null;
 }
 
-// A reference into the IR's script table — how one script entry embeds
-// another (and how the IR names its entrypoint). `target` selects the
-// entry; `args` are the splice values passed to it, in splice order, one per
-// parameter of the target `IrScriptEntry`. Each argument may itself be an
-// `IrScriptRef`.
+// How one script entry embeds another (and how the IR names its entrypoint).
+// `target` is the entry itself — `scripts` orders the table, it doesn't name
+// it, and an entry is interned by source location so two references to one
+// script are two references to one object. `args` are the splice values passed
+// to it, in splice order, one per parameter of the target. Each argument may
+// itself be an `IrScriptRef`.
 export interface IrScriptRef {
   readonly kind: "IrScriptRef";
-  readonly target: number;
+  readonly target: IrScriptEntry;
   readonly args: readonly IrArgument[];
 }
 

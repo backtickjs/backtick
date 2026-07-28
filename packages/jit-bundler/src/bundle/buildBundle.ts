@@ -3,6 +3,7 @@ import type {
   IrArgument,
   IrElement,
   IrExpansion,
+  IrScriptEntry,
   IrScriptRef,
   IrTreeRef,
 } from "../ir/Ir.js";
@@ -76,8 +77,6 @@ const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
 export function buildBundle(ir: Ir): Bundle {
-  const fns = ir.scripts;
-
   // The captures a reference supplies, as the object the entry reads them from.
   // Null when the entry captures nothing, so neither side carries an empty one.
   //
@@ -150,7 +149,7 @@ export function buildBundle(ir: Ir): Bundle {
   // lowered to a reference nested in some entry's splice arguments or in a
   // tree entry's props. The tree set is shared across the walk so each tree
   // entry's contents are collected once.
-  const refsByTarget = new Map<number, IrScriptRef[]>();
+  const refsByTarget = new Map<IrScriptEntry, IrScriptRef[]>();
   const seenRefs = new Set<IrScriptRef>();
   const seenTrees = new Set<number>();
   const seenCells = new Set<number>();
@@ -194,7 +193,7 @@ export function buildBundle(ir: Ir): Bundle {
   const freeCapsImpl = (value: IrArgument): string[] => {
     switch (value.kind) {
       case "IrScriptRef": {
-        const keys = [...fns[value.target].captures];
+        const keys = [...value.target.captures];
         value.args.forEach((arg, index) => {
           // What the hole hands its thunk is supplied there, not by the call
           // site. Asking the hole rather than the entry is the exact question:
@@ -255,9 +254,12 @@ export function buildBundle(ir: Ir): Bundle {
   // the ones it does — because which fragment reaches a hole is a host
   // decision. A carried fragment brings its own captures through `$env`, so the
   // extra parameters are unused rather than wrong.
-  const passKeys = (target: number, hole: number): readonly string[] => {
-    const splice = fns[target].splices[hole];
-    return splice === undefined ? [] : (fns[target].spliceParams[splice] ?? []);
+  const passKeys = (
+    target: IrScriptEntry,
+    hole: number,
+  ): readonly string[] => {
+    const splice = target.splices[hole];
+    return splice === undefined ? [] : (target.spliceParams[splice] ?? []);
   };
 
   // What to scan for an entry's needs: an element contributes its key and its
@@ -328,14 +330,14 @@ export function buildBundle(ir: Ir): Bundle {
   const treeSlots = (target: number): string[] => treeNeeds(target).slots;
   const treeCells = (target: number): string[] => treeNeeds(target).cells;
 
-  const bodies = new Map<number, BundleArrowNode>();
+  const bodies = new Map<IrScriptEntry, BundleArrowNode>();
 
   // A script entry's label: where it was written, not where it landed in the
   // table. Two responses that contain the same script label it the same, so an
   // entry a client already holds is recognizable as the one it holds — table
   // position isn't, since it follows the order this composition reached things.
-  const fnLabel = (target: number): FunctionLabel =>
-    locKey(fns[target].fileHash, fns[target].loc);
+  const fnLabel = (target: IrScriptEntry): FunctionLabel =>
+    locKey(target.fileHash, target.loc);
 
   // A class's expansion compiles as its own `functions` entry. The entry is an
   // arrow over the expansion's holes; a construction's call site applies it to
@@ -370,11 +372,10 @@ export function buildBundle(ir: Ir): Bundle {
   // reached. An entry takes a `$i` parameter per splice — its holes render as
   // calls `$i()` — ahead of its environment. Nothing from a call site is
   // inlined, so the body is a function of the script's source alone.
-  const materialize = (target: number): void => {
-    if (bodies.has(target)) {
+  const materialize = (script: IrScriptEntry): void => {
+    if (bodies.has(script)) {
       return;
     }
-    const script = fns[target];
     // One numbered sequence: a thunk per splice hole, then a value per capture.
     const params = [...script.splices, ...script.captures].map(
       (_, index) => `$${index}`,
@@ -384,7 +385,7 @@ export function buildBundle(ir: Ir): Bundle {
       ...(params.length === 0 ? {} : { [NodeField.params]: params }),
       [NodeField.body]: lowerScriptBody(script),
     };
-    bodies.set(target, arrow);
+    bodies.set(script, arrow);
   };
 
   // The arguments passed when calling an entry: one thunk per splice, bound to
@@ -394,7 +395,7 @@ export function buildBundle(ir: Ir): Bundle {
     ref.args.forEach((arg, index) => {
       parts.push(renderThunk(arg, ref.target, index));
     });
-    for (const key of fns[ref.target].captures) {
+    for (const key of ref.target.captures) {
       parts.push(readKey(key));
     }
     return parts;
@@ -412,7 +413,7 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind !== "IrScriptRef" || value.args.length > 0) {
       return null;
     }
-    const wanted = fns[value.target].captures;
+    const wanted = value.target.captures;
     if (
       wanted.length !== passed.length ||
       wanted.some((key, at) => key !== passed[at])
@@ -541,7 +542,7 @@ export function buildBundle(ir: Ir): Bundle {
   // as-is; anything else is wrapped in an arrow.
   const renderThunk = (
     value: IrArgument,
-    target: number,
+    target: IrScriptEntry,
     hole: number,
   ): BundleExpressionNode => {
     const params = passKeys(target, hole).map(displayName);
@@ -719,7 +720,7 @@ export function buildBundle(ir: Ir): Bundle {
       // nested inside it.
       const passed = [
         ...passKeys(ref.target, index),
-        ...fns[ref.target].captures,
+        ...ref.target.captures,
       ];
       // A fragment whose own parameters are exactly that list reads the hole's
       // arguments as they arrive, so it is passed as it is rather than wrapped
@@ -744,7 +745,7 @@ export function buildBundle(ir: Ir): Bundle {
         [NodeField.expression]: renderExpr(arg, scope, inner),
       });
     });
-    for (const key of fns[ref.target].captures) {
+    for (const key of ref.target.captures) {
       parts.push(capExpr(key, scope, params));
     }
     return parts;
@@ -851,8 +852,12 @@ export function buildBundle(ir: Ir): Bundle {
   // Nothing encloses the root, so it can hold no cell at all.
   const root = renderExpr(ir.root, noInstance());
   const functions: Record<FunctionLabel, BundleArrowNode> = {};
-  for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
-    functions[fnLabel(index)] = body;
+  // In table order, which is the order the walk first reached each script.
+  for (const script of ir.scripts) {
+    const body = bodies.get(script);
+    if (body !== undefined) {
+      functions[fnLabel(script)] = body;
+    }
   }
   for (const [label, body] of expansionBodies) {
     functions[label] = body;
