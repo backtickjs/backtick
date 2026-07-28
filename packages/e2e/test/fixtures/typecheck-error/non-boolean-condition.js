@@ -11,7 +11,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: ["name$7s4lkv4w2ddn$0"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.arrow(

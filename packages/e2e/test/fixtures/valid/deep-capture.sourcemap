@@ -1,0 +1,48 @@
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_outer              → outer
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(start)                 → $start
+)                       →  [-semantic]
+);                      → ;
+\n                      → \n    
+return cs.const(        → return 
+cs.splice(              → ${ [-semantic]
+cs.lift((() => {\n      → cs`{\n      
+const                   → const 
+__cs_middle             → middle
+ = cs.const(            →  = 
+10                      → 10
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+__cs_middle             → middle
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+cs.lift(cs.const(       → cs`
+__cs_outer              → outer
+))                      → `
+)                       → } [-semantic]
+);                      → ;
+\n})())                 → \n    }`
+)                       → } [-semantic]
+);                      → ;
+\n})())                 → \n  }`
+cs.lift(cs.const(       → cs`
+cs.splice(              → ${ [-semantic]
+wrap(                   → wrap(
+cs.lift(cs.const(       → cs`
+1                       → 1
+))                      → `
+)                       → )
+)                       → } [-semantic]
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+wrap(                   → wrap(
+cs.lift(cs.const(       → cs`
+2                       → 2
+))                      → `
+)                       → )
+)                       → } [-semantic]
+))                      → `

@@ -11,7 +11,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(

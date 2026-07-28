@@ -54,7 +54,7 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
     splices,
     captures: client.metadata.captures,
     declarations: client.metadata.declarations,
-    captured: client.metadata.captured,
+    spliceScopes: client.metadata.spliceScopes,
     expression: body,
   };
   return node;

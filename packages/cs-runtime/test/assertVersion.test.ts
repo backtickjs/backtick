@@ -20,7 +20,7 @@ function create(version: string) {
         splices: {},
         captures: [],
         declarations: [],
-        captured: [],
+        spliceScopes: {},
       },
       noVisit,
     );

@@ -20,7 +20,7 @@ const press = cs.create(
     splices: {},
     captures: [],
     declarations: ["x$1w48eutzbucnb$0"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(
@@ -54,7 +54,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.string([23, 34, 23, 38], "OK"),
         ),
@@ -63,7 +63,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["button$1w48eutzbucnb$1"],
-    captured: [],
+    spliceScopes: { $0splice0: [] },
   },
   (v) =>
     v.block(

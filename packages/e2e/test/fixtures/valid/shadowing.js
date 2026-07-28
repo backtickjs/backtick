@@ -18,7 +18,7 @@ export default cs.create(
             splices: {},
             captures: ["total$wjl0rp4901n3$0"],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.identifier([5, 19, 5, 24], "total", "total$wjl0rp4901n3$0"),
         ),
@@ -27,7 +27,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["total$wjl0rp4901n3$0"],
-    captured: ["total$wjl0rp4901n3$0"],
+    spliceScopes: { $0splice0: ["total$wjl0rp4901n3$0"] },
   },
   (v) =>
     v.block(
@@ -54,7 +54,10 @@ function add(lhs, rhs) {
       splices: { $lhs: lhs, $rhs: rhs },
       captures: [],
       declarations: ["total$wjl0rp4901n3$1"],
-      captured: [],
+      spliceScopes: {
+        $lhs: ["total$wjl0rp4901n3$1"],
+        $rhs: ["total$wjl0rp4901n3$1"],
+      },
     },
     (v) =>
       v.block(

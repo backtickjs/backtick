@@ -17,14 +17,14 @@ export default cs.create(
           splices: {},
           captures: ["x$3d1j5mxf94bs6$0"],
           declarations: [],
-          captured: [],
+          spliceScopes: {},
         },
         (v) => v.identifier([5, 15, 5, 16], "x", "x$3d1j5mxf94bs6$0"),
       ),
     },
     captures: [],
     declarations: ["x$3d1j5mxf94bs6$0"],
-    captured: ["x$3d1j5mxf94bs6$0"],
+    spliceScopes: { $0splice0: ["x$3d1j5mxf94bs6$0"] },
   },
   (v) =>
     v.block(

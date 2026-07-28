@@ -29,7 +29,7 @@ function inner(carried) {
             splices: { $carried: carried },
             captures: ["base$2dzpugititb9o$0"],
             declarations: [],
-            captured: [],
+            spliceScopes: { $carried: [] },
           },
           (v) =>
             v.binop(
@@ -42,7 +42,7 @@ function inner(carried) {
       },
       captures: [],
       declarations: ["base$2dzpugititb9o$0"],
-      captured: ["base$2dzpugititb9o$0"],
+      spliceScopes: { $0splice0: ["base$2dzpugititb9o$0"] },
     },
     (v) =>
       v.block(
@@ -78,7 +78,7 @@ export default cs.create(
             splices: {},
             captures: ["base$2dzpugititb9o$1"],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.identifier([23, 21, 23, 25], "base", "base$2dzpugititb9o$1"),
         ),
@@ -86,7 +86,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["base$2dzpugititb9o$1"],
-    captured: ["base$2dzpugititb9o$1"],
+    spliceScopes: { $0splice0: ["base$2dzpugititb9o$1"] },
   },
   (v) =>
     v.block(

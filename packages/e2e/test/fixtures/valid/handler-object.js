@@ -11,7 +11,7 @@ const beep = cs.create(
     splices: {},
     captures: [],
     declarations: ["n$gyja921xjk87$0"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(
@@ -41,7 +41,7 @@ const onTap = cs.create(
     splices: { $beep: beep },
     captures: [],
     declarations: ["id$gyja921xjk87$1"],
-    captured: [],
+    spliceScopes: { $beep: ["id$gyja921xjk87$1"] },
   },
   (v) =>
     v.arrow(
@@ -60,7 +60,7 @@ export default cs.create(
     splices: { $onTap: onTap },
     captures: [],
     declarations: ["handlers$gyja921xjk87$2"],
-    captured: [],
+    spliceScopes: { $onTap: [] },
   },
   (v) =>
     v.block(

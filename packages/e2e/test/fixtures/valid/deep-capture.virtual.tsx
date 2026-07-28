@@ -1,0 +1,24 @@
+import { cs, type Client } from "@backtickjs/core";
+
+// Three scripts, and the binding skips the middle one.
+//
+// The outer script declares `outer`; the innermost references it. The script
+// between them neither declares nor mentions it, so it has no capture of its
+// own — the binding still has to reach through it, and the outer script has to
+// know its declaration escaped even though the script that took it is two
+// levels down.
+//
+// Two call sites make the outer script polymorphic, so its splice arrives as a
+// thunk: `captured` is what the hole hands that thunk, which is the only place
+// a wrong answer would show up.
+function wrap(start: Client<number>): Client<number> {
+  return cs.lift((() => {
+    const __cs_outer = cs.const(cs.splice((start)));
+    return cs.const(cs.splice(cs.lift((() => {
+    const __cs_middle = cs.const(10);
+    return cs.const(__cs_middle + cs.splice(cs.lift(cs.const(__cs_outer))));
+})())));
+})());
+}
+
+export default cs.lift(cs.const(cs.splice(wrap(cs.lift(cs.const(1)))) + cs.splice(wrap(cs.lift(cs.const(2))))));

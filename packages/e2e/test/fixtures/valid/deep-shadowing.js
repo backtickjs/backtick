@@ -22,7 +22,7 @@ export default cs.create(
             splices: {},
             captures: ["base$1q50brt6ov79t$0"],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.identifier([9, 21, 9, 25], "base", "base$1q50brt6ov79t$0"),
         ),
@@ -30,7 +30,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["base$1q50brt6ov79t$0"],
-    captured: ["base$1q50brt6ov79t$0"],
+    spliceScopes: { $0splice0: ["base$1q50brt6ov79t$0"] },
   },
   (v) =>
     v.block(
@@ -57,7 +57,7 @@ function outer(inner) {
       splices: { $0splice0: middle(inner) },
       captures: [],
       declarations: ["base$1q50brt6ov79t$1"],
-      captured: [],
+      spliceScopes: { $0splice0: ["base$1q50brt6ov79t$1"] },
     },
     (v) =>
       v.block(
@@ -93,7 +93,7 @@ function middle(inner) {
       splices: { $inner: inner },
       captures: [],
       declarations: ["base$1q50brt6ov79t$2"],
-      captured: [],
+      spliceScopes: { $inner: ["base$1q50brt6ov79t$2"] },
     },
     (v) =>
       v.block(

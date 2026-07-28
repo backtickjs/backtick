@@ -20,7 +20,7 @@ const press = cs.create(
     splices: {},
     captures: [],
     declarations: ["x$k0vejtxhilaj$0"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(
@@ -54,7 +54,7 @@ export const stored = cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.string([23, 34, 23, 38], "OK"),
         ),
@@ -63,7 +63,7 @@ export const stored = cs.create(
     },
     captures: [],
     declarations: ["button$k0vejtxhilaj$1", "handler$k0vejtxhilaj$2"],
-    captured: [],
+    spliceScopes: { $0splice0: [] },
   },
   (v) =>
     v.block(
@@ -108,7 +108,7 @@ export const performed = cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.string([29, 34, 29, 38], "OK"),
         ),
@@ -117,7 +117,7 @@ export const performed = cs.create(
     },
     captures: [],
     declarations: ["button$k0vejtxhilaj$3"],
-    captured: [],
+    spliceScopes: { $0splice0: [] },
   },
   (v) =>
     v.block(

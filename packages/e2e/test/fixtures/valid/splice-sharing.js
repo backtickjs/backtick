@@ -10,7 +10,7 @@ function add(lhs, rhs) {
       splices: { $lhs: lhs, $rhs: rhs },
       captures: [],
       declarations: [],
-      captured: [],
+      spliceScopes: { $lhs: [], $rhs: [] },
     },
     (v) =>
       v.binop(
@@ -40,7 +40,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([8, 15, 8, 16], 1),
         ),
@@ -54,7 +54,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([8, 22, 8, 23], 2),
         ),
@@ -70,7 +70,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([9, 15, 9, 16], 3),
         ),
@@ -84,7 +84,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([9, 22, 9, 23], 4),
         ),
@@ -92,7 +92,7 @@ export default cs.create(
     },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
     v.object([7, 20, 10, 2], {

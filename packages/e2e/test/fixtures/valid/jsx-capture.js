@@ -23,7 +23,7 @@ const script = cs.create(
             splices: {},
             captures: ["x$dxmm13j6jyfs$0"],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) =>
             v.arrow(
@@ -36,7 +36,7 @@ const script = cs.create(
     },
     captures: [],
     declarations: ["x$dxmm13j6jyfs$0"],
-    captured: ["x$dxmm13j6jyfs$0"],
+    spliceScopes: { $0splice0: ["x$dxmm13j6jyfs$0"] },
   },
   (v) =>
     v.arrow(

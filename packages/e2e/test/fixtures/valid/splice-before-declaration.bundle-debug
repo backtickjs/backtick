@@ -1,8 +1,8 @@
-#f0 = () => #f1(#f2) + #f1(#f3)
+#f0 = () => #f1((before) => #f2()) + #f1((before) => #f3())
 
 #f1 = ($0) => {
   const before = 1;
-  const spliced = $0();
+  const spliced = $0(before);
   const after = 2;
   return before + spliced + after;
 }

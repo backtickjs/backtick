@@ -72,7 +72,7 @@ export interface AstScript {
   readonly splices: Readonly<Record<string, Ast>>;
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
-  readonly captured: readonly string[];
+  readonly spliceScopes: Readonly<Record<string, readonly string[]>>;
   readonly expression: AstScriptBody;
 }
 

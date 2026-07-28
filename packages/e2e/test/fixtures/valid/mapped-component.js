@@ -36,7 +36,7 @@ export default _jsx(View, {
               splices: {},
               captures: ["row$3qcr5x2z3u56v$0"],
               declarations: [],
-              captured: [],
+              spliceScopes: {},
             },
             (v) =>
               v.binop(
@@ -50,7 +50,7 @@ export default _jsx(View, {
       },
       captures: [],
       declarations: ["row$3qcr5x2z3u56v$0"],
-      captured: ["row$3qcr5x2z3u56v$0"],
+      spliceScopes: { $rows: [], $0splice0: ["row$3qcr5x2z3u56v$0"] },
     },
     (v) =>
       v.call(

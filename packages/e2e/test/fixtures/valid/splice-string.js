@@ -12,7 +12,7 @@ export default cs.create(
     splices: { $value: value },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $value: [] },
   },
   (v) => v.splice([7, 19, 7, 25], "$value"),
 );

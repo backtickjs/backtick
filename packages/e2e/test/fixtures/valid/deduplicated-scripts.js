@@ -11,7 +11,7 @@ const leaf = cs.create(
     splices: {},
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: {},
   },
   (v) => v.number([5, 17, 5, 18], 7),
 );
@@ -25,7 +25,7 @@ export default cs.create(
     splices: { $leaf: leaf },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $leaf: [] },
   },
   (v) =>
     v.object([7, 20, 7, 42], {

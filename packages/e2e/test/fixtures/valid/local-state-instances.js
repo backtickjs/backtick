@@ -18,7 +18,7 @@ async function Counter() {
           splices: { $size: size },
           captures: [],
           declarations: [],
-          captured: [],
+          spliceScopes: { $size: [] },
         },
         (v) =>
           v.call(
@@ -42,7 +42,7 @@ async function Counter() {
         splices: { $size: size },
         captures: [],
         declarations: [],
-        captured: [],
+        spliceScopes: { $size: [] },
       },
       (v) =>
         v.arrow(

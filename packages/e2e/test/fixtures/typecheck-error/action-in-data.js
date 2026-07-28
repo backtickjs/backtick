@@ -11,7 +11,7 @@ const action = cs.create(
     splices: {},
     captures: [],
     declarations: ["x$1937kl3l6y7n7$0"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(
@@ -36,7 +36,7 @@ export const listed = cs.create(
     splices: { $0splice0: [action] },
     captures: [],
     declarations: ["list$1937kl3l6y7n7$1"],
-    captured: [],
+    spliceScopes: { $0splice0: [] },
   },
   (v) =>
     v.block(
@@ -62,7 +62,7 @@ export const keyed = cs.create(
     splices: { $0splice0: { press: action } },
     captures: [],
     declarations: ["map$1937kl3l6y7n7$2"],
-    captured: [],
+    spliceScopes: { $0splice0: [] },
   },
   (v) =>
     v.block(

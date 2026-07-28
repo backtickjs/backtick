@@ -1,0 +1,19 @@
+#f0 = () => #f1(#f2, (outer) => #f3((middle) => #f4({ "outer": outer }))) + #f1(#f5, (outer) => #f3((middle) => #f4({ "outer": outer })))
+
+#f1 = ($0, $1) => {
+  const outer = $0();
+  return $1(outer);
+}
+
+#f2 = () => 1
+
+#f3 = ($0) => {
+  const middle = 10;
+  return middle + $0(middle);
+}
+
+#f4 = ($env) => $env.outer
+
+#f5 = () => 2
+
+root = #f0()

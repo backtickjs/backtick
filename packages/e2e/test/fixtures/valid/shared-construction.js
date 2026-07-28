@@ -26,7 +26,7 @@ function make(Shape) {
       splices: { $Shape: Shape },
       captures: [],
       declarations: [],
-      captured: [],
+      spliceScopes: { $Shape: [] },
     },
     (v) =>
       v.new([23, 13, 23, 26], v.splice([23, 17, 23, 23], "$Shape"), [
@@ -48,7 +48,7 @@ export default cs.create(
     splices: { $a: a, $b: b, $c: c, $d: d },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $a: [], $b: [], $c: [], $d: [] },
   },
   (v) =>
     v.block(

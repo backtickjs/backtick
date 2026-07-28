@@ -22,7 +22,7 @@ export default cs.create(
     splices: { $Point: Point },
     captures: [],
     declarations: ["C$1n6hvxiblc91f$0"],
-    captured: [],
+    spliceScopes: { $Point: [] },
   },
   (v) =>
     v.block(

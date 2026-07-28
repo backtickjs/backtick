@@ -11,7 +11,7 @@ const count = cs.create(
     splices: {},
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: {},
   },
   (v) => v.number([5, 18, 5, 19], 1),
 );
@@ -25,7 +25,7 @@ export const script = cs.create(
     splices: { $count: count },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $count: [] },
   },
   (v) => v.block([7, 26, 9, 2], [v.splice([8, 3, 8, 9], "$count")]),
 );

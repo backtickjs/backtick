@@ -22,10 +22,16 @@ import type { ClientScript } from "./parseFile.js";
  *    nested scripts (each owns its own). With `captures`, every binding the
  *    script's body can refer to; one it never reads is still a declaration.
  *
- *  - `captured`: the declarations some nested script captures — this script's
- *    bindings that escape into a fragment written inside it. The inverse of
- *    `captures`, read off the same `owner` tags, and what tells a splice hole
- *    which of the entry's bindings its thunk must be handed.
+ *  - `spliceScopes`: for each splice, the script's own declarations that are
+ *    bound where that hole sits. A fragment landing there can only reference
+ *    what was in scope where it was written, so this is what the hole must hand
+ *    the thunk carrying it — and unlike counting what actually reached the hole
+ *    in one bundle, it is a fact about the script alone.
+ *
+ *    Declared *above* the hole, not merely in scope: `declareBlock` hoists a
+ *    block's declarations before walking it, so the scope chain at a hole
+ *    already holds ones the source has not reached. Handing those over would
+ *    name a binding inside its own initializer.
  *
  * They come from one traversal because they are the same analysis:
  * a reference is free for the script it appears in exactly when the binding it
@@ -55,7 +61,7 @@ export interface ResolvedScopes {
   bindings: BindingResolution;
   captures: Map<ClientScript, string[]>;
   declarations: Map<ClientScript, string[]>;
-  captured: Map<ClientScript, string[]>;
+  spliceScopes: Map<ClientScript, { [splice: string]: string[] }>;
 }
 
 // A scope's in-scope names mapped to the binding key of their declaration.
@@ -80,26 +86,31 @@ export function resolveBindings(
   // appends the fresh key to its script; keys are unique, so no dedup is needed.
   const declarations = new Map<ClientScript, string[]>();
 
-  // Per-script declarations that escape, recorded as they are captured — so in
-  // first-capture order, the same convention `captures` uses for first use. A
-  // binding key is unique across the file, so one set records each escape once
-  // however many scripts capture it; no per-owner bookkeeping is needed.
-  const captured = new Map<ClientScript, string[]>();
-  const escaped = new Set<string>();
+  // What each splice hole sees, recorded as the walk reaches it.
+  const spliceScopes = new Map<ClientScript, { [splice: string]: string[] }>();
 
-  const capture = (
-    script: ClientScript,
-    name: string,
-    from: ClientScript,
-  ): void => {
+  // Binding keys the walk has passed the declaration of. A block's declarations
+  // are hoisted into its scope before its body is walked, so the scope chain
+  // cannot answer "is this bound *here*"; this can. Keys leave again when their
+  // block, arrow or handler does.
+  const live = new Set<string>();
+  const enliven = (scope: Scope): (() => void) => {
+    const added = [...scope.values()].filter((key) => !live.has(key));
+    for (const key of added) {
+      live.add(key);
+    }
+    return () => {
+      for (const key of added) {
+        live.delete(key);
+      }
+    };
+  };
+
+  const capture = (script: ClientScript, name: string): void => {
     const seen = seenCaptures.get(script);
     if (seen && !seen.has(name)) {
       seen.add(name);
       captures.get(script)?.push(name);
-    }
-    if (!escaped.has(name)) {
-      escaped.add(name);
-      captured.get(from)?.push(name);
     }
   };
 
@@ -141,11 +152,8 @@ export function resolveBindings(
       return;
     }
     bindings.set(node, bound);
-    // Every bound key was declared, so it has an owner; capturing is what
-    // happens when that owner is some enclosing script rather than this one.
-    const from = owner.get(bound);
-    if (from !== undefined && from !== script) {
-      capture(script, bound, from);
+    if (owner.get(bound) !== script) {
+      capture(script, bound);
     }
   };
 
@@ -174,7 +182,7 @@ export function resolveBindings(
       captures.set(script, []);
       seenCaptures.set(script, new Set());
       declarations.set(script, []);
-      captured.set(script, []);
+      spliceScopes.set(script, {});
     }
     const root = scriptRoot(ts, script);
     if (!root) {
@@ -192,9 +200,27 @@ export function resolveBindings(
     block: ts.Block,
     scopes: Scope[],
   ): void => {
-    const inner = [...scopes, declareBlock(block, script)];
+    const declared = declareBlock(block, script);
+    const inner = [...scopes, declared];
+    const added: string[] = [];
     for (const statement of block.statements) {
       walkStatement(script, statement, inner);
+      // After the statement, not before: an initializer does not see its own
+      // binding, and a hole inside one must not be handed it.
+      if (ts.isVariableStatement(statement)) {
+        const [declaration] = statement.declarationList.declarations;
+        const key =
+          declaration && ts.isIdentifier(declaration.name)
+            ? declared.get(declaration.name.text)
+            : undefined;
+        if (key !== undefined && !live.has(key)) {
+          live.add(key);
+          added.push(key);
+        }
+      }
+    }
+    for (const key of added) {
+      live.delete(key);
     }
   };
 
@@ -237,7 +263,9 @@ export function resolveBindings(
           scope.set(declaration.name.text, unique);
           bindings.set(declaration.name, unique);
         }
+        const release = enliven(scope);
         walkBlock(script, clause.block, [...scopes, scope]);
+        release();
       }
       if (node.finallyBlock) {
         walkBlock(script, node.finallyBlock, scopes);
@@ -260,6 +288,12 @@ export function resolveBindings(
         // A splice evaluates host code in the enclosing scope; descend into any
         // nested scripts it contains so their free variables resolve against
         // this scope chain, but the placeholder itself is not a variable.
+        const scope = spliceScopes.get(script);
+        if (scope !== undefined) {
+          scope[node.text] = (declarations.get(script) ?? []).filter((key) =>
+            live.has(key),
+          );
+        }
         for (const nested of splice.scripts) {
           walkScript(nested, scopes);
         }
@@ -299,11 +333,13 @@ export function resolveBindings(
         }
       }
       const inner = [...scopes, params];
+      const release = enliven(params);
       if (ts.isBlock(node.body)) {
         walkBlock(script, node.body, inner);
       } else {
         walkExpression(script, node.body, inner);
       }
+      release();
     } else if (ts.isArrayLiteralExpression(node)) {
       for (const element of node.elements) {
         walkExpression(script, element, scopes);
@@ -324,7 +360,7 @@ export function resolveBindings(
     walkScript(script, []);
   }
 
-  return { bindings, captures, declarations, captured };
+  return { bindings, captures, declarations, spliceScopes };
 }
 
 function scriptRoot(

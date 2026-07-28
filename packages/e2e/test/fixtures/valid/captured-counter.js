@@ -11,7 +11,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: ["count$31t2pc3vo9x5y$0", "bump$31t2pc3vo9x5y$1"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(

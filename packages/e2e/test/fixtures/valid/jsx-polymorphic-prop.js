@@ -14,7 +14,7 @@ function make(n) {
       splices: { $n: n },
       captures: [],
       declarations: [],
-      captured: [],
+      spliceScopes: { $n: [] },
     },
     (v) => v.arrow([7, 13, 7, 21], [], v.splice([7, 19, 7, 21], "$n")),
   );

@@ -9,7 +9,7 @@ export default cs.create(
     splices: { $0splice0: [1, "two", true, null], $0splice1: { k: 3 } },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
     v.object([3, 20, 3, 73], {

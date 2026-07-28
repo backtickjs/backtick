@@ -13,7 +13,7 @@ export default cs.create(
       "one$357jk2g9zktff$1",
       "two$357jk2g9zktff$2",
     ],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.block(

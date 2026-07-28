@@ -11,7 +11,7 @@ const greet = cs.create(
     splices: {},
     captures: [],
     declarations: ["name$1gqqin78x7yev$0"],
-    captured: [],
+    spliceScopes: {},
   },
   (v) =>
     v.arrow(
@@ -47,7 +47,7 @@ export default cs.create(
     splices: { $greet: greet },
     captures: [],
     declarations: [],
-    captured: [],
+    spliceScopes: { $greet: [] },
   },
   (v) =>
     v.block(

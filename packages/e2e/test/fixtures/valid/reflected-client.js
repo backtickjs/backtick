@@ -18,7 +18,7 @@ class Point {
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
-        captured: [],
+        spliceScopes: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
         v.arrow(
@@ -56,7 +56,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([25, 28, 25, 29], 1),
         ),
@@ -70,7 +70,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([25, 35, 25, 36], 2),
         ),
@@ -86,7 +86,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([26, 28, 26, 29], 3),
         ),
@@ -100,7 +100,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
-            captured: [],
+            spliceScopes: {},
           },
           (v) => v.number([26, 35, 26, 36], 4),
         ),
@@ -112,7 +112,7 @@ export default cs.create(
       "b$1n3zukooyw7a6$1",
       "sum$1n3zukooyw7a6$2",
     ],
-    captured: [],
+    spliceScopes: { $0splice0: [], $0splice1: ["a$1n3zukooyw7a6$0"] },
   },
   (v) =>
     v.block(
