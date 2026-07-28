@@ -17,7 +17,7 @@ class Point {
         kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
-        spliceScopes: { $0splice0: [], $0splice1: [] },
+        spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
         v.arrow(
@@ -45,7 +45,7 @@ const shared = new Point(
       kind: "value",
       splices: {},
       captures: [],
-      spliceScopes: {},
+      spliceParams: {},
     },
     (v) => v.number([22, 29, 22, 30], 1),
   ),
@@ -58,7 +58,7 @@ const shared = new Point(
       kind: "value",
       splices: {},
       captures: [],
-      spliceScopes: {},
+      spliceParams: {},
     },
     (v) => v.number([22, 36, 22, 37], 2),
   ),
@@ -72,7 +72,7 @@ const left = cs.create(
     kind: "value",
     splices: { $shared: shared },
     captures: [],
-    spliceScopes: { $shared: [] },
+    spliceParams: { $shared: [] },
   },
   (v) =>
     v.block(
@@ -108,7 +108,7 @@ const right = cs.create(
     kind: "value",
     splices: { $shared: shared },
     captures: [],
-    spliceScopes: { $shared: [] },
+    spliceParams: { $shared: [] },
   },
   (v) =>
     v.block(
@@ -140,7 +140,7 @@ export default cs.create(
     kind: "value",
     splices: { $left: left, $right: right },
     captures: [],
-    spliceScopes: { $left: [], $right: [] },
+    spliceParams: { $left: [], $right: [] },
   },
   (v) =>
     v.binop(

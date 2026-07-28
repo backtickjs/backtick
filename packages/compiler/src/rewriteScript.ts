@@ -24,7 +24,7 @@ export function rewriteScript(
   fileHash: string,
   bindings: BindingResolution,
   captures: string[] = [],
-  spliceScopes: { [splice: string]: string[] } = {},
+  spliceParams: { [splice: string]: string[] } = {},
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -122,9 +122,9 @@ export function rewriteScript(
         ),
       ),
       ts.factory.createPropertyAssignment(
-        "spliceScopes",
+        "spliceParams",
         ts.factory.createObjectLiteralExpression(
-          Object.entries(spliceScopes).map(([splice, keys]) =>
+          Object.entries(spliceParams).map(([splice, keys]) =>
             ts.factory.createPropertyAssignment(
               ts.factory.createStringLiteral(splice),
               ts.factory.createArrayLiteralExpression(

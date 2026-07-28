@@ -10,7 +10,7 @@ const orDash = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -50,7 +50,7 @@ export default cs.create(
     kind: "value",
     splices: { $orDash: orDash },
     captures: [],
-    spliceScopes: { $orDash: [] },
+    spliceParams: { $orDash: [] },
   },
   (v) =>
     v.object([14, 20, 18, 2], {

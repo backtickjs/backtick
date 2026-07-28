@@ -17,7 +17,7 @@ const Counter = async ({ size }) =>
           kind: "value",
           splices: { $size: size },
           captures: [],
-          spliceScopes: { $size: [] },
+          spliceParams: { $size: [] },
         },
         (v) =>
           v.call(
@@ -40,7 +40,7 @@ const Counter = async ({ size }) =>
         kind: "value",
         splices: { $size: size },
         captures: [],
-        spliceScopes: { $size: [] },
+        spliceParams: { $size: [] },
       },
       (v) =>
         v.arrow(

@@ -22,7 +22,7 @@ const script = cs.create(
             kind: "value",
             splices: {},
             captures: ["x$dxmm13j6jyfs$0"],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) =>
             v.arrow(
@@ -34,7 +34,7 @@ const script = cs.create(
       }),
     },
     captures: [],
-    spliceScopes: { $0splice0: ["x$dxmm13j6jyfs$0"] },
+    spliceParams: { $0splice0: ["x$dxmm13j6jyfs$0"] },
   },
   (v) =>
     v.arrow(

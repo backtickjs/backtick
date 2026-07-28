@@ -16,13 +16,13 @@ export default cs.create(
           kind: "value",
           splices: {},
           captures: ["x$3d1j5mxf94bs6$0"],
-          spliceScopes: {},
+          spliceParams: {},
         },
         (v) => v.identifier([5, 15, 5, 16], "x", "x$3d1j5mxf94bs6$0"),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: ["x$3d1j5mxf94bs6$0"] },
+    spliceParams: { $0splice0: ["x$3d1j5mxf94bs6$0"] },
   },
   (v) =>
     v.block(

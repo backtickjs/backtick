@@ -53,7 +53,7 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
     fileHash: client.metadata.fileHash,
     splices,
     captures: client.metadata.captures,
-    spliceScopes: client.metadata.spliceScopes,
+    spliceParams: client.metadata.spliceParams,
     expression: body,
   };
   return node;

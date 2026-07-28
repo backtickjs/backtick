@@ -11,7 +11,7 @@ const read = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -61,7 +61,7 @@ export default cs.create(
     kind: "value",
     splices: { $read: read },
     captures: [],
-    spliceScopes: { $read: [] },
+    spliceParams: { $read: [] },
   },
   (v) =>
     v.object([10, 20, 14, 2], {

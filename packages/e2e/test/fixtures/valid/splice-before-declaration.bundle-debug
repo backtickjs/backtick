@@ -2,7 +2,7 @@
 
 #f1 = ($0) => {
   const before = 1;
-  const spliced = $0(before);
+  const spliced = $0();
   const after = 2;
   return before + spliced + after;
 }
@@ -11,4 +11,4 @@
 
 #f3 = () => 20
 
-root = #f0(() => #f1((before) => #f2()), () => #f1((before) => #f3()))
+root = #f0(() => #f1(() => #f2()), () => #f1(() => #f3()))

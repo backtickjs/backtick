@@ -23,7 +23,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
-import { compileEntry, environmentKeys } from "./compileEntry.js";
+import { compileEntry, envKey } from "./compileEntry.js";
 
 // What a tree expression renders against: the entry being materialized, and the
 // slot index of each capture it threads in. The two travel together because a
@@ -93,13 +93,16 @@ export function buildBundle(ir: Ir): Bundle {
     if (keys.length === 0) {
       return null;
     }
-    const names = environmentKeys(fns[target]);
     const env: { [name: string]: T } = {};
     for (const key of keys) {
-      const name = names.get(key);
-      if (name !== undefined) {
-        env[name] = value(key);
+      const name = envKey(key);
+      if (name in env) {
+        // Impossible while captures are a script's free variables — but a
+        // duplicate would silently merge two bindings, which is not a thing to
+        // discover at runtime.
+        throw new Error(`Two captures of one entry are both \`${name}\`.`);
       }
+      env[name] = value(key);
     }
     return env;
   };
@@ -262,7 +265,7 @@ export function buildBundle(ir: Ir): Bundle {
   // the call site. The body's hole call and every thunk's parameter list read
   // this, so they agree positionally.
   //
-  // Read off the entry's own source (see `spliceScopes` in `resolveBindings`),
+  // Read off the entry's own source (see `spliceParams` in `resolveBindings`),
   // not off what the arguments reaching that hole in this bundle happen to
   // capture. That is what lets an entry be compiled from its script alone: a
   // second call site appearing elsewhere in a render cannot change a thunk a
@@ -274,7 +277,7 @@ export function buildBundle(ir: Ir): Bundle {
   // extra parameters are unused rather than wrong.
   const passKeys = (target: number, hole: number): readonly string[] => {
     const splice = fns[target].splices[hole];
-    return splice === undefined ? [] : (fns[target].spliceScopes[splice] ?? []);
+    return splice === undefined ? [] : (fns[target].spliceParams[splice] ?? []);
   };
 
   // What to scan for an entry's needs: an element contributes its key and its
@@ -664,7 +667,13 @@ export function buildBundle(ir: Ir): Bundle {
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
-        "this reference to supply it.",
+        "this reference to supply it. A fragment carries the bindings it was " +
+        "written under, so this is also what happens when one is spliced " +
+        "somewhere another `" +
+        sourceName(key) +
+        "` shadows it: the binding is still there, but no longer reachable by " +
+        "name, and naming it anyway would mean emitting what the source " +
+        "couldn't say.",
     );
   };
 

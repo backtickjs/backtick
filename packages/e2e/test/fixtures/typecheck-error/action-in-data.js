@@ -10,7 +10,7 @@ const action = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.block(
@@ -34,7 +34,7 @@ export const listed = cs.create(
     kind: "value",
     splices: { $0splice0: [action] },
     captures: [],
-    spliceScopes: { $0splice0: [] },
+    spliceParams: { $0splice0: [] },
   },
   (v) =>
     v.block(
@@ -59,7 +59,7 @@ export const keyed = cs.create(
     kind: "value",
     splices: { $0splice0: { press: action } },
     captures: [],
-    spliceScopes: { $0splice0: [] },
+    spliceParams: { $0splice0: [] },
   },
   (v) =>
     v.block(

@@ -28,7 +28,7 @@ export default _jsxs(View, {
           kind: "value",
           splices: {},
           captures: [],
-          spliceScopes: {},
+          spliceParams: {},
         },
         (v) => v.string([20, 18, 20, 25], "third"),
       ),

@@ -17,10 +17,10 @@ export interface Metadata {
   splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope
   captures: string[];
-  // for each splice, the declarations bound where that hole sits — what the
-  // hole hands the thunk carrying whatever lands there. Declared above the hole,
-  // so a binding inside its own initializer is not one of them.
-  spliceScopes: { [splice: string]: string[] };
+  // for each splice, this script's own bindings a fragment landing at that hole
+  // can reach: bound above the hole, and wanted by something. What the hole
+  // hands whatever arrives there.
+  spliceParams: { [splice: string]: string[] };
 }
 
 export interface ClientScript {

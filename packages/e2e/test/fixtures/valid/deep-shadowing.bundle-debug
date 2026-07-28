@@ -5,14 +5,14 @@
 
 #f1 = ($0) => {
   const base = 1;
-  return base + $0(base);
+  return base + $0();
 }
 
 #f2 = ($0) => {
   const base = 2;
-  return base * $0(base);
+  return base * $0();
 }
 
 #f3 = ($env) => $env.base
 
-root = #f0((base) => #f1((base2) => #f2((base3) => #f3({ "base": base }))))
+root = #f0((base) => #f1(() => #f2(() => #f3({ "base": base }))))

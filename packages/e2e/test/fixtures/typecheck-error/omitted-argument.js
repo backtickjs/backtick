@@ -10,7 +10,7 @@ const greet = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -45,7 +45,7 @@ export default cs.create(
     kind: "value",
     splices: { $greet: greet },
     captures: [],
-    spliceScopes: { $greet: [] },
+    spliceParams: { $greet: [] },
   },
   (v) =>
     v.block(

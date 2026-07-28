@@ -16,7 +16,7 @@ function guard(fragment) {
       kind: "value",
       splices: { $fragment: fragment },
       captures: [],
-      spliceScopes: { $fragment: ["flag$23k9adtpaouck$0"] },
+      spliceParams: { $fragment: [] },
     },
     (v) =>
       v.arrow(
@@ -54,7 +54,7 @@ const ok = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) => v.string([19, 15, 19, 26], "evaluated"),
 );
@@ -67,7 +67,7 @@ const broken = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.block(
@@ -89,7 +89,7 @@ export default cs.create(
     kind: "value",
     splices: { $0splice0: guard(ok), $0splice1: guard(broken) },
     captures: [],
-    spliceScopes: { $0splice0: [], $0splice1: [] },
+    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
     v.object([24, 20, 27, 2], {

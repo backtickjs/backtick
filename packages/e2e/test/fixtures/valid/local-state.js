@@ -22,7 +22,7 @@ async function Stepper() {
           kind: "value",
           splices: { $size: size },
           captures: [],
-          spliceScopes: { $size: [] },
+          spliceParams: { $size: [] },
         },
         (v) =>
           v.call(
@@ -45,7 +45,7 @@ async function Stepper() {
         kind: "value",
         splices: { $size: size },
         captures: [],
-        spliceScopes: { $size: [] },
+        spliceParams: { $size: [] },
       },
       (v) =>
         v.arrow(

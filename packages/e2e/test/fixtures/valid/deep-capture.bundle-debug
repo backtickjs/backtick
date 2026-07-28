@@ -9,11 +9,11 @@
 
 #f3 = ($0) => {
   const middle = 10;
-  return middle + $0(middle);
+  return middle + $0();
 }
 
 #f4 = ($env) => $env.outer
 
 #f5 = () => 2
 
-root = #f0(() => #f1(() => #f2(), (outer) => #f3((middle) => #f4({ "outer": outer }))), () => #f1(() => #f5(), (outer) => #f3((middle) => #f4({ "outer": outer }))))
+root = #f0(() => #f1(() => #f2(), (outer) => #f3(() => #f4({ "outer": outer }))), () => #f1(() => #f5(), (outer) => #f3(() => #f4({ "outer": outer }))))

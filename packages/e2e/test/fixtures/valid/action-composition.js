@@ -10,7 +10,7 @@ const effects = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.block(
@@ -34,7 +34,7 @@ const composed = cs.create(
     kind: "action",
     splices: { $effects: effects },
     captures: [],
-    spliceScopes: { $effects: [] },
+    spliceParams: { $effects: [] },
   },
   (v) => v.block([9, 35, 11, 2], [v.splice([10, 3, 10, 11], "$effects")]),
 );
@@ -47,7 +47,7 @@ export default cs.create(
     kind: "action",
     splices: { $composed: composed },
     captures: [],
-    spliceScopes: { $composed: [] },
+    spliceParams: { $composed: [] },
   },
   (v) => v.block([13, 19, 15, 2], [v.splice([14, 3, 14, 12], "$composed")]),
 );

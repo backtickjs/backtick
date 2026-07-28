@@ -14,7 +14,7 @@ const gate = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -70,7 +70,7 @@ export default cs.create(
     kind: "value",
     splices: { $gate: gate },
     captures: [],
-    spliceScopes: { $gate: [] },
+    spliceParams: { $gate: [] },
   },
   (v) =>
     v.object([20, 20, 23, 2], {

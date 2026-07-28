@@ -11,7 +11,7 @@ export default cs.create(
     kind: "value",
     splices: { $value: value },
     captures: [],
-    spliceScopes: { $value: [] },
+    spliceParams: { $value: [] },
   },
   (v) => v.splice([7, 19, 7, 25], "$value"),
 );

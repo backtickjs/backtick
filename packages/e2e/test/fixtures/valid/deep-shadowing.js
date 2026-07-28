@@ -21,14 +21,14 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: ["base$1q50brt6ov79t$0"],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.identifier([9, 21, 9, 25], "base", "base$1q50brt6ov79t$0"),
         ),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: ["base$1q50brt6ov79t$0"] },
+    spliceParams: { $0splice0: ["base$1q50brt6ov79t$0"] },
   },
   (v) =>
     v.block(
@@ -54,7 +54,7 @@ function outer(inner) {
       kind: "value",
       splices: { $0splice0: middle(inner) },
       captures: [],
-      spliceScopes: { $0splice0: ["base$1q50brt6ov79t$1"] },
+      spliceParams: { $0splice0: [] },
     },
     (v) =>
       v.block(
@@ -89,7 +89,7 @@ function middle(inner) {
       kind: "value",
       splices: { $inner: inner },
       captures: [],
-      spliceScopes: { $inner: ["base$1q50brt6ov79t$2"] },
+      spliceParams: { $inner: [] },
     },
     (v) =>
       v.block(

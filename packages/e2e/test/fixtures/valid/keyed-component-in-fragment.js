@@ -27,7 +27,7 @@ const script = cs.create(
     kind: "value",
     splices: { $rows: rows },
     captures: [],
-    spliceScopes: { $rows: [] },
+    spliceParams: { $rows: [] },
   },
   (v) => v.arrow([24, 46, 24, 57], [], v.splice([24, 52, 24, 57], "$rows")),
 );

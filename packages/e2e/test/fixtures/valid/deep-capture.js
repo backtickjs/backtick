@@ -37,7 +37,7 @@ function wrap(start) {
                   kind: "value",
                   splices: {},
                   captures: ["outer$1mlv4ugew6yjv$0"],
-                  spliceScopes: {},
+                  spliceParams: {},
                 },
                 (v) =>
                   v.identifier(
@@ -48,7 +48,7 @@ function wrap(start) {
               ),
             },
             captures: [],
-            spliceScopes: { $0splice0: ["middle$1mlv4ugew6yjv$1"] },
+            spliceParams: { $0splice0: [] },
           },
           (v) =>
             v.block(
@@ -82,7 +82,7 @@ function wrap(start) {
         ),
       },
       captures: [],
-      spliceScopes: { $start: [], $0splice0: ["outer$1mlv4ugew6yjv$0"] },
+      spliceParams: { $start: [], $0splice0: ["outer$1mlv4ugew6yjv$0"] },
     },
     (v) =>
       v.block(
@@ -117,7 +117,7 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.number([24, 29, 24, 30], 1),
         ),
@@ -132,14 +132,14 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.number([24, 46, 24, 47], 2),
         ),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: [], $0splice1: [] },
+    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
     v.binop(

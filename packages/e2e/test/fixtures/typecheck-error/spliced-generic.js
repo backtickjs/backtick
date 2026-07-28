@@ -21,7 +21,7 @@ function wrap(value) {
       kind: "value",
       splices: { $value: value },
       captures: [],
-      spliceScopes: { $value: [] },
+      spliceParams: { $value: [] },
     },
     (v) => v.arrow([20, 13, 20, 25], [], v.splice([20, 19, 20, 25], "$value")),
   );
@@ -45,7 +45,7 @@ export default cs.create(
               kind: "value",
               splices: {},
               captures: [],
-              spliceScopes: {},
+              spliceParams: {},
             },
             (v) => v.number([23, 39, 23, 40], 7),
           ),
@@ -53,7 +53,7 @@ export default cs.create(
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: [] },
+    spliceParams: { $0splice0: [] },
   },
   (v) =>
     v.propertyAccess(

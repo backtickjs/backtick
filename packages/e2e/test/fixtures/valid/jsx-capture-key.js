@@ -24,14 +24,14 @@ const script = cs.create(
             kind: "value",
             splices: {},
             captures: ["x$opm9pkkvziiq$0"],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.identifier([9, 27, 9, 28], "x", "x$opm9pkkvziiq$0"),
         ),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: ["x$opm9pkkvziiq$0"] },
+    spliceParams: { $0splice0: ["x$opm9pkkvziiq$0"] },
   },
   (v) =>
     v.arrow(

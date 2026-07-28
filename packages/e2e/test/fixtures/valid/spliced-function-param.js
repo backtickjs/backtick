@@ -20,13 +20,13 @@ export default cs.create(
           kind: "value",
           splices: {},
           captures: [],
-          spliceScopes: {},
+          spliceParams: {},
         },
         (v) => v.arrow([9, 21, 9, 28], [], v.number([9, 27, 9, 28], 2)),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: ["apply$22dvza3e0b85b$0"] },
+    spliceParams: { $0splice0: [] },
   },
   (v) =>
     v.block(

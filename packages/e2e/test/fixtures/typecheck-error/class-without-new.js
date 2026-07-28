@@ -21,7 +21,7 @@ export default cs.create(
     kind: "value",
     splices: { $Point: Point },
     captures: [],
-    spliceScopes: { $Point: [] },
+    spliceParams: { $Point: [] },
   },
   (v) =>
     v.block(

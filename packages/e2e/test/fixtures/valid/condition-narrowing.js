@@ -16,7 +16,7 @@ const flags = {
       kind: "value",
       splices: {},
       captures: [],
-      spliceScopes: {},
+      spliceParams: {},
     },
     (v) => v.boolean([10, 28, 10, 32], true),
   ),
@@ -30,9 +30,7 @@ const label = cs.create(
     kind: "value",
     splices: { $0splice0: flags.strict },
     captures: [],
-    spliceScopes: {
-      $0splice0: ["text$3ciy5yb38f51h$0", "upper$3ciy5yb38f51h$1"],
-    },
+    spliceParams: { $0splice0: [] },
   },
   (v) =>
     v.arrow(
@@ -156,7 +154,7 @@ export default cs.create(
     kind: "value",
     splices: { $label: label },
     captures: [],
-    spliceScopes: { $label: [] },
+    spliceParams: { $label: [] },
   },
   (v) =>
     v.object([25, 20, 30, 2], {

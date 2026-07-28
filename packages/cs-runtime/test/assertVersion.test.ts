@@ -19,7 +19,7 @@ function create(version: string) {
         kind: "value" as const,
         splices: {},
         captures: [],
-        spliceScopes: {},
+        spliceParams: {},
       },
       noVisit,
     );

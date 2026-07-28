@@ -19,7 +19,7 @@ function wrap(fragment) {
       kind: "value",
       splices: { $fragment: fragment },
       captures: [],
-      spliceScopes: { $fragment: ["before$2r40h7jqt1118$0"] },
+      spliceParams: { $fragment: [] },
     },
     (v) =>
       v.block(
@@ -91,7 +91,7 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.number([22, 29, 22, 31], 10),
         ),
@@ -106,14 +106,14 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.number([22, 47, 22, 49], 20),
         ),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: [], $0splice1: [] },
+    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
     v.binop(

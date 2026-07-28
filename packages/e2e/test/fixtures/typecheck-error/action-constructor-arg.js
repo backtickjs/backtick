@@ -17,7 +17,7 @@ const action = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.block(
@@ -41,7 +41,7 @@ export const held = cs.create(
     kind: "value",
     splices: { $Holder: Holder, $action: action },
     captures: [],
-    spliceScopes: { $Holder: [], $action: [] },
+    spliceParams: { $Holder: [], $action: [] },
   },
   (v) =>
     v.block(

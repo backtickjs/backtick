@@ -17,7 +17,7 @@ class Point {
         kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
-        spliceScopes: { $0splice0: [], $0splice1: [] },
+        spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
         v.arrow(
@@ -53,7 +53,7 @@ export default cs.create(
     kind: "value",
     splices: { $Segment: Segment, $Point: Point },
     captures: [],
-    spliceScopes: { $Segment: [], $Point: [] },
+    spliceParams: { $Segment: [], $Point: [] },
   },
   (v) =>
     v.block(

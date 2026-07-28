@@ -12,7 +12,7 @@ export default cs.create(
     kind: "value",
     splices: { $count: count, $0splice0: ++count },
     captures: [],
-    spliceScopes: { $count: [], $0splice0: [] },
+    spliceParams: { $count: [], $0splice0: [] },
   },
   (v) =>
     v.object([8, 20, 8, 48], {

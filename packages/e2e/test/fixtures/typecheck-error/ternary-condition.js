@@ -9,7 +9,7 @@ const count = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) => v.number([4, 18, 4, 19], 1),
 );
@@ -22,7 +22,7 @@ export default cs.create(
     kind: "value",
     splices: { $count: count },
     captures: [],
-    spliceScopes: { $count: [] },
+    spliceParams: { $count: [] },
   },
   (v) =>
     v.ternary(

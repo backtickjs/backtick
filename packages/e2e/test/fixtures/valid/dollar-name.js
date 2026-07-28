@@ -13,7 +13,7 @@ function add(lhs) {
       kind: "value",
       splices: { $lhs: lhs },
       captures: [],
-      spliceScopes: { $lhs: [] },
+      spliceParams: { $lhs: [] },
     },
     (v) =>
       v.binop(
@@ -42,14 +42,14 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: ["foo$$3r8prbdxxrtje$0"],
-            spliceScopes: {},
+            spliceParams: {},
           },
           (v) => v.identifier([13, 19, 13, 23], "foo$", "foo$$3r8prbdxxrtje$0"),
         ),
       ),
     },
     captures: [],
-    spliceScopes: { $0splice0: ["foo$$3r8prbdxxrtje$0"] },
+    spliceParams: { $0splice0: ["foo$$3r8prbdxxrtje$0"] },
   },
   (v) =>
     v.block(

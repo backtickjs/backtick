@@ -19,76 +19,48 @@ import { lowerScriptBody, type RenderSplice } from "./lowerScriptBody.js";
 // The parameter an entry receives its captures under.
 export const envParam = "$env";
 
-// Where each capture sits in that object: its source name, or a cell's own
+// Where a capture sits in that object: its source name, or a cell's own
 // reserved key — `#` can't appear in an identifier, so a cell can never collide
 // with a variable.
 //
-// Two captures can still want one name. An entry's own free variables can't
-// collide (within a script a name resolves outward to exactly one binding), but
-// a fragment carried in by host code brings the captures it was written under,
-// so `foreign-capture-shadow` lands two `base`s in one entry. Hence the suffix.
+// No disambiguation, because two captures of one entry can't want one name: an
+// entry's captures are its script's free variables, and within a script a name
+// resolves outward to exactly one binding. That was not always so — while a
+// monomorphic entry folded in the captures of arguments it inlined, a fragment
+// carried in under a different `base` could land beside the entry's own.
 //
-// Exported because a call site builds the object this reads. Both sides derive
-// it from the same script, so they agree without having to be told.
-export function environmentKeys(
-  script: IrScriptEntry,
-): ReadonlyMap<string, string> {
-  const keys = new Map<string, string>();
-  const taken = new Set<string>();
-  for (const key of script.captures) {
-    if (isCellKey(key)) {
-      keys.set(key, key);
-      continue;
-    }
-    const base = sourceName(key);
-    let name = base;
-    for (let n = 2; taken.has(name); n++) {
-      name = `${base}${n}`;
-    }
-    taken.add(name);
-    keys.set(key, name);
-  }
-  return keys;
+// Exported because a call site builds the object this names. Both sides read
+// the key, so they agree without having to be told.
+export function envKey(key: string): string {
+  return isCellKey(key) ? key : sourceName(key);
 }
 
 export function compileEntry(script: IrScriptEntry): BundleArrowNode {
-  const env = environmentKeys(script);
+  const captured = new Set(script.captures);
 
-  // Names are minted per entry, over the names this body uses and nothing else.
-  // A call site reads none of them — it hands its arguments positionally — so
-  // there is nothing outside to agree with.
-  const names = new Map<string, string>();
-  const used = new Set<string>();
-  const displayName = (key: string): string => {
-    const existing = names.get(key);
-    if (existing !== undefined) {
-      return existing;
-    }
-    const base = sourceName(key);
-    let name = base;
-    for (let n = 2; used.has(name); n++) {
-      name = `${base}${n}`;
-    }
-    used.add(name);
-    names.set(key, name);
-    return name;
-  };
+  // Names are the source's own, undisambiguated.
+  //
+  // Two of a script's bindings can share a name only by shadowing, and then
+  // printing both under it is what the source says — a block frames its own
+  // declarations, so the inner one shadows the outer exactly as written. The one
+  // case that needed telling them apart was a hole reaching a binding an inner
+  // scope shadows, and that is now refused outright (see `spliceParams`): a hole
+  // is only offered what is reachable by name where it sits.
+  const displayName = sourceName;
 
   // A binding the script declares reads as itself; one it captures reads off the
   // environment, so a read says where its value came from.
-  const read = (key: string): BundleExpressionNode => {
-    const name = env.get(key);
-    return name === undefined
-      ? { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) }
-      : {
+  const read = (key: string): BundleExpressionNode =>
+    captured.has(key)
+      ? {
           "#": NodeKind.Property,
           [NodeField.object]: {
             "#": NodeKind.Identifier,
             [NodeField.name]: envParam,
           },
-          [NodeField.name]: name,
-        };
-  };
+          [NodeField.name]: envKey(key),
+        }
+      : { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
 
   // The body references holes by key; a reference's `args` are positional in the
   // script's `splices` order, so this maps between them.
@@ -99,9 +71,9 @@ export function compileEntry(script: IrScriptEntry): BundleArrowNode {
       throw new Error(`This script has no \`${key}\` splice.`);
     }
     // What the hole hands its thunk: the bindings this script declares that are
-    // bound where the hole sits (see `spliceScopes`). A fragment landing there
+    // bound where the hole sits (see `spliceParams`). A fragment landing there
     // can only reference what was in scope where it was written.
-    const args = (script.spliceScopes[key] ?? []).map((bound) => ({
+    const args = (script.spliceParams[key] ?? []).map((bound) => ({
       "#": NodeKind.Identifier,
       [NodeField.name]: displayName(bound),
     }));
@@ -119,7 +91,7 @@ export function compileEntry(script: IrScriptEntry): BundleArrowNode {
   // captures anything — both read off the script, so the shape is its own.
   const params = [
     ...script.splices.map((_, i) => `$${i}`),
-    ...(env.size === 0 ? [] : [envParam]),
+    ...(captured.size === 0 ? [] : [envParam]),
   ];
   return {
     "#": NodeKind.Arrow,

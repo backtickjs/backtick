@@ -71,7 +71,7 @@ export interface AstScript {
   readonly fileHash: string;
   readonly splices: Readonly<Record<string, Ast>>;
   readonly captures: readonly string[];
-  readonly spliceScopes: Readonly<Record<string, readonly string[]>>;
+  readonly spliceParams: Readonly<Record<string, readonly string[]>>;
   readonly expression: AstScriptBody;
 }
 

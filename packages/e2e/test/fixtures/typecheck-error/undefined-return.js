@@ -8,7 +8,7 @@ const lying = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) => v.arrow([11, 39, 11, 49], [], v.string([11, 45, 11, 49], "hi")),
 );
@@ -21,7 +21,7 @@ export default cs.create(
     kind: "value",
     splices: { $lying: lying },
     captures: [],
-    spliceScopes: { $lying: ["stored$19ws50ksjspoc$0"] },
+    spliceParams: { $lying: [] },
   },
   (v) =>
     v.block(

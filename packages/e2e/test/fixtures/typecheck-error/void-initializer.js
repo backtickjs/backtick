@@ -10,7 +10,7 @@ const ping = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -43,7 +43,7 @@ const script = cs.create(
     kind: "value",
     splices: { $ping: ping },
     captures: [],
-    spliceScopes: { $ping: [] },
+    spliceParams: { $ping: [] },
   },
   (v) =>
     v.block(
@@ -68,7 +68,7 @@ const action = cs.create(
     kind: "action",
     splices: { $ping: ping },
     captures: [],
-    spliceScopes: { $ping: [] },
+    spliceParams: { $ping: [] },
   },
   (v) =>
     v.block(
@@ -94,7 +94,7 @@ const label = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -120,7 +120,7 @@ const wrongArgument = cs.create(
     kind: "value",
     splices: { $label: label },
     captures: [],
-    spliceScopes: { $label: [] },
+    spliceParams: { $label: [] },
   },
   (v) =>
     v.block(

@@ -41,7 +41,7 @@ export default _jsx(View, {
                       kind: "value",
                       splices: {},
                       captures: ["order$kpf5b5091dr1$0"],
-                      spliceScopes: {},
+                      spliceParams: {},
                     },
                     (v) =>
                       v.binop(
@@ -79,7 +79,7 @@ export default _jsx(View, {
                     kind: "value",
                     splices: {},
                     captures: ["order$kpf5b5091dr1$0"],
-                    spliceScopes: {},
+                    spliceParams: {},
                   },
                   (v) =>
                     v.propertyAccess(
@@ -107,7 +107,7 @@ export default _jsx(View, {
                     kind: "value",
                     splices: {},
                     captures: ["order$kpf5b5091dr1$0"],
-                    spliceScopes: {},
+                    spliceParams: {},
                   },
                   (v) =>
                     v.propertyAccess(
@@ -145,7 +145,7 @@ export default _jsx(View, {
                             kind: "value",
                             splices: {},
                             captures: ["item$kpf5b5091dr1$1"],
-                            spliceScopes: {},
+                            spliceParams: {},
                           },
                           (v) =>
                             v.binop(
@@ -186,7 +186,7 @@ export default _jsx(View, {
                           kind: "value",
                           splices: {},
                           captures: ["item$kpf5b5091dr1$1"],
-                          spliceScopes: {},
+                          spliceParams: {},
                         },
                         (v) =>
                           v.propertyAccess(
@@ -202,7 +202,7 @@ export default _jsx(View, {
                     ),
                   },
                   captures: ["order$kpf5b5091dr1$0"],
-                  spliceScopes: { $0splice0: ["item$kpf5b5091dr1$1"] },
+                  spliceParams: { $0splice0: ["item$kpf5b5091dr1$1"] },
                 },
                 (v) =>
                   v.call(
@@ -245,7 +245,7 @@ export default _jsx(View, {
                     kind: "value",
                     splices: {},
                     captures: ["order$kpf5b5091dr1$0"],
-                    spliceScopes: {},
+                    spliceParams: {},
                   },
                   (v) =>
                     v.binop(
@@ -275,7 +275,7 @@ export default _jsx(View, {
               kind: "value",
               splices: {},
               captures: ["order$kpf5b5091dr1$0"],
-              spliceScopes: {},
+              spliceParams: {},
             },
             (v) =>
               v.propertyAccess(
@@ -287,7 +287,7 @@ export default _jsx(View, {
         ),
       },
       captures: [],
-      spliceScopes: { $orders: [], $0splice0: ["order$kpf5b5091dr1$0"] },
+      spliceParams: { $orders: [], $0splice0: ["order$kpf5b5091dr1$0"] },
     },
     (v) =>
       v.call(

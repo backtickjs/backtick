@@ -17,7 +17,7 @@ class Point {
         kind: "value",
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
-        spliceScopes: { $0splice0: [], $0splice1: [] },
+        spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
         v.arrow(
@@ -51,7 +51,7 @@ class Segment {
         kind: "value",
         splices: { $0splice0: this.from.x, $0splice1: this.to.x },
         captures: [],
-        spliceScopes: { $0splice0: [], $0splice1: [] },
+        spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
         v.arrow(
@@ -78,7 +78,7 @@ const segment = new Segment(
         kind: "value",
         splices: {},
         captures: [],
-        spliceScopes: {},
+        spliceParams: {},
       },
       (v) => v.number([36, 42, 36, 43], 1),
     ),
@@ -91,7 +91,7 @@ const segment = new Segment(
         kind: "value",
         splices: {},
         captures: [],
-        spliceScopes: {},
+        spliceParams: {},
       },
       (v) => v.number([36, 49, 36, 50], 2),
     ),
@@ -106,7 +106,7 @@ const segment = new Segment(
         kind: "value",
         splices: {},
         captures: [],
-        spliceScopes: {},
+        spliceParams: {},
       },
       (v) => v.number([36, 67, 36, 68], 1),
     ),
@@ -119,7 +119,7 @@ const segment = new Segment(
         kind: "value",
         splices: {},
         captures: [],
-        spliceScopes: {},
+        spliceParams: {},
       },
       (v) => v.number([36, 74, 36, 75], 8),
     ),
@@ -134,7 +134,7 @@ export default cs.create(
     kind: "value",
     splices: { $segment: segment },
     captures: [],
-    spliceScopes: { $segment: [] },
+    spliceParams: { $segment: [] },
   },
   (v) =>
     v.block(

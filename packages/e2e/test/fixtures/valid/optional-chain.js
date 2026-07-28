@@ -11,7 +11,7 @@ const pick = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -42,7 +42,7 @@ const deep = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -78,7 +78,7 @@ const shout = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    spliceScopes: {},
+    spliceParams: {},
   },
   (v) =>
     v.arrow(
@@ -113,7 +113,7 @@ export default cs.create(
     kind: "value",
     splices: { $pick: pick, $deep: deep, $shout: shout },
     captures: [],
-    spliceScopes: { $pick: [], $deep: [], $shout: [] },
+    spliceParams: { $pick: [], $deep: [], $shout: [] },
   },
   (v) =>
     v.object([18, 20, 26, 2], {
