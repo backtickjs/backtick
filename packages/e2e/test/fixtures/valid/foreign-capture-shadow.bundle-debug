@@ -4,8 +4,8 @@
 }
 
 #f1 = ($0) => {
-  const base2 = 100;
-  return $0(base2);
+  const base = 100;
+  return $0(base);
 }
 
 #f2 = ($0, $env) => $env.base + $0()

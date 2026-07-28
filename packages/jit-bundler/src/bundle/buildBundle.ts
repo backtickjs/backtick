@@ -6,6 +6,7 @@ import type {
   IrScriptRef,
   IrTreeRef,
 } from "../ir/Ir.js";
+import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
@@ -22,23 +23,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
-import { lowerScriptBody, type RenderSplice } from "./lowerScriptBody.js";
-
-// A state cell threads into entries exactly like a capture — an entry that
-// reads a cell receives its handle as a parameter — so a cell travels as a
-// capture key. `#` starts the key because it can't appear in a binding key
-// (or in a JS identifier), so the two namespaces can't collide.
-function cellKey(index: number): string {
-  return `#s${index}`;
-}
-
-function isCellKey(key: string): boolean {
-  return key.startsWith("#s");
-}
-
-function cellIndex(key: string): number {
-  return Number(key.slice(2));
-}
+import { compileEntry, environmentKeys } from "./compileEntry.js";
 
 // What a tree expression renders against: the entry being materialized, and the
 // slot index of each capture it threads in. The two travel together because a
@@ -53,20 +38,6 @@ interface TreeScope {
 // Renders in no instance: nothing is in scope, and a cell reaching here has
 // nowhere to resolve against.
 const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
-
-// Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
-// dropping the hash/counter suffix the compiler appends for global uniqueness.
-//
-// Two bindings may print the same: they only share a scope when the source
-// shadows, and a block frames its own declarations, so the inner one shadows the
-// outer as written. Entries never meet — arguments are positional — and a
-// capture is a key in `$env` rather than an identifier.
-function sourceName(key: string): string {
-  if (isCellKey(key)) {
-    return key.slice(1);
-  }
-  return key.replace(/\$[0-9a-z]+\$\d+$/, "");
-}
 
 // Builds the bundle `{ functions, trees, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
@@ -106,46 +77,6 @@ function sourceName(key: string): string {
 export function buildBundle(ir: Ir): Bundle {
   const fns = ir.scripts;
 
-  // The parameter an entry receives its captures under, and the key each capture
-  // sits at: its source name, or a cell's own reserved key — `#` can't appear in
-  // an identifier, so a cell can never collide with a variable.
-  //
-  // Two captures of one entry can want the same source name. An entry's own free
-  // variables can't collide — within one script a name resolves outward to
-  // exactly one binding — but an entry also receives whatever the arguments it
-  // inlines capture, and a fragment written under one `base` can be carried by
-  // host code into a script written under another. So a name is disambiguated,
-  // per entry: distinct bindings never share a key, and the same binding always
-  // renders the same, which is what makes a body's reads line up with the object
-  // a call site builds.
-  //
-  // Per entry rather than per bundle, so a name minted for one entry can't shift
-  // another's — an entry's keys depend on its own captures and nothing else.
-  const envParam = "$env";
-  const envKeys = new Map<number, Map<string, string>>();
-  const envKey = (target: number, key: string): string => {
-    if (isCellKey(key)) {
-      return key;
-    }
-    let names = envKeys.get(target);
-    if (names === undefined) {
-      names = new Map();
-      envKeys.set(target, names);
-    }
-    const existing = names.get(key);
-    if (existing !== undefined) {
-      return existing;
-    }
-    const taken = new Set(names.values());
-    const base = sourceName(key);
-    let name = base;
-    for (let n = 2; taken.has(name); n++) {
-      name = `${base}${n}`;
-    }
-    names.set(key, name);
-    return name;
-  };
-
   // The captures a reference supplies, as the object the entry reads them from.
   // Null when the entry captures nothing, so neither side carries an empty one.
   //
@@ -162,72 +93,72 @@ export function buildBundle(ir: Ir): Bundle {
     if (keys.length === 0) {
       return null;
     }
+    const names = environmentKeys(fns[target]);
     const env: { [name: string]: T } = {};
     for (const key of keys) {
-      env[envKey(target, key)] = value(key);
+      const name = names.get(key);
+      if (name !== undefined) {
+        env[name] = value(key);
+      }
     }
     return env;
   };
 
-  // Which entry's body is being rendered. A binding key emitted inside a body
-  // has to resolve the way that body resolves it — a capture reads off the
-  // environment, anything else is a local name — but bodies are built through
-  // `renderValue` and `callArgs`, which are shared with tree position. Ambient
-  // rather than a parameter on both, and on everything they reach.
-  let bodyEntry: number | null = null;
-  const withBodyOf = <T>(target: number | null, build: () => T): T => {
-    const previous = bodyEntry;
-    bodyEntry = target;
+  // A binding key in a call site's own expression. Never a capture read: an
+  // entry's captures are resolved inside `compileEntry`, against the object it
+  // is handed — out here a key is a name in the expression being built.
+  const readKey = (key: string): BundleExpressionNode => ({
+    "#": NodeKind.Identifier,
+    [NodeField.name]: displayName(key),
+  });
+
+  // A binding key printed under its source name, with a numeric suffix when two
+  // distinct bindings would otherwise print the same — within one naming scope.
+  //
+  // Disambiguated at all because these become identifiers, and identifiers nest:
+  // a hole inside a thunk puts one thunk's parameters inside another's, so two
+  // bindings sharing a source name can land in one chain and the inner would
+  // shadow what the outer was handed (`shadowing` nests three). Environment keys
+  // have no such problem — they are scoped to one entry's object — so those are
+  // named separately (see `environmentKeys`).
+  //
+  // Two scopes here, neither of them the whole bundle: a `trees` entry, over the
+  // cells it declares and the thunks written in its content; and the root, which
+  // is a tree's content without the entry. A `functions` entry names inside
+  // `compileEntry`, from its own script — nothing out here reads those names,
+  // because a call site hands an entry its arguments positionally.
+  interface Naming {
+    readonly names: Map<string, string>;
+    readonly used: Set<string>;
+  }
+  const namings = new Map<string, Naming>();
+  let naming = "root";
+  const withNaming = <T>(scope: string, build: () => T): T => {
+    const previous = naming;
+    naming = scope;
     try {
       return build();
     } finally {
-      bodyEntry = previous;
+      naming = previous;
     }
   };
-  const capturedCache = new Map<number, ReadonlySet<string>>();
-  const capturedBy = (target: number): ReadonlySet<string> => {
-    let keys = capturedCache.get(target);
-    if (keys === undefined) {
-      keys = new Set(fns[target].captures);
-      capturedCache.set(target, keys);
-    }
-    return keys;
-  };
-  const envRead = (target: number, key: string): BundleExpressionNode => ({
-    "#": NodeKind.Property,
-    [NodeField.object]: {
-      "#": NodeKind.Identifier,
-      [NodeField.name]: envParam,
-    },
-    [NodeField.name]: envKey(target, key),
-  });
-  const readKey = (key: string): BundleExpressionNode =>
-    bodyEntry !== null && capturedBy(bodyEntry).has(key)
-      ? envRead(bodyEntry, key)
-      : { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
-
-  // A binding key printed under its source name, with a numeric suffix when two
-  // distinct bindings would otherwise print the same.
-  //
-  // Needed because these become identifiers, and identifiers nest: a hole inside
-  // a thunk puts one thunk's parameters inside another's, so two bindings that
-  // share a source name can end up in the same chain and the inner would shadow
-  // what the outer was handed. Environment keys have no such problem — they are
-  // scoped to one entry's object — so those stay bare source names (`envKey`).
-  const displayNames = new Map<string, string>();
-  const usedNames = new Set<string>();
   const displayName = (key: string): string => {
-    const existing = displayNames.get(key);
+    let scope = namings.get(naming);
+    if (scope === undefined) {
+      scope = { names: new Map(), used: new Set() };
+      namings.set(naming, scope);
+    }
+    const existing = scope.names.get(key);
     if (existing !== undefined) {
       return existing;
     }
     const base = sourceName(key);
     let name = base;
-    for (let n = 2; usedNames.has(name); n++) {
+    for (let n = 2; scope.used.has(name); n++) {
       name = `${base}${n}`;
     }
-    usedNames.add(name);
-    displayNames.set(key, name);
+    scope.used.add(name);
+    scope.names.set(key, name);
     return name;
   };
 
@@ -430,7 +361,7 @@ export function buildBundle(ir: Ir): Bundle {
       label = `${fns.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
-      const expansionBody = withBodyOf(null, () => renderValue(expansion.body));
+      const expansionBody = renderValue(expansion.body);
       expansionBodies.set(label, {
         "#": NodeKind.Arrow,
         ...(params.length === 0 ? {} : { [NodeField.params]: params }),
@@ -448,51 +379,7 @@ export function buildBundle(ir: Ir): Bundle {
     if (bodies.has(target)) {
       return;
     }
-    // Reserve the slot to break reference cycles; overwritten below.
-    bodies.set(target, { "#": NodeKind.Arrow, [NodeField.body]: null });
-    const captured = new Set(fns[target].captures);
-    // The body references holes by key; a reference's `args` are
-    // positional in the entry's `splices` order, so this maps between them.
-    const holes = new Map(
-      fns[target].splices.map((key, index) => [key, index]),
-    );
-    const holeIndex = (key: string): number => {
-      const index = holes.get(key);
-      if (index === undefined) {
-        throw new Error(`This script has no \`${key}\` splice.`);
-      }
-      return index;
-    };
-    // One parameter per splice the script writes, so an entry's shape is its
-    // own — not a count of how many references this bundle happened to hold.
-    const spliceParams = fns[target].splices.map((_, i) => `$${i}`);
-    const params = [
-      ...spliceParams,
-      ...(captured.size === 0 ? [] : [envParam]),
-    ];
-    const renderSplice: RenderSplice = (key) => {
-      const index = holeIndex(key);
-      const args = passKeys(target, index).map((key) => ({
-        "#": NodeKind.Identifier,
-        [NodeField.name]: displayName(key),
-      }));
-      return {
-        "#": NodeKind.Call,
-        [NodeField.callee]: {
-          "#": NodeKind.Identifier,
-          [NodeField.name]: `$${index}`,
-        },
-        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
-      };
-    };
-    const body = withBodyOf(target, () =>
-      lowerScriptBody(fns[target].body, renderSplice, displayName, readKey),
-    );
-    bodies.set(target, {
-      "#": NodeKind.Arrow,
-      ...(params.length === 0 ? {} : { [NodeField.params]: params }),
-      [NodeField.body]: body,
-    });
+    bodies.set(target, compileEntry(fns[target]));
   };
 
   // The arguments passed when calling an entry: one thunk per splice, bound to
@@ -684,6 +571,10 @@ export function buildBundle(ir: Ir): Bundle {
     if (treeJsons.has(target)) {
       return;
     }
+    withNaming(`t${target}`, () => buildTree(target));
+  };
+
+  const buildTree = (target: number): void => {
     const keys = treeSlots(target);
     const scope: TreeScope = {
       target,
