@@ -1,18 +1,18 @@
 #f0 = () => {
   const base = 10;
-  return #f1(base);
+  return #f1({ "base": base });
 }
 
-#f1 = (base) => {
+#f1 = ($env) => {
   const base2 = 1;
-  return base2 + #f2(base);
+  return base2 + #f2({ "base": $env.base });
 }
 
-#f2 = (base) => {
+#f2 = ($env) => {
   const base3 = 2;
-  return base3 * #f3(base);
+  return base3 * #f3({ "base": $env.base });
 }
 
-#f3 = (base) => base
+#f3 = ($env) => $env.base
 
 root = #f0()

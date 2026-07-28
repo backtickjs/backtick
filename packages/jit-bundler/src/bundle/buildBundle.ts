@@ -126,6 +126,79 @@ export function buildBundle(ir: Ir): Bundle {
     return name;
   };
 
+  // The parameter an entry receives its captures under, and the key each
+  // capture sits at. A source name for a variable, and a cell's own reserved key
+  // — `#` can't appear in an identifier, so the two can't collide.
+  //
+  // Source names are enough because an entry's captures are its free variables:
+  // within one script a name resolves outward to exactly one binding, so two
+  // distinct captures can't share one. `envObject` checks it anyway — a
+  // collision would silently merge two bindings, which is not a failure worth
+  // discovering at runtime.
+  const envParam = "$env";
+  const envKey = (key: string): string =>
+    isCellKey(key) ? key : sourceName(key);
+
+  // The captures a reference supplies, as the object the entry reads them from.
+  // Null when the entry captures nothing, so neither side carries an empty one.
+  const envObject = <T>(
+    target: number,
+    value: (key: string) => T,
+  ): { [name: string]: T } | null => {
+    const keys = need(target);
+    if (keys.length === 0) {
+      return null;
+    }
+    const env: { [name: string]: T } = {};
+    for (const key of keys) {
+      const name = envKey(key);
+      if (name in env) {
+        throw new Error(
+          `Two captures of one entry share the name \`${name}\`.`,
+        );
+      }
+      env[name] = value(key);
+    }
+    return env;
+  };
+
+  // Which entry's body is being rendered. A binding key emitted inside a body
+  // has to resolve the way that body resolves it — a capture reads off the
+  // environment, anything else is a local name — but bodies are built through
+  // `renderValue` and `callArgs`, which are shared with tree position. Ambient
+  // rather than a parameter on both, and on everything they reach.
+  let bodyEntry: number | null = null;
+  const withBodyOf = <T>(target: number | null, build: () => T): T => {
+    const previous = bodyEntry;
+    bodyEntry = target;
+    try {
+      return build();
+    } finally {
+      bodyEntry = previous;
+    }
+  };
+  const capturedCache = new Map<number, ReadonlySet<string>>();
+  const capturedBy = (target: number): ReadonlySet<string> => {
+    let keys = capturedCache.get(target);
+    if (keys === undefined) {
+      keys = new Set(need(target));
+      capturedCache.set(target, keys);
+    }
+    return keys;
+  };
+  const envRead = (key: string): BundleExpressionNode => ({
+    "#": NodeKind.Property,
+    [NodeField.object]: {
+      "#": NodeKind.Identifier,
+      [NodeField.name]: envParam,
+    },
+    [NodeField.name]: envKey(key),
+  });
+  const readKey = (key: string): BundleExpressionNode =>
+    bodyEntry !== null && capturedBy(bodyEntry).has(key)
+      ? envRead(key)
+      : { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+
   // Names each entry's body declares (variable declarations and arrow
   // parameters, at any depth), computed once by the compiler and carried on the
   // entry. A capture an entry binds itself is supplied by that entry, not
@@ -180,7 +253,7 @@ export function buildBundle(ir: Ir): Bundle {
   const monoArgs = (target: number): readonly IrArgument[] =>
     refsByTarget.get(target)?.[0]?.args ?? [];
 
-  // The captures an entry must receive as parameters: its own free variables
+  // The captures an entry receives in its environment: its own free variables
   // plus, for a monomorphic entry, the captures free in the arguments it inlines
   // — minus the ones it binds itself. A polymorphic entry inlines nothing (its
   // arguments arrive as thunks bound at the call site), so it needs only its own
@@ -406,10 +479,11 @@ export function buildBundle(ir: Ir): Bundle {
       label = `${fns.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
+      const expansionBody = withBodyOf(null, () => renderValue(expansion.body));
       expansionBodies.set(label, {
         "#": NodeKind.Arrow,
         ...(params.length === 0 ? {} : { [NodeField.params]: params }),
-        [NodeField.body]: renderValue(expansion.body),
+        [NodeField.body]: expansionBody,
       });
     }
     return { "#": NodeKind.GetFunction, [NodeField.label]: label };
@@ -425,7 +499,7 @@ export function buildBundle(ir: Ir): Bundle {
     }
     // Reserve the slot to break reference cycles; overwritten below.
     bodies.set(target, { "#": NodeKind.Arrow, [NodeField.body]: null });
-    const captureParams = need(target).map(displayName);
+    const captured = new Set(need(target));
     // The body references holes by key; a reference's `args` are
     // positional in the entry's `splices` order, so this maps between them.
     const holes = new Map(
@@ -443,7 +517,7 @@ export function buildBundle(ir: Ir): Bundle {
     if (polymorphic.has(target)) {
       const arity = monoArgs(target).length;
       const spliceParams = Array.from({ length: arity }, (_, i) => `$${i}`);
-      params = [...spliceParams, ...captureParams];
+      params = [...spliceParams, ...(captured.size === 0 ? [] : [envParam])];
       renderSplice = (key) => {
         const index = holeIndex(key);
         const args = passKeys(target, index).map((key) => ({
@@ -460,11 +534,13 @@ export function buildBundle(ir: Ir): Bundle {
         };
       };
     } else {
-      params = captureParams;
+      params = captured.size === 0 ? [] : [envParam];
       const args = monoArgs(target);
       renderSplice = (key) => renderValue(args[holeIndex(key)]);
     }
-    const body = lowerScriptBody(fns[target].body, renderSplice, displayName);
+    const body = withBodyOf(target, () =>
+      lowerScriptBody(fns[target].body, renderSplice, displayName, readKey),
+    );
     bodies.set(target, {
       "#": NodeKind.Arrow,
       ...(params.length === 0 ? {} : { [NodeField.params]: params }),
@@ -474,7 +550,7 @@ export function buildBundle(ir: Ir): Bundle {
 
   // The arguments passed when calling an entry: for a polymorphic target, one
   // thunk per splice (bound to this reference's arguments) ahead of its
-  // captures; for a monomorphic target, just its captures.
+  // environment; for a monomorphic target, just the environment.
   const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
     const parts: BundleExpressionNode[] = [];
     if (polymorphic.has(ref.target)) {
@@ -482,11 +558,9 @@ export function buildBundle(ir: Ir): Bundle {
         parts.push(renderThunk(arg, ref.target, index));
       });
     }
-    for (const key of need(ref.target)) {
-      parts.push({
-        "#": NodeKind.Identifier,
-        [NodeField.name]: displayName(key),
-      });
+    const env = envObject(ref.target, readKey);
+    if (env !== null) {
+      parts.push(env);
     }
     return parts;
   };
@@ -527,10 +601,7 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrTreeRef": {
         materializeTree(value.target);
         requireUnkeyed(value);
-        const args = treeSlots(value.target).map((key) => ({
-          "#": NodeKind.Identifier,
-          [NodeField.name]: displayName(key),
-        }));
+        const args = treeSlots(value.target).map(readKey);
         return {
           "#": NodeKind.Call,
           [NodeField.callee]: {
@@ -542,13 +613,10 @@ export function buildBundle(ir: Ir): Bundle {
       }
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
-      // In a body the handle is already in scope: the entry received it as a
-      // parameter (see `freeCaps`), so it reads by name like any capture.
+      // In a body the handle is already in scope: the entry was handed it with
+      // its captures (see `freeCaps`), so it reads like any of them.
       case "IrStateRef":
-        return {
-          "#": NodeKind.Identifier,
-          [NodeField.name]: displayName(cellKey(value.target)),
-        };
+        return readKey(cellKey(value.target));
       case "IrValue":
         return value.value;
       // An expansion in value position is its `functions` entry: passed
@@ -556,8 +624,11 @@ export function buildBundle(ir: Ir): Bundle {
       // applies to the client arguments.
       case "IrExpansion":
         return expansionEntry(value);
+      // A hole threads like a capture (see `freeCaps`), so in a body it is
+      // reached the same way — through the environment when the entry took it
+      // as one.
       case "IrHole":
-        return { "#": NodeKind.Identifier, [NodeField.name]: value.name };
+        return readKey(value.name);
       case "IrArray":
         return value.elements.map(renderValue);
       case "IrObject": {
@@ -612,12 +683,7 @@ export function buildBundle(ir: Ir): Bundle {
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       requireUnkeyed(value);
-      const args = treeSlots(value.target).map(
-        (key): BundleExpressionNode => ({
-          "#": NodeKind.Identifier,
-          [NodeField.name]: displayName(key),
-        }),
-      );
+      const args = treeSlots(value.target).map(readKey);
       const entry = {
         "#": NodeKind.GetTree,
         [NodeField.label]: `${value.target}`,
@@ -735,7 +801,7 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
-  // a polymorphic target, one `#thunk` per splice ahead of its captures.
+  // a polymorphic target, one `#thunk` per splice ahead of its environment.
   const exprCallArgs = (
     ref: IrScriptRef,
     scope: TreeScope,
@@ -762,8 +828,9 @@ export function buildBundle(ir: Ir): Bundle {
         });
       });
     }
-    for (const key of need(ref.target)) {
-      parts.push(capExpr(key, scope, params));
+    const env = envObject(ref.target, (key) => capExpr(key, scope, params));
+    if (env !== null) {
+      parts.push(env);
     }
     return parts;
   };

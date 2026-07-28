@@ -3,10 +3,10 @@
   return #t0(x);
 }
 
-#f1 = (x) => () => x
+#f1 = ($env) => () => $env.x
 
 #t0 = <Text
-  onPress={#f1(slots[0])}
+  onPress={#f1({ "x": slots[0] })}
 />
 
 root = #f0()

@@ -1,0 +1,13 @@
+#f0 = () => [1, 2, 3].map((row) => #t0(row))
+
+#f1 = ($env) => "row " + $env.row
+
+#t0 = <Text>
+  {#f1({ "row": slots[0] })}
+</Text>
+
+#t1 = <View>
+  {#f0()}
+</View>
+
+root = #t1()

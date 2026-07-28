@@ -18,8 +18,16 @@ import type {
 export type RenderSplice = (key: string) => BundleExpressionNode;
 
 // Maps a binding key to the name it is printed under (see `displayName` in
-// `buildBundle`).
+// `buildBundle`). Binding sites only — a declaration, an arrow parameter, a
+// catch binding — where what is emitted is a name rather than an expression.
 export type Mangle = (key: string) => string;
+
+// Reads a binding key in expression position. A binding the script declares
+// itself resolves to a plain identifier; one it captures is a lookup on the
+// environment the entry was handed (see `buildBundle`). Separate from `Mangle`
+// because only one of the two can be an expression: a capture is a value, never
+// a variable, so a binding site is always local and always a name.
+export type ReadIdentifier = (key: string) => BundleExpressionNode;
 
 // Lowers a script's AST body to its wire `BundleBody`: splice holes are
 // filled by `renderSplice` (with the arguments passed to the script), and
@@ -31,20 +39,22 @@ export function lowerScriptBody(
   node: AstScriptBody,
   renderSplice: RenderSplice,
   mangle: Mangle,
+  read: ReadIdentifier,
 ): BundleBody {
   if (node.kind === "AstScriptBlock") {
-    return buildBlock(node, renderSplice, mangle);
+    return buildBlock(node, renderSplice, mangle, read);
   }
-  return buildExpression(node, renderSplice, mangle);
+  return buildExpression(node, renderSplice, mangle, read);
 }
 
 function buildBlock(
   node: AstScriptBlock,
   renderSplice: RenderSplice,
   mangle: Mangle,
+  read: ReadIdentifier,
 ): BundleBlockNode {
   const statements = node.statements.map((statement) =>
-    buildStatement(statement, renderSplice, mangle),
+    buildStatement(statement, renderSplice, mangle, read),
   );
   return {
     "#": NodeKind.Block,
@@ -57,6 +67,7 @@ function buildStatement(
   node: AstScriptStatement,
   renderSplice: RenderSplice,
   mangle: Mangle,
+  read: ReadIdentifier,
 ): BundleStatementNode {
   switch (node.kind) {
     case "AstScriptAssignment":
@@ -67,10 +78,11 @@ function buildStatement(
           node.expression,
           renderSplice,
           mangle,
+          read,
         ),
       };
     case "AstScriptBlock":
-      return buildBlock(node, renderSplice, mangle);
+      return buildBlock(node, renderSplice, mangle, read);
     case "AstScriptIf":
       return {
         "#": NodeKind.If,
@@ -78,16 +90,18 @@ function buildStatement(
           node.condition,
           renderSplice,
           mangle,
+          read,
         ),
         [NodeField.consequent]: buildStatement(
           node.consequent,
           renderSplice,
           mangle,
+          read,
         ),
         [NodeField.alternate]:
           node.alternate === null
             ? null
-            : buildStatement(node.alternate, renderSplice, mangle),
+            : buildStatement(node.alternate, renderSplice, mangle, read),
       };
     case "AstScriptReturn":
       return {
@@ -96,6 +110,7 @@ function buildStatement(
           node.expression,
           renderSplice,
           mangle,
+          read,
         ),
       };
     case "AstScriptThrow":
@@ -105,15 +120,21 @@ function buildStatement(
           node.expression,
           renderSplice,
           mangle,
+          read,
         ),
       };
     case "AstScriptTry":
       return {
         "#": NodeKind.Try,
-        [NodeField.block]: buildBlock(node.block, renderSplice, mangle),
+        [NodeField.block]: buildBlock(node.block, renderSplice, mangle, read),
         [NodeField.param]:
           node.param === null ? null : mangle(node.param.bindingKey),
-        [NodeField.handler]: buildBlock(node.handler, renderSplice, mangle),
+        [NodeField.handler]: buildBlock(
+          node.handler,
+          renderSplice,
+          mangle,
+          read,
+        ),
       };
     case "AstScriptVariableDeclaration":
       return {
@@ -124,11 +145,12 @@ function buildStatement(
           node.expression,
           renderSplice,
           mangle,
+          read,
         ),
       };
     default:
       // Every remaining kind is an expression, evaluated for its effect.
-      return buildExpression(node, renderSplice, mangle);
+      return buildExpression(node, renderSplice, mangle, read);
   }
 }
 
@@ -136,9 +158,10 @@ function buildExpression(
   node: AstScriptExpression,
   renderSplice: RenderSplice,
   mangle: Mangle,
+  read: ReadIdentifier,
 ): BundleExpressionNode {
   const e = (child: AstScriptExpression): BundleExpressionNode =>
-    buildExpression(child, renderSplice, mangle);
+    buildExpression(child, renderSplice, mangle, read);
   switch (node.kind) {
     case "AstScriptArray":
       return node.elements.map(e);
@@ -147,7 +170,12 @@ function buildExpression(
       return {
         "#": NodeKind.Arrow,
         ...(params.length === 0 ? {} : { [NodeField.params]: params }),
-        [NodeField.body]: lowerScriptBody(node.body, renderSplice, mangle),
+        [NodeField.body]: lowerScriptBody(
+          node.body,
+          renderSplice,
+          mangle,
+          read,
+        ),
       };
     }
     case "AstScriptBinop":
@@ -180,10 +208,7 @@ function buildExpression(
       };
     }
     case "AstScriptIdentifier":
-      return {
-        "#": NodeKind.Identifier,
-        [NodeField.name]: mangle(node.bindingKey),
-      };
+      return read(node.bindingKey);
     case "AstScriptNew": {
       // Here `new` expands: a spliced class lowers to a function with one
       // hole per constructor parameter (see `lowerSpliceable`), so a

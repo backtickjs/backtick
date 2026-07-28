@@ -1,8 +1,8 @@
 #f0 = () => {
   const x = 0;
-  return #f1(x);
+  return #f1({ "x": x });
 }
 
-#f1 = (x) => x
+#f1 = ($env) => $env.x
 
 root = #f0()

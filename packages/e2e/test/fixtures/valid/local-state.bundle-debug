@@ -1,12 +1,12 @@
-#f0 = (s0) => s0.read()
+#f0 = ($env) => $env.#s0.read()
 
-#f1 = (s0) => () => {
-  s0.write(s0.read() + 1);
+#f1 = ($env) => () => {
+  $env.#s0.write($env.#s0.read() + 1);
 }
 
 #t0 state { s0 = 16 } = <Text
-  style={{ "fontSize": #f0(cells.s0) }}
-  onPress={#f1(cells.s0)}
+  style={{ "fontSize": #f0({ "#s0": cells.s0 }) }}
+  onPress={#f1({ "#s0": cells.s0 })}
 >
   {"press"}
 </Text>

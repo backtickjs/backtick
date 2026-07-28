@@ -1,0 +1,22 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(rows)             → $rows
+)                  →  [-semantic]
+)                  → 
+.                  → .
+map                → map
+(                  → (
+__cs_row           → row
+ =>                → ) => 
+cs.splice(         → ${ [-semantic]
+<Text>{            → <Text>{
+cs.lift(cs.const(  → cs`
+"row "             → "row "
+ +                 →  + 
+__cs_row           → row
+))                 → `
+}</Text>           → }</Text>
+)                  → } [-semantic]
+)                  → )
+))                 → `

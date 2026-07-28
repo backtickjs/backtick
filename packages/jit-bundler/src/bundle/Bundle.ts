@@ -33,13 +33,27 @@ export interface Bundle {
   // Each entry is an arrow node — evaluating it yields a function, exactly
   // as for an arrow nested inside a body. A monomorphic entry (one call
   // site, or identical arguments everywhere) has its splice arguments
-  // inlined into the body and takes only its captures as parameters. A
-  // polymorphic entry additionally takes one thunk parameter per splice
-  // hole (named `$0`, `$1`, …), ahead of its captures; the body invokes the
-  // thunk at the hole, passing the entry-scoped bindings the splice
-  // captures — a spliced fragment sees the bindings in scope at its hole. A
-  // `BundleApplyFunction` targeting the entry passes arguments in that same
-  // order.
+  // inlined into the body. A polymorphic entry takes one thunk parameter per
+  // splice hole (named `$0`, `$1`, …); the body invokes the thunk at the
+  // hole, passing the entry-scoped bindings the splice captures — a spliced
+  // fragment sees the bindings in scope at its hole.
+  //
+  // Whatever an entry captures arrives after those, in a single object
+  // parameter named `$env`, omitted when it captures nothing. The body reads
+  // a capture as a property of it — `$env.count` — so a read says where the
+  // value came from, and adding a capture shifts no position. A cell sits
+  // under its own `#s<n>` key, which can't collide with a variable because
+  // `#` is not an identifier character.
+  //
+  // The keys are source names, which is sound because an entry's captures are
+  // its free variables: within one script a name resolves outward to exactly
+  // one binding, so two captures can never want the same key. What makes the
+  // two sides line up is the emitter building the object — not, as when
+  // captures were positional parameters, the fact that binding keys are
+  // globally unique.
+  //
+  // A `BundleApplyFunction` targeting the entry passes arguments in that same
+  // order: thunks first, then the environment.
   // A construction's expansion is also an entry — one per class, labeled
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
