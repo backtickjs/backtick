@@ -218,10 +218,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // the ones it does — because which fragment reaches a hole is a host
   // decision. A carried fragment brings its own captures through `$env`, so the
   // extra parameters are unused rather than wrong.
-  const passKeys = (
-    target: IrScriptEntry,
-    hole: number,
-  ): readonly string[] => {
+  const passKeys = (target: IrScriptEntry, hole: number): readonly string[] => {
     const splice = target.splices[hole];
     return splice === undefined ? [] : (target.spliceParams[splice] ?? []);
   };
@@ -683,10 +680,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.
-      const passed = [
-        ...passKeys(ref.target, index),
-        ...ref.target.captures,
-      ];
+      const passed = [...passKeys(ref.target, index), ...ref.target.captures];
       // A fragment whose own parameters are exactly that list reads the hole's
       // arguments as they arrive, so it is passed as it is rather than wrapped
       // in a thunk that would only pass them along.
