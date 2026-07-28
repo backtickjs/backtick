@@ -387,19 +387,26 @@ export function buildBundle(ir: Ir): Bundle {
     return parts;
   };
 
-  // A fragment that is exactly one entry taking no parameters, so calling it is
-  // what a thunk wrapped around it would have done. Null for anything else —
-  // an entry with parameters needs its arguments supplied, which only a thunk
-  // carries.
-  const bareEntry = (value: IrArgument): BundleExpr | null => {
+  // A fragment that is one entry whose parameters are exactly what this hole
+  // passes, so calling it is what a thunk around it would have done. The lists
+  // are compared rather than assumed: a hole hands over what its own entry has,
+  // and a fragment wants what its own script needs, and those coincide often
+  // but not always.
+  const forwarding = (
+    value: IrArgument,
+    passed: readonly string[],
+  ): BundleExpr | null => {
     if (value.kind !== "IrScriptRef" || value.args.length > 0) {
       return null;
     }
-    materialize(value.target);
-    const params = bodies.get(value.target)?.[NodeField.params];
-    if (params !== undefined && params.length > 0) {
+    const wanted = fns[value.target].captures;
+    if (
+      wanted.length !== passed.length ||
+      wanted.some((key, at) => key !== passed[at])
+    ) {
       return null;
     }
+    materialize(value.target);
     return {
       "#": NodeKind.GetFunction,
       [NodeField.label]: `${value.target}`,
@@ -694,20 +701,29 @@ export function buildBundle(ir: Ir): Bundle {
     const parts: BundleExpr[] = [];
     ref.args.forEach((arg, index) => {
       requireUnkeyedIn(arg);
-      const passed = passKeys(ref.target, index);
-      if (passed.length === 0) {
-        // Nothing to hand over means the thunk is called with no arguments, so a
-        // fragment that is one parameterless entry is already that function.
-        parts.push(
-          bareEntry(arg) ?? {
-            "#": NodeKind.Thunk,
-            [NodeField.expression]: renderExpr(arg, scope, params),
-          },
-        );
+      // What the hole hands over, in the order the entry fixes: the bindings
+      // bound there, then the captures it forwards on behalf of whatever is
+      // nested inside it.
+      const passed = [
+        ...passKeys(ref.target, index),
+        ...fns[ref.target].captures,
+      ];
+      // A fragment whose own parameters are exactly that list reads the hole's
+      // arguments as they arrive, so it is passed as it is rather than wrapped
+      // in a thunk that would only pass them along.
+      const forwarded = forwarding(arg, passed);
+      if (forwarded !== null) {
+        parts.push(forwarded);
         return;
       }
-      // The thunk's parameters extend the enclosing ones, like a nested
-      // frame: the expression sees both.
+      if (passed.length === 0) {
+        parts.push({
+          "#": NodeKind.Thunk,
+          [NodeField.expression]: renderExpr(arg, scope, params),
+        });
+        return;
+      }
+      // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
       parts.push({
         "#": NodeKind.Thunk,

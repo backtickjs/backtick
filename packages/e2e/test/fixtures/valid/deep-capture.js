@@ -47,7 +47,7 @@ function wrap(start) {
                   ),
               ),
             },
-            captures: [],
+            captures: ["outer$1mlv4ugew6yjv$0"],
             spliceParams: { $0splice0: [] },
           },
           (v) =>

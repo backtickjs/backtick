@@ -54,10 +54,14 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     if (index === undefined) {
       throw new Error(`This script has no \`${key}\` splice.`);
     }
-    const args = (script.spliceParams[key] ?? []).map((bound) => ({
-      "#": NodeKind.Identifier,
-      [NodeField.name]: sourceName(bound),
-    }));
+    // What a fragment landing here could want: the bindings bound at this hole,
+    // then everything this script captured — which, captures being transitive,
+    // already covers what a fragment nested here needs. Positional, in an order
+    // the script fixes, so a call site reading the same metadata can line its
+    // thunk up without either side knowing the other.
+    const args = [...(script.spliceParams[key] ?? []), ...script.captures].map(
+      (bound) => read(bound),
+    );
     return {
       "#": NodeKind.Call,
       [NodeField.callee]: {

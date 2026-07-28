@@ -8,8 +8,8 @@
   return $0(base);
 }
 
-#f2 = ($0, $1) => $1 + $0()
+#f2 = ($0, $1) => $1 + $0($1)
 
 #f3 = ($0) => $0
 
-root = #f0((base) => #f1((base2) => #f2(() => #f3(base), base2)))
+root = #f0((base) => #f1((base2) => #f2((base2) => #f3(base), base2)))

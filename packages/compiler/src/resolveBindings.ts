@@ -158,8 +158,19 @@ export function resolveBindings(
       return;
     }
     bindings.set(node, bound);
-    if (owner.get(bound) !== script) {
-      capture(script, bound);
+    // Captured by the script that reads it and by every one between it and the
+    // script that declared it: a script whose own body never mentions a binding
+    // still carries it, because the fragment nested inside it does and this is
+    // what hands it over.
+    const from = owner.get(bound);
+    if (from !== script) {
+      for (let i = nesting.length - 1; i >= 0; i--) {
+        const enclosing = nesting[i];
+        if (enclosing === undefined || enclosing === from) {
+          break;
+        }
+        capture(enclosing, bound);
+      }
     }
   };
 
@@ -183,7 +194,21 @@ export function resolveBindings(
     return scope;
   };
 
+  // The scripts enclosing the one being walked, innermost last. A binding read
+  // deep in the nest reaches every script between the reader and the one that
+  // declared it, because each of those is what hands it to the next.
+  const nesting: ClientScript[] = [];
+
   const walkScript = (script: ClientScript, scopes: Scope[]): void => {
+    nesting.push(script);
+    try {
+      walkScriptBody(script, scopes);
+    } finally {
+      nesting.pop();
+    }
+  };
+
+  const walkScriptBody = (script: ClientScript, scopes: Scope[]): void => {
     if (!captures.has(script)) {
       captures.set(script, []);
       seenCaptures.set(script, new Set());

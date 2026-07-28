@@ -8,7 +8,7 @@
 
 #f4 = ($0) => $0.customer.city
 
-#f5 = ($0, $1) => $1.items.map((item) => $0(item))
+#f5 = ($0, $1) => $1.items.map((item) => $0(item, $1))
 
 #f6 = ($0) => $0.sku
 
@@ -34,7 +34,7 @@
   {<Text>
     {#f4(slots[0])}
   </Text>}
-  {#f5((item) => #t0(item), slots[0])}
+  {#f5((item, order) => #t0(item), slots[0])}
   {<Text>
     {#f8(slots[0])}
   </Text>}
