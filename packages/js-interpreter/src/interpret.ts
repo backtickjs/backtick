@@ -187,16 +187,46 @@ function lookup(scope: Scope | null, name: string): Scope | null {
   return null;
 }
 
+// An entry's function is a pure function of the bundle and the label — the
+// tables never change, and an entry closes over nothing else, since its
+// captures arrive as its own parameters. So it is built once per bundle rather
+// than per reference: a reference reached inside a loop would otherwise
+// allocate a closure per iteration. Every invocation still gets its own frame,
+// so sharing the closure shares no state.
+//
+// Keyed weakly, so the table goes when the bundle does.
+const functionsByBundle = new WeakMap<
+  Bundle,
+  Map<FunctionLabel, (...args: Value[]) => Value>
+>();
+const treesByBundle = new WeakMap<
+  Bundle,
+  Map<TreeLabel, (...slots: Value[]) => Value>
+>();
+
 // A `functions` entry as a function: its arrow, evaluated at the top level.
 function getFunction(
   bundle: Bundle,
   label: FunctionLabel,
 ): (...args: Value[]) => Value {
+  let built = functionsByBundle.get(bundle);
+  if (built === undefined) {
+    built = new Map();
+    functionsByBundle.set(bundle, built);
+  }
+  const existing = built.get(label);
+  if (existing !== undefined) {
+    return existing;
+  }
   const arrow = bundle.functions[label];
   if (arrow === undefined) {
     throw new Error(`unknown function entry ${label}`);
   }
-  return evaluateNode(bundle, arrow, null) as (...args: Value[]) => Value;
+  // Evaluated with no enclosing scope: an entry resolves only against its own
+  // parameters, so there is nothing for it to close over.
+  const fn = evaluateNode(bundle, arrow, null) as (...args: Value[]) => Value;
+  built.set(label, fn);
+  return fn;
 }
 
 // A `trees` entry as a function: it takes its slot values and instantiates the
@@ -205,11 +235,24 @@ function getTree(
   bundle: Bundle,
   label: TreeLabel,
 ): (...slots: Value[]) => Value {
+  let built = treesByBundle.get(bundle);
+  if (built === undefined) {
+    built = new Map();
+    treesByBundle.set(bundle, built);
+  }
+  const existing = built.get(label);
+  if (existing !== undefined) {
+    return existing;
+  }
   const tree = bundle.trees[label];
   if (tree === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
-  return (...slots: Value[]) => instantiate(bundle, tree, slots).element;
+  // The closure is shared; `instantiate` still runs per call, so each
+  // instantiation gets its own instance and its own cells.
+  const fn = (...slots: Value[]) => instantiate(bundle, tree, slots).element;
+  built.set(label, fn);
+  return fn;
 }
 
 // An inline element renders in its enclosing instance: it is part of that entry,
