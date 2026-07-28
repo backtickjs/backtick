@@ -8,4 +8,4 @@
   return "dropped";
 }
 
-root = #f0(() => #f1())
+root = #f0(#f1)

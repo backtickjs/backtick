@@ -2,6 +2,7 @@ import { NodeKind, NodeField } from "@backtickjs/core";
 import type {
   Bundle,
   BundleApply,
+  BundleGetFunction,
   BundleApplyTree,
   BundleBinaryOperator,
   BundleElement,
@@ -262,6 +263,7 @@ function evaluateExpr(
       | BundleGetSlot
       | BundleGetState
       | BundleIdentifierNode
+      | BundleGetFunction
       | BundleApply
       | BundleThunk
       | BundleElement;
@@ -286,6 +288,11 @@ function evaluateExpr(
           throw new Error(`unknown identifier ${form[NodeField.name]}`);
         }
         return frame.bindings.get(form[NodeField.name]) ?? null;
+      }
+      // An entry named rather than applied: the function it evaluates to, which
+      // is what a hole handing over nothing would have called.
+      case NodeKind.GetFunction: {
+        return getFunction(bundle, form[NodeField.label]);
       }
       case NodeKind.ApplyFunction: {
         const args = (form[NodeField.args] ?? []).map((arg) =>

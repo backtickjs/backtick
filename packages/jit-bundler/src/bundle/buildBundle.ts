@@ -415,6 +415,25 @@ export function buildBundle(ir: Ir): Bundle {
     return parts;
   };
 
+  // A fragment that is exactly one entry taking no parameters, so calling it is
+  // what a thunk wrapped around it would have done. Null for anything else —
+  // an entry with parameters needs its arguments supplied, which only a thunk
+  // carries.
+  const bareEntry = (value: IrArgument): BundleExpr | null => {
+    if (value.kind !== "IrScriptRef" || value.args.length > 0) {
+      return null;
+    }
+    materialize(value.target);
+    const params = bodies.get(value.target)?.[NodeField.params];
+    if (params !== undefined && params.length > 0) {
+      return null;
+    }
+    return {
+      "#": NodeKind.GetFunction,
+      [NodeField.label]: `${value.target}`,
+    };
+  };
+
   // A body instantiates a tree with a plain call, which carries no key — so a
   // keyed component spliced into a script would lose it. Refused rather than
   // dropped; the key only means something where siblings are compared.
@@ -705,10 +724,14 @@ export function buildBundle(ir: Ir): Bundle {
       requireUnkeyedIn(arg);
       const passed = passKeys(ref.target, index);
       if (passed.length === 0) {
-        parts.push({
-          "#": NodeKind.Thunk,
-          [NodeField.expression]: renderExpr(arg, scope, params),
-        });
+        // Nothing to hand over means the thunk is called with no arguments, so a
+        // fragment that is one parameterless entry is already that function.
+        parts.push(
+          bareEntry(arg) ?? {
+            "#": NodeKind.Thunk,
+            [NodeField.expression]: renderExpr(arg, scope, params),
+          },
+        );
         return;
       }
       // The thunk's parameters extend the enclosing ones, like a nested

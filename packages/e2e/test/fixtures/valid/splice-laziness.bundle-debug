@@ -13,4 +13,4 @@
   throw "the guarded fragment must never evaluate";
 }
 
-root = #f0(() => #f1(() => #f2()), () => #f1(() => #f3()))
+root = #f0(() => #f1(#f2), () => #f1(#f3))

@@ -4,4 +4,4 @@
   return n === null ? 0 : n + 1;
 }
 
-root = #f0(() => #f1())
+root = #f0(#f1)

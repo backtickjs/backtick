@@ -8,4 +8,4 @@
   return [o.label, o.inner?.z ?? 0];
 }
 
-root = #f0(() => #f1())
+root = #f0(#f1)

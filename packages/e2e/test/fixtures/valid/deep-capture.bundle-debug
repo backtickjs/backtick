@@ -16,4 +16,4 @@
 
 #f5 = () => 2
 
-root = #f0(() => #f1(() => #f2(), (outer) => #f3(() => #f4({ "outer": outer }))), () => #f1(() => #f5(), (outer) => #f3(() => #f4({ "outer": outer }))))
+root = #f0(() => #f1(#f2, (outer) => #f3(() => #f4({ "outer": outer }))), () => #f1(#f5, (outer) => #f3(() => #f4({ "outer": outer }))))

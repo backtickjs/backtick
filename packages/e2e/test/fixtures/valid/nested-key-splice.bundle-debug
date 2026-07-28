@@ -4,7 +4,7 @@
 
 #t0 = <View>
   {<Text
-    key={#f0(() => #f1())}
+    key={#f0(#f1)}
   >
     {"x"}
   </Text>}

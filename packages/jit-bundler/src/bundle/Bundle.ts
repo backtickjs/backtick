@@ -255,6 +255,17 @@ export interface BundleThunk {
 // carries itself; the `#`-discriminated nodes compose. `#` is the
 // bundle's one reserved key — a plain data object never uses it (bundling
 // rejects it), so the node reading is unambiguous.
+// What a tree position holds: composition, not computation. Slots and cells,
+// instantiation, elements, and plain data — a reader walks it without needing to
+// evaluate anything, until it meets an `applyFunction`, which is exactly where
+// computation begins.
+//
+// `getFunction` is here because naming an entry is not computing with one. A
+// hole that hands its thunk nothing calls it with no arguments, so a fragment
+// that is one parameterless entry already *is* that function, and wrapping it in
+// a thunk would say the same thing twice. Nothing else from the body grammar
+// belongs: `property` and `call` would let a tree expression destructure and
+// invoke, and the boundary above is the thing worth keeping.
 export type BundleExpr =
   | null
   | boolean
@@ -264,6 +275,7 @@ export type BundleExpr =
   | BundleGetSlot
   | BundleGetState
   | BundleIdentifierNode
+  | BundleGetFunction
   | BundleApply
   | BundleThunk
   | BundleElement

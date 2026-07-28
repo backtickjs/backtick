@@ -156,6 +156,8 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       return `slots[${expr[NodeField.index]}]`;
     case NodeKind.GetState:
       return `cells.${expr[NodeField.name]}`;
+    case NodeKind.GetFunction:
+      return fnLabel(expr[NodeField.label]);
     case NodeKind.ApplyFunction: {
       const args = (expr[NodeField.args] ?? []).map((arg) =>
         renderExpr(arg, indent),
