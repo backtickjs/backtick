@@ -18,6 +18,7 @@ function wrap(fragment) {
       splices: { $fragment: fragment },
       captures: [],
       declarations: ["total$2jup3dk7x37m7$0", "total$2jup3dk7x37m7$1"],
+      captured: [],
     },
     (v) =>
       v.block(
@@ -80,6 +81,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([21, 29, 21, 31], 10),
         ),
@@ -95,6 +97,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([21, 47, 21, 49], 20),
         ),
@@ -102,6 +105,7 @@ export default cs.create(
     },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.binop(

@@ -14,7 +14,7 @@ import { cs, type Client } from "@backtickjs/core";
 function inner(carried: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = cs.const(100);
-    return cs.const(cs.splice(cs.lift(cs.const(__cs_base + cs.splice(carried)))));
+    return cs.const(cs.splice(cs.lift(cs.const(__cs_base + cs.splice((carried))))));
 })());
 }
 

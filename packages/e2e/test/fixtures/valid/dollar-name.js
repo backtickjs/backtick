@@ -14,6 +14,7 @@ function add(lhs) {
       splices: { $lhs: lhs },
       captures: [],
       declarations: [],
+      captured: [],
     },
     (v) =>
       v.binop(
@@ -43,6 +44,7 @@ export default cs.create(
             splices: {},
             captures: ["foo$$3r8prbdxxrtje$0"],
             declarations: [],
+            captured: [],
           },
           (v) => v.identifier([13, 19, 13, 23], "foo$", "foo$$3r8prbdxxrtje$0"),
         ),
@@ -50,6 +52,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["foo$$3r8prbdxxrtje$0"],
+    captured: ["foo$$3r8prbdxxrtje$0"],
   },
   (v) =>
     v.block(

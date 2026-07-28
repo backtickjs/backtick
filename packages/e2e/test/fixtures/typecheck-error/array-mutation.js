@@ -11,6 +11,7 @@ const script = cs.create(
     splices: {},
     captures: [],
     declarations: ["coins$3m6roaxdg127n$0", "last$3m6roaxdg127n$1"],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -57,6 +58,7 @@ const action = cs.create(
     splices: {},
     captures: [],
     declarations: ["coins$3m6roaxdg127n$2"],
+    captured: [],
   },
   (v) =>
     v.block(

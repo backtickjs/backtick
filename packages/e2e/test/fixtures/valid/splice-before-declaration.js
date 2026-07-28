@@ -24,6 +24,7 @@ function wrap(fragment) {
         "spliced$2r40h7jqt1118$1",
         "after$2r40h7jqt1118$2",
       ],
+      captured: [],
     },
     (v) =>
       v.block(
@@ -96,6 +97,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([22, 29, 22, 31], 10),
         ),
@@ -111,6 +113,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([22, 47, 22, 49], 20),
         ),
@@ -118,6 +121,7 @@ export default cs.create(
     },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.binop(

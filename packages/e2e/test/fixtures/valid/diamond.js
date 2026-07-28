@@ -13,6 +13,7 @@ const d0 = cs.create(
     splices: {},
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) => v.number([7, 15, 7, 16], 1),
 );
@@ -26,6 +27,7 @@ const d1 = cs.create(
     splices: { $d0: d0 },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -53,6 +55,7 @@ const d2 = cs.create(
     splices: { $d1: d1 },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -80,6 +83,7 @@ const d3 = cs.create(
     splices: { $d2: d2 },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -107,6 +111,7 @@ const d4 = cs.create(
     splices: { $d3: d3 },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.block(

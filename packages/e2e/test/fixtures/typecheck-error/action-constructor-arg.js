@@ -18,6 +18,7 @@ const action = cs.create(
     splices: {},
     captures: [],
     declarations: ["x$t3cg066e2mwt$0"],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -42,6 +43,7 @@ export const held = cs.create(
     splices: { $Holder: Holder, $action: action },
     captures: [],
     declarations: ["h$t3cg066e2mwt$1"],
+    captured: [],
   },
   (v) =>
     v.block(

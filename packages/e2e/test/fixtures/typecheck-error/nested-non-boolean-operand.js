@@ -20,6 +20,7 @@ export default cs.create(
       "keep$1yqqpc9g2l4nh$1",
       "on$1yqqpc9g2l4nh$2",
     ],
+    captured: [],
   },
   (v) =>
     v.arrow(

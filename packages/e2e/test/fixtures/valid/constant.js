@@ -9,6 +9,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) => v.number([3, 19, 3, 20], 1),
 );

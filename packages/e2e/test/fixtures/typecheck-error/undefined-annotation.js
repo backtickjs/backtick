@@ -9,6 +9,7 @@ const stored = cs.create(
     splices: {},
     captures: [],
     declarations: ["x$18uwl3j62c30b$0", "y$18uwl3j62c30b$1"],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -38,6 +39,7 @@ const written = cs.create(
     splices: {},
     captures: [],
     declarations: ["x$18uwl3j62c30b$2", "y$18uwl3j62c30b$3"],
+    captured: [],
   },
   (v) =>
     v.arrow(

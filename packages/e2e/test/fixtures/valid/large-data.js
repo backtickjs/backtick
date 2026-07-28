@@ -42,6 +42,7 @@ export default _jsx(View, {
                       splices: {},
                       captures: ["order$kpf5b5091dr1$0"],
                       declarations: [],
+                      captured: [],
                     },
                     (v) =>
                       v.binop(
@@ -80,6 +81,7 @@ export default _jsx(View, {
                     splices: {},
                     captures: ["order$kpf5b5091dr1$0"],
                     declarations: [],
+                    captured: [],
                   },
                   (v) =>
                     v.propertyAccess(
@@ -108,6 +110,7 @@ export default _jsx(View, {
                     splices: {},
                     captures: ["order$kpf5b5091dr1$0"],
                     declarations: [],
+                    captured: [],
                   },
                   (v) =>
                     v.propertyAccess(
@@ -146,6 +149,7 @@ export default _jsx(View, {
                             splices: {},
                             captures: ["item$kpf5b5091dr1$1"],
                             declarations: [],
+                            captured: [],
                           },
                           (v) =>
                             v.binop(
@@ -187,6 +191,7 @@ export default _jsx(View, {
                           splices: {},
                           captures: ["item$kpf5b5091dr1$1"],
                           declarations: [],
+                          captured: [],
                         },
                         (v) =>
                           v.propertyAccess(
@@ -203,6 +208,7 @@ export default _jsx(View, {
                   },
                   captures: ["order$kpf5b5091dr1$0"],
                   declarations: ["item$kpf5b5091dr1$1"],
+                  captured: ["item$kpf5b5091dr1$1"],
                 },
                 (v) =>
                   v.call(
@@ -246,6 +252,7 @@ export default _jsx(View, {
                     splices: {},
                     captures: ["order$kpf5b5091dr1$0"],
                     declarations: [],
+                    captured: [],
                   },
                   (v) =>
                     v.binop(
@@ -276,6 +283,7 @@ export default _jsx(View, {
               splices: {},
               captures: ["order$kpf5b5091dr1$0"],
               declarations: [],
+              captured: [],
             },
             (v) =>
               v.propertyAccess(
@@ -288,6 +296,7 @@ export default _jsx(View, {
       },
       captures: [],
       declarations: ["order$kpf5b5091dr1$0"],
+      captured: ["order$kpf5b5091dr1$0"],
     },
     (v) =>
       v.call(

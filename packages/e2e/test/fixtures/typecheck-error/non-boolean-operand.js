@@ -12,6 +12,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: ["count$3kpojr67liy8x$0", "flag$3kpojr67liy8x$1"],
+    captured: [],
   },
   (v) =>
     v.arrow(

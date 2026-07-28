@@ -11,6 +11,7 @@ const greet = cs.create(
     splices: {},
     captures: [],
     declarations: ["name$hlti23avj5mo$0"],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -47,6 +48,7 @@ const double = cs.create(
     splices: {},
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) => v.arrow([10, 19, 10, 26], [], v.number([10, 25, 10, 26], 2)),
 );
@@ -60,6 +62,7 @@ const call = cs.create(
     splices: {},
     captures: [],
     declarations: ["cb$hlti23avj5mo$1"],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -96,6 +99,7 @@ export default cs.create(
     splices: { $greet: greet, $call: call, $double: double },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.object([16, 20, 21, 2], {

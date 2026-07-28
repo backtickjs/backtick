@@ -25,6 +25,7 @@ const script = cs.create(
             splices: {},
             captures: ["x$opm9pkkvziiq$0"],
             declarations: [],
+            captured: [],
           },
           (v) => v.identifier([9, 27, 9, 28], "x", "x$opm9pkkvziiq$0"),
         ),
@@ -32,6 +33,7 @@ const script = cs.create(
     },
     captures: [],
     declarations: ["x$opm9pkkvziiq$0"],
+    captured: ["x$opm9pkkvziiq$0"],
   },
   (v) =>
     v.arrow(

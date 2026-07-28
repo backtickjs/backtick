@@ -301,7 +301,7 @@ export function buildBundle(ir: Ir): Bundle {
   // thunks are written inline at this call site. A tree reference needs its
   // slot values; an inline element whatever its props need.
   // Memoized per argument — the IR is immutable and this fans out from
-  // `need`, `passKeys`, and `treeSlots`. A result computed while a `need` is
+  // `need`, `captured`, and `treeSlots`. A result computed while a `need` is
   // in flight can reflect that cycle guard's partial answer, so it is only
   // cached when no `need` computation is active.
   const freeCapsCache = new Map<IrArgument, string[]>();
@@ -324,7 +324,7 @@ export function buildBundle(ir: Ir): Bundle {
         if (polymorphic.has(value.target)) {
           for (const arg of value.args) {
             // A capture the entry itself declares is supplied by the hole
-            // call (see `passKeys`), not by the call site.
+            // call (it is one of the entry's `captured`), not by the call site.
             for (const key of freeCaps(arg)) {
               if (!declaredKeys[value.target].has(key)) {
                 keys.push(key);
@@ -363,36 +363,6 @@ export function buildBundle(ir: Ir): Bundle {
       case "IrValue":
         return [];
     }
-  };
-
-  // The entry-declared bindings a polymorphic entry's hole must feed its
-  // thunk: whatever the splice arguments passed for that hole capture from
-  // the entry's own scope, across every reference — the body's hole call and
-  // every thunk's parameter list must agree positionally, so the union is
-  // taken and ordered by the entry's declaration order (stable across
-  // applications). This is what makes a spliced fragment see the bindings in
-  // scope at its hole even though the thunk is written at the call site.
-  const passKeysCache = new Map<string, string[]>();
-  const passKeys = (target: number, hole: number): string[] => {
-    const cacheKey = `${target}:${hole}`;
-    const cached = passKeysCache.get(cacheKey);
-    if (cached) {
-      return cached;
-    }
-    const keys = new Set<string>();
-    for (const ref of refsByTarget.get(target) ?? []) {
-      const arg = ref.args[hole];
-      if (arg) {
-        for (const key of freeCaps(arg)) {
-          if (declaredKeys[target].has(key)) {
-            keys.add(key);
-          }
-        }
-      }
-    }
-    const order = fns[target].declarations.filter((key) => keys.has(key));
-    passKeysCache.set(cacheKey, order);
-    return order;
   };
 
   // What to scan for an entry's needs: an element contributes its key and its
@@ -520,7 +490,7 @@ export function buildBundle(ir: Ir): Bundle {
       params = [...spliceParams, ...(captured.size === 0 ? [] : [envParam])];
       renderSplice = (key) => {
         const index = holeIndex(key);
-        const args = passKeys(target, index).map((key) => ({
+        const args = fns[target].captured.map((key) => ({
           "#": NodeKind.Identifier,
           [NodeField.name]: sourceName(key),
         }));
@@ -554,8 +524,8 @@ export function buildBundle(ir: Ir): Bundle {
   const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
     const parts: BundleExpressionNode[] = [];
     if (polymorphic.has(ref.target)) {
-      ref.args.forEach((arg, index) => {
-        parts.push(renderThunk(arg, ref.target, index));
+      ref.args.forEach((arg) => {
+        parts.push(renderThunk(arg, ref.target));
       });
     }
     const env = envObject(ref.target, readKey);
@@ -648,17 +618,26 @@ export function buildBundle(ir: Ir): Bundle {
 
   // Renders a splice argument in thunk position — as a function yielding the
   // value — so a polymorphic entry evaluates it lazily at the hole, mirroring
-  // an inlined splice. When the splice captures bindings the entry declares,
-  // the thunk takes them as parameters and the hole call supplies them (see
-  // `passKeys`); the body's identifiers then resolve through the thunk frame.
-  // Otherwise a referenced entry that takes no arguments is a nullary thunk
-  // as-is; anything else is wrapped in an arrow.
+  // an inlined splice. Otherwise a referenced entry that takes no arguments is a
+  // nullary thunk as-is; anything else is wrapped in an arrow.
+  //
+  // The entry's `captured` are its parameters: the bindings it declares that
+  // escape into a fragment written inside it, so a spliced fragment sees the
+  // bindings in scope at its hole even though the thunk is written at the call
+  // site. The hole call supplies them positionally, reading the same list, and
+  // the body's identifiers then resolve through the thunk frame.
+  //
+  // One list for every hole rather than one per hole: which fragment reaches
+  // which hole is a host decision — a fragment can be carried in from another
+  // scope entirely — so no reading of the source can say it exactly. The
+  // compiler's answer is the tightest thing that is a fact about the script
+  // alone, which is what keeps a second call site appearing elsewhere in a
+  // render from changing a thunk a first one already had.
   const renderThunk = (
     value: IrArgument,
     target: number,
-    hole: number,
   ): BundleExpressionNode => {
-    const params = passKeys(target, hole).map(sourceName);
+    const params = fns[target].captured.map(sourceName);
     if (params.length > 0) {
       return {
         "#": NodeKind.Arrow,
@@ -809,8 +788,8 @@ export function buildBundle(ir: Ir): Bundle {
   ): BundleExpr[] => {
     const parts: BundleExpr[] = [];
     if (polymorphic.has(ref.target)) {
-      ref.args.forEach((arg, index) => {
-        const passed = passKeys(ref.target, index);
+      ref.args.forEach((arg) => {
+        const passed = fns[ref.target].captured;
         if (passed.length === 0) {
           parts.push({
             "#": NodeKind.Thunk,

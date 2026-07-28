@@ -20,6 +20,7 @@ const gate = cs.create(
       "keep$2nymys98gllff$2",
       "on$2nymys98gllff$3",
     ],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -76,6 +77,7 @@ export default cs.create(
     splices: { $gate: gate },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.object([20, 20, 23, 2], {

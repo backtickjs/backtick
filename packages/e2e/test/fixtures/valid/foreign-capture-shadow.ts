@@ -14,7 +14,7 @@ import { cs, type Client } from "@backtickjs/core";
 function inner(carried: Client<number>): Client<number> {
   return cs`{
     const base = 100;
-    return ${cs`base + ${carried}`};
+    return ${cs`base + $carried`};
   }`;
 }
 

@@ -12,6 +12,7 @@ const read = cs.create(
     splices: {},
     captures: [],
     declarations: ["o$10vcjd80vhoob$0"],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -62,6 +63,7 @@ export default cs.create(
     splices: { $read: read },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.object([10, 20, 14, 2], {

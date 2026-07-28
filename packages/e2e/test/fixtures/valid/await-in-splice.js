@@ -15,6 +15,7 @@ export default cs.create(
     splices: { $0splice0: await fetchGreeting() },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.binop(

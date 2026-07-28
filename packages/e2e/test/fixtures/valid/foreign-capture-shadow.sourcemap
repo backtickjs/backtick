@@ -10,9 +10,9 @@ cs.splice(              → ${ [-semantic]
 cs.lift(cs.const(       → cs`
 __cs_base               → base
  +                      →  + 
-cs.splice(              → ${ [-semantic]
-carried                 → carried
-)                       → } [-semantic]
+cs.splice(              →  [-semantic]
+(carried)               → $carried
+)                       →  [-semantic]
 ))                      → `
 )                       → } [-semantic]
 );                      → ;

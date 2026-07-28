@@ -11,6 +11,7 @@ const ping = cs.create(
     splices: {},
     captures: [],
     declarations: ["n$3hyzmfxyz75s4$0"],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -44,6 +45,7 @@ const script = cs.create(
     splices: { $ping: ping },
     captures: [],
     declarations: ["x$3hyzmfxyz75s4$1"],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -69,6 +71,7 @@ const action = cs.create(
     splices: { $ping: ping },
     captures: [],
     declarations: ["x$3hyzmfxyz75s4$2"],
+    captured: [],
   },
   (v) =>
     v.block(
@@ -95,6 +98,7 @@ const label = cs.create(
     splices: {},
     captures: [],
     declarations: ["text$3hyzmfxyz75s4$3"],
+    captured: [],
   },
   (v) =>
     v.arrow(
@@ -121,6 +125,7 @@ const wrongArgument = cs.create(
     splices: { $label: label },
     captures: [],
     declarations: ["x$3hyzmfxyz75s4$4"],
+    captured: [],
   },
   (v) =>
     v.block(

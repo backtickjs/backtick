@@ -29,6 +29,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([19, 28, 19, 30], 30),
         ),
@@ -42,6 +43,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([19, 36, 19, 39], 144),
         ),
@@ -55,6 +57,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([19, 45, 19, 48], 255),
         ),
@@ -62,6 +65,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["c$3o65fk6h8ba4e$0", "brightness$3o65fk6h8ba4e$1"],
+    captured: [],
   },
   (v) =>
     v.block(

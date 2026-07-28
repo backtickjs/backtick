@@ -21,6 +21,7 @@ class Color {
         splices: { $0splice0: this.r },
         captures: [],
         declarations: [],
+        captured: [],
       },
       (v) =>
         v.arrow(
@@ -55,6 +56,7 @@ export default cs.create(
             splices: {},
             captures: [],
             declarations: [],
+            captured: [],
           },
           (v) => v.number([25, 30, 25, 31], 7),
         ),
@@ -63,6 +65,7 @@ export default cs.create(
     },
     captures: [],
     declarations: ["pick$22eb8gy7ghfko$0", "c$22eb8gy7ghfko$1"],
+    captured: [],
   },
   (v) =>
     v.block(

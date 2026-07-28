@@ -19,10 +19,15 @@ import type { ClientScript } from "./parseFile.js";
  *
  *  - `declarations`: for each script, the binding keys it declares itself — every
  *    variable declaration and arrow parameter, at any depth, but not those of
- *    nested scripts (each owns its own). The complement of `captures`, and what
- *    the serializer uses to tell which of an entry's captures it binds locally.
+ *    nested scripts (each owns its own). With `captures`, every binding the
+ *    script's body can refer to; one it never reads is still a declaration.
  *
- * The two answers come from one traversal because they are the same analysis:
+ *  - `captured`: the declarations some nested script captures — this script's
+ *    bindings that escape into a fragment written inside it. The inverse of
+ *    `captures`, read off the same `owner` tags, and what tells a splice hole
+ *    which of the entry's bindings its thunk must be handed.
+ *
+ * They come from one traversal because they are the same analysis:
  * a reference is free for the script it appears in exactly when the binding it
  * resolves to was declared in an *enclosing* script (or in none at all). Every
  * binding is therefore tagged with its declaring script, and a reference is a
@@ -50,6 +55,7 @@ export interface ResolvedScopes {
   bindings: BindingResolution;
   captures: Map<ClientScript, string[]>;
   declarations: Map<ClientScript, string[]>;
+  captured: Map<ClientScript, string[]>;
 }
 
 // A scope's in-scope names mapped to the binding key of their declaration.
@@ -67,18 +73,33 @@ export function resolveBindings(
   // binding it resolves to is local (declared in the same script) or captured
   // from an enclosing one.
   const captures = new Map<ClientScript, string[]>();
-  const captured = new Map<ClientScript, Set<string>>();
+  const seenCaptures = new Map<ClientScript, Set<string>>();
   const owner = new Map<string, ClientScript>();
 
   // Per-script declared binding keys, in declaration order. Every `declare`
   // appends the fresh key to its script; keys are unique, so no dedup is needed.
   const declarations = new Map<ClientScript, string[]>();
 
-  const capture = (script: ClientScript, name: string): void => {
-    const seen = captured.get(script);
+  // Per-script declarations that escape, recorded as they are captured — so in
+  // first-capture order, the same convention `captures` uses for first use. A
+  // binding key is unique across the file, so one set records each escape once
+  // however many scripts capture it; no per-owner bookkeeping is needed.
+  const captured = new Map<ClientScript, string[]>();
+  const escaped = new Set<string>();
+
+  const capture = (
+    script: ClientScript,
+    name: string,
+    from: ClientScript,
+  ): void => {
+    const seen = seenCaptures.get(script);
     if (seen && !seen.has(name)) {
       seen.add(name);
       captures.get(script)?.push(name);
+    }
+    if (!escaped.has(name)) {
+      escaped.add(name);
+      captured.get(from)?.push(name);
     }
   };
 
@@ -120,8 +141,11 @@ export function resolveBindings(
       return;
     }
     bindings.set(node, bound);
-    if (owner.get(bound) !== script) {
-      capture(script, bound);
+    // Every bound key was declared, so it has an owner; capturing is what
+    // happens when that owner is some enclosing script rather than this one.
+    const from = owner.get(bound);
+    if (from !== undefined && from !== script) {
+      capture(script, bound, from);
     }
   };
 
@@ -148,8 +172,9 @@ export function resolveBindings(
   const walkScript = (script: ClientScript, scopes: Scope[]): void => {
     if (!captures.has(script)) {
       captures.set(script, []);
-      captured.set(script, new Set());
+      seenCaptures.set(script, new Set());
       declarations.set(script, []);
+      captured.set(script, []);
     }
     const root = scriptRoot(ts, script);
     if (!root) {
@@ -299,7 +324,7 @@ export function resolveBindings(
     walkScript(script, []);
   }
 
-  return { bindings, captures, declarations };
+  return { bindings, captures, declarations, captured };
 }
 
 function scriptRoot(

@@ -96,6 +96,7 @@ class IrBuilder {
       splices: Object.keys(script.splices),
       captures: script.captures,
       declarations: script.declarations,
+      captured: script.captured,
       body: script.expression,
     });
     return index;

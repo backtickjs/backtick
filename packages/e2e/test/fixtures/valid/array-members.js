@@ -16,6 +16,7 @@ export default cs.create(
       "n$3kt9mhwly650i$2",
       "n$3kt9mhwly650i$3",
     ],
+    captured: [],
   },
   (v) =>
     v.block(

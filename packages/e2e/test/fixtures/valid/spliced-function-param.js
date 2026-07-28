@@ -21,12 +21,14 @@ export default cs.create(
           splices: {},
           captures: [],
           declarations: [],
+          captured: [],
         },
         (v) => v.arrow([9, 21, 9, 28], [], v.number([9, 27, 9, 28], 2)),
       ),
     },
     captures: [],
     declarations: ["apply$22dvza3e0b85b$0", "f$22dvza3e0b85b$1"],
+    captured: [],
   },
   (v) =>
     v.block(

@@ -13,6 +13,7 @@ export default cs.create(
     splices: { $count: count, $0splice0: ++count },
     captures: [],
     declarations: [],
+    captured: [],
   },
   (v) =>
     v.object([8, 20, 8, 48], {

@@ -9,6 +9,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: ["message$2osmwga78xnj6$0", "error$2osmwga78xnj6$1"],
+    captured: [],
   },
   (v) =>
     v.block(

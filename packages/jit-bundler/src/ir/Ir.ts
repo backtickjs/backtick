@@ -30,6 +30,7 @@ export interface IrScriptEntry {
   readonly splices: readonly string[];
   readonly captures: readonly string[];
   readonly declarations: readonly string[];
+  readonly captured: readonly string[];
   readonly body: AstScriptBody;
 }
 

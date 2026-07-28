@@ -14,6 +14,7 @@ function sum(a, b) {
       splices: { $a: a, $b: b },
       captures: [],
       declarations: [],
+      captured: [],
     },
     (v) =>
       v.arrow(
@@ -62,6 +63,7 @@ export default cs.create(
     splices: { $Point: Point, $Size: Size },
     captures: [],
     declarations: ["p$2kc5czyfqafly$0", "s$2kc5czyfqafly$1"],
+    captured: [],
   },
   (v) =>
     v.block(

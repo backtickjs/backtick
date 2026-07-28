@@ -17,8 +17,13 @@ export interface Metadata {
   splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope
   captures: string[];
-  // binding keys the script declares itself
+  // binding keys the script declares itself. With `captures`, every binding its
+  // body can refer to — one it never reads is still a declaration.
   declarations: string[];
+  // the declarations a nested script captures: this script's bindings that
+  // escape into a fragment written inside it. What tells a splice hole which of
+  // them its thunk must be handed.
+  captured: string[];
 }
 
 export interface ClientScript {

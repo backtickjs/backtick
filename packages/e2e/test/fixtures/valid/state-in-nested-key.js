@@ -20,6 +20,7 @@ const Counter = async ({ size }) =>
           splices: { $size: size },
           captures: [],
           declarations: [],
+          captured: [],
         },
         (v) =>
           v.call(

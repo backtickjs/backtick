@@ -10,6 +10,7 @@ export default cs.create(
     splices: {},
     captures: [],
     declarations: ["n$3slc08eszz0br$0"],
+    captured: [],
   },
   (v) =>
     v.block(

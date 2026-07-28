@@ -16,31 +16,33 @@ function inner(carried) {
     {
       version: "0.0.0",
       filePath: "foreign-capture-shadow.ts",
-      fileHash: "23gtczxzqc5a2",
+      fileHash: "2dzpugititb9o",
       kind: "value",
       splices: {
         $0splice0: cs.create(
-          [17, 14, 17, 35],
+          [17, 14, 17, 33],
           {
             version: "0.0.0",
             filePath: "foreign-capture-shadow.ts",
-            fileHash: "23gtczxzqc5a2",
+            fileHash: "2dzpugititb9o",
             kind: "value",
-            splices: { $0splice0: carried },
-            captures: ["base$23gtczxzqc5a2$0"],
+            splices: { $carried: carried },
+            captures: ["base$2dzpugititb9o$0"],
             declarations: [],
+            captured: [],
           },
           (v) =>
             v.binop(
-              [17, 17, 17, 34],
-              v.identifier([17, 17, 17, 21], "base", "base$23gtczxzqc5a2$0"),
+              [17, 17, 17, 32],
+              v.identifier([17, 17, 17, 21], "base", "base$2dzpugititb9o$0"),
               "+",
-              v.splice([17, 24, 17, 34], "$0splice0"),
+              v.splice([17, 24, 17, 32], "$carried"),
             ),
         ),
       },
       captures: [],
-      declarations: ["base$23gtczxzqc5a2$0"],
+      declarations: ["base$2dzpugititb9o$0"],
+      captured: ["base$2dzpugititb9o$0"],
     },
     (v) =>
       v.block(
@@ -49,10 +51,10 @@ function inner(carried) {
           v.variableDeclaration(
             [16, 5, 16, 22],
             "const",
-            v.identifier([16, 11, 16, 15], "base", "base$23gtczxzqc5a2$0"),
+            v.identifier([16, 11, 16, 15], "base", "base$2dzpugititb9o$0"),
             v.number([16, 18, 16, 21], 100),
           ),
-          v.return([17, 5, 17, 37], v.splice([17, 12, 17, 36], "$0splice0")),
+          v.return([17, 5, 17, 35], v.splice([17, 12, 17, 34], "$0splice0")),
         ],
       ),
   );
@@ -62,7 +64,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "foreign-capture-shadow.ts",
-    fileHash: "23gtczxzqc5a2",
+    fileHash: "2dzpugititb9o",
     kind: "value",
     splices: {
       $0splice0: inner(
@@ -71,18 +73,20 @@ export default cs.create(
           {
             version: "0.0.0",
             filePath: "foreign-capture-shadow.ts",
-            fileHash: "23gtczxzqc5a2",
+            fileHash: "2dzpugititb9o",
             kind: "value",
             splices: {},
-            captures: ["base$23gtczxzqc5a2$1"],
+            captures: ["base$2dzpugititb9o$1"],
             declarations: [],
+            captured: [],
           },
-          (v) => v.identifier([23, 21, 23, 25], "base", "base$23gtczxzqc5a2$1"),
+          (v) => v.identifier([23, 21, 23, 25], "base", "base$2dzpugititb9o$1"),
         ),
       ),
     },
     captures: [],
-    declarations: ["base$23gtczxzqc5a2$1"],
+    declarations: ["base$2dzpugititb9o$1"],
+    captured: ["base$2dzpugititb9o$1"],
   },
   (v) =>
     v.block(
@@ -91,7 +95,7 @@ export default cs.create(
         v.variableDeclaration(
           [22, 3, 22, 18],
           "const",
-          v.identifier([22, 9, 22, 13], "base", "base$23gtczxzqc5a2$1"),
+          v.identifier([22, 9, 22, 13], "base", "base$2dzpugititb9o$1"),
           v.number([22, 16, 22, 17], 1),
         ),
         v.return([23, 3, 23, 29], v.splice([23, 10, 23, 28], "$0splice0")),

@@ -18,6 +18,7 @@ class Point {
         splices: { $0splice0: this.x, $0splice1: this.y },
         captures: [],
         declarations: [],
+        captured: [],
       },
       (v) =>
         v.arrow(
@@ -54,6 +55,7 @@ export default cs.create(
     splices: { $Segment: Segment, $Point: Point },
     captures: [],
     declarations: ["s$3b7boqu5f3cse$0"],
+    captured: [],
   },
   (v) =>
     v.block(
