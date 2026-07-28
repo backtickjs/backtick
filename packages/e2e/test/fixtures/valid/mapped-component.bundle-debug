@@ -1,13 +1,13 @@
-3qcr5x2z3u56v:20:10 = ($0, $1) => $0().map((row) => $1(row))
+#f0 = ($0, $1) => $0().map((row) => $1(row))
 
-3qcr5x2z3u56v:20:42 = ($0) => "row " + $0
+#f1 = ($0) => "row " + $0
 
 #t0 = <Text>
-  {3qcr5x2z3u56v:20:42(slots[0])}
+  {#f1(slots[0])}
 </Text>
 
 #t1 = <View>
-  {3qcr5x2z3u56v:20:10(() => [1, 2, 3], (row) => #t0(row))}
+  {#f0(() => [1, 2, 3], (row) => #t0(row))}
 </View>
 
 root = #t1()

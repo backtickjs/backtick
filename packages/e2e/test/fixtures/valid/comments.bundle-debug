@@ -1,4 +1,4 @@
-rbes3su3s43l:5:16 = () => {
+#f0 = () => {
   const count = 1;
   if (count === 1) {
     return "one";
@@ -6,4 +6,4 @@ rbes3su3s43l:5:16 = () => {
   return "many";
 }
 
-root = rbes3su3s43l:5:16()
+root = #f0()

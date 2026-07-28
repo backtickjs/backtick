@@ -1,19 +1,19 @@
-1mlv4ugew6yjv:24:16 = ($0, $1) => $0() + $1()
+#f0 = ($0, $1) => $0() + $1()
 
-1mlv4ugew6yjv:15:10 = ($0, $1) => {
+#f1 = ($0, $1) => {
   const outer = $0();
   return $1(outer);
 }
 
-1mlv4ugew6yjv:24:26 = () => 1
+#f2 = () => 1
 
-1mlv4ugew6yjv:17:14 = ($0, $1) => {
+#f3 = ($0, $1) => {
   const middle = 10;
   return middle + $0($1);
 }
 
-1mlv4ugew6yjv:19:25 = ($0) => $0
+#f4 = ($0) => $0
 
-1mlv4ugew6yjv:24:43 = () => 2
+#f5 = () => 2
 
-root = 1mlv4ugew6yjv:24:16(() => 1mlv4ugew6yjv:15:10(1mlv4ugew6yjv:24:26, (outer) => 1mlv4ugew6yjv:17:14(1mlv4ugew6yjv:19:25, outer)), () => 1mlv4ugew6yjv:15:10(1mlv4ugew6yjv:24:43, (outer) => 1mlv4ugew6yjv:17:14(1mlv4ugew6yjv:19:25, outer)))
+root = #f0(() => #f1(#f2, (outer) => #f3(#f4, outer)), () => #f1(#f5, (outer) => #f3(#f4, outer)))

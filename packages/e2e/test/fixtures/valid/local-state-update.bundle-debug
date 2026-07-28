@@ -1,12 +1,12 @@
-1rqun2dr71nzq:10:26 = ($0) => $0().read()
+#f0 = ($0) => $0().read()
 
-1rqun2dr71nzq:11:16 = ($0) => () => {
+#f1 = ($0) => () => {
   $0().update((current) => current + 1);
 }
 
 #t0 state { s0 = 16 } = <Text
-  style={{ "fontSize": 1rqun2dr71nzq:10:26(() => cells.s0) }}
-  onPress={1rqun2dr71nzq:11:16(() => cells.s0)}
+  style={{ "fontSize": #f0(() => cells.s0) }}
+  onPress={#f1(() => cells.s0)}
 >
   {"press"}
 </Text>

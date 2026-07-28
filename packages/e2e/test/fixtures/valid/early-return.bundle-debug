@@ -1,4 +1,4 @@
-3slc08eszz0br:4:16 = () => {
+#f0 = () => {
   let n = 0;
   if (n === 0) {
     return null;
@@ -6,4 +6,4 @@
   n = 1;
 }
 
-root = 3slc08eszz0br:4:16()
+root = #f0()

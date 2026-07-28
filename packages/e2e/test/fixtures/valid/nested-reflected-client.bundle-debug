@@ -1,4 +1,4 @@
-marvm6ddqnqk:38:16 = ($0) => {
+#f0 = ($0) => {
   const s = $0();
   const rise = s.to.y - s.from.y;
   if (s.vertical()) {
@@ -7,28 +7,20 @@ marvm6ddqnqk:38:16 = ($0) => {
   return s.to.sum() - s.from.sum();
 }
 
-marvm6ddqnqk:36:39 = () => 1
+#f1 = () => 1
 
-marvm6ddqnqk:36:46 = () => 2
+#f2 = () => 2
 
-marvm6ddqnqk:16:12 = ($0, $1) => () => $0() + $1()
+#f3 = ($0, $1) => () => $0() + $1()
 
-marvm6ddqnqk:36:64 = () => 1
+#f4 = () => 1
 
-marvm6ddqnqk:36:71 = () => 8
+#f5 = () => 8
 
-marvm6ddqnqk:32:12 = ($0, $1) => () => $0() === $1()
+#f6 = ($0, $1) => () => $0() === $1()
 
-root = marvm6ddqnqk:38:16(() => {
-  "from": {
-    "x": marvm6ddqnqk:36:39(),
-    "y": marvm6ddqnqk:36:46(),
-    "sum": marvm6ddqnqk:16:12(marvm6ddqnqk:36:39, marvm6ddqnqk:36:46)
-  },
-  "to": {
-    "x": marvm6ddqnqk:36:64(),
-    "y": marvm6ddqnqk:36:71(),
-    "sum": marvm6ddqnqk:16:12(marvm6ddqnqk:36:64, marvm6ddqnqk:36:71)
-  },
-  "vertical": marvm6ddqnqk:32:12(marvm6ddqnqk:36:39, marvm6ddqnqk:36:64)
+root = #f0(() => {
+  "from": { "x": #f1(), "y": #f2(), "sum": #f3(#f1, #f2) },
+  "to": { "x": #f4(), "y": #f5(), "sum": #f3(#f4, #f5) },
+  "vertical": #f6(#f1, #f4)
 })

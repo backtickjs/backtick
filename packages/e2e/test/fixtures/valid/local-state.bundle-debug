@@ -1,12 +1,12 @@
-3f74kgyltbjcu:16:26 = ($0) => $0().read()
+#f0 = ($0) => $0().read()
 
-3f74kgyltbjcu:17:16 = ($0) => () => {
+#f1 = ($0) => () => {
   $0().write($0().read() + 1);
 }
 
 #t0 state { s0 = 16 } = <Text
-  style={{ "fontSize": 3f74kgyltbjcu:16:26(() => cells.s0) }}
-  onPress={3f74kgyltbjcu:17:16(() => cells.s0)}
+  style={{ "fontSize": #f0(() => cells.s0) }}
+  onPress={#f1(() => cells.s0)}
 >
   {"press"}
 </Text>

@@ -1,16 +1,16 @@
-23k9adtpaouck:24:16 = ($0, $1) => { "taken": $0()(true), "skipped": $1()(false) }
+#f0 = ($0, $1) => { "taken": $0()(true), "skipped": $1()(false) }
 
-23k9adtpaouck:11:10 = ($0) => (flag) => {
+#f1 = ($0) => (flag) => {
   if (flag) {
     return $0();
   }
   return "skipped";
 }
 
-23k9adtpaouck:19:12 = () => "evaluated"
+#f2 = () => "evaluated"
 
-23k9adtpaouck:20:16 = () => {
+#f3 = () => {
   throw "the guarded fragment must never evaluate";
 }
 
-root = 23k9adtpaouck:24:16(() => 23k9adtpaouck:11:10(23k9adtpaouck:19:12), () => 23k9adtpaouck:11:10(23k9adtpaouck:20:16))
+root = #f0(() => #f1(#f2), () => #f1(#f3))

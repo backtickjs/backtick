@@ -1,4 +1,4 @@
-3kt9mhwly650i:5:16 = () => {
+#f0 = () => {
   const coins = [1, 2, 3];
   const four = 4;
   return {
@@ -13,4 +13,4 @@
   };
 }
 
-root = 3kt9mhwly650i:5:16()
+root = #f0()

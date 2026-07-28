@@ -1,5 +1,5 @@
-xr1ijhq5mxaf:7:16 = ($0) => { "a": $0(), "b": $0() }
+#f0 = ($0) => { "a": $0(), "b": $0() }
 
-xr1ijhq5mxaf:5:14 = () => 7
+#f1 = () => 7
 
-root = xr1ijhq5mxaf:7:16(xr1ijhq5mxaf:5:14)
+root = #f0(#f1)

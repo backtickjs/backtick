@@ -1,4 +1,4 @@
-2osmwga78xnj6:3:16 = () => {
+#f0 = () => {
   const message = "boom";
   try {
     throw message;
@@ -10,4 +10,4 @@
   }
 }
 
-root = 2osmwga78xnj6:3:16()
+root = #f0()

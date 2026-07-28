@@ -1,4 +1,4 @@
-1jo3526bq0xmc:5:16 = () => {
+#f0 = () => {
   try {
     throw "boom";
   } catch {
@@ -6,4 +6,4 @@
   }
 }
 
-root = 1jo3526bq0xmc:5:16()
+root = #f0()

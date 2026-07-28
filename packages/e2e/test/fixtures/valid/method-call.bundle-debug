@@ -1,6 +1,6 @@
-190iczdl07b3h:3:16 = () => {
+#f0 = () => {
   const greeting = "Hello";
   return greeting.concat(", ", "World").toUpperCase();
 }
 
-root = 190iczdl07b3h:3:16()
+root = #f0()

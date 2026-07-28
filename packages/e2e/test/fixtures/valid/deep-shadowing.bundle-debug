@@ -1,18 +1,18 @@
-1q50brt6ov79t:7:16 = ($0) => {
+#f0 = ($0) => {
   const base = 10;
   return $0(base);
 }
 
-1q50brt6ov79t:13:10 = ($0) => {
+#f1 = ($0) => {
   const base = 1;
   return base + $0();
 }
 
-1q50brt6ov79t:20:10 = ($0) => {
+#f2 = ($0) => {
   const base = 2;
   return base * $0();
 }
 
-1q50brt6ov79t:9:18 = ($0) => $0
+#f3 = ($0) => $0
 
-root = 1q50brt6ov79t:7:16((base) => 1q50brt6ov79t:13:10(() => 1q50brt6ov79t:20:10(() => 1q50brt6ov79t:9:18(base))))
+root = #f0((base) => #f1(() => #f2(() => #f3(base))))

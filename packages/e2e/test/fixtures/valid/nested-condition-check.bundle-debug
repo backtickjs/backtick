@@ -1,6 +1,6 @@
-2nymys98gllff:20:16 = ($0) => { "both": $0()(true, true), "one": $0()(true, false) }
+#f0 = ($0) => { "both": $0()(true, true), "one": $0()(true, false) }
 
-2nymys98gllff:9:58 = () => (a, b) => {
+#f1 = () => (a, b) => {
   const keep = (on) => on;
   if (keep(a && b)) {
     return "kept";
@@ -8,4 +8,4 @@
   return "dropped";
 }
 
-root = 2nymys98gllff:20:16(2nymys98gllff:9:58)
+root = #f0(#f1)

@@ -1,8 +1,8 @@
-h3aw1djkxdp9:11:16 = ($0) => $0().read()
+#f0 = ($0) => $0().read()
 
 #t0 = <View>
   {<Text
-    key={h3aw1djkxdp9:11:16(() => slots[0])}
+    key={#f0(() => slots[0])}
   >
     {"press"}
   </Text>}

@@ -1,11 +1,11 @@
-10vcjd80vhoob:10:16 = ($0) => {
+#f0 = ($0) => {
   "present": $0()({ "label": "a", "inner": { "z": 3 } }),
   "partial": $0()({ "label": "b", "inner": {} }),
   "omitted": $0()({ "label": "c" })
 }
 
-10vcjd80vhoob:6:14 = () => (o) => {
+#f1 = () => (o) => {
   return [o.label, o.inner?.z ?? 0];
 }
 
-root = 10vcjd80vhoob:10:16(10vcjd80vhoob:6:14)
+root = #f0(#f1)
