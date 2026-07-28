@@ -77,18 +77,10 @@ const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
 export function buildBundle(ir: Ir): Bundle {
-  // The captures a reference supplies, as the object the entry reads them from.
-  // Null when the entry captures nothing, so neither side carries an empty one.
-  //
-  // The script's free variables and nothing else, in the first-use order the
-  // compiler resolved them in. A capture is by definition a binding some
-  // enclosing script declared, so it can never be one this entry declares —
-  // there is nothing to filter out, and nothing to memoize, now that an entry
-  // never folds in the captures of arguments it inlined.
-
   // A binding key in a call site's own expression. Never a capture read: an
-  // entry's captures are resolved inside `compileEntry`, against the object it
-  // is handed — out here a key is a name in the expression being built.
+  // entry resolves its captures against its own parameters (see
+  // `lowerScriptBody`) — out here a key is a name in the expression being
+  // built.
   const readKey = (key: string): BundleExpressionNode => ({
     "#": NodeKind.Identifier,
     [NodeField.name]: displayName(key),
@@ -100,15 +92,14 @@ export function buildBundle(ir: Ir): Bundle {
   // Disambiguated at all because these become identifiers, and identifiers nest:
   // a hole inside a thunk puts one thunk's parameters inside another's, so two
   // bindings sharing a source name can land in one chain and the inner would
-  // shadow what the outer was handed (`shadowing` nests three). Environment keys
-  // have no such problem — they are scoped to one entry's object — so those are
-  // named separately (see `environmentKeys`).
+  // shadow what the outer was handed (`shadowing` nests three).
   //
   // Two scopes here, neither of them the whole bundle: a `trees` entry, over the
   // cells it declares and the thunks written in its content; and the root, which
   // is a tree's content without the entry. A `functions` entry names inside
-  // `compileEntry`, from its own script — nothing out here reads those names,
-  // because a call site hands an entry its arguments positionally.
+  // `lowerScriptBody`, from its own script — nothing out here reads those names,
+  // because a call site hands an entry its arguments positionally, and its
+  // captures arrive as numbered parameters rather than under a name.
   interface Naming {
     readonly names: Map<string, string>;
     readonly used: Set<string>;
@@ -143,34 +134,6 @@ export function buildBundle(ir: Ir): Bundle {
     scope.names.set(key, name);
     return name;
   };
-
-  // Every reference reaching each entry, grouped by target. Walking from the
-  // root's argument tree reaches the whole table, since each nested script is
-  // lowered to a reference nested in some entry's splice arguments or in a
-  // tree entry's props. The tree set is shared across the walk so each tree
-  // entry's contents are collected once.
-  const refsByTarget = new Map<IrScriptEntry, IrScriptRef[]>();
-  const seenRefs = new Set<IrScriptRef>();
-  const seenTrees = new Set<number>();
-  const seenCells = new Set<number>();
-  const collectRefs = (ref: IrScriptRef): void => {
-    const list = refsByTarget.get(ref.target);
-    if (list) {
-      list.push(ref);
-    } else {
-      refsByTarget.set(ref.target, [ref]);
-    }
-    if (seenRefs.has(ref)) {
-      return; // a shared reference (a diamond arm) is descended into only once
-    }
-    seenRefs.add(ref);
-    for (const child of nestedRefs(ref.args, ir, seenTrees, seenCells)) {
-      collectRefs(child);
-    }
-  };
-  for (const ref of nestedRefs([ir.root], ir, seenTrees, seenCells)) {
-    collectRefs(ref);
-  }
 
   // The captures that the rendered form of a splice argument refers to in the
   // enclosing scope: whatever its target still needs, plus the captures of the
@@ -867,51 +830,4 @@ export function buildBundle(ir: Ir): Bundle {
     trees[`${index}`] = tree;
   }
   return { functions, trees, root };
-}
-
-// Collects every script reference reachable inside a list of arguments,
-// descending into array and object values, inline elements, and — through the
-// tree and state tables — tree and cell references, each entry once per `seen`
-// set (a nested script may be spliced anywhere).
-function nestedRefs(
-  values: readonly IrArgument[],
-  ir: Ir,
-  seenTrees: Set<number>,
-  seenCells: Set<number>,
-): IrScriptRef[] {
-  const refs: IrScriptRef[] = [];
-  const visit = (value: IrArgument): void => {
-    if (value.kind === "IrScriptRef") {
-      refs.push(value);
-    } else if (value.kind === "IrTreeRef") {
-      // The key is this reference's own, so it is walked per reference rather
-      // than once per entry.
-      visit(value.key);
-      if (!seenTrees.has(value.target)) {
-        seenTrees.add(value.target);
-        const content = ir.trees[value.target].content;
-        if (content !== null) {
-          visit(content);
-        }
-      }
-    } else if (value.kind === "IrStateRef") {
-      // A cell's initial is carried by its owning entry, so scripts spliced
-      // into it are reachable only through here.
-      if (!seenCells.has(value.target)) {
-        seenCells.add(value.target);
-        visit(ir.states[value.target].initial);
-      }
-    } else if (value.kind === "IrElement") {
-      visit(value.key);
-      Object.values(value.props).forEach(visit);
-    } else if (value.kind === "IrArray") {
-      value.elements.forEach(visit);
-    } else if (value.kind === "IrObject") {
-      Object.values(value.entries).forEach(visit);
-    } else if (value.kind === "IrExpansion") {
-      visit(value.body);
-    }
-  };
-  values.forEach(visit);
-  return refs;
 }
