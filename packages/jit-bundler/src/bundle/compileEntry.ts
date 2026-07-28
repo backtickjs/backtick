@@ -38,18 +38,15 @@ export function envKey(key: string): string {
 export function compileEntry(script: IrScriptEntry): BundleArrowNode {
   const captured = new Set(script.captures);
 
-  // Names are the source's own, undisambiguated.
+  // A binding the script declares reads as itself, under its source name; one
+  // it captures reads off the environment, so a read says where its value came
+  // from.
   //
-  // Two of a script's bindings can share a name only by shadowing, and then
-  // printing both under it is what the source says — a block frames its own
-  // declarations, so the inner one shadows the outer exactly as written. The one
-  // case that needed telling them apart was a hole reaching a binding an inner
-  // scope shadows, and that is now refused outright (see `spliceParams`): a hole
-  // is only offered what is reachable by name where it sits.
-  const displayName = sourceName;
-
-  // A binding the script declares reads as itself; one it captures reads off the
-  // environment, so a read says where its value came from.
+  // No disambiguation. Two of a script's bindings share a name only by
+  // shadowing, and printing both under it is what the source says — a block
+  // frames its own declarations, so the inner shadows the outer as written. The
+  // one case that needed telling them apart was a hole reaching a binding an
+  // inner scope shadows, and that is refused outright (see `spliceParams`).
   const read = (key: string): BundleExpressionNode =>
     captured.has(key)
       ? {
@@ -60,7 +57,7 @@ export function compileEntry(script: IrScriptEntry): BundleArrowNode {
           },
           [NodeField.name]: envKey(key),
         }
-      : { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+      : { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
 
   // The body references holes by key; a reference's `args` are positional in the
   // script's `splices` order, so this maps between them.
@@ -75,7 +72,7 @@ export function compileEntry(script: IrScriptEntry): BundleArrowNode {
     // can only reference what was in scope where it was written.
     const args = (script.spliceParams[key] ?? []).map((bound) => ({
       "#": NodeKind.Identifier,
-      [NodeField.name]: displayName(bound),
+      [NodeField.name]: sourceName(bound),
     }));
     return {
       "#": NodeKind.Call,
@@ -96,11 +93,6 @@ export function compileEntry(script: IrScriptEntry): BundleArrowNode {
   return {
     "#": NodeKind.Arrow,
     ...(params.length === 0 ? {} : { [NodeField.params]: params }),
-    [NodeField.body]: lowerScriptBody(
-      script.body,
-      renderSplice,
-      displayName,
-      read,
-    ),
+    [NodeField.body]: lowerScriptBody(script.body, renderSplice, read),
   };
 }
