@@ -1,0 +1,40 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_base               → base
+ = cs.const(            →  = 
+1                       → 1
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+cs.splice(              → ${ [-semantic]
+((carried =             → ((carried = 
+cs.lift(cs.const(       → cs`
+__cs_base               → base
+))                      → `
+), carried)             → ), carried)
+)                       → } [-semantic]
+);                      → ;
+\n})())                 → \n}`
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_base               → base
+ = cs.const(            →  = 
+100                     → 100
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+cs.splice(              →  [-semantic]
+(source)                → $source
+)                       →  [-semantic]
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+cs.lift(cs.const(       → cs`
+__cs_base               → base
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+take()                  → take()
+)                       → } [-semantic]
+))                      → `
+)                       → } [-semantic]
+);                      → ;
+\n})())                 → \n}`

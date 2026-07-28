@@ -1,0 +1,15 @@
+#f0 = () => {
+  const base = 1;
+  return #f1({ "base": base });
+}
+
+#f1 = ($env) => {
+  const base = 100;
+  return #f2({ "base": base, "base2": $env.base });
+}
+
+#f2 = ($env) => $env.base + #f3({ "base": $env.base2 })
+
+#f3 = ($env) => $env.base
+
+root = #f0()

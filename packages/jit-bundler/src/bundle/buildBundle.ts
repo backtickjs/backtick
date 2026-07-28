@@ -105,18 +105,45 @@ function sourceName(key: string): string {
 export function buildBundle(ir: Ir): Bundle {
   const fns = ir.scripts;
 
-  // The parameter an entry receives its captures under, and the key each
-  // capture sits at. A source name for a variable, and a cell's own reserved key
-  // — `#` can't appear in an identifier, so the two can't collide.
+  // The parameter an entry receives its captures under, and the key each capture
+  // sits at: its source name, or a cell's own reserved key — `#` can't appear in
+  // an identifier, so a cell can never collide with a variable.
   //
-  // Source names are enough because an entry's captures are its free variables:
-  // within one script a name resolves outward to exactly one binding, so two
-  // distinct captures can't share one. `envObject` checks it anyway — a
-  // collision would silently merge two bindings, which is not a failure worth
-  // discovering at runtime.
+  // Two captures of one entry can want the same source name. An entry's own free
+  // variables can't collide — within one script a name resolves outward to
+  // exactly one binding — but an entry also receives whatever the arguments it
+  // inlines capture, and a fragment written under one `base` can be carried by
+  // host code into a script written under another. So a name is disambiguated,
+  // per entry: distinct bindings never share a key, and the same binding always
+  // renders the same, which is what makes a body's reads line up with the object
+  // a call site builds.
+  //
+  // Per entry rather than per bundle, so a name minted for one entry can't shift
+  // another's — an entry's keys depend on its own captures and nothing else.
   const envParam = "$env";
-  const envKey = (key: string): string =>
-    isCellKey(key) ? key : sourceName(key);
+  const envKeys = new Map<number, Map<string, string>>();
+  const envKey = (target: number, key: string): string => {
+    if (isCellKey(key)) {
+      return key;
+    }
+    let names = envKeys.get(target);
+    if (names === undefined) {
+      names = new Map();
+      envKeys.set(target, names);
+    }
+    const existing = names.get(key);
+    if (existing !== undefined) {
+      return existing;
+    }
+    const taken = new Set(names.values());
+    const base = sourceName(key);
+    let name = base;
+    for (let n = 2; taken.has(name); n++) {
+      name = `${base}${n}`;
+    }
+    names.set(key, name);
+    return name;
+  };
 
   // The captures a reference supplies, as the object the entry reads them from.
   // Null when the entry captures nothing, so neither side carries an empty one.
@@ -130,13 +157,7 @@ export function buildBundle(ir: Ir): Bundle {
     }
     const env: { [name: string]: T } = {};
     for (const key of keys) {
-      const name = envKey(key);
-      if (name in env) {
-        throw new Error(
-          `Two captures of one entry share the name \`${name}\`.`,
-        );
-      }
-      env[name] = value(key);
+      env[envKey(target, key)] = value(key);
     }
     return env;
   };
@@ -165,17 +186,17 @@ export function buildBundle(ir: Ir): Bundle {
     }
     return keys;
   };
-  const envRead = (key: string): BundleExpressionNode => ({
+  const envRead = (target: number, key: string): BundleExpressionNode => ({
     "#": NodeKind.Property,
     [NodeField.object]: {
       "#": NodeKind.Identifier,
       [NodeField.name]: envParam,
     },
-    [NodeField.name]: envKey(key),
+    [NodeField.name]: envKey(target, key),
   });
   const readKey = (key: string): BundleExpressionNode =>
     bodyEntry !== null && capturedBy(bodyEntry).has(key)
-      ? envRead(key)
+      ? envRead(bodyEntry, key)
       : { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
 
   // Names each entry's body declares (variable declarations and arrow
