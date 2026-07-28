@@ -10,7 +10,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["count$31t2pc3vo9x5y$0", "bump$31t2pc3vo9x5y$1"],
     spliceScopes: {},
   },
   (v) =>

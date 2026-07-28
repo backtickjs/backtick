@@ -9,7 +9,6 @@ const count = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [],
     spliceScopes: {},
   },
   (v) => v.number([4, 18, 4, 19], 1),
@@ -23,7 +22,6 @@ export default cs.create(
     kind: "value",
     splices: { $count: count },
     captures: [],
-    declarations: [],
     spliceScopes: { $count: [] },
   },
   (v) =>

@@ -11,7 +11,6 @@ const read = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["o$10vcjd80vhoob$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -62,7 +61,6 @@ export default cs.create(
     kind: "value",
     splices: { $read: read },
     captures: [],
-    declarations: [],
     spliceScopes: { $read: [] },
   },
   (v) =>

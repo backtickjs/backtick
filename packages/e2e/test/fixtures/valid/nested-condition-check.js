@@ -14,12 +14,6 @@ const gate = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [
-      "a$2nymys98gllff$0",
-      "b$2nymys98gllff$1",
-      "keep$2nymys98gllff$2",
-      "on$2nymys98gllff$3",
-    ],
     spliceScopes: {},
   },
   (v) =>
@@ -76,7 +70,6 @@ export default cs.create(
     kind: "value",
     splices: { $gate: gate },
     captures: [],
-    declarations: [],
     spliceScopes: { $gate: [] },
   },
   (v) =>

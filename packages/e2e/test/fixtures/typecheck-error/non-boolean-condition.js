@@ -10,7 +10,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["name$7s4lkv4w2ddn$0"],
     spliceScopes: {},
   },
   (v) =>

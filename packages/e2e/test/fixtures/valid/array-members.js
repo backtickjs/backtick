@@ -10,12 +10,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [
-      "coins$3kt9mhwly650i$0",
-      "four$3kt9mhwly650i$1",
-      "n$3kt9mhwly650i$2",
-      "n$3kt9mhwly650i$3",
-    ],
     spliceScopes: {},
   },
   (v) =>

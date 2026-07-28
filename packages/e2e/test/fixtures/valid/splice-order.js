@@ -12,7 +12,6 @@ export default cs.create(
     kind: "value",
     splices: { $count: count, $0splice0: ++count },
     captures: [],
-    declarations: [],
     spliceScopes: { $count: [], $0splice0: [] },
   },
   (v) =>

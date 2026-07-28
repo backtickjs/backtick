@@ -17,11 +17,6 @@ import type { ClientScript } from "./parseFile.js";
  *    source-order walk. A name bound by no script at all is not a capture:
  *    there are no globals, and the rewrite reports it as unresolvable.
  *
- *  - `declarations`: for each script, the binding keys it declares itself — every
- *    variable declaration and arrow parameter, at any depth, but not those of
- *    nested scripts (each owns its own). With `captures`, every binding the
- *    script's body can refer to; one it never reads is still a declaration.
- *
  *  - `spliceScopes`: for each splice, the script's own declarations that are
  *    bound where that hole sits. A fragment landing there can only reference
  *    what was in scope where it was written, so this is what the hole must hand
@@ -60,7 +55,6 @@ export type BindingResolution = Map<ts.Identifier, string>;
 export interface ResolvedScopes {
   bindings: BindingResolution;
   captures: Map<ClientScript, string[]>;
-  declarations: Map<ClientScript, string[]>;
   spliceScopes: Map<ClientScript, { [splice: string]: string[] }>;
 }
 
@@ -84,6 +78,8 @@ export function resolveBindings(
 
   // Per-script declared binding keys, in declaration order. Every `declare`
   // appends the fresh key to its script; keys are unique, so no dedup is needed.
+  // Not reported: what a reader needs is which of them a given hole can see,
+  // which is `spliceScopes`. They are kept here to build it.
   const declarations = new Map<ClientScript, string[]>();
 
   // What each splice hole sees, recorded as the walk reaches it.
@@ -360,7 +356,7 @@ export function resolveBindings(
     walkScript(script, []);
   }
 
-  return { bindings, captures, declarations, spliceScopes };
+  return { bindings, captures, spliceScopes };
 }
 
 function scriptRoot(

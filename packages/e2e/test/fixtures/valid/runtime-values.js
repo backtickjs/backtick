@@ -8,7 +8,6 @@ export default cs.create(
     kind: "value",
     splices: { $0splice0: [1, "two", true, null], $0splice1: { k: 3 } },
     captures: [],
-    declarations: [],
     spliceScopes: { $0splice0: [], $0splice1: [] },
   },
   (v) =>

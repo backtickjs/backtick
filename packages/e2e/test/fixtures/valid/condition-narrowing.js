@@ -16,7 +16,6 @@ const flags = {
       kind: "value",
       splices: {},
       captures: [],
-      declarations: [],
       spliceScopes: {},
     },
     (v) => v.boolean([10, 28, 10, 32], true),
@@ -31,7 +30,6 @@ const label = cs.create(
     kind: "value",
     splices: { $0splice0: flags.strict },
     captures: [],
-    declarations: ["text$3ciy5yb38f51h$0", "upper$3ciy5yb38f51h$1"],
     spliceScopes: {
       $0splice0: ["text$3ciy5yb38f51h$0", "upper$3ciy5yb38f51h$1"],
     },
@@ -158,7 +156,6 @@ export default cs.create(
     kind: "value",
     splices: { $label: label },
     captures: [],
-    declarations: [],
     spliceScopes: { $label: [] },
   },
   (v) =>

@@ -10,7 +10,6 @@ const greet = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["name$1gqqin78x7yev$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -46,7 +45,6 @@ export default cs.create(
     kind: "value",
     splices: { $greet: greet },
     captures: [],
-    declarations: [],
     spliceScopes: { $greet: [] },
   },
   (v) =>

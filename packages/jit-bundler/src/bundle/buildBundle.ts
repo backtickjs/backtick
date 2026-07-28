@@ -148,11 +148,17 @@ export function buildBundle(ir: Ir): Bundle {
 
   // The captures a reference supplies, as the object the entry reads them from.
   // Null when the entry captures nothing, so neither side carries an empty one.
+  //
+  // The script's free variables and nothing else, in the first-use order the
+  // compiler resolved them in. A capture is by definition a binding some
+  // enclosing script declared, so it can never be one this entry declares —
+  // there is nothing to filter out, and nothing to memoize, now that an entry
+  // never folds in the captures of arguments it inlined.
   const envObject = <T>(
     target: number,
     value: (key: string) => T,
   ): { [name: string]: T } | null => {
-    const keys = need(target);
+    const keys = fns[target].captures;
     if (keys.length === 0) {
       return null;
     }
@@ -182,7 +188,7 @@ export function buildBundle(ir: Ir): Bundle {
   const capturedBy = (target: number): ReadonlySet<string> => {
     let keys = capturedCache.get(target);
     if (keys === undefined) {
-      keys = new Set(need(target));
+      keys = new Set(fns[target].captures);
       capturedCache.set(target, keys);
     }
     return keys;
@@ -225,12 +231,6 @@ export function buildBundle(ir: Ir): Bundle {
     return name;
   };
 
-  // Names each entry's body declares (variable declarations and arrow
-  // parameters, at any depth), computed once by the compiler and carried on the
-  // entry. A capture an entry binds itself is supplied by that entry, not
-  // received as a parameter.
-  const declaredKeys = fns.map((fn) => new Set(fn.declarations));
-
   // Every reference reaching each entry, grouped by target. Walking from the
   // root's argument tree reaches the whole table, since each nested script is
   // lowered to a reference nested in some entry's splice arguments or in a
@@ -259,49 +259,13 @@ export function buildBundle(ir: Ir): Bundle {
     collectRefs(ref);
   }
 
-  // The captures an entry receives in its environment: its own free variables,
-  // minus the ones it binds itself. Nothing from a call site is inlined — every
-  // splice argument arrives as a thunk — so this is the script's own answer, and
-  // the filter only ever removes what a hole supplies (see `passKeys`). Binding keys are globally unique, so a capture is identified
-  // by key alone. Returned in a stable order (own captures first); memoized, with
-  // a cycle guard for self-referential scripts.
-  const needCache = new Map<number, string[]>();
-  const needStack = new Set<number>();
-  const need = (i: number): string[] => {
-    const cached = needCache.get(i);
-    if (cached) {
-      return cached;
-    }
-    if (needStack.has(i)) {
-      return [];
-    }
-    needStack.add(i);
-    const order: string[] = [];
-    const seen = new Set<string>();
-    const add = (key: string): void => {
-      if (!seen.has(key)) {
-        seen.add(key);
-        order.push(key);
-      }
-    };
-    for (const key of fns[i].captures) {
-      add(key);
-    }
-    const result = order.filter((key) => !declaredKeys[i].has(key));
-    needStack.delete(i);
-    needCache.set(i, result);
-    return result;
-  };
-
   // The captures that the rendered form of a splice argument refers to in the
   // enclosing scope: whatever its target still needs, plus the captures of the
   // thunks passed for its splices, since those thunks are written inline at this
   // call site. A tree reference needs its
   // slot values; an inline element whatever its props need.
-  // Memoized per argument — the IR is immutable and this fans out from
-  // `need`, `passKeys`, and `treeSlots`. A result computed while a `need` is
-  // in flight can reflect that cycle guard's partial answer, so it is only
-  // cached when no `need` computation is active.
+  // Memoized per argument — the IR is immutable and this fans out from `need`
+  // and `treeSlots`.
   const freeCapsCache = new Map<IrArgument, string[]>();
   const freeCaps = (value: IrArgument): string[] => {
     const cached = freeCapsCache.get(value);
@@ -309,25 +273,26 @@ export function buildBundle(ir: Ir): Bundle {
       return cached;
     }
     const result = freeCapsImpl(value);
-    if (needStack.size === 0) {
-      freeCapsCache.set(value, result);
-    }
+    freeCapsCache.set(value, result);
     return result;
   };
 
   const freeCapsImpl = (value: IrArgument): string[] => {
     switch (value.kind) {
       case "IrScriptRef": {
-        const keys = [...need(value.target)];
-        for (const arg of value.args) {
-          // A capture the entry itself declares is supplied by the hole call
-          // (see `passKeys`), not by the call site.
+        const keys = [...fns[value.target].captures];
+        value.args.forEach((arg, index) => {
+          // What the hole hands its thunk is supplied there, not by the call
+          // site. Asking the hole rather than the entry is the exact question:
+          // a binding the entry declares but that is not in scope at *this*
+          // hole is not supplied here, so it still has to thread in.
+          const supplied = new Set(passKeys(value.target, index));
           for (const key of freeCaps(arg)) {
-            if (!declaredKeys[value.target].has(key)) {
+            if (!supplied.has(key)) {
               keys.push(key);
             }
           }
-        }
+        });
         return keys;
       }
       case "IrTreeRef":
@@ -485,7 +450,7 @@ export function buildBundle(ir: Ir): Bundle {
     }
     // Reserve the slot to break reference cycles; overwritten below.
     bodies.set(target, { "#": NodeKind.Arrow, [NodeField.body]: null });
-    const captured = new Set(need(target));
+    const captured = new Set(fns[target].captures);
     // The body references holes by key; a reference's `args` are
     // positional in the entry's `splices` order, so this maps between them.
     const holes = new Map(

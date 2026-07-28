@@ -11,7 +11,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["count$3kpojr67liy8x$0", "flag$3kpojr67liy8x$1"],
     spliceScopes: {},
   },
   (v) =>

@@ -20,7 +20,6 @@ export default cs.create(
     kind: "value",
     splices: { $Point: Point },
     captures: [],
-    declarations: ["C$2pik4a0v1yd8w$0", "p$2pik4a0v1yd8w$1"],
     spliceScopes: { $Point: [] },
   },
   (v) =>

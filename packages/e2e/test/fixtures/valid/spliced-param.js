@@ -20,7 +20,6 @@ class Color {
         kind: "value",
         splices: { $0splice0: this.r },
         captures: [],
-        declarations: [],
         spliceScopes: { $0splice0: [] },
       },
       (v) =>
@@ -55,7 +54,6 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            declarations: [],
             spliceScopes: {},
           },
           (v) => v.number([25, 30, 25, 31], 7),
@@ -64,7 +62,6 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: ["pick$22eb8gy7ghfko$0", "c$22eb8gy7ghfko$1"],
     spliceScopes: { $0splice0: ["pick$22eb8gy7ghfko$0"] },
   },
   (v) =>

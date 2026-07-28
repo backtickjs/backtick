@@ -8,7 +8,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [],
     spliceScopes: {},
   },
   (v) => v.number([3, 19, 3, 20], 1),

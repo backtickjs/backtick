@@ -10,7 +10,6 @@ const beep = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    declarations: ["n$gyja921xjk87$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -40,7 +39,6 @@ const onTap = cs.create(
     kind: "value",
     splices: { $beep: beep },
     captures: [],
-    declarations: ["id$gyja921xjk87$1"],
     spliceScopes: { $beep: ["id$gyja921xjk87$1"] },
   },
   (v) =>
@@ -59,7 +57,6 @@ export default cs.create(
     kind: "value",
     splices: { $onTap: onTap },
     captures: [],
-    declarations: ["handlers$gyja921xjk87$2"],
     spliceScopes: { $onTap: [] },
   },
   (v) =>

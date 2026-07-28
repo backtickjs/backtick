@@ -26,7 +26,6 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            declarations: [],
             spliceScopes: {},
           },
           (v) => v.number([16, 36, 16, 37], 1),
@@ -40,7 +39,6 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            declarations: [],
             spliceScopes: {},
           },
           (v) => v.number([16, 43, 16, 44], 2),
@@ -48,7 +46,6 @@ export default cs.create(
       ]),
     },
     captures: [],
-    declarations: [],
     spliceScopes: { $0splice0: [] },
   },
   (v) =>

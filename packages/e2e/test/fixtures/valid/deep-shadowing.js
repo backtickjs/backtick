@@ -21,7 +21,6 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: ["base$1q50brt6ov79t$0"],
-            declarations: [],
             spliceScopes: {},
           },
           (v) => v.identifier([9, 21, 9, 25], "base", "base$1q50brt6ov79t$0"),
@@ -29,7 +28,6 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: ["base$1q50brt6ov79t$0"],
     spliceScopes: { $0splice0: ["base$1q50brt6ov79t$0"] },
   },
   (v) =>
@@ -56,7 +54,6 @@ function outer(inner) {
       kind: "value",
       splices: { $0splice0: middle(inner) },
       captures: [],
-      declarations: ["base$1q50brt6ov79t$1"],
       spliceScopes: { $0splice0: ["base$1q50brt6ov79t$1"] },
     },
     (v) =>
@@ -92,7 +89,6 @@ function middle(inner) {
       kind: "value",
       splices: { $inner: inner },
       captures: [],
-      declarations: ["base$1q50brt6ov79t$2"],
       spliceScopes: { $inner: ["base$1q50brt6ov79t$2"] },
     },
     (v) =>

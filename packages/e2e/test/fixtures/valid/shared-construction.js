@@ -25,7 +25,6 @@ function make(Shape) {
       kind: "value",
       splices: { $Shape: Shape },
       captures: [],
-      declarations: [],
       spliceScopes: { $Shape: [] },
     },
     (v) =>
@@ -47,7 +46,6 @@ export default cs.create(
     kind: "value",
     splices: { $a: a, $b: b, $c: c, $d: d },
     captures: [],
-    declarations: [],
     spliceScopes: { $a: [], $b: [], $c: [], $d: [] },
   },
   (v) =>

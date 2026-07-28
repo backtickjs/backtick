@@ -8,7 +8,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["greeting$190iczdl07b3h$0"],
     spliceScopes: {},
   },
   (v) =>

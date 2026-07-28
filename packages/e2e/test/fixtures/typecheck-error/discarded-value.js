@@ -11,7 +11,6 @@ const getValue = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [],
     spliceScopes: {},
   },
   (v) =>
@@ -33,7 +32,6 @@ const ping = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["n$1y1jdbv3pfwln$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -67,7 +65,6 @@ const action = cs.create(
     kind: "action",
     splices: { $ping: ping, $getValue: getValue },
     captures: [],
-    declarations: [],
     spliceScopes: { $ping: [], $getValue: [] },
   },
   (v) =>

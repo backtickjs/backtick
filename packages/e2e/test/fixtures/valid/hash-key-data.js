@@ -10,7 +10,6 @@ export default cs.create(
     kind: "value",
     splices: { $0splice0: { "#call": "#f0" } },
     captures: [],
-    declarations: [],
     spliceScopes: { $0splice0: [] },
   },
   (v) => v.arrow([5, 19, 5, 46], [], v.splice([5, 25, 5, 46], "$0splice0")),

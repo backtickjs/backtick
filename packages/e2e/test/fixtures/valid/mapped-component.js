@@ -35,7 +35,6 @@ export default _jsx(View, {
               kind: "value",
               splices: {},
               captures: ["row$3qcr5x2z3u56v$0"],
-              declarations: [],
               spliceScopes: {},
             },
             (v) =>
@@ -49,7 +48,6 @@ export default _jsx(View, {
         }),
       },
       captures: [],
-      declarations: ["row$3qcr5x2z3u56v$0"],
       spliceScopes: { $rows: [], $0splice0: ["row$3qcr5x2z3u56v$0"] },
     },
     (v) =>

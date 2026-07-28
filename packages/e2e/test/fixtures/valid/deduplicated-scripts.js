@@ -10,7 +10,6 @@ const leaf = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [],
     spliceScopes: {},
   },
   (v) => v.number([5, 17, 5, 18], 7),
@@ -24,7 +23,6 @@ export default cs.create(
     kind: "value",
     splices: { $leaf: leaf },
     captures: [],
-    declarations: [],
     spliceScopes: { $leaf: [] },
   },
   (v) =>

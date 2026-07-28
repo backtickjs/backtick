@@ -9,7 +9,6 @@ export default cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    declarations: ["n$3slc08eszz0br$0"],
     spliceScopes: {},
   },
   (v) =>

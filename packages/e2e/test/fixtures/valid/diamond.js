@@ -12,7 +12,6 @@ const d0 = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [],
     spliceScopes: {},
   },
   (v) => v.number([7, 15, 7, 16], 1),
@@ -26,7 +25,6 @@ const d1 = cs.create(
     kind: "value",
     splices: { $d0: d0 },
     captures: [],
-    declarations: [],
     spliceScopes: { $d0: [] },
   },
   (v) =>
@@ -54,7 +52,6 @@ const d2 = cs.create(
     kind: "value",
     splices: { $d1: d1 },
     captures: [],
-    declarations: [],
     spliceScopes: { $d1: [] },
   },
   (v) =>
@@ -82,7 +79,6 @@ const d3 = cs.create(
     kind: "value",
     splices: { $d2: d2 },
     captures: [],
-    declarations: [],
     spliceScopes: { $d2: [] },
   },
   (v) =>
@@ -110,7 +106,6 @@ const d4 = cs.create(
     kind: "value",
     splices: { $d3: d3 },
     captures: [],
-    declarations: [],
     spliceScopes: { $d3: [] },
   },
   (v) =>

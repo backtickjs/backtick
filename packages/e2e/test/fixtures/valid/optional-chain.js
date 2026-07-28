@@ -11,7 +11,6 @@ const pick = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["p$1k96f1nwptp9k$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -43,7 +42,6 @@ const deep = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["o$1k96f1nwptp9k$1"],
     spliceScopes: {},
   },
   (v) =>
@@ -80,7 +78,6 @@ const shout = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["s$1k96f1nwptp9k$2"],
     spliceScopes: {},
   },
   (v) =>
@@ -116,7 +113,6 @@ export default cs.create(
     kind: "value",
     splices: { $pick: pick, $deep: deep, $shout: shout },
     captures: [],
-    declarations: [],
     spliceScopes: { $pick: [], $deep: [], $shout: [] },
   },
   (v) =>

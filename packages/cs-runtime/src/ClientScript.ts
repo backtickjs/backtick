@@ -17,9 +17,6 @@ export interface Metadata {
   splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope
   captures: string[];
-  // binding keys the script declares itself. With `captures`, every binding its
-  // body can refer to — one it never reads is still a declaration.
-  declarations: string[];
   // for each splice, the declarations bound where that hole sits — what the
   // hole hands the thunk carrying whatever lands there. Declared above the hole,
   // so a binding inside its own initializer is not one of them.

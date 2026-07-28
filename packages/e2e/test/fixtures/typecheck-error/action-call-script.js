@@ -11,7 +11,6 @@ const ping = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["x$17wdcvct95tpn$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -40,7 +39,6 @@ export const called = cs.create(
     kind: "value",
     splices: { $ping: ping },
     captures: [],
-    declarations: [],
     spliceScopes: { $ping: [] },
   },
   (v) => v.call([10, 26, 10, 33], v.splice([10, 26, 10, 31], "$ping"), []),
@@ -54,7 +52,6 @@ const action = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    declarations: ["x$17wdcvct95tpn$1"],
     spliceScopes: {},
   },
   (v) =>
@@ -79,7 +76,6 @@ export const spliced = cs.create(
     kind: "value",
     splices: { $action: action },
     captures: [],
-    declarations: [],
     spliceScopes: { $action: [] },
   },
   (v) => v.splice([16, 27, 16, 34], "$action"),

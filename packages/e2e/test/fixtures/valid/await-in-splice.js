@@ -14,7 +14,6 @@ export default cs.create(
     kind: "value",
     splices: { $0splice0: await fetchGreeting() },
     captures: [],
-    declarations: [],
     spliceScopes: { $0splice0: [] },
   },
   (v) =>

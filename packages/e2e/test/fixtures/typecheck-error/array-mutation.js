@@ -10,7 +10,6 @@ const script = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["coins$3m6roaxdg127n$0", "last$3m6roaxdg127n$1"],
     spliceScopes: {},
   },
   (v) =>
@@ -57,7 +56,6 @@ const action = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    declarations: ["coins$3m6roaxdg127n$2"],
     spliceScopes: {},
   },
   (v) =>

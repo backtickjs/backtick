@@ -11,7 +11,6 @@ const action = cs.create(
     kind: "action",
     splices: {},
     captures: [],
-    declarations: ["x$8tx5qho0had8$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -36,7 +35,6 @@ export const stored = cs.create(
     kind: "value",
     splices: { $action: action },
     captures: [],
-    declarations: ["captured$8tx5qho0had8$1"],
     spliceScopes: { $action: [] },
   },
   (v) =>
@@ -62,7 +60,6 @@ export const returned = cs.create(
     kind: "value",
     splices: { $action: action },
     captures: [],
-    declarations: [],
     spliceScopes: { $action: [] },
   },
   (v) =>
@@ -80,7 +77,6 @@ export const assigned = cs.create(
     kind: "value",
     splices: { $action: action },
     captures: [],
-    declarations: ["e$8tx5qho0had8$2"],
     spliceScopes: { $action: ["e$8tx5qho0had8$2"] },
   },
   (v) =>

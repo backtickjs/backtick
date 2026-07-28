@@ -10,7 +10,6 @@ const pick = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["n$2bgu1tn5wjo9o$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -52,7 +51,6 @@ export default cs.create(
     kind: "value",
     splices: { $pick: pick },
     captures: [],
-    declarations: [],
     spliceScopes: { $pick: [] },
   },
   (v) =>

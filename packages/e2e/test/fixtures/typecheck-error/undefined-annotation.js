@@ -8,7 +8,6 @@ const stored = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["x$18uwl3j62c30b$0", "y$18uwl3j62c30b$1"],
     spliceScopes: {},
   },
   (v) =>
@@ -38,7 +37,6 @@ const written = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["x$18uwl3j62c30b$2", "y$18uwl3j62c30b$3"],
     spliceScopes: {},
   },
   (v) =>

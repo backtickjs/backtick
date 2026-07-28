@@ -16,7 +16,6 @@ async function Stepper() {
           kind: "value",
           splices: { $size: size },
           captures: [],
-          declarations: [],
           spliceScopes: { $size: [] },
         },
         (v) =>
@@ -40,7 +39,6 @@ async function Stepper() {
         kind: "value",
         splices: { $size: size },
         captures: [],
-        declarations: ["current$1rqun2dr71nzq$0"],
         spliceScopes: { $size: [] },
       },
       (v) =>

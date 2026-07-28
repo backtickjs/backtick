@@ -15,11 +15,6 @@ export default cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: [
-      "count$1yqqpc9g2l4nh$0",
-      "keep$1yqqpc9g2l4nh$1",
-      "on$1yqqpc9g2l4nh$2",
-    ],
     spliceScopes: {},
   },
   (v) =>

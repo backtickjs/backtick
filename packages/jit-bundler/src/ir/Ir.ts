@@ -29,7 +29,6 @@ export interface IrScriptEntry {
   readonly loc: SourceLocation;
   readonly splices: readonly string[];
   readonly captures: readonly string[];
-  readonly declarations: readonly string[];
   readonly spliceScopes: Readonly<Record<string, readonly string[]>>;
   readonly body: AstScriptBody;
 }

@@ -37,7 +37,6 @@ function wrap(start) {
                   kind: "value",
                   splices: {},
                   captures: ["outer$1mlv4ugew6yjv$0"],
-                  declarations: [],
                   spliceScopes: {},
                 },
                 (v) =>
@@ -49,7 +48,6 @@ function wrap(start) {
               ),
             },
             captures: [],
-            declarations: ["middle$1mlv4ugew6yjv$1"],
             spliceScopes: { $0splice0: ["middle$1mlv4ugew6yjv$1"] },
           },
           (v) =>
@@ -84,7 +82,6 @@ function wrap(start) {
         ),
       },
       captures: [],
-      declarations: ["outer$1mlv4ugew6yjv$0"],
       spliceScopes: { $start: [], $0splice0: ["outer$1mlv4ugew6yjv$0"] },
     },
     (v) =>
@@ -120,7 +117,6 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            declarations: [],
             spliceScopes: {},
           },
           (v) => v.number([24, 29, 24, 30], 1),
@@ -136,7 +132,6 @@ export default cs.create(
             kind: "value",
             splices: {},
             captures: [],
-            declarations: [],
             spliceScopes: {},
           },
           (v) => v.number([24, 46, 24, 47], 2),
@@ -144,7 +139,6 @@ export default cs.create(
       ),
     },
     captures: [],
-    declarations: [],
     spliceScopes: { $0splice0: [], $0splice1: [] },
   },
   (v) =>

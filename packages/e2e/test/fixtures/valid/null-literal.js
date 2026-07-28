@@ -10,7 +10,6 @@ const orDash = cs.create(
     kind: "value",
     splices: {},
     captures: [],
-    declarations: ["value$2albtvza6nmmn$0"],
     spliceScopes: {},
   },
   (v) =>
@@ -51,7 +50,6 @@ export default cs.create(
     kind: "value",
     splices: { $orDash: orDash },
     captures: [],
-    declarations: [],
     spliceScopes: { $orDash: [] },
   },
   (v) =>
