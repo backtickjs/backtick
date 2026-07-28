@@ -237,13 +237,11 @@ export function buildBundle(ir: Ir): Bundle {
         ? [content.key, ...Object.values(content.props)]
         : [content];
 
-  // Where each cell's storage lives: the entry the declaring component's
-  // invocation became. `state()` recorded which invocation declared it, so
-  // there is nothing to infer from where the cell is read.
-  const cellOwner = new Map<string, number>();
-  ir.states.forEach((entry, index) => {
-    cellOwner.set(cellKey(index), entry.owner);
-  });
+  // Whether a cell's storage lives in this entry. A cell sits in the entry that
+  // holds it, so ownership is a lookup rather than something to infer from
+  // where the cell is read.
+  const ownsCell = (target: number, key: string): boolean =>
+    isCellKey(key) && cellIndex(key) in ir.trees[target].state;
 
   // What an entry's wiring needs, split by where it comes from:
   //
@@ -280,10 +278,8 @@ export function buildBundle(ir: Ir): Bundle {
           continue;
         }
         seen.add(key);
-        // Only a cell is ever owned, so a binding key falls through to a slot
-        // without needing to be recognized as one.
-        const owned = cellOwner.get(key) === target;
-        (owned ? needs.cells : needs.slots).push(key);
+        // Anything this entry doesn't hold threads in as a slot, cell or not.
+        (ownsCell(target, key) ? needs.cells : needs.slots).push(key);
       }
     }
     treeNeedsCache.set(target, needs);
@@ -580,10 +576,11 @@ export function buildBundle(ir: Ir): Bundle {
     const cells = treeCells(target);
     const state: { [name: string]: BundleExpr } = {};
     for (const key of cells) {
-      state[displayName(key)] = renderExpr(
-        ir.states[cellIndex(key)].initial,
-        noInstance(),
-      );
+      // `treeCells` only yields keys this entry holds, so the initial is here.
+      const initial = ir.trees[target].state[cellIndex(key)];
+      if (initial !== undefined) {
+        state[displayName(key)] = renderExpr(initial, noInstance());
+      }
     }
     const declared = cells.length === 0 ? {} : { [NodeField.state]: state };
     // An instance that renders nothing: the entry stays, with nothing under it.
@@ -646,7 +643,7 @@ export function buildBundle(ir: Ir): Bundle {
             "root. Read it from a script the component renders instead.",
         );
       }
-      if (cellOwner.get(key) !== scope.target) {
+      if (!ownsCell(scope.target, key)) {
         throw new Error(
           `Can't read the state cell \`${sourceName(key)}\` here: a cell's ` +
             "storage belongs to the component instance that declared it, so " +

@@ -1,0 +1,1 @@
+Can't read the state cell `s0` here: its storage belongs to a component instance, and this is evaluated where there is none — a cell's initial value, or the bundle's root. Read it from a script the component renders instead.

@@ -14,7 +14,6 @@ import type {
   IrExpansion,
   IrScriptEntry,
   IrScriptRef,
-  IrStateEntry,
   IrStateRef,
   IrTreeEntry,
   IrTreeRef,
@@ -36,16 +35,16 @@ class IrBuilder {
   // One entry per invocation, interned by node identity so an instance reached
   // twice is one entry instantiated twice.
   private readonly refByInstance = new Map<AstInstance, IrTreeRef>();
-  // One entry per cell, interned by node identity — `lowerClientState` shares
-  // one node per cell — so every splice of a cell is the same reference. The
-  // initial and the declaring instance are held apart until `buildIr` can
-  // resolve that instance to the entry it became.
+  // One reference per cell, interned by node identity — `lowerClientState`
+  // shares one node per cell — so every splice of a cell reaches the same
+  // storage.
   private readonly refByState = new Map<AstState, IrStateRef>();
-  private readonly initialByState: IrArgument[] = [];
-  private readonly declaredByState: AstInstance[] = [];
   // Which entry each invocation became, so a cell's declaring instance resolves
-  // to the entry that owns its storage.
-  private readonly entryByInstance = new Map<AstInstance, number>();
+  // to the entry that holds it.
+  private readonly treeByInstance = new Map<AstInstance, IrTreeEntry>();
+  // Cells are numbered across the whole IR (see `IrStateRef`), so the counter
+  // lives here rather than on an entry.
+  private cellCount = 0;
   // A class's expansion shared across script instances (`lowerSpliceable`
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
@@ -118,6 +117,7 @@ class IrBuilder {
     const tree: IrTreeEntry = {
       kind: "IrTreeEntry",
       content: this.lowerElement(element),
+      state: {},
     };
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
@@ -137,68 +137,58 @@ class IrBuilder {
     if (shared) {
       return shared;
     }
-    const child = instance.child;
     // A component that rendered nothing still gets its entry — the entry is the
-    // instance, and it owns state whether or not it has content.
+    // instance, and it holds state whether or not it has content. Minted before
+    // the subtree is lowered because `state()` runs down there, and a cell has
+    // to land in the entry its component became.
     const tree: IrTreeEntry = {
       kind: "IrTreeEntry",
-      content:
-        child === null
-          ? null
-          : child.kind === "AstInstance"
-            ? this.referenceInstance(child)
-            : this.lowerElement(child),
+      content: null,
+      state: {},
     };
+    this.treeByInstance.set(instance, tree);
+    const child = instance.child;
+    tree.content =
+      child === null
+        ? null
+        : child.kind === "AstInstance"
+          ? this.referenceInstance(child)
+          : this.lowerElement(child);
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
       target: this.trees.length,
       key: this.lower(instance.key),
     };
     this.trees.push(tree);
-    this.entryByInstance.set(instance, ref.target);
     this.refByInstance.set(instance, ref);
     return ref;
   }
 
-  // Lowers a state cell to a reference into the state table, adding its entry
-  // on first sight. The initial lowers in value position — it is data the
-  // owning entry carries, not a tree prop.
+  // Lowers a state cell to a reference, putting its initial in the entry its
+  // declaring component became. The initial lowers in value position — it is
+  // data that entry carries, not a tree prop.
   referenceState(node: AstState): IrStateRef {
     const shared = this.refByState.get(node);
     if (shared) {
       return shared;
     }
-    const ref: IrStateRef = {
-      kind: "IrStateRef",
-      target: this.initialByState.length,
-    };
+    const owner = this.treeByInstance.get(node.declaredIn);
+    if (owner === undefined) {
+      // `state()` records the invocation it ran inside, and every invocation
+      // reached by lowering has an entry by the time its subtree lowers — so
+      // this is a cell whose component isn't in the tree its readers are.
+      throw new Error(
+        "Can't own this state cell: the component that declared it isn't " +
+          "part of the tree being bundled.",
+      );
+    }
+    const ref: IrStateRef = { kind: "IrStateRef", target: this.cellCount++ };
     // Reserved before lowering the initial so a cell whose initial somehow
-    // reaches itself resolves to a stable index rather than recursing.
-    this.initialByState.push({ kind: "IrValue", value: null });
-    this.declaredByState.push(node.declaredIn);
+    // reaches itself resolves to this cell rather than recursing.
+    owner.state[ref.target] = { kind: "IrValue", value: null };
     this.refByState.set(node, ref);
-    this.initialByState[ref.target] = this.lower(node.initial);
+    owner.state[ref.target] = this.lower(node.initial);
     return ref;
-  }
-
-  // The state table, once every invocation has an entry to own its cells.
-  // Resolved at the end because an invocation's entry index is only final after
-  // its subtree has been pushed, and its cells are interned during that subtree.
-  states(): IrStateEntry[] {
-    return this.initialByState.map((initial, index) => {
-      const declaredIn = this.declaredByState[index];
-      const owner = this.entryByInstance.get(declaredIn);
-      if (owner === undefined) {
-        // `state()` records the invocation it ran inside, and every invocation
-        // reached by lowering became an entry — so this is a cell whose
-        // component isn't in the tree its readers are.
-        throw new Error(
-          "Can't own this state cell: the component that declared it isn't " +
-            "part of the tree being bundled.",
-        );
-      }
-      return { kind: "IrStateEntry", initial, owner };
-    });
   }
 
   // Lowers an element's props into an IR element, keeping structure as
@@ -378,7 +368,6 @@ export function buildIr(ast: Ast): Ir {
   return {
     scripts: builder.scripts,
     trees: builder.trees,
-    states: builder.states(),
     root,
   };
 }

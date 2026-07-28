@@ -4,21 +4,16 @@ import type { AstScriptBody } from "../ast/Ast.js";
 export interface Ir {
   scripts: IrScriptEntry[];
   trees: IrTreeEntry[];
-  states: IrStateEntry[];
   root: IrArgument;
 }
 
-// A state-table entry: a cell's initial value, and the entry that owns its
-// storage — the one the declaring component's invocation became. Ownership is
-// recorded rather than inferred, so it doesn't depend on where the cell is read.
-export interface IrStateEntry {
-  readonly kind: "IrStateEntry";
-  readonly initial: IrArgument;
-  readonly owner: number;
-}
-
-// A reference into the IR's state table. Every splice of one cell is the same
-// reference, so every reader and writer shares the storage.
+// A cell. Every splice of one cell is the same reference, so every reader and
+// writer shares the storage.
+//
+// `target` numbers the cell across the whole IR, not within its entry: a script
+// can capture two cells at once — one its own component declared and one
+// reaching in from an enclosing component — and per-entry numbers would give
+// both the same binding key.
 export interface IrStateRef {
   readonly kind: "IrStateRef";
   readonly target: number;
@@ -45,7 +40,17 @@ export interface IrTreeEntry {
   // Null when the instance renders nothing. The entry still exists — it is what
   // owns the instance's state and what a re-render re-evaluates — so what is
   // absent is the content, not the entry.
-  readonly content: IrElement | IrTreeRef | null;
+  //
+  // Written after the entry exists, like `AstInstance.child`: the entry is
+  // minted before its subtree is lowered, because a cell interned down there
+  // has to land in the entry its component became.
+  content: IrElement | IrTreeRef | null;
+  // The cells this instance declares, each under the number its references
+  // carry (`IrStateRef.target`) and holding the cell's initial value.
+  // Instantiating the entry allocates storage for each, so ownership is where a
+  // cell sits rather than something recorded on it. Empty for an element entry:
+  // only a component invocation can declare state.
+  state: Record<number, IrArgument>;
 }
 
 // How one script entry embeds another (and how the IR names its entrypoint).
