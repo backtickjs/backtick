@@ -1,4 +1,4 @@
-#f0 = () => [1, 2, 3].map((row) => #t0(row))
+#f0 = ($0, $1) => $0().map((row) => $1(row))
 
 #f1 = ($env) => "row " + $env.row
 
@@ -7,7 +7,7 @@
 </Text>
 
 #t1 = <View>
-  {#f0()}
+  {#f0(() => [1, 2, 3], (row) => #t0(row))}
 </View>
 
 root = #t1()

@@ -1,7 +1,7 @@
-#f0 = () => { "coins": [#f1(), #f2()] }.coins.length
+#f0 = ($0) => $0().coins.length
 
 #f1 = () => 1
 
 #f2 = () => 2
 
-root = #f0()
+root = #f0(() => { "coins": [#f1(), #f2()] })

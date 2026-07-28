@@ -1,8 +1,8 @@
-#f0 = () => {
+#f0 = ($0) => {
   const apply = (f) => f() + 1;
-  return apply(#f1());
+  return apply($0(apply));
 }
 
 #f1 = () => () => 2
 
-root = #f0()
+root = #f0((apply) => #f1())

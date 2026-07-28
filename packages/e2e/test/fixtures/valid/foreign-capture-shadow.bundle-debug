@@ -1,15 +1,15 @@
-#f0 = () => {
+#f0 = ($0) => {
   const base = 1;
-  return #f1({ "base": base });
+  return $0(base);
 }
 
-#f1 = ($env) => {
-  const base = 100;
-  return #f2({ "base": base, "base2": $env.base });
+#f1 = ($0) => {
+  const base2 = 100;
+  return $0(base2);
 }
 
-#f2 = ($env) => $env.base + #f3({ "base": $env.base2 })
+#f2 = ($0, $env) => $env.base + $0()
 
 #f3 = ($env) => $env.base
 
-root = #f0()
+root = #f0((base) => #f1((base2) => #f2(() => #f3({ "base": base }), { "base": base2 })))

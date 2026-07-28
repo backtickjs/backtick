@@ -1,8 +1,8 @@
-#f0 = () => {
+#f0 = ($0) => {
   const x = 0;
-  return #f1({ "x": x });
+  return $0(x);
 }
 
 #f1 = ($env) => $env.x
 
-root = #f0()
+root = #f0((x) => #f1({ "x": x }))

@@ -198,7 +198,32 @@ export function buildBundle(ir: Ir): Bundle {
   const readKey = (key: string): BundleExpressionNode =>
     bodyEntry !== null && capturedBy(bodyEntry).has(key)
       ? envRead(bodyEntry, key)
-      : { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
+      : { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+
+  // A binding key printed under its source name, with a numeric suffix when two
+  // distinct bindings would otherwise print the same.
+  //
+  // Needed because these become identifiers, and identifiers nest: a hole inside
+  // a thunk puts one thunk's parameters inside another's, so two bindings that
+  // share a source name can end up in the same chain and the inner would shadow
+  // what the outer was handed. Environment keys have no such problem — they are
+  // scoped to one entry's object — so those stay bare source names (`envKey`).
+  const displayNames = new Map<string, string>();
+  const usedNames = new Set<string>();
+  const displayName = (key: string): string => {
+    const existing = displayNames.get(key);
+    if (existing !== undefined) {
+      return existing;
+    }
+    const base = sourceName(key);
+    let name = base;
+    for (let n = 2; usedNames.has(name); n++) {
+      name = `${base}${n}`;
+    }
+    usedNames.add(name);
+    displayNames.set(key, name);
+    return name;
+  };
 
   // Names each entry's body declares (variable declarations and arrow
   // parameters, at any depth), computed once by the compiler and carried on the
@@ -234,31 +259,10 @@ export function buildBundle(ir: Ir): Bundle {
     collectRefs(ref);
   }
 
-  // An entry is polymorphic when it is reached by more than one distinct
-  // reference: its body (one source location) is shared across call sites that
-  // pass different splices, so the splices can't be inlined and must be threaded
-  // as parameters instead. `buildIr` interns one reference per source node,
-  // so "more than one reference object" means the entry is reached from more than
-  // one splice site — the only way its arguments can vary. Comparing reference
-  // identity keeps this O(1) per entry; comparing the arguments structurally
-  // would re-expand shared subtrees and cost 2^depth on a diamond.
-  const polymorphic = new Set<number>();
-  for (const [target, refs] of refsByTarget) {
-    if (new Set(refs).size > 1) {
-      polymorphic.add(target);
-    }
-  }
-
-  // A representative splice-argument list for an entry. For a monomorphic entry
-  // every reference agrees, so any list stands in for all of them.
-  const monoArgs = (target: number): readonly IrArgument[] =>
-    refsByTarget.get(target)?.[0]?.args ?? [];
-
-  // The captures an entry receives in its environment: its own free variables
-  // plus, for a monomorphic entry, the captures free in the arguments it inlines
-  // — minus the ones it binds itself. A polymorphic entry inlines nothing (its
-  // arguments arrive as thunks bound at the call site), so it needs only its own
-  // free variables. Binding keys are globally unique, so a capture is identified
+  // The captures an entry receives in its environment: its own free variables,
+  // minus the ones it binds itself. Nothing from a call site is inlined — every
+  // splice argument arrives as a thunk — so this is the script's own answer, and
+  // the filter only ever removes what a hole supplies (see `passKeys`). Binding keys are globally unique, so a capture is identified
   // by key alone. Returned in a stable order (own captures first); memoized, with
   // a cycle guard for self-referential scripts.
   const needCache = new Map<number, string[]>();
@@ -283,13 +287,6 @@ export function buildBundle(ir: Ir): Bundle {
     for (const key of fns[i].captures) {
       add(key);
     }
-    if (!polymorphic.has(i)) {
-      for (const arg of monoArgs(i)) {
-        for (const key of freeCaps(arg)) {
-          add(key);
-        }
-      }
-    }
     const result = order.filter((key) => !declaredKeys[i].has(key));
     needStack.delete(i);
     needCache.set(i, result);
@@ -297,9 +294,9 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // The captures that the rendered form of a splice argument refers to in the
-  // enclosing scope: whatever its target still needs, plus — when the target is
-  // polymorphic — the captures of the thunks passed for its splices, since those
-  // thunks are written inline at this call site. A tree reference needs its
+  // enclosing scope: whatever its target still needs, plus the captures of the
+  // thunks passed for its splices, since those thunks are written inline at this
+  // call site. A tree reference needs its
   // slot values; an inline element whatever its props need.
   // Memoized per argument — the IR is immutable and this fans out from
   // `need`, `passKeys`, and `treeSlots`. A result computed while a `need` is
@@ -322,14 +319,12 @@ export function buildBundle(ir: Ir): Bundle {
     switch (value.kind) {
       case "IrScriptRef": {
         const keys = [...need(value.target)];
-        if (polymorphic.has(value.target)) {
-          for (const arg of value.args) {
-            // A capture the entry itself declares is supplied by the hole
-            // call (see `passKeys`), not by the call site.
-            for (const key of freeCaps(arg)) {
-              if (!declaredKeys[value.target].has(key)) {
-                keys.push(key);
-              }
+        for (const arg of value.args) {
+          // A capture the entry itself declares is supplied by the hole call
+          // (see `passKeys`), not by the call site.
+          for (const key of freeCaps(arg)) {
+            if (!declaredKeys[value.target].has(key)) {
+              keys.push(key);
             }
           }
         }
@@ -481,9 +476,9 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // Materializes an entry's arrow node into `bodies` the first time it is
-  // reached. A polymorphic entry takes a `$i` parameter per splice (its holes
-  // render as calls `$i()`) ahead of its captures; a monomorphic entry inlines
-  // its splice arguments and takes only captures.
+  // reached. An entry takes a `$i` parameter per splice — its holes render as
+  // calls `$i()` — ahead of its environment. Nothing from a call site is
+  // inlined, so the body is a function of the script's source alone.
   const materialize = (target: number): void => {
     if (bodies.has(target)) {
       return;
@@ -503,34 +498,30 @@ export function buildBundle(ir: Ir): Bundle {
       }
       return index;
     };
-    let params: string[];
-    let renderSplice: RenderSplice;
-    if (polymorphic.has(target)) {
-      const arity = monoArgs(target).length;
-      const spliceParams = Array.from({ length: arity }, (_, i) => `$${i}`);
-      params = [...spliceParams, ...(captured.size === 0 ? [] : [envParam])];
-      renderSplice = (key) => {
-        const index = holeIndex(key);
-        const args = passKeys(target, index).map((key) => ({
+    // One parameter per splice the script writes, so an entry's shape is its
+    // own — not a count of how many references this bundle happened to hold.
+    const spliceParams = fns[target].splices.map((_, i) => `$${i}`);
+    const params = [
+      ...spliceParams,
+      ...(captured.size === 0 ? [] : [envParam]),
+    ];
+    const renderSplice: RenderSplice = (key) => {
+      const index = holeIndex(key);
+      const args = passKeys(target, index).map((key) => ({
+        "#": NodeKind.Identifier,
+        [NodeField.name]: displayName(key),
+      }));
+      return {
+        "#": NodeKind.Call,
+        [NodeField.callee]: {
           "#": NodeKind.Identifier,
-          [NodeField.name]: sourceName(key),
-        }));
-        return {
-          "#": NodeKind.Call,
-          [NodeField.callee]: {
-            "#": NodeKind.Identifier,
-            [NodeField.name]: `$${index}`,
-          },
-          ...(args.length === 0 ? {} : { [NodeField.args]: args }),
-        };
+          [NodeField.name]: `$${index}`,
+        },
+        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
       };
-    } else {
-      params = captured.size === 0 ? [] : [envParam];
-      const args = monoArgs(target);
-      renderSplice = (key) => renderValue(args[holeIndex(key)]);
-    }
+    };
     const body = withBodyOf(target, () =>
-      lowerScriptBody(fns[target].body, renderSplice, sourceName, readKey),
+      lowerScriptBody(fns[target].body, renderSplice, displayName, readKey),
     );
     bodies.set(target, {
       "#": NodeKind.Arrow,
@@ -539,16 +530,13 @@ export function buildBundle(ir: Ir): Bundle {
     });
   };
 
-  // The arguments passed when calling an entry: for a polymorphic target, one
-  // thunk per splice (bound to this reference's arguments) ahead of its
-  // environment; for a monomorphic target, just the environment.
+  // The arguments passed when calling an entry: one thunk per splice, bound to
+  // this reference's arguments, then the environment.
   const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
     const parts: BundleExpressionNode[] = [];
-    if (polymorphic.has(ref.target)) {
-      ref.args.forEach((arg, index) => {
-        parts.push(renderThunk(arg, ref.target, index));
-      });
-    }
+    ref.args.forEach((arg, index) => {
+      parts.push(renderThunk(arg, ref.target, index));
+    });
     const env = envObject(ref.target, readKey);
     if (env !== null) {
       parts.push(env);
@@ -568,6 +556,31 @@ export function buildBundle(ir: Ir): Bundle {
           "an element survives a splice, and its children are what land in " +
           "tree position, where a key means something.",
       );
+    }
+  };
+
+  // A splice argument is instantiated by the script it lands in, whether it is
+  // threaded as a thunk or reached directly, so a component anywhere inside one
+  // is unkeyed for the same reason (see `requireUnkeyed`). Inlining used to
+  // enforce this by routing every splice argument through `renderValue`; now
+  // that they all arrive as thunks, the check has to be made where they are
+  // built. A nested script's own splices are checked when its thunks are.
+  const requireUnkeyedIn = (value: IrArgument): void => {
+    switch (value.kind) {
+      case "IrTreeRef":
+        requireUnkeyed(value);
+        return;
+      case "IrArray":
+        value.elements.forEach(requireUnkeyedIn);
+        return;
+      case "IrObject":
+        Object.values(value.entries).forEach(requireUnkeyedIn);
+        return;
+      case "IrExpansion":
+        requireUnkeyedIn(value.body);
+        return;
+      default:
+        return;
     }
   };
 
@@ -638,8 +651,8 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // Renders a splice argument in thunk position — as a function yielding the
-  // value — so a polymorphic entry evaluates it lazily at the hole, mirroring
-  // an inlined splice. When the splice captures bindings the entry declares,
+  // value — so the entry evaluates it lazily at the hole, which is what keeps a
+  // splice as lazy as it reads. When the splice captures bindings the entry declares,
   // the thunk takes them as parameters and the hole call supplies them (see
   // `passKeys`); the body's identifiers then resolve through the thunk frame.
   // Otherwise a referenced entry that takes no arguments is a nullary thunk
@@ -649,7 +662,7 @@ export function buildBundle(ir: Ir): Bundle {
     target: number,
     hole: number,
   ): BundleExpressionNode => {
-    const params = passKeys(target, hole).map(sourceName);
+    const params = passKeys(target, hole).map(displayName);
     if (params.length > 0) {
       return {
         "#": NodeKind.Arrow,
@@ -717,7 +730,7 @@ export function buildBundle(ir: Ir): Bundle {
     const cells = treeCells(target);
     const state: { [name: string]: BundleExpr } = {};
     for (const key of cells) {
-      state[sourceName(key)] = renderExpr(
+      state[displayName(key)] = renderExpr(
         ir.states[cellIndex(key)].initial,
         noInstance(),
       );
@@ -761,7 +774,7 @@ export function buildBundle(ir: Ir): Bundle {
     params: ReadonlySet<string> = new Set(),
   ): BundleGetSlot | BundleGetState | BundleIdentifierNode => {
     if (params.has(key)) {
-      return { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
+      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
     // Before the cell case: a cell this entry doesn't own arrives as a slot, and
     // only one it owns resolves against the instance.
@@ -791,7 +804,7 @@ export function buildBundle(ir: Ir): Bundle {
             "prop. Pass it down, or declare a cell where it is read.",
         );
       }
-      return { "#": NodeKind.GetState, [NodeField.name]: sourceName(key) };
+      return { "#": NodeKind.GetState, [NodeField.name]: displayName(key) };
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -800,33 +813,32 @@ export function buildBundle(ir: Ir): Bundle {
   };
 
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
-  // a polymorphic target, one `#thunk` per splice ahead of its environment.
+  // one `#thunk` per splice ahead of the environment.
   const exprCallArgs = (
     ref: IrScriptRef,
     scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleExpr[] => {
     const parts: BundleExpr[] = [];
-    if (polymorphic.has(ref.target)) {
-      ref.args.forEach((arg, index) => {
-        const passed = passKeys(ref.target, index);
-        if (passed.length === 0) {
-          parts.push({
-            "#": NodeKind.Thunk,
-            [NodeField.expression]: renderExpr(arg, scope, params),
-          });
-          return;
-        }
-        // The thunk's parameters extend the enclosing ones, like a nested
-        // frame: the expression sees both.
-        const inner = new Set([...params, ...passed]);
+    ref.args.forEach((arg, index) => {
+      requireUnkeyedIn(arg);
+      const passed = passKeys(ref.target, index);
+      if (passed.length === 0) {
         parts.push({
           "#": NodeKind.Thunk,
-          [NodeField.params]: passed.map(sourceName),
-          [NodeField.expression]: renderExpr(arg, scope, inner),
+          [NodeField.expression]: renderExpr(arg, scope, params),
         });
+        return;
+      }
+      // The thunk's parameters extend the enclosing ones, like a nested
+      // frame: the expression sees both.
+      const inner = new Set([...params, ...passed]);
+      parts.push({
+        "#": NodeKind.Thunk,
+        [NodeField.params]: passed.map(displayName),
+        [NodeField.expression]: renderExpr(arg, scope, inner),
       });
-    }
+    });
     const env = envObject(ref.target, (key) => capExpr(key, scope, params));
     if (env !== null) {
       parts.push(env);

@@ -1,4 +1,4 @@
-#f0 = () => #f1(#f2, (outer) => #f3((middle) => #f4({ "outer": outer }))) + #f1(#f5, (outer) => #f3((middle) => #f4({ "outer": outer })))
+#f0 = ($0, $1) => $0() + $1()
 
 #f1 = ($0, $1) => {
   const outer = $0();
@@ -16,4 +16,4 @@
 
 #f5 = () => 2
 
-root = #f0()
+root = #f0(() => #f1(() => #f2(), (outer) => #f3((middle) => #f4({ "outer": outer }))), () => #f1(() => #f5(), (outer) => #f3((middle) => #f4({ "outer": outer }))))

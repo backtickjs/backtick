@@ -1,35 +1,4 @@
-#f0 = () => [
-  {
-    "id": "ord-1000",
-    "customer": { "name": "Customer 0", "city": "Montréal" },
-    "items": [{ "sku": "SKU-0-A", "qty": 1 }, { "sku": "SKU-0-B", "qty": 1 }],
-    "total": 45.23
-  },
-  {
-    "id": "ord-1001",
-    "customer": { "name": "Customer 1", "city": "Toronto" },
-    "items": [{ "sku": "SKU-1-A", "qty": 2 }, { "sku": "SKU-1-B", "qty": 1 }],
-    "total": 46.23
-  },
-  {
-    "id": "ord-1002",
-    "customer": { "name": "Customer 2", "city": "Montréal" },
-    "items": [{ "sku": "SKU-2-A", "qty": 3 }, { "sku": "SKU-2-B", "qty": 1 }],
-    "total": 47.23
-  },
-  {
-    "id": "ord-1003",
-    "customer": { "name": "Customer 3", "city": "Toronto" },
-    "items": [{ "sku": "SKU-3-A", "qty": 1 }, { "sku": "SKU-3-B", "qty": 1 }],
-    "total": 48.23
-  },
-  {
-    "id": "ord-1004",
-    "customer": { "name": "Customer 4", "city": "Montréal" },
-    "items": [{ "sku": "SKU-4-A", "qty": 2 }, { "sku": "SKU-4-B", "qty": 1 }],
-    "total": 49.23
-  }
-].map((order) => #t1(order))
+#f0 = ($0, $1) => $0().map((order) => $1(order))
 
 #f1 = ($env) => $env.order.id
 
@@ -39,7 +8,7 @@
 
 #f4 = ($env) => $env.order.customer.city
 
-#f5 = ($env) => $env.order.items.map((item) => #t0(item))
+#f5 = ($0, $env) => $env.order.items.map((item) => $0(item))
 
 #f6 = ($env) => $env.item.sku
 
@@ -65,14 +34,45 @@
   {<Text>
     {#f4({ "order": slots[0] })}
   </Text>}
-  {#f5({ "order": slots[0] })}
+  {#f5((item) => #t0(item), { "order": slots[0] })}
   {<Text>
     {#f8({ "order": slots[0] })}
   </Text>}
 </View>
 
 #t2 = <View>
-  {#f0()}
+  {#f0(() => [
+    {
+      "id": "ord-1000",
+      "customer": { "name": "Customer 0", "city": "Montréal" },
+      "items": [{ "sku": "SKU-0-A", "qty": 1 }, { "sku": "SKU-0-B", "qty": 1 }],
+      "total": 45.23
+    },
+    {
+      "id": "ord-1001",
+      "customer": { "name": "Customer 1", "city": "Toronto" },
+      "items": [{ "sku": "SKU-1-A", "qty": 2 }, { "sku": "SKU-1-B", "qty": 1 }],
+      "total": 46.23
+    },
+    {
+      "id": "ord-1002",
+      "customer": { "name": "Customer 2", "city": "Montréal" },
+      "items": [{ "sku": "SKU-2-A", "qty": 3 }, { "sku": "SKU-2-B", "qty": 1 }],
+      "total": 47.23
+    },
+    {
+      "id": "ord-1003",
+      "customer": { "name": "Customer 3", "city": "Toronto" },
+      "items": [{ "sku": "SKU-3-A", "qty": 1 }, { "sku": "SKU-3-B", "qty": 1 }],
+      "total": 48.23
+    },
+    {
+      "id": "ord-1004",
+      "customer": { "name": "Customer 4", "city": "Montréal" },
+      "items": [{ "sku": "SKU-4-A", "qty": 2 }, { "sku": "SKU-4-B", "qty": 1 }],
+      "total": 49.23
+    }
+  ], (order) => #t1(order))}
 </View>
 
 root = #t2()

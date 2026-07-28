@@ -2,102 +2,21 @@
   "functions": {
     "0": {
       "#": 1005,
+      "h": [
+        "$0",
+        "$1"
+      ],
       "s": {
         "#": 1001,
         "j": {
           "#": 1002,
-          "k": [
-            {
-              "id": "ord-1000",
-              "customer": {
-                "name": "Customer 0",
-                "city": "Montréal"
-              },
-              "items": [
-                {
-                  "sku": "SKU-0-A",
-                  "qty": 1
-                },
-                {
-                  "sku": "SKU-0-B",
-                  "qty": 1
-                }
-              ],
-              "total": 45.23
-            },
-            {
-              "id": "ord-1001",
-              "customer": {
-                "name": "Customer 1",
-                "city": "Toronto"
-              },
-              "items": [
-                {
-                  "sku": "SKU-1-A",
-                  "qty": 2
-                },
-                {
-                  "sku": "SKU-1-B",
-                  "qty": 1
-                }
-              ],
-              "total": 46.23
-            },
-            {
-              "id": "ord-1002",
-              "customer": {
-                "name": "Customer 2",
-                "city": "Montréal"
-              },
-              "items": [
-                {
-                  "sku": "SKU-2-A",
-                  "qty": 3
-                },
-                {
-                  "sku": "SKU-2-B",
-                  "qty": 1
-                }
-              ],
-              "total": 47.23
-            },
-            {
-              "id": "ord-1003",
-              "customer": {
-                "name": "Customer 3",
-                "city": "Toronto"
-              },
-              "items": [
-                {
-                  "sku": "SKU-3-A",
-                  "qty": 1
-                },
-                {
-                  "sku": "SKU-3-B",
-                  "qty": 1
-                }
-              ],
-              "total": 48.23
-            },
-            {
-              "id": "ord-1004",
-              "customer": {
-                "name": "Customer 4",
-                "city": "Montréal"
-              },
-              "items": [
-                {
-                  "sku": "SKU-4-A",
-                  "qty": 2
-                },
-                {
-                  "sku": "SKU-4-B",
-                  "qty": 1
-                }
-              ],
-              "total": 49.23
+          "k": {
+            "#": 1001,
+            "j": {
+              "#": 1000,
+              "e": "$0"
             }
-          ],
+          },
           "e": "map"
         },
         "g": [
@@ -109,8 +28,8 @@
             "s": {
               "#": 1001,
               "j": {
-                "#": 3,
-                "f": "1"
+                "#": 1000,
+                "e": "$1"
               },
               "g": [
                 {
@@ -216,6 +135,7 @@
     "5": {
       "#": 1005,
       "h": [
+        "$0",
         "$env"
       ],
       "s": {
@@ -245,8 +165,8 @@
             "s": {
               "#": 1001,
               "j": {
-                "#": 3,
-                "f": "0"
+                "#": 1000,
+                "e": "$0"
               },
               "g": [
                 {
@@ -452,6 +372,22 @@
               "f": "5",
               "g": [
                 {
+                  "#": 7,
+                  "h": [
+                    "item"
+                  ],
+                  "i": {
+                    "#": 5,
+                    "f": "0",
+                    "g": [
+                      {
+                        "#": 1000,
+                        "e": "item"
+                      }
+                    ]
+                  }
+                },
+                {
                   "order": {
                     "#": 1,
                     "d": 0
@@ -488,7 +424,120 @@
         "c": {
           "children": {
             "#": 6,
-            "f": "0"
+            "f": "0",
+            "g": [
+              {
+                "#": 7,
+                "i": [
+                  {
+                    "id": "ord-1000",
+                    "customer": {
+                      "name": "Customer 0",
+                      "city": "Montréal"
+                    },
+                    "items": [
+                      {
+                        "sku": "SKU-0-A",
+                        "qty": 1
+                      },
+                      {
+                        "sku": "SKU-0-B",
+                        "qty": 1
+                      }
+                    ],
+                    "total": 45.23
+                  },
+                  {
+                    "id": "ord-1001",
+                    "customer": {
+                      "name": "Customer 1",
+                      "city": "Toronto"
+                    },
+                    "items": [
+                      {
+                        "sku": "SKU-1-A",
+                        "qty": 2
+                      },
+                      {
+                        "sku": "SKU-1-B",
+                        "qty": 1
+                      }
+                    ],
+                    "total": 46.23
+                  },
+                  {
+                    "id": "ord-1002",
+                    "customer": {
+                      "name": "Customer 2",
+                      "city": "Montréal"
+                    },
+                    "items": [
+                      {
+                        "sku": "SKU-2-A",
+                        "qty": 3
+                      },
+                      {
+                        "sku": "SKU-2-B",
+                        "qty": 1
+                      }
+                    ],
+                    "total": 47.23
+                  },
+                  {
+                    "id": "ord-1003",
+                    "customer": {
+                      "name": "Customer 3",
+                      "city": "Toronto"
+                    },
+                    "items": [
+                      {
+                        "sku": "SKU-3-A",
+                        "qty": 1
+                      },
+                      {
+                        "sku": "SKU-3-B",
+                        "qty": 1
+                      }
+                    ],
+                    "total": 48.23
+                  },
+                  {
+                    "id": "ord-1004",
+                    "customer": {
+                      "name": "Customer 4",
+                      "city": "Montréal"
+                    },
+                    "items": [
+                      {
+                        "sku": "SKU-4-A",
+                        "qty": 2
+                      },
+                      {
+                        "sku": "SKU-4-B",
+                        "qty": 1
+                      }
+                    ],
+                    "total": 49.23
+                  }
+                ]
+              },
+              {
+                "#": 7,
+                "h": [
+                  "order"
+                ],
+                "i": {
+                  "#": 5,
+                  "f": "1",
+                  "g": [
+                    {
+                      "#": 1000,
+                      "e": "order"
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       }

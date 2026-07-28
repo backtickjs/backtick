@@ -1,10 +1,10 @@
-#f0 = () => {
+#f0 = ($0) => {
   const foo$ = 1;
-  return #f1({ "foo$": foo$ });
+  return $0(foo$);
 }
 
-#f1 = ($env) => #f2({ "foo$": $env.foo$ }) + 2
+#f1 = ($0) => $0() + 2
 
 #f2 = ($env) => $env.foo$
 
-root = #f0()
+root = #f0((foo$) => #f1(() => #f2({ "foo$": foo$ })))

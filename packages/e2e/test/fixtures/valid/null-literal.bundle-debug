@@ -1,4 +1,4 @@
-#f0 = () => { "missing": #f1()(null), "present": #f1()("hi"), "bare": null }
+#f0 = ($0) => { "missing": $0()(null), "present": $0()("hi"), "bare": null }
 
 #f1 = () => (value) => {
   if (value === null) {
@@ -7,4 +7,4 @@
   return value;
 }
 
-root = #f0()
+root = #f0(() => #f1())

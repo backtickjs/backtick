@@ -1,8 +1,8 @@
-#f0 = ($env) => $env.#s0.read()
+#f0 = ($0) => $0().read()
 
 #t0 = <View>
   {<Text
-    key={#f0({ "#s0": slots[0] })}
+    key={#f0(() => slots[0])}
   >
     {"press"}
   </Text>}

@@ -1,15 +1,15 @@
-#f0 = () => {
+#f0 = ($0) => {
   const total = 1;
-  return #f1({ "total": total });
+  return $0(total);
 }
 
-#f1 = ($env) => {
-  let total = 0;
-  total = total + #f2({ "total": $env.total });
-  total = total + 100;
-  return total;
+#f1 = ($0, $1) => {
+  let total2 = 0;
+  total2 = total2 + $0(total2);
+  total2 = total2 + $1(total2);
+  return total2;
 }
 
 #f2 = ($env) => $env.total
 
-root = #f0()
+root = #f0((total) => #f1((total2) => #f2({ "total": total }), (total2) => 100))

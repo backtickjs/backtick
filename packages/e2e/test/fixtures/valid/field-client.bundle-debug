@@ -1,5 +1,5 @@
-#f0 = () => {
-  const c = { "r": #f1(), "g": #f2(), "b": #f3() };
+#f0 = ($0) => {
+  const c = $0();
   const brightness = c.r + c.g + c.b;
   if (brightness > 382) {
     return "light";
@@ -13,4 +13,4 @@
 
 #f3 = () => 255
 
-root = #f0()
+root = #f0(() => { "r": #f1(), "g": #f2(), "b": #f3() })

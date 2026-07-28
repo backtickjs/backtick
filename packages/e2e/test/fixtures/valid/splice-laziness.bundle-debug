@@ -1,4 +1,4 @@
-#f0 = () => { "taken": #f1((flag) => #f2())(true), "skipped": #f1((flag) => #f3())(false) }
+#f0 = ($0, $1) => { "taken": $0()(true), "skipped": $1()(false) }
 
 #f1 = ($0) => (flag) => {
   if (flag) {
@@ -13,4 +13,4 @@
   throw "the guarded fragment must never evaluate";
 }
 
-root = #f0()
+root = #f0(() => #f1((flag) => #f2()), () => #f1((flag) => #f3()))

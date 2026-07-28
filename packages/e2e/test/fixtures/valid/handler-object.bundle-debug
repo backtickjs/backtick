@@ -1,10 +1,10 @@
-#f0 = () => {
-  const handlers = { "tap": #f1(), "hold": #f1() };
+#f0 = ($0) => {
+  const handlers = { "tap": $0(), "hold": $0() };
   return handlers;
 }
 
-#f1 = () => (id) => {
-  #f2();
+#f1 = ($0) => (id) => {
+  $0(id);
 }
 
 #f2 = () => {
@@ -12,4 +12,4 @@
   n = 1;
 }
 
-root = #f0()
+root = #f0(() => #f1((id) => #f2()))

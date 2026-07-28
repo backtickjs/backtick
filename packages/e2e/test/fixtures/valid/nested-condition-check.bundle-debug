@@ -1,4 +1,4 @@
-#f0 = () => { "both": #f1()(true, true), "one": #f1()(true, false) }
+#f0 = ($0) => { "both": $0()(true, true), "one": $0()(true, false) }
 
 #f1 = () => (a, b) => {
   const keep = (on) => on;
@@ -8,4 +8,4 @@
   return "dropped";
 }
 
-root = #f0()
+root = #f0(() => #f1())

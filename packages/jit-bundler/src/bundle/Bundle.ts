@@ -31,12 +31,14 @@
 // function value it holds.
 export interface Bundle {
   // Each entry is an arrow node — evaluating it yields a function, exactly
-  // as for an arrow nested inside a body. A monomorphic entry (one call
-  // site, or identical arguments everywhere) has its splice arguments
-  // inlined into the body. A polymorphic entry takes one thunk parameter per
-  // splice hole (named `$0`, `$1`, …); the body invokes the thunk at the
-  // hole, passing the entry-scoped bindings the splice captures — a spliced
-  // fragment sees the bindings in scope at its hole.
+  // as for an arrow nested inside a body. It takes one thunk parameter per
+  // splice hole the script writes (named `$0`, `$1`, …); the body invokes the
+  // thunk at the hole, passing the entry-scoped bindings in scope there — a
+  // spliced fragment sees the bindings in scope at its hole.
+  //
+  // Nothing a call site supplies is inlined, so an entry's shape and body are
+  // a function of its script's source: the same script compiles to the same
+  // entry in every bundle it appears in.
   //
   // Whatever an entry captures arrives after those, in a single object
   // parameter named `$env`, omitted when it captures nothing. The body reads
@@ -211,7 +213,14 @@ export interface BundleGetState {
 // Instantiates a `trees` entry: `args` supplies the tree's slots in index
 // order, and `key` identifies the instance among its siblings so it survives a
 // re-render that reorders them. Only a tree can be keyed — only a tree has
-// state to keep. (Applying names a table row by label; a body `call` evaluates
+// state to keep.
+//
+// An instance persists across its parent's re-renders, named by this node and by
+// which evaluation of it it was: the first evaluation of a node finds the first
+// instance again, the second finds the second. The node alone is not enough,
+// because a node inside a loop is evaluated once per iteration, and naming them
+// all the same would give every iteration one shared instance. Positional, so
+// reordering a list moves state between rows — which is what `key` overrides. (Applying names a table row by label; a body `call` evaluates
 // a `callee` node instead, so the two are separate kinds.)
 export interface BundleApplyTree {
   "#": typeof NodeKind.ApplyTree;

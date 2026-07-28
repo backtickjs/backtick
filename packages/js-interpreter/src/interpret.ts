@@ -2,6 +2,7 @@ import { NodeKind, NodeField } from "@backtickjs/core";
 import type {
   Bundle,
   BundleApply,
+  BundleApplyTree,
   BundleBinaryOperator,
   BundleElement,
   BundleExpr,
@@ -58,7 +59,13 @@ interface Instance {
   readonly tree: BundleTree;
   slots: Value[];
   readonly cells: Map<string, Value>;
-  readonly children: Map<BundleApply, Instance>;
+  // Nested instances, per `apply` node and then by how many times that node has
+  // been reached in one render — a node inside a loop is reached once per
+  // iteration, and each of those is its own instance.
+  readonly children: Map<BundleApplyTree, Instance[]>;
+  // How many times each `apply` has been reached in the render under way.
+  // Cleared when one starts, so the nth evaluation finds the nth instance again.
+  readonly visits: Map<BundleApplyTree, number>;
   // The host that mounted this instance, captured when it was created — a
   // child created during a later re-render inherits it the same way.
   readonly notify: (() => void) | null;
@@ -76,6 +83,7 @@ function instantiate(
     slots,
     cells: new Map(),
     children: new Map(),
+    visits: new Map(),
     notify: notifying,
     element: null,
   };
@@ -98,6 +106,9 @@ function instantiate(
 // that child rather than instantiating a new one, which is what keeps the
 // child's cells alive. An instance whose content is null renders nothing.
 function render(instance: Instance): Element | null {
+  // A fresh count for this pass: an `apply` reached n times last render is
+  // reached n times again, so the nth evaluation lines up with the nth instance.
+  instance.visits.clear();
   // Under this instance's host, so a child instantiated for the first time
   // during a re-render notifies the same one rather than nothing.
   const rendered = whileNotifying(
@@ -296,15 +307,25 @@ function evaluateExpr(
         if (tree === undefined) {
           throw new Error(`unknown tree entry ${label}`);
         }
-        // A nested instance persists across the parent's re-renders, keyed by
-        // this node — its position in the parent.
-        const child = instance.children.get(form);
+        // A nested instance persists across the parent's re-renders, named by
+        // this node and by which evaluation of it this is. The node alone would
+        // do if a node were reached once per render, but a hole inside a loop is
+        // reached once per iteration — one name for all of them would hand every
+        // iteration the same instance, and each would overwrite the last.
+        const seen = instance.visits.get(form) ?? 0;
+        instance.visits.set(form, seen + 1);
+        let siblings = instance.children.get(form);
+        if (siblings === undefined) {
+          siblings = [];
+          instance.children.set(form, siblings);
+        }
+        const child = siblings[seen];
         if (child !== undefined) {
           child.slots = args;
           return render(child);
         }
         const created = instantiate(bundle, tree, args);
-        instance.children.set(form, created);
+        siblings[seen] = created;
         return created.element;
       }
       case NodeKind.Thunk: {

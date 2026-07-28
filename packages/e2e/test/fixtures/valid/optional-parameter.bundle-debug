@@ -1,8 +1,8 @@
-#f0 = () => {
-  "named": #f1()("hi"),
-  "explicit": #f1()(null),
-  "supplied": #f2()(#f3()),
-  "fallback": #f2()(null)
+#f0 = ($0, $1, $2) => {
+  "named": $0()("hi"),
+  "explicit": $0()(null),
+  "supplied": $1()($2()),
+  "fallback": $1()(null)
 }
 
 #f1 = () => (name) => {
@@ -15,4 +15,4 @@
 
 #f3 = () => () => 2
 
-root = #f0()
+root = #f0(() => #f1(), () => #f2(), () => #f3())
