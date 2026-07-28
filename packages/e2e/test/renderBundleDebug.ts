@@ -13,7 +13,6 @@ import type {
 // expression that evaluates it. This is a reading aid for the `*.bundle`
 // snapshots, not a wire format — nothing parses it back.
 export function renderBundleDebug(bundle: Bundle): string {
-  shortNames.clear();
   const sections: string[] = [];
   for (const [label, arrow] of Object.entries(bundle.functions)) {
     sections.push(`${fnLabel(label)} = ${renderNode(arrow, "")}`);
@@ -34,21 +33,9 @@ export function renderBundleDebug(bundle: Bundle): string {
 
 // A label as this view names it. The node kind says which table on the wire,
 // but a debug file is read without one in hand, so the two are spelled apart
-// here.
-//
-// A `functions` label is a `locKey` — a file hash and a position — which is
-// exact and unreadable at the call sites where it repeats. So entries are
-// numbered instead, in the order the table lists them, and the numbering starts
-// over per bundle: `#f0` is the first entry of the bundle being read.
-const shortNames = new Map<string, string>();
-const fnLabel = (label: string): string => {
-  let name = shortNames.get(label);
-  if (name === undefined) {
-    name = `#f${shortNames.size}`;
-    shortNames.set(label, name);
-  }
-  return name;
-};
+// here. These snapshots use `functionLabels: "index"`, so a label is already
+// short and stands for itself.
+const fnLabel = (label: string): string => `#f${label}`;
 const treeLabel = (label: string): string => `#t${label}`;
 
 // A `#`-discriminated node, as opposed to plain JSON carrying itself.

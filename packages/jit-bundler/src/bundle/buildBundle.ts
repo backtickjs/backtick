@@ -25,6 +25,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
+import type { BundleOptions } from "../bundle.js";
 import { lowerScriptBody } from "./lowerScriptBody.js";
 
 // What a tree expression renders against: the entry being materialized, and the
@@ -76,7 +77,7 @@ const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
 //     `$i`: the body fills the hole with `$i()` and every reference passes that
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
-export function buildBundle(ir: Ir): Bundle {
+export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // A binding key in a call site's own expression. Never a capture read: an
   // entry resolves its captures against its own parameters (see
   // `lowerScriptBody`) — out here a key is a name in the expression being
@@ -291,12 +292,16 @@ export function buildBundle(ir: Ir): Bundle {
 
   const bodies = new Map<IrScriptEntry, BundleArrowNode>();
 
-  // A script entry's label: where it was written, not where it landed in the
-  // table. Two responses that contain the same script label it the same, so an
-  // entry a client already holds is recognizable as the one it holds — table
-  // position isn't, since it follows the order this composition reached things.
+  // A script entry's label, either of the two things that name one (see
+  // `BundleOptions.functionLabels`): where it landed in the table, or where it
+  // was written. Only the second is the same across responses — a table position
+  // follows the order this composition reached things — so it is what a client
+  // holding an entry from an earlier response can recognize.
+  const scriptIndex = new Map(ir.scripts.map((script, at) => [script, at]));
   const fnLabel = (target: IrScriptEntry): FunctionLabel =>
-    locKey(target.fileHash, target.loc);
+    options.functionLabels === "location"
+      ? locKey(target.fileHash, target.loc)
+      : `${scriptIndex.get(target)}`;
 
   // A class's expansion compiles as its own `functions` entry. The entry is an
   // arrow over the expansion's holes; a construction's call site applies it to
@@ -304,17 +309,17 @@ export function buildBundle(ir: Ir): Bundle {
   // one expansion per class, so it is one entry however many instances
   // construct the class.
   //
-  // Numbered rather than located: an expansion carries no source position (see
-  // `AstExpansion`), so its label can only name where it landed. That can't
-  // collide with a script's, which always holds the `:` of a `locKey`, but it
-  // does mean an expansion entry is not recognizable across responses the way a
-  // script entry is.
+  // Numbered rather than located whichever way scripts are labeled: an
+  // expansion carries no source position (see `AstExpansion`), so its label can
+  // only name where it landed, and it is not recognizable across responses the
+  // way a located script entry is. Numbered past the script table so it can't
+  // collide with an index label.
   const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
   const expansionEntry = (expansion: IrExpansion): BundleGetEntry => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
-      label = `${expansionLabels.size}`;
+      label = `${ir.scripts.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
