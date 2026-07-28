@@ -1,9 +1,9 @@
 #f0 = ($0, $1) => $0().map((row) => $1(row))
 
-#f1 = ($env) => "row " + $env.row
+#f1 = ($0) => "row " + $0
 
 #t0 = <Text>
-  {#f1({ "row": slots[0] })}
+  {#f1(slots[0])}
 </Text>
 
 #t1 = <View>

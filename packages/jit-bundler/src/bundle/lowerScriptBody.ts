@@ -5,7 +5,7 @@ import type {
   AstScriptStatement,
 } from "../ast/Ast.js";
 import type { IrScriptEntry } from "../ir/Ir.js";
-import { envKey, envParam, sourceName } from "./bindingKey.js";
+import { sourceName } from "./bindingKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   BundleBlockNode,
@@ -23,27 +23,25 @@ import type {
 // close over them instead of threading them down every branch to reach two
 // leaves.
 export function lowerScriptBody(script: IrScriptEntry): BundleBody {
-  // A binding the script declares reads as itself, under its source name; one
-  // it captures reads off the environment, so a read says where its value came
-  // from.
+  // An entry's parameters are one numbered sequence: a thunk per splice hole
+  // the script writes, then a value per binding it captures. Both lists come
+  // from the script, so the arity and the order are its own.
   //
-  // No disambiguation. Two of a script's bindings share a name only by
-  // shadowing, and printing both under it is what the source says — a block
-  // frames its own declarations, so the inner shadows the outer as written. The
-  // one case that needed telling them apart was a hole reaching a binding an
-  // inner scope shadows, and that is refused outright (see `spliceParams`).
-  const captured = new Set(script.captures);
-  const read = (key: string): BundleExpressionNode =>
-    captured.has(key)
-      ? {
-          "#": NodeKind.Property,
-          [NodeField.object]: {
-            "#": NodeKind.Identifier,
-            [NodeField.name]: envParam,
-          },
-          [NodeField.name]: envKey(key),
-        }
-      : { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
+  // A capture reads as its number rather than its source name, which is what
+  // keeps it out of the way: `$` cannot start a source name, so a capture can
+  // never be shadowed by a local, and neither ever needs renaming to avoid the
+  // other. A binding the script declares still reads as itself, since that is
+  // what the source says.
+  const captureIndex = new Map(
+    script.captures.map((key, at) => [key, script.splices.length + at]),
+  );
+  const read = (key: string): BundleExpressionNode => {
+    const at = captureIndex.get(key);
+    return {
+      "#": NodeKind.Identifier,
+      [NodeField.name]: at === undefined ? sourceName(key) : `$${at}`,
+    };
+  };
 
   // The body names holes by key; a reference's `args` are positional in the
   // script's `splices` order, so this maps between them. The hole hands its

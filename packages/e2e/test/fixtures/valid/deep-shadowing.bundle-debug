@@ -13,6 +13,6 @@
   return base * $0();
 }
 
-#f3 = ($env) => $env.base
+#f3 = ($0) => $0
 
-root = #f0((base) => #f1(() => #f2(() => #f3({ "base": base }))))
+root = #f0((base) => #f1(() => #f2(() => #f3(base))))

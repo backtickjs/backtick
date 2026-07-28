@@ -27,18 +27,3 @@ export function sourceName(key: string): string {
   }
   return key.replace(/\$[0-9a-z]+\$\d+$/, "");
 }
-
-// The parameter an entry receives its captures under, and where each sits in
-// that object: its source name, or a cell's own reserved key.
-//
-// No disambiguation, because two captures of one entry can't want one name: an
-// entry's captures are its script's free variables, and within a script a name
-// resolves outward to exactly one binding.
-//
-// Here rather than with either half of the bundler because both need it — the
-// body reads the object, and a call site builds it — and neither owns it.
-export const envParam = "$env";
-
-export function envKey(key: string): string {
-  return isCellKey(key) ? key : sourceName(key);
-}

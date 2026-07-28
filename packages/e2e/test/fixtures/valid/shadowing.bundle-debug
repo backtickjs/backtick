@@ -10,6 +10,6 @@
   return total;
 }
 
-#f2 = ($env) => $env.total
+#f2 = ($0) => $0
 
-root = #f0((total) => #f1(() => #f2({ "total": total }), () => 100))
+root = #f0((total) => #f1(() => #f2(total), () => 100))

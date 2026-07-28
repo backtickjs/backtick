@@ -1,42 +1,42 @@
 #f0 = ($0, $1) => $0().map((order) => $1(order))
 
-#f1 = ($env) => $env.order.id
+#f1 = ($0) => $0.id
 
-#f2 = ($env) => "https://img.example.com/" + $env.order.id + ".png"
+#f2 = ($0) => "https://img.example.com/" + $0.id + ".png"
 
-#f3 = ($env) => $env.order.customer.name
+#f3 = ($0) => $0.customer.name
 
-#f4 = ($env) => $env.order.customer.city
+#f4 = ($0) => $0.customer.city
 
-#f5 = ($0, $env) => $env.order.items.map((item) => $0(item))
+#f5 = ($0, $1) => $1.items.map((item) => $0(item))
 
-#f6 = ($env) => $env.item.sku
+#f6 = ($0) => $0.sku
 
-#f7 = ($env) => $env.item.sku + " x" + $env.item.qty
+#f7 = ($0) => $0.sku + " x" + $0.qty
 
-#f8 = ($env) => "$" + $env.order.total
+#f8 = ($0) => "$" + $0.total
 
 #t0 = <Text
-  key={#f6({ "item": slots[0] })}
+  key={#f6(slots[0])}
 >
-  {#f7({ "item": slots[0] })}
+  {#f7(slots[0])}
 </Text>
 
 #t1 = <View
-  key={#f1({ "order": slots[0] })}
+  key={#f1(slots[0])}
 >
   {<Image
-    source={{ "uri": #f2({ "order": slots[0] }) }}
+    source={{ "uri": #f2(slots[0]) }}
   />}
   {<Text>
-    {#f3({ "order": slots[0] })}
+    {#f3(slots[0])}
   </Text>}
   {<Text>
-    {#f4({ "order": slots[0] })}
+    {#f4(slots[0])}
   </Text>}
-  {#f5((item) => #t0(item), { "order": slots[0] })}
+  {#f5((item) => #t0(item), slots[0])}
   {<Text>
-    {#f8({ "order": slots[0] })}
+    {#f8(slots[0])}
   </Text>}
 </View>
 

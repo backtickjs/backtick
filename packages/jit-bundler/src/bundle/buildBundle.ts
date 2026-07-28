@@ -6,13 +6,7 @@ import type {
   IrScriptRef,
   IrTreeRef,
 } from "../ir/Ir.js";
-import {
-  cellIndex,
-  cellKey,
-  isCellKey,
-  sourceName,
-  envKey,
-} from "./bindingKey.js";
+import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
@@ -91,27 +85,6 @@ export function buildBundle(ir: Ir): Bundle {
   // enclosing script declared, so it can never be one this entry declares —
   // there is nothing to filter out, and nothing to memoize, now that an entry
   // never folds in the captures of arguments it inlined.
-  const envObject = <T>(
-    target: number,
-    value: (key: string) => T,
-  ): { [name: string]: T } | null => {
-    const keys = fns[target].captures;
-    if (keys.length === 0) {
-      return null;
-    }
-    const env: { [name: string]: T } = {};
-    for (const key of keys) {
-      const name = envKey(key);
-      if (name in env) {
-        // Impossible while captures are a script's free variables — but a
-        // duplicate would silently merge two bindings, which is not a thing to
-        // discover at runtime.
-        throw new Error(`Two captures of one entry are both \`${name}\`.`);
-      }
-      env[name] = value(key);
-    }
-    return env;
-  };
 
   // A binding key in a call site's own expression. Never a capture read: an
   // entry's captures are resolved inside `compileEntry`, against the object it
@@ -389,10 +362,10 @@ export function buildBundle(ir: Ir): Bundle {
       return;
     }
     const script = fns[target];
-    const params = [
-      ...script.splices.map((_, index) => `$${index}`),
-      ...(script.captures.length === 0 ? [] : ["$env"]),
-    ];
+    // One numbered sequence: a thunk per splice hole, then a value per capture.
+    const params = [...script.splices, ...script.captures].map(
+      (_, index) => `$${index}`,
+    );
     const arrow = {
       "#": NodeKind.Arrow,
       ...(params.length === 0 ? {} : { [NodeField.params]: params }),
@@ -408,9 +381,8 @@ export function buildBundle(ir: Ir): Bundle {
     ref.args.forEach((arg, index) => {
       parts.push(renderThunk(arg, ref.target, index));
     });
-    const env = envObject(ref.target, readKey);
-    if (env !== null) {
-      parts.push(env);
+    for (const key of fns[ref.target].captures) {
+      parts.push(readKey(key));
     }
     return parts;
   };
@@ -743,9 +715,8 @@ export function buildBundle(ir: Ir): Bundle {
         [NodeField.expression]: renderExpr(arg, scope, inner),
       });
     });
-    const env = envObject(ref.target, (key) => capExpr(key, scope, params));
-    if (env !== null) {
-      parts.push(env);
+    for (const key of fns[ref.target].captures) {
+      parts.push(capExpr(key, scope, params));
     }
     return parts;
   };

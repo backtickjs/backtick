@@ -370,7 +370,15 @@ function evaluateExpr(
   }
   const object: { [key: string]: Value } = {};
   for (const [key, value] of Object.entries(expr)) {
-    object[key] = evaluateExpr(bundle, value, slots, env, instance);
+    // The index admits `undefined` only so the reserved `#` can be excluded
+    // from it (see `BundleData`); parsed JSON never carries one.
+    object[key] = evaluateExpr(
+      bundle,
+      value as BundleExpr,
+      slots,
+      env,
+      instance,
+    );
   }
   return object;
 }
@@ -506,7 +514,7 @@ function evaluateNode(
     }
     const object: { [key: string]: Value } = {};
     for (const [key, value] of Object.entries(node)) {
-      object[key] = evaluateNode(bundle, value, scope);
+      object[key] = evaluateNode(bundle, value as BundleExpressionNode, scope);
     }
     return object;
   }
