@@ -1,6 +1,6 @@
-#f0 = () => {
+357jk2g9zktff:3:16 = () => {
   const base = 10;
   return (one, two) => one + two + base;
 }
 
-root = #f0()
+root = 357jk2g9zktff:3:16()

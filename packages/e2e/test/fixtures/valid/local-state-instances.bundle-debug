@@ -1,19 +1,19 @@
-#f0 = ($0) => $0().read()
+3pcu8arhicczh:11:26 = ($0) => $0().read()
 
-#f1 = ($0) => () => {
+3pcu8arhicczh:12:16 = ($0) => () => {
   $0().write($0().read() + 1);
 }
 
 #t0 state { s0 = 16 } = <Text
-  style={{ "fontSize": #f0(() => cells.s0) }}
-  onPress={#f1(() => cells.s0)}
+  style={{ "fontSize": 3pcu8arhicczh:11:26(() => cells.s0) }}
+  onPress={3pcu8arhicczh:12:16(() => cells.s0)}
 >
   {"press"}
 </Text>
 
 #t1 state { s1 = 16 } = <Text
-  style={{ "fontSize": #f0(() => cells.s1) }}
-  onPress={#f1(() => cells.s1)}
+  style={{ "fontSize": 3pcu8arhicczh:11:26(() => cells.s1) }}
+  onPress={3pcu8arhicczh:12:16(() => cells.s1)}
 >
   {"press"}
 </Text>

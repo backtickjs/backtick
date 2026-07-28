@@ -1,11 +1,11 @@
-#f0 = ($0) => () => $0()
+1le9zmhdblst0:7:10 = ($0) => () => $0()
 
 #t0 = <View>
   {<Text
-    onPress={#f0(() => 1)}
+    onPress={1le9zmhdblst0:7:10(() => 1)}
   />}
   {<Text
-    onPress={#f0(() => 2)}
+    onPress={1le9zmhdblst0:7:10(() => 2)}
   />}
 </View>
 

@@ -1,11 +1,11 @@
-#f0 = ($0) => {
+3ciy5yb38f51h:25:16 = ($0) => {
   "missing": $0()(null, true),
   "loud": $0()("!hi", true),
   "quiet": $0()("!hi", false),
   "plain": $0()("zz", false)
 }
 
-#f1 = ($0) => (text, upper) => {
+3ciy5yb38f51h:12:72 = ($0) => (text, upper) => {
   if (upper && text !== null) {
     return text.toUpperCase();
   }
@@ -15,6 +15,6 @@
   return "none";
 }
 
-#f2 = () => true
+3ciy5yb38f51h:10:25 = () => true
 
-root = #f0(() => #f1(#f2))
+root = 3ciy5yb38f51h:25:16(() => 3ciy5yb38f51h:12:72(3ciy5yb38f51h:10:25))

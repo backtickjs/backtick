@@ -1,4 +1,4 @@
-#f0 = () => {
+31t2pc3vo9x5y:5:16 = () => {
   let count = 0;
   const bump = () => {
     count = count + 1;
@@ -7,4 +7,4 @@
   return bump() + bump();
 }
 
-root = #f0()
+root = 31t2pc3vo9x5y:5:16()

@@ -27,6 +27,7 @@ export interface IrStateRef {
 export interface IrScriptEntry {
   readonly kind: "IrScriptEntry";
   readonly loc: SourceLocation;
+  readonly fileHash: string;
   readonly splices: readonly string[];
   readonly captures: readonly string[];
   readonly spliceParams: Readonly<Record<string, readonly string[]>>;

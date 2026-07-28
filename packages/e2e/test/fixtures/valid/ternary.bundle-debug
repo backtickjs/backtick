@@ -1,7 +1,7 @@
-#f0 = ($0) => { "absent": $0()(null), "present": $0()(4) }
+2bgu1tn5wjo9o:9:16 = ($0) => { "absent": $0()(null), "present": $0()(4) }
 
-#f1 = () => (n) => {
+2bgu1tn5wjo9o:5:14 = () => (n) => {
   return n === null ? 0 : n + 1;
 }
 
-root = #f0(#f1)
+root = 2bgu1tn5wjo9o:9:16(2bgu1tn5wjo9o:5:14)

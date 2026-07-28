@@ -1,8 +1,8 @@
-#f0 = ($0) => {
+3d1j5mxf94bs6:3:16 = ($0) => {
   const x = 0;
   return $0(x);
 }
 
-#f1 = ($0) => $0
+3d1j5mxf94bs6:5:12 = ($0) => $0
 
-root = #f0(#f1)
+root = 3d1j5mxf94bs6:3:16(3d1j5mxf94bs6:5:12)

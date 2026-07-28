@@ -1,10 +1,10 @@
-#f0 = ($0) => {
+3r8prbdxxrtje:11:16 = ($0) => {
   const foo$ = 1;
   return $0(foo$);
 }
 
-#f1 = ($0) => $0() + 2
+3r8prbdxxrtje:8:10 = ($0) => $0() + 2
 
-#f2 = ($0) => $0
+3r8prbdxxrtje:13:16 = ($0) => $0
 
-root = #f0((foo$) => #f1(() => #f2(foo$)))
+root = 3r8prbdxxrtje:11:16((foo$) => 3r8prbdxxrtje:8:10(() => 3r8prbdxxrtje:13:16(foo$)))

@@ -1,18 +1,18 @@
-#f0 = ($0, $1, $2) => {
+hlti23avj5mo:16:16 = ($0, $1, $2) => {
   "named": $0()("hi"),
   "explicit": $0()(null),
   "supplied": $1()($2()),
   "fallback": $1()(null)
 }
 
-#f1 = () => (name) => {
+hlti23avj5mo:5:15 = () => (name) => {
   return name?.concat("!");
 }
 
-#f2 = () => (cb) => {
+hlti23avj5mo:12:14 = () => (cb) => {
   return cb?.() ?? 0;
 }
 
-#f3 = () => () => 2
+hlti23avj5mo:10:16 = () => () => 2
 
-root = #f0(#f1, #f2, #f3)
+root = hlti23avj5mo:16:16(hlti23avj5mo:5:15, hlti23avj5mo:12:14, hlti23avj5mo:10:16)

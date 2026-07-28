@@ -1,4 +1,4 @@
-#f0 = () => () => {
+k1rdly8050va:5:45 = () => () => {
 
 }
 
@@ -7,7 +7,7 @@
 >
   {<Text
     style={{ "fontSize": 12 }}
-    onPress={#f0()}
+    onPress={k1rdly8050va:5:45()}
   >
     {"hi"}
   </Text>}

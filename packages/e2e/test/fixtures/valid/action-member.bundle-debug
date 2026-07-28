@@ -1,8 +1,8 @@
-#f0 = ($0) => {
+1w48eutzbucnb:22:16 = ($0) => {
   const button = $0();
   return button.label;
 }
 
-#f1 = () => "OK"
+1w48eutzbucnb:23:31 = () => "OK"
 
-root = #f0(() => { "label": #f1() })
+root = 1w48eutzbucnb:22:16(() => { "label": 1w48eutzbucnb:23:31() })

@@ -1,19 +1,19 @@
-#f0 = ($0) => $0().read()
+2js8otjs3p707:11:24 = ($0) => $0().read()
 
-#f1 = ($0) => () => {
+2js8otjs3p707:12:14 = ($0) => () => {
   $0().write($0().read() + 1);
 }
 
 #t0 = <Text
-  style={{ "fontSize": #f0(() => slots[0]) }}
-  onPress={#f1(() => slots[0])}
+  style={{ "fontSize": 2js8otjs3p707:11:24(() => slots[0]) }}
+  onPress={2js8otjs3p707:12:14(() => slots[0])}
 >
   {"press"}
 </Text>
 
 #t1 = <Text
-  style={{ "fontSize": #f0(() => slots[0]) }}
-  onPress={#f1(() => slots[0])}
+  style={{ "fontSize": 2js8otjs3p707:11:24(() => slots[0]) }}
+  onPress={2js8otjs3p707:12:14(() => slots[0])}
 >
   {"press"}
 </Text>

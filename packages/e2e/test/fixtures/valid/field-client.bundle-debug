@@ -1,4 +1,4 @@
-#f0 = ($0) => {
+3o65fk6h8ba4e:18:16 = ($0) => {
   const c = $0();
   const brightness = c.r + c.g + c.b;
   if (brightness > 382) {
@@ -7,10 +7,14 @@
   return "dark";
 }
 
-#f1 = () => 30
+3o65fk6h8ba4e:19:25 = () => 30
 
-#f2 = () => 144
+3o65fk6h8ba4e:19:33 = () => 144
 
-#f3 = () => 255
+3o65fk6h8ba4e:19:42 = () => 255
 
-root = #f0(() => { "r": #f1(), "g": #f2(), "b": #f3() })
+root = 3o65fk6h8ba4e:18:16(() => {
+  "r": 3o65fk6h8ba4e:19:25(),
+  "g": 3o65fk6h8ba4e:19:33(),
+  "b": 3o65fk6h8ba4e:19:42()
+})

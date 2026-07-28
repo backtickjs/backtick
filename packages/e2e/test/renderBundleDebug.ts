@@ -31,10 +31,10 @@ export function renderBundleDebug(bundle: Bundle): string {
   return `${sections.join("\n\n")}\n`;
 }
 
-// A label as this view names it. The wire carries a bare index — the node kind
-// says which table — but a debug file is read without one in hand, so the two
-// tables are spelled apart here.
-const fnLabel = (label: string): string => `#f${label}`;
+// A label as this view names it. The node kind says which table on the wire,
+// but a debug file is read without one in hand, so a tree is marked. A script's
+// label is a `locKey` and reads as one, so it stands for itself.
+const fnLabel = (label: string): string => label;
 const treeLabel = (label: string): string => `#t${label}`;
 
 // A `#`-discriminated node, as opposed to plain JSON carrying itself.

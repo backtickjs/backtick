@@ -9,5 +9,6 @@ import type { SourceLocation } from "@backtickjs/cs-runtime";
 // when the files' contents are identical, in which case the scripts are the
 // same and sharing is correct.
 export function locKey(fileHash: string, loc: SourceLocation): string {
-  return `${fileHash}:${loc.join(":")}`;
+  const [startLine, startCharacter] = loc;
+  return `${fileHash}:${startLine}:${startCharacter}`;
 }

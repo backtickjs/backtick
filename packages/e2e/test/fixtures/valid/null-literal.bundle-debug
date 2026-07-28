@@ -1,10 +1,10 @@
-#f0 = ($0) => { "missing": $0()(null), "present": $0()("hi"), "bare": null }
+2albtvza6nmmn:14:16 = ($0) => { "missing": $0()(null), "present": $0()("hi"), "bare": null }
 
-#f1 = () => (value) => {
+2albtvza6nmmn:5:58 = () => (value) => {
   if (value === null) {
     return "-";
   }
   return value;
 }
 
-root = #f0(#f1)
+root = 2albtvza6nmmn:14:16(2albtvza6nmmn:5:58)

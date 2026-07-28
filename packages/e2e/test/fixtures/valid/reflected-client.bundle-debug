@@ -1,17 +1,25 @@
-#f0 = ($0, $1) => {
+1n3zukooyw7a6:24:16 = ($0, $1) => {
   const a = $0();
   const b = $1();
   const sum = a.valid() + b.valid();
 }
 
-#f1 = () => 1
+1n3zukooyw7a6:25:25 = () => 1
 
-#f2 = () => 2
+1n3zukooyw7a6:25:32 = () => 2
 
-#f3 = ($0, $1) => () => $0() + $1()
+1n3zukooyw7a6:16:12 = ($0, $1) => () => $0() + $1()
 
-#f4 = () => 3
+1n3zukooyw7a6:26:25 = () => 3
 
-#f5 = () => 4
+1n3zukooyw7a6:26:32 = () => 4
 
-root = #f0(() => { "x": #f1(), "y": #f2(), "valid": #f3(#f1, #f2) }, () => { "x": #f4(), "y": #f5(), "valid": #f3(#f4, #f5) })
+root = 1n3zukooyw7a6:24:16(() => {
+  "x": 1n3zukooyw7a6:25:25(),
+  "y": 1n3zukooyw7a6:25:32(),
+  "valid": 1n3zukooyw7a6:16:12(1n3zukooyw7a6:25:25, 1n3zukooyw7a6:25:32)
+}, () => {
+  "x": 1n3zukooyw7a6:26:25(),
+  "y": 1n3zukooyw7a6:26:32(),
+  "valid": 1n3zukooyw7a6:16:12(1n3zukooyw7a6:26:25, 1n3zukooyw7a6:26:32)
+})

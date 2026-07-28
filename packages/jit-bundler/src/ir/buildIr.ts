@@ -93,6 +93,7 @@ class IrBuilder {
     this.scripts.push({
       kind: "IrScriptEntry",
       loc: script.loc,
+      fileHash: script.fileHash,
       splices: Object.keys(script.splices),
       captures: script.captures,
       spliceParams: script.spliceParams,

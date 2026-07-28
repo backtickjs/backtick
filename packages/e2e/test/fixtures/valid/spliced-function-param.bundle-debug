@@ -1,8 +1,8 @@
-#f0 = ($0) => {
+22dvza3e0b85b:7:16 = ($0) => {
   const apply = (f) => f() + 1;
   return apply($0());
 }
 
-#f1 = () => () => 2
+22dvza3e0b85b:9:18 = () => () => 2
 
-root = #f0(#f1)
+root = 22dvza3e0b85b:7:16(22dvza3e0b85b:9:18)

@@ -1,47 +1,47 @@
-#f0 = ($0, $1) => $0().map((order) => $1(order))
+kpf5b5091dr1:22:6 = ($0, $1) => $0().map((order) => $1(order))
 
-#f1 = ($0) => $0.id
+kpf5b5091dr1:25:22 = ($0) => $0.id
 
-#f2 = ($0) => "https://img.example.com/" + $0.id + ".png"
+kpf5b5091dr1:28:22 = ($0) => "https://img.example.com/" + $0.id + ".png"
 
-#f3 = ($0) => $0.customer.name
+kpf5b5091dr1:31:20 = ($0) => $0.customer.name
 
-#f4 = ($0) => $0.customer.city
+kpf5b5091dr1:32:20 = ($0) => $0.customer.city
 
-#f5 = ($0, $1) => $1.items.map((item) => $0(item, $1))
+kpf5b5091dr1:33:14 = ($0, $1) => $1.items.map((item) => $0(item, $1))
 
-#f6 = ($0) => $0.sku
+kpf5b5091dr1:36:30 = ($0) => $0.sku
 
-#f7 = ($0) => $0.sku + " x" + $0.qty
+kpf5b5091dr1:37:22 = ($0) => $0.sku + " x" + $0.qty
 
-#f8 = ($0) => "$" + $0.total
+kpf5b5091dr1:41:20 = ($0) => "$" + $0.total
 
 #t0 = <Text
-  key={#f6(slots[0])}
+  key={kpf5b5091dr1:36:30(slots[0])}
 >
-  {#f7(slots[0])}
+  {kpf5b5091dr1:37:22(slots[0])}
 </Text>
 
 #t1 = <View
-  key={#f1(slots[0])}
+  key={kpf5b5091dr1:25:22(slots[0])}
 >
   {<Image
-    source={{ "uri": #f2(slots[0]) }}
+    source={{ "uri": kpf5b5091dr1:28:22(slots[0]) }}
   />}
   {<Text>
-    {#f3(slots[0])}
+    {kpf5b5091dr1:31:20(slots[0])}
   </Text>}
   {<Text>
-    {#f4(slots[0])}
+    {kpf5b5091dr1:32:20(slots[0])}
   </Text>}
-  {#f5((item, order) => #t0(item), slots[0])}
+  {kpf5b5091dr1:33:14((item, order) => #t0(item), slots[0])}
   {<Text>
-    {#f8(slots[0])}
+    {kpf5b5091dr1:41:20(slots[0])}
   </Text>}
 </View>
 
 #t2 = <View>
-  {#f0(() => [
+  {kpf5b5091dr1:22:6(() => [
     {
       "id": "ord-1000",
       "customer": { "name": "Customer 0", "city": "Montréal" },

@@ -7,6 +7,7 @@ import type {
   IrTreeRef,
 } from "../ir/Ir.js";
 import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
+import { locKey } from "../locKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
@@ -329,18 +330,30 @@ export function buildBundle(ir: Ir): Bundle {
 
   const bodies = new Map<number, BundleArrowNode>();
 
-  // A class's expansion compiles as its own `functions` entry, labeled
-  // after the script entries (script indices are reserved whether or not
-  // they materialize). The entry is an arrow over the expansion's holes; a
-  // construction's call site applies it to the client arguments. Interned
-  // by node identity: `lowerSpliceable` shares one expansion per class, so
-  // it is one entry however many instances construct the class.
+  // A script entry's label: where it was written, not where it landed in the
+  // table. Two responses that contain the same script label it the same, so an
+  // entry a client already holds is recognizable as the one it holds — table
+  // position isn't, since it follows the order this composition reached things.
+  const fnLabel = (target: number): FunctionLabel =>
+    locKey(fns[target].fileHash, fns[target].loc);
+
+  // A class's expansion compiles as its own `functions` entry. The entry is an
+  // arrow over the expansion's holes; a construction's call site applies it to
+  // the client arguments. Interned by node identity: `lowerSpliceable` shares
+  // one expansion per class, so it is one entry however many instances
+  // construct the class.
+  //
+  // Numbered rather than located: an expansion carries no source position (see
+  // `AstExpansion`), so its label can only name where it landed. That can't
+  // collide with a script's, which always holds the `:` of a `locKey`, but it
+  // does mean an expansion entry is not recognizable across responses the way a
+  // script entry is.
   const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
   const expansionEntry = (expansion: IrExpansion): BundleGetEntry => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
-      label = `${fns.length + expansionLabels.size}`;
+      label = `${expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
@@ -409,7 +422,7 @@ export function buildBundle(ir: Ir): Bundle {
     materialize(value.target);
     return {
       "#": NodeKind.GetFunction,
-      [NodeField.label]: `${value.target}`,
+      [NodeField.label]: fnLabel(value.target),
     };
   };
 
@@ -466,7 +479,7 @@ export function buildBundle(ir: Ir): Bundle {
           "#": NodeKind.Call,
           [NodeField.callee]: {
             "#": NodeKind.GetFunction,
-            [NodeField.label]: `${value.target}`,
+            [NodeField.label]: fnLabel(value.target),
           },
           ...(args.length === 0 ? {} : { [NodeField.args]: args }),
         };
@@ -544,7 +557,7 @@ export function buildBundle(ir: Ir): Bundle {
       const args = callArgs(value);
       const entry = {
         "#": NodeKind.GetFunction,
-        [NodeField.label]: `${value.target}`,
+        [NodeField.label]: fnLabel(value.target),
       } as const satisfies BundleExpressionNode;
       return args.length === 0
         ? entry
@@ -770,7 +783,7 @@ export function buildBundle(ir: Ir): Bundle {
       const args = exprCallArgs(value, scope, params);
       return {
         "#": NodeKind.ApplyFunction,
-        [NodeField.label]: `${value.target}`,
+        [NodeField.label]: fnLabel(value.target),
         ...(args.length === 0 ? {} : { [NodeField.args]: args }),
       };
     }
@@ -839,7 +852,7 @@ export function buildBundle(ir: Ir): Bundle {
   const root = renderExpr(ir.root, noInstance());
   const functions: Record<FunctionLabel, BundleArrowNode> = {};
   for (const [index, body] of [...bodies].sort(([a], [b]) => a - b)) {
-    functions[`${index}`] = body;
+    functions[fnLabel(index)] = body;
   }
   for (const [label, body] of expansionBodies) {
     functions[label] = body;

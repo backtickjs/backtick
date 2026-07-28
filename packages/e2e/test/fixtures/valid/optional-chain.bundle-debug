@@ -1,4 +1,4 @@
-#f0 = ($0, $1, $2) => {
+1k96f1nwptp9k:18:16 = ($0, $1, $2) => {
   "found": $0()({ "x": 5 }),
   "missing": $0()(null),
   "deep": $1()({ "inner": { "z": 7 } }),
@@ -8,16 +8,16 @@
   "silent": $2()(null)
 }
 
-#f1 = () => (p) => {
+1k96f1nwptp9k:6:14 = () => (p) => {
   return p?.x;
 }
 
-#f2 = () => (o) => {
+1k96f1nwptp9k:10:14 = () => (o) => {
   return o?.inner?.z;
 }
 
-#f3 = () => (s) => {
+1k96f1nwptp9k:14:15 = () => (s) => {
   return s?.concat("!");
 }
 
-root = #f0(#f1, #f2, #f3)
+root = 1k96f1nwptp9k:18:16(1k96f1nwptp9k:6:14, 1k96f1nwptp9k:10:14, 1k96f1nwptp9k:14:15)
