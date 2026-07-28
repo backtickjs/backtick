@@ -1,0 +1,15 @@
+#f0 = () => #f1(#f2) + #f1(#f3)
+
+#f1 = ($0) => {
+  const total = 1;
+  {
+    const total = 2;
+    return total + $0();
+  }
+}
+
+#f2 = () => 10
+
+#f3 = () => 20
+
+root = #f0()

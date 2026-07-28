@@ -4,10 +4,10 @@
 }
 
 #f1 = ($env) => {
-  let total2 = 0;
-  total2 = total2 + #f2({ "total": $env.total });
-  total2 = total2 + 100;
-  return total2;
+  let total = 0;
+  total = total + #f2({ "total": $env.total });
+  total = total + 100;
+  return total;
 }
 
 #f2 = ($env) => $env.total

@@ -1,0 +1,40 @@
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_total              → total
+ = cs.const(            →  = 
+1                       → 1
+);                      → ;
+\n                      → \n    
+{\n                     → {\n      
+const                   → const 
+__cs_total              → total
+ = cs.const(            →  = 
+2                       → 2
+);                      → ;
+\n                      → \n      
+return cs.const(        → return 
+__cs_total              → total
+ +                      →  + 
+cs.splice(              →  [-semantic]
+(fragment)              → $fragment
+)                       →  [-semantic]
+);                      → ;
+\n    }                 → \n    }
+\n})())                 → \n  }`
+cs.lift(cs.const(       → cs`
+cs.splice(              → ${ [-semantic]
+wrap(                   → wrap(
+cs.lift(cs.const(       → cs`
+10                      → 10
+))                      → `
+)                       → )
+)                       → } [-semantic]
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+wrap(                   → wrap(
+cs.lift(cs.const(       → cs`
+20                      → 20
+))                      → `
+)                       → )
+)                       → } [-semantic]
+))                      → `

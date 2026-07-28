@@ -17,42 +17,42 @@ import { cs, Text, View } from "@backtickjs/core";
 const rows = [1, 2, 3];
 export default _jsx(View, {
   children: cs.create(
-    [20, 10, 20, 68],
+    [20, 10, 20, 70],
     {
       version: "0.0.0",
       filePath: "mapped-component.tsx",
-      fileHash: "2a06blnzigy",
+      fileHash: "3qcr5x2z3u56v",
       kind: "value",
       splices: {
         $rows: rows,
         $0splice0: _jsx(Text, {
           children: cs.create(
-            [20, 41, 20, 57],
+            [20, 42, 20, 58],
             {
               version: "0.0.0",
               filePath: "mapped-component.tsx",
-              fileHash: "2a06blnzigy",
+              fileHash: "3qcr5x2z3u56v",
               kind: "value",
               splices: {},
-              captures: ["row$2a06blnzigy$0"],
+              captures: ["row$3qcr5x2z3u56v$0"],
               declarations: [],
             },
             (v) =>
               v.binop(
-                [20, 44, 20, 56],
-                v.string([20, 44, 20, 50], "row "),
+                [20, 45, 20, 57],
+                v.string([20, 45, 20, 51], "row "),
                 "+",
-                v.identifier([20, 53, 20, 56], "row", "row$2a06blnzigy$0"),
+                v.identifier([20, 54, 20, 57], "row", "row$3qcr5x2z3u56v$0"),
               ),
           ),
         }),
       },
       captures: [],
-      declarations: ["row$2a06blnzigy$0"],
+      declarations: ["row$3qcr5x2z3u56v$0"],
     },
     (v) =>
       v.call(
-        [20, 13, 20, 67],
+        [20, 13, 20, 69],
         v.propertyAccess(
           [20, 13, 20, 22],
           v.splice([20, 13, 20, 18], "$rows"),
@@ -60,9 +60,9 @@ export default _jsx(View, {
         ),
         [
           v.arrow(
-            [20, 23, 20, 66],
-            [v.identifier([20, 24, 20, 27], "row", "row$2a06blnzigy$0")],
-            v.splice([20, 32, 20, 66], "$0splice0"),
+            [20, 23, 20, 68],
+            [v.identifier([20, 24, 20, 27], "row", "row$3qcr5x2z3u56v$0")],
+            v.splice([20, 32, 20, 68], "$0splice0"),
           ),
         ],
       ),

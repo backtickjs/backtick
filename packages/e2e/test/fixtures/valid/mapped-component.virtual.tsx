@@ -17,5 +17,5 @@ import { cs, Text, View } from "@backtickjs/core";
 const rows = [1, 2, 3];
 
 export default (
-  <View>{cs.lift(cs.const(cs.receiver(cs.splice((rows))).map(__cs_row => cs.splice(<Text>{cs.lift(cs.const("row " + __cs_row))}</Text>))))}</View>
+  <View>{cs.lift(cs.const(cs.receiver(cs.splice((rows))).map(__cs_row => cs.splice((<Text>{cs.lift(cs.const("row " + __cs_row))}</Text>)))))}</View>
 );

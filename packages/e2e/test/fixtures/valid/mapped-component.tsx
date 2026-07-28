@@ -17,5 +17,5 @@ import { cs, Text, View } from "@backtickjs/core";
 const rows = [1, 2, 3];
 
 export default (
-  <View>{cs`$rows.map((row) => ${<Text>{cs`"row " + row`}</Text>})`}</View>
+  <View>{cs`$rows.map((row) => ${(<Text>{cs`"row " + row`}</Text>)})`}</View>
 );

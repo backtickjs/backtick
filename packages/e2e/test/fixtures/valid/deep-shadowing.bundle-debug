@@ -4,13 +4,13 @@
 }
 
 #f1 = ($env) => {
-  const base2 = 1;
-  return base2 + #f2({ "base": $env.base });
+  const base = 1;
+  return base + #f2({ "base": $env.base });
 }
 
 #f2 = ($env) => {
-  const base3 = 2;
-  return base3 * #f3({ "base": $env.base });
+  const base = 2;
+  return base * #f3({ "base": $env.base });
 }
 
 #f3 = ($env) => $env.base

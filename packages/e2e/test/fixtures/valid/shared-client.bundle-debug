@@ -12,8 +12,8 @@
 #f4 = () => () => #f2() + #f3()
 
 #f5 = () => {
-  const p2 = { "x": #f2(), "y": #f3(), "sum": #f4() };
-  return p2.x;
+  const p = { "x": #f2(), "y": #f3(), "sum": #f4() };
+  return p.x;
 }
 
 root = #f0()

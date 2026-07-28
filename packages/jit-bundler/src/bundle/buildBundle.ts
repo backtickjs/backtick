@@ -55,6 +55,11 @@ const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
 
 // Recovers the source name from a binding key `<name>$<fileHash>$<n>` by
 // dropping the hash/counter suffix the compiler appends for global uniqueness.
+//
+// Two bindings may print the same: they only share a scope when the source
+// shadows, and a block frames its own declarations, so the inner one shadows the
+// outer as written. Entries never meet — arguments are positional — and a
+// capture is a key in `$env` rather than an identifier.
 function sourceName(key: string): string {
   if (isCellKey(key)) {
     return key.slice(1);
@@ -99,32 +104,6 @@ function sourceName(key: string): string {
 //     just positionally.
 export function buildBundle(ir: Ir): Bundle {
   const fns = ir.scripts;
-
-  // Maps each binding key to a readable display name — its source name with the
-  // uniqueness suffix (`$<fileHash>$<n>`) dropped — so the bundle reads like the
-  // script it came from rather than exposing internal keys. A numeric suffix is
-  // reattached only when distinct bindings share a source name (a shadowed or
-  // threaded variable). The mapping is a bijection: the same key always renders
-  // identically (so threaded captures still line up between a call site and its
-  // parameter) and two different bindings never collapse onto one name (so no
-  // accidental shadowing). Free host references carry no suffix and pass through
-  // unchanged.
-  const displayNames = new Map<string, string>();
-  const usedNames = new Set<string>();
-  const displayName = (key: string): string => {
-    const existing = displayNames.get(key);
-    if (existing !== undefined) {
-      return existing;
-    }
-    const base = sourceName(key);
-    let name = base;
-    for (let n = 2; usedNames.has(name); n++) {
-      name = `${base}${n}`;
-    }
-    usedNames.add(name);
-    displayNames.set(key, name);
-    return name;
-  };
 
   // The parameter an entry receives its captures under, and the key each
   // capture sits at. A source name for a variable, and a cell's own reserved key
@@ -197,7 +176,7 @@ export function buildBundle(ir: Ir): Bundle {
   const readKey = (key: string): BundleExpressionNode =>
     bodyEntry !== null && capturedBy(bodyEntry).has(key)
       ? envRead(key)
-      : { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+      : { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
 
   // Names each entry's body declares (variable declarations and arrow
   // parameters, at any depth), computed once by the compiler and carried on the
@@ -522,7 +501,7 @@ export function buildBundle(ir: Ir): Bundle {
         const index = holeIndex(key);
         const args = passKeys(target, index).map((key) => ({
           "#": NodeKind.Identifier,
-          [NodeField.name]: displayName(key),
+          [NodeField.name]: sourceName(key),
         }));
         return {
           "#": NodeKind.Call,
@@ -539,7 +518,7 @@ export function buildBundle(ir: Ir): Bundle {
       renderSplice = (key) => renderValue(args[holeIndex(key)]);
     }
     const body = withBodyOf(target, () =>
-      lowerScriptBody(fns[target].body, renderSplice, displayName, readKey),
+      lowerScriptBody(fns[target].body, renderSplice, sourceName, readKey),
     );
     bodies.set(target, {
       "#": NodeKind.Arrow,
@@ -658,7 +637,7 @@ export function buildBundle(ir: Ir): Bundle {
     target: number,
     hole: number,
   ): BundleExpressionNode => {
-    const params = passKeys(target, hole).map(displayName);
+    const params = passKeys(target, hole).map(sourceName);
     if (params.length > 0) {
       return {
         "#": NodeKind.Arrow,
@@ -718,7 +697,7 @@ export function buildBundle(ir: Ir): Bundle {
     const cells = treeCells(target);
     const state: { [name: string]: BundleExpr } = {};
     for (const key of cells) {
-      state[displayName(key)] = renderExpr(
+      state[sourceName(key)] = renderExpr(
         ir.states[cellIndex(key)].initial,
         noInstance(),
       );
@@ -762,7 +741,7 @@ export function buildBundle(ir: Ir): Bundle {
     params: ReadonlySet<string> = new Set(),
   ): BundleGetSlot | BundleGetState | BundleIdentifierNode => {
     if (params.has(key)) {
-      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+      return { "#": NodeKind.Identifier, [NodeField.name]: sourceName(key) };
     }
     // Before the cell case: a cell this entry doesn't own arrives as a slot, and
     // only one it owns resolves against the instance.
@@ -792,7 +771,7 @@ export function buildBundle(ir: Ir): Bundle {
             "prop. Pass it down, or declare a cell where it is read.",
         );
       }
-      return { "#": NodeKind.GetState, [NodeField.name]: displayName(key) };
+      return { "#": NodeKind.GetState, [NodeField.name]: sourceName(key) };
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -823,7 +802,7 @@ export function buildBundle(ir: Ir): Bundle {
         const inner = new Set([...params, ...passed]);
         parts.push({
           "#": NodeKind.Thunk,
-          [NodeField.params]: passed.map(displayName),
+          [NodeField.params]: passed.map(sourceName),
           [NodeField.expression]: renderExpr(arg, scope, inner),
         });
       });
