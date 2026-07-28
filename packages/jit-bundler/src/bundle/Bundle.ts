@@ -64,6 +64,16 @@ export interface Bundle {
   root: BundleExpr;
 }
 
+// Plain JSON carrying itself. The `#` key is how a node is told from data, so
+// data may not have one — the bundler refuses an object that does (see
+// `lowerScriptBody`). Spelling that out here is what makes a malformed node a
+// type error: without it every `#`-carrying object satisfies this member, and a
+// node with the wrong fields quietly passes as data.
+export interface BundleData<T> {
+  readonly [key: string]: T | undefined;
+  readonly "#"?: never;
+}
+
 export type FunctionLabel = string;
 export type TreeLabel = string;
 
@@ -279,7 +289,7 @@ export type BundleExpr =
   | BundleApply
   | BundleThunk
   | BundleElement
-  | { [key: string]: BundleExpr };
+  | BundleData<BundleExpr>;
 
 // A node of a function body's AST, discriminated by `#` — a reserved key
 // like the tagged expression forms, so a node can never be confused with
@@ -302,7 +312,7 @@ export type BundleExpressionNode =
   | number
   | string
   | BundleExpressionNode[]
-  | { [key: string]: BundleExpressionNode }
+  | BundleData<BundleExpressionNode>
   | BundleIdentifierNode
   | BundleGetEntry
   | BundleCallNode
