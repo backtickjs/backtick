@@ -391,7 +391,7 @@ export function buildBundle(ir: Ir): Bundle {
     const script = fns[target];
     const params = [
       ...script.splices.map((_, index) => `$${index}`),
-      ...(script.captures.length === 0 ? [] : ['$env']),
+      ...(script.captures.length === 0 ? [] : ["$env"]),
     ];
     const arrow = {
       "#": NodeKind.Arrow,

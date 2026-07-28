@@ -2,7 +2,6 @@ import type {
   AstScriptBlock,
   AstScriptBody,
   AstScriptExpression,
-  AstScriptIdentifier,
   AstScriptStatement,
 } from "../ast/Ast.js";
 import type { IrScriptEntry } from "../ir/Ir.js";
@@ -92,7 +91,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
       case "AstScriptAssignment":
         return {
           "#": NodeKind.Assignment,
-          [NodeField.name]: targetName(node.name),
+          [NodeField.name]: sourceName(node.name.bindingKey),
           [NodeField.expression]: buildExpression(node.expression),
         };
       case "AstScriptBlock":
@@ -127,7 +126,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return {
           "#": NodeKind.Declaration,
           [NodeField.keyword]: node.keyword,
-          [NodeField.name]: targetName(node.name),
+          [NodeField.name]: sourceName(node.name.bindingKey),
           [NodeField.expression]: buildExpression(node.expression),
         };
       default:
@@ -227,12 +226,6 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);
       }
     }
-  }
-
-  // A declaration or assignment target — the compiler only produces
-  // identifier targets.
-  function targetName(node: AstScriptIdentifier): string {
-    return sourceName(node.bindingKey);
   }
 
   return buildBody(script.body);
