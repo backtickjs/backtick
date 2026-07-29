@@ -2,7 +2,7 @@ import type { Bundle } from "@backtickjs/core";
 import { evaluate } from "@backtickjs/js-interpreter";
 import { renderInto } from "./dom.js";
 
-export { Element, evaluate } from "@backtickjs/js-interpreter";
+export { Element, isElement, evaluate } from "@backtickjs/js-interpreter";
 
 /**
  * Renders a bundle into a DOM container, and keeps it there: a write to a state

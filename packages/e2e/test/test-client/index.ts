@@ -1,6 +1,7 @@
-import { Element } from "@backtickjs/js-interpreter";
+import { isElement } from "@backtickjs/js-interpreter";
+import type { Element } from "@backtickjs/js-interpreter";
 
-export { Element, evaluate } from "@backtickjs/js-interpreter";
+export { Element, isElement, evaluate } from "@backtickjs/js-interpreter";
 
 // The interpreter itself lives in `@backtickjs/js-interpreter` — one
 // implementation, so what this suite exercises is what every host runs. What
@@ -40,14 +41,14 @@ function renderAttribute(value: unknown, indent: string): string {
   if (typeof value === "string") {
     return JSON.stringify(value);
   }
-  if (value instanceof Element) {
+  if (isElement(value)) {
     return `{${renderMarkup(value, indent)}}`;
   }
   return `{${renderInline(value)}}`;
 }
 
 function renderChild(child: unknown, indent: string): string {
-  if (child instanceof Element) {
+  if (isElement(child)) {
     return renderMarkup(child, indent);
   }
   return `{${renderInline(child)}}`;
@@ -69,7 +70,7 @@ function renderInline(value: unknown): string {
   if (Array.isArray(value)) {
     return `[${value.map(renderInline).join(", ")}]`;
   }
-  if (value instanceof Element) {
+  if (isElement(value)) {
     return renderMarkup(value);
   }
   if (typeof value === "object") {

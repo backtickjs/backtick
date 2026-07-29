@@ -1,4 +1,5 @@
-import { renderMarkup, Element } from "./test-client/index.ts";
+import { renderMarkup, isElement } from "./test-client/index.ts";
+import type { Element } from "./test-client/index.ts";
 
 // Renders a runtime value produced by the test-client into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,
@@ -21,7 +22,7 @@ function render(value: unknown, indent: string, seen: Set<object>): string {
   if (typeof value === "function") {
     return "[function]";
   }
-  if (value instanceof Element) {
+  if (isElement(value)) {
     return renderMarkup(value, indent);
   }
   if (typeof value !== "object") {

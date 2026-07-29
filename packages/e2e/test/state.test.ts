@@ -3,7 +3,8 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, Element } from "./test-client/index.ts";
+import { evaluate, isElement } from "./test-client/index.ts";
+import type { Element } from "./test-client/index.ts";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
 // wire shape, and these drive the reference client through it — a write has to
@@ -15,7 +16,7 @@ const importFixture = createFixtureLoader("state");
 async function render(file: string): Promise<Element> {
   const script = await importFixture(validDir, file);
   const element = evaluate(await bundle(script));
-  assert.ok(element instanceof Element, "expected a rendered element");
+  assert.ok(isElement(element), "expected a rendered element");
   return element;
 }
 

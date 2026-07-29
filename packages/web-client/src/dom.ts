@@ -1,4 +1,5 @@
-import { Element } from "@backtickjs/js-interpreter";
+import { isElement } from "@backtickjs/js-interpreter";
+import type { Element } from "@backtickjs/js-interpreter";
 
 // How each element id renders in a browser. A client dispatches on `id` to pick
 // a native component; here the native components are DOM tags.
@@ -63,7 +64,7 @@ function nodes(value: unknown): Node[] {
   if (Array.isArray(value)) {
     return value.flatMap(nodes);
   }
-  if (value instanceof Element) {
+  if (isElement(value)) {
     return element(value);
   }
   return [document.createTextNode(String(value))];

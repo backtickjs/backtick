@@ -8,6 +8,13 @@ import type { Value } from "./Value.js";
 // written: whoever holds the element is holding the instance, so it observes
 // the new render rather than a detached copy.
 export class Element {
+  // Recognized by this marker rather than by `instanceof`, as everything else
+  // spliceable is (`isClientScript`, `isJsxElement`, `isClientState`). Class
+  // identity is per-copy of the package: two copies resolved into one install
+  // would make `instanceof` false and a renderer would quietly draw every
+  // element as text. A marker makes that case merely wasteful.
+  readonly "@backtickjs" = "Element";
+
   readonly id: string;
   key: string | number | null;
   props: { [prop: string]: Value };
@@ -21,4 +28,13 @@ export class Element {
     this.key = key;
     this.props = props;
   }
+}
+
+export function isElement(value: unknown): value is Element {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "@backtickjs" in value &&
+    value["@backtickjs"] === "Element"
+  );
 }

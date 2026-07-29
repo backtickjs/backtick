@@ -377,9 +377,6 @@ importers:
 
   packages/web-sdk:
     dependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
       '@backtickjs/jit-bundler':
         specifier: workspace:*
         version: link:../jit-bundler
@@ -393,6 +390,9 @@ importers:
         specifier: workspace:*
         version: link:../web-server
     devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

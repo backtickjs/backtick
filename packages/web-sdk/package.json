@@ -25,13 +25,16 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/core": "workspace:*",
     "@backtickjs/jit-bundler": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
     "@backtickjs/web-server": "workspace:*"
   },
+  "peerDependencies": {
+    "@backtickjs/core": "workspace:*"
+  },
   "devDependencies": {
+    "@backtickjs/core": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }
