@@ -4,11 +4,16 @@ import { createHandler, renderDocument } from "../dist/index.js";
 import type { Bundle } from "@backtickjs/core";
 
 const options = { client: "/client/index.js" };
-const handle = createHandler(null, {
-  ...options,
-  read: async (path) =>
-    path === "/client/index.js" ? new TextEncoder().encode("export {}") : null,
-});
+const handle = createHandler(
+  { "/": () => null, "/about": () => "about" },
+  {
+    ...options,
+    read: async (path) =>
+      path === "/client/index.js"
+        ? new TextEncoder().encode("export {}")
+        : null,
+  },
+);
 const asked = (path: string, accept?: string): Request =>
   new Request(`http://localhost${path}`, {
     headers: accept === undefined ? {} : { accept },
@@ -39,6 +44,17 @@ test("answers a browser with the payload already in the document", async () => {
   assert.match(html, /<script type="application\/json" id="bundle">/);
   // Inlined, so the page needs no second request to draw.
   assert.doesNotMatch(html, /fetch\(/);
+});
+
+test("answers each route from the same table", async () => {
+  // Same paths for every client — the envelope is what differs, not the route.
+  assert.deepEqual(
+    (await (await handle(asked("/about"))).json()).root,
+    "about",
+  );
+  const html = await handle(asked("/about", "text/html"));
+  assert.match(await html.text(), /id="bundle"/);
+  assert.equal((await handle(asked("/missing"))).status, 404);
 });
 
 test("serves a module with a type a browser will execute", async () => {

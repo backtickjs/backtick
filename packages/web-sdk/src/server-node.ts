@@ -2,8 +2,11 @@ import { createServer, type Server } from "node:http";
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, join, normalize } from "node:path";
-import { createHandler, type DocumentOptions } from "@backtickjs/web-server";
-import type { Spliceable } from "@backtickjs/core";
+import {
+  createHandler,
+  type DocumentOptions,
+  type Routes,
+} from "@backtickjs/web-server";
 
 export interface BrowserAssets extends DocumentOptions {
   // Directories to serve, by the URL prefix that reaches them.
@@ -66,11 +69,14 @@ export function readAssets(
 // The assets default to the SDK's own, so an app says only what is its own —
 // its screen, and its title.
 export function serve(
-  app: Spliceable,
+  routes: Routes,
   options: Partial<BrowserAssets> & { readonly title?: string } = {},
 ): Server {
   const assets = { ...browserAssets(), ...options };
-  const handle = createHandler(app, { ...assets, read: readAssets(assets) });
+  const handle = createHandler(routes, {
+    ...assets,
+    read: readAssets(assets),
+  });
   return createServer((incoming, outgoing) => {
     const request = new Request(
       new URL(incoming.url ?? "/", "http://localhost"),

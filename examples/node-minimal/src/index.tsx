@@ -1,13 +1,22 @@
 import { serve } from "@backtickjs/web-sdk/server/node";
-import App from "./app.js";
+import { About, Counter, Home } from "./screens.js";
 
-// The bundle is built here, on the server, and the page mounts it. Nothing
-// compiles in the browser: what ships is the same JSON a native client gets.
+// One route table for every client. A browser asks for `/about` and gets a
+// document with the bundle already in it; a phone asks for the same path and
+// gets the bundle on its own. Neither knows the other exists.
 //
-// The client is served from the SDK's own `dist` as plain ES modules, so this
-// needs no JavaScript bundler and names none of the packages behind the SDK.
+// A route is a function, so it runs when the path is asked for — `/about`
+// reports the uptime at the moment of the request.
+const started = new Date();
 const port = Number(process.env.PORT ?? 5173);
 
-serve(<App />, { title: "Backtick — node-minimal" }).listen(port, () => {
+serve(
+  {
+    "/": () => <Home />,
+    "/counter": () => <Counter />,
+    "/about": () => <About started={started} />,
+  },
+  { title: "Backtick — node-minimal" },
+).listen(port, () => {
   console.log(`Preview on http://localhost:${port}`);
 });

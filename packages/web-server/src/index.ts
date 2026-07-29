@@ -4,6 +4,19 @@ import { renderDocument, type DocumentOptions } from "./renderDocument.js";
 export { renderDocument } from "./renderDocument.js";
 export type { DocumentOptions } from "./renderDocument.js";
 
+// A screen, built when its path is asked for. A function rather than a value so
+// a route can read whatever it needs at request time, and because a bare value
+// could not be told from a `ClientConstructor` — which is spliceable and is
+// also a function.
+export type Screen = () => Spliceable | Promise<Spliceable>;
+
+// Which screen answers which path. The same table serves every client: a
+// browser asks for `/about` and gets a document, a phone asks for `/about` and
+// gets the bundle, and neither knows the other exists.
+export interface Routes {
+  readonly [pathname: string]: Screen;
+}
+
 export interface HandlerOptions extends DocumentOptions {
   // How to read a served module. Supplied as a reader rather than a path,
   // because reaching a filesystem is the one thing this can't do and stay
@@ -31,12 +44,13 @@ const contentTypes: { readonly [ext: string]: string } = {
 // adapter in `@backtickjs/web-sdk/server/node`, which is also where reading a
 // file off disk lives.
 export function createHandler(
-  app: Spliceable,
+  routes: Routes,
   options: HandlerOptions,
 ): (request: Request) => Promise<Response> {
   return async (request) => {
     const { pathname } = new URL(request.url);
-    if (pathname !== "/") {
+    const screen = routes[pathname];
+    if (screen === undefined) {
       const contents = await options.read?.(pathname);
       if (contents == null) {
         return new Response("Not found", { status: 404 });
@@ -51,8 +65,8 @@ export function createHandler(
       });
     }
     // Bundled per request, so an edit shows on reload rather than on restart.
-    // A deployment bundles once and serves the JSON as a file.
-    const payload = await bundle(app);
+    // A deployment bundles once per route and serves the JSON as a file.
+    const payload = await bundle(await screen());
     if (!(request.headers.get("accept") ?? "").includes("text/html")) {
       return new Response(JSON.stringify(payload), {
         headers: { "content-type": "application/json; charset=utf-8" },
