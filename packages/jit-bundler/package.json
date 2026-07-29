@@ -8,6 +8,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./format": {
+      "types": "./dist/bundle/Bundle.d.ts",
+      "default": "./dist/bundle/Bundle.js"
     }
   },
   "scripts": {

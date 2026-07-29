@@ -4,7 +4,13 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "types": ["bun"]
+    "types": [
+      "bun"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/core"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }

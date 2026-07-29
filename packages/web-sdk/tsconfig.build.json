@@ -3,12 +3,14 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "sourceMap": true,
-    // The browser is the target: DOM globals, and none of node's.
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "types": []
+    // Both halves live here, so both sets of globals are in scope. Which half
+    // reaches which is enforced by the entry points, not by the types: a
+    // browser imports `.` and never sees `node:http`.
+    "lib": ["esnext", "dom", "dom.iterable"]
   },
   "references": [
     { "path": "../core/tsconfig.build.json" },
-    { "path": "../web-client/tsconfig.build.json" }
+    { "path": "../web-client/tsconfig.build.json" },
+    { "path": "../web-server/tsconfig.build.json" }
   ]
 }

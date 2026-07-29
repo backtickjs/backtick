@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/js-interpreter",
+  "name": "@backtickjs/web-server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -13,13 +13,13 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/core": "workspace:*",
-    "@backtickjs/jit-bundler": "workspace:*"
+    "@backtickjs/core": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

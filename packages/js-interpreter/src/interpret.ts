@@ -1,4 +1,8 @@
-import { NodeKind, NodeField } from "@backtickjs/core";
+// The wire tags only. `@backtickjs/core` re-exports these, but reaching them
+// that way pulls the bundler and `node:async_hooks` into the graph, which a
+// browser cannot load. This subpath is the format module alone, and it
+// imports nothing.
+import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleApply,

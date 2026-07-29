@@ -6,6 +6,9 @@
     "rootDir": "src",
     "outDir": "dist",
     "sourceMap": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/core",
+    "types": ["node"],
     "plugins": [
       // Build with `tspc`, not `tsc`.
       { "transform": "@backtickjs/tspatch-plugin" }
