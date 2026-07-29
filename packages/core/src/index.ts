@@ -14,6 +14,8 @@ export {
   type FragmentProps,
   Image,
   type ImageProps,
+  Link,
+  type LinkProps,
   Text,
   type TextProps,
   View,

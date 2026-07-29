@@ -116,6 +116,16 @@ test("onPress becomes a click listener, testID a data attribute", () => {
 test("names the components it can render when it meets one it can't", () => {
   assert.throws(() => render(new Element("Slider", null, {})), {
     message:
-      /No web rendering for <Slider \/>.*View, Text, Image and Fragment/s,
+      /No web rendering for <Slider \/>.*View, Text, Image, Link and Fragment/s,
   });
+});
+
+test("a Link renders as the tag a browser can already follow", () => {
+  const link = render(
+    new Element("Link", null, { href: "/about", children: "About" }),
+  )[0];
+  assert.equal(link?.tag, "a");
+  // `href` is not one of the props handled specially, so it falls through as an
+  // ordinary attribute — no wiring of its own.
+  assert.equal(link?.attributes.href, "/about");
 });

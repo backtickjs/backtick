@@ -10,6 +10,7 @@ const tags: { readonly [id: string]: string } = {
   View: "div",
   Text: "span",
   Image: "img",
+  Link: "a",
 };
 
 const FRAGMENT = "Fragment";
