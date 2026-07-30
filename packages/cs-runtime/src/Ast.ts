@@ -1,3 +1,4 @@
+import type { BinaryOperator } from "./BinaryOperator.js";
 import type { SourceLocation } from "./SourceLocation.js";
 import type { SyntaxKind } from "./SyntaxKind.js";
 
@@ -5,25 +6,6 @@ import type { SyntaxKind } from "./SyntaxKind.js";
 // compiles to a thunk returning one of these, so this is the contract between
 // what the compiler emits and what the bundler reads — the emitted code is
 // checked against it in the project it was compiled in.
-
-// The operators a script may write. `=` is one of them, because an assignment
-// is a binary expression here exactly as it is in TypeScript.
-export type BinaryOperator =
-  | "="
-  | "&&"
-  | "||"
-  | "??"
-  | "+"
-  | "-"
-  | "*"
-  | "/"
-  | "%"
-  | "==="
-  | "!=="
-  | "<"
-  | "<="
-  | ">"
-  | ">=";
 
 // A script node that yields a value.
 export type ClientScriptExpression =

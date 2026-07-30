@@ -28,6 +28,7 @@ export { state, type State } from "./state.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";
 export * from "./Ast.js";
+export type { BinaryOperator } from "./BinaryOperator.js";
 export { SyntaxKind } from "./SyntaxKind.js";
 export {
   type ClientElement,
