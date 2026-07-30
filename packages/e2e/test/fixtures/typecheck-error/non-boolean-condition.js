@@ -13,14 +13,14 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 19, 10, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [5, 20, 5, 32],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 20, 5, 24],
           text: "name",
           bindingKey: "name$7s4lkv4w2ddn$0",
@@ -28,27 +28,27 @@ export default cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [5, 37, 10, 2],
       statements: [
         {
-          kind: "AstScriptIfStatement",
+          kind: 246,
           loc: [6, 3, 8, 4],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [6, 7, 6, 11],
             text: "name",
             bindingKey: "name$7s4lkv4w2ddn$0",
           },
           thenStatement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [6, 13, 8, 4],
             statements: [
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [7, 5, 7, 17],
                 expression: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [7, 12, 7, 16],
                   text: "name",
                   bindingKey: "name$7s4lkv4w2ddn$0",
@@ -59,10 +59,10 @@ export default cs.create(
           elseStatement: null,
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [9, 3, 9, 22],
           expression: {
-            kind: "AstScriptStringLiteral",
+            kind: 11,
             loc: [9, 10, 9, 21],
             text: "anonymous",
           },

@@ -24,7 +24,7 @@ const Child = async ({ n }) =>
           spliceParams: { $n: [] },
         },
         () => ({
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [13, 19, 13, 21],
           key: "$n",
         }),
@@ -44,7 +44,7 @@ export default _jsx(Child, {
       spliceParams: {},
     },
     () => ({
-      kind: "AstScriptNumericLiteral",
+      kind: 9,
       loc: [17, 29, 17, 30],
       value: 1,
     }),

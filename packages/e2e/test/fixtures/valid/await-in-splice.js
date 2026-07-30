@@ -17,16 +17,16 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptBinaryExpression",
+    kind: 227,
     loc: [10, 19, 10, 49],
     left: {
-      kind: "AstScriptSplice",
+      kind: 1000,
       loc: [10, 19, 10, 43],
       key: "$0splice0",
     },
     operatorToken: "+",
     right: {
-      kind: "AstScriptStringLiteral",
+      kind: 11,
       loc: [10, 46, 10, 49],
       text: "!",
     },

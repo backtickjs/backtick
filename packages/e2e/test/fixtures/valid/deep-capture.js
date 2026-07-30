@@ -40,7 +40,7 @@ function wrap(start) {
                   spliceParams: {},
                 },
                 () => ({
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [19, 28, 19, 33],
                   text: "outer",
                   bindingKey: "outer$1mlv4ugew6yjv$0",
@@ -51,40 +51,40 @@ function wrap(start) {
             spliceParams: { $0splice0: [] },
           },
           () => ({
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [17, 17, 20, 6],
             statements: [
               {
-                kind: "AstScriptVariableDeclaration",
+                kind: 261,
                 loc: [18, 7, 18, 25],
                 name: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [18, 13, 18, 19],
                   text: "middle",
                   bindingKey: "middle$1mlv4ugew6yjv$1",
                 },
                 initializer: {
-                  kind: "AstScriptNumericLiteral",
+                  kind: 9,
                   loc: [18, 22, 18, 24],
                   value: 10,
                 },
                 keyword: "const",
               },
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [19, 7, 19, 36],
                 expression: {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [19, 14, 19, 35],
                   left: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [19, 14, 19, 20],
                     text: "middle",
                     bindingKey: "middle$1mlv4ugew6yjv$1",
                   },
                   operatorToken: "+",
                   right: {
-                    kind: "AstScriptSplice",
+                    kind: 1000,
                     loc: [19, 23, 19, 35],
                     key: "$0splice0",
                   },
@@ -98,30 +98,30 @@ function wrap(start) {
       spliceParams: { $start: [], $0splice0: ["outer$1mlv4ugew6yjv$0"] },
     },
     () => ({
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [15, 13, 21, 4],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [16, 5, 16, 26],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [16, 11, 16, 16],
             text: "outer",
             bindingKey: "outer$1mlv4ugew6yjv$0",
           },
           initializer: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [16, 19, 16, 25],
             key: "$start",
           },
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [17, 5, 20, 9],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [17, 12, 20, 8],
             key: "$0splice0",
           },
@@ -151,7 +151,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [24, 29, 24, 30],
             value: 1,
           }),
@@ -170,7 +170,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [24, 46, 24, 47],
             value: 2,
           }),
@@ -181,16 +181,16 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
-    kind: "AstScriptBinaryExpression",
+    kind: 227,
     loc: [24, 19, 24, 50],
     left: {
-      kind: "AstScriptSplice",
+      kind: 1000,
       loc: [24, 19, 24, 33],
       key: "$0splice0",
     },
     operatorToken: "+",
     right: {
-      kind: "AstScriptSplice",
+      kind: 1000,
       loc: [24, 36, 24, 50],
       key: "$0splice1",
     },

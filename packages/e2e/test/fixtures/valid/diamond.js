@@ -15,7 +15,7 @@ const d0 = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptNumericLiteral",
+    kind: 9,
     loc: [7, 15, 7, 16],
     value: 1,
   }),
@@ -32,23 +32,23 @@ const d1 = cs.create(
     spliceParams: { $d0: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [8, 15, 10, 2],
     statements: [
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [9, 3, 9, 20],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [9, 10, 9, 19],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [9, 10, 9, 13],
             key: "$d0",
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [9, 16, 9, 19],
             key: "$d0",
           },
@@ -69,23 +69,23 @@ const d2 = cs.create(
     spliceParams: { $d1: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [11, 15, 13, 2],
     statements: [
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [12, 3, 12, 20],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [12, 10, 12, 19],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [12, 10, 12, 13],
             key: "$d1",
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [12, 16, 12, 19],
             key: "$d1",
           },
@@ -106,23 +106,23 @@ const d3 = cs.create(
     spliceParams: { $d2: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [14, 15, 16, 2],
     statements: [
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [15, 3, 15, 20],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [15, 10, 15, 19],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [15, 10, 15, 13],
             key: "$d2",
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [15, 16, 15, 19],
             key: "$d2",
           },
@@ -143,23 +143,23 @@ const d4 = cs.create(
     spliceParams: { $d3: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [17, 15, 19, 2],
     statements: [
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [18, 3, 18, 20],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [18, 10, 18, 19],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [18, 10, 18, 13],
             key: "$d3",
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [18, 16, 18, 19],
             key: "$d3",
           },

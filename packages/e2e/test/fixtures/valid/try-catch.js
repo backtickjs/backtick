@@ -11,37 +11,37 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [3, 19, 13, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [4, 3, 4, 26],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [4, 9, 4, 16],
           text: "message",
           bindingKey: "message$2osmwga78xnj6$0",
         },
         initializer: {
-          kind: "AstScriptStringLiteral",
+          kind: 11,
           loc: [4, 19, 4, 25],
           text: "boom",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptTryStatement",
+        kind: 259,
         loc: [5, 3, 12, 4],
         tryBlock: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [5, 7, 7, 4],
           statements: [
             {
-              kind: "AstScriptThrowStatement",
+              kind: 258,
               loc: [6, 5, 6, 19],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [6, 11, 6, 18],
                 text: "message",
                 bindingKey: "message$2osmwga78xnj6$0",
@@ -50,47 +50,47 @@ export default cs.create(
           ],
         },
         catchClause: {
-          kind: "AstScriptCatchClause",
+          kind: 300,
           loc: [7, 5, 12, 4],
           variableDeclaration: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [7, 12, 7, 17],
             text: "error",
             bindingKey: "error$2osmwga78xnj6$1",
           },
           block: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [7, 19, 12, 4],
             statements: [
               {
-                kind: "AstScriptIfStatement",
+                kind: 246,
                 loc: [8, 5, 10, 6],
                 expression: {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [8, 9, 8, 26],
                   left: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [8, 9, 8, 14],
                     text: "error",
                     bindingKey: "error$2osmwga78xnj6$1",
                   },
                   operatorToken: "===",
                   right: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [8, 19, 8, 26],
                     text: "message",
                     bindingKey: "message$2osmwga78xnj6$0",
                   },
                 },
                 thenStatement: {
-                  kind: "AstScriptBlock",
+                  kind: 242,
                   loc: [8, 28, 10, 6],
                   statements: [
                     {
-                      kind: "AstScriptReturnStatement",
+                      kind: 254,
                       loc: [9, 7, 9, 28],
                       expression: {
-                        kind: "AstScriptStringLiteral",
+                        kind: 11,
                         loc: [9, 14, 9, 27],
                         text: "caught boom",
                       },
@@ -100,10 +100,10 @@ export default cs.create(
                 elseStatement: null,
               },
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [11, 5, 11, 36],
                 expression: {
-                  kind: "AstScriptStringLiteral",
+                  kind: 11,
                   loc: [11, 12, 11, 35],
                   text: "caught something else",
                 },

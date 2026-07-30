@@ -19,7 +19,7 @@ const flags = {
       spliceParams: {},
     },
     () => ({
-      kind: "AstScriptTrueLiteral",
+      kind: 112,
       loc: [10, 28, 10, 32],
     }),
   ),
@@ -36,24 +36,24 @@ const label = cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [12, 75, 23, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [13, 3, 13, 22],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [13, 3, 13, 7],
           text: "text",
           bindingKey: "text$3ciy5yb38f51h$0",
         },
       },
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [14, 3, 14, 17],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [14, 3, 14, 8],
           text: "upper",
           bindingKey: "upper$3ciy5yb38f51h$1",
@@ -61,53 +61,53 @@ const label = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [15, 6, 23, 2],
       statements: [
         {
-          kind: "AstScriptIfStatement",
+          kind: 246,
           loc: [16, 3, 18, 4],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [16, 7, 16, 29],
             left: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [16, 7, 16, 12],
               text: "upper",
               bindingKey: "upper$3ciy5yb38f51h$1",
             },
             operatorToken: "&&",
             right: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [16, 16, 16, 29],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [16, 16, 16, 20],
                 text: "text",
                 bindingKey: "text$3ciy5yb38f51h$0",
               },
               operatorToken: "!==",
               right: {
-                kind: "AstScriptNullLiteral",
+                kind: 106,
                 loc: [16, 25, 16, 29],
               },
             },
           },
           thenStatement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [16, 31, 18, 4],
             statements: [
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [17, 5, 17, 31],
                 expression: {
-                  kind: "AstScriptCallExpression",
+                  kind: 214,
                   loc: [17, 12, 17, 30],
                   expression: {
-                    kind: "AstScriptPropertyAccessExpression",
+                    kind: 212,
                     loc: [17, 12, 17, 28],
                     expression: {
-                      kind: "AstScriptIdentifier",
+                      kind: 80,
                       loc: [17, 12, 17, 16],
                       text: "text",
                       bindingKey: "text$3ciy5yb38f51h$0",
@@ -124,48 +124,48 @@ const label = cs.create(
           elseStatement: null,
         },
         {
-          kind: "AstScriptIfStatement",
+          kind: 246,
           loc: [19, 3, 21, 4],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [19, 7, 19, 65],
             left: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [19, 7, 19, 39],
               left: {
-                kind: "AstScriptSplice",
+                kind: 1000,
                 loc: [19, 7, 19, 22],
                 key: "$0splice0",
               },
               operatorToken: "&&",
               right: {
-                kind: "AstScriptBinaryExpression",
+                kind: 227,
                 loc: [19, 26, 19, 39],
                 left: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [19, 26, 19, 30],
                   text: "text",
                   bindingKey: "text$3ciy5yb38f51h$0",
                 },
                 operatorToken: "!==",
                 right: {
-                  kind: "AstScriptNullLiteral",
+                  kind: 106,
                   loc: [19, 35, 19, 39],
                 },
               },
             },
             operatorToken: "&&",
             right: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [19, 43, 19, 65],
               left: {
-                kind: "AstScriptCallExpression",
+                kind: 214,
                 loc: [19, 43, 19, 57],
                 expression: {
-                  kind: "AstScriptPropertyAccessExpression",
+                  kind: 212,
                   loc: [19, 43, 19, 54],
                   expression: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [19, 43, 19, 47],
                     text: "text",
                     bindingKey: "text$3ciy5yb38f51h$0",
@@ -176,7 +176,7 @@ const label = cs.create(
                 questionDotToken: false,
                 arguments: [
                   {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [19, 55, 19, 56],
                     value: 0,
                   },
@@ -184,27 +184,27 @@ const label = cs.create(
               },
               operatorToken: "===",
               right: {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [19, 62, 19, 65],
                 text: "!",
               },
             },
           },
           thenStatement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [19, 67, 21, 4],
             statements: [
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [20, 5, 20, 29],
                 expression: {
-                  kind: "AstScriptCallExpression",
+                  kind: 214,
                   loc: [20, 12, 20, 28],
                   expression: {
-                    kind: "AstScriptPropertyAccessExpression",
+                    kind: 212,
                     loc: [20, 12, 20, 23],
                     expression: {
-                      kind: "AstScriptIdentifier",
+                      kind: 80,
                       loc: [20, 12, 20, 16],
                       text: "text",
                       bindingKey: "text$3ciy5yb38f51h$0",
@@ -215,7 +215,7 @@ const label = cs.create(
                   questionDotToken: false,
                   arguments: [
                     {
-                      kind: "AstScriptStringLiteral",
+                      kind: 11,
                       loc: [20, 24, 20, 27],
                       text: "?",
                     },
@@ -227,10 +227,10 @@ const label = cs.create(
           elseStatement: null,
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [22, 3, 22, 17],
           expression: {
-            kind: "AstScriptStringLiteral",
+            kind: 11,
             loc: [22, 10, 22, 16],
             text: "none",
           },
@@ -251,107 +251,107 @@ export default cs.create(
     spliceParams: { $label: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [25, 20, 30, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [26, 3, 26, 30],
         name: "missing",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [26, 12, 26, 30],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [26, 12, 26, 18],
             key: "$label",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [26, 19, 26, 23],
             },
             {
-              kind: "AstScriptTrueLiteral",
+              kind: 112,
               loc: [26, 25, 26, 29],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [27, 3, 27, 28],
         name: "loud",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [27, 9, 27, 28],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [27, 9, 27, 15],
             key: "$label",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [27, 16, 27, 21],
               text: "!hi",
             },
             {
-              kind: "AstScriptTrueLiteral",
+              kind: 112,
               loc: [27, 23, 27, 27],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [28, 3, 28, 30],
         name: "quiet",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [28, 10, 28, 30],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [28, 10, 28, 16],
             key: "$label",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [28, 17, 28, 22],
               text: "!hi",
             },
             {
-              kind: "AstScriptFalseLiteral",
+              kind: 97,
               loc: [28, 24, 28, 29],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [29, 3, 29, 29],
         name: "plain",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [29, 10, 29, 29],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [29, 10, 29, 16],
             key: "$label",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [29, 17, 29, 21],
               text: "zz",
             },
             {
-              kind: "AstScriptFalseLiteral",
+              kind: 97,
               loc: [29, 23, 29, 28],
             },
           ],

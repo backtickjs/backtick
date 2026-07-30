@@ -29,7 +29,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [16, 36, 16, 37],
             value: 1,
           }),
@@ -46,7 +46,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [16, 43, 16, 44],
             value: 2,
           }),
@@ -57,13 +57,13 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptPropertyAccessExpression",
+    kind: 212,
     loc: [16, 19, 16, 61],
     expression: {
-      kind: "AstScriptPropertyAccessExpression",
+      kind: 212,
       loc: [16, 19, 16, 54],
       expression: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [16, 19, 16, 48],
         key: "$0splice0",
       },

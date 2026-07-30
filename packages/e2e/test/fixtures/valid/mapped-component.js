@@ -38,16 +38,16 @@ export default _jsx(View, {
               spliceParams: {},
             },
             () => ({
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [20, 45, 20, 57],
               left: {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [20, 45, 20, 51],
                 text: "row ",
               },
               operatorToken: "+",
               right: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [20, 54, 20, 57],
                 text: "row",
                 bindingKey: "row$3qcr5x2z3u56v$0",
@@ -60,13 +60,13 @@ export default _jsx(View, {
       spliceParams: { $rows: [], $0splice0: ["row$3qcr5x2z3u56v$0"] },
     },
     () => ({
-      kind: "AstScriptCallExpression",
+      kind: 214,
       loc: [20, 13, 20, 69],
       expression: {
-        kind: "AstScriptPropertyAccessExpression",
+        kind: 212,
         loc: [20, 13, 20, 22],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [20, 13, 20, 18],
           key: "$rows",
         },
@@ -76,14 +76,14 @@ export default _jsx(View, {
       questionDotToken: false,
       arguments: [
         {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [20, 23, 20, 68],
           parameters: [
             {
-              kind: "AstScriptParameterDeclaration",
+              kind: 170,
               loc: [20, 24, 20, 27],
               name: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [20, 24, 20, 27],
                 text: "row",
                 bindingKey: "row$3qcr5x2z3u56v$0",
@@ -91,7 +91,7 @@ export default _jsx(View, {
             },
           ],
           body: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [20, 32, 20, 68],
             key: "$0splice0",
           },

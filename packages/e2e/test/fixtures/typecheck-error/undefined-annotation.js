@@ -11,14 +11,14 @@ const stored = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [8, 19, 11, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [8, 20, 8, 28],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [8, 20, 8, 21],
           text: "x",
           bindingKey: "x$18uwl3j62c30b$0",
@@ -26,20 +26,20 @@ const stored = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [8, 33, 11, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [9, 3, 9, 15],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 9, 9, 10],
             text: "y",
             bindingKey: "y$18uwl3j62c30b$1",
           },
           initializer: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 13, 9, 14],
             text: "x",
             bindingKey: "x$18uwl3j62c30b$0",
@@ -47,10 +47,10 @@ const stored = cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [10, 3, 10, 12],
           expression: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [10, 10, 10, 11],
             value: 1,
           },
@@ -71,14 +71,14 @@ const written = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [13, 20, 17, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [13, 21, 13, 29],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [13, 21, 13, 22],
           text: "x",
           bindingKey: "x$18uwl3j62c30b$2",
@@ -86,47 +86,47 @@ const written = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [13, 34, 17, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [14, 3, 14, 14],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [14, 7, 14, 8],
             text: "y",
             bindingKey: "y$18uwl3j62c30b$3",
           },
           initializer: {
-            kind: "AstScriptStringLiteral",
+            kind: 11,
             loc: [14, 11, 14, 13],
             text: "",
           },
           keyword: "let",
         },
         {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [15, 3, 15, 8],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [15, 3, 15, 4],
             text: "y",
             bindingKey: "y$18uwl3j62c30b$3",
           },
           operatorToken: "=",
           right: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [15, 7, 15, 8],
             text: "x",
             bindingKey: "x$18uwl3j62c30b$2",
           },
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [16, 3, 16, 12],
           expression: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [16, 10, 16, 11],
             value: 1,
           },

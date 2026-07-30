@@ -13,37 +13,37 @@ const beep = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [5, 31, 8, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [6, 3, 6, 13],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 7, 6, 8],
           text: "n",
           bindingKey: "n$gyja921xjk87$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [6, 11, 6, 12],
           value: 0,
         },
         keyword: "let",
       },
       {
-        kind: "AstScriptBinaryExpression",
+        kind: 227,
         loc: [7, 3, 7, 8],
         left: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [7, 3, 7, 4],
           text: "n",
           bindingKey: "n$gyja921xjk87$0",
         },
         operatorToken: "=",
         right: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [7, 7, 7, 8],
           value: 1,
         },
@@ -63,14 +63,14 @@ const onTap = cs.create(
     spliceParams: { $beep: [] },
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [10, 48, 12, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [10, 49, 10, 59],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [10, 49, 10, 51],
           text: "id",
           bindingKey: "id$gyja921xjk87$1",
@@ -78,11 +78,11 @@ const onTap = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [10, 64, 12, 2],
       statements: [
         {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [11, 3, 11, 8],
           key: "$beep",
         },
@@ -102,38 +102,38 @@ export default cs.create(
     spliceParams: { $onTap: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [14, 19, 20, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [15, 3, 18, 5],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [15, 9, 15, 17],
           text: "handlers",
           bindingKey: "handlers$gyja921xjk87$2",
         },
         initializer: {
-          kind: "AstScriptObjectLiteralExpression",
+          kind: 211,
           loc: [15, 20, 18, 4],
           properties: [
             {
-              kind: "AstScriptPropertyAssignment",
+              kind: 304,
               loc: [16, 5, 16, 16],
               name: "tap",
               initializer: {
-                kind: "AstScriptSplice",
+                kind: 1000,
                 loc: [16, 10, 16, 16],
                 key: "$onTap",
               },
             },
             {
-              kind: "AstScriptPropertyAssignment",
+              kind: 304,
               loc: [17, 5, 17, 17],
               name: "hold",
               initializer: {
-                kind: "AstScriptSplice",
+                kind: 1000,
                 loc: [17, 11, 17, 17],
                 key: "$onTap",
               },
@@ -143,10 +143,10 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [19, 3, 19, 19],
         expression: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [19, 10, 19, 18],
           text: "handlers",
           bindingKey: "handlers$gyja921xjk87$2",

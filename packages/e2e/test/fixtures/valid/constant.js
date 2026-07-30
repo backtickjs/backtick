@@ -11,7 +11,7 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptNumericLiteral",
+    kind: 9,
     loc: [3, 19, 3, 20],
     value: 1,
   }),

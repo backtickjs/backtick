@@ -13,7 +13,7 @@ const leaf = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptNumericLiteral",
+    kind: 9,
     loc: [5, 17, 5, 18],
     value: 7,
   }),
@@ -30,25 +30,25 @@ export default cs.create(
     spliceParams: { $leaf: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [7, 20, 7, 42],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [7, 22, 7, 30],
         name: "a",
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [7, 25, 7, 30],
           key: "$leaf",
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [7, 32, 7, 40],
         name: "b",
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [7, 35, 7, 40],
           key: "$leaf",
         },

@@ -15,25 +15,25 @@ export default cs.create(
     spliceParams: { $count: [], $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [8, 20, 8, 48],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [8, 22, 8, 31],
         name: "a",
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [8, 25, 8, 31],
           key: "$count",
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [8, 33, 8, 46],
         name: "b",
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [8, 36, 8, 46],
           key: "$0splice0",
         },

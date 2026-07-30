@@ -13,14 +13,14 @@ const greet = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 18, 7, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [5, 19, 5, 32],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 19, 5, 23],
           text: "name",
           bindingKey: "name$1gqqin78x7yev$0",
@@ -28,20 +28,20 @@ const greet = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [5, 37, 7, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [6, 3, 6, 28],
           expression: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [6, 10, 6, 27],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [6, 10, 6, 22],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [6, 10, 6, 14],
                 text: "name",
                 bindingKey: "name$1gqqin78x7yev$0",
@@ -52,7 +52,7 @@ const greet = cs.create(
             questionDotToken: false,
             arguments: [
               {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [6, 23, 6, 26],
                 text: "!",
               },
@@ -75,17 +75,17 @@ export default cs.create(
     spliceParams: { $greet: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [9, 19, 11, 2],
     statements: [
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [10, 3, 10, 19],
         expression: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [10, 10, 10, 18],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [10, 10, 10, 16],
             key: "$greet",
           },

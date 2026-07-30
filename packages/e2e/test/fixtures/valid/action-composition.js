@@ -13,20 +13,20 @@ const effects = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [5, 34, 7, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [6, 3, 6, 15],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 9, 6, 10],
           text: "x",
           bindingKey: "x$agkxao2hual4$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [6, 13, 6, 14],
           value: 1,
         },
@@ -47,11 +47,11 @@ const composed = cs.create(
     spliceParams: { $effects: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [9, 35, 11, 2],
     statements: [
       {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [10, 3, 10, 11],
         key: "$effects",
       },
@@ -70,11 +70,11 @@ export default cs.create(
     spliceParams: { $composed: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [13, 19, 15, 2],
     statements: [
       {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [14, 3, 14, 12],
         key: "$composed",
       },

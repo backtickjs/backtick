@@ -11,47 +11,47 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [3, 19, 6, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [4, 3, 4, 19],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [4, 9, 4, 13],
           text: "base",
           bindingKey: "base$357jk2g9zktff$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [4, 16, 4, 18],
           value: 10,
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [5, 3, 5, 57],
         expression: {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [5, 10, 5, 56],
           parameters: [
             {
-              kind: "AstScriptParameterDeclaration",
+              kind: 170,
               loc: [5, 11, 5, 22],
               name: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [5, 11, 5, 14],
                 text: "one",
                 bindingKey: "one$357jk2g9zktff$1",
               },
             },
             {
-              kind: "AstScriptParameterDeclaration",
+              kind: 170,
               loc: [5, 24, 5, 35],
               name: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [5, 24, 5, 27],
                 text: "two",
                 bindingKey: "two$357jk2g9zktff$2",
@@ -59,20 +59,20 @@ export default cs.create(
             },
           ],
           body: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [5, 40, 5, 56],
             left: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [5, 40, 5, 49],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [5, 40, 5, 43],
                 text: "one",
                 bindingKey: "one$357jk2g9zktff$1",
               },
               operatorToken: "+",
               right: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [5, 46, 5, 49],
                 text: "two",
                 bindingKey: "two$357jk2g9zktff$2",
@@ -80,7 +80,7 @@ export default cs.create(
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [5, 52, 5, 56],
               text: "base",
               bindingKey: "base$357jk2g9zktff$0",

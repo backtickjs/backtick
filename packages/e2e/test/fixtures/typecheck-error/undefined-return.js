@@ -11,11 +11,11 @@ const lying = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [11, 39, 11, 49],
     parameters: [],
     body: {
-      kind: "AstScriptStringLiteral",
+      kind: 11,
       loc: [11, 45, 11, 49],
       text: "hi",
     },
@@ -33,39 +33,39 @@ export default cs.create(
     spliceParams: { $lying: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [13, 19, 17, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [14, 3, 14, 25],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [14, 9, 14, 15],
           text: "stored",
           bindingKey: "stored$19ws50ksjspoc$0",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [14, 18, 14, 24],
           key: "$lying",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [15, 3, 15, 27],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [15, 9, 15, 15],
           text: "caught",
           bindingKey: "caught$19ws50ksjspoc$1",
         },
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [15, 18, 15, 26],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [15, 18, 15, 24],
             key: "$lying",
           },
@@ -75,10 +75,10 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [16, 3, 16, 12],
         expression: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [16, 10, 16, 11],
           value: 1,
         },

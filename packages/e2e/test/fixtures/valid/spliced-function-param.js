@@ -23,11 +23,11 @@ export default cs.create(
           spliceParams: {},
         },
         () => ({
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [9, 21, 9, 28],
           parameters: [],
           body: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [9, 27, 9, 28],
             value: 2,
           },
@@ -38,27 +38,27 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [8, 3, 8, 46],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [8, 9, 8, 14],
           text: "apply",
           bindingKey: "apply$22dvza3e0b85b$0",
         },
         initializer: {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [8, 17, 8, 45],
           parameters: [
             {
-              kind: "AstScriptParameterDeclaration",
+              kind: 170,
               loc: [8, 18, 8, 33],
               name: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [8, 18, 8, 19],
                 text: "f",
                 bindingKey: "f$22dvza3e0b85b$1",
@@ -66,13 +66,13 @@ export default cs.create(
             },
           ],
           body: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [8, 38, 8, 45],
             left: {
-              kind: "AstScriptCallExpression",
+              kind: 214,
               loc: [8, 38, 8, 41],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [8, 38, 8, 39],
                 text: "f",
                 bindingKey: "f$22dvza3e0b85b$1",
@@ -82,7 +82,7 @@ export default cs.create(
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [8, 44, 8, 45],
               value: 1,
             },
@@ -91,13 +91,13 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [9, 3, 9, 32],
         expression: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [9, 10, 9, 31],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 10, 9, 15],
             text: "apply",
             bindingKey: "apply$22dvza3e0b85b$0",
@@ -105,7 +105,7 @@ export default cs.create(
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [9, 16, 9, 30],
               key: "$0splice0",
             },

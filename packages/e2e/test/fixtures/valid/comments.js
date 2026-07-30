@@ -13,53 +13,53 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [5, 19, 17, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [7, 3, 7, 19],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [7, 9, 7, 14],
           text: "count",
           bindingKey: "count$rbes3su3s43l$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [7, 17, 7, 18],
           value: 1,
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptIfStatement",
+        kind: 246,
         loc: [9, 3, 12, 4],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [9, 7, 9, 18],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 7, 9, 12],
             text: "count",
             bindingKey: "count$rbes3su3s43l$0",
           },
           operatorToken: "===",
           right: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [9, 17, 9, 18],
             value: 1,
           },
         },
         thenStatement: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [9, 20, 12, 4],
           statements: [
             {
-              kind: "AstScriptReturnStatement",
+              kind: 254,
               loc: [11, 5, 11, 18],
               expression: {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [11, 12, 11, 17],
                 text: "one",
               },
@@ -69,10 +69,10 @@ export default cs.create(
         elseStatement: null,
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [16, 3, 16, 17],
         expression: {
-          kind: "AstScriptStringLiteral",
+          kind: 11,
           loc: [16, 10, 16, 16],
           text: "many",
         },

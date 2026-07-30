@@ -17,11 +17,11 @@ export default _jsxs(View, {
           spliceParams: {},
         },
         () => ({
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [5, 48, 5, 56],
           parameters: [],
           body: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [5, 54, 5, 56],
             statements: [],
           },

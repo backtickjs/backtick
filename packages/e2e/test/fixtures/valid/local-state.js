@@ -25,13 +25,13 @@ async function Stepper() {
           spliceParams: { $size: [] },
         },
         () => ({
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [16, 29, 16, 41],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [16, 29, 16, 39],
             expression: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [16, 29, 16, 34],
               key: "$size",
             },
@@ -55,21 +55,21 @@ async function Stepper() {
         spliceParams: { $size: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [17, 19, 19, 8],
         parameters: [],
         body: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [17, 25, 19, 8],
           statements: [
             {
-              kind: "AstScriptCallExpression",
+              kind: 214,
               loc: [18, 9, 18, 38],
               expression: {
-                kind: "AstScriptPropertyAccessExpression",
+                kind: 212,
                 loc: [18, 9, 18, 20],
                 expression: {
-                  kind: "AstScriptSplice",
+                  kind: 1000,
                   loc: [18, 9, 18, 14],
                   key: "$size",
                 },
@@ -79,16 +79,16 @@ async function Stepper() {
               questionDotToken: false,
               arguments: [
                 {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [18, 21, 18, 37],
                   left: {
-                    kind: "AstScriptCallExpression",
+                    kind: 214,
                     loc: [18, 21, 18, 33],
                     expression: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [18, 21, 18, 31],
                       expression: {
-                        kind: "AstScriptSplice",
+                        kind: 1000,
                         loc: [18, 21, 18, 26],
                         key: "$size",
                       },
@@ -100,7 +100,7 @@ async function Stepper() {
                   },
                   operatorToken: "+",
                   right: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [18, 36, 18, 37],
                     value: 1,
                   },

@@ -14,24 +14,24 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [6, 19, 12, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [7, 3, 7, 22],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [7, 7, 7, 11],
           text: "last",
           bindingKey: "last$21o8qjv656zb3$0",
         },
         initializer: {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [7, 14, 7, 21],
           parameters: [],
           body: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [7, 20, 7, 21],
             value: 0,
           },
@@ -39,87 +39,87 @@ export default cs.create(
         keyword: "let",
       },
       {
-        kind: "AstScriptForStatement",
+        kind: 249,
         loc: [8, 3, 10, 4],
         initializer: {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [8, 8, 8, 17],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [8, 12, 8, 13],
             text: "i",
             bindingKey: "i$21o8qjv656zb3$1",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [8, 16, 8, 17],
             value: 0,
           },
           keyword: "let",
         },
         condition: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [8, 19, 8, 24],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [8, 19, 8, 20],
             text: "i",
             bindingKey: "i$21o8qjv656zb3$1",
           },
           operatorToken: "<",
           right: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [8, 23, 8, 24],
             value: 3,
           },
         },
         incrementor: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [8, 26, 8, 35],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [8, 26, 8, 27],
             text: "i",
             bindingKey: "i$21o8qjv656zb3$1",
           },
           operatorToken: "=",
           right: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [8, 30, 8, 35],
             left: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [8, 30, 8, 31],
               text: "i",
               bindingKey: "i$21o8qjv656zb3$1",
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [8, 34, 8, 35],
               value: 1,
             },
           },
         },
         statement: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [8, 37, 10, 4],
           statements: [
             {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [9, 5, 9, 19],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [9, 5, 9, 9],
                 text: "last",
                 bindingKey: "last$21o8qjv656zb3$0",
               },
               operatorToken: "=",
               right: {
-                kind: "AstScriptArrowFunction",
+                kind: 220,
                 loc: [9, 12, 9, 19],
                 parameters: [],
                 body: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [9, 18, 9, 19],
                   text: "i",
                   bindingKey: "i$21o8qjv656zb3$1",
@@ -130,13 +130,13 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [11, 3, 11, 17],
         expression: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [11, 10, 11, 16],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [11, 10, 11, 14],
             text: "last",
             bindingKey: "last$21o8qjv656zb3$0",

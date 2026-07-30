@@ -11,7 +11,7 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptSplice",
+    kind: 1000,
     loc: [3, 19, 3, 23],
     key: "$0splice0",
   }),

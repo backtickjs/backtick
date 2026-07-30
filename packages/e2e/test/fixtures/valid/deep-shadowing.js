@@ -24,7 +24,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 21, 9, 25],
             text: "base",
             bindingKey: "base$1q50brt6ov79t$0",
@@ -36,30 +36,30 @@ export default cs.create(
     spliceParams: { $0splice0: ["base$1q50brt6ov79t$0"] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [8, 3, 8, 19],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [8, 9, 8, 13],
           text: "base",
           bindingKey: "base$1q50brt6ov79t$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [8, 16, 8, 18],
           value: 10,
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [9, 3, 9, 29],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [9, 10, 9, 28],
           key: "$0splice0",
         },
@@ -80,40 +80,40 @@ function outer(inner) {
       spliceParams: { $0splice0: [] },
     },
     () => ({
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [13, 13, 16, 4],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [14, 5, 14, 20],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [14, 11, 14, 15],
             text: "base",
             bindingKey: "base$1q50brt6ov79t$1",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [14, 18, 14, 19],
             value: 1,
           },
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [15, 5, 15, 36],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [15, 12, 15, 35],
             left: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [15, 12, 15, 16],
               text: "base",
               bindingKey: "base$1q50brt6ov79t$1",
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [15, 19, 15, 35],
               key: "$0splice0",
             },
@@ -136,40 +136,40 @@ function middle(inner) {
       spliceParams: { $inner: [] },
     },
     () => ({
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [20, 13, 23, 4],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [21, 5, 21, 20],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [21, 11, 21, 15],
             text: "base",
             bindingKey: "base$1q50brt6ov79t$2",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [21, 18, 21, 19],
             value: 2,
           },
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [22, 5, 22, 26],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [22, 12, 22, 25],
             left: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [22, 12, 22, 16],
               text: "base",
               bindingKey: "base$1q50brt6ov79t$2",
             },
             operatorToken: "*",
             right: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [22, 19, 22, 25],
               key: "$inner",
             },

@@ -14,14 +14,14 @@ const pick = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [6, 17, 8, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [6, 18, 6, 41],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 18, 6, 19],
           text: "p",
           bindingKey: "p$1k96f1nwptp9k$0",
@@ -29,17 +29,17 @@ const pick = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [6, 46, 8, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [7, 3, 7, 15],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [7, 10, 7, 14],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [7, 10, 7, 11],
               text: "p",
               bindingKey: "p$1k96f1nwptp9k$0",
@@ -64,14 +64,14 @@ const deep = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [10, 17, 12, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [10, 18, 10, 59],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [10, 18, 10, 19],
           text: "o",
           bindingKey: "o$1k96f1nwptp9k$1",
@@ -79,20 +79,20 @@ const deep = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [10, 64, 12, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [11, 3, 11, 22],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [11, 10, 11, 21],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [11, 10, 11, 18],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [11, 10, 11, 11],
                 text: "o",
                 bindingKey: "o$1k96f1nwptp9k$1",
@@ -120,14 +120,14 @@ const shout = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [14, 18, 16, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [14, 19, 14, 35],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [14, 19, 14, 20],
           text: "s",
           bindingKey: "s$1k96f1nwptp9k$2",
@@ -135,20 +135,20 @@ const shout = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [14, 40, 16, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [15, 3, 15, 25],
           expression: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [15, 10, 15, 24],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [15, 10, 15, 19],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [15, 10, 15, 11],
                 text: "s",
                 bindingKey: "s$1k96f1nwptp9k$2",
@@ -159,7 +159,7 @@ const shout = cs.create(
             questionDotToken: false,
             arguments: [
               {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [15, 20, 15, 23],
                 text: "!",
               },
@@ -182,33 +182,33 @@ export default cs.create(
     spliceParams: { $pick: [], $deep: [], $shout: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [18, 20, 26, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [19, 3, 19, 25],
         name: "found",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [19, 10, 19, 25],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [19, 10, 19, 15],
             key: "$pick",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptObjectLiteralExpression",
+              kind: 211,
               loc: [19, 16, 19, 24],
               properties: [
                 {
-                  kind: "AstScriptPropertyAssignment",
+                  kind: 304,
                   loc: [19, 18, 19, 22],
                   name: "x",
                   initializer: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [19, 21, 19, 22],
                     value: 5,
                   },
@@ -219,58 +219,58 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [20, 3, 20, 23],
         name: "missing",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [20, 12, 20, 23],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [20, 12, 20, 17],
             key: "$pick",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [20, 18, 20, 22],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [21, 3, 21, 35],
         name: "deep",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [21, 9, 21, 35],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [21, 9, 21, 14],
             key: "$deep",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptObjectLiteralExpression",
+              kind: 211,
               loc: [21, 15, 21, 34],
               properties: [
                 {
-                  kind: "AstScriptPropertyAssignment",
+                  kind: 304,
                   loc: [21, 17, 21, 32],
                   name: "inner",
                   initializer: {
-                    kind: "AstScriptObjectLiteralExpression",
+                    kind: 211,
                     loc: [21, 24, 21, 32],
                     properties: [
                       {
-                        kind: "AstScriptPropertyAssignment",
+                        kind: 304,
                         loc: [21, 26, 21, 30],
                         name: "z",
                         initializer: {
-                          kind: "AstScriptNumericLiteral",
+                          kind: 9,
                           loc: [21, 29, 21, 30],
                           value: 7,
                         },
@@ -284,29 +284,29 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [22, 3, 22, 30],
         name: "cut",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [22, 8, 22, 30],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [22, 8, 22, 13],
             key: "$deep",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptObjectLiteralExpression",
+              kind: 211,
               loc: [22, 14, 22, 29],
               properties: [
                 {
-                  kind: "AstScriptPropertyAssignment",
+                  kind: 304,
                   loc: [22, 16, 22, 27],
                   name: "inner",
                   initializer: {
-                    kind: "AstScriptNullLiteral",
+                    kind: 106,
                     loc: [22, 23, 22, 27],
                   },
                 },
@@ -316,42 +316,42 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [23, 3, 23, 19],
         name: "top",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [23, 8, 23, 19],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [23, 8, 23, 13],
             key: "$deep",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [23, 14, 23, 18],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [24, 3, 24, 21],
         name: "loud",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [24, 9, 24, 21],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [24, 9, 24, 15],
             key: "$shout",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [24, 16, 24, 20],
               text: "hi",
             },
@@ -359,21 +359,21 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [25, 3, 25, 23],
         name: "silent",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [25, 11, 25, 23],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [25, 11, 25, 17],
             key: "$shout",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [25, 18, 25, 22],
             },
           ],

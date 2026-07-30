@@ -13,11 +13,11 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 19, 5, 46],
     parameters: [],
     body: {
-      kind: "AstScriptSplice",
+      kind: 1000,
       loc: [5, 25, 5, 46],
       key: "$0splice0",
     },

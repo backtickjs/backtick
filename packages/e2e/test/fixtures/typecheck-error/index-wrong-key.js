@@ -16,14 +16,14 @@ export default cs.create(
     spliceParams: { $point: [] },
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [9, 19, 15, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [9, 20, 9, 32],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [9, 20, 9, 24],
           text: "name",
           bindingKey: "name$2h9vfj6qbexsg$0",
@@ -31,34 +31,34 @@ export default cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [9, 37, 15, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [10, 3, 10, 28],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [10, 9, 10, 14],
             text: "coins",
             bindingKey: "coins$2h9vfj6qbexsg$1",
           },
           initializer: {
-            kind: "AstScriptArrayLiteralExpression",
+            kind: 210,
             loc: [10, 17, 10, 27],
             elements: [
               {
-                kind: "AstScriptNumericLiteral",
+                kind: 9,
                 loc: [10, 18, 10, 19],
                 value: 5,
               },
               {
-                kind: "AstScriptNumericLiteral",
+                kind: 9,
                 loc: [10, 21, 10, 23],
                 value: 31,
               },
               {
-                kind: "AstScriptNumericLiteral",
+                kind: 9,
                 loc: [10, 25, 10, 26],
                 value: 7,
               },
@@ -67,25 +67,25 @@ export default cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [11, 3, 11, 28],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [11, 9, 11, 14],
             text: "first",
             bindingKey: "first$2h9vfj6qbexsg$2",
           },
           initializer: {
-            kind: "AstScriptElementAccessExpression",
+            kind: 213,
             loc: [11, 17, 11, 27],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [11, 17, 11, 22],
               text: "coins",
               bindingKey: "coins$2h9vfj6qbexsg$1",
             },
             argumentExpression: {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [11, 23, 11, 26],
               text: "0",
             },
@@ -93,25 +93,25 @@ export default cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [12, 3, 12, 29],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [12, 9, 12, 14],
             text: "wrong",
             bindingKey: "wrong$2h9vfj6qbexsg$3",
           },
           initializer: {
-            kind: "AstScriptElementAccessExpression",
+            kind: 213,
             loc: [12, 17, 12, 28],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [12, 17, 12, 22],
               text: "coins",
               bindingKey: "coins$2h9vfj6qbexsg$1",
             },
             argumentExpression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [12, 23, 12, 27],
               text: "name",
               bindingKey: "name$2h9vfj6qbexsg$0",
@@ -120,24 +120,24 @@ export default cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [13, 3, 13, 30],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [13, 9, 13, 14],
             text: "which",
             bindingKey: "which$2h9vfj6qbexsg$4",
           },
           initializer: {
-            kind: "AstScriptElementAccessExpression",
+            kind: 213,
             loc: [13, 17, 13, 29],
             expression: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [13, 17, 13, 23],
               key: "$point",
             },
             argumentExpression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [13, 24, 13, 28],
               text: "name",
               bindingKey: "name$2h9vfj6qbexsg$0",
@@ -146,23 +146,23 @@ export default cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [14, 3, 14, 32],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [14, 10, 14, 31],
             left: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [14, 10, 14, 23],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [14, 10, 14, 15],
                 text: "first",
                 bindingKey: "first$2h9vfj6qbexsg$2",
               },
               operatorToken: "+",
               right: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [14, 18, 14, 23],
                 text: "wrong",
                 bindingKey: "wrong$2h9vfj6qbexsg$3",
@@ -170,7 +170,7 @@ export default cs.create(
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [14, 26, 14, 31],
               text: "which",
               bindingKey: "which$2h9vfj6qbexsg$4",

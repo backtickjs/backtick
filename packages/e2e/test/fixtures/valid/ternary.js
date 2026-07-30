@@ -13,14 +13,14 @@ const pick = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 17, 7, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [5, 18, 5, 34],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 18, 5, 19],
           text: "n",
           bindingKey: "n$2bgu1tn5wjo9o$0",
@@ -28,47 +28,47 @@ const pick = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [5, 39, 7, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [6, 3, 6, 33],
           expression: {
-            kind: "AstScriptConditionalExpression",
+            kind: 228,
             loc: [6, 10, 6, 32],
             condition: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [6, 10, 6, 20],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [6, 10, 6, 11],
                 text: "n",
                 bindingKey: "n$2bgu1tn5wjo9o$0",
               },
               operatorToken: "===",
               right: {
-                kind: "AstScriptNullLiteral",
+                kind: 106,
                 loc: [6, 16, 6, 20],
               },
             },
             whenTrue: {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [6, 23, 6, 24],
               value: 0,
             },
             whenFalse: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [6, 27, 6, 32],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [6, 27, 6, 28],
                 text: "n",
                 bindingKey: "n$2bgu1tn5wjo9o$0",
               },
               operatorToken: "+",
               right: {
-                kind: "AstScriptNumericLiteral",
+                kind: 9,
                 loc: [6, 31, 6, 32],
                 value: 1,
               },
@@ -91,46 +91,46 @@ export default cs.create(
     spliceParams: { $pick: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [9, 20, 12, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [10, 3, 10, 22],
         name: "absent",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [10, 11, 10, 22],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [10, 11, 10, 16],
             key: "$pick",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [10, 17, 10, 21],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [11, 3, 11, 20],
         name: "present",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [11, 12, 11, 20],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [11, 12, 11, 17],
             key: "$pick",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [11, 18, 11, 19],
               value: 4,
             },

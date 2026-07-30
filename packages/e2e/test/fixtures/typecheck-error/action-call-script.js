@@ -14,24 +14,24 @@ const ping = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [6, 17, 8, 2],
     parameters: [],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [6, 23, 8, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [7, 3, 7, 15],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [7, 9, 7, 10],
             text: "x",
             bindingKey: "x$17wdcvct95tpn$0",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [7, 13, 7, 14],
             value: 1,
           },
@@ -53,10 +53,10 @@ export const called = cs.create(
     spliceParams: { $ping: [] },
   },
   () => ({
-    kind: "AstScriptCallExpression",
+    kind: 214,
     loc: [10, 26, 10, 33],
     expression: {
-      kind: "AstScriptSplice",
+      kind: 1000,
       loc: [10, 26, 10, 31],
       key: "$ping",
     },
@@ -76,20 +76,20 @@ const action = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [12, 19, 14, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [13, 3, 13, 15],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [13, 9, 13, 10],
           text: "x",
           bindingKey: "x$17wdcvct95tpn$1",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [13, 13, 13, 14],
           value: 1,
         },
@@ -110,7 +110,7 @@ export const spliced = cs.create(
     spliceParams: { $action: [] },
   },
   () => ({
-    kind: "AstScriptSplice",
+    kind: 1000,
     loc: [16, 27, 16, 34],
     key: "$action",
   }),

@@ -22,13 +22,13 @@ const Counter = async ({ size }) =>
           spliceParams: { $size: [] },
         },
         () => ({
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [11, 19, 11, 31],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [11, 19, 11, 29],
             expression: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [11, 19, 11, 24],
               key: "$size",
             },

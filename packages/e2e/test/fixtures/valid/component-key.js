@@ -31,7 +31,7 @@ export default _jsxs(View, {
           spliceParams: {},
         },
         () => ({
-          kind: "AstScriptStringLiteral",
+          kind: 11,
           loc: [20, 18, 20, 25],
           text: "third",
         }),

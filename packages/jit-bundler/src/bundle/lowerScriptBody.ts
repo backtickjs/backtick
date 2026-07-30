@@ -1,3 +1,4 @@
+import { SyntaxKind } from "@backtickjs/cs-runtime";
 import type {
   AstScriptBlock,
   AstScriptBody,
@@ -85,7 +86,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
   };
 
   const buildBody = (node: AstScriptBody): BundleBody =>
-    node.kind === "AstScriptBlock" ? buildBlock(node) : buildExpression(node);
+    node.kind === SyntaxKind.Block ? buildBlock(node) : buildExpression(node);
 
   function buildBlock(node: AstScriptBlock): BundleBlockNode {
     const statements = node.statements.map((statement) =>
@@ -102,9 +103,9 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
 
   function buildStatement(node: AstScriptStatement): BundleStatementNode {
     switch (node.kind) {
-      case "AstScriptBlock":
+      case SyntaxKind.Block:
         return buildBlock(node);
-      case "AstScriptIfStatement":
+      case SyntaxKind.IfStatement:
         return {
           "#": NodeKind.IfStatement,
           [NodeField.expression]: buildExpression(node.expression),
@@ -114,13 +115,13 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
               ? null
               : buildStatement(node.elseStatement),
         };
-      case "AstScriptWhileStatement":
+      case SyntaxKind.WhileStatement:
         return {
           "#": NodeKind.WhileStatement,
           [NodeField.expression]: buildExpression(node.expression),
           [NodeField.statement]: buildStatement(node.statement),
         };
-      case "AstScriptForStatement":
+      case SyntaxKind.ForStatement:
         return {
           "#": NodeKind.ForStatement,
           [NodeField.initializer]:
@@ -131,21 +132,21 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
             node.incrementor === null ? null : buildStatement(node.incrementor),
           [NodeField.statement]: buildStatement(node.statement),
         };
-      case "AstScriptBreakStatement":
+      case SyntaxKind.BreakStatement:
         return { "#": NodeKind.BreakStatement };
-      case "AstScriptContinueStatement":
+      case SyntaxKind.ContinueStatement:
         return { "#": NodeKind.ContinueStatement };
-      case "AstScriptReturnStatement":
+      case SyntaxKind.ReturnStatement:
         return {
           "#": NodeKind.ReturnStatement,
           [NodeField.expression]: buildExpression(node.expression),
         };
-      case "AstScriptThrowStatement":
+      case SyntaxKind.ThrowStatement:
         return {
           "#": NodeKind.ThrowStatement,
           [NodeField.expression]: buildExpression(node.expression),
         };
-      case "AstScriptTryStatement": {
+      case SyntaxKind.TryStatement: {
         const clause = node.catchClause;
         return {
           "#": NodeKind.TryStatement,
@@ -160,7 +161,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           },
         };
       }
-      case "AstScriptVariableDeclaration":
+      case SyntaxKind.VariableDeclaration:
         return {
           "#": NodeKind.VariableDeclaration,
           [NodeField.name]: sourceName(node.name.bindingKey),
@@ -177,9 +178,9 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     const e = (child: AstScriptExpression): BundleExpressionNode =>
       buildExpression(child);
     switch (node.kind) {
-      case "AstScriptArrayLiteralExpression":
+      case SyntaxKind.ArrayLiteralExpression:
         return node.elements.map(e);
-      case "AstScriptArrowFunction": {
+      case SyntaxKind.ArrowFunction: {
         const params = node.parameters.map((param) =>
           sourceName(param.name.bindingKey),
         );
@@ -191,11 +192,11 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.body]: buildBody(node.body),
         };
       }
-      case "AstScriptBinaryExpression": {
+      case SyntaxKind.BinaryExpression: {
         if (node.operatorToken === "=") {
           // Only a variable can be assigned to, which the compiler enforces
           // and the wire type states; this is where the two meet.
-          if (node.left.kind !== "AstScriptIdentifier") {
+          if (node.left.kind !== SyntaxKind.Identifier) {
             throw new Error("An assignment target must be an identifier.");
           }
           return {
@@ -215,18 +216,18 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.right]: e(node.right),
         };
       }
-      case "AstScriptConditionalExpression":
+      case SyntaxKind.ConditionalExpression:
         return {
           "#": NodeKind.ConditionalExpression,
           [NodeField.condition]: e(node.condition),
           [NodeField.whenTrue]: e(node.whenTrue),
           [NodeField.whenFalse]: e(node.whenFalse),
         };
-      case "AstScriptTrueLiteral":
+      case SyntaxKind.TrueKeyword:
         return true;
-      case "AstScriptFalseLiteral":
+      case SyntaxKind.FalseKeyword:
         return false;
-      case "AstScriptCallExpression": {
+      case SyntaxKind.CallExpression: {
         // The callee is built before the arguments, because building one can
         // mint a `functions` entry and the labels run in the order they are
         // taken. Binding them here keeps that order explicit.
@@ -241,9 +242,9 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
             : undefined,
         };
       }
-      case "AstScriptIdentifier":
+      case SyntaxKind.Identifier:
         return read(node.bindingKey);
-      case "AstScriptNewExpression": {
+      case SyntaxKind.NewExpression: {
         // Here `new` expands: a spliced class lowers to a function with one
         // hole per constructor parameter (see `lowerSpliceable`), so a
         // construction serializes as an ordinary call of its callee, binding
@@ -256,11 +257,11 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         };
       }
-      case "AstScriptNullLiteral":
+      case SyntaxKind.NullKeyword:
         return null;
-      case "AstScriptNumericLiteral":
+      case SyntaxKind.NumericLiteral:
         return node.value;
-      case "AstScriptObjectLiteralExpression": {
+      case SyntaxKind.ObjectLiteralExpression: {
         // An object literal serializes as the plain object it spells, so `#` —
         // the bundle's one reserved key — would read as a node. Its property
         // assignments are the source's shape, not the wire's: what ships is
@@ -276,7 +277,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         }
         return entries;
       }
-      case "AstScriptPropertyAccessExpression": {
+      case SyntaxKind.PropertyAccessExpression: {
         return {
           "#": NodeKind.PropertyAccessExpression,
           [NodeField.expression]: e(node.expression),
@@ -286,15 +287,15 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
             : undefined,
         };
       }
-      case "AstScriptElementAccessExpression":
+      case SyntaxKind.ElementAccessExpression:
         return {
           "#": NodeKind.ElementAccessExpression,
           [NodeField.expression]: e(node.expression),
           [NodeField.argumentExpression]: e(node.argumentExpression),
         };
-      case "AstScriptSplice":
+      case SyntaxKind.Splice:
         return renderSplice(node.key);
-      case "AstScriptStringLiteral":
+      case SyntaxKind.StringLiteral:
         return node.text;
       default: {
         const unhandled: never = node;

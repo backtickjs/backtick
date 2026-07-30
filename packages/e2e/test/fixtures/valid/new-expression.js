@@ -26,34 +26,34 @@ export default cs.create(
     spliceParams: { $Point: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [22, 19, 25, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [23, 3, 23, 30],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [23, 9, 23, 10],
           text: "p",
           bindingKey: "p$y9r0n74bbbwa$0",
         },
         initializer: {
-          kind: "AstScriptNewExpression",
+          kind: 215,
           loc: [23, 13, 23, 29],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [23, 17, 23, 23],
             key: "$Point",
           },
           arguments: [
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [23, 24, 23, 25],
               value: 1,
             },
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [23, 27, 23, 28],
               value: 2,
             },
@@ -62,16 +62,16 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [24, 3, 24, 20],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [24, 10, 24, 19],
           left: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [24, 10, 24, 13],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [24, 10, 24, 11],
               text: "p",
               bindingKey: "p$y9r0n74bbbwa$0",
@@ -81,10 +81,10 @@ export default cs.create(
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [24, 16, 24, 19],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [24, 16, 24, 17],
               text: "p",
               bindingKey: "p$y9r0n74bbbwa$0",

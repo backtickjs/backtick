@@ -30,11 +30,11 @@ const script = cs.create(
     spliceParams: { $rows: [] },
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [24, 46, 24, 57],
     parameters: [],
     body: {
-      kind: "AstScriptSplice",
+      kind: 1000,
       loc: [24, 52, 24, 57],
       key: "$rows",
     },

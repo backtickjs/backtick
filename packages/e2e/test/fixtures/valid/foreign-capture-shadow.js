@@ -31,17 +31,17 @@ function inner(carried) {
             spliceParams: { $carried: [] },
           },
           () => ({
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [17, 17, 17, 32],
             left: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [17, 17, 17, 21],
               text: "base",
               bindingKey: "base$2dzpugititb9o$0",
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [17, 24, 17, 32],
               key: "$carried",
             },
@@ -52,30 +52,30 @@ function inner(carried) {
       spliceParams: { $0splice0: ["base$2dzpugititb9o$0"] },
     },
     () => ({
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [15, 13, 18, 4],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [16, 5, 16, 22],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [16, 11, 16, 15],
             text: "base",
             bindingKey: "base$2dzpugititb9o$0",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [16, 18, 16, 21],
             value: 100,
           },
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [17, 5, 17, 35],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [17, 12, 17, 34],
             key: "$0splice0",
           },
@@ -105,7 +105,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [23, 21, 23, 25],
             text: "base",
             bindingKey: "base$2dzpugititb9o$1",
@@ -117,30 +117,30 @@ export default cs.create(
     spliceParams: { $0splice0: ["base$2dzpugititb9o$1"] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [21, 19, 24, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [22, 3, 22, 18],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [22, 9, 22, 13],
           text: "base",
           bindingKey: "base$2dzpugititb9o$1",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [22, 16, 22, 17],
           value: 1,
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [23, 3, 23, 29],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [23, 10, 23, 28],
           key: "$0splice0",
         },

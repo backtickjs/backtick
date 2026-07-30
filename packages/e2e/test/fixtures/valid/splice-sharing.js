@@ -12,16 +12,16 @@ function add(lhs, rhs) {
       spliceParams: { $lhs: [], $rhs: [] },
     },
     () => ({
-      kind: "AstScriptBinaryExpression",
+      kind: 227,
       loc: [4, 13, 4, 24],
       left: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [4, 13, 4, 17],
         key: "$lhs",
       },
       operatorToken: "+",
       right: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [4, 20, 4, 24],
         key: "$rhs",
       },
@@ -49,7 +49,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [8, 15, 8, 16],
             value: 1,
           }),
@@ -66,7 +66,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [8, 22, 8, 23],
             value: 2,
           }),
@@ -85,7 +85,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [9, 15, 9, 16],
             value: 3,
           }),
@@ -102,7 +102,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [9, 22, 9, 23],
             value: 4,
           }),
@@ -113,25 +113,25 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [7, 20, 10, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [8, 3, 8, 26],
         name: "x",
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [8, 6, 8, 26],
           key: "$0splice0",
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [9, 3, 9, 26],
         name: "y",
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [9, 6, 9, 26],
           key: "$0splice1",
         },

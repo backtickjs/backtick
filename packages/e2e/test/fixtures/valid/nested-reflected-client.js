@@ -20,20 +20,20 @@ class Point {
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [16, 15, 16, 42],
         parameters: [],
         body: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [16, 21, 16, 42],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [16, 21, 16, 30],
             key: "$0splice0",
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [16, 33, 16, 42],
             key: "$0splice1",
           },
@@ -63,20 +63,20 @@ class Segment {
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [32, 15, 32, 52],
         parameters: [],
         body: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [32, 21, 32, 52],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [32, 21, 32, 35],
             key: "$0splice0",
           },
           operatorToken: "===",
           right: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [32, 40, 32, 52],
             key: "$0splice1",
           },
@@ -99,7 +99,7 @@ const segment = new Segment(
         spliceParams: {},
       },
       () => ({
-        kind: "AstScriptNumericLiteral",
+        kind: 9,
         loc: [36, 42, 36, 43],
         value: 1,
       }),
@@ -116,7 +116,7 @@ const segment = new Segment(
         spliceParams: {},
       },
       () => ({
-        kind: "AstScriptNumericLiteral",
+        kind: 9,
         loc: [36, 49, 36, 50],
         value: 2,
       }),
@@ -135,7 +135,7 @@ const segment = new Segment(
         spliceParams: {},
       },
       () => ({
-        kind: "AstScriptNumericLiteral",
+        kind: 9,
         loc: [36, 67, 36, 68],
         value: 1,
       }),
@@ -152,7 +152,7 @@ const segment = new Segment(
         spliceParams: {},
       },
       () => ({
-        kind: "AstScriptNumericLiteral",
+        kind: 9,
         loc: [36, 74, 36, 75],
         value: 8,
       }),
@@ -171,45 +171,45 @@ export default cs.create(
     spliceParams: { $segment: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [38, 19, 45, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [39, 3, 39, 22],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [39, 9, 39, 10],
           text: "s",
           bindingKey: "s$marvm6ddqnqk$0",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [39, 13, 39, 21],
           key: "$segment",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [40, 3, 40, 34],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [40, 9, 40, 13],
           text: "rise",
           bindingKey: "rise$marvm6ddqnqk$1",
         },
         initializer: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [40, 16, 40, 33],
           left: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [40, 16, 40, 22],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [40, 16, 40, 20],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [40, 16, 40, 17],
                 text: "s",
                 bindingKey: "s$marvm6ddqnqk$0",
@@ -222,13 +222,13 @@ export default cs.create(
           },
           operatorToken: "-",
           right: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [40, 25, 40, 33],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [40, 25, 40, 31],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [40, 25, 40, 26],
                 text: "s",
                 bindingKey: "s$marvm6ddqnqk$0",
@@ -243,16 +243,16 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptIfStatement",
+        kind: 246,
         loc: [41, 3, 43, 4],
         expression: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [41, 7, 41, 19],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [41, 7, 41, 17],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [41, 7, 41, 8],
               text: "s",
               bindingKey: "s$marvm6ddqnqk$0",
@@ -264,14 +264,14 @@ export default cs.create(
           arguments: [],
         },
         thenStatement: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [41, 21, 43, 4],
           statements: [
             {
-              kind: "AstScriptReturnStatement",
+              kind: 254,
               loc: [42, 5, 42, 17],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [42, 12, 42, 16],
                 text: "rise",
                 bindingKey: "rise$marvm6ddqnqk$1",
@@ -282,22 +282,22 @@ export default cs.create(
         elseStatement: null,
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [44, 3, 44, 36],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [44, 10, 44, 35],
           left: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [44, 10, 44, 20],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [44, 10, 44, 18],
               expression: {
-                kind: "AstScriptPropertyAccessExpression",
+                kind: 212,
                 loc: [44, 10, 44, 14],
                 expression: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [44, 10, 44, 11],
                   text: "s",
                   bindingKey: "s$marvm6ddqnqk$0",
@@ -313,16 +313,16 @@ export default cs.create(
           },
           operatorToken: "-",
           right: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [44, 23, 44, 35],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [44, 23, 44, 33],
               expression: {
-                kind: "AstScriptPropertyAccessExpression",
+                kind: 212,
                 loc: [44, 23, 44, 29],
                 expression: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [44, 23, 44, 24],
                   text: "s",
                   bindingKey: "s$marvm6ddqnqk$0",

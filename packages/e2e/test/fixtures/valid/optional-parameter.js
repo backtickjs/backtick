@@ -13,14 +13,14 @@ const greet = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 18, 7, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [5, 19, 5, 32],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 19, 5, 23],
           text: "name",
           bindingKey: "name$hlti23avj5mo$0",
@@ -28,20 +28,20 @@ const greet = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [5, 37, 7, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [6, 3, 6, 28],
           expression: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [6, 10, 6, 27],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [6, 10, 6, 22],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [6, 10, 6, 14],
                 text: "name",
                 bindingKey: "name$hlti23avj5mo$0",
@@ -52,7 +52,7 @@ const greet = cs.create(
             questionDotToken: false,
             arguments: [
               {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [6, 23, 6, 26],
                 text: "!",
               },
@@ -76,11 +76,11 @@ const double = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [10, 19, 10, 26],
     parameters: [],
     body: {
-      kind: "AstScriptNumericLiteral",
+      kind: 9,
       loc: [10, 25, 10, 26],
       value: 2,
     },
@@ -98,14 +98,14 @@ const call = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [12, 17, 14, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [12, 18, 12, 35],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [12, 18, 12, 20],
           text: "cb",
           bindingKey: "cb$hlti23avj5mo$1",
@@ -113,20 +113,20 @@ const call = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [12, 40, 14, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [13, 3, 13, 22],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [13, 10, 13, 21],
             left: {
-              kind: "AstScriptCallExpression",
+              kind: 214,
               loc: [13, 10, 13, 16],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [13, 10, 13, 12],
                 text: "cb",
                 bindingKey: "cb$hlti23avj5mo$1",
@@ -136,7 +136,7 @@ const call = cs.create(
             },
             operatorToken: "??",
             right: {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [13, 20, 13, 21],
               value: 0,
             },
@@ -158,25 +158,25 @@ export default cs.create(
     spliceParams: { $greet: [], $call: [], $double: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [16, 20, 21, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [17, 3, 17, 22],
         name: "named",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [17, 10, 17, 22],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [17, 10, 17, 16],
             key: "$greet",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [17, 17, 17, 21],
               text: "hi",
             },
@@ -184,42 +184,42 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [18, 3, 18, 25],
         name: "explicit",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [18, 13, 18, 25],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [18, 13, 18, 19],
             key: "$greet",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [18, 20, 18, 24],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [19, 3, 19, 27],
         name: "supplied",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [19, 13, 19, 27],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [19, 13, 19, 18],
             key: "$call",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [19, 19, 19, 26],
               key: "$double",
             },
@@ -227,21 +227,21 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [20, 3, 20, 24],
         name: "fallback",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [20, 13, 20, 24],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [20, 13, 20, 18],
             key: "$call",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [20, 19, 20, 23],
             },
           ],

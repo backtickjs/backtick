@@ -31,7 +31,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [19, 28, 19, 30],
             value: 30,
           }),
@@ -48,7 +48,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [19, 36, 19, 39],
             value: 144,
           }),
@@ -65,7 +65,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [19, 45, 19, 48],
             value: 255,
           }),
@@ -76,45 +76,45 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [18, 19, 25, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [19, 3, 19, 52],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [19, 9, 19, 10],
           text: "c",
           bindingKey: "c$3o65fk6h8ba4e$0",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [19, 13, 19, 51],
           key: "$0splice0",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [20, 3, 20, 38],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [20, 9, 20, 19],
           text: "brightness",
           bindingKey: "brightness$3o65fk6h8ba4e$1",
         },
         initializer: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [20, 22, 20, 37],
           left: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [20, 22, 20, 31],
             left: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [20, 22, 20, 25],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [20, 22, 20, 23],
                 text: "c",
                 bindingKey: "c$3o65fk6h8ba4e$0",
@@ -124,10 +124,10 @@ export default cs.create(
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [20, 28, 20, 31],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [20, 28, 20, 29],
                 text: "c",
                 bindingKey: "c$3o65fk6h8ba4e$0",
@@ -138,10 +138,10 @@ export default cs.create(
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [20, 34, 20, 37],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [20, 34, 20, 35],
               text: "c",
               bindingKey: "c$3o65fk6h8ba4e$0",
@@ -153,33 +153,33 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptIfStatement",
+        kind: 246,
         loc: [21, 3, 23, 4],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [21, 7, 21, 23],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [21, 7, 21, 17],
             text: "brightness",
             bindingKey: "brightness$3o65fk6h8ba4e$1",
           },
           operatorToken: ">",
           right: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [21, 20, 21, 23],
             value: 382,
           },
         },
         thenStatement: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [21, 25, 23, 4],
           statements: [
             {
-              kind: "AstScriptReturnStatement",
+              kind: 254,
               loc: [22, 5, 22, 20],
               expression: {
-                kind: "AstScriptStringLiteral",
+                kind: 11,
                 loc: [22, 12, 22, 19],
                 text: "light",
               },
@@ -189,10 +189,10 @@ export default cs.create(
         elseStatement: null,
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [24, 3, 24, 17],
         expression: {
-          kind: "AstScriptStringLiteral",
+          kind: 11,
           loc: [24, 10, 24, 16],
           text: "dark",
         },

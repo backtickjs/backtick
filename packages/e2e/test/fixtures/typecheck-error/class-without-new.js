@@ -24,33 +24,33 @@ export default cs.create(
     spliceParams: { $Point: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [20, 19, 23, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [21, 3, 21, 20],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [21, 9, 21, 10],
           text: "C",
           bindingKey: "C$1n6hvxiblc91f$0",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [21, 13, 21, 19],
           key: "$Point",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [22, 3, 22, 18],
         expression: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [22, 10, 22, 17],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [22, 10, 22, 11],
             text: "C",
             bindingKey: "C$1n6hvxiblc91f$0",
@@ -58,12 +58,12 @@ export default cs.create(
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [22, 12, 22, 13],
               value: 1,
             },
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [22, 15, 22, 16],
               value: 2,
             },

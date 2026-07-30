@@ -15,29 +15,29 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [8, 3, 8, 33],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [8, 9, 8, 14],
           text: "names",
           bindingKey: "names$2hkx7916f6ioy$0",
         },
         initializer: {
-          kind: "AstScriptArrayLiteralExpression",
+          kind: 210,
           loc: [8, 17, 8, 32],
           elements: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [8, 18, 8, 24],
               text: "zero",
             },
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [8, 26, 8, 31],
               text: "one",
             },
@@ -46,19 +46,19 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [9, 3, 9, 19],
         expression: {
-          kind: "AstScriptElementAccessExpression",
+          kind: 213,
           loc: [9, 10, 9, 18],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 10, 9, 15],
             text: "names",
             bindingKey: "names$2hkx7916f6ioy$0",
           },
           argumentExpression: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [9, 16, 9, 17],
             value: 9,
           },

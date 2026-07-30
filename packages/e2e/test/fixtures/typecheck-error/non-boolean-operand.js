@@ -14,24 +14,24 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [6, 19, 8, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [6, 20, 6, 33],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 20, 6, 25],
           text: "count",
           bindingKey: "count$3kpojr67liy8x$0",
         },
       },
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [6, 35, 6, 48],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 35, 6, 39],
           text: "flag",
           bindingKey: "flag$3kpojr67liy8x$1",
@@ -39,27 +39,27 @@ export default cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [6, 53, 8, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [7, 3, 7, 36],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [7, 10, 7, 35],
             left: {
-              kind: "AstScriptBinaryExpression",
+              kind: 227,
               loc: [7, 11, 7, 24],
               left: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [7, 11, 7, 16],
                 text: "count",
                 bindingKey: "count$3kpojr67liy8x$0",
               },
               operatorToken: "&&",
               right: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [7, 20, 7, 24],
                 text: "flag",
                 bindingKey: "flag$3kpojr67liy8x$1",
@@ -67,7 +67,7 @@ export default cs.create(
             },
             operatorToken: "||",
             right: {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [7, 29, 7, 35],
               text: "none",
             },

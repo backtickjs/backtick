@@ -13,14 +13,14 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 19, 11, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [5, 20, 5, 29],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 20, 5, 21],
           text: "n",
           bindingKey: "n$22k8zyijhbub1$0",
@@ -28,20 +28,20 @@ export default cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [5, 34, 11, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [6, 3, 6, 16],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [6, 7, 6, 11],
             text: "left",
             bindingKey: "left$22k8zyijhbub1$1",
           },
           initializer: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [6, 14, 6, 15],
             text: "n",
             bindingKey: "n$22k8zyijhbub1$0",
@@ -49,40 +49,40 @@ export default cs.create(
           keyword: "let",
         },
         {
-          kind: "AstScriptWhileStatement",
+          kind: 248,
           loc: [7, 3, 9, 4],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [7, 10, 7, 14],
             text: "left",
             bindingKey: "left$22k8zyijhbub1$1",
           },
           statement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [7, 16, 9, 4],
             statements: [
               {
-                kind: "AstScriptBinaryExpression",
+                kind: 227,
                 loc: [8, 5, 8, 20],
                 left: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [8, 5, 8, 9],
                   text: "left",
                   bindingKey: "left$22k8zyijhbub1$1",
                 },
                 operatorToken: "=",
                 right: {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [8, 12, 8, 20],
                   left: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [8, 12, 8, 16],
                     text: "left",
                     bindingKey: "left$22k8zyijhbub1$1",
                   },
                   operatorToken: "-",
                   right: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [8, 19, 8, 20],
                     value: 1,
                   },
@@ -92,10 +92,10 @@ export default cs.create(
           },
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [10, 3, 10, 15],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [10, 10, 10, 14],
             text: "left",
             bindingKey: "left$22k8zyijhbub1$1",

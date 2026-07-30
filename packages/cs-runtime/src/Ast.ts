@@ -1,4 +1,5 @@
 import type { SourceLocation } from "./SourceLocation.js";
+import type { SyntaxKind } from "./SyntaxKind.js";
 
 // The syntax of a client script, as the compiler writes it. A `cs` template
 // compiles to a thunk returning one of these, so this is the contract between
@@ -87,20 +88,20 @@ export type AstScriptNode =
   | AstScriptPropertyAssignment;
 
 export interface AstScriptArrayLiteralExpression {
-  readonly kind: "AstScriptArrayLiteralExpression";
+  readonly kind: typeof SyntaxKind.ArrayLiteralExpression;
   readonly loc: SourceLocation;
   readonly elements: readonly AstScriptExpression[];
 }
 
 export interface AstScriptArrowFunction {
-  readonly kind: "AstScriptArrowFunction";
+  readonly kind: typeof SyntaxKind.ArrowFunction;
   readonly loc: SourceLocation;
   readonly parameters: readonly AstScriptParameterDeclaration[];
   readonly body: AstScriptBody;
 }
 
 export interface AstScriptWhileStatement {
-  readonly kind: "AstScriptWhileStatement";
+  readonly kind: typeof SyntaxKind.WhileStatement;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly statement: AstScriptStatement;
@@ -109,7 +110,7 @@ export interface AstScriptWhileStatement {
 // `init` is a declaration or an assignment and `update` an assignment, so both
 // are statements rather than expressions.
 export interface AstScriptForStatement {
-  readonly kind: "AstScriptForStatement";
+  readonly kind: typeof SyntaxKind.ForStatement;
   readonly loc: SourceLocation;
   readonly initializer: AstScriptStatement | null;
   readonly condition: AstScriptExpression | null;
@@ -118,17 +119,17 @@ export interface AstScriptForStatement {
 }
 
 export interface AstScriptBreakStatement {
-  readonly kind: "AstScriptBreakStatement";
+  readonly kind: typeof SyntaxKind.BreakStatement;
   readonly loc: SourceLocation;
 }
 
 export interface AstScriptContinueStatement {
-  readonly kind: "AstScriptContinueStatement";
+  readonly kind: typeof SyntaxKind.ContinueStatement;
   readonly loc: SourceLocation;
 }
 
 export interface AstScriptBinaryExpression {
-  readonly kind: "AstScriptBinaryExpression";
+  readonly kind: typeof SyntaxKind.BinaryExpression;
   readonly loc: SourceLocation;
   readonly left: AstScriptExpression;
   readonly operatorToken: BinaryOperator;
@@ -136,7 +137,7 @@ export interface AstScriptBinaryExpression {
 }
 
 export interface AstScriptConditionalExpression {
-  readonly kind: "AstScriptConditionalExpression";
+  readonly kind: typeof SyntaxKind.ConditionalExpression;
   readonly loc: SourceLocation;
   readonly condition: AstScriptExpression;
   readonly whenTrue: AstScriptExpression;
@@ -144,7 +145,7 @@ export interface AstScriptConditionalExpression {
 }
 
 export interface AstScriptBlock {
-  readonly kind: "AstScriptBlock";
+  readonly kind: typeof SyntaxKind.Block;
   readonly loc: SourceLocation;
   readonly statements: readonly AstScriptStatement[];
 }
@@ -152,17 +153,17 @@ export interface AstScriptBlock {
 // Two kinds rather than one with a value, as ts.TrueLiteral and
 // ts.FalseLiteral are: the kind is the value.
 export interface AstScriptTrueLiteral {
-  readonly kind: "AstScriptTrueLiteral";
+  readonly kind: typeof SyntaxKind.TrueKeyword;
   readonly loc: SourceLocation;
 }
 
 export interface AstScriptFalseLiteral {
-  readonly kind: "AstScriptFalseLiteral";
+  readonly kind: typeof SyntaxKind.FalseKeyword;
   readonly loc: SourceLocation;
 }
 
 export interface AstScriptCallExpression {
-  readonly kind: "AstScriptCallExpression";
+  readonly kind: typeof SyntaxKind.CallExpression;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly questionDotToken: boolean;
@@ -170,14 +171,14 @@ export interface AstScriptCallExpression {
 }
 
 export interface AstScriptIdentifier {
-  readonly kind: "AstScriptIdentifier";
+  readonly kind: typeof SyntaxKind.Identifier;
   readonly loc: SourceLocation;
   readonly text: string;
   readonly bindingKey: string;
 }
 
 export interface AstScriptIfStatement {
-  readonly kind: "AstScriptIfStatement";
+  readonly kind: typeof SyntaxKind.IfStatement;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly thenStatement: AstScriptStatement;
@@ -190,31 +191,31 @@ export interface AstScriptIfStatement {
 // so the bundler expands the construction into a plain call of its callee
 // (see `lowerScriptBody`).
 export interface AstScriptNewExpression {
-  readonly kind: "AstScriptNewExpression";
+  readonly kind: typeof SyntaxKind.NewExpression;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly arguments: readonly AstScriptExpression[];
 }
 
 export interface AstScriptNullLiteral {
-  readonly kind: "AstScriptNullLiteral";
+  readonly kind: typeof SyntaxKind.NullKeyword;
   readonly loc: SourceLocation;
 }
 
 export interface AstScriptNumericLiteral {
-  readonly kind: "AstScriptNumericLiteral";
+  readonly kind: typeof SyntaxKind.NumericLiteral;
   readonly loc: SourceLocation;
   readonly value: number;
 }
 
 export interface AstScriptObjectLiteralExpression {
-  readonly kind: "AstScriptObjectLiteralExpression";
+  readonly kind: typeof SyntaxKind.ObjectLiteralExpression;
   readonly loc: SourceLocation;
   readonly properties: readonly AstScriptPropertyAssignment[];
 }
 
 export interface AstScriptPropertyAccessExpression {
-  readonly kind: "AstScriptPropertyAccessExpression";
+  readonly kind: typeof SyntaxKind.PropertyAccessExpression;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly questionDotToken: boolean;
@@ -224,38 +225,38 @@ export interface AstScriptPropertyAccessExpression {
 // The key is an expression, not a name: `a[i]` and `row[column]` are the point,
 // `row["name"]` only incidentally allowed.
 export interface AstScriptElementAccessExpression {
-  readonly kind: "AstScriptElementAccessExpression";
+  readonly kind: typeof SyntaxKind.ElementAccessExpression;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
   readonly argumentExpression: AstScriptExpression;
 }
 
 export interface AstScriptReturnStatement {
-  readonly kind: "AstScriptReturnStatement";
+  readonly kind: typeof SyntaxKind.ReturnStatement;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
 }
 
 export interface AstScriptSplice {
-  readonly kind: "AstScriptSplice";
+  readonly kind: typeof SyntaxKind.Splice;
   readonly loc: SourceLocation;
   readonly key: string;
 }
 
 export interface AstScriptStringLiteral {
-  readonly kind: "AstScriptStringLiteral";
+  readonly kind: typeof SyntaxKind.StringLiteral;
   readonly loc: SourceLocation;
   readonly text: string;
 }
 
 export interface AstScriptThrowStatement {
-  readonly kind: "AstScriptThrowStatement";
+  readonly kind: typeof SyntaxKind.ThrowStatement;
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
 }
 
 export interface AstScriptTryStatement {
-  readonly kind: "AstScriptTryStatement";
+  readonly kind: typeof SyntaxKind.TryStatement;
   readonly loc: SourceLocation;
   readonly tryBlock: AstScriptBlock;
   readonly catchClause: AstScriptCatchClause;
@@ -265,7 +266,7 @@ export interface AstScriptTryStatement {
 // for a bindingless catch; TypeScript holds a declaration node there, where
 // the name is all this needs.
 export interface AstScriptCatchClause {
-  readonly kind: "AstScriptCatchClause";
+  readonly kind: typeof SyntaxKind.CatchClause;
   readonly loc: SourceLocation;
   readonly variableDeclaration: AstScriptIdentifier | null;
   readonly block: AstScriptBlock;
@@ -274,7 +275,7 @@ export interface AstScriptCatchClause {
 // A parameter is the name it binds: TypeScript's `dotDotDotToken`,
 // `questionToken`, `type` and `initializer` are each rejected here.
 export interface AstScriptParameterDeclaration {
-  readonly kind: "AstScriptParameterDeclaration";
+  readonly kind: typeof SyntaxKind.Parameter;
   readonly loc: SourceLocation;
   readonly name: AstScriptIdentifier;
 }
@@ -282,14 +283,14 @@ export interface AstScriptParameterDeclaration {
 // One `a: 4` of an object literal. A key is always a plain name here, so
 // `name` is that name rather than the `PropertyName` node TypeScript holds.
 export interface AstScriptPropertyAssignment {
-  readonly kind: "AstScriptPropertyAssignment";
+  readonly kind: typeof SyntaxKind.PropertyAssignment;
   readonly loc: SourceLocation;
   readonly name: string;
   readonly initializer: AstScriptExpression;
 }
 
 export interface AstScriptVariableDeclaration {
-  readonly kind: "AstScriptVariableDeclaration";
+  readonly kind: typeof SyntaxKind.VariableDeclaration;
   readonly loc: SourceLocation;
   readonly name: AstScriptIdentifier;
   readonly initializer: AstScriptExpression;

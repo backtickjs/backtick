@@ -14,20 +14,20 @@ const action = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [6, 19, 8, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [7, 3, 7, 15],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [7, 9, 7, 10],
           text: "x",
           bindingKey: "x$8tx5qho0had8$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [7, 13, 7, 14],
           value: 1,
         },
@@ -48,30 +48,30 @@ export const stored = cs.create(
     spliceParams: { $action: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [10, 26, 13, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [11, 3, 11, 28],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [11, 9, 11, 17],
           text: "captured",
           bindingKey: "captured$8tx5qho0had8$1",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [11, 20, 11, 27],
           key: "$action",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [12, 3, 12, 12],
         expression: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [12, 10, 12, 11],
           value: 1,
         },
@@ -91,14 +91,14 @@ export const returned = cs.create(
     spliceParams: { $action: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [15, 28, 17, 2],
     statements: [
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [16, 3, 16, 18],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [16, 10, 16, 17],
           key: "$action",
         },
@@ -118,21 +118,21 @@ export const assigned = cs.create(
     spliceParams: { $action: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [19, 28, 26, 2],
     statements: [
       {
-        kind: "AstScriptTryStatement",
+        kind: 259,
         loc: [20, 3, 25, 4],
         tryBlock: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [20, 7, 22, 4],
           statements: [
             {
-              kind: "AstScriptReturnStatement",
+              kind: 254,
               loc: [21, 5, 21, 14],
               expression: {
-                kind: "AstScriptNumericLiteral",
+                kind: 9,
                 loc: [21, 12, 21, 13],
                 value: 1,
               },
@@ -140,39 +140,39 @@ export const assigned = cs.create(
           ],
         },
         catchClause: {
-          kind: "AstScriptCatchClause",
+          kind: 300,
           loc: [22, 5, 25, 4],
           variableDeclaration: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [22, 12, 22, 13],
             text: "e",
             bindingKey: "e$8tx5qho0had8$2",
           },
           block: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [22, 15, 25, 4],
             statements: [
               {
-                kind: "AstScriptBinaryExpression",
+                kind: 227,
                 loc: [23, 5, 23, 16],
                 left: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [23, 5, 23, 6],
                   text: "e",
                   bindingKey: "e$8tx5qho0had8$2",
                 },
                 operatorToken: "=",
                 right: {
-                  kind: "AstScriptSplice",
+                  kind: 1000,
                   loc: [23, 9, 23, 16],
                   key: "$action",
                 },
               },
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [24, 5, 24, 14],
                 expression: {
-                  kind: "AstScriptNumericLiteral",
+                  kind: 9,
                   loc: [24, 12, 24, 13],
                   value: 2,
                 },

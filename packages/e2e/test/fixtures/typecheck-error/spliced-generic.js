@@ -24,11 +24,11 @@ function wrap(value) {
       spliceParams: { $value: [] },
     },
     () => ({
-      kind: "AstScriptArrowFunction",
+      kind: 220,
       loc: [20, 13, 20, 25],
       parameters: [],
       body: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [20, 19, 20, 25],
         key: "$value",
       },
@@ -57,7 +57,7 @@ export default cs.create(
               spliceParams: {},
             },
             () => ({
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [23, 39, 23, 40],
               value: 7,
             }),
@@ -69,13 +69,13 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptPropertyAccessExpression",
+    kind: 212,
     loc: [23, 19, 23, 48],
     expression: {
-      kind: "AstScriptCallExpression",
+      kind: 214,
       loc: [23, 19, 23, 46],
       expression: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [23, 19, 23, 44],
         key: "$0splice0",
       },

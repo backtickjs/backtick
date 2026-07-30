@@ -25,11 +25,11 @@ const script = cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptArrowFunction",
+            kind: 220,
             loc: [10, 31, 10, 38],
             parameters: [],
             body: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [10, 37, 10, 38],
               text: "x",
               bindingKey: "x$dxmm13j6jyfs$0",
@@ -42,34 +42,34 @@ const script = cs.create(
     spliceParams: { $0splice0: ["x$dxmm13j6jyfs$0"] },
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [8, 46, 11, 2],
     parameters: [],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [8, 52, 11, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [9, 3, 9, 15],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [9, 9, 9, 10],
             text: "x",
             bindingKey: "x$dxmm13j6jyfs$0",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [9, 13, 9, 14],
             value: 1,
           },
           keyword: "const",
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [10, 3, 10, 46],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [10, 10, 10, 45],
             key: "$0splice0",
           },

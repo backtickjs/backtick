@@ -14,18 +14,18 @@ const getValue = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [6, 21, 8, 2],
     parameters: [],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [6, 27, 8, 2],
       statements: [
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [7, 3, 7, 12],
           expression: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [7, 10, 7, 11],
             value: 1,
           },
@@ -46,41 +46,41 @@ const ping = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [10, 17, 13, 2],
     parameters: [],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [10, 23, 13, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [11, 3, 11, 13],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [11, 7, 11, 8],
             text: "n",
             bindingKey: "n$1y1jdbv3pfwln$0",
           },
           initializer: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [11, 11, 11, 12],
             value: 0,
           },
           keyword: "let",
         },
         {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [12, 3, 12, 8],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [12, 3, 12, 4],
             text: "n",
             bindingKey: "n$1y1jdbv3pfwln$0",
           },
           operatorToken: "=",
           right: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [12, 7, 12, 8],
             value: 1,
           },
@@ -101,14 +101,14 @@ const action = cs.create(
     spliceParams: { $ping: [], $getValue: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [15, 19, 18, 2],
     statements: [
       {
-        kind: "AstScriptCallExpression",
+        kind: 214,
         loc: [16, 3, 16, 10],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [16, 3, 16, 8],
           key: "$ping",
         },
@@ -116,10 +116,10 @@ const action = cs.create(
         arguments: [],
       },
       {
-        kind: "AstScriptCallExpression",
+        kind: 214,
         loc: [17, 3, 17, 14],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [17, 3, 17, 12],
           key: "$getValue",
         },

@@ -12,16 +12,16 @@ function add(lhs, rhs) {
       spliceParams: { $lhs: [], $rhs: [] },
     },
     () => ({
-      kind: "AstScriptBinaryExpression",
+      kind: 227,
       loc: [4, 13, 4, 24],
       left: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [4, 13, 4, 17],
         key: "$lhs",
       },
       operatorToken: "+",
       right: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [4, 20, 4, 24],
         key: "$rhs",
       },
@@ -49,7 +49,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [7, 28, 7, 29],
             value: 1,
           }),
@@ -66,7 +66,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [7, 35, 7, 36],
             value: 2,
           }),
@@ -77,7 +77,7 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptSplice",
+    kind: 1000,
     loc: [7, 19, 7, 39],
     key: "$0splice0",
   }),

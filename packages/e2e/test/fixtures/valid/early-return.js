@@ -12,53 +12,53 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [4, 19, 10, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [5, 3, 5, 13],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 7, 5, 8],
           text: "n",
           bindingKey: "n$3slc08eszz0br$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [5, 11, 5, 12],
           value: 0,
         },
         keyword: "let",
       },
       {
-        kind: "AstScriptIfStatement",
+        kind: 246,
         loc: [6, 3, 8, 4],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [6, 7, 6, 14],
           left: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [6, 7, 6, 8],
             text: "n",
             bindingKey: "n$3slc08eszz0br$0",
           },
           operatorToken: "===",
           right: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [6, 13, 6, 14],
             value: 0,
           },
         },
         thenStatement: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [6, 16, 8, 4],
           statements: [
             {
-              kind: "AstScriptReturnStatement",
+              kind: 254,
               loc: [7, 5, 7, 12],
               expression: {
-                kind: "AstScriptNullLiteral",
+                kind: 106,
                 loc: [7, 5, 7, 12],
               },
             },
@@ -67,17 +67,17 @@ export default cs.create(
         elseStatement: null,
       },
       {
-        kind: "AstScriptBinaryExpression",
+        kind: 227,
         loc: [9, 3, 9, 8],
         left: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [9, 3, 9, 4],
           text: "n",
           bindingKey: "n$3slc08eszz0br$0",
         },
         operatorToken: "=",
         right: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [9, 7, 9, 8],
           value: 1,
         },

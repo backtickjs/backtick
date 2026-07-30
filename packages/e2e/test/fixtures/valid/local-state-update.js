@@ -19,13 +19,13 @@ async function Stepper() {
           spliceParams: { $size: [] },
         },
         () => ({
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [10, 29, 10, 41],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [10, 29, 10, 39],
             expression: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [10, 29, 10, 34],
               key: "$size",
             },
@@ -49,21 +49,21 @@ async function Stepper() {
         spliceParams: { $size: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [11, 19, 13, 8],
         parameters: [],
         body: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [11, 25, 13, 8],
           statements: [
             {
-              kind: "AstScriptCallExpression",
+              kind: 214,
               loc: [12, 9, 12, 55],
               expression: {
-                kind: "AstScriptPropertyAccessExpression",
+                kind: 212,
                 loc: [12, 9, 12, 21],
                 expression: {
-                  kind: "AstScriptSplice",
+                  kind: 1000,
                   loc: [12, 9, 12, 14],
                   key: "$size",
                 },
@@ -73,14 +73,14 @@ async function Stepper() {
               questionDotToken: false,
               arguments: [
                 {
-                  kind: "AstScriptArrowFunction",
+                  kind: 220,
                   loc: [12, 22, 12, 54],
                   parameters: [
                     {
-                      kind: "AstScriptParameterDeclaration",
+                      kind: 170,
                       loc: [12, 23, 12, 38],
                       name: {
-                        kind: "AstScriptIdentifier",
+                        kind: 80,
                         loc: [12, 23, 12, 30],
                         text: "current",
                         bindingKey: "current$1rqun2dr71nzq$0",
@@ -88,17 +88,17 @@ async function Stepper() {
                     },
                   ],
                   body: {
-                    kind: "AstScriptBinaryExpression",
+                    kind: 227,
                     loc: [12, 43, 12, 54],
                     left: {
-                      kind: "AstScriptIdentifier",
+                      kind: 80,
                       loc: [12, 43, 12, 50],
                       text: "current",
                       bindingKey: "current$1rqun2dr71nzq$0",
                     },
                     operatorToken: "+",
                     right: {
-                      kind: "AstScriptNumericLiteral",
+                      kind: 9,
                       loc: [12, 53, 12, 54],
                       value: 1,
                     },

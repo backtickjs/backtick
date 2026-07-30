@@ -13,74 +13,74 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [5, 19, 12, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [6, 3, 6, 17],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 7, 6, 12],
           text: "count",
           bindingKey: "count$31t2pc3vo9x5y$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [6, 15, 6, 16],
           value: 0,
         },
         keyword: "let",
       },
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [7, 3, 10, 5],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [7, 9, 7, 13],
           text: "bump",
           bindingKey: "bump$31t2pc3vo9x5y$1",
         },
         initializer: {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [7, 16, 10, 4],
           parameters: [],
           body: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [7, 22, 10, 4],
             statements: [
               {
-                kind: "AstScriptBinaryExpression",
+                kind: 227,
                 loc: [8, 5, 8, 22],
                 left: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [8, 5, 8, 10],
                   text: "count",
                   bindingKey: "count$31t2pc3vo9x5y$0",
                 },
                 operatorToken: "=",
                 right: {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [8, 13, 8, 22],
                   left: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [8, 13, 8, 18],
                     text: "count",
                     bindingKey: "count$31t2pc3vo9x5y$0",
                   },
                   operatorToken: "+",
                   right: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [8, 21, 8, 22],
                     value: 1,
                   },
                 },
               },
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [9, 5, 9, 18],
                 expression: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [9, 12, 9, 17],
                   text: "count",
                   bindingKey: "count$31t2pc3vo9x5y$0",
@@ -92,16 +92,16 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [11, 3, 11, 26],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [11, 10, 11, 25],
           left: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [11, 10, 11, 16],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [11, 10, 11, 14],
               text: "bump",
               bindingKey: "bump$31t2pc3vo9x5y$1",
@@ -111,10 +111,10 @@ export default cs.create(
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [11, 19, 11, 25],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [11, 19, 11, 23],
               text: "bump",
               bindingKey: "bump$31t2pc3vo9x5y$1",

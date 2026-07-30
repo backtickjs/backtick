@@ -16,20 +16,20 @@ function sum(a, b) {
       spliceParams: { $a: [], $b: [] },
     },
     () => ({
-      kind: "AstScriptArrowFunction",
+      kind: 220,
       loc: [9, 13, 9, 26],
       parameters: [],
       body: {
-        kind: "AstScriptBinaryExpression",
+        kind: 227,
         loc: [9, 19, 9, 26],
         left: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [9, 19, 9, 21],
           key: "$a",
         },
         operatorToken: "+",
         right: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [9, 24, 9, 26],
           key: "$b",
         },
@@ -73,34 +73,34 @@ export default cs.create(
     spliceParams: { $Point: [], $Size: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [44, 19, 48, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [45, 3, 45, 30],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [45, 9, 45, 10],
           text: "p",
           bindingKey: "p$2kc5czyfqafly$0",
         },
         initializer: {
-          kind: "AstScriptNewExpression",
+          kind: 215,
           loc: [45, 13, 45, 29],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [45, 17, 45, 23],
             key: "$Point",
           },
           arguments: [
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [45, 24, 45, 25],
               value: 1,
             },
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [45, 27, 45, 28],
               value: 2,
             },
@@ -109,30 +109,30 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [46, 3, 46, 29],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [46, 9, 46, 10],
           text: "s",
           bindingKey: "s$2kc5czyfqafly$1",
         },
         initializer: {
-          kind: "AstScriptNewExpression",
+          kind: 215,
           loc: [46, 13, 46, 28],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [46, 17, 46, 22],
             key: "$Size",
           },
           arguments: [
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [46, 23, 46, 24],
               value: 3,
             },
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [46, 26, 46, 27],
               value: 4,
             },
@@ -141,19 +141,19 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [47, 3, 47, 28],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [47, 10, 47, 27],
           left: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [47, 10, 47, 17],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [47, 10, 47, 15],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [47, 10, 47, 11],
                 text: "p",
                 bindingKey: "p$2kc5czyfqafly$0",
@@ -166,13 +166,13 @@ export default cs.create(
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [47, 20, 47, 27],
             expression: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [47, 20, 47, 25],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [47, 20, 47, 21],
                 text: "s",
                 bindingKey: "s$2kc5czyfqafly$1",

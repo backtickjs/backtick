@@ -23,20 +23,20 @@ class Color {
         spliceParams: { $0splice0: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [19, 15, 19, 34],
         parameters: [],
         body: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [19, 21, 19, 34],
           left: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [19, 21, 19, 30],
             key: "$0splice0",
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [19, 33, 19, 34],
             value: 2,
           },
@@ -66,7 +66,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptNumericLiteral",
+            kind: 9,
             loc: [25, 30, 25, 31],
             value: 7,
           }),
@@ -78,27 +78,27 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [23, 19, 26, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [24, 3, 24, 38],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [24, 9, 24, 13],
           text: "pick",
           bindingKey: "pick$22eb8gy7ghfko$0",
         },
         initializer: {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [24, 16, 24, 37],
           parameters: [
             {
-              kind: "AstScriptParameterDeclaration",
+              kind: 170,
               loc: [24, 17, 24, 25],
               name: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [24, 17, 24, 18],
                 text: "c",
                 bindingKey: "c$22eb8gy7ghfko$1",
@@ -106,13 +106,13 @@ export default cs.create(
             },
           ],
           body: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [24, 30, 24, 37],
             left: {
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [24, 30, 24, 33],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [24, 30, 24, 31],
                 text: "c",
                 bindingKey: "c$22eb8gy7ghfko$1",
@@ -122,7 +122,7 @@ export default cs.create(
             },
             operatorToken: "+",
             right: {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [24, 36, 24, 37],
               value: 1,
             },
@@ -131,13 +131,13 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [25, 3, 25, 44],
         expression: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [25, 10, 25, 43],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [25, 10, 25, 14],
             text: "pick",
             bindingKey: "pick$22eb8gy7ghfko$0",
@@ -145,7 +145,7 @@ export default cs.create(
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [25, 15, 25, 42],
               key: "$0splice0",
             },

@@ -16,11 +16,11 @@ function make(n) {
       spliceParams: { $n: [] },
     },
     () => ({
-      kind: "AstScriptArrowFunction",
+      kind: 220,
       loc: [7, 13, 7, 21],
       parameters: [],
       body: {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [7, 19, 7, 21],
         key: "$n",
       },

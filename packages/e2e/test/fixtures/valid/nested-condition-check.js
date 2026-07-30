@@ -17,24 +17,24 @@ const gate = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [9, 61, 18, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [10, 3, 10, 13],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [10, 3, 10, 4],
           text: "a",
           bindingKey: "a$2nymys98gllff$0",
         },
       },
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [11, 3, 11, 13],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [11, 3, 11, 4],
           text: "b",
           bindingKey: "b$2nymys98gllff$1",
@@ -42,27 +42,27 @@ const gate = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [12, 6, 18, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [13, 3, 13, 36],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [13, 9, 13, 13],
             text: "keep",
             bindingKey: "keep$2nymys98gllff$2",
           },
           initializer: {
-            kind: "AstScriptArrowFunction",
+            kind: 220,
             loc: [13, 16, 13, 35],
             parameters: [
               {
-                kind: "AstScriptParameterDeclaration",
+                kind: 170,
                 loc: [13, 17, 13, 28],
                 name: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [13, 17, 13, 19],
                   text: "on",
                   bindingKey: "on$2nymys98gllff$3",
@@ -70,7 +70,7 @@ const gate = cs.create(
               },
             ],
             body: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [13, 33, 13, 35],
               text: "on",
               bindingKey: "on$2nymys98gllff$3",
@@ -79,13 +79,13 @@ const gate = cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptIfStatement",
+          kind: 246,
           loc: [14, 3, 16, 4],
           expression: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [14, 7, 14, 19],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [14, 7, 14, 11],
               text: "keep",
               bindingKey: "keep$2nymys98gllff$2",
@@ -93,17 +93,17 @@ const gate = cs.create(
             questionDotToken: false,
             arguments: [
               {
-                kind: "AstScriptBinaryExpression",
+                kind: 227,
                 loc: [14, 12, 14, 18],
                 left: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [14, 12, 14, 13],
                   text: "a",
                   bindingKey: "a$2nymys98gllff$0",
                 },
                 operatorToken: "&&",
                 right: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [14, 17, 14, 18],
                   text: "b",
                   bindingKey: "b$2nymys98gllff$1",
@@ -112,14 +112,14 @@ const gate = cs.create(
             ],
           },
           thenStatement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [14, 21, 16, 4],
             statements: [
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [15, 5, 15, 19],
                 expression: {
-                  kind: "AstScriptStringLiteral",
+                  kind: 11,
                   loc: [15, 12, 15, 18],
                   text: "kept",
                 },
@@ -129,10 +129,10 @@ const gate = cs.create(
           elseStatement: null,
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [17, 3, 17, 20],
           expression: {
-            kind: "AstScriptStringLiteral",
+            kind: 11,
             loc: [17, 10, 17, 19],
             text: "dropped",
           },
@@ -153,54 +153,54 @@ export default cs.create(
     spliceParams: { $gate: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [20, 20, 23, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [21, 3, 21, 26],
         name: "both",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [21, 9, 21, 26],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [21, 9, 21, 14],
             key: "$gate",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptTrueLiteral",
+              kind: 112,
               loc: [21, 15, 21, 19],
             },
             {
-              kind: "AstScriptTrueLiteral",
+              kind: 112,
               loc: [21, 21, 21, 25],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [22, 3, 22, 26],
         name: "one",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [22, 8, 22, 26],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [22, 8, 22, 13],
             key: "$gate",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptTrueLiteral",
+              kind: 112,
               loc: [22, 14, 22, 18],
             },
             {
-              kind: "AstScriptFalseLiteral",
+              kind: 97,
               loc: [22, 20, 22, 25],
             },
           ],

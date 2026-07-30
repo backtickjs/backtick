@@ -20,13 +20,13 @@ async function Counter() {
           spliceParams: { $size: [] },
         },
         () => ({
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [11, 29, 11, 41],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [11, 29, 11, 39],
             expression: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [11, 29, 11, 34],
               key: "$size",
             },
@@ -50,21 +50,21 @@ async function Counter() {
         spliceParams: { $size: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [12, 19, 14, 8],
         parameters: [],
         body: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [12, 25, 14, 8],
           statements: [
             {
-              kind: "AstScriptCallExpression",
+              kind: 214,
               loc: [13, 9, 13, 38],
               expression: {
-                kind: "AstScriptPropertyAccessExpression",
+                kind: 212,
                 loc: [13, 9, 13, 20],
                 expression: {
-                  kind: "AstScriptSplice",
+                  kind: 1000,
                   loc: [13, 9, 13, 14],
                   key: "$size",
                 },
@@ -74,16 +74,16 @@ async function Counter() {
               questionDotToken: false,
               arguments: [
                 {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [13, 21, 13, 37],
                   left: {
-                    kind: "AstScriptCallExpression",
+                    kind: 214,
                     loc: [13, 21, 13, 33],
                     expression: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [13, 21, 13, 31],
                       expression: {
-                        kind: "AstScriptSplice",
+                        kind: 1000,
                         loc: [13, 21, 13, 26],
                         key: "$size",
                       },
@@ -95,7 +95,7 @@ async function Counter() {
                   },
                   operatorToken: "+",
                   right: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [13, 36, 13, 37],
                     value: 1,
                   },

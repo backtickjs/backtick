@@ -18,14 +18,14 @@ export default cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [10, 19, 16, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [10, 20, 10, 33],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [10, 20, 10, 25],
           text: "count",
           bindingKey: "count$1yqqpc9g2l4nh$0",
@@ -33,27 +33,27 @@ export default cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [10, 38, 16, 2],
       statements: [
         {
-          kind: "AstScriptVariableDeclaration",
+          kind: 261,
           loc: [11, 3, 11, 36],
           name: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [11, 9, 11, 13],
             text: "keep",
             bindingKey: "keep$1yqqpc9g2l4nh$1",
           },
           initializer: {
-            kind: "AstScriptArrowFunction",
+            kind: 220,
             loc: [11, 16, 11, 35],
             parameters: [
               {
-                kind: "AstScriptParameterDeclaration",
+                kind: 170,
                 loc: [11, 17, 11, 28],
                 name: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [11, 17, 11, 19],
                   text: "on",
                   bindingKey: "on$1yqqpc9g2l4nh$2",
@@ -61,7 +61,7 @@ export default cs.create(
               },
             ],
             body: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [11, 33, 11, 35],
               text: "on",
               bindingKey: "on$1yqqpc9g2l4nh$2",
@@ -70,13 +70,13 @@ export default cs.create(
           keyword: "const",
         },
         {
-          kind: "AstScriptIfStatement",
+          kind: 246,
           loc: [12, 3, 14, 4],
           expression: {
-            kind: "AstScriptCallExpression",
+            kind: 214,
             loc: [12, 7, 12, 31],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [12, 7, 12, 11],
               text: "keep",
               bindingKey: "keep$1yqqpc9g2l4nh$1",
@@ -84,27 +84,27 @@ export default cs.create(
             questionDotToken: false,
             arguments: [
               {
-                kind: "AstScriptBinaryExpression",
+                kind: 227,
                 loc: [12, 12, 12, 30],
                 left: {
-                  kind: "AstScriptIdentifier",
+                  kind: 80,
                   loc: [12, 12, 12, 17],
                   text: "count",
                   bindingKey: "count$1yqqpc9g2l4nh$0",
                 },
                 operatorToken: "&&",
                 right: {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [12, 21, 12, 30],
                   left: {
-                    kind: "AstScriptIdentifier",
+                    kind: 80,
                     loc: [12, 21, 12, 26],
                     text: "count",
                     bindingKey: "count$1yqqpc9g2l4nh$0",
                   },
                   operatorToken: ">",
                   right: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [12, 29, 12, 30],
                     value: 0,
                   },
@@ -113,14 +113,14 @@ export default cs.create(
             ],
           },
           thenStatement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [12, 33, 14, 4],
             statements: [
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [13, 5, 13, 19],
                 expression: {
-                  kind: "AstScriptStringLiteral",
+                  kind: 11,
                   loc: [13, 12, 13, 18],
                   text: "kept",
                 },
@@ -130,10 +130,10 @@ export default cs.create(
           elseStatement: null,
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [15, 3, 15, 20],
           expression: {
-            kind: "AstScriptStringLiteral",
+            kind: 11,
             loc: [15, 10, 15, 19],
             text: "dropped",
           },

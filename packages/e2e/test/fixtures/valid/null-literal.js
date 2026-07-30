@@ -13,14 +13,14 @@ const orDash = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptArrowFunction",
+    kind: 220,
     loc: [5, 61, 12, 2],
     parameters: [
       {
-        kind: "AstScriptParameterDeclaration",
+        kind: 170,
         loc: [6, 3, 6, 23],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [6, 3, 6, 8],
           text: "value",
           bindingKey: "value$2albtvza6nmmn$0",
@@ -28,36 +28,36 @@ const orDash = cs.create(
       },
     ],
     body: {
-      kind: "AstScriptBlock",
+      kind: 242,
       loc: [7, 6, 12, 2],
       statements: [
         {
-          kind: "AstScriptIfStatement",
+          kind: 246,
           loc: [8, 3, 10, 4],
           expression: {
-            kind: "AstScriptBinaryExpression",
+            kind: 227,
             loc: [8, 7, 8, 21],
             left: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [8, 7, 8, 12],
               text: "value",
               bindingKey: "value$2albtvza6nmmn$0",
             },
             operatorToken: "===",
             right: {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [8, 17, 8, 21],
             },
           },
           thenStatement: {
-            kind: "AstScriptBlock",
+            kind: 242,
             loc: [8, 23, 10, 4],
             statements: [
               {
-                kind: "AstScriptReturnStatement",
+                kind: 254,
                 loc: [9, 5, 9, 16],
                 expression: {
-                  kind: "AstScriptStringLiteral",
+                  kind: 11,
                   loc: [9, 12, 9, 15],
                   text: "-",
                 },
@@ -67,10 +67,10 @@ const orDash = cs.create(
           elseStatement: null,
         },
         {
-          kind: "AstScriptReturnStatement",
+          kind: 254,
           loc: [11, 3, 11, 16],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [11, 10, 11, 15],
             text: "value",
             bindingKey: "value$2albtvza6nmmn$0",
@@ -92,46 +92,46 @@ export default cs.create(
     spliceParams: { $orDash: [] },
   },
   () => ({
-    kind: "AstScriptObjectLiteralExpression",
+    kind: 211,
     loc: [14, 20, 18, 2],
     properties: [
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [15, 3, 15, 25],
         name: "missing",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [15, 12, 15, 25],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [15, 12, 15, 19],
             key: "$orDash",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptNullLiteral",
+              kind: 106,
               loc: [15, 20, 15, 24],
             },
           ],
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [16, 3, 16, 25],
         name: "present",
         initializer: {
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [16, 12, 16, 25],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [16, 12, 16, 19],
             key: "$orDash",
           },
           questionDotToken: false,
           arguments: [
             {
-              kind: "AstScriptStringLiteral",
+              kind: 11,
               loc: [16, 20, 16, 24],
               text: "hi",
             },
@@ -139,11 +139,11 @@ export default cs.create(
         },
       },
       {
-        kind: "AstScriptPropertyAssignment",
+        kind: 304,
         loc: [17, 3, 17, 13],
         name: "bare",
         initializer: {
-          kind: "AstScriptNullLiteral",
+          kind: 106,
           loc: [17, 9, 17, 13],
         },
       },

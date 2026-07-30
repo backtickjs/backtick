@@ -27,7 +27,8 @@ export { type Instance, withInstance } from "./Instance.js";
 export { state, type State } from "./state.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";
-export type * from "./Ast.js";
+export * from "./Ast.js";
+export { SyntaxKind } from "./SyntaxKind.js";
 export {
   type ClientElement,
   createClientElement,

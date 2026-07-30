@@ -20,20 +20,20 @@ const action = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [16, 19, 18, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [17, 3, 17, 15],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [17, 9, 17, 10],
           text: "x",
           bindingKey: "x$t3cg066e2mwt$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [17, 13, 17, 14],
           value: 1,
         },
@@ -54,29 +54,29 @@ export const held = cs.create(
     spliceParams: { $Holder: [], $action: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [20, 24, 23, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [21, 3, 21, 34],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [21, 9, 21, 10],
           text: "h",
           bindingKey: "h$t3cg066e2mwt$1",
         },
         initializer: {
-          kind: "AstScriptNewExpression",
+          kind: 215,
           loc: [21, 13, 21, 33],
           expression: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [21, 17, 21, 24],
             key: "$Holder",
           },
           arguments: [
             {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [21, 25, 21, 32],
               key: "$action",
             },
@@ -85,10 +85,10 @@ export const held = cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [22, 3, 22, 12],
         expression: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [22, 10, 22, 11],
           value: 1,
         },

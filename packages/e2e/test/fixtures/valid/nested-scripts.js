@@ -19,7 +19,7 @@ export default cs.create(
           spliceParams: {},
         },
         () => ({
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [5, 15, 5, 16],
           text: "x",
           bindingKey: "x$3d1j5mxf94bs6$0",
@@ -30,30 +30,30 @@ export default cs.create(
     spliceParams: { $0splice0: ["x$3d1j5mxf94bs6$0"] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [3, 19, 6, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [4, 3, 4, 15],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [4, 9, 4, 10],
           text: "x",
           bindingKey: "x$3d1j5mxf94bs6$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [4, 13, 4, 14],
           value: 0,
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [5, 3, 5, 19],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [5, 10, 5, 18],
           key: "$0splice0",
         },

@@ -20,13 +20,13 @@ const Counter = async ({ size }) =>
           spliceParams: { $size: [] },
         },
         () => ({
-          kind: "AstScriptCallExpression",
+          kind: 214,
           loc: [11, 27, 11, 39],
           expression: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [11, 27, 11, 37],
             expression: {
-              kind: "AstScriptSplice",
+              kind: 1000,
               loc: [11, 27, 11, 32],
               key: "$size",
             },
@@ -50,21 +50,21 @@ const Counter = async ({ size }) =>
         spliceParams: { $size: [] },
       },
       () => ({
-        kind: "AstScriptArrowFunction",
+        kind: 220,
         loc: [12, 17, 14, 6],
         parameters: [],
         body: {
-          kind: "AstScriptBlock",
+          kind: 242,
           loc: [12, 23, 14, 6],
           statements: [
             {
-              kind: "AstScriptCallExpression",
+              kind: 214,
               loc: [13, 7, 13, 36],
               expression: {
-                kind: "AstScriptPropertyAccessExpression",
+                kind: 212,
                 loc: [13, 7, 13, 18],
                 expression: {
-                  kind: "AstScriptSplice",
+                  kind: 1000,
                   loc: [13, 7, 13, 12],
                   key: "$size",
                 },
@@ -74,16 +74,16 @@ const Counter = async ({ size }) =>
               questionDotToken: false,
               arguments: [
                 {
-                  kind: "AstScriptBinaryExpression",
+                  kind: 227,
                   loc: [13, 19, 13, 35],
                   left: {
-                    kind: "AstScriptCallExpression",
+                    kind: 214,
                     loc: [13, 19, 13, 31],
                     expression: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [13, 19, 13, 29],
                       expression: {
-                        kind: "AstScriptSplice",
+                        kind: 1000,
                         loc: [13, 19, 13, 24],
                         key: "$size",
                       },
@@ -95,7 +95,7 @@ const Counter = async ({ size }) =>
                   },
                   operatorToken: "+",
                   right: {
-                    kind: "AstScriptNumericLiteral",
+                    kind: 9,
                     loc: [13, 34, 13, 35],
                     value: 1,
                   },

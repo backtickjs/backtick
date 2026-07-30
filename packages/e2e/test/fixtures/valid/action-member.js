@@ -22,20 +22,20 @@ const press = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [18, 18, 20, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [19, 3, 19, 15],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [19, 9, 19, 10],
           text: "x",
           bindingKey: "x$1w48eutzbucnb$0",
         },
         initializer: {
-          kind: "AstScriptNumericLiteral",
+          kind: 9,
           loc: [19, 13, 19, 14],
           value: 1,
         },
@@ -65,7 +65,7 @@ export default cs.create(
             spliceParams: {},
           },
           () => ({
-            kind: "AstScriptStringLiteral",
+            kind: 11,
             loc: [23, 34, 23, 38],
             text: "OK",
           }),
@@ -77,33 +77,33 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [22, 19, 25, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [23, 3, 23, 49],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [23, 9, 23, 15],
           text: "button",
           bindingKey: "button$1w48eutzbucnb$1",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [23, 18, 23, 48],
           key: "$0splice0",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [24, 3, 24, 23],
         expression: {
-          kind: "AstScriptPropertyAccessExpression",
+          kind: 212,
           loc: [24, 10, 24, 22],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [24, 10, 24, 16],
             text: "button",
             bindingKey: "button$1w48eutzbucnb$1",

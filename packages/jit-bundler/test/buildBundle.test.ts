@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { SyntaxKind } from "@backtickjs/cs-runtime";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
 import type { Ir, IrScriptEntry } from "../dist/ir/Ir.js";
 
@@ -11,7 +12,7 @@ const entry: IrScriptEntry = {
   splices: [],
   captures: [],
   spliceParams: {},
-  body: { kind: "AstScriptNumericLiteral", loc: [3, 7, 3, 8], value: 1 },
+  body: { kind: SyntaxKind.NumericLiteral, loc: [3, 7, 3, 8], value: 1 },
 };
 
 const ir: Ir = {

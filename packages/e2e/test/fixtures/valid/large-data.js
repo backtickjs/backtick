@@ -44,22 +44,22 @@ export default _jsx(View, {
                       spliceParams: {},
                     },
                     () => ({
-                      kind: "AstScriptBinaryExpression",
+                      kind: 227,
                       loc: [28, 25, 28, 71],
                       left: {
-                        kind: "AstScriptBinaryExpression",
+                        kind: 227,
                         loc: [28, 25, 28, 62],
                         left: {
-                          kind: "AstScriptStringLiteral",
+                          kind: 11,
                           loc: [28, 25, 28, 51],
                           text: "https://img.example.com/",
                         },
                         operatorToken: "+",
                         right: {
-                          kind: "AstScriptPropertyAccessExpression",
+                          kind: 212,
                           loc: [28, 54, 28, 62],
                           expression: {
-                            kind: "AstScriptIdentifier",
+                            kind: 80,
                             loc: [28, 54, 28, 59],
                             text: "order",
                             bindingKey: "order$kpf5b5091dr1$0",
@@ -70,7 +70,7 @@ export default _jsx(View, {
                       },
                       operatorToken: "+",
                       right: {
-                        kind: "AstScriptStringLiteral",
+                        kind: 11,
                         loc: [28, 65, 28, 71],
                         text: ".png",
                       },
@@ -91,13 +91,13 @@ export default _jsx(View, {
                     spliceParams: {},
                   },
                   () => ({
-                    kind: "AstScriptPropertyAccessExpression",
+                    kind: 212,
                     loc: [31, 23, 31, 42],
                     expression: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [31, 23, 31, 37],
                       expression: {
-                        kind: "AstScriptIdentifier",
+                        kind: 80,
                         loc: [31, 23, 31, 28],
                         text: "order",
                         bindingKey: "order$kpf5b5091dr1$0",
@@ -123,13 +123,13 @@ export default _jsx(View, {
                     spliceParams: {},
                   },
                   () => ({
-                    kind: "AstScriptPropertyAccessExpression",
+                    kind: 212,
                     loc: [32, 23, 32, 42],
                     expression: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [32, 23, 32, 37],
                       expression: {
-                        kind: "AstScriptIdentifier",
+                        kind: 80,
                         loc: [32, 23, 32, 28],
                         text: "order",
                         bindingKey: "order$kpf5b5091dr1$0",
@@ -165,16 +165,16 @@ export default _jsx(View, {
                             spliceParams: {},
                           },
                           () => ({
-                            kind: "AstScriptBinaryExpression",
+                            kind: 227,
                             loc: [37, 25, 37, 51],
                             left: {
-                              kind: "AstScriptBinaryExpression",
+                              kind: 227,
                               loc: [37, 25, 37, 40],
                               left: {
-                                kind: "AstScriptPropertyAccessExpression",
+                                kind: 212,
                                 loc: [37, 25, 37, 33],
                                 expression: {
-                                  kind: "AstScriptIdentifier",
+                                  kind: 80,
                                   loc: [37, 25, 37, 29],
                                   text: "item",
                                   bindingKey: "item$kpf5b5091dr1$1",
@@ -184,17 +184,17 @@ export default _jsx(View, {
                               },
                               operatorToken: "+",
                               right: {
-                                kind: "AstScriptStringLiteral",
+                                kind: 11,
                                 loc: [37, 36, 37, 40],
                                 text: " x",
                               },
                             },
                             operatorToken: "+",
                             right: {
-                              kind: "AstScriptPropertyAccessExpression",
+                              kind: 212,
                               loc: [37, 43, 37, 51],
                               expression: {
-                                kind: "AstScriptIdentifier",
+                                kind: 80,
                                 loc: [37, 43, 37, 47],
                                 text: "item",
                                 bindingKey: "item$kpf5b5091dr1$1",
@@ -217,10 +217,10 @@ export default _jsx(View, {
                           spliceParams: {},
                         },
                         () => ({
-                          kind: "AstScriptPropertyAccessExpression",
+                          kind: 212,
                           loc: [36, 33, 36, 41],
                           expression: {
-                            kind: "AstScriptIdentifier",
+                            kind: 80,
                             loc: [36, 33, 36, 37],
                             text: "item",
                             bindingKey: "item$kpf5b5091dr1$1",
@@ -235,16 +235,16 @@ export default _jsx(View, {
                   spliceParams: { $0splice0: ["item$kpf5b5091dr1$1"] },
                 },
                 () => ({
-                  kind: "AstScriptCallExpression",
+                  kind: 214,
                   loc: [33, 17, 40, 14],
                   expression: {
-                    kind: "AstScriptPropertyAccessExpression",
+                    kind: 212,
                     loc: [33, 17, 33, 32],
                     expression: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [33, 17, 33, 28],
                       expression: {
-                        kind: "AstScriptIdentifier",
+                        kind: 80,
                         loc: [33, 17, 33, 22],
                         text: "order",
                         bindingKey: "order$kpf5b5091dr1$0",
@@ -258,14 +258,14 @@ export default _jsx(View, {
                   questionDotToken: false,
                   arguments: [
                     {
-                      kind: "AstScriptArrowFunction",
+                      kind: 220,
                       loc: [34, 15, 39, 19],
                       parameters: [
                         {
-                          kind: "AstScriptParameterDeclaration",
+                          kind: 170,
                           loc: [34, 16, 34, 20],
                           name: {
-                            kind: "AstScriptIdentifier",
+                            kind: 80,
                             loc: [34, 16, 34, 20],
                             text: "item",
                             bindingKey: "item$kpf5b5091dr1$1",
@@ -273,7 +273,7 @@ export default _jsx(View, {
                         },
                       ],
                       body: {
-                        kind: "AstScriptSplice",
+                        kind: 1000,
                         loc: [35, 17, 39, 19],
                         key: "$0splice0",
                       },
@@ -294,19 +294,19 @@ export default _jsx(View, {
                     spliceParams: {},
                   },
                   () => ({
-                    kind: "AstScriptBinaryExpression",
+                    kind: 227,
                     loc: [41, 23, 41, 40],
                     left: {
-                      kind: "AstScriptStringLiteral",
+                      kind: 11,
                       loc: [41, 23, 41, 26],
                       text: "$",
                     },
                     operatorToken: "+",
                     right: {
-                      kind: "AstScriptPropertyAccessExpression",
+                      kind: 212,
                       loc: [41, 29, 41, 40],
                       expression: {
-                        kind: "AstScriptIdentifier",
+                        kind: 80,
                         loc: [41, 29, 41, 34],
                         text: "order",
                         bindingKey: "order$kpf5b5091dr1$0",
@@ -331,10 +331,10 @@ export default _jsx(View, {
               spliceParams: {},
             },
             () => ({
-              kind: "AstScriptPropertyAccessExpression",
+              kind: 212,
               loc: [25, 25, 25, 33],
               expression: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [25, 25, 25, 30],
                 text: "order",
                 bindingKey: "order$kpf5b5091dr1$0",
@@ -349,13 +349,13 @@ export default _jsx(View, {
       spliceParams: { $orders: [], $0splice0: ["order$kpf5b5091dr1$0"] },
     },
     () => ({
-      kind: "AstScriptCallExpression",
+      kind: 214,
       loc: [22, 9, 44, 6],
       expression: {
-        kind: "AstScriptPropertyAccessExpression",
+        kind: 212,
         loc: [22, 9, 22, 20],
         expression: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [22, 9, 22, 16],
           key: "$orders",
         },
@@ -365,14 +365,14 @@ export default _jsx(View, {
       questionDotToken: false,
       arguments: [
         {
-          kind: "AstScriptArrowFunction",
+          kind: 220,
           loc: [23, 7, 43, 11],
           parameters: [
             {
-              kind: "AstScriptParameterDeclaration",
+              kind: 170,
               loc: [23, 8, 23, 13],
               name: {
-                kind: "AstScriptIdentifier",
+                kind: 80,
                 loc: [23, 8, 23, 13],
                 text: "order",
                 bindingKey: "order$kpf5b5091dr1$0",
@@ -380,7 +380,7 @@ export default _jsx(View, {
             },
           ],
           body: {
-            kind: "AstScriptSplice",
+            kind: 1000,
             loc: [24, 9, 43, 11],
             key: "$0splice0",
           },

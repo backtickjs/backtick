@@ -13,7 +13,7 @@ const count = cs.create(
     spliceParams: {},
   },
   () => ({
-    kind: "AstScriptNumericLiteral",
+    kind: 9,
     loc: [5, 18, 5, 19],
     value: 1,
   }),
@@ -30,11 +30,11 @@ export const script = cs.create(
     spliceParams: { $count: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [7, 26, 9, 2],
     statements: [
       {
-        kind: "AstScriptSplice",
+        kind: 1000,
         loc: [8, 3, 8, 9],
         key: "$count",
       },

@@ -1,21 +1,23 @@
-import type { SourceLocation } from "@backtickjs/cs-runtime";
+import type { SourceLocation, SyntaxKind } from "@backtickjs/cs-runtime";
 import type ts from "typescript";
 
-/** An AST node as the emitted code spells it: `{ kind: "AstScriptX", … }`.
+/** An AST node as the emitted code spells it: `{ kind: 246, … }`.
  *
  * The compiler writes the bundler's AST directly, so the fields are named
  * rather than positional — a node gaining one is additive, where an argument
- * list gaining one shifts everything after it in code already compiled. */
+ * list gaining one shifts everything after it in code already compiled. The
+ * kind goes as its number, which is TypeScript's own: `ts.SyntaxKind[246]`
+ * reads back `IfStatement`. */
 export function astNode(
   ts: typeof import("typescript"),
-  kind: string,
+  kind: SyntaxKind,
   fields: { [name: string]: ts.Expression },
 ): ts.ObjectLiteralExpression {
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "kind",
-        ts.factory.createStringLiteral(kind),
+        ts.factory.createNumericLiteral(kind),
       ),
       ...Object.entries(fields).map(([name, value]) =>
         ts.factory.createPropertyAssignment(name, value),

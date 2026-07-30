@@ -23,51 +23,51 @@ export default cs.create(
     spliceParams: { $Point: [] },
   },
   () => ({
-    kind: "AstScriptBlock",
+    kind: 242,
     loc: [19, 19, 23, 2],
     statements: [
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [20, 3, 20, 20],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [20, 9, 20, 10],
           text: "C",
           bindingKey: "C$2pik4a0v1yd8w$0",
         },
         initializer: {
-          kind: "AstScriptSplice",
+          kind: 1000,
           loc: [20, 13, 20, 19],
           key: "$Point",
         },
         keyword: "const",
       },
       {
-        kind: "AstScriptVariableDeclaration",
+        kind: 261,
         loc: [21, 3, 21, 25],
         name: {
-          kind: "AstScriptIdentifier",
+          kind: 80,
           loc: [21, 9, 21, 10],
           text: "p",
           bindingKey: "p$2pik4a0v1yd8w$1",
         },
         initializer: {
-          kind: "AstScriptNewExpression",
+          kind: 215,
           loc: [21, 13, 21, 24],
           expression: {
-            kind: "AstScriptIdentifier",
+            kind: 80,
             loc: [21, 17, 21, 18],
             text: "C",
             bindingKey: "C$2pik4a0v1yd8w$0",
           },
           arguments: [
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [21, 19, 21, 20],
               value: 1,
             },
             {
-              kind: "AstScriptNumericLiteral",
+              kind: 9,
               loc: [21, 22, 21, 23],
               value: 2,
             },
@@ -76,16 +76,16 @@ export default cs.create(
         keyword: "const",
       },
       {
-        kind: "AstScriptReturnStatement",
+        kind: 254,
         loc: [22, 3, 22, 20],
         expression: {
-          kind: "AstScriptBinaryExpression",
+          kind: 227,
           loc: [22, 10, 22, 19],
           left: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [22, 10, 22, 13],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [22, 10, 22, 11],
               text: "p",
               bindingKey: "p$2pik4a0v1yd8w$1",
@@ -95,10 +95,10 @@ export default cs.create(
           },
           operatorToken: "+",
           right: {
-            kind: "AstScriptPropertyAccessExpression",
+            kind: 212,
             loc: [22, 16, 22, 19],
             expression: {
-              kind: "AstScriptIdentifier",
+              kind: 80,
               loc: [22, 16, 22, 17],
               text: "p",
               bindingKey: "p$2pik4a0v1yd8w$1",
