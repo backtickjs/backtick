@@ -21,18 +21,28 @@ const press = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [18, 18, 20, 2],
-      [
-        v.variableDeclaration(
-          [19, 3, 19, 15],
-          v.identifier([19, 9, 19, 10], "x", "x$1w48eutzbucnb$0"),
-          v.numericLiteral([19, 13, 19, 14], 1),
-          "const",
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [18, 18, 20, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [19, 3, 19, 15],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [19, 9, 19, 10],
+          text: "x",
+          bindingKey: "x$1w48eutzbucnb$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [19, 13, 19, 14],
+          value: 1,
+        },
+        keyword: "const",
+      },
+    ],
+  }),
 );
 export default cs.create(
   [22, 16, 25, 3],
@@ -54,7 +64,11 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.stringLiteral([23, 34, 23, 38], "OK"),
+          () => ({
+            kind: "AstScriptStringLiteral",
+            loc: [23, 34, 23, 38],
+            text: "OK",
+          }),
         ),
         press,
       ),
@@ -62,25 +76,42 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) =>
-    v.block(
-      [22, 19, 25, 2],
-      [
-        v.variableDeclaration(
-          [23, 3, 23, 49],
-          v.identifier([23, 9, 23, 15], "button", "button$1w48eutzbucnb$1"),
-          v.splice([23, 18, 23, 48], "$0splice0"),
-          "const",
-        ),
-        v.returnStatement(
-          [24, 3, 24, 23],
-          v.propertyAccessExpression(
-            [24, 10, 24, 22],
-            v.identifier([24, 10, 24, 16], "button", "button$1w48eutzbucnb$1"),
-            false,
-            "label",
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [22, 19, 25, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [23, 3, 23, 49],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [23, 9, 23, 15],
+          text: "button",
+          bindingKey: "button$1w48eutzbucnb$1",
+        },
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [23, 18, 23, 48],
+          key: "$0splice0",
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [24, 3, 24, 23],
+        expression: {
+          kind: "AstScriptPropertyAccessExpression",
+          loc: [24, 10, 24, 22],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [24, 10, 24, 16],
+            text: "button",
+            bindingKey: "button$1w48eutzbucnb$1",
+          },
+          questionDotToken: false,
+          name: "label",
+        },
+      },
+    ],
+  }),
 );

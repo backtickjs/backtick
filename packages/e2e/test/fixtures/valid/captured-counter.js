@@ -12,72 +12,118 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [5, 19, 12, 2],
-      [
-        v.variableDeclaration(
-          [6, 3, 6, 17],
-          v.identifier([6, 7, 6, 12], "count", "count$31t2pc3vo9x5y$0"),
-          v.numericLiteral([6, 15, 6, 16], 0),
-          "let",
-        ),
-        v.variableDeclaration(
-          [7, 3, 10, 5],
-          v.identifier([7, 9, 7, 13], "bump", "bump$31t2pc3vo9x5y$1"),
-          v.arrowFunction(
-            [7, 16, 10, 4],
-            [],
-            v.block(
-              [7, 22, 10, 4],
-              [
-                v.binaryExpression(
-                  [8, 5, 8, 22],
-                  v.identifier([8, 5, 8, 10], "count", "count$31t2pc3vo9x5y$0"),
-                  "=",
-                  v.binaryExpression(
-                    [8, 13, 8, 22],
-                    v.identifier(
-                      [8, 13, 8, 18],
-                      "count",
-                      "count$31t2pc3vo9x5y$0",
-                    ),
-                    "+",
-                    v.numericLiteral([8, 21, 8, 22], 1),
-                  ),
-                ),
-                v.returnStatement(
-                  [9, 5, 9, 18],
-                  v.identifier(
-                    [9, 12, 9, 17],
-                    "count",
-                    "count$31t2pc3vo9x5y$0",
-                  ),
-                ),
-              ],
-            ),
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [11, 3, 11, 26],
-          v.binaryExpression(
-            [11, 10, 11, 25],
-            v.callExpression(
-              [11, 10, 11, 16],
-              v.identifier([11, 10, 11, 14], "bump", "bump$31t2pc3vo9x5y$1"),
-              false,
-              [],
-            ),
-            "+",
-            v.callExpression(
-              [11, 19, 11, 25],
-              v.identifier([11, 19, 11, 23], "bump", "bump$31t2pc3vo9x5y$1"),
-              false,
-              [],
-            ),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [5, 19, 12, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [6, 3, 6, 17],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [6, 7, 6, 12],
+          text: "count",
+          bindingKey: "count$31t2pc3vo9x5y$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [6, 15, 6, 16],
+          value: 0,
+        },
+        keyword: "let",
+      },
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [7, 3, 10, 5],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [7, 9, 7, 13],
+          text: "bump",
+          bindingKey: "bump$31t2pc3vo9x5y$1",
+        },
+        initializer: {
+          kind: "AstScriptArrowFunction",
+          loc: [7, 16, 10, 4],
+          parameters: [],
+          body: {
+            kind: "AstScriptBlock",
+            loc: [7, 22, 10, 4],
+            statements: [
+              {
+                kind: "AstScriptBinaryExpression",
+                loc: [8, 5, 8, 22],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [8, 5, 8, 10],
+                  text: "count",
+                  bindingKey: "count$31t2pc3vo9x5y$0",
+                },
+                operatorToken: "=",
+                right: {
+                  kind: "AstScriptBinaryExpression",
+                  loc: [8, 13, 8, 22],
+                  left: {
+                    kind: "AstScriptIdentifier",
+                    loc: [8, 13, 8, 18],
+                    text: "count",
+                    bindingKey: "count$31t2pc3vo9x5y$0",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: "AstScriptNumericLiteral",
+                    loc: [8, 21, 8, 22],
+                    value: 1,
+                  },
+                },
+              },
+              {
+                kind: "AstScriptReturnStatement",
+                loc: [9, 5, 9, 18],
+                expression: {
+                  kind: "AstScriptIdentifier",
+                  loc: [9, 12, 9, 17],
+                  text: "count",
+                  bindingKey: "count$31t2pc3vo9x5y$0",
+                },
+              },
+            ],
+          },
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [11, 3, 11, 26],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [11, 10, 11, 25],
+          left: {
+            kind: "AstScriptCallExpression",
+            loc: [11, 10, 11, 16],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [11, 10, 11, 14],
+              text: "bump",
+              bindingKey: "bump$31t2pc3vo9x5y$1",
+            },
+            questionDotToken: false,
+            arguments: [],
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptCallExpression",
+            loc: [11, 19, 11, 25],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [11, 19, 11, 23],
+              text: "bump",
+              bindingKey: "bump$31t2pc3vo9x5y$1",
+            },
+            questionDotToken: false,
+            arguments: [],
+          },
+        },
+      },
+    ],
+  }),
 );

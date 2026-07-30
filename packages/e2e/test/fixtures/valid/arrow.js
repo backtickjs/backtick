@@ -10,43 +10,84 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [3, 19, 6, 2],
-      [
-        v.variableDeclaration(
-          [4, 3, 4, 19],
-          v.identifier([4, 9, 4, 13], "base", "base$357jk2g9zktff$0"),
-          v.numericLiteral([4, 16, 4, 18], 10),
-          "const",
-        ),
-        v.returnStatement(
-          [5, 3, 5, 57],
-          v.arrowFunction(
-            [5, 10, 5, 56],
-            [
-              v.parameterDeclaration(
-                [5, 11, 5, 22],
-                v.identifier([5, 11, 5, 14], "one", "one$357jk2g9zktff$1"),
-              ),
-              v.parameterDeclaration(
-                [5, 24, 5, 35],
-                v.identifier([5, 24, 5, 27], "two", "two$357jk2g9zktff$2"),
-              ),
-            ],
-            v.binaryExpression(
-              [5, 40, 5, 56],
-              v.binaryExpression(
-                [5, 40, 5, 49],
-                v.identifier([5, 40, 5, 43], "one", "one$357jk2g9zktff$1"),
-                "+",
-                v.identifier([5, 46, 5, 49], "two", "two$357jk2g9zktff$2"),
-              ),
-              "+",
-              v.identifier([5, 52, 5, 56], "base", "base$357jk2g9zktff$0"),
-            ),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [3, 19, 6, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [4, 3, 4, 19],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [4, 9, 4, 13],
+          text: "base",
+          bindingKey: "base$357jk2g9zktff$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [4, 16, 4, 18],
+          value: 10,
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [5, 3, 5, 57],
+        expression: {
+          kind: "AstScriptArrowFunction",
+          loc: [5, 10, 5, 56],
+          parameters: [
+            {
+              kind: "AstScriptParameterDeclaration",
+              loc: [5, 11, 5, 22],
+              name: {
+                kind: "AstScriptIdentifier",
+                loc: [5, 11, 5, 14],
+                text: "one",
+                bindingKey: "one$357jk2g9zktff$1",
+              },
+            },
+            {
+              kind: "AstScriptParameterDeclaration",
+              loc: [5, 24, 5, 35],
+              name: {
+                kind: "AstScriptIdentifier",
+                loc: [5, 24, 5, 27],
+                text: "two",
+                bindingKey: "two$357jk2g9zktff$2",
+              },
+            },
+          ],
+          body: {
+            kind: "AstScriptBinaryExpression",
+            loc: [5, 40, 5, 56],
+            left: {
+              kind: "AstScriptBinaryExpression",
+              loc: [5, 40, 5, 49],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [5, 40, 5, 43],
+                text: "one",
+                bindingKey: "one$357jk2g9zktff$1",
+              },
+              operatorToken: "+",
+              right: {
+                kind: "AstScriptIdentifier",
+                loc: [5, 46, 5, 49],
+                text: "two",
+                bindingKey: "two$357jk2g9zktff$2",
+              },
+            },
+            operatorToken: "+",
+            right: {
+              kind: "AstScriptIdentifier",
+              loc: [5, 52, 5, 56],
+              text: "base",
+              bindingKey: "base$357jk2g9zktff$0",
+            },
+          },
+        },
+      },
+    ],
+  }),
 );

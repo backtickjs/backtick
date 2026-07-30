@@ -14,7 +14,11 @@ const d0 = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.numericLiteral([7, 15, 7, 16], 1),
+  () => ({
+    kind: "AstScriptNumericLiteral",
+    loc: [7, 15, 7, 16],
+    value: 1,
+  }),
 );
 const d1 = cs.create(
   [8, 12, 10, 3],
@@ -27,21 +31,31 @@ const d1 = cs.create(
     captures: [],
     spliceParams: { $d0: [] },
   },
-  (v) =>
-    v.block(
-      [8, 15, 10, 2],
-      [
-        v.returnStatement(
-          [9, 3, 9, 20],
-          v.binaryExpression(
-            [9, 10, 9, 19],
-            v.splice([9, 10, 9, 13], "$d0"),
-            "+",
-            v.splice([9, 16, 9, 19], "$d0"),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [8, 15, 10, 2],
+    statements: [
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [9, 3, 9, 20],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [9, 10, 9, 19],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [9, 10, 9, 13],
+            key: "$d0",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [9, 16, 9, 19],
+            key: "$d0",
+          },
+        },
+      },
+    ],
+  }),
 );
 const d2 = cs.create(
   [11, 12, 13, 3],
@@ -54,21 +68,31 @@ const d2 = cs.create(
     captures: [],
     spliceParams: { $d1: [] },
   },
-  (v) =>
-    v.block(
-      [11, 15, 13, 2],
-      [
-        v.returnStatement(
-          [12, 3, 12, 20],
-          v.binaryExpression(
-            [12, 10, 12, 19],
-            v.splice([12, 10, 12, 13], "$d1"),
-            "+",
-            v.splice([12, 16, 12, 19], "$d1"),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [11, 15, 13, 2],
+    statements: [
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [12, 3, 12, 20],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [12, 10, 12, 19],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [12, 10, 12, 13],
+            key: "$d1",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [12, 16, 12, 19],
+            key: "$d1",
+          },
+        },
+      },
+    ],
+  }),
 );
 const d3 = cs.create(
   [14, 12, 16, 3],
@@ -81,21 +105,31 @@ const d3 = cs.create(
     captures: [],
     spliceParams: { $d2: [] },
   },
-  (v) =>
-    v.block(
-      [14, 15, 16, 2],
-      [
-        v.returnStatement(
-          [15, 3, 15, 20],
-          v.binaryExpression(
-            [15, 10, 15, 19],
-            v.splice([15, 10, 15, 13], "$d2"),
-            "+",
-            v.splice([15, 16, 15, 19], "$d2"),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [14, 15, 16, 2],
+    statements: [
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [15, 3, 15, 20],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [15, 10, 15, 19],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [15, 10, 15, 13],
+            key: "$d2",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [15, 16, 15, 19],
+            key: "$d2",
+          },
+        },
+      },
+    ],
+  }),
 );
 const d4 = cs.create(
   [17, 12, 19, 3],
@@ -108,20 +142,30 @@ const d4 = cs.create(
     captures: [],
     spliceParams: { $d3: [] },
   },
-  (v) =>
-    v.block(
-      [17, 15, 19, 2],
-      [
-        v.returnStatement(
-          [18, 3, 18, 20],
-          v.binaryExpression(
-            [18, 10, 18, 19],
-            v.splice([18, 10, 18, 13], "$d3"),
-            "+",
-            v.splice([18, 16, 18, 19], "$d3"),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [17, 15, 19, 2],
+    statements: [
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [18, 3, 18, 20],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [18, 10, 18, 19],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [18, 10, 18, 13],
+            key: "$d3",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [18, 16, 18, 19],
+            key: "$d3",
+          },
+        },
+      },
+    ],
+  }),
 );
 export default d4;

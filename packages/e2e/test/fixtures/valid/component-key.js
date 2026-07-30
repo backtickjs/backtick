@@ -30,7 +30,11 @@ export default _jsxs(View, {
           captures: [],
           spliceParams: {},
         },
-        (v) => v.stringLiteral([20, 18, 20, 25], "third"),
+        () => ({
+          kind: "AstScriptStringLiteral",
+          loc: [20, 18, 20, 25],
+          text: "third",
+        }),
       ),
     ),
   ],

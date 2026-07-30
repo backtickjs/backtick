@@ -11,61 +11,129 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [4, 19, 10, 2],
-      [
-        v.parameterDeclaration(
-          [4, 20, 4, 29],
-          v.identifier([4, 20, 4, 21], "n", "n$2gfrnuray6h4d$0"),
-        ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [4, 19, 10, 2],
+    parameters: [
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [4, 20, 4, 29],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [4, 20, 4, 21],
+          text: "n",
+          bindingKey: "n$2gfrnuray6h4d$0",
+        },
+      },
+    ],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [4, 34, 10, 2],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [5, 3, 5, 16],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [5, 7, 5, 11],
+            text: "last",
+            bindingKey: "last$2gfrnuray6h4d$1",
+          },
+          initializer: {
+            kind: "AstScriptNumericLiteral",
+            loc: [5, 14, 5, 15],
+            value: 0,
+          },
+          keyword: "let",
+        },
+        {
+          kind: "AstScriptForStatement",
+          loc: [6, 3, 8, 4],
+          initializer: {
+            kind: "AstScriptVariableDeclaration",
+            loc: [6, 8, 6, 17],
+            name: {
+              kind: "AstScriptIdentifier",
+              loc: [6, 12, 6, 13],
+              text: "i",
+              bindingKey: "i$2gfrnuray6h4d$2",
+            },
+            initializer: {
+              kind: "AstScriptIdentifier",
+              loc: [6, 16, 6, 17],
+              text: "n",
+              bindingKey: "n$2gfrnuray6h4d$0",
+            },
+            keyword: "let",
+          },
+          condition: {
+            kind: "AstScriptIdentifier",
+            loc: [6, 19, 6, 20],
+            text: "i",
+            bindingKey: "i$2gfrnuray6h4d$2",
+          },
+          incrementor: {
+            kind: "AstScriptBinaryExpression",
+            loc: [6, 22, 6, 31],
+            left: {
+              kind: "AstScriptIdentifier",
+              loc: [6, 22, 6, 23],
+              text: "i",
+              bindingKey: "i$2gfrnuray6h4d$2",
+            },
+            operatorToken: "=",
+            right: {
+              kind: "AstScriptBinaryExpression",
+              loc: [6, 26, 6, 31],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [6, 26, 6, 27],
+                text: "i",
+                bindingKey: "i$2gfrnuray6h4d$2",
+              },
+              operatorToken: "-",
+              right: {
+                kind: "AstScriptNumericLiteral",
+                loc: [6, 30, 6, 31],
+                value: 1,
+              },
+            },
+          },
+          statement: {
+            kind: "AstScriptBlock",
+            loc: [6, 33, 8, 4],
+            statements: [
+              {
+                kind: "AstScriptBinaryExpression",
+                loc: [7, 5, 7, 13],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [7, 5, 7, 9],
+                  text: "last",
+                  bindingKey: "last$2gfrnuray6h4d$1",
+                },
+                operatorToken: "=",
+                right: {
+                  kind: "AstScriptIdentifier",
+                  loc: [7, 12, 7, 13],
+                  text: "i",
+                  bindingKey: "i$2gfrnuray6h4d$2",
+                },
+              },
+            ],
+          },
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [9, 3, 9, 15],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [9, 10, 9, 14],
+            text: "last",
+            bindingKey: "last$2gfrnuray6h4d$1",
+          },
+        },
       ],
-      v.block(
-        [4, 34, 10, 2],
-        [
-          v.variableDeclaration(
-            [5, 3, 5, 16],
-            v.identifier([5, 7, 5, 11], "last", "last$2gfrnuray6h4d$1"),
-            v.numericLiteral([5, 14, 5, 15], 0),
-            "let",
-          ),
-          v.forStatement(
-            [6, 3, 8, 4],
-            v.variableDeclaration(
-              [6, 8, 6, 17],
-              v.identifier([6, 12, 6, 13], "i", "i$2gfrnuray6h4d$2"),
-              v.identifier([6, 16, 6, 17], "n", "n$2gfrnuray6h4d$0"),
-              "let",
-            ),
-            v.identifier([6, 19, 6, 20], "i", "i$2gfrnuray6h4d$2"),
-            v.binaryExpression(
-              [6, 22, 6, 31],
-              v.identifier([6, 22, 6, 23], "i", "i$2gfrnuray6h4d$2"),
-              "=",
-              v.binaryExpression(
-                [6, 26, 6, 31],
-                v.identifier([6, 26, 6, 27], "i", "i$2gfrnuray6h4d$2"),
-                "-",
-                v.numericLiteral([6, 30, 6, 31], 1),
-              ),
-            ),
-            v.block(
-              [6, 33, 8, 4],
-              [
-                v.binaryExpression(
-                  [7, 5, 7, 13],
-                  v.identifier([7, 5, 7, 9], "last", "last$2gfrnuray6h4d$1"),
-                  "=",
-                  v.identifier([7, 12, 7, 13], "i", "i$2gfrnuray6h4d$2"),
-                ),
-              ],
-            ),
-          ),
-          v.returnStatement(
-            [9, 3, 9, 15],
-            v.identifier([9, 10, 9, 14], "last", "last$2gfrnuray6h4d$1"),
-          ),
-        ],
-      ),
-    ),
+    },
+  }),
 );

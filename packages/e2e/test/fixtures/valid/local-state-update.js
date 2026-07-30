@@ -18,18 +18,23 @@ async function Stepper() {
           captures: [],
           spliceParams: { $size: [] },
         },
-        (v) =>
-          v.callExpression(
-            [10, 29, 10, 41],
-            v.propertyAccessExpression(
-              [10, 29, 10, 39],
-              v.splice([10, 29, 10, 34], "$size"),
-              false,
-              "read",
-            ),
-            false,
-            [],
-          ),
+        () => ({
+          kind: "AstScriptCallExpression",
+          loc: [10, 29, 10, 41],
+          expression: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [10, 29, 10, 39],
+            expression: {
+              kind: "AstScriptSplice",
+              loc: [10, 29, 10, 34],
+              key: "$size",
+            },
+            questionDotToken: false,
+            name: "read",
+          },
+          questionDotToken: false,
+          arguments: [],
+        }),
       ),
     },
     onPress: cs.create(
@@ -43,51 +48,67 @@ async function Stepper() {
         captures: [],
         spliceParams: { $size: [] },
       },
-      (v) =>
-        v.arrowFunction(
-          [11, 19, 13, 8],
-          [],
-          v.block(
-            [11, 25, 13, 8],
-            [
-              v.callExpression(
-                [12, 9, 12, 55],
-                v.propertyAccessExpression(
-                  [12, 9, 12, 21],
-                  v.splice([12, 9, 12, 14], "$size"),
-                  false,
-                  "update",
-                ),
-                false,
-                [
-                  v.arrowFunction(
-                    [12, 22, 12, 54],
-                    [
-                      v.parameterDeclaration(
-                        [12, 23, 12, 38],
-                        v.identifier(
-                          [12, 23, 12, 30],
-                          "current",
-                          "current$1rqun2dr71nzq$0",
-                        ),
-                      ),
-                    ],
-                    v.binaryExpression(
-                      [12, 43, 12, 54],
-                      v.identifier(
-                        [12, 43, 12, 50],
-                        "current",
-                        "current$1rqun2dr71nzq$0",
-                      ),
-                      "+",
-                      v.numericLiteral([12, 53, 12, 54], 1),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+      () => ({
+        kind: "AstScriptArrowFunction",
+        loc: [11, 19, 13, 8],
+        parameters: [],
+        body: {
+          kind: "AstScriptBlock",
+          loc: [11, 25, 13, 8],
+          statements: [
+            {
+              kind: "AstScriptCallExpression",
+              loc: [12, 9, 12, 55],
+              expression: {
+                kind: "AstScriptPropertyAccessExpression",
+                loc: [12, 9, 12, 21],
+                expression: {
+                  kind: "AstScriptSplice",
+                  loc: [12, 9, 12, 14],
+                  key: "$size",
+                },
+                questionDotToken: false,
+                name: "update",
+              },
+              questionDotToken: false,
+              arguments: [
+                {
+                  kind: "AstScriptArrowFunction",
+                  loc: [12, 22, 12, 54],
+                  parameters: [
+                    {
+                      kind: "AstScriptParameterDeclaration",
+                      loc: [12, 23, 12, 38],
+                      name: {
+                        kind: "AstScriptIdentifier",
+                        loc: [12, 23, 12, 30],
+                        text: "current",
+                        bindingKey: "current$1rqun2dr71nzq$0",
+                      },
+                    },
+                  ],
+                  body: {
+                    kind: "AstScriptBinaryExpression",
+                    loc: [12, 43, 12, 54],
+                    left: {
+                      kind: "AstScriptIdentifier",
+                      loc: [12, 43, 12, 50],
+                      text: "current",
+                      bindingKey: "current$1rqun2dr71nzq$0",
+                    },
+                    operatorToken: "+",
+                    right: {
+                      kind: "AstScriptNumericLiteral",
+                      loc: [12, 53, 12, 54],
+                      value: 1,
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }),
     ),
     children: "press",
   });

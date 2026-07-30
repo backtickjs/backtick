@@ -16,11 +16,19 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) =>
-    v.binaryExpression(
-      [10, 19, 10, 49],
-      v.splice([10, 19, 10, 43], "$0splice0"),
-      "+",
-      v.stringLiteral([10, 46, 10, 49], "!"),
-    ),
+  () => ({
+    kind: "AstScriptBinaryExpression",
+    loc: [10, 19, 10, 49],
+    left: {
+      kind: "AstScriptSplice",
+      loc: [10, 19, 10, 43],
+      key: "$0splice0",
+    },
+    operatorToken: "+",
+    right: {
+      kind: "AstScriptStringLiteral",
+      loc: [10, 46, 10, 49],
+      text: "!",
+    },
+  }),
 );

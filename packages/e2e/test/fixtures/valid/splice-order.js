@@ -14,20 +14,30 @@ export default cs.create(
     captures: [],
     spliceParams: { $count: [], $0splice0: [] },
   },
-  (v) =>
-    v.objectLiteralExpression(
-      [8, 20, 8, 48],
-      [
-        v.propertyAssignment(
-          [8, 22, 8, 31],
-          "a",
-          v.splice([8, 25, 8, 31], "$count"),
-        ),
-        v.propertyAssignment(
-          [8, 33, 8, 46],
-          "b",
-          v.splice([8, 36, 8, 46], "$0splice0"),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptObjectLiteralExpression",
+    loc: [8, 20, 8, 48],
+    properties: [
+      {
+        kind: "AstScriptPropertyAssignment",
+        loc: [8, 22, 8, 31],
+        name: "a",
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [8, 25, 8, 31],
+          key: "$count",
+        },
+      },
+      {
+        kind: "AstScriptPropertyAssignment",
+        loc: [8, 33, 8, 46],
+        name: "b",
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [8, 36, 8, 46],
+          key: "$0splice0",
+        },
+      },
+    ],
+  }),
 );

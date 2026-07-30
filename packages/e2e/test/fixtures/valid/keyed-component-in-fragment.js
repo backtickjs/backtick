@@ -29,7 +29,15 @@ const script = cs.create(
     captures: [],
     spliceParams: { $rows: [] },
   },
-  (v) =>
-    v.arrowFunction([24, 46, 24, 57], [], v.splice([24, 52, 24, 57], "$rows")),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [24, 46, 24, 57],
+    parameters: [],
+    body: {
+      kind: "AstScriptSplice",
+      loc: [24, 52, 24, 57],
+      key: "$rows",
+    },
+  }),
 );
 export default script;

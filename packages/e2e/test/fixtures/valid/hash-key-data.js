@@ -12,6 +12,14 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) =>
-    v.arrowFunction([5, 19, 5, 46], [], v.splice([5, 25, 5, 46], "$0splice0")),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [5, 19, 5, 46],
+    parameters: [],
+    body: {
+      kind: "AstScriptSplice",
+      loc: [5, 25, 5, 46],
+      key: "$0splice0",
+    },
+  }),
 );

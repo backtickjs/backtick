@@ -12,53 +12,96 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [5, 19, 11, 2],
-      [
-        v.parameterDeclaration(
-          [5, 20, 5, 29],
-          v.identifier([5, 20, 5, 21], "n", "n$22k8zyijhbub1$0"),
-        ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [5, 19, 11, 2],
+    parameters: [
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [5, 20, 5, 29],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [5, 20, 5, 21],
+          text: "n",
+          bindingKey: "n$22k8zyijhbub1$0",
+        },
+      },
+    ],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [5, 34, 11, 2],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [6, 3, 6, 16],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [6, 7, 6, 11],
+            text: "left",
+            bindingKey: "left$22k8zyijhbub1$1",
+          },
+          initializer: {
+            kind: "AstScriptIdentifier",
+            loc: [6, 14, 6, 15],
+            text: "n",
+            bindingKey: "n$22k8zyijhbub1$0",
+          },
+          keyword: "let",
+        },
+        {
+          kind: "AstScriptWhileStatement",
+          loc: [7, 3, 9, 4],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [7, 10, 7, 14],
+            text: "left",
+            bindingKey: "left$22k8zyijhbub1$1",
+          },
+          statement: {
+            kind: "AstScriptBlock",
+            loc: [7, 16, 9, 4],
+            statements: [
+              {
+                kind: "AstScriptBinaryExpression",
+                loc: [8, 5, 8, 20],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [8, 5, 8, 9],
+                  text: "left",
+                  bindingKey: "left$22k8zyijhbub1$1",
+                },
+                operatorToken: "=",
+                right: {
+                  kind: "AstScriptBinaryExpression",
+                  loc: [8, 12, 8, 20],
+                  left: {
+                    kind: "AstScriptIdentifier",
+                    loc: [8, 12, 8, 16],
+                    text: "left",
+                    bindingKey: "left$22k8zyijhbub1$1",
+                  },
+                  operatorToken: "-",
+                  right: {
+                    kind: "AstScriptNumericLiteral",
+                    loc: [8, 19, 8, 20],
+                    value: 1,
+                  },
+                },
+              },
+            ],
+          },
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [10, 3, 10, 15],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [10, 10, 10, 14],
+            text: "left",
+            bindingKey: "left$22k8zyijhbub1$1",
+          },
+        },
       ],
-      v.block(
-        [5, 34, 11, 2],
-        [
-          v.variableDeclaration(
-            [6, 3, 6, 16],
-            v.identifier([6, 7, 6, 11], "left", "left$22k8zyijhbub1$1"),
-            v.identifier([6, 14, 6, 15], "n", "n$22k8zyijhbub1$0"),
-            "let",
-          ),
-          v.whileStatement(
-            [7, 3, 9, 4],
-            v.identifier([7, 10, 7, 14], "left", "left$22k8zyijhbub1$1"),
-            v.block(
-              [7, 16, 9, 4],
-              [
-                v.binaryExpression(
-                  [8, 5, 8, 20],
-                  v.identifier([8, 5, 8, 9], "left", "left$22k8zyijhbub1$1"),
-                  "=",
-                  v.binaryExpression(
-                    [8, 12, 8, 20],
-                    v.identifier(
-                      [8, 12, 8, 16],
-                      "left",
-                      "left$22k8zyijhbub1$1",
-                    ),
-                    "-",
-                    v.numericLiteral([8, 19, 8, 20], 1),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          v.returnStatement(
-            [10, 3, 10, 15],
-            v.identifier([10, 10, 10, 14], "left", "left$22k8zyijhbub1$1"),
-          ),
-        ],
-      ),
-    ),
+    },
+  }),
 );

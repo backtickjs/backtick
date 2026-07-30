@@ -26,32 +26,53 @@ const script = cs.create(
             captures: ["x$opm9pkkvziiq$0"],
             spliceParams: {},
           },
-          (v) => v.identifier([9, 27, 9, 28], "x", "x$opm9pkkvziiq$0"),
+          () => ({
+            kind: "AstScriptIdentifier",
+            loc: [9, 27, 9, 28],
+            text: "x",
+            bindingKey: "x$opm9pkkvziiq$0",
+          }),
         ),
       ),
     },
     captures: [],
     spliceParams: { $0splice0: ["x$opm9pkkvziiq$0"] },
   },
-  (v) =>
-    v.arrowFunction(
-      [7, 46, 10, 2],
-      [],
-      v.block(
-        [7, 52, 10, 2],
-        [
-          v.variableDeclaration(
-            [8, 3, 8, 15],
-            v.identifier([8, 9, 8, 10], "x", "x$opm9pkkvziiq$0"),
-            v.numericLiteral([8, 13, 8, 14], 1),
-            "const",
-          ),
-          v.returnStatement(
-            [9, 3, 9, 36],
-            v.splice([9, 10, 9, 35], "$0splice0"),
-          ),
-        ],
-      ),
-    ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [7, 46, 10, 2],
+    parameters: [],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [7, 52, 10, 2],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [8, 3, 8, 15],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [8, 9, 8, 10],
+            text: "x",
+            bindingKey: "x$opm9pkkvziiq$0",
+          },
+          initializer: {
+            kind: "AstScriptNumericLiteral",
+            loc: [8, 13, 8, 14],
+            value: 1,
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [9, 3, 9, 36],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [9, 10, 9, 35],
+            key: "$0splice0",
+          },
+        },
+      ],
+    },
+  }),
 );
 export default script;

@@ -1,7 +1,7 @@
 import type { ClientScript } from "@backtickjs/cs-runtime";
 import { locKey } from "../locKey.js";
-import type { Ast, AstScript, AstScriptBody, AstScriptNode } from "./Ast.js";
-import { AstBuilder } from "./AstBuilder.js";
+import type { Ast, AstScript } from "./Ast.js";
+import type { AstScriptBody } from "@backtickjs/cs-runtime";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The parsed body for each distinct source location. Two client objects at
@@ -34,7 +34,7 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
   const key = locKey(client.metadata.fileHash, client.loc);
   let body = parsedByLoc.get(key);
   if (body === undefined) {
-    body = client.visit<AstScriptNode>(new AstBuilder()) as AstScriptBody;
+    body = client.body();
     parsedByLoc.set(key, body);
   }
 

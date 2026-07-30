@@ -15,84 +15,169 @@ export default cs.create(
     captures: [],
     spliceParams: { $point: [] },
   },
-  (v) =>
-    v.arrowFunction(
-      [9, 19, 15, 2],
-      [
-        v.parameterDeclaration(
-          [9, 20, 9, 32],
-          v.identifier([9, 20, 9, 24], "name", "name$2h9vfj6qbexsg$0"),
-        ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [9, 19, 15, 2],
+    parameters: [
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [9, 20, 9, 32],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [9, 20, 9, 24],
+          text: "name",
+          bindingKey: "name$2h9vfj6qbexsg$0",
+        },
+      },
+    ],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [9, 37, 15, 2],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [10, 3, 10, 28],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [10, 9, 10, 14],
+            text: "coins",
+            bindingKey: "coins$2h9vfj6qbexsg$1",
+          },
+          initializer: {
+            kind: "AstScriptArrayLiteralExpression",
+            loc: [10, 17, 10, 27],
+            elements: [
+              {
+                kind: "AstScriptNumericLiteral",
+                loc: [10, 18, 10, 19],
+                value: 5,
+              },
+              {
+                kind: "AstScriptNumericLiteral",
+                loc: [10, 21, 10, 23],
+                value: 31,
+              },
+              {
+                kind: "AstScriptNumericLiteral",
+                loc: [10, 25, 10, 26],
+                value: 7,
+              },
+            ],
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [11, 3, 11, 28],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [11, 9, 11, 14],
+            text: "first",
+            bindingKey: "first$2h9vfj6qbexsg$2",
+          },
+          initializer: {
+            kind: "AstScriptElementAccessExpression",
+            loc: [11, 17, 11, 27],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [11, 17, 11, 22],
+              text: "coins",
+              bindingKey: "coins$2h9vfj6qbexsg$1",
+            },
+            argumentExpression: {
+              kind: "AstScriptStringLiteral",
+              loc: [11, 23, 11, 26],
+              text: "0",
+            },
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [12, 3, 12, 29],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [12, 9, 12, 14],
+            text: "wrong",
+            bindingKey: "wrong$2h9vfj6qbexsg$3",
+          },
+          initializer: {
+            kind: "AstScriptElementAccessExpression",
+            loc: [12, 17, 12, 28],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [12, 17, 12, 22],
+              text: "coins",
+              bindingKey: "coins$2h9vfj6qbexsg$1",
+            },
+            argumentExpression: {
+              kind: "AstScriptIdentifier",
+              loc: [12, 23, 12, 27],
+              text: "name",
+              bindingKey: "name$2h9vfj6qbexsg$0",
+            },
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [13, 3, 13, 30],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [13, 9, 13, 14],
+            text: "which",
+            bindingKey: "which$2h9vfj6qbexsg$4",
+          },
+          initializer: {
+            kind: "AstScriptElementAccessExpression",
+            loc: [13, 17, 13, 29],
+            expression: {
+              kind: "AstScriptSplice",
+              loc: [13, 17, 13, 23],
+              key: "$point",
+            },
+            argumentExpression: {
+              kind: "AstScriptIdentifier",
+              loc: [13, 24, 13, 28],
+              text: "name",
+              bindingKey: "name$2h9vfj6qbexsg$0",
+            },
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [14, 3, 14, 32],
+          expression: {
+            kind: "AstScriptBinaryExpression",
+            loc: [14, 10, 14, 31],
+            left: {
+              kind: "AstScriptBinaryExpression",
+              loc: [14, 10, 14, 23],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [14, 10, 14, 15],
+                text: "first",
+                bindingKey: "first$2h9vfj6qbexsg$2",
+              },
+              operatorToken: "+",
+              right: {
+                kind: "AstScriptIdentifier",
+                loc: [14, 18, 14, 23],
+                text: "wrong",
+                bindingKey: "wrong$2h9vfj6qbexsg$3",
+              },
+            },
+            operatorToken: "+",
+            right: {
+              kind: "AstScriptIdentifier",
+              loc: [14, 26, 14, 31],
+              text: "which",
+              bindingKey: "which$2h9vfj6qbexsg$4",
+            },
+          },
+        },
       ],
-      v.block(
-        [9, 37, 15, 2],
-        [
-          v.variableDeclaration(
-            [10, 3, 10, 28],
-            v.identifier([10, 9, 10, 14], "coins", "coins$2h9vfj6qbexsg$1"),
-            v.arrayLiteralExpression(
-              [10, 17, 10, 27],
-              [
-                v.numericLiteral([10, 18, 10, 19], 5),
-                v.numericLiteral([10, 21, 10, 23], 31),
-                v.numericLiteral([10, 25, 10, 26], 7),
-              ],
-            ),
-            "const",
-          ),
-          v.variableDeclaration(
-            [11, 3, 11, 28],
-            v.identifier([11, 9, 11, 14], "first", "first$2h9vfj6qbexsg$2"),
-            v.elementAccessExpression(
-              [11, 17, 11, 27],
-              v.identifier([11, 17, 11, 22], "coins", "coins$2h9vfj6qbexsg$1"),
-              v.stringLiteral([11, 23, 11, 26], "0"),
-            ),
-            "const",
-          ),
-          v.variableDeclaration(
-            [12, 3, 12, 29],
-            v.identifier([12, 9, 12, 14], "wrong", "wrong$2h9vfj6qbexsg$3"),
-            v.elementAccessExpression(
-              [12, 17, 12, 28],
-              v.identifier([12, 17, 12, 22], "coins", "coins$2h9vfj6qbexsg$1"),
-              v.identifier([12, 23, 12, 27], "name", "name$2h9vfj6qbexsg$0"),
-            ),
-            "const",
-          ),
-          v.variableDeclaration(
-            [13, 3, 13, 30],
-            v.identifier([13, 9, 13, 14], "which", "which$2h9vfj6qbexsg$4"),
-            v.elementAccessExpression(
-              [13, 17, 13, 29],
-              v.splice([13, 17, 13, 23], "$point"),
-              v.identifier([13, 24, 13, 28], "name", "name$2h9vfj6qbexsg$0"),
-            ),
-            "const",
-          ),
-          v.returnStatement(
-            [14, 3, 14, 32],
-            v.binaryExpression(
-              [14, 10, 14, 31],
-              v.binaryExpression(
-                [14, 10, 14, 23],
-                v.identifier(
-                  [14, 10, 14, 15],
-                  "first",
-                  "first$2h9vfj6qbexsg$2",
-                ),
-                "+",
-                v.identifier(
-                  [14, 18, 14, 23],
-                  "wrong",
-                  "wrong$2h9vfj6qbexsg$3",
-                ),
-              ),
-              "+",
-              v.identifier([14, 26, 14, 31], "which", "which$2h9vfj6qbexsg$4"),
-            ),
-          ),
-        ],
-      ),
-    ),
+    },
+  }),
 );

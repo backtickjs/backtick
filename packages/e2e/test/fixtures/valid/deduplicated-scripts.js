@@ -12,7 +12,11 @@ const leaf = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.numericLiteral([5, 17, 5, 18], 7),
+  () => ({
+    kind: "AstScriptNumericLiteral",
+    loc: [5, 17, 5, 18],
+    value: 7,
+  }),
 );
 export default cs.create(
   [7, 16, 7, 44],
@@ -25,20 +29,30 @@ export default cs.create(
     captures: [],
     spliceParams: { $leaf: [] },
   },
-  (v) =>
-    v.objectLiteralExpression(
-      [7, 20, 7, 42],
-      [
-        v.propertyAssignment(
-          [7, 22, 7, 30],
-          "a",
-          v.splice([7, 25, 7, 30], "$leaf"),
-        ),
-        v.propertyAssignment(
-          [7, 32, 7, 40],
-          "b",
-          v.splice([7, 35, 7, 40], "$leaf"),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptObjectLiteralExpression",
+    loc: [7, 20, 7, 42],
+    properties: [
+      {
+        kind: "AstScriptPropertyAssignment",
+        loc: [7, 22, 7, 30],
+        name: "a",
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [7, 25, 7, 30],
+          key: "$leaf",
+        },
+      },
+      {
+        kind: "AstScriptPropertyAssignment",
+        loc: [7, 32, 7, 40],
+        name: "b",
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [7, 35, 7, 40],
+          key: "$leaf",
+        },
+      },
+    ],
+  }),
 );

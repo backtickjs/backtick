@@ -12,28 +12,49 @@ const ping = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [5, 17, 8, 2],
-      [],
-      v.block(
-        [5, 23, 8, 2],
-        [
-          v.variableDeclaration(
-            [6, 3, 6, 13],
-            v.identifier([6, 7, 6, 8], "n", "n$3hyzmfxyz75s4$0"),
-            v.numericLiteral([6, 11, 6, 12], 0),
-            "let",
-          ),
-          v.binaryExpression(
-            [7, 3, 7, 8],
-            v.identifier([7, 3, 7, 4], "n", "n$3hyzmfxyz75s4$0"),
-            "=",
-            v.numericLiteral([7, 7, 7, 8], 1),
-          ),
-        ],
-      ),
-    ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [5, 17, 8, 2],
+    parameters: [],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [5, 23, 8, 2],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [6, 3, 6, 13],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [6, 7, 6, 8],
+            text: "n",
+            bindingKey: "n$3hyzmfxyz75s4$0",
+          },
+          initializer: {
+            kind: "AstScriptNumericLiteral",
+            loc: [6, 11, 6, 12],
+            value: 0,
+          },
+          keyword: "let",
+        },
+        {
+          kind: "AstScriptBinaryExpression",
+          loc: [7, 3, 7, 8],
+          left: {
+            kind: "AstScriptIdentifier",
+            loc: [7, 3, 7, 4],
+            text: "n",
+            bindingKey: "n$3hyzmfxyz75s4$0",
+          },
+          operatorToken: "=",
+          right: {
+            kind: "AstScriptNumericLiteral",
+            loc: [7, 7, 7, 8],
+            value: 1,
+          },
+        },
+      ],
+    },
+  }),
 );
 const script = cs.create(
   [10, 16, 13, 3],
@@ -46,27 +67,43 @@ const script = cs.create(
     captures: [],
     spliceParams: { $ping: [] },
   },
-  (v) =>
-    v.block(
-      [10, 19, 13, 2],
-      [
-        v.variableDeclaration(
-          [11, 3, 11, 21],
-          v.identifier([11, 9, 11, 10], "x", "x$3hyzmfxyz75s4$1"),
-          v.callExpression(
-            [11, 13, 11, 20],
-            v.splice([11, 13, 11, 18], "$ping"),
-            false,
-            [],
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [12, 3, 12, 12],
-          v.numericLiteral([12, 10, 12, 11], 1),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [10, 19, 13, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [11, 3, 11, 21],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [11, 9, 11, 10],
+          text: "x",
+          bindingKey: "x$3hyzmfxyz75s4$1",
+        },
+        initializer: {
+          kind: "AstScriptCallExpression",
+          loc: [11, 13, 11, 20],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [11, 13, 11, 18],
+            key: "$ping",
+          },
+          questionDotToken: false,
+          arguments: [],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [12, 3, 12, 12],
+        expression: {
+          kind: "AstScriptNumericLiteral",
+          loc: [12, 10, 12, 11],
+          value: 1,
+        },
+      },
+    ],
+  }),
 );
 const action = cs.create(
   [15, 16, 17, 3],
@@ -79,23 +116,34 @@ const action = cs.create(
     captures: [],
     spliceParams: { $ping: [] },
   },
-  (v) =>
-    v.block(
-      [15, 19, 17, 2],
-      [
-        v.variableDeclaration(
-          [16, 3, 16, 21],
-          v.identifier([16, 9, 16, 10], "x", "x$3hyzmfxyz75s4$2"),
-          v.callExpression(
-            [16, 13, 16, 20],
-            v.splice([16, 13, 16, 18], "$ping"),
-            false,
-            [],
-          ),
-          "const",
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [15, 19, 17, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [16, 3, 16, 21],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [16, 9, 16, 10],
+          text: "x",
+          bindingKey: "x$3hyzmfxyz75s4$2",
+        },
+        initializer: {
+          kind: "AstScriptCallExpression",
+          loc: [16, 13, 16, 20],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [16, 13, 16, 18],
+            key: "$ping",
+          },
+          questionDotToken: false,
+          arguments: [],
+        },
+        keyword: "const",
+      },
+    ],
+  }),
 );
 // An error inside a checked initializer reports once: the duplicate copy
 // the check sequences is shielded.
@@ -110,25 +158,38 @@ const label = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [21, 18, 23, 2],
-      [
-        v.parameterDeclaration(
-          [21, 19, 21, 31],
-          v.identifier([21, 19, 21, 23], "text", "text$3hyzmfxyz75s4$3"),
-        ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [21, 18, 23, 2],
+    parameters: [
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [21, 19, 21, 31],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [21, 19, 21, 23],
+          text: "text",
+          bindingKey: "text$3hyzmfxyz75s4$3",
+        },
+      },
+    ],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [21, 36, 23, 2],
+      statements: [
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [22, 3, 22, 15],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [22, 10, 22, 14],
+            text: "text",
+            bindingKey: "text$3hyzmfxyz75s4$3",
+          },
+        },
       ],
-      v.block(
-        [21, 36, 23, 2],
-        [
-          v.returnStatement(
-            [22, 3, 22, 15],
-            v.identifier([22, 10, 22, 14], "text", "text$3hyzmfxyz75s4$3"),
-          ),
-        ],
-      ),
-    ),
+    },
+  }),
 );
 const wrongArgument = cs.create(
   [25, 23, 28, 3],
@@ -141,25 +202,46 @@ const wrongArgument = cs.create(
     captures: [],
     spliceParams: { $label: [] },
   },
-  (v) =>
-    v.block(
-      [25, 26, 28, 2],
-      [
-        v.variableDeclaration(
-          [26, 3, 26, 26],
-          v.identifier([26, 9, 26, 10], "x", "x$3hyzmfxyz75s4$4"),
-          v.callExpression(
-            [26, 13, 26, 25],
-            v.splice([26, 13, 26, 19], "$label"),
-            false,
-            [v.trueLiteral([26, 20, 26, 24])],
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [27, 3, 27, 12],
-          v.numericLiteral([27, 10, 27, 11], 1),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [25, 26, 28, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [26, 3, 26, 26],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [26, 9, 26, 10],
+          text: "x",
+          bindingKey: "x$3hyzmfxyz75s4$4",
+        },
+        initializer: {
+          kind: "AstScriptCallExpression",
+          loc: [26, 13, 26, 25],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [26, 13, 26, 19],
+            key: "$label",
+          },
+          questionDotToken: false,
+          arguments: [
+            {
+              kind: "AstScriptTrueLiteral",
+              loc: [26, 20, 26, 24],
+            },
+          ],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [27, 3, 27, 12],
+        expression: {
+          kind: "AstScriptNumericLiteral",
+          loc: [27, 10, 27, 11],
+          value: 1,
+        },
+      },
+    ],
+  }),
 );

@@ -19,17 +19,26 @@ class Point {
         captures: [],
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
-      (v) =>
-        v.arrowFunction(
-          [16, 15, 16, 42],
-          [],
-          v.binaryExpression(
-            [16, 21, 16, 42],
-            v.splice([16, 21, 16, 30], "$0splice0"),
-            "+",
-            v.splice([16, 33, 16, 42], "$0splice1"),
-          ),
-        ),
+      () => ({
+        kind: "AstScriptArrowFunction",
+        loc: [16, 15, 16, 42],
+        parameters: [],
+        body: {
+          kind: "AstScriptBinaryExpression",
+          loc: [16, 21, 16, 42],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [16, 21, 16, 30],
+            key: "$0splice0",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [16, 33, 16, 42],
+            key: "$0splice1",
+          },
+        },
+      }),
     );
   }
 }
@@ -47,7 +56,11 @@ const shared = new Point(
       captures: [],
       spliceParams: {},
     },
-    (v) => v.numericLiteral([22, 29, 22, 30], 1),
+    () => ({
+      kind: "AstScriptNumericLiteral",
+      loc: [22, 29, 22, 30],
+      value: 1,
+    }),
   ),
   cs.create(
     [22, 33, 22, 38],
@@ -60,7 +73,11 @@ const shared = new Point(
       captures: [],
       spliceParams: {},
     },
-    (v) => v.numericLiteral([22, 36, 22, 37], 2),
+    () => ({
+      kind: "AstScriptNumericLiteral",
+      loc: [22, 36, 22, 37],
+      value: 2,
+    }),
   ),
 );
 const left = cs.create(
@@ -74,32 +91,50 @@ const left = cs.create(
     captures: [],
     spliceParams: { $shared: [] },
   },
-  (v) =>
-    v.block(
-      [24, 17, 27, 2],
-      [
-        v.variableDeclaration(
-          [25, 3, 25, 21],
-          v.identifier([25, 9, 25, 10], "p", "p$2dmd79xnh14ui$0"),
-          v.splice([25, 13, 25, 20], "$shared"),
-          "const",
-        ),
-        v.returnStatement(
-          [26, 3, 26, 18],
-          v.callExpression(
-            [26, 10, 26, 17],
-            v.propertyAccessExpression(
-              [26, 10, 26, 15],
-              v.identifier([26, 10, 26, 11], "p", "p$2dmd79xnh14ui$0"),
-              false,
-              "sum",
-            ),
-            false,
-            [],
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [24, 17, 27, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [25, 3, 25, 21],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [25, 9, 25, 10],
+          text: "p",
+          bindingKey: "p$2dmd79xnh14ui$0",
+        },
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [25, 13, 25, 20],
+          key: "$shared",
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [26, 3, 26, 18],
+        expression: {
+          kind: "AstScriptCallExpression",
+          loc: [26, 10, 26, 17],
+          expression: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [26, 10, 26, 15],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [26, 10, 26, 11],
+              text: "p",
+              bindingKey: "p$2dmd79xnh14ui$0",
+            },
+            questionDotToken: false,
+            name: "sum",
+          },
+          questionDotToken: false,
+          arguments: [],
+        },
+      },
+    ],
+  }),
 );
 const right = cs.create(
   [29, 15, 32, 3],
@@ -112,27 +147,44 @@ const right = cs.create(
     captures: [],
     spliceParams: { $shared: [] },
   },
-  (v) =>
-    v.block(
-      [29, 18, 32, 2],
-      [
-        v.variableDeclaration(
-          [30, 3, 30, 21],
-          v.identifier([30, 9, 30, 10], "p", "p$2dmd79xnh14ui$1"),
-          v.splice([30, 13, 30, 20], "$shared"),
-          "const",
-        ),
-        v.returnStatement(
-          [31, 3, 31, 14],
-          v.propertyAccessExpression(
-            [31, 10, 31, 13],
-            v.identifier([31, 10, 31, 11], "p", "p$2dmd79xnh14ui$1"),
-            false,
-            "x",
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [29, 18, 32, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [30, 3, 30, 21],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [30, 9, 30, 10],
+          text: "p",
+          bindingKey: "p$2dmd79xnh14ui$1",
+        },
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [30, 13, 30, 20],
+          key: "$shared",
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [31, 3, 31, 14],
+        expression: {
+          kind: "AstScriptPropertyAccessExpression",
+          loc: [31, 10, 31, 13],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [31, 10, 31, 11],
+            text: "p",
+            bindingKey: "p$2dmd79xnh14ui$1",
+          },
+          questionDotToken: false,
+          name: "x",
+        },
+      },
+    ],
+  }),
 );
 export default cs.create(
   [34, 16, 34, 34],
@@ -145,11 +197,19 @@ export default cs.create(
     captures: [],
     spliceParams: { $left: [], $right: [] },
   },
-  (v) =>
-    v.binaryExpression(
-      [34, 19, 34, 33],
-      v.splice([34, 19, 34, 24], "$left"),
-      "+",
-      v.splice([34, 27, 34, 33], "$right"),
-    ),
+  () => ({
+    kind: "AstScriptBinaryExpression",
+    loc: [34, 19, 34, 33],
+    left: {
+      kind: "AstScriptSplice",
+      loc: [34, 19, 34, 24],
+      key: "$left",
+    },
+    operatorToken: "+",
+    right: {
+      kind: "AstScriptSplice",
+      loc: [34, 27, 34, 33],
+      key: "$right",
+    },
+  }),
 );

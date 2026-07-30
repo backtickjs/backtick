@@ -28,7 +28,11 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.numericLiteral([16, 36, 16, 37], 1),
+          () => ({
+            kind: "AstScriptNumericLiteral",
+            loc: [16, 36, 16, 37],
+            value: 1,
+          }),
         ),
         cs.create(
           [16, 40, 16, 45],
@@ -41,23 +45,32 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.numericLiteral([16, 43, 16, 44], 2),
+          () => ({
+            kind: "AstScriptNumericLiteral",
+            loc: [16, 43, 16, 44],
+            value: 2,
+          }),
         ),
       ]),
     },
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) =>
-    v.propertyAccessExpression(
-      [16, 19, 16, 61],
-      v.propertyAccessExpression(
-        [16, 19, 16, 54],
-        v.splice([16, 19, 16, 48], "$0splice0"),
-        false,
-        "coins",
-      ),
-      false,
-      "length",
-    ),
+  () => ({
+    kind: "AstScriptPropertyAccessExpression",
+    loc: [16, 19, 16, 61],
+    expression: {
+      kind: "AstScriptPropertyAccessExpression",
+      loc: [16, 19, 16, 54],
+      expression: {
+        kind: "AstScriptSplice",
+        loc: [16, 19, 16, 48],
+        key: "$0splice0",
+      },
+      questionDotToken: false,
+      name: "coins",
+    },
+    questionDotToken: false,
+    name: "length",
+  }),
 );

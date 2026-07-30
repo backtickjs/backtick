@@ -19,17 +19,26 @@ class Point {
         captures: [],
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
-      (v) =>
-        v.arrowFunction(
-          [16, 15, 16, 42],
-          [],
-          v.binaryExpression(
-            [16, 21, 16, 42],
-            v.splice([16, 21, 16, 30], "$0splice0"),
-            "+",
-            v.splice([16, 33, 16, 42], "$0splice1"),
-          ),
-        ),
+      () => ({
+        kind: "AstScriptArrowFunction",
+        loc: [16, 15, 16, 42],
+        parameters: [],
+        body: {
+          kind: "AstScriptBinaryExpression",
+          loc: [16, 21, 16, 42],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [16, 21, 16, 30],
+            key: "$0splice0",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [16, 33, 16, 42],
+            key: "$0splice1",
+          },
+        },
+      }),
     );
   }
 }
@@ -53,17 +62,26 @@ class Segment {
         captures: [],
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
-      (v) =>
-        v.arrowFunction(
-          [32, 15, 32, 52],
-          [],
-          v.binaryExpression(
-            [32, 21, 32, 52],
-            v.splice([32, 21, 32, 35], "$0splice0"),
-            "===",
-            v.splice([32, 40, 32, 52], "$0splice1"),
-          ),
-        ),
+      () => ({
+        kind: "AstScriptArrowFunction",
+        loc: [32, 15, 32, 52],
+        parameters: [],
+        body: {
+          kind: "AstScriptBinaryExpression",
+          loc: [32, 21, 32, 52],
+          left: {
+            kind: "AstScriptSplice",
+            loc: [32, 21, 32, 35],
+            key: "$0splice0",
+          },
+          operatorToken: "===",
+          right: {
+            kind: "AstScriptSplice",
+            loc: [32, 40, 32, 52],
+            key: "$0splice1",
+          },
+        },
+      }),
     );
   }
 }
@@ -80,7 +98,11 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.numericLiteral([36, 42, 36, 43], 1),
+      () => ({
+        kind: "AstScriptNumericLiteral",
+        loc: [36, 42, 36, 43],
+        value: 1,
+      }),
     ),
     cs.create(
       [36, 46, 36, 51],
@@ -93,7 +115,11 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.numericLiteral([36, 49, 36, 50], 2),
+      () => ({
+        kind: "AstScriptNumericLiteral",
+        loc: [36, 49, 36, 50],
+        value: 2,
+      }),
     ),
   ),
   new Point(
@@ -108,7 +134,11 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.numericLiteral([36, 67, 36, 68], 1),
+      () => ({
+        kind: "AstScriptNumericLiteral",
+        loc: [36, 67, 36, 68],
+        value: 1,
+      }),
     ),
     cs.create(
       [36, 71, 36, 76],
@@ -121,7 +151,11 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.numericLiteral([36, 74, 36, 75], 8),
+      () => ({
+        kind: "AstScriptNumericLiteral",
+        loc: [36, 74, 36, 75],
+        value: 8,
+      }),
     ),
   ),
 );
@@ -136,110 +170,174 @@ export default cs.create(
     captures: [],
     spliceParams: { $segment: [] },
   },
-  (v) =>
-    v.block(
-      [38, 19, 45, 2],
-      [
-        v.variableDeclaration(
-          [39, 3, 39, 22],
-          v.identifier([39, 9, 39, 10], "s", "s$marvm6ddqnqk$0"),
-          v.splice([39, 13, 39, 21], "$segment"),
-          "const",
-        ),
-        v.variableDeclaration(
-          [40, 3, 40, 34],
-          v.identifier([40, 9, 40, 13], "rise", "rise$marvm6ddqnqk$1"),
-          v.binaryExpression(
-            [40, 16, 40, 33],
-            v.propertyAccessExpression(
-              [40, 16, 40, 22],
-              v.propertyAccessExpression(
-                [40, 16, 40, 20],
-                v.identifier([40, 16, 40, 17], "s", "s$marvm6ddqnqk$0"),
-                false,
-                "to",
-              ),
-              false,
-              "y",
-            ),
-            "-",
-            v.propertyAccessExpression(
-              [40, 25, 40, 33],
-              v.propertyAccessExpression(
-                [40, 25, 40, 31],
-                v.identifier([40, 25, 40, 26], "s", "s$marvm6ddqnqk$0"),
-                false,
-                "from",
-              ),
-              false,
-              "y",
-            ),
-          ),
-          "const",
-        ),
-        v.ifStatement(
-          [41, 3, 43, 4],
-          v.callExpression(
-            [41, 7, 41, 19],
-            v.propertyAccessExpression(
-              [41, 7, 41, 17],
-              v.identifier([41, 7, 41, 8], "s", "s$marvm6ddqnqk$0"),
-              false,
-              "vertical",
-            ),
-            false,
-            [],
-          ),
-          v.block(
-            [41, 21, 43, 4],
-            [
-              v.returnStatement(
-                [42, 5, 42, 17],
-                v.identifier([42, 12, 42, 16], "rise", "rise$marvm6ddqnqk$1"),
-              ),
-            ],
-          ),
-          null,
-        ),
-        v.returnStatement(
-          [44, 3, 44, 36],
-          v.binaryExpression(
-            [44, 10, 44, 35],
-            v.callExpression(
-              [44, 10, 44, 20],
-              v.propertyAccessExpression(
-                [44, 10, 44, 18],
-                v.propertyAccessExpression(
-                  [44, 10, 44, 14],
-                  v.identifier([44, 10, 44, 11], "s", "s$marvm6ddqnqk$0"),
-                  false,
-                  "to",
-                ),
-                false,
-                "sum",
-              ),
-              false,
-              [],
-            ),
-            "-",
-            v.callExpression(
-              [44, 23, 44, 35],
-              v.propertyAccessExpression(
-                [44, 23, 44, 33],
-                v.propertyAccessExpression(
-                  [44, 23, 44, 29],
-                  v.identifier([44, 23, 44, 24], "s", "s$marvm6ddqnqk$0"),
-                  false,
-                  "from",
-                ),
-                false,
-                "sum",
-              ),
-              false,
-              [],
-            ),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [38, 19, 45, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [39, 3, 39, 22],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [39, 9, 39, 10],
+          text: "s",
+          bindingKey: "s$marvm6ddqnqk$0",
+        },
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [39, 13, 39, 21],
+          key: "$segment",
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [40, 3, 40, 34],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [40, 9, 40, 13],
+          text: "rise",
+          bindingKey: "rise$marvm6ddqnqk$1",
+        },
+        initializer: {
+          kind: "AstScriptBinaryExpression",
+          loc: [40, 16, 40, 33],
+          left: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [40, 16, 40, 22],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [40, 16, 40, 20],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [40, 16, 40, 17],
+                text: "s",
+                bindingKey: "s$marvm6ddqnqk$0",
+              },
+              questionDotToken: false,
+              name: "to",
+            },
+            questionDotToken: false,
+            name: "y",
+          },
+          operatorToken: "-",
+          right: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [40, 25, 40, 33],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [40, 25, 40, 31],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [40, 25, 40, 26],
+                text: "s",
+                bindingKey: "s$marvm6ddqnqk$0",
+              },
+              questionDotToken: false,
+              name: "from",
+            },
+            questionDotToken: false,
+            name: "y",
+          },
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptIfStatement",
+        loc: [41, 3, 43, 4],
+        expression: {
+          kind: "AstScriptCallExpression",
+          loc: [41, 7, 41, 19],
+          expression: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [41, 7, 41, 17],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [41, 7, 41, 8],
+              text: "s",
+              bindingKey: "s$marvm6ddqnqk$0",
+            },
+            questionDotToken: false,
+            name: "vertical",
+          },
+          questionDotToken: false,
+          arguments: [],
+        },
+        thenStatement: {
+          kind: "AstScriptBlock",
+          loc: [41, 21, 43, 4],
+          statements: [
+            {
+              kind: "AstScriptReturnStatement",
+              loc: [42, 5, 42, 17],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [42, 12, 42, 16],
+                text: "rise",
+                bindingKey: "rise$marvm6ddqnqk$1",
+              },
+            },
+          ],
+        },
+        elseStatement: null,
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [44, 3, 44, 36],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [44, 10, 44, 35],
+          left: {
+            kind: "AstScriptCallExpression",
+            loc: [44, 10, 44, 20],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [44, 10, 44, 18],
+              expression: {
+                kind: "AstScriptPropertyAccessExpression",
+                loc: [44, 10, 44, 14],
+                expression: {
+                  kind: "AstScriptIdentifier",
+                  loc: [44, 10, 44, 11],
+                  text: "s",
+                  bindingKey: "s$marvm6ddqnqk$0",
+                },
+                questionDotToken: false,
+                name: "to",
+              },
+              questionDotToken: false,
+              name: "sum",
+            },
+            questionDotToken: false,
+            arguments: [],
+          },
+          operatorToken: "-",
+          right: {
+            kind: "AstScriptCallExpression",
+            loc: [44, 23, 44, 35],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [44, 23, 44, 33],
+              expression: {
+                kind: "AstScriptPropertyAccessExpression",
+                loc: [44, 23, 44, 29],
+                expression: {
+                  kind: "AstScriptIdentifier",
+                  loc: [44, 23, 44, 24],
+                  text: "s",
+                  bindingKey: "s$marvm6ddqnqk$0",
+                },
+                questionDotToken: false,
+                name: "from",
+              },
+              questionDotToken: false,
+              name: "sum",
+            },
+            questionDotToken: false,
+            arguments: [],
+          },
+        },
+      },
+    ],
+  }),
 );

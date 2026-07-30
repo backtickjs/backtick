@@ -12,18 +12,28 @@ const effects = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [5, 34, 7, 2],
-      [
-        v.variableDeclaration(
-          [6, 3, 6, 15],
-          v.identifier([6, 9, 6, 10], "x", "x$agkxao2hual4$0"),
-          v.numericLiteral([6, 13, 6, 14], 1),
-          "const",
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [5, 34, 7, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [6, 3, 6, 15],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [6, 9, 6, 10],
+          text: "x",
+          bindingKey: "x$agkxao2hual4$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [6, 13, 6, 14],
+          value: 1,
+        },
+        keyword: "const",
+      },
+    ],
+  }),
 );
 const composed = cs.create(
   [9, 32, 11, 3],
@@ -36,7 +46,17 @@ const composed = cs.create(
     captures: [],
     spliceParams: { $effects: [] },
   },
-  (v) => v.block([9, 35, 11, 2], [v.splice([10, 3, 10, 11], "$effects")]),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [9, 35, 11, 2],
+    statements: [
+      {
+        kind: "AstScriptSplice",
+        loc: [10, 3, 10, 11],
+        key: "$effects",
+      },
+    ],
+  }),
 );
 export default cs.create(
   [13, 16, 15, 3],
@@ -49,5 +69,15 @@ export default cs.create(
     captures: [],
     spliceParams: { $composed: [] },
   },
-  (v) => v.block([13, 19, 15, 2], [v.splice([14, 3, 14, 12], "$composed")]),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [13, 19, 15, 2],
+    statements: [
+      {
+        kind: "AstScriptSplice",
+        loc: [14, 3, 14, 12],
+        key: "$composed",
+      },
+    ],
+  }),
 );

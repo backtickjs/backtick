@@ -12,35 +12,49 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [5, 19, 11, 2],
-      [
-        v.tryStatement(
-          [6, 3, 10, 4],
-          v.block(
-            [6, 7, 8, 4],
-            [
-              v.throwStatement(
-                [7, 5, 7, 18],
-                v.stringLiteral([7, 11, 7, 17], "boom"),
-              ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [5, 19, 11, 2],
+    statements: [
+      {
+        kind: "AstScriptTryStatement",
+        loc: [6, 3, 10, 4],
+        tryBlock: {
+          kind: "AstScriptBlock",
+          loc: [6, 7, 8, 4],
+          statements: [
+            {
+              kind: "AstScriptThrowStatement",
+              loc: [7, 5, 7, 18],
+              expression: {
+                kind: "AstScriptStringLiteral",
+                loc: [7, 11, 7, 17],
+                text: "boom",
+              },
+            },
+          ],
+        },
+        catchClause: {
+          kind: "AstScriptCatchClause",
+          loc: [8, 5, 10, 4],
+          variableDeclaration: null,
+          block: {
+            kind: "AstScriptBlock",
+            loc: [8, 11, 10, 4],
+            statements: [
+              {
+                kind: "AstScriptReturnStatement",
+                loc: [9, 5, 9, 21],
+                expression: {
+                  kind: "AstScriptStringLiteral",
+                  loc: [9, 12, 9, 20],
+                  text: "caught",
+                },
+              },
             ],
-          ),
-          v.catchClause(
-            [8, 5, 10, 4],
-            null,
-            v.block(
-              [8, 11, 10, 4],
-              [
-                v.returnStatement(
-                  [9, 5, 9, 21],
-                  v.stringLiteral([9, 12, 9, 20], "caught"),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    ),
+          },
+        },
+      },
+    ],
+  }),
 );

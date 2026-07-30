@@ -22,55 +22,96 @@ export default cs.create(
           captures: [],
           spliceParams: {},
         },
-        (v) =>
-          v.arrowFunction(
-            [9, 21, 9, 28],
-            [],
-            v.numericLiteral([9, 27, 9, 28], 2),
-          ),
+        () => ({
+          kind: "AstScriptArrowFunction",
+          loc: [9, 21, 9, 28],
+          parameters: [],
+          body: {
+            kind: "AstScriptNumericLiteral",
+            loc: [9, 27, 9, 28],
+            value: 2,
+          },
+        }),
       ),
     },
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) =>
-    v.block(
-      [7, 19, 10, 2],
-      [
-        v.variableDeclaration(
-          [8, 3, 8, 46],
-          v.identifier([8, 9, 8, 14], "apply", "apply$22dvza3e0b85b$0"),
-          v.arrowFunction(
-            [8, 17, 8, 45],
-            [
-              v.parameterDeclaration(
-                [8, 18, 8, 33],
-                v.identifier([8, 18, 8, 19], "f", "f$22dvza3e0b85b$1"),
-              ),
-            ],
-            v.binaryExpression(
-              [8, 38, 8, 45],
-              v.callExpression(
-                [8, 38, 8, 41],
-                v.identifier([8, 38, 8, 39], "f", "f$22dvza3e0b85b$1"),
-                false,
-                [],
-              ),
-              "+",
-              v.numericLiteral([8, 44, 8, 45], 1),
-            ),
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [9, 3, 9, 32],
-          v.callExpression(
-            [9, 10, 9, 31],
-            v.identifier([9, 10, 9, 15], "apply", "apply$22dvza3e0b85b$0"),
-            false,
-            [v.splice([9, 16, 9, 30], "$0splice0")],
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [7, 19, 10, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [8, 3, 8, 46],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [8, 9, 8, 14],
+          text: "apply",
+          bindingKey: "apply$22dvza3e0b85b$0",
+        },
+        initializer: {
+          kind: "AstScriptArrowFunction",
+          loc: [8, 17, 8, 45],
+          parameters: [
+            {
+              kind: "AstScriptParameterDeclaration",
+              loc: [8, 18, 8, 33],
+              name: {
+                kind: "AstScriptIdentifier",
+                loc: [8, 18, 8, 19],
+                text: "f",
+                bindingKey: "f$22dvza3e0b85b$1",
+              },
+            },
+          ],
+          body: {
+            kind: "AstScriptBinaryExpression",
+            loc: [8, 38, 8, 45],
+            left: {
+              kind: "AstScriptCallExpression",
+              loc: [8, 38, 8, 41],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [8, 38, 8, 39],
+                text: "f",
+                bindingKey: "f$22dvza3e0b85b$1",
+              },
+              questionDotToken: false,
+              arguments: [],
+            },
+            operatorToken: "+",
+            right: {
+              kind: "AstScriptNumericLiteral",
+              loc: [8, 44, 8, 45],
+              value: 1,
+            },
+          },
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [9, 3, 9, 32],
+        expression: {
+          kind: "AstScriptCallExpression",
+          loc: [9, 10, 9, 31],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [9, 10, 9, 15],
+            text: "apply",
+            bindingKey: "apply$22dvza3e0b85b$0",
+          },
+          questionDotToken: false,
+          arguments: [
+            {
+              kind: "AstScriptSplice",
+              loc: [9, 16, 9, 30],
+              key: "$0splice0",
+            },
+          ],
+        },
+      },
+    ],
+  }),
 );

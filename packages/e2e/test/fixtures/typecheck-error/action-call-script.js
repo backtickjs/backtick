@@ -13,22 +13,33 @@ const ping = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [6, 17, 8, 2],
-      [],
-      v.block(
-        [6, 23, 8, 2],
-        [
-          v.variableDeclaration(
-            [7, 3, 7, 15],
-            v.identifier([7, 9, 7, 10], "x", "x$17wdcvct95tpn$0"),
-            v.numericLiteral([7, 13, 7, 14], 1),
-            "const",
-          ),
-        ],
-      ),
-    ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [6, 17, 8, 2],
+    parameters: [],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [6, 23, 8, 2],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [7, 3, 7, 15],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [7, 9, 7, 10],
+            text: "x",
+            bindingKey: "x$17wdcvct95tpn$0",
+          },
+          initializer: {
+            kind: "AstScriptNumericLiteral",
+            loc: [7, 13, 7, 14],
+            value: 1,
+          },
+          keyword: "const",
+        },
+      ],
+    },
+  }),
 );
 export const called = cs.create(
   [10, 23, 10, 34],
@@ -41,13 +52,17 @@ export const called = cs.create(
     captures: [],
     spliceParams: { $ping: [] },
   },
-  (v) =>
-    v.callExpression(
-      [10, 26, 10, 33],
-      v.splice([10, 26, 10, 31], "$ping"),
-      false,
-      [],
-    ),
+  () => ({
+    kind: "AstScriptCallExpression",
+    loc: [10, 26, 10, 33],
+    expression: {
+      kind: "AstScriptSplice",
+      loc: [10, 26, 10, 31],
+      key: "$ping",
+    },
+    questionDotToken: false,
+    arguments: [],
+  }),
 );
 const action = cs.create(
   [12, 16, 14, 3],
@@ -60,18 +75,28 @@ const action = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [12, 19, 14, 2],
-      [
-        v.variableDeclaration(
-          [13, 3, 13, 15],
-          v.identifier([13, 9, 13, 10], "x", "x$17wdcvct95tpn$1"),
-          v.numericLiteral([13, 13, 13, 14], 1),
-          "const",
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [12, 19, 14, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [13, 3, 13, 15],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [13, 9, 13, 10],
+          text: "x",
+          bindingKey: "x$17wdcvct95tpn$1",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [13, 13, 13, 14],
+          value: 1,
+        },
+        keyword: "const",
+      },
+    ],
+  }),
 );
 export const spliced = cs.create(
   [16, 24, 16, 35],
@@ -84,5 +109,9 @@ export const spliced = cs.create(
     captures: [],
     spliceParams: { $action: [] },
   },
-  (v) => v.splice([16, 27, 16, 34], "$action"),
+  () => ({
+    kind: "AstScriptSplice",
+    loc: [16, 27, 16, 34],
+    key: "$action",
+  }),
 );

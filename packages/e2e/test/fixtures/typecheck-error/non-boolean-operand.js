@@ -13,37 +13,67 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [6, 19, 8, 2],
-      [
-        v.parameterDeclaration(
-          [6, 20, 6, 33],
-          v.identifier([6, 20, 6, 25], "count", "count$3kpojr67liy8x$0"),
-        ),
-        v.parameterDeclaration(
-          [6, 35, 6, 48],
-          v.identifier([6, 35, 6, 39], "flag", "flag$3kpojr67liy8x$1"),
-        ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [6, 19, 8, 2],
+    parameters: [
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [6, 20, 6, 33],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [6, 20, 6, 25],
+          text: "count",
+          bindingKey: "count$3kpojr67liy8x$0",
+        },
+      },
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [6, 35, 6, 48],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [6, 35, 6, 39],
+          text: "flag",
+          bindingKey: "flag$3kpojr67liy8x$1",
+        },
+      },
+    ],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [6, 53, 8, 2],
+      statements: [
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [7, 3, 7, 36],
+          expression: {
+            kind: "AstScriptBinaryExpression",
+            loc: [7, 10, 7, 35],
+            left: {
+              kind: "AstScriptBinaryExpression",
+              loc: [7, 11, 7, 24],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [7, 11, 7, 16],
+                text: "count",
+                bindingKey: "count$3kpojr67liy8x$0",
+              },
+              operatorToken: "&&",
+              right: {
+                kind: "AstScriptIdentifier",
+                loc: [7, 20, 7, 24],
+                text: "flag",
+                bindingKey: "flag$3kpojr67liy8x$1",
+              },
+            },
+            operatorToken: "||",
+            right: {
+              kind: "AstScriptStringLiteral",
+              loc: [7, 29, 7, 35],
+              text: "none",
+            },
+          },
+        },
       ],
-      v.block(
-        [6, 53, 8, 2],
-        [
-          v.returnStatement(
-            [7, 3, 7, 36],
-            v.binaryExpression(
-              [7, 10, 7, 35],
-              v.binaryExpression(
-                [7, 11, 7, 24],
-                v.identifier([7, 11, 7, 16], "count", "count$3kpojr67liy8x$0"),
-                "&&",
-                v.identifier([7, 20, 7, 24], "flag", "flag$3kpojr67liy8x$1"),
-              ),
-              "||",
-              v.stringLiteral([7, 29, 7, 35], "none"),
-            ),
-          ),
-        ],
-      ),
-    ),
+    },
+  }),
 );

@@ -15,13 +15,21 @@ function add(lhs) {
       captures: [],
       spliceParams: { $lhs: [] },
     },
-    (v) =>
-      v.binaryExpression(
-        [8, 13, 8, 21],
-        v.splice([8, 13, 8, 17], "$lhs"),
-        "+",
-        v.numericLiteral([8, 20, 8, 21], 2),
-      ),
+    () => ({
+      kind: "AstScriptBinaryExpression",
+      loc: [8, 13, 8, 21],
+      left: {
+        kind: "AstScriptSplice",
+        loc: [8, 13, 8, 17],
+        key: "$lhs",
+      },
+      operatorToken: "+",
+      right: {
+        kind: "AstScriptNumericLiteral",
+        loc: [8, 20, 8, 21],
+        value: 2,
+      },
+    }),
   );
 }
 export default cs.create(
@@ -44,27 +52,47 @@ export default cs.create(
             captures: ["foo$$3r8prbdxxrtje$0"],
             spliceParams: {},
           },
-          (v) => v.identifier([13, 19, 13, 23], "foo$", "foo$$3r8prbdxxrtje$0"),
+          () => ({
+            kind: "AstScriptIdentifier",
+            loc: [13, 19, 13, 23],
+            text: "foo$",
+            bindingKey: "foo$$3r8prbdxxrtje$0",
+          }),
         ),
       ),
     },
     captures: [],
     spliceParams: { $0splice0: ["foo$$3r8prbdxxrtje$0"] },
   },
-  (v) =>
-    v.block(
-      [11, 19, 14, 2],
-      [
-        v.variableDeclaration(
-          [12, 3, 12, 18],
-          v.identifier([12, 9, 12, 13], "foo$", "foo$$3r8prbdxxrtje$0"),
-          v.numericLiteral([12, 16, 12, 17], 1),
-          "const",
-        ),
-        v.returnStatement(
-          [13, 3, 13, 27],
-          v.splice([13, 10, 13, 26], "$0splice0"),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [11, 19, 14, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [12, 3, 12, 18],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [12, 9, 12, 13],
+          text: "foo$",
+          bindingKey: "foo$$3r8prbdxxrtje$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [12, 16, 12, 17],
+          value: 1,
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [13, 3, 13, 27],
+        expression: {
+          kind: "AstScriptSplice",
+          loc: [13, 10, 13, 26],
+          key: "$0splice0",
+        },
+      },
+    ],
+  }),
 );

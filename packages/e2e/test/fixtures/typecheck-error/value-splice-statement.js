@@ -12,7 +12,11 @@ const count = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.numericLiteral([5, 18, 5, 19], 1),
+  () => ({
+    kind: "AstScriptNumericLiteral",
+    loc: [5, 18, 5, 19],
+    value: 1,
+  }),
 );
 export const script = cs.create(
   [7, 23, 9, 3],
@@ -25,5 +29,15 @@ export const script = cs.create(
     captures: [],
     spliceParams: { $count: [] },
   },
-  (v) => v.block([7, 26, 9, 2], [v.splice([8, 3, 8, 9], "$count")]),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [7, 26, 9, 2],
+    statements: [
+      {
+        kind: "AstScriptSplice",
+        loc: [8, 3, 8, 9],
+        key: "$count",
+      },
+    ],
+  }),
 );

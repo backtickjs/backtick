@@ -19,7 +19,12 @@ export default cs.create(
             captures: ["total$wjl0rp4901n3$0"],
             spliceParams: {},
           },
-          (v) => v.identifier([5, 19, 5, 24], "total", "total$wjl0rp4901n3$0"),
+          () => ({
+            kind: "AstScriptIdentifier",
+            loc: [5, 19, 5, 24],
+            text: "total",
+            bindingKey: "total$wjl0rp4901n3$0",
+          }),
         ),
         100,
       ),
@@ -27,19 +32,37 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: ["total$wjl0rp4901n3$0"] },
   },
-  (v) =>
-    v.block(
-      [3, 19, 6, 2],
-      [
-        v.variableDeclaration(
-          [4, 3, 4, 19],
-          v.identifier([4, 9, 4, 14], "total", "total$wjl0rp4901n3$0"),
-          v.numericLiteral([4, 17, 4, 18], 1),
-          "const",
-        ),
-        v.returnStatement([5, 3, 5, 33], v.splice([5, 10, 5, 32], "$0splice0")),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [3, 19, 6, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [4, 3, 4, 19],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [4, 9, 4, 14],
+          text: "total",
+          bindingKey: "total$wjl0rp4901n3$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [4, 17, 4, 18],
+          value: 1,
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [5, 3, 5, 33],
+        expression: {
+          kind: "AstScriptSplice",
+          loc: [5, 10, 5, 32],
+          key: "$0splice0",
+        },
+      },
+    ],
+  }),
 );
 function add(lhs, rhs) {
   return cs.create(
@@ -53,43 +76,91 @@ function add(lhs, rhs) {
       captures: [],
       spliceParams: { $lhs: [], $rhs: [] },
     },
-    (v) =>
-      v.block(
-        [9, 13, 14, 4],
-        [
-          v.variableDeclaration(
-            [10, 5, 10, 19],
-            v.identifier([10, 9, 10, 14], "total", "total$wjl0rp4901n3$1"),
-            v.numericLiteral([10, 17, 10, 18], 0),
-            "let",
-          ),
-          v.binaryExpression(
-            [11, 5, 11, 25],
-            v.identifier([11, 5, 11, 10], "total", "total$wjl0rp4901n3$1"),
-            "=",
-            v.binaryExpression(
-              [11, 13, 11, 25],
-              v.identifier([11, 13, 11, 18], "total", "total$wjl0rp4901n3$1"),
-              "+",
-              v.splice([11, 21, 11, 25], "$lhs"),
-            ),
-          ),
-          v.binaryExpression(
-            [12, 5, 12, 25],
-            v.identifier([12, 5, 12, 10], "total", "total$wjl0rp4901n3$1"),
-            "=",
-            v.binaryExpression(
-              [12, 13, 12, 25],
-              v.identifier([12, 13, 12, 18], "total", "total$wjl0rp4901n3$1"),
-              "+",
-              v.splice([12, 21, 12, 25], "$rhs"),
-            ),
-          ),
-          v.returnStatement(
-            [13, 5, 13, 18],
-            v.identifier([13, 12, 13, 17], "total", "total$wjl0rp4901n3$1"),
-          ),
-        ],
-      ),
+    () => ({
+      kind: "AstScriptBlock",
+      loc: [9, 13, 14, 4],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [10, 5, 10, 19],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [10, 9, 10, 14],
+            text: "total",
+            bindingKey: "total$wjl0rp4901n3$1",
+          },
+          initializer: {
+            kind: "AstScriptNumericLiteral",
+            loc: [10, 17, 10, 18],
+            value: 0,
+          },
+          keyword: "let",
+        },
+        {
+          kind: "AstScriptBinaryExpression",
+          loc: [11, 5, 11, 25],
+          left: {
+            kind: "AstScriptIdentifier",
+            loc: [11, 5, 11, 10],
+            text: "total",
+            bindingKey: "total$wjl0rp4901n3$1",
+          },
+          operatorToken: "=",
+          right: {
+            kind: "AstScriptBinaryExpression",
+            loc: [11, 13, 11, 25],
+            left: {
+              kind: "AstScriptIdentifier",
+              loc: [11, 13, 11, 18],
+              text: "total",
+              bindingKey: "total$wjl0rp4901n3$1",
+            },
+            operatorToken: "+",
+            right: {
+              kind: "AstScriptSplice",
+              loc: [11, 21, 11, 25],
+              key: "$lhs",
+            },
+          },
+        },
+        {
+          kind: "AstScriptBinaryExpression",
+          loc: [12, 5, 12, 25],
+          left: {
+            kind: "AstScriptIdentifier",
+            loc: [12, 5, 12, 10],
+            text: "total",
+            bindingKey: "total$wjl0rp4901n3$1",
+          },
+          operatorToken: "=",
+          right: {
+            kind: "AstScriptBinaryExpression",
+            loc: [12, 13, 12, 25],
+            left: {
+              kind: "AstScriptIdentifier",
+              loc: [12, 13, 12, 18],
+              text: "total",
+              bindingKey: "total$wjl0rp4901n3$1",
+            },
+            operatorToken: "+",
+            right: {
+              kind: "AstScriptSplice",
+              loc: [12, 21, 12, 25],
+              key: "$rhs",
+            },
+          },
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [13, 5, 13, 18],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [13, 12, 13, 17],
+            text: "total",
+            bindingKey: "total$wjl0rp4901n3$1",
+          },
+        },
+      ],
+    }),
   );
 }

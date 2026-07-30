@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
-import { call, sourceLoc, varDeclList } from "./nodeFactory.js";
+import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
 import { bodyKind, partialReturn } from "./bodyKind.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -226,7 +226,9 @@ function rewriteNodeImpl(
 ): RewrittenNode {
   const unsupported = (): RewrittenNode => ({
     virtual: node,
-    runtime: call(ts, "v", "nullLiteral", [loc(node)]),
+    runtime: astNode(ts, "AstScriptNullLiteral", {
+      loc: loc(node),
+    }),
   });
 
   const loc = (target: ts.Node): ts.Expression =>
@@ -247,13 +249,13 @@ function rewriteNodeImpl(
         statements.map((statement) => statement.virtual as ts.Statement),
         true,
       ),
-      runtime: call(ts, "v", "block", [
-        loc(node),
-        ts.factory.createArrayLiteralExpression(
+      runtime: astNode(ts, "AstScriptBlock", {
+        loc: loc(node),
+        statements: ts.factory.createArrayLiteralExpression(
           statements.map((statement) => statement.runtime as ts.Expression),
           false,
         ),
-      ]),
+      }),
     };
   }
 
@@ -342,16 +344,16 @@ function rewriteNodeImpl(
           // exact type, `cs.let` widens, as unwrapped they would.
           call(ts, "cs", keyword, [initializer.virtual as ts.Expression]),
         ),
-        runtime: call(ts, "v", "variableDeclaration", [
-          loc(at),
-          call(ts, "v", "identifier", [
-            loc(declaration.name),
-            ts.factory.createStringLiteral(name.text),
-            ts.factory.createStringLiteral(bindingKey(state, name)),
-          ]),
-          initializer.runtime as ts.Expression,
-          ts.factory.createStringLiteral(keyword),
-        ]),
+        runtime: astNode(ts, "AstScriptVariableDeclaration", {
+          loc: loc(at),
+          name: astNode(ts, "AstScriptIdentifier", {
+            loc: loc(declaration.name),
+            text: ts.factory.createStringLiteral(name.text),
+            bindingKey: ts.factory.createStringLiteral(bindingKey(state, name)),
+          }),
+          initializer: initializer.runtime as ts.Expression,
+          keyword: ts.factory.createStringLiteral(keyword),
+        }),
       };
     }
   }
@@ -373,14 +375,14 @@ function rewriteNodeImpl(
         consequent.virtual as ts.Statement,
         alternate ? (alternate.virtual as ts.Statement) : undefined,
       ),
-      runtime: call(ts, "v", "ifStatement", [
-        loc(node),
-        condition.runtime as ts.Expression,
-        consequent.runtime as ts.Expression,
-        alternate
+      runtime: astNode(ts, "AstScriptIfStatement", {
+        loc: loc(node),
+        expression: condition.runtime as ts.Expression,
+        thenStatement: consequent.runtime as ts.Expression,
+        elseStatement: alternate
           ? (alternate.runtime as ts.Expression)
           : ts.factory.createNull(),
-      ]),
+      }),
     };
   }
 
@@ -397,11 +399,11 @@ function rewriteNodeImpl(
         ),
         body.virtual as ts.Statement,
       ),
-      runtime: call(ts, "v", "whileStatement", [
-        loc(node),
-        condition.runtime as ts.Expression,
-        body.runtime as ts.Expression,
-      ]),
+      runtime: astNode(ts, "AstScriptWhileStatement", {
+        loc: loc(node),
+        expression: condition.runtime as ts.Expression,
+        statement: body.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -436,13 +438,13 @@ function rewriteNodeImpl(
         update ? (update.virtual as ts.Expression) : undefined,
         body.virtual as ts.Statement,
       ),
-      runtime: call(ts, "v", "forStatement", [
-        loc(node),
-        runtimeOr(initializer),
-        runtimeOr(condition),
-        runtimeOr(update),
-        body.runtime as ts.Expression,
-      ]),
+      runtime: astNode(ts, "AstScriptForStatement", {
+        loc: loc(node),
+        initializer: runtimeOr(initializer),
+        condition: runtimeOr(condition),
+        incrementor: runtimeOr(update),
+        statement: body.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -461,7 +463,13 @@ function rewriteNodeImpl(
       virtual: ts.isBreakStatement(node)
         ? ts.factory.createBreakStatement()
         : ts.factory.createContinueStatement(),
-      runtime: call(ts, "v", `${keyword}Statement`, [loc(node)]),
+      runtime: astNode(
+        ts,
+        ts.isBreakStatement(node)
+          ? "AstScriptBreakStatement"
+          : "AstScriptContinueStatement",
+        { loc: loc(node) },
+      ),
     };
   }
 
@@ -514,10 +522,12 @@ function rewriteNodeImpl(
         state.bodyKind === "value"
           ? ts.factory.createReturnStatement(ts.factory.createNull())
           : ts.factory.createReturnStatement(),
-      runtime: call(ts, "v", "returnStatement", [
-        loc(node),
-        call(ts, "v", "nullLiteral", [loc(node)]),
-      ]),
+      runtime: astNode(ts, "AstScriptReturnStatement", {
+        loc: loc(node),
+        expression: astNode(ts, "AstScriptNullLiteral", {
+          loc: loc(node),
+        }),
+      }),
     };
   }
 
@@ -529,10 +539,10 @@ function rewriteNodeImpl(
           ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
           : (expression.virtual as ts.Expression),
       ),
-      runtime: call(ts, "v", "returnStatement", [
-        loc(node),
-        expression.runtime as ts.Expression,
-      ]),
+      runtime: astNode(ts, "AstScriptReturnStatement", {
+        loc: loc(node),
+        expression: expression.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -542,10 +552,10 @@ function rewriteNodeImpl(
       virtual: ts.factory.createThrowStatement(
         expression.virtual as ts.Expression,
       ),
-      runtime: call(ts, "v", "throwStatement", [
-        loc(node),
-        expression.runtime as ts.Expression,
-      ]),
+      runtime: astNode(ts, "AstScriptThrowStatement", {
+        loc: loc(node),
+        expression: expression.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -585,11 +595,11 @@ function rewriteNodeImpl(
       state.mappings.set(identifier, name);
       param = {
         virtual: identifier,
-        runtime: call(ts, "v", "identifier", [
-          loc(name),
-          ts.factory.createStringLiteral(name.text),
-          ts.factory.createStringLiteral(bindingKey(state, name)),
-        ]),
+        runtime: astNode(ts, "AstScriptIdentifier", {
+          loc: loc(name),
+          text: ts.factory.createStringLiteral(name.text),
+          bindingKey: ts.factory.createStringLiteral(bindingKey(state, name)),
+        }),
       };
     }
     const handler = rewriteNode(ts, state, clause.block);
@@ -602,16 +612,16 @@ function rewriteNodeImpl(
         ),
         undefined,
       ),
-      runtime: call(ts, "v", "tryStatement", [
-        loc(node),
-        block.runtime as ts.Expression,
+      runtime: astNode(ts, "AstScriptTryStatement", {
+        loc: loc(node),
+        tryBlock: block.runtime as ts.Expression,
         // The clause is its own node, as it is in TypeScript.
-        call(ts, "v", "catchClause", [
-          loc(clause),
-          param ? param.runtime : ts.factory.createNull(),
-          handler.runtime as ts.Expression,
-        ]),
-      ]),
+        catchClause: astNode(ts, "AstScriptCatchClause", {
+          loc: loc(clause),
+          variableDeclaration: param ? param.runtime : ts.factory.createNull(),
+          block: handler.runtime as ts.Expression,
+        }),
+      }),
     };
   }
 
@@ -660,10 +670,10 @@ function rewriteNodeImpl(
       state.codeInformation.set(virtual, { semantic: false });
       return {
         virtual,
-        runtime: call(ts, "v", "splice", [
-          loc(node),
-          ts.factory.createStringLiteral(splice.key),
-        ]),
+        runtime: astNode(ts, "AstScriptSplice", {
+          loc: loc(node),
+          key: ts.factory.createStringLiteral(splice.key),
+        }),
       };
     }
 
@@ -672,7 +682,9 @@ function rewriteNodeImpl(
     if (bannedUndefined(state, node, "value")) {
       return {
         virtual: ts.factory.createNull(),
-        runtime: call(ts, "v", "nullLiteral", [loc(node)]),
+        runtime: astNode(ts, "AstScriptNullLiteral", {
+          loc: loc(node),
+        }),
       };
     }
 
@@ -692,11 +704,11 @@ function rewriteNodeImpl(
       virtual: ts.factory.createIdentifier(
         state.bindings.has(node) ? mangle(node.text) : node.text,
       ),
-      runtime: call(ts, "v", "identifier", [
-        loc(node),
-        ts.factory.createStringLiteral(node.text),
-        ts.factory.createStringLiteral(bindingKey(state, node)),
-      ]),
+      runtime: astNode(ts, "AstScriptIdentifier", {
+        loc: loc(node),
+        text: ts.factory.createStringLiteral(node.text),
+        bindingKey: ts.factory.createStringLiteral(bindingKey(state, node)),
+      }),
     };
   }
 
@@ -748,12 +760,14 @@ function rewriteNodeImpl(
         : access;
     return {
       virtual,
-      runtime: call(ts, "v", "propertyAccessExpression", [
-        loc(node),
-        expression.runtime as ts.Expression,
-        optional ? ts.factory.createTrue() : ts.factory.createFalse(),
-        ts.factory.createStringLiteral(name),
-      ]),
+      runtime: astNode(ts, "AstScriptPropertyAccessExpression", {
+        loc: loc(node),
+        expression: expression.runtime as ts.Expression,
+        questionDotToken: optional
+          ? ts.factory.createTrue()
+          : ts.factory.createFalse(),
+        name: ts.factory.createStringLiteral(name),
+      }),
     };
   }
 
@@ -782,11 +796,11 @@ function rewriteNodeImpl(
         expression.virtual as ts.Expression,
         key.virtual as ts.Expression,
       ]),
-      runtime: call(ts, "v", "elementAccessExpression", [
-        loc(node),
-        expression.runtime as ts.Expression,
-        key.runtime as ts.Expression,
-      ]),
+      runtime: astNode(ts, "AstScriptElementAccessExpression", {
+        loc: loc(node),
+        expression: expression.runtime as ts.Expression,
+        argumentExpression: key.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -865,17 +879,21 @@ function rewriteNodeImpl(
           : virtualCall;
       return {
         virtual,
-        runtime: call(ts, "v", "callExpression", [
-          loc(node),
-          call(ts, "v", "propertyAccessExpression", [
-            loc(access),
-            receiver.runtime as ts.Expression,
-            optional ? ts.factory.createTrue() : ts.factory.createFalse(),
-            ts.factory.createStringLiteral(name),
-          ]),
-          optionalCall ? ts.factory.createTrue() : ts.factory.createFalse(),
-          runtimeArgs,
-        ]),
+        runtime: astNode(ts, "AstScriptCallExpression", {
+          loc: loc(node),
+          expression: astNode(ts, "AstScriptPropertyAccessExpression", {
+            loc: loc(access),
+            expression: receiver.runtime as ts.Expression,
+            questionDotToken: optional
+              ? ts.factory.createTrue()
+              : ts.factory.createFalse(),
+            name: ts.factory.createStringLiteral(name),
+          }),
+          questionDotToken: optionalCall
+            ? ts.factory.createTrue()
+            : ts.factory.createFalse(),
+          arguments: runtimeArgs,
+        }),
       };
     }
 
@@ -903,12 +921,14 @@ function rewriteNodeImpl(
               ),
             )
           : virtualCall,
-      runtime: call(ts, "v", "callExpression", [
-        loc(node),
-        callee.runtime as ts.Expression,
-        optionalCall ? ts.factory.createTrue() : ts.factory.createFalse(),
-        runtimeArgs,
-      ]),
+      runtime: astNode(ts, "AstScriptCallExpression", {
+        loc: loc(node),
+        expression: callee.runtime as ts.Expression,
+        questionDotToken: optionalCall
+          ? ts.factory.createTrue()
+          : ts.factory.createFalse(),
+        arguments: runtimeArgs,
+      }),
     };
   }
 
@@ -935,14 +955,14 @@ function rewriteNodeImpl(
         undefined,
         liftedArgs,
       ),
-      runtime: call(ts, "v", "newExpression", [
-        loc(node),
-        rewrittenCallee.runtime as ts.Expression,
-        ts.factory.createArrayLiteralExpression(
+      runtime: astNode(ts, "AstScriptNewExpression", {
+        loc: loc(node),
+        expression: rewrittenCallee.runtime as ts.Expression,
+        arguments: ts.factory.createArrayLiteralExpression(
           rewrittenArgs.map((arg) => arg.runtime as ts.Expression),
           false,
         ),
-      ]),
+      }),
     };
   }
 
@@ -1034,23 +1054,25 @@ function rewriteNodeImpl(
           ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
           body.virtual as ts.ConciseBody,
         ),
-        runtime: call(ts, "v", "arrowFunction", [
-          loc(node),
-          ts.factory.createArrayLiteralExpression(
+        runtime: astNode(ts, "AstScriptArrowFunction", {
+          loc: loc(node),
+          parameters: ts.factory.createArrayLiteralExpression(
             params.map((param) =>
-              call(ts, "v", "parameterDeclaration", [
-                loc(param.source),
-                call(ts, "v", "identifier", [
-                  loc(param.name),
-                  ts.factory.createStringLiteral(param.name.text),
-                  ts.factory.createStringLiteral(bindingKey(state, param.name)),
-                ]),
-              ]),
+              astNode(ts, "AstScriptParameterDeclaration", {
+                loc: loc(param.source),
+                name: astNode(ts, "AstScriptIdentifier", {
+                  loc: loc(param.name),
+                  text: ts.factory.createStringLiteral(param.name.text),
+                  bindingKey: ts.factory.createStringLiteral(
+                    bindingKey(state, param.name),
+                  ),
+                }),
+              }),
             ),
             false,
           ),
-          body.runtime as ts.Expression,
-        ]),
+          body: body.runtime as ts.Expression,
+        }),
       };
     }
 
@@ -1066,13 +1088,13 @@ function rewriteNodeImpl(
         elements.map((element) => element.virtual as ts.Expression),
         false,
       ),
-      runtime: call(ts, "v", "arrayLiteralExpression", [
-        loc(node),
-        ts.factory.createArrayLiteralExpression(
+      runtime: astNode(ts, "AstScriptArrayLiteralExpression", {
+        loc: loc(node),
+        elements: ts.factory.createArrayLiteralExpression(
           elements.map((element) => element.runtime as ts.Expression),
           false,
         ),
-      ]),
+      }),
     };
   }
 
@@ -1111,19 +1133,19 @@ function rewriteNodeImpl(
           ),
           false,
         ),
-        runtime: call(ts, "v", "objectLiteralExpression", [
-          loc(node),
-          ts.factory.createArrayLiteralExpression(
+        runtime: astNode(ts, "AstScriptObjectLiteralExpression", {
+          loc: loc(node),
+          properties: ts.factory.createArrayLiteralExpression(
             properties.map((property) =>
-              call(ts, "v", "propertyAssignment", [
-                loc(property.source),
-                ts.factory.createStringLiteral(property.text),
-                property.value.runtime as ts.Expression,
-              ]),
+              astNode(ts, "AstScriptPropertyAssignment", {
+                loc: loc(property.source),
+                name: ts.factory.createStringLiteral(property.text),
+                initializer: property.value.runtime as ts.Expression,
+              }),
             ),
             false,
           ),
-        ]),
+        }),
       };
     }
 
@@ -1147,12 +1169,12 @@ function rewriteNodeImpl(
         ts.factory.createToken(ts.SyntaxKind.ColonToken),
         alternate.virtual as ts.Expression,
       ),
-      runtime: call(ts, "v", "conditionalExpression", [
-        loc(node),
-        condition.runtime as ts.Expression,
-        consequent.runtime as ts.Expression,
-        alternate.runtime as ts.Expression,
-      ]),
+      runtime: astNode(ts, "AstScriptConditionalExpression", {
+        loc: loc(node),
+        condition: condition.runtime as ts.Expression,
+        whenTrue: consequent.runtime as ts.Expression,
+        whenFalse: alternate.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -1189,12 +1211,12 @@ function rewriteNodeImpl(
           ts.SyntaxKind.EqualsToken,
           call(ts, "cs", "const", [rhs.virtual as ts.Expression]),
         ),
-        runtime: call(ts, "v", "binaryExpression", [
-          loc(node),
-          lhs.runtime as ts.Expression,
-          ts.factory.createStringLiteral("="),
-          rhs.runtime as ts.Expression,
-        ]),
+        runtime: astNode(ts, "AstScriptBinaryExpression", {
+          loc: loc(node),
+          left: lhs.runtime as ts.Expression,
+          operatorToken: ts.factory.createStringLiteral("="),
+          right: rhs.runtime as ts.Expression,
+        }),
       };
     }
 
@@ -1212,12 +1234,12 @@ function rewriteNodeImpl(
           node.operatorToken.kind,
           virtualRight,
         ),
-        runtime: call(ts, "v", "binaryExpression", [
-          loc(node),
-          lhs.runtime as ts.Expression,
-          ts.factory.createStringLiteral(operator),
-          rhs.runtime as ts.Expression,
-        ]),
+        runtime: astNode(ts, "AstScriptBinaryExpression", {
+          loc: loc(node),
+          left: lhs.runtime as ts.Expression,
+          operatorToken: ts.factory.createStringLiteral(operator),
+          right: rhs.runtime as ts.Expression,
+        }),
       };
     }
     state.errors.set(
@@ -1230,41 +1252,47 @@ function rewriteNodeImpl(
   if (node.kind === ts.SyntaxKind.NullKeyword) {
     return {
       virtual: ts.factory.createNull(),
-      runtime: call(ts, "v", "nullLiteral", [loc(node)]),
+      runtime: astNode(ts, "AstScriptNullLiteral", {
+        loc: loc(node),
+      }),
     };
   }
 
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
-      runtime: call(ts, "v", "numericLiteral", [
-        loc(node),
-        ts.factory.createNumericLiteral(node.text),
-      ]),
+      runtime: astNode(ts, "AstScriptNumericLiteral", {
+        loc: loc(node),
+        value: ts.factory.createNumericLiteral(node.text),
+      }),
     };
   }
 
   if (ts.isStringLiteral(node)) {
     return {
       virtual: ts.factory.createStringLiteral(node.text),
-      runtime: call(ts, "v", "stringLiteral", [
-        loc(node),
-        ts.factory.createStringLiteral(node.text),
-      ]),
+      runtime: astNode(ts, "AstScriptStringLiteral", {
+        loc: loc(node),
+        text: ts.factory.createStringLiteral(node.text),
+      }),
     };
   }
 
   if (node.kind === ts.SyntaxKind.TrueKeyword) {
     return {
       virtual: ts.factory.createTrue(),
-      runtime: call(ts, "v", "trueLiteral", [loc(node)]),
+      runtime: astNode(ts, "AstScriptTrueLiteral", {
+        loc: loc(node),
+      }),
     };
   }
 
   if (node.kind === ts.SyntaxKind.FalseKeyword) {
     return {
       virtual: ts.factory.createFalse(),
-      runtime: call(ts, "v", "falseLiteral", [loc(node)]),
+      runtime: astNode(ts, "AstScriptFalseLiteral", {
+        loc: loc(node),
+      }),
     };
   }
 

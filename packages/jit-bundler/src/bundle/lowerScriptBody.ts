@@ -3,7 +3,7 @@ import type {
   AstScriptBody,
   AstScriptExpression,
   AstScriptStatement,
-} from "../ast/Ast.js";
+} from "@backtickjs/cs-runtime";
 import type { IrScriptEntry } from "../ir/Ir.js";
 import { sourceName } from "./bindingKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";

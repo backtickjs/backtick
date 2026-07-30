@@ -21,18 +21,23 @@ const Counter = async ({ size }) =>
           captures: [],
           spliceParams: { $size: [] },
         },
-        (v) =>
-          v.callExpression(
-            [11, 19, 11, 31],
-            v.propertyAccessExpression(
-              [11, 19, 11, 29],
-              v.splice([11, 19, 11, 24], "$size"),
-              false,
-              "read",
-            ),
-            false,
-            [],
-          ),
+        () => ({
+          kind: "AstScriptCallExpression",
+          loc: [11, 19, 11, 31],
+          expression: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [11, 19, 11, 29],
+            expression: {
+              kind: "AstScriptSplice",
+              loc: [11, 19, 11, 24],
+              key: "$size",
+            },
+            questionDotToken: false,
+            name: "read",
+          },
+          questionDotToken: false,
+          arguments: [],
+        }),
       ),
     ),
   });

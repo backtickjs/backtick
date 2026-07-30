@@ -1,11 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { cs, type Visitor } from "@backtickjs/cs-runtime";
+import { cs, type AstScriptBody } from "@backtickjs/cs-runtime";
 
-// the visitor is never run here; only `create`'s version check is under test
-function noVisit<U>(_visitor: Visitor<U>): U {
-  return undefined as unknown as U;
-}
+// the body is never read here; only `create`'s version check is under test
+const noBody = (): AstScriptBody => ({
+  kind: "AstScriptNullLiteral",
+  loc: [0, 0, 0, 0],
+});
 
 // exercised through `cs.create`, the path emitted code takes
 function create(version: string) {
@@ -21,7 +22,7 @@ function create(version: string) {
         captures: [],
         spliceParams: {},
       },
-      noVisit,
+      noBody,
     );
 }
 

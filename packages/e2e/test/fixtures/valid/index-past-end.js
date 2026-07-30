@@ -14,30 +14,56 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [7, 19, 10, 2],
-      [
-        v.variableDeclaration(
-          [8, 3, 8, 33],
-          v.identifier([8, 9, 8, 14], "names", "names$2hkx7916f6ioy$0"),
-          v.arrayLiteralExpression(
-            [8, 17, 8, 32],
-            [
-              v.stringLiteral([8, 18, 8, 24], "zero"),
-              v.stringLiteral([8, 26, 8, 31], "one"),
-            ],
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [9, 3, 9, 19],
-          v.elementAccessExpression(
-            [9, 10, 9, 18],
-            v.identifier([9, 10, 9, 15], "names", "names$2hkx7916f6ioy$0"),
-            v.numericLiteral([9, 16, 9, 17], 9),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [7, 19, 10, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [8, 3, 8, 33],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [8, 9, 8, 14],
+          text: "names",
+          bindingKey: "names$2hkx7916f6ioy$0",
+        },
+        initializer: {
+          kind: "AstScriptArrayLiteralExpression",
+          loc: [8, 17, 8, 32],
+          elements: [
+            {
+              kind: "AstScriptStringLiteral",
+              loc: [8, 18, 8, 24],
+              text: "zero",
+            },
+            {
+              kind: "AstScriptStringLiteral",
+              loc: [8, 26, 8, 31],
+              text: "one",
+            },
+          ],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [9, 3, 9, 19],
+        expression: {
+          kind: "AstScriptElementAccessExpression",
+          loc: [9, 10, 9, 18],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [9, 10, 9, 15],
+            text: "names",
+            bindingKey: "names$2hkx7916f6ioy$0",
+          },
+          argumentExpression: {
+            kind: "AstScriptNumericLiteral",
+            loc: [9, 16, 9, 17],
+            value: 9,
+          },
+        },
+      },
+    ],
+  }),
 );

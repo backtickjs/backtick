@@ -19,18 +19,23 @@ async function Counter() {
           captures: [],
           spliceParams: { $size: [] },
         },
-        (v) =>
-          v.callExpression(
-            [11, 29, 11, 41],
-            v.propertyAccessExpression(
-              [11, 29, 11, 39],
-              v.splice([11, 29, 11, 34], "$size"),
-              false,
-              "read",
-            ),
-            false,
-            [],
-          ),
+        () => ({
+          kind: "AstScriptCallExpression",
+          loc: [11, 29, 11, 41],
+          expression: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [11, 29, 11, 39],
+            expression: {
+              kind: "AstScriptSplice",
+              loc: [11, 29, 11, 34],
+              key: "$size",
+            },
+            questionDotToken: false,
+            name: "read",
+          },
+          questionDotToken: false,
+          arguments: [],
+        }),
       ),
     },
     onPress: cs.create(
@@ -44,44 +49,62 @@ async function Counter() {
         captures: [],
         spliceParams: { $size: [] },
       },
-      (v) =>
-        v.arrowFunction(
-          [12, 19, 14, 8],
-          [],
-          v.block(
-            [12, 25, 14, 8],
-            [
-              v.callExpression(
-                [13, 9, 13, 38],
-                v.propertyAccessExpression(
-                  [13, 9, 13, 20],
-                  v.splice([13, 9, 13, 14], "$size"),
-                  false,
-                  "write",
-                ),
-                false,
-                [
-                  v.binaryExpression(
-                    [13, 21, 13, 37],
-                    v.callExpression(
-                      [13, 21, 13, 33],
-                      v.propertyAccessExpression(
-                        [13, 21, 13, 31],
-                        v.splice([13, 21, 13, 26], "$size"),
-                        false,
-                        "read",
-                      ),
-                      false,
-                      [],
-                    ),
-                    "+",
-                    v.numericLiteral([13, 36, 13, 37], 1),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+      () => ({
+        kind: "AstScriptArrowFunction",
+        loc: [12, 19, 14, 8],
+        parameters: [],
+        body: {
+          kind: "AstScriptBlock",
+          loc: [12, 25, 14, 8],
+          statements: [
+            {
+              kind: "AstScriptCallExpression",
+              loc: [13, 9, 13, 38],
+              expression: {
+                kind: "AstScriptPropertyAccessExpression",
+                loc: [13, 9, 13, 20],
+                expression: {
+                  kind: "AstScriptSplice",
+                  loc: [13, 9, 13, 14],
+                  key: "$size",
+                },
+                questionDotToken: false,
+                name: "write",
+              },
+              questionDotToken: false,
+              arguments: [
+                {
+                  kind: "AstScriptBinaryExpression",
+                  loc: [13, 21, 13, 37],
+                  left: {
+                    kind: "AstScriptCallExpression",
+                    loc: [13, 21, 13, 33],
+                    expression: {
+                      kind: "AstScriptPropertyAccessExpression",
+                      loc: [13, 21, 13, 31],
+                      expression: {
+                        kind: "AstScriptSplice",
+                        loc: [13, 21, 13, 26],
+                        key: "$size",
+                      },
+                      questionDotToken: false,
+                      name: "read",
+                    },
+                    questionDotToken: false,
+                    arguments: [],
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: "AstScriptNumericLiteral",
+                    loc: [13, 36, 13, 37],
+                    value: 1,
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }),
     ),
     children: "press",
   });

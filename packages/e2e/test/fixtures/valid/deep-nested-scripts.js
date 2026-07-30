@@ -11,13 +11,21 @@ function add(lhs, rhs) {
       captures: [],
       spliceParams: { $lhs: [], $rhs: [] },
     },
-    (v) =>
-      v.binaryExpression(
-        [4, 13, 4, 24],
-        v.splice([4, 13, 4, 17], "$lhs"),
-        "+",
-        v.splice([4, 20, 4, 24], "$rhs"),
-      ),
+    () => ({
+      kind: "AstScriptBinaryExpression",
+      loc: [4, 13, 4, 24],
+      left: {
+        kind: "AstScriptSplice",
+        loc: [4, 13, 4, 17],
+        key: "$lhs",
+      },
+      operatorToken: "+",
+      right: {
+        kind: "AstScriptSplice",
+        loc: [4, 20, 4, 24],
+        key: "$rhs",
+      },
+    }),
   );
 }
 export default cs.create(
@@ -40,7 +48,11 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.numericLiteral([7, 28, 7, 29], 1),
+          () => ({
+            kind: "AstScriptNumericLiteral",
+            loc: [7, 28, 7, 29],
+            value: 1,
+          }),
         ),
         cs.create(
           [7, 32, 7, 37],
@@ -53,12 +65,20 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.numericLiteral([7, 35, 7, 36], 2),
+          () => ({
+            kind: "AstScriptNumericLiteral",
+            loc: [7, 35, 7, 36],
+            value: 2,
+          }),
         ),
       ),
     },
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) => v.splice([7, 19, 7, 39], "$0splice0"),
+  () => ({
+    kind: "AstScriptSplice",
+    loc: [7, 19, 7, 39],
+    key: "$0splice0",
+  }),
 );

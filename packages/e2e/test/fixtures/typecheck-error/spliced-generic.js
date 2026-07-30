@@ -23,12 +23,16 @@ function wrap(value) {
       captures: [],
       spliceParams: { $value: [] },
     },
-    (v) =>
-      v.arrowFunction(
-        [20, 13, 20, 25],
-        [],
-        v.splice([20, 19, 20, 25], "$value"),
-      ),
+    () => ({
+      kind: "AstScriptArrowFunction",
+      loc: [20, 13, 20, 25],
+      parameters: [],
+      body: {
+        kind: "AstScriptSplice",
+        loc: [20, 19, 20, 25],
+        key: "$value",
+      },
+    }),
   );
 }
 export default cs.create(
@@ -52,7 +56,11 @@ export default cs.create(
               captures: [],
               spliceParams: {},
             },
-            (v) => v.numericLiteral([23, 39, 23, 40], 7),
+            () => ({
+              kind: "AstScriptNumericLiteral",
+              loc: [23, 39, 23, 40],
+              value: 7,
+            }),
           ),
         ),
       ),
@@ -60,16 +68,21 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) =>
-    v.propertyAccessExpression(
-      [23, 19, 23, 48],
-      v.callExpression(
-        [23, 19, 23, 46],
-        v.splice([23, 19, 23, 44], "$0splice0"),
-        false,
-        [],
-      ),
-      false,
-      "x",
-    ),
+  () => ({
+    kind: "AstScriptPropertyAccessExpression",
+    loc: [23, 19, 23, 48],
+    expression: {
+      kind: "AstScriptCallExpression",
+      loc: [23, 19, 23, 46],
+      expression: {
+        kind: "AstScriptSplice",
+        loc: [23, 19, 23, 44],
+        key: "$0splice0",
+      },
+      questionDotToken: false,
+      arguments: [],
+    },
+    questionDotToken: false,
+    name: "x",
+  }),
 );

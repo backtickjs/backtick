@@ -27,10 +27,22 @@ function make(Shape) {
       captures: [],
       spliceParams: { $Shape: [] },
     },
-    (v) =>
-      v.newExpression([23, 13, 23, 26], v.splice([23, 17, 23, 23], "$Shape"), [
-        v.numericLiteral([23, 24, 23, 25], 5),
-      ]),
+    () => ({
+      kind: "AstScriptNewExpression",
+      loc: [23, 13, 23, 26],
+      expression: {
+        kind: "AstScriptSplice",
+        loc: [23, 17, 23, 23],
+        key: "$Shape",
+      },
+      arguments: [
+        {
+          kind: "AstScriptNumericLiteral",
+          loc: [23, 24, 23, 25],
+          value: 5,
+        },
+      ],
+    }),
   );
 }
 const a = make(Circle);
@@ -48,38 +60,60 @@ export default cs.create(
     captures: [],
     spliceParams: { $a: [], $b: [], $c: [], $d: [] },
   },
-  (v) =>
-    v.block(
-      [31, 19, 33, 2],
-      [
-        v.returnStatement(
-          [32, 3, 32, 59],
-          v.objectLiteralExpression(
-            [32, 10, 32, 58],
-            [
-              v.propertyAssignment(
-                [32, 12, 32, 21],
-                "first",
-                v.splice([32, 19, 32, 21], "$a"),
-              ),
-              v.propertyAssignment(
-                [32, 23, 32, 33],
-                "second",
-                v.splice([32, 31, 32, 33], "$b"),
-              ),
-              v.propertyAssignment(
-                [32, 35, 32, 44],
-                "third",
-                v.splice([32, 42, 32, 44], "$c"),
-              ),
-              v.propertyAssignment(
-                [32, 46, 32, 56],
-                "fourth",
-                v.splice([32, 54, 32, 56], "$d"),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [31, 19, 33, 2],
+    statements: [
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [32, 3, 32, 59],
+        expression: {
+          kind: "AstScriptObjectLiteralExpression",
+          loc: [32, 10, 32, 58],
+          properties: [
+            {
+              kind: "AstScriptPropertyAssignment",
+              loc: [32, 12, 32, 21],
+              name: "first",
+              initializer: {
+                kind: "AstScriptSplice",
+                loc: [32, 19, 32, 21],
+                key: "$a",
+              },
+            },
+            {
+              kind: "AstScriptPropertyAssignment",
+              loc: [32, 23, 32, 33],
+              name: "second",
+              initializer: {
+                kind: "AstScriptSplice",
+                loc: [32, 31, 32, 33],
+                key: "$b",
+              },
+            },
+            {
+              kind: "AstScriptPropertyAssignment",
+              loc: [32, 35, 32, 44],
+              name: "third",
+              initializer: {
+                kind: "AstScriptSplice",
+                loc: [32, 42, 32, 44],
+                key: "$c",
+              },
+            },
+            {
+              kind: "AstScriptPropertyAssignment",
+              loc: [32, 46, 32, 56],
+              name: "fourth",
+              initializer: {
+                kind: "AstScriptSplice",
+                loc: [32, 54, 32, 56],
+                key: "$d",
+              },
+            },
+          ],
+        },
+      },
+    ],
+  }),
 );

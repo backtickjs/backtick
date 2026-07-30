@@ -12,35 +12,56 @@ const greet = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.arrowFunction(
-      [5, 18, 7, 2],
-      [
-        v.parameterDeclaration(
-          [5, 19, 5, 32],
-          v.identifier([5, 19, 5, 23], "name", "name$1gqqin78x7yev$0"),
-        ),
+  () => ({
+    kind: "AstScriptArrowFunction",
+    loc: [5, 18, 7, 2],
+    parameters: [
+      {
+        kind: "AstScriptParameterDeclaration",
+        loc: [5, 19, 5, 32],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [5, 19, 5, 23],
+          text: "name",
+          bindingKey: "name$1gqqin78x7yev$0",
+        },
+      },
+    ],
+    body: {
+      kind: "AstScriptBlock",
+      loc: [5, 37, 7, 2],
+      statements: [
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [6, 3, 6, 28],
+          expression: {
+            kind: "AstScriptCallExpression",
+            loc: [6, 10, 6, 27],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [6, 10, 6, 22],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [6, 10, 6, 14],
+                text: "name",
+                bindingKey: "name$1gqqin78x7yev$0",
+              },
+              questionDotToken: true,
+              name: "concat",
+            },
+            questionDotToken: false,
+            arguments: [
+              {
+                kind: "AstScriptStringLiteral",
+                loc: [6, 23, 6, 26],
+                text: "!",
+              },
+            ],
+          },
+        },
       ],
-      v.block(
-        [5, 37, 7, 2],
-        [
-          v.returnStatement(
-            [6, 3, 6, 28],
-            v.callExpression(
-              [6, 10, 6, 27],
-              v.propertyAccessExpression(
-                [6, 10, 6, 22],
-                v.identifier([6, 10, 6, 14], "name", "name$1gqqin78x7yev$0"),
-                true,
-                "concat",
-              ),
-              false,
-              [v.stringLiteral([6, 23, 6, 26], "!")],
-            ),
-          ),
-        ],
-      ),
-    ),
+    },
+  }),
 );
 export default cs.create(
   [9, 16, 11, 3],
@@ -53,19 +74,25 @@ export default cs.create(
     captures: [],
     spliceParams: { $greet: [] },
   },
-  (v) =>
-    v.block(
-      [9, 19, 11, 2],
-      [
-        v.returnStatement(
-          [10, 3, 10, 19],
-          v.callExpression(
-            [10, 10, 10, 18],
-            v.splice([10, 10, 10, 16], "$greet"),
-            false,
-            [],
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [9, 19, 11, 2],
+    statements: [
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [10, 3, 10, 19],
+        expression: {
+          kind: "AstScriptCallExpression",
+          loc: [10, 10, 10, 18],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [10, 10, 10, 16],
+            key: "$greet",
+          },
+          questionDotToken: false,
+          arguments: [],
+        },
+      },
+    ],
+  }),
 );

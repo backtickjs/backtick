@@ -37,41 +37,66 @@ export default _jsx(View, {
               captures: ["row$3qcr5x2z3u56v$0"],
               spliceParams: {},
             },
-            (v) =>
-              v.binaryExpression(
-                [20, 45, 20, 57],
-                v.stringLiteral([20, 45, 20, 51], "row "),
-                "+",
-                v.identifier([20, 54, 20, 57], "row", "row$3qcr5x2z3u56v$0"),
-              ),
+            () => ({
+              kind: "AstScriptBinaryExpression",
+              loc: [20, 45, 20, 57],
+              left: {
+                kind: "AstScriptStringLiteral",
+                loc: [20, 45, 20, 51],
+                text: "row ",
+              },
+              operatorToken: "+",
+              right: {
+                kind: "AstScriptIdentifier",
+                loc: [20, 54, 20, 57],
+                text: "row",
+                bindingKey: "row$3qcr5x2z3u56v$0",
+              },
+            }),
           ),
         }),
       },
       captures: [],
       spliceParams: { $rows: [], $0splice0: ["row$3qcr5x2z3u56v$0"] },
     },
-    (v) =>
-      v.callExpression(
-        [20, 13, 20, 69],
-        v.propertyAccessExpression(
-          [20, 13, 20, 22],
-          v.splice([20, 13, 20, 18], "$rows"),
-          false,
-          "map",
-        ),
-        false,
-        [
-          v.arrowFunction(
-            [20, 23, 20, 68],
-            [
-              v.parameterDeclaration(
-                [20, 24, 20, 27],
-                v.identifier([20, 24, 20, 27], "row", "row$3qcr5x2z3u56v$0"),
-              ),
-            ],
-            v.splice([20, 32, 20, 68], "$0splice0"),
-          ),
-        ],
-      ),
+    () => ({
+      kind: "AstScriptCallExpression",
+      loc: [20, 13, 20, 69],
+      expression: {
+        kind: "AstScriptPropertyAccessExpression",
+        loc: [20, 13, 20, 22],
+        expression: {
+          kind: "AstScriptSplice",
+          loc: [20, 13, 20, 18],
+          key: "$rows",
+        },
+        questionDotToken: false,
+        name: "map",
+      },
+      questionDotToken: false,
+      arguments: [
+        {
+          kind: "AstScriptArrowFunction",
+          loc: [20, 23, 20, 68],
+          parameters: [
+            {
+              kind: "AstScriptParameterDeclaration",
+              loc: [20, 24, 20, 27],
+              name: {
+                kind: "AstScriptIdentifier",
+                loc: [20, 24, 20, 27],
+                text: "row",
+                bindingKey: "row$3qcr5x2z3u56v$0",
+              },
+            },
+          ],
+          body: {
+            kind: "AstScriptSplice",
+            loc: [20, 32, 20, 68],
+            key: "$0splice0",
+          },
+        },
+      ],
+    }),
   ),
 });

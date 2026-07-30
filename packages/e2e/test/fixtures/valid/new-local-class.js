@@ -22,48 +22,92 @@ export default cs.create(
     captures: [],
     spliceParams: { $Point: [] },
   },
-  (v) =>
-    v.block(
-      [19, 19, 23, 2],
-      [
-        v.variableDeclaration(
-          [20, 3, 20, 20],
-          v.identifier([20, 9, 20, 10], "C", "C$2pik4a0v1yd8w$0"),
-          v.splice([20, 13, 20, 19], "$Point"),
-          "const",
-        ),
-        v.variableDeclaration(
-          [21, 3, 21, 25],
-          v.identifier([21, 9, 21, 10], "p", "p$2pik4a0v1yd8w$1"),
-          v.newExpression(
-            [21, 13, 21, 24],
-            v.identifier([21, 17, 21, 18], "C", "C$2pik4a0v1yd8w$0"),
-            [
-              v.numericLiteral([21, 19, 21, 20], 1),
-              v.numericLiteral([21, 22, 21, 23], 2),
-            ],
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [22, 3, 22, 20],
-          v.binaryExpression(
-            [22, 10, 22, 19],
-            v.propertyAccessExpression(
-              [22, 10, 22, 13],
-              v.identifier([22, 10, 22, 11], "p", "p$2pik4a0v1yd8w$1"),
-              false,
-              "x",
-            ),
-            "+",
-            v.propertyAccessExpression(
-              [22, 16, 22, 19],
-              v.identifier([22, 16, 22, 17], "p", "p$2pik4a0v1yd8w$1"),
-              false,
-              "y",
-            ),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [19, 19, 23, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [20, 3, 20, 20],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [20, 9, 20, 10],
+          text: "C",
+          bindingKey: "C$2pik4a0v1yd8w$0",
+        },
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [20, 13, 20, 19],
+          key: "$Point",
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [21, 3, 21, 25],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [21, 9, 21, 10],
+          text: "p",
+          bindingKey: "p$2pik4a0v1yd8w$1",
+        },
+        initializer: {
+          kind: "AstScriptNewExpression",
+          loc: [21, 13, 21, 24],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [21, 17, 21, 18],
+            text: "C",
+            bindingKey: "C$2pik4a0v1yd8w$0",
+          },
+          arguments: [
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [21, 19, 21, 20],
+              value: 1,
+            },
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [21, 22, 21, 23],
+              value: 2,
+            },
+          ],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [22, 3, 22, 20],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [22, 10, 22, 19],
+          left: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [22, 10, 22, 13],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [22, 10, 22, 11],
+              text: "p",
+              bindingKey: "p$2pik4a0v1yd8w$1",
+            },
+            questionDotToken: false,
+            name: "x",
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptPropertyAccessExpression",
+            loc: [22, 16, 22, 19],
+            expression: {
+              kind: "AstScriptIdentifier",
+              loc: [22, 16, 22, 17],
+              text: "p",
+              bindingKey: "p$2pik4a0v1yd8w$1",
+            },
+            questionDotToken: false,
+            name: "y",
+          },
+        },
+      },
+    ],
+  }),
 );

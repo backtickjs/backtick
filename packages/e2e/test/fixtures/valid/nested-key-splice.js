@@ -23,7 +23,11 @@ const Child = async ({ n }) =>
           captures: [],
           spliceParams: { $n: [] },
         },
-        (v) => v.splice([13, 19, 13, 21], "$n"),
+        () => ({
+          kind: "AstScriptSplice",
+          loc: [13, 19, 13, 21],
+          key: "$n",
+        }),
       ),
     ),
   });
@@ -39,6 +43,10 @@ export default _jsx(Child, {
       captures: [],
       spliceParams: {},
     },
-    (v) => v.numericLiteral([17, 29, 17, 30], 1),
+    () => ({
+      kind: "AstScriptNumericLiteral",
+      loc: [17, 29, 17, 30],
+      value: 1,
+    }),
   ),
 });

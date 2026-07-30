@@ -15,7 +15,16 @@ function make(n) {
       captures: [],
       spliceParams: { $n: [] },
     },
-    (v) => v.arrowFunction([7, 13, 7, 21], [], v.splice([7, 19, 7, 21], "$n")),
+    () => ({
+      kind: "AstScriptArrowFunction",
+      loc: [7, 13, 7, 21],
+      parameters: [],
+      body: {
+        kind: "AstScriptSplice",
+        loc: [7, 19, 7, 21],
+        key: "$n",
+      },
+    }),
   );
 }
 export default _jsxs(View, {

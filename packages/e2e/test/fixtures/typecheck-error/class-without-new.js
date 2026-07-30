@@ -23,28 +23,53 @@ export default cs.create(
     captures: [],
     spliceParams: { $Point: [] },
   },
-  (v) =>
-    v.block(
-      [20, 19, 23, 2],
-      [
-        v.variableDeclaration(
-          [21, 3, 21, 20],
-          v.identifier([21, 9, 21, 10], "C", "C$1n6hvxiblc91f$0"),
-          v.splice([21, 13, 21, 19], "$Point"),
-          "const",
-        ),
-        v.returnStatement(
-          [22, 3, 22, 18],
-          v.callExpression(
-            [22, 10, 22, 17],
-            v.identifier([22, 10, 22, 11], "C", "C$1n6hvxiblc91f$0"),
-            false,
-            [
-              v.numericLiteral([22, 12, 22, 13], 1),
-              v.numericLiteral([22, 15, 22, 16], 2),
-            ],
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [20, 19, 23, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [21, 3, 21, 20],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [21, 9, 21, 10],
+          text: "C",
+          bindingKey: "C$1n6hvxiblc91f$0",
+        },
+        initializer: {
+          kind: "AstScriptSplice",
+          loc: [21, 13, 21, 19],
+          key: "$Point",
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [22, 3, 22, 18],
+        expression: {
+          kind: "AstScriptCallExpression",
+          loc: [22, 10, 22, 17],
+          expression: {
+            kind: "AstScriptIdentifier",
+            loc: [22, 10, 22, 11],
+            text: "C",
+            bindingKey: "C$1n6hvxiblc91f$0",
+          },
+          questionDotToken: false,
+          arguments: [
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [22, 12, 22, 13],
+              value: 1,
+            },
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [22, 15, 22, 16],
+              value: 2,
+            },
+          ],
+        },
+      },
+    ],
+  }),
 );

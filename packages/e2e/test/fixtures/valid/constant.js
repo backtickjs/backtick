@@ -10,5 +10,9 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.numericLiteral([3, 19, 3, 20], 1),
+  () => ({
+    kind: "AstScriptNumericLiteral",
+    loc: [3, 19, 3, 20],
+    value: 1,
+  }),
 );

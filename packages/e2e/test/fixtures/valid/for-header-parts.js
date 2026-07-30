@@ -12,64 +12,135 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [5, 19, 13, 2],
-      [
-        v.variableDeclaration(
-          [6, 3, 6, 13],
-          v.identifier([6, 7, 6, 8], "i", "i$2mxyjvdrslxo1$0"),
-          v.numericLiteral([6, 11, 6, 12], 0),
-          "let",
-        ),
-        v.variableDeclaration(
-          [7, 3, 7, 17],
-          v.identifier([7, 7, 7, 11], "seen", "seen$2mxyjvdrslxo1$1"),
-          v.stringLiteral([7, 14, 7, 16], ""),
-          "let",
-        ),
-        v.forStatement(
-          [8, 3, 11, 4],
-          null,
-          v.binaryExpression(
-            [8, 10, 8, 15],
-            v.identifier([8, 10, 8, 11], "i", "i$2mxyjvdrslxo1$0"),
-            "<",
-            v.numericLiteral([8, 14, 8, 15], 3),
-          ),
-          null,
-          v.block(
-            [8, 19, 11, 4],
-            [
-              v.binaryExpression(
-                [9, 5, 9, 20],
-                v.identifier([9, 5, 9, 9], "seen", "seen$2mxyjvdrslxo1$1"),
-                "=",
-                v.binaryExpression(
-                  [9, 12, 9, 20],
-                  v.identifier([9, 12, 9, 16], "seen", "seen$2mxyjvdrslxo1$1"),
-                  "+",
-                  v.identifier([9, 19, 9, 20], "i", "i$2mxyjvdrslxo1$0"),
-                ),
-              ),
-              v.binaryExpression(
-                [10, 5, 10, 14],
-                v.identifier([10, 5, 10, 6], "i", "i$2mxyjvdrslxo1$0"),
-                "=",
-                v.binaryExpression(
-                  [10, 9, 10, 14],
-                  v.identifier([10, 9, 10, 10], "i", "i$2mxyjvdrslxo1$0"),
-                  "+",
-                  v.numericLiteral([10, 13, 10, 14], 1),
-                ),
-              ),
-            ],
-          ),
-        ),
-        v.returnStatement(
-          [12, 3, 12, 15],
-          v.identifier([12, 10, 12, 14], "seen", "seen$2mxyjvdrslxo1$1"),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [5, 19, 13, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [6, 3, 6, 13],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [6, 7, 6, 8],
+          text: "i",
+          bindingKey: "i$2mxyjvdrslxo1$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [6, 11, 6, 12],
+          value: 0,
+        },
+        keyword: "let",
+      },
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [7, 3, 7, 17],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [7, 7, 7, 11],
+          text: "seen",
+          bindingKey: "seen$2mxyjvdrslxo1$1",
+        },
+        initializer: {
+          kind: "AstScriptStringLiteral",
+          loc: [7, 14, 7, 16],
+          text: "",
+        },
+        keyword: "let",
+      },
+      {
+        kind: "AstScriptForStatement",
+        loc: [8, 3, 11, 4],
+        initializer: null,
+        condition: {
+          kind: "AstScriptBinaryExpression",
+          loc: [8, 10, 8, 15],
+          left: {
+            kind: "AstScriptIdentifier",
+            loc: [8, 10, 8, 11],
+            text: "i",
+            bindingKey: "i$2mxyjvdrslxo1$0",
+          },
+          operatorToken: "<",
+          right: {
+            kind: "AstScriptNumericLiteral",
+            loc: [8, 14, 8, 15],
+            value: 3,
+          },
+        },
+        incrementor: null,
+        statement: {
+          kind: "AstScriptBlock",
+          loc: [8, 19, 11, 4],
+          statements: [
+            {
+              kind: "AstScriptBinaryExpression",
+              loc: [9, 5, 9, 20],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [9, 5, 9, 9],
+                text: "seen",
+                bindingKey: "seen$2mxyjvdrslxo1$1",
+              },
+              operatorToken: "=",
+              right: {
+                kind: "AstScriptBinaryExpression",
+                loc: [9, 12, 9, 20],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [9, 12, 9, 16],
+                  text: "seen",
+                  bindingKey: "seen$2mxyjvdrslxo1$1",
+                },
+                operatorToken: "+",
+                right: {
+                  kind: "AstScriptIdentifier",
+                  loc: [9, 19, 9, 20],
+                  text: "i",
+                  bindingKey: "i$2mxyjvdrslxo1$0",
+                },
+              },
+            },
+            {
+              kind: "AstScriptBinaryExpression",
+              loc: [10, 5, 10, 14],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [10, 5, 10, 6],
+                text: "i",
+                bindingKey: "i$2mxyjvdrslxo1$0",
+              },
+              operatorToken: "=",
+              right: {
+                kind: "AstScriptBinaryExpression",
+                loc: [10, 9, 10, 14],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [10, 9, 10, 10],
+                  text: "i",
+                  bindingKey: "i$2mxyjvdrslxo1$0",
+                },
+                operatorToken: "+",
+                right: {
+                  kind: "AstScriptNumericLiteral",
+                  loc: [10, 13, 10, 14],
+                  value: 1,
+                },
+              },
+            },
+          ],
+        },
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [12, 3, 12, 15],
+        expression: {
+          kind: "AstScriptIdentifier",
+          loc: [12, 10, 12, 14],
+          text: "seen",
+          bindingKey: "seen$2mxyjvdrslxo1$1",
+        },
+      },
+    ],
+  }),
 );

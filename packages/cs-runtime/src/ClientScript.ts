@@ -1,7 +1,7 @@
 import { assertVersion } from "./assertVersion.js";
 import type { SourceLocation } from "./SourceLocation.js";
 import type { Spliceable } from "./Spliceable.js";
-import type { Visitor } from "./Visitor.js";
+import type { AstScriptBody } from "./Ast.js";
 
 export interface Metadata {
   // the version of the toolchain that emitted this script
@@ -13,7 +13,7 @@ export interface Metadata {
   // the compiler's classification: a value script returns on every path;
   // an action completes without returning
   kind: "value" | "action";
-  // spliced host values, under the keys the body uses (see `Visitor.splice`)
+  // spliced host values, under the keys the body uses (see `AstScriptSplice`)
   splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope
   captures: string[];
@@ -27,7 +27,10 @@ export interface ClientScript {
   readonly "@backtickjs": "ClientScript";
   readonly loc: SourceLocation;
   readonly metadata: Metadata;
-  readonly visit: <U>(visitor: Visitor<U>) => U;
+  // The script's syntax, behind a thunk: one `cs` in a host function makes a
+  // `ClientScript` per call, and the bundler parses one per source location, so
+  // the nodes are built when they are first read rather than at every call.
+  readonly body: () => AstScriptBody;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -42,13 +45,13 @@ export function isClientScript(value: unknown): value is ClientScript {
 export function create(
   loc: SourceLocation,
   metadata: Metadata,
-  visit: <U>(visitor: Visitor<U>) => U,
+  body: () => AstScriptBody,
 ): ClientScript {
   assertVersion(metadata.version);
   return {
     "@backtickjs": "ClientScript",
     loc,
     metadata,
-    visit,
+    body,
   };
 }

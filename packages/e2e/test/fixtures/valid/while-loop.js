@@ -10,89 +10,170 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [3, 19, 14, 2],
-      [
-        v.variableDeclaration(
-          [4, 3, 4, 13],
-          v.identifier([4, 7, 4, 8], "i", "i$2c5ohtv8baju6$0"),
-          v.numericLiteral([4, 11, 4, 12], 0),
-          "let",
-        ),
-        v.variableDeclaration(
-          [5, 3, 5, 17],
-          v.identifier([5, 7, 5, 12], "total", "total$2c5ohtv8baju6$1"),
-          v.numericLiteral([5, 15, 5, 16], 0),
-          "let",
-        ),
-        v.whileStatement(
-          [6, 3, 12, 4],
-          v.binaryExpression(
-            [6, 10, 6, 15],
-            v.identifier([6, 10, 6, 11], "i", "i$2c5ohtv8baju6$0"),
-            "<",
-            v.numericLiteral([6, 14, 6, 15], 5),
-          ),
-          v.block(
-            [6, 17, 12, 4],
-            [
-              v.binaryExpression(
-                [7, 5, 7, 22],
-                v.identifier([7, 5, 7, 10], "total", "total$2c5ohtv8baju6$1"),
-                "=",
-                v.binaryExpression(
-                  [7, 13, 7, 22],
-                  v.identifier(
-                    [7, 13, 7, 18],
-                    "total",
-                    "total$2c5ohtv8baju6$1",
-                  ),
-                  "+",
-                  v.identifier([7, 21, 7, 22], "i", "i$2c5ohtv8baju6$0"),
-                ),
-              ),
-              v.ifStatement(
-                [8, 5, 10, 6],
-                v.binaryExpression(
-                  [8, 9, 8, 16],
-                  v.identifier([8, 9, 8, 10], "i", "i$2c5ohtv8baju6$0"),
-                  "===",
-                  v.numericLiteral([8, 15, 8, 16], 3),
-                ),
-                v.block(
-                  [8, 18, 10, 6],
-                  [
-                    v.returnStatement(
-                      [9, 7, 9, 20],
-                      v.identifier(
-                        [9, 14, 9, 19],
-                        "total",
-                        "total$2c5ohtv8baju6$1",
-                      ),
-                    ),
-                  ],
-                ),
-                null,
-              ),
-              v.binaryExpression(
-                [11, 5, 11, 14],
-                v.identifier([11, 5, 11, 6], "i", "i$2c5ohtv8baju6$0"),
-                "=",
-                v.binaryExpression(
-                  [11, 9, 11, 14],
-                  v.identifier([11, 9, 11, 10], "i", "i$2c5ohtv8baju6$0"),
-                  "+",
-                  v.numericLiteral([11, 13, 11, 14], 1),
-                ),
-              ),
-            ],
-          ),
-        ),
-        v.returnStatement(
-          [13, 3, 13, 16],
-          v.identifier([13, 10, 13, 15], "total", "total$2c5ohtv8baju6$1"),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [3, 19, 14, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [4, 3, 4, 13],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [4, 7, 4, 8],
+          text: "i",
+          bindingKey: "i$2c5ohtv8baju6$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [4, 11, 4, 12],
+          value: 0,
+        },
+        keyword: "let",
+      },
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [5, 3, 5, 17],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [5, 7, 5, 12],
+          text: "total",
+          bindingKey: "total$2c5ohtv8baju6$1",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [5, 15, 5, 16],
+          value: 0,
+        },
+        keyword: "let",
+      },
+      {
+        kind: "AstScriptWhileStatement",
+        loc: [6, 3, 12, 4],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [6, 10, 6, 15],
+          left: {
+            kind: "AstScriptIdentifier",
+            loc: [6, 10, 6, 11],
+            text: "i",
+            bindingKey: "i$2c5ohtv8baju6$0",
+          },
+          operatorToken: "<",
+          right: {
+            kind: "AstScriptNumericLiteral",
+            loc: [6, 14, 6, 15],
+            value: 5,
+          },
+        },
+        statement: {
+          kind: "AstScriptBlock",
+          loc: [6, 17, 12, 4],
+          statements: [
+            {
+              kind: "AstScriptBinaryExpression",
+              loc: [7, 5, 7, 22],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [7, 5, 7, 10],
+                text: "total",
+                bindingKey: "total$2c5ohtv8baju6$1",
+              },
+              operatorToken: "=",
+              right: {
+                kind: "AstScriptBinaryExpression",
+                loc: [7, 13, 7, 22],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [7, 13, 7, 18],
+                  text: "total",
+                  bindingKey: "total$2c5ohtv8baju6$1",
+                },
+                operatorToken: "+",
+                right: {
+                  kind: "AstScriptIdentifier",
+                  loc: [7, 21, 7, 22],
+                  text: "i",
+                  bindingKey: "i$2c5ohtv8baju6$0",
+                },
+              },
+            },
+            {
+              kind: "AstScriptIfStatement",
+              loc: [8, 5, 10, 6],
+              expression: {
+                kind: "AstScriptBinaryExpression",
+                loc: [8, 9, 8, 16],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [8, 9, 8, 10],
+                  text: "i",
+                  bindingKey: "i$2c5ohtv8baju6$0",
+                },
+                operatorToken: "===",
+                right: {
+                  kind: "AstScriptNumericLiteral",
+                  loc: [8, 15, 8, 16],
+                  value: 3,
+                },
+              },
+              thenStatement: {
+                kind: "AstScriptBlock",
+                loc: [8, 18, 10, 6],
+                statements: [
+                  {
+                    kind: "AstScriptReturnStatement",
+                    loc: [9, 7, 9, 20],
+                    expression: {
+                      kind: "AstScriptIdentifier",
+                      loc: [9, 14, 9, 19],
+                      text: "total",
+                      bindingKey: "total$2c5ohtv8baju6$1",
+                    },
+                  },
+                ],
+              },
+              elseStatement: null,
+            },
+            {
+              kind: "AstScriptBinaryExpression",
+              loc: [11, 5, 11, 14],
+              left: {
+                kind: "AstScriptIdentifier",
+                loc: [11, 5, 11, 6],
+                text: "i",
+                bindingKey: "i$2c5ohtv8baju6$0",
+              },
+              operatorToken: "=",
+              right: {
+                kind: "AstScriptBinaryExpression",
+                loc: [11, 9, 11, 14],
+                left: {
+                  kind: "AstScriptIdentifier",
+                  loc: [11, 9, 11, 10],
+                  text: "i",
+                  bindingKey: "i$2c5ohtv8baju6$0",
+                },
+                operatorToken: "+",
+                right: {
+                  kind: "AstScriptNumericLiteral",
+                  loc: [11, 13, 11, 14],
+                  value: 1,
+                },
+              },
+            },
+          ],
+        },
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [13, 3, 13, 16],
+        expression: {
+          kind: "AstScriptIdentifier",
+          loc: [13, 10, 13, 15],
+          text: "total",
+          bindingKey: "total$2c5ohtv8baju6$1",
+        },
+      },
+    ],
+  }),
 );

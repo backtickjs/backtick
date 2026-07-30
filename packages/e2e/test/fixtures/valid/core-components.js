@@ -16,7 +16,16 @@ export default _jsxs(View, {
           captures: [],
           spliceParams: {},
         },
-        (v) => v.arrowFunction([5, 48, 5, 56], [], v.block([5, 54, 5, 56], [])),
+        () => ({
+          kind: "AstScriptArrowFunction",
+          loc: [5, 48, 5, 56],
+          parameters: [],
+          body: {
+            kind: "AstScriptBlock",
+            loc: [5, 54, 5, 56],
+            statements: [],
+          },
+        }),
       ),
       children: "hi",
     }),

@@ -30,34 +30,58 @@ function inner(carried) {
             captures: ["base$2dzpugititb9o$0"],
             spliceParams: { $carried: [] },
           },
-          (v) =>
-            v.binaryExpression(
-              [17, 17, 17, 32],
-              v.identifier([17, 17, 17, 21], "base", "base$2dzpugititb9o$0"),
-              "+",
-              v.splice([17, 24, 17, 32], "$carried"),
-            ),
+          () => ({
+            kind: "AstScriptBinaryExpression",
+            loc: [17, 17, 17, 32],
+            left: {
+              kind: "AstScriptIdentifier",
+              loc: [17, 17, 17, 21],
+              text: "base",
+              bindingKey: "base$2dzpugititb9o$0",
+            },
+            operatorToken: "+",
+            right: {
+              kind: "AstScriptSplice",
+              loc: [17, 24, 17, 32],
+              key: "$carried",
+            },
+          }),
         ),
       },
       captures: [],
       spliceParams: { $0splice0: ["base$2dzpugititb9o$0"] },
     },
-    (v) =>
-      v.block(
-        [15, 13, 18, 4],
-        [
-          v.variableDeclaration(
-            [16, 5, 16, 22],
-            v.identifier([16, 11, 16, 15], "base", "base$2dzpugititb9o$0"),
-            v.numericLiteral([16, 18, 16, 21], 100),
-            "const",
-          ),
-          v.returnStatement(
-            [17, 5, 17, 35],
-            v.splice([17, 12, 17, 34], "$0splice0"),
-          ),
-        ],
-      ),
+    () => ({
+      kind: "AstScriptBlock",
+      loc: [15, 13, 18, 4],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [16, 5, 16, 22],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [16, 11, 16, 15],
+            text: "base",
+            bindingKey: "base$2dzpugititb9o$0",
+          },
+          initializer: {
+            kind: "AstScriptNumericLiteral",
+            loc: [16, 18, 16, 21],
+            value: 100,
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [17, 5, 17, 35],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [17, 12, 17, 34],
+            key: "$0splice0",
+          },
+        },
+      ],
+    }),
   );
 }
 export default cs.create(
@@ -80,27 +104,47 @@ export default cs.create(
             captures: ["base$2dzpugititb9o$1"],
             spliceParams: {},
           },
-          (v) => v.identifier([23, 21, 23, 25], "base", "base$2dzpugititb9o$1"),
+          () => ({
+            kind: "AstScriptIdentifier",
+            loc: [23, 21, 23, 25],
+            text: "base",
+            bindingKey: "base$2dzpugititb9o$1",
+          }),
         ),
       ),
     },
     captures: [],
     spliceParams: { $0splice0: ["base$2dzpugititb9o$1"] },
   },
-  (v) =>
-    v.block(
-      [21, 19, 24, 2],
-      [
-        v.variableDeclaration(
-          [22, 3, 22, 18],
-          v.identifier([22, 9, 22, 13], "base", "base$2dzpugititb9o$1"),
-          v.numericLiteral([22, 16, 22, 17], 1),
-          "const",
-        ),
-        v.returnStatement(
-          [23, 3, 23, 29],
-          v.splice([23, 10, 23, 28], "$0splice0"),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [21, 19, 24, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [22, 3, 22, 18],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [22, 9, 22, 13],
+          text: "base",
+          bindingKey: "base$2dzpugititb9o$1",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [22, 16, 22, 17],
+          value: 1,
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [23, 3, 23, 29],
+        expression: {
+          kind: "AstScriptSplice",
+          loc: [23, 10, 23, 28],
+          key: "$0splice0",
+        },
+      },
+    ],
+  }),
 );

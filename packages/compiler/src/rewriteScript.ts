@@ -151,7 +151,10 @@ export function rewriteScript(
   const runtime = call(ts, "cs", "create", [
     sourceLoc(ts, scriptLocation),
     metadata,
-    arrow(ts, ["v"], rewritten.runtime as ts.Expression),
+    // The body behind a thunk: one `cs` inside a host function makes a script
+    // per call, and the bundler parses one per source location, so the nodes
+    // are built when they are first read rather than at every call.
+    arrow(ts, [], rewritten.runtime as ts.Expression),
   ]);
 
   return {

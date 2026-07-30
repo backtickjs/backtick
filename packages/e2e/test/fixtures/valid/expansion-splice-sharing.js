@@ -15,17 +15,26 @@ function sum(a, b) {
       captures: [],
       spliceParams: { $a: [], $b: [] },
     },
-    (v) =>
-      v.arrowFunction(
-        [9, 13, 9, 26],
-        [],
-        v.binaryExpression(
-          [9, 19, 9, 26],
-          v.splice([9, 19, 9, 21], "$a"),
-          "+",
-          v.splice([9, 24, 9, 26], "$b"),
-        ),
-      ),
+    () => ({
+      kind: "AstScriptArrowFunction",
+      loc: [9, 13, 9, 26],
+      parameters: [],
+      body: {
+        kind: "AstScriptBinaryExpression",
+        loc: [9, 19, 9, 26],
+        left: {
+          kind: "AstScriptSplice",
+          loc: [9, 19, 9, 21],
+          key: "$a",
+        },
+        operatorToken: "+",
+        right: {
+          kind: "AstScriptSplice",
+          loc: [9, 24, 9, 26],
+          key: "$b",
+        },
+      },
+    }),
   );
 }
 class Point {
@@ -63,65 +72,119 @@ export default cs.create(
     captures: [],
     spliceParams: { $Point: [], $Size: [] },
   },
-  (v) =>
-    v.block(
-      [44, 19, 48, 2],
-      [
-        v.variableDeclaration(
-          [45, 3, 45, 30],
-          v.identifier([45, 9, 45, 10], "p", "p$2kc5czyfqafly$0"),
-          v.newExpression(
-            [45, 13, 45, 29],
-            v.splice([45, 17, 45, 23], "$Point"),
-            [
-              v.numericLiteral([45, 24, 45, 25], 1),
-              v.numericLiteral([45, 27, 45, 28], 2),
-            ],
-          ),
-          "const",
-        ),
-        v.variableDeclaration(
-          [46, 3, 46, 29],
-          v.identifier([46, 9, 46, 10], "s", "s$2kc5czyfqafly$1"),
-          v.newExpression(
-            [46, 13, 46, 28],
-            v.splice([46, 17, 46, 22], "$Size"),
-            [
-              v.numericLiteral([46, 23, 46, 24], 3),
-              v.numericLiteral([46, 26, 46, 27], 4),
-            ],
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [47, 3, 47, 28],
-          v.binaryExpression(
-            [47, 10, 47, 27],
-            v.callExpression(
-              [47, 10, 47, 17],
-              v.propertyAccessExpression(
-                [47, 10, 47, 15],
-                v.identifier([47, 10, 47, 11], "p", "p$2kc5czyfqafly$0"),
-                false,
-                "sum",
-              ),
-              false,
-              [],
-            ),
-            "+",
-            v.callExpression(
-              [47, 20, 47, 27],
-              v.propertyAccessExpression(
-                [47, 20, 47, 25],
-                v.identifier([47, 20, 47, 21], "s", "s$2kc5czyfqafly$1"),
-                false,
-                "sum",
-              ),
-              false,
-              [],
-            ),
-          ),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [44, 19, 48, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [45, 3, 45, 30],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [45, 9, 45, 10],
+          text: "p",
+          bindingKey: "p$2kc5czyfqafly$0",
+        },
+        initializer: {
+          kind: "AstScriptNewExpression",
+          loc: [45, 13, 45, 29],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [45, 17, 45, 23],
+            key: "$Point",
+          },
+          arguments: [
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [45, 24, 45, 25],
+              value: 1,
+            },
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [45, 27, 45, 28],
+              value: 2,
+            },
+          ],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [46, 3, 46, 29],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [46, 9, 46, 10],
+          text: "s",
+          bindingKey: "s$2kc5czyfqafly$1",
+        },
+        initializer: {
+          kind: "AstScriptNewExpression",
+          loc: [46, 13, 46, 28],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [46, 17, 46, 22],
+            key: "$Size",
+          },
+          arguments: [
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [46, 23, 46, 24],
+              value: 3,
+            },
+            {
+              kind: "AstScriptNumericLiteral",
+              loc: [46, 26, 46, 27],
+              value: 4,
+            },
+          ],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [47, 3, 47, 28],
+        expression: {
+          kind: "AstScriptBinaryExpression",
+          loc: [47, 10, 47, 27],
+          left: {
+            kind: "AstScriptCallExpression",
+            loc: [47, 10, 47, 17],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [47, 10, 47, 15],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [47, 10, 47, 11],
+                text: "p",
+                bindingKey: "p$2kc5czyfqafly$0",
+              },
+              questionDotToken: false,
+              name: "sum",
+            },
+            questionDotToken: false,
+            arguments: [],
+          },
+          operatorToken: "+",
+          right: {
+            kind: "AstScriptCallExpression",
+            loc: [47, 20, 47, 27],
+            expression: {
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [47, 20, 47, 25],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [47, 20, 47, 21],
+                text: "s",
+                bindingKey: "s$2kc5czyfqafly$1",
+              },
+              questionDotToken: false,
+              name: "sum",
+            },
+            questionDotToken: false,
+            arguments: [],
+          },
+        },
+      },
+    ],
+  }),
 );

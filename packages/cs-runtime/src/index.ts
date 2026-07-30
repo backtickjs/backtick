@@ -27,7 +27,7 @@ export { type Instance, withInstance } from "./Instance.js";
 export { state, type State } from "./state.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";
-export type { BinaryOperator, Visitor } from "./Visitor.js";
+export type * from "./Ast.js";
 export {
   type ClientElement,
   createClientElement,

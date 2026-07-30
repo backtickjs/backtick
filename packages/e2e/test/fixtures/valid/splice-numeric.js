@@ -10,5 +10,9 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) => v.splice([3, 19, 3, 23], "$0splice0"),
+  () => ({
+    kind: "AstScriptSplice",
+    loc: [3, 19, 3, 23],
+    key: "$0splice0",
+  }),
 );

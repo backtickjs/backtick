@@ -43,30 +43,38 @@ export default _jsx(View, {
                       captures: ["order$kpf5b5091dr1$0"],
                       spliceParams: {},
                     },
-                    (v) =>
-                      v.binaryExpression(
-                        [28, 25, 28, 71],
-                        v.binaryExpression(
-                          [28, 25, 28, 62],
-                          v.stringLiteral(
-                            [28, 25, 28, 51],
-                            "https://img.example.com/",
-                          ),
-                          "+",
-                          v.propertyAccessExpression(
-                            [28, 54, 28, 62],
-                            v.identifier(
-                              [28, 54, 28, 59],
-                              "order",
-                              "order$kpf5b5091dr1$0",
-                            ),
-                            false,
-                            "id",
-                          ),
-                        ),
-                        "+",
-                        v.stringLiteral([28, 65, 28, 71], ".png"),
-                      ),
+                    () => ({
+                      kind: "AstScriptBinaryExpression",
+                      loc: [28, 25, 28, 71],
+                      left: {
+                        kind: "AstScriptBinaryExpression",
+                        loc: [28, 25, 28, 62],
+                        left: {
+                          kind: "AstScriptStringLiteral",
+                          loc: [28, 25, 28, 51],
+                          text: "https://img.example.com/",
+                        },
+                        operatorToken: "+",
+                        right: {
+                          kind: "AstScriptPropertyAccessExpression",
+                          loc: [28, 54, 28, 62],
+                          expression: {
+                            kind: "AstScriptIdentifier",
+                            loc: [28, 54, 28, 59],
+                            text: "order",
+                            bindingKey: "order$kpf5b5091dr1$0",
+                          },
+                          questionDotToken: false,
+                          name: "id",
+                        },
+                      },
+                      operatorToken: "+",
+                      right: {
+                        kind: "AstScriptStringLiteral",
+                        loc: [28, 65, 28, 71],
+                        text: ".png",
+                      },
+                    }),
                   ),
                 },
               }),
@@ -82,22 +90,24 @@ export default _jsx(View, {
                     captures: ["order$kpf5b5091dr1$0"],
                     spliceParams: {},
                   },
-                  (v) =>
-                    v.propertyAccessExpression(
-                      [31, 23, 31, 42],
-                      v.propertyAccessExpression(
-                        [31, 23, 31, 37],
-                        v.identifier(
-                          [31, 23, 31, 28],
-                          "order",
-                          "order$kpf5b5091dr1$0",
-                        ),
-                        false,
-                        "customer",
-                      ),
-                      false,
-                      "name",
-                    ),
+                  () => ({
+                    kind: "AstScriptPropertyAccessExpression",
+                    loc: [31, 23, 31, 42],
+                    expression: {
+                      kind: "AstScriptPropertyAccessExpression",
+                      loc: [31, 23, 31, 37],
+                      expression: {
+                        kind: "AstScriptIdentifier",
+                        loc: [31, 23, 31, 28],
+                        text: "order",
+                        bindingKey: "order$kpf5b5091dr1$0",
+                      },
+                      questionDotToken: false,
+                      name: "customer",
+                    },
+                    questionDotToken: false,
+                    name: "name",
+                  }),
                 ),
               }),
               _jsx(Text, {
@@ -112,22 +122,24 @@ export default _jsx(View, {
                     captures: ["order$kpf5b5091dr1$0"],
                     spliceParams: {},
                   },
-                  (v) =>
-                    v.propertyAccessExpression(
-                      [32, 23, 32, 42],
-                      v.propertyAccessExpression(
-                        [32, 23, 32, 37],
-                        v.identifier(
-                          [32, 23, 32, 28],
-                          "order",
-                          "order$kpf5b5091dr1$0",
-                        ),
-                        false,
-                        "customer",
-                      ),
-                      false,
-                      "city",
-                    ),
+                  () => ({
+                    kind: "AstScriptPropertyAccessExpression",
+                    loc: [32, 23, 32, 42],
+                    expression: {
+                      kind: "AstScriptPropertyAccessExpression",
+                      loc: [32, 23, 32, 37],
+                      expression: {
+                        kind: "AstScriptIdentifier",
+                        loc: [32, 23, 32, 28],
+                        text: "order",
+                        bindingKey: "order$kpf5b5091dr1$0",
+                      },
+                      questionDotToken: false,
+                      name: "customer",
+                    },
+                    questionDotToken: false,
+                    name: "city",
+                  }),
                 ),
               }),
               cs.create(
@@ -152,36 +164,45 @@ export default _jsx(View, {
                             captures: ["item$kpf5b5091dr1$1"],
                             spliceParams: {},
                           },
-                          (v) =>
-                            v.binaryExpression(
-                              [37, 25, 37, 51],
-                              v.binaryExpression(
-                                [37, 25, 37, 40],
-                                v.propertyAccessExpression(
-                                  [37, 25, 37, 33],
-                                  v.identifier(
-                                    [37, 25, 37, 29],
-                                    "item",
-                                    "item$kpf5b5091dr1$1",
-                                  ),
-                                  false,
-                                  "sku",
-                                ),
-                                "+",
-                                v.stringLiteral([37, 36, 37, 40], " x"),
-                              ),
-                              "+",
-                              v.propertyAccessExpression(
-                                [37, 43, 37, 51],
-                                v.identifier(
-                                  [37, 43, 37, 47],
-                                  "item",
-                                  "item$kpf5b5091dr1$1",
-                                ),
-                                false,
-                                "qty",
-                              ),
-                            ),
+                          () => ({
+                            kind: "AstScriptBinaryExpression",
+                            loc: [37, 25, 37, 51],
+                            left: {
+                              kind: "AstScriptBinaryExpression",
+                              loc: [37, 25, 37, 40],
+                              left: {
+                                kind: "AstScriptPropertyAccessExpression",
+                                loc: [37, 25, 37, 33],
+                                expression: {
+                                  kind: "AstScriptIdentifier",
+                                  loc: [37, 25, 37, 29],
+                                  text: "item",
+                                  bindingKey: "item$kpf5b5091dr1$1",
+                                },
+                                questionDotToken: false,
+                                name: "sku",
+                              },
+                              operatorToken: "+",
+                              right: {
+                                kind: "AstScriptStringLiteral",
+                                loc: [37, 36, 37, 40],
+                                text: " x",
+                              },
+                            },
+                            operatorToken: "+",
+                            right: {
+                              kind: "AstScriptPropertyAccessExpression",
+                              loc: [37, 43, 37, 51],
+                              expression: {
+                                kind: "AstScriptIdentifier",
+                                loc: [37, 43, 37, 47],
+                                text: "item",
+                                bindingKey: "item$kpf5b5091dr1$1",
+                              },
+                              questionDotToken: false,
+                              name: "qty",
+                            },
+                          }),
                         ),
                       },
                       cs.create(
@@ -195,59 +216,70 @@ export default _jsx(View, {
                           captures: ["item$kpf5b5091dr1$1"],
                           spliceParams: {},
                         },
-                        (v) =>
-                          v.propertyAccessExpression(
-                            [36, 33, 36, 41],
-                            v.identifier(
-                              [36, 33, 36, 37],
-                              "item",
-                              "item$kpf5b5091dr1$1",
-                            ),
-                            false,
-                            "sku",
-                          ),
+                        () => ({
+                          kind: "AstScriptPropertyAccessExpression",
+                          loc: [36, 33, 36, 41],
+                          expression: {
+                            kind: "AstScriptIdentifier",
+                            loc: [36, 33, 36, 37],
+                            text: "item",
+                            bindingKey: "item$kpf5b5091dr1$1",
+                          },
+                          questionDotToken: false,
+                          name: "sku",
+                        }),
                       ),
                     ),
                   },
                   captures: ["order$kpf5b5091dr1$0"],
                   spliceParams: { $0splice0: ["item$kpf5b5091dr1$1"] },
                 },
-                (v) =>
-                  v.callExpression(
-                    [33, 17, 40, 14],
-                    v.propertyAccessExpression(
-                      [33, 17, 33, 32],
-                      v.propertyAccessExpression(
-                        [33, 17, 33, 28],
-                        v.identifier(
-                          [33, 17, 33, 22],
-                          "order",
-                          "order$kpf5b5091dr1$0",
-                        ),
-                        false,
-                        "items",
-                      ),
-                      false,
-                      "map",
-                    ),
-                    false,
-                    [
-                      v.arrowFunction(
-                        [34, 15, 39, 19],
-                        [
-                          v.parameterDeclaration(
-                            [34, 16, 34, 20],
-                            v.identifier(
-                              [34, 16, 34, 20],
-                              "item",
-                              "item$kpf5b5091dr1$1",
-                            ),
-                          ),
-                        ],
-                        v.splice([35, 17, 39, 19], "$0splice0"),
-                      ),
-                    ],
-                  ),
+                () => ({
+                  kind: "AstScriptCallExpression",
+                  loc: [33, 17, 40, 14],
+                  expression: {
+                    kind: "AstScriptPropertyAccessExpression",
+                    loc: [33, 17, 33, 32],
+                    expression: {
+                      kind: "AstScriptPropertyAccessExpression",
+                      loc: [33, 17, 33, 28],
+                      expression: {
+                        kind: "AstScriptIdentifier",
+                        loc: [33, 17, 33, 22],
+                        text: "order",
+                        bindingKey: "order$kpf5b5091dr1$0",
+                      },
+                      questionDotToken: false,
+                      name: "items",
+                    },
+                    questionDotToken: false,
+                    name: "map",
+                  },
+                  questionDotToken: false,
+                  arguments: [
+                    {
+                      kind: "AstScriptArrowFunction",
+                      loc: [34, 15, 39, 19],
+                      parameters: [
+                        {
+                          kind: "AstScriptParameterDeclaration",
+                          loc: [34, 16, 34, 20],
+                          name: {
+                            kind: "AstScriptIdentifier",
+                            loc: [34, 16, 34, 20],
+                            text: "item",
+                            bindingKey: "item$kpf5b5091dr1$1",
+                          },
+                        },
+                      ],
+                      body: {
+                        kind: "AstScriptSplice",
+                        loc: [35, 17, 39, 19],
+                        key: "$0splice0",
+                      },
+                    },
+                  ],
+                }),
               ),
               _jsx(Text, {
                 children: cs.create(
@@ -261,22 +293,28 @@ export default _jsx(View, {
                     captures: ["order$kpf5b5091dr1$0"],
                     spliceParams: {},
                   },
-                  (v) =>
-                    v.binaryExpression(
-                      [41, 23, 41, 40],
-                      v.stringLiteral([41, 23, 41, 26], "$"),
-                      "+",
-                      v.propertyAccessExpression(
-                        [41, 29, 41, 40],
-                        v.identifier(
-                          [41, 29, 41, 34],
-                          "order",
-                          "order$kpf5b5091dr1$0",
-                        ),
-                        false,
-                        "total",
-                      ),
-                    ),
+                  () => ({
+                    kind: "AstScriptBinaryExpression",
+                    loc: [41, 23, 41, 40],
+                    left: {
+                      kind: "AstScriptStringLiteral",
+                      loc: [41, 23, 41, 26],
+                      text: "$",
+                    },
+                    operatorToken: "+",
+                    right: {
+                      kind: "AstScriptPropertyAccessExpression",
+                      loc: [41, 29, 41, 40],
+                      expression: {
+                        kind: "AstScriptIdentifier",
+                        loc: [41, 29, 41, 34],
+                        text: "order",
+                        bindingKey: "order$kpf5b5091dr1$0",
+                      },
+                      questionDotToken: false,
+                      name: "total",
+                    },
+                  }),
                 ),
               }),
             ],
@@ -292,41 +330,62 @@ export default _jsx(View, {
               captures: ["order$kpf5b5091dr1$0"],
               spliceParams: {},
             },
-            (v) =>
-              v.propertyAccessExpression(
-                [25, 25, 25, 33],
-                v.identifier([25, 25, 25, 30], "order", "order$kpf5b5091dr1$0"),
-                false,
-                "id",
-              ),
+            () => ({
+              kind: "AstScriptPropertyAccessExpression",
+              loc: [25, 25, 25, 33],
+              expression: {
+                kind: "AstScriptIdentifier",
+                loc: [25, 25, 25, 30],
+                text: "order",
+                bindingKey: "order$kpf5b5091dr1$0",
+              },
+              questionDotToken: false,
+              name: "id",
+            }),
           ),
         ),
       },
       captures: [],
       spliceParams: { $orders: [], $0splice0: ["order$kpf5b5091dr1$0"] },
     },
-    (v) =>
-      v.callExpression(
-        [22, 9, 44, 6],
-        v.propertyAccessExpression(
-          [22, 9, 22, 20],
-          v.splice([22, 9, 22, 16], "$orders"),
-          false,
-          "map",
-        ),
-        false,
-        [
-          v.arrowFunction(
-            [23, 7, 43, 11],
-            [
-              v.parameterDeclaration(
-                [23, 8, 23, 13],
-                v.identifier([23, 8, 23, 13], "order", "order$kpf5b5091dr1$0"),
-              ),
-            ],
-            v.splice([24, 9, 43, 11], "$0splice0"),
-          ),
-        ],
-      ),
+    () => ({
+      kind: "AstScriptCallExpression",
+      loc: [22, 9, 44, 6],
+      expression: {
+        kind: "AstScriptPropertyAccessExpression",
+        loc: [22, 9, 22, 20],
+        expression: {
+          kind: "AstScriptSplice",
+          loc: [22, 9, 22, 16],
+          key: "$orders",
+        },
+        questionDotToken: false,
+        name: "map",
+      },
+      questionDotToken: false,
+      arguments: [
+        {
+          kind: "AstScriptArrowFunction",
+          loc: [23, 7, 43, 11],
+          parameters: [
+            {
+              kind: "AstScriptParameterDeclaration",
+              loc: [23, 8, 23, 13],
+              name: {
+                kind: "AstScriptIdentifier",
+                loc: [23, 8, 23, 13],
+                text: "order",
+                bindingKey: "order$kpf5b5091dr1$0",
+              },
+            },
+          ],
+          body: {
+            kind: "AstScriptSplice",
+            loc: [24, 9, 43, 11],
+            key: "$0splice0",
+          },
+        },
+      ],
+    }),
   ),
 });

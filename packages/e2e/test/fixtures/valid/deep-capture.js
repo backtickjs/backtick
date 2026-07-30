@@ -39,67 +39,95 @@ function wrap(start) {
                   captures: ["outer$1mlv4ugew6yjv$0"],
                   spliceParams: {},
                 },
-                (v) =>
-                  v.identifier(
-                    [19, 28, 19, 33],
-                    "outer",
-                    "outer$1mlv4ugew6yjv$0",
-                  ),
+                () => ({
+                  kind: "AstScriptIdentifier",
+                  loc: [19, 28, 19, 33],
+                  text: "outer",
+                  bindingKey: "outer$1mlv4ugew6yjv$0",
+                }),
               ),
             },
             captures: ["outer$1mlv4ugew6yjv$0"],
             spliceParams: { $0splice0: [] },
           },
-          (v) =>
-            v.block(
-              [17, 17, 20, 6],
-              [
-                v.variableDeclaration(
-                  [18, 7, 18, 25],
-                  v.identifier(
-                    [18, 13, 18, 19],
-                    "middle",
-                    "middle$1mlv4ugew6yjv$1",
-                  ),
-                  v.numericLiteral([18, 22, 18, 24], 10),
-                  "const",
-                ),
-                v.returnStatement(
-                  [19, 7, 19, 36],
-                  v.binaryExpression(
-                    [19, 14, 19, 35],
-                    v.identifier(
-                      [19, 14, 19, 20],
-                      "middle",
-                      "middle$1mlv4ugew6yjv$1",
-                    ),
-                    "+",
-                    v.splice([19, 23, 19, 35], "$0splice0"),
-                  ),
-                ),
-              ],
-            ),
+          () => ({
+            kind: "AstScriptBlock",
+            loc: [17, 17, 20, 6],
+            statements: [
+              {
+                kind: "AstScriptVariableDeclaration",
+                loc: [18, 7, 18, 25],
+                name: {
+                  kind: "AstScriptIdentifier",
+                  loc: [18, 13, 18, 19],
+                  text: "middle",
+                  bindingKey: "middle$1mlv4ugew6yjv$1",
+                },
+                initializer: {
+                  kind: "AstScriptNumericLiteral",
+                  loc: [18, 22, 18, 24],
+                  value: 10,
+                },
+                keyword: "const",
+              },
+              {
+                kind: "AstScriptReturnStatement",
+                loc: [19, 7, 19, 36],
+                expression: {
+                  kind: "AstScriptBinaryExpression",
+                  loc: [19, 14, 19, 35],
+                  left: {
+                    kind: "AstScriptIdentifier",
+                    loc: [19, 14, 19, 20],
+                    text: "middle",
+                    bindingKey: "middle$1mlv4ugew6yjv$1",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: "AstScriptSplice",
+                    loc: [19, 23, 19, 35],
+                    key: "$0splice0",
+                  },
+                },
+              },
+            ],
+          }),
         ),
       },
       captures: [],
       spliceParams: { $start: [], $0splice0: ["outer$1mlv4ugew6yjv$0"] },
     },
-    (v) =>
-      v.block(
-        [15, 13, 21, 4],
-        [
-          v.variableDeclaration(
-            [16, 5, 16, 26],
-            v.identifier([16, 11, 16, 16], "outer", "outer$1mlv4ugew6yjv$0"),
-            v.splice([16, 19, 16, 25], "$start"),
-            "const",
-          ),
-          v.returnStatement(
-            [17, 5, 20, 9],
-            v.splice([17, 12, 20, 8], "$0splice0"),
-          ),
-        ],
-      ),
+    () => ({
+      kind: "AstScriptBlock",
+      loc: [15, 13, 21, 4],
+      statements: [
+        {
+          kind: "AstScriptVariableDeclaration",
+          loc: [16, 5, 16, 26],
+          name: {
+            kind: "AstScriptIdentifier",
+            loc: [16, 11, 16, 16],
+            text: "outer",
+            bindingKey: "outer$1mlv4ugew6yjv$0",
+          },
+          initializer: {
+            kind: "AstScriptSplice",
+            loc: [16, 19, 16, 25],
+            key: "$start",
+          },
+          keyword: "const",
+        },
+        {
+          kind: "AstScriptReturnStatement",
+          loc: [17, 5, 20, 9],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [17, 12, 20, 8],
+            key: "$0splice0",
+          },
+        },
+      ],
+    }),
   );
 }
 export default cs.create(
@@ -122,7 +150,11 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.numericLiteral([24, 29, 24, 30], 1),
+          () => ({
+            kind: "AstScriptNumericLiteral",
+            loc: [24, 29, 24, 30],
+            value: 1,
+          }),
         ),
       ),
       $0splice1: wrap(
@@ -137,18 +169,30 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.numericLiteral([24, 46, 24, 47], 2),
+          () => ({
+            kind: "AstScriptNumericLiteral",
+            loc: [24, 46, 24, 47],
+            value: 2,
+          }),
         ),
       ),
     },
     captures: [],
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
-  (v) =>
-    v.binaryExpression(
-      [24, 19, 24, 50],
-      v.splice([24, 19, 24, 33], "$0splice0"),
-      "+",
-      v.splice([24, 36, 24, 50], "$0splice1"),
-    ),
+  () => ({
+    kind: "AstScriptBinaryExpression",
+    loc: [24, 19, 24, 50],
+    left: {
+      kind: "AstScriptSplice",
+      loc: [24, 19, 24, 33],
+      key: "$0splice0",
+    },
+    operatorToken: "+",
+    right: {
+      kind: "AstScriptSplice",
+      loc: [24, 36, 24, 50],
+      key: "$0splice1",
+    },
+  }),
 );

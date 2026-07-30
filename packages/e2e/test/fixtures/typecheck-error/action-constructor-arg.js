@@ -19,18 +19,28 @@ const action = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) =>
-    v.block(
-      [16, 19, 18, 2],
-      [
-        v.variableDeclaration(
-          [17, 3, 17, 15],
-          v.identifier([17, 9, 17, 10], "x", "x$t3cg066e2mwt$0"),
-          v.numericLiteral([17, 13, 17, 14], 1),
-          "const",
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [16, 19, 18, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [17, 3, 17, 15],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [17, 9, 17, 10],
+          text: "x",
+          bindingKey: "x$t3cg066e2mwt$0",
+        },
+        initializer: {
+          kind: "AstScriptNumericLiteral",
+          loc: [17, 13, 17, 14],
+          value: 1,
+        },
+        keyword: "const",
+      },
+    ],
+  }),
 );
 export const held = cs.create(
   [20, 21, 23, 3],
@@ -43,24 +53,46 @@ export const held = cs.create(
     captures: [],
     spliceParams: { $Holder: [], $action: [] },
   },
-  (v) =>
-    v.block(
-      [20, 24, 23, 2],
-      [
-        v.variableDeclaration(
-          [21, 3, 21, 34],
-          v.identifier([21, 9, 21, 10], "h", "h$t3cg066e2mwt$1"),
-          v.newExpression(
-            [21, 13, 21, 33],
-            v.splice([21, 17, 21, 24], "$Holder"),
-            [v.splice([21, 25, 21, 32], "$action")],
-          ),
-          "const",
-        ),
-        v.returnStatement(
-          [22, 3, 22, 12],
-          v.numericLiteral([22, 10, 22, 11], 1),
-        ),
-      ],
-    ),
+  () => ({
+    kind: "AstScriptBlock",
+    loc: [20, 24, 23, 2],
+    statements: [
+      {
+        kind: "AstScriptVariableDeclaration",
+        loc: [21, 3, 21, 34],
+        name: {
+          kind: "AstScriptIdentifier",
+          loc: [21, 9, 21, 10],
+          text: "h",
+          bindingKey: "h$t3cg066e2mwt$1",
+        },
+        initializer: {
+          kind: "AstScriptNewExpression",
+          loc: [21, 13, 21, 33],
+          expression: {
+            kind: "AstScriptSplice",
+            loc: [21, 17, 21, 24],
+            key: "$Holder",
+          },
+          arguments: [
+            {
+              kind: "AstScriptSplice",
+              loc: [21, 25, 21, 32],
+              key: "$action",
+            },
+          ],
+        },
+        keyword: "const",
+      },
+      {
+        kind: "AstScriptReturnStatement",
+        loc: [22, 3, 22, 12],
+        expression: {
+          kind: "AstScriptNumericLiteral",
+          loc: [22, 10, 22, 11],
+          value: 1,
+        },
+      },
+    ],
+  }),
 );
