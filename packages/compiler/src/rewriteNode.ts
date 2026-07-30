@@ -1248,15 +1248,17 @@ function rewriteNodeImpl(
     };
   }
 
-  if (
-    node.kind === ts.SyntaxKind.TrueKeyword ||
-    node.kind === ts.SyntaxKind.FalseKeyword
-  ) {
-    const value = node.kind === ts.SyntaxKind.TrueKeyword;
-    const literal = value ? ts.factory.createTrue() : ts.factory.createFalse();
+  if (node.kind === ts.SyntaxKind.TrueKeyword) {
     return {
-      virtual: literal,
-      runtime: call(ts, "v", "booleanLiteral", [loc(node), literal]),
+      virtual: ts.factory.createTrue(),
+      runtime: call(ts, "v", "trueLiteral", [loc(node)]),
+    };
+  }
+
+  if (node.kind === ts.SyntaxKind.FalseKeyword) {
+    return {
+      virtual: ts.factory.createFalse(),
+      runtime: call(ts, "v", "falseLiteral", [loc(node)]),
     };
   }
 

@@ -147,7 +147,7 @@ const wrongArgument = cs.create(
             [26, 13, 26, 25],
             v.splice([26, 13, 26, 19], "$label"),
             false,
-            [v.booleanLiteral([26, 20, 26, 24], true)],
+            [v.trueLiteral([26, 20, 26, 24])],
           ),
           "const",
         ),

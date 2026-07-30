@@ -87,19 +87,13 @@ export default cs.create(
         [21, 9, 21, 26],
         v.splice([21, 9, 21, 14], "$gate"),
         false,
-        [
-          v.booleanLiteral([21, 15, 21, 19], true),
-          v.booleanLiteral([21, 21, 21, 25], true),
-        ],
+        [v.trueLiteral([21, 15, 21, 19]), v.trueLiteral([21, 21, 21, 25])],
       ),
       one: v.callExpression(
         [22, 8, 22, 26],
         v.splice([22, 8, 22, 13], "$gate"),
         false,
-        [
-          v.booleanLiteral([22, 14, 22, 18], true),
-          v.booleanLiteral([22, 20, 22, 25], false),
-        ],
+        [v.trueLiteral([22, 14, 22, 18]), v.falseLiteral([22, 20, 22, 25])],
       ),
     }),
 );

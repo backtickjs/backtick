@@ -9,7 +9,7 @@ import type {
   AstScriptBinaryExpression,
   AstScriptBlock,
   AstScriptBody,
-  AstScriptBooleanLiteral,
+  AstScriptFalseLiteral,
   AstScriptBreakStatement,
   AstScriptCallExpression,
   AstScriptCatchClause,
@@ -30,6 +30,7 @@ import type {
   AstScriptSplice,
   AstScriptStatement,
   AstScriptStringLiteral,
+  AstScriptTrueLiteral,
   AstScriptThrowStatement,
   AstScriptTryStatement,
   AstScriptVariableDeclaration,
@@ -52,8 +53,12 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     return { kind: "AstScriptNumericLiteral", loc, value };
   }
 
-  booleanLiteral(loc: SourceLocation, value: boolean): AstScriptBooleanLiteral {
-    return { kind: "AstScriptBooleanLiteral", loc, value };
+  trueLiteral(loc: SourceLocation): AstScriptTrueLiteral {
+    return { kind: "AstScriptTrueLiteral", loc };
+  }
+
+  falseLiteral(loc: SourceLocation): AstScriptFalseLiteral {
+    return { kind: "AstScriptFalseLiteral", loc };
   }
 
   stringLiteral(loc: SourceLocation, text: string): AstScriptStringLiteral {

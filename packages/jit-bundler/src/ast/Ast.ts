@@ -32,7 +32,8 @@ export type AstScriptExpression =
   | AstScriptArrayLiteralExpression
   | AstScriptArrowFunction
   | AstScriptBinaryExpression
-  | AstScriptBooleanLiteral
+  | AstScriptTrueLiteral
+  | AstScriptFalseLiteral
   | AstScriptCallExpression
   | AstScriptIdentifier
   | AstScriptNewExpression
@@ -143,10 +144,16 @@ export interface AstScriptBlock {
   readonly statements: readonly AstScriptStatement[];
 }
 
-export interface AstScriptBooleanLiteral {
-  readonly kind: "AstScriptBooleanLiteral";
+// Two kinds rather than one with a value, as ts.TrueLiteral and
+// ts.FalseLiteral are: the kind is the value.
+export interface AstScriptTrueLiteral {
+  readonly kind: "AstScriptTrueLiteral";
   readonly loc: SourceLocation;
-  readonly value: boolean;
+}
+
+export interface AstScriptFalseLiteral {
+  readonly kind: "AstScriptFalseLiteral";
+  readonly loc: SourceLocation;
 }
 
 export interface AstScriptCallExpression {

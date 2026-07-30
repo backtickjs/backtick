@@ -103,13 +103,13 @@ export default cs.create(
         [25, 10, 25, 28],
         v.splice([25, 10, 25, 22], "$0splice0"),
         false,
-        [v.booleanLiteral([25, 23, 25, 27], true)],
+        [v.trueLiteral([25, 23, 25, 27])],
       ),
       skipped: v.callExpression(
         [26, 12, 26, 35],
         v.splice([26, 12, 26, 28], "$0splice1"),
         false,
-        [v.booleanLiteral([26, 29, 26, 34], false)],
+        [v.falseLiteral([26, 29, 26, 34])],
       ),
     }),
 );

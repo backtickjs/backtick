@@ -18,7 +18,7 @@ const flags = {
       captures: [],
       spliceParams: {},
     },
-    (v) => v.booleanLiteral([10, 28, 10, 32], true),
+    (v) => v.trueLiteral([10, 28, 10, 32]),
   ),
 };
 const label = cs.create(
@@ -171,10 +171,7 @@ export default cs.create(
         [26, 12, 26, 30],
         v.splice([26, 12, 26, 18], "$label"),
         false,
-        [
-          v.nullLiteral([26, 19, 26, 23]),
-          v.booleanLiteral([26, 25, 26, 29], true),
-        ],
+        [v.nullLiteral([26, 19, 26, 23]), v.trueLiteral([26, 25, 26, 29])],
       ),
       loud: v.callExpression(
         [27, 9, 27, 28],
@@ -182,7 +179,7 @@ export default cs.create(
         false,
         [
           v.stringLiteral([27, 16, 27, 21], "!hi"),
-          v.booleanLiteral([27, 23, 27, 27], true),
+          v.trueLiteral([27, 23, 27, 27]),
         ],
       ),
       quiet: v.callExpression(
@@ -191,7 +188,7 @@ export default cs.create(
         false,
         [
           v.stringLiteral([28, 17, 28, 22], "!hi"),
-          v.booleanLiteral([28, 24, 28, 29], false),
+          v.falseLiteral([28, 24, 28, 29]),
         ],
       ),
       plain: v.callExpression(
@@ -200,7 +197,7 @@ export default cs.create(
         false,
         [
           v.stringLiteral([29, 17, 29, 21], "zz"),
-          v.booleanLiteral([29, 23, 29, 28], false),
+          v.falseLiteral([29, 23, 29, 28]),
         ],
       ),
     }),

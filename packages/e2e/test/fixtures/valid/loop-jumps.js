@@ -64,7 +64,7 @@ export default cs.create(
               ),
               v.whileStatement(
                 [12, 5, 15, 6],
-                v.booleanLiteral([12, 12, 12, 16], true),
+                v.trueLiteral([12, 12, 12, 16]),
                 v.block(
                   [12, 18, 15, 6],
                   [

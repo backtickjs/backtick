@@ -208,8 +208,10 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.whenTrue]: e(node.whenTrue),
           [NodeField.whenFalse]: e(node.whenFalse),
         };
-      case "AstScriptBooleanLiteral":
-        return node.value;
+      case "AstScriptTrueLiteral":
+        return true;
+      case "AstScriptFalseLiteral":
+        return false;
       case "AstScriptCallExpression": {
         // The callee is built before the arguments, because building one can
         // mint a `functions` entry and the labels run in the order they are

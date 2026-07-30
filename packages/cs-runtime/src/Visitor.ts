@@ -48,10 +48,10 @@ export type BinaryOperator =
 // Two names can't be TypeScript's. A call's arguments arrive as
 // `argumentsArray`, since `arguments` is not a legal parameter name in strict
 // mode — which is what TypeScript's own `factory.createCallExpression` calls
-// it, for the same reason. And a numeric or boolean literal carries its
-// `value`, where TypeScript's `NumericLiteral` carries the source `text` and a
-// boolean is a `TrueLiteral` or a `FalseLiteral` whose kind is the value: a
-// literal is data in this language, not a node with the value spelled out.
+// it, for the same reason. And a numeric literal carries its `value`, where
+// TypeScript's `NumericLiteral` carries the source `text`: a number is data
+// here, not text to be parsed. A boolean needs no such slot, being two kinds
+// rather than one with a value.
 export interface Visitor<U> {
   // e.g. ${ 1 } — `key` names the value in the script's `splices` metadata
   splice(loc: SourceLocation, key: string): U;
@@ -62,8 +62,11 @@ export interface Visitor<U> {
   // e.g. 3
   numericLiteral(loc: SourceLocation, value: number): U;
 
-  // e.g. true
-  booleanLiteral(loc: SourceLocation, value: boolean): U;
+  // true — a node kind rather than a value, as `ts.TrueLiteral` is
+  trueLiteral(loc: SourceLocation): U;
+
+  // false
+  falseLiteral(loc: SourceLocation): U;
 
   // e.g. "Hello World"
   stringLiteral(loc: SourceLocation, text: string): U;
