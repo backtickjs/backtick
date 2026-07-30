@@ -1,0 +1,52 @@
+cs.lift(cs.const(  → cs`
+() =>              → () => 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(count)            → $count
+)                  →  [-semantic]
+)                  → 
+.                  → .
+write              → write
+(                  → (
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(count)            → $count
+)                  →  [-semantic]
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+ +                 →  + 
+1                  → 1
+)                  → )
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(count)            → $count
+)                  →  [-semantic]
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+ >                 →  > 
+0                  → 0
+ ?                 →  ? 
+"\\u2611"          → "☑"
+ :                 →  : 
+"\\u2610"          → "☐"
+))                 → `
+cs.lift(cs.const(  → cs`
+"pressed "         → "pressed "
+ +                 →  + 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(count)            → $count
+)                  →  [-semantic]
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+ +                 →  + 
+" times"           → " times"
+))                 → `

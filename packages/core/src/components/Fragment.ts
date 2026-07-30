@@ -5,6 +5,9 @@ import {
 import type { JSX } from "../jsx-runtime/index.js";
 import type { Children } from "./Children.js";
 
+/**
+ * Children with no element of their own.
+ */
 export type FragmentProps = {
   children?: Children<JSX.Element>;
 };

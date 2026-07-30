@@ -1,0 +1,8 @@
+<Pressable testID="row" style={{ "flexDirection": "row", "gap": 8 }} onPress={[function]}>
+  <Text style={{ "fontWeight": "700" }}>
+    {"☐"}
+  </Text>
+  <Text>
+    {"pressed 0 times"}
+  </Text>
+</Pressable>

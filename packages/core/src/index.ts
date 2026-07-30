@@ -16,6 +16,8 @@ export {
   type ImageProps,
   Link,
   type LinkProps,
+  Pressable,
+  type PressableProps,
   Text,
   type TextProps,
   View,

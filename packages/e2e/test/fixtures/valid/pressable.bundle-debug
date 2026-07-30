@@ -1,0 +1,22 @@
+#f0 = ($0) => () => $0().write($0().read() + 1)
+
+#f1 = ($0) => $0().read() > 0 ? "☑" : "☐"
+
+#f2 = ($0) => "pressed " + $0().read() + " times"
+
+#t0 state { s0 = 0 } = <Pressable
+  testID={"row"}
+  style={{ "flexDirection": "row", "gap": 8 }}
+  onPress={#f0(() => cells.s0)}
+>
+  {<Text
+    style={{ "fontWeight": "700" }}
+  >
+    {#f1(() => cells.s0)}
+  </Text>}
+  {<Text>
+    {#f2(() => cells.s0)}
+  </Text>}
+</Pressable>
+
+root = #t0()

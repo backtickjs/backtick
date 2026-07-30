@@ -113,10 +113,26 @@ test("onPress becomes a click listener, testID a data attribute", () => {
   assert.equal(pressed, 1);
 });
 
+test("a pressable lays out as a view and presses like a text", () => {
+  let pressed = 0;
+  const [box] = render(
+    new Element("Pressable", null, {
+      onPress: () => (pressed += 1),
+      children: [new Element("Text", null, {})],
+    }),
+  );
+  assert.equal(box?.tag, "div");
+  assert.equal(box?.style.display, "flex");
+  assert.equal(box?.style.flexDirection, "column");
+  assert.equal(box?.style.cursor, "pointer");
+  box?.listeners.click?.[0]?.();
+  assert.equal(pressed, 1);
+});
+
 test("names the components it can render when it meets one it can't", () => {
   assert.throws(() => render(new Element("Slider", null, {})), {
     message:
-      /No web rendering for <Slider \/>.*View, Text, Image, Link and Fragment/s,
+      /No web rendering for <Slider \/>.*View, Pressable, Text, Image, Link and Fragment/s,
   });
 });
 

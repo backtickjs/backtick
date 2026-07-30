@@ -8,6 +8,7 @@ import type { Element } from "@backtickjs/js-interpreter";
 // node of its own, so it maps to no tag at all.
 const tags: { readonly [id: string]: string } = {
   View: "div",
+  Pressable: "div",
   Text: "span",
   Image: "img",
   Link: "a",
@@ -86,8 +87,9 @@ function element(source: Element): Node[] {
   const node = document.createElement(tag);
 
   // A view lays out as a column by default, matching the native clients rather
-  // than the block layout a `div` would otherwise take.
-  if (source.id === "View") {
+  // than the block layout a `div` would otherwise take. A pressable is a view
+  // that can be pressed, so it lays out the same way.
+  if (source.id === "View" || source.id === "Pressable") {
     node.style.display = "flex";
     node.style.flexDirection = "column";
   }
