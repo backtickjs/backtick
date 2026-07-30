@@ -42,6 +42,12 @@ function isBooleanByConstruction(
   ) {
     return true;
   }
+  if (
+    ts.isPrefixUnaryExpression(node) &&
+    node.operator === ts.SyntaxKind.ExclamationToken
+  ) {
+    return true;
+  }
   if (ts.isBinaryExpression(node)) {
     switch (ts.tokenToString(node.operatorToken.kind)) {
       case "&&":
@@ -1188,6 +1194,33 @@ function rewriteNodeImpl(
         condition: condition.runtime as ts.Expression,
         whenTrue: consequent.runtime as ts.Expression,
         whenFalse: alternate.runtime as ts.Expression,
+      }),
+    };
+  }
+
+  if (ts.isPrefixUnaryExpression(node)) {
+    if (node.operator !== ts.SyntaxKind.ExclamationToken) {
+      state.errors.set(
+        node,
+        "This operator isn't supported in a `cs` client script.",
+      );
+      return unsupported();
+    }
+    const operand = rewriteNode(ts, state, node.operand);
+    return {
+      virtual: ts.factory.createPrefixUnaryExpression(
+        ts.SyntaxKind.ExclamationToken,
+        checkedCondition(
+          ts,
+          state,
+          node.operand,
+          operand.virtual as ts.Expression,
+        ),
+      ),
+      runtime: astNode(ts, SyntaxKind.PrefixUnaryExpression, {
+        loc: loc(node),
+        operator: ts.factory.createStringLiteral("!"),
+        operand: operand.runtime as ts.Expression,
       }),
     };
   }

@@ -86,6 +86,17 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         node[NodeField.right],
         indent,
       )}`;
+    case NodeKind.PrefixUnaryExpression: {
+      // `!` binds tighter than any binary operator, so an operand that is one
+      // reads as the wrong tree without parentheses.
+      const operand = node[NodeField.operand];
+      const text = renderNode(operand, indent);
+      const looser =
+        isNode(operand) &&
+        (operand["#"] === NodeKind.BinaryExpression ||
+          operand["#"] === NodeKind.ConditionalExpression);
+      return `${node[NodeField.operator]}${looser ? `(${text})` : text}`;
+    }
     case NodeKind.ConditionalExpression:
       return `${renderNode(node[NodeField.condition], indent)} ? ${renderNode(
         node[NodeField.whenTrue],

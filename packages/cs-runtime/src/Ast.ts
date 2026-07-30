@@ -1,4 +1,5 @@
 import type { BinaryOperator } from "./BinaryOperator.js";
+import type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
 import type { SourceLocation } from "./SourceLocation.js";
 import type { SyntaxKind } from "./SyntaxKind.js";
 
@@ -12,6 +13,7 @@ export type ClientScriptExpression =
   | ClientScriptArrayLiteralExpression
   | ClientScriptArrowFunction
   | ClientScriptBinaryExpression
+  | ClientScriptPrefixUnaryExpression
   | ClientScriptTrueLiteral
   | ClientScriptFalseLiteral
   | ClientScriptCallExpression
@@ -100,6 +102,14 @@ export interface ClientScriptBinaryExpression extends ClientScriptNode {
   readonly left: ClientScriptExpression;
   readonly operatorToken: BinaryOperator;
   readonly right: ClientScriptExpression;
+}
+
+// `!x`, whose operand is boolean like every other tested position: there is no
+// truthiness for it to negate.
+export interface ClientScriptPrefixUnaryExpression extends ClientScriptNode {
+  readonly kind: typeof SyntaxKind.PrefixUnaryExpression;
+  readonly operator: PrefixUnaryOperator;
+  readonly operand: ClientScriptExpression;
 }
 
 export interface ClientScriptConditionalExpression extends ClientScriptNode {

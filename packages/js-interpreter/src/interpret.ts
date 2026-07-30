@@ -773,6 +773,14 @@ function evaluateNode(
         scope,
       );
     }
+    case NodeKind.PrefixUnaryExpression: {
+      // The operand is boolean, as a tested position always is, so this negates
+      // rather than deciding what counts as true.
+      return !condition(
+        evaluateNode(bundle, node[NodeField.operand], scope),
+        "the operand of `!`",
+      );
+    }
     case NodeKind.ConditionalExpression: {
       // Only the taken branch evaluates.
       const taken = condition(

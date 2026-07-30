@@ -1,0 +1,34 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_ready         → ready
+: boolean          → : boolean
+,                  → , 
+__cs_count         → count
+: number           → : number
+) => {\n           → ) => {\n  
+if (               → if (
+!(cs.condition(    → !
+__cs_ready         → ready
+) &&               → 
+__cs_ready         → ready [-semantic -completion -navigation -verification]
+)                  → 
+)                  → ) 
+{\n                → {\n    
+return cs.const(   → return 
+"waiting"          → "waiting"
+);                 → ;
+\n    }            → \n  }
+\n                 → \n  
+return cs.const(   → return 
+!(                 → !
+__cs_count         → count
+ >                 →  > 
+3                  → 3
+)                  → 
+ ?                 →  ? 
+"room left"        → "room left"
+ :                 →  : 
+"full"             → "full"
+);                 → ;
+\n}                → \n}
+))                 → `

@@ -161,6 +161,8 @@ export const NodeField = {
   // there or not, and the operator itself rather than a kind to look up.
   questionDotToken: "l", // ts.PropertyAccessExpression, ts.CallExpression
   operatorToken: "m", // ts.BinaryExpression
+  operator: "m", // ts.PrefixUnaryExpression, which names the same slot plainly
+  operand: "aa", // ts.PrefixUnaryExpression
 
   // The one slot with no TypeScript counterpart: `const` or `let`, which
   // TypeScript keeps as flags on the declaration list this format doesn't have.
@@ -227,6 +229,7 @@ export const NodeKind = {
   ElementAccessExpression: 1017,
   CatchClause: 1018,
   Parameter: 1019,
+  PrefixUnaryExpression: 1020,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -361,6 +364,7 @@ export type BundleExpressionNode =
   | BundlePropertyAccessExpressionNode
   | BundleElementAccessExpressionNode
   | BundleBinaryExpressionNode
+  | BundlePrefixUnaryExpressionNode
   | BundleConditionalExpressionNode
   | BundleArrowFunctionNode;
 
@@ -498,6 +502,14 @@ export type BundleBinaryExpressionNode =
       [NodeField.left]: BundleExpressionNode;
       [NodeField.right]: BundleExpressionNode;
     };
+
+// `!x`. The operand is boolean, as every tested position is, so this negates a
+// value rather than deciding what counts as one.
+export interface BundlePrefixUnaryExpressionNode {
+  "#": typeof NodeKind.PrefixUnaryExpression;
+  [NodeField.operator]: "!";
+  [NodeField.operand]: BundleExpressionNode;
+}
 
 // A ternary: `condition ? consequent : alternate`. The condition is boolean
 // — the typechecker requires it, no truthiness — and only the taken

@@ -35,6 +35,7 @@ export const SyntaxKind = {
   CallExpression: 214,
   NewExpression: 215,
   ArrowFunction: 220,
+  PrefixUnaryExpression: 225,
   BinaryExpression: 227,
   ConditionalExpression: 228,
 

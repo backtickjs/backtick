@@ -234,6 +234,12 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.right]: e(node.right),
         };
       }
+      case SyntaxKind.PrefixUnaryExpression:
+        return {
+          "#": NodeKind.PrefixUnaryExpression,
+          [NodeField.operator]: node.operator,
+          [NodeField.operand]: e(node.operand),
+        };
       case SyntaxKind.ConditionalExpression:
         return {
           "#": NodeKind.ConditionalExpression,

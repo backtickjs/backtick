@@ -24,6 +24,7 @@ export type {
   BundleElementAccessExpressionNode,
   BundleNode,
   BundleParameterNode,
+  BundlePrefixUnaryExpressionNode,
   BundlePropertyAccessExpressionNode,
   BundleReturnStatementNode,
   BundleStatementNode,
