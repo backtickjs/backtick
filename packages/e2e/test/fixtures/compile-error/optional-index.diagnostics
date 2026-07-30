@@ -1,0 +1,1 @@
+4:10-4:20 error TS0: `?.[` isn't supported in a `cs` client script; check the target for null instead.

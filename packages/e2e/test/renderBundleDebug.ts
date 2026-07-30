@@ -79,6 +79,8 @@ function renderNode(node: BundleStatementNode, indent: string): string {
     }
     case NodeKind.Property:
       return `${renderNode(node[NodeField.object], indent)}${node[NodeField.optional] ? "?." : "."}${node[NodeField.name]}`;
+    case NodeKind.Index:
+      return `${renderNode(node[NodeField.object], indent)}[${renderNode(node[NodeField.index], indent)}]`;
     case NodeKind.Binop:
       return `${renderNode(node[NodeField.left], indent)} ${node[NodeField.operator]} ${renderNode(
         node[NodeField.right],

@@ -21,6 +21,7 @@ export type {
   BundleGetFunction,
   BundleIdentifierNode,
   BundleIfNode,
+  BundleIndexNode,
   BundleNode,
   BundlePropertyNode,
   BundleReturnNode,

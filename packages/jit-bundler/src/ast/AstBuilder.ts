@@ -17,6 +17,7 @@ import type {
   AstScriptExpression,
   AstScriptFor,
   AstScriptIdentifier,
+  AstScriptIndex,
   AstScriptIf,
   AstScriptNew,
   AstScriptNode,
@@ -156,6 +157,14 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     optional = false,
   ): AstScriptPropertyAccess {
     return { kind: "AstScriptPropertyAccess", loc, expression, name, optional };
+  }
+
+  index(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+    key: AstScriptExpression,
+  ): AstScriptIndex {
+    return { kind: "AstScriptIndex", loc, expression, key };
   }
 
   binop(

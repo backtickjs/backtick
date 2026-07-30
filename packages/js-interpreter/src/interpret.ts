@@ -720,6 +720,31 @@ function evaluateNode(
       // `undefined` never arises.
       return object[node[NodeField.name]] ?? null;
     }
+    case NodeKind.Index: {
+      const target = evaluateNode(bundle, node[NodeField.object], scope);
+      const key = evaluateNode(bundle, node[NodeField.index], scope);
+      if (Array.isArray(target)) {
+        // An array is reached by whole numbers in range; everything else about
+        // it — a fractional key, a string one, one past either end — is a place
+        // the array has nothing, which reads as null.
+        return typeof key === "number" &&
+          Number.isInteger(key) &&
+          key >= 0 &&
+          key < target.length
+          ? (target[key] ?? null)
+          : null;
+      }
+      // An object is reached by the names it holds itself: an inherited one
+      // (`toString`) is not a member of the value, so it reads as absent
+      // rather than handing back something from the host's prototypes.
+      if (target !== null && typeof target === "object") {
+        return typeof key === "string" &&
+          Object.prototype.hasOwnProperty.call(target, key)
+          ? ((target as { [name: string]: Value })[key] ?? null)
+          : null;
+      }
+      return null;
+    }
     case NodeKind.Binop: {
       return evaluateBinop(
         bundle,

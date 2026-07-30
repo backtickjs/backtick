@@ -382,6 +382,11 @@ export function resolveBindings(
       reference(node, script, scopes);
     } else if (ts.isPropertyAccessExpression(node)) {
       walkExpression(script, node.expression, scopes); // the name is not a variable
+    } else if (ts.isElementAccessExpression(node)) {
+      // Unlike a property name, a key is an expression and can name anything
+      // in scope.
+      walkExpression(script, node.expression, scopes);
+      walkExpression(script, node.argumentExpression, scopes);
     } else if (ts.isCallExpression(node)) {
       walkExpression(script, node.expression, scopes);
       for (const arg of node.arguments) {

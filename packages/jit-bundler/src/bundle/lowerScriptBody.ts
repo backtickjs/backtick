@@ -240,6 +240,12 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.optional]: node.optional ? true : undefined,
         };
       }
+      case "AstScriptIndex":
+        return {
+          "#": NodeKind.Index,
+          [NodeField.object]: e(node.expression),
+          [NodeField.index]: e(node.key),
+        };
       case "AstScriptSplice":
         return renderSplice(node.key);
       case "AstScriptString":

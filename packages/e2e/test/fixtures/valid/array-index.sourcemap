@@ -1,0 +1,60 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_coins              → coins
+ = cs.const(            →  = 
+[                       → [
+5                       → 5
+,                       → , 
+31                      → 31
+,                       → , 
+7                       → 7
+]                       → ]
+);                      → ;
+\n                      → \n  
+let                     → let 
+__cs_total              → total
+ = cs.let(              →  = 
+0                       → 0
+);                      → ;
+\n                      → \n  
+for (                   → for (
+let                     → let 
+__cs_i                  → i
+ = cs.let(              →  = 
+0                       → 0
+)                       → 
+;                       → ; 
+__cs_i                  → i
+ <                      →  < 
+cs.receiver(            → 
+__cs_coins              → coins
+)                       → 
+.                       → .
+length                  → length
+;                       → ; 
+__cs_i                  → i
+ = cs.const(            →  = 
+__cs_i                  → i
+ +                      →  + 
+1                       → 1
+)                       → 
+)                       → ) 
+{\n                     → {\n    
+__cs_total              → total
+ = cs.const(            →  = 
+__cs_total              → total
+ +                      →  + 
+cs.receiver(            → 
+__cs_coins              → coins
+)                       → 
+[                       → [
+__cs_i                  → i
+]                       → ]
+)                       → 
+;                       → ;
+\n    }                 → \n  }
+\n                      → \n  
+return cs.const(        → return 
+__cs_total              → total
+);                      → ;
+\n})())                 → \n}`

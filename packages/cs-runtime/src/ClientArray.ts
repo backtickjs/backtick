@@ -7,6 +7,11 @@ import type { ClientValue } from "./ClientValue.js";
  * `find`, …) are absent.
  */
 export interface ClientArray<T> {
+  /** The element at an index. Reading is total at runtime — an index the array
+   * doesn't have reads as `null` — but the type follows TypeScript's own rule
+   * and names the element, so an in-range read needs no null check. */
+  readonly [index: number]: T;
+
   /** Gets the length of the array. This is a number one higher than the highest index in the array. */
   readonly length: number;
 

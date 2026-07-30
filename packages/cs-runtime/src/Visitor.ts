@@ -91,6 +91,11 @@ export interface Visitor<U> {
     optional?: boolean,
   ): U;
 
+  // e.g. a[i], row["name"] — the key is an expression, so unlike a property
+  // name it need not be written in the source. Reading is total: a key the
+  // array or object doesn't have reads as null, the language's absent value.
+  index(loc: SourceLocation, expression: U, key: U): U;
+
   // e.g. a + b
   binop(loc: SourceLocation, lhs: U, operator: BinaryOperator, rhs: U): U;
 

@@ -753,6 +753,42 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isElementAccessExpression(node)) {
+    // `a?.[i]` would have to say what a null `a` reads as. A null target is the
+    // caller's to rule out, and `a?.b[i]` needs nothing here: the access is on
+    // what `?.b` produced, which the typechecker already knows may be null.
+    if (node.questionDotToken) {
+      state.errors.set(
+        node,
+        "`?.[` isn't supported in a `cs` client script; check the target " +
+          "for null instead.",
+      );
+      return unsupported();
+    }
+    const expression = rewriteNode(ts, state, node.expression);
+    const key = rewriteNode(ts, state, node.argumentExpression);
+    // The receiver reads as its client-side view, as it does for `.`, and the
+    // access stays a real one so the key is checked against what that view can
+    // be indexed by: a number for an array, whatever the type says for an
+    // object. An in-range read is the element type — TypeScript's own rule,
+    // which is the one the language follows wherever TypeScript has one.
+    const virtualReceiver = call(ts, "cs", "receiver", [
+      expression.virtual as ts.Expression,
+    ]);
+    state.mappings.set(virtualReceiver, node.expression);
+    return {
+      virtual: ts.factory.createElementAccessExpression(
+        virtualReceiver,
+        key.virtual as ts.Expression,
+      ),
+      runtime: call(ts, "v", "index", [
+        loc(node),
+        expression.runtime as ts.Expression,
+        key.runtime as ts.Expression,
+      ]),
+    };
+  }
+
   if (ts.isCallExpression(node)) {
     // `cb?.()` — an optional call: a null callee yields null, the
     // arguments unevaluated, mirroring an optional access.

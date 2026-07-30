@@ -1,0 +1,7 @@
+#f0 = ($0) => {
+  const names = ["zero", "one"];
+  const missing = $0()["nowhere"] ?? "gone";
+  return names[1] + "/" + missing;
+}
+
+root = #f0(() => { "here": "yes" })

@@ -40,6 +40,7 @@ export type AstScriptExpression =
   | AstScriptNumber
   | AstScriptObject
   | AstScriptPropertyAccess
+  | AstScriptIndex
   | AstScriptSplice
   | AstScriptString
   | AstScriptTernary;
@@ -213,6 +214,15 @@ export interface AstScriptPropertyAccess {
   readonly expression: AstScriptExpression;
   readonly name: string;
   readonly optional: boolean;
+}
+
+// The key is an expression, not a name: `a[i]` and `row[column]` are the point,
+// `row["name"]` only incidentally allowed.
+export interface AstScriptIndex {
+  readonly kind: "AstScriptIndex";
+  readonly loc: SourceLocation;
+  readonly expression: AstScriptExpression;
+  readonly key: AstScriptExpression;
 }
 
 export interface AstScriptReturn {

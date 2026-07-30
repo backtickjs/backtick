@@ -193,6 +193,7 @@ export const NodeKind = {
   For: 1014,
   Break: 1015,
   Continue: 1016,
+  Index: 1017,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -325,6 +326,7 @@ export type BundleExpressionNode =
   | BundleGetEntry
   | BundleCallNode
   | BundlePropertyNode
+  | BundleIndexNode
   | BundleBinopNode
   | BundleTernaryNode
   | BundleArrowNode;
@@ -396,6 +398,22 @@ export interface BundlePropertyNode {
   [NodeField.object]: BundleExpressionNode;
   [NodeField.name]: string;
   [NodeField.optional]?: true;
+}
+
+// A dynamic read: `object[key]`, where the key is an expression rather than a
+// name. Reading is total, so a reader never faults: an array takes a whole
+// number in range and yields that element; an object takes a string and yields
+// the member it holds under it, its own and not one inherited. Anything else —
+// a key of the wrong type, a negative or fractional index, one past the end, a
+// member the object hasn't got, a target that is neither — reads as null.
+//
+// The typechecker is stricter than that, naming the element type for an
+// in-range read the way TypeScript itself does, so the null is a runtime floor
+// rather than something every read has to answer for.
+export interface BundleIndexNode {
+  "#": typeof NodeKind.Index;
+  [NodeField.object]: BundleExpressionNode;
+  [NodeField.index]: BundleExpressionNode;
 }
 
 // The closed set of binary operators, part of the wire contract: a client

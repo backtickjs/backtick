@@ -1,0 +1,48 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_name          → name
+: string           → : string
+) => {\n           → ) => {\n  
+const              → const 
+__cs_coins         → coins
+ = cs.const(       →  = 
+[                  → [
+5                  → 5
+,                  → , 
+31                 → 31
+,                  → , 
+7                  → 7
+]                  → ]
+);                 → ;
+\n                 → \n  
+const              → const 
+__cs_first         → first
+ = cs.const(       →  = 
+cs.receiver(       → 
+__cs_coins         → coins
+)                  → 
+[                  → [
+__cs_name          → name
+]                  → ]
+);                 → ;
+\n                 → \n  
+const              → const 
+__cs_which         → which
+ = cs.const(       →  = 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(point)            → $point
+)                  →  [-semantic]
+)                  → 
+[                  → [
+__cs_name          → name
+]                  → ]
+);                 → ;
+\n                 → \n  
+return cs.const(   → return 
+__cs_first         → first
+ +                 →  + 
+__cs_which         → which
+);                 → ;
+\n}                → \n}
+))                 → `
