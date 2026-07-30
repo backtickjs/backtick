@@ -29,6 +29,7 @@ import type {
   AstScriptThrow,
   AstScriptTry,
   AstScriptVariableDeclaration,
+  AstScriptWhile,
 } from "./Ast.js";
 
 // Mirrors a client script's source 1:1: each visitor method returns the node
@@ -97,6 +98,14 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     alternate: AstScriptStatement | null,
   ): AstScriptIf {
     return { kind: "AstScriptIf", loc, condition, consequent, alternate };
+  }
+
+  while(
+    loc: SourceLocation,
+    condition: AstScriptExpression,
+    body: AstScriptStatement,
+  ): AstScriptWhile {
+    return { kind: "AstScriptWhile", loc, condition, body };
   }
 
   return(

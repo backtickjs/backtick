@@ -275,6 +275,9 @@ export function resolveBindings(
       if (node.elseStatement) {
         walkStatement(script, node.elseStatement, scopes);
       }
+    } else if (ts.isWhileStatement(node)) {
+      walkExpression(script, node.expression, scopes);
+      walkStatement(script, node.statement, scopes);
     } else if (ts.isReturnStatement(node)) {
       if (node.expression) {
         walkExpression(script, node.expression, scopes);

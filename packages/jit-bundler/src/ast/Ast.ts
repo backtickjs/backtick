@@ -51,6 +51,7 @@ export type AstScriptStatement =
   | AstScriptAssignment
   | AstScriptBlock
   | AstScriptIf
+  | AstScriptWhile
   | AstScriptReturn
   | AstScriptThrow
   | AstScriptTry
@@ -93,6 +94,13 @@ export interface AstScriptAssignment {
   readonly loc: SourceLocation;
   readonly name: AstScriptIdentifier;
   readonly expression: AstScriptExpression;
+}
+
+export interface AstScriptWhile {
+  readonly kind: "AstScriptWhile";
+  readonly loc: SourceLocation;
+  readonly condition: AstScriptExpression;
+  readonly body: AstScriptStatement;
 }
 
 export interface AstScriptBinop {

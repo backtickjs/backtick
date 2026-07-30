@@ -185,6 +185,7 @@ export const NodeKind = {
   Return: 1010,
   Throw: 1011,
   Try: 1012,
+  While: 1013,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -329,6 +330,7 @@ export type BundleStatementNode =
   | BundleDeclarationNode
   | BundleAssignmentNode
   | BundleIfNode
+  | BundleWhileNode
   | BundleReturnNode
   | BundleThrowNode
   | BundleTryNode;
@@ -471,6 +473,15 @@ export interface BundleIfNode {
   [NodeField.condition]: BundleExpressionNode;
   [NodeField.consequent]: BundleStatementNode;
   [NodeField.alternate]: BundleStatementNode | null;
+}
+
+// `while (c) { … }`. The condition is boolean, as every condition is: there is
+// no truthiness to fall back on. A `return` in the body returns from the
+// enclosing arrow.
+export interface BundleWhileNode {
+  "#": typeof NodeKind.While;
+  [NodeField.condition]: BundleExpressionNode;
+  [NodeField.body]: BundleStatementNode;
 }
 
 // Returns the expression's value from the enclosing arrow.

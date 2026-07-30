@@ -52,6 +52,9 @@ export interface Visitor<U> {
   // e.g. if (c) { ... } else { ... }
   if(loc: SourceLocation, condition: U, consequent: U, alternate: U | null): U;
 
+  // e.g. while (i < n) { ... } — the condition is boolean, as everywhere else
+  "while"(loc: SourceLocation, condition: U, body: U): U;
+
   // e.g. return i;
   return(loc: SourceLocation, expression: U): U;
 

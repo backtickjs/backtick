@@ -366,6 +366,27 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isWhileStatement(node)) {
+    const condition = rewriteNode(ts, state, node.expression);
+    const body = rewriteNode(ts, state, node.statement);
+    return {
+      virtual: ts.factory.createWhileStatement(
+        checkedCondition(
+          ts,
+          state,
+          node.expression,
+          condition.virtual as ts.Expression,
+        ),
+        body.virtual as ts.Statement,
+      ),
+      runtime: call(ts, "v", "while", [
+        loc(node),
+        condition.runtime as ts.Expression,
+        body.runtime as ts.Expression,
+      ]),
+    };
+  }
+
   if (ts.isExpressionStatement(node)) {
     let inner = node.expression;
     while (ts.isParenthesizedExpression(inner)) {

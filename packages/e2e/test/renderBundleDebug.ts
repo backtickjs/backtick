@@ -112,6 +112,11 @@ function renderNode(node: BundleStatementNode, indent: string): string {
           : ` else ${renderStatement(node[NodeField.alternate], indent)}`;
       return `if (${renderNode(node[NodeField.condition], indent)}) ${consequent}${alternate}`;
     }
+    case NodeKind.While:
+      return `while (${renderNode(node[NodeField.condition], indent)}) ${renderStatement(
+        node[NodeField.body],
+        indent,
+      )}`;
     case NodeKind.Return:
       return `return ${renderNode(node[NodeField.expression], indent)}`;
     case NodeKind.Throw:
@@ -134,6 +139,7 @@ function renderStatement(node: BundleStatementNode, indent: string): string {
   return isNode(node) &&
     (node["#"] === NodeKind.Block ||
       node["#"] === NodeKind.If ||
+      node["#"] === NodeKind.While ||
       node["#"] === NodeKind.Try)
     ? text
     : `${text};`;

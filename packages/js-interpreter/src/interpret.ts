@@ -513,6 +513,30 @@ function executeStatement(
       }
       return advanced;
     }
+    case NodeKind.While: {
+      let turns = 0;
+      while (
+        condition(
+          evaluateNode(bundle, node[NodeField.condition], scope),
+          "a `while`",
+        )
+      ) {
+        const completion = executeStatement(
+          bundle,
+          node[NodeField.body],
+          scope,
+        );
+        if (completion.returned) {
+          return completion;
+        }
+        // A bundle is data from elsewhere, and a loop that never ends is the
+        // one way it can hang the client rather than merely be wrong.
+        if ((turns += 1) > 1_000_000) {
+          throw new Error("A `while` in this bundle ran a million times.");
+        }
+      }
+      return advanced;
+    }
     case NodeKind.Return: {
       return {
         returned: true,
