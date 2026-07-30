@@ -278,6 +278,36 @@ export function resolveBindings(
     } else if (ts.isWhileStatement(node)) {
       walkExpression(script, node.expression, scopes);
       walkStatement(script, node.statement, scopes);
+    } else if (ts.isForStatement(node)) {
+      // A header declaration isn't a statement of the enclosing block, so
+      // `declareBlock` never saw it: it scopes over the rest of the header and
+      // the body only, like a catch binding over its handler.
+      const scope: Scope = new Map();
+      const initializer = node.initializer;
+      if (initializer && ts.isVariableDeclarationList(initializer)) {
+        const [declaration] = initializer.declarations;
+        if (declaration && ts.isIdentifier(declaration.name)) {
+          const unique = declare(declaration.name.text, script);
+          scope.set(declaration.name.text, unique);
+          bindings.set(declaration.name, unique);
+          if (declaration.initializer) {
+            // Before the binding is live: an initializer does not see its own.
+            walkExpression(script, declaration.initializer, scopes);
+          }
+        }
+      } else if (initializer) {
+        walkExpression(script, initializer, scopes);
+      }
+      const release = enliven(scope);
+      const inner = [...scopes, scope];
+      if (node.condition) {
+        walkExpression(script, node.condition, inner);
+      }
+      if (node.incrementor) {
+        walkExpression(script, node.incrementor, inner);
+      }
+      walkStatement(script, node.statement, inner);
+      release();
     } else if (ts.isReturnStatement(node)) {
       if (node.expression) {
         walkExpression(script, node.expression, scopes);

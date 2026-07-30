@@ -117,6 +117,24 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         node[NodeField.body],
         indent,
       )}`;
+    case NodeKind.For: {
+      const init = node[NodeField.init];
+      const condition = node[NodeField.condition];
+      const update = node[NodeField.update];
+      const parts = [
+        init === null ? "" : renderNode(init, indent),
+        condition === null ? "" : renderNode(condition, indent),
+        update === null ? "" : renderNode(update, indent),
+      ];
+      const header = parts.every((part) => part === "")
+        ? ";;"
+        : parts.join("; ");
+      return `for (${header}) ${renderStatement(node[NodeField.body], indent)}`;
+    }
+    case NodeKind.Break:
+      return "break";
+    case NodeKind.Continue:
+      return "continue";
     case NodeKind.Return:
       return `return ${renderNode(node[NodeField.expression], indent)}`;
     case NodeKind.Throw:
@@ -140,6 +158,7 @@ function renderStatement(node: BundleStatementNode, indent: string): string {
     (node["#"] === NodeKind.Block ||
       node["#"] === NodeKind.If ||
       node["#"] === NodeKind.While ||
+      node["#"] === NodeKind.For ||
       node["#"] === NodeKind.Try)
     ? text
     : `${text};`;

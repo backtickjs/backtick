@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
-import { call, sourceLoc, varDecl } from "./nodeFactory.js";
+import { call, sourceLoc, varDeclList } from "./nodeFactory.js";
 import { bodyKind, partialReturn } from "./bodyKind.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
@@ -257,20 +257,38 @@ function rewriteNodeImpl(
     };
   }
 
+  // A statement is its declaration list plus a semicolon; the list rewrites on
+  // its own because a `for` header holds one without the statement around it.
   if (ts.isVariableStatement(node)) {
-    const flags = node.declarationList.flags;
+    // The impl, not `rewriteNode`: the statement is what maps to the source
+    // here, and a second mapping over the list inside it would only split the
+    // same span in two. A `for` header, where the list stands alone, maps it.
+    const declarations = rewriteNodeImpl(ts, state, node.declarationList);
+    return {
+      virtual: ts.isVariableDeclarationList(declarations.virtual)
+        ? ts.factory.createVariableStatement(undefined, declarations.virtual)
+        : declarations.virtual,
+      runtime: declarations.runtime,
+    };
+  }
+
+  if (ts.isVariableDeclarationList(node)) {
+    // What a reader sees as the declaration: the whole statement where there is
+    // one, `;` and all; in a `for` header the list is all there is.
+    const at = ts.isVariableStatement(node.parent) ? node.parent : node;
+    const flags = node.flags;
     if (flags !== ts.NodeFlags.Const && flags !== ts.NodeFlags.Let) {
       state.errors.set(
-        node,
+        at,
         "`var` isn't supported in a client script; use `const` or `let`.",
       );
       return unsupported();
     }
     const keyword = flags === ts.NodeFlags.Const ? "const" : "let";
-    const declarations = node.declarationList.declarations;
+    const declarations = node.declarations;
     if (declarations.length !== 1) {
       state.errors.set(
-        node,
+        at,
         "A client script variable declaration must declare a single variable.",
       );
       return unsupported();
@@ -279,7 +297,7 @@ function rewriteNodeImpl(
     if (declaration && ts.isIdentifier(declaration.name)) {
       if (!declaration.initializer) {
         state.errors.set(
-          node,
+          at,
           "A client script variable declaration must have an initializer.",
         );
         return unsupported();
@@ -315,9 +333,9 @@ function rewriteNodeImpl(
       const identifier = ts.factory.createIdentifier(mangle(name.text));
       state.mappings.set(identifier, name);
       return {
-        virtual: varDecl(
+        virtual: varDeclList(
           ts,
-          node.declarationList.flags,
+          node.flags,
           identifier,
           // A value position must hold a value — a call can produce
           // `void`. The check mirrors the keyword: `cs.const` reads the
@@ -325,7 +343,7 @@ function rewriteNodeImpl(
           call(ts, "cs", keyword, [initializer.virtual as ts.Expression]),
         ),
         runtime: call(ts, "v", "variableDeclaration", [
-          loc(node),
+          loc(at),
           ts.factory.createStringLiteral(keyword),
           call(ts, "v", "identifier", [
             loc(declaration.name),
@@ -384,6 +402,66 @@ function rewriteNodeImpl(
         condition.runtime as ts.Expression,
         body.runtime as ts.Expression,
       ]),
+    };
+  }
+
+  if (ts.isForStatement(node)) {
+    // Each header part is optional, and the virtual `for` keeps them where the
+    // source put them: the initializer's binding scopes over the header and the
+    // body, which a rewrite into a block would have to reproduce by hand.
+    const conditionNode = node.condition;
+    const initializer = node.initializer
+      ? rewriteNode(ts, state, node.initializer)
+      : null;
+    const condition = conditionNode
+      ? rewriteNode(ts, state, conditionNode)
+      : null;
+    const update = node.incrementor
+      ? rewriteNode(ts, state, node.incrementor)
+      : null;
+    const body = rewriteNode(ts, state, node.statement);
+    const runtimeOr = (part: RewrittenNode | null): ts.Expression =>
+      part ? (part.runtime as ts.Expression) : ts.factory.createNull();
+    return {
+      virtual: ts.factory.createForStatement(
+        initializer ? (initializer.virtual as ts.ForInitializer) : undefined,
+        condition && conditionNode
+          ? checkedCondition(
+              ts,
+              state,
+              conditionNode,
+              condition.virtual as ts.Expression,
+            )
+          : undefined,
+        update ? (update.virtual as ts.Expression) : undefined,
+        body.virtual as ts.Statement,
+      ),
+      runtime: call(ts, "v", "for", [
+        loc(node),
+        runtimeOr(initializer),
+        runtimeOr(condition),
+        runtimeOr(update),
+        body.runtime as ts.Expression,
+      ]),
+    };
+  }
+
+  if (ts.isBreakStatement(node) || ts.isContinueStatement(node)) {
+    const keyword = ts.isBreakStatement(node) ? "break" : "continue";
+    // A label names a loop further out; without labels there is one loop a
+    // jump can mean, which is the one it is written in.
+    if (node.label) {
+      state.errors.set(
+        node,
+        `A labeled \`${keyword}\` isn't supported in a \`cs\` client script.`,
+      );
+      return unsupported();
+    }
+    return {
+      virtual: ts.isBreakStatement(node)
+        ? ts.factory.createBreakStatement()
+        : ts.factory.createContinueStatement(),
+      runtime: call(ts, "v", keyword, [loc(node)]),
     };
   }
 

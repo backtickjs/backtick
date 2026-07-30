@@ -55,6 +55,27 @@ export function iife(
   );
 }
 
+/** <const|let|var> <name> = <initializer> — the list, without the semicolon a
+ * statement would add, so it also fits a `for` header. */
+export function varDeclList(
+  ts: typeof import("typescript"),
+  flags: ts.NodeFlags,
+  name: string | ts.BindingName,
+  initializer: ts.Expression,
+): ts.VariableDeclarationList {
+  return ts.factory.createVariableDeclarationList(
+    [
+      ts.factory.createVariableDeclaration(
+        name,
+        undefined,
+        undefined,
+        initializer,
+      ),
+    ],
+    flags,
+  );
+}
+
 /** <const|let|var> <name> = <initializer>; */
 export function varDecl(
   ts: typeof import("typescript"),
@@ -64,17 +85,7 @@ export function varDecl(
 ): ts.VariableStatement {
   return ts.factory.createVariableStatement(
     undefined,
-    ts.factory.createVariableDeclarationList(
-      [
-        ts.factory.createVariableDeclaration(
-          name,
-          undefined,
-          undefined,
-          initializer,
-        ),
-      ],
-      flags,
-    ),
+    varDeclList(ts, flags, name, initializer),
   );
 }
 

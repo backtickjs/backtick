@@ -1,0 +1,42 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_n             → n
+: number           → : number
+) => {\n           → ) => {\n  
+let                → let 
+__cs_last          → last
+ = cs.let(         →  = 
+0                  → 0
+);                 → ;
+\n                 → \n  
+for (              → for (
+let                → let 
+__cs_i             → i
+ = cs.let(         →  = 
+__cs_n             → n
+)                  → 
+; (cs.condition(   → ; 
+__cs_i             → i
+) &&               → 
+__cs_i             → i [-semantic -completion -navigation -verification]
+);                 → ; 
+__cs_i             → i
+ = cs.const(       →  = 
+__cs_i             → i
+ -                 →  - 
+1                  → 1
+)                  → 
+)                  → ) 
+{\n                → {\n    
+__cs_last          → last
+ = cs.const(       →  = 
+__cs_i             → i
+)                  → 
+;                  → ;
+\n    }            → \n  }
+\n                 → \n  
+return cs.const(   → return 
+__cs_last          → last
+);                 → ;
+\n}                → \n}
+))                 → `

@@ -11,8 +11,11 @@ import type {
   AstScriptBlock,
   AstScriptBody,
   AstScriptBoolean,
+  AstScriptBreak,
+  AstScriptContinue,
   AstScriptCall,
   AstScriptExpression,
+  AstScriptFor,
   AstScriptIdentifier,
   AstScriptIf,
   AstScriptNew,
@@ -106,6 +109,24 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     body: AstScriptStatement,
   ): AstScriptWhile {
     return { kind: "AstScriptWhile", loc, condition, body };
+  }
+
+  for(
+    loc: SourceLocation,
+    init: AstScriptStatement | null,
+    condition: AstScriptExpression | null,
+    update: AstScriptStatement | null,
+    body: AstScriptStatement,
+  ): AstScriptFor {
+    return { kind: "AstScriptFor", loc, init, condition, update, body };
+  }
+
+  break(loc: SourceLocation): AstScriptBreak {
+    return { kind: "AstScriptBreak", loc };
+  }
+
+  continue(loc: SourceLocation): AstScriptContinue {
+    return { kind: "AstScriptContinue", loc };
   }
 
   return(

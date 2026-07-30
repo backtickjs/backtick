@@ -52,6 +52,9 @@ export type AstScriptStatement =
   | AstScriptBlock
   | AstScriptIf
   | AstScriptWhile
+  | AstScriptFor
+  | AstScriptBreak
+  | AstScriptContinue
   | AstScriptReturn
   | AstScriptThrow
   | AstScriptTry
@@ -101,6 +104,27 @@ export interface AstScriptWhile {
   readonly loc: SourceLocation;
   readonly condition: AstScriptExpression;
   readonly body: AstScriptStatement;
+}
+
+// `init` is a declaration or an assignment and `update` an assignment, so both
+// are statements rather than expressions.
+export interface AstScriptFor {
+  readonly kind: "AstScriptFor";
+  readonly loc: SourceLocation;
+  readonly init: AstScriptStatement | null;
+  readonly condition: AstScriptExpression | null;
+  readonly update: AstScriptStatement | null;
+  readonly body: AstScriptStatement;
+}
+
+export interface AstScriptBreak {
+  readonly kind: "AstScriptBreak";
+  readonly loc: SourceLocation;
+}
+
+export interface AstScriptContinue {
+  readonly kind: "AstScriptContinue";
+  readonly loc: SourceLocation;
 }
 
 export interface AstScriptBinop {

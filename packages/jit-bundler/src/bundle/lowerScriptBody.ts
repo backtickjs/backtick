@@ -112,6 +112,21 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.condition]: buildExpression(node.condition),
           [NodeField.body]: buildStatement(node.body),
         };
+      case "AstScriptFor":
+        return {
+          "#": NodeKind.For,
+          [NodeField.init]:
+            node.init === null ? null : buildStatement(node.init),
+          [NodeField.condition]:
+            node.condition === null ? null : buildExpression(node.condition),
+          [NodeField.update]:
+            node.update === null ? null : buildStatement(node.update),
+          [NodeField.body]: buildStatement(node.body),
+        };
+      case "AstScriptBreak":
+        return { "#": NodeKind.Break };
+      case "AstScriptContinue":
+        return { "#": NodeKind.Continue };
       case "AstScriptReturn":
         return {
           "#": NodeKind.Return,

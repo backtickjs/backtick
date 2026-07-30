@@ -444,15 +444,26 @@ function isNode(
   );
 }
 
-// The statement outcome of a block or one of its statements: `returned`
-// signals that a `return` executed and the enclosing arrow's result is
-// `value`.
+// The statement outcome of a block or one of its statements. `advanced` fell
+// through to the next one; the rest are jumps, and every container passes one
+// outward until something catches it: a loop catches `break` and `continue`,
+// an arrow catches `returned` and answers with `value`.
 interface Completion {
-  returned: boolean;
+  kind: "advanced" | "returned" | "break" | "continue";
   value: Value;
 }
 
-const advanced: Completion = { returned: false, value: null };
+const advanced: Completion = { kind: "advanced", value: null };
+const broke: Completion = { kind: "break", value: null };
+const continued: Completion = { kind: "continue", value: null };
+
+// A bundle is data from elsewhere, and a loop that never ends is the one way it
+// can hang the client rather than merely be wrong.
+function guardTurns(turns: number, keyword: string): void {
+  if (turns > 1_000_000) {
+    throw new Error(`A \`${keyword}\` in this bundle ran a million times.`);
+  }
+}
 
 function executeStatement(
   bundle: Bundle,
@@ -477,7 +488,8 @@ function executeStatement(
       }
       for (const statement of node[NodeField.statements] ?? []) {
         const completion = executeStatement(bundle, statement, frame);
-        if (completion.returned) {
+        // A jump of any kind leaves the block; what catches it is further out.
+        if (completion.kind !== "advanced") {
           return completion;
         }
       }
@@ -526,20 +538,68 @@ function executeStatement(
           node[NodeField.body],
           scope,
         );
-        if (completion.returned) {
+        if (completion.kind === "returned") {
           return completion;
         }
-        // A bundle is data from elsewhere, and a loop that never ends is the
-        // one way it can hang the client rather than merely be wrong.
-        if ((turns += 1) > 1_000_000) {
-          throw new Error("A `while` in this bundle ran a million times.");
+        if (completion.kind === "break") {
+          return advanced;
         }
+        // `continue` arrives here too, having nothing left to skip.
+        guardTurns((turns += 1), "while");
       }
       return advanced;
     }
+    case NodeKind.For: {
+      // The header binding lives in a scope of the loop's own, so it is gone
+      // once the loop is.
+      let frame: Scope = { parent: scope, bindings: new Map() };
+      const init = node[NodeField.init];
+      if (init !== null) {
+        executeStatement(bundle, init, frame);
+      }
+      let turns = 0;
+      for (;;) {
+        const test = node[NodeField.condition];
+        if (
+          test !== null &&
+          !condition(evaluateNode(bundle, test, frame), "a `for`")
+        ) {
+          return advanced;
+        }
+        const completion = executeStatement(
+          bundle,
+          node[NodeField.body],
+          frame,
+        );
+        if (completion.kind === "returned") {
+          return completion;
+        }
+        if (completion.kind === "break") {
+          return advanced;
+        }
+        // `continue` lands here, where falling off the end of the body lands:
+        // the update runs either way.
+        //
+        // Each turn gets its own copy of the header scope, taken before the
+        // update: an arrow built in one turn keeps that turn's values instead
+        // of the ones the loop stopped at.
+        frame = { parent: scope, bindings: new Map(frame.bindings) };
+        const update = node[NodeField.update];
+        if (update !== null) {
+          executeStatement(bundle, update, frame);
+        }
+        guardTurns((turns += 1), "for");
+      }
+    }
+    case NodeKind.Break: {
+      return broke;
+    }
+    case NodeKind.Continue: {
+      return continued;
+    }
     case NodeKind.Return: {
       return {
-        returned: true,
+        kind: "returned",
         value: evaluateNode(bundle, node[NodeField.expression], scope),
       };
     }
@@ -692,7 +752,14 @@ function evaluateNode(
         const body = node[NodeField.body];
         if (isNode(body) && body["#"] === NodeKind.Block) {
           const completion = executeStatement(bundle, body, frame);
-          return completion.returned ? completion.value : null;
+          if (completion.kind === "break" || completion.kind === "continue") {
+            // The compiler rejects a jump with no loop to catch it, so one
+            // reaching here means the bundle was not written by it.
+            throw new Error(
+              `A \`${completion.kind}\` in this bundle escaped its loop.`,
+            );
+          }
+          return completion.kind === "returned" ? completion.value : null;
         }
         // A non-block body is an expression, implicitly returned.
         return evaluateNode(bundle, body as BundleExpressionNode, frame);

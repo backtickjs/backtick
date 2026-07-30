@@ -55,6 +55,24 @@ export interface Visitor<U> {
   // e.g. while (i < n) { ... } — the condition is boolean, as everywhere else
   "while"(loc: SourceLocation, condition: U, body: U): U;
 
+  // e.g. for (let i = 0; i < n; i = i + 1) { ... } — each header part is null
+  // when omitted, and an absent condition loops forever. `i++` is not an
+  // operator here, so the update is an assignment like any other.
+  "for"(
+    loc: SourceLocation,
+    init: U | null,
+    condition: U | null,
+    update: U | null,
+    body: U,
+  ): U;
+
+  // e.g. break; — ends the nearest enclosing loop. There are no labels, so
+  // there is nothing to name and nothing to pass.
+  "break"(loc: SourceLocation): U;
+
+  // e.g. continue; — starts that loop's next turn, after a `for`'s update.
+  "continue"(loc: SourceLocation): U;
+
   // e.g. return i;
   return(loc: SourceLocation, expression: U): U;
 

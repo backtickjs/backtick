@@ -140,6 +140,10 @@ export const NodeField = {
   param: "x",
   content: "y",
   state: "z",
+  // The single letters are spent. These cost a byte more each, which is the
+  // right way round: a `for` header is rare next to an identifier or a call.
+  init: "aa",
+  update: "ab",
 } as const;
 
 // Every node kind, as the number `"#"` carries. A number rather than a name
@@ -186,6 +190,9 @@ export const NodeKind = {
   Throw: 1011,
   Try: 1012,
   While: 1013,
+  For: 1014,
+  Break: 1015,
+  Continue: 1016,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -331,6 +338,9 @@ export type BundleStatementNode =
   | BundleAssignmentNode
   | BundleIfNode
   | BundleWhileNode
+  | BundleForNode
+  | BundleBreakNode
+  | BundleContinueNode
   | BundleReturnNode
   | BundleThrowNode
   | BundleTryNode;
@@ -482,6 +492,33 @@ export interface BundleWhileNode {
   "#": typeof NodeKind.While;
   [NodeField.condition]: BundleExpressionNode;
   [NodeField.body]: BundleStatementNode;
+}
+
+// `for (init; condition; update) { … }`. Each header part is null when the
+// source omitted it, and an absent condition never ends the loop by itself.
+//
+// Two rules a reader has to implement, both of them what JavaScript does:
+// a binding the initializer declares lives in a scope of the loop's own, gone
+// once the loop is; and each turn gets its own copy of that scope, made from
+// the last turn's values before the update runs — so an arrow built in one turn
+// keeps that turn's numbers rather than the value the loop stopped at.
+export interface BundleForNode {
+  "#": typeof NodeKind.For;
+  [NodeField.init]: BundleStatementNode | null;
+  [NodeField.condition]: BundleExpressionNode | null;
+  [NodeField.update]: BundleStatementNode | null;
+  [NodeField.body]: BundleStatementNode;
+}
+
+// `break` and `continue`, which the nearest enclosing loop catches: one ends
+// it, the other starts its next turn — after a `for`'s update, never skipping
+// it. Neither takes a label, so neither can name a loop further out.
+export interface BundleBreakNode {
+  "#": typeof NodeKind.Break;
+}
+
+export interface BundleContinueNode {
+  "#": typeof NodeKind.Continue;
 }
 
 // Returns the expression's value from the enclosing arrow.
