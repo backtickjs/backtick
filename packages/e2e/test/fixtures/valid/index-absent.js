@@ -19,66 +19,86 @@ export default cs.create(
     loc: [8, 19, 12, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [9, 3, 9, 33],
-        name: {
-          kind: 80,
-          loc: [9, 9, 9, 14],
-          text: "names",
-          bindingKey: "names$2bxuydarg0iof$0",
-        },
-        initializer: {
-          kind: 210,
-          loc: [9, 17, 9, 32],
-          elements: [
+        declarationList: {
+          kind: 262,
+          loc: [9, 3, 9, 32],
+          declarations: [
             {
-              kind: 11,
-              loc: [9, 18, 9, 24],
-              text: "zero",
-            },
-            {
-              kind: 11,
-              loc: [9, 26, 9, 31],
-              text: "one",
+              kind: 261,
+              loc: [9, 9, 9, 32],
+              name: {
+                kind: 80,
+                loc: [9, 9, 9, 14],
+                text: "names",
+                bindingKey: "names$2bxuydarg0iof$0",
+              },
+              initializer: {
+                kind: 210,
+                loc: [9, 17, 9, 32],
+                elements: [
+                  {
+                    kind: 11,
+                    loc: [9, 18, 9, 24],
+                    text: "zero",
+                  },
+                  {
+                    kind: 11,
+                    loc: [9, 26, 9, 31],
+                    text: "one",
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [10, 3, 10, 47],
-        name: {
-          kind: 80,
-          loc: [10, 9, 10, 16],
-          text: "missing",
-          bindingKey: "missing$2bxuydarg0iof$1",
-        },
-        initializer: {
-          kind: 227,
-          loc: [10, 19, 10, 46],
-          left: {
-            kind: 213,
-            loc: [10, 19, 10, 36],
-            expression: {
-              kind: 1000,
-              loc: [10, 19, 10, 25],
-              key: "$table",
+        declarationList: {
+          kind: 262,
+          loc: [10, 3, 10, 46],
+          declarations: [
+            {
+              kind: 261,
+              loc: [10, 9, 10, 46],
+              name: {
+                kind: 80,
+                loc: [10, 9, 10, 16],
+                text: "missing",
+                bindingKey: "missing$2bxuydarg0iof$1",
+              },
+              initializer: {
+                kind: 227,
+                loc: [10, 19, 10, 46],
+                left: {
+                  kind: 213,
+                  loc: [10, 19, 10, 36],
+                  expression: {
+                    kind: 1000,
+                    loc: [10, 19, 10, 25],
+                    key: "$table",
+                  },
+                  argumentExpression: {
+                    kind: 11,
+                    loc: [10, 26, 10, 35],
+                    text: "nowhere",
+                  },
+                },
+                operatorToken: "??",
+                right: {
+                  kind: 11,
+                  loc: [10, 40, 10, 46],
+                  text: "gone",
+                },
+              },
             },
-            argumentExpression: {
-              kind: 11,
-              loc: [10, 26, 10, 35],
-              text: "nowhere",
-            },
-          },
-          operatorToken: "??",
-          right: {
-            kind: 11,
-            loc: [10, 40, 10, 46],
-            text: "gone",
-          },
+          ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

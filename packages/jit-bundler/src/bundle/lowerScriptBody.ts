@@ -4,6 +4,7 @@ import type {
   ClientScriptBody,
   ClientScriptExpression,
   ClientScriptStatement,
+  ClientScriptVariableDeclarationList,
 } from "@backtickjs/cs-runtime";
 import type { IrScriptEntry } from "../ir/Ir.js";
 import { sourceName } from "./bindingKey.js";
@@ -101,6 +102,24 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     };
   }
 
+  // The wire keeps a declaration flat: TypeScript's three nodes say where the
+  // `const` sits and that a list could hold several, neither of which this
+  // language has a second case for.
+  function buildDeclarationList(
+    list: ClientScriptVariableDeclarationList,
+  ): BundleStatementNode {
+    const [declaration] = list.declarations;
+    if (declaration === undefined) {
+      throw new Error("A declaration list must declare a variable.");
+    }
+    return {
+      "#": NodeKind.VariableDeclaration,
+      [NodeField.name]: sourceName(declaration.name.bindingKey),
+      [NodeField.initializer]: buildExpression(declaration.initializer),
+      [NodeField.keyword]: list.keyword,
+    };
+  }
+
   function buildStatement(node: ClientScriptStatement): BundleStatementNode {
     switch (node.kind) {
       case SyntaxKind.Block:
@@ -125,7 +144,11 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return {
           "#": NodeKind.ForStatement,
           [NodeField.initializer]:
-            node.initializer === null ? null : buildStatement(node.initializer),
+            node.initializer === null
+              ? null
+              : node.initializer.kind === SyntaxKind.VariableDeclarationList
+                ? buildDeclarationList(node.initializer)
+                : buildStatement(node.initializer),
           [NodeField.condition]:
             node.condition === null ? null : buildExpression(node.condition),
           [NodeField.incrementor]:
@@ -161,13 +184,8 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           },
         };
       }
-      case SyntaxKind.VariableDeclaration:
-        return {
-          "#": NodeKind.VariableDeclaration,
-          [NodeField.name]: sourceName(node.name.bindingKey),
-          [NodeField.initializer]: buildExpression(node.initializer),
-          [NodeField.keyword]: node.keyword,
-        };
+      case SyntaxKind.VariableStatement:
+        return buildDeclarationList(node.declarationList);
       default:
         // Every remaining kind is an expression, evaluated for its effect.
         return buildExpression(node);

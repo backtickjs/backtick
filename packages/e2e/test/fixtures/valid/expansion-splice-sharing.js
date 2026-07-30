@@ -77,68 +77,88 @@ export default cs.create(
     loc: [44, 19, 48, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [45, 3, 45, 30],
-        name: {
-          kind: 80,
-          loc: [45, 9, 45, 10],
-          text: "p",
-          bindingKey: "p$2kc5czyfqafly$0",
-        },
-        initializer: {
-          kind: 215,
-          loc: [45, 13, 45, 29],
-          expression: {
-            kind: 1000,
-            loc: [45, 17, 45, 23],
-            key: "$Point",
-          },
-          arguments: [
+        declarationList: {
+          kind: 262,
+          loc: [45, 3, 45, 29],
+          declarations: [
             {
-              kind: 9,
-              loc: [45, 24, 45, 25],
-              value: 1,
-            },
-            {
-              kind: 9,
-              loc: [45, 27, 45, 28],
-              value: 2,
+              kind: 261,
+              loc: [45, 9, 45, 29],
+              name: {
+                kind: 80,
+                loc: [45, 9, 45, 10],
+                text: "p",
+                bindingKey: "p$2kc5czyfqafly$0",
+              },
+              initializer: {
+                kind: 215,
+                loc: [45, 13, 45, 29],
+                expression: {
+                  kind: 1000,
+                  loc: [45, 17, 45, 23],
+                  key: "$Point",
+                },
+                arguments: [
+                  {
+                    kind: 9,
+                    loc: [45, 24, 45, 25],
+                    value: 1,
+                  },
+                  {
+                    kind: 9,
+                    loc: [45, 27, 45, 28],
+                    value: 2,
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [46, 3, 46, 29],
-        name: {
-          kind: 80,
-          loc: [46, 9, 46, 10],
-          text: "s",
-          bindingKey: "s$2kc5czyfqafly$1",
-        },
-        initializer: {
-          kind: 215,
-          loc: [46, 13, 46, 28],
-          expression: {
-            kind: 1000,
-            loc: [46, 17, 46, 22],
-            key: "$Size",
-          },
-          arguments: [
+        declarationList: {
+          kind: 262,
+          loc: [46, 3, 46, 28],
+          declarations: [
             {
-              kind: 9,
-              loc: [46, 23, 46, 24],
-              value: 3,
-            },
-            {
-              kind: 9,
-              loc: [46, 26, 46, 27],
-              value: 4,
+              kind: 261,
+              loc: [46, 9, 46, 28],
+              name: {
+                kind: 80,
+                loc: [46, 9, 46, 10],
+                text: "s",
+                bindingKey: "s$2kc5czyfqafly$1",
+              },
+              initializer: {
+                kind: 215,
+                loc: [46, 13, 46, 28],
+                expression: {
+                  kind: 1000,
+                  loc: [46, 17, 46, 22],
+                  key: "$Size",
+                },
+                arguments: [
+                  {
+                    kind: 9,
+                    loc: [46, 23, 46, 24],
+                    value: 3,
+                  },
+                  {
+                    kind: 9,
+                    loc: [46, 26, 46, 27],
+                    value: 4,
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

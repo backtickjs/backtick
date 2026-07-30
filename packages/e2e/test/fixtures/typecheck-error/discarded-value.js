@@ -54,20 +54,30 @@ const ping = cs.create(
       loc: [10, 23, 13, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [11, 3, 11, 13],
-          name: {
-            kind: 80,
-            loc: [11, 7, 11, 8],
-            text: "n",
-            bindingKey: "n$1y1jdbv3pfwln$0",
+          declarationList: {
+            kind: 262,
+            loc: [11, 3, 11, 12],
+            declarations: [
+              {
+                kind: 261,
+                loc: [11, 7, 11, 12],
+                name: {
+                  kind: 80,
+                  loc: [11, 7, 11, 8],
+                  text: "n",
+                  bindingKey: "n$1y1jdbv3pfwln$0",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [11, 11, 11, 12],
+                  value: 0,
+                },
+              },
+            ],
+            keyword: "let",
           },
-          initializer: {
-            kind: 9,
-            loc: [11, 11, 11, 12],
-            value: 0,
-          },
-          keyword: "let",
         },
         {
           kind: 227,

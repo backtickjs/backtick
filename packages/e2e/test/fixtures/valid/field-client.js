@@ -80,77 +80,97 @@ export default cs.create(
     loc: [18, 19, 25, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [19, 3, 19, 52],
-        name: {
-          kind: 80,
-          loc: [19, 9, 19, 10],
-          text: "c",
-          bindingKey: "c$3o65fk6h8ba4e$0",
+        declarationList: {
+          kind: 262,
+          loc: [19, 3, 19, 51],
+          declarations: [
+            {
+              kind: 261,
+              loc: [19, 9, 19, 51],
+              name: {
+                kind: 80,
+                loc: [19, 9, 19, 10],
+                text: "c",
+                bindingKey: "c$3o65fk6h8ba4e$0",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [19, 13, 19, 51],
+                key: "$0splice0",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [19, 13, 19, 51],
-          key: "$0splice0",
-        },
-        keyword: "const",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [20, 3, 20, 38],
-        name: {
-          kind: 80,
-          loc: [20, 9, 20, 19],
-          text: "brightness",
-          bindingKey: "brightness$3o65fk6h8ba4e$1",
-        },
-        initializer: {
-          kind: 227,
-          loc: [20, 22, 20, 37],
-          left: {
-            kind: 227,
-            loc: [20, 22, 20, 31],
-            left: {
-              kind: 212,
-              loc: [20, 22, 20, 25],
-              expression: {
+        declarationList: {
+          kind: 262,
+          loc: [20, 3, 20, 37],
+          declarations: [
+            {
+              kind: 261,
+              loc: [20, 9, 20, 37],
+              name: {
                 kind: 80,
-                loc: [20, 22, 20, 23],
-                text: "c",
-                bindingKey: "c$3o65fk6h8ba4e$0",
+                loc: [20, 9, 20, 19],
+                text: "brightness",
+                bindingKey: "brightness$3o65fk6h8ba4e$1",
               },
-              questionDotToken: false,
-              name: "r",
-            },
-            operatorToken: "+",
-            right: {
-              kind: 212,
-              loc: [20, 28, 20, 31],
-              expression: {
-                kind: 80,
-                loc: [20, 28, 20, 29],
-                text: "c",
-                bindingKey: "c$3o65fk6h8ba4e$0",
+              initializer: {
+                kind: 227,
+                loc: [20, 22, 20, 37],
+                left: {
+                  kind: 227,
+                  loc: [20, 22, 20, 31],
+                  left: {
+                    kind: 212,
+                    loc: [20, 22, 20, 25],
+                    expression: {
+                      kind: 80,
+                      loc: [20, 22, 20, 23],
+                      text: "c",
+                      bindingKey: "c$3o65fk6h8ba4e$0",
+                    },
+                    questionDotToken: false,
+                    name: "r",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: 212,
+                    loc: [20, 28, 20, 31],
+                    expression: {
+                      kind: 80,
+                      loc: [20, 28, 20, 29],
+                      text: "c",
+                      bindingKey: "c$3o65fk6h8ba4e$0",
+                    },
+                    questionDotToken: false,
+                    name: "g",
+                  },
+                },
+                operatorToken: "+",
+                right: {
+                  kind: 212,
+                  loc: [20, 34, 20, 37],
+                  expression: {
+                    kind: 80,
+                    loc: [20, 34, 20, 35],
+                    text: "c",
+                    bindingKey: "c$3o65fk6h8ba4e$0",
+                  },
+                  questionDotToken: false,
+                  name: "b",
+                },
               },
-              questionDotToken: false,
-              name: "g",
             },
-          },
-          operatorToken: "+",
-          right: {
-            kind: 212,
-            loc: [20, 34, 20, 37],
-            expression: {
-              kind: 80,
-              loc: [20, 34, 20, 35],
-              text: "c",
-              bindingKey: "c$3o65fk6h8ba4e$0",
-            },
-            questionDotToken: false,
-            name: "b",
-          },
+          ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 246,

@@ -37,37 +37,47 @@ export default cs.create(
       loc: [10, 38, 16, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [11, 3, 11, 36],
-          name: {
-            kind: 80,
-            loc: [11, 9, 11, 13],
-            text: "keep",
-            bindingKey: "keep$1yqqpc9g2l4nh$1",
-          },
-          initializer: {
-            kind: 220,
-            loc: [11, 16, 11, 35],
-            parameters: [
+          declarationList: {
+            kind: 262,
+            loc: [11, 3, 11, 35],
+            declarations: [
               {
-                kind: 170,
-                loc: [11, 17, 11, 28],
+                kind: 261,
+                loc: [11, 9, 11, 35],
                 name: {
                   kind: 80,
-                  loc: [11, 17, 11, 19],
-                  text: "on",
-                  bindingKey: "on$1yqqpc9g2l4nh$2",
+                  loc: [11, 9, 11, 13],
+                  text: "keep",
+                  bindingKey: "keep$1yqqpc9g2l4nh$1",
+                },
+                initializer: {
+                  kind: 220,
+                  loc: [11, 16, 11, 35],
+                  parameters: [
+                    {
+                      kind: 170,
+                      loc: [11, 17, 11, 28],
+                      name: {
+                        kind: 80,
+                        loc: [11, 17, 11, 19],
+                        text: "on",
+                        bindingKey: "on$1yqqpc9g2l4nh$2",
+                      },
+                    },
+                  ],
+                  body: {
+                    kind: 80,
+                    loc: [11, 33, 11, 35],
+                    text: "on",
+                    bindingKey: "on$1yqqpc9g2l4nh$2",
+                  },
                 },
               },
             ],
-            body: {
-              kind: 80,
-              loc: [11, 33, 11, 35],
-              text: "on",
-              bindingKey: "on$1yqqpc9g2l4nh$2",
-            },
+            keyword: "const",
           },
-          keyword: "const",
         },
         {
           kind: 246,

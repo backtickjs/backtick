@@ -28,20 +28,30 @@ export default cs.create(
     loc: [20, 19, 23, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [21, 3, 21, 20],
-        name: {
-          kind: 80,
-          loc: [21, 9, 21, 10],
-          text: "C",
-          bindingKey: "C$1n6hvxiblc91f$0",
+        declarationList: {
+          kind: 262,
+          loc: [21, 3, 21, 19],
+          declarations: [
+            {
+              kind: 261,
+              loc: [21, 9, 21, 19],
+              name: {
+                kind: 80,
+                loc: [21, 9, 21, 10],
+                text: "C",
+                bindingKey: "C$1n6hvxiblc91f$0",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [21, 13, 21, 19],
+                key: "$Point",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [21, 13, 21, 19],
-          key: "$Point",
-        },
-        keyword: "const",
       },
       {
         kind: 254,

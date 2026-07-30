@@ -69,68 +69,78 @@ export default cs.create(
     loc: [34, 19, 37, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [35, 3, 35, 62],
-        name: {
-          kind: 80,
-          loc: [35, 9, 35, 10],
-          text: "s",
-          bindingKey: "s$3b7boqu5f3cse$0",
-        },
-        initializer: {
-          kind: 215,
-          loc: [35, 13, 35, 61],
-          expression: {
-            kind: 1000,
-            loc: [35, 17, 35, 25],
-            key: "$Segment",
-          },
-          arguments: [
+        declarationList: {
+          kind: 262,
+          loc: [35, 3, 35, 61],
+          declarations: [
             {
-              kind: 215,
-              loc: [35, 26, 35, 42],
-              expression: {
-                kind: 1000,
-                loc: [35, 30, 35, 36],
-                key: "$Point",
+              kind: 261,
+              loc: [35, 9, 35, 61],
+              name: {
+                kind: 80,
+                loc: [35, 9, 35, 10],
+                text: "s",
+                bindingKey: "s$3b7boqu5f3cse$0",
               },
-              arguments: [
-                {
-                  kind: 9,
-                  loc: [35, 37, 35, 38],
-                  value: 1,
+              initializer: {
+                kind: 215,
+                loc: [35, 13, 35, 61],
+                expression: {
+                  kind: 1000,
+                  loc: [35, 17, 35, 25],
+                  key: "$Segment",
                 },
-                {
-                  kind: 9,
-                  loc: [35, 40, 35, 41],
-                  value: 2,
-                },
-              ],
-            },
-            {
-              kind: 215,
-              loc: [35, 44, 35, 60],
-              expression: {
-                kind: 1000,
-                loc: [35, 48, 35, 54],
-                key: "$Point",
+                arguments: [
+                  {
+                    kind: 215,
+                    loc: [35, 26, 35, 42],
+                    expression: {
+                      kind: 1000,
+                      loc: [35, 30, 35, 36],
+                      key: "$Point",
+                    },
+                    arguments: [
+                      {
+                        kind: 9,
+                        loc: [35, 37, 35, 38],
+                        value: 1,
+                      },
+                      {
+                        kind: 9,
+                        loc: [35, 40, 35, 41],
+                        value: 2,
+                      },
+                    ],
+                  },
+                  {
+                    kind: 215,
+                    loc: [35, 44, 35, 60],
+                    expression: {
+                      kind: 1000,
+                      loc: [35, 48, 35, 54],
+                      key: "$Point",
+                    },
+                    arguments: [
+                      {
+                        kind: 9,
+                        loc: [35, 55, 35, 56],
+                        value: 1,
+                      },
+                      {
+                        kind: 9,
+                        loc: [35, 58, 35, 59],
+                        value: 2,
+                      },
+                    ],
+                  },
+                ],
               },
-              arguments: [
-                {
-                  kind: 9,
-                  loc: [35, 55, 35, 56],
-                  value: 1,
-                },
-                {
-                  kind: 9,
-                  loc: [35, 58, 35, 59],
-                  value: 2,
-                },
-              ],
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

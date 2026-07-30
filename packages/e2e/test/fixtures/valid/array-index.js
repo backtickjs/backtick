@@ -17,70 +17,96 @@ export default cs.create(
     loc: [5, 19, 12, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [6, 3, 6, 28],
-        name: {
-          kind: 80,
-          loc: [6, 9, 6, 14],
-          text: "coins",
-          bindingKey: "coins$2287xz8ecscg5$0",
-        },
-        initializer: {
-          kind: 210,
-          loc: [6, 17, 6, 27],
-          elements: [
+        declarationList: {
+          kind: 262,
+          loc: [6, 3, 6, 27],
+          declarations: [
             {
-              kind: 9,
-              loc: [6, 18, 6, 19],
-              value: 5,
-            },
-            {
-              kind: 9,
-              loc: [6, 21, 6, 23],
-              value: 31,
-            },
-            {
-              kind: 9,
-              loc: [6, 25, 6, 26],
-              value: 7,
+              kind: 261,
+              loc: [6, 9, 6, 27],
+              name: {
+                kind: 80,
+                loc: [6, 9, 6, 14],
+                text: "coins",
+                bindingKey: "coins$2287xz8ecscg5$0",
+              },
+              initializer: {
+                kind: 210,
+                loc: [6, 17, 6, 27],
+                elements: [
+                  {
+                    kind: 9,
+                    loc: [6, 18, 6, 19],
+                    value: 5,
+                  },
+                  {
+                    kind: 9,
+                    loc: [6, 21, 6, 23],
+                    value: 31,
+                  },
+                  {
+                    kind: 9,
+                    loc: [6, 25, 6, 26],
+                    value: 7,
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [7, 3, 7, 17],
-        name: {
-          kind: 80,
-          loc: [7, 7, 7, 12],
-          text: "total",
-          bindingKey: "total$2287xz8ecscg5$1",
+        declarationList: {
+          kind: 262,
+          loc: [7, 3, 7, 16],
+          declarations: [
+            {
+              kind: 261,
+              loc: [7, 7, 7, 16],
+              name: {
+                kind: 80,
+                loc: [7, 7, 7, 12],
+                text: "total",
+                bindingKey: "total$2287xz8ecscg5$1",
+              },
+              initializer: {
+                kind: 9,
+                loc: [7, 15, 7, 16],
+                value: 0,
+              },
+            },
+          ],
+          keyword: "let",
         },
-        initializer: {
-          kind: 9,
-          loc: [7, 15, 7, 16],
-          value: 0,
-        },
-        keyword: "let",
       },
       {
         kind: 249,
         loc: [8, 3, 10, 4],
         initializer: {
-          kind: 261,
+          kind: 262,
           loc: [8, 8, 8, 17],
-          name: {
-            kind: 80,
-            loc: [8, 12, 8, 13],
-            text: "i",
-            bindingKey: "i$2287xz8ecscg5$2",
-          },
-          initializer: {
-            kind: 9,
-            loc: [8, 16, 8, 17],
-            value: 0,
-          },
+          declarations: [
+            {
+              kind: 261,
+              loc: [8, 12, 8, 17],
+              name: {
+                kind: 80,
+                loc: [8, 12, 8, 13],
+                text: "i",
+                bindingKey: "i$2287xz8ecscg5$2",
+              },
+              initializer: {
+                kind: 9,
+                loc: [8, 16, 8, 17],
+                value: 0,
+              },
+            },
+          ],
           keyword: "let",
         },
         condition: {

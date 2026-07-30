@@ -96,20 +96,30 @@ const left = cs.create(
     loc: [24, 17, 27, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [25, 3, 25, 21],
-        name: {
-          kind: 80,
-          loc: [25, 9, 25, 10],
-          text: "p",
-          bindingKey: "p$2dmd79xnh14ui$0",
+        declarationList: {
+          kind: 262,
+          loc: [25, 3, 25, 20],
+          declarations: [
+            {
+              kind: 261,
+              loc: [25, 9, 25, 20],
+              name: {
+                kind: 80,
+                loc: [25, 9, 25, 10],
+                text: "p",
+                bindingKey: "p$2dmd79xnh14ui$0",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [25, 13, 25, 20],
+                key: "$shared",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [25, 13, 25, 20],
-          key: "$shared",
-        },
-        keyword: "const",
       },
       {
         kind: 254,
@@ -152,20 +162,30 @@ const right = cs.create(
     loc: [29, 18, 32, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [30, 3, 30, 21],
-        name: {
-          kind: 80,
-          loc: [30, 9, 30, 10],
-          text: "p",
-          bindingKey: "p$2dmd79xnh14ui$1",
+        declarationList: {
+          kind: 262,
+          loc: [30, 3, 30, 20],
+          declarations: [
+            {
+              kind: 261,
+              loc: [30, 9, 30, 20],
+              name: {
+                kind: 80,
+                loc: [30, 9, 30, 10],
+                text: "p",
+                bindingKey: "p$2dmd79xnh14ui$1",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [30, 13, 30, 20],
+                key: "$shared",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [30, 13, 30, 20],
-          key: "$shared",
-        },
-        keyword: "const",
       },
       {
         kind: 254,

@@ -17,20 +17,30 @@ const beep = cs.create(
     loc: [5, 31, 8, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [6, 3, 6, 13],
-        name: {
-          kind: 80,
-          loc: [6, 7, 6, 8],
-          text: "n",
-          bindingKey: "n$gyja921xjk87$0",
+        declarationList: {
+          kind: 262,
+          loc: [6, 3, 6, 12],
+          declarations: [
+            {
+              kind: 261,
+              loc: [6, 7, 6, 12],
+              name: {
+                kind: 80,
+                loc: [6, 7, 6, 8],
+                text: "n",
+                bindingKey: "n$gyja921xjk87$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [6, 11, 6, 12],
+                value: 0,
+              },
+            },
+          ],
+          keyword: "let",
         },
-        initializer: {
-          kind: 9,
-          loc: [6, 11, 6, 12],
-          value: 0,
-        },
-        keyword: "let",
       },
       {
         kind: 227,
@@ -106,41 +116,51 @@ export default cs.create(
     loc: [14, 19, 20, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [15, 3, 18, 5],
-        name: {
-          kind: 80,
-          loc: [15, 9, 15, 17],
-          text: "handlers",
-          bindingKey: "handlers$gyja921xjk87$2",
-        },
-        initializer: {
-          kind: 211,
-          loc: [15, 20, 18, 4],
-          properties: [
+        declarationList: {
+          kind: 262,
+          loc: [15, 3, 18, 4],
+          declarations: [
             {
-              kind: 304,
-              loc: [16, 5, 16, 16],
-              name: "tap",
-              initializer: {
-                kind: 1000,
-                loc: [16, 10, 16, 16],
-                key: "$onTap",
+              kind: 261,
+              loc: [15, 9, 18, 4],
+              name: {
+                kind: 80,
+                loc: [15, 9, 15, 17],
+                text: "handlers",
+                bindingKey: "handlers$gyja921xjk87$2",
               },
-            },
-            {
-              kind: 304,
-              loc: [17, 5, 17, 17],
-              name: "hold",
               initializer: {
-                kind: 1000,
-                loc: [17, 11, 17, 17],
-                key: "$onTap",
+                kind: 211,
+                loc: [15, 20, 18, 4],
+                properties: [
+                  {
+                    kind: 304,
+                    loc: [16, 5, 16, 16],
+                    name: "tap",
+                    initializer: {
+                      kind: 1000,
+                      loc: [16, 10, 16, 16],
+                      key: "$onTap",
+                    },
+                  },
+                  {
+                    kind: 304,
+                    loc: [17, 5, 17, 17],
+                    name: "hold",
+                    initializer: {
+                      kind: 1000,
+                      loc: [17, 11, 17, 17],
+                      key: "$onTap",
+                    },
+                  },
+                ],
               },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

@@ -57,20 +57,30 @@ function wrap(start) {
               loc: [16, 21, 19, 6],
               statements: [
                 {
-                  kind: 261,
+                  kind: 244,
                   loc: [17, 7, 17, 25],
-                  name: {
-                    kind: 80,
-                    loc: [17, 13, 17, 19],
-                    text: "middle",
-                    bindingKey: "middle$xrqzjp57nqfg$1",
+                  declarationList: {
+                    kind: 262,
+                    loc: [17, 7, 17, 24],
+                    declarations: [
+                      {
+                        kind: 261,
+                        loc: [17, 13, 17, 24],
+                        name: {
+                          kind: 80,
+                          loc: [17, 13, 17, 19],
+                          text: "middle",
+                          bindingKey: "middle$xrqzjp57nqfg$1",
+                        },
+                        initializer: {
+                          kind: 9,
+                          loc: [17, 22, 17, 24],
+                          value: 10,
+                        },
+                      },
+                    ],
+                    keyword: "const",
                   },
-                  initializer: {
-                    kind: 9,
-                    loc: [17, 22, 17, 24],
-                    value: 10,
-                  },
-                  keyword: "const",
                 },
                 {
                   kind: 254,
@@ -105,20 +115,30 @@ function wrap(start) {
       loc: [14, 13, 20, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [15, 5, 15, 26],
-          name: {
-            kind: 80,
-            loc: [15, 11, 15, 16],
-            text: "outer",
-            bindingKey: "outer$xrqzjp57nqfg$0",
+          declarationList: {
+            kind: 262,
+            loc: [15, 5, 15, 25],
+            declarations: [
+              {
+                kind: 261,
+                loc: [15, 11, 15, 25],
+                name: {
+                  kind: 80,
+                  loc: [15, 11, 15, 16],
+                  text: "outer",
+                  bindingKey: "outer$xrqzjp57nqfg$0",
+                },
+                initializer: {
+                  kind: 1000,
+                  loc: [15, 19, 15, 25],
+                  key: "$start",
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 1000,
-            loc: [15, 19, 15, 25],
-            key: "$start",
-          },
-          keyword: "const",
         },
         {
           kind: 254,

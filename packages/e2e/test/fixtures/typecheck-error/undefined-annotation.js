@@ -30,21 +30,31 @@ const stored = cs.create(
       loc: [8, 33, 11, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [9, 3, 9, 15],
-          name: {
-            kind: 80,
-            loc: [9, 9, 9, 10],
-            text: "y",
-            bindingKey: "y$18uwl3j62c30b$1",
+          declarationList: {
+            kind: 262,
+            loc: [9, 3, 9, 14],
+            declarations: [
+              {
+                kind: 261,
+                loc: [9, 9, 9, 14],
+                name: {
+                  kind: 80,
+                  loc: [9, 9, 9, 10],
+                  text: "y",
+                  bindingKey: "y$18uwl3j62c30b$1",
+                },
+                initializer: {
+                  kind: 80,
+                  loc: [9, 13, 9, 14],
+                  text: "x",
+                  bindingKey: "x$18uwl3j62c30b$0",
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 80,
-            loc: [9, 13, 9, 14],
-            text: "x",
-            bindingKey: "x$18uwl3j62c30b$0",
-          },
-          keyword: "const",
         },
         {
           kind: 254,
@@ -90,20 +100,30 @@ const written = cs.create(
       loc: [13, 34, 17, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [14, 3, 14, 14],
-          name: {
-            kind: 80,
-            loc: [14, 7, 14, 8],
-            text: "y",
-            bindingKey: "y$18uwl3j62c30b$3",
+          declarationList: {
+            kind: 262,
+            loc: [14, 3, 14, 13],
+            declarations: [
+              {
+                kind: 261,
+                loc: [14, 7, 14, 13],
+                name: {
+                  kind: 80,
+                  loc: [14, 7, 14, 8],
+                  text: "y",
+                  bindingKey: "y$18uwl3j62c30b$3",
+                },
+                initializer: {
+                  kind: 11,
+                  loc: [14, 11, 14, 13],
+                  text: "",
+                },
+              },
+            ],
+            keyword: "let",
           },
-          initializer: {
-            kind: 11,
-            loc: [14, 11, 14, 13],
-            text: "",
-          },
-          keyword: "let",
         },
         {
           kind: 227,

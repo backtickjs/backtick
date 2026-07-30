@@ -15,36 +15,56 @@ export default cs.create(
     loc: [3, 19, 14, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [4, 3, 4, 13],
-        name: {
-          kind: 80,
-          loc: [4, 7, 4, 8],
-          text: "i",
-          bindingKey: "i$2c5ohtv8baju6$0",
+        declarationList: {
+          kind: 262,
+          loc: [4, 3, 4, 12],
+          declarations: [
+            {
+              kind: 261,
+              loc: [4, 7, 4, 12],
+              name: {
+                kind: 80,
+                loc: [4, 7, 4, 8],
+                text: "i",
+                bindingKey: "i$2c5ohtv8baju6$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [4, 11, 4, 12],
+                value: 0,
+              },
+            },
+          ],
+          keyword: "let",
         },
-        initializer: {
-          kind: 9,
-          loc: [4, 11, 4, 12],
-          value: 0,
-        },
-        keyword: "let",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [5, 3, 5, 17],
-        name: {
-          kind: 80,
-          loc: [5, 7, 5, 12],
-          text: "total",
-          bindingKey: "total$2c5ohtv8baju6$1",
+        declarationList: {
+          kind: 262,
+          loc: [5, 3, 5, 16],
+          declarations: [
+            {
+              kind: 261,
+              loc: [5, 7, 5, 16],
+              name: {
+                kind: 80,
+                loc: [5, 7, 5, 12],
+                text: "total",
+                bindingKey: "total$2c5ohtv8baju6$1",
+              },
+              initializer: {
+                kind: 9,
+                loc: [5, 15, 5, 16],
+                value: 0,
+              },
+            },
+          ],
+          keyword: "let",
         },
-        initializer: {
-          kind: 9,
-          loc: [5, 15, 5, 16],
-          value: 0,
-        },
-        keyword: "let",
       },
       {
         kind: 248,

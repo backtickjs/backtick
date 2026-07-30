@@ -26,52 +26,82 @@ function wrap(fragment) {
       loc: [14, 13, 19, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [15, 5, 15, 22],
-          name: {
-            kind: 80,
-            loc: [15, 11, 15, 17],
-            text: "before",
-            bindingKey: "before$2r40h7jqt1118$0",
+          declarationList: {
+            kind: 262,
+            loc: [15, 5, 15, 21],
+            declarations: [
+              {
+                kind: 261,
+                loc: [15, 11, 15, 21],
+                name: {
+                  kind: 80,
+                  loc: [15, 11, 15, 17],
+                  text: "before",
+                  bindingKey: "before$2r40h7jqt1118$0",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [15, 20, 15, 21],
+                  value: 1,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [15, 20, 15, 21],
-            value: 1,
-          },
-          keyword: "const",
         },
         {
-          kind: 261,
+          kind: 244,
           loc: [16, 5, 16, 31],
-          name: {
-            kind: 80,
-            loc: [16, 11, 16, 18],
-            text: "spliced",
-            bindingKey: "spliced$2r40h7jqt1118$1",
+          declarationList: {
+            kind: 262,
+            loc: [16, 5, 16, 30],
+            declarations: [
+              {
+                kind: 261,
+                loc: [16, 11, 16, 30],
+                name: {
+                  kind: 80,
+                  loc: [16, 11, 16, 18],
+                  text: "spliced",
+                  bindingKey: "spliced$2r40h7jqt1118$1",
+                },
+                initializer: {
+                  kind: 1000,
+                  loc: [16, 21, 16, 30],
+                  key: "$fragment",
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 1000,
-            loc: [16, 21, 16, 30],
-            key: "$fragment",
-          },
-          keyword: "const",
         },
         {
-          kind: 261,
+          kind: 244,
           loc: [17, 5, 17, 21],
-          name: {
-            kind: 80,
-            loc: [17, 11, 17, 16],
-            text: "after",
-            bindingKey: "after$2r40h7jqt1118$2",
+          declarationList: {
+            kind: 262,
+            loc: [17, 5, 17, 20],
+            declarations: [
+              {
+                kind: 261,
+                loc: [17, 11, 17, 20],
+                name: {
+                  kind: 80,
+                  loc: [17, 11, 17, 16],
+                  text: "after",
+                  bindingKey: "after$2r40h7jqt1118$2",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [17, 19, 17, 20],
+                  value: 2,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [17, 19, 17, 20],
-            value: 2,
-          },
-          keyword: "const",
         },
         {
           kind: 254,

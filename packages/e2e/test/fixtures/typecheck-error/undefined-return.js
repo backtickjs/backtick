@@ -37,42 +37,62 @@ export default cs.create(
     loc: [13, 19, 17, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [14, 3, 14, 25],
-        name: {
-          kind: 80,
-          loc: [14, 9, 14, 15],
-          text: "stored",
-          bindingKey: "stored$19ws50ksjspoc$0",
+        declarationList: {
+          kind: 262,
+          loc: [14, 3, 14, 24],
+          declarations: [
+            {
+              kind: 261,
+              loc: [14, 9, 14, 24],
+              name: {
+                kind: 80,
+                loc: [14, 9, 14, 15],
+                text: "stored",
+                bindingKey: "stored$19ws50ksjspoc$0",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [14, 18, 14, 24],
+                key: "$lying",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [14, 18, 14, 24],
-          key: "$lying",
-        },
-        keyword: "const",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [15, 3, 15, 27],
-        name: {
-          kind: 80,
-          loc: [15, 9, 15, 15],
-          text: "caught",
-          bindingKey: "caught$19ws50ksjspoc$1",
+        declarationList: {
+          kind: 262,
+          loc: [15, 3, 15, 26],
+          declarations: [
+            {
+              kind: 261,
+              loc: [15, 9, 15, 26],
+              name: {
+                kind: 80,
+                loc: [15, 9, 15, 15],
+                text: "caught",
+                bindingKey: "caught$19ws50ksjspoc$1",
+              },
+              initializer: {
+                kind: 214,
+                loc: [15, 18, 15, 26],
+                expression: {
+                  kind: 1000,
+                  loc: [15, 18, 15, 24],
+                  key: "$lying",
+                },
+                questionDotToken: false,
+                arguments: [],
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 214,
-          loc: [15, 18, 15, 26],
-          expression: {
-            kind: 1000,
-            loc: [15, 18, 15, 24],
-            key: "$lying",
-          },
-          questionDotToken: false,
-          arguments: [],
-        },
-        keyword: "const",
       },
       {
         kind: 254,

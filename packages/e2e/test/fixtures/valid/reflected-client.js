@@ -134,88 +134,118 @@ export default cs.create(
     loc: [24, 19, 28, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [25, 3, 25, 40],
-        name: {
-          kind: 80,
-          loc: [25, 9, 25, 10],
-          text: "a",
-          bindingKey: "a$1n3zukooyw7a6$0",
-        },
-        initializer: {
-          kind: 1000,
-          loc: [25, 13, 25, 39],
-          key: "$0splice0",
-        },
-        keyword: "const",
-      },
-      {
-        kind: 261,
-        loc: [26, 3, 26, 40],
-        name: {
-          kind: 80,
-          loc: [26, 9, 26, 10],
-          text: "b",
-          bindingKey: "b$1n3zukooyw7a6$1",
-        },
-        initializer: {
-          kind: 1000,
-          loc: [26, 13, 26, 39],
-          key: "$0splice1",
-        },
-        keyword: "const",
-      },
-      {
-        kind: 261,
-        loc: [27, 3, 27, 37],
-        name: {
-          kind: 80,
-          loc: [27, 9, 27, 12],
-          text: "sum",
-          bindingKey: "sum$1n3zukooyw7a6$2",
-        },
-        initializer: {
-          kind: 227,
-          loc: [27, 15, 27, 36],
-          left: {
-            kind: 214,
-            loc: [27, 15, 27, 24],
-            expression: {
-              kind: 212,
-              loc: [27, 15, 27, 22],
-              expression: {
+        declarationList: {
+          kind: 262,
+          loc: [25, 3, 25, 39],
+          declarations: [
+            {
+              kind: 261,
+              loc: [25, 9, 25, 39],
+              name: {
                 kind: 80,
-                loc: [27, 15, 27, 16],
+                loc: [25, 9, 25, 10],
                 text: "a",
                 bindingKey: "a$1n3zukooyw7a6$0",
               },
-              questionDotToken: false,
-              name: "valid",
+              initializer: {
+                kind: 1000,
+                loc: [25, 13, 25, 39],
+                key: "$0splice0",
+              },
             },
-            questionDotToken: false,
-            arguments: [],
-          },
-          operatorToken: "+",
-          right: {
-            kind: 214,
-            loc: [27, 27, 27, 36],
-            expression: {
-              kind: 212,
-              loc: [27, 27, 27, 34],
-              expression: {
+          ],
+          keyword: "const",
+        },
+      },
+      {
+        kind: 244,
+        loc: [26, 3, 26, 40],
+        declarationList: {
+          kind: 262,
+          loc: [26, 3, 26, 39],
+          declarations: [
+            {
+              kind: 261,
+              loc: [26, 9, 26, 39],
+              name: {
                 kind: 80,
-                loc: [27, 27, 27, 28],
+                loc: [26, 9, 26, 10],
                 text: "b",
                 bindingKey: "b$1n3zukooyw7a6$1",
               },
-              questionDotToken: false,
-              name: "valid",
+              initializer: {
+                kind: 1000,
+                loc: [26, 13, 26, 39],
+                key: "$0splice1",
+              },
             },
-            questionDotToken: false,
-            arguments: [],
-          },
+          ],
+          keyword: "const",
         },
-        keyword: "const",
+      },
+      {
+        kind: 244,
+        loc: [27, 3, 27, 37],
+        declarationList: {
+          kind: 262,
+          loc: [27, 3, 27, 36],
+          declarations: [
+            {
+              kind: 261,
+              loc: [27, 9, 27, 36],
+              name: {
+                kind: 80,
+                loc: [27, 9, 27, 12],
+                text: "sum",
+                bindingKey: "sum$1n3zukooyw7a6$2",
+              },
+              initializer: {
+                kind: 227,
+                loc: [27, 15, 27, 36],
+                left: {
+                  kind: 214,
+                  loc: [27, 15, 27, 24],
+                  expression: {
+                    kind: 212,
+                    loc: [27, 15, 27, 22],
+                    expression: {
+                      kind: 80,
+                      loc: [27, 15, 27, 16],
+                      text: "a",
+                      bindingKey: "a$1n3zukooyw7a6$0",
+                    },
+                    questionDotToken: false,
+                    name: "valid",
+                  },
+                  questionDotToken: false,
+                  arguments: [],
+                },
+                operatorToken: "+",
+                right: {
+                  kind: 214,
+                  loc: [27, 27, 27, 36],
+                  expression: {
+                    kind: 212,
+                    loc: [27, 27, 27, 34],
+                    expression: {
+                      kind: 80,
+                      loc: [27, 27, 27, 28],
+                      text: "b",
+                      bindingKey: "b$1n3zukooyw7a6$1",
+                    },
+                    questionDotToken: false,
+                    name: "valid",
+                  },
+                  questionDotToken: false,
+                  arguments: [],
+                },
+              },
+            },
+          ],
+          keyword: "const",
+        },
       },
     ],
   }),

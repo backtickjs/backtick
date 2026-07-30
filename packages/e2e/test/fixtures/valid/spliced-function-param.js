@@ -42,53 +42,63 @@ export default cs.create(
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [8, 3, 8, 46],
-        name: {
-          kind: 80,
-          loc: [8, 9, 8, 14],
-          text: "apply",
-          bindingKey: "apply$22dvza3e0b85b$0",
-        },
-        initializer: {
-          kind: 220,
-          loc: [8, 17, 8, 45],
-          parameters: [
+        declarationList: {
+          kind: 262,
+          loc: [8, 3, 8, 45],
+          declarations: [
             {
-              kind: 170,
-              loc: [8, 18, 8, 33],
+              kind: 261,
+              loc: [8, 9, 8, 45],
               name: {
                 kind: 80,
-                loc: [8, 18, 8, 19],
-                text: "f",
-                bindingKey: "f$22dvza3e0b85b$1",
+                loc: [8, 9, 8, 14],
+                text: "apply",
+                bindingKey: "apply$22dvza3e0b85b$0",
+              },
+              initializer: {
+                kind: 220,
+                loc: [8, 17, 8, 45],
+                parameters: [
+                  {
+                    kind: 170,
+                    loc: [8, 18, 8, 33],
+                    name: {
+                      kind: 80,
+                      loc: [8, 18, 8, 19],
+                      text: "f",
+                      bindingKey: "f$22dvza3e0b85b$1",
+                    },
+                  },
+                ],
+                body: {
+                  kind: 227,
+                  loc: [8, 38, 8, 45],
+                  left: {
+                    kind: 214,
+                    loc: [8, 38, 8, 41],
+                    expression: {
+                      kind: 80,
+                      loc: [8, 38, 8, 39],
+                      text: "f",
+                      bindingKey: "f$22dvza3e0b85b$1",
+                    },
+                    questionDotToken: false,
+                    arguments: [],
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: 9,
+                    loc: [8, 44, 8, 45],
+                    value: 1,
+                  },
+                },
               },
             },
           ],
-          body: {
-            kind: 227,
-            loc: [8, 38, 8, 45],
-            left: {
-              kind: 214,
-              loc: [8, 38, 8, 41],
-              expression: {
-                kind: 80,
-                loc: [8, 38, 8, 39],
-                text: "f",
-                bindingKey: "f$22dvza3e0b85b$1",
-              },
-              questionDotToken: false,
-              arguments: [],
-            },
-            operatorToken: "+",
-            right: {
-              kind: 9,
-              loc: [8, 44, 8, 45],
-              value: 1,
-            },
-          },
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

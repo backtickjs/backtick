@@ -82,53 +82,63 @@ export default cs.create(
     loc: [23, 19, 26, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [24, 3, 24, 38],
-        name: {
-          kind: 80,
-          loc: [24, 9, 24, 13],
-          text: "pick",
-          bindingKey: "pick$22eb8gy7ghfko$0",
-        },
-        initializer: {
-          kind: 220,
-          loc: [24, 16, 24, 37],
-          parameters: [
+        declarationList: {
+          kind: 262,
+          loc: [24, 3, 24, 37],
+          declarations: [
             {
-              kind: 170,
-              loc: [24, 17, 24, 25],
+              kind: 261,
+              loc: [24, 9, 24, 37],
               name: {
                 kind: 80,
-                loc: [24, 17, 24, 18],
-                text: "c",
-                bindingKey: "c$22eb8gy7ghfko$1",
+                loc: [24, 9, 24, 13],
+                text: "pick",
+                bindingKey: "pick$22eb8gy7ghfko$0",
+              },
+              initializer: {
+                kind: 220,
+                loc: [24, 16, 24, 37],
+                parameters: [
+                  {
+                    kind: 170,
+                    loc: [24, 17, 24, 25],
+                    name: {
+                      kind: 80,
+                      loc: [24, 17, 24, 18],
+                      text: "c",
+                      bindingKey: "c$22eb8gy7ghfko$1",
+                    },
+                  },
+                ],
+                body: {
+                  kind: 227,
+                  loc: [24, 30, 24, 37],
+                  left: {
+                    kind: 212,
+                    loc: [24, 30, 24, 33],
+                    expression: {
+                      kind: 80,
+                      loc: [24, 30, 24, 31],
+                      text: "c",
+                      bindingKey: "c$22eb8gy7ghfko$1",
+                    },
+                    questionDotToken: false,
+                    name: "r",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: 9,
+                    loc: [24, 36, 24, 37],
+                    value: 1,
+                  },
+                },
               },
             },
           ],
-          body: {
-            kind: 227,
-            loc: [24, 30, 24, 37],
-            left: {
-              kind: 212,
-              loc: [24, 30, 24, 33],
-              expression: {
-                kind: 80,
-                loc: [24, 30, 24, 31],
-                text: "c",
-                bindingKey: "c$22eb8gy7ghfko$1",
-              },
-              questionDotToken: false,
-              name: "r",
-            },
-            operatorToken: "+",
-            right: {
-              kind: 9,
-              loc: [24, 36, 24, 37],
-              value: 1,
-            },
-          },
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

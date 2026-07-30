@@ -17,20 +17,30 @@ const effects = cs.create(
     loc: [5, 34, 7, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [6, 3, 6, 15],
-        name: {
-          kind: 80,
-          loc: [6, 9, 6, 10],
-          text: "x",
-          bindingKey: "x$agkxao2hual4$0",
+        declarationList: {
+          kind: 262,
+          loc: [6, 3, 6, 14],
+          declarations: [
+            {
+              kind: 261,
+              loc: [6, 9, 6, 14],
+              name: {
+                kind: 80,
+                loc: [6, 9, 6, 10],
+                text: "x",
+                bindingKey: "x$agkxao2hual4$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [6, 13, 6, 14],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [6, 13, 6, 14],
-          value: 1,
-        },
-        keyword: "const",
       },
     ],
   }),

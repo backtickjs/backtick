@@ -24,20 +24,30 @@ const action = cs.create(
     loc: [16, 19, 18, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [17, 3, 17, 15],
-        name: {
-          kind: 80,
-          loc: [17, 9, 17, 10],
-          text: "x",
-          bindingKey: "x$t3cg066e2mwt$0",
+        declarationList: {
+          kind: 262,
+          loc: [17, 3, 17, 14],
+          declarations: [
+            {
+              kind: 261,
+              loc: [17, 9, 17, 14],
+              name: {
+                kind: 80,
+                loc: [17, 9, 17, 10],
+                text: "x",
+                bindingKey: "x$t3cg066e2mwt$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [17, 13, 17, 14],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [17, 13, 17, 14],
-          value: 1,
-        },
-        keyword: "const",
       },
     ],
   }),
@@ -58,31 +68,41 @@ export const held = cs.create(
     loc: [20, 24, 23, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [21, 3, 21, 34],
-        name: {
-          kind: 80,
-          loc: [21, 9, 21, 10],
-          text: "h",
-          bindingKey: "h$t3cg066e2mwt$1",
-        },
-        initializer: {
-          kind: 215,
-          loc: [21, 13, 21, 33],
-          expression: {
-            kind: 1000,
-            loc: [21, 17, 21, 24],
-            key: "$Holder",
-          },
-          arguments: [
+        declarationList: {
+          kind: 262,
+          loc: [21, 3, 21, 33],
+          declarations: [
             {
-              kind: 1000,
-              loc: [21, 25, 21, 32],
-              key: "$action",
+              kind: 261,
+              loc: [21, 9, 21, 33],
+              name: {
+                kind: 80,
+                loc: [21, 9, 21, 10],
+                text: "h",
+                bindingKey: "h$t3cg066e2mwt$1",
+              },
+              initializer: {
+                kind: 215,
+                loc: [21, 13, 21, 33],
+                expression: {
+                  kind: 1000,
+                  loc: [21, 17, 21, 24],
+                  key: "$Holder",
+                },
+                arguments: [
+                  {
+                    kind: 1000,
+                    loc: [21, 25, 21, 32],
+                    key: "$action",
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

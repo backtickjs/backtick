@@ -56,20 +56,30 @@ function inner(carried) {
       loc: [15, 13, 18, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [16, 5, 16, 22],
-          name: {
-            kind: 80,
-            loc: [16, 11, 16, 15],
-            text: "base",
-            bindingKey: "base$2dzpugititb9o$0",
+          declarationList: {
+            kind: 262,
+            loc: [16, 5, 16, 21],
+            declarations: [
+              {
+                kind: 261,
+                loc: [16, 11, 16, 21],
+                name: {
+                  kind: 80,
+                  loc: [16, 11, 16, 15],
+                  text: "base",
+                  bindingKey: "base$2dzpugititb9o$0",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [16, 18, 16, 21],
+                  value: 100,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [16, 18, 16, 21],
-            value: 100,
-          },
-          keyword: "const",
         },
         {
           kind: 254,
@@ -121,20 +131,30 @@ export default cs.create(
     loc: [21, 19, 24, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [22, 3, 22, 18],
-        name: {
-          kind: 80,
-          loc: [22, 9, 22, 13],
-          text: "base",
-          bindingKey: "base$2dzpugititb9o$1",
+        declarationList: {
+          kind: 262,
+          loc: [22, 3, 22, 17],
+          declarations: [
+            {
+              kind: 261,
+              loc: [22, 9, 22, 17],
+              name: {
+                kind: 80,
+                loc: [22, 9, 22, 13],
+                text: "base",
+                bindingKey: "base$2dzpugititb9o$1",
+              },
+              initializer: {
+                kind: 9,
+                loc: [22, 16, 22, 17],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [22, 16, 22, 17],
-          value: 1,
-        },
-        keyword: "const",
       },
       {
         kind: 254,

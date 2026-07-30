@@ -50,20 +50,30 @@ const script = cs.create(
       loc: [8, 52, 11, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [9, 3, 9, 15],
-          name: {
-            kind: 80,
-            loc: [9, 9, 9, 10],
-            text: "x",
-            bindingKey: "x$dxmm13j6jyfs$0",
+          declarationList: {
+            kind: 262,
+            loc: [9, 3, 9, 14],
+            declarations: [
+              {
+                kind: 261,
+                loc: [9, 9, 9, 14],
+                name: {
+                  kind: 80,
+                  loc: [9, 9, 9, 10],
+                  text: "x",
+                  bindingKey: "x$dxmm13j6jyfs$0",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [9, 13, 9, 14],
+                  value: 1,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [9, 13, 9, 14],
-            value: 1,
-          },
-          keyword: "const",
         },
         {
           kind: 254,

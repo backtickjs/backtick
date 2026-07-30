@@ -15,20 +15,30 @@ export default cs.create(
     loc: [3, 19, 13, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [4, 3, 4, 26],
-        name: {
-          kind: 80,
-          loc: [4, 9, 4, 16],
-          text: "message",
-          bindingKey: "message$2osmwga78xnj6$0",
+        declarationList: {
+          kind: 262,
+          loc: [4, 3, 4, 25],
+          declarations: [
+            {
+              kind: 261,
+              loc: [4, 9, 4, 25],
+              name: {
+                kind: 80,
+                loc: [4, 9, 4, 16],
+                text: "message",
+                bindingKey: "message$2osmwga78xnj6$0",
+              },
+              initializer: {
+                kind: 11,
+                loc: [4, 19, 4, 25],
+                text: "boom",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 11,
-          loc: [4, 19, 4, 25],
-          text: "boom",
-        },
-        keyword: "const",
       },
       {
         kind: 259,

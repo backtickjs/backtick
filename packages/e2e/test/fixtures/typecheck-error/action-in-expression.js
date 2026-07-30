@@ -18,20 +18,30 @@ const action = cs.create(
     loc: [6, 19, 8, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [7, 3, 7, 15],
-        name: {
-          kind: 80,
-          loc: [7, 9, 7, 10],
-          text: "x",
-          bindingKey: "x$8tx5qho0had8$0",
+        declarationList: {
+          kind: 262,
+          loc: [7, 3, 7, 14],
+          declarations: [
+            {
+              kind: 261,
+              loc: [7, 9, 7, 14],
+              name: {
+                kind: 80,
+                loc: [7, 9, 7, 10],
+                text: "x",
+                bindingKey: "x$8tx5qho0had8$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [7, 13, 7, 14],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [7, 13, 7, 14],
-          value: 1,
-        },
-        keyword: "const",
       },
     ],
   }),
@@ -52,20 +62,30 @@ export const stored = cs.create(
     loc: [10, 26, 13, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [11, 3, 11, 28],
-        name: {
-          kind: 80,
-          loc: [11, 9, 11, 17],
-          text: "captured",
-          bindingKey: "captured$8tx5qho0had8$1",
+        declarationList: {
+          kind: 262,
+          loc: [11, 3, 11, 27],
+          declarations: [
+            {
+              kind: 261,
+              loc: [11, 9, 11, 27],
+              name: {
+                kind: 80,
+                loc: [11, 9, 11, 17],
+                text: "captured",
+                bindingKey: "captured$8tx5qho0had8$1",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [11, 20, 11, 27],
+                key: "$action",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [11, 20, 11, 27],
-          key: "$action",
-        },
-        keyword: "const",
       },
       {
         kind: 254,

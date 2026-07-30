@@ -175,72 +175,92 @@ export default cs.create(
     loc: [38, 19, 45, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [39, 3, 39, 22],
-        name: {
-          kind: 80,
-          loc: [39, 9, 39, 10],
-          text: "s",
-          bindingKey: "s$marvm6ddqnqk$0",
+        declarationList: {
+          kind: 262,
+          loc: [39, 3, 39, 21],
+          declarations: [
+            {
+              kind: 261,
+              loc: [39, 9, 39, 21],
+              name: {
+                kind: 80,
+                loc: [39, 9, 39, 10],
+                text: "s",
+                bindingKey: "s$marvm6ddqnqk$0",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [39, 13, 39, 21],
+                key: "$segment",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [39, 13, 39, 21],
-          key: "$segment",
-        },
-        keyword: "const",
       },
       {
-        kind: 261,
+        kind: 244,
         loc: [40, 3, 40, 34],
-        name: {
-          kind: 80,
-          loc: [40, 9, 40, 13],
-          text: "rise",
-          bindingKey: "rise$marvm6ddqnqk$1",
-        },
-        initializer: {
-          kind: 227,
-          loc: [40, 16, 40, 33],
-          left: {
-            kind: 212,
-            loc: [40, 16, 40, 22],
-            expression: {
-              kind: 212,
-              loc: [40, 16, 40, 20],
-              expression: {
+        declarationList: {
+          kind: 262,
+          loc: [40, 3, 40, 33],
+          declarations: [
+            {
+              kind: 261,
+              loc: [40, 9, 40, 33],
+              name: {
                 kind: 80,
-                loc: [40, 16, 40, 17],
-                text: "s",
-                bindingKey: "s$marvm6ddqnqk$0",
+                loc: [40, 9, 40, 13],
+                text: "rise",
+                bindingKey: "rise$marvm6ddqnqk$1",
               },
-              questionDotToken: false,
-              name: "to",
-            },
-            questionDotToken: false,
-            name: "y",
-          },
-          operatorToken: "-",
-          right: {
-            kind: 212,
-            loc: [40, 25, 40, 33],
-            expression: {
-              kind: 212,
-              loc: [40, 25, 40, 31],
-              expression: {
-                kind: 80,
-                loc: [40, 25, 40, 26],
-                text: "s",
-                bindingKey: "s$marvm6ddqnqk$0",
+              initializer: {
+                kind: 227,
+                loc: [40, 16, 40, 33],
+                left: {
+                  kind: 212,
+                  loc: [40, 16, 40, 22],
+                  expression: {
+                    kind: 212,
+                    loc: [40, 16, 40, 20],
+                    expression: {
+                      kind: 80,
+                      loc: [40, 16, 40, 17],
+                      text: "s",
+                      bindingKey: "s$marvm6ddqnqk$0",
+                    },
+                    questionDotToken: false,
+                    name: "to",
+                  },
+                  questionDotToken: false,
+                  name: "y",
+                },
+                operatorToken: "-",
+                right: {
+                  kind: 212,
+                  loc: [40, 25, 40, 33],
+                  expression: {
+                    kind: 212,
+                    loc: [40, 25, 40, 31],
+                    expression: {
+                      kind: 80,
+                      loc: [40, 25, 40, 26],
+                      text: "s",
+                      bindingKey: "s$marvm6ddqnqk$0",
+                    },
+                    questionDotToken: false,
+                    name: "from",
+                  },
+                  questionDotToken: false,
+                  name: "y",
+                },
               },
-              questionDotToken: false,
-              name: "from",
             },
-            questionDotToken: false,
-            name: "y",
-          },
+          ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 246,

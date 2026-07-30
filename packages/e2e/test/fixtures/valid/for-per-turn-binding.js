@@ -18,43 +18,59 @@ export default cs.create(
     loc: [6, 19, 12, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [7, 3, 7, 22],
-        name: {
-          kind: 80,
-          loc: [7, 7, 7, 11],
-          text: "last",
-          bindingKey: "last$21o8qjv656zb3$0",
+        declarationList: {
+          kind: 262,
+          loc: [7, 3, 7, 21],
+          declarations: [
+            {
+              kind: 261,
+              loc: [7, 7, 7, 21],
+              name: {
+                kind: 80,
+                loc: [7, 7, 7, 11],
+                text: "last",
+                bindingKey: "last$21o8qjv656zb3$0",
+              },
+              initializer: {
+                kind: 220,
+                loc: [7, 14, 7, 21],
+                parameters: [],
+                body: {
+                  kind: 9,
+                  loc: [7, 20, 7, 21],
+                  value: 0,
+                },
+              },
+            },
+          ],
+          keyword: "let",
         },
-        initializer: {
-          kind: 220,
-          loc: [7, 14, 7, 21],
-          parameters: [],
-          body: {
-            kind: 9,
-            loc: [7, 20, 7, 21],
-            value: 0,
-          },
-        },
-        keyword: "let",
       },
       {
         kind: 249,
         loc: [8, 3, 10, 4],
         initializer: {
-          kind: 261,
+          kind: 262,
           loc: [8, 8, 8, 17],
-          name: {
-            kind: 80,
-            loc: [8, 12, 8, 13],
-            text: "i",
-            bindingKey: "i$21o8qjv656zb3$1",
-          },
-          initializer: {
-            kind: 9,
-            loc: [8, 16, 8, 17],
-            value: 0,
-          },
+          declarations: [
+            {
+              kind: 261,
+              loc: [8, 12, 8, 17],
+              name: {
+                kind: 80,
+                loc: [8, 12, 8, 13],
+                text: "i",
+                bindingKey: "i$21o8qjv656zb3$1",
+              },
+              initializer: {
+                kind: 9,
+                loc: [8, 16, 8, 17],
+                value: 0,
+              },
+            },
+          ],
           keyword: "let",
         },
         condition: {

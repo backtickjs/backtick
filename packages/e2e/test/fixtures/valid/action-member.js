@@ -26,20 +26,30 @@ const press = cs.create(
     loc: [18, 18, 20, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [19, 3, 19, 15],
-        name: {
-          kind: 80,
-          loc: [19, 9, 19, 10],
-          text: "x",
-          bindingKey: "x$1w48eutzbucnb$0",
+        declarationList: {
+          kind: 262,
+          loc: [19, 3, 19, 14],
+          declarations: [
+            {
+              kind: 261,
+              loc: [19, 9, 19, 14],
+              name: {
+                kind: 80,
+                loc: [19, 9, 19, 10],
+                text: "x",
+                bindingKey: "x$1w48eutzbucnb$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [19, 13, 19, 14],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [19, 13, 19, 14],
-          value: 1,
-        },
-        keyword: "const",
       },
     ],
   }),
@@ -81,20 +91,30 @@ export default cs.create(
     loc: [22, 19, 25, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [23, 3, 23, 49],
-        name: {
-          kind: 80,
-          loc: [23, 9, 23, 15],
-          text: "button",
-          bindingKey: "button$1w48eutzbucnb$1",
+        declarationList: {
+          kind: 262,
+          loc: [23, 3, 23, 48],
+          declarations: [
+            {
+              kind: 261,
+              loc: [23, 9, 23, 48],
+              name: {
+                kind: 80,
+                loc: [23, 9, 23, 15],
+                text: "button",
+                bindingKey: "button$1w48eutzbucnb$1",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [23, 18, 23, 48],
+                key: "$0splice0",
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 1000,
-          loc: [23, 18, 23, 48],
-          key: "$0splice0",
-        },
-        keyword: "const",
       },
       {
         kind: 254,

@@ -27,53 +27,73 @@ export default cs.create(
     loc: [19, 19, 23, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [20, 3, 20, 20],
-        name: {
-          kind: 80,
-          loc: [20, 9, 20, 10],
-          text: "C",
-          bindingKey: "C$2pik4a0v1yd8w$0",
-        },
-        initializer: {
-          kind: 1000,
-          loc: [20, 13, 20, 19],
-          key: "$Point",
-        },
-        keyword: "const",
-      },
-      {
-        kind: 261,
-        loc: [21, 3, 21, 25],
-        name: {
-          kind: 80,
-          loc: [21, 9, 21, 10],
-          text: "p",
-          bindingKey: "p$2pik4a0v1yd8w$1",
-        },
-        initializer: {
-          kind: 215,
-          loc: [21, 13, 21, 24],
-          expression: {
-            kind: 80,
-            loc: [21, 17, 21, 18],
-            text: "C",
-            bindingKey: "C$2pik4a0v1yd8w$0",
-          },
-          arguments: [
+        declarationList: {
+          kind: 262,
+          loc: [20, 3, 20, 19],
+          declarations: [
             {
-              kind: 9,
-              loc: [21, 19, 21, 20],
-              value: 1,
-            },
-            {
-              kind: 9,
-              loc: [21, 22, 21, 23],
-              value: 2,
+              kind: 261,
+              loc: [20, 9, 20, 19],
+              name: {
+                kind: 80,
+                loc: [20, 9, 20, 10],
+                text: "C",
+                bindingKey: "C$2pik4a0v1yd8w$0",
+              },
+              initializer: {
+                kind: 1000,
+                loc: [20, 13, 20, 19],
+                key: "$Point",
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
+      },
+      {
+        kind: 244,
+        loc: [21, 3, 21, 25],
+        declarationList: {
+          kind: 262,
+          loc: [21, 3, 21, 24],
+          declarations: [
+            {
+              kind: 261,
+              loc: [21, 9, 21, 24],
+              name: {
+                kind: 80,
+                loc: [21, 9, 21, 10],
+                text: "p",
+                bindingKey: "p$2pik4a0v1yd8w$1",
+              },
+              initializer: {
+                kind: 215,
+                loc: [21, 13, 21, 24],
+                expression: {
+                  kind: 80,
+                  loc: [21, 17, 21, 18],
+                  text: "C",
+                  bindingKey: "C$2pik4a0v1yd8w$0",
+                },
+                arguments: [
+                  {
+                    kind: 9,
+                    loc: [21, 19, 21, 20],
+                    value: 1,
+                  },
+                  {
+                    kind: 9,
+                    loc: [21, 22, 21, 23],
+                    value: 2,
+                  },
+                ],
+              },
+            },
+          ],
+          keyword: "const",
+        },
       },
       {
         kind: 254,

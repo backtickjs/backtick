@@ -37,20 +37,30 @@ export default cs.create(
     loc: [3, 19, 6, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [4, 3, 4, 19],
-        name: {
-          kind: 80,
-          loc: [4, 9, 4, 14],
-          text: "total",
-          bindingKey: "total$wjl0rp4901n3$0",
+        declarationList: {
+          kind: 262,
+          loc: [4, 3, 4, 18],
+          declarations: [
+            {
+              kind: 261,
+              loc: [4, 9, 4, 18],
+              name: {
+                kind: 80,
+                loc: [4, 9, 4, 14],
+                text: "total",
+                bindingKey: "total$wjl0rp4901n3$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [4, 17, 4, 18],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [4, 17, 4, 18],
-          value: 1,
-        },
-        keyword: "const",
       },
       {
         kind: 254,
@@ -81,20 +91,30 @@ function add(lhs, rhs) {
       loc: [9, 13, 14, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [10, 5, 10, 19],
-          name: {
-            kind: 80,
-            loc: [10, 9, 10, 14],
-            text: "total",
-            bindingKey: "total$wjl0rp4901n3$1",
+          declarationList: {
+            kind: 262,
+            loc: [10, 5, 10, 18],
+            declarations: [
+              {
+                kind: 261,
+                loc: [10, 9, 10, 18],
+                name: {
+                  kind: 80,
+                  loc: [10, 9, 10, 14],
+                  text: "total",
+                  bindingKey: "total$wjl0rp4901n3$1",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [10, 17, 10, 18],
+                  value: 0,
+                },
+              },
+            ],
+            keyword: "let",
           },
-          initializer: {
-            kind: 9,
-            loc: [10, 17, 10, 18],
-            value: 0,
-          },
-          keyword: "let",
         },
         {
           kind: 227,

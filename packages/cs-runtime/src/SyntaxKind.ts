@@ -22,7 +22,9 @@ export const SyntaxKind = {
 
   // Declarations
   Parameter: 170,
+  VariableStatement: 244,
   VariableDeclaration: 261,
+  VariableDeclarationList: 262,
   PropertyAssignment: 304,
 
   // Expressions

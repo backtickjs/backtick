@@ -40,20 +40,30 @@ export default cs.create(
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [8, 3, 8, 19],
-        name: {
-          kind: 80,
-          loc: [8, 9, 8, 13],
-          text: "base",
-          bindingKey: "base$1q50brt6ov79t$0",
+        declarationList: {
+          kind: 262,
+          loc: [8, 3, 8, 18],
+          declarations: [
+            {
+              kind: 261,
+              loc: [8, 9, 8, 18],
+              name: {
+                kind: 80,
+                loc: [8, 9, 8, 13],
+                text: "base",
+                bindingKey: "base$1q50brt6ov79t$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [8, 16, 8, 18],
+                value: 10,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [8, 16, 8, 18],
-          value: 10,
-        },
-        keyword: "const",
       },
       {
         kind: 254,
@@ -84,20 +94,30 @@ function outer(inner) {
       loc: [13, 13, 16, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [14, 5, 14, 20],
-          name: {
-            kind: 80,
-            loc: [14, 11, 14, 15],
-            text: "base",
-            bindingKey: "base$1q50brt6ov79t$1",
+          declarationList: {
+            kind: 262,
+            loc: [14, 5, 14, 19],
+            declarations: [
+              {
+                kind: 261,
+                loc: [14, 11, 14, 19],
+                name: {
+                  kind: 80,
+                  loc: [14, 11, 14, 15],
+                  text: "base",
+                  bindingKey: "base$1q50brt6ov79t$1",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [14, 18, 14, 19],
+                  value: 1,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [14, 18, 14, 19],
-            value: 1,
-          },
-          keyword: "const",
         },
         {
           kind: 254,
@@ -140,20 +160,30 @@ function middle(inner) {
       loc: [20, 13, 23, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [21, 5, 21, 20],
-          name: {
-            kind: 80,
-            loc: [21, 11, 21, 15],
-            text: "base",
-            bindingKey: "base$1q50brt6ov79t$2",
+          declarationList: {
+            kind: 262,
+            loc: [21, 5, 21, 19],
+            declarations: [
+              {
+                kind: 261,
+                loc: [21, 11, 21, 19],
+                name: {
+                  kind: 80,
+                  loc: [21, 11, 21, 15],
+                  text: "base",
+                  bindingKey: "base$1q50brt6ov79t$2",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [21, 18, 21, 19],
+                  value: 2,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [21, 18, 21, 19],
-            value: 2,
-          },
-          keyword: "const",
         },
         {
           kind: 254,

@@ -39,7 +39,7 @@ export type ClientScriptStatement =
   | ClientScriptReturnStatement
   | ClientScriptThrowStatement
   | ClientScriptTryStatement
-  | ClientScriptVariableDeclaration;
+  | ClientScriptVariableStatement;
 
 // The body of a script or an arrow: a block, or an expression whose value is
 // implicitly returned.
@@ -73,11 +73,15 @@ export interface ClientScriptWhileStatement extends ClientScriptNode {
   readonly statement: ClientScriptStatement;
 }
 
-// `init` is a declaration or an assignment and `update` an assignment, so both
-// are statements rather than expressions.
+// The incrementor is an assignment, which is a statement's worth of syntax
+// here even though TypeScript reads it as an expression.
 export interface ClientScriptForStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ForStatement;
-  readonly initializer: ClientScriptStatement | null;
+  // The list, not the statement — `ts.ForInitializer` is the same union.
+  readonly initializer:
+    | ClientScriptVariableDeclarationList
+    | ClientScriptExpression
+    | null;
   readonly condition: ClientScriptExpression | null;
   readonly incrementor: ClientScriptStatement | null;
   readonly statement: ClientScriptStatement;
@@ -230,9 +234,29 @@ export interface ClientScriptPropertyAssignment extends ClientScriptNode {
   readonly initializer: ClientScriptExpression;
 }
 
+// A declaration in statement position, wrapping the list that holds it —
+// TypeScript spends the same three nodes, and for the same reason: a `for`
+// header takes the list without this wrapper (see
+// `ClientScriptForStatement.initializer`).
+export interface ClientScriptVariableStatement extends ClientScriptNode {
+  readonly kind: typeof SyntaxKind.VariableStatement;
+  readonly declarationList: ClientScriptVariableDeclarationList;
+}
+
+// Always one declaration: the compiler rejects `let a = 1, b = 2`, so the array
+// is TypeScript's shape rather than something this language uses.
+//
+// `keyword` is the one field with no TypeScript counterpart, and this is the
+// node TypeScript keeps the same fact on — as `NodeFlags.Const` or
+// `NodeFlags.Let` in `Node.flags`, where this spells the word.
+export interface ClientScriptVariableDeclarationList extends ClientScriptNode {
+  readonly kind: typeof SyntaxKind.VariableDeclarationList;
+  readonly declarations: readonly ClientScriptVariableDeclaration[];
+  readonly keyword: "let" | "const";
+}
+
 export interface ClientScriptVariableDeclaration extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.VariableDeclaration;
   readonly name: ClientScriptIdentifier;
   readonly initializer: ClientScriptExpression;
-  readonly keyword: "let" | "const";
 }

@@ -24,40 +24,60 @@ function wrap(fragment) {
       loc: [12, 13, 18, 4],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [13, 5, 13, 21],
-          name: {
-            kind: 80,
-            loc: [13, 11, 13, 16],
-            text: "total",
-            bindingKey: "total$2jup3dk7x37m7$0",
+          declarationList: {
+            kind: 262,
+            loc: [13, 5, 13, 20],
+            declarations: [
+              {
+                kind: 261,
+                loc: [13, 11, 13, 20],
+                name: {
+                  kind: 80,
+                  loc: [13, 11, 13, 16],
+                  text: "total",
+                  bindingKey: "total$2jup3dk7x37m7$0",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [13, 19, 13, 20],
+                  value: 1,
+                },
+              },
+            ],
+            keyword: "const",
           },
-          initializer: {
-            kind: 9,
-            loc: [13, 19, 13, 20],
-            value: 1,
-          },
-          keyword: "const",
         },
         {
           kind: 242,
           loc: [14, 5, 17, 6],
           statements: [
             {
-              kind: 261,
+              kind: 244,
               loc: [15, 7, 15, 23],
-              name: {
-                kind: 80,
-                loc: [15, 13, 15, 18],
-                text: "total",
-                bindingKey: "total$2jup3dk7x37m7$1",
+              declarationList: {
+                kind: 262,
+                loc: [15, 7, 15, 22],
+                declarations: [
+                  {
+                    kind: 261,
+                    loc: [15, 13, 15, 22],
+                    name: {
+                      kind: 80,
+                      loc: [15, 13, 15, 18],
+                      text: "total",
+                      bindingKey: "total$2jup3dk7x37m7$1",
+                    },
+                    initializer: {
+                      kind: 9,
+                      loc: [15, 21, 15, 22],
+                      value: 2,
+                    },
+                  },
+                ],
+                keyword: "const",
               },
-              initializer: {
-                kind: 9,
-                loc: [15, 21, 15, 22],
-                value: 2,
-              },
-              keyword: "const",
             },
             {
               kind: 254,

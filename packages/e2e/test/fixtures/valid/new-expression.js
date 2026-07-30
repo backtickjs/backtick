@@ -30,36 +30,46 @@ export default cs.create(
     loc: [22, 19, 25, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [23, 3, 23, 30],
-        name: {
-          kind: 80,
-          loc: [23, 9, 23, 10],
-          text: "p",
-          bindingKey: "p$y9r0n74bbbwa$0",
-        },
-        initializer: {
-          kind: 215,
-          loc: [23, 13, 23, 29],
-          expression: {
-            kind: 1000,
-            loc: [23, 17, 23, 23],
-            key: "$Point",
-          },
-          arguments: [
+        declarationList: {
+          kind: 262,
+          loc: [23, 3, 23, 29],
+          declarations: [
             {
-              kind: 9,
-              loc: [23, 24, 23, 25],
-              value: 1,
-            },
-            {
-              kind: 9,
-              loc: [23, 27, 23, 28],
-              value: 2,
+              kind: 261,
+              loc: [23, 9, 23, 29],
+              name: {
+                kind: 80,
+                loc: [23, 9, 23, 10],
+                text: "p",
+                bindingKey: "p$y9r0n74bbbwa$0",
+              },
+              initializer: {
+                kind: 215,
+                loc: [23, 13, 23, 29],
+                expression: {
+                  kind: 1000,
+                  loc: [23, 17, 23, 23],
+                  key: "$Point",
+                },
+                arguments: [
+                  {
+                    kind: 9,
+                    loc: [23, 24, 23, 25],
+                    value: 1,
+                  },
+                  {
+                    kind: 9,
+                    loc: [23, 27, 23, 28],
+                    value: 2,
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

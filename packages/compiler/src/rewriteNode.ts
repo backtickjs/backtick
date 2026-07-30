@@ -271,7 +271,10 @@ function rewriteNodeImpl(
       virtual: ts.isVariableDeclarationList(declarations.virtual)
         ? ts.factory.createVariableStatement(undefined, declarations.virtual)
         : declarations.virtual,
-      runtime: declarations.runtime,
+      runtime: astNode(ts, SyntaxKind.VariableStatement, {
+        loc: loc(node),
+        declarationList: declarations.runtime as ts.Expression,
+      }),
     };
   }
 
@@ -345,14 +348,24 @@ function rewriteNodeImpl(
           // exact type, `cs.let` widens, as unwrapped they would.
           call(ts, "cs", keyword, [initializer.virtual as ts.Expression]),
         ),
-        runtime: astNode(ts, SyntaxKind.VariableDeclaration, {
-          loc: loc(at),
-          name: astNode(ts, SyntaxKind.Identifier, {
-            loc: loc(declaration.name),
-            text: ts.factory.createStringLiteral(name.text),
-            bindingKey: ts.factory.createStringLiteral(bindingKey(state, name)),
-          }),
-          initializer: initializer.runtime as ts.Expression,
+        runtime: astNode(ts, SyntaxKind.VariableDeclarationList, {
+          loc: loc(node),
+          declarations: ts.factory.createArrayLiteralExpression(
+            [
+              astNode(ts, SyntaxKind.VariableDeclaration, {
+                loc: loc(declaration),
+                name: astNode(ts, SyntaxKind.Identifier, {
+                  loc: loc(declaration.name),
+                  text: ts.factory.createStringLiteral(name.text),
+                  bindingKey: ts.factory.createStringLiteral(
+                    bindingKey(state, name),
+                  ),
+                }),
+                initializer: initializer.runtime as ts.Expression,
+              }),
+            ],
+            false,
+          ),
           keyword: ts.factory.createStringLiteral(keyword),
         }),
       };

@@ -32,21 +32,31 @@ export default cs.create(
       loc: [5, 34, 11, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [6, 3, 6, 16],
-          name: {
-            kind: 80,
-            loc: [6, 7, 6, 11],
-            text: "left",
-            bindingKey: "left$22k8zyijhbub1$1",
+          declarationList: {
+            kind: 262,
+            loc: [6, 3, 6, 15],
+            declarations: [
+              {
+                kind: 261,
+                loc: [6, 7, 6, 15],
+                name: {
+                  kind: 80,
+                  loc: [6, 7, 6, 11],
+                  text: "left",
+                  bindingKey: "left$22k8zyijhbub1$1",
+                },
+                initializer: {
+                  kind: 80,
+                  loc: [6, 14, 6, 15],
+                  text: "n",
+                  bindingKey: "n$22k8zyijhbub1$0",
+                },
+              },
+            ],
+            keyword: "let",
           },
-          initializer: {
-            kind: 80,
-            loc: [6, 14, 6, 15],
-            text: "n",
-            bindingKey: "n$22k8zyijhbub1$0",
-          },
-          keyword: "let",
         },
         {
           kind: 248,

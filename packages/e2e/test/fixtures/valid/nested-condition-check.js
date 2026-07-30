@@ -46,37 +46,47 @@ const gate = cs.create(
       loc: [12, 6, 18, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [13, 3, 13, 36],
-          name: {
-            kind: 80,
-            loc: [13, 9, 13, 13],
-            text: "keep",
-            bindingKey: "keep$2nymys98gllff$2",
-          },
-          initializer: {
-            kind: 220,
-            loc: [13, 16, 13, 35],
-            parameters: [
+          declarationList: {
+            kind: 262,
+            loc: [13, 3, 13, 35],
+            declarations: [
               {
-                kind: 170,
-                loc: [13, 17, 13, 28],
+                kind: 261,
+                loc: [13, 9, 13, 35],
                 name: {
                   kind: 80,
-                  loc: [13, 17, 13, 19],
-                  text: "on",
-                  bindingKey: "on$2nymys98gllff$3",
+                  loc: [13, 9, 13, 13],
+                  text: "keep",
+                  bindingKey: "keep$2nymys98gllff$2",
+                },
+                initializer: {
+                  kind: 220,
+                  loc: [13, 16, 13, 35],
+                  parameters: [
+                    {
+                      kind: 170,
+                      loc: [13, 17, 13, 28],
+                      name: {
+                        kind: 80,
+                        loc: [13, 17, 13, 19],
+                        text: "on",
+                        bindingKey: "on$2nymys98gllff$3",
+                      },
+                    },
+                  ],
+                  body: {
+                    kind: 80,
+                    loc: [13, 33, 13, 35],
+                    text: "on",
+                    bindingKey: "on$2nymys98gllff$3",
+                  },
                 },
               },
             ],
-            body: {
-              kind: 80,
-              loc: [13, 33, 13, 35],
-              text: "on",
-              bindingKey: "on$2nymys98gllff$3",
-            },
+            keyword: "const",
           },
-          keyword: "const",
         },
         {
           kind: 246,

@@ -19,31 +19,41 @@ export default cs.create(
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [8, 3, 8, 33],
-        name: {
-          kind: 80,
-          loc: [8, 9, 8, 14],
-          text: "names",
-          bindingKey: "names$2hkx7916f6ioy$0",
-        },
-        initializer: {
-          kind: 210,
-          loc: [8, 17, 8, 32],
-          elements: [
+        declarationList: {
+          kind: 262,
+          loc: [8, 3, 8, 32],
+          declarations: [
             {
-              kind: 11,
-              loc: [8, 18, 8, 24],
-              text: "zero",
-            },
-            {
-              kind: 11,
-              loc: [8, 26, 8, 31],
-              text: "one",
+              kind: 261,
+              loc: [8, 9, 8, 32],
+              name: {
+                kind: 80,
+                loc: [8, 9, 8, 14],
+                text: "names",
+                bindingKey: "names$2hkx7916f6ioy$0",
+              },
+              initializer: {
+                kind: 210,
+                loc: [8, 17, 8, 32],
+                elements: [
+                  {
+                    kind: 11,
+                    loc: [8, 18, 8, 24],
+                    text: "zero",
+                  },
+                  {
+                    kind: 11,
+                    loc: [8, 26, 8, 31],
+                    text: "one",
+                  },
+                ],
+              },
             },
           ],
+          keyword: "const",
         },
-        keyword: "const",
       },
       {
         kind: 254,

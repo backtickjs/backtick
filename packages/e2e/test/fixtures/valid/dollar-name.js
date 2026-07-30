@@ -69,20 +69,30 @@ export default cs.create(
     loc: [11, 19, 14, 2],
     statements: [
       {
-        kind: 261,
+        kind: 244,
         loc: [12, 3, 12, 18],
-        name: {
-          kind: 80,
-          loc: [12, 9, 12, 13],
-          text: "foo$",
-          bindingKey: "foo$$3r8prbdxxrtje$0",
+        declarationList: {
+          kind: 262,
+          loc: [12, 3, 12, 17],
+          declarations: [
+            {
+              kind: 261,
+              loc: [12, 9, 12, 17],
+              name: {
+                kind: 80,
+                loc: [12, 9, 12, 13],
+                text: "foo$",
+                bindingKey: "foo$$3r8prbdxxrtje$0",
+              },
+              initializer: {
+                kind: 9,
+                loc: [12, 16, 12, 17],
+                value: 1,
+              },
+            },
+          ],
+          keyword: "const",
         },
-        initializer: {
-          kind: 9,
-          loc: [12, 16, 12, 17],
-          value: 1,
-        },
-        keyword: "const",
       },
       {
         kind: 254,

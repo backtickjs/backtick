@@ -31,39 +31,55 @@ export default cs.create(
       loc: [4, 34, 10, 2],
       statements: [
         {
-          kind: 261,
+          kind: 244,
           loc: [5, 3, 5, 16],
-          name: {
-            kind: 80,
-            loc: [5, 7, 5, 11],
-            text: "last",
-            bindingKey: "last$2gfrnuray6h4d$1",
+          declarationList: {
+            kind: 262,
+            loc: [5, 3, 5, 15],
+            declarations: [
+              {
+                kind: 261,
+                loc: [5, 7, 5, 15],
+                name: {
+                  kind: 80,
+                  loc: [5, 7, 5, 11],
+                  text: "last",
+                  bindingKey: "last$2gfrnuray6h4d$1",
+                },
+                initializer: {
+                  kind: 9,
+                  loc: [5, 14, 5, 15],
+                  value: 0,
+                },
+              },
+            ],
+            keyword: "let",
           },
-          initializer: {
-            kind: 9,
-            loc: [5, 14, 5, 15],
-            value: 0,
-          },
-          keyword: "let",
         },
         {
           kind: 249,
           loc: [6, 3, 8, 4],
           initializer: {
-            kind: 261,
+            kind: 262,
             loc: [6, 8, 6, 17],
-            name: {
-              kind: 80,
-              loc: [6, 12, 6, 13],
-              text: "i",
-              bindingKey: "i$2gfrnuray6h4d$2",
-            },
-            initializer: {
-              kind: 80,
-              loc: [6, 16, 6, 17],
-              text: "n",
-              bindingKey: "n$2gfrnuray6h4d$0",
-            },
+            declarations: [
+              {
+                kind: 261,
+                loc: [6, 12, 6, 17],
+                name: {
+                  kind: 80,
+                  loc: [6, 12, 6, 13],
+                  text: "i",
+                  bindingKey: "i$2gfrnuray6h4d$2",
+                },
+                initializer: {
+                  kind: 80,
+                  loc: [6, 16, 6, 17],
+                  text: "n",
+                  bindingKey: "n$2gfrnuray6h4d$0",
+                },
+              },
+            ],
             keyword: "let",
           },
           condition: {
