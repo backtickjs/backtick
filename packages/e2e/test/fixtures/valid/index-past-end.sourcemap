@@ -10,11 +10,10 @@ __cs_names              → names
 );                      → ;
 \n                      → \n  
 return cs.const(        → return 
-cs.receiver(            → 
+cs.index(               → 
 __cs_names              → names
-)                       → 
-[                       → [
+,                       → [
 9                       → 9
-]                       → ]
+)                       → ]
 );                      → ;
 \n})())                 → \n}`

@@ -6,5 +6,5 @@ import { cs } from "@backtickjs/core";
 // faults; the type simply doesn't mention the floor under it.
 export default cs.lift((() => {
     const __cs_names = cs.const(["zero", "one"]);
-    return cs.const(cs.receiver(__cs_names)[9]);
+    return cs.const(cs.index(__cs_names, 9));
 })());

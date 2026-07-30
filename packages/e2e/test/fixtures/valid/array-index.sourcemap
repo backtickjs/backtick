@@ -44,12 +44,11 @@ __cs_total              → total
  = cs.const(            →  = 
 __cs_total              → total
  +                      →  + 
-cs.receiver(            → 
+cs.index(               → 
 __cs_coins              → coins
-)                       → 
-[                       → [
+,                       → [
 __cs_i                  → i
-]                       → ]
+)                       → ]
 )                       → 
 ;                       → ;
 \n    }                 → \n  }

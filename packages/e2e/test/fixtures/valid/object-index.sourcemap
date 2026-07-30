@@ -14,12 +14,11 @@ cs.splice(         →  [-semantic]
 const              → const 
 __cs_asked         → asked
  = cs.const(       →  = 
-cs.receiver(       → 
+cs.index(          → 
 __cs_table         → table
-)                  → 
-[                  → [
+,                  → [
 __cs_currency      → currency
-]                  → ]
+)                  → ]
  ??                →  ?? 
 0                  → 0
 );                 → ;
@@ -27,12 +26,11 @@ __cs_currency      → currency
 const              → const 
 __cs_usd           → usd
  = cs.const(       →  = 
-cs.receiver(       → 
+cs.index(          → 
 __cs_table         → table
-)                  → 
-[                  → [
+,                  → [
 "usd"              → "usd"
-]                  → ]
+)                  → ]
  ??                →  ?? 
 0                  → 0
 );                 → ;

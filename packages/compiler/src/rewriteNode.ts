@@ -767,20 +767,17 @@ function rewriteNodeImpl(
     }
     const expression = rewriteNode(ts, state, node.expression);
     const key = rewriteNode(ts, state, node.argumentExpression);
-    // The receiver reads as its client-side view, as it does for `.`, and the
-    // access stays a real one so the key is checked against what that view can
-    // be indexed by: a number for an array, whatever the type says for an
-    // object. An in-range read is the element type — TypeScript's own rule,
-    // which is the one the language follows wherever TypeScript has one.
-    const virtualReceiver = call(ts, "cs", "receiver", [
-      expression.virtual as ts.Expression,
-    ]);
-    state.mappings.set(virtualReceiver, node.expression);
     return {
-      virtual: ts.factory.createElementAccessExpression(
-        virtualReceiver,
+      // `cs.index` reads the receiver as its client-side view and checks the
+      // key against what that view names, which a real `a[i]` would not: to
+      // TypeScript a numeric string literal is a numeric index, so `a["0"]`
+      // would pass there and read null here. An in-range read is the element
+      // type — TypeScript's own rule, the one the language follows wherever
+      // TypeScript has one.
+      virtual: call(ts, "cs", "index", [
+        expression.virtual as ts.Expression,
         key.virtual as ts.Expression,
-      ),
+      ]),
       runtime: call(ts, "v", "index", [
         loc(node),
         expression.runtime as ts.Expression,
