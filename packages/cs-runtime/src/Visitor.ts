@@ -168,13 +168,13 @@ export interface Visitor<U> {
   // e.g. [1, 2, 3]
   arrayLiteralExpression(loc: SourceLocation, elements: U[]): U;
 
-  // e.g. { a: 4 } — TypeScript carries a list of `PropertyAssignment` nodes
-  // where this takes the properties by name, since a key here is always a name
-  // and never an expression.
-  objectLiteralExpression(
-    loc: SourceLocation,
-    properties: { [name: string]: U },
-  ): U;
+  // e.g. { a: 4 } — a list of `propertyAssignment`, as TypeScript's is
+  objectLiteralExpression(loc: SourceLocation, properties: U[]): U;
+
+  // e.g. the `a: 4` in { a: 4 }. TypeScript puts a `PropertyName` node in
+  // `name`, where a key here is always a plain name — never computed, never a
+  // string literal — so the name itself is what there is to carry.
+  propertyAssignment(loc: SourceLocation, name: string, initializer: U): U;
 
   // e.g. s.concat("!") — `questionDotToken` for `cb?.(…)`, which yields null
   // (never `undefined`) for a null callee, the arguments unevaluated
@@ -185,8 +185,13 @@ export interface Visitor<U> {
     argumentsArray: U[],
   ): U;
 
-  // e.g. (r, g, b) => { ... }
+  // e.g. (r, g, b) => { ... } — `parameters` are `parameterDeclaration`
   arrowFunction(loc: SourceLocation, parameters: U[], body: U): U;
+
+  // e.g. the `r` in (r, g, b) => { ... }. TypeScript's parameter also carries
+  // a default, a type, modifiers and a rest token; each of those is rejected
+  // here, so a parameter is the name it binds.
+  parameterDeclaration(loc: SourceLocation, name: U): U;
 
   // e.g. new $Foo(1)
   newExpression(loc: SourceLocation, expression: U, argumentsArray: U[]): U;

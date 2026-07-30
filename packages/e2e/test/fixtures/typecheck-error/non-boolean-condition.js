@@ -15,7 +15,12 @@ export default cs.create(
   (v) =>
     v.arrowFunction(
       [5, 19, 10, 2],
-      [v.identifier([5, 20, 5, 24], "name", "name$7s4lkv4w2ddn$0")],
+      [
+        v.parameterDeclaration(
+          [5, 20, 5, 32],
+          v.identifier([5, 20, 5, 24], "name", "name$7s4lkv4w2ddn$0"),
+        ),
+      ],
       v.block(
         [5, 37, 10, 2],
         [

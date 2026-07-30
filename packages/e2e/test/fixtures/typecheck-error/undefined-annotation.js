@@ -13,7 +13,12 @@ const stored = cs.create(
   (v) =>
     v.arrowFunction(
       [8, 19, 11, 2],
-      [v.identifier([8, 20, 8, 21], "x", "x$18uwl3j62c30b$0")],
+      [
+        v.parameterDeclaration(
+          [8, 20, 8, 28],
+          v.identifier([8, 20, 8, 21], "x", "x$18uwl3j62c30b$0"),
+        ),
+      ],
       v.block(
         [8, 33, 11, 2],
         [
@@ -45,7 +50,12 @@ const written = cs.create(
   (v) =>
     v.arrowFunction(
       [13, 20, 17, 2],
-      [v.identifier([13, 21, 13, 22], "x", "x$18uwl3j62c30b$2")],
+      [
+        v.parameterDeclaration(
+          [13, 21, 13, 29],
+          v.identifier([13, 21, 13, 22], "x", "x$18uwl3j62c30b$2"),
+        ),
+      ],
       v.block(
         [13, 34, 17, 2],
         [

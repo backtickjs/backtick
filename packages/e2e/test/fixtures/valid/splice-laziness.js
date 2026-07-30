@@ -21,7 +21,12 @@ function guard(fragment) {
     (v) =>
       v.arrowFunction(
         [11, 13, 16, 4],
-        [v.identifier([11, 14, 11, 18], "flag", "flag$23k9adtpaouck$0")],
+        [
+          v.parameterDeclaration(
+            [11, 14, 11, 27],
+            v.identifier([11, 14, 11, 18], "flag", "flag$23k9adtpaouck$0"),
+          ),
+        ],
         v.block(
           [11, 32, 16, 4],
           [
@@ -98,18 +103,29 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.objectLiteralExpression([24, 20, 27, 2], {
-      taken: v.callExpression(
-        [25, 10, 25, 28],
-        v.splice([25, 10, 25, 22], "$0splice0"),
-        false,
-        [v.trueLiteral([25, 23, 25, 27])],
-      ),
-      skipped: v.callExpression(
-        [26, 12, 26, 35],
-        v.splice([26, 12, 26, 28], "$0splice1"),
-        false,
-        [v.falseLiteral([26, 29, 26, 34])],
-      ),
-    }),
+    v.objectLiteralExpression(
+      [24, 20, 27, 2],
+      [
+        v.propertyAssignment(
+          [25, 3, 25, 28],
+          "taken",
+          v.callExpression(
+            [25, 10, 25, 28],
+            v.splice([25, 10, 25, 22], "$0splice0"),
+            false,
+            [v.trueLiteral([25, 23, 25, 27])],
+          ),
+        ),
+        v.propertyAssignment(
+          [26, 3, 26, 35],
+          "skipped",
+          v.callExpression(
+            [26, 12, 26, 35],
+            v.splice([26, 12, 26, 28], "$0splice1"),
+            false,
+            [v.falseLiteral([26, 29, 26, 34])],
+          ),
+        ),
+      ],
+    ),
 );

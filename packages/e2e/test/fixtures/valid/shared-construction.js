@@ -54,12 +54,31 @@ export default cs.create(
       [
         v.returnStatement(
           [32, 3, 32, 59],
-          v.objectLiteralExpression([32, 10, 32, 58], {
-            first: v.splice([32, 19, 32, 21], "$a"),
-            second: v.splice([32, 31, 32, 33], "$b"),
-            third: v.splice([32, 42, 32, 44], "$c"),
-            fourth: v.splice([32, 54, 32, 56], "$d"),
-          }),
+          v.objectLiteralExpression(
+            [32, 10, 32, 58],
+            [
+              v.propertyAssignment(
+                [32, 12, 32, 21],
+                "first",
+                v.splice([32, 19, 32, 21], "$a"),
+              ),
+              v.propertyAssignment(
+                [32, 23, 32, 33],
+                "second",
+                v.splice([32, 31, 32, 33], "$b"),
+              ),
+              v.propertyAssignment(
+                [32, 35, 32, 44],
+                "third",
+                v.splice([32, 42, 32, 44], "$c"),
+              ),
+              v.propertyAssignment(
+                [32, 46, 32, 56],
+                "fourth",
+                v.splice([32, 54, 32, 56], "$d"),
+              ),
+            ],
+          ),
         ),
       ],
     ),

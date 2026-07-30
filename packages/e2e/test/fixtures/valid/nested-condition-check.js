@@ -20,8 +20,14 @@ const gate = cs.create(
     v.arrowFunction(
       [9, 61, 18, 2],
       [
-        v.identifier([10, 3, 10, 4], "a", "a$2nymys98gllff$0"),
-        v.identifier([11, 3, 11, 4], "b", "b$2nymys98gllff$1"),
+        v.parameterDeclaration(
+          [10, 3, 10, 13],
+          v.identifier([10, 3, 10, 4], "a", "a$2nymys98gllff$0"),
+        ),
+        v.parameterDeclaration(
+          [11, 3, 11, 13],
+          v.identifier([11, 3, 11, 4], "b", "b$2nymys98gllff$1"),
+        ),
       ],
       v.block(
         [12, 6, 18, 2],
@@ -31,7 +37,12 @@ const gate = cs.create(
             v.identifier([13, 9, 13, 13], "keep", "keep$2nymys98gllff$2"),
             v.arrowFunction(
               [13, 16, 13, 35],
-              [v.identifier([13, 17, 13, 19], "on", "on$2nymys98gllff$3")],
+              [
+                v.parameterDeclaration(
+                  [13, 17, 13, 28],
+                  v.identifier([13, 17, 13, 19], "on", "on$2nymys98gllff$3"),
+                ),
+              ],
               v.identifier([13, 33, 13, 35], "on", "on$2nymys98gllff$3"),
             ),
             "const",
@@ -82,18 +93,29 @@ export default cs.create(
     spliceParams: { $gate: [] },
   },
   (v) =>
-    v.objectLiteralExpression([20, 20, 23, 2], {
-      both: v.callExpression(
-        [21, 9, 21, 26],
-        v.splice([21, 9, 21, 14], "$gate"),
-        false,
-        [v.trueLiteral([21, 15, 21, 19]), v.trueLiteral([21, 21, 21, 25])],
-      ),
-      one: v.callExpression(
-        [22, 8, 22, 26],
-        v.splice([22, 8, 22, 13], "$gate"),
-        false,
-        [v.trueLiteral([22, 14, 22, 18]), v.falseLiteral([22, 20, 22, 25])],
-      ),
-    }),
+    v.objectLiteralExpression(
+      [20, 20, 23, 2],
+      [
+        v.propertyAssignment(
+          [21, 3, 21, 26],
+          "both",
+          v.callExpression(
+            [21, 9, 21, 26],
+            v.splice([21, 9, 21, 14], "$gate"),
+            false,
+            [v.trueLiteral([21, 15, 21, 19]), v.trueLiteral([21, 21, 21, 25])],
+          ),
+        ),
+        v.propertyAssignment(
+          [22, 3, 22, 26],
+          "one",
+          v.callExpression(
+            [22, 8, 22, 26],
+            v.splice([22, 8, 22, 13], "$gate"),
+            false,
+            [v.trueLiteral([22, 14, 22, 18]), v.falseLiteral([22, 20, 22, 25])],
+          ),
+        ),
+      ],
+    ),
 );

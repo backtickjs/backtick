@@ -18,7 +18,12 @@ export default cs.create(
   (v) =>
     v.arrowFunction(
       [9, 19, 14, 2],
-      [v.identifier([9, 20, 9, 28], "currency", "currency$1cte50r1xtec2$0")],
+      [
+        v.parameterDeclaration(
+          [9, 20, 9, 36],
+          v.identifier([9, 20, 9, 28], "currency", "currency$1cte50r1xtec2$0"),
+        ),
+      ],
       v.block(
         [9, 41, 14, 2],
         [

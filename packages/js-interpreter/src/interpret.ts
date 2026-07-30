@@ -400,7 +400,7 @@ function evaluateExpr(
         return (...args: Value[]) => {
           const frame: Scope = { parent: env, bindings: new Map() };
           params.forEach((param, index) => {
-            frame.bindings.set(param, args[index]);
+            frame.bindings.set(param[NodeField.name], args[index]);
           });
           return evaluateExpr(
             bundle,
@@ -791,7 +791,10 @@ function evaluateNode(
         // `undefined` never arises (an omitted optional parameter reads
         // as null).
         (node[NodeField.parameters] ?? []).forEach((param, index) => {
-          frame.bindings.set(param, index < args.length ? args[index] : null);
+          frame.bindings.set(
+            param[NodeField.name],
+            index < args.length ? args[index] : null,
+          );
         });
         const body = node[NodeField.body];
         if (isNode(body) && body["#"] === NodeKind.Block) {

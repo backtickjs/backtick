@@ -226,6 +226,7 @@ export const NodeKind = {
   ContinueStatement: 1016,
   ElementAccessExpression: 1017,
   CatchClause: 1018,
+  Parameter: 1019,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -298,7 +299,7 @@ export type BundleApply = BundleApplyTree | BundleApplyFunction;
 // against the enclosing thunk parameters, exactly like a body identifier.
 export interface BundleThunk {
   "#": typeof NodeKind.Thunk;
-  [NodeField.parameters]?: string[];
+  [NodeField.parameters]?: BundleParameterNode[];
   [NodeField.expression]: BundleExpr;
 }
 
@@ -516,7 +517,7 @@ export interface BundleConditionalExpressionNode {
 // optional parameter reads as null.
 export interface BundleArrowFunctionNode {
   "#": typeof NodeKind.ArrowFunction;
-  [NodeField.parameters]?: string[];
+  [NodeField.parameters]?: BundleParameterNode[];
   [NodeField.body]: BundleBody;
 }
 
@@ -615,4 +616,13 @@ export interface BundleCatchClauseNode {
   "#": typeof NodeKind.CatchClause;
   [NodeField.variableDeclaration]: string | null;
   [NodeField.block]: BundleBlockNode;
+}
+
+// A parameter, as `ts.ParameterDeclaration` is — the kind TypeScript calls
+// `Parameter`. It carries the name it binds and nothing else: a default, a
+// type, a rest token and modifiers are each rejected by the compiler, so there
+// is nothing left for the node to say.
+export interface BundleParameterNode {
+  "#": typeof NodeKind.Parameter;
+  [NodeField.name]: string;
 }

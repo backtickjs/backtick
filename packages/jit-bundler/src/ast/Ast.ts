@@ -69,7 +69,11 @@ export type AstScriptBody = AstScriptExpression | AstScriptBlock;
 // spans the grammar, apart from the one clause that is neither a statement nor
 // an expression. Every script node carries the source location it was parsed
 // from.
-export type AstScriptNode = AstScriptStatement | AstScriptCatchClause;
+export type AstScriptNode =
+  | AstScriptStatement
+  | AstScriptCatchClause
+  | AstScriptParameterDeclaration
+  | AstScriptPropertyAssignment;
 
 export interface AstScript {
   readonly kind: "AstScript";
@@ -90,7 +94,7 @@ export interface AstScriptArrayLiteralExpression {
 export interface AstScriptArrowFunction {
   readonly kind: "AstScriptArrowFunction";
   readonly loc: SourceLocation;
-  readonly parameters: readonly AstScriptIdentifier[];
+  readonly parameters: readonly AstScriptParameterDeclaration[];
   readonly body: AstScriptBody;
 }
 
@@ -205,7 +209,7 @@ export interface AstScriptNumericLiteral {
 export interface AstScriptObjectLiteralExpression {
   readonly kind: "AstScriptObjectLiteralExpression";
   readonly loc: SourceLocation;
-  readonly properties: Readonly<Record<string, AstScriptExpression>>;
+  readonly properties: readonly AstScriptPropertyAssignment[];
 }
 
 export interface AstScriptPropertyAccessExpression {
@@ -264,6 +268,23 @@ export interface AstScriptCatchClause {
   readonly loc: SourceLocation;
   readonly variableDeclaration: AstScriptIdentifier | null;
   readonly block: AstScriptBlock;
+}
+
+// A parameter is the name it binds: TypeScript's `dotDotDotToken`,
+// `questionToken`, `type` and `initializer` are each rejected here.
+export interface AstScriptParameterDeclaration {
+  readonly kind: "AstScriptParameterDeclaration";
+  readonly loc: SourceLocation;
+  readonly name: AstScriptIdentifier;
+}
+
+// One `a: 4` of an object literal. A key is always a plain name here, so
+// `name` is that name rather than the `PropertyName` node TypeScript holds.
+export interface AstScriptPropertyAssignment {
+  readonly kind: "AstScriptPropertyAssignment";
+  readonly loc: SourceLocation;
+  readonly name: string;
+  readonly initializer: AstScriptExpression;
 }
 
 export interface AstScriptVariableDeclaration {

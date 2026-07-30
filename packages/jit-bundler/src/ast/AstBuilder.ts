@@ -25,7 +25,9 @@ import type {
   AstScriptNullLiteral,
   AstScriptNumericLiteral,
   AstScriptObjectLiteralExpression,
+  AstScriptParameterDeclaration,
   AstScriptPropertyAccessExpression,
+  AstScriptPropertyAssignment,
   AstScriptReturnStatement,
   AstScriptSplice,
   AstScriptStatement,
@@ -242,9 +244,17 @@ export class AstBuilder implements Visitor<AstScriptNode> {
 
   objectLiteralExpression(
     loc: SourceLocation,
-    properties: { [name: string]: AstScriptExpression },
+    properties: AstScriptPropertyAssignment[],
   ): AstScriptObjectLiteralExpression {
     return { kind: "AstScriptObjectLiteralExpression", loc, properties };
+  }
+
+  propertyAssignment(
+    loc: SourceLocation,
+    name: string,
+    initializer: AstScriptExpression,
+  ): AstScriptPropertyAssignment {
+    return { kind: "AstScriptPropertyAssignment", loc, name, initializer };
   }
 
   // `argumentsArray` rather than `arguments`, which is not a legal parameter
@@ -266,10 +276,17 @@ export class AstBuilder implements Visitor<AstScriptNode> {
 
   arrowFunction(
     loc: SourceLocation,
-    parameters: AstScriptIdentifier[],
+    parameters: AstScriptParameterDeclaration[],
     body: AstScriptBody,
   ): AstScriptArrowFunction {
     return { kind: "AstScriptArrowFunction", loc, parameters, body };
+  }
+
+  parameterDeclaration(
+    loc: SourceLocation,
+    name: AstScriptIdentifier,
+  ): AstScriptParameterDeclaration {
+    return { kind: "AstScriptParameterDeclaration", loc, name };
   }
 
   newExpression(

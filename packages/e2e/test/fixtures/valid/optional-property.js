@@ -16,7 +16,12 @@ const read = cs.create(
   (v) =>
     v.arrowFunction(
       [6, 17, 8, 2],
-      [v.identifier([6, 18, 6, 19], "o", "o$10vcjd80vhoob$0")],
+      [
+        v.parameterDeclaration(
+          [6, 18, 6, 62],
+          v.identifier([6, 18, 6, 19], "o", "o$10vcjd80vhoob$0"),
+        ),
+      ],
       v.block(
         [6, 67, 8, 2],
         [
@@ -66,40 +71,91 @@ export default cs.create(
     spliceParams: { $read: [] },
   },
   (v) =>
-    v.objectLiteralExpression([10, 20, 14, 2], {
-      present: v.callExpression(
-        [11, 12, 11, 50],
-        v.splice([11, 12, 11, 17], "$read"),
-        false,
-        [
-          v.objectLiteralExpression([11, 18, 11, 49], {
-            label: v.stringLiteral([11, 27, 11, 30], "a"),
-            inner: v.objectLiteralExpression([11, 39, 11, 47], {
-              z: v.numericLiteral([11, 44, 11, 45], 3),
-            }),
-          }),
-        ],
-      ),
-      partial: v.callExpression(
-        [12, 12, 12, 44],
-        v.splice([12, 12, 12, 17], "$read"),
-        false,
-        [
-          v.objectLiteralExpression([12, 18, 12, 43], {
-            label: v.stringLiteral([12, 27, 12, 30], "b"),
-            inner: v.objectLiteralExpression([12, 39, 12, 41], {}),
-          }),
-        ],
-      ),
-      omitted: v.callExpression(
-        [13, 12, 13, 33],
-        v.splice([13, 12, 13, 17], "$read"),
-        false,
-        [
-          v.objectLiteralExpression([13, 18, 13, 32], {
-            label: v.stringLiteral([13, 27, 13, 30], "c"),
-          }),
-        ],
-      ),
-    }),
+    v.objectLiteralExpression(
+      [10, 20, 14, 2],
+      [
+        v.propertyAssignment(
+          [11, 3, 11, 50],
+          "present",
+          v.callExpression(
+            [11, 12, 11, 50],
+            v.splice([11, 12, 11, 17], "$read"),
+            false,
+            [
+              v.objectLiteralExpression(
+                [11, 18, 11, 49],
+                [
+                  v.propertyAssignment(
+                    [11, 20, 11, 30],
+                    "label",
+                    v.stringLiteral([11, 27, 11, 30], "a"),
+                  ),
+                  v.propertyAssignment(
+                    [11, 32, 11, 47],
+                    "inner",
+                    v.objectLiteralExpression(
+                      [11, 39, 11, 47],
+                      [
+                        v.propertyAssignment(
+                          [11, 41, 11, 45],
+                          "z",
+                          v.numericLiteral([11, 44, 11, 45], 3),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        v.propertyAssignment(
+          [12, 3, 12, 44],
+          "partial",
+          v.callExpression(
+            [12, 12, 12, 44],
+            v.splice([12, 12, 12, 17], "$read"),
+            false,
+            [
+              v.objectLiteralExpression(
+                [12, 18, 12, 43],
+                [
+                  v.propertyAssignment(
+                    [12, 20, 12, 30],
+                    "label",
+                    v.stringLiteral([12, 27, 12, 30], "b"),
+                  ),
+                  v.propertyAssignment(
+                    [12, 32, 12, 41],
+                    "inner",
+                    v.objectLiteralExpression([12, 39, 12, 41], []),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        v.propertyAssignment(
+          [13, 3, 13, 33],
+          "omitted",
+          v.callExpression(
+            [13, 12, 13, 33],
+            v.splice([13, 12, 13, 17], "$read"),
+            false,
+            [
+              v.objectLiteralExpression(
+                [13, 18, 13, 32],
+                [
+                  v.propertyAssignment(
+                    [13, 20, 13, 30],
+                    "label",
+                    v.stringLiteral([13, 27, 13, 30], "c"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
 );

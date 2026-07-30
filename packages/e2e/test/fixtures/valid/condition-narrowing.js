@@ -36,8 +36,14 @@ const label = cs.create(
     v.arrowFunction(
       [12, 75, 23, 2],
       [
-        v.identifier([13, 3, 13, 7], "text", "text$3ciy5yb38f51h$0"),
-        v.identifier([14, 3, 14, 8], "upper", "upper$3ciy5yb38f51h$1"),
+        v.parameterDeclaration(
+          [13, 3, 13, 22],
+          v.identifier([13, 3, 13, 7], "text", "text$3ciy5yb38f51h$0"),
+        ),
+        v.parameterDeclaration(
+          [14, 3, 14, 17],
+          v.identifier([14, 3, 14, 8], "upper", "upper$3ciy5yb38f51h$1"),
+        ),
       ],
       v.block(
         [15, 6, 23, 2],
@@ -166,39 +172,58 @@ export default cs.create(
     spliceParams: { $label: [] },
   },
   (v) =>
-    v.objectLiteralExpression([25, 20, 30, 2], {
-      missing: v.callExpression(
-        [26, 12, 26, 30],
-        v.splice([26, 12, 26, 18], "$label"),
-        false,
-        [v.nullLiteral([26, 19, 26, 23]), v.trueLiteral([26, 25, 26, 29])],
-      ),
-      loud: v.callExpression(
-        [27, 9, 27, 28],
-        v.splice([27, 9, 27, 15], "$label"),
-        false,
-        [
-          v.stringLiteral([27, 16, 27, 21], "!hi"),
-          v.trueLiteral([27, 23, 27, 27]),
-        ],
-      ),
-      quiet: v.callExpression(
-        [28, 10, 28, 30],
-        v.splice([28, 10, 28, 16], "$label"),
-        false,
-        [
-          v.stringLiteral([28, 17, 28, 22], "!hi"),
-          v.falseLiteral([28, 24, 28, 29]),
-        ],
-      ),
-      plain: v.callExpression(
-        [29, 10, 29, 29],
-        v.splice([29, 10, 29, 16], "$label"),
-        false,
-        [
-          v.stringLiteral([29, 17, 29, 21], "zz"),
-          v.falseLiteral([29, 23, 29, 28]),
-        ],
-      ),
-    }),
+    v.objectLiteralExpression(
+      [25, 20, 30, 2],
+      [
+        v.propertyAssignment(
+          [26, 3, 26, 30],
+          "missing",
+          v.callExpression(
+            [26, 12, 26, 30],
+            v.splice([26, 12, 26, 18], "$label"),
+            false,
+            [v.nullLiteral([26, 19, 26, 23]), v.trueLiteral([26, 25, 26, 29])],
+          ),
+        ),
+        v.propertyAssignment(
+          [27, 3, 27, 28],
+          "loud",
+          v.callExpression(
+            [27, 9, 27, 28],
+            v.splice([27, 9, 27, 15], "$label"),
+            false,
+            [
+              v.stringLiteral([27, 16, 27, 21], "!hi"),
+              v.trueLiteral([27, 23, 27, 27]),
+            ],
+          ),
+        ),
+        v.propertyAssignment(
+          [28, 3, 28, 30],
+          "quiet",
+          v.callExpression(
+            [28, 10, 28, 30],
+            v.splice([28, 10, 28, 16], "$label"),
+            false,
+            [
+              v.stringLiteral([28, 17, 28, 22], "!hi"),
+              v.falseLiteral([28, 24, 28, 29]),
+            ],
+          ),
+        ),
+        v.propertyAssignment(
+          [29, 3, 29, 29],
+          "plain",
+          v.callExpression(
+            [29, 10, 29, 29],
+            v.splice([29, 10, 29, 16], "$label"),
+            false,
+            [
+              v.stringLiteral([29, 17, 29, 21], "zz"),
+              v.falseLiteral([29, 23, 29, 28]),
+            ],
+          ),
+        ),
+      ],
+    ),
 );

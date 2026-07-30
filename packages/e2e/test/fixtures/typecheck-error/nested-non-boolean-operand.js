@@ -20,7 +20,12 @@ export default cs.create(
   (v) =>
     v.arrowFunction(
       [10, 19, 16, 2],
-      [v.identifier([10, 20, 10, 25], "count", "count$1yqqpc9g2l4nh$0")],
+      [
+        v.parameterDeclaration(
+          [10, 20, 10, 33],
+          v.identifier([10, 20, 10, 25], "count", "count$1yqqpc9g2l4nh$0"),
+        ),
+      ],
       v.block(
         [10, 38, 16, 2],
         [
@@ -29,7 +34,12 @@ export default cs.create(
             v.identifier([11, 9, 11, 13], "keep", "keep$1yqqpc9g2l4nh$1"),
             v.arrowFunction(
               [11, 16, 11, 35],
-              [v.identifier([11, 17, 11, 19], "on", "on$1yqqpc9g2l4nh$2")],
+              [
+                v.parameterDeclaration(
+                  [11, 17, 11, 28],
+                  v.identifier([11, 17, 11, 19], "on", "on$1yqqpc9g2l4nh$2"),
+                ),
+              ],
               v.identifier([11, 33, 11, 35], "on", "on$1yqqpc9g2l4nh$2"),
             ),
             "const",

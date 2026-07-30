@@ -15,8 +15,19 @@ export default cs.create(
     spliceParams: { $count: [], $0splice0: [] },
   },
   (v) =>
-    v.objectLiteralExpression([8, 20, 8, 48], {
-      a: v.splice([8, 25, 8, 31], "$count"),
-      b: v.splice([8, 36, 8, 46], "$0splice0"),
-    }),
+    v.objectLiteralExpression(
+      [8, 20, 8, 48],
+      [
+        v.propertyAssignment(
+          [8, 22, 8, 31],
+          "a",
+          v.splice([8, 25, 8, 31], "$count"),
+        ),
+        v.propertyAssignment(
+          [8, 33, 8, 46],
+          "b",
+          v.splice([8, 36, 8, 46], "$0splice0"),
+        ),
+      ],
+    ),
 );

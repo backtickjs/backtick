@@ -26,8 +26,19 @@ export default cs.create(
     spliceParams: { $leaf: [] },
   },
   (v) =>
-    v.objectLiteralExpression([7, 20, 7, 42], {
-      a: v.splice([7, 25, 7, 30], "$leaf"),
-      b: v.splice([7, 35, 7, 40], "$leaf"),
-    }),
+    v.objectLiteralExpression(
+      [7, 20, 7, 42],
+      [
+        v.propertyAssignment(
+          [7, 22, 7, 30],
+          "a",
+          v.splice([7, 25, 7, 30], "$leaf"),
+        ),
+        v.propertyAssignment(
+          [7, 32, 7, 40],
+          "b",
+          v.splice([7, 35, 7, 40], "$leaf"),
+        ),
+      ],
+    ),
 );

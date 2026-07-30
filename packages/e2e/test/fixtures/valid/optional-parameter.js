@@ -15,7 +15,12 @@ const greet = cs.create(
   (v) =>
     v.arrowFunction(
       [5, 18, 7, 2],
-      [v.identifier([5, 19, 5, 23], "name", "name$hlti23avj5mo$0")],
+      [
+        v.parameterDeclaration(
+          [5, 19, 5, 32],
+          v.identifier([5, 19, 5, 23], "name", "name$hlti23avj5mo$0"),
+        ),
+      ],
       v.block(
         [5, 37, 7, 2],
         [
@@ -70,7 +75,12 @@ const call = cs.create(
   (v) =>
     v.arrowFunction(
       [12, 17, 14, 2],
-      [v.identifier([12, 18, 12, 20], "cb", "cb$hlti23avj5mo$1")],
+      [
+        v.parameterDeclaration(
+          [12, 18, 12, 35],
+          v.identifier([12, 18, 12, 20], "cb", "cb$hlti23avj5mo$1"),
+        ),
+      ],
       v.block(
         [12, 40, 14, 2],
         [
@@ -104,30 +114,49 @@ export default cs.create(
     spliceParams: { $greet: [], $call: [], $double: [] },
   },
   (v) =>
-    v.objectLiteralExpression([16, 20, 21, 2], {
-      named: v.callExpression(
-        [17, 10, 17, 22],
-        v.splice([17, 10, 17, 16], "$greet"),
-        false,
-        [v.stringLiteral([17, 17, 17, 21], "hi")],
-      ),
-      explicit: v.callExpression(
-        [18, 13, 18, 25],
-        v.splice([18, 13, 18, 19], "$greet"),
-        false,
-        [v.nullLiteral([18, 20, 18, 24])],
-      ),
-      supplied: v.callExpression(
-        [19, 13, 19, 27],
-        v.splice([19, 13, 19, 18], "$call"),
-        false,
-        [v.splice([19, 19, 19, 26], "$double")],
-      ),
-      fallback: v.callExpression(
-        [20, 13, 20, 24],
-        v.splice([20, 13, 20, 18], "$call"),
-        false,
-        [v.nullLiteral([20, 19, 20, 23])],
-      ),
-    }),
+    v.objectLiteralExpression(
+      [16, 20, 21, 2],
+      [
+        v.propertyAssignment(
+          [17, 3, 17, 22],
+          "named",
+          v.callExpression(
+            [17, 10, 17, 22],
+            v.splice([17, 10, 17, 16], "$greet"),
+            false,
+            [v.stringLiteral([17, 17, 17, 21], "hi")],
+          ),
+        ),
+        v.propertyAssignment(
+          [18, 3, 18, 25],
+          "explicit",
+          v.callExpression(
+            [18, 13, 18, 25],
+            v.splice([18, 13, 18, 19], "$greet"),
+            false,
+            [v.nullLiteral([18, 20, 18, 24])],
+          ),
+        ),
+        v.propertyAssignment(
+          [19, 3, 19, 27],
+          "supplied",
+          v.callExpression(
+            [19, 13, 19, 27],
+            v.splice([19, 13, 19, 18], "$call"),
+            false,
+            [v.splice([19, 19, 19, 26], "$double")],
+          ),
+        ),
+        v.propertyAssignment(
+          [20, 3, 20, 24],
+          "fallback",
+          v.callExpression(
+            [20, 13, 20, 24],
+            v.splice([20, 13, 20, 18], "$call"),
+            false,
+            [v.nullLiteral([20, 19, 20, 23])],
+          ),
+        ),
+      ],
+    ),
 );

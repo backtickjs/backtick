@@ -73,7 +73,12 @@ export default cs.create(
           v.identifier([24, 9, 24, 13], "pick", "pick$22eb8gy7ghfko$0"),
           v.arrowFunction(
             [24, 16, 24, 37],
-            [v.identifier([24, 17, 24, 18], "c", "c$22eb8gy7ghfko$1")],
+            [
+              v.parameterDeclaration(
+                [24, 17, 24, 25],
+                v.identifier([24, 17, 24, 18], "c", "c$22eb8gy7ghfko$1"),
+              ),
+            ],
             v.binaryExpression(
               [24, 30, 24, 37],
               v.propertyAccessExpression(

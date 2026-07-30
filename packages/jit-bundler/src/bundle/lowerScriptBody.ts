@@ -11,8 +11,20 @@ import type {
   BundleBlockNode,
   BundleBody,
   BundleExpressionNode,
+  BundleParameterNode,
   BundleStatementNode,
 } from "./Bundle.js";
+
+// A parameter list as the wire carries it: one node per name. Shared with
+// `buildBundle`, which builds entries and thunks the same way.
+export function parameterNodes(
+  names: readonly string[],
+): BundleParameterNode[] {
+  return names.map((name) => ({
+    "#": NodeKind.Parameter,
+    [NodeField.name]: name,
+  }));
+}
 
 // Lowers a script to its wire `BundleBody`. The mapping mirrors the grammar —
 // expressions lower to expressions, statements to statements — with two places
@@ -169,11 +181,13 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return node.elements.map(e);
       case "AstScriptArrowFunction": {
         const params = node.parameters.map((param) =>
-          sourceName(param.bindingKey),
+          sourceName(param.name.bindingKey),
         );
         return {
           "#": NodeKind.ArrowFunction,
-          ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
+          ...(params.length === 0
+            ? {}
+            : { [NodeField.parameters]: parameterNodes(params) }),
           [NodeField.body]: buildBody(node.body),
         };
       }
@@ -248,13 +262,17 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return node.value;
       case "AstScriptObjectLiteralExpression": {
         // An object literal serializes as the plain object it spells, so `#` —
-        // the bundle's one reserved key — would read as a node.
-        if ("#" in node.properties) {
-          throw new Error("Can't bundle this object: the `#` key is reserved.");
-        }
+        // the bundle's one reserved key — would read as a node. Its property
+        // assignments are the source's shape, not the wire's: what ships is
+        // data, which is what lets a spliced object pass through untouched.
         const entries: { [key: string]: BundleExpressionNode } = {};
-        for (const [key, value] of Object.entries(node.properties)) {
-          entries[key] = e(value);
+        for (const property of node.properties) {
+          if (property.name === "#") {
+            throw new Error(
+              "Can't bundle this object: the `#` key is reserved.",
+            );
+          }
+          entries[property.name] = e(property.initializer);
         }
         return entries;
       }

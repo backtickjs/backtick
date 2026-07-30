@@ -48,6 +48,7 @@ export type {
   BundleIfStatementNode,
   BundleElementAccessExpressionNode,
   BundleNode,
+  BundleParameterNode,
   BundlePropertyAccessExpressionNode,
   BundleReturnStatementNode,
   BundleStatementNode,

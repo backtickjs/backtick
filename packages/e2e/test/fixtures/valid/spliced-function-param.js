@@ -42,7 +42,12 @@ export default cs.create(
           v.identifier([8, 9, 8, 14], "apply", "apply$22dvza3e0b85b$0"),
           v.arrowFunction(
             [8, 17, 8, 45],
-            [v.identifier([8, 18, 8, 19], "f", "f$22dvza3e0b85b$1")],
+            [
+              v.parameterDeclaration(
+                [8, 18, 8, 33],
+                v.identifier([8, 18, 8, 19], "f", "f$22dvza3e0b85b$1"),
+              ),
+            ],
             v.binaryExpression(
               [8, 38, 8, 45],
               v.callExpression(

@@ -92,7 +92,9 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         indent,
       )} : ${renderNode(node[NodeField.whenFalse], indent)}`;
     case NodeKind.ArrowFunction:
-      return `(${(node[NodeField.parameters] ?? []).join(", ")}) => ${renderBody(node[NodeField.body], indent)}`;
+      return `(${(node[NodeField.parameters] ?? [])
+        .map((param) => param[NodeField.name])
+        .join(", ")}) => ${renderBody(node[NodeField.body], indent)}`;
     case NodeKind.Block: {
       const statements = (node[NodeField.statements] ?? []).map(
         (statement) => `${inner}${renderStatement(statement, inner)}`,
@@ -203,7 +205,9 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       return `${treeLabel(expr[NodeField.label])}(${args.join(", ")})${key}`;
     }
     case NodeKind.Thunk: {
-      const params = expr[NodeField.parameters] ?? [];
+      const params = (expr[NodeField.parameters] ?? []).map(
+        (param) => param[NodeField.name],
+      );
       return `(${params.join(", ")}) => ${renderExpr(expr[NodeField.expression], indent)}`;
     }
     case NodeKind.Identifier:

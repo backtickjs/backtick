@@ -26,7 +26,7 @@ import type {
   TreeLabel,
 } from "./Bundle.js";
 import type { BundleOptions } from "../bundle.js";
-import { lowerScriptBody } from "./lowerScriptBody.js";
+import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 
 // What a tree expression renders against: the entry being materialized, and the
 // slot index of each capture it threads in. The two travel together because a
@@ -322,7 +322,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       const expansionBody = renderValue(expansion.body);
       expansionBodies.set(label, {
         "#": NodeKind.ArrowFunction,
-        ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
+        ...(params.length === 0
+          ? {}
+          : { [NodeField.parameters]: parameterNodes(params) }),
         [NodeField.body]: expansionBody,
       });
     }
@@ -343,7 +345,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     );
     const arrow = {
       "#": NodeKind.ArrowFunction,
-      ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
+      ...(params.length === 0
+        ? {}
+        : { [NodeField.parameters]: parameterNodes(params) }),
       [NodeField.body]: lowerScriptBody(script),
     };
     bodies.set(script, arrow);
@@ -510,7 +514,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if (params.length > 0) {
       return {
         "#": NodeKind.ArrowFunction,
-        ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
+        ...(params.length === 0
+          ? {}
+          : { [NodeField.parameters]: parameterNodes(params) }),
         [NodeField.body]: renderValue(value),
       };
     }
@@ -703,7 +709,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       const inner = new Set([...params, ...passed]);
       parts.push({
         "#": NodeKind.Thunk,
-        [NodeField.parameters]: passed.map(displayName),
+        [NodeField.parameters]: parameterNodes(passed.map(displayName)),
         [NodeField.expression]: renderExpr(arg, scope, inner),
       });
     });
@@ -784,7 +790,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       // frame, so a hole threading into the body resolves by name.
       return {
         "#": NodeKind.Thunk,
-        [NodeField.parameters]: [...value.params],
+        [NodeField.parameters]: parameterNodes(value.params),
         [NodeField.expression]: renderExpr(
           value.body,
           scope,

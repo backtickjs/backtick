@@ -1038,10 +1038,13 @@ function rewriteNodeImpl(
           loc(node),
           ts.factory.createArrayLiteralExpression(
             params.map((param) =>
-              call(ts, "v", "identifier", [
-                loc(param.name),
-                ts.factory.createStringLiteral(param.name.text),
-                ts.factory.createStringLiteral(bindingKey(state, param.name)),
+              call(ts, "v", "parameterDeclaration", [
+                loc(param.source),
+                call(ts, "v", "identifier", [
+                  loc(param.name),
+                  ts.factory.createStringLiteral(param.name.text),
+                  ts.factory.createStringLiteral(bindingKey(state, param.name)),
+                ]),
               ]),
             ),
             false,
@@ -1085,6 +1088,8 @@ function rewriteNodeImpl(
         state.mappings.set(name, property.name);
         return {
           name,
+          text: property.name.text,
+          source: property,
           value: rewriteNode(ts, state, property.initializer),
         };
       }
@@ -1108,12 +1113,13 @@ function rewriteNodeImpl(
         ),
         runtime: call(ts, "v", "objectLiteralExpression", [
           loc(node),
-          ts.factory.createObjectLiteralExpression(
+          ts.factory.createArrayLiteralExpression(
             properties.map((property) =>
-              ts.factory.createPropertyAssignment(
-                property.name,
+              call(ts, "v", "propertyAssignment", [
+                loc(property.source),
+                ts.factory.createStringLiteral(property.text),
                 property.value.runtime as ts.Expression,
-              ),
+              ]),
             ),
             false,
           ),

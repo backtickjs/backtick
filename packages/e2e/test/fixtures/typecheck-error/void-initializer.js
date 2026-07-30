@@ -113,7 +113,12 @@ const label = cs.create(
   (v) =>
     v.arrowFunction(
       [21, 18, 23, 2],
-      [v.identifier([21, 19, 21, 23], "text", "text$3hyzmfxyz75s4$3")],
+      [
+        v.parameterDeclaration(
+          [21, 19, 21, 31],
+          v.identifier([21, 19, 21, 23], "text", "text$3hyzmfxyz75s4$3"),
+        ),
+      ],
       v.block(
         [21, 36, 23, 2],
         [

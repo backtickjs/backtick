@@ -15,7 +15,12 @@ const orDash = cs.create(
   (v) =>
     v.arrowFunction(
       [5, 61, 12, 2],
-      [v.identifier([6, 3, 6, 8], "value", "value$2albtvza6nmmn$0")],
+      [
+        v.parameterDeclaration(
+          [6, 3, 6, 23],
+          v.identifier([6, 3, 6, 8], "value", "value$2albtvza6nmmn$0"),
+        ),
+      ],
       v.block(
         [7, 6, 12, 2],
         [
@@ -58,19 +63,34 @@ export default cs.create(
     spliceParams: { $orDash: [] },
   },
   (v) =>
-    v.objectLiteralExpression([14, 20, 18, 2], {
-      missing: v.callExpression(
-        [15, 12, 15, 25],
-        v.splice([15, 12, 15, 19], "$orDash"),
-        false,
-        [v.nullLiteral([15, 20, 15, 24])],
-      ),
-      present: v.callExpression(
-        [16, 12, 16, 25],
-        v.splice([16, 12, 16, 19], "$orDash"),
-        false,
-        [v.stringLiteral([16, 20, 16, 24], "hi")],
-      ),
-      bare: v.nullLiteral([17, 9, 17, 13]),
-    }),
+    v.objectLiteralExpression(
+      [14, 20, 18, 2],
+      [
+        v.propertyAssignment(
+          [15, 3, 15, 25],
+          "missing",
+          v.callExpression(
+            [15, 12, 15, 25],
+            v.splice([15, 12, 15, 19], "$orDash"),
+            false,
+            [v.nullLiteral([15, 20, 15, 24])],
+          ),
+        ),
+        v.propertyAssignment(
+          [16, 3, 16, 25],
+          "present",
+          v.callExpression(
+            [16, 12, 16, 25],
+            v.splice([16, 12, 16, 19], "$orDash"),
+            false,
+            [v.stringLiteral([16, 20, 16, 24], "hi")],
+          ),
+        ),
+        v.propertyAssignment(
+          [17, 3, 17, 13],
+          "bare",
+          v.nullLiteral([17, 9, 17, 13]),
+        ),
+      ],
+    ),
 );

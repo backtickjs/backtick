@@ -45,7 +45,12 @@ const onTap = cs.create(
   (v) =>
     v.arrowFunction(
       [10, 48, 12, 2],
-      [v.identifier([10, 49, 10, 51], "id", "id$gyja921xjk87$1")],
+      [
+        v.parameterDeclaration(
+          [10, 49, 10, 59],
+          v.identifier([10, 49, 10, 51], "id", "id$gyja921xjk87$1"),
+        ),
+      ],
       v.block([10, 64, 12, 2], [v.splice([11, 3, 11, 8], "$beep")]),
     ),
 );
@@ -67,10 +72,21 @@ export default cs.create(
         v.variableDeclaration(
           [15, 3, 18, 5],
           v.identifier([15, 9, 15, 17], "handlers", "handlers$gyja921xjk87$2"),
-          v.objectLiteralExpression([15, 20, 18, 4], {
-            tap: v.splice([16, 10, 16, 16], "$onTap"),
-            hold: v.splice([17, 11, 17, 17], "$onTap"),
-          }),
+          v.objectLiteralExpression(
+            [15, 20, 18, 4],
+            [
+              v.propertyAssignment(
+                [16, 5, 16, 16],
+                "tap",
+                v.splice([16, 10, 16, 16], "$onTap"),
+              ),
+              v.propertyAssignment(
+                [17, 5, 17, 17],
+                "hold",
+                v.splice([17, 11, 17, 17], "$onTap"),
+              ),
+            ],
+          ),
           "const",
         ),
         v.returnStatement(

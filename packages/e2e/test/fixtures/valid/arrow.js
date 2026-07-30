@@ -25,8 +25,14 @@ export default cs.create(
           v.arrowFunction(
             [5, 10, 5, 56],
             [
-              v.identifier([5, 11, 5, 14], "one", "one$357jk2g9zktff$1"),
-              v.identifier([5, 24, 5, 27], "two", "two$357jk2g9zktff$2"),
+              v.parameterDeclaration(
+                [5, 11, 5, 22],
+                v.identifier([5, 11, 5, 14], "one", "one$357jk2g9zktff$1"),
+              ),
+              v.parameterDeclaration(
+                [5, 24, 5, 35],
+                v.identifier([5, 24, 5, 27], "two", "two$357jk2g9zktff$2"),
+              ),
             ],
             v.binaryExpression(
               [5, 40, 5, 56],

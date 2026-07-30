@@ -17,8 +17,14 @@ export default cs.create(
     v.arrowFunction(
       [6, 19, 8, 2],
       [
-        v.identifier([6, 20, 6, 25], "count", "count$3kpojr67liy8x$0"),
-        v.identifier([6, 35, 6, 39], "flag", "flag$3kpojr67liy8x$1"),
+        v.parameterDeclaration(
+          [6, 20, 6, 33],
+          v.identifier([6, 20, 6, 25], "count", "count$3kpojr67liy8x$0"),
+        ),
+        v.parameterDeclaration(
+          [6, 35, 6, 48],
+          v.identifier([6, 35, 6, 39], "flag", "flag$3kpojr67liy8x$1"),
+        ),
       ],
       v.block(
         [6, 53, 8, 2],

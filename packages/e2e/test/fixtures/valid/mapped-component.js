@@ -63,7 +63,12 @@ export default _jsx(View, {
         [
           v.arrowFunction(
             [20, 23, 20, 68],
-            [v.identifier([20, 24, 20, 27], "row", "row$3qcr5x2z3u56v$0")],
+            [
+              v.parameterDeclaration(
+                [20, 24, 20, 27],
+                v.identifier([20, 24, 20, 27], "row", "row$3qcr5x2z3u56v$0"),
+              ),
+            ],
             v.splice([20, 32, 20, 68], "$0splice0"),
           ),
         ],

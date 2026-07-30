@@ -15,7 +15,12 @@ const greet = cs.create(
   (v) =>
     v.arrowFunction(
       [5, 18, 7, 2],
-      [v.identifier([5, 19, 5, 23], "name", "name$1gqqin78x7yev$0")],
+      [
+        v.parameterDeclaration(
+          [5, 19, 5, 32],
+          v.identifier([5, 19, 5, 23], "name", "name$1gqqin78x7yev$0"),
+        ),
+      ],
       v.block(
         [5, 37, 7, 2],
         [

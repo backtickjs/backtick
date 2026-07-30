@@ -37,155 +37,220 @@ export default cs.create(
         ),
         v.returnStatement(
           [8, 3, 17, 5],
-          v.objectLiteralExpression([8, 10, 17, 4], {
-            count: v.propertyAccessExpression(
-              [9, 12, 9, 24],
-              v.identifier([9, 12, 9, 17], "coins", "coins$3kt9mhwly650i$0"),
-              false,
-              "length",
-            ),
-            all: v.callExpression(
-              [10, 10, 10, 30],
-              v.propertyAccessExpression(
-                [10, 10, 10, 22],
-                v.identifier(
-                  [10, 10, 10, 15],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
+          v.objectLiteralExpression(
+            [8, 10, 17, 4],
+            [
+              v.propertyAssignment(
+                [9, 5, 9, 24],
+                "count",
+                v.propertyAccessExpression(
+                  [9, 12, 9, 24],
+                  v.identifier(
+                    [9, 12, 9, 17],
+                    "coins",
+                    "coins$3kt9mhwly650i$0",
+                  ),
+                  false,
+                  "length",
                 ),
-                false,
-                "concat",
               ),
-              false,
-              [
-                v.arrayLiteralExpression(
-                  [10, 23, 10, 29],
-                  [
+              v.propertyAssignment(
+                [10, 5, 10, 30],
+                "all",
+                v.callExpression(
+                  [10, 10, 10, 30],
+                  v.propertyAccessExpression(
+                    [10, 10, 10, 22],
                     v.identifier(
-                      [10, 24, 10, 28],
-                      "four",
-                      "four$3kt9mhwly650i$1",
+                      [10, 10, 10, 15],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "concat",
+                  ),
+                  false,
+                  [
+                    v.arrayLiteralExpression(
+                      [10, 23, 10, 29],
+                      [
+                        v.identifier(
+                          [10, 24, 10, 28],
+                          "four",
+                          "four$3kt9mhwly650i$1",
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-            part: v.callExpression(
-              [11, 11, 11, 28],
-              v.propertyAccessExpression(
-                [11, 11, 11, 22],
-                v.identifier(
-                  [11, 11, 11, 16],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
-                ),
-                false,
-                "slice",
               ),
-              false,
-              [
-                v.numericLiteral([11, 23, 11, 24], 0),
-                v.numericLiteral([11, 26, 11, 27], 2),
-              ],
-            ),
-            where: v.callExpression(
-              [12, 12, 12, 28],
-              v.propertyAccessExpression(
-                [12, 12, 12, 25],
-                v.identifier(
-                  [12, 12, 12, 17],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
-                ),
-                false,
-                "indexOf",
-              ),
-              false,
-              [v.numericLiteral([12, 26, 12, 27], 2)],
-            ),
-            has: v.callExpression(
-              [13, 10, 13, 27],
-              v.propertyAccessExpression(
-                [13, 10, 13, 24],
-                v.identifier(
-                  [13, 10, 13, 15],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
-                ),
-                false,
-                "includes",
-              ),
-              false,
-              [v.numericLiteral([13, 25, 13, 26], 3)],
-            ),
-            text: v.callExpression(
-              [14, 11, 14, 26],
-              v.propertyAccessExpression(
-                [14, 11, 14, 21],
-                v.identifier(
-                  [14, 11, 14, 16],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
-                ),
-                false,
-                "join",
-              ),
-              false,
-              [v.stringLiteral([14, 22, 14, 25], "-")],
-            ),
-            doubled: v.callExpression(
-              [15, 14, 15, 37],
-              v.propertyAccessExpression(
-                [15, 14, 15, 23],
-                v.identifier(
-                  [15, 14, 15, 19],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
-                ),
-                false,
-                "map",
-              ),
-              false,
-              [
-                v.arrowFunction(
-                  [15, 24, 15, 36],
-                  [v.identifier([15, 25, 15, 26], "n", "n$3kt9mhwly650i$2")],
-                  v.binaryExpression(
-                    [15, 31, 15, 36],
-                    v.identifier([15, 31, 15, 32], "n", "n$3kt9mhwly650i$2"),
-                    "*",
-                    v.numericLiteral([15, 35, 15, 36], 2),
+              v.propertyAssignment(
+                [11, 5, 11, 28],
+                "part",
+                v.callExpression(
+                  [11, 11, 11, 28],
+                  v.propertyAccessExpression(
+                    [11, 11, 11, 22],
+                    v.identifier(
+                      [11, 11, 11, 16],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "slice",
                   ),
+                  false,
+                  [
+                    v.numericLiteral([11, 23, 11, 24], 0),
+                    v.numericLiteral([11, 26, 11, 27], 2),
+                  ],
                 ),
-              ],
-            ),
-            small: v.callExpression(
-              [16, 12, 16, 38],
-              v.propertyAccessExpression(
-                [16, 12, 16, 24],
-                v.identifier(
-                  [16, 12, 16, 17],
-                  "coins",
-                  "coins$3kt9mhwly650i$0",
-                ),
-                false,
-                "filter",
               ),
-              false,
-              [
-                v.arrowFunction(
-                  [16, 25, 16, 37],
-                  [v.identifier([16, 26, 16, 27], "n", "n$3kt9mhwly650i$3")],
-                  v.binaryExpression(
-                    [16, 32, 16, 37],
-                    v.identifier([16, 32, 16, 33], "n", "n$3kt9mhwly650i$3"),
-                    "<",
-                    v.numericLiteral([16, 36, 16, 37], 3),
+              v.propertyAssignment(
+                [12, 5, 12, 28],
+                "where",
+                v.callExpression(
+                  [12, 12, 12, 28],
+                  v.propertyAccessExpression(
+                    [12, 12, 12, 25],
+                    v.identifier(
+                      [12, 12, 12, 17],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "indexOf",
                   ),
+                  false,
+                  [v.numericLiteral([12, 26, 12, 27], 2)],
                 ),
-              ],
-            ),
-          }),
+              ),
+              v.propertyAssignment(
+                [13, 5, 13, 27],
+                "has",
+                v.callExpression(
+                  [13, 10, 13, 27],
+                  v.propertyAccessExpression(
+                    [13, 10, 13, 24],
+                    v.identifier(
+                      [13, 10, 13, 15],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "includes",
+                  ),
+                  false,
+                  [v.numericLiteral([13, 25, 13, 26], 3)],
+                ),
+              ),
+              v.propertyAssignment(
+                [14, 5, 14, 26],
+                "text",
+                v.callExpression(
+                  [14, 11, 14, 26],
+                  v.propertyAccessExpression(
+                    [14, 11, 14, 21],
+                    v.identifier(
+                      [14, 11, 14, 16],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "join",
+                  ),
+                  false,
+                  [v.stringLiteral([14, 22, 14, 25], "-")],
+                ),
+              ),
+              v.propertyAssignment(
+                [15, 5, 15, 37],
+                "doubled",
+                v.callExpression(
+                  [15, 14, 15, 37],
+                  v.propertyAccessExpression(
+                    [15, 14, 15, 23],
+                    v.identifier(
+                      [15, 14, 15, 19],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "map",
+                  ),
+                  false,
+                  [
+                    v.arrowFunction(
+                      [15, 24, 15, 36],
+                      [
+                        v.parameterDeclaration(
+                          [15, 25, 15, 26],
+                          v.identifier(
+                            [15, 25, 15, 26],
+                            "n",
+                            "n$3kt9mhwly650i$2",
+                          ),
+                        ),
+                      ],
+                      v.binaryExpression(
+                        [15, 31, 15, 36],
+                        v.identifier(
+                          [15, 31, 15, 32],
+                          "n",
+                          "n$3kt9mhwly650i$2",
+                        ),
+                        "*",
+                        v.numericLiteral([15, 35, 15, 36], 2),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              v.propertyAssignment(
+                [16, 5, 16, 38],
+                "small",
+                v.callExpression(
+                  [16, 12, 16, 38],
+                  v.propertyAccessExpression(
+                    [16, 12, 16, 24],
+                    v.identifier(
+                      [16, 12, 16, 17],
+                      "coins",
+                      "coins$3kt9mhwly650i$0",
+                    ),
+                    false,
+                    "filter",
+                  ),
+                  false,
+                  [
+                    v.arrowFunction(
+                      [16, 25, 16, 37],
+                      [
+                        v.parameterDeclaration(
+                          [16, 26, 16, 27],
+                          v.identifier(
+                            [16, 26, 16, 27],
+                            "n",
+                            "n$3kt9mhwly650i$3",
+                          ),
+                        ),
+                      ],
+                      v.binaryExpression(
+                        [16, 32, 16, 37],
+                        v.identifier(
+                          [16, 32, 16, 33],
+                          "n",
+                          "n$3kt9mhwly650i$3",
+                        ),
+                        "<",
+                        v.numericLiteral([16, 36, 16, 37], 3),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     ),

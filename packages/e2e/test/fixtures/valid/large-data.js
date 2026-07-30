@@ -235,10 +235,13 @@ export default _jsx(View, {
                       v.arrowFunction(
                         [34, 15, 39, 19],
                         [
-                          v.identifier(
+                          v.parameterDeclaration(
                             [34, 16, 34, 20],
-                            "item",
-                            "item$kpf5b5091dr1$1",
+                            v.identifier(
+                              [34, 16, 34, 20],
+                              "item",
+                              "item$kpf5b5091dr1$1",
+                            ),
                           ),
                         ],
                         v.splice([35, 17, 39, 19], "$0splice0"),
@@ -315,7 +318,12 @@ export default _jsx(View, {
         [
           v.arrowFunction(
             [23, 7, 43, 11],
-            [v.identifier([23, 8, 23, 13], "order", "order$kpf5b5091dr1$0")],
+            [
+              v.parameterDeclaration(
+                [23, 8, 23, 13],
+                v.identifier([23, 8, 23, 13], "order", "order$kpf5b5091dr1$0"),
+              ),
+            ],
             v.splice([24, 9, 43, 11], "$0splice0"),
           ),
         ],

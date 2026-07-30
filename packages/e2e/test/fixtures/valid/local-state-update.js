@@ -63,10 +63,13 @@ async function Stepper() {
                   v.arrowFunction(
                     [12, 22, 12, 54],
                     [
-                      v.identifier(
-                        [12, 23, 12, 30],
-                        "current",
-                        "current$1rqun2dr71nzq$0",
+                      v.parameterDeclaration(
+                        [12, 23, 12, 38],
+                        v.identifier(
+                          [12, 23, 12, 30],
+                          "current",
+                          "current$1rqun2dr71nzq$0",
+                        ),
                       ),
                     ],
                     v.binaryExpression(
