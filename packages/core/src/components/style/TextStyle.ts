@@ -19,7 +19,7 @@ type TextStyleProps = ViewStyleProps & {
     | "800"
     | "900"
     | number;
-  fontVariant: readonly (
+  fontVariant: (
     | "small-caps"
     | "oldstyle-nums"
     | "lining-nums"

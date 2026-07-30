@@ -36,7 +36,7 @@ export type ViewStyleProps = LayoutStyleProps & {
   elevation: number;
 
   backfaceVisibility: "visible" | "hidden";
-  transform: readonly Transform[];
+  transform: Transform[];
 };
 
 export type ViewStyle = Styled<ViewStyleProps>;
