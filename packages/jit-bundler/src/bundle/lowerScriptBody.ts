@@ -1,9 +1,9 @@
 import { SyntaxKind } from "@backtickjs/cs-runtime";
 import type {
-  AstScriptBlock,
-  AstScriptBody,
-  AstScriptExpression,
-  AstScriptStatement,
+  ClientScriptBlock,
+  ClientScriptBody,
+  ClientScriptExpression,
+  ClientScriptStatement,
 } from "@backtickjs/cs-runtime";
 import type { IrScriptEntry } from "../ir/Ir.js";
 import { sourceName } from "./bindingKey.js";
@@ -85,10 +85,10 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     };
   };
 
-  const buildBody = (node: AstScriptBody): BundleBody =>
+  const buildBody = (node: ClientScriptBody): BundleBody =>
     node.kind === SyntaxKind.Block ? buildBlock(node) : buildExpression(node);
 
-  function buildBlock(node: AstScriptBlock): BundleBlockNode {
+  function buildBlock(node: ClientScriptBlock): BundleBlockNode {
     const statements = node.statements.map((statement) =>
       buildStatement(statement),
     );
@@ -101,7 +101,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     };
   }
 
-  function buildStatement(node: AstScriptStatement): BundleStatementNode {
+  function buildStatement(node: ClientScriptStatement): BundleStatementNode {
     switch (node.kind) {
       case SyntaxKind.Block:
         return buildBlock(node);
@@ -174,8 +174,8 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     }
   }
 
-  function buildExpression(node: AstScriptExpression): BundleExpressionNode {
-    const e = (child: AstScriptExpression): BundleExpressionNode =>
+  function buildExpression(node: ClientScriptExpression): BundleExpressionNode {
+    const e = (child: ClientScriptExpression): BundleExpressionNode =>
       buildExpression(child);
     switch (node.kind) {
       case SyntaxKind.ArrayLiteralExpression:

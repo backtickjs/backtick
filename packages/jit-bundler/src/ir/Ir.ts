@@ -1,5 +1,5 @@
 import type { SourceLocation } from "@backtickjs/cs-runtime";
-import type { AstScriptBody } from "@backtickjs/cs-runtime";
+import type { ClientScriptBody } from "@backtickjs/cs-runtime";
 
 export interface Ir {
   scripts: IrScriptEntry[];
@@ -26,7 +26,7 @@ export interface IrScriptEntry {
   readonly splices: readonly string[];
   readonly captures: readonly string[];
   readonly spliceParams: Readonly<Record<string, readonly string[]>>;
-  readonly body: AstScriptBody;
+  readonly body: ClientScriptBody;
 }
 
 // A tree-table entry. A wrapper rather than the element itself so

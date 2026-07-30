@@ -1,14 +1,14 @@
 import type { ClientScript } from "@backtickjs/cs-runtime";
 import { locKey } from "../locKey.js";
 import type { Ast, AstScript } from "./Ast.js";
-import type { AstScriptBody } from "@backtickjs/cs-runtime";
+import type { ClientScriptBody } from "@backtickjs/cs-runtime";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The parsed body for each distinct source location. Two client objects at
 // the same location — a script inside a host function, instantiated with
 // different splices at different call sites — share one parse but still get
 // their own node (their splices differ).
-const parsedByLoc = new Map<string, AstScriptBody>();
+const parsedByLoc = new Map<string, ClientScriptBody>();
 
 // The lowered node for each client object, keyed by identity. A script reached
 // through several splice paths (a diamond) is the same object each time, so it

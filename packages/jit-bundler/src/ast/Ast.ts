@@ -1,4 +1,4 @@
-import type { AstScriptBody, SourceLocation } from "@backtickjs/cs-runtime";
+import type { ClientScriptBody, SourceLocation } from "@backtickjs/cs-runtime";
 
 // The value grammar: what a splice becomes. A script's own syntax is the other
 // half of this AST and lives in `cs-runtime`, since that is where the compiler's
@@ -38,7 +38,7 @@ export interface AstScript {
   readonly splices: Readonly<Record<string, Ast>>;
   readonly captures: readonly string[];
   readonly spliceParams: Readonly<Record<string, readonly string[]>>;
-  readonly expression: AstScriptBody;
+  readonly expression: ClientScriptBody;
 }
 
 export interface AstArray {

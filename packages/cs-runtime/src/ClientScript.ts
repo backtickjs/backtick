@@ -1,7 +1,7 @@
 import { assertVersion } from "./assertVersion.js";
 import type { SourceLocation } from "./SourceLocation.js";
 import type { Spliceable } from "./Spliceable.js";
-import type { AstScriptBody } from "./Ast.js";
+import type { ClientScriptBody } from "./Ast.js";
 
 export interface Metadata {
   // the version of the toolchain that emitted this script
@@ -13,7 +13,7 @@ export interface Metadata {
   // the compiler's classification: a value script returns on every path;
   // an action completes without returning
   kind: "value" | "action";
-  // spliced host values, under the keys the body uses (see `AstScriptSplice`)
+  // spliced host values, under the keys the body uses (see `ClientScriptSplice`)
   splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope
   captures: string[];
@@ -30,7 +30,7 @@ export interface ClientScript {
   // The script's syntax, behind a thunk: one `cs` in a host function makes a
   // `ClientScript` per call, and the bundler parses one per source location, so
   // the nodes are built when they are first read rather than at every call.
-  readonly body: () => AstScriptBody;
+  readonly body: () => ClientScriptBody;
 }
 
 export function isClientScript(value: unknown): value is ClientScript {
@@ -45,7 +45,7 @@ export function isClientScript(value: unknown): value is ClientScript {
 export function create(
   loc: SourceLocation,
   metadata: Metadata,
-  body: () => AstScriptBody,
+  body: () => ClientScriptBody,
 ): ClientScript {
   assertVersion(metadata.version);
   return {

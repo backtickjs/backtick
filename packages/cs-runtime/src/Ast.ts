@@ -5,20 +5,6 @@ import type { SyntaxKind } from "./SyntaxKind.js";
 // compiles to a thunk returning one of these, so this is the contract between
 // what the compiler emits and what the bundler reads — the emitted code is
 // checked against it in the project it was compiled in.
-//
-// Every node is named for the TypeScript node it mirrors — `ts.IfStatement` is
-// `AstScriptIfStatement` — and its fields are TypeScript's, in TypeScript's
-// order, so a reader who knows that AST knows this one. Anything this language
-// adds comes last: an identifier's `bindingKey`, a declaration's `keyword`.
-// Only `AstScriptSplice` has no counterpart, having no counterpart in
-// JavaScript either.
-//
-// What TypeScript has and this hasn't: the type positions (`typeArguments`,
-// `type`, `exclamationToken`, `modifiers`), the punctuation a parser keeps for
-// formatting (`questionToken`, `colonToken`, `equalsGreaterThanToken`), and the
-// slots for syntax this language rejects — a `try` has no `finallyBlock`, a
-// jump takes no `label`, an element access takes no `questionDotToken`. A
-// literal carries its value rather than the source text TypeScript keeps.
 
 // The operators a script may write. `=` is one of them, because an assignment
 // is a binary expression here exactly as it is in TypeScript.
@@ -40,130 +26,136 @@ export type BinaryOperator =
   | ">=";
 
 // A script node that yields a value.
-export type AstScriptExpression =
-  | AstScriptArrayLiteralExpression
-  | AstScriptArrowFunction
-  | AstScriptBinaryExpression
-  | AstScriptTrueLiteral
-  | AstScriptFalseLiteral
-  | AstScriptCallExpression
-  | AstScriptIdentifier
-  | AstScriptNewExpression
-  | AstScriptNullLiteral
-  | AstScriptNumericLiteral
-  | AstScriptObjectLiteralExpression
-  | AstScriptPropertyAccessExpression
-  | AstScriptElementAccessExpression
-  | AstScriptSplice
-  | AstScriptStringLiteral
-  | AstScriptConditionalExpression;
+export type ClientScriptExpression =
+  | ClientScriptArrayLiteralExpression
+  | ClientScriptArrowFunction
+  | ClientScriptBinaryExpression
+  | ClientScriptTrueLiteral
+  | ClientScriptFalseLiteral
+  | ClientScriptCallExpression
+  | ClientScriptIdentifier
+  | ClientScriptNewExpression
+  | ClientScriptNullLiteral
+  | ClientScriptNumericLiteral
+  | ClientScriptObjectLiteralExpression
+  | ClientScriptPropertyAccessExpression
+  | ClientScriptElementAccessExpression
+  | ClientScriptSplice
+  | ClientScriptStringLiteral
+  | ClientScriptConditionalExpression;
 
 // A script node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.
-export type AstScriptStatement =
-  | AstScriptExpression
-  | AstScriptBlock
-  | AstScriptIfStatement
-  | AstScriptWhileStatement
-  | AstScriptForStatement
-  | AstScriptBreakStatement
-  | AstScriptContinueStatement
-  | AstScriptReturnStatement
-  | AstScriptThrowStatement
-  | AstScriptTryStatement
-  | AstScriptVariableDeclaration;
+export type ClientScriptStatement =
+  | ClientScriptExpression
+  | ClientScriptBlock
+  | ClientScriptIfStatement
+  | ClientScriptWhileStatement
+  | ClientScriptForStatement
+  | ClientScriptBreakStatement
+  | ClientScriptContinueStatement
+  | ClientScriptReturnStatement
+  | ClientScriptThrowStatement
+  | ClientScriptTryStatement
+  | ClientScriptVariableDeclaration;
 
 // The body of a script or an arrow: a block, or an expression whose value is
 // implicitly returned.
-export type AstScriptBody = AstScriptExpression | AstScriptBlock;
+export type ClientScriptBody = ClientScriptExpression | ClientScriptBlock;
 
-export interface AstScriptNode {
+// Each node below is named for the TypeScript node it mirrors — `ts.IfStatement`
+// is `ClientScriptIfStatement` — and its fields are TypeScript's, in TypeScript's
+// order, so a reader who knows that AST knows this one. Anything this language
+// adds comes last: an identifier's `bindingKey`, a declaration's `keyword`.
+// Only `ClientScriptSplice` has no counterpart, having no counterpart in
+// JavaScript either.
+export interface ClientScriptNode {
   readonly kind: SyntaxKind;
   readonly loc: SourceLocation;
 }
 
-export interface AstScriptArrayLiteralExpression extends AstScriptNode {
+export interface ClientScriptArrayLiteralExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ArrayLiteralExpression;
-  readonly elements: readonly AstScriptExpression[];
+  readonly elements: readonly ClientScriptExpression[];
 }
 
-export interface AstScriptArrowFunction extends AstScriptNode {
+export interface ClientScriptArrowFunction extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ArrowFunction;
-  readonly parameters: readonly AstScriptParameterDeclaration[];
-  readonly body: AstScriptNode;
+  readonly parameters: readonly ClientScriptParameterDeclaration[];
+  readonly body: ClientScriptBody;
 }
 
-export interface AstScriptWhileStatement extends AstScriptNode {
+export interface ClientScriptWhileStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.WhileStatement;
-  readonly expression: AstScriptExpression;
-  readonly statement: AstScriptStatement;
+  readonly expression: ClientScriptExpression;
+  readonly statement: ClientScriptStatement;
 }
 
 // `init` is a declaration or an assignment and `update` an assignment, so both
 // are statements rather than expressions.
-export interface AstScriptForStatement extends AstScriptNode {
+export interface ClientScriptForStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ForStatement;
-  readonly initializer: AstScriptStatement | null;
-  readonly condition: AstScriptExpression | null;
-  readonly incrementor: AstScriptStatement | null;
-  readonly statement: AstScriptStatement;
+  readonly initializer: ClientScriptStatement | null;
+  readonly condition: ClientScriptExpression | null;
+  readonly incrementor: ClientScriptStatement | null;
+  readonly statement: ClientScriptStatement;
 }
 
-export interface AstScriptBreakStatement extends AstScriptNode {
+export interface ClientScriptBreakStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.BreakStatement;
 }
 
-export interface AstScriptContinueStatement extends AstScriptNode {
+export interface ClientScriptContinueStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ContinueStatement;
 }
 
-export interface AstScriptBinaryExpression extends AstScriptNode {
+export interface ClientScriptBinaryExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.BinaryExpression;
-  readonly left: AstScriptExpression;
+  readonly left: ClientScriptExpression;
   readonly operatorToken: BinaryOperator;
-  readonly right: AstScriptExpression;
+  readonly right: ClientScriptExpression;
 }
 
-export interface AstScriptConditionalExpression extends AstScriptNode {
+export interface ClientScriptConditionalExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ConditionalExpression;
-  readonly condition: AstScriptExpression;
-  readonly whenTrue: AstScriptExpression;
-  readonly whenFalse: AstScriptExpression;
+  readonly condition: ClientScriptExpression;
+  readonly whenTrue: ClientScriptExpression;
+  readonly whenFalse: ClientScriptExpression;
 }
 
-export interface AstScriptBlock extends AstScriptNode {
+export interface ClientScriptBlock extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.Block;
-  readonly statements: readonly AstScriptStatement[];
+  readonly statements: readonly ClientScriptStatement[];
 }
 
 // Two kinds rather than one with a value, as ts.TrueLiteral and
 // ts.FalseLiteral are: the kind is the value.
-export interface AstScriptTrueLiteral extends AstScriptNode {
+export interface ClientScriptTrueLiteral extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.TrueKeyword;
 }
 
-export interface AstScriptFalseLiteral extends AstScriptNode {
+export interface ClientScriptFalseLiteral extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.FalseKeyword;
 }
 
-export interface AstScriptCallExpression extends AstScriptNode {
+export interface ClientScriptCallExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.CallExpression;
-  readonly expression: AstScriptExpression;
+  readonly expression: ClientScriptExpression;
   readonly questionDotToken: boolean;
-  readonly arguments: readonly AstScriptExpression[];
+  readonly arguments: readonly ClientScriptExpression[];
 }
 
-export interface AstScriptIdentifier extends AstScriptNode {
+export interface ClientScriptIdentifier extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.Identifier;
   readonly text: string;
   readonly bindingKey: string;
 }
 
-export interface AstScriptIfStatement extends AstScriptNode {
+export interface ClientScriptIfStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.IfStatement;
-  readonly expression: AstScriptExpression;
-  readonly thenStatement: AstScriptStatement;
-  readonly elseStatement: AstScriptStatement | null;
+  readonly expression: ClientScriptExpression;
+  readonly thenStatement: ClientScriptStatement;
+  readonly elseStatement: ClientScriptStatement | null;
 }
 
 // e.g. new ${Point}(1, 2) — a construction, mirrored 1:1 from the source.
@@ -171,94 +163,94 @@ export interface AstScriptIfStatement extends AstScriptNode {
 // function with one hole per constructor parameter (see `lowerSpliceable`) —
 // so the bundler expands the construction into a plain call of its callee
 // (see `lowerScriptBody`).
-export interface AstScriptNewExpression extends AstScriptNode {
+export interface ClientScriptNewExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.NewExpression;
-  readonly expression: AstScriptExpression;
-  readonly arguments: readonly AstScriptExpression[];
+  readonly expression: ClientScriptExpression;
+  readonly arguments: readonly ClientScriptExpression[];
 }
 
-export interface AstScriptNullLiteral extends AstScriptNode {
+export interface ClientScriptNullLiteral extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.NullKeyword;
 }
 
-export interface AstScriptNumericLiteral extends AstScriptNode {
+export interface ClientScriptNumericLiteral extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.NumericLiteral;
   readonly value: number;
 }
 
-export interface AstScriptObjectLiteralExpression extends AstScriptNode {
+export interface ClientScriptObjectLiteralExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ObjectLiteralExpression;
-  readonly properties: readonly AstScriptPropertyAssignment[];
+  readonly properties: readonly ClientScriptPropertyAssignment[];
 }
 
-export interface AstScriptPropertyAccessExpression extends AstScriptNode {
+export interface ClientScriptPropertyAccessExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.PropertyAccessExpression;
-  readonly expression: AstScriptExpression;
+  readonly expression: ClientScriptExpression;
   readonly questionDotToken: boolean;
   readonly name: string;
 }
 
 // The key is an expression, not a name: `a[i]` and `row[column]` are the point,
 // `row["name"]` only incidentally allowed.
-export interface AstScriptElementAccessExpression extends AstScriptNode {
+export interface ClientScriptElementAccessExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ElementAccessExpression;
-  readonly expression: AstScriptExpression;
-  readonly argumentExpression: AstScriptExpression;
+  readonly expression: ClientScriptExpression;
+  readonly argumentExpression: ClientScriptExpression;
 }
 
-export interface AstScriptReturnStatement extends AstScriptNode {
+export interface ClientScriptReturnStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ReturnStatement;
-  readonly expression: AstScriptExpression;
+  readonly expression: ClientScriptExpression;
 }
 
-export interface AstScriptSplice extends AstScriptNode {
+export interface ClientScriptSplice extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.Splice;
   readonly key: string;
 }
 
-export interface AstScriptStringLiteral extends AstScriptNode {
+export interface ClientScriptStringLiteral extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.StringLiteral;
   readonly text: string;
 }
 
-export interface AstScriptThrowStatement extends AstScriptNode {
+export interface ClientScriptThrowStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ThrowStatement;
-  readonly expression: AstScriptExpression;
+  readonly expression: ClientScriptExpression;
 }
 
-export interface AstScriptTryStatement extends AstScriptNode {
+export interface ClientScriptTryStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.TryStatement;
-  readonly tryBlock: AstScriptBlock;
-  readonly catchClause: AstScriptCatchClause;
+  readonly tryBlock: ClientScriptBlock;
+  readonly catchClause: ClientScriptCatchClause;
 }
 
 // The clause a try statement catches with. `variableDeclaration` is null
 // for a bindingless catch; TypeScript holds a declaration node there, where
 // the name is all this needs.
-export interface AstScriptCatchClause extends AstScriptNode {
+export interface ClientScriptCatchClause extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.CatchClause;
-  readonly variableDeclaration: AstScriptIdentifier | null;
-  readonly block: AstScriptBlock;
+  readonly variableDeclaration: ClientScriptIdentifier | null;
+  readonly block: ClientScriptBlock;
 }
 
 // A parameter is the name it binds: TypeScript's `dotDotDotToken`,
 // `questionToken`, `type` and `initializer` are each rejected here.
-export interface AstScriptParameterDeclaration extends AstScriptNode {
+export interface ClientScriptParameterDeclaration extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.Parameter;
-  readonly name: AstScriptIdentifier;
+  readonly name: ClientScriptIdentifier;
 }
 
 // One `a: 4` of an object literal. A key is always a plain name here, so
 // `name` is that name rather than the `PropertyName` node TypeScript holds.
-export interface AstScriptPropertyAssignment extends AstScriptNode {
+export interface ClientScriptPropertyAssignment extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.PropertyAssignment;
   readonly name: string;
-  readonly initializer: AstScriptExpression;
+  readonly initializer: ClientScriptExpression;
 }
 
-export interface AstScriptVariableDeclaration extends AstScriptNode {
+export interface ClientScriptVariableDeclaration extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.VariableDeclaration;
-  readonly name: AstScriptIdentifier;
-  readonly initializer: AstScriptExpression;
+  readonly name: ClientScriptIdentifier;
+  readonly initializer: ClientScriptExpression;
   readonly keyword: "let" | "const";
 }
