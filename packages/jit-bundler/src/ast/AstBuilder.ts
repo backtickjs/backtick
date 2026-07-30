@@ -4,36 +4,36 @@ import type {
   Visitor,
 } from "@backtickjs/cs-runtime";
 import type {
-  AstScriptArray,
-  AstScriptArrow,
-  AstScriptAssignment,
-  AstScriptBinop,
+  AstScriptArrayLiteralExpression,
+  AstScriptArrowFunction,
+  AstScriptBinaryExpression,
   AstScriptBlock,
   AstScriptBody,
-  AstScriptBoolean,
-  AstScriptBreak,
-  AstScriptContinue,
-  AstScriptCall,
+  AstScriptBooleanLiteral,
+  AstScriptBreakStatement,
+  AstScriptCallExpression,
+  AstScriptCatchClause,
+  AstScriptConditionalExpression,
+  AstScriptContinueStatement,
+  AstScriptElementAccessExpression,
   AstScriptExpression,
-  AstScriptFor,
+  AstScriptForStatement,
   AstScriptIdentifier,
-  AstScriptIndex,
-  AstScriptIf,
-  AstScriptNew,
+  AstScriptIfStatement,
+  AstScriptNewExpression,
   AstScriptNode,
-  AstScriptNull,
-  AstScriptNumber,
-  AstScriptObject,
-  AstScriptPropertyAccess,
-  AstScriptReturn,
+  AstScriptNullLiteral,
+  AstScriptNumericLiteral,
+  AstScriptObjectLiteralExpression,
+  AstScriptPropertyAccessExpression,
+  AstScriptReturnStatement,
   AstScriptSplice,
   AstScriptStatement,
-  AstScriptString,
-  AstScriptTernary,
-  AstScriptThrow,
-  AstScriptTry,
+  AstScriptStringLiteral,
+  AstScriptThrowStatement,
+  AstScriptTryStatement,
   AstScriptVariableDeclaration,
-  AstScriptWhile,
+  AstScriptWhileStatement,
 } from "./Ast.js";
 
 // Mirrors a client script's source 1:1: each visitor method returns the node
@@ -44,185 +44,239 @@ export class AstBuilder implements Visitor<AstScriptNode> {
     return { kind: "AstScriptSplice", loc, key };
   }
 
-  null(loc: SourceLocation): AstScriptNull {
-    return { kind: "AstScriptNull", loc };
+  nullLiteral(loc: SourceLocation): AstScriptNullLiteral {
+    return { kind: "AstScriptNullLiteral", loc };
   }
 
-  number(loc: SourceLocation, value: number): AstScriptNumber {
-    return { kind: "AstScriptNumber", loc, value };
+  numericLiteral(loc: SourceLocation, value: number): AstScriptNumericLiteral {
+    return { kind: "AstScriptNumericLiteral", loc, value };
   }
 
-  boolean(loc: SourceLocation, value: boolean): AstScriptBoolean {
-    return { kind: "AstScriptBoolean", loc, value };
+  booleanLiteral(loc: SourceLocation, value: boolean): AstScriptBooleanLiteral {
+    return { kind: "AstScriptBooleanLiteral", loc, value };
   }
 
-  string(loc: SourceLocation, value: string): AstScriptString {
-    return { kind: "AstScriptString", loc, value };
+  stringLiteral(loc: SourceLocation, text: string): AstScriptStringLiteral {
+    return { kind: "AstScriptStringLiteral", loc, text };
   }
 
   identifier(
     loc: SourceLocation,
-    name: string,
+    text: string,
     bindingKey: string,
   ): AstScriptIdentifier {
-    return { kind: "AstScriptIdentifier", loc, name, bindingKey };
+    return { kind: "AstScriptIdentifier", loc, text, bindingKey };
   }
 
   block(loc: SourceLocation, statements: AstScriptStatement[]): AstScriptBlock {
     return { kind: "AstScriptBlock", loc, statements };
   }
 
-  assignment(
-    loc: SourceLocation,
-    name: AstScriptIdentifier,
-    expression: AstScriptExpression,
-  ): AstScriptAssignment {
-    return { kind: "AstScriptAssignment", loc, name, expression };
-  }
-
   variableDeclaration(
     loc: SourceLocation,
-    keyword: "let" | "const",
     name: AstScriptIdentifier,
-    expression: AstScriptExpression,
+    initializer: AstScriptExpression,
+    keyword: "let" | "const",
   ): AstScriptVariableDeclaration {
     return {
       kind: "AstScriptVariableDeclaration",
       loc,
-      keyword,
       name,
-      expression,
+      initializer,
+      keyword,
     };
   }
 
-  if(
-    loc: SourceLocation,
-    condition: AstScriptExpression,
-    consequent: AstScriptStatement,
-    alternate: AstScriptStatement | null,
-  ): AstScriptIf {
-    return { kind: "AstScriptIf", loc, condition, consequent, alternate };
-  }
-
-  while(
-    loc: SourceLocation,
-    condition: AstScriptExpression,
-    body: AstScriptStatement,
-  ): AstScriptWhile {
-    return { kind: "AstScriptWhile", loc, condition, body };
-  }
-
-  for(
-    loc: SourceLocation,
-    init: AstScriptStatement | null,
-    condition: AstScriptExpression | null,
-    update: AstScriptStatement | null,
-    body: AstScriptStatement,
-  ): AstScriptFor {
-    return { kind: "AstScriptFor", loc, init, condition, update, body };
-  }
-
-  break(loc: SourceLocation): AstScriptBreak {
-    return { kind: "AstScriptBreak", loc };
-  }
-
-  continue(loc: SourceLocation): AstScriptContinue {
-    return { kind: "AstScriptContinue", loc };
-  }
-
-  return(
+  ifStatement(
     loc: SourceLocation,
     expression: AstScriptExpression,
-  ): AstScriptReturn {
-    return { kind: "AstScriptReturn", loc, expression };
-  }
-
-  throw(loc: SourceLocation, expression: AstScriptExpression): AstScriptThrow {
-    return { kind: "AstScriptThrow", loc, expression };
-  }
-
-  try(
-    loc: SourceLocation,
-    block: AstScriptBlock,
-    param: AstScriptIdentifier | null,
-    handler: AstScriptBlock,
-  ): AstScriptTry {
-    return { kind: "AstScriptTry", loc, block, param, handler };
-  }
-
-  propertyAccess(
-    loc: SourceLocation,
-    expression: AstScriptExpression,
-    name: string,
-    optional = false,
-  ): AstScriptPropertyAccess {
-    return { kind: "AstScriptPropertyAccess", loc, expression, name, optional };
-  }
-
-  index(
-    loc: SourceLocation,
-    expression: AstScriptExpression,
-    key: AstScriptExpression,
-  ): AstScriptIndex {
-    return { kind: "AstScriptIndex", loc, expression, key };
-  }
-
-  binop(
-    loc: SourceLocation,
-    lhs: AstScriptExpression,
-    operator: BinaryOperator,
-    rhs: AstScriptExpression,
-  ): AstScriptBinop {
-    return { kind: "AstScriptBinop", loc, lhs, operator, rhs };
-  }
-
-  ternary(
-    loc: SourceLocation,
-    condition: AstScriptExpression,
-    consequent: AstScriptExpression,
-    alternate: AstScriptExpression,
-  ): AstScriptTernary {
-    return { kind: "AstScriptTernary", loc, condition, consequent, alternate };
-  }
-
-  array(loc: SourceLocation, elements: AstScriptExpression[]): AstScriptArray {
-    return { kind: "AstScriptArray", loc, elements };
-  }
-
-  object(
-    loc: SourceLocation,
-    entries: { [key: string]: AstScriptExpression },
-  ): AstScriptObject {
-    return { kind: "AstScriptObject", loc, entries };
-  }
-
-  call(
-    loc: SourceLocation,
-    callee: AstScriptExpression,
-    args: AstScriptExpression[],
-    optional = false,
-  ): AstScriptCall {
-    return { kind: "AstScriptCall", loc, callee, args, optional };
-  }
-
-  arrow(
-    loc: SourceLocation,
-    params: AstScriptIdentifier[],
-    body: AstScriptBody,
-  ): AstScriptArrow {
+    thenStatement: AstScriptStatement,
+    elseStatement: AstScriptStatement | null,
+  ): AstScriptIfStatement {
     return {
-      kind: "AstScriptArrow",
+      kind: "AstScriptIfStatement",
       loc,
-      params: params,
-      body,
+      expression,
+      thenStatement,
+      elseStatement,
     };
   }
 
-  new(
+  whileStatement(
     loc: SourceLocation,
-    callee: AstScriptExpression,
-    args: AstScriptExpression[],
-  ): AstScriptNew {
-    return { kind: "AstScriptNew", loc, callee, args };
+    expression: AstScriptExpression,
+    statement: AstScriptStatement,
+  ): AstScriptWhileStatement {
+    return { kind: "AstScriptWhileStatement", loc, expression, statement };
+  }
+
+  forStatement(
+    loc: SourceLocation,
+    initializer: AstScriptStatement | null,
+    condition: AstScriptExpression | null,
+    incrementor: AstScriptStatement | null,
+    statement: AstScriptStatement,
+  ): AstScriptForStatement {
+    return {
+      kind: "AstScriptForStatement",
+      loc,
+      initializer,
+      condition,
+      incrementor,
+      statement,
+    };
+  }
+
+  breakStatement(loc: SourceLocation): AstScriptBreakStatement {
+    return { kind: "AstScriptBreakStatement", loc };
+  }
+
+  continueStatement(loc: SourceLocation): AstScriptContinueStatement {
+    return { kind: "AstScriptContinueStatement", loc };
+  }
+
+  returnStatement(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+  ): AstScriptReturnStatement {
+    return { kind: "AstScriptReturnStatement", loc, expression };
+  }
+
+  throwStatement(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+  ): AstScriptThrowStatement {
+    return { kind: "AstScriptThrowStatement", loc, expression };
+  }
+
+  tryStatement(
+    loc: SourceLocation,
+    tryBlock: AstScriptBlock,
+    catchClause: AstScriptCatchClause,
+  ): AstScriptTryStatement {
+    return { kind: "AstScriptTryStatement", loc, tryBlock, catchClause };
+  }
+
+  catchClause(
+    loc: SourceLocation,
+    variableDeclaration: AstScriptIdentifier | null,
+    block: AstScriptBlock,
+  ): AstScriptCatchClause {
+    return {
+      kind: "AstScriptCatchClause",
+      loc,
+      variableDeclaration,
+      block,
+    };
+  }
+
+  propertyAccessExpression(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+    questionDotToken: boolean,
+    name: string,
+  ): AstScriptPropertyAccessExpression {
+    return {
+      kind: "AstScriptPropertyAccessExpression",
+      loc,
+      expression,
+      questionDotToken,
+      name,
+    };
+  }
+
+  elementAccessExpression(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+    argumentExpression: AstScriptExpression,
+  ): AstScriptElementAccessExpression {
+    return {
+      kind: "AstScriptElementAccessExpression",
+      loc,
+      expression,
+      argumentExpression,
+    };
+  }
+
+  binaryExpression(
+    loc: SourceLocation,
+    left: AstScriptExpression,
+    operatorToken: BinaryOperator,
+    right: AstScriptExpression,
+  ): AstScriptBinaryExpression {
+    return {
+      kind: "AstScriptBinaryExpression",
+      loc,
+      left,
+      operatorToken,
+      right,
+    };
+  }
+
+  conditionalExpression(
+    loc: SourceLocation,
+    condition: AstScriptExpression,
+    whenTrue: AstScriptExpression,
+    whenFalse: AstScriptExpression,
+  ): AstScriptConditionalExpression {
+    return {
+      kind: "AstScriptConditionalExpression",
+      loc,
+      condition,
+      whenTrue,
+      whenFalse,
+    };
+  }
+
+  arrayLiteralExpression(
+    loc: SourceLocation,
+    elements: AstScriptExpression[],
+  ): AstScriptArrayLiteralExpression {
+    return { kind: "AstScriptArrayLiteralExpression", loc, elements };
+  }
+
+  objectLiteralExpression(
+    loc: SourceLocation,
+    properties: { [name: string]: AstScriptExpression },
+  ): AstScriptObjectLiteralExpression {
+    return { kind: "AstScriptObjectLiteralExpression", loc, properties };
+  }
+
+  // `argumentsArray` rather than `arguments`, which is not a legal parameter
+  // name in strict mode — TypeScript's own factory does the same.
+  callExpression(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+    questionDotToken: boolean,
+    argumentsArray: AstScriptExpression[],
+  ): AstScriptCallExpression {
+    return {
+      kind: "AstScriptCallExpression",
+      loc,
+      expression,
+      questionDotToken,
+      arguments: argumentsArray,
+    };
+  }
+
+  arrowFunction(
+    loc: SourceLocation,
+    parameters: AstScriptIdentifier[],
+    body: AstScriptBody,
+  ): AstScriptArrowFunction {
+    return { kind: "AstScriptArrowFunction", loc, parameters, body };
+  }
+
+  newExpression(
+    loc: SourceLocation,
+    expression: AstScriptExpression,
+    argumentsArray: AstScriptExpression[],
+  ): AstScriptNewExpression {
+    return {
+      kind: "AstScriptNewExpression",
+      loc,
+      expression,
+      arguments: argumentsArray,
+    };
   }
 }

@@ -20,10 +20,10 @@ class Point {
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
-        v.arrow(
+        v.arrowFunction(
           [16, 15, 16, 42],
           [],
-          v.binop(
+          v.binaryExpression(
             [16, 21, 16, 42],
             v.splice([16, 21, 16, 30], "$0splice0"),
             "+",
@@ -61,48 +61,66 @@ export default cs.create(
       [
         v.variableDeclaration(
           [35, 3, 35, 62],
-          "const",
           v.identifier([35, 9, 35, 10], "s", "s$3b7boqu5f3cse$0"),
-          v.new([35, 13, 35, 61], v.splice([35, 17, 35, 25], "$Segment"), [
-            v.new([35, 26, 35, 42], v.splice([35, 30, 35, 36], "$Point"), [
-              v.number([35, 37, 35, 38], 1),
-              v.number([35, 40, 35, 41], 2),
-            ]),
-            v.new([35, 44, 35, 60], v.splice([35, 48, 35, 54], "$Point"), [
-              v.number([35, 55, 35, 56], 1),
-              v.number([35, 58, 35, 59], 2),
-            ]),
-          ]),
+          v.newExpression(
+            [35, 13, 35, 61],
+            v.splice([35, 17, 35, 25], "$Segment"),
+            [
+              v.newExpression(
+                [35, 26, 35, 42],
+                v.splice([35, 30, 35, 36], "$Point"),
+                [
+                  v.numericLiteral([35, 37, 35, 38], 1),
+                  v.numericLiteral([35, 40, 35, 41], 2),
+                ],
+              ),
+              v.newExpression(
+                [35, 44, 35, 60],
+                v.splice([35, 48, 35, 54], "$Point"),
+                [
+                  v.numericLiteral([35, 55, 35, 56], 1),
+                  v.numericLiteral([35, 58, 35, 59], 2),
+                ],
+              ),
+            ],
+          ),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [36, 3, 36, 36],
-          v.binop(
+          v.binaryExpression(
             [36, 10, 36, 35],
-            v.call(
+            v.callExpression(
               [36, 10, 36, 20],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [36, 10, 36, 18],
-                v.propertyAccess(
+                v.propertyAccessExpression(
                   [36, 10, 36, 14],
                   v.identifier([36, 10, 36, 11], "s", "s$3b7boqu5f3cse$0"),
+                  false,
                   "to",
                 ),
+                false,
                 "sum",
               ),
+              false,
               [],
             ),
             "-",
-            v.call(
+            v.callExpression(
               [36, 23, 36, 35],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [36, 23, 36, 33],
-                v.propertyAccess(
+                v.propertyAccessExpression(
                   [36, 23, 36, 29],
                   v.identifier([36, 23, 36, 24], "s", "s$3b7boqu5f3cse$0"),
+                  false,
                   "from",
                 ),
+                false,
                 "sum",
               ),
+              false,
               [],
             ),
           ),

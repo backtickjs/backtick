@@ -15,7 +15,7 @@ function make(n) {
       captures: [],
       spliceParams: { $n: [] },
     },
-    (v) => v.arrow([7, 13, 7, 21], [], v.splice([7, 19, 7, 21], "$n")),
+    (v) => v.arrowFunction([7, 13, 7, 21], [], v.splice([7, 19, 7, 21], "$n")),
   );
 }
 export default _jsxs(View, {

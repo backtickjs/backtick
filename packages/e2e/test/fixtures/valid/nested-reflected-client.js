@@ -20,10 +20,10 @@ class Point {
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
-        v.arrow(
+        v.arrowFunction(
           [16, 15, 16, 42],
           [],
-          v.binop(
+          v.binaryExpression(
             [16, 21, 16, 42],
             v.splice([16, 21, 16, 30], "$0splice0"),
             "+",
@@ -54,10 +54,10 @@ class Segment {
         spliceParams: { $0splice0: [], $0splice1: [] },
       },
       (v) =>
-        v.arrow(
+        v.arrowFunction(
           [32, 15, 32, 52],
           [],
-          v.binop(
+          v.binaryExpression(
             [32, 21, 32, 52],
             v.splice([32, 21, 32, 35], "$0splice0"),
             "===",
@@ -80,7 +80,7 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.number([36, 42, 36, 43], 1),
+      (v) => v.numericLiteral([36, 42, 36, 43], 1),
     ),
     cs.create(
       [36, 46, 36, 51],
@@ -93,7 +93,7 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.number([36, 49, 36, 50], 2),
+      (v) => v.numericLiteral([36, 49, 36, 50], 2),
     ),
   ),
   new Point(
@@ -108,7 +108,7 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.number([36, 67, 36, 68], 1),
+      (v) => v.numericLiteral([36, 67, 36, 68], 1),
     ),
     cs.create(
       [36, 71, 36, 76],
@@ -121,7 +121,7 @@ const segment = new Segment(
         captures: [],
         spliceParams: {},
       },
-      (v) => v.number([36, 74, 36, 75], 8),
+      (v) => v.numericLiteral([36, 74, 36, 75], 8),
     ),
   ),
 );
@@ -142,52 +142,58 @@ export default cs.create(
       [
         v.variableDeclaration(
           [39, 3, 39, 22],
-          "const",
           v.identifier([39, 9, 39, 10], "s", "s$marvm6ddqnqk$0"),
           v.splice([39, 13, 39, 21], "$segment"),
+          "const",
         ),
         v.variableDeclaration(
           [40, 3, 40, 34],
-          "const",
           v.identifier([40, 9, 40, 13], "rise", "rise$marvm6ddqnqk$1"),
-          v.binop(
+          v.binaryExpression(
             [40, 16, 40, 33],
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [40, 16, 40, 22],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [40, 16, 40, 20],
                 v.identifier([40, 16, 40, 17], "s", "s$marvm6ddqnqk$0"),
+                false,
                 "to",
               ),
+              false,
               "y",
             ),
             "-",
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [40, 25, 40, 33],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [40, 25, 40, 31],
                 v.identifier([40, 25, 40, 26], "s", "s$marvm6ddqnqk$0"),
+                false,
                 "from",
               ),
+              false,
               "y",
             ),
           ),
+          "const",
         ),
-        v.if(
+        v.ifStatement(
           [41, 3, 43, 4],
-          v.call(
+          v.callExpression(
             [41, 7, 41, 19],
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [41, 7, 41, 17],
               v.identifier([41, 7, 41, 8], "s", "s$marvm6ddqnqk$0"),
+              false,
               "vertical",
             ),
+            false,
             [],
           ),
           v.block(
             [41, 21, 43, 4],
             [
-              v.return(
+              v.returnStatement(
                 [42, 5, 42, 17],
                 v.identifier([42, 12, 42, 16], "rise", "rise$marvm6ddqnqk$1"),
               ),
@@ -195,35 +201,41 @@ export default cs.create(
           ),
           null,
         ),
-        v.return(
+        v.returnStatement(
           [44, 3, 44, 36],
-          v.binop(
+          v.binaryExpression(
             [44, 10, 44, 35],
-            v.call(
+            v.callExpression(
               [44, 10, 44, 20],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [44, 10, 44, 18],
-                v.propertyAccess(
+                v.propertyAccessExpression(
                   [44, 10, 44, 14],
                   v.identifier([44, 10, 44, 11], "s", "s$marvm6ddqnqk$0"),
+                  false,
                   "to",
                 ),
+                false,
                 "sum",
               ),
+              false,
               [],
             ),
             "-",
-            v.call(
+            v.callExpression(
               [44, 23, 44, 35],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [44, 23, 44, 33],
-                v.propertyAccess(
+                v.propertyAccessExpression(
                   [44, 23, 44, 29],
                   v.identifier([44, 23, 44, 24], "s", "s$marvm6ddqnqk$0"),
+                  false,
                   "from",
                 ),
+                false,
                 "sum",
               ),
+              false,
               [],
             ),
           ),

@@ -31,7 +31,7 @@ function inner(carried) {
             spliceParams: { $carried: [] },
           },
           (v) =>
-            v.binop(
+            v.binaryExpression(
               [17, 17, 17, 32],
               v.identifier([17, 17, 17, 21], "base", "base$2dzpugititb9o$0"),
               "+",
@@ -48,11 +48,14 @@ function inner(carried) {
         [
           v.variableDeclaration(
             [16, 5, 16, 22],
-            "const",
             v.identifier([16, 11, 16, 15], "base", "base$2dzpugititb9o$0"),
-            v.number([16, 18, 16, 21], 100),
+            v.numericLiteral([16, 18, 16, 21], 100),
+            "const",
           ),
-          v.return([17, 5, 17, 35], v.splice([17, 12, 17, 34], "$0splice0")),
+          v.returnStatement(
+            [17, 5, 17, 35],
+            v.splice([17, 12, 17, 34], "$0splice0"),
+          ),
         ],
       ),
   );
@@ -90,11 +93,14 @@ export default cs.create(
       [
         v.variableDeclaration(
           [22, 3, 22, 18],
-          "const",
           v.identifier([22, 9, 22, 13], "base", "base$2dzpugititb9o$1"),
-          v.number([22, 16, 22, 17], 1),
+          v.numericLiteral([22, 16, 22, 17], 1),
+          "const",
         ),
-        v.return([23, 3, 23, 29], v.splice([23, 10, 23, 28], "$0splice0")),
+        v.returnStatement(
+          [23, 3, 23, 29],
+          v.splice([23, 10, 23, 28], "$0splice0"),
+        ),
       ],
     ),
 );

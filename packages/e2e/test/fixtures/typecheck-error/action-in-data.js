@@ -18,9 +18,9 @@ const action = cs.create(
       [
         v.variableDeclaration(
           [6, 3, 6, 15],
-          "const",
           v.identifier([6, 9, 6, 10], "x", "x$1937kl3l6y7n7$0"),
-          v.number([6, 13, 6, 14], 1),
+          v.numericLiteral([6, 13, 6, 14], 1),
+          "const",
         ),
       ],
     ),
@@ -42,11 +42,14 @@ export const listed = cs.create(
       [
         v.variableDeclaration(
           [10, 3, 10, 28],
-          "const",
           v.identifier([10, 9, 10, 13], "list", "list$1937kl3l6y7n7$1"),
           v.splice([10, 16, 10, 27], "$0splice0"),
+          "const",
         ),
-        v.return([11, 3, 11, 12], v.number([11, 10, 11, 11], 1)),
+        v.returnStatement(
+          [11, 3, 11, 12],
+          v.numericLiteral([11, 10, 11, 11], 1),
+        ),
       ],
     ),
 );
@@ -67,11 +70,14 @@ export const keyed = cs.create(
       [
         v.variableDeclaration(
           [15, 3, 15, 36],
-          "const",
           v.identifier([15, 9, 15, 12], "map", "map$1937kl3l6y7n7$2"),
           v.splice([15, 15, 15, 35], "$0splice0"),
+          "const",
         ),
-        v.return([16, 3, 16, 12], v.number([16, 10, 16, 11], 1)),
+        v.returnStatement(
+          [16, 3, 16, 12],
+          v.numericLiteral([16, 10, 16, 11], 1),
+        ),
       ],
     ),
 );

@@ -18,14 +18,15 @@ const beep = cs.create(
       [
         v.variableDeclaration(
           [6, 3, 6, 13],
-          "let",
           v.identifier([6, 7, 6, 8], "n", "n$gyja921xjk87$0"),
-          v.number([6, 11, 6, 12], 0),
+          v.numericLiteral([6, 11, 6, 12], 0),
+          "let",
         ),
-        v.assignment(
+        v.binaryExpression(
           [7, 3, 7, 8],
           v.identifier([7, 3, 7, 4], "n", "n$gyja921xjk87$0"),
-          v.number([7, 7, 7, 8], 1),
+          "=",
+          v.numericLiteral([7, 7, 7, 8], 1),
         ),
       ],
     ),
@@ -42,7 +43,7 @@ const onTap = cs.create(
     spliceParams: { $beep: [] },
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [10, 48, 12, 2],
       [v.identifier([10, 49, 10, 51], "id", "id$gyja921xjk87$1")],
       v.block([10, 64, 12, 2], [v.splice([11, 3, 11, 8], "$beep")]),
@@ -65,14 +66,14 @@ export default cs.create(
       [
         v.variableDeclaration(
           [15, 3, 18, 5],
-          "const",
           v.identifier([15, 9, 15, 17], "handlers", "handlers$gyja921xjk87$2"),
-          v.object([15, 20, 18, 4], {
+          v.objectLiteralExpression([15, 20, 18, 4], {
             tap: v.splice([16, 10, 16, 16], "$onTap"),
             hold: v.splice([17, 11, 17, 17], "$onTap"),
           }),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [19, 3, 19, 19],
           v.identifier([19, 10, 19, 18], "handlers", "handlers$gyja921xjk87$2"),
         ),

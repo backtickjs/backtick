@@ -27,9 +27,9 @@ const press = cs.create(
       [
         v.variableDeclaration(
           [19, 3, 19, 15],
-          "const",
           v.identifier([19, 9, 19, 10], "x", "x$k0vejtxhilaj$0"),
-          v.number([19, 13, 19, 14], 1),
+          v.numericLiteral([19, 13, 19, 14], 1),
+          "const",
         ),
       ],
     ),
@@ -54,7 +54,7 @@ export const stored = cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.string([23, 34, 23, 38], "OK"),
+          (v) => v.stringLiteral([23, 34, 23, 38], "OK"),
         ),
         press,
       ),
@@ -68,21 +68,25 @@ export const stored = cs.create(
       [
         v.variableDeclaration(
           [23, 3, 23, 49],
-          "const",
           v.identifier([23, 9, 23, 15], "button", "button$k0vejtxhilaj$1"),
           v.splice([23, 18, 23, 48], "$0splice0"),
+          "const",
         ),
         v.variableDeclaration(
           [24, 3, 24, 32],
-          "const",
           v.identifier([24, 9, 24, 16], "handler", "handler$k0vejtxhilaj$2"),
-          v.propertyAccess(
+          v.propertyAccessExpression(
             [24, 19, 24, 31],
             v.identifier([24, 19, 24, 25], "button", "button$k0vejtxhilaj$1"),
+            false,
             "press",
           ),
+          "const",
         ),
-        v.return([25, 3, 25, 12], v.number([25, 10, 25, 11], 1)),
+        v.returnStatement(
+          [25, 3, 25, 12],
+          v.numericLiteral([25, 10, 25, 11], 1),
+        ),
       ],
     ),
 );
@@ -106,7 +110,7 @@ export const performed = cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.string([29, 34, 29, 38], "OK"),
+          (v) => v.stringLiteral([29, 34, 29, 38], "OK"),
         ),
         press,
       ),
@@ -120,17 +124,19 @@ export const performed = cs.create(
       [
         v.variableDeclaration(
           [29, 3, 29, 49],
-          "const",
           v.identifier([29, 9, 29, 15], "button", "button$k0vejtxhilaj$3"),
           v.splice([29, 18, 29, 48], "$0splice0"),
+          "const",
         ),
-        v.call(
+        v.callExpression(
           [30, 3, 30, 17],
-          v.propertyAccess(
+          v.propertyAccessExpression(
             [30, 3, 30, 15],
             v.identifier([30, 3, 30, 9], "button", "button$k0vejtxhilaj$3"),
+            false,
             "press",
           ),
+          false,
           [],
         ),
       ],

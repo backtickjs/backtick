@@ -22,7 +22,12 @@ export default cs.create(
           captures: [],
           spliceParams: {},
         },
-        (v) => v.arrow([9, 21, 9, 28], [], v.number([9, 27, 9, 28], 2)),
+        (v) =>
+          v.arrowFunction(
+            [9, 21, 9, 28],
+            [],
+            v.numericLiteral([9, 27, 9, 28], 2),
+          ),
       ),
     },
     captures: [],
@@ -34,28 +39,30 @@ export default cs.create(
       [
         v.variableDeclaration(
           [8, 3, 8, 46],
-          "const",
           v.identifier([8, 9, 8, 14], "apply", "apply$22dvza3e0b85b$0"),
-          v.arrow(
+          v.arrowFunction(
             [8, 17, 8, 45],
             [v.identifier([8, 18, 8, 19], "f", "f$22dvza3e0b85b$1")],
-            v.binop(
+            v.binaryExpression(
               [8, 38, 8, 45],
-              v.call(
+              v.callExpression(
                 [8, 38, 8, 41],
                 v.identifier([8, 38, 8, 39], "f", "f$22dvza3e0b85b$1"),
+                false,
                 [],
               ),
               "+",
-              v.number([8, 44, 8, 45], 1),
+              v.numericLiteral([8, 44, 8, 45], 1),
             ),
           ),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [9, 3, 9, 32],
-          v.call(
+          v.callExpression(
             [9, 10, 9, 31],
             v.identifier([9, 10, 9, 15], "apply", "apply$22dvza3e0b85b$0"),
+            false,
             [v.splice([9, 16, 9, 30], "$0splice0")],
           ),
         ),

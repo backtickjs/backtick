@@ -19,9 +19,9 @@ const action = cs.create(
       [
         v.variableDeclaration(
           [7, 3, 7, 15],
-          "const",
           v.identifier([7, 9, 7, 10], "x", "x$8tx5qho0had8$0"),
-          v.number([7, 13, 7, 14], 1),
+          v.numericLiteral([7, 13, 7, 14], 1),
+          "const",
         ),
       ],
     ),
@@ -43,11 +43,14 @@ export const stored = cs.create(
       [
         v.variableDeclaration(
           [11, 3, 11, 28],
-          "const",
           v.identifier([11, 9, 11, 17], "captured", "captured$8tx5qho0had8$1"),
           v.splice([11, 20, 11, 27], "$action"),
+          "const",
         ),
-        v.return([12, 3, 12, 12], v.number([12, 10, 12, 11], 1)),
+        v.returnStatement(
+          [12, 3, 12, 12],
+          v.numericLiteral([12, 10, 12, 11], 1),
+        ),
       ],
     ),
 );
@@ -65,7 +68,12 @@ export const returned = cs.create(
   (v) =>
     v.block(
       [15, 28, 17, 2],
-      [v.return([16, 3, 16, 18], v.splice([16, 10, 16, 17], "$action"))],
+      [
+        v.returnStatement(
+          [16, 3, 16, 18],
+          v.splice([16, 10, 16, 17], "$action"),
+        ),
+      ],
     ),
 );
 export const assigned = cs.create(
@@ -83,23 +91,35 @@ export const assigned = cs.create(
     v.block(
       [19, 28, 26, 2],
       [
-        v.try(
+        v.tryStatement(
           [20, 3, 25, 4],
           v.block(
             [20, 7, 22, 4],
-            [v.return([21, 5, 21, 14], v.number([21, 12, 21, 13], 1))],
-          ),
-          v.identifier([22, 12, 22, 13], "e", "e$8tx5qho0had8$2"),
-          v.block(
-            [22, 15, 25, 4],
             [
-              v.assignment(
-                [23, 5, 23, 16],
-                v.identifier([23, 5, 23, 6], "e", "e$8tx5qho0had8$2"),
-                v.splice([23, 9, 23, 16], "$action"),
+              v.returnStatement(
+                [21, 5, 21, 14],
+                v.numericLiteral([21, 12, 21, 13], 1),
               ),
-              v.return([24, 5, 24, 14], v.number([24, 12, 24, 13], 2)),
             ],
+          ),
+          v.catchClause(
+            [22, 5, 25, 4],
+            v.identifier([22, 12, 22, 13], "e", "e$8tx5qho0had8$2"),
+            v.block(
+              [22, 15, 25, 4],
+              [
+                v.binaryExpression(
+                  [23, 5, 23, 16],
+                  v.identifier([23, 5, 23, 6], "e", "e$8tx5qho0had8$2"),
+                  "=",
+                  v.splice([23, 9, 23, 16], "$action"),
+                ),
+                v.returnStatement(
+                  [24, 5, 24, 14],
+                  v.numericLiteral([24, 12, 24, 13], 2),
+                ),
+              ],
+            ),
           ),
         ),
       ],

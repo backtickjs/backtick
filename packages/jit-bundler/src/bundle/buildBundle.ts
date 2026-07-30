@@ -12,8 +12,8 @@ import { locKey } from "../locKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
-  BundleArrowNode,
-  BundleCallNode,
+  BundleArrowFunctionNode,
+  BundleCallExpressionNode,
   BundleElement,
   BundleGetEntry,
   BundleExpr,
@@ -287,7 +287,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const treeSlots = (target: number): string[] => treeNeeds(target).slots;
   const treeCells = (target: number): string[] => treeNeeds(target).cells;
 
-  const bodies = new Map<IrScriptEntry, BundleArrowNode>();
+  const bodies = new Map<IrScriptEntry, BundleArrowFunctionNode>();
 
   // A script entry's label, either of the two things that name one (see
   // `BundleOptions.functionLabels`): where it landed in the table, or where it
@@ -311,7 +311,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // only name where it landed, and it is not recognizable across responses the
   // way a located script entry is. Numbered past the script table so it can't
   // collide with an index label.
-  const expansionBodies = new Map<FunctionLabel, BundleArrowNode>();
+  const expansionBodies = new Map<FunctionLabel, BundleArrowFunctionNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
   const expansionEntry = (expansion: IrExpansion): BundleGetEntry => {
     let label = expansionLabels.get(expansion);
@@ -529,7 +529,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
               "#": NodeKind.CallExpression,
               [NodeField.expression]: entry,
               [NodeField.arguments]: args,
-            } satisfies BundleCallNode,
+            } satisfies BundleCallExpressionNode,
           };
     }
     if (value.kind === "IrTreeRef") {
@@ -548,7 +548,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
               "#": NodeKind.CallExpression,
               [NodeField.expression]: entry,
               [NodeField.arguments]: args,
-            } satisfies BundleCallNode,
+            } satisfies BundleCallExpressionNode,
           };
     }
     return {
@@ -813,7 +813,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   // Nothing encloses the root, so it can hold no cell at all.
   const root = renderExpr(ir.root, noInstance());
-  const functions: Record<FunctionLabel, BundleArrowNode> = {};
+  const functions: Record<FunctionLabel, BundleArrowFunctionNode> = {};
   // In table order, which is the order the walk first reached each script.
   for (const script of ir.scripts) {
     const body = bodies.get(script);

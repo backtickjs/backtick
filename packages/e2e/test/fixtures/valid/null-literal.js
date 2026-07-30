@@ -13,27 +13,32 @@ const orDash = cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [5, 61, 12, 2],
       [v.identifier([6, 3, 6, 8], "value", "value$2albtvza6nmmn$0")],
       v.block(
         [7, 6, 12, 2],
         [
-          v.if(
+          v.ifStatement(
             [8, 3, 10, 4],
-            v.binop(
+            v.binaryExpression(
               [8, 7, 8, 21],
               v.identifier([8, 7, 8, 12], "value", "value$2albtvza6nmmn$0"),
               "===",
-              v.null([8, 17, 8, 21]),
+              v.nullLiteral([8, 17, 8, 21]),
             ),
             v.block(
               [8, 23, 10, 4],
-              [v.return([9, 5, 9, 16], v.string([9, 12, 9, 15], "-"))],
+              [
+                v.returnStatement(
+                  [9, 5, 9, 16],
+                  v.stringLiteral([9, 12, 9, 15], "-"),
+                ),
+              ],
             ),
             null,
           ),
-          v.return(
+          v.returnStatement(
             [11, 3, 11, 16],
             v.identifier([11, 10, 11, 15], "value", "value$2albtvza6nmmn$0"),
           ),
@@ -53,13 +58,19 @@ export default cs.create(
     spliceParams: { $orDash: [] },
   },
   (v) =>
-    v.object([14, 20, 18, 2], {
-      missing: v.call([15, 12, 15, 25], v.splice([15, 12, 15, 19], "$orDash"), [
-        v.null([15, 20, 15, 24]),
-      ]),
-      present: v.call([16, 12, 16, 25], v.splice([16, 12, 16, 19], "$orDash"), [
-        v.string([16, 20, 16, 24], "hi"),
-      ]),
-      bare: v.null([17, 9, 17, 13]),
+    v.objectLiteralExpression([14, 20, 18, 2], {
+      missing: v.callExpression(
+        [15, 12, 15, 25],
+        v.splice([15, 12, 15, 19], "$orDash"),
+        false,
+        [v.nullLiteral([15, 20, 15, 24])],
+      ),
+      present: v.callExpression(
+        [16, 12, 16, 25],
+        v.splice([16, 12, 16, 19], "$orDash"),
+        false,
+        [v.stringLiteral([16, 20, 16, 24], "hi")],
+      ),
+      bare: v.nullLiteral([17, 9, 17, 13]),
     }),
 );

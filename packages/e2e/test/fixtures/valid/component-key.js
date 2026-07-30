@@ -30,7 +30,7 @@ export default _jsxs(View, {
           captures: [],
           spliceParams: {},
         },
-        (v) => v.string([20, 18, 20, 25], "third"),
+        (v) => v.stringLiteral([20, 18, 20, 25], "third"),
       ),
     ),
   ],

@@ -16,7 +16,7 @@ export default _jsxs(View, {
           captures: [],
           spliceParams: {},
         },
-        (v) => v.arrow([5, 48, 5, 56], [], v.block([5, 54, 5, 56], [])),
+        (v) => v.arrowFunction([5, 48, 5, 56], [], v.block([5, 54, 5, 56], [])),
       ),
       children: "hi",
     }),

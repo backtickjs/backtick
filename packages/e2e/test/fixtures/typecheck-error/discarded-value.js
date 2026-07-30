@@ -14,12 +14,12 @@ const getValue = cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [6, 21, 8, 2],
       [],
       v.block(
         [6, 27, 8, 2],
-        [v.return([7, 3, 7, 12], v.number([7, 10, 7, 11], 1))],
+        [v.returnStatement([7, 3, 7, 12], v.numericLiteral([7, 10, 7, 11], 1))],
       ),
     ),
 );
@@ -35,7 +35,7 @@ const ping = cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [10, 17, 13, 2],
       [],
       v.block(
@@ -43,14 +43,15 @@ const ping = cs.create(
         [
           v.variableDeclaration(
             [11, 3, 11, 13],
-            "let",
             v.identifier([11, 7, 11, 8], "n", "n$1y1jdbv3pfwln$0"),
-            v.number([11, 11, 11, 12], 0),
+            v.numericLiteral([11, 11, 11, 12], 0),
+            "let",
           ),
-          v.assignment(
+          v.binaryExpression(
             [12, 3, 12, 8],
             v.identifier([12, 3, 12, 4], "n", "n$1y1jdbv3pfwln$0"),
-            v.number([12, 7, 12, 8], 1),
+            "=",
+            v.numericLiteral([12, 7, 12, 8], 1),
           ),
         ],
       ),
@@ -71,8 +72,18 @@ const action = cs.create(
     v.block(
       [15, 19, 18, 2],
       [
-        v.call([16, 3, 16, 10], v.splice([16, 3, 16, 8], "$ping"), []),
-        v.call([17, 3, 17, 14], v.splice([17, 3, 17, 12], "$getValue"), []),
+        v.callExpression(
+          [16, 3, 16, 10],
+          v.splice([16, 3, 16, 8], "$ping"),
+          false,
+          [],
+        ),
+        v.callExpression(
+          [17, 3, 17, 14],
+          v.splice([17, 3, 17, 12], "$getValue"),
+          false,
+          [],
+        ),
       ],
     ),
 );

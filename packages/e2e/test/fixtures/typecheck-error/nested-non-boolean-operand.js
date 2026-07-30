@@ -18,7 +18,7 @@ export default cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [10, 19, 16, 2],
       [v.identifier([10, 20, 10, 25], "count", "count$1yqqpc9g2l4nh$0")],
       v.block(
@@ -26,21 +26,22 @@ export default cs.create(
         [
           v.variableDeclaration(
             [11, 3, 11, 36],
-            "const",
             v.identifier([11, 9, 11, 13], "keep", "keep$1yqqpc9g2l4nh$1"),
-            v.arrow(
+            v.arrowFunction(
               [11, 16, 11, 35],
               [v.identifier([11, 17, 11, 19], "on", "on$1yqqpc9g2l4nh$2")],
               v.identifier([11, 33, 11, 35], "on", "on$1yqqpc9g2l4nh$2"),
             ),
+            "const",
           ),
-          v.if(
+          v.ifStatement(
             [12, 3, 14, 4],
-            v.call(
+            v.callExpression(
               [12, 7, 12, 31],
               v.identifier([12, 7, 12, 11], "keep", "keep$1yqqpc9g2l4nh$1"),
+              false,
               [
-                v.binop(
+                v.binaryExpression(
                   [12, 12, 12, 30],
                   v.identifier(
                     [12, 12, 12, 17],
@@ -48,7 +49,7 @@ export default cs.create(
                     "count$1yqqpc9g2l4nh$0",
                   ),
                   "&&",
-                  v.binop(
+                  v.binaryExpression(
                     [12, 21, 12, 30],
                     v.identifier(
                       [12, 21, 12, 26],
@@ -56,18 +57,26 @@ export default cs.create(
                       "count$1yqqpc9g2l4nh$0",
                     ),
                     ">",
-                    v.number([12, 29, 12, 30], 0),
+                    v.numericLiteral([12, 29, 12, 30], 0),
                   ),
                 ),
               ],
             ),
             v.block(
               [12, 33, 14, 4],
-              [v.return([13, 5, 13, 19], v.string([13, 12, 13, 18], "kept"))],
+              [
+                v.returnStatement(
+                  [13, 5, 13, 19],
+                  v.stringLiteral([13, 12, 13, 18], "kept"),
+                ),
+              ],
             ),
             null,
           ),
-          v.return([15, 3, 15, 20], v.string([15, 10, 15, 19], "dropped")),
+          v.returnStatement(
+            [15, 3, 15, 20],
+            v.stringLiteral([15, 10, 15, 19], "dropped"),
+          ),
         ],
       ),
     ),

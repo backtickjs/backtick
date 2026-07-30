@@ -7,9 +7,9 @@
         "t": [
           {
             "#": 1007,
-            "u": "const",
             "e": "greeting",
-            "j": "Hello"
+            "j": "Hello",
+            "u": "const"
           },
           {
             "#": 1010,

@@ -25,26 +25,26 @@ function wrap(fragment) {
         [
           v.variableDeclaration(
             [13, 5, 13, 21],
-            "const",
             v.identifier([13, 11, 13, 16], "total", "total$2jup3dk7x37m7$0"),
-            v.number([13, 19, 13, 20], 1),
+            v.numericLiteral([13, 19, 13, 20], 1),
+            "const",
           ),
           v.block(
             [14, 5, 17, 6],
             [
               v.variableDeclaration(
                 [15, 7, 15, 23],
-                "const",
                 v.identifier(
                   [15, 13, 15, 18],
                   "total",
                   "total$2jup3dk7x37m7$1",
                 ),
-                v.number([15, 21, 15, 22], 2),
+                v.numericLiteral([15, 21, 15, 22], 2),
+                "const",
               ),
-              v.return(
+              v.returnStatement(
                 [16, 7, 16, 32],
-                v.binop(
+                v.binaryExpression(
                   [16, 14, 16, 31],
                   v.identifier(
                     [16, 14, 16, 19],
@@ -81,7 +81,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([21, 29, 21, 31], 10),
+          (v) => v.numericLiteral([21, 29, 21, 31], 10),
         ),
       ),
       $0splice1: wrap(
@@ -96,7 +96,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([21, 47, 21, 49], 20),
+          (v) => v.numericLiteral([21, 47, 21, 49], 20),
         ),
       ),
     },
@@ -104,7 +104,7 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.binop(
+    v.binaryExpression(
       [21, 19, 21, 52],
       v.splice([21, 19, 21, 34], "$0splice0"),
       "+",

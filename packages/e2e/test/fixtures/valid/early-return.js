@@ -17,28 +17,29 @@ export default cs.create(
       [
         v.variableDeclaration(
           [5, 3, 5, 13],
-          "let",
           v.identifier([5, 7, 5, 8], "n", "n$3slc08eszz0br$0"),
-          v.number([5, 11, 5, 12], 0),
+          v.numericLiteral([5, 11, 5, 12], 0),
+          "let",
         ),
-        v.if(
+        v.ifStatement(
           [6, 3, 8, 4],
-          v.binop(
+          v.binaryExpression(
             [6, 7, 6, 14],
             v.identifier([6, 7, 6, 8], "n", "n$3slc08eszz0br$0"),
             "===",
-            v.number([6, 13, 6, 14], 0),
+            v.numericLiteral([6, 13, 6, 14], 0),
           ),
           v.block(
             [6, 16, 8, 4],
-            [v.return([7, 5, 7, 12], v.null([7, 5, 7, 12]))],
+            [v.returnStatement([7, 5, 7, 12], v.nullLiteral([7, 5, 7, 12]))],
           ),
           null,
         ),
-        v.assignment(
+        v.binaryExpression(
           [9, 3, 9, 8],
           v.identifier([9, 3, 9, 4], "n", "n$3slc08eszz0br$0"),
-          v.number([9, 7, 9, 8], 1),
+          "=",
+          v.numericLiteral([9, 7, 9, 8], 1),
         ),
       ],
     ),

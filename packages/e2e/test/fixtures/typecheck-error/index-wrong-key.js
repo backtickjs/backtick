@@ -16,7 +16,7 @@ export default cs.create(
     spliceParams: { $point: [] },
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [9, 19, 15, 2],
       [v.identifier([9, 20, 9, 24], "name", "name$2h9vfj6qbexsg$0")],
       v.block(
@@ -24,52 +24,52 @@ export default cs.create(
         [
           v.variableDeclaration(
             [10, 3, 10, 28],
-            "const",
             v.identifier([10, 9, 10, 14], "coins", "coins$2h9vfj6qbexsg$1"),
-            v.array(
+            v.arrayLiteralExpression(
               [10, 17, 10, 27],
               [
-                v.number([10, 18, 10, 19], 5),
-                v.number([10, 21, 10, 23], 31),
-                v.number([10, 25, 10, 26], 7),
+                v.numericLiteral([10, 18, 10, 19], 5),
+                v.numericLiteral([10, 21, 10, 23], 31),
+                v.numericLiteral([10, 25, 10, 26], 7),
               ],
             ),
+            "const",
           ),
           v.variableDeclaration(
             [11, 3, 11, 28],
-            "const",
             v.identifier([11, 9, 11, 14], "first", "first$2h9vfj6qbexsg$2"),
-            v.index(
+            v.elementAccessExpression(
               [11, 17, 11, 27],
               v.identifier([11, 17, 11, 22], "coins", "coins$2h9vfj6qbexsg$1"),
-              v.string([11, 23, 11, 26], "0"),
+              v.stringLiteral([11, 23, 11, 26], "0"),
             ),
+            "const",
           ),
           v.variableDeclaration(
             [12, 3, 12, 29],
-            "const",
             v.identifier([12, 9, 12, 14], "wrong", "wrong$2h9vfj6qbexsg$3"),
-            v.index(
+            v.elementAccessExpression(
               [12, 17, 12, 28],
               v.identifier([12, 17, 12, 22], "coins", "coins$2h9vfj6qbexsg$1"),
               v.identifier([12, 23, 12, 27], "name", "name$2h9vfj6qbexsg$0"),
             ),
+            "const",
           ),
           v.variableDeclaration(
             [13, 3, 13, 30],
-            "const",
             v.identifier([13, 9, 13, 14], "which", "which$2h9vfj6qbexsg$4"),
-            v.index(
+            v.elementAccessExpression(
               [13, 17, 13, 29],
               v.splice([13, 17, 13, 23], "$point"),
               v.identifier([13, 24, 13, 28], "name", "name$2h9vfj6qbexsg$0"),
             ),
+            "const",
           ),
-          v.return(
+          v.returnStatement(
             [14, 3, 14, 32],
-            v.binop(
+            v.binaryExpression(
               [14, 10, 14, 31],
-              v.binop(
+              v.binaryExpression(
                 [14, 10, 14, 23],
                 v.identifier(
                   [14, 10, 14, 15],

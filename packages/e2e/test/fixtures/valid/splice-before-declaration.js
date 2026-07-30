@@ -27,31 +27,31 @@ function wrap(fragment) {
         [
           v.variableDeclaration(
             [15, 5, 15, 22],
-            "const",
             v.identifier([15, 11, 15, 17], "before", "before$2r40h7jqt1118$0"),
-            v.number([15, 20, 15, 21], 1),
+            v.numericLiteral([15, 20, 15, 21], 1),
+            "const",
           ),
           v.variableDeclaration(
             [16, 5, 16, 31],
-            "const",
             v.identifier(
               [16, 11, 16, 18],
               "spliced",
               "spliced$2r40h7jqt1118$1",
             ),
             v.splice([16, 21, 16, 30], "$fragment"),
+            "const",
           ),
           v.variableDeclaration(
             [17, 5, 17, 21],
-            "const",
             v.identifier([17, 11, 17, 16], "after", "after$2r40h7jqt1118$2"),
-            v.number([17, 19, 17, 20], 2),
+            v.numericLiteral([17, 19, 17, 20], 2),
+            "const",
           ),
-          v.return(
+          v.returnStatement(
             [18, 5, 18, 37],
-            v.binop(
+            v.binaryExpression(
               [18, 12, 18, 36],
-              v.binop(
+              v.binaryExpression(
                 [18, 12, 18, 28],
                 v.identifier(
                   [18, 12, 18, 18],
@@ -93,7 +93,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([22, 29, 22, 31], 10),
+          (v) => v.numericLiteral([22, 29, 22, 31], 10),
         ),
       ),
       $0splice1: wrap(
@@ -108,7 +108,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([22, 47, 22, 49], 20),
+          (v) => v.numericLiteral([22, 47, 22, 49], 20),
         ),
       ),
     },
@@ -116,7 +116,7 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.binop(
+    v.binaryExpression(
       [22, 19, 22, 52],
       v.splice([22, 19, 22, 34], "$0splice0"),
       "+",

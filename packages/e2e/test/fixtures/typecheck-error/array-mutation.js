@@ -18,32 +18,34 @@ const script = cs.create(
       [
         v.variableDeclaration(
           [6, 3, 6, 27],
-          "const",
           v.identifier([6, 9, 6, 14], "coins", "coins$3m6roaxdg127n$0"),
-          v.array(
+          v.arrayLiteralExpression(
             [6, 17, 6, 26],
             [
-              v.number([6, 18, 6, 19], 1),
-              v.number([6, 21, 6, 22], 2),
-              v.number([6, 24, 6, 25], 3),
+              v.numericLiteral([6, 18, 6, 19], 1),
+              v.numericLiteral([6, 21, 6, 22], 2),
+              v.numericLiteral([6, 24, 6, 25], 3),
             ],
           ),
+          "const",
         ),
         v.variableDeclaration(
           [7, 3, 7, 28],
-          "const",
           v.identifier([7, 9, 7, 13], "last", "last$3m6roaxdg127n$1"),
-          v.call(
+          v.callExpression(
             [7, 16, 7, 27],
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [7, 16, 7, 25],
               v.identifier([7, 16, 7, 21], "coins", "coins$3m6roaxdg127n$0"),
+              false,
               "pop",
             ),
+            false,
             [],
           ),
+          "const",
         ),
-        v.return([8, 3, 8, 12], v.number([8, 10, 8, 11], 1)),
+        v.returnStatement([8, 3, 8, 12], v.numericLiteral([8, 10, 8, 11], 1)),
       ],
     ),
 );
@@ -64,21 +66,26 @@ const action = cs.create(
       [
         v.variableDeclaration(
           [12, 3, 12, 24],
-          "const",
           v.identifier([12, 9, 12, 14], "coins", "coins$3m6roaxdg127n$2"),
-          v.array(
+          v.arrayLiteralExpression(
             [12, 17, 12, 23],
-            [v.number([12, 18, 12, 19], 1), v.number([12, 21, 12, 22], 2)],
+            [
+              v.numericLiteral([12, 18, 12, 19], 1),
+              v.numericLiteral([12, 21, 12, 22], 2),
+            ],
           ),
+          "const",
         ),
-        v.call(
+        v.callExpression(
           [13, 3, 13, 16],
-          v.propertyAccess(
+          v.propertyAccessExpression(
             [13, 3, 13, 13],
             v.identifier([13, 3, 13, 8], "coins", "coins$3m6roaxdg127n$2"),
+            false,
             "push",
           ),
-          [v.number([13, 14, 13, 15], 3)],
+          false,
+          [v.numericLiteral([13, 14, 13, 15], 3)],
         ),
       ],
     ),

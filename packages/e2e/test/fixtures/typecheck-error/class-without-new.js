@@ -29,16 +29,20 @@ export default cs.create(
       [
         v.variableDeclaration(
           [21, 3, 21, 20],
-          "const",
           v.identifier([21, 9, 21, 10], "C", "C$1n6hvxiblc91f$0"),
           v.splice([21, 13, 21, 19], "$Point"),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [22, 3, 22, 18],
-          v.call(
+          v.callExpression(
             [22, 10, 22, 17],
             v.identifier([22, 10, 22, 11], "C", "C$1n6hvxiblc91f$0"),
-            [v.number([22, 12, 22, 13], 1), v.number([22, 15, 22, 16], 2)],
+            false,
+            [
+              v.numericLiteral([22, 12, 22, 13], 1),
+              v.numericLiteral([22, 15, 22, 16], 2),
+            ],
           ),
         ),
       ],

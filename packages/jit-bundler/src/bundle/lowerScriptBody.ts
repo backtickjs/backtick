@@ -90,76 +90,70 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
 
   function buildStatement(node: AstScriptStatement): BundleStatementNode {
     switch (node.kind) {
-      case "AstScriptAssignment":
-        // An assignment is a binary expression over `=`, as it is in
-        // TypeScript, so its target goes as the identifier it is.
-        return {
-          "#": NodeKind.BinaryExpression,
-          [NodeField.operatorToken]: "=",
-          [NodeField.left]: {
-            "#": NodeKind.Identifier,
-            [NodeField.text]: sourceName(node.name.bindingKey),
-          },
-          [NodeField.right]: buildExpression(node.expression),
-        };
       case "AstScriptBlock":
         return buildBlock(node);
-      case "AstScriptIf":
+      case "AstScriptIfStatement":
         return {
           "#": NodeKind.IfStatement,
-          [NodeField.expression]: buildExpression(node.condition),
-          [NodeField.thenStatement]: buildStatement(node.consequent),
+          [NodeField.expression]: buildExpression(node.expression),
+          [NodeField.thenStatement]: buildStatement(node.thenStatement),
           [NodeField.elseStatement]:
-            node.alternate === null ? null : buildStatement(node.alternate),
+            node.elseStatement === null
+              ? null
+              : buildStatement(node.elseStatement),
         };
-      case "AstScriptWhile":
+      case "AstScriptWhileStatement":
         return {
           "#": NodeKind.WhileStatement,
-          [NodeField.expression]: buildExpression(node.condition),
-          [NodeField.statement]: buildStatement(node.body),
+          [NodeField.expression]: buildExpression(node.expression),
+          [NodeField.statement]: buildStatement(node.statement),
         };
-      case "AstScriptFor":
+      case "AstScriptForStatement":
         return {
           "#": NodeKind.ForStatement,
           [NodeField.initializer]:
-            node.init === null ? null : buildStatement(node.init),
+            node.initializer === null ? null : buildStatement(node.initializer),
           [NodeField.condition]:
             node.condition === null ? null : buildExpression(node.condition),
           [NodeField.incrementor]:
-            node.update === null ? null : buildStatement(node.update),
-          [NodeField.statement]: buildStatement(node.body),
+            node.incrementor === null ? null : buildStatement(node.incrementor),
+          [NodeField.statement]: buildStatement(node.statement),
         };
-      case "AstScriptBreak":
+      case "AstScriptBreakStatement":
         return { "#": NodeKind.BreakStatement };
-      case "AstScriptContinue":
+      case "AstScriptContinueStatement":
         return { "#": NodeKind.ContinueStatement };
-      case "AstScriptReturn":
+      case "AstScriptReturnStatement":
         return {
           "#": NodeKind.ReturnStatement,
           [NodeField.expression]: buildExpression(node.expression),
         };
-      case "AstScriptThrow":
+      case "AstScriptThrowStatement":
         return {
           "#": NodeKind.ThrowStatement,
           [NodeField.expression]: buildExpression(node.expression),
         };
-      case "AstScriptTry":
+      case "AstScriptTryStatement": {
+        const clause = node.catchClause;
         return {
           "#": NodeKind.TryStatement,
-          [NodeField.tryBlock]: buildBlock(node.block),
+          [NodeField.tryBlock]: buildBlock(node.tryBlock),
           [NodeField.catchClause]: {
             "#": NodeKind.CatchClause,
             [NodeField.variableDeclaration]:
-              node.param === null ? null : sourceName(node.param.bindingKey),
-            [NodeField.block]: buildBlock(node.handler),
+              clause.variableDeclaration === null
+                ? null
+                : sourceName(clause.variableDeclaration.bindingKey),
+            [NodeField.block]: buildBlock(clause.block),
           },
         };
+      }
       case "AstScriptVariableDeclaration":
         return {
           "#": NodeKind.VariableDeclaration,
-          [NodeField.keyword]: node.keyword,
           [NodeField.name]: sourceName(node.name.bindingKey),
-          [NodeField.initializer]: buildExpression(node.expression),
+          [NodeField.initializer]: buildExpression(node.initializer),
+          [NodeField.keyword]: node.keyword,
         };
       default:
         // Every remaining kind is an expression, evaluated for its effect.
@@ -171,94 +165,117 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     const e = (child: AstScriptExpression): BundleExpressionNode =>
       buildExpression(child);
     switch (node.kind) {
-      case "AstScriptArray":
+      case "AstScriptArrayLiteralExpression":
         return node.elements.map(e);
-      case "AstScriptArrow": {
-        const params = node.params.map((param) => sourceName(param.bindingKey));
+      case "AstScriptArrowFunction": {
+        const params = node.parameters.map((param) =>
+          sourceName(param.bindingKey),
+        );
         return {
           "#": NodeKind.ArrowFunction,
           ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
           [NodeField.body]: buildBody(node.body),
         };
       }
-      case "AstScriptBinop":
+      case "AstScriptBinaryExpression": {
+        if (node.operatorToken === "=") {
+          // Only a variable can be assigned to, which the compiler enforces
+          // and the wire type states; this is where the two meet.
+          if (node.left.kind !== "AstScriptIdentifier") {
+            throw new Error("An assignment target must be an identifier.");
+          }
+          return {
+            "#": NodeKind.BinaryExpression,
+            [NodeField.operatorToken]: "=",
+            [NodeField.left]: {
+              "#": NodeKind.Identifier,
+              [NodeField.text]: sourceName(node.left.bindingKey),
+            },
+            [NodeField.right]: e(node.right),
+          };
+        }
         return {
           "#": NodeKind.BinaryExpression,
-          [NodeField.operatorToken]: node.operator,
-          [NodeField.left]: e(node.lhs),
-          [NodeField.right]: e(node.rhs),
+          [NodeField.operatorToken]: node.operatorToken,
+          [NodeField.left]: e(node.left),
+          [NodeField.right]: e(node.right),
         };
-      case "AstScriptTernary":
+      }
+      case "AstScriptConditionalExpression":
         return {
           "#": NodeKind.ConditionalExpression,
           [NodeField.condition]: e(node.condition),
-          [NodeField.whenTrue]: e(node.consequent),
-          [NodeField.whenFalse]: e(node.alternate),
+          [NodeField.whenTrue]: e(node.whenTrue),
+          [NodeField.whenFalse]: e(node.whenFalse),
         };
-      case "AstScriptBoolean":
+      case "AstScriptBooleanLiteral":
         return node.value;
-      case "AstScriptCall": {
+      case "AstScriptCallExpression": {
         // The callee is built before the arguments, because building one can
         // mint a `functions` entry and the labels run in the order they are
         // taken. Binding them here keeps that order explicit.
-        const callee = e(node.callee);
-        const args = node.args.map(e);
+        const callee = e(node.expression);
+        const args = node.arguments.map(e);
         return {
           "#": NodeKind.CallExpression,
           [NodeField.expression]: callee,
           ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-          [NodeField.questionDotToken]: node.optional ? true : undefined,
+          [NodeField.questionDotToken]: node.questionDotToken
+            ? true
+            : undefined,
         };
       }
       case "AstScriptIdentifier":
         return read(node.bindingKey);
-      case "AstScriptNew": {
+      case "AstScriptNewExpression": {
         // Here `new` expands: a spliced class lowers to a function with one
         // hole per constructor parameter (see `lowerSpliceable`), so a
         // construction serializes as an ordinary call of its callee, binding
         // the client's argument values to the holes when it runs.
-        const callee = e(node.callee);
-        const args = node.args.map(e);
+        const callee = e(node.expression);
+        const args = node.arguments.map(e);
         return {
           "#": NodeKind.CallExpression,
           [NodeField.expression]: callee,
           ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         };
       }
-      case "AstScriptNull":
+      case "AstScriptNullLiteral":
         return null;
-      case "AstScriptNumber":
+      case "AstScriptNumericLiteral":
         return node.value;
-      case "AstScriptObject": {
+      case "AstScriptObjectLiteralExpression": {
         // An object literal serializes as the plain object it spells, so `#` —
         // the bundle's one reserved key — would read as a node.
-        if ("#" in node.entries) {
+        if ("#" in node.properties) {
           throw new Error("Can't bundle this object: the `#` key is reserved.");
         }
         const entries: { [key: string]: BundleExpressionNode } = {};
-        for (const [key, value] of Object.entries(node.entries)) {
+        for (const [key, value] of Object.entries(node.properties)) {
           entries[key] = e(value);
         }
         return entries;
       }
-      case "AstScriptPropertyAccess": {
+      case "AstScriptPropertyAccessExpression": {
         return {
           "#": NodeKind.PropertyAccessExpression,
           [NodeField.expression]: e(node.expression),
           [NodeField.name]: node.name,
-          [NodeField.questionDotToken]: node.optional ? true : undefined,
+          [NodeField.questionDotToken]: node.questionDotToken
+            ? true
+            : undefined,
         };
       }
-      case "AstScriptIndex":
+      case "AstScriptElementAccessExpression":
         return {
           "#": NodeKind.ElementAccessExpression,
           [NodeField.expression]: e(node.expression),
-          [NodeField.argumentExpression]: e(node.key),
+          [NodeField.argumentExpression]: e(node.argumentExpression),
         };
       case "AstScriptSplice":
         return renderSplice(node.key);
-      case "AstScriptString":
-        return node.value;
+      case "AstScriptStringLiteral":
+        return node.text;
       default: {
         const unhandled: never = node;
         throw new Error(`Unhandled AST node: ${JSON.stringify(unhandled)}`);

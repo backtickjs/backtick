@@ -3,6 +3,7 @@ import type { BinaryOperator } from "@backtickjs/cs-runtime";
 export function isSupportedBinop(operator: string): operator is BinaryOperator {
   const candidate = operator as BinaryOperator;
   switch (candidate) {
+    case "=":
     case "&&":
     case "||":
     case "??":

@@ -11,7 +11,7 @@ const entry: IrScriptEntry = {
   splices: [],
   captures: [],
   spliceParams: {},
-  body: { kind: "AstScriptNumber", loc: [3, 7, 3, 8], value: 1 },
+  body: { kind: "AstScriptNumericLiteral", loc: [3, 7, 3, 8], value: 1 },
 };
 
 const ir: Ir = {

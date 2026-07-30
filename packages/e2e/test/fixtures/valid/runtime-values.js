@@ -11,7 +11,7 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.object([3, 20, 3, 73], {
+    v.objectLiteralExpression([3, 20, 3, 73], {
       list: v.splice([3, 28, 3, 53], "$0splice0"),
       obj: v.splice([3, 60, 3, 71], "$0splice1"),
     }),

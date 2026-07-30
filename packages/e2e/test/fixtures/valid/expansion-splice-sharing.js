@@ -16,10 +16,10 @@ function sum(a, b) {
       spliceParams: { $a: [], $b: [] },
     },
     (v) =>
-      v.arrow(
+      v.arrowFunction(
         [9, 13, 9, 26],
         [],
-        v.binop(
+        v.binaryExpression(
           [9, 19, 9, 26],
           v.splice([9, 19, 9, 21], "$a"),
           "+",
@@ -69,43 +69,55 @@ export default cs.create(
       [
         v.variableDeclaration(
           [45, 3, 45, 30],
-          "const",
           v.identifier([45, 9, 45, 10], "p", "p$2kc5czyfqafly$0"),
-          v.new([45, 13, 45, 29], v.splice([45, 17, 45, 23], "$Point"), [
-            v.number([45, 24, 45, 25], 1),
-            v.number([45, 27, 45, 28], 2),
-          ]),
+          v.newExpression(
+            [45, 13, 45, 29],
+            v.splice([45, 17, 45, 23], "$Point"),
+            [
+              v.numericLiteral([45, 24, 45, 25], 1),
+              v.numericLiteral([45, 27, 45, 28], 2),
+            ],
+          ),
+          "const",
         ),
         v.variableDeclaration(
           [46, 3, 46, 29],
-          "const",
           v.identifier([46, 9, 46, 10], "s", "s$2kc5czyfqafly$1"),
-          v.new([46, 13, 46, 28], v.splice([46, 17, 46, 22], "$Size"), [
-            v.number([46, 23, 46, 24], 3),
-            v.number([46, 26, 46, 27], 4),
-          ]),
+          v.newExpression(
+            [46, 13, 46, 28],
+            v.splice([46, 17, 46, 22], "$Size"),
+            [
+              v.numericLiteral([46, 23, 46, 24], 3),
+              v.numericLiteral([46, 26, 46, 27], 4),
+            ],
+          ),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [47, 3, 47, 28],
-          v.binop(
+          v.binaryExpression(
             [47, 10, 47, 27],
-            v.call(
+            v.callExpression(
               [47, 10, 47, 17],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [47, 10, 47, 15],
                 v.identifier([47, 10, 47, 11], "p", "p$2kc5czyfqafly$0"),
+                false,
                 "sum",
               ),
+              false,
               [],
             ),
             "+",
-            v.call(
+            v.callExpression(
               [47, 20, 47, 27],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [47, 20, 47, 25],
                 v.identifier([47, 20, 47, 21], "s", "s$2kc5czyfqafly$1"),
+                false,
                 "sum",
               ),
+              false,
               [],
             ),
           ),

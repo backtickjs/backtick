@@ -59,7 +59,7 @@ export interface Bundle {
   // A construction's expansion is also an entry — one per class, labeled
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
-  functions: Record<FunctionLabel, BundleArrowNode>;
+  functions: Record<FunctionLabel, BundleArrowFunctionNode>;
   trees: Record<TreeLabel, BundleTree>;
   root: BundleExpr;
 }
@@ -356,27 +356,27 @@ export type BundleExpressionNode =
   | BundleData<BundleExpressionNode>
   | BundleIdentifierNode
   | BundleGetEntry
-  | BundleCallNode
-  | BundlePropertyNode
-  | BundleIndexNode
-  | BundleBinopNode
-  | BundleTernaryNode
-  | BundleArrowNode;
+  | BundleCallExpressionNode
+  | BundlePropertyAccessExpressionNode
+  | BundleElementAccessExpressionNode
+  | BundleBinaryExpressionNode
+  | BundleConditionalExpressionNode
+  | BundleArrowFunctionNode;
 
 // A body node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.
 export type BundleStatementNode =
   | BundleExpressionNode
   | BundleBlockNode
-  | BundleDeclarationNode
-  | BundleIfNode
-  | BundleWhileNode
-  | BundleForNode
-  | BundleBreakNode
-  | BundleContinueNode
-  | BundleReturnNode
-  | BundleThrowNode
-  | BundleTryNode;
+  | BundleVariableDeclarationNode
+  | BundleIfStatementNode
+  | BundleWhileStatementNode
+  | BundleForStatementNode
+  | BundleBreakStatementNode
+  | BundleContinueStatementNode
+  | BundleReturnStatementNode
+  | BundleThrowStatementNode
+  | BundleTryStatementNode;
 
 // The body of an arrow: a block, or an expression whose value is implicitly
 // returned.
@@ -411,11 +411,11 @@ export type BundleGetEntry = BundleGetFunction | BundleGetTree;
 // order. When `questionDotToken` (`callee?.(…)`), a null callee yields null — the
 // language's absent value; `undefined` never arises — and the arguments are
 // not evaluated.
-export interface BundleCallNode {
+export interface BundleCallExpressionNode {
   "#": typeof NodeKind.CallExpression;
   [NodeField.expression]: BundleExpressionNode;
-  [NodeField.arguments]?: BundleExpressionNode[];
   [NodeField.questionDotToken]?: true;
+  [NodeField.arguments]?: BundleExpressionNode[];
 }
 
 // A static property access: `object.name`. When `questionDotToken` (`object?.name`),
@@ -424,11 +424,11 @@ export interface BundleCallNode {
 // the same family as a missing argument binding null. As a call's callee,
 // an optional access also short-circuits the call: a null object yields
 // null and the arguments are not evaluated.
-export interface BundlePropertyNode {
+export interface BundlePropertyAccessExpressionNode {
   "#": typeof NodeKind.PropertyAccessExpression;
   [NodeField.expression]: BundleExpressionNode;
-  [NodeField.name]: string;
   [NodeField.questionDotToken]?: true;
+  [NodeField.name]: string;
 }
 
 // A dynamic read: `object[key]`, where the key is an expression rather than a
@@ -441,7 +441,7 @@ export interface BundlePropertyNode {
 // The typechecker is stricter than that, naming the element type for an
 // in-range read the way TypeScript itself does, so the null is a runtime floor
 // rather than something every read has to answer for.
-export interface BundleIndexNode {
+export interface BundleElementAccessExpressionNode {
   "#": typeof NodeKind.ElementAccessExpression;
   [NodeField.expression]: BundleExpressionNode;
   [NodeField.argumentExpression]: BundleExpressionNode;
@@ -456,7 +456,7 @@ export interface BundleIndexNode {
 // The compiler rejects any other operator in a script.
 //
 // `=` is here because an assignment is a binary expression, as it is in
-// TypeScript — see `BundleBinopNode`. A script can't write one where a value
+// TypeScript — see `BundleBinaryExpressionNode`. A script can't write one where a value
 // is expected, but the format has no separate place to put it.
 export type BundleBinaryOperator =
   | "="
@@ -484,7 +484,7 @@ export type BundleBinaryOperator =
 // evaluating it first would read a variable where a name was meant. The type
 // splits them so a reader can't reach `left` for an assignment and find
 // anything but a name.
-export type BundleBinopNode =
+export type BundleBinaryExpressionNode =
   | {
       "#": typeof NodeKind.BinaryExpression;
       [NodeField.operatorToken]: "=";
@@ -501,7 +501,7 @@ export type BundleBinopNode =
 // A ternary: `condition ? consequent : alternate`. The condition is boolean
 // — the typechecker requires it, no truthiness — and only the taken
 // branch evaluates (the other branch's effects are skipped).
-export interface BundleTernaryNode {
+export interface BundleConditionalExpressionNode {
   "#": typeof NodeKind.ConditionalExpression;
   [NodeField.condition]: BundleExpressionNode;
   [NodeField.whenTrue]: BundleExpressionNode;
@@ -514,7 +514,7 @@ export interface BundleTernaryNode {
 // arguments than `params` binds the missing ones to null — the language's
 // absent value; `undefined` never arises — which is how an omitted
 // optional parameter reads as null.
-export interface BundleArrowNode {
+export interface BundleArrowFunctionNode {
   "#": typeof NodeKind.ArrowFunction;
   [NodeField.parameters]?: string[];
   [NodeField.body]: BundleBody;
@@ -530,17 +530,17 @@ export interface BundleBlockNode {
 }
 
 // A variable declaration: binds `name` in the enclosing block.
-export interface BundleDeclarationNode {
+export interface BundleVariableDeclarationNode {
   "#": typeof NodeKind.VariableDeclaration;
-  [NodeField.keyword]: "let" | "const";
   [NodeField.name]: string;
   [NodeField.initializer]: BundleExpressionNode;
+  [NodeField.keyword]: "let" | "const";
 }
 
 // An if statement; `alternate` is null when there is no else branch. The
 // condition is boolean — the typechecker rejects a non-boolean condition,
 // so a client tests it directly, without truthiness rules.
-export interface BundleIfNode {
+export interface BundleIfStatementNode {
   "#": typeof NodeKind.IfStatement;
   [NodeField.expression]: BundleExpressionNode;
   [NodeField.thenStatement]: BundleStatementNode;
@@ -550,7 +550,7 @@ export interface BundleIfNode {
 // `while (c) { … }`. The condition is boolean, as every condition is: there is
 // no truthiness to fall back on. A `return` in the body returns from the
 // enclosing arrow.
-export interface BundleWhileNode {
+export interface BundleWhileStatementNode {
   "#": typeof NodeKind.WhileStatement;
   [NodeField.expression]: BundleExpressionNode;
   [NodeField.statement]: BundleStatementNode;
@@ -564,7 +564,7 @@ export interface BundleWhileNode {
 // once the loop is; and each turn gets its own copy of that scope, made from
 // the last turn's values before the update runs — so an arrow built in one turn
 // keeps that turn's numbers rather than the value the loop stopped at.
-export interface BundleForNode {
+export interface BundleForStatementNode {
   "#": typeof NodeKind.ForStatement;
   [NodeField.initializer]: BundleStatementNode | null;
   [NodeField.condition]: BundleExpressionNode | null;
@@ -575,23 +575,23 @@ export interface BundleForNode {
 // `break` and `continue`, which the nearest enclosing loop catches: one ends
 // it, the other starts its next turn — after a `for`'s update, never skipping
 // it. Neither takes a label, so neither can name a loop further out.
-export interface BundleBreakNode {
+export interface BundleBreakStatementNode {
   "#": typeof NodeKind.BreakStatement;
 }
 
-export interface BundleContinueNode {
+export interface BundleContinueStatementNode {
   "#": typeof NodeKind.ContinueStatement;
 }
 
 // Returns the expression's value from the enclosing arrow.
-export interface BundleReturnNode {
+export interface BundleReturnStatementNode {
   "#": typeof NodeKind.ReturnStatement;
   [NodeField.expression]: BundleExpressionNode;
 }
 
 // Throws the expression's value, with JavaScript `throw` semantics: the value
 // is thrown as-is (`throw "message"` throws the string itself).
-export interface BundleThrowNode {
+export interface BundleThrowStatementNode {
   "#": typeof NodeKind.ThrowStatement;
   [NodeField.expression]: BundleExpressionNode;
 }
@@ -600,7 +600,7 @@ export interface BundleThrowNode {
 // takes over. There is no `finallyBlock` — the compiler rejects `finally` —
 // and the clause is never absent, since a `try` with nothing to catch it
 // would be the statement it wraps.
-export interface BundleTryNode {
+export interface BundleTryStatementNode {
   "#": typeof NodeKind.TryStatement;
   [NodeField.tryBlock]: BundleBlockNode;
   [NodeField.catchClause]: BundleCatchClauseNode;

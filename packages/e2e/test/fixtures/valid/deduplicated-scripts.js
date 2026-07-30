@@ -12,7 +12,7 @@ const leaf = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.number([5, 17, 5, 18], 7),
+  (v) => v.numericLiteral([5, 17, 5, 18], 7),
 );
 export default cs.create(
   [7, 16, 7, 44],
@@ -26,7 +26,7 @@ export default cs.create(
     spliceParams: { $leaf: [] },
   },
   (v) =>
-    v.object([7, 20, 7, 42], {
+    v.objectLiteralExpression([7, 20, 7, 42], {
       a: v.splice([7, 25, 7, 30], "$leaf"),
       b: v.splice([7, 35, 7, 40], "$leaf"),
     }),

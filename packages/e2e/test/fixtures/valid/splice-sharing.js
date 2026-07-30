@@ -12,7 +12,7 @@ function add(lhs, rhs) {
       spliceParams: { $lhs: [], $rhs: [] },
     },
     (v) =>
-      v.binop(
+      v.binaryExpression(
         [4, 13, 4, 24],
         v.splice([4, 13, 4, 17], "$lhs"),
         "+",
@@ -40,7 +40,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([8, 15, 8, 16], 1),
+          (v) => v.numericLiteral([8, 15, 8, 16], 1),
         ),
         cs.create(
           [8, 19, 8, 24],
@@ -53,7 +53,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([8, 22, 8, 23], 2),
+          (v) => v.numericLiteral([8, 22, 8, 23], 2),
         ),
       ),
       $0splice1: add(
@@ -68,7 +68,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([9, 15, 9, 16], 3),
+          (v) => v.numericLiteral([9, 15, 9, 16], 3),
         ),
         cs.create(
           [9, 19, 9, 24],
@@ -81,7 +81,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([9, 22, 9, 23], 4),
+          (v) => v.numericLiteral([9, 22, 9, 23], 4),
         ),
       ),
     },
@@ -89,7 +89,7 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.object([7, 20, 10, 2], {
+    v.objectLiteralExpression([7, 20, 10, 2], {
       x: v.splice([8, 6, 8, 26], "$0splice0"),
       y: v.splice([9, 6, 9, 26], "$0splice1"),
     }),

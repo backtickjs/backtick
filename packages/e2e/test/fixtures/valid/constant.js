@@ -10,5 +10,5 @@ export default cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.number([3, 19, 3, 20], 1),
+  (v) => v.numericLiteral([3, 19, 3, 20], 1),
 );

@@ -19,32 +19,33 @@ export default cs.create(
       [
         v.variableDeclaration(
           [7, 3, 7, 16],
-          "let",
           v.identifier([7, 7, 7, 10], "out", "out$2qq4wmxi2b090$0"),
-          v.string([7, 13, 7, 15], ""),
+          v.stringLiteral([7, 13, 7, 15], ""),
+          "let",
         ),
-        v.for(
+        v.forStatement(
           [8, 3, 13, 4],
           v.variableDeclaration(
             [8, 8, 8, 17],
-            "let",
             v.identifier([8, 12, 8, 13], "i", "i$2qq4wmxi2b090$1"),
-            v.number([8, 16, 8, 17], 0),
+            v.numericLiteral([8, 16, 8, 17], 0),
+            "let",
           ),
-          v.binop(
+          v.binaryExpression(
             [8, 19, 8, 24],
             v.identifier([8, 19, 8, 20], "i", "i$2qq4wmxi2b090$1"),
             "<",
-            v.number([8, 23, 8, 24], 2),
+            v.numericLiteral([8, 23, 8, 24], 2),
           ),
-          v.assignment(
+          v.binaryExpression(
             [8, 26, 8, 35],
             v.identifier([8, 26, 8, 27], "i", "i$2qq4wmxi2b090$1"),
-            v.binop(
+            "=",
+            v.binaryExpression(
               [8, 30, 8, 35],
               v.identifier([8, 30, 8, 31], "i", "i$2qq4wmxi2b090$1"),
               "+",
-              v.number([8, 34, 8, 35], 1),
+              v.numericLiteral([8, 34, 8, 35], 1),
             ),
           ),
           v.block(
@@ -52,47 +53,49 @@ export default cs.create(
             [
               v.variableDeclaration(
                 [9, 5, 9, 19],
-                "const",
                 v.identifier([9, 11, 9, 12], "i", "i$2qq4wmxi2b090$2"),
-                v.string([9, 15, 9, 18], "-"),
+                v.stringLiteral([9, 15, 9, 18], "-"),
+                "const",
               ),
-              v.for(
+              v.forStatement(
                 [10, 5, 12, 6],
                 v.variableDeclaration(
                   [10, 10, 10, 19],
-                  "let",
                   v.identifier([10, 14, 10, 15], "j", "j$2qq4wmxi2b090$3"),
-                  v.number([10, 18, 10, 19], 0),
+                  v.numericLiteral([10, 18, 10, 19], 0),
+                  "let",
                 ),
-                v.binop(
+                v.binaryExpression(
                   [10, 21, 10, 26],
                   v.identifier([10, 21, 10, 22], "j", "j$2qq4wmxi2b090$3"),
                   "<",
-                  v.number([10, 25, 10, 26], 2),
+                  v.numericLiteral([10, 25, 10, 26], 2),
                 ),
-                v.assignment(
+                v.binaryExpression(
                   [10, 28, 10, 37],
                   v.identifier([10, 28, 10, 29], "j", "j$2qq4wmxi2b090$3"),
-                  v.binop(
+                  "=",
+                  v.binaryExpression(
                     [10, 32, 10, 37],
                     v.identifier([10, 32, 10, 33], "j", "j$2qq4wmxi2b090$3"),
                     "+",
-                    v.number([10, 36, 10, 37], 1),
+                    v.numericLiteral([10, 36, 10, 37], 1),
                   ),
                 ),
                 v.block(
                   [10, 39, 12, 6],
                   [
-                    v.assignment(
+                    v.binaryExpression(
                       [11, 7, 11, 24],
                       v.identifier(
                         [11, 7, 11, 10],
                         "out",
                         "out$2qq4wmxi2b090$0",
                       ),
-                      v.binop(
+                      "=",
+                      v.binaryExpression(
                         [11, 13, 11, 24],
-                        v.binop(
+                        v.binaryExpression(
                           [11, 13, 11, 20],
                           v.identifier(
                             [11, 13, 11, 16],
@@ -120,7 +123,7 @@ export default cs.create(
             ],
           ),
         ),
-        v.return(
+        v.returnStatement(
           [14, 3, 14, 14],
           v.identifier([14, 10, 14, 13], "out", "out$2qq4wmxi2b090$0"),
         ),

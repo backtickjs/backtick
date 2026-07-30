@@ -13,7 +13,7 @@ export default cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [5, 19, 11, 2],
       [v.identifier([5, 20, 5, 21], "n", "n$22k8zyijhbub1$0")],
       v.block(
@@ -21,20 +21,21 @@ export default cs.create(
         [
           v.variableDeclaration(
             [6, 3, 6, 16],
-            "let",
             v.identifier([6, 7, 6, 11], "left", "left$22k8zyijhbub1$1"),
             v.identifier([6, 14, 6, 15], "n", "n$22k8zyijhbub1$0"),
+            "let",
           ),
-          v.while(
+          v.whileStatement(
             [7, 3, 9, 4],
             v.identifier([7, 10, 7, 14], "left", "left$22k8zyijhbub1$1"),
             v.block(
               [7, 16, 9, 4],
               [
-                v.assignment(
+                v.binaryExpression(
                   [8, 5, 8, 20],
                   v.identifier([8, 5, 8, 9], "left", "left$22k8zyijhbub1$1"),
-                  v.binop(
+                  "=",
+                  v.binaryExpression(
                     [8, 12, 8, 20],
                     v.identifier(
                       [8, 12, 8, 16],
@@ -42,13 +43,13 @@ export default cs.create(
                       "left$22k8zyijhbub1$1",
                     ),
                     "-",
-                    v.number([8, 19, 8, 20], 1),
+                    v.numericLiteral([8, 19, 8, 20], 1),
                   ),
                 ),
               ],
             ),
           ),
-          v.return(
+          v.returnStatement(
             [10, 3, 10, 15],
             v.identifier([10, 10, 10, 14], "left", "left$22k8zyijhbub1$1"),
           ),

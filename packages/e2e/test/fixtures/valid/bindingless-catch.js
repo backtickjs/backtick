@@ -16,16 +16,29 @@ export default cs.create(
     v.block(
       [5, 19, 11, 2],
       [
-        v.try(
+        v.tryStatement(
           [6, 3, 10, 4],
           v.block(
             [6, 7, 8, 4],
-            [v.throw([7, 5, 7, 18], v.string([7, 11, 7, 17], "boom"))],
+            [
+              v.throwStatement(
+                [7, 5, 7, 18],
+                v.stringLiteral([7, 11, 7, 17], "boom"),
+              ),
+            ],
           ),
-          null,
-          v.block(
-            [8, 11, 10, 4],
-            [v.return([9, 5, 9, 21], v.string([9, 12, 9, 20], "caught"))],
+          v.catchClause(
+            [8, 5, 10, 4],
+            null,
+            v.block(
+              [8, 11, 10, 4],
+              [
+                v.returnStatement(
+                  [9, 5, 9, 21],
+                  v.stringLiteral([9, 12, 9, 20], "caught"),
+                ),
+              ],
+            ),
           ),
         ),
       ],

@@ -12,7 +12,7 @@ const count = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.number([5, 18, 5, 19], 1),
+  (v) => v.numericLiteral([5, 18, 5, 19], 1),
 );
 export const script = cs.create(
   [7, 23, 9, 3],

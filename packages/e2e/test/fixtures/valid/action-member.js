@@ -27,9 +27,9 @@ const press = cs.create(
       [
         v.variableDeclaration(
           [19, 3, 19, 15],
-          "const",
           v.identifier([19, 9, 19, 10], "x", "x$1w48eutzbucnb$0"),
-          v.number([19, 13, 19, 14], 1),
+          v.numericLiteral([19, 13, 19, 14], 1),
+          "const",
         ),
       ],
     ),
@@ -54,7 +54,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.string([23, 34, 23, 38], "OK"),
+          (v) => v.stringLiteral([23, 34, 23, 38], "OK"),
         ),
         press,
       ),
@@ -68,15 +68,16 @@ export default cs.create(
       [
         v.variableDeclaration(
           [23, 3, 23, 49],
-          "const",
           v.identifier([23, 9, 23, 15], "button", "button$1w48eutzbucnb$1"),
           v.splice([23, 18, 23, 48], "$0splice0"),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [24, 3, 24, 23],
-          v.propertyAccess(
+          v.propertyAccessExpression(
             [24, 10, 24, 22],
             v.identifier([24, 10, 24, 16], "button", "button$1w48eutzbucnb$1"),
+            false,
             "label",
           ),
         ),

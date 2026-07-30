@@ -18,25 +18,33 @@ export default cs.create(
       [
         v.variableDeclaration(
           [7, 3, 7, 19],
-          "const",
           v.identifier([7, 9, 7, 14], "count", "count$rbes3su3s43l$0"),
-          v.number([7, 17, 7, 18], 1),
+          v.numericLiteral([7, 17, 7, 18], 1),
+          "const",
         ),
-        v.if(
+        v.ifStatement(
           [9, 3, 12, 4],
-          v.binop(
+          v.binaryExpression(
             [9, 7, 9, 18],
             v.identifier([9, 7, 9, 12], "count", "count$rbes3su3s43l$0"),
             "===",
-            v.number([9, 17, 9, 18], 1),
+            v.numericLiteral([9, 17, 9, 18], 1),
           ),
           v.block(
             [9, 20, 12, 4],
-            [v.return([11, 5, 11, 18], v.string([11, 12, 11, 17], "one"))],
+            [
+              v.returnStatement(
+                [11, 5, 11, 18],
+                v.stringLiteral([11, 12, 11, 17], "one"),
+              ),
+            ],
           ),
           null,
         ),
-        v.return([16, 3, 16, 17], v.string([16, 10, 16, 16], "many")),
+        v.returnStatement(
+          [16, 3, 16, 17],
+          v.stringLiteral([16, 10, 16, 16], "many"),
+        ),
       ],
     ),
 );

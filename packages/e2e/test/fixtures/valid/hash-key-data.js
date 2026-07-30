@@ -12,5 +12,6 @@ export default cs.create(
     captures: [],
     spliceParams: { $0splice0: [] },
   },
-  (v) => v.arrow([5, 19, 5, 46], [], v.splice([5, 25, 5, 46], "$0splice0")),
+  (v) =>
+    v.arrowFunction([5, 19, 5, 46], [], v.splice([5, 25, 5, 46], "$0splice0")),
 );

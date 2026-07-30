@@ -29,46 +29,46 @@ export interface AstState {
 
 // A script node that yields a value.
 export type AstScriptExpression =
-  | AstScriptArray
-  | AstScriptArrow
-  | AstScriptBinop
-  | AstScriptBoolean
-  | AstScriptCall
+  | AstScriptArrayLiteralExpression
+  | AstScriptArrowFunction
+  | AstScriptBinaryExpression
+  | AstScriptBooleanLiteral
+  | AstScriptCallExpression
   | AstScriptIdentifier
-  | AstScriptNew
-  | AstScriptNull
-  | AstScriptNumber
-  | AstScriptObject
-  | AstScriptPropertyAccess
-  | AstScriptIndex
+  | AstScriptNewExpression
+  | AstScriptNullLiteral
+  | AstScriptNumericLiteral
+  | AstScriptObjectLiteralExpression
+  | AstScriptPropertyAccessExpression
+  | AstScriptElementAccessExpression
   | AstScriptSplice
-  | AstScriptString
-  | AstScriptTernary;
+  | AstScriptStringLiteral
+  | AstScriptConditionalExpression;
 
 // A script node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.
 export type AstScriptStatement =
   | AstScriptExpression
-  | AstScriptAssignment
   | AstScriptBlock
-  | AstScriptIf
-  | AstScriptWhile
-  | AstScriptFor
-  | AstScriptBreak
-  | AstScriptContinue
-  | AstScriptReturn
-  | AstScriptThrow
-  | AstScriptTry
+  | AstScriptIfStatement
+  | AstScriptWhileStatement
+  | AstScriptForStatement
+  | AstScriptBreakStatement
+  | AstScriptContinueStatement
+  | AstScriptReturnStatement
+  | AstScriptThrowStatement
+  | AstScriptTryStatement
   | AstScriptVariableDeclaration;
 
 // The body of a script or an arrow: a block, or an expression whose value is
 // implicitly returned.
 export type AstScriptBody = AstScriptExpression | AstScriptBlock;
 
-// Any node parsed from a client script's source text — the statement union
-// already spans the grammar. Every script node carries the source location it
-// was parsed from.
-export type AstScriptNode = AstScriptStatement;
+// Any node parsed from a client script's source text: the statement union
+// spans the grammar, apart from the one clause that is neither a statement nor
+// an expression. Every script node carries the source location it was parsed
+// from.
+export type AstScriptNode = AstScriptStatement | AstScriptCatchClause;
 
 export interface AstScript {
   readonly kind: "AstScript";
@@ -80,68 +80,61 @@ export interface AstScript {
   readonly expression: AstScriptBody;
 }
 
-export interface AstScriptArray {
-  readonly kind: "AstScriptArray";
+export interface AstScriptArrayLiteralExpression {
+  readonly kind: "AstScriptArrayLiteralExpression";
   readonly loc: SourceLocation;
   readonly elements: readonly AstScriptExpression[];
 }
 
-export interface AstScriptArrow {
-  readonly kind: "AstScriptArrow";
+export interface AstScriptArrowFunction {
+  readonly kind: "AstScriptArrowFunction";
   readonly loc: SourceLocation;
-  readonly params: readonly AstScriptIdentifier[];
+  readonly parameters: readonly AstScriptIdentifier[];
   readonly body: AstScriptBody;
 }
 
-export interface AstScriptAssignment {
-  readonly kind: "AstScriptAssignment";
+export interface AstScriptWhileStatement {
+  readonly kind: "AstScriptWhileStatement";
   readonly loc: SourceLocation;
-  readonly name: AstScriptIdentifier;
   readonly expression: AstScriptExpression;
-}
-
-export interface AstScriptWhile {
-  readonly kind: "AstScriptWhile";
-  readonly loc: SourceLocation;
-  readonly condition: AstScriptExpression;
-  readonly body: AstScriptStatement;
+  readonly statement: AstScriptStatement;
 }
 
 // `init` is a declaration or an assignment and `update` an assignment, so both
 // are statements rather than expressions.
-export interface AstScriptFor {
-  readonly kind: "AstScriptFor";
+export interface AstScriptForStatement {
+  readonly kind: "AstScriptForStatement";
   readonly loc: SourceLocation;
-  readonly init: AstScriptStatement | null;
+  readonly initializer: AstScriptStatement | null;
   readonly condition: AstScriptExpression | null;
-  readonly update: AstScriptStatement | null;
-  readonly body: AstScriptStatement;
+  readonly incrementor: AstScriptStatement | null;
+  readonly statement: AstScriptStatement;
 }
 
-export interface AstScriptBreak {
-  readonly kind: "AstScriptBreak";
+export interface AstScriptBreakStatement {
+  readonly kind: "AstScriptBreakStatement";
   readonly loc: SourceLocation;
 }
 
-export interface AstScriptContinue {
-  readonly kind: "AstScriptContinue";
+export interface AstScriptContinueStatement {
+  readonly kind: "AstScriptContinueStatement";
   readonly loc: SourceLocation;
 }
 
-export interface AstScriptBinop {
-  readonly kind: "AstScriptBinop";
+export interface AstScriptBinaryExpression {
+  readonly kind: "AstScriptBinaryExpression";
   readonly loc: SourceLocation;
-  readonly lhs: AstScriptExpression;
-  readonly operator: BinaryOperator;
-  readonly rhs: AstScriptExpression;
+  readonly left: AstScriptExpression;
+  readonly operatorToken: BinaryOperator;
+  readonly right: AstScriptExpression;
 }
 
-export interface AstScriptTernary {
-  readonly kind: "AstScriptTernary";
+export interface AstScriptConditionalExpression {
+  readonly kind: "AstScriptConditionalExpression";
   readonly loc: SourceLocation;
   readonly condition: AstScriptExpression;
-  readonly consequent: AstScriptExpression;
-  readonly alternate: AstScriptExpression;
+  readonly whenTrue: AstScriptExpression;
+  readonly whenFalse: AstScriptExpression;
 }
 
 export interface AstScriptBlock {
@@ -150,33 +143,33 @@ export interface AstScriptBlock {
   readonly statements: readonly AstScriptStatement[];
 }
 
-export interface AstScriptBoolean {
-  readonly kind: "AstScriptBoolean";
+export interface AstScriptBooleanLiteral {
+  readonly kind: "AstScriptBooleanLiteral";
   readonly loc: SourceLocation;
   readonly value: boolean;
 }
 
-export interface AstScriptCall {
-  readonly kind: "AstScriptCall";
+export interface AstScriptCallExpression {
+  readonly kind: "AstScriptCallExpression";
   readonly loc: SourceLocation;
-  readonly callee: AstScriptExpression;
-  readonly args: readonly AstScriptExpression[];
-  readonly optional: boolean;
+  readonly expression: AstScriptExpression;
+  readonly questionDotToken: boolean;
+  readonly arguments: readonly AstScriptExpression[];
 }
 
 export interface AstScriptIdentifier {
   readonly kind: "AstScriptIdentifier";
   readonly loc: SourceLocation;
-  readonly name: string;
+  readonly text: string;
   readonly bindingKey: string;
 }
 
-export interface AstScriptIf {
-  readonly kind: "AstScriptIf";
+export interface AstScriptIfStatement {
+  readonly kind: "AstScriptIfStatement";
   readonly loc: SourceLocation;
-  readonly condition: AstScriptExpression;
-  readonly consequent: AstScriptStatement;
-  readonly alternate: AstScriptStatement | null;
+  readonly expression: AstScriptExpression;
+  readonly thenStatement: AstScriptStatement;
+  readonly elseStatement: AstScriptStatement | null;
 }
 
 // e.g. new ${Point}(1, 2) — a construction, mirrored 1:1 from the source.
@@ -184,49 +177,49 @@ export interface AstScriptIf {
 // function with one hole per constructor parameter (see `lowerSpliceable`) —
 // so the bundler expands the construction into a plain call of its callee
 // (see `lowerScriptBody`).
-export interface AstScriptNew {
-  readonly kind: "AstScriptNew";
+export interface AstScriptNewExpression {
+  readonly kind: "AstScriptNewExpression";
   readonly loc: SourceLocation;
-  readonly callee: AstScriptExpression;
-  readonly args: readonly AstScriptExpression[];
+  readonly expression: AstScriptExpression;
+  readonly arguments: readonly AstScriptExpression[];
 }
 
-export interface AstScriptNull {
-  readonly kind: "AstScriptNull";
+export interface AstScriptNullLiteral {
+  readonly kind: "AstScriptNullLiteral";
   readonly loc: SourceLocation;
 }
 
-export interface AstScriptNumber {
-  readonly kind: "AstScriptNumber";
+export interface AstScriptNumericLiteral {
+  readonly kind: "AstScriptNumericLiteral";
   readonly loc: SourceLocation;
   readonly value: number;
 }
 
-export interface AstScriptObject {
-  readonly kind: "AstScriptObject";
+export interface AstScriptObjectLiteralExpression {
+  readonly kind: "AstScriptObjectLiteralExpression";
   readonly loc: SourceLocation;
-  readonly entries: Readonly<Record<string, AstScriptExpression>>;
+  readonly properties: Readonly<Record<string, AstScriptExpression>>;
 }
 
-export interface AstScriptPropertyAccess {
-  readonly kind: "AstScriptPropertyAccess";
+export interface AstScriptPropertyAccessExpression {
+  readonly kind: "AstScriptPropertyAccessExpression";
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
+  readonly questionDotToken: boolean;
   readonly name: string;
-  readonly optional: boolean;
 }
 
 // The key is an expression, not a name: `a[i]` and `row[column]` are the point,
 // `row["name"]` only incidentally allowed.
-export interface AstScriptIndex {
-  readonly kind: "AstScriptIndex";
+export interface AstScriptElementAccessExpression {
+  readonly kind: "AstScriptElementAccessExpression";
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
-  readonly key: AstScriptExpression;
+  readonly argumentExpression: AstScriptExpression;
 }
 
-export interface AstScriptReturn {
-  readonly kind: "AstScriptReturn";
+export interface AstScriptReturnStatement {
+  readonly kind: "AstScriptReturnStatement";
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
 }
@@ -237,32 +230,41 @@ export interface AstScriptSplice {
   readonly key: string;
 }
 
-export interface AstScriptString {
-  readonly kind: "AstScriptString";
+export interface AstScriptStringLiteral {
+  readonly kind: "AstScriptStringLiteral";
   readonly loc: SourceLocation;
-  readonly value: string;
+  readonly text: string;
 }
 
-export interface AstScriptThrow {
-  readonly kind: "AstScriptThrow";
+export interface AstScriptThrowStatement {
+  readonly kind: "AstScriptThrowStatement";
   readonly loc: SourceLocation;
   readonly expression: AstScriptExpression;
 }
 
-export interface AstScriptTry {
-  readonly kind: "AstScriptTry";
+export interface AstScriptTryStatement {
+  readonly kind: "AstScriptTryStatement";
   readonly loc: SourceLocation;
+  readonly tryBlock: AstScriptBlock;
+  readonly catchClause: AstScriptCatchClause;
+}
+
+// The clause a try statement catches with. `variableDeclaration` is null
+// for a bindingless catch; TypeScript holds a declaration node there, where
+// the name is all this needs.
+export interface AstScriptCatchClause {
+  readonly kind: "AstScriptCatchClause";
+  readonly loc: SourceLocation;
+  readonly variableDeclaration: AstScriptIdentifier | null;
   readonly block: AstScriptBlock;
-  readonly param: AstScriptIdentifier | null;
-  readonly handler: AstScriptBlock;
 }
 
 export interface AstScriptVariableDeclaration {
   readonly kind: "AstScriptVariableDeclaration";
   readonly loc: SourceLocation;
-  readonly keyword: "let" | "const";
   readonly name: AstScriptIdentifier;
-  readonly expression: AstScriptExpression;
+  readonly initializer: AstScriptExpression;
+  readonly keyword: "let" | "const";
 }
 
 export interface AstArray {

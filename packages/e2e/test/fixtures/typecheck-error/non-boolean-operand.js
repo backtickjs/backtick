@@ -14,7 +14,7 @@ export default cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [6, 19, 8, 2],
       [
         v.identifier([6, 20, 6, 25], "count", "count$3kpojr67liy8x$0"),
@@ -23,18 +23,18 @@ export default cs.create(
       v.block(
         [6, 53, 8, 2],
         [
-          v.return(
+          v.returnStatement(
             [7, 3, 7, 36],
-            v.binop(
+            v.binaryExpression(
               [7, 10, 7, 35],
-              v.binop(
+              v.binaryExpression(
                 [7, 11, 7, 24],
                 v.identifier([7, 11, 7, 16], "count", "count$3kpojr67liy8x$0"),
                 "&&",
                 v.identifier([7, 20, 7, 24], "flag", "flag$3kpojr67liy8x$1"),
               ),
               "||",
-              v.string([7, 29, 7, 35], "none"),
+              v.stringLiteral([7, 29, 7, 35], "none"),
             ),
           ),
         ],

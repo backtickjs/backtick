@@ -23,7 +23,12 @@ function wrap(value) {
       captures: [],
       spliceParams: { $value: [] },
     },
-    (v) => v.arrow([20, 13, 20, 25], [], v.splice([20, 19, 20, 25], "$value")),
+    (v) =>
+      v.arrowFunction(
+        [20, 13, 20, 25],
+        [],
+        v.splice([20, 19, 20, 25], "$value"),
+      ),
   );
 }
 export default cs.create(
@@ -47,7 +52,7 @@ export default cs.create(
               captures: [],
               spliceParams: {},
             },
-            (v) => v.number([23, 39, 23, 40], 7),
+            (v) => v.numericLiteral([23, 39, 23, 40], 7),
           ),
         ),
       ),
@@ -56,9 +61,15 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   (v) =>
-    v.propertyAccess(
+    v.propertyAccessExpression(
       [23, 19, 23, 48],
-      v.call([23, 19, 23, 46], v.splice([23, 19, 23, 44], "$0splice0"), []),
+      v.callExpression(
+        [23, 19, 23, 46],
+        v.splice([23, 19, 23, 44], "$0splice0"),
+        false,
+        [],
+      ),
+      false,
       "x",
     ),
 );

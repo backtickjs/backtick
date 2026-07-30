@@ -19,19 +19,19 @@ function guard(fragment) {
       spliceParams: { $fragment: [] },
     },
     (v) =>
-      v.arrow(
+      v.arrowFunction(
         [11, 13, 16, 4],
         [v.identifier([11, 14, 11, 18], "flag", "flag$23k9adtpaouck$0")],
         v.block(
           [11, 32, 16, 4],
           [
-            v.if(
+            v.ifStatement(
               [12, 5, 14, 6],
               v.identifier([12, 9, 12, 13], "flag", "flag$23k9adtpaouck$0"),
               v.block(
                 [12, 15, 14, 6],
                 [
-                  v.return(
+                  v.returnStatement(
                     [13, 7, 13, 24],
                     v.splice([13, 14, 13, 23], "$fragment"),
                   ),
@@ -39,7 +39,10 @@ function guard(fragment) {
               ),
               null,
             ),
-            v.return([15, 5, 15, 22], v.string([15, 12, 15, 21], "skipped")),
+            v.returnStatement(
+              [15, 5, 15, 22],
+              v.stringLiteral([15, 12, 15, 21], "skipped"),
+            ),
           ],
         ),
       ),
@@ -56,7 +59,7 @@ const ok = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.string([19, 15, 19, 26], "evaluated"),
+  (v) => v.stringLiteral([19, 15, 19, 26], "evaluated"),
 );
 const broken = cs.create(
   [20, 16, 22, 3],
@@ -73,9 +76,12 @@ const broken = cs.create(
     v.block(
       [20, 19, 22, 2],
       [
-        v.throw(
+        v.throwStatement(
           [21, 3, 21, 52],
-          v.string([21, 9, 21, 51], "the guarded fragment must never evaluate"),
+          v.stringLiteral(
+            [21, 9, 21, 51],
+            "the guarded fragment must never evaluate",
+          ),
         ),
       ],
     ),
@@ -92,14 +98,18 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.object([24, 20, 27, 2], {
-      taken: v.call([25, 10, 25, 28], v.splice([25, 10, 25, 22], "$0splice0"), [
-        v.boolean([25, 23, 25, 27], true),
-      ]),
-      skipped: v.call(
+    v.objectLiteralExpression([24, 20, 27, 2], {
+      taken: v.callExpression(
+        [25, 10, 25, 28],
+        v.splice([25, 10, 25, 22], "$0splice0"),
+        false,
+        [v.booleanLiteral([25, 23, 25, 27], true)],
+      ),
+      skipped: v.callExpression(
         [26, 12, 26, 35],
         v.splice([26, 12, 26, 28], "$0splice1"),
-        [v.boolean([26, 29, 26, 34], false)],
+        false,
+        [v.booleanLiteral([26, 29, 26, 34], false)],
       ),
     }),
 );

@@ -44,27 +44,28 @@ export default _jsx(View, {
                       spliceParams: {},
                     },
                     (v) =>
-                      v.binop(
+                      v.binaryExpression(
                         [28, 25, 28, 71],
-                        v.binop(
+                        v.binaryExpression(
                           [28, 25, 28, 62],
-                          v.string(
+                          v.stringLiteral(
                             [28, 25, 28, 51],
                             "https://img.example.com/",
                           ),
                           "+",
-                          v.propertyAccess(
+                          v.propertyAccessExpression(
                             [28, 54, 28, 62],
                             v.identifier(
                               [28, 54, 28, 59],
                               "order",
                               "order$kpf5b5091dr1$0",
                             ),
+                            false,
                             "id",
                           ),
                         ),
                         "+",
-                        v.string([28, 65, 28, 71], ".png"),
+                        v.stringLiteral([28, 65, 28, 71], ".png"),
                       ),
                   ),
                 },
@@ -82,17 +83,19 @@ export default _jsx(View, {
                     spliceParams: {},
                   },
                   (v) =>
-                    v.propertyAccess(
+                    v.propertyAccessExpression(
                       [31, 23, 31, 42],
-                      v.propertyAccess(
+                      v.propertyAccessExpression(
                         [31, 23, 31, 37],
                         v.identifier(
                           [31, 23, 31, 28],
                           "order",
                           "order$kpf5b5091dr1$0",
                         ),
+                        false,
                         "customer",
                       ),
+                      false,
                       "name",
                     ),
                 ),
@@ -110,17 +113,19 @@ export default _jsx(View, {
                     spliceParams: {},
                   },
                   (v) =>
-                    v.propertyAccess(
+                    v.propertyAccessExpression(
                       [32, 23, 32, 42],
-                      v.propertyAccess(
+                      v.propertyAccessExpression(
                         [32, 23, 32, 37],
                         v.identifier(
                           [32, 23, 32, 28],
                           "order",
                           "order$kpf5b5091dr1$0",
                         ),
+                        false,
                         "customer",
                       ),
+                      false,
                       "city",
                     ),
                 ),
@@ -148,30 +153,32 @@ export default _jsx(View, {
                             spliceParams: {},
                           },
                           (v) =>
-                            v.binop(
+                            v.binaryExpression(
                               [37, 25, 37, 51],
-                              v.binop(
+                              v.binaryExpression(
                                 [37, 25, 37, 40],
-                                v.propertyAccess(
+                                v.propertyAccessExpression(
                                   [37, 25, 37, 33],
                                   v.identifier(
                                     [37, 25, 37, 29],
                                     "item",
                                     "item$kpf5b5091dr1$1",
                                   ),
+                                  false,
                                   "sku",
                                 ),
                                 "+",
-                                v.string([37, 36, 37, 40], " x"),
+                                v.stringLiteral([37, 36, 37, 40], " x"),
                               ),
                               "+",
-                              v.propertyAccess(
+                              v.propertyAccessExpression(
                                 [37, 43, 37, 51],
                                 v.identifier(
                                   [37, 43, 37, 47],
                                   "item",
                                   "item$kpf5b5091dr1$1",
                                 ),
+                                false,
                                 "qty",
                               ),
                             ),
@@ -189,13 +196,14 @@ export default _jsx(View, {
                           spliceParams: {},
                         },
                         (v) =>
-                          v.propertyAccess(
+                          v.propertyAccessExpression(
                             [36, 33, 36, 41],
                             v.identifier(
                               [36, 33, 36, 37],
                               "item",
                               "item$kpf5b5091dr1$1",
                             ),
+                            false,
                             "sku",
                           ),
                       ),
@@ -205,23 +213,26 @@ export default _jsx(View, {
                   spliceParams: { $0splice0: ["item$kpf5b5091dr1$1"] },
                 },
                 (v) =>
-                  v.call(
+                  v.callExpression(
                     [33, 17, 40, 14],
-                    v.propertyAccess(
+                    v.propertyAccessExpression(
                       [33, 17, 33, 32],
-                      v.propertyAccess(
+                      v.propertyAccessExpression(
                         [33, 17, 33, 28],
                         v.identifier(
                           [33, 17, 33, 22],
                           "order",
                           "order$kpf5b5091dr1$0",
                         ),
+                        false,
                         "items",
                       ),
+                      false,
                       "map",
                     ),
+                    false,
                     [
-                      v.arrow(
+                      v.arrowFunction(
                         [34, 15, 39, 19],
                         [
                           v.identifier(
@@ -248,17 +259,18 @@ export default _jsx(View, {
                     spliceParams: {},
                   },
                   (v) =>
-                    v.binop(
+                    v.binaryExpression(
                       [41, 23, 41, 40],
-                      v.string([41, 23, 41, 26], "$"),
+                      v.stringLiteral([41, 23, 41, 26], "$"),
                       "+",
-                      v.propertyAccess(
+                      v.propertyAccessExpression(
                         [41, 29, 41, 40],
                         v.identifier(
                           [41, 29, 41, 34],
                           "order",
                           "order$kpf5b5091dr1$0",
                         ),
+                        false,
                         "total",
                       ),
                     ),
@@ -278,9 +290,10 @@ export default _jsx(View, {
               spliceParams: {},
             },
             (v) =>
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [25, 25, 25, 33],
                 v.identifier([25, 25, 25, 30], "order", "order$kpf5b5091dr1$0"),
+                false,
                 "id",
               ),
           ),
@@ -290,15 +303,17 @@ export default _jsx(View, {
       spliceParams: { $orders: [], $0splice0: ["order$kpf5b5091dr1$0"] },
     },
     (v) =>
-      v.call(
+      v.callExpression(
         [22, 9, 44, 6],
-        v.propertyAccess(
+        v.propertyAccessExpression(
           [22, 9, 22, 20],
           v.splice([22, 9, 22, 16], "$orders"),
+          false,
           "map",
         ),
+        false,
         [
-          v.arrow(
+          v.arrowFunction(
             [23, 7, 43, 11],
             [v.identifier([23, 8, 23, 13], "order", "order$kpf5b5091dr1$0")],
             v.splice([24, 9, 43, 11], "$0splice0"),

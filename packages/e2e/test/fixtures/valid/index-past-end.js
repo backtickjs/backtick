@@ -20,19 +20,22 @@ export default cs.create(
       [
         v.variableDeclaration(
           [8, 3, 8, 33],
-          "const",
           v.identifier([8, 9, 8, 14], "names", "names$2hkx7916f6ioy$0"),
-          v.array(
+          v.arrayLiteralExpression(
             [8, 17, 8, 32],
-            [v.string([8, 18, 8, 24], "zero"), v.string([8, 26, 8, 31], "one")],
+            [
+              v.stringLiteral([8, 18, 8, 24], "zero"),
+              v.stringLiteral([8, 26, 8, 31], "one"),
+            ],
           ),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [9, 3, 9, 19],
-          v.index(
+          v.elementAccessExpression(
             [9, 10, 9, 18],
             v.identifier([9, 10, 9, 15], "names", "names$2hkx7916f6ioy$0"),
-            v.number([9, 16, 9, 17], 9),
+            v.numericLiteral([9, 16, 9, 17], 9),
           ),
         ),
       ],

@@ -22,13 +22,15 @@ const Counter = async ({ size }) =>
           spliceParams: { $size: [] },
         },
         (v) =>
-          v.call(
+          v.callExpression(
             [11, 19, 11, 31],
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [11, 19, 11, 29],
               v.splice([11, 19, 11, 24], "$size"),
+              false,
               "read",
             ),
+            false,
             [],
           ),
       ),

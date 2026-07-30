@@ -28,8 +28,8 @@ function make(Shape) {
       spliceParams: { $Shape: [] },
     },
     (v) =>
-      v.new([23, 13, 23, 26], v.splice([23, 17, 23, 23], "$Shape"), [
-        v.number([23, 24, 23, 25], 5),
+      v.newExpression([23, 13, 23, 26], v.splice([23, 17, 23, 23], "$Shape"), [
+        v.numericLiteral([23, 24, 23, 25], 5),
       ]),
   );
 }
@@ -52,9 +52,9 @@ export default cs.create(
     v.block(
       [31, 19, 33, 2],
       [
-        v.return(
+        v.returnStatement(
           [32, 3, 32, 59],
-          v.object([32, 10, 32, 58], {
+          v.objectLiteralExpression([32, 10, 32, 58], {
             first: v.splice([32, 19, 32, 21], "$a"),
             second: v.splice([32, 31, 32, 33], "$b"),
             third: v.splice([32, 42, 32, 44], "$c"),

@@ -16,21 +16,21 @@ export default cs.create(
       [
         v.variableDeclaration(
           [4, 3, 4, 19],
-          "const",
           v.identifier([4, 9, 4, 13], "base", "base$357jk2g9zktff$0"),
-          v.number([4, 16, 4, 18], 10),
+          v.numericLiteral([4, 16, 4, 18], 10),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [5, 3, 5, 57],
-          v.arrow(
+          v.arrowFunction(
             [5, 10, 5, 56],
             [
               v.identifier([5, 11, 5, 14], "one", "one$357jk2g9zktff$1"),
               v.identifier([5, 24, 5, 27], "two", "two$357jk2g9zktff$2"),
             ],
-            v.binop(
+            v.binaryExpression(
               [5, 40, 5, 56],
-              v.binop(
+              v.binaryExpression(
                 [5, 40, 5, 49],
                 v.identifier([5, 40, 5, 43], "one", "one$357jk2g9zktff$1"),
                 "+",

@@ -18,7 +18,7 @@ const flags = {
       captures: [],
       spliceParams: {},
     },
-    (v) => v.boolean([10, 28, 10, 32], true),
+    (v) => v.booleanLiteral([10, 28, 10, 32], true),
   ),
 };
 const label = cs.create(
@@ -33,7 +33,7 @@ const label = cs.create(
     spliceParams: { $0splice0: [] },
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [12, 75, 23, 2],
       [
         v.identifier([13, 3, 13, 7], "text", "text$3ciy5yb38f51h$0"),
@@ -42,35 +42,37 @@ const label = cs.create(
       v.block(
         [15, 6, 23, 2],
         [
-          v.if(
+          v.ifStatement(
             [16, 3, 18, 4],
-            v.binop(
+            v.binaryExpression(
               [16, 7, 16, 29],
               v.identifier([16, 7, 16, 12], "upper", "upper$3ciy5yb38f51h$1"),
               "&&",
-              v.binop(
+              v.binaryExpression(
                 [16, 16, 16, 29],
                 v.identifier([16, 16, 16, 20], "text", "text$3ciy5yb38f51h$0"),
                 "!==",
-                v.null([16, 25, 16, 29]),
+                v.nullLiteral([16, 25, 16, 29]),
               ),
             ),
             v.block(
               [16, 31, 18, 4],
               [
-                v.return(
+                v.returnStatement(
                   [17, 5, 17, 31],
-                  v.call(
+                  v.callExpression(
                     [17, 12, 17, 30],
-                    v.propertyAccess(
+                    v.propertyAccessExpression(
                       [17, 12, 17, 28],
                       v.identifier(
                         [17, 12, 17, 16],
                         "text",
                         "text$3ciy5yb38f51h$0",
                       ),
+                      false,
                       "toUpperCase",
                     ),
+                    false,
                     [],
                   ),
                 ),
@@ -78,15 +80,15 @@ const label = cs.create(
             ),
             null,
           ),
-          v.if(
+          v.ifStatement(
             [19, 3, 21, 4],
-            v.binop(
+            v.binaryExpression(
               [19, 7, 19, 65],
-              v.binop(
+              v.binaryExpression(
                 [19, 7, 19, 39],
                 v.splice([19, 7, 19, 22], "$0splice0"),
                 "&&",
-                v.binop(
+                v.binaryExpression(
                   [19, 26, 19, 39],
                   v.identifier(
                     [19, 26, 19, 30],
@@ -94,53 +96,60 @@ const label = cs.create(
                     "text$3ciy5yb38f51h$0",
                   ),
                   "!==",
-                  v.null([19, 35, 19, 39]),
+                  v.nullLiteral([19, 35, 19, 39]),
                 ),
               ),
               "&&",
-              v.binop(
+              v.binaryExpression(
                 [19, 43, 19, 65],
-                v.call(
+                v.callExpression(
                   [19, 43, 19, 57],
-                  v.propertyAccess(
+                  v.propertyAccessExpression(
                     [19, 43, 19, 54],
                     v.identifier(
                       [19, 43, 19, 47],
                       "text",
                       "text$3ciy5yb38f51h$0",
                     ),
+                    false,
                     "charAt",
                   ),
-                  [v.number([19, 55, 19, 56], 0)],
+                  false,
+                  [v.numericLiteral([19, 55, 19, 56], 0)],
                 ),
                 "===",
-                v.string([19, 62, 19, 65], "!"),
+                v.stringLiteral([19, 62, 19, 65], "!"),
               ),
             ),
             v.block(
               [19, 67, 21, 4],
               [
-                v.return(
+                v.returnStatement(
                   [20, 5, 20, 29],
-                  v.call(
+                  v.callExpression(
                     [20, 12, 20, 28],
-                    v.propertyAccess(
+                    v.propertyAccessExpression(
                       [20, 12, 20, 23],
                       v.identifier(
                         [20, 12, 20, 16],
                         "text",
                         "text$3ciy5yb38f51h$0",
                       ),
+                      false,
                       "concat",
                     ),
-                    [v.string([20, 24, 20, 27], "?")],
+                    false,
+                    [v.stringLiteral([20, 24, 20, 27], "?")],
                   ),
                 ),
               ],
             ),
             null,
           ),
-          v.return([22, 3, 22, 17], v.string([22, 10, 22, 16], "none")),
+          v.returnStatement(
+            [22, 3, 22, 17],
+            v.stringLiteral([22, 10, 22, 16], "none"),
+          ),
         ],
       ),
     ),
@@ -157,22 +166,42 @@ export default cs.create(
     spliceParams: { $label: [] },
   },
   (v) =>
-    v.object([25, 20, 30, 2], {
-      missing: v.call([26, 12, 26, 30], v.splice([26, 12, 26, 18], "$label"), [
-        v.null([26, 19, 26, 23]),
-        v.boolean([26, 25, 26, 29], true),
-      ]),
-      loud: v.call([27, 9, 27, 28], v.splice([27, 9, 27, 15], "$label"), [
-        v.string([27, 16, 27, 21], "!hi"),
-        v.boolean([27, 23, 27, 27], true),
-      ]),
-      quiet: v.call([28, 10, 28, 30], v.splice([28, 10, 28, 16], "$label"), [
-        v.string([28, 17, 28, 22], "!hi"),
-        v.boolean([28, 24, 28, 29], false),
-      ]),
-      plain: v.call([29, 10, 29, 29], v.splice([29, 10, 29, 16], "$label"), [
-        v.string([29, 17, 29, 21], "zz"),
-        v.boolean([29, 23, 29, 28], false),
-      ]),
+    v.objectLiteralExpression([25, 20, 30, 2], {
+      missing: v.callExpression(
+        [26, 12, 26, 30],
+        v.splice([26, 12, 26, 18], "$label"),
+        false,
+        [
+          v.nullLiteral([26, 19, 26, 23]),
+          v.booleanLiteral([26, 25, 26, 29], true),
+        ],
+      ),
+      loud: v.callExpression(
+        [27, 9, 27, 28],
+        v.splice([27, 9, 27, 15], "$label"),
+        false,
+        [
+          v.stringLiteral([27, 16, 27, 21], "!hi"),
+          v.booleanLiteral([27, 23, 27, 27], true),
+        ],
+      ),
+      quiet: v.callExpression(
+        [28, 10, 28, 30],
+        v.splice([28, 10, 28, 16], "$label"),
+        false,
+        [
+          v.stringLiteral([28, 17, 28, 22], "!hi"),
+          v.booleanLiteral([28, 24, 28, 29], false),
+        ],
+      ),
+      plain: v.callExpression(
+        [29, 10, 29, 29],
+        v.splice([29, 10, 29, 16], "$label"),
+        false,
+        [
+          v.stringLiteral([29, 17, 29, 21], "zz"),
+          v.booleanLiteral([29, 23, 29, 28], false),
+        ],
+      ),
     }),
 );

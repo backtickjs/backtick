@@ -18,24 +18,24 @@ export default cs.create(
       [
         v.variableDeclaration(
           [6, 3, 6, 17],
-          "let",
           v.identifier([6, 7, 6, 12], "count", "count$31t2pc3vo9x5y$0"),
-          v.number([6, 15, 6, 16], 0),
+          v.numericLiteral([6, 15, 6, 16], 0),
+          "let",
         ),
         v.variableDeclaration(
           [7, 3, 10, 5],
-          "const",
           v.identifier([7, 9, 7, 13], "bump", "bump$31t2pc3vo9x5y$1"),
-          v.arrow(
+          v.arrowFunction(
             [7, 16, 10, 4],
             [],
             v.block(
               [7, 22, 10, 4],
               [
-                v.assignment(
+                v.binaryExpression(
                   [8, 5, 8, 22],
                   v.identifier([8, 5, 8, 10], "count", "count$31t2pc3vo9x5y$0"),
-                  v.binop(
+                  "=",
+                  v.binaryExpression(
                     [8, 13, 8, 22],
                     v.identifier(
                       [8, 13, 8, 18],
@@ -43,10 +43,10 @@ export default cs.create(
                       "count$31t2pc3vo9x5y$0",
                     ),
                     "+",
-                    v.number([8, 21, 8, 22], 1),
+                    v.numericLiteral([8, 21, 8, 22], 1),
                   ),
                 ),
-                v.return(
+                v.returnStatement(
                   [9, 5, 9, 18],
                   v.identifier(
                     [9, 12, 9, 17],
@@ -57,20 +57,23 @@ export default cs.create(
               ],
             ),
           ),
+          "const",
         ),
-        v.return(
+        v.returnStatement(
           [11, 3, 11, 26],
-          v.binop(
+          v.binaryExpression(
             [11, 10, 11, 25],
-            v.call(
+            v.callExpression(
               [11, 10, 11, 16],
               v.identifier([11, 10, 11, 14], "bump", "bump$31t2pc3vo9x5y$1"),
+              false,
               [],
             ),
             "+",
-            v.call(
+            v.callExpression(
               [11, 19, 11, 25],
               v.identifier([11, 19, 11, 23], "bump", "bump$31t2pc3vo9x5y$1"),
+              false,
               [],
             ),
           ),

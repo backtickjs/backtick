@@ -13,28 +13,28 @@ const pick = cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [5, 17, 7, 2],
       [v.identifier([5, 18, 5, 19], "n", "n$2bgu1tn5wjo9o$0")],
       v.block(
         [5, 39, 7, 2],
         [
-          v.return(
+          v.returnStatement(
             [6, 3, 6, 33],
-            v.ternary(
+            v.conditionalExpression(
               [6, 10, 6, 32],
-              v.binop(
+              v.binaryExpression(
                 [6, 10, 6, 20],
                 v.identifier([6, 10, 6, 11], "n", "n$2bgu1tn5wjo9o$0"),
                 "===",
-                v.null([6, 16, 6, 20]),
+                v.nullLiteral([6, 16, 6, 20]),
               ),
-              v.number([6, 23, 6, 24], 0),
-              v.binop(
+              v.numericLiteral([6, 23, 6, 24], 0),
+              v.binaryExpression(
                 [6, 27, 6, 32],
                 v.identifier([6, 27, 6, 28], "n", "n$2bgu1tn5wjo9o$0"),
                 "+",
-                v.number([6, 31, 6, 32], 1),
+                v.numericLiteral([6, 31, 6, 32], 1),
               ),
             ),
           ),
@@ -54,12 +54,18 @@ export default cs.create(
     spliceParams: { $pick: [] },
   },
   (v) =>
-    v.object([9, 20, 12, 2], {
-      absent: v.call([10, 11, 10, 22], v.splice([10, 11, 10, 16], "$pick"), [
-        v.null([10, 17, 10, 21]),
-      ]),
-      present: v.call([11, 12, 11, 20], v.splice([11, 12, 11, 17], "$pick"), [
-        v.number([11, 18, 11, 19], 4),
-      ]),
+    v.objectLiteralExpression([9, 20, 12, 2], {
+      absent: v.callExpression(
+        [10, 11, 10, 22],
+        v.splice([10, 11, 10, 16], "$pick"),
+        false,
+        [v.nullLiteral([10, 17, 10, 21])],
+      ),
+      present: v.callExpression(
+        [11, 12, 11, 20],
+        v.splice([11, 12, 11, 17], "$pick"),
+        false,
+        [v.numericLiteral([11, 18, 11, 19], 4)],
+      ),
     }),
 );

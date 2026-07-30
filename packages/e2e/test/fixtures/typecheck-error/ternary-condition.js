@@ -11,7 +11,7 @@ const count = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.number([4, 18, 4, 19], 1),
+  (v) => v.numericLiteral([4, 18, 4, 19], 1),
 );
 export default cs.create(
   [6, 16, 6, 44],
@@ -25,10 +25,10 @@ export default cs.create(
     spliceParams: { $count: [] },
   },
   (v) =>
-    v.ternary(
+    v.conditionalExpression(
       [6, 19, 6, 43],
       v.splice([6, 19, 6, 25], "$count"),
-      v.string([6, 28, 6, 34], "some"),
-      v.string([6, 37, 6, 43], "none"),
+      v.stringLiteral([6, 28, 6, 34], "some"),
+      v.stringLiteral([6, 37, 6, 43], "none"),
     ),
 );

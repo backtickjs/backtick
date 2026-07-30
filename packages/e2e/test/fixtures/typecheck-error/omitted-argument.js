@@ -13,23 +13,24 @@ const greet = cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [5, 18, 7, 2],
       [v.identifier([5, 19, 5, 23], "name", "name$1gqqin78x7yev$0")],
       v.block(
         [5, 37, 7, 2],
         [
-          v.return(
+          v.returnStatement(
             [6, 3, 6, 28],
-            v.call(
+            v.callExpression(
               [6, 10, 6, 27],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [6, 10, 6, 22],
                 v.identifier([6, 10, 6, 14], "name", "name$1gqqin78x7yev$0"),
-                "concat",
                 true,
+                "concat",
               ),
-              [v.string([6, 23, 6, 26], "!")],
+              false,
+              [v.stringLiteral([6, 23, 6, 26], "!")],
             ),
           ),
         ],
@@ -51,9 +52,14 @@ export default cs.create(
     v.block(
       [9, 19, 11, 2],
       [
-        v.return(
+        v.returnStatement(
           [10, 3, 10, 19],
-          v.call([10, 10, 10, 18], v.splice([10, 10, 10, 16], "$greet"), []),
+          v.callExpression(
+            [10, 10, 10, 18],
+            v.splice([10, 10, 10, 16], "$greet"),
+            false,
+            [],
+          ),
         ),
       ],
     ),

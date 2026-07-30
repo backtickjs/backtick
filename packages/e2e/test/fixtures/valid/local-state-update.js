@@ -19,13 +19,15 @@ async function Stepper() {
           spliceParams: { $size: [] },
         },
         (v) =>
-          v.call(
+          v.callExpression(
             [10, 29, 10, 41],
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [10, 29, 10, 39],
               v.splice([10, 29, 10, 34], "$size"),
+              false,
               "read",
             ),
+            false,
             [],
           ),
       ),
@@ -42,21 +44,23 @@ async function Stepper() {
         spliceParams: { $size: [] },
       },
       (v) =>
-        v.arrow(
+        v.arrowFunction(
           [11, 19, 13, 8],
           [],
           v.block(
             [11, 25, 13, 8],
             [
-              v.call(
+              v.callExpression(
                 [12, 9, 12, 55],
-                v.propertyAccess(
+                v.propertyAccessExpression(
                   [12, 9, 12, 21],
                   v.splice([12, 9, 12, 14], "$size"),
+                  false,
                   "update",
                 ),
+                false,
                 [
-                  v.arrow(
+                  v.arrowFunction(
                     [12, 22, 12, 54],
                     [
                       v.identifier(
@@ -65,7 +69,7 @@ async function Stepper() {
                         "current$1rqun2dr71nzq$0",
                       ),
                     ],
-                    v.binop(
+                    v.binaryExpression(
                       [12, 43, 12, 54],
                       v.identifier(
                         [12, 43, 12, 50],
@@ -73,7 +77,7 @@ async function Stepper() {
                         "current$1rqun2dr71nzq$0",
                       ),
                       "+",
-                      v.number([12, 53, 12, 54], 1),
+                      v.numericLiteral([12, 53, 12, 54], 1),
                     ),
                   ),
                 ],

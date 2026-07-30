@@ -12,7 +12,7 @@ function add(lhs, rhs) {
       spliceParams: { $lhs: [], $rhs: [] },
     },
     (v) =>
-      v.binop(
+      v.binaryExpression(
         [4, 13, 4, 24],
         v.splice([4, 13, 4, 17], "$lhs"),
         "+",
@@ -40,7 +40,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([7, 28, 7, 29], 1),
+          (v) => v.numericLiteral([7, 28, 7, 29], 1),
         ),
         cs.create(
           [7, 32, 7, 37],
@@ -53,7 +53,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([7, 35, 7, 36], 2),
+          (v) => v.numericLiteral([7, 35, 7, 36], 2),
         ),
       ),
     },

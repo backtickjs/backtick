@@ -14,7 +14,7 @@ const d0 = cs.create(
     captures: [],
     spliceParams: {},
   },
-  (v) => v.number([7, 15, 7, 16], 1),
+  (v) => v.numericLiteral([7, 15, 7, 16], 1),
 );
 const d1 = cs.create(
   [8, 12, 10, 3],
@@ -31,9 +31,9 @@ const d1 = cs.create(
     v.block(
       [8, 15, 10, 2],
       [
-        v.return(
+        v.returnStatement(
           [9, 3, 9, 20],
-          v.binop(
+          v.binaryExpression(
             [9, 10, 9, 19],
             v.splice([9, 10, 9, 13], "$d0"),
             "+",
@@ -58,9 +58,9 @@ const d2 = cs.create(
     v.block(
       [11, 15, 13, 2],
       [
-        v.return(
+        v.returnStatement(
           [12, 3, 12, 20],
-          v.binop(
+          v.binaryExpression(
             [12, 10, 12, 19],
             v.splice([12, 10, 12, 13], "$d1"),
             "+",
@@ -85,9 +85,9 @@ const d3 = cs.create(
     v.block(
       [14, 15, 16, 2],
       [
-        v.return(
+        v.returnStatement(
           [15, 3, 15, 20],
-          v.binop(
+          v.binaryExpression(
             [15, 10, 15, 19],
             v.splice([15, 10, 15, 13], "$d2"),
             "+",
@@ -112,9 +112,9 @@ const d4 = cs.create(
     v.block(
       [17, 15, 19, 2],
       [
-        v.return(
+        v.returnStatement(
           [18, 3, 18, 20],
-          v.binop(
+          v.binaryExpression(
             [18, 10, 18, 19],
             v.splice([18, 10, 18, 13], "$d3"),
             "+",

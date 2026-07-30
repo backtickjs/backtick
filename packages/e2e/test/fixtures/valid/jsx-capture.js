@@ -25,7 +25,7 @@ const script = cs.create(
             spliceParams: {},
           },
           (v) =>
-            v.arrow(
+            v.arrowFunction(
               [10, 31, 10, 38],
               [],
               v.identifier([10, 37, 10, 38], "x", "x$dxmm13j6jyfs$0"),
@@ -37,7 +37,7 @@ const script = cs.create(
     spliceParams: { $0splice0: ["x$dxmm13j6jyfs$0"] },
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [8, 46, 11, 2],
       [],
       v.block(
@@ -45,11 +45,14 @@ const script = cs.create(
         [
           v.variableDeclaration(
             [9, 3, 9, 15],
-            "const",
             v.identifier([9, 9, 9, 10], "x", "x$dxmm13j6jyfs$0"),
-            v.number([9, 13, 9, 14], 1),
+            v.numericLiteral([9, 13, 9, 14], 1),
+            "const",
           ),
-          v.return([10, 3, 10, 46], v.splice([10, 10, 10, 45], "$0splice0")),
+          v.returnStatement(
+            [10, 3, 10, 46],
+            v.splice([10, 10, 10, 45], "$0splice0"),
+          ),
         ],
       ),
     ),

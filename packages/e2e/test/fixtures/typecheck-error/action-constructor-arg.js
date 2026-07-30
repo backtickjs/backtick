@@ -25,9 +25,9 @@ const action = cs.create(
       [
         v.variableDeclaration(
           [17, 3, 17, 15],
-          "const",
           v.identifier([17, 9, 17, 10], "x", "x$t3cg066e2mwt$0"),
-          v.number([17, 13, 17, 14], 1),
+          v.numericLiteral([17, 13, 17, 14], 1),
+          "const",
         ),
       ],
     ),
@@ -49,13 +49,18 @@ export const held = cs.create(
       [
         v.variableDeclaration(
           [21, 3, 21, 34],
-          "const",
           v.identifier([21, 9, 21, 10], "h", "h$t3cg066e2mwt$1"),
-          v.new([21, 13, 21, 33], v.splice([21, 17, 21, 24], "$Holder"), [
-            v.splice([21, 25, 21, 32], "$action"),
-          ]),
+          v.newExpression(
+            [21, 13, 21, 33],
+            v.splice([21, 17, 21, 24], "$Holder"),
+            [v.splice([21, 25, 21, 32], "$action")],
+          ),
+          "const",
         ),
-        v.return([22, 3, 22, 12], v.number([22, 10, 22, 11], 1)),
+        v.returnStatement(
+          [22, 3, 22, 12],
+          v.numericLiteral([22, 10, 22, 11], 1),
+        ),
       ],
     ),
 );

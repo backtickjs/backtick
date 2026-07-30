@@ -20,13 +20,15 @@ const Counter = async ({ size }) =>
           spliceParams: { $size: [] },
         },
         (v) =>
-          v.call(
+          v.callExpression(
             [11, 27, 11, 39],
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [11, 27, 11, 37],
               v.splice([11, 27, 11, 32], "$size"),
+              false,
               "read",
             ),
+            false,
             [],
           ),
       ),
@@ -43,33 +45,37 @@ const Counter = async ({ size }) =>
         spliceParams: { $size: [] },
       },
       (v) =>
-        v.arrow(
+        v.arrowFunction(
           [12, 17, 14, 6],
           [],
           v.block(
             [12, 23, 14, 6],
             [
-              v.call(
+              v.callExpression(
                 [13, 7, 13, 36],
-                v.propertyAccess(
+                v.propertyAccessExpression(
                   [13, 7, 13, 18],
                   v.splice([13, 7, 13, 12], "$size"),
+                  false,
                   "write",
                 ),
+                false,
                 [
-                  v.binop(
+                  v.binaryExpression(
                     [13, 19, 13, 35],
-                    v.call(
+                    v.callExpression(
                       [13, 19, 13, 31],
-                      v.propertyAccess(
+                      v.propertyAccessExpression(
                         [13, 19, 13, 29],
                         v.splice([13, 19, 13, 24], "$size"),
+                        false,
                         "read",
                       ),
+                      false,
                       [],
                     ),
                     "+",
-                    v.number([13, 34, 13, 35], 1),
+                    v.numericLiteral([13, 34, 13, 35], 1),
                   ),
                 ],
               ),

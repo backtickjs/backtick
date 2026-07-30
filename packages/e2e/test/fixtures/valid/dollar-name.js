@@ -16,11 +16,11 @@ function add(lhs) {
       spliceParams: { $lhs: [] },
     },
     (v) =>
-      v.binop(
+      v.binaryExpression(
         [8, 13, 8, 21],
         v.splice([8, 13, 8, 17], "$lhs"),
         "+",
-        v.number([8, 20, 8, 21], 2),
+        v.numericLiteral([8, 20, 8, 21], 2),
       ),
   );
 }
@@ -57,11 +57,14 @@ export default cs.create(
       [
         v.variableDeclaration(
           [12, 3, 12, 18],
-          "const",
           v.identifier([12, 9, 12, 13], "foo$", "foo$$3r8prbdxxrtje$0"),
-          v.number([12, 16, 12, 17], 1),
+          v.numericLiteral([12, 16, 12, 17], 1),
+          "const",
         ),
-        v.return([13, 3, 13, 27], v.splice([13, 10, 13, 26], "$0splice0")),
+        v.returnStatement(
+          [13, 3, 13, 27],
+          v.splice([13, 10, 13, 26], "$0splice0"),
+        ),
       ],
     ),
 );

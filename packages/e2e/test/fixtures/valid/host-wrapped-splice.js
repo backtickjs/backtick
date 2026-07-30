@@ -58,17 +58,17 @@ function wrap(start) {
                 [
                   v.variableDeclaration(
                     [17, 7, 17, 25],
-                    "const",
                     v.identifier(
                       [17, 13, 17, 19],
                       "middle",
                       "middle$xrqzjp57nqfg$1",
                     ),
-                    v.number([17, 22, 17, 24], 10),
+                    v.numericLiteral([17, 22, 17, 24], 10),
+                    "const",
                   ),
-                  v.return(
+                  v.returnStatement(
                     [18, 7, 18, 42],
-                    v.binop(
+                    v.binaryExpression(
                       [18, 14, 18, 41],
                       v.identifier(
                         [18, 14, 18, 20],
@@ -93,11 +93,14 @@ function wrap(start) {
         [
           v.variableDeclaration(
             [15, 5, 15, 26],
-            "const",
             v.identifier([15, 11, 15, 16], "outer", "outer$xrqzjp57nqfg$0"),
             v.splice([15, 19, 15, 25], "$start"),
+            "const",
           ),
-          v.return([16, 5, 19, 10], v.splice([16, 12, 19, 9], "$0splice0")),
+          v.returnStatement(
+            [16, 5, 19, 10],
+            v.splice([16, 12, 19, 9], "$0splice0"),
+          ),
         ],
       ),
   );
@@ -115,11 +118,11 @@ function foo(start) {
       spliceParams: { $start: [] },
     },
     (v) =>
-      v.binop(
+      v.binaryExpression(
         [24, 13, 24, 23],
         v.splice([24, 13, 24, 19], "$start"),
         "+",
-        v.number([24, 22, 24, 23], 1),
+        v.numericLiteral([24, 22, 24, 23], 1),
       ),
   );
 }
@@ -146,7 +149,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([31, 29, 31, 30], 1),
+          (v) => v.numericLiteral([31, 29, 31, 30], 1),
         ),
       ),
       $0splice1: wrap(
@@ -161,7 +164,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([31, 46, 31, 47], 2),
+          (v) => v.numericLiteral([31, 46, 31, 47], 2),
         ),
       ),
     },
@@ -169,7 +172,7 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.binop(
+    v.binaryExpression(
       [31, 19, 31, 50],
       v.splice([31, 19, 31, 33], "$0splice0"),
       "+",

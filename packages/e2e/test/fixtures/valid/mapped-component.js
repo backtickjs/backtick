@@ -38,9 +38,9 @@ export default _jsx(View, {
               spliceParams: {},
             },
             (v) =>
-              v.binop(
+              v.binaryExpression(
                 [20, 45, 20, 57],
-                v.string([20, 45, 20, 51], "row "),
+                v.stringLiteral([20, 45, 20, 51], "row "),
                 "+",
                 v.identifier([20, 54, 20, 57], "row", "row$3qcr5x2z3u56v$0"),
               ),
@@ -51,15 +51,17 @@ export default _jsx(View, {
       spliceParams: { $rows: [], $0splice0: ["row$3qcr5x2z3u56v$0"] },
     },
     (v) =>
-      v.call(
+      v.callExpression(
         [20, 13, 20, 69],
-        v.propertyAccess(
+        v.propertyAccessExpression(
           [20, 13, 20, 22],
           v.splice([20, 13, 20, 18], "$rows"),
+          false,
           "map",
         ),
+        false,
         [
-          v.arrow(
+          v.arrowFunction(
             [20, 23, 20, 68],
             [v.identifier([20, 24, 20, 27], "row", "row$3qcr5x2z3u56v$0")],
             v.splice([20, 32, 20, 68], "$0splice0"),

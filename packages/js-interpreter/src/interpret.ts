@@ -9,7 +9,7 @@ import type {
   BundleGetFunction,
   BundleApplyTree,
   BundleBinaryOperator,
-  BundleBinopNode,
+  BundleBinaryExpressionNode,
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
@@ -833,12 +833,15 @@ function condition(value: Value, what: string): boolean {
   );
 }
 
-// The `=` half of `BundleBinopNode`, whose left is an identifier. A predicate
+// The `=` half of `BundleBinaryExpressionNode`, whose left is an identifier. A predicate
 // rather than a comparison at the use site: the field is reached by a computed
 // key, which TypeScript won't narrow a union through on its own.
 function isAssignment(
-  node: BundleBinopNode,
-): node is Extract<BundleBinopNode, { [NodeField.operatorToken]: "=" }> {
+  node: BundleBinaryExpressionNode,
+): node is Extract<
+  BundleBinaryExpressionNode,
+  { [NodeField.operatorToken]: "=" }
+> {
   return node[NodeField.operatorToken] === "=";
 }
 

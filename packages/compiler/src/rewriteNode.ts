@@ -226,7 +226,7 @@ function rewriteNodeImpl(
 ): RewrittenNode {
   const unsupported = (): RewrittenNode => ({
     virtual: node,
-    runtime: call(ts, "v", "null", [loc(node)]),
+    runtime: call(ts, "v", "nullLiteral", [loc(node)]),
   });
 
   const loc = (target: ts.Node): ts.Expression =>
@@ -344,13 +344,13 @@ function rewriteNodeImpl(
         ),
         runtime: call(ts, "v", "variableDeclaration", [
           loc(at),
-          ts.factory.createStringLiteral(keyword),
           call(ts, "v", "identifier", [
             loc(declaration.name),
             ts.factory.createStringLiteral(name.text),
             ts.factory.createStringLiteral(bindingKey(state, name)),
           ]),
           initializer.runtime as ts.Expression,
+          ts.factory.createStringLiteral(keyword),
         ]),
       };
     }
@@ -373,7 +373,7 @@ function rewriteNodeImpl(
         consequent.virtual as ts.Statement,
         alternate ? (alternate.virtual as ts.Statement) : undefined,
       ),
-      runtime: call(ts, "v", "if", [
+      runtime: call(ts, "v", "ifStatement", [
         loc(node),
         condition.runtime as ts.Expression,
         consequent.runtime as ts.Expression,
@@ -397,7 +397,7 @@ function rewriteNodeImpl(
         ),
         body.virtual as ts.Statement,
       ),
-      runtime: call(ts, "v", "while", [
+      runtime: call(ts, "v", "whileStatement", [
         loc(node),
         condition.runtime as ts.Expression,
         body.runtime as ts.Expression,
@@ -436,7 +436,7 @@ function rewriteNodeImpl(
         update ? (update.virtual as ts.Expression) : undefined,
         body.virtual as ts.Statement,
       ),
-      runtime: call(ts, "v", "for", [
+      runtime: call(ts, "v", "forStatement", [
         loc(node),
         runtimeOr(initializer),
         runtimeOr(condition),
@@ -461,7 +461,7 @@ function rewriteNodeImpl(
       virtual: ts.isBreakStatement(node)
         ? ts.factory.createBreakStatement()
         : ts.factory.createContinueStatement(),
-      runtime: call(ts, "v", keyword, [loc(node)]),
+      runtime: call(ts, "v", `${keyword}Statement`, [loc(node)]),
     };
   }
 
@@ -514,9 +514,9 @@ function rewriteNodeImpl(
         state.bodyKind === "value"
           ? ts.factory.createReturnStatement(ts.factory.createNull())
           : ts.factory.createReturnStatement(),
-      runtime: call(ts, "v", "return", [
+      runtime: call(ts, "v", "returnStatement", [
         loc(node),
-        call(ts, "v", "null", [loc(node)]),
+        call(ts, "v", "nullLiteral", [loc(node)]),
       ]),
     };
   }
@@ -529,7 +529,7 @@ function rewriteNodeImpl(
           ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
           : (expression.virtual as ts.Expression),
       ),
-      runtime: call(ts, "v", "return", [
+      runtime: call(ts, "v", "returnStatement", [
         loc(node),
         expression.runtime as ts.Expression,
       ]),
@@ -542,7 +542,7 @@ function rewriteNodeImpl(
       virtual: ts.factory.createThrowStatement(
         expression.virtual as ts.Expression,
       ),
-      runtime: call(ts, "v", "throw", [
+      runtime: call(ts, "v", "throwStatement", [
         loc(node),
         expression.runtime as ts.Expression,
       ]),
@@ -602,11 +602,15 @@ function rewriteNodeImpl(
         ),
         undefined,
       ),
-      runtime: call(ts, "v", "try", [
+      runtime: call(ts, "v", "tryStatement", [
         loc(node),
         block.runtime as ts.Expression,
-        param ? param.runtime : ts.factory.createNull(),
-        handler.runtime as ts.Expression,
+        // The clause is its own node, as it is in TypeScript.
+        call(ts, "v", "catchClause", [
+          loc(clause),
+          param ? param.runtime : ts.factory.createNull(),
+          handler.runtime as ts.Expression,
+        ]),
       ]),
     };
   }
@@ -668,7 +672,7 @@ function rewriteNodeImpl(
     if (bannedUndefined(state, node, "value")) {
       return {
         virtual: ts.factory.createNull(),
-        runtime: call(ts, "v", "null", [loc(node)]),
+        runtime: call(ts, "v", "nullLiteral", [loc(node)]),
       };
     }
 
@@ -744,11 +748,11 @@ function rewriteNodeImpl(
         : access;
     return {
       virtual,
-      runtime: call(ts, "v", "propertyAccess", [
+      runtime: call(ts, "v", "propertyAccessExpression", [
         loc(node),
         expression.runtime as ts.Expression,
+        optional ? ts.factory.createTrue() : ts.factory.createFalse(),
         ts.factory.createStringLiteral(name),
-        ...(optional ? [ts.factory.createTrue()] : []),
       ]),
     };
   }
@@ -778,7 +782,7 @@ function rewriteNodeImpl(
         expression.virtual as ts.Expression,
         key.virtual as ts.Expression,
       ]),
-      runtime: call(ts, "v", "index", [
+      runtime: call(ts, "v", "elementAccessExpression", [
         loc(node),
         expression.runtime as ts.Expression,
         key.runtime as ts.Expression,
@@ -861,16 +865,16 @@ function rewriteNodeImpl(
           : virtualCall;
       return {
         virtual,
-        runtime: call(ts, "v", "call", [
+        runtime: call(ts, "v", "callExpression", [
           loc(node),
-          call(ts, "v", "propertyAccess", [
+          call(ts, "v", "propertyAccessExpression", [
             loc(access),
             receiver.runtime as ts.Expression,
+            optional ? ts.factory.createTrue() : ts.factory.createFalse(),
             ts.factory.createStringLiteral(name),
-            ...(optional ? [ts.factory.createTrue()] : []),
           ]),
+          optionalCall ? ts.factory.createTrue() : ts.factory.createFalse(),
           runtimeArgs,
-          ...(optionalCall ? [ts.factory.createTrue()] : []),
         ]),
       };
     }
@@ -899,11 +903,11 @@ function rewriteNodeImpl(
               ),
             )
           : virtualCall,
-      runtime: call(ts, "v", "call", [
+      runtime: call(ts, "v", "callExpression", [
         loc(node),
         callee.runtime as ts.Expression,
+        optionalCall ? ts.factory.createTrue() : ts.factory.createFalse(),
         runtimeArgs,
-        ...(optionalCall ? [ts.factory.createTrue()] : []),
       ]),
     };
   }
@@ -931,7 +935,7 @@ function rewriteNodeImpl(
         undefined,
         liftedArgs,
       ),
-      runtime: call(ts, "v", "new", [
+      runtime: call(ts, "v", "newExpression", [
         loc(node),
         rewrittenCallee.runtime as ts.Expression,
         ts.factory.createArrayLiteralExpression(
@@ -1030,7 +1034,7 @@ function rewriteNodeImpl(
           ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
           body.virtual as ts.ConciseBody,
         ),
-        runtime: call(ts, "v", "arrow", [
+        runtime: call(ts, "v", "arrowFunction", [
           loc(node),
           ts.factory.createArrayLiteralExpression(
             params.map((param) =>
@@ -1059,7 +1063,7 @@ function rewriteNodeImpl(
         elements.map((element) => element.virtual as ts.Expression),
         false,
       ),
-      runtime: call(ts, "v", "array", [
+      runtime: call(ts, "v", "arrayLiteralExpression", [
         loc(node),
         ts.factory.createArrayLiteralExpression(
           elements.map((element) => element.runtime as ts.Expression),
@@ -1102,7 +1106,7 @@ function rewriteNodeImpl(
           ),
           false,
         ),
-        runtime: call(ts, "v", "object", [
+        runtime: call(ts, "v", "objectLiteralExpression", [
           loc(node),
           ts.factory.createObjectLiteralExpression(
             properties.map((property) =>
@@ -1137,7 +1141,7 @@ function rewriteNodeImpl(
         ts.factory.createToken(ts.SyntaxKind.ColonToken),
         alternate.virtual as ts.Expression,
       ),
-      runtime: call(ts, "v", "ternary", [
+      runtime: call(ts, "v", "conditionalExpression", [
         loc(node),
         condition.runtime as ts.Expression,
         consequent.runtime as ts.Expression,
@@ -1150,10 +1154,17 @@ function rewriteNodeImpl(
     const lhs = rewriteNode(ts, state, node.left);
     const rhs = rewriteNode(ts, state, node.right);
 
-    if (
-      node.operatorToken.kind === ts.SyntaxKind.EqualsToken &&
-      ts.isIdentifier(node.left)
-    ) {
+    if (node.operatorToken.kind === ts.SyntaxKind.EqualsToken) {
+      // An assignment is a binary expression over `=`, as it is in TypeScript,
+      // but only a variable can be assigned to: a member and an element are
+      // both reads here, since an object and an array are values.
+      if (!ts.isIdentifier(node.left)) {
+        state.errors.set(
+          node.left,
+          "Only a variable can be assigned to in a `cs` client script.",
+        );
+        return unsupported();
+      }
       // A script's own variables are assignable anywhere within it, but a
       // captured one isn't: the write would mutate the nested script's
       // copy and silently not propagate. An unresolved target keeps the
@@ -1172,9 +1183,10 @@ function rewriteNodeImpl(
           ts.SyntaxKind.EqualsToken,
           call(ts, "cs", "const", [rhs.virtual as ts.Expression]),
         ),
-        runtime: call(ts, "v", "assignment", [
+        runtime: call(ts, "v", "binaryExpression", [
           loc(node),
           lhs.runtime as ts.Expression,
+          ts.factory.createStringLiteral("="),
           rhs.runtime as ts.Expression,
         ]),
       };
@@ -1194,7 +1206,7 @@ function rewriteNodeImpl(
           node.operatorToken.kind,
           virtualRight,
         ),
-        runtime: call(ts, "v", "binop", [
+        runtime: call(ts, "v", "binaryExpression", [
           loc(node),
           lhs.runtime as ts.Expression,
           ts.factory.createStringLiteral(operator),
@@ -1212,14 +1224,14 @@ function rewriteNodeImpl(
   if (node.kind === ts.SyntaxKind.NullKeyword) {
     return {
       virtual: ts.factory.createNull(),
-      runtime: call(ts, "v", "null", [loc(node)]),
+      runtime: call(ts, "v", "nullLiteral", [loc(node)]),
     };
   }
 
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
-      runtime: call(ts, "v", "number", [
+      runtime: call(ts, "v", "numericLiteral", [
         loc(node),
         ts.factory.createNumericLiteral(node.text),
       ]),
@@ -1229,7 +1241,7 @@ function rewriteNodeImpl(
   if (ts.isStringLiteral(node)) {
     return {
       virtual: ts.factory.createStringLiteral(node.text),
-      runtime: call(ts, "v", "string", [
+      runtime: call(ts, "v", "stringLiteral", [
         loc(node),
         ts.factory.createStringLiteral(node.text),
       ]),
@@ -1244,7 +1256,7 @@ function rewriteNodeImpl(
     const literal = value ? ts.factory.createTrue() : ts.factory.createFalse();
     return {
       virtual: literal,
-      runtime: call(ts, "v", "boolean", [loc(node), literal]),
+      runtime: call(ts, "v", "booleanLiteral", [loc(node), literal]),
     };
   }
 

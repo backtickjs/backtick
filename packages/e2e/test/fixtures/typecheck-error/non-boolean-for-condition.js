@@ -12,7 +12,7 @@ export default cs.create(
     spliceParams: {},
   },
   (v) =>
-    v.arrow(
+    v.arrowFunction(
       [4, 19, 10, 2],
       [v.identifier([4, 20, 4, 21], "n", "n$2gfrnuray6h4d$0")],
       v.block(
@@ -20,41 +20,43 @@ export default cs.create(
         [
           v.variableDeclaration(
             [5, 3, 5, 16],
-            "let",
             v.identifier([5, 7, 5, 11], "last", "last$2gfrnuray6h4d$1"),
-            v.number([5, 14, 5, 15], 0),
+            v.numericLiteral([5, 14, 5, 15], 0),
+            "let",
           ),
-          v.for(
+          v.forStatement(
             [6, 3, 8, 4],
             v.variableDeclaration(
               [6, 8, 6, 17],
-              "let",
               v.identifier([6, 12, 6, 13], "i", "i$2gfrnuray6h4d$2"),
               v.identifier([6, 16, 6, 17], "n", "n$2gfrnuray6h4d$0"),
+              "let",
             ),
             v.identifier([6, 19, 6, 20], "i", "i$2gfrnuray6h4d$2"),
-            v.assignment(
+            v.binaryExpression(
               [6, 22, 6, 31],
               v.identifier([6, 22, 6, 23], "i", "i$2gfrnuray6h4d$2"),
-              v.binop(
+              "=",
+              v.binaryExpression(
                 [6, 26, 6, 31],
                 v.identifier([6, 26, 6, 27], "i", "i$2gfrnuray6h4d$2"),
                 "-",
-                v.number([6, 30, 6, 31], 1),
+                v.numericLiteral([6, 30, 6, 31], 1),
               ),
             ),
             v.block(
               [6, 33, 8, 4],
               [
-                v.assignment(
+                v.binaryExpression(
                   [7, 5, 7, 13],
                   v.identifier([7, 5, 7, 9], "last", "last$2gfrnuray6h4d$1"),
+                  "=",
                   v.identifier([7, 12, 7, 13], "i", "i$2gfrnuray6h4d$2"),
                 ),
               ],
             ),
           ),
-          v.return(
+          v.returnStatement(
             [9, 3, 9, 15],
             v.identifier([9, 10, 9, 14], "last", "last$2gfrnuray6h4d$1"),
           ),

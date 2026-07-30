@@ -30,7 +30,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([19, 28, 19, 30], 30),
+          (v) => v.numericLiteral([19, 28, 19, 30], 30),
         ),
         cs.create(
           [19, 33, 19, 40],
@@ -43,7 +43,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([19, 36, 19, 39], 144),
+          (v) => v.numericLiteral([19, 36, 19, 39], 144),
         ),
         cs.create(
           [19, 42, 19, 49],
@@ -56,7 +56,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([19, 45, 19, 48], 255),
+          (v) => v.numericLiteral([19, 45, 19, 48], 255),
         ),
       ),
     },
@@ -69,45 +69,48 @@ export default cs.create(
       [
         v.variableDeclaration(
           [19, 3, 19, 52],
-          "const",
           v.identifier([19, 9, 19, 10], "c", "c$3o65fk6h8ba4e$0"),
           v.splice([19, 13, 19, 51], "$0splice0"),
+          "const",
         ),
         v.variableDeclaration(
           [20, 3, 20, 38],
-          "const",
           v.identifier(
             [20, 9, 20, 19],
             "brightness",
             "brightness$3o65fk6h8ba4e$1",
           ),
-          v.binop(
+          v.binaryExpression(
             [20, 22, 20, 37],
-            v.binop(
+            v.binaryExpression(
               [20, 22, 20, 31],
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [20, 22, 20, 25],
                 v.identifier([20, 22, 20, 23], "c", "c$3o65fk6h8ba4e$0"),
+                false,
                 "r",
               ),
               "+",
-              v.propertyAccess(
+              v.propertyAccessExpression(
                 [20, 28, 20, 31],
                 v.identifier([20, 28, 20, 29], "c", "c$3o65fk6h8ba4e$0"),
+                false,
                 "g",
               ),
             ),
             "+",
-            v.propertyAccess(
+            v.propertyAccessExpression(
               [20, 34, 20, 37],
               v.identifier([20, 34, 20, 35], "c", "c$3o65fk6h8ba4e$0"),
+              false,
               "b",
             ),
           ),
+          "const",
         ),
-        v.if(
+        v.ifStatement(
           [21, 3, 23, 4],
-          v.binop(
+          v.binaryExpression(
             [21, 7, 21, 23],
             v.identifier(
               [21, 7, 21, 17],
@@ -115,15 +118,23 @@ export default cs.create(
               "brightness$3o65fk6h8ba4e$1",
             ),
             ">",
-            v.number([21, 20, 21, 23], 382),
+            v.numericLiteral([21, 20, 21, 23], 382),
           ),
           v.block(
             [21, 25, 23, 4],
-            [v.return([22, 5, 22, 20], v.string([22, 12, 22, 19], "light"))],
+            [
+              v.returnStatement(
+                [22, 5, 22, 20],
+                v.stringLiteral([22, 12, 22, 19], "light"),
+              ),
+            ],
           ),
           null,
         ),
-        v.return([24, 3, 24, 17], v.string([24, 10, 24, 16], "dark")),
+        v.returnStatement(
+          [24, 3, 24, 17],
+          v.stringLiteral([24, 10, 24, 16], "dark"),
+        ),
       ],
     ),
 );

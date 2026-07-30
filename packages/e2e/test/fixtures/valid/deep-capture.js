@@ -56,17 +56,17 @@ function wrap(start) {
               [
                 v.variableDeclaration(
                   [18, 7, 18, 25],
-                  "const",
                   v.identifier(
                     [18, 13, 18, 19],
                     "middle",
                     "middle$1mlv4ugew6yjv$1",
                   ),
-                  v.number([18, 22, 18, 24], 10),
+                  v.numericLiteral([18, 22, 18, 24], 10),
+                  "const",
                 ),
-                v.return(
+                v.returnStatement(
                   [19, 7, 19, 36],
-                  v.binop(
+                  v.binaryExpression(
                     [19, 14, 19, 35],
                     v.identifier(
                       [19, 14, 19, 20],
@@ -90,11 +90,14 @@ function wrap(start) {
         [
           v.variableDeclaration(
             [16, 5, 16, 26],
-            "const",
             v.identifier([16, 11, 16, 16], "outer", "outer$1mlv4ugew6yjv$0"),
             v.splice([16, 19, 16, 25], "$start"),
+            "const",
           ),
-          v.return([17, 5, 20, 9], v.splice([17, 12, 20, 8], "$0splice0")),
+          v.returnStatement(
+            [17, 5, 20, 9],
+            v.splice([17, 12, 20, 8], "$0splice0"),
+          ),
         ],
       ),
   );
@@ -119,7 +122,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([24, 29, 24, 30], 1),
+          (v) => v.numericLiteral([24, 29, 24, 30], 1),
         ),
       ),
       $0splice1: wrap(
@@ -134,7 +137,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([24, 46, 24, 47], 2),
+          (v) => v.numericLiteral([24, 46, 24, 47], 2),
         ),
       ),
     },
@@ -142,7 +145,7 @@ export default cs.create(
     spliceParams: { $0splice0: [], $0splice1: [] },
   },
   (v) =>
-    v.binop(
+    v.binaryExpression(
       [24, 19, 24, 50],
       v.splice([24, 19, 24, 33], "$0splice0"),
       "+",

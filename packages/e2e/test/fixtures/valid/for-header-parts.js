@@ -18,53 +18,55 @@ export default cs.create(
       [
         v.variableDeclaration(
           [6, 3, 6, 13],
-          "let",
           v.identifier([6, 7, 6, 8], "i", "i$2mxyjvdrslxo1$0"),
-          v.number([6, 11, 6, 12], 0),
+          v.numericLiteral([6, 11, 6, 12], 0),
+          "let",
         ),
         v.variableDeclaration(
           [7, 3, 7, 17],
-          "let",
           v.identifier([7, 7, 7, 11], "seen", "seen$2mxyjvdrslxo1$1"),
-          v.string([7, 14, 7, 16], ""),
+          v.stringLiteral([7, 14, 7, 16], ""),
+          "let",
         ),
-        v.for(
+        v.forStatement(
           [8, 3, 11, 4],
           null,
-          v.binop(
+          v.binaryExpression(
             [8, 10, 8, 15],
             v.identifier([8, 10, 8, 11], "i", "i$2mxyjvdrslxo1$0"),
             "<",
-            v.number([8, 14, 8, 15], 3),
+            v.numericLiteral([8, 14, 8, 15], 3),
           ),
           null,
           v.block(
             [8, 19, 11, 4],
             [
-              v.assignment(
+              v.binaryExpression(
                 [9, 5, 9, 20],
                 v.identifier([9, 5, 9, 9], "seen", "seen$2mxyjvdrslxo1$1"),
-                v.binop(
+                "=",
+                v.binaryExpression(
                   [9, 12, 9, 20],
                   v.identifier([9, 12, 9, 16], "seen", "seen$2mxyjvdrslxo1$1"),
                   "+",
                   v.identifier([9, 19, 9, 20], "i", "i$2mxyjvdrslxo1$0"),
                 ),
               ),
-              v.assignment(
+              v.binaryExpression(
                 [10, 5, 10, 14],
                 v.identifier([10, 5, 10, 6], "i", "i$2mxyjvdrslxo1$0"),
-                v.binop(
+                "=",
+                v.binaryExpression(
                   [10, 9, 10, 14],
                   v.identifier([10, 9, 10, 10], "i", "i$2mxyjvdrslxo1$0"),
                   "+",
-                  v.number([10, 13, 10, 14], 1),
+                  v.numericLiteral([10, 13, 10, 14], 1),
                 ),
               ),
             ],
           ),
         ),
-        v.return(
+        v.returnStatement(
           [12, 3, 12, 15],
           v.identifier([12, 10, 12, 14], "seen", "seen$2mxyjvdrslxo1$1"),
         ),

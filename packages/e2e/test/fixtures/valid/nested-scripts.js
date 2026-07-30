@@ -30,11 +30,11 @@ export default cs.create(
       [
         v.variableDeclaration(
           [4, 3, 4, 15],
-          "const",
           v.identifier([4, 9, 4, 10], "x", "x$3d1j5mxf94bs6$0"),
-          v.number([4, 13, 4, 14], 0),
+          v.numericLiteral([4, 13, 4, 14], 0),
+          "const",
         ),
-        v.return([5, 3, 5, 19], v.splice([5, 10, 5, 18], "$0splice0")),
+        v.returnStatement([5, 3, 5, 19], v.splice([5, 10, 5, 18], "$0splice0")),
       ],
     ),
 );

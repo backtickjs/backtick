@@ -18,9 +18,9 @@ const effects = cs.create(
       [
         v.variableDeclaration(
           [6, 3, 6, 15],
-          "const",
           v.identifier([6, 9, 6, 10], "x", "x$agkxao2hual4$0"),
-          v.number([6, 13, 6, 14], 1),
+          v.numericLiteral([6, 13, 6, 14], 1),
+          "const",
         ),
       ],
     ),

@@ -17,10 +17,10 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   (v) =>
-    v.binop(
+    v.binaryExpression(
       [10, 19, 10, 49],
       v.splice([10, 19, 10, 43], "$0splice0"),
       "+",
-      v.string([10, 46, 10, 49], "!"),
+      v.stringLiteral([10, 46, 10, 49], "!"),
     ),
 );

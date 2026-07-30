@@ -39,6 +39,6 @@ export default _jsx(Child, {
       captures: [],
       spliceParams: {},
     },
-    (v) => v.number([17, 29, 17, 30], 1),
+    (v) => v.numericLiteral([17, 29, 17, 30], 1),
   ),
 });

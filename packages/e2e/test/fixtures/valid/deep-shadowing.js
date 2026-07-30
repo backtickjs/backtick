@@ -36,11 +36,11 @@ export default cs.create(
       [
         v.variableDeclaration(
           [8, 3, 8, 19],
-          "const",
           v.identifier([8, 9, 8, 13], "base", "base$1q50brt6ov79t$0"),
-          v.number([8, 16, 8, 18], 10),
+          v.numericLiteral([8, 16, 8, 18], 10),
+          "const",
         ),
-        v.return([9, 3, 9, 29], v.splice([9, 10, 9, 28], "$0splice0")),
+        v.returnStatement([9, 3, 9, 29], v.splice([9, 10, 9, 28], "$0splice0")),
       ],
     ),
 );
@@ -62,13 +62,13 @@ function outer(inner) {
         [
           v.variableDeclaration(
             [14, 5, 14, 20],
-            "const",
             v.identifier([14, 11, 14, 15], "base", "base$1q50brt6ov79t$1"),
-            v.number([14, 18, 14, 19], 1),
+            v.numericLiteral([14, 18, 14, 19], 1),
+            "const",
           ),
-          v.return(
+          v.returnStatement(
             [15, 5, 15, 36],
-            v.binop(
+            v.binaryExpression(
               [15, 12, 15, 35],
               v.identifier([15, 12, 15, 16], "base", "base$1q50brt6ov79t$1"),
               "+",
@@ -97,13 +97,13 @@ function middle(inner) {
         [
           v.variableDeclaration(
             [21, 5, 21, 20],
-            "const",
             v.identifier([21, 11, 21, 15], "base", "base$1q50brt6ov79t$2"),
-            v.number([21, 18, 21, 19], 2),
+            v.numericLiteral([21, 18, 21, 19], 2),
+            "const",
           ),
-          v.return(
+          v.returnStatement(
             [22, 5, 22, 26],
-            v.binop(
+            v.binaryExpression(
               [22, 12, 22, 25],
               v.identifier([22, 12, 22, 16], "base", "base$1q50brt6ov79t$2"),
               "*",

@@ -28,7 +28,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([16, 36, 16, 37], 1),
+          (v) => v.numericLiteral([16, 36, 16, 37], 1),
         ),
         cs.create(
           [16, 40, 16, 45],
@@ -41,7 +41,7 @@ export default cs.create(
             captures: [],
             spliceParams: {},
           },
-          (v) => v.number([16, 43, 16, 44], 2),
+          (v) => v.numericLiteral([16, 43, 16, 44], 2),
         ),
       ]),
     },
@@ -49,13 +49,15 @@ export default cs.create(
     spliceParams: { $0splice0: [] },
   },
   (v) =>
-    v.propertyAccess(
+    v.propertyAccessExpression(
       [16, 19, 16, 61],
-      v.propertyAccess(
+      v.propertyAccessExpression(
         [16, 19, 16, 54],
         v.splice([16, 19, 16, 48], "$0splice0"),
+        false,
         "coins",
       ),
+      false,
       "length",
     ),
 );
