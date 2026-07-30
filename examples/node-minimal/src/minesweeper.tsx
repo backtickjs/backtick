@@ -61,10 +61,10 @@ function deal(): Board {
 // One handler for the whole board rather than one per square: `at` is the only
 // thing that differs between squares, so it is an argument.
 function press(
-  open: Client<State<readonly boolean[]>>,
+  open: Client<State<boolean[]>>,
   dead: Client<State<boolean>>,
-  labels: Client<State<readonly string[]>>,
-  clears: Client<State<readonly (readonly number[])[]>>,
+  labels: Client<State<string[]>>,
+  clears: Client<State<number[][]>>,
   at: number,
 ): Client<() => void> {
   return cs`() => {
@@ -94,15 +94,15 @@ function press(
 // What a square shows, and how it is shaded — one script each for the whole
 // board, with the square's position as an argument.
 const shows = (
-  open: Client<State<readonly boolean[]>>,
+  open: Client<State<boolean[]>>,
   dead: Client<State<boolean>>,
-  labels: Client<State<readonly string[]>>,
+  labels: Client<State<string[]>>,
   at: number,
 ): Client<string> =>
   cs`$open.read()[$at] === true || $dead.read() ? $labels.read()[$at] : ""`;
 
 const shade = (
-  open: Client<State<readonly boolean[]>>,
+  open: Client<State<boolean[]>>,
   dead: Client<State<boolean>>,
   at: number,
 ): Client<string> =>
@@ -127,8 +127,8 @@ export async function Minesweeper() {
   // cell's initial is written once in the tree, while a splice is written at
   // every script that reads it, and every square reads these.
   const open = state(board.labels.map(() => false));
-  const labels = state<readonly string[]>(board.labels);
-  const clears = state<readonly (readonly number[])[]>(board.clears);
+  const labels = state<string[]>(board.labels);
+  const clears = state<number[][]>(board.clears);
   const dead = state(false);
 
   const rows = [];

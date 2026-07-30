@@ -38,10 +38,10 @@ export type Spliced<T> = [SpliceableValue] extends [T]
         ? T
         : T extends ClientObject
           ? T
-          : T extends (infer Item)[]
+          : T extends readonly (infer Item)[]
             ? Spliced<Item>[]
             : T extends object
-              ? { [K in keyof T]: Spliced<T[K]> }
+              ? { -readonly [K in keyof T]: Spliced<T[K]> }
               : T;
 
 export function isSpliceable(value: unknown): value is Spliceable {
