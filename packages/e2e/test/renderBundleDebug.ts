@@ -75,14 +75,14 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         isNode(calleeNode) && calleeNode["#"] === NodeKind.ArrowFunction
           ? `(${callee})`
           : callee;
-      return `${target}${node[NodeField.optional] ? "?." : ""}(${args.join(", ")})`;
+      return `${target}${node[NodeField.questionDotToken] ? "?." : ""}(${args.join(", ")})`;
     }
     case NodeKind.PropertyAccessExpression:
-      return `${renderNode(node[NodeField.expression], indent)}${node[NodeField.optional] ? "?." : "."}${node[NodeField.name]}`;
+      return `${renderNode(node[NodeField.expression], indent)}${node[NodeField.questionDotToken] ? "?." : "."}${node[NodeField.name]}`;
     case NodeKind.ElementAccessExpression:
       return `${renderNode(node[NodeField.expression], indent)}[${renderNode(node[NodeField.argumentExpression], indent)}]`;
     case NodeKind.BinaryExpression:
-      return `${renderNode(node[NodeField.left], indent)} ${node[NodeField.operator]} ${renderNode(
+      return `${renderNode(node[NodeField.left], indent)} ${node[NodeField.operatorToken]} ${renderNode(
         node[NodeField.right],
         indent,
       )}`;
@@ -104,8 +104,6 @@ function renderNode(node: BundleStatementNode, indent: string): string {
         node[NodeField.initializer],
         indent,
       )}`;
-    case NodeKind.AssignmentExpression:
-      return `${node[NodeField.name]} = ${renderNode(node[NodeField.expression], indent)}`;
     case NodeKind.IfStatement: {
       const consequent = renderStatement(node[NodeField.thenStatement], indent);
       const alternate =
@@ -142,10 +140,11 @@ function renderNode(node: BundleStatementNode, indent: string): string {
     case NodeKind.ThrowStatement:
       return `throw ${renderNode(node[NodeField.expression], indent)}`;
     case NodeKind.TryStatement: {
-      const param =
-        node[NodeField.param] === null ? "" : ` (${node[NodeField.param]})`;
+      const clause = node[NodeField.catchClause];
+      const bound = clause[NodeField.variableDeclaration];
+      const param = bound === null ? "" : ` (${bound})`;
       return `try ${renderNode(node[NodeField.tryBlock], indent)} catch${param} ${renderNode(
-        node[NodeField.handler],
+        clause[NodeField.block],
         indent,
       )}`;
     }

@@ -9,6 +9,7 @@ import type {
   BundleGetFunction,
   BundleApplyTree,
   BundleBinaryOperator,
+  BundleBinopNode,
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
@@ -505,15 +506,6 @@ function executeStatement(
       );
       return advanced;
     }
-    case NodeKind.AssignmentExpression: {
-      const value = evaluateNode(bundle, node[NodeField.expression], scope);
-      const frame = lookup(scope, node[NodeField.name]);
-      if (frame === null) {
-        throw new Error(`unknown assignment target ${node[NodeField.name]}`);
-      }
-      frame.bindings.set(node[NodeField.name], value);
-      return advanced;
-    }
     case NodeKind.IfStatement: {
       if (
         condition(
@@ -613,14 +605,15 @@ function executeStatement(
       try {
         return executeStatement(bundle, node[NodeField.tryBlock], scope);
       } catch (thrown) {
-        // The catch binding scopes over the handler only, like an arrow
+        // The catch binding scopes over the clause's block only, like an arrow
         // parameter over its body.
+        const clause = node[NodeField.catchClause];
         const frame: Scope = { parent: scope, bindings: new Map() };
-        const caught = node[NodeField.param];
+        const caught = clause[NodeField.variableDeclaration];
         if (caught !== null) {
           frame.bindings.set(caught, thrown as Value);
         }
-        return executeStatement(bundle, node[NodeField.handler], frame);
+        return executeStatement(bundle, clause[NodeField.block], frame);
       }
     }
     default: {
@@ -680,13 +673,13 @@ function evaluateNode(
         ) as {
           [name: string]: Value;
         };
-        if (callee[NodeField.optional] && object === null) {
+        if (callee[NodeField.questionDotToken] && object === null) {
           return null;
         }
         const method = object[callee[NodeField.name]];
         // An optional call (`a.b?.(…)`) short-circuits a null method the
         // same way, arguments unevaluated.
-        if (node[NodeField.optional] && method === null) {
+        if (node[NodeField.questionDotToken] && method === null) {
           return null;
         }
         if (typeof method !== "function") {
@@ -701,7 +694,7 @@ function evaluateNode(
       // (`cb?.(…)`) short-circuits a null callee to null, arguments
       // unevaluated.
       const value = evaluateNode(bundle, callee, scope);
-      if (node[NodeField.optional] && value === null) {
+      if (node[NodeField.questionDotToken] && value === null) {
         return null;
       }
       if (typeof value !== "function") {
@@ -720,7 +713,7 @@ function evaluateNode(
       ) as {
         [name: string]: Value;
       };
-      if (node[NodeField.optional] && object === null) {
+      if (node[NodeField.questionDotToken] && object === null) {
         return null;
       }
       // An absent member reads as null — the language's absent value;
@@ -757,9 +750,24 @@ function evaluateNode(
       return null;
     }
     case NodeKind.BinaryExpression: {
+      if (isAssignment(node)) {
+        // An assignment, which is a binary expression here as it is in
+        // TypeScript. The left is a name to bind, never a value to read, so it
+        // is the one operand that isn't evaluated.
+        const name = node[NodeField.left][NodeField.text];
+        const value = evaluateNode(bundle, node[NodeField.right], scope);
+        const frame = lookup(scope, name);
+        if (frame === null) {
+          throw new Error(`unknown assignment target ${name}`);
+        }
+        frame.bindings.set(name, value);
+        // An assignment evaluates to the value assigned, as in JavaScript; in
+        // statement position nothing reads it.
+        return value;
+      }
       return evaluateBinop(
         bundle,
-        node[NodeField.operator],
+        node[NodeField.operatorToken],
         node[NodeField.left],
         node[NodeField.right],
         scope,
@@ -825,9 +833,20 @@ function condition(value: Value, what: string): boolean {
   );
 }
 
+// The `=` half of `BundleBinopNode`, whose left is an identifier. A predicate
+// rather than a comparison at the use site: the field is reached by a computed
+// key, which TypeScript won't narrow a union through on its own.
+function isAssignment(
+  node: BundleBinopNode,
+): node is Extract<BundleBinopNode, { [NodeField.operatorToken]: "=" }> {
+  return node[NodeField.operatorToken] === "=";
+}
+
 function evaluateBinop(
   bundle: Bundle,
-  operator: BundleBinaryOperator,
+  // Every operator but `=`, which assigns rather than combining two values and
+  // is answered where the node is read.
+  operator: Exclude<BundleBinaryOperator, "=">,
   leftNode: BundleExpressionNode,
   rightNode: BundleExpressionNode,
   scope: Scope | null,

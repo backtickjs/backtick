@@ -91,10 +91,16 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
   function buildStatement(node: AstScriptStatement): BundleStatementNode {
     switch (node.kind) {
       case "AstScriptAssignment":
+        // An assignment is a binary expression over `=`, as it is in
+        // TypeScript, so its target goes as the identifier it is.
         return {
-          "#": NodeKind.AssignmentExpression,
-          [NodeField.name]: sourceName(node.name.bindingKey),
-          [NodeField.expression]: buildExpression(node.expression),
+          "#": NodeKind.BinaryExpression,
+          [NodeField.operatorToken]: "=",
+          [NodeField.left]: {
+            "#": NodeKind.Identifier,
+            [NodeField.text]: sourceName(node.name.bindingKey),
+          },
+          [NodeField.right]: buildExpression(node.expression),
         };
       case "AstScriptBlock":
         return buildBlock(node);
@@ -141,9 +147,12 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return {
           "#": NodeKind.TryStatement,
           [NodeField.tryBlock]: buildBlock(node.block),
-          [NodeField.param]:
-            node.param === null ? null : sourceName(node.param.bindingKey),
-          [NodeField.handler]: buildBlock(node.handler),
+          [NodeField.catchClause]: {
+            "#": NodeKind.CatchClause,
+            [NodeField.variableDeclaration]:
+              node.param === null ? null : sourceName(node.param.bindingKey),
+            [NodeField.block]: buildBlock(node.handler),
+          },
         };
       case "AstScriptVariableDeclaration":
         return {
@@ -175,7 +184,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
       case "AstScriptBinop":
         return {
           "#": NodeKind.BinaryExpression,
-          [NodeField.operator]: node.operator,
+          [NodeField.operatorToken]: node.operator,
           [NodeField.left]: e(node.lhs),
           [NodeField.right]: e(node.rhs),
         };
@@ -198,7 +207,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           "#": NodeKind.CallExpression,
           [NodeField.expression]: callee,
           ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-          [NodeField.optional]: node.optional ? true : undefined,
+          [NodeField.questionDotToken]: node.optional ? true : undefined,
         };
       }
       case "AstScriptIdentifier":
@@ -237,7 +246,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           "#": NodeKind.PropertyAccessExpression,
           [NodeField.expression]: e(node.expression),
           [NodeField.name]: node.name,
-          [NodeField.optional]: node.optional ? true : undefined,
+          [NodeField.questionDotToken]: node.optional ? true : undefined,
         };
       }
       case "AstScriptIndex":

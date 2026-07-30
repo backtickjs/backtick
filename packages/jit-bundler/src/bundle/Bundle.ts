@@ -105,9 +105,8 @@ export interface BundleTree {
 //
 // The names are TypeScript's, from the node each one mirrors: a slot is called
 // what `ts.IfStatement` or `ts.CallExpression` calls it, so a reader who knows
-// that AST knows this one. Where a node's shape is this format's own rather
-// than TypeScript's, so is the name — `keyword`, `optional`, `operator`,
-// `param`, `handler` — and each says why at its declaration.
+// that AST knows this one. Only `keyword` has no counterpart, and it says so
+// where it is declared.
 //
 // A letter can carry more than one name. TypeScript often names one slot
 // differently per node — `whenTrue` in a ternary, `thenStatement` in an `if` —
@@ -117,7 +116,7 @@ export interface BundleTree {
 // `expression` is a call's callee, an access's target and a loop's condition
 // alike, because that is what TypeScript calls all of them.
 //
-// Written as `[NodeField.operator]` rather than `m` so the declarations below
+// Written as `[NodeField.operatorToken]` rather than `m` so the declarations below
 // still say what each field is: the name lives here once, and nothing else has
 // to know its letter. Append to add a field; never reassign one — a letter that
 // moves silently misreads every bundle already written.
@@ -153,15 +152,19 @@ export const NodeField = {
   statement: "s", // ts.WhileStatement, ts.ForStatement
   statements: "t", // ts.Block
   tryBlock: "v", // ts.TryStatement
+  catchClause: "w", // ts.TryStatement
+  variableDeclaration: "x", // ts.CatchClause
+  block: "v", // ts.CatchClause
 
-  // This format's own shape, so its own name. TypeScript holds a token node
-  // where these hold a flag or a string, and flattens no clause the way `try`
-  // is flattened here.
-  optional: "l", // ts.PropertyAccessExpression.questionDotToken, as a flag
-  operator: "m", // ts.BinaryExpression.operatorToken, as the operator itself
-  keyword: "u", // `const` or `let`, which ts.VariableDeclarationList holds
-  param: "x", // ts.CatchClause.variableDeclaration, as a name
-  handler: "w", // ts.CatchClause.block, the clause being flattened into `try`
+  // TypeScript's names for slots it fills with a token node, where this format
+  // carries what the token would have said: a flag for a `?.` that is either
+  // there or not, and the operator itself rather than a kind to look up.
+  questionDotToken: "l", // ts.PropertyAccessExpression, ts.CallExpression
+  operatorToken: "m", // ts.BinaryExpression
+
+  // The one slot with no TypeScript counterpart: `const` or `let`, which
+  // TypeScript keeps as flags on the declaration list this format doesn't have.
+  keyword: "u",
 } as const;
 
 // Every node kind, as the number `"#"` carries. A number rather than a name
@@ -195,13 +198,13 @@ export const NodeKind = {
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
   // value.
   //
-  // Named as TypeScript's `SyntaxKind` names them, so a reader who knows that
-  // AST knows this one. Two are ours: `VariableDeclaration` carries the
-  // `const`/`let` keyword TypeScript keeps on the declaration list, and
-  // `AssignmentExpression` is a `SyntaxKind` TypeScript hasn't got — it reads
-  // `x = 1` as a `BinaryExpression` over an `EqualsToken`, where this format
-  // keeps assignment apart, its target always a name (the name is TypeScript's
-  // own, from `ts.AssignmentExpression`).
+  // Every name here is a `ts.SyntaxKind`, so a reader who knows that AST knows
+  // this one. What a name can't carry is that the format is smaller than the
+  // grammar: a literal is JSON carrying itself rather than a `NumericLiteral`
+  // or a `NullKeyword`, and a declaration holds its own `const`/`let` instead
+  // of the `VariableStatement` → `VariableDeclarationList` → `VariableDeclaration`
+  // that TypeScript spends three nodes on. Where a node exists at all, it is
+  // shaped and named as TypeScript shapes and names it.
   Identifier: 1000,
   CallExpression: 1001,
   PropertyAccessExpression: 1002,
@@ -210,7 +213,9 @@ export const NodeKind = {
   ArrowFunction: 1005,
   Block: 1006,
   VariableDeclaration: 1007,
-  AssignmentExpression: 1008,
+  // 1008 is retired. It was an assignment kind, which TypeScript hasn't got:
+  // `x = 1` is a `BinaryExpression` over an `EqualsToken`, and that is what
+  // this format writes now. A number is never reused.
   IfStatement: 1009,
   ReturnStatement: 1010,
   ThrowStatement: 1011,
@@ -220,6 +225,7 @@ export const NodeKind = {
   BreakStatement: 1015,
   ContinueStatement: 1016,
   ElementAccessExpression: 1017,
+  CatchClause: 1018,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -363,7 +369,6 @@ export type BundleStatementNode =
   | BundleExpressionNode
   | BundleBlockNode
   | BundleDeclarationNode
-  | BundleAssignmentNode
   | BundleIfNode
   | BundleWhileNode
   | BundleForNode
@@ -403,17 +408,17 @@ export type BundleGetEntry = BundleGetFunction | BundleGetTree;
 // is an `entry` node targeting a function, `args` mirrors that entry's
 // parameters (thunks for a polymorphic entry's splices first, then one value
 // per capture); targeting a tree, `args` supplies the tree's slots in index
-// order. When `optional` (`callee?.(…)`), a null callee yields null — the
+// order. When `questionDotToken` (`callee?.(…)`), a null callee yields null — the
 // language's absent value; `undefined` never arises — and the arguments are
 // not evaluated.
 export interface BundleCallNode {
   "#": typeof NodeKind.CallExpression;
   [NodeField.expression]: BundleExpressionNode;
   [NodeField.arguments]?: BundleExpressionNode[];
-  [NodeField.optional]?: true;
+  [NodeField.questionDotToken]?: true;
 }
 
-// A static property access: `object.name`. When `optional` (`object?.name`),
+// A static property access: `object.name`. When `questionDotToken` (`object?.name`),
 // a null object yields null — the language's absent value; `undefined` never
 // arises — instead of reading. Reading an absent member also yields null,
 // the same family as a missing argument binding null. As a call's callee,
@@ -423,7 +428,7 @@ export interface BundlePropertyNode {
   "#": typeof NodeKind.PropertyAccessExpression;
   [NodeField.expression]: BundleExpressionNode;
   [NodeField.name]: string;
-  [NodeField.optional]?: true;
+  [NodeField.questionDotToken]?: true;
 }
 
 // A dynamic read: `object[key]`, where the key is an expression rather than a
@@ -449,7 +454,12 @@ export interface BundleIndexNode {
 // operand directly — short-circuiting (skipping the right operand's
 // effects) without ToBoolean rules. `??` short-circuits on null/undefined.
 // The compiler rejects any other operator in a script.
+//
+// `=` is here because an assignment is a binary expression, as it is in
+// TypeScript — see `BundleBinopNode`. A script can't write one where a value
+// is expected, but the format has no separate place to put it.
 export type BundleBinaryOperator =
+  | "="
   | "&&"
   | "||"
   | "??"
@@ -465,13 +475,28 @@ export type BundleBinaryOperator =
   | ">"
   | ">=";
 
-// A binary operation with JavaScript semantics for `operator`.
-export interface BundleBinopNode {
-  "#": typeof NodeKind.BinaryExpression;
-  [NodeField.operator]: BundleBinaryOperator;
-  [NodeField.left]: BundleExpressionNode;
-  [NodeField.right]: BundleExpressionNode;
-}
+// A binary operation with JavaScript semantics for `operatorToken` — which is
+// the operator itself, where TypeScript holds a token node.
+//
+// `=` assigns, and its left is always an identifier: nothing else in this
+// language can be assigned to. Reading the two apart is the reader's one
+// obligation here — an `=` binds its left rather than evaluating it, and
+// evaluating it first would read a variable where a name was meant. The type
+// splits them so a reader can't reach `left` for an assignment and find
+// anything but a name.
+export type BundleBinopNode =
+  | {
+      "#": typeof NodeKind.BinaryExpression;
+      [NodeField.operatorToken]: "=";
+      [NodeField.left]: BundleIdentifierNode;
+      [NodeField.right]: BundleExpressionNode;
+    }
+  | {
+      "#": typeof NodeKind.BinaryExpression;
+      [NodeField.operatorToken]: Exclude<BundleBinaryOperator, "=">;
+      [NodeField.left]: BundleExpressionNode;
+      [NodeField.right]: BundleExpressionNode;
+    };
 
 // A ternary: `condition ? consequent : alternate`. The condition is boolean
 // — the typechecker requires it, no truthiness — and only the taken
@@ -510,13 +535,6 @@ export interface BundleDeclarationNode {
   [NodeField.keyword]: "let" | "const";
   [NodeField.name]: string;
   [NodeField.initializer]: BundleExpressionNode;
-}
-
-// An assignment to a resolved name (targets are always identifiers).
-export interface BundleAssignmentNode {
-  "#": typeof NodeKind.AssignmentExpression;
-  [NodeField.name]: string;
-  [NodeField.expression]: BundleExpressionNode;
 }
 
 // An if statement; `alternate` is null when there is no else branch. The
@@ -578,13 +596,23 @@ export interface BundleThrowNode {
   [NodeField.expression]: BundleExpressionNode;
 }
 
-// A try statement: executes `block`; when it throws, binds the thrown value
-// to `param` (null for a bindingless `catch`) and executes `handler`. The
-// binding scopes over the handler only. There is no `finally` — the compiler
-// rejects it.
+// A try statement: executes `tryBlock`; when it throws, its `catchClause`
+// takes over. There is no `finallyBlock` — the compiler rejects `finally` —
+// and the clause is never absent, since a `try` with nothing to catch it
+// would be the statement it wraps.
 export interface BundleTryNode {
   "#": typeof NodeKind.TryStatement;
   [NodeField.tryBlock]: BundleBlockNode;
-  [NodeField.param]: string | null;
-  [NodeField.handler]: BundleBlockNode;
+  [NodeField.catchClause]: BundleCatchClauseNode;
+}
+
+// `catch (e) { … }`: binds the thrown value and runs `block`, the binding
+// scoping over that block alone. `variableDeclaration` is the name it binds,
+// or null for a bindingless `catch` — TypeScript holds a declaration node
+// there, where the name is all this format needs, since a catch binding has no
+// initializer and no keyword to carry.
+export interface BundleCatchClauseNode {
+  "#": typeof NodeKind.CatchClause;
+  [NodeField.variableDeclaration]: string | null;
+  [NodeField.block]: BundleBlockNode;
 }
