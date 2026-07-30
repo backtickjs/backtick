@@ -1199,7 +1199,8 @@ function rewriteNodeImpl(
   }
 
   if (ts.isPrefixUnaryExpression(node)) {
-    if (node.operator !== ts.SyntaxKind.ExclamationToken) {
+    const negation = node.operator === ts.SyntaxKind.MinusToken;
+    if (node.operator !== ts.SyntaxKind.ExclamationToken && !negation) {
       state.errors.set(
         node,
         "This operator isn't supported in a `cs` client script.",
@@ -1209,17 +1210,23 @@ function rewriteNodeImpl(
     const operand = rewriteNode(ts, state, node.operand);
     return {
       virtual: ts.factory.createPrefixUnaryExpression(
-        ts.SyntaxKind.ExclamationToken,
-        checkedCondition(
-          ts,
-          state,
-          node.operand,
-          operand.virtual as ts.Expression,
-        ),
+        node.operator,
+        // `!` tests its operand, so it takes the boolean check every tested
+        // position takes. `-` takes one of its own: TypeScript checks a binary
+        // arithmetic operand but not a prefixed one, so `-name` would type as a
+        // number and coerce at runtime.
+        negation
+          ? call(ts, "cs", "number", [operand.virtual as ts.Expression])
+          : checkedCondition(
+              ts,
+              state,
+              node.operand,
+              operand.virtual as ts.Expression,
+            ),
       ),
       runtime: astNode(ts, SyntaxKind.PrefixUnaryExpression, {
         loc: loc(node),
-        operator: ts.factory.createStringLiteral("!"),
+        operator: ts.factory.createStringLiteral(negation ? "-" : "!"),
         operand: operand.runtime as ts.Expression,
       }),
     };

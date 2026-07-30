@@ -30,6 +30,16 @@ function _condition(_: boolean): boolean {
   );
 }
 
+// Used to keep `-` arithmetic. TypeScript checks a binary operand — `s * 1` is
+// an error — but not a prefixed one, where it types `-s` as a number and lets
+// JavaScript coerce. There is no coercion here, so the check is made instead.
+function _number(_: number): number {
+  throw new Error(
+    "Don't call `cs.number` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 // A value with `const` semantics
 function _const<T extends ClientValue>(_: T): T {
   throw new Error(
@@ -96,6 +106,7 @@ export const cs = Object.assign(
     lift: _lift,
     splice: _splice,
     condition: _condition,
+    number: _number,
     const: _const,
     let: _let,
     statement: _statement,

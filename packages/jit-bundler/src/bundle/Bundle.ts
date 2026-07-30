@@ -503,11 +503,17 @@ export type BundleBinaryExpressionNode =
       [NodeField.right]: BundleExpressionNode;
     };
 
-// `!x`. The operand is boolean, as every tested position is, so this negates a
-// value rather than deciding what counts as one.
+// The prefix operators, as `BundleBinaryOperator` is for the binary ones.
+export type BundlePrefixUnaryOperator = "!" | "-";
+
+// `!x` or `-x`. A `!` operand is boolean, as every tested position is, so it
+// negates a value rather than deciding what counts as one; a `-` operand is a
+// number. A negative literal is not written this way — it carries itself, like
+// every other literal on the wire — so this node means an operator applied to
+// something computed.
 export interface BundlePrefixUnaryExpressionNode {
   "#": typeof NodeKind.PrefixUnaryExpression;
-  [NodeField.operator]: "!";
+  [NodeField.operator]: BundlePrefixUnaryOperator;
   [NodeField.operand]: BundleExpressionNode;
 }
 

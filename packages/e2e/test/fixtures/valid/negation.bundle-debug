@@ -1,0 +1,7 @@
+#f0 = () => (count) => {
+  const floor = -1;
+  const step = -count;
+  return floor + step + -2;
+}
+
+root = #f0()

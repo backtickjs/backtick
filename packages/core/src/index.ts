@@ -50,6 +50,7 @@ export type {
   BundleNode,
   BundleParameterNode,
   BundlePrefixUnaryExpressionNode,
+  BundlePrefixUnaryOperator,
   BundlePropertyAccessExpressionNode,
   BundleReturnStatementNode,
   BundleStatementNode,

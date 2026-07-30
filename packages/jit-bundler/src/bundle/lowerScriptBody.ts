@@ -235,6 +235,14 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         };
       }
       case SyntaxKind.PrefixUnaryExpression:
+        // A negative literal carries itself, like every other literal here: the
+        // node is TypeScript's way of writing one, not something to evaluate.
+        if (
+          node.operator === "-" &&
+          node.operand.kind === SyntaxKind.NumericLiteral
+        ) {
+          return -node.operand.value;
+        }
         return {
           "#": NodeKind.PrefixUnaryExpression,
           [NodeField.operator]: node.operator,

@@ -1,0 +1,9 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_name          → name
+: string           → : string
+) =>               → ) => 
+-cs.number(        → -
+__cs_name          → name
+)                  → 
+))                 → `

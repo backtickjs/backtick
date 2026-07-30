@@ -774,12 +774,13 @@ function evaluateNode(
       );
     }
     case NodeKind.PrefixUnaryExpression: {
-      // The operand is boolean, as a tested position always is, so this negates
-      // rather than deciding what counts as true.
-      return !condition(
-        evaluateNode(bundle, node[NodeField.operand], scope),
-        "the operand of `!`",
-      );
+      const operand = evaluateNode(bundle, node[NodeField.operand], scope);
+      // A `!` operand is boolean, as a tested position always is, so this
+      // negates rather than deciding what counts as true. A `-` operand is a
+      // number, checked by the compiler as arithmetic everywhere else is.
+      return node[NodeField.operator] === "-"
+        ? -(operand as number)
+        : !condition(operand, "the operand of `!`");
     }
     case NodeKind.ConditionalExpression: {
       // Only the taken branch evaluates.

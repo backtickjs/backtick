@@ -1,3 +1,4 @@
 import { cs } from "@backtickjs/core";
 
-const script = cs`(n: number) => -n`;
+// `!` and `-` are the prefix operators; the bitwise and update ones are not.
+const script = cs`(n: number) => ~n`;
