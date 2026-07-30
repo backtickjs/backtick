@@ -39,7 +39,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     const at = captureIndex.get(key);
     return {
       "#": NodeKind.Identifier,
-      [NodeField.name]: at === undefined ? sourceName(key) : `$${at}`,
+      [NodeField.text]: at === undefined ? sourceName(key) : `$${at}`,
     };
   };
 
@@ -63,12 +63,12 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
       (bound) => read(bound),
     );
     return {
-      "#": NodeKind.Call,
-      [NodeField.callee]: {
+      "#": NodeKind.CallExpression,
+      [NodeField.expression]: {
         "#": NodeKind.Identifier,
-        [NodeField.name]: `$${index}`,
+        [NodeField.text]: `$${index}`,
       },
-      ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+      ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
     };
   };
 
@@ -92,7 +92,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     switch (node.kind) {
       case "AstScriptAssignment":
         return {
-          "#": NodeKind.Assignment,
+          "#": NodeKind.AssignmentExpression,
           [NodeField.name]: sourceName(node.name.bindingKey),
           [NodeField.expression]: buildExpression(node.expression),
         };
@@ -100,57 +100,57 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return buildBlock(node);
       case "AstScriptIf":
         return {
-          "#": NodeKind.If,
-          [NodeField.condition]: buildExpression(node.condition),
-          [NodeField.consequent]: buildStatement(node.consequent),
-          [NodeField.alternate]:
+          "#": NodeKind.IfStatement,
+          [NodeField.expression]: buildExpression(node.condition),
+          [NodeField.thenStatement]: buildStatement(node.consequent),
+          [NodeField.elseStatement]:
             node.alternate === null ? null : buildStatement(node.alternate),
         };
       case "AstScriptWhile":
         return {
-          "#": NodeKind.While,
-          [NodeField.condition]: buildExpression(node.condition),
-          [NodeField.body]: buildStatement(node.body),
+          "#": NodeKind.WhileStatement,
+          [NodeField.expression]: buildExpression(node.condition),
+          [NodeField.statement]: buildStatement(node.body),
         };
       case "AstScriptFor":
         return {
-          "#": NodeKind.For,
-          [NodeField.init]:
+          "#": NodeKind.ForStatement,
+          [NodeField.initializer]:
             node.init === null ? null : buildStatement(node.init),
           [NodeField.condition]:
             node.condition === null ? null : buildExpression(node.condition),
-          [NodeField.update]:
+          [NodeField.incrementor]:
             node.update === null ? null : buildStatement(node.update),
-          [NodeField.body]: buildStatement(node.body),
+          [NodeField.statement]: buildStatement(node.body),
         };
       case "AstScriptBreak":
-        return { "#": NodeKind.Break };
+        return { "#": NodeKind.BreakStatement };
       case "AstScriptContinue":
-        return { "#": NodeKind.Continue };
+        return { "#": NodeKind.ContinueStatement };
       case "AstScriptReturn":
         return {
-          "#": NodeKind.Return,
+          "#": NodeKind.ReturnStatement,
           [NodeField.expression]: buildExpression(node.expression),
         };
       case "AstScriptThrow":
         return {
-          "#": NodeKind.Throw,
+          "#": NodeKind.ThrowStatement,
           [NodeField.expression]: buildExpression(node.expression),
         };
       case "AstScriptTry":
         return {
-          "#": NodeKind.Try,
-          [NodeField.block]: buildBlock(node.block),
+          "#": NodeKind.TryStatement,
+          [NodeField.tryBlock]: buildBlock(node.block),
           [NodeField.param]:
             node.param === null ? null : sourceName(node.param.bindingKey),
           [NodeField.handler]: buildBlock(node.handler),
         };
       case "AstScriptVariableDeclaration":
         return {
-          "#": NodeKind.Declaration,
+          "#": NodeKind.VariableDeclaration,
           [NodeField.keyword]: node.keyword,
           [NodeField.name]: sourceName(node.name.bindingKey),
-          [NodeField.expression]: buildExpression(node.expression),
+          [NodeField.initializer]: buildExpression(node.expression),
         };
       default:
         // Every remaining kind is an expression, evaluated for its effect.
@@ -167,24 +167,24 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
       case "AstScriptArrow": {
         const params = node.params.map((param) => sourceName(param.bindingKey));
         return {
-          "#": NodeKind.Arrow,
-          ...(params.length === 0 ? {} : { [NodeField.params]: params }),
+          "#": NodeKind.ArrowFunction,
+          ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
           [NodeField.body]: buildBody(node.body),
         };
       }
       case "AstScriptBinop":
         return {
-          "#": NodeKind.Binop,
+          "#": NodeKind.BinaryExpression,
           [NodeField.operator]: node.operator,
           [NodeField.left]: e(node.lhs),
           [NodeField.right]: e(node.rhs),
         };
       case "AstScriptTernary":
         return {
-          "#": NodeKind.Ternary,
+          "#": NodeKind.ConditionalExpression,
           [NodeField.condition]: e(node.condition),
-          [NodeField.consequent]: e(node.consequent),
-          [NodeField.alternate]: e(node.alternate),
+          [NodeField.whenTrue]: e(node.consequent),
+          [NodeField.whenFalse]: e(node.alternate),
         };
       case "AstScriptBoolean":
         return node.value;
@@ -195,9 +195,9 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         const callee = e(node.callee);
         const args = node.args.map(e);
         return {
-          "#": NodeKind.Call,
-          [NodeField.callee]: callee,
-          ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+          "#": NodeKind.CallExpression,
+          [NodeField.expression]: callee,
+          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
           [NodeField.optional]: node.optional ? true : undefined,
         };
       }
@@ -211,9 +211,9 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         const callee = e(node.callee);
         const args = node.args.map(e);
         return {
-          "#": NodeKind.Call,
-          [NodeField.callee]: callee,
-          ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+          "#": NodeKind.CallExpression,
+          [NodeField.expression]: callee,
+          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         };
       }
       case "AstScriptNull":
@@ -234,17 +234,17 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
       }
       case "AstScriptPropertyAccess": {
         return {
-          "#": NodeKind.Property,
-          [NodeField.object]: e(node.expression),
+          "#": NodeKind.PropertyAccessExpression,
+          [NodeField.expression]: e(node.expression),
           [NodeField.name]: node.name,
           [NodeField.optional]: node.optional ? true : undefined,
         };
       }
       case "AstScriptIndex":
         return {
-          "#": NodeKind.Index,
-          [NodeField.object]: e(node.expression),
-          [NodeField.index]: e(node.key),
+          "#": NodeKind.ElementAccessExpression,
+          [NodeField.expression]: e(node.expression),
+          [NodeField.argumentExpression]: e(node.key),
         };
       case "AstScriptSplice":
         return renderSplice(node.key);

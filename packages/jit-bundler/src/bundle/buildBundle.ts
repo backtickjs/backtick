@@ -321,8 +321,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
       expansionBodies.set(label, {
-        "#": NodeKind.Arrow,
-        ...(params.length === 0 ? {} : { [NodeField.params]: params }),
+        "#": NodeKind.ArrowFunction,
+        ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
         [NodeField.body]: expansionBody,
       });
     }
@@ -342,8 +342,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       (_, index) => `$${index}`,
     );
     const arrow = {
-      "#": NodeKind.Arrow,
-      ...(params.length === 0 ? {} : { [NodeField.params]: params }),
+      "#": NodeKind.ArrowFunction,
+      ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
       [NodeField.body]: lowerScriptBody(script),
     };
     bodies.set(script, arrow);
@@ -438,12 +438,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         materialize(value.target);
         const args = callArgs(value);
         return {
-          "#": NodeKind.Call,
-          [NodeField.callee]: {
+          "#": NodeKind.CallExpression,
+          [NodeField.expression]: {
             "#": NodeKind.GetFunction,
             [NodeField.label]: fnLabel(value.target),
           },
-          ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         };
       }
       case "IrTreeRef": {
@@ -451,12 +451,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         requireUnkeyed(value);
         const args = treeSlots(value.target).map(readKey);
         return {
-          "#": NodeKind.Call,
-          [NodeField.callee]: {
+          "#": NodeKind.CallExpression,
+          [NodeField.expression]: {
             "#": NodeKind.GetTree,
             [NodeField.label]: `${value.target}`,
           },
-          ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         };
       }
       case "IrElement":
@@ -509,8 +509,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     const params = passKeys(target, hole).map(displayName);
     if (params.length > 0) {
       return {
-        "#": NodeKind.Arrow,
-        ...(params.length === 0 ? {} : { [NodeField.params]: params }),
+        "#": NodeKind.ArrowFunction,
+        ...(params.length === 0 ? {} : { [NodeField.parameters]: params }),
         [NodeField.body]: renderValue(value),
       };
     }
@@ -524,11 +524,11 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       return args.length === 0
         ? entry
         : {
-            "#": NodeKind.Arrow,
+            "#": NodeKind.ArrowFunction,
             [NodeField.body]: {
-              "#": NodeKind.Call,
-              [NodeField.callee]: entry,
-              [NodeField.args]: args,
+              "#": NodeKind.CallExpression,
+              [NodeField.expression]: entry,
+              [NodeField.arguments]: args,
             } satisfies BundleCallNode,
           };
     }
@@ -543,15 +543,18 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       return args.length === 0
         ? entry
         : {
-            "#": NodeKind.Arrow,
+            "#": NodeKind.ArrowFunction,
             [NodeField.body]: {
-              "#": NodeKind.Call,
-              [NodeField.callee]: entry,
-              [NodeField.args]: args,
+              "#": NodeKind.CallExpression,
+              [NodeField.expression]: entry,
+              [NodeField.arguments]: args,
             } satisfies BundleCallNode,
           };
     }
-    return { "#": NodeKind.Arrow, [NodeField.body]: renderValue(value) };
+    return {
+      "#": NodeKind.ArrowFunction,
+      [NodeField.body]: renderValue(value),
+    };
   };
 
   const treeJsons = new Map<number, BundleTree>();
@@ -606,7 +609,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       [NodeField.content]: {
         "#": NodeKind.ApplyTree,
         [NodeField.label]: `${content.target}`,
-        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         ...(passedKey === null ? {} : { [NodeField.key]: passedKey }),
       },
       ...declared,
@@ -700,7 +703,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       const inner = new Set([...params, ...passed]);
       parts.push({
         "#": NodeKind.Thunk,
-        [NodeField.params]: passed.map(displayName),
+        [NodeField.parameters]: passed.map(displayName),
         [NodeField.expression]: renderExpr(arg, scope, inner),
       });
     });
@@ -744,7 +747,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       return {
         "#": NodeKind.ApplyFunction,
         [NodeField.label]: fnLabel(value.target),
-        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
       };
     }
     if (value.kind === "IrTreeRef") {
@@ -756,7 +759,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       return {
         "#": NodeKind.ApplyTree,
         [NodeField.label]: `${value.target}`,
-        ...(args.length === 0 ? {} : { [NodeField.args]: args }),
+        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         ...(keyed === null ? {} : { [NodeField.key]: keyed }),
       };
     }
@@ -781,7 +784,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       // frame, so a hole threading into the body resolves by name.
       return {
         "#": NodeKind.Thunk,
-        [NodeField.params]: [...value.params],
+        [NodeField.parameters]: [...value.params],
         [NodeField.expression]: renderExpr(
           value.body,
           scope,

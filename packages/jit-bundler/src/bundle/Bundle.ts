@@ -103,47 +103,65 @@ export interface BundleTree {
 // shape is read far more often than it is written, and the long names cost more
 // than the values in most of them.
 //
-// The letters are positional: the nth field here takes the nth letter. They are
-// not mnemonics — half of these names begin with the same letter, so any
-// attempt at one ends in `p` for `params` and something invented for `param`.
-// A rule that can be checked by reading down the column beats a rule that holds
-// for two thirds of the rows.
+// The names are TypeScript's, from the node each one mirrors: a slot is called
+// what `ts.IfStatement` or `ts.CallExpression` calls it, so a reader who knows
+// that AST knows this one. Where a node's shape is this format's own rather
+// than TypeScript's, so is the name — `keyword`, `optional`, `operator`,
+// `param`, `handler` — and each says why at its declaration.
+//
+// A letter can carry more than one name. TypeScript often names one slot
+// differently per node — `whenTrue` in a ternary, `thenStatement` in an `if` —
+// and no node holds two of them, so both read as themselves in the
+// declarations below while costing one letter between them. Where TypeScript
+// uses one name for slots this format kept apart, the letter is what gives:
+// `expression` is a call's callee, an access's target and a loop's condition
+// alike, because that is what TypeScript calls all of them.
 //
 // Written as `[NodeField.operator]` rather than `m` so the declarations below
 // still say what each field is: the name lives here once, and nothing else has
-// to know its letter. Append to add a field; never reassign one, and never
-// reorder — a letter that moves silently misreads every bundle already written.
+// to know its letter. Append to add a field; never reassign one — a letter that
+// moves silently misreads every bundle already written.
 export const NodeField = {
+  // The format's own: a tree, its state, and the tables a label indexes.
   id: "a",
   key: "b",
   props: "c",
   index: "d",
-  name: "e",
   label: "f",
-  args: "g",
-  params: "h",
-  expression: "i",
-  callee: "j",
-  object: "k",
-  optional: "l",
-  operator: "m",
-  left: "n",
-  right: "o",
-  condition: "p",
-  consequent: "q",
-  alternate: "r",
-  body: "s",
-  statements: "t",
-  keyword: "u",
-  block: "v",
-  handler: "w",
-  param: "x",
   content: "y",
   state: "z",
-  // The single letters are spent. These cost a byte more each, which is the
-  // right way round: a `for` header is rare next to an identifier or a call.
-  init: "aa",
-  update: "ab",
+
+  // TypeScript's, by the node they come from.
+  name: "e", // ts.PropertyAccessExpression, ts.VariableDeclaration
+  text: "e", // ts.Identifier
+  arguments: "g", // ts.CallExpression, and what an `apply` supplies
+  parameters: "h", // ts.ArrowFunction
+  expression: "i", // ts.CallExpression (the callee), ts.PropertyAccessExpression
+  // and ts.ElementAccessExpression (the target), ts.IfStatement and
+  // ts.WhileStatement (the condition), ts.ReturnStatement, ts.ThrowStatement
+  argumentExpression: "d", // ts.ElementAccessExpression
+  initializer: "j", // ts.VariableDeclaration, ts.ForStatement
+  incrementor: "k", // ts.ForStatement
+  left: "n", // ts.BinaryExpression
+  right: "o", // ts.BinaryExpression
+  condition: "p", // ts.ConditionalExpression, ts.ForStatement
+  whenTrue: "q", // ts.ConditionalExpression
+  whenFalse: "r", // ts.ConditionalExpression
+  thenStatement: "q", // ts.IfStatement
+  elseStatement: "r", // ts.IfStatement
+  body: "s", // ts.ArrowFunction
+  statement: "s", // ts.WhileStatement, ts.ForStatement
+  statements: "t", // ts.Block
+  tryBlock: "v", // ts.TryStatement
+
+  // This format's own shape, so its own name. TypeScript holds a token node
+  // where these hold a flag or a string, and flattens no clause the way `try`
+  // is flattened here.
+  optional: "l", // ts.PropertyAccessExpression.questionDotToken, as a flag
+  operator: "m", // ts.BinaryExpression.operatorToken, as the operator itself
+  keyword: "u", // `const` or `let`, which ts.VariableDeclarationList holds
+  param: "x", // ts.CatchClause.variableDeclaration, as a name
+  handler: "w", // ts.CatchClause.block, the clause being flattened into `try`
 } as const;
 
 // Every node kind, as the number `"#"` carries. A number rather than a name
@@ -176,24 +194,32 @@ export const NodeKind = {
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
   // value.
+  //
+  // Named as TypeScript's `SyntaxKind` names them, so a reader who knows that
+  // AST knows this one. Two are ours: `VariableDeclaration` carries the
+  // `const`/`let` keyword TypeScript keeps on the declaration list, and
+  // `AssignmentExpression` is a `SyntaxKind` TypeScript hasn't got — it reads
+  // `x = 1` as a `BinaryExpression` over an `EqualsToken`, where this format
+  // keeps assignment apart, its target always a name (the name is TypeScript's
+  // own, from `ts.AssignmentExpression`).
   Identifier: 1000,
-  Call: 1001,
-  Property: 1002,
-  Binop: 1003,
-  Ternary: 1004,
-  Arrow: 1005,
+  CallExpression: 1001,
+  PropertyAccessExpression: 1002,
+  BinaryExpression: 1003,
+  ConditionalExpression: 1004,
+  ArrowFunction: 1005,
   Block: 1006,
-  Declaration: 1007,
-  Assignment: 1008,
-  If: 1009,
-  Return: 1010,
-  Throw: 1011,
-  Try: 1012,
-  While: 1013,
-  For: 1014,
-  Break: 1015,
-  Continue: 1016,
-  Index: 1017,
+  VariableDeclaration: 1007,
+  AssignmentExpression: 1008,
+  IfStatement: 1009,
+  ReturnStatement: 1010,
+  ThrowStatement: 1011,
+  TryStatement: 1012,
+  WhileStatement: 1013,
+  ForStatement: 1014,
+  BreakStatement: 1015,
+  ContinueStatement: 1016,
+  ElementAccessExpression: 1017,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -244,7 +270,7 @@ export interface BundleGetState {
 export interface BundleApplyTree {
   "#": typeof NodeKind.ApplyTree;
   [NodeField.label]: TreeLabel;
-  [NodeField.args]?: BundleExpr[];
+  [NodeField.arguments]?: BundleExpr[];
   [NodeField.key]?: BundleExpr;
 }
 
@@ -253,7 +279,7 @@ export interface BundleApplyTree {
 export interface BundleApplyFunction {
   "#": typeof NodeKind.ApplyFunction;
   [NodeField.label]: FunctionLabel;
-  [NodeField.args]?: BundleExpr[];
+  [NodeField.arguments]?: BundleExpr[];
 }
 
 export type BundleApply = BundleApplyTree | BundleApplyFunction;
@@ -266,7 +292,7 @@ export type BundleApply = BundleApplyTree | BundleApplyFunction;
 // against the enclosing thunk parameters, exactly like a body identifier.
 export interface BundleThunk {
   "#": typeof NodeKind.Thunk;
-  [NodeField.params]?: string[];
+  [NodeField.parameters]?: string[];
   [NodeField.expression]: BundleExpr;
 }
 
@@ -355,7 +381,7 @@ export type BundleBody = BundleExpressionNode | BundleBlockNode;
 // is bound; an unresolved name is a malformed bundle.
 export interface BundleIdentifierNode {
   "#": typeof NodeKind.Identifier;
-  [NodeField.name]: string;
+  [NodeField.text]: string;
 }
 
 // An entry as a value, not applied: the function it evaluates to. Calling that
@@ -381,9 +407,9 @@ export type BundleGetEntry = BundleGetFunction | BundleGetTree;
 // language's absent value; `undefined` never arises — and the arguments are
 // not evaluated.
 export interface BundleCallNode {
-  "#": typeof NodeKind.Call;
-  [NodeField.callee]: BundleExpressionNode;
-  [NodeField.args]?: BundleExpressionNode[];
+  "#": typeof NodeKind.CallExpression;
+  [NodeField.expression]: BundleExpressionNode;
+  [NodeField.arguments]?: BundleExpressionNode[];
   [NodeField.optional]?: true;
 }
 
@@ -394,8 +420,8 @@ export interface BundleCallNode {
 // an optional access also short-circuits the call: a null object yields
 // null and the arguments are not evaluated.
 export interface BundlePropertyNode {
-  "#": typeof NodeKind.Property;
-  [NodeField.object]: BundleExpressionNode;
+  "#": typeof NodeKind.PropertyAccessExpression;
+  [NodeField.expression]: BundleExpressionNode;
   [NodeField.name]: string;
   [NodeField.optional]?: true;
 }
@@ -411,9 +437,9 @@ export interface BundlePropertyNode {
 // in-range read the way TypeScript itself does, so the null is a runtime floor
 // rather than something every read has to answer for.
 export interface BundleIndexNode {
-  "#": typeof NodeKind.Index;
-  [NodeField.object]: BundleExpressionNode;
-  [NodeField.index]: BundleExpressionNode;
+  "#": typeof NodeKind.ElementAccessExpression;
+  [NodeField.expression]: BundleExpressionNode;
+  [NodeField.argumentExpression]: BundleExpressionNode;
 }
 
 // The closed set of binary operators, part of the wire contract: a client
@@ -441,7 +467,7 @@ export type BundleBinaryOperator =
 
 // A binary operation with JavaScript semantics for `operator`.
 export interface BundleBinopNode {
-  "#": typeof NodeKind.Binop;
+  "#": typeof NodeKind.BinaryExpression;
   [NodeField.operator]: BundleBinaryOperator;
   [NodeField.left]: BundleExpressionNode;
   [NodeField.right]: BundleExpressionNode;
@@ -451,10 +477,10 @@ export interface BundleBinopNode {
 // — the typechecker requires it, no truthiness — and only the taken
 // branch evaluates (the other branch's effects are skipped).
 export interface BundleTernaryNode {
-  "#": typeof NodeKind.Ternary;
+  "#": typeof NodeKind.ConditionalExpression;
   [NodeField.condition]: BundleExpressionNode;
-  [NodeField.consequent]: BundleExpressionNode;
-  [NodeField.alternate]: BundleExpressionNode;
+  [NodeField.whenTrue]: BundleExpressionNode;
+  [NodeField.whenFalse]: BundleExpressionNode;
 }
 
 // An arrow function: evaluates to a closure over the enclosing scope. The
@@ -464,8 +490,8 @@ export interface BundleTernaryNode {
 // absent value; `undefined` never arises — which is how an omitted
 // optional parameter reads as null.
 export interface BundleArrowNode {
-  "#": typeof NodeKind.Arrow;
-  [NodeField.params]?: string[];
+  "#": typeof NodeKind.ArrowFunction;
+  [NodeField.parameters]?: string[];
   [NodeField.body]: BundleBody;
 }
 
@@ -480,15 +506,15 @@ export interface BundleBlockNode {
 
 // A variable declaration: binds `name` in the enclosing block.
 export interface BundleDeclarationNode {
-  "#": typeof NodeKind.Declaration;
+  "#": typeof NodeKind.VariableDeclaration;
   [NodeField.keyword]: "let" | "const";
   [NodeField.name]: string;
-  [NodeField.expression]: BundleExpressionNode;
+  [NodeField.initializer]: BundleExpressionNode;
 }
 
 // An assignment to a resolved name (targets are always identifiers).
 export interface BundleAssignmentNode {
-  "#": typeof NodeKind.Assignment;
+  "#": typeof NodeKind.AssignmentExpression;
   [NodeField.name]: string;
   [NodeField.expression]: BundleExpressionNode;
 }
@@ -497,19 +523,19 @@ export interface BundleAssignmentNode {
 // condition is boolean — the typechecker rejects a non-boolean condition,
 // so a client tests it directly, without truthiness rules.
 export interface BundleIfNode {
-  "#": typeof NodeKind.If;
-  [NodeField.condition]: BundleExpressionNode;
-  [NodeField.consequent]: BundleStatementNode;
-  [NodeField.alternate]: BundleStatementNode | null;
+  "#": typeof NodeKind.IfStatement;
+  [NodeField.expression]: BundleExpressionNode;
+  [NodeField.thenStatement]: BundleStatementNode;
+  [NodeField.elseStatement]: BundleStatementNode | null;
 }
 
 // `while (c) { … }`. The condition is boolean, as every condition is: there is
 // no truthiness to fall back on. A `return` in the body returns from the
 // enclosing arrow.
 export interface BundleWhileNode {
-  "#": typeof NodeKind.While;
-  [NodeField.condition]: BundleExpressionNode;
-  [NodeField.body]: BundleStatementNode;
+  "#": typeof NodeKind.WhileStatement;
+  [NodeField.expression]: BundleExpressionNode;
+  [NodeField.statement]: BundleStatementNode;
 }
 
 // `for (init; condition; update) { … }`. Each header part is null when the
@@ -521,34 +547,34 @@ export interface BundleWhileNode {
 // the last turn's values before the update runs — so an arrow built in one turn
 // keeps that turn's numbers rather than the value the loop stopped at.
 export interface BundleForNode {
-  "#": typeof NodeKind.For;
-  [NodeField.init]: BundleStatementNode | null;
+  "#": typeof NodeKind.ForStatement;
+  [NodeField.initializer]: BundleStatementNode | null;
   [NodeField.condition]: BundleExpressionNode | null;
-  [NodeField.update]: BundleStatementNode | null;
-  [NodeField.body]: BundleStatementNode;
+  [NodeField.incrementor]: BundleStatementNode | null;
+  [NodeField.statement]: BundleStatementNode;
 }
 
 // `break` and `continue`, which the nearest enclosing loop catches: one ends
 // it, the other starts its next turn — after a `for`'s update, never skipping
 // it. Neither takes a label, so neither can name a loop further out.
 export interface BundleBreakNode {
-  "#": typeof NodeKind.Break;
+  "#": typeof NodeKind.BreakStatement;
 }
 
 export interface BundleContinueNode {
-  "#": typeof NodeKind.Continue;
+  "#": typeof NodeKind.ContinueStatement;
 }
 
 // Returns the expression's value from the enclosing arrow.
 export interface BundleReturnNode {
-  "#": typeof NodeKind.Return;
+  "#": typeof NodeKind.ReturnStatement;
   [NodeField.expression]: BundleExpressionNode;
 }
 
 // Throws the expression's value, with JavaScript `throw` semantics: the value
 // is thrown as-is (`throw "message"` throws the string itself).
 export interface BundleThrowNode {
-  "#": typeof NodeKind.Throw;
+  "#": typeof NodeKind.ThrowStatement;
   [NodeField.expression]: BundleExpressionNode;
 }
 
@@ -557,8 +583,8 @@ export interface BundleThrowNode {
 // binding scopes over the handler only. There is no `finally` — the compiler
 // rejects it.
 export interface BundleTryNode {
-  "#": typeof NodeKind.Try;
-  [NodeField.block]: BundleBlockNode;
+  "#": typeof NodeKind.TryStatement;
+  [NodeField.tryBlock]: BundleBlockNode;
   [NodeField.param]: string | null;
   [NodeField.handler]: BundleBlockNode;
 }

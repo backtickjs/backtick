@@ -330,7 +330,7 @@ function evaluateExpr(
       }
       case NodeKind.Identifier: {
         // A parameter of an enclosing thunk.
-        const frame = lookup(env, form[NodeField.name]);
+        const frame = lookup(env, form[NodeField.text]);
         if (frame === null) {
           throw new Error(`unknown identifier ${form[NodeField.name]}`);
         }
@@ -342,14 +342,14 @@ function evaluateExpr(
         return getFunction(bundle, form[NodeField.label]);
       }
       case NodeKind.ApplyFunction: {
-        const args = (form[NodeField.args] ?? []).map((arg) =>
+        const args = (form[NodeField.arguments] ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
         return getFunction(bundle, form[NodeField.label])(...args);
       }
       case NodeKind.ApplyTree: {
         const label = form[NodeField.label];
-        const args = (form[NodeField.args] ?? []).map((arg) =>
+        const args = (form[NodeField.arguments] ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
         // Outside an instance there is nothing to persist against, so the
@@ -383,7 +383,7 @@ function evaluateExpr(
         return created.element;
       }
       case NodeKind.Thunk: {
-        const params = form[NodeField.params];
+        const params = form[NodeField.parameters];
         if (!params || params.length === 0) {
           return () =>
             evaluateExpr(
@@ -482,7 +482,10 @@ function executeStatement(
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward.
       for (const statement of node[NodeField.statements] ?? []) {
-        if (isNode(statement) && statement["#"] === NodeKind.Declaration) {
+        if (
+          isNode(statement) &&
+          statement["#"] === NodeKind.VariableDeclaration
+        ) {
           frame.bindings.set(statement[NodeField.name], null);
         }
       }
@@ -495,14 +498,14 @@ function executeStatement(
       }
       return advanced;
     }
-    case NodeKind.Declaration: {
+    case NodeKind.VariableDeclaration: {
       scope.bindings.set(
         node[NodeField.name],
-        evaluateNode(bundle, node[NodeField.expression], scope),
+        evaluateNode(bundle, node[NodeField.initializer], scope),
       );
       return advanced;
     }
-    case NodeKind.Assignment: {
+    case NodeKind.AssignmentExpression: {
       const value = evaluateNode(bundle, node[NodeField.expression], scope);
       const frame = lookup(scope, node[NodeField.name]);
       if (frame === null) {
@@ -511,31 +514,31 @@ function executeStatement(
       frame.bindings.set(node[NodeField.name], value);
       return advanced;
     }
-    case NodeKind.If: {
+    case NodeKind.IfStatement: {
       if (
         condition(
-          evaluateNode(bundle, node[NodeField.condition], scope),
+          evaluateNode(bundle, node[NodeField.expression], scope),
           "an `if`",
         )
       ) {
-        return executeStatement(bundle, node[NodeField.consequent], scope);
+        return executeStatement(bundle, node[NodeField.thenStatement], scope);
       }
-      if (node[NodeField.alternate] !== null) {
-        return executeStatement(bundle, node[NodeField.alternate], scope);
+      if (node[NodeField.elseStatement] !== null) {
+        return executeStatement(bundle, node[NodeField.elseStatement], scope);
       }
       return advanced;
     }
-    case NodeKind.While: {
+    case NodeKind.WhileStatement: {
       let turns = 0;
       while (
         condition(
-          evaluateNode(bundle, node[NodeField.condition], scope),
+          evaluateNode(bundle, node[NodeField.expression], scope),
           "a `while`",
         )
       ) {
         const completion = executeStatement(
           bundle,
-          node[NodeField.body],
+          node[NodeField.statement],
           scope,
         );
         if (completion.kind === "returned") {
@@ -549,11 +552,11 @@ function executeStatement(
       }
       return advanced;
     }
-    case NodeKind.For: {
+    case NodeKind.ForStatement: {
       // The header binding lives in a scope of the loop's own, so it is gone
       // once the loop is.
       let frame: Scope = { parent: scope, bindings: new Map() };
-      const init = node[NodeField.init];
+      const init = node[NodeField.initializer];
       if (init !== null) {
         executeStatement(bundle, init, frame);
       }
@@ -568,7 +571,7 @@ function executeStatement(
         }
         const completion = executeStatement(
           bundle,
-          node[NodeField.body],
+          node[NodeField.statement],
           frame,
         );
         if (completion.kind === "returned") {
@@ -584,31 +587,31 @@ function executeStatement(
         // update: an arrow built in one turn keeps that turn's values instead
         // of the ones the loop stopped at.
         frame = { parent: scope, bindings: new Map(frame.bindings) };
-        const update = node[NodeField.update];
+        const update = node[NodeField.incrementor];
         if (update !== null) {
           executeStatement(bundle, update, frame);
         }
         guardTurns((turns += 1), "for");
       }
     }
-    case NodeKind.Break: {
+    case NodeKind.BreakStatement: {
       return broke;
     }
-    case NodeKind.Continue: {
+    case NodeKind.ContinueStatement: {
       return continued;
     }
-    case NodeKind.Return: {
+    case NodeKind.ReturnStatement: {
       return {
         kind: "returned",
         value: evaluateNode(bundle, node[NodeField.expression], scope),
       };
     }
-    case NodeKind.Throw: {
+    case NodeKind.ThrowStatement: {
       throw evaluateNode(bundle, node[NodeField.expression], scope);
     }
-    case NodeKind.Try: {
+    case NodeKind.TryStatement: {
       try {
-        return executeStatement(bundle, node[NodeField.block], scope);
+        return executeStatement(bundle, node[NodeField.tryBlock], scope);
       } catch (thrown) {
         // The catch binding scopes over the handler only, like an arrow
         // parameter over its body.
@@ -651,9 +654,9 @@ function evaluateNode(
   }
   switch (node["#"]) {
     case NodeKind.Identifier: {
-      const frame = lookup(scope, node[NodeField.name]);
+      const frame = lookup(scope, node[NodeField.text]);
       if (frame === null) {
-        throw new Error(`unknown identifier ${node[NodeField.name]}`);
+        throw new Error(`unknown identifier ${node[NodeField.text]}`);
       }
       return frame.bindings.get(node[NodeField.name]) ?? null;
     }
@@ -663,16 +666,16 @@ function evaluateNode(
     case NodeKind.GetTree: {
       return getTree(bundle, node[NodeField.label]);
     }
-    case NodeKind.Call: {
+    case NodeKind.CallExpression: {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
       // The receiver evaluates before the arguments; an optional receiver
       // (`a?.b(…)`) short-circuits a null object to null, arguments
       // unevaluated.
-      const callee = node[NodeField.callee];
-      if (isNode(callee) && callee["#"] === NodeKind.Property) {
+      const callee = node[NodeField.expression];
+      if (isNode(callee) && callee["#"] === NodeKind.PropertyAccessExpression) {
         const object = evaluateNode(
           bundle,
-          callee[NodeField.object],
+          callee[NodeField.expression],
           scope,
         ) as {
           [name: string]: Value;
@@ -689,7 +692,7 @@ function evaluateNode(
         if (typeof method !== "function") {
           throw new Error(`${callee[NodeField.name]} is not a function`);
         }
-        const args = (node[NodeField.args] ?? []).map((arg) =>
+        const args = (node[NodeField.arguments] ?? []).map((arg) =>
           evaluateNode(bundle, arg, scope),
         );
         return method.apply(object, args);
@@ -704,13 +707,17 @@ function evaluateNode(
       if (typeof value !== "function") {
         throw new Error("callee is not a function");
       }
-      const args = (node[NodeField.args] ?? []).map((arg) =>
+      const args = (node[NodeField.arguments] ?? []).map((arg) =>
         evaluateNode(bundle, arg, scope),
       );
       return value(...args);
     }
-    case NodeKind.Property: {
-      const object = evaluateNode(bundle, node[NodeField.object], scope) as {
+    case NodeKind.PropertyAccessExpression: {
+      const object = evaluateNode(
+        bundle,
+        node[NodeField.expression],
+        scope,
+      ) as {
         [name: string]: Value;
       };
       if (node[NodeField.optional] && object === null) {
@@ -720,9 +727,13 @@ function evaluateNode(
       // `undefined` never arises.
       return object[node[NodeField.name]] ?? null;
     }
-    case NodeKind.Index: {
-      const target = evaluateNode(bundle, node[NodeField.object], scope);
-      const key = evaluateNode(bundle, node[NodeField.index], scope);
+    case NodeKind.ElementAccessExpression: {
+      const target = evaluateNode(bundle, node[NodeField.expression], scope);
+      const key = evaluateNode(
+        bundle,
+        node[NodeField.argumentExpression],
+        scope,
+      );
       if (Array.isArray(target)) {
         // An array is reached by whole numbers in range; everything else about
         // it — a fractional key, a string one, one past either end — is a place
@@ -745,7 +756,7 @@ function evaluateNode(
       }
       return null;
     }
-    case NodeKind.Binop: {
+    case NodeKind.BinaryExpression: {
       return evaluateBinop(
         bundle,
         node[NodeField.operator],
@@ -754,24 +765,24 @@ function evaluateNode(
         scope,
       );
     }
-    case NodeKind.Ternary: {
+    case NodeKind.ConditionalExpression: {
       // Only the taken branch evaluates.
       const taken = condition(
         evaluateNode(bundle, node[NodeField.condition], scope),
         "a ternary condition",
       );
       if (taken) {
-        return evaluateNode(bundle, node[NodeField.consequent], scope);
+        return evaluateNode(bundle, node[NodeField.whenTrue], scope);
       }
-      return evaluateNode(bundle, node[NodeField.alternate], scope);
+      return evaluateNode(bundle, node[NodeField.whenFalse], scope);
     }
-    case NodeKind.Arrow: {
+    case NodeKind.ArrowFunction: {
       return (...args: Value[]) => {
         const frame: Scope = { parent: scope, bindings: new Map() };
         // A missing argument binds as null — the language's absent value;
         // `undefined` never arises (an omitted optional parameter reads
         // as null).
-        (node[NodeField.params] ?? []).forEach((param, index) => {
+        (node[NodeField.parameters] ?? []).forEach((param, index) => {
           frame.bindings.set(param, index < args.length ? args[index] : null);
         });
         const body = node[NodeField.body];

@@ -58,71 +58,71 @@ function renderNode(node: BundleStatementNode, indent: string): string {
   const inner = `${indent}  `;
   switch (node["#"]) {
     case NodeKind.Identifier:
-      return node[NodeField.name];
+      return node[NodeField.text];
     case NodeKind.GetFunction:
       return fnLabel(node[NodeField.label]);
     case NodeKind.GetTree:
       return treeLabel(node[NodeField.label]);
-    case NodeKind.Call: {
-      const args = (node[NodeField.args] ?? []).map((arg) =>
+    case NodeKind.CallExpression: {
+      const args = (node[NodeField.arguments] ?? []).map((arg) =>
         renderNode(arg, indent),
       );
-      const calleeNode = node[NodeField.callee];
+      const calleeNode = node[NodeField.expression];
       const callee = renderNode(calleeNode, indent);
       // An arrow callee (an expansion applied to its arguments) binds
       // looser than the call — parenthesize so the text reads as it runs.
       const target =
-        isNode(calleeNode) && calleeNode["#"] === NodeKind.Arrow
+        isNode(calleeNode) && calleeNode["#"] === NodeKind.ArrowFunction
           ? `(${callee})`
           : callee;
       return `${target}${node[NodeField.optional] ? "?." : ""}(${args.join(", ")})`;
     }
-    case NodeKind.Property:
-      return `${renderNode(node[NodeField.object], indent)}${node[NodeField.optional] ? "?." : "."}${node[NodeField.name]}`;
-    case NodeKind.Index:
-      return `${renderNode(node[NodeField.object], indent)}[${renderNode(node[NodeField.index], indent)}]`;
-    case NodeKind.Binop:
+    case NodeKind.PropertyAccessExpression:
+      return `${renderNode(node[NodeField.expression], indent)}${node[NodeField.optional] ? "?." : "."}${node[NodeField.name]}`;
+    case NodeKind.ElementAccessExpression:
+      return `${renderNode(node[NodeField.expression], indent)}[${renderNode(node[NodeField.argumentExpression], indent)}]`;
+    case NodeKind.BinaryExpression:
       return `${renderNode(node[NodeField.left], indent)} ${node[NodeField.operator]} ${renderNode(
         node[NodeField.right],
         indent,
       )}`;
-    case NodeKind.Ternary:
+    case NodeKind.ConditionalExpression:
       return `${renderNode(node[NodeField.condition], indent)} ? ${renderNode(
-        node[NodeField.consequent],
+        node[NodeField.whenTrue],
         indent,
-      )} : ${renderNode(node[NodeField.alternate], indent)}`;
-    case NodeKind.Arrow:
-      return `(${(node[NodeField.params] ?? []).join(", ")}) => ${renderBody(node[NodeField.body], indent)}`;
+      )} : ${renderNode(node[NodeField.whenFalse], indent)}`;
+    case NodeKind.ArrowFunction:
+      return `(${(node[NodeField.parameters] ?? []).join(", ")}) => ${renderBody(node[NodeField.body], indent)}`;
     case NodeKind.Block: {
       const statements = (node[NodeField.statements] ?? []).map(
         (statement) => `${inner}${renderStatement(statement, inner)}`,
       );
       return `{\n${statements.join("\n")}\n${indent}}`;
     }
-    case NodeKind.Declaration:
+    case NodeKind.VariableDeclaration:
       return `${node[NodeField.keyword]} ${node[NodeField.name]} = ${renderNode(
-        node[NodeField.expression],
+        node[NodeField.initializer],
         indent,
       )}`;
-    case NodeKind.Assignment:
+    case NodeKind.AssignmentExpression:
       return `${node[NodeField.name]} = ${renderNode(node[NodeField.expression], indent)}`;
-    case NodeKind.If: {
-      const consequent = renderStatement(node[NodeField.consequent], indent);
+    case NodeKind.IfStatement: {
+      const consequent = renderStatement(node[NodeField.thenStatement], indent);
       const alternate =
-        node[NodeField.alternate] === null
+        node[NodeField.elseStatement] === null
           ? ""
-          : ` else ${renderStatement(node[NodeField.alternate], indent)}`;
-      return `if (${renderNode(node[NodeField.condition], indent)}) ${consequent}${alternate}`;
+          : ` else ${renderStatement(node[NodeField.elseStatement], indent)}`;
+      return `if (${renderNode(node[NodeField.expression], indent)}) ${consequent}${alternate}`;
     }
-    case NodeKind.While:
-      return `while (${renderNode(node[NodeField.condition], indent)}) ${renderStatement(
-        node[NodeField.body],
+    case NodeKind.WhileStatement:
+      return `while (${renderNode(node[NodeField.expression], indent)}) ${renderStatement(
+        node[NodeField.statement],
         indent,
       )}`;
-    case NodeKind.For: {
-      const init = node[NodeField.init];
+    case NodeKind.ForStatement: {
+      const init = node[NodeField.initializer];
       const condition = node[NodeField.condition];
-      const update = node[NodeField.update];
+      const update = node[NodeField.incrementor];
       const parts = [
         init === null ? "" : renderNode(init, indent),
         condition === null ? "" : renderNode(condition, indent),
@@ -131,20 +131,20 @@ function renderNode(node: BundleStatementNode, indent: string): string {
       const header = parts.every((part) => part === "")
         ? ";;"
         : parts.join("; ");
-      return `for (${header}) ${renderStatement(node[NodeField.body], indent)}`;
+      return `for (${header}) ${renderStatement(node[NodeField.statement], indent)}`;
     }
-    case NodeKind.Break:
+    case NodeKind.BreakStatement:
       return "break";
-    case NodeKind.Continue:
+    case NodeKind.ContinueStatement:
       return "continue";
-    case NodeKind.Return:
+    case NodeKind.ReturnStatement:
       return `return ${renderNode(node[NodeField.expression], indent)}`;
-    case NodeKind.Throw:
+    case NodeKind.ThrowStatement:
       return `throw ${renderNode(node[NodeField.expression], indent)}`;
-    case NodeKind.Try: {
+    case NodeKind.TryStatement: {
       const param =
         node[NodeField.param] === null ? "" : ` (${node[NodeField.param]})`;
-      return `try ${renderNode(node[NodeField.block], indent)} catch${param} ${renderNode(
+      return `try ${renderNode(node[NodeField.tryBlock], indent)} catch${param} ${renderNode(
         node[NodeField.handler],
         indent,
       )}`;
@@ -158,10 +158,10 @@ function renderStatement(node: BundleStatementNode, indent: string): string {
   const text = renderNode(node, indent);
   return isNode(node) &&
     (node["#"] === NodeKind.Block ||
-      node["#"] === NodeKind.If ||
-      node["#"] === NodeKind.While ||
-      node["#"] === NodeKind.For ||
-      node["#"] === NodeKind.Try)
+      node["#"] === NodeKind.IfStatement ||
+      node["#"] === NodeKind.WhileStatement ||
+      node["#"] === NodeKind.ForStatement ||
+      node["#"] === NodeKind.TryStatement)
     ? text
     : `${text};`;
 }
@@ -187,13 +187,13 @@ function renderExpr(expr: BundleExpr, indent: string): string {
     case NodeKind.GetFunction:
       return fnLabel(expr[NodeField.label]);
     case NodeKind.ApplyFunction: {
-      const args = (expr[NodeField.args] ?? []).map((arg) =>
+      const args = (expr[NodeField.arguments] ?? []).map((arg) =>
         renderExpr(arg, indent),
       );
       return `${fnLabel(expr[NodeField.label])}(${args.join(", ")})`;
     }
     case NodeKind.ApplyTree: {
-      const args = (expr[NodeField.args] ?? []).map((arg) =>
+      const args = (expr[NodeField.arguments] ?? []).map((arg) =>
         renderExpr(arg, indent),
       );
       // A keyed instantiation reads as a suffix, since the key identifies the
@@ -204,11 +204,11 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       return `${treeLabel(expr[NodeField.label])}(${args.join(", ")})${key}`;
     }
     case NodeKind.Thunk: {
-      const params = expr[NodeField.params] ?? [];
+      const params = expr[NodeField.parameters] ?? [];
       return `(${params.join(", ")}) => ${renderExpr(expr[NodeField.expression], indent)}`;
     }
     case NodeKind.Identifier:
-      return expr[NodeField.name];
+      return expr[NodeField.text];
     case NodeKind.Element:
       return renderJsx(expr, indent);
   }
