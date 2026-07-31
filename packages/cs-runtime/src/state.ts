@@ -1,23 +1,14 @@
-import type { Client } from "./Client.js";
-import type { ClientState } from "./ClientState.js";
-import { getInstance } from "./Instance.js";
 import type { ClientValue } from "./ClientValue.js";
-import type { SpliceableValue, Spliced } from "./Spliceable.js";
-import type { Widen } from "./Widen.js";
 
+/**
+ * A cell as a script reads it.
+ *
+ * Declaring one is not here: `state()` lives in `@backtickjs/jit-bundler`,
+ * because declaring happens while a component is being expanded and has to know
+ * which instance is running. This is the half that reaches the client.
+ */
 export interface State<T extends ClientValue> {
   read(): T;
   write(value: T): void;
   update(updater: (value: T) => T): void;
-}
-
-export function state<const T extends SpliceableValue>(
-  initial: T,
-): Client<State<Widen<Spliced<T>>>> {
-  const cell: ClientState<T> = {
-    "@backtickjs": "ClientState",
-    initial,
-    declaredIn: getInstance(),
-  };
-  return cell as unknown as Client<State<Widen<Spliced<T>>>>;
 }

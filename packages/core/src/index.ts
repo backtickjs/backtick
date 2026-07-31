@@ -10,7 +10,6 @@ export {
   type Spliceable,
   type State,
   cs,
-  state,
 } from "@backtickjs/cs-runtime";
 export {
   Image,
@@ -25,7 +24,7 @@ export {
   type ViewProps,
 } from "./components/index.js";
 export type { JSX } from "./jsx-runtime/index.js";
-export { bundle } from "@backtickjs/jit-bundler";
+export { bundle, state } from "@backtickjs/jit-bundler";
 export { NodeKind, NodeField } from "@backtickjs/jit-bundler";
 export type {
   Bundle,

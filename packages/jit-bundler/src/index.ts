@@ -43,3 +43,4 @@ export type {
   TreeLabel,
 } from "./bundle/Bundle.js";
 export { bundle } from "./bundle.js";
+export { state } from "./state.js";

@@ -2,8 +2,8 @@ import {
   isClientElement,
   type JsxElement,
   isSpliceable,
-  withInstance,
 } from "@backtickjs/cs-runtime";
+import { withInstance } from "../Instance.js";
 import type { Ast, AstElement, AstInstance } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
