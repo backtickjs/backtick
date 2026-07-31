@@ -1,17 +1,41 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createHandler, renderDocument } from "../dist/server/index.js";
-import type { Bundle } from "@backtickjs/core";
+import { createHandler } from "../dist/server/index.js";
 
-const options = { client: "/client/index.js" };
+const page = '<!doctype html><html><body><div id="root"></div></body></html>';
 const handle = createHandler(
-  { "/": () => null, "/about": () => "about" },
+  [
+    {
+      path: "/",
+      html: "/index.html",
+      render: () => [{ target: "#root", component: null }],
+    },
+    {
+      path: "/todos/new",
+      html: "/index.html",
+      render: () => [{ target: "#root", component: "new" }],
+    },
+    {
+      path: "/todos/:id",
+      html: "/index.html",
+      render: ({ params }) => [{ target: "#root", component: params.id }],
+    },
+    {
+      path: "/dashboard",
+      html: "/dashboard.html",
+      render: () => [
+        { target: "#body", component: "body" },
+        { target: "#aside", component: "aside" },
+      ],
+    },
+  ],
   {
-    ...options,
     read: async (path) =>
-      path === "/client/index.js"
-        ? new TextEncoder().encode("export {}")
-        : null,
+      path === "/index.html"
+        ? new TextEncoder().encode(page)
+        : path === "/main.js"
+          ? new TextEncoder().encode("export {}")
+          : null,
   },
 );
 const asked = (path: string, accept?: string): Request =>
@@ -19,64 +43,50 @@ const asked = (path: string, accept?: string): Request =>
     headers: accept === undefined ? {} : { accept },
   });
 
-test("answers a native client with the bundle on its own", async () => {
+test("answers a browser with the page the app wrote, unchanged", async () => {
+  const response = await handle(asked("/", "text/html"));
+  assert.equal(response.headers.get("content-type"), "text/html");
+  assert.equal(await response.text(), page);
+});
+
+test("answers everyone else with what to draw where", async () => {
   for (const accept of [undefined, "application/json", "*/*"]) {
-    const response = await handle(asked("/", accept));
+    const response = await handle(asked("/todos/42", accept));
     assert.equal(
       response.headers.get("content-type"),
       "application/json; charset=utf-8",
     );
-    assert.deepEqual(await response.json(), {
-      functions: {},
-      trees: {},
-      root: null,
-    });
+    assert.deepEqual(await response.json(), [
+      { target: "#root", bundle: { functions: {}, trees: {}, root: "42" } },
+    ]);
   }
 });
 
-test("answers a browser with the payload already in the document", async () => {
-  const response = await handle(asked("/", "text/html,application/xhtml+xml"));
+test("a route earlier in the list wins the path", async () => {
+  // `/todos/new` is a page, `/todos/:id` is a parameter, and both match. The
+  // order they were written in is what says which was meant.
   assert.equal(
-    response.headers.get("content-type"),
-    "text/html; charset=utf-8",
+    (await (await handle(asked("/todos/new"))).json())[0].bundle.root,
+    "new",
   );
-  const html = await response.text();
-  assert.match(html, /<script type="application\/json" id="bundle">/);
-  // Inlined, so the page needs no second request to draw.
-  assert.doesNotMatch(html, /fetch\(/);
 });
 
-test("answers each route from the same table", async () => {
-  // Same paths for every client — the envelope is what differs, not the route.
+test("a page draws every target it holds, in order", async () => {
+  const drawn = await (await handle(asked("/dashboard"))).json();
   assert.deepEqual(
-    (await (await handle(asked("/about"))).json()).root,
-    "about",
+    drawn.map((each: { target: string }) => each.target),
+    ["#body", "#aside"],
   );
-  const html = await handle(asked("/about", "text/html"));
-  assert.match(await html.text(), /id="bundle"/);
-  assert.equal((await handle(asked("/missing"))).status, 404);
+});
+
+test("a route names the page it opens", async () => {
+  // `/dashboard` asks for a document that isn't there, and says so rather than
+  // serving the default page.
+  assert.equal((await handle(asked("/dashboard", "text/html"))).status, 404);
 });
 
 test("serves a module with a type a browser will execute", async () => {
-  const response = await handle(asked("/client/index.js"));
+  const response = await handle(asked("/main.js"));
   assert.equal(response.headers.get("content-type"), "text/javascript");
   assert.equal(await response.text(), "export {}");
-  assert.equal((await handle(asked("/nope.js"))).status, 404);
-});
-
-test("closes a `</script>` carried in the data", () => {
-  // A bundle carries whatever the app put in it, so a string can end the script
-  // tag it sits in. Escaping `<` is what stops it.
-  const carrying: Bundle = {
-    functions: {},
-    trees: {},
-    root: "</script><script>alert(1)</script>",
-  };
-  const html = renderDocument(carrying, options);
-  const embedded = html.slice(
-    html.indexOf('id="bundle">') + 'id="bundle">'.length,
-    html.indexOf("</script>"),
-  );
-  assert.doesNotMatch(embedded, /<\/script>/);
-  assert.deepEqual(JSON.parse(embedded), carrying);
 });

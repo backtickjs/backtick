@@ -1,12 +1,17 @@
 import { createServer, type Server } from "node:http";
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import { dirname, join, normalize } from "node:path";
+import { dirname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createHandler, type Routes } from "./handler.js";
-import type { DocumentOptions } from "./document.js";
+import { createHandler, type Route } from "./handler.js";
 
-export interface BrowserAssets extends DocumentOptions {
+export interface BrowserAssets {
+  // The module a page imports to draw a payload, as a URL it can reach. A page
+  // names this itself, in its own import map — see `serve`.
+  readonly client: string;
+  // Bare specifiers a browser can't resolve, as an app writes them into that
+  // map. A workspace package imported by name needs an entry here.
+  readonly imports: { readonly [specifier: string]: string };
   // Directories to serve, by the URL prefix that reaches them.
   readonly modules: { readonly [prefix: string]: string };
 }
@@ -65,7 +70,10 @@ export function readAssets(
       return null;
     }
     // `normalize` first, so a `..` in the request can't climb out of `root`.
-    const file = join(root, normalize(path.slice(prefix.length)));
+    // A path ending in `/` is a directory, and a directory means its page —
+    // note that `normalize("")` is `"."`, so the test is on what was asked for.
+    const asked = normalize(path.slice(prefix.length));
+    const file = join(root, path.endsWith("/") ? `${asked}/index.html` : asked);
     if (!file.startsWith(root)) {
       return null;
     }
@@ -77,16 +85,33 @@ export function readAssets(
 // `Request`/`Response`, so the handler needs the two translated. Bun needs none
 // of this — `Bun.serve({ fetch })` takes the handler as it is.
 //
-// The assets default to the SDK's own, so an app says only what is its own —
-// its screen, and its title.
+// Serves an app: its own files — its pages among them — and its routes.
+//
+// This writes no HTML. `root` is the directory a page and whatever it loads sit
+// in, and the client is served under the prefix `browserAssets` names, which is
+// what a page's own import map points at:
+//
+//     <script type="importmap">
+//       { "imports": { "@backtickjs/web-sdk": "/_backtick/client/index.js" } }
+//     </script>
+//
+// The page then asks its own path for the targets it should draw, which is the
+// same request a phone makes.
 export function serve(
-  routes: Routes,
-  options: Partial<BrowserAssets> & { readonly title?: string } = {},
+  routes: readonly Route[],
+  options: { readonly root?: string } = {},
 ): Server {
-  const assets = { ...browserAssets(), ...options };
+  const assets = browserAssets();
   const handle = createHandler(routes, {
-    ...assets,
-    read: readAssets(assets),
+    read: readAssets({
+      ...assets,
+      modules: {
+        ...assets.modules,
+        // Last, so the app's own directory is reached only by a path the
+        // client did not claim.
+        "/": resolve(options.root ?? "."),
+      },
+    }),
   });
   return createServer((incoming, outgoing) => {
     const request = new Request(
