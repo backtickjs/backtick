@@ -10,6 +10,8 @@
     "build": "tspc --noCheck --declaration",
     "start": "node --enable-source-maps dist/index.js",
     "bench": "node --enable-source-maps dist/bench.js",
+    "verify": "node --enable-source-maps dist/verify.js",
+    "test": "node --enable-source-maps dist/verify.js",
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {

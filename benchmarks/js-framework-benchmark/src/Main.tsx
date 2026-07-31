@@ -7,6 +7,7 @@ import {
   type Client,
 } from "@backtickjs/core";
 import { generate, type Row } from "./rows.js";
+import { SEED, seeded } from "./random.js";
 
 // The seed the client draws rows from, and the only deliberate departure from
 // the benchmark's app: there, `run` generates its 1,000 rows on the spot. A
@@ -17,7 +18,7 @@ import { generate, type Row } from "./rows.js";
 //
 // 11,000 rather than 10,000 so that appending 1,000 to a table of 10,000 — the
 // benchmark's append case — still draws rows the table doesn't already hold.
-const POOL = generate(11_000);
+const POOL = generate(11_000, seeded(SEED));
 
 const NONE = 0;
 

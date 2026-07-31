@@ -8,8 +8,9 @@ point is that each operation the benchmark asks for either works, works
 expensively, or can't be written at all, and that sorts the work.
 
 ```sh
-pnpm build && pnpm bench   # times every operation, no browser needed
-pnpm start                 # the app at :5180, for profiling by hand
+pnpm build && pnpm bench     # times every operation, no browser needed
+pnpm build && pnpm verify    # checks each operation against vanillajs
+pnpm start                   # the app at :5180, for profiling by hand
 ```
 
 `bench` bundles the app, evaluates it with the same interpreter every client
@@ -41,6 +42,41 @@ clear rows (10k)                    0.05 ms       15
 
 Read the last column first. Selecting a row changes one row's colour and hands
 the host 4,015 elements. That ratio, not the milliseconds, is the finding.
+
+## Checked against the reference
+
+The numbers only mean something if the app does what the benchmark's app does,
+so `verify` checks it against the real thing. The keyed vanillajs implementation
+is vendored under `vendor/vanillajs/` and runs unedited against the DOM modelled
+in `src/dom.ts`; both sides draw their rows from one seeded stream, so identical
+input makes any difference in the output a difference in what the operation did.
+
+```
+operation                           rows     model   vs vanillajs
+---------------------------------------------------------------------------
+create rows (1k)                    1,000    ok      match
+replace all rows (1k)               1,000    ok      count only — the reference generates fresh rows; this app re-slices the same pool
+partial update (every 10th of 1k)   1,000    ok      match
+select row (of 1k)                  1,000    ok      match
+swap rows (of 1k)                   1,000    ok      match
+remove row (of 1k)                  999      ok      match
+create many rows (10k)              10,000   ok      match
+append rows (1k to 10k)             11,000   ok      match
+clear rows (10k)                    0        ok      match
+```
+
+The `model` column is the harness checking itself. A modelled DOM is only worth
+as much as its fidelity, so the reference's own record of what it rendered
+(`store.data`, which touches no DOM) is compared against what the model actually
+holds. `ok` means the model agrees with the reference about its own state;
+`WRONG` means the fault is in `src/dom.ts` and the comparison beside it means
+nothing. Both paths are exercised: swapping the wrong rows in the app reports
+`ok` / `DIFFERS`, and breaking `insertBefore` in the model reports `WRONG`.
+
+What this can't check is how the result was reached. The reference mutates
+surgically — `insertBefore` for a swap, and for an update it rewrites only the
+label text nodes — where backtick hands back the whole tree. Identical results,
+very different work, which is what gaps A and B are about.
 
 ## The one deliberate deviation
 

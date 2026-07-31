@@ -64,11 +64,14 @@ const NOUNS = [
   "keyboard",
 ];
 
-// The benchmark's own generator, kept verbatim in shape: `Math.random()` per
-// word, ids counting up from 1. It runs on the server here — see GAPS.md, the
-// client language reaches no globals, so a script can't call `Math.random()`
-// and has no way to build an array element by element either.
-export function generate(count: number): Row[] {
+// The benchmark's own generator, kept verbatim in shape: three draws per row in
+// the order adjective, colour, noun, and ids counting up from 1 — so that a
+// vanillajs drawing from the same seeded stream builds the same rows. It runs on
+// the server here: see GAPS.md, the client language reaches no globals, so a
+// script can't call `Math.random()` and has no way to build an array element by
+// element either.
+export function generate(count: number, draw: () => number): Row[] {
+  const random = (max: number): number => Math.round(draw() * 1000) % max;
   const rows: Row[] = [];
   for (let index = 0; index < count; index++) {
     rows.push({
@@ -80,8 +83,4 @@ export function generate(count: number): Row[] {
     });
   }
   return rows;
-}
-
-function random(max: number): number {
-  return Math.round(Math.random() * 1000) % max;
 }
