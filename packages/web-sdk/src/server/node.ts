@@ -19,6 +19,13 @@ export interface BrowserAssets extends DocumentOptions {
 export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
   const require = createRequire(import.meta.url);
   const at = (name: string): string => dirname(require.resolve(name));
+  // The bundle format is in the browser's graph because the interpreter
+  // imports it, so it is resolved the way the interpreter resolves it. This
+  // package doesn't depend on the bundler and has no business naming it as
+  // one of its own.
+  const interpreter = createRequire(
+    require.resolve("@backtickjs/js-interpreter"),
+  );
   return {
     client: `${prefix}client/index.js`,
     modules: {
@@ -30,16 +37,14 @@ export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
         "client",
       ),
       [`${prefix}interpreter/`]: at("@backtickjs/js-interpreter"),
-      [`${prefix}cs-runtime/`]: at("@backtickjs/cs-runtime"),
       [`${prefix}format/`]: dirname(
-        require.resolve("@backtickjs/jit-bundler/format"),
+        interpreter.resolve("@backtickjs/jit-bundler/format"),
       ),
     },
     // A browser resolves a relative import on its own but not a bare one, so
     // the specifiers the client imports by name are mapped here.
     imports: {
       "@backtickjs/js-interpreter": `${prefix}interpreter/index.js`,
-      "@backtickjs/cs-runtime": `${prefix}cs-runtime/index.js`,
       "@backtickjs/jit-bundler/format": `${prefix}format/Bundle.js`,
     },
   };

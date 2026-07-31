@@ -1,6 +1,5 @@
 import { isElement } from "@backtickjs/js-interpreter";
 import type { Element } from "@backtickjs/js-interpreter";
-import { FRAGMENT_ID } from "@backtickjs/cs-runtime";
 
 // How an element becomes a node. This client renders the web's own vocabulary
 // and nothing else: an element's id *is* its tag name, and its props are the
@@ -12,8 +11,9 @@ import { FRAGMENT_ID } from "@backtickjs/cs-runtime";
 // one into a `div` would be answering for a target it isn't.
 //
 // `Fragment` is the reserved id for a group: it renders its children with no
-// node of its own, so it maps to no tag at all. The word is `cs-runtime`'s —
-// spelling it here would be a second place for it to change.
+// node of its own, so it maps to no tag at all. Every target that has a
+// fragment builds it from this same word.
+const FRAGMENT_ID = "Fragment";
 
 // Props that are wiring rather than attributes, handled on their own.
 const handled = new Set(["children"]);

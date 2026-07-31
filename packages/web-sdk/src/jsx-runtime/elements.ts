@@ -26,7 +26,7 @@ import type {
 // SVG is not covered.
 
 // One child or several, and a script in place of either.
-type Content = Children<JsxElement | string | number>;
+export type Content = Children<JsxElement | string | number>;
 
 // ARIA reads the words `true` and `false`, so a boolean attribute here is not
 // the HTML kind that is present or absent.

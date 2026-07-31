@@ -30,7 +30,10 @@ export declare namespace JSX {
   // `ServerComponent` itself: leaving `ClientElement` out of this union does
   // nothing on its own, because one is callable and returns `never` and so
   // satisfies any signature. `<>…</>` needs no place here either — TypeScript
-  // resolves a fragment through the `Fragment` export rather than this type.
+  // resolves a fragment through the `Fragment` export rather than this type —
+  // so `<>…</>` works and an explicit `<Fragment>` does not. Admitting it would
+  // mean admitting a `ClientElement`, and the only thing then keeping `<View />`
+  // out is that the two targets' `FragmentProps` happen to differ.
   export type ElementType = keyof IntrinsicElements | ServerComponent<never>;
   export interface ElementChildrenAttribute {
     children: unknown;
@@ -72,4 +75,4 @@ export const jsxs = jsx;
 
 // The one element no vocabulary owns: every target re-exports it under this
 // name because that is what the JSX transform imports for `<>…</>`.
-export { Fragment } from "@backtickjs/cs-runtime";
+export { Fragment, type FragmentProps } from "./Fragment.js";

@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
-    "@backtickjs/jit-bundler": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*"
   },
   "peerDependencies": {

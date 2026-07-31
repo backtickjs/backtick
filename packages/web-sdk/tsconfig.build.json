@@ -10,6 +10,7 @@
   },
   "references": [
     { "path": "../core/tsconfig.build.json" },
+    { "path": "../cs-runtime/tsconfig.build.json" },
     { "path": "../cs-runtime/tsconfig.build.json" }
   ]
 }
