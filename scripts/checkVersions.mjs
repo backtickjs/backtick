@@ -24,9 +24,9 @@ const released = [
   ...manifests("packages"),
   ...manifests("packages/language-tools"),
 ];
-// examples model a real consumer install, so their ranges are checked but
-// their own versions are not part of the release set
-const consumers = manifests("examples");
+// examples and benchmarks model a real consumer install, so their ranges are
+// checked but their own versions are not part of the release set
+const consumers = [...manifests("examples"), ...manifests("benchmarks")];
 
 const errors = [];
 

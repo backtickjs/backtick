@@ -21,6 +21,37 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  benchmarks/js-framework-benchmark:
+    dependencies:
+      '@backtickjs/core':
+        specifier: ^0.1.0
+        version: link:../../packages/core
+      '@backtickjs/js-interpreter':
+        specifier: ^0.1.0
+        version: link:../../packages/js-interpreter
+      '@backtickjs/tspatch-plugin':
+        specifier: ^0.1.0
+        version: link:../../packages/tspatch-plugin
+      '@backtickjs/web-sdk':
+        specifier: ^0.1.0
+        version: link:../../packages/web-sdk
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.1.0
+        version: link:../../packages/language-tools/tsc
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   examples/bun-minimal:
     dependencies:
       '@backtickjs/bun-plugin':

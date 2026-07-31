@@ -1,0 +1,28 @@
+{
+  "name": "@backtickjs/benchmark-js-framework-benchmark",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "typecheck": "backtick-tsc --noEmit",
+    "build": "tspc --noCheck --declaration",
+    "start": "node --enable-source-maps dist/index.js",
+    "bench": "node --enable-source-maps dist/bench.js",
+    "clean": "rm -rf node_modules dist"
+  },
+  "dependencies": {
+    "@backtickjs/core": "^0.1.0",
+    "@backtickjs/js-interpreter": "^0.1.0",
+    "@backtickjs/tspatch-plugin": "^0.1.0",
+    "@backtickjs/web-sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.0",
+    "@backtickjs/tsc": "^0.1.0",
+    "prettier": "^3.6.2",
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  }
+}
