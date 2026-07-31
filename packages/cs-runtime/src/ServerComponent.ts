@@ -15,6 +15,14 @@ type Props = { [key: string]: unknown };
  * and a re-render can still give it a child — so what disappears is the
  * subtree, not the component.
  */
-export type ServerComponent<P extends Props = Props> = (
+export type ServerComponent<P extends Props = Props> = ((
   props: P,
-) => Promise<JsxElement | null>;
+) => Promise<JsxElement | null>) & {
+  // What a component is *not*. A component is an ordinary function and declares
+  // no brand, so this is optional and nothing has to be wrapped to satisfy it.
+  // What it rules out is a value branded as something else: a `ClientElement`
+  // is callable and returns `never`, which is assignable to every return type,
+  // so without this it would satisfy the signature above and count as a
+  // component.
+  readonly "@backtickjs"?: "ServerComponent";
+};

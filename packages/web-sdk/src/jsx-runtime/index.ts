@@ -24,16 +24,13 @@ import type { IntrinsicElements as Html } from "./elements.js";
 export declare namespace JSX {
   export interface Element extends JsxElement {}
   export interface IntrinsicElements extends Html {}
-  // A tag, or a component of the app's own. `<>…</>` needs no place here —
-  // TypeScript resolves a fragment through the `Fragment` export rather than
-  // through this type.
-  //
-  // The portable components are not this target's vocabulary, and leaving
-  // `ClientElement` out of the union is not enough to say so: one is callable
-  // and returns `never`, which makes it assignable to `ServerComponent`
-  // anyway. So the brand every `ClientElement` carries is excluded by hand,
-  // and `<View />` in a web app is a type error rather than something that
-  // quietly renders.
+  // A tag, or a component of the app's own — and nothing else, which is how
+  // `<View />` in a web app is a type error rather than something that quietly
+  // renders. What keeps a portable component out is the marker on
+  // `ServerComponent` itself: leaving `ClientElement` out of this union does
+  // nothing on its own, because one is callable and returns `never` and so
+  // satisfies any signature. `<>…</>` needs no place here either — TypeScript
+  // resolves a fragment through the `Fragment` export rather than this type.
   export type ElementType = keyof IntrinsicElements | ServerComponent<never>;
   export interface ElementChildrenAttribute {
     children: unknown;
