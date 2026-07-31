@@ -1,25 +1,28 @@
-import { cs, Link, state, Text, View } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
-const page = { gap: 8, padding: 24 } as const;
-const heading = { fontSize: 24 } as const;
-const body = { fontSize: 16 } as const;
-const link = { fontSize: 16, color: "royalblue" } as const;
+const page = "display: grid; gap: 8px; padding: 24px; justify-items: start";
+const heading = "margin: 0; font-size: 24px";
+const body = "margin: 0; font-size: 16px";
+const link = "font-size: 16px; color: royalblue";
+const press =
+  "font: inherit; font-size: 16px; color: royalblue; background: none;" +
+  " border: 0; padding: 0; cursor: pointer";
 
 // Every screen is an ordinary server component. Nothing about it knows which
 // path reached it, or which client asked — that is the router's business, and
 // the same screen answers a browser and a phone.
 export async function Home() {
   return (
-    <View style={page}>
-      <Text style={heading}>Backtick</Text>
-      <Text style={body}>Three routes, one bundle each.</Text>
-      <Link href="/counter" style={link} testID="to-counter">
+    <div style={page}>
+      <h1 style={heading}>Backtick</h1>
+      <p style={body}>Three routes, one bundle each.</p>
+      <a href="/counter" style={link}>
         Counter
-      </Link>
-      <Link href="/about" style={link} testID="to-about">
+      </a>
+      <a href="/about" style={link}>
         About
-      </Link>
-    </View>
+      </a>
+    </div>
   );
 }
 
@@ -29,19 +32,19 @@ export async function Home() {
 export async function Counter() {
   const count = state(0);
   return (
-    <View style={page}>
-      <Text style={heading}>{cs`"Pressed " + $count.read() + " times"`}</Text>
-      <Text
-        testID="press"
-        style={{ fontSize: 16, color: "royalblue" }}
-        onPress={cs`() => $count.write($count.read() + 1)`}
+    <div style={page}>
+      <h1 style={heading}>{cs`"Pressed " + $count.read() + " times"`}</h1>
+      <button
+        id="press"
+        style={press}
+        onclick={cs`() => $count.write($count.read() + 1)`}
       >
         Press me
-      </Text>
-      <Link href="/" style={link}>
+      </button>
+      <a href="/" style={link}>
         Home
-      </Link>
-    </View>
+      </a>
+    </div>
   );
 }
 
@@ -50,13 +53,13 @@ export async function Counter() {
 export async function About({ started }: { started: Date }) {
   const uptime = Math.round((Date.now() - started.getTime()) / 1000);
   return (
-    <View style={page}>
-      <Text style={heading}>About</Text>
-      <Text style={body}>Rendered on the server, drawn by the client.</Text>
-      <Text style={body}>{`Server up ${uptime}s.`}</Text>
-      <Link href="/" style={link}>
+    <div style={page}>
+      <h1 style={heading}>About</h1>
+      <p style={body}>Rendered on the server, drawn by the client.</p>
+      <p style={body}>{`Server up ${uptime}s.`}</p>
+      <a href="/" style={link}>
         Home
-      </Link>
-    </View>
+      </a>
+    </div>
   );
 }

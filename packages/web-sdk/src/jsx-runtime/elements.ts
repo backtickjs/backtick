@@ -2,6 +2,7 @@ import type {
   Children,
   Client,
   JsxElement,
+  Key,
   Prop,
 } from "@backtickjs/cs-runtime";
 
@@ -299,6 +300,10 @@ export interface Events {
  * The attributes every element carries.
  */
 export interface GlobalAttributes extends AriaAttributes, Events {
+  // `JSX.IntrinsicAttributes` is applied to components, not to tags, so a tag
+  // that takes a key has to say so itself — which is why React's own element
+  // props carry one too.
+  key?: Key;
   accesskey?: Prop<string>;
   autocapitalize?: Prop<
     "off" | "none" | "on" | "sentences" | "words" | "characters"
