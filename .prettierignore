@@ -4,4 +4,4 @@ pnpm-lock.yaml
 
 # Third-party, kept byte-for-byte as published so the benchmark compares
 # against the reference rather than against a reformatting of it.
-benchmarks/js-framework-benchmark/vendor/
+benchmarks/js-framework-benchmark/frameworks/
