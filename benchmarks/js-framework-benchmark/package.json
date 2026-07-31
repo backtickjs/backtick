@@ -5,11 +5,10 @@
   "type": "module",
   "description": "Implementations measured by Stefan Krause's js-framework-benchmark, in its own directory layout",
   "scripts": {
-    "rebuild": "node cli.mjs rebuild",
     "start": "node cli.mjs start",
     "bench": "node cli.mjs bench",
     "isKeyed": "node cli.mjs isKeyed",
-    "results": "node cli.mjs results",
-    "clean": "node cli.mjs clean"
+    "checkCSP": "node cli.mjs checkCSP",
+    "results": "node cli.mjs results"
   }
 }

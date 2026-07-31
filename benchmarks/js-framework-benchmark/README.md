@@ -37,18 +37,38 @@ checkout is somewhere else.
 
 Then, from this directory:
 
+Build an implementation the way upstream requires of every one of them:
+
 ```sh
-pnpm rebuild svelte     # npm install && npm run build-prod, as upstream requires
+cd frameworks/keyed/svelte && npm install && npm run build-prod
+```
+
+Then, from this directory:
+
+```sh
 pnpm start              # the benchmark's server, serving *these* frameworks, on :8080
-pnpm bench svelte       # the real run — add --benchmark 01_ --count 3 to keep it short
-pnpm isKeyed svelte     # the keyed classification check a run has to pass
+pnpm bench              # the real run, in another terminal
+pnpm isKeyed            # the keyed classification check a run has to pass
+pnpm checkCSP
 pnpm results            # rebuild the results table
 ```
 
-`cli.mjs` is what makes those one-liners: the server resolves its frameworks
-root relative to its _own_ repo root rather than to the caller, so the argument
-it wants is `../backtick/benchmarks/js-framework-benchmark/frameworks` — which
-the script works out rather than asking anyone to remember.
+These are upstream's own scripts, and every argument reaches them untouched, so
+their README applies verbatim — including that a framework is named
+`keyed/svelte` rather than `svelte`, that naming none runs all of them, and that
+a name written after `--benchmark` is swallowed by that flag.
+
+```sh
+pnpm bench keyed/svelte --benchmark 01_ --count 3
+pnpm isKeyed keyed/svelte --headless true
+```
+
+`cli.mjs` forwards each command to the checkout and does nothing else. The one
+exception is `start`: upstream's server serves its own `frameworks/` unless told
+otherwise, and it resolves the directory it is given relative to its _own_ repo
+root — so the argument it wants is
+`../backtick/benchmarks/js-framework-benchmark/frameworks`, which the script
+works out rather than asking anyone to remember.
 
 Three sharp edges it doesn't paper over. A framework directory without
 `package-lock.json` is skipped in silence — absent from `/ls`, and the driver
