@@ -12,7 +12,7 @@ import { build } from "esbuild";
 // itself, and reading a stack trace is worth more there than a request is.
 await build({
   entryPoints: ["dist/client/index.js"],
-  outfile: "dist/browser/client.js",
+  outfile: "dist/browser/backtick.js",
   bundle: true,
   format: "esm",
   platform: "browser",

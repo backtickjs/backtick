@@ -49,13 +49,13 @@ export function draw(drawn: readonly Drawn[]): void {
 }
 
 /**
- * Asks a path what to draw, and draws it. The path defaults to the one the page
- * is at, which is the path that served it.
+ * Starts a page: asks the path it is at what to draw, and draws it. That path
+ * is the one that served the document, so a page says only that it is ready.
  *
  * The request is the one every other client makes: the same URL, answered with
  * data rather than the document, because a document is not what was asked for.
  */
-export async function drawFrom(path = location.pathname): Promise<void> {
+export async function start(path = location.pathname): Promise<void> {
   const answer = await fetch(path, { headers: { accept: "application/json" } });
   if (!answer.ok) {
     throw new Error(`${path} answered ${answer.status}`);

@@ -7,9 +7,12 @@
     <style>
       body { margin: 0; font-family: system-ui, sans-serif; }
     </style>
-    <script type="module" src="/main.js"></script>
   </head>
   <body>
     <div id="root"></div>
+    <script type="module">
+      import { start } from "/backtick.js";
+      await start();
+    </script>
   </body>
 </html>

@@ -13,20 +13,26 @@ export interface BrowserAssets {
 
 // Where the browser half sits on disk, and what a page needs to reach it.
 //
-// One file, and one prefix to serve it under. The client is bundled for the
-// browser (`scripts/browser.mjs`), so nothing it loads names a package: a page
-// needs a script tag and no import map, and this needs no table of specifiers
-// to hand it.
+// Two paths, not a directory: the client is bundled for the browser
+// (`scripts/browser.mjs`), so nothing it loads names a package and nothing else
+// has to be served. A page needs a script tag and no import map, and an app
+// gives up one filename rather than a whole prefix of its own URL space.
 //
 // Resolved here rather than by the app: what makes up the client is the SDK's
 // business, and an app that named its parts would have to change when they did.
-export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
+export function browserAssets(prefix = "/"): BrowserAssets {
+  // `dist/browser`, where this file is `dist/server/node.js`.
+  const browser = join(
+    dirname(fileURLToPath(import.meta.url)),
+    "..",
+    "browser",
+  );
   return {
-    client: `${prefix}client.js`,
+    client: `${prefix}backtick.js`,
     modules: {
-      // `dist/browser`, where this file is `dist/server/node.js`. The sourcemap
-      // sits beside the client, so the directory is served rather than the file.
-      [prefix]: join(dirname(fileURLToPath(import.meta.url)), "..", "browser"),
+      [`${prefix}backtick.js`]: join(browser, "backtick.js"),
+      // Named by the client, which carries `//# sourceMappingURL=backtick.js.map`.
+      [`${prefix}backtick.js.map`]: join(browser, "backtick.js.map"),
     },
   };
 }
@@ -38,8 +44,14 @@ export function readAssets(
   assets: BrowserAssets = browserAssets(),
 ): (path: string) => Promise<Uint8Array | null> {
   return async (path) => {
-    const prefix = Object.keys(assets.modules).find((each) =>
-      path.startsWith(each),
+    // A module can be one file rather than a directory — the client is — and
+    // then the path is the whole of it.
+    const named = assets.modules[path];
+    if (named !== undefined) {
+      return readFile(named).catch(() => null);
+    }
+    const prefix = Object.keys(assets.modules).find(
+      (each) => each.endsWith("/") && path.startsWith(each),
     );
     const root = prefix === undefined ? undefined : assets.modules[prefix];
     if (prefix === undefined || root === undefined) {

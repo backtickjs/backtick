@@ -6,7 +6,7 @@
 // browser bundling this entry never pulls in a runtime API.
 export { mount, evaluate, Element, isElement } from "./client/index.js";
 export type { MountOptions } from "./client/index.js";
-export { draw, drawFrom } from "./client/index.js";
+export { draw, start } from "./client/index.js";
 export type { Drawn } from "./Drawn.js";
 export { bundle } from "@backtickjs/core";
 export type { Bundle, Spliceable } from "@backtickjs/core";
