@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createHandler, renderDocument } from "../dist/index.js";
+import { createHandler, renderDocument } from "../dist/server/index.js";
 import type { Bundle } from "@backtickjs/core";
 
 const options = { client: "/client/index.js" };

@@ -3,11 +3,8 @@ import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
-import {
-  createHandler,
-  type DocumentOptions,
-  type Routes,
-} from "@backtickjs/web-server";
+import { createHandler, type Routes } from "./handler.js";
+import type { DocumentOptions } from "./document.js";
 
 export interface BrowserAssets extends DocumentOptions {
   // Directories to serve, by the URL prefix that reaches them.
@@ -25,9 +22,11 @@ export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
   return {
     client: `${prefix}client/index.js`,
     modules: {
-      // The client is this package's own, beside this file in the build.
+      // The client is this package's own: `dist/client`, where this file is
+      // `dist/server/node.js`.
       [`${prefix}client/`]: join(
         dirname(fileURLToPath(import.meta.url)),
+        "..",
         "client",
       ),
       [`${prefix}interpreter/`]: at("@backtickjs/js-interpreter"),

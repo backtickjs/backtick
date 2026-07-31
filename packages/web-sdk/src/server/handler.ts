@@ -1,8 +1,8 @@
 import { bundle, type Spliceable } from "@backtickjs/core";
-import { renderDocument, type DocumentOptions } from "./renderDocument.js";
+import { renderDocument, type DocumentOptions } from "./document.js";
 
-export { renderDocument } from "./renderDocument.js";
-export type { DocumentOptions } from "./renderDocument.js";
+export { renderDocument } from "./document.js";
+export type { DocumentOptions } from "./document.js";
 
 // A screen, built when its path is asked for. A function rather than a value so
 // a route can read whatever it needs at request time, and because a bare value

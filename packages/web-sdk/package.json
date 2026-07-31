@@ -9,12 +9,12 @@
       "default": "./dist/index.js"
     },
     "./server": {
-      "types": "./dist/server.d.ts",
-      "default": "./dist/server.js"
+      "types": "./dist/server/index.d.ts",
+      "default": "./dist/server/index.js"
     },
     "./server/node": {
-      "types": "./dist/server-node.d.ts",
-      "default": "./dist/server-node.js"
+      "types": "./dist/server/node.d.ts",
+      "default": "./dist/server/node.js"
     },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime/index.d.ts",
@@ -28,6 +28,7 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
+    "test": "node --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
@@ -35,8 +36,7 @@
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
     "@backtickjs/jit-bundler": "workspace:*",
-    "@backtickjs/js-interpreter": "workspace:*",
-    "@backtickjs/web-server": "workspace:*"
+    "@backtickjs/js-interpreter": "workspace:*"
   },
   "peerDependencies": {
     "@backtickjs/core": "workspace:*"
