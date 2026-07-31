@@ -1,4 +1,5 @@
 export {
+  type Children,
   type Client,
   type ClientObject,
   type ClientUnknown,

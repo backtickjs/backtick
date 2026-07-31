@@ -1,9 +1,9 @@
 import {
+  type Children,
   type Client,
   type ClientElement,
   createClientElement,
 } from "@backtickjs/cs-runtime";
-import type { Children } from "./Children.js";
 import type { TextStyle } from "./style/index.js";
 
 /**
