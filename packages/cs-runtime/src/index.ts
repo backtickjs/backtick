@@ -13,6 +13,7 @@ export type { ClientString } from "./ClientString.js";
 export { type JsxElement, isJsxElement, type Key } from "./JsxElement.js";
 export type { Prop } from "./Prop.js";
 export type { Children } from "./Children.js";
+export { Fragment, type FragmentProps } from "./Fragment.js";
 export type { ClientValue } from "./ClientValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
 export { cs } from "./cs.js";

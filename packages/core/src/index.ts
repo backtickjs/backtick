@@ -1,6 +1,8 @@
 export {
   type Children,
   type Client,
+  Fragment,
+  type FragmentProps,
   type ClientObject,
   type ClientUnknown,
   type ClientValue,
@@ -11,8 +13,6 @@ export {
   state,
 } from "@backtickjs/cs-runtime";
 export {
-  Fragment,
-  type FragmentProps,
   Image,
   type ImageProps,
   Link,

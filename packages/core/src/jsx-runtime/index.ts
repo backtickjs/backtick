@@ -29,4 +29,4 @@ export const jsxs = jsx;
 
 // Named `Fragment` here because that is what the JSX transform imports for
 // `<>…</>`, so the shorthand and the tag are one component.
-export { Fragment } from "../components/Fragment.js";
+export { Fragment } from "@backtickjs/cs-runtime";

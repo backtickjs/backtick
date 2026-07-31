@@ -73,4 +73,6 @@ export function jsx(
 
 export const jsxs = jsx;
 
-export { Fragment } from "@backtickjs/core";
+// The one element no vocabulary owns: every target re-exports it under this
+// name because that is what the JSX transform imports for `<>…</>`.
+export { Fragment } from "@backtickjs/cs-runtime";
