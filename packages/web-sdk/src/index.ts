@@ -4,6 +4,6 @@
 //
 // The client half. The server is `@backtickjs/web-sdk/server`, kept apart so a
 // browser bundling this entry never pulls in a runtime API.
-export { mount, evaluate, Element, isElement } from "@backtickjs/web-client";
+export { mount, evaluate, Element, isElement } from "./client/index.js";
 export { bundle } from "@backtickjs/core";
 export type { Bundle, Spliceable } from "@backtickjs/core";

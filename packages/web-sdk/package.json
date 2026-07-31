@@ -36,7 +36,6 @@
     "@backtickjs/cs-runtime": "workspace:*",
     "@backtickjs/jit-bundler": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
-    "@backtickjs/web-client": "workspace:*",
     "@backtickjs/web-server": "workspace:*"
   },
   "peerDependencies": {

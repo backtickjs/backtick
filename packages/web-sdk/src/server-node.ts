@@ -2,6 +2,7 @@ import { createServer, type Server } from "node:http";
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { dirname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   createHandler,
   type DocumentOptions,
@@ -24,8 +25,13 @@ export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
   return {
     client: `${prefix}client/index.js`,
     modules: {
-      [`${prefix}client/`]: at("@backtickjs/web-client"),
+      // The client is this package's own, beside this file in the build.
+      [`${prefix}client/`]: join(
+        dirname(fileURLToPath(import.meta.url)),
+        "client",
+      ),
       [`${prefix}interpreter/`]: at("@backtickjs/js-interpreter"),
+      [`${prefix}cs-runtime/`]: at("@backtickjs/cs-runtime"),
       [`${prefix}format/`]: dirname(
         require.resolve("@backtickjs/jit-bundler/format"),
       ),
@@ -34,6 +40,7 @@ export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
     // the specifiers the client imports by name are mapped here.
     imports: {
       "@backtickjs/js-interpreter": `${prefix}interpreter/index.js`,
+      "@backtickjs/cs-runtime": `${prefix}cs-runtime/index.js`,
       "@backtickjs/jit-bundler/format": `${prefix}format/Bundle.js`,
     },
   };
