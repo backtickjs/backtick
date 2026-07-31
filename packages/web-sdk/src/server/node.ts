@@ -1,56 +1,32 @@
 import { createServer, type Server } from "node:http";
 import { readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
 import { dirname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createHandler, type Route } from "./handler.js";
 
 export interface BrowserAssets {
-  // The module a page imports to draw a payload, as a URL it can reach. A page
-  // names this itself, in its own import map — see `serve`.
+  // The module a page loads, as a URL it can reach.
   readonly client: string;
-  // Bare specifiers a browser can't resolve, as an app writes them into that
-  // map. A workspace package imported by name needs an entry here.
-  readonly imports: { readonly [specifier: string]: string };
   // Directories to serve, by the URL prefix that reaches them.
   readonly modules: { readonly [prefix: string]: string };
 }
 
 // Where the browser half sits on disk, and what a page needs to reach it.
 //
-// Resolved here rather than by the app: which packages make up the client is
-// the SDK's business, and an app that named them would have to change when that
-// changed. It is also what lets an app depend on the SDK alone.
+// One file, and one prefix to serve it under. The client is bundled for the
+// browser (`scripts/browser.mjs`), so nothing it loads names a package: a page
+// needs a script tag and no import map, and this needs no table of specifiers
+// to hand it.
+//
+// Resolved here rather than by the app: what makes up the client is the SDK's
+// business, and an app that named its parts would have to change when they did.
 export function browserAssets(prefix = "/_backtick/"): BrowserAssets {
-  const require = createRequire(import.meta.url);
-  const at = (name: string): string => dirname(require.resolve(name));
-  // The bundle format is in the browser's graph because the interpreter
-  // imports it, so it is resolved the way the interpreter resolves it. This
-  // package doesn't depend on the bundler and has no business naming it as
-  // one of its own.
-  const interpreter = createRequire(
-    require.resolve("@backtickjs/js-interpreter"),
-  );
   return {
-    client: `${prefix}client/index.js`,
+    client: `${prefix}client.js`,
     modules: {
-      // The client is this package's own: `dist/client`, where this file is
-      // `dist/server/node.js`.
-      [`${prefix}client/`]: join(
-        dirname(fileURLToPath(import.meta.url)),
-        "..",
-        "client",
-      ),
-      [`${prefix}interpreter/`]: at("@backtickjs/js-interpreter"),
-      [`${prefix}format/`]: dirname(
-        interpreter.resolve("@backtickjs/jit-bundler/format"),
-      ),
-    },
-    // A browser resolves a relative import on its own but not a bare one, so
-    // the specifiers the client imports by name are mapped here.
-    imports: {
-      "@backtickjs/js-interpreter": `${prefix}interpreter/index.js`,
-      "@backtickjs/jit-bundler/format": `${prefix}format/Bundle.js`,
+      // `dist/browser`, where this file is `dist/server/node.js`. The sourcemap
+      // sits beside the client, so the directory is served rather than the file.
+      [prefix]: join(dirname(fileURLToPath(import.meta.url)), "..", "browser"),
     },
   };
 }
@@ -89,11 +65,9 @@ export function readAssets(
 //
 // This writes no HTML. `root` is the directory a page and whatever it loads sit
 // in, and the client is served under the prefix `browserAssets` names, which is
-// what a page's own import map points at:
+// what a page's own script imports:
 //
-//     <script type="importmap">
-//       { "imports": { "@backtickjs/web-sdk": "/_backtick/client/index.js" } }
-//     </script>
+//     <script type="module" src="/main.js"></script>
 //
 // The page then asks its own path for the targets it should draw, which is the
 // same request a phone makes.

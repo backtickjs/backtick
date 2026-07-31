@@ -7,20 +7,6 @@
     <style>
       body { margin: 0; font-family: system-ui, sans-serif; }
     </style>
-    <!--
-      The page is the app's, so its wiring is too. A browser resolves a relative
-      import on its own but not a bare one, and `serve` puts the client under
-      this prefix — `browserAssets()` names the same paths.
-    -->
-    <script type="importmap">
-      {
-        "imports": {
-          "@backtickjs/web-sdk": "/_backtick/client/index.js",
-          "@backtickjs/js-interpreter": "/_backtick/interpreter/index.js",
-          "@backtickjs/jit-bundler/format": "/_backtick/format/Bundle.js"
-        }
-      }
-    </script>
     <script type="module" src="/main.js"></script>
   </head>
   <body>
