@@ -81,13 +81,6 @@ interface Pending {
 let computing: Pending | null = null;
 let rendering = 0;
 
-// The bindings built by the render under way. An instance that re-renders keeps
-// its element and takes the new render's props into it, so the element a
-// binding was built against is thrown away — and a change naming that one would
-// name something the host never drew. They are retargeted at the element that
-// survived, which is the one anybody outside is holding.
-let building: PropBinding[] | null = null;
-
 function whileNotifying<T>(
   notify: ((change: Change) => void) | null,
   run: () => T,
@@ -205,8 +198,6 @@ function render(instance: Instance): Element | null {
   // A fresh count for this pass: an `apply` reached n times last render is
   // reached n times again, so the nth evaluation lines up with the nth instance.
   instance.visits.clear();
-  // The bindings this render is about to build replace the ones it built last
-  // time, so what watches a cell is emptied and filled again rather than grown.
   // What this render replaces stops watching anything. Only its own bindings:
   // a child instance that isn't re-rendered keeps drawing what it drew, and
   // must keep hearing about the cells that would change it.
@@ -216,8 +207,6 @@ function render(instance: Instance): Element | null {
   instance.made = [];
   instance.calls.clear();
   rendering++;
-  const outer = building;
-  building = [];
   // Under this instance's host, so a child instantiated for the first time
   // during a re-render notifies the same one rather than nothing.
   const rendered = whileNotifying(
@@ -229,12 +218,10 @@ function render(instance: Instance): Element | null {
         instance.slots,
         null,
         instance,
+        instance.element,
       ) as Element | null,
   );
   rendering--;
-  const made = building ?? [];
-  building = outer;
-  instance.made = made;
   // An apply this render never reached draws nothing now, so the instances it
   // was holding are dropped. Rotating them only on a visit would keep a
   // thousand rows alive through a table that was cleared, and pay for them
@@ -250,22 +237,8 @@ function render(instance: Instance): Element | null {
   if (rendered !== null && instance.key !== null) {
     rendered.key = instance.key;
   }
-  const existing = instance.element;
-  if (existing === null || rendered === null || existing === rendered) {
-    instance.element = rendered;
-    return rendered;
-  }
-  existing.key = rendered.key;
-  existing.props = rendered.props;
-  // The element this render built is discarded in favour of the one already
-  // held, so anything that would report the discarded one is pointed at the
-  // survivor. Its props are the same object, so nothing else has to move.
-  for (const binding of made) {
-    if (binding.element === rendered) {
-      binding.element = existing;
-    }
-  }
-  return existing;
+  instance.element = rendered;
+  return rendered;
 }
 
 // Whether two argument lists are the same values in the same order. Identity
@@ -526,6 +499,7 @@ function evaluateElement(
   element: BundleElement,
   slots: Value[],
   instance: Instance | null = null,
+  reuse: Element | null = null,
 ): Element {
   // An absent key is no key, exactly as a null one was — the wire omits it
   // rather than spelling it out.
@@ -538,7 +512,13 @@ function evaluateElement(
           | number
           | null);
   const props: { [prop: string]: Value } = {};
-  const built = new Element(element[NodeField.id], key, props, element);
+  // The same element, rendering again — recognised by having come from this
+  // same part of the bundle. Written into rather than replaced, so everything
+  // holding it sees the new values and nothing has to be told that the one it
+  // holds was swapped for another.
+  const again = reuse !== null && reuse.shape === element;
+  const built = again ? reuse : new Element(element[NodeField.id], key, props, element);
+  built.key = key;
   for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
     // Children are structure, not an attribute. A cell read while working out
     // what an element contains decides which elements exist, and no amount of
@@ -557,9 +537,10 @@ function evaluateElement(
     // There is a binding only where computing it read a cell, and only that one
     // can ever be asked to recompute.
     if (pending.binding !== null) {
-      building?.push(pending.binding);
+      instance?.made.push(pending.binding);
     }
   }
+  built.props = props;
   return built;
 }
 
@@ -575,6 +556,10 @@ function evaluateExpr(
   // The enclosing instance, when there is one: what `cell` resolves against, and
   // what a nested `apply` keys its child instance under.
   instance: Instance | null = null,
+  // The element to render into, where this is an instance rendering again. Only
+  // its own content reaches this: everything nested is evaluated afresh, which
+  // is why it is not threaded any further down.
+  reuse: Element | null = null,
 ): Value {
   if (expr === null || typeof expr !== "object") {
     return expr;
@@ -742,7 +727,7 @@ function evaluateExpr(
         };
       }
       case NodeKind.Element: {
-        return evaluateElement(bundle, form, slots, instance);
+        return evaluateElement(bundle, form, slots, instance, reuse);
       }
     }
   }
