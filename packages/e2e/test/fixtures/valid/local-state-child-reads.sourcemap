@@ -1,0 +1,77 @@
+cs.lift(cs.const(      → cs`
+cs.receiver(           → 
+cs.splice(             →  [-semantic]
+(selected)             → $selected
+)                      →  [-semantic]
+)                      → 
+.                      → .
+read                   → read
+()                     → ()
+ ===                   →  === 
+cs.splice(             →  [-semantic]
+(id)                   → $id
+)                      →  [-semantic]
+ ?                     →  ? 
+20                     → 20
+ :                     →  : 
+16                     → 16
+))                     → `
+cs.lift(cs.const(      → cs`
+"row "                 → "row "
+ +                     →  + 
+cs.splice(             →  [-semantic]
+(id)                   → $id
+)                      →  [-semantic]
+ +                     →  + 
+" of "                 → " of "
+ +                     →  + 
+cs.receiver(           → 
+cs.splice(             →  [-semantic]
+(selected)             → $selected
+)                      →  [-semantic]
+)                      → 
+.                      → .
+read                   → read
+()                     → ()
+))                     → `
+cs.lift(cs.const(      → cs`
+cs.receiver(           → 
+cs.splice(             →  [-semantic]
+(selected)             → $selected
+)                      →  [-semantic]
+)                      → 
+.                      → .
+read                   → read
+()                     → ()
+ ===                   →  === 
+cs.splice(             →  [-semantic]
+(id)                   → $id
+)                      →  [-semantic]
+ ?                     →  ? 
+[                      → [
+cs.splice(             → ${ [-semantic]
+(<Text>marker</Text>)  → (<Text>marker</Text>)
+)                      → } [-semantic]
+]                      → ]
+ :                     →  : 
+[]                     → []
+))                     → `
+cs.lift(cs.const(      → cs`
+() =>                  → () => 
+cs.receiver(           → 
+cs.splice(             →  [-semantic]
+(selected)             → $selected
+)                      →  [-semantic]
+)                      → 
+.                      → .
+write                  → write
+(                      → (
+1                      → 1
+)                      → )
+))                     → `
+cs.lift(cs.const(      → cs`
+0                      → 0
+))                     → `
+cs.lift(cs.const(      → cs`
+1                      → 1
+))                     → `

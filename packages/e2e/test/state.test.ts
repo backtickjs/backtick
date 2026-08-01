@@ -4,7 +4,7 @@ import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { evaluate, isElement } from "./test-client/index.ts";
-import type { Element } from "./test-client/index.ts";
+import type { Change, Element } from "./test-client/index.ts";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
 // wire shape, and these drive the reference client through it — a write has to
@@ -13,9 +13,11 @@ import type { Element } from "./test-client/index.ts";
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("state");
 
-async function render(file: string): Promise<Element> {
+async function render(file: string, changes?: Change[]): Promise<Element> {
   const script = await importFixture(validDir, file);
-  const element = evaluate(await bundle(script));
+  const element = evaluate(await bundle(script), (change) =>
+    changes?.push(change),
+  );
   assert.ok(isElement(element), "expected a rendered element");
   return element;
 }
@@ -104,4 +106,53 @@ describe("local state", () => {
     handler(text)();
     assert.equal(fontSize(text), 18);
   });
+
+  it("a child redraws everything it read of a cell it was handed", async () => {
+    const view = await render("local-state-child-reads.tsx");
+    const [button, ...rows] = children(view);
+    assert.ok(button !== undefined && rows.length === 2);
+    // Nothing either row was given changes across the write — the same handle
+    // object and the same id — so every assertion here is one the arguments
+    // alone cannot answer. A prop, a text child, and a branch, per row.
+    assert.deepEqual(rows.map(readRow), [
+      { size: 20, text: "row 0 of 0", marked: true },
+      { size: 16, text: "row 1 of 0", marked: false },
+    ]);
+    handler(button)();
+    assert.deepEqual(rows.map(readRow), [
+      { size: 16, text: "row 0 of 1", marked: false },
+      { size: 20, text: "row 1 of 1", marked: true },
+    ]);
+  });
+
+  it("one write is one shape, however many instances redrew for it", async () => {
+    const changes: Change[] = [];
+    const view = await render("local-state-child-reads.tsx", changes);
+    const [button] = children(view);
+    assert.ok(button !== undefined);
+    // Both rows re-render — each read the cell in a branch, and each is its own
+    // computation. The host re-reads the tree from the root either way, so
+    // being told twice is one redraw of a tree that is already right.
+    handler(button)();
+    assert.deepEqual(
+      changes.filter((change) => change.kind === "shape").length,
+      1,
+    );
+  });
 });
+
+// What one row of `local-state-child-reads.tsx` draws, in the three positions
+// it read the cell from: a prop, a text child, and a branch.
+function readRow(row: Element): {
+  size: unknown;
+  text: unknown;
+  marked: boolean;
+} {
+  const [label, marker] = children(row);
+  assert.ok(label !== undefined, "expected a label");
+  return {
+    size: fontSize(label),
+    text: label.props.children,
+    marked: marker !== null && marker !== undefined,
+  };
+}

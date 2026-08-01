@@ -2,6 +2,7 @@ import { isElement } from "@backtickjs/js-interpreter";
 import type { Element } from "@backtickjs/js-interpreter";
 
 export { Element, isElement, evaluate } from "@backtickjs/js-interpreter";
+export type { Change } from "@backtickjs/js-interpreter";
 
 // The interpreter itself lives in `@backtickjs/js-interpreter` — one
 // implementation, so what this suite exercises is what every host runs. What
