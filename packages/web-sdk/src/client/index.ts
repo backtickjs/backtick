@@ -1,3 +1,13 @@
+// The client half: drawing what a path answered with, in a browser.
+//
+// `@backtickjs/web-sdk/client`, and the other half is
+// `@backtickjs/web-sdk/server`. Neither is the package's default, because
+// neither is what the SDK is — an import says which half it holds, and reading
+// one tells you where that code runs.
+//
+// Nothing here reaches a runtime API, so this is the half a browser can bundle.
+// `browser.ts` beside it is this with `start()` already called, which is what
+// the served `/backtick.js` is built from.
 import type { Bundle } from "@backtickjs/core";
 import type { Drawn } from "../Drawn.js";
 import { evaluate } from "@backtickjs/js-interpreter";
