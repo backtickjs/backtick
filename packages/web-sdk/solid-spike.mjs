@@ -3,8 +3,13 @@
 //   children → mapArray (keyed, one owner per row).
 // Nothing below tracks dependencies, subscriptions, or lifetimes by hand.
 import {
-  createSignal, createRenderEffect, createRoot, createMemo, mapArray, batch,
-} from "solid-js/dist/solid.js";  // the browser build: Node resolves the inert server one
+  createSignal,
+  createRenderEffect,
+  createRoot,
+  createMemo,
+  mapArray,
+  batch,
+} from "solid-js/dist/solid.js"; // the browser build: Node resolves the inert server one
 
 const log = [];
 const say = (what) => log.push(what);
@@ -17,12 +22,22 @@ const app = createRoot((dispose) => {
   // that broke us. Nothing here says it depends on `selected`.
   const Row = (row) => {
     const cls = createMemo(() => (selected() === row.id ? "danger" : ""));
-    createRenderEffect(() => say(`  row ${row.id} class=${JSON.stringify(cls())}`));
-    createRenderEffect(() => say(`  row ${row.id} branch=${selected() === row.id ? "on" : "off"}`));
+    createRenderEffect(() =>
+      say(`  row ${row.id} class=${JSON.stringify(cls())}`),
+    );
+    createRenderEffect(() =>
+      say(`  row ${row.id} branch=${selected() === row.id ? "on" : "off"}`),
+    );
     return row;
   };
   const drawn = createMemo(mapArray(rows, Row));
-  createRenderEffect(() => say(`  list = [${drawn().map((r) => r.id).join(",")}]`));
+  createRenderEffect(() =>
+    say(
+      `  list = [${drawn()
+        .map((r) => r.id)
+        .join(",")}]`,
+    ),
+  );
   return { setSelected, setRows, dispose };
 });
 

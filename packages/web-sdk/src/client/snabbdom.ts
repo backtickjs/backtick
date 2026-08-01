@@ -49,18 +49,23 @@ function vnode(element: Element): VNode {
       if (prop.startsWith("on")) on[prop.slice(2)] = value as () => void;
       continue;
     }
-    if (value === null || value === undefined || typeof value === "object") continue;
+    if (value === null || value === undefined || typeof value === "object")
+      continue;
     attrs[prop.toLowerCase()] = value as string | number | boolean;
   }
-  return h(element.id, {
-    attrs,
-    on,
-    key: element.key ?? undefined,
-    hook: {
-      create: (_: VNode, made: VNode) => drewAs(element, made.elm as Node),
-      update: (_: VNode, made: VNode) => drewAs(element, made.elm as Node),
+  return h(
+    element.id,
+    {
+      attrs,
+      on,
+      key: element.key ?? undefined,
+      hook: {
+        create: (_: VNode, made: VNode) => drewAs(element, made.elm as Node),
+        update: (_: VNode, made: VNode) => drewAs(element, made.elm as Node),
+      },
     },
-  }, children(element.props.children));
+    children(element.props.children),
+  );
 }
 
 export function renderInto(container: globalThis.Element, tree: unknown): void {
@@ -78,7 +83,11 @@ export function applyChange(change: Change): void {
   const node = drawnAs(change.element);
   if (node === undefined || change.prop === "children") return;
   const { prop, value } = change;
-  if (typeof value === "function" || (typeof value === "object" && value !== null)) return;
+  if (
+    typeof value === "function" ||
+    (typeof value === "object" && value !== null)
+  )
+    return;
   const element = node as globalThis.Element;
   if (value === null || value === undefined || value === false) {
     element.removeAttribute(prop.toLowerCase());
