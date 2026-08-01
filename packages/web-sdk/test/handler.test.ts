@@ -90,3 +90,101 @@ test("serves a module with a type a browser will execute", async () => {
   assert.equal(response.headers.get("content-type"), "text/javascript");
   assert.equal(await response.text(), "export {}");
 });
+
+// A page that names the client every way a browser would read it, and once in
+// prose, which is not a way a browser would read it.
+const wired = [
+  "<!doctype html><html><head>",
+  '<link rel="modulepreload" href="/backtick.js">',
+  '</head><body><div id="root"></div>',
+  '<script type="module" src="/backtick.js"></script>',
+  '<script type="module">import { start } from "/backtick.js"; await start();</script>',
+  "<p>The client is served at /backtick.js — write that, not the built name.</p>",
+  "</body></html>",
+].join("");
+
+const client = "/backtick-IEB5UTWZ.js";
+const wiring = createHandler(
+  [{ path: "/", html: "/index.html", render: () => [] }],
+  {
+    client,
+    read: async (path) =>
+      path === "/index.html" || path === "/loose.html"
+        ? new TextEncoder().encode(wired)
+        : path === client
+          ? new TextEncoder().encode("export const client = 1")
+          : null,
+  },
+);
+
+test("resolves the client where a page names it as a URL", async () => {
+  const html = await (
+    await wiring(
+      new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    )
+  ).text();
+  assert.equal(html.match(/\/backtick-IEB5UTWZ\.js/g)?.length, 3);
+  assert.ok(html.includes(`href="${client}"`));
+  assert.ok(html.includes(`src="${client}"`));
+  assert.ok(html.includes(`from "${client}"`));
+});
+
+test("leaves the name alone where a page only mentions it", async () => {
+  const html = await (
+    await wiring(
+      new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    )
+  ).text();
+  assert.ok(html.includes("served at /backtick.js — write that"));
+});
+
+test("resolves it in any page it serves, not only a route's", async () => {
+  const html = await (
+    await wiring(new Request("http://localhost/loose.html"))
+  ).text();
+  assert.ok(html.includes(`src="${client}"`));
+});
+
+test("the built name is cached for a year and never revalidated", async () => {
+  const response = await wiring(new Request(`http://localhost${client}`));
+  assert.equal(
+    response.headers.get("cache-control"),
+    "public, max-age=31536000, immutable",
+  );
+  assert.equal(response.headers.get("etag"), null);
+});
+
+test("a route's answers carry no tag, because one could never mean either", async () => {
+  // The page and the bundle share the path, and a browser keeps one entry per
+  // URL — a tag from either would be sent back for the other and always miss.
+  for (const accept of ["text/html", "application/json"]) {
+    const response = await wiring(
+      new Request("http://localhost/", { headers: { accept } }),
+    );
+    assert.equal(response.headers.get("etag"), null);
+    assert.equal(response.headers.get("cache-control"), "no-cache");
+  }
+});
+
+test("a file at its own URL is revalidated, and answers 304 when it has not changed", async () => {
+  const first = await wiring(new Request("http://localhost/loose.html"));
+  const etag = first.headers.get("etag");
+  assert.equal(first.headers.get("cache-control"), "no-cache");
+  assert.ok(etag);
+  const again = await wiring(
+    new Request("http://localhost/loose.html", {
+      headers: { "if-none-match": etag },
+    }),
+  );
+  assert.equal(again.status, 304);
+  assert.equal((await again.arrayBuffer()).byteLength, 0);
+});
+
+test("a page and its bundle share a path, so a cache is told what varies", async () => {
+  for (const accept of ["text/html", "application/json"]) {
+    const response = await wiring(
+      new Request("http://localhost/", { headers: { accept } }),
+    );
+    assert.equal(response.headers.get("vary"), "accept");
+  }
+});

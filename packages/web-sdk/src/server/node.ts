@@ -1,11 +1,12 @@
 import { createServer, type Server } from "node:http";
+import { readFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { dirname, join, normalize, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createHandler, type Route } from "./handler.js";
+import { CLIENT_URL, createHandler, type Route } from "./handler.js";
 
 export interface BrowserAssets {
-  // The module a page loads, as a URL it can reach.
+  // The URL the client is served at, as the build named it.
   readonly client: string;
   // Directories to serve, by the URL prefix that reaches them.
   readonly modules: { readonly [prefix: string]: string };
@@ -13,26 +14,34 @@ export interface BrowserAssets {
 
 // Where the browser half sits on disk, and what a page needs to reach it.
 //
-// Two paths, not a directory: the client is bundled for the browser
+// Files, not a directory: the client is bundled for the browser
 // (`scripts/browser.mjs`), so nothing it loads names a package and nothing else
 // has to be served. A page needs a script tag and no import map, and an app
 // gives up one filename rather than a whole prefix of its own URL space.
 //
+// The build names the file for what is in it and writes that name down; this
+// reads it rather than guessing, so the URL changes exactly when the bytes do.
 // Resolved here rather than by the app: what makes up the client is the SDK's
 // business, and an app that named its parts would have to change when they did.
-export function browserAssets(prefix = "/"): BrowserAssets {
+export function browserAssets(): BrowserAssets {
   // `dist/browser`, where this file is `dist/server/node.js`.
   const browser = join(
     dirname(fileURLToPath(import.meta.url)),
     "..",
     "browser",
   );
+  const { client } = JSON.parse(
+    readFileSync(join(browser, "manifest.json"), "utf8"),
+  ) as { client: string };
   return {
-    client: `${prefix}backtick.js`,
+    client: `/${client}`,
     modules: {
-      [`${prefix}backtick.js`]: join(browser, "backtick.js"),
-      // Named by the client, which carries `//# sourceMappingURL=backtick.js.map`.
-      [`${prefix}backtick.js.map`]: join(browser, "backtick.js.map"),
+      [`/${client}`]: join(browser, client),
+      // Named by the client, which carries `//# sourceMappingURL=...`.
+      [`/${client}.map`]: join(browser, `${client}.map`),
+      // What a page writes, for anything that asks for it under that name
+      // rather than being handed the built one by a page this served.
+      [CLIENT_URL]: join(browser, client),
     },
   };
 }
@@ -76,10 +85,9 @@ export function readAssets(
 // Serves an app: its own files — its pages among them — and its routes.
 //
 // This writes no HTML. `root` is the directory a page and whatever it loads sit
-// in, and the client is served under the prefix `browserAssets` names, which is
-// what a page's own script imports:
+// in, and a page reaches the client by the name it writes:
 //
-//     <script type="module" src="/main.js"></script>
+//     <script type="module">import { start } from "/backtick.js";</script>
 //
 // The page then asks its own path for the targets it should draw, which is the
 // same request a phone makes.
@@ -89,6 +97,7 @@ export function serve(
 ): Server {
   const assets = browserAssets();
   const handle = createHandler(routes, {
+    client: assets.client,
     read: readAssets({
       ...assets,
       modules: {

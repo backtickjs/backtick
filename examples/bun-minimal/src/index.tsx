@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { createHandler } from "@backtickjs/web-sdk/server";
 import { browserAssets, readAssets } from "@backtickjs/web-sdk/server/node";
 import { About, Counter, Home } from "./screens.js";
@@ -27,15 +28,17 @@ const routes = [
   },
 ];
 
-// The other thing `serve` does for Node is assemble this: the client under its
-// own prefix, and the app's own directory — its page — under `/`.
+// The other thing `serve` does for Node is assemble this: the client under the
+// name its build gave it, and the app's own directory — its page — under `/`.
+// `client` is also what a page's `/backtick.js` becomes when it is served.
 const assets = browserAssets();
 const options = {
+  client: assets.client,
   read: readAssets({
     ...assets,
     modules: {
       ...assets.modules,
-      "/": new URL("../public", import.meta.url).pathname,
+      "/": fileURLToPath(new URL("../public", import.meta.url)),
     },
   }),
 };

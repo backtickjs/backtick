@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { serve } from "@backtickjs/web-sdk/server/node";
 import { About, Counter, Home } from "./screens.js";
 
@@ -31,7 +32,9 @@ const routes = [
 ];
 
 const port = Number(process.env.PORT ?? 5173);
-const options = { root: new URL("../public", import.meta.url).pathname };
+const options = {
+  root: fileURLToPath(new URL("../public", import.meta.url)),
+};
 
 serve(routes, options).listen(port, () => {
   console.log(`Preview on http://localhost:${port}`);
