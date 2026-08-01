@@ -81,6 +81,28 @@ interface Pending {
 let computing: Pending | null = null;
 let rendering = 0;
 
+// The cell being written, while the render it caused is under way. An instance
+// that read this cell has to render again even if everything it was handed is
+// unchanged — a handle is the same object whatever its cell now holds, so
+// "nothing I was given is different" is not the same as "nothing I draw is".
+let writing: string | null = null;
+
+// The instance whose render is under way, so a read can be recorded against it.
+let reading: Instance | null = null;
+
+// A cell, named so two instances' cells of the same name are still two cells.
+let counted = 0;
+const numbered = new WeakMap<Instance, number>();
+
+function cellName(owner: Instance, name: string): string {
+  let at = numbered.get(owner);
+  if (at === undefined) {
+    at = ++counted;
+    numbered.set(owner, at);
+  }
+  return `${at}.${name}`;
+}
+
 function whileNotifying<T>(
   notify: ((change: Change) => void) | null,
   run: () => T,
@@ -146,6 +168,8 @@ interface Instance {
   // renders again — but only then, so a child that had nothing to redraw keeps
   // watching the cells its props read.
   made: PropBinding[];
+  // The cells this instance's last render read, its own and anyone else's.
+  reads: Set<string>;
   // Which of its siblings this one is, as the node that applied it said. Held
   // here rather than read off the element, because the element is the content's
   // and the content doesn't know it was keyed — a re-render would otherwise put
@@ -174,6 +198,7 @@ function instantiate(
     calls: new Map(),
     handles: new Map(),
     made: [],
+    reads: new Set(),
     key,
     element: null,
   };
@@ -207,8 +232,11 @@ function render(instance: Instance): Element | null {
     binding.forget();
   }
   instance.made = [];
+  instance.reads = new Set();
   instance.calls.clear();
   rendering++;
+  const outer = reading;
+  reading = instance;
   // Under this instance's host, so a child instantiated for the first time
   // during a re-render notifies the same one rather than nothing.
   const rendered = whileNotifying(
@@ -224,6 +252,7 @@ function render(instance: Instance): Element | null {
       ) as Element | null,
   );
   rendering--;
+  reading = outer;
   // An apply this render never reached draws nothing now, so the instances it
   // was holding are dropped. Rotating them only on a visit would keep a
   // thousand rows alive through a table that was cleared, and pay for them
@@ -270,6 +299,10 @@ function cellHandle(instance: Instance, name: string): Value {
     return instance.cells;
   };
   const read = () => {
+    // Recorded against whoever is rendering, wherever the cell lives: a child
+    // handed another instance's cell depends on it exactly as if it were its
+    // own, and is the reason skipping has to ask what was read.
+    reading?.reads.add(cellName(instance, name));
     // Attributed where there is something to attribute it to.
     if (computing !== null) {
       const binding = (computing.binding ??= new PropBinding(
@@ -306,7 +339,13 @@ function cellHandle(instance: Instance, name: string): Value {
       }
       return null;
     }
-    render(instance);
+    const outer = writing;
+    writing = cellName(instance, name);
+    try {
+      render(instance);
+    } finally {
+      writing = outer;
+    }
     // The element refreshed in place, so the host re-reads rather than being
     // handed anything: this only says that something moved.
     instance.notify?.({ kind: "shape" });
@@ -682,10 +721,15 @@ function evaluateExpr(
         if (child !== undefined) {
           child.key = key;
           siblings.claimed.set(under, child);
-          // Nothing it was given is different, so nothing it draws can be:
-          // the element it drew last time is still what it draws, down to the
-          // objects, which is what lets a host recognise it and stop there.
-          if (child.element !== null && same(child.slots, args)) {
+          // Nothing it was given is different and nothing it read has changed,
+          // so nothing it draws can be: the element it drew last time is still
+          // what it draws, down to the objects, which is what lets a host
+          // recognise it and stop there.
+          if (
+            child.element !== null &&
+            same(child.slots, args) &&
+            (writing === null || !child.reads.has(writing))
+          ) {
             return child.element;
           }
           child.slots = args;
