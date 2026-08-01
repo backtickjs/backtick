@@ -22,7 +22,7 @@ const FRAGMENT_ID = "Fragment";
 // decision in the file, and the reason this is `createRenderer` rather than a
 // renderer that already knows what HTML is: what a prop means is ours.
 const { insert, effect, setProp, createElement } = createRenderer<Node>({
-  createElement: (tag) => document.createElement(tagFor(tag)),
+  createElement: (tag) => document.createElement(tag),
   createTextNode: (value) => document.createTextNode(value),
   replaceText: (node, value) => {
     node.nodeValue = value;
@@ -132,18 +132,4 @@ function attribute(node: HTMLElement, prop: string, value: unknown): void {
     return;
   }
   node.setAttribute(name, String(value));
-}
-
-// A tag is written as HTML writes it, which is how an element built by this
-// target's `jsx` arrives here. Anything else is an element from another
-// target's vocabulary, and rendering it as a tag would invent an element the
-// app never asked for.
-function tagFor(id: string): string {
-  if (/^[a-z][a-z0-9-]*$/.test(id)) {
-    return id;
-  }
-  throw new Error(
-    `No web rendering for <${id} />. This client renders HTML tags and ` +
-      `${FRAGMENT_ID}; <${id} /> belongs to another target's vocabulary.`,
-  );
 }
