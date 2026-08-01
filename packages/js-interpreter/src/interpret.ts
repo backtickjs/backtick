@@ -468,65 +468,92 @@ function setChildren(built: Element, children: Value): void {
 }
 
 // An inline element renders in its enclosing instance: it is part of that entry,
-// so it reads the same slots and the same cells.
-function evaluateElement(
-  bundle: Bundle,
-  element: BundleElement,
-  slots: Value[],
-  instance: Instance | null = null,
-): Element {
+// so it reads the same slots and the same cells. Its key and its children are
+// the two expressions a render re-evaluates, so both are compiled with it; the
+// props are bound once, on the drawing that first builds it.
+function compileElement(bundle: Bundle, element: BundleElement): CompiledExpr {
+  const id = element[NodeField.id];
+  const elementKey = element[NodeField.key];
   // An absent key is no key, exactly as a null one was — the wire omits it
   // rather than spelling it out.
-  const elementKey = element[NodeField.key];
-  const key =
-    elementKey === undefined
-      ? null
-      : (evaluateExpr(bundle, elementKey, slots, null, instance) as
-          | string
-          | number
-          | null);
-  // Which drawing of this element this is — the nth time this render has
-  // reached it, which for an element inside a loop is the nth row.
-  const at = instance === null ? 0 : (instance.made.get(element) ?? 0);
-  let drew = instance?.drew.get(element);
-  if (instance !== null && drew === undefined) {
-    drew = [];
-    instance.drew.set(element, drew);
-  }
-  instance?.made.set(element, at + 1);
-  const kept = drew?.[at];
-  // The same element, drawn again. Written into rather than replaced, so
-  // everything holding it — the node it was drawn as, the effects reading its
-  // props — is holding the current one and nothing has to be told.
-  const built = kept ?? new Element(element[NodeField.id], key, {}, element);
-  built.key = key;
-  if (kept === undefined) {
-    if (drew !== undefined) {
-      drew[at] = built;
-    }
-    for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
-      if (prop === "children") {
-        continue;
-      }
-      // Bound once. The getter resolves against the instance every time it is
-      // read, so a second render has nothing to tell it.
-      bindProp(bundle, built, prop, expr, slots, instance);
-    }
-  }
-  // Children are structure, not an attribute, so they are worked out here —
-  // inside the render, where an `apply` among them can be matched against the
-  // instance that drew it last time — and handed over rather than read.
+  const key = elementKey === undefined ? null : compileExpr(bundle, elementKey);
+  const props = Object.entries(element[NodeField.props] ?? {}).filter(
+    ([prop]) => prop !== "children",
+  );
+  // Children are structure, not an attribute, so they are worked out inside the
+  // render, where an `apply` among them can be matched against the instance
+  // that drew it last time — and handed over rather than read.
   const children = element[NodeField.props]?.["children"];
-  if (children !== undefined) {
-    setChildren(built, evaluateExpr(bundle, children, slots, null, instance));
-  }
-  return built;
+  const drawChildren =
+    children === undefined ? null : compileExpr(bundle, children);
+  return (slots, _env, instance) => {
+    const drawn =
+      key === null
+        ? null
+        : (key(slots, null, instance) as string | number | null);
+    // Which drawing of this element this is — the nth time this render has
+    // reached it, which for an element inside a loop is the nth row.
+    const at = instance === null ? 0 : (instance.made.get(element) ?? 0);
+    let drew = instance?.drew.get(element);
+    if (instance !== null && drew === undefined) {
+      drew = [];
+      instance.drew.set(element, drew);
+    }
+    instance?.made.set(element, at + 1);
+    const kept = drew?.[at];
+    // The same element, drawn again. Written into rather than replaced, so
+    // everything holding it — the node it was drawn as, the effects reading its
+    // props — is holding the current one and nothing has to be told.
+    const built = kept ?? new Element(id, drawn, {}, element);
+    built.key = drawn;
+    if (kept === undefined) {
+      if (drew !== undefined) {
+        drew[at] = built;
+      }
+      for (const [prop, expr] of props) {
+        // Bound once. The getter resolves against the instance every time it is
+        // read, so a second render has nothing to tell it.
+        bindProp(bundle, built, prop, expr, slots, instance);
+      }
+    }
+    if (drawChildren !== null) {
+      setChildren(built, drawChildren(slots, null, instance));
+    }
+    return built;
+  };
 }
 
 // A tree expression (also the root): plain JSON carries itself; the
 // `#`-discriminated nodes compose. Bundling rejects plain data carrying
 // `#` — the bundle's one reserved key — so the node reading is
 // unambiguous.
+//
+// Compiled like a body expression, and for the same reason: what kind of node
+// this is was decided when the bundle was parsed, and a prop read or a render
+// asking again is asking a question whose answer cannot have changed.
+type CompiledExpr = (
+  slots: Value[],
+  env: Scope | null,
+  instance: Instance | null,
+) => Value;
+
+const compiledExprs = new WeakMap<object, CompiledExpr>();
+
+function compileExpr(bundle: Bundle, expr: BundleExpr): CompiledExpr {
+  if (expr === null || typeof expr !== "object") {
+    const literal = expr as Value;
+    return () => literal;
+  }
+  const node = expr as object;
+  const already = compiledExprs.get(node);
+  if (already !== undefined) {
+    return already;
+  }
+  const made = buildExpr(bundle, expr);
+  compiledExprs.set(node, made);
+  return made;
+}
+
 function evaluateExpr(
   bundle: Bundle,
   expr: BundleExpr,
@@ -536,13 +563,17 @@ function evaluateExpr(
   // what a nested `apply` keys its child instance under.
   instance: Instance | null = null,
 ): Value {
-  if (expr === null || typeof expr !== "object") {
-    return expr;
-  }
+  return compileExpr(bundle, expr)(slots, env, instance);
+}
+
+// `compileExpr` has already ruled out the literals, so what reaches this is a
+// composite: an array, a node, or plain data.
+function buildExpr(bundle: Bundle, literal: BundleExpr): CompiledExpr {
+  const expr = literal as Extract<BundleExpr, object>;
   if (Array.isArray(expr)) {
-    return expr.map((element) =>
-      evaluateExpr(bundle, element, slots, env, instance),
-    );
+    const parts = expr.map((element) => compileExpr(bundle, element));
+    return (slots, env, instance) =>
+      parts.map((part) => part(slots, env, instance));
   }
   if ("#" in expr) {
     const form = expr as
@@ -555,171 +586,167 @@ function evaluateExpr(
       | BundleElement;
     switch (form["#"]) {
       case NodeKind.GetSlot: {
-        return slots[form[NodeField.index]];
+        const index = form[NodeField.index];
+        return (slots) => slots[index];
       }
       case NodeKind.GetState: {
-        // A cell is declared by the enclosing entry, so it is only meaningful
-        // inside an instance of it.
-        if (instance === null) {
-          throw new Error(
-            `no instance to resolve state cell ${form[NodeField.name]}`,
-          );
-        }
-        const handle = instance.handles?.get(form[NodeField.name]);
-        if (handle === undefined) {
-          throw new Error(`unknown state cell ${form[NodeField.name]}`);
-        }
-        return handle;
+        const name = form[NodeField.name];
+        return (_slots, _env, instance) => {
+          // A cell is declared by the enclosing entry, so it is only meaningful
+          // inside an instance of it.
+          if (instance === null) {
+            throw new Error(`no instance to resolve state cell ${name}`);
+          }
+          const handle = instance.handles?.get(name);
+          if (handle === undefined) {
+            throw new Error(`unknown state cell ${name}`);
+          }
+          return handle;
+        };
       }
       case NodeKind.Identifier: {
         // A parameter of an enclosing thunk.
-        const frame = lookup(env, form[NodeField.text]);
-        if (frame === null) {
-          throw new Error(`unknown identifier ${form[NodeField.name]}`);
-        }
-        return read(frame, form[NodeField.name]);
+        const name = form[NodeField.text];
+        return (_slots, env) => {
+          const frame = lookup(env, name);
+          if (frame === null) {
+            throw new Error(`unknown identifier ${name}`);
+          }
+          return read(frame, name);
+        };
       }
       // An entry named rather than applied: the function it evaluates to, which
       // is what a hole handing over nothing would have called.
       case NodeKind.GetFunction: {
-        return getFunction(bundle, form[NodeField.label]);
+        const label = form[NodeField.label];
+        return () => getFunction(bundle, label);
       }
       case NodeKind.ApplyFunction: {
+        const label = form[NodeField.label];
         const args = (form[NodeField.arguments] ?? []).map((arg) =>
-          evaluateExpr(bundle, arg, slots, env, instance),
+          compileExpr(bundle, arg),
         );
-        const value = getFunction(bundle, form[NodeField.label])(...args);
-        // Only a closure is held on to. A call that computed anything else may
-        // read a cell or an instance's storage, and answering it from last time
-        // would be answering a question that wasn't asked.
-        if (instance === null || typeof value !== "function") {
+        return (slots, env, instance) => {
+          const supplied = args.map((arg) => arg(slots, env, instance));
+          const value = getFunction(bundle, label)(...supplied);
+          // Only a closure is held on to. A call that computed anything else may
+          // read a cell or an instance's storage, and answering it from last time
+          // would be answering a question that wasn't asked.
+          if (instance === null || typeof value !== "function") {
+            return value;
+          }
+          const seen = instance.calls?.get(form) ?? 0;
+          (instance.calls ??= new Map()).set(form, seen + 1);
+          let made = instance.closures?.get(form);
+          if (made === undefined) {
+            made = [];
+            (instance.closures ??= new Map()).set(form, made);
+          }
+          const previous = made[seen];
+          if (previous !== undefined && same(previous.args, supplied)) {
+            return previous.value;
+          }
+          made[seen] = { args: supplied, value };
           return value;
-        }
-        const seen = instance.calls?.get(form) ?? 0;
-        (instance.calls ??= new Map()).set(form, seen + 1);
-        let made = instance.closures?.get(form);
-        if (made === undefined) {
-          made = [];
-          (instance.closures ??= new Map()).set(form, made);
-        }
-        const previous = made[seen];
-        if (previous !== undefined && same(previous.args, args)) {
-          return previous.value;
-        }
-        made[seen] = { args, value };
-        return value;
+        };
       }
       case NodeKind.ApplyTree: {
         const label = form[NodeField.label];
         const args = (form[NodeField.arguments] ?? []).map((arg) =>
-          evaluateExpr(bundle, arg, slots, env, instance),
+          compileExpr(bundle, arg),
         );
         const applied = form[NodeField.key];
-        const key =
-          applied === undefined
-            ? null
-            : (evaluateExpr(bundle, applied, slots, env, instance) as
-                | string
-                | number
-                | null);
-        // Outside an instance there is nothing to persist against, so the
-        // entry applies as a plain function.
-        if (instance === null) {
+        const key = applied === undefined ? null : compileExpr(bundle, applied);
+        return (slots, env, instance) => {
+          const supplied = args.map((arg) => arg(slots, env, instance));
+          const drawn =
+            key === null
+              ? null
+              : (key(slots, env, instance) as string | number | null);
           const tree = bundle.trees[label];
           if (tree === undefined) {
             throw new Error(`unknown tree entry ${label}`);
           }
-          return instantiate(bundle, tree, args, key).content();
-        }
-        const tree = bundle.trees[label];
-        if (tree === undefined) {
-          throw new Error(`unknown tree entry ${label}`);
-        }
-        // A nested instance persists across the parent's re-renders. A keyed
-        // one is found by its key wherever it moved to; an unkeyed one by which
-        // evaluation of this node it was, because a node inside a loop is
-        // reached once per iteration and position is all that tells them apart.
-        const seen = instance.visits?.get(form) ?? 0;
-        (instance.visits ??= new Map()).set(form, seen + 1);
-        let siblings = instance.children?.get(form);
-        if (siblings === undefined) {
-          siblings = { claimed: new Map(), left: new Map() };
-          (instance.children ??= new Map()).set(form, siblings);
-        }
-        // The first visit of a render starts a new claim on this node's
-        // instances; whatever the last render left and nobody asks for again is
-        // dropped with the map it was in.
-        if (seen === 0) {
-          siblings.left = siblings.claimed;
-          siblings.claimed = new Map();
-        }
-        const under = key ?? seen;
-        const child = siblings.left.get(under);
-        if (child !== undefined) {
-          child.key = key;
-          // Claimed, so what stays behind in `left` is what nobody asked for
-          // again — which is what the render disposes when it finishes.
-          siblings.left.delete(under);
-          siblings.claimed.set(under, child);
-          // Handing it its arguments, which is the only way it is asked to draw
-          // again. Equal ones are not a write and it stays exactly as it was —
-          // the same element down to the objects, which is what lets a host
-          // recognise it and stop there. What it read of somebody else's cell
-          // is not this call's business: reading it below is what brings it up
-          // to date, whatever made it stale.
-          child.setSlots(args);
-          return child.content();
-        }
-        const created = instantiate(bundle, tree, args, key);
-        siblings.claimed.set(under, created);
-        return created.content();
+          // Outside an instance there is nothing to persist against, so the
+          // entry applies as a plain function.
+          if (instance === null) {
+            return instantiate(bundle, tree, supplied, drawn).content();
+          }
+          // A nested instance persists across the parent's re-renders. A keyed
+          // one is found by its key wherever it moved to; an unkeyed one by which
+          // evaluation of this node it was, because a node inside a loop is
+          // reached once per iteration and position is all that tells them apart.
+          const seen = instance.visits?.get(form) ?? 0;
+          (instance.visits ??= new Map()).set(form, seen + 1);
+          let siblings = instance.children?.get(form);
+          if (siblings === undefined) {
+            siblings = { claimed: new Map(), left: new Map() };
+            (instance.children ??= new Map()).set(form, siblings);
+          }
+          // The first visit of a render starts a new claim on this node's
+          // instances; whatever the last render left and nobody asks for again is
+          // dropped with the map it was in.
+          if (seen === 0) {
+            siblings.left = siblings.claimed;
+            siblings.claimed = new Map();
+          }
+          const under = drawn ?? seen;
+          const child = siblings.left.get(under);
+          if (child !== undefined) {
+            child.key = drawn;
+            // Claimed, so what stays behind in `left` is what nobody asked for
+            // again — which is what the render disposes when it finishes.
+            siblings.left.delete(under);
+            siblings.claimed.set(under, child);
+            // Handing it its arguments, which is the only way it is asked to draw
+            // again. Equal ones are not a write and it stays exactly as it was —
+            // the same element down to the objects, which is what lets a host
+            // recognise it and stop there. What it read of somebody else's cell
+            // is not this call's business: reading it below is what brings it up
+            // to date, whatever made it stale.
+            child.setSlots(supplied);
+            return child.content();
+          }
+          const created = instantiate(bundle, tree, supplied, drawn);
+          siblings.claimed.set(under, created);
+          return created.content();
+        };
       }
       case NodeKind.Thunk: {
         const params = form[NodeField.parameters];
+        const body = compileExpr(bundle, form[NodeField.expression]);
         if (!params || params.length === 0) {
-          return () =>
-            evaluateExpr(
-              bundle,
-              form[NodeField.expression],
-              slots,
-              env,
-              instance,
-            );
+          return (slots, env, instance) => () => body(slots, env, instance);
         }
         // The hole call supplies the entry-scoped bindings the splice
         // captures, one value per parameter, over the enclosing frame.
-        return (...args: Value[]) => {
-          const frame = scopeOf(env);
-          params.forEach((param, index) => {
-            bind(frame, param[NodeField.name], args[index]);
-          });
-          return evaluateExpr(
-            bundle,
-            form[NodeField.expression],
-            slots,
-            frame,
-            instance,
-          );
-        };
+        const names = params.map((param) => param[NodeField.name]);
+        return (slots, env, instance) =>
+          (...args: Value[]) => {
+            const frame = scopeOf(env);
+            for (let at = 0; at < names.length; at++) {
+              bind(frame, names[at], args[at]);
+            }
+            return body(slots, frame, instance);
+          };
       }
       case NodeKind.Element: {
-        return evaluateElement(bundle, form, slots, instance);
+        return compileElement(bundle, form);
       }
     }
   }
-  const object: { [key: string]: Value } = {};
-  for (const [key, value] of Object.entries(expr)) {
-    // The index admits `undefined` only so the reserved `#` can be excluded
-    // from it (see `BundleData`); parsed JSON never carries one.
-    object[key] = evaluateExpr(
-      bundle,
-      value as BundleExpr,
-      slots,
-      env,
-      instance,
-    );
-  }
-  return object;
+  // The index admits `undefined` only so the reserved `#` can be excluded
+  // from it (see `BundleData`); parsed JSON never carries one.
+  const data = expr as { [key: string]: BundleExpr };
+  const keys = Object.keys(data);
+  const parts = keys.map((key) => compileExpr(bundle, data[key]));
+  return (slots, env, instance) => {
+    const object: { [key: string]: Value } = {};
+    for (let at = 0; at < keys.length; at++) {
+      object[keys[at]] = parts[at](slots, env, instance);
+    }
+    return object;
+  };
 }
 
 // A `#`-discriminated node, as opposed to plain JSON carrying itself.
@@ -757,165 +784,218 @@ function guardTurns(turns: number, keyword: string): void {
   }
 }
 
-function executeStatement(
-  bundle: Bundle,
-  node: BundleStatementNode,
-  scope: Scope,
-): Completion {
+// SPIKE: a node is compiled once into the closure that evaluates it, and that
+// closure is what runs from then on. Deciding what kind of node this is happens
+// per node instead of per evaluation — the same walk of the same tree, without
+// re-reading a shape that has not changed since the bundle was parsed.
+type Compiled = (scope: Scope | null) => Value;
+type Executed = (scope: Scope) => Completion;
+
+const compiledNodes = new WeakMap<object, Compiled>();
+const compiledStatements = new WeakMap<object, Executed>();
+
+function compileNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
+  if (node === null || typeof node !== "object") {
+    const literal = node as Value;
+    return () => literal;
+  }
+  const already = compiledNodes.get(node);
+  if (already !== undefined) {
+    return already;
+  }
+  const made = buildNode(bundle, node);
+  compiledNodes.set(node, made);
+  return made;
+}
+
+function compileStatement(bundle: Bundle, node: BundleStatementNode): Executed {
+  if (node === null || typeof node !== "object") {
+    return () => advanced;
+  }
+  const already = compiledStatements.get(node);
+  if (already !== undefined) {
+    return already;
+  }
+  const made = buildStatement(bundle, node);
+  compiledStatements.set(node, made);
+  return made;
+}
+
+function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
   if (!isNode(node)) {
     // Plain JSON in statement position is an expression evaluated for its
     // effect.
-    evaluateNode(bundle, node, scope);
-    return advanced;
+    const run = compileNode(bundle, node);
+    return (scope) => {
+      run(scope);
+      return advanced;
+    };
   }
   switch (node["#"]) {
     case NodeKind.Block: {
-      const frame = scopeOf(scope);
+      const statements = node[NodeField.statements] ?? [];
       // Declarations hoist to the block: a use before its declaration
-      // resolves to the local (with value `null`), never outward.
-      for (const statement of node[NodeField.statements] ?? []) {
-        if (
-          isNode(statement) &&
-          statement["#"] === NodeKind.VariableDeclaration
-        ) {
-          bind(frame, statement[NodeField.name], null);
-        }
-      }
-      for (const statement of node[NodeField.statements] ?? []) {
-        const completion = executeStatement(bundle, statement, frame);
-        // A jump of any kind leaves the block; what catches it is further out.
-        if (completion.kind !== "advanced") {
-          return completion;
-        }
-      }
-      return advanced;
-    }
-    case NodeKind.VariableDeclaration: {
-      bind(
-        scope,
-        node[NodeField.name],
-        evaluateNode(bundle, node[NodeField.initializer], scope),
+      // resolves to the local (with value `null`), never outward. Which names
+      // those are is a property of the block, so it is found once.
+      const declared = statements
+        .filter(
+          (statement) =>
+            isNode(statement) &&
+            statement["#"] === NodeKind.VariableDeclaration,
+        )
+        .map((statement) => (statement as { e: string })[NodeField.name]);
+      const body = statements.map((statement) =>
+        compileStatement(bundle, statement),
       );
-      return advanced;
-    }
-    case NodeKind.IfStatement: {
-      if (
-        condition(
-          evaluateNode(bundle, node[NodeField.expression], scope),
-          "an `if`",
-        )
-      ) {
-        return executeStatement(bundle, node[NodeField.thenStatement], scope);
-      }
-      if (node[NodeField.elseStatement] !== null) {
-        return executeStatement(bundle, node[NodeField.elseStatement], scope);
-      }
-      return advanced;
-    }
-    case NodeKind.WhileStatement: {
-      let turns = 0;
-      while (
-        condition(
-          evaluateNode(bundle, node[NodeField.expression], scope),
-          "a `while`",
-        )
-      ) {
-        const completion = executeStatement(
-          bundle,
-          node[NodeField.statement],
-          scope,
-        );
-        if (completion.kind === "returned") {
-          return completion;
+      return (scope) => {
+        const frame = scopeOf(scope);
+        for (const name of declared) {
+          bind(frame, name, null);
         }
-        if (completion.kind === "break") {
-          return advanced;
+        for (const run of body) {
+          const completion = run(frame);
+          // A jump of any kind leaves the block; what catches it is further out.
+          if (completion.kind !== "advanced") {
+            return completion;
+          }
         }
-        // `continue` arrives here too, having nothing left to skip.
-        guardTurns((turns += 1), "while");
-      }
-      return advanced;
-    }
-    case NodeKind.ForStatement: {
-      // The header binding lives in a scope of the loop's own, so it is gone
-      // once the loop is.
-      let frame = scopeOf(scope);
-      const init = node[NodeField.initializer];
-      if (init !== null) {
-        executeStatement(bundle, init, frame);
-      }
-      let turns = 0;
-      for (;;) {
-        const test = node[NodeField.condition];
-        if (
-          test !== null &&
-          !condition(evaluateNode(bundle, test, frame), "a `for`")
-        ) {
-          return advanced;
-        }
-        const completion = executeStatement(
-          bundle,
-          node[NodeField.statement],
-          frame,
-        );
-        if (completion.kind === "returned") {
-          return completion;
-        }
-        if (completion.kind === "break") {
-          return advanced;
-        }
-        // `continue` lands here, where falling off the end of the body lands:
-        // the update runs either way.
-        //
-        // Each turn gets its own copy of the header scope, taken before the
-        // update: an arrow built in one turn keeps that turn's values instead
-        // of the ones the loop stopped at.
-        frame = {
-          parent: scope,
-          names: frame.names.slice(),
-          values: frame.values.slice(),
-        };
-        const update = node[NodeField.incrementor];
-        if (update !== null) {
-          executeStatement(bundle, update, frame);
-        }
-        guardTurns((turns += 1), "for");
-      }
-    }
-    case NodeKind.BreakStatement: {
-      return broke;
-    }
-    case NodeKind.ContinueStatement: {
-      return continued;
-    }
-    case NodeKind.ReturnStatement: {
-      return {
-        kind: "returned",
-        value: evaluateNode(bundle, node[NodeField.expression], scope),
+        return advanced;
       };
     }
+    case NodeKind.VariableDeclaration: {
+      const name = node[NodeField.name];
+      const initializer = compileNode(bundle, node[NodeField.initializer]);
+      return (scope) => {
+        bind(scope, name, initializer(scope));
+        return advanced;
+      };
+    }
+    case NodeKind.IfStatement: {
+      const test = compileNode(bundle, node[NodeField.expression]);
+      const then = compileStatement(bundle, node[NodeField.thenStatement]);
+      const otherwise =
+        node[NodeField.elseStatement] === null
+          ? null
+          : compileStatement(bundle, node[NodeField.elseStatement]);
+      return (scope) => {
+        if (condition(test(scope), "an `if`")) {
+          return then(scope);
+        }
+        return otherwise === null ? advanced : otherwise(scope);
+      };
+    }
+    case NodeKind.WhileStatement: {
+      const test = compileNode(bundle, node[NodeField.expression]);
+      const body = compileStatement(bundle, node[NodeField.statement]);
+      return (scope) => {
+        let turns = 0;
+        while (condition(test(scope), "a `while`")) {
+          const completion = body(scope);
+          if (completion.kind === "returned") {
+            return completion;
+          }
+          if (completion.kind === "break") {
+            return advanced;
+          }
+          // `continue` arrives here too, having nothing left to skip.
+          guardTurns((turns += 1), "while");
+        }
+        return advanced;
+      };
+    }
+    case NodeKind.ForStatement: {
+      const init =
+        node[NodeField.initializer] === null
+          ? null
+          : compileStatement(bundle, node[NodeField.initializer]);
+      const test =
+        node[NodeField.condition] === null
+          ? null
+          : compileNode(bundle, node[NodeField.condition]);
+      const body = compileStatement(bundle, node[NodeField.statement]);
+      const update =
+        node[NodeField.incrementor] === null
+          ? null
+          : compileStatement(bundle, node[NodeField.incrementor]);
+      return (scope) => {
+        // The header binding lives in a scope of the loop's own, so it is gone
+        // once the loop is.
+        let frame = scopeOf(scope);
+        if (init !== null) {
+          init(frame);
+        }
+        let turns = 0;
+        for (;;) {
+          if (test !== null && !condition(test(frame), "a `for`")) {
+            return advanced;
+          }
+          const completion = body(frame);
+          if (completion.kind === "returned") {
+            return completion;
+          }
+          if (completion.kind === "break") {
+            return advanced;
+          }
+          // `continue` lands here, where falling off the end of the body lands:
+          // the update runs either way.
+          //
+          // Each turn gets its own copy of the header scope, taken before the
+          // update: an arrow built in one turn keeps that turn's values instead
+          // of the ones the loop stopped at.
+          frame = {
+            parent: scope,
+            names: frame.names.slice(),
+            values: frame.values.slice(),
+          };
+          if (update !== null) {
+            update(frame);
+          }
+          guardTurns((turns += 1), "for");
+        }
+      };
+    }
+    case NodeKind.BreakStatement: {
+      return () => broke;
+    }
+    case NodeKind.ContinueStatement: {
+      return () => continued;
+    }
+    case NodeKind.ReturnStatement: {
+      const value = compileNode(bundle, node[NodeField.expression]);
+      return (scope) => ({ kind: "returned", value: value(scope) });
+    }
     case NodeKind.ThrowStatement: {
-      throw evaluateNode(bundle, node[NodeField.expression], scope);
+      const thrown = compileNode(bundle, node[NodeField.expression]);
+      return (scope) => {
+        throw thrown(scope);
+      };
     }
     case NodeKind.TryStatement: {
-      try {
-        return executeStatement(bundle, node[NodeField.tryBlock], scope);
-      } catch (thrown) {
-        // The catch binding scopes over the clause's block only, like an arrow
-        // parameter over its body.
-        const clause = node[NodeField.catchClause];
-        const frame = scopeOf(scope);
-        const caught = clause[NodeField.variableDeclaration];
-        if (caught !== null) {
-          bind(frame, caught, thrown as Value);
+      const attempted = compileStatement(bundle, node[NodeField.tryBlock]);
+      const clause = node[NodeField.catchClause];
+      const caught = clause[NodeField.variableDeclaration];
+      const handler = compileStatement(bundle, clause[NodeField.block]);
+      return (scope) => {
+        try {
+          return attempted(scope);
+        } catch (thrown) {
+          // The catch binding scopes over the clause's block only, like an
+          // arrow parameter over its body.
+          const frame = scopeOf(scope);
+          if (caught !== null) {
+            bind(frame, caught, thrown as Value);
+          }
+          return handler(frame);
         }
-        return executeStatement(bundle, clause[NodeField.block], frame);
-      }
+      };
     }
     default: {
       // Every remaining kind is an expression, evaluated for its effect.
-      evaluateNode(bundle, node, scope);
-      return advanced;
+      const run = compileNode(bundle, node);
+      return (scope) => {
+        run(scope);
+        return advanced;
+      };
     }
   }
 }
@@ -928,32 +1008,44 @@ function evaluateNode(
   node: BundleExpressionNode,
   scope: Scope | null,
 ): Value {
+  return compileNode(bundle, node)(scope);
+}
+
+function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
   if (!isNode(node)) {
-    if (node === null || typeof node !== "object") {
-      return node;
-    }
     if (Array.isArray(node)) {
-      return node.map((element) => evaluateNode(bundle, element, scope));
+      const parts = node.map((element) => compileNode(bundle, element));
+      return (scope) => parts.map((part) => part(scope));
     }
-    const object: { [key: string]: Value } = {};
-    for (const [key, value] of Object.entries(node)) {
-      object[key] = evaluateNode(bundle, value as BundleExpressionNode, scope);
-    }
-    return object;
+    const data = node as { [key: string]: BundleExpressionNode };
+    const keys = Object.keys(data);
+    const parts = keys.map((key) => compileNode(bundle, data[key]));
+    return (scope) => {
+      const object: { [key: string]: Value } = {};
+      for (let at = 0; at < keys.length; at++) {
+        object[keys[at]] = parts[at](scope);
+      }
+      return object;
+    };
   }
   switch (node["#"]) {
     case NodeKind.Identifier: {
-      const frame = lookup(scope, node[NodeField.text]);
-      if (frame === null) {
-        throw new Error(`unknown identifier ${node[NodeField.text]}`);
-      }
-      return read(frame, node[NodeField.name]);
+      const name = node[NodeField.text];
+      return (scope) => {
+        const frame = lookup(scope, name);
+        if (frame === null) {
+          throw new Error(`unknown identifier ${name}`);
+        }
+        return read(frame, name);
+      };
     }
     case NodeKind.GetFunction: {
-      return getFunction(bundle, node[NodeField.label]);
+      const label = node[NodeField.label];
+      return () => getFunction(bundle, label);
     }
     case NodeKind.GetTree: {
-      return getTree(bundle, node[NodeField.label]);
+      const label = node[NodeField.label];
+      return () => getTree(bundle, label);
     }
     // A script instantiating a keyed entry. There is no enclosing instance to
     // persist a child against here — a script builds its rows fresh on each
@@ -961,109 +1053,117 @@ function evaluateNode(
     // to whoever renders them.
     case NodeKind.ApplyTree: {
       const label = node[NodeField.label];
-      const tree = bundle.trees[label];
-      if (tree === undefined) {
-        throw new Error(`unknown tree entry ${label}`);
-      }
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        evaluateNode(bundle, arg, scope),
+        compileNode(bundle, arg),
       );
       const applied = node[NodeField.key];
-      const key =
-        applied === undefined
-          ? null
-          : (evaluateNode(bundle, applied, scope) as string | number | null);
-      return instantiate(bundle, tree, args, key).content();
+      const key = applied === undefined ? null : compileNode(bundle, applied);
+      return (scope) => {
+        const tree = bundle.trees[label];
+        if (tree === undefined) {
+          throw new Error(`unknown tree entry ${label}`);
+        }
+        return instantiate(
+          bundle,
+          tree,
+          args.map((arg) => arg(scope)),
+          key === null ? null : (key(scope) as string | number | null),
+        ).content();
+      };
     }
     case NodeKind.CallExpression: {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
-      // The receiver evaluates before the arguments; an optional receiver
-      // (`a?.b(…)`) short-circuits a null object to null, arguments
-      // unevaluated.
+      // Which of the two this is, is a property of the callee, so it is
+      // decided here rather than on every call.
       const callee = node[NodeField.expression];
-      if (isNode(callee) && callee["#"] === NodeKind.PropertyAccessExpression) {
-        const object = evaluateNode(
-          bundle,
-          callee[NodeField.expression],
-          scope,
-        ) as {
-          [name: string]: Value;
-        };
-        if (callee[NodeField.questionDotToken] && object === null) {
-          return null;
-        }
-        const method = object[callee[NodeField.name]];
-        // An optional call (`a.b?.(…)`) short-circuits a null method the
-        // same way, arguments unevaluated.
-        if (node[NodeField.questionDotToken] && method === null) {
-          return null;
-        }
-        if (typeof method !== "function") {
-          throw new Error(`${callee[NodeField.name]} is not a function`);
-        }
-        const args = (node[NodeField.arguments] ?? []).map((arg) =>
-          evaluateNode(bundle, arg, scope),
-        );
-        return method.apply(object, args);
-      }
-      // The callee evaluates before the arguments; an optional call
-      // (`cb?.(…)`) short-circuits a null callee to null, arguments
-      // unevaluated.
-      const value = evaluateNode(bundle, callee, scope);
-      if (node[NodeField.questionDotToken] && value === null) {
-        return null;
-      }
-      if (typeof value !== "function") {
-        throw new Error("callee is not a function");
-      }
+      const optionalCall = node[NodeField.questionDotToken];
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        evaluateNode(bundle, arg, scope),
+        compileNode(bundle, arg),
       );
-      return value(...args);
+      if (isNode(callee) && callee["#"] === NodeKind.PropertyAccessExpression) {
+        const receiver = compileNode(bundle, callee[NodeField.expression]);
+        const member = callee[NodeField.name];
+        const optionalReceiver = callee[NodeField.questionDotToken];
+        return (scope) => {
+          // The receiver evaluates before the arguments; an optional receiver
+          // (`a?.b(…)`) short-circuits a null object to null, arguments
+          // unevaluated.
+          const object = receiver(scope) as { [name: string]: Value };
+          if (optionalReceiver && object === null) {
+            return null;
+          }
+          const method = object[member];
+          // An optional call (`a.b?.(…)`) short-circuits a null method the
+          // same way, arguments unevaluated.
+          if (optionalCall && method === null) {
+            return null;
+          }
+          if (typeof method !== "function") {
+            throw new Error(`${member} is not a function`);
+          }
+          return method.apply(
+            object,
+            args.map((arg) => arg(scope)),
+          );
+        };
+      }
+      const target = compileNode(bundle, callee);
+      return (scope) => {
+        // The callee evaluates before the arguments; an optional call
+        // (`cb?.(…)`) short-circuits a null callee to null, arguments
+        // unevaluated.
+        const value = target(scope);
+        if (optionalCall && value === null) {
+          return null;
+        }
+        if (typeof value !== "function") {
+          throw new Error("callee is not a function");
+        }
+        return value(...args.map((arg) => arg(scope)));
+      };
     }
     case NodeKind.PropertyAccessExpression: {
-      const object = evaluateNode(
-        bundle,
-        node[NodeField.expression],
-        scope,
-      ) as {
-        [name: string]: Value;
+      const target = compileNode(bundle, node[NodeField.expression]);
+      const member = node[NodeField.name];
+      const optional = node[NodeField.questionDotToken];
+      return (scope) => {
+        const object = target(scope) as { [name: string]: Value };
+        if (optional && object === null) {
+          return null;
+        }
+        // An absent member reads as null — the language's absent value;
+        // `undefined` never arises.
+        return object[member] ?? null;
       };
-      if (node[NodeField.questionDotToken] && object === null) {
-        return null;
-      }
-      // An absent member reads as null — the language's absent value;
-      // `undefined` never arises.
-      return object[node[NodeField.name]] ?? null;
     }
     case NodeKind.ElementAccessExpression: {
-      const target = evaluateNode(bundle, node[NodeField.expression], scope);
-      const key = evaluateNode(
-        bundle,
-        node[NodeField.argumentExpression],
-        scope,
-      );
-      if (Array.isArray(target)) {
-        // An array is reached by whole numbers in range; everything else about
-        // it — a fractional key, a string one, one past either end — is a place
-        // the array has nothing, which reads as null.
-        return typeof key === "number" &&
-          Number.isInteger(key) &&
-          key >= 0 &&
-          key < target.length
-          ? (target[key] ?? null)
-          : null;
-      }
-      // An object is reached by the names it holds itself: an inherited one
-      // (`toString`) is not a member of the value, so it reads as absent
-      // rather than handing back something from the host's prototypes.
-      if (target !== null && typeof target === "object") {
-        return typeof key === "string" &&
-          Object.prototype.hasOwnProperty.call(target, key)
-          ? ((target as { [name: string]: Value })[key] ?? null)
-          : null;
-      }
-      return null;
+      const target = compileNode(bundle, node[NodeField.expression]);
+      const argument = compileNode(bundle, node[NodeField.argumentExpression]);
+      return (scope) => {
+        const reached = target(scope);
+        const key = argument(scope);
+        if (Array.isArray(reached)) {
+          // An array is reached by whole numbers in range; everything else
+          // about it — a fractional key, a string one, one past either end —
+          // is a place the array has nothing, which reads as null.
+          return typeof key === "number" &&
+            Number.isInteger(key) &&
+            key >= 0 &&
+            key < reached.length
+            ? (reached[key] ?? null)
+            : null;
+        }
+        // An object is reached by the names it holds itself: an inherited one
+        // (`toString`) is not a member of the value, so it reads as absent
+        // rather than handing back something from the host's prototypes.
+        if (reached !== null && typeof reached === "object") {
+          return typeof key === "string" &&
+            Object.prototype.hasOwnProperty.call(reached, key)
+            ? ((reached as { [name: string]: Value })[key] ?? null)
+            : null;
+        }
+        return null;
+      };
     }
     case NodeKind.BinaryExpression: {
       if (isAssignment(node)) {
@@ -1071,60 +1171,72 @@ function evaluateNode(
         // TypeScript. The left is a name to bind, never a value to read, so it
         // is the one operand that isn't evaluated.
         const name = node[NodeField.left][NodeField.text];
-        const value = evaluateNode(bundle, node[NodeField.right], scope);
-        const frame = lookup(scope, name);
-        if (frame === null) {
-          throw new Error(`unknown assignment target ${name}`);
-        }
-        bind(frame, name, value);
-        // An assignment evaluates to the value assigned, as in JavaScript; in
-        // statement position nothing reads it.
-        return value;
+        const right = compileNode(bundle, node[NodeField.right]);
+        return (scope) => {
+          const value = right(scope);
+          const frame = lookup(scope, name);
+          if (frame === null) {
+            throw new Error(`unknown assignment target ${name}`);
+          }
+          bind(frame, name, value);
+          // An assignment evaluates to the value assigned, as in JavaScript; in
+          // statement position nothing reads it.
+          return value;
+        };
       }
-      return evaluateBinop(
-        bundle,
+      return compileBinop(
         node[NodeField.operatorToken],
-        node[NodeField.left],
-        node[NodeField.right],
-        scope,
+        compileNode(bundle, node[NodeField.left]),
+        compileNode(bundle, node[NodeField.right]),
       );
     }
     case NodeKind.PrefixUnaryExpression: {
-      const operand = evaluateNode(bundle, node[NodeField.operand], scope);
+      const operand = compileNode(bundle, node[NodeField.operand]);
       // A `!` operand is boolean, as a tested position always is, so this
       // negates rather than deciding what counts as true. A `-` operand is a
       // number, checked by the compiler as arithmetic everywhere else is.
-      return node[NodeField.operator] === "-"
-        ? -(operand as number)
-        : !condition(operand, "the operand of `!`");
+      if (node[NodeField.operator] === "-") {
+        return (scope) => -(operand(scope) as number);
+      }
+      return (scope) => !condition(operand(scope), "the operand of `!`");
     }
     case NodeKind.ConditionalExpression: {
+      const test = compileNode(bundle, node[NodeField.condition]);
+      const whenTrue = compileNode(bundle, node[NodeField.whenTrue]);
+      const whenFalse = compileNode(bundle, node[NodeField.whenFalse]);
       // Only the taken branch evaluates.
-      const taken = condition(
-        evaluateNode(bundle, node[NodeField.condition], scope),
-        "a ternary condition",
-      );
-      if (taken) {
-        return evaluateNode(bundle, node[NodeField.whenTrue], scope);
-      }
-      return evaluateNode(bundle, node[NodeField.whenFalse], scope);
+      return (scope) =>
+        condition(test(scope), "a ternary condition")
+          ? whenTrue(scope)
+          : whenFalse(scope);
     }
     case NodeKind.ArrowFunction: {
-      return (...args: Value[]) => {
-        const frame = scopeOf(scope);
-        // A missing argument binds as null — the language's absent value;
-        // `undefined` never arises (an omitted optional parameter reads
-        // as null).
-        (node[NodeField.parameters] ?? []).forEach((param, index) => {
-          bind(
-            frame,
-            param[NodeField.name],
-            index < args.length ? args[index] : null,
-          );
-        });
-        const body = node[NodeField.body];
-        if (isNode(body) && body["#"] === NodeKind.Block) {
-          const completion = executeStatement(bundle, body, frame);
+      const parameters = (node[NodeField.parameters] ?? []).map(
+        (param) => param[NodeField.name],
+      );
+      const body = node[NodeField.body];
+      const block =
+        isNode(body) && body["#"] === NodeKind.Block
+          ? compileStatement(bundle, body)
+          : null;
+      // A non-block body is an expression, implicitly returned.
+      const expression =
+        block === null
+          ? compileNode(bundle, body as BundleExpressionNode)
+          : null;
+      return (scope) =>
+        (...args: Value[]) => {
+          const frame = scopeOf(scope);
+          // A missing argument binds as null — the language's absent value;
+          // `undefined` never arises (an omitted optional parameter reads
+          // as null).
+          for (let at = 0; at < parameters.length; at++) {
+            bind(frame, parameters[at], at < args.length ? args[at] : null);
+          }
+          if (block === null) {
+            return (expression as Compiled)(frame);
+          }
+          const completion = block(frame);
           if (completion.kind === "break" || completion.kind === "continue") {
             // The compiler rejects a jump with no loop to catch it, so one
             // reaching here means the bundle was not written by it.
@@ -1133,10 +1245,7 @@ function evaluateNode(
             );
           }
           return completion.kind === "returned" ? completion.value : null;
-        }
-        // A non-block body is an expression, implicitly returned.
-        return evaluateNode(bundle, body as BundleExpressionNode, frame);
-      };
+        };
     }
   }
 }
@@ -1174,16 +1283,13 @@ function isAssignment(
   return node[NodeField.operatorToken] === "=";
 }
 
-function evaluateBinop(
-  bundle: Bundle,
+function compileBinop(
   // Every operator but `=`, which assigns rather than combining two values and
   // is answered where the node is read.
   operator: Exclude<BundleBinaryOperator, "=">,
-  leftNode: BundleExpressionNode,
-  rightNode: BundleExpressionNode,
-  scope: Scope | null,
-): Value {
-  const left = evaluateNode(bundle, leftNode, scope);
+  left: Compiled,
+  right: Compiled,
+): Compiled {
   // The logical operators evaluate their right operand lazily, and both
   // operands are boolean — so `&&` and `||` yield one. Checking only the left
   // would still branch correctly and then return whatever the right side was,
@@ -1192,71 +1298,65 @@ function evaluateBinop(
   // `??` is the exception at both ends: it asks whether a value is absent, not
   // whether it is false, so either side may be any value.
   switch (operator) {
-    case "&&": {
-      if (!condition(left, "the left operand of `&&`")) {
-        return false;
-      }
-      const right = evaluateNode(bundle, rightNode, scope);
-      return condition(right, "the right operand of `&&`");
-    }
-    case "||": {
-      if (condition(left, "the left operand of `||`")) {
-        return true;
-      }
-      const right = evaluateNode(bundle, rightNode, scope);
-      return condition(right, "the right operand of `||`");
-    }
-    case "??": {
-      if (left !== null) {
-        return left;
-      }
-      return evaluateNode(bundle, rightNode, scope);
-    }
-    default:
-      break;
-  }
-  const right = evaluateNode(bundle, rightNode, scope);
-  switch (operator) {
-    case "+": {
+    case "&&":
+      return (scope) =>
+        condition(left(scope), "the left operand of `&&`")
+          ? condition(right(scope), "the right operand of `&&`")
+          : false;
+    case "||":
+      return (scope) =>
+        condition(left(scope), "the left operand of `||`")
+          ? true
+          : condition(right(scope), "the right operand of `||`");
+    case "??":
+      return (scope) => {
+        const value = left(scope);
+        return value !== null ? value : right(scope);
+      };
+    case "+":
       // Two numbers add; a string on either side concatenates. Written out
       // because the cast the other arithmetic uses would be a lie here: it
       // erases, and JavaScript's `+` then does whichever the operands imply.
       // A client not written in JavaScript has to make the same choice, so the
       // choice belongs in the open.
-      if (typeof left === "number" && typeof right === "number") {
-        return left + right;
-      }
-      if (typeof left === "string" || typeof right === "string") {
-        return `${left as string | number}${right as string | number}`;
-      }
-      throw new Error(
-        "`+` adds two numbers or concatenates with a string; this bundle " +
-          `produced ${typeof left} + ${typeof right}.`,
-      );
-    }
+      return (scope) => {
+        const a = left(scope);
+        const b = right(scope);
+        if (typeof a === "number" && typeof b === "number") {
+          return a + b;
+        }
+        if (typeof a === "string" || typeof b === "string") {
+          return `${a as string | number}${b as string | number}`;
+        }
+        throw new Error(
+          "`+` adds two numbers or concatenates with a string; this bundle " +
+            `produced ${typeof a} + ${typeof b}.`,
+        );
+      };
     case "-":
-      return (left as number) - (right as number);
+      return (scope) => (left(scope) as number) - (right(scope) as number);
     case "*":
-      return (left as number) * (right as number);
+      return (scope) => (left(scope) as number) * (right(scope) as number);
     case "/":
-      return (left as number) / (right as number);
+      return (scope) => (left(scope) as number) / (right(scope) as number);
     case "%":
-      return (left as number) % (right as number);
+      return (scope) => (left(scope) as number) % (right(scope) as number);
     case "===":
-      return left === right;
+      return (scope) => left(scope) === right(scope);
     case "!==":
-      return left !== right;
+      return (scope) => left(scope) !== right(scope);
     case "<":
-      return (left as number) < (right as number);
+      return (scope) => (left(scope) as number) < (right(scope) as number);
     case "<=":
-      return (left as number) <= (right as number);
+      return (scope) => (left(scope) as number) <= (right(scope) as number);
     case ">":
-      return (left as number) > (right as number);
+      return (scope) => (left(scope) as number) > (right(scope) as number);
     case ">=":
-      return (left as number) >= (right as number);
+      return (scope) => (left(scope) as number) >= (right(scope) as number);
   }
   // No `default`: the switch covers `BundleBinaryOperator`, so adding an
   // operator to the format is a compile error here rather than a throw at
   // evaluation.
   operator satisfies never;
+  throw new Error(`unknown operator ${operator as string}`);
 }
