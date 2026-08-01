@@ -404,7 +404,10 @@ function adopt(node: Node, want: Wanted, proto: Prototype): boolean {
     if (text !== (kid.nodeType === 3)) {
       return false;
     }
-    if (!text && (kid as globalThis.Element).tagName.toLowerCase() !== child.source.id) {
+    if (
+      !text &&
+      (kid as globalThis.Element).tagName.toLowerCase() !== child.source.id
+    ) {
       return false;
     }
   }
@@ -421,7 +424,12 @@ function adopt(node: Node, want: Wanted, proto: Prototype): boolean {
   drewAs(want.source, node);
   // Against what the copy already carries: its attributes came with it, and a
   // listener never does — cloning carries attributes, not registrations.
-  applyProps(node as globalThis.Element, record, want.source.props, proto.props);
+  applyProps(
+    node as globalThis.Element,
+    record,
+    want.source.props,
+    proto.props,
+  );
 
   for (let at = 0; at < wants.length; at++) {
     if (

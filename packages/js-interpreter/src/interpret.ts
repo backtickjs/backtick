@@ -514,7 +514,9 @@ function evaluateElement(
   // holding it sees the new values and nothing has to be told that the one it
   // holds was swapped for another.
   const again = reuse !== null && reuse.shape === element;
-  const built = again ? reuse : new Element(element[NodeField.id], key, props, element);
+  const built = again
+    ? reuse
+    : new Element(element[NodeField.id], key, props, element);
   built.key = key;
   for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
     // Children are structure, not an attribute. A cell read while working out
