@@ -49,6 +49,13 @@
       "keyed": true,
       "dir": "4c38bcc",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "f496572",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "f496572",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

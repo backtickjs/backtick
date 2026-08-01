@@ -123,6 +123,22 @@ interface Instance {
   // which of its cells were read somewhere a prop update can't answer for.
   readonly watchers: Map<string, Set<PropBinding>>;
   readonly structural: Set<string>;
+  // The closures this instance's calls produced, per call node and per how many
+  // times that node was reached — a call inside a loop makes one per row. A
+  // call reached again with the same arguments hands back the same function,
+  // because a closure over the same values behaves the same way and being a
+  // different object is the only thing that would say otherwise.
+  readonly closures: Map<BundleApply, { args: Value[]; value: Value }[]>;
+  readonly calls: Map<BundleApply, number>;
+  // The handle each of this instance's cells is read through. One per cell for
+  // the life of the instance: a handle is a view onto storage and holds nothing
+  // of its own, so making a new one per read would only make two views of the
+  // same cell look like different values to anything comparing them.
+  readonly handles: Map<string, Value>;
+  // The bindings this instance's own render built. Dropped and rebuilt when it
+  // renders again — but only then, so a child that had nothing to redraw keeps
+  // watching the cells its props read.
+  made: PropBinding[];
   // Which of its siblings this one is, as the node that applied it said. Held
   // here rather than read off the element, because the element is the content's
   // and the content doesn't know it was keyed — a re-render would otherwise put
@@ -147,6 +163,10 @@ function instantiate(
     notify: notifying,
     watchers: new Map(),
     structural: new Set(),
+    closures: new Map(),
+    calls: new Map(),
+    handles: new Map(),
+    made: [],
     key,
     element: null,
   };
@@ -174,8 +194,14 @@ function render(instance: Instance): Element | null {
   instance.visits.clear();
   // The bindings this render is about to build replace the ones it built last
   // time, so what watches a cell is emptied and filled again rather than grown.
-  instance.watchers.clear();
-  instance.structural.clear();
+  // What this render replaces stops watching anything. Only its own bindings:
+  // a child instance that isn't re-rendered keeps drawing what it drew, and
+  // must keep hearing about the cells that would change it.
+  for (const binding of instance.made) {
+    binding.forget();
+  }
+  instance.made = [];
+  instance.calls.clear();
   rendering++;
   const outer = building;
   building = [];
@@ -195,6 +221,7 @@ function render(instance: Instance): Element | null {
   rendering--;
   const made = building ?? [];
   building = outer;
+  instance.made = made;
   // The applied key wins over whatever the content named itself: the content is
   // one element among an instance's own, and the key is about the instance.
   if (rendered !== null && instance.key !== null) {
@@ -218,6 +245,16 @@ function render(instance: Instance): Element | null {
   return existing;
 }
 
+// Whether two argument lists are the same values in the same order. Identity
+// rather than equality: two objects that look alike are still two objects, and
+// telling them apart is the caller's business, not this.
+function same(a: Value[], b: Value[]): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+  return a.every((value, at) => value === b[at]);
+}
+
 // A cell's handle, as a script reads it: an ordinary object of functions, so it
 // is a `Value` like anything else the interpreter hands a script. `read`
 // observes the instance's current storage; `write` replaces it and re-renders —
@@ -228,6 +265,10 @@ function render(instance: Instance): Element | null {
 // language has, and a function that returned one couldn't be passed where a
 // value is expected — which a handle's members are.
 function cellHandle(instance: Instance, name: string): Value {
+  const held = instance.handles.get(name);
+  if (held !== undefined) {
+    return held;
+  }
   const storage = (): Map<string, Value> => {
     if (!instance.cells.has(name)) {
       throw new Error(`unknown state cell ${name}`);
@@ -243,8 +284,12 @@ function cellHandle(instance: Instance, name: string): Value {
         instance.watchers.set(name, watching);
       }
       watching.add(computing);
-      computing.watched = true;
+      computing.watches(instance, name);
     } else if (rendering > 0) {
+      // Never taken back: a cell that decided a shape once is treated as one
+      // that could again, because a render that skipped a child never saw what
+      // that child would have read. Erring towards re-rendering is the safe
+      // direction — the other way silently stops drawing.
       instance.structural.add(name);
     }
     return storage().get(name) ?? null;
@@ -271,11 +316,13 @@ function cellHandle(instance: Instance, name: string): Value {
   const update = (updater: (current: Value) => Value): Value => {
     return write(updater(storage().get(name) ?? null));
   };
-  return {
+  const handle = {
     read,
     write,
     update: update as Value,
   };
+  instance.handles.set(name, handle);
+  return handle;
 }
 
 // One frame per arrow application or block. Names are pre-resolved by the
@@ -378,12 +425,27 @@ class PropBinding {
   element: Element;
   private readonly compute: () => Value;
   private readonly notify: ((change: Change) => void) | null;
+  // Where this is registered, so it can take itself back out again.
+  private readonly watching: { cells: Instance; name: string }[] = [];
 
   constructor(prop: string, element: Element, compute: () => Value) {
     this.prop = prop;
     this.element = element;
     this.compute = compute;
     this.notify = notifying;
+  }
+
+  // Registered against a cell, and able to say where.
+  watches(cells: Instance, name: string): void {
+    this.watching.push({ cells, name });
+    this.watched = true;
+  }
+
+  forget(): void {
+    for (const { cells, name } of this.watching) {
+      cells.watchers.get(name)?.delete(this);
+    }
+    this.watching.length = 0;
   }
 
   // Recomputes, and says so only where the value is actually different: a write
@@ -517,7 +579,26 @@ function evaluateExpr(
         const args = (form[NodeField.arguments] ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
-        return getFunction(bundle, form[NodeField.label])(...args);
+        const value = getFunction(bundle, form[NodeField.label])(...args);
+        // Only a closure is held on to. A call that computed anything else may
+        // read a cell or an instance's storage, and answering it from last time
+        // would be answering a question that wasn't asked.
+        if (instance === null || typeof value !== "function") {
+          return value;
+        }
+        const seen = instance.calls.get(form) ?? 0;
+        instance.calls.set(form, seen + 1);
+        let made = instance.closures.get(form);
+        if (made === undefined) {
+          made = [];
+          instance.closures.set(form, made);
+        }
+        const previous = made[seen];
+        if (previous !== undefined && same(previous.args, args)) {
+          return previous.value;
+        }
+        made[seen] = { args, value };
+        return value;
       }
       case NodeKind.ApplyTree: {
         const label = form[NodeField.label];
@@ -559,8 +640,14 @@ function evaluateExpr(
         }
         const child = siblings[seen];
         if (child !== undefined) {
-          child.slots = args;
           child.key = key;
+          // Nothing it was given is different, so nothing it draws can be:
+          // the element it drew last time is still what it draws, down to the
+          // objects, which is what lets a host recognise it and stop there.
+          if (child.element !== null && same(child.slots, args)) {
+            return child.element;
+          }
+          child.slots = args;
           return render(child);
         }
         const created = instantiate(bundle, tree, args, key);

@@ -29,6 +29,11 @@ const handled = new Set(["children"]);
 // or a test could reach it. The props are the ones this rendered, which is what
 // says whether an attribute has to be touched at all.
 interface Rendered {
+  // What this node was drawn from last time. An instance that had nothing new
+  // to say hands back the element it handed back before, down to the objects —
+  // so finding the same one here means this whole subtree is already right.
+  source: Element | null;
+  drew: { readonly [prop: string]: unknown } | null;
   readonly id: string;
   readonly key: string | number | null;
   props: { readonly [prop: string]: unknown };
@@ -267,6 +272,8 @@ function build(want: Wanted): Node {
   if (want.kind === "text") {
     const node = document.createTextNode(want.value);
     rendered.set(node, {
+      source: null,
+      drew: null,
       id: TEXT_ID,
       key: null,
       props: {},
@@ -276,6 +283,8 @@ function build(want: Wanted): Node {
   }
   const node = document.createElement(tagFor(want.source.id));
   rendered.set(node, {
+    source: null,
+    drew: null,
     id: want.source.id,
     key: want.source.key,
     props: {},
@@ -294,6 +303,11 @@ function update(node: Node, want: Wanted): void {
     if (node.nodeValue !== want.value) {
       node.nodeValue = want.value;
     }
+    return;
+  }
+  // Same element, same props: this node and everything under it is already
+  // what it should be, and walking it would only confirm that.
+  if (was.source === want.source && was.drew === want.source.props) {
     return;
   }
   const element = node as globalThis.Element;
@@ -338,8 +352,15 @@ function update(node: Node, want: Wanted): void {
   }
 
   drawn.set(want.source, node);
+  const children = was.props["children"];
   was.props = props;
-  patch(element, wanted(props.children));
+  was.source = want.source;
+  was.drew = props;
+  // Children the instance handed back unchanged are the same value, and the
+  // nodes drawn from them are already there.
+  if (children !== props["children"]) {
+    patch(element, wanted(props.children));
+  }
 }
 
 function attribute(
