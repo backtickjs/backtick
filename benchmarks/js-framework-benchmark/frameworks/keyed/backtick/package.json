@@ -9,6 +9,8 @@
     "language": "TypeScript"
   },
   "scripts": {
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
     "build": "node build.mjs",
     "build-prod": "node build.mjs",
     "typecheck": "backtick-tsc --noEmit",
@@ -28,6 +30,7 @@
     "@backtickjs/web-sdk": "^0.1.0"
   },
   "devDependencies": {
+    "@backtickjs/prettier-plugin": "^0.1.0",
     "@backtickjs/tsc": "^0.1.0",
     "esbuild": "0.28.0",
     "ts-patch": "^4.0.1",

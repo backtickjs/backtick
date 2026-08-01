@@ -35,6 +35,9 @@ importers:
         specifier: ^0.1.0
         version: link:../../../../../packages/web-sdk
     devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../../../../packages/prettier-plugin
       '@backtickjs/tsc':
         specifier: ^0.1.0
         version: link:../../../../../packages/language-tools/tsc

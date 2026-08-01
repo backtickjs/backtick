@@ -81,23 +81,21 @@ export function iife(
   );
 }
 
-/** <const|let|var> <name> = <initializer> — the list, without the semicolon a
- * statement would add, so it also fits a `for` header. */
+/** <const|let|var> <name>[: <type>] = <initializer> — the list, without the
+ * semicolon a statement would add, so it also fits a `for` header.
+ *
+ * The annotation is carried because it is the only way to say what an empty
+ * collection holds: `let rows: Row[] = []` reads as `never[]` without it, and
+ * nothing can be put in it afterwards. */
 export function varDeclList(
   ts: typeof import("typescript"),
   flags: ts.NodeFlags,
   name: string | ts.BindingName,
   initializer: ts.Expression,
+  type?: ts.TypeNode,
 ): ts.VariableDeclarationList {
   return ts.factory.createVariableDeclarationList(
-    [
-      ts.factory.createVariableDeclaration(
-        name,
-        undefined,
-        undefined,
-        initializer,
-      ),
-    ],
+    [ts.factory.createVariableDeclaration(name, undefined, type, initializer)],
     flags,
   );
 }

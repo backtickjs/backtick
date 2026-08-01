@@ -353,6 +353,10 @@ function rewriteNodeImpl(
           // `void`. The check mirrors the keyword: `cs.const` reads the
           // exact type, `cs.let` widens, as unwrapped they would.
           call(ts, "cs", keyword, [initializer.virtual as ts.Expression]),
+          // What the script said it was. Written by hand or not at all: a
+          // script is checked as the code it looks like, and dropping this
+          // would leave `let rows: Row[] = []` holding nothing it can hold.
+          declaration.type,
         ),
         runtime: astNode(ts, SyntaxKind.VariableDeclarationList, {
           loc: loc(node),
