@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "rootDir": "src",
+    "outDir": "lib",
+    "sourceMap": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/web-sdk",
+    "plugins": [
+      { "transform": "@backtickjs/tspatch-plugin" }
+    ]
+  },
+  "include": ["src"],
+  "exclude": ["src/main.ts"]
+}

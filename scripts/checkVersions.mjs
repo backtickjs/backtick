@@ -25,8 +25,28 @@ const released = [
   ...manifests("packages/language-tools"),
 ];
 // examples and benchmarks model a real consumer install, so their ranges are
-// checked but their own versions are not part of the release set
-const consumers = [...manifests("examples"), ...manifests("benchmarks")];
+// checked but their own versions are not part of the release set.
+//
+// Found by looking rather than by naming a depth: a benchmark implementation
+// sits several levels inside the layout its driver expects, and a guard that
+// knows where consumers live is a guard that stops covering the next one.
+function consumers(dir) {
+  const base = join(root, dir);
+  if (!existsSync(base)) return [];
+  const found = [];
+  for (const entry of readdirSync(base, { withFileTypes: true })) {
+    if (entry.name === "node_modules") continue;
+    if (entry.isDirectory()) {
+      found.push(...consumers(join(dir, entry.name)));
+    } else if (entry.name === "package.json") {
+      const file = join(base, entry.name);
+      found.push({ file, json: JSON.parse(readFileSync(file, "utf8")) });
+    }
+  }
+  return found;
+}
+
+const consuming = [...consumers("examples"), ...consumers("benchmarks")];
 
 const errors = [];
 
@@ -56,7 +76,7 @@ const dependencyFields = [
   "optionalDependencies",
 ];
 
-for (const { file, json } of [...released, ...consumers]) {
+for (const { file, json } of [...released, ...consuming]) {
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
       if (!name.startsWith("@backtickjs/")) continue;

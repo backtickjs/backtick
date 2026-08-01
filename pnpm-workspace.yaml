@@ -2,6 +2,7 @@ packages:
   - "packages/**/*"
   - "examples/*"
   - "benchmarks/*"
+  - "benchmarks/js-framework-benchmark/frameworks/keyed/backtick"
 
 linkWorkspacePackages: true
 preferWorkspacePackages: true

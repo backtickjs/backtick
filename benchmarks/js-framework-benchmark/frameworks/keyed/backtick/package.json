@@ -1,0 +1,36 @@
+{
+  "name": "js-framework-benchmark-backtick",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Boilerplate for Backtick",
+  "js-framework-benchmark": {
+    "frameworkVersion": "0.1.0",
+    "frameworkHomeURL": "https://backtickjs.com/",
+    "language": "TypeScript"
+  },
+  "scripts": {
+    "build": "node build.mjs",
+    "build-prod": "node build.mjs",
+    "typecheck": "backtick-tsc --noEmit",
+    "clean": "rm -rf node_modules dist lib"
+  },
+  "keywords": [
+    "backtick"
+  ],
+  "homepage": "https://github.com/trybacktick/backtick",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trybacktick/backtick.git"
+  },
+  "dependencies": {
+    "@backtickjs/core": "^0.1.0",
+    "@backtickjs/tspatch-plugin": "^0.1.0",
+    "@backtickjs/web-sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@backtickjs/tsc": "^0.1.0",
+    "esbuild": "0.28.0",
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  }
+}
