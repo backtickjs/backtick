@@ -34,7 +34,9 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
-    "@backtickjs/js-interpreter": "workspace:*"
+    "@backtickjs/js-interpreter": "workspace:*",
+    "snabbdom": "^3.6.4",
+    "solid-js": "^1.9.14"
   },
   "peerDependencies": {
     "@backtickjs/core": "workspace:*"

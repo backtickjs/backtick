@@ -113,6 +113,14 @@
       "keyed": true,
       "dir": "snabbdom-spike",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "solid",
+      "label": "spike",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "solid-signals",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

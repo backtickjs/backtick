@@ -22,6 +22,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "@backtickjs/core";
+import { createRoot, createSignal } from "solid-js";
 import { Element } from "./Element.js";
 import type { Value } from "./Value.js";
 
@@ -134,7 +135,12 @@ interface Instance {
   readonly bundle: Bundle;
   readonly tree: BundleTree;
   slots: Value[];
-  readonly cells: Map<string, Value>;
+  // A cell is a signal, so its storage and who hears about a write are the
+  // graph's business rather than ours.
+  readonly cells: Map<string, [() => Value, (value: Value) => void]>;
+  // Everything created under this instance dies when this is called: the
+  // instance is the owner, and dropping one drops what it made.
+  dispose: () => void;
   // Nested instances, per `apply` node. A keyed apply finds its instance by the
   // key it was given, which is the whole point of a key: a row deleted from the
   // middle leaves every other row with the instance it already had. An unkeyed
@@ -189,6 +195,7 @@ function instantiate(
     tree,
     slots,
     cells: new Map(),
+    dispose: () => {},
     children: new Map(),
     visits: new Map(),
     notify: notifying,
@@ -202,13 +209,21 @@ function instantiate(
     key,
     element: null,
   };
-  // A cell's initial is evaluated in no instance: it can't read a slot or
-  // another cell, so nothing is in scope for it.
-  for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
-    instance.cells.set(name, evaluateExpr(bundle, initial, []));
-    instance.handles.set(name, cellHandle(instance, name));
-  }
-  render(instance);
+  // Owned: the cells and everything they feed belong to this instance, and
+  // dropping it drops them without anything having to be unregistered.
+  createRoot((dispose) => {
+    instance.dispose = dispose;
+    // A cell's initial is evaluated in no instance: it can't read a slot or
+    // another cell, so nothing is in scope for it.
+    for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
+      instance.cells.set(
+        name,
+        createSignal<Value>(evaluateExpr(bundle, initial, [])),
+      );
+      instance.handles.set(name, cellHandle(instance, name));
+    }
+    render(instance);
+  });
   return instance;
 }
 
@@ -260,7 +275,8 @@ function render(instance: Instance): Element | null {
   for (const [node, group] of instance.children) {
     if (!instance.visits.has(node)) {
       instance.children.delete(node);
-      void group;
+      for (const child of group.claimed.values()) child.dispose();
+      for (const child of group.left.values()) child.dispose();
     }
   }
   // The applied key wins over whatever the content named itself: the content is
@@ -292,11 +308,12 @@ function same(a: Value[], b: Value[]): boolean {
 // language has, and a function that returned one couldn't be passed where a
 // value is expected — which a handle's members are.
 function cellHandle(instance: Instance, name: string): Value {
-  const storage = (): Map<string, Value> => {
-    if (!instance.cells.has(name)) {
+  const cell = (): [() => Value, (value: Value) => void] => {
+    const held = instance.cells.get(name);
+    if (held === undefined) {
       throw new Error(`unknown state cell ${name}`);
     }
-    return instance.cells;
+    return held;
   };
   const read = () => {
     // Recorded against whoever is rendering, wherever the cell lives: a child
@@ -324,10 +341,10 @@ function cellHandle(instance: Instance, name: string): Value {
       // direction — the other way silently stops drawing.
       instance.structural.add(name);
     }
-    return storage().get(name) ?? null;
+    return cell()[0]() ?? null;
   };
   const write = (value: Value): Value => {
-    storage().set(name, value);
+    cell()[1](() => value);
     const watching = instance.watchers.get(name);
     // Where every read of this cell was a prop, the props are recomputed and
     // whoever holds them is told — nothing is re-rendered and nothing is
@@ -352,7 +369,7 @@ function cellHandle(instance: Instance, name: string): Value {
     return null;
   };
   const update = (updater: (current: Value) => Value): Value => {
-    return write(updater(storage().get(name) ?? null));
+    return write(updater(cell()[0]() ?? null));
   };
   return {
     read,
