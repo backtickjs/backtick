@@ -538,7 +538,7 @@ function evaluateElement(
           | number
           | null);
   const props: { [prop: string]: Value } = {};
-  const built = new Element(element[NodeField.id], key, props);
+  const built = new Element(element[NodeField.id], key, props, element);
   for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
     // Children are structure, not an attribute. A cell read while working out
     // what an element contains decides which elements exist, and no amount of

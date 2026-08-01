@@ -18,15 +18,26 @@ export class Element {
   readonly id: string;
   key: string | number | null;
   props: { [prop: string]: Value };
+  // Which part of the bundle this was evaluated from. Two elements from the
+  // same one have the same shape — the same tags nested the same way — because
+  // that is what a tree entry is, and a host that notices can build the second
+  // one from a copy of the first instead of from nothing.
+  //
+  // A hint, not a contract: it is the same object every time only because the
+  // bundle is read once, and a host that ignores it draws exactly what a host
+  // that reads it draws.
+  shape: object | null;
 
   constructor(
     id: string,
     key: string | number | null,
     props: { [prop: string]: Value },
+    shape: object | null = null,
   ) {
     this.id = id;
     this.key = key;
     this.props = props;
+    this.shape = shape;
   }
 }
 

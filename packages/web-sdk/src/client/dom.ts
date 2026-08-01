@@ -287,6 +287,22 @@ function keepable(from: number[]): number[] {
 const identity = (id: string, key: string | number): string =>
   `${id}:${JSON.stringify(key)}`;
 
+// What the first element of a shape came out as: a pristine copy of the node,
+// and the values already in it. A thousand rows are a thousand copies of the
+// same eight tags, and copying one is a single call where building it is ten —
+// so the second row onwards is cloned, and only the values that differ from the
+// first row's are written.
+interface Prototype {
+  readonly node: Node;
+  readonly props: { readonly [prop: string]: unknown };
+  readonly children: Prototype[];
+  readonly text: string | null;
+}
+
+// Keyed by the part of the bundle an element was evaluated from, which is the
+// same object for every element of the same shape.
+const prototypes = new Map<object, Prototype>();
+
 function build(want: Wanted): Node {
   if (want.kind === "text") {
     const node = document.createTextNode(want.value);
@@ -300,6 +316,17 @@ function build(want: Wanted): Node {
     });
     return node;
   }
+  const shape = want.source.shape;
+  const known = shape === null ? undefined : prototypes.get(shape);
+  if (known !== undefined) {
+    const copy = known.node.cloneNode(true);
+    // A shape is a hint. Where this element turns out not to have the shape the
+    // first one had — a branch that went the other way, a list of a different
+    // length — the copy is abandoned and it is built from nothing.
+    if (adopt(copy, want, known)) {
+      return copy;
+    }
+  }
   const node = document.createElement(tagFor(want.source.id));
   remember(node, {
     source: null,
@@ -310,7 +337,125 @@ function build(want: Wanted): Node {
     listeners: null,
   });
   update(node, want);
+  if (shape !== null && known === undefined) {
+    const taken = snapshot(node, want);
+    if (taken !== null) {
+      prototypes.set(shape, taken);
+    }
+  }
   return node;
+}
+
+// Takes the copy, before anything can change the node it was taken from.
+function snapshot(node: Node, want: Wanted): Prototype | null {
+  if (want.kind === "text") {
+    return { node, props: {}, children: [], text: want.value };
+  }
+  const children: Prototype[] = [];
+  const wants = wanted(want.source.props.children);
+  const kids = node.childNodes;
+  if (kids.length !== wants.length) {
+    return null;
+  }
+  for (let at = 0; at < wants.length; at++) {
+    const taken = snapshot(kids[at] as Node, wants[at] as Wanted);
+    if (taken === null) {
+      return null;
+    }
+    children.push(taken);
+  }
+  return {
+    node: node.cloneNode(true),
+    props: { ...want.source.props },
+    children,
+    text: null,
+  };
+}
+
+// Makes a copy this renderer's own: records for every node in it, and the
+// values that differ from the ones the copy was taken with. Answers whether the
+// copy fits at all.
+function adopt(node: Node, want: Wanted, proto: Prototype): boolean {
+  if (want.kind === "text") {
+    remember(node, {
+      source: null,
+      drew: null,
+      id: TEXT_ID,
+      key: null,
+      props: {},
+      listeners: null,
+    });
+    if (want.value !== proto.text) {
+      node.nodeValue = want.value;
+    }
+    return true;
+  }
+  const wants = wanted(want.source.props.children);
+  const kids = node.childNodes;
+  if (kids.length !== wants.length || wants.length !== proto.children.length) {
+    return false;
+  }
+  for (let at = 0; at < wants.length; at++) {
+    const child = wants[at] as Wanted;
+    const kid = kids[at] as Node;
+    const text = child.kind === "text";
+    if (text !== (kid.nodeType === 3)) {
+      return false;
+    }
+    if (!text && (kid as globalThis.Element).tagName.toLowerCase() !== child.source.id) {
+      return false;
+    }
+  }
+
+  const record: Rendered = {
+    source: want.source,
+    drew: want.source.props,
+    id: want.source.id,
+    key: want.source.key,
+    props: want.source.props,
+    listeners: null,
+  };
+  remember(node, record);
+  drewAs(want.source, node);
+  const element = node as globalThis.Element;
+  for (const prop in want.source.props) {
+    if (handled.has(prop)) {
+      continue;
+    }
+    const value = want.source.props[prop];
+    // A listener is never in a copy — cloning carries attributes, not
+    // registrations — so every element registers its own.
+    if (typeof value === "function") {
+      if (prop.startsWith("on")) {
+        const event = prop.slice(2);
+        const listeners = (record.listeners ??= new Map());
+        element.addEventListener(event, () => listeners.get(event)?.());
+        listeners.set(event, value as () => void);
+      }
+      continue;
+    }
+    if (typeof value === "object" && value !== null) {
+      continue;
+    }
+    // Already in the copy, because the element it was copied from had it.
+    if (value === proto.props[prop]) {
+      continue;
+    }
+    attribute(element, prop, value);
+  }
+
+  for (let at = 0; at < wants.length; at++) {
+    if (
+      !adopt(
+        kids[at] as Node,
+        wants[at] as Wanted,
+        proto.children[at] as Prototype,
+      )
+    ) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function update(node: Node, want: Wanted): void {
