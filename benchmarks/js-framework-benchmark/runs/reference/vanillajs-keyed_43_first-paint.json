@@ -1,1 +1,16 @@
-{"framework":"vanillajs-keyed","keyed":true,"benchmark":"43_first-paint","type":"size","values":{"DEFAULT":{"min":80.7,"max":80.7,"median":80.7,"mean":80.7,"stddev":null,"values":[80.7]}}}
+{
+  "framework": "vanillajs-keyed",
+  "keyed": true,
+  "benchmark": "43_first-paint",
+  "type": "size",
+  "values": {
+    "DEFAULT": {
+      "min": 80.7,
+      "max": 80.7,
+      "median": 80.7,
+      "mean": 80.7,
+      "stddev": null,
+      "values": [80.7]
+    }
+  }
+}

@@ -142,7 +142,9 @@ function table(group) {
       continue;
     }
     const best = Math.min(...values);
-    values.forEach((value, at) => factors[at].push(best === 0 ? 1 : value / best));
+    values.forEach((value, at) =>
+      factors[at].push(best === 0 ? 1 : value / best),
+    );
   }
   const means = factors.map((each) =>
     each.length === 0
