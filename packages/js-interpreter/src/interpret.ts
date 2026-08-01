@@ -136,10 +136,11 @@ interface Instance {
   // different object is the only thing that would say otherwise.
   readonly closures: Map<BundleApply, { args: Value[]; value: Value }[]>;
   readonly calls: Map<BundleApply, number>;
-  // The handle each of this instance's cells is read through. One per cell for
-  // the life of the instance: a handle is a view onto storage and holds nothing
-  // of its own, so making a new one per read would only make two views of the
-  // same cell look like different values to anything comparing them.
+  // The handle each of this instance's cells is read through, made with the
+  // instance because the cells a tree declares are known before it runs. One
+  // per cell for its life: a handle is a view onto storage and holds nothing of
+  // its own, so a second view of the same cell would only look like a different
+  // value to anything comparing them.
   readonly handles: Map<string, Value>;
   // The bindings this instance's own render built. Dropped and rebuilt when it
   // renders again — but only then, so a child that had nothing to redraw keeps
@@ -180,6 +181,7 @@ function instantiate(
   // another cell, so nothing is in scope for it.
   for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
     instance.cells.set(name, evaluateExpr(bundle, initial, []));
+    instance.handles.set(name, cellHandle(instance, name));
   }
   render(instance);
   return instance;
@@ -261,10 +263,6 @@ function same(a: Value[], b: Value[]): boolean {
 // language has, and a function that returned one couldn't be passed where a
 // value is expected — which a handle's members are.
 function cellHandle(instance: Instance, name: string): Value {
-  const held = instance.handles.get(name);
-  if (held !== undefined) {
-    return held;
-  }
   const storage = (): Map<string, Value> => {
     if (!instance.cells.has(name)) {
       throw new Error(`unknown state cell ${name}`);
@@ -317,13 +315,11 @@ function cellHandle(instance: Instance, name: string): Value {
   const update = (updater: (current: Value) => Value): Value => {
     return write(updater(storage().get(name) ?? null));
   };
-  const handle = {
+  return {
     read,
     write,
     update: update as Value,
   };
-  instance.handles.set(name, handle);
-  return handle;
 }
 
 // The instances one `apply` node has made, under the name each was applied by:
@@ -591,7 +587,11 @@ function evaluateExpr(
             `no instance to resolve state cell ${form[NodeField.name]}`,
           );
         }
-        return cellHandle(instance, form[NodeField.name]);
+        const handle = instance.handles.get(form[NodeField.name]);
+        if (handle === undefined) {
+          throw new Error(`unknown state cell ${form[NodeField.name]}`);
+        }
+        return handle;
       }
       case NodeKind.Identifier: {
         // A parameter of an enclosing thunk.
