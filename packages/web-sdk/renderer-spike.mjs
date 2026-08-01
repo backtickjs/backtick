@@ -21,7 +21,13 @@ const say = (what) => log.push(what);
 // rather than becoming a library's to map onto.
 let made = 0;
 const { insert, effect, setProp, createElement, insertNode } = createRenderer({
-  createElement: (tag) => ({ tag, props: {}, children: [], parent: null, n: ++made }),
+  createElement: (tag) => ({
+    tag,
+    props: {},
+    children: [],
+    parent: null,
+    n: ++made,
+  }),
   createTextNode: (value) => ({ text: value, parent: null, n: ++made }),
   replaceText: (node, value) => {
     node.text = value;
@@ -136,13 +142,19 @@ const before = nodes();
 propRuns = 0;
 rowBuilds = 0;
 app.setSelected(2);
-say(`select 2   class=${JSON.stringify(classes())} propRuns=${propRuns} rebuilds=${rowBuilds}`);
-say(`           nodes unchanged: ${JSON.stringify(nodes()) === JSON.stringify(before)}`);
+say(
+  `select 2   class=${JSON.stringify(classes())} propRuns=${propRuns} rebuilds=${rowBuilds}`,
+);
+say(
+  `           nodes unchanged: ${JSON.stringify(nodes()) === JSON.stringify(before)}`,
+);
 
 rowBuilds = 0;
 app.setRows((was) => was.filter((r) => r.id !== 2));
 say(`remove 2   rows=${ids()} nodes=${nodes()} rebuilds=${rowBuilds}`);
-say(`           kept row 1 and 3 nodes: ${nodes()[0] === before[0] && nodes()[1] === before[2]}`);
+say(
+  `           kept row 1 and 3 nodes: ${nodes()[0] === before[0] && nodes()[1] === before[2]}`,
+);
 
 rowBuilds = 0;
 app.setRows((was) => [was[1], was[0]]);

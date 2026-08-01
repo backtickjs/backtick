@@ -101,6 +101,10 @@ const columns = [
   ...manifest.columns.map((column) => ({
     label: column.label ?? `backtick`,
     sub: column.commit,
+    // How this run differs from the ones beside it, where it does. A column
+    // measured at a different iteration count is not the same evidence as one
+    // that wasn't, and a table that doesn't say so reads as though it is.
+    note: column.note,
     keyed: column.keyed,
     read: (benchmark) => median(column, benchmark),
   })),
@@ -174,6 +178,10 @@ function table(group) {
           .map(
             (column) =>
               `<th><span class="name">${escape(column.label)}</span><span class="sub">${escape(column.sub)}</span>${
+                column.note === undefined
+                  ? ""
+                  : `<span class="note">${escape(column.note)}</span>`
+              }${
                 column.keyed === undefined
                   ? ""
                   : `<span class="keyed ${column.keyed ? "yes" : "no"}">${column.keyed ? "keyed" : "non-keyed"}</span>`
@@ -206,6 +214,7 @@ const page = `<!doctype html>
       thead th { background: #fafafa; vertical-align: bottom; padding-bottom: 6px; }
       thead .name { display: block; font-weight: bold; }
       thead .sub { display: block; color: #666; font-weight: normal; font-family: ui-monospace, Menlo, monospace; font-size: 11px; }
+      thead .note { display: block; color: #8b1d1d; font-weight: normal; font-size: 10px; }
       .keyed { display: inline-block; margin-top: 3px; padding: 0 5px; border-radius: 8px; font-size: 10px; font-weight: normal; }
       .keyed.yes { background: #dff3e3; color: #1d6b33; }
       .keyed.no { background: #fde2e2; color: #8b1d1d; }

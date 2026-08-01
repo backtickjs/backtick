@@ -129,6 +129,15 @@
       "keyed": true,
       "dir": "solid-graph",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "solid",
+      "label": "renderer",
+      "note": "3 iterations",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "solid-renderer",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

@@ -61,6 +61,12 @@
         font-family: ui-monospace, Menlo, monospace;
         font-size: 11px;
       }
+      thead .note {
+        display: block;
+        color: #8b1d1d;
+        font-weight: normal;
+        font-size: 10px;
+      }
       .keyed {
         display: inline-block;
         margin-top: 3px;
@@ -195,6 +201,11 @@
               <span class="name">graph</span><span class="sub">solid</span
               ><span class="keyed yes">keyed</span>
             </th>
+            <th>
+              <span class="name">renderer</span><span class="sub">solid</span
+              ><span class="note">3 iterations</span
+              ><span class="keyed yes">keyed</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -248,6 +259,9 @@
             <td style="background: rgb(196, 219, 129)">
               <span class="value">34.4</span><span class="factor">1.62</span>
             </td>
+            <td style="background: rgb(237, 231, 131)">
+              <span class="value">39.9</span><span class="factor">1.88</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">replace all 1,000 rows</th>
@@ -298,6 +312,9 @@
             </td>
             <td style="background: rgb(200, 220, 129)">
               <span class="value">38.4</span><span class="factor">1.65</span>
+            </td>
+            <td style="background: rgb(244, 233, 131)">
+              <span class="value">45.0</span><span class="factor">1.93</span>
             </td>
           </tr>
           <tr>
@@ -350,6 +367,9 @@
             <td style="background: rgb(254, 224, 130)">
               <span class="value">28.1</span><span class="factor">2.18</span>
             </td>
+            <td style="background: rgb(231, 229, 131)">
+              <span class="value">23.8</span><span class="factor">1.84</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">select row</th>
@@ -400,6 +420,9 @@
             </td>
             <td style="background: rgb(253, 200, 125)">
               <span class="value">8.40</span><span class="factor">2.55</span>
+            </td>
+            <td style="background: rgb(251, 157, 117)">
+              <span class="value">10.6</span><span class="factor">3.21</span>
             </td>
           </tr>
           <tr>
@@ -452,6 +475,9 @@
             <td style="background: rgb(206, 222, 129)">
               <span class="value">23.9</span><span class="factor">1.68</span>
             </td>
+            <td style="background: rgb(151, 206, 127)">
+              <span class="value">18.9</span><span class="factor">1.33</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">remove row</th>
@@ -502,6 +528,9 @@
             </td>
             <td style="background: rgb(145, 204, 126)">
               <span class="value">14.9</span><span class="factor">1.30</span>
+            </td>
+            <td style="background: rgb(127, 199, 125)">
+              <span class="value">13.6</span><span class="factor">1.18</span>
             </td>
           </tr>
           <tr>
@@ -554,6 +583,9 @@
             <td style="background: rgb(183, 215, 128)">
               <span class="value">343.6</span><span class="factor">1.54</span>
             </td>
+            <td style="background: rgb(218, 225, 130)">
+              <span class="value">394.1</span><span class="factor">1.76</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">append 1,000 to a table of 1,000 (×2)</th>
@@ -604,6 +636,9 @@
             </td>
             <td style="background: rgb(183, 215, 128)">
               <span class="value">38.3</span><span class="factor">1.54</span>
+            </td>
+            <td style="background: rgb(230, 229, 131)">
+              <span class="value">45.8</span><span class="factor">1.84</span>
             </td>
           </tr>
           <tr>
@@ -656,6 +691,9 @@
             <td style="background: rgb(139, 203, 126)">
               <span class="value">12.7</span><span class="factor">1.26</span>
             </td>
+            <td style="background: rgb(250, 235, 132)">
+              <span class="value">19.9</span><span class="factor">1.97</span>
+            </td>
           </tr>
           <tr class="mean">
             <th class="benchmark">geometric mean of the factors</th>
@@ -706,6 +744,9 @@
             </td>
             <td style="background: rgb(202, 221, 129)">
               <span class="value">1.66</span>
+            </td>
+            <td style="background: rgb(227, 228, 131)">
+              <span class="value">1.82</span>
             </td>
           </tr>
         </tbody>
@@ -782,6 +823,11 @@
               <span class="name">graph</span><span class="sub">solid</span
               ><span class="keyed yes">keyed</span>
             </th>
+            <th>
+              <span class="name">renderer</span><span class="sub">solid</span
+              ><span class="note">3 iterations</span
+              ><span class="keyed yes">keyed</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -835,6 +881,9 @@
             <td style="background: rgb(170, 212, 128)">
               <span class="value">0.84</span><span class="factor">1.46</span>
             </td>
+            <td style="background: rgb(161, 209, 127)">
+              <span class="value">0.81</span><span class="factor">1.40</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">after 1,000 rows</th>
@@ -885,6 +934,9 @@
             </td>
             <td style="background: rgb(249, 114, 110)">
               <span class="value">7.24</span><span class="factor">3.86</span>
+            </td>
+            <td style="background: rgb(249, 105, 108)">
+              <span class="value">12.2</span><span class="factor">6.52</span>
             </td>
           </tr>
           <tr>
@@ -937,6 +989,9 @@
             <td style="background: rgb(232, 229, 131)">
               <span class="value">1.22</span><span class="factor">1.86</span>
             </td>
+            <td style="background: rgb(250, 137, 114)">
+              <span class="value">2.32</span><span class="factor">3.51</span>
+            </td>
           </tr>
           <tr class="mean">
             <th class="benchmark">geometric mean of the factors</th>
@@ -987,6 +1042,9 @@
             </td>
             <td style="background: rgb(254, 224, 130)">
               <span class="value">2.19</span>
+            </td>
+            <td style="background: rgb(251, 159, 118)">
+              <span class="value">3.18</span>
             </td>
           </tr>
         </tbody>
@@ -1063,6 +1121,11 @@
               <span class="name">graph</span><span class="sub">solid</span
               ><span class="keyed yes">keyed</span>
             </th>
+            <th>
+              <span class="name">renderer</span><span class="sub">solid</span
+              ><span class="note">3 iterations</span
+              ><span class="keyed yes">keyed</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -1116,6 +1179,9 @@
             <td style="background: rgb(252, 180, 122)">
               <span class="value">32.3</span><span class="factor">2.86</span>
             </td>
+            <td style="background: rgb(252, 169, 120)">
+              <span class="value">34.2</span><span class="factor">3.03</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">compressed</th>
@@ -1166,6 +1232,9 @@
             </td>
             <td style="background: rgb(251, 142, 115)">
               <span class="value">8.60</span><span class="factor">3.44</span>
+            </td>
+            <td style="background: rgb(250, 121, 111)">
+              <span class="value">9.40</span><span class="factor">3.76</span>
             </td>
           </tr>
           <tr>
@@ -1218,6 +1287,9 @@
             <td style="background: rgb(144, 204, 126)">
               <span class="value">103.9</span><span class="factor">1.29</span>
             </td>
+            <td style="background: rgb(151, 206, 127)">
+              <span class="value">107.5</span><span class="factor">1.33</span>
+            </td>
           </tr>
           <tr class="mean">
             <th class="benchmark">geometric mean of the factors</th>
@@ -1268,6 +1340,9 @@
             </td>
             <td style="background: rgb(254, 214, 128)">
               <span class="value">2.33</span>
+            </td>
+            <td style="background: rgb(254, 205, 126)">
+              <span class="value">2.47</span>
             </td>
           </tr>
         </tbody>

@@ -22,12 +22,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "@backtickjs/core";
-import {
-  createMemo,
-  createRenderEffect,
-  createRoot,
-  createSignal,
-} from "solid-js/dist/solid.js";
+import { createMemo, createRoot, createSignal } from "solid-js/dist/solid.js";
 import { Element } from "./Element.js";
 import type { Value } from "./Value.js";
 
@@ -38,69 +33,11 @@ import type { Value } from "./Value.js";
 // it, and tests can observe runtime behavior rather than only snapshotting
 // shape.
 
-/**
- * What a write did, as the host is told about it.
- *
- * `shape` says the tree is not the shape it was — read it again and draw the
- * difference. `prop` says one value on one element is different and nothing
- * else is, which a host can answer with one attribute rather than a walk.
- *
- * One channel rather than two, because a client that can only redraw stays
- * correct by redrawing on everything, and one that can do better needs nothing
- * beyond this to know when.
- */
-export type Change =
-  | { readonly kind: "shape" }
-  | {
-      readonly kind: "prop";
-      readonly element: Element;
-      readonly prop: string;
-      readonly value: Value;
-    };
-
-// Who to tell — set while an evaluation or a re-render is in flight, and
-// captured by each instance created during it, so two mounts in one process
-// tell their own hosts rather than the last one to start. Ambient rather than
-// threaded because every instance is created deep inside the evaluation, and
-// only this one thing needs to reach them.
-let notifying: ((change: Change) => void) | null = null;
-
-// The hosts to tell that something moved, while a write is landing.
-//
-// A write is one change as far as a host is concerned: it re-reads the tree and
-// draws the difference, and the difference is the same however many contents
-// ran to produce it. The graph re-runs each reader on its own — which is the
-// point of it, and why a cell a hundred instances read is a hundred re-runs
-// rather than one re-render of their parent — so what the host is told is
-// gathered here and said once at the end.
-let moved: Set<(change: Change) => void> | null = null;
-
-function whileNotifying<T>(
-  notify: ((change: Change) => void) | null,
-  run: () => T,
-): T {
-  const previous = notifying;
-  notifying = notify;
-  try {
-    return run();
-  } finally {
-    notifying = previous;
-  }
-}
-
-export function evaluate(
-  bundle: Bundle,
-  onChange?: (change: Change) => void,
-): Value {
-  // An owner for whatever the root builds outside any instance — an element at
-  // the root has props like any other, and each is an effect. Nothing is
+export function evaluate(bundle: Bundle): Value {
+  // An owner for whatever the root builds outside any instance. Nothing is
   // handed back to drop it with: a mount lasts as long as whoever asked for it,
   // and there is no unmounting this to be the other half of.
-  return createRoot(() =>
-    whileNotifying(onChange ?? null, () =>
-      evaluateExpr(bundle, bundle.root, []),
-    ),
-  );
+  return createRoot(() => evaluateExpr(bundle, bundle.root, []));
 }
 
 // A tree instance: what persists on the client. `cells` is the storage the
@@ -138,9 +75,6 @@ interface Instance {
   // How many times each `apply` has been reached in the render under way.
   // Cleared when one starts, so the nth evaluation finds the nth instance again.
   readonly visits: Map<BundleApplyTree, number>;
-  // The host that mounted this instance, captured when it was created — a
-  // child created during a later re-render inherits it the same way.
-  readonly notify: ((change: Change) => void) | null;
   // The closures this instance's calls produced, per call node and per how many
   // times that node was reached — a call inside a loop makes one per row. A
   // call reached again with the same arguments hands back the same function,
@@ -148,6 +82,13 @@ interface Instance {
   // different object is the only thing that would say otherwise.
   readonly closures: Map<BundleApply, { args: Value[]; value: Value }[]>;
   readonly calls: Map<BundleApply, number>;
+  // The elements this instance has drawn, per element of the bundle and per how
+  // many times that one was reached — an element inside a loop is one entry per
+  // row. Handing back the same object is what says "this is the thing you
+  // already have": a prop is read from it and its children are a signal on it,
+  // so an element that persists is a node that persists, down the whole subtree.
+  readonly drew: Map<BundleElement, Element[]>;
+  readonly made: Map<BundleElement, number>;
   // The handle each of this instance's cells is read through, made with the
   // instance because the cells a tree declares are known before it runs. One
   // per cell for its life: a handle is a view onto storage and holds nothing of
@@ -182,9 +123,10 @@ function instantiate(
     dispose: () => {},
     children: new Map(),
     visits: new Map(),
-    notify: notifying,
     closures: new Map(),
     calls: new Map(),
+    drew: new Map(),
+    made: new Map(),
     handles: new Map(),
     key,
     element: null,
@@ -202,16 +144,7 @@ function instantiate(
       );
       instance.handles.set(name, cellHandle(instance, name));
     }
-    instance.content = createMemo<Element | null, undefined>((previous) => {
-      const rendered = render(instance);
-      // The first run is this instance being built, and nobody has been handed
-      // it to be told about. Every run after is a structural change by
-      // definition — the content re-ran, so what it draws is not what it drew.
-      if (previous !== undefined && instance.notify !== null) {
-        moved?.add(instance.notify);
-      }
-      return rendered;
-    }, undefined);
+    instance.content = createMemo(() => render(instance));
   });
   return instance;
 }
@@ -234,30 +167,33 @@ function render(instance: Instance): Element | null {
   // reached n times again, so the nth evaluation lines up with the nth instance.
   instance.visits.clear();
   instance.calls.clear();
-  // Under this instance's host, so a child instantiated for the first time
-  // during a re-render notifies the same one rather than nothing.
-  const rendered = whileNotifying(
-    instance.notify,
-    () =>
-      evaluateExpr(
-        instance.bundle,
-        instance.tree[NodeField.content],
-        instance.slots(),
-        null,
-        instance,
-        instance.element,
-      ) as Element | null,
-  );
-  // An apply this render never reached draws nothing now, so the instances it
-  // was holding are dropped. Rotating them only on a visit would keep a
-  // thousand rows alive through a table that was cleared, and pay for them
-  // again on every render after that.
+  instance.made.clear();
+  const rendered = evaluateExpr(
+    instance.bundle,
+    instance.tree[NodeField.content],
+    instance.slots(),
+    null,
+    instance,
+  ) as Element | null;
+  // What this render didn't ask for again is dropped, and dropping an instance
+  // means disposing it: an owner that is merely unreachable has still got its
+  // effects registered against every cell they read, and a cell outlives the
+  // rows that read it. Letting the map go is not enough.
+  //
+  // An apply this render never reached draws nothing now, so everything under
+  // it goes. One it did reach keeps what it claimed, and `left` is by now
+  // exactly the rows that were there last time and are not here this time —
+  // the middle row of a list, which is the case that never went through the
+  // branch above.
   for (const [node, group] of instance.children) {
     if (!instance.visits.has(node)) {
       instance.children.delete(node);
       for (const child of group.claimed.values()) child.dispose();
       for (const child of group.left.values()) child.dispose();
+      continue;
     }
+    for (const child of group.left.values()) child.dispose();
+    group.left.clear();
   }
   // The applied key wins over whatever the content named itself: the content is
   // one element among an instance's own, and the key is about the instance.
@@ -300,25 +236,12 @@ function cellHandle(instance: Instance, name: string): Value {
   // drawing, which need not be the one that owns the cell. A read from a
   // handler belongs to no computation and depends on nothing.
   const read = () => cell()[0]() ?? null;
-  // And writing is writing: every prop that read this cell recomputes here and
-  // says so as one attribute, every content that read it runs again and says so
-  // as one tree to re-read. Both happen before this returns. A write inside a
-  // write — a handler that sets two cells — is still the one change, told at
-  // the end of the outermost.
+  // And writing is writing: every prop that read this cell is recomputed by
+  // whoever was reading it, and every content that read it runs again. Both
+  // happen before this returns, and nobody is told, because everything that
+  // cared was already reading.
   const write = (value: Value): Value => {
-    const outer = moved;
-    const told = outer ?? new Set<(change: Change) => void>();
-    moved = told;
-    try {
-      cell()[1](() => value);
-    } finally {
-      moved = outer;
-    }
-    if (outer === null) {
-      for (const notify of told) {
-        notify({ kind: "shape" });
-      }
-    }
+    cell()[1](() => value);
     return null;
   };
   const update = (updater: (current: Value) => Value): Value => {
@@ -426,16 +349,25 @@ function getTree(
   return fn;
 }
 
-// Computes one prop of one element, and recomputes it whenever a cell it read
-// is written — the whole of what a prop depends on, declared by reading it and
-// written down nowhere. Nested inside the content that built it, so this is
-// also what tells a prop's reads from a structural one: a cell read here has an
-// attribute to change into its new value, and a cell read by the content
-// decided which elements exist, and only the second re-runs a render.
+// A prop is read rather than pushed: the getter evaluates the expression when
+// somebody asks for it, so a read inside a computation subscribes to whatever
+// the expression touched and a read outside one is an ordinary value. Nothing
+// is stored, nothing is notified, and nobody is told to look again.
 //
-// The first run only stores, because the element is being built and nobody has
-// been handed it to be told about. Every run after is a write landing, and says
-// so only where the value is actually different.
+// This is also what tells a prop's reads from a structural one, without a flag
+// to say so. Whoever reads a prop is what depends on it — one attribute, which
+// they can set — where a cell read while working out an element's children
+// decided which elements exist, and is read by the content itself.
+//
+// No memo. What would cache it is the computation reading it, which re-runs
+// only when something the expression read has changed — and there is exactly
+// one such reader per prop. A memo here would be a second copy of that, built
+// per element per render, which for a thousand rows is the cost the handful of
+// props that change would make everyone else pay.
+//
+// Bound once and kept. Everything the expression resolves against is already
+// reactive — the instance's slots, the cells it reads — so there is nothing a
+// later render could tell this that it does not hear on its own.
 function bindProp(
   bundle: Bundle,
   built: Element,
@@ -444,19 +376,64 @@ function bindProp(
   slots: Value[],
   instance: Instance | null,
 ): void {
-  createRenderEffect((first: boolean) => {
-    const value = evaluateExpr(bundle, expr, slots, null, instance);
-    if (first) {
-      built.props[prop] = value;
-      return false;
-    }
-    if (built.props[prop] === value) {
-      return false;
-    }
-    built.props[prop] = value;
-    instance?.notify?.({ kind: "prop", element: built, prop, value });
+  Object.defineProperty(built.props, prop, {
+    get: () =>
+      evaluateExpr(
+        bundle,
+        expr,
+        instance === null ? slots : instance.slots(),
+        null,
+        instance,
+      ),
+    enumerable: true,
+    configurable: true,
+  });
+}
+
+// What an element's children evaluated to last, as a signal, because working
+// them out needs the render pass around it — an `apply` reached inside them is
+// counted and matched against the instances the last pass left. So the content
+// computes them and writes them here, and whoever draws them reads.
+//
+// A render rebuilds the array even where it drew the same elements into it, so
+// the array is never the one from last time and comparing it as one value would
+// say everything moved every time. Compared a member at a time instead: an
+// element an instance drew again is the same object, so an unchanged list is
+// equal and whoever draws it is not asked to look.
+//
+// Everything under this rests on that. Drawing is one reader per element, and a
+// reader that runs takes its whole subtree with it — so a list that says it
+// changed when it didn't is a table detaching and reattaching a thousand rows
+// to put them back where they were.
+const childrenOf = new WeakMap<Element, (children: Value) => void>();
+
+function sameChildren(before: Value, after: Value): boolean {
+  if (before === after) {
+    return true;
+  }
+  if (
+    !Array.isArray(before) ||
+    !Array.isArray(after) ||
+    before.length !== after.length
+  ) {
     return false;
-  }, true);
+  }
+  return before.every((value, at) => sameChildren(value, after[at] as Value));
+}
+
+function setChildren(built: Element, children: Value): void {
+  const write = childrenOf.get(built);
+  if (write !== undefined) {
+    write(children);
+    return;
+  }
+  const [read, set] = createSignal<Value>(children, { equals: sameChildren });
+  childrenOf.set(built, set);
+  Object.defineProperty(built.props, "children", {
+    get: read,
+    enumerable: true,
+    configurable: true,
+  });
 }
 
 // An inline element renders in its enclosing instance: it is part of that entry,
@@ -466,7 +443,6 @@ function evaluateElement(
   element: BundleElement,
   slots: Value[],
   instance: Instance | null = null,
-  reuse: Element | null = null,
 ): Element {
   // An absent key is no key, exactly as a null one was — the wire omits it
   // rather than spelling it out.
@@ -478,30 +454,40 @@ function evaluateElement(
           | string
           | number
           | null);
-  const props: { [prop: string]: Value } = {};
-  // The same element, rendering again — recognised by having come from this
-  // same part of the bundle. Written into rather than replaced, so everything
-  // holding it sees the new values and nothing has to be told that the one it
-  // holds was swapped for another.
-  const again = reuse !== null && reuse.shape === element;
-  const built = again
-    ? reuse
-    : new Element(element[NodeField.id], key, props, element);
+  // Which drawing of this element this is — the nth time this render has
+  // reached it, which for an element inside a loop is the nth row.
+  const at = instance === null ? 0 : (instance.made.get(element) ?? 0);
+  let drew = instance?.drew.get(element);
+  if (instance !== null && drew === undefined) {
+    drew = [];
+    instance.drew.set(element, drew);
+  }
+  instance?.made.set(element, at + 1);
+  const kept = drew?.[at];
+  // The same element, drawn again. Written into rather than replaced, so
+  // everything holding it — the node it was drawn as, the effects reading its
+  // props — is holding the current one and nothing has to be told.
+  const built = kept ?? new Element(element[NodeField.id], key, {}, element);
   built.key = key;
-  // Before the props are computed, because each is computed by an effect that
-  // writes where it belongs — and where it belongs is this element's props,
-  // whichever object those are now.
-  built.props = props;
-  for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
-    // Children are structure, not an attribute. A cell read while working out
-    // what an element contains decides which elements exist, and no amount of
-    // recomputing one value can express that — so it is read outside a prop,
-    // which marks the cell as one a write has to re-render.
-    if (prop === "children") {
-      props[prop] = evaluateExpr(bundle, expr, slots, null, instance);
-      continue;
+  if (kept === undefined) {
+    if (drew !== undefined) {
+      drew[at] = built;
     }
-    bindProp(bundle, built, prop, expr, slots, instance);
+    for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
+      if (prop === "children") {
+        continue;
+      }
+      // Bound once. The getter resolves against the instance every time it is
+      // read, so a second render has nothing to tell it.
+      bindProp(bundle, built, prop, expr, slots, instance);
+    }
+  }
+  // Children are structure, not an attribute, so they are worked out here —
+  // inside the render, where an `apply` among them can be matched against the
+  // instance that drew it last time — and handed over rather than read.
+  const children = element[NodeField.props]?.["children"];
+  if (children !== undefined) {
+    setChildren(built, evaluateExpr(bundle, children, slots, null, instance));
   }
   return built;
 }
@@ -518,10 +504,6 @@ function evaluateExpr(
   // The enclosing instance, when there is one: what `cell` resolves against, and
   // what a nested `apply` keys its child instance under.
   instance: Instance | null = null,
-  // The element to render into, where this is an instance rendering again. Only
-  // its own content reaches this: everything nested is evaluated afresh, which
-  // is why it is not threaded any further down.
-  reuse: Element | null = null,
 ): Value {
   if (expr === null || typeof expr !== "object") {
     return expr;
@@ -644,6 +626,9 @@ function evaluateExpr(
         const child = siblings.left.get(under);
         if (child !== undefined) {
           child.key = key;
+          // Claimed, so what stays behind in `left` is what nobody asked for
+          // again — which is what the render disposes when it finishes.
+          siblings.left.delete(under);
           siblings.claimed.set(under, child);
           // Handing it its arguments, which is the only way it is asked to draw
           // again. Equal ones are not a write and it stays exactly as it was —
@@ -687,7 +672,7 @@ function evaluateExpr(
         };
       }
       case NodeKind.Element: {
-        return evaluateElement(bundle, form, slots, instance, reuse);
+        return evaluateElement(bundle, form, slots, instance);
       }
     }
   }

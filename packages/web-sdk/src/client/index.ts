@@ -11,7 +11,8 @@
 import type { Bundle } from "@backtickjs/core";
 import type { Drawn } from "../Drawn.js";
 import { evaluate } from "@backtickjs/js-interpreter";
-import { applyChange, renderInto } from "./dom.js";
+import { createRoot } from "solid-js";
+import { renderInto } from "./dom.js";
 
 export { Element, isElement, evaluate } from "@backtickjs/js-interpreter";
 
@@ -33,19 +34,11 @@ export interface MountOptions {
  * and the half above it (evaluating the bundle) is the same on every target.
  */
 export function mount(bundle: Bundle, { target }: MountOptions): void {
-  // Evaluated once. Re-rendering reads the same tree again rather than
-  // re-evaluating the bundle, so instances — and the cells they own — survive.
-  // A shape change is answered by reading the tree again and drawing the
-  // difference; a prop change is one attribute, and reading the tree to find it
-  // would cost more than the change itself.
-  const tree = evaluate(bundle, (change) => {
-    if (change.kind === "shape") {
-      renderInto(target, tree);
-    } else {
-      applyChange(change);
-    }
-  });
-  renderInto(target, tree);
+  // Evaluated once, and nothing asks it to evaluate again: what a write moves
+  // is read by whoever draws it, so the drawing keeps itself right. The root is
+  // what everything drawn belongs to.
+  const tree = evaluate(bundle);
+  createRoot(() => renderInto(target, tree));
 }
 
 /**
