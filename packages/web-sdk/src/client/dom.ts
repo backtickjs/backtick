@@ -15,66 +15,294 @@ import type { Element } from "@backtickjs/js-interpreter";
 // fragment builds it from this same word.
 const FRAGMENT_ID = "Fragment";
 
+// The id a text child is matched under, which no tag can collide with.
+const TEXT_ID = "#text";
+
 // Props that are wiring rather than attributes, handled on their own.
 const handled = new Set(["children"]);
 
-// Builds the DOM for an element tree. Rebuilt wholesale on a change rather than
-// diffed: a preview shows a tree that is small and already fully evaluated, so
-// the work is proportional to what is on screen and the fidelity of a real
-// reconciler buys nothing here.
-export function renderInto(container: globalThis.Element, tree: unknown): void {
-  container.replaceChildren(...nodes(tree));
+// What a node was last rendered from, so the next render can recognise it
+// rather than replace it.
+//
+// Kept beside the node instead of on it: a `key` is the app's word for which
+// row this is, and writing it into the document would put it where a stylesheet
+// or a test could reach it. The props are the ones this rendered, which is what
+// says whether an attribute has to be touched at all.
+interface Rendered {
+  readonly id: string;
+  readonly key: string | number | null;
+  props: { readonly [prop: string]: unknown };
+  // One listener per event, added once. The handler an element carries is a new
+  // closure on every render, so what is registered dispatches to whichever is
+  // current — otherwise every render would add another listener to the same
+  // node, and one click would run the handler as many times as it had rendered.
+  readonly listeners: Map<string, () => void>;
 }
 
-function nodes(value: unknown): Node[] {
+const rendered = new WeakMap<Node, Rendered>();
+
+// What a render asks for in one child position.
+type Wanted =
+  | { readonly kind: "element"; readonly source: Element }
+  | { readonly kind: "text"; readonly value: string };
+
+// Builds the DOM for an element tree, and keeps the nodes it already built.
+//
+// A re-render is a whole tree — the instance evaluates again and hands back
+// everything it draws — so what stays on screen is decided here, by matching
+// what is wanted against what is there. Keyed children match by key wherever
+// they moved to; unkeyed ones match by position among their own tag, which is
+// what a page's own structure is. Anything left over is removed.
+export function renderInto(container: globalThis.Element, tree: unknown): void {
+  patch(container, wanted(tree));
+}
+
+// The children a value asks for, with fragments flattened into their parent:
+// a fragment has no node, so its children are the parent's children.
+function wanted(value: unknown, into: Wanted[] = []): Wanted[] {
   if (value === null || value === undefined || value === false) {
-    return [];
+    return into;
   }
   if (Array.isArray(value)) {
-    return value.flatMap(nodes);
+    for (const each of value) {
+      wanted(each, into);
+    }
+    return into;
   }
   if (isElement(value)) {
-    return element(value);
+    if (value.id === FRAGMENT_ID) {
+      return wanted(value.props.children, into);
+    }
+    into.push({ kind: "element", source: value });
+    return into;
   }
-  return [document.createTextNode(String(value))];
+  into.push({ kind: "text", value: String(value) });
+  return into;
 }
 
-function element(source: Element): Node[] {
-  const children = nodes(source.props.children);
-  if (source.id === FRAGMENT_ID) {
-    return children;
-  }
-  const node = document.createElement(tagFor(source.id));
+function patch(parent: globalThis.Element, children: Wanted[]): void {
+  // Only what this renderer put here. A page's own markup inside the mount
+  // point is neither matched nor moved nor removed — it isn't ours.
+  const existing = Array.from(parent.childNodes).filter((node) =>
+    rendered.has(node),
+  );
 
-  for (const [prop, value] of Object.entries(source.props)) {
-    if (handled.has(prop) || value === null || value === undefined) {
+  // What is there now, indexed the two ways a match can be made: a keyed node
+  // is found wherever it moved to, an unkeyed one by being the next of its kind.
+  const keyed = new Map<string, number>();
+  const spare: number[] = [];
+  existing.forEach((node, at) => {
+    const was = rendered.get(node);
+    if (was === undefined) {
+      return;
+    }
+    if (was.key === null) {
+      spare.push(at);
+    } else {
+      keyed.set(identity(was.id, was.key), at);
+    }
+  });
+
+  // Where each wanted child comes from, as an index into what is there — `-1`
+  // for one that has to be built. This is the whole of the matching; the moving
+  // below reads nothing else.
+  const from: number[] = [];
+  const taken = new Set<number>();
+  let next = 0;
+  for (const want of children) {
+    const id = want.kind === "text" ? TEXT_ID : want.source.id;
+    let found = -1;
+    if (want.kind === "element" && want.source.key !== null) {
+      const at = keyed.get(identity(id, want.source.key));
+      found = at !== undefined && !taken.has(at) ? at : -1;
+    } else {
+      for (let at = next; at < spare.length; at++) {
+        const candidate = spare[at] as number;
+        if (
+          !taken.has(candidate) &&
+          rendered.get(existing[candidate] as Node)?.id === id
+        ) {
+          found = candidate;
+          next = at + 1;
+          break;
+        }
+      }
+    }
+    from.push(found);
+    if (found !== -1) {
+      taken.add(found);
+    }
+  }
+
+  for (const [at, node] of existing.entries()) {
+    if (!taken.has(at)) {
+      parent.removeChild(node);
+    }
+  }
+
+  const nodes = children.map((want, at) => {
+    const reuse = from[at];
+    if (reuse === undefined || reuse === -1) {
+      return build(want);
+    }
+    const node = existing[reuse] as Node;
+    update(node, want);
+    return node;
+  });
+
+  // Moved only where the order actually changed. The longest run of children
+  // whose old positions are already increasing stays exactly where it is;
+  // everything else is placed before the child that follows it, which is
+  // already in place because this walks backwards. Swapping two rows of a
+  // thousand moves two nodes, not the nine hundred between them.
+  const stable = new Set(keepable(from));
+  for (let at = children.length - 1; at >= 0; at--) {
+    const node = nodes[at] as Node;
+    if (stable.has(at)) {
+      continue;
+    }
+    const anchor = nodes[at + 1] ?? null;
+    if (node.nextSibling !== anchor || node.parentNode !== parent) {
+      parent.insertBefore(node, anchor);
+    }
+  }
+}
+
+// The positions worth leaving alone: the longest subsequence of children whose
+// sources are already in increasing order. A child built fresh is never one —
+// it has nowhere to have stayed.
+function keepable(from: number[]): number[] {
+  const ends: number[] = [];
+  const previous = new Array<number>(from.length).fill(-1);
+  for (const [at, source] of from.entries()) {
+    if (source === -1) {
+      continue;
+    }
+    let low = 0;
+    let high = ends.length;
+    while (low < high) {
+      const middle = (low + high) >> 1;
+      if ((from[ends[middle] as number] as number) < source) {
+        low = middle + 1;
+      } else {
+        high = middle;
+      }
+    }
+    previous[at] = low > 0 ? (ends[low - 1] as number) : -1;
+    ends[low] = at;
+  }
+  const kept: number[] = [];
+  let at = ends.length === 0 ? -1 : (ends[ends.length - 1] as number);
+  while (at !== -1) {
+    kept.push(at);
+    at = previous[at] as number;
+  }
+  return kept;
+}
+
+// A key is only ever compared within a tag, so the two are matched together.
+const identity = (id: string, key: string | number): string =>
+  `${id}:${JSON.stringify(key)}`;
+
+function build(want: Wanted): Node {
+  if (want.kind === "text") {
+    const node = document.createTextNode(want.value);
+    rendered.set(node, {
+      id: TEXT_ID,
+      key: null,
+      props: {},
+      listeners: new Map(),
+    });
+    return node;
+  }
+  const node = document.createElement(tagFor(want.source.id));
+  rendered.set(node, {
+    id: want.source.id,
+    key: want.source.key,
+    props: {},
+    listeners: new Map(),
+  });
+  update(node, want);
+  return node;
+}
+
+function update(node: Node, want: Wanted): void {
+  const was = rendered.get(node);
+  if (was === undefined) {
+    return;
+  }
+  if (want.kind === "text") {
+    if (node.nodeValue !== want.value) {
+      node.nodeValue = want.value;
+    }
+    return;
+  }
+  const element = node as globalThis.Element;
+  const props = want.source.props;
+
+  for (const [prop, value] of Object.entries(props)) {
+    if (handled.has(prop)) {
       continue;
     }
     // An element names its own events, and the prop is the listener's name:
-    // `onclick` is a click.
+    // `onclick` is a click. The registration is made once and reads the current
+    // handler when it fires, so a re-render replaces what runs rather than
+    // adding another listener beside it.
     if (typeof value === "function") {
       if (prop.startsWith("on")) {
-        const listener = value as () => void;
-        node.addEventListener(prop.slice(2), () => listener());
+        const event = prop.slice(2);
+        if (!was.listeners.has(event)) {
+          element.addEventListener(event, () => was.listeners.get(event)?.());
+        }
+        was.listeners.set(event, value as () => void);
       }
       continue;
     }
-    if (typeof value === "object") {
+    if (typeof value === "object" && value !== null) {
       continue;
     }
-    // A boolean attribute is there or it isn't — `disabled="false"` disables.
-    // ARIA is the exception: its values are the words themselves.
-    if (typeof value === "boolean" && !prop.startsWith("aria-")) {
-      if (value) {
-        node.setAttribute(prop.toLowerCase(), "");
-      }
+    if (value === was.props[prop]) {
       continue;
     }
-    node.setAttribute(prop.toLowerCase(), String(value));
+    attribute(element, prop, value);
   }
 
-  node.append(...children);
-  return [node];
+  // A prop that was set and is now gone. Handlers stay registered — the
+  // dispatch reads what is current, and nothing current is what nothing does.
+  for (const prop of Object.keys(was.props)) {
+    if (!(prop in props) && !handled.has(prop)) {
+      element.removeAttribute(prop.toLowerCase());
+    }
+    if (!(prop in props) && was.listeners.has(prop.slice(2))) {
+      was.listeners.delete(prop.slice(2));
+    }
+  }
+
+  was.props = props;
+  patch(element, wanted(props.children));
+}
+
+function attribute(
+  node: globalThis.Element,
+  prop: string,
+  value: unknown,
+): void {
+  const name = prop.toLowerCase();
+  if (value === null || value === undefined) {
+    node.removeAttribute(name);
+    return;
+  }
+  // A boolean attribute is there or it isn't — `disabled="false"` disables.
+  // ARIA is the exception: its values are the words themselves.
+  if (typeof value === "boolean" && !prop.startsWith("aria-")) {
+    if (value) {
+      node.setAttribute(name, "");
+    } else {
+      node.removeAttribute(name);
+    }
+    return;
+  }
+  node.setAttribute(name, String(value));
 }
 
 // A tag is written as HTML writes it, which is how an element built by this
