@@ -109,10 +109,12 @@ interface Instance {
   readonly tree: BundleTree;
   slots: Value[];
   readonly cells: Map<string, Value>;
-  // Nested instances, per `apply` node and then by how many times that node has
-  // been reached in one render — a node inside a loop is reached once per
-  // iteration, and each of those is its own instance.
-  readonly children: Map<BundleApplyTree, Instance[]>;
+  // Nested instances, per `apply` node. A keyed apply finds its instance by the
+  // key it was given, which is the whole point of a key: a row deleted from the
+  // middle leaves every other row with the instance it already had. An unkeyed
+  // one falls back to position — how many times that node has been reached in
+  // this render — because position is the only identity it has.
+  readonly children: Map<BundleApplyTree, Children>;
   // How many times each `apply` has been reached in the render under way.
   // Cleared when one starts, so the nth evaluation finds the nth instance again.
   readonly visits: Map<BundleApplyTree, number>;
@@ -323,6 +325,15 @@ function cellHandle(instance: Instance, name: string): Value {
   };
   instance.handles.set(name, handle);
   return handle;
+}
+
+// The instances one `apply` node has made. `keyed` is what this render has
+// claimed and `previous` is what the last one left; rotating them at the first
+// visit of a render is what drops instances whose keys nobody asked for again.
+interface Children {
+  readonly list: Instance[];
+  keyed: Map<string | number, Instance>;
+  previous: Map<string | number, Instance>;
 }
 
 // One frame per arrow application or block. Names are pre-resolved by the
@@ -626,21 +637,31 @@ function evaluateExpr(
         if (tree === undefined) {
           throw new Error(`unknown tree entry ${label}`);
         }
-        // A nested instance persists across the parent's re-renders, named by
-        // this node and by which evaluation of it this is. The node alone would
-        // do if a node were reached once per render, but a hole inside a loop is
-        // reached once per iteration — one name for all of them would hand every
-        // iteration the same instance, and each would overwrite the last.
+        // A nested instance persists across the parent's re-renders. A keyed
+        // one is found by its key wherever it moved to; an unkeyed one by which
+        // evaluation of this node it was, because a node inside a loop is
+        // reached once per iteration and position is all that tells them apart.
         const seen = instance.visits.get(form) ?? 0;
         instance.visits.set(form, seen + 1);
         let siblings = instance.children.get(form);
         if (siblings === undefined) {
-          siblings = [];
+          siblings = { list: [], keyed: new Map(), previous: new Map() };
           instance.children.set(form, siblings);
         }
-        const child = siblings[seen];
+        // The first visit of a render starts a new claim on this node's
+        // instances; whatever the last render left and nobody asks for again is
+        // dropped with the map it was in.
+        if (seen === 0) {
+          siblings.previous = siblings.keyed;
+          siblings.keyed = new Map();
+        }
+        const child =
+          key === null ? siblings.list[seen] : siblings.previous.get(key);
         if (child !== undefined) {
           child.key = key;
+          if (key !== null) {
+            siblings.keyed.set(key, child);
+          }
           // Nothing it was given is different, so nothing it draws can be:
           // the element it drew last time is still what it draws, down to the
           // objects, which is what lets a host recognise it and stop there.
@@ -651,7 +672,11 @@ function evaluateExpr(
           return render(child);
         }
         const created = instantiate(bundle, tree, args, key);
-        siblings[seen] = created;
+        if (key === null) {
+          siblings.list[seen] = created;
+        } else {
+          siblings.keyed.set(key, created);
+        }
         return created.element;
       }
       case NodeKind.Thunk: {

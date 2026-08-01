@@ -56,6 +56,13 @@
       "keyed": true,
       "dir": "f496572",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "bdfa3aa",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "bdfa3aa",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
