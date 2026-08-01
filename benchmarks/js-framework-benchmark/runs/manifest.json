@@ -145,6 +145,13 @@
       "keyed": true,
       "dir": "b94464a",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "dc5dd67",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "dc5dd67",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
