@@ -138,6 +138,13 @@
       "keyed": true,
       "dir": "solid-renderer",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "b94464a",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "b94464a",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
