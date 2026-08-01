@@ -121,6 +121,14 @@
       "keyed": true,
       "dir": "solid-signals",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "solid",
+      "label": "graph",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "solid-graph",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
