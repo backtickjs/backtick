@@ -120,6 +120,32 @@ function patch(parent: globalThis.Element, children: Wanted[]): void {
     rendered.has(node),
   );
 
+  // Nothing to match against: everything is built, and built into a fragment so
+  // a thousand rows are one insertion rather than a thousand.
+  if (existing.length === 0) {
+    if (children.length === 0) {
+      return;
+    }
+    const fragment = document.createDocumentFragment();
+    for (const want of children) {
+      fragment.appendChild(build(want));
+    }
+    parent.appendChild(fragment);
+    return;
+  }
+
+  // Nothing wanted: what is here goes, in one call where all of it is ours.
+  if (children.length === 0) {
+    if (existing.length === parent.childNodes.length) {
+      parent.replaceChildren();
+    } else {
+      for (const node of existing) {
+        parent.removeChild(node);
+      }
+    }
+    return;
+  }
+
   // What is there now, indexed the two ways a match can be made: a keyed node
   // is found wherever it moved to, an unkeyed one by being the next of its kind.
   const keyed = new Map<string, number>();
