@@ -376,6 +376,14 @@ function bindProp(
   slots: Value[],
   instance: Instance | null,
 ): void {
+  // A literal is already the value it evaluates to, and a getter over one reads
+  // the same thing forever. It is also indistinguishable from a script to
+  // whoever draws it, so leaving it a getter is what makes a constant attribute
+  // cost a computation that watches nothing change.
+  if (expr === null || typeof expr !== "object") {
+    built.props[prop] = expr;
+    return;
+  }
   Object.defineProperty(built.props, prop, {
     get: () =>
       evaluateExpr(

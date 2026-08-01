@@ -70,6 +70,15 @@ function draw(value: unknown): unknown {
     }
     // Reading the prop is what subscribes to it, so this effect re-runs when
     // that one prop changes and sets that one attribute. Nothing told it to.
+    //
+    // Only where there is something to subscribe to. A prop a script computes
+    // is a getter; one the bundle carried is the value itself, and an effect
+    // around it would be a computation kept for the life of the element to
+    // watch a constant.
+    if (Object.getOwnPropertyDescriptor(value.props, prop)?.get === undefined) {
+      setProp(node, prop, value.props[prop]);
+      continue;
+    }
     effect(() => setProp(node, prop, value.props[prop]));
   }
   insert(node, () => draw(value.props.children));
