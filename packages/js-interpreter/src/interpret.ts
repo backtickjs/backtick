@@ -489,7 +489,12 @@ class PropBinding {
   // that lands on the same value costs the comparison and nothing else.
   refresh(): void {
     const value = track(
-      { prop: this.prop, element: this.element, compute: this.compute, binding: this },
+      {
+        prop: this.prop,
+        element: this.element,
+        compute: this.compute,
+        binding: this,
+      },
       this.compute,
     );
     if (value === this.element.props[this.prop]) {

@@ -77,6 +77,13 @@
       "keyed": true,
       "dir": "5e5dfab",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "fa1c071",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "fa1c071",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

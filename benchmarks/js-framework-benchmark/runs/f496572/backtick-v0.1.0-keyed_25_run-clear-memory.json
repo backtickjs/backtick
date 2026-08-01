@@ -1,1 +1,16 @@
-{"framework":"backtick-v0.1.0-keyed","keyed":true,"benchmark":"25_run-clear-memory","type":"memory","values":{"DEFAULT":{"min":7.374055862426758,"max":7.374055862426758,"median":7.374055862426758,"mean":7.374055862426758,"stddev":null,"values":[7.374055862426758]}}}
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "25_run-clear-memory",
+  "type": "memory",
+  "values": {
+    "DEFAULT": {
+      "min": 7.374055862426758,
+      "max": 7.374055862426758,
+      "median": 7.374055862426758,
+      "mean": 7.374055862426758,
+      "stddev": null,
+      "values": [7.374055862426758]
+    }
+  }
+}

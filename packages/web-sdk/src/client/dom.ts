@@ -140,8 +140,8 @@ function wanted(value: unknown, into: Wanted[] = []): Wanted[] {
 function patch(parent: globalThis.Element, children: Wanted[]): void {
   // Only what this renderer put here. A page's own markup inside the mount
   // point is neither matched nor moved nor removed — it isn't ours.
-  const existing = Array.from(parent.childNodes).filter((node) =>
-    recordOf(node) !== undefined,
+  const existing = Array.from(parent.childNodes).filter(
+    (node) => recordOf(node) !== undefined,
   );
 
   // Nothing to match against: everything is built, and built into a fragment so
