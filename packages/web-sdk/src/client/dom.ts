@@ -294,6 +294,8 @@ const identity = (id: string, key: string | number): string =>
 // first row's are written.
 interface Prototype {
   readonly node: Node;
+  // The props of the element it was taken from, so a copy only writes what
+  // differs. Its children carry their own, in the order they appear.
   readonly props: { readonly [prop: string]: unknown };
   readonly children: Prototype[];
   readonly text: string | null;
@@ -417,32 +419,9 @@ function adopt(node: Node, want: Wanted, proto: Prototype): boolean {
   };
   remember(node, record);
   drewAs(want.source, node);
-  const element = node as globalThis.Element;
-  for (const prop in want.source.props) {
-    if (handled.has(prop)) {
-      continue;
-    }
-    const value = want.source.props[prop];
-    // A listener is never in a copy — cloning carries attributes, not
-    // registrations — so every element registers its own.
-    if (typeof value === "function") {
-      if (prop.startsWith("on")) {
-        const event = prop.slice(2);
-        const listeners = (record.listeners ??= new Map());
-        element.addEventListener(event, () => listeners.get(event)?.());
-        listeners.set(event, value as () => void);
-      }
-      continue;
-    }
-    if (typeof value === "object" && value !== null) {
-      continue;
-    }
-    // Already in the copy, because the element it was copied from had it.
-    if (value === proto.props[prop]) {
-      continue;
-    }
-    attribute(element, prop, value);
-  }
+  // Against what the copy already carries: its attributes came with it, and a
+  // listener never does — cloning carries attributes, not registrations.
+  applyProps(node as globalThis.Element, record, want.source.props, proto.props);
 
   for (let at = 0; at < wants.length; at++) {
     if (
@@ -456,6 +435,46 @@ function adopt(node: Node, want: Wanted, proto: Prototype): boolean {
     }
   }
   return true;
+}
+
+// Writes an element's props onto a node: attributes for values, one
+// registration per event for handlers. `already` is what the node is known to
+// carry — the props it was last drawn with, or the ones baked into the copy it
+// was cloned from — so nothing is written twice.
+function applyProps(
+  element: globalThis.Element,
+  record: Rendered,
+  props: { readonly [prop: string]: unknown },
+  already: { readonly [prop: string]: unknown },
+): void {
+  for (const prop in props) {
+    if (handled.has(prop)) {
+      continue;
+    }
+    const value = props[prop];
+    // An element names its own events, and the prop is the listener's name:
+    // `onclick` is a click. The registration is made once and reads the current
+    // handler when it fires, so a re-render replaces what runs rather than
+    // adding another listener beside it.
+    if (typeof value === "function") {
+      if (prop.startsWith("on")) {
+        const event = prop.slice(2);
+        const listeners = (record.listeners ??= new Map());
+        if (!listeners.has(event)) {
+          element.addEventListener(event, () => listeners.get(event)?.());
+        }
+        listeners.set(event, value as () => void);
+      }
+      continue;
+    }
+    if (typeof value === "object" && value !== null) {
+      continue;
+    }
+    if (value === already[prop]) {
+      continue;
+    }
+    attribute(element, prop, value);
+  }
 }
 
 function update(node: Node, want: Wanted): void {
@@ -476,35 +495,7 @@ function update(node: Node, want: Wanted): void {
   }
   const element = node as globalThis.Element;
   const props = want.source.props;
-
-  for (const prop in props) {
-    if (handled.has(prop)) {
-      continue;
-    }
-    const value = props[prop];
-    // An element names its own events, and the prop is the listener's name:
-    // `onclick` is a click. The registration is made once and reads the current
-    // handler when it fires, so a re-render replaces what runs rather than
-    // adding another listener beside it.
-    if (typeof value === "function") {
-      if (prop.startsWith("on")) {
-        const event = prop.slice(2);
-        const listeners = (was.listeners ??= new Map());
-        if (!listeners.has(event)) {
-          element.addEventListener(event, () => listeners.get(event)?.());
-        }
-        listeners.set(event, value as () => void);
-      }
-      continue;
-    }
-    if (typeof value === "object" && value !== null) {
-      continue;
-    }
-    if (value === was.props[prop]) {
-      continue;
-    }
-    attribute(element, prop, value);
-  }
+  applyProps(element, was, props, was.props);
 
   // A prop that was set and is now gone. Handlers stay registered — the
   // dispatch reads what is current, and nothing current is what nothing does.
