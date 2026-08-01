@@ -326,13 +326,14 @@ function cellHandle(instance: Instance, name: string): Value {
   return handle;
 }
 
-// The instances one `apply` node has made. `keyed` is what this render has
-// claimed and `previous` is what the last one left; rotating them at the first
-// visit of a render is what drops instances whose keys nobody asked for again.
+// The instances one `apply` node has made, under the name each was applied by:
+// its key, or — where it has none — which evaluation of the node it was, since
+// position is the only identity an unkeyed instance has. `claimed` is what this
+// render has asked for and `left` is what the last one ended with; rotating
+// them at the first visit is what drops the instances nobody asked for again.
 interface Children {
-  readonly list: Instance[];
-  keyed: Map<string | number, Instance>;
-  previous: Map<string | number, Instance>;
+  claimed: Map<string | number, Instance>;
+  left: Map<string | number, Instance>;
 }
 
 // One frame per arrow application or block. Names are pre-resolved by the
@@ -664,23 +665,21 @@ function evaluateExpr(
         instance.visits.set(form, seen + 1);
         let siblings = instance.children.get(form);
         if (siblings === undefined) {
-          siblings = { list: [], keyed: new Map(), previous: new Map() };
+          siblings = { claimed: new Map(), left: new Map() };
           instance.children.set(form, siblings);
         }
         // The first visit of a render starts a new claim on this node's
         // instances; whatever the last render left and nobody asks for again is
         // dropped with the map it was in.
         if (seen === 0) {
-          siblings.previous = siblings.keyed;
-          siblings.keyed = new Map();
+          siblings.left = siblings.claimed;
+          siblings.claimed = new Map();
         }
-        const child =
-          key === null ? siblings.list[seen] : siblings.previous.get(key);
+        const under = key ?? seen;
+        const child = siblings.left.get(under);
         if (child !== undefined) {
           child.key = key;
-          if (key !== null) {
-            siblings.keyed.set(key, child);
-          }
+          siblings.claimed.set(under, child);
           // Nothing it was given is different, so nothing it draws can be:
           // the element it drew last time is still what it draws, down to the
           // objects, which is what lets a host recognise it and stop there.
@@ -691,11 +690,7 @@ function evaluateExpr(
           return render(child);
         }
         const created = instantiate(bundle, tree, args, key);
-        if (key === null) {
-          siblings.list[seen] = created;
-        } else {
-          siblings.keyed.set(key, created);
-        }
+        siblings.claimed.set(under, created);
         return created.element;
       }
       case NodeKind.Thunk: {
