@@ -57,7 +57,7 @@ interface Instance {
   readonly setSlots: (slots: Value[]) => void;
   // A cell is a signal, so its storage and who hears about a write are the
   // graph's business rather than ours.
-  readonly cells: Map<string, [() => Value, (value: Value) => void]>;
+  cells: Map<string, [() => Value, (value: Value) => void]> | null;
   // What this instance draws, recomputed whenever anything it read is written —
   // its slots, or a cell, wherever that cell lives. Read rather than called:
   // asking a stale one brings it up to date first, which is what lets a parent
@@ -71,17 +71,17 @@ interface Instance {
   // middle leaves every other row with the instance it already had. An unkeyed
   // one falls back to position — how many times that node has been reached in
   // this render — because position is the only identity it has.
-  readonly children: Map<BundleApplyTree, Children>;
+  children: Map<BundleApplyTree, Children> | null;
   // How many times each `apply` has been reached in the render under way.
   // Cleared when one starts, so the nth evaluation finds the nth instance again.
-  readonly visits: Map<BundleApplyTree, number>;
+  visits: Map<BundleApplyTree, number> | null;
   // The closures this instance's calls produced, per call node and per how many
   // times that node was reached — a call inside a loop makes one per row. A
   // call reached again with the same arguments hands back the same function,
   // because a closure over the same values behaves the same way and being a
   // different object is the only thing that would say otherwise.
-  readonly closures: Map<BundleApply, { args: Value[]; value: Value }[]>;
-  readonly calls: Map<BundleApply, number>;
+  closures: Map<BundleApply, { args: Value[]; value: Value }[]> | null;
+  calls: Map<BundleApply, number> | null;
   // The elements this instance has drawn, per element of the bundle and per how
   // many times that one was reached — an element inside a loop is one entry per
   // row. Handing back the same object is what says "this is the thing you
@@ -94,7 +94,7 @@ interface Instance {
   // per cell for its life: a handle is a view onto storage and holds nothing of
   // its own, so a second view of the same cell would only look like a different
   // value to anything comparing them.
-  readonly handles: Map<string, Value>;
+  handles: Map<string, Value> | null;
   // Which of its siblings this one is, as the node that applied it said. Held
   // here rather than read off the element, because the element is the content's
   // and the content doesn't know it was keyed — a re-render would otherwise put
@@ -118,16 +118,16 @@ function instantiate(
     tree,
     slots: readSlots,
     setSlots,
-    cells: new Map(),
+    cells: null,
     content: () => null,
     dispose: () => {},
-    children: new Map(),
-    visits: new Map(),
-    closures: new Map(),
-    calls: new Map(),
+    children: null,
+    visits: null,
+    closures: null,
+    calls: null,
     drew: new Map(),
     made: new Map(),
-    handles: new Map(),
+    handles: null,
     key,
     element: null,
   };
@@ -138,11 +138,11 @@ function instantiate(
     // A cell's initial is evaluated in no instance: it can't read a slot or
     // another cell, so nothing is in scope for it.
     for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
-      instance.cells.set(
+      (instance.cells ??= new Map()).set(
         name,
         createSignal<Value>(evaluateExpr(bundle, initial, [])),
       );
-      instance.handles.set(name, cellHandle(instance, name));
+      (instance.handles ??= new Map()).set(name, cellHandle(instance, name));
     }
     instance.content = createMemo(() => render(instance));
   });
@@ -165,8 +165,8 @@ function instantiate(
 function render(instance: Instance): Element | null {
   // A fresh count for this pass: an `apply` reached n times last render is
   // reached n times again, so the nth evaluation lines up with the nth instance.
-  instance.visits.clear();
-  instance.calls.clear();
+  instance.visits?.clear();
+  instance.calls?.clear();
   instance.made.clear();
   const rendered = evaluateExpr(
     instance.bundle,
@@ -185,9 +185,9 @@ function render(instance: Instance): Element | null {
   // exactly the rows that were there last time and are not here this time —
   // the middle row of a list, which is the case that never went through the
   // branch above.
-  for (const [node, group] of instance.children) {
-    if (!instance.visits.has(node)) {
-      instance.children.delete(node);
+  for (const [node, group] of instance.children ?? []) {
+    if (instance.visits?.has(node) !== true) {
+      instance.children?.delete(node);
       for (const child of group.claimed.values()) child.dispose();
       for (const child of group.left.values()) child.dispose();
       continue;
@@ -225,7 +225,7 @@ function same(a: Value[], b: Value[]): boolean {
 // value is expected — which a handle's members are.
 function cellHandle(instance: Instance, name: string): Value {
   const cell = (): [() => Value, (value: Value) => void] => {
-    const held = instance.cells.get(name);
+    const held = instance.cells?.get(name);
     if (held === undefined) {
       throw new Error(`unknown state cell ${name}`);
     }
@@ -267,15 +267,38 @@ interface Children {
 // One frame per arrow application or block. Names are pre-resolved by the
 // bundler and there are no globals: a name no frame binds is a malformed
 // bundle.
+// SPIKE: names and values side by side rather than a `Map`. A frame binds one
+// or two names — an arrow's parameters, a block's declarations — and a linear
+// scan of that beats hashing it, where allocating the `Map` is what a call was
+// mostly paying for.
 interface Scope {
   parent: Scope | null;
-  bindings: Map<string, Value>;
+  names: string[];
+  values: Value[];
+}
+
+function scopeOf(parent: Scope | null): Scope {
+  return { parent, names: [], values: [] };
+}
+
+function bind(scope: Scope, name: string, value: Value): void {
+  const at = scope.names.indexOf(name);
+  if (at === -1) {
+    scope.names.push(name);
+    scope.values.push(value);
+    return;
+  }
+  scope.values[at] = value;
+}
+
+function read(scope: Scope, name: string): Value {
+  return scope.values[scope.names.indexOf(name)] ?? null;
 }
 
 function lookup(scope: Scope | null, name: string): Scope | null {
-  for (let frame = scope; frame !== null; frame = frame.parent) {
-    if (frame.bindings.has(name)) {
-      return frame;
+  for (let at = scope; at !== null; at = at.parent) {
+    if (at.names.indexOf(name) !== -1) {
+      return at;
     }
   }
   return null;
@@ -542,7 +565,7 @@ function evaluateExpr(
             `no instance to resolve state cell ${form[NodeField.name]}`,
           );
         }
-        const handle = instance.handles.get(form[NodeField.name]);
+        const handle = instance.handles?.get(form[NodeField.name]);
         if (handle === undefined) {
           throw new Error(`unknown state cell ${form[NodeField.name]}`);
         }
@@ -554,7 +577,7 @@ function evaluateExpr(
         if (frame === null) {
           throw new Error(`unknown identifier ${form[NodeField.name]}`);
         }
-        return frame.bindings.get(form[NodeField.name]) ?? null;
+        return read(frame, form[NodeField.name]);
       }
       // An entry named rather than applied: the function it evaluates to, which
       // is what a hole handing over nothing would have called.
@@ -572,12 +595,12 @@ function evaluateExpr(
         if (instance === null || typeof value !== "function") {
           return value;
         }
-        const seen = instance.calls.get(form) ?? 0;
-        instance.calls.set(form, seen + 1);
-        let made = instance.closures.get(form);
+        const seen = instance.calls?.get(form) ?? 0;
+        (instance.calls ??= new Map()).set(form, seen + 1);
+        let made = instance.closures?.get(form);
         if (made === undefined) {
           made = [];
-          instance.closures.set(form, made);
+          (instance.closures ??= new Map()).set(form, made);
         }
         const previous = made[seen];
         if (previous !== undefined && same(previous.args, args)) {
@@ -616,12 +639,12 @@ function evaluateExpr(
         // one is found by its key wherever it moved to; an unkeyed one by which
         // evaluation of this node it was, because a node inside a loop is
         // reached once per iteration and position is all that tells them apart.
-        const seen = instance.visits.get(form) ?? 0;
-        instance.visits.set(form, seen + 1);
-        let siblings = instance.children.get(form);
+        const seen = instance.visits?.get(form) ?? 0;
+        (instance.visits ??= new Map()).set(form, seen + 1);
+        let siblings = instance.children?.get(form);
         if (siblings === undefined) {
           siblings = { claimed: new Map(), left: new Map() };
-          instance.children.set(form, siblings);
+          (instance.children ??= new Map()).set(form, siblings);
         }
         // The first visit of a render starts a new claim on this node's
         // instances; whatever the last render left and nobody asks for again is
@@ -666,9 +689,9 @@ function evaluateExpr(
         // The hole call supplies the entry-scoped bindings the splice
         // captures, one value per parameter, over the enclosing frame.
         return (...args: Value[]) => {
-          const frame: Scope = { parent: env, bindings: new Map() };
+          const frame = scopeOf(env);
           params.forEach((param, index) => {
-            frame.bindings.set(param[NodeField.name], args[index]);
+            bind(frame, param[NodeField.name], args[index]);
           });
           return evaluateExpr(
             bundle,
@@ -747,7 +770,7 @@ function executeStatement(
   }
   switch (node["#"]) {
     case NodeKind.Block: {
-      const frame: Scope = { parent: scope, bindings: new Map() };
+      const frame = scopeOf(scope);
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward.
       for (const statement of node[NodeField.statements] ?? []) {
@@ -755,7 +778,7 @@ function executeStatement(
           isNode(statement) &&
           statement["#"] === NodeKind.VariableDeclaration
         ) {
-          frame.bindings.set(statement[NodeField.name], null);
+          bind(frame, statement[NodeField.name], null);
         }
       }
       for (const statement of node[NodeField.statements] ?? []) {
@@ -768,7 +791,8 @@ function executeStatement(
       return advanced;
     }
     case NodeKind.VariableDeclaration: {
-      scope.bindings.set(
+      bind(
+        scope,
         node[NodeField.name],
         evaluateNode(bundle, node[NodeField.initializer], scope),
       );
@@ -815,7 +839,7 @@ function executeStatement(
     case NodeKind.ForStatement: {
       // The header binding lives in a scope of the loop's own, so it is gone
       // once the loop is.
-      let frame: Scope = { parent: scope, bindings: new Map() };
+      let frame = scopeOf(scope);
       const init = node[NodeField.initializer];
       if (init !== null) {
         executeStatement(bundle, init, frame);
@@ -846,7 +870,11 @@ function executeStatement(
         // Each turn gets its own copy of the header scope, taken before the
         // update: an arrow built in one turn keeps that turn's values instead
         // of the ones the loop stopped at.
-        frame = { parent: scope, bindings: new Map(frame.bindings) };
+        frame = {
+          parent: scope,
+          names: frame.names.slice(),
+          values: frame.values.slice(),
+        };
         const update = node[NodeField.incrementor];
         if (update !== null) {
           executeStatement(bundle, update, frame);
@@ -876,10 +904,10 @@ function executeStatement(
         // The catch binding scopes over the clause's block only, like an arrow
         // parameter over its body.
         const clause = node[NodeField.catchClause];
-        const frame: Scope = { parent: scope, bindings: new Map() };
+        const frame = scopeOf(scope);
         const caught = clause[NodeField.variableDeclaration];
         if (caught !== null) {
-          frame.bindings.set(caught, thrown as Value);
+          bind(frame, caught, thrown as Value);
         }
         return executeStatement(bundle, clause[NodeField.block], frame);
       }
@@ -919,7 +947,7 @@ function evaluateNode(
       if (frame === null) {
         throw new Error(`unknown identifier ${node[NodeField.text]}`);
       }
-      return frame.bindings.get(node[NodeField.name]) ?? null;
+      return read(frame, node[NodeField.name]);
     }
     case NodeKind.GetFunction: {
       return getFunction(bundle, node[NodeField.label]);
@@ -1048,7 +1076,7 @@ function evaluateNode(
         if (frame === null) {
           throw new Error(`unknown assignment target ${name}`);
         }
-        frame.bindings.set(name, value);
+        bind(frame, name, value);
         // An assignment evaluates to the value assigned, as in JavaScript; in
         // statement position nothing reads it.
         return value;
@@ -1083,12 +1111,13 @@ function evaluateNode(
     }
     case NodeKind.ArrowFunction: {
       return (...args: Value[]) => {
-        const frame: Scope = { parent: scope, bindings: new Map() };
+        const frame = scopeOf(scope);
         // A missing argument binds as null — the language's absent value;
         // `undefined` never arises (an omitted optional parameter reads
         // as null).
         (node[NodeField.parameters] ?? []).forEach((param, index) => {
-          frame.bindings.set(
+          bind(
+            frame,
             param[NodeField.name],
             index < args.length ? args[index] : null,
           );
