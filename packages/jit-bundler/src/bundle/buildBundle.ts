@@ -392,44 +392,36 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     };
   };
 
-  // A body instantiates a tree with a plain call, which carries no key — so a
-  // keyed component spliced into a script would lose it. Refused rather than
-  // dropped; the key only means something where siblings are compared.
-  const requireUnkeyed = (value: IrTreeRef): void => {
-    if (!(value.key.kind === "IrValue" && value.key.value === null)) {
-      throw new Error(
-        "Can't splice a keyed component into a script: a key identifies an " +
-          "instance among siblings, and a script instantiates one on its own. " +
-          "Wrap it in a fragment, or drop the key. An array won't do — only " +
-          "an element survives a splice, and its children are what land in " +
-          "tree position, where a key means something.",
-      );
-    }
-  };
+  // Whether a reference names which of its siblings it is. Absent is spelled as
+  // a null value rather than as a missing field, which is what the IR carries
+  // for an element nobody keyed.
+  const keyed = (value: IrTreeRef): boolean =>
+    !(value.key.kind === "IrValue" && value.key.value === null);
 
-  // A splice argument is instantiated by the script it lands in, whether it is
-  // threaded as a thunk or reached directly, so a component anywhere inside one
-  // is unkeyed for the same reason (see `requireUnkeyed`). Inlining used to
-  // enforce this by routing every splice argument through `renderValue`; now
-  // that they all arrive as thunks, the check has to be made where they are
-  // built. A nested script's own splices are checked when its thunks are.
-  const requireUnkeyedIn = (value: IrArgument): void => {
-    switch (value.kind) {
-      case "IrTreeRef":
-        requireUnkeyed(value);
-        return;
-      case "IrArray":
-        value.elements.forEach(requireUnkeyedIn);
-        return;
-      case "IrObject":
-        Object.values(value.entries).forEach(requireUnkeyedIn);
-        return;
-      case "IrExpansion":
-        requireUnkeyedIn(value.body);
-        return;
-      default:
-        return;
+  // Instantiating a tree in value position: a plain call where there is no key,
+  // and an apply where there is one. Both reach the same entry with the same
+  // slots; the apply also says which of its siblings this instance is, which is
+  // the whole of what a key is for — and is why a row a script builds can now
+  // be named the way one written in tree position can.
+  const instantiation = (value: IrTreeRef): BundleExpressionNode => {
+    materializeTree(value.target);
+    const args: BundleExpressionNode[] = treeSlots(value.target).map(readKey);
+    if (keyed(value)) {
+      return {
+        "#": NodeKind.ApplyTree,
+        [NodeField.label]: `${value.target}`,
+        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
+        [NodeField.key]: renderValue(value.key),
+      };
     }
+    return {
+      "#": NodeKind.CallExpression,
+      [NodeField.expression]: {
+        "#": NodeKind.GetTree,
+        [NodeField.label]: `${value.target}`,
+      },
+      ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
+    };
   };
 
   // Renders an IR argument in value position — as the node for the value it
@@ -450,19 +442,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
           ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
         };
       }
-      case "IrTreeRef": {
-        materializeTree(value.target);
-        requireUnkeyed(value);
-        const args = treeSlots(value.target).map(readKey);
-        return {
-          "#": NodeKind.CallExpression,
-          [NodeField.expression]: {
-            "#": NodeKind.GetTree,
-            [NodeField.label]: `${value.target}`,
-          },
-          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-        };
-      }
+      case "IrTreeRef":
+        return instantiation(value);
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
       // In a body the handle is already in scope: the entry was handed it with
@@ -539,23 +520,20 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
           };
     }
     if (value.kind === "IrTreeRef") {
+      // An unkeyed entry taking no slots is already the function the hole
+      // wants, so it is passed as it is rather than wrapped in one. Anything
+      // else — slots to thread, or a key to give — is a body to run.
       materializeTree(value.target);
-      requireUnkeyed(value);
-      const args = treeSlots(value.target).map(readKey);
-      const entry = {
-        "#": NodeKind.GetTree,
-        [NodeField.label]: `${value.target}`,
-      } as const satisfies BundleExpressionNode;
-      return args.length === 0
-        ? entry
-        : {
-            "#": NodeKind.ArrowFunction,
-            [NodeField.body]: {
-              "#": NodeKind.CallExpression,
-              [NodeField.expression]: entry,
-              [NodeField.arguments]: args,
-            } satisfies BundleCallExpressionNode,
-          };
+      if (!keyed(value) && treeSlots(value.target).length === 0) {
+        return {
+          "#": NodeKind.GetTree,
+          [NodeField.label]: `${value.target}`,
+        } as const satisfies BundleExpressionNode;
+      }
+      return {
+        "#": NodeKind.ArrowFunction,
+        [NodeField.body]: instantiation(value),
+      };
     }
     return {
       "#": NodeKind.ArrowFunction,
@@ -685,7 +663,6 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   ): BundleExpr[] => {
     const parts: BundleExpr[] = [];
     ref.args.forEach((arg, index) => {
-      requireUnkeyedIn(arg);
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.

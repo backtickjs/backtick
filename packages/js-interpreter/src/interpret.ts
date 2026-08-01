@@ -75,6 +75,11 @@ interface Instance {
   // The host that mounted this instance, captured when it was created — a
   // child created during a later re-render inherits it the same way.
   readonly notify: (() => void) | null;
+  // Which of its siblings this one is, as the node that applied it said. Held
+  // here rather than read off the element, because the element is the content's
+  // and the content doesn't know it was keyed — a re-render would otherwise put
+  // the content's own key back and the identity would last one pass.
+  key: string | number | null;
   element: Element | null;
 }
 
@@ -82,6 +87,7 @@ function instantiate(
   bundle: Bundle,
   tree: BundleTree,
   slots: Value[],
+  key: string | number | null = null,
 ): Instance {
   const instance: Instance = {
     bundle,
@@ -91,6 +97,7 @@ function instantiate(
     children: new Map(),
     visits: new Map(),
     notify: notifying,
+    key,
     element: null,
   };
   // A cell's initial is evaluated in no instance: it can't read a slot or
@@ -128,6 +135,11 @@ function render(instance: Instance): Element | null {
         instance,
       ) as Element | null,
   );
+  // The applied key wins over whatever the content named itself: the content is
+  // one element among an instance's own, and the key is about the instance.
+  if (rendered !== null && instance.key !== null) {
+    rendered.key = instance.key;
+  }
   const existing = instance.element;
   if (existing === null || rendered === null || existing === rendered) {
     instance.element = rendered;
@@ -353,10 +365,22 @@ function evaluateExpr(
         const args = (form[NodeField.arguments] ?? []).map((arg) =>
           evaluateExpr(bundle, arg, slots, env, instance),
         );
+        const applied = form[NodeField.key];
+        const key =
+          applied === undefined
+            ? null
+            : (evaluateExpr(bundle, applied, slots, env, instance) as
+                | string
+                | number
+                | null);
         // Outside an instance there is nothing to persist against, so the
         // entry applies as a plain function.
         if (instance === null) {
-          return getTree(bundle, label)(...args);
+          const tree = bundle.trees[label];
+          if (tree === undefined) {
+            throw new Error(`unknown tree entry ${label}`);
+          }
+          return instantiate(bundle, tree, args, key).element;
         }
         const tree = bundle.trees[label];
         if (tree === undefined) {
@@ -377,9 +401,10 @@ function evaluateExpr(
         const child = siblings[seen];
         if (child !== undefined) {
           child.slots = args;
+          child.key = key;
           return render(child);
         }
-        const created = instantiate(bundle, tree, args);
+        const created = instantiate(bundle, tree, args, key);
         siblings[seen] = created;
         return created.element;
       }
@@ -658,6 +683,26 @@ function evaluateNode(
     }
     case NodeKind.GetTree: {
       return getTree(bundle, node[NodeField.label]);
+    }
+    // A script instantiating a keyed entry. There is no enclosing instance to
+    // persist a child against here — a script builds its rows fresh on each
+    // read — so this names the element it produces and leaves matching them up
+    // to whoever renders them.
+    case NodeKind.ApplyTree: {
+      const label = node[NodeField.label];
+      const tree = bundle.trees[label];
+      if (tree === undefined) {
+        throw new Error(`unknown tree entry ${label}`);
+      }
+      const args = (node[NodeField.arguments] ?? []).map((arg) =>
+        evaluateNode(bundle, arg, scope),
+      );
+      const applied = node[NodeField.key];
+      const key =
+        applied === undefined
+          ? null
+          : (evaluateNode(bundle, applied, scope) as string | number | null);
+      return instantiate(bundle, tree, args, key).element;
     }
     case NodeKind.CallExpression: {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.

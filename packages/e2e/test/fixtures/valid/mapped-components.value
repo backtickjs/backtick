@@ -1,11 +1,11 @@
 <View>
-  <Text>
+  <Text key={0}>
     {"alpha"}
   </Text>
-  <Text>
+  <Text key={1}>
     {"beta"}
   </Text>
-  <Text>
+  <Text key={2}>
     {"gamma"}
   </Text>
 </View>

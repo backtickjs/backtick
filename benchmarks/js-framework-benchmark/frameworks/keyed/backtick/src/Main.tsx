@@ -190,11 +190,11 @@ export async function Main() {
           {cs`$data.read().map(
             (row) =>
               ${(
-                // No `key`: a script instantiates a row on its own, and the
-                // bundler rejects a keyed component in a splice. The benchmark's
-                // keyed category is about node identity across an update, which
-                // is what this framework has no way to say yet.
+                // Keyed by the row's own id, which is what makes this a keyed
+                // implementation: the key rides the apply that instantiates the
+                // row, so two renders of the same list name the same rows.
                 <TableRow
+                  key={cs`row.id`}
                   id={cs`row.id`}
                   label={cs`row.label`}
                   selected={cs`$selected.read() === row.id`}

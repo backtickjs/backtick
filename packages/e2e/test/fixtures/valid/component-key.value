@@ -1,11 +1,11 @@
 <View>
-  <Text>
+  <Text key="first">
     {"one"}
   </Text>
-  <Text>
+  <Text key={2}>
     {"two"}
   </Text>
-  <Text>
+  <Text key="third">
     {"three"}
   </Text>
 </View>

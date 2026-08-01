@@ -63,6 +63,17 @@ function renderNode(node: BundleStatementNode, indent: string): string {
       return fnLabel(node[NodeField.label]);
     case NodeKind.GetTree:
       return treeLabel(node[NodeField.label]);
+    // Same notation as in tree position: a body applies an entry when the
+    // instance it makes is named, and calls one when it isn't.
+    case NodeKind.ApplyTree: {
+      const args = (node[NodeField.arguments] ?? []).map((arg) =>
+        renderNode(arg, indent),
+      );
+      const applied = node[NodeField.key];
+      const key =
+        applied === undefined ? "" : ` key=${renderNode(applied, indent)}`;
+      return `${treeLabel(node[NodeField.label])}(${args.join(", ")})${key}`;
+    }
     case NodeKind.CallExpression: {
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
         renderNode(arg, indent),

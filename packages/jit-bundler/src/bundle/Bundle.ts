@@ -277,11 +277,11 @@ export interface BundleGetState {
 // all the same would give every iteration one shared instance. Positional, so
 // reordering a list moves state between rows — which is what `key` overrides. (Applying names a table row by label; a body `call` evaluates
 // a `callee` node instead, so the two are separate kinds.)
-export interface BundleApplyTree {
+export interface BundleApplyTree<Expr = BundleExpr> {
   "#": typeof NodeKind.ApplyTree;
   [NodeField.label]: TreeLabel;
-  [NodeField.arguments]?: BundleExpr[];
-  [NodeField.key]?: BundleExpr;
+  [NodeField.arguments]?: Expr[];
+  [NodeField.key]?: Expr;
 }
 
 // Applies a `functions` entry: `args` mirrors the entry's parameters — thunks
@@ -360,6 +360,11 @@ export type BundleExpressionNode =
   | BundleData<BundleExpressionNode>
   | BundleIdentifierNode
   | BundleGetEntry
+  // A body instantiates a tree by calling a `getTree`, which says nothing about
+  // identity. Applying says both: which entry, and which of its siblings this
+  // one is — so a row a script builds can be named the way a row written in
+  // tree position can.
+  | BundleApplyTree<BundleExpressionNode>
   | BundleCallExpressionNode
   | BundlePropertyAccessExpressionNode
   | BundleElementAccessExpressionNode
