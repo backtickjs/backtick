@@ -41,7 +41,7 @@ interface Rendered {
   // closure on every render, so what is registered dispatches to whichever is
   // current — otherwise every render would add another listener to the same
   // node, and one click would run the handler as many times as it had rendered.
-  readonly listeners: Map<string, () => void>;
+  listeners: Map<string, () => void> | null;
 }
 
 // Which node an element was drawn as, so a change naming the element can be
@@ -84,7 +84,7 @@ export function applyChange(change: Change): void {
   const { prop, value } = change;
   if (typeof value === "function") {
     if (prop.startsWith("on")) {
-      was.listeners.set(prop.slice(2), value as () => void);
+      was.listeners?.set(prop.slice(2), value as () => void);
     }
     return;
   }
@@ -277,7 +277,7 @@ function build(want: Wanted): Node {
       id: TEXT_ID,
       key: null,
       props: {},
-      listeners: new Map(),
+      listeners: null,
     });
     return node;
   }
@@ -288,7 +288,7 @@ function build(want: Wanted): Node {
     id: want.source.id,
     key: want.source.key,
     props: {},
-    listeners: new Map(),
+    listeners: null,
   });
   update(node, want);
   return node;
@@ -313,10 +313,11 @@ function update(node: Node, want: Wanted): void {
   const element = node as globalThis.Element;
   const props = want.source.props;
 
-  for (const [prop, value] of Object.entries(props)) {
+  for (const prop in props) {
     if (handled.has(prop)) {
       continue;
     }
+    const value = props[prop];
     // An element names its own events, and the prop is the listener's name:
     // `onclick` is a click. The registration is made once and reads the current
     // handler when it fires, so a re-render replaces what runs rather than
@@ -324,10 +325,11 @@ function update(node: Node, want: Wanted): void {
     if (typeof value === "function") {
       if (prop.startsWith("on")) {
         const event = prop.slice(2);
-        if (!was.listeners.has(event)) {
-          element.addEventListener(event, () => was.listeners.get(event)?.());
+        const listeners = (was.listeners ??= new Map());
+        if (!listeners.has(event)) {
+          element.addEventListener(event, () => listeners.get(event)?.());
         }
-        was.listeners.set(event, value as () => void);
+        listeners.set(event, value as () => void);
       }
       continue;
     }
@@ -346,8 +348,8 @@ function update(node: Node, want: Wanted): void {
     if (!(prop in props) && !handled.has(prop)) {
       element.removeAttribute(prop.toLowerCase());
     }
-    if (!(prop in props) && was.listeners.has(prop.slice(2))) {
-      was.listeners.delete(prop.slice(2));
+    if (!(prop in props)) {
+      was.listeners?.delete(prop.slice(2));
     }
   }
 

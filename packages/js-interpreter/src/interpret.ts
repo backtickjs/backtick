@@ -67,7 +67,18 @@ let notifying: ((change: Change) => void) | null = null;
 // during a render but outside a prop is structural — it decided what is drawn
 // rather than what an attribute says — and writing that cell has to re-render,
 // because there is no attribute to change into a different shape.
-let computing: PropBinding | null = null;
+// What the prop being computed would need to become a binding, if it turns out
+// to read a cell. Most props read none — an id, a class, a label — and building
+// one for each of them is the cost of a thousand rows paying for the handful
+// that need it.
+interface Pending {
+  readonly prop: string;
+  readonly element: Element;
+  readonly compute: () => Value;
+  binding: PropBinding | null;
+}
+
+let computing: Pending | null = null;
 let rendering = 0;
 
 // The bindings built by the render under way. An instance that re-renders keeps
@@ -224,6 +235,16 @@ function render(instance: Instance): Element | null {
   const made = building ?? [];
   building = outer;
   instance.made = made;
+  // An apply this render never reached draws nothing now, so the instances it
+  // was holding are dropped. Rotating them only on a visit would keep a
+  // thousand rows alive through a table that was cleared, and pay for them
+  // again on every render after that.
+  for (const [node, group] of instance.children) {
+    if (!instance.visits.has(node)) {
+      instance.children.delete(node);
+      void group;
+    }
+  }
   // The applied key wins over whatever the content named itself: the content is
   // one element among an instance's own, and the key is about the instance.
   if (rendered !== null && instance.key !== null) {
@@ -280,13 +301,18 @@ function cellHandle(instance: Instance, name: string): Value {
   const read = () => {
     // Attributed where there is something to attribute it to.
     if (computing !== null) {
+      const binding = (computing.binding ??= new PropBinding(
+        computing.prop,
+        computing.element,
+        computing.compute,
+      ));
       let watching = instance.watchers.get(name);
       if (watching === undefined) {
         watching = new Set();
         instance.watchers.set(name, watching);
       }
-      watching.add(computing);
-      computing.watches(instance, name);
+      watching.add(binding);
+      binding.watches(instance, name);
     } else if (rendering > 0) {
       // Never taken back: a cell that decided a shape once is treated as one
       // that could again, because a render that skipped a child never saw what
@@ -462,7 +488,10 @@ class PropBinding {
   // Recomputes, and says so only where the value is actually different: a write
   // that lands on the same value costs the comparison and nothing else.
   refresh(): void {
-    const value = track(this, this.compute);
+    const value = track(
+      { prop: this.prop, element: this.element, compute: this.compute, binding: this },
+      this.compute,
+    );
     if (value === this.element.props[this.prop]) {
       return;
     }
@@ -477,9 +506,9 @@ class PropBinding {
 }
 
 // Runs something with its cell reads attributed to a prop, and nothing else's.
-function track<T>(binding: PropBinding | null, run: () => T): T {
+function track<T>(pending: Pending | null, run: () => T): T {
   const previous = computing;
-  computing = binding;
+  computing = pending;
   try {
     return run();
   } finally {
@@ -516,15 +545,15 @@ function evaluateElement(
       );
       continue;
     }
-    const binding = new PropBinding(prop, built, () =>
-      evaluateExpr(bundle, expr, slots, null, instance),
-    );
-    building?.push(binding);
-    props[prop] = track(binding, () =>
-      evaluateExpr(bundle, expr, slots, null, instance),
-    );
-    // A binding computing it read no cell is dropped here: it is registered
-    // nowhere, so nothing can ever ask it to recompute.
+    const compute = (): Value =>
+      evaluateExpr(bundle, expr, slots, null, instance);
+    const pending: Pending = { prop, element: built, compute, binding: null };
+    props[prop] = track(pending, compute);
+    // There is a binding only where computing it read a cell, and only that one
+    // can ever be asked to recompute.
+    if (pending.binding !== null) {
+      building?.push(pending.binding);
+    }
   }
   return built;
 }
