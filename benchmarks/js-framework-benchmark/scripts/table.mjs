@@ -99,7 +99,7 @@ const columns = [
     read: (benchmark) => reference(framework, benchmark),
   })),
   ...manifest.columns.map((column) => ({
-    label: `backtick`,
+    label: column.label ?? `backtick`,
     sub: column.commit,
     keyed: column.keyed,
     read: (benchmark) => median(column, benchmark),

@@ -98,6 +98,21 @@
       "keyed": true,
       "dir": "57eb586",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "b2bc5df",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "b2bc5df",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "snabbdom",
+      "label": "spike",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "snabbdom-spike",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
