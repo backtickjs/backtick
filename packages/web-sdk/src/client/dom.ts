@@ -2,22 +2,6 @@ import { isElement } from "@backtickjs/js-interpreter";
 import type { Element } from "@backtickjs/js-interpreter";
 import { createRenderer } from "solid-js/universal";
 
-// How an element becomes a node. This client renders the web's own vocabulary
-// and nothing else: an element's id *is* its tag name, and its props are the
-// attributes and events HTML already has — the elements declared in
-// `../jsx-runtime/elements.ts`, which is what an app writing `<div>` names.
-//
-// There is no diffing here, and no table of components. A prop is read, and
-// reading it subscribes to whatever the interpreter computed it from, so one
-// effect per prop keeps one attribute right. Structure is `insert`, which is
-// dom-expressions' own reconciler — the same `reconcileArrays` Solid uses, over
-// the ten operations below.
-//
-// `Fragment` is the reserved id for a group: it renders its children with no
-// node of its own, so it maps to no tag at all. Every target that has a
-// fragment builds it from this same word.
-const FRAGMENT_ID = "Fragment";
-
 // Nine of these are the DOM's own words. The tenth, `setProperty`, is the only
 // decision in the file, and the reason this is `createRenderer` rather than a
 // renderer that already knows what HTML is: what a prop means is ours.
@@ -71,7 +55,7 @@ function draw(value: unknown): unknown {
   if (!isElement(value)) {
     return value;
   }
-  if (value.id === FRAGMENT_ID) {
+  if (value.id === "Fragment") {
     return draw(value.props.children);
   }
   const already = drawn.get(value);
