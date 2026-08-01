@@ -11,7 +11,7 @@
 import type { Bundle } from "@backtickjs/core";
 import type { Drawn } from "../Drawn.js";
 import { evaluate } from "@backtickjs/js-interpreter";
-import { renderInto } from "./dom.js";
+import { applyChange, renderInto } from "./dom.js";
 
 export { Element, isElement, evaluate } from "@backtickjs/js-interpreter";
 
@@ -35,7 +35,16 @@ export interface MountOptions {
 export function mount(bundle: Bundle, { target }: MountOptions): void {
   // Evaluated once. Re-rendering reads the same tree again rather than
   // re-evaluating the bundle, so instances — and the cells they own — survive.
-  const tree = evaluate(bundle, () => renderInto(target, tree));
+  // A shape change is answered by reading the tree again and drawing the
+  // difference; a prop change is one attribute, and reading the tree to find it
+  // would cost more than the change itself.
+  const tree = evaluate(bundle, (change) => {
+    if (change.kind === "shape") {
+      renderInto(target, tree);
+    } else {
+      applyChange(change);
+    }
+  });
   renderInto(target, tree);
 }
 

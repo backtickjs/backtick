@@ -32,14 +32,55 @@ import type { Value } from "./Value.js";
 // it, and tests can observe runtime behavior rather than only snapshotting
 // shape.
 
-// Who to notify after a write has re-rendered — set while an evaluation or a
-// re-render is in flight, and captured by each instance created during it, so
-// two mounts in one process notify their own hosts rather than the last one to
-// start. Ambient rather than threaded because every instance is created deep
-// inside the evaluation, and only this one thing needs to reach them.
-let notifying: (() => void) | null = null;
+/**
+ * What a write did, as the host is told about it.
+ *
+ * `shape` says the tree is not the shape it was — read it again and draw the
+ * difference. `prop` says one value on one element is different and nothing
+ * else is, which a host can answer with one attribute rather than a walk.
+ *
+ * One channel rather than two, because a client that can only redraw stays
+ * correct by redrawing on everything, and one that can do better needs nothing
+ * beyond this to know when.
+ */
+export type Change =
+  | { readonly kind: "shape" }
+  | {
+      readonly kind: "prop";
+      readonly element: Element;
+      readonly prop: string;
+      readonly value: Value;
+    };
 
-function whileNotifying<T>(notify: (() => void) | null, run: () => T): T {
+// Who to tell — set while an evaluation or a re-render is in flight, and
+// captured by each instance created during it, so two mounts in one process
+// tell their own hosts rather than the last one to start. Ambient rather than
+// threaded because every instance is created deep inside the evaluation, and
+// only this one thing needs to reach them.
+let notifying: ((change: Change) => void) | null = null;
+
+// The prop being computed, or null where a read is not being attributed to one
+// — inside a handler, say, which runs long after the render that built it.
+//
+// This is the whole of the dependency tracking: a prop that reads a cell says
+// so by reading it, and nothing is declared anywhere. A read that happens
+// during a render but outside a prop is structural — it decided what is drawn
+// rather than what an attribute says — and writing that cell has to re-render,
+// because there is no attribute to change into a different shape.
+let computing: PropBinding | null = null;
+let rendering = 0;
+
+// The bindings built by the render under way. An instance that re-renders keeps
+// its element and takes the new render's props into it, so the element a
+// binding was built against is thrown away — and a change naming that one would
+// name something the host never drew. They are retargeted at the element that
+// survived, which is the one anybody outside is holding.
+let building: PropBinding[] | null = null;
+
+function whileNotifying<T>(
+  notify: ((change: Change) => void) | null,
+  run: () => T,
+): T {
   const previous = notifying;
   notifying = notify;
   try {
@@ -49,7 +90,10 @@ function whileNotifying<T>(notify: (() => void) | null, run: () => T): T {
   }
 }
 
-export function evaluate(bundle: Bundle, onChange?: () => void): Value {
+export function evaluate(
+  bundle: Bundle,
+  onChange?: (change: Change) => void,
+): Value {
   return whileNotifying(onChange ?? null, () =>
     evaluateExpr(bundle, bundle.root, []),
   );
@@ -74,7 +118,11 @@ interface Instance {
   readonly visits: Map<BundleApplyTree, number>;
   // The host that mounted this instance, captured when it was created — a
   // child created during a later re-render inherits it the same way.
-  readonly notify: (() => void) | null;
+  readonly notify: ((change: Change) => void) | null;
+  // Which props to recompute when one of this instance's cells is written, and
+  // which of its cells were read somewhere a prop update can't answer for.
+  readonly watchers: Map<string, Set<PropBinding>>;
+  readonly structural: Set<string>;
   // Which of its siblings this one is, as the node that applied it said. Held
   // here rather than read off the element, because the element is the content's
   // and the content doesn't know it was keyed — a re-render would otherwise put
@@ -97,6 +145,8 @@ function instantiate(
     children: new Map(),
     visits: new Map(),
     notify: notifying,
+    watchers: new Map(),
+    structural: new Set(),
     key,
     element: null,
   };
@@ -122,6 +172,13 @@ function render(instance: Instance): Element | null {
   // A fresh count for this pass: an `apply` reached n times last render is
   // reached n times again, so the nth evaluation lines up with the nth instance.
   instance.visits.clear();
+  // The bindings this render is about to build replace the ones it built last
+  // time, so what watches a cell is emptied and filled again rather than grown.
+  instance.watchers.clear();
+  instance.structural.clear();
+  rendering++;
+  const outer = building;
+  building = [];
   // Under this instance's host, so a child instantiated for the first time
   // during a re-render notifies the same one rather than nothing.
   const rendered = whileNotifying(
@@ -135,6 +192,9 @@ function render(instance: Instance): Element | null {
         instance,
       ) as Element | null,
   );
+  rendering--;
+  const made = building ?? [];
+  building = outer;
   // The applied key wins over whatever the content named itself: the content is
   // one element among an instance's own, and the key is about the instance.
   if (rendered !== null && instance.key !== null) {
@@ -147,6 +207,14 @@ function render(instance: Instance): Element | null {
   }
   existing.key = rendered.key;
   existing.props = rendered.props;
+  // The element this render built is discarded in favour of the one already
+  // held, so anything that would report the discarded one is pointed at the
+  // survivor. Its props are the same object, so nothing else has to move.
+  for (const binding of made) {
+    if (binding.element === rendered) {
+      binding.element = existing;
+    }
+  }
   return existing;
 }
 
@@ -167,14 +235,37 @@ function cellHandle(instance: Instance, name: string): Value {
     return instance.cells;
   };
   const read = () => {
+    // Attributed where there is something to attribute it to.
+    if (computing !== null) {
+      let watching = instance.watchers.get(name);
+      if (watching === undefined) {
+        watching = new Set();
+        instance.watchers.set(name, watching);
+      }
+      watching.add(computing);
+      computing.watched = true;
+    } else if (rendering > 0) {
+      instance.structural.add(name);
+    }
     return storage().get(name) ?? null;
   };
   const write = (value: Value): Value => {
     storage().set(name, value);
+    const watching = instance.watchers.get(name);
+    // Where every read of this cell was a prop, the props are recomputed and
+    // whoever holds them is told — nothing is re-rendered and nothing is
+    // walked. Where a read decided what is drawn, the instance renders again,
+    // because there is no attribute to change into a different shape.
+    if (!instance.structural.has(name) && watching !== undefined) {
+      for (const binding of watching) {
+        binding.refresh();
+      }
+      return null;
+    }
     render(instance);
     // The element refreshed in place, so the host re-reads rather than being
     // handed anything: this only says that something moved.
-    instance.notify?.();
+    instance.notify?.({ kind: "shape" });
     return null;
   };
   const update = (updater: (current: Value) => Value): Value => {
@@ -274,6 +365,55 @@ function getTree(
 
 // An inline element renders in its enclosing instance: it is part of that entry,
 // so it reads the same slots and the same cells.
+// One prop of one element, and how to compute it again. Rebuilt with the
+// element it belongs to, so it holds no state beyond what it needs to recompute
+// and who to tell.
+// One prop of one element, and how to compute it again. Rebuilt with the
+// element it belongs to, so it holds no state beyond what it needs to recompute
+// and who to tell — and a render that replaces it takes it out of what watches
+// a cell, so a binding nobody holds is never refreshed again.
+class PropBinding {
+  watched = false;
+  readonly prop: string;
+  element: Element;
+  private readonly compute: () => Value;
+  private readonly notify: ((change: Change) => void) | null;
+
+  constructor(prop: string, element: Element, compute: () => Value) {
+    this.prop = prop;
+    this.element = element;
+    this.compute = compute;
+    this.notify = notifying;
+  }
+
+  // Recomputes, and says so only where the value is actually different: a write
+  // that lands on the same value costs the comparison and nothing else.
+  refresh(): void {
+    const value = track(this, this.compute);
+    if (value === this.element.props[this.prop]) {
+      return;
+    }
+    this.element.props[this.prop] = value;
+    this.notify?.({
+      kind: "prop",
+      element: this.element,
+      prop: this.prop,
+      value,
+    });
+  }
+}
+
+// Runs something with its cell reads attributed to a prop, and nothing else's.
+function track<T>(binding: PropBinding | null, run: () => T): T {
+  const previous = computing;
+  computing = binding;
+  try {
+    return run();
+  } finally {
+    computing = previous;
+  }
+}
+
 function evaluateElement(
   bundle: Bundle,
   element: BundleElement,
@@ -291,10 +431,29 @@ function evaluateElement(
           | number
           | null);
   const props: { [prop: string]: Value } = {};
+  const built = new Element(element[NodeField.id], key, props);
   for (const [prop, expr] of Object.entries(element[NodeField.props] ?? {})) {
-    props[prop] = evaluateExpr(bundle, expr, slots, null, instance);
+    // Children are structure, not an attribute. A cell read while working out
+    // what an element contains decides which elements exist, and no amount of
+    // recomputing one value can express that — so it is read with nothing to
+    // attribute it to, which marks the cell as one a write has to re-render.
+    if (prop === "children") {
+      props[prop] = track(null, () =>
+        evaluateExpr(bundle, expr, slots, null, instance),
+      );
+      continue;
+    }
+    const binding = new PropBinding(prop, built, () =>
+      evaluateExpr(bundle, expr, slots, null, instance),
+    );
+    building?.push(binding);
+    props[prop] = track(binding, () =>
+      evaluateExpr(bundle, expr, slots, null, instance),
+    );
+    // A binding computing it read no cell is dropped here: it is registered
+    // nowhere, so nothing can ever ask it to recompute.
   }
-  return new Element(element[NodeField.id], key, props);
+  return built;
 }
 
 // A tree expression (also the root): plain JSON carries itself; the

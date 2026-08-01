@@ -1,5 +1,5 @@
 import { isElement } from "@backtickjs/js-interpreter";
-import type { Element } from "@backtickjs/js-interpreter";
+import type { Change, Element } from "@backtickjs/js-interpreter";
 
 // How an element becomes a node. This client renders the web's own vocabulary
 // and nothing else: an element's id *is* its tag name, and its props are the
@@ -39,6 +39,10 @@ interface Rendered {
   readonly listeners: Map<string, () => void>;
 }
 
+// Which node an element was drawn as, so a change naming the element can be
+// answered without looking for it.
+const drawn = new WeakMap<Element, Node>();
+
 const rendered = new WeakMap<Node, Rendered>();
 
 // What a render asks for in one child position.
@@ -55,6 +59,35 @@ type Wanted =
 // what a page's own structure is. Anything left over is removed.
 export function renderInto(container: globalThis.Element, tree: unknown): void {
   patch(container, wanted(tree));
+}
+
+// One prop of one element is different, and nothing else is. Answered where it
+// landed rather than by reading the tree again: the element says which node it
+// was drawn as, and one attribute is set.
+//
+// A change naming an element this never drew is nothing to do — a tree the host
+// has not rendered yet, or one it has already replaced.
+export function applyChange(change: Change): void {
+  if (change.kind !== "prop") {
+    return;
+  }
+  const node = drawn.get(change.element);
+  const was = node === undefined ? undefined : rendered.get(node);
+  if (node === undefined || was === undefined || handled.has(change.prop)) {
+    return;
+  }
+  const { prop, value } = change;
+  if (typeof value === "function") {
+    if (prop.startsWith("on")) {
+      was.listeners.set(prop.slice(2), value as () => void);
+    }
+    return;
+  }
+  if (typeof value === "object" && value !== null) {
+    return;
+  }
+  was.props = { ...was.props, [prop]: value };
+  attribute(node as globalThis.Element, prop, value);
 }
 
 // The children a value asks for, with fragments flattened into their parent:
@@ -278,6 +311,7 @@ function update(node: Node, want: Wanted): void {
     }
   }
 
+  drawn.set(want.source, node);
   was.props = props;
   patch(element, wanted(props.children));
 }

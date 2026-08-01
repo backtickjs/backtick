@@ -1,4 +1,4 @@
-import { cs, state, type Client } from "@backtickjs/core";
+import { cs, state, type Client, type State } from "@backtickjs/core";
 
 type Row = {
   readonly id: number;
@@ -197,7 +197,7 @@ export async function Main() {
                   key={cs`row.id`}
                   id={cs`row.id`}
                   label={cs`row.label`}
-                  selected={cs`$selected.read() === row.id`}
+                  selected={selected}
                   onSelect={cs`() => $select(row.id)`}
                   onRemove={cs`() => $remove(row.id)`}
                 />
@@ -238,6 +238,11 @@ async function Button({
 
 // The row shape the driver asserts, node for node: four cells, the label in an
 // anchor, and the remove glyph in an anchor of its own.
+//
+// The row is handed the cell rather than an answer computed from it. A prop
+// that reads a cell is recomputed on its own when that cell is written, so
+// selecting a row changes two class attributes; a boolean computed out here
+// would make selecting one row a re-render of all of them.
 async function TableRow({
   id,
   label,
@@ -247,12 +252,12 @@ async function TableRow({
 }: {
   id: Client<number>;
   label: Client<string>;
-  selected: Client<boolean>;
+  selected: Client<State<number>>;
   onSelect: Client<() => void>;
   onRemove: Client<() => void>;
 }) {
   return (
-    <tr class={cs`$selected ? "danger" : ""`}>
+    <tr class={cs`$selected.read() === $id ? "danger" : ""`}>
       <td class="col-md-1">{id}</td>
       <td class="col-md-4">
         <a onclick={onSelect}>{label}</a>
