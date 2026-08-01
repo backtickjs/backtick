@@ -45,10 +45,29 @@ interface Rendered {
 }
 
 // Which node an element was drawn as, so a change naming the element can be
-// answered without looking for it.
-const drawn = new WeakMap<Element, Node>();
+// answered without looking for it. Kept on the element for the same reason the
+// record is kept on the node.
+function drawnAs(element: Element): Node | undefined {
+  return (element as unknown as { node?: Node }).node;
+}
 
-const rendered = new WeakMap<Node, Rendered>();
+function drewAs(element: Element, node: Node): void {
+  (element as unknown as { node?: Node }).node = node;
+}
+
+// Held on the node rather than in a table beside it. A thousand rows is eight
+// thousand nodes, and a table of that many entries is a table the collector has
+// to walk when they go — where a property is freed with the node that carried
+// it. The name is the package's, so nothing else on a node can collide.
+const RECORD = "@backtickjs";
+
+function recordOf(node: Node): Rendered | undefined {
+  return (node as unknown as { [RECORD]?: Rendered })[RECORD];
+}
+
+function remember(node: Node, record: Rendered): void {
+  (node as unknown as { [RECORD]?: Rendered })[RECORD] = record;
+}
 
 // What a render asks for in one child position.
 type Wanted =
@@ -76,8 +95,8 @@ export function applyChange(change: Change): void {
   if (change.kind !== "prop") {
     return;
   }
-  const node = drawn.get(change.element);
-  const was = node === undefined ? undefined : rendered.get(node);
+  const node = drawnAs(change.element);
+  const was = node === undefined ? undefined : recordOf(node);
   if (node === undefined || was === undefined || handled.has(change.prop)) {
     return;
   }
@@ -122,7 +141,7 @@ function patch(parent: globalThis.Element, children: Wanted[]): void {
   // Only what this renderer put here. A page's own markup inside the mount
   // point is neither matched nor moved nor removed — it isn't ours.
   const existing = Array.from(parent.childNodes).filter((node) =>
-    rendered.has(node),
+    recordOf(node) !== undefined,
   );
 
   // Nothing to match against: everything is built, and built into a fragment so
@@ -156,7 +175,7 @@ function patch(parent: globalThis.Element, children: Wanted[]): void {
   const keyed = new Map<string, number>();
   const spare: number[] = [];
   existing.forEach((node, at) => {
-    const was = rendered.get(node);
+    const was = recordOf(node);
     if (was === undefined) {
       return;
     }
@@ -184,7 +203,7 @@ function patch(parent: globalThis.Element, children: Wanted[]): void {
         const candidate = spare[at] as number;
         if (
           !taken.has(candidate) &&
-          rendered.get(existing[candidate] as Node)?.id === id
+          recordOf(existing[candidate] as Node)?.id === id
         ) {
           found = candidate;
           next = at + 1;
@@ -271,7 +290,7 @@ const identity = (id: string, key: string | number): string =>
 function build(want: Wanted): Node {
   if (want.kind === "text") {
     const node = document.createTextNode(want.value);
-    rendered.set(node, {
+    remember(node, {
       source: null,
       drew: null,
       id: TEXT_ID,
@@ -282,7 +301,7 @@ function build(want: Wanted): Node {
     return node;
   }
   const node = document.createElement(tagFor(want.source.id));
-  rendered.set(node, {
+  remember(node, {
     source: null,
     drew: null,
     id: want.source.id,
@@ -295,7 +314,7 @@ function build(want: Wanted): Node {
 }
 
 function update(node: Node, want: Wanted): void {
-  const was = rendered.get(node);
+  const was = recordOf(node);
   if (was === undefined) {
     return;
   }
@@ -353,7 +372,7 @@ function update(node: Node, want: Wanted): void {
     }
   }
 
-  drawn.set(want.source, node);
+  drewAs(want.source, node);
   const children = was.props["children"];
   was.props = props;
   was.source = want.source;
