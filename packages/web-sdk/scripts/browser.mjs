@@ -1,7 +1,8 @@
 import { build } from "esbuild";
 import { writeFile } from "node:fs/promises";
 
-// The client, as a browser can load it.
+// The client, as a browser can load it: `client/browser.js`, which is the
+// client with `start()` already called — a page loads one script and is done.
 //
 // `tsc` emits what Node reads: real modules that name their dependencies —
 // `@backtickjs/js-interpreter`, `@backtickjs/jit-bundler/format`. A browser
@@ -17,7 +18,7 @@ import { writeFile } from "node:fs/promises";
 // is still current. `metafile` is how the name comes back — esbuild picks it,
 // and the manifest is where the server reads it rather than recomputing it.
 const result = await build({
-  entryPoints: ["dist/client/index.js"],
+  entryPoints: ["dist/client/browser.js"],
   entryNames: "backtick-[hash]",
   outdir: "dist/browser",
   bundle: true,

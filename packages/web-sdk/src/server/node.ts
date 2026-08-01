@@ -87,7 +87,7 @@ export function readAssets(
 // This writes no HTML. `root` is the directory a page and whatever it loads sit
 // in, and a page reaches the client by the name it writes:
 //
-//     <script type="module">import { start } from "/backtick.js";</script>
+//     <script type="module" src="/backtick.js"></script>
 //
 // The page then asks its own path for the targets it should draw, which is the
 // same request a phone makes.
