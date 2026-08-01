@@ -1,0 +1,47 @@
+{
+  "reference": {
+    "dir": "reference",
+    "date": "2026-07-31",
+    "frameworks": [
+      {
+        "label": "vanillajs",
+        "file": "vanillajs-keyed"
+      },
+      {
+        "label": "svelte",
+        "file": "svelte-v5.42.1-keyed"
+      }
+    ]
+  },
+  "columns": [
+    {
+      "commit": "71ab0ec",
+      "date": "2026-08-01",
+      "keyed": false,
+      "medians": {
+        "01_run1k": 44.7,
+        "02_replace1k": 47.3,
+        "03_update10th1k_x16": 122.1,
+        "04_select1k": 124.2,
+        "05_swap1k": 120.4,
+        "06_remove-one-1k": 59.9,
+        "07_create10k": 464.8,
+        "08_create1k-after1k_x2": 78.9,
+        "09_clear1k_x8": 12.3,
+        "21_ready-memory": 0.6,
+        "22_run-memory": 3.9,
+        "25_run-clear-memory": 2.6,
+        "41_size-uncompressed": 20.6,
+        "42_size-compressed": 4.8,
+        "43_first-paint": 106.6
+      }
+    },
+    {
+      "commit": "8ddc1bd",
+      "date": "2026-08-01",
+      "keyed": true,
+      "dir": "8ddc1bd",
+      "file": "backtick-v0.1.0-keyed"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"framework":"vanillajs-keyed","keyed":true,"benchmark":"41_size-uncompressed","type":"size","values":{"DEFAULT":{"min":11.3,"max":11.3,"median":11.3,"mean":11.3,"stddev":null,"values":[11.3]}}}

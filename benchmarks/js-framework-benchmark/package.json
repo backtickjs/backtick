@@ -9,6 +9,7 @@
     "bench": "node cli.mjs bench",
     "isKeyed": "node cli.mjs isKeyed",
     "checkCSP": "node cli.mjs checkCSP",
-    "results": "node cli.mjs results"
+    "results": "node cli.mjs results",
+    "table": "node scripts/table.mjs"
   }
 }
