@@ -229,6 +229,39 @@
       "keyed": true,
       "dir": "app-views",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "ba263a7",
+      "label": "each",
+      "note": "list node, 5 iterations, not kept; result files lost",
+      "date": "uncommitted",
+      "keyed": true,
+      "medians": {
+        "01_run1k": 30.1,
+        "02_replace1k": 33.4,
+        "03_update10th1k_x16": 32.1,
+        "04_select1k": 6.9,
+        "05_swap1k": 15.7,
+        "06_remove-one-1k": 11.8,
+        "07_create10k": 304.4,
+        "08_create1k-after1k_x2": 33.2,
+        "09_clear1k_x8": 15.1,
+        "21_ready-memory": 0.82,
+        "22_run-memory": 4.49,
+        "25_run-clear-memory": 1.32,
+        "41_size-uncompressed": 35,
+        "42_size-compressed": 10,
+        "43_first-paint": 107.4
+      }
+    },
+    {
+      "commit": "ba263a7",
+      "label": "rebuild",
+      "note": "no list node, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-rebuild",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

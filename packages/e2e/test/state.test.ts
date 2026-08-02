@@ -113,27 +113,30 @@ describe("local state", () => {
     assert.equal(fontSize(text), 18);
   });
 
-  it("a keyed row keeps its node when the list is reordered", async () => {
+  // A list is drawn again from nothing whenever what it was built from
+  // changes: there is no node in the format saying a children position is a
+  // list, so a client is handed a finished one and has nothing to match it
+  // against. What that costs is written down in `PLAN.md`; what it has to keep
+  // is that the list is right afterwards, which is what these two check.
+  //
+  // The assertions a `For` would add back are about identity — that a row which
+  // moved is the node it was, and that a row which went took its own node with
+  // it. Neither holds here, and neither is asserted.
+  it("a reordered list draws the rows it was left with", async () => {
     const view = await render("keyed-rows.tsx");
     const [swap, , list] = children(view);
     assert.ok(swap !== undefined && list !== undefined);
-    const before = [...list.children];
-    assert.equal(before.length, 3);
+    assert.deepEqual(list.children.map(text), ["row 1", "row 2", "row 3"]);
     handler(swap)();
-    // The write built a new array of new rows, and the keys are what say the
-    // rows themselves are the ones already there: the ends have traded places
-    // and the middle has not moved, and all three are the nodes from before.
-    assert.deepEqual(list.children, [before[2], before[1], before[0]]);
     assert.deepEqual(list.children.map(text), ["row 3", "row 2", "row 1"]);
   });
 
-  it("a keyed row that goes takes its node with it", async () => {
+  it("a list a row was dropped from draws the rest", async () => {
     const view = await render("keyed-rows.tsx");
     const [, drop, list] = children(view);
     assert.ok(drop !== undefined && list !== undefined);
-    const before = [...list.children];
     handler(drop)();
-    assert.deepEqual(list.children, [before[0], before[2]]);
+    assert.deepEqual(list.children.map(text), ["row 1", "row 3"]);
   });
 
   it("a child redraws everything it read of a cell it was handed", async () => {

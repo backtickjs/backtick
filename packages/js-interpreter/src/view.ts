@@ -1,23 +1,17 @@
-import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
+import { NodeField } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleElement,
   BundleExpr,
   BundleTree,
 } from "@backtickjs/core";
-import {
-  createMemo,
-  createRoot,
-  createSignal,
-  mapArray,
-  untrack,
-} from "solid-js";
+import { createMemo, createRoot, createSignal } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import type { Renderer, RendererOptions } from "solid-js/universal";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
 import { isAppliedTree } from "./Value.js";
-import type { Key, Value } from "./Value.js";
+import type { Value } from "./Value.js";
 
 // The view half: turning a tree entry into the host's own nodes, once, and
 // keeping them current through the reactive graph rather than by building them
@@ -261,11 +255,16 @@ export function compileElement(
   const props = Object.entries(element[NodeField.props] ?? {}).filter(
     ([prop]) => prop !== "children",
   );
+  // A prop the bundle spelled out is set once and never looked at again. It is
+  // the one distinction left here, and it is a question about the node rather
+  // than a walk of what is under it: a literal is the value it evaluates to,
+  // and a computation watching a constant would be a computation per attribute
+  // per element for nothing.
   const fixed = props
-    .filter(([, expr]) => buildsOnce(expr))
-    .map(([prop, expr]) => [prop, compile(bundle, expr)] as const);
+    .filter(([, expr]) => expr === null || typeof expr !== "object")
+    .map(([prop, expr]) => [prop, expr as Value] as const);
   const computed = props
-    .filter(([, expr]) => !buildsOnce(expr))
+    .filter(([, expr]) => expr !== null && typeof expr === "object")
     .map(([prop, expr]) => [prop, compile(bundle, expr)] as const);
   const children = element[NodeField.props]?.["children"];
   const draw =
@@ -274,8 +273,8 @@ export function compileElement(
     const instance = instanceOf(scope);
     const host = instance.host;
     const node = host.createElement(id);
-    for (const [prop, read] of fixed) {
-      host.setProp(node, prop, drawn(read(scope), instance));
+    for (const [prop, value] of fixed) {
+      host.setProp(node, prop, value);
     }
     for (const [prop, read] of computed) {
       // One effect per prop, so a write moves that one prop of that one node.
@@ -312,81 +311,7 @@ function compileChildren(
       members.map((member) => member(scope, instance));
   }
   const read = compile(bundle, expr);
-  // Built once and never asked again, so it costs no computation and no
-  // reconciliation: structure the bundle carried, or an element — whose own
-  // moving parts are its business, and which is one child however many of them
-  // it has.
-  if (buildsOnce(expr)) {
-    return (scope, instance) => drawn(read(scope), instance);
-  }
-  // Something computed, but never an instance: text, a number, a list of them.
-  // There is no identity to keep here — `insert` reads it, and what it reads is
-  // the whole of what this position is — so it costs one computation and none
-  // of the machinery below.
-  if (!mayApplyTree(bundle, expr, new Set())) {
-    return (scope) => () => read(scope);
-  }
-  return (scope, instance) => views(read, scope, instance);
-}
-
-// Whether building this once is enough.
-//
-// An element is: what can change inside it is bound when it is built, and no
-// amount of change makes it a different element. So is a value the bundle
-// carried, which cannot change at all. Everything else is something a script
-// works out, and may be a different thing every time it is asked.
-function buildsOnce(expr: BundleExpr): boolean {
-  return isElementNode(expr) || isStatic(expr);
-}
-
-function isElementNode(expr: BundleExpr): expr is BundleElement {
-  return (
-    expr !== null &&
-    typeof expr === "object" &&
-    !Array.isArray(expr) &&
-    "#" in expr &&
-    expr["#"] === NodeKind.Element
-  );
-}
-
-// Whether evaluating this could ever produce an instance to keep — reaching
-// through the entries it calls, since what a script hands back is decided in
-// its body and in the thunks handed to it.
-//
-// A children position that cannot is the common one: a label, a number, a row's
-// id. Knowing that here is what keeps the keyed reconciler off everything that
-// isn't a list, which is most of a page.
-function mayApplyTree(
-  bundle: Bundle,
-  expr: unknown,
-  seen: Set<string>,
-): boolean {
-  if (expr === null || typeof expr !== "object") {
-    return false;
-  }
-  if (Array.isArray(expr)) {
-    return expr.some((member) => mayApplyTree(bundle, member, seen));
-  }
-  const node = expr as { [key: string]: unknown; "#"?: number };
-  if (node["#"] === NodeKind.ApplyTree || node["#"] === NodeKind.GetTree) {
-    return true;
-  }
-  // An entry named or applied is an entry whose body this position can produce
-  // the value of. Followed once — a body that reaches itself says nothing new
-  // the second time.
-  if (
-    node["#"] === NodeKind.ApplyFunction ||
-    node["#"] === NodeKind.GetFunction
-  ) {
-    const label = node[NodeField.label] as string;
-    if (!seen.has(label)) {
-      seen.add(label);
-      if (mayApplyTree(bundle, bundle.functions[label], seen)) {
-        return true;
-      }
-    }
-  }
-  return Object.values(node).some((value) => mayApplyTree(bundle, value, seen));
+  return (scope, instance) => () => drawn(read(scope), instance);
 }
 
 // What a settled children position holds, with its applications built: the same
@@ -396,141 +321,6 @@ function drawn(value: Value, instance: Instance): unknown {
     return value.map((member) => drawn(member, instance));
   }
   return build(value, instance);
-}
-
-/**
- * A children position a script computes, as the accessor `insert` reads.
- *
- * The list of applications is compared against the last one by key, and that
- * comparison is all the identity there is: a row that was in both keeps the
- * nodes it had and is handed its new slots, a row that has gone is dropped
- * along with everything it built, and a row that has moved is moved rather than
- * rebuilt. `mapArray` is what does it — over the keys rather than the
- * applications, so a row whose data changed under an unchanged key is the same
- * row, which is the difference between updating a thousand rows and replacing
- * them.
- *
- * A position that evaluates to something other than a list of applications —
- * text, a number, nothing — hands that straight to `insert`, which knows what
- * to do with it. There is nothing to reconcile in a value.
- */
-function views(
-  draw: Compiled,
-  scope: Scope | null,
-  instance: Instance,
-): () => unknown {
-  const evaluated = createMemo(() => draw(scope));
-  // Null where this is not a list of applications, which is the case that goes
-  // through untouched. Flattened first: a map over a map is a list of lists,
-  // and what goes in a children position is what they add up to.
-  const list = createMemo(() => {
-    const value = evaluated();
-    if (!Array.isArray(value)) {
-      return isAppliedTree(value) ? [value] : null;
-    }
-    const members: Value[] = [];
-    flatten(value as Value[], members);
-    return members.some(isAppliedTree) ? members : null;
-  });
-  // The names this list goes by, in order. Compared member by member: a list
-  // rebuilt from the same rows is a new array every time, and comparing it as
-  // one value would say every row moved on every write.
-  const keys = createMemo(() => list()?.map(keyOf) ?? [], undefined, {
-    equals: sameKeys,
-  });
-  const byKey = createMemo(() => {
-    const found = new Map<Key, Value>();
-    const members = list();
-    if (members !== null) {
-      for (let at = 0; at < members.length; at++) {
-        found.set(keyOf(members[at], at), members[at]);
-      }
-    }
-    return found;
-  });
-  const built = mapArray(keys, (key) => {
-    const held = untrack(() => byKey().get(key) ?? null);
-    if (!isAppliedTree(held)) {
-      // Not an application, so there is nothing to instantiate: the value is
-      // handed to `insert` as it is, and reads its own way to the current one.
-      return () => byKey().get(key) ?? null;
-    }
-    // One computation per row, and what it holds is what the row is handed: a
-    // list this row is still in re-runs this and stops there, because equal
-    // arguments are not a write. A second memo between this and the row would
-    // be a second pass over every row of every list, to arrive at what this
-    // already says.
-    const slots = createMemo(
-      () => {
-        const now = byKey().get(key) ?? null;
-        return isAppliedTree(now) ? now.slots : held.slots;
-      },
-      undefined,
-      { equals: same },
-    );
-    return instantiate(instance.bundle, held.tree, slots, instance.host);
-  });
-  return () => (list() === null ? evaluated() : built());
-}
-
-function flatten(value: readonly Value[], into: Value[]): void {
-  for (const member of value) {
-    if (Array.isArray(member)) {
-      flatten(member, into);
-      continue;
-    }
-    into.push(member);
-  }
-}
-
-// The name a member of a list goes by: the key it was applied with, or where it
-// has none, its position — which is the only identity an unkeyed member has.
-function keyOf(value: Value, at: number): Key {
-  return (isAppliedTree(value) ? value.key : null) ?? at;
-}
-
-function sameKeys(a: readonly Key[], b: readonly Key[]): boolean {
-  return a.length === b.length && a.every((key, at) => key === b[at]);
-}
-
-// Whether two argument lists are the same values in the same order. Identity
-// rather than equality: two objects that look alike are still two objects, and
-// telling them apart is the caller's business, not this.
-function same(a: Value[], b: Value[]): boolean {
-  return a.length === b.length && a.every((value, at) => value === b[at]);
-}
-
-// Whether an expression is the value it spells: a literal, or a container of
-// them, or an element whose props and children are all of them too. Everything
-// a `#` names is something somebody works out — a slot, a cell, an entry
-// applied — and is therefore not.
-//
-// This is what tells structure from content without a flag saying which is
-// which. A page's chrome is static all the way down and costs nothing to keep;
-// the parts a script computes are exactly the parts that carry one of those
-// nodes.
-function isStatic(expr: BundleExpr): boolean {
-  if (expr === null || typeof expr !== "object") {
-    return true;
-  }
-  if (Array.isArray(expr)) {
-    return expr.every(isStatic);
-  }
-  if ("#" in expr) {
-    // An element is as settled as what it holds; every other node is
-    // something computed.
-    const element = expr as BundleElement;
-    return (
-      element["#"] === NodeKind.Element &&
-      element[NodeField.key] === undefined &&
-      Object.values(element[NodeField.props] ?? {}).every((prop) =>
-        isStatic(prop as BundleExpr),
-      )
-    );
-  }
-  return Object.values(expr as { [key: string]: BundleExpr }).every((value) =>
-    isStatic(value as BundleExpr),
-  );
 }
 
 // The instance a tree expression is being evaluated in. A tree expression is
