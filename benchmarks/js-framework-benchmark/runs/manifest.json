@@ -271,6 +271,24 @@
       "keyed": true,
       "dir": "app-for",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "262bb84",
+      "label": "settled",
+      "note": "no effect for a settled child, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-settled",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "262bb84",
+      "label": "settled",
+      "note": "same build, second run",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-settled2",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { NodeField } from "@backtickjs/jit-bundler/format";
+import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleElement,
@@ -316,7 +316,26 @@ function compileChildren(
       members.map((member) => member(scope, instance));
   }
   const read = compile(bundle, expr);
+  // An element, or a value the bundle spelled out: what it draws is settled
+  // when it is built, so `insert` is handed the thing rather than a way of
+  // asking for it — and hands back without making a computation to watch it.
+  // Whatever moves inside an element is the element's own business, bound when
+  // it was built.
+  if (isSettled(expr)) {
+    return (scope, instance) => drawn(read(scope), instance);
+  }
   return (scope, instance) => () => drawn(read(scope), instance);
+}
+
+function isSettled(expr: BundleExpr): boolean {
+  if (expr === null || typeof expr !== "object") {
+    return true;
+  }
+  return (
+    !Array.isArray(expr) &&
+    "#" in expr &&
+    (expr as { "#": number })["#"] === NodeKind.Element
+  );
 }
 
 /**
