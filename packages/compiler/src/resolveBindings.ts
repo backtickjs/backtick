@@ -427,6 +427,10 @@ export function resolveBindings(
         walkExpression(script, node.body, inner);
       }
       release();
+    } else if (ts.isSpreadElement(node)) {
+      // `...xs` contributes no name of its own; what it spreads is an
+      // ordinary expression and reaches whatever that references.
+      walkExpression(script, node.expression, scopes);
     } else if (ts.isArrayLiteralExpression(node)) {
       for (const element of node.elements) {
         walkExpression(script, element, scopes);

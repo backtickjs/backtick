@@ -5,6 +5,7 @@ import type {
   BundleElement,
   BundleExpr,
   BundleExpressionNode,
+  BundleSpreadElementNode,
   BundleStatementNode,
 } from "@backtickjs/core";
 
@@ -51,7 +52,27 @@ function isNode(
 }
 
 // Body grammar, as pseudo-JS.
-function renderNode(node: BundleStatementNode, indent: string): string {
+// `...xs`, which stands where an element or an argument stands rather than
+// where a statement does — so it is read before the statement kinds are.
+function isSpread(
+  node: BundleStatementNode | BundleSpreadElementNode,
+): node is BundleSpreadElementNode {
+  return (
+    typeof node === "object" &&
+    node !== null &&
+    !Array.isArray(node) &&
+    "#" in node &&
+    node["#"] === NodeKind.SpreadElement
+  );
+}
+
+function renderNode(
+  node: BundleStatementNode | BundleSpreadElementNode,
+  indent: string,
+): string {
+  if (isSpread(node)) {
+    return `...${renderNode(node[NodeField.expression], indent)}`;
+  }
   if (!isNode(node)) {
     return renderData(node, indent, renderNode);
   }

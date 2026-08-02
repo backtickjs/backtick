@@ -6,6 +6,8 @@ import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleApply,
+  BundleArrayElement,
+  BundleSpreadElementNode,
   BundleGetFunction,
   BundleApplyTree,
   BundleBinaryOperator,
@@ -1011,11 +1013,65 @@ function evaluateNode(
   return compileNode(bundle, node)(scope);
 }
 
+// Whether a list member is `...xs` rather than a value of its own.
+function isSpread(
+  element: BundleArrayElement,
+): element is BundleSpreadElementNode {
+  return (
+    typeof element === "object" &&
+    element !== null &&
+    !Array.isArray(element) &&
+    "#" in element &&
+    element["#"] === NodeKind.SpreadElement
+  );
+}
+
+// A list that may hold `...xs`: each member answers with one value or with the
+// members of an array, and the list is what they add up to. A list with no
+// spread in it compiles to the plain map it was before — the flattening is a
+// cost only where something is actually spread.
+function compileElements(
+  bundle: Bundle,
+  elements: readonly BundleArrayElement[],
+): (scope: Scope | null) => Value[] {
+  if (!elements.some(isSpread)) {
+    const parts = elements.map((element) =>
+      compileNode(bundle, element as BundleExpressionNode),
+    );
+    return (scope) => parts.map((part) => part(scope));
+  }
+  const parts = elements.map((element) =>
+    isSpread(element)
+      ? {
+          spread: true,
+          read: compileNode(bundle, element[NodeField.expression]),
+        }
+      : { spread: false, read: compileNode(bundle, element) },
+  );
+  return (scope) => {
+    const out: Value[] = [];
+    for (const part of parts) {
+      const value = part.read(scope);
+      if (!part.spread) {
+        out.push(value);
+        continue;
+      }
+      if (!Array.isArray(value)) {
+        throw new Error("only an array can be spread");
+      }
+      for (const member of value) {
+        out.push(member);
+      }
+    }
+    return out;
+  };
+}
+
 function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
   if (!isNode(node)) {
     if (Array.isArray(node)) {
-      const parts = node.map((element) => compileNode(bundle, element));
-      return (scope) => parts.map((part) => part(scope));
+      const elements = compileElements(bundle, node);
+      return (scope) => elements(scope);
     }
     const data = node as { [key: string]: BundleExpressionNode };
     const keys = Object.keys(data);
@@ -1077,9 +1133,7 @@ function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
       // decided here rather than on every call.
       const callee = node[NodeField.expression];
       const optionalCall = node[NodeField.questionDotToken];
-      const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        compileNode(bundle, arg),
-      );
+      const args = compileElements(bundle, node[NodeField.arguments] ?? []);
       if (isNode(callee) && callee["#"] === NodeKind.PropertyAccessExpression) {
         const receiver = compileNode(bundle, callee[NodeField.expression]);
         const member = callee[NodeField.name];
@@ -1101,10 +1155,7 @@ function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
           if (typeof method !== "function") {
             throw new Error(`${member} is not a function`);
           }
-          return method.apply(
-            object,
-            args.map((arg) => arg(scope)),
-          );
+          return method.apply(object, args(scope));
         };
       }
       const target = compileNode(bundle, callee);
@@ -1119,7 +1170,7 @@ function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
         if (typeof value !== "function") {
           throw new Error("callee is not a function");
         }
-        return value(...args.map((arg) => arg(scope)));
+        return value(...args(scope));
       };
     }
     case NodeKind.PropertyAccessExpression: {

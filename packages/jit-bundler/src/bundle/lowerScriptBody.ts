@@ -1,5 +1,6 @@
 import { SyntaxKind } from "@backtickjs/cs-runtime";
 import type {
+  ClientScriptArrayElement,
   ClientScriptBlock,
   ClientScriptBody,
   ClientScriptExpression,
@@ -10,6 +11,7 @@ import type { IrScriptEntry } from "../ir/Ir.js";
 import { sourceName } from "./bindingKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
+  BundleArrayElement,
   BundleBlockNode,
   BundleBody,
   BundleExpressionNode,
@@ -195,9 +197,17 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
   function buildExpression(node: ClientScriptExpression): BundleExpressionNode {
     const e = (child: ClientScriptExpression): BundleExpressionNode =>
       buildExpression(child);
+    // Where a list admits `...xs` as well as a value.
+    const element = (child: ClientScriptArrayElement): BundleArrayElement =>
+      child.kind === SyntaxKind.SpreadElement
+        ? {
+            "#": NodeKind.SpreadElement,
+            [NodeField.expression]: buildExpression(child.expression),
+          }
+        : buildExpression(child);
     switch (node.kind) {
       case SyntaxKind.ArrayLiteralExpression:
-        return node.elements.map(e);
+        return node.elements.map(element);
       case SyntaxKind.ArrowFunction: {
         const params = node.parameters.map((param) =>
           sourceName(param.name.bindingKey),
@@ -264,7 +274,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         // mint a `functions` entry and the labels run in the order they are
         // taken. Binding them here keeps that order explicit.
         const callee = e(node.expression);
-        const args = node.arguments.map(e);
+        const args = node.arguments.map(element);
         return {
           "#": NodeKind.CallExpression,
           [NodeField.expression]: callee,

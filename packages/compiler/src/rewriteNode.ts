@@ -1103,6 +1103,17 @@ function rewriteNodeImpl(
     return unsupported();
   }
 
+  if (ts.isSpreadElement(node)) {
+    const spread = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createSpreadElement(spread.virtual as ts.Expression),
+      runtime: astNode(ts, SyntaxKind.SpreadElement, {
+        loc: loc(node),
+        expression: spread.runtime as ts.Expression,
+      }),
+    };
+  }
+
   if (ts.isArrayLiteralExpression(node)) {
     const elements = node.elements.map((element) =>
       rewriteNode(ts, state, element),

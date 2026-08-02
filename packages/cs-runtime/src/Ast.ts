@@ -60,8 +60,20 @@ export interface ClientScriptNode {
 
 export interface ClientScriptArrayLiteralExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ArrayLiteralExpression;
-  readonly elements: readonly ClientScriptExpression[];
+  readonly elements: readonly ClientScriptArrayElement[];
 }
+
+// `...xs`, which is not an expression: it stands where an element or an
+// argument stands and contributes however many the array it spreads has. Named
+// only by the two lists that admit it, so nothing else has to consider it.
+export interface ClientScriptSpreadElement extends ClientScriptNode {
+  readonly kind: typeof SyntaxKind.SpreadElement;
+  readonly expression: ClientScriptExpression;
+}
+
+export type ClientScriptArrayElement =
+  | ClientScriptExpression
+  | ClientScriptSpreadElement;
 
 export interface ClientScriptArrowFunction extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ArrowFunction;
@@ -138,7 +150,7 @@ export interface ClientScriptCallExpression extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.CallExpression;
   readonly expression: ClientScriptExpression;
   readonly questionDotToken: boolean;
-  readonly arguments: readonly ClientScriptExpression[];
+  readonly arguments: readonly ClientScriptArrayElement[];
 }
 
 export interface ClientScriptIdentifier extends ClientScriptNode {

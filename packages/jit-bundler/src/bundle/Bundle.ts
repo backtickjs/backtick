@@ -230,6 +230,7 @@ export const NodeKind = {
   CatchClause: 1018,
   Parameter: 1019,
   PrefixUnaryExpression: 1020,
+  SpreadElement: 1021,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -351,12 +352,22 @@ export type BundleNode = BundleStatementNode;
 // A body node that yields a value. Plain JSON carries itself; containers
 // recurse as expressions — a spliced runtime array can hold entry calls —
 // so a `#`-less object is the data it spells, never a node.
+// `...xs` where an element or an argument goes. Not a `BundleExpressionNode`:
+// it has no value of its own, it contributes the members of one — so the two
+// lists that admit it say so, and nothing else has to consider it.
+export interface BundleSpreadElementNode {
+  "#": typeof NodeKind.SpreadElement;
+  [NodeField.expression]: BundleExpressionNode;
+}
+
+export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
+
 export type BundleExpressionNode =
   | null
   | boolean
   | number
   | string
-  | BundleExpressionNode[]
+  | BundleArrayElement[]
   | BundleData<BundleExpressionNode>
   | BundleIdentifierNode
   | BundleGetEntry
@@ -425,7 +436,7 @@ export interface BundleCallExpressionNode {
   "#": typeof NodeKind.CallExpression;
   [NodeField.expression]: BundleExpressionNode;
   [NodeField.questionDotToken]?: true;
-  [NodeField.arguments]?: BundleExpressionNode[];
+  [NodeField.arguments]?: BundleArrayElement[];
 }
 
 // A static property access: `object.name`. When `questionDotToken` (`object?.name`),

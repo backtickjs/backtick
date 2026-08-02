@@ -118,7 +118,7 @@ export async function Main() {
 
   const add = cs`() => {
     const from = $rowId.read();
-    $data.update((data) => data.concat($buildData(1000, from)));
+    $data.write([...$data.read(), ...$buildData(1000, from)]);
     $rowId.write(from + 1000);
   }`;
 

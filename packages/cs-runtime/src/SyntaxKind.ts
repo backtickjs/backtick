@@ -29,6 +29,7 @@ export const SyntaxKind = {
 
   // Expressions
   ArrayLiteralExpression: 210,
+  SpreadElement: 231,
   ObjectLiteralExpression: 211,
   PropertyAccessExpression: 212,
   ElementAccessExpression: 213,
