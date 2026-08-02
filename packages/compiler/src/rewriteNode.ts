@@ -215,7 +215,7 @@ export interface RewrittenNode {
 }
 
 // What a script may reach without binding it.
-const BUILTINS = new Set(["Math"]);
+const BUILTINS = new Set(["Math", "Array"]);
 
 export function rewriteNode(
   ts: typeof import("typescript"),

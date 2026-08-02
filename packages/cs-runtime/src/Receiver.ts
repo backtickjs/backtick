@@ -1,5 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
+import type { ClientArrayStatics } from "./ClientArrayStatics.js";
 import type { ClientMath } from "./ClientMath.js";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
@@ -52,7 +53,7 @@ type ReadMembers<T extends object> = {
 // them before `Receiver` narrows each to what this language admits of it. The
 // lib type is the whole of JavaScript's `Math`; `ClientMath` is the part of it
 // every host can agree on.
-export type ClientGlobal = typeof globalThis.Math;
+export type ClientGlobal = typeof globalThis.Math | typeof globalThis.Array;
 
 // What a client view may be indexed by: an array by number and nothing else,
 // anything else by the keys its own type names. Naming the array case rather
@@ -69,14 +70,16 @@ export type IndexKey<R> = R extends ClientArray<any> ? number : keyof R;
 export type Receiver<T extends ClientValue | ClientGlobal> =
   T extends typeof globalThis.Math
     ? ClientMath
-    : T extends string | number | boolean | readonly unknown[]
-      ? Autoboxed<T>
-      : T extends JsxElement
-        ? {}
-        : T extends ClientObject
-          ? SplicedMembers<T>
-          : T extends ClientConstructor | ClientFunction
-            ? T
-            : T extends object
-              ? ReadMembers<T>
-              : T;
+    : T extends typeof globalThis.Array
+      ? ClientArrayStatics
+      : T extends string | number | boolean | readonly unknown[]
+        ? Autoboxed<T>
+        : T extends JsxElement
+          ? {}
+          : T extends ClientObject
+            ? SplicedMembers<T>
+            : T extends ClientConstructor | ClientFunction
+              ? T
+              : T extends object
+                ? ReadMembers<T>
+                : T;

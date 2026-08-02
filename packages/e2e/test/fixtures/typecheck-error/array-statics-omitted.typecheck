@@ -1,0 +1,3 @@
+5:32 error TS2339: Property 'of' does not exist on type 'ClientArrayStatics'.
+7:32 error TS2339: Property 'isArray' does not exist on type 'ClientArrayStatics'.
+12:31 error TS2554: Expected 2 arguments, but got 1.

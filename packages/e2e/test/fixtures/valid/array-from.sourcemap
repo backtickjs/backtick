@@ -1,0 +1,113 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_doubled            → doubled
+ = cs.const(            →  = 
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+from                    → from
+(                       → (
+{                       → { 
+length                  → length
+:                       → : 
+4                       → 4
+ }                      →  }
+,                       → , 
+(                       → (
+__cs__                  → _
+,                       → , 
+__cs_index              → index
+) =>                    → ) => 
+__cs_index              → index
+ *                      →  * 
+2                       → 2
+)                       → )
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_empty              → empty
+ = cs.const(            →  = 
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+from                    → from
+(                       → (
+{                       → { 
+length                  → length
+:                       → : 
+0                       → 0
+ }                      →  }
+,                       → , 
+(                       → (
+__cs__                  → _
+,                       → , 
+__cs_index              → index
+) =>                    → ) => 
+__cs_index              → index
+)                       → )
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_absent             → absent
+ = cs.const(            →  = 
+cs.receiver(            → 
+Array                   → Array
+)                       → 
+.                       → .
+from                    → from
+(                       → (
+{                       → { 
+length                  → length
+:                       → : 
+2                       → 2
+ }                      →  }
+,                       → , 
+(                       → (
+__cs_value              → value
+,                       → , 
+__cs_index              → index
+) =>                    → ) =>\n    
+__cs_value              → value
+ ===                    →  === 
+null                    → null
+ ?                      →  ? 
+__cs_index              → index
+ :                      →  : 
+-cs.number(             → -
+1                       → 1
+)                       → 
+)                       → ,\n  )
+);                      → ;
+\n                      → \n  
+return cs.const(        → return 
+cs.receiver(            → 
+__cs_doubled            → doubled
+)                       → 
+.                       → .
+join                    → join
+(                       → (
+","                     → ","
+)                       → )
+ +                      →  + 
+"|"                     → "|"
+ +                      →  + 
+cs.receiver(            → 
+__cs_empty              → empty
+)                       → 
+.                       → .
+length                  → length
+ +                      →  + 
+"|"                     → "|"
+ +                      →  + 
+cs.receiver(            → 
+__cs_absent             → absent
+)                       → 
+.                       → .
+join                    → join
+(                       → (
+","                     → ","
+)                       → )
+);                      → ;
+\n})())                 → \n}`

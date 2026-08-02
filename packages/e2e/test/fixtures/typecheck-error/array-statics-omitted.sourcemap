@@ -1,0 +1,38 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Array              → Array
+)                  → 
+.                  → .
+of                 → of
+(                  → (
+1                  → 1
+,                  → , 
+2                  → 2
+)                  → )
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Array              → Array
+)                  → 
+.                  → .
+isArray            → isArray
+(                  → (
+[                  → [
+1                  → 1
+]                  → ]
+)                  → )
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Array              → Array
+)                  → 
+.                  → .
+from               → from
+(                  → (
+{                  → { 
+length             → length
+:                  → : 
+3                  → 3
+ }                 →  }
+)                  → )
+))                 → `

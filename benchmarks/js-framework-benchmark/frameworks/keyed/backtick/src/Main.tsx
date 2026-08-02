@@ -78,17 +78,11 @@ export async function Main() {
     return list[Math.round(Math.random() * 1000) % list.length];
   }`;
 
-  // Built by doubling a throwaway array to the right length and mapping over
-  // it. Growing one element at a time — `data = data.concat([row])` — copies
-  // what is already there on every step, which is 30ms at 10,000 rows against
-  // 4ms for this. The language can transform a sequence but cannot produce one
-  // of a given length, which is what makes the doubling necessary.
+  // The reference sizes an array and fills it by index — `new Array(count)`,
+  // then a `for`. `Array.from` is the same thing without an assignment into a
+  // slot, which this language has no node for.
   const buildData = cs`(count: number, from: number) => {
-    let slots = [0];
-    while (slots.length < count) {
-      slots = slots.concat(slots);
-    }
-    return slots.slice(0, count).map((_, index) => {
+    return Array.from({ length: count }, (_, index) => {
       return {
         id: from + index,
         label: $word($ADJECTIVES) + " " + $word($COLOURS) + " " + $word($NOUNS),
