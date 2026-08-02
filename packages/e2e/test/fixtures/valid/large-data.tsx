@@ -1,4 +1,12 @@
-import { cs, Image, Text, View } from "@backtickjs/core";
+import { cs, For, Image, Text, View } from "@backtickjs/core";
+
+type Item = { sku: string; qty: number };
+type Order = {
+  id: string;
+  customer: { name: string; city: string };
+  items: Item[];
+  total: number;
+};
 
 const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,
@@ -19,8 +27,8 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 // copies. The root View stays static; only its children map on the client.
 export default (
   <View>
-    {cs`$orders.map(
-      (order) =>
+    <For each={cs`$orders`}>
+      {cs`(order: Order) =>
         ${(
           <View>
             <Image
@@ -30,17 +38,13 @@ export default (
             />
             <Text>{cs`order.customer.name`}</Text>
             <Text>{cs`order.customer.city`}</Text>
-            {cs`order.items.map(
-              (item) =>
-                ${(
-                  <Text>
-                    {cs`item.sku + " x" + item.qty`}
-                  </Text>
-                )},
-            )`}
+            <For each={cs`order.items`}>
+              {cs`(item: Item) =>
+                ${(<Text>{cs`item.sku + " x" + item.qty`}</Text>)}`}
+            </For>
             <Text>{cs`"$" + order.total`}</Text>
           </View>
-        )},
-    )`}
+        )}`}
+    </For>
   </View>
 );

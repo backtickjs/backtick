@@ -73,20 +73,19 @@ __cs_id            → id
 ))                 → `
 cs.lift(cs.const(  → cs`
 cs.receiver(       → 
-cs.receiver(       → 
 cs.splice(         →  [-semantic]
 (ids)              → $ids
 )                  →  [-semantic]
 )                  → 
-.                  → \n          .
+.                  → .
 read               → read
 ()                 → ()
-)                  → 
-.                  → \n          .
-map                → map
+))                 → `
+cs.lift(cs.const(  → cs`
 (                  → (
 __cs_id            → id
- =>                → ) => 
+: number           → : number
+) =>               → ) => 
 cs.splice(         → ${ [-semantic]
 (<Text>{           → (<Text>{
 cs.lift(cs.const(  → cs`
@@ -96,5 +95,4 @@ __cs_id            → id
 ))                 → `
 }</Text>)          → }</Text>)
 )                  → } [-semantic]
-)                  → )
 ))                 → `

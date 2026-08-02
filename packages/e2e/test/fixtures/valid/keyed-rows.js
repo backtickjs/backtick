@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, state, Text, View } from "@backtickjs/core";
+import { cs, state, For, Text, View } from "@backtickjs/core";
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
 // thing saying which row is which.
@@ -15,7 +15,7 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "keyed-rows.tsx",
-      fileHash: "1u8zg5c0zbmro",
+      fileHash: "my6ez66kcj5q",
       kind: "value",
       splices: { $ids: ids },
       captures: [],
@@ -56,7 +56,7 @@ async function Rows() {
                       kind: 80,
                       loc: [14, 18, 14, 22],
                       text: "held",
-                      bindingKey: "held$1u8zg5c0zbmro$0",
+                      bindingKey: "held$my6ez66kcj5q$0",
                     },
                   },
                 ],
@@ -76,7 +76,7 @@ async function Rows() {
                           kind: 80,
                           loc: [14, 27, 14, 31],
                           text: "held",
-                          bindingKey: "held$1u8zg5c0zbmro$0",
+                          bindingKey: "held$my6ez66kcj5q$0",
                         },
                         questionDotToken: false,
                         name: "with",
@@ -95,7 +95,7 @@ async function Rows() {
                             kind: 80,
                             loc: [14, 40, 14, 44],
                             text: "held",
-                            bindingKey: "held$1u8zg5c0zbmro$0",
+                            bindingKey: "held$my6ez66kcj5q$0",
                           },
                           argumentExpression: {
                             kind: 9,
@@ -122,7 +122,7 @@ async function Rows() {
                         kind: 80,
                         loc: [14, 57, 14, 61],
                         text: "held",
-                        bindingKey: "held$1u8zg5c0zbmro$0",
+                        bindingKey: "held$my6ez66kcj5q$0",
                       },
                       argumentExpression: {
                         kind: 9,
@@ -144,7 +144,7 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "keyed-rows.tsx",
-      fileHash: "1u8zg5c0zbmro",
+      fileHash: "my6ez66kcj5q",
       kind: "value",
       splices: { $ids: ids },
       captures: [],
@@ -185,7 +185,7 @@ async function Rows() {
                       kind: 80,
                       loc: [17, 18, 17, 22],
                       text: "held",
-                      bindingKey: "held$1u8zg5c0zbmro$1",
+                      bindingKey: "held$my6ez66kcj5q$1",
                     },
                   },
                 ],
@@ -199,7 +199,7 @@ async function Rows() {
                       kind: 80,
                       loc: [17, 27, 17, 31],
                       text: "held",
-                      bindingKey: "held$1u8zg5c0zbmro$1",
+                      bindingKey: "held$my6ez66kcj5q$1",
                     },
                     questionDotToken: false,
                     name: "filter",
@@ -217,7 +217,7 @@ async function Rows() {
                             kind: 80,
                             loc: [17, 40, 17, 42],
                             text: "id",
-                            bindingKey: "id$1u8zg5c0zbmro$2",
+                            bindingKey: "id$my6ez66kcj5q$2",
                           },
                         },
                       ],
@@ -228,7 +228,7 @@ async function Rows() {
                           kind: 80,
                           loc: [17, 47, 17, 49],
                           text: "id",
-                          bindingKey: "id$1u8zg5c0zbmro$2",
+                          bindingKey: "id$my6ez66kcj5q$2",
                         },
                         operatorToken: "!==",
                         right: {
@@ -252,101 +252,101 @@ async function Rows() {
       _jsx(Text, { onPress: swap, children: "swap" }),
       _jsx(Text, { onPress: drop, children: "drop" }),
       _jsx(View, {
-        children: cs.create(
-          [24, 10, 26, 61],
-          {
-            version: "0.0.0",
-            filePath: "keyed-rows.tsx",
-            fileHash: "1u8zg5c0zbmro",
-            kind: "value",
-            splices: {
-              $ids: ids,
-              $0splice0: _jsx(Text, {
-                children: cs.create(
-                  [26, 34, 26, 49],
-                  {
-                    version: "0.0.0",
-                    filePath: "keyed-rows.tsx",
-                    fileHash: "1u8zg5c0zbmro",
-                    kind: "value",
-                    splices: {},
-                    captures: ["id$1u8zg5c0zbmro$3"],
-                    spliceParams: {},
-                  },
-                  () => ({
-                    kind: 227,
-                    loc: [26, 37, 26, 48],
-                    left: {
-                      kind: 11,
-                      loc: [26, 37, 26, 43],
-                      text: "row ",
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: 80,
-                      loc: [26, 46, 26, 48],
-                      text: "id",
-                      bindingKey: "id$1u8zg5c0zbmro$3",
-                    },
-                  }),
-                ),
-              }),
+        children: _jsx(For, {
+          each: cs.create(
+            [24, 20, 24, 35],
+            {
+              version: "0.0.0",
+              filePath: "keyed-rows.tsx",
+              fileHash: "my6ez66kcj5q",
+              kind: "value",
+              splices: { $ids: ids },
+              captures: [],
+              spliceParams: { $ids: [] },
             },
-            captures: [],
-            spliceParams: { $ids: [], $0splice0: ["id$1u8zg5c0zbmro$3"] },
-          },
-          () => ({
-            kind: 214,
-            loc: [24, 13, 26, 60],
-            expression: {
-              kind: 212,
-              loc: [24, 13, 26, 15],
+            () => ({
+              kind: 214,
+              loc: [24, 23, 24, 34],
               expression: {
-                kind: 214,
-                loc: [24, 13, 25, 18],
+                kind: 212,
+                loc: [24, 23, 24, 32],
                 expression: {
-                  kind: 212,
-                  loc: [24, 13, 25, 16],
-                  expression: {
-                    kind: 1000,
-                    loc: [24, 13, 24, 17],
-                    key: "$ids",
-                  },
-                  questionDotToken: false,
-                  name: "read",
+                  kind: 1000,
+                  loc: [24, 23, 24, 27],
+                  key: "$ids",
                 },
                 questionDotToken: false,
-                arguments: [],
+                name: "read",
               },
               questionDotToken: false,
-              name: "map",
-            },
-            questionDotToken: false,
-            arguments: [
-              {
-                kind: 220,
-                loc: [26, 16, 26, 59],
-                parameters: [
-                  {
-                    kind: 170,
-                    loc: [26, 17, 26, 19],
-                    name: {
-                      kind: 80,
-                      loc: [26, 17, 26, 19],
-                      text: "id",
-                      bindingKey: "id$1u8zg5c0zbmro$3",
+              arguments: [],
+            }),
+          ),
+          children: cs.create(
+            [25, 12, 25, 67],
+            {
+              version: "0.0.0",
+              filePath: "keyed-rows.tsx",
+              fileHash: "my6ez66kcj5q",
+              kind: "value",
+              splices: {
+                $0splice0: _jsx(Text, {
+                  children: cs.create(
+                    [25, 41, 25, 56],
+                    {
+                      version: "0.0.0",
+                      filePath: "keyed-rows.tsx",
+                      fileHash: "my6ez66kcj5q",
+                      kind: "value",
+                      splices: {},
+                      captures: ["id$my6ez66kcj5q$3"],
+                      spliceParams: {},
                     },
-                  },
-                ],
-                body: {
-                  kind: 1000,
-                  loc: [26, 24, 26, 59],
-                  key: "$0splice0",
-                },
+                    () => ({
+                      kind: 227,
+                      loc: [25, 44, 25, 55],
+                      left: {
+                        kind: 11,
+                        loc: [25, 44, 25, 50],
+                        text: "row ",
+                      },
+                      operatorToken: "+",
+                      right: {
+                        kind: 80,
+                        loc: [25, 53, 25, 55],
+                        text: "id",
+                        bindingKey: "id$my6ez66kcj5q$3",
+                      },
+                    }),
+                  ),
+                }),
               },
-            ],
-          }),
-        ),
+              captures: [],
+              spliceParams: { $0splice0: ["id$my6ez66kcj5q$3"] },
+            },
+            () => ({
+              kind: 220,
+              loc: [25, 15, 25, 66],
+              parameters: [
+                {
+                  kind: 170,
+                  loc: [25, 16, 25, 26],
+                  name: {
+                    kind: 80,
+                    loc: [25, 16, 25, 18],
+                    text: "id",
+                    bindingKey: "id$my6ez66kcj5q$3",
+                  },
+                },
+              ],
+              body: {
+                kind: 1000,
+                loc: [25, 31, 25, 66],
+                key: "$0splice0",
+              },
+            }),
+          ),
+        }),
       }),
     ],
   });

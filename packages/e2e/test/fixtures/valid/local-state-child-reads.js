@@ -19,7 +19,7 @@ const Row = async ({ id, selected }) =>
             {
               version: "0.0.0",
               filePath: "local-state-child-reads.tsx",
-              fileHash: "13oclx3uze35q",
+              fileHash: "fbxokwfwaqtv",
               kind: "value",
               splices: { $selected: selected, $id: id },
               captures: [],
@@ -73,7 +73,7 @@ const Row = async ({ id, selected }) =>
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "13oclx3uze35q",
+            fileHash: "fbxokwfwaqtv",
             kind: "value",
             splices: { $id: id, $selected: selected },
             captures: [],
@@ -133,7 +133,7 @@ const Row = async ({ id, selected }) =>
         {
           version: "0.0.0",
           filePath: "local-state-child-reads.tsx",
-          fileHash: "13oclx3uze35q",
+          fileHash: "fbxokwfwaqtv",
           kind: "value",
           splices: {
             $selected: selected,
@@ -174,20 +174,13 @@ const Row = async ({ id, selected }) =>
             },
           },
           whenTrue: {
-            kind: 210,
-            loc: [24, 36, 24, 62],
-            elements: [
-              {
-                kind: 1000,
-                loc: [24, 37, 24, 61],
-                key: "$0splice0",
-              },
-            ],
+            kind: 1000,
+            loc: [24, 36, 24, 60],
+            key: "$0splice0",
           },
           whenFalse: {
-            kind: 210,
-            loc: [24, 65, 24, 67],
-            elements: [],
+            kind: 106,
+            loc: [24, 63, 24, 67],
           },
         }),
       ),
@@ -203,7 +196,7 @@ async function Panel() {
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "13oclx3uze35q",
+            fileHash: "fbxokwfwaqtv",
             kind: "value",
             splices: { $selected: selected },
             captures: [],
@@ -246,7 +239,7 @@ async function Panel() {
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "13oclx3uze35q",
+            fileHash: "fbxokwfwaqtv",
             kind: "value",
             splices: {},
             captures: [],
@@ -266,7 +259,7 @@ async function Panel() {
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "13oclx3uze35q",
+            fileHash: "fbxokwfwaqtv",
             kind: "value",
             splices: {},
             captures: [],

@@ -2,25 +2,16 @@ import type { BundleTree } from "@backtickjs/core";
 
 /**
  * A tree entry with the arguments it was applied to, before anything has been
- * built from it.
+ * built from it. The entry is resolved rather than named, so the table is read
+ * once and an unknown label is caught in one place.
  *
- * The entry is resolved rather than named: a label is what the *format* carries,
- * because a bundle is data and a label is how data points at a table. By the
- * time this exists the table has been read, so carrying the label again would
- * only mean looking it up a second time — and would leave two places to say
- * what an unknown one is.
+ * Kept apart from `BundleApplyTree`, which it resembles: a node's arguments are
+ * expressions waiting for a scope, and these are what those expressions became.
+ * Nothing tells the two apart by shape, so a node reaching here would draw an
+ * entry with expressions as its slots — wrong, and quietly.
  *
- * Kept apart from `BundleApplyTree`, which it otherwise resembles, because the
- * two are not the same thing: a node's arguments are expressions waiting for a
- * scope, and these are the values those expressions became. Nothing tells the
- * two apart by shape, so a node reaching a position that expects one of these
- * would draw an entry with expressions as its slots — wrong, and quietly. One
- * describes a program; the other is what running it produced.
- *
- * Recognized by the marker rather than by `instanceof`, like everything else
- * spliceable: class identity is per-copy of the package, and two copies
- * resolved into one install would make the check fail and the value draw as
- * text.
+ * Recognized by the marker rather than by `instanceof`: class identity is
+ * per-copy of the package, and two copies in one install would fail the check.
  */
 export interface Applied {
   readonly "@backtickjs": "Applied";

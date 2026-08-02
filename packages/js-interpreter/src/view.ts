@@ -5,7 +5,7 @@ import type {
   BundleExpr,
   BundleTree,
 } from "@backtickjs/core";
-import { createMemo, createRoot, createSignal } from "solid-js";
+import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import type { Renderer, RendererOptions } from "solid-js/universal";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
@@ -248,6 +248,15 @@ export function compileElement(
   element: BundleElement,
 ): Compiled {
   const id = element[NodeField.id];
+  // The two elements every target has, recognized by the id they agree on.
+  // Neither draws a node: one puts its children where it stands, the other
+  // draws one thing per member of an array.
+  if (id === "Fragment") {
+    return compileFragment(bundle, element);
+  }
+  if (id === "For") {
+    return compileFor(bundle, element);
+  }
   const props = Object.entries(element[NodeField.props] ?? {}).filter(
     ([prop]) => prop !== "children",
   );
@@ -308,6 +317,49 @@ function compileChildren(
   }
   const read = compile(bundle, expr);
   return (scope, instance) => () => drawn(read(scope), instance);
+}
+
+/**
+ * A fragment: its children where it stands, and no node of its own.
+ */
+function compileFragment(bundle: Bundle, element: BundleElement): Compiled {
+  const children = element[NodeField.props]?.["children"];
+  if (children === undefined) {
+    return () => null;
+  }
+  const draw = compileChildren(bundle, children);
+  return (scope) => draw(scope, instanceOf(scope)) as Value;
+}
+
+/**
+ * A list: one drawing per member of an array.
+ *
+ * The client walks the array itself, so `mapArray` keeps the drawing of a
+ * member that is still there, drops what a member that has gone drew, and draws
+ * only what is new. Identity is the member's own — nothing here extracts a key.
+ */
+function compileFor(bundle: Bundle, element: BundleElement): Compiled {
+  const props = element[NodeField.props] ?? {};
+  const each = props["each"];
+  const body = props["children"];
+  if (each === undefined || body === undefined) {
+    throw new Error("a `For` needs an `each` array and a child to draw");
+  }
+  const source = compile(bundle, each);
+  const draw = compile(bundle, body);
+  return (scope) => {
+    const instance = instanceOf(scope);
+    const members = createMemo(() => {
+      const value = source(scope);
+      return Array.isArray(value) ? (value as Value[]) : [];
+    });
+    // Made once: it closes over this instance, and the member arrives as an
+    // argument.
+    const one = draw(scope) as (...args: Value[]) => Value;
+    return mapArray(members, (member, at) =>
+      drawn(one(member, at()), instance),
+    ) as unknown as Value;
+  };
 }
 
 // What a settled children position holds, with its applications built: the same

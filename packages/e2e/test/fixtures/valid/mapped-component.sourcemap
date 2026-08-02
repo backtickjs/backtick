@@ -1,14 +1,13 @@
 cs.lift(cs.const(  → cs`
-cs.receiver(       → 
 cs.splice(         →  [-semantic]
 (rows)             → $rows
 )                  →  [-semantic]
-)                  → 
-.                  → .
-map                → map
+))                 → `
+cs.lift(cs.const(  → cs`
 (                  → (
 __cs_row           → row
- =>                → ) => 
+: number           → : number
+) =>               → ) => 
 cs.splice(         → ${ [-semantic]
 (<Text>{           → (<Text>{
 cs.lift(cs.const(  → cs`
@@ -18,5 +17,4 @@ __cs_row           → row
 ))                 → `
 }</Text>)          → }</Text>)
 )                  → } [-semantic]
-)                  → )
 ))                 → `

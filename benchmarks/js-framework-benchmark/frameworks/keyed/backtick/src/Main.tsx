@@ -1,4 +1,4 @@
-import { cs, state, type Client, type State } from "@backtickjs/core";
+import { cs, state, For, type Client, type State } from "@backtickjs/core";
 
 type Row = {
   readonly id: number;
@@ -201,8 +201,8 @@ export async function Main() {
       </div>
       <table class="table table-hover table-striped test-data">
         <tbody>
-          {cs`$data.read().map(
-            (row) =>
+          <For each={cs`$data.read()`}>
+            {cs`(row: Row) =>
               ${(
                 <tr class={cs`$selected.read() === row.id ? "danger" : ""`}>
                   <td class="col-md-1">{cs`row.id`}</td>
@@ -219,8 +219,8 @@ export async function Main() {
                   </td>
                   <td class="col-md-6"></td>
                 </tr>
-              )},
-          )`}
+              )}`}
+          </For>
         </tbody>
       </table>
       <span

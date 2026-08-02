@@ -5,7 +5,9 @@ import {
   type JsxElement,
   type ServerComponent,
 } from "@backtickjs/cs-runtime";
+import { For } from "@backtickjs/cs-runtime";
 import type { IntrinsicElements as Html } from "./elements.js";
+import { Fragment } from "./Fragment.js";
 
 // The JSX a web app writes: HTML tags, and the components built from them.
 //
@@ -23,17 +25,16 @@ import type { IntrinsicElements as Html } from "./elements.js";
 export declare namespace JSX {
   export interface Element extends JsxElement {}
   export interface IntrinsicElements extends Html {}
-  // A tag, or a component of the app's own — and nothing else, which is how
-  // `<View />` in a web app is a type error rather than something that quietly
-  // renders. What keeps a portable component out is the marker on
-  // `ServerComponent` itself: leaving `ClientElement` out of this union does
-  // nothing on its own, because one is callable and returns `never` and so
-  // satisfies any signature. `<>…</>` needs no place here either — TypeScript
-  // resolves a fragment through the `Fragment` export rather than this type —
-  // so `<>…</>` works and an explicit `<Fragment>` does not. Admitting it would
-  // mean admitting a `ClientElement`, and the only thing then keeping `<View />`
-  // out is that the two targets' `FragmentProps` happen to differ.
-  export type ElementType = keyof IntrinsicElements | ServerComponent<never>;
+  // A tag, a component of the app's own, or one of the two that arrange rather
+  // than name — and nothing else, which is how `<View />` in a web app is a
+  // type error rather than something that quietly renders. What keeps a
+  // portable vocabulary out is the marker on `ServerComponent`: a
+  // `ClientElement` returns `never` and so satisfies any signature.
+  export type ElementType =
+    | keyof IntrinsicElements
+    | typeof Fragment
+    | typeof For
+    | ServerComponent<never>;
   export interface ElementChildrenAttribute {
     children: unknown;
   }

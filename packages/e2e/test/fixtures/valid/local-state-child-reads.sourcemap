@@ -48,13 +48,11 @@ cs.splice(             →  [-semantic]
 (id)                   → $id
 )                      →  [-semantic]
  ?                     →  ? 
-[                      → [
 cs.splice(             → ${ [-semantic]
 (<Text>marker</Text>)  → (<Text>marker</Text>)
 )                      → } [-semantic]
-]                      → ]
  :                     →  : 
-[]                     → []
+null                   → null
 ))                     → `
 cs.lift(cs.const(      → cs`
 () =>                  → () => 

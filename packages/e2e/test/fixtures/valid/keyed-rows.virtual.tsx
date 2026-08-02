@@ -1,4 +1,4 @@
-import { cs, state, Text, View } from "@backtickjs/core";
+import { cs, state, For, Text, View } from "@backtickjs/core";
 
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
@@ -21,7 +21,9 @@ async function Rows() {
       <Text onPress={swap}>swap</Text>
       <Text onPress={drop}>drop</Text>
       <View>
-        {cs.lift(cs.const(cs.receiver(cs.receiver(cs.splice((ids))).read()).map(__cs_id => cs.splice((<Text>{cs.lift(cs.const("row " + __cs_id))}</Text>)))))}
+        <For each={cs.lift(cs.const(cs.receiver(cs.splice((ids))).read()))}>
+          {cs.lift(cs.const((__cs_id: number) => cs.splice((<Text>{cs.lift(cs.const("row " + __cs_id))}</Text>))))}
+        </For>
       </View>
     </View>
   );

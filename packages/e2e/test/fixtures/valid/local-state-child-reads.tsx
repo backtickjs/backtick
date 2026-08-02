@@ -21,7 +21,7 @@ const Row = async ({
     <Text style={{ fontSize: cs`$selected.read() === $id ? 20 : 16` }}>
       {cs`"row " + $id + " of " + $selected.read()`}
     </Text>
-    {cs`$selected.read() === $id ? [${(<Text>marker</Text>)}] : []`}
+    {cs`$selected.read() === $id ? ${(<Text>marker</Text>)} : null`}
   </View>
 );
 

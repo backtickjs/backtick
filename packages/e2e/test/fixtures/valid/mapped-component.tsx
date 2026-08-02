@@ -1,4 +1,4 @@
-import { cs, Text, View } from "@backtickjs/core";
+import { cs, For, Text, View } from "@backtickjs/core";
 
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each
@@ -17,5 +17,9 @@ import { cs, Text, View } from "@backtickjs/core";
 const rows = [1, 2, 3];
 
 export default (
-  <View>{cs`$rows.map((row) => ${(<Text>{cs`"row " + row`}</Text>)})`}</View>
+  <View>
+    <For each={cs`$rows`}>
+      {cs`(row: number) => ${(<Text>{cs`"row " + row`}</Text>)}`}
+    </For>
+  </View>
 );

@@ -1,14 +1,13 @@
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (orders)                                  → $orders
 )                                         →  [-semantic]
-)                                         → 
-.                                         → .
-map                                       → map
-(                                         → (\n      
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
 __cs_order                                → order
- =>                                       → ) =>\n        
+: Order                                   → : Order
+) =>                                      → ) =>\n        
 cs.splice(                                → ${ [-semantic]
 (\n          <View>\n            <Image\n              source={{\n                uri: → (\n          <View>\n            <Image\n              source={{\n                uri: 
 cs.lift(cs.const(                         → cs`
@@ -46,22 +45,22 @@ customer                                  → customer
 .                                         → .
 city                                      → city
 ))                                        → `
-}</Text>\n            {                   → }</Text>\n            {
+}</Text>\n            <For each={         → }</Text>\n            <For each={
 cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
 cs.receiver(                              → 
 __cs_order                                → order
 )                                         → 
 .                                         → .
 items                                     → items
-)                                         → 
-.                                         → .
-map                                       → map
-(                                         → (\n              
+))                                        → `
+}>\n              {                       → }>\n              {
+cs.lift(cs.const(                         → cs`
+(                                         → (
 __cs_item                                 → item
- =>                                       → ) =>\n                
+: Item                                    → : Item
+) =>                                      → ) =>\n                
 cs.splice(                                → ${ [-semantic]
-(\n                  <Text>\n                    {→ (\n                  <Text>\n                    {
+(<Text>{                                  → (<Text>{
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 __cs_item                                 → item
@@ -77,11 +76,10 @@ __cs_item                                 → item
 .                                         → .
 qty                                       → qty
 ))                                        → `
-}\n                  </Text>\n                )→ }\n                  </Text>\n                )
+}</Text>)                                 → }</Text>)
 )                                         → } [-semantic]
-)                                         → ,\n            )
 ))                                        → `
-}\n            <Text>{                    → }\n            <Text>{
+}\n            </For>\n            <Text>{→ }\n            </For>\n            <Text>{
 cs.lift(cs.const(                         → cs`
 "$"                                       → "$"
  +                                        →  + 
@@ -93,5 +91,4 @@ total                                     → total
 ))                                        → `
 }</Text>\n          </View>\n        )    → }</Text>\n          </View>\n        )
 )                                         → } [-semantic]
-)                                         → ,\n    )
 ))                                        → `

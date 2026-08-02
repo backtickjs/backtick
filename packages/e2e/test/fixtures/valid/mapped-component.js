@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { cs, Text, View } from "@backtickjs/core";
+import { cs, For, Text, View } from "@backtickjs/core";
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each
 // expansion must see its own `row`.
@@ -16,87 +16,87 @@ import { cs, Text, View } from "@backtickjs/core";
 // the two apart.
 const rows = [1, 2, 3];
 export default _jsx(View, {
-  children: cs.create(
-    [20, 10, 20, 70],
-    {
-      version: "0.0.0",
-      filePath: "mapped-component.tsx",
-      fileHash: "3qcr5x2z3u56v",
-      kind: "value",
-      splices: {
-        $rows: rows,
-        $0splice0: _jsx(Text, {
-          children: cs.create(
-            [20, 42, 20, 58],
-            {
-              version: "0.0.0",
-              filePath: "mapped-component.tsx",
-              fileHash: "3qcr5x2z3u56v",
-              kind: "value",
-              splices: {},
-              captures: ["row$3qcr5x2z3u56v$0"],
-              spliceParams: {},
-            },
-            () => ({
-              kind: 227,
-              loc: [20, 45, 20, 57],
-              left: {
-                kind: 11,
-                loc: [20, 45, 20, 51],
-                text: "row ",
-              },
-              operatorToken: "+",
-              right: {
-                kind: 80,
-                loc: [20, 54, 20, 57],
-                text: "row",
-                bindingKey: "row$3qcr5x2z3u56v$0",
-              },
-            }),
-          ),
-        }),
+  children: _jsx(For, {
+    each: cs.create(
+      [21, 16, 21, 25],
+      {
+        version: "0.0.0",
+        filePath: "mapped-component.tsx",
+        fileHash: "3opgj3ru78ngf",
+        kind: "value",
+        splices: { $rows: rows },
+        captures: [],
+        spliceParams: { $rows: [] },
       },
-      captures: [],
-      spliceParams: { $rows: [], $0splice0: ["row$3qcr5x2z3u56v$0"] },
-    },
-    () => ({
-      kind: 214,
-      loc: [20, 13, 20, 69],
-      expression: {
-        kind: 212,
-        loc: [20, 13, 20, 22],
-        expression: {
-          kind: 1000,
-          loc: [20, 13, 20, 18],
-          key: "$rows",
+      () => ({
+        kind: 1000,
+        loc: [21, 19, 21, 24],
+        key: "$rows",
+      }),
+    ),
+    children: cs.create(
+      [22, 8, 22, 65],
+      {
+        version: "0.0.0",
+        filePath: "mapped-component.tsx",
+        fileHash: "3opgj3ru78ngf",
+        kind: "value",
+        splices: {
+          $0splice0: _jsx(Text, {
+            children: cs.create(
+              [22, 38, 22, 54],
+              {
+                version: "0.0.0",
+                filePath: "mapped-component.tsx",
+                fileHash: "3opgj3ru78ngf",
+                kind: "value",
+                splices: {},
+                captures: ["row$3opgj3ru78ngf$0"],
+                spliceParams: {},
+              },
+              () => ({
+                kind: 227,
+                loc: [22, 41, 22, 53],
+                left: {
+                  kind: 11,
+                  loc: [22, 41, 22, 47],
+                  text: "row ",
+                },
+                operatorToken: "+",
+                right: {
+                  kind: 80,
+                  loc: [22, 50, 22, 53],
+                  text: "row",
+                  bindingKey: "row$3opgj3ru78ngf$0",
+                },
+              }),
+            ),
+          }),
         },
-        questionDotToken: false,
-        name: "map",
+        captures: [],
+        spliceParams: { $0splice0: ["row$3opgj3ru78ngf$0"] },
       },
-      questionDotToken: false,
-      arguments: [
-        {
-          kind: 220,
-          loc: [20, 23, 20, 68],
-          parameters: [
-            {
-              kind: 170,
-              loc: [20, 24, 20, 27],
-              name: {
-                kind: 80,
-                loc: [20, 24, 20, 27],
-                text: "row",
-                bindingKey: "row$3qcr5x2z3u56v$0",
-              },
+      () => ({
+        kind: 220,
+        loc: [22, 11, 22, 64],
+        parameters: [
+          {
+            kind: 170,
+            loc: [22, 12, 22, 23],
+            name: {
+              kind: 80,
+              loc: [22, 12, 22, 15],
+              text: "row",
+              bindingKey: "row$3opgj3ru78ngf$0",
             },
-          ],
-          body: {
-            kind: 1000,
-            loc: [20, 32, 20, 68],
-            key: "$0splice0",
           },
+        ],
+        body: {
+          kind: 1000,
+          loc: [22, 28, 22, 64],
+          key: "$0splice0",
         },
-      ],
-    }),
-  ),
+      }),
+    ),
+  }),
 });

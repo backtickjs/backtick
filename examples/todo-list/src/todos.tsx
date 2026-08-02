@@ -1,4 +1,4 @@
-import { cs, state, type Client } from "@backtickjs/core";
+import { cs, state, For, type Client } from "@backtickjs/core";
 
 const TASKS = [
   "Water the plants",
@@ -65,16 +65,18 @@ export async function TodoList() {
         ))}
       </div>
 
-      <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">{cs`$showing.map(
-        (task, index) =>
-          ${(
-            <Task
-              label={cs`task.label`}
-              isDone={cs`task.isDone`}
-              onPress={cs`() => $onPress(index)`}
-            />
-          )},
-      )`}</ul>
+      <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">
+        <For each={cs`$showing`}>
+          {cs`(task: { label: string; isDone: boolean }, index: number) =>
+            ${(
+              <Task
+                label={cs`task.label`}
+                isDone={cs`task.isDone`}
+                onPress={cs`() => $onPress(index)`}
+              />
+            )}`}
+        </For>
+      </ul>
     </div>
   );
 }

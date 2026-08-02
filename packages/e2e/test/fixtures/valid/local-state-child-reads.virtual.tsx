@@ -21,7 +21,7 @@ const Row = async ({
     <Text style={{ fontSize: cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? 20 : 16)) }}>
       {cs.lift(cs.const("row " + cs.splice((id)) + " of " + cs.receiver(cs.splice((selected))).read()))}
     </Text>
-    {cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? [cs.splice((<Text>marker</Text>))] : []))}
+    {cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? cs.splice((<Text>marker</Text>)) : null))}
   </View>
 );
 

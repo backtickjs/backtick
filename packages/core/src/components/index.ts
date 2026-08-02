@@ -1,3 +1,4 @@
+export { For, type ForProps } from "@backtickjs/cs-runtime";
 export { Fragment, type FragmentProps } from "./Fragment.js";
 export { Image, type ImageProps } from "./Image.js";
 export { Link, type LinkProps } from "./Link.js";
