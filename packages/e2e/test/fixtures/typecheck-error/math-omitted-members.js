@@ -2,13 +2,14 @@ import { cs } from "@backtickjs/core";
 // `Math` is reachable, but only as `ClientMath` fixes it. What is left out is
 // left out on purpose: `sin`, `cos`, `exp`, `log` and `pow` are not specified
 // to the last bit by IEEE 754, so two conforming hosts may disagree about
-// them, and `random` makes what a bundle draws unreproducible.
+// them. (`random` disagrees with itself, and is admitted anyway — see
+// `ClientMath`.)
 export const transcendental = cs.create(
-  [7, 31, 7, 46],
+  [8, 31, 8, 46],
   {
     version: "0.0.0",
     filePath: "math-omitted-members.ts",
-    fileHash: "19bh49dob2obv",
+    fileHash: "1dx0tqzuxngr9",
     kind: "value",
     splices: {},
     captures: [],
@@ -16,13 +17,13 @@ export const transcendental = cs.create(
   },
   () => ({
     kind: 214,
-    loc: [7, 34, 7, 45],
+    loc: [8, 34, 8, 45],
     expression: {
       kind: 212,
-      loc: [7, 34, 7, 42],
+      loc: [8, 34, 8, 42],
       expression: {
         kind: 1001,
-        loc: [7, 34, 7, 38],
+        loc: [8, 34, 8, 38],
         name: "Math",
       },
       questionDotToken: false,
@@ -32,18 +33,18 @@ export const transcendental = cs.create(
     arguments: [
       {
         kind: 9,
-        loc: [7, 43, 7, 44],
+        loc: [8, 43, 8, 44],
         value: 1,
       },
     ],
   }),
 );
 export const raised = cs.create(
-  [9, 23, 9, 41],
+  [10, 23, 10, 41],
   {
     version: "0.0.0",
     filePath: "math-omitted-members.ts",
-    fileHash: "19bh49dob2obv",
+    fileHash: "1dx0tqzuxngr9",
     kind: "value",
     splices: {},
     captures: [],
@@ -51,13 +52,13 @@ export const raised = cs.create(
   },
   () => ({
     kind: 214,
-    loc: [9, 26, 9, 40],
+    loc: [10, 26, 10, 40],
     expression: {
       kind: 212,
-      loc: [9, 26, 9, 34],
+      loc: [10, 26, 10, 34],
       expression: {
         kind: 1001,
-        loc: [9, 26, 9, 30],
+        loc: [10, 26, 10, 30],
         name: "Math",
       },
       questionDotToken: false,
@@ -67,54 +68,25 @@ export const raised = cs.create(
     arguments: [
       {
         kind: 9,
-        loc: [9, 35, 9, 36],
+        loc: [10, 35, 10, 36],
         value: 2,
       },
       {
         kind: 9,
-        loc: [9, 38, 9, 39],
+        loc: [10, 38, 10, 39],
         value: 8,
       },
     ],
   }),
 );
-export const unreproducible = cs.create(
-  [11, 31, 11, 48],
-  {
-    version: "0.0.0",
-    filePath: "math-omitted-members.ts",
-    fileHash: "19bh49dob2obv",
-    kind: "value",
-    splices: {},
-    captures: [],
-    spliceParams: {},
-  },
-  () => ({
-    kind: 214,
-    loc: [11, 34, 11, 47],
-    expression: {
-      kind: 212,
-      loc: [11, 34, 11, 45],
-      expression: {
-        kind: 1001,
-        loc: [11, 34, 11, 38],
-        name: "Math",
-      },
-      questionDotToken: false,
-      name: "random",
-    },
-    questionDotToken: false,
-    arguments: [],
-  }),
-);
 // `min` takes at least one argument, where the standard library takes none and
 // answers `Infinity` — an empty answer that isn't this language's absent one.
 export const empty = cs.create(
-  [15, 22, 15, 36],
+  [14, 22, 14, 36],
   {
     version: "0.0.0",
     filePath: "math-omitted-members.ts",
-    fileHash: "19bh49dob2obv",
+    fileHash: "1dx0tqzuxngr9",
     kind: "value",
     splices: {},
     captures: [],
@@ -122,13 +94,13 @@ export const empty = cs.create(
   },
   () => ({
     kind: 214,
-    loc: [15, 25, 15, 35],
+    loc: [14, 25, 14, 35],
     expression: {
       kind: 212,
-      loc: [15, 25, 15, 33],
+      loc: [14, 25, 14, 33],
       expression: {
         kind: 1001,
-        loc: [15, 25, 15, 29],
+        loc: [14, 25, 14, 29],
         name: "Math",
       },
       questionDotToken: false,

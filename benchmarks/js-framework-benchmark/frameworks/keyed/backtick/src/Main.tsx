@@ -68,14 +68,14 @@ export async function Main() {
   const selected = state(0);
   const rowId = state(1);
 
-  // A word for a row, drawn from the row's own number rather than from a
-  // generator. The reference calls `Math.round(Math.random() * 1000) % max`; a
-  // script reaches no globals, so there is no `Math.random` to call and this
-  // mixes the number instead — the same shape of label, chosen the same way
-  // every run. Multiplication stays exact: the largest product here is well
-  // under 2^53.
-  const word = cs`(list: string[], at: number) => {
-    return list[((at * 2654435761 + 12345) % 2147483647) % list.length];
+  // A word for a row, drawn the way the reference draws one:
+  // `Math.round(Math.random() * 1000) % max`, down to the redundant `* 1000`
+  // and the modulo of a number already smaller than the list.
+  //
+  // Every run now builds different labels, which is what the reference does
+  // and so what this has to do to be measured against it.
+  const word = cs`(list: string[]) => {
+    return list[Math.round(Math.random() * 1000) % list.length];
   }`;
 
   // Built by doubling a throwaway array to the right length and mapping over
@@ -89,15 +89,9 @@ export async function Main() {
       slots = slots.concat(slots);
     }
     return slots.slice(0, count).map((_, index) => {
-      const at = (from + index) * 3;
       return {
         id: from + index,
-        label:
-          $word($ADJECTIVES, at) +
-          " " +
-          $word($COLOURS, at + 1) +
-          " " +
-          $word($NOUNS, at + 2),
+        label: $word($ADJECTIVES) + " " + $word($COLOURS) + " " + $word($NOUNS),
       };
     });
   }`;

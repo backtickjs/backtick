@@ -1320,6 +1320,7 @@ const builtins: { [name: string]: Value } = {
     PI: Math.PI,
     E: Math.E,
     abs: (x: Value) => Math.abs(x as number),
+    random: () => Math.random(),
     sign: (x: Value) => Math.sign(x as number),
     floor: (x: Value) => Math.floor(x as number),
     ceil: (x: Value) => Math.ceil(x as number),

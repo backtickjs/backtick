@@ -11,9 +11,13 @@
  * specified against a reference client cannot promise "whatever JavaScript
  * did", so those are absent rather than approximately right.
  *
- * `random` is absent for a different reason: it makes what a bundle draws
- * unreproducible. A seeded generator would keep the seed in the bundle and
- * could be added later; `Math.random` cannot.
+ * `random` is the exception, and it is here deliberately. Every other member
+ * answers the same on every host and on every run; this one answers
+ * differently each time it is called, so a bundle that reaches it draws
+ * something new on each read and cannot be compared against itself. It is
+ * admitted because the alternative is that no script can be random at all, and
+ * a seeded generator — which would keep its seed in the bundle, and would be
+ * reproducible — is not written yet.
  */
 export interface ClientMath {
   /** The ratio of the circumference of a circle to its diameter. */
@@ -24,6 +28,16 @@ export interface ClientMath {
 
   /** Returns the absolute value of a number. */
   abs(x: number): number;
+
+  /**
+   * Returns a pseudorandom number between 0 (inclusive) and 1 (exclusive).
+   *
+   * The one member here that is not a function of its arguments. Two calls
+   * disagree, two hosts disagree, and two runs of the same bundle disagree —
+   * so a bundle that reaches this cannot be snapshotted, cached by its output,
+   * or compared against a previous run of itself.
+   */
+  random(): number;
 
   /** Returns the sign of a number, indicating whether it is positive (1), negative (-1) or zero (0). */
   sign(x: number): number;

@@ -25,14 +25,6 @@ cs.receiver(       →
 Math               → Math
 )                  → 
 .                  → .
-random             → random
-()                 → ()
-))                 → `
-cs.lift(cs.const(  → cs`
-cs.receiver(       → 
-Math               → Math
-)                  → 
-.                  → .
 min                → min
 ()                 → ()
 ))                 → `
