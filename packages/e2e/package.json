@@ -8,8 +8,8 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "node --test \"test/**/*.test.ts\"",
-    "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\"",
+    "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
+    "test:update": "UPDATE_SNAPSHOTS=1 node --conditions=browser --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules .cache .turbo"
   },
   "devDependencies": {
@@ -19,6 +19,7 @@
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",
     "prettier": "^3.6.2",
+    "solid-js": "^1.9.14",
     "typescript": "^6.0.3"
   },
   "prettier": {

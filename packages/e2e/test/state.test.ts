@@ -3,40 +3,48 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isElement } from "./test-client/index.ts";
-import type { Element } from "./test-client/index.ts";
+import { evaluate, isTestNode } from "./test-client/index.ts";
+import type { TestNode } from "./test-client/index.ts";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
 // wire shape, and these drive the reference client through it — a write has to
-// persist, re-render the instance that owns the cell, and leave every other
-// instance alone.
+// persist, move everything that read the cell, and leave every other instance
+// alone.
+//
+// The nodes are built once and never rebuilt, so the ones these tests hold are
+// the ones a write moves: reading a prop again after a write is reading what
+// the host was told, which is the whole of what a host would have drawn.
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("state");
 
-async function render(file: string): Promise<Element> {
+async function render(file: string): Promise<TestNode> {
   const script = await importFixture(validDir, file);
-  const element = evaluate(await bundle(script));
-  assert.ok(isElement(element), "expected a rendered element");
-  return element;
+  const node = evaluate(await bundle(script));
+  assert.ok(isTestNode(node), "expected a rendered node");
+  return node;
 }
 
 // The handler a prop holds, as the host would invoke it.
-function handler(element: Element): () => void {
-  const onPress = element.props.onPress;
+function handler(node: TestNode): () => void {
+  const onPress = node.props.onPress;
   assert.equal(typeof onPress, "function", "expected an onPress handler");
   return onPress as () => void;
 }
 
-function fontSize(element: Element): unknown {
-  const style = element.props.style;
+function fontSize(node: TestNode): unknown {
+  const style = node.props.style;
   assert.ok(style !== null && typeof style === "object", "expected a style");
   return (style as { fontSize?: unknown }).fontSize;
 }
 
-function children(element: Element): Element[] {
-  const value = element.props.children;
-  assert.ok(Array.isArray(value), "expected several children");
-  return value.flat(Infinity) as Element[];
+// What a node says, as its text child holds it.
+function text(node: TestNode): unknown {
+  return node.children[0]?.text;
+}
+
+function children(node: TestNode): TestNode[] {
+  assert.ok(node.children.length > 0, "expected several children");
+  return node.children;
 }
 
 describe("local state", () => {
@@ -105,6 +113,29 @@ describe("local state", () => {
     assert.equal(fontSize(text), 18);
   });
 
+  it("a keyed row keeps its node when the list is reordered", async () => {
+    const view = await render("keyed-rows.tsx");
+    const [swap, , list] = children(view);
+    assert.ok(swap !== undefined && list !== undefined);
+    const before = [...list.children];
+    assert.equal(before.length, 3);
+    handler(swap)();
+    // The write built a new array of new rows, and the keys are what say the
+    // rows themselves are the ones already there: the ends have traded places
+    // and the middle has not moved, and all three are the nodes from before.
+    assert.deepEqual(list.children, [before[2], before[1], before[0]]);
+    assert.deepEqual(list.children.map(text), ["row 3", "row 2", "row 1"]);
+  });
+
+  it("a keyed row that goes takes its node with it", async () => {
+    const view = await render("keyed-rows.tsx");
+    const [, drop, list] = children(view);
+    assert.ok(drop !== undefined && list !== undefined);
+    const before = [...list.children];
+    handler(drop)();
+    assert.deepEqual(list.children, [before[0], before[2]]);
+  });
+
   it("a child redraws everything it read of a cell it was handed", async () => {
     const view = await render("local-state-child-reads.tsx");
     const [button, ...rows] = children(view);
@@ -126,7 +157,7 @@ describe("local state", () => {
 
 // What one row of `local-state-child-reads.tsx` draws, in the three positions
 // it read the cell from: a prop, a text child, and a branch.
-function readRow(row: Element): {
+function readRow(row: TestNode): {
   size: unknown;
   text: unknown;
   marked: boolean;
@@ -135,7 +166,7 @@ function readRow(row: Element): {
   assert.ok(label !== undefined, "expected a label");
   return {
     size: fontSize(label),
-    text: label.props.children,
-    marked: marker !== null && marker !== undefined,
+    text: label.children[0]?.text,
+    marked: marker !== undefined,
   };
 }

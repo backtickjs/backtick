@@ -1,0 +1,37 @@
+#f0 = ($0) => () => {
+  $0().update((held) => held.with(0, held[2]).with(2, held[0]));
+}
+
+#f1 = ($0) => () => {
+  $0().update((held) => held.filter((id) => id !== 2));
+}
+
+#f2 = ($0, $1) => $0().read().map((id) => $1(id))
+
+#f3 = ($0) => $0
+
+#f4 = ($0) => "row " + $0
+
+#t0 = <Text
+  key={#f3(slots[0])}
+>
+  {#f4(slots[0])}
+</Text>
+
+#t1 state { s0 = [1, 2, 3] } = <View>
+  {<Text
+    onPress={#f0(() => cells.s0)}
+  >
+    {"swap"}
+  </Text>}
+  {<Text
+    onPress={#f1(() => cells.s0)}
+  >
+    {"drop"}
+  </Text>}
+  {<View>
+    {#f2(() => cells.s0, (id) => #t0(id) key=#f3(id))}
+  </View>}
+</View>
+
+root = #t1()

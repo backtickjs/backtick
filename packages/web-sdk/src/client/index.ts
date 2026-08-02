@@ -10,11 +10,10 @@
 // the served `/backtick.js` is built from.
 import type { Bundle } from "@backtickjs/core";
 import type { Drawn } from "../Drawn.js";
-import { evaluate } from "@backtickjs/js-interpreter";
-import { createRoot } from "solid-js";
-import { renderInto } from "./dom.js";
+import { render } from "@backtickjs/js-interpreter";
+import { dom } from "./dom.js";
 
-export { Element, isElement, evaluate } from "@backtickjs/js-interpreter";
+export { evaluate, render } from "@backtickjs/js-interpreter";
 
 /**
  * Where a mounted app goes, and anything else the mounting takes. An object
@@ -27,18 +26,17 @@ export interface MountOptions {
 
 /**
  * Renders a bundle into a DOM element, and keeps it there: a write to a state
- * cell re-renders the instance that owns it and the target follows.
+ * cell re-runs the props and the lists that read it, and the target follows.
  *
  * The bundle is data — build it with `bundle()` on the server and ship the
  * JSON. Nothing here compiles or bundles; this is the web half of the client,
- * and the half above it (evaluating the bundle) is the same on every target.
+ * and the half above it (evaluating the bundle) is the same on every target,
+ * which is why the DOM arrives as an argument rather than as an assumption.
  */
 export function mount(bundle: Bundle, { target }: MountOptions): void {
-  // Evaluated once, and nothing asks it to evaluate again: what a write moves
-  // is read by whoever draws it, so the drawing keeps itself right. The root is
-  // what everything drawn belongs to.
-  const tree = evaluate(bundle);
-  createRoot(() => renderInto(target, tree));
+  // Built once, and nothing asks it to build again: what a write moves is read
+  // by whoever holds it, so the nodes keep themselves right.
+  render(bundle, dom, target);
 }
 
 /**

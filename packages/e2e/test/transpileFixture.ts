@@ -1,5 +1,11 @@
 import { transform } from "@backtickjs/compiler";
-import prettier from "prettier";
+// Prettier by the path rather than the name. This suite runs under
+// `--conditions=browser`, which is what makes Solid resolve to its reactive
+// build rather than the inert server one (see `js-interpreter/view.ts`), and
+// under that condition `prettier` resolves to the standalone bundle — which
+// carries no parsers and can't format TypeScript. The condition is the
+// interpreter's, so the name it breaks names its build instead.
+import prettier from "prettier/index.mjs";
 import ts from "typescript";
 
 // The one set of options every suite compiles fixtures with, so the `*.js`

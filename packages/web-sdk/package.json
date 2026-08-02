@@ -27,7 +27,7 @@
   "scripts": {
     "build": "tsc -b && node scripts/browser.mjs",
     "dev": "tsc -b --watch",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"

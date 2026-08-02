@@ -1,5 +1,5 @@
 <View>
-  <View key="ord-1000">
+  <View>
     <Image source={{ "uri": "https://img.example.com/ord-1000.png" }} />
     <Text>
       {"Customer 0"}
@@ -7,17 +7,17 @@
     <Text>
       {"Montréal"}
     </Text>
-    <Text key="SKU-0-A">
+    <Text>
       {"SKU-0-A x1"}
     </Text>
-    <Text key="SKU-0-B">
+    <Text>
       {"SKU-0-B x1"}
     </Text>
     <Text>
       {"$45.23"}
     </Text>
   </View>
-  <View key="ord-1001">
+  <View>
     <Image source={{ "uri": "https://img.example.com/ord-1001.png" }} />
     <Text>
       {"Customer 1"}
@@ -25,17 +25,17 @@
     <Text>
       {"Toronto"}
     </Text>
-    <Text key="SKU-1-A">
+    <Text>
       {"SKU-1-A x2"}
     </Text>
-    <Text key="SKU-1-B">
+    <Text>
       {"SKU-1-B x1"}
     </Text>
     <Text>
       {"$46.23"}
     </Text>
   </View>
-  <View key="ord-1002">
+  <View>
     <Image source={{ "uri": "https://img.example.com/ord-1002.png" }} />
     <Text>
       {"Customer 2"}
@@ -43,17 +43,17 @@
     <Text>
       {"Montréal"}
     </Text>
-    <Text key="SKU-2-A">
+    <Text>
       {"SKU-2-A x3"}
     </Text>
-    <Text key="SKU-2-B">
+    <Text>
       {"SKU-2-B x1"}
     </Text>
     <Text>
       {"$47.23"}
     </Text>
   </View>
-  <View key="ord-1003">
+  <View>
     <Image source={{ "uri": "https://img.example.com/ord-1003.png" }} />
     <Text>
       {"Customer 3"}
@@ -61,17 +61,17 @@
     <Text>
       {"Toronto"}
     </Text>
-    <Text key="SKU-3-A">
+    <Text>
       {"SKU-3-A x1"}
     </Text>
-    <Text key="SKU-3-B">
+    <Text>
       {"SKU-3-B x1"}
     </Text>
     <Text>
       {"$48.23"}
     </Text>
   </View>
-  <View key="ord-1004">
+  <View>
     <Image source={{ "uri": "https://img.example.com/ord-1004.png" }} />
     <Text>
       {"Customer 4"}
@@ -79,10 +79,10 @@
     <Text>
       {"Montréal"}
     </Text>
-    <Text key="SKU-4-A">
+    <Text>
       {"SKU-4-A x2"}
     </Text>
-    <Text key="SKU-4-B">
+    <Text>
       {"SKU-4-B x1"}
     </Text>
     <Text>

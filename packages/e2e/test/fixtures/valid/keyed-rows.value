@@ -1,0 +1,19 @@
+<View>
+  <Text onPress={[function]}>
+    {"swap"}
+  </Text>
+  <Text onPress={[function]}>
+    {"drop"}
+  </Text>
+  <View>
+    <Text>
+      {"row 1"}
+    </Text>
+    <Text>
+      {"row 2"}
+    </Text>
+    <Text>
+      {"row 3"}
+    </Text>
+  </View>
+</View>

@@ -212,6 +212,23 @@
       "keyed": true,
       "dir": "app-inlined",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "13874e8",
+      "note": "5 iterations",
+      "date": "2026-08-02",
+      "keyed": true,
+      "dir": "13874e8",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "13874e8",
+      "label": "views",
+      "note": "built once, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-views",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

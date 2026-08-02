@@ -1,10 +1,9 @@
-import { renderMarkup, isElement } from "./test-client/index.ts";
-import type { Element } from "./test-client/index.ts";
+import { renderMarkup, isTestNode } from "./test-client/index.ts";
 
 // Renders a runtime value produced by the test-client into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,
-// undefined, circular references) rendered as bracketed placeholders, and
-// elements rendered as markup with their client scripts evaluated.
+// undefined, circular references) rendered as bracketed placeholders, and the
+// nodes a tree built rendered as markup.
 export function renderValue(value: unknown): string {
   return render(value, "", new Set());
 }
@@ -22,7 +21,7 @@ function render(value: unknown, indent: string, seen: Set<object>): string {
   if (typeof value === "function") {
     return "[function]";
   }
-  if (isElement(value)) {
+  if (isTestNode(value)) {
     return renderMarkup(value, indent);
   }
   if (typeof value !== "object") {
