@@ -94,14 +94,12 @@ export async function Main() {
     const from = $rowId.read();
     $data.write($buildData(1000, from));
     $rowId.write(from + 1000);
-    $selected.write(0);
   }`;
 
   const runLots = cs`() => {
     const from = $rowId.read();
     $data.write($buildData(10000, from));
     $rowId.write(from + 10000);
-    $selected.write(0);
   }`;
 
   const add = cs`() => {
@@ -120,15 +118,13 @@ export async function Main() {
 
   const clear = cs`() => {
     $data.write([]);
-    $selected.write(0);
   }`;
 
   const swapRows = cs`() => {
-    let clone = $data.read().slice();
-    const tmp = clone[1];
-    clone = clone.with(1, clone[998]);
-    clone = clone.with(998, tmp);
-    $data.write(clone);
+    const rows = $data.read();
+    if (rows.length > 998) {
+      $data.write(rows.with(1, rows[998]).with(998, rows[1]));
+    }
   }`;
 
   const select = cs`(id: number) => {
