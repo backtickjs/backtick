@@ -9,7 +9,6 @@ import type {
   BundleSpreadElementNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
-  BundleApplyTree,
   BundleExpr,
   BundleStatementNode,
   FunctionLabel,
@@ -17,7 +16,7 @@ import type {
 } from "@backtickjs/core";
 import { compileElement, instanceOf } from "./view.js";
 import type { Instance } from "./view.js";
-import type { Value } from "./Value.js";
+import type { Applied, Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
@@ -123,26 +122,16 @@ function getFunction(
   return fn;
 }
 
-// An entry applied: the same node the bundle writes, with its arguments
-// evaluated. The wire says an application is a label and the arguments to hand
-// over, and that is all one is once the arguments are values — so there is
-// nothing here the format had not already named.
-//
-// The entry is looked up rather than carried, so a malformed label is caught
-// where it is written rather than where it is drawn.
-function applied(
-  bundle: Bundle,
-  label: TreeLabel,
-  slots: Value[],
-): BundleApplyTree<Value> {
-  if (bundle.trees[label] === undefined) {
+// An entry applied: the entry itself, and the arguments to hand it. The label
+// is resolved here — the one place that reads the table — so an unknown one is
+// caught where it is written rather than carried along to be looked up again by
+// whoever draws it.
+function applied(bundle: Bundle, label: TreeLabel, slots: Value[]): Applied {
+  const tree = bundle.trees[label];
+  if (tree === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
-  return {
-    "#": NodeKind.ApplyTree,
-    [NodeField.label]: label,
-    ...(slots.length === 0 ? {} : { [NodeField.arguments]: slots }),
-  };
+  return { "@backtickjs": "Applied", tree, slots };
 }
 
 // A node is compiled once into the closure that evaluates it, and that closure

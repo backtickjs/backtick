@@ -1,7 +1,6 @@
-import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
+import { NodeField } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
-  BundleApplyTree,
   BundleElement,
   BundleExpr,
   BundleTree,
@@ -11,6 +10,7 @@ import { createRenderer } from "solid-js/universal";
 import type { Renderer, RendererOptions } from "solid-js/universal";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
+import { isApplied } from "./Value.js";
 import type { Value } from "./Value.js";
 
 // The view half: turning a tree entry into the host's own nodes, once, and
@@ -199,29 +199,10 @@ function build(value: Value, instance: Instance): unknown {
   if (!isApplied(value)) {
     return value;
   }
-  const tree = instance.bundle.trees[value[NodeField.label]];
-  if (tree === undefined) {
-    throw new Error(`unknown tree entry ${value[NodeField.label]}`);
-  }
   // Fixed arguments: this position holds one application, evaluated when the
   // instance was built, so nothing will hand it different ones.
-  const slots = value[NodeField.arguments] ?? [];
-  return instantiate(instance.bundle, tree, () => slots, instance.host);
-}
-
-// An application, as opposed to any other value a tree expression evaluates to.
-//
-// The `#` key is what tells a node from data everywhere else in the format, and
-// it does here too: a plain object can never carry one, because bundling
-// refuses data that does.
-function isApplied(value: Value): value is BundleApplyTree<Value> {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    !Array.isArray(value) &&
-    "#" in value &&
-    value["#"] === NodeKind.ApplyTree
-  );
+  const slots = value.slots;
+  return instantiate(instance.bundle, value.tree, () => slots, instance.host);
 }
 
 // A cell's handle, as a script reads it: an ordinary object of functions, so it
