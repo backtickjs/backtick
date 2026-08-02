@@ -7,8 +7,7 @@ export type { TestNode } from "./host.ts";
 
 // The interpreter itself lives in `@backtickjs/js-interpreter` — one
 // implementation, so what this suite exercises is what every host runs. What
-// stays here is the test-only half: a host of plain objects to build in, and
-// rendering what it built as markup for the `*.value` snapshots.
+// stays here is the test-only half: a host of plain objects to build in.
 
 /**
  * Evaluates a bundle's root, building whatever it draws out of plain objects.

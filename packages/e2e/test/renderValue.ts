@@ -1,4 +1,5 @@
-import { renderMarkup, isTestNode } from "./test-client/index.ts";
+import { renderMarkup } from "./renderMarkup.ts";
+import { isTestNode } from "./test-client/index.ts";
 
 // Renders a runtime value produced by the test-client into a stable textual
 // snapshot: JSON-like, with the values JSON can't carry (functions,

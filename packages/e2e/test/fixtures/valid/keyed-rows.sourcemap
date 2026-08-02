@@ -78,13 +78,13 @@ cs.splice(         →  [-semantic]
 (ids)              → $ids
 )                  →  [-semantic]
 )                  → 
-.                  → .
+.                  → \n          .
 read               → read
 ()                 → ()
 )                  → 
-.                  → .
+.                  → \n          .
 map                → map
-(                  → (\n          
+(                  → (
 __cs_id            → id
  =>                → ) => 
 cs.splice(         → ${ [-semantic]
@@ -100,5 +100,5 @@ __cs_id            → id
 ))                 → `
 }</Text>)          → }</Text>)
 )                  → } [-semantic]
-)                  → ,\n        )
+)                  → )
 ))                 → `
