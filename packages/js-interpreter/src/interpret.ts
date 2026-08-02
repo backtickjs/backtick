@@ -89,8 +89,7 @@ interface Instance {
   // row. Handing back the same object is what says "this is the thing you
   // already have": a prop is read from it and its children are a signal on it,
   // so an element that persists is a node that persists, down the whole subtree.
-  readonly drew: Map<BundleElement, Element[]>;
-  readonly made: Map<BundleElement, number>;
+  readonly drawing: Drawing;
   // The handle each of this instance's cells is read through, made with the
   // instance because the cells a tree declares are known before it runs. One
   // per cell for its life: a handle is a view onto storage and holds nothing of
@@ -127,8 +126,7 @@ function instantiate(
     visits: null,
     closures: null,
     calls: null,
-    drew: new Map(),
-    made: new Map(),
+    drawing: newDrawing(),
     handles: null,
     key,
     element: null,
@@ -169,41 +167,51 @@ function render(instance: Instance): Element | null {
   // reached n times again, so the nth evaluation lines up with the nth instance.
   instance.visits?.clear();
   instance.calls?.clear();
-  instance.made.clear();
-  const rendered = evaluateExpr(
-    instance.bundle,
-    instance.tree[NodeField.content],
-    instance.slots(),
-    null,
-    instance,
-  ) as Element | null;
-  // What this render didn't ask for again is dropped, and dropping an instance
-  // means disposing it: an owner that is merely unreachable has still got its
-  // effects registered against every cell they read, and a cell outlives the
-  // rows that read it. Letting the map go is not enough.
-  //
-  // An apply this render never reached draws nothing now, so everything under
-  // it goes. One it did reach keeps what it claimed, and `left` is by now
-  // exactly the rows that were there last time and are not here this time —
-  // the middle row of a list, which is the case that never went through the
-  // branch above.
-  for (const [node, group] of instance.children ?? []) {
-    if (instance.visits?.has(node) !== true) {
-      instance.children?.delete(node);
-      for (const child of group.claimed.values()) child.dispose();
+  instance.drawing.made.clear();
+  // An instance draws in its own space, whatever space the parent was drawing
+  // in when it reached the apply. Without this a child rendered from inside a
+  // keyed element would record what it drew under that element, and find it
+  // again — or fail to — from there.
+  const outerDrawing = drawingIn;
+  drawingIn = instance.drawing;
+  try {
+    const rendered = evaluateExpr(
+      instance.bundle,
+      instance.tree[NodeField.content],
+      instance.slots(),
+      null,
+      instance,
+    ) as Element | null;
+    // What this render didn't ask for again is dropped, and dropping an instance
+    // means disposing it: an owner that is merely unreachable has still got its
+    // effects registered against every cell they read, and a cell outlives the
+    // rows that read it. Letting the map go is not enough.
+    //
+    // An apply this render never reached draws nothing now, so everything under
+    // it goes. One it did reach keeps what it claimed, and `left` is by now
+    // exactly the rows that were there last time and are not here this time —
+    // the middle row of a list, which is the case that never went through the
+    // branch above.
+    for (const [node, group] of instance.children ?? []) {
+      if (instance.visits?.has(node) !== true) {
+        instance.children?.delete(node);
+        for (const child of group.claimed.values()) child.dispose();
+        for (const child of group.left.values()) child.dispose();
+        continue;
+      }
       for (const child of group.left.values()) child.dispose();
-      continue;
+      group.left.clear();
     }
-    for (const child of group.left.values()) child.dispose();
-    group.left.clear();
+    // The applied key wins over whatever the content named itself: the content is
+    // one element among an instance's own, and the key is about the instance.
+    if (rendered !== null && instance.key !== null) {
+      rendered.key = instance.key;
+    }
+    instance.element = rendered;
+    return rendered;
+  } finally {
+    drawingIn = outerDrawing;
   }
-  // The applied key wins over whatever the content named itself: the content is
-  // one element among an instance's own, and the key is about the instance.
-  if (rendered !== null && instance.key !== null) {
-    rendered.key = instance.key;
-  }
-  instance.element = rendered;
-  return rendered;
 }
 
 // Whether two argument lists are the same values in the same order. Identity
@@ -265,6 +273,42 @@ interface Children {
   claimed: Map<string | number, Instance>;
   left: Map<string | number, Instance>;
 }
+
+// Where an element is found again. An instance has one for its own render, and
+// a keyed element has one of its own — so a row found by its key finds its
+// cells by position *within that row*, rather than by position in the table.
+// Without that a row that moved would keep its `tr` and rebuild every `td`
+// under it, which is keyed by the letter and not in effect.
+interface Drawing {
+  // The nth drawing of this node in this drawing, and what each of them drew.
+  readonly drew: Map<BundleElement, Element[]>;
+  readonly made: Map<BundleElement, number>;
+  // What a keyed node drew, under the key it was drawn by. `claimed` is what
+  // this drawing has asked for and `left` is what the last one ended with;
+  // rotating them at the first visit drops whatever nobody asked for again.
+  keyed: Map<BundleElement, KeptByKey> | null;
+}
+
+interface KeptByKey {
+  claimed: Map<string | number, Kept>;
+  left: Map<string | number, Kept>;
+}
+
+// An element found by its key, with the identity space its own subtree is
+// found in.
+interface Kept {
+  readonly element: Element;
+  readonly drawing: Drawing;
+}
+
+function newDrawing(): Drawing {
+  return { drew: new Map(), made: new Map(), keyed: null };
+}
+
+// Which drawing is being made. Per-render mutable state, like the counters it
+// holds: a render is one synchronous walk, and a keyed element swaps this for
+// its own while its children are worked out.
+let drawingIn: Drawing | null = null;
 
 // One frame per arrow application or block. Names are pre-resolved by the
 // bundler and there are no globals: a name no frame binds is a malformed
@@ -493,33 +537,91 @@ function compileElement(bundle: Bundle, element: BundleElement): CompiledExpr {
       key === null
         ? null
         : (key(slots, null, instance) as string | number | null);
-    // Which drawing of this element this is — the nth time this render has
-    // reached it, which for an element inside a loop is the nth row.
-    const at = instance === null ? 0 : (instance.made.get(element) ?? 0);
-    let drew = instance?.drew.get(element);
-    if (instance !== null && drew === undefined) {
-      drew = [];
-      instance.drew.set(element, drew);
-    }
-    instance?.made.set(element, at + 1);
-    const kept = drew?.[at];
-    // The same element, drawn again. Written into rather than replaced, so
-    // everything holding it — the node it was drawn as, the effects reading its
-    // props — is holding the current one and nothing has to be told.
-    const built = kept ?? new Element(id, drawn, {}, element);
-    built.key = drawn;
-    if (kept === undefined) {
-      if (drew !== undefined) {
-        drew[at] = built;
-      }
+    // The drawing this element belongs to: the enclosing keyed element's, or
+    // the instance's own where no keyed element stands between them.
+    const drawing = drawingIn ?? instance?.drawing ?? null;
+    if (drawing === null) {
+      // Nothing to be found again in — outside a render nobody is holding the
+      // last one, so this is built fresh.
+      const made = new Element(id, drawn, {}, element);
       for (const [prop, expr] of props) {
-        // Bound once. The getter resolves against the instance every time it is
-        // read, so a second render has nothing to tell it.
-        bindProp(bundle, built, prop, expr, slots, instance);
+        bindProp(bundle, made, prop, expr, slots, instance);
       }
+      if (drawChildren !== null) {
+        setChildren(made, drawChildren(slots, null, instance));
+      }
+      return made;
     }
+    // Which drawing of this element this is — the nth time this drawing has
+    // reached it, which for an element inside a loop is the nth row.
+    const at = drawing.made.get(element) ?? 0;
+    drawing.made.set(element, at + 1);
+
+    let built: Element;
+    let under: Drawing;
+    if (key === null) {
+      let drew = drawing.drew.get(element);
+      if (drew === undefined) {
+        drew = [];
+        drawing.drew.set(element, drew);
+      }
+      const kept = drew[at];
+      // The same element, drawn again. Written into rather than replaced, so
+      // everything holding it — the node it was drawn as, the effects reading
+      // its props — is holding the current one and nothing has to be told.
+      built = kept ?? new Element(id, drawn, {}, element);
+      if (kept === undefined) {
+        drew[at] = built;
+        for (const [prop, expr] of props) {
+          // Bound once. The getter resolves against the instance every time it
+          // is read, so a second render has nothing to tell it.
+          bindProp(bundle, built, prop, expr, slots, instance);
+        }
+      }
+      // An unkeyed element cannot move, so what it draws is found where it is
+      // found: in the drawing it belongs to.
+      under = drawing;
+    } else {
+      let byKey = drawing.keyed?.get(element);
+      if (byKey === undefined) {
+        byKey = { claimed: new Map(), left: new Map() };
+        (drawing.keyed ??= new Map()).set(element, byKey);
+      }
+      // The first visit of a drawing starts a new claim on this node; whatever
+      // the last one left and nobody asks for again goes with the map it was
+      // in.
+      if (at === 0) {
+        byKey.left = byKey.claimed;
+        byKey.claimed = new Map();
+      }
+      const name = drawn ?? at;
+      let kept = byKey.left.get(name);
+      if (kept !== undefined) {
+        byKey.left.delete(name);
+      } else {
+        const made = new Element(id, drawn, {}, element);
+        for (const [prop, expr] of props) {
+          bindProp(bundle, made, prop, expr, slots, instance);
+        }
+        // A space of its own: what this element draws is found under it, so a
+        // row that moved keeps the cells it drew rather than adopting whichever
+        // ones sit where it landed.
+        kept = { element: made, drawing: newDrawing() };
+      }
+      byKey.claimed.set(name, kept);
+      built = kept.element;
+      under = kept.drawing;
+      under.made.clear();
+    }
+    built.key = drawn;
     if (drawChildren !== null) {
-      setChildren(built, drawChildren(slots, null, instance));
+      const outer = drawingIn;
+      drawingIn = under;
+      try {
+        setChildren(built, drawChildren(slots, null, instance));
+      } finally {
+        drawingIn = outer;
+      }
     }
     return built;
   };

@@ -162,25 +162,32 @@
       "file": "backtick-v0.1.0-keyed"
     },
     {
-      "commit": "9b6df30",
-      "label": "app",
+      "commit": "73ed821",
+      "label": "compiled",
       "note": "uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "closure-compile",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "c1f27f0",
+      "label": "app",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-with",
       "file": "backtick-v0.1.0-keyed"
     },
     {
-      "commit": "9b6df30",
+      "commit": "2996ded",
       "label": "spread",
-      "note": "uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-spread",
       "file": "backtick-v0.1.0-keyed"
     },
     {
-      "commit": "9b6df30",
+      "commit": "dea1da7",
       "label": "globals",
       "note": "random labels",
       "date": "uncommitted",
@@ -189,7 +196,7 @@
       "file": "backtick-v0.1.0-keyed"
     },
     {
-      "commit": "9b6df30",
+      "commit": "60d894a",
       "label": "matched",
       "note": "random labels",
       "date": "uncommitted",
@@ -198,12 +205,12 @@
       "file": "backtick-v0.1.0-keyed"
     },
     {
-      "commit": "9b6df30",
-      "label": "compiled",
-      "note": "uncommitted",
+      "commit": "60d894a",
+      "label": "inlined",
+      "note": "no components, uncommitted",
       "date": "uncommitted",
       "keyed": true,
-      "dir": "closure-compile",
+      "dir": "app-inlined",
       "file": "backtick-v0.1.0-keyed"
     }
   ]

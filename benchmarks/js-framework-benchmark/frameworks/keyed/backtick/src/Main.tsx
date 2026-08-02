@@ -68,19 +68,10 @@ export async function Main() {
   const selected = state(0);
   const rowId = state(1);
 
-  // A word for a row, drawn the way the reference draws one:
-  // `Math.round(Math.random() * 1000) % max`, down to the redundant `* 1000`
-  // and the modulo of a number already smaller than the list.
-  //
-  // Every run now builds different labels, which is what the reference does
-  // and so what this has to do to be measured against it.
   const word = cs`(list: string[]) => {
     return list[Math.round(Math.random() * 1000) % list.length];
   }`;
 
-  // The reference sizes an array and fills it by index — `new Array(count)`,
-  // then a `for`. `Array.from` is the same thing without an assignment into a
-  // slot, which this language has no node for.
   const buildData = cs`(count: number, from: number) => {
     return Array.from({ length: count }, (_, index) => {
       return {
@@ -144,20 +135,66 @@ export async function Main() {
           </div>
           <div class="col-md-6">
             <div class="row">
-              <Button id="run" label="Create 1,000 rows" onclick={run} />
-              <Button
-                id="runlots"
-                label="Create 10,000 rows"
-                onclick={runLots}
-              />
-              <Button id="add" label="Append 1,000 rows" onclick={add} />
-              <Button
-                id="update"
-                label="Update every 10th row"
-                onclick={partialUpdate}
-              />
-              <Button id="clear" label="Clear" onclick={clear} />
-              <Button id="swaprows" label="Swap Rows" onclick={swapRows} />
+              <div class="col-sm-6 smallpad">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  id="run"
+                  onclick={run}
+                >
+                  Create 1,000 rows
+                </button>
+              </div>
+              <div class="col-sm-6 smallpad">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  id="runlots"
+                  onclick={runLots}
+                >
+                  Create 10,000 rows
+                </button>
+              </div>
+              <div class="col-sm-6 smallpad">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  id="add"
+                  onclick={add}
+                >
+                  Append 1,000 rows
+                </button>
+              </div>
+              <div class="col-sm-6 smallpad">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  id="update"
+                  onclick={partialUpdate}
+                >
+                  Update every 10th row
+                </button>
+              </div>
+              <div class="col-sm-6 smallpad">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  id="clear"
+                  onclick={clear}
+                >
+                  Clear
+                </button>
+              </div>
+              <div class="col-sm-6 smallpad">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-block"
+                  id="swaprows"
+                  onclick={swapRows}
+                >
+                  Swap Rows
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -167,17 +204,24 @@ export async function Main() {
           {cs`$data.read().map(
             (row) =>
               ${(
-                // Keyed by the row's own id, which is what makes this a keyed
-                // implementation: the key rides the apply that instantiates the
-                // row, so two renders of the same list name the same rows.
-                <TableRow
+                <tr
                   key={cs`row.id`}
-                  id={cs`row.id`}
-                  label={cs`row.label`}
-                  selected={selected}
-                  onSelect={cs`() => $select(row.id)`}
-                  onRemove={cs`() => $remove(row.id)`}
-                />
+                  class={cs`$selected.read() === row.id ? "danger" : ""`}
+                >
+                  <td class="col-md-1">{cs`row.id`}</td>
+                  <td class="col-md-4">
+                    <a onclick={cs`() => $select(row.id)`}>{cs`row.label`}</a>
+                  </td>
+                  <td class="col-md-1">
+                    <a onclick={cs`() => $remove(row.id)`}>
+                      <span
+                        class="glyphicon glyphicon-remove"
+                        aria-hidden="true"
+                      ></span>
+                    </a>
+                  </td>
+                  <td class="col-md-6"></td>
+                </tr>
               )},
           )`}
         </tbody>
@@ -187,64 +231,5 @@ export async function Main() {
         aria-hidden="true"
       ></span>
     </>
-  );
-}
-
-async function Button({
-  id,
-  label,
-  onclick,
-}: {
-  id: string;
-  label: string;
-  onclick: Client<() => void>;
-}) {
-  return (
-    <div class="col-sm-6 smallpad">
-      <button
-        type="button"
-        class="btn btn-primary btn-block"
-        id={id}
-        onclick={onclick}
-      >
-        {label}
-      </button>
-    </div>
-  );
-}
-
-// The row shape the driver asserts, node for node: four cells, the label in an
-// anchor, and the remove glyph in an anchor of its own.
-//
-// The row is handed the cell rather than an answer computed from it. A prop
-// that reads a cell is recomputed on its own when that cell is written, so
-// selecting a row changes two class attributes; a boolean computed out here
-// would make selecting one row a re-render of all of them.
-async function TableRow({
-  id,
-  label,
-  selected,
-  onSelect,
-  onRemove,
-}: {
-  id: Client<number>;
-  label: Client<string>;
-  selected: Client<State<number>>;
-  onSelect: Client<() => void>;
-  onRemove: Client<() => void>;
-}) {
-  return (
-    <tr class={cs`$selected.read() === $id ? "danger" : ""`}>
-      <td class="col-md-1">{id}</td>
-      <td class="col-md-4">
-        <a onclick={onSelect}>{label}</a>
-      </td>
-      <td class="col-md-1">
-        <a onclick={onRemove}>
-          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        </a>
-      </td>
-      <td class="col-md-6"></td>
-    </tr>
   );
 }
