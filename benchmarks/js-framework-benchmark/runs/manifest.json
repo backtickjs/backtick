@@ -262,6 +262,15 @@
       "keyed": true,
       "dir": "app-rebuild",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "ba263a7",
+      "label": "For",
+      "note": "list declared, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-for",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
