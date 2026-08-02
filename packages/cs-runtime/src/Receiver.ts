@@ -1,5 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
+import type { ClientMath } from "./ClientMath.js";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
@@ -47,6 +48,12 @@ type ReadMembers<T extends object> = {
     : T[K];
 };
 
+// The globals a script may reach without binding one, as the typechecker sees
+// them before `Receiver` narrows each to what this language admits of it. The
+// lib type is the whole of JavaScript's `Math`; `ClientMath` is the part of it
+// every host can agree on.
+export type ClientGlobal = typeof globalThis.Math;
+
 // What a client view may be indexed by: an array by number and nothing else,
 // anything else by the keys its own type names. Naming the array case rather
 // than leaving it to `keyof` keeps the answer to a bad key a clean one — the
@@ -59,18 +66,17 @@ export type IndexKey<R> = R extends ClientArray<any> ? number : keyof R;
 //   ClientObject                    -> SplicedMembers<T>
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
-export type Receiver<T extends ClientValue> = T extends
-  | string
-  | number
-  | boolean
-  | readonly unknown[]
-  ? Autoboxed<T>
-  : T extends JsxElement
-    ? {}
-    : T extends ClientObject
-      ? SplicedMembers<T>
-      : T extends ClientConstructor | ClientFunction
-        ? T
-        : T extends object
-          ? ReadMembers<T>
-          : T;
+export type Receiver<T extends ClientValue | ClientGlobal> =
+  T extends typeof globalThis.Math
+    ? ClientMath
+    : T extends string | number | boolean | readonly unknown[]
+      ? Autoboxed<T>
+      : T extends JsxElement
+        ? {}
+        : T extends ClientObject
+          ? SplicedMembers<T>
+          : T extends ClientConstructor | ClientFunction
+            ? T
+            : T extends object
+              ? ReadMembers<T>
+              : T;

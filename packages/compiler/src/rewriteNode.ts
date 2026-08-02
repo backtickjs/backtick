@@ -214,6 +214,9 @@ export interface RewrittenNode {
   runtime: ts.Node;
 }
 
+// What a script may reach without binding it.
+const BUILTINS = new Set(["Math"]);
+
 export function rewriteNode(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -708,6 +711,25 @@ function rewriteNodeImpl(
         virtual: ts.factory.createNull(),
         runtime: astNode(ts, SyntaxKind.NullKeyword, {
           loc: loc(node),
+        }),
+      };
+    }
+
+    // One exception to "there are no globals", and it is a list rather than a
+    // rule: a name here is a global this language provides itself, and what it
+    // means is written down rather than inherited from whatever the host's own
+    // happens to be.
+    //
+    // The virtual code names it plainly, as the lib global — narrowing it is
+    // `Receiver`'s job, the same as for a string or an array, and what it
+    // narrows to is `ClientMath`. So the whole of JavaScript's `Math` is what
+    // the name resolves to and only the agreed part of it is reachable.
+    if (!state.bindings.has(node) && BUILTINS.has(node.text)) {
+      return {
+        virtual: ts.factory.createIdentifier(node.text),
+        runtime: astNode(ts, SyntaxKind.Builtin, {
+          loc: loc(node),
+          name: ts.factory.createStringLiteral(node.text),
         }),
       };
     }

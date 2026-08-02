@@ -1,5 +1,6 @@
 export type { Client } from "./Client.js";
 export type { ClientArray } from "./ClientArray.js";
+export type { ClientMath } from "./ClientMath.js";
 export type { ClientBoolean } from "./ClientBoolean.js";
 export type { ClientConstructor } from "./ClientConstructor.js";
 export type { ClientNumber } from "./ClientNumber.js";

@@ -3,7 +3,7 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
-import type { IndexKey, Receiver } from "./Receiver.js";
+import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 import type { Widen } from "./Widen.js";
 
 // The root of a script
@@ -65,7 +65,7 @@ function _statement(_: void): void {
   );
 }
 
-function _receiver<T extends ClientValue>(_: T): Receiver<T> {
+function _receiver<T extends ClientValue | ClientGlobal>(_: T): Receiver<T> {
   throw new Error(
     "Don't call `cs.receiver` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",

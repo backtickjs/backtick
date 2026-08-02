@@ -55,6 +55,10 @@ export const SyntaxKind = {
   // This language's own, past where TypeScript has reached: a splice is host
   // code, which JavaScript's grammar has no node for.
   Splice: 1000,
+  // A global this language provides itself. JavaScript reaches `Math` because
+  // it is in scope; here there is no scope to be in, so what a script may
+  // reach is written down instead of inherited.
+  Builtin: 1001,
 } as const;
 
 export type SyntaxKind = (typeof SyntaxKind)[keyof typeof SyntaxKind];

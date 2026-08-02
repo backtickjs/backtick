@@ -231,6 +231,7 @@ export const NodeKind = {
   Parameter: 1019,
   PrefixUnaryExpression: 1020,
   SpreadElement: 1021,
+  Builtin: 1022,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -360,6 +361,14 @@ export interface BundleSpreadElementNode {
   [NodeField.expression]: BundleExpressionNode;
 }
 
+// A global reached by name. What `Math` is, is the host's to answer — which is
+// the point: a bundle that carried JavaScript's would be carrying JavaScript.
+// What the format fixes is which members exist and what each one means.
+export interface BundleBuiltinNode {
+  "#": typeof NodeKind.Builtin;
+  [NodeField.name]: string;
+}
+
 export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
 
 export type BundleExpressionNode =
@@ -382,7 +391,8 @@ export type BundleExpressionNode =
   | BundleBinaryExpressionNode
   | BundlePrefixUnaryExpressionNode
   | BundleConditionalExpressionNode
-  | BundleArrowFunctionNode;
+  | BundleArrowFunctionNode
+  | BundleBuiltinNode;
 
 // A body node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.

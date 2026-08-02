@@ -1,9 +1,12 @@
 import { cs } from "@backtickjs/core";
 
-// There are no globals: a name is a script's own variable or a splice.
+// A name is a script's own variable, a splice, or one of the globals this
+// language provides itself — which is `Math` and nothing else. A lib global is
+// not in scope here whatever JavaScript would say, because there is no scope
+// for it to be in.
 const lib = cs`String(1)`;
 
-const method = cs`Math.floor(1.5)`;
+const object = cs`JSON.stringify(1)`;
 
 const hostValue = 5;
 

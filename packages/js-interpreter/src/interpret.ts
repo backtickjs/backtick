@@ -1099,6 +1099,17 @@ function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
       const label = node[NodeField.label];
       return () => getFunction(bundle, label);
     }
+    // A global the format names and the host answers. This host is
+    // JavaScript, so these are JavaScript's — which is what the curation is
+    // for: every member here means the same thing everywhere.
+    case NodeKind.Builtin: {
+      const name = node[NodeField.name];
+      const value = builtins[name];
+      if (value === undefined) {
+        throw new Error(`unknown builtin ${name}`);
+      }
+      return () => value;
+    }
     case NodeKind.GetTree: {
       const label = node[NodeField.label];
       return () => getTree(bundle, label);
@@ -1300,6 +1311,26 @@ function buildNode(bundle: Bundle, node: BundleExpressionNode): Compiled {
     }
   }
 }
+
+// `Math`, as `ClientMath` fixes it. Written out rather than handed the host's
+// own object, so what a bundle can reach is a list somebody chose and a member
+// left out stays left out.
+const builtins: { [name: string]: Value } = {
+  Math: {
+    PI: Math.PI,
+    E: Math.E,
+    abs: (x: Value) => Math.abs(x as number),
+    sign: (x: Value) => Math.sign(x as number),
+    floor: (x: Value) => Math.floor(x as number),
+    ceil: (x: Value) => Math.ceil(x as number),
+    round: (x: Value) => Math.round(x as number),
+    trunc: (x: Value) => Math.trunc(x as number),
+    min: (...values: Value[]) => Math.min(...(values as number[])),
+    max: (...values: Value[]) => Math.max(...(values as number[])),
+    sqrt: (x: Value) => Math.sqrt(x as number),
+    fround: (x: Value) => Math.fround(x as number),
+  },
+};
 
 // Reads a value the language guarantees is boolean: a condition, or an operand
 // of `&&`/`||`. The compiler rejects anything else — `cs.condition` exists to

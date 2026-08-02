@@ -335,6 +335,11 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           [NodeField.expression]: e(node.expression),
           [NodeField.argumentExpression]: e(node.argumentExpression),
         };
+      case SyntaxKind.Builtin:
+        return {
+          "#": NodeKind.Builtin,
+          [NodeField.name]: node.name,
+        };
       case SyntaxKind.Splice:
         return renderSplice(node.key);
       case SyntaxKind.StringLiteral:

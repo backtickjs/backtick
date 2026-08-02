@@ -25,6 +25,7 @@ export type ClientScriptExpression =
   | ClientScriptPropertyAccessExpression
   | ClientScriptElementAccessExpression
   | ClientScriptSplice
+  | ClientScriptBuiltin
   | ClientScriptStringLiteral
   | ClientScriptConditionalExpression;
 
@@ -209,6 +210,14 @@ export interface ClientScriptElementAccessExpression extends ClientScriptNode {
 export interface ClientScriptReturnStatement extends ClientScriptNode {
   readonly kind: typeof SyntaxKind.ReturnStatement;
   readonly expression: ClientScriptExpression;
+}
+
+// `Math`, and nothing else yet. The name travels rather than the value, so a
+// host that is not JavaScript answers with its own and the format says which
+// answer is the right one.
+export interface ClientScriptBuiltin extends ClientScriptNode {
+  readonly kind: typeof SyntaxKind.Builtin;
+  readonly name: string;
 }
 
 export interface ClientScriptSplice extends ClientScriptNode {

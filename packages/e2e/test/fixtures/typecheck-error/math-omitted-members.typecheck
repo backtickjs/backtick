@@ -1,0 +1,4 @@
+7:39 error TS2551: Property 'sin' does not exist on type 'ClientMath'. Did you mean 'sign'?
+9:31 error TS2339: Property 'pow' does not exist on type 'ClientMath'.
+11:39 error TS2339: Property 'random' does not exist on type 'ClientMath'.
+15:30 error TS2555: Expected at least 1 arguments, but got 0.

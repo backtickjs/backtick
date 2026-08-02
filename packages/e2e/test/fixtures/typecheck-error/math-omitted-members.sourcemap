@@ -1,0 +1,38 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Math               → Math
+)                  → 
+.                  → .
+sin                → sin
+(                  → (
+1                  → 1
+)                  → )
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Math               → Math
+)                  → 
+.                  → .
+pow                → pow
+(                  → (
+2                  → 2
+,                  → , 
+8                  → 8
+)                  → )
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Math               → Math
+)                  → 
+.                  → .
+random             → random
+()                 → ()
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Math               → Math
+)                  → 
+.                  → .
+min                → min
+()                 → ()
+))                 → `

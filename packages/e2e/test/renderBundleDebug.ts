@@ -84,6 +84,9 @@ function renderNode(
       return fnLabel(node[NodeField.label]);
     case NodeKind.GetTree:
       return treeLabel(node[NodeField.label]);
+    // A global the format names and the host answers.
+    case NodeKind.Builtin:
+      return node[NodeField.name];
     // Same notation as in tree position: a body applies an entry when the
     // instance it makes is named, and calls one when it isn't.
     case NodeKind.ApplyTree: {
