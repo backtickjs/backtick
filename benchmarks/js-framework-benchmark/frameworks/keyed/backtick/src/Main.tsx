@@ -122,9 +122,7 @@ export async function Main() {
     $rowId.write(from + 1000);
   }`;
 
-  // Every tenth row gets ` !!!`, as the reference does — but by rebuilding the
-  // row rather than assigning to its label, because an object is a value here.
-  const update = cs`() => {
+  const partialUpdate = cs`() => {
     $data.update((data) =>
       data.map((row, index) =>
         index % 10 === 0 ? { id: row.id, label: row.label + " !!!" } : row,
@@ -137,17 +135,12 @@ export async function Main() {
     $selected.write(0);
   }`;
 
-  // The reference swaps by index assignment. With no way to write into a slot,
-  // this rebuilds the array and reads the two rows out of the one it was given
-  // — the same result, at O(n) where the reference pays O(1).
   const swapRows = cs`() => {
-    $data.update((data) =>
-      data.length > 998
-        ? data.map((row, index) =>
-            index === 1 ? data[998] : index === 998 ? data[1] : row,
-          )
-        : data,
-    );
+    let clone = $data.read().slice();
+    const tmp = clone[1];
+    clone = clone.with(1, clone[998]);
+    clone = clone.with(998, tmp);
+    $data.write(clone);
   }`;
 
   const select = cs`(id: number) => {
@@ -177,7 +170,7 @@ export async function Main() {
               <Button
                 id="update"
                 label="Update every 10th row"
-                onclick={update}
+                onclick={partialUpdate}
               />
               <Button id="clear" label="Clear" onclick={clear} />
               <Button id="swaprows" label="Swap Rows" onclick={swapRows} />

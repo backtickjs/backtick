@@ -7,12 +7,6 @@ import type { ClientValue } from "./ClientValue.js";
  * `find`, …) are absent.
  */
 export interface ClientArray<T> {
-  /** The element at an index, which is what `cs.index` resolves a read to.
-   * Reading is total at runtime — an index the array doesn't have reads as
-   * `null` — but the type follows TypeScript's own rule and names the element,
-   * so an in-range read needs no null check. */
-  readonly [index: number]: T;
-
   /** Gets the length of the array. This is a number one higher than the highest index in the array. */
   readonly length: number;
 
@@ -60,4 +54,45 @@ export interface ClientArray<T> {
    * @param predicate A function that accepts up to two arguments. The filter method calls the predicate function one time for each element in the array.
    */
   filter(predicate: (value: T, index: number) => boolean): T[];
+
+  /**
+   * Copies an array, then overwrites the value at the provided index with the
+   * given value. If the index is negative, then it replaces from the end
+   * of the array.
+   * @param index The index of the value to overwrite. If the index is
+   * negative, then it replaces from the end of the array.
+   * @param value The value to write into the copied array.
+   * @returns The copied array with the updated value.
+   */
+  with(index: number, value: T): T[];
+
+  /**
+   * Returns a copy of an array with its elements sorted.
+   *
+   * The comparator is required, where the standard library makes it optional:
+   * sorting without one compares the elements as strings, which is a rule of
+   * JavaScript's rather than of this language, and every other host would have
+   * to reproduce it to agree. Saying how to order two elements is the same
+   * work and it ports.
+   * @param compareFn Function used to determine the order of the elements. It is expected to return
+   * a negative value if the first argument is less than the second argument, zero if they're equal, and a positive
+   * value otherwise.
+   */
+  toSorted(compareFn: (a: T, b: T) => number): T[];
+
+  /**
+   * Returns a copy of an array with its elements in reverse order.
+   */
+  toReversed(): T[];
+
+  /**
+   * Copies an array and removes elements while, if necessary, inserting new elements in their place, returning the remaining elements.
+   * @param start The zero-based location in the array from which to start removing elements.
+   * @param deleteCount The number of elements to remove.
+   * @param items Elements to insert into the copied array in place of the deleted elements.
+   * @returns A copy of the original array with the remaining elements.
+   */
+  toSpliced(start: number, deleteCount: number, ...items: T[]): T[];
+
+  readonly [index: number]: T;
 }
