@@ -34,7 +34,7 @@
   {<Text>
     {#f4(slots[0])}
   </Text>}
-  {#f5((item, order) => #t0(item), slots[0])}
+  {#f5((item, order) => #t0(item) key=#f6(item), slots[0])}
   {<Text>
     {#f8(slots[0])}
   </Text>}
@@ -72,7 +72,7 @@
       "items": [{ "sku": "SKU-4-A", "qty": 2 }, { "sku": "SKU-4-B", "qty": 1 }],
       "total": 49.23
     }
-  ], (order) => #t1(order))}
+  ], (order) => #t1(order) key=#f1(order))}
 </View>
 
 root = #t2()

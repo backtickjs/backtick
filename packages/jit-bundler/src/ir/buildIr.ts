@@ -114,15 +114,16 @@ class IrBuilder {
     if (shared) {
       return shared;
     }
+    const content = this.lowerElement(element);
     const tree: IrTreeEntry = {
       kind: "IrTreeEntry",
-      content: this.lowerElement(element),
+      content,
       state: {},
     };
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
       target: this.trees.length,
-      key: { kind: "IrValue", value: null },
+      key: content.key,
     };
     this.trees.push(tree);
     this.refByElement.set(element, ref);

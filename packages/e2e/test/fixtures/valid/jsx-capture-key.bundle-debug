@@ -9,4 +9,4 @@
   key={#f1(slots[0])}
 />
 
-root = #f0((x) => #t0(x))
+root = #f0((x) => #t0(x) key=#f1(x))
