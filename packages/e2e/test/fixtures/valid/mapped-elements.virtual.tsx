@@ -11,8 +11,8 @@ const items = ["alpha", "beta", "gamma"];
 // `View`'s entry, each carrying its own key inside the element node.
 export default (
   <View>
-    {items.map((item, index) => (
-      <Text key={index}>{item}</Text>
+    {items.map((item) => (
+      <Text>{item}</Text>
     ))}
   </View>
 );

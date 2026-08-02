@@ -15,7 +15,7 @@ import type {
   BundleArrowFunctionNode,
   BundleCallExpressionNode,
   BundleElement,
-  BundleGetEntry,
+  BundleGetFunction,
   BundleExpr,
   BundleExpressionNode,
   BundleIdentifierNode,
@@ -176,13 +176,13 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         // An entry supplies the cells it owns, so only its slots thread out.
         // The key belongs to this reference rather than the entry, so it
         // captures here, alongside them.
-        return [...freeCaps(value.key), ...treeSlots(value.target)];
+        return treeSlots(value.target);
       // A cell threads like a capture: the entry reading it takes the handle as
       // a parameter, and its owner supplies it.
       case "IrStateRef":
         return [cellKey(value.target)];
       case "IrElement":
-        return [value.key, ...Object.values(value.props)].flatMap(freeCaps);
+        return Object.values(value.props).flatMap(freeCaps);
       case "IrArray":
         return value.elements.flatMap(freeCaps);
       case "IrObject":
@@ -232,7 +232,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     content === null
       ? [] // renders nothing, so there is no wiring to thread
       : content.kind === "IrElement"
-        ? [content.key, ...Object.values(content.props)]
+        ? Object.values(content.props)
         : [content];
 
   // Whether a cell's storage lives in this entry. A cell sits in the entry that
@@ -313,7 +313,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // collide with an index label.
   const expansionBodies = new Map<FunctionLabel, BundleArrowFunctionNode>();
   const expansionLabels = new Map<IrExpansion, FunctionLabel>();
-  const expansionEntry = (expansion: IrExpansion): BundleGetEntry => {
+  const expansionEntry = (expansion: IrExpansion): BundleGetFunction => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
       label = `${ir.scripts.length + expansionLabels.size}`;
@@ -392,34 +392,17 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     };
   };
 
-  // Whether a reference names which of its siblings it is. Absent is spelled as
-  // a null value rather than as a missing field, which is what the IR carries
-  // for an element nobody keyed.
-  const keyed = (value: IrTreeRef): boolean =>
-    !(value.key.kind === "IrValue" && value.key.value === null);
-
-  // Instantiating a tree in value position: a plain call where there is no key,
-  // and an apply where there is one. Both reach the same entry with the same
-  // slots; the apply also says which of its siblings this instance is, which is
-  // the whole of what a key is for — and is why a row a script builds can now
-  // be named the way one written in tree position can.
+  // Instantiating a tree in value position: which entry, and the slots to hand
+  // it. A tree is applied wherever it is reached — there was once a plain call
+  // for the unkeyed case and an apply for the keyed one, but the two carried
+  // the same label and the same slots and differed only in the node they were
+  // written as.
   const instantiation = (value: IrTreeRef): BundleExpressionNode => {
     materializeTree(value.target);
     const args: BundleExpressionNode[] = treeSlots(value.target).map(readKey);
-    if (keyed(value)) {
-      return {
-        "#": NodeKind.ApplyTree,
-        [NodeField.label]: `${value.target}`,
-        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-        [NodeField.key]: renderValue(value.key),
-      };
-    }
     return {
-      "#": NodeKind.CallExpression,
-      [NodeField.expression]: {
-        "#": NodeKind.GetTree,
-        [NodeField.label]: `${value.target}`,
-      },
+      "#": NodeKind.ApplyTree,
+      [NodeField.label]: `${value.target}`,
       ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
     };
   };
@@ -520,16 +503,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
           };
     }
     if (value.kind === "IrTreeRef") {
-      // An unkeyed entry taking no slots is already the function the hole
-      // wants, so it is passed as it is rather than wrapped in one. Anything
-      // else — slots to thread, or a key to give — is a body to run.
+      // A hole calls what it is handed, so what it is handed is a body to run:
+      // the application, in an arrow. A slotless entry used to be passed as
+      // itself, being already a function of nothing — but that took a node kind
+      // of its own to say, and this says it with the one every other reference
+      // uses.
       materializeTree(value.target);
-      if (!keyed(value) && treeSlots(value.target).length === 0) {
-        return {
-          "#": NodeKind.GetTree,
-          [NodeField.label]: `${value.target}`,
-        } as const satisfies BundleExpressionNode;
-      }
       return {
         "#": NodeKind.ArrowFunction,
         [NodeField.body]: instantiation(value),
@@ -587,14 +566,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     // An instance that renders another instance: applying the inner entry,
     // passing whatever its slots need from this one's.
     materializeTree(content.target);
-    const passedKey = renderExpr(content.key, scope);
     const args = treeSlots(content.target).map((key) => capExpr(key, scope));
     treeJsons.set(target, {
       [NodeField.content]: {
         "#": NodeKind.ApplyTree,
         [NodeField.label]: `${content.target}`,
         ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-        ...(passedKey === null ? {} : { [NodeField.key]: passedKey }),
       },
       ...declared,
     });
@@ -703,7 +680,6 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleElement => {
-    const key = renderExpr(element.key, scope, params);
     const props: { [key: string]: BundleExpr } = {};
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = renderExpr(entry, scope, params);
@@ -711,7 +687,6 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     return {
       "#": NodeKind.Element,
       [NodeField.id]: element.id,
-      ...(key === null ? {} : { [NodeField.key]: key }),
       ...(Object.keys(props).length === 0 ? {} : { [NodeField.props]: props }),
     };
   };
@@ -735,7 +710,6 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
-      const keyed = renderExpr(value.key, scope, params);
       const args = treeSlots(value.target).map((key) =>
         capExpr(key, scope, params),
       );
@@ -743,7 +717,6 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         "#": NodeKind.ApplyTree,
         [NodeField.label]: `${value.target}`,
         ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-        ...(keyed === null ? {} : { [NodeField.key]: keyed }),
       };
     }
     if (value.kind === "IrElement") {

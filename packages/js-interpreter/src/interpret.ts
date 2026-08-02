@@ -9,6 +9,7 @@ import type {
   BundleSpreadElementNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
+  BundleApplyTree,
   BundleExpr,
   BundleStatementNode,
   FunctionLabel,
@@ -16,7 +17,7 @@ import type {
 } from "@backtickjs/core";
 import { compileElement, instanceOf } from "./view.js";
 import type { Instance } from "./view.js";
-import type { AppliedTree, Key, Value } from "./Value.js";
+import type { Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
@@ -122,27 +123,26 @@ function getFunction(
   return fn;
 }
 
-// A `trees` entry as a function: it takes its slot values and applies the
-// entry. Applying, not building — what a hole hands back is the application,
-// and whoever holds it decides whether it is the row they already have.
-function getTree(
-  bundle: Bundle,
-  label: TreeLabel,
-): (...slots: Value[]) => Value {
-  return (...slots: Value[]) => applied(bundle, label, slots, null);
-}
-
+// An entry applied: the same node the bundle writes, with its arguments
+// evaluated. The wire says an application is a label and the arguments to hand
+// over, and that is all one is once the arguments are values — so there is
+// nothing here the format had not already named.
+//
+// The entry is looked up rather than carried, so a malformed label is caught
+// where it is written rather than where it is drawn.
 function applied(
   bundle: Bundle,
   label: TreeLabel,
   slots: Value[],
-  key: Key | null,
-): AppliedTree {
-  const tree = bundle.trees[label];
-  if (tree === undefined) {
+): BundleApplyTree<Value> {
+  if (bundle.trees[label] === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
-  return { "@backtickjs": "AppliedTree", tree, key, slots };
+  return {
+    "#": NodeKind.ApplyTree,
+    [NodeField.label]: label,
+    ...(slots.length === 0 ? {} : { [NodeField.arguments]: slots }),
+  };
 }
 
 // A node is compiled once into the closure that evaluates it, and that closure
@@ -254,10 +254,6 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       const label = node[NodeField.label];
       return () => getFunction(bundle, label);
     }
-    case NodeKind.GetTree: {
-      const label = node[NodeField.label];
-      return () => getTree(bundle, label);
-    }
     case NodeKind.ApplyFunction: {
       const label = node[NodeField.label];
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
@@ -277,14 +273,11 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
         compile(bundle, arg),
       );
-      const named = node[NodeField.key];
-      const key = named === undefined ? null : compile(bundle, named);
       return (scope) =>
         applied(
           bundle,
           label,
           args.map((arg) => arg(scope)),
-          key === null ? null : (key(scope) as Key | null),
         );
     }
     case NodeKind.Thunk: {

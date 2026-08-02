@@ -1,17 +1,11 @@
 #t0 = <View>
-  {<Text
-    key={0}
-  >
+  {<Text>
     {"alpha"}
   </Text>}
-  {<Text
-    key={1}
-  >
+  {<Text>
     {"beta"}
   </Text>}
-  {<Text
-    key={2}
-  >
+  {<Text>
     {"gamma"}
   </Text>}
 </View>

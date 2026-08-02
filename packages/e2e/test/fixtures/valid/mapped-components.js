@@ -9,5 +9,5 @@ async function Row({ label }) {
 // own and the key rides the `#apply` that instantiates it — the contrast with
 // `mapped-elements.tsx`, where the key sits inside an inlined element instead.
 export default _jsx(View, {
-  children: items.map((item, index) => _jsx(Row, { label: item }, index)),
+  children: items.map((item) => _jsx(Row, { label: item })),
 });

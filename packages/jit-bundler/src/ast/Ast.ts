@@ -54,7 +54,6 @@ export interface AstBoolean {
 export interface AstElement {
   readonly kind: "AstElement";
   readonly id: string;
-  readonly key: Ast;
   readonly props: Readonly<Record<string, Ast>>;
 }
 
@@ -63,7 +62,6 @@ export interface AstElement {
 // component declares, so it can't depend on how often the component is named.
 export interface AstInstance {
   readonly kind: "AstInstance";
-  readonly key: Ast;
   child: AstInstance | AstElement | null;
 }
 

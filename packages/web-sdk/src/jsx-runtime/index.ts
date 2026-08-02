@@ -3,7 +3,6 @@ import {
   createJsxElement,
   type ClientElement,
   type JsxElement,
-  type Key,
   type ServerComponent,
 } from "@backtickjs/cs-runtime";
 import type { IntrinsicElements as Html } from "./elements.js";
@@ -38,9 +37,6 @@ export declare namespace JSX {
   export interface ElementChildrenAttribute {
     children: unknown;
   }
-  export interface IntrinsicAttributes {
-    key?: Key;
-  }
 }
 
 // A tag is an element whose id is the tag name — the same shape a component
@@ -62,13 +58,8 @@ function tag(name: string): ClientElement<never> {
 export function jsx(
   type: JSX.ElementType,
   props: { [key: string]: unknown },
-  key?: Key,
 ): JSX.Element {
-  return createJsxElement(
-    typeof type === "string" ? tag(type) : type,
-    props,
-    key,
-  );
+  return createJsxElement(typeof type === "string" ? tag(type) : type, props);
 }
 
 export const jsxs = jsx;

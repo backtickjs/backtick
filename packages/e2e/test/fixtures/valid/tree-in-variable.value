@@ -1,4 +1,5 @@
 <View>
+  <View />
   <Text>
     {"x"}
   </Text>

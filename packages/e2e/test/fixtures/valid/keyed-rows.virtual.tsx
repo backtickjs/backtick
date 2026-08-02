@@ -21,7 +21,7 @@ async function Rows() {
       <Text onPress={swap}>swap</Text>
       <Text onPress={drop}>drop</Text>
       <View>
-        {cs.lift(cs.const(cs.receiver(cs.receiver(cs.splice((ids))).read()).map(__cs_id => cs.splice((<Text key={cs.lift(cs.const(__cs_id))}>{cs.lift(cs.const("row " + __cs_id))}</Text>)))))}
+        {cs.lift(cs.const(cs.receiver(cs.receiver(cs.splice((ids))).read()).map(__cs_id => cs.splice((<Text>{cs.lift(cs.const("row " + __cs_id))}</Text>)))))}
       </View>
     </View>
   );

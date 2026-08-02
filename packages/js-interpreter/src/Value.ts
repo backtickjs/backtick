@@ -1,52 +1,20 @@
-import type { BundleTree } from "@backtickjs/core";
-
-// What a key can be. A tree applied without one is named by its position
-// instead, which is a number too — but a number nobody wrote down.
-export type Key = string | number;
-
-/**
- * A tree entry with the arguments it was applied to, before anything has been
- * built from it.
- *
- * Applying is not instantiating. A script that maps a thousand rows applies a
- * thousand times, and the list it hands back is compared against the last one
- * before any of it is built: a row that was there before keeps the nodes it
- * had and is handed its new slots, and only a row that wasn't is instantiated.
- * Evaluating eagerly would build a thousand subtrees to throw all but a few of
- * them away.
- *
- * Recognized by the marker rather than by `instanceof`, like everything else
- * spliceable: class identity is per-copy of the package, and two copies
- * resolved into one install would make the check fail and the value draw as
- * text.
- */
-export interface AppliedTree {
-  readonly "@backtickjs": "AppliedTree";
-  readonly tree: BundleTree;
-  // Which of its siblings this one is, as the node that applied it said, or
-  // null where it said nothing and position is the only identity it has.
-  readonly key: Key | null;
-  readonly slots: Value[];
-}
-
-export function isAppliedTree(value: unknown): value is AppliedTree {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "@backtickjs" in value &&
-    value["@backtickjs"] === "AppliedTree"
-  );
-}
+import type { BundleApplyTree } from "@backtickjs/core";
 
 /**
  * Everything evaluating a bundle can produce, and nothing else.
  *
  * The counterpart of `ClientValue`, which is the same domain seen from the
- * authoring end: a `JsxElement` there is an `AppliedTree` here, a `State<T>` is
+ * authoring end: a `JsxElement` there is an applied tree here, a `State<T>` is
  * the object of functions `cellHandle` builds, and a spliced class is a plain
  * function. They stay two types because they are two representations —
  * `Spliced<T>` is the mapping between them — and collapsing them would make one
  * side describe values it can't hold.
+ *
+ * An applied tree is the format's own `BundleApplyTree`, with its arguments
+ * evaluated: the node says which entry and what to hand it, and that is exactly
+ * what applying one produces. Written this way rather than as a shape of the
+ * interpreter's own so there is one description of an application, and a client
+ * that hands one back is handing back something the format already names.
  *
  * A host's own nodes are not in here. What a tree builds belongs to the host
  * that built it, and nothing a script can hold is one: a script applies a tree
@@ -63,5 +31,5 @@ export type Value =
   | string
   | readonly Value[]
   | { readonly [key: string]: Value }
-  | AppliedTree
+  | BundleApplyTree<Value>
   | ((...args: Value[]) => Value);

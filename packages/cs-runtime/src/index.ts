@@ -12,7 +12,7 @@ export {
   type Metadata,
 } from "./ClientScript.js";
 export type { ClientString } from "./ClientString.js";
-export { type JsxElement, isJsxElement, type Key } from "./JsxElement.js";
+export { type JsxElement, isJsxElement } from "./JsxElement.js";
 export type { Prop } from "./Prop.js";
 export type { Children } from "./Children.js";
 export type { ClientValue } from "./ClientValue.js";

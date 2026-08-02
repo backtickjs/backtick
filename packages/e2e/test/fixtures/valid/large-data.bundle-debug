@@ -1,42 +1,34 @@
 #f0 = ($0, $1) => $0().map((order) => $1(order))
 
-#f1 = ($0) => $0.id
+#f1 = ($0) => "https://img.example.com/" + $0.id + ".png"
 
-#f2 = ($0) => "https://img.example.com/" + $0.id + ".png"
+#f2 = ($0) => $0.customer.name
 
-#f3 = ($0) => $0.customer.name
+#f3 = ($0) => $0.customer.city
 
-#f4 = ($0) => $0.customer.city
+#f4 = ($0, $1) => $1.items.map((item) => $0(item, $1))
 
-#f5 = ($0, $1) => $1.items.map((item) => $0(item, $1))
+#f5 = ($0) => $0.sku + " x" + $0.qty
 
-#f6 = ($0) => $0.sku
+#f6 = ($0) => "$" + $0.total
 
-#f7 = ($0) => $0.sku + " x" + $0.qty
-
-#f8 = ($0) => "$" + $0.total
-
-#t0 = <Text
-  key={#f6(slots[0])}
->
-  {#f7(slots[0])}
+#t0 = <Text>
+  {#f5(slots[0])}
 </Text>
 
-#t1 = <View
-  key={#f1(slots[0])}
->
+#t1 = <View>
   {<Image
-    source={{ "uri": #f2(slots[0]) }}
+    source={{ "uri": #f1(slots[0]) }}
   />}
+  {<Text>
+    {#f2(slots[0])}
+  </Text>}
   {<Text>
     {#f3(slots[0])}
   </Text>}
+  {#f4((item, order) => #t0(item), slots[0])}
   {<Text>
-    {#f4(slots[0])}
-  </Text>}
-  {#f5((item, order) => #t0(item) key=#f6(item), slots[0])}
-  {<Text>
-    {#f8(slots[0])}
+    {#f6(slots[0])}
   </Text>}
 </View>
 
@@ -72,7 +64,7 @@
       "items": [{ "sku": "SKU-4-A", "qty": 2 }, { "sku": "SKU-4-B", "qty": 1 }],
       "total": 49.23
     }
-  ], (order) => #t1(order) key=#f1(order))}
+  ], (order) => #t1(order))}
 </View>
 
 root = #t2()

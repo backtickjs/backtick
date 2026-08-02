@@ -1,8 +1,0 @@
-cs.lift(cs.const(  → cs`
-cs.splice(         →  [-semantic]
-(n)                → $n
-)                  →  [-semantic]
-))                 → `
-cs.lift(cs.const(  → cs`
-1                  → 1
-))                 → `

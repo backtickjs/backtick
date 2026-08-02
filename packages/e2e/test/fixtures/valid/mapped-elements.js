@@ -9,5 +9,5 @@ const items = ["alpha", "beta", "gamma"];
 // Each element is referenced once, so none hoists: they inline into the
 // `View`'s entry, each carrying its own key inside the element node.
 export default _jsx(View, {
-  children: items.map((item, index) => _jsx(Text, { children: item }, index)),
+  children: items.map((item) => _jsx(Text, { children: item })),
 });

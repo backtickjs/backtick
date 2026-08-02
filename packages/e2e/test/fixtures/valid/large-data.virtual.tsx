@@ -20,7 +20,7 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 export default (
   <View>
     {cs.lift(cs.const(cs.receiver(cs.splice((orders))).map(__cs_order => cs.splice((
-          <View key={cs.lift(cs.const(cs.receiver(__cs_order).id))}>
+          <View>
             <Image
               source={{
                 uri: cs.lift(cs.const("https://img.example.com/" + cs.receiver(__cs_order).id + ".png")),
@@ -29,7 +29,7 @@ export default (
             <Text>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).name))}</Text>
             <Text>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).city))}</Text>
             {cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).items).map(__cs_item => cs.splice((
-                  <Text key={cs.lift(cs.const(cs.receiver(__cs_item).sku))}>
+                  <Text>
                     {cs.lift(cs.const(cs.receiver(__cs_item).sku + " x" + cs.receiver(__cs_item).qty))}
                   </Text>
                 )))))}

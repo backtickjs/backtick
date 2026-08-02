@@ -1,7 +1,5 @@
 #t0 = <View>
-  {<Text
-    key={"a"}
-  >
+  {<Text>
     {"hi"}
   </Text>}
 </View>

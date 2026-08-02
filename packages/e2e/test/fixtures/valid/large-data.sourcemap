@@ -10,15 +10,7 @@ map                                       → map
 __cs_order                                → order
  =>                                       → ) =>\n        
 cs.splice(                                → ${ [-semantic]
-(\n          <View key={                  → (\n          <View key={
-cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-__cs_order                                → order
-)                                         → 
-.                                         → .
-id                                        → id
-))                                        → `
-}>\n            <Image\n              source={{\n                uri: → }>\n            <Image\n              source={{\n                uri: 
+(\n          <View>\n            <Image\n              source={{\n                uri: → (\n          <View>\n            <Image\n              source={{\n                uri: 
 cs.lift(cs.const(                         → cs`
 "https://img.example.com/"                → "https://img.example.com/"
  +                                        →  + 
@@ -69,15 +61,7 @@ map                                       → map
 __cs_item                                 → item
  =>                                       → ) =>\n                
 cs.splice(                                → ${ [-semantic]
-(\n                  <Text key={          → (\n                  <Text key={
-cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-__cs_item                                 → item
-)                                         → 
-.                                         → .
-sku                                       → sku
-))                                        → `
-}>\n                    {                 → }>\n                    {
+(\n                  <Text>\n                    {→ (\n                  <Text>\n                    {
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 __cs_item                                 → item

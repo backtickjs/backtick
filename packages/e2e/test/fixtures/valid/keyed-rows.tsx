@@ -23,7 +23,7 @@ async function Rows() {
       <View>
         {cs`$ids
           .read()
-          .map((id) => ${(<Text key={cs`id`}>{cs`"row " + id`}</Text>)})`}
+          .map((id) => ${(<Text>{cs`"row " + id`}</Text>)})`}
       </View>
     </View>
   );

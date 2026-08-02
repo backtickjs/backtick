@@ -34,10 +34,6 @@ async function buildElement(
 ): Promise<AstInstance | AstElement> {
   const type = jsx.type;
 
-  // The key lowers like a prop: a static key to its literal node, a client
-  // key to its script (evaluated per instance). A missing key lowers null.
-  const key = await lowerSpliceable(jsx.key, "ClientValue");
-
   if (isClientElement(type)) {
     // A client component names the element the interpreter renders, and the props
     // it hands back are the ones the element carries.
@@ -60,7 +56,6 @@ async function buildElement(
     return {
       kind: "AstElement",
       id: type.id,
-      key,
       props,
     };
   } else {
@@ -68,7 +63,7 @@ async function buildElement(
     // happens: it is what the component's `state()` calls record as their
     // owner, and only its child waits on what the component returned. Nothing
     // reads the child in between — the run produces it.
-    const instance: AstInstance = { kind: "AstInstance", key, child: null };
+    const instance: AstInstance = { kind: "AstInstance", child: null };
 
     // A server component resolves to another element asynchronously: awaited
     // here, on the host, and the element it built is what the bundle carries.

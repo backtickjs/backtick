@@ -1,6 +1,0 @@
-cs.lift(cs.const(  → cs`
-() =>              → () => 
-cs.splice(         →  [-semantic]
-(row)              → $row
-)                  →  [-semantic]
-))                 → `

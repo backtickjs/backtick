@@ -73,7 +73,6 @@ export interface IrScriptRef {
 export interface IrTreeRef {
   readonly kind: "IrTreeRef";
   readonly target: number;
-  readonly key: IrArgument;
 }
 
 // A JSX element lowered into a tree entry: static structure carried as data,
@@ -83,7 +82,6 @@ export interface IrTreeRef {
 export interface IrElement {
   readonly kind: "IrElement";
   readonly id: string;
-  readonly key: IrArgument;
   readonly props: Readonly<Record<string, IrArgument>>;
 }
 

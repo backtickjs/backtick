@@ -82,8 +82,6 @@ function renderNode(
       return node[NodeField.text];
     case NodeKind.GetFunction:
       return fnLabel(node[NodeField.label]);
-    case NodeKind.GetTree:
-      return treeLabel(node[NodeField.label]);
     // A global the format names and the host answers.
     case NodeKind.Builtin:
       return node[NodeField.name];
@@ -93,10 +91,7 @@ function renderNode(
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
         renderNode(arg, indent),
       );
-      const applied = node[NodeField.key];
-      const key =
-        applied === undefined ? "" : ` key=${renderNode(applied, indent)}`;
-      return `${treeLabel(node[NodeField.label])}(${args.join(", ")})${key}`;
+      return `${treeLabel(node[NodeField.label])}(${args.join(", ")})`;
     }
     case NodeKind.CallExpression: {
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
@@ -243,12 +238,7 @@ function renderExpr(expr: BundleExpr, indent: string): string {
       const args = (expr[NodeField.arguments] ?? []).map((arg) =>
         renderExpr(arg, indent),
       );
-      // A keyed instantiation reads as a suffix, since the key identifies the
-      // instance rather than being one of the entry's arguments.
-      const applyKey = expr[NodeField.key];
-      const key =
-        applyKey === undefined ? "" : ` key=${renderExpr(applyKey, indent)}`;
-      return `${treeLabel(expr[NodeField.label])}(${args.join(", ")})${key}`;
+      return `${treeLabel(expr[NodeField.label])}(${args.join(", ")})`;
     }
     case NodeKind.Thunk: {
       const params = (expr[NodeField.parameters] ?? []).map(
@@ -268,10 +258,6 @@ function renderExpr(expr: BundleExpr, indent: string): string {
 function renderJsx(element: BundleElement, indent: string): string {
   const inner = `${indent}  `;
   const attributes: string[] = [];
-  const elementKey = element[NodeField.key];
-  if (elementKey !== undefined) {
-    attributes.push(`${inner}key={${renderExpr(elementKey, inner)}}`);
-  }
   let children: BundleExpr[] = [];
   for (const [prop, value] of Object.entries(element[NodeField.props] ?? {})) {
     if (prop === "children") {

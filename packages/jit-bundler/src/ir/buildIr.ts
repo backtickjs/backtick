@@ -123,7 +123,6 @@ class IrBuilder {
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
       target: this.trees.length,
-      key: content.key,
     };
     this.trees.push(tree);
     this.refByElement.set(element, ref);
@@ -158,7 +157,6 @@ class IrBuilder {
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
       target: this.trees.length,
-      key: this.lower(instance.key),
     };
     this.trees.push(tree);
     this.refByInstance.set(instance, ref);
@@ -195,7 +193,6 @@ class IrBuilder {
   // Lowers an element's props into an IR element, keeping structure as
   // data: only a script or a shared subtree interrupts it.
   private lowerElement(element: AstElement): IrElement {
-    const key = this.lowerInTree(element.key);
     const props: Record<string, IrArgument> = {};
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = this.lowerInTree(entry);
@@ -203,7 +200,6 @@ class IrBuilder {
     return {
       kind: "IrElement",
       id: element.id,
-      key,
       props,
     };
   }

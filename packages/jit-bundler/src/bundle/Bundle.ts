@@ -190,7 +190,10 @@ export const NodeKind = {
   Element: 0,
   GetSlot: 1,
   GetState: 2,
-  GetTree: 3,
+  // 3 is retired. It named a `trees` entry as a value — a function taking the
+  // entry's slots and yielding the instance. A tree is applied, never called,
+  // so an `ApplyTree` says the same thing in one node where this needed two.
+  // A number is never reused.
   GetFunction: 4,
   ApplyTree: 5,
   ApplyFunction: 6,
@@ -241,7 +244,6 @@ export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
 export interface BundleElement {
   "#": typeof NodeKind.Element;
   [NodeField.id]: string;
-  [NodeField.key]?: BundleExpr;
   [NodeField.props]?: { [prop: string]: BundleExpr };
 }
 
@@ -283,7 +285,6 @@ export interface BundleApplyTree<Expr = BundleExpr> {
   "#": typeof NodeKind.ApplyTree;
   [NodeField.label]: TreeLabel;
   [NodeField.arguments]?: Expr[];
-  [NodeField.key]?: Expr;
 }
 
 // Applies a `functions` entry: `args` mirrors the entry's parameters — thunks
@@ -379,7 +380,7 @@ export type BundleExpressionNode =
   | BundleArrayElement[]
   | BundleData<BundleExpressionNode>
   | BundleIdentifierNode
-  | BundleGetEntry
+  | BundleGetFunction
   // A body instantiates a tree by calling a `getTree`, which says nothing about
   // identity. Applying says both: which entry, and which of its siblings this
   // one is — so a row a script builds can be named the way a row written in
@@ -421,19 +422,14 @@ export interface BundleIdentifierNode {
 }
 
 // An entry as a value, not applied: the function it evaluates to. Calling that
-// applies the entry; passed bare it is already a nullary thunk. A tree entry's
-// function takes its slots and yields the instantiated element.
+// applies the entry; passed bare it is already a nullary thunk.
+//
+// Only a `functions` entry can be named this way. A tree is applied, which an
+// `ApplyTree` says on its own, so there is nothing for a tree to be named as.
 export interface BundleGetFunction {
   "#": typeof NodeKind.GetFunction;
   [NodeField.label]: FunctionLabel;
 }
-
-export interface BundleGetTree {
-  "#": typeof NodeKind.GetTree;
-  [NodeField.label]: TreeLabel;
-}
-
-export type BundleGetEntry = BundleGetFunction | BundleGetTree;
 
 // A call: evaluates the callee to a function and applies it. When the callee
 // is an `entry` node targeting a function, `args` mirrors that entry's

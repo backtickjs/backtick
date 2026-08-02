@@ -88,11 +88,7 @@ map                → map
 __cs_id            → id
  =>                → ) => 
 cs.splice(         → ${ [-semantic]
-(<Text key={       → (<Text key={
-cs.lift(cs.const(  → cs`
-__cs_id            → id
-))                 → `
-}>{                → }>{
+(<Text>{           → (<Text>{
 cs.lift(cs.const(  → cs`
 "row "             → "row "
  +                 →  + 

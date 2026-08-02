@@ -12,8 +12,8 @@ async function Row({ label }: { label: string }) {
 // `mapped-elements.tsx`, where the key sits inside an inlined element instead.
 export default (
   <View>
-    {items.map((item, index) => (
-      <Row key={index} label={item} />
+    {items.map((item) => (
+      <Row label={item} />
     ))}
   </View>
 );

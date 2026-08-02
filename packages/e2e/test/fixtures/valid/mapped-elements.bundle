@@ -10,7 +10,6 @@
             {
               "#": 0,
               "a": "Text",
-              "b": 0,
               "c": {
                 "children": "alpha"
               }
@@ -18,7 +17,6 @@
             {
               "#": 0,
               "a": "Text",
-              "b": 1,
               "c": {
                 "children": "beta"
               }
@@ -26,7 +24,6 @@
             {
               "#": 0,
               "a": "Text",
-              "b": 2,
               "c": {
                 "children": "gamma"
               }

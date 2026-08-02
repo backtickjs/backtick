@@ -204,10 +204,7 @@ export async function Main() {
           {cs`$data.read().map(
             (row) =>
               ${(
-                <tr
-                  key={cs`row.id`}
-                  class={cs`$selected.read() === row.id ? "danger" : ""`}
-                >
+                <tr class={cs`$selected.read() === row.id ? "danger" : ""`}>
                   <td class="col-md-1">{cs`row.id`}</td>
                   <td class="col-md-4">
                     <a onclick={cs`() => $select(row.id)`}>{cs`row.label`}</a>

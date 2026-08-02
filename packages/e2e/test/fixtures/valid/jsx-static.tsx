@@ -4,6 +4,6 @@ import { Text, View } from "@backtickjs/core";
 // entry, an empty function table, and a nested element inlined in place.
 export default (
   <View>
-    <Text key="a">hi</Text>
+    <Text>hi</Text>
   </View>
 );

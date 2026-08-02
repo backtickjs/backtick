@@ -22,331 +22,277 @@ export default _jsx(View, {
     {
       version: "0.0.0",
       filePath: "large-data.tsx",
-      fileHash: "kpf5b5091dr1",
+      fileHash: "dcgnq1fpiqca",
       kind: "value",
       splices: {
         $orders: orders,
-        $0splice0: _jsxs(
-          View,
-          {
-            children: [
-              _jsx(Image, {
-                source: {
-                  uri: cs.create(
-                    [28, 22, 28, 72],
-                    {
-                      version: "0.0.0",
-                      filePath: "large-data.tsx",
-                      fileHash: "kpf5b5091dr1",
-                      kind: "value",
-                      splices: {},
-                      captures: ["order$kpf5b5091dr1$0"],
-                      spliceParams: {},
-                    },
-                    () => ({
-                      kind: 227,
-                      loc: [28, 25, 28, 71],
-                      left: {
-                        kind: 227,
-                        loc: [28, 25, 28, 62],
-                        left: {
-                          kind: 11,
-                          loc: [28, 25, 28, 51],
-                          text: "https://img.example.com/",
-                        },
-                        operatorToken: "+",
-                        right: {
-                          kind: 212,
-                          loc: [28, 54, 28, 62],
-                          expression: {
-                            kind: 80,
-                            loc: [28, 54, 28, 59],
-                            text: "order",
-                            bindingKey: "order$kpf5b5091dr1$0",
-                          },
-                          questionDotToken: false,
-                          name: "id",
-                        },
-                      },
-                      operatorToken: "+",
-                      right: {
-                        kind: 11,
-                        loc: [28, 65, 28, 71],
-                        text: ".png",
-                      },
-                    }),
-                  ),
-                },
-              }),
-              _jsx(Text, {
-                children: cs.create(
-                  [31, 20, 31, 43],
+        $0splice0: _jsxs(View, {
+          children: [
+            _jsx(Image, {
+              source: {
+                uri: cs.create(
+                  [28, 22, 28, 72],
                   {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
-                    fileHash: "kpf5b5091dr1",
+                    fileHash: "dcgnq1fpiqca",
                     kind: "value",
                     splices: {},
-                    captures: ["order$kpf5b5091dr1$0"],
-                    spliceParams: {},
-                  },
-                  () => ({
-                    kind: 212,
-                    loc: [31, 23, 31, 42],
-                    expression: {
-                      kind: 212,
-                      loc: [31, 23, 31, 37],
-                      expression: {
-                        kind: 80,
-                        loc: [31, 23, 31, 28],
-                        text: "order",
-                        bindingKey: "order$kpf5b5091dr1$0",
-                      },
-                      questionDotToken: false,
-                      name: "customer",
-                    },
-                    questionDotToken: false,
-                    name: "name",
-                  }),
-                ),
-              }),
-              _jsx(Text, {
-                children: cs.create(
-                  [32, 20, 32, 43],
-                  {
-                    version: "0.0.0",
-                    filePath: "large-data.tsx",
-                    fileHash: "kpf5b5091dr1",
-                    kind: "value",
-                    splices: {},
-                    captures: ["order$kpf5b5091dr1$0"],
-                    spliceParams: {},
-                  },
-                  () => ({
-                    kind: 212,
-                    loc: [32, 23, 32, 42],
-                    expression: {
-                      kind: 212,
-                      loc: [32, 23, 32, 37],
-                      expression: {
-                        kind: 80,
-                        loc: [32, 23, 32, 28],
-                        text: "order",
-                        bindingKey: "order$kpf5b5091dr1$0",
-                      },
-                      questionDotToken: false,
-                      name: "customer",
-                    },
-                    questionDotToken: false,
-                    name: "city",
-                  }),
-                ),
-              }),
-              cs.create(
-                [33, 14, 40, 15],
-                {
-                  version: "0.0.0",
-                  filePath: "large-data.tsx",
-                  fileHash: "kpf5b5091dr1",
-                  kind: "value",
-                  splices: {
-                    $0splice0: _jsx(
-                      Text,
-                      {
-                        children: cs.create(
-                          [37, 22, 37, 52],
-                          {
-                            version: "0.0.0",
-                            filePath: "large-data.tsx",
-                            fileHash: "kpf5b5091dr1",
-                            kind: "value",
-                            splices: {},
-                            captures: ["item$kpf5b5091dr1$1"],
-                            spliceParams: {},
-                          },
-                          () => ({
-                            kind: 227,
-                            loc: [37, 25, 37, 51],
-                            left: {
-                              kind: 227,
-                              loc: [37, 25, 37, 40],
-                              left: {
-                                kind: 212,
-                                loc: [37, 25, 37, 33],
-                                expression: {
-                                  kind: 80,
-                                  loc: [37, 25, 37, 29],
-                                  text: "item",
-                                  bindingKey: "item$kpf5b5091dr1$1",
-                                },
-                                questionDotToken: false,
-                                name: "sku",
-                              },
-                              operatorToken: "+",
-                              right: {
-                                kind: 11,
-                                loc: [37, 36, 37, 40],
-                                text: " x",
-                              },
-                            },
-                            operatorToken: "+",
-                            right: {
-                              kind: 212,
-                              loc: [37, 43, 37, 51],
-                              expression: {
-                                kind: 80,
-                                loc: [37, 43, 37, 47],
-                                text: "item",
-                                bindingKey: "item$kpf5b5091dr1$1",
-                              },
-                              questionDotToken: false,
-                              name: "qty",
-                            },
-                          }),
-                        ),
-                      },
-                      cs.create(
-                        [36, 30, 36, 42],
-                        {
-                          version: "0.0.0",
-                          filePath: "large-data.tsx",
-                          fileHash: "kpf5b5091dr1",
-                          kind: "value",
-                          splices: {},
-                          captures: ["item$kpf5b5091dr1$1"],
-                          spliceParams: {},
-                        },
-                        () => ({
-                          kind: 212,
-                          loc: [36, 33, 36, 41],
-                          expression: {
-                            kind: 80,
-                            loc: [36, 33, 36, 37],
-                            text: "item",
-                            bindingKey: "item$kpf5b5091dr1$1",
-                          },
-                          questionDotToken: false,
-                          name: "sku",
-                        }),
-                      ),
-                    ),
-                  },
-                  captures: ["order$kpf5b5091dr1$0"],
-                  spliceParams: { $0splice0: ["item$kpf5b5091dr1$1"] },
-                },
-                () => ({
-                  kind: 214,
-                  loc: [33, 17, 40, 14],
-                  expression: {
-                    kind: 212,
-                    loc: [33, 17, 33, 32],
-                    expression: {
-                      kind: 212,
-                      loc: [33, 17, 33, 28],
-                      expression: {
-                        kind: 80,
-                        loc: [33, 17, 33, 22],
-                        text: "order",
-                        bindingKey: "order$kpf5b5091dr1$0",
-                      },
-                      questionDotToken: false,
-                      name: "items",
-                    },
-                    questionDotToken: false,
-                    name: "map",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 220,
-                      loc: [34, 15, 39, 19],
-                      parameters: [
-                        {
-                          kind: 170,
-                          loc: [34, 16, 34, 20],
-                          name: {
-                            kind: 80,
-                            loc: [34, 16, 34, 20],
-                            text: "item",
-                            bindingKey: "item$kpf5b5091dr1$1",
-                          },
-                        },
-                      ],
-                      body: {
-                        kind: 1000,
-                        loc: [35, 17, 39, 19],
-                        key: "$0splice0",
-                      },
-                    },
-                  ],
-                }),
-              ),
-              _jsx(Text, {
-                children: cs.create(
-                  [41, 20, 41, 41],
-                  {
-                    version: "0.0.0",
-                    filePath: "large-data.tsx",
-                    fileHash: "kpf5b5091dr1",
-                    kind: "value",
-                    splices: {},
-                    captures: ["order$kpf5b5091dr1$0"],
+                    captures: ["order$dcgnq1fpiqca$0"],
                     spliceParams: {},
                   },
                   () => ({
                     kind: 227,
-                    loc: [41, 23, 41, 40],
+                    loc: [28, 25, 28, 71],
                     left: {
-                      kind: 11,
-                      loc: [41, 23, 41, 26],
-                      text: "$",
+                      kind: 227,
+                      loc: [28, 25, 28, 62],
+                      left: {
+                        kind: 11,
+                        loc: [28, 25, 28, 51],
+                        text: "https://img.example.com/",
+                      },
+                      operatorToken: "+",
+                      right: {
+                        kind: 212,
+                        loc: [28, 54, 28, 62],
+                        expression: {
+                          kind: 80,
+                          loc: [28, 54, 28, 59],
+                          text: "order",
+                          bindingKey: "order$dcgnq1fpiqca$0",
+                        },
+                        questionDotToken: false,
+                        name: "id",
+                      },
                     },
                     operatorToken: "+",
                     right: {
-                      kind: 212,
-                      loc: [41, 29, 41, 40],
-                      expression: {
-                        kind: 80,
-                        loc: [41, 29, 41, 34],
-                        text: "order",
-                        bindingKey: "order$kpf5b5091dr1$0",
-                      },
-                      questionDotToken: false,
-                      name: "total",
+                      kind: 11,
+                      loc: [28, 65, 28, 71],
+                      text: ".png",
                     },
                   }),
                 ),
-              }),
-            ],
-          },
-          cs.create(
-            [25, 22, 25, 34],
-            {
-              version: "0.0.0",
-              filePath: "large-data.tsx",
-              fileHash: "kpf5b5091dr1",
-              kind: "value",
-              splices: {},
-              captures: ["order$kpf5b5091dr1$0"],
-              spliceParams: {},
-            },
-            () => ({
-              kind: 212,
-              loc: [25, 25, 25, 33],
-              expression: {
-                kind: 80,
-                loc: [25, 25, 25, 30],
-                text: "order",
-                bindingKey: "order$kpf5b5091dr1$0",
               },
-              questionDotToken: false,
-              name: "id",
             }),
-          ),
-        ),
+            _jsx(Text, {
+              children: cs.create(
+                [31, 20, 31, 43],
+                {
+                  version: "0.0.0",
+                  filePath: "large-data.tsx",
+                  fileHash: "dcgnq1fpiqca",
+                  kind: "value",
+                  splices: {},
+                  captures: ["order$dcgnq1fpiqca$0"],
+                  spliceParams: {},
+                },
+                () => ({
+                  kind: 212,
+                  loc: [31, 23, 31, 42],
+                  expression: {
+                    kind: 212,
+                    loc: [31, 23, 31, 37],
+                    expression: {
+                      kind: 80,
+                      loc: [31, 23, 31, 28],
+                      text: "order",
+                      bindingKey: "order$dcgnq1fpiqca$0",
+                    },
+                    questionDotToken: false,
+                    name: "customer",
+                  },
+                  questionDotToken: false,
+                  name: "name",
+                }),
+              ),
+            }),
+            _jsx(Text, {
+              children: cs.create(
+                [32, 20, 32, 43],
+                {
+                  version: "0.0.0",
+                  filePath: "large-data.tsx",
+                  fileHash: "dcgnq1fpiqca",
+                  kind: "value",
+                  splices: {},
+                  captures: ["order$dcgnq1fpiqca$0"],
+                  spliceParams: {},
+                },
+                () => ({
+                  kind: 212,
+                  loc: [32, 23, 32, 42],
+                  expression: {
+                    kind: 212,
+                    loc: [32, 23, 32, 37],
+                    expression: {
+                      kind: 80,
+                      loc: [32, 23, 32, 28],
+                      text: "order",
+                      bindingKey: "order$dcgnq1fpiqca$0",
+                    },
+                    questionDotToken: false,
+                    name: "customer",
+                  },
+                  questionDotToken: false,
+                  name: "city",
+                }),
+              ),
+            }),
+            cs.create(
+              [33, 14, 40, 15],
+              {
+                version: "0.0.0",
+                filePath: "large-data.tsx",
+                fileHash: "dcgnq1fpiqca",
+                kind: "value",
+                splices: {
+                  $0splice0: _jsx(Text, {
+                    children: cs.create(
+                      [37, 22, 37, 52],
+                      {
+                        version: "0.0.0",
+                        filePath: "large-data.tsx",
+                        fileHash: "dcgnq1fpiqca",
+                        kind: "value",
+                        splices: {},
+                        captures: ["item$dcgnq1fpiqca$1"],
+                        spliceParams: {},
+                      },
+                      () => ({
+                        kind: 227,
+                        loc: [37, 25, 37, 51],
+                        left: {
+                          kind: 227,
+                          loc: [37, 25, 37, 40],
+                          left: {
+                            kind: 212,
+                            loc: [37, 25, 37, 33],
+                            expression: {
+                              kind: 80,
+                              loc: [37, 25, 37, 29],
+                              text: "item",
+                              bindingKey: "item$dcgnq1fpiqca$1",
+                            },
+                            questionDotToken: false,
+                            name: "sku",
+                          },
+                          operatorToken: "+",
+                          right: {
+                            kind: 11,
+                            loc: [37, 36, 37, 40],
+                            text: " x",
+                          },
+                        },
+                        operatorToken: "+",
+                        right: {
+                          kind: 212,
+                          loc: [37, 43, 37, 51],
+                          expression: {
+                            kind: 80,
+                            loc: [37, 43, 37, 47],
+                            text: "item",
+                            bindingKey: "item$dcgnq1fpiqca$1",
+                          },
+                          questionDotToken: false,
+                          name: "qty",
+                        },
+                      }),
+                    ),
+                  }),
+                },
+                captures: ["order$dcgnq1fpiqca$0"],
+                spliceParams: { $0splice0: ["item$dcgnq1fpiqca$1"] },
+              },
+              () => ({
+                kind: 214,
+                loc: [33, 17, 40, 14],
+                expression: {
+                  kind: 212,
+                  loc: [33, 17, 33, 32],
+                  expression: {
+                    kind: 212,
+                    loc: [33, 17, 33, 28],
+                    expression: {
+                      kind: 80,
+                      loc: [33, 17, 33, 22],
+                      text: "order",
+                      bindingKey: "order$dcgnq1fpiqca$0",
+                    },
+                    questionDotToken: false,
+                    name: "items",
+                  },
+                  questionDotToken: false,
+                  name: "map",
+                },
+                questionDotToken: false,
+                arguments: [
+                  {
+                    kind: 220,
+                    loc: [34, 15, 39, 19],
+                    parameters: [
+                      {
+                        kind: 170,
+                        loc: [34, 16, 34, 20],
+                        name: {
+                          kind: 80,
+                          loc: [34, 16, 34, 20],
+                          text: "item",
+                          bindingKey: "item$dcgnq1fpiqca$1",
+                        },
+                      },
+                    ],
+                    body: {
+                      kind: 1000,
+                      loc: [35, 17, 39, 19],
+                      key: "$0splice0",
+                    },
+                  },
+                ],
+              }),
+            ),
+            _jsx(Text, {
+              children: cs.create(
+                [41, 20, 41, 41],
+                {
+                  version: "0.0.0",
+                  filePath: "large-data.tsx",
+                  fileHash: "dcgnq1fpiqca",
+                  kind: "value",
+                  splices: {},
+                  captures: ["order$dcgnq1fpiqca$0"],
+                  spliceParams: {},
+                },
+                () => ({
+                  kind: 227,
+                  loc: [41, 23, 41, 40],
+                  left: {
+                    kind: 11,
+                    loc: [41, 23, 41, 26],
+                    text: "$",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: 212,
+                    loc: [41, 29, 41, 40],
+                    expression: {
+                      kind: 80,
+                      loc: [41, 29, 41, 34],
+                      text: "order",
+                      bindingKey: "order$dcgnq1fpiqca$0",
+                    },
+                    questionDotToken: false,
+                    name: "total",
+                  },
+                }),
+              ),
+            }),
+          ],
+        }),
       },
       captures: [],
-      spliceParams: { $orders: [], $0splice0: ["order$kpf5b5091dr1$0"] },
+      spliceParams: { $orders: [], $0splice0: ["order$dcgnq1fpiqca$0"] },
     },
     () => ({
       kind: 214,
@@ -375,7 +321,7 @@ export default _jsx(View, {
                 kind: 80,
                 loc: [23, 8, 23, 13],
                 text: "order",
-                bindingKey: "order$kpf5b5091dr1$0",
+                bindingKey: "order$dcgnq1fpiqca$0",
               },
             },
           ],

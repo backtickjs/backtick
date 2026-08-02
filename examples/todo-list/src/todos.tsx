@@ -50,7 +50,6 @@ export async function TodoList() {
       <div style="display: flex; gap: 16px">
         {["all", "todo", "done"].map((value) => (
           <button
-            key={value}
             id={`filter-${value}`}
             onclick={cs`() => $filter.write($value)`}
             // The style is a string here, so what changes with the filter is

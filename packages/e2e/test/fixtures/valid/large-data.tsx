@@ -22,7 +22,7 @@ export default (
     {cs`$orders.map(
       (order) =>
         ${(
-          <View key={cs`order.id`}>
+          <View>
             <Image
               source={{
                 uri: cs`"https://img.example.com/" + order.id + ".png"`,
@@ -33,7 +33,7 @@ export default (
             {cs`order.items.map(
               (item) =>
                 ${(
-                  <Text key={cs`item.sku`}>
+                  <Text>
                     {cs`item.sku + " x" + item.qty`}
                   </Text>
                 )},
