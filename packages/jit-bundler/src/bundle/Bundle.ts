@@ -40,22 +40,9 @@ export interface Bundle {
   // a function of its script's source: the same script compiles to the same
   // entry in every bundle it appears in.
   //
-  // Whatever an entry captures arrives after those, in a single object
-  // parameter named `$env`, omitted when it captures nothing. The body reads
-  // a capture as a property of it — `$env.count` — so a read says where the
-  // value came from, and adding a capture shifts no position. A cell sits
-  // under its own `#s<n>` key, which can't collide with a variable because
-  // `#` is not an identifier character.
-  //
-  // The keys are source names, which is sound because an entry's captures are
-  // its free variables: within one script a name resolves outward to exactly
-  // one binding, so two captures can never want the same key. What makes the
-  // two sides line up is the emitter building the object — not, as when
-  // captures were positional parameters, the fact that binding keys are
-  // globally unique.
-  //
-  // A `BundleApplyFunction` targeting the entry passes arguments in that same
-  // order: thunks first, then the environment.
+  // Whatever an entry captures arrives after those, one parameter per capture,
+  // in the same numbering: a thunk per hole, then a value per capture. A
+  // `BundleApplyFunction` targeting the entry supplies them in that order.
   // A construction's expansion is also an entry — one per class, labeled
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.

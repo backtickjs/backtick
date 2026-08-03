@@ -218,8 +218,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   //
   // It is a superset — the bindings a fragment written there *could* name, not
   // the ones it does — because which fragment reaches a hole is a host
-  // decision. A carried fragment brings its own captures through `$env`, so the
-  // extra parameters are unused rather than wrong.
+  // decision. A carried fragment arrives with its own captures already bound,
+  // so the extra parameters are unused rather than wrong.
   const passKeys = (target: IrScriptEntry, hole: number): readonly string[] => {
     const splice = target.splices[hole];
     return splice === undefined ? [] : (target.spliceParams[splice] ?? []);

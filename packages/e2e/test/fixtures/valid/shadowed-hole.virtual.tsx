@@ -5,9 +5,9 @@ import { cs, type Client } from "@backtickjs/core";
 //
 // Both `total` bindings are the entry's own, and both render under their source
 // name — the inner one shadows the outer exactly as it does in the source, and a
-// block frames its declarations, so nothing has to tell them apart. Only a
-// binding an entry *captures* ever needed a distinct name, and those now live in
-// `$env` where they cannot collide with a local at all.
+// block frames its declarations, so nothing has to tell them apart. What an
+// entry captures cannot collide with either: a capture is a parameter, numbered
+// `$0` upward, and `$` starts no name a script can write.
 function wrap(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_total = cs.const(1);
