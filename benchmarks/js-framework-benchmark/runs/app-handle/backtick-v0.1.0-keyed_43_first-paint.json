@@ -1,0 +1,16 @@
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "43_first-paint",
+  "type": "size",
+  "values": {
+    "DEFAULT": {
+      "min": 112.2,
+      "max": 112.2,
+      "median": 112.2,
+      "mean": 112.2,
+      "stddev": null,
+      "values": [112.2]
+    }
+  }
+}

@@ -307,6 +307,15 @@
       "keyed": true,
       "dir": "app-index",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "adbc64c",
+      "label": "handle",
+      "note": "a cell handle closes over its signal, so a read is no longer a lookup, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-handle",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

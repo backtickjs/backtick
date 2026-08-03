@@ -70,7 +70,6 @@ function materialize(bundle: Bundle, host: Host): unknown {
     bundle,
     host,
     slots: noSlots,
-    cells: null,
     handles: null,
   };
   // The root is built once and never again — there is nothing above it to hand
@@ -121,8 +120,8 @@ function requireReactivity(): void {
   }
 }
 
-// A tree instance: what persists on the client. `cells` is the storage the
-// entry's `state` declares, allocated fresh per instance.
+// A tree instance: what persists on the client — the storage the entry's
+// `state` declares, allocated fresh per instance.
 //
 // There is no list of children here, and nothing recording what was drawn. An
 // instance is built once and never again, so there is nothing to match a second
@@ -136,16 +135,20 @@ export interface Instance {
   // arguments are no write at all, which is the skip a row gets for being
   // handed nothing new.
   readonly slots: () => Value[];
-  // A cell is a signal, so its storage and who hears about a write are the
-  // graph's business rather than ours.
-  cells: Map<string, [() => Value, (value: Value) => void]> | null;
-  // The handle each cell is read through, made with the instance because the
-  // cells a tree declares are known before it runs. One per cell for its life:
-  // a handle is a view onto storage and holds nothing of its own, so a second
-  // view of the same cell would only look like a different value to anything
-  // comparing them.
+  // A cell, as the only thing that ever reaches it: its handle. One per cell
+  // for its life — a handle is a view onto storage and holds nothing of its
+  // own, so a second view of the same cell would only look like a different
+  // value to anything comparing them.
   handles: Map<string, Value> | null;
 }
+
+// A cell's storage: a signal, so who hears about a write is the graph's
+// business rather than ours. Both writers go through the setter's updater
+// form, which is what it is typed as taking.
+type Cell = [
+  read: () => Value,
+  store: (next: (previous: Value) => Value) => void,
+];
 
 const noSlots = (): Value[] => [];
 
@@ -168,17 +171,13 @@ export function instantiate(
     bundle,
     host,
     slots,
-    cells: null,
     handles: null,
   };
   for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
     // A cell's initial is evaluated in no instance: it can't read a slot or
     // another cell, so nothing is in scope for it.
-    (instance.cells ??= new Map()).set(
-      name,
-      createSignal<Value>(evaluateNode(bundle, initial, null)),
-    );
-    (instance.handles ??= new Map()).set(name, cellHandle(instance, name));
+    const cell: Cell = createSignal<Value>(evaluateNode(bundle, initial, null));
+    (instance.handles ??= new Map()).set(name, cellHandle(cell));
   }
   const content = tree[NodeField.content];
   // A null-content entry is still an instance — it holds the state its
@@ -207,29 +206,26 @@ function build(value: Value, instance: Instance): unknown {
 
 // A cell's handle, as a script reads it: an ordinary object of functions, so it
 // is a `Value` like anything else the interpreter hands a script. `read`
-// observes the instance's current storage; `write` replaces it — and everything
-// that read it runs again, which is the whole of what a write does. A handle a
-// handler captured keeps working for the life of the instance because it
-// resolves the cell by name at call time.
+// observes the cell's current value; the writers replace it — and everything
+// that read it runs again, which is the whole of what a write does. The signal
+// is the instance's for its life, so a handle a handler captured keeps working
+// however long it is held.
 //
 // The writers yield `null` rather than nothing. `void` is not a value this
 // language has, and a function that returned one couldn't be passed where a
 // value is expected — which a handle's members are.
-function cellHandle(instance: Instance, name: string): Value {
-  const cell = (): [() => Value, (value: Value) => void] => {
-    const held = instance.cells?.get(name);
-    if (held === undefined) {
-      throw new Error(`unknown state cell ${name}`);
-    }
-    return held;
-  };
-  const read = () => cell()[0]() ?? null;
+function cellHandle([read, store]: Cell): Value {
+  // Both writers store through the updater form, because a setter handed a
+  // function reads it as one — and a cell may hold a function, so `write` has
+  // to be an updater that ignores what it is given rather than the value
+  // itself.
   const write = (value: Value): Value => {
-    cell()[1](() => value);
+    store(() => value);
     return null;
   };
   const update = (updater: (current: Value) => Value): Value => {
-    return write(updater(cell()[0]() ?? null));
+    store((previous) => updater(previous));
+    return null;
   };
   return { read, write, update: update as Value };
 }
