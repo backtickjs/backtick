@@ -2,5 +2,5 @@
   <Text style={{ "fontSize": 12 }} onPress={[function]}>
     {"hi"}
   </Text>
-  <Image resizeMode="cover" source={{ "uri": "https://example.com/a.png" }} />
+  <Image source={{ "uri": "https://example.com/a.png" }} resizeMode="cover" />
 </View>

@@ -16,10 +16,12 @@ import type { BundleFunction, FunctionLabel } from "./Bundle.js";
  * body is read by whoever calls it, in whatever computation that is — so a call
  * written inside one is not this entry's reading.
  *
- * Nor does it follow a label into the table, and it doesn't have to. An entry
- * reaches another only by splicing it, a splice is a thunk the body invokes at
- * the hole, and invoking a thunk is a call — so an entry that could reach a
- * cell through another entry has a call of its own to be caught by.
+ * Nor does it follow a label into the table, and it cannot need to: an entry's
+ * body holds no application at all. Nothing a call site supplies is inlined, so
+ * a body reaches what encloses it through its own thunk parameters, and
+ * invoking one is a call; an expansion named in a body is the function itself,
+ * and using that is a call as well. Whatever an entry can reach while it is
+ * being evaluated, it reaches by calling.
  */
 export function markFixed(
   functions: Record<FunctionLabel, BundleFunction>,
@@ -43,6 +45,9 @@ function calls(node: unknown): boolean {
   if (kind === NodeKind.ArrowFunction || kind === NodeKind.Thunk) {
     return false;
   }
+  // After it, not before: a function written where it is called is still
+  // called, and the call is the node reached first. What the stop above means
+  // is a function this expression only makes.
   if (kind === NodeKind.CallExpression) {
     return true;
   }

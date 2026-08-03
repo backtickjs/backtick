@@ -253,20 +253,21 @@ export function compileElement(
   if (id === "For") {
     return compileFor(bundle, element);
   }
-  const props = Object.entries(element[NodeField.props] ?? {}).filter(
-    ([prop]) => prop !== "children",
-  );
-  // A prop the bundle spelled out is set once and never looked at again. It is
-  // the one distinction left here, and it is a question about the node rather
-  // than a walk of what is under it: a literal is the value it evaluates to,
-  // and a computation watching a constant would be a computation per attribute
-  // per element for nothing.
-  const fixed = props
-    .filter(([, expr]) => expr === null || typeof expr !== "object")
-    .map(([prop, expr]) => [prop, expr as Value] as const);
-  const computed = props
-    .filter(([, expr]) => expr !== null && typeof expr === "object")
-    .map(([prop, expr]) => [prop, compile(bundle, expr)] as const);
+  // Every prop, with how to read it and whether reading it again could say
+  // anything different — in the order the element wrote them, because a host
+  // may care: an `<input>` wants its `type` before its `value`.
+  //
+  // A value the bundle spelled out needs no case of its own. Compiling one
+  // yields a reader that hands it back, and nothing the bundler could mark
+  // would make it move, so it takes the same path a handler does: set once, and
+  // never looked at again. A computation watching a constant would be a
+  // computation per attribute per element for nothing.
+  const props = Object.entries(element[NodeField.props] ?? {})
+    .filter(([prop]) => prop !== "children")
+    .map(([prop, expr]) => {
+      const fixed = isFixed(bundle, expr);
+      return [prop, compile(bundle, expr), fixed] as const;
+    });
   const children = element[NodeField.props]?.["children"];
   const draw =
     children === undefined ? null : compileChildren(bundle, children);
@@ -274,10 +275,11 @@ export function compileElement(
     const instance = instanceOf(scope);
     const host = instance.host;
     const node = host.createElement(id);
-    for (const [prop, value] of fixed) {
-      host.setProp(node, prop, value);
-    }
-    for (const [prop, read] of computed) {
+    for (const [prop, read, fixed] of props) {
+      if (fixed) {
+        host.setProp(node, prop, read(scope));
+        continue;
+      }
       // One effect per prop, so a write moves that one prop of that one node.
       // It re-runs only when something the expression itself read has changed;
       // nothing tells it to look.
@@ -312,29 +314,64 @@ function compileChildren(
       members.map((member) => member(scope, instance));
   }
   const read = compile(bundle, expr);
-  // An element, or a value the bundle spelled out: what it draws is settled
-  // when it is built, so `insert` is handed the thing rather than a way of
-  // asking for it — and hands back without making a computation to watch it.
-  // Whatever moves inside an element is the element's own business, bound when
-  // it was built.
-  //
-  // Nothing is built on the way out, either. Only an application has to be, and
-  // an application is never settled: what this evaluates to is a value as it
-  // stands, a node, an array a fragment already drew, or a list's accessor.
-  if (isSettled(expr)) {
-    return (scope) => read(scope);
+  // Nothing that moves, so `insert` is handed what this draws rather than a way
+  // of asking for it, and makes no computation to watch it. That covers a value
+  // the bundle spelled out, an element — whatever moves inside one is the
+  // element's own business, bound when it was built — and an entry the bundler
+  // vouched for, a row's own label say.
+  if (isFixed(bundle, expr)) {
+    return mayApply(expr)
+      ? (scope, instance) => drawn(read(scope), instance)
+      : (scope) => read(scope);
   }
   return (scope, instance) => () => drawn(read(scope), instance);
 }
 
-function isSettled(expr: BundleExpr): boolean {
+// Whether what this expression evaluates to has to be built.
+//
+// Only an application does, and only some expressions can produce one. A value
+// the bundle carried is already what it draws, and an element is the node it
+// made — what a fragment holds was built as the fragment was, and a list draws
+// its own members. Asking costs nothing here and saves a walk per position per
+// instance, which is a walk per element of every row of a list.
+function mayApply(expr: BundleExpr): boolean {
+  if (expr === null || typeof expr !== "object") {
+    return false;
+  }
+  if (Array.isArray(expr)) {
+    return expr.some(mayApply);
+  }
+  return (expr as Record<string, unknown>)["#"] !== NodeKind.Element;
+}
+
+// Whether what this expression evaluates to can change once it has been built.
+//
+// For an entry applied the bundler answered it, so nothing here walks a body to
+// find out: an entry it could not vouch for carries no mark, and a mark is the
+// only yes. The rest this reads itself, because they are shapes rather than
+// scripts — and what it does not recognize it assumes moves.
+function isFixed(bundle: Bundle, expr: BundleExpr): boolean {
   if (expr === null || typeof expr !== "object") {
     return true;
   }
+  // A list can move if anything in it can.
+  if (Array.isArray(expr)) {
+    return expr.every((member) => isFixed(bundle, member));
+  }
+  const node = expr as Record<string, unknown>;
+  // An element is built once and is thereafter its own: every part of it that
+  // can change was bound to a computation of its own when it was built, so the
+  // position holding it never has to look again.
+  if (node["#"] === NodeKind.Element) {
+    return true;
+  }
+  if (node["#"] !== NodeKind.ApplyFunction) {
+    return false;
+  }
+  const label = node[NodeField.label];
   return (
-    !Array.isArray(expr) &&
-    "#" in expr &&
-    (expr as { "#": number })["#"] === NodeKind.Element
+    typeof label === "string" &&
+    bundle.functions[label]?.[NodeField.fixed] === true
   );
 }
 

@@ -320,10 +320,19 @@
     {
       "commit": "0576cca",
       "label": "no rebuild",
-      "note": "a settled child is handed over as it stands — only an application is ever built, and one is never settled, 5 iterations, uncommitted",
+      "note": "a settled child is handed over as it stands \u2014 only an application is ever built, and one is never settled, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-settled-direct",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "6a4915d",
+      "label": "fixed",
+      "note": "the bundler marks an entry whose value cannot change; no computation for a prop or child that reads nothing which moves, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-fixed",
       "file": "backtick-v0.1.0-keyed"
     }
   ]

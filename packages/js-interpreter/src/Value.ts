@@ -20,11 +20,13 @@ export interface Applied {
 }
 
 export function isApplied(value: unknown): value is Applied {
+  // A read rather than `in` and a read: both walk the prototype chain, and on a
+  // host node that chain is long and the answer is always no. This runs once
+  // per drawn position, so the second walk is one too many.
   return (
     typeof value === "object" &&
     value !== null &&
-    "@backtickjs" in value &&
-    value["@backtickjs"] === "Applied"
+    (value as { "@backtickjs"?: unknown })["@backtickjs"] === "Applied"
   );
 }
 
