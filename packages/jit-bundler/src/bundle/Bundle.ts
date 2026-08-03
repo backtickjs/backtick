@@ -73,6 +73,15 @@ export interface BundleFunction {
   // The arrow this entry is. Always present: an entry with nothing to evaluate
   // is not written at all.
   [NodeField.content]: BundleArrowFunctionNode;
+  // Set where applying this entry reads nothing that moves — no cell, and no
+  // position of a member of a list. What it yields once is what it would yield
+  // again, so a client can fill the position it feeds and never watch it.
+  //
+  // Absent is the answer that costs a computation and nothing else, so a reader
+  // that does not carry this — or a bundle written before it existed — is right
+  // to assume the value moves. Only the bundler can say otherwise, which is why
+  // it says so here rather than leaving every client to work it out.
+  [NodeField.fixed]?: true;
 }
 
 // Plain JSON carrying itself. The `#` key is how a node is told from data, so
@@ -178,6 +187,10 @@ export const NodeField = {
   // The one slot with no TypeScript counterpart: `const` or `let`, which
   // TypeScript keeps as flags on the declaration list this format doesn't have.
   keyword: "u",
+
+  // What the bundler worked out rather than read, for a client that would
+  // otherwise work it out again.
+  fixed: "ab", // a function entry whose value cannot change
 } as const;
 
 // Every node kind, as the number `"#"` carries. A number rather than a name

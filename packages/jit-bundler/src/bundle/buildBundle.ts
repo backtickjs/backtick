@@ -8,6 +8,7 @@ import type {
   IrTreeRef,
 } from "../ir/Ir.js";
 import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
+import { markFixed } from "./markFixed.js";
 import { locKey } from "../locKey.js";
 import { NodeKind, NodeField } from "./Bundle.js";
 import type {
@@ -781,6 +782,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   for (const [label, body] of expansionBodies) {
     functions[label] = { [NodeField.content]: body };
   }
+  // Last, with the table whole: an entry's body is only whole once every
+  // splice it writes has been rendered into it.
+  markFixed(functions);
   const trees: Record<TreeLabel, BundleTree> = {};
   for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
     trees[`${index}`] = tree;
