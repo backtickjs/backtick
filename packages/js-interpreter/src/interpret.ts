@@ -14,6 +14,7 @@ import type {
   FunctionLabel,
   TreeLabel,
 } from "@backtickjs/core";
+import { makeState } from "./makeState.js";
 import { compileElement, instanceOf } from "./view.js";
 import type { Instance } from "./view.js";
 import type { Applied, Value } from "./Value.js";
@@ -222,7 +223,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     case NodeKind.GetState: {
       const name = node[NodeField.name];
       return (scope) => {
-        const handle = instanceOf(scope).handles?.get(name);
+        const handle = instanceOf(scope).cells?.get(name);
         if (handle === undefined) {
           throw new Error(`unknown state cell ${name}`);
         }
@@ -742,6 +743,10 @@ function compileElements(
 // which is what keeps this client, the one the format is specified against,
 // from accepting more than the format defines.
 const builtins: { [name: string]: Value } = {
+  // The one builtin that is not a function of its arguments: two calls are two
+  // storages, where `Bundle` licenses re-running any other expression freely.
+  // Nothing emits this yet — where a call may stand is a rule still to write.
+  state: (initial: Value) => makeState(initial),
   Array: {
     // Not the host's `Array.from`: the mapper is required where the standard
     // library's is optional, and its first argument is `null` where the
