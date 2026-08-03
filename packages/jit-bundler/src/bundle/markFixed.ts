@@ -51,5 +51,13 @@ function calls(node: unknown): boolean {
   if (kind === NodeKind.CallExpression) {
     return true;
   }
+  // An application runs another entry's body, which this has not read — and
+  // whatever that body reads, it reads by invoking the thunks supplied here,
+  // which are the arguments the stop above walks past. A body holds no
+  // application today, so this says no about nothing; it is here so that a
+  // lowering which put one in a body would be conservative rather than wrong.
+  if (kind === NodeKind.ApplyFunction) {
+    return true;
+  }
   return Object.values(node).some(calls);
 }
