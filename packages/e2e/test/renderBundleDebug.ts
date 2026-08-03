@@ -15,8 +15,10 @@ import type {
 // snapshots, not a wire format — nothing parses it back.
 export function renderBundleDebug(bundle: Bundle): string {
   const sections: string[] = [];
-  for (const [label, arrow] of Object.entries(bundle.functions)) {
-    sections.push(`${fnLabel(label)} = ${renderNode(arrow, "")}`);
+  for (const [label, entry] of Object.entries(bundle.functions)) {
+    sections.push(
+      `${fnLabel(label)} = ${renderNode(entry[NodeField.content], "")}`,
+    );
   }
   for (const [label, tree] of Object.entries(bundle.trees)) {
     // The entry's cells read as a header on its label — storage it allocates

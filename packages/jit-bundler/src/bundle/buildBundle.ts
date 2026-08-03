@@ -13,6 +13,7 @@ import { NodeKind, NodeField } from "./Bundle.js";
 import type {
   Bundle,
   BundleArrowFunctionNode,
+  BundleFunction,
   BundleCallExpressionNode,
   BundleElement,
   BundleGetFunction,
@@ -769,16 +770,16 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   // Nothing encloses the root, so it can hold no cell at all.
   const root = renderExpr(ir.root, noInstance());
-  const functions: Record<FunctionLabel, BundleArrowFunctionNode> = {};
+  const functions: Record<FunctionLabel, BundleFunction> = {};
   // In table order, which is the order the walk first reached each script.
   for (const script of ir.scripts) {
     const body = bodies.get(script);
     if (body !== undefined) {
-      functions[fnLabel(script)] = body;
+      functions[fnLabel(script)] = { [NodeField.content]: body };
     }
   }
   for (const [label, body] of expansionBodies) {
-    functions[label] = body;
+    functions[label] = { [NodeField.content]: body };
   }
   const trees: Record<TreeLabel, BundleTree> = {};
   for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {

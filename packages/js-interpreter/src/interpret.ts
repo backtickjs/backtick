@@ -111,13 +111,15 @@ function getFunction(
   if (existing !== undefined) {
     return existing;
   }
-  const arrow = bundle.functions[label];
-  if (arrow === undefined) {
+  const entry = bundle.functions[label];
+  if (entry === undefined) {
     throw new Error(`unknown function entry ${label}`);
   }
   // Evaluated with no enclosing scope: an entry resolves only against its own
   // parameters, so there is nothing for it to close over.
-  const fn = evaluate(bundle, arrow, null) as (...args: Value[]) => Value;
+  const fn = evaluate(bundle, entry[NodeField.content], null) as (
+    ...args: Value[]
+  ) => Value;
   built.set(label, fn);
   return fn;
 }

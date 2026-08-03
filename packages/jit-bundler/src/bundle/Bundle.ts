@@ -30,7 +30,7 @@
 // evaluations freely. Effects happen only when the client itself invokes a
 // function value it holds.
 export interface Bundle {
-  // Each entry is an arrow node — evaluating it yields a function, exactly
+  // Each entry holds an arrow node — evaluating it yields a function, exactly
   // as for an arrow nested inside a body. It takes one thunk parameter per
   // splice hole the script writes (named `$0`, `$1`, …); the body invokes the
   // thunk at the hole, passing the entry-scoped bindings in scope there — a
@@ -59,9 +59,20 @@ export interface Bundle {
   // A construction's expansion is also an entry — one per class, labeled
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
-  functions: Record<FunctionLabel, BundleArrowFunctionNode>;
+  functions: Record<FunctionLabel, BundleFunction>;
   trees: Record<TreeLabel, BundleTree>;
   root: BundleExpr;
+}
+
+// A function entry: a script as data. The arrow sits under a wrapper for the
+// same reason a tree's element does — so what the bundler works out about an
+// entry can land as a sibling field without reshaping the table, and without
+// hanging a field on the arrow node that every other arrow in the language
+// would then carry the possibility of.
+export interface BundleFunction {
+  // The arrow this entry is. Always present: an entry with nothing to evaluate
+  // is not written at all.
+  [NodeField.content]: BundleArrowFunctionNode;
 }
 
 // Plain JSON carrying itself. The `#` key is how a node is told from data, so
