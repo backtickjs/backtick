@@ -317,8 +317,12 @@ function compileChildren(
   // asking for it — and hands back without making a computation to watch it.
   // Whatever moves inside an element is the element's own business, bound when
   // it was built.
+  //
+  // Nothing is built on the way out, either. Only an application has to be, and
+  // an application is never settled: what this evaluates to is a value as it
+  // stands, a node, an array a fragment already drew, or a list's accessor.
   if (isSettled(expr)) {
-    return (scope, instance) => drawn(read(scope), instance);
+    return (scope) => read(scope);
   }
   return (scope, instance) => () => drawn(read(scope), instance);
 }

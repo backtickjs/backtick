@@ -316,6 +316,15 @@
       "keyed": true,
       "dir": "app-handle",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "0576cca",
+      "label": "no rebuild",
+      "note": "a settled child is handed over as it stands — only an application is ever built, and one is never settled, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-settled-direct",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
