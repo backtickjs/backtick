@@ -1,0 +1,15 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    // The app is a package of its own rather than a dependency of this one, so
+    // what the snapshots read — its `lib/bundle.json` — is named here instead.
+    "test": {
+      "dependsOn": ["js-framework-benchmark-backtick#build"]
+    },
+    "test:update": {
+      "dependsOn": ["js-framework-benchmark-backtick#build"],
+      "cache": false
+    }
+  }
+}

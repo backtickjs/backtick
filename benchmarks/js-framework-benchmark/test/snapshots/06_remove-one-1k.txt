@@ -1,0 +1,11 @@
+06_remove-one-1k — remove row
+measured: click the fourth row's remove icon
+
+host operations
+  removeNode      1
+  getNextSibling  1
+  total           2
+
+in order, repetition folded
+  getNextSibling  tr
+  removeNode      tbody -> tr

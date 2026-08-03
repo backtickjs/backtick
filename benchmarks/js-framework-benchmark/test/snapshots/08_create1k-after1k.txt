@@ -1,0 +1,44 @@
+08_create1k-after1k — append rows to large table
+measured: click #add, over a table that already holds a thousand rows
+
+host operations
+  createElement   8000
+  createTextNode  2000
+  setProperty     9000
+  insertNode      10000
+  getFirstChild   2000
+  getNextSibling  1
+  total           31001
+
+in order, repetition folded
+  1000 × [
+    createElement   tr
+    setProperty     tr class=""
+    createElement   td
+    setProperty     td class="col-md-1"
+    createTextNode
+    getFirstChild   td
+    insertNode      td <- #text
+    createElement   td
+    setProperty     td class="col-md-4"
+    createElement   a
+    setProperty     a onclick=[function]
+    createTextNode
+    getFirstChild   a
+    insertNode      a <- #text
+    insertNode      td <- a
+    createElement   td
+    setProperty     td class="col-md-1"
+    createElement   a
+    setProperty     a onclick=[function]
+    createElement   span
+    setProperty     span class="glyphicon glyphicon-remove"
+    setProperty     span aria-hidden="true"
+    insertNode      a <- span
+    insertNode      td <- a
+    createElement   td
+    setProperty     td class="col-md-6"
+    4 × insertNode      tr <- td
+  ]
+  getNextSibling  tr
+  1000 × insertNode      tbody <- tr

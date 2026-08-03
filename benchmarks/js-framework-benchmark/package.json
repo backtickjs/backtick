@@ -10,6 +10,11 @@
     "isKeyed": "node cli.mjs isKeyed",
     "checkCSP": "node cli.mjs checkCSP",
     "results": "node cli.mjs results",
-    "table": "node scripts/table.mjs"
+    "table": "node scripts/table.mjs",
+    "test": "node --conditions=browser --test \"test/**/*.test.mjs\"",
+    "test:update": "UPDATE_SNAPSHOTS=1 node --conditions=browser --test \"test/**/*.test.mjs\""
+  },
+  "devDependencies": {
+    "@backtickjs/js-interpreter": "workspace:*"
   }
 }

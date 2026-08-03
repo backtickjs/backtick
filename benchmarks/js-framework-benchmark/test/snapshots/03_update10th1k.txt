@@ -1,0 +1,51 @@
+03_update10th1k — partial update
+measured: click #update, which appends ` !!!` to every tenth row's label
+
+host operations
+  createElement   800
+  createTextNode  200
+  setProperty     900
+  insertNode      1000
+  removeNode      100
+  getFirstChild   200
+  getNextSibling  2
+  total           3202
+
+in order, repetition folded
+  100 × [
+    createElement   tr
+    setProperty     tr class=""
+    createElement   td
+    setProperty     td class="col-md-1"
+    createTextNode
+    getFirstChild   td
+    insertNode      td <- #text
+    createElement   td
+    setProperty     td class="col-md-4"
+    createElement   a
+    setProperty     a onclick=[function]
+    createTextNode
+    getFirstChild   a
+    insertNode      a <- #text
+    insertNode      td <- a
+    createElement   td
+    setProperty     td class="col-md-1"
+    createElement   a
+    setProperty     a onclick=[function]
+    createElement   span
+    setProperty     span class="glyphicon glyphicon-remove"
+    setProperty     span aria-hidden="true"
+    insertNode      a <- span
+    insertNode      td <- a
+    createElement   td
+    setProperty     td class="col-md-6"
+    4 × insertNode      tr <- td
+  ]
+  getNextSibling  tr
+  99 × [
+    removeNode      tbody -> tr
+    insertNode      tbody <- tr before tr
+  ]
+  removeNode      tbody -> tr
+  getNextSibling  tr
+  insertNode      tbody <- tr before tr

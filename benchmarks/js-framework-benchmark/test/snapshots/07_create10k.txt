@@ -1,0 +1,42 @@
+07_create10k — create many rows
+measured: click #runlots, for ten thousand rows
+
+host operations
+  createElement   80000
+  createTextNode  20000
+  setProperty     90000
+  insertNode      100000
+  getFirstChild   20000
+  total           310000
+
+in order, repetition folded
+  10000 × [
+    createElement   tr
+    setProperty     tr class=""
+    createElement   td
+    setProperty     td class="col-md-1"
+    createTextNode
+    getFirstChild   td
+    insertNode      td <- #text
+    createElement   td
+    setProperty     td class="col-md-4"
+    createElement   a
+    setProperty     a onclick=[function]
+    createTextNode
+    getFirstChild   a
+    insertNode      a <- #text
+    insertNode      td <- a
+    createElement   td
+    setProperty     td class="col-md-1"
+    createElement   a
+    setProperty     a onclick=[function]
+    createElement   span
+    setProperty     span class="glyphicon glyphicon-remove"
+    setProperty     span aria-hidden="true"
+    insertNode      a <- span
+    insertNode      td <- a
+    createElement   td
+    setProperty     td class="col-md-6"
+    4 × insertNode      tr <- td
+  ]
+  10000 × insertNode      tbody <- tr

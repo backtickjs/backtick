@@ -21,7 +21,11 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  benchmarks/js-framework-benchmark: {}
+  benchmarks/js-framework-benchmark:
+    devDependencies:
+      '@backtickjs/js-interpreter':
+        specifier: workspace:*
+        version: link:../../packages/js-interpreter
 
   benchmarks/js-framework-benchmark/frameworks/keyed/backtick:
     dependencies:
