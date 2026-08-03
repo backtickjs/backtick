@@ -283,9 +283,19 @@ export function compileElement(
       // One effect per prop, so a write moves that one prop of that one node.
       // It re-runs only when something the expression itself read has changed;
       // nothing tells it to look.
-      host.effect((previous) =>
-        host.setProp(node, prop, read(scope), previous),
-      );
+      //
+      // Re-running is not the same as changing: a cell a whole list reads is
+      // what decides one row's class, and every other row recomputes the class
+      // it already has. The host hears about a prop when the prop moved, so
+      // that is a comparison here rather than a write per row per selection.
+      // A handler is a new closure whenever what it captured changed, so it
+      // compares unequal and is registered again, as before.
+      host.effect((previous) => {
+        const value = read(scope);
+        return value === previous
+          ? previous
+          : host.setProp(node, prop, value, previous);
+      });
     }
     if (draw !== null) {
       host.insert(node, draw(scope, instance));

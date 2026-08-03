@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
-import { evaluate, isTestNode } from "./test-client/index.ts";
+import { evaluate, isTestNode, recordingHost } from "./test-client/index.ts";
 import type { TestNode } from "./test-client/index.ts";
 
 // The behavior side of per-instance state: the `*.bundle` snapshots pin the
@@ -171,6 +171,38 @@ describe("local state", () => {
       { size: 16, text: "row 0 of 1", marked: false },
       { size: 20, text: "row 1 of 1", marked: true },
     ]);
+  });
+
+  // A prop re-runs when something it read was written, which is not the same as
+  // holding anything new: a cell a whole list reads decides one row's prop, and
+  // every other row recomputes the value it already had. The host hears about
+  // the two that moved and nothing else — a write per row per selection is what
+  // a list of any size would otherwise cost.
+  it("a prop that recomputed to what it held is not set again", async () => {
+    const script = await importFixture(validDir, "unmoved-prop.tsx");
+    const { options, writes } = recordingHost();
+    const view = evaluate(await bundle(script), options);
+    assert.ok(isTestNode(view), "expected a rendered node");
+    const [select, list] = children(view);
+    assert.ok(select !== undefined && list !== undefined);
+    const href = (): unknown[] => list.children.map((row) => row.props["href"]);
+    assert.deepEqual(href(), ["#open", "#closed", "#closed"]);
+    writes.length = 0;
+    handler(select)();
+    assert.deepEqual(href(), ["#closed", "#open", "#closed"]);
+    // The row that was selected and the row now selected, in the order they
+    // were built. The third row read the cell too, and had nothing to say.
+    assert.deepEqual(
+      writes.map(({ node, prop, value }) => [
+        list.children.indexOf(node),
+        prop,
+        value,
+      ]),
+      [
+        [0, "href", "#closed"],
+        [1, "href", "#open"],
+      ],
+    );
   });
 });
 

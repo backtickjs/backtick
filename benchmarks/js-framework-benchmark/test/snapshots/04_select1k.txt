@@ -2,10 +2,9 @@
 measured: click a row's label, with another row already selected
 
 host operations
-  setProperty     1000
-  total           1000
+  setProperty     2
+  total           2
 
 in order, repetition folded
-  2 × setProperty     tr class=""
   setProperty     tr class="danger"
-  997 × setProperty     tr class=""
+  setProperty     tr class=""

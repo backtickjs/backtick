@@ -1,0 +1,16 @@
+<View>
+  <Text onPress={[function]}>
+    {"select"}
+  </Text>
+  <View>
+    <Link href="#open">
+      {"row 0"}
+    </Link>
+    <Link href="#closed">
+      {"row 1"}
+    </Link>
+    <Link href="#closed">
+      {"row 2"}
+    </Link>
+  </View>
+</View>

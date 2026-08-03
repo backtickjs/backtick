@@ -1,0 +1,32 @@
+#f0 = ($0) => () => $0().write(1)
+
+#f1 = () => [0, 1, 2]
+
+#f2 = ($0) => (id) => $0(id)
+
+#f3 = ($0, $1) => $0($1).read() === $1 ? "#open" : "#closed"
+
+#f4 = ($0) => "row " + $0
+
+#t0 = <Link
+  href={#f3((id) => slots[1], slots[0])}
+>
+  {#f4(slots[0])}
+</Link>
+
+#t1 state { s0 = 0 } = <View>
+  {<Text
+    onPress={#f0(() => cells.s0)}
+  >
+    {"select"}
+  </Text>}
+  {<View>
+    {<For
+      each={#f1()}
+    >
+      {#f2((id) => #t0(id, cells.s0))}
+    </For>}
+  </View>}
+</View>
+
+root = #t1()

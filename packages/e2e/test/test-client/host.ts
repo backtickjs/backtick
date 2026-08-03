@@ -84,3 +84,35 @@ export const testHost: RendererOptions<TestNode> = {
     return siblings[siblings.indexOf(node) + 1];
   },
 };
+
+// One prop the host was told to set.
+export interface Write {
+  readonly node: TestNode;
+  readonly prop: string;
+  readonly value: unknown;
+}
+
+/**
+ * The same host, with every prop write recorded.
+ *
+ * What a node holds says which writes landed, not which were made: a prop set
+ * to what it already held reads the same either way. So being told at all is
+ * what this is for — a prop nothing moved is one the host should never hear
+ * about.
+ */
+export function recordingHost(): {
+  options: RendererOptions<TestNode>;
+  writes: Write[];
+} {
+  const writes: Write[] = [];
+  return {
+    options: {
+      ...testHost,
+      setProperty: (node, prop, value) => {
+        writes.push({ node, prop, value });
+        node.props[prop] = value;
+      },
+    },
+    writes,
+  };
+}
