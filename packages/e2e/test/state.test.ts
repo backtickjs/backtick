@@ -113,30 +113,46 @@ describe("local state", () => {
     assert.equal(fontSize(text), 18);
   });
 
-  // A list is drawn again from nothing whenever what it was built from
-  // changes: there is no node in the format saying a children position is a
-  // list, so a client is handed a finished one and has nothing to match it
-  // against. What that costs is written down in `PLAN.md`; what it has to keep
-  // is that the list is right afterwards, which is what these two check.
-  //
-  // The assertions a `For` would add back are about identity — that a row which
-  // moved is the node it was, and that a row which went took its own node with
-  // it. Neither holds here, and neither is asserted.
-  it("a reordered list draws the rows it was left with", async () => {
+  // A list is declared, so the client walks the array itself and a member is
+  // named by its own identity. What that has to buy is node identity: a row
+  // that moved is the node it was, and a row that went took its own node with
+  // it — neither is anything a snapshot of the drawn markup can see, so both
+  // are asserted on the nodes these hold across the write.
+  it("a reordered list moves the rows it already built", async () => {
     const view = await render("keyed-rows.tsx");
     const [swap, , list] = children(view);
     assert.ok(swap !== undefined && list !== undefined);
     assert.deepEqual(list.children.map(text), ["row 1", "row 2", "row 3"]);
+    const [first, , third] = list.children;
     handler(swap)();
     assert.deepEqual(list.children.map(text), ["row 3", "row 2", "row 1"]);
+    // The two that swapped are the nodes they were, at each other's places.
+    assert.equal(list.children[0], third);
+    assert.equal(list.children[2], first);
   });
 
   it("a list a row was dropped from draws the rest", async () => {
     const view = await render("keyed-rows.tsx");
     const [, drop, list] = children(view);
     assert.ok(drop !== undefined && list !== undefined);
+    const [first, , third] = list.children;
     handler(drop)();
     assert.deepEqual(list.children.map(text), ["row 1", "row 3"]);
+    // Only the row that went was touched; the rest kept their nodes.
+    assert.deepEqual(list.children, [first, third]);
+  });
+
+  it("a moved row keeps its node and reads its new index", async () => {
+    const view = await render("for-index.tsx");
+    const [rotate, list] = children(view);
+    assert.ok(rotate !== undefined && list !== undefined);
+    assert.deepEqual(list.children.map(text), ["a at 0", "b at 1", "c at 2"]);
+    const held = list.children[0];
+    handler(rotate)();
+    // Nothing about a member changed, so every row is the node it was — and
+    // the index each one draws is the position it now sits at.
+    assert.deepEqual(list.children.map(text), ["c at 0", "a at 1", "b at 2"]);
+    assert.equal(list.children[1], held);
   });
 
   it("a child redraws everything it read of a cell it was handed", async () => {

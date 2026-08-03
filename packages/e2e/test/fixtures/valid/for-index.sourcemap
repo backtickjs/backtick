@@ -1,0 +1,71 @@
+cs.lift(cs.const(        → cs`
+() => {\n                → () => {\n    
+cs.statement(            → 
+cs.receiver(             → 
+cs.splice(               →  [-semantic]
+(names)                  → $names
+)                        →  [-semantic]
+)                        → 
+.                        → .
+update                   → update
+(                        → (
+__cs_held                → held
+ =>                      → ) => 
+[                        → [
+cs.index(                → 
+__cs_held                → held
+,                        → [
+2                        → 2
+)                        → ]
+,                        → , 
+cs.index(                → 
+__cs_held                → held
+,                        → [
+0                        → 0
+)                        → ]
+,                        → , 
+cs.index(                → 
+__cs_held                → held
+,                        → [
+1                        → 1
+)                        → ]
+]                        → ]
+)                        → )
+);                       → ;
+\n}                      → \n  }
+))                       → `
+cs.lift(cs.const(        → cs`
+cs.receiver(             → 
+cs.splice(               →  [-semantic]
+(names)                  → $names
+)                        →  [-semantic]
+)                        → 
+.                        → .
+read                     → read
+()                       → ()
+))                       → `
+cs.lift(cs.const(        → cs`
+(                        → (
+__cs_name                → name
+: string                 → : string
+,                        → , 
+__cs_index               → index
+: ReadonlyState<number>  → : ReadonlyState<number>
+) =>                     → ) =>\n            
+cs.splice(               → ${ [-semantic]
+(<Text>{                 → (<Text>{
+cs.lift(cs.const(        → cs`
+__cs_name                → name
+ +                       →  + 
+" at "                   → " at "
+ +                       →  + 
+cs.receiver(             → 
+__cs_index               → index
+)                        → 
+.                        → .
+read                     → read
+()                       → ()
+))                       → `
+}</Text>)                → }</Text>)
+)                        → } [-semantic]
+))                       → `

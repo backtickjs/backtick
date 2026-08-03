@@ -289,6 +289,24 @@
       "keyed": true,
       "dir": "app-settled2",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "adbc64c",
+      "label": "no index",
+      "note": "`For` gives the member alone, so `mapArray` keeps no index signals, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-noindex",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "adbc64c",
+      "label": "index",
+      "note": "index back as `ReadonlyState`, no arity gate, so every list holds index signals, 5 iterations, uncommitted",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "app-index",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

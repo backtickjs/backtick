@@ -1,0 +1,16 @@
+<View>
+  <Text onPress={[function]}>
+    {"rotate"}
+  </Text>
+  <View>
+    <Text>
+      {"a at 0"}
+    </Text>
+    <Text>
+      {"b at 1"}
+    </Text>
+    <Text>
+      {"c at 2"}
+    </Text>
+  </View>
+</View>

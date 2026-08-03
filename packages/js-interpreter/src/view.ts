@@ -375,8 +375,11 @@ function compileFor(bundle: Bundle, element: BundleElement): Compiled {
     // Made once: it closes over this instance, and the member arrives as an
     // argument.
     const one = draw(scope) as (...args: Value[]) => Value;
+    // The index is `mapArray`'s own signal, handed over as storage rather than
+    // as the number it holds: whoever reads it is reading where the member sits
+    // now.
     return mapArray(members, (member, at) =>
-      drawn(one(member, at()), instance),
+      drawn(one(member, { read: at } as Value), instance),
     ) as unknown as Value;
   };
 }

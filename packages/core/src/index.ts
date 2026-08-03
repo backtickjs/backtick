@@ -5,6 +5,7 @@ export {
   type ClientUnknown,
   type ClientValue,
   type Prop,
+  type ReadonlyState,
   type Spliceable,
   type State,
   cs,

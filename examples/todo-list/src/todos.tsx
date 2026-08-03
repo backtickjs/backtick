@@ -28,10 +28,14 @@ export async function TodoList() {
     }
   })`;
 
-  const onPress = cs`(index: number) => {
+  // By label rather than by position: the list draws the filtered array, so a
+  // task's place in what is shown is not its place in `tasks`.
+  const onPress = cs`(label: string) => {
     $tasks.update((tasks) =>
-      tasks.map((task, at) =>
-        index === at ? { label: task.label, isDone: !task.isDone } : task,
+      tasks.map((task) =>
+        task.label === label
+          ? { label: task.label, isDone: !task.isDone }
+          : task,
       ),
     );
   }`;
@@ -67,12 +71,12 @@ export async function TodoList() {
 
       <ul style="margin: 0; padding: 0; list-style: none; align-self: stretch">
         <For each={cs`$showing`}>
-          {cs`(task: { label: string; isDone: boolean }, index: number) =>
+          {cs`(task: { label: string; isDone: boolean }) =>
             ${(
               <Task
                 label={cs`task.label`}
                 isDone={cs`task.isDone`}
-                onPress={cs`() => $onPress(index)`}
+                onPress={cs`() => $onPress(task.label)`}
               />
             )}`}
         </For>

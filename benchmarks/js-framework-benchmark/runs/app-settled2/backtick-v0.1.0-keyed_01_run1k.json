@@ -1,1 +1,32 @@
-{"framework":"backtick-v0.1.0-keyed","keyed":true,"benchmark":"01_run1k","type":"cpu","values":{"total":{"min":29.3,"max":30.4,"median":29.9,"mean":29.880000000000003,"stddev":0.414728827066554,"values":[29.3,29.7,29.9,30.4,30.1]},"script":{"min":9.2,"max":10.4,"median":10,"mean":9.84,"stddev":0.5176871642217915,"values":[9.4,9.2,10.4,10.2,10]},"paint":{"min":19,"max":19.8,"median":19.4,"mean":19.419999999999998,"stddev":0.28635642126552735,"values":[19.4,19.8,19,19.5,19.4]}}}
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "01_run1k",
+  "type": "cpu",
+  "values": {
+    "total": {
+      "min": 29.3,
+      "max": 30.4,
+      "median": 29.9,
+      "mean": 29.880000000000003,
+      "stddev": 0.414728827066554,
+      "values": [29.3, 29.7, 29.9, 30.4, 30.1]
+    },
+    "script": {
+      "min": 9.2,
+      "max": 10.4,
+      "median": 10,
+      "mean": 9.84,
+      "stddev": 0.5176871642217915,
+      "values": [9.4, 9.2, 10.4, 10.2, 10]
+    },
+    "paint": {
+      "min": 19,
+      "max": 19.8,
+      "median": 19.4,
+      "mean": 19.419999999999998,
+      "stddev": 0.28635642126552735,
+      "values": [19.4, 19.8, 19, 19.5, 19.4]
+    }
+  }
+}
