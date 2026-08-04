@@ -1,0 +1,6 @@
+cs.lift(cs.const(  → cs`
+() =>              → () => 
+cs.splice(         → ${ [-semantic]
+{ "#": "value" }   → { "#": "value" }
+)                  → } [-semantic]
+))                 → `

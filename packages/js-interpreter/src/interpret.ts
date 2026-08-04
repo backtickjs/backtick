@@ -2,13 +2,12 @@
 // that way pulls the bundler and `node:async_hooks` into the graph, which a
 // browser cannot load. This subpath is the format module alone, and it
 // imports nothing.
-import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
+import { NodeKind } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleArrayElement,
   BundleSpreadElementNode,
   BundleBinaryOperator,
-  BundleBinaryExpressionNode,
   BundleExpressionNode,
   BundleStatementNode,
   FunctionLabel,
@@ -100,11 +99,9 @@ function getFunction(
   if (entry === undefined) {
     throw new Error(`unknown function entry ${label}`);
   }
-  const fn = evaluate(
-    instance.bundle,
-    entry[NodeField.content],
-    scopeOf(null, instance),
-  ) as (...args: Value[]) => Value;
+  const fn = evaluate(instance.bundle, entry[0], scopeOf(null, instance)) as (
+    ...args: Value[]
+  ) => Value;
   instance.entries.set(label, fn);
   return fn;
 }
@@ -154,24 +151,15 @@ function compileStatement(bundle: Bundle, node: BundleStatementNode): Executed {
   return made;
 }
 
-// A `#`-discriminated node, as opposed to plain JSON carrying itself.
-// Bundling rejects plain data carrying `#` — the bundle's one reserved key —
-// so the node reading is unambiguous.
-function isNode(node: Source): node is Extract<Source, { "#": NodeKind }> {
-  return (
-    typeof node === "object" &&
-    node !== null &&
-    !Array.isArray(node) &&
-    "#" in node
-  );
+// A node, as opposed to plain JSON carrying itself. Every node is an array and
+// nothing else in a value slot is: an array of data travels under a `DataArray`
+// node, so the reading is unambiguous without a reserved key.
+function isNode(node: Source): node is Extract<Source, { 0: NodeKind }> {
+  return Array.isArray(node);
 }
 
 function buildNode(bundle: Bundle, source: Source): Compiled {
   if (!isNode(source)) {
-    if (Array.isArray(source)) {
-      const members = compileElements(bundle, source);
-      return (scope) => members(scope);
-    }
     const data = source as { [key: string]: Source };
     const keys = Object.keys(data);
     const parts = keys.map((key) => compile(bundle, data[key]));
@@ -184,9 +172,13 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     };
   }
   const node = source;
-  switch (node["#"]) {
+  switch (node[0]) {
+    case NodeKind.DataArray: {
+      const members = compileElements(bundle, node[1]);
+      return (scope) => members(scope);
+    }
     case NodeKind.Identifier: {
-      const name = node[NodeField.text];
+      const name = node[1];
       return (scope) => {
         const frame = lookup(scope, name);
         if (frame === null) {
@@ -198,17 +190,15 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     // An entry named rather than applied: the function it evaluates to, which
     // is what a hole handing over nothing would have called.
     case NodeKind.GetFunction: {
-      const label = node[NodeField.label];
+      const label = node[1];
       return (scope) => getFunction(instanceOf(scope), label);
     }
     // An entry applied: run it, wherever this is. Drawing needs no ceremony —
     // an entry is evaluated where the mount is, so an element in its body
     // builds with the same host as one written here.
     case NodeKind.ApplyFunction: {
-      const label = node[NodeField.label];
-      const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        compile(bundle, arg),
-      );
+      const label = node[1];
+      const args = node[2].map((arg) => compile(bundle, arg));
       return (scope) => {
         const supplied = args.map((arg) => arg(scope));
         return getFunction(instanceOf(scope), label)(...supplied);
@@ -221,7 +211,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     // JavaScript, so these are JavaScript's — which is what the curation is
     // for: every member here means the same thing everywhere.
     case NodeKind.Builtin: {
-      const name = node[NodeField.name];
+      const name = node[1];
       const value = builtins[name];
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
@@ -232,13 +222,13 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
       // Which of the two this is, is a property of the callee, so it is
       // decided here rather than on every call.
-      const callee = node[NodeField.expression];
-      const optionalCall = node[NodeField.questionDotToken];
-      const args = compileElements(bundle, node[NodeField.arguments] ?? []);
-      if (isNode(callee) && callee["#"] === NodeKind.PropertyAccessExpression) {
-        const receiver = compile(bundle, callee[NodeField.expression]);
-        const member = callee[NodeField.name];
-        const optionalReceiver = callee[NodeField.questionDotToken];
+      const callee = node[1];
+      const optionalCall = node[2];
+      const args = compileElements(bundle, node[3]);
+      if (isNode(callee) && callee[0] === NodeKind.PropertyAccessExpression) {
+        const receiver = compile(bundle, callee[1]);
+        const optionalReceiver = callee[2];
+        const member = callee[3];
         return (scope) => {
           // The receiver evaluates before the arguments; an optional receiver
           // (`a?.b(…)`) short-circuits a null object to null, arguments
@@ -275,9 +265,9 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       };
     }
     case NodeKind.PropertyAccessExpression: {
-      const target = compile(bundle, node[NodeField.expression]);
-      const member = node[NodeField.name];
-      const optional = node[NodeField.questionDotToken];
+      const target = compile(bundle, node[1]);
+      const optional = node[2];
+      const member = node[3];
       return (scope) => {
         const object = target(scope) as { [name: string]: Value };
         if (optional && object === null) {
@@ -289,8 +279,8 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       };
     }
     case NodeKind.ElementAccessExpression: {
-      const target = compile(bundle, node[NodeField.expression]);
-      const argument = compile(bundle, node[NodeField.argumentExpression]);
+      const target = compile(bundle, node[1]);
+      const argument = compile(bundle, node[2]);
       return (scope) => {
         const reached = target(scope);
         const key = argument(scope);
@@ -318,12 +308,18 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       };
     }
     case NodeKind.BinaryExpression: {
-      if (isAssignment(node)) {
+      if (node[1] === "=") {
         // An assignment, which is a binary expression here as it is in
         // TypeScript. The left is a name to bind, never a value to read, so it
         // is the one operand that isn't evaluated.
-        const name = node[NodeField.left][NodeField.text];
-        const right = compile(bundle, node[NodeField.right]);
+        const target = node[2];
+        // Only a variable can be assigned to, which the compiler enforces; a
+        // bundle saying otherwise was not written by it.
+        if (!isNode(target) || target[0] !== NodeKind.Identifier) {
+          throw new Error("an assignment target must be an identifier");
+        }
+        const name = target[1];
+        const right = compile(bundle, node[3]);
         return (scope) => {
           const value = right(scope);
           const frame = lookup(scope, name);
@@ -337,25 +333,25 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         };
       }
       return compileBinop(
-        node[NodeField.operatorToken],
-        compile(bundle, node[NodeField.left]),
-        compile(bundle, node[NodeField.right]),
+        node[1],
+        compile(bundle, node[2]),
+        compile(bundle, node[3]),
       );
     }
     case NodeKind.PrefixUnaryExpression: {
-      const operand = compile(bundle, node[NodeField.operand]);
+      const operand = compile(bundle, node[2]);
       // A `!` operand is boolean, as a tested position always is, so this
       // negates rather than deciding what counts as true. A `-` operand is a
       // number, checked by the compiler as arithmetic everywhere else is.
-      if (node[NodeField.operator] === "-") {
+      if (node[1] === "-") {
         return (scope) => -(operand(scope) as number);
       }
       return (scope) => !condition(operand(scope), "the operand of `!`");
     }
     case NodeKind.ConditionalExpression: {
-      const test = compile(bundle, node[NodeField.condition]);
-      const whenTrue = compile(bundle, node[NodeField.whenTrue]);
-      const whenFalse = compile(bundle, node[NodeField.whenFalse]);
+      const test = compile(bundle, node[1]);
+      const whenTrue = compile(bundle, node[2]);
+      const whenFalse = compile(bundle, node[3]);
       // Only the taken branch evaluates.
       return (scope) =>
         condition(test(scope), "a ternary condition")
@@ -363,12 +359,10 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
           : whenFalse(scope);
     }
     case NodeKind.ArrowFunction: {
-      const parameters = (node[NodeField.parameters] ?? []).map(
-        (param) => param[NodeField.name],
-      );
-      const body = node[NodeField.body];
+      const parameters = node[1].map((param) => param[1]);
+      const body = node[2];
       const block =
-        isNode(body) && body["#"] === NodeKind.Block
+        isNode(body) && body[0] === NodeKind.Block
           ? compileStatement(bundle, body)
           : null;
       // A non-block body is an expression, implicitly returned.
@@ -406,7 +400,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       // Every remaining kind is a statement, which is not a value. A bundle
       // that puts one where a value is expected was not written by the
       // compiler.
-      throw new Error(`\`${node["#"] as number}\` is not an expression`);
+      throw new Error(`\`${node[0] as number}\` is not an expression`);
     }
   }
 }
@@ -442,19 +436,18 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       return advanced;
     };
   }
-  switch (node["#"]) {
+  switch (node[0]) {
     case NodeKind.Block: {
-      const statements = node[NodeField.statements] ?? [];
+      const statements = node[1];
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward. Which names
       // those are is a property of the block, so it is found once.
       const declared = statements
         .filter(
           (statement) =>
-            isNode(statement) &&
-            statement["#"] === NodeKind.VariableDeclaration,
+            isNode(statement) && statement[0] === NodeKind.VariableDeclaration,
         )
-        .map((statement) => (statement as { e: string })[NodeField.name]);
+        .map((statement) => (statement as unknown as [number, string])[1]);
       const body = statements.map((statement) =>
         compileStatement(bundle, statement),
       );
@@ -474,20 +467,19 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       };
     }
     case NodeKind.VariableDeclaration: {
-      const name = node[NodeField.name];
-      const initializer = compile(bundle, node[NodeField.initializer]);
+      const name = node[1];
+      const initializer = compile(bundle, node[2]);
       return (scope) => {
         bind(scope, name, initializer(scope));
         return advanced;
       };
     }
     case NodeKind.IfStatement: {
-      const test = compile(bundle, node[NodeField.expression]);
-      const then = compileStatement(bundle, node[NodeField.thenStatement]);
+      const test = compile(bundle, node[1]);
+      const then = compileStatement(bundle, node[2]);
+      const branch = node[3];
       const otherwise =
-        node[NodeField.elseStatement] === null
-          ? null
-          : compileStatement(bundle, node[NodeField.elseStatement]);
+        branch === null ? null : compileStatement(bundle, branch);
       return (scope) => {
         if (condition(test(scope), "an `if`")) {
           return then(scope);
@@ -496,8 +488,8 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       };
     }
     case NodeKind.WhileStatement: {
-      const test = compile(bundle, node[NodeField.expression]);
-      const body = compileStatement(bundle, node[NodeField.statement]);
+      const test = compile(bundle, node[1]);
+      const body = compileStatement(bundle, node[2]);
       return (scope) => {
         let turns = 0;
         while (condition(test(scope), "a `while`")) {
@@ -515,19 +507,15 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       };
     }
     case NodeKind.ForStatement: {
+      const initializer = node[1];
+      const condition_ = node[2];
+      const incrementor = node[3];
       const init =
-        node[NodeField.initializer] === null
-          ? null
-          : compileStatement(bundle, node[NodeField.initializer]);
-      const test =
-        node[NodeField.condition] === null
-          ? null
-          : compile(bundle, node[NodeField.condition]);
-      const body = compileStatement(bundle, node[NodeField.statement]);
+        initializer === null ? null : compileStatement(bundle, initializer);
+      const test = condition_ === null ? null : compile(bundle, condition_);
+      const body = compileStatement(bundle, node[4]);
       const update =
-        node[NodeField.incrementor] === null
-          ? null
-          : compileStatement(bundle, node[NodeField.incrementor]);
+        incrementor === null ? null : compileStatement(bundle, incrementor);
       return (scope) => {
         // The header binding lives in a scope of the loop's own, so it is gone
         // once the loop is.
@@ -573,20 +561,20 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       return () => continued;
     }
     case NodeKind.ReturnStatement: {
-      const value = compile(bundle, node[NodeField.expression]);
+      const value = compile(bundle, node[1]);
       return (scope) => ({ kind: "returned", value: value(scope) });
     }
     case NodeKind.ThrowStatement: {
-      const thrown = compile(bundle, node[NodeField.expression]);
+      const thrown = compile(bundle, node[1]);
       return (scope) => {
         throw thrown(scope);
       };
     }
     case NodeKind.TryStatement: {
-      const attempted = compileStatement(bundle, node[NodeField.tryBlock]);
-      const clause = node[NodeField.catchClause];
-      const caught = clause[NodeField.variableDeclaration];
-      const handler = compileStatement(bundle, clause[NodeField.block]);
+      const attempted = compileStatement(bundle, node[1]);
+      const clause = node[2];
+      const caught = clause[1];
+      const handler = compileStatement(bundle, clause[2]);
       return (scope) => {
         try {
           return attempted(scope);
@@ -616,13 +604,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
 function isSpread(
   element: BundleArrayElement,
 ): element is BundleSpreadElementNode {
-  return (
-    typeof element === "object" &&
-    element !== null &&
-    !Array.isArray(element) &&
-    "#" in element &&
-    element["#"] === NodeKind.SpreadElement
-  );
+  return Array.isArray(element) && element[0] === NodeKind.SpreadElement;
 }
 
 // A list that may hold `...xs`: each member answers with one value or with the
@@ -641,10 +623,7 @@ function compileElements(
     isSpread(element as BundleArrayElement)
       ? {
           spread: true,
-          read: compile(
-            bundle,
-            (element as BundleSpreadElementNode)[NodeField.expression],
-          ),
+          read: compile(bundle, (element as BundleSpreadElementNode)[1]),
         }
       : { spread: false, read: compile(bundle, element as Source) },
   );
@@ -737,18 +716,6 @@ function condition(value: Value, what: string): boolean {
     `${what} must be \`true\` or \`false\`: this language has no truthiness, ` +
       `and this bundle produced ${JSON.stringify(value) ?? typeof value}.`,
   );
-}
-
-// The `=` half of `BundleBinaryExpressionNode`, whose left is an identifier. A
-// predicate rather than a comparison at the use site: the field is reached by a
-// computed key, which TypeScript won't narrow a union through on its own.
-function isAssignment(
-  node: BundleBinaryExpressionNode,
-): node is Extract<
-  BundleBinaryExpressionNode,
-  { [NodeField.operatorToken]: "=" }
-> {
-  return node[NodeField.operatorToken] === "=";
 }
 
 function compileBinop(

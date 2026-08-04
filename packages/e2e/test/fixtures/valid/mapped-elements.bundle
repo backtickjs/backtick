@@ -1,42 +1,48 @@
 {
   "functions": {
-    "0": {
-      "y": {
-        "#": 1005,
-        "s": {
-          "#": 0,
-          "a": "View",
-          "c": {
+    "0": [
+      [
+        1005,
+        [],
+        [
+          0,
+          "View",
+          {
             "children": [
-              {
-                "#": 0,
-                "a": "Text",
-                "c": {
-                  "children": "alpha"
-                }
-              },
-              {
-                "#": 0,
-                "a": "Text",
-                "c": {
-                  "children": "beta"
-                }
-              },
-              {
-                "#": 0,
-                "a": "Text",
-                "c": {
-                  "children": "gamma"
-                }
-              }
+              4,
+              [
+                [
+                  0,
+                  "Text",
+                  {
+                    "children": "alpha"
+                  }
+                ],
+                [
+                  0,
+                  "Text",
+                  {
+                    "children": "beta"
+                  }
+                ],
+                [
+                  0,
+                  "Text",
+                  {
+                    "children": "gamma"
+                  }
+                ]
+              ]
             ]
           }
-        }
-      }
-    }
+        ]
+      ],
+      false
+    ]
   },
-  "root": {
-    "#": 2,
-    "f": "0"
-  }
+  "root": [
+    2,
+    "0",
+    []
+  ]
 }

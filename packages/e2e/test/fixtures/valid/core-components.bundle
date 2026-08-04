@@ -1,60 +1,70 @@
 {
   "functions": {
-    "0": {
-      "y": {
-        "#": 1005,
-        "s": {
-          "#": 1005,
-          "s": {
-            "#": 1006
-          }
-        }
-      },
-      "ab": true
-    },
-    "1": {
-      "y": {
-        "#": 1005,
-        "s": {
-          "#": 0,
-          "a": "View",
-          "c": {
+    "0": [
+      [
+        1005,
+        [],
+        [
+          1005,
+          [],
+          [
+            1006,
+            []
+          ]
+        ]
+      ],
+      true
+    ],
+    "1": [
+      [
+        1005,
+        [],
+        [
+          0,
+          "View",
+          {
             "style": {
               "padding": 8
             },
             "children": [
-              {
-                "#": 0,
-                "a": "Text",
-                "c": {
-                  "style": {
-                    "fontSize": 12
-                  },
-                  "onPress": {
-                    "#": 2,
-                    "f": "0"
-                  },
-                  "children": "hi"
-                }
-              },
-              {
-                "#": 0,
-                "a": "Image",
-                "c": {
-                  "source": {
-                    "uri": "https://example.com/a.png"
-                  },
-                  "resizeMode": "cover"
-                }
-              }
+              4,
+              [
+                [
+                  0,
+                  "Text",
+                  {
+                    "style": {
+                      "fontSize": 12
+                    },
+                    "onPress": [
+                      2,
+                      "0",
+                      []
+                    ],
+                    "children": "hi"
+                  }
+                ],
+                [
+                  0,
+                  "Image",
+                  {
+                    "source": {
+                      "uri": "https://example.com/a.png"
+                    },
+                    "resizeMode": "cover"
+                  }
+                ]
+              ]
             ]
           }
-        }
-      }
-    }
+        ]
+      ],
+      false
+    ]
   },
-  "root": {
-    "#": 2,
-    "f": "1"
-  }
+  "root": [
+    2,
+    "1",
+    []
+  ]
 }

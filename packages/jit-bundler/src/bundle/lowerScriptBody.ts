@@ -9,7 +9,7 @@ import type {
 } from "@backtickjs/cs-runtime";
 import type { IrScriptEntry } from "../ir/Ir.js";
 import { sourceName } from "./bindingKey.js";
-import { NodeKind, NodeField } from "./Bundle.js";
+import { NodeKind } from "./Bundle.js";
 import type {
   BundleArrayElement,
   BundleBlockNode,
@@ -24,10 +24,7 @@ import type {
 export function parameterNodes(
   names: readonly string[],
 ): BundleParameterNode[] {
-  return names.map((name) => ({
-    "#": NodeKind.Parameter,
-    [NodeField.name]: name,
-  }));
+  return names.map((name) => [NodeKind.Parameter, name]);
 }
 
 // Lowers a script to its wire `BundleBody`. The mapping mirrors the grammar —
@@ -53,10 +50,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
   );
   const read = (key: string): BundleExpressionNode => {
     const at = captureIndex.get(key);
-    return {
-      "#": NodeKind.Identifier,
-      [NodeField.text]: at === undefined ? sourceName(key) : `$${at}`,
-    };
+    return [NodeKind.Identifier, at === undefined ? sourceName(key) : `$${at}`];
   };
 
   // The body names holes by key; a reference's `args` are positional in the
@@ -78,14 +72,12 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     const args = [...(script.spliceParams[key] ?? []), ...script.captures].map(
       (bound) => read(bound),
     );
-    return {
-      "#": NodeKind.CallExpression,
-      [NodeField.expression]: {
-        "#": NodeKind.Identifier,
-        [NodeField.text]: `$${index}`,
-      },
-      ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-    };
+    return [
+      NodeKind.CallExpression,
+      [NodeKind.Identifier, `$${index}`],
+      false,
+      args,
+    ];
   };
 
   const buildBody = (node: ClientScriptBody): BundleBody =>
@@ -95,13 +87,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     const statements = node.statements.map((statement) =>
       buildStatement(statement),
     );
-    return {
-      "#": NodeKind.Block,
-      // An empty container is left out rather than spelled out (see `Bundle.ts`).
-      ...(statements.length === 0
-        ? {}
-        : { [NodeField.statements]: statements }),
-    };
+    return [NodeKind.Block, statements];
   }
 
   // The wire keeps a declaration flat: TypeScript's three nodes say where the
@@ -114,77 +100,67 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     if (declaration === undefined) {
       throw new Error("A declaration list must declare a variable.");
     }
-    return {
-      "#": NodeKind.VariableDeclaration,
-      [NodeField.name]: sourceName(declaration.name.bindingKey),
-      [NodeField.initializer]: buildExpression(declaration.initializer),
-      [NodeField.keyword]: list.keyword,
-    };
+    return [
+      NodeKind.VariableDeclaration,
+      sourceName(declaration.name.bindingKey),
+      buildExpression(declaration.initializer),
+      list.keyword,
+    ];
   }
 
   function buildStatement(node: ClientScriptStatement): BundleStatementNode {
     switch (node.kind) {
       case SyntaxKind.Block:
         return buildBlock(node);
-      case SyntaxKind.IfStatement:
-        return {
-          "#": NodeKind.IfStatement,
-          [NodeField.expression]: buildExpression(node.expression),
-          [NodeField.thenStatement]: buildStatement(node.thenStatement),
-          [NodeField.elseStatement]:
-            node.elseStatement === null
-              ? null
-              : buildStatement(node.elseStatement),
-        };
+      case SyntaxKind.IfStatement: {
+        return [
+          NodeKind.IfStatement,
+          buildExpression(node.expression),
+          buildStatement(node.thenStatement),
+          node.elseStatement === null
+            ? null
+            : buildStatement(node.elseStatement),
+        ];
+      }
       case SyntaxKind.WhileStatement:
-        return {
-          "#": NodeKind.WhileStatement,
-          [NodeField.expression]: buildExpression(node.expression),
-          [NodeField.statement]: buildStatement(node.statement),
-        };
+        return [
+          NodeKind.WhileStatement,
+          buildExpression(node.expression),
+          buildStatement(node.statement),
+        ];
       case SyntaxKind.ForStatement:
-        return {
-          "#": NodeKind.ForStatement,
-          [NodeField.initializer]:
-            node.initializer === null
-              ? null
-              : node.initializer.kind === SyntaxKind.VariableDeclarationList
-                ? buildDeclarationList(node.initializer)
-                : buildStatement(node.initializer),
-          [NodeField.condition]:
-            node.condition === null ? null : buildExpression(node.condition),
-          [NodeField.incrementor]:
-            node.incrementor === null ? null : buildStatement(node.incrementor),
-          [NodeField.statement]: buildStatement(node.statement),
-        };
+        return [
+          NodeKind.ForStatement,
+          node.initializer === null
+            ? null
+            : node.initializer.kind === SyntaxKind.VariableDeclarationList
+              ? buildDeclarationList(node.initializer)
+              : buildStatement(node.initializer),
+          node.condition === null ? null : buildExpression(node.condition),
+          node.incrementor === null ? null : buildStatement(node.incrementor),
+          buildStatement(node.statement),
+        ];
       case SyntaxKind.BreakStatement:
-        return { "#": NodeKind.BreakStatement };
+        return [NodeKind.BreakStatement];
       case SyntaxKind.ContinueStatement:
-        return { "#": NodeKind.ContinueStatement };
+        return [NodeKind.ContinueStatement];
       case SyntaxKind.ReturnStatement:
-        return {
-          "#": NodeKind.ReturnStatement,
-          [NodeField.expression]: buildExpression(node.expression),
-        };
+        return [NodeKind.ReturnStatement, buildExpression(node.expression)];
       case SyntaxKind.ThrowStatement:
-        return {
-          "#": NodeKind.ThrowStatement,
-          [NodeField.expression]: buildExpression(node.expression),
-        };
+        return [NodeKind.ThrowStatement, buildExpression(node.expression)];
       case SyntaxKind.TryStatement: {
         const clause = node.catchClause;
-        return {
-          "#": NodeKind.TryStatement,
-          [NodeField.tryBlock]: buildBlock(node.tryBlock),
-          [NodeField.catchClause]: {
-            "#": NodeKind.CatchClause,
-            [NodeField.variableDeclaration]:
-              clause.variableDeclaration === null
-                ? null
-                : sourceName(clause.variableDeclaration.bindingKey),
-            [NodeField.block]: buildBlock(clause.block),
-          },
-        };
+        return [
+          NodeKind.TryStatement,
+          buildBlock(node.tryBlock),
+          [
+            NodeKind.CatchClause,
+            clause.variableDeclaration === null
+              ? null
+              : sourceName(clause.variableDeclaration.bindingKey),
+            buildBlock(clause.block),
+          ],
+        ];
       }
       case SyntaxKind.VariableStatement:
         return buildDeclarationList(node.declarationList);
@@ -200,25 +176,21 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
     // Where a list admits `...xs` as well as a value.
     const element = (child: ClientScriptArrayElement): BundleArrayElement =>
       child.kind === SyntaxKind.SpreadElement
-        ? {
-            "#": NodeKind.SpreadElement,
-            [NodeField.expression]: buildExpression(child.expression),
-          }
+        ? [NodeKind.SpreadElement, buildExpression(child.expression)]
         : buildExpression(child);
     switch (node.kind) {
       case SyntaxKind.ArrayLiteralExpression:
-        return node.elements.map(element);
+        // Data, and a node is an array too, so it says which it is.
+        return [NodeKind.DataArray, node.elements.map(element)];
       case SyntaxKind.ArrowFunction: {
         const params = node.parameters.map((param) =>
           sourceName(param.name.bindingKey),
         );
-        return {
-          "#": NodeKind.ArrowFunction,
-          ...(params.length === 0
-            ? {}
-            : { [NodeField.parameters]: parameterNodes(params) }),
-          [NodeField.body]: buildBody(node.body),
-        };
+        return [
+          NodeKind.ArrowFunction,
+          parameterNodes(params),
+          buildBody(node.body),
+        ];
       }
       case SyntaxKind.BinaryExpression: {
         if (node.operatorToken === "=") {
@@ -227,22 +199,19 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
           if (node.left.kind !== SyntaxKind.Identifier) {
             throw new Error("An assignment target must be an identifier.");
           }
-          return {
-            "#": NodeKind.BinaryExpression,
-            [NodeField.operatorToken]: "=",
-            [NodeField.left]: {
-              "#": NodeKind.Identifier,
-              [NodeField.text]: sourceName(node.left.bindingKey),
-            },
-            [NodeField.right]: e(node.right),
-          };
+          return [
+            NodeKind.BinaryExpression,
+            "=",
+            [NodeKind.Identifier, sourceName(node.left.bindingKey)],
+            e(node.right),
+          ];
         }
-        return {
-          "#": NodeKind.BinaryExpression,
-          [NodeField.operatorToken]: node.operatorToken,
-          [NodeField.left]: e(node.left),
-          [NodeField.right]: e(node.right),
-        };
+        return [
+          NodeKind.BinaryExpression,
+          node.operatorToken,
+          e(node.left),
+          e(node.right),
+        ];
       }
       case SyntaxKind.PrefixUnaryExpression:
         // A negative literal carries itself, like every other literal here: the
@@ -253,18 +222,14 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         ) {
           return -node.operand.value;
         }
-        return {
-          "#": NodeKind.PrefixUnaryExpression,
-          [NodeField.operator]: node.operator,
-          [NodeField.operand]: e(node.operand),
-        };
+        return [NodeKind.PrefixUnaryExpression, node.operator, e(node.operand)];
       case SyntaxKind.ConditionalExpression:
-        return {
-          "#": NodeKind.ConditionalExpression,
-          [NodeField.condition]: e(node.condition),
-          [NodeField.whenTrue]: e(node.whenTrue),
-          [NodeField.whenFalse]: e(node.whenFalse),
-        };
+        return [
+          NodeKind.ConditionalExpression,
+          e(node.condition),
+          e(node.whenTrue),
+          e(node.whenFalse),
+        ];
       case SyntaxKind.TrueKeyword:
         return true;
       case SyntaxKind.FalseKeyword:
@@ -275,14 +240,7 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         // taken. Binding them here keeps that order explicit.
         const callee = e(node.expression);
         const args = node.arguments.map(element);
-        return {
-          "#": NodeKind.CallExpression,
-          [NodeField.expression]: callee,
-          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-          [NodeField.questionDotToken]: node.questionDotToken
-            ? true
-            : undefined,
-        };
+        return [NodeKind.CallExpression, callee, node.questionDotToken, args];
       }
       case SyntaxKind.Identifier:
         return read(node.bindingKey);
@@ -293,53 +251,39 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         // the client's argument values to the holes when it runs.
         const callee = e(node.expression);
         const args = node.arguments.map(e);
-        return {
-          "#": NodeKind.CallExpression,
-          [NodeField.expression]: callee,
-          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-        };
+        return [NodeKind.CallExpression, callee, false, args];
       }
       case SyntaxKind.NullKeyword:
         return null;
       case SyntaxKind.NumericLiteral:
         return node.value;
       case SyntaxKind.ObjectLiteralExpression: {
-        // An object literal serializes as the plain object it spells, so `#` —
-        // the bundle's one reserved key — would read as a node. Its property
-        // assignments are the source's shape, not the wire's: what ships is
-        // data, which is what lets a spliced object pass through untouched.
+        // An object literal serializes as the plain object it spells. Its
+        // property assignments are the source's shape, not the wire's: what
+        // ships is data, which is what lets a spliced object pass through
+        // untouched — every key of it, the format reserving none.
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const property of node.properties) {
-          if (property.name === "#") {
-            throw new Error(
-              "Can't bundle this object: the `#` key is reserved.",
-            );
-          }
           entries[property.name] = e(property.initializer);
         }
         return entries;
       }
       case SyntaxKind.PropertyAccessExpression: {
-        return {
-          "#": NodeKind.PropertyAccessExpression,
-          [NodeField.expression]: e(node.expression),
-          [NodeField.name]: node.name,
-          [NodeField.questionDotToken]: node.questionDotToken
-            ? true
-            : undefined,
-        };
+        return [
+          NodeKind.PropertyAccessExpression,
+          e(node.expression),
+          node.questionDotToken,
+          node.name,
+        ];
       }
       case SyntaxKind.ElementAccessExpression:
-        return {
-          "#": NodeKind.ElementAccessExpression,
-          [NodeField.expression]: e(node.expression),
-          [NodeField.argumentExpression]: e(node.argumentExpression),
-        };
+        return [
+          NodeKind.ElementAccessExpression,
+          e(node.expression),
+          e(node.argumentExpression),
+        ];
       case SyntaxKind.Builtin:
-        return {
-          "#": NodeKind.Builtin,
-          [NodeField.name]: node.name,
-        };
+        return [NodeKind.Builtin, node.name];
       case SyntaxKind.Splice:
         return renderSplice(node.key);
       case SyntaxKind.StringLiteral:

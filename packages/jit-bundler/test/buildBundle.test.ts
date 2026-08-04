@@ -30,5 +30,5 @@ test("labels an entry by where its script was written on request", () => {
   const located = buildBundle(ir, { functionLabels: "location" });
   assert.deepEqual(Object.keys(located.functions), ["abc:3:7"]);
   // The reference names the same thing, so a bundle reads on its own.
-  assert.deepEqual(located.root, { "#": NodeKind.ApplyFunction, f: "abc:3:7" });
+  assert.deepEqual(located.root, [NodeKind.ApplyFunction, "abc:3:7", []]);
 });

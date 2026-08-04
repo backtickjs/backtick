@@ -1,7 +1,6 @@
-export { NodeKind, NodeField } from "./bundle/Bundle.js";
+export { NodeKind } from "./bundle/Bundle.js";
 export type {
   Bundle,
-  BundleApplyFunction,
   BundleArrowFunctionNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
@@ -13,6 +12,7 @@ export type {
   BundleContinueStatementNode,
   BundleVariableDeclarationNode,
   BundleElement,
+  BundleDataArrayNode,
   BundleForStatementNode,
   BundleExpressionNode,
   BundleFunction,

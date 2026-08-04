@@ -10,10 +10,11 @@ import type {
 import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
 import { markFixed } from "./markFixed.js";
 import { locKey } from "../locKey.js";
-import { NodeKind, NodeField } from "./Bundle.js";
+import { NodeKind } from "./Bundle.js";
 import type {
   Bundle,
   BundleArrowFunctionNode,
+  BundleBody,
   BundleFunction,
   BundleCallExpressionNode,
   BundleElement,
@@ -78,10 +79,10 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // entry resolves its captures against its own parameters (see
   // `lowerScriptBody`) — out here a key is a name in the expression being
   // built.
-  const readKey = (key: string): BundleExpressionNode => ({
-    "#": NodeKind.Identifier,
-    [NodeField.name]: displayName(key),
-  });
+  const readKey = (key: string): BundleExpressionNode => [
+    NodeKind.Identifier,
+    displayName(key),
+  ];
 
   // A binding key printed under its source name, with a numeric suffix when two
   // distinct bindings would otherwise print the same — within one naming scope.
@@ -315,15 +316,13 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
-      expansionBodies.set(label, {
-        "#": NodeKind.ArrowFunction,
-        ...(params.length === 0
-          ? {}
-          : { [NodeField.parameters]: parameterNodes(params) }),
-        [NodeField.body]: expansionBody,
-      });
+      expansionBodies.set(label, [
+        NodeKind.ArrowFunction,
+        parameterNodes(params),
+        expansionBody,
+      ]);
     }
-    return { "#": NodeKind.GetFunction, [NodeField.label]: label };
+    return [NodeKind.GetFunction, label];
   };
 
   // Materializes an entry's arrow node into `bodies` the first time it is
@@ -338,14 +337,11 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     const params = [...script.splices, ...script.captures].map(
       (_, index) => `$${index}`,
     );
-    const arrow = {
-      "#": NodeKind.ArrowFunction,
-      ...(params.length === 0
-        ? {}
-        : { [NodeField.parameters]: parameterNodes(params) }),
-      [NodeField.body]: lowerScriptBody(script),
-    };
-    bodies.set(script, arrow);
+    bodies.set(script, [
+      NodeKind.ArrowFunction,
+      parameterNodes(params),
+      lowerScriptBody(script),
+    ]);
   };
 
   // The arguments passed when calling an entry: one thunk per splice, bound to
@@ -381,10 +377,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       return null;
     }
     materialize(value.target);
-    return {
-      "#": NodeKind.GetFunction,
-      [NodeField.label]: fnLabel(value.target),
-    };
+    return [NodeKind.GetFunction, fnLabel(value.target)];
   };
 
   // Instantiating a tree in value position: which entry, and what to hand
@@ -402,11 +395,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const instantiation = (value: IrTreeRef): BundleExpressionNode => {
     materializeTree(value.target);
     const args: BundleExpressionNode[] = treeParams(value.target).map(readKey);
-    return {
-      "#": NodeKind.ApplyFunction,
-      [NodeField.label]: treeLabel(value.target),
-      ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-    };
+    return [NodeKind.ApplyFunction, treeLabel(value.target), args];
   };
 
   // Renders an IR argument in value position — as the node for the value it
@@ -418,14 +407,11 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       case "IrScriptRef": {
         materialize(value.target);
         const args = callArgs(value);
-        return {
-          "#": NodeKind.CallExpression,
-          [NodeField.expression]: {
-            "#": NodeKind.GetFunction,
-            [NodeField.label]: fnLabel(value.target),
-          },
-          ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-        };
+        const entry: BundleGetFunction = [
+          NodeKind.GetFunction,
+          fnLabel(value.target),
+        ];
+        return [NodeKind.CallExpression, entry, false, args];
       }
       case "IrTreeRef":
         return instantiation(value);
@@ -448,13 +434,10 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       case "IrHole":
         return readKey(value.name);
       case "IrArray":
-        return value.elements.map(renderValue);
+        // Data, and a node is an array too, so it says which it is.
+        return [NodeKind.DataArray, value.elements.map(renderValue)];
       case "IrObject": {
-        // A plain data object passes through, exactly as in `renderExpr`, so
-        // it can't carry `#` — the bundle's one reserved key.
-        if ("#" in value.entries) {
-          throw new Error("Can't bundle this object: the `#` key is reserved.");
-        }
+        // A plain data object passes through, exactly as in `renderExpr`.
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
           entries[key] = renderValue(entry);
@@ -478,31 +461,26 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   ): BundleExpressionNode => {
     const params = passKeys(target, hole).map(displayName);
     if (params.length > 0) {
-      return {
-        "#": NodeKind.ArrowFunction,
-        ...(params.length === 0
-          ? {}
-          : { [NodeField.parameters]: parameterNodes(params) }),
-        [NodeField.body]: renderValue(value),
-      };
+      return [
+        NodeKind.ArrowFunction,
+        parameterNodes(params),
+        renderValue(value),
+      ];
     }
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       const args = callArgs(value);
-      const entry = {
-        "#": NodeKind.GetFunction,
-        [NodeField.label]: fnLabel(value.target),
-      } as const satisfies BundleExpressionNode;
-      return args.length === 0
-        ? entry
-        : {
-            "#": NodeKind.ArrowFunction,
-            [NodeField.body]: {
-              "#": NodeKind.CallExpression,
-              [NodeField.expression]: entry,
-              [NodeField.arguments]: args,
-            } satisfies BundleCallExpressionNode,
-          };
+      const entry: BundleGetFunction = [
+        NodeKind.GetFunction,
+        fnLabel(value.target),
+      ];
+      const call: BundleCallExpressionNode = [
+        NodeKind.CallExpression,
+        entry,
+        false,
+        args,
+      ];
+      return args.length === 0 ? entry : [NodeKind.ArrowFunction, [], call];
     }
     if (value.kind === "IrTreeRef") {
       // A hole calls what it is handed, so what it is handed is a body to run:
@@ -511,15 +489,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       // of its own to say, and this says it with the one every other reference
       // uses.
       materializeTree(value.target);
-      return {
-        "#": NodeKind.ArrowFunction,
-        [NodeField.body]: instantiation(value),
-      };
+      return [NodeKind.ArrowFunction, [], instantiation(value)];
     }
-    return {
-      "#": NodeKind.ArrowFunction,
-      [NodeField.body]: renderValue(value),
-    };
+    return [NodeKind.ArrowFunction, [], renderValue(value)];
   };
 
   const treeJsons = new Map<number, BundleFunction>();
@@ -539,20 +511,19 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const cellBinding = (
     name: string,
     initial: IrArgument,
-  ): BundleVariableDeclarationNode => ({
-    "#": NodeKind.VariableDeclaration,
-    [NodeField.name]: name,
-    [NodeField.keyword]: "const",
-    [NodeField.initializer]: {
-      "#": NodeKind.CallExpression,
-      [NodeField.expression]: { "#": NodeKind.Builtin, [NodeField.name]: "state" },
+  ): BundleVariableDeclarationNode => [
+    NodeKind.VariableDeclaration,
+    name,
+    [
+      NodeKind.CallExpression,
+      [NodeKind.Builtin, "state"],
+      false,
       // A cell's initial is data (`state-in-state-initial` rejects anything that
       // reads), so it is an expression node wherever it renders.
-      [NodeField.arguments]: [
-        renderExpr(initial, noInstance()) as BundleExpressionNode,
-      ],
-    },
-  });
+      [renderExpr(initial, noInstance()) as BundleExpressionNode],
+    ],
+    "const",
+  ];
 
   // An entry as its arrow: the cells it declares, then what it draws. A body
   // only where there is something to bind — otherwise the arrow is its content.
@@ -560,27 +531,19 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     params: string[],
     bindings: BundleVariableDeclarationNode[],
     drawn: BundleExpressionNode,
-  ): BundleFunction => ({
-    [NodeField.content]: {
-      "#": NodeKind.ArrowFunction,
-      ...(params.length === 0
-        ? {}
-        : { [NodeField.parameters]: parameterNodes(params) }),
-      [NodeField.body]:
-        bindings.length === 0
-          ? (drawn as BundleExpressionNode)
-          : {
-              "#": NodeKind.Block,
-              [NodeField.statements]: [
-                ...bindings,
-                {
-                  "#": NodeKind.ReturnStatement,
-                  [NodeField.expression]: drawn as BundleExpressionNode,
-                },
-              ],
-            },
-    },
-  });
+  ): BundleFunction => {
+    const body: BundleBody =
+      bindings.length === 0
+        ? (drawn as BundleExpressionNode)
+        : [
+            NodeKind.Block,
+            [
+              ...bindings,
+              [NodeKind.ReturnStatement, drawn as BundleExpressionNode],
+            ],
+          ];
+    return [[NodeKind.ArrowFunction, parameterNodes(params), body], false];
+  };
 
   const buildTree = (target: number): void => {
     const keys = treeParams(target);
@@ -616,11 +579,11 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     const args = treeParams(content.target).map((key) => capExpr(key, scope));
     treeJsons.set(
       target,
-      treeEntry(names, bindings, {
-        "#": NodeKind.ApplyFunction,
-        [NodeField.label]: treeLabel(content.target),
-        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-      }),
+      treeEntry(names, bindings, [
+        NodeKind.ApplyFunction,
+        treeLabel(content.target),
+        args,
+      ]),
     );
   };
 
@@ -635,12 +598,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     params: ReadonlySet<string> = new Set(),
   ): BundleIdentifierNode => {
     if (params.has(key)) {
-      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+      return [NodeKind.Identifier, displayName(key)];
     }
     // Before the cell case: a cell this entry doesn't own arrives as a
     // parameter, and only one it owns is bound here.
     if (scope.params.has(key)) {
-      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+      return [NodeKind.Identifier, displayName(key)];
     }
     if (isCellKey(key)) {
       // The one place a `cell` node is made, so the rule `Bundle.ts` states —
@@ -664,7 +627,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
             "prop. Pass it down, or declare a cell where it is read.",
         );
       }
-      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
+      return [NodeKind.Identifier, displayName(key)];
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -700,19 +663,20 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         return;
       }
       if (passed.length === 0) {
-        parts.push({
-          "#": NodeKind.ArrowFunction,
-          [NodeField.body]: renderExpr(arg, scope, params),
-        });
+        parts.push([
+          NodeKind.ArrowFunction,
+          [],
+          renderExpr(arg, scope, params),
+        ]);
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
-      parts.push({
-        "#": NodeKind.ArrowFunction,
-        [NodeField.parameters]: parameterNodes(passed.map(displayName)),
-        [NodeField.body]: renderExpr(arg, scope, inner),
-      });
+      parts.push([
+        NodeKind.ArrowFunction,
+        parameterNodes(passed.map(displayName)),
+        renderExpr(arg, scope, inner),
+      ]);
     });
     for (const key of ref.target.captures) {
       parts.push(capExpr(key, scope, params));
@@ -731,11 +695,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = renderExpr(entry, scope, params);
     }
-    return {
-      "#": NodeKind.Element,
-      [NodeField.id]: element.id,
-      ...(Object.keys(props).length === 0 ? {} : { [NodeField.props]: props }),
-    };
+    return [NodeKind.Element, element.id, props];
   };
 
   // Renders an IR argument in expression position — the form used inside tree
@@ -749,22 +709,14 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       const args = exprCallArgs(value, scope, params);
-      return {
-        "#": NodeKind.ApplyFunction,
-        [NodeField.label]: fnLabel(value.target),
-        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-      };
+      return [NodeKind.ApplyFunction, fnLabel(value.target), args];
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
       const args = treeParams(value.target).map((key) =>
         capExpr(key, scope, params),
       );
-      return {
-        "#": NodeKind.ApplyFunction,
-        [NodeField.label]: treeLabel(value.target),
-        ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-      };
+      return [NodeKind.ApplyFunction, treeLabel(value.target), args];
     }
     if (value.kind === "IrElement") {
       return renderElement(value, scope, params);
@@ -785,28 +737,24 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if (value.kind === "IrExpansion") {
       // The expansion's params extend the enclosing ones, like a nested
       // frame, so a hole threading into the body resolves by name.
-      return {
-        "#": NodeKind.ArrowFunction,
-        [NodeField.parameters]: parameterNodes(value.params),
-        [NodeField.body]: renderExpr(
-          value.body,
-          scope,
-          new Set([...params, ...value.params]),
-        ),
-      };
+      return [
+        NodeKind.ArrowFunction,
+        parameterNodes(value.params),
+        renderExpr(value.body, scope, new Set([...params, ...value.params])),
+      ];
     }
     if (value.kind === "IrHole") {
-      return { "#": NodeKind.Identifier, [NodeField.name]: value.name };
+      return [NodeKind.Identifier, value.name];
     }
     if (value.kind === "IrArray") {
-      return value.elements.map((entry) => renderExpr(entry, scope, params));
+      // Data, and a node is an array too, so it says which it is.
+      return [
+        NodeKind.DataArray,
+        value.elements.map((entry) => renderExpr(entry, scope, params)),
+      ];
     }
-    // A plain data object passes through. `#` is the bundle's one
-    // reserved key — the discriminant of every node — so an object
-    // carrying it would be indistinguishable from a node to the loader.
-    if ("#" in value.entries) {
-      throw new Error("Can't bundle this object: the `#` key is reserved.");
-    }
+    // A plain data object passes through, every key of it: a node is an array,
+    // so an object is never mistaken for one and the format reserves no key.
     const entries: { [key: string]: BundleExpressionNode } = {};
     for (const [key, entry] of Object.entries(value.entries)) {
       entries[key] = renderExpr(entry, scope, params);
@@ -821,7 +769,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   for (const script of ir.scripts) {
     const body = bodies.get(script);
     if (body !== undefined) {
-      functions[fnLabel(script)] = { [NodeField.content]: body };
+      functions[fnLabel(script)] = [body, false];
     }
   }
   // Last, with the table whole: an entry's body is only whole once every
@@ -833,7 +781,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     functions[treeLabel(index)] = tree;
   }
   for (const [label, body] of expansionBodies) {
-    functions[label] = { [NodeField.content]: body };
+    functions[label] = [body, false];
   }
   return { functions, root };
 }

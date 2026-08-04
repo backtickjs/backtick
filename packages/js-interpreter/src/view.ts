@@ -1,4 +1,4 @@
-import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
+import { NodeKind } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleArrayElement,
@@ -133,7 +133,7 @@ export function compileElement(
   bundle: Bundle,
   element: BundleElement,
 ): Compiled {
-  const id = element[NodeField.id];
+  const id = element[1];
   // The two elements every target has, recognized by the id they agree on.
   // Neither draws a node: one puts its children where it stands, the other
   // draws one thing per member of an array.
@@ -152,13 +152,13 @@ export function compileElement(
   // would make it move, so it takes the same path a handler does: set once, and
   // never looked at again. A computation watching a constant would be a
   // computation per attribute per element for nothing.
-  const props = Object.entries(element[NodeField.props] ?? {})
+  const props = Object.entries(element[2])
     .filter(([prop]) => prop !== "children")
     .map(([prop, expr]) => {
       const fixed = isFixed(bundle, expr);
       return [prop, compile(bundle, expr), fixed] as const;
     });
-  const children = element[NodeField.props]?.["children"];
+  const children = element[2]["children"];
   const draw =
     children === undefined ? null : compileChildren(bundle, children);
   return (scope) => {
@@ -208,8 +208,11 @@ function compileChildren(
   bundle: Bundle,
   expr: BundleArrayElement,
 ): (scope: Scope | null) => unknown {
-  if (Array.isArray(expr)) {
-    const members = expr.map((member) => compileChildren(bundle, member));
+  // A list of children travels as data, which is a node like any other.
+  if (Array.isArray(expr) && expr[0] === NodeKind.DataArray) {
+    const members = (expr[1] as BundleArrayElement[]).map((member) =>
+      compileChildren(bundle, member),
+    );
     return (scope) => members.map((member) => member(scope));
   }
   const read = compile(bundle, expr);
@@ -228,37 +231,62 @@ function compileChildren(
 // For an entry applied the bundler answered it, so nothing here walks a body to
 // find out: an entry it could not vouch for carries no mark, and a mark is the
 // only yes. The rest this reads itself, because they are shapes rather than
-// scripts — and what it does not recognize it assumes moves.
+// scripts — every kind saying so for itself, so a kind added without an answer
+// fails to compile rather than defaulting into one.
 function isFixed(bundle: Bundle, expr: BundleArrayElement): boolean {
   if (expr === null || typeof expr !== "object") {
     return true;
   }
-  // A list can move if anything in it can.
-  if (Array.isArray(expr)) {
-    return expr.every((member) => isFixed(bundle, member));
+  if (!Array.isArray(expr)) {
+    // Data, whose keys are the host's: it can move if anything under it can.
+    return Object.values(expr).every((member) =>
+      member === undefined ? true : isFixed(bundle, member),
+    );
   }
-  const node = expr as Record<string, unknown>;
-  // An element is built once and is thereafter its own: every part of it that
-  // can change was bound to a computation of its own when it was built, so the
-  // position holding it never has to look again.
-  if (node["#"] === NodeKind.Element) {
-    return true;
+  switch (expr[0]) {
+    // A list can move if anything in it can.
+    case NodeKind.DataArray: {
+      const [_kind, members] = expr;
+      return members.every((member) => isFixed(bundle, member));
+    }
+    // An element is built once and is thereafter its own: every part of it that
+    // can change was bound to a computation of its own when it was built, so
+    // the position holding it never has to look again.
+    case NodeKind.Element: {
+      return true;
+    }
+    case NodeKind.ApplyFunction: {
+      const [_kind, label] = expr;
+      return bundle.functions[label]?.[1] === true;
+    }
+    // Everything else computes, and computing is what moves — an entry named
+    // rather than applied included, since the position holds whatever calling
+    // it will yield.
+    case NodeKind.GetFunction:
+    case NodeKind.Builtin:
+    case NodeKind.Identifier:
+    case NodeKind.CallExpression:
+    case NodeKind.PropertyAccessExpression:
+    case NodeKind.ElementAccessExpression:
+    case NodeKind.BinaryExpression:
+    case NodeKind.PrefixUnaryExpression:
+    case NodeKind.ConditionalExpression:
+    case NodeKind.ArrowFunction:
+    case NodeKind.SpreadElement: {
+      return false;
+    }
+    default: {
+      const unhandled: never = expr;
+      throw new Error(`Unhandled node kind: ${JSON.stringify(unhandled)}`);
+    }
   }
-  if (node["#"] !== NodeKind.ApplyFunction) {
-    return false;
-  }
-  const label = node[NodeField.label];
-  return (
-    typeof label === "string" &&
-    bundle.functions[label]?.[NodeField.fixed] === true
-  );
 }
 
 /**
  * A fragment: its children where it stands, and no node of its own.
  */
 function compileFragment(bundle: Bundle, element: BundleElement): Compiled {
-  const children = element[NodeField.props]?.["children"];
+  const children = element[2]["children"];
   if (children === undefined) {
     return () => null;
   }
@@ -274,7 +302,7 @@ function compileFragment(bundle: Bundle, element: BundleElement): Compiled {
  * only what is new. Identity is the member's own — nothing here extracts a key.
  */
 function compileFor(bundle: Bundle, element: BundleElement): Compiled {
-  const props = element[NodeField.props] ?? {};
+  const props = element[2];
   const each = props["each"];
   const body = props["children"];
   if (each === undefined || body === undefined) {

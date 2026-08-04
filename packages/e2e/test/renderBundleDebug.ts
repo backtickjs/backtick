@@ -1,4 +1,4 @@
-import { NodeKind, NodeField } from "@backtickjs/core";
+import { NodeKind } from "@backtickjs/core";
 import type {
   Bundle,
   BundleArrayElement,
@@ -17,7 +17,7 @@ export function renderBundleDebug(bundle: Bundle): string {
   const sections: string[] = [];
   for (const [label, entry] of Object.entries(bundle.functions)) {
     sections.push(
-      `${fnLabel(label)} = ${renderNode(entry[NodeField.content], "")}`,
+      `${fnLabel(label)} = ${renderNode(entry[0], "")}`,
     );
   }
   sections.push(`root = ${renderNode(bundle.root, "")}`);
@@ -29,16 +29,12 @@ export function renderBundleDebug(bundle: Bundle): string {
 // `functionLabels: "index"`, so a label is already short and stands for itself.
 const fnLabel = (label: string): string => `#f${label}`;
 
-// A `#`-discriminated node, as opposed to plain JSON carrying itself.
+// A node, as opposed to plain JSON carrying itself: every node is an array,
+// and an array of data travels as one too (`DataArray`).
 function isNode(
   node: BundleStatementNode | BundleExpressionNode,
-): node is Extract<BundleStatementNode | BundleExpressionNode, { "#": NodeKind }> {
-  return (
-    typeof node === "object" &&
-    node !== null &&
-    !Array.isArray(node) &&
-    "#" in node
-  );
+): node is Extract<BundleStatementNode | BundleExpressionNode, { 0: NodeKind }> {
+  return Array.isArray(node);
 }
 
 // Body grammar, as pseudo-JS.
@@ -47,13 +43,7 @@ function isNode(
 function isSpread(
   node: BundleStatementNode | BundleSpreadElementNode,
 ): node is BundleSpreadElementNode {
-  return (
-    typeof node === "object" &&
-    node !== null &&
-    !Array.isArray(node) &&
-    "#" in node &&
-    node["#"] === NodeKind.SpreadElement
-  );
+  return Array.isArray(node) && node[0] === NodeKind.SpreadElement;
 }
 
 function renderNode(
@@ -61,102 +51,97 @@ function renderNode(
   indent: string,
 ): string {
   if (isSpread(node)) {
-    return `...${renderNode(node[NodeField.expression], indent)}`;
+    return `...${renderNode(node[1], indent)}`;
   }
   if (!isNode(node)) {
     return renderData(node, indent, renderNode);
   }
   const inner = `${indent}  `;
-  switch (node["#"]) {
+  switch (node[0]) {
+    // Data, which a node kind carries only so it is not read as a node.
+    case NodeKind.DataArray:
+      return renderData<BundleArrayElement[]>(node[1], indent, renderNode);
     case NodeKind.Identifier:
-      return node[NodeField.text];
+      return node[1];
     case NodeKind.GetFunction:
-      return fnLabel(node[NodeField.label]);
+      return fnLabel(node[1]);
     // What a tree entry's body yields.
     case NodeKind.Element:
       return renderJsx(node, indent);
     // A global the format names and the host answers.
     case NodeKind.Builtin:
-      return node[NodeField.name];
+      return node[1];
     // Same notation as in tree position: a body applies an entry when the
     // instance it makes is named, and calls one when it isn't.
     case NodeKind.ApplyFunction: {
-      const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        renderNode(arg, indent),
-      );
-      return `${fnLabel(node[NodeField.label])}(${args.join(", ")})`;
+      const args = node[2].map((arg) => renderNode(arg, indent));
+      return `${fnLabel(node[1])}(${args.join(", ")})`;
     }
     case NodeKind.CallExpression: {
-      const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        renderNode(arg, indent),
-      );
-      const calleeNode = node[NodeField.expression];
+      const args = node[3].map((arg) => renderNode(arg, indent));
+      const calleeNode = node[1];
       const callee = renderNode(calleeNode, indent);
       // An arrow callee (an expansion applied to its arguments) binds
       // looser than the call — parenthesize so the text reads as it runs.
       const target =
-        isNode(calleeNode) && calleeNode["#"] === NodeKind.ArrowFunction
+        isNode(calleeNode) && calleeNode[0] === NodeKind.ArrowFunction
           ? `(${callee})`
           : callee;
-      return `${target}${node[NodeField.questionDotToken] ? "?." : ""}(${args.join(", ")})`;
+      return `${target}${node[2] ? "?." : ""}(${args.join(", ")})`;
     }
     case NodeKind.PropertyAccessExpression:
-      return `${renderNode(node[NodeField.expression], indent)}${node[NodeField.questionDotToken] ? "?." : "."}${node[NodeField.name]}`;
+      return `${renderNode(node[1], indent)}${node[2] ? "?." : "."}${node[3]}`;
     case NodeKind.ElementAccessExpression:
-      return `${renderNode(node[NodeField.expression], indent)}[${renderNode(node[NodeField.argumentExpression], indent)}]`;
+      return `${renderNode(node[1], indent)}[${renderNode(node[2], indent)}]`;
     case NodeKind.BinaryExpression:
-      return `${renderNode(node[NodeField.left], indent)} ${node[NodeField.operatorToken]} ${renderNode(
-        node[NodeField.right],
+      return `${renderNode(node[2], indent)} ${node[1]} ${renderNode(
+        node[3],
         indent,
       )}`;
     case NodeKind.PrefixUnaryExpression: {
       // `!` binds tighter than any binary operator, so an operand that is one
       // reads as the wrong tree without parentheses.
-      const operand = node[NodeField.operand];
+      const operand = node[2];
       const text = renderNode(operand, indent);
       const looser =
         isNode(operand) &&
-        (operand["#"] === NodeKind.BinaryExpression ||
-          operand["#"] === NodeKind.ConditionalExpression);
-      return `${node[NodeField.operator]}${looser ? `(${text})` : text}`;
+        (operand[0] === NodeKind.BinaryExpression ||
+          operand[0] === NodeKind.ConditionalExpression);
+      return `${node[1]}${looser ? `(${text})` : text}`;
     }
     case NodeKind.ConditionalExpression:
-      return `${renderNode(node[NodeField.condition], indent)} ? ${renderNode(
-        node[NodeField.whenTrue],
+      return `${renderNode(node[1], indent)} ? ${renderNode(
+        node[2],
         indent,
-      )} : ${renderNode(node[NodeField.whenFalse], indent)}`;
+      )} : ${renderNode(node[3], indent)}`;
     case NodeKind.ArrowFunction:
-      return `(${(node[NodeField.parameters] ?? [])
-        .map((param) => param[NodeField.name])
-        .join(", ")}) => ${renderBody(node[NodeField.body], indent)}`;
+      return `(${node[1]
+        .map((param) => param[1])
+        .join(", ")}) => ${renderBody(node[2], indent)}`;
     case NodeKind.Block: {
-      const statements = (node[NodeField.statements] ?? []).map(
+      const statements = node[1].map(
         (statement) => `${inner}${renderStatement(statement, inner)}`,
       );
       return `{\n${statements.join("\n")}\n${indent}}`;
     }
     case NodeKind.VariableDeclaration:
-      return `${node[NodeField.keyword]} ${node[NodeField.name]} = ${renderNode(
-        node[NodeField.initializer],
-        indent,
-      )}`;
+      return `${node[3]} ${node[1]} = ${renderNode(node[2], indent)}`;
     case NodeKind.IfStatement: {
-      const consequent = renderStatement(node[NodeField.thenStatement], indent);
+      const consequent = renderStatement(node[2], indent);
+      const branch = node[3];
       const alternate =
-        node[NodeField.elseStatement] === null
-          ? ""
-          : ` else ${renderStatement(node[NodeField.elseStatement], indent)}`;
-      return `if (${renderNode(node[NodeField.expression], indent)}) ${consequent}${alternate}`;
+        branch === null ? "" : ` else ${renderStatement(branch, indent)}`;
+      return `if (${renderNode(node[1], indent)}) ${consequent}${alternate}`;
     }
     case NodeKind.WhileStatement:
-      return `while (${renderNode(node[NodeField.expression], indent)}) ${renderStatement(
-        node[NodeField.statement],
+      return `while (${renderNode(node[1], indent)}) ${renderStatement(
+        node[2],
         indent,
       )}`;
     case NodeKind.ForStatement: {
-      const init = node[NodeField.initializer];
-      const condition = node[NodeField.condition];
-      const update = node[NodeField.incrementor];
+      const init = node[1];
+      const condition = node[2];
+      const update = node[3];
       const parts = [
         init === null ? "" : renderNode(init, indent),
         condition === null ? "" : renderNode(condition, indent),
@@ -165,22 +150,22 @@ function renderNode(
       const header = parts.every((part) => part === "")
         ? ";;"
         : parts.join("; ");
-      return `for (${header}) ${renderStatement(node[NodeField.statement], indent)}`;
+      return `for (${header}) ${renderStatement(node[4], indent)}`;
     }
     case NodeKind.BreakStatement:
       return "break";
     case NodeKind.ContinueStatement:
       return "continue";
     case NodeKind.ReturnStatement:
-      return `return ${renderNode(node[NodeField.expression], indent)}`;
+      return `return ${renderNode(node[1], indent)}`;
     case NodeKind.ThrowStatement:
-      return `throw ${renderNode(node[NodeField.expression], indent)}`;
+      return `throw ${renderNode(node[1], indent)}`;
     case NodeKind.TryStatement: {
-      const clause = node[NodeField.catchClause];
-      const bound = clause[NodeField.variableDeclaration];
+      const clause = node[2];
+      const bound = clause[1];
       const param = bound === null ? "" : ` (${bound})`;
-      return `try ${renderNode(node[NodeField.tryBlock], indent)} catch${param} ${renderNode(
-        clause[NodeField.block],
+      return `try ${renderNode(node[1], indent)} catch${param} ${renderNode(
+        clause[2],
         indent,
       )}`;
     }
@@ -192,18 +177,18 @@ function renderNode(
 function renderStatement(node: BundleStatementNode, indent: string): string {
   const text = renderNode(node, indent);
   return isNode(node) &&
-    (node["#"] === NodeKind.Block ||
-      node["#"] === NodeKind.IfStatement ||
-      node["#"] === NodeKind.WhileStatement ||
-      node["#"] === NodeKind.ForStatement ||
-      node["#"] === NodeKind.TryStatement)
+    (node[0] === NodeKind.Block ||
+      node[0] === NodeKind.IfStatement ||
+      node[0] === NodeKind.WhileStatement ||
+      node[0] === NodeKind.ForStatement ||
+      node[0] === NodeKind.TryStatement)
     ? text
     : `${text};`;
 }
 
 // An arrow body: a block, or an expression implicitly returned.
 function renderBody(body: BundleBody, indent: string): string {
-  if (isNode(body) && body["#"] === NodeKind.Block) {
+  if (isNode(body) && body[0] === NodeKind.Block) {
     return renderNode(body, indent);
   }
   return renderNode(body as BundleExpressionNode, indent);
@@ -215,24 +200,27 @@ function renderJsx(element: BundleElement, indent: string): string {
   const inner = `${indent}  `;
   const attributes: string[] = [];
   let children: BundleArrayElement[] = [];
-  for (const [prop, value] of Object.entries(element[NodeField.props] ?? {})) {
+  for (const [prop, value] of Object.entries(element[2])) {
     if (prop === "children") {
-      children = Array.isArray(value) ? value : [value];
+      children =
+        Array.isArray(value) && value[0] === NodeKind.DataArray
+          ? (value[1] as BundleArrayElement[])
+          : [value];
       continue;
     }
     attributes.push(`${inner}${prop}={${renderNode(value, inner)}}`);
   }
   const opening =
     attributes.length === 0
-      ? `<${element[NodeField.id]}`
-      : `<${element[NodeField.id]}\n${attributes.join("\n")}\n${indent}`;
+      ? `<${element[1]}`
+      : `<${element[1]}\n${attributes.join("\n")}\n${indent}`;
   if (children.length === 0) {
     return `${opening}${attributes.length === 0 ? " " : ""}/>`;
   }
   const body = children
     .map((child) => `${inner}{${renderNode(child, inner)}}`)
     .join("\n");
-  return `${opening}>\n${body}\n${indent}</${element[NodeField.id]}>`;
+  return `${opening}>\n${body}\n${indent}</${element[1]}>`;
 }
 
 // A container stays on one line while it fits the column budget; a large one

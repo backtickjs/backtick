@@ -28,10 +28,9 @@ export {
 } from "./components/index.js";
 export type { JSX } from "./jsx-runtime/index.js";
 export { bundle, state } from "@backtickjs/jit-bundler";
-export { NodeKind, NodeField } from "@backtickjs/jit-bundler";
+export { NodeKind } from "@backtickjs/jit-bundler";
 export type {
   Bundle,
-  BundleApplyFunction,
   BundleArrowFunctionNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
@@ -43,6 +42,7 @@ export type {
   BundleContinueStatementNode,
   BundleVariableDeclarationNode,
   BundleElement,
+  BundleDataArrayNode,
   BundleForStatementNode,
   BundleArrayElement,
   BundleExpressionNode,
