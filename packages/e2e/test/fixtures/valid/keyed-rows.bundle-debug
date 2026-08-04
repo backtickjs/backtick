@@ -12,11 +12,11 @@
 
 #f4 = ($0) => "row " + $0
 
-#t0 = (id) => <Text>
+#f5 = (id) => <Text>
   {#f4(id)}
 </Text>
 
-#t1 = () => {
+#f6 = () => {
   const s0 = state([1, 2, 3]);
   return <View>
     {<Text
@@ -33,10 +33,10 @@
       {<For
         each={#f2(() => s0)}
       >
-        {#f3((id) => #t0(id))}
+        {#f3((id) => #f5(id))}
       </For>}
     </View>}
   </View>;
 }
 
-root = #t1()
+root = #f6()

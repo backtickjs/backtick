@@ -8,11 +8,11 @@
 
 #f3 = ($0, $1) => $0 + " at " + $1.read()
 
-#t0 = (name, index) => <Text>
+#f4 = (name, index) => <Text>
   {#f3(name, index)}
 </Text>
 
-#t1 = () => {
+#f5 = () => {
   const s0 = state(["a", "b", "c"]);
   return <View>
     {<Text
@@ -24,10 +24,10 @@
       {<For
         each={#f1(() => s0)}
       >
-        {#f2((name, index) => #t0(name, index))}
+        {#f2((name, index) => #f4(name, index))}
       </For>}
     </View>}
   </View>;
 }
 
-root = #t1()
+root = #f5()

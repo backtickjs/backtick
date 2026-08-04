@@ -1,4 +1,4 @@
-#t0 = () => <View>
+#f0 = () => <View>
   {<Text>
     {"alpha"}
   </Text>}
@@ -10,4 +10,4 @@
   </Text>}
 </View>
 
-root = #t0()
+root = #f0()

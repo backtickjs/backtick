@@ -1,7 +1,7 @@
-#t0 = () => null
+#f0 = () => null
 
-#t1 = () => <View>
-  {#t0()}
+#f1 = () => <View>
+  {#f0()}
 </View>
 
-root = #t1()
+root = #f1()

@@ -1,14 +1,14 @@
-#t0 = () => <Text>
+#f0 = () => <Text>
   {"one"}
 </Text>
 
-#t1 = () => <Text>
+#f1 = () => <Text>
   {"two"}
 </Text>
 
-#t2 = () => <View>
-  {#t0()}
-  {#t1()}
+#f2 = () => <View>
+  {#f0()}
+  {#f1()}
 </View>
 
-root = #t2()
+root = #f2()

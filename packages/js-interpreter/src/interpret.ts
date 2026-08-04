@@ -12,16 +12,15 @@ import type {
   BundleExpr,
   BundleStatementNode,
   FunctionLabel,
-  TreeLabel,
 } from "@backtickjs/core";
 import { makeState } from "./makeState.js";
 import { compileElement } from "./view.js";
 import type { Instance } from "./view.js";
-import type { Applied, Value } from "./Value.js";
+import type { Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
-// against its `functions` and `trees` tables and yields the resulting
+// against its `functions` table and yields the resulting
 // JavaScript value, so a host can draw it and tests can observe runtime
 // behavior rather than only snapshotting shape.
 //
@@ -123,18 +122,6 @@ function getFunction(
   return fn;
 }
 
-// An entry applied: the entry itself, and the arguments to hand it. The label
-// is resolved here — the one place that reads the table — so an unknown one is
-// caught where it is written rather than carried along to be looked up again by
-// whoever draws it.
-function applied(bundle: Bundle, label: TreeLabel, args: Value[]): Applied {
-  const tree = bundle.trees[label];
-  if (tree === undefined) {
-    throw new Error(`unknown tree entry ${label}`);
-  }
-  return { "@backtickjs": "Applied", tree, args };
-}
-
 // A node is compiled once into the closure that evaluates it, and that closure
 // is what runs from then on. Deciding what kind of node this is happens per
 // node instead of per evaluation — the same walk of the same tree, without
@@ -227,31 +214,31 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       const label = node[NodeField.label];
       return () => getFunction(bundle, label);
     }
+    // An entry applied, in a tree position or in a script alike. What that
+    // means is the entry's: one that draws hands back the application, because
+    // an entry closes over no host and only whoever holds it has one — and for
+    // a list that is what lets a row be decided against the list before.
     case NodeKind.ApplyFunction: {
       const label = node[NodeField.label];
+      const entry = bundle.functions[label];
+      if (entry === undefined) {
+        throw new Error(`unknown entry ${label}`);
+      }
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
         compile(bundle, arg),
       );
+      // An entry that draws hands the application back instead of running it.
+      if (entry[NodeField.draws]) {
+        return (scope) => ({
+          "@backtickjs": "Applied",
+          entry,
+          args: args.map((arg) => arg(scope)),
+        });
+      }
       return (scope) => {
         const supplied = args.map((arg) => arg(scope));
         return getFunction(bundle, label)(...supplied);
       };
-    }
-    // An entry applied, in a tree position or in a script alike: which entry,
-    // with which arguments, and which of its siblings this one is. Nothing is
-    // built here — whoever holds the application decides that, and for a list
-    // that means deciding it against the list before.
-    case NodeKind.ApplyTree: {
-      const label = node[NodeField.label];
-      const args = (node[NodeField.arguments] ?? []).map((arg) =>
-        compile(bundle, arg),
-      );
-      return (scope) =>
-        applied(
-          bundle,
-          label,
-          args.map((arg) => arg(scope)),
-        );
     }
     case NodeKind.Thunk: {
       const params = node[NodeField.parameters];

@@ -10,33 +10,33 @@
 
 #f5 = () => 1
 
-#t0 = () => <Text>
+#f6 = () => <Text>
   {"marker"}
 </Text>
 
-#t1 = (s0) => <View>
+#f7 = (s0) => <View>
   {<Text
     style={{ "fontSize": #f1(() => s0, #f2) }}
   >
     {#f3(#f2, () => s0)}
   </Text>}
-  {#f4(() => s0, #f2, () => #t0())}
+  {#f4(() => s0, #f2, () => #f6())}
 </View>
 
-#t2 = () => <Text>
+#f8 = () => <Text>
   {"marker"}
 </Text>
 
-#t3 = (s0) => <View>
+#f9 = (s0) => <View>
   {<Text
     style={{ "fontSize": #f1(() => s0, #f5) }}
   >
     {#f3(#f5, () => s0)}
   </Text>}
-  {#f4(() => s0, #f5, () => #t2())}
+  {#f4(() => s0, #f5, () => #f8())}
 </View>
 
-#t4 = () => {
+#f10 = () => {
   const s0 = state(0);
   return <View>
     {<Text
@@ -44,9 +44,9 @@
     >
       {"select"}
     </Text>}
-    {#t1(s0)}
-    {#t3(s0)}
+    {#f7(s0)}
+    {#f9(s0)}
   </View>;
 }
 
-root = #t4()
+root = #f10()

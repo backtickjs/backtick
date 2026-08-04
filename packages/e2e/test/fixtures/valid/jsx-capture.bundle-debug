@@ -5,8 +5,8 @@
 
 #f1 = ($0) => () => $0
 
-#t0 = (x) => <Text
+#f2 = (x) => <Text
   onPress={#f1(x)}
 />
 
-root = #f0((x) => #t0(x))
+root = #f0((x) => #f2(x))

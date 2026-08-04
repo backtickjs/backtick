@@ -4,16 +4,16 @@
 
 #f2 = ($0) => "row " + $0
 
-#t0 = (row) => <Text>
+#f3 = (row) => <Text>
   {#f2(row)}
 </Text>
 
-#t1 = () => <View>
+#f4 = () => <View>
   {<For
     each={#f0(() => [1, 2, 3])}
   >
-    {#f1((row) => #t0(row))}
+    {#f1((row) => #f3(row))}
   </For>}
 </View>
 
-root = #t1()
+root = #f4()

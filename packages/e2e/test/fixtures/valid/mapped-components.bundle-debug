@@ -1,19 +1,19 @@
-#t0 = () => <Text>
+#f0 = () => <Text>
   {"alpha"}
 </Text>
 
-#t1 = () => <Text>
+#f1 = () => <Text>
   {"beta"}
 </Text>
 
-#t2 = () => <Text>
+#f2 = () => <Text>
   {"gamma"}
 </Text>
 
-#t3 = () => <View>
-  {#t0()}
-  {#t1()}
-  {#t2()}
+#f3 = () => <View>
+  {#f0()}
+  {#f1()}
+  {#f2()}
 </View>
 
-root = #t3()
+root = #f3()

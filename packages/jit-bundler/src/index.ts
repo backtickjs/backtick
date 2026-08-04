@@ -1,7 +1,7 @@
 export { NodeKind, NodeField } from "./bundle/Bundle.js";
 export type {
   Bundle,
-  BundleApply,
+  BundleApplyFunction,
   BundleArrowFunctionNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
@@ -19,7 +19,6 @@ export type {
   BundleArrayElement,
   BundleExpressionNode,
   BundleSpreadElementNode,
-  BundleApplyFunction,
   BundleGetFunction,
   BundleIdentifierNode,
   BundleIfStatementNode,
@@ -34,11 +33,9 @@ export type {
   BundleConditionalExpressionNode,
   BundleThrowStatementNode,
   BundleThunk,
-  BundleApplyTree,
   BundleTryStatementNode,
   BundleWhileStatementNode,
   FunctionLabel,
-  TreeLabel,
 } from "./bundle/Bundle.js";
 export { bundle } from "./bundle.js";
 export { state } from "./state.js";

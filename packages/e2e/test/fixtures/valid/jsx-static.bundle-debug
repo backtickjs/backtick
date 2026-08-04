@@ -1,7 +1,7 @@
-#t0 = () => <View>
+#f0 = () => <View>
   {<Text>
     {"hi"}
   </Text>}
 </View>
 
-root = #t0()
+root = #f0()

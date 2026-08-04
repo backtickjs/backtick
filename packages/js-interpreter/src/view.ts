@@ -66,13 +66,13 @@ export function evaluate<N extends object>(
 function materialize(bundle: Bundle, host: Host): unknown {
   // The root is evaluated in no instance: nothing above it to have supplied
   // arguments, and nothing above it to have bound anything.
-  const outside: Instance = { bundle, host };
+  const instance: Instance = { bundle, host, entries: new Map() };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.
   return drawn(
-    evaluateNode(bundle, bundle.root, scopeOf(null, outside)),
-    outside,
+    evaluateNode(bundle, bundle.root, scopeOf(null, instance)),
+    instance,
   );
 }
 
@@ -115,19 +115,19 @@ function requireReactivity(): void {
   }
 }
 
-// A tree instance: what the entry's arrow is called in. The cells it declares
-// are bindings in that call, so what persists per instance is a scope.
-//
-// There is no list of children here, and nothing recording what was drawn. An
-// instance is built once and never again, so there is nothing to match a second
-// building against: what a re-render used to recover, the graph now keeps.
+// What an instance carries: the bundle being drawn and the host drawing it.
+// One per mount rather than one per instantiation — an entry's cells are
+// bindings in its call, so nothing here differs between two of them.
 export interface Instance {
   readonly bundle: Bundle;
   readonly host: Host;
+  // Each drawing entry as the function it evaluates to, so a row's entry is
+  // evaluated once however many rows there are.
+  readonly entries: Map<BundleFunction, (...args: Value[]) => Value>;
 }
 
 /**
- * Builds an instance of a tree entry by calling it.
+ * Builds an instance of an entry by calling it.
  *
  * Nothing owns this but whoever is building. An instance created for a row of a
  * list belongs to that row's owner, so dropping the row drops the instance and
@@ -136,20 +136,22 @@ export interface Instance {
  * found again.
  */
 export function instantiate(
-  bundle: Bundle,
-  tree: BundleFunction,
+  instance: Instance,
+  entry: BundleFunction,
   args: Value[],
-  host: Host,
 ): unknown {
-  const instance: Instance = { bundle, host };
-  // Instantiating is calling: the entry's arrow runs in this instance, binding
-  // whatever cells it declares in a scope of its own, and yields what to draw.
-  const entry = evaluateNode(
-    bundle,
-    tree[NodeField.content],
-    scopeOf(null, instance),
-  ) as (...args: Value[]) => Value;
-  return build(entry(...args), instance);
+  let drawing = instance.entries.get(entry);
+  if (drawing === undefined) {
+    drawing = evaluateNode(
+      instance.bundle,
+      entry[NodeField.content],
+      scopeOf(null, instance),
+    ) as (...args: Value[]) => Value;
+    instance.entries.set(entry, drawing);
+  }
+  // Instantiating is calling: the cells the entry declares are bound in this
+  // call, and what it yields is what to draw.
+  return build(drawing(...args), instance);
 }
 
 // What an evaluated tree expression draws, in a position that draws exactly
@@ -159,12 +161,7 @@ function build(value: Value, instance: Instance): unknown {
   if (!isApplied(value)) {
     return value;
   }
-  return instantiate(
-    instance.bundle,
-    value.tree,
-    value.args,
-    instance.host,
-  );
+  return instantiate(instance, value.entry, value.args);
 }
 
 /**

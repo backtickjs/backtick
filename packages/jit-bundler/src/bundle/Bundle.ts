@@ -1,9 +1,9 @@
 // The bundle: the JIT bundler's wire format, as plain data — what ships is
 // exactly `JSON.stringify` of this. These types are the contract an
-// interpreter implements: evaluate `root` against the `functions` and `trees`
-// tables. Computation ships as `BundleNode` ASTs (no JavaScript parsing
-// required), composition as data (a tree and the root are `BundleExpr`
-// values), so the whole bundle is parseable and inspectable as JSON.
+// interpreter implements: evaluate `root` against the `functions` table.
+// Computation ships as `BundleNode` ASTs (no JavaScript parsing required),
+// composition as data (an element and the root are `BundleExpr` values), so the
+// whole bundle is parseable and inspectable as JSON.
 //
 // Two guarantees an interpreter may rely on, and must uphold:
 //
@@ -47,19 +47,19 @@ export interface Bundle {
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
   functions: Record<FunctionLabel, BundleFunction>;
-  // The same entry a `functions` label names: an arrow, evaluated to a function
-  // and called to instantiate. What it is handed are its parameters and the
-  // cells it declares are bindings in its body, so an instance is a call and
-  // what persists per instance is that call's scope.
-  trees: Record<TreeLabel, BundleFunction>;
   root: BundleExpr;
 }
 
-// A function entry: a script as data. The arrow sits under a wrapper for the
-// same reason a tree's element does — so what the bundler works out about an
-// entry can land as a sibling field without reshaping the table, and without
-// hanging a field on the arrow node that every other arrow in the language
-// would then carry the possibility of.
+// An entry: an arrow under a wrapper, so what the bundler worked out about it
+// can land as a sibling field without hanging one on the arrow node that every
+// other arrow in the language would then carry the possibility of.
+//
+// A script and a component are the same thing here. What differs is `draws`,
+// and only because an entry is shared across mounts: it is evaluated with no
+// enclosing scope, so it cannot close over a host, and an entry that would
+// build one has to be applied where a host is — which is what `draws` says and
+// what an interpreter answers by yielding the application rather than
+// performing it.
 export interface BundleFunction {
   // The arrow this entry is. Always present: an entry with nothing to evaluate
   // is not written at all.
@@ -73,6 +73,10 @@ export interface BundleFunction {
   // to assume the value moves. Only the bundler can say otherwise, which is why
   // it says so here rather than leaving every client to work it out.
   [NodeField.fixed]?: true;
+  // Set where applying this entry yields an instance rather than a value: the
+  // application is handed back for whoever holds it to build, in a position
+  // that has a host. Absent is an ordinary call.
+  [NodeField.draws]?: true;
 }
 
 // Plain JSON carrying itself. The `#` key is how a node is told from data, so
@@ -86,7 +90,6 @@ export interface BundleData<T> {
 }
 
 export type FunctionLabel = string;
-export type TreeLabel = string;
 
 // Every field name, as the single character it carries on the wire. A node's
 // shape is read far more often than it is written, and the long names cost more
@@ -162,6 +165,7 @@ export const NodeField = {
   // What the bundler worked out rather than read, for a client that would
   // otherwise work it out again.
   fixed: "ab", // a function entry whose value cannot change
+  draws: "ac", // a function entry applied to make an instance
 } as const;
 
 // Every node kind, as the number `"#"` carries. A number rather than a name
@@ -188,13 +192,12 @@ export const NodeKind = {
   // 2 is retired. It named a cell declared by the enclosing tree entry, where a
   // cell is now bound by a declaration in that entry and resolves as an
   // `Identifier`. A number is never reused.
-  // 3 is retired. It named a `trees` entry as a value — a function taking the
-  // entry's arguments and yielding the instance. A tree is applied, never called,
-  // so an `ApplyTree` says the same thing in one node where this needed two.
-  // (An entry is a function now, but it is still applied rather than named.)
-  // A number is never reused.
+  // 3 is retired. It named an entry as a value — a function taking the entry's
+  // arguments and yielding the instance — where naming one is `GetEntry` and
+  // running one is `Apply`. A number is never reused.
   GetFunction: 4,
-  ApplyTree: 5,
+  // 5 is retired. It applied a tree entry, where one kind applies any entry
+  // and the entry itself says whether that draws. A number is never reused.
   ApplyFunction: 6,
   Thunk: 7,
 
@@ -246,7 +249,7 @@ export interface BundleElement {
   [NodeField.props]?: { [prop: string]: BundleExpr };
 }
 
-// Instantiates a `trees` entry: `args` supplies the entry's parameters in
+// Applies an entry: `args` supplies its parameters in
 // order, and `key` identifies the instance among its siblings so it survives a
 // re-render that reorders them. Only a tree can be keyed — only a tree has
 // state to keep.
@@ -258,21 +261,13 @@ export interface BundleElement {
 // all the same would give every iteration one shared instance. Positional, so
 // reordering a list moves state between rows — which is what `key` overrides. (Applying names a table row by label; a body `call` evaluates
 // a `callee` node instead, so the two are separate kinds.)
-export interface BundleApplyTree<Expr = BundleExpr> {
-  "#": typeof NodeKind.ApplyTree;
-  [NodeField.label]: TreeLabel;
-  [NodeField.arguments]?: Expr[];
-}
-
-// Applies a `functions` entry: `args` mirrors the entry's parameters — thunks
-// for a polymorphic entry's splices first, then one value per capture.
-export interface BundleApplyFunction {
+export interface BundleApplyFunction<Expr = BundleExpr> {
   "#": typeof NodeKind.ApplyFunction;
   [NodeField.label]: FunctionLabel;
-  [NodeField.arguments]?: BundleExpr[];
+  // Mirrors the entry's parameters — for a script, thunks for a polymorphic
+  // entry's splices first, then one value per capture.
+  [NodeField.arguments]?: Expr[];
 }
-
-export type BundleApply = BundleApplyTree | BundleApplyFunction;
 
 // A splice argument passed to a polymorphic entry, evaluated lazily: the
 // interpreter passes it as a function yielding the expression's value, so
@@ -309,7 +304,7 @@ export type BundleExpr =
   | BundleExpr[]
   | BundleIdentifierNode
   | BundleGetFunction
-  | BundleApply
+  | BundleApplyFunction
   | BundleThunk
   | BundleElement
   | BundleData<BundleExpr>;
@@ -360,7 +355,7 @@ export type BundleExpressionNode =
   // identity. Applying says both: which entry, and which of its siblings this
   // one is — so a row a script builds can be named the way a row written in
   // tree position can.
-  | BundleApplyTree<BundleExpressionNode>
+  | BundleApplyFunction<BundleExpressionNode>
   // What a tree entry's body yields, and so what a `return` in one may hold.
   | BundleElement
   | BundleCallExpressionNode

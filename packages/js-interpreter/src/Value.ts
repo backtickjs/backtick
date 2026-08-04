@@ -5,7 +5,7 @@ import type { BundleFunction } from "@backtickjs/core";
  * built from it. The entry is resolved rather than named, so the table is read
  * once and an unknown label is caught in one place.
  *
- * Kept apart from `BundleApplyTree`, which it resembles: a node's arguments are
+ * Kept apart from `BundleApplyFunction`, which it resembles: a node's arguments are
  * expressions waiting for a scope, and these are what those expressions became.
  * Nothing tells the two apart by shape, so a node reaching here would call an
  * entry with expressions as its arguments — wrong, and quietly.
@@ -15,7 +15,7 @@ import type { BundleFunction } from "@backtickjs/core";
  */
 export interface Applied {
   readonly "@backtickjs": "Applied";
-  readonly tree: BundleFunction;
+  readonly entry: BundleFunction;
   readonly args: Value[];
 }
 

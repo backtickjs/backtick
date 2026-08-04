@@ -31,7 +31,7 @@ export { bundle, state } from "@backtickjs/jit-bundler";
 export { NodeKind, NodeField } from "@backtickjs/jit-bundler";
 export type {
   Bundle,
-  BundleApply,
+  BundleApplyFunction,
   BundleArrowFunctionNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
@@ -48,7 +48,6 @@ export type {
   BundleExpr,
   BundleFunction,
   BundleExpressionNode,
-  BundleApplyFunction,
   BundleGetFunction,
   BundleIdentifierNode,
   BundleIfStatementNode,
@@ -63,9 +62,7 @@ export type {
   BundleStatementNode,
   BundleThrowStatementNode,
   BundleThunk,
-  BundleApplyTree,
   BundleTryStatementNode,
   BundleWhileStatementNode,
   FunctionLabel,
-  TreeLabel,
 } from "@backtickjs/jit-bundler";

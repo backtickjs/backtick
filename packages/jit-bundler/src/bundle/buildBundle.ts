@@ -23,7 +23,6 @@ import type {
   BundleIdentifierNode,
   BundleVariableDeclarationNode,
   FunctionLabel,
-  TreeLabel,
 } from "./Bundle.js";
 import type { BundleOptions } from "../bundle.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
@@ -42,7 +41,7 @@ interface TreeScope {
 // nowhere to resolve against.
 const noInstance = (): TreeScope => ({ target: null, params: new Set() });
 
-// Builds the bundle `{ functions, trees, root }` as plain data. The output
+// Builds the bundle `{ functions, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
 // contract — are documented on the `Bundle` types; this file documents how
 // they are derived.
@@ -93,7 +92,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // bindings sharing a source name can land in one chain and the inner would
   // shadow what the outer was handed (`shadowing` nests three).
   //
-  // Two scopes here, neither of them the whole bundle: a `trees` entry, over the
+  // Two scopes here, neither of them the whole bundle: a drawing entry, over the
   // cells it declares and the thunks written in its content; and the root, which
   // is a tree's content without the entry. A `functions` entry names inside
   // `lowerScriptBody`, from its own script — nothing out here reads those names,
@@ -313,7 +312,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const expansionEntry = (expansion: IrExpansion): BundleGetFunction => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
-      label = `${ir.scripts.length + expansionLabels.size}`;
+      label = `${ir.scripts.length + ir.trees.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
@@ -394,19 +393,26 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // for the unkeyed case and an apply for the keyed one, but the two carried
   // the same label and the same arguments and differed only in the node they were
   // written as.
+  // One table, one numbering: the scripts, then the entries that draw, then a
+  // class's expansions. Every part is known up front — a tree per `ir.trees`
+  // and an expansion interned as it is reached — so a label is decided by
+  // arithmetic rather than by the order rendering happens to reach things.
+  const treeLabel = (target: number): FunctionLabel =>
+    `${ir.scripts.length + target}`;
+
   const instantiation = (value: IrTreeRef): BundleExpressionNode => {
     materializeTree(value.target);
     const args: BundleExpressionNode[] = treeParams(value.target).map(readKey);
     return {
-      "#": NodeKind.ApplyTree,
-      [NodeField.label]: `${value.target}`,
+      "#": NodeKind.ApplyFunction,
+      [NodeField.label]: treeLabel(value.target),
       ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
     };
   };
 
   // Renders an IR argument in value position — as the node for the value it
   // evaluates to. A script reference becomes a call of its `functions` entry, a
-  // tree reference a call of its `trees` entry passing its captures by name;
+  // tree reference an application of its entry passing its captures by name;
   // every other value its literal form.
   const renderValue = (value: IrArgument): BundleExpressionNode => {
     switch (value.kind) {
@@ -556,6 +562,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     bindings: BundleVariableDeclarationNode[],
     drawn: BundleExpr,
   ): BundleFunction => ({
+    [NodeField.draws]: true,
     [NodeField.content]: {
       "#": NodeKind.ArrowFunction,
       ...(params.length === 0
@@ -612,8 +619,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     treeJsons.set(
       target,
       treeEntry(names, bindings, {
-        "#": NodeKind.ApplyTree,
-        [NodeField.label]: `${content.target}`,
+        "#": NodeKind.ApplyFunction,
+        [NodeField.label]: treeLabel(content.target),
         ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
       }),
     );
@@ -756,8 +763,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         capExpr(key, scope, params),
       );
       return {
-        "#": NodeKind.ApplyTree,
-        [NodeField.label]: `${value.target}`,
+        "#": NodeKind.ApplyFunction,
+        [NodeField.label]: treeLabel(value.target),
         ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
       };
     }
@@ -819,15 +826,16 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       functions[fnLabel(script)] = { [NodeField.content]: body };
     }
   }
+  // Last, with the table whole: an entry's body is only whole once every
+  // splice it writes has been rendered into it. An entry that draws is not
+  // marked — what it yields is an instance to build, which is never a value a
+  // position can settle on.
+  markFixed(functions);
+  for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
+    functions[treeLabel(index)] = tree;
+  }
   for (const [label, body] of expansionBodies) {
     functions[label] = { [NodeField.content]: body };
   }
-  // Last, with the table whole: an entry's body is only whole once every
-  // splice it writes has been rendered into it.
-  markFixed(functions);
-  const trees: Record<TreeLabel, BundleFunction> = {};
-  for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
-    trees[`${index}`] = tree;
-  }
-  return { functions, trees, root };
+  return { functions, root };
 }

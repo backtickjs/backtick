@@ -57,7 +57,7 @@ test("answers everyone else with what to draw where", async () => {
       "application/json; charset=utf-8",
     );
     assert.deepEqual(await response.json(), [
-      { target: "#root", bundle: { functions: {}, trees: {}, root: "42" } },
+      { target: "#root", bundle: { functions: {}, root: "42" } },
     ]);
   }
 });

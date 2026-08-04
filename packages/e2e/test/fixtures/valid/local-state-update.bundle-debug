@@ -4,7 +4,7 @@
   $0().update((current) => current + 1);
 }
 
-#t0 = () => {
+#f2 = () => {
   const s0 = state(16);
   return <Text
     style={{ "fontSize": #f0(() => s0) }}
@@ -14,4 +14,4 @@
   </Text>;
 }
 
-root = #t0()
+root = #f2()

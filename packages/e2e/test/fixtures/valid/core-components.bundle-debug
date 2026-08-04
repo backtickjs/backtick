@@ -2,7 +2,7 @@
 
 }
 
-#t0 = () => <View
+#f1 = () => <View
   style={{ "padding": 8 }}
 >
   {<Text
@@ -17,4 +17,4 @@
   />}
 </View>
 
-root = #t0()
+root = #f1()

@@ -4,26 +4,26 @@
   $0().write($0().read() + 1);
 }
 
-#t0 = (s0) => <Text
+#f2 = (s0) => <Text
   style={{ "fontSize": #f0(() => s0) }}
   onPress={#f1(() => s0)}
 >
   {"press"}
 </Text>
 
-#t1 = (s0) => <Text
+#f3 = (s0) => <Text
   style={{ "fontSize": #f0(() => s0) }}
   onPress={#f1(() => s0)}
 >
   {"press"}
 </Text>
 
-#t2 = () => {
+#f4 = () => {
   const s0 = state(16);
   return <View>
-    {#t0(s0)}
-    {#t1(s0)}
+    {#f2(s0)}
+    {#f3(s0)}
   </View>;
 }
 
-root = #t2()
+root = #f4()
