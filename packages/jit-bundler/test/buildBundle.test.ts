@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { SyntaxKind } from "@backtickjs/cs-runtime";
+import { NodeKind } from "../dist/bundle/Bundle.js";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
 import type { Ir, IrScriptEntry } from "../dist/ir/Ir.js";
 
@@ -29,5 +30,5 @@ test("labels an entry by where its script was written on request", () => {
   const located = buildBundle(ir, { functionLabels: "location" });
   assert.deepEqual(Object.keys(located.functions), ["abc:3:7"]);
   // The reference names the same thing, so a bundle reads on its own.
-  assert.deepEqual(located.root, { "#": 6, f: "abc:3:7" });
+  assert.deepEqual(located.root, { "#": NodeKind.ApplyFunction, f: "abc:3:7" });
 });

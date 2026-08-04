@@ -1,9 +1,7 @@
 // The bundle: the JIT bundler's wire format, as plain data — what ships is
 // exactly `JSON.stringify` of this. These types are the contract an
 // interpreter implements: evaluate `root` against the `functions` table.
-// Computation ships as `BundleNode` ASTs (no JavaScript parsing required),
-// composition as data (an element and the root are `BundleExpressionNode` values), so the
-// whole bundle is parseable and inspectable as JSON.
+// Computation ships as ASTs, so nothing here needs a JavaScript parser.
 //
 // Two guarantees an interpreter may rely on, and must uphold:
 //
@@ -23,59 +21,35 @@
 // everywhere, so a client reads them the same way each time. A spliced empty
 // array or object is untouched — that is data the client asked for.
 //
-// Evaluation is effect-free and deterministic: materializing the root, a
-// tree, or any entry a data position references runs no effects — an
-// action never ships as data — so re-evaluating any value is unobservable.
-// This is the caching license: an interpreter may cache, re-run, or share
-// evaluations freely. Effects happen only when the client itself invokes a
-// function value it holds.
+// Evaluation is deterministic, and effect-free but for one thing: applying an
+// entry that draws allocates the storage its body binds, so applying one twice
+// is two sets of it. Everything else may be cached, re-run or shared freely.
 export interface Bundle {
-  // Each entry holds an arrow node — evaluating it yields a function, exactly
-  // as for an arrow nested inside a body. It takes one thunk parameter per
-  // splice hole the script writes (named `$0`, `$1`, …); the body invokes the
-  // thunk at the hole, passing the entry-scoped bindings in scope there — a
-  // spliced fragment sees the bindings in scope at its hole.
+  // Every entry is an arrow: a script, a component, or a class's expansion.
+  // Its parameters are an arrow per splice hole the script writes (`$0`, `$1`,
+  // …) and then one per capture, which an application supplies in that order.
   //
-  // Nothing a call site supplies is inlined, so an entry's shape and body are
-  // a function of its script's source: the same script compiles to the same
-  // entry in every bundle it appears in.
-  //
-  // Whatever an entry captures arrives after those, one parameter per capture,
-  // in the same numbering: a thunk per hole, then a value per capture. A
-  // `BundleApplyFunction` targeting the entry supplies them in that order.
-  // A construction's expansion is also an entry — one per class, labeled
-  // after the script entries — an arrow over the expansion's holes, applied
-  // by its call site to the client arguments.
+  // Nothing a call site supplies is inlined, so an entry's shape is a function
+  // of its source: the same script compiles to the same entry in every bundle.
   functions: Record<FunctionLabel, BundleFunction>;
   root: BundleExpressionNode;
 }
 
 // An entry: an arrow under a wrapper, so what the bundler worked out about it
-// can land as a sibling field without hanging one on the arrow node that every
-// other arrow in the language would then carry the possibility of.
-//
-// A script and a component are the same thing here. What differs is `draws`,
-// and only because an entry is shared across mounts: it is evaluated with no
-// enclosing scope, so it cannot close over a host, and an entry that would
-// build one has to be applied where a host is — which is what `draws` says and
-// what an interpreter answers by yielding the application rather than
-// performing it.
+// lands beside the arrow rather than on it.
 export interface BundleFunction {
   // The arrow this entry is. Always present: an entry with nothing to evaluate
   // is not written at all.
   [NodeField.content]: BundleArrowFunctionNode;
-  // Set where applying this entry reads nothing that moves — no cell, and no
-  // position of a member of a list. What it yields once is what it would yield
-  // again, so a client can fill the position it feeds and never watch it.
-  //
-  // Absent is the answer that costs a computation and nothing else, so a reader
-  // that does not carry this — or a bundle written before it existed — is right
-  // to assume the value moves. Only the bundler can say otherwise, which is why
-  // it says so here rather than leaving every client to work it out.
+  // Set where applying this entry reads nothing that moves, so a client can
+  // fill the position it feeds and never watch it. Absent costs a computation
+  // and nothing else, which is why a reader without it is right to assume the
+  // value moves.
   [NodeField.fixed]?: true;
-  // Set where applying this entry yields an instance rather than a value: the
-  // application is handed back for whoever holds it to build, in a position
-  // that has a host. Absent is an ordinary call.
+  // Set where applying this entry yields an instance rather than a value: it
+  // is handed back for whoever holds it to build, where a host is. An entry is
+  // shared across mounts and evaluated in no scope, so it cannot close over
+  // one itself. Absent is an ordinary call.
   [NodeField.draws]?: true;
 }
 
@@ -113,16 +87,11 @@ export type FunctionLabel = string;
 // to know its letter. Append to add a field; never reassign one — a letter that
 // moves silently misreads every bundle already written.
 export const NodeField = {
-  // The format's own: a tree, its state, and the tables a label indexes.
+  // The format's own.
   id: "a",
-  key: "b",
   props: "c",
-  index: "d",
   label: "f",
   content: "y",
-  // "z" is retired. It named a tree entry's cells as a table of initials for an
-  // interpreter to allocate from, where they are now declarations in the
-  // entry's own body. A letter is never reused.
 
   // TypeScript's, by the node they come from.
   name: "e", // ts.PropertyAccessExpression, ts.VariableDeclaration
@@ -174,46 +143,27 @@ export const NodeField = {
 //
 // Two groups: this format's own from 0, JavaScript's from 1000. So `kind <
 // 1000` is the test for "a node only this format defines"; the rest an
-// implementer dispatches as the JavaScript they mirror. The wide gap lets
-// either group grow without renumbering, at four digits per JavaScript node
-// (+2111 bytes raw across the fixtures, +165 gzipped).
+// implementer dispatches as the JavaScript they mirror. The gap lets either
+// group grow without disturbing the other.
 //
 // Append within a group; never renumber. A reader implements the numbers it
 // knows, so a moved value silently misparses every bundle already written.
 // `renderBundleDebug` maps a number back to its name.
 export const NodeKind = {
-  // A `get` names a row of a table. An `apply` runs one — for a tree, that
-  // means instantiating it. The kind names the table, so a label is only an
-  // index into it.
+  // A `get` names an entry; an `apply` runs one, which for an entry that draws
+  // means instantiating it.
   Element: 0,
-  // 1 is retired. It named the enclosing entry's n-th argument, where an entry
-  // is a function and its arguments are its parameters. A number is never
-  // reused.
-  // 2 is retired. It named a cell declared by the enclosing tree entry, where a
-  // cell is now bound by a declaration in that entry and resolves as an
-  // `Identifier`. A number is never reused.
-  // 3 is retired. It named an entry as a value — a function taking the entry's
-  // arguments and yielding the instance — where naming one is `GetEntry` and
-  // running one is `Apply`. A number is never reused.
-  GetFunction: 4,
-  // 5 is retired. It applied a tree entry, where one kind applies any entry
-  // and the entry itself says whether that draws. A number is never reused.
-  ApplyFunction: 6,
-  // 7 is retired. It was a splice argument evaluated lazily — an arrow over the
-  // bindings the hole supplies, which is what an `ArrowFunction` already is. A
-  // number is never reused.
+  GetFunction: 1,
+  ApplyFunction: 2,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
   // value.
   //
-  // Every name here is a `ts.SyntaxKind`, so a reader who knows that AST knows
-  // this one. What a name can't carry is that the format is smaller than the
-  // grammar: a literal is JSON carrying itself rather than a `NumericLiteral`
-  // or a `NullKeyword`, and a declaration holds its own `const`/`let` instead
-  // of the `VariableStatement` → `VariableDeclarationList` → `VariableDeclaration`
-  // that TypeScript spends three nodes on. Where a node exists at all, it is
-  // shaped and named as TypeScript shapes and names it.
+  // Every name is a `ts.SyntaxKind`, so a reader who knows that AST knows this
+  // one. What a name can't carry is that the format is smaller than the
+  // grammar: a literal is JSON carrying itself, and a declaration holds its own
+  // `const`/`let` rather than the three nodes TypeScript spends on one.
   Identifier: 1000,
   CallExpression: 1001,
   PropertyAccessExpression: 1002,
@@ -222,50 +172,36 @@ export const NodeKind = {
   ArrowFunction: 1005,
   Block: 1006,
   VariableDeclaration: 1007,
-  // 1008 is retired. It was an assignment kind, which TypeScript hasn't got:
-  // `x = 1` is a `BinaryExpression` over an `EqualsToken`, and that is what
-  // this format writes now. A number is never reused.
-  IfStatement: 1009,
-  ReturnStatement: 1010,
-  ThrowStatement: 1011,
-  TryStatement: 1012,
-  WhileStatement: 1013,
-  ForStatement: 1014,
-  BreakStatement: 1015,
-  ContinueStatement: 1016,
-  ElementAccessExpression: 1017,
-  CatchClause: 1018,
-  Parameter: 1019,
-  PrefixUnaryExpression: 1020,
-  SpreadElement: 1021,
-  Builtin: 1022,
+  IfStatement: 1008,
+  ReturnStatement: 1009,
+  ThrowStatement: 1010,
+  TryStatement: 1011,
+  WhileStatement: 1012,
+  ForStatement: 1013,
+  BreakStatement: 1014,
+  ContinueStatement: 1015,
+  ElementAccessExpression: 1016,
+  CatchClause: 1017,
+  Parameter: 1018,
+  PrefixUnaryExpression: 1019,
+  SpreadElement: 1020,
+  Builtin: 1021,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
 
-// A JSX element node: static structure carried as data, each prop a
-// `BundleExpressionNode` evaluated in the enclosing entry's scope.
+// An element: structure as data, each prop evaluated in the enclosing entry's
+// scope.
 export interface BundleElement {
   "#": typeof NodeKind.Element;
   [NodeField.id]: string;
-  // Composition rather than computation, in what the bundler writes: data, an
-  // element, or an entry applied — never arithmetic. Nothing enforces that now
-  // the two grammars are one, so it is a fact about the bundler, not the format.
+  // What the bundler writes here is composition rather than computation — data,
+  // an element, or an entry applied. Nothing in the type says so.
   [NodeField.props]?: { [prop: string]: BundleExpressionNode };
 }
 
-// Applies an entry: `args` supplies its parameters in
-// order, and `key` identifies the instance among its siblings so it survives a
-// re-render that reorders them. Only a tree can be keyed — only a tree has
-// state to keep.
-//
-// An instance persists across its parent's re-renders, named by this node and by
-// which evaluation of it it was: the first evaluation of a node finds the first
-// instance again, the second finds the second. The node alone is not enough,
-// because a node inside a loop is evaluated once per iteration, and naming them
-// all the same would give every iteration one shared instance. Positional, so
-// reordering a list moves state between rows — which is what `key` overrides. (Applying names a table row by label; a body `call` evaluates
-// a `callee` node instead, so the two are separate kinds.)
+// Applies an entry, named by label. A `call` evaluates a callee node instead,
+// which is why the two are separate kinds.
 export interface BundleApplyFunction {
   "#": typeof NodeKind.ApplyFunction;
   [NodeField.label]: FunctionLabel;
