@@ -127,32 +127,18 @@ export function compileElement(
   if (id === "For") {
     return compileFor(instance, element);
   }
-  // Every prop, with how to read it and whether reading it again could say
-  // anything different — in the order the element wrote them, because a host
-  // may care: an `<input>` wants its `type` before its `value`.
-  //
-  // A value the bundle spelled out needs no case of its own. Compiling one
-  // yields a reader that hands it back, and nothing the bundler could mark
-  // would make it move, so it takes the same path a handler does: set once, and
-  // never looked at again. A computation watching a constant would be a
-  // computation per attribute per element for nothing.
+  // Every prop, with how to read it — in the order the element wrote them,
+  // because a host may care: an `<input>` wants its `type` before its `value`.
   const props = Object.entries(element[2])
     .filter(([prop]) => prop !== "children")
-    .map(([prop, expr]) => {
-      const fixed = isFixed(instance.bundle, expr);
-      return [prop, compile(instance, expr), fixed] as const;
-    });
+    .map(([prop, expr]) => [prop, compile(instance, expr)] as const);
   const children = element[2]["children"];
   const draw =
     children === undefined ? null : compileChildren(instance, children);
   return (scope) => {
     const renderer = instance.renderer;
     const node = renderer.createElement(id);
-    for (const [prop, read, fixed] of props) {
-      if (fixed) {
-        renderer.setProp(node, prop, read(scope));
-        continue;
-      }
+    for (const [prop, read] of props) {
       // One effect per prop, so a write moves that one prop of that one node.
       // It re-runs only when something the expression itself read has changed;
       // nothing tells it to look.
@@ -199,70 +185,7 @@ function compileChildren(
     return (scope) => members.map((member) => member(scope));
   }
   const read = compile(instance, expr);
-  // Nothing that moves, so `insert` is handed the value rather than a way of
-  // asking for it, and makes no computation to watch it: a value the bundle
-  // spelled out, an element — whatever moves inside one is its own business —
-  // or an entry the bundler vouched for, a row's own label say.
-  if (isFixed(instance.bundle, expr)) {
-    return (scope) => read(scope);
-  }
   return (scope) => () => read(scope);
-}
-
-// Whether what this expression evaluates to can change once it has been built.
-//
-// For an entry applied the bundler answered it, so nothing here walks a body to
-// find out: an entry it could not vouch for carries no mark, and a mark is the
-// only yes. The rest this reads itself, because they are shapes rather than
-// scripts — every kind saying so for itself, so a kind added without an answer
-// fails to compile rather than defaulting into one.
-function isFixed(bundle: Bundle, expr: BundleArrayElement): boolean {
-  if (expr === null || typeof expr !== "object") {
-    return true;
-  }
-  if (!Array.isArray(expr)) {
-    // Data, whose keys are the host's: it can move if anything under it can.
-    return Object.values(expr).every((member) =>
-      member === undefined ? true : isFixed(bundle, member),
-    );
-  }
-  switch (expr[0]) {
-    // A list can move if anything in it can.
-    case 4: /* DataArray */ {
-      const [_kind, members] = expr;
-      return members.every((member) => isFixed(bundle, member));
-    }
-    // An element is built once and is thereafter its own: every part of it that
-    // can change was bound to a computation of its own when it was built, so
-    // the position holding it never has to look again.
-    case 0: /* Element */ {
-      return true;
-    }
-    case 2: /* ApplyFunction */ {
-      const [_kind, label] = expr;
-      return bundle.functions[label]?.[1] === true;
-    }
-    // Everything else computes, and computing is what moves — an entry named
-    // rather than applied included, since the position holds whatever calling
-    // it will yield.
-    case 1: /* GetFunction */
-    case 3: /* Builtin */
-    case 1000: /* Identifier */
-    case 1001: /* CallExpression */
-    case 1002: /* PropertyAccessExpression */
-    case 1016: /* ElementAccessExpression */
-    case 1003: /* BinaryExpression */
-    case 1019: /* PrefixUnaryExpression */
-    case 1004: /* ConditionalExpression */
-    case 1005: /* ArrowFunction */
-    case 1020: /* SpreadElement */ {
-      return false;
-    }
-    default: {
-      const unhandled: never = expr;
-      throw new Error(`Unhandled node kind: ${JSON.stringify(unhandled)}`);
-    }
-  }
 }
 
 /**

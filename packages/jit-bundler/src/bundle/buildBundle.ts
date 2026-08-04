@@ -8,7 +8,6 @@ import type {
   IrTreeRef,
 } from "../ir/Ir.js";
 import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
-import { markFixed } from "./markFixed.js";
 import { locKey } from "../locKey.js";
 import { NodeKind } from "./Bundle.js";
 import type {
@@ -542,7 +541,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
               [NodeKind.ReturnStatement, drawn as BundleExpressionNode],
             ],
           ];
-    return [[NodeKind.ArrowFunction, parameterNodes(params), body], false];
+    return [[NodeKind.ArrowFunction, parameterNodes(params), body]];
   };
 
   const buildTree = (target: number): void => {
@@ -769,19 +768,14 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   for (const script of ir.scripts) {
     const body = bodies.get(script);
     if (body !== undefined) {
-      functions[fnLabel(script)] = [body, false];
+      functions[fnLabel(script)] = [body];
     }
   }
-  // Last, with the table whole: an entry's body is only whole once every
-  // splice it writes has been rendered into it. An entry that draws is not
-  // marked — what it yields is an instance to build, which is never a value a
-  // position can settle on.
-  markFixed(functions);
   for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
     functions[treeLabel(index)] = tree;
   }
   for (const [label, body] of expansionBodies) {
-    functions[label] = [body, false];
+    functions[label] = [body];
   }
   return { functions, root };
 }

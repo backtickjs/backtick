@@ -35,17 +35,13 @@ export interface Bundle {
   root: BundleExpressionNode;
 }
 
-// An entry: an arrow under a wrapper, so what the bundler worked out about it
-// lands beside the arrow rather than on it.
+// An entry: an arrow under a wrapper, so what the bundler works out about one
+// has somewhere to land beside it rather than on it. Nothing does today, and
+// the wrapper is what keeps adding something from moving the arrow.
 export type BundleFunction = [
   // The arrow this entry is. An entry with nothing to evaluate is not written
   // at all.
   content: BundleArrowFunctionNode,
-  // True where applying this entry reads nothing that moves, so a client can
-  // fill the position it feeds and never watch it. False costs a computation
-  // and nothing else, which is why a reader is right to assume the value moves
-  // wherever this doesn't say otherwise.
-  fixed: boolean,
 ];
 
 // Plain JSON carrying itself. A node is an array, so an object is the data it

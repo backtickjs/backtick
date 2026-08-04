@@ -1,4 +1,4 @@
-import { evaluate } from "@backtickjs/js-interpreter";
+import { render } from "@backtickjs/js-interpreter";
 
 // The driver, as the benchmark's own driver would be if there were no browser:
 // it opens the app, finds elements by selector, and clicks them. What it drives
@@ -147,7 +147,18 @@ export function open(bundle) {
     },
   };
 
-  evaluate(bundle, host);
+  // Somewhere for the drawing to stand. The app's root is a fragment — children
+  // where it stands — which is a root that draws more than one node and so has
+  // no one value to hand back. Not made by the host, so it stays out of `made`
+  // and out of what a selector searches.
+  const root = {
+    tag: "#root",
+    props: {},
+    children: [],
+    parent: null,
+    text: null,
+  };
+  render(bundle, host, root);
 
   // The first step is a search — there is no document to descend from, so it
   // runs over every node the host made — and each step after it is a child of

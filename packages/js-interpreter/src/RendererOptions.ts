@@ -14,4 +14,3 @@ export interface RendererOptions<NodeType> {
   getFirstChild(node: NodeType): NodeType | undefined;
   getNextSibling(node: NodeType): NodeType | undefined;
 }
-
