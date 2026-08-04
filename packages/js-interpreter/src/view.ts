@@ -138,7 +138,7 @@ export interface Instance {
 export function instantiate(
   bundle: Bundle,
   tree: BundleFunction,
-  slots: Value[],
+  args: Value[],
   host: Host,
 ): unknown {
   const instance: Instance = { bundle, host };
@@ -149,7 +149,7 @@ export function instantiate(
     tree[NodeField.content],
     scopeOf(null, instance),
   ) as (...args: Value[]) => Value;
-  return build(entry(...slots), instance);
+  return build(entry(...args), instance);
 }
 
 // What an evaluated tree expression draws, in a position that draws exactly
@@ -162,7 +162,7 @@ function build(value: Value, instance: Instance): unknown {
   return instantiate(
     instance.bundle,
     value.tree,
-    value.slots,
+    value.args,
     instance.host,
   );
 }

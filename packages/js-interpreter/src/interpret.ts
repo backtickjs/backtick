@@ -127,12 +127,12 @@ function getFunction(
 // is resolved here — the one place that reads the table — so an unknown one is
 // caught where it is written rather than carried along to be looked up again by
 // whoever draws it.
-function applied(bundle: Bundle, label: TreeLabel, slots: Value[]): Applied {
+function applied(bundle: Bundle, label: TreeLabel, args: Value[]): Applied {
   const tree = bundle.trees[label];
   if (tree === undefined) {
     throw new Error(`unknown tree entry ${label}`);
   }
-  return { "@backtickjs": "Applied", tree, slots };
+  return { "@backtickjs": "Applied", tree, args };
 }
 
 // A node is compiled once into the closure that evaluates it, and that closure

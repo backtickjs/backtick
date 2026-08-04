@@ -28,31 +28,29 @@ import type {
 import type { BundleOptions } from "../bundle.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 
-// What a tree expression renders against: the entry being materialized, and the
-// slot index of each capture it threads in. The two travel together because a
-// `cell` node means storage on the enclosing entry, so resolving one takes both
-// the key and whose entry it is landing in. `target` is null where no instance
-// encloses the expression — the bundle root, and a cell's initial.
+// What a tree expression renders against: the entry being materialized, and
+// which keys are its parameters. The two travel together because resolving a
+// key takes both the key and whose entry it is landing in. `target` is null
+// where no entry encloses the expression — the bundle root, and a cell's
+// initial.
 interface TreeScope {
   readonly target: number | null;
-  readonly slots: Set<string>;
+  readonly params: Set<string>;
 }
 
-// Renders in no instance: nothing is in scope, and a cell reaching here has
+// Renders in no entry: nothing is in scope, and a cell reaching here has
 // nowhere to resolve against.
-const noInstance = (): TreeScope => ({ target: null, slots: new Set() });
+const noInstance = (): TreeScope => ({ target: null, params: new Set() });
 
 // Builds the bundle `{ functions, trees, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
 // contract — are documented on the `Bundle` types; this file documents how
 // they are derived.
 //
-// A tree entry is an implicit function of its slots: instantiating it supplies
-// one value per slot, exactly as calling a `functions` entry supplies its
-// captures. The slot signature is derived, not stored (see `treeSlots`). A
-// reference to a tree from source position renders as a call of its entry
-// passing those captures by name; from JSON position it is a `#call` whose
-// arguments are `#slot` expressions of the enclosing entry.
+// A tree entry is a function of what it was handed: instantiating it supplies
+// one value per parameter, exactly as calling a `functions` entry supplies its
+// captures. The signature is derived, not stored (see `treeParams`), and a
+// reference passes those captures by name.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -140,9 +138,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // enclosing scope: whatever its target still needs, plus the captures of the
   // thunks passed for its splices, since those thunks are written inline at this
   // call site. A tree reference needs its
-  // slot values; an inline element whatever its props need.
+  // arguments; an inline element whatever its props need.
   // Memoized per argument — the IR is immutable and this fans out from `need`
-  // and `treeSlots`.
+  // and `treeParams`.
   const freeCapsCache = new Map<IrArgument, string[]>();
   const freeCaps = (value: IrArgument): string[] => {
     const cached = freeCapsCache.get(value);
@@ -173,10 +171,10 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         return keys;
       }
       case "IrTreeRef":
-        // An entry supplies the cells it owns, so only its slots thread out.
+        // An entry supplies the cells it owns, so only its params thread out.
         // The key belongs to this reference rather than the entry, so it
         // captures here, alongside them.
-        return treeSlots(value.target);
+        return treeParams(value.target);
       // A cell threads like a capture: the entry reading it takes the handle as
       // a parameter, and its owner supplies it.
       case "IrStateRef":
@@ -225,7 +223,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   // What to scan for an entry's needs: an element contributes its key and its
   // props — a key may be a script, so it captures like any other value — and a
-  // reference contributes itself, so the inner instance's slots thread through.
+  // reference contributes itself, so the inner entry's params thread through.
   const contentValues = (
     content: IrElement | IrTreeRef | null,
   ): IrArgument[] =>
@@ -243,11 +241,10 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   // What an entry's wiring needs, split by where it comes from:
   //
-  //   slots — the capture keys it takes from whichever scope instantiates it,
-  //     in first-need order. These are the entry's implicit parameters, and a
-  //     reference passes one value per key, exactly as captures thread between
-  //     functions. A cell the entry doesn't own is one of them: it threads down
-  //     from its owner like any other value.
+  //   params — the capture keys it takes from whichever scope instantiates it,
+  //     in first-need order, which are the entry's parameters. A cell the entry
+  //     doesn't own is one of them: it threads down from its owner like any
+  //     other value.
   //   cells — the cells it owns, and so declares. Every instance of the entry
   //     allocates its own storage for each.
   //
@@ -259,7 +256,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // Memoized; no cycle guard is needed because the entry graph is acyclic —
   // a child is always built before its parent.
   interface TreeNeeds {
-    readonly slots: string[];
+    readonly params: string[];
     readonly cells: string[];
   }
   const treeNeedsCache = new Map<number, TreeNeeds>();
@@ -268,7 +265,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if (cached) {
       return cached;
     }
-    const needs: TreeNeeds = { slots: [], cells: [] };
+    const needs: TreeNeeds = { params: [], cells: [] };
     const seen = new Set<string>();
     for (const value of contentValues(ir.trees[target].content)) {
       for (const key of freeCaps(value)) {
@@ -276,15 +273,15 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
           continue;
         }
         seen.add(key);
-        // Anything this entry doesn't hold threads in as a slot, cell or not.
-        (ownsCell(target, key) ? needs.cells : needs.slots).push(key);
+        // Anything this entry doesn't hold is a parameter, cell or not.
+        (ownsCell(target, key) ? needs.cells : needs.params).push(key);
       }
     }
     treeNeedsCache.set(target, needs);
     return needs;
   };
 
-  const treeSlots = (target: number): string[] => treeNeeds(target).slots;
+  const treeParams = (target: number): string[] => treeNeeds(target).params;
   const treeCells = (target: number): string[] => treeNeeds(target).cells;
 
   const bodies = new Map<IrScriptEntry, BundleArrowFunctionNode>();
@@ -392,14 +389,14 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     };
   };
 
-  // Instantiating a tree in value position: which entry, and the slots to hand
+  // Instantiating a tree in value position: which entry, and what to hand
   // it. A tree is applied wherever it is reached — there was once a plain call
   // for the unkeyed case and an apply for the keyed one, but the two carried
-  // the same label and the same slots and differed only in the node they were
+  // the same label and the same arguments and differed only in the node they were
   // written as.
   const instantiation = (value: IrTreeRef): BundleExpressionNode => {
     materializeTree(value.target);
-    const args: BundleExpressionNode[] = treeSlots(value.target).map(readKey);
+    const args: BundleExpressionNode[] = treeParams(value.target).map(readKey);
     return {
       "#": NodeKind.ApplyTree,
       [NodeField.label]: `${value.target}`,
@@ -409,7 +406,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   // Renders an IR argument in value position — as the node for the value it
   // evaluates to. A script reference becomes a call of its `functions` entry, a
-  // tree reference a call of its `trees` entry passing the tree's slot captures;
+  // tree reference a call of its `trees` entry passing its captures by name;
   // every other value its literal form.
   const renderValue = (value: IrArgument): BundleExpressionNode => {
     switch (value.kind) {
@@ -504,7 +501,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     }
     if (value.kind === "IrTreeRef") {
       // A hole calls what it is handed, so what it is handed is a body to run:
-      // the application, in an arrow. A slotless entry used to be passed as
+      // the application, in an arrow. An entry taking nothing used to be passed as
       // itself, being already a function of nothing — but that took a node kind
       // of its own to say, and this says it with the one every other reference
       // uses.
@@ -523,8 +520,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const treeJsons = new Map<number, BundleFunction>();
 
   // Materializes a tree entry into `treeJsons` the first time it is reached:
-  // its element rendered as a bundle expression against the entry's own slot
-  // indices.
+  // its element rendered as a bundle expression against the entry's own
+  // parameters.
   const materializeTree = (target: number): void => {
     if (treeJsons.has(target)) {
       return;
@@ -555,15 +552,15 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // An entry as its arrow: the cells it declares, then what it draws. A body
   // only where there is something to bind — otherwise the arrow is its content.
   const treeEntry = (
-    slots: string[],
+    params: string[],
     bindings: BundleVariableDeclarationNode[],
     drawn: BundleExpr,
   ): BundleFunction => ({
     [NodeField.content]: {
       "#": NodeKind.ArrowFunction,
-      ...(slots.length === 0
+      ...(params.length === 0
         ? {}
-        : { [NodeField.parameters]: parameterNodes(slots) }),
+        : { [NodeField.parameters]: parameterNodes(params) }),
       [NodeField.body]:
         bindings.length === 0
           ? (drawn as BundleExpressionNode)
@@ -581,13 +578,13 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   });
 
   const buildTree = (target: number): void => {
-    const keys = treeSlots(target);
-    const scope: TreeScope = { target, slots: new Set(keys) };
-    // The entry's parameters, named where its expressions name them.
+    const keys = treeParams(target);
+    const scope: TreeScope = { target, params: new Set(keys) };
+    // Named where its expressions name them.
     const names = keys.map(displayName);
     const content = ir.trees[target].content;
     // A cell's initial is data the entry carries, evaluated in no instance: it
-    // can't read a slot or another cell, so it renders against an empty scope.
+    // can't read a parameter or another cell, so it renders against nothing.
     const bindings: BundleVariableDeclarationNode[] = [];
     for (const key of treeCells(target)) {
       // `treeCells` only yields keys this entry holds, so the initial is here.
@@ -609,9 +606,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       return;
     }
     // An instance that draws another instance: applying the inner entry,
-    // passing whatever its slots need from this one's.
+    // passing whatever its parameters need from this one's.
     materializeTree(content.target);
-    const args = treeSlots(content.target).map((key) => capExpr(key, scope));
+    const args = treeParams(content.target).map((key) => capExpr(key, scope));
     treeJsons.set(
       target,
       treeEntry(names, bindings, {
@@ -623,7 +620,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
-  // resolves by name; anything else must be a slot of the enclosing tree. At
+  // resolves by name; anything else must be a parameter of the enclosing entry.
+  // At
   // the bundle root there is no enclosing instance, so a capture reaching it
   // can't be threaded from anywhere.
   const capExpr = (
@@ -634,16 +632,16 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if (params.has(key)) {
       return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
-    // Before the cell case: a cell this entry doesn't own arrives as a slot,
-    // and only one it owns is bound here.
-    if (scope.slots.has(key)) {
+    // Before the cell case: a cell this entry doesn't own arrives as a
+    // parameter, and only one it owns is bound here.
+    if (scope.params.has(key)) {
       return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
     if (isCellKey(key)) {
       // The one place a `cell` node is made, so the rule `Bundle.ts` states —
       // a cell only means anything inside the entry declaring it — is enforced
       // by this comparison rather than by rescanning the finished bundle.
-      // Reaching here off its owner means the cell threaded outward as a slot
+      // Reaching here off its owner means the cell threaded outward as a parameter
       // until nothing was left to supply it.
       if (scope.target === null) {
         throw new Error(
@@ -718,7 +716,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   };
 
   // Renders an inline element: static structure carried as data, each prop a
-  // bundle expression against the enclosing tree's slots.
+  // bundle expression in the enclosing entry's scope.
   const renderElement = (
     element: IrElement,
     scope: TreeScope,
@@ -754,7 +752,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     }
     if (value.kind === "IrTreeRef") {
       materializeTree(value.target);
-      const args = treeSlots(value.target).map((key) =>
+      const args = treeParams(value.target).map((key) =>
         capExpr(key, scope, params),
       );
       return {
@@ -766,8 +764,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if (value.kind === "IrElement") {
       return renderElement(value, scope, params);
     }
-    // A handle in tree position resolves against the instance, exactly as a
-    // slot resolves against the instantiation arguments.
+    // A cell in tree position resolves by name, like anything else the entry
+    // bound or was handed.
     if (value.kind === "IrStateRef") {
       return capExpr(cellKey(value.target), scope, params);
     }

@@ -7,8 +7,8 @@ import type { BundleFunction } from "@backtickjs/core";
  *
  * Kept apart from `BundleApplyTree`, which it resembles: a node's arguments are
  * expressions waiting for a scope, and these are what those expressions became.
- * Nothing tells the two apart by shape, so a node reaching here would draw an
- * entry with expressions as its slots — wrong, and quietly.
+ * Nothing tells the two apart by shape, so a node reaching here would call an
+ * entry with expressions as its arguments — wrong, and quietly.
  *
  * Recognized by the marker rather than by `instanceof`: class identity is
  * per-copy of the package, and two copies in one install would fail the check.
@@ -16,7 +16,7 @@ import type { BundleFunction } from "@backtickjs/core";
 export interface Applied {
   readonly "@backtickjs": "Applied";
   readonly tree: BundleFunction;
-  readonly slots: Value[];
+  readonly args: Value[];
 }
 
 export function isApplied(value: unknown): value is Applied {

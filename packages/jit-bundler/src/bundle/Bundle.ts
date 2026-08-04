@@ -48,9 +48,9 @@ export interface Bundle {
   // by its call site to the client arguments.
   functions: Record<FunctionLabel, BundleFunction>;
   // The same entry a `functions` label names: an arrow, evaluated to a function
-  // and called to instantiate. Its slots are its parameters and its cells are
-  // bindings in its body, so an instance is a call and what persists per
-  // instance is that call's scope.
+  // and called to instantiate. What it is handed are its parameters and the
+  // cells it declares are bindings in its body, so an instance is a call and
+  // what persists per instance is that call's scope.
   trees: Record<TreeLabel, BundleFunction>;
   root: BundleExpr;
 }
@@ -189,7 +189,7 @@ export const NodeKind = {
   // cell is now bound by a declaration in that entry and resolves as an
   // `Identifier`. A number is never reused.
   // 3 is retired. It named a `trees` entry as a value — a function taking the
-  // entry's slots and yielding the instance. A tree is applied, never called,
+  // entry's arguments and yielding the instance. A tree is applied, never called,
   // so an `ApplyTree` says the same thing in one node where this needed two.
   // (An entry is a function now, but it is still applied rather than named.)
   // A number is never reused.
