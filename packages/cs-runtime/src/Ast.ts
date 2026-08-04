@@ -48,27 +48,38 @@ export type ClientScriptStatement =
 // implicitly returned.
 export type ClientScriptBody = ClientScriptExpression | ClientScriptBlock;
 
+// Any node at all: the statements, which cover the expressions, and the rest —
+// each admitted only by a particular list or clause. Spread is TypeScript's one
+// disagreement: `ts.SpreadElement` is an `Expression` there, where here it is
+// only what an array or an argument list may hold.
+export type ClientScriptNode =
+  | ClientScriptStatement
+  | ClientScriptSpreadElement
+  | ClientScriptParameterDeclaration
+  | ClientScriptPropertyAssignment
+  | ClientScriptCatchClause
+  | ClientScriptVariableDeclarationList
+  | ClientScriptVariableDeclaration;
+
 // Each node below is named for the TypeScript node it mirrors — `ts.IfStatement`
 // is `ClientScriptIfStatement` — and its fields are TypeScript's, in TypeScript's
 // order, so a reader who knows that AST knows this one. Anything this language
 // adds comes last: an identifier's `bindingKey`, a declaration's `keyword`.
 // Only `ClientScriptSplice` has no counterpart, having no counterpart in
 // JavaScript either.
-export interface ClientScriptNode {
-  readonly kind: SyntaxKind;
-  readonly loc: SourceLocation;
-}
 
-export interface ClientScriptArrayLiteralExpression extends ClientScriptNode {
+export interface ClientScriptArrayLiteralExpression {
   readonly kind: typeof SyntaxKind.ArrayLiteralExpression;
+  readonly loc: SourceLocation;
   readonly elements: readonly ClientScriptArrayElement[];
 }
 
 // `...xs`, which is not an expression: it stands where an element or an
 // argument stands and contributes however many the array it spreads has. Named
 // only by the two lists that admit it, so nothing else has to consider it.
-export interface ClientScriptSpreadElement extends ClientScriptNode {
+export interface ClientScriptSpreadElement {
   readonly kind: typeof SyntaxKind.SpreadElement;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
 }
 
@@ -76,22 +87,25 @@ export type ClientScriptArrayElement =
   | ClientScriptExpression
   | ClientScriptSpreadElement;
 
-export interface ClientScriptArrowFunction extends ClientScriptNode {
+export interface ClientScriptArrowFunction {
   readonly kind: typeof SyntaxKind.ArrowFunction;
+  readonly loc: SourceLocation;
   readonly parameters: readonly ClientScriptParameterDeclaration[];
   readonly body: ClientScriptBody;
 }
 
-export interface ClientScriptWhileStatement extends ClientScriptNode {
+export interface ClientScriptWhileStatement {
   readonly kind: typeof SyntaxKind.WhileStatement;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
   readonly statement: ClientScriptStatement;
 }
 
 // The incrementor is an assignment, which is a statement's worth of syntax
 // here even though TypeScript reads it as an expression.
-export interface ClientScriptForStatement extends ClientScriptNode {
+export interface ClientScriptForStatement {
   readonly kind: typeof SyntaxKind.ForStatement;
+  readonly loc: SourceLocation;
   // The list, not the statement — `ts.ForInitializer` is the same union.
   readonly initializer:
     | ClientScriptVariableDeclarationList
@@ -102,16 +116,19 @@ export interface ClientScriptForStatement extends ClientScriptNode {
   readonly statement: ClientScriptStatement;
 }
 
-export interface ClientScriptBreakStatement extends ClientScriptNode {
+export interface ClientScriptBreakStatement {
   readonly kind: typeof SyntaxKind.BreakStatement;
+  readonly loc: SourceLocation;
 }
 
-export interface ClientScriptContinueStatement extends ClientScriptNode {
+export interface ClientScriptContinueStatement {
   readonly kind: typeof SyntaxKind.ContinueStatement;
+  readonly loc: SourceLocation;
 }
 
-export interface ClientScriptBinaryExpression extends ClientScriptNode {
+export interface ClientScriptBinaryExpression {
   readonly kind: typeof SyntaxKind.BinaryExpression;
+  readonly loc: SourceLocation;
   readonly left: ClientScriptExpression;
   readonly operatorToken: BinaryOperator;
   readonly right: ClientScriptExpression;
@@ -119,49 +136,57 @@ export interface ClientScriptBinaryExpression extends ClientScriptNode {
 
 // `!x`, whose operand is boolean like every other tested position: there is no
 // truthiness for it to negate.
-export interface ClientScriptPrefixUnaryExpression extends ClientScriptNode {
+export interface ClientScriptPrefixUnaryExpression {
   readonly kind: typeof SyntaxKind.PrefixUnaryExpression;
+  readonly loc: SourceLocation;
   readonly operator: PrefixUnaryOperator;
   readonly operand: ClientScriptExpression;
 }
 
-export interface ClientScriptConditionalExpression extends ClientScriptNode {
+export interface ClientScriptConditionalExpression {
   readonly kind: typeof SyntaxKind.ConditionalExpression;
+  readonly loc: SourceLocation;
   readonly condition: ClientScriptExpression;
   readonly whenTrue: ClientScriptExpression;
   readonly whenFalse: ClientScriptExpression;
 }
 
-export interface ClientScriptBlock extends ClientScriptNode {
+export interface ClientScriptBlock {
   readonly kind: typeof SyntaxKind.Block;
+  readonly loc: SourceLocation;
   readonly statements: readonly ClientScriptStatement[];
 }
 
 // Two kinds rather than one with a value, as ts.TrueLiteral and
 // ts.FalseLiteral are: the kind is the value.
-export interface ClientScriptTrueLiteral extends ClientScriptNode {
+export interface ClientScriptTrueLiteral {
   readonly kind: typeof SyntaxKind.TrueKeyword;
+  readonly loc: SourceLocation;
 }
 
-export interface ClientScriptFalseLiteral extends ClientScriptNode {
+export interface ClientScriptFalseLiteral {
   readonly kind: typeof SyntaxKind.FalseKeyword;
+  readonly loc: SourceLocation;
 }
 
-export interface ClientScriptCallExpression extends ClientScriptNode {
+export interface ClientScriptCallExpression {
   readonly kind: typeof SyntaxKind.CallExpression;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
   readonly questionDotToken: boolean;
   readonly arguments: readonly ClientScriptArrayElement[];
 }
 
-export interface ClientScriptIdentifier extends ClientScriptNode {
+export interface ClientScriptIdentifier {
   readonly kind: typeof SyntaxKind.Identifier;
+  readonly loc: SourceLocation;
   readonly text: string;
   readonly bindingKey: string;
 }
 
-export interface ClientScriptIfStatement extends ClientScriptNode {
+export interface ClientScriptIfStatement {
   readonly kind: typeof SyntaxKind.IfStatement;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
   readonly thenStatement: ClientScriptStatement;
   readonly elseStatement: ClientScriptStatement | null;
@@ -172,28 +197,33 @@ export interface ClientScriptIfStatement extends ClientScriptNode {
 // function with one hole per constructor parameter (see `lowerSpliceable`) —
 // so the bundler expands the construction into a plain call of its callee
 // (see `lowerScriptBody`).
-export interface ClientScriptNewExpression extends ClientScriptNode {
+export interface ClientScriptNewExpression {
   readonly kind: typeof SyntaxKind.NewExpression;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
   readonly arguments: readonly ClientScriptExpression[];
 }
 
-export interface ClientScriptNullLiteral extends ClientScriptNode {
+export interface ClientScriptNullLiteral {
   readonly kind: typeof SyntaxKind.NullKeyword;
+  readonly loc: SourceLocation;
 }
 
-export interface ClientScriptNumericLiteral extends ClientScriptNode {
+export interface ClientScriptNumericLiteral {
   readonly kind: typeof SyntaxKind.NumericLiteral;
+  readonly loc: SourceLocation;
   readonly value: number;
 }
 
-export interface ClientScriptObjectLiteralExpression extends ClientScriptNode {
+export interface ClientScriptObjectLiteralExpression {
   readonly kind: typeof SyntaxKind.ObjectLiteralExpression;
+  readonly loc: SourceLocation;
   readonly properties: readonly ClientScriptPropertyAssignment[];
 }
 
-export interface ClientScriptPropertyAccessExpression extends ClientScriptNode {
+export interface ClientScriptPropertyAccessExpression {
   readonly kind: typeof SyntaxKind.PropertyAccessExpression;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
   readonly questionDotToken: boolean;
   readonly name: string;
@@ -201,42 +231,49 @@ export interface ClientScriptPropertyAccessExpression extends ClientScriptNode {
 
 // The key is an expression, not a name: `a[i]` and `row[column]` are the point,
 // `row["name"]` only incidentally allowed.
-export interface ClientScriptElementAccessExpression extends ClientScriptNode {
+export interface ClientScriptElementAccessExpression {
   readonly kind: typeof SyntaxKind.ElementAccessExpression;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
   readonly argumentExpression: ClientScriptExpression;
 }
 
-export interface ClientScriptReturnStatement extends ClientScriptNode {
+export interface ClientScriptReturnStatement {
   readonly kind: typeof SyntaxKind.ReturnStatement;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
 }
 
 // `Math`, and nothing else yet. The name travels rather than the value, so a
 // host that is not JavaScript answers with its own and the format says which
 // answer is the right one.
-export interface ClientScriptBuiltin extends ClientScriptNode {
+export interface ClientScriptBuiltin {
   readonly kind: typeof SyntaxKind.Builtin;
+  readonly loc: SourceLocation;
   readonly name: string;
 }
 
-export interface ClientScriptSplice extends ClientScriptNode {
+export interface ClientScriptSplice {
   readonly kind: typeof SyntaxKind.Splice;
+  readonly loc: SourceLocation;
   readonly key: string;
 }
 
-export interface ClientScriptStringLiteral extends ClientScriptNode {
+export interface ClientScriptStringLiteral {
   readonly kind: typeof SyntaxKind.StringLiteral;
+  readonly loc: SourceLocation;
   readonly text: string;
 }
 
-export interface ClientScriptThrowStatement extends ClientScriptNode {
+export interface ClientScriptThrowStatement {
   readonly kind: typeof SyntaxKind.ThrowStatement;
+  readonly loc: SourceLocation;
   readonly expression: ClientScriptExpression;
 }
 
-export interface ClientScriptTryStatement extends ClientScriptNode {
+export interface ClientScriptTryStatement {
   readonly kind: typeof SyntaxKind.TryStatement;
+  readonly loc: SourceLocation;
   readonly tryBlock: ClientScriptBlock;
   readonly catchClause: ClientScriptCatchClause;
 }
@@ -244,23 +281,26 @@ export interface ClientScriptTryStatement extends ClientScriptNode {
 // The clause a try statement catches with. `variableDeclaration` is null
 // for a bindingless catch; TypeScript holds a declaration node there, where
 // the name is all this needs.
-export interface ClientScriptCatchClause extends ClientScriptNode {
+export interface ClientScriptCatchClause {
   readonly kind: typeof SyntaxKind.CatchClause;
+  readonly loc: SourceLocation;
   readonly variableDeclaration: ClientScriptIdentifier | null;
   readonly block: ClientScriptBlock;
 }
 
 // A parameter is the name it binds: TypeScript's `dotDotDotToken`,
 // `questionToken`, `type` and `initializer` are each rejected here.
-export interface ClientScriptParameterDeclaration extends ClientScriptNode {
+export interface ClientScriptParameterDeclaration {
   readonly kind: typeof SyntaxKind.Parameter;
+  readonly loc: SourceLocation;
   readonly name: ClientScriptIdentifier;
 }
 
 // One `a: 4` of an object literal. A key is always a plain name here, so
 // `name` is that name rather than the `PropertyName` node TypeScript holds.
-export interface ClientScriptPropertyAssignment extends ClientScriptNode {
+export interface ClientScriptPropertyAssignment {
   readonly kind: typeof SyntaxKind.PropertyAssignment;
+  readonly loc: SourceLocation;
   readonly name: string;
   readonly initializer: ClientScriptExpression;
 }
@@ -269,8 +309,9 @@ export interface ClientScriptPropertyAssignment extends ClientScriptNode {
 // TypeScript spends the same three nodes, and for the same reason: a `for`
 // header takes the list without this wrapper (see
 // `ClientScriptForStatement.initializer`).
-export interface ClientScriptVariableStatement extends ClientScriptNode {
+export interface ClientScriptVariableStatement {
   readonly kind: typeof SyntaxKind.VariableStatement;
+  readonly loc: SourceLocation;
   readonly declarationList: ClientScriptVariableDeclarationList;
 }
 
@@ -280,14 +321,16 @@ export interface ClientScriptVariableStatement extends ClientScriptNode {
 // `keyword` is the one field with no TypeScript counterpart, and this is the
 // node TypeScript keeps the same fact on — as `NodeFlags.Const` or
 // `NodeFlags.Let` in `Node.flags`, where this spells the word.
-export interface ClientScriptVariableDeclarationList extends ClientScriptNode {
+export interface ClientScriptVariableDeclarationList {
   readonly kind: typeof SyntaxKind.VariableDeclarationList;
+  readonly loc: SourceLocation;
   readonly declarations: readonly ClientScriptVariableDeclaration[];
   readonly keyword: "let" | "const";
 }
 
-export interface ClientScriptVariableDeclaration extends ClientScriptNode {
+export interface ClientScriptVariableDeclaration {
   readonly kind: typeof SyntaxKind.VariableDeclaration;
+  readonly loc: SourceLocation;
   readonly name: ClientScriptIdentifier;
   readonly initializer: ClientScriptExpression;
 }
