@@ -1,6 +1,6 @@
 import type { Bundle, FunctionLabel } from "@backtickjs/core";
 import type { Value } from "./Value.js";
-import type { Host } from "./view.js";
+import type { Renderer } from "solid-js/universal";
 
 // A bundle paired with a host: what is needed to draw one, which neither of
 // them holds alone. A bundle says what to draw and a host knows how, and an
@@ -11,7 +11,7 @@ import type { Host } from "./view.js";
 // bindings in its call, so nothing here differs between two of them.
 export interface Instance {
   readonly bundle: Bundle;
-  readonly host: Host;
+  readonly renderer: Renderer<object>;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per
   // reference would be a fresh identity, and a prop holding one would be set

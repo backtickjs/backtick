@@ -1,4 +1,4 @@
-import type { RendererOptions } from "solid-js/universal";
+import type { RendererOptions } from "@backtickjs/js-interpreter";
 
 // The DOM, as the ten operations a host answers. Nine of them are the DOM's own
 // words. The tenth, `setProperty`, is the only decision in the file, and the

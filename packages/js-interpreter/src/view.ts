@@ -4,8 +4,8 @@ import type {
   BundleElement,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
-import { createRenderer } from "solid-js/universal";
-import type { Renderer, RendererOptions } from "solid-js/universal";
+import { createRenderer, type Renderer } from "solid-js/universal";
+import type { RendererOptions } from "./RendererOptions.js";
 import type { Instance } from "./Instance.js";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
@@ -23,12 +23,6 @@ import type { Value } from "./Value.js";
 // around them is untouched — there is no pass over the tree to find out what
 // changed, because whatever changed said so.
 
-// A host as this file uses one: the renderer Solid builds from the ten
-// operations a host implements. Typed over `object` because the interpreter
-// never looks inside a node — it holds them, hands them back, and lets the
-// host say what they mean.
-export type Host = Renderer<object>;
-
 /**
  * Renders a bundle into one of the host's nodes, and keeps it there: a write to
  * a state cell re-runs the props and the lists that read it, and the target
@@ -39,9 +33,9 @@ export function render<N extends object>(
   options: RendererOptions<N>,
   target: N,
 ): () => void {
-  const host = hostOf(options);
+  const renderer = rendererOf(options);
   return createRoot((dispose) => {
-    host.insert(target, materialize(bundle, host));
+    renderer.insert(target, materialize(bundle, renderer));
     return dispose;
   });
 }
@@ -58,24 +52,26 @@ export function evaluate<N extends object>(
   bundle: Bundle,
   options: RendererOptions<N>,
 ): unknown {
-  return createRoot(() => materialize(bundle, hostOf(options)));
+  return createRoot(() => materialize(bundle, rendererOf(options)));
 }
 
-function materialize(bundle: Bundle, host: Host): unknown {
-  const instance: Instance = { bundle, host, functions: new Map() };
+function materialize(bundle: Bundle, renderer: Renderer<object>): unknown {
+  const instance: Instance = { bundle, renderer, functions: new Map() };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.
   return evaluateNode(instance, bundle.root, scopeOf(null));
 }
 
-// A renderer per set of host operations. The cast is the one place the
-// interpreter's `object` meets the host's own node type: every node this holds
-// came from the host and goes back to it untouched, so what it is, is the
-// host's business throughout.
-function hostOf<N extends object>(options: RendererOptions<N>): Host {
+// A renderer per set of target operations. The cast is the one place the
+// interpreter's `object` meets the target's own node type: every node this
+// holds came from the target and goes back to it untouched, so what it is, is
+// the target's business throughout.
+function rendererOf<N extends object>(
+  options: RendererOptions<N>,
+): Renderer<object> {
   requireReactivity();
-  return createRenderer(options as RendererOptions<object>) as Host;
+  return createRenderer(options as RendererOptions<object>);
 }
 
 // Whether the Solid in the graph is the reactive one.
@@ -150,11 +146,11 @@ export function compileElement(
   const draw =
     children === undefined ? null : compileChildren(instance, children);
   return (scope) => {
-    const host = instance.host;
-    const node = host.createElement(id);
+    const renderer = instance.renderer;
+    const node = renderer.createElement(id);
     for (const [prop, read, fixed] of props) {
       if (fixed) {
-        host.setProp(node, prop, read(scope));
+        renderer.setProp(node, prop, read(scope));
         continue;
       }
       // One effect per prop, so a write moves that one prop of that one node.
@@ -167,15 +163,15 @@ export function compileElement(
       // that is a comparison here rather than a write per row per selection.
       // A handler is a new closure whenever what it captured changed, so it
       // compares unequal and is registered again, as before.
-      host.effect((previous) => {
+      renderer.effect((previous) => {
         const value = read(scope);
         return value === previous
           ? previous
-          : host.setProp(node, prop, value, previous);
+          : renderer.setProp(node, prop, value, previous);
       });
     }
     if (draw !== null) {
-      host.insert(node, draw(scope));
+      renderer.insert(node, draw(scope));
     }
     return node as Value;
   };

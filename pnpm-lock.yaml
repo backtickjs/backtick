@@ -432,9 +432,6 @@ importers:
       '@backtickjs/js-interpreter':
         specifier: workspace:*
         version: link:../js-interpreter
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
     devDependencies:
       '@backtickjs/core':
         specifier: workspace:*
