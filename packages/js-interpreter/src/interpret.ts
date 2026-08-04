@@ -87,13 +87,17 @@ function compileFunction(
     run: () => {
       throw new Error(`\`${label}\` was applied while it was compiling`);
     },
+    // A body reaching itself is not one this can settle.
+    fixed: false,
   });
   const arrow = compile(instance, declared[0]);
   // In no scope rather than an empty one: a function reaches what encloses it
   // through its own parameters, so a frame binding nothing would only be one
   // more to walk past at the end of every name it fails to find.
   const closure = arrow.run(null) as (...args: Value[]) => Value;
-  const compiled = { run: () => closure };
+  // The arrow already answered for applying it — what the bundler used to work
+  // out and ship as a flag beside the function.
+  const compiled = { run: () => closure, fixed: arrow.fixed };
   instance.functions.set(label, compiled);
   return compiled;
 }
@@ -116,12 +120,21 @@ function compileFunction(
 //   `Compiled<Value[]>`    a list, which yields its members
 export interface Compiled<T = Value> {
   readonly run: (scope: Scope | null) => T;
+  // Whether what it yields can change after it has first been read. Storage is
+  // what moves, and storage is reached by calling — `read()` on a handle, and
+  // nothing else — so a node that runs no call is settled, and the position
+  // holding it needs no computation to watch it.
+  //
+  // Worked out as the node is compiled: every case has already compiled its
+  // children, so what it says about itself is what they said. A pass over the
+  // same nodes to ask the same question would not pay for itself.
+  readonly fixed: boolean;
 }
 
 export function compile(instance: Instance, node: Source): Compiled {
   if (node === null || typeof node !== "object") {
     const literal = node as Value;
-    return { run: () => literal };
+    return { run: () => literal, fixed: true };
   }
   return buildNode(instance, node);
 }
@@ -139,7 +152,7 @@ function compileStatement(
   node: BundleStatementNode,
 ): Compiled<Completion> {
   if (node === null || typeof node !== "object") {
-    return { run: () => advanced };
+    return { run: () => advanced, fixed: true };
   }
   return buildStatement(instance, node);
 }
@@ -160,13 +173,14 @@ function buildNode(instance: Instance, source: Source): Compiled {
         }
         return object;
       },
+      fixed: parts.every((part) => part.fixed),
     };
   }
   const node = source;
   switch (node[0]) {
     case 4: /* DataArray */ {
       const members = compileElements(instance, node[1]);
-      return { run: (scope) => members.run(scope) };
+      return { run: (scope) => members.run(scope), fixed: members.fixed };
     }
     case 1000: /* Identifier */ {
       const name = node[1];
@@ -178,13 +192,15 @@ function buildNode(instance: Instance, source: Source): Compiled {
           }
           return read(frame, name);
         },
+        fixed: true,
       };
     }
     // A function named rather than applied: what it evaluates to, which is what
     // a hole handing over nothing would have called.
     case 1: /* GetFunction */ {
       const label = node[1];
-      return { run: () => compileFunction(instance, label).run(null) };
+      const func = compileFunction(instance, label);
+      return { run: () => func.run(null), fixed: true };
     }
     // A function applied: run it, wherever this is. Drawing needs no ceremony —
     // a function is evaluated where the mount is, so an element in its body
@@ -192,11 +208,13 @@ function buildNode(instance: Instance, source: Source): Compiled {
     case 2: /* ApplyFunction */ {
       const label = node[1];
       const args = node[2].map((arg) => compile(instance, arg));
+      const func = compileFunction(instance, label);
       return {
         run: (scope) => {
           const supplied = args.map((arg) => arg.run(scope));
-          return compileFunction(instance, label).run(null)(...supplied);
+          return func.run(null)(...supplied);
         },
+        fixed: args.every((arg) => arg.fixed) && func.fixed,
       };
     }
     case 0: /* Element */ {
@@ -211,7 +229,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }
-      return { run: () => value };
+      return { run: () => value, fixed: true };
     }
     case 1001: /* CallExpression */ {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
@@ -247,6 +265,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
             }
             return method.apply(object, args.run(scope));
           },
+          fixed: false,
         };
       }
       const target = compile(instance, callee);
@@ -264,6 +283,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
           }
           return value(...args.run(scope));
         },
+        fixed: false,
       };
     }
     case 1002: /* PropertyAccessExpression */ {
@@ -280,6 +300,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
           // `undefined` never arises.
           return object[member] ?? null;
         },
+        fixed: target.fixed,
       };
     }
     case 1016: /* ElementAccessExpression */ {
@@ -311,6 +332,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
           }
           return null;
         },
+        fixed: target.fixed && argument.fixed,
       };
     }
     case 1003: /* BinaryExpression */ {
@@ -338,14 +360,14 @@ function buildNode(instance: Instance, source: Source): Compiled {
             // statement position nothing reads it.
             return value;
           },
+          fixed: right.fixed,
         };
       }
+      const left = compile(instance, node[2]);
+      const right = compile(instance, node[3]);
       return {
-        run: compileBinop(
-          node[1],
-          compile(instance, node[2]),
-          compile(instance, node[3]),
-        ),
+        run: compileBinop(node[1], left, right),
+        fixed: left.fixed && right.fixed,
       };
     }
     case 1019: /* PrefixUnaryExpression */ {
@@ -354,10 +376,14 @@ function buildNode(instance: Instance, source: Source): Compiled {
       // negates rather than deciding what counts as true. A `-` operand is a
       // number, checked by the compiler as arithmetic everywhere else is.
       if (node[1] === "-") {
-        return { run: (scope) => -(operand.run(scope) as number) };
+        return {
+          run: (scope) => -(operand.run(scope) as number),
+          fixed: operand.fixed,
+        };
       }
       return {
         run: (scope) => !condition(operand.run(scope), "the operand of `!`"),
+        fixed: operand.fixed,
       };
     }
     case 1004: /* ConditionalExpression */ {
@@ -370,22 +396,29 @@ function buildNode(instance: Instance, source: Source): Compiled {
           condition(test.run(scope), "a ternary condition")
             ? whenTrue.run(scope)
             : whenFalse.run(scope),
+        fixed: test.fixed && whenTrue.fixed && whenFalse.fixed,
       };
     }
     case 1005: /* ArrowFunction */ {
       const parameters = node[1].map((param) => param[1]);
       const body = node[2];
-      const block =
-        Array.isArray(body) && body[0] === 1006 /* Block */
-          ? compileStatement(instance, body)
-          : null;
-      // A non-block body is an expression, implicitly returned.
-      const expression = block === null ? compile(instance, body) : null;
+      // A block runs its statements; anything else is an expression, which is
+      // implicitly returned. What is asked of a function is whether applying it
+      // is settled, never whether holding it is — so either way that is what
+      // `fixed` answers, and either way the body just said it.
+      const isBlock = Array.isArray(body) && body[0] === 1006; /* Block */
+      const compiled = isBlock
+        ? compileStatement(instance, body)
+        : compile(instance, body);
       // Nothing to bind and nothing to declare: the body reads the enclosing
       // frame, so making one of its own would be an allocation per call for a
       // scope that holds nothing. Every splice argument is one of these.
-      if (parameters.length === 0 && expression !== null) {
-        return { run: (scope) => () => expression.run(scope) };
+      if (parameters.length === 0 && !isBlock) {
+        const expression = compiled as Compiled;
+        return {
+          run: (scope) => () => expression.run(scope),
+          fixed: expression.fixed,
+        };
       }
       return {
         run:
@@ -398,10 +431,10 @@ function buildNode(instance: Instance, source: Source): Compiled {
             for (let at = 0; at < parameters.length; at++) {
               bind(frame, parameters[at], at < args.length ? args[at] : null);
             }
-            if (block === null) {
-              return (expression as Compiled).run(frame);
+            if (!isBlock) {
+              return (compiled as Compiled).run(frame);
             }
-            const completion = block.run(frame);
+            const completion = (compiled as Compiled<Completion>).run(frame);
             if (completion.kind === "break" || completion.kind === "continue") {
               // The compiler rejects a jump with no loop to catch it, so one
               // reaching here means the bundle was not written by it.
@@ -411,6 +444,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
             }
             return completion.kind === "returned" ? completion.value : null;
           },
+        fixed: compiled.fixed,
       };
     }
     default: {
@@ -456,6 +490,7 @@ function buildStatement(
         run.run(scope);
         return advanced;
       },
+      fixed: run.fixed,
     };
   }
   switch (node[0]) {
@@ -489,6 +524,7 @@ function buildStatement(
           }
           return advanced;
         },
+        fixed: body.every((statement) => statement.fixed),
       };
     }
     case 1007: /* VariableDeclaration */ {
@@ -501,6 +537,7 @@ function buildStatement(
           bind(scope as Scope, name, initializer.run(scope));
           return advanced;
         },
+        fixed: initializer.fixed,
       };
     }
     case 1008: /* IfStatement */ {
@@ -516,6 +553,8 @@ function buildStatement(
           }
           return otherwise === null ? advanced : otherwise.run(scope);
         },
+        fixed:
+          test.fixed && then.fixed && (otherwise === null || otherwise.fixed),
       };
     }
     case 1012: /* WhileStatement */ {
@@ -537,6 +576,7 @@ function buildStatement(
           }
           return advanced;
         },
+        fixed: test.fixed && body.fixed,
       };
     }
     case 1013: /* ForStatement */ {
@@ -585,18 +625,24 @@ function buildStatement(
             guardTurns((turns += 1), "for");
           }
         },
+        fixed:
+          (init === null || init.fixed) &&
+          (test === null || test.fixed) &&
+          (update === null || update.fixed) &&
+          body.fixed,
       };
     }
     case 1014: /* BreakStatement */ {
-      return { run: () => broke };
+      return { run: () => broke, fixed: true };
     }
     case 1015: /* ContinueStatement */ {
-      return { run: () => continued };
+      return { run: () => continued, fixed: true };
     }
     case 1009: /* ReturnStatement */ {
       const value = compile(instance, node[1]);
       return {
         run: (scope) => ({ kind: "returned", value: value.run(scope) }),
+        fixed: value.fixed,
       };
     }
     case 1010: /* ThrowStatement */ {
@@ -605,6 +651,7 @@ function buildStatement(
         run: (scope) => {
           throw thrown.run(scope);
         },
+        fixed: thrown.fixed,
       };
     }
     case 1011: /* TryStatement */ {
@@ -626,6 +673,7 @@ function buildStatement(
             return handler.run(frame);
           }
         },
+        fixed: attempted.fixed && handler.fixed,
       };
     }
     default: {
@@ -636,6 +684,7 @@ function buildStatement(
           run.run(scope);
           return advanced;
         },
+        fixed: run.fixed,
       };
     }
   }
@@ -660,7 +709,10 @@ function compileElements(
     const parts = elements.map((element) =>
       compile(instance, element as Source),
     );
-    return { run: (scope) => parts.map((part) => part.run(scope)) };
+    return {
+      run: (scope) => parts.map((part) => part.run(scope)),
+      fixed: parts.every((part) => part.fixed),
+    };
   }
   const parts = elements.map((element) =>
     isSpread(element as BundleArrayElement)
@@ -688,6 +740,7 @@ function compileElements(
       }
       return out;
     },
+    fixed: parts.every((part) => part.read.fixed),
   };
 }
 

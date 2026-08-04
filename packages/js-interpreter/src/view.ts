@@ -128,8 +128,11 @@ export function compileElement(
   if (id === "For") {
     return compileFor(instance, element);
   }
-  // Every prop, with how to read it — in the order the element wrote them,
-  // because a host may care: an `<input>` wants its `type` before its `value`.
+  // Every prop, with how to read it and whether reading it again could say
+  // anything different — in the order the element wrote them, because a host
+  // may care: an `<input>` wants its `type` before its `value`. One that cannot
+  // move is set once: a computation watching a constant would be one per
+  // attribute per element, held for as long as the element is.
   const props = Object.entries(element[2])
     .filter(([prop]) => prop !== "children")
     .map(([prop, expr]) => [prop, compile(instance, expr)] as const);
@@ -141,11 +144,15 @@ export function compileElement(
       const renderer = instance.renderer;
       const node = renderer.createElement(id);
       for (const [prop, read] of props) {
+        if (read.fixed) {
+          renderer.setProp(node, prop, read.run(scope));
+          continue;
+        }
         // One effect per prop, so a write moves that one prop of that one node.
         // It re-runs only when something the expression itself read has changed;
         // nothing tells it to look.
         //
-        // Re-running is not the same as changing: a cell a whole list reads is
+        // Re-running is not the same as changing: a state a whole list reads is
         // what decides one row's class, and every other row recomputes the class
         // it already has. The host hears about a prop when the prop moved, so
         // that is a comparison here rather than a write per row per selection.
@@ -163,6 +170,7 @@ export function compileElement(
       }
       return node as Value;
     },
+    fixed: true,
   };
 }
 
@@ -188,6 +196,11 @@ function compileChildren(
     return (scope) => members.map((member) => member(scope));
   }
   const read = compile(instance, expr);
+  // Nothing that moves, so `insert` is handed the value rather than a way of
+  // asking for it, and makes no computation to watch it.
+  if (read.fixed) {
+    return (scope) => read.run(scope);
+  }
   return (scope) => () => read.run(scope);
 }
 
@@ -197,10 +210,10 @@ function compileChildren(
 function compileFragment(instance: Instance, element: BundleElement): Compiled {
   const children = element[2]["children"];
   if (children === undefined) {
-    return { run: () => null };
+    return { run: () => null, fixed: true };
   }
   const draw = compileChildren(instance, children);
-  return { run: (scope) => draw(scope) as Value };
+  return { run: (scope) => draw(scope) as Value, fixed: true };
 }
 
 /**
@@ -234,5 +247,6 @@ function compileFor(instance: Instance, element: BundleElement): Compiled {
         one(member, { read: at } as Value),
       ) as unknown as Value;
     },
+    fixed: true,
   };
 }
