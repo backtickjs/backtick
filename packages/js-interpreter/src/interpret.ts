@@ -21,13 +21,13 @@ import type { Value } from "./Value.js";
 // JavaScript value, so a host can draw it and tests can observe runtime
 // behavior rather than only snapshotting shape.
 //
-// This half is evaluation alone. What a tree entry builds — and what keeps it
-// current afterwards — is `view.ts`, which is the only part that knows a host
-// exists.
+// This half is evaluation alone. What a drawing function builds — and what
+// keeps it current afterwards — is `view.ts`, which is the only part that knows
+// a host exists.
 
 // Everything the compiler reads. A tree expression and a body node are one
 // grammar with two ends: the shared middle is literals, containers, names and
-// entries, the tree end adds applications and elements, and the
+// functions, the tree end adds applications and elements, and the
 // body end adds the statements and operators a script is written in. Compiling
 // them together is what makes the middle exist once.
 type Source = BundleArrayElement | BundleStatementNode;
@@ -61,16 +61,20 @@ function lookup(scope: Scope | null, name: string): Scope | null {
   return null;
 }
 
-// An entry as the function it evaluates to, once per mount.
+// A `functions` label, compiled once per mount: in the mount's scope, so an
+// element in its body has a host to build with, and once so that every
+// reference is handed the same closure — a fresh one would be a fresh identity,
+// and a prop holding it would be set again every time its position is read.
 //
-// Not once per bundle: an entry is evaluated in the mount's scope, so an
-// element anywhere in its body has a host to build with — which is what lets a
-// script hold a drawing rather than only describe one. Two mounts want two
-// closures for the same reason.
-function getFunction(
+// Compiled where it is first referred to rather than where it is first applied,
+// which nothing needs yet: what will is the question a reference asks about a
+// function, answered by compiling its body. One still being compiled stands in
+// the table as itself, so a body reaching back finds it rather than compiling
+// it again.
+function compileFunction(
   instance: Instance,
   label: FunctionLabel,
-): (...args: Value[]) => Value {
+): Compiled<(...args: Value[]) => Value> {
   const existing = instance.functions.get(label);
   if (existing !== undefined) {
     return existing;
@@ -79,11 +83,19 @@ function getFunction(
   if (declared === undefined) {
     throw new Error(`unknown function ${label}`);
   }
-  const fn = evaluate(instance, declared[0], scopeOf(null)) as (
-    ...args: Value[]
-  ) => Value;
-  instance.functions.set(label, fn);
-  return fn;
+  instance.functions.set(label, {
+    run: () => {
+      throw new Error(`\`${label}\` was applied while it was compiling`);
+    },
+  });
+  const arrow = compile(instance, declared[0]);
+  // In no scope rather than an empty one: a function reaches what encloses it
+  // through its own parameters, so a frame binding nothing would only be one
+  // more to walk past at the end of every name it fails to find.
+  const closure = arrow.run(null) as (...args: Value[]) => Value;
+  const compiled = { run: () => closure };
+  instance.functions.set(label, compiled);
+  return compiled;
 }
 
 // A node is compiled once into the closure that evaluates it, and that closure
@@ -168,14 +180,14 @@ function buildNode(instance: Instance, source: Source): Compiled {
         },
       };
     }
-    // An entry named rather than applied: the function it evaluates to, which
-    // is what a hole handing over nothing would have called.
+    // A function named rather than applied: what it evaluates to, which is what
+    // a hole handing over nothing would have called.
     case 1: /* GetFunction */ {
       const label = node[1];
-      return { run: () => getFunction(instance, label) };
+      return { run: () => compileFunction(instance, label).run(null) };
     }
-    // An entry applied: run it, wherever this is. Drawing needs no ceremony —
-    // an entry is evaluated where the mount is, so an element in its body
+    // A function applied: run it, wherever this is. Drawing needs no ceremony —
+    // a function is evaluated where the mount is, so an element in its body
     // builds with the same host as one written here.
     case 2: /* ApplyFunction */ {
       const label = node[1];
@@ -183,7 +195,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
       return {
         run: (scope) => {
           const supplied = args.map((arg) => arg.run(scope));
-          return getFunction(instance, label)(...supplied);
+          return compileFunction(instance, label).run(null)(...supplied);
         },
       };
     }

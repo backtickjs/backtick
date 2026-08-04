@@ -11,7 +11,8 @@ import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
 import type { Value } from "./Value.js";
 
-// The view half: turning a tree entry into the host's own nodes, once, and
+// The view half: turning a drawing function into the host's own nodes, once,
+// and
 // keeping them current through the reactive graph rather than by building them
 // again.
 //

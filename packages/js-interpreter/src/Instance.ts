@@ -1,4 +1,5 @@
 import type { Bundle, FunctionLabel } from "@backtickjs/core";
+import type { Compiled } from "./interpret.js";
 import type { Value } from "./Value.js";
 import type { Renderer } from "solid-js/universal";
 
@@ -19,5 +20,5 @@ export interface Instance {
   //
   // Keyed here rather than on the bundle because the closure holds this host —
   // the same function under a second host is a second closure.
-  readonly functions: Map<FunctionLabel, (...args: Value[]) => Value>;
+  readonly functions: Map<FunctionLabel, Compiled<(...args: Value[]) => Value>>;
 }
