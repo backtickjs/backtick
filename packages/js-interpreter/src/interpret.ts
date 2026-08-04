@@ -14,7 +14,7 @@ import type {
   FunctionLabel,
 } from "@backtickjs/core";
 import { makeState } from "./makeState.js";
-import { compileElement } from "./view.js";
+import { compileElement, instanceOf } from "./view.js";
 import type { Instance } from "./view.js";
 import type { Value } from "./Value.js";
 
@@ -82,43 +82,30 @@ function lookup(scope: Scope | null, name: string): Scope | null {
   return null;
 }
 
-// An entry's function is a pure function of the bundle and the label — the
-// tables never change, and an entry closes over nothing else, since its
-// captures arrive as its own parameters. So it is built once per bundle rather
-// than per reference: a reference reached inside a loop would otherwise
-// allocate a closure per iteration. Every invocation still gets its own frame,
-// so sharing the closure shares no state.
+// An entry as the function it evaluates to, once per mount.
 //
-// Keyed weakly, so the table goes when the bundle does.
-const functionsByBundle = new WeakMap<
-  Bundle,
-  Map<FunctionLabel, (...args: Value[]) => Value>
->();
-
-// A `functions` entry as a function: its arrow, evaluated at the top level.
+// Not once per bundle: an entry is evaluated in the mount's scope, so an
+// element anywhere in its body has a host to build with — which is what lets a
+// script hold a drawing rather than only describe one. Two mounts want two
+// closures for the same reason.
 function getFunction(
-  bundle: Bundle,
+  instance: Instance,
   label: FunctionLabel,
 ): (...args: Value[]) => Value {
-  let built = functionsByBundle.get(bundle);
-  if (built === undefined) {
-    built = new Map();
-    functionsByBundle.set(bundle, built);
-  }
-  const existing = built.get(label);
+  const existing = instance.entries.get(label);
   if (existing !== undefined) {
     return existing;
   }
-  const entry = bundle.functions[label];
+  const entry = instance.bundle.functions[label];
   if (entry === undefined) {
     throw new Error(`unknown function entry ${label}`);
   }
-  // Evaluated with no enclosing scope: an entry resolves only against its own
-  // parameters, so there is nothing for it to close over.
-  const fn = evaluate(bundle, entry[NodeField.content], null) as (
-    ...args: Value[]
-  ) => Value;
-  built.set(label, fn);
+  const fn = evaluate(
+    instance.bundle,
+    entry[NodeField.content],
+    scopeOf(null, instance),
+  ) as (...args: Value[]) => Value;
+  instance.entries.set(label, fn);
   return fn;
 }
 
@@ -212,32 +199,19 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     // is what a hole handing over nothing would have called.
     case NodeKind.GetFunction: {
       const label = node[NodeField.label];
-      return () => getFunction(bundle, label);
+      return (scope) => getFunction(instanceOf(scope), label);
     }
-    // An entry applied, in a tree position or in a script alike. What that
-    // means is the entry's: one that draws hands back the application, because
-    // an entry closes over no host and only whoever holds it has one — and for
-    // a list that is what lets a row be decided against the list before.
+    // An entry applied: run it, wherever this is. Drawing needs no ceremony —
+    // an entry is evaluated where the mount is, so an element in its body
+    // builds with the same host as one written here.
     case NodeKind.ApplyFunction: {
       const label = node[NodeField.label];
-      const entry = bundle.functions[label];
-      if (entry === undefined) {
-        throw new Error(`unknown entry ${label}`);
-      }
       const args = (node[NodeField.arguments] ?? []).map((arg) =>
         compile(bundle, arg),
       );
-      // An entry that draws hands the application back instead of running it.
-      if (entry[NodeField.draws]) {
-        return (scope) => ({
-          "@backtickjs": "Applied",
-          entry,
-          args: args.map((arg) => arg(scope)),
-        });
-      }
       return (scope) => {
         const supplied = args.map((arg) => arg(scope));
-        return getFunction(bundle, label)(...supplied);
+        return getFunction(instanceOf(scope), label)(...supplied);
       };
     }
     case NodeKind.Element: {

@@ -46,11 +46,6 @@ export interface BundleFunction {
   // and nothing else, which is why a reader without it is right to assume the
   // value moves.
   [NodeField.fixed]?: true;
-  // Set where applying this entry yields an instance rather than a value: it
-  // is handed back for whoever holds it to build, where a host is. An entry is
-  // shared across mounts and evaluated in no scope, so it cannot close over
-  // one itself. Absent is an ordinary call.
-  [NodeField.draws]?: true;
 }
 
 // Plain JSON carrying itself. The `#` key is how a node is told from data, so
@@ -134,7 +129,6 @@ export const NodeField = {
   // What the bundler worked out rather than read, for a client that would
   // otherwise work it out again.
   fixed: "ab", // a function entry whose value cannot change
-  draws: "ac", // a function entry applied to make an instance
 } as const;
 
 // Every node kind, as the number `"#"` carries. A number rather than a name

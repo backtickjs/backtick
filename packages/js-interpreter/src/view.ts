@@ -3,14 +3,13 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
-  BundleFunction,
+  FunctionLabel,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import type { Renderer, RendererOptions } from "solid-js/universal";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
-import { isApplied } from "./Value.js";
 import type { Value } from "./Value.js";
 
 // The view half: turning a tree entry into the host's own nodes, once, and
@@ -70,10 +69,7 @@ function materialize(bundle: Bundle, host: Host): unknown {
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.
-  return drawn(
-    evaluateNode(bundle, bundle.root, scopeOf(null, instance)),
-    instance,
-  );
+  return evaluateNode(bundle, bundle.root, scopeOf(null, instance));
 }
 
 // A renderer per set of host operations. The cast is the one place the
@@ -121,47 +117,7 @@ function requireReactivity(): void {
 export interface Instance {
   readonly bundle: Bundle;
   readonly host: Host;
-  // Each drawing entry as the function it evaluates to, so a row's entry is
-  // evaluated once however many rows there are.
-  readonly entries: Map<BundleFunction, (...args: Value[]) => Value>;
-}
-
-/**
- * Builds an instance of an entry by calling it.
- *
- * Nothing owns this but whoever is building. An instance created for a row of a
- * list belongs to that row's owner, so dropping the row drops the instance and
- * everything it made, and an instance built in a fixed position lives as long
- * as the mount does. Neither is registered anywhere, because neither has to be
- * found again.
- */
-export function instantiate(
-  instance: Instance,
-  entry: BundleFunction,
-  args: Value[],
-): unknown {
-  let drawing = instance.entries.get(entry);
-  if (drawing === undefined) {
-    drawing = evaluateNode(
-      instance.bundle,
-      entry[NodeField.content],
-      scopeOf(null, instance),
-    ) as (...args: Value[]) => Value;
-    instance.entries.set(entry, drawing);
-  }
-  // Instantiating is calling: the cells the entry declares are bound in this
-  // call, and what it yields is what to draw.
-  return build(drawing(...args), instance);
-}
-
-// What an evaluated tree expression draws, in a position that draws exactly
-// one thing: the entry's content, or a prop. An application becomes an
-// instance here; everything else already is what it draws.
-function build(value: Value, instance: Instance): unknown {
-  if (!isApplied(value)) {
-    return value;
-  }
-  return instantiate(instance, value.entry, value.args);
+  readonly entries: Map<FunctionLabel, (...args: Value[]) => Value>;
 }
 
 /**
@@ -232,7 +188,7 @@ export function compileElement(
       });
     }
     if (draw !== null) {
-      host.insert(node, draw(scope, instance));
+      host.insert(node, draw(scope));
     }
     return node as Value;
   };
@@ -251,41 +207,20 @@ export function compileElement(
 function compileChildren(
   bundle: Bundle,
   expr: BundleArrayElement,
-): (scope: Scope | null, instance: Instance) => unknown {
+): (scope: Scope | null) => unknown {
   if (Array.isArray(expr)) {
     const members = expr.map((member) => compileChildren(bundle, member));
-    return (scope, instance) =>
-      members.map((member) => member(scope, instance));
+    return (scope) => members.map((member) => member(scope));
   }
   const read = compile(bundle, expr);
-  // Nothing that moves, so `insert` is handed what this draws rather than a way
-  // of asking for it, and makes no computation to watch it. That covers a value
-  // the bundle spelled out, an element — whatever moves inside one is the
-  // element's own business, bound when it was built — and an entry the bundler
-  // vouched for, a row's own label say.
+  // Nothing that moves, so `insert` is handed the value rather than a way of
+  // asking for it, and makes no computation to watch it: a value the bundle
+  // spelled out, an element — whatever moves inside one is its own business —
+  // or an entry the bundler vouched for, a row's own label say.
   if (isFixed(bundle, expr)) {
-    return mayApply(expr)
-      ? (scope, instance) => drawn(read(scope), instance)
-      : (scope) => read(scope);
+    return (scope) => read(scope);
   }
-  return (scope, instance) => () => drawn(read(scope), instance);
-}
-
-// Whether what this expression evaluates to has to be built.
-//
-// Only an application does, and only some expressions can produce one. A value
-// the bundle carried is already what it draws, and an element is the node it
-// made — what a fragment holds was built as the fragment was, and a list draws
-// its own members. Asking costs nothing here and saves a walk per position per
-// instance, which is a walk per element of every row of a list.
-function mayApply(expr: BundleArrayElement): boolean {
-  if (expr === null || typeof expr !== "object") {
-    return false;
-  }
-  if (Array.isArray(expr)) {
-    return expr.some(mayApply);
-  }
-  return (expr as Record<string, unknown>)["#"] !== NodeKind.Element;
+  return (scope) => () => read(scope);
 }
 
 // Whether what this expression evaluates to can change once it has been built.
@@ -328,7 +263,7 @@ function compileFragment(bundle: Bundle, element: BundleElement): Compiled {
     return () => null;
   }
   const draw = compileChildren(bundle, children);
-  return (scope) => draw(scope, instanceOf(scope)) as Value;
+  return (scope) => draw(scope) as Value;
 }
 
 /**
@@ -348,34 +283,23 @@ function compileFor(bundle: Bundle, element: BundleElement): Compiled {
   const source = compile(bundle, each);
   const draw = compile(bundle, body);
   return (scope) => {
-    const instance = instanceOf(scope);
     const members = createMemo(() => {
       const value = source(scope);
       return Array.isArray(value) ? (value as Value[]) : [];
     });
-    // Made once: it closes over this instance, and the member arrives as an
-    // argument.
+    // Made once: the member arrives as an argument.
     const one = draw(scope) as (...args: Value[]) => Value;
     // The index is `mapArray`'s own signal, handed over as storage rather than
     // as the number it holds: whoever reads it is reading where the member sits
     // now.
     return mapArray(members, (member, at) =>
-      drawn(one(member, { read: at } as Value), instance),
+      one(member, { read: at } as Value),
     ) as unknown as Value;
   };
 }
 
-// What a settled children position holds, with its applications built: the same
-// walk `build` does, through the arrays a children position can be.
-function drawn(value: Value, instance: Instance): unknown {
-  if (Array.isArray(value)) {
-    return value.map((member) => drawn(member, instance));
-  }
-  return build(value, instance);
-}
-
-// The instance a tree expression is being evaluated in. A tree expression is
-// only ever evaluated while an instance is being built, so there is always one;
+// The instance an expression is being evaluated in. Every scope descends from
+// the mount's, so there is always one;
 // a scope without one is a body's, and no tree node reaches a body.
 export function instanceOf(scope: Scope | null): Instance {
   if (scope === null || scope.instance === null) {

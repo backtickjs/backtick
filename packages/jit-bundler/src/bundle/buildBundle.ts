@@ -561,7 +561,6 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     bindings: BundleVariableDeclarationNode[],
     drawn: BundleExpressionNode,
   ): BundleFunction => ({
-    [NodeField.draws]: true,
     [NodeField.content]: {
       "#": NodeKind.ArrowFunction,
       ...(params.length === 0
