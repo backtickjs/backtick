@@ -16,9 +16,7 @@ import type {
 export function renderBundleDebug(bundle: Bundle): string {
   const sections: string[] = [];
   for (const [label, entry] of Object.entries(bundle.functions)) {
-    sections.push(
-      `${fnLabel(label)} = ${renderNode(entry[0], "")}`,
-    );
+    sections.push(`${fnLabel(label)} = ${renderNode(entry[0], "")}`);
   }
   sections.push(`root = ${renderNode(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;
@@ -33,7 +31,10 @@ const fnLabel = (label: string): string => `#f${label}`;
 // and an array of data travels as one too (`DataArray`).
 function isNode(
   node: BundleStatementNode | BundleExpressionNode,
-): node is Extract<BundleStatementNode | BundleExpressionNode, { 0: NodeKind }> {
+): node is Extract<
+  BundleStatementNode | BundleExpressionNode,
+  { 0: NodeKind }
+> {
   return Array.isArray(node);
 }
 

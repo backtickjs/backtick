@@ -1,4 +1,3 @@
-import { NodeKind } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
   BundleArrayElement,
@@ -209,7 +208,7 @@ function compileChildren(
   expr: BundleArrayElement,
 ): (scope: Scope | null) => unknown {
   // A list of children travels as data, which is a node like any other.
-  if (Array.isArray(expr) && expr[0] === NodeKind.DataArray) {
+  if (Array.isArray(expr) && expr[0] === 4 /* DataArray */) {
     const members = (expr[1] as BundleArrayElement[]).map((member) =>
       compileChildren(bundle, member),
     );
@@ -245,34 +244,34 @@ function isFixed(bundle: Bundle, expr: BundleArrayElement): boolean {
   }
   switch (expr[0]) {
     // A list can move if anything in it can.
-    case NodeKind.DataArray: {
+    case 4: /* DataArray */ {
       const [_kind, members] = expr;
       return members.every((member) => isFixed(bundle, member));
     }
     // An element is built once and is thereafter its own: every part of it that
     // can change was bound to a computation of its own when it was built, so
     // the position holding it never has to look again.
-    case NodeKind.Element: {
+    case 0: /* Element */ {
       return true;
     }
-    case NodeKind.ApplyFunction: {
+    case 2: /* ApplyFunction */ {
       const [_kind, label] = expr;
       return bundle.functions[label]?.[1] === true;
     }
     // Everything else computes, and computing is what moves — an entry named
     // rather than applied included, since the position holds whatever calling
     // it will yield.
-    case NodeKind.GetFunction:
-    case NodeKind.Builtin:
-    case NodeKind.Identifier:
-    case NodeKind.CallExpression:
-    case NodeKind.PropertyAccessExpression:
-    case NodeKind.ElementAccessExpression:
-    case NodeKind.BinaryExpression:
-    case NodeKind.PrefixUnaryExpression:
-    case NodeKind.ConditionalExpression:
-    case NodeKind.ArrowFunction:
-    case NodeKind.SpreadElement: {
+    case 1: /* GetFunction */
+    case 3: /* Builtin */
+    case 1000: /* Identifier */
+    case 1001: /* CallExpression */
+    case 1002: /* PropertyAccessExpression */
+    case 1016: /* ElementAccessExpression */
+    case 1003: /* BinaryExpression */
+    case 1019: /* PrefixUnaryExpression */
+    case 1004: /* ConditionalExpression */
+    case 1005: /* ArrowFunction */
+    case 1020: /* SpreadElement */ {
       return false;
     }
     default: {

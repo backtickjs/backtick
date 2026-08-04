@@ -1,8 +1,7 @@
-// The wire tags only. `@backtickjs/core` re-exports these, but reaching them
-// that way pulls the bundler and `node:async_hooks` into the graph, which a
-// browser cannot load. This subpath is the format module alone, and it
-// imports nothing.
-import { NodeKind } from "@backtickjs/jit-bundler/format";
+// Types only, and nothing of the bundler's at all: a kind is written here as
+// the number the format fixes it to, the way a client that never saw this
+// repository would have to write it. That is the point of a reference client —
+// what it needs from the format is the format, not a package.
 import type {
   Bundle,
   BundleArrayElement,
@@ -151,15 +150,11 @@ function compileStatement(bundle: Bundle, node: BundleStatementNode): Executed {
   return made;
 }
 
-// A node, as opposed to plain JSON carrying itself. Every node is an array and
-// nothing else in a value slot is: an array of data travels under a `DataArray`
-// node, so the reading is unambiguous without a reserved key.
-function isNode(node: Source): node is Extract<Source, { 0: NodeKind }> {
-  return Array.isArray(node);
-}
-
+// A node is an array and nothing else in a value slot is — an array of data
+// travels under a `DataArray` node — so `Array.isArray` is the whole test, here
+// and everywhere below.
 function buildNode(bundle: Bundle, source: Source): Compiled {
-  if (!isNode(source)) {
+  if (!Array.isArray(source)) {
     const data = source as { [key: string]: Source };
     const keys = Object.keys(data);
     const parts = keys.map((key) => compile(bundle, data[key]));
@@ -173,11 +168,11 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
   }
   const node = source;
   switch (node[0]) {
-    case NodeKind.DataArray: {
+    case 4: /* DataArray */ {
       const members = compileElements(bundle, node[1]);
       return (scope) => members(scope);
     }
-    case NodeKind.Identifier: {
+    case 1000: /* Identifier */ {
       const name = node[1];
       return (scope) => {
         const frame = lookup(scope, name);
@@ -189,14 +184,14 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     }
     // An entry named rather than applied: the function it evaluates to, which
     // is what a hole handing over nothing would have called.
-    case NodeKind.GetFunction: {
+    case 1: /* GetFunction */ {
       const label = node[1];
       return (scope) => getFunction(instanceOf(scope), label);
     }
     // An entry applied: run it, wherever this is. Drawing needs no ceremony —
     // an entry is evaluated where the mount is, so an element in its body
     // builds with the same host as one written here.
-    case NodeKind.ApplyFunction: {
+    case 2: /* ApplyFunction */ {
       const label = node[1];
       const args = node[2].map((arg) => compile(bundle, arg));
       return (scope) => {
@@ -204,13 +199,13 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         return getFunction(instanceOf(scope), label)(...supplied);
       };
     }
-    case NodeKind.Element: {
+    case 0: /* Element */ {
       return compileElement(bundle, node);
     }
     // A global the format names and the host answers. This host is
     // JavaScript, so these are JavaScript's — which is what the curation is
     // for: every member here means the same thing everywhere.
-    case NodeKind.Builtin: {
+    case 3: /* Builtin */ {
       const name = node[1];
       const value = builtins[name];
       if (value === undefined) {
@@ -218,14 +213,17 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       }
       return () => value;
     }
-    case NodeKind.CallExpression: {
+    case 1001: /* CallExpression */ {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
       // Which of the two this is, is a property of the callee, so it is
       // decided here rather than on every call.
       const callee = node[1];
       const optionalCall = node[2];
       const args = compileElements(bundle, node[3]);
-      if (isNode(callee) && callee[0] === NodeKind.PropertyAccessExpression) {
+      if (
+        Array.isArray(callee) &&
+        callee[0] === 1002 /* PropertyAccessExpression */
+      ) {
         const receiver = compile(bundle, callee[1]);
         const optionalReceiver = callee[2];
         const member = callee[3];
@@ -264,7 +262,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         return value(...args(scope));
       };
     }
-    case NodeKind.PropertyAccessExpression: {
+    case 1002: /* PropertyAccessExpression */ {
       const target = compile(bundle, node[1]);
       const optional = node[2];
       const member = node[3];
@@ -278,7 +276,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         return object[member] ?? null;
       };
     }
-    case NodeKind.ElementAccessExpression: {
+    case 1016: /* ElementAccessExpression */ {
       const target = compile(bundle, node[1]);
       const argument = compile(bundle, node[2]);
       return (scope) => {
@@ -307,7 +305,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         return null;
       };
     }
-    case NodeKind.BinaryExpression: {
+    case 1003: /* BinaryExpression */ {
       if (node[1] === "=") {
         // An assignment, which is a binary expression here as it is in
         // TypeScript. The left is a name to bind, never a value to read, so it
@@ -315,7 +313,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         const target = node[2];
         // Only a variable can be assigned to, which the compiler enforces; a
         // bundle saying otherwise was not written by it.
-        if (!isNode(target) || target[0] !== NodeKind.Identifier) {
+        if (!Array.isArray(target) || target[0] !== 1000 /* Identifier */) {
           throw new Error("an assignment target must be an identifier");
         }
         const name = target[1];
@@ -338,7 +336,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         compile(bundle, node[3]),
       );
     }
-    case NodeKind.PrefixUnaryExpression: {
+    case 1019: /* PrefixUnaryExpression */ {
       const operand = compile(bundle, node[2]);
       // A `!` operand is boolean, as a tested position always is, so this
       // negates rather than deciding what counts as true. A `-` operand is a
@@ -348,7 +346,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       }
       return (scope) => !condition(operand(scope), "the operand of `!`");
     }
-    case NodeKind.ConditionalExpression: {
+    case 1004: /* ConditionalExpression */ {
       const test = compile(bundle, node[1]);
       const whenTrue = compile(bundle, node[2]);
       const whenFalse = compile(bundle, node[3]);
@@ -358,11 +356,11 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
           ? whenTrue(scope)
           : whenFalse(scope);
     }
-    case NodeKind.ArrowFunction: {
+    case 1005: /* ArrowFunction */ {
       const parameters = node[1].map((param) => param[1]);
       const body = node[2];
       const block =
-        isNode(body) && body[0] === NodeKind.Block
+        Array.isArray(body) && body[0] === 1006 /* Block */
           ? compileStatement(bundle, body)
           : null;
       // A non-block body is an expression, implicitly returned.
@@ -427,7 +425,7 @@ function guardTurns(turns: number, keyword: string): void {
 }
 
 function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
-  if (!isNode(node)) {
+  if (!Array.isArray(node)) {
     // Plain JSON in statement position is an expression evaluated for its
     // effect.
     const run = compile(bundle, node);
@@ -437,7 +435,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
     };
   }
   switch (node[0]) {
-    case NodeKind.Block: {
+    case 1006: /* Block */ {
       const statements = node[1];
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward. Which names
@@ -445,7 +443,8 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       const declared = statements
         .filter(
           (statement) =>
-            isNode(statement) && statement[0] === NodeKind.VariableDeclaration,
+            Array.isArray(statement) &&
+            statement[0] === 1007 /* VariableDeclaration */,
         )
         .map((statement) => (statement as unknown as [number, string])[1]);
       const body = statements.map((statement) =>
@@ -466,7 +465,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
         return advanced;
       };
     }
-    case NodeKind.VariableDeclaration: {
+    case 1007: /* VariableDeclaration */ {
       const name = node[1];
       const initializer = compile(bundle, node[2]);
       return (scope) => {
@@ -474,7 +473,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
         return advanced;
       };
     }
-    case NodeKind.IfStatement: {
+    case 1008: /* IfStatement */ {
       const test = compile(bundle, node[1]);
       const then = compileStatement(bundle, node[2]);
       const branch = node[3];
@@ -487,7 +486,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
         return otherwise === null ? advanced : otherwise(scope);
       };
     }
-    case NodeKind.WhileStatement: {
+    case 1012: /* WhileStatement */ {
       const test = compile(bundle, node[1]);
       const body = compileStatement(bundle, node[2]);
       return (scope) => {
@@ -506,7 +505,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
         return advanced;
       };
     }
-    case NodeKind.ForStatement: {
+    case 1013: /* ForStatement */ {
       const initializer = node[1];
       const condition_ = node[2];
       const incrementor = node[3];
@@ -554,23 +553,23 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
         }
       };
     }
-    case NodeKind.BreakStatement: {
+    case 1014: /* BreakStatement */ {
       return () => broke;
     }
-    case NodeKind.ContinueStatement: {
+    case 1015: /* ContinueStatement */ {
       return () => continued;
     }
-    case NodeKind.ReturnStatement: {
+    case 1009: /* ReturnStatement */ {
       const value = compile(bundle, node[1]);
       return (scope) => ({ kind: "returned", value: value(scope) });
     }
-    case NodeKind.ThrowStatement: {
+    case 1010: /* ThrowStatement */ {
       const thrown = compile(bundle, node[1]);
       return (scope) => {
         throw thrown(scope);
       };
     }
-    case NodeKind.TryStatement: {
+    case 1011: /* TryStatement */ {
       const attempted = compileStatement(bundle, node[1]);
       const clause = node[2];
       const caught = clause[1];
@@ -604,7 +603,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
 function isSpread(
   element: BundleArrayElement,
 ): element is BundleSpreadElementNode {
-  return Array.isArray(element) && element[0] === NodeKind.SpreadElement;
+  return Array.isArray(element) && element[0] === 1020 /* SpreadElement */;
 }
 
 // A list that may hold `...xs`: each member answers with one value or with the

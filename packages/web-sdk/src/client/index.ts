@@ -13,8 +13,6 @@ import type { Drawn } from "../Drawn.js";
 import { render } from "@backtickjs/js-interpreter";
 import { dom } from "./dom.js";
 
-export { evaluate, render } from "@backtickjs/js-interpreter";
-
 /**
  * Where a mounted app goes, and anything else the mounting takes. An object
  * rather than the element on its own, so what a mount can be told grows

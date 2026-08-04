@@ -238,16 +238,13 @@ importers:
 
   packages/js-interpreter:
     dependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@backtickjs/jit-bundler':
-        specifier: workspace:*
-        version: link:../jit-bundler
       solid-js:
         specifier: ^1.9.14
         version: 1.9.14
     devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

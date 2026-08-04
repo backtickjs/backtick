@@ -1,4 +1,3 @@
-
 /**
  * Everything evaluating a bundle can produce, and nothing else.
  *
