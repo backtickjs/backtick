@@ -96,13 +96,20 @@ function getFunction(
 // cache of compiled nodes measured zero hits against the fixtures and every
 // benchmark case — it would earn its place back the day compilation goes lazy,
 // a node compiled when it is first evaluated rather than when its parent is.
-export type Compiled = (scope: Scope | null) => Value;
-type Executed = (scope: Scope) => Completion;
+// What evaluating yields is the only thing that differs between the compiled
+// things here, so it is the parameter and nothing else is:
+//
+//   `Compiled`             an expression, which yields a value
+//   `Compiled<Completion>` a statement, which yields where to go next
+//   `Compiled<Value[]>`    a list, which yields its members
+export interface Compiled<T = Value> {
+  readonly run: (scope: Scope | null) => T;
+}
 
 export function compile(instance: Instance, node: Source): Compiled {
   if (node === null || typeof node !== "object") {
     const literal = node as Value;
-    return () => literal;
+    return { run: () => literal };
   }
   return buildNode(instance, node);
 }
@@ -112,15 +119,15 @@ export function evaluate(
   node: Source,
   scope: Scope | null,
 ): Value {
-  return compile(instance, node)(scope);
+  return compile(instance, node).run(scope);
 }
 
 function compileStatement(
   instance: Instance,
   node: BundleStatementNode,
-): Executed {
+): Compiled<Completion> {
   if (node === null || typeof node !== "object") {
-    return () => advanced;
+    return { run: () => advanced };
   }
   return buildStatement(instance, node);
 }
@@ -133,35 +140,39 @@ function buildNode(instance: Instance, source: Source): Compiled {
     const data = source as { [key: string]: Source };
     const keys = Object.keys(data);
     const parts = keys.map((key) => compile(instance, data[key]));
-    return (scope) => {
-      const object: { [key: string]: Value } = {};
-      for (let at = 0; at < keys.length; at++) {
-        object[keys[at]] = parts[at](scope);
-      }
-      return object;
+    return {
+      run: (scope) => {
+        const object: { [key: string]: Value } = {};
+        for (let at = 0; at < keys.length; at++) {
+          object[keys[at]] = parts[at].run(scope);
+        }
+        return object;
+      },
     };
   }
   const node = source;
   switch (node[0]) {
     case 4: /* DataArray */ {
       const members = compileElements(instance, node[1]);
-      return (scope) => members(scope);
+      return { run: (scope) => members.run(scope) };
     }
     case 1000: /* Identifier */ {
       const name = node[1];
-      return (scope) => {
-        const frame = lookup(scope, name);
-        if (frame === null) {
-          throw new Error(`unknown identifier ${name}`);
-        }
-        return read(frame, name);
+      return {
+        run: (scope) => {
+          const frame = lookup(scope, name);
+          if (frame === null) {
+            throw new Error(`unknown identifier ${name}`);
+          }
+          return read(frame, name);
+        },
       };
     }
     // An entry named rather than applied: the function it evaluates to, which
     // is what a hole handing over nothing would have called.
     case 1: /* GetFunction */ {
       const label = node[1];
-      return () => getFunction(instance, label);
+      return { run: () => getFunction(instance, label) };
     }
     // An entry applied: run it, wherever this is. Drawing needs no ceremony —
     // an entry is evaluated where the mount is, so an element in its body
@@ -169,9 +180,11 @@ function buildNode(instance: Instance, source: Source): Compiled {
     case 2: /* ApplyFunction */ {
       const label = node[1];
       const args = node[2].map((arg) => compile(instance, arg));
-      return (scope) => {
-        const supplied = args.map((arg) => arg(scope));
-        return getFunction(instance, label)(...supplied);
+      return {
+        run: (scope) => {
+          const supplied = args.map((arg) => arg.run(scope));
+          return getFunction(instance, label)(...supplied);
+        },
       };
     }
     case 0: /* Element */ {
@@ -186,7 +199,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }
-      return () => value;
+      return { run: () => value };
     }
     case 1001: /* CallExpression */ {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
@@ -202,82 +215,90 @@ function buildNode(instance: Instance, source: Source): Compiled {
         const receiver = compile(instance, callee[1]);
         const optionalReceiver = callee[2];
         const member = callee[3];
-        return (scope) => {
-          // The receiver evaluates before the arguments; an optional receiver
-          // (`a?.b(…)`) short-circuits a null object to null, arguments
-          // unevaluated.
-          const object = receiver(scope) as { [name: string]: Value };
-          if (optionalReceiver && object === null) {
-            return null;
-          }
-          const method = object[member];
-          // An optional call (`a.b?.(…)`) short-circuits a null method the
-          // same way, arguments unevaluated.
-          if (optionalCall && method === null) {
-            return null;
-          }
-          if (typeof method !== "function") {
-            throw new Error(`${member} is not a function`);
-          }
-          return method.apply(object, args(scope));
+        return {
+          run: (scope) => {
+            // The receiver evaluates before the arguments; an optional receiver
+            // (`a?.b(…)`) short-circuits a null object to null, arguments
+            // unevaluated.
+            const object = receiver.run(scope) as { [name: string]: Value };
+            if (optionalReceiver && object === null) {
+              return null;
+            }
+            const method = object[member];
+            // An optional call (`a.b?.(…)`) short-circuits a null method the
+            // same way, arguments unevaluated.
+            if (optionalCall && method === null) {
+              return null;
+            }
+            if (typeof method !== "function") {
+              throw new Error(`${member} is not a function`);
+            }
+            return method.apply(object, args.run(scope));
+          },
         };
       }
       const target = compile(instance, callee);
-      return (scope) => {
-        // The callee evaluates before the arguments; an optional call
-        // (`cb?.(…)`) short-circuits a null callee to null, arguments
-        // unevaluated.
-        const value = target(scope);
-        if (optionalCall && value === null) {
-          return null;
-        }
-        if (typeof value !== "function") {
-          throw new Error("callee is not a function");
-        }
-        return value(...args(scope));
+      return {
+        run: (scope) => {
+          // The callee evaluates before the arguments; an optional call
+          // (`cb?.(…)`) short-circuits a null callee to null, arguments
+          // unevaluated.
+          const value = target.run(scope);
+          if (optionalCall && value === null) {
+            return null;
+          }
+          if (typeof value !== "function") {
+            throw new Error("callee is not a function");
+          }
+          return value(...args.run(scope));
+        },
       };
     }
     case 1002: /* PropertyAccessExpression */ {
       const target = compile(instance, node[1]);
       const optional = node[2];
       const member = node[3];
-      return (scope) => {
-        const object = target(scope) as { [name: string]: Value };
-        if (optional && object === null) {
-          return null;
-        }
-        // An absent member reads as null — the language's absent value;
-        // `undefined` never arises.
-        return object[member] ?? null;
+      return {
+        run: (scope) => {
+          const object = target.run(scope) as { [name: string]: Value };
+          if (optional && object === null) {
+            return null;
+          }
+          // An absent member reads as null — the language's absent value;
+          // `undefined` never arises.
+          return object[member] ?? null;
+        },
       };
     }
     case 1016: /* ElementAccessExpression */ {
       const target = compile(instance, node[1]);
       const argument = compile(instance, node[2]);
-      return (scope) => {
-        const reached = target(scope);
-        const key = argument(scope);
-        if (Array.isArray(reached)) {
-          // An array is reached by whole numbers in range; everything else
-          // about it — a fractional key, a string one, one past either end —
-          // is a place the array has nothing, which reads as null.
-          return typeof key === "number" &&
-            Number.isInteger(key) &&
-            key >= 0 &&
-            key < reached.length
-            ? (reached[key] ?? null)
-            : null;
-        }
-        // An object is reached by the names it holds itself: an inherited one
-        // (`toString`) is not a member of the value, so it reads as absent
-        // rather than handing back something from the host's prototypes.
-        if (reached !== null && typeof reached === "object") {
-          return typeof key === "string" &&
-            Object.prototype.hasOwnProperty.call(reached, key)
-            ? ((reached as { [name: string]: Value })[key] ?? null)
-            : null;
-        }
-        return null;
+      return {
+        run: (scope) => {
+          const reached = target.run(scope);
+          const key = argument.run(scope);
+          if (Array.isArray(reached)) {
+            // An array is reached by whole numbers in range; everything else
+            // about it — a fractional key, a string one, one past either end —
+            // is a place the array has nothing, which reads as null.
+            return typeof key === "number" &&
+              Number.isInteger(key) &&
+              key >= 0 &&
+              key < reached.length
+              ? (reached[key] ?? null)
+              : null;
+          }
+          // An object is reached by the names it holds itself: an inherited one
+          // (`toString`) is not a member of the value, so it reads as absent
+          // rather than handing back something from the host's prototypes.
+          if (reached !== null && typeof reached === "object") {
+            return typeof key === "string" &&
+              Object.prototype.hasOwnProperty.call(reached, key)
+              ? ((reached as { [name: string]: Value })[key] ?? null)
+              : null;
+          }
+          return null;
+        },
       };
     }
     case 1003: /* BinaryExpression */ {
@@ -293,23 +314,27 @@ function buildNode(instance: Instance, source: Source): Compiled {
         }
         const name = target[1];
         const right = compile(instance, node[3]);
-        return (scope) => {
-          const value = right(scope);
-          const frame = lookup(scope, name);
-          if (frame === null) {
-            throw new Error(`unknown assignment target ${name}`);
-          }
-          bind(frame, name, value);
-          // An assignment evaluates to the value assigned, as in JavaScript; in
-          // statement position nothing reads it.
-          return value;
+        return {
+          run: (scope) => {
+            const value = right.run(scope);
+            const frame = lookup(scope, name);
+            if (frame === null) {
+              throw new Error(`unknown assignment target ${name}`);
+            }
+            bind(frame, name, value);
+            // An assignment evaluates to the value assigned, as in JavaScript; in
+            // statement position nothing reads it.
+            return value;
+          },
         };
       }
-      return compileBinop(
-        node[1],
-        compile(instance, node[2]),
-        compile(instance, node[3]),
-      );
+      return {
+        run: compileBinop(
+          node[1],
+          compile(instance, node[2]),
+          compile(instance, node[3]),
+        ),
+      };
     }
     case 1019: /* PrefixUnaryExpression */ {
       const operand = compile(instance, node[2]);
@@ -317,19 +342,23 @@ function buildNode(instance: Instance, source: Source): Compiled {
       // negates rather than deciding what counts as true. A `-` operand is a
       // number, checked by the compiler as arithmetic everywhere else is.
       if (node[1] === "-") {
-        return (scope) => -(operand(scope) as number);
+        return { run: (scope) => -(operand.run(scope) as number) };
       }
-      return (scope) => !condition(operand(scope), "the operand of `!`");
+      return {
+        run: (scope) => !condition(operand.run(scope), "the operand of `!`"),
+      };
     }
     case 1004: /* ConditionalExpression */ {
       const test = compile(instance, node[1]);
       const whenTrue = compile(instance, node[2]);
       const whenFalse = compile(instance, node[3]);
       // Only the taken branch evaluates.
-      return (scope) =>
-        condition(test(scope), "a ternary condition")
-          ? whenTrue(scope)
-          : whenFalse(scope);
+      return {
+        run: (scope) =>
+          condition(test.run(scope), "a ternary condition")
+            ? whenTrue.run(scope)
+            : whenFalse.run(scope),
+      };
     }
     case 1005: /* ArrowFunction */ {
       const parameters = node[1].map((param) => param[1]);
@@ -344,30 +373,33 @@ function buildNode(instance: Instance, source: Source): Compiled {
       // frame, so making one of its own would be an allocation per call for a
       // scope that holds nothing. Every splice argument is one of these.
       if (parameters.length === 0 && expression !== null) {
-        return (scope) => () => expression(scope);
+        return { run: (scope) => () => expression.run(scope) };
       }
-      return (scope) =>
-        (...args: Value[]) => {
-          const frame = scopeOf(scope);
-          // A missing argument binds as null — the language's absent value;
-          // `undefined` never arises (an omitted optional parameter reads
-          // as null).
-          for (let at = 0; at < parameters.length; at++) {
-            bind(frame, parameters[at], at < args.length ? args[at] : null);
-          }
-          if (block === null) {
-            return (expression as Compiled)(frame);
-          }
-          const completion = block(frame);
-          if (completion.kind === "break" || completion.kind === "continue") {
-            // The compiler rejects a jump with no loop to catch it, so one
-            // reaching here means the bundle was not written by it.
-            throw new Error(
-              `A \`${completion.kind}\` in this bundle escaped its loop.`,
-            );
-          }
-          return completion.kind === "returned" ? completion.value : null;
-        };
+      return {
+        run:
+          (scope) =>
+          (...args: Value[]) => {
+            const frame = scopeOf(scope);
+            // A missing argument binds as null — the language's absent value;
+            // `undefined` never arises (an omitted optional parameter reads
+            // as null).
+            for (let at = 0; at < parameters.length; at++) {
+              bind(frame, parameters[at], at < args.length ? args[at] : null);
+            }
+            if (block === null) {
+              return (expression as Compiled).run(frame);
+            }
+            const completion = block.run(frame);
+            if (completion.kind === "break" || completion.kind === "continue") {
+              // The compiler rejects a jump with no loop to catch it, so one
+              // reaching here means the bundle was not written by it.
+              throw new Error(
+                `A \`${completion.kind}\` in this bundle escaped its loop.`,
+              );
+            }
+            return completion.kind === "returned" ? completion.value : null;
+          },
+      };
     }
     default: {
       // Every remaining kind is a statement, which is not a value. A bundle
@@ -402,14 +434,16 @@ function guardTurns(turns: number, keyword: string): void {
 function buildStatement(
   instance: Instance,
   node: BundleStatementNode,
-): Executed {
+): Compiled<Completion> {
   if (!Array.isArray(node)) {
     // Plain JSON in statement position is an expression evaluated for its
     // effect.
     const run = compile(instance, node);
-    return (scope) => {
-      run(scope);
-      return advanced;
+    return {
+      run: (scope) => {
+        run.run(scope);
+        return advanced;
+      },
     };
   }
   switch (node[0]) {
@@ -428,27 +462,33 @@ function buildStatement(
       const body = statements.map((statement) =>
         compileStatement(instance, statement),
       );
-      return (scope) => {
-        const frame = scopeOf(scope);
-        for (const name of declared) {
-          bind(frame, name, null);
-        }
-        for (const run of body) {
-          const completion = run(frame);
-          // A jump of any kind leaves the block; what catches it is further out.
-          if (completion.kind !== "advanced") {
-            return completion;
+      return {
+        run: (scope) => {
+          const frame = scopeOf(scope);
+          for (const name of declared) {
+            bind(frame, name, null);
           }
-        }
-        return advanced;
+          for (const run of body) {
+            const completion = run.run(frame);
+            // A jump of any kind leaves the block; what catches it is further out.
+            if (completion.kind !== "advanced") {
+              return completion;
+            }
+          }
+          return advanced;
+        },
       };
     }
     case 1007: /* VariableDeclaration */ {
       const name = node[1];
       const initializer = compile(instance, node[2]);
-      return (scope) => {
-        bind(scope, name, initializer(scope));
-        return advanced;
+      return {
+        run: (scope) => {
+          // A declaration only ever runs inside the block that hoisted it, so
+          // there is always a frame to bind into.
+          bind(scope as Scope, name, initializer.run(scope));
+          return advanced;
+        },
       };
     }
     case 1008: /* IfStatement */ {
@@ -457,30 +497,34 @@ function buildStatement(
       const branch = node[3];
       const otherwise =
         branch === null ? null : compileStatement(instance, branch);
-      return (scope) => {
-        if (condition(test(scope), "an `if`")) {
-          return then(scope);
-        }
-        return otherwise === null ? advanced : otherwise(scope);
+      return {
+        run: (scope) => {
+          if (condition(test.run(scope), "an `if`")) {
+            return then.run(scope);
+          }
+          return otherwise === null ? advanced : otherwise.run(scope);
+        },
       };
     }
     case 1012: /* WhileStatement */ {
       const test = compile(instance, node[1]);
       const body = compileStatement(instance, node[2]);
-      return (scope) => {
-        let turns = 0;
-        while (condition(test(scope), "a `while`")) {
-          const completion = body(scope);
-          if (completion.kind === "returned") {
-            return completion;
+      return {
+        run: (scope) => {
+          let turns = 0;
+          while (condition(test.run(scope), "a `while`")) {
+            const completion = body.run(scope);
+            if (completion.kind === "returned") {
+              return completion;
+            }
+            if (completion.kind === "break") {
+              return advanced;
+            }
+            // `continue` arrives here too, having nothing left to skip.
+            guardTurns((turns += 1), "while");
           }
-          if (completion.kind === "break") {
-            return advanced;
-          }
-          // `continue` arrives here too, having nothing left to skip.
-          guardTurns((turns += 1), "while");
-        }
-        return advanced;
+          return advanced;
+        },
       };
     }
     case 1013: /* ForStatement */ {
@@ -493,56 +537,62 @@ function buildStatement(
       const body = compileStatement(instance, node[4]);
       const update =
         incrementor === null ? null : compileStatement(instance, incrementor);
-      return (scope) => {
-        // The header binding lives in a scope of the loop's own, so it is gone
-        // once the loop is.
-        let frame = scopeOf(scope);
-        if (init !== null) {
-          init(frame);
-        }
-        let turns = 0;
-        for (;;) {
-          if (test !== null && !condition(test(frame), "a `for`")) {
-            return advanced;
+      return {
+        run: (scope) => {
+          // The header binding lives in a scope of the loop's own, so it is gone
+          // once the loop is.
+          let frame = scopeOf(scope);
+          if (init !== null) {
+            init.run(frame);
           }
-          const completion = body(frame);
-          if (completion.kind === "returned") {
-            return completion;
+          let turns = 0;
+          for (;;) {
+            if (test !== null && !condition(test.run(frame), "a `for`")) {
+              return advanced;
+            }
+            const completion = body.run(frame);
+            if (completion.kind === "returned") {
+              return completion;
+            }
+            if (completion.kind === "break") {
+              return advanced;
+            }
+            // `continue` lands here, where falling off the end of the body lands:
+            // the update runs either way.
+            //
+            // Each turn gets its own copy of the header scope, taken before the
+            // update: an arrow built in one turn keeps that turn's values instead
+            // of the ones the loop stopped at.
+            frame = {
+              parent: scope,
+              bindings: new Map(frame.bindings),
+            };
+            if (update !== null) {
+              update.run(frame);
+            }
+            guardTurns((turns += 1), "for");
           }
-          if (completion.kind === "break") {
-            return advanced;
-          }
-          // `continue` lands here, where falling off the end of the body lands:
-          // the update runs either way.
-          //
-          // Each turn gets its own copy of the header scope, taken before the
-          // update: an arrow built in one turn keeps that turn's values instead
-          // of the ones the loop stopped at.
-          frame = {
-            parent: scope,
-            bindings: new Map(frame.bindings),
-          };
-          if (update !== null) {
-            update(frame);
-          }
-          guardTurns((turns += 1), "for");
-        }
+        },
       };
     }
     case 1014: /* BreakStatement */ {
-      return () => broke;
+      return { run: () => broke };
     }
     case 1015: /* ContinueStatement */ {
-      return () => continued;
+      return { run: () => continued };
     }
     case 1009: /* ReturnStatement */ {
       const value = compile(instance, node[1]);
-      return (scope) => ({ kind: "returned", value: value(scope) });
+      return {
+        run: (scope) => ({ kind: "returned", value: value.run(scope) }),
+      };
     }
     case 1010: /* ThrowStatement */ {
       const thrown = compile(instance, node[1]);
-      return (scope) => {
-        throw thrown(scope);
+      return {
+        run: (scope) => {
+          throw thrown.run(scope);
+        },
       };
     }
     case 1011: /* TryStatement */ {
@@ -550,26 +600,30 @@ function buildStatement(
       const clause = node[2];
       const caught = clause[1];
       const handler = compileStatement(instance, clause[2]);
-      return (scope) => {
-        try {
-          return attempted(scope);
-        } catch (thrown) {
-          // The catch binding scopes over the clause's block only, like an
-          // arrow parameter over its body.
-          const frame = scopeOf(scope);
-          if (caught !== null) {
-            bind(frame, caught, thrown as Value);
+      return {
+        run: (scope) => {
+          try {
+            return attempted.run(scope);
+          } catch (thrown) {
+            // The catch binding scopes over the clause's block only, like an
+            // arrow parameter over its body.
+            const frame = scopeOf(scope);
+            if (caught !== null) {
+              bind(frame, caught, thrown as Value);
+            }
+            return handler.run(frame);
           }
-          return handler(frame);
-        }
+        },
       };
     }
     default: {
       // Every remaining kind is an expression, evaluated for its effect.
       const run = compile(instance, node);
-      return (scope) => {
-        run(scope);
-        return advanced;
+      return {
+        run: (scope) => {
+          run.run(scope);
+          return advanced;
+        },
       };
     }
   }
@@ -589,12 +643,12 @@ function isSpread(
 function compileElements(
   instance: Instance,
   elements: readonly (BundleArrayElement | BundleExpressionNode)[],
-): (scope: Scope | null) => Value[] {
+): Compiled<Value[]> {
   if (!elements.some((element) => isSpread(element as BundleArrayElement))) {
     const parts = elements.map((element) =>
       compile(instance, element as Source),
     );
-    return (scope) => parts.map((part) => part(scope));
+    return { run: (scope) => parts.map((part) => part.run(scope)) };
   }
   const parts = elements.map((element) =>
     isSpread(element as BundleArrayElement)
@@ -604,22 +658,24 @@ function compileElements(
         }
       : { spread: false, read: compile(instance, element as Source) },
   );
-  return (scope) => {
-    const out: Value[] = [];
-    for (const part of parts) {
-      const value = part.read(scope);
-      if (!part.spread) {
-        out.push(value);
-        continue;
+  return {
+    run: (scope) => {
+      const out: Value[] = [];
+      for (const part of parts) {
+        const value = part.read.run(scope);
+        if (!part.spread) {
+          out.push(value);
+          continue;
+        }
+        if (!Array.isArray(value)) {
+          throw new Error("only an array can be spread");
+        }
+        for (const member of value) {
+          out.push(member);
+        }
       }
-      if (!Array.isArray(value)) {
-        throw new Error("only an array can be spread");
-      }
-      for (const member of value) {
-        out.push(member);
-      }
-    }
-    return out;
+      return out;
+    },
   };
 }
 
@@ -701,7 +757,7 @@ function compileBinop(
   operator: Exclude<BundleBinaryOperator, "=">,
   left: Compiled,
   right: Compiled,
-): Compiled {
+): (scope: Scope | null) => Value {
   // The logical operators evaluate their right operand lazily, and both
   // operands are boolean — so `&&` and `||` yield one. Checking only the left
   // would still branch correctly and then return whatever the right side was,
@@ -712,18 +768,18 @@ function compileBinop(
   switch (operator) {
     case "&&":
       return (scope) =>
-        condition(left(scope), "the left operand of `&&`")
-          ? condition(right(scope), "the right operand of `&&`")
+        condition(left.run(scope), "the left operand of `&&`")
+          ? condition(right.run(scope), "the right operand of `&&`")
           : false;
     case "||":
       return (scope) =>
-        condition(left(scope), "the left operand of `||`")
+        condition(left.run(scope), "the left operand of `||`")
           ? true
-          : condition(right(scope), "the right operand of `||`");
+          : condition(right.run(scope), "the right operand of `||`");
     case "??":
       return (scope) => {
-        const value = left(scope);
-        return value !== null ? value : right(scope);
+        const value = left.run(scope);
+        return value !== null ? value : right.run(scope);
       };
     case "+":
       // Two numbers add; a string on either side concatenates. Written out
@@ -732,8 +788,8 @@ function compileBinop(
       // A client not written in JavaScript has to make the same choice, so the
       // choice belongs in the open.
       return (scope) => {
-        const a = left(scope);
-        const b = right(scope);
+        const a = left.run(scope);
+        const b = right.run(scope);
         if (typeof a === "number" && typeof b === "number") {
           return a + b;
         }
@@ -746,25 +802,33 @@ function compileBinop(
         );
       };
     case "-":
-      return (scope) => (left(scope) as number) - (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) - (right.run(scope) as number);
     case "*":
-      return (scope) => (left(scope) as number) * (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) * (right.run(scope) as number);
     case "/":
-      return (scope) => (left(scope) as number) / (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) / (right.run(scope) as number);
     case "%":
-      return (scope) => (left(scope) as number) % (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) % (right.run(scope) as number);
     case "===":
-      return (scope) => left(scope) === right(scope);
+      return (scope) => left.run(scope) === right.run(scope);
     case "!==":
-      return (scope) => left(scope) !== right(scope);
+      return (scope) => left.run(scope) !== right.run(scope);
     case "<":
-      return (scope) => (left(scope) as number) < (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) < (right.run(scope) as number);
     case "<=":
-      return (scope) => (left(scope) as number) <= (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) <= (right.run(scope) as number);
     case ">":
-      return (scope) => (left(scope) as number) > (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) > (right.run(scope) as number);
     case ">=":
-      return (scope) => (left(scope) as number) >= (right(scope) as number);
+      return (scope) =>
+        (left.run(scope) as number) >= (right.run(scope) as number);
   }
   // No `default`: the switch covers `BundleBinaryOperator`, so adding an
   // operator to the format is a compile error here rather than a throw at
