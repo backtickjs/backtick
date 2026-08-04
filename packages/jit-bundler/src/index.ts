@@ -35,7 +35,6 @@ export type {
   BundleThrowStatementNode,
   BundleThunk,
   BundleApplyTree,
-  BundleGetSlot,
   BundleTryStatementNode,
   BundleWhileStatementNode,
   FunctionLabel,

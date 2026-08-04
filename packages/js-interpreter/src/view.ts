@@ -64,9 +64,9 @@ export function evaluate<N extends object>(
 }
 
 function materialize(bundle: Bundle, host: Host): unknown {
-  // The root is evaluated in no instance: there is nothing above it to have
-  // supplied slots, and nothing above it declares cells it could read.
-  const outside: Instance = { bundle, host, slots: noSlots };
+  // The root is evaluated in no instance: nothing above it to have supplied
+  // arguments, and nothing above it to have bound anything.
+  const outside: Instance = { bundle, host };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.
@@ -124,15 +124,7 @@ function requireReactivity(): void {
 export interface Instance {
   readonly bundle: Bundle;
   readonly host: Host;
-  // What the parent handed over, read rather than held: for a row of a list it
-  // is a computation over the last list evaluated, so handing a row new
-  // arguments is a write and every prop that read one runs again. Equal
-  // arguments are no write at all, which is the skip a row gets for being
-  // handed nothing new.
-  readonly slots: () => Value[];
 }
-
-const noSlots = (): Value[] => [];
 
 /**
  * Builds an instance of a tree entry by calling it.
@@ -146,18 +138,18 @@ const noSlots = (): Value[] => [];
 export function instantiate(
   bundle: Bundle,
   tree: BundleFunction,
-  slots: () => Value[],
+  slots: Value[],
   host: Host,
 ): unknown {
-  const instance: Instance = { bundle, host, slots };
+  const instance: Instance = { bundle, host };
   // Instantiating is calling: the entry's arrow runs in this instance, binding
   // whatever cells it declares in a scope of its own, and yields what to draw.
   const entry = evaluateNode(
     bundle,
     tree[NodeField.content],
     scopeOf(null, instance),
-  ) as () => Value;
-  return build(entry(), instance);
+  ) as (...args: Value[]) => Value;
+  return build(entry(...slots), instance);
 }
 
 // What an evaluated tree expression draws, in a position that draws exactly
@@ -167,10 +159,12 @@ function build(value: Value, instance: Instance): unknown {
   if (!isApplied(value)) {
     return value;
   }
-  // Fixed arguments: this position holds one application, evaluated when the
-  // instance was built, so nothing will hand it different ones.
-  const slots = value.slots;
-  return instantiate(instance.bundle, value.tree, () => slots, instance.host);
+  return instantiate(
+    instance.bundle,
+    value.tree,
+    value.slots,
+    instance.host,
+  );
 }
 
 /**

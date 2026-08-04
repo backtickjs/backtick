@@ -8,10 +8,10 @@
 
 #f4 = ($0) => "row " + $0
 
-#t0 = () => <Link
-  href={#f3((id) => slots[1], slots[0])}
+#t0 = (id, s0) => <Link
+  href={#f3((id) => s0, id)}
 >
-  {#f4(slots[0])}
+  {#f4(id)}
 </Link>
 
 #t1 = () => {

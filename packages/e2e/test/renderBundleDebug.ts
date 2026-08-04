@@ -222,8 +222,6 @@ function renderExpr(expr: BundleExpr, indent: string): string {
     return renderData(expr, indent, renderExpr);
   }
   switch (expr["#"]) {
-    case NodeKind.GetSlot:
-      return `slots[${expr[NodeField.index]}]`;
     case NodeKind.GetFunction:
       return fnLabel(expr[NodeField.label]);
     case NodeKind.ApplyFunction: {

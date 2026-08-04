@@ -21,7 +21,6 @@ import type {
   BundleExpr,
   BundleExpressionNode,
   BundleIdentifierNode,
-  BundleGetSlot,
   BundleVariableDeclarationNode,
   FunctionLabel,
   TreeLabel,
@@ -36,12 +35,12 @@ import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 // encloses the expression — the bundle root, and a cell's initial.
 interface TreeScope {
   readonly target: number | null;
-  readonly slots: Map<string, number>;
+  readonly slots: Set<string>;
 }
 
 // Renders in no instance: nothing is in scope, and a cell reaching here has
 // nowhere to resolve against.
-const noInstance = (): TreeScope => ({ target: null, slots: new Map() });
+const noInstance = (): TreeScope => ({ target: null, slots: new Set() });
 
 // Builds the bundle `{ functions, trees, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
@@ -556,11 +555,15 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // An entry as its arrow: the cells it declares, then what it draws. A body
   // only where there is something to bind — otherwise the arrow is its content.
   const treeEntry = (
+    slots: string[],
     bindings: BundleVariableDeclarationNode[],
     drawn: BundleExpr,
   ): BundleFunction => ({
     [NodeField.content]: {
       "#": NodeKind.ArrowFunction,
+      ...(slots.length === 0
+        ? {}
+        : { [NodeField.parameters]: parameterNodes(slots) }),
       [NodeField.body]:
         bindings.length === 0
           ? (drawn as BundleExpressionNode)
@@ -579,10 +582,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   const buildTree = (target: number): void => {
     const keys = treeSlots(target);
-    const scope: TreeScope = {
-      target,
-      slots: new Map(keys.map((key, index) => [key, index] as const)),
-    };
+    const scope: TreeScope = { target, slots: new Set(keys) };
+    // The entry's parameters, named where its expressions name them.
+    const names = keys.map(displayName);
     const content = ir.trees[target].content;
     // A cell's initial is data the entry carries, evaluated in no instance: it
     // can't read a slot or another cell, so it renders against an empty scope.
@@ -596,13 +598,13 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     }
     // An instance that draws nothing: the entry stays, with nothing under it.
     if (content === null) {
-      treeJsons.set(target, treeEntry(bindings, null));
+      treeJsons.set(target, treeEntry(names, bindings, null));
       return;
     }
     if (content.kind === "IrElement") {
       treeJsons.set(
         target,
-        treeEntry(bindings, renderElement(content, scope, new Set())),
+        treeEntry(names, bindings, renderElement(content, scope, new Set())),
       );
       return;
     }
@@ -612,7 +614,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     const args = treeSlots(content.target).map((key) => capExpr(key, scope));
     treeJsons.set(
       target,
-      treeEntry(bindings, {
+      treeEntry(names, bindings, {
         "#": NodeKind.ApplyTree,
         [NodeField.label]: `${content.target}`,
         ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
@@ -628,15 +630,14 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     key: string,
     scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
-  ): BundleGetSlot | BundleIdentifierNode => {
+  ): BundleIdentifierNode => {
     if (params.has(key)) {
       return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
-    // Before the cell case: a cell this entry doesn't own arrives as a slot, and
-    // only one it owns resolves against the instance.
-    const index = scope.slots.get(key);
-    if (index !== undefined) {
-      return { "#": NodeKind.GetSlot, [NodeField.index]: index };
+    // Before the cell case: a cell this entry doesn't own arrives as a slot,
+    // and only one it owns is bound here.
+    if (scope.slots.has(key)) {
+      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
     if (isCellKey(key)) {
       // The one place a `cell` node is made, so the rule `Bundle.ts` states —

@@ -16,27 +16,27 @@
 
 #f8 = ($0) => "$" + $0.total
 
-#t0 = () => <Text>
-  {#f7(slots[0])}
+#t0 = (item) => <Text>
+  {#f7(item)}
 </Text>
 
-#t1 = () => <View>
+#t1 = (order) => <View>
   {<Image
-    source={{ "uri": #f2(slots[0]) }}
+    source={{ "uri": #f2(order) }}
   />}
   {<Text>
-    {#f3(slots[0])}
+    {#f3(order)}
   </Text>}
   {<Text>
-    {#f4(slots[0])}
+    {#f4(order)}
   </Text>}
   {<For
-    each={#f5(slots[0])}
+    each={#f5(order)}
   >
     {#f6((item) => #t0(item))}
   </For>}
   {<Text>
-    {#f8(slots[0])}
+    {#f8(order)}
   </Text>}
 </View>
 

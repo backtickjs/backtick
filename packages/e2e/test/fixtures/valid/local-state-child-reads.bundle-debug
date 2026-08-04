@@ -14,26 +14,26 @@
   {"marker"}
 </Text>
 
-#t1 = () => <View>
+#t1 = (s0) => <View>
   {<Text
-    style={{ "fontSize": #f1(() => slots[0], #f2) }}
+    style={{ "fontSize": #f1(() => s0, #f2) }}
   >
-    {#f3(#f2, () => slots[0])}
+    {#f3(#f2, () => s0)}
   </Text>}
-  {#f4(() => slots[0], #f2, () => #t0())}
+  {#f4(() => s0, #f2, () => #t0())}
 </View>
 
 #t2 = () => <Text>
   {"marker"}
 </Text>
 
-#t3 = () => <View>
+#t3 = (s0) => <View>
   {<Text
-    style={{ "fontSize": #f1(() => slots[0], #f5) }}
+    style={{ "fontSize": #f1(() => s0, #f5) }}
   >
-    {#f3(#f5, () => slots[0])}
+    {#f3(#f5, () => s0)}
   </Text>}
-  {#f4(() => slots[0], #f5, () => #t2())}
+  {#f4(() => s0, #f5, () => #t2())}
 </View>
 
 #t4 = () => {

@@ -15,7 +15,7 @@ import type {
   TreeLabel,
 } from "@backtickjs/core";
 import { makeState } from "./makeState.js";
-import { compileElement, instanceOf } from "./view.js";
+import { compileElement } from "./view.js";
 import type { Instance } from "./view.js";
 import type { Applied, Value } from "./Value.js";
 
@@ -31,7 +31,7 @@ import type { Applied, Value } from "./Value.js";
 
 // Everything the compiler reads. A tree expression and a body node are one
 // grammar with two ends: the shared middle is literals, containers, names and
-// entries, the tree end adds slots, cells, applications and elements, and the
+// entries, the tree end adds applications and elements, and the
 // body end adds the statements and operators a script is written in. Compiling
 // them together is what makes the middle exist once.
 type Source = BundleExpr | BundleStatementNode;
@@ -48,10 +48,8 @@ export interface Scope {
   parent: Scope | null;
   names: string[];
   values: Value[];
-  // What a slot and a cell resolve against, carried down every frame so a
-  // thunk nested inside an element still knows whose slots it is reading.
-  // Null in a `functions` entry, which resolves against its parameters alone:
-  // a cell reaches one as an ordinary argument, and a slot never does.
+  // Whose instance this is being evaluated in — the host an element is built
+  // with. Null in a `functions` entry, which draws nothing.
   instance: Instance | null;
 }
 
@@ -213,13 +211,6 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
   }
   const node = source;
   switch (node["#"]) {
-    // The enclosing entry's n-th argument. Read through the instance's
-    // accessor, so whoever is reading depends on it: hand a row new slots and
-    // exactly the props that read one run again.
-    case NodeKind.GetSlot: {
-      const index = node[NodeField.index];
-      return (scope) => instanceOf(scope).slots()[index] ?? null;
-    }
     case NodeKind.Identifier: {
       const name = node[NodeField.text];
       return (scope) => {

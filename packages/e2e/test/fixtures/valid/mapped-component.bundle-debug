@@ -4,8 +4,8 @@
 
 #f2 = ($0) => "row " + $0
 
-#t0 = () => <Text>
-  {#f2(slots[0])}
+#t0 = (row) => <Text>
+  {#f2(row)}
 </Text>
 
 #t1 = () => <View>

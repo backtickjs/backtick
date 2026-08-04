@@ -48,11 +48,9 @@ export interface Bundle {
   // by its call site to the client arguments.
   functions: Record<FunctionLabel, BundleFunction>;
   // The same entry a `functions` label names: an arrow, evaluated to a function
-  // and called to instantiate. Its body binds the cells the entry declares and
-  // yields what the instance draws, so per-instance storage is what a call
-  // already means. Its slots arrive as a `BundleGetSlot` resolves them, not as
-  // parameters — an entry is applied, and what it is applied to is the
-  // instance's, not the call's.
+  // and called to instantiate. Its slots are its parameters and its cells are
+  // bindings in its body, so an instance is a call and what persists per
+  // instance is that call's scope.
   trees: Record<TreeLabel, BundleFunction>;
   root: BundleExpr;
 }
@@ -180,18 +178,20 @@ export const NodeField = {
 // knows, so a moved value silently misparses every bundle already written.
 // `renderBundleDebug` maps a number back to its name.
 export const NodeKind = {
-  // A `get` resolves something already in reach: this instance's slots and
-  // state, or a row of either table. An `apply` runs a row — for a tree, that
+  // A `get` names a row of a table. An `apply` runs one — for a tree, that
   // means instantiating it. The kind names the table, so a label is only an
   // index into it.
   Element: 0,
-  GetSlot: 1,
+  // 1 is retired. It named the enclosing entry's n-th argument, where an entry
+  // is a function and its arguments are its parameters. A number is never
+  // reused.
   // 2 is retired. It named a cell declared by the enclosing tree entry, where a
   // cell is now bound by a declaration in that entry and resolves as an
   // `Identifier`. A number is never reused.
   // 3 is retired. It named a `trees` entry as a value — a function taking the
   // entry's slots and yielding the instance. A tree is applied, never called,
   // so an `ApplyTree` says the same thing in one node where this needed two.
+  // (An entry is a function now, but it is still applied rather than named.)
   // A number is never reused.
   GetFunction: 4,
   ApplyTree: 5,
@@ -239,21 +239,14 @@ export const NodeKind = {
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
 
 // A JSX element node: static structure carried as data, each prop a
-// `BundleExpr` evaluated against the enclosing tree's slots.
+// `BundleExpr` evaluated in the enclosing entry's scope.
 export interface BundleElement {
   "#": typeof NodeKind.Element;
   [NodeField.id]: string;
   [NodeField.props]?: { [prop: string]: BundleExpr };
 }
 
-// The enclosing tree's n-th slot: resolves to the value supplied for that
-// position when the tree was instantiated.
-export interface BundleGetSlot {
-  "#": typeof NodeKind.GetSlot;
-  [NodeField.index]: number;
-}
-
-// Instantiates a `trees` entry: `args` supplies the tree's slots in index
+// Instantiates a `trees` entry: `args` supplies the entry's parameters in
 // order, and `key` identifies the instance among its siblings so it survives a
 // re-render that reorders them. Only a tree can be keyed — only a tree has
 // state to keep.
@@ -314,7 +307,6 @@ export type BundleExpr =
   | number
   | string
   | BundleExpr[]
-  | BundleGetSlot
   | BundleIdentifierNode
   | BundleGetFunction
   | BundleApply
@@ -419,8 +411,7 @@ export interface BundleGetFunction {
 // A call: evaluates the callee to a function and applies it. When the callee
 // is an `entry` node targeting a function, `args` mirrors that entry's
 // parameters (thunks for a polymorphic entry's splices first, then one value
-// per capture); targeting a tree, `args` supplies the tree's slots in index
-// order. When `questionDotToken` (`callee?.(…)`), a null callee yields null — the
+// per capture); targeting a tree, `args` supplies its parameters in order. When `questionDotToken` (`callee?.(…)`), a null callee yields null — the
 // language's absent value; `undefined` never arises — and the arguments are
 // not evaluated.
 export interface BundleCallExpressionNode {

@@ -8,8 +8,8 @@
 
 #f3 = ($0, $1) => $0 + " at " + $1.read()
 
-#t0 = () => <Text>
-  {#f3(slots[0], slots[1])}
+#t0 = (name, index) => <Text>
+  {#f3(name, index)}
 </Text>
 
 #t1 = () => {

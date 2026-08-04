@@ -4,16 +4,16 @@
   $0().write($0().read() + 1);
 }
 
-#t0 = () => <Text
-  style={{ "fontSize": #f0(() => slots[0]) }}
-  onPress={#f1(() => slots[0])}
+#t0 = (s0) => <Text
+  style={{ "fontSize": #f0(() => s0) }}
+  onPress={#f1(() => s0)}
 >
   {"press"}
 </Text>
 
-#t1 = () => <Text
-  style={{ "fontSize": #f0(() => slots[0]) }}
-  onPress={#f1(() => slots[0])}
+#t1 = (s0) => <Text
+  style={{ "fontSize": #f0(() => s0) }}
+  onPress={#f1(() => s0)}
 >
   {"press"}
 </Text>
