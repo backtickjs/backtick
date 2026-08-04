@@ -334,6 +334,15 @@
       "keyed": true,
       "dir": "app-fixed",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "e7664dc",
+      "label": "entries",
+      "note": "one table: a cell is a binding, an argument is a parameter, and a tree entry is a function entry. Every op-count snapshot is byte-identical, so this measures the interpreter rather than the drawing. 5 iterations",
+      "date": "2026-08-03",
+      "keyed": true,
+      "dir": "e7664dc",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
