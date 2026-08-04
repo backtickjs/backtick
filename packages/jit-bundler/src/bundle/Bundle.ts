@@ -149,6 +149,7 @@ export const NodeKind = {
   Element: 0,
   GetFunction: 1,
   ApplyFunction: 2,
+  Builtin: 3,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -179,7 +180,6 @@ export const NodeKind = {
   Parameter: 1018,
   PrefixUnaryExpression: 1019,
   SpreadElement: 1020,
-  Builtin: 1021,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -196,6 +196,10 @@ export interface BundleElement {
 
 // Applies an entry, named by label. A `call` evaluates a callee node instead,
 // which is why the two are separate kinds.
+//
+// Shorthand, exactly, for a `call` of a `get` of this label, and it must stay
+// equivalent to one. Spelled as a single node because applying is most of what
+// a bundle does: written the long way, the fixtures measure ~5% larger.
 export interface BundleApplyFunction {
   "#": typeof NodeKind.ApplyFunction;
   [NodeField.label]: FunctionLabel;
