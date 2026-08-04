@@ -36,15 +36,9 @@ type Source = BundleArrayElement | BundleStatementNode;
 // One frame per arrow application or block. Names are pre-resolved by the
 // bundler and there are no globals: a name no frame binds is a malformed
 // bundle.
-//
-// Names and values side by side rather than a `Map`. A frame binds one or two
-// names — an arrow's parameters, a block's declarations — and a linear scan of
-// that beats hashing it, where allocating the `Map` is what a call was mostly
-// paying for.
 export interface Scope {
   parent: Scope | null;
-  names: string[];
-  values: Value[];
+  bindings: Map<string, Value>;
   // Whose instance this is being evaluated in — the host an element is built
   // with. Null in a `functions` entry, which draws nothing.
   instance: Instance | null;
@@ -54,26 +48,20 @@ export function scopeOf(
   parent: Scope | null,
   instance: Instance | null = parent?.instance ?? null,
 ): Scope {
-  return { parent, names: [], values: [], instance };
+  return { parent, bindings: new Map(), instance };
 }
 
 function bind(scope: Scope, name: string, value: Value): void {
-  const at = scope.names.indexOf(name);
-  if (at === -1) {
-    scope.names.push(name);
-    scope.values.push(value);
-    return;
-  }
-  scope.values[at] = value;
+  scope.bindings.set(name, value);
 }
 
 function read(scope: Scope, name: string): Value {
-  return scope.values[scope.names.indexOf(name)] ?? null;
+  return scope.bindings.get(name) ?? null;
 }
 
 function lookup(scope: Scope | null, name: string): Scope | null {
   for (let at = scope; at !== null; at = at.parent) {
-    if (at.names.indexOf(name) !== -1) {
+    if (at.bindings.has(name)) {
       return at;
     }
   }
@@ -542,8 +530,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
           // of the ones the loop stopped at.
           frame = {
             parent: scope,
-            names: frame.names.slice(),
-            values: frame.values.slice(),
+            bindings: new Map(frame.bindings),
             instance: frame.instance,
           };
           if (update !== null) {

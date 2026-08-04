@@ -332,6 +332,14 @@
       "keyed": true,
       "dir": "1ca53ea",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "b368f74",
+      "label": "map",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "map-scope",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
