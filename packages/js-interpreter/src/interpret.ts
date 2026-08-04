@@ -90,21 +90,21 @@ function getFunction(
 // is what runs from then on. Deciding what kind of node this is happens per
 // node instead of per evaluation — the same walk of the same tree, without
 // re-reading a shape that has not changed since the bundle was parsed.
+//
+// Once, and nothing here remembers that it was: a bundle is a tree, and a body
+// is compiled where its parent is, so the walk reaches a node exactly once. A
+// cache of compiled nodes measured zero hits against the fixtures and every
+// benchmark case — it would earn its place back the day compilation goes lazy,
+// a node compiled when it is first evaluated rather than when its parent is.
 export type Compiled = (scope: Scope | null) => Value;
-export type Executed = (scope: Scope) => Completion;
+type Executed = (scope: Scope) => Completion;
 
 export function compile(instance: Instance, node: Source): Compiled {
   if (node === null || typeof node !== "object") {
     const literal = node as Value;
     return () => literal;
   }
-  const already = instance.nodes.get(node);
-  if (already !== undefined) {
-    return already;
-  }
-  const made = buildNode(instance, node);
-  instance.nodes.set(node, made);
-  return made;
+  return buildNode(instance, node);
 }
 
 export function evaluate(
@@ -122,13 +122,7 @@ function compileStatement(
   if (node === null || typeof node !== "object") {
     return () => advanced;
   }
-  const already = instance.statements.get(node);
-  if (already !== undefined) {
-    return already;
-  }
-  const made = buildStatement(instance, node);
-  instance.statements.set(node, made);
-  return made;
+  return buildStatement(instance, node);
 }
 
 // A node is an array and nothing else in a value slot is — an array of data

@@ -62,13 +62,7 @@ export function evaluate<N extends object>(
 }
 
 function materialize(bundle: Bundle, host: Host): unknown {
-  const instance: Instance = {
-    bundle,
-    host,
-    functions: new Map(),
-    nodes: new WeakMap(),
-    statements: new WeakMap(),
-  };
+  const instance: Instance = { bundle, host, functions: new Map() };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.

@@ -1,5 +1,4 @@
 import type { Bundle, FunctionLabel } from "@backtickjs/core";
-import type { Compiled, Executed } from "./interpret.js";
 import type { Value } from "./Value.js";
 import type { Host } from "./view.js";
 
@@ -21,10 +20,4 @@ export interface Instance {
   // Keyed here rather than on the bundle because the closure holds this host —
   // the same function under a second host is a second closure.
   readonly functions: Map<FunctionLabel, (...args: Value[]) => Value>;
-  // A node is compiled once into the closure that evaluates it. Held here
-  // rather than in a table of its own for the same reason as `functions`: a
-  // closure holds the mount it was compiled for, so the same node under a
-  // second mount is a second closure.
-  readonly nodes: WeakMap<object, Compiled>;
-  readonly statements: WeakMap<object, Executed>;
 }
