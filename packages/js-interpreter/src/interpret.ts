@@ -202,20 +202,20 @@ function buildNode(instance: Instance, source: Source): Compiled {
       const func = compileFunction(instance, label);
       return { run: () => func.run(null), fixed: true };
     }
-    // A function applied: run it, wherever this is. Drawing needs no ceremony —
-    // a function is evaluated where the mount is, so an element in its body
-    // builds with the same host as one written here.
+    // A function applied. The format spells this as one node because applying
+    // is most of what a bundle does (see `BundleApplyFunction`), but it is
+    // shorthand for a call of a `get` and must stay equivalent to one — so it
+    // is expanded into exactly that and compiled as a call. Running a function
+    // has one path here, so there is one place to answer what it costs and no
+    // second place for that answer to drift.
     case 2: /* ApplyFunction */ {
-      const label = node[1];
-      const args = node[2].map((arg) => compile(instance, arg));
-      const func = compileFunction(instance, label);
-      return {
-        run: (scope) => {
-          const supplied = args.map((arg) => arg.run(scope));
-          return func.run(null)(...supplied);
-        },
-        fixed: args.every((arg) => arg.fixed) && func.fixed,
-      };
+      const [, label, args] = node;
+      return compile(instance, [
+        1001 /* CallExpression */,
+        [1 /* GetFunction */, label],
+        false,
+        args,
+      ]);
     }
     case 0: /* Element */ {
       return compileElement(instance, node);
