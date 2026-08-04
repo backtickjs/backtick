@@ -3,7 +3,6 @@
 // repository would have to write it. That is the point of a reference client —
 // what it needs from the format is the format, not a package.
 import type {
-  Bundle,
   BundleArrayElement,
   BundleSpreadElementNode,
   BundleBinaryOperator,
@@ -12,8 +11,8 @@ import type {
   FunctionLabel,
 } from "@backtickjs/core";
 import { makeState } from "./makeState.js";
-import { compileElement, instanceOf } from "./view.js";
-import type { Instance } from "./view.js";
+import type { Instance } from "./Instance.js";
+import { compileElement } from "./view.js";
 import type { Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
@@ -39,16 +38,10 @@ type Source = BundleArrayElement | BundleStatementNode;
 export interface Scope {
   parent: Scope | null;
   bindings: Map<string, Value>;
-  // Whose instance this is being evaluated in — the host an element is built
-  // with. Null in a `functions` entry, which draws nothing.
-  instance: Instance | null;
 }
 
-export function scopeOf(
-  parent: Scope | null,
-  instance: Instance | null = parent?.instance ?? null,
-): Scope {
-  return { parent, bindings: new Map(), instance };
+export function scopeOf(parent: Scope | null): Scope {
+  return { parent, bindings: new Map() };
 }
 
 function bind(scope: Scope, name: string, value: Value): void {
@@ -78,18 +71,18 @@ function getFunction(
   instance: Instance,
   label: FunctionLabel,
 ): (...args: Value[]) => Value {
-  const existing = instance.entries.get(label);
+  const existing = instance.functions.get(label);
   if (existing !== undefined) {
     return existing;
   }
-  const entry = instance.bundle.functions[label];
-  if (entry === undefined) {
-    throw new Error(`unknown function entry ${label}`);
+  const declared = instance.bundle.functions[label];
+  if (declared === undefined) {
+    throw new Error(`unknown function ${label}`);
   }
-  const fn = evaluate(instance.bundle, entry[0], scopeOf(null, instance)) as (
+  const fn = evaluate(instance, declared[0], scopeOf(null)) as (
     ...args: Value[]
   ) => Value;
-  instance.entries.set(label, fn);
+  instance.functions.set(label, fn);
   return fn;
 }
 
@@ -98,54 +91,54 @@ function getFunction(
 // node instead of per evaluation — the same walk of the same tree, without
 // re-reading a shape that has not changed since the bundle was parsed.
 export type Compiled = (scope: Scope | null) => Value;
-type Executed = (scope: Scope) => Completion;
+export type Executed = (scope: Scope) => Completion;
 
-const compiledNodes = new WeakMap<object, Compiled>();
-const compiledStatements = new WeakMap<object, Executed>();
-
-export function compile(bundle: Bundle, node: Source): Compiled {
+export function compile(instance: Instance, node: Source): Compiled {
   if (node === null || typeof node !== "object") {
     const literal = node as Value;
     return () => literal;
   }
-  const already = compiledNodes.get(node);
+  const already = instance.nodes.get(node);
   if (already !== undefined) {
     return already;
   }
-  const made = buildNode(bundle, node);
-  compiledNodes.set(node, made);
+  const made = buildNode(instance, node);
+  instance.nodes.set(node, made);
   return made;
 }
 
 export function evaluate(
-  bundle: Bundle,
+  instance: Instance,
   node: Source,
   scope: Scope | null,
 ): Value {
-  return compile(bundle, node)(scope);
+  return compile(instance, node)(scope);
 }
 
-function compileStatement(bundle: Bundle, node: BundleStatementNode): Executed {
+function compileStatement(
+  instance: Instance,
+  node: BundleStatementNode,
+): Executed {
   if (node === null || typeof node !== "object") {
     return () => advanced;
   }
-  const already = compiledStatements.get(node);
+  const already = instance.statements.get(node);
   if (already !== undefined) {
     return already;
   }
-  const made = buildStatement(bundle, node);
-  compiledStatements.set(node, made);
+  const made = buildStatement(instance, node);
+  instance.statements.set(node, made);
   return made;
 }
 
 // A node is an array and nothing else in a value slot is — an array of data
 // travels under a `DataArray` node — so `Array.isArray` is the whole test, here
 // and everywhere below.
-function buildNode(bundle: Bundle, source: Source): Compiled {
+function buildNode(instance: Instance, source: Source): Compiled {
   if (!Array.isArray(source)) {
     const data = source as { [key: string]: Source };
     const keys = Object.keys(data);
-    const parts = keys.map((key) => compile(bundle, data[key]));
+    const parts = keys.map((key) => compile(instance, data[key]));
     return (scope) => {
       const object: { [key: string]: Value } = {};
       for (let at = 0; at < keys.length; at++) {
@@ -157,7 +150,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
   const node = source;
   switch (node[0]) {
     case 4: /* DataArray */ {
-      const members = compileElements(bundle, node[1]);
+      const members = compileElements(instance, node[1]);
       return (scope) => members(scope);
     }
     case 1000: /* Identifier */ {
@@ -174,21 +167,21 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
     // is what a hole handing over nothing would have called.
     case 1: /* GetFunction */ {
       const label = node[1];
-      return (scope) => getFunction(instanceOf(scope), label);
+      return () => getFunction(instance, label);
     }
     // An entry applied: run it, wherever this is. Drawing needs no ceremony —
     // an entry is evaluated where the mount is, so an element in its body
     // builds with the same host as one written here.
     case 2: /* ApplyFunction */ {
       const label = node[1];
-      const args = node[2].map((arg) => compile(bundle, arg));
+      const args = node[2].map((arg) => compile(instance, arg));
       return (scope) => {
         const supplied = args.map((arg) => arg(scope));
-        return getFunction(instanceOf(scope), label)(...supplied);
+        return getFunction(instance, label)(...supplied);
       };
     }
     case 0: /* Element */ {
-      return compileElement(bundle, node);
+      return compileElement(instance, node);
     }
     // A global the format names and the host answers. This host is
     // JavaScript, so these are JavaScript's — which is what the curation is
@@ -207,12 +200,12 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       // decided here rather than on every call.
       const callee = node[1];
       const optionalCall = node[2];
-      const args = compileElements(bundle, node[3]);
+      const args = compileElements(instance, node[3]);
       if (
         Array.isArray(callee) &&
         callee[0] === 1002 /* PropertyAccessExpression */
       ) {
-        const receiver = compile(bundle, callee[1]);
+        const receiver = compile(instance, callee[1]);
         const optionalReceiver = callee[2];
         const member = callee[3];
         return (scope) => {
@@ -235,7 +228,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
           return method.apply(object, args(scope));
         };
       }
-      const target = compile(bundle, callee);
+      const target = compile(instance, callee);
       return (scope) => {
         // The callee evaluates before the arguments; an optional call
         // (`cb?.(…)`) short-circuits a null callee to null, arguments
@@ -251,7 +244,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       };
     }
     case 1002: /* PropertyAccessExpression */ {
-      const target = compile(bundle, node[1]);
+      const target = compile(instance, node[1]);
       const optional = node[2];
       const member = node[3];
       return (scope) => {
@@ -265,8 +258,8 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       };
     }
     case 1016: /* ElementAccessExpression */ {
-      const target = compile(bundle, node[1]);
-      const argument = compile(bundle, node[2]);
+      const target = compile(instance, node[1]);
+      const argument = compile(instance, node[2]);
       return (scope) => {
         const reached = target(scope);
         const key = argument(scope);
@@ -305,7 +298,7 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
           throw new Error("an assignment target must be an identifier");
         }
         const name = target[1];
-        const right = compile(bundle, node[3]);
+        const right = compile(instance, node[3]);
         return (scope) => {
           const value = right(scope);
           const frame = lookup(scope, name);
@@ -320,12 +313,12 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       }
       return compileBinop(
         node[1],
-        compile(bundle, node[2]),
-        compile(bundle, node[3]),
+        compile(instance, node[2]),
+        compile(instance, node[3]),
       );
     }
     case 1019: /* PrefixUnaryExpression */ {
-      const operand = compile(bundle, node[2]);
+      const operand = compile(instance, node[2]);
       // A `!` operand is boolean, as a tested position always is, so this
       // negates rather than deciding what counts as true. A `-` operand is a
       // number, checked by the compiler as arithmetic everywhere else is.
@@ -335,9 +328,9 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       return (scope) => !condition(operand(scope), "the operand of `!`");
     }
     case 1004: /* ConditionalExpression */ {
-      const test = compile(bundle, node[1]);
-      const whenTrue = compile(bundle, node[2]);
-      const whenFalse = compile(bundle, node[3]);
+      const test = compile(instance, node[1]);
+      const whenTrue = compile(instance, node[2]);
+      const whenFalse = compile(instance, node[3]);
       // Only the taken branch evaluates.
       return (scope) =>
         condition(test(scope), "a ternary condition")
@@ -349,10 +342,10 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       const body = node[2];
       const block =
         Array.isArray(body) && body[0] === 1006 /* Block */
-          ? compileStatement(bundle, body)
+          ? compileStatement(instance, body)
           : null;
       // A non-block body is an expression, implicitly returned.
-      const expression = block === null ? compile(bundle, body) : null;
+      const expression = block === null ? compile(instance, body) : null;
       // Nothing to bind and nothing to declare: the body reads the enclosing
       // frame, so making one of its own would be an allocation per call for a
       // scope that holds nothing. Every splice argument is one of these.
@@ -412,11 +405,14 @@ function guardTurns(turns: number, keyword: string): void {
   }
 }
 
-function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
+function buildStatement(
+  instance: Instance,
+  node: BundleStatementNode,
+): Executed {
   if (!Array.isArray(node)) {
     // Plain JSON in statement position is an expression evaluated for its
     // effect.
-    const run = compile(bundle, node);
+    const run = compile(instance, node);
     return (scope) => {
       run(scope);
       return advanced;
@@ -436,7 +432,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
         )
         .map((statement) => (statement as unknown as [number, string])[1]);
       const body = statements.map((statement) =>
-        compileStatement(bundle, statement),
+        compileStatement(instance, statement),
       );
       return (scope) => {
         const frame = scopeOf(scope);
@@ -455,18 +451,18 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
     }
     case 1007: /* VariableDeclaration */ {
       const name = node[1];
-      const initializer = compile(bundle, node[2]);
+      const initializer = compile(instance, node[2]);
       return (scope) => {
         bind(scope, name, initializer(scope));
         return advanced;
       };
     }
     case 1008: /* IfStatement */ {
-      const test = compile(bundle, node[1]);
-      const then = compileStatement(bundle, node[2]);
+      const test = compile(instance, node[1]);
+      const then = compileStatement(instance, node[2]);
       const branch = node[3];
       const otherwise =
-        branch === null ? null : compileStatement(bundle, branch);
+        branch === null ? null : compileStatement(instance, branch);
       return (scope) => {
         if (condition(test(scope), "an `if`")) {
           return then(scope);
@@ -475,8 +471,8 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       };
     }
     case 1012: /* WhileStatement */ {
-      const test = compile(bundle, node[1]);
-      const body = compileStatement(bundle, node[2]);
+      const test = compile(instance, node[1]);
+      const body = compileStatement(instance, node[2]);
       return (scope) => {
         let turns = 0;
         while (condition(test(scope), "a `while`")) {
@@ -498,11 +494,11 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       const condition_ = node[2];
       const incrementor = node[3];
       const init =
-        initializer === null ? null : compileStatement(bundle, initializer);
-      const test = condition_ === null ? null : compile(bundle, condition_);
-      const body = compileStatement(bundle, node[4]);
+        initializer === null ? null : compileStatement(instance, initializer);
+      const test = condition_ === null ? null : compile(instance, condition_);
+      const body = compileStatement(instance, node[4]);
       const update =
-        incrementor === null ? null : compileStatement(bundle, incrementor);
+        incrementor === null ? null : compileStatement(instance, incrementor);
       return (scope) => {
         // The header binding lives in a scope of the loop's own, so it is gone
         // once the loop is.
@@ -531,7 +527,6 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
           frame = {
             parent: scope,
             bindings: new Map(frame.bindings),
-            instance: frame.instance,
           };
           if (update !== null) {
             update(frame);
@@ -547,20 +542,20 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
       return () => continued;
     }
     case 1009: /* ReturnStatement */ {
-      const value = compile(bundle, node[1]);
+      const value = compile(instance, node[1]);
       return (scope) => ({ kind: "returned", value: value(scope) });
     }
     case 1010: /* ThrowStatement */ {
-      const thrown = compile(bundle, node[1]);
+      const thrown = compile(instance, node[1]);
       return (scope) => {
         throw thrown(scope);
       };
     }
     case 1011: /* TryStatement */ {
-      const attempted = compileStatement(bundle, node[1]);
+      const attempted = compileStatement(instance, node[1]);
       const clause = node[2];
       const caught = clause[1];
-      const handler = compileStatement(bundle, clause[2]);
+      const handler = compileStatement(instance, clause[2]);
       return (scope) => {
         try {
           return attempted(scope);
@@ -577,7 +572,7 @@ function buildStatement(bundle: Bundle, node: BundleStatementNode): Executed {
     }
     default: {
       // Every remaining kind is an expression, evaluated for its effect.
-      const run = compile(bundle, node);
+      const run = compile(instance, node);
       return (scope) => {
         run(scope);
         return advanced;
@@ -598,20 +593,22 @@ function isSpread(
 // spread in it compiles to a plain map — the flattening is a cost only where
 // something is actually spread.
 function compileElements(
-  bundle: Bundle,
+  instance: Instance,
   elements: readonly (BundleArrayElement | BundleExpressionNode)[],
 ): (scope: Scope | null) => Value[] {
   if (!elements.some((element) => isSpread(element as BundleArrayElement))) {
-    const parts = elements.map((element) => compile(bundle, element as Source));
+    const parts = elements.map((element) =>
+      compile(instance, element as Source),
+    );
     return (scope) => parts.map((part) => part(scope));
   }
   const parts = elements.map((element) =>
     isSpread(element as BundleArrayElement)
       ? {
           spread: true,
-          read: compile(bundle, (element as BundleSpreadElementNode)[1]),
+          read: compile(instance, (element as BundleSpreadElementNode)[1]),
         }
-      : { spread: false, read: compile(bundle, element as Source) },
+      : { spread: false, read: compile(instance, element as Source) },
   );
   return (scope) => {
     const out: Value[] = [];

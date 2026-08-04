@@ -2,11 +2,11 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
-  FunctionLabel,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import type { Renderer, RendererOptions } from "solid-js/universal";
+import type { Instance } from "./Instance.js";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
 import type { Value } from "./Value.js";
@@ -62,13 +62,17 @@ export function evaluate<N extends object>(
 }
 
 function materialize(bundle: Bundle, host: Host): unknown {
-  // The root is evaluated in no instance: nothing above it to have supplied
-  // arguments, and nothing above it to have bound anything.
-  const instance: Instance = { bundle, host, entries: new Map() };
+  const instance: Instance = {
+    bundle,
+    host,
+    functions: new Map(),
+    nodes: new WeakMap(),
+    statements: new WeakMap(),
+  };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.
-  return evaluateNode(bundle, bundle.root, scopeOf(null, instance));
+  return evaluateNode(instance, bundle.root, scopeOf(null));
 }
 
 // A renderer per set of host operations. The cast is the one place the
@@ -110,15 +114,6 @@ function requireReactivity(): void {
   }
 }
 
-// What an instance carries: the bundle being drawn and the host drawing it.
-// One per mount rather than one per instantiation — an entry's cells are
-// bindings in its call, so nothing here differs between two of them.
-export interface Instance {
-  readonly bundle: Bundle;
-  readonly host: Host;
-  readonly entries: Map<FunctionLabel, (...args: Value[]) => Value>;
-}
-
 /**
  * An inline element, as the closure that builds one.
  *
@@ -129,7 +124,7 @@ export interface Instance {
  * prop is set and forgotten, and only what can change costs a computation.
  */
 export function compileElement(
-  bundle: Bundle,
+  instance: Instance,
   element: BundleElement,
 ): Compiled {
   const id = element[1];
@@ -137,10 +132,10 @@ export function compileElement(
   // Neither draws a node: one puts its children where it stands, the other
   // draws one thing per member of an array.
   if (id === "Fragment") {
-    return compileFragment(bundle, element);
+    return compileFragment(instance, element);
   }
   if (id === "For") {
-    return compileFor(bundle, element);
+    return compileFor(instance, element);
   }
   // Every prop, with how to read it and whether reading it again could say
   // anything different — in the order the element wrote them, because a host
@@ -154,14 +149,13 @@ export function compileElement(
   const props = Object.entries(element[2])
     .filter(([prop]) => prop !== "children")
     .map(([prop, expr]) => {
-      const fixed = isFixed(bundle, expr);
-      return [prop, compile(bundle, expr), fixed] as const;
+      const fixed = isFixed(instance.bundle, expr);
+      return [prop, compile(instance, expr), fixed] as const;
     });
   const children = element[2]["children"];
   const draw =
-    children === undefined ? null : compileChildren(bundle, children);
+    children === undefined ? null : compileChildren(instance, children);
   return (scope) => {
-    const instance = instanceOf(scope);
     const host = instance.host;
     const node = host.createElement(id);
     for (const [prop, read, fixed] of props) {
@@ -204,22 +198,22 @@ export function compileElement(
 // What comes back is what `insert` takes: a node, a value, an accessor for a
 // member that moves, or an array of those.
 function compileChildren(
-  bundle: Bundle,
+  instance: Instance,
   expr: BundleArrayElement,
 ): (scope: Scope | null) => unknown {
   // A list of children travels as data, which is a node like any other.
   if (Array.isArray(expr) && expr[0] === 4 /* DataArray */) {
     const members = (expr[1] as BundleArrayElement[]).map((member) =>
-      compileChildren(bundle, member),
+      compileChildren(instance, member),
     );
     return (scope) => members.map((member) => member(scope));
   }
-  const read = compile(bundle, expr);
+  const read = compile(instance, expr);
   // Nothing that moves, so `insert` is handed the value rather than a way of
   // asking for it, and makes no computation to watch it: a value the bundle
   // spelled out, an element — whatever moves inside one is its own business —
   // or an entry the bundler vouched for, a row's own label say.
-  if (isFixed(bundle, expr)) {
+  if (isFixed(instance.bundle, expr)) {
     return (scope) => read(scope);
   }
   return (scope) => () => read(scope);
@@ -284,12 +278,12 @@ function isFixed(bundle: Bundle, expr: BundleArrayElement): boolean {
 /**
  * A fragment: its children where it stands, and no node of its own.
  */
-function compileFragment(bundle: Bundle, element: BundleElement): Compiled {
+function compileFragment(instance: Instance, element: BundleElement): Compiled {
   const children = element[2]["children"];
   if (children === undefined) {
     return () => null;
   }
-  const draw = compileChildren(bundle, children);
+  const draw = compileChildren(instance, children);
   return (scope) => draw(scope) as Value;
 }
 
@@ -300,15 +294,15 @@ function compileFragment(bundle: Bundle, element: BundleElement): Compiled {
  * member that is still there, drops what a member that has gone drew, and draws
  * only what is new. Identity is the member's own — nothing here extracts a key.
  */
-function compileFor(bundle: Bundle, element: BundleElement): Compiled {
+function compileFor(instance: Instance, element: BundleElement): Compiled {
   const props = element[2];
   const each = props["each"];
   const body = props["children"];
   if (each === undefined || body === undefined) {
     throw new Error("a `For` needs an `each` array and a child to draw");
   }
-  const source = compile(bundle, each);
-  const draw = compile(bundle, body);
+  const source = compile(instance, each);
+  const draw = compile(instance, body);
   return (scope) => {
     const members = createMemo(() => {
       const value = source(scope);
@@ -323,14 +317,4 @@ function compileFor(bundle: Bundle, element: BundleElement): Compiled {
       one(member, { read: at } as Value),
     ) as unknown as Value;
   };
-}
-
-// The instance an expression is being evaluated in. Every scope descends from
-// the mount's, so there is always one;
-// a scope without one is a body's, and no tree node reaches a body.
-export function instanceOf(scope: Scope | null): Instance {
-  if (scope === null || scope.instance === null) {
-    throw new Error("no instance to draw in");
-  }
-  return scope.instance;
 }
