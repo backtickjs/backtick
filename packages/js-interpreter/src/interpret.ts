@@ -220,16 +220,6 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
       const index = node[NodeField.index];
       return (scope) => instanceOf(scope).slots()[index] ?? null;
     }
-    case NodeKind.GetState: {
-      const name = node[NodeField.name];
-      return (scope) => {
-        const handle = instanceOf(scope).cells?.get(name);
-        if (handle === undefined) {
-          throw new Error(`unknown state cell ${name}`);
-        }
-        return handle;
-      };
-    }
     case NodeKind.Identifier: {
       const name = node[NodeField.text];
       return (scope) => {

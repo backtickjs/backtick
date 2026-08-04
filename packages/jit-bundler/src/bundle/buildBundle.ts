@@ -21,9 +21,8 @@ import type {
   BundleExpr,
   BundleExpressionNode,
   BundleIdentifierNode,
-  BundleTree,
-  BundleGetState,
   BundleGetSlot,
+  BundleVariableDeclarationNode,
   FunctionLabel,
   TreeLabel,
 } from "./Bundle.js";
@@ -522,7 +521,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     };
   };
 
-  const treeJsons = new Map<number, BundleTree>();
+  const treeJsons = new Map<number, BundleFunction>();
 
   // Materializes a tree entry into `treeJsons` the first time it is reached:
   // its element rendered as a bundle expression against the entry's own slot
@@ -534,6 +533,50 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     withNaming(`t${target}`, () => buildTree(target));
   };
 
+  // `const s0 = state(<initial>)`: the entry allocates its own storage, and its
+  // content resolves the name.
+  const cellBinding = (
+    name: string,
+    initial: IrArgument,
+  ): BundleVariableDeclarationNode => ({
+    "#": NodeKind.VariableDeclaration,
+    [NodeField.name]: name,
+    [NodeField.keyword]: "const",
+    [NodeField.initializer]: {
+      "#": NodeKind.CallExpression,
+      [NodeField.expression]: { "#": NodeKind.Builtin, [NodeField.name]: "state" },
+      // A cell's initial is data (`state-in-state-initial` rejects anything that
+      // reads), so it is an expression node wherever it renders.
+      [NodeField.arguments]: [
+        renderExpr(initial, noInstance()) as BundleExpressionNode,
+      ],
+    },
+  });
+
+  // An entry as its arrow: the cells it declares, then what it draws. A body
+  // only where there is something to bind — otherwise the arrow is its content.
+  const treeEntry = (
+    bindings: BundleVariableDeclarationNode[],
+    drawn: BundleExpr,
+  ): BundleFunction => ({
+    [NodeField.content]: {
+      "#": NodeKind.ArrowFunction,
+      [NodeField.body]:
+        bindings.length === 0
+          ? (drawn as BundleExpressionNode)
+          : {
+              "#": NodeKind.Block,
+              [NodeField.statements]: [
+                ...bindings,
+                {
+                  "#": NodeKind.ReturnStatement,
+                  [NodeField.expression]: drawn as BundleExpressionNode,
+                },
+              ],
+            },
+    },
+  });
+
   const buildTree = (target: number): void => {
     const keys = treeSlots(target);
     const scope: TreeScope = {
@@ -543,40 +586,38 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     const content = ir.trees[target].content;
     // A cell's initial is data the entry carries, evaluated in no instance: it
     // can't read a slot or another cell, so it renders against an empty scope.
-    const cells = treeCells(target);
-    const state: { [name: string]: BundleExpr } = {};
-    for (const key of cells) {
+    const bindings: BundleVariableDeclarationNode[] = [];
+    for (const key of treeCells(target)) {
       // `treeCells` only yields keys this entry holds, so the initial is here.
       const initial = ir.trees[target].state[cellIndex(key)];
       if (initial !== undefined) {
-        state[displayName(key)] = renderExpr(initial, noInstance());
+        bindings.push(cellBinding(displayName(key), initial));
       }
     }
-    const declared = cells.length === 0 ? {} : { [NodeField.state]: state };
-    // An instance that renders nothing: the entry stays, with nothing under it.
+    // An instance that draws nothing: the entry stays, with nothing under it.
     if (content === null) {
-      treeJsons.set(target, { [NodeField.content]: null, ...declared });
+      treeJsons.set(target, treeEntry(bindings, null));
       return;
     }
     if (content.kind === "IrElement") {
-      treeJsons.set(target, {
-        [NodeField.content]: renderElement(content, scope, new Set()),
-        ...declared,
-      });
+      treeJsons.set(
+        target,
+        treeEntry(bindings, renderElement(content, scope, new Set())),
+      );
       return;
     }
-    // An instance that renders another instance: applying the inner entry,
+    // An instance that draws another instance: applying the inner entry,
     // passing whatever its slots need from this one's.
     materializeTree(content.target);
     const args = treeSlots(content.target).map((key) => capExpr(key, scope));
-    treeJsons.set(target, {
-      [NodeField.content]: {
+    treeJsons.set(
+      target,
+      treeEntry(bindings, {
         "#": NodeKind.ApplyTree,
         [NodeField.label]: `${content.target}`,
         ...(args.length === 0 ? {} : { [NodeField.arguments]: args }),
-      },
-      ...declared,
-    });
+      }),
+    );
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
@@ -587,7 +628,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     key: string,
     scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
-  ): BundleGetSlot | BundleGetState | BundleIdentifierNode => {
+  ): BundleGetSlot | BundleIdentifierNode => {
     if (params.has(key)) {
       return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
@@ -619,7 +660,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
             "prop. Pass it down, or declare a cell where it is read.",
         );
       }
-      return { "#": NodeKind.GetState, [NodeField.name]: displayName(key) };
+      return { "#": NodeKind.Identifier, [NodeField.name]: displayName(key) };
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -785,7 +826,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // Last, with the table whole: an entry's body is only whole once every
   // splice it writes has been rendered into it.
   markFixed(functions);
-  const trees: Record<TreeLabel, BundleTree> = {};
+  const trees: Record<TreeLabel, BundleFunction> = {};
   for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
     trees[`${index}`] = tree;
   }

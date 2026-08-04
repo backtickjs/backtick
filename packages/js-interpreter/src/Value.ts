@@ -1,4 +1,4 @@
-import type { BundleTree } from "@backtickjs/core";
+import type { BundleFunction } from "@backtickjs/core";
 
 /**
  * A tree entry with the arguments it was applied to, before anything has been
@@ -15,7 +15,7 @@ import type { BundleTree } from "@backtickjs/core";
  */
 export interface Applied {
   readonly "@backtickjs": "Applied";
-  readonly tree: BundleTree;
+  readonly tree: BundleFunction;
   readonly slots: Value[];
 }
 

@@ -1,4 +1,4 @@
-#t0 = <View>
+#t0 = () => <View>
   {<Fragment>
     {<Text>
       {"a"}

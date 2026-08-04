@@ -12,28 +12,31 @@
 
 #f4 = ($0) => "row " + $0
 
-#t0 = <Text>
+#t0 = () => <Text>
   {#f4(slots[0])}
 </Text>
 
-#t1 state { s0 = [1, 2, 3] } = <View>
-  {<Text
-    onPress={#f0(() => cells.s0)}
-  >
-    {"swap"}
-  </Text>}
-  {<Text
-    onPress={#f1(() => cells.s0)}
-  >
-    {"drop"}
-  </Text>}
-  {<View>
-    {<For
-      each={#f2(() => cells.s0)}
+#t1 = () => {
+  const s0 = state([1, 2, 3]);
+  return <View>
+    {<Text
+      onPress={#f0(() => s0)}
     >
-      {#f3((id) => #t0(id))}
-    </For>}
-  </View>}
-</View>
+      {"swap"}
+    </Text>}
+    {<Text
+      onPress={#f1(() => s0)}
+    >
+      {"drop"}
+    </Text>}
+    {<View>
+      {<For
+        each={#f2(() => s0)}
+      >
+        {#f3((id) => #t0(id))}
+      </For>}
+    </View>}
+  </View>;
+}
 
 root = #t1()

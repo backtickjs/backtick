@@ -16,38 +16,41 @@
   "trees": {
     "0": {
       "y": {
-        "#": 0,
-        "a": "View",
-        "c": {
-          "style": {
-            "padding": 8
-          },
-          "children": [
-            {
-              "#": 0,
-              "a": "Text",
-              "c": {
-                "style": {
-                  "fontSize": 12
-                },
-                "onPress": {
-                  "#": 6,
-                  "f": "0"
-                },
-                "children": "hi"
-              }
+        "#": 1005,
+        "s": {
+          "#": 0,
+          "a": "View",
+          "c": {
+            "style": {
+              "padding": 8
             },
-            {
-              "#": 0,
-              "a": "Image",
-              "c": {
-                "source": {
-                  "uri": "https://example.com/a.png"
-                },
-                "resizeMode": "cover"
+            "children": [
+              {
+                "#": 0,
+                "a": "Text",
+                "c": {
+                  "style": {
+                    "fontSize": 12
+                  },
+                  "onPress": {
+                    "#": 6,
+                    "f": "0"
+                  },
+                  "children": "hi"
+                }
+              },
+              {
+                "#": 0,
+                "a": "Image",
+                "c": {
+                  "source": {
+                    "uri": "https://example.com/a.png"
+                  },
+                  "resizeMode": "cover"
+                }
               }
-            }
-          ]
+            ]
+          }
         }
       }
     }

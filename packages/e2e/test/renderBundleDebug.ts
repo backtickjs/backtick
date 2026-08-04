@@ -21,14 +21,9 @@ export function renderBundleDebug(bundle: Bundle): string {
     );
   }
   for (const [label, tree] of Object.entries(bundle.trees)) {
-    // The entry's cells read as a header on its label — storage it allocates
-    // per instance, before the content renders.
-    const cells = Object.entries(tree[NodeField.state] ?? {})
-      .map(([name, initial]) => `${name} = ${renderExpr(initial, "")}`)
-      .join(", ");
-    const named = treeLabel(label);
-    const header = cells === "" ? named : `${named} state { ${cells} }`;
-    sections.push(`${header} = ${renderExpr(tree[NodeField.content], "")}`);
+    sections.push(
+      `${treeLabel(label)} = ${renderNode(tree[NodeField.content], "")}`,
+    );
   }
   sections.push(`root = ${renderExpr(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;
@@ -84,6 +79,9 @@ function renderNode(
       return node[NodeField.text];
     case NodeKind.GetFunction:
       return fnLabel(node[NodeField.label]);
+    // What a tree entry's body yields.
+    case NodeKind.Element:
+      return renderJsx(node, indent);
     // A global the format names and the host answers.
     case NodeKind.Builtin:
       return node[NodeField.name];
@@ -226,8 +224,6 @@ function renderExpr(expr: BundleExpr, indent: string): string {
   switch (expr["#"]) {
     case NodeKind.GetSlot:
       return `slots[${expr[NodeField.index]}]`;
-    case NodeKind.GetState:
-      return `cells.${expr[NodeField.name]}`;
     case NodeKind.GetFunction:
       return fnLabel(expr[NodeField.label]);
     case NodeKind.ApplyFunction: {

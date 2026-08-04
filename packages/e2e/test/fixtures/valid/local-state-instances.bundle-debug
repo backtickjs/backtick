@@ -4,21 +4,27 @@
   $0().write($0().read() + 1);
 }
 
-#t0 state { s0 = 16 } = <Text
-  style={{ "fontSize": #f0(() => cells.s0) }}
-  onPress={#f1(() => cells.s0)}
->
-  {"press"}
-</Text>
+#t0 = () => {
+  const s0 = state(16);
+  return <Text
+    style={{ "fontSize": #f0(() => s0) }}
+    onPress={#f1(() => s0)}
+  >
+    {"press"}
+  </Text>;
+}
 
-#t1 state { s1 = 16 } = <Text
-  style={{ "fontSize": #f0(() => cells.s1) }}
-  onPress={#f1(() => cells.s1)}
->
-  {"press"}
-</Text>
+#t1 = () => {
+  const s1 = state(16);
+  return <Text
+    style={{ "fontSize": #f0(() => s1) }}
+    onPress={#f1(() => s1)}
+  >
+    {"press"}
+  </Text>;
+}
 
-#t2 = <View>
+#t2 = () => <View>
   {#t0()}
   {#t1()}
 </View>

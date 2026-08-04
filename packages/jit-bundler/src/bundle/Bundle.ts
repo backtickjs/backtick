@@ -47,7 +47,13 @@ export interface Bundle {
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
   functions: Record<FunctionLabel, BundleFunction>;
-  trees: Record<TreeLabel, BundleTree>;
+  // The same entry a `functions` label names: an arrow, evaluated to a function
+  // and called to instantiate. Its body binds the cells the entry declares and
+  // yields what the instance draws, so per-instance storage is what a call
+  // already means. Its slots arrive as a `BundleGetSlot` resolves them, not as
+  // parameters — an entry is applied, and what it is applied to is the
+  // instance's, not the call's.
+  trees: Record<TreeLabel, BundleFunction>;
   root: BundleExpr;
 }
 
@@ -84,28 +90,6 @@ export interface BundleData<T> {
 export type FunctionLabel = string;
 export type TreeLabel = string;
 
-// A tree entry: a JSX tree as data. The element sits under an `element`
-// wrapper so instance-scoped additions (per-instance state declarations) can
-// land as sibling fields without reshaping the table. A tree is an implicit
-// function of its slots: instantiating it supplies one value per
-// `BundleGetSlot` index, exactly as calling a `functions` entry supplies its
-// captures.
-export interface BundleTree {
-  // What this instance renders: the element, a reference to another instance
-  // when this one is a component that renders a component, or null when it
-  // renders nothing. A null-content entry is still an instance — it holds the
-  // state its component declared, and a re-render may give it content — so an
-  // interpreter instantiates it as usual and renders nothing for it.
-  [NodeField.content]: BundleElement | BundleApplyTree | null;
-  // The per-instance cells this entry declares, each named entry's value the
-  // cell's initial. Instantiating allocates fresh storage for each, so two
-  // instances never share a cell; a `BundleGetState` resolves against that
-  // storage exactly as a `BundleGetSlot` resolves against the supplied slot
-  // values.
-  // Additive: an interpreter that ignores it renders a tree with no state.
-  [NodeField.state]?: { [name: string]: BundleExpr };
-}
-
 // Every field name, as the single character it carries on the wire. A node's
 // shape is read far more often than it is written, and the long names cost more
 // than the values in most of them.
@@ -135,7 +119,9 @@ export const NodeField = {
   index: "d",
   label: "f",
   content: "y",
-  state: "z",
+  // "z" is retired. It named a tree entry's cells as a table of initials for an
+  // interpreter to allocate from, where they are now declarations in the
+  // entry's own body. A letter is never reused.
 
   // TypeScript's, by the node they come from.
   name: "e", // ts.PropertyAccessExpression, ts.VariableDeclaration
@@ -200,7 +186,9 @@ export const NodeKind = {
   // index into it.
   Element: 0,
   GetSlot: 1,
-  GetState: 2,
+  // 2 is retired. It named a cell declared by the enclosing tree entry, where a
+  // cell is now bound by a declaration in that entry and resolves as an
+  // `Identifier`. A number is never reused.
   // 3 is retired. It named a `trees` entry as a value — a function taking the
   // entry's slots and yielding the instance. A tree is applied, never called,
   // so an `ApplyTree` says the same thing in one node where this needed two.
@@ -265,21 +253,6 @@ export interface BundleGetSlot {
   [NodeField.index]: number;
 }
 
-// A cell declared by the enclosing tree entry's `state`: resolves to the handle
-// for this instance's storage — an object with `read()`, `write(value)` and
-// `update(updater)`. It resolves to the handle, not the value — reading is one
-// of three things the handle does. Like a `BundleGetSlot` it means nothing
-// outside the entry that declares it, and nothing outside a single instance.
-//
-// A cell reaches a function entry as an ordinary argument, so a body never
-// carries this node: the entry takes the handle as a parameter and reads it by
-// name. That keeps bodies lexically scoped — a shared entry can't resolve a free
-// name differently per call site.
-export interface BundleGetState {
-  "#": typeof NodeKind.GetState;
-  [NodeField.name]: string;
-}
-
 // Instantiates a `trees` entry: `args` supplies the tree's slots in index
 // order, and `key` identifies the instance among its siblings so it survives a
 // re-render that reorders them. Only a tree can be keyed — only a tree has
@@ -342,7 +315,6 @@ export type BundleExpr =
   | string
   | BundleExpr[]
   | BundleGetSlot
-  | BundleGetState
   | BundleIdentifierNode
   | BundleGetFunction
   | BundleApply
@@ -397,6 +369,8 @@ export type BundleExpressionNode =
   // one is — so a row a script builds can be named the way a row written in
   // tree position can.
   | BundleApplyTree<BundleExpressionNode>
+  // What a tree entry's body yields, and so what a `return` in one may hold.
+  | BundleElement
   | BundleCallExpressionNode
   | BundlePropertyAccessExpressionNode
   | BundleElementAccessExpressionNode

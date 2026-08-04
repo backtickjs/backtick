@@ -8,23 +8,26 @@
 
 #f3 = ($0, $1) => $0 + " at " + $1.read()
 
-#t0 = <Text>
+#t0 = () => <Text>
   {#f3(slots[0], slots[1])}
 </Text>
 
-#t1 state { s0 = ["a", "b", "c"] } = <View>
-  {<Text
-    onPress={#f0(() => cells.s0)}
-  >
-    {"rotate"}
-  </Text>}
-  {<View>
-    {<For
-      each={#f1(() => cells.s0)}
+#t1 = () => {
+  const s0 = state(["a", "b", "c"]);
+  return <View>
+    {<Text
+      onPress={#f0(() => s0)}
     >
-      {#f2((name, index) => #t0(name, index))}
-    </For>}
-  </View>}
-</View>
+      {"rotate"}
+    </Text>}
+    {<View>
+      {<For
+        each={#f1(() => s0)}
+      >
+        {#f2((name, index) => #t0(name, index))}
+      </For>}
+    </View>}
+  </View>;
+}
 
 root = #t1()

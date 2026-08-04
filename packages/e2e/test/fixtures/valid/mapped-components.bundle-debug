@@ -1,16 +1,16 @@
-#t0 = <Text>
+#t0 = () => <Text>
   {"alpha"}
 </Text>
 
-#t1 = <Text>
+#t1 = () => <Text>
   {"beta"}
 </Text>
 
-#t2 = <Text>
+#t2 = () => <Text>
   {"gamma"}
 </Text>
 
-#t3 = <View>
+#t3 = () => <View>
   {#t0()}
   {#t1()}
   {#t2()}

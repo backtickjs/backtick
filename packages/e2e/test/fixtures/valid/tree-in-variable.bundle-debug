@@ -12,13 +12,13 @@
   return tree;
 }
 
-#t0 = <View />
+#t0 = () => <View />
 
-#t1 = <Text>
+#t1 = () => <Text>
   {"x"}
 </Text>
 
-#t2 = <View>
+#t2 = () => <View>
   {#f0(() => #f1(() => #t0()))}
   {#f2(() => #f3(() => #t1()))}
 </View>

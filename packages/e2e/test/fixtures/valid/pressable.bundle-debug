@@ -4,19 +4,22 @@
 
 #f2 = ($0) => "pressed " + $0().read() + " times"
 
-#t0 state { s0 = 0 } = <Pressable
-  testID={"row"}
-  style={{ "flexDirection": "row", "gap": 8 }}
-  onPress={#f0(() => cells.s0)}
->
-  {<Text
-    style={{ "fontWeight": "700" }}
+#t0 = () => {
+  const s0 = state(0);
+  return <Pressable
+    testID={"row"}
+    style={{ "flexDirection": "row", "gap": 8 }}
+    onPress={#f0(() => s0)}
   >
-    {#f1(() => cells.s0)}
-  </Text>}
-  {<Text>
-    {#f2(() => cells.s0)}
-  </Text>}
-</Pressable>
+    {<Text
+      style={{ "fontWeight": "700" }}
+    >
+      {#f1(() => s0)}
+    </Text>}
+    {<Text>
+      {#f2(() => s0)}
+    </Text>}
+  </Pressable>;
+}
 
 root = #t0()

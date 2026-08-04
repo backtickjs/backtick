@@ -1,8 +1,8 @@
-#t0 = <Text>
+#t0 = () => <Text>
   {"hi"}
 </Text>
 
-#t1 = <View>
+#t1 = () => <View>
   {#t0()}
   {#t0()}
 </View>

@@ -8,25 +8,28 @@
 
 #f4 = ($0) => "row " + $0
 
-#t0 = <Link
+#t0 = () => <Link
   href={#f3((id) => slots[1], slots[0])}
 >
   {#f4(slots[0])}
 </Link>
 
-#t1 state { s0 = 0 } = <View>
-  {<Text
-    onPress={#f0(() => cells.s0)}
-  >
-    {"select"}
-  </Text>}
-  {<View>
-    {<For
-      each={#f1()}
+#t1 = () => {
+  const s0 = state(0);
+  return <View>
+    {<Text
+      onPress={#f0(() => s0)}
     >
-      {#f2((id) => #t0(id, cells.s0))}
-    </For>}
-  </View>}
-</View>
+      {"select"}
+    </Text>}
+    {<View>
+      {<For
+        each={#f1()}
+      >
+        {#f2((id) => #t0(id, s0))}
+      </For>}
+    </View>}
+  </View>;
+}
 
 root = #t1()

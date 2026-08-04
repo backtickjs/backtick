@@ -3,12 +3,11 @@ import type {
   Bundle,
   BundleElement,
   BundleExpr,
-  BundleTree,
+  BundleFunction,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer } from "solid-js/universal";
 import type { Renderer, RendererOptions } from "solid-js/universal";
-import { makeState } from "./makeState.js";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Compiled, Scope } from "./interpret.js";
 import { isApplied } from "./Value.js";
@@ -67,12 +66,7 @@ export function evaluate<N extends object>(
 function materialize(bundle: Bundle, host: Host): unknown {
   // The root is evaluated in no instance: there is nothing above it to have
   // supplied slots, and nothing above it declares cells it could read.
-  const outside: Instance = {
-    bundle,
-    host,
-    slots: noSlots,
-    cells: null,
-  };
+  const outside: Instance = { bundle, host, slots: noSlots };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.
@@ -121,8 +115,8 @@ function requireReactivity(): void {
   }
 }
 
-// A tree instance: what persists on the client — the storage the entry's
-// `state` declares, allocated fresh per instance.
+// A tree instance: what the entry's arrow is called in. The cells it declares
+// are bindings in that call, so what persists per instance is a scope.
 //
 // There is no list of children here, and nothing recording what was drawn. An
 // instance is built once and never again, so there is nothing to match a second
@@ -136,17 +130,12 @@ export interface Instance {
   // arguments are no write at all, which is the skip a row gets for being
   // handed nothing new.
   readonly slots: () => Value[];
-  // A cell, as the only thing that ever reaches it: its handle. One per cell
-  // for its life — a handle is a view onto storage and holds nothing of its
-  // own, so a second view of the same cell would only look like a different
-  // value to anything comparing them.
-  cells: Map<string, Value> | null;
 }
 
 const noSlots = (): Value[] => [];
 
 /**
- * Builds an instance of a tree entry: its cells, then its content.
+ * Builds an instance of a tree entry by calling it.
  *
  * Nothing owns this but whoever is building. An instance created for a row of a
  * list belongs to that row's owner, so dropping the row drops the instance and
@@ -156,34 +145,19 @@ const noSlots = (): Value[] => [];
  */
 export function instantiate(
   bundle: Bundle,
-  tree: BundleTree,
+  tree: BundleFunction,
   slots: () => Value[],
   host: Host,
 ): unknown {
-  const instance: Instance = {
+  const instance: Instance = { bundle, host, slots };
+  // Instantiating is calling: the entry's arrow runs in this instance, binding
+  // whatever cells it declares in a scope of its own, and yields what to draw.
+  const entry = evaluateNode(
     bundle,
-    host,
-    slots,
-    cells: null,
-  };
-  for (const [name, initial] of Object.entries(tree[NodeField.state] ?? {})) {
-    // A cell's initial is evaluated in no instance: it can't read a slot or
-    // another cell, so nothing is in scope for it.
-    (instance.cells ??= new Map()).set(
-      name,
-      makeState(evaluateNode(bundle, initial, null)),
-    );
-  }
-  const content = tree[NodeField.content];
-  // A null-content entry is still an instance — it holds the state its
-  // component declared — so it is built as usual and draws nothing.
-  if (content === null) {
-    return null;
-  }
-  return build(
-    evaluateNode(bundle, content, scopeOf(null, instance)),
-    instance,
-  );
+    tree[NodeField.content],
+    scopeOf(null, instance),
+  ) as () => Value;
+  return build(entry(), instance);
 }
 
 // What an evaluated tree expression draws, in a position that draws exactly

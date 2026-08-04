@@ -1,12 +1,12 @@
-#t0 = <Text>
+#t0 = () => <Text>
   {"one"}
 </Text>
 
-#t1 = <Text>
+#t1 = () => <Text>
   {"two"}
 </Text>
 
-#t2 = <View>
+#t2 = () => <View>
   {#t0()}
   {#t1()}
 </View>

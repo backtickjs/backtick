@@ -10,11 +10,11 @@
 
 #f5 = () => 1
 
-#t0 = <Text>
+#t0 = () => <Text>
   {"marker"}
 </Text>
 
-#t1 = <View>
+#t1 = () => <View>
   {<Text
     style={{ "fontSize": #f1(() => slots[0], #f2) }}
   >
@@ -23,11 +23,11 @@
   {#f4(() => slots[0], #f2, () => #t0())}
 </View>
 
-#t2 = <Text>
+#t2 = () => <Text>
   {"marker"}
 </Text>
 
-#t3 = <View>
+#t3 = () => <View>
   {<Text
     style={{ "fontSize": #f1(() => slots[0], #f5) }}
   >
@@ -36,14 +36,17 @@
   {#f4(() => slots[0], #f5, () => #t2())}
 </View>
 
-#t4 state { s0 = 0 } = <View>
-  {<Text
-    onPress={#f0(() => cells.s0)}
-  >
-    {"select"}
-  </Text>}
-  {#t1(cells.s0)}
-  {#t3(cells.s0)}
-</View>
+#t4 = () => {
+  const s0 = state(0);
+  return <View>
+    {<Text
+      onPress={#f0(() => s0)}
+    >
+      {"select"}
+    </Text>}
+    {#t1(s0)}
+    {#t3(s0)}
+  </View>;
+}
 
 root = #t4()
