@@ -1,9 +1,9 @@
 import { NodeKind, NodeField } from "@backtickjs/core";
 import type {
   Bundle,
+  BundleArrayElement,
   BundleBody,
   BundleElement,
-  BundleExpr,
   BundleExpressionNode,
   BundleSpreadElementNode,
   BundleStatementNode,
@@ -20,7 +20,7 @@ export function renderBundleDebug(bundle: Bundle): string {
       `${fnLabel(label)} = ${renderNode(entry[NodeField.content], "")}`,
     );
   }
-  sections.push(`root = ${renderExpr(bundle.root, "")}`);
+  sections.push(`root = ${renderNode(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;
 }
 
@@ -31,8 +31,8 @@ const fnLabel = (label: string): string => `#f${label}`;
 
 // A `#`-discriminated node, as opposed to plain JSON carrying itself.
 function isNode(
-  node: BundleStatementNode | BundleExpr,
-): node is Extract<BundleStatementNode | BundleExpr, { "#": NodeKind }> {
+  node: BundleStatementNode | BundleExpressionNode,
+): node is Extract<BundleStatementNode | BundleExpressionNode, { "#": NodeKind }> {
   return (
     typeof node === "object" &&
     node !== null &&
@@ -209,51 +209,18 @@ function renderBody(body: BundleBody, indent: string): string {
   return renderNode(body as BundleExpressionNode, indent);
 }
 
-// Tree grammar, as pseudo-JS with elements as pseudo-JSX.
-function renderExpr(expr: BundleExpr, indent: string): string {
-  if (!isNode(expr)) {
-    return renderData(expr, indent, renderExpr);
-  }
-  switch (expr["#"]) {
-    case NodeKind.GetFunction:
-      return fnLabel(expr[NodeField.label]);
-    case NodeKind.ApplyFunction: {
-      const args = (expr[NodeField.arguments] ?? []).map((arg) =>
-        renderExpr(arg, indent),
-      );
-      return `${fnLabel(expr[NodeField.label])}(${args.join(", ")})`;
-    }
-    case NodeKind.ApplyFunction: {
-      const args = (expr[NodeField.arguments] ?? []).map((arg) =>
-        renderExpr(arg, indent),
-      );
-      return `${fnLabel(expr[NodeField.label])}(${args.join(", ")})`;
-    }
-    case NodeKind.Thunk: {
-      const params = (expr[NodeField.parameters] ?? []).map(
-        (param) => param[NodeField.name],
-      );
-      return `(${params.join(", ")}) => ${renderExpr(expr[NodeField.expression], indent)}`;
-    }
-    case NodeKind.Identifier:
-      return expr[NodeField.text];
-    case NodeKind.Element:
-      return renderJsx(expr, indent);
-  }
-}
-
 // A JSX-like view of an element: props as attributes — each on its own
 // line — and `children` as the body, one child per line.
 function renderJsx(element: BundleElement, indent: string): string {
   const inner = `${indent}  `;
   const attributes: string[] = [];
-  let children: BundleExpr[] = [];
+  let children: BundleArrayElement[] = [];
   for (const [prop, value] of Object.entries(element[NodeField.props] ?? {})) {
     if (prop === "children") {
       children = Array.isArray(value) ? value : [value];
       continue;
     }
-    attributes.push(`${inner}${prop}={${renderExpr(value, inner)}}`);
+    attributes.push(`${inner}${prop}={${renderNode(value, inner)}}`);
   }
   const opening =
     attributes.length === 0
@@ -263,7 +230,7 @@ function renderJsx(element: BundleElement, indent: string): string {
     return `${opening}${attributes.length === 0 ? " " : ""}/>`;
   }
   const body = children
-    .map((child) => `${inner}{${renderExpr(child, inner)}}`)
+    .map((child) => `${inner}{${renderNode(child, inner)}}`)
     .join("\n");
   return `${opening}>\n${body}\n${indent}</${element[NodeField.id]}>`;
 }

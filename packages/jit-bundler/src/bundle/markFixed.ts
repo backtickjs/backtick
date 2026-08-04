@@ -42,7 +42,7 @@ function calls(node: unknown): boolean {
   }
   const kind = (node as Record<string, unknown>)["#"];
   // Made, not run.
-  if (kind === NodeKind.ArrowFunction || kind === NodeKind.Thunk) {
+  if (kind === NodeKind.ArrowFunction) {
     return false;
   }
   // After it, not before: a function written where it is called is still

@@ -2,7 +2,7 @@
 // exactly `JSON.stringify` of this. These types are the contract an
 // interpreter implements: evaluate `root` against the `functions` table.
 // Computation ships as `BundleNode` ASTs (no JavaScript parsing required),
-// composition as data (an element and the root are `BundleExpr` values), so the
+// composition as data (an element and the root are `BundleExpressionNode` values), so the
 // whole bundle is parseable and inspectable as JSON.
 //
 // Two guarantees an interpreter may rely on, and must uphold:
@@ -47,7 +47,7 @@ export interface Bundle {
   // after the script entries — an arrow over the expansion's holes, applied
   // by its call site to the client arguments.
   functions: Record<FunctionLabel, BundleFunction>;
-  root: BundleExpr;
+  root: BundleExpressionNode;
 }
 
 // An entry: an arrow under a wrapper, so what the bundler worked out about it
@@ -84,8 +84,8 @@ export interface BundleFunction {
 // `lowerScriptBody`). Spelling that out here is what makes a malformed node a
 // type error: without it every `#`-carrying object satisfies this member, and a
 // node with the wrong fields quietly passes as data.
-export interface BundleData<T> {
-  readonly [key: string]: T | undefined;
+export interface BundleData {
+  readonly [key: string]: BundleExpressionNode | undefined;
   readonly "#"?: never;
 }
 
@@ -199,7 +199,9 @@ export const NodeKind = {
   // 5 is retired. It applied a tree entry, where one kind applies any entry
   // and the entry itself says whether that draws. A number is never reused.
   ApplyFunction: 6,
-  Thunk: 7,
+  // 7 is retired. It was a splice argument evaluated lazily — an arrow over the
+  // bindings the hole supplies, which is what an `ArrowFunction` already is. A
+  // number is never reused.
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -242,11 +244,14 @@ export const NodeKind = {
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
 
 // A JSX element node: static structure carried as data, each prop a
-// `BundleExpr` evaluated in the enclosing entry's scope.
+// `BundleExpressionNode` evaluated in the enclosing entry's scope.
 export interface BundleElement {
   "#": typeof NodeKind.Element;
   [NodeField.id]: string;
-  [NodeField.props]?: { [prop: string]: BundleExpr };
+  // Composition rather than computation, in what the bundler writes: data, an
+  // element, or an entry applied — never arithmetic. Nothing enforces that now
+  // the two grammars are one, so it is a fact about the bundler, not the format.
+  [NodeField.props]?: { [prop: string]: BundleExpressionNode };
 }
 
 // Applies an entry: `args` supplies its parameters in
@@ -261,53 +266,13 @@ export interface BundleElement {
 // all the same would give every iteration one shared instance. Positional, so
 // reordering a list moves state between rows — which is what `key` overrides. (Applying names a table row by label; a body `call` evaluates
 // a `callee` node instead, so the two are separate kinds.)
-export interface BundleApplyFunction<Expr = BundleExpr> {
+export interface BundleApplyFunction {
   "#": typeof NodeKind.ApplyFunction;
   [NodeField.label]: FunctionLabel;
-  // Mirrors the entry's parameters — for a script, thunks for a polymorphic
-  // entry's splices first, then one value per capture.
-  [NodeField.arguments]?: Expr[];
+  // Mirrors the entry's parameters — for a script, an arrow per splice hole
+  // first, then one value per capture.
+  [NodeField.arguments]?: BundleExpressionNode[];
 }
-
-// A splice argument passed to a polymorphic entry, evaluated lazily: the
-// interpreter passes it as a function yielding the expression's value, so
-// the hole evaluates it exactly like an inlined splice. `params` — present
-// when the splice captures bindings the entry itself declares — names the
-// values the hole call supplies; an `identifier` in the expression resolves
-// against the enclosing thunk parameters, exactly like a body identifier.
-export interface BundleThunk {
-  "#": typeof NodeKind.Thunk;
-  [NodeField.parameters]?: BundleParameterNode[];
-  [NodeField.expression]: BundleExpr;
-}
-
-// A bundle expression: what a tree entry and the root are made of. Plain JSON
-// carries itself; the `#`-discriminated nodes compose. `#` is the
-// bundle's one reserved key — a plain data object never uses it (bundling
-// rejects it), so the node reading is unambiguous.
-// What a tree position holds: composition, not computation. Slots and cells,
-// instantiation, elements, and plain data — a reader walks it without needing to
-// evaluate anything, until it meets an `applyFunction`, which is exactly where
-// computation begins.
-//
-// `getFunction` is here because naming an entry is not computing with one. A
-// hole that hands its thunk nothing calls it with no arguments, so a fragment
-// that is one parameterless entry already *is* that function, and wrapping it in
-// a thunk would say the same thing twice. Nothing else from the body grammar
-// belongs: `property` and `call` would let a tree expression destructure and
-// invoke, and the boundary above is the thing worth keeping.
-export type BundleExpr =
-  | null
-  | boolean
-  | number
-  | string
-  | BundleExpr[]
-  | BundleIdentifierNode
-  | BundleGetFunction
-  | BundleApplyFunction
-  | BundleThunk
-  | BundleElement
-  | BundleData<BundleExpr>;
 
 // A node of a function body's AST, discriminated by `#` — a reserved key
 // like the tagged expression forms, so a node can never be confused with
@@ -348,14 +313,14 @@ export type BundleExpressionNode =
   | number
   | string
   | BundleArrayElement[]
-  | BundleData<BundleExpressionNode>
+  | BundleData
   | BundleIdentifierNode
   | BundleGetFunction
   // A body instantiates a tree by calling a `getTree`, which says nothing about
   // identity. Applying says both: which entry, and which of its siblings this
   // one is — so a row a script builds can be named the way a row written in
   // tree position can.
-  | BundleApplyFunction<BundleExpressionNode>
+  | BundleApplyFunction
   // What a tree entry's body yields, and so what a `return` in one may hold.
   | BundleElement
   | BundleCallExpressionNode

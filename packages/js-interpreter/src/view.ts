@@ -1,8 +1,8 @@
 import { NodeKind, NodeField } from "@backtickjs/jit-bundler/format";
 import type {
   Bundle,
+  BundleArrayElement,
   BundleElement,
-  BundleExpr,
   BundleFunction,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
@@ -250,7 +250,7 @@ export function compileElement(
 // member that moves, or an array of those.
 function compileChildren(
   bundle: Bundle,
-  expr: BundleExpr,
+  expr: BundleArrayElement,
 ): (scope: Scope | null, instance: Instance) => unknown {
   if (Array.isArray(expr)) {
     const members = expr.map((member) => compileChildren(bundle, member));
@@ -278,7 +278,7 @@ function compileChildren(
 // made — what a fragment holds was built as the fragment was, and a list draws
 // its own members. Asking costs nothing here and saves a walk per position per
 // instance, which is a walk per element of every row of a list.
-function mayApply(expr: BundleExpr): boolean {
+function mayApply(expr: BundleArrayElement): boolean {
   if (expr === null || typeof expr !== "object") {
     return false;
   }
@@ -294,7 +294,7 @@ function mayApply(expr: BundleExpr): boolean {
 // find out: an entry it could not vouch for carries no mark, and a mark is the
 // only yes. The rest this reads itself, because they are shapes rather than
 // scripts — and what it does not recognize it assumes moves.
-function isFixed(bundle: Bundle, expr: BundleExpr): boolean {
+function isFixed(bundle: Bundle, expr: BundleArrayElement): boolean {
   if (expr === null || typeof expr !== "object") {
     return true;
   }

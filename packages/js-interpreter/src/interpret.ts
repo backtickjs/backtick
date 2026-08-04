@@ -9,7 +9,7 @@ import type {
   BundleSpreadElementNode,
   BundleBinaryOperator,
   BundleBinaryExpressionNode,
-  BundleExpr,
+  BundleExpressionNode,
   BundleStatementNode,
   FunctionLabel,
 } from "@backtickjs/core";
@@ -33,7 +33,7 @@ import type { Value } from "./Value.js";
 // entries, the tree end adds applications and elements, and the
 // body end adds the statements and operators a script is written in. Compiling
 // them together is what makes the middle exist once.
-type Source = BundleExpr | BundleStatementNode;
+type Source = BundleArrayElement | BundleStatementNode;
 
 // One frame per arrow application or block. Names are pre-resolved by the
 // bundler and there are no globals: a name no frame binds is a malformed
@@ -240,24 +240,6 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
         return getFunction(bundle, label)(...supplied);
       };
     }
-    case NodeKind.Thunk: {
-      const params = node[NodeField.parameters];
-      const body = compile(bundle, node[NodeField.expression]);
-      if (!params || params.length === 0) {
-        return (scope) => () => body(scope);
-      }
-      // The hole call supplies the entry-scoped bindings the splice captures,
-      // one value per parameter, over the enclosing frame.
-      const names = params.map((param) => param[NodeField.name]);
-      return (scope) =>
-        (...args: Value[]) => {
-          const frame = scopeOf(scope);
-          for (let at = 0; at < names.length; at++) {
-            bind(frame, names[at], args[at]);
-          }
-          return body(frame);
-        };
-    }
     case NodeKind.Element: {
       return compileElement(bundle, node);
     }
@@ -417,6 +399,12 @@ function buildNode(bundle: Bundle, source: Source): Compiled {
           : null;
       // A non-block body is an expression, implicitly returned.
       const expression = block === null ? compile(bundle, body) : null;
+      // Nothing to bind and nothing to declare: the body reads the enclosing
+      // frame, so making one of its own would be an allocation per call for a
+      // scope that holds nothing. Every splice argument is one of these.
+      if (parameters.length === 0 && expression !== null) {
+        return (scope) => () => expression(scope);
+      }
       return (scope) =>
         (...args: Value[]) => {
           const frame = scopeOf(scope);
@@ -669,7 +657,7 @@ function isSpread(
 // something is actually spread.
 function compileElements(
   bundle: Bundle,
-  elements: readonly (BundleArrayElement | BundleExpr)[],
+  elements: readonly (BundleArrayElement | BundleExpressionNode)[],
 ): (scope: Scope | null) => Value[] {
   if (!elements.some((element) => isSpread(element as BundleArrayElement))) {
     const parts = elements.map((element) => compile(bundle, element as Source));

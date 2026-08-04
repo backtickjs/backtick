@@ -18,7 +18,6 @@ import type {
   BundleCallExpressionNode,
   BundleElement,
   BundleGetFunction,
-  BundleExpr,
   BundleExpressionNode,
   BundleIdentifierNode,
   BundleVariableDeclarationNode,
@@ -354,7 +353,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
     const parts: BundleExpressionNode[] = [];
     ref.args.forEach((arg, index) => {
-      parts.push(renderThunk(arg, ref.target, index));
+      parts.push(renderLazily(arg, ref.target, index));
     });
     for (const key of ref.target.captures) {
       parts.push(readKey(key));
@@ -370,7 +369,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const forwarding = (
     value: IrArgument,
     passed: readonly string[],
-  ): BundleExpr | null => {
+  ): BundleExpressionNode | null => {
     if (value.kind !== "IrScriptRef" || value.args.length > 0) {
       return null;
     }
@@ -467,12 +466,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
 
   // Renders a splice argument in thunk position — as a function yielding the
   // value — so the entry evaluates it lazily at the hole, which is what keeps a
-  // splice as lazy as it reads. When the splice captures bindings the entry declares,
-  // the thunk takes them as parameters and the hole call supplies them (see
-  // `passKeys`); the body's identifiers then resolve through the thunk frame.
-  // Otherwise a referenced entry that takes no arguments is a nullary thunk
-  // as-is; anything else is wrapped in an arrow.
-  const renderThunk = (
+  // splice as lazy as it reads. When the splice captures bindings the entry
+  // declares, the arrow takes them as parameters and the hole call supplies them
+  // (see `passKeys`); the body's identifiers then resolve through its frame.
+  // Otherwise a referenced entry that takes no arguments already is one;
+  // anything else is wrapped.
+  const renderLazily = (
     value: IrArgument,
     target: IrScriptEntry,
     hole: number,
@@ -560,7 +559,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const treeEntry = (
     params: string[],
     bindings: BundleVariableDeclarationNode[],
-    drawn: BundleExpr,
+    drawn: BundleExpressionNode,
   ): BundleFunction => ({
     [NodeField.draws]: true,
     [NodeField.content]: {
@@ -686,8 +685,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     ref: IrScriptRef,
     scope: TreeScope,
     params: ReadonlySet<string>,
-  ): BundleExpr[] => {
-    const parts: BundleExpr[] = [];
+  ): BundleExpressionNode[] => {
+    const parts: BundleExpressionNode[] = [];
     ref.args.forEach((arg, index) => {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
@@ -703,17 +702,17 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       }
       if (passed.length === 0) {
         parts.push({
-          "#": NodeKind.Thunk,
-          [NodeField.expression]: renderExpr(arg, scope, params),
+          "#": NodeKind.ArrowFunction,
+          [NodeField.body]: renderExpr(arg, scope, params),
         });
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
       parts.push({
-        "#": NodeKind.Thunk,
+        "#": NodeKind.ArrowFunction,
         [NodeField.parameters]: parameterNodes(passed.map(displayName)),
-        [NodeField.expression]: renderExpr(arg, scope, inner),
+        [NodeField.body]: renderExpr(arg, scope, inner),
       });
     });
     for (const key of ref.target.captures) {
@@ -729,7 +728,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleElement => {
-    const props: { [key: string]: BundleExpr } = {};
+    const props: { [key: string]: BundleExpressionNode } = {};
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = renderExpr(entry, scope, params);
     }
@@ -747,7 +746,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     value: IrArgument,
     scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
-  ): BundleExpr => {
+  ): BundleExpressionNode => {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
       const args = exprCallArgs(value, scope, params);
@@ -788,9 +787,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       // The expansion's params extend the enclosing ones, like a nested
       // frame, so a hole threading into the body resolves by name.
       return {
-        "#": NodeKind.Thunk,
+        "#": NodeKind.ArrowFunction,
         [NodeField.parameters]: parameterNodes(value.params),
-        [NodeField.expression]: renderExpr(
+        [NodeField.body]: renderExpr(
           value.body,
           scope,
           new Set([...params, ...value.params]),
@@ -809,7 +808,7 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     if ("#" in value.entries) {
       throw new Error("Can't bundle this object: the `#` key is reserved.");
     }
-    const entries: { [key: string]: BundleExpr } = {};
+    const entries: { [key: string]: BundleExpressionNode } = {};
     for (const [key, entry] of Object.entries(value.entries)) {
       entries[key] = renderExpr(entry, scope, params);
     }
