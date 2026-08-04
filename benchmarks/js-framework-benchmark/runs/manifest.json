@@ -133,7 +133,6 @@
     {
       "commit": "solid",
       "label": "renderer",
-      "note": "3 iterations",
       "date": "uncommitted",
       "keyed": true,
       "dir": "solid-renderer",
@@ -155,7 +154,6 @@
     },
     {
       "commit": "9b6df30",
-      "note": "first paint is one sample",
       "date": "2026-08-01",
       "keyed": true,
       "dir": "9b6df30",
@@ -164,7 +162,6 @@
     {
       "commit": "73ed821",
       "label": "compiled",
-      "note": "uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "closure-compile",
@@ -189,7 +186,6 @@
     {
       "commit": "dea1da7",
       "label": "globals",
-      "note": "random labels",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-globals",
@@ -198,7 +194,6 @@
     {
       "commit": "60d894a",
       "label": "matched",
-      "note": "random labels",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-guarded",
@@ -207,7 +202,6 @@
     {
       "commit": "60d894a",
       "label": "inlined",
-      "note": "no components, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-inlined",
@@ -215,7 +209,6 @@
     },
     {
       "commit": "13874e8",
-      "note": "5 iterations",
       "date": "2026-08-02",
       "keyed": true,
       "dir": "13874e8",
@@ -224,7 +217,6 @@
     {
       "commit": "13874e8",
       "label": "views",
-      "note": "built once, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-views",
@@ -233,7 +225,6 @@
     {
       "commit": "ba263a7",
       "label": "each",
-      "note": "list node, 5 iterations, not kept; result files lost",
       "date": "uncommitted",
       "keyed": true,
       "medians": {
@@ -257,7 +248,6 @@
     {
       "commit": "ba263a7",
       "label": "rebuild",
-      "note": "no list node, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-rebuild",
@@ -266,7 +256,6 @@
     {
       "commit": "ba263a7",
       "label": "For",
-      "note": "list declared, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-for",
@@ -275,7 +264,6 @@
     {
       "commit": "262bb84",
       "label": "settled",
-      "note": "no effect for a settled child, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-settled",
@@ -284,7 +272,6 @@
     {
       "commit": "262bb84",
       "label": "settled",
-      "note": "same build, second run",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-settled2",
@@ -293,7 +280,6 @@
     {
       "commit": "adbc64c",
       "label": "no index",
-      "note": "`For` gives the member alone, so `mapArray` keeps no index signals, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-noindex",
@@ -302,7 +288,6 @@
     {
       "commit": "adbc64c",
       "label": "index",
-      "note": "index back as `ReadonlyState`, no arity gate, so every list holds index signals, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-index",
@@ -311,7 +296,6 @@
     {
       "commit": "adbc64c",
       "label": "handle",
-      "note": "a cell handle closes over its signal, so a read is no longer a lookup, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-handle",
@@ -320,7 +304,6 @@
     {
       "commit": "0576cca",
       "label": "no rebuild",
-      "note": "a settled child is handed over as it stands \u2014 only an application is ever built, and one is never settled, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-settled-direct",
@@ -329,7 +312,6 @@
     {
       "commit": "6a4915d",
       "label": "fixed",
-      "note": "the bundler marks an entry whose value cannot change; no computation for a prop or child that reads nothing which moves, 5 iterations, uncommitted",
       "date": "uncommitted",
       "keyed": true,
       "dir": "app-fixed",
@@ -338,10 +320,17 @@
     {
       "commit": "e7664dc",
       "label": "entries",
-      "note": "one table: a cell is a binding, an argument is a parameter, and a tree entry is a function entry. Every op-count snapshot is byte-identical, so this measures the interpreter rather than the drawing. 5 iterations",
       "date": "2026-08-03",
       "keyed": true,
       "dir": "e7664dc",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "1ca53ea",
+      "label": "positional",
+      "date": "2026-08-04",
+      "keyed": true,
+      "dir": "1ca53ea",
       "file": "backtick-v0.1.0-keyed"
     }
   ]
