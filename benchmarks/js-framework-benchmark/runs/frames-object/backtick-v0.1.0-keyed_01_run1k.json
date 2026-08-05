@@ -1,0 +1,32 @@
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "01_run1k",
+  "type": "cpu",
+  "values": {
+    "total": {
+      "min": 27.9,
+      "max": 28.6,
+      "median": 28.2,
+      "mean": 28.22,
+      "stddev": 0.25884358211089653,
+      "values": [28.2, 28.3, 28.6, 28.1, 27.9]
+    },
+    "script": {
+      "min": 8.3,
+      "max": 8.5,
+      "median": 8.4,
+      "mean": 8.42,
+      "stddev": 0.08366600265340726,
+      "values": [8.5, 8.4, 8.5, 8.4, 8.3]
+    },
+    "paint": {
+      "min": 19,
+      "max": 19.6,
+      "median": 19.1,
+      "mean": 19.24,
+      "stddev": 0.25099800796022254,
+      "values": [19.1, 19.4, 19.6, 19.1, 19]
+    }
+  }
+}

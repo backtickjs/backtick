@@ -380,6 +380,30 @@
       "keyed": true,
       "dir": "nullary-back",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "510d1c7",
+      "label": "row state",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "row-state",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "510d1c7",
+      "label": "row state 2",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "row-state-2",
+      "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "510d1c7",
+      "label": "frames object",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "frames-object",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

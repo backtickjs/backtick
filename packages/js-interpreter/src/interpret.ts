@@ -37,24 +37,30 @@ type Source = BundleArrayElement | BundleStatementNode;
 // bundle.
 export interface Scope {
   parent: Scope | null;
-  bindings: Map<string, Value>;
+  // Own properties only, which is why every read goes through `hasOwn`: a
+  // binding named `toString` must not find `Object.prototype`'s.
+  bindings: { [name: string]: Value };
 }
 
+// A frame lives as long as what closes over it — every handler a row writes
+// keeps its row's — so an app with a thousand rows holds a thousand of these. A
+// `Map` allocates its table before it holds anything; an object holding two
+// bindings is the two bindings.
 export function scopeOf(parent: Scope | null): Scope {
-  return { parent, bindings: new Map() };
+  return { parent, bindings: {} };
 }
 
 function bind(scope: Scope, name: string, value: Value): void {
-  scope.bindings.set(name, value);
+  scope.bindings[name] = value;
 }
 
 function read(scope: Scope, name: string): Value {
-  return scope.bindings.get(name) ?? null;
+  return scope.bindings[name] ?? null;
 }
 
 function lookup(scope: Scope | null, name: string): Scope | null {
   for (let at = scope; at !== null; at = at.parent) {
-    if (at.bindings.has(name)) {
+    if (Object.hasOwn(at.bindings, name)) {
       return at;
     }
   }
@@ -675,7 +681,7 @@ function buildStatement(
             // of the ones the loop stopped at.
             frame = {
               parent: scope,
-              bindings: new Map(frame.bindings),
+              bindings: { ...frame.bindings },
             };
             if (update !== null) {
               update.run(frame);
