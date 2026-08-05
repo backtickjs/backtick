@@ -74,7 +74,7 @@ function lookup(scope: Scope | null, name: string): Scope | null {
 function compileFunction(
   instance: Instance,
   label: FunctionLabel,
-): Compiled<(...args: Value[]) => Value> {
+): CompiledFunction {
   const existing = instance.functions.get(label);
   if (existing !== undefined) {
     return existing;
@@ -89,15 +89,27 @@ function compileFunction(
     },
     // A body reaching itself is not one this can settle.
     fixed: false,
+    fixedApplied: false,
   });
+  // An arrow and nothing else, which is what `BundleFunction` declares — so one
+  // that compiled to anything else is a malformed bundle, not a function this
+  // cannot see through.
   const arrow = compile(instance, declared[0]);
+  if (!("fixedApplied" in arrow)) {
+    throw new Error(`\`${label}\` is not an arrow`);
+  }
   // In no scope rather than an empty one: a function reaches what encloses it
   // through its own parameters, so a frame binding nothing would only be one
   // more to walk past at the end of every name it fails to find.
-  const closure = arrow.run(null) as (...args: Value[]) => Value;
-  // The arrow already answered for applying it — what the bundler used to work
-  // out and ship as a flag beside the function.
-  const compiled = { run: () => closure, fixed: arrow.fixed };
+  const closure = arrow.run(null);
+  // Holding one is settled; what calling it costs is what the arrow worked out
+  // from its body — what the bundler used to answer and ship as a flag beside
+  // the function.
+  const compiled: CompiledFunction = {
+    run: () => closure,
+    fixed: true,
+    fixedApplied: arrow.fixedApplied,
+  };
   instance.functions.set(label, compiled);
   return compiled;
 }
@@ -131,7 +143,28 @@ export interface Compiled<T = Value> {
   readonly fixed: boolean;
 }
 
-export function compile(instance: Instance, node: Source): Compiled {
+// A node that evaluates to a function: an arrow, a `get` of one, and a function
+// itself. The two questions come apart here and nowhere else, which is why this
+// is a type rather than a field everything else would carry empty.
+export interface CompiledFunction extends Compiled<
+  (...args: Value[]) => Value
+> {
+  // Whether *calling* what it yields is settled — the other question, and the
+  // one a call asks of whatever it is calling. An arrow answers from the body
+  // it has just compiled; a `get`, from the function it names.
+  //
+  // Apart from `fixed` because the two differ for exactly these nodes: making a
+  // closure reads nothing whatever the closure would read, so an arrow is
+  // settled to hold while calling it may be anything. A position holding a
+  // function — an argument, a prop — wants the first; only a call wants the
+  // second.
+  readonly fixedApplied: boolean;
+}
+
+export function compile(
+  instance: Instance,
+  node: Source,
+): Compiled | CompiledFunction {
   if (node === null || typeof node !== "object") {
     const literal = node as Value;
     return { run: () => literal, fixed: true };
@@ -160,7 +193,10 @@ function compileStatement(
 // A node is an array and nothing else in a value slot is — an array of data
 // travels under a `DataArray` node — so `Array.isArray` is the whole test, here
 // and everywhere below.
-function buildNode(instance: Instance, source: Source): Compiled {
+function buildNode(
+  instance: Instance,
+  source: Source,
+): Compiled | CompiledFunction {
   if (!Array.isArray(source)) {
     const data = source as { [key: string]: Source };
     const keys = Object.keys(data);
@@ -199,8 +235,7 @@ function buildNode(instance: Instance, source: Source): Compiled {
     // a hole handing over nothing would have called.
     case 1: /* GetFunction */ {
       const label = node[1];
-      const func = compileFunction(instance, label);
-      return { run: () => func.run(null), fixed: true };
+      return compileFunction(instance, label);
     }
     // A function applied. The format spells this as one node because applying
     // is most of what a bundle does (see `BundleApplyFunction`), but it is
@@ -269,6 +304,17 @@ function buildNode(instance: Instance, source: Source): Compiled {
         };
       }
       const target = compile(instance, callee);
+      // A callee whose body this compiled — a `get`, an arrow written where it
+      // is called — is a function already: there is nothing to check when it
+      // runs, and it has said what calling it costs.
+      if ("fixedApplied" in target) {
+        return {
+          run: (scope) => target.run(scope)(...args.run(scope)),
+          fixed: args.fixed && target.fixedApplied,
+        };
+      }
+      // Everything else arrives as a value, so what it is is a runtime
+      // question, and what calling it costs is one nothing here can answer.
       return {
         run: (scope) => {
           // The callee evaluates before the arguments; an optional call
@@ -417,7 +463,8 @@ function buildNode(instance: Instance, source: Source): Compiled {
         const expression = compiled as Compiled;
         return {
           run: (scope) => () => expression.run(scope),
-          fixed: expression.fixed,
+          fixed: true,
+          fixedApplied: expression.fixed,
         };
       }
       return {
@@ -444,7 +491,8 @@ function buildNode(instance: Instance, source: Source): Compiled {
             }
             return completion.kind === "returned" ? completion.value : null;
           },
-        fixed: compiled.fixed,
+        fixed: true,
+        fixedApplied: compiled.fixed,
       };
     }
     default: {
