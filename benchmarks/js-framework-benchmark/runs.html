@@ -338,6 +338,11 @@
               ><span class="sub">510d1c7</span
               ><span class="keyed yes">keyed</span>
             </th>
+            <th>
+              <span class="name">shape check</span
+              ><span class="sub">2e1c4cc</span
+              ><span class="keyed yes">keyed</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -490,6 +495,9 @@
             <td style="background: rgb(151, 206, 127)">
               <span class="value">28.2</span><span class="factor">1.33</span>
             </td>
+            <td style="background: rgb(155, 207, 127)">
+              <span class="value">28.8</span><span class="factor">1.36</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">replace all 1,000 rows</th>
@@ -639,6 +647,9 @@
             </td>
             <td style="background: rgb(154, 207, 127)">
               <span class="value">31.5</span><span class="factor">1.35</span>
+            </td>
+            <td style="background: rgb(159, 208, 127)">
+              <span class="value">32.3</span><span class="factor">1.39</span>
             </td>
           </tr>
           <tr>
@@ -790,6 +801,9 @@
             <td style="background: rgb(99, 191, 124)">
               <span class="value">12.9</span><span class="factor">1.00</span>
             </td>
+            <td style="background: rgb(107, 193, 124)">
+              <span class="value">13.6</span><span class="factor">1.05</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">select row</th>
@@ -939,6 +953,9 @@
             </td>
             <td style="background: rgb(194, 218, 129)">
               <span class="value">5.30</span><span class="factor">1.61</span>
+            </td>
+            <td style="background: rgb(203, 221, 129)">
+              <span class="value">5.50</span><span class="factor">1.67</span>
             </td>
           </tr>
           <tr>
@@ -1090,6 +1107,9 @@
             <td style="background: rgb(113, 195, 125)">
               <span class="value">14.4</span><span class="factor">1.09</span>
             </td>
+            <td style="background: rgb(110, 194, 125)">
+              <span class="value">14.1</span><span class="factor">1.07</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">remove row</th>
@@ -1239,6 +1259,9 @@
             </td>
             <td style="background: rgb(106, 193, 124)">
               <span class="value">11.2</span><span class="factor">1.05</span>
+            </td>
+            <td style="background: rgb(105, 193, 124)">
+              <span class="value">11.1</span><span class="factor">1.04</span>
             </td>
           </tr>
           <tr>
@@ -1390,6 +1413,9 @@
             <td style="background: rgb(146, 205, 126)">
               <span class="value">291.1</span><span class="factor">1.30</span>
             </td>
+            <td style="background: rgb(158, 208, 127)">
+              <span class="value">308.0</span><span class="factor">1.38</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">append 1,000 to a table of 1,000 (×2)</th>
@@ -1540,8 +1566,161 @@
             <td style="background: rgb(140, 203, 126)">
               <span class="value">31.5</span><span class="factor">1.27</span>
             </td>
+            <td style="background: rgb(145, 204, 126)">
+              <span class="value">32.3</span><span class="factor">1.30</span>
+            </td>
           </tr>
-
+          <tr>
+            <th class="benchmark">clear 1,000 rows (×8)</th>
+            <td style="background: rgb(99, 191, 124)">
+              <span class="value">10.1</span><span class="factor">1.00</span>
+            </td>
+            <td style="background: rgb(131, 200, 126)">
+              <span class="value">12.2</span><span class="factor">1.21</span>
+            </td>
+            <td style="background: rgb(133, 201, 126)">
+              <span class="value">12.3</span><span class="factor">1.22</span>
+            </td>
+            <td style="background: rgb(173, 212, 128)">
+              <span class="value">14.9</span><span class="factor">1.48</span>
+            </td>
+            <td style="background: rgb(240, 232, 131)">
+              <span class="value">19.2</span><span class="factor">1.90</span>
+            </td>
+            <td style="background: rgb(195, 219, 129)">
+              <span class="value">16.3</span><span class="factor">1.61</span>
+            </td>
+            <td style="background: rgb(232, 229, 131)">
+              <span class="value">18.7</span><span class="factor">1.85</span>
+            </td>
+            <td style="background: rgb(251, 159, 118)">
+              <span class="value">32.0</span><span class="factor">3.17</span>
+            </td>
+            <td style="background: rgb(251, 158, 118)">
+              <span class="value">32.2</span><span class="factor">3.19</span>
+            </td>
+            <td style="background: rgb(252, 163, 119)">
+              <span class="value">31.4</span><span class="factor">3.11</span>
+            </td>
+            <td style="background: rgb(252, 172, 120)">
+              <span class="value">30.0</span><span class="factor">2.97</span>
+            </td>
+            <td style="background: rgb(252, 172, 120)">
+              <span class="value">30.0</span><span class="factor">2.97</span>
+            </td>
+            <td style="background: rgb(252, 170, 120)">
+              <span class="value">30.4</span><span class="factor">3.01</span>
+            </td>
+            <td style="background: rgb(251, 138, 114)">
+              <span class="value">35.3</span><span class="factor">3.50</span>
+            </td>
+            <td style="background: rgb(252, 165, 119)">
+              <span class="value">31.1</span><span class="factor">3.08</span>
+            </td>
+            <td style="background: rgb(139, 203, 126)">
+              <span class="value">12.7</span><span class="factor">1.26</span>
+            </td>
+            <td style="background: rgb(250, 235, 132)">
+              <span class="value">19.9</span><span class="factor">1.97</span>
+            </td>
+            <td style="background: rgb(201, 220, 129)">
+              <span class="value">16.7</span><span class="factor">1.65</span>
+            </td>
+            <td style="background: rgb(182, 215, 128)">
+              <span class="value">15.5</span><span class="factor">1.53</span>
+            </td>
+            <td style="background: rgb(161, 209, 127)">
+              <span class="value">14.1</span><span class="factor">1.40</span>
+            </td>
+            <td style="background: rgb(179, 214, 128)">
+              <span class="value">15.3</span><span class="factor">1.51</span>
+            </td>
+            <td style="background: rgb(189, 217, 129)">
+              <span class="value">15.9</span><span class="factor">1.57</span>
+            </td>
+            <td style="background: rgb(175, 213, 128)">
+              <span class="value">15.0</span><span class="factor">1.49</span>
+            </td>
+            <td style="background: rgb(175, 213, 128)">
+              <span class="value">15.0</span><span class="factor">1.49</span>
+            </td>
+            <td style="background: rgb(172, 212, 128)">
+              <span class="value">14.8</span><span class="factor">1.47</span>
+            </td>
+            <td style="background: rgb(156, 207, 127)">
+              <span class="value">13.8</span><span class="factor">1.37</span>
+            </td>
+            <td style="background: rgb(178, 214, 128)">
+              <span class="value">15.2</span><span class="factor">1.50</span>
+            </td>
+            <td style="background: rgb(158, 208, 127)">
+              <span class="value">13.9</span><span class="factor">1.38</span>
+            </td>
+            <td style="background: rgb(176, 213, 128)">
+              <span class="value">15.1</span><span class="factor">1.50</span>
+            </td>
+            <td style="background: rgb(172, 212, 128)">
+              <span class="value">14.8</span><span class="factor">1.47</span>
+            </td>
+            <td style="background: rgb(156, 207, 127)">
+              <span class="value">13.8</span><span class="factor">1.37</span>
+            </td>
+            <td style="background: rgb(165, 210, 127)">
+              <span class="value">14.4</span><span class="factor">1.43</span>
+            </td>
+            <td style="background: rgb(169, 211, 128)">
+              <span class="value">14.6</span><span class="factor">1.45</span>
+            </td>
+            <td style="background: rgb(147, 205, 126)">
+              <span class="value">13.2</span><span class="factor">1.31</span>
+            </td>
+            <td style="background: rgb(142, 203, 126)">
+              <span class="value">12.9</span><span class="factor">1.28</span>
+            </td>
+            <td style="background: rgb(147, 205, 126)">
+              <span class="value">13.2</span><span class="factor">1.31</span>
+            </td>
+            <td style="background: rgb(135, 201, 126)">
+              <span class="value">12.4</span><span class="factor">1.23</span>
+            </td>
+            <td style="background: rgb(125, 199, 125)">
+              <span class="value">11.8</span><span class="factor">1.17</span>
+            </td>
+            <td style="background: rgb(133, 201, 126)">
+              <span class="value">12.3</span><span class="factor">1.22</span>
+            </td>
+            <td style="background: rgb(138, 202, 126)">
+              <span class="value">12.6</span><span class="factor">1.25</span>
+            </td>
+            <td style="background: rgb(128, 199, 126)">
+              <span class="value">12.0</span><span class="factor">1.19</span>
+            </td>
+            <td style="background: rgb(133, 201, 126)">
+              <span class="value">12.3</span><span class="factor">1.22</span>
+            </td>
+            <td style="background: rgb(165, 210, 127)">
+              <span class="value">14.4</span><span class="factor">1.43</span>
+            </td>
+            <td style="background: rgb(133, 201, 126)">
+              <span class="value">12.3</span><span class="factor">1.22</span>
+            </td>
+            <td style="background: rgb(141, 203, 126)">
+              <span class="value">12.8</span><span class="factor">1.27</span>
+            </td>
+            <td style="background: rgb(130, 200, 126)">
+              <span class="value">12.1</span><span class="factor">1.20</span>
+            </td>
+            <td style="background: rgb(136, 202, 126)">
+              <span class="value">12.5</span><span class="factor">1.24</span>
+            </td>
+            <td style="background: rgb(128, 199, 126)">
+              <span class="value">12.0</span><span class="factor">1.19</span>
+            </td>
+            <td class="none">—</td>
+            <td style="background: rgb(153, 207, 127)">
+              <span class="value">13.6</span><span class="factor">1.35</span>
+            </td>
+          </tr>
           <tr class="mean">
             <th class="benchmark">geometric mean of the factors</th>
             <td style="background: rgb(99, 191, 124)">
@@ -1690,6 +1869,9 @@
             </td>
             <td style="background: rgb(132, 201, 126)">
               <span class="value">1.24</span>
+            </td>
+            <td style="background: rgb(137, 202, 126)">
+              <span class="value">1.26</span>
             </td>
           </tr>
         </tbody>
@@ -1903,6 +2085,11 @@
               ><span class="sub">510d1c7</span
               ><span class="keyed yes">keyed</span>
             </th>
+            <th>
+              <span class="name">shape check</span
+              ><span class="sub">2e1c4cc</span
+              ><span class="keyed yes">keyed</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -2055,6 +2242,9 @@
             <td style="background: rgb(160, 209, 127)">
               <span class="value">0.81</span><span class="factor">1.39</span>
             </td>
+            <td style="background: rgb(155, 207, 127)">
+              <span class="value">0.79</span><span class="factor">1.36</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">after 1,000 rows</th>
@@ -2204,6 +2394,9 @@
             </td>
             <td style="background: rgb(255, 234, 132)">
               <span class="value">3.80</span><span class="factor">2.03</span>
+            </td>
+            <td style="background: rgb(254, 219, 129)">
+              <span class="value">4.22</span><span class="factor">2.25</span>
             </td>
           </tr>
           <tr>
@@ -2355,6 +2548,9 @@
             <td style="background: rgb(244, 233, 131)">
               <span class="value">1.27</span><span class="factor">1.93</span>
             </td>
+            <td style="background: rgb(236, 230, 131)">
+              <span class="value">1.24</span><span class="factor">1.88</span>
+            </td>
           </tr>
           <tr class="mean">
             <th class="benchmark">geometric mean of the factors</th>
@@ -2504,6 +2700,9 @@
             </td>
             <td style="background: rgb(218, 225, 130)">
               <span class="value">1.76</span>
+            </td>
+            <td style="background: rgb(223, 227, 130)">
+              <span class="value">1.79</span>
             </td>
           </tr>
         </tbody>
@@ -2717,6 +2916,11 @@
               ><span class="sub">510d1c7</span
               ><span class="keyed yes">keyed</span>
             </th>
+            <th>
+              <span class="name">shape check</span
+              ><span class="sub">2e1c4cc</span
+              ><span class="keyed yes">keyed</span>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -2869,6 +3073,9 @@
             <td style="background: rgb(253, 192, 124)">
               <span class="value">30.2</span><span class="factor">2.67</span>
             </td>
+            <td style="background: rgb(253, 199, 125)">
+              <span class="value">29.0</span><span class="factor">2.57</span>
+            </td>
           </tr>
           <tr>
             <th class="benchmark">compressed</th>
@@ -3018,6 +3225,9 @@
             </td>
             <td style="background: rgb(250, 129, 112)">
               <span class="value">9.10</span><span class="factor">3.64</span>
+            </td>
+            <td style="background: rgb(250, 134, 113)">
+              <span class="value">8.90</span><span class="factor">3.56</span>
             </td>
           </tr>
           <tr>
@@ -3169,6 +3379,9 @@
             <td style="background: rgb(142, 203, 126)">
               <span class="value">102.8</span><span class="factor">1.27</span>
             </td>
+            <td style="background: rgb(183, 215, 128)">
+              <span class="value">123.9</span><span class="factor">1.54</span>
+            </td>
           </tr>
           <tr class="mean">
             <th class="benchmark">geometric mean of the factors</th>
@@ -3318,6 +3531,9 @@
             </td>
             <td style="background: rgb(254, 215, 128)">
               <span class="value">2.31</span>
+            </td>
+            <td style="background: rgb(254, 209, 127)">
+              <span class="value">2.41</span>
             </td>
           </tr>
         </tbody>

@@ -188,6 +188,9 @@ function isFixed(expr: BundleArrayElement): boolean {
     }
     return Object.values(expr).every((member) => isFixed(member));
   }
+  if (expr[0] === 4 /* DataArray */) {
+    return expr[1].every((member) => isFixed(member));
+  }
   return expr[0] === 1005 /* ArrowFunction */ || expr[0] === 0 /* Element */;
 }
 
