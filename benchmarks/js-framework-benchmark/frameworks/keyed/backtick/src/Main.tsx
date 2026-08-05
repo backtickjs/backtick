@@ -1,8 +1,21 @@
 import { cs, state, For, type Client, type State } from "@backtickjs/core";
 
+// A row's label is its own storage, so updating one is writing one cell rather
+// than replacing the list it sits in: `partialUpdate` leaves `data` untouched
+// and nothing re-reads the array.
+//
+// Two names for one row, because the host and a script see the cell
+// differently: `Client<…>` is how the host names a value that lives on the
+// client, and a script reads that member as the cell itself. The host never
+// builds a row — every one comes from `buildData`.
+type HostRow = {
+  readonly id: number;
+  readonly label: Client<State<string>>;
+};
+
 type Row = {
   readonly id: number;
-  readonly label: string;
+  readonly label: State<string>;
 };
 
 const ADJECTIVES = [
@@ -64,7 +77,7 @@ const NOUNS = [
 ];
 
 export async function Main() {
-  const data = state<Row[]>([]);
+  const data = state<HostRow[]>([]);
   const selected = state(0);
   const rowId = state(1);
 
@@ -76,7 +89,9 @@ export async function Main() {
     return Array.from({ length: count }, (_, index) => {
       return {
         id: from + index,
-        label: $word($ADJECTIVES) + " " + $word($COLOURS) + " " + $word($NOUNS),
+        label: state(
+          $word($ADJECTIVES) + " " + $word($COLOURS) + " " + $word($NOUNS),
+        ),
       };
     });
   }`;
@@ -100,11 +115,10 @@ export async function Main() {
   }`;
 
   const partialUpdate = cs`() => {
-    $data.update((data) =>
-      data.map((row, index) =>
-        index % 10 === 0 ? { id: row.id, label: row.label + " !!!" } : row,
-      ),
-    );
+    const rows = $data.read();
+    for (let index = 0; index < rows.length; index = index + 10) {
+      rows[index].label.update((label: string) => label + " !!!");
+    }
   }`;
 
   const clear = cs`() => {
@@ -207,7 +221,9 @@ export async function Main() {
                 <tr class={cs`$selected.read() === row.id ? "danger" : ""`}>
                   <td class="col-md-1">{cs`row.id`}</td>
                   <td class="col-md-4">
-                    <a onclick={cs`() => $select(row.id)`}>{cs`row.label`}</a>
+                    <a
+                      onclick={cs`() => $select(row.id)`}
+                    >{cs`row.label.read()`}</a>
                   </td>
                   <td class="col-md-1">
                     <a onclick={cs`() => $remove(row.id)`}>

@@ -1,0 +1,3 @@
+<Text style={{ "fontSize": 16 }} onPress={[function]}>
+  {"one"}
+</Text>

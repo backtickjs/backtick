@@ -26,6 +26,7 @@ export type ClientScriptExpression =
   | ClientScriptElementAccessExpression
   | ClientScriptSplice
   | ClientScriptBuiltin
+  | ClientScriptState
   | ClientScriptStringLiteral
   | ClientScriptConditionalExpression;
 
@@ -257,6 +258,15 @@ export interface ClientScriptSplice {
   readonly kind: typeof SyntaxKind.Splice;
   readonly loc: SourceLocation;
   readonly key: string;
+}
+
+// `state(initial)`: storage the script declares, one per evaluation. The
+// initial value is an expression like any other, evaluated where the
+// declaration is.
+export interface ClientScriptState {
+  readonly kind: typeof SyntaxKind.State;
+  readonly loc: SourceLocation;
+  readonly initial: ClientScriptExpression;
 }
 
 export interface ClientScriptStringLiteral {

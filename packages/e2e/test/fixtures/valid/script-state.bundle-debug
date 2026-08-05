@@ -1,0 +1,21 @@
+#f0 = () => 16
+
+#f1 = ($0) => () => {
+  const row = $0()("one");
+  row.label.write(row.label.read() + " !!!");
+}
+
+#f2 = () => (label) => {
+  return { "label": state(label) };
+}
+
+#f3 = ($0) => $0()("one").label.read()
+
+#f4 = () => <Text
+  style={{ "fontSize": #f0() }}
+  onPress={#f1(#f2)}
+>
+  {#f3(#f2)}
+</Text>
+
+root = #f4()

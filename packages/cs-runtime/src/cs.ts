@@ -3,6 +3,7 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
+import type { State } from "./state.js";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 import type { Widen } from "./Widen.js";
 
@@ -92,6 +93,16 @@ function _index<T extends ClientValue, K extends IndexKey<Receiver<T>>>(
   );
 }
 
+// Storage a script declares for itself, read as the cell it becomes. Declaring
+// is not calling: this stands where the declaration is written, and each time
+// that is evaluated there is another cell.
+function _state<const T extends ClientValue>(_: T): State<Widen<T>> {
+  throw new Error(
+    "Don't call `cs.state` directly; it's used to generate virtual " +
+      "code for the typechecker. Write code using cs`...` instead.",
+  );
+}
+
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -112,5 +123,6 @@ export const cs = Object.assign(
     statement: _statement,
     receiver: _receiver,
     index: _index,
+    state: _state,
   },
 );

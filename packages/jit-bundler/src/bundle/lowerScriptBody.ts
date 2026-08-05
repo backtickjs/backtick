@@ -284,6 +284,8 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         ];
       case SyntaxKind.Builtin:
         return [NodeKind.Builtin, node.name];
+      case SyntaxKind.State:
+        return [NodeKind.State, e(node.initial)];
       case SyntaxKind.Splice:
         return renderSplice(node.key);
       case SyntaxKind.StringLiteral:

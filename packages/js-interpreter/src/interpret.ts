@@ -218,6 +218,16 @@ function buildNode(
       const members = compileElements(instance, node[1]);
       return { run: (scope) => members.run(scope), fixed: members.fixed };
     }
+    // Storage, made where this stands: evaluating it twice is two storages,
+    // which is why it is a kind and not a call of a name. Never settled — the
+    // whole point of a cell is that what it holds moves.
+    case 5: /* State */ {
+      const initial = compile(instance, node[1]);
+      return {
+        run: (scope) => makeState(initial.run(scope)),
+        fixed: false,
+      };
+    }
     case 1000: /* Identifier */ {
       const name = node[1];
       return {
@@ -798,10 +808,6 @@ function compileElements(
 // which is what keeps this client, the one the format is specified against,
 // from accepting more than the format defines.
 const builtins: { [name: string]: Value } = {
-  // The one builtin that is not a function of its arguments: two calls are two
-  // storages, where `Bundle` licenses re-running any other expression freely.
-  // Nothing emits this yet — where a call may stand is a rule still to write.
-  state: (initial: Value) => makeState(initial),
   Array: {
     // Not the host's `Array.from`: the mapper is required where the standard
     // library's is optional, and its first argument is `null` where the

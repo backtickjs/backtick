@@ -943,6 +943,41 @@ function rewriteNodeImpl(
       };
     }
 
+    // Storage the script declares, which is a node rather than a call of a
+    // name: `state` names nothing a script may hold or pass on, so there is no
+    // callee to rewrite and nothing to reach it by except writing it here.
+    if (
+      ts.isIdentifier(node.expression) &&
+      !state.bindings.has(node.expression) &&
+      node.expression.text === "state"
+    ) {
+      if (optionalCall) {
+        state.errors.set(
+          node,
+          "`state?.()` isn't a declaration: write `state(initial)`.",
+        );
+      }
+      if (node.arguments.length !== 1) {
+        state.errors.set(
+          node,
+          "`state` takes one argument, the value it starts at.",
+        );
+      }
+      const initial =
+        args[0] ?? rewriteNode(ts, state, ts.factory.createNull());
+      const virtual = call(ts, "cs", "state", [
+        initial.virtual as ts.Expression,
+      ]);
+      state.mappings.set(virtual, node);
+      return {
+        virtual,
+        runtime: astNode(ts, SyntaxKind.State, {
+          loc: loc(node),
+          initial: initial.runtime as ts.Expression,
+        }),
+      };
+    }
+
     const callee = rewriteNode(ts, state, node.expression);
     const virtualCall = optionalCall
       ? ts.factory.createCallChain(

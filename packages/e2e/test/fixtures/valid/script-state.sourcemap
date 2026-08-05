@@ -1,0 +1,76 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_label         → label
+: string           → : string
+) => {\n           → ) => {\n    
+return cs.const(   → return 
+{                  → { 
+label              → label
+:                  → : 
+cs.state(          → state(
+__cs_label         → label
+)                  → )
+ }                 →  }
+);                 → ;
+\n}                → \n  }
+))                 → `
+cs.lift(cs.const(  → cs`
+16                 → 16
+))                 → `
+cs.lift(cs.const(  → cs`
+() => {\n          → () => {\n        
+const              → const 
+__cs_row           → row
+ = cs.const(       →  = 
+cs.splice(         →  [-semantic]
+(build)            → $build
+)                  →  [-semantic]
+(                  → (
+"one"              → "one"
+)                  → )
+);                 → ;
+\n                 → \n        
+cs.statement(      → 
+cs.receiver(       → 
+cs.receiver(       → 
+__cs_row           → row
+)                  → 
+.                  → .
+label              → label
+)                  → 
+.                  → .
+write              → write
+(                  → (
+cs.receiver(       → 
+cs.receiver(       → 
+__cs_row           → row
+)                  → 
+.                  → .
+label              → label
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+ +                 →  + 
+" !!!"             → " !!!"
+)                  → )
+);                 → ;
+\n}                → \n      }
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(build)            → $build
+)                  →  [-semantic]
+(                  → (
+"one"              → "one"
+)                  → )
+)                  → 
+.                  → .
+label              → label
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+))                 → `

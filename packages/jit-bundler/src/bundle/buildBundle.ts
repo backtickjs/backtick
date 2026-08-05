@@ -514,12 +514,10 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     NodeKind.VariableDeclaration,
     name,
     [
-      NodeKind.CallExpression,
-      [NodeKind.Builtin, "state"],
-      false,
+      NodeKind.State,
       // A cell's initial is data (`state-in-state-initial` rejects anything that
       // reads), so it is an expression node wherever it renders.
-      [renderExpr(initial, noInstance()) as BundleExpressionNode],
+      renderExpr(initial, noInstance()) as BundleExpressionNode,
     ],
     "const",
   ];

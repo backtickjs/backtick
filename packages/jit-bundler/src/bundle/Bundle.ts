@@ -21,9 +21,10 @@
 // `false`. A node's arity is its kind's, so a reader takes a slot by position
 // without first asking whether it is there.
 //
-// Evaluation is deterministic, and effect-free but for one thing: applying an
-// entry that draws allocates the storage its body binds, so applying one twice
-// is two sets of it. Everything else may be cached, re-run or shared freely.
+// Evaluation is deterministic, and effect-free but for storage: applying an
+// entry that draws allocates the storage its body binds, and a `state` node
+// allocates one where it stands — so either, evaluated twice, is two. Every
+// other node may be cached, re-run or shared freely.
 export interface Bundle {
   // Every entry is an arrow: a script, a component, or a class's expansion.
   // Its parameters are an arrow per splice hole the script writes (`$0`, `$1`,
@@ -75,6 +76,7 @@ export const NodeKind = {
   // A node is an array, so an array of data needs saying apart from one. Data
   // objects need no such wrapper, which is why only this one exists.
   DataArray: 4,
+  State: 5,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -182,6 +184,17 @@ export type BundleSpreadElementNode = [
 // What the format fixes is which members exist and what each one means.
 export type BundleBuiltinNode = [kind: typeof NodeKind.Builtin, name: string];
 
+// Storage, declared where this node stands. The one node that is not a function
+// of what it reads: evaluating it twice is two storages, where every other
+// expression may be re-run, cached or shared freely. A kind of its own for that
+// reason — a call of a named global would say the opposite, since calling one
+// twice is calling it twice.
+export type BundleStateNode = [
+  kind: typeof NodeKind.State,
+  // Evaluated where the declaration is, once per storage it makes.
+  initial: BundleExpressionNode,
+];
+
 export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
 
 export type BundleExpressionNode =
@@ -207,7 +220,8 @@ export type BundleExpressionNode =
   | BundlePrefixUnaryExpressionNode
   | BundleConditionalExpressionNode
   | BundleArrowFunctionNode
-  | BundleBuiltinNode;
+  | BundleBuiltinNode
+  | BundleStateNode;
 
 // A body node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.
