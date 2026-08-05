@@ -49,7 +49,7 @@ export type BundleFunction = [
 // spells and nothing else — which is what positional nodes bought: the format
 // reserves no key at all, and every key a host object holds passes through.
 export interface BundleData {
-  readonly [key: string]: BundleExpressionNode | undefined;
+  readonly [key: string]: BundleExpressionNode;
 }
 
 export type FunctionLabel = string;

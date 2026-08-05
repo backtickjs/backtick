@@ -8,7 +8,7 @@ import { createRenderer, type Renderer } from "solid-js/universal";
 import type { RendererOptions } from "./RendererOptions.js";
 import type { Instance } from "./Instance.js";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
-import type { Compiled, Scope } from "./interpret.js";
+import type { Scope } from "./interpret.js";
 import type { Value } from "./Value.js";
 
 // The view half: turning a drawing function into the host's own nodes, once,
@@ -117,7 +117,7 @@ function requireReactivity(): void {
 export function compileElement(
   instance: Instance,
   element: BundleElement,
-): Compiled {
+): (scope: Scope | null) => Value {
   const id = element[1];
   // The two elements every target has, recognized by the id they agree on.
   // Neither draws a node: one puts its children where it stands, the other
@@ -128,50 +128,67 @@ export function compileElement(
   if (id === "For") {
     return compileFor(instance, element);
   }
-  // Every prop, with how to read it and whether reading it again could say
-  // anything different — in the order the element wrote them, because a host
-  // may care: an `<input>` wants its `type` before its `value`. One that cannot
-  // move is set once: a computation watching a constant would be one per
-  // attribute per element, held for as long as the element is.
+  // Every prop, in the order the element wrote them, because a host may care:
+  // an `<input>` wants its `type` before its `value`.
   const props = Object.entries(element[2])
     .filter(([prop]) => prop !== "children")
-    .map(([prop, expr]) => [prop, compile(instance, expr)] as const);
+    .map(([prop, expr]) => {
+      const fixed = isFixed(expr);
+      return [prop, compile(instance, expr), fixed] as const;
+    });
   const children = element[2]["children"];
   const draw =
     children === undefined ? null : compileChildren(instance, children);
-  return {
-    run: (scope) => {
-      const renderer = instance.renderer;
-      const node = renderer.createElement(id);
-      for (const [prop, read] of props) {
-        if (read.fixed) {
-          renderer.setProp(node, prop, read.run(scope));
-          continue;
-        }
-        // One effect per prop, so a write moves that one prop of that one node.
-        // It re-runs only when something the expression itself read has changed;
-        // nothing tells it to look.
-        //
-        // Re-running is not the same as changing: a state a whole list reads is
-        // what decides one row's class, and every other row recomputes the class
-        // it already has. The host hears about a prop when the prop moved, so
-        // that is a comparison here rather than a write per row per selection.
-        // A handler is a new closure whenever what it captured changed, so it
-        // compares unequal and is registered again, as before.
-        renderer.effect((previous) => {
-          const value = read.run(scope);
-          return value === previous
-            ? previous
-            : renderer.setProp(node, prop, value, previous);
-        });
+  return (scope) => {
+    const renderer = instance.renderer;
+    const node = renderer.createElement(id);
+    for (const [prop, read, fixed] of props) {
+      // It cannot change, so set it and be done: no computation to make, and
+      // none held for as long as the element is.
+      if (fixed) {
+        renderer.setProp(node, prop, read(scope));
+        continue;
       }
-      if (draw !== null) {
-        renderer.insert(node, draw(scope));
-      }
-      return node as Value;
-    },
-    fixed: true,
+      // One effect per prop, so a write moves that one prop of that one node.
+      // It re-runs only when something the expression itself read has changed;
+      // nothing tells it to look.
+      //
+      // Re-running is not the same as changing: a state a whole list reads is
+      // what decides one row's class, and every other row recomputes the class
+      // it already has. The host hears about a prop when the prop moved, so
+      // that is a comparison here rather than a write per row per selection.
+      // A handler is a new closure whenever what it captured changed, so it
+      // compares unequal and is registered again, as before.
+      renderer.effect((previous) => {
+        const value = read(scope);
+        return value === previous
+          ? previous
+          : renderer.setProp(node, prop, value, previous);
+      });
+    }
+    if (draw !== null) {
+      renderer.insert(node, draw(scope));
+    }
+    return node as Value;
   };
+}
+
+// Whether what a position holds can change after it has first been read.
+//
+// True where the node's own shape proves it cannot: a literal is its own value,
+// an arrow is a closure — making one reads nothing, whatever calling it later
+// would read — and an element is built once, what moves inside it having its
+// own computations. False where this cannot tell, which is not the same as
+// saying it moves: `row.id` reads a binding and never changes, and this says
+// false about it.
+function isFixed(expr: BundleArrayElement): boolean {
+  if (!Array.isArray(expr)) {
+    if (expr === null || typeof expr !== "object") {
+      return true;
+    }
+    return Object.values(expr).every((member) => isFixed(member));
+  }
+  return expr[0] === 1005 /* ArrowFunction */ || expr[0] === 0 /* Element */;
 }
 
 // A children position, compiled member by member.
@@ -196,24 +213,27 @@ function compileChildren(
     return (scope) => members.map((member) => member(scope));
   }
   const read = compile(instance, expr);
-  // Nothing that moves, so `insert` is handed the value rather than a way of
-  // asking for it, and makes no computation to watch it.
-  if (read.fixed) {
-    return (scope) => read.run(scope);
+  // A value where it cannot change, so `insert` makes no computation to watch
+  // it; a way of asking, where it might.
+  if (isFixed(expr)) {
+    return (scope) => read(scope);
   }
-  return (scope) => () => read.run(scope);
+  return (scope) => () => read(scope);
 }
 
 /**
  * A fragment: its children where it stands, and no node of its own.
  */
-function compileFragment(instance: Instance, element: BundleElement): Compiled {
+function compileFragment(
+  instance: Instance,
+  element: BundleElement,
+): (scope: Scope | null) => Value {
   const children = element[2]["children"];
   if (children === undefined) {
-    return { run: () => null, fixed: true };
+    return () => null;
   }
   const draw = compileChildren(instance, children);
-  return { run: (scope) => draw(scope) as Value, fixed: true };
+  return (scope) => draw(scope) as Value;
 }
 
 /**
@@ -223,7 +243,10 @@ function compileFragment(instance: Instance, element: BundleElement): Compiled {
  * member that is still there, drops what a member that has gone drew, and draws
  * only what is new. Identity is the member's own — nothing here extracts a key.
  */
-function compileFor(instance: Instance, element: BundleElement): Compiled {
+function compileFor(
+  instance: Instance,
+  element: BundleElement,
+): (scope: Scope | null) => Value {
   const props = element[2];
   const each = props["each"];
   const body = props["children"];
@@ -232,21 +255,18 @@ function compileFor(instance: Instance, element: BundleElement): Compiled {
   }
   const source = compile(instance, each);
   const draw = compile(instance, body);
-  return {
-    run: (scope) => {
-      const members = createMemo(() => {
-        const value = source.run(scope);
-        return Array.isArray(value) ? (value as Value[]) : [];
-      });
-      // Made once: the member arrives as an argument.
-      const one = draw.run(scope) as (...args: Value[]) => Value;
-      // The index is `mapArray`'s own signal, handed over as storage rather than
-      // as the number it holds: whoever reads it is reading where the member sits
-      // now.
-      return mapArray(members, (member, at) =>
-        one(member, { read: at } as Value),
-      ) as unknown as Value;
-    },
-    fixed: true,
+  return (scope) => {
+    const members = createMemo(() => {
+      const value = source(scope);
+      return Array.isArray(value) ? (value as Value[]) : [];
+    });
+    // Made once: the member arrives as an argument.
+    const one = draw(scope) as (...args: Value[]) => Value;
+    // The index is `mapArray`'s own signal, handed over as storage rather than
+    // as the number it holds: whoever reads it is reading where the member sits
+    // now.
+    return mapArray(members, (member, at) =>
+      one(member, { read: at } as Value),
+    ) as unknown as Value;
   };
 }
