@@ -1030,7 +1030,13 @@ function rewriteNodeImpl(
       virtual,
       runtime: astNode(ts, SyntaxKind.JsxElement, {
         loc: loc(node),
-        tagName: ts.factory.createStringLiteral(tagName),
+        // Written as its own string for now. A component tag is the host
+        // binding, which a script reaches by splice — the rewrite for that
+        // waits on the bundler being able to resolve one.
+        tagName: astNode(ts, SyntaxKind.StringLiteral, {
+          loc: opening === null ? loc(node) : loc(opening.tagName),
+          text: ts.factory.createStringLiteral(tagName),
+        }),
         attributes: ts.factory.createArrayLiteralExpression(
           attributes.map((attribute) => attribute.runtime),
           false,

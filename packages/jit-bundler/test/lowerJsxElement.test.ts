@@ -17,22 +17,23 @@ import type { Ir, IrScriptEntry } from "../dist/ir/Ir.js";
 
 const loc = [1, 0, 1, 1] as const;
 
+const text = (value: string): ClientScriptExpression => ({
+  kind: SyntaxKind.StringLiteral,
+  loc: [...loc],
+  text: value,
+});
+
 const element = (
-  tagName: string,
+  tag: string,
   attributes: readonly ClientScriptJsxAttribute[],
   children: readonly ClientScriptExpression[],
 ): ClientScriptJsxElement => ({
   kind: SyntaxKind.JsxElement,
   loc: [...loc],
-  tagName,
+  // A tag is a value, so an intrinsic one is the string it is.
+  tagName: text(tag),
   attributes,
   children,
-});
-
-const text = (value: string): ClientScriptExpression => ({
-  kind: SyntaxKind.StringLiteral,
-  loc: [...loc],
-  text: value,
 });
 
 // The body of the one script in a bundle, lowered.

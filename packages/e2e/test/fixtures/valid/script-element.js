@@ -93,7 +93,11 @@ async function Card() {
             expression: {
               kind: 285,
               loc: [15, 7, 26, 14],
-              tagName: "View",
+              tagName: {
+                kind: 11,
+                loc: [15, 8, 15, 12],
+                text: "View",
+              },
               attributes: [
                 {
                   name: "style",
@@ -120,7 +124,11 @@ async function Card() {
                 {
                   kind: 285,
                   loc: [16, 9, 21, 16],
-                  tagName: "Text",
+                  tagName: {
+                    kind: 11,
+                    loc: [16, 10, 16, 14],
+                    text: "Text",
+                  },
                   attributes: [
                     {
                       name: "style",
@@ -197,7 +205,11 @@ async function Card() {
                 {
                   kind: 285,
                   loc: [22, 9, 22, 51],
-                  tagName: "Text",
+                  tagName: {
+                    kind: 11,
+                    loc: [22, 10, 22, 14],
+                    text: "Text",
+                  },
                   attributes: [
                     {
                       name: "style",
@@ -230,7 +242,11 @@ async function Card() {
                 {
                   kind: 285,
                   loc: [23, 9, 25, 16],
-                  tagName: "Text",
+                  tagName: {
+                    kind: 11,
+                    loc: [23, 10, 23, 14],
+                    text: "Text",
+                  },
                   attributes: [
                     {
                       name: "style",

@@ -302,7 +302,17 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
             : node.children.length === 1
               ? e(node.children[0])
               : [NodeKind.DataArray, node.children.map((child) => e(child))];
-        return [NodeKind.Element, node.tagName, props, children];
+        // An intrinsic tag is its own string, which is the id an element node
+        // names. Any other tag is a value — a `ClientElement` to take an id
+        // from, or a component to expand — and resolving one is the bundler's
+        // to do before a node can be written, which it does not do yet.
+        if (node.tagName.kind !== SyntaxKind.StringLiteral) {
+          throw new Error(
+            "A client script element's tag must be a plain tag for now: a " +
+              "component tag is a value the bundler has yet to resolve.",
+          );
+        }
+        return [NodeKind.Element, node.tagName.text, props, children];
       }
       case SyntaxKind.Splice:
         return renderSplice(node.key);

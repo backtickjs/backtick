@@ -35,13 +35,21 @@ const listed = cs.create(
     body: {
       kind: 285,
       loc: [10, 3, 15, 6],
-      tagName: "Fragment",
+      tagName: {
+        kind: 11,
+        loc: [10, 3, 15, 6],
+        text: "Fragment",
+      },
       attributes: [],
       children: [
         {
           kind: 285,
           loc: [11, 5, 11, 41],
-          tagName: "Text",
+          tagName: {
+            kind: 11,
+            loc: [11, 6, 11, 10],
+            text: "Text",
+          },
           attributes: [],
           children: [
             {
@@ -54,7 +62,11 @@ const listed = cs.create(
         {
           kind: 285,
           loc: [12, 5, 14, 12],
-          tagName: "Text",
+          tagName: {
+            kind: 11,
+            loc: [12, 6, 12, 10],
+            text: "Text",
+          },
           attributes: [],
           children: [
             {
