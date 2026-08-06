@@ -1,0 +1,1 @@
+5:57-5:66 error TS0: A `cs` client script element's attributes are written `name={...}`; `{...spread}` isn't supported.

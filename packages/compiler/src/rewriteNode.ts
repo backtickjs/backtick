@@ -889,9 +889,11 @@ function rewriteNodeImpl(
       }
       const value = rewriteNode(ts, state, source);
       attributes.push({
-        // Lifted, because a prop takes `T | Client<T>` and everything written
-        // in a script is already client code: an arrow here is the handler a
-        // host would have spliced, not a host function.
+        // Lifted, all of them: everything written in a script is client code,
+        // and a prop admits it either as `Prop<T>`'s `Client` side or, for a
+        // structured one, as a `Client` of the whole. A handler admits nothing
+        // else — `Client<() => void>` has no plain form, which is what keeps a
+        // host function out of a place only client code can go.
         virtual: ts.factory.createJsxAttribute(
           ts.factory.createIdentifier(name),
           ts.factory.createJsxExpression(

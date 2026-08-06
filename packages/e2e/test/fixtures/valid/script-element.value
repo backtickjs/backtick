@@ -1,0 +1,13 @@
+<View style={{ "padding": 0 }}>
+  <View style={{ "padding": 12 }}>
+    <Text style={{ "fontSize": 12 }} onPress={[function]}>
+      {"hi"}
+    </Text>
+    <Text style={{ "fontSize": 8 }}>
+      {"fixed"}
+    </Text>
+    <Text style={{ "fontSize": 12 }} onPress={[function]}>
+      {"held"}
+    </Text>
+  </View>
+</View>

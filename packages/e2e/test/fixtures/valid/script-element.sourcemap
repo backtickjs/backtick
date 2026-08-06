@@ -1,0 +1,85 @@
+cs.lift(cs.const(                     → cs`
+(                                     → (
+__cs_size                             → size
+: number                              → : number
+) => {\n                              → ) => {\n    
+const                                 → const 
+__cs_press                            → press
+ = cs.const(                          →  = 
+() =>                                 → () => 
+cs.receiver(                          → 
+cs.splice(                            →  [-semantic]
+(label)                               → $label
+)                                     →  [-semantic]
+)                                     → 
+.                                     → .
+write                                 → write
+(                                     → (
+"held"                                → "held"
+)                                     → )
+);                                    → ;
+\n                                    → \n    
+return cs.const(                      → return 
+<View style={cs.lift(                 → (\n      <View style={
+{                                     → { 
+padding                               → padding
+:                                     → : 
+__cs_size                             → size
+ }                                    →  }
+)}>                                   → }>\n        
+<Text style={cs.lift(                 → <Text\n          style={
+{                                     → { 
+fontSize                              → fontSize
+:                                     → : 
+__cs_size                             → size
+ }                                    →  }
+)} onPress={cs.lift(                  → }\n          onPress={
+() =>                                 → () => 
+cs.receiver(                          → 
+cs.splice(                            →  [-semantic]
+(label)                               → $label
+)                                     →  [-semantic]
+)                                     → 
+.                                     → .
+write                                 → write
+(                                     → (
+"pressed"                             → "pressed"
+)                                     → )
+)}>{                                  → }\n        >\n          {
+cs.receiver(                          → 
+cs.splice(                            →  [-semantic]
+(label)                               → $label
+)                                     →  [-semantic]
+)                                     → 
+.                                     → .
+read                                  → read
+()                                    → ()
+}</Text>                              → }\n        </Text>
+<Text style={cs.lift(                 → <Text style={
+{                                     → { 
+fontSize                              → fontSize
+:                                     → : 
+8                                     → 8
+ }                                    →  }
+)}>fixed</Text>                       → }>fixed</Text>
+<Text style={cs.lift(                 → <Text style={
+{                                     → { 
+fontSize                              → fontSize
+:                                     → : 
+__cs_size                             → size
+ }                                    →  }
+)} onPress={cs.lift(                  → } onPress={
+__cs_press                            → press
+)}>\n          held\n        </Text>  → }>\n          held\n        </Text>
+</View>                               → \n      </View>\n    )
+);                                    → ;
+\n}                                   → \n  }
+))                                    → `
+cs.lift(cs.const(                     → cs`
+cs.splice(                            →  [-semantic]
+(row)                                 → $row
+)                                     →  [-semantic]
+(                                     → (
+12                                    → 12
+)                                     → )
+))                                    → `

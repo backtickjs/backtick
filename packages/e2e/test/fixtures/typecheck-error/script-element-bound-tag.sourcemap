@@ -1,0 +1,7 @@
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_Tag           → Tag
+: number           → : number
+) =>               → ) => 
+<Tag />            → <Tag />
+))                 → `
