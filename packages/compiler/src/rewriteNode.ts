@@ -850,6 +850,147 @@ function rewriteNodeImpl(
     };
   }
 
+  if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+    const opening = ts.isJsxElement(node) ? node.openingElement : node;
+    if (!ts.isIdentifier(opening.tagName)) {
+      state.errors.set(
+        opening.tagName,
+        "A `cs` client script element's tag must be a plain name.",
+      );
+      return unsupported();
+    }
+    const tagName = opening.tagName.text;
+
+    // In source order, because a host may care that `type` precedes `value`.
+    const attributes: { virtual: ts.JsxAttribute; runtime: ts.Expression }[] =
+      [];
+    for (const attribute of opening.attributes.properties) {
+      if (!ts.isJsxAttribute(attribute) || !ts.isIdentifier(attribute.name)) {
+        state.errors.set(
+          attribute,
+          "A `cs` client script element's attributes are written " +
+            "`name={...}`; `{...spread}` isn't supported.",
+        );
+        return unsupported();
+      }
+      const name = attribute.name.text;
+      const initializer = attribute.initializer;
+      // A valueless attribute is the `true` it means, so nothing downstream
+      // reads an absence.
+      const source =
+        initializer === undefined
+          ? ts.factory.createTrue()
+          : ts.isJsxExpression(initializer)
+            ? initializer.expression
+            : initializer;
+      if (source === undefined) {
+        state.errors.set(attribute, "This attribute has no value.");
+        return unsupported();
+      }
+      const value = rewriteNode(ts, state, source);
+      attributes.push({
+        // Lifted, because a prop takes `T | Client<T>` and everything written
+        // in a script is already client code: an arrow here is the handler a
+        // host would have spliced, not a host function.
+        virtual: ts.factory.createJsxAttribute(
+          ts.factory.createIdentifier(name),
+          ts.factory.createJsxExpression(
+            undefined,
+            call(ts, "cs", "lift", [value.virtual as ts.Expression]),
+          ),
+        ),
+        runtime: ts.factory.createObjectLiteralExpression(
+          [
+            ts.factory.createPropertyAssignment(
+              "name",
+              ts.factory.createStringLiteral(name),
+            ),
+            ts.factory.createPropertyAssignment(
+              "initializer",
+              value.runtime as ts.Expression,
+            ),
+          ],
+          true,
+        ),
+      });
+    }
+
+    // Whitespace-only text is dropped, as JSX drops it; what is left is text,
+    // an expression, or another element.
+    const children: ts.Expression[] = [];
+    const virtualChildren: ts.JsxChild[] = [];
+    if (ts.isJsxElement(node)) {
+      for (const child of node.children) {
+        if (ts.isJsxText(child)) {
+          if (child.containsOnlyTriviaWhiteSpaces) {
+            continue;
+          }
+          children.push(
+            astNode(ts, SyntaxKind.StringLiteral, {
+              loc: loc(child),
+              text: ts.factory.createStringLiteral(child.text.trim()),
+            }),
+          );
+          virtualChildren.push(child);
+          continue;
+        }
+        if (ts.isJsxExpression(child)) {
+          if (child.expression === undefined) {
+            continue;
+          }
+          const rewritten = rewriteNode(ts, state, child.expression);
+          children.push(rewritten.runtime as ts.Expression);
+          virtualChildren.push(
+            ts.factory.createJsxExpression(
+              undefined,
+              rewritten.virtual as ts.Expression,
+            ),
+          );
+          continue;
+        }
+        const rewritten = rewriteNode(ts, state, child);
+        children.push(rewritten.runtime as ts.Expression);
+        virtualChildren.push(rewritten.virtual as ts.JsxChild);
+      }
+    }
+
+    const written = ts.factory.createJsxAttributes(
+      attributes.map((attribute) => attribute.virtual),
+    );
+    const virtual =
+      virtualChildren.length === 0
+        ? ts.factory.createJsxSelfClosingElement(
+            ts.factory.createIdentifier(tagName),
+            undefined,
+            written,
+          )
+        : ts.factory.createJsxElement(
+            ts.factory.createJsxOpeningElement(
+              ts.factory.createIdentifier(tagName),
+              undefined,
+              written,
+            ),
+            virtualChildren,
+            ts.factory.createJsxClosingElement(
+              ts.factory.createIdentifier(tagName),
+            ),
+          );
+    state.mappings.set(virtual, node);
+
+    return {
+      virtual,
+      runtime: astNode(ts, SyntaxKind.JsxElement, {
+        loc: loc(node),
+        tagName: ts.factory.createStringLiteral(tagName),
+        attributes: ts.factory.createArrayLiteralExpression(
+          attributes.map((attribute) => attribute.runtime),
+          false,
+        ),
+        children: ts.factory.createArrayLiteralExpression(children, false),
+      }),
+    };
+  }
+
   if (ts.isCallExpression(node)) {
     // `cb?.()` — an optional call: a null callee yields null, the
     // arguments unevaluated, mirroring an optional access.

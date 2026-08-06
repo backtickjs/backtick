@@ -216,26 +216,23 @@ export async function Main() {
       <table class="table table-hover table-striped test-data">
         <tbody>
           <For each={cs`$data.read()`}>
-            {cs`(row: Row) =>
-              ${(
-                <tr class={cs`$selected.read() === row.id ? "danger" : ""`}>
-                  <td class="col-md-1">{cs`row.id`}</td>
-                  <td class="col-md-4">
-                    <a
-                      onclick={cs`() => $select(row.id)`}
-                    >{cs`row.label.read()`}</a>
-                  </td>
-                  <td class="col-md-1">
-                    <a onclick={cs`() => $remove(row.id)`}>
-                      <span
-                        class="glyphicon glyphicon-remove"
-                        aria-hidden="true"
-                      ></span>
-                    </a>
-                  </td>
-                  <td class="col-md-6"></td>
-                </tr>
-              )}`}
+            {cs`(row: Row) => (
+              <tr class={$selected.read() === row.id ? "danger" : ""}>
+                <td class="col-md-1">{row.id}</td>
+                <td class="col-md-4">
+                  <a onclick={() => $select(row.id)}>{row.label.read()}</a>
+                </td>
+                <td class="col-md-1">
+                  <a onclick={() => $remove(row.id)}>
+                    <span
+                      class="glyphicon glyphicon-remove"
+                      aria-hidden="true"
+                    ></span>
+                  </a>
+                </td>
+                <td class="col-md-6"></td>
+              </tr>
+            )`}
           </For>
         </tbody>
       </table>

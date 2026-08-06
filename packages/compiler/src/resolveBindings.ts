@@ -387,6 +387,35 @@ export function resolveBindings(
       // in scope.
       walkExpression(script, node.expression, scopes);
       walkExpression(script, node.argumentExpression, scopes);
+    } else if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+      // The tag names what the host's JSX namespace answers for, which no scope
+      // here binds. Everything written inside is ordinary client code, so an
+      // attribute's expression and an expression child resolve like any other.
+      const opening = ts.isJsxElement(node) ? node.openingElement : node;
+      for (const attribute of opening.attributes.properties) {
+        if (!ts.isJsxAttribute(attribute)) {
+          continue;
+        }
+        const initializer = attribute.initializer;
+        if (
+          initializer !== undefined &&
+          ts.isJsxExpression(initializer) &&
+          initializer.expression !== undefined
+        ) {
+          walkExpression(script, initializer.expression, scopes);
+        }
+      }
+      if (ts.isJsxElement(node)) {
+        for (const child of node.children) {
+          if (ts.isJsxExpression(child)) {
+            if (child.expression !== undefined) {
+              walkExpression(script, child.expression, scopes);
+            }
+          } else if (!ts.isJsxText(child)) {
+            walkExpression(script, child, scopes);
+          }
+        }
+      }
     } else if (ts.isCallExpression(node)) {
       walkExpression(script, node.expression, scopes);
       for (const arg of node.arguments) {
