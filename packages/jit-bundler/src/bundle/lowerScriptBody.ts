@@ -286,6 +286,8 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return [NodeKind.Builtin, node.name];
       case SyntaxKind.State:
         return [NodeKind.State, e(node.initial)];
+      case SyntaxKind.JsxElement:
+        throw new Error("An element in a client script is not lowered yet.");
       case SyntaxKind.Splice:
         return renderSplice(node.key);
       case SyntaxKind.StringLiteral:

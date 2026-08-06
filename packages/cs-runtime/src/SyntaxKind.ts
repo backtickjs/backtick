@@ -39,6 +39,7 @@ export const SyntaxKind = {
   PrefixUnaryExpression: 225,
   BinaryExpression: 227,
   ConditionalExpression: 228,
+  JsxElement: 285,
 
   // Statements and clauses
   Block: 242,

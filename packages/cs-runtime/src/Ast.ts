@@ -27,6 +27,7 @@ export type ClientScriptExpression =
   | ClientScriptSplice
   | ClientScriptBuiltin
   | ClientScriptState
+  | ClientScriptJsxElement
   | ClientScriptStringLiteral
   | ClientScriptConditionalExpression;
 
@@ -258,6 +259,32 @@ export interface ClientScriptSplice {
   readonly kind: typeof SyntaxKind.Splice;
   readonly loc: SourceLocation;
   readonly key: string;
+}
+
+// `<tr class={…}>{…}</tr>`: an element the script builds where it stands. Its
+// children are its own, in source order, and an attribute's initializer is an
+// expression like any other — so a name written inside one resolves against the
+// script's scopes, not the host's.
+//
+// One node where TypeScript has two: `ts.JsxSelfClosingElement` exists because
+// that AST keeps the syntax, and `<td />` and `<td></td>` are the same element
+// here. The fields are the opening tag's, in its order, and then the children
+// `ts.JsxElement` carries.
+export interface ClientScriptJsxElement {
+  readonly kind: typeof SyntaxKind.JsxElement;
+  readonly loc: SourceLocation;
+  readonly tagName: string;
+  readonly attributes: readonly ClientScriptJsxAttribute[];
+  readonly children: readonly ClientScriptExpression[];
+}
+
+// Not a node: an attribute stands only where an element's opening tag admits
+// one, the way a parameter stands only in a parameter list. Its initializer is
+// required where `ts.JsxAttribute` leaves it optional — a valueless `disabled`
+// is written as the `true` it means, so nothing downstream reads an absence.
+export interface ClientScriptJsxAttribute {
+  readonly name: string;
+  readonly initializer: ClientScriptExpression;
 }
 
 // `state(initial)`: storage the script declares, one per evaluation. The
