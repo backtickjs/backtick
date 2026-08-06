@@ -412,6 +412,14 @@
       "keyed": true,
       "dir": "shape-spliced",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "working",
+      "label": "script jsx + shape",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "jsx-shape",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
