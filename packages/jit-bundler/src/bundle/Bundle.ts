@@ -136,6 +136,14 @@ export type BundleElement = [
   // What the bundler writes here is composition rather than computation — data,
   // an element, or an entry applied. Nothing in the type says so.
   props: { [prop: string]: BundleExpressionNode },
+  // What the element draws inside itself, in its own slot rather than under a
+  // prop named `children`. A slot because that is what the rest of this format
+  // is: a reader takes children by position, where a reserved key has to be
+  // looked up by name and kept out of the props every other reader walks.
+  //
+  // `null` is no children, which a child evaluating to `null` also draws —
+  // nothing either way, so the two need not be told apart.
+  children: BundleExpressionNode,
 ];
 
 // Applies an entry, named by label. A `call` evaluates a callee node instead,

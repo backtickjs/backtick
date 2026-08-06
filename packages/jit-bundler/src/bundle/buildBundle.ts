@@ -689,10 +689,16 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     params: ReadonlySet<string>,
   ): BundleElement => {
     const props: { [key: string]: BundleExpressionNode } = {};
+    let children: BundleExpressionNode = null;
     for (const [key, entry] of Object.entries(element.props)) {
-      props[key] = renderExpr(entry, scope, params);
+      const rendered = renderExpr(entry, scope, params);
+      if (key === "children") {
+        children = rendered;
+        continue;
+      }
+      props[key] = rendered;
     }
-    return [NodeKind.Element, element.id, props];
+    return [NodeKind.Element, element.id, props, children];
   };
 
   // Renders an IR argument in expression position — the form used inside tree

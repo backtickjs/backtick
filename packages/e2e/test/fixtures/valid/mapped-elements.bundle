@@ -7,34 +7,30 @@
         [
           0,
           "View",
-          {
-            "children": [
-              4,
+          {},
+          [
+            4,
+            [
               [
-                [
-                  0,
-                  "Text",
-                  {
-                    "children": "alpha"
-                  }
-                ],
-                [
-                  0,
-                  "Text",
-                  {
-                    "children": "beta"
-                  }
-                ],
-                [
-                  0,
-                  "Text",
-                  {
-                    "children": "gamma"
-                  }
-                ]
+                0,
+                "Text",
+                {},
+                "alpha"
+              ],
+              [
+                0,
+                "Text",
+                {},
+                "beta"
+              ],
+              [
+                0,
+                "Text",
+                {},
+                "gamma"
               ]
             ]
-          }
+          ]
         ]
       ]
     ]

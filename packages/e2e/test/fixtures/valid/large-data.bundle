@@ -263,18 +263,17 @@
         [
           0,
           "Text",
-          {
-            "children": [
-              2,
-              "7",
+          {},
+          [
+            2,
+            "7",
+            [
               [
-                [
-                  1000,
-                  "item"
-                ]
+                1000,
+                "item"
               ]
             ]
-          }
+          ]
         ]
       ]
     ],
@@ -290,120 +289,117 @@
         [
           0,
           "View",
-          {
-            "children": [
-              4,
+          {},
+          [
+            4,
+            [
               [
+                0,
+                "Image",
+                {
+                  "source": {
+                    "uri": [
+                      2,
+                      "2",
+                      [
+                        [
+                          1000,
+                          "order"
+                        ]
+                      ]
+                    ]
+                  }
+                },
+                null
+              ],
+              [
+                0,
+                "Text",
+                {},
                 [
-                  0,
-                  "Image",
-                  {
-                    "source": {
-                      "uri": [
+                  2,
+                  "3",
+                  [
+                    [
+                      1000,
+                      "order"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                0,
+                "Text",
+                {},
+                [
+                  2,
+                  "4",
+                  [
+                    [
+                      1000,
+                      "order"
+                    ]
+                  ]
+                ]
+              ],
+              [
+                0,
+                "For",
+                {
+                  "each": [
+                    2,
+                    "5",
+                    [
+                      [
+                        1000,
+                        "order"
+                      ]
+                    ]
+                  ]
+                },
+                [
+                  2,
+                  "6",
+                  [
+                    [
+                      1005,
+                      [
+                        [
+                          1018,
+                          "item"
+                        ]
+                      ],
+                      [
                         2,
-                        "2",
+                        "9",
                         [
                           [
                             1000,
-                            "order"
-                          ]
-                        ]
-                      ]
-                    }
-                  }
-                ],
-                [
-                  0,
-                  "Text",
-                  {
-                    "children": [
-                      2,
-                      "3",
-                      [
-                        [
-                          1000,
-                          "order"
-                        ]
-                      ]
-                    ]
-                  }
-                ],
-                [
-                  0,
-                  "Text",
-                  {
-                    "children": [
-                      2,
-                      "4",
-                      [
-                        [
-                          1000,
-                          "order"
-                        ]
-                      ]
-                    ]
-                  }
-                ],
-                [
-                  0,
-                  "For",
-                  {
-                    "each": [
-                      2,
-                      "5",
-                      [
-                        [
-                          1000,
-                          "order"
-                        ]
-                      ]
-                    ],
-                    "children": [
-                      2,
-                      "6",
-                      [
-                        [
-                          1005,
-                          [
-                            [
-                              1018,
-                              "item"
-                            ]
-                          ],
-                          [
-                            2,
-                            "9",
-                            [
-                              [
-                                1000,
-                                "item"
-                              ]
-                            ]
+                            "item"
                           ]
                         ]
                       ]
                     ]
-                  }
-                ],
+                  ]
+                ]
+              ],
+              [
+                0,
+                "Text",
+                {},
                 [
-                  0,
-                  "Text",
-                  {
-                    "children": [
-                      2,
-                      "8",
-                      [
-                        [
-                          1000,
-                          "order"
-                        ]
-                      ]
+                  2,
+                  "8",
+                  [
+                    [
+                      1000,
+                      "order"
                     ]
-                  }
+                  ]
                 ]
               ]
             ]
-          }
+          ]
         ]
       ]
     ],
@@ -414,159 +410,158 @@
         [
           0,
           "View",
-          {
-            "children": [
-              0,
-              "For",
-              {
-                "each": [
-                  2,
-                  "0",
+          {},
+          [
+            0,
+            "For",
+            {
+              "each": [
+                2,
+                "0",
+                [
                   [
+                    1005,
+                    [],
                     [
-                      1005,
-                      [],
+                      4,
                       [
-                        4,
-                        [
-                          {
-                            "id": "ord-1000",
-                            "customer": {
-                              "name": "Customer 0",
-                              "city": "Montréal"
-                            },
-                            "items": [
-                              4,
-                              [
-                                {
-                                  "sku": "SKU-0-A",
-                                  "qty": 1
-                                },
-                                {
-                                  "sku": "SKU-0-B",
-                                  "qty": 1
-                                }
-                              ]
-                            ],
-                            "total": 45.23
+                        {
+                          "id": "ord-1000",
+                          "customer": {
+                            "name": "Customer 0",
+                            "city": "Montréal"
                           },
-                          {
-                            "id": "ord-1001",
-                            "customer": {
-                              "name": "Customer 1",
-                              "city": "Toronto"
-                            },
-                            "items": [
-                              4,
-                              [
-                                {
-                                  "sku": "SKU-1-A",
-                                  "qty": 2
-                                },
-                                {
-                                  "sku": "SKU-1-B",
-                                  "qty": 1
-                                }
-                              ]
-                            ],
-                            "total": 46.23
+                          "items": [
+                            4,
+                            [
+                              {
+                                "sku": "SKU-0-A",
+                                "qty": 1
+                              },
+                              {
+                                "sku": "SKU-0-B",
+                                "qty": 1
+                              }
+                            ]
+                          ],
+                          "total": 45.23
+                        },
+                        {
+                          "id": "ord-1001",
+                          "customer": {
+                            "name": "Customer 1",
+                            "city": "Toronto"
                           },
-                          {
-                            "id": "ord-1002",
-                            "customer": {
-                              "name": "Customer 2",
-                              "city": "Montréal"
-                            },
-                            "items": [
-                              4,
-                              [
-                                {
-                                  "sku": "SKU-2-A",
-                                  "qty": 3
-                                },
-                                {
-                                  "sku": "SKU-2-B",
-                                  "qty": 1
-                                }
-                              ]
-                            ],
-                            "total": 47.23
+                          "items": [
+                            4,
+                            [
+                              {
+                                "sku": "SKU-1-A",
+                                "qty": 2
+                              },
+                              {
+                                "sku": "SKU-1-B",
+                                "qty": 1
+                              }
+                            ]
+                          ],
+                          "total": 46.23
+                        },
+                        {
+                          "id": "ord-1002",
+                          "customer": {
+                            "name": "Customer 2",
+                            "city": "Montréal"
                           },
-                          {
-                            "id": "ord-1003",
-                            "customer": {
-                              "name": "Customer 3",
-                              "city": "Toronto"
-                            },
-                            "items": [
-                              4,
-                              [
-                                {
-                                  "sku": "SKU-3-A",
-                                  "qty": 1
-                                },
-                                {
-                                  "sku": "SKU-3-B",
-                                  "qty": 1
-                                }
-                              ]
-                            ],
-                            "total": 48.23
+                          "items": [
+                            4,
+                            [
+                              {
+                                "sku": "SKU-2-A",
+                                "qty": 3
+                              },
+                              {
+                                "sku": "SKU-2-B",
+                                "qty": 1
+                              }
+                            ]
+                          ],
+                          "total": 47.23
+                        },
+                        {
+                          "id": "ord-1003",
+                          "customer": {
+                            "name": "Customer 3",
+                            "city": "Toronto"
                           },
-                          {
-                            "id": "ord-1004",
-                            "customer": {
-                              "name": "Customer 4",
-                              "city": "Montréal"
-                            },
-                            "items": [
-                              4,
-                              [
-                                {
-                                  "sku": "SKU-4-A",
-                                  "qty": 2
-                                },
-                                {
-                                  "sku": "SKU-4-B",
-                                  "qty": 1
-                                }
-                              ]
-                            ],
-                            "total": 49.23
-                          }
-                        ]
-                      ]
-                    ]
-                  ]
-                ],
-                "children": [
-                  2,
-                  "1",
-                  [
-                    [
-                      1005,
-                      [
-                        [
-                          1018,
-                          "order"
-                        ]
-                      ],
-                      [
-                        2,
-                        "10",
-                        [
-                          [
-                            1000,
-                            "order"
-                          ]
-                        ]
+                          "items": [
+                            4,
+                            [
+                              {
+                                "sku": "SKU-3-A",
+                                "qty": 1
+                              },
+                              {
+                                "sku": "SKU-3-B",
+                                "qty": 1
+                              }
+                            ]
+                          ],
+                          "total": 48.23
+                        },
+                        {
+                          "id": "ord-1004",
+                          "customer": {
+                            "name": "Customer 4",
+                            "city": "Montréal"
+                          },
+                          "items": [
+                            4,
+                            [
+                              {
+                                "sku": "SKU-4-A",
+                                "qty": 2
+                              },
+                              {
+                                "sku": "SKU-4-B",
+                                "qty": 1
+                              }
+                            ]
+                          ],
+                          "total": 49.23
+                        }
                       ]
                     ]
                   ]
                 ]
-              }
+              ]
+            },
+            [
+              2,
+              "1",
+              [
+                [
+                  1005,
+                  [
+                    [
+                      1018,
+                      "order"
+                    ]
+                  ],
+                  [
+                    2,
+                    "10",
+                    [
+                      [
+                        1000,
+                        "order"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
             ]
-          }
+          ]
         ]
       ]
     ]

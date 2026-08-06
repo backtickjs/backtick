@@ -286,8 +286,24 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return [NodeKind.Builtin, node.name];
       case SyntaxKind.State:
         return [NodeKind.State, e(node.initial)];
-      case SyntaxKind.JsxElement:
-        throw new Error("An element in a client script is not lowered yet.");
+      // An element the script wrote, which is the node a tree entry already
+      // builds: `children` is a prop beside the rest, so what draws one draws
+      // both and nothing downstream learns a second kind of element.
+      case SyntaxKind.JsxElement: {
+        const props: { [prop: string]: BundleExpressionNode } = {};
+        for (const attribute of node.attributes) {
+          props[attribute.name] = e(attribute.initializer);
+        }
+        // One child stands on its own; several travel under a `DataArray`,
+        // which is how an array of data says it is not a node. None is `null`.
+        const children: BundleExpressionNode =
+          node.children.length === 0
+            ? null
+            : node.children.length === 1
+              ? e(node.children[0])
+              : [NodeKind.DataArray, node.children.map((child) => e(child))];
+        return [NodeKind.Element, node.tagName, props, children];
+      }
       case SyntaxKind.Splice:
         return renderSplice(node.key);
       case SyntaxKind.StringLiteral:

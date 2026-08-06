@@ -7,33 +7,29 @@
         [
           0,
           "View",
-          {
-            "children": [
-              0,
-              "Fragment",
-              {
-                "children": [
-                  4,
-                  [
-                    [
-                      0,
-                      "Text",
-                      {
-                        "children": "a"
-                      }
-                    ],
-                    [
-                      0,
-                      "Text",
-                      {
-                        "children": "b"
-                      }
-                    ]
-                  ]
+          {},
+          [
+            0,
+            "Fragment",
+            {},
+            [
+              4,
+              [
+                [
+                  0,
+                  "Text",
+                  {},
+                  "a"
+                ],
+                [
+                  0,
+                  "Text",
+                  {},
+                  "b"
                 ]
-              }
+              ]
             ]
-          }
+          ]
         ]
       ]
     ]

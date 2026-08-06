@@ -24,38 +24,39 @@
           {
             "style": {
               "padding": 8
-            },
-            "children": [
-              4,
+            }
+          },
+          [
+            4,
+            [
               [
-                [
-                  0,
-                  "Text",
-                  {
-                    "style": {
-                      "fontSize": 12
-                    },
-                    "onPress": [
-                      2,
-                      "0",
-                      []
-                    ],
-                    "children": "hi"
-                  }
-                ],
-                [
-                  0,
-                  "Image",
-                  {
-                    "source": {
-                      "uri": "https://example.com/a.png"
-                    },
-                    "resizeMode": "cover"
-                  }
-                ]
+                0,
+                "Text",
+                {
+                  "style": {
+                    "fontSize": 12
+                  },
+                  "onPress": [
+                    2,
+                    "0",
+                    []
+                  ]
+                },
+                "hi"
+              ],
+              [
+                0,
+                "Image",
+                {
+                  "source": {
+                    "uri": "https://example.com/a.png"
+                  },
+                  "resizeMode": "cover"
+                },
+                null
               ]
             ]
-          }
+          ]
         ]
       ]
     ]

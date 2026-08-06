@@ -130,15 +130,12 @@ export function compileElement(
   }
   // Every prop, in the order the element wrote them, because a host may care:
   // an `<input>` wants its `type` before its `value`.
-  const props = Object.entries(element[2])
-    .filter(([prop]) => prop !== "children")
-    .map(([prop, expr]) => {
-      const fixed = isFixed(expr);
-      return [prop, compile(instance, expr), fixed] as const;
-    });
-  const children = element[2]["children"];
-  const draw =
-    children === undefined ? null : compileChildren(instance, children);
+  const props = Object.entries(element[2]).map(([prop, expr]) => {
+    const fixed = isFixed(expr);
+    return [prop, compile(instance, expr), fixed] as const;
+  });
+  const children = element[3];
+  const draw = children === null ? null : compileChildren(instance, children);
   return (scope) => {
     const renderer = instance.renderer;
     const node = renderer.createElement(id);
@@ -231,8 +228,8 @@ function compileFragment(
   instance: Instance,
   element: BundleElement,
 ): (scope: Scope | null) => Value {
-  const children = element[2]["children"];
-  if (children === undefined) {
+  const children = element[3];
+  if (children === null) {
     return () => null;
   }
   const draw = compileChildren(instance, children);
@@ -250,10 +247,10 @@ function compileFor(
   instance: Instance,
   element: BundleElement,
 ): (scope: Scope | null) => Value {
-  const props = element[2];
-  const each = props["each"];
-  const body = props["children"];
-  if (each === undefined || body === undefined) {
+  const each = element[2]["each"];
+  // What a `For` draws is its children, which is a slot and not a prop.
+  const body = element[3];
+  if (each === undefined || body === null) {
     throw new Error("a `For` needs an `each` array and a child to draw");
   }
   const source = compile(instance, each);

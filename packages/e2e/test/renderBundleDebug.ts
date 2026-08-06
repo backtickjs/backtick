@@ -204,17 +204,16 @@ function renderBody(body: BundleBody, indent: string): string {
 function renderJsx(element: BundleElement, indent: string): string {
   const inner = `${indent}  `;
   const attributes: string[] = [];
-  let children: BundleArrayElement[] = [];
   for (const [prop, value] of Object.entries(element[2])) {
-    if (prop === "children") {
-      children =
-        Array.isArray(value) && value[0] === NodeKind.DataArray
-          ? (value[1] as BundleArrayElement[])
-          : [value];
-      continue;
-    }
     attributes.push(`${inner}${prop}={${renderNode(value, inner)}}`);
   }
+  const held = element[3];
+  const children: BundleArrayElement[] =
+    held === null
+      ? []
+      : Array.isArray(held) && held[0] === NodeKind.DataArray
+        ? (held[1] as BundleArrayElement[])
+        : [held];
   const opening =
     attributes.length === 0
       ? `<${element[1]}`
