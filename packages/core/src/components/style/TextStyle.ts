@@ -1,5 +1,6 @@
 import type { ViewStyleProps } from "./ViewStyle.js";
-import type { Color, Styled } from "./values.js";
+import type { Color } from "./Color.js";
+import type { Styled } from "./values.js";
 
 type TextStyleProps = ViewStyleProps & {
   color: Color;

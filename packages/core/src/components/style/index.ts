@@ -1,4 +1,5 @@
-export type { Color, Dimension } from "./values.js";
+export type { Color } from "./Color.js";
+export type { Dimension } from "./Dimension.js";
 export type { Transform } from "./Transform.js";
 export type { ViewStyle } from "./ViewStyle.js";
 export type { TextStyle } from "./TextStyle.js";

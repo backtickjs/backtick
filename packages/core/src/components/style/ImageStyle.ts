@@ -1,5 +1,7 @@
-import type { LayoutStyleProps } from "./layout.js";
-import type { Color, Dimension, Styled } from "./values.js";
+import type { LayoutStyleProps } from "./LayoutStyle.js";
+import type { Color } from "./Color.js";
+import type { Dimension } from "./Dimension.js";
+import type { Styled } from "./values.js";
 
 type ImageStyleProps = LayoutStyleProps & {
   backgroundColor: Color;

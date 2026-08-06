@@ -1,4 +1,4 @@
-import type { Dimension } from "./values.js";
+import type { Dimension } from "./Dimension.js";
 
 export type LayoutStyleProps = {
   flex: number;
