@@ -387,12 +387,21 @@ export function resolveBindings(
       // in scope.
       walkExpression(script, node.expression, scopes);
       walkExpression(script, node.argumentExpression, scopes);
-    } else if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
+    } else if (
+      ts.isJsxElement(node) ||
+      ts.isJsxSelfClosingElement(node) ||
+      ts.isJsxFragment(node)
+    ) {
       // The tag names what the host's JSX namespace answers for, which no scope
       // here binds. Everything written inside is ordinary client code, so an
       // attribute's expression and an expression child resolve like any other.
-      const opening = ts.isJsxElement(node) ? node.openingElement : node;
-      for (const attribute of opening.attributes.properties) {
+      // A fragment has no tag and no attributes, and its children are the same.
+      const opening = ts.isJsxFragment(node)
+        ? null
+        : ts.isJsxElement(node)
+          ? node.openingElement
+          : node;
+      for (const attribute of opening?.attributes.properties ?? []) {
         if (!ts.isJsxAttribute(attribute)) {
           continue;
         }
@@ -405,7 +414,7 @@ export function resolveBindings(
           walkExpression(script, initializer.expression, scopes);
         }
       }
-      if (ts.isJsxElement(node)) {
+      if (ts.isJsxElement(node) || ts.isJsxFragment(node)) {
         for (const child of node.children) {
           if (ts.isJsxExpression(child)) {
             if (child.expression !== undefined) {

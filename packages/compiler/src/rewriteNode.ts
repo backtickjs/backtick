@@ -217,6 +217,30 @@ export interface RewrittenNode {
 // What a script may reach without binding it.
 const BUILTINS = new Set(["Math", "Array"]);
 
+// JSX text as JSX reads it, or null where it reads as nothing. Not `trim()`:
+// the rule is per line — leading whitespace goes from every line but the first,
+// trailing from every line but the last, a line left empty drops, and what
+// remains joins with one space. So `<p>a b</p>` written across three lines is
+// `"a b"`, and the space in `<p>{x} {y}</p>` survives, where trimming would
+// take one and lose the other.
+function jsxText(text: string): string | null {
+  const lines = text.split(/\r\n|[\n\r]/);
+  const kept: string[] = [];
+  for (let at = 0; at < lines.length; at++) {
+    let line = lines[at];
+    if (at !== 0) {
+      line = line.replace(/^[\t ]+/, "");
+    }
+    if (at !== lines.length - 1) {
+      line = line.replace(/[\t ]+$/, "");
+    }
+    if (line.length > 0) {
+      kept.push(line);
+    }
+  }
+  return kept.length === 0 ? null : kept.join(" ");
+}
+
 export function rewriteNode(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -850,21 +874,38 @@ function rewriteNodeImpl(
     };
   }
 
-  if (ts.isJsxElement(node) || ts.isJsxSelfClosingElement(node)) {
-    const opening = ts.isJsxElement(node) ? node.openingElement : node;
-    if (!ts.isIdentifier(opening.tagName)) {
-      state.errors.set(
-        opening.tagName,
-        "A `cs` client script element's tag must be a plain name.",
-      );
-      return unsupported();
+  if (
+    ts.isJsxElement(node) ||
+    ts.isJsxSelfClosingElement(node) ||
+    ts.isJsxFragment(node)
+  ) {
+    // A fragment is an element named `Fragment` — what the JSX transform
+    // resolves `<>` to, and what the tree path already writes for one — so it
+    // is this case with no tag to read and no attributes to write.
+    const fragment = ts.isJsxFragment(node);
+    const opening: ts.JsxOpeningLikeElement | null = fragment
+      ? null
+      : ts.isJsxElement(node)
+        ? node.openingElement
+        : (node as ts.JsxSelfClosingElement);
+    let tagName = "Fragment";
+    let properties: readonly ts.JsxAttributeLike[] = [];
+    if (opening !== null) {
+      if (!ts.isIdentifier(opening.tagName)) {
+        state.errors.set(
+          opening.tagName,
+          "A `cs` client script element's tag must be a plain name.",
+        );
+        return unsupported();
+      }
+      tagName = opening.tagName.text;
+      properties = opening.attributes.properties;
     }
-    const tagName = opening.tagName.text;
 
     // In source order, because a host may care that `type` precedes `value`.
     const attributes: { virtual: ts.JsxAttribute; runtime: ts.Expression }[] =
       [];
-    for (const attribute of opening.attributes.properties) {
+    for (const attribute of properties) {
       if (!ts.isJsxAttribute(attribute) || !ts.isIdentifier(attribute.name)) {
         state.errors.set(
           attribute,
@@ -921,16 +962,17 @@ function rewriteNodeImpl(
     // an expression, or another element.
     const children: ts.Expression[] = [];
     const virtualChildren: ts.JsxChild[] = [];
-    if (ts.isJsxElement(node)) {
+    if (ts.isJsxElement(node) || ts.isJsxFragment(node)) {
       for (const child of node.children) {
         if (ts.isJsxText(child)) {
-          if (child.containsOnlyTriviaWhiteSpaces) {
+          const text = jsxText(child.text);
+          if (text === null) {
             continue;
           }
           children.push(
             astNode(ts, SyntaxKind.StringLiteral, {
               loc: loc(child),
-              text: ts.factory.createStringLiteral(child.text.trim()),
+              text: ts.factory.createStringLiteral(text),
             }),
           );
           virtualChildren.push(child);
@@ -959,8 +1001,13 @@ function rewriteNodeImpl(
     const written = ts.factory.createJsxAttributes(
       attributes.map((attribute) => attribute.virtual),
     );
-    const virtual =
-      virtualChildren.length === 0
+    const virtual = fragment
+      ? ts.factory.createJsxFragment(
+          ts.factory.createJsxOpeningFragment(),
+          virtualChildren,
+          ts.factory.createJsxJsxClosingFragment(),
+        )
+      : virtualChildren.length === 0
         ? ts.factory.createJsxSelfClosingElement(
             ts.factory.createIdentifier(tagName),
             undefined,

@@ -1,0 +1,10 @@
+<View>
+  <Text>
+    {"a sentence across lines"}
+  </Text>
+  <Text>
+    {"x"}
+    {" "}
+    {"x"}
+  </Text>
+</View>

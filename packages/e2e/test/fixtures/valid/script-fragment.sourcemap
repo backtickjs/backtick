@@ -1,0 +1,22 @@
+cs.lift(cs.const(                     → cs`
+(                                     → (
+__cs_name                             → name
+: string                              → : string
+) =>                                  → ) => 
+<>                                    → (\n  <>\n    
+<Text>a sentence across lines</Text>  → <Text>a sentence across lines</Text>
+<Text>{                               → <Text>\n      {
+__cs_name                             → name
+} {                                   → } {
+__cs_name                             → name
+}</Text>                              → }\n    </Text>
+</>                                   → \n  </>\n)
+))                                    → `
+cs.lift(cs.const(                     → cs`
+cs.splice(                            →  [-semantic]
+(listed)                              → $listed
+)                                     →  [-semantic]
+(                                     → (
+"x"                                   → "x"
+)                                     → )
+))                                    → `
