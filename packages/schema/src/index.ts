@@ -1,3 +1,5 @@
+export { schema } from "./build.js";
+export type { Declared } from "./build.js";
 export type {
   SchemaChildren,
   SchemaDocument,
