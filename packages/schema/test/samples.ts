@@ -60,7 +60,6 @@ export const web: SchemaDocument = {
       },
       children: "none",
     },
-    Fragment: { extends: [], properties: {}, children: "content" },
   },
 };
 

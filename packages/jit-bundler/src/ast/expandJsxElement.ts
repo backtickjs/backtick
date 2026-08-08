@@ -1,26 +1,22 @@
 import {
   isClientElement,
   isFor,
+  isFragment,
   type JsxElement,
   isSpliceable,
 } from "@backtickjs/cs-runtime";
 import { withInstance } from "../Instance.js";
-import type { Ast, AstElement, AstFor, AstInstance } from "./Ast.js";
+import type { Ast, AstFor, AstInstance } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the expansion
 // instead of racing into duplicate subtrees (see `lowerClientObject`).
-const nodeByElement = new WeakMap<
-  JsxElement,
-  Promise<AstInstance | AstElement | AstFor>
->();
+const nodeByElement = new WeakMap<JsxElement, Promise<Ast>>();
 
 // Runs the element's component and lowers what it names. The component itself
 // never leaves the host: a server component expands away here, and only the
 // client component it bottoms out in reaches the bundle.
-export function expandJsxElement(
-  value: JsxElement,
-): Promise<AstInstance | AstElement | AstFor> {
+export function expandJsxElement(value: JsxElement): Promise<Ast> {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;
@@ -30,13 +26,20 @@ export function expandJsxElement(
   return node;
 }
 
-async function buildElement(
-  jsx: JsxElement,
-): Promise<AstInstance | AstElement | AstFor> {
+async function buildElement(jsx: JsxElement): Promise<Ast> {
   const type = jsx.type;
 
   if (isFor(type)) {
     return buildFor(jsx);
+  }
+
+  // A fragment lowers to what it held: its children go where it stood, which is
+  // what a list of them already means. Nothing of it reaches the client.
+  if (isFragment(type)) {
+    const children = jsx.props["children"];
+    return children === undefined
+      ? { kind: "AstNull" }
+      : lowerSpliceable(children as never, "ClientValue");
   }
 
   if (isClientElement(type)) {

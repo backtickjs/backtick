@@ -33,15 +33,9 @@ const listed = cs.create(
       },
     ],
     body: {
-      kind: 285,
+      kind: 210,
       loc: [10, 3, 15, 6],
-      tagName: {
-        kind: 11,
-        loc: [10, 3, 15, 6],
-        text: "Fragment",
-      },
-      attributes: [],
-      children: [
+      elements: [
         {
           kind: 285,
           loc: [11, 5, 11, 41],

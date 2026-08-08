@@ -1,6 +1,6 @@
 import {
-  type ClientElement,
-  createClientElement,
+  createFragment,
+  type Fragment as FragmentTag,
 } from "@backtickjs/cs-runtime";
 import type { Content } from "./elements.js";
 
@@ -9,11 +9,11 @@ import type { Content } from "./elements.js";
  *
  * The web's fragment, declared here rather than shared: what it may hold is
  * what this target's elements are — tags and text — and another target's
- * fragment holds that target's. The id is the part they agree on.
+ * fragment holds that target's. The brand is the part they agree on.
  */
 export type FragmentProps = {
   children?: Content;
 };
 
-export const Fragment: ClientElement<FragmentProps> =
-  createClientElement("Fragment");
+export const Fragment: FragmentTag<FragmentProps> =
+  createFragment<FragmentProps>();

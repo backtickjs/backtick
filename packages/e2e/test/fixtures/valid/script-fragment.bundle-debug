@@ -1,15 +1,15 @@
 #f0 = ($0) => $0()("x")
 
-#f1 = () => (name) => <Fragment>
-  {<Text>
+#f1 = () => (name) => [
+  <Text>
     {"a sentence across lines"}
-  </Text>}
-  {<Text>
+  </Text>,
+  <Text>
     {name}
     {" "}
     {name}
-  </Text>}
-</Fragment>
+  </Text>
+]
 
 #f2 = () => <View>
   {#f0(#f1)}

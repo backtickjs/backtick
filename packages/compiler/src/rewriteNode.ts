@@ -879,16 +879,15 @@ function rewriteNodeImpl(
     ts.isJsxSelfClosingElement(node) ||
     ts.isJsxFragment(node)
   ) {
-    // A fragment is an element named `Fragment` — what the JSX transform
-    // resolves `<>` to, and what the tree path already writes for one — so it
-    // is this case with no tag to read and no attributes to write.
+    // A fragment has no tag to read and no attributes to write: it lowers to
+    // its children, so only they are rewritten.
     const fragment = ts.isJsxFragment(node);
     const opening: ts.JsxOpeningLikeElement | null = fragment
       ? null
       : ts.isJsxElement(node)
         ? node.openingElement
         : (node as ts.JsxSelfClosingElement);
-    let tagName = "Fragment";
+    let tagName = "";
     let properties: readonly ts.JsxAttributeLike[] = [];
     if (opening !== null) {
       if (!ts.isIdentifier(opening.tagName)) {
@@ -1025,6 +1024,24 @@ function rewriteNodeImpl(
             ),
           );
     state.mappings.set(virtual, node);
+
+    // A fragment is its children: they go where it stood, and a list of them
+    // already says that, so nothing of it reaches the client.
+    if (fragment) {
+      return {
+        virtual,
+        runtime:
+          children.length === 1
+            ? children[0]
+            : astNode(ts, SyntaxKind.ArrayLiteralExpression, {
+                loc: loc(node),
+                elements: ts.factory.createArrayLiteralExpression(
+                  children,
+                  false,
+                ),
+              }),
+      };
+    }
 
     return {
       virtual,

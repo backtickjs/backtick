@@ -226,16 +226,10 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // What to scan for an entry's needs: an element contributes its key and its
   // props — a key may be a script, so it captures like any other value — and a
   // reference contributes itself, so the inner entry's params thread through.
-  const contentValues = (
-    content: IrElement | IrFor | IrTreeRef | null,
-  ): IrArgument[] =>
-    content === null
-      ? [] // renders nothing, so there is no wiring to thread
-      : content.kind === "IrElement"
-        ? Object.values(content.props)
-        : content.kind === "IrFor"
-          ? [content.each, content.children]
-          : [content];
+  // What an entry's wiring has to reach: whatever it draws, since `freeCaps` is
+  // exhaustive over every kind that could be. Empty when it draws nothing.
+  const contentValues = (content: IrArgument | null): IrArgument[] =>
+    content === null ? [] : [content];
 
   // Whether a cell's storage lives in this entry. A cell sits in the entry that
   // holds it, so ownership is a lookup rather than something to infer from
@@ -571,31 +565,12 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       treeJsons.set(target, treeEntry(names, bindings, null));
       return;
     }
-    if (content.kind === "IrElement") {
-      treeJsons.set(
-        target,
-        treeEntry(names, bindings, renderElement(content, scope, new Set())),
-      );
-      return;
-    }
-    if (content.kind === "IrFor") {
-      treeJsons.set(
-        target,
-        treeEntry(names, bindings, renderFor(content, scope, new Set())),
-      );
-      return;
-    }
-    // An instance that draws another instance: applying the inner entry,
-    // passing whatever its parameters need from this one's.
-    materializeTree(content.target);
-    const args = treeParams(content.target).map((key) => capExpr(key, scope));
+    // Whatever it draws, rendered as any other value in tree position is: an
+    // element inline, an inner instance applied, a fragment's children as the
+    // list they are.
     treeJsons.set(
       target,
-      treeEntry(names, bindings, [
-        NodeKind.ApplyFunction,
-        treeLabel(content.target),
-        args,
-      ]),
+      treeEntry(names, bindings, renderExpr(content, scope, new Set())),
     );
   };
 

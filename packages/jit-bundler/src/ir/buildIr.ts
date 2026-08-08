@@ -150,14 +150,7 @@ class IrBuilder {
     };
     this.treeByInstance.set(instance, tree);
     const child = instance.child;
-    tree.content =
-      child === null
-        ? null
-        : child.kind === "AstInstance"
-          ? this.referenceInstance(child)
-          : child.kind === "AstFor"
-            ? this.lowerFor(child)
-            : this.lowerElement(child);
+    tree.content = child === null ? null : this.lowerInTree(child);
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
       target: this.trees.length,

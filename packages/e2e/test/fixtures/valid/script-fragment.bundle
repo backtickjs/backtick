@@ -40,34 +40,29 @@
             ]
           ],
           [
-            0,
-            "Fragment",
-            {},
+            4,
             [
-              4,
               [
+                0,
+                "Text",
+                {},
+                "a sentence across lines"
+              ],
+              [
+                0,
+                "Text",
+                {},
                 [
-                  0,
-                  "Text",
-                  {},
-                  "a sentence across lines"
-                ],
-                [
-                  0,
-                  "Text",
-                  {},
+                  4,
                   [
-                    4,
                     [
-                      [
-                        1000,
-                        "name"
-                      ],
-                      " ",
-                      [
-                        1000,
-                        "name"
-                      ]
+                      1000,
+                      "name"
+                    ],
+                    " ",
+                    [
+                      1000,
+                      "name"
                     ]
                   ]
                 ]

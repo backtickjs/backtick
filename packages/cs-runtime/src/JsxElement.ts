@@ -1,13 +1,18 @@
 import type { ClientElement } from "./ClientElement.js";
 import type { For } from "./For.js";
+import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 /**
  * What a JSX tag names: an element to draw, a component to run while bundling,
- * or the one list. Said once, because a host element and one a client script
- * writes both reach for it.
+ * or one of the two that arrange rather than draw. Said once, because a host
+ * element and one a client script writes both reach for it.
  */
-export type JsxType = ClientElement<never> | ServerComponent<never> | For;
+export type JsxType =
+  | ClientElement<never>
+  | ServerComponent<never>
+  | For
+  | Fragment<never>;
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it.

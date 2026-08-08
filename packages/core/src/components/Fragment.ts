@@ -1,7 +1,7 @@
 import {
   type Children,
-  type ClientElement,
-  createClientElement,
+  createFragment,
+  type Fragment as FragmentTag,
 } from "@backtickjs/cs-runtime";
 import type { JSX } from "../jsx-runtime/index.js";
 
@@ -15,8 +15,8 @@ export type FragmentProps = {
 /**
  * This vocabulary's fragment. Every target declares its own, because what a
  * fragment may hold is whatever that target's elements are. What they agree on
- * is the id: a client answers to `"Fragment"` whichever target sent it, so the
- * word is the same in every target that has one.
+ * is the brand, which is what makes one recognizable while bundling — nothing
+ * of it reaches a client, since its children go where it stood.
  */
-export const Fragment: ClientElement<FragmentProps> =
-  createClientElement("Fragment");
+export const Fragment: FragmentTag<FragmentProps> =
+  createFragment<FragmentProps>();

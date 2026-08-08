@@ -44,7 +44,7 @@ export interface IrTreeEntry {
   // Written after the entry exists, like `AstInstance.child`: the entry is
   // minted before its subtree is lowered, because a cell interned down there
   // has to land in the entry its component became.
-  content: IrElement | IrFor | IrTreeRef | null;
+  content: IrArgument | null;
   // The cells this instance declares, each under the number its references
   // carry (`IrStateRef.target`) and holding the cell's initial value.
   // Instantiating the entry allocates storage for each, so ownership is where a

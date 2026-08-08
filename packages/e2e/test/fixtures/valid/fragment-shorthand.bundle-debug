@@ -1,12 +1,10 @@
 #f0 = () => <View>
-  {<Fragment>
-    {<Text>
-      {"a"}
-    </Text>}
-    {<Text>
-      {"b"}
-    </Text>}
-  </Fragment>}
+  {<Text>
+    {"a"}
+  </Text>}
+  {<Text>
+    {"b"}
+  </Text>}
 </View>
 
 root = #f0()

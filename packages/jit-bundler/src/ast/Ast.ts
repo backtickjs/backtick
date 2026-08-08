@@ -72,7 +72,9 @@ export interface AstFor {
 // component declares, so it can't depend on how often the component is named.
 export interface AstInstance {
   readonly kind: "AstInstance";
-  child: AstInstance | AstElement | AstFor | null;
+  // Whatever the component drew, which a fragment makes as wide as a value:
+  // `<>…</>` is its children, so an instance may hold a list of them.
+  child: Ast | null;
 }
 
 // A spliced class's bundle-time expansion: the spliceable the constructor

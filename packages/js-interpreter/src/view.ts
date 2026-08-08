@@ -120,12 +120,6 @@ export function compileElement(
   element: BundleElement,
 ): (scope: Scope | null) => Value {
   const id = element[1];
-  // The one element every target has and no target draws: its children go
-  // where it stands. Recognized by the id they agree on, where a list — the
-  // other thing that draws no node — has a kind of its own.
-  if (id === "Fragment") {
-    return compileFragment(instance, element);
-  }
   // Every prop, in the order the element wrote them, because a host may care:
   // an `<input>` wants its `type` before its `value`.
   const props = Object.entries(element[2]).map(([prop, expr]) => {
@@ -217,21 +211,6 @@ function compileChildren(
     return (scope) => read(scope);
   }
   return (scope) => () => read(scope);
-}
-
-/**
- * A fragment: its children where it stands, and no node of its own.
- */
-function compileFragment(
-  instance: Instance,
-  element: BundleElement,
-): (scope: Scope | null) => Value {
-  const children = element[3];
-  if (children === null) {
-    return () => null;
-  }
-  const draw = compileChildren(instance, children);
-  return (scope) => draw(scope) as Value;
 }
 
 /**
