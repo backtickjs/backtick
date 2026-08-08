@@ -6,7 +6,7 @@ import type { SchemaDocument } from "@backtickjs/schema";
 // document comes back out of it.
 
 // An interface extending two interfaces, a union of primitives, a void element,
-// and a handler.
+// and a function.
 export const web: SchemaDocument = {
   name: "web",
   types: {
@@ -20,45 +20,99 @@ export const web: SchemaDocument = {
       properties: {
         // ARIA reads the words, so this is not the present-or-absent kind of
         // boolean an HTML attribute is.
-        "aria-busy": { kind: "enum", values: ["true", "false"] },
-        "aria-label": { kind: "string" },
-        role: { kind: "reference", name: "ariaRole" },
+        "aria-busy": {
+          type: { kind: "enum", values: ["true", "false"] },
+          optional: true,
+          description: null,
+        },
+        "aria-label": {
+          type: { kind: "string" },
+          optional: true,
+          description: null,
+        },
+        role: {
+          type: { kind: "reference", name: "ariaRole" },
+          optional: true,
+          description: null,
+        },
       },
     },
     events: {
       kind: "interface",
       extends: [],
       properties: {
-        onclick: { kind: "handler", params: [] },
-        oninput: { kind: "handler", params: [] },
+        onclick: {
+          type: { kind: "function", params: [], returns: { kind: "void" } },
+          optional: true,
+          description: null,
+        },
+        oninput: {
+          type: { kind: "function", params: [], returns: { kind: "void" } },
+          optional: true,
+          description: null,
+        },
       },
     },
     globalAttributes: {
       kind: "interface",
       extends: ["ariaAttributes", "events"],
       properties: {
-        class: { kind: "string" },
-        hidden: { kind: "boolean" },
-        id: { kind: "string" },
+        class: { type: { kind: "string" }, optional: true, description: null },
+        hidden: {
+          type: { kind: "boolean" },
+          optional: true,
+          description: null,
+        },
+        id: { type: { kind: "string" }, optional: true, description: null },
       },
     },
   },
   elements: {
-    br: { extends: ["globalAttributes"], properties: {}, children: "none" },
-    div: { extends: ["globalAttributes"], properties: {}, children: "content" },
+    br: {
+      extends: ["globalAttributes"],
+      properties: {},
+      children: "none",
+      description: null,
+    },
+    div: {
+      extends: ["globalAttributes"],
+      properties: {},
+      children: "content",
+      description: null,
+    },
     input: {
       extends: ["globalAttributes"],
       properties: {
-        disabled: { kind: "boolean" },
-        name: { kind: "string" },
+        disabled: {
+          type: { kind: "boolean" },
+          optional: true,
+          description: null,
+        },
+        // The one property either vocabulary would call required: an input
+        // without a name submits nothing.
+        name: {
+          type: { kind: "string" },
+          optional: false,
+          description:
+            "Submitted with the form; an input without one submits nothing.",
+        },
         type: {
-          kind: "enum",
-          values: ["text", "number", "checkbox", "radio"],
+          type: {
+            kind: "enum",
+            values: ["text", "number", "checkbox", "radio"],
+          },
+          optional: true,
+          description: null,
         },
         // A size is logical pixels or a percentage, and HTML takes either.
-        value: { kind: "union", of: [{ kind: "string" }, { kind: "number" }] },
+        value: {
+          type: { kind: "union", of: [{ kind: "string" }, { kind: "number" }] },
+          optional: true,
+          description: null,
+        },
       },
       children: "none",
+      description: null,
     },
   },
 };
@@ -81,17 +135,35 @@ export const portable: SchemaDocument = {
         {
           kind: "object",
           includes: [],
-          properties: { translateX: { kind: "number" } },
+          properties: {
+            translateX: {
+              type: { kind: "number" },
+              optional: true,
+              description: null,
+            },
+          },
         },
         {
           kind: "object",
           includes: [],
-          properties: { translateY: { kind: "number" } },
+          properties: {
+            translateY: {
+              type: { kind: "number" },
+              optional: true,
+              description: null,
+            },
+          },
         },
         {
           kind: "object",
           includes: [],
-          properties: { rotate: { kind: "string" } },
+          properties: {
+            rotate: {
+              type: { kind: "string" },
+              optional: true,
+              description: null,
+            },
+          },
         },
       ],
     },
@@ -99,20 +171,41 @@ export const portable: SchemaDocument = {
       kind: "object",
       includes: [],
       properties: {
-        height: { kind: "reference", name: "dimension" },
-        padding: { kind: "reference", name: "dimension" },
-        width: { kind: "reference", name: "dimension" },
+        height: {
+          type: { kind: "reference", name: "dimension" },
+          optional: true,
+          description: null,
+        },
+        padding: {
+          type: { kind: "reference", name: "dimension" },
+          optional: true,
+          description: null,
+        },
+        width: {
+          type: { kind: "reference", name: "dimension" },
+          optional: true,
+          description: null,
+        },
       },
     },
     viewStyle: {
       kind: "object",
       includes: ["layoutStyle"],
       properties: {
-        backgroundColor: { kind: "reference", name: "color" },
-        opacity: { kind: "number" },
+        backgroundColor: {
+          type: { kind: "reference", name: "color" },
+          optional: true,
+          description: null,
+        },
+        opacity: {
+          type: { kind: "number" },
+          optional: true,
+          description: null,
+        },
         transform: {
-          kind: "list",
-          of: { kind: "reference", name: "transform" },
+          type: { kind: "list", of: { kind: "reference", name: "transform" } },
+          optional: true,
+          description: null,
         },
       },
     },
@@ -121,22 +214,49 @@ export const portable: SchemaDocument = {
     Text: {
       extends: [],
       properties: {
-        // Numbers rather than `dimension`s: a union of primitives cannot
-        // stand in a parameter list.
+        // A callback handed something, where the web's are handed nothing: the
+        // target decides what its clients pass back.
+        //
+        // Numbers rather than `dimension`s: a union of primitives cannot stand
+        // in a parameter list.
         onLayout: {
-          kind: "handler",
-          params: [{ kind: "number" }, { kind: "number" }],
+          type: {
+            kind: "function",
+            params: [
+              { name: "width", type: { kind: "number" }, nullable: false },
+              { name: "height", type: { kind: "number" }, nullable: true },
+            ],
+            returns: { kind: "void" },
+          },
+          optional: true,
+          description: null,
         },
-        onPress: { kind: "handler", params: [] },
-        style: { kind: "reference", name: "viewStyle" },
-        testID: { kind: "string" },
+        onPress: {
+          type: { kind: "function", params: [], returns: { kind: "void" } },
+          optional: true,
+          description: null,
+        },
+        style: {
+          type: { kind: "reference", name: "viewStyle" },
+          optional: true,
+          description: null,
+        },
+        testID: { type: { kind: "string" }, optional: true, description: null },
       },
       children: "text",
+      description: null,
     },
     View: {
       extends: [],
-      properties: { style: { kind: "reference", name: "viewStyle" } },
+      properties: {
+        style: {
+          type: { kind: "reference", name: "viewStyle" },
+          optional: true,
+          description: null,
+        },
+      },
       children: "elements",
+      description: null,
     },
   },
 };

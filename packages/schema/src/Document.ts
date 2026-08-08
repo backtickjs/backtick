@@ -22,6 +22,8 @@ export interface SchemaElement {
   readonly extends: readonly string[];
   readonly properties: SchemaProperties;
   readonly children: SchemaChildren;
+  /** What a generated class's doc comment reads, or `null`. */
+  readonly description: string | null;
 }
 
 // What an element may hold: nothing (a void element), a string, elements, or

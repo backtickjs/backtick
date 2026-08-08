@@ -17,17 +17,17 @@ const ariaRole = schema.enum({ name: "ariaRole", values: AriaRole });
 const ariaAttributes = schema.interface({
   name: "ariaAttributes",
   properties: {
-    "aria-busy": schema.enum({ values: ["true", "false"] }),
-    "aria-label": schema.string(),
-    role: ariaRole,
+    "aria-busy": schema.enum({ values: ["true", "false"] }).optional(),
+    "aria-label": schema.string().optional(),
+    role: ariaRole.optional(),
   },
 });
 
 const events = schema.interface({
   name: "events",
   properties: {
-    onclick: schema.handler(),
-    oninput: schema.handler(),
+    onclick: schema.function().optional(),
+    oninput: schema.function().optional(),
   },
 });
 
@@ -38,9 +38,9 @@ const globalAttributes = schema.interface({
   name: "globalAttributes",
   extends: [ariaAttributes, events],
   properties: {
-    class: schema.string(),
-    hidden: schema.boolean(),
-    id: schema.string(),
+    class: schema.string().optional(),
+    hidden: schema.boolean().optional(),
+    id: schema.string().optional(),
   },
 });
 
@@ -52,10 +52,18 @@ export const web = schema("web", {
     input: schema.element({
       extends: [globalAttributes],
       properties: {
-        disabled: schema.boolean(),
-        name: schema.string(),
-        type: schema.enum({ values: ["text", "number", "checkbox", "radio"] }),
-        value: schema.union({ of: [schema.string(), schema.number()] }),
+        disabled: schema.boolean().optional(),
+        name: schema
+          .string()
+          .describe(
+            "Submitted with the form; an input without one submits nothing.",
+          ),
+        type: schema
+          .enum({ values: ["text", "number", "checkbox", "radio"] })
+          .optional(),
+        value: schema
+          .union({ of: [schema.string(), schema.number()] })
+          .optional(),
       },
       children: "none",
     }),
@@ -72,18 +80,24 @@ const dimension = schema.union({
 const transform = schema.union({
   name: "transform",
   of: [
-    schema.object({ properties: { translateX: schema.number() } }),
-    schema.object({ properties: { translateY: schema.number() } }),
-    schema.object({ properties: { rotate: schema.string() } }),
+    schema.object({
+      properties: { translateX: schema.number().optional() },
+    }),
+    schema.object({
+      properties: { translateY: schema.number().optional() },
+    }),
+    schema.object({
+      properties: { rotate: schema.string().optional() },
+    }),
   ],
 });
 
 const layoutStyle = schema.object({
   name: "layoutStyle",
   properties: {
-    height: dimension,
-    padding: dimension,
-    width: dimension,
+    height: dimension.optional(),
+    padding: dimension.optional(),
+    width: dimension.optional(),
   },
 });
 
@@ -91,9 +105,9 @@ const viewStyle = schema.object({
   name: "viewStyle",
   includes: [layoutStyle],
   properties: {
-    backgroundColor: color,
-    opacity: schema.number(),
-    transform: schema.list({ of: transform }),
+    backgroundColor: color.optional(),
+    opacity: schema.number().optional(),
+    transform: schema.list({ of: transform }).optional(),
   },
 });
 
@@ -102,17 +116,22 @@ export const portable = schema("portable", {
   elements: {
     Text: schema.element({
       properties: {
-        onLayout: schema.handler({
-          params: [schema.number(), schema.number()],
-        }),
-        onPress: schema.handler(),
-        style: viewStyle,
-        testID: schema.string(),
+        onLayout: schema
+          .function({
+            params: [
+              { name: "width", type: schema.number() },
+              { name: "height", type: schema.number(), nullable: true },
+            ],
+          })
+          .optional(),
+        onPress: schema.function().optional(),
+        style: viewStyle.optional(),
+        testID: schema.string().optional(),
       },
       children: "text",
     }),
     View: schema.element({
-      properties: { style: viewStyle },
+      properties: { style: viewStyle.optional() },
       children: "elements",
     }),
   },

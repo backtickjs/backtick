@@ -4,6 +4,7 @@ import type {
   SchemaDocument,
   SchemaProperties,
   SchemaType,
+  SchemaVoid,
 } from "@backtickjs/schema";
 import { portable, web } from "./samples.ts";
 
@@ -12,8 +13,10 @@ import { portable, web } from "./samples.ts";
 // `parse()` when there is one.
 
 // Every type a document mentions, nested ones included.
-function* types(document: SchemaDocument): Generator<SchemaType> {
-  const walk = function* (type: SchemaType): Generator<SchemaType> {
+function* types(document: SchemaDocument): Generator<SchemaType | SchemaVoid> {
+  const walk = function* (
+    type: SchemaType | SchemaVoid,
+  ): Generator<SchemaType | SchemaVoid> {
     yield type;
     if (type.kind === "union") {
       for (const member of type.of) {
@@ -21,13 +24,20 @@ function* types(document: SchemaDocument): Generator<SchemaType> {
       }
     } else if (type.kind === "list") {
       yield* walk(type.of);
-    } else if (type.kind === "object") {
+    } else if (type.kind === "object" || type.kind === "interface") {
       yield* properties(type.properties);
+    } else if (type.kind === "function") {
+      for (const param of type.params) {
+        yield* walk(param.type);
+      }
+      yield* walk(type.returns);
     }
   };
-  const properties = function* (bag: SchemaProperties): Generator<SchemaType> {
-    for (const type of Object.values(bag)) {
-      yield* walk(type);
+  const properties = function* (
+    bag: SchemaProperties,
+  ): Generator<SchemaType | SchemaVoid> {
+    for (const property of Object.values(bag)) {
+      yield* walk(property.type);
     }
   };
   for (const type of Object.values(document.types)) {

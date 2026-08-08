@@ -1,5 +1,5 @@
 export { schema } from "./build.js";
-export type { Declared } from "./build.js";
+export type { CanDescribe, CanOptional, Chain, Declared } from "./build.js";
 export type {
   SchemaChildren,
   SchemaDocument,
@@ -8,14 +8,18 @@ export type {
 export type {
   SchemaBoolean,
   SchemaEnum,
-  SchemaHandler,
+  SchemaFunction,
   SchemaInterface,
   SchemaList,
   SchemaNumber,
   SchemaObject,
+  SchemaParameter,
   SchemaProperties,
+  SchemaProperty,
   SchemaReference,
   SchemaString,
   SchemaType,
+  SchemaValue,
+  SchemaVoid,
   SchemaUnion,
 } from "./Vocabulary.js";

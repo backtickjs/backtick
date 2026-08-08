@@ -28,9 +28,11 @@ describe("a schema the builder wrote", () => {
 // what `Intrinsics<S>` maps, so an inference that widened would cost nothing at
 // runtime and everything there. These are checked by compiling.
 const _spellings: readonly ("text" | "number" | "checkbox" | "radio")[] =
-  built.web.elements.input.properties.type.values;
+  built.web.elements.input.properties.type.type.values;
 const _members: readonly ("button" | "dialog" | "navigation")[] =
   built.web.types.ariaRole.values;
 const _extended: readonly ["globalAttributes"] = built.web.elements.div.extends;
 const _held: "content" = built.web.elements.div.children;
-const _named: "viewStyle" = built.portable.elements.View.properties.style.name;
+const _required: false = built.web.elements.input.properties.name.optional;
+const _named: "viewStyle" =
+  built.portable.elements.View.properties.style.type.name;
