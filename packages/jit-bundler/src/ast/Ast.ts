@@ -12,6 +12,7 @@ export type Ast =
   | AstArray
   | AstBoolean
   | AstElement
+  | AstFor
   | AstExpansion
   | AstHole
   | AstInstance
@@ -57,12 +58,21 @@ export interface AstElement {
   readonly props: Readonly<Record<string, Ast>>;
 }
 
+// `<For />`: one drawing per member of an array. Not an element — it draws no
+// node, and its child is applied per member where an element's children are
+// drawn once — so it is its own node here as it is on the wire.
+export interface AstFor {
+  readonly kind: "AstFor";
+  readonly each: Ast;
+  readonly children: Ast;
+}
+
 // A server component's invocation, wrapping what it resolved to. One node per
 // invocation rather than per component: the node is what owns the cells its
 // component declares, so it can't depend on how often the component is named.
 export interface AstInstance {
   readonly kind: "AstInstance";
-  child: AstInstance | AstElement | null;
+  child: AstInstance | AstElement | AstFor | null;
 }
 
 // A spliced class's bundle-time expansion: the spliceable the constructor

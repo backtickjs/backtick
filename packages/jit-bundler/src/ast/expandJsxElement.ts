@@ -1,17 +1,18 @@
 import {
   isClientElement,
+  isFor,
   type JsxElement,
   isSpliceable,
 } from "@backtickjs/cs-runtime";
 import { withInstance } from "../Instance.js";
-import type { Ast, AstElement, AstInstance } from "./Ast.js";
+import type { Ast, AstElement, AstFor, AstInstance } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the expansion
 // instead of racing into duplicate subtrees (see `lowerClientObject`).
 const nodeByElement = new WeakMap<
   JsxElement,
-  Promise<AstInstance | AstElement>
+  Promise<AstInstance | AstElement | AstFor>
 >();
 
 // Runs the element's component and lowers what it names. The component itself
@@ -19,7 +20,7 @@ const nodeByElement = new WeakMap<
 // client component it bottoms out in reaches the bundle.
 export function expandJsxElement(
   value: JsxElement,
-): Promise<AstInstance | AstElement> {
+): Promise<AstInstance | AstElement | AstFor> {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;
@@ -31,8 +32,12 @@ export function expandJsxElement(
 
 async function buildElement(
   jsx: JsxElement,
-): Promise<AstInstance | AstElement> {
+): Promise<AstInstance | AstElement | AstFor> {
   const type = jsx.type;
+
+  if (isFor(type)) {
+    return buildFor(jsx);
+  }
 
   if (isClientElement(type)) {
     // A client component names the element the interpreter renders, and the props
@@ -78,4 +83,19 @@ async function buildElement(
 
     return instance;
   }
+}
+
+async function buildFor(jsx: JsxElement): Promise<AstFor> {
+  const { each, children } = jsx.props;
+  if (!isSpliceable(each) || !isSpliceable(children)) {
+    throw new Error(
+      "Can't bundle this <For /> element: it needs an `each` array and a " +
+        "child to draw.",
+    );
+  }
+  return {
+    kind: "AstFor",
+    each: await lowerSpliceable(each, "ClientValue"),
+    children: await lowerSpliceable(children, "ClientValue"),
+  };
 }

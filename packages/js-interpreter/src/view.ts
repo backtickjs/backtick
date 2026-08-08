@@ -2,6 +2,7 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
+  BundleFor,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer, type Renderer } from "solid-js/universal";
@@ -119,14 +120,11 @@ export function compileElement(
   element: BundleElement,
 ): (scope: Scope | null) => Value {
   const id = element[1];
-  // The two elements every target has, recognized by the id they agree on.
-  // Neither draws a node: one puts its children where it stands, the other
-  // draws one thing per member of an array.
+  // The one element every target has and no target draws: its children go
+  // where it stands. Recognized by the id they agree on, where a list — the
+  // other thing that draws no node — has a kind of its own.
   if (id === "Fragment") {
     return compileFragment(instance, element);
-  }
-  if (id === "For") {
-    return compileFor(instance, element);
   }
   // Every prop, in the order the element wrote them, because a host may care:
   // an `<input>` wants its `type` before its `value`.
@@ -243,25 +241,19 @@ function compileFragment(
  * member that is still there, drops what a member that has gone drew, and draws
  * only what is new. Identity is the member's own — nothing here extracts a key.
  */
-function compileFor(
+export function compileFor(
   instance: Instance,
-  element: BundleElement,
+  node: BundleFor,
 ): (scope: Scope | null) => Value {
-  const each = element[2]["each"];
-  // What a `For` draws is its children, which is a slot and not a prop.
-  const body = element[3];
-  if (each === undefined || body === null) {
-    throw new Error("a `For` needs an `each` array and a child to draw");
-  }
-  const source = compile(instance, each);
-  const draw = compile(instance, body);
+  const each = compile(instance, node[1]);
+  const children = compile(instance, node[2]);
   return (scope) => {
     const members = createMemo(() => {
-      const value = source(scope);
+      const value = each(scope);
       return Array.isArray(value) ? (value as Value[]) : [];
     });
     // Made once: the member arrives as an argument.
-    const one = draw(scope) as (...args: Value[]) => Value;
+    const one = children(scope) as (...args: Value[]) => Value;
     // The index is `mapArray`'s own signal, handed over as storage rather than
     // as the number it holds: whoever reads it is reading where the member sits
     // now.

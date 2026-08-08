@@ -12,6 +12,7 @@ export type {
   BundleContinueStatementNode,
   BundleVariableDeclarationNode,
   BundleElement,
+  BundleFor,
   BundleDataArrayNode,
   BundleForStatementNode,
   BundleExpressionNode,

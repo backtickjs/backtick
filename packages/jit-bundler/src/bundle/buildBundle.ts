@@ -3,6 +3,7 @@ import type {
   IrArgument,
   IrElement,
   IrExpansion,
+  IrFor,
   IrScriptEntry,
   IrScriptRef,
   IrTreeRef,
@@ -17,6 +18,7 @@ import type {
   BundleFunction,
   BundleCallExpressionNode,
   BundleElement,
+  BundleFor,
   BundleGetFunction,
   BundleExpressionNode,
   BundleIdentifierNode,
@@ -179,6 +181,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         return [cellKey(value.target)];
       case "IrElement":
         return Object.values(value.props).flatMap(freeCaps);
+      case "IrFor":
+        return [value.each, value.children].flatMap(freeCaps);
       case "IrArray":
         return value.elements.flatMap(freeCaps);
       case "IrObject":
@@ -223,13 +227,15 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   // props — a key may be a script, so it captures like any other value — and a
   // reference contributes itself, so the inner entry's params thread through.
   const contentValues = (
-    content: IrElement | IrTreeRef | null,
+    content: IrElement | IrFor | IrTreeRef | null,
   ): IrArgument[] =>
     content === null
       ? [] // renders nothing, so there is no wiring to thread
       : content.kind === "IrElement"
         ? Object.values(content.props)
-        : [content];
+        : content.kind === "IrFor"
+          ? [content.each, content.children]
+          : [content];
 
   // Whether a cell's storage lives in this entry. A cell sits in the entry that
   // holds it, so ownership is a lookup rather than something to infer from
@@ -416,6 +422,8 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
         return instantiation(value);
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
+      case "IrFor":
+        throw new Error("A `For` can't appear outside a tree entry.");
       // In a body the handle is already in scope: the entry was handed it with
       // its captures (see `freeCaps`), so it reads like any of them.
       case "IrStateRef":
@@ -570,6 +578,13 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
       );
       return;
     }
+    if (content.kind === "IrFor") {
+      treeJsons.set(
+        target,
+        treeEntry(names, bindings, renderFor(content, scope, new Set())),
+      );
+      return;
+    }
     // An instance that draws another instance: applying the inner entry,
     // passing whatever its parameters need from this one's.
     materializeTree(content.target);
@@ -701,6 +716,16 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     return [NodeKind.Element, element.id, props, children];
   };
 
+  const renderFor = (
+    value: IrFor,
+    scope: TreeScope,
+    params: ReadonlySet<string>,
+  ): BundleFor => [
+    NodeKind.For,
+    renderExpr(value.each, scope, params),
+    renderExpr(value.children, scope, params),
+  ];
+
   // Renders an IR argument in expression position — the form used inside tree
   // entries and for the bundle root, where composition is data rather than
   // source. The mirror of `renderValue`.
@@ -723,6 +748,9 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
     }
     if (value.kind === "IrElement") {
       return renderElement(value, scope, params);
+    }
+    if (value.kind === "IrFor") {
+      return renderFor(value, scope, params);
     }
     // A cell in tree position resolves by name, like anything else the entry
     // bound or was handed.

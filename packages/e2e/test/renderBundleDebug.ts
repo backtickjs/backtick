@@ -69,6 +69,12 @@ function renderNode(
     // What a tree entry's body yields.
     case NodeKind.Element:
       return renderJsx(node, indent);
+    // Written as the element it used to be, so a list still reads as one.
+    case NodeKind.For:
+      return renderJsx(
+        [NodeKind.Element, "For", { each: node[1] }, node[2]],
+        indent,
+      );
     // A global the format names and the host answers.
     case NodeKind.Builtin:
       return node[1];

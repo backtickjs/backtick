@@ -44,7 +44,7 @@ export interface IrTreeEntry {
   // Written after the entry exists, like `AstInstance.child`: the entry is
   // minted before its subtree is lowered, because a cell interned down there
   // has to land in the entry its component became.
-  content: IrElement | IrTreeRef | null;
+  content: IrElement | IrFor | IrTreeRef | null;
   // The cells this instance declares, each under the number its references
   // carry (`IrStateRef.target`) and holding the cell's initial value.
   // Instantiating the entry allocates storage for each, so ownership is where a
@@ -83,6 +83,14 @@ export interface IrElement {
   readonly kind: "IrElement";
   readonly id: string;
   readonly props: Readonly<Record<string, IrArgument>>;
+}
+
+// `<For />` carried through the IR: the array to walk, and what draws one
+// member of it.
+export interface IrFor {
+  readonly kind: "IrFor";
+  readonly each: IrArgument;
+  readonly children: IrArgument;
 }
 
 // A construction's expansion carried through the IR: an arrow over `params`
@@ -135,4 +143,5 @@ export type IrArgument =
   | IrScriptRef
   | IrTreeRef
   | IrStateRef
-  | IrElement;
+  | IrElement
+  | IrFor;

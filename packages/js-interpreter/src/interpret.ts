@@ -12,7 +12,7 @@ import type {
 } from "@backtickjs/core";
 import { makeState } from "./makeState.js";
 import type { Instance } from "./Instance.js";
-import { compileElement } from "./view.js";
+import { compileElement, compileFor } from "./view.js";
 import type { Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
@@ -213,6 +213,11 @@ function buildNode(
     }
     case 0: /* Element */ {
       return compileElement(instance, node);
+    }
+    // A list draws no node of its own, so it is a kind rather than an element
+    // a reader has to know the id of.
+    case 6: /* For */ {
+      return compileFor(instance, node);
     }
     // A global the format names and the host answers. This host is
     // JavaScript, so these are JavaScript's — which is what the curation is

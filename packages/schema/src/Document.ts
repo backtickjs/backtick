@@ -25,11 +25,7 @@ export interface SchemaElement {
 }
 
 // What an element may hold: nothing (a void element), a string, elements, or
-// either. Four cases rather than a type, because the wire gives children a slot
-// of their own and every host answers them with an operation of its own —
-// `setText` for a string, `addChild` for the rest.
-//
-// `<For />` is the shape this cannot say: its children are a script the client
-// applies per member. It is undeclarable for another reason anyway — `T` is
-// inferred from `each`, and there are no type variables here.
+// either. Four cases rather than a type, because children are structure: the
+// wire gives them a slot of their own, and every host answers them with an
+// operation of its own — `setText` for a string, `addChild` for the rest.
 export type SchemaChildren = "none" | "text" | "elements" | "content";

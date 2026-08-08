@@ -1,5 +1,4 @@
 import type { Client } from "./Client.js";
-import { createClientElement } from "./ClientElement.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { JsxElement } from "./JsxElement.js";
 import type { ReadonlyState } from "./state.js";
@@ -17,16 +16,16 @@ export type ForProps<T extends ClientValue> = {
 };
 
 // Generic where `ClientElement<P>` fixes its props: `each` decides `T`, and the
-// child script's parameter is checked against it.
+// child script's parameter is checked against it. The call signature is spelled
+// out rather than inherited from `ClientElement`, whose own takes any object of
+// spliceable values — every call that failed this signature would resolve
+// against that one instead and report nothing.
 //
-// The two marker members are spelled out rather than inherited, because
-// inheriting brings `ClientElement`'s own call signature with them — and that
-// one takes any object of spliceable values, so every call that failed this
-// signature would resolve against it instead and report nothing.
+// Branded as itself rather than as a `ClientElement`, because it is not one: it
+// draws no node, and it lowers to `NodeKind.For` rather than to an element.
 export interface For {
   <T extends ClientValue>(props: ForProps<T>): never;
-  readonly "@backtickjs": "ClientElement";
-  readonly id: string;
+  readonly "@backtickjs": "For";
 }
 
 /**
@@ -46,4 +45,13 @@ export interface For {
  * script draws — and what a target admits as a tag is already settled by its
  * `ElementType`.
  */
-export const For = createClientElement("For") as unknown as For;
+export const For = { "@backtickjs": "For" } as unknown as For;
+
+export function isFor(value: unknown): value is For {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "@backtickjs" in value &&
+    value["@backtickjs"] === "For"
+  );
+}

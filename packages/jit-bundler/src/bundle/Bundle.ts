@@ -77,6 +77,10 @@ export const NodeKind = {
   // objects need no such wrapper, which is why only this one exists.
   DataArray: 4,
   State: 5,
+  // A list draws one thing per member of an array. Its own kind rather than an
+  // element the reader knows by id: it draws no node, and its child is applied
+  // per member where an element's children are drawn once.
+  For: 6,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -203,6 +207,21 @@ export type BundleStateNode = [
   initial: BundleExpressionNode,
 ];
 
+// A list: one drawing per member of an array.
+//
+// The client walks the array — it keeps what a member still there drew, drops
+// what a departed one drew, and draws only what is new — so identity is the
+// member's own and nothing here extracts a key.
+export type BundleFor = [
+  kind: typeof NodeKind.For,
+  // The array to walk.
+  each: BundleExpressionNode,
+  // Applied once per member, to the member and to the position it now sits at.
+  // The position arrives as storage rather than a number, because a member
+  // moves without changing: whoever reads it reads where the member is now.
+  children: BundleExpressionNode,
+];
+
 export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
 
 export type BundleExpressionNode =
@@ -221,6 +240,7 @@ export type BundleExpressionNode =
   | BundleApplyFunction
   // What a tree entry's body yields, and so what a `return` in one may hold.
   | BundleElement
+  | BundleFor
   | BundleCallExpressionNode
   | BundlePropertyAccessExpressionNode
   | BundleElementAccessExpressionNode

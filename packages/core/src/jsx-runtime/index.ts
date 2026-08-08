@@ -1,13 +1,9 @@
-import type {
-  ClientElement,
-  JsxElement,
-  ServerComponent,
-} from "@backtickjs/cs-runtime";
+import type { JsxElement, JsxType } from "@backtickjs/cs-runtime";
 import { createJsxElement } from "@backtickjs/cs-runtime";
 
 export declare namespace JSX {
   export interface Element extends JsxElement {}
-  export type ElementType = ClientElement<never> | ServerComponent<never>;
+  export type ElementType = JsxType;
   export interface ElementChildrenAttribute {
     children: unknown;
   }
