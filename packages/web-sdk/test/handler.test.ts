@@ -145,39 +145,22 @@ test("resolves it in any page it serves, not only a route's", async () => {
   assert.ok(html.includes(`src="${client}"`));
 });
 
-test("the built name is cached for a year and never revalidated", async () => {
-  const response = await wiring(new Request(`http://localhost${client}`));
-  assert.equal(
-    response.headers.get("cache-control"),
-    "public, max-age=31536000, immutable",
-  );
-  assert.equal(response.headers.get("etag"), null);
-});
-
-test("a route's answers carry no tag, because one could never mean either", async () => {
-  // The page and the bundle share the path, and a browser keeps one entry per
-  // URL — a tag from either would be sent back for the other and always miss.
-  for (const accept of ["text/html", "application/json"]) {
-    const response = await wiring(
-      new Request("http://localhost/", { headers: { accept } }),
-    );
-    assert.equal(response.headers.get("etag"), null);
-    assert.equal(response.headers.get("cache-control"), "no-cache");
-  }
-});
-
-test("a file at its own URL is revalidated, and answers 304 when it has not changed", async () => {
-  const first = await wiring(new Request("http://localhost/loose.html"));
-  const etag = first.headers.get("etag");
-  assert.equal(first.headers.get("cache-control"), "no-cache");
-  assert.ok(etag);
-  const again = await wiring(
-    new Request("http://localhost/loose.html", {
-      headers: { "if-none-match": etag },
+test("everything served is asked for again next time", async () => {
+  // One rule, and no revalidation to get wrong: a dev server reads its files
+  // per request anyway, and a route answers with what is true now.
+  const asked = [
+    new Request(`http://localhost${client}`),
+    new Request("http://localhost/loose.html"),
+    new Request("http://localhost/", { headers: { accept: "text/html" } }),
+    new Request("http://localhost/", {
+      headers: { accept: "application/json" },
     }),
-  );
-  assert.equal(again.status, 304);
-  assert.equal((await again.arrayBuffer()).byteLength, 0);
+  ];
+  for (const request of asked) {
+    const response = await wiring(request);
+    assert.equal(response.headers.get("cache-control"), "no-cache");
+    assert.equal(response.headers.get("etag"), null);
+  }
 });
 
 test("a page and its bundle share a path, so a cache is told what varies", async () => {
