@@ -1,8 +1,9 @@
 import {
   createFragment,
+  type Children,
   type Fragment as FragmentTag,
+  type JsxElement,
 } from "@backtickjs/cs-runtime";
-import type { Content } from "./elements.js";
 
 /**
  * Children with no element of their own.
@@ -12,7 +13,7 @@ import type { Content } from "./elements.js";
  * fragment holds that target's. The brand is the part they agree on.
  */
 export type FragmentProps = {
-  children?: Content;
+  children?: Children<JsxElement | string | number>;
 };
 
 export const Fragment: FragmentTag<FragmentProps> =

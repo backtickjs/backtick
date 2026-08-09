@@ -1,3 +1,5 @@
+// Generated from `schema/html.ts` by `pnpm generate`. Do not edit.
+
 import type {
   Children,
   Client,
@@ -5,36 +7,9 @@ import type {
   Prop,
 } from "@backtickjs/cs-runtime";
 
-// What a browser's elements accept, as JSX writes them. Modelled on React's
-// `@types/react`, element for element and attribute for attribute, with three
-// deliberate differences:
-//
-//   - The names are HTML's, not the DOM's: `class`, `for`, `colspan`,
-//     `maxlength`, `onclick`. A tag reaches the client as an element whose id
-//     is the tag name and whose props are set as attributes, so what is
-//     written here is what is rendered — see `../client/dom.ts`.
-//   - Every value is a `Prop`, so a script may stand where a literal would.
-//   - A handler takes nothing. A script has no event object to be handed, so
-//     which event it is, is the prop's name.
-//
-// `data-*` is not declared and does not need to be: TypeScript exempts a JSX
-// attribute whose name isn't a valid identifier from checking, which is the
-// same rule that lets React accept it. The `aria-*` attributes below are
-// declared anyway, so their values are checked — at the cost that a misspelled
-// one is silently accepted, exactly as in React.
-//
-// SVG is not covered.
+export type Booleanish = boolean | "true" | "false";
 
-// One child or several, and a script in place of either.
-export type Content = Children<JsxElement | string | number>;
-
-// ARIA reads the words `true` and `false`, so a boolean attribute here is not
-// the HTML kind that is present or absent.
-type Booleanish = boolean | "true" | "false";
-
-type Handler = Client<() => void>;
-
-type Numeric = Prop<number | string>;
+export type Numeric = number | string;
 
 export type AriaRole =
   | "alert"
@@ -106,8 +81,22 @@ export type AriaRole =
   | "tree"
   | "treegrid"
   | "treeitem"
-  // A role this list hasn't caught up with is still a role.
   | (string & {});
+
+export type ReferrerPolicy =
+  | ""
+  | "no-referrer"
+  | "no-referrer-when-downgrade"
+  | "origin"
+  | "origin-when-cross-origin"
+  | "same-origin"
+  | "strict-origin"
+  | "strict-origin-when-cross-origin"
+  | "unsafe-url";
+
+export type CrossOrigin = "anonymous" | "use-credentials" | "";
+
+export type Target = "_self" | "_blank" | "_parent" | "_top" | (string & {});
 
 export interface AriaAttributes {
   "aria-activedescendant"?: Prop<string>;
@@ -179,125 +168,95 @@ export interface AriaAttributes {
 }
 
 export interface Events {
-  // Clipboard
-  oncopy?: Handler;
-  oncut?: Handler;
-  onpaste?: Handler;
-
-  // Composition
-  oncompositionend?: Handler;
-  oncompositionstart?: Handler;
-  oncompositionupdate?: Handler;
-
-  // Focus
-  onblur?: Handler;
-  onfocus?: Handler;
-  onfocusin?: Handler;
-  onfocusout?: Handler;
-
-  // Form
-  onbeforeinput?: Handler;
-  onchange?: Handler;
-  oninput?: Handler;
-  oninvalid?: Handler;
-  onreset?: Handler;
-  onselect?: Handler;
-  onsubmit?: Handler;
-
-  // Loading
-  onerror?: Handler;
-  onload?: Handler;
-
-  // Keyboard
-  onkeydown?: Handler;
-  onkeypress?: Handler;
-  onkeyup?: Handler;
-
-  // Media
-  onabort?: Handler;
-  oncanplay?: Handler;
-  oncanplaythrough?: Handler;
-  ondurationchange?: Handler;
-  onemptied?: Handler;
-  onended?: Handler;
-  onloadeddata?: Handler;
-  onloadedmetadata?: Handler;
-  onloadstart?: Handler;
-  onpause?: Handler;
-  onplay?: Handler;
-  onplaying?: Handler;
-  onprogress?: Handler;
-  onratechange?: Handler;
-  onseeked?: Handler;
-  onseeking?: Handler;
-  onstalled?: Handler;
-  onsuspend?: Handler;
-  ontimeupdate?: Handler;
-  onvolumechange?: Handler;
-  onwaiting?: Handler;
-
-  // Mouse
-  onauxclick?: Handler;
-  onclick?: Handler;
-  oncontextmenu?: Handler;
-  ondblclick?: Handler;
-  onmousedown?: Handler;
-  onmouseenter?: Handler;
-  onmouseleave?: Handler;
-  onmousemove?: Handler;
-  onmouseout?: Handler;
-  onmouseover?: Handler;
-  onmouseup?: Handler;
-
-  // Drag
-  ondrag?: Handler;
-  ondragend?: Handler;
-  ondragenter?: Handler;
-  ondragleave?: Handler;
-  ondragover?: Handler;
-  ondragstart?: Handler;
-  ondrop?: Handler;
-
-  // Touch
-  ontouchcancel?: Handler;
-  ontouchend?: Handler;
-  ontouchmove?: Handler;
-  ontouchstart?: Handler;
-
-  // Pointer
-  ongotpointercapture?: Handler;
-  onlostpointercapture?: Handler;
-  onpointercancel?: Handler;
-  onpointerdown?: Handler;
-  onpointerenter?: Handler;
-  onpointerleave?: Handler;
-  onpointermove?: Handler;
-  onpointerout?: Handler;
-  onpointerover?: Handler;
-  onpointerup?: Handler;
-
-  // Scroll and wheel
-  onscroll?: Handler;
-  onscrollend?: Handler;
-  onwheel?: Handler;
-
-  // Animation and transition
-  onanimationend?: Handler;
-  onanimationiteration?: Handler;
-  onanimationstart?: Handler;
-  ontransitioncancel?: Handler;
-  ontransitionend?: Handler;
-  ontransitionrun?: Handler;
-  ontransitionstart?: Handler;
-
-  // Popover and disclosure
-  onbeforetoggle?: Handler;
-  ontoggle?: Handler;
+  oncopy?: Client<() => void>;
+  oncut?: Client<() => void>;
+  onpaste?: Client<() => void>;
+  oncompositionend?: Client<() => void>;
+  oncompositionstart?: Client<() => void>;
+  oncompositionupdate?: Client<() => void>;
+  onblur?: Client<() => void>;
+  onfocus?: Client<() => void>;
+  onfocusin?: Client<() => void>;
+  onfocusout?: Client<() => void>;
+  onbeforeinput?: Client<() => void>;
+  onchange?: Client<() => void>;
+  oninput?: Client<() => void>;
+  oninvalid?: Client<() => void>;
+  onreset?: Client<() => void>;
+  onselect?: Client<() => void>;
+  onsubmit?: Client<() => void>;
+  onerror?: Client<() => void>;
+  onload?: Client<() => void>;
+  onkeydown?: Client<() => void>;
+  onkeypress?: Client<() => void>;
+  onkeyup?: Client<() => void>;
+  onabort?: Client<() => void>;
+  oncanplay?: Client<() => void>;
+  oncanplaythrough?: Client<() => void>;
+  ondurationchange?: Client<() => void>;
+  onemptied?: Client<() => void>;
+  onended?: Client<() => void>;
+  onloadeddata?: Client<() => void>;
+  onloadedmetadata?: Client<() => void>;
+  onloadstart?: Client<() => void>;
+  onpause?: Client<() => void>;
+  onplay?: Client<() => void>;
+  onplaying?: Client<() => void>;
+  onprogress?: Client<() => void>;
+  onratechange?: Client<() => void>;
+  onseeked?: Client<() => void>;
+  onseeking?: Client<() => void>;
+  onstalled?: Client<() => void>;
+  onsuspend?: Client<() => void>;
+  ontimeupdate?: Client<() => void>;
+  onvolumechange?: Client<() => void>;
+  onwaiting?: Client<() => void>;
+  onauxclick?: Client<() => void>;
+  onclick?: Client<() => void>;
+  oncontextmenu?: Client<() => void>;
+  ondblclick?: Client<() => void>;
+  onmousedown?: Client<() => void>;
+  onmouseenter?: Client<() => void>;
+  onmouseleave?: Client<() => void>;
+  onmousemove?: Client<() => void>;
+  onmouseout?: Client<() => void>;
+  onmouseover?: Client<() => void>;
+  onmouseup?: Client<() => void>;
+  ondrag?: Client<() => void>;
+  ondragend?: Client<() => void>;
+  ondragenter?: Client<() => void>;
+  ondragleave?: Client<() => void>;
+  ondragover?: Client<() => void>;
+  ondragstart?: Client<() => void>;
+  ondrop?: Client<() => void>;
+  ontouchcancel?: Client<() => void>;
+  ontouchend?: Client<() => void>;
+  ontouchmove?: Client<() => void>;
+  ontouchstart?: Client<() => void>;
+  ongotpointercapture?: Client<() => void>;
+  onlostpointercapture?: Client<() => void>;
+  onpointercancel?: Client<() => void>;
+  onpointerdown?: Client<() => void>;
+  onpointerenter?: Client<() => void>;
+  onpointerleave?: Client<() => void>;
+  onpointermove?: Client<() => void>;
+  onpointerout?: Client<() => void>;
+  onpointerover?: Client<() => void>;
+  onpointerup?: Client<() => void>;
+  onscroll?: Client<() => void>;
+  onscrollend?: Client<() => void>;
+  onwheel?: Client<() => void>;
+  onanimationend?: Client<() => void>;
+  onanimationiteration?: Client<() => void>;
+  onanimationstart?: Client<() => void>;
+  ontransitioncancel?: Client<() => void>;
+  ontransitionend?: Client<() => void>;
+  ontransitionrun?: Client<() => void>;
+  ontransitionstart?: Client<() => void>;
+  onbeforetoggle?: Client<() => void>;
+  ontoggle?: Client<() => void>;
 }
 
-/**
- * The attributes every element carries.
- */
 export interface GlobalAttributes extends AriaAttributes, Events {
   accesskey?: Prop<string>;
   autocapitalize?: Prop<
@@ -332,43 +291,17 @@ export interface GlobalAttributes extends AriaAttributes, Events {
   role?: Prop<AriaRole>;
   slot?: Prop<string>;
   spellcheck?: Prop<Booleanish>;
-  // The attribute HTML has, not the object the native clients take: a web app
-  // writes CSS.
   style?: Prop<string>;
   tabindex?: Prop<number>;
   title?: Prop<string>;
   translate?: Prop<"yes" | "no">;
 }
 
-/**
- * An element that holds nothing — `<br>`, `<img>`, `<input>`. Written closed
- * in JSX (`<br />`), and given children it is a type error rather than markup
- * a browser would silently drop.
- */
 export interface VoidProps extends GlobalAttributes {}
 
-/**
- * An element that holds children, which is most of them.
- */
 export interface HtmlProps extends GlobalAttributes {
-  children?: Content;
+  children?: Children<JsxElement | string | number>;
 }
-
-type ReferrerPolicy = Prop<
-  | ""
-  | "no-referrer"
-  | "no-referrer-when-downgrade"
-  | "origin"
-  | "origin-when-cross-origin"
-  | "same-origin"
-  | "strict-origin"
-  | "strict-origin-when-cross-origin"
-  | "unsafe-url"
->;
-
-type CrossOrigin = Prop<"anonymous" | "use-credentials" | "">;
-
-type Target = Prop<"_self" | "_blank" | "_parent" | "_top" | (string & {})>;
 
 export interface AnchorProps extends HtmlProps {
   download?: Prop<string | boolean>;
@@ -376,9 +309,9 @@ export interface AnchorProps extends HtmlProps {
   hreflang?: Prop<string>;
   media?: Prop<string>;
   ping?: Prop<string>;
-  referrerpolicy?: ReferrerPolicy;
+  referrerpolicy?: Prop<ReferrerPolicy>;
   rel?: Prop<string>;
-  target?: Target;
+  target?: Prop<Target>;
   type?: Prop<string>;
 }
 
@@ -387,15 +320,15 @@ export interface AreaProps extends VoidProps {
   coords?: Prop<string>;
   download?: Prop<string | boolean>;
   href?: Prop<string>;
-  referrerpolicy?: ReferrerPolicy;
+  referrerpolicy?: Prop<ReferrerPolicy>;
   rel?: Prop<string>;
   shape?: Prop<"rect" | "circle" | "poly" | "default">;
-  target?: Target;
+  target?: Prop<Target>;
 }
 
 export interface BaseProps extends VoidProps {
   href?: Prop<string>;
-  target?: Target;
+  target?: Prop<Target>;
 }
 
 export interface BlockquoteProps extends HtmlProps {
@@ -409,7 +342,7 @@ export interface ButtonProps extends HtmlProps {
   formenctype?: Prop<string>;
   formmethod?: Prop<"get" | "post" | "dialog">;
   formnovalidate?: Prop<boolean>;
-  formtarget?: Target;
+  formtarget?: Prop<Target>;
   name?: Prop<string>;
   popovertarget?: Prop<string>;
   popovertargetaction?: Prop<"toggle" | "show" | "hide">;
@@ -418,13 +351,13 @@ export interface ButtonProps extends HtmlProps {
 }
 
 export interface CanvasProps extends HtmlProps {
-  height?: Numeric;
-  width?: Numeric;
+  height?: Prop<Numeric>;
+  width?: Prop<Numeric>;
 }
 
 export interface ColProps extends VoidProps {
   span?: Prop<number>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface ColgroupProps extends HtmlProps {
@@ -451,10 +384,10 @@ export interface DialogProps extends HtmlProps {
 }
 
 export interface EmbedProps extends VoidProps {
-  height?: Numeric;
+  height?: Prop<Numeric>;
   src?: Prop<string>;
   type?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface FieldsetProps extends HtmlProps {
@@ -472,7 +405,7 @@ export interface FormProps extends HtmlProps {
   name?: Prop<string>;
   novalidate?: Prop<boolean>;
   rel?: Prop<string>;
-  target?: Target;
+  target?: Prop<Target>;
 }
 
 export interface HtmlElementProps extends HtmlProps {
@@ -482,29 +415,29 @@ export interface HtmlElementProps extends HtmlProps {
 export interface IframeProps extends HtmlProps {
   allow?: Prop<string>;
   allowfullscreen?: Prop<boolean>;
-  height?: Numeric;
+  height?: Prop<Numeric>;
   loading?: Prop<"eager" | "lazy">;
   name?: Prop<string>;
-  referrerpolicy?: ReferrerPolicy;
+  referrerpolicy?: Prop<ReferrerPolicy>;
   sandbox?: Prop<string>;
   src?: Prop<string>;
   srcdoc?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface ImgProps extends VoidProps {
   alt?: Prop<string>;
-  crossorigin?: CrossOrigin;
+  crossorigin?: Prop<CrossOrigin>;
   decoding?: Prop<"async" | "auto" | "sync">;
   fetchpriority?: Prop<"high" | "low" | "auto">;
-  height?: Numeric;
+  height?: Prop<Numeric>;
   loading?: Prop<"eager" | "lazy">;
-  referrerpolicy?: ReferrerPolicy;
+  referrerpolicy?: Prop<ReferrerPolicy>;
   sizes?: Prop<string>;
   src?: Prop<string>;
   srcset?: Prop<string>;
   usemap?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface InputProps extends VoidProps {
@@ -520,12 +453,12 @@ export interface InputProps extends VoidProps {
   formenctype?: Prop<string>;
   formmethod?: Prop<"get" | "post" | "dialog">;
   formnovalidate?: Prop<boolean>;
-  formtarget?: Target;
-  height?: Numeric;
+  formtarget?: Prop<Target>;
+  height?: Prop<Numeric>;
   list?: Prop<string>;
-  max?: Numeric;
+  max?: Prop<Numeric>;
   maxlength?: Prop<number>;
-  min?: Numeric;
+  min?: Prop<Numeric>;
   minlength?: Prop<number>;
   multiple?: Prop<boolean>;
   name?: Prop<string>;
@@ -535,7 +468,7 @@ export interface InputProps extends VoidProps {
   required?: Prop<boolean>;
   size?: Prop<number>;
   src?: Prop<string>;
-  step?: Numeric;
+  step?: Prop<Numeric>;
   type?: Prop<
     | "button"
     | "checkbox"
@@ -561,7 +494,7 @@ export interface InputProps extends VoidProps {
     | "week"
   >;
   value?: Prop<string | number>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface InsProps extends HtmlProps {
@@ -580,7 +513,7 @@ export interface LiProps extends HtmlProps {
 
 export interface LinkProps extends VoidProps {
   as?: Prop<string>;
-  crossorigin?: CrossOrigin;
+  crossorigin?: Prop<CrossOrigin>;
   fetchpriority?: Prop<"high" | "low" | "auto">;
   href?: Prop<string>;
   hreflang?: Prop<string>;
@@ -588,7 +521,7 @@ export interface LinkProps extends VoidProps {
   imagesrcset?: Prop<string>;
   integrity?: Prop<string>;
   media?: Prop<string>;
-  referrerpolicy?: ReferrerPolicy;
+  referrerpolicy?: Prop<ReferrerPolicy>;
   rel?: Prop<string>;
   sizes?: Prop<string>;
   type?: Prop<string>;
@@ -602,7 +535,7 @@ export interface MediaProps extends HtmlProps {
   autoplay?: Prop<boolean>;
   controls?: Prop<boolean>;
   controlslist?: Prop<string>;
-  crossorigin?: CrossOrigin;
+  crossorigin?: Prop<CrossOrigin>;
   loop?: Prop<boolean>;
   muted?: Prop<boolean>;
   preload?: Prop<"none" | "metadata" | "auto" | "">;
@@ -621,8 +554,8 @@ export interface MeterProps extends HtmlProps {
   form?: Prop<string>;
   high?: Prop<number>;
   low?: Prop<number>;
-  max?: Numeric;
-  min?: Numeric;
+  max?: Prop<Numeric>;
+  min?: Prop<Numeric>;
   optimum?: Prop<number>;
   value?: Prop<string | number>;
 }
@@ -630,11 +563,11 @@ export interface MeterProps extends HtmlProps {
 export interface ObjectProps extends HtmlProps {
   data?: Prop<string>;
   form?: Prop<string>;
-  height?: Numeric;
+  height?: Prop<Numeric>;
   name?: Prop<string>;
   type?: Prop<string>;
   usemap?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface OlProps extends HtmlProps {
@@ -662,7 +595,7 @@ export interface OutputProps extends HtmlProps {
 }
 
 export interface ProgressProps extends HtmlProps {
-  max?: Numeric;
+  max?: Prop<Numeric>;
   value?: Prop<string | number>;
 }
 
@@ -672,12 +605,12 @@ export interface QuoteProps extends HtmlProps {
 
 export interface ScriptProps extends HtmlProps {
   async?: Prop<boolean>;
-  crossorigin?: CrossOrigin;
+  crossorigin?: Prop<CrossOrigin>;
   defer?: Prop<boolean>;
   fetchpriority?: Prop<"high" | "low" | "auto">;
   integrity?: Prop<string>;
   nomodule?: Prop<boolean>;
-  referrerpolicy?: ReferrerPolicy;
+  referrerpolicy?: Prop<ReferrerPolicy>;
   src?: Prop<string>;
   type?: Prop<string>;
 }
@@ -698,13 +631,13 @@ export interface SlotProps extends HtmlProps {
 }
 
 export interface SourceProps extends VoidProps {
-  height?: Numeric;
+  height?: Prop<Numeric>;
   media?: Prop<string>;
   sizes?: Prop<string>;
   src?: Prop<string>;
   srcset?: Prop<string>;
   type?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface StyleProps extends HtmlProps {
@@ -714,7 +647,7 @@ export interface StyleProps extends HtmlProps {
 
 export interface TableProps extends HtmlProps {
   summary?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
 export interface TdProps extends HtmlProps {
@@ -765,15 +698,12 @@ export interface TrackProps extends VoidProps {
 export interface VideoProps extends MediaProps {
   disablepictureinpicture?: Prop<boolean>;
   disableremoteplayback?: Prop<boolean>;
-  height?: Numeric;
+  height?: Prop<Numeric>;
   playsinline?: Prop<boolean>;
   poster?: Prop<string>;
-  width?: Numeric;
+  width?: Prop<Numeric>;
 }
 
-/**
- * The tags a web app may write, and what each accepts.
- */
 export interface IntrinsicElements {
   a: AnchorProps;
   abbr: HtmlProps;

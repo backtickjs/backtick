@@ -5,6 +5,9 @@
       "dependsOn": ["^build", "typecheck"],
       "outputs": ["dist/**"]
     },
+    "generate": {
+      "cache": false
+    },
     "format": {
       "dependsOn": ["^build"]
     },

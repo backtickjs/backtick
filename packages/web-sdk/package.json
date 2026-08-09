@@ -27,6 +27,7 @@
   "scripts": {
     "build": "tsc -b && node scripts/browser.mjs",
     "dev": "tsc -b --watch",
+    "generate": "node --experimental-strip-types scripts/generate.ts && prettier --write src/jsx-runtime/elements.ts",
     "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
@@ -43,6 +44,7 @@
     "@backtickjs/core": "workspace:*",
     "esbuild": "0.28.0",
     "prettier": "^3.6.2",
+    "typebox": "^1.3.11",
     "typescript": "^6.0.3"
   }
 }

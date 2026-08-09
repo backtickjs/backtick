@@ -8,6 +8,7 @@
   "scripts": {
     "build": "turbo run build",
     "check:versions": "node scripts/checkVersions.mjs",
+    "generate": "turbo run generate",
     "typecheck": "turbo run typecheck",
     "test": "pnpm check:versions && turbo run test",
     "test:update": "turbo run test:update",
