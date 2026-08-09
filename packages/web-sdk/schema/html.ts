@@ -1,5 +1,4 @@
-import { Type } from "typebox";
-import type { JsxElement } from "@backtickjs/cs-runtime";
+import { Type } from "@backtickjs/schema";
 
 // What a browser's elements accept, as a schema. `elements.ts` is generated
 // from this and is not written by hand — run `pnpm generate`.
@@ -19,7 +18,7 @@ import type { JsxElement } from "@backtickjs/cs-runtime";
  * target publishes — it is what two of its things happen to hold.
  */
 const child = Type.Union([
-  Type.Unsafe<JsxElement>(Type.Ref("JsxElement")),
+  Type.Ref("JsxElement"),
   Type.String(),
   Type.Number(),
 ]);

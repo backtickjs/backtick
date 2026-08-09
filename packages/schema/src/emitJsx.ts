@@ -12,7 +12,7 @@ import {
   type TObject,
   type TSchema,
 } from "typebox";
-import type { Schema } from "./Schema.js";
+import type { Schema, SchemaNode } from "./Schema.js";
 
 // A schema to the `jsx-runtime` an app writes against.
 //
@@ -29,8 +29,12 @@ import type { Schema } from "./Schema.js";
 export function emitJsx(schema: Schema): string {
   const { aliases, elements, interfaces } = schema;
 
+  // TypeBox types a node's children as `TSchema`, where a schema only ever
+  // holds a `SchemaNode` — `Type` in this package cannot build anything else.
+  const held = (child: TSchema) => child as SchemaNode;
+
   /** What a schema node reads as, in TypeScript. */
-  function type(node: TSchema): string {
+  function type(node: SchemaNode): string {
     // A `$ref` is a name, whether the document declares it or the boundary
     // supplies it — `JsxElement` is the second kind, and reads no differently.
     if (IsRef(node)) {
@@ -40,27 +44,27 @@ export function emitJsx(schema: Schema): string {
       return JSON.stringify(node.const);
     }
     if (IsUnion(node)) {
-      return node.anyOf.map(type).join(" | ");
+      return node.anyOf.map((one) => type(held(one))).join(" | ");
     }
     // An intersection standing where a value goes is written as one. The schema
     // says `string & {}` where it means TypeScript's open-enum idiom, so this
     // translates rather than recognising it — there is nothing here that knows
     // what the shape was for.
     if (IsIntersect(node)) {
-      return `(${node.allOf.map(type).join(" & ")})`;
+      return `(${node.allOf.map((one) => type(held(one))).join(" & ")})`;
     }
     // A function the schema did not name keeps its own signature, parameters and
     // all — the case `core`'s `onLayout(width, height)` needs.
     if (IsFunction(node)) {
       const params = node.parameters.map((one, at) => {
-        const named = one as TSchema & { readonly name?: string };
-        return `${named.name ?? `arg${at}`}: ${type(one)}`;
+        const named = one as SchemaNode & { readonly name?: string };
+        return `${named.name ?? `arg${at}`}: ${type(held(one))}`;
       });
-      return `(${params.join(", ")}) => ${type(node.returnType)}`;
+      return `(${params.join(", ")}) => ${type(held(node.returnType))}`;
     }
     if (IsObject(node)) {
       const members = Object.entries(node.properties).map(
-        ([name, child]) => `${name}: ${type(child)}`,
+        ([name, child]) => `${name}: ${type(held(child))}`,
       );
       return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
     }
@@ -76,11 +80,14 @@ export function emitJsx(schema: Schema): string {
     if (IsVoid(node)) {
       return "void";
     }
-    throw new Error(`unhandled node: ${JSON.stringify(node).slice(0, 60)}`);
+    // Exhaustive: a kind added to `SchemaNode` without a case above fails
+    // here, where it is read, rather than at the throw below.
+    const unread: never = node;
+    throw new Error(`unhandled node: ${JSON.stringify(unread).slice(0, 60)}`);
   }
 
   /** What an interface extends, and the one object of its own. */
-  function parts(node: TSchema): {
+  function parts(node: SchemaNode): {
     bases: string[];
     own: TObject | null;
   } {
@@ -99,14 +106,14 @@ export function emitJsx(schema: Schema): string {
   /** The properties an object holds, and whether each was written required. */
   function members(
     own: TObject | null,
-  ): { name: string; node: TSchema; required: boolean }[] {
+  ): { name: string; node: SchemaNode; required: boolean }[] {
     if (own === null) {
       return [];
     }
     const required = own.required ?? [];
     return Object.entries(own.properties).map(([name, node]) => ({
       name,
-      node,
+      node: held(node),
       required: required.includes(name),
     }));
   }
@@ -116,7 +123,7 @@ export function emitJsx(schema: Schema): string {
     /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
 
   /** What a property admits, which is where the boundary is drawn. */
-  function property(name: string, node: TSchema, required: boolean): string {
+  function property(name: string, node: SchemaNode, required: boolean): string {
     const optional = required ? "" : "?";
     // Which prop holds what is written inside a tag is JSX's own rule — the one
     // `JSX.ElementChildrenAttribute` names — so the *wrapper* is decided here and
