@@ -11,11 +11,11 @@ const script = (html: string) =>
   html.match(/<script type="module">([\s\S]*)<\/script>/)?.[1] ?? "";
 
 describe("a page that draws itself", () => {
-  it("carries a module that mounts the bundle into the body", () => {
+  it("carries a module that draws the bundle into the body", () => {
     assert.equal(
       script(toHtml(drawn)),
-      `import{mount}from"${CLIENT_URL}";` +
-        `mount({"functions":{},"root":"42"},{target:document.body});`,
+      `import{dom,render}from"${CLIENT_URL}";` +
+        `render({"functions":{},"root":"42"},dom,document.body);`,
     );
   });
 
@@ -67,6 +67,6 @@ describe("a page as an answer", () => {
     assert.equal(answer.headers.get("content-type"), "text/html");
     const html = await answer.text();
     assert.ok(html.startsWith("<!doctype html>"));
-    assert.ok(script(html).includes("{target:document.body}"));
+    assert.ok(script(html).includes(",dom,document.body);"));
   });
 });

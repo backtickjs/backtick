@@ -3,7 +3,7 @@ import { build } from "esbuild";
 // The client, as a browser can load it.
 //
 // It starts nothing on its own: what a page carries is a script that imports
-// `mount` from here and calls it, which is what `embedInDocument` writes. So
+// `render` and `dom` from here and calls them, which is what `toHtml` writes. So
 // this is the client's own module, bundled — not a variant with a decision
 // already made.
 //

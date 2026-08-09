@@ -20,26 +20,22 @@ export const CLIENT_URL = "/backtick.js";
 
 /** The page, with the bundle already in it. */
 export function toHtml(bundle: Bundle): string {
+  // Import the client, draw the bundle, done. Every `<` is written `<`: a
+  // script element ends at the first `</script>` in its text, whoever wrote it,
+  // and to a JavaScript parser the two are the same character. Escaped here
+  // rather than over the whole document, which is made of `<` by design.
+  const script = (
+    `import{dom,render}from${JSON.stringify(CLIENT_URL)};` +
+    `render(${JSON.stringify(bundle)},dom,document.body);`
+  ).replaceAll("<", "\\u003c");
+
   return (
     `<!doctype html><html><head>` +
     `<meta charset="utf-8">` +
     `<meta name="viewport" content="width=device-width, initial-scale=1">` +
     `<link rel="modulepreload" href="${CLIENT_URL}">` +
     `</head><body>` +
-    `<script type="module">${mounting(bundle)}</script>` +
+    `<script type="module">${script}</script>` +
     `</body></html>`
   );
 }
-
-/** The script a page carries: import the client, draw the bundle, done. */
-function mounting(bundle: Bundle): string {
-  return escaped(
-    `import{mount}from${JSON.stringify(CLIENT_URL)};` +
-      `mount(${JSON.stringify(bundle)},{target:document.body});`,
-  );
-}
-
-// A script element ends at the first `</script>` in its text, whoever wrote it,
-// so no `<` may survive into one. To a JavaScript parser this is the same
-// character.
-const escaped = (source: string) => source.replaceAll("<", "\\u003c");
