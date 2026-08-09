@@ -26,6 +26,28 @@ export function expandJsxElement(value: JsxElement): Promise<Ast> {
   return node;
 }
 
+// The props an element carries, lowered. The id is only ever the one it was
+// reached by, and is here for what a prop that cannot be lowered has to say.
+async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
+  const props = Object.fromEntries(
+    await Promise.all(
+      Object.entries(jsx.props).map(
+        async ([key, entry]): Promise<[string, Ast]> => {
+          if (!isSpliceable(entry)) {
+            throw new Error(
+              `Can't bundle this <${id} /> element: the \`${key}\` ` +
+                "prop isn't spliceable.",
+            );
+          }
+          return [key, await lowerSpliceable(entry, "ClientValue")];
+        },
+      ),
+    ),
+  );
+
+  return { kind: "AstElement", id, props };
+}
+
 async function buildElement(jsx: JsxElement): Promise<Ast> {
   const type = jsx.type;
 
@@ -42,30 +64,16 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
       : lowerSpliceable(children as never, "ClientValue");
   }
 
-  if (isClientElement(type)) {
-    // A client component names the element the interpreter renders, and the props
-    // it hands back are the ones the element carries.
-    const props = Object.fromEntries(
-      await Promise.all(
-        Object.entries(jsx.props).map(
-          async ([key, entry]): Promise<[string, Ast]> => {
-            if (!isSpliceable(entry)) {
-              throw new Error(
-                `Can't bundle this <${type.id} /> element: the \`${key}\` ` +
-                  "prop isn't spliceable.",
-              );
-            }
-            return [key, await lowerSpliceable(entry, "ClientValue")];
-          },
-        ),
-      ),
-    );
+  // An element the interpreter renders, named by the id it was reached by. A
+  // plain tag is its own — `<div>` is `"div"`, the same string a client
+  // script's element already writes — where a `ClientElement` carries one,
+  // which is how a target declares an element as a value.
+  if (typeof type === "string") {
+    return buildTag(jsx, type);
+  }
 
-    return {
-      kind: "AstElement",
-      id: type.id,
-      props,
-    };
+  if (isClientElement(type)) {
+    return buildTag(jsx, type.id);
   } else {
     // The node stands for the invocation, so it is built before the invocation
     // happens: it is what the component's `state()` calls record as their

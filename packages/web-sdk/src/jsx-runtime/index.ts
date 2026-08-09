@@ -1,7 +1,5 @@
 import {
-  createClientElement,
   createJsxElement,
-  type ClientElement,
   type JsxElement,
   type ServerComponent,
 } from "@backtickjs/cs-runtime";
@@ -40,27 +38,14 @@ export declare namespace JSX {
   }
 }
 
-// A tag is an element whose id is the tag name — the same shape a component
-// like `View` has, built here instead of being declared one by one. Interned,
-// so every `<div>` in a bundle is the one element and the bundler's sharing
-// works on tags as it does on components.
-const tags = new Map<string, ClientElement<never>>();
-
-function tag(name: string): ClientElement<never> {
-  const known = tags.get(name);
-  if (known !== undefined) {
-    return known;
-  }
-  const made = createClientElement<never>(name);
-  tags.set(name, made);
-  return made;
-}
-
+// A tag is its own id, so nothing stands for one: `<div>` reaches the bundler
+// as `"div"`, which is the string the wire carries and the one a client
+// script's element already writes.
 export function jsx(
   type: JSX.ElementType,
   props: { [key: string]: unknown },
 ): JSX.Element {
-  return createJsxElement(typeof type === "string" ? tag(type) : type, props);
+  return createJsxElement(type, props);
 }
 
 export const jsxs = jsx;
