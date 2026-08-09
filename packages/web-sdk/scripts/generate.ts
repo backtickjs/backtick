@@ -129,10 +129,15 @@ lines.push(`  Children,`);
 lines.push(`  Client,`);
 lines.push(`  JsxElement,`);
 lines.push(`  Prop,`);
+lines.push(`  ServerComponent,`);
 lines.push(`} from "@backtickjs/cs-runtime";`);
+lines.push(`import {`);
 if ("FragmentProps" in interfaces) {
-  lines.push(`import { createFragment } from "@backtickjs/cs-runtime";`);
+  lines.push(`  createFragment,`);
 }
+lines.push(`  createJsxElement,`);
+lines.push(`  For,`);
+lines.push(`} from "@backtickjs/cs-runtime";`);
 lines.push("");
 
 for (const [name, node] of Object.entries(aliases)) {
@@ -161,17 +166,48 @@ if ("FragmentProps" in interfaces) {
   lines.push("");
 }
 
-lines.push(`export interface IntrinsicElements {`);
+lines.push(`export declare namespace JSX {`);
+lines.push(`  export interface Element extends JsxElement {}`);
+// The tags an app writes bare. TypeScript looks a lowercase name up here and
+// nowhere else, so a name this target does not declare is a type error rather
+// than something that quietly renders.
+lines.push(`  export interface IntrinsicElements {`);
 for (const [tag, name] of Object.entries(elements)) {
-  lines.push(`  ${key(tag)}: ${name};`);
+  lines.push(`    ${key(tag)}: ${name};`);
 }
+lines.push(`  }`);
+// A tag, a component of the app's own, or one of the two that arrange rather
+// than name — and nothing else.
+lines.push(`  export type ElementType =`);
+lines.push(`    | keyof IntrinsicElements`);
+if ("FragmentProps" in interfaces) {
+  lines.push(`    | typeof Fragment`);
+}
+lines.push(`    | typeof For`);
+lines.push(`    | ServerComponent<never>;`);
+lines.push(`  export interface ElementChildrenAttribute {`);
+lines.push(`    children: unknown;`);
+lines.push(`  }`);
 lines.push(`}`);
+lines.push("");
+
+// A tag is its own id, so nothing stands for one: `<div>` reaches the bundler
+// as `"div"`, which is the string the wire carries and the one a client
+// script's element already writes.
+lines.push(`export function jsx(`);
+lines.push(`  type: JSX.ElementType,`);
+lines.push(`  props: { [key: string]: unknown },`);
+lines.push(`): JSX.Element {`);
+lines.push(`  return createJsxElement(type, props);`);
+lines.push(`}`);
+lines.push("");
+lines.push(`export const jsxs = jsx;`);
 lines.push("");
 
 // Relative to this file rather than to the working directory, so it writes the
 // same file wherever it is run from.
 const out = fileURLToPath(
-  new URL("../src/jsx-runtime/elements.ts", import.meta.url),
+  new URL("../src/jsx-runtime/index.ts", import.meta.url),
 );
 writeFileSync(out, lines.join("\n"));
-console.log(`elements.ts: ${lines.length} lines`);
+console.log(`jsx-runtime/index.ts: ${lines.length} lines`);
