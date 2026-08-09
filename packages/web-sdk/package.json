@@ -27,7 +27,7 @@
   "scripts": {
     "build": "tsc -b && node scripts/browser.mjs",
     "dev": "tsc -b --watch",
-    "generate": "node --experimental-strip-types scripts/generate.ts && prettier --write src/jsx-runtime/index.ts schema/html.json",
+    "generate": "node --experimental-strip-types scripts/generate.ts && prettier --write src/jsx-runtime/index.ts schema/index.json",
     "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
