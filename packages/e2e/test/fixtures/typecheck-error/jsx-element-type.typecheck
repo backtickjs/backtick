@@ -1,0 +1,11 @@
+17:27 error TS2339: Property 'blink' does not exist on type 'JSX.IntrinsicElements'.
+23:27 error TS2604: JSX element type 'NotATag' does not have any construct or call signatures.
+23:27 error TS2786: 'NotATag' cannot be used as a JSX component.
+  Its type '{ id: string; }' is not a valid JSX element type.
+46:31 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'HtmlProps'.
+  Property 'nosuch' does not exist on type 'HtmlProps'.
+49:31 error TS2322: Type 'number' is not assignable to type 'Prop<string> | undefined'.
+52:44 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'FragmentProps'.
+  Property 'nosuch' does not exist on type 'FragmentProps'.
+64:32 error TS2322: Type 'true' is not assignable to type 'Children<string | number | JsxElement> | undefined'.
+67:34 error TS2559: Type '{ children: string; }' has no properties in common with type 'VoidProps'.

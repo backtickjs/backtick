@@ -128,15 +128,14 @@ lines.push(`import type {`);
 lines.push(`  Children,`);
 lines.push(`  Client,`);
 lines.push(`  JsxElement,`);
+lines.push(`  JsxElementType,`);
 lines.push(`  Prop,`);
-lines.push(`  ServerComponent,`);
 lines.push(`} from "@backtickjs/cs-runtime";`);
 lines.push(`import {`);
 if ("FragmentProps" in interfaces) {
   lines.push(`  createFragment,`);
 }
 lines.push(`  createJsxElement,`);
-lines.push(`  For,`);
 lines.push(`} from "@backtickjs/cs-runtime";`);
 lines.push("");
 
@@ -176,15 +175,12 @@ for (const [tag, name] of Object.entries(elements)) {
   lines.push(`    ${key(tag)}: ${name};`);
 }
 lines.push(`  }`);
-// A tag, a component of the app's own, or one of the two that arrange rather
-// than name — and nothing else.
-lines.push(`  export type ElementType =`);
-lines.push(`    | keyof IntrinsicElements`);
-if ("FragmentProps" in interfaces) {
-  lines.push(`    | typeof Fragment`);
-}
-lines.push(`    | typeof For`);
-lines.push(`    | ServerComponent<never>;`);
+// What may stand as a tag, which is `cs-runtime`'s to say and not a target's:
+// a tag name, a component the app wrote, or one of the two the bundler
+// recognises. Naming the tags again here would say nothing — TypeScript looks
+// a lowercase name up in `IntrinsicElements` whatever this admits, so a name
+// this target does not declare is a type error either way.
+lines.push(`  export type ElementType = JsxElementType;`);
 lines.push(`  export interface ElementChildrenAttribute {`);
 lines.push(`    children: unknown;`);
 lines.push(`  }`);

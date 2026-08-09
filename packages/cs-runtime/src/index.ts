@@ -14,7 +14,11 @@ export {
 export type { ClientString } from "./ClientString.js";
 export { For, type ForProps, isFor } from "./For.js";
 export { createFragment, type Fragment, isFragment } from "./Fragment.js";
-export { type JsxElement, type JsxType, isJsxElement } from "./JsxElement.js";
+export {
+  type JsxElement,
+  type JsxElementType,
+  isJsxElement,
+} from "./JsxElement.js";
 export type { Prop } from "./Prop.js";
 export type { Children } from "./Children.js";
 export type { ClientValue } from "./ClientValue.js";

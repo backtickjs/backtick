@@ -4,10 +4,10 @@ import type {
   Children,
   Client,
   JsxElement,
+  JsxElementType,
   Prop,
-  ServerComponent,
 } from "@backtickjs/cs-runtime";
-import { createFragment, createJsxElement, For } from "@backtickjs/cs-runtime";
+import { createFragment, createJsxElement } from "@backtickjs/cs-runtime";
 
 export type Booleanish = boolean | "true" | "false";
 
@@ -828,11 +828,7 @@ export declare namespace JSX {
     video: VideoProps;
     wbr: VoidProps;
   }
-  export type ElementType =
-    | keyof IntrinsicElements
-    | typeof Fragment
-    | typeof For
-    | ServerComponent<never>;
+  export type ElementType = JsxElementType;
   export interface ElementChildrenAttribute {
     children: unknown;
   }
