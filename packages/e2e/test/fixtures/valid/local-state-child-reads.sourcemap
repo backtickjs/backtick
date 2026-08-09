@@ -1,4 +1,6 @@
 cs.lift(cs.const(      → cs`
+"font-size: "          → "font-size: "
+ + (                   →  + 
 cs.receiver(           → 
 cs.splice(             →  [-semantic]
 (selected)             → $selected
@@ -15,6 +17,9 @@ cs.splice(             →  [-semantic]
 20                     → 20
  :                     →  : 
 16                     → 16
+)                      → 
+ +                     →  + 
+"px"                   → "px"
 ))                     → `
 cs.lift(cs.const(      → cs`
 "row "                 → "row "
@@ -49,7 +54,7 @@ cs.splice(             →  [-semantic]
 )                      →  [-semantic]
  ?                     →  ? 
 cs.splice(             → ${ [-semantic]
-(<Text>marker</Text>)  → (<Text>marker</Text>)
+(<span>marker</span>)  → (<span>marker</span>)
 )                      → } [-semantic]
  :                     →  : 
 null                   → null

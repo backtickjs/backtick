@@ -5,8 +5,8 @@
 
 #f1 = ($0) => () => $0
 
-#f2 = (x) => <Text
-  onPress={#f1(x)}
+#f2 = (x) => <span
+  onclick={#f1(x)}
 />
 
 root = #f0((x) => #f2(x))

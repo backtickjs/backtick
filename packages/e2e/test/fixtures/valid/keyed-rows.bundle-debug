@@ -12,31 +12,31 @@
 
 #f4 = ($0) => "row " + $0
 
-#f5 = (id) => <Text>
+#f5 = (id) => <span>
   {#f4(id)}
-</Text>
+</span>
 
 #f6 = () => {
   const s0 = state([1, 2, 3]);
-  return <View>
-    {<Text
-      onPress={#f0(() => s0)}
+  return <div>
+    {<span
+      onclick={#f0(() => s0)}
     >
       {"swap"}
-    </Text>}
-    {<Text
-      onPress={#f1(() => s0)}
+    </span>}
+    {<span
+      onclick={#f1(() => s0)}
     >
       {"drop"}
-    </Text>}
-    {<View>
+    </span>}
+    {<div>
       {<For
         each={#f2(() => s0)}
       >
         {#f3((id) => #f5(id))}
       </For>}
-    </View>}
-  </View>;
+    </div>}
+  </div>;
 }
 
 root = #f6()

@@ -1,19 +1,19 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, Pressable, state, Text } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state } from "@backtickjs/core";
 // `Pressable` is the row that responds as one thing: `View` lays children out
 // and `Text` takes a press, and this takes both — so a checkbox and a label are
 // one tap target while staying separately styled.
 async function Row() {
   const count = state(0);
-  return _jsxs(Pressable, {
-    testID: "row",
-    style: { flexDirection: "row", gap: 8 },
-    onPress: cs.create(
+  return _jsxs("button", {
+    id: "row",
+    style: "display: flex; gap: 8px",
+    onclick: cs.create(
       [12, 16, 12, 57],
       {
         version: "0.0.0",
         filePath: "pressable.tsx",
-        fileHash: "1ro4qk3wjtadf",
+        fileHash: "2dcmkw8revorp",
         kind: "value",
         splices: { $count: count },
         captures: [],
@@ -71,14 +71,14 @@ async function Row() {
       }),
     ),
     children: [
-      _jsx(Text, {
-        style: { fontWeight: "700" },
+      _jsx("span", {
+        style: "font-weight: 700",
         children: cs.create(
-          [15, 10, 15, 43],
+          [14, 39, 14, 72],
           {
             version: "0.0.0",
             filePath: "pressable.tsx",
-            fileHash: "1ro4qk3wjtadf",
+            fileHash: "2dcmkw8revorp",
             kind: "value",
             splices: { $count: count },
             captures: [],
@@ -86,19 +86,19 @@ async function Row() {
           },
           () => ({
             kind: 228,
-            loc: [15, 13, 15, 42],
+            loc: [14, 42, 14, 71],
             condition: {
               kind: 227,
-              loc: [15, 13, 15, 30],
+              loc: [14, 42, 14, 59],
               left: {
                 kind: 214,
-                loc: [15, 13, 15, 26],
+                loc: [14, 42, 14, 55],
                 expression: {
                   kind: 212,
-                  loc: [15, 13, 15, 24],
+                  loc: [14, 42, 14, 53],
                   expression: {
                     kind: 1000,
-                    loc: [15, 13, 15, 19],
+                    loc: [14, 42, 14, 48],
                     key: "$count",
                   },
                   questionDotToken: false,
@@ -110,30 +110,30 @@ async function Row() {
               operatorToken: ">",
               right: {
                 kind: 9,
-                loc: [15, 29, 15, 30],
+                loc: [14, 58, 14, 59],
                 value: 0,
               },
             },
             whenTrue: {
               kind: 11,
-              loc: [15, 33, 15, 36],
+              loc: [14, 62, 14, 65],
               text: "\u2611",
             },
             whenFalse: {
               kind: 11,
-              loc: [15, 39, 15, 42],
+              loc: [14, 68, 14, 71],
               text: "\u2610",
             },
           }),
         ),
       }),
-      _jsx(Text, {
+      _jsx("span", {
         children: cs.create(
-          [17, 14, 17, 55],
+          [15, 14, 15, 55],
           {
             version: "0.0.0",
             filePath: "pressable.tsx",
-            fileHash: "1ro4qk3wjtadf",
+            fileHash: "2dcmkw8revorp",
             kind: "value",
             splices: { $count: count },
             captures: [],
@@ -141,25 +141,25 @@ async function Row() {
           },
           () => ({
             kind: 227,
-            loc: [17, 17, 17, 54],
+            loc: [15, 17, 15, 54],
             left: {
               kind: 227,
-              loc: [17, 17, 17, 43],
+              loc: [15, 17, 15, 43],
               left: {
                 kind: 11,
-                loc: [17, 17, 17, 27],
+                loc: [15, 17, 15, 27],
                 text: "pressed ",
               },
               operatorToken: "+",
               right: {
                 kind: 214,
-                loc: [17, 30, 17, 43],
+                loc: [15, 30, 15, 43],
                 expression: {
                   kind: 212,
-                  loc: [17, 30, 17, 41],
+                  loc: [15, 30, 15, 41],
                   expression: {
                     kind: 1000,
-                    loc: [17, 30, 17, 36],
+                    loc: [15, 30, 15, 36],
                     key: "$count",
                   },
                   questionDotToken: false,
@@ -172,7 +172,7 @@ async function Row() {
             operatorToken: "+",
             right: {
               kind: 11,
-              loc: [17, 46, 17, 54],
+              loc: [15, 46, 15, 54],
               text: " times",
             },
           }),

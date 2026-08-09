@@ -9,7 +9,7 @@ __cs_order                                → order
 : Order                                   → : Order
 ) =>                                      → ) =>\n        
 cs.splice(                                → ${ [-semantic]
-(\n          <View>\n            <Image\n              source={{\n                uri: → (\n          <View>\n            <Image\n              source={{\n                uri: 
+(\n          <div>\n            <img\n              src={→ (\n          <div>\n            <img\n              src={
 cs.lift(cs.const(                         → cs`
 "https://img.example.com/"                → "https://img.example.com/"
  +                                        →  + 
@@ -21,7 +21,7 @@ id                                        → id
  +                                        →  + 
 ".png"                                    → ".png"
 ))                                        → `
-,\n              }}\n            />\n            <Text>{→ ,\n              }}\n            />\n            <Text>{
+}\n              alt=""\n            />\n            <span>{→ }\n              alt=""\n            />\n            <span>{
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.receiver(                              → 
@@ -33,7 +33,7 @@ customer                                  → customer
 .                                         → .
 name                                      → name
 ))                                        → `
-}</Text>\n            <Text>{             → }</Text>\n            <Text>{
+}</span>\n            <span>{             → }</span>\n            <span>{
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.receiver(                              → 
@@ -45,7 +45,7 @@ customer                                  → customer
 .                                         → .
 city                                      → city
 ))                                        → `
-}</Text>\n            <For each={         → }</Text>\n            <For each={
+}</span>\n            <For each={         → }</span>\n            <For each={
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 __cs_order                                → order
@@ -60,7 +60,7 @@ __cs_item                                 → item
 : Item                                    → : Item
 ) =>                                      → ) =>\n                
 cs.splice(                                → ${ [-semantic]
-(<Text>{                                  → (<Text>{
+(<span>{                                  → (<span>{
 cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 __cs_item                                 → item
@@ -76,10 +76,10 @@ __cs_item                                 → item
 .                                         → .
 qty                                       → qty
 ))                                        → `
-}</Text>)                                 → }</Text>)
+}</span>)                                 → }</span>)
 )                                         → } [-semantic]
 ))                                        → `
-}\n            </For>\n            <Text>{→ }\n            </For>\n            <Text>{
+}\n            </For>\n            <span>{→ }\n            </For>\n            <span>{
 cs.lift(cs.const(                         → cs`
 "$"                                       → "$"
  +                                        →  + 
@@ -89,6 +89,6 @@ __cs_order                                → order
 .                                         → .
 total                                     → total
 ))                                        → `
-}</Text>\n          </View>\n        )    → }</Text>\n          </View>\n        )
+}</span>\n          </div>\n        )     → }</span>\n          </div>\n        )
 )                                         → } [-semantic]
 ))                                        → `

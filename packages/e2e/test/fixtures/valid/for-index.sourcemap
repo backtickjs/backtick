@@ -53,7 +53,7 @@ __cs_index               → index
 : ReadonlyState<number>  → : ReadonlyState<number>
 ) =>                     → ) =>\n            
 cs.splice(               → ${ [-semantic]
-(<Text>{                 → (<Text>{
+(<span>{                 → (<span>{
 cs.lift(cs.const(        → cs`
 __cs_name                → name
  +                       →  + 
@@ -66,6 +66,6 @@ __cs_index               → index
 read                     → read
 ()                       → ()
 ))                       → `
-}</Text>)                → }</Text>)
+}</span>)                → }</span>)
 )                        → } [-semantic]
 ))                       → `

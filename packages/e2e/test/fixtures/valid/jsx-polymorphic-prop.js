@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, View, Text } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs } from "@backtickjs/core";
 // One script body (one source location) instantiated with different splices —
 // the JSX analogue of the `splice-sharing` fixture. The entry takes a thunk
 // parameter, and each `onPress`'s `#call` passes its own splice as a `#thunk`.
@@ -9,7 +9,7 @@ function make(n) {
     {
       version: "0.0.0",
       filePath: "jsx-polymorphic-prop.tsx",
-      fileHash: "1le9zmhdblst0",
+      fileHash: "29qub6x9fptt4",
       kind: "value",
       splices: { $n: n },
       captures: [],
@@ -27,9 +27,9 @@ function make(n) {
     }),
   );
 }
-export default _jsxs(View, {
+export default _jsxs("div", {
   children: [
-    _jsx(Text, { onPress: make(1) }),
-    _jsx(Text, { onPress: make(2) }),
+    _jsx("span", { onclick: make(1) }),
+    _jsx("span", { onclick: make(2) }),
   ],
 });

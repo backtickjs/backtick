@@ -87,12 +87,12 @@ __cs_id            → id
 : number           → : number
 ) =>               → ) => 
 cs.splice(         → ${ [-semantic]
-(<Text>{           → (<Text>{
+(<span>{           → (<span>{
 cs.lift(cs.const(  → cs`
 "row "             → "row "
  +                 →  + 
 __cs_id            → id
 ))                 → `
-}</Text>)          → }</Text>)
+}</span>)          → }</span>)
 )                  → } [-semantic]
 ))                 → `

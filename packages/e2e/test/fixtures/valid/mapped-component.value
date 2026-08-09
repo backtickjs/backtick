@@ -1,11 +1,11 @@
-<View>
-  <Text>
+<div>
+  <span>
     {"row 1"}
-  </Text>
-  <Text>
+  </span>
+  <span>
     {"row 2"}
-  </Text>
-  <Text>
+  </span>
+  <span>
     {"row 3"}
-  </Text>
-</View>
+  </span>
+</div>

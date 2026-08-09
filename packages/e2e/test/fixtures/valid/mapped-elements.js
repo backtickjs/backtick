@@ -1,5 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { Text, View } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 const items = ["alpha", "beta", "gamma"];
 // A list mapped on the host. The array is host data, so the map runs while
 // bundling and each item becomes its own element — the list's length is fixed
@@ -8,6 +7,6 @@ const items = ["alpha", "beta", "gamma"];
 //
 // Each element is referenced once, so none hoists: they inline into the
 // `View`'s entry, each carrying its own key inside the element node.
-export default _jsx(View, {
-  children: items.map((item) => _jsx(Text, { children: item })),
+export default _jsx("div", {
+  children: items.map((item) => _jsx("span", { children: item })),
 });

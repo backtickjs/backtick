@@ -1,4 +1,6 @@
 cs.lift(cs.const(  → cs`
+"font-size: "      → "font-size: "
+ +                 →  + 
 cs.receiver(       → 
 cs.splice(         →  [-semantic]
 (size)             → $size
@@ -7,6 +9,8 @@ cs.splice(         →  [-semantic]
 .                  → .
 read               → read
 ()                 → ()
+ +                 →  + 
+"px"               → "px"
 ))                 → `
 cs.lift(cs.const(  → cs`
 () => {\n          → () => {\n      

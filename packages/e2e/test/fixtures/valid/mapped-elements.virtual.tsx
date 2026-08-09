@@ -1,5 +1,3 @@
-import { Text, View } from "@backtickjs/core";
-
 const items = ["alpha", "beta", "gamma"];
 
 // A list mapped on the host. The array is host data, so the map runs while
@@ -10,9 +8,9 @@ const items = ["alpha", "beta", "gamma"];
 // Each element is referenced once, so none hoists: they inline into the
 // `View`'s entry, each carrying its own key inside the element node.
 export default (
-  <View>
+  <div>
     {items.map((item) => (
-      <Text>{item}</Text>
+      <span>{item}</span>
     ))}
-  </View>
+  </div>
 );

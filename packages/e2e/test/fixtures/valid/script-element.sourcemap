@@ -4,6 +4,16 @@ __cs_size                             → size
 : number                              → : number
 ) => {\n                              → ) => {\n    
 const                                 → const 
+__cs_css                              → css
+ = cs.const(                          →  = 
+"font-size: "                         → "font-size: "
+ +                                    →  + 
+__cs_size                             → size
+ +                                    →  + 
+"px"                                  → "px"
+);                                    → ;
+\n                                    → \n    
+const                                 → const 
 __cs_press                            → press
  = cs.const(                          →  = 
 () =>                                 → () => 
@@ -20,20 +30,12 @@ write                                 → write
 );                                    → ;
 \n                                    → \n    
 return cs.const(                      → return 
-<View style={cs.lift(                 → (\n      <View style={
-{                                     → { 
-padding                               → padding
-:                                     → : 
-__cs_size                             → size
- }                                    →  }
+<div style={cs.lift(                  → (\n      <div style={
+__cs_css                              → css
 )}>                                   → }>\n        
-<Text style={cs.lift(                 → <Text\n          style={
-{                                     → { 
-fontSize                              → fontSize
-:                                     → : 
-__cs_size                             → size
- }                                    →  }
-)} onPress={cs.lift(                  → }\n          onPress={
+<span style={cs.lift(                 → <span style={
+__cs_css                              → css
+)} onclick={cs.lift(                  → } onclick={
 () =>                                 → () => 
 cs.receiver(                          → 
 cs.splice(                            →  [-semantic]
@@ -45,7 +47,7 @@ write                                 → write
 (                                     → (
 "pressed"                             → "pressed"
 )                                     → )
-)}>{                                  → }\n        >\n          {
+)}>{                                  → }>\n          {
 cs.receiver(                          → 
 cs.splice(                            →  [-semantic]
 (label)                               → $label
@@ -54,24 +56,16 @@ cs.splice(                            →  [-semantic]
 .                                     → .
 read                                  → read
 ()                                    → ()
-}</Text>                              → }\n        </Text>
-<Text style={cs.lift(                 → <Text style={
-{                                     → { 
-fontSize                              → fontSize
-:                                     → : 
-8                                     → 8
- }                                    →  }
-)}>fixed</Text>                       → }>fixed</Text>
-<Text style={cs.lift(                 → <Text style={
-{                                     → { 
-fontSize                              → fontSize
-:                                     → : 
-__cs_size                             → size
- }                                    →  }
-)} onPress={cs.lift(                  → } onPress={
+}</span>                              → }\n        </span>
+<span style={cs.lift(                 → <span style=
+"font-size: 8px"                      → "font-size: 8px"
+)}>fixed</span>                       → >fixed</span>
+<span style={cs.lift(                 → <span style={
+__cs_css                              → css
+)} onclick={cs.lift(                  → } onclick={
 __cs_press                            → press
-)}>\n          held\n        </Text>  → }>\n          held\n        </Text>
-</View>                               → \n      </View>\n    )
+)}>\n          held\n        </span>  → }>\n          held\n        </span>
+</div>                                → \n      </div>\n    )
 );                                    → ;
 \n}                                   → \n  }
 ))                                    → `

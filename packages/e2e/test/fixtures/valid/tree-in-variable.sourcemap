@@ -4,7 +4,7 @@ const              → const
 __cs_tree          → tree
  = cs.const(       →  = 
 cs.splice(         → ${ [-semantic]
-(<View />)         → (<View />)
+(<div />)          → (<div />)
 )                  → } [-semantic]
 );                 → ;
 \n                 → \n  

@@ -49,6 +49,25 @@
             [
               [
                 1007,
+                "css",
+                [
+                  1003,
+                  "+",
+                  [
+                    1003,
+                    "+",
+                    "font-size: ",
+                    [
+                      1000,
+                      "size"
+                    ]
+                  ],
+                  "px"
+                ],
+                "const"
+              ],
+              [
+                1007,
                 "press",
                 [
                   1005,
@@ -81,29 +100,25 @@
                 1009,
                 [
                   0,
-                  "View",
+                  "div",
                   {
-                    "style": {
-                      "padding": [
-                        1000,
-                        "size"
-                      ]
-                    }
+                    "style": [
+                      1000,
+                      "css"
+                    ]
                   },
                   [
                     4,
                     [
                       [
                         0,
-                        "Text",
+                        "span",
                         {
-                          "style": {
-                            "fontSize": [
-                              1000,
-                              "size"
-                            ]
-                          },
-                          "onPress": [
+                          "style": [
+                            1000,
+                            "css"
+                          ],
+                          "onclick": [
                             1005,
                             [],
                             [
@@ -151,25 +166,21 @@
                       ],
                       [
                         0,
-                        "Text",
+                        "span",
                         {
-                          "style": {
-                            "fontSize": 8
-                          }
+                          "style": "font-size: 8px"
                         },
                         "fixed"
                       ],
                       [
                         0,
-                        "Text",
+                        "span",
                         {
-                          "style": {
-                            "fontSize": [
-                              1000,
-                              "size"
-                            ]
-                          },
-                          "onPress": [
+                          "style": [
+                            1000,
+                            "css"
+                          ],
+                          "onclick": [
                             1000,
                             "press"
                           ]
@@ -205,11 +216,9 @@
               1009,
               [
                 0,
-                "View",
+                "div",
                 {
-                  "style": {
-                    "padding": 0
-                  }
+                  "style": "padding: 0"
                 },
                 [
                   2,

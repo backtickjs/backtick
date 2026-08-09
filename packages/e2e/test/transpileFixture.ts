@@ -15,7 +15,7 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
   target: ts.ScriptTarget.ESNext,
   module: ts.ModuleKind.ESNext,
   jsx: ts.JsxEmit.ReactJSX,
-  jsxImportSource: "@backtickjs/core",
+  jsxImportSource: "@backtickjs/web-sdk",
   sourceMap: false,
 };
 

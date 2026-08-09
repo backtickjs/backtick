@@ -1,5 +1,5 @@
-import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { cs, View } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs } from "@backtickjs/core";
 // A fragment a script writes: its children where it stands, and no node of its
 // own — the same `Fragment` element the tree path writes for `<>`.
 //
@@ -11,7 +11,7 @@ const listed = cs.create(
   {
     version: "0.0.0",
     filePath: "script-fragment.tsx",
-    fileHash: "3kv5kwgfahv4i",
+    fileHash: "eweogd4x2tuk",
     kind: "value",
     splices: {},
     captures: [],
@@ -28,7 +28,7 @@ const listed = cs.create(
           kind: 80,
           loc: [9, 20, 9, 24],
           text: "name",
-          bindingKey: "name$3kv5kwgfahv4i$0",
+          bindingKey: "name$eweogd4x2tuk$0",
         },
       },
     ],
@@ -42,7 +42,7 @@ const listed = cs.create(
           tagName: {
             kind: 11,
             loc: [11, 6, 11, 10],
-            text: "Text",
+            text: "span",
           },
           attributes: [],
           children: [
@@ -59,7 +59,7 @@ const listed = cs.create(
           tagName: {
             kind: 11,
             loc: [12, 6, 12, 10],
-            text: "Text",
+            text: "span",
           },
           attributes: [],
           children: [
@@ -67,7 +67,7 @@ const listed = cs.create(
               kind: 80,
               loc: [13, 8, 13, 12],
               text: "name",
-              bindingKey: "name$3kv5kwgfahv4i$0",
+              bindingKey: "name$eweogd4x2tuk$0",
             },
             {
               kind: 11,
@@ -78,7 +78,7 @@ const listed = cs.create(
               kind: 80,
               loc: [13, 15, 13, 19],
               text: "name",
-              bindingKey: "name$3kv5kwgfahv4i$0",
+              bindingKey: "name$eweogd4x2tuk$0",
             },
           ],
         },
@@ -86,13 +86,13 @@ const listed = cs.create(
     },
   }),
 );
-export default _jsx(View, {
+export default _jsx("div", {
   children: cs.create(
-    [18, 23, 18, 39],
+    [18, 22, 18, 38],
     {
       version: "0.0.0",
       filePath: "script-fragment.tsx",
-      fileHash: "3kv5kwgfahv4i",
+      fileHash: "eweogd4x2tuk",
       kind: "value",
       splices: { $listed: listed },
       captures: [],
@@ -100,17 +100,17 @@ export default _jsx(View, {
     },
     () => ({
       kind: 214,
-      loc: [18, 26, 18, 38],
+      loc: [18, 25, 18, 37],
       expression: {
         kind: 1000,
-        loc: [18, 26, 18, 33],
+        loc: [18, 25, 18, 32],
         key: "$listed",
       },
       questionDotToken: false,
       arguments: [
         {
           kind: 11,
-          loc: [18, 34, 18, 37],
+          loc: [18, 33, 18, 36],
           text: "x",
         },
       ],

@@ -1,4 +1,4 @@
-import { cs, state, Text } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // A per-instance state cell. The component that declared it owns it, so that
 // component's entry carries the initial value and each instance allocates its
@@ -12,14 +12,14 @@ import { cs, state, Text } from "@backtickjs/core";
 async function Stepper() {
   const size = state(16);
   return (
-    <Text
-      style={{ fontSize: cs.lift(cs.const(cs.receiver(cs.splice((size))).read())) }}
-      onPress={cs.lift(cs.const(() => {
+    <span
+      style={cs.lift(cs.const("font-size: " + cs.receiver(cs.splice((size))).read() + "px"))}
+      onclick={cs.lift(cs.const(() => {
     cs.statement(cs.receiver(cs.splice((size))).write(cs.receiver(cs.splice((size))).read() + 1));
 }))}
     >
       press
-    </Text>
+    </span>
   );
 }
 

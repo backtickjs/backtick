@@ -1,5 +1,5 @@
-import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { cs, state, Text } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state } from "@backtickjs/core";
 // A per-instance state cell. The component that declared it owns it, so that
 // component's entry carries the initial value and each instance allocates its
 // own storage. The display and the handler splice the same handle, so they
@@ -11,44 +11,62 @@ import { cs, state, Text } from "@backtickjs/core";
 // threads through `slots`.
 async function Stepper() {
   const size = state(16);
-  return _jsx(Text, {
-    style: {
-      fontSize: cs.create(
-        [16, 26, 16, 42],
-        {
-          version: "0.0.0",
-          filePath: "local-state.tsx",
-          fileHash: "3f74kgyltbjcu",
-          kind: "value",
-          splices: { $size: size },
-          captures: [],
-          spliceParams: { $size: [] },
-        },
-        () => ({
-          kind: 214,
-          loc: [16, 29, 16, 41],
-          expression: {
-            kind: 212,
-            loc: [16, 29, 16, 39],
+  return _jsx("span", {
+    style: cs.create(
+      [16, 14, 16, 53],
+      {
+        version: "0.0.0",
+        filePath: "local-state.tsx",
+        fileHash: "32fwldp12hoh5",
+        kind: "value",
+        splices: { $size: size },
+        captures: [],
+        spliceParams: { $size: [] },
+      },
+      () => ({
+        kind: 227,
+        loc: [16, 17, 16, 52],
+        left: {
+          kind: 227,
+          loc: [16, 17, 16, 45],
+          left: {
+            kind: 11,
+            loc: [16, 17, 16, 30],
+            text: "font-size: ",
+          },
+          operatorToken: "+",
+          right: {
+            kind: 214,
+            loc: [16, 33, 16, 45],
             expression: {
-              kind: 1000,
-              loc: [16, 29, 16, 34],
-              key: "$size",
+              kind: 212,
+              loc: [16, 33, 16, 43],
+              expression: {
+                kind: 1000,
+                loc: [16, 33, 16, 38],
+                key: "$size",
+              },
+              questionDotToken: false,
+              name: "read",
             },
             questionDotToken: false,
-            name: "read",
+            arguments: [],
           },
-          questionDotToken: false,
-          arguments: [],
-        }),
-      ),
-    },
-    onPress: cs.create(
+        },
+        operatorToken: "+",
+        right: {
+          kind: 11,
+          loc: [16, 48, 16, 52],
+          text: "px",
+        },
+      }),
+    ),
+    onclick: cs.create(
       [17, 16, 19, 9],
       {
         version: "0.0.0",
         filePath: "local-state.tsx",
-        fileHash: "3f74kgyltbjcu",
+        fileHash: "32fwldp12hoh5",
         kind: "value",
         splices: { $size: size },
         captures: [],

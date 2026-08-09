@@ -1,10 +1,10 @@
-#f0 = () => <View>
-  {<Text>
+#f0 = () => <div>
+  {<span>
     {"a"}
-  </Text>}
-  {<Text>
+  </span>}
+  {<span>
     {"b"}
-  </Text>}
-</View>
+  </span>}
+</div>
 
 root = #f0()

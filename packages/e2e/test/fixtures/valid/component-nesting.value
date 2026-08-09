@@ -1,5 +1,5 @@
-<View>
-  <Text>
+<div>
+  <span>
     {"x"}
-  </Text>
-</View>
+  </span>
+</div>

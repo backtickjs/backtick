@@ -1,16 +1,16 @@
-<View>
-  <Text onPress={[function]}>
+<div>
+  <span onclick={[function]}>
     {"select"}
-  </Text>
-  <View>
-    <Link href="#open">
+  </span>
+  <div>
+    <a href="#open">
       {"row 0"}
-    </Link>
-    <Link href="#closed">
+    </a>
+    <a href="#closed">
       {"row 1"}
-    </Link>
-    <Link href="#closed">
+    </a>
+    <a href="#closed">
       {"row 2"}
-    </Link>
-  </View>
-</View>
+    </a>
+  </div>
+</div>

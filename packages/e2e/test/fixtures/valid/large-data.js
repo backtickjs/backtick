@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, For, Image, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, For } from "@backtickjs/core";
 const orders = Array.from({ length: 5 }, (_, i) => ({
   id: `ord-${1000 + i}`,
   customer: {
@@ -16,14 +16,14 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 // with holes for each order's fields (and a nested item list), mapped at
 // runtime. The bundle carries the data plus a single card, not five expanded
 // copies. The root View stays static; only its children map on the client.
-export default _jsx(View, {
+export default _jsx("div", {
   children: _jsx(For, {
     each: cs.create(
       [30, 16, 30, 27],
       {
         version: "0.0.0",
         filePath: "large-data.tsx",
-        fileHash: "b5tmg4sc0e9w",
+        fileHash: "2yx6cd1u55xly",
         kind: "value",
         splices: { $orders: orders },
         captures: [],
@@ -36,73 +36,104 @@ export default _jsx(View, {
       }),
     ),
     children: cs.create(
-      [31, 8, 47, 12],
+      [31, 8, 46, 12],
       {
         version: "0.0.0",
         filePath: "large-data.tsx",
-        fileHash: "b5tmg4sc0e9w",
+        fileHash: "2yx6cd1u55xly",
         kind: "value",
         splices: {
-          $0splice0: _jsxs(View, {
+          $0splice0: _jsxs("div", {
             children: [
-              _jsx(Image, {
-                source: {
-                  uri: cs.create(
-                    [36, 22, 36, 72],
-                    {
-                      version: "0.0.0",
-                      filePath: "large-data.tsx",
-                      fileHash: "b5tmg4sc0e9w",
-                      kind: "value",
-                      splices: {},
-                      captures: ["order$b5tmg4sc0e9w$0"],
-                      spliceParams: {},
-                    },
-                    () => ({
+              _jsx("img", {
+                src: cs.create(
+                  [35, 20, 35, 70],
+                  {
+                    version: "0.0.0",
+                    filePath: "large-data.tsx",
+                    fileHash: "2yx6cd1u55xly",
+                    kind: "value",
+                    splices: {},
+                    captures: ["order$2yx6cd1u55xly$0"],
+                    spliceParams: {},
+                  },
+                  () => ({
+                    kind: 227,
+                    loc: [35, 23, 35, 69],
+                    left: {
                       kind: 227,
-                      loc: [36, 25, 36, 71],
+                      loc: [35, 23, 35, 60],
                       left: {
-                        kind: 227,
-                        loc: [36, 25, 36, 62],
-                        left: {
-                          kind: 11,
-                          loc: [36, 25, 36, 51],
-                          text: "https://img.example.com/",
-                        },
-                        operatorToken: "+",
-                        right: {
-                          kind: 212,
-                          loc: [36, 54, 36, 62],
-                          expression: {
-                            kind: 80,
-                            loc: [36, 54, 36, 59],
-                            text: "order",
-                            bindingKey: "order$b5tmg4sc0e9w$0",
-                          },
-                          questionDotToken: false,
-                          name: "id",
-                        },
+                        kind: 11,
+                        loc: [35, 23, 35, 49],
+                        text: "https://img.example.com/",
                       },
                       operatorToken: "+",
                       right: {
-                        kind: 11,
-                        loc: [36, 65, 36, 71],
-                        text: ".png",
+                        kind: 212,
+                        loc: [35, 52, 35, 60],
+                        expression: {
+                          kind: 80,
+                          loc: [35, 52, 35, 57],
+                          text: "order",
+                          bindingKey: "order$2yx6cd1u55xly$0",
+                        },
+                        questionDotToken: false,
+                        name: "id",
                       },
-                    }),
-                  ),
-                },
+                    },
+                    operatorToken: "+",
+                    right: {
+                      kind: 11,
+                      loc: [35, 63, 35, 69],
+                      text: ".png",
+                    },
+                  }),
+                ),
+                alt: "",
               }),
-              _jsx(Text, {
+              _jsx("span", {
+                children: cs.create(
+                  [38, 20, 38, 43],
+                  {
+                    version: "0.0.0",
+                    filePath: "large-data.tsx",
+                    fileHash: "2yx6cd1u55xly",
+                    kind: "value",
+                    splices: {},
+                    captures: ["order$2yx6cd1u55xly$0"],
+                    spliceParams: {},
+                  },
+                  () => ({
+                    kind: 212,
+                    loc: [38, 23, 38, 42],
+                    expression: {
+                      kind: 212,
+                      loc: [38, 23, 38, 37],
+                      expression: {
+                        kind: 80,
+                        loc: [38, 23, 38, 28],
+                        text: "order",
+                        bindingKey: "order$2yx6cd1u55xly$0",
+                      },
+                      questionDotToken: false,
+                      name: "customer",
+                    },
+                    questionDotToken: false,
+                    name: "name",
+                  }),
+                ),
+              }),
+              _jsx("span", {
                 children: cs.create(
                   [39, 20, 39, 43],
                   {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
-                    fileHash: "b5tmg4sc0e9w",
+                    fileHash: "2yx6cd1u55xly",
                     kind: "value",
                     splices: {},
-                    captures: ["order$b5tmg4sc0e9w$0"],
+                    captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
                   },
                   () => ({
@@ -115,39 +146,7 @@ export default _jsx(View, {
                         kind: 80,
                         loc: [39, 23, 39, 28],
                         text: "order",
-                        bindingKey: "order$b5tmg4sc0e9w$0",
-                      },
-                      questionDotToken: false,
-                      name: "customer",
-                    },
-                    questionDotToken: false,
-                    name: "name",
-                  }),
-                ),
-              }),
-              _jsx(Text, {
-                children: cs.create(
-                  [40, 20, 40, 43],
-                  {
-                    version: "0.0.0",
-                    filePath: "large-data.tsx",
-                    fileHash: "b5tmg4sc0e9w",
-                    kind: "value",
-                    splices: {},
-                    captures: ["order$b5tmg4sc0e9w$0"],
-                    spliceParams: {},
-                  },
-                  () => ({
-                    kind: 212,
-                    loc: [40, 23, 40, 42],
-                    expression: {
-                      kind: 212,
-                      loc: [40, 23, 40, 37],
-                      expression: {
-                        kind: 80,
-                        loc: [40, 23, 40, 28],
-                        text: "order",
-                        bindingKey: "order$b5tmg4sc0e9w$0",
+                        bindingKey: "order$2yx6cd1u55xly$0",
                       },
                       questionDotToken: false,
                       name: "customer",
@@ -159,63 +158,63 @@ export default _jsx(View, {
               }),
               _jsx(For, {
                 each: cs.create(
-                  [41, 24, 41, 39],
+                  [40, 24, 40, 39],
                   {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
-                    fileHash: "b5tmg4sc0e9w",
+                    fileHash: "2yx6cd1u55xly",
                     kind: "value",
                     splices: {},
-                    captures: ["order$b5tmg4sc0e9w$0"],
+                    captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
                   },
                   () => ({
                     kind: 212,
-                    loc: [41, 27, 41, 38],
+                    loc: [40, 27, 40, 38],
                     expression: {
                       kind: 80,
-                      loc: [41, 27, 41, 32],
+                      loc: [40, 27, 40, 32],
                       text: "order",
-                      bindingKey: "order$b5tmg4sc0e9w$0",
+                      bindingKey: "order$2yx6cd1u55xly$0",
                     },
                     questionDotToken: false,
                     name: "items",
                   }),
                 ),
                 children: cs.create(
-                  [42, 16, 43, 68],
+                  [41, 16, 42, 68],
                   {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
-                    fileHash: "b5tmg4sc0e9w",
+                    fileHash: "2yx6cd1u55xly",
                     kind: "value",
                     splices: {
-                      $0splice0: _jsx(Text, {
+                      $0splice0: _jsx("span", {
                         children: cs.create(
-                          [43, 27, 43, 57],
+                          [42, 27, 42, 57],
                           {
                             version: "0.0.0",
                             filePath: "large-data.tsx",
-                            fileHash: "b5tmg4sc0e9w",
+                            fileHash: "2yx6cd1u55xly",
                             kind: "value",
                             splices: {},
-                            captures: ["item$b5tmg4sc0e9w$1"],
+                            captures: ["item$2yx6cd1u55xly$1"],
                             spliceParams: {},
                           },
                           () => ({
                             kind: 227,
-                            loc: [43, 30, 43, 56],
+                            loc: [42, 30, 42, 56],
                             left: {
                               kind: 227,
-                              loc: [43, 30, 43, 45],
+                              loc: [42, 30, 42, 45],
                               left: {
                                 kind: 212,
-                                loc: [43, 30, 43, 38],
+                                loc: [42, 30, 42, 38],
                                 expression: {
                                   kind: 80,
-                                  loc: [43, 30, 43, 34],
+                                  loc: [42, 30, 42, 34],
                                   text: "item",
-                                  bindingKey: "item$b5tmg4sc0e9w$1",
+                                  bindingKey: "item$2yx6cd1u55xly$1",
                                 },
                                 questionDotToken: false,
                                 name: "sku",
@@ -223,19 +222,19 @@ export default _jsx(View, {
                               operatorToken: "+",
                               right: {
                                 kind: 11,
-                                loc: [43, 41, 43, 45],
+                                loc: [42, 41, 42, 45],
                                 text: " x",
                               },
                             },
                             operatorToken: "+",
                             right: {
                               kind: 212,
-                              loc: [43, 48, 43, 56],
+                              loc: [42, 48, 42, 56],
                               expression: {
                                 kind: 80,
-                                loc: [43, 48, 43, 52],
+                                loc: [42, 48, 42, 52],
                                 text: "item",
-                                bindingKey: "item$b5tmg4sc0e9w$1",
+                                bindingKey: "item$2yx6cd1u55xly$1",
                               },
                               questionDotToken: false,
                               name: "qty",
@@ -245,60 +244,60 @@ export default _jsx(View, {
                       }),
                     },
                     captures: [],
-                    spliceParams: { $0splice0: ["item$b5tmg4sc0e9w$1"] },
+                    spliceParams: { $0splice0: ["item$2yx6cd1u55xly$1"] },
                   },
                   () => ({
                     kind: 220,
-                    loc: [42, 19, 43, 67],
+                    loc: [41, 19, 42, 67],
                     parameters: [
                       {
                         kind: 170,
-                        loc: [42, 20, 42, 30],
+                        loc: [41, 20, 41, 30],
                         name: {
                           kind: 80,
-                          loc: [42, 20, 42, 24],
+                          loc: [41, 20, 41, 24],
                           text: "item",
-                          bindingKey: "item$b5tmg4sc0e9w$1",
+                          bindingKey: "item$2yx6cd1u55xly$1",
                         },
                       },
                     ],
                     body: {
                       kind: 1000,
-                      loc: [43, 17, 43, 67],
+                      loc: [42, 17, 42, 67],
                       key: "$0splice0",
                     },
                   }),
                 ),
               }),
-              _jsx(Text, {
+              _jsx("span", {
                 children: cs.create(
-                  [45, 20, 45, 41],
+                  [44, 20, 44, 41],
                   {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
-                    fileHash: "b5tmg4sc0e9w",
+                    fileHash: "2yx6cd1u55xly",
                     kind: "value",
                     splices: {},
-                    captures: ["order$b5tmg4sc0e9w$0"],
+                    captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
                   },
                   () => ({
                     kind: 227,
-                    loc: [45, 23, 45, 40],
+                    loc: [44, 23, 44, 40],
                     left: {
                       kind: 11,
-                      loc: [45, 23, 45, 26],
+                      loc: [44, 23, 44, 26],
                       text: "$",
                     },
                     operatorToken: "+",
                     right: {
                       kind: 212,
-                      loc: [45, 29, 45, 40],
+                      loc: [44, 29, 44, 40],
                       expression: {
                         kind: 80,
-                        loc: [45, 29, 45, 34],
+                        loc: [44, 29, 44, 34],
                         text: "order",
-                        bindingKey: "order$b5tmg4sc0e9w$0",
+                        bindingKey: "order$2yx6cd1u55xly$0",
                       },
                       questionDotToken: false,
                       name: "total",
@@ -310,11 +309,11 @@ export default _jsx(View, {
           }),
         },
         captures: [],
-        spliceParams: { $0splice0: ["order$b5tmg4sc0e9w$0"] },
+        spliceParams: { $0splice0: ["order$2yx6cd1u55xly$0"] },
       },
       () => ({
         kind: 220,
-        loc: [31, 11, 47, 11],
+        loc: [31, 11, 46, 11],
         parameters: [
           {
             kind: 170,
@@ -323,13 +322,13 @@ export default _jsx(View, {
               kind: 80,
               loc: [31, 12, 31, 17],
               text: "order",
-              bindingKey: "order$b5tmg4sc0e9w$0",
+              bindingKey: "order$2yx6cd1u55xly$0",
             },
           },
         ],
         body: {
           kind: 1000,
-          loc: [32, 9, 47, 11],
+          loc: [32, 9, 46, 11],
           key: "$0splice0",
         },
       }),

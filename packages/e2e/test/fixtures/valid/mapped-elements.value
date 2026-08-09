@@ -1,11 +1,11 @@
-<View>
-  <Text>
+<div>
+  <span>
     {"alpha"}
-  </Text>
-  <Text>
+  </span>
+  <span>
     {"beta"}
-  </Text>
-  <Text>
+  </span>
+  <span>
     {"gamma"}
-  </Text>
-</View>
+  </span>
+</div>

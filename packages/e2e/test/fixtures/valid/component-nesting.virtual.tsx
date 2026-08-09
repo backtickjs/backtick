@@ -1,5 +1,3 @@
-import { Text, View } from "@backtickjs/core";
-
 // Invocations nest, and each one is an instance. `Outer` renders `Inner`, which
 // renders the `Text`, so there are three entries — and `Outer`'s content is a
 // reference to `Inner`'s rather than an element of its own.
@@ -9,7 +7,7 @@ import { Text, View } from "@backtickjs/core";
 // entry, sharing one instance and therefore one lifetime for any state they
 // declared.
 async function Inner() {
-  return <Text>x</Text>;
+  return <span>x</span>;
 }
 
 async function Outer() {
@@ -17,7 +15,7 @@ async function Outer() {
 }
 
 export default (
-  <View>
+  <div>
     <Outer />
-  </View>
+  </div>
 );

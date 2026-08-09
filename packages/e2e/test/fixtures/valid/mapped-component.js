@@ -1,5 +1,5 @@
-import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { cs, For, Text, View } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, For } from "@backtickjs/core";
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each
 // expansion must see its own `row`.
@@ -15,14 +15,14 @@ import { cs, For, Text, View } from "@backtickjs/core";
 // every row, each overwriting the last. The three values below are what tells
 // the two apart.
 const rows = [1, 2, 3];
-export default _jsx(View, {
+export default _jsx("div", {
   children: _jsx(For, {
     each: cs.create(
       [21, 16, 21, 25],
       {
         version: "0.0.0",
         filePath: "mapped-component.tsx",
-        fileHash: "3opgj3ru78ngf",
+        fileHash: "thyrht8e58qr",
         kind: "value",
         splices: { $rows: rows },
         captures: [],
@@ -39,19 +39,19 @@ export default _jsx(View, {
       {
         version: "0.0.0",
         filePath: "mapped-component.tsx",
-        fileHash: "3opgj3ru78ngf",
+        fileHash: "thyrht8e58qr",
         kind: "value",
         splices: {
-          $0splice0: _jsx(Text, {
+          $0splice0: _jsx("span", {
             children: cs.create(
               [22, 38, 22, 54],
               {
                 version: "0.0.0",
                 filePath: "mapped-component.tsx",
-                fileHash: "3opgj3ru78ngf",
+                fileHash: "thyrht8e58qr",
                 kind: "value",
                 splices: {},
-                captures: ["row$3opgj3ru78ngf$0"],
+                captures: ["row$thyrht8e58qr$0"],
                 spliceParams: {},
               },
               () => ({
@@ -67,14 +67,14 @@ export default _jsx(View, {
                   kind: 80,
                   loc: [22, 50, 22, 53],
                   text: "row",
-                  bindingKey: "row$3opgj3ru78ngf$0",
+                  bindingKey: "row$thyrht8e58qr$0",
                 },
               }),
             ),
           }),
         },
         captures: [],
-        spliceParams: { $0splice0: ["row$3opgj3ru78ngf$0"] },
+        spliceParams: { $0splice0: ["row$thyrht8e58qr$0"] },
       },
       () => ({
         kind: 220,
@@ -87,7 +87,7 @@ export default _jsx(View, {
               kind: 80,
               loc: [22, 12, 22, 15],
               text: "row",
-              bindingKey: "row$3opgj3ru78ngf$0",
+              bindingKey: "row$thyrht8e58qr$0",
             },
           },
         ],

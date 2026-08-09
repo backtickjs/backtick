@@ -1,4 +1,4 @@
-#f0 = ($0) => $0().read()
+#f0 = ($0) => "font-size: " + $0().read() + "px"
 
 #f1 = ($0) => () => {
   $0().write($0().read() + 1);
@@ -6,27 +6,27 @@
 
 #f2 = () => {
   const s0 = state(16);
-  return <Text
-    style={{ "fontSize": #f0(() => s0) }}
-    onPress={#f1(() => s0)}
+  return <span
+    style={#f0(() => s0)}
+    onclick={#f1(() => s0)}
   >
     {"press"}
-  </Text>;
+  </span>;
 }
 
 #f3 = () => {
   const s1 = state(16);
-  return <Text
-    style={{ "fontSize": #f0(() => s1) }}
-    onPress={#f1(() => s1)}
+  return <span
+    style={#f0(() => s1)}
+    onclick={#f1(() => s1)}
   >
     {"press"}
-  </Text>;
+  </span>;
 }
 
-#f4 = () => <View>
+#f4 = () => <div>
   {#f2()}
   {#f3()}
-</View>
+</div>
 
 root = #f4()

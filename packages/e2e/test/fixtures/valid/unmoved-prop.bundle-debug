@@ -8,28 +8,28 @@
 
 #f4 = ($0) => "row " + $0
 
-#f5 = (id, s0) => <Link
+#f5 = (id, s0) => <a
   href={#f3((id) => s0, id)}
 >
   {#f4(id)}
-</Link>
+</a>
 
 #f6 = () => {
   const s0 = state(0);
-  return <View>
-    {<Text
-      onPress={#f0(() => s0)}
+  return <div>
+    {<span
+      onclick={#f0(() => s0)}
     >
       {"select"}
-    </Text>}
-    {<View>
+    </span>}
+    {<div>
       {<For
         each={#f1()}
       >
         {#f2((id) => #f5(id, s0))}
       </For>}
-    </View>}
-  </View>;
+    </div>}
+  </div>;
 }
 
 root = #f6()

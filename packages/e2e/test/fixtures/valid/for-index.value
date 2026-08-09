@@ -1,16 +1,16 @@
-<View>
-  <Text onPress={[function]}>
+<div>
+  <span onclick={[function]}>
     {"rotate"}
-  </Text>
-  <View>
-    <Text>
+  </span>
+  <div>
+    <span>
       {"a at 0"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"b at 1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"c at 2"}
-    </Text>
-  </View>
-</View>
+    </span>
+  </div>
+</div>

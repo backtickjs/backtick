@@ -1,4 +1,4 @@
-import { cs, Text, View } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 
 // A fragment a script writes: its children where it stands, and no node of its
 // own — the same `Fragment` element the tree path writes for `<>`.
@@ -8,11 +8,11 @@ import { cs, Text, View } from "@backtickjs/core";
 // expressions survives, where trimming would take it.
 const listed = cs`(name: string) => (
   <>
-    <Text>a sentence across lines</Text>
-    <Text>
+    <span>a sentence across lines</span>
+    <span>
       {name} {name}
-    </Text>
+    </span>
   </>
 )`;
 
-export default <View>{cs`$listed("x")`}</View>;
+export default <div>{cs`$listed("x")`}</div>;

@@ -1,4 +1,4 @@
-import { cs, state, Text, View } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // State belongs to the component that declared it. `Counter` calls `state`
 // once per invocation, so two `<Counter />` tags are two cells — and each
@@ -7,20 +7,20 @@ import { cs, state, Text, View } from "@backtickjs/core";
 async function Counter() {
   const size = state(16);
   return (
-    <Text
-      style={{ fontSize: cs`$size.read()` }}
-      onPress={cs`() => {
+    <span
+      style={cs`"font-size: " + $size.read() + "px"`}
+      onclick={cs`() => {
         $size.write($size.read() + 1);
       }`}
     >
       press
-    </Text>
+    </span>
   );
 }
 
 export default (
-  <View>
+  <div>
     <Counter />
     <Counter />
-  </View>
+  </div>
 );

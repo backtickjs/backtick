@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, state, For, Link, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state, For } from "@backtickjs/core";
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row
 // selected, and the row that no longer is. The third recomputes the href it
@@ -11,15 +11,15 @@ import { cs, state, For, Link, Text, View } from "@backtickjs/core";
 // any size, and no snapshot of the drawn markup could see it.
 async function Rows() {
   const selected = state(0);
-  return _jsxs(View, {
+  return _jsxs("div", {
     children: [
-      _jsx(Text, {
-        onPress: cs.create(
+      _jsx("span", {
+        onclick: cs.create(
           [16, 22, 16, 50],
           {
             version: "0.0.0",
             filePath: "unmoved-prop.tsx",
-            fileHash: "14ifc5py1b51e",
+            fileHash: "3lx9bfa62m6pl",
             kind: "value",
             splices: { $selected: selected },
             captures: [],
@@ -56,14 +56,14 @@ async function Rows() {
         ),
         children: "select",
       }),
-      _jsx(View, {
+      _jsx("div", {
         children: _jsx(For, {
           each: cs.create(
             [18, 20, 18, 33],
             {
               version: "0.0.0",
               filePath: "unmoved-prop.tsx",
-              fileHash: "14ifc5py1b51e",
+              fileHash: "3lx9bfa62m6pl",
               kind: "value",
               splices: {},
               captures: [],
@@ -96,36 +96,36 @@ async function Rows() {
             {
               version: "0.0.0",
               filePath: "unmoved-prop.tsx",
-              fileHash: "14ifc5py1b51e",
+              fileHash: "3lx9bfa62m6pl",
               kind: "value",
               splices: {
-                $0splice0: _jsx(Link, {
+                $0splice0: _jsx("a", {
                   href: cs.create(
-                    [21, 27, 21, 76],
+                    [21, 24, 21, 73],
                     {
                       version: "0.0.0",
                       filePath: "unmoved-prop.tsx",
-                      fileHash: "14ifc5py1b51e",
+                      fileHash: "3lx9bfa62m6pl",
                       kind: "value",
                       splices: { $selected: selected },
-                      captures: ["id$14ifc5py1b51e$0"],
+                      captures: ["id$3lx9bfa62m6pl$0"],
                       spliceParams: { $selected: [] },
                     },
                     () => ({
                       kind: 228,
-                      loc: [21, 30, 21, 75],
+                      loc: [21, 27, 21, 72],
                       condition: {
                         kind: 227,
-                        loc: [21, 30, 21, 53],
+                        loc: [21, 27, 21, 50],
                         left: {
                           kind: 214,
-                          loc: [21, 30, 21, 46],
+                          loc: [21, 27, 21, 43],
                           expression: {
                             kind: 212,
-                            loc: [21, 30, 21, 44],
+                            loc: [21, 27, 21, 41],
                             expression: {
                               kind: 1000,
-                              loc: [21, 30, 21, 39],
+                              loc: [21, 27, 21, 36],
                               key: "$selected",
                             },
                             questionDotToken: false,
@@ -137,19 +137,19 @@ async function Rows() {
                         operatorToken: "===",
                         right: {
                           kind: 80,
-                          loc: [21, 51, 21, 53],
+                          loc: [21, 48, 21, 50],
                           text: "id",
-                          bindingKey: "id$14ifc5py1b51e$0",
+                          bindingKey: "id$3lx9bfa62m6pl$0",
                         },
                       },
                       whenTrue: {
                         kind: 11,
-                        loc: [21, 56, 21, 63],
+                        loc: [21, 53, 21, 60],
                         text: "#open",
                       },
                       whenFalse: {
                         kind: 11,
-                        loc: [21, 66, 21, 75],
+                        loc: [21, 63, 21, 72],
                         text: "#closed",
                       },
                     }),
@@ -159,10 +159,10 @@ async function Rows() {
                     {
                       version: "0.0.0",
                       filePath: "unmoved-prop.tsx",
-                      fileHash: "14ifc5py1b51e",
+                      fileHash: "3lx9bfa62m6pl",
                       kind: "value",
                       splices: {},
-                      captures: ["id$14ifc5py1b51e$0"],
+                      captures: ["id$3lx9bfa62m6pl$0"],
                       spliceParams: {},
                     },
                     () => ({
@@ -178,14 +178,14 @@ async function Rows() {
                         kind: 80,
                         loc: [22, 30, 22, 32],
                         text: "id",
-                        bindingKey: "id$14ifc5py1b51e$0",
+                        bindingKey: "id$3lx9bfa62m6pl$0",
                       },
                     }),
                   ),
                 }),
               },
               captures: [],
-              spliceParams: { $0splice0: ["id$14ifc5py1b51e$0"] },
+              spliceParams: { $0splice0: ["id$3lx9bfa62m6pl$0"] },
             },
             () => ({
               kind: 220,
@@ -198,7 +198,7 @@ async function Rows() {
                     kind: 80,
                     loc: [19, 16, 19, 18],
                     text: "id",
-                    bindingKey: "id$14ifc5py1b51e$0",
+                    bindingKey: "id$3lx9bfa62m6pl$0",
                   },
                 },
               ],

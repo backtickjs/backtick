@@ -1,4 +1,4 @@
-import { cs, For, Image, Text, View } from "@backtickjs/core";
+import { cs, For } from "@backtickjs/core";
 
 type Item = { sku: string; qty: number };
 type Order = {
@@ -26,25 +26,24 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 // runtime. The bundle carries the data plus a single card, not five expanded
 // copies. The root View stays static; only its children map on the client.
 export default (
-  <View>
+  <div>
     <For each={cs`$orders`}>
       {cs`(order: Order) =>
         ${(
-          <View>
-            <Image
-              source={{
-                uri: cs`"https://img.example.com/" + order.id + ".png"`,
-              }}
+          <div>
+            <img
+              src={cs`"https://img.example.com/" + order.id + ".png"`}
+              alt=""
             />
-            <Text>{cs`order.customer.name`}</Text>
-            <Text>{cs`order.customer.city`}</Text>
+            <span>{cs`order.customer.name`}</span>
+            <span>{cs`order.customer.city`}</span>
             <For each={cs`order.items`}>
               {cs`(item: Item) =>
-                ${(<Text>{cs`item.sku + " x" + item.qty`}</Text>)}`}
+                ${(<span>{cs`item.sku + " x" + item.qty`}</span>)}`}
             </For>
-            <Text>{cs`"$" + order.total`}</Text>
-          </View>
+            <span>{cs`"$" + order.total`}</span>
+          </div>
         )}`}
     </For>
-  </View>
+  </div>
 );

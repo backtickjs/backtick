@@ -6,20 +6,20 @@
 
 #f3 = () => {
   const s0 = state(0);
-  return <Pressable
-    testID={"row"}
-    style={{ "flexDirection": "row", "gap": 8 }}
-    onPress={#f0(() => s0)}
+  return <button
+    id={"row"}
+    style={"display: flex; gap: 8px"}
+    onclick={#f0(() => s0)}
   >
-    {<Text
-      style={{ "fontWeight": "700" }}
+    {<span
+      style={"font-weight: 700"}
     >
       {#f1(() => s0)}
-    </Text>}
-    {<Text>
+    </span>}
+    {<span>
       {#f2(() => s0)}
-    </Text>}
-  </Pressable>;
+    </span>}
+  </button>;
 }
 
 root = #f3()

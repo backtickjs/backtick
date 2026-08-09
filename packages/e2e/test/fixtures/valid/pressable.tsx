@@ -1,4 +1,4 @@
-import { cs, Pressable, state, Text } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // `Pressable` is the row that responds as one thing: `View` lays children out
 // and `Text` takes a press, and this takes both — so a checkbox and a label are
@@ -6,16 +6,14 @@ import { cs, Pressable, state, Text } from "@backtickjs/core";
 async function Row() {
   const count = state(0);
   return (
-    <Pressable
-      testID="row"
-      style={{ flexDirection: "row", gap: 8 }}
-      onPress={cs`() => $count.write($count.read() + 1)`}
+    <button
+      id="row"
+      style="display: flex; gap: 8px"
+      onclick={cs`() => $count.write($count.read() + 1)`}
     >
-      <Text style={{ fontWeight: "700" }}>
-        {cs`$count.read() > 0 ? "☑" : "☐"`}
-      </Text>
-      <Text>{cs`"pressed " + $count.read() + " times"`}</Text>
-    </Pressable>
+      <span style="font-weight: 700">{cs`$count.read() > 0 ? "☑" : "☐"`}</span>
+      <span>{cs`"pressed " + $count.read() + " times"`}</span>
+    </button>
   );
 }
 

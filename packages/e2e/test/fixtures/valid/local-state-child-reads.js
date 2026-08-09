@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, state, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state } from "@backtickjs/core";
 // A child reading a cell it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. `Panel` owns the
 // cell and never reads it, so a write re-renders `Panel` and reaches each `Row`
@@ -10,70 +10,88 @@ import { cs, state, Text, View } from "@backtickjs/core";
 // handle is one object whatever its cell holds. The branch is the half no
 // amount of recomputing a prop can answer for.
 const Row = async ({ id, selected }) =>
-  _jsxs(View, {
+  _jsxs("div", {
     children: [
-      _jsx(Text, {
-        style: {
-          fontSize: cs.create(
-            [21, 30, 21, 68],
-            {
-              version: "0.0.0",
-              filePath: "local-state-child-reads.tsx",
-              fileHash: "fbxokwfwaqtv",
-              kind: "value",
-              splices: { $selected: selected, $id: id },
-              captures: [],
-              spliceParams: { $selected: [], $id: [] },
-            },
-            () => ({
-              kind: 228,
-              loc: [21, 33, 21, 67],
-              condition: {
-                kind: 227,
-                loc: [21, 33, 21, 57],
-                left: {
-                  kind: 214,
-                  loc: [21, 33, 21, 49],
-                  expression: {
-                    kind: 212,
-                    loc: [21, 33, 21, 47],
-                    expression: {
-                      kind: 1000,
-                      loc: [21, 33, 21, 42],
-                      key: "$selected",
-                    },
-                    questionDotToken: false,
-                    name: "read",
-                  },
-                  questionDotToken: false,
-                  arguments: [],
-                },
-                operatorToken: "===",
-                right: {
-                  kind: 1000,
-                  loc: [21, 54, 21, 57],
-                  key: "$id",
-                },
-              },
-              whenTrue: {
-                kind: 9,
-                loc: [21, 60, 21, 62],
-                value: 20,
-              },
-              whenFalse: {
-                kind: 9,
-                loc: [21, 65, 21, 67],
-                value: 16,
-              },
-            }),
-          ),
-        },
-        children: cs.create(
-          [22, 8, 22, 52],
+      _jsx("span", {
+        style: cs.create(
+          [22, 14, 22, 77],
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "fbxokwfwaqtv",
+            fileHash: "1xxq1a0w43eq",
+            kind: "value",
+            splices: { $selected: selected, $id: id },
+            captures: [],
+            spliceParams: { $selected: [], $id: [] },
+          },
+          () => ({
+            kind: 227,
+            loc: [22, 17, 22, 76],
+            left: {
+              kind: 227,
+              loc: [22, 17, 22, 69],
+              left: {
+                kind: 11,
+                loc: [22, 17, 22, 30],
+                text: "font-size: ",
+              },
+              operatorToken: "+",
+              right: {
+                kind: 228,
+                loc: [22, 34, 22, 68],
+                condition: {
+                  kind: 227,
+                  loc: [22, 34, 22, 58],
+                  left: {
+                    kind: 214,
+                    loc: [22, 34, 22, 50],
+                    expression: {
+                      kind: 212,
+                      loc: [22, 34, 22, 48],
+                      expression: {
+                        kind: 1000,
+                        loc: [22, 34, 22, 43],
+                        key: "$selected",
+                      },
+                      questionDotToken: false,
+                      name: "read",
+                    },
+                    questionDotToken: false,
+                    arguments: [],
+                  },
+                  operatorToken: "===",
+                  right: {
+                    kind: 1000,
+                    loc: [22, 55, 22, 58],
+                    key: "$id",
+                  },
+                },
+                whenTrue: {
+                  kind: 9,
+                  loc: [22, 61, 22, 63],
+                  value: 20,
+                },
+                whenFalse: {
+                  kind: 9,
+                  loc: [22, 66, 22, 68],
+                  value: 16,
+                },
+              },
+            },
+            operatorToken: "+",
+            right: {
+              kind: 11,
+              loc: [22, 72, 22, 76],
+              text: "px",
+            },
+          }),
+        ),
+        children: cs.create(
+          [24, 8, 24, 52],
+          {
+            version: "0.0.0",
+            filePath: "local-state-child-reads.tsx",
+            fileHash: "1xxq1a0w43eq",
             kind: "value",
             splices: { $id: id, $selected: selected },
             captures: [],
@@ -81,42 +99,42 @@ const Row = async ({ id, selected }) =>
           },
           () => ({
             kind: 227,
-            loc: [22, 11, 22, 51],
+            loc: [24, 11, 24, 51],
             left: {
               kind: 227,
-              loc: [22, 11, 22, 32],
+              loc: [24, 11, 24, 32],
               left: {
                 kind: 227,
-                loc: [22, 11, 22, 23],
+                loc: [24, 11, 24, 23],
                 left: {
                   kind: 11,
-                  loc: [22, 11, 22, 17],
+                  loc: [24, 11, 24, 17],
                   text: "row ",
                 },
                 operatorToken: "+",
                 right: {
                   kind: 1000,
-                  loc: [22, 20, 22, 23],
+                  loc: [24, 20, 24, 23],
                   key: "$id",
                 },
               },
               operatorToken: "+",
               right: {
                 kind: 11,
-                loc: [22, 26, 22, 32],
+                loc: [24, 26, 24, 32],
                 text: " of ",
               },
             },
             operatorToken: "+",
             right: {
               kind: 214,
-              loc: [22, 35, 22, 51],
+              loc: [24, 35, 24, 51],
               expression: {
                 kind: 212,
-                loc: [22, 35, 22, 49],
+                loc: [24, 35, 24, 49],
                 expression: {
                   kind: 1000,
-                  loc: [22, 35, 22, 44],
+                  loc: [24, 35, 24, 44],
                   key: "$selected",
                 },
                 questionDotToken: false,
@@ -129,35 +147,35 @@ const Row = async ({ id, selected }) =>
         ),
       }),
       cs.create(
-        [24, 6, 24, 68],
+        [26, 6, 26, 68],
         {
           version: "0.0.0",
           filePath: "local-state-child-reads.tsx",
-          fileHash: "fbxokwfwaqtv",
+          fileHash: "1xxq1a0w43eq",
           kind: "value",
           splices: {
             $selected: selected,
             $id: id,
-            $0splice0: _jsx(Text, { children: "marker" }),
+            $0splice0: _jsx("span", { children: "marker" }),
           },
           captures: [],
           spliceParams: { $selected: [], $id: [], $0splice0: [] },
         },
         () => ({
           kind: 228,
-          loc: [24, 9, 24, 67],
+          loc: [26, 9, 26, 67],
           condition: {
             kind: 227,
-            loc: [24, 9, 24, 33],
+            loc: [26, 9, 26, 33],
             left: {
               kind: 214,
-              loc: [24, 9, 24, 25],
+              loc: [26, 9, 26, 25],
               expression: {
                 kind: 212,
-                loc: [24, 9, 24, 23],
+                loc: [26, 9, 26, 23],
                 expression: {
                   kind: 1000,
-                  loc: [24, 9, 24, 18],
+                  loc: [26, 9, 26, 18],
                   key: "$selected",
                 },
                 questionDotToken: false,
@@ -169,18 +187,18 @@ const Row = async ({ id, selected }) =>
             operatorToken: "===",
             right: {
               kind: 1000,
-              loc: [24, 30, 24, 33],
+              loc: [26, 30, 26, 33],
               key: "$id",
             },
           },
           whenTrue: {
             kind: 1000,
-            loc: [24, 36, 24, 60],
+            loc: [26, 36, 26, 60],
             key: "$0splice0",
           },
           whenFalse: {
             kind: 106,
-            loc: [24, 63, 24, 67],
+            loc: [26, 63, 26, 67],
           },
         }),
       ),
@@ -188,15 +206,15 @@ const Row = async ({ id, selected }) =>
   });
 async function Panel() {
   const selected = state(0);
-  return _jsxs(View, {
+  return _jsxs("div", {
     children: [
-      _jsx(Text, {
-        onPress: cs.create(
-          [32, 22, 32, 50],
+      _jsx("span", {
+        onclick: cs.create(
+          [34, 22, 34, 50],
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "fbxokwfwaqtv",
+            fileHash: "1xxq1a0w43eq",
             kind: "value",
             splices: { $selected: selected },
             captures: [],
@@ -204,17 +222,17 @@ async function Panel() {
           },
           () => ({
             kind: 220,
-            loc: [32, 25, 32, 49],
+            loc: [34, 25, 34, 49],
             parameters: [],
             body: {
               kind: 214,
-              loc: [32, 31, 32, 49],
+              loc: [34, 31, 34, 49],
               expression: {
                 kind: 212,
-                loc: [32, 31, 32, 46],
+                loc: [34, 31, 34, 46],
                 expression: {
                   kind: 1000,
-                  loc: [32, 31, 32, 40],
+                  loc: [34, 31, 34, 40],
                   key: "$selected",
                 },
                 questionDotToken: false,
@@ -224,7 +242,7 @@ async function Panel() {
               arguments: [
                 {
                   kind: 9,
-                  loc: [32, 47, 32, 48],
+                  loc: [34, 47, 34, 48],
                   value: 1,
                 },
               ],
@@ -235,11 +253,11 @@ async function Panel() {
       }),
       _jsx(Row, {
         id: cs.create(
-          [33, 16, 33, 21],
+          [35, 16, 35, 21],
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "fbxokwfwaqtv",
+            fileHash: "1xxq1a0w43eq",
             kind: "value",
             splices: {},
             captures: [],
@@ -247,7 +265,7 @@ async function Panel() {
           },
           () => ({
             kind: 9,
-            loc: [33, 19, 33, 20],
+            loc: [35, 19, 35, 20],
             value: 0,
           }),
         ),
@@ -255,11 +273,11 @@ async function Panel() {
       }),
       _jsx(Row, {
         id: cs.create(
-          [34, 16, 34, 21],
+          [36, 16, 36, 21],
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "fbxokwfwaqtv",
+            fileHash: "1xxq1a0w43eq",
             kind: "value",
             splices: {},
             captures: [],
@@ -267,7 +285,7 @@ async function Panel() {
           },
           () => ({
             kind: 9,
-            loc: [34, 19, 34, 20],
+            loc: [36, 19, 36, 20],
             value: 1,
           }),
         ),

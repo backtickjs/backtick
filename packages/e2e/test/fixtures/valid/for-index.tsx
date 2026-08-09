@@ -1,4 +1,4 @@
-import { cs, state, For, Text, View } from "@backtickjs/core";
+import { cs, state, For } from "@backtickjs/core";
 import type { ReadonlyState } from "@backtickjs/core";
 
 // A list whose drawing reads where a member sits as well as what it is.
@@ -14,15 +14,15 @@ async function Rows() {
     $names.update((held) => [held[2], held[0], held[1]]);
   }`;
   return (
-    <View>
-      <Text onPress={rotate}>rotate</Text>
-      <View>
+    <div>
+      <span onclick={rotate}>rotate</span>
+      <div>
         <For each={cs`$names.read()`}>
           {cs`(name: string, index: ReadonlyState<number>) =>
-            ${(<Text>{cs`name + " at " + index.read()`}</Text>)}`}
+            ${(<span>{cs`name + " at " + index.read()`}</span>)}`}
         </For>
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }
 

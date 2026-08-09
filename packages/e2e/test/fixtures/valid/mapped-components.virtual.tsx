@@ -1,9 +1,7 @@
-import { Text, View } from "@backtickjs/core";
-
 const items = ["alpha", "beta", "gamma"];
 
 async function Row({ label }: { label: string }) {
-  return <Text>{label}</Text>;
+  return <span>{label}</span>;
 }
 
 // The same list, but each item is a component invocation rather than an
@@ -11,9 +9,9 @@ async function Row({ label }: { label: string }) {
 // own and the key rides the `#apply` that instantiates it — the contrast with
 // `mapped-elements.tsx`, where the key sits inside an inlined element instead.
 export default (
-  <View>
+  <div>
     {items.map((item) => (
       <Row label={item} />
     ))}
-  </View>
+  </div>
 );

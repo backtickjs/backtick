@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs } from "@backtickjs/core";
 // A tree spliced into a body and bound to a name before it is used. Nothing
 // applies it at the hole and nothing draws it there — it is a value, held and
 // handed back, and the position that receives it is what draws it.
@@ -8,15 +8,15 @@ import { cs, Text, View } from "@backtickjs/core";
 // value says which entry and what to hand it, and that is the whole of what an
 // instance-to-be is. There was once a second way to say it — naming the entry,
 // and calling what that named — and this is the case it existed for.
-const Row = async () => _jsx(Text, { children: "x" });
+const Row = async () => _jsx("span", { children: "x" });
 const held = cs.create(
   [13, 14, 16, 3],
   {
     version: "0.0.0",
     filePath: "tree-in-variable.tsx",
-    fileHash: "2c9mrlrfdrw72",
+    fileHash: "3ravx23kvqohc",
     kind: "value",
-    splices: { $0splice0: _jsx(View, {}) },
+    splices: { $0splice0: _jsx("div", {}) },
     captures: [],
     spliceParams: { $0splice0: [] },
   },
@@ -30,23 +30,23 @@ const held = cs.create(
       statements: [
         {
           kind: 244,
-          loc: [14, 3, 14, 30],
+          loc: [14, 3, 14, 29],
           declarationList: {
             kind: 262,
-            loc: [14, 3, 14, 29],
+            loc: [14, 3, 14, 28],
             declarations: [
               {
                 kind: 261,
-                loc: [14, 9, 14, 29],
+                loc: [14, 9, 14, 28],
                 name: {
                   kind: 80,
                   loc: [14, 9, 14, 13],
                   text: "tree",
-                  bindingKey: "tree$2c9mrlrfdrw72$0",
+                  bindingKey: "tree$3ravx23kvqohc$0",
                 },
                 initializer: {
                   kind: 1000,
-                  loc: [14, 16, 14, 29],
+                  loc: [14, 16, 14, 28],
                   key: "$0splice0",
                 },
               },
@@ -61,7 +61,7 @@ const held = cs.create(
             kind: 80,
             loc: [15, 10, 15, 14],
             text: "tree",
-            bindingKey: "tree$2c9mrlrfdrw72$0",
+            bindingKey: "tree$3ravx23kvqohc$0",
           },
         },
       ],
@@ -73,7 +73,7 @@ const heldComponent = cs.create(
   {
     version: "0.0.0",
     filePath: "tree-in-variable.tsx",
-    fileHash: "2c9mrlrfdrw72",
+    fileHash: "3ravx23kvqohc",
     kind: "value",
     splices: { $0splice0: _jsx(Row, {}) },
     captures: [],
@@ -101,7 +101,7 @@ const heldComponent = cs.create(
                   kind: 80,
                   loc: [19, 9, 19, 13],
                   text: "tree",
-                  bindingKey: "tree$2c9mrlrfdrw72$1",
+                  bindingKey: "tree$3ravx23kvqohc$1",
                 },
                 initializer: {
                   kind: 1000,
@@ -120,21 +120,21 @@ const heldComponent = cs.create(
             kind: 80,
             loc: [20, 10, 20, 14],
             text: "tree",
-            bindingKey: "tree$2c9mrlrfdrw72$1",
+            bindingKey: "tree$3ravx23kvqohc$1",
           },
         },
       ],
     },
   }),
 );
-export default _jsxs(View, {
+export default _jsxs("div", {
   children: [
     cs.create(
       [25, 6, 25, 17],
       {
         version: "0.0.0",
         filePath: "tree-in-variable.tsx",
-        fileHash: "2c9mrlrfdrw72",
+        fileHash: "3ravx23kvqohc",
         kind: "value",
         splices: { $held: held },
         captures: [],
@@ -157,7 +157,7 @@ export default _jsxs(View, {
       {
         version: "0.0.0",
         filePath: "tree-in-variable.tsx",
-        fileHash: "2c9mrlrfdrw72",
+        fileHash: "3ravx23kvqohc",
         kind: "value",
         splices: { $heldComponent: heldComponent },
         captures: [],

@@ -1,10 +1,10 @@
-<View>
-  <Text>
+<div>
+  <span>
     {"a sentence across lines"}
-  </Text>
-  <Text>
+  </span>
+  <span>
     {"x"}
     {" "}
     {"x"}
-  </Text>
-</View>
+  </span>
+</div>

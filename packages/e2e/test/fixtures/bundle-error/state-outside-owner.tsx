@@ -1,4 +1,4 @@
-import { cs, state, Text, View, type Client } from "@backtickjs/core";
+import { cs, state, type Client } from "@backtickjs/core";
 
 // A cell escaping the component that declared it, through host state rather
 // than down through props.
@@ -12,16 +12,16 @@ let escaped: Client<number> | null = null;
 async function Declarer() {
   const count = state(0);
   escaped = cs`$count.read()`;
-  return <Text>declarer</Text>;
+  return <span>declarer</span>;
 }
 
 async function Reader() {
-  return <Text>{escaped}</Text>;
+  return <span>{escaped}</span>;
 }
 
 export default (
-  <View>
+  <div>
     <Declarer />
     <Reader />
-  </View>
+  </div>
 );

@@ -1,4 +1,4 @@
-import { cs, state, For, Text, View } from "@backtickjs/core";
+import { cs, state, For } from "@backtickjs/core";
 
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
@@ -17,15 +17,15 @@ async function Rows() {
     $ids.update((held) => held.filter((id) => id !== 2));
   }`;
   return (
-    <View>
-      <Text onPress={swap}>swap</Text>
-      <Text onPress={drop}>drop</Text>
-      <View>
+    <div>
+      <span onclick={swap}>swap</span>
+      <span onclick={drop}>drop</span>
+      <div>
         <For each={cs`$ids.read()`}>
-          {cs`(id: number) => ${(<Text>{cs`"row " + id`}</Text>)}`}
+          {cs`(id: number) => ${(<span>{cs`"row " + id`}</span>)}`}
         </For>
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }
 

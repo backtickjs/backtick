@@ -1,18 +1,18 @@
-<View>
-  <Text onPress={[function]}>
+<div>
+  <span onclick={[function]}>
     {"select"}
-  </Text>
-  <View>
-    <Text style={{ "fontSize": 20 }}>
+  </span>
+  <div>
+    <span style="font-size: 20px">
       {"row 0 of 0"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"marker"}
-    </Text>
-  </View>
-  <View>
-    <Text style={{ "fontSize": 16 }}>
+    </span>
+  </div>
+  <div>
+    <span style="font-size: 16px">
       {"row 1 of 0"}
-    </Text>
-  </View>
-</View>
+    </span>
+  </div>
+</div>

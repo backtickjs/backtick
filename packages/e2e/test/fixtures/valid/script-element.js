@@ -1,5 +1,5 @@
-import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { cs, state, View } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state } from "@backtickjs/core";
 // An element a script writes, rather than one the host wrote and the script
 // spliced in. What it lowers to is the node a tree entry builds, so the two
 // spellings draw the same thing — the difference is where the element is
@@ -9,11 +9,11 @@ async function Card() {
   // A handler written inline and one held under a name: both are client code,
   // and a handler prop takes `Client<() => void>` and nothing else.
   const row = cs.create(
-    [12, 15, 28, 5],
+    [12, 15, 26, 5],
     {
       version: "0.0.0",
       filePath: "script-element.tsx",
-      fileHash: "38xnrt94rygy7",
+      fileHash: "kj57tcnfhdwx",
       kind: "value",
       splices: { $label: label },
       captures: [],
@@ -21,7 +21,7 @@ async function Card() {
     },
     () => ({
       kind: 220,
-      loc: [12, 18, 28, 4],
+      loc: [12, 18, 26, 4],
       parameters: [
         {
           kind: 170,
@@ -30,43 +30,90 @@ async function Card() {
             kind: 80,
             loc: [12, 19, 12, 23],
             text: "size",
-            bindingKey: "size$38xnrt94rygy7$0",
+            bindingKey: "size$kj57tcnfhdwx$0",
           },
         },
       ],
       body: {
         kind: 242,
-        loc: [12, 36, 28, 4],
+        loc: [12, 36, 26, 4],
         statements: [
           {
             kind: 244,
-            loc: [13, 5, 13, 46],
+            loc: [13, 5, 13, 45],
             declarationList: {
               kind: 262,
-              loc: [13, 5, 13, 45],
+              loc: [13, 5, 13, 44],
               declarations: [
                 {
                   kind: 261,
-                  loc: [13, 11, 13, 45],
+                  loc: [13, 11, 13, 44],
                   name: {
                     kind: 80,
-                    loc: [13, 11, 13, 16],
+                    loc: [13, 11, 13, 14],
+                    text: "css",
+                    bindingKey: "css$kj57tcnfhdwx$1",
+                  },
+                  initializer: {
+                    kind: 227,
+                    loc: [13, 17, 13, 44],
+                    left: {
+                      kind: 227,
+                      loc: [13, 17, 13, 37],
+                      left: {
+                        kind: 11,
+                        loc: [13, 17, 13, 30],
+                        text: "font-size: ",
+                      },
+                      operatorToken: "+",
+                      right: {
+                        kind: 80,
+                        loc: [13, 33, 13, 37],
+                        text: "size",
+                        bindingKey: "size$kj57tcnfhdwx$0",
+                      },
+                    },
+                    operatorToken: "+",
+                    right: {
+                      kind: 11,
+                      loc: [13, 40, 13, 44],
+                      text: "px",
+                    },
+                  },
+                },
+              ],
+              keyword: "const",
+            },
+          },
+          {
+            kind: 244,
+            loc: [14, 5, 14, 46],
+            declarationList: {
+              kind: 262,
+              loc: [14, 5, 14, 45],
+              declarations: [
+                {
+                  kind: 261,
+                  loc: [14, 11, 14, 45],
+                  name: {
+                    kind: 80,
+                    loc: [14, 11, 14, 16],
                     text: "press",
-                    bindingKey: "press$38xnrt94rygy7$1",
+                    bindingKey: "press$kj57tcnfhdwx$2",
                   },
                   initializer: {
                     kind: 220,
-                    loc: [13, 19, 13, 45],
+                    loc: [14, 19, 14, 45],
                     parameters: [],
                     body: {
                       kind: 214,
-                      loc: [13, 25, 13, 45],
+                      loc: [14, 25, 14, 45],
                       expression: {
                         kind: 212,
-                        loc: [13, 25, 13, 37],
+                        loc: [14, 25, 14, 37],
                         expression: {
                           kind: 1000,
-                          loc: [13, 25, 13, 31],
+                          loc: [14, 25, 14, 31],
                           key: "$label",
                         },
                         questionDotToken: false,
@@ -76,7 +123,7 @@ async function Card() {
                       arguments: [
                         {
                           kind: 11,
-                          loc: [13, 38, 13, 44],
+                          loc: [14, 38, 14, 44],
                           text: "held",
                         },
                       ],
@@ -89,82 +136,60 @@ async function Card() {
           },
           {
             kind: 254,
-            loc: [14, 5, 27, 7],
+            loc: [15, 5, 25, 7],
             expression: {
               kind: 285,
-              loc: [15, 7, 26, 14],
+              loc: [16, 7, 24, 13],
               tagName: {
                 kind: 11,
-                loc: [15, 8, 15, 12],
-                text: "View",
+                loc: [16, 8, 16, 11],
+                text: "div",
               },
               attributes: [
                 {
                   name: "style",
                   initializer: {
-                    kind: 211,
-                    loc: [15, 20, 15, 37],
-                    properties: [
-                      {
-                        kind: 304,
-                        loc: [15, 22, 15, 35],
-                        name: "padding",
-                        initializer: {
-                          kind: 80,
-                          loc: [15, 31, 15, 35],
-                          text: "size",
-                          bindingKey: "size$38xnrt94rygy7$0",
-                        },
-                      },
-                    ],
+                    kind: 80,
+                    loc: [16, 19, 16, 22],
+                    text: "css",
+                    bindingKey: "css$kj57tcnfhdwx$1",
                   },
                 },
               ],
               children: [
                 {
                   kind: 285,
-                  loc: [16, 9, 21, 16],
+                  loc: [17, 9, 19, 16],
                   tagName: {
                     kind: 11,
-                    loc: [16, 10, 16, 14],
-                    text: "Text",
+                    loc: [17, 10, 17, 14],
+                    text: "span",
                   },
                   attributes: [
                     {
                       name: "style",
                       initializer: {
-                        kind: 211,
-                        loc: [17, 18, 17, 36],
-                        properties: [
-                          {
-                            kind: 304,
-                            loc: [17, 20, 17, 34],
-                            name: "fontSize",
-                            initializer: {
-                              kind: 80,
-                              loc: [17, 30, 17, 34],
-                              text: "size",
-                              bindingKey: "size$38xnrt94rygy7$0",
-                            },
-                          },
-                        ],
+                        kind: 80,
+                        loc: [17, 22, 17, 25],
+                        text: "css",
+                        bindingKey: "css$kj57tcnfhdwx$1",
                       },
                     },
                     {
-                      name: "onPress",
+                      name: "onclick",
                       initializer: {
                         kind: 220,
-                        loc: [18, 20, 18, 49],
+                        loc: [17, 36, 17, 65],
                         parameters: [],
                         body: {
                           kind: 214,
-                          loc: [18, 26, 18, 49],
+                          loc: [17, 42, 17, 65],
                           expression: {
                             kind: 212,
-                            loc: [18, 26, 18, 38],
+                            loc: [17, 42, 17, 54],
                             expression: {
                               kind: 1000,
-                              loc: [18, 26, 18, 32],
+                              loc: [17, 42, 17, 48],
                               key: "$label",
                             },
                             questionDotToken: false,
@@ -174,7 +199,7 @@ async function Card() {
                           arguments: [
                             {
                               kind: 11,
-                              loc: [18, 39, 18, 48],
+                              loc: [17, 55, 17, 64],
                               text: "pressed",
                             },
                           ],
@@ -185,13 +210,13 @@ async function Card() {
                   children: [
                     {
                       kind: 214,
-                      loc: [20, 12, 20, 25],
+                      loc: [18, 12, 18, 25],
                       expression: {
                         kind: 212,
-                        loc: [20, 12, 20, 23],
+                        loc: [18, 12, 18, 23],
                         expression: {
                           kind: 1000,
-                          loc: [20, 12, 20, 18],
+                          loc: [18, 12, 18, 18],
                           key: "$label",
                         },
                         questionDotToken: false,
@@ -204,84 +229,62 @@ async function Card() {
                 },
                 {
                   kind: 285,
-                  loc: [22, 9, 22, 51],
+                  loc: [20, 9, 20, 50],
                   tagName: {
                     kind: 11,
-                    loc: [22, 10, 22, 14],
-                    text: "Text",
+                    loc: [20, 10, 20, 14],
+                    text: "span",
                   },
                   attributes: [
                     {
                       name: "style",
                       initializer: {
-                        kind: 211,
-                        loc: [22, 22, 22, 37],
-                        properties: [
-                          {
-                            kind: 304,
-                            loc: [22, 24, 22, 35],
-                            name: "fontSize",
-                            initializer: {
-                              kind: 9,
-                              loc: [22, 34, 22, 35],
-                              value: 8,
-                            },
-                          },
-                        ],
+                        kind: 11,
+                        loc: [20, 21, 20, 37],
+                        text: "font-size: 8px",
                       },
                     },
                   ],
                   children: [
                     {
                       kind: 11,
-                      loc: [22, 39, 22, 44],
+                      loc: [20, 38, 20, 43],
                       text: "fixed",
                     },
                   ],
                 },
                 {
                   kind: 285,
-                  loc: [23, 9, 25, 16],
+                  loc: [21, 9, 23, 16],
                   tagName: {
                     kind: 11,
-                    loc: [23, 10, 23, 14],
-                    text: "Text",
+                    loc: [21, 10, 21, 14],
+                    text: "span",
                   },
                   attributes: [
                     {
                       name: "style",
                       initializer: {
-                        kind: 211,
-                        loc: [23, 22, 23, 40],
-                        properties: [
-                          {
-                            kind: 304,
-                            loc: [23, 24, 23, 38],
-                            name: "fontSize",
-                            initializer: {
-                              kind: 80,
-                              loc: [23, 34, 23, 38],
-                              text: "size",
-                              bindingKey: "size$38xnrt94rygy7$0",
-                            },
-                          },
-                        ],
+                        kind: 80,
+                        loc: [21, 22, 21, 25],
+                        text: "css",
+                        bindingKey: "css$kj57tcnfhdwx$1",
                       },
                     },
                     {
-                      name: "onPress",
+                      name: "onclick",
                       initializer: {
                         kind: 80,
-                        loc: [23, 51, 23, 56],
+                        loc: [21, 36, 21, 41],
                         text: "press",
-                        bindingKey: "press$38xnrt94rygy7$1",
+                        bindingKey: "press$kj57tcnfhdwx$2",
                       },
                     },
                   ],
                   children: [
                     {
                       kind: 11,
-                      loc: [24, 11, 25, 9],
+                      loc: [22, 11, 23, 9],
                       text: "held",
                     },
                   ],
@@ -293,14 +296,14 @@ async function Card() {
       },
     }),
   );
-  return _jsx(View, {
-    style: { padding: 0 },
+  return _jsx("div", {
+    style: "padding: 0",
     children: cs.create(
-      [30, 40, 30, 52],
+      [28, 35, 28, 47],
       {
         version: "0.0.0",
         filePath: "script-element.tsx",
-        fileHash: "38xnrt94rygy7",
+        fileHash: "kj57tcnfhdwx",
         kind: "value",
         splices: { $row: row },
         captures: [],
@@ -308,17 +311,17 @@ async function Card() {
       },
       () => ({
         kind: 214,
-        loc: [30, 43, 30, 51],
+        loc: [28, 38, 28, 46],
         expression: {
           kind: 1000,
-          loc: [30, 43, 30, 47],
+          loc: [28, 38, 28, 42],
           key: "$row",
         },
         questionDotToken: false,
         arguments: [
           {
             kind: 9,
-            loc: [30, 48, 30, 50],
+            loc: [28, 43, 28, 45],
             value: 12,
           },
         ],

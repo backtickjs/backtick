@@ -1,4 +1,4 @@
-import { cs, state, For, Link, Text, View } from "@backtickjs/core";
+import { cs, state, For } from "@backtickjs/core";
 
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row
@@ -12,18 +12,18 @@ import { cs, state, For, Link, Text, View } from "@backtickjs/core";
 async function Rows() {
   const selected = state(0);
   return (
-    <View>
-      <Text onPress={cs.lift(cs.const(() => cs.receiver(cs.splice((selected))).write(1)))}>select</Text>
-      <View>
+    <div>
+      <span onclick={cs.lift(cs.const(() => cs.receiver(cs.splice((selected))).write(1)))}>select</span>
+      <div>
         <For each={cs.lift(cs.const([0, 1, 2]))}>
           {cs.lift(cs.const((__cs_id: number) => cs.splice((
-              <Link href={cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === __cs_id ? "#open" : "#closed"))}>
+              <a href={cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === __cs_id ? "#open" : "#closed"))}>
                 {cs.lift(cs.const("row " + __cs_id))}
-              </Link>
+              </a>
             ))))}
         </For>
-      </View>
-    </View>
+      </div>
+    </div>
   );
 }
 

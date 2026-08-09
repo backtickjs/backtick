@@ -1,18 +1,18 @@
 #f0 = ($0) => $0()("x")
 
 #f1 = () => (name) => [
-  <Text>
+  <span>
     {"a sentence across lines"}
-  </Text>,
-  <Text>
+  </span>,
+  <span>
     {name}
     {" "}
     {name}
-  </Text>
+  </span>
 ]
 
-#f2 = () => <View>
+#f2 = () => <div>
   {#f0(#f1)}
-</View>
+</div>
 
 root = #f2()

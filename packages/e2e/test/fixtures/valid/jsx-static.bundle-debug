@@ -1,7 +1,7 @@
-#f0 = () => <View>
-  {<Text>
+#f0 = () => <div>
+  {<span>
     {"hi"}
-  </Text>}
-</View>
+  </span>}
+</div>
 
 root = #f0()

@@ -1,6 +1,6 @@
-<View style={{ "padding": 8 }}>
-  <Text style={{ "fontSize": 12 }} onPress={[function]}>
+<div style="padding: 8px">
+  <span style="font-size: 12px" onclick={[function]}>
     {"hi"}
-  </Text>
-  <Image source={{ "uri": "https://example.com/a.png" }} resizeMode="cover" />
-</View>
+  </span>
+  <img src="https://example.com/a.png" />
+</div>

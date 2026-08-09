@@ -1,4 +1,4 @@
-import { cs, state, Text } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // `update` derives the next value from the current one, so a handler needs no
 // separate read. It returns `void` like `write`, which is what keeps it out of
@@ -6,14 +6,14 @@ import { cs, state, Text } from "@backtickjs/core";
 async function Stepper() {
   const size = state(16);
   return (
-    <Text
-      style={{ fontSize: cs`$size.read()` }}
-      onPress={cs`() => {
+    <span
+      style={cs`"font-size: " + $size.read() + "px"`}
+      onclick={cs`() => {
         $size.update((current: number) => current + 1);
       }`}
     >
       press
-    </Text>
+    </span>
   );
 }
 

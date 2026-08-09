@@ -1,4 +1,4 @@
-import { cs, Text } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 
 // Storage a script declares for itself, rather than one a component owns and
 // splices in. `state(...)` is a declaration and not a call of a name: each time
@@ -10,15 +10,15 @@ async function Rows() {
 }));
 
   return (
-    <Text
-      style={{ fontSize: cs.lift(cs.const(16)) }}
-      onPress={cs.lift(cs.const(() => {
+    <span
+      style={cs.lift(cs.const("font-size: 16px"))}
+      onclick={cs.lift(cs.const(() => {
     const __cs_row = cs.const(cs.splice((build))("one"));
     cs.statement(cs.receiver(cs.receiver(__cs_row).label).write(cs.receiver(cs.receiver(__cs_row).label).read() + " !!!"));
 }))}
     >
       {cs.lift(cs.const(cs.receiver(cs.receiver(cs.splice((build))("one")).label).read()))}
-    </Text>
+    </span>
   );
 }
 

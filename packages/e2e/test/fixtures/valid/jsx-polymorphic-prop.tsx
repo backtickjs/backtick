@@ -1,4 +1,4 @@
-import { type Client, cs, View, Text } from "@backtickjs/core";
+import { type Client, cs } from "@backtickjs/core";
 
 // One script body (one source location) instantiated with different splices —
 // the JSX analogue of the `splice-sharing` fixture. The entry takes a thunk
@@ -8,8 +8,8 @@ function make(n: number): Client<() => number> {
 }
 
 export default (
-  <View>
-    <Text onPress={make(1)} />
-    <Text onPress={make(2)} />
-  </View>
+  <div>
+    <span onclick={make(1)} />
+    <span onclick={make(2)} />
+  </div>
 );

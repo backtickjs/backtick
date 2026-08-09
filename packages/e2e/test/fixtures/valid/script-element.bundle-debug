@@ -1,37 +1,38 @@
 #f0 = ($0) => $0()(12)
 
 #f1 = ($0) => (size) => {
+  const css = "font-size: " + size + "px";
   const press = () => $0().write("held");
-  return <View
-    style={{ "padding": size }}
+  return <div
+    style={css}
   >
-    {<Text
-      style={{ "fontSize": size }}
-      onPress={() => $0().write("pressed")}
+    {<span
+      style={css}
+      onclick={() => $0().write("pressed")}
     >
       {$0().read()}
-    </Text>}
-    {<Text
-      style={{ "fontSize": 8 }}
+    </span>}
+    {<span
+      style={"font-size: 8px"}
     >
       {"fixed"}
-    </Text>}
-    {<Text
-      style={{ "fontSize": size }}
-      onPress={press}
+    </span>}
+    {<span
+      style={css}
+      onclick={press}
     >
       {"held"}
-    </Text>}
-  </View>;
+    </span>}
+  </div>;
 }
 
 #f2 = () => {
   const s0 = state("hi");
-  return <View
-    style={{ "padding": 0 }}
+  return <div
+    style={"padding: 0"}
   >
     {#f0(() => #f1(() => s0))}
-  </View>;
+  </div>;
 }
 
 root = #f2()

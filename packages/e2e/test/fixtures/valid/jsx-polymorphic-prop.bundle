@@ -30,16 +30,16 @@
         [],
         [
           0,
-          "View",
+          "div",
           {},
           [
             4,
             [
               [
                 0,
-                "Text",
+                "span",
                 {
-                  "onPress": [
+                  "onclick": [
                     2,
                     "0",
                     [
@@ -55,9 +55,9 @@
               ],
               [
                 0,
-                "Text",
+                "span",
                 {
-                  "onPress": [
+                  "onclick": [
                     2,
                     "0",
                     [

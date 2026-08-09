@@ -2,19 +2,18 @@
 
 }
 
-#f1 = () => <View
-  style={{ "padding": 8 }}
+#f1 = () => <div
+  style={"padding: 8px"}
 >
-  {<Text
-    style={{ "fontSize": 12 }}
-    onPress={#f0()}
+  {<span
+    style={"font-size: 12px"}
+    onclick={#f0()}
   >
     {"hi"}
-  </Text>}
-  {<Image
-    source={{ "uri": "https://example.com/a.png" }}
-    resizeMode={"cover"}
+  </span>}
+  {<img
+    src={"https://example.com/a.png"}
   />}
-</View>
+</div>
 
 root = #f1()

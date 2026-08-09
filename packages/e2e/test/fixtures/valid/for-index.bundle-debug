@@ -8,26 +8,26 @@
 
 #f3 = ($0, $1) => $0 + " at " + $1.read()
 
-#f4 = (name, index) => <Text>
+#f4 = (name, index) => <span>
   {#f3(name, index)}
-</Text>
+</span>
 
 #f5 = () => {
   const s0 = state(["a", "b", "c"]);
-  return <View>
-    {<Text
-      onPress={#f0(() => s0)}
+  return <div>
+    {<span
+      onclick={#f0(() => s0)}
     >
       {"rotate"}
-    </Text>}
-    {<View>
+    </span>}
+    {<div>
       {<For
         each={#f1(() => s0)}
       >
         {#f2((name, index) => #f4(name, index))}
       </For>}
-    </View>}
-  </View>;
+    </div>}
+  </div>;
 }
 
 root = #f5()

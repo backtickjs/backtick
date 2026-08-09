@@ -1,10 +1,10 @@
-import { cs, Image, Text, View } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 
 export default (
-  <View style={{ padding: 8 }}>
-    <Text style={{ fontSize: 12 }} onPress={cs`() => {}`}>
+  <div style="padding: 8px">
+    <span style="font-size: 12px" onclick={cs`() => {}`}>
       hi
-    </Text>
-    <Image source={{ uri: "https://example.com/a.png" }} resizeMode="cover" />
-  </View>
+    </span>
+    <img src="https://example.com/a.png" />
+  </div>
 );

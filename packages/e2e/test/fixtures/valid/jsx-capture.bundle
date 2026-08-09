@@ -73,9 +73,9 @@
         ],
         [
           0,
-          "Text",
+          "span",
           {
-            "onPress": [
+            "onclick": [
               2,
               "1",
               [

@@ -20,23 +20,19 @@
         [],
         [
           0,
-          "View",
+          "div",
           {
-            "style": {
-              "padding": 8
-            }
+            "style": "padding: 8px"
           },
           [
             4,
             [
               [
                 0,
-                "Text",
+                "span",
                 {
-                  "style": {
-                    "fontSize": 12
-                  },
-                  "onPress": [
+                  "style": "font-size: 12px",
+                  "onclick": [
                     2,
                     "0",
                     []
@@ -46,12 +42,9 @@
               ],
               [
                 0,
-                "Image",
+                "img",
                 {
-                  "source": {
-                    "uri": "https://example.com/a.png"
-                  },
-                  "resizeMode": "cover"
+                  "src": "https://example.com/a.png"
                 },
                 null
               ]

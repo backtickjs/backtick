@@ -1,6 +1,6 @@
-<View>
-  <View />
-  <Text>
+<div>
+  <div />
+  <span>
     {"x"}
-  </Text>
-</View>
+  </span>
+</div>

@@ -1,54 +1,54 @@
-cs.lift(cs.const(                        → cs`
-() =>                                    → () => 
-cs.receiver(                             → 
-cs.splice(                               →  [-semantic]
-(selected)                               → $selected
-)                                        →  [-semantic]
-)                                        → 
-.                                        → .
-write                                    → write
-(                                        → (
-1                                        → 1
-)                                        → )
-))                                       → `
-cs.lift(cs.const(                        → cs`
-[                                        → [
-0                                        → 0
-,                                        → , 
-1                                        → 1
-,                                        → , 
-2                                        → 2
-]                                        → ]
-))                                       → `
-cs.lift(cs.const(                        → cs`
-(                                        → (
-__cs_id                                  → id
-: number                                 → : number
-) =>                                     → ) =>\n            
-cs.splice(                               → ${ [-semantic]
-(\n              <Link href={            → (\n              <Link href={
-cs.lift(cs.const(                        → cs`
-cs.receiver(                             → 
-cs.splice(                               →  [-semantic]
-(selected)                               → $selected
-)                                        →  [-semantic]
-)                                        → 
-.                                        → .
-read                                     → read
-()                                       → ()
- ===                                     →  === 
-__cs_id                                  → id
- ?                                       →  ? 
-"#open"                                  → "#open"
- :                                       →  : 
-"#closed"                                → "#closed"
-))                                       → `
-}>\n                {                    → }>\n                {
-cs.lift(cs.const(                        → cs`
-"row "                                   → "row "
- +                                       →  + 
-__cs_id                                  → id
-))                                       → `
-}\n              </Link>\n            )  → }\n              </Link>\n            )
-)                                        → } [-semantic]
-))                                       → `
+cs.lift(cs.const(                     → cs`
+() =>                                 → () => 
+cs.receiver(                          → 
+cs.splice(                            →  [-semantic]
+(selected)                            → $selected
+)                                     →  [-semantic]
+)                                     → 
+.                                     → .
+write                                 → write
+(                                     → (
+1                                     → 1
+)                                     → )
+))                                    → `
+cs.lift(cs.const(                     → cs`
+[                                     → [
+0                                     → 0
+,                                     → , 
+1                                     → 1
+,                                     → , 
+2                                     → 2
+]                                     → ]
+))                                    → `
+cs.lift(cs.const(                     → cs`
+(                                     → (
+__cs_id                               → id
+: number                              → : number
+) =>                                  → ) =>\n            
+cs.splice(                            → ${ [-semantic]
+(\n              <a href={            → (\n              <a href={
+cs.lift(cs.const(                     → cs`
+cs.receiver(                          → 
+cs.splice(                            →  [-semantic]
+(selected)                            → $selected
+)                                     →  [-semantic]
+)                                     → 
+.                                     → .
+read                                  → read
+()                                    → ()
+ ===                                  →  === 
+__cs_id                               → id
+ ?                                    →  ? 
+"#open"                               → "#open"
+ :                                    →  : 
+"#closed"                             → "#closed"
+))                                    → `
+}>\n                {                 → }>\n                {
+cs.lift(cs.const(                     → cs`
+"row "                                → "row "
+ +                                    →  + 
+__cs_id                               → id
+))                                    → `
+}\n              </a>\n            )  → }\n              </a>\n            )
+)                                     → } [-semantic]
+))                                    → `

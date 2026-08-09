@@ -1,4 +1,4 @@
-import { cs, state, Text, View } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import type { Client, State } from "@backtickjs/core";
 
 // A child reading a cell it was handed, in all three positions at once: a prop,
@@ -17,22 +17,24 @@ const Row = async ({
   id: Client<number>;
   selected: Client<State<number>>;
 }) => (
-  <View>
-    <Text style={{ fontSize: cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? 20 : 16)) }}>
+  <div>
+    <span
+      style={cs.lift(cs.const("font-size: " + (cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? 20 : 16) + "px"))}
+    >
       {cs.lift(cs.const("row " + cs.splice((id)) + " of " + cs.receiver(cs.splice((selected))).read()))}
-    </Text>
-    {cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? cs.splice((<Text>marker</Text>)) : null))}
-  </View>
+    </span>
+    {cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? cs.splice((<span>marker</span>)) : null))}
+  </div>
 );
 
 async function Panel() {
   const selected = state(0);
   return (
-    <View>
-      <Text onPress={cs.lift(cs.const(() => cs.receiver(cs.splice((selected))).write(1)))}>select</Text>
+    <div>
+      <span onclick={cs.lift(cs.const(() => cs.receiver(cs.splice((selected))).write(1)))}>select</span>
       <Row id={cs.lift(cs.const(0))} selected={selected} />
       <Row id={cs.lift(cs.const(1))} selected={selected} />
-    </View>
+    </div>
   );
 }
 

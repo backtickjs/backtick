@@ -1,10 +1,10 @@
-#f0 = () => <Text>
+#f0 = () => <span>
   {"hi"}
-</Text>
+</span>
 
-#f1 = () => <View>
+#f1 = () => <div>
   {#f0()}
   {#f0()}
-</View>
+</div>
 
 root = #f1()

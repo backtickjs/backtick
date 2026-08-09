@@ -1,5 +1,5 @@
-import { jsx as _jsx } from "@backtickjs/core/jsx-runtime";
-import { cs, Text } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs } from "@backtickjs/core";
 // Storage a script declares for itself, rather than one a component owns and
 // splices in. `state(...)` is a declaration and not a call of a name: each time
 // the declaration is evaluated there is another cell, which is what lets a
@@ -10,7 +10,7 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "script-state.tsx",
-      fileHash: "1ntlpgrpbrfuo",
+      fileHash: "8owf25be0b5d",
       kind: "value",
       splices: {},
       captures: [],
@@ -27,7 +27,7 @@ async function Rows() {
             kind: 80,
             loc: [8, 21, 8, 26],
             text: "label",
-            bindingKey: "label$1ntlpgrpbrfuo$0",
+            bindingKey: "label$8owf25be0b5d$0",
           },
         },
       ],
@@ -53,7 +53,7 @@ async function Rows() {
                       kind: 80,
                       loc: [9, 27, 9, 32],
                       text: "label",
-                      bindingKey: "label$1ntlpgrpbrfuo$0",
+                      bindingKey: "label$8owf25be0b5d$0",
                     },
                   },
                 },
@@ -64,32 +64,30 @@ async function Rows() {
       },
     }),
   );
-  return _jsx(Text, {
-    style: {
-      fontSize: cs.create(
-        [14, 26, 14, 32],
-        {
-          version: "0.0.0",
-          filePath: "script-state.tsx",
-          fileHash: "1ntlpgrpbrfuo",
-          kind: "value",
-          splices: {},
-          captures: [],
-          spliceParams: {},
-        },
-        () => ({
-          kind: 9,
-          loc: [14, 29, 14, 31],
-          value: 16,
-        }),
-      ),
-    },
-    onPress: cs.create(
+  return _jsx("span", {
+    style: cs.create(
+      [14, 14, 14, 35],
+      {
+        version: "0.0.0",
+        filePath: "script-state.tsx",
+        fileHash: "8owf25be0b5d",
+        kind: "value",
+        splices: {},
+        captures: [],
+        spliceParams: {},
+      },
+      () => ({
+        kind: 11,
+        loc: [14, 17, 14, 34],
+        text: "font-size: 16px",
+      }),
+    ),
+    onclick: cs.create(
       [15, 16, 18, 9],
       {
         version: "0.0.0",
         filePath: "script-state.tsx",
-        fileHash: "1ntlpgrpbrfuo",
+        fileHash: "8owf25be0b5d",
         kind: "value",
         splices: { $build: build },
         captures: [],
@@ -117,7 +115,7 @@ async function Rows() {
                       kind: 80,
                       loc: [16, 15, 16, 18],
                       text: "row",
-                      bindingKey: "row$1ntlpgrpbrfuo$1",
+                      bindingKey: "row$8owf25be0b5d$1",
                     },
                     initializer: {
                       kind: 214,
@@ -154,7 +152,7 @@ async function Rows() {
                     kind: 80,
                     loc: [17, 9, 17, 12],
                     text: "row",
-                    bindingKey: "row$1ntlpgrpbrfuo$1",
+                    bindingKey: "row$8owf25be0b5d$1",
                   },
                   questionDotToken: false,
                   name: "label",
@@ -180,7 +178,7 @@ async function Rows() {
                           kind: 80,
                           loc: [17, 25, 17, 28],
                           text: "row",
-                          bindingKey: "row$1ntlpgrpbrfuo$1",
+                          bindingKey: "row$8owf25be0b5d$1",
                         },
                         questionDotToken: false,
                         name: "label",
@@ -209,7 +207,7 @@ async function Rows() {
       {
         version: "0.0.0",
         filePath: "script-state.tsx",
-        fileHash: "1ntlpgrpbrfuo",
+        fileHash: "8owf25be0b5d",
         kind: "value",
         splices: { $build: build },
         captures: [],

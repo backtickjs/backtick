@@ -1,4 +1,4 @@
-import { cs, For, Text, View } from "@backtickjs/core";
+import { cs, For } from "@backtickjs/core";
 
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each
@@ -17,9 +17,9 @@ import { cs, For, Text, View } from "@backtickjs/core";
 const rows = [1, 2, 3];
 
 export default (
-  <View>
+  <div>
     <For each={cs.lift(cs.const(cs.splice((rows))))}>
-      {cs.lift(cs.const((__cs_row: number) => cs.splice((<Text>{cs.lift(cs.const("row " + __cs_row))}</Text>))))}
+      {cs.lift(cs.const((__cs_row: number) => cs.splice((<span>{cs.lift(cs.const("row " + __cs_row))}</span>))))}
     </For>
-  </View>
+  </div>
 );

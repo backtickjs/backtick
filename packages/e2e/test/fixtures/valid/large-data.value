@@ -1,92 +1,92 @@
-<View>
-  <View>
-    <Image source={{ "uri": "https://img.example.com/ord-1000.png" }} />
-    <Text>
+<div>
+  <div>
+    <img src="https://img.example.com/ord-1000.png" alt="" />
+    <span>
       {"Customer 0"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"Montréal"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-0-A x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-0-B x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"$45.23"}
-    </Text>
-  </View>
-  <View>
-    <Image source={{ "uri": "https://img.example.com/ord-1001.png" }} />
-    <Text>
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1001.png" alt="" />
+    <span>
       {"Customer 1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"Toronto"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-1-A x2"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-1-B x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"$46.23"}
-    </Text>
-  </View>
-  <View>
-    <Image source={{ "uri": "https://img.example.com/ord-1002.png" }} />
-    <Text>
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1002.png" alt="" />
+    <span>
       {"Customer 2"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"Montréal"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-2-A x3"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-2-B x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"$47.23"}
-    </Text>
-  </View>
-  <View>
-    <Image source={{ "uri": "https://img.example.com/ord-1003.png" }} />
-    <Text>
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1003.png" alt="" />
+    <span>
       {"Customer 3"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"Toronto"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-3-A x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-3-B x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"$48.23"}
-    </Text>
-  </View>
-  <View>
-    <Image source={{ "uri": "https://img.example.com/ord-1004.png" }} />
-    <Text>
+    </span>
+  </div>
+  <div>
+    <img src="https://img.example.com/ord-1004.png" alt="" />
+    <span>
       {"Customer 4"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"Montréal"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-4-A x2"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"SKU-4-B x1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"$49.23"}
-    </Text>
-  </View>
-</View>
+    </span>
+  </div>
+</div>

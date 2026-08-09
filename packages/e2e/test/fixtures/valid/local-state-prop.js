@@ -1,49 +1,67 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, state, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state } from "@backtickjs/core";
 // A cell crossing a component boundary: declared once by the parent, handed to
 // each child as a prop, so both read one storage. Ownership follows the
 // declaration rather than the readers, so `Panel`'s entry declares the cell and
 // each `Counter` receives the handle as a slot — which is what makes a write
 // through either child reach the same storage.
 const Counter = async ({ size }) =>
-  _jsx(Text, {
-    style: {
-      fontSize: cs.create(
-        [11, 24, 11, 40],
-        {
-          version: "0.0.0",
-          filePath: "local-state-prop.tsx",
-          fileHash: "2js8otjs3p707",
-          kind: "value",
-          splices: { $size: size },
-          captures: [],
-          spliceParams: { $size: [] },
-        },
-        () => ({
-          kind: 214,
-          loc: [11, 27, 11, 39],
-          expression: {
-            kind: 212,
-            loc: [11, 27, 11, 37],
+  _jsx("span", {
+    style: cs.create(
+      [11, 12, 11, 51],
+      {
+        version: "0.0.0",
+        filePath: "local-state-prop.tsx",
+        fileHash: "gb10io8ydqeb",
+        kind: "value",
+        splices: { $size: size },
+        captures: [],
+        spliceParams: { $size: [] },
+      },
+      () => ({
+        kind: 227,
+        loc: [11, 15, 11, 50],
+        left: {
+          kind: 227,
+          loc: [11, 15, 11, 43],
+          left: {
+            kind: 11,
+            loc: [11, 15, 11, 28],
+            text: "font-size: ",
+          },
+          operatorToken: "+",
+          right: {
+            kind: 214,
+            loc: [11, 31, 11, 43],
             expression: {
-              kind: 1000,
-              loc: [11, 27, 11, 32],
-              key: "$size",
+              kind: 212,
+              loc: [11, 31, 11, 41],
+              expression: {
+                kind: 1000,
+                loc: [11, 31, 11, 36],
+                key: "$size",
+              },
+              questionDotToken: false,
+              name: "read",
             },
             questionDotToken: false,
-            name: "read",
+            arguments: [],
           },
-          questionDotToken: false,
-          arguments: [],
-        }),
-      ),
-    },
-    onPress: cs.create(
+        },
+        operatorToken: "+",
+        right: {
+          kind: 11,
+          loc: [11, 46, 11, 50],
+          text: "px",
+        },
+      }),
+    ),
+    onclick: cs.create(
       [12, 14, 14, 7],
       {
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
-        fileHash: "2js8otjs3p707",
+        fileHash: "gb10io8ydqeb",
         kind: "value",
         splices: { $size: size },
         captures: [],
@@ -110,7 +128,7 @@ const Counter = async ({ size }) =>
   });
 async function Panel() {
   const size = state(16);
-  return _jsxs(View, {
+  return _jsxs("div", {
     children: [_jsx(Counter, { size: size }), _jsx(Counter, { size: size })],
   });
 }

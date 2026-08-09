@@ -213,6 +213,9 @@ importers:
       '@backtickjs/tsc':
         specifier: workspace:*
         version: link:../language-tools/tsc
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../web-sdk
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

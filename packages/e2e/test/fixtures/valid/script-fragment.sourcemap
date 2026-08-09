@@ -4,12 +4,12 @@ __cs_name                             → name
 : string                              → : string
 ) =>                                  → ) => 
 <>                                    → (\n  <>\n    
-<Text>a sentence across lines</Text>  → <Text>a sentence across lines</Text>
-<Text>{                               → <Text>\n      {
+<span>a sentence across lines</span>  → <span>a sentence across lines</span>
+<span>{                               → <span>\n      {
 __cs_name                             → name
 } {                                   → } {
 __cs_name                             → name
-}</Text>                              → }\n    </Text>
+}</span>                              → }\n    </span>
 </>                                   → \n  </>\n)
 ))                                    → `
 cs.lift(cs.const(                     → cs`

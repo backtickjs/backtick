@@ -1,4 +1,4 @@
-import { cs, For, Image, Text, View } from "@backtickjs/core";
+import { cs, For } from "@backtickjs/core";
 
 type Item = { sku: string; qty: number };
 type Order = {
@@ -26,23 +26,22 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 // runtime. The bundle carries the data plus a single card, not five expanded
 // copies. The root View stays static; only its children map on the client.
 export default (
-  <View>
+  <div>
     <For each={cs.lift(cs.const(cs.splice((orders))))}>
       {cs.lift(cs.const((__cs_order: Order) => cs.splice((
-          <View>
-            <Image
-              source={{
-                uri: cs.lift(cs.const("https://img.example.com/" + cs.receiver(__cs_order).id + ".png")),
-              }}
+          <div>
+            <img
+              src={cs.lift(cs.const("https://img.example.com/" + cs.receiver(__cs_order).id + ".png"))}
+              alt=""
             />
-            <Text>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).name))}</Text>
-            <Text>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).city))}</Text>
+            <span>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).name))}</span>
+            <span>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).city))}</span>
             <For each={cs.lift(cs.const(cs.receiver(__cs_order).items))}>
-              {cs.lift(cs.const((__cs_item: Item) => cs.splice((<Text>{cs.lift(cs.const(cs.receiver(__cs_item).sku + " x" + cs.receiver(__cs_item).qty))}</Text>))))}
+              {cs.lift(cs.const((__cs_item: Item) => cs.splice((<span>{cs.lift(cs.const(cs.receiver(__cs_item).sku + " x" + cs.receiver(__cs_item).qty))}</span>))))}
             </For>
-            <Text>{cs.lift(cs.const("$" + cs.receiver(__cs_order).total))}</Text>
-          </View>
+            <span>{cs.lift(cs.const("$" + cs.receiver(__cs_order).total))}</span>
+          </div>
         ))))}
     </For>
-  </View>
+  </div>
 );

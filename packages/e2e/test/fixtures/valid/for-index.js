@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, state, For, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state, For } from "@backtickjs/core";
 // A list whose drawing reads where a member sits as well as what it is.
 //
 // The index is storage, not a number, and this is the case that says why: a
@@ -14,7 +14,7 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "for-index.tsx",
-      fileHash: "3na2qej9qen26",
+      fileHash: "3s4hpk0ugzsmv",
       kind: "value",
       splices: { $names: names },
       captures: [],
@@ -55,7 +55,7 @@ async function Rows() {
                       kind: 80,
                       loc: [14, 20, 14, 24],
                       text: "held",
-                      bindingKey: "held$3na2qej9qen26$0",
+                      bindingKey: "held$3s4hpk0ugzsmv$0",
                     },
                   },
                 ],
@@ -70,7 +70,7 @@ async function Rows() {
                         kind: 80,
                         loc: [14, 30, 14, 34],
                         text: "held",
-                        bindingKey: "held$3na2qej9qen26$0",
+                        bindingKey: "held$3s4hpk0ugzsmv$0",
                       },
                       argumentExpression: {
                         kind: 9,
@@ -85,7 +85,7 @@ async function Rows() {
                         kind: 80,
                         loc: [14, 39, 14, 43],
                         text: "held",
-                        bindingKey: "held$3na2qej9qen26$0",
+                        bindingKey: "held$3s4hpk0ugzsmv$0",
                       },
                       argumentExpression: {
                         kind: 9,
@@ -100,7 +100,7 @@ async function Rows() {
                         kind: 80,
                         loc: [14, 48, 14, 52],
                         text: "held",
-                        bindingKey: "held$3na2qej9qen26$0",
+                        bindingKey: "held$3s4hpk0ugzsmv$0",
                       },
                       argumentExpression: {
                         kind: 9,
@@ -117,17 +117,17 @@ async function Rows() {
       },
     }),
   );
-  return _jsxs(View, {
+  return _jsxs("div", {
     children: [
-      _jsx(Text, { onPress: rotate, children: "rotate" }),
-      _jsx(View, {
+      _jsx("span", { onclick: rotate, children: "rotate" }),
+      _jsx("div", {
         children: _jsx(For, {
           each: cs.create(
             [20, 20, 20, 37],
             {
               version: "0.0.0",
               filePath: "for-index.tsx",
-              fileHash: "3na2qej9qen26",
+              fileHash: "3s4hpk0ugzsmv",
               kind: "value",
               splices: { $names: names },
               captures: [],
@@ -156,21 +156,21 @@ async function Rows() {
             {
               version: "0.0.0",
               filePath: "for-index.tsx",
-              fileHash: "3na2qej9qen26",
+              fileHash: "3s4hpk0ugzsmv",
               kind: "value",
               splices: {
-                $0splice0: _jsx(Text, {
+                $0splice0: _jsx("span", {
                   children: cs.create(
                     [22, 23, 22, 55],
                     {
                       version: "0.0.0",
                       filePath: "for-index.tsx",
-                      fileHash: "3na2qej9qen26",
+                      fileHash: "3s4hpk0ugzsmv",
                       kind: "value",
                       splices: {},
                       captures: [
-                        "name$3na2qej9qen26$1",
-                        "index$3na2qej9qen26$2",
+                        "name$3s4hpk0ugzsmv$1",
+                        "index$3s4hpk0ugzsmv$2",
                       ],
                       spliceParams: {},
                     },
@@ -184,7 +184,7 @@ async function Rows() {
                           kind: 80,
                           loc: [22, 26, 22, 30],
                           text: "name",
-                          bindingKey: "name$3na2qej9qen26$1",
+                          bindingKey: "name$3s4hpk0ugzsmv$1",
                         },
                         operatorToken: "+",
                         right: {
@@ -204,7 +204,7 @@ async function Rows() {
                             kind: 80,
                             loc: [22, 42, 22, 47],
                             text: "index",
-                            bindingKey: "index$3na2qej9qen26$2",
+                            bindingKey: "index$3s4hpk0ugzsmv$2",
                           },
                           questionDotToken: false,
                           name: "read",
@@ -218,7 +218,7 @@ async function Rows() {
               },
               captures: [],
               spliceParams: {
-                $0splice0: ["name$3na2qej9qen26$1", "index$3na2qej9qen26$2"],
+                $0splice0: ["name$3s4hpk0ugzsmv$1", "index$3s4hpk0ugzsmv$2"],
               },
             },
             () => ({
@@ -232,7 +232,7 @@ async function Rows() {
                     kind: 80,
                     loc: [21, 16, 21, 20],
                     text: "name",
-                    bindingKey: "name$3na2qej9qen26$1",
+                    bindingKey: "name$3s4hpk0ugzsmv$1",
                   },
                 },
                 {
@@ -242,7 +242,7 @@ async function Rows() {
                     kind: 80,
                     loc: [21, 30, 21, 35],
                     text: "index",
-                    bindingKey: "index$3na2qej9qen26$2",
+                    bindingKey: "index$3s4hpk0ugzsmv$2",
                   },
                 },
               ],

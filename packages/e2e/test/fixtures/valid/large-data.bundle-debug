@@ -16,31 +16,32 @@
 
 #f8 = ($0) => "$" + $0.total
 
-#f9 = (item) => <Text>
+#f9 = (item) => <span>
   {#f7(item)}
-</Text>
+</span>
 
-#f10 = (order) => <View>
-  {<Image
-    source={{ "uri": #f2(order) }}
+#f10 = (order) => <div>
+  {<img
+    src={#f2(order)}
+    alt={""}
   />}
-  {<Text>
+  {<span>
     {#f3(order)}
-  </Text>}
-  {<Text>
+  </span>}
+  {<span>
     {#f4(order)}
-  </Text>}
+  </span>}
   {<For
     each={#f5(order)}
   >
     {#f6((item) => #f9(item))}
   </For>}
-  {<Text>
+  {<span>
     {#f8(order)}
-  </Text>}
-</View>
+  </span>}
+</div>
 
-#f11 = () => <View>
+#f11 = () => <div>
   {<For
     each={#f0(() => [
       {
@@ -77,6 +78,6 @@
   >
     {#f1((order) => #f10(order))}
   </For>}
-</View>
+</div>
 
 root = #f11()

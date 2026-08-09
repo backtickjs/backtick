@@ -8,14 +8,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./jsx-runtime": {
-      "types": "./dist/jsx-runtime/index.d.ts",
-      "default": "./dist/jsx-runtime/index.js"
-    },
-    "./jsx-dev-runtime": {
-      "types": "./dist/jsx-dev-runtime/index.d.ts",
-      "default": "./dist/jsx-dev-runtime/index.js"
     }
   },
   "scripts": {
@@ -23,8 +15,6 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "node --test \"test/**/*.test.ts\"",
-    "test:update": "UPDATE_SNAPSHOTS=1 node --test \"test/**/*.test.ts\"",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {

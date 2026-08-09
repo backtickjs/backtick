@@ -1,8 +1,8 @@
-<View>
-  <Text>
+<div>
+  <span>
     {"a"}
-  </Text>
-  <Text>
+  </span>
+  <span>
     {"b"}
-  </Text>
-</View>
+  </span>
+</div>

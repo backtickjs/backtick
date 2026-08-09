@@ -1,4 +1,4 @@
-<View>
-  <Text onPress={[function]} />
-  <Text onPress={[function]} />
-</View>
+<div>
+  <span onclick={[function]} />
+  <span onclick={[function]} />
+</div>

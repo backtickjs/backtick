@@ -159,14 +159,11 @@
               1009,
               [
                 0,
-                "Pressable",
+                "button",
                 {
-                  "testID": "row",
-                  "style": {
-                    "flexDirection": "row",
-                    "gap": 8
-                  },
-                  "onPress": [
+                  "id": "row",
+                  "style": "display: flex; gap: 8px",
+                  "onclick": [
                     2,
                     "0",
                     [
@@ -186,11 +183,9 @@
                   [
                     [
                       0,
-                      "Text",
+                      "span",
                       {
-                        "style": {
-                          "fontWeight": "700"
-                        }
+                        "style": "font-weight: 700"
                       },
                       [
                         2,
@@ -209,7 +204,7 @@
                     ],
                     [
                       0,
-                      "Text",
+                      "span",
                       {},
                       [
                         2,

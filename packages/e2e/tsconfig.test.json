@@ -2,7 +2,7 @@
   "extends": "../../configs/tsconfig.test.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/core"
+    "jsxImportSource": "@backtickjs/web-sdk"
   },
   "include": [
     "test/**/*.mts",
@@ -22,6 +22,7 @@
   ],
   "references": [
     { "path": "../compiler/tsconfig.build.json" },
-    { "path": "../core/tsconfig.build.json" }
+    { "path": "../core/tsconfig.build.json" },
+    { "path": "../web-sdk/tsconfig.build.json" }
   ]
 }

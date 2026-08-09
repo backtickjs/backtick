@@ -1,4 +1,3 @@
-import type { ClientElement } from "./ClientElement.js";
 import type { For } from "./For.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
@@ -8,18 +7,13 @@ import type { ServerComponent } from "./ServerComponent.js";
  * or one of the two that arrange rather than draw. Said once, because a host
  * element and one a client script writes both reach for it.
  *
- * A plain tag is its own name. `<div>` is the string `"div"` — the same id the
- * wire carries and the string `createElement` receives — so a target with
- * intrinsic tags needs nothing to stand for them. A `ClientElement` carries an
- * id instead, which is how a target declares an element as a value, the way
- * `core` declares `View`.
+ * An element is its own name. `<div>` is the string `"div"` — the same id the
+ * wire carries and the string `createElement` receives — so every element a
+ * target draws is a tag it declares in `IntrinsicElements`, and nothing stands
+ * between the two. What is left is a value only where it has to be: a
+ * component runs, and `For` and `Fragment` are recognised rather than drawn.
  */
-export type JsxType =
-  | string
-  | ClientElement<never>
-  | ServerComponent<never>
-  | For
-  | Fragment<never>;
+export type JsxType = string | ServerComponent<never> | For | Fragment<never>;
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it.

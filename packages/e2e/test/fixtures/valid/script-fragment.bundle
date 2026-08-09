@@ -44,13 +44,13 @@
             [
               [
                 0,
-                "Text",
+                "span",
                 {},
                 "a sentence across lines"
               ],
               [
                 0,
-                "Text",
+                "span",
                 {},
                 [
                   4,
@@ -78,7 +78,7 @@
         [],
         [
           0,
-          "View",
+          "div",
           {},
           [
             2,

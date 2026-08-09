@@ -1,4 +1,4 @@
-import { cs, state, Text, View } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import type { Client, State } from "@backtickjs/core";
 
 // A child reading a cell it was handed, in all three positions at once: a prop,
@@ -17,22 +17,24 @@ const Row = async ({
   id: Client<number>;
   selected: Client<State<number>>;
 }) => (
-  <View>
-    <Text style={{ fontSize: cs`$selected.read() === $id ? 20 : 16` }}>
+  <div>
+    <span
+      style={cs`"font-size: " + ($selected.read() === $id ? 20 : 16) + "px"`}
+    >
       {cs`"row " + $id + " of " + $selected.read()`}
-    </Text>
-    {cs`$selected.read() === $id ? ${(<Text>marker</Text>)} : null`}
-  </View>
+    </span>
+    {cs`$selected.read() === $id ? ${(<span>marker</span>)} : null`}
+  </div>
 );
 
 async function Panel() {
   const selected = state(0);
   return (
-    <View>
-      <Text onPress={cs`() => $selected.write(1)`}>select</Text>
+    <div>
+      <span onclick={cs`() => $selected.write(1)`}>select</span>
       <Row id={cs`0`} selected={selected} />
       <Row id={cs`1`} selected={selected} />
-    </View>
+    </div>
   );
 }
 

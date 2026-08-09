@@ -1,49 +1,67 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/core/jsx-runtime";
-import { cs, state, Text, View } from "@backtickjs/core";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, state } from "@backtickjs/core";
 // State belongs to the component that declared it. `Counter` calls `state`
 // once per invocation, so two `<Counter />` tags are two cells — and each
 // invocation is its own tree entry, so neither depends on how many places
 // reference an element.
 async function Counter() {
   const size = state(16);
-  return _jsx(Text, {
-    style: {
-      fontSize: cs.create(
-        [11, 26, 11, 42],
-        {
-          version: "0.0.0",
-          filePath: "local-state-instances.tsx",
-          fileHash: "3pcu8arhicczh",
-          kind: "value",
-          splices: { $size: size },
-          captures: [],
-          spliceParams: { $size: [] },
-        },
-        () => ({
-          kind: 214,
-          loc: [11, 29, 11, 41],
-          expression: {
-            kind: 212,
-            loc: [11, 29, 11, 39],
+  return _jsx("span", {
+    style: cs.create(
+      [11, 14, 11, 53],
+      {
+        version: "0.0.0",
+        filePath: "local-state-instances.tsx",
+        fileHash: "k75nanux01nz",
+        kind: "value",
+        splices: { $size: size },
+        captures: [],
+        spliceParams: { $size: [] },
+      },
+      () => ({
+        kind: 227,
+        loc: [11, 17, 11, 52],
+        left: {
+          kind: 227,
+          loc: [11, 17, 11, 45],
+          left: {
+            kind: 11,
+            loc: [11, 17, 11, 30],
+            text: "font-size: ",
+          },
+          operatorToken: "+",
+          right: {
+            kind: 214,
+            loc: [11, 33, 11, 45],
             expression: {
-              kind: 1000,
-              loc: [11, 29, 11, 34],
-              key: "$size",
+              kind: 212,
+              loc: [11, 33, 11, 43],
+              expression: {
+                kind: 1000,
+                loc: [11, 33, 11, 38],
+                key: "$size",
+              },
+              questionDotToken: false,
+              name: "read",
             },
             questionDotToken: false,
-            name: "read",
+            arguments: [],
           },
-          questionDotToken: false,
-          arguments: [],
-        }),
-      ),
-    },
-    onPress: cs.create(
+        },
+        operatorToken: "+",
+        right: {
+          kind: 11,
+          loc: [11, 48, 11, 52],
+          text: "px",
+        },
+      }),
+    ),
+    onclick: cs.create(
       [12, 16, 14, 9],
       {
         version: "0.0.0",
         filePath: "local-state-instances.tsx",
-        fileHash: "3pcu8arhicczh",
+        fileHash: "k75nanux01nz",
         kind: "value",
         splices: { $size: size },
         captures: [],
@@ -109,6 +127,6 @@ async function Counter() {
     children: "press",
   });
 }
-export default _jsxs(View, {
+export default _jsxs("div", {
   children: [_jsx(Counter, {}), _jsx(Counter, {})],
 });

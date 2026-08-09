@@ -1,19 +1,19 @@
-<View>
-  <Text onPress={[function]}>
+<div>
+  <span onclick={[function]}>
     {"swap"}
-  </Text>
-  <Text onPress={[function]}>
+  </span>
+  <span onclick={[function]}>
     {"drop"}
-  </Text>
-  <View>
-    <Text>
+  </span>
+  <div>
+    <span>
       {"row 1"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"row 2"}
-    </Text>
-    <Text>
+    </span>
+    <span>
       {"row 3"}
-    </Text>
-  </View>
-</View>
+    </span>
+  </div>
+</div>

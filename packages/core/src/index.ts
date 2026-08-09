@@ -10,23 +10,9 @@ export {
   type State,
   cs,
 } from "@backtickjs/cs-runtime";
-export {
-  Fragment,
-  type FragmentProps,
-  Image,
-  type ImageProps,
-  Link,
-  type LinkProps,
-  For,
-  type ForProps,
-  Pressable,
-  type PressableProps,
-  Text,
-  type TextProps,
-  View,
-  type ViewProps,
-} from "./components/index.js";
-export type { JSX } from "./jsx-runtime/index.js";
+// `For` is the bundler's, not a target's: what it draws is whatever the
+// elements around it are. A target's own vocabulary lives in that target's SDK.
+export { For, type ForProps } from "@backtickjs/cs-runtime";
 export { bundle, state } from "@backtickjs/jit-bundler";
 export { NodeKind } from "@backtickjs/jit-bundler";
 export type {

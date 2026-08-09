@@ -26,15 +26,19 @@ async function render(file: string): Promise<TestNode> {
 
 // The handler a prop holds, as the host would invoke it.
 function handler(node: TestNode): () => void {
-  const onPress = node.props.onPress;
-  assert.equal(typeof onPress, "function", "expected an onPress handler");
-  return onPress as () => void;
+  const onclick = node.props.onclick;
+  assert.equal(typeof onclick, "function", "expected an onclick handler");
+  return onclick as () => void;
 }
 
+// The size a node's style names. The web's `style` is the attribute HTML has —
+// a string — so what a cell holds is read back out of the CSS rather than off
+// a member, which is what these fixtures wrote before the vocabulary moved.
 function fontSize(node: TestNode): unknown {
   const style = node.props.style;
-  assert.ok(style !== null && typeof style === "object", "expected a style");
-  return (style as { fontSize?: unknown }).fontSize;
+  assert.equal(typeof style, "string", "expected a style");
+  const found = /font-size:\s*(\d+)px/.exec(style as string);
+  return found === null ? undefined : Number(found[1]);
 }
 
 // What a node says, as its text child holds it.

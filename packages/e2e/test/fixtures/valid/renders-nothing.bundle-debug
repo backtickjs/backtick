@@ -1,7 +1,7 @@
 #f0 = () => null
 
-#f1 = () => <View>
+#f1 = () => <div>
   {#f0()}
-</View>
+</div>
 
 root = #f1()

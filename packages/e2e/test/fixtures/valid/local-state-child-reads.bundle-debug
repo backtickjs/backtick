@@ -1,6 +1,6 @@
 #f0 = ($0) => () => $0().write(1)
 
-#f1 = ($0, $1) => $0().read() === $1() ? 20 : 16
+#f1 = ($0, $1) => "font-size: " + $0().read() === $1() ? 20 : 16 + "px"
 
 #f2 = () => 0
 
@@ -10,43 +10,43 @@
 
 #f5 = () => 1
 
-#f6 = () => <Text>
+#f6 = () => <span>
   {"marker"}
-</Text>
+</span>
 
-#f7 = (s0) => <View>
-  {<Text
-    style={{ "fontSize": #f1(() => s0, #f2) }}
+#f7 = (s0) => <div>
+  {<span
+    style={#f1(() => s0, #f2)}
   >
     {#f3(#f2, () => s0)}
-  </Text>}
+  </span>}
   {#f4(() => s0, #f2, () => #f6())}
-</View>
+</div>
 
-#f8 = () => <Text>
+#f8 = () => <span>
   {"marker"}
-</Text>
+</span>
 
-#f9 = (s0) => <View>
-  {<Text
-    style={{ "fontSize": #f1(() => s0, #f5) }}
+#f9 = (s0) => <div>
+  {<span
+    style={#f1(() => s0, #f5)}
   >
     {#f3(#f5, () => s0)}
-  </Text>}
+  </span>}
   {#f4(() => s0, #f5, () => #f8())}
-</View>
+</div>
 
 #f10 = () => {
   const s0 = state(0);
-  return <View>
-    {<Text
-      onPress={#f0(() => s0)}
+  return <div>
+    {<span
+      onclick={#f0(() => s0)}
     >
       {"select"}
-    </Text>}
+    </span>}
     {#f7(s0)}
     {#f9(s0)}
-  </View>;
+  </div>;
 }
 
 root = #f10()
