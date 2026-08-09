@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
+    "@backtickjs/schema": "workspace:*",
     "esbuild": "0.28.0",
     "prettier": "^3.6.2",
     "typebox": "^1.3.11",
