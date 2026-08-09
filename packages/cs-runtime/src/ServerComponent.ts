@@ -1,7 +1,5 @@
 import type { JsxElement } from "./JsxElement.js";
 
-type Props = { [key: string]: unknown };
-
 /**
  * A component built from other components rather than naming one. It runs on
  * the server while bundling — free to await — and leaves no *named* trace: the
@@ -15,7 +13,7 @@ type Props = { [key: string]: unknown };
  * and a re-render can still give it a child — so what disappears is the
  * subtree, not the component.
  */
-export type ServerComponent<P extends Props = Props> = ((
+export type ServerComponent<P extends object = object> = ((
   props: P,
 ) => Promise<JsxElement | null>) & {
   // What a component is *not*. A component is an ordinary function and declares

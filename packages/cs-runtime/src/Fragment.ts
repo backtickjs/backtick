@@ -1,7 +1,3 @@
-import type { SpliceableValue } from "./Spliceable.js";
-
-type Props = { [key: string]: SpliceableValue };
-
 /**
  * Children with no element of their own: what one holds goes where it stands.
  *
@@ -11,12 +7,12 @@ type Props = { [key: string]: SpliceableValue };
  * Made per target, because what a fragment may hold is what that target's
  * elements are. What they share is this brand, so one rule reads them all.
  */
-export interface Fragment<P extends Props = Props> {
+export interface Fragment<P extends object = object> {
   (props: P): never;
   readonly "@backtickjs": "Fragment";
 }
 
-export function createFragment<P extends Props>(): Fragment<P> {
+export function createFragment<P extends object>(): Fragment<P> {
   return { "@backtickjs": "Fragment" } as unknown as Fragment<P>;
 }
 

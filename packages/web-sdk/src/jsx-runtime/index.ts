@@ -4,8 +4,8 @@ import {
   type ServerComponent,
 } from "@backtickjs/cs-runtime";
 import { For } from "@backtickjs/cs-runtime";
+import { Fragment } from "./elements.js";
 import type { IntrinsicElements as Html } from "./elements.js";
-import { Fragment } from "./Fragment.js";
 
 // The JSX a web app writes: HTML tags, and the components built from them.
 //
@@ -51,4 +51,4 @@ export const jsxs = jsx;
 
 // The one element no vocabulary owns: every target re-exports it under this
 // name because that is what the JSX transform imports for `<>…</>`.
-export { Fragment, type FragmentProps } from "./Fragment.js";
+export { Fragment, type FragmentProps } from "./elements.js";

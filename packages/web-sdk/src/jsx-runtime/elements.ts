@@ -6,6 +6,7 @@ import type {
   JsxElement,
   Prop,
 } from "@backtickjs/cs-runtime";
+import { createFragment } from "@backtickjs/cs-runtime";
 
 export type Booleanish = boolean | "true" | "false";
 
@@ -300,6 +301,10 @@ export interface GlobalAttributes extends AriaAttributes, Events {
 export interface VoidProps extends GlobalAttributes {}
 
 export interface HtmlProps extends GlobalAttributes {
+  children?: Children<JsxElement | string | number>;
+}
+
+export interface FragmentProps {
   children?: Children<JsxElement | string | number>;
 }
 
@@ -703,6 +708,8 @@ export interface VideoProps extends MediaProps {
   poster?: Prop<string>;
   width?: Prop<Numeric>;
 }
+
+export const Fragment = createFragment<FragmentProps>();
 
 export interface IntrinsicElements {
   a: AnchorProps;

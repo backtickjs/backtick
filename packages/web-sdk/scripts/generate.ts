@@ -1,70 +1,109 @@
 import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import {
+  IsBoolean,
+  IsFunction,
+  IsIntersect,
+  IsLiteral,
+  IsNumber,
+  IsObject,
+  IsRef,
+  IsString,
+  IsUnion,
+  IsVoid,
+  type TObject,
+  type TSchema,
+} from "typebox";
 import { aliases, elements, interfaces } from "../schema/html.ts";
 
-type Node = Record<string, any>;
-
 /** What a schema node reads as, in TypeScript. */
-function type(node: Node): string {
+function type(node: TSchema): string {
   // A `$ref` is a name, whether the document declares it or the boundary
   // supplies it — `JsxElement` is the second kind, and reads no differently.
-  if (typeof node.$ref === "string") {
+  if (IsRef(node)) {
     return node.$ref;
   }
-  if (node.const !== undefined) {
+  if (IsLiteral(node)) {
     return JSON.stringify(node.const);
   }
-  if (Array.isArray(node.anyOf)) {
+  if (IsUnion(node)) {
     return node.anyOf.map(type).join(" | ");
   }
   // An intersection standing where a value goes is written as one. The schema
   // says `string & {}` where it means TypeScript's open-enum idiom, so this
   // translates rather than recognising it — there is nothing here that knows
   // what the shape was for.
-  if (Array.isArray(node.allOf)) {
+  if (IsIntersect(node)) {
     return `(${node.allOf.map(type).join(" & ")})`;
   }
-  switch (node.type) {
-    // A function the schema did not name keeps its own signature, parameters
-    // and all — the case `core`'s `onLayout(width, height)` needs.
-    case "function": {
-      const params = (node.parameters ?? []).map(
-        (one: Node, at: number) => `${one.name ?? `arg${at}`}: ${type(one)}`,
-      );
-      return `(${params.join(", ")}) => ${type(node.returnType)}`;
-    }
-    case "void":
-      return "void";
-    case "object": {
-      const members = Object.entries(node.properties ?? {}).map(
-        ([name, child]) => `${name}: ${type(child as Node)}`,
-      );
-      if (members.length === 0) {
-        return "{}";
-      }
-      return `{ ${members.join("; ")} }`;
-    }
-    case "string":
-      return "string";
-    case "number":
-      return "number";
-    case "boolean":
-      return "boolean";
-    default:
-      throw new Error(`unhandled node: ${JSON.stringify(node).slice(0, 60)}`);
+  // A function the schema did not name keeps its own signature, parameters and
+  // all — the case `core`'s `onLayout(width, height)` needs.
+  if (IsFunction(node)) {
+    const params = node.parameters.map((one, at) => {
+      const named = one as TSchema & { readonly name?: string };
+      return `${named.name ?? `arg${at}`}: ${type(one)}`;
+    });
+    return `(${params.join(", ")}) => ${type(node.returnType)}`;
   }
+  if (IsObject(node)) {
+    const members = Object.entries(node.properties).map(
+      ([name, child]) => `${name}: ${type(child)}`,
+    );
+    return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
+  }
+  if (IsString(node)) {
+    return "string";
+  }
+  if (IsNumber(node)) {
+    return "number";
+  }
+  if (IsBoolean(node)) {
+    return "boolean";
+  }
+  if (IsVoid(node)) {
+    return "void";
+  }
+  throw new Error(`unhandled node: ${JSON.stringify(node).slice(0, 60)}`);
 }
 
-/** An `allOf` split into what it extends and the one object of its own. */
-const parts = (node: Node) => ({
-  bases: (node.allOf ?? [])
-    .filter((one: Node) => typeof one.$ref === "string")
-    .map((one: Node) => one.$ref as string),
-  own: (node.allOf ?? []).find((one: Node) => one.type === "object") ?? {},
-});
+/** What an interface extends, and the one object of its own. */
+function parts(node: TSchema): {
+  bases: string[];
+  own: TObject | null;
+} {
+  // An interface that extends nothing is the object itself: there is nothing
+  // for an `allOf` of one to say.
+  if (IsObject(node)) {
+    return { bases: [], own: node };
+  }
+  const members = IsIntersect(node) ? node.allOf : [];
+  return {
+    bases: members.filter(IsRef).map((one) => one.$ref),
+    own: members.find(IsObject) ?? null,
+  };
+}
+
+/** The properties an object holds, and whether each was written required. */
+function members(
+  own: TObject | null,
+): { name: string; node: TSchema; required: boolean }[] {
+  if (own === null) {
+    return [];
+  }
+  const required = own.required ?? [];
+  return Object.entries(own.properties).map(([name, node]) => ({
+    name,
+    node,
+    required: required.includes(name),
+  }));
+}
+
+/** A name TypeScript can read bare, or one it needs quoted. */
+const key = (name: string) =>
+  /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
 
 /** What a property admits, which is where the boundary is drawn. */
-function property(name: string, node: Node, required: boolean): string {
+function property(name: string, node: TSchema, required: boolean): string {
   const optional = required ? "" : "?";
   // Which prop holds what is written inside a tag is JSX's own rule — the one
   // `JSX.ElementChildrenAttribute` names — so the *wrapper* is decided here and
@@ -72,13 +111,12 @@ function property(name: string, node: Node, required: boolean): string {
   let written: string;
   if (name === "children") {
     written = `Children<${type(node)}>`;
-  } else if (node.type === "function") {
+  } else if (IsFunction(node)) {
     written = `Client<${type(node)}>`;
   } else {
     written = `Prop<${type(node)}>`;
   }
-  const key = /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
-  return `  ${key}${optional}: ${written};`;
+  return `  ${key(name)}${optional}: ${written};`;
 }
 
 const lines: string[] = [];
@@ -92,31 +130,40 @@ lines.push(`  Client,`);
 lines.push(`  JsxElement,`);
 lines.push(`  Prop,`);
 lines.push(`} from "@backtickjs/cs-runtime";`);
+if ("FragmentProps" in interfaces) {
+  lines.push(`import { createFragment } from "@backtickjs/cs-runtime";`);
+}
 lines.push("");
 
-for (const [name, node] of Object.entries(aliases as Record<string, Node>)) {
+for (const [name, node] of Object.entries(aliases)) {
   lines.push(`export type ${name} = ${type(node)};`);
   lines.push("");
 }
 
-for (const [name, node] of Object.entries(interfaces as Record<string, Node>)) {
+for (const [name, node] of Object.entries(interfaces)) {
   const { bases, own } = parts(node);
-  const required: string[] = own.required ?? [];
   const extend = bases.length > 0 ? ` extends ${bases.join(", ")}` : "";
   lines.push(`export interface ${name}${extend} {`);
-  for (const [key, child] of Object.entries(
-    (own.properties ?? {}) as Record<string, Node>,
-  )) {
-    lines.push(property(key, child, required.includes(key)));
+  for (const one of members(own)) {
+    lines.push(property(one.name, one.node, one.required));
   }
   lines.push(`}`);
   lines.push("");
 }
 
+// `Fragment` is the one value emitted here, and its name is not the schema's
+// to choose: it is what the JSX transform imports for `<>…</>`. Its props are
+// an interface like any other, generated above. `createFragment` answers with
+// `Fragment<P>`, so an annotation would only repeat itself — and repeating it
+// is what would need the type imported.
+if ("FragmentProps" in interfaces) {
+  lines.push(`export const Fragment = createFragment<FragmentProps>();`);
+  lines.push("");
+}
+
 lines.push(`export interface IntrinsicElements {`);
-for (const [tag, name] of Object.entries(elements as Record<string, string>)) {
-  const key = /^[A-Za-z_$][\w$]*$/.test(tag) ? tag : JSON.stringify(tag);
-  lines.push(`  ${key}: ${name};`);
+for (const [tag, name] of Object.entries(elements)) {
+  lines.push(`  ${key(tag)}: ${name};`);
 }
 lines.push(`}`);
 lines.push("");
