@@ -1,39 +1,22 @@
-import { bundle, type Spliceable } from "@backtickjs/core";
-import type { Drawn } from "../Drawn.js";
-
-// What a path gives a render to work from.
+// What a path gives a route to answer from.
 export interface RouteContext {
   // What the route's own `:name` segments matched, decoded.
   readonly params: { readonly [name: string]: string };
   readonly url: URL;
+  readonly request: Request;
 }
 
-// Where one screen goes, and what goes there. The target is a selector — the
-// name the page already has for the element it means to fill — and the
-// component is what fills it, usually an element written as `<Home />`.
-export interface Mount {
-  readonly target: string;
-  readonly component: Spliceable;
-}
-
-// A path, the page a browser opens at it, and what that page draws.
+// A path, and what answers for it.
 //
-// `render` runs when the path is asked for, which is what makes a route answer
-// with today's data rather than the day it started. It returns every mount the
-// page holds, so a document with a body and a sidebar reads them from one
-// place — and so the work behind them happens once, not once per target.
+// `respond` runs when the path is asked for, which is what makes a route answer
+// with today's data rather than the day it started. What it hands back is a
+// `Response` and nothing here reads it — a page with a bundle already in it, a
+// bundle as JSON, an image.
 export interface Route {
   // The path this answers for, with `:name` where a segment is a parameter:
   // `/todos/:id`.
   readonly path: string;
-  // Where the document is, as a path the reader resolves — `/index.html` being
-  // a file in whatever directory the app serves. Said rather than assumed: a
-  // route that opens a page names it, and a reader of the table can see which
-  // document each path answers with.
-  readonly html: string;
-  readonly render: (
-    context: RouteContext,
-  ) => readonly Mount[] | Promise<readonly Mount[]>;
+  readonly respond: (context: RouteContext) => Response | Promise<Response>;
 }
 
 export interface HandlerOptions {
@@ -51,14 +34,35 @@ const contentTypes: { readonly [ext: string]: string } = {
   json: "application/json",
 };
 
-// One handler for every client, and it writes no HTML.
+// The type a path's name implies, or bytes where it implies nothing.
+export function contentType(path: string): string {
+  // A path ending in `/` is a directory, and what a directory serves is its
+  // page — there is no extension to read the type from.
+  const extension = path.endsWith("/") ? "html" : (path.split(".").pop() ?? "");
+  return contentTypes[extension] ?? "application/octet-stream";
+}
+
+// What was built, under a type, asked for again next time.
 //
-// A browser asks for `text/html` and gets the app's own page. Everything else —
-// a phone, an MCU, and the page itself once it is running — asks for the same
-// path and gets what to draw where.
+// Text or bytes: a route that built a page has a string and a file that was
+// read has neither the encoding nor the need to become one.
 //
-// `text/html` has to be asked for. A client sending nothing, or `*/*`, is not a
-// browser navigating, so the data is the safer read.
+// `no-cache` is "ask me", not "don't store" — which is what a page rendered per
+// request needs, and what a dev server wants of everything else.
+export function respond(contents: Uint8Array | string, type: string): Response {
+  const body =
+    typeof contents === "string"
+      ? new TextEncoder().encode(contents)
+      : // Copied into a plain `ArrayBuffer`: a `Uint8Array` over a
+        // `SharedArrayBuffer` is not a body, and the type can't tell them apart.
+        contents.slice();
+  return new Response(body.buffer as ArrayBuffer, {
+    headers: { "content-type": type, "cache-control": "no-cache" },
+  });
+}
+
+// A URL that belongs to a route is that route's to answer. Everything else is a
+// file, read by whatever reader was given.
 //
 // Routes are tried in order and the first that matches answers: `/todos/new`
 // before `/todos/:id` is the difference between a page and a parameter, and the
@@ -74,30 +78,16 @@ export function createHandler(
 ): (request: Request) => Promise<Response> {
   return async (request) => {
     const url = new URL(request.url);
-    const matched = routes
-      .map((route) => ({ route, params: match(route.path, url.pathname) }))
-      .find((candidate) => candidate.params !== null);
-
-    if (matched?.params == null) {
-      return file(url.pathname, await options.read?.(url.pathname));
+    for (const route of routes) {
+      const params = match(route.path, url.pathname);
+      if (params !== null) {
+        return route.respond({ params, url, request });
+      }
     }
-    // A route's path answers two ways: the page a browser asked for, or what to
-    // draw. Both say what varies, so nothing keeps one and hands it to the
-    // other.
-    if ((request.headers.get("accept") ?? "").includes("text/html")) {
-      const { html } = matched.route;
-      return file(html, await options.read?.(html), "accept");
-    }
-    // Rendered per request, so an edit shows on reload rather than on restart,
-    // and so a route answers with what is true now. A deployment renders once
-    // per path and serves the JSON as a file.
-    const mounts = await matched.route.render({ params: matched.params, url });
-    const drawn: Drawn[] = [];
-    for (const { target, component } of mounts) {
-      drawn.push({ target, bundle: await bundle(component) });
-    }
-    const body = new TextEncoder().encode(JSON.stringify(drawn));
-    return fresh(body, "application/json; charset=utf-8", "accept");
+    const read = await options.read?.(url.pathname);
+    return read == null
+      ? new Response("Not found", { status: 404 })
+      : respond(read, contentType(url.pathname));
   };
 }
 
@@ -123,41 +113,4 @@ function match(
     }
   }
   return params;
-}
-
-// A file, answered under the type its name implies — or a 404 where the reader
-// had nothing. Served exactly as it was written: a page that names the client
-// gets the name it wrote, because that is the name the client is served under.
-function file(
-  path: string,
-  contents: Uint8Array | null | undefined,
-  vary?: string,
-): Response {
-  if (contents == null) {
-    return new Response("Not found", { status: 404 });
-  }
-  // A path ending in `/` is a directory, and what a directory serves is its
-  // page — there is no extension to read the type from.
-  const extension = path.endsWith("/") ? "html" : (path.split(".").pop() ?? "");
-  const type = contentTypes[extension] ?? "application/octet-stream";
-  return fresh(contents, type, vary);
-}
-
-// Answered whole, and asked for again next time.
-//
-// `no-cache` is "ask me", not "don't store" — which is what a page rendered per
-// request needs, and what a dev server wants of everything else. Nothing here
-// revalidates: a server that serves its own files answers that from a stat and
-// never opens them, which is a different program to this one.
-function fresh(contents: Uint8Array, type: string, vary?: string): Response {
-  const headers: Record<string, string> = {
-    "content-type": type,
-    "cache-control": "no-cache",
-  };
-  if (vary != null) {
-    headers["vary"] = vary;
-  }
-  // Copied into a plain `ArrayBuffer`: a `Uint8Array` over a `SharedArrayBuffer`
-  // is not a body, and the type can't tell the two apart.
-  return new Response(contents.slice().buffer as ArrayBuffer, { headers });
 }

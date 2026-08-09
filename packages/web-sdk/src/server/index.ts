@@ -1,4 +1,4 @@
-// The server half: building a bundle and answering for it.
+// The server half: answering for a path.
 //
 // `@backtickjs/web-sdk/server`, and the other half is
 // `@backtickjs/web-sdk/client`. Neither is the package's default, because
@@ -8,6 +8,7 @@
 // Runtime-neutral: a `Request` in, a `Response` out. Bun serves this as it is;
 // Node needs the adapter in `./server/node`, which is the same half with a
 // listener and a filesystem.
-export { createHandler } from "./handler.js";
-export type { Drawn } from "../Drawn.js";
-export type { HandlerOptions, Mount, Route, RouteContext } from "./handler.js";
+export { contentType, createHandler, respond } from "./handler.js";
+export type { HandlerOptions, Route, RouteContext } from "./handler.js";
+export { page } from "./page.js";
+export { toHtml, CLIENT_URL } from "../toHtml.js";

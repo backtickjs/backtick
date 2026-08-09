@@ -1,7 +1,11 @@
 import { build } from "esbuild";
 
-// The client, as a browser can load it: `client/browser.js`, which is the
-// client with `start()` already called — a page loads one script and is done.
+// The client, as a browser can load it.
+//
+// It starts nothing on its own: what a page carries is a script that imports
+// `mount` from here and calls it, which is what `embedInDocument` writes. So
+// this is the client's own module, bundled — not a variant with a decision
+// already made.
 //
 // `tsc` emits what Node reads: real modules that name their dependencies —
 // `@backtickjs/js-interpreter`, `solid-js`. A browser can't resolve a bare
@@ -17,7 +21,7 @@ import { build } from "esbuild";
 // point at a different name — the served URL and the written URL are the same
 // string.
 await build({
-  entryPoints: ["dist/client/browser.js"],
+  entryPoints: ["dist/client/index.js"],
   entryNames: "backtick",
   outdir: "dist/browser",
   bundle: true,

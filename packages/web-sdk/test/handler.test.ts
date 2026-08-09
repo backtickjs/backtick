@@ -1,151 +1,106 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createHandler } from "../dist/server/index.js";
+import {
+  contentType,
+  createHandler,
+  respond,
+  type Route,
+} from "../dist/server/index.js";
 
-const page = '<!doctype html><html><body><div id="root"></div></body></html>';
-const handle = createHandler(
-  [
-    {
-      path: "/",
-      html: "/index.html",
-      render: () => [{ target: "#root", component: null }],
-    },
-    {
-      path: "/todos/new",
-      html: "/index.html",
-      render: () => [{ target: "#root", component: "new" }],
-    },
-    {
-      path: "/todos/:id",
-      html: "/index.html",
-      render: ({ params }) => [{ target: "#root", component: params.id }],
-    },
-    {
-      path: "/dashboard",
-      html: "/dashboard.html",
-      render: () => [
-        { target: "#body", component: "body" },
-        { target: "#aside", component: "aside" },
-      ],
-    },
-  ],
-  {
-    read: async (path) =>
-      path === "/index.html"
-        ? new TextEncoder().encode(page)
-        : path === "/main.js"
-          ? new TextEncoder().encode("export {}")
-          : null,
-  },
-);
-const asked = (path: string, accept?: string): Request =>
-  new Request(`http://localhost${path}`, {
-    headers: accept === undefined ? {} : { accept },
-  });
+const said = (text: string) => new TextEncoder().encode(text);
 
-test("answers a browser with the page the app wrote, unchanged", async () => {
-  const response = await handle(asked("/", "text/html"));
-  assert.equal(response.headers.get("content-type"), "text/html");
-  assert.equal(await response.text(), page);
+// Routes that answer with the path they matched and what it matched, so a test
+// can read both out of the body.
+const routes: Route[] = [
+  "/",
+  "/todos/new",
+  "/todos/:id",
+  "/todos/:id/notes/:note",
+].map((path) => ({
+  path,
+  respond: ({ params }) =>
+    respond(said(`${path} ${JSON.stringify(params)}`), "text/plain"),
+}));
+
+const handle = createHandler(routes, {
+  read: async (path) =>
+    path === "/main.js"
+      ? said("export {}")
+      : path === "/index.html"
+        ? said("<!doctype html><html></html>")
+        : null,
 });
 
-test("answers everyone else with what to draw where", async () => {
-  for (const accept of [undefined, "application/json", "*/*"]) {
-    const response = await handle(asked("/todos/42", accept));
-    assert.equal(
-      response.headers.get("content-type"),
-      "application/json; charset=utf-8",
-    );
-    assert.deepEqual(await response.json(), [
-      { target: "#root", bundle: { functions: {}, root: "42" } },
-    ]);
-  }
+const ask = async (path: string, handler = handle) => {
+  const answer = await handler(new Request(`http://localhost${path}`));
+  return { status: answer.status, body: await answer.text(), answer };
+};
+
+test("a path with as many segments as a route is that route's", async () => {
+  assert.equal((await ask("/todos/42")).body, '/todos/:id {"id":"42"}');
+  assert.equal(
+    (await ask("/todos/42/notes/7")).body,
+    '/todos/:id/notes/:note {"id":"42","note":"7"}',
+  );
+});
+
+test("a path with too few or too many segments is not", async () => {
+  // Segment by segment, so a parameter is one segment and never several.
+  assert.equal((await ask("/todos")).status, 404);
+  assert.equal((await ask("/todos/42/edit")).status, 404);
+});
+
+test("a parameter is read as it was written, not as it was sent", async () => {
+  assert.equal((await ask("/todos/a%20b")).body, '/todos/:id {"id":"a b"}');
 });
 
 test("a route earlier in the list wins the path", async () => {
   // `/todos/new` is a page, `/todos/:id` is a parameter, and both match. The
   // order they were written in is what says which was meant.
-  assert.equal(
-    (await (await handle(asked("/todos/new"))).json())[0].bundle.root,
-    "new",
-  );
+  assert.equal((await ask("/todos/new")).body, "/todos/new {}");
 });
 
-test("a page draws every target it holds, in order", async () => {
-  const drawn = await (await handle(asked("/dashboard"))).json();
+test("a route answers with whatever it built", async () => {
+  // Nothing here reads what a route hands back, so a route is free to answer
+  // with a page, a bundle as JSON, or an image.
+  const json = createHandler([
+    { path: "/", respond: () => Response.json({ drawn: true }) },
+  ]);
   assert.deepEqual(
-    drawn.map((each: { target: string }) => each.target),
-    ["#body", "#aside"],
+    await (await json(new Request("http://localhost/"))).json(),
+    {
+      drawn: true,
+    },
   );
 });
 
-test("a route names the page it opens", async () => {
-  // `/dashboard` asks for a document that isn't there, and says so rather than
-  // serving the default page.
-  assert.equal((await handle(asked("/dashboard", "text/html"))).status, 404);
+test("a path no route claims is read as a file", async () => {
+  const { body, answer } = await ask("/main.js");
+  assert.equal(body, "export {}");
+  assert.equal(answer.headers.get("content-type"), "text/javascript");
 });
 
-test("serves a module with a type a browser will execute", async () => {
-  const response = await handle(asked("/main.js"));
-  assert.equal(response.headers.get("content-type"), "text/javascript");
-  assert.equal(await response.text(), "export {}");
-});
-
-const client = "/backtick.js";
-const wired = [
-  "<!doctype html><html><head>",
-  `<link rel="modulepreload" href="${client}">`,
-  '</head><body><div id="root"></div>',
-  `<script type="module" src="${client}"></script>`,
-  "</body></html>",
-].join("");
-
-const wiring = createHandler(
-  [{ path: "/", html: "/index.html", render: () => [] }],
-  {
-    read: async (path) =>
-      path === "/index.html" || path === "/loose.html"
-        ? new TextEncoder().encode(wired)
-        : path === client
-          ? new TextEncoder().encode("export const client = 1")
-          : null,
-  },
-);
-
-test("serves a page exactly as it was written", async () => {
-  // The name a page writes for the client is the name it is served under, so
-  // there is nothing to resolve and no page to rewrite on the way out.
-  const html = await (
-    await wiring(
-      new Request("http://localhost/", { headers: { accept: "text/html" } }),
-    )
-  ).text();
-  assert.equal(html, wired);
+test("a path nothing can answer for is a 404", async () => {
+  assert.equal((await ask("/missing.js")).status, 404);
+  // No reader at all is the static case: routes, and nothing else.
+  assert.equal((await ask("/main.js", createHandler(routes))).status, 404);
 });
 
 test("everything served is asked for again next time", async () => {
   // One rule, and no revalidation to get wrong: a dev server reads its files
   // per request anyway, and a route answers with what is true now.
-  const asked = [
-    new Request(`http://localhost${client}`),
-    new Request("http://localhost/loose.html"),
-    new Request("http://localhost/", { headers: { accept: "text/html" } }),
-    new Request("http://localhost/", {
-      headers: { accept: "application/json" },
-    }),
-  ];
-  for (const request of asked) {
-    const response = await wiring(request);
-    assert.equal(response.headers.get("cache-control"), "no-cache");
-    assert.equal(response.headers.get("etag"), null);
+  for (const path of ["/", "/index.html", "/main.js"]) {
+    const { answer } = await ask(path);
+    assert.equal(answer.headers.get("cache-control"), "no-cache");
+    assert.equal(answer.headers.get("etag"), null);
   }
 });
 
-test("a page and its bundle share a path, so a cache is told what varies", async () => {
-  for (const accept of ["text/html", "application/json"]) {
-    const response = await wiring(
-      new Request("http://localhost/", { headers: { accept } }),
-    );
-    assert.equal(response.headers.get("vary"), "accept");
-  }
+test("the type a path implies is read from its name", () => {
+  assert.equal(contentType("/index.html"), "text/html");
+  assert.equal(contentType("/app.js"), "text/javascript");
+  assert.equal(contentType("/app.js.map"), "application/json");
+  // A directory has no extension to read, and what it serves is its page.
+  assert.equal(contentType("/todos/"), "text/html");
+  assert.equal(contentType("/logo.avif"), "application/octet-stream");
 });
