@@ -41,16 +41,7 @@ export interface HandlerOptions {
   // because reaching a filesystem is the one thing this can't do and stay
   // runtime-neutral.
   readonly read?: (path: string) => Promise<Uint8Array | null>;
-  // Where the client is served, as the build named it — a name that holds a
-  // hash of the file. A page served from here gets this in place of the name
-  // it wrote, and this is the one path answered as immutable.
-  readonly client?: string;
 }
-
-// The name a page writes for the client, and the only thing about it an app
-// says out loud. What it resolves to is the build's business, which is what
-// lets the file behind it be cached for a year.
-export const CLIENT_URL = "/backtick.js";
 
 const contentTypes: { readonly [ext: string]: string } = {
   html: "text/html",
@@ -88,14 +79,14 @@ export function createHandler(
       .find((candidate) => candidate.params !== null);
 
     if (matched?.params == null) {
-      return file(url.pathname, await options.read?.(url.pathname), options);
+      return file(url.pathname, await options.read?.(url.pathname));
     }
     // A route's path answers two ways: the page a browser asked for, or what to
     // draw. Both say what varies, so nothing keeps one and hands it to the
     // other.
     if ((request.headers.get("accept") ?? "").includes("text/html")) {
       const { html } = matched.route;
-      return file(html, await options.read?.(html), options, "accept");
+      return file(html, await options.read?.(html), "accept");
     }
     // Rendered per request, so an edit shows on reload rather than on restart,
     // and so a route answers with what is true now. A deployment renders once
@@ -134,11 +125,12 @@ function match(
   return params;
 }
 
-// A file, read and answered under its own type.
+// A file, answered under the type its name implies — or a 404 where the reader
+// had nothing. Served exactly as it was written: a page that names the client
+// gets the name it wrote, because that is the name the client is served under.
 function file(
   path: string,
   contents: Uint8Array | null | undefined,
-  options: HandlerOptions,
   vary?: string,
 ): Response {
   if (contents == null) {
@@ -148,36 +140,7 @@ function file(
   // page — there is no extension to read the type from.
   const extension = path.endsWith("/") ? "html" : (path.split(".").pop() ?? "");
   const type = contentTypes[extension] ?? "application/octet-stream";
-  const body =
-    type === "text/html" && options.client != null
-      ? built(contents, options.client)
-      : contents;
-  return fresh(body, type, vary);
-}
-
-// Where a page names the client as a URL: an attribute the browser fetches, or
-// a specifier a module resolves. Quoted, because that is what tells a name from
-// a mention — a page that writes `/backtick.js` in a comment or in its own
-// prose said it, it didn't ask for it.
-const named = new RegExp(
-  `(\\bsrc\\s*=\\s*|\\bhref\\s*=\\s*|\\bfrom\\s*|\\bimport\\s*\\(?\\s*)(["'])${CLIENT_URL.replace(
-    /[.*+?^${}()|[\]\\]/g,
-    "\\$&",
-  )}\\2`,
-  "g",
-);
-
-// A page as it was written, with the client resolved to the name the build gave
-// it. The page keeps saying `/backtick.js`, which is readable and stays true;
-// the browser is told the name that carries the hash, which is what makes the
-// file behind it something it never has to ask about again.
-function built(contents: Uint8Array, client: string): Uint8Array {
-  const html = new TextDecoder().decode(contents);
-  return new TextEncoder().encode(
-    html.replace(named, (_, how: string, quote: string) =>
-      [how, quote, client, quote].join(""),
-    ),
-  );
+  return fresh(contents, type, vary);
 }
 
 // Answered whole, and asked for again next time.

@@ -1,5 +1,4 @@
 import { build } from "esbuild";
-import { writeFile } from "node:fs/promises";
 
 // The client, as a browser can load it: `client/browser.js`, which is the
 // client with `start()` already called — a page loads one script and is done.
@@ -13,31 +12,17 @@ import { writeFile } from "node:fs/promises";
 // The server half is deliberately not bundled: Node resolves those names
 // itself, and reading a stack trace is worth more there than a request is.
 //
-// Named for what it holds: the hash changes when the bytes do, so the URL a
-// page loads is one a browser can keep forever without ever asking whether it
-// is still current. `metafile` is how the name comes back — esbuild picks it,
-// and the manifest is where the server reads it rather than recomputing it.
-const result = await build({
+// One name, and it is the name a page writes: `/backtick.js`. Nothing reads
+// this file back to learn what it was called, and nothing rewrites a page to
+// point at a different name — the served URL and the written URL are the same
+// string.
+await build({
   entryPoints: ["dist/client/browser.js"],
-  entryNames: "backtick-[hash]",
+  entryNames: "backtick",
   outdir: "dist/browser",
   bundle: true,
   format: "esm",
   platform: "browser",
   target: "es2022",
   sourcemap: true,
-  metafile: true,
 });
-
-const client = Object.keys(result.metafile.outputs)
-  .map((path) => path.slice("dist/browser/".length))
-  .find((name) => name.endsWith(".js"));
-
-if (client === undefined) {
-  throw new Error("esbuild wrote no client");
-}
-
-await writeFile(
-  "dist/browser/manifest.json",
-  `${JSON.stringify({ client }, null, 2)}\n`,
-);

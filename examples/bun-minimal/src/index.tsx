@@ -29,23 +29,16 @@ const routes = [
 ];
 
 // The other thing `serve` does for Node is assemble this: the client under the
-// name its build gave it, and the app's own directory — its page — under `/`.
-// `client` is also what a page's `/backtick.js` becomes when it is served.
-const assets = browserAssets();
-const options = {
-  client: assets.client,
-  read: readAssets({
-    ...assets,
-    modules: {
-      ...assets.modules,
-      "/": fileURLToPath(new URL("../public", import.meta.url)),
-    },
-  }),
-};
+// name a page writes for it, and the app's own directory — its page — under
+// `/`.
+const read = readAssets({
+  ...browserAssets(),
+  "/": fileURLToPath(new URL("../public", import.meta.url)),
+});
 
 const server = Bun.serve({
   port: Number(process.env.PORT ?? 5174),
-  fetch: createHandler(routes, options),
+  fetch: createHandler(routes, { read }),
 });
 
 console.log(`Preview on ${server.url}`);

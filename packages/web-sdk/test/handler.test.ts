@@ -91,23 +91,18 @@ test("serves a module with a type a browser will execute", async () => {
   assert.equal(await response.text(), "export {}");
 });
 
-// A page that names the client every way a browser would read it, and once in
-// prose, which is not a way a browser would read it.
+const client = "/backtick.js";
 const wired = [
   "<!doctype html><html><head>",
-  '<link rel="modulepreload" href="/backtick.js">',
+  `<link rel="modulepreload" href="${client}">`,
   '</head><body><div id="root"></div>',
-  '<script type="module" src="/backtick.js"></script>',
-  '<script type="module">import { start } from "/backtick.js"; await start();</script>',
-  "<p>The client is served at /backtick.js — write that, not the built name.</p>",
+  `<script type="module" src="${client}"></script>`,
   "</body></html>",
 ].join("");
 
-const client = "/backtick-IEB5UTWZ.js";
 const wiring = createHandler(
   [{ path: "/", html: "/index.html", render: () => [] }],
   {
-    client,
     read: async (path) =>
       path === "/index.html" || path === "/loose.html"
         ? new TextEncoder().encode(wired)
@@ -117,32 +112,15 @@ const wiring = createHandler(
   },
 );
 
-test("resolves the client where a page names it as a URL", async () => {
+test("serves a page exactly as it was written", async () => {
+  // The name a page writes for the client is the name it is served under, so
+  // there is nothing to resolve and no page to rewrite on the way out.
   const html = await (
     await wiring(
       new Request("http://localhost/", { headers: { accept: "text/html" } }),
     )
   ).text();
-  assert.equal(html.match(/\/backtick-IEB5UTWZ\.js/g)?.length, 3);
-  assert.ok(html.includes(`href="${client}"`));
-  assert.ok(html.includes(`src="${client}"`));
-  assert.ok(html.includes(`from "${client}"`));
-});
-
-test("leaves the name alone where a page only mentions it", async () => {
-  const html = await (
-    await wiring(
-      new Request("http://localhost/", { headers: { accept: "text/html" } }),
-    )
-  ).text();
-  assert.ok(html.includes("served at /backtick.js — write that"));
-});
-
-test("resolves it in any page it serves, not only a route's", async () => {
-  const html = await (
-    await wiring(new Request("http://localhost/loose.html"))
-  ).text();
-  assert.ok(html.includes(`src="${client}"`));
+  assert.equal(html, wired);
 });
 
 test("everything served is asked for again next time", async () => {
