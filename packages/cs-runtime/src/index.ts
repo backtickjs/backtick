@@ -36,10 +36,5 @@ export * from "./Ast.js";
 export type { BinaryOperator } from "./BinaryOperator.js";
 export type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
 export { SyntaxKind } from "./SyntaxKind.js";
-export {
-  type ClientElement,
-  createClientElement,
-  isClientElement,
-} from "./ClientElement.js";
 export { version } from "./version.js";
 export { createJsxElement } from "./JsxElement.js";

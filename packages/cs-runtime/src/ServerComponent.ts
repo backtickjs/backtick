@@ -20,9 +20,9 @@ export type ServerComponent<P extends Props = Props> = ((
 ) => Promise<JsxElement | null>) & {
   // What a component is *not*. A component is an ordinary function and declares
   // no brand, so this is optional and nothing has to be wrapped to satisfy it.
-  // What it rules out is a value branded as something else: a `ClientElement`
-  // is callable and returns `never`, which is assignable to every return type,
-  // so without this it would satisfy the signature above and count as a
-  // component.
+  // What it rules out is a value branded as something else: `For` and
+  // `Fragment` are callable and return `never`, which is assignable to every
+  // return type, so without this either would satisfy the signature above and
+  // count as a component.
   readonly "@backtickjs"?: "ServerComponent";
 };

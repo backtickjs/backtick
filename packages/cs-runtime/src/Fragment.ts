@@ -5,9 +5,8 @@ type Props = { [key: string]: SpliceableValue };
 /**
  * Children with no element of their own: what one holds goes where it stands.
  *
- * Branded rather than made a `ClientElement`, because it is not one — it draws
- * no node, and it lowers to its children rather than to an element a client
- * would have to know the id of.
+ * Branded, because this is not an element — it draws no node, and it lowers to
+ * its children rather than to one a client would have to know the id of.
  *
  * Made per target, because what a fragment may hold is what that target's
  * elements are. What they share is this brand, so one rule reads them all.

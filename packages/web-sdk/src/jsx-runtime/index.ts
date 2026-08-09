@@ -24,10 +24,9 @@ export declare namespace JSX {
   export interface Element extends JsxElement {}
   export interface IntrinsicElements extends Html {}
   // A tag, a component of the app's own, or one of the two that arrange rather
-  // than name — and nothing else, which is how `<View />` in a web app is a
-  // type error rather than something that quietly renders. What keeps a
-  // portable vocabulary out is the marker on `ServerComponent`: a
-  // `ClientElement` returns `never` and so satisfies any signature.
+  // than name — and nothing else. A tag is a key of `IntrinsicElements`, so a
+  // name this target does not declare is a type error rather than something
+  // that quietly renders.
   export type ElementType =
     | keyof IntrinsicElements
     | typeof Fragment

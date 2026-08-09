@@ -15,14 +15,12 @@ export type ForProps<T extends ClientValue> = {
   children: Client<(member: T, index: ReadonlyState<number>) => JsxElement>;
 };
 
-// Generic where `ClientElement<P>` fixes its props: `each` decides `T`, and the
-// child script's parameter is checked against it. The call signature is spelled
-// out rather than inherited from `ClientElement`, whose own takes any object of
-// spliceable values — every call that failed this signature would resolve
-// against that one instead and report nothing.
+// Generic where an element's props are fixed: `each` decides `T`, and the child
+// script's parameter is checked against it.
 //
-// Branded as itself rather than as a `ClientElement`, because it is not one: it
-// draws no node, and it lowers to `NodeKind.For` rather than to an element.
+// Branded, because this is not an element: it draws no node, and it lowers to
+// `NodeKind.For` rather than to one. An element is a tag — its own name — and
+// nothing callable stands for it.
 export interface For {
   <T extends ClientValue>(props: ForProps<T>): never;
   readonly "@backtickjs": "For";
