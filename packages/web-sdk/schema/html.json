@@ -1,0 +1,3525 @@
+{
+  "aliases": {
+    "Booleanish": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "const": "true"
+        },
+        {
+          "type": "string",
+          "const": "false"
+        }
+      ]
+    },
+    "Numeric": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "AriaRole": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "alert"
+        },
+        {
+          "type": "string",
+          "const": "alertdialog"
+        },
+        {
+          "type": "string",
+          "const": "application"
+        },
+        {
+          "type": "string",
+          "const": "article"
+        },
+        {
+          "type": "string",
+          "const": "banner"
+        },
+        {
+          "type": "string",
+          "const": "button"
+        },
+        {
+          "type": "string",
+          "const": "cell"
+        },
+        {
+          "type": "string",
+          "const": "checkbox"
+        },
+        {
+          "type": "string",
+          "const": "columnheader"
+        },
+        {
+          "type": "string",
+          "const": "combobox"
+        },
+        {
+          "type": "string",
+          "const": "complementary"
+        },
+        {
+          "type": "string",
+          "const": "contentinfo"
+        },
+        {
+          "type": "string",
+          "const": "definition"
+        },
+        {
+          "type": "string",
+          "const": "dialog"
+        },
+        {
+          "type": "string",
+          "const": "directory"
+        },
+        {
+          "type": "string",
+          "const": "document"
+        },
+        {
+          "type": "string",
+          "const": "feed"
+        },
+        {
+          "type": "string",
+          "const": "figure"
+        },
+        {
+          "type": "string",
+          "const": "form"
+        },
+        {
+          "type": "string",
+          "const": "grid"
+        },
+        {
+          "type": "string",
+          "const": "gridcell"
+        },
+        {
+          "type": "string",
+          "const": "group"
+        },
+        {
+          "type": "string",
+          "const": "heading"
+        },
+        {
+          "type": "string",
+          "const": "img"
+        },
+        {
+          "type": "string",
+          "const": "link"
+        },
+        {
+          "type": "string",
+          "const": "list"
+        },
+        {
+          "type": "string",
+          "const": "listbox"
+        },
+        {
+          "type": "string",
+          "const": "listitem"
+        },
+        {
+          "type": "string",
+          "const": "log"
+        },
+        {
+          "type": "string",
+          "const": "main"
+        },
+        {
+          "type": "string",
+          "const": "marquee"
+        },
+        {
+          "type": "string",
+          "const": "math"
+        },
+        {
+          "type": "string",
+          "const": "menu"
+        },
+        {
+          "type": "string",
+          "const": "menubar"
+        },
+        {
+          "type": "string",
+          "const": "menuitem"
+        },
+        {
+          "type": "string",
+          "const": "menuitemcheckbox"
+        },
+        {
+          "type": "string",
+          "const": "menuitemradio"
+        },
+        {
+          "type": "string",
+          "const": "navigation"
+        },
+        {
+          "type": "string",
+          "const": "none"
+        },
+        {
+          "type": "string",
+          "const": "note"
+        },
+        {
+          "type": "string",
+          "const": "option"
+        },
+        {
+          "type": "string",
+          "const": "presentation"
+        },
+        {
+          "type": "string",
+          "const": "progressbar"
+        },
+        {
+          "type": "string",
+          "const": "radio"
+        },
+        {
+          "type": "string",
+          "const": "radiogroup"
+        },
+        {
+          "type": "string",
+          "const": "region"
+        },
+        {
+          "type": "string",
+          "const": "row"
+        },
+        {
+          "type": "string",
+          "const": "rowgroup"
+        },
+        {
+          "type": "string",
+          "const": "rowheader"
+        },
+        {
+          "type": "string",
+          "const": "scrollbar"
+        },
+        {
+          "type": "string",
+          "const": "search"
+        },
+        {
+          "type": "string",
+          "const": "searchbox"
+        },
+        {
+          "type": "string",
+          "const": "separator"
+        },
+        {
+          "type": "string",
+          "const": "slider"
+        },
+        {
+          "type": "string",
+          "const": "spinbutton"
+        },
+        {
+          "type": "string",
+          "const": "status"
+        },
+        {
+          "type": "string",
+          "const": "switch"
+        },
+        {
+          "type": "string",
+          "const": "tab"
+        },
+        {
+          "type": "string",
+          "const": "table"
+        },
+        {
+          "type": "string",
+          "const": "tablist"
+        },
+        {
+          "type": "string",
+          "const": "tabpanel"
+        },
+        {
+          "type": "string",
+          "const": "term"
+        },
+        {
+          "type": "string",
+          "const": "textbox"
+        },
+        {
+          "type": "string",
+          "const": "timer"
+        },
+        {
+          "type": "string",
+          "const": "toolbar"
+        },
+        {
+          "type": "string",
+          "const": "tooltip"
+        },
+        {
+          "type": "string",
+          "const": "tree"
+        },
+        {
+          "type": "string",
+          "const": "treegrid"
+        },
+        {
+          "type": "string",
+          "const": "treeitem"
+        },
+        {
+          "allOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ]
+    },
+    "ReferrerPolicy": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": ""
+        },
+        {
+          "type": "string",
+          "const": "no-referrer"
+        },
+        {
+          "type": "string",
+          "const": "no-referrer-when-downgrade"
+        },
+        {
+          "type": "string",
+          "const": "origin"
+        },
+        {
+          "type": "string",
+          "const": "origin-when-cross-origin"
+        },
+        {
+          "type": "string",
+          "const": "same-origin"
+        },
+        {
+          "type": "string",
+          "const": "strict-origin"
+        },
+        {
+          "type": "string",
+          "const": "strict-origin-when-cross-origin"
+        },
+        {
+          "type": "string",
+          "const": "unsafe-url"
+        }
+      ]
+    },
+    "CrossOrigin": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "anonymous"
+        },
+        {
+          "type": "string",
+          "const": "use-credentials"
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ]
+    },
+    "Target": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "_self"
+        },
+        {
+          "type": "string",
+          "const": "_blank"
+        },
+        {
+          "type": "string",
+          "const": "_parent"
+        },
+        {
+          "type": "string",
+          "const": "_top"
+        },
+        {
+          "allOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {}
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "elements": {
+    "a": "AnchorProps",
+    "abbr": "HtmlProps",
+    "address": "HtmlProps",
+    "area": "AreaProps",
+    "article": "HtmlProps",
+    "aside": "HtmlProps",
+    "audio": "MediaProps",
+    "b": "HtmlProps",
+    "base": "BaseProps",
+    "bdi": "HtmlProps",
+    "bdo": "HtmlProps",
+    "blockquote": "BlockquoteProps",
+    "body": "HtmlProps",
+    "br": "VoidProps",
+    "button": "ButtonProps",
+    "canvas": "CanvasProps",
+    "caption": "HtmlProps",
+    "cite": "HtmlProps",
+    "code": "HtmlProps",
+    "col": "ColProps",
+    "colgroup": "ColgroupProps",
+    "data": "DataProps",
+    "datalist": "HtmlProps",
+    "dd": "HtmlProps",
+    "del": "DelProps",
+    "details": "DetailsProps",
+    "dfn": "HtmlProps",
+    "dialog": "DialogProps",
+    "div": "HtmlProps",
+    "dl": "HtmlProps",
+    "dt": "HtmlProps",
+    "em": "HtmlProps",
+    "embed": "EmbedProps",
+    "fieldset": "FieldsetProps",
+    "figcaption": "HtmlProps",
+    "figure": "HtmlProps",
+    "footer": "HtmlProps",
+    "form": "FormProps",
+    "h1": "HtmlProps",
+    "h2": "HtmlProps",
+    "h3": "HtmlProps",
+    "h4": "HtmlProps",
+    "h5": "HtmlProps",
+    "h6": "HtmlProps",
+    "head": "HtmlProps",
+    "header": "HtmlProps",
+    "hgroup": "HtmlProps",
+    "hr": "VoidProps",
+    "html": "HtmlElementProps",
+    "i": "HtmlProps",
+    "iframe": "IframeProps",
+    "img": "ImgProps",
+    "input": "InputProps",
+    "ins": "InsProps",
+    "kbd": "HtmlProps",
+    "label": "LabelProps",
+    "legend": "HtmlProps",
+    "li": "LiProps",
+    "link": "LinkProps",
+    "main": "HtmlProps",
+    "map": "MapProps",
+    "mark": "HtmlProps",
+    "menu": "HtmlProps",
+    "meta": "MetaProps",
+    "meter": "MeterProps",
+    "nav": "HtmlProps",
+    "noscript": "HtmlProps",
+    "object": "ObjectProps",
+    "ol": "OlProps",
+    "optgroup": "OptgroupProps",
+    "option": "OptionProps",
+    "output": "OutputProps",
+    "p": "HtmlProps",
+    "picture": "HtmlProps",
+    "pre": "HtmlProps",
+    "progress": "ProgressProps",
+    "q": "QuoteProps",
+    "rp": "HtmlProps",
+    "rt": "HtmlProps",
+    "ruby": "HtmlProps",
+    "s": "HtmlProps",
+    "samp": "HtmlProps",
+    "script": "ScriptProps",
+    "search": "HtmlProps",
+    "section": "HtmlProps",
+    "select": "SelectProps",
+    "slot": "SlotProps",
+    "small": "HtmlProps",
+    "source": "SourceProps",
+    "span": "HtmlProps",
+    "strong": "HtmlProps",
+    "style": "StyleProps",
+    "sub": "HtmlProps",
+    "summary": "HtmlProps",
+    "sup": "HtmlProps",
+    "table": "TableProps",
+    "tbody": "HtmlProps",
+    "td": "TdProps",
+    "template": "HtmlProps",
+    "textarea": "TextareaProps",
+    "tfoot": "HtmlProps",
+    "th": "ThProps",
+    "thead": "HtmlProps",
+    "time": "TimeProps",
+    "title": "HtmlProps",
+    "tr": "HtmlProps",
+    "track": "TrackProps",
+    "u": "HtmlProps",
+    "ul": "HtmlProps",
+    "var": "HtmlProps",
+    "video": "VideoProps",
+    "wbr": "VoidProps"
+  },
+  "interfaces": {
+    "AriaAttributes": {
+      "type": "object",
+      "properties": {
+        "aria-activedescendant": {
+          "type": "string"
+        },
+        "aria-atomic": {
+          "$ref": "Booleanish"
+        },
+        "aria-autocomplete": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "inline"
+            },
+            {
+              "type": "string",
+              "const": "list"
+            },
+            {
+              "type": "string",
+              "const": "both"
+            }
+          ]
+        },
+        "aria-braillelabel": {
+          "type": "string"
+        },
+        "aria-brailleroledescription": {
+          "type": "string"
+        },
+        "aria-busy": {
+          "$ref": "Booleanish"
+        },
+        "aria-checked": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "mixed"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            }
+          ]
+        },
+        "aria-colcount": {
+          "type": "number"
+        },
+        "aria-colindex": {
+          "type": "number"
+        },
+        "aria-colindextext": {
+          "type": "string"
+        },
+        "aria-colspan": {
+          "type": "number"
+        },
+        "aria-controls": {
+          "type": "string"
+        },
+        "aria-current": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "page"
+            },
+            {
+              "type": "string",
+              "const": "step"
+            },
+            {
+              "type": "string",
+              "const": "location"
+            },
+            {
+              "type": "string",
+              "const": "date"
+            },
+            {
+              "type": "string",
+              "const": "time"
+            }
+          ]
+        },
+        "aria-describedby": {
+          "type": "string"
+        },
+        "aria-description": {
+          "type": "string"
+        },
+        "aria-details": {
+          "type": "string"
+        },
+        "aria-disabled": {
+          "$ref": "Booleanish"
+        },
+        "aria-errormessage": {
+          "type": "string"
+        },
+        "aria-expanded": {
+          "$ref": "Booleanish"
+        },
+        "aria-flowto": {
+          "type": "string"
+        },
+        "aria-haspopup": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "menu"
+            },
+            {
+              "type": "string",
+              "const": "listbox"
+            },
+            {
+              "type": "string",
+              "const": "tree"
+            },
+            {
+              "type": "string",
+              "const": "grid"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "aria-hidden": {
+          "$ref": "Booleanish"
+        },
+        "aria-invalid": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "grammar"
+            },
+            {
+              "type": "string",
+              "const": "spelling"
+            }
+          ]
+        },
+        "aria-keyshortcuts": {
+          "type": "string"
+        },
+        "aria-label": {
+          "type": "string"
+        },
+        "aria-labelledby": {
+          "type": "string"
+        },
+        "aria-level": {
+          "type": "number"
+        },
+        "aria-live": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "off"
+            },
+            {
+              "type": "string",
+              "const": "assertive"
+            },
+            {
+              "type": "string",
+              "const": "polite"
+            }
+          ]
+        },
+        "aria-modal": {
+          "$ref": "Booleanish"
+        },
+        "aria-multiline": {
+          "$ref": "Booleanish"
+        },
+        "aria-multiselectable": {
+          "$ref": "Booleanish"
+        },
+        "aria-orientation": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "horizontal"
+            },
+            {
+              "type": "string",
+              "const": "vertical"
+            }
+          ]
+        },
+        "aria-owns": {
+          "type": "string"
+        },
+        "aria-placeholder": {
+          "type": "string"
+        },
+        "aria-posinset": {
+          "type": "number"
+        },
+        "aria-pressed": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "mixed"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            }
+          ]
+        },
+        "aria-readonly": {
+          "$ref": "Booleanish"
+        },
+        "aria-relevant": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "additions"
+            },
+            {
+              "type": "string",
+              "const": "additions removals"
+            },
+            {
+              "type": "string",
+              "const": "additions text"
+            },
+            {
+              "type": "string",
+              "const": "all"
+            },
+            {
+              "type": "string",
+              "const": "removals"
+            },
+            {
+              "type": "string",
+              "const": "removals additions"
+            },
+            {
+              "type": "string",
+              "const": "removals text"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            },
+            {
+              "type": "string",
+              "const": "text additions"
+            },
+            {
+              "type": "string",
+              "const": "text removals"
+            }
+          ]
+        },
+        "aria-required": {
+          "$ref": "Booleanish"
+        },
+        "aria-roledescription": {
+          "type": "string"
+        },
+        "aria-rowcount": {
+          "type": "number"
+        },
+        "aria-rowindex": {
+          "type": "number"
+        },
+        "aria-rowindextext": {
+          "type": "string"
+        },
+        "aria-rowspan": {
+          "type": "number"
+        },
+        "aria-selected": {
+          "$ref": "Booleanish"
+        },
+        "aria-setsize": {
+          "type": "number"
+        },
+        "aria-sort": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "ascending"
+            },
+            {
+              "type": "string",
+              "const": "descending"
+            },
+            {
+              "type": "string",
+              "const": "other"
+            }
+          ]
+        },
+        "aria-valuemax": {
+          "type": "number"
+        },
+        "aria-valuemin": {
+          "type": "number"
+        },
+        "aria-valuenow": {
+          "type": "number"
+        },
+        "aria-valuetext": {
+          "type": "string"
+        }
+      }
+    },
+    "Events": {
+      "type": "object",
+      "properties": {
+        "oncopy": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncut": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpaste": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncompositionend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncompositionstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncompositionupdate": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onblur": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onfocus": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onfocusin": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onfocusout": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onbeforeinput": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onchange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oninput": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oninvalid": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onreset": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onselect": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onsubmit": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onerror": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onload": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onkeydown": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onkeypress": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onkeyup": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onabort": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncanplay": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncanplaythrough": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondurationchange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onemptied": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onended": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onloadeddata": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onloadedmetadata": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onloadstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpause": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onplay": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onplaying": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onprogress": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onratechange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onseeked": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onseeking": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onstalled": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onsuspend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontimeupdate": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onvolumechange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onwaiting": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onauxclick": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onclick": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncontextmenu": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondblclick": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmousedown": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseenter": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseleave": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmousemove": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseout": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseover": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseup": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondrag": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragenter": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragleave": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragover": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondrop": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchcancel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchmove": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ongotpointercapture": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onlostpointercapture": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointercancel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerdown": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerenter": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerleave": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointermove": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerout": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerover": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerup": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onscroll": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onscrollend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onwheel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onanimationend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onanimationiteration": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onanimationstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitioncancel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitionend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitionrun": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitionstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onbeforetoggle": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontoggle": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        }
+      }
+    },
+    "GlobalAttributes": {
+      "allOf": [
+        {
+          "$ref": "AriaAttributes"
+        },
+        {
+          "$ref": "Events"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accesskey": {
+              "type": "string"
+            },
+            "autocapitalize": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "off"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "on"
+                },
+                {
+                  "type": "string",
+                  "const": "sentences"
+                },
+                {
+                  "type": "string",
+                  "const": "words"
+                },
+                {
+                  "type": "string",
+                  "const": "characters"
+                }
+              ]
+            },
+            "autocorrect": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "on"
+                },
+                {
+                  "type": "string",
+                  "const": "off"
+                }
+              ]
+            },
+            "autofocus": {
+              "type": "boolean"
+            },
+            "class": {
+              "type": "string"
+            },
+            "contenteditable": {
+              "anyOf": [
+                {
+                  "$ref": "Booleanish"
+                },
+                {
+                  "type": "string",
+                  "const": "inherit"
+                },
+                {
+                  "type": "string",
+                  "const": "plaintext-only"
+                }
+              ]
+            },
+            "dir": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "ltr"
+                },
+                {
+                  "type": "string",
+                  "const": "rtl"
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                }
+              ]
+            },
+            "draggable": {
+              "$ref": "Booleanish"
+            },
+            "enterkeyhint": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "enter"
+                },
+                {
+                  "type": "string",
+                  "const": "done"
+                },
+                {
+                  "type": "string",
+                  "const": "go"
+                },
+                {
+                  "type": "string",
+                  "const": "next"
+                },
+                {
+                  "type": "string",
+                  "const": "previous"
+                },
+                {
+                  "type": "string",
+                  "const": "search"
+                },
+                {
+                  "type": "string",
+                  "const": "send"
+                }
+              ]
+            },
+            "exportparts": {
+              "type": "string"
+            },
+            "hidden": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "const": "until-found"
+                }
+              ]
+            },
+            "id": {
+              "type": "string"
+            },
+            "inert": {
+              "type": "boolean"
+            },
+            "inputmode": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "text"
+                },
+                {
+                  "type": "string",
+                  "const": "tel"
+                },
+                {
+                  "type": "string",
+                  "const": "url"
+                },
+                {
+                  "type": "string",
+                  "const": "email"
+                },
+                {
+                  "type": "string",
+                  "const": "numeric"
+                },
+                {
+                  "type": "string",
+                  "const": "decimal"
+                },
+                {
+                  "type": "string",
+                  "const": "search"
+                }
+              ]
+            },
+            "is": {
+              "type": "string"
+            },
+            "itemid": {
+              "type": "string"
+            },
+            "itemprop": {
+              "type": "string"
+            },
+            "itemref": {
+              "type": "string"
+            },
+            "itemscope": {
+              "type": "boolean"
+            },
+            "itemtype": {
+              "type": "string"
+            },
+            "lang": {
+              "type": "string"
+            },
+            "nonce": {
+              "type": "string"
+            },
+            "part": {
+              "type": "string"
+            },
+            "popover": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": ""
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                },
+                {
+                  "type": "string",
+                  "const": "manual"
+                },
+                {
+                  "type": "string",
+                  "const": "hint"
+                }
+              ]
+            },
+            "role": {
+              "$ref": "AriaRole"
+            },
+            "slot": {
+              "type": "string"
+            },
+            "spellcheck": {
+              "$ref": "Booleanish"
+            },
+            "style": {
+              "type": "string"
+            },
+            "tabindex": {
+              "type": "number"
+            },
+            "title": {
+              "type": "string"
+            },
+            "translate": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "yes"
+                },
+                {
+                  "type": "string",
+                  "const": "no"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "VoidProps": {
+      "allOf": [
+        {
+          "$ref": "GlobalAttributes"
+        },
+        {
+          "type": "object",
+          "properties": {}
+        }
+      ]
+    },
+    "HtmlProps": {
+      "allOf": [
+        {
+          "$ref": "GlobalAttributes"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "children": {
+              "anyOf": [
+                {
+                  "$ref": "JsxElement"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "FragmentProps": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "anyOf": [
+            {
+              "$ref": "JsxElement"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      }
+    },
+    "AnchorProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "download": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "href": {
+              "type": "string"
+            },
+            "hreflang": {
+              "type": "string"
+            },
+            "media": {
+              "type": "string"
+            },
+            "ping": {
+              "type": "string"
+            },
+            "referrerpolicy": {
+              "$ref": "ReferrerPolicy"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "target": {
+              "$ref": "Target"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "AreaProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "alt": {
+              "type": "string"
+            },
+            "coords": {
+              "type": "string"
+            },
+            "download": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "boolean"
+                }
+              ]
+            },
+            "href": {
+              "type": "string"
+            },
+            "referrerpolicy": {
+              "$ref": "ReferrerPolicy"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "shape": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "rect"
+                },
+                {
+                  "type": "string",
+                  "const": "circle"
+                },
+                {
+                  "type": "string",
+                  "const": "poly"
+                },
+                {
+                  "type": "string",
+                  "const": "default"
+                }
+              ]
+            },
+            "target": {
+              "$ref": "Target"
+            }
+          }
+        }
+      ]
+    },
+    "BaseProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            },
+            "target": {
+              "$ref": "Target"
+            }
+          }
+        }
+      ]
+    },
+    "BlockquoteProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cite": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "ButtonProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "disabled": {
+              "type": "boolean"
+            },
+            "form": {
+              "type": "string"
+            },
+            "formaction": {
+              "type": "string"
+            },
+            "formenctype": {
+              "type": "string"
+            },
+            "formmethod": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "get"
+                },
+                {
+                  "type": "string",
+                  "const": "post"
+                },
+                {
+                  "type": "string",
+                  "const": "dialog"
+                }
+              ]
+            },
+            "formnovalidate": {
+              "type": "boolean"
+            },
+            "formtarget": {
+              "$ref": "Target"
+            },
+            "name": {
+              "type": "string"
+            },
+            "popovertarget": {
+              "type": "string"
+            },
+            "popovertargetaction": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "toggle"
+                },
+                {
+                  "type": "string",
+                  "const": "show"
+                },
+                {
+                  "type": "string",
+                  "const": "hide"
+                }
+              ]
+            },
+            "type": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "submit"
+                },
+                {
+                  "type": "string",
+                  "const": "reset"
+                },
+                {
+                  "type": "string",
+                  "const": "button"
+                }
+              ]
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "CanvasProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "height": {
+              "$ref": "Numeric"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "ColProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "span": {
+              "type": "number"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "ColgroupProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "span": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "DataProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "DelProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cite": {
+              "type": "string"
+            },
+            "datetime": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "DetailsProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "open": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "DialogProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "closedby": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "any"
+                },
+                {
+                  "type": "string",
+                  "const": "closerequest"
+                },
+                {
+                  "type": "string",
+                  "const": "none"
+                }
+              ]
+            },
+            "open": {
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    },
+    "EmbedProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "height": {
+              "$ref": "Numeric"
+            },
+            "src": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "FieldsetProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "disabled": {
+              "type": "boolean"
+            },
+            "form": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "FormProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accept-charset": {
+              "type": "string"
+            },
+            "action": {
+              "type": "string"
+            },
+            "autocomplete": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "on"
+                },
+                {
+                  "type": "string",
+                  "const": "off"
+                }
+              ]
+            },
+            "enctype": {
+              "type": "string"
+            },
+            "method": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "get"
+                },
+                {
+                  "type": "string",
+                  "const": "post"
+                },
+                {
+                  "type": "string",
+                  "const": "dialog"
+                }
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "novalidate": {
+              "type": "boolean"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "target": {
+              "$ref": "Target"
+            }
+          }
+        }
+      ]
+    },
+    "HtmlElementProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "manifest": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "IframeProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "allow": {
+              "type": "string"
+            },
+            "allowfullscreen": {
+              "type": "boolean"
+            },
+            "height": {
+              "$ref": "Numeric"
+            },
+            "loading": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "eager"
+                },
+                {
+                  "type": "string",
+                  "const": "lazy"
+                }
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "referrerpolicy": {
+              "$ref": "ReferrerPolicy"
+            },
+            "sandbox": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            },
+            "srcdoc": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "ImgProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "alt": {
+              "type": "string"
+            },
+            "crossorigin": {
+              "$ref": "CrossOrigin"
+            },
+            "decoding": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "async"
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                },
+                {
+                  "type": "string",
+                  "const": "sync"
+                }
+              ]
+            },
+            "fetchpriority": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "high"
+                },
+                {
+                  "type": "string",
+                  "const": "low"
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                }
+              ]
+            },
+            "height": {
+              "$ref": "Numeric"
+            },
+            "loading": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "eager"
+                },
+                {
+                  "type": "string",
+                  "const": "lazy"
+                }
+              ]
+            },
+            "referrerpolicy": {
+              "$ref": "ReferrerPolicy"
+            },
+            "sizes": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            },
+            "srcset": {
+              "type": "string"
+            },
+            "usemap": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "InputProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accept": {
+              "type": "string"
+            },
+            "alt": {
+              "type": "string"
+            },
+            "autocomplete": {
+              "type": "string"
+            },
+            "capture": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "string",
+                  "const": "user"
+                },
+                {
+                  "type": "string",
+                  "const": "environment"
+                }
+              ]
+            },
+            "checked": {
+              "type": "boolean"
+            },
+            "dirname": {
+              "type": "string"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "form": {
+              "type": "string"
+            },
+            "formaction": {
+              "type": "string"
+            },
+            "formenctype": {
+              "type": "string"
+            },
+            "formmethod": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "get"
+                },
+                {
+                  "type": "string",
+                  "const": "post"
+                },
+                {
+                  "type": "string",
+                  "const": "dialog"
+                }
+              ]
+            },
+            "formnovalidate": {
+              "type": "boolean"
+            },
+            "formtarget": {
+              "$ref": "Target"
+            },
+            "height": {
+              "$ref": "Numeric"
+            },
+            "list": {
+              "type": "string"
+            },
+            "max": {
+              "$ref": "Numeric"
+            },
+            "maxlength": {
+              "type": "number"
+            },
+            "min": {
+              "$ref": "Numeric"
+            },
+            "minlength": {
+              "type": "number"
+            },
+            "multiple": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "pattern": {
+              "type": "string"
+            },
+            "placeholder": {
+              "type": "string"
+            },
+            "readonly": {
+              "type": "boolean"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "size": {
+              "type": "number"
+            },
+            "src": {
+              "type": "string"
+            },
+            "step": {
+              "$ref": "Numeric"
+            },
+            "type": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "button"
+                },
+                {
+                  "type": "string",
+                  "const": "checkbox"
+                },
+                {
+                  "type": "string",
+                  "const": "color"
+                },
+                {
+                  "type": "string",
+                  "const": "date"
+                },
+                {
+                  "type": "string",
+                  "const": "datetime-local"
+                },
+                {
+                  "type": "string",
+                  "const": "email"
+                },
+                {
+                  "type": "string",
+                  "const": "file"
+                },
+                {
+                  "type": "string",
+                  "const": "hidden"
+                },
+                {
+                  "type": "string",
+                  "const": "image"
+                },
+                {
+                  "type": "string",
+                  "const": "month"
+                },
+                {
+                  "type": "string",
+                  "const": "number"
+                },
+                {
+                  "type": "string",
+                  "const": "password"
+                },
+                {
+                  "type": "string",
+                  "const": "radio"
+                },
+                {
+                  "type": "string",
+                  "const": "range"
+                },
+                {
+                  "type": "string",
+                  "const": "reset"
+                },
+                {
+                  "type": "string",
+                  "const": "search"
+                },
+                {
+                  "type": "string",
+                  "const": "submit"
+                },
+                {
+                  "type": "string",
+                  "const": "tel"
+                },
+                {
+                  "type": "string",
+                  "const": "text"
+                },
+                {
+                  "type": "string",
+                  "const": "time"
+                },
+                {
+                  "type": "string",
+                  "const": "url"
+                },
+                {
+                  "type": "string",
+                  "const": "week"
+                }
+              ]
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "InsProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cite": {
+              "type": "string"
+            },
+            "datetime": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "LabelProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "for": {
+              "type": "string"
+            },
+            "form": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "LiProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "LinkProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "as": {
+              "type": "string"
+            },
+            "crossorigin": {
+              "$ref": "CrossOrigin"
+            },
+            "fetchpriority": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "high"
+                },
+                {
+                  "type": "string",
+                  "const": "low"
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                }
+              ]
+            },
+            "href": {
+              "type": "string"
+            },
+            "hreflang": {
+              "type": "string"
+            },
+            "imagesizes": {
+              "type": "string"
+            },
+            "imagesrcset": {
+              "type": "string"
+            },
+            "integrity": {
+              "type": "string"
+            },
+            "media": {
+              "type": "string"
+            },
+            "referrerpolicy": {
+              "$ref": "ReferrerPolicy"
+            },
+            "rel": {
+              "type": "string"
+            },
+            "sizes": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MapProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MediaProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "autoplay": {
+              "type": "boolean"
+            },
+            "controls": {
+              "type": "boolean"
+            },
+            "controlslist": {
+              "type": "string"
+            },
+            "crossorigin": {
+              "$ref": "CrossOrigin"
+            },
+            "loop": {
+              "type": "boolean"
+            },
+            "muted": {
+              "type": "boolean"
+            },
+            "preload": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "none"
+                },
+                {
+                  "type": "string",
+                  "const": "metadata"
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                },
+                {
+                  "type": "string",
+                  "const": ""
+                }
+              ]
+            },
+            "src": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MetaProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "charset": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "http-equiv": {
+              "type": "string"
+            },
+            "media": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "MeterProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "form": {
+              "type": "string"
+            },
+            "high": {
+              "type": "number"
+            },
+            "low": {
+              "type": "number"
+            },
+            "max": {
+              "$ref": "Numeric"
+            },
+            "min": {
+              "$ref": "Numeric"
+            },
+            "optimum": {
+              "type": "number"
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "ObjectProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "string"
+            },
+            "form": {
+              "type": "string"
+            },
+            "height": {
+              "$ref": "Numeric"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "usemap": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "OlProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "reversed": {
+              "type": "boolean"
+            },
+            "start": {
+              "type": "number"
+            },
+            "type": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "1"
+                },
+                {
+                  "type": "string",
+                  "const": "a"
+                },
+                {
+                  "type": "string",
+                  "const": "A"
+                },
+                {
+                  "type": "string",
+                  "const": "i"
+                },
+                {
+                  "type": "string",
+                  "const": "I"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "OptgroupProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "disabled": {
+              "type": "boolean"
+            },
+            "label": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "OptionProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "disabled": {
+              "type": "boolean"
+            },
+            "label": {
+              "type": "string"
+            },
+            "selected": {
+              "type": "boolean"
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "OutputProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "for": {
+              "type": "string"
+            },
+            "form": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "ProgressProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "max": {
+              "$ref": "Numeric"
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "QuoteProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cite": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "ScriptProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "async": {
+              "type": "boolean"
+            },
+            "crossorigin": {
+              "$ref": "CrossOrigin"
+            },
+            "defer": {
+              "type": "boolean"
+            },
+            "fetchpriority": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "high"
+                },
+                {
+                  "type": "string",
+                  "const": "low"
+                },
+                {
+                  "type": "string",
+                  "const": "auto"
+                }
+              ]
+            },
+            "integrity": {
+              "type": "string"
+            },
+            "nomodule": {
+              "type": "boolean"
+            },
+            "referrerpolicy": {
+              "$ref": "ReferrerPolicy"
+            },
+            "src": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "SelectProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "autocomplete": {
+              "type": "string"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "form": {
+              "type": "string"
+            },
+            "multiple": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "size": {
+              "type": "number"
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "SlotProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "SourceProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "height": {
+              "$ref": "Numeric"
+            },
+            "media": {
+              "type": "string"
+            },
+            "sizes": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            },
+            "srcset": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "StyleProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "media": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "TableProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    },
+    "TdProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "colspan": {
+              "type": "number"
+            },
+            "headers": {
+              "type": "string"
+            },
+            "rowspan": {
+              "type": "number"
+            }
+          }
+        }
+      ]
+    },
+    "ThProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "abbr": {
+              "type": "string"
+            },
+            "colspan": {
+              "type": "number"
+            },
+            "headers": {
+              "type": "string"
+            },
+            "rowspan": {
+              "type": "number"
+            },
+            "scope": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "row"
+                },
+                {
+                  "type": "string",
+                  "const": "col"
+                },
+                {
+                  "type": "string",
+                  "const": "rowgroup"
+                },
+                {
+                  "type": "string",
+                  "const": "colgroup"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "TextareaProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "autocomplete": {
+              "type": "string"
+            },
+            "cols": {
+              "type": "number"
+            },
+            "dirname": {
+              "type": "string"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "form": {
+              "type": "string"
+            },
+            "maxlength": {
+              "type": "number"
+            },
+            "minlength": {
+              "type": "number"
+            },
+            "name": {
+              "type": "string"
+            },
+            "placeholder": {
+              "type": "string"
+            },
+            "readonly": {
+              "type": "boolean"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "rows": {
+              "type": "number"
+            },
+            "value": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            },
+            "wrap": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "hard"
+                },
+                {
+                  "type": "string",
+                  "const": "soft"
+                },
+                {
+                  "type": "string",
+                  "const": "off"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "TimeProps": {
+      "allOf": [
+        {
+          "$ref": "HtmlProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "datetime": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "TrackProps": {
+      "allOf": [
+        {
+          "$ref": "VoidProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "boolean"
+            },
+            "kind": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "const": "subtitles"
+                },
+                {
+                  "type": "string",
+                  "const": "captions"
+                },
+                {
+                  "type": "string",
+                  "const": "descriptions"
+                },
+                {
+                  "type": "string",
+                  "const": "chapters"
+                },
+                {
+                  "type": "string",
+                  "const": "metadata"
+                }
+              ]
+            },
+            "label": {
+              "type": "string"
+            },
+            "src": {
+              "type": "string"
+            },
+            "srclang": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "VideoProps": {
+      "allOf": [
+        {
+          "$ref": "MediaProps"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "disablepictureinpicture": {
+              "type": "boolean"
+            },
+            "disableremoteplayback": {
+              "type": "boolean"
+            },
+            "height": {
+              "$ref": "Numeric"
+            },
+            "playsinline": {
+              "type": "boolean"
+            },
+            "poster": {
+              "type": "string"
+            },
+            "width": {
+              "$ref": "Numeric"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
