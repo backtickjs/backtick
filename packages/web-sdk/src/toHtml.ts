@@ -10,7 +10,7 @@ import type { Bundle } from "@backtickjs/core";
 
 // Read once: the bytes never change while the process runs.
 const backtick = readFileSync(
-  new URL("../browser/backtick.js", import.meta.url),
+  new URL("./browser/backtick.js", import.meta.url),
   "utf8",
 );
 

@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
-import { page } from "../dist/server/page.js";
-import { toHtml } from "../dist/server/toHtml.js";
+import { page } from "../dist/page.js";
+import { toHtml } from "../dist/toHtml.js";
 
 const html = (drawn: unknown = null) => toHtml(drawn as never);
 
@@ -37,10 +37,8 @@ describe("a page that draws itself", () => {
     assert.equal(scripts(html("a"))[0], scripts(html("b"))[0]);
   });
 
-  it("is a whole document, said to be one", async () => {
-    const answer = await page(null as never);
-    assert.equal(answer.headers.get("content-type"), "text/html");
-    const doc = await answer.text();
+  it("is a whole document", async () => {
+    const doc = await page(null as never);
     assert.ok(doc.startsWith("<!doctype html><html><head>"));
     assert.ok(doc.includes('<meta charset="utf-8">'));
     assert.ok(doc.endsWith("</body></html>"));

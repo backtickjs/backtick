@@ -3,17 +3,13 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./client": {
       "types": "./dist/client/index.d.ts",
       "default": "./dist/client/index.js"
-    },
-    "./server": {
-      "types": "./dist/server/index.d.ts",
-      "default": "./dist/server/index.js"
-    },
-    "./server/node": {
-      "types": "./dist/server/node.d.ts",
-      "default": "./dist/server/node.js"
     },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime/index.d.ts",
