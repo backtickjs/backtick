@@ -7,10 +7,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./client": {
-      "types": "./dist/client/index.d.ts",
-      "default": "./dist/client/index.js"
-    },
     "./jsx-runtime": {
       "types": "./dist/jsx-runtime/index.d.ts",
       "default": "./dist/jsx-runtime/index.js"

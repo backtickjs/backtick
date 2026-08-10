@@ -32,7 +32,6 @@
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",
     "@backtickjs/tsc": "^0.1.0",
-    "esbuild": "0.28.0",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   }

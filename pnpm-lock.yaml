@@ -45,9 +45,6 @@ importers:
       '@backtickjs/tsc':
         specifier: ^0.1.0
         version: link:../../../../../packages/language-tools/tsc
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
       ts-patch:
         specifier: ^4.0.1
         version: 4.0.1
