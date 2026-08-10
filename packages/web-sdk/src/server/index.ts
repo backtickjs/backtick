@@ -11,4 +11,4 @@
 export { contentType, createHandler, respond } from "./handler.js";
 export type { HandlerOptions, Route, RouteContext } from "./handler.js";
 export { page } from "./page.js";
-export { toHtml, CLIENT_URL } from "../toHtml.js";
+export { toHtml } from "../toHtml.js";
