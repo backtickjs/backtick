@@ -4,6 +4,7 @@ export {
   type ClientObject,
   type ClientUnknown,
   type ClientValue,
+  type JsxElement,
   type Prop,
   type ReadonlyState,
   type Spliceable,

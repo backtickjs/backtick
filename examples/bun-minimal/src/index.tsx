@@ -8,9 +8,18 @@ import { About, Counter, Home } from "./screens.js";
 const started = new Date();
 
 const routes = [
-  { path: "/", respond: () => page(<Home />) },
-  { path: "/counter", respond: () => page(<Counter />) },
-  { path: "/about", respond: () => page(<About started={started} />) },
+  {
+    path: "/",
+    respond: () => page(<Home />),
+  },
+  {
+    path: "/counter",
+    respond: () => page(<Counter />),
+  },
+  {
+    path: "/about",
+    respond: () => page(<About started={started} />),
+  },
 ];
 
 const server = Bun.serve({
