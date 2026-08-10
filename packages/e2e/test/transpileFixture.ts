@@ -17,6 +17,7 @@ const COMPILER_OPTIONS: ts.CompilerOptions = {
   jsx: ts.JsxEmit.ReactJSX,
   jsxImportSource: "@backtickjs/web-sdk",
   sourceMap: false,
+  verbatimModuleSyntax: true,
 };
 
 export async function transpileFixture(

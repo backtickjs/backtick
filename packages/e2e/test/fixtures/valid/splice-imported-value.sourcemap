@@ -1,0 +1,17 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(NodeKind)         → $NodeKind
+)                  →  [-semantic]
+)                  → 
+.                  → .
+Element            → Element
+ +                 →  + 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(NodeKind)         → $NodeKind
+)                  →  [-semantic]
+)                  → 
+.                  → .
+For                → For
+))                 → `
