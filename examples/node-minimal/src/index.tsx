@@ -37,8 +37,9 @@ createServer(async (incoming, outgoing) => {
     for (const { pattern, handler } of matchers) {
       const found = pattern.exec({ pathname });
       if (found !== null) {
+        const html = await page(handler(found.pathname.groups));
         outgoing.writeHead(200, { "content-type": "text/html" });
-        outgoing.end(await page(handler(found.pathname.groups)));
+        outgoing.end(html);
         return;
       }
     }

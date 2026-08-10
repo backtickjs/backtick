@@ -21,8 +21,9 @@ createServer(async (incoming, outgoing) => {
     const [pathname = "/"] = (incoming.url ?? "/").split("?");
     for (const { pattern, handler } of matchers) {
       if (pattern.exec({ pathname }) !== null) {
+        const html = await page(handler());
         outgoing.writeHead(200, { "content-type": "text/html" });
-        outgoing.end(await page(handler()));
+        outgoing.end(html);
         return;
       }
     }
