@@ -38,7 +38,10 @@ createServer(async (incoming, outgoing) => {
       const found = pattern.exec({ pathname });
       if (found !== null) {
         const html = await page(handler(found.pathname.groups));
-        outgoing.writeHead(200, { "content-type": "text/html" });
+        outgoing.writeHead(200, {
+          "content-type": "text/html",
+          "content-security-policy": "default-src 'self'",
+        });
         outgoing.end(html);
         return;
       }

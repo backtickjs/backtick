@@ -8,7 +8,10 @@ const started = new Date();
 
 const html = async (content: JsxElement) =>
   new Response(await page(content), {
-    headers: { "content-type": "text/html" },
+    headers: {
+      "content-type": "text/html",
+      "content-security-policy": "default-src 'self'",
+    },
   });
 
 const server = Bun.serve({
