@@ -22,10 +22,7 @@ createServer(async (incoming, outgoing) => {
     for (const { pattern, handler } of matchers) {
       if (pattern.exec({ pathname }) !== null) {
         const html = await page(handler());
-        outgoing.writeHead(200, {
-          "content-type": "text/html",
-          "content-security-policy": "default-src 'self'",
-        });
+        outgoing.writeHead(200, { "content-type": "text/html" });
         outgoing.end(html);
         return;
       }

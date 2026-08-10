@@ -65,23 +65,38 @@ describe("what cannot end a script early", () => {
   });
 });
 
+const tags = (html: string) => [
+  ...html.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g),
+];
+
 describe("a page that draws itself", () => {
-  it("is a whole document, the client and the call apart", () => {
+  // Two tags: the bundle as data, then the client that reads it. Nothing here
+  // is a call — the client starts itself from what the page carries.
+  it("is a whole document: a data block, then the client", () => {
     const doc = toHtml(drawn);
     assert.ok(doc.startsWith("<!doctype html><html><head>"));
     assert.ok(doc.includes('<meta charset="utf-8">'));
     assert.ok(doc.endsWith("</body></html>"));
-    assert.equal(doc.match(/<script/g)?.length, 2);
-    assert.equal(scripts(doc)[0], client);
-    assert.equal(scripts(doc)[1], render(drawn, { into: "body" }));
+
+    const [held, starts] = tags(doc);
+    assert.equal(held?.[1], ' type="application/json" data-backtick="body"');
+    assert.equal(held?.[2], '{"functions":{},"root":"42"}');
+    assert.equal(starts?.[2], client);
   });
 
-  // Nothing is fetched once the document arrives, so there is no URL for a page
-  // and a server to agree on and no way for them to disagree.
-  it("asks for nothing else", () => {
+  // The bundle is carried once, as data. A page that also wrote it into the
+  // script that draws it would be twice its size.
+  it("carries the bundle once", () => {
     const doc = toHtml(drawn);
-    assert.ok(!doc.includes("src="));
-    assert.ok(!doc.includes("modulepreload"));
+    assert.equal(doc.split('"root":"42"').length - 1, 1);
+  });
+
+  it("cannot be ended early by the bundle it holds", () => {
+    const doc = toHtml({
+      root: "</script><img src=x onerror=alert(1)>",
+    } as never);
+    assert.equal(tags(doc).length, 2);
+    assert.ok(doc.includes("\\u003c/script>"));
   });
 
   it("is what `page` builds from a screen", async () => {

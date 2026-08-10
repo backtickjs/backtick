@@ -1,5 +1,5 @@
 import type { Bundle } from "@backtickjs/core";
-import { client, render } from "./render.js";
+import { client } from "./render.js";
 
 /**
  * The document a bundle draws itself in.
@@ -12,13 +12,17 @@ import { client, render } from "./render.js";
  * selector. A document that already exists reaches for `render` instead.
  */
 export function toHtml(bundle: Bundle): string {
+  // A `</script` ends a script element wherever it stands, data block or not.
+  // Only string values in `JSON.stringify` output can hold a `<`, and `<`
+  // is an escape JSON reads the same way JavaScript does.
+  const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
   return (
     `<!doctype html><html><head>` +
     `<meta charset="utf-8">` +
     `<meta name="viewport" content="width=device-width, initial-scale=1">` +
     `</head><body>` +
+    `<script type="application/json" data-backtick="body">${escaped}</script>` +
     `<script>${client}</script>` +
-    `<script>${render(bundle, { into: "body" })}</script>` +
     `</body></html>`
   );
 }
