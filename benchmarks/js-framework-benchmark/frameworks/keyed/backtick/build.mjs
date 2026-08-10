@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { client, render } from "@backtickjs/web-sdk";
+import { client, toDataScript } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -38,16 +38,25 @@ await writeFile(
   `${JSON.stringify(drawn)}\n`,
 );
 
-// The client and the drawing as one script, which is what a page carries too —
-// so what this measures is what an app ships. `index.html` is the harness\'s and
-// says where the app goes, hence `#main` rather than the body.
+// The page, as the harness's own boilerplate plus what this app draws.
 //
-// Nothing here is bundled: the client is already one file, and the drawing is
-// data.
+// `index.template.html` is upstream's file, unedited: the stylesheet it links
+// and the `#main` it provides are what every framework here is measured in. The
+// bundle goes in beside them as a data block, which is how an app written with
+// this SDK carries one — so what runs in Chrome is the shape an app ships,
+// rather than an arrangement this benchmark invented.
+const template = await readFile(new URL("index.template.html", here), "utf8");
 await writeFile(
-  new URL("dist/main.js", here),
-  `${client}${render(drawn, { into: "#main" })}\n`,
+  new URL("index.html", here),
+  template.replace(
+    "<script src='dist/main.js'></script>",
+    `${toDataScript(drawn, "#main")}\n    <script src='dist/main.js'></script>`,
+  ),
 );
+
+// And the client, whole and unaccompanied. It finds the block above and draws
+// it: nothing here appends a call, and nothing on the page reaches into it.
+await writeFile(new URL("dist/main.js", here), `${client}\n`);
 
 const bytes = (await readFile(new URL("dist/main.js", here))).byteLength;
 console.log(`dist/main.js  ${bytes} bytes`);

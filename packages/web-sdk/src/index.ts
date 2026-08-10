@@ -1,3 +1,3 @@
-export { client, render, type RenderOptions } from "./render.js";
 export { page } from "./page.js";
-export { toHtml } from "./toHtml.js";
+export { toDataScript } from "./toDataScript.js";
+export { client, toHtml } from "./toHtml.js";

@@ -4,18 +4,17 @@ import { dom } from "./dom.js";
 
 // The client: what a browser needs to draw a bundle.
 //
-// Two exports, and only one of them is this package's. `render` is the
+// Two things, and only one of them is this package's. `render` is the
 // interpreter's, unchanged: evaluating a bundle is the same work on every
 // target, and what a browser adds is `dom` — which is why it is an argument
-// rather than an assumption. Wrapping the pair in a `mount` of our own would
-// only hide which half is which.
+// rather than an assumption.
 //
-// Nothing here reaches a runtime API, so this is the half a browser can run,
-// and `scripts/browser.mjs` bundles exactly this file into the string that
-// `client` hands out.
-export { render } from "@backtickjs/js-interpreter";
-export { dom } from "./dom.js";
-
+// Exports nothing. Nothing on a page reaches into this file, because a page
+// says what to draw in markup and this reads it — so the bundle esbuild writes
+// declares no global, and pays none of the interop that handing one over costs.
+//
+// `scripts/browser.mjs` bundles exactly this file into the string that `client`
+// hands out.
 // And it starts itself, from whatever the page is carrying.
 //
 // A page says what to draw in `<script type="application/json">` scripts, each
