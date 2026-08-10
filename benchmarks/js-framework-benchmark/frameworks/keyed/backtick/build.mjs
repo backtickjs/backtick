@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { readFile, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { client, toDataScript } from "@backtickjs/web-sdk";
+import { client } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -45,12 +45,21 @@ await writeFile(
 // bundle goes in beside them as a data block, which is how an app written with
 // this SDK carries one — so what runs in Chrome is the shape an app ships,
 // rather than an arrangement this benchmark invented.
+//
+// `data-backtick` names where the drawing goes, and every `<` in the JSON is
+// written `\u003c` — a `</script` would end the block wherever it stood, and
+// only a string value in `JSON.stringify` output can hold one. Both are what
+// the client reads and what `toHtml` writes, spelled here because this page is
+// assembled rather than generated whole.
+const escaped = JSON.stringify(drawn).replaceAll("<", "\\u003c");
+
 const template = await readFile(new URL("index.template.html", here), "utf8");
 await writeFile(
   new URL("index.html", here),
   template.replace(
     "<script src='dist/main.js'></script>",
-    `${toDataScript(drawn, "#main")}\n    <script src='dist/main.js'></script>`,
+    `<script type="application/json" data-backtick="#main">${escaped}</script>` +
+      `\n    <script src='dist/main.js'></script>`,
   ),
 );
 

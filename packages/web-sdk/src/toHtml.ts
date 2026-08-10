@@ -1,6 +1,5 @@
 import type { Bundle } from "@backtickjs/core";
 import { clientUrl } from "./browserClient.js";
-import { toDataScript } from "./toDataScript.js";
 
 /**
  * The document a bundle draws itself in.
@@ -10,8 +9,8 @@ import { toDataScript } from "./toDataScript.js";
  * this with the bundling and the response around it.
  *
  * A whole document, so it has a body of its own to render into and needs no
- * selector. A document that already exists carries `toDataScript` and asks for
- * the client itself, which is what the benchmark does.
+ * selector. A document that already exists writes the data block and the
+ * script itself, which is what the benchmark does.
  *
  * The page holds no JavaScript of its own: the bundle is a data block, which no
  * content policy checks, and the client is a same-origin file that
@@ -20,12 +19,16 @@ import { toDataScript } from "./toDataScript.js";
  * is drawn, is fetched once rather than carried by every page.
  */
 export function toHtml(bundle: Bundle): string {
+  // A `</script` ends a script element wherever it stands, data block or not.
+  // Only string values in `JSON.stringify` output can hold a `<`, and `<`
+  // is an escape JSON reads the same way JavaScript does.
+  const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
   return (
     `<!doctype html><html><head>` +
     `<meta charset="utf-8">` +
     `<meta name="viewport" content="width=device-width, initial-scale=1">` +
     `</head><body>` +
-    toDataScript(bundle, "body") +
+    `<script type="application/json" data-backtick="body">${escaped}</script>` +
     `<script src="${clientUrl}"></script>` +
     `</body></html>`
   );
