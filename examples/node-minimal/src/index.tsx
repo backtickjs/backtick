@@ -1,41 +1,53 @@
 import { createServer } from "node:http";
-import type { JsxElement } from "@backtickjs/core";
+import { URLPattern } from "node:url";
 import { page } from "@backtickjs/web-sdk";
-import { About, Counter, Home } from "./screens.js";
+import { About } from "./About.js";
+import { Counter } from "./Counter.js";
+import { Home } from "./Home.js";
 
-// One screen per path, drawn when the path is asked for and answered whole.
-//
-// The SDK writes the page and nothing else — no routing, no listener — so what
-// is left here is `node:http` and a lookup. `/about` reports the uptime at the
-// moment of the request rather than the moment the server started, because a
-// screen is built when it is asked for.
 const started = new Date();
 
-const screens: { [path: string]: () => JsxElement } = {
-  "/": () => <Home />,
-  "/counter": () => <Counter />,
-  "/about": () => <About started={started} />,
+type Params = Record<string, string | undefined>;
+
+const routes = {
+  "/": () => {
+    return <Home />;
+  },
+  "/counter": () => {
+    return <Counter from={0} />;
+  },
+  "/counter/:from": ({ from }: Params) => {
+    return <Counter from={Number(decodeURIComponent(from!))} />;
+  },
+  "/about": () => {
+    return <About started={started} />;
+  },
 };
+
+const matchers = Object.entries(routes).map(([path, handler]) => ({
+  pattern: new URLPattern({ pathname: path }),
+  handler,
+}));
 
 const port = Number(process.env.PORT ?? 5173);
 
-createServer((incoming, outgoing) => {
-  const screen = screens[incoming.url ?? "/"];
-  if (screen === undefined) {
+createServer(async (incoming, outgoing) => {
+  try {
+    const [pathname = "/"] = (incoming.url ?? "/").split("?");
+    for (const { pattern, handler } of matchers) {
+      const found = pattern.exec({ pathname });
+      if (found !== null) {
+        outgoing.writeHead(200, { "content-type": "text/html" });
+        outgoing.end(await page(handler(found.pathname.groups)));
+        return;
+      }
+    }
     outgoing.writeHead(404, { "content-type": "text/plain" });
     outgoing.end("Not found");
-    return;
+  } catch (error) {
+    outgoing.writeHead(500, { "content-type": "text/plain" });
+    outgoing.end(String(error));
   }
-  void page(screen()).then(
-    (html) => {
-      outgoing.writeHead(200, { "content-type": "text/html" });
-      outgoing.end(html);
-    },
-    (error: unknown) => {
-      outgoing.writeHead(500, { "content-type": "text/plain" });
-      outgoing.end(String(error));
-    },
-  );
 }).listen(port, () => {
   console.log(`Preview on http://localhost:${port}`);
 });
