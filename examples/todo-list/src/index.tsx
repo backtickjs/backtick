@@ -1,15 +1,37 @@
 import { createServer } from "node:http";
+import { URLPattern } from "node:url";
 import { page } from "@backtickjs/web-sdk";
-import { TodoList } from "./todos.js";
+import { TodoList } from "./TodoList.js";
 
-// One request, no second trip: the list is drawn into the page that carries it.
+const routes = {
+  "/": () => {
+    return <TodoList />;
+  },
+};
+
+const matchers = Object.entries(routes).map(([path, handler]) => ({
+  pattern: new URLPattern({ pathname: path }),
+  handler,
+}));
+
 const port = Number(process.env.PORT ?? 5175);
 
-createServer((_, outgoing) => {
-  void page(<TodoList />).then((html) => {
-    outgoing.writeHead(200, { "content-type": "text/html" });
-    outgoing.end(html);
-  });
+createServer(async (incoming, outgoing) => {
+  try {
+    const [pathname = "/"] = (incoming.url ?? "/").split("?");
+    for (const { pattern, handler } of matchers) {
+      if (pattern.exec({ pathname }) !== null) {
+        outgoing.writeHead(200, { "content-type": "text/html" });
+        outgoing.end(await page(handler()));
+        return;
+      }
+    }
+    outgoing.writeHead(404, { "content-type": "text/plain" });
+    outgoing.end("Not found");
+  } catch (error) {
+    outgoing.writeHead(500, { "content-type": "text/plain" });
+    outgoing.end(String(error));
+  }
 }).listen(port, () => {
   console.log(`Preview on http://localhost:${port}`);
 });

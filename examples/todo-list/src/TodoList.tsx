@@ -1,4 +1,5 @@
-import { cs, state, For, type Client } from "@backtickjs/core";
+import { cs, state, For } from "@backtickjs/core";
+import { Task } from "./Task.js";
 
 const TASKS = [
   "Water the plants",
@@ -12,7 +13,6 @@ const TASKS = [
 const page =
   "display: grid; gap: 16px; padding: 24px; justify-items: start;" +
   " max-width: 420px";
-const bare = "background: none; border: 0; padding: 0; cursor: pointer";
 
 export async function TodoList() {
   const filter = state("all");
@@ -58,8 +58,8 @@ export async function TodoList() {
             onclick={cs`() => $filter.write($value)`}
             // The style is a string here, so what changes with the filter is
             // written into it rather than set as a property.
-            style={cs`$bare +
-              "; font-size: 15px; font-weight: " +
+            style={cs`"background: none; border: 0; padding: 0;" +
+              " cursor: pointer; font-size: 15px; font-weight: " +
               ($filter.read() === $value ? "700" : "400") +
               "; color: " +
               ($filter.read() === $value ? "#18181b" : "#71717a")`}
@@ -82,34 +82,5 @@ export async function TodoList() {
         </For>
       </ul>
     </div>
-  );
-}
-
-async function Task({
-  label,
-  isDone,
-  onPress,
-}: {
-  label: Client<string>;
-  isDone: Client<boolean>;
-  onPress: Client<() => void>;
-}) {
-  return (
-    <li>
-      <button
-        onclick={onPress}
-        style={`${bare}; display: flex; gap: 10px; padding: 6px 0; font: inherit`}
-      >
-        <span style="font-size: 17px">{cs`$isDone ? "☑" : "☐"`}</span>
-        <span
-          style={cs`"font-size: 17px; color: " +
-            ($isDone ? "#a1a1aa" : "#18181b") +
-            "; text-decoration: " +
-            ($isDone ? "line-through" : "none")`}
-        >
-          {label}
-        </span>
-      </button>
-    </li>
   );
 }
