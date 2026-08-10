@@ -1,6 +1,6 @@
 import { createServer } from "node:http";
 import { URLPattern } from "node:url";
-import { page } from "@backtickjs/web-sdk";
+import { client, clientUrl, page } from "@backtickjs/web-sdk";
 import { About } from "./About.js";
 import { Counter } from "./Counter.js";
 import { Home } from "./Home.js";
@@ -34,11 +34,22 @@ const port = Number(process.env.PORT ?? 5173);
 createServer(async (incoming, outgoing) => {
   try {
     const [pathname = "/"] = (incoming.url ?? "/").split("?");
+    if (pathname === clientUrl) {
+      outgoing.writeHead(200, {
+        "content-type": "text/javascript",
+        "cache-control": "public, max-age=31536000, immutable",
+      });
+      outgoing.end(client);
+      return;
+    }
     for (const { pattern, handler } of matchers) {
       const found = pattern.exec({ pathname });
       if (found !== null) {
         const html = await page(handler(found.pathname.groups));
-        outgoing.writeHead(200, { "content-type": "text/html" });
+        outgoing.writeHead(200, {
+          "content-type": "text/html",
+          "content-security-policy": "default-src 'self'",
+        });
         outgoing.end(html);
         return;
       }

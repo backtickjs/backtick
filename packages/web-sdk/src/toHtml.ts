@@ -1,21 +1,6 @@
-import { readFileSync } from "node:fs";
 import type { Bundle } from "@backtickjs/core";
+import { clientUrl } from "./browserClient.js";
 import { toDataScript } from "./toDataScript.js";
-
-/**
- * The client, as a browser can run it.
- *
- * Put it in a `<script>`, or serve it as a file. Once per document, however
- * many things that document draws — it finds every one of them itself, so
- * nothing writes a call to go with it.
- *
- * Needs no escaping on the way in: esbuild writes `<\/script` inside string
- * literals, which is what lets it be inlined verbatim.
- */
-export const client: string = readFileSync(
-  new URL("./browser/client.js", import.meta.url),
-  "utf8",
-);
 
 /**
  * The document a bundle draws itself in.
@@ -25,8 +10,14 @@ export const client: string = readFileSync(
  * this with the bundling and the response around it.
  *
  * A whole document, so it has a body of its own to render into and needs no
- * selector. A document that already exists carries `toDataScript` and the
- * client itself, which is what the benchmark does.
+ * selector. A document that already exists carries `toDataScript` and asks for
+ * the client itself, which is what the benchmark does.
+ *
+ * The page holds no JavaScript of its own: the bundle is a data block, which no
+ * content policy checks, and the client is a same-origin file that
+ * `default-src 'self'` already admits. So a page needs no hash, no nonce and no
+ * `unsafe-inline` — and the client, being the half that never changes with what
+ * is drawn, is fetched once rather than carried by every page.
  */
 export function toHtml(bundle: Bundle): string {
   return (
@@ -35,7 +26,7 @@ export function toHtml(bundle: Bundle): string {
     `<meta name="viewport" content="width=device-width, initial-scale=1">` +
     `</head><body>` +
     toDataScript(bundle, "body") +
-    `<script>${client}</script>` +
+    `<script src="${clientUrl}"></script>` +
     `</body></html>`
   );
 }

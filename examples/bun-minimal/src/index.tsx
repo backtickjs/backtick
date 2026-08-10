@@ -1,5 +1,5 @@
 import type { JsxElement } from "@backtickjs/core";
-import { page } from "@backtickjs/web-sdk";
+import { client, clientUrl, page } from "@backtickjs/web-sdk";
 import { About } from "./About.js";
 import { Counter } from "./Counter.js";
 import { Home } from "./Home.js";
@@ -8,7 +8,10 @@ const started = new Date();
 
 const html = async (content: JsxElement) =>
   new Response(await page(content), {
-    headers: { "content-type": "text/html" },
+    headers: {
+      "content-type": "text/html",
+      "content-security-policy": "default-src 'self'",
+    },
   });
 
 const server = Bun.serve({
@@ -26,6 +29,17 @@ const server = Bun.serve({
     "/about": () => {
       return html(<About started={started} />);
     },
+  },
+  fetch(request) {
+    if (new URL(request.url).pathname === clientUrl) {
+      return new Response(client, {
+        headers: {
+          "content-type": "text/javascript",
+          "cache-control": "public, max-age=31536000, immutable",
+        },
+      });
+    }
+    return new Response("Not found", { status: 404 });
   },
 });
 

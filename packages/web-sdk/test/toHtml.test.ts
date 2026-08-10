@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { page } from "../dist/page.js";
 import { toDataScript } from "../dist/toDataScript.js";
-import { client, toHtml } from "../dist/toHtml.js";
+import { client, clientUrl } from "../dist/browserClient.js";
+import { toHtml } from "../dist/toHtml.js";
 
 const drawn = { functions: {}, root: "42" } as never;
 
@@ -31,9 +32,10 @@ describe("a bundle as a page carries it", () => {
 });
 
 describe("a page that draws itself", () => {
-  // Two tags: the bundle as data, then the client that reads it. Nothing here
-  // is a call — the client starts itself from what the page carries.
-  it("is a whole document: a data block, then the client", () => {
+  // Two tags: the bundle as data, then the client that reads it. Neither is
+  // JavaScript the page wrote, which is why `default-src 'self'` admits it with
+  // no hash, no nonce and no exception.
+  it("is a whole document: a data block, then the client fetched", () => {
     const doc = toHtml(drawn);
     assert.ok(doc.startsWith("<!doctype html><html><head>"));
     assert.ok(doc.includes('<meta charset="utf-8">'));
@@ -42,25 +44,26 @@ describe("a page that draws itself", () => {
     const [held, starts] = tags(doc);
     assert.equal(held?.[1], ' type="application/json" data-backtick="body"');
     assert.equal(held?.[2], '{"functions":{},"root":"42"}');
-    assert.equal(starts?.[2], client);
+    assert.equal(starts?.[1], ` src="${clientUrl}"`);
+    assert.equal(starts?.[2], "", "nothing inline");
+    assert.ok(!doc.includes(client), "the client is fetched, not carried");
   });
 
-  // The bundle is carried once, as data. A page that also wrote it into the
-  // script that draws it would be twice its size.
-  it("carries the bundle once", () => {
-    const doc = toHtml(drawn);
-    assert.equal(doc.split('"root":"42"').length - 1, 1);
+  // The whole reason a page is small: it carries what it draws, and the client
+  // is one cached file however many pages are opened.
+  it("costs a page only what it draws", () => {
+    assert.ok(toHtml(drawn).length < 400);
   });
 
-  it("cannot be ended early by the bundle it holds", () => {
-    const doc = toHtml({
-      root: "</script><img src=x onerror=alert(1)>",
-    } as never);
-    assert.equal(tags(doc).length, 2);
-    assert.ok(doc.includes("\\u003c/script>"));
+  // Named for what is in it, so a build that changes the client changes the
+  // URL — which is what makes a year of cache safe rather than reckless.
+  it("asks for the client at a URL its bytes decide", () => {
+    assert.match(clientUrl, /^\/_backtick\/client-[0-9a-f]{16}\.js$/);
   });
 
   it("is what `page` builds from a screen", async () => {
-    assert.ok((await page(null as never)).startsWith("<!doctype html>"));
+    const doc = await page(null as never);
+    assert.ok(doc.startsWith("<!doctype html>"));
+    assert.ok(doc.includes(`<script src="${clientUrl}">`));
   });
 });
