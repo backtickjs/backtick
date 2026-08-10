@@ -12,7 +12,7 @@ import { build } from "esbuild";
 // Minified because every page carries it — 57 KB to 22 KB, 13 to 8 gzipped —
 // and unmapped, because nothing serves a `.map` beside it.
 await build({
-  entryPoints: ["dist/client/index.js"],
+  entryPoints: ["dist/client.js"],
   entryNames: "backtick",
   outdir: "dist/browser",
   bundle: true,
