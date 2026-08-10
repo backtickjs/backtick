@@ -61,6 +61,15 @@ function attribute(node: HTMLElement, prop: string, value: unknown): void {
     node.removeAttribute(name);
     return;
   }
+  // Style through the CSSOM rather than the attribute, which is the difference
+  // between a page that works under a content policy and one that doesn't:
+  // `style-src` blocks writing a `style` attribute and says nothing about
+  // `cssText`, so this is the same declaration by a route a policy does not
+  // check. Nothing about authoring changes — `style="…"` still reads the same.
+  if (name === "style") {
+    node.style.cssText = String(value);
+    return;
+  }
   // A boolean attribute is there or it isn't — `disabled="false"` disables.
   // ARIA is the exception: its values are the words themselves.
   if (typeof value === "boolean" && !prop.startsWith("aria-")) {
