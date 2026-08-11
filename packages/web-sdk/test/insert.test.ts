@@ -21,7 +21,7 @@ describe("insert", () => {
     assert.ok(cart !== undefined);
     // After what it already held, not instead of it.
     assert.ok(cart.startsWith("loading…"));
-    assert.ok(cart.includes(`<script type="application/backtick+json">`));
+    assert.ok(cart.includes(`<script type="application/json">`));
   });
 
   it("leaves the rest of the document alone", () => {
@@ -29,10 +29,7 @@ describe("insert", () => {
     assert.match(html, /^<!doctype html>/i);
     assert.ok(html.includes("<title>Shop</title>"));
     assert.ok(html.includes("<header>a shop</header>"));
-    assert.equal(
-      html.split(`<script type="application/backtick+json">`).length - 1,
-      1,
-    );
+    assert.equal(html.split(`<script type="application/json">`).length - 1, 1);
   });
 
   it("draws more than one by calling again with what came back", () => {
@@ -41,10 +38,7 @@ describe("insert", () => {
       "footer .subscribe",
       other,
     );
-    assert.equal(
-      html.split(`<script type="application/backtick+json">`).length - 1,
-      2,
-    );
+    assert.equal(html.split(`<script type="application/json">`).length - 1, 2);
     const cart = /<div id="cart">([\s\S]*?)<\/div>/.exec(html)?.[1] ?? "";
     const subscribe =
       /<div class="subscribe">([\s\S]*?)<\/div>/.exec(html)?.[1] ?? "";
@@ -53,8 +47,8 @@ describe("insert", () => {
   });
 
   it("writes data and nothing that draws it", () => {
-    // The document asks for the client itself; an island is the bundle and an
-    // element saying to draw it, and neither fetches anything.
+    // The document asks for the client itself; what goes in is the bundle and
+    // an element saying to draw it, and neither fetches anything.
     const html = insert(held, "#cart", drawn);
     assert.ok(!html.includes("src="));
     assert.ok(!html.includes("_backtick"));
@@ -76,10 +70,36 @@ describe("insert", () => {
     );
     const html = insert(held, "#cart", risky);
     const carried =
-      /<script type="application\/backtick\+json">([\s\S]*?)<\/script>/.exec(
-        html,
-      )?.[1];
+      /<script type="application\/json">([\s\S]*?)<\/script>/.exec(html)?.[1];
     assert.ok(carried !== undefined);
     assert.deepEqual(JSON.parse(carried), risky);
+  });
+
+  it("writes the bundle and then the element that draws it", () => {
+    // The order is the whole of how the client finds its work: the bundle is the
+    // element in front, which the parser finished before it reached this one.
+    const html = insert(held, "#cart", drawn);
+    assert.match(
+      html,
+      /<script type="application\/json">[\s\S]*?<\/script><backtick-bundle><\/backtick-bundle>/,
+    );
+  });
+
+  it("costs no more than the bundle it carries", () => {
+    // Raw text in a script, so nothing about it is escaped for an attribute.
+    const html = insert(held, "#cart", drawn);
+    const carried =
+      /<script type="application\/json">([\s\S]*?)<\/script>/.exec(html)?.[1];
+    assert.ok(carried !== undefined);
+    assert.equal(carried.length, JSON.stringify(drawn).length);
+  });
+
+  it("carries the bundle as a type no browser runs", () => {
+    // A data block: never executed, and never checked by a content policy. What
+    // is drawn is whatever script the element follows, so nothing is looked up
+    // by this type and an app's own json is none of backtick's business.
+    assert.ok(
+      insert(held, "#cart", drawn).includes(`<script type="application/json">`),
+    );
   });
 });

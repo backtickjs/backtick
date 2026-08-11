@@ -13,10 +13,10 @@ import type { TestNode } from "./test-client/index.ts";
 // front of. What the host holds on either side of it is the host's, so a target
 // is never a render's to empty — the anchor is what says where the drawing ends.
 //
-// The web is what wants this — an island leaves a comment where it stood and
-// draws in front of it, so a page's own markup keeps its order — but nothing
-// here is the web's: an anchor is one of the host's own nodes, so this is the
-// same claim on every target.
+// The web is what wants this — a bundle leaves a comment where it stood and draws
+// in front of it, so a page's own markup keeps its order — but nothing here is
+// the web's: an anchor is one of the host's own nodes, so this is the same claim
+// on every target.
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("render");
 
@@ -101,8 +101,8 @@ describe("where a render draws", () => {
   });
 
   it("holds two drawings apart in one target", async () => {
-    // One page, two islands: each draws at its own anchor, and a write to one
-    // leaves the other where it is.
+    // One page, two drawings: each at its own anchor, and a write to one leaves
+    // the other where it is.
     const first = node("comment-1");
     const second = node("comment-2");
     const parent = parentOf(first, second);

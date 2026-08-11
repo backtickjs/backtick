@@ -7,13 +7,13 @@ import { page } from "../dist/page.js";
 const content = jsx("p", { children: "hi" });
 
 describe("page", () => {
-  it("writes a document around the one island a page is", async () => {
+  it("writes a document around the one bundle a page is", async () => {
     const html = await page(content);
     assert.match(html, /^<!doctype html>/i);
     assert.ok(html.includes(`<meta charset="utf-8">`));
     assert.match(
       html,
-      /<body><script type="application\/backtick\+json">[\s\S]*<\/body><\/html>$/,
+      /<body><script type="application\/json">[\s\S]*<\/body><\/html>$/,
     );
     assert.ok(html.includes(`<script defer src="${clientUrl}"></script>`));
   });
@@ -48,7 +48,7 @@ describe("page", () => {
 
   it("draws in the body, not the head", async () => {
     const html = await page(content, `<title>Todos</title>`);
-    assert.ok(html.includes(`<body><script type="application/backtick+json">`));
+    assert.ok(html.includes(`<body><script type="application/json">`));
     const head = /<head>([\s\S]*?)<\/head>/.exec(html)?.[1] ?? "";
     assert.equal(
       head,
