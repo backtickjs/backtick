@@ -1,1 +1,16 @@
-{"framework":"backtick-v0.1.0-keyed","keyed":true,"benchmark":"43_first-paint","type":"size","values":{"DEFAULT":{"min":112,"max":112,"median":112,"mean":112,"stddev":null,"values":[112]}}}
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "43_first-paint",
+  "type": "size",
+  "values": {
+    "DEFAULT": {
+      "min": 112,
+      "max": 112,
+      "median": 112,
+      "mean": 112,
+      "stddev": null,
+      "values": [112]
+    }
+  }
+}
