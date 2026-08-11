@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { dom } from "../dist/dom.js";
+import { dom } from "../src/dom.ts";
 
 // A node that records which route a value took onto it.
 function node() {

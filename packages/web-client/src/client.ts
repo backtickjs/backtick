@@ -2,7 +2,7 @@ import type { Bundle } from "@backtickjs/core";
 import { render } from "@backtickjs/js-interpreter";
 import { dom } from "./dom.js";
 
-// The client, as `scripts/browser.mjs` bundles it. Self-starting and exporting
+// The client, as `scripts/build.mjs` bundles it. Self-starting and exporting
 // nothing, so a page declares no global and nothing on it calls in.
 //
 // An element, so the browser reports each drawing and upgrades the ones already

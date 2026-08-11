@@ -3,14 +3,10 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "sourceMap": true,
-    // Both halves live here, so both sets of globals are in scope. Which half
-    // reaches which is enforced by the entry points, not by the types: a
-    // browser imports `.` and never sees `node:http`.
-    "lib": ["esnext", "dom", "dom.iterable"]
+    "lib": ["esnext"]
   },
   "references": [
     { "path": "../core/tsconfig.build.json" },
-    { "path": "../cs-runtime/tsconfig.build.json" },
     { "path": "../cs-runtime/tsconfig.build.json" }
   ]
 }

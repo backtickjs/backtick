@@ -17,7 +17,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -b && node scripts/browser.mjs",
+    "build": "tsc -b",
     "dev": "tsc -b --watch",
     "generate": "backtick-generate",
     "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
-    "@backtickjs/js-interpreter": "workspace:*",
+    "@backtickjs/web-client": "workspace:*",
     "linkedom": "^0.18.13"
   },
   "peerDependencies": {
@@ -36,7 +36,6 @@
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
     "@backtickjs/schema": "workspace:*",
-    "esbuild": "0.28.0",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

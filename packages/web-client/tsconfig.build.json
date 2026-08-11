@@ -1,0 +1,18 @@
+{
+  "extends": "../../configs/tsconfig.base.json",
+  "compilerOptions": {
+    // A browser's globals, and nothing else's: what is here runs in a page, so
+    // reaching for `node:http` is a mistake the types catch.
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": [],
+    "rootDir": "src"
+  },
+  // No `dist`: what this package ships is `scripts/build.mjs`'s, and what `tsc`
+  // has to say about `src` is whether it typechecks. Declarations go where the
+  // base config puts them, which is nowhere anyone installs.
+  "include": ["src"],
+  "references": [
+    { "path": "../core/tsconfig.build.json" },
+    { "path": "../js-interpreter/tsconfig.build.json" }
+  ]
+}

@@ -437,14 +437,32 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/web-client:
+    devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@backtickjs/js-interpreter':
+        specifier: workspace:*
+        version: link:../js-interpreter
+      esbuild:
+        specifier: 0.28.0
+        version: 0.28.0
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/web-sdk:
     dependencies:
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
-      '@backtickjs/js-interpreter':
+      '@backtickjs/web-client':
         specifier: workspace:*
-        version: link:../js-interpreter
+        version: link:../web-client
       linkedom:
         specifier: ^0.18.13
         version: 0.18.13
@@ -455,9 +473,6 @@ importers:
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../schema
-      esbuild:
-        specifier: 0.28.0
-        version: 0.28.0
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
