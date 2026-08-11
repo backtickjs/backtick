@@ -5,7 +5,7 @@ import { clientUrl } from "./browserClient.js";
  * A document, given backtick's part of it.
  *
  * A function rather than HTML with a marker in it, so nothing here searches or
- * parses what an app wrote: where the block goes is where the app put it.
+ * parses what an app wrote: where the island goes is where the app put it.
  *
  * What it is handed is one element, and what is drawn is drawn inside it — so
  * a template says where by placement, and there is no selector to name a place
@@ -33,21 +33,39 @@ export type Template = (backtick: string) => string;
  * is drawn, is fetched once rather than carried by every page.
  */
 export function toHtml(bundle: Bundle, template: Template = plain): string {
+  return template(island(bundle));
+}
+
+/**
+ * One island: a bundle, the client that draws it, and the element it draws in.
+ *
+ * What a document holds as many of as it has bundles. `toHtml` writes one, which
+ * is what a page is; a document with more says so by placing them, and they are
+ * drawn side by side without knowing about each other — separate state, separate
+ * writes. The client is one file however many there are, asked for once and
+ * answered from the cache after that.
+ */
+export function island(bundle: Bundle): string {
   // A `</script` ends a script element wherever it stands, data block or not.
   // Only string values in `JSON.stringify` output can hold a `<`, and `<`
   // is an escape JSON reads the same way JavaScript does.
   const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
-  return template(
-    `<div>` +
-      `<script type="application/json">${escaped}</script>` +
-      `<script src="${clientUrl}"></script>` +
-      `</div>`,
+  // A `<slot>`, which is `display: contents` in every browser's own stylesheet
+  // and so draws no box of its own: what is inside it lays out as though it were
+  // a child of whatever holds the island, and an app's grid or flex row counts
+  // what the app wrote. A rule nobody has to ship — an element that needed a
+  // stylesheet to disappear would need `style-src` to allow one.
+  return (
+    `<slot>` +
+    `<script type="application/json">${escaped}</script>` +
+    `<script src="${clientUrl}"></script>` +
+    `</slot>`
   );
 }
 
 // Enough to render and no more, for an app with nothing to say about the
 // document. In the body, which is where a page with nothing to say about it
-// wants to be drawn — and a block drawing inside itself, that placement is the
+// wants to be drawn — and an island drawing inside itself, that placement is the
 // whole of what says so.
 const plain: Template = (backtick) =>
   `<!doctype html><html><head>` +

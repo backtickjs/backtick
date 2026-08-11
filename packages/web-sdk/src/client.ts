@@ -19,26 +19,28 @@ import { dom } from "./dom.js";
 // And it starts itself, from where on the page it finds itself.
 //
 // `toHtml` writes one element holding the bundle and then this, so everything
-// this needs is a step away: the block is the element before it, and where to
+// this needs is a step away: the bundle is the element before it, and where to
 // draw is the element they are both in. Nothing is marked and nothing is
-// searched for, which is what leaves a page free to put the block anywhere and
+// searched for, which is what leaves a page free to put an island anywhere and
 // have that be the whole of what says where.
 //
 // The bundle stays data and never code: `application/json` is a type no browser
 // runs, so a page carries no JavaScript but this file, which it fetched.
-const script = document.currentScript;
-if (script === null) {
+const clientScript = document.currentScript;
+if (clientScript === null) {
   throw new Error("backtick: the client was not run by a script on the page");
 }
 
-const block = script.previousElementSibling;
-if (!(block instanceof HTMLScriptElement)) {
+const bundleScript = clientScript.previousElementSibling;
+if (!(bundleScript instanceof HTMLScriptElement)) {
   throw new Error("backtick: no bundle in front of the client to draw");
 }
 
-const into = script.parentElement;
+const into = clientScript.parentElement;
 if (into === null) {
-  throw new Error("backtick: a block to draw is not in the document");
+  throw new Error("backtick: an island to draw is not in the document");
 }
 
-render(JSON.parse(block.textContent ?? "null") as Bundle, dom, into);
+const bundle = JSON.parse(bundleScript.textContent!) as Bundle;
+
+render(bundle, dom, into);
