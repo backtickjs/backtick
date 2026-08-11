@@ -18,7 +18,7 @@ import { dom } from "./dom.js";
 // hands out.
 // And it starts itself, from where on the page it finds itself.
 //
-// `toHtml` writes one element holding the bundle and then this, so everything
+// An island is the bundle and then this, in an element, so everything
 // this needs is a step away: the bundle is the element before it, and where to
 // draw is the element they are both in. Nothing is marked and nothing is
 // searched for, which is what leaves a page free to put an island anywhere and

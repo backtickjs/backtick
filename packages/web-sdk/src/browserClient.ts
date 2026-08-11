@@ -11,9 +11,9 @@ import { readFileSync } from "node:fs";
 /**
  * The client, as a browser can run it.
  *
- * Serve it at {@link clientUrl}, which is where a document from `toHtml` asks
- * for it. Once per document, however many things that document draws — it finds
- * every one of them itself, so nothing writes a call to go with it.
+ * Serve it at {@link clientUrl}, which is where every island asks for it. One
+ * file however many a document holds — each island draws itself, so nothing
+ * writes a call to go with it.
  */
 export const client: string = readFileSync(
   new URL("./browser/client.js", import.meta.url),
