@@ -1,8 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { createServer } from "node:http";
 import { bundle } from "@backtickjs/core";
-import * as client from "@backtickjs/web-client";
-import { insert } from "@backtickjs/web-sdk";
+import { client, insert } from "@backtickjs/web-sdk";
 import { Counter } from "./Counter.js";
 
 // A page somebody else wrote, which is what `insert` is for. `charset` is not

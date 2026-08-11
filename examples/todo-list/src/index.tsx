@@ -1,8 +1,7 @@
 import { createServer } from "node:http";
 import { URLPattern } from "node:url";
 import { bundle } from "@backtickjs/core";
-import * as client from "@backtickjs/web-client";
-import { insert } from "@backtickjs/web-sdk";
+import { client, insert } from "@backtickjs/web-sdk";
 import { TodoList } from "./TodoList.js";
 
 // The client is asked for at a name that says what it holds, so a rebuilt client

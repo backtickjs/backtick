@@ -1,8 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import * as client from "@backtickjs/web-client";
-import { insert } from "@backtickjs/web-sdk";
+import { client, insert } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
