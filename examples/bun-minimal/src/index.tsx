@@ -1,66 +1,23 @@
-import type { JsxElement } from "@backtickjs/core";
 import { bundle } from "@backtickjs/core";
 import * as client from "@backtickjs/web-client";
 import { insert } from "@backtickjs/web-sdk";
-import { About } from "./About.js";
 import { Counter } from "./Counter.js";
-import { Home } from "./Home.js";
 
-// The client is asked for at a name that says what it holds, so a rebuilt client
-// is a name no cache has an old answer for — which is what makes the year this
-// server promises for it below safe.
-const clientUrl = `/_backtick/client-${client.sha256.slice(0, 16)}.js`;
-
-// The document this app serves. Its head is its own — a charset, a viewport, and
-// the one script that draws what `insert` puts in the body.
-//
-// `charset` is not decoration: a bundle is UTF-8 text read back with
-// `JSON.parse`, and a document decoded as anything else is every string in the
-// app quietly mangled. It counts only in the first 1024 bytes of a document, and
-// only while it is being parsed.
-const html =
-  `<!doctype html><html><head>` +
-  `<meta charset="utf-8">` +
-  `<meta name="viewport" content="width=device-width, initial-scale=1">` +
-  `<script defer src="${clientUrl}"></script>` +
-  `</head><body></body></html>`;
-
-const started = new Date();
-
-const page = async (content: JsxElement) =>
-  new Response(insert(html, "body", await bundle(content)), {
-    headers: {
-      "content-type": "text/html",
-      "content-security-policy": "default-src 'self'",
-    },
-  });
+const html = await Bun.file(new URL("../index.html", import.meta.url)).text();
 
 const server = Bun.serve({
-  port: Number(process.env.PORT ?? 5174),
+  port: 5174,
   routes: {
-    "/": () => {
-      return page(<Home />);
-    },
-    "/counter": () => {
-      return page(<Counter from={0} />);
-    },
-    "/counter/:from": (request) => {
-      return page(<Counter from={Number(request.params.from)} />);
-    },
-    "/about": () => {
-      return page(<About started={started} />);
-    },
-  },
-  fetch(request) {
-    if (new URL(request.url).pathname === clientUrl) {
-      return new Response(client.source, {
-        headers: {
-          "content-type": "text/javascript",
-          "cache-control": "public, max-age=31536000, immutable",
-        },
-      });
-    }
-    return new Response("Not found", { status: 404 });
+    "/": async () =>
+      new Response(insert(html, "body", await bundle(<Counter from={0} />)), {
+        headers: { "content-type": "text/html" },
+      }),
+
+    // The name `index.html` asks for
+    "/_backtick/client.js": () =>
+      new Response(client.source, {
+        headers: { "content-type": "text/javascript" },
+      }),
   },
 });
 
