@@ -15,7 +15,7 @@ import { TodoList } from "./TodoList.js";
 // The client is asked for where this server answers for it, named for what it
 // holds so a year of cache is safe to promise.
 const clientUrl = `/_backtick/client-${clientHash.slice(0, 16)}.js`;
-const shell =
+const html =
   `<!doctype html><html><head>` +
   `<meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width, initial-scale=1">` +
@@ -48,12 +48,12 @@ createServer(async (incoming, outgoing) => {
     }
     for (const { pattern, handler } of matchers) {
       if (pattern.exec({ pathname }) !== null) {
-        const html = insert(shell, "body", await bundle(handler()));
+        const page = insert(html, "body", await bundle(handler()));
         outgoing.writeHead(200, {
           "content-type": "text/html",
           "content-security-policy": "default-src 'self'",
         });
-        outgoing.end(html);
+        outgoing.end(page);
         return;
       }
     }

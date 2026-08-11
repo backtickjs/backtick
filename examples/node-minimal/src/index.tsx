@@ -17,7 +17,7 @@ import { Home } from "./Home.js";
 // The client is asked for at the same url this server answers on, named for what
 // it holds so a year of cache is safe to promise.
 const clientUrl = `/_backtick/client-${clientHash.slice(0, 16)}.js`;
-const shell =
+const html =
   `<!doctype html><html><head>` +
   `<meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width, initial-scale=1">` +
@@ -64,8 +64,8 @@ createServer(async (incoming, outgoing) => {
     for (const { pattern, handler } of matchers) {
       const found = pattern.exec({ pathname });
       if (found !== null) {
-        const html = insert(
-          shell,
+        const page = insert(
+          html,
           "body",
           await bundle(handler(found.pathname.groups)),
         );
@@ -73,7 +73,7 @@ createServer(async (incoming, outgoing) => {
           "content-type": "text/html",
           "content-security-policy": "default-src 'self'",
         });
-        outgoing.end(html);
+        outgoing.end(page);
         return;
       }
     }

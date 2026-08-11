@@ -16,7 +16,7 @@ import { Home } from "./Home.js";
 // The client is asked for where this server answers for it, named for what it
 // holds so a year of cache is safe to promise.
 const clientUrl = `/_backtick/client-${clientHash.slice(0, 16)}.js`;
-const shell =
+const html =
   `<!doctype html><html><head>` +
   `<meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width, initial-scale=1">` +
@@ -25,8 +25,8 @@ const shell =
 
 const started = new Date();
 
-const html = async (content: JsxElement) =>
-  new Response(insert(shell, "body", await bundle(content)), {
+const page = async (content: JsxElement) =>
+  new Response(insert(html, "body", await bundle(content)), {
     headers: {
       "content-type": "text/html",
       "content-security-policy": "default-src 'self'",
@@ -37,16 +37,16 @@ const server = Bun.serve({
   port: Number(process.env.PORT ?? 5174),
   routes: {
     "/": () => {
-      return html(<Home />);
+      return page(<Home />);
     },
     "/counter": () => {
-      return html(<Counter from={0} />);
+      return page(<Counter from={0} />);
     },
     "/counter/:from": (request) => {
-      return html(<Counter from={Number(request.params.from)} />);
+      return page(<Counter from={Number(request.params.from)} />);
     },
     "/about": () => {
-      return html(<About started={started} />);
+      return page(<About started={started} />);
     },
   },
   fetch(request) {
