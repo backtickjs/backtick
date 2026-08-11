@@ -1,6 +1,6 @@
-import type { JsxElement } from "@backtickjs/core";
+import { bundle, type JsxElement } from "@backtickjs/core";
 import { clientUrl } from "./browserClient.js";
-import { embed } from "./embed.js";
+import { insert } from "./insert.js";
 
 /**
  * A page drawing this, into the body of `document`.
@@ -13,13 +13,13 @@ import { embed } from "./embed.js";
  * arrives too late for `charset`, for the preload scanner, and for a crawler.
  *
  * Sending it is the caller's. Drawing in more than one place, somewhere other
- * than the body, or from under a prefix, is `embed`.
+ * than the body, or from under a prefix, is `insert`.
  */
 export async function page(
   content: JsxElement,
   document: string = plain,
 ): Promise<string> {
-  return embed(document, { body: content }, clientUrl);
+  return insert(document, "body", await bundle(content), clientUrl);
 }
 
 const plain =

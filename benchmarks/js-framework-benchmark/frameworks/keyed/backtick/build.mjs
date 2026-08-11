@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { client, clientUrl, embed } from "@backtickjs/web-sdk";
+import { client, clientUrl, insert } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -41,27 +41,24 @@ await writeFile(
 // The document this app is measured in, written here rather than by the SDK:
 // what `page` would give is a document with nothing in its head, and what every
 // framework here is measured with is the shared stylesheet and the `#main`
-// container. So the island goes in a document of this app's own.
-//
-// Bundled twice — once above for `lib/bundle.json`, once inside `embed` — which
-// costs a tenth of a millisecond and is the same bundle both times: bundling the
-// same element twice is byte for byte identical, so what the snapshots read and
-// what the page carries cannot drift.
+// container. So `insert` draws the bundle above into a document of this app's
+// own — the same bundle the snapshots read, drawn once and written twice.
 //
 // `clientUrl` is a path from an origin's root, and this app is served under a
-// prefix of the harness's choosing rather than at one. So the islands are told to
+// prefix of the harness's choosing rather than at one. So the island is told to
 // ask for it relatively, which is the whole of what that takes.
 const asked = `.${clientUrl}`;
 
 await writeFile(
   new URL("index.html", here),
-  await embed(
+  insert(
     `<!doctype html><html><head>` +
       `<meta charset="utf-8">` +
       `<title>Backtick-"keyed"</title>` +
       `<link href="/css/currentStyle.css" rel="stylesheet">` +
       `</head><body><div id="main" class="container"></div></body></html>`,
-    { "#main": jsx(Main, {}) },
+    "#main",
+    drawn,
     asked,
   ),
 );
