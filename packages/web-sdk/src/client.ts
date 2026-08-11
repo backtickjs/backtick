@@ -10,40 +10,35 @@ import { dom } from "./dom.js";
 // rather than an assumption.
 //
 // Exports nothing. Nothing on a page reaches into this file, because a page
-// says what to draw in markup and this reads it — so the bundle esbuild writes
-// declares no global, and pays none of the interop that handing one over costs.
+// says what to draw by where it puts it and this reads that — so the bundle
+// esbuild writes declares no global, and pays none of the interop that handing
+// one over costs.
 //
 // `scripts/browser.mjs` bundles exactly this file into the string that `client`
 // hands out.
-// And it starts itself, from whatever the page is carrying.
+// And it starts itself, from where on the page it finds itself.
 //
-// A page says what to draw in `<script type="application/json">` scripts, each
-// naming where it goes: `data-backtick="body"`. A `data-*` attribute because
-// that is the only kind an author may invent, which is also what puts it on
-// `dataset` rather than behind `getAttribute`.
+// `toHtml` writes one element holding the bundle and then this, so everything
+// this needs is a step away: the block is the element before it, and where to
+// draw is the element they are both in. Nothing is marked and nothing is
+// searched for, which is what leaves a page free to put the block anywhere and
+// have that be the whole of what says where.
 //
-// Reading them here rather than being told by a script beside them is what
-// leaves the bundle as data and never as code: nothing on the page executes but
-// this file, so a page that fetches it carries no inline JavaScript at all.
-//
-// Every script, not just the first — one page may draw in several places, and
-// they share this one client rather than a copy each.
-const scripts = document.querySelectorAll<HTMLScriptElement>(
-  "script[data-backtick]",
-);
-
-// Loudly, both of them. The alternative is a blank page with nothing in the
-// console to read: a script that says nowhere, or names something the page does
-// not have, is a page and whatever wrote it disagreeing, and only the page is
-// in a position to say so.
-for (const script of scripts) {
-  const into = script.dataset["backtick"];
-  if (into === undefined || into === "") {
-    throw new Error("backtick: a block to render says nowhere to render it");
-  }
-  const target = document.querySelector(into);
-  if (target === null) {
-    throw new Error(`backtick: nothing matches \`${into}\` to render into`);
-  }
-  render(JSON.parse(script.textContent) as Bundle, dom, target);
+// The bundle stays data and never code: `application/json` is a type no browser
+// runs, so a page carries no JavaScript but this file, which it fetched.
+const script = document.currentScript;
+if (script === null) {
+  throw new Error("backtick: the client was not run by a script on the page");
 }
+
+const block = script.previousElementSibling;
+if (!(block instanceof HTMLScriptElement)) {
+  throw new Error("backtick: no bundle in front of the client to draw");
+}
+
+const into = script.parentElement;
+if (into === null) {
+  throw new Error("backtick: a block to draw is not in the document");
+}
+
+render(JSON.parse(block.textContent ?? "null") as Bundle, dom, into);

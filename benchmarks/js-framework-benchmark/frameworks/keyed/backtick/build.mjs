@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { client } from "@backtickjs/web-sdk";
+import { client, clientUrl, toHtml } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -38,34 +38,34 @@ await writeFile(
   `${JSON.stringify(drawn)}\n`,
 );
 
-// The page, as the harness's own boilerplate plus what this app draws.
+// The page, from the SDK, around a template of this app's own — which is what
+// the document every framework here is measured in is made of: the stylesheet
+// in a real `<head>`, and the `#main` container the block draws inside of.
 //
-// `index.template.html` is upstream's file, unedited: the stylesheet it links
-// and the `#main` it provides are what every framework here is measured in. The
-// bundle goes in beside them as a data block, which is how an app written with
-// this SDK carries one — so what runs in Chrome is the shape an app ships,
-// rather than an arrangement this benchmark invented.
-//
-// `data-backtick` names where the drawing goes, and every `<` in the JSON is
-// written `\u003c` — a `</script` would end the block wherever it stood, and
-// only a string value in `JSON.stringify` output can hold one. Both are what
-// the client reads and what `toHtml` writes, spelled here because this page is
-// assembled rather than generated whole.
-const escaped = JSON.stringify(drawn).replaceAll("<", "\\u003c");
+// `clientUrl` is a path from an origin's root, and this app is served under a
+// prefix of the harness's choosing rather than at one. Asked for relatively
+// instead, which is safe to do by replacement because both the string being
+// matched and the string replacing it come from that constant.
+const asked = `.${clientUrl}`;
+const html = toHtml(drawn, (backtick) => {
+  const relative = backtick.replace(`src="${clientUrl}"`, `src="${asked}"`);
+  if (!relative.includes(asked)) {
+    throw new Error(`the page does not ask for the client at ${clientUrl}`);
+  }
+  return (
+    `<!doctype html><html><head>` +
+    `<meta charset="utf-8">` +
+    `<title>Backtick-"keyed"</title>` +
+    `<link href="/css/currentStyle.css" rel="stylesheet">` +
+    `</head><body><div id="main" class="container">${relative}</div></body></html>`
+  );
+});
+await writeFile(new URL("index.html", here), html);
 
-const template = await readFile(new URL("index.template.html", here), "utf8");
-await writeFile(
-  new URL("index.html", here),
-  template.replace(
-    "<script src='dist/main.js'></script>",
-    `<script type="application/json" data-backtick="#main">${escaped}</script>` +
-      `\n    <script src='dist/main.js'></script>`,
-  ),
-);
+// And the client itself, at the name the SDK gave it. It finds the block in the
+// page and draws it: nothing here appends a call.
+const built = new URL(asked, here);
+await mkdir(new URL(".", built), { recursive: true });
+await writeFile(built, client);
 
-// And the client, whole and unaccompanied. It finds the block above and draws
-// it: nothing here appends a call, and nothing on the page reaches into it.
-await writeFile(new URL("dist/main.js", here), `${client}\n`);
-
-const bytes = (await readFile(new URL("dist/main.js", here))).byteLength;
-console.log(`dist/main.js  ${bytes} bytes`);
+console.log(`${asked}  ${client.length} bytes`);
