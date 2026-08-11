@@ -1,7 +1,7 @@
 import { createServer } from "node:http";
 import { URLPattern } from "node:url";
 import { bundle } from "@backtickjs/core";
-import { client, clientHash, insert } from "@backtickjs/web-sdk";
+import { clientAsset, insert } from "@backtickjs/web-sdk";
 import { About } from "./About.js";
 import { Counter } from "./Counter.js";
 import { Home } from "./Home.js";
@@ -13,15 +13,12 @@ import { Home } from "./Home.js";
 // `JSON.parse`, and a document decoded as anything else is every string in the
 // app quietly mangled. It counts only in the first 1024 bytes, and only while
 // parsing.
-//
-// The client is asked for at the same url this server answers on, named for what
-// it holds so a year of cache is safe to promise.
-const clientUrl = `/_backtick/client-${clientHash.slice(0, 16)}.js`;
+const asset = clientAsset();
 const html =
   `<!doctype html><html><head>` +
   `<meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width, initial-scale=1">` +
-  `<script defer src="${clientUrl}"></script>` +
+  `<script defer src="${asset.url}"></script>` +
   `</head><body></body></html>`;
 
 const started = new Date();
@@ -53,12 +50,9 @@ const port = Number(process.env.PORT ?? 5173);
 createServer(async (incoming, outgoing) => {
   try {
     const [pathname = "/"] = (incoming.url ?? "/").split("?");
-    if (pathname === clientUrl) {
-      outgoing.writeHead(200, {
-        "content-type": "text/javascript",
-        "cache-control": "public, max-age=31536000, immutable",
-      });
-      outgoing.end(client);
+    if (pathname === asset.url) {
+      outgoing.writeHead(200, asset.headers);
+      outgoing.end(asset.source);
       return;
     }
     for (const { pattern, handler } of matchers) {
