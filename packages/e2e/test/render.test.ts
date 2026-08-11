@@ -7,16 +7,16 @@ import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { testHost } from "./test-client/index.ts";
 import type { TestNode } from "./test-client/index.ts";
 
-// What a render claims of the target it is given.
+// Where a render draws, and what it may move.
 //
-// A target with nothing in it is this one's to fill, and claiming it is the
-// cheaper path. A target the host is already holding something in is not: what
-// was drawn is what may be moved, and the rest stays.
+// An anchor is one of the target's children: drawn in front of, and kept in
+// front of. What the host holds on either side of it is the host's, so a target
+// is never a render's to empty — the anchor is what says where the drawing ends.
 //
-// The web is what wants this — an island draws into an element of the page's
-// own, beside whatever else the page put there — but nothing here is the web's:
-// the target is one of the host's own nodes, so this is the same claim on every
-// target.
+// The web is what wants this — an island leaves a comment where it stood and
+// draws in front of it, so a page's own markup keeps its order — but nothing
+// here is the web's: an anchor is one of the host's own nodes, so this is the
+// same claim on every target.
 const validDir = join(fixturesRoot, "valid");
 const importFixture = createFixtureLoader("render");
 
@@ -46,24 +46,30 @@ function handler(on: TestNode): () => void {
   return onclick as () => void;
 }
 
-describe("what a render claims of its target", () => {
-  it("draws into the back of what the host is holding", async () => {
+describe("where a render draws", () => {
+  it("draws in front of its anchor", async () => {
     const before = node("header");
-    const parent = parentOf(before);
-    render(await rootList(), testHost, parent);
+    const ends = node("comment");
+    const after = node("footer");
+    const parent = parentOf(before, ends, after);
+
+    render(await rootList(), testHost, parent, ends);
+
     assert.deepEqual(
       parent.children.map((child) => child.id),
-      ["header", "span", "span", "span", "span"],
+      ["header", "span", "span", "span", "span", "comment", "footer"],
     );
   });
 
-  it("leaves alone what the target was already holding", async () => {
-    // A root that is a list, emptied: with a claim to the whole target this
-    // takes every child the target has, the host's own included. What is drawn
+  it("leaves alone what the host holds on either side", async () => {
+    // A root that is a list, emptied. A render that claimed its target would
+    // take every child the target has, the host's own included; what is drawn
     // is what goes.
     const before = node("header");
-    const parent = parentOf(before);
-    render(await rootList(), testHost, parent);
+    const ends = node("comment");
+    const after = node("footer");
+    const parent = parentOf(before, ends, after);
+    render(await rootList(), testHost, parent, ends);
 
     const clear = parent.children[1];
     assert.ok(clear !== undefined);
@@ -71,20 +77,18 @@ describe("what a render claims of its target", () => {
 
     assert.deepEqual(
       parent.children.map((child) => child.id),
-      ["header", "span"],
+      ["header", "span", "comment", "footer"],
     );
     assert.equal(parent.children[0], before);
+    assert.equal(parent.children.at(-1), after);
   });
 
-  it("claims the target when it is holding nothing", async () => {
-    // Nothing to protect, so the cheaper path: what is drawn is every child
-    // there is, and emptying the list leaves the target empty.
-    const parent = parentOf();
-    render(await rootList(), testHost, parent);
-    assert.deepEqual(
-      parent.children.map((child) => child.id),
-      ["span", "span", "span", "span"],
-    );
+  it("never claims a target it was given nothing else of", async () => {
+    // An anchor is always a node, so the path that empties a whole target is
+    // one this cannot take — an empty target holding only the anchor included.
+    const ends = node("comment");
+    const parent = parentOf(ends);
+    render(await rootList(), testHost, parent, ends);
 
     const clear = parent.children[0];
     assert.ok(clear !== undefined);
@@ -92,7 +96,50 @@ describe("what a render claims of its target", () => {
 
     assert.deepEqual(
       parent.children.map((child) => child.id),
-      ["span"],
+      ["span", "comment"],
+    );
+  });
+
+  it("holds two drawings apart in one target", async () => {
+    // One page, two islands: each draws at its own anchor, and a write to one
+    // leaves the other where it is.
+    const first = node("comment-1");
+    const second = node("comment-2");
+    const parent = parentOf(first, second);
+
+    render(await rootList(), testHost, parent, first);
+    render(await rootList(), testHost, parent, second);
+
+    assert.deepEqual(
+      parent.children.map((child) => child.id),
+      [
+        "span",
+        "span",
+        "span",
+        "span",
+        "comment-1",
+        "span",
+        "span",
+        "span",
+        "span",
+        "comment-2",
+      ],
+    );
+
+    // Everything from the first anchor onwards, as the nodes it is.
+    const tail = parent.children.slice(parent.children.indexOf(first));
+    const clear = parent.children[0];
+    assert.ok(clear !== undefined);
+    handler(clear)();
+
+    // The first drawing shrank and the second is the nodes it was, in order.
+    assert.deepEqual(
+      parent.children.map((child) => child.id),
+      ["span", "comment-1", "span", "span", "span", "span", "comment-2"],
+    );
+    assert.deepEqual(
+      parent.children.slice(parent.children.indexOf(first)),
+      tail,
     );
   });
 });
