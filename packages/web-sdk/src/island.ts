@@ -37,10 +37,21 @@ export function island(bundle: Bundle, clientUrl: string): string {
   // a child of whatever holds the island, and an app's grid or flex row counts
   // what the app wrote. A rule nobody has to ship — an element that needed a
   // stylesheet to disappear would need `style-src` to allow one.
+  //
+  // `defer`, so the document finishes parsing before anything is drawn. Without
+  // it the parser stops at every island, draws the whole of it against a
+  // half-built document, and only then goes on reading — which a page of
+  // backtick's own barely notices, its island being the last thing in it, and a
+  // page of somebody else's pays for once per island.
+  //
+  // Deferred scripts still say which one is running and still stand where they
+  // were written, so nothing about drawing where it is put changes. They run in
+  // the order the document holds them, and before `DOMContentLoaded`, so a page
+  // waiting on that sees what was drawn.
   return (
     `<slot>` +
     `<script type="application/json">${escaped}</script>` +
-    `<script src="${clientUrl}"></script>` +
+    `<script defer src="${clientUrl}"></script>` +
     `</slot>`
   );
 }
