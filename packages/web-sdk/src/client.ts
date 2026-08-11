@@ -3,31 +3,35 @@ import { render } from "@backtickjs/js-interpreter";
 import { dom } from "./dom.js";
 
 // The client, as `scripts/browser.mjs` bundles it. Self-starting and exporting
-// nothing, so an island declares no global and nothing on a page calls in.
+// nothing, so a page declares no global and nothing on it calls in.
 //
-// An island is the bundle and then this, so nothing is marked and nothing is
-// searched for: the bundle is the element in front, and where to draw is what
-// they are both in.
-const clientScript = document.currentScript;
-if (clientScript === null) {
-  throw new Error("backtick: the client was not run by a script on the page");
+// One element, and the browser does the rest: it is told when one is in the
+// document, whether the parser has just made it or something added it later, and
+// defining the element upgrades every one already there. So a page can ask for
+// this file from anywhere — the head, the end of the body, deferred, or
+// appended long after — and none of that changes where anything is drawn.
+if (customElements.get("backtick-island") === undefined) {
+  customElements.define(
+    "backtick-island",
+    class extends HTMLElement {
+      connectedCallback(): void {
+        // The bundle is the element in front, which the parser finished before
+        // it reached this one.
+        const bundleScript = this.previousElementSibling;
+        if (!(bundleScript instanceof HTMLScriptElement)) {
+          throw new Error("backtick: no bundle in front of an island to draw");
+        }
+        const parent = this.parentElement!;
+        const bundle = JSON.parse(bundleScript.textContent!) as Bundle;
+        // A comment in its place, and drawn in front of that: what the page
+        // wrote after an island stays after what the island draws, whenever this
+        // runs. A comment because it is no element — nothing selecting what was
+        // drawn can see it, and `:nth-child` cannot count it.
+        const anchor = document.createComment("");
+        this.replaceWith(anchor);
+        bundleScript.remove();
+        render(bundle, dom, parent, anchor);
+      }
+    },
+  );
 }
-
-const bundleScript = clientScript.previousElementSibling;
-if (!(bundleScript instanceof HTMLScriptElement)) {
-  throw new Error("backtick: no bundle in front of the client to draw");
-}
-
-const into = clientScript.parentElement;
-if (into === null) {
-  throw new Error("backtick: an island to draw is not in the document");
-}
-
-// Read, then take both out: a script is an element, and one left behind would
-// show up in `#main > .card` and in `:first-child`. Before drawing, so an empty
-// target is this one's to fill and a target the host is using is not.
-const bundle = JSON.parse(bundleScript.textContent!) as Bundle;
-bundleScript.remove();
-clientScript.remove();
-
-render(bundle, dom, into);

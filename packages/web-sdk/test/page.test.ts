@@ -13,7 +13,7 @@ describe("page", () => {
     assert.ok(html.includes(`<meta charset="utf-8">`));
     assert.match(
       html,
-      /<body><script type="application\/json">[\s\S]*<\/body><\/html>$/,
+      /<body><script type="application\/backtick\+json">[\s\S]*<\/body><\/html>$/,
     );
     assert.ok(html.includes(`<script defer src="${clientUrl}"></script>`));
   });
@@ -29,7 +29,10 @@ describe("page", () => {
 
   it("puts nothing in the head that was not asked for", async () => {
     const head = /<head>([\s\S]*?)<\/head>/.exec(await page(content))?.[1];
-    assert.equal(head, `<meta charset="utf-8">`);
+    assert.equal(
+      head,
+      `<meta charset="utf-8"><script defer src="${clientUrl}"></script>`,
+    );
   });
 
   it("writes charset whatever it is given, and writes it first", async () => {
@@ -45,8 +48,11 @@ describe("page", () => {
 
   it("draws in the body, not the head", async () => {
     const html = await page(content, `<title>Todos</title>`);
-    assert.ok(html.includes(`<body><script type="application/json">`));
+    assert.ok(html.includes(`<body><script type="application/backtick+json">`));
     const head = /<head>([\s\S]*?)<\/head>/.exec(html)?.[1] ?? "";
-    assert.equal(head, `<meta charset="utf-8"><title>Todos</title>`);
+    assert.equal(
+      head,
+      `<meta charset="utf-8"><title>Todos</title><script defer src="${clientUrl}"></script>`,
+    );
   });
 });

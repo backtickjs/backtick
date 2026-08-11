@@ -33,22 +33,21 @@ import type { Value } from "./Value.js";
  * Drawn into the back of the target, and only what was drawn is ever moved: a
  * target the host is already holding something in keeps what it held, and this
  * goes after it.
+ *
+ * An anchor says where to end instead: one of the target's children, drawn in
+ * front of and kept in front of, so what the host holds after it stays after
+ * what is drawn. It has to stay where it is for as long as the drawing does —
+ * it is what says where the drawing ends.
  */
 export function render<N extends object>(
   bundle: Bundle,
   options: RendererOptions<N>,
   target: N,
+  anchor: N,
 ): () => void {
   const renderer = rendererOf(options);
-  // Nothing-at-the-back and nothing-at-all are different things to say, and
-  // saying the second is a claim to the whole target: reconciling a list reads
-  // the target's first child as its own, and emptying one takes every child the
-  // target has. True of a target with nothing in it, and the cheaper path.
-  // False the moment the host is holding something, so what is said then is the
-  // back of the target and no more.
-  const ends = options.getFirstChild(target) === undefined ? undefined : null;
   return createRoot((dispose) => {
-    renderer.insert(target, materialize(bundle, renderer), ends);
+    renderer.insert(target, materialize(bundle, renderer), anchor);
     return dispose;
   });
 }

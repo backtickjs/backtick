@@ -1,29 +1,34 @@
 import type { Bundle } from "@backtickjs/core";
 
 /**
- * One island: a bundle and the client that draws it.
+ * One island: a bundle, as a page carries it.
  *
- *     `<main>${island(await bundle(<Home />), clientUrl)}</main>`
+ *     `<main>${island(await bundle(<Home />))}</main>`
  *
- * Drawn into whatever holds it, at the back — so an island goes last in its
- * element, which is where `embed` and `page` put one. Several in one element
- * draw in document order; markup written after one ends up in front of it.
+ * Data and nothing else. What draws it is the client, which the page asks for
+ * itself — a script tag the app writes, wherever it serves the file from. So how
+ * it is deployed, cached, or vouched for is the app's, and nothing here has an
+ * opinion about a url it does not control. `page` writes that tag for you.
  *
- * `clientUrl` is asked for rather than assumed: a document served under a prefix
- * has a different one, and a wrong guess draws nothing.
+ * Two nodes: the bundle, and an element after it that says to draw it. The
+ * element is what the browser reports — the client defines `backtick-island`,
+ * and whether it is defined before the page is parsed or long after, every one
+ * of these draws itself. Nothing waits for the document and nothing scans it.
  *
- * No inline JavaScript, so no hash and no nonce: the bundle is a data block that
- * no content policy checks, and the client is a same-origin file that
- * `default-src 'self'` already admits.
+ * The bundle goes in front rather than inside, because a custom element is told
+ * it is in the document while the parser is still inside it: its children do not
+ * exist yet, and everything before it does. Which is also what keeps a bundle
+ * the size it is — raw text in a script needs no escaping for an attribute.
+ *
+ * Drawn into whatever holds it, in its place — so an island can sit anywhere in
+ * an element, and what follows it in the markup stays after what it draws.
  */
-export function island(bundle: Bundle, clientUrl: string): string {
+export function island(bundle: Bundle): string {
   // `</script` ends the element wherever it stands. Only strings can hold a `<`,
   // and `<` is an escape JSON reads back itself.
   const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
-  // No wrapper: an element here would be an element in every selector reaching
-  // what was drawn. `defer` so the parser finishes the document first.
   return (
-    `<script type="application/json">${escaped}</script>` +
-    `<script defer src="${clientUrl}"></script>`
+    `<script type="application/backtick+json">${escaped}</script>` +
+    `<backtick-island></backtick-island>`
   );
 }

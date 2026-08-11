@@ -15,10 +15,10 @@ import { insert } from "./insert.js";
  * Nothing is in the head that was not asked for, save `charset`, which is
  * written either way and cannot be replaced.
  *
- * The document around them is this one's. A caller with a document of their own
- * — a file on disk, another framework's template — draws into it with `insert`,
- * which is also the way to draw somewhere other than the body or from under a
- * prefix.
+ * The document around them is this one's, and so is asking for the client: it is
+ * served from {@link clientUrl}, on this origin. A caller with a document of
+ * their own — a file on disk, another framework's template, a client on a CDN —
+ * writes that script tag themselves and draws with `insert`.
  *
  * Sending it is the caller's.
  */
@@ -31,10 +31,10 @@ export async function page(
   // in the app quietly mangled. It counts only in the first 1024 bytes, and only
   // during parsing, so there is nowhere else to put it and no fixing it after.
   return insert(
-    `<!doctype html><html><head><meta charset="utf-8">${head}</head>` +
+    `<!doctype html><html><head><meta charset="utf-8">${head}` +
+      `<script defer src="${clientUrl}"></script></head>` +
       `<body></body></html>`,
     "body",
     await bundle(body),
-    clientUrl,
   );
 }

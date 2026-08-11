@@ -45,8 +45,9 @@ await writeFile(
 // own — the same bundle the snapshots read, drawn once and written twice.
 //
 // `clientUrl` is a path from an origin's root, and this app is served under a
-// prefix of the harness's choosing rather than at one. So the island is told to
-// ask for it relatively, which is the whole of what that takes.
+// prefix of the harness's choosing rather than at one — so the page asks for the
+// client relatively. Which script tag a document carries is the document's, and
+// this is a document that knows where it will be served.
 const asked = `.${clientUrl}`;
 
 await writeFile(
@@ -56,10 +57,10 @@ await writeFile(
       `<meta charset="utf-8">` +
       `<title>Backtick-"keyed"</title>` +
       `<link href="/css/currentStyle.css" rel="stylesheet">` +
+      `<script defer src="${asked}"></script>` +
       `</head><body><div id="main" class="container"></div></body></html>`,
     "#main",
     drawn,
-    asked,
   ),
 );
 
