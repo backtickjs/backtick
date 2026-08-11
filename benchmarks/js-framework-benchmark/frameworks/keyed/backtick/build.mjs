@@ -44,14 +44,9 @@ await writeFile(
 // container. So the island goes in a document of this app's own.
 //
 // `clientUrl` is a path from an origin's root, and this app is served under a
-// prefix of the harness's choosing rather than at one. Asked for relatively
-// instead, which is safe to do by replacement because both the string being
-// matched and the string replacing it come from that constant.
+// prefix of the harness's choosing rather than at one. So the island is told to
+// ask for it relatively, which is the whole of what that takes.
 const asked = `.${clientUrl}`;
-const drawing = island(drawn).replace(`src="${clientUrl}"`, `src="${asked}"`);
-if (!drawing.includes(asked)) {
-  throw new Error(`the page does not ask for the client at ${clientUrl}`);
-}
 
 await writeFile(
   new URL("index.html", here),
@@ -59,7 +54,7 @@ await writeFile(
     `<meta charset="utf-8">` +
     `<title>Backtick-"keyed"</title>` +
     `<link href="/css/currentStyle.css" rel="stylesheet">` +
-    `</head><body><div id="main" class="container">${drawing}</div></body></html>`,
+    `</head><body><div id="main" class="container">${island(drawn, asked)}</div></body></html>`,
 );
 
 // And the client itself, at the name the SDK gave it. The island draws itself:

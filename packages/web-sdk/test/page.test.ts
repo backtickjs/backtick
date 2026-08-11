@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { bundle } from "@backtickjs/core";
+import { clientUrl } from "../dist/browserClient.js";
 import { island } from "../dist/island.js";
 import { jsx } from "../dist/jsx-runtime/index.js";
 import { page } from "../dist/page.js";
@@ -15,10 +16,10 @@ describe("page", () => {
     assert.ok(html.includes(`<meta charset="utf-8">`));
   });
 
-  it("draws what it was given", async () => {
+  it("draws what it was given, asking for the client where this package serves it", async () => {
     assert.equal(
       await page(content, (backtick) => backtick),
-      island(await bundle(content)),
+      island(await bundle(content), clientUrl),
     );
   });
 

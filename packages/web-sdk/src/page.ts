@@ -1,4 +1,5 @@
 import { bundle, type JsxElement } from "@backtickjs/core";
+import { clientUrl } from "./browserClient.js";
 import { island } from "./island.js";
 
 /**
@@ -36,14 +37,16 @@ export type Template = (backtick: string) => string;
  * Bundling per request rather than once, because it costs about 0.03 ms for the
  * pages there are — cheaper than an API for deciding when to do it — and
  * because a page that reads the time or a database has to be built now anyway.
- * A caller holding a bundle already, or drawing more than one thing, writes the
- * document around `island` itself.
+ * The client is asked for at `clientUrl`, which is the answer for a page served
+ * from an origin's root — which a page from here is. A caller holding a bundle
+ * already, drawing more than one thing, or serving from under a prefix, writes
+ * the document around `island` itself.
  */
 export async function page(
   content: JsxElement,
   template: Template = plain,
 ): Promise<string> {
-  return template(island(await bundle(content)));
+  return template(island(await bundle(content), clientUrl));
 }
 
 // Enough to draw in and no more, for an app with nothing to say about the

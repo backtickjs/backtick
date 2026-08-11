@@ -1,5 +1,4 @@
 import type { Bundle } from "@backtickjs/core";
-import { clientUrl } from "./browserClient.js";
 
 /**
  * One island: a bundle, the client that draws it, and the element it draws in.
@@ -20,8 +19,15 @@ import { clientUrl } from "./browserClient.js";
  * `default-src 'self'` already admits. So a page needs no hash, no nonce and no
  * `unsafe-inline` — and the client, being the half that never changes with what
  * is drawn, is fetched once rather than carried by every page.
+ *
+ * `clientUrl` says where to ask for it, and is asked for rather than assumed:
+ * `clientUrl` from this package is the answer for a document served from an
+ * origin's root, and a document served under a prefix of somebody else's
+ * choosing — a build written to a subdirectory, an app mounted under a path —
+ * has a different one. Nothing here can tell which, and a wrong guess is a page
+ * that draws nothing.
  */
-export function island(bundle: Bundle): string {
+export function island(bundle: Bundle, clientUrl: string): string {
   // A `</script` ends a script element wherever it stands, data block or not.
   // Only string values in `JSON.stringify` output can hold a `<`, and `<`
   // is an escape JSON reads the same way JavaScript does.
