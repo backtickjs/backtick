@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { client, clientUrl, insert } from "@backtickjs/web-sdk";
+import { client, clientHash, insert } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -44,11 +44,11 @@ await writeFile(
 // container. So `insert` draws the bundle above into a document of this app's
 // own — the same bundle the snapshots read, drawn once and written twice.
 //
-// `clientUrl` is a path from an origin's root, and this app is served under a
-// prefix of the harness's choosing rather than at one — so the page asks for the
-// client relatively. Which script tag a document carries is the document's, and
-// this is a document that knows where it will be served.
-const asked = `.${clientUrl}`;
+// Named for what the client holds, so a rebuilt client is a new name and the
+// harness's browser cannot answer with an old one. Relative, because this app is
+// served under a prefix of the harness's choosing rather than at an origin's
+// root — which is a thing only a document knows about itself.
+const asked = `./_backtick/client-${clientHash.slice(0, 16)}.js`;
 
 await writeFile(
   new URL("index.html", here),
@@ -64,8 +64,8 @@ await writeFile(
   ),
 );
 
-// And the client itself, at the name the SDK gave it. The island draws itself:
-// nothing here appends a call.
+// And the client itself, at the name this document asks for. It draws what it
+// finds: nothing here appends a call.
 const built = new URL(asked, here);
 await mkdir(new URL(".", built), { recursive: true });
 await writeFile(built, client);
