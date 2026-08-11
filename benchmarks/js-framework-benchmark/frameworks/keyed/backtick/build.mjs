@@ -1,7 +1,7 @@
 import { spawnSync } from "node:child_process";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { client, clientUrl, island } from "@backtickjs/web-sdk";
+import { client, clientUrl, embed } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -43,18 +43,27 @@ await writeFile(
 // framework here is measured with is the shared stylesheet and the `#main`
 // container. So the island goes in a document of this app's own.
 //
+// Bundled twice — once above for `lib/bundle.json`, once inside `embed` — which
+// costs a tenth of a millisecond and is the same bundle both times: bundling the
+// same element twice is byte for byte identical, so what the snapshots read and
+// what the page carries cannot drift.
+//
 // `clientUrl` is a path from an origin's root, and this app is served under a
-// prefix of the harness's choosing rather than at one. So the island is told to
+// prefix of the harness's choosing rather than at one. So the islands are told to
 // ask for it relatively, which is the whole of what that takes.
 const asked = `.${clientUrl}`;
 
 await writeFile(
   new URL("index.html", here),
-  `<!doctype html><html><head>` +
-    `<meta charset="utf-8">` +
-    `<title>Backtick-"keyed"</title>` +
-    `<link href="/css/currentStyle.css" rel="stylesheet">` +
-    `</head><body><div id="main" class="container">${island(drawn, asked)}</div></body></html>`,
+  await embed(
+    `<!doctype html><html><head>` +
+      `<meta charset="utf-8">` +
+      `<title>Backtick-"keyed"</title>` +
+      `<link href="/css/currentStyle.css" rel="stylesheet">` +
+      `</head><body><div id="main" class="container"></div></body></html>`,
+    { "#main": jsx(Main, {}) },
+    asked,
+  ),
 );
 
 // And the client itself, at the name the SDK gave it. The island draws itself:

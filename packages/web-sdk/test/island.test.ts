@@ -14,10 +14,12 @@ describe("island", () => {
     // the element in front of it, and where to draw is what they are both in.
     assert.match(
       island(drawn, clientUrl),
-      /^<slot><script type="application\/json">.*<\/script><script src="[^"]+"><\/script><\/slot>$/s,
+      /^<script type="application\/json">.*<\/script><script defer src="[^"]+"><\/script>$/s,
     );
     assert.ok(
-      island(drawn, clientUrl).includes(`<script src="${clientUrl}"></script>`),
+      island(drawn, clientUrl).includes(
+        `<script defer src="${clientUrl}"></script>`,
+      ),
     );
   });
 
@@ -25,8 +27,14 @@ describe("island", () => {
     assert.ok(!island(drawn, clientUrl).includes("data-backtick"));
   });
 
-  it("draws in a slot, which costs no layout and needs no stylesheet", () => {
-    assert.ok(island(drawn, clientUrl).startsWith("<slot>"));
+  it("waits for the document to finish parsing before it draws", () => {
+    // Without `defer` the parser stops at every island and draws it against a
+    // half-built document.
+    assert.ok(island(drawn, clientUrl).includes("<script defer src="));
+  });
+
+  it("wraps what it draws in nothing at all", () => {
+    assert.ok(island(drawn, clientUrl).startsWith("<script "));
     assert.ok(!island(drawn, clientUrl).includes("style"));
   });
 
@@ -35,8 +43,8 @@ describe("island", () => {
     // so rather than rewriting what came back.
     const asked = `.${clientUrl}`;
     const held = island(drawn, asked);
-    assert.ok(held.includes(`<script src="${asked}"></script>`));
-    assert.ok(!held.includes(`<script src="${clientUrl}"></script>`));
+    assert.ok(held.includes(`<script defer src="${asked}"></script>`));
+    assert.ok(!held.includes(`<script defer src="${clientUrl}"></script>`));
   });
 
   it("carries the bundle but not the client", () => {
@@ -50,11 +58,11 @@ describe("island", () => {
     // between two islands but the client file, which is one url either way.
     const held = `<body><section>${island(drawn, clientUrl)}</section><section>${island(other, clientUrl)}</section></body>`;
     assert.equal(
-      held.split(`<script src="${clientUrl}"></script>`).length - 1,
+      held.split(`<script defer src="${clientUrl}"></script>`).length - 1,
       2,
     );
-    assert.equal(held.split("<slot>").length - 1, 2);
-    assert.ok(held.includes(`<section><slot><script type="application/json">`));
+    assert.equal(held.split('<script type="application/json">').length - 1, 2);
+    assert.ok(held.includes(`<section><script type="application/json">`));
   });
 
   it("carries its own bundle and no other", () => {

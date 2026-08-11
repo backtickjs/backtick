@@ -3,7 +3,8 @@
   "extends": ["//"],
   "tasks": {
     // The app is a package of its own rather than a dependency of this one, so
-    // what the snapshots read — its `lib/bundle.json` — is named here instead.
+    // what the snapshots read — the bundle in its `index.html` — is named here
+    // instead.
     "test": {
       "dependsOn": ["js-framework-benchmark-backtick#build"]
     },

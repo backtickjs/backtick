@@ -9,10 +9,11 @@ import type { Bundle } from "@backtickjs/core";
  * separate writes. The client is one file however many there are, asked for once
  * and answered from the cache after that.
  *
- * Drawn where it is put, so a document says where by placement: there is no
- * selector to name a place and no way for the name and the markup to disagree.
+ * Drawn into whatever holds it, after what that already holds: a document says
+ * where by putting it there, so there is no selector to name a place and no way
+ * for the name and the markup to disagree.
  *
- *     `<main>${island(await bundle(<Home />))}</main>`
+ *     `<main>${island(await bundle(<Home />), clientUrl)}</main>`
  *
  * An island holds no JavaScript of its own: the bundle is a data block, which no
  * content policy checks, and the client is a same-origin file that
@@ -32,11 +33,12 @@ export function island(bundle: Bundle, clientUrl: string): string {
   // Only string values in `JSON.stringify` output can hold a `<`, and `<`
   // is an escape JSON reads the same way JavaScript does.
   const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
-  // A `<slot>`, which is `display: contents` in every browser's own stylesheet
-  // and so draws no box of its own: what is inside it lays out as though it were
-  // a child of whatever holds the island, and an app's grid or flex row counts
-  // what the app wrote. A rule nobody has to ship — an element that needed a
-  // stylesheet to disappear would need `style-src` to allow one.
+  // Nothing wraps this. An element around what is drawn is an element in every
+  // selector that reaches it: `#main > .card` stops matching, `:first-child` is
+  // the wrapper, and `> *` counts one thing where the app wrote three. So what
+  // goes in the document is the two scripts and nothing else, and the client
+  // takes even those out once it has read them — leaving what the app wrote, as
+  // a direct child of what the app put it in.
   //
   // `defer`, so the document finishes parsing before anything is drawn. Without
   // it the parser stops at every island, draws the whole of it against a
@@ -49,9 +51,7 @@ export function island(bundle: Bundle, clientUrl: string): string {
   // the order the document holds them, and before `DOMContentLoaded`, so a page
   // waiting on that sees what was drawn.
   return (
-    `<slot>` +
     `<script type="application/json">${escaped}</script>` +
-    `<script defer src="${clientUrl}"></script>` +
-    `</slot>`
+    `<script defer src="${clientUrl}"></script>`
   );
 }

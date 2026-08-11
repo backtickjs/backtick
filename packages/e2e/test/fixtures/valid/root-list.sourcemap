@@ -1,0 +1,42 @@
+cs.lift(cs.const(  → cs`
+() => {\n          → () => {\n    
+cs.statement(      → 
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(ids)              → $ids
+)                  →  [-semantic]
+)                  → 
+.                  → .
+update             → update
+(                  → (
+() =>              → () => 
+[]                 → []
+)                  → )
+);                 → ;
+\n}                → \n  }
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+cs.splice(         →  [-semantic]
+(ids)              → $ids
+)                  →  [-semantic]
+)                  → 
+.                  → .
+read               → read
+()                 → ()
+))                 → `
+cs.lift(cs.const(  → cs`
+(                  → (
+__cs_id            → id
+: number           → : number
+) =>               → ) => 
+cs.splice(         → ${ [-semantic]
+(<span>{           → (<span>{
+cs.lift(cs.const(  → cs`
+"row "             → "row "
+ +                 →  + 
+__cs_id            → id
+))                 → `
+}</span>)          → }</span>)
+)                  → } [-semantic]
+))                 → `

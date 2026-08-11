@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
-    "@backtickjs/js-interpreter": "workspace:*"
+    "@backtickjs/js-interpreter": "workspace:*",
+    "linkedom": "^0.18.13"
   },
   "peerDependencies": {
     "@backtickjs/core": "workspace:*"

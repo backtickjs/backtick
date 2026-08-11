@@ -1,0 +1,31 @@
+#f0 = ($0) => () => {
+  $0().update(() => []);
+}
+
+#f1 = ($0) => $0().read()
+
+#f2 = ($0) => (id) => $0(id)
+
+#f3 = ($0) => "row " + $0
+
+#f4 = (id) => <span>
+  {#f3(id)}
+</span>
+
+#f5 = () => {
+  const s0 = state([1, 2, 3]);
+  return [
+    <span
+      onclick={#f0(() => s0)}
+    >
+      {"clear"}
+    </span>,
+    <For
+      each={#f1(() => s0)}
+    >
+      {#f2((id) => #f4(id))}
+    </For>
+  ];
+}
+
+root = #f5()
