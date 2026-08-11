@@ -31,11 +31,11 @@ const { Main } = await import(new URL("lib/Main.js", here));
 
 // Into `lib/`, with everything else the compiler wrote: this is what `Main.tsx`
 // produced, not something anyone typed, and `src/` holds only what was typed.
-const drawn = await bundle(jsx(Main, {}));
+const bundled = await bundle(jsx(Main, {}));
 
 await writeFile(
   new URL("lib/bundle.json", here),
-  `${JSON.stringify(drawn)}\n`,
+  `${JSON.stringify(bundled)}\n`,
 );
 
 // The document this app is measured in, written here rather than by the SDK:
@@ -60,7 +60,7 @@ await writeFile(
       `<script defer src="${clientUrl}"></script>` +
       `</head><body><div id="main" class="container"></div></body></html>`,
     "#main",
-    drawn,
+    bundled,
   ),
 );
 

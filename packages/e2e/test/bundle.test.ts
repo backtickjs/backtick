@@ -41,17 +41,17 @@ describe("bundle", () => {
       it(file, async () => {
         const base = file.slice(0, -extname(file).length);
         const script = await importFixture(dir, file);
-        const payload = await bundle(script, { functionLabels: "index" });
+        const bundled = await bundle(script, { functionLabels: "index" });
         matchFileSnapshot(
-          JSON.stringify(payload, null, 2),
+          JSON.stringify(bundled, null, 2),
           join(dir, `${base}.bundle`),
         );
         matchFileSnapshot(
-          renderBundleDebug(payload),
+          renderBundleDebug(bundled),
           join(dir, `${base}.bundle-debug`),
         );
         matchFileSnapshot(
-          `${renderValue(evaluate(payload))}\n`,
+          `${renderValue(evaluate(bundled))}\n`,
           join(dir, `${base}.value`),
         );
       });

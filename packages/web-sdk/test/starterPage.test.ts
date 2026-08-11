@@ -5,9 +5,9 @@ import { client } from "../dist/index.js";
 import { jsx } from "../dist/jsx-runtime/index.js";
 import { starterPage } from "../dist/starterPage.js";
 
-const drawn = jsx("p", { children: "hi" });
-const page = await starterPage(drawn);
-const titled = await starterPage(drawn, "<title>Shop</title>");
+const bundled = await bundle(jsx("p", { children: "hi" }));
+const page = starterPage(bundled);
+const titled = starterPage(bundled, "<title>Shop</title>");
 
 describe("starterPage", () => {
   it("is a whole document", () => {
@@ -33,19 +33,12 @@ describe("starterPage", () => {
     assert.doesNotMatch(page, /<title>/);
   });
 
-  it("draws what it was given, in the body", () => {
+  it("carries the bundle it was given, in the body", () => {
     const body = /<body>([\s\S]*)<\/body>/.exec(page)?.[1] ?? "";
-    assert.ok(body.includes(`<script type="application/json">`));
     assert.ok(body.includes("<backtick-bundle></backtick-bundle>"));
-  });
-
-  it("carries the same bundle `bundle` would give", async () => {
     const held = /<script type="application\/json">([\s\S]*?)<\/script>/.exec(
-      page,
+      body,
     )?.[1];
-    assert.deepEqual(
-      JSON.parse(held!.replaceAll("\\u003c", "<")),
-      await bundle(drawn),
-    );
+    assert.deepEqual(JSON.parse(held!.replaceAll("\\u003c", "<")), bundled);
   });
 });
