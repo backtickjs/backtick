@@ -1,10 +1,16 @@
 import { createServer } from "node:http";
 import { URLPattern } from "node:url";
 import { bundle } from "@backtickjs/core";
-import { clientAsset, insert } from "@backtickjs/web-sdk";
+import * as client from "@backtickjs/web-client";
+import { insert } from "@backtickjs/web-sdk";
 import { About } from "./About.js";
 import { Counter } from "./Counter.js";
 import { Home } from "./Home.js";
+
+// The client is asked for at a name that says what it holds, so a rebuilt client
+// is a name no cache has an old answer for — which is what makes the year this
+// server promises for it below safe.
+const clientUrl = `/_backtick/client-${client.sha256.slice(0, 16)}.js`;
 
 // The document this app serves. Its head is its own — a charset, a viewport, and
 // the one script that draws what `insert` puts in the body.
@@ -13,12 +19,11 @@ import { Home } from "./Home.js";
 // `JSON.parse`, and a document decoded as anything else is every string in the
 // app quietly mangled. It counts only in the first 1024 bytes, and only while
 // parsing.
-const asset = clientAsset();
 const html =
   `<!doctype html><html><head>` +
   `<meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width, initial-scale=1">` +
-  `<script defer src="${asset.url}"></script>` +
+  `<script defer src="${clientUrl}"></script>` +
   `</head><body></body></html>`;
 
 const started = new Date();
@@ -50,9 +55,12 @@ const port = Number(process.env.PORT ?? 5173);
 createServer(async (incoming, outgoing) => {
   try {
     const [pathname = "/"] = (incoming.url ?? "/").split("?");
-    if (pathname === asset.url) {
-      outgoing.writeHead(200, asset.headers);
-      outgoing.end(asset.source);
+    if (pathname === clientUrl) {
+      outgoing.writeHead(200, {
+        "content-type": "text/javascript",
+        "cache-control": "public, max-age=31536000, immutable",
+      });
+      outgoing.end(client.source);
       return;
     }
     for (const { pattern, handler } of matchers) {

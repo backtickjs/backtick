@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
-    "@backtickjs/web-client": "workspace:*",
     "linkedom": "^0.18.13"
   },
   "peerDependencies": {

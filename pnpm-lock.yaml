@@ -35,6 +35,9 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../../../../packages/tspatch-plugin
+      '@backtickjs/web-client':
+        specifier: ^0.1.0
+        version: link:../../../../../packages/web-client
       '@backtickjs/web-sdk':
         specifier: ^0.1.0
         version: link:../../../../../packages/web-sdk
@@ -60,6 +63,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/web-client':
+        specifier: ^0.1.0
+        version: link:../../packages/web-client
       '@backtickjs/web-sdk':
         specifier: ^0.1.0
         version: link:../../packages/web-sdk
@@ -88,6 +94,9 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
+      '@backtickjs/web-client':
+        specifier: ^0.1.0
+        version: link:../../packages/web-client
       '@backtickjs/web-sdk':
         specifier: ^0.1.0
         version: link:../../packages/web-sdk
@@ -116,6 +125,9 @@ importers:
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
+      '@backtickjs/web-client':
+        specifier: ^0.1.0
+        version: link:../../packages/web-client
       '@backtickjs/web-sdk':
         specifier: ^0.1.0
         version: link:../../packages/web-sdk
@@ -460,9 +472,6 @@ importers:
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
-      '@backtickjs/web-client':
-        specifier: workspace:*
-        version: link:../web-client
       linkedom:
         specifier: ^0.18.13
         version: 0.18.13

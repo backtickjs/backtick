@@ -1,7 +1,8 @@
 import { spawnSync } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { bundle } from "@backtickjs/core";
-import { clientAsset, insert } from "@backtickjs/web-sdk";
+import * as client from "@backtickjs/web-client";
+import { insert } from "@backtickjs/web-sdk";
 import { jsx } from "@backtickjs/web-sdk/jsx-runtime";
 
 // Three steps, because a component here is server code: compile it, run it to
@@ -44,11 +45,11 @@ await writeFile(
 // container. So `insert` draws the bundle above into a document of this app's
 // own — the same bundle the snapshots read, drawn once and written twice.
 //
-// Relative, because this app is served under a prefix of the harness's choosing
-// rather than at an origin's root — which is a thing only a document knows about
-// itself. Nothing answers requests here, so of what `clientAsset` gives only
-// the url and the bytes are of any use: this writes both out as files.
-const asset = clientAsset("./_backtick/");
+// Named for what the client holds, so a rebuilt client is a new name and the
+// harness's browser cannot answer with an old one. Relative, because this app
+// is served under a prefix of the harness's choosing rather than at an origin's
+// root — which is a thing only a document knows about itself.
+const clientUrl = `./_backtick/client-${client.sha256.slice(0, 16)}.js`;
 
 await writeFile(
   new URL("index.html", here),
@@ -57,7 +58,7 @@ await writeFile(
       `<meta charset="utf-8">` +
       `<title>Backtick-"keyed"</title>` +
       `<link href="/css/currentStyle.css" rel="stylesheet">` +
-      `<script defer src="${asset.url}"></script>` +
+      `<script defer src="${clientUrl}"></script>` +
       `</head><body><div id="main" class="container"></div></body></html>`,
     "#main",
     drawn,
@@ -66,8 +67,8 @@ await writeFile(
 
 // And the client itself, at the name this document asks for. It draws what it
 // finds: nothing here appends a call.
-const built = new URL(asset.url, here);
+const built = new URL(clientUrl, here);
 await mkdir(new URL(".", built), { recursive: true });
-await writeFile(built, asset.source);
+await writeFile(built, client.source);
 
-console.log(`${asset.url}  ${asset.source.length} bytes`);
+console.log(`${clientUrl}  ${client.source.length} bytes`);

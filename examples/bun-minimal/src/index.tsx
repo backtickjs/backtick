@@ -1,9 +1,15 @@
 import type { JsxElement } from "@backtickjs/core";
 import { bundle } from "@backtickjs/core";
-import { clientAsset, insert } from "@backtickjs/web-sdk";
+import * as client from "@backtickjs/web-client";
+import { insert } from "@backtickjs/web-sdk";
 import { About } from "./About.js";
 import { Counter } from "./Counter.js";
 import { Home } from "./Home.js";
+
+// The client is asked for at a name that says what it holds, so a rebuilt client
+// is a name no cache has an old answer for — which is what makes the year this
+// server promises for it below safe.
+const clientUrl = `/_backtick/client-${client.sha256.slice(0, 16)}.js`;
 
 // The document this app serves. Its head is its own — a charset, a viewport, and
 // the one script that draws what `insert` puts in the body.
@@ -12,12 +18,11 @@ import { Home } from "./Home.js";
 // `JSON.parse`, and a document decoded as anything else is every string in the
 // app quietly mangled. It counts only in the first 1024 bytes of a document, and
 // only while it is being parsed.
-const asset = clientAsset();
 const html =
   `<!doctype html><html><head>` +
   `<meta charset="utf-8">` +
   `<meta name="viewport" content="width=device-width, initial-scale=1">` +
-  `<script defer src="${asset.url}"></script>` +
+  `<script defer src="${clientUrl}"></script>` +
   `</head><body></body></html>`;
 
 const started = new Date();
@@ -47,8 +52,13 @@ const server = Bun.serve({
     },
   },
   fetch(request) {
-    if (new URL(request.url).pathname === asset.url) {
-      return new Response(asset.source, { headers: asset.headers });
+    if (new URL(request.url).pathname === clientUrl) {
+      return new Response(client.source, {
+        headers: {
+          "content-type": "text/javascript",
+          "cache-control": "public, max-age=31536000, immutable",
+        },
+      });
     }
     return new Response("Not found", { status: 404 });
   },
