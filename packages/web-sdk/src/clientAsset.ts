@@ -1,4 +1,4 @@
-import { hash, source } from "@backtickjs/web-client";
+import { cacheControl, fileName, sha256, source } from "@backtickjs/web-client";
 
 /** The client, as one url, the bytes to answer there, and how to answer. */
 export interface ClientAsset {
@@ -38,12 +38,12 @@ export interface ClientAsset {
  */
 export function clientAsset(base: string = "/_backtick/"): ClientAsset {
   return {
-    url: `${base}client-${hash.slice(0, 16)}.js`,
+    url: `${base}${fileName}`,
     headers: {
       "content-type": "text/javascript",
-      "cache-control": "public, max-age=31536000, immutable",
+      "cache-control": cacheControl,
     },
     source,
-    hash,
+    hash: sha256,
   };
 }
