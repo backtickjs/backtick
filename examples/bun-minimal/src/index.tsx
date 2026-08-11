@@ -15,7 +15,7 @@ const server = Bun.serve({
       // A document holding that data and the client that draws it.
       const page = starterPage(bundled);
 
-      // Ordinary HTTP from here: what backtick gave you is a string.
+      // Ordinary HTTP from here
       return new Response(page, { headers: { "content-type": "text/html" } });
     },
   },
