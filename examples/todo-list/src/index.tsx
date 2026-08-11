@@ -1,5 +1,3 @@
-import { createServer } from "node:http";
-import { URLPattern } from "node:url";
 import { bundle } from "@backtickjs/core";
 import { client, insert } from "@backtickjs/web-sdk";
 import { TodoList } from "./TodoList.js";
@@ -23,47 +21,28 @@ const html =
   `<script defer src="${clientUrl}"></script>` +
   `</head><body></body></html>`;
 
-const routes = {
-  "/": () => {
-    return <TodoList />;
-  },
-};
-
-const matchers = Object.entries(routes).map(([path, handler]) => ({
-  pattern: new URLPattern({ pathname: path }),
-  handler,
-}));
-
-const port = Number(process.env.PORT ?? 5175);
-
-createServer(async (incoming, outgoing) => {
-  try {
-    const [pathname = "/"] = (incoming.url ?? "/").split("?");
-    if (pathname === clientUrl) {
-      outgoing.writeHead(200, {
-        "content-type": "text/javascript",
-        "cache-control": "public, max-age=31536000, immutable",
-      });
-      outgoing.end(client.source);
-      return;
-    }
-    for (const { pattern, handler } of matchers) {
-      if (pattern.exec({ pathname }) !== null) {
-        const page = insert(html, "body", await bundle(handler()));
-        outgoing.writeHead(200, {
+const server = Bun.serve({
+  port: 5175,
+  routes: {
+    "/": async () => {
+      const page = insert(html, "body", await bundle(<TodoList />));
+      return new Response(page, {
+        headers: {
           "content-type": "text/html",
           "content-security-policy": "default-src 'self'",
-        });
-        outgoing.end(page);
-        return;
-      }
-    }
-    outgoing.writeHead(404, { "content-type": "text/plain" });
-    outgoing.end("Not found");
-  } catch (error) {
-    outgoing.writeHead(500, { "content-type": "text/plain" });
-    outgoing.end(String(error));
-  }
-}).listen(port, () => {
-  console.log(`Preview on http://localhost:${port}`);
+        },
+      });
+    },
+
+    // The name the document above asks for, answered here.
+    [clientUrl]: () =>
+      new Response(client.source, {
+        headers: {
+          "content-type": "text/javascript",
+          "cache-control": "public, max-age=31536000, immutable",
+        },
+      }),
+  },
 });
+
+console.log(`Preview on ${server.url}`);

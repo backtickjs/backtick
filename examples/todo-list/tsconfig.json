@@ -4,16 +4,14 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "Bundler",
-    "rootDir": "src",
-    "outDir": "dist",
-    "sourceMap": true,
+    "noEmit": true,
+    "types": [
+      "bun"
+    ],
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/web-sdk",
-    "types": ["node"],
-    "plugins": [
-      // Build with `tspc`, not `tsc`.
-      { "transform": "@backtickjs/tspatch-plugin" }
-    ]
+    "jsxImportSource": "@backtickjs/web-sdk"
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
