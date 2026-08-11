@@ -420,6 +420,14 @@
       "keyed": true,
       "dir": "jsx-shape",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "71bc61f3",
+      "label": "island element",
+      "date": "2026-08-11",
+      "keyed": true,
+      "dir": "71bc61f3",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
