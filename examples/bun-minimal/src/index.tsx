@@ -21,14 +21,14 @@ const server = Bun.serve({
   },
 });
 
-function toHtml(bundled: Bundle): string {
+function toHtml(bundle: Bundle): string {
   const html =
     `<!doctype html><html><head>` +
     `<meta charset="utf-8">` +
     `<meta name="viewport" content="width=device-width, initial-scale=1">` +
     `<script>${client.source}</script>` +
     `</head><body></body></html>`;
-  return insert(html, "body", bundled);
+  return insert(html, "body", bundle);
 }
 
 console.log(`Preview on ${server.url}`);
