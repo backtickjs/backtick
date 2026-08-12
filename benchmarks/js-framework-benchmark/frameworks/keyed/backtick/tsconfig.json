@@ -9,6 +9,7 @@
     "sourceMap": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@backtickjs/web-sdk",
+    "types": ["node"],
     "plugins": [
       { "transform": "@backtickjs/tspatch-plugin" }
     ]
