@@ -5,11 +5,10 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "rootDir": "src",
-    "outDir": "lib",
+    "outDir": "dist",
     "sourceMap": true,
     "jsx": "react-jsx",
     "jsxImportSource": "@backtickjs/web-sdk",
-    "types": ["node"],
     "plugins": [
       { "transform": "@backtickjs/tspatch-plugin" }
     ]
