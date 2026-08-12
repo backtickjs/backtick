@@ -1,11 +1,13 @@
 import type {
   TBoolean,
   TFunction,
+  TGeneric,
   TIntersect,
   TLiteral,
   TNumber,
   TObject,
   TRef,
+  TRest,
   TString,
   TUnion,
   TVoid,
@@ -34,7 +36,9 @@ export type SchemaNode =
   | TObject
   | TFunction
   | TVoid
-  | TRef;
+  | TRef
+  | TRest
+  | TGeneric;
 
 /**
  * What a target draws, and what each element accepts.

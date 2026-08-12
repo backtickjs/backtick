@@ -1,15 +1,19 @@
 import {
   IsBoolean,
   IsFunction,
+  IsGeneric,
   IsIntersect,
   IsLiteral,
   IsNumber,
   IsObject,
   IsRef,
+  IsRest,
   IsString,
   IsUnion,
+  IsUnknown,
   IsVoid,
   type TObject,
+  type TParameter,
   type TSchema,
 } from "typebox";
 import type { Schema, SchemaNode } from "./Schema.js";
@@ -56,11 +60,17 @@ export function emitJsx(schema: Schema): string {
     // A function the schema did not name keeps its own signature, parameters and
     // all — the case `core`'s `onLayout(width, height)` needs.
     if (IsFunction(node)) {
-      const params = node.parameters.map((one, at) => {
-        const named = one as SchemaNode & { readonly name?: string };
-        return `${named.name ?? `arg${at}`}: ${type(held(one))}`;
-      });
+      const params = node.parameters.map((one, at) => parameter(held(one), at));
       return `(${params.join(", ")}) => ${type(held(node.returnType))}`;
+    }
+    if (IsGeneric(node)) {
+      const declared = node.parameters.map((one) =>
+        typeParameter(one as TParameter),
+      );
+      return `<${declared.join(", ")}>${type(held(node.expression))}`;
+    }
+    if (IsRest(node)) {
+      throw new Error("a rest may only stand in a parameter list");
     }
     if (IsObject(node)) {
       const members = Object.entries(node.properties).map(
@@ -84,6 +94,33 @@ export function emitJsx(schema: Schema): string {
     // here, where it is read, rather than at the throw below.
     const unread: never = node;
     throw new Error(`unhandled node: ${JSON.stringify(unread).slice(0, 60)}`);
+  }
+
+  /** One entry in a parameter list, named as the schema named it. */
+  function parameter(node: SchemaNode, at: number): string {
+    if (IsRest(node)) {
+      const items = held(node.items);
+      const named = items as SchemaNode & { readonly name?: string };
+      return `...${named.name ?? "args"}: ${type(items)}[]`;
+    }
+    const named = node as SchemaNode & { readonly name?: string };
+    return `${named.name ?? `arg${at}`}: ${type(node)}`;
+  }
+
+  /** One type parameter, with the constraint and default it was given. */
+  function typeParameter(node: TParameter): string {
+    const constrained = !IsUnknown(node.extends);
+    const constraint = constrained
+      ? ` extends ${type(held(node.extends))}`
+      : "";
+    // `Parameter(name, extends)` fills the default in with the constraint, so a
+    // default worth printing is one that differs from it.
+    const fallback =
+      !IsUnknown(node.equals) &&
+      JSON.stringify(node.equals) !== JSON.stringify(node.extends)
+        ? ` = ${type(held(node.equals))}`
+        : "";
+    return `${node.name}${constraint}${fallback}`;
   }
 
   /** What an interface extends, and the one object of its own. */

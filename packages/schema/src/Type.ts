@@ -24,4 +24,7 @@ export const Type = {
   Void: TypeBox.Void,
   Ref: TypeBox.Ref,
   Optional: TypeBox.Optional,
+  Rest: TypeBox.Rest,
+  Generic: TypeBox.Generic,
+  Parameter: TypeBox.Parameter,
 };
