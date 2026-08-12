@@ -1,9 +1,11 @@
 import type {
+  TArray,
   TBoolean,
   TFunction,
   TGeneric,
   TIntersect,
   TLiteral,
+  TNull,
   TNumber,
   TObject,
   TRef,
@@ -34,8 +36,10 @@ export type SchemaNode =
   | TUnion
   | TIntersect
   | TObject
+  | TArray
   | TFunction
   | TVoid
+  | TNull
   | TRef
   | TRest
   | TGeneric;

@@ -1,9 +1,11 @@
 import {
+  IsArray,
   IsBoolean,
   IsFunction,
   IsGeneric,
   IsIntersect,
   IsLiteral,
+  IsNull,
   IsNumber,
   IsObject,
   IsRef,
@@ -78,6 +80,13 @@ export function emitJsx(schema: Schema): string {
       );
       return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
     }
+    if (IsArray(node)) {
+      const items = held(node.items);
+      const written = type(items);
+      return IsUnion(items) || IsFunction(items) || IsGeneric(items)
+        ? `(${written})[]`
+        : `${written}[]`;
+    }
     if (IsString(node)) {
       return "string";
     }
@@ -89,6 +98,9 @@ export function emitJsx(schema: Schema): string {
     }
     if (IsVoid(node)) {
       return "void";
+    }
+    if (IsNull(node)) {
+      return "null";
     }
     // Exhaustive: a kind added to `SchemaNode` without a case above fails
     // here, where it is read, rather than at the throw below.
