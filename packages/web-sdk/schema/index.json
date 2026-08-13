@@ -1,6 +1,7 @@
 {
   "aliases": {
     "Booleanish": {
+      "type": "union",
       "anyOf": [
         {
           "type": "boolean"
@@ -16,6 +17,7 @@
       ]
     },
     "Numeric": {
+      "type": "union",
       "anyOf": [
         {
           "type": "number"
@@ -26,6 +28,7 @@
       ]
     },
     "AriaRole": {
+      "type": "union",
       "anyOf": [
         {
           "type": "string",
@@ -306,6 +309,7 @@
       ]
     },
     "ReferrerPolicy": {
+      "type": "union",
       "anyOf": [
         {
           "type": "string",
@@ -346,6 +350,7 @@
       ]
     },
     "CrossOrigin": {
+      "type": "union",
       "anyOf": [
         {
           "type": "string",
@@ -362,6 +367,7 @@
       ]
     },
     "Target": {
+      "type": "union",
       "anyOf": [
         {
           "type": "string",
@@ -386,672 +392,784 @@
     "a": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "AnchorProps"
       }
     },
     "abbr": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "address": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "area": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "AreaProps"
       }
     },
     "article": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "aside": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "audio": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "MediaProps"
       }
     },
     "b": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "base": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "BaseProps"
       }
     },
     "bdi": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "bdo": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "blockquote": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "BlockquoteProps"
       }
     },
     "body": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "br": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "VoidProps"
       }
     },
     "button": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ButtonProps"
       }
     },
     "canvas": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "CanvasProps"
       }
     },
     "caption": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "cite": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "code": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "col": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ColProps"
       }
     },
     "colgroup": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ColgroupProps"
       }
     },
     "data": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "DataProps"
       }
     },
     "datalist": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "dd": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "del": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "DelProps"
       }
     },
     "details": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "DetailsProps"
       }
     },
     "dfn": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "dialog": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "DialogProps"
       }
     },
     "div": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "dl": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "dt": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "em": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "embed": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "EmbedProps"
       }
     },
     "fieldset": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "FieldsetProps"
       }
     },
     "figcaption": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "figure": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "footer": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "form": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "FormProps"
       }
     },
     "h1": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "h2": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "h3": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "h4": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "h5": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "h6": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "head": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "header": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "hgroup": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "hr": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "VoidProps"
       }
     },
     "html": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlElementProps"
       }
     },
     "i": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "iframe": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "IframeProps"
       }
     },
     "img": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ImgProps"
       }
     },
     "input": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "InputProps"
       }
     },
     "ins": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "InsProps"
       }
     },
     "kbd": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "label": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "LabelProps"
       }
     },
     "legend": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "li": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "LiProps"
       }
     },
     "link": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "LinkProps"
       }
     },
     "main": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "map": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "MapProps"
       }
     },
     "mark": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "menu": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "meta": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "MetaProps"
       }
     },
     "meter": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "MeterProps"
       }
     },
     "nav": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "noscript": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "object": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ObjectProps"
       }
     },
     "ol": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "OlProps"
       }
     },
     "optgroup": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "OptgroupProps"
       }
     },
     "option": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "OptionProps"
       }
     },
     "output": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "OutputProps"
       }
     },
     "p": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "picture": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "pre": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "progress": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ProgressProps"
       }
     },
     "q": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "QuoteProps"
       }
     },
     "rp": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "rt": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "ruby": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "s": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "samp": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "script": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ScriptProps"
       }
     },
     "search": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "section": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "select": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "SelectProps"
       }
     },
     "slot": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "SlotProps"
       }
     },
     "small": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "source": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "SourceProps"
       }
     },
     "span": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "strong": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "style": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "StyleProps"
       }
     },
     "sub": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "summary": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "sup": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "table": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "TableProps"
       }
     },
     "tbody": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "td": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "TdProps"
       }
     },
     "template": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "textarea": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "TextareaProps"
       }
     },
     "tfoot": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "th": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "ThProps"
       }
     },
     "thead": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "time": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "TimeProps"
       }
     },
     "title": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "tr": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "track": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "TrackProps"
       }
     },
     "u": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "ul": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "var": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "HtmlProps"
       }
     },
     "video": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "VideoProps"
       }
     },
     "wbr": {
       "type": "element",
       "props": {
+        "type": "ref",
         "$ref": "VoidProps"
       }
     }
@@ -1065,9 +1183,11 @@
           "type": "string"
         },
         "aria-atomic": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-autocomplete": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -1094,9 +1214,11 @@
           "type": "string"
         },
         "aria-busy": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-checked": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -1131,6 +1253,7 @@
           "type": "string"
         },
         "aria-current": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -1175,18 +1298,21 @@
           "type": "string"
         },
         "aria-disabled": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-errormessage": {
           "type": "string"
         },
         "aria-expanded": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-flowto": {
           "type": "string"
         },
         "aria-haspopup": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -1222,9 +1348,11 @@
           ]
         },
         "aria-hidden": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-invalid": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -1260,6 +1388,7 @@
           "type": "number"
         },
         "aria-live": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -1276,15 +1405,19 @@
           ]
         },
         "aria-modal": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-multiline": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-multiselectable": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-orientation": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -1306,6 +1439,7 @@
           "type": "number"
         },
         "aria-pressed": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -1325,9 +1459,11 @@
           ]
         },
         "aria-readonly": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-relevant": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -1372,6 +1508,7 @@
           ]
         },
         "aria-required": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-roledescription": {
@@ -1390,12 +1527,14 @@
           "type": "number"
         },
         "aria-selected": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "aria-setsize": {
           "type": "number"
         },
         "aria-sort": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2050,9 +2189,11 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "AriaAttributes"
         },
         {
+          "type": "ref",
           "$ref": "Events"
         }
       ],
@@ -2061,6 +2202,7 @@
           "type": "string"
         },
         "autocapitalize": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2089,6 +2231,7 @@
           ]
         },
         "autocorrect": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2107,8 +2250,10 @@
           "type": "string"
         },
         "contenteditable": {
+          "type": "union",
           "anyOf": [
             {
+              "type": "ref",
               "$ref": "Booleanish"
             },
             {
@@ -2122,6 +2267,7 @@
           ]
         },
         "dir": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2138,9 +2284,11 @@
           ]
         },
         "draggable": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "enterkeyhint": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2176,6 +2324,7 @@
           "type": "string"
         },
         "hidden": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -2193,6 +2342,7 @@
           "type": "boolean"
         },
         "inputmode": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2256,6 +2406,7 @@
           "type": "string"
         },
         "popover": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2276,12 +2427,14 @@
           ]
         },
         "role": {
+          "type": "ref",
           "$ref": "AriaRole"
         },
         "slot": {
           "type": "string"
         },
         "spellcheck": {
+          "type": "ref",
           "$ref": "Booleanish"
         },
         "style": {
@@ -2294,6 +2447,7 @@
           "type": "string"
         },
         "translate": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2312,6 +2466,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "GlobalAttributes"
         }
       ],
@@ -2322,13 +2477,16 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "GlobalAttributes"
         }
       ],
       "properties": {
         "children": {
+          "type": "union",
           "anyOf": [
             {
+              "type": "ref",
               "$ref": "JsxElement"
             },
             {
@@ -2347,8 +2505,10 @@
       "extends": [],
       "properties": {
         "children": {
+          "type": "union",
           "anyOf": [
             {
+              "type": "ref",
               "$ref": "JsxElement"
             },
             {
@@ -2366,11 +2526,13 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
       "properties": {
         "download": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -2393,12 +2555,14 @@
           "type": "string"
         },
         "referrerpolicy": {
+          "type": "ref",
           "$ref": "ReferrerPolicy"
         },
         "rel": {
           "type": "string"
         },
         "target": {
+          "type": "ref",
           "$ref": "Target"
         },
         "type": {
@@ -2411,6 +2575,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -2422,6 +2587,7 @@
           "type": "string"
         },
         "download": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -2435,12 +2601,14 @@
           "type": "string"
         },
         "referrerpolicy": {
+          "type": "ref",
           "$ref": "ReferrerPolicy"
         },
         "rel": {
           "type": "string"
         },
         "shape": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2461,6 +2629,7 @@
           ]
         },
         "target": {
+          "type": "ref",
           "$ref": "Target"
         }
       },
@@ -2470,6 +2639,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -2478,6 +2648,7 @@
           "type": "string"
         },
         "target": {
+          "type": "ref",
           "$ref": "Target"
         }
       },
@@ -2487,6 +2658,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2501,6 +2673,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2518,6 +2691,7 @@
           "type": "string"
         },
         "formmethod": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2537,6 +2711,7 @@
           "type": "boolean"
         },
         "formtarget": {
+          "type": "ref",
           "$ref": "Target"
         },
         "name": {
@@ -2546,6 +2721,7 @@
           "type": "string"
         },
         "popovertargetaction": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2562,6 +2738,7 @@
           ]
         },
         "type": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2578,6 +2755,7 @@
           ]
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -2594,14 +2772,17 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
       "properties": {
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -2611,6 +2792,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -2619,6 +2801,7 @@
           "type": "number"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -2628,6 +2811,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2642,11 +2826,13 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
       "properties": {
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -2663,6 +2849,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2680,6 +2867,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2697,11 +2885,13 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
       "properties": {
         "closedby": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2727,11 +2917,13 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
       "properties": {
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "src": {
@@ -2741,6 +2933,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -2750,6 +2943,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2770,6 +2964,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2781,6 +2976,7 @@
           "type": "string"
         },
         "autocomplete": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2796,6 +2992,7 @@
           "type": "string"
         },
         "method": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2821,6 +3018,7 @@
           "type": "string"
         },
         "target": {
+          "type": "ref",
           "$ref": "Target"
         }
       },
@@ -2830,6 +3028,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2844,6 +3043,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -2855,9 +3055,11 @@
           "type": "boolean"
         },
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "loading": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2873,6 +3075,7 @@
           "type": "string"
         },
         "referrerpolicy": {
+          "type": "ref",
           "$ref": "ReferrerPolicy"
         },
         "sandbox": {
@@ -2885,6 +3088,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -2894,6 +3098,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -2902,9 +3107,11 @@
           "type": "string"
         },
         "crossorigin": {
+          "type": "ref",
           "$ref": "CrossOrigin"
         },
         "decoding": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2921,6 +3128,7 @@
           ]
         },
         "fetchpriority": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2937,9 +3145,11 @@
           ]
         },
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "loading": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -2952,6 +3162,7 @@
           ]
         },
         "referrerpolicy": {
+          "type": "ref",
           "$ref": "ReferrerPolicy"
         },
         "sizes": {
@@ -2967,6 +3178,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -2976,6 +3188,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -2990,6 +3203,7 @@
           "type": "string"
         },
         "capture": {
+          "type": "union",
           "anyOf": [
             {
               "type": "boolean"
@@ -3023,6 +3237,7 @@
           "type": "string"
         },
         "formmethod": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3042,21 +3257,25 @@
           "type": "boolean"
         },
         "formtarget": {
+          "type": "ref",
           "$ref": "Target"
         },
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "list": {
           "type": "string"
         },
         "max": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "maxlength": {
           "type": "number"
         },
         "min": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "minlength": {
@@ -3087,9 +3306,11 @@
           "type": "string"
         },
         "step": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "type": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3182,6 +3403,7 @@
           ]
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -3192,6 +3414,7 @@
           ]
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -3201,6 +3424,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3218,6 +3442,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3235,6 +3460,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3249,6 +3475,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -3257,9 +3484,11 @@
           "type": "string"
         },
         "crossorigin": {
+          "type": "ref",
           "$ref": "CrossOrigin"
         },
         "fetchpriority": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3294,6 +3523,7 @@
           "type": "string"
         },
         "referrerpolicy": {
+          "type": "ref",
           "$ref": "ReferrerPolicy"
         },
         "rel": {
@@ -3312,6 +3542,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3326,6 +3557,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3340,6 +3572,7 @@
           "type": "string"
         },
         "crossorigin": {
+          "type": "ref",
           "$ref": "CrossOrigin"
         },
         "loop": {
@@ -3349,6 +3582,7 @@
           "type": "boolean"
         },
         "preload": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3378,6 +3612,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -3404,6 +3639,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3418,15 +3654,18 @@
           "type": "number"
         },
         "max": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "min": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "optimum": {
           "type": "number"
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -3443,6 +3682,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3454,6 +3694,7 @@
           "type": "string"
         },
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "name": {
@@ -3466,6 +3707,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -3475,6 +3717,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3486,6 +3729,7 @@
           "type": "number"
         },
         "type": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3516,6 +3760,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3533,6 +3778,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3547,6 +3793,7 @@
           "type": "boolean"
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -3563,6 +3810,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3583,14 +3831,17 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
       "properties": {
         "max": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -3607,6 +3858,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3621,6 +3873,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3629,12 +3882,14 @@
           "type": "boolean"
         },
         "crossorigin": {
+          "type": "ref",
           "$ref": "CrossOrigin"
         },
         "defer": {
           "type": "boolean"
         },
         "fetchpriority": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3657,6 +3912,7 @@
           "type": "boolean"
         },
         "referrerpolicy": {
+          "type": "ref",
           "$ref": "ReferrerPolicy"
         },
         "src": {
@@ -3672,6 +3928,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3698,6 +3955,7 @@
           "type": "number"
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -3714,6 +3972,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3728,11 +3987,13 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
       "properties": {
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "media": {
@@ -3751,6 +4012,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -3760,6 +4022,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3777,6 +4040,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3785,6 +4049,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },
@@ -3794,6 +4059,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3814,6 +4080,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3831,6 +4098,7 @@
           "type": "number"
         },
         "scope": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3857,6 +4125,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3898,6 +4167,7 @@
           "type": "number"
         },
         "value": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string"
@@ -3908,6 +4178,7 @@
           ]
         },
         "wrap": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3930,6 +4201,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "HtmlProps"
         }
       ],
@@ -3944,6 +4216,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "VoidProps"
         }
       ],
@@ -3952,6 +4225,7 @@
           "type": "boolean"
         },
         "kind": {
+          "type": "union",
           "anyOf": [
             {
               "type": "string",
@@ -3991,6 +4265,7 @@
       "type": "interface",
       "extends": [
         {
+          "type": "ref",
           "$ref": "MediaProps"
         }
       ],
@@ -4002,6 +4277,7 @@
           "type": "boolean"
         },
         "height": {
+          "type": "ref",
           "$ref": "Numeric"
         },
         "playsinline": {
@@ -4011,6 +4287,7 @@
           "type": "string"
         },
         "width": {
+          "type": "ref",
           "$ref": "Numeric"
         }
       },

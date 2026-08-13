@@ -1,4 +1,5 @@
 import { Unknown } from "./Unknown.js";
+import { isType } from "../helpers/isType.js";
 import type { TUnknown } from "./Unknown.js";
 import type { SchemaNode } from "../Schema.js";
 
@@ -7,6 +8,7 @@ export interface TParameter<
   Extends extends SchemaNode | TUnknown = SchemaNode | TUnknown,
   Equals extends SchemaNode | TUnknown = SchemaNode | TUnknown,
 > {
+  readonly type: "parameter";
   readonly name: Name;
   readonly extends: Extends;
   readonly equals: Equals;
@@ -23,6 +25,7 @@ export function Parameter<
 ): TParameter<Name, Extends, Equals> {
   const bound = (constraint ?? Unknown()) as Extends;
   return {
+    type: "parameter",
     name,
     extends: bound,
     equals: (fallback ?? bound) as Equals,
@@ -30,11 +33,5 @@ export function Parameter<
 }
 
 export function IsParameter(value: unknown): value is TParameter {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "name" in value &&
-    "extends" in value &&
-    "equals" in value
-  );
+  return isType(value, "parameter");
 }
