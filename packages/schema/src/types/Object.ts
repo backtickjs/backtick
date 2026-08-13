@@ -1,7 +1,7 @@
 import { isType } from "../helpers/isType.js";
 import { requiredOf } from "./Optional.js";
 import type { TProperties } from "./Properties.js";
-import type { TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
 
 export interface TObject<
   Properties extends TProperties = TProperties,

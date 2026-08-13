@@ -1,5 +1,5 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
 
 export interface TVoid extends TSchemaOptions {
   readonly type: "void";

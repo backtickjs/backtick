@@ -13,7 +13,8 @@ import { IsUnion } from "../types/Union.js";
 import { IsUnknown } from "../types/Unknown.js";
 import { IsVoid } from "../types/Void.js";
 import type { TParameter } from "../types/Parameter.js";
-import type { Schema, TSchema } from "../Schema.js";
+import type { Schema } from "../Schema.js";
+import type { TSchema } from "../TSchema.js";
 
 // A schema to the `jsx-runtime` an app writes against.
 //

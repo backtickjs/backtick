@@ -1,7 +1,8 @@
 import { isType } from "../helpers/isType.js";
 import { requiredOf } from "./Optional.js";
 import type { TProperties } from "./Properties.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TSchema } from "../TSchema.js";
 
 export interface TInterface<
   Heritage extends readonly TSchema[] = readonly TSchema[],

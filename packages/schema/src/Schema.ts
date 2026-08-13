@@ -1,56 +1,5 @@
-import type { TArray } from "./types/Array.js";
-import type { TBoolean } from "./types/Boolean.js";
 import type { TElement } from "./types/Element.js";
-import type { TFunction } from "./types/Function.js";
-import type { TGeneric } from "./types/Generic.js";
-import type { TInterface } from "./types/Interface.js";
-import type { TNull } from "./types/Null.js";
-import type { TNumber } from "./types/Number.js";
-import type { TObject } from "./types/Object.js";
-import type { TRef } from "./types/Ref.js";
-import type { TRest } from "./types/Rest.js";
-import type { TString } from "./types/String.js";
-import type { TUnion } from "./types/Union.js";
-import type { TUnknown } from "./types/Unknown.js";
-import type { TVoid } from "./types/Void.js";
-
-/**
- * A type a schema may hold, which is the set every generator can read.
- *
- * Closed, so a generator can be exhaustive: a kind added here without a case
- * to read it is a compile error where it is read, rather than a throw where it
- * is generated.
- *
- * Narrower than the languages that read it for the same reason: five of them
- * do, and a kind is only worth having where all of them can say it.
- */
-export type TSchema =
-  | TString
-  | TNumber
-  | TBoolean
-  | TUnion
-  | TInterface
-  | TObject
-  | TArray
-  | TFunction
-  | TVoid
-  | TNull
-  | TUnknown
-  | TRef
-  | TRest
-  | TGeneric;
-
-/**
- * What a node may be given when one is built, and what one carries.
- *
- * One key, because it is all any two nodes have in common: what a generator
- * writes a doc comment from, and what JSON Schema already calls it. Declared
- * rather than left off and dug back out of the built node — what a node may
- * carry is a closed list here, so there is nothing to dig for.
- */
-export interface TSchemaOptions {
-  readonly description?: string;
-}
+import type { TSchema } from "./TSchema.js";
 
 /**
  * What a target draws, and what each element accepts.

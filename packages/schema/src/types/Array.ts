@@ -1,5 +1,6 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TSchema } from "../TSchema.js";
 
 export interface TArray<
   Items extends TSchema = TSchema,

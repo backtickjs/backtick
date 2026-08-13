@@ -1,6 +1,7 @@
 import { isType } from "../helpers/isType.js";
 import type { TParameter } from "./Parameter.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TSchema } from "../TSchema.js";
 
 export interface TGeneric<
   Parameters extends readonly TParameter[] = TParameter[],

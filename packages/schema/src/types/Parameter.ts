@@ -1,7 +1,8 @@
 import { Unknown } from "./Unknown.js";
 import { isType } from "../helpers/isType.js";
 import type { TUnknown } from "./Unknown.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TSchema } from "../TSchema.js";
 
 export interface TParameter<
   Name extends string = string,

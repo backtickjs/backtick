@@ -1,7 +1,7 @@
 import type { TBoolean } from "./Boolean.js";
 import type { TNumber } from "./Number.js";
 import type { TString } from "./String.js";
-import type { TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../SchemaOptions.js";
 
 export type LiteralValue = string | number | boolean;
 
