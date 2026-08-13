@@ -1,7 +1,7 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../Schema.js";
 
-export interface TNumber extends TSchema {
+export interface TNumber extends TSchemaOptions {
   readonly type: "number";
   readonly const?: number;
 }

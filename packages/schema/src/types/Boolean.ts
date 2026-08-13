@@ -1,7 +1,7 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../Schema.js";
 
-export interface TBoolean extends TSchema {
+export interface TBoolean extends TSchemaOptions {
   readonly type: "boolean";
   readonly const?: boolean;
 }

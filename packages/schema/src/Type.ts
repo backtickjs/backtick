@@ -17,7 +17,7 @@ import { Union } from "./types/Union.js";
 import { Void } from "./types/Void.js";
 
 /**
- * How a schema is written: the nodes of `SchemaNode` and nothing else.
+ * How a schema is written: the nodes of `TSchema` and nothing else.
  *
  * Adding a kind is adding a case to every generator first, and a member here
  * second. `Unknown` is absent because nothing a target writes needs it — a

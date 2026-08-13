@@ -1,11 +1,11 @@
 import { isType } from "../helpers/isType.js";
 import type { TParameter } from "./Parameter.js";
-import type { SchemaNode, TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TGeneric<
   Parameters extends readonly TParameter[] = TParameter[],
-  Expression extends SchemaNode = SchemaNode,
-> extends TSchema {
+  Expression extends TSchema = TSchema,
+> extends TSchemaOptions {
   readonly type: "generic";
   readonly parameters: Parameters;
   readonly expression: Expression;
@@ -13,7 +13,7 @@ export interface TGeneric<
 
 export function Generic<
   Parameters extends readonly TParameter[],
-  Expression extends SchemaNode,
+  Expression extends TSchema,
 >(
   parameters: [...Parameters],
   expression: Expression,

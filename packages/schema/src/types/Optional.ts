@@ -1,11 +1,11 @@
 import type { TProperties } from "./Properties.js";
-import type { SchemaNode } from "../Schema.js";
+import type { TSchema } from "../Schema.js";
 
-export type TOptional<Node extends SchemaNode = SchemaNode> = Node & {
+export type TOptional<Node extends TSchema = TSchema> = Node & {
   readonly "~optional": true;
 };
 
-export function Optional<Node extends SchemaNode>(node: Node): TOptional<Node> {
+export function Optional<Node extends TSchema>(node: Node): TOptional<Node> {
   const marked = { ...node };
   Object.defineProperty(marked, "~optional", {
     value: true,
@@ -16,7 +16,7 @@ export function Optional<Node extends SchemaNode>(node: Node): TOptional<Node> {
   return marked as TOptional<Node>;
 }
 
-export function IsOptional(node: SchemaNode): boolean {
+export function IsOptional(node: TSchema): boolean {
   return "~optional" in node;
 }
 

@@ -1,14 +1,14 @@
 import { isType } from "../helpers/isType.js";
-import type { SchemaNode, TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TElement<
-  Props extends SchemaNode = SchemaNode,
-> extends TSchema {
+  Props extends TSchema = TSchema,
+> extends TSchemaOptions {
   readonly type: "element";
   readonly props: Props;
 }
 
-export function Element<Props extends SchemaNode>(
+export function Element<Props extends TSchema>(
   props: Props,
   options: TSchemaOptions = {},
 ): TElement<Props> {

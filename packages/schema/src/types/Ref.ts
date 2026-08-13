@@ -1,7 +1,7 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../Schema.js";
 
-export interface TRef<Name extends string = string> extends TSchema {
+export interface TRef<Name extends string = string> extends TSchemaOptions {
   readonly type: "ref";
   readonly $ref: Name;
 }

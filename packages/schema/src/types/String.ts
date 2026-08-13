@@ -1,7 +1,7 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../Schema.js";
 
-export interface TString extends TSchema {
+export interface TString extends TSchemaOptions {
   readonly type: "string";
   readonly const?: string;
 }

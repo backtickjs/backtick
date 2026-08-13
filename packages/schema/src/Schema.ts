@@ -24,7 +24,7 @@ import type { TVoid } from "./types/Void.js";
  * Narrower than the languages that read it for the same reason: five of them
  * do, and a kind is only worth having where all of them can say it.
  */
-export type SchemaNode =
+export type TSchema =
   | TString
   | TNumber
   | TBoolean
@@ -41,25 +41,16 @@ export type SchemaNode =
   | TGeneric;
 
 /**
- * What every node is, beneath the one thing each of them says.
+ * What a node may be given when one is built, and what one carries.
  *
  * One key, because it is all any two nodes have in common: what a generator
  * writes a doc comment from, and what JSON Schema already calls it. Declared
  * rather than left off and dug back out of the built node — what a node may
  * carry is a closed list here, so there is nothing to dig for.
  */
-export interface TSchema {
+export interface TSchemaOptions {
   readonly description?: string;
 }
-
-/**
- * What a node may be given when one is built.
- *
- * The keys a node carries, under the name that says where they are being
- * passed rather than what they are on. Everything settable ends up on the
- * node, which is why this extends that and not the other way about.
- */
-export interface TSchemaOptions extends TSchema {}
 
 /**
  * What a target draws, and what each element accepts.
@@ -72,9 +63,9 @@ export interface TSchemaOptions extends TSchema {}
  */
 export interface Schema {
   /** Named types the rest refers to by `$ref`. */
-  readonly aliases: Readonly<Record<string, SchemaNode>>;
+  readonly aliases: Readonly<Record<string, TSchema>>;
   /** Groups of properties, each with what it extends. */
-  readonly interfaces: Readonly<Record<string, SchemaNode>>;
+  readonly interfaces: Readonly<Record<string, TSchema>>;
   /** Every tag, and what it accepts. */
   readonly elements: Readonly<Record<string, TElement>>;
 }

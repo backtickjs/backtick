@@ -1,12 +1,14 @@
 import { isType } from "../helpers/isType.js";
-import type { SchemaNode, TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchema, TSchemaOptions } from "../Schema.js";
 
-export interface TArray<Items extends SchemaNode = SchemaNode> extends TSchema {
+export interface TArray<
+  Items extends TSchema = TSchema,
+> extends TSchemaOptions {
   readonly type: "array";
   readonly items: Items;
 }
 
-export function Array<Items extends SchemaNode>(
+export function Array<Items extends TSchema>(
   items: Items,
   options: TSchemaOptions = {},
 ): TArray<Items> {

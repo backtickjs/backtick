@@ -1,14 +1,14 @@
 import { isType } from "../helpers/isType.js";
-import type { SchemaNode, TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TUnion<
-  Anyof extends readonly SchemaNode[] = SchemaNode[],
-> extends TSchema {
+  Anyof extends readonly TSchema[] = TSchema[],
+> extends TSchemaOptions {
   readonly type: "union";
   readonly anyOf: Anyof;
 }
 
-export function Union<Anyof extends readonly SchemaNode[]>(
+export function Union<Anyof extends readonly TSchema[]>(
   anyOf: [...Anyof],
   options: TSchemaOptions = {},
 ): TUnion<Anyof> {

@@ -1,7 +1,7 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TSchemaOptions } from "../Schema.js";
 
-export interface TNull extends TSchema {
+export interface TNull extends TSchemaOptions {
   readonly type: "null";
 }
 

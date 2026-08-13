@@ -13,7 +13,7 @@ import { IsUnion } from "../types/Union.js";
 import { IsUnknown } from "../types/Unknown.js";
 import { IsVoid } from "../types/Void.js";
 import type { TParameter } from "../types/Parameter.js";
-import type { Schema, SchemaNode } from "../Schema.js";
+import type { Schema, TSchema } from "../Schema.js";
 
 // A schema to the `jsx-runtime` an app writes against.
 //
@@ -31,7 +31,7 @@ export function jsx(schema: Schema): string {
   const { aliases, elements, interfaces } = schema;
 
   /** What a schema node reads as, in TypeScript. */
-  function type(node: SchemaNode): string {
+  function type(node: TSchema): string {
     // A `$ref` is a name, whether the document declares it or the boundary
     // supplies it — `JsxElement` is the second kind, and reads no differently.
     if (IsRef(node)) {
@@ -96,7 +96,7 @@ export function jsx(schema: Schema): string {
     if (IsUnknown(node)) {
       throw new Error("an unknown may only stand as a type parameter's bound");
     }
-    // Exhaustive: a kind added to `SchemaNode` without a case above fails
+    // Exhaustive: a kind added to `TSchema` without a case above fails
     // here, where it is read, rather than at the throw below.
     const unread: never = node;
     throw new Error(`unhandled node: ${JSON.stringify(unread).slice(0, 60)}`);
@@ -110,7 +110,7 @@ export function jsx(schema: Schema): string {
    * schema that comes to have something to say about a parameter says it with
    * a node for the purpose.
    */
-  function parameter(node: SchemaNode, at: number): string {
+  function parameter(node: TSchema, at: number): string {
     if (IsRest(node)) {
       return `...args: ${type(node.items)}[]`;
     }
@@ -132,7 +132,7 @@ export function jsx(schema: Schema): string {
   }
 
   /** What an interface extends, which an object never does. */
-  function bases(node: SchemaNode): readonly string[] {
+  function bases(node: TSchema): readonly string[] {
     return IsInterface(node) ? node.extends.map(baseName) : [];
   }
 
@@ -144,7 +144,7 @@ export function jsx(schema: Schema): string {
    * ones the schema declares. Identity, not shape: two interfaces holding the
    * same properties are still two names.
    */
-  function baseName(base: SchemaNode): string {
+  function baseName(base: TSchema): string {
     if (IsRef(base)) {
       return base.$ref;
     }
@@ -157,8 +157,8 @@ export function jsx(schema: Schema): string {
 
   /** The properties a node holds, and whether each was written required. */
   function members(
-    node: SchemaNode,
-  ): { name: string; node: SchemaNode; required: boolean }[] {
+    node: TSchema,
+  ): { name: string; node: TSchema; required: boolean }[] {
     if (!IsInterface(node) && !IsObject(node)) {
       return [];
     }
@@ -175,7 +175,7 @@ export function jsx(schema: Schema): string {
     /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
 
   /** What a property admits, which is where the boundary is drawn. */
-  function property(name: string, node: SchemaNode, required: boolean): string {
+  function property(name: string, node: TSchema, required: boolean): string {
     const optional = required ? "" : "?";
     // Which prop holds what is written inside a tag is JSX's own rule — the one
     // `JSX.ElementChildrenAttribute` names — so the *wrapper* is decided here and
@@ -197,7 +197,7 @@ export function jsx(schema: Schema): string {
    * every other prop — the `Prop<T>`/`Client<T>`/`Children<T>` wrapping is JSX's
    * rule about props, not a rule about interfaces.
    */
-  function elementProps(node: SchemaNode): string {
+  function elementProps(node: TSchema): string {
     if (IsRef(node)) {
       return node.$ref;
     }
