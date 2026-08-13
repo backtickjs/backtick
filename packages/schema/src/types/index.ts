@@ -15,6 +15,7 @@ export {
   type TOptional,
 } from "./Optional.js";
 export { Parameter, IsParameter, type TParameter } from "./Parameter.js";
+export type { TProperties } from "./Properties.js";
 export { Ref, IsRef, type TRef } from "./Ref.js";
 export { Rest, IsRest, type TRest } from "./Rest.js";
 export { String, IsString, type TString } from "./String.js";

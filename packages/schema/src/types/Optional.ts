@@ -1,4 +1,5 @@
-import type { SchemaNode, TProperties } from "../Schema.js";
+import type { TProperties } from "./Properties.js";
+import type { SchemaNode } from "../Schema.js";
 
 export type TOptional<Node extends SchemaNode = SchemaNode> = Node & {
   readonly "~optional": true;

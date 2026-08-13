@@ -42,9 +42,6 @@ export type SchemaNode =
   | TRest
   | TGeneric;
 
-/** What a group of properties holds, each name against what it admits. */
-export type TProperties = Readonly<Record<string, SchemaNode>>;
-
 /**
  * What every node is, beneath the one thing each of them says.
  *
