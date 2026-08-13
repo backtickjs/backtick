@@ -27,7 +27,7 @@ test("labels an entry by its table position by default", () => {
 });
 
 test("labels an entry by where its script was written on request", () => {
-  const located = buildBundle(ir, { functionLabels: "location" });
+  const located = buildBundle(ir, { stableFunctionLabels: true });
   assert.deepEqual(Object.keys(located.functions), ["abc:3:7"]);
   // The reference names the same thing, so a bundle reads on its own.
   assert.deepEqual(located.root, [NodeKind.ApplyFunction, "abc:3:7", []]);

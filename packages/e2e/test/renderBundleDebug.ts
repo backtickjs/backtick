@@ -24,7 +24,8 @@ export function renderBundleDebug(bundle: Bundle): string {
 
 // A label as this view names it. One table, so one sigil — a drawing entry's
 // label already says which it is (`t0`). These snapshots use
-// `functionLabels: "index"`, so a label is already short and stands for itself.
+// `run` rather than located labels, so a label is already short and stands
+// for itself.
 const fnLabel = (label: string): string => `#f${label}`;
 
 // A node, as opposed to plain JSON carrying itself: every node is an array,

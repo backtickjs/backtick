@@ -41,7 +41,7 @@ describe("bundle", () => {
       it(file, async () => {
         const base = file.slice(0, -extname(file).length);
         const script = await importFixture(dir, file);
-        const bundle = await bundler.run(script, { functionLabels: "index" });
+        const bundle = await bundler.run(script);
         matchFileSnapshot(
           JSON.stringify(bundle, null, 2),
           join(dir, `${base}.bundle`),
@@ -65,7 +65,7 @@ describe("bundle", () => {
         const script = await importFixture(bundleErrorDir, file);
         let message: string | null = null;
         try {
-          await bundler.run(script, { functionLabels: "index" });
+          await bundler.run(script);
         } catch (error) {
           message = error instanceof Error ? error.message : String(error);
         }

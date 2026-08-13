@@ -25,7 +25,7 @@ import type {
   BundleVariableDeclarationNode,
   FunctionLabel,
 } from "./Bundle.js";
-import type { BundleOptions } from "../bundler.js";
+import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 
 // What a tree expression renders against: the entry being materialized, and
@@ -75,7 +75,10 @@ const noInstance = (): TreeScope => ({ target: null, params: new Set() });
 //     `$i`: the body fills the hole with `$i()` and every reference passes that
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
-export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
+export function buildBundle(
+  ir: Ir,
+  features: ExperimentalFeatures = {},
+): Bundle {
   // A binding key in a call site's own expression. Never a capture read: an
   // entry resolves its captures against its own parameters (see
   // `lowerScriptBody`) — out here a key is a name in the expression being
@@ -285,13 +288,13 @@ export function buildBundle(ir: Ir, options: BundleOptions = {}): Bundle {
   const bodies = new Map<IrScriptEntry, BundleArrowFunctionNode>();
 
   // A script entry's label, either of the two things that name one (see
-  // `BundleOptions.functionLabels`): where it landed in the table, or where it
-  // was written. Only the second is the same across responses — a table position
-  // follows the order this composition reached things — so it is what a client
-  // holding an entry from an earlier response can recognize.
+  // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
+  // where it was written. Only the second is the same across responses — a
+  // table position follows the order this composition reached things — so it is
+  // what a client holding an entry from an earlier response can recognize.
   const scriptIndex = new Map(ir.scripts.map((script, at) => [script, at]));
   const fnLabel = (target: IrScriptEntry): FunctionLabel =>
-    options.functionLabels === "location"
+    features.stableFunctionLabels === true
       ? locKey(target.fileHash, target.loc)
       : `${scriptIndex.get(target)}`;
 
