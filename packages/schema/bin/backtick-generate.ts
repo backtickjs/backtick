@@ -4,23 +4,29 @@ import { pathToFileURL } from "node:url";
 import { format } from "prettier";
 import { generate, type ClientSchema } from "../dist/index.js";
 
-// Every target's `pnpm generate`, run from the package it generates for.
+// Every project's `pnpm generate`, run from the project it generates for.
 //
-// `backtick-tsc` next door is a plain `#!/usr/bin/env node` launcher over its
-// compiled `dist`. This one cannot be: the flag is for the *target's*
-// `schema/index.ts`, which is TypeScript imported here at run time, so
-// compiling this file would not remove the need for it. One place to drop the
-// flag when stripping stops being experimental.
+// Not a compiled launcher like `backtick-tsc` next door: the flag is for the
+// project's schema, which is TypeScript imported here at run time, so
+// compiling this file would not remove the need for it.
 //
-// By convention rather than by configuration: a target keeps its schema at
-// `schema/index.ts` and gets the same artifacts in the same places, so there
-// is one of these and not one per SDK. What differs between targets is the
-// schema, which is the point.
+// By convention rather than by configuration: a project keeps its schema
+// beside its `package.json` and gets the same artifacts in the same places, so
+// there is one of these and not one per SDK.
+
+const SOURCE = "backtick.schema.ts";
 
 const root = pathToFileURL(`${process.cwd()}/`);
 const at = (path: string) => new URL(path, root);
 
-const schema: ClientSchema = await import(at("schema/index.ts").href);
+// One export rather than the module itself, so the annotation on it is what
+// checks the shape: the specifier here is built at run time, so nothing
+// resolves it and a missing field would otherwise reach the artifact.
+const module: { schema?: ClientSchema } = await import(at(SOURCE).href);
+const { schema } = module;
+if (schema === undefined) {
+  throw new Error(`${SOURCE} must export a schema.`);
+}
 
 /** Written formatted, so what is checked in is what `format:check` expects. */
 async function write(path: string, body: string): Promise<void> {
@@ -29,9 +35,8 @@ async function write(path: string, body: string): Promise<void> {
   console.log(`${path}: ${body.split("\n").length} lines`);
 }
 
-// What an app writes against.
 await write("src/jsx-runtime/index.ts", generate.jsx(schema));
 
-// And what everything else reads: beside the schema it came from, so a change
-// to what a target draws is a change someone can see in review.
-await write("schema/index.json", generate.json(schema));
+// Beside the schema it came from, so a change to what a client can do is a
+// change someone can see in review.
+await write("backtick.schema.json", generate.json(schema));

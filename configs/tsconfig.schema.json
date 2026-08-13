@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.base.json",
+  // A package's `backtick.schema.ts`, which `pnpm generate` reads and which
+  // nothing else compiles: it is outside `src` on purpose, so the build neither
+  // typechecks it nor ships it, and this project exists to do the first without
+  // the second. Emitted to a cache, since only the checking is wanted.
+  "compilerOptions": {
+    "rootDir": "${configDir}",
+    "outDir": "${configDir}/node_modules/.cache/ts_schema/out"
+  },
+  "include": ["${configDir}/backtick.schema.ts"]
+}

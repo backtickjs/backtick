@@ -1,0 +1,4297 @@
+{
+  "extends": [],
+  "types": {
+    "Booleanish": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "const": "true"
+        },
+        {
+          "type": "string",
+          "const": "false"
+        }
+      ]
+    },
+    "Numeric": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "AriaRole": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "alert"
+        },
+        {
+          "type": "string",
+          "const": "alertdialog"
+        },
+        {
+          "type": "string",
+          "const": "application"
+        },
+        {
+          "type": "string",
+          "const": "article"
+        },
+        {
+          "type": "string",
+          "const": "banner"
+        },
+        {
+          "type": "string",
+          "const": "button"
+        },
+        {
+          "type": "string",
+          "const": "cell"
+        },
+        {
+          "type": "string",
+          "const": "checkbox"
+        },
+        {
+          "type": "string",
+          "const": "columnheader"
+        },
+        {
+          "type": "string",
+          "const": "combobox"
+        },
+        {
+          "type": "string",
+          "const": "complementary"
+        },
+        {
+          "type": "string",
+          "const": "contentinfo"
+        },
+        {
+          "type": "string",
+          "const": "definition"
+        },
+        {
+          "type": "string",
+          "const": "dialog"
+        },
+        {
+          "type": "string",
+          "const": "directory"
+        },
+        {
+          "type": "string",
+          "const": "document"
+        },
+        {
+          "type": "string",
+          "const": "feed"
+        },
+        {
+          "type": "string",
+          "const": "figure"
+        },
+        {
+          "type": "string",
+          "const": "form"
+        },
+        {
+          "type": "string",
+          "const": "grid"
+        },
+        {
+          "type": "string",
+          "const": "gridcell"
+        },
+        {
+          "type": "string",
+          "const": "group"
+        },
+        {
+          "type": "string",
+          "const": "heading"
+        },
+        {
+          "type": "string",
+          "const": "img"
+        },
+        {
+          "type": "string",
+          "const": "link"
+        },
+        {
+          "type": "string",
+          "const": "list"
+        },
+        {
+          "type": "string",
+          "const": "listbox"
+        },
+        {
+          "type": "string",
+          "const": "listitem"
+        },
+        {
+          "type": "string",
+          "const": "log"
+        },
+        {
+          "type": "string",
+          "const": "main"
+        },
+        {
+          "type": "string",
+          "const": "marquee"
+        },
+        {
+          "type": "string",
+          "const": "math"
+        },
+        {
+          "type": "string",
+          "const": "menu"
+        },
+        {
+          "type": "string",
+          "const": "menubar"
+        },
+        {
+          "type": "string",
+          "const": "menuitem"
+        },
+        {
+          "type": "string",
+          "const": "menuitemcheckbox"
+        },
+        {
+          "type": "string",
+          "const": "menuitemradio"
+        },
+        {
+          "type": "string",
+          "const": "navigation"
+        },
+        {
+          "type": "string",
+          "const": "none"
+        },
+        {
+          "type": "string",
+          "const": "note"
+        },
+        {
+          "type": "string",
+          "const": "option"
+        },
+        {
+          "type": "string",
+          "const": "presentation"
+        },
+        {
+          "type": "string",
+          "const": "progressbar"
+        },
+        {
+          "type": "string",
+          "const": "radio"
+        },
+        {
+          "type": "string",
+          "const": "radiogroup"
+        },
+        {
+          "type": "string",
+          "const": "region"
+        },
+        {
+          "type": "string",
+          "const": "row"
+        },
+        {
+          "type": "string",
+          "const": "rowgroup"
+        },
+        {
+          "type": "string",
+          "const": "rowheader"
+        },
+        {
+          "type": "string",
+          "const": "scrollbar"
+        },
+        {
+          "type": "string",
+          "const": "search"
+        },
+        {
+          "type": "string",
+          "const": "searchbox"
+        },
+        {
+          "type": "string",
+          "const": "separator"
+        },
+        {
+          "type": "string",
+          "const": "slider"
+        },
+        {
+          "type": "string",
+          "const": "spinbutton"
+        },
+        {
+          "type": "string",
+          "const": "status"
+        },
+        {
+          "type": "string",
+          "const": "switch"
+        },
+        {
+          "type": "string",
+          "const": "tab"
+        },
+        {
+          "type": "string",
+          "const": "table"
+        },
+        {
+          "type": "string",
+          "const": "tablist"
+        },
+        {
+          "type": "string",
+          "const": "tabpanel"
+        },
+        {
+          "type": "string",
+          "const": "term"
+        },
+        {
+          "type": "string",
+          "const": "textbox"
+        },
+        {
+          "type": "string",
+          "const": "timer"
+        },
+        {
+          "type": "string",
+          "const": "toolbar"
+        },
+        {
+          "type": "string",
+          "const": "tooltip"
+        },
+        {
+          "type": "string",
+          "const": "tree"
+        },
+        {
+          "type": "string",
+          "const": "treegrid"
+        },
+        {
+          "type": "string",
+          "const": "treeitem"
+        }
+      ]
+    },
+    "ReferrerPolicy": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "string",
+          "const": ""
+        },
+        {
+          "type": "string",
+          "const": "no-referrer"
+        },
+        {
+          "type": "string",
+          "const": "no-referrer-when-downgrade"
+        },
+        {
+          "type": "string",
+          "const": "origin"
+        },
+        {
+          "type": "string",
+          "const": "origin-when-cross-origin"
+        },
+        {
+          "type": "string",
+          "const": "same-origin"
+        },
+        {
+          "type": "string",
+          "const": "strict-origin"
+        },
+        {
+          "type": "string",
+          "const": "strict-origin-when-cross-origin"
+        },
+        {
+          "type": "string",
+          "const": "unsafe-url"
+        }
+      ]
+    },
+    "CrossOrigin": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "anonymous"
+        },
+        {
+          "type": "string",
+          "const": "use-credentials"
+        },
+        {
+          "type": "string",
+          "const": ""
+        }
+      ]
+    },
+    "Target": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "_self"
+        },
+        {
+          "type": "string",
+          "const": "_blank"
+        },
+        {
+          "type": "string",
+          "const": "_parent"
+        },
+        {
+          "type": "string",
+          "const": "_top"
+        }
+      ]
+    },
+    "AriaAttributes": {
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "aria-activedescendant": {
+          "type": "string"
+        },
+        "aria-atomic": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-autocomplete": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "inline"
+            },
+            {
+              "type": "string",
+              "const": "list"
+            },
+            {
+              "type": "string",
+              "const": "both"
+            }
+          ]
+        },
+        "aria-braillelabel": {
+          "type": "string"
+        },
+        "aria-brailleroledescription": {
+          "type": "string"
+        },
+        "aria-busy": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-checked": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "mixed"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            }
+          ]
+        },
+        "aria-colcount": {
+          "type": "number"
+        },
+        "aria-colindex": {
+          "type": "number"
+        },
+        "aria-colindextext": {
+          "type": "string"
+        },
+        "aria-colspan": {
+          "type": "number"
+        },
+        "aria-controls": {
+          "type": "string"
+        },
+        "aria-current": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "page"
+            },
+            {
+              "type": "string",
+              "const": "step"
+            },
+            {
+              "type": "string",
+              "const": "location"
+            },
+            {
+              "type": "string",
+              "const": "date"
+            },
+            {
+              "type": "string",
+              "const": "time"
+            }
+          ]
+        },
+        "aria-describedby": {
+          "type": "string"
+        },
+        "aria-description": {
+          "type": "string"
+        },
+        "aria-details": {
+          "type": "string"
+        },
+        "aria-disabled": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-errormessage": {
+          "type": "string"
+        },
+        "aria-expanded": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-flowto": {
+          "type": "string"
+        },
+        "aria-haspopup": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "menu"
+            },
+            {
+              "type": "string",
+              "const": "listbox"
+            },
+            {
+              "type": "string",
+              "const": "tree"
+            },
+            {
+              "type": "string",
+              "const": "grid"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "aria-hidden": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-invalid": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            },
+            {
+              "type": "string",
+              "const": "grammar"
+            },
+            {
+              "type": "string",
+              "const": "spelling"
+            }
+          ]
+        },
+        "aria-keyshortcuts": {
+          "type": "string"
+        },
+        "aria-label": {
+          "type": "string"
+        },
+        "aria-labelledby": {
+          "type": "string"
+        },
+        "aria-level": {
+          "type": "number"
+        },
+        "aria-live": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "off"
+            },
+            {
+              "type": "string",
+              "const": "assertive"
+            },
+            {
+              "type": "string",
+              "const": "polite"
+            }
+          ]
+        },
+        "aria-modal": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-multiline": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-multiselectable": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-orientation": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "horizontal"
+            },
+            {
+              "type": "string",
+              "const": "vertical"
+            }
+          ]
+        },
+        "aria-owns": {
+          "type": "string"
+        },
+        "aria-placeholder": {
+          "type": "string"
+        },
+        "aria-posinset": {
+          "type": "number"
+        },
+        "aria-pressed": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "false"
+            },
+            {
+              "type": "string",
+              "const": "mixed"
+            },
+            {
+              "type": "string",
+              "const": "true"
+            }
+          ]
+        },
+        "aria-readonly": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-relevant": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "additions"
+            },
+            {
+              "type": "string",
+              "const": "additions removals"
+            },
+            {
+              "type": "string",
+              "const": "additions text"
+            },
+            {
+              "type": "string",
+              "const": "all"
+            },
+            {
+              "type": "string",
+              "const": "removals"
+            },
+            {
+              "type": "string",
+              "const": "removals additions"
+            },
+            {
+              "type": "string",
+              "const": "removals text"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            },
+            {
+              "type": "string",
+              "const": "text additions"
+            },
+            {
+              "type": "string",
+              "const": "text removals"
+            }
+          ]
+        },
+        "aria-required": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-roledescription": {
+          "type": "string"
+        },
+        "aria-rowcount": {
+          "type": "number"
+        },
+        "aria-rowindex": {
+          "type": "number"
+        },
+        "aria-rowindextext": {
+          "type": "string"
+        },
+        "aria-rowspan": {
+          "type": "number"
+        },
+        "aria-selected": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "aria-setsize": {
+          "type": "number"
+        },
+        "aria-sort": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "ascending"
+            },
+            {
+              "type": "string",
+              "const": "descending"
+            },
+            {
+              "type": "string",
+              "const": "other"
+            }
+          ]
+        },
+        "aria-valuemax": {
+          "type": "number"
+        },
+        "aria-valuemin": {
+          "type": "number"
+        },
+        "aria-valuenow": {
+          "type": "number"
+        },
+        "aria-valuetext": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "Events": {
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "oncopy": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncut": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpaste": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncompositionend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncompositionstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncompositionupdate": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onblur": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onfocus": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onfocusin": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onfocusout": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onbeforeinput": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onchange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oninput": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oninvalid": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onreset": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onselect": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onsubmit": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onerror": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onload": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onkeydown": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onkeypress": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onkeyup": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onabort": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncanplay": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncanplaythrough": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondurationchange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onemptied": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onended": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onloadeddata": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onloadedmetadata": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onloadstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpause": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onplay": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onplaying": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onprogress": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onratechange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onseeked": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onseeking": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onstalled": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onsuspend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontimeupdate": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onvolumechange": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onwaiting": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onauxclick": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onclick": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "oncontextmenu": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondblclick": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmousedown": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseenter": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseleave": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmousemove": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseout": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseover": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onmouseup": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondrag": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragenter": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragleave": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragover": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondragstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ondrop": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchcancel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchmove": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontouchstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ongotpointercapture": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onlostpointercapture": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointercancel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerdown": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerenter": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerleave": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointermove": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerout": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerover": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onpointerup": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onscroll": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onscrollend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onwheel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onanimationend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onanimationiteration": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onanimationstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitioncancel": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitionend": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitionrun": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontransitionstart": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "onbeforetoggle": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "ontoggle": {
+          "type": "function",
+          "parameters": [],
+          "returnType": {
+            "type": "void"
+          }
+        }
+      },
+      "required": []
+    },
+    "GlobalAttributes": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "AriaAttributes"
+        },
+        {
+          "type": "ref",
+          "$ref": "Events"
+        }
+      ],
+      "properties": {
+        "accesskey": {
+          "type": "string"
+        },
+        "autocapitalize": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "off"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "on"
+            },
+            {
+              "type": "string",
+              "const": "sentences"
+            },
+            {
+              "type": "string",
+              "const": "words"
+            },
+            {
+              "type": "string",
+              "const": "characters"
+            }
+          ]
+        },
+        "autocorrect": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "on"
+            },
+            {
+              "type": "string",
+              "const": "off"
+            }
+          ]
+        },
+        "autofocus": {
+          "type": "boolean"
+        },
+        "class": {
+          "type": "string"
+        },
+        "contenteditable": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "ref",
+              "$ref": "Booleanish"
+            },
+            {
+              "type": "string",
+              "const": "inherit"
+            },
+            {
+              "type": "string",
+              "const": "plaintext-only"
+            }
+          ]
+        },
+        "dir": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "ltr"
+            },
+            {
+              "type": "string",
+              "const": "rtl"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "draggable": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "enterkeyhint": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "enter"
+            },
+            {
+              "type": "string",
+              "const": "done"
+            },
+            {
+              "type": "string",
+              "const": "go"
+            },
+            {
+              "type": "string",
+              "const": "next"
+            },
+            {
+              "type": "string",
+              "const": "previous"
+            },
+            {
+              "type": "string",
+              "const": "search"
+            },
+            {
+              "type": "string",
+              "const": "send"
+            }
+          ]
+        },
+        "exportparts": {
+          "type": "string"
+        },
+        "hidden": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "until-found"
+            }
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "inert": {
+          "type": "boolean"
+        },
+        "inputmode": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            },
+            {
+              "type": "string",
+              "const": "tel"
+            },
+            {
+              "type": "string",
+              "const": "url"
+            },
+            {
+              "type": "string",
+              "const": "email"
+            },
+            {
+              "type": "string",
+              "const": "numeric"
+            },
+            {
+              "type": "string",
+              "const": "decimal"
+            },
+            {
+              "type": "string",
+              "const": "search"
+            }
+          ]
+        },
+        "is": {
+          "type": "string"
+        },
+        "itemid": {
+          "type": "string"
+        },
+        "itemprop": {
+          "type": "string"
+        },
+        "itemref": {
+          "type": "string"
+        },
+        "itemscope": {
+          "type": "boolean"
+        },
+        "itemtype": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "part": {
+          "type": "string"
+        },
+        "popover": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": ""
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            },
+            {
+              "type": "string",
+              "const": "manual"
+            },
+            {
+              "type": "string",
+              "const": "hint"
+            }
+          ]
+        },
+        "role": {
+          "type": "ref",
+          "$ref": "AriaRole"
+        },
+        "slot": {
+          "type": "string"
+        },
+        "spellcheck": {
+          "type": "ref",
+          "$ref": "Booleanish"
+        },
+        "style": {
+          "type": "string"
+        },
+        "tabindex": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "translate": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "yes"
+            },
+            {
+              "type": "string",
+              "const": "no"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "VoidProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "GlobalAttributes"
+        }
+      ],
+      "properties": {},
+      "required": []
+    },
+    "HtmlProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "GlobalAttributes"
+        }
+      ],
+      "properties": {
+        "children": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "ref",
+              "$ref": "JsxElement"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "FragmentProps": {
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "children": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "ref",
+              "$ref": "JsxElement"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "AnchorProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "download": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "hreflang": {
+          "type": "string"
+        },
+        "media": {
+          "type": "string"
+        },
+        "ping": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "type": "ref",
+          "$ref": "ReferrerPolicy"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "target": {
+          "type": "ref",
+          "$ref": "Target"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "AreaProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "alt": {
+          "type": "string"
+        },
+        "coords": {
+          "type": "string"
+        },
+        "download": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "type": "ref",
+          "$ref": "ReferrerPolicy"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "shape": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "rect"
+            },
+            {
+              "type": "string",
+              "const": "circle"
+            },
+            {
+              "type": "string",
+              "const": "poly"
+            },
+            {
+              "type": "string",
+              "const": "default"
+            }
+          ]
+        },
+        "target": {
+          "type": "ref",
+          "$ref": "Target"
+        }
+      },
+      "required": []
+    },
+    "BaseProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "target": {
+          "type": "ref",
+          "$ref": "Target"
+        }
+      },
+      "required": []
+    },
+    "BlockquoteProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "ButtonProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "formaction": {
+          "type": "string"
+        },
+        "formenctype": {
+          "type": "string"
+        },
+        "formmethod": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "get"
+            },
+            {
+              "type": "string",
+              "const": "post"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "formnovalidate": {
+          "type": "boolean"
+        },
+        "formtarget": {
+          "type": "ref",
+          "$ref": "Target"
+        },
+        "name": {
+          "type": "string"
+        },
+        "popovertarget": {
+          "type": "string"
+        },
+        "popovertargetaction": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "toggle"
+            },
+            {
+              "type": "string",
+              "const": "show"
+            },
+            {
+              "type": "string",
+              "const": "hide"
+            }
+          ]
+        },
+        "type": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "submit"
+            },
+            {
+              "type": "string",
+              "const": "reset"
+            },
+            {
+              "type": "string",
+              "const": "button"
+            }
+          ]
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "CanvasProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "ColProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "span": {
+          "type": "number"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "ColgroupProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "span": {
+          "type": "number"
+        }
+      },
+      "required": []
+    },
+    "DataProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "DelProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "DetailsProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "open": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "DialogProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "closedby": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "any"
+            },
+            {
+              "type": "string",
+              "const": "closerequest"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            }
+          ]
+        },
+        "open": {
+          "type": "boolean"
+        }
+      },
+      "required": []
+    },
+    "EmbedProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "src": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "FieldsetProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "FormProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "accept-charset": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "autocomplete": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "on"
+            },
+            {
+              "type": "string",
+              "const": "off"
+            }
+          ]
+        },
+        "enctype": {
+          "type": "string"
+        },
+        "method": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "get"
+            },
+            {
+              "type": "string",
+              "const": "post"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "novalidate": {
+          "type": "boolean"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "target": {
+          "type": "ref",
+          "$ref": "Target"
+        }
+      },
+      "required": []
+    },
+    "HtmlElementProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "manifest": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "IframeProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "allow": {
+          "type": "string"
+        },
+        "allowfullscreen": {
+          "type": "boolean"
+        },
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "loading": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "eager"
+            },
+            {
+              "type": "string",
+              "const": "lazy"
+            }
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "type": "ref",
+          "$ref": "ReferrerPolicy"
+        },
+        "sandbox": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srcdoc": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "ImgProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "alt": {
+          "type": "string"
+        },
+        "crossorigin": {
+          "type": "ref",
+          "$ref": "CrossOrigin"
+        },
+        "decoding": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "async"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            },
+            {
+              "type": "string",
+              "const": "sync"
+            }
+          ]
+        },
+        "fetchpriority": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "high"
+            },
+            {
+              "type": "string",
+              "const": "low"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "loading": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "eager"
+            },
+            {
+              "type": "string",
+              "const": "lazy"
+            }
+          ]
+        },
+        "referrerpolicy": {
+          "type": "ref",
+          "$ref": "ReferrerPolicy"
+        },
+        "sizes": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srcset": {
+          "type": "string"
+        },
+        "usemap": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "InputProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "accept": {
+          "type": "string"
+        },
+        "alt": {
+          "type": "string"
+        },
+        "autocomplete": {
+          "type": "string"
+        },
+        "capture": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "user"
+            },
+            {
+              "type": "string",
+              "const": "environment"
+            }
+          ]
+        },
+        "checked": {
+          "type": "boolean"
+        },
+        "dirname": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "formaction": {
+          "type": "string"
+        },
+        "formenctype": {
+          "type": "string"
+        },
+        "formmethod": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "get"
+            },
+            {
+              "type": "string",
+              "const": "post"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "formnovalidate": {
+          "type": "boolean"
+        },
+        "formtarget": {
+          "type": "ref",
+          "$ref": "Target"
+        },
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "list": {
+          "type": "string"
+        },
+        "max": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "maxlength": {
+          "type": "number"
+        },
+        "min": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "minlength": {
+          "type": "number"
+        },
+        "multiple": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "number"
+        },
+        "src": {
+          "type": "string"
+        },
+        "step": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "type": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "button"
+            },
+            {
+              "type": "string",
+              "const": "checkbox"
+            },
+            {
+              "type": "string",
+              "const": "color"
+            },
+            {
+              "type": "string",
+              "const": "date"
+            },
+            {
+              "type": "string",
+              "const": "datetime-local"
+            },
+            {
+              "type": "string",
+              "const": "email"
+            },
+            {
+              "type": "string",
+              "const": "file"
+            },
+            {
+              "type": "string",
+              "const": "hidden"
+            },
+            {
+              "type": "string",
+              "const": "image"
+            },
+            {
+              "type": "string",
+              "const": "month"
+            },
+            {
+              "type": "string",
+              "const": "number"
+            },
+            {
+              "type": "string",
+              "const": "password"
+            },
+            {
+              "type": "string",
+              "const": "radio"
+            },
+            {
+              "type": "string",
+              "const": "range"
+            },
+            {
+              "type": "string",
+              "const": "reset"
+            },
+            {
+              "type": "string",
+              "const": "search"
+            },
+            {
+              "type": "string",
+              "const": "submit"
+            },
+            {
+              "type": "string",
+              "const": "tel"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            },
+            {
+              "type": "string",
+              "const": "time"
+            },
+            {
+              "type": "string",
+              "const": "url"
+            },
+            {
+              "type": "string",
+              "const": "week"
+            }
+          ]
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "InsProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "LabelProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "for": {
+          "type": "string"
+        },
+        "form": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "LiProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": []
+    },
+    "LinkProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "as": {
+          "type": "string"
+        },
+        "crossorigin": {
+          "type": "ref",
+          "$ref": "CrossOrigin"
+        },
+        "fetchpriority": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "high"
+            },
+            {
+              "type": "string",
+              "const": "low"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "hreflang": {
+          "type": "string"
+        },
+        "imagesizes": {
+          "type": "string"
+        },
+        "imagesrcset": {
+          "type": "string"
+        },
+        "integrity": {
+          "type": "string"
+        },
+        "media": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "type": "ref",
+          "$ref": "ReferrerPolicy"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "sizes": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "MapProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "MediaProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "autoplay": {
+          "type": "boolean"
+        },
+        "controls": {
+          "type": "boolean"
+        },
+        "controlslist": {
+          "type": "string"
+        },
+        "crossorigin": {
+          "type": "ref",
+          "$ref": "CrossOrigin"
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "muted": {
+          "type": "boolean"
+        },
+        "preload": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "metadata"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            },
+            {
+              "type": "string",
+              "const": ""
+            }
+          ]
+        },
+        "src": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "MetaProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "charset": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "http-equiv": {
+          "type": "string"
+        },
+        "media": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "MeterProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "form": {
+          "type": "string"
+        },
+        "high": {
+          "type": "number"
+        },
+        "low": {
+          "type": "number"
+        },
+        "max": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "min": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "optimum": {
+          "type": "number"
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "ObjectProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "form": {
+          "type": "string"
+        },
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "usemap": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "OlProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "reversed": {
+          "type": "boolean"
+        },
+        "start": {
+          "type": "number"
+        },
+        "type": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "1"
+            },
+            {
+              "type": "string",
+              "const": "a"
+            },
+            {
+              "type": "string",
+              "const": "A"
+            },
+            {
+              "type": "string",
+              "const": "i"
+            },
+            {
+              "type": "string",
+              "const": "I"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "OptgroupProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "OptionProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "OutputProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "for": {
+          "type": "string"
+        },
+        "form": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "ProgressProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "max": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "QuoteProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "ScriptProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "async": {
+          "type": "boolean"
+        },
+        "crossorigin": {
+          "type": "ref",
+          "$ref": "CrossOrigin"
+        },
+        "defer": {
+          "type": "boolean"
+        },
+        "fetchpriority": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "high"
+            },
+            {
+              "type": "string",
+              "const": "low"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "integrity": {
+          "type": "string"
+        },
+        "nomodule": {
+          "type": "boolean"
+        },
+        "referrerpolicy": {
+          "type": "ref",
+          "$ref": "ReferrerPolicy"
+        },
+        "src": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "SelectProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "autocomplete": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "multiple": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "number"
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "SlotProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "SourceProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "media": {
+          "type": "string"
+        },
+        "sizes": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srcset": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "StyleProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "media": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "TableProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    },
+    "TdProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "colspan": {
+          "type": "number"
+        },
+        "headers": {
+          "type": "string"
+        },
+        "rowspan": {
+          "type": "number"
+        }
+      },
+      "required": []
+    },
+    "ThProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "abbr": {
+          "type": "string"
+        },
+        "colspan": {
+          "type": "number"
+        },
+        "headers": {
+          "type": "string"
+        },
+        "rowspan": {
+          "type": "number"
+        },
+        "scope": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "row"
+            },
+            {
+              "type": "string",
+              "const": "col"
+            },
+            {
+              "type": "string",
+              "const": "rowgroup"
+            },
+            {
+              "type": "string",
+              "const": "colgroup"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "TextareaProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "autocomplete": {
+          "type": "string"
+        },
+        "cols": {
+          "type": "number"
+        },
+        "dirname": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "maxlength": {
+          "type": "number"
+        },
+        "minlength": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "rows": {
+          "type": "number"
+        },
+        "value": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "wrap": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "hard"
+            },
+            {
+              "type": "string",
+              "const": "soft"
+            },
+            {
+              "type": "string",
+              "const": "off"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "TimeProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "datetime": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "TrackProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "VoidProps"
+        }
+      ],
+      "properties": {
+        "default": {
+          "type": "boolean"
+        },
+        "kind": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "subtitles"
+            },
+            {
+              "type": "string",
+              "const": "captions"
+            },
+            {
+              "type": "string",
+              "const": "descriptions"
+            },
+            {
+              "type": "string",
+              "const": "chapters"
+            },
+            {
+              "type": "string",
+              "const": "metadata"
+            }
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srclang": {
+          "type": "string"
+        }
+      },
+      "required": []
+    },
+    "VideoProps": {
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "MediaProps"
+        }
+      ],
+      "properties": {
+        "disablepictureinpicture": {
+          "type": "boolean"
+        },
+        "disableremoteplayback": {
+          "type": "boolean"
+        },
+        "height": {
+          "type": "ref",
+          "$ref": "Numeric"
+        },
+        "playsinline": {
+          "type": "boolean"
+        },
+        "poster": {
+          "type": "string"
+        },
+        "width": {
+          "type": "ref",
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
+    }
+  },
+  "elements": {
+    "a": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "AnchorProps"
+      }
+    },
+    "abbr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "address": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "area": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "AreaProps"
+      }
+    },
+    "article": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "aside": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "audio": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MediaProps"
+      }
+    },
+    "b": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "base": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "BaseProps"
+      }
+    },
+    "bdi": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "bdo": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "blockquote": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "BlockquoteProps"
+      }
+    },
+    "body": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "br": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VoidProps"
+      }
+    },
+    "button": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ButtonProps"
+      }
+    },
+    "canvas": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "CanvasProps"
+      }
+    },
+    "caption": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "cite": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "code": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "col": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ColProps"
+      }
+    },
+    "colgroup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ColgroupProps"
+      }
+    },
+    "data": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DataProps"
+      }
+    },
+    "datalist": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dd": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "del": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DelProps"
+      }
+    },
+    "details": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DetailsProps"
+      }
+    },
+    "dfn": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dialog": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DialogProps"
+      }
+    },
+    "div": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dl": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dt": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "em": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "embed": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "EmbedProps"
+      }
+    },
+    "fieldset": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "FieldsetProps"
+      }
+    },
+    "figcaption": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "figure": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "footer": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "form": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "FormProps"
+      }
+    },
+    "h1": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h2": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h3": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h4": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h5": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h6": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "head": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "header": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "hgroup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "hr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VoidProps"
+      }
+    },
+    "html": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlElementProps"
+      }
+    },
+    "i": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "iframe": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "IframeProps"
+      }
+    },
+    "img": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ImgProps"
+      }
+    },
+    "input": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "InputProps"
+      }
+    },
+    "ins": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "InsProps"
+      }
+    },
+    "kbd": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "label": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "LabelProps"
+      }
+    },
+    "legend": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "li": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "LiProps"
+      }
+    },
+    "link": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "LinkProps"
+      }
+    },
+    "main": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "map": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MapProps"
+      }
+    },
+    "mark": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "menu": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "meta": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MetaProps"
+      }
+    },
+    "meter": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MeterProps"
+      }
+    },
+    "nav": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "noscript": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "object": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ObjectProps"
+      }
+    },
+    "ol": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OlProps"
+      }
+    },
+    "optgroup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OptgroupProps"
+      }
+    },
+    "option": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OptionProps"
+      }
+    },
+    "output": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OutputProps"
+      }
+    },
+    "p": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "picture": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "pre": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "progress": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ProgressProps"
+      }
+    },
+    "q": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "QuoteProps"
+      }
+    },
+    "rp": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "rt": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "ruby": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "s": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "samp": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "script": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ScriptProps"
+      }
+    },
+    "search": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "section": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "select": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "SelectProps"
+      }
+    },
+    "slot": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "SlotProps"
+      }
+    },
+    "small": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "source": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "SourceProps"
+      }
+    },
+    "span": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "strong": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "style": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "StyleProps"
+      }
+    },
+    "sub": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "summary": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "sup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "table": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TableProps"
+      }
+    },
+    "tbody": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "td": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TdProps"
+      }
+    },
+    "template": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "textarea": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TextareaProps"
+      }
+    },
+    "tfoot": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "th": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ThProps"
+      }
+    },
+    "thead": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "time": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TimeProps"
+      }
+    },
+    "title": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "tr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "track": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TrackProps"
+      }
+    },
+    "u": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "ul": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "var": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "video": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VideoProps"
+      }
+    },
+    "wbr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VoidProps"
+      }
+    }
+  },
+  "functions": {}
+}
