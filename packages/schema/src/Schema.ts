@@ -49,19 +49,22 @@ export type TProperties = Readonly<Record<string, SchemaNode>>;
  * What every node is, beneath the one thing each of them says.
  *
  * One key, because it is all any two nodes have in common: what a generator
- * writes a doc comment from, and what JSON Schema already calls it.
+ * writes a doc comment from, and what JSON Schema already calls it. Declared
+ * rather than left off and dug back out of the built node — what a node may
+ * carry is a closed list here, so there is nothing to dig for.
  */
-export interface TSchema {}
+export interface TSchema {
+  readonly description?: string;
+}
 
 /**
  * What a node may be given when one is built.
  *
- * The same keys a node carries, under the name that says where they are being
- * passed rather than what they are on.
+ * The keys a node carries, under the name that says where they are being
+ * passed rather than what they are on. Everything settable ends up on the
+ * node, which is why this extends that and not the other way about.
  */
-export interface TSchemaOptions {
-  readonly description?: string;
-}
+export interface TSchemaOptions extends TSchema {}
 
 /**
  * What a target draws, and what each element accepts.
