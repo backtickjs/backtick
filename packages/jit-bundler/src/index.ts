@@ -36,5 +36,5 @@ export type {
   BundleWhileStatementNode,
   FunctionLabel,
 } from "./bundle/Bundle.js";
-export { bundle } from "./bundle.js";
+export { bundler } from "./bundler.js";
 export { state } from "./state.js";

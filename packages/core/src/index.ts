@@ -14,7 +14,7 @@ export {
 // `For` is the bundler's, not a target's: what it draws is whatever the
 // elements around it are. A target's own vocabulary lives in that target's SDK.
 export { For, type ForProps } from "@backtickjs/cs-runtime";
-export { bundle, state } from "@backtickjs/jit-bundler";
+export { bundler, state } from "@backtickjs/jit-bundler";
 export { NodeKind } from "@backtickjs/jit-bundler";
 export type {
   Bundle,

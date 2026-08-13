@@ -25,7 +25,7 @@ import type {
   BundleVariableDeclarationNode,
   FunctionLabel,
 } from "./Bundle.js";
-import type { BundleOptions } from "../bundle.js";
+import type { BundleOptions } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 
 // What a tree expression renders against: the entry being materialized, and

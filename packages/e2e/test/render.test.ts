@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { bundle, type Bundle } from "@backtickjs/core";
+import { bundler, type Bundle } from "@backtickjs/core";
 import { render } from "@backtickjs/js-interpreter";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { testHost } from "./test-client/index.ts";
@@ -36,7 +36,7 @@ function parentOf(...held: TestNode[]): TestNode {
 
 // A list at the root, so a write moves children of the target itself.
 async function rootList(): Promise<Bundle> {
-  return bundle(await importFixture(validDir, "root-list.tsx"));
+  return bundler.run(await importFixture(validDir, "root-list.tsx"));
 }
 
 // The handler a prop holds, as the host would invoke it.

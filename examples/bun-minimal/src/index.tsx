@@ -1,4 +1,4 @@
-import { bundle, type Bundle } from "@backtickjs/core";
+import { bundler, type Bundle } from "@backtickjs/core";
 import { client, insert } from "@backtickjs/web-sdk";
 import { Counter } from "./Counter.js";
 
@@ -10,10 +10,10 @@ const server = Bun.serve({
       const counter = <Counter from={0} />;
 
       // Runs it, here on the server. What comes back is a bundle: data, not HTML.
-      const bundled = await bundle(counter);
+      const bundle = await bundler.run(counter);
 
       // A document carrying that bundle as JSON, with the client that draws it.
-      const html = toHtml(bundled);
+      const html = toHtml(bundle);
 
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });

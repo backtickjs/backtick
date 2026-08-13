@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { bundle } from "@backtickjs/core";
+import { bundler } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { evaluate, isTestNode, recordingHost } from "./test-client/index.ts";
 import type { TestNode } from "./test-client/index.ts";
@@ -19,7 +19,7 @@ const importFixture = createFixtureLoader("state");
 
 async function render(file: string): Promise<TestNode> {
   const script = await importFixture(validDir, file);
-  const node = evaluate(await bundle(script));
+  const node = evaluate(await bundler.run(script));
   assert.ok(isTestNode(node), "expected a rendered node");
   return node;
 }
@@ -185,7 +185,7 @@ describe("local state", () => {
   it("a prop that recomputed to what it held is not set again", async () => {
     const script = await importFixture(validDir, "unmoved-prop.tsx");
     const { options, writes } = recordingHost();
-    const view = evaluate(await bundle(script), options);
+    const view = evaluate(await bundler.run(script), options);
     assert.ok(isTestNode(view), "expected a rendered node");
     const [select, list] = children(view);
     assert.ok(select !== undefined && list !== undefined);

@@ -1,4 +1,4 @@
-import { bundle } from "@backtickjs/core";
+import { bundler } from "@backtickjs/core";
 import { client, insert } from "@backtickjs/web-sdk";
 import { TodoList } from "./TodoList.js";
 
@@ -25,7 +25,7 @@ const server = Bun.serve({
   port: 5175,
   routes: {
     "/": async () => {
-      const page = insert(html, "body", await bundle(<TodoList />));
+      const page = insert(html, "body", await bundler.run(<TodoList />));
       return new Response(page, {
         headers: {
           "content-type": "text/html",

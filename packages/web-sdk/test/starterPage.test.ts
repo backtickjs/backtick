@@ -1,13 +1,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { bundle } from "@backtickjs/core";
+import { bundler } from "@backtickjs/core";
 import { client } from "../dist/index.js";
 import { jsx } from "../dist/jsx-runtime/index.js";
 import { starterPage } from "../dist/starterPage.js";
 
-const bundled = await bundle(jsx("p", { children: "hi" }));
-const page = starterPage(bundled);
-const titled = starterPage(bundled, "<title>Shop</title>");
+const bundle = await bundler.run(jsx("p", { children: "hi" }));
+const page = starterPage(bundle);
+const titled = starterPage(bundle, "<title>Shop</title>");
 
 describe("starterPage", () => {
   it("is a whole document", () => {
@@ -39,6 +39,6 @@ describe("starterPage", () => {
     const held = /<script type="application\/json">([\s\S]*?)<\/script>/.exec(
       body,
     )?.[1];
-    assert.deepEqual(JSON.parse(held!.replaceAll("\\u003c", "<")), bundled);
+    assert.deepEqual(JSON.parse(held!.replaceAll("\\u003c", "<")), bundle);
   });
 });

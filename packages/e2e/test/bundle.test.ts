@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readdirSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
-import { bundle } from "@backtickjs/core";
+import { bundler } from "@backtickjs/core";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
@@ -12,7 +12,7 @@ import { evaluate } from "./test-client/index.ts";
 // End-to-end snapshot tests over the shared fixtures: each fixture exports a
 // client — a script or a JSX tree — compiled here with the same transform the
 // compiler suite snapshots as `*.js`, then executed by importing the emitted
-// module. A `valid/` fixture's bundled payload is snapshotted to a sibling
+// module. A `valid/` fixture's bundle payload is snapshotted to a sibling
 // `*.bundle` file (with a human-readable rendering of the same payload in
 // `*.bundle-debug` — see `renderBundleDebug`), then executed by the
 // reference test-client and the resulting runtime value snapshotted to
@@ -41,17 +41,17 @@ describe("bundle", () => {
       it(file, async () => {
         const base = file.slice(0, -extname(file).length);
         const script = await importFixture(dir, file);
-        const bundled = await bundle(script, { functionLabels: "index" });
+        const bundle = await bundler.run(script, { functionLabels: "index" });
         matchFileSnapshot(
-          JSON.stringify(bundled, null, 2),
+          JSON.stringify(bundle, null, 2),
           join(dir, `${base}.bundle`),
         );
         matchFileSnapshot(
-          renderBundleDebug(bundled),
+          renderBundleDebug(bundle),
           join(dir, `${base}.bundle-debug`),
         );
         matchFileSnapshot(
-          `${renderValue(evaluate(bundled))}\n`,
+          `${renderValue(evaluate(bundle))}\n`,
           join(dir, `${base}.value`),
         );
       });
@@ -65,7 +65,7 @@ describe("bundle", () => {
         const script = await importFixture(bundleErrorDir, file);
         let message: string | null = null;
         try {
-          await bundle(script, { functionLabels: "index" });
+          await bundler.run(script, { functionLabels: "index" });
         } catch (error) {
           message = error instanceof Error ? error.message : String(error);
         }

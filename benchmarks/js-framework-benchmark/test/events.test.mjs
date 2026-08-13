@@ -21,7 +21,7 @@ import { matchFileSnapshot, render } from "./snapshot.mjs";
 
 const here = new URL("./", import.meta.url).pathname;
 const snapshots = join(here, "snapshots");
-const bundled = join(
+const compiled = join(
   here,
   "..",
   "frameworks",
@@ -31,14 +31,14 @@ const bundled = join(
   "bundle.js",
 );
 
-if (!existsSync(bundled)) {
+if (!existsSync(compiled)) {
   throw new Error(
-    `no bundle at ${bundled} — build the app first:\n\n` +
+    `no bundle at ${compiled} — build the app first:\n\n` +
       `  cd frameworks/keyed/backtick && npm run build-prod\n`,
   );
 }
 mkdirSync(snapshots, { recursive: true });
-const { bundled: bundle } = await import(pathToFileURL(bundled).href);
+const { bundle } = await import(pathToFileURL(compiled).href);
 
 for (const each of cases) {
   test(`${each.id} — ${each.label}`, () => {

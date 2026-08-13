@@ -1,4 +1,4 @@
-import { bundle } from "@backtickjs/core";
+import { bundler } from "@backtickjs/core";
 import { Main } from "./Main.js";
 
-export const bundled = await bundle(<Main />);
+export const bundle = await bundler.run(<Main />);

@@ -15,12 +15,19 @@ export interface BundleOptions {
   readonly functionLabels?: "index" | "location";
 }
 
-// The bundle is plain data; serialize it with `JSON.stringify`.
-export async function bundle(
-  value: Spliceable,
-  options: BundleOptions = {},
-): Promise<Bundle> {
-  const ast = await lowerSpliceable(value, "ClientUnknown");
-  const ir = buildIr(ast);
-  return buildBundle(ir, options);
-}
+/**
+ * What runs your components and hands back what they drew.
+ *
+ *     const bundle = await bundler.run(<Home />);
+ *
+ * A namespace rather than a bare function, so `bundle` stays a name a caller
+ * can give what comes back. The bundle is plain data; serialize it with
+ * `JSON.stringify`.
+ */
+export const bundler = {
+  async run(value: Spliceable, options: BundleOptions = {}): Promise<Bundle> {
+    const ast = await lowerSpliceable(value, "ClientUnknown");
+    const ir = buildIr(ast);
+    return buildBundle(ir, options);
+  },
+};
