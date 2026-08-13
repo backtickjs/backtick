@@ -1,5 +1,5 @@
 {
-  "aliases": {
+  "declarations": {
     "Booleanish": {
       "type": "union",
       "anyOf": [
@@ -386,795 +386,7 @@
           "const": "_top"
         }
       ]
-    }
-  },
-  "elements": {
-    "a": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "AnchorProps"
-      }
     },
-    "abbr": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "address": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "area": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "AreaProps"
-      }
-    },
-    "article": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "aside": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "audio": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "MediaProps"
-      }
-    },
-    "b": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "base": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "BaseProps"
-      }
-    },
-    "bdi": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "bdo": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "blockquote": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "BlockquoteProps"
-      }
-    },
-    "body": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "br": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "VoidProps"
-      }
-    },
-    "button": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ButtonProps"
-      }
-    },
-    "canvas": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "CanvasProps"
-      }
-    },
-    "caption": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "cite": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "code": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "col": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ColProps"
-      }
-    },
-    "colgroup": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ColgroupProps"
-      }
-    },
-    "data": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "DataProps"
-      }
-    },
-    "datalist": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "dd": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "del": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "DelProps"
-      }
-    },
-    "details": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "DetailsProps"
-      }
-    },
-    "dfn": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "dialog": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "DialogProps"
-      }
-    },
-    "div": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "dl": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "dt": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "em": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "embed": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "EmbedProps"
-      }
-    },
-    "fieldset": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "FieldsetProps"
-      }
-    },
-    "figcaption": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "figure": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "footer": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "form": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "FormProps"
-      }
-    },
-    "h1": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "h2": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "h3": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "h4": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "h5": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "h6": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "head": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "header": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "hgroup": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "hr": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "VoidProps"
-      }
-    },
-    "html": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlElementProps"
-      }
-    },
-    "i": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "iframe": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "IframeProps"
-      }
-    },
-    "img": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ImgProps"
-      }
-    },
-    "input": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "InputProps"
-      }
-    },
-    "ins": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "InsProps"
-      }
-    },
-    "kbd": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "label": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "LabelProps"
-      }
-    },
-    "legend": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "li": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "LiProps"
-      }
-    },
-    "link": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "LinkProps"
-      }
-    },
-    "main": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "map": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "MapProps"
-      }
-    },
-    "mark": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "menu": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "meta": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "MetaProps"
-      }
-    },
-    "meter": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "MeterProps"
-      }
-    },
-    "nav": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "noscript": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "object": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ObjectProps"
-      }
-    },
-    "ol": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "OlProps"
-      }
-    },
-    "optgroup": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "OptgroupProps"
-      }
-    },
-    "option": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "OptionProps"
-      }
-    },
-    "output": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "OutputProps"
-      }
-    },
-    "p": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "picture": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "pre": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "progress": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ProgressProps"
-      }
-    },
-    "q": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "QuoteProps"
-      }
-    },
-    "rp": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "rt": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "ruby": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "s": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "samp": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "script": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ScriptProps"
-      }
-    },
-    "search": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "section": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "select": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "SelectProps"
-      }
-    },
-    "slot": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "SlotProps"
-      }
-    },
-    "small": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "source": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "SourceProps"
-      }
-    },
-    "span": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "strong": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "style": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "StyleProps"
-      }
-    },
-    "sub": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "summary": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "sup": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "table": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "TableProps"
-      }
-    },
-    "tbody": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "td": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "TdProps"
-      }
-    },
-    "template": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "textarea": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "TextareaProps"
-      }
-    },
-    "tfoot": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "th": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "ThProps"
-      }
-    },
-    "thead": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "time": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "TimeProps"
-      }
-    },
-    "title": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "tr": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "track": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "TrackProps"
-      }
-    },
-    "u": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "ul": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "var": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "HtmlProps"
-      }
-    },
-    "video": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "VideoProps"
-      }
-    },
-    "wbr": {
-      "type": "element",
-      "props": {
-        "type": "ref",
-        "$ref": "VoidProps"
-      }
-    }
-  },
-  "interfaces": {
     "AriaAttributes": {
       "type": "interface",
       "extends": [],
@@ -4292,6 +3504,792 @@
         }
       },
       "required": []
+    }
+  },
+  "elements": {
+    "a": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "AnchorProps"
+      }
+    },
+    "abbr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "address": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "area": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "AreaProps"
+      }
+    },
+    "article": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "aside": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "audio": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MediaProps"
+      }
+    },
+    "b": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "base": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "BaseProps"
+      }
+    },
+    "bdi": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "bdo": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "blockquote": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "BlockquoteProps"
+      }
+    },
+    "body": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "br": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VoidProps"
+      }
+    },
+    "button": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ButtonProps"
+      }
+    },
+    "canvas": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "CanvasProps"
+      }
+    },
+    "caption": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "cite": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "code": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "col": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ColProps"
+      }
+    },
+    "colgroup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ColgroupProps"
+      }
+    },
+    "data": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DataProps"
+      }
+    },
+    "datalist": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dd": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "del": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DelProps"
+      }
+    },
+    "details": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DetailsProps"
+      }
+    },
+    "dfn": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dialog": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "DialogProps"
+      }
+    },
+    "div": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dl": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "dt": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "em": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "embed": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "EmbedProps"
+      }
+    },
+    "fieldset": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "FieldsetProps"
+      }
+    },
+    "figcaption": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "figure": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "footer": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "form": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "FormProps"
+      }
+    },
+    "h1": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h2": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h3": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h4": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h5": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "h6": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "head": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "header": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "hgroup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "hr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VoidProps"
+      }
+    },
+    "html": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlElementProps"
+      }
+    },
+    "i": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "iframe": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "IframeProps"
+      }
+    },
+    "img": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ImgProps"
+      }
+    },
+    "input": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "InputProps"
+      }
+    },
+    "ins": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "InsProps"
+      }
+    },
+    "kbd": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "label": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "LabelProps"
+      }
+    },
+    "legend": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "li": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "LiProps"
+      }
+    },
+    "link": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "LinkProps"
+      }
+    },
+    "main": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "map": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MapProps"
+      }
+    },
+    "mark": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "menu": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "meta": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MetaProps"
+      }
+    },
+    "meter": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "MeterProps"
+      }
+    },
+    "nav": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "noscript": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "object": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ObjectProps"
+      }
+    },
+    "ol": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OlProps"
+      }
+    },
+    "optgroup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OptgroupProps"
+      }
+    },
+    "option": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OptionProps"
+      }
+    },
+    "output": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "OutputProps"
+      }
+    },
+    "p": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "picture": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "pre": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "progress": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ProgressProps"
+      }
+    },
+    "q": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "QuoteProps"
+      }
+    },
+    "rp": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "rt": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "ruby": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "s": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "samp": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "script": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ScriptProps"
+      }
+    },
+    "search": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "section": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "select": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "SelectProps"
+      }
+    },
+    "slot": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "SlotProps"
+      }
+    },
+    "small": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "source": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "SourceProps"
+      }
+    },
+    "span": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "strong": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "style": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "StyleProps"
+      }
+    },
+    "sub": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "summary": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "sup": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "table": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TableProps"
+      }
+    },
+    "tbody": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "td": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TdProps"
+      }
+    },
+    "template": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "textarea": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TextareaProps"
+      }
+    },
+    "tfoot": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "th": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "ThProps"
+      }
+    },
+    "thead": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "time": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TimeProps"
+      }
+    },
+    "title": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "tr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "track": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "TrackProps"
+      }
+    },
+    "u": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "ul": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "var": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "HtmlProps"
+      }
+    },
+    "video": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VideoProps"
+      }
+    },
+    "wbr": {
+      "type": "element",
+      "props": {
+        "type": "ref",
+        "$ref": "VoidProps"
+      }
     }
   }
 }

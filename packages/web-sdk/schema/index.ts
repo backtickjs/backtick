@@ -23,7 +23,7 @@ const child = Type.Union([
   Type.Number(),
 ]);
 
-export const aliases = {
+export const declarations = {
   Booleanish: Type.Union([
     Type.Boolean(),
     Type.Literal("true"),
@@ -123,9 +123,6 @@ export const aliases = {
     Type.Literal("_parent"),
     Type.Literal("_top"),
   ]),
-};
-
-export const interfaces = {
   AriaAttributes: Type.Interface([], {
     "aria-activedescendant": Type.Optional(Type.String()),
     "aria-atomic": Type.Optional(Type.Ref("Booleanish")),

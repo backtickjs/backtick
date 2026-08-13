@@ -13,7 +13,7 @@ import { IsUnion } from "../types/Union.js";
 import { IsUnknown } from "../types/Unknown.js";
 import { IsVoid } from "../types/Void.js";
 import type { TParameter } from "../types/Parameter.js";
-import type { Schema } from "../Schema.js";
+import type { ClientSchema } from "../ClientSchema.js";
 import type { TSchema } from "../TSchema.js";
 
 // A schema to the `jsx-runtime` an app writes against.
@@ -28,8 +28,8 @@ import type { TSchema } from "../TSchema.js";
 
 /** The `jsx-runtime` a target ships: its tags, their props, and the namespace
  * TypeScript reads them through. */
-export function jsx(schema: Schema): string {
-  const { aliases, elements, interfaces } = schema;
+export function jsx(schema: ClientSchema): string {
+  const { declarations, elements } = schema;
 
   /** What a schema node reads as, in TypeScript. */
   function type(node: TSchema): string {
@@ -42,7 +42,7 @@ export function jsx(schema: Schema): string {
       return node.anyOf.map((one) => type(one)).join(" | ");
     }
     if (IsInterface(node)) {
-      throw new Error("an interface may only stand in `interfaces`");
+      throw new Error("an interface may only stand as a declaration");
     }
     // A function the schema did not name keeps its own signature, parameters and
     // all — the case `core`'s `onLayout(width, height)` needs.
@@ -149,7 +149,7 @@ export function jsx(schema: Schema): string {
     if (IsRef(base)) {
       return base.$ref;
     }
-    const named = Object.entries(interfaces).find(([, one]) => one === base);
+    const named = Object.entries(declarations).find(([, one]) => one === base);
     if (named === undefined) {
       throw new Error("an interface may only extend one the schema declares");
     }
@@ -226,27 +226,30 @@ export function jsx(schema: Schema): string {
   lines.push(`  Prop,`);
   lines.push(`} from "@backtickjs/cs-runtime";`);
   lines.push(`import {`);
-  if ("FragmentProps" in interfaces) {
+  if ("FragmentProps" in declarations) {
     lines.push(`  createFragment,`);
   }
   lines.push(`  createJsxElement,`);
   lines.push(`} from "@backtickjs/cs-runtime";`);
   lines.push("");
 
-  for (const [name, node] of Object.entries(aliases)) {
-    lines.push(`export type ${name} = ${type(node)};`);
-    lines.push("");
-  }
-
-  for (const [name, node] of Object.entries(interfaces)) {
-    const inherited = bases(node);
-    const extend =
-      inherited.length > 0 ? ` extends ${inherited.join(", ")}` : "";
-    lines.push(`export interface ${name}${extend} {`);
-    for (const one of members(node)) {
-      lines.push(property(one.name, one.node, one.required));
+  // How a name is written follows from what it stands for: an interface where
+  // the node is one, and a named type everywhere else. Written in the order
+  // the schema declares them, which TypeScript does not mind — a type is in
+  // scope wherever it is named, however late it is said.
+  for (const [name, node] of Object.entries(declarations)) {
+    if (IsInterface(node)) {
+      const inherited = bases(node);
+      const extend =
+        inherited.length > 0 ? ` extends ${inherited.join(", ")}` : "";
+      lines.push(`export interface ${name}${extend} {`);
+      for (const one of members(node)) {
+        lines.push(property(one.name, one.node, one.required));
+      }
+      lines.push(`}`);
+    } else {
+      lines.push(`export type ${name} = ${type(node)};`);
     }
-    lines.push(`}`);
     lines.push("");
   }
 
@@ -255,7 +258,7 @@ export function jsx(schema: Schema): string {
   // an interface like any other, generated above. `createFragment` answers with
   // `Fragment<P>`, so an annotation would only repeat itself — and repeating it
   // is what would need the type imported.
-  if ("FragmentProps" in interfaces) {
+  if ("FragmentProps" in declarations) {
     lines.push(`export const Fragment = createFragment<FragmentProps>();`);
     lines.push("");
   }

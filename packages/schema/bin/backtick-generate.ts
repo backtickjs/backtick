@@ -2,7 +2,7 @@
 import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { generate, type Schema } from "../dist/index.js";
+import { generate, type ClientSchema } from "../dist/index.js";
 
 // Every target's `pnpm generate`, run from the package it generates for.
 //
@@ -20,7 +20,7 @@ import { generate, type Schema } from "../dist/index.js";
 const root = pathToFileURL(`${process.cwd()}/`);
 const at = (path: string) => new URL(path, root);
 
-const schema: Schema = await import(at("schema/index.ts").href);
+const schema: ClientSchema = await import(at("schema/index.ts").href);
 
 /** Written formatted, so what is checked in is what `format:check` expects. */
 async function write(path: string, body: string): Promise<void> {
