@@ -1,20 +1,20 @@
-import { IsArray } from "../types/Array.js";
-import { IsBoolean } from "../types/Boolean.js";
-import { IsFunction } from "../types/Function.js";
-import { IsGeneric } from "../types/Generic.js";
-import { IsInterface } from "../types/Interface.js";
-import { IsNull } from "../types/Null.js";
-import { IsNumber } from "../types/Number.js";
-import { IsObject } from "../types/Object.js";
-import { IsRef } from "../types/Ref.js";
-import { IsRest } from "../types/Rest.js";
-import { IsString } from "../types/String.js";
-import { IsUnion } from "../types/Union.js";
-import { IsUnknown } from "../types/Unknown.js";
-import { IsVoid } from "../types/Void.js";
-import type { TParameter } from "../types/Parameter.js";
+import { IsArray } from "../nodes/Array.js";
+import { IsBoolean } from "../nodes/Boolean.js";
+import { IsFunction } from "../nodes/Function.js";
+import { IsGeneric } from "../nodes/Generic.js";
+import { IsInterface } from "../nodes/Interface.js";
+import { IsNull } from "../nodes/Null.js";
+import { IsNumber } from "../nodes/Number.js";
+import { IsObject } from "../nodes/Object.js";
+import { IsRef } from "../nodes/Ref.js";
+import { IsRest } from "../nodes/Rest.js";
+import { IsString } from "../nodes/String.js";
+import { IsUnion } from "../nodes/Union.js";
+import { IsUnknown } from "../nodes/Unknown.js";
+import { IsVoid } from "../nodes/Void.js";
+import type { TParameter } from "../nodes/Parameter.js";
 import type { ClientSchema } from "../ClientSchema.js";
-import type { TSchema } from "../TSchema.js";
+import type { TNode } from "../TNode.js";
 
 // A schema to the `jsx-runtime` an app writes against.
 //
@@ -29,10 +29,10 @@ import type { TSchema } from "../TSchema.js";
 /** The `jsx-runtime` a target ships: its tags, their props, and the namespace
  * TypeScript reads them through. */
 export function jsx(schema: ClientSchema): string {
-  const { declarations, elements } = schema;
+  const { types, elements } = schema;
 
   /** What a schema node reads as, in TypeScript. */
-  function type(node: TSchema): string {
+  function type(node: TNode): string {
     // A `$ref` is a name, whether the document declares it or the boundary
     // supplies it — `JsxElement` is the second kind, and reads no differently.
     if (IsRef(node)) {
@@ -97,7 +97,7 @@ export function jsx(schema: ClientSchema): string {
     if (IsUnknown(node)) {
       throw new Error("an unknown may only stand as a type parameter's bound");
     }
-    // Exhaustive: a kind added to `TSchema` without a case above fails
+    // Exhaustive: a kind added to `TNode` without a case above fails
     // here, where it is read, rather than at the throw below.
     const unread: never = node;
     throw new Error(`unhandled node: ${JSON.stringify(unread).slice(0, 60)}`);
@@ -111,7 +111,7 @@ export function jsx(schema: ClientSchema): string {
    * schema that comes to have something to say about a parameter says it with
    * a node for the purpose.
    */
-  function parameter(node: TSchema, at: number): string {
+  function parameter(node: TNode, at: number): string {
     if (IsRest(node)) {
       return `...args: ${type(node.items)}[]`;
     }
@@ -133,7 +133,7 @@ export function jsx(schema: ClientSchema): string {
   }
 
   /** What an interface extends, which an object never does. */
-  function bases(node: TSchema): readonly string[] {
+  function bases(node: TNode): readonly string[] {
     return IsInterface(node) ? node.extends.map(baseName) : [];
   }
 
@@ -145,11 +145,11 @@ export function jsx(schema: ClientSchema): string {
    * ones the schema declares. Identity, not shape: two interfaces holding the
    * same properties are still two names.
    */
-  function baseName(base: TSchema): string {
+  function baseName(base: TNode): string {
     if (IsRef(base)) {
       return base.$ref;
     }
-    const named = Object.entries(declarations).find(([, one]) => one === base);
+    const named = Object.entries(types).find(([, one]) => one === base);
     if (named === undefined) {
       throw new Error("an interface may only extend one the schema declares");
     }
@@ -158,8 +158,8 @@ export function jsx(schema: ClientSchema): string {
 
   /** The properties a node holds, and whether each was written required. */
   function members(
-    node: TSchema,
-  ): { name: string; node: TSchema; required: boolean }[] {
+    node: TNode,
+  ): { name: string; node: TNode; required: boolean }[] {
     if (!IsInterface(node) && !IsObject(node)) {
       return [];
     }
@@ -176,7 +176,7 @@ export function jsx(schema: ClientSchema): string {
     /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
 
   /** What a property admits, which is where the boundary is drawn. */
-  function property(name: string, node: TSchema, required: boolean): string {
+  function property(name: string, node: TNode, required: boolean): string {
     const optional = required ? "" : "?";
     // Which prop holds what is written inside a tag is JSX's own rule — the one
     // `JSX.ElementChildrenAttribute` names — so the *wrapper* is decided here and
@@ -198,7 +198,7 @@ export function jsx(schema: ClientSchema): string {
    * every other prop — the `Prop<T>`/`Client<T>`/`Children<T>` wrapping is JSX's
    * rule about props, not a rule about interfaces.
    */
-  function elementProps(node: TSchema): string {
+  function elementProps(node: TNode): string {
     if (IsRef(node)) {
       return node.$ref;
     }
@@ -226,7 +226,7 @@ export function jsx(schema: ClientSchema): string {
   lines.push(`  Prop,`);
   lines.push(`} from "@backtickjs/cs-runtime";`);
   lines.push(`import {`);
-  if ("FragmentProps" in declarations) {
+  if ("FragmentProps" in types) {
     lines.push(`  createFragment,`);
   }
   lines.push(`  createJsxElement,`);
@@ -237,7 +237,7 @@ export function jsx(schema: ClientSchema): string {
   // the node is one, and a named type everywhere else. Written in the order
   // the schema declares them, which TypeScript does not mind — a type is in
   // scope wherever it is named, however late it is said.
-  for (const [name, node] of Object.entries(declarations)) {
+  for (const [name, node] of Object.entries(types)) {
     if (IsInterface(node)) {
       const inherited = bases(node);
       const extend =
@@ -258,7 +258,7 @@ export function jsx(schema: ClientSchema): string {
   // an interface like any other, generated above. `createFragment` answers with
   // `Fragment<P>`, so an annotation would only repeat itself — and repeating it
   // is what would need the type imported.
-  if ("FragmentProps" in declarations) {
+  if ("FragmentProps" in types) {
     lines.push(`export const Fragment = createFragment<FragmentProps>();`);
     lines.push("");
   }

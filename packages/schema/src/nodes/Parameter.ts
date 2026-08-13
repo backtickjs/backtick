@@ -1,14 +1,14 @@
 import { Unknown } from "./Unknown.js";
 import { isType } from "../helpers/isType.js";
 import type { TUnknown } from "./Unknown.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
-import type { TSchema } from "../TSchema.js";
+import type { TNodeOptions } from "../NodeOptions.js";
+import type { TNode } from "../TNode.js";
 
 export interface TParameter<
   Name extends string = string,
-  Extends extends TSchema = TSchema,
-  Equals extends TSchema = TSchema,
-> extends TSchemaOptions {
+  Extends extends TNode = TNode,
+  Equals extends TNode = TNode,
+> extends TNodeOptions {
   readonly type: "parameter";
   readonly name: Name;
   readonly extends: Extends;
@@ -17,13 +17,13 @@ export interface TParameter<
 
 export function Parameter<
   Name extends string,
-  Extends extends TSchema = TUnknown,
-  Equals extends TSchema = Extends,
+  Extends extends TNode = TUnknown,
+  Equals extends TNode = Extends,
 >(
   name: Name,
   constraint?: Extends,
   fallback?: Equals,
-  options: TSchemaOptions = {},
+  options: TNodeOptions = {},
 ): TParameter<Name, Extends, Equals> {
   const bound = (constraint ?? Unknown()) as Extends;
   return {

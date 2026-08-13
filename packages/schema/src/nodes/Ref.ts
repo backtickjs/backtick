@@ -1,14 +1,14 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TNodeOptions } from "../NodeOptions.js";
 
-export interface TRef<Name extends string = string> extends TSchemaOptions {
+export interface TRef<Name extends string = string> extends TNodeOptions {
   readonly type: "ref";
   readonly $ref: Name;
 }
 
 export function Ref<Name extends string>(
   name: Name,
-  options: TSchemaOptions = {},
+  options: TNodeOptions = {},
 ): TRef<Name> {
   return { ...options, type: "ref", $ref: name };
 }

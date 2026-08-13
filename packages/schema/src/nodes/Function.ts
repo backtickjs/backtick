@@ -1,23 +1,23 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
-import type { TSchema } from "../TSchema.js";
+import type { TNodeOptions } from "../NodeOptions.js";
+import type { TNode } from "../TNode.js";
 
 export interface TFunction<
-  Parameters extends readonly TSchema[] = TSchema[],
-  ReturnType extends TSchema = TSchema,
-> extends TSchemaOptions {
+  Parameters extends readonly TNode[] = TNode[],
+  ReturnType extends TNode = TNode,
+> extends TNodeOptions {
   readonly type: "function";
   readonly parameters: Parameters;
   readonly returnType: ReturnType;
 }
 
 export function Function<
-  Parameters extends readonly TSchema[],
-  ReturnType extends TSchema,
+  Parameters extends readonly TNode[],
+  ReturnType extends TNode,
 >(
   parameters: [...Parameters],
   returnType: ReturnType,
-  options: TSchemaOptions = {},
+  options: TNodeOptions = {},
 ): TFunction<Parameters, ReturnType> {
   return { ...options, type: "function", parameters, returnType };
 }

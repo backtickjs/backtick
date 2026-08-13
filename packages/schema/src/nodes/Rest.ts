@@ -1,15 +1,15 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
-import type { TSchema } from "../TSchema.js";
+import type { TNodeOptions } from "../NodeOptions.js";
+import type { TNode } from "../TNode.js";
 
-export interface TRest<Items extends TSchema = TSchema> extends TSchemaOptions {
+export interface TRest<Items extends TNode = TNode> extends TNodeOptions {
   readonly type: "rest";
   readonly items: Items;
 }
 
-export function Rest<Items extends TSchema>(
+export function Rest<Items extends TNode>(
   items: Items,
-  options: TSchemaOptions = {},
+  options: TNodeOptions = {},
 ): TRest<Items> {
   return { ...options, type: "rest", items };
 }

@@ -1,23 +1,23 @@
-import { Array } from "./types/Array.js";
-import { Boolean } from "./types/Boolean.js";
-import { Element } from "./types/Element.js";
-import { Function } from "./types/Function.js";
-import { Generic } from "./types/Generic.js";
-import { Interface } from "./types/Interface.js";
-import { Literal } from "./types/Literal.js";
-import { Null } from "./types/Null.js";
-import { Number } from "./types/Number.js";
-import { Object } from "./types/Object.js";
-import { Optional } from "./types/Optional.js";
-import { Parameter } from "./types/Parameter.js";
-import { Ref } from "./types/Ref.js";
-import { Rest } from "./types/Rest.js";
-import { String } from "./types/String.js";
-import { Union } from "./types/Union.js";
-import { Void } from "./types/Void.js";
+import { Array } from "./nodes/Array.js";
+import { Boolean } from "./nodes/Boolean.js";
+import { Element } from "./nodes/Element.js";
+import { Function } from "./nodes/Function.js";
+import { Generic } from "./nodes/Generic.js";
+import { Interface } from "./nodes/Interface.js";
+import { Literal } from "./nodes/Literal.js";
+import { Null } from "./nodes/Null.js";
+import { Number } from "./nodes/Number.js";
+import { Object } from "./nodes/Object.js";
+import { Optional } from "./nodes/Optional.js";
+import { Parameter } from "./nodes/Parameter.js";
+import { Ref } from "./nodes/Ref.js";
+import { Rest } from "./nodes/Rest.js";
+import { String } from "./nodes/String.js";
+import { Union } from "./nodes/Union.js";
+import { Void } from "./nodes/Void.js";
 
 /**
- * How a schema is written: the nodes of `TSchema` and nothing else.
+ * How a schema is written: the nodes of `TNode` and nothing else.
  *
  * Adding a kind is adding a case to every generator first, and a member here
  * second. `Unknown` is absent because nothing a target writes needs it — a

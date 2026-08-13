@@ -23,7 +23,7 @@ const child = Type.Union([
   Type.Number(),
 ]);
 
-export const declarations = {
+export const types = {
   Booleanish: Type.Union([
     Type.Boolean(),
     Type.Literal("true"),

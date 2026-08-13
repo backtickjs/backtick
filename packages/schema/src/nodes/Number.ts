@@ -1,12 +1,12 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TNodeOptions } from "../NodeOptions.js";
 
-export interface TNumber extends TSchemaOptions {
+export interface TNumber extends TNodeOptions {
   readonly type: "number";
   readonly const?: number;
 }
 
-export function Number(options: TSchemaOptions = {}): TNumber {
+export function Number(options: TNodeOptions = {}): TNumber {
   return { ...options, type: "number" };
 }
 

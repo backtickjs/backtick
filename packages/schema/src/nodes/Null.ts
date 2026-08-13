@@ -1,11 +1,11 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TNodeOptions } from "../NodeOptions.js";
 
-export interface TNull extends TSchemaOptions {
+export interface TNull extends TNodeOptions {
   readonly type: "null";
 }
 
-export function Null(options: TSchemaOptions = {}): TNull {
+export function Null(options: TNodeOptions = {}): TNull {
   return { ...options, type: "null" };
 }
 

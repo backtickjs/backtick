@@ -1,12 +1,12 @@
 import { isType } from "../helpers/isType.js";
-import type { TSchemaOptions } from "../SchemaOptions.js";
+import type { TNodeOptions } from "../NodeOptions.js";
 
-export interface TBoolean extends TSchemaOptions {
+export interface TBoolean extends TNodeOptions {
   readonly type: "boolean";
   readonly const?: boolean;
 }
 
-export function Boolean(options: TSchemaOptions = {}): TBoolean {
+export function Boolean(options: TNodeOptions = {}): TBoolean {
   return { ...options, type: "boolean" };
 }
 

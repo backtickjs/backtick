@@ -6,6 +6,6 @@
  * rather than left off and dug back out of the built node — what a node may
  * carry is a closed list here, so there is nothing to dig for.
  */
-export interface TSchemaOptions {
+export interface TNodeOptions {
   readonly description?: string;
 }
