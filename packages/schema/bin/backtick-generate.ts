@@ -36,7 +36,3 @@ async function write(path: string, body: string): Promise<void> {
 }
 
 await write("src/jsx-runtime/index.ts", generate.jsx(schema));
-
-// Beside the schema it came from, so a change to what a client can do is a
-// change someone can see in review.
-await write("backtick.schema.json", generate.json(schema));
