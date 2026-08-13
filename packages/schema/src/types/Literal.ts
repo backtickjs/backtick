@@ -1,25 +1,23 @@
-import type { TSchema, TSchemaOptions } from "../Schema.js";
+import type { TBoolean } from "./Boolean.js";
+import type { TNumber } from "./Number.js";
+import type { TString } from "./String.js";
+import type { TSchemaOptions } from "../Schema.js";
 
 export type LiteralValue = string | number | boolean;
 
-export interface TLiteral<
-  Value extends LiteralValue = LiteralValue,
-> extends TSchema {
-  readonly type: "string" | "number" | "boolean";
-  readonly const: Value;
-}
+export type TLiteral<Value extends LiteralValue = LiteralValue> = (
+  | TString
+  | TNumber
+  | TBoolean
+) & { readonly const: Value };
 
-export function Literal<Value extends LiteralValue>(
+export function Literal<const Value extends LiteralValue>(
   value: Value,
   options: TSchemaOptions = {},
 ): TLiteral<Value> {
   return {
     ...options,
-    type: typeof value as TLiteral["type"],
+    type: typeof value,
     const: value,
-  };
-}
-
-export function IsLiteral(value: unknown): value is TLiteral {
-  return typeof value === "object" && value !== null && "const" in value;
+  } as TLiteral<Value>;
 }

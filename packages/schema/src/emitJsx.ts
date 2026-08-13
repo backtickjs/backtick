@@ -4,7 +4,6 @@ import {
   IsFunction,
   IsGeneric,
   IsInterface,
-  IsLiteral,
   IsNull,
   IsNumber,
   IsObject,
@@ -40,9 +39,6 @@ export function emitJsx(schema: Schema): string {
     if (IsRef(node)) {
       return node.$ref;
     }
-    if (IsLiteral(node)) {
-      return JSON.stringify(node.const);
-    }
     if (IsUnion(node)) {
       return node.anyOf.map((one) => type(one)).join(" | ");
     }
@@ -76,12 +72,21 @@ export function emitJsx(schema: Schema): string {
         : `${written}[]`;
     }
     if (IsString(node)) {
+      if ("const" in node) {
+        return JSON.stringify(node.const);
+      }
       return "string";
     }
     if (IsNumber(node)) {
+      if ("const" in node) {
+        return JSON.stringify(node.const);
+      }
       return "number";
     }
     if (IsBoolean(node)) {
+      if ("const" in node) {
+        return JSON.stringify(node.const);
+      }
       return "boolean";
     }
     if (IsVoid(node)) {

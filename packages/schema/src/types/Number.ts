@@ -3,6 +3,7 @@ import type { TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TNumber extends TSchema {
   readonly type: "number";
+  readonly const?: number;
 }
 
 export function Number(options: TSchemaOptions = {}): TNumber {
@@ -10,5 +11,5 @@ export function Number(options: TSchemaOptions = {}): TNumber {
 }
 
 export function IsNumber(value: unknown): value is TNumber {
-  return isType(value, "number") && !("const" in value);
+  return isType(value, "number");
 }

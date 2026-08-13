@@ -3,6 +3,7 @@ import type { TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TString extends TSchema {
   readonly type: "string";
+  readonly const?: string;
 }
 
 export function String(options: TSchemaOptions = {}): TString {
@@ -10,5 +11,5 @@ export function String(options: TSchemaOptions = {}): TString {
 }
 
 export function IsString(value: unknown): value is TString {
-  return isType(value, "string") && !("const" in value);
+  return isType(value, "string");
 }

@@ -4,12 +4,7 @@ export { Element, IsElement, type TElement } from "./Element.js";
 export { Function, IsFunction, type TFunction } from "./Function.js";
 export { Generic, IsGeneric, type TGeneric } from "./Generic.js";
 export { Interface, IsInterface, type TInterface } from "./Interface.js";
-export {
-  Literal,
-  IsLiteral,
-  type LiteralValue,
-  type TLiteral,
-} from "./Literal.js";
+export { Literal, type LiteralValue, type TLiteral } from "./Literal.js";
 export { Null, IsNull, type TNull } from "./Null.js";
 export { Number, IsNumber, type TNumber } from "./Number.js";
 export { Object, IsObject, type TObject } from "./Object.js";

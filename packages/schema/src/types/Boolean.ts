@@ -3,6 +3,7 @@ import type { TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TBoolean extends TSchema {
   readonly type: "boolean";
+  readonly const?: boolean;
 }
 
 export function Boolean(options: TSchemaOptions = {}): TBoolean {
@@ -10,5 +11,5 @@ export function Boolean(options: TSchemaOptions = {}): TBoolean {
 }
 
 export function IsBoolean(value: unknown): value is TBoolean {
-  return isType(value, "boolean") && !("const" in value);
+  return isType(value, "boolean");
 }

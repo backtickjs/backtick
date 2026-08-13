@@ -5,7 +5,6 @@ import type {
   TFunction,
   TGeneric,
   TInterface,
-  TLiteral,
   TNull,
   TNumber,
   TObject,
@@ -31,7 +30,6 @@ export type SchemaNode =
   | TString
   | TNumber
   | TBoolean
-  | TLiteral
   | TUnion
   | TInterface
   | TObject
@@ -53,9 +51,7 @@ export type TProperties = Readonly<Record<string, SchemaNode>>;
  * One key, because it is all any two nodes have in common: what a generator
  * writes a doc comment from, and what JSON Schema already calls it.
  */
-export interface TSchema {
-  readonly description?: string;
-}
+export interface TSchema {}
 
 /**
  * What a node may be given when one is built.
@@ -63,7 +59,9 @@ export interface TSchema {
  * The same keys a node carries, under the name that says where they are being
  * passed rather than what they are on.
  */
-export interface TSchemaOptions extends TSchema {}
+export interface TSchemaOptions {
+  readonly description?: string;
+}
 
 /**
  * What a target draws, and what each element accepts.
