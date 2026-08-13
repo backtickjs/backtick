@@ -1,5 +1,11 @@
-import type { TProperties, TSchema, TSchemaOptions } from "typebox";
-import type { SchemaNode } from "../Schema.js";
+import { isType } from "../helpers/isType.js";
+import { requiredOf } from "./Optional.js";
+import type {
+  SchemaNode,
+  TProperties,
+  TSchema,
+  TSchemaOptions,
+} from "../Schema.js";
 
 export interface TInterface<
   Heritage extends readonly SchemaNode[] = readonly SchemaNode[],
@@ -19,23 +25,15 @@ export function Interface<
   properties: Properties,
   options: TSchemaOptions = {},
 ): TInterface<Heritage, Properties> {
-  const required = Object.entries(properties)
-    .filter(([, node]) => !("~optional" in node))
-    .map(([name]) => name);
   return {
     ...options,
     type: "interface",
     extends: heritage,
     properties,
-    required,
+    required: requiredOf(properties),
   };
 }
 
 export function IsInterface(value: unknown): value is TInterface {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "type" in value &&
-    value["type"] === "interface"
-  );
+  return isType(value, "interface");
 }

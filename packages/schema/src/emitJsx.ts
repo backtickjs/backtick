@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsFunction,
   IsGeneric,
+  IsInterface,
   IsLiteral,
   IsNull,
   IsNumber,
@@ -14,9 +15,7 @@ import {
   IsUnknown,
   IsVoid,
   type TParameter,
-  type TSchema,
-} from "typebox";
-import { IsInterface } from "./nodes/Interface.js";
+} from "./types/index.js";
 import type { Schema, SchemaNode } from "./Schema.js";
 
 // A schema to the `jsx-runtime` an app writes against.
@@ -34,10 +33,6 @@ import type { Schema, SchemaNode } from "./Schema.js";
 export function emitJsx(schema: Schema): string {
   const { aliases, elements, interfaces } = schema;
 
-  // TypeBox types a node's children as `TSchema`, where a schema only ever
-  // holds a `SchemaNode` — `Type` in this package cannot build anything else.
-  const held = (child: TSchema) => child as SchemaNode;
-
   /** What a schema node reads as, in TypeScript. */
   function type(node: SchemaNode): string {
     // A `$ref` is a name, whether the document declares it or the boundary
@@ -49,7 +44,7 @@ export function emitJsx(schema: Schema): string {
       return JSON.stringify(node.const);
     }
     if (IsUnion(node)) {
-      return node.anyOf.map((one) => type(held(one))).join(" | ");
+      return node.anyOf.map((one) => type(one)).join(" | ");
     }
     if (IsInterface(node)) {
       throw new Error("an interface may only stand in `interfaces`");
@@ -57,26 +52,24 @@ export function emitJsx(schema: Schema): string {
     // A function the schema did not name keeps its own signature, parameters and
     // all — the case `core`'s `onLayout(width, height)` needs.
     if (IsFunction(node)) {
-      const params = node.parameters.map((one, at) => parameter(held(one), at));
-      return `(${params.join(", ")}) => ${type(held(node.returnType))}`;
+      const params = node.parameters.map((one, at) => parameter(one, at));
+      return `(${params.join(", ")}) => ${type(node.returnType)}`;
     }
     if (IsGeneric(node)) {
-      const declared = node.parameters.map((one) =>
-        typeParameter(one as TParameter),
-      );
-      return `<${declared.join(", ")}>${type(held(node.expression))}`;
+      const declared = node.parameters.map(typeParameter);
+      return `<${declared.join(", ")}>${type(node.expression)}`;
     }
     if (IsRest(node)) {
       throw new Error("a rest may only stand in a parameter list");
     }
     if (IsObject(node)) {
       const members = Object.entries(node.properties).map(
-        ([name, child]) => `${name}: ${type(held(child))}`,
+        ([name, child]) => `${name}: ${type(child)}`,
       );
       return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
     }
     if (IsArray(node)) {
-      const items = held(node.items);
+      const items = node.items;
       const written = type(items);
       return IsUnion(items) || IsFunction(items) || IsGeneric(items)
         ? `(${written})[]`
@@ -97,35 +90,40 @@ export function emitJsx(schema: Schema): string {
     if (IsNull(node)) {
       return "null";
     }
+    if (IsUnknown(node)) {
+      throw new Error("an unknown may only stand as a type parameter's bound");
+    }
     // Exhaustive: a kind added to `SchemaNode` without a case above fails
     // here, where it is read, rather than at the throw below.
     const unread: never = node;
     throw new Error(`unhandled node: ${JSON.stringify(unread).slice(0, 60)}`);
   }
 
-  /** One entry in a parameter list, named as the schema named it. */
+  /**
+   * One entry in a parameter list, called after where it stands.
+   *
+   * A parameter is a type and nothing else, so the name is this generator's to
+   * invent — TypeScript needs one written and the schema has none to give. A
+   * schema that comes to have something to say about a parameter says it with
+   * a node for the purpose.
+   */
   function parameter(node: SchemaNode, at: number): string {
     if (IsRest(node)) {
-      const items = held(node.items);
-      const named = items as SchemaNode & { readonly name?: string };
-      return `...${named.name ?? "args"}: ${type(items)}[]`;
+      return `...args: ${type(node.items)}[]`;
     }
-    const named = node as SchemaNode & { readonly name?: string };
-    return `${named.name ?? `arg${at}`}: ${type(node)}`;
+    return `arg${at}: ${type(node)}`;
   }
 
   /** One type parameter, with the constraint and default it was given. */
   function typeParameter(node: TParameter): string {
     const constrained = !IsUnknown(node.extends);
-    const constraint = constrained
-      ? ` extends ${type(held(node.extends))}`
-      : "";
+    const constraint = constrained ? ` extends ${type(node.extends)}` : "";
     // `Parameter(name, extends)` fills the default in with the constraint, so a
     // default worth printing is one that differs from it.
     const fallback =
       !IsUnknown(node.equals) &&
       JSON.stringify(node.equals) !== JSON.stringify(node.extends)
-        ? ` = ${type(held(node.equals))}`
+        ? ` = ${type(node.equals)}`
         : "";
     return `${node.name}${constraint}${fallback}`;
   }
@@ -143,7 +141,7 @@ export function emitJsx(schema: Schema): string {
    * ones the schema declares. Identity, not shape: two interfaces holding the
    * same properties are still two names.
    */
-  function baseName(base: TSchema): string {
+  function baseName(base: SchemaNode): string {
     if (IsRef(base)) {
       return base.$ref;
     }
@@ -164,7 +162,7 @@ export function emitJsx(schema: Schema): string {
     const required = node.required ?? [];
     return Object.entries(node.properties).map(([name, child]) => ({
       name,
-      node: held(child),
+      node: child,
       required: required.includes(name),
     }));
   }

@@ -1,35 +1,28 @@
-import { Type as TypeBox } from "typebox";
-import { Element } from "./nodes/Element.js";
-import { Interface } from "./nodes/Interface.js";
+import * as types from "./types/index.js";
 
 /**
  * How a schema is written: the nodes of `SchemaNode` and nothing else.
  *
- * TypeBox builds far more — `Date`, `BigInt`, arrays, template literals — and
- * a schema holding one of those would typecheck and then fail where it was
- * read. So a target writes against this rather than against TypeBox, and a
- * node no generator knows is a name that does not exist.
- *
  * Adding a kind is adding a case to every generator first, and a member here
- * second. `Unsafe` is deliberately absent: a node no guard can narrow is a
- * node no generator can be exhaustive about.
+ * second. `Unknown` is absent because nothing a target writes needs it — a
+ * `Parameter` makes one when it is given no constraint.
  */
 export const Type = {
-  String: TypeBox.String,
-  Number: TypeBox.Number,
-  Boolean: TypeBox.Boolean,
-  Literal: TypeBox.Literal,
-  Union: TypeBox.Union,
-  Object: TypeBox.Object,
-  Array: TypeBox.Array,
-  Function: TypeBox.Function,
-  Void: TypeBox.Void,
-  Null: TypeBox.Null,
-  Ref: TypeBox.Ref,
-  Optional: TypeBox.Optional,
-  Rest: TypeBox.Rest,
-  Generic: TypeBox.Generic,
-  Parameter: TypeBox.Parameter,
-  Element,
-  Interface,
+  String: types.String,
+  Number: types.Number,
+  Boolean: types.Boolean,
+  Literal: types.Literal,
+  Union: types.Union,
+  Object: types.Object,
+  Array: types.Array,
+  Function: types.Function,
+  Void: types.Void,
+  Null: types.Null,
+  Ref: types.Ref,
+  Optional: types.Optional,
+  Rest: types.Rest,
+  Generic: types.Generic,
+  Parameter: types.Parameter,
+  Element: types.Element,
+  Interface: types.Interface,
 };

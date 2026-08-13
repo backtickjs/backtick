@@ -1,5 +1,5 @@
-import type { TSchema, TSchemaOptions } from "typebox";
-import type { SchemaNode } from "../Schema.js";
+import { isType } from "../helpers/isType.js";
+import type { SchemaNode, TSchema, TSchemaOptions } from "../Schema.js";
 
 export interface TElement<
   Props extends SchemaNode = SchemaNode,
@@ -12,14 +12,9 @@ export function Element<Props extends SchemaNode>(
   props: Props,
   options: TSchemaOptions = {},
 ): TElement<Props> {
-  return { ...options, type: "element", props } as TElement<Props>;
+  return { ...options, type: "element", props };
 }
 
 export function IsElement(value: unknown): value is TElement {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "type" in value &&
-    value["type"] === "element"
-  );
+  return isType(value, "element");
 }

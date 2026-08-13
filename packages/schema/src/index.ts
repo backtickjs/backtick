@@ -5,5 +5,5 @@ export { Type } from "./Type.js";
 
 export { emitJson } from "./emitJson.js";
 export { emitJsx } from "./emitJsx.js";
-export type { TElement } from "./nodes/Element.js";
+export type { TElement } from "./types/Element.js";
 export type { Schema, SchemaNode } from "./Schema.js";
