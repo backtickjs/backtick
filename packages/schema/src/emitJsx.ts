@@ -1,20 +1,18 @@
-import {
-  IsArray,
-  IsBoolean,
-  IsFunction,
-  IsGeneric,
-  IsInterface,
-  IsNull,
-  IsNumber,
-  IsObject,
-  IsRef,
-  IsRest,
-  IsString,
-  IsUnion,
-  IsUnknown,
-  IsVoid,
-  type TParameter,
-} from "./types/index.js";
+import { IsArray } from "./types/Array.js";
+import { IsBoolean } from "./types/Boolean.js";
+import { IsFunction } from "./types/Function.js";
+import { IsGeneric } from "./types/Generic.js";
+import { IsInterface } from "./types/Interface.js";
+import { IsNull } from "./types/Null.js";
+import { IsNumber } from "./types/Number.js";
+import { IsObject } from "./types/Object.js";
+import { IsRef } from "./types/Ref.js";
+import { IsRest } from "./types/Rest.js";
+import { IsString } from "./types/String.js";
+import { IsUnion } from "./types/Union.js";
+import { IsUnknown } from "./types/Unknown.js";
+import { IsVoid } from "./types/Void.js";
+import type { TParameter } from "./types/Parameter.js";
 import type { Schema, SchemaNode } from "./Schema.js";
 
 // A schema to the `jsx-runtime` an app writes against.

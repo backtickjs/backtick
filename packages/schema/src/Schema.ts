@@ -1,20 +1,18 @@
-import type {
-  TArray,
-  TBoolean,
-  TElement,
-  TFunction,
-  TGeneric,
-  TInterface,
-  TNull,
-  TNumber,
-  TObject,
-  TRef,
-  TRest,
-  TString,
-  TUnion,
-  TUnknown,
-  TVoid,
-} from "./types/index.js";
+import type { TArray } from "./types/Array.js";
+import type { TBoolean } from "./types/Boolean.js";
+import type { TElement } from "./types/Element.js";
+import type { TFunction } from "./types/Function.js";
+import type { TGeneric } from "./types/Generic.js";
+import type { TInterface } from "./types/Interface.js";
+import type { TNull } from "./types/Null.js";
+import type { TNumber } from "./types/Number.js";
+import type { TObject } from "./types/Object.js";
+import type { TRef } from "./types/Ref.js";
+import type { TRest } from "./types/Rest.js";
+import type { TString } from "./types/String.js";
+import type { TUnion } from "./types/Union.js";
+import type { TUnknown } from "./types/Unknown.js";
+import type { TVoid } from "./types/Void.js";
 
 /**
  * A type a schema may hold, which is the set every generator can read.

@@ -1,4 +1,20 @@
-import * as types from "./types/index.js";
+import { Array } from "./types/Array.js";
+import { Boolean } from "./types/Boolean.js";
+import { Element } from "./types/Element.js";
+import { Function } from "./types/Function.js";
+import { Generic } from "./types/Generic.js";
+import { Interface } from "./types/Interface.js";
+import { Literal } from "./types/Literal.js";
+import { Null } from "./types/Null.js";
+import { Number } from "./types/Number.js";
+import { Object } from "./types/Object.js";
+import { Optional } from "./types/Optional.js";
+import { Parameter } from "./types/Parameter.js";
+import { Ref } from "./types/Ref.js";
+import { Rest } from "./types/Rest.js";
+import { String } from "./types/String.js";
+import { Union } from "./types/Union.js";
+import { Void } from "./types/Void.js";
 
 /**
  * How a schema is written: the nodes of `SchemaNode` and nothing else.
@@ -8,21 +24,21 @@ import * as types from "./types/index.js";
  * `Parameter` makes one when it is given no constraint.
  */
 export const Type = {
-  String: types.String,
-  Number: types.Number,
-  Boolean: types.Boolean,
-  Literal: types.Literal,
-  Union: types.Union,
-  Object: types.Object,
-  Array: types.Array,
-  Function: types.Function,
-  Void: types.Void,
-  Null: types.Null,
-  Ref: types.Ref,
-  Optional: types.Optional,
-  Rest: types.Rest,
-  Generic: types.Generic,
-  Parameter: types.Parameter,
-  Element: types.Element,
-  Interface: types.Interface,
+  String,
+  Number,
+  Boolean,
+  Literal,
+  Union,
+  Object,
+  Array,
+  Function,
+  Void,
+  Null,
+  Ref,
+  Optional,
+  Rest,
+  Generic,
+  Parameter,
+  Element,
+  Interface,
 };
