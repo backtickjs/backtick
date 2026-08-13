@@ -1036,3 +1036,7 @@ export const elements = {
   video: Type.Element(Type.Ref("VideoProps")),
   wbr: Type.Element(Type.Ref("VoidProps")),
 };
+
+// What a browser can run, which is nothing of its own yet: `state`, `Math` and
+// `Array` are every client's and belong to the core schema, not to this one.
+export const functions = {};

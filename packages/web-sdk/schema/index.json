@@ -785,6 +785,7 @@
       }
     }
   },
+  "functions": {},
   "types": {
     "Booleanish": {
       "type": "union",
