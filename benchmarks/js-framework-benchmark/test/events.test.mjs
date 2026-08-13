@@ -1,6 +1,7 @@
-import { existsSync, mkdirSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
+import { pathToFileURL } from "node:url";
 import { cases } from "./cases.mjs";
 import { open } from "./driver.mjs";
 import { matchFileSnapshot, render } from "./snapshot.mjs";
@@ -14,29 +15,30 @@ import { matchFileSnapshot, render } from "./snapshot.mjs";
 // optimisation here is, and a case that starts asking for more has regressed
 // whatever a run in Chrome happens to say that day.
 //
-// The app has to be built first — `npm run build-prod` in its directory, or
-// `pnpm build` from the root, both of which write `lib/bundle.json`.
+// What is drawn is the app's own `bundle.js` — the same bundle its page
+// carries — so the app has to be built first: `npm run build-prod` in its
+// directory, or `pnpm build` from the root.
 
 const here = new URL("./", import.meta.url).pathname;
 const snapshots = join(here, "snapshots");
-const built = join(
+const bundled = join(
   here,
   "..",
   "frameworks",
   "keyed",
   "backtick",
-  "lib",
-  "bundle.json",
+  "dist",
+  "bundle.js",
 );
 
-if (!existsSync(built)) {
+if (!existsSync(bundled)) {
   throw new Error(
-    `no bundle at ${built} — build the app first:\n\n` +
+    `no bundle at ${bundled} — build the app first:\n\n` +
       `  cd frameworks/keyed/backtick && npm run build-prod\n`,
   );
 }
 mkdirSync(snapshots, { recursive: true });
-const bundle = JSON.parse(readFileSync(built, "utf8"));
+const { bundled: bundle } = await import(pathToFileURL(bundled).href);
 
 for (const each of cases) {
   test(`${each.id} — ${each.label}`, () => {

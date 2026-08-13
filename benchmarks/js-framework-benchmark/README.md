@@ -76,8 +76,8 @@ also the guard: an optimisation lands as a count going down, and a regression
 lands as one going up, whatever Chrome says that day.
 
 The app has to be built first — `pnpm build` from the root, or `npm run
-build-prod` in its directory — because what is drawn is what its `lib/html.js`
-bundles.
+build-prod` in its directory — because what is drawn is its
+`dist/bundle.js`.
 Labels are `Math.random()`'s, so text is counted but never written down.
 
 These are upstream's own scripts, and every argument reaches them untouched, so
