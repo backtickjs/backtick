@@ -100,7 +100,6 @@ export const aliases = {
     Type.Literal("tree"),
     Type.Literal("treegrid"),
     Type.Literal("treeitem"),
-    Type.Intersect([Type.String(), Type.Object({})]),
   ]),
   ReferrerPolicy: Type.Union([
     Type.Literal(""),
@@ -123,12 +122,11 @@ export const aliases = {
     Type.Literal("_blank"),
     Type.Literal("_parent"),
     Type.Literal("_top"),
-    Type.Intersect([Type.String(), Type.Object({})]),
   ]),
 };
 
 export const interfaces = {
-  AriaAttributes: Type.Object({
+  AriaAttributes: Type.Interface([], {
     "aria-activedescendant": Type.Optional(Type.String()),
     "aria-atomic": Type.Optional(Type.Ref("Booleanish")),
     "aria-autocomplete": Type.Optional(
@@ -260,7 +258,7 @@ export const interfaces = {
     "aria-valuenow": Type.Optional(Type.Number()),
     "aria-valuetext": Type.Optional(Type.String()),
   }),
-  Events: Type.Object({
+  Events: Type.Interface([], {
     oncopy: Type.Optional(Type.Function([], Type.Void())),
     oncut: Type.Optional(Type.Function([], Type.Void())),
     onpaste: Type.Optional(Type.Function([], Type.Void())),
@@ -349,10 +347,9 @@ export const interfaces = {
     onbeforetoggle: Type.Optional(Type.Function([], Type.Void())),
     ontoggle: Type.Optional(Type.Function([], Type.Void())),
   }),
-  GlobalAttributes: Type.Intersect([
-    Type.Ref("AriaAttributes"),
-    Type.Ref("Events"),
-    Type.Object({
+  GlobalAttributes: Type.Interface(
+    [Type.Ref("AriaAttributes"), Type.Ref("Events")],
+    {
       accesskey: Type.Optional(Type.String()),
       autocapitalize: Type.Optional(
         Type.Union([
@@ -439,13 +436,12 @@ export const interfaces = {
       translate: Type.Optional(
         Type.Union([Type.Literal("yes"), Type.Literal("no")]),
       ),
-    }),
-  ]),
-  VoidProps: Type.Intersect([Type.Ref("GlobalAttributes"), Type.Object({})]),
-  HtmlProps: Type.Intersect([
-    Type.Ref("GlobalAttributes"),
-    Type.Object({ children: Type.Optional(child) }),
-  ]),
+    },
+  ),
+  VoidProps: Type.Interface([Type.Ref("GlobalAttributes")], {}),
+  HtmlProps: Type.Interface([Type.Ref("GlobalAttributes")], {
+    children: Type.Optional(child),
+  }),
   /**
    * Children with no element of their own.
    *
@@ -453,615 +449,477 @@ export const interfaces = {
    * why it is declared here rather than shared: another target's fragment holds
    * that target's, and the brand they agree on is `cs-runtime`'s.
    */
-  FragmentProps: Type.Object({ children: Type.Optional(child) }),
-  AnchorProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
-      href: Type.Optional(Type.String()),
-      hreflang: Type.Optional(Type.String()),
-      media: Type.Optional(Type.String()),
-      ping: Type.Optional(Type.String()),
-      referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-      rel: Type.Optional(Type.String()),
-      target: Type.Optional(Type.Ref("Target")),
-      type: Type.Optional(Type.String()),
-    }),
-  ]),
-  AreaProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      alt: Type.Optional(Type.String()),
-      coords: Type.Optional(Type.String()),
-      download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
-      href: Type.Optional(Type.String()),
-      referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-      rel: Type.Optional(Type.String()),
-      shape: Type.Optional(
-        Type.Union([
-          Type.Literal("rect"),
-          Type.Literal("circle"),
-          Type.Literal("poly"),
-          Type.Literal("default"),
-        ]),
-      ),
-      target: Type.Optional(Type.Ref("Target")),
-    }),
-  ]),
-  BaseProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      href: Type.Optional(Type.String()),
-      target: Type.Optional(Type.Ref("Target")),
-    }),
-  ]),
-  BlockquoteProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      cite: Type.Optional(Type.String()),
-    }),
-  ]),
-  ButtonProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      disabled: Type.Optional(Type.Boolean()),
-      form: Type.Optional(Type.String()),
-      formaction: Type.Optional(Type.String()),
-      formenctype: Type.Optional(Type.String()),
-      formmethod: Type.Optional(
-        Type.Union([
-          Type.Literal("get"),
-          Type.Literal("post"),
-          Type.Literal("dialog"),
-        ]),
-      ),
-      formnovalidate: Type.Optional(Type.Boolean()),
-      formtarget: Type.Optional(Type.Ref("Target")),
-      name: Type.Optional(Type.String()),
-      popovertarget: Type.Optional(Type.String()),
-      popovertargetaction: Type.Optional(
-        Type.Union([
-          Type.Literal("toggle"),
-          Type.Literal("show"),
-          Type.Literal("hide"),
-        ]),
-      ),
-      type: Type.Optional(
-        Type.Union([
-          Type.Literal("submit"),
-          Type.Literal("reset"),
-          Type.Literal("button"),
-        ]),
-      ),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-    }),
-  ]),
-  CanvasProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      height: Type.Optional(Type.Ref("Numeric")),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  ColProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      span: Type.Optional(Type.Number()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  ColgroupProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      span: Type.Optional(Type.Number()),
-    }),
-  ]),
-  DataProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-    }),
-  ]),
-  DelProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      cite: Type.Optional(Type.String()),
-      datetime: Type.Optional(Type.String()),
-    }),
-  ]),
-  DetailsProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      name: Type.Optional(Type.String()),
-      open: Type.Optional(Type.Boolean()),
-    }),
-  ]),
-  DialogProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      closedby: Type.Optional(
-        Type.Union([
-          Type.Literal("any"),
-          Type.Literal("closerequest"),
-          Type.Literal("none"),
-        ]),
-      ),
-      open: Type.Optional(Type.Boolean()),
-    }),
-  ]),
-  EmbedProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      height: Type.Optional(Type.Ref("Numeric")),
-      src: Type.Optional(Type.String()),
-      type: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  FieldsetProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      disabled: Type.Optional(Type.Boolean()),
-      form: Type.Optional(Type.String()),
-      name: Type.Optional(Type.String()),
-    }),
-  ]),
-  FormProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      "accept-charset": Type.Optional(Type.String()),
-      action: Type.Optional(Type.String()),
-      autocomplete: Type.Optional(
-        Type.Union([Type.Literal("on"), Type.Literal("off")]),
-      ),
-      enctype: Type.Optional(Type.String()),
-      method: Type.Optional(
-        Type.Union([
-          Type.Literal("get"),
-          Type.Literal("post"),
-          Type.Literal("dialog"),
-        ]),
-      ),
-      name: Type.Optional(Type.String()),
-      novalidate: Type.Optional(Type.Boolean()),
-      rel: Type.Optional(Type.String()),
-      target: Type.Optional(Type.Ref("Target")),
-    }),
-  ]),
-  HtmlElementProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      manifest: Type.Optional(Type.String()),
-    }),
-  ]),
-  IframeProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      allow: Type.Optional(Type.String()),
-      allowfullscreen: Type.Optional(Type.Boolean()),
-      height: Type.Optional(Type.Ref("Numeric")),
-      loading: Type.Optional(
-        Type.Union([Type.Literal("eager"), Type.Literal("lazy")]),
-      ),
-      name: Type.Optional(Type.String()),
-      referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-      sandbox: Type.Optional(Type.String()),
-      src: Type.Optional(Type.String()),
-      srcdoc: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  ImgProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      alt: Type.Optional(Type.String()),
-      crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
-      decoding: Type.Optional(
-        Type.Union([
-          Type.Literal("async"),
-          Type.Literal("auto"),
-          Type.Literal("sync"),
-        ]),
-      ),
-      fetchpriority: Type.Optional(
-        Type.Union([
-          Type.Literal("high"),
-          Type.Literal("low"),
-          Type.Literal("auto"),
-        ]),
-      ),
-      height: Type.Optional(Type.Ref("Numeric")),
-      loading: Type.Optional(
-        Type.Union([Type.Literal("eager"), Type.Literal("lazy")]),
-      ),
-      referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-      sizes: Type.Optional(Type.String()),
-      src: Type.Optional(Type.String()),
-      srcset: Type.Optional(Type.String()),
-      usemap: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  InputProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      accept: Type.Optional(Type.String()),
-      alt: Type.Optional(Type.String()),
-      autocomplete: Type.Optional(Type.String()),
-      capture: Type.Optional(
-        Type.Union([
-          Type.Boolean(),
-          Type.Literal("user"),
-          Type.Literal("environment"),
-        ]),
-      ),
-      checked: Type.Optional(Type.Boolean()),
-      dirname: Type.Optional(Type.String()),
-      disabled: Type.Optional(Type.Boolean()),
-      form: Type.Optional(Type.String()),
-      formaction: Type.Optional(Type.String()),
-      formenctype: Type.Optional(Type.String()),
-      formmethod: Type.Optional(
-        Type.Union([
-          Type.Literal("get"),
-          Type.Literal("post"),
-          Type.Literal("dialog"),
-        ]),
-      ),
-      formnovalidate: Type.Optional(Type.Boolean()),
-      formtarget: Type.Optional(Type.Ref("Target")),
-      height: Type.Optional(Type.Ref("Numeric")),
-      list: Type.Optional(Type.String()),
-      max: Type.Optional(Type.Ref("Numeric")),
-      maxlength: Type.Optional(Type.Number()),
-      min: Type.Optional(Type.Ref("Numeric")),
-      minlength: Type.Optional(Type.Number()),
-      multiple: Type.Optional(Type.Boolean()),
-      name: Type.Optional(Type.String()),
-      pattern: Type.Optional(Type.String()),
-      placeholder: Type.Optional(Type.String()),
-      readonly: Type.Optional(Type.Boolean()),
-      required: Type.Optional(Type.Boolean()),
-      size: Type.Optional(Type.Number()),
-      src: Type.Optional(Type.String()),
-      step: Type.Optional(Type.Ref("Numeric")),
-      type: Type.Optional(
-        Type.Union([
-          Type.Literal("button"),
-          Type.Literal("checkbox"),
-          Type.Literal("color"),
-          Type.Literal("date"),
-          Type.Literal("datetime-local"),
-          Type.Literal("email"),
-          Type.Literal("file"),
-          Type.Literal("hidden"),
-          Type.Literal("image"),
-          Type.Literal("month"),
-          Type.Literal("number"),
-          Type.Literal("password"),
-          Type.Literal("radio"),
-          Type.Literal("range"),
-          Type.Literal("reset"),
-          Type.Literal("search"),
-          Type.Literal("submit"),
-          Type.Literal("tel"),
-          Type.Literal("text"),
-          Type.Literal("time"),
-          Type.Literal("url"),
-          Type.Literal("week"),
-        ]),
-      ),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  InsProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      cite: Type.Optional(Type.String()),
-      datetime: Type.Optional(Type.String()),
-    }),
-  ]),
-  LabelProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      for: Type.Optional(Type.String()),
-      form: Type.Optional(Type.String()),
-    }),
-  ]),
-  LiProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      value: Type.Optional(Type.Number()),
-    }),
-  ]),
-  LinkProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      as: Type.Optional(Type.String()),
-      crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
-      fetchpriority: Type.Optional(
-        Type.Union([
-          Type.Literal("high"),
-          Type.Literal("low"),
-          Type.Literal("auto"),
-        ]),
-      ),
-      href: Type.Optional(Type.String()),
-      hreflang: Type.Optional(Type.String()),
-      imagesizes: Type.Optional(Type.String()),
-      imagesrcset: Type.Optional(Type.String()),
-      integrity: Type.Optional(Type.String()),
-      media: Type.Optional(Type.String()),
-      referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-      rel: Type.Optional(Type.String()),
-      sizes: Type.Optional(Type.String()),
-      type: Type.Optional(Type.String()),
-    }),
-  ]),
-  MapProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      name: Type.Optional(Type.String()),
-    }),
-  ]),
-  MediaProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      autoplay: Type.Optional(Type.Boolean()),
-      controls: Type.Optional(Type.Boolean()),
-      controlslist: Type.Optional(Type.String()),
-      crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
-      loop: Type.Optional(Type.Boolean()),
-      muted: Type.Optional(Type.Boolean()),
-      preload: Type.Optional(
-        Type.Union([
-          Type.Literal("none"),
-          Type.Literal("metadata"),
-          Type.Literal("auto"),
-          Type.Literal(""),
-        ]),
-      ),
-      src: Type.Optional(Type.String()),
-    }),
-  ]),
-  MetaProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      charset: Type.Optional(Type.String()),
-      content: Type.Optional(Type.String()),
-      "http-equiv": Type.Optional(Type.String()),
-      media: Type.Optional(Type.String()),
-      name: Type.Optional(Type.String()),
-    }),
-  ]),
-  MeterProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      form: Type.Optional(Type.String()),
-      high: Type.Optional(Type.Number()),
-      low: Type.Optional(Type.Number()),
-      max: Type.Optional(Type.Ref("Numeric")),
-      min: Type.Optional(Type.Ref("Numeric")),
-      optimum: Type.Optional(Type.Number()),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-    }),
-  ]),
-  ObjectProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      data: Type.Optional(Type.String()),
-      form: Type.Optional(Type.String()),
-      height: Type.Optional(Type.Ref("Numeric")),
-      name: Type.Optional(Type.String()),
-      type: Type.Optional(Type.String()),
-      usemap: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  OlProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      reversed: Type.Optional(Type.Boolean()),
-      start: Type.Optional(Type.Number()),
-      type: Type.Optional(
-        Type.Union([
-          Type.Literal("1"),
-          Type.Literal("a"),
-          Type.Literal("A"),
-          Type.Literal("i"),
-          Type.Literal("I"),
-        ]),
-      ),
-    }),
-  ]),
-  OptgroupProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      disabled: Type.Optional(Type.Boolean()),
-      label: Type.Optional(Type.String()),
-    }),
-  ]),
-  OptionProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      disabled: Type.Optional(Type.Boolean()),
-      label: Type.Optional(Type.String()),
-      selected: Type.Optional(Type.Boolean()),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-    }),
-  ]),
-  OutputProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      for: Type.Optional(Type.String()),
-      form: Type.Optional(Type.String()),
-      name: Type.Optional(Type.String()),
-    }),
-  ]),
-  ProgressProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      max: Type.Optional(Type.Ref("Numeric")),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-    }),
-  ]),
-  QuoteProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      cite: Type.Optional(Type.String()),
-    }),
-  ]),
-  ScriptProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      async: Type.Optional(Type.Boolean()),
-      crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
-      defer: Type.Optional(Type.Boolean()),
-      fetchpriority: Type.Optional(
-        Type.Union([
-          Type.Literal("high"),
-          Type.Literal("low"),
-          Type.Literal("auto"),
-        ]),
-      ),
-      integrity: Type.Optional(Type.String()),
-      nomodule: Type.Optional(Type.Boolean()),
-      referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-      src: Type.Optional(Type.String()),
-      type: Type.Optional(Type.String()),
-    }),
-  ]),
-  SelectProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      autocomplete: Type.Optional(Type.String()),
-      disabled: Type.Optional(Type.Boolean()),
-      form: Type.Optional(Type.String()),
-      multiple: Type.Optional(Type.Boolean()),
-      name: Type.Optional(Type.String()),
-      required: Type.Optional(Type.Boolean()),
-      size: Type.Optional(Type.Number()),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-    }),
-  ]),
-  SlotProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      name: Type.Optional(Type.String()),
-    }),
-  ]),
-  SourceProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      height: Type.Optional(Type.Ref("Numeric")),
-      media: Type.Optional(Type.String()),
-      sizes: Type.Optional(Type.String()),
-      src: Type.Optional(Type.String()),
-      srcset: Type.Optional(Type.String()),
-      type: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  StyleProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      media: Type.Optional(Type.String()),
-      type: Type.Optional(Type.String()),
-    }),
-  ]),
-  TableProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      summary: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
-  TdProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      colspan: Type.Optional(Type.Number()),
-      headers: Type.Optional(Type.String()),
-      rowspan: Type.Optional(Type.Number()),
-    }),
-  ]),
-  ThProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      abbr: Type.Optional(Type.String()),
-      colspan: Type.Optional(Type.Number()),
-      headers: Type.Optional(Type.String()),
-      rowspan: Type.Optional(Type.Number()),
-      scope: Type.Optional(
-        Type.Union([
-          Type.Literal("row"),
-          Type.Literal("col"),
-          Type.Literal("rowgroup"),
-          Type.Literal("colgroup"),
-        ]),
-      ),
-    }),
-  ]),
-  TextareaProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      autocomplete: Type.Optional(Type.String()),
-      cols: Type.Optional(Type.Number()),
-      dirname: Type.Optional(Type.String()),
-      disabled: Type.Optional(Type.Boolean()),
-      form: Type.Optional(Type.String()),
-      maxlength: Type.Optional(Type.Number()),
-      minlength: Type.Optional(Type.Number()),
-      name: Type.Optional(Type.String()),
-      placeholder: Type.Optional(Type.String()),
-      readonly: Type.Optional(Type.Boolean()),
-      required: Type.Optional(Type.Boolean()),
-      rows: Type.Optional(Type.Number()),
-      value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
-      wrap: Type.Optional(
-        Type.Union([
-          Type.Literal("hard"),
-          Type.Literal("soft"),
-          Type.Literal("off"),
-        ]),
-      ),
-    }),
-  ]),
-  TimeProps: Type.Intersect([
-    Type.Ref("HtmlProps"),
-    Type.Object({
-      datetime: Type.Optional(Type.String()),
-    }),
-  ]),
-  TrackProps: Type.Intersect([
-    Type.Ref("VoidProps"),
-    Type.Object({
-      default: Type.Optional(Type.Boolean()),
-      kind: Type.Optional(
-        Type.Union([
-          Type.Literal("subtitles"),
-          Type.Literal("captions"),
-          Type.Literal("descriptions"),
-          Type.Literal("chapters"),
-          Type.Literal("metadata"),
-        ]),
-      ),
-      label: Type.Optional(Type.String()),
-      src: Type.Optional(Type.String()),
-      srclang: Type.Optional(Type.String()),
-    }),
-  ]),
-  VideoProps: Type.Intersect([
-    Type.Ref("MediaProps"),
-    Type.Object({
-      disablepictureinpicture: Type.Optional(Type.Boolean()),
-      disableremoteplayback: Type.Optional(Type.Boolean()),
-      height: Type.Optional(Type.Ref("Numeric")),
-      playsinline: Type.Optional(Type.Boolean()),
-      poster: Type.Optional(Type.String()),
-      width: Type.Optional(Type.Ref("Numeric")),
-    }),
-  ]),
+  FragmentProps: Type.Interface([], { children: Type.Optional(child) }),
+  AnchorProps: Type.Interface([Type.Ref("HtmlProps")], {
+    download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
+    href: Type.Optional(Type.String()),
+    hreflang: Type.Optional(Type.String()),
+    media: Type.Optional(Type.String()),
+    ping: Type.Optional(Type.String()),
+    referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
+    rel: Type.Optional(Type.String()),
+    target: Type.Optional(Type.Ref("Target")),
+    type: Type.Optional(Type.String()),
+  }),
+  AreaProps: Type.Interface([Type.Ref("VoidProps")], {
+    alt: Type.Optional(Type.String()),
+    coords: Type.Optional(Type.String()),
+    download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
+    href: Type.Optional(Type.String()),
+    referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
+    rel: Type.Optional(Type.String()),
+    shape: Type.Optional(
+      Type.Union([
+        Type.Literal("rect"),
+        Type.Literal("circle"),
+        Type.Literal("poly"),
+        Type.Literal("default"),
+      ]),
+    ),
+    target: Type.Optional(Type.Ref("Target")),
+  }),
+  BaseProps: Type.Interface([Type.Ref("VoidProps")], {
+    href: Type.Optional(Type.String()),
+    target: Type.Optional(Type.Ref("Target")),
+  }),
+  BlockquoteProps: Type.Interface([Type.Ref("HtmlProps")], {
+    cite: Type.Optional(Type.String()),
+  }),
+  ButtonProps: Type.Interface([Type.Ref("HtmlProps")], {
+    disabled: Type.Optional(Type.Boolean()),
+    form: Type.Optional(Type.String()),
+    formaction: Type.Optional(Type.String()),
+    formenctype: Type.Optional(Type.String()),
+    formmethod: Type.Optional(
+      Type.Union([
+        Type.Literal("get"),
+        Type.Literal("post"),
+        Type.Literal("dialog"),
+      ]),
+    ),
+    formnovalidate: Type.Optional(Type.Boolean()),
+    formtarget: Type.Optional(Type.Ref("Target")),
+    name: Type.Optional(Type.String()),
+    popovertarget: Type.Optional(Type.String()),
+    popovertargetaction: Type.Optional(
+      Type.Union([
+        Type.Literal("toggle"),
+        Type.Literal("show"),
+        Type.Literal("hide"),
+      ]),
+    ),
+    type: Type.Optional(
+      Type.Union([
+        Type.Literal("submit"),
+        Type.Literal("reset"),
+        Type.Literal("button"),
+      ]),
+    ),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+  }),
+  CanvasProps: Type.Interface([Type.Ref("HtmlProps")], {
+    height: Type.Optional(Type.Ref("Numeric")),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  ColProps: Type.Interface([Type.Ref("VoidProps")], {
+    span: Type.Optional(Type.Number()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  ColgroupProps: Type.Interface([Type.Ref("HtmlProps")], {
+    span: Type.Optional(Type.Number()),
+  }),
+  DataProps: Type.Interface([Type.Ref("HtmlProps")], {
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+  }),
+  DelProps: Type.Interface([Type.Ref("HtmlProps")], {
+    cite: Type.Optional(Type.String()),
+    datetime: Type.Optional(Type.String()),
+  }),
+  DetailsProps: Type.Interface([Type.Ref("HtmlProps")], {
+    name: Type.Optional(Type.String()),
+    open: Type.Optional(Type.Boolean()),
+  }),
+  DialogProps: Type.Interface([Type.Ref("HtmlProps")], {
+    closedby: Type.Optional(
+      Type.Union([
+        Type.Literal("any"),
+        Type.Literal("closerequest"),
+        Type.Literal("none"),
+      ]),
+    ),
+    open: Type.Optional(Type.Boolean()),
+  }),
+  EmbedProps: Type.Interface([Type.Ref("VoidProps")], {
+    height: Type.Optional(Type.Ref("Numeric")),
+    src: Type.Optional(Type.String()),
+    type: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  FieldsetProps: Type.Interface([Type.Ref("HtmlProps")], {
+    disabled: Type.Optional(Type.Boolean()),
+    form: Type.Optional(Type.String()),
+    name: Type.Optional(Type.String()),
+  }),
+  FormProps: Type.Interface([Type.Ref("HtmlProps")], {
+    "accept-charset": Type.Optional(Type.String()),
+    action: Type.Optional(Type.String()),
+    autocomplete: Type.Optional(
+      Type.Union([Type.Literal("on"), Type.Literal("off")]),
+    ),
+    enctype: Type.Optional(Type.String()),
+    method: Type.Optional(
+      Type.Union([
+        Type.Literal("get"),
+        Type.Literal("post"),
+        Type.Literal("dialog"),
+      ]),
+    ),
+    name: Type.Optional(Type.String()),
+    novalidate: Type.Optional(Type.Boolean()),
+    rel: Type.Optional(Type.String()),
+    target: Type.Optional(Type.Ref("Target")),
+  }),
+  HtmlElementProps: Type.Interface([Type.Ref("HtmlProps")], {
+    manifest: Type.Optional(Type.String()),
+  }),
+  IframeProps: Type.Interface([Type.Ref("HtmlProps")], {
+    allow: Type.Optional(Type.String()),
+    allowfullscreen: Type.Optional(Type.Boolean()),
+    height: Type.Optional(Type.Ref("Numeric")),
+    loading: Type.Optional(
+      Type.Union([Type.Literal("eager"), Type.Literal("lazy")]),
+    ),
+    name: Type.Optional(Type.String()),
+    referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
+    sandbox: Type.Optional(Type.String()),
+    src: Type.Optional(Type.String()),
+    srcdoc: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  ImgProps: Type.Interface([Type.Ref("VoidProps")], {
+    alt: Type.Optional(Type.String()),
+    crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
+    decoding: Type.Optional(
+      Type.Union([
+        Type.Literal("async"),
+        Type.Literal("auto"),
+        Type.Literal("sync"),
+      ]),
+    ),
+    fetchpriority: Type.Optional(
+      Type.Union([
+        Type.Literal("high"),
+        Type.Literal("low"),
+        Type.Literal("auto"),
+      ]),
+    ),
+    height: Type.Optional(Type.Ref("Numeric")),
+    loading: Type.Optional(
+      Type.Union([Type.Literal("eager"), Type.Literal("lazy")]),
+    ),
+    referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
+    sizes: Type.Optional(Type.String()),
+    src: Type.Optional(Type.String()),
+    srcset: Type.Optional(Type.String()),
+    usemap: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  InputProps: Type.Interface([Type.Ref("VoidProps")], {
+    accept: Type.Optional(Type.String()),
+    alt: Type.Optional(Type.String()),
+    autocomplete: Type.Optional(Type.String()),
+    capture: Type.Optional(
+      Type.Union([
+        Type.Boolean(),
+        Type.Literal("user"),
+        Type.Literal("environment"),
+      ]),
+    ),
+    checked: Type.Optional(Type.Boolean()),
+    dirname: Type.Optional(Type.String()),
+    disabled: Type.Optional(Type.Boolean()),
+    form: Type.Optional(Type.String()),
+    formaction: Type.Optional(Type.String()),
+    formenctype: Type.Optional(Type.String()),
+    formmethod: Type.Optional(
+      Type.Union([
+        Type.Literal("get"),
+        Type.Literal("post"),
+        Type.Literal("dialog"),
+      ]),
+    ),
+    formnovalidate: Type.Optional(Type.Boolean()),
+    formtarget: Type.Optional(Type.Ref("Target")),
+    height: Type.Optional(Type.Ref("Numeric")),
+    list: Type.Optional(Type.String()),
+    max: Type.Optional(Type.Ref("Numeric")),
+    maxlength: Type.Optional(Type.Number()),
+    min: Type.Optional(Type.Ref("Numeric")),
+    minlength: Type.Optional(Type.Number()),
+    multiple: Type.Optional(Type.Boolean()),
+    name: Type.Optional(Type.String()),
+    pattern: Type.Optional(Type.String()),
+    placeholder: Type.Optional(Type.String()),
+    readonly: Type.Optional(Type.Boolean()),
+    required: Type.Optional(Type.Boolean()),
+    size: Type.Optional(Type.Number()),
+    src: Type.Optional(Type.String()),
+    step: Type.Optional(Type.Ref("Numeric")),
+    type: Type.Optional(
+      Type.Union([
+        Type.Literal("button"),
+        Type.Literal("checkbox"),
+        Type.Literal("color"),
+        Type.Literal("date"),
+        Type.Literal("datetime-local"),
+        Type.Literal("email"),
+        Type.Literal("file"),
+        Type.Literal("hidden"),
+        Type.Literal("image"),
+        Type.Literal("month"),
+        Type.Literal("number"),
+        Type.Literal("password"),
+        Type.Literal("radio"),
+        Type.Literal("range"),
+        Type.Literal("reset"),
+        Type.Literal("search"),
+        Type.Literal("submit"),
+        Type.Literal("tel"),
+        Type.Literal("text"),
+        Type.Literal("time"),
+        Type.Literal("url"),
+        Type.Literal("week"),
+      ]),
+    ),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  InsProps: Type.Interface([Type.Ref("HtmlProps")], {
+    cite: Type.Optional(Type.String()),
+    datetime: Type.Optional(Type.String()),
+  }),
+  LabelProps: Type.Interface([Type.Ref("HtmlProps")], {
+    for: Type.Optional(Type.String()),
+    form: Type.Optional(Type.String()),
+  }),
+  LiProps: Type.Interface([Type.Ref("HtmlProps")], {
+    value: Type.Optional(Type.Number()),
+  }),
+  LinkProps: Type.Interface([Type.Ref("VoidProps")], {
+    as: Type.Optional(Type.String()),
+    crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
+    fetchpriority: Type.Optional(
+      Type.Union([
+        Type.Literal("high"),
+        Type.Literal("low"),
+        Type.Literal("auto"),
+      ]),
+    ),
+    href: Type.Optional(Type.String()),
+    hreflang: Type.Optional(Type.String()),
+    imagesizes: Type.Optional(Type.String()),
+    imagesrcset: Type.Optional(Type.String()),
+    integrity: Type.Optional(Type.String()),
+    media: Type.Optional(Type.String()),
+    referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
+    rel: Type.Optional(Type.String()),
+    sizes: Type.Optional(Type.String()),
+    type: Type.Optional(Type.String()),
+  }),
+  MapProps: Type.Interface([Type.Ref("HtmlProps")], {
+    name: Type.Optional(Type.String()),
+  }),
+  MediaProps: Type.Interface([Type.Ref("HtmlProps")], {
+    autoplay: Type.Optional(Type.Boolean()),
+    controls: Type.Optional(Type.Boolean()),
+    controlslist: Type.Optional(Type.String()),
+    crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
+    loop: Type.Optional(Type.Boolean()),
+    muted: Type.Optional(Type.Boolean()),
+    preload: Type.Optional(
+      Type.Union([
+        Type.Literal("none"),
+        Type.Literal("metadata"),
+        Type.Literal("auto"),
+        Type.Literal(""),
+      ]),
+    ),
+    src: Type.Optional(Type.String()),
+  }),
+  MetaProps: Type.Interface([Type.Ref("VoidProps")], {
+    charset: Type.Optional(Type.String()),
+    content: Type.Optional(Type.String()),
+    "http-equiv": Type.Optional(Type.String()),
+    media: Type.Optional(Type.String()),
+    name: Type.Optional(Type.String()),
+  }),
+  MeterProps: Type.Interface([Type.Ref("HtmlProps")], {
+    form: Type.Optional(Type.String()),
+    high: Type.Optional(Type.Number()),
+    low: Type.Optional(Type.Number()),
+    max: Type.Optional(Type.Ref("Numeric")),
+    min: Type.Optional(Type.Ref("Numeric")),
+    optimum: Type.Optional(Type.Number()),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+  }),
+  ObjectProps: Type.Interface([Type.Ref("HtmlProps")], {
+    data: Type.Optional(Type.String()),
+    form: Type.Optional(Type.String()),
+    height: Type.Optional(Type.Ref("Numeric")),
+    name: Type.Optional(Type.String()),
+    type: Type.Optional(Type.String()),
+    usemap: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  OlProps: Type.Interface([Type.Ref("HtmlProps")], {
+    reversed: Type.Optional(Type.Boolean()),
+    start: Type.Optional(Type.Number()),
+    type: Type.Optional(
+      Type.Union([
+        Type.Literal("1"),
+        Type.Literal("a"),
+        Type.Literal("A"),
+        Type.Literal("i"),
+        Type.Literal("I"),
+      ]),
+    ),
+  }),
+  OptgroupProps: Type.Interface([Type.Ref("HtmlProps")], {
+    disabled: Type.Optional(Type.Boolean()),
+    label: Type.Optional(Type.String()),
+  }),
+  OptionProps: Type.Interface([Type.Ref("HtmlProps")], {
+    disabled: Type.Optional(Type.Boolean()),
+    label: Type.Optional(Type.String()),
+    selected: Type.Optional(Type.Boolean()),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+  }),
+  OutputProps: Type.Interface([Type.Ref("HtmlProps")], {
+    for: Type.Optional(Type.String()),
+    form: Type.Optional(Type.String()),
+    name: Type.Optional(Type.String()),
+  }),
+  ProgressProps: Type.Interface([Type.Ref("HtmlProps")], {
+    max: Type.Optional(Type.Ref("Numeric")),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+  }),
+  QuoteProps: Type.Interface([Type.Ref("HtmlProps")], {
+    cite: Type.Optional(Type.String()),
+  }),
+  ScriptProps: Type.Interface([Type.Ref("HtmlProps")], {
+    async: Type.Optional(Type.Boolean()),
+    crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
+    defer: Type.Optional(Type.Boolean()),
+    fetchpriority: Type.Optional(
+      Type.Union([
+        Type.Literal("high"),
+        Type.Literal("low"),
+        Type.Literal("auto"),
+      ]),
+    ),
+    integrity: Type.Optional(Type.String()),
+    nomodule: Type.Optional(Type.Boolean()),
+    referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
+    src: Type.Optional(Type.String()),
+    type: Type.Optional(Type.String()),
+  }),
+  SelectProps: Type.Interface([Type.Ref("HtmlProps")], {
+    autocomplete: Type.Optional(Type.String()),
+    disabled: Type.Optional(Type.Boolean()),
+    form: Type.Optional(Type.String()),
+    multiple: Type.Optional(Type.Boolean()),
+    name: Type.Optional(Type.String()),
+    required: Type.Optional(Type.Boolean()),
+    size: Type.Optional(Type.Number()),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+  }),
+  SlotProps: Type.Interface([Type.Ref("HtmlProps")], {
+    name: Type.Optional(Type.String()),
+  }),
+  SourceProps: Type.Interface([Type.Ref("VoidProps")], {
+    height: Type.Optional(Type.Ref("Numeric")),
+    media: Type.Optional(Type.String()),
+    sizes: Type.Optional(Type.String()),
+    src: Type.Optional(Type.String()),
+    srcset: Type.Optional(Type.String()),
+    type: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  StyleProps: Type.Interface([Type.Ref("HtmlProps")], {
+    media: Type.Optional(Type.String()),
+    type: Type.Optional(Type.String()),
+  }),
+  TableProps: Type.Interface([Type.Ref("HtmlProps")], {
+    summary: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
+  TdProps: Type.Interface([Type.Ref("HtmlProps")], {
+    colspan: Type.Optional(Type.Number()),
+    headers: Type.Optional(Type.String()),
+    rowspan: Type.Optional(Type.Number()),
+  }),
+  ThProps: Type.Interface([Type.Ref("HtmlProps")], {
+    abbr: Type.Optional(Type.String()),
+    colspan: Type.Optional(Type.Number()),
+    headers: Type.Optional(Type.String()),
+    rowspan: Type.Optional(Type.Number()),
+    scope: Type.Optional(
+      Type.Union([
+        Type.Literal("row"),
+        Type.Literal("col"),
+        Type.Literal("rowgroup"),
+        Type.Literal("colgroup"),
+      ]),
+    ),
+  }),
+  TextareaProps: Type.Interface([Type.Ref("HtmlProps")], {
+    autocomplete: Type.Optional(Type.String()),
+    cols: Type.Optional(Type.Number()),
+    dirname: Type.Optional(Type.String()),
+    disabled: Type.Optional(Type.Boolean()),
+    form: Type.Optional(Type.String()),
+    maxlength: Type.Optional(Type.Number()),
+    minlength: Type.Optional(Type.Number()),
+    name: Type.Optional(Type.String()),
+    placeholder: Type.Optional(Type.String()),
+    readonly: Type.Optional(Type.Boolean()),
+    required: Type.Optional(Type.Boolean()),
+    rows: Type.Optional(Type.Number()),
+    value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
+    wrap: Type.Optional(
+      Type.Union([
+        Type.Literal("hard"),
+        Type.Literal("soft"),
+        Type.Literal("off"),
+      ]),
+    ),
+  }),
+  TimeProps: Type.Interface([Type.Ref("HtmlProps")], {
+    datetime: Type.Optional(Type.String()),
+  }),
+  TrackProps: Type.Interface([Type.Ref("VoidProps")], {
+    default: Type.Optional(Type.Boolean()),
+    kind: Type.Optional(
+      Type.Union([
+        Type.Literal("subtitles"),
+        Type.Literal("captions"),
+        Type.Literal("descriptions"),
+        Type.Literal("chapters"),
+        Type.Literal("metadata"),
+      ]),
+    ),
+    label: Type.Optional(Type.String()),
+    src: Type.Optional(Type.String()),
+    srclang: Type.Optional(Type.String()),
+  }),
+  VideoProps: Type.Interface([Type.Ref("MediaProps")], {
+    disablepictureinpicture: Type.Optional(Type.Boolean()),
+    disableremoteplayback: Type.Optional(Type.Boolean()),
+    height: Type.Optional(Type.Ref("Numeric")),
+    playsinline: Type.Optional(Type.Boolean()),
+    poster: Type.Optional(Type.String()),
+    width: Type.Optional(Type.Ref("Numeric")),
+  }),
 };
 
 // Keyed by tag, which is also the id the wire carries and the string

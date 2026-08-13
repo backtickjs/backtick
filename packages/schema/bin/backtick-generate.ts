@@ -2,9 +2,7 @@
 import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { emitJson } from "../src/emitJson.ts";
-import { emitJsx } from "../src/emitJsx.ts";
-import type { Schema } from "../src/Schema.ts";
+import { emitJson, emitJsx, type Schema } from "../dist/index.js";
 
 // Every target's `pnpm generate`, run from the package it generates for.
 //

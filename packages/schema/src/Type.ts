@@ -1,5 +1,6 @@
 import { Type as TypeBox } from "typebox";
 import { Element } from "./nodes/Element.js";
+import { Interface } from "./nodes/Interface.js";
 
 /**
  * How a schema is written: the nodes of `SchemaNode` and nothing else.
@@ -19,7 +20,6 @@ export const Type = {
   Boolean: TypeBox.Boolean,
   Literal: TypeBox.Literal,
   Union: TypeBox.Union,
-  Intersect: TypeBox.Intersect,
   Object: TypeBox.Object,
   Array: TypeBox.Array,
   Function: TypeBox.Function,
@@ -31,4 +31,5 @@ export const Type = {
   Generic: TypeBox.Generic,
   Parameter: TypeBox.Parameter,
   Element,
+  Interface,
 };

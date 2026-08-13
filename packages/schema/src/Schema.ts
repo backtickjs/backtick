@@ -1,10 +1,10 @@
 import type { TElement } from "./nodes/Element.js";
+import type { TInterface } from "./nodes/Interface.js";
 import type {
   TArray,
   TBoolean,
   TFunction,
   TGeneric,
-  TIntersect,
   TLiteral,
   TNull,
   TNumber,
@@ -35,7 +35,7 @@ export type SchemaNode =
   | TBoolean
   | TLiteral
   | TUnion
-  | TIntersect
+  | TInterface
   | TObject
   | TArray
   | TFunction

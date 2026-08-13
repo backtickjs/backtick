@@ -302,17 +302,6 @@
         {
           "type": "string",
           "const": "treeitem"
-        },
-        {
-          "allOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "object",
-              "properties": {}
-            }
-          ]
         }
       ]
     },
@@ -389,17 +378,6 @@
         {
           "type": "string",
           "const": "_top"
-        },
-        {
-          "allOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "object",
-              "properties": {}
-            }
-          ]
         }
       ]
     }
@@ -1080,7 +1058,8 @@
   },
   "interfaces": {
     "AriaAttributes": {
-      "type": "object",
+      "type": "interface",
+      "extends": [],
       "properties": {
         "aria-activedescendant": {
           "type": "string"
@@ -1448,10 +1427,12 @@
         "aria-valuetext": {
           "type": "string"
         }
-      }
+      },
+      "required": []
     },
     "Events": {
-      "type": "object",
+      "type": "interface",
+      "extends": [],
       "properties": {
         "oncopy": {
           "type": "function",
@@ -2062,309 +2043,288 @@
             "type": "void"
           }
         }
-      }
+      },
+      "required": []
     },
     "GlobalAttributes": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "AriaAttributes"
         },
         {
           "$ref": "Events"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "accesskey": {
-              "type": "string"
-            },
-            "autocapitalize": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "off"
-                },
-                {
-                  "type": "string",
-                  "const": "none"
-                },
-                {
-                  "type": "string",
-                  "const": "on"
-                },
-                {
-                  "type": "string",
-                  "const": "sentences"
-                },
-                {
-                  "type": "string",
-                  "const": "words"
-                },
-                {
-                  "type": "string",
-                  "const": "characters"
-                }
-              ]
-            },
-            "autocorrect": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "on"
-                },
-                {
-                  "type": "string",
-                  "const": "off"
-                }
-              ]
-            },
-            "autofocus": {
-              "type": "boolean"
-            },
-            "class": {
-              "type": "string"
-            },
-            "contenteditable": {
-              "anyOf": [
-                {
-                  "$ref": "Booleanish"
-                },
-                {
-                  "type": "string",
-                  "const": "inherit"
-                },
-                {
-                  "type": "string",
-                  "const": "plaintext-only"
-                }
-              ]
-            },
-            "dir": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "ltr"
-                },
-                {
-                  "type": "string",
-                  "const": "rtl"
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                }
-              ]
-            },
-            "draggable": {
-              "$ref": "Booleanish"
-            },
-            "enterkeyhint": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "enter"
-                },
-                {
-                  "type": "string",
-                  "const": "done"
-                },
-                {
-                  "type": "string",
-                  "const": "go"
-                },
-                {
-                  "type": "string",
-                  "const": "next"
-                },
-                {
-                  "type": "string",
-                  "const": "previous"
-                },
-                {
-                  "type": "string",
-                  "const": "search"
-                },
-                {
-                  "type": "string",
-                  "const": "send"
-                }
-              ]
-            },
-            "exportparts": {
-              "type": "string"
-            },
-            "hidden": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "string",
-                  "const": "until-found"
-                }
-              ]
-            },
-            "id": {
-              "type": "string"
-            },
-            "inert": {
-              "type": "boolean"
-            },
-            "inputmode": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "none"
-                },
-                {
-                  "type": "string",
-                  "const": "text"
-                },
-                {
-                  "type": "string",
-                  "const": "tel"
-                },
-                {
-                  "type": "string",
-                  "const": "url"
-                },
-                {
-                  "type": "string",
-                  "const": "email"
-                },
-                {
-                  "type": "string",
-                  "const": "numeric"
-                },
-                {
-                  "type": "string",
-                  "const": "decimal"
-                },
-                {
-                  "type": "string",
-                  "const": "search"
-                }
-              ]
-            },
-            "is": {
-              "type": "string"
-            },
-            "itemid": {
-              "type": "string"
-            },
-            "itemprop": {
-              "type": "string"
-            },
-            "itemref": {
-              "type": "string"
-            },
-            "itemscope": {
-              "type": "boolean"
-            },
-            "itemtype": {
-              "type": "string"
-            },
-            "lang": {
-              "type": "string"
-            },
-            "nonce": {
-              "type": "string"
-            },
-            "part": {
-              "type": "string"
-            },
-            "popover": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": ""
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                },
-                {
-                  "type": "string",
-                  "const": "manual"
-                },
-                {
-                  "type": "string",
-                  "const": "hint"
-                }
-              ]
-            },
-            "role": {
-              "$ref": "AriaRole"
-            },
-            "slot": {
-              "type": "string"
-            },
-            "spellcheck": {
-              "$ref": "Booleanish"
-            },
-            "style": {
-              "type": "string"
-            },
-            "tabindex": {
-              "type": "number"
-            },
-            "title": {
-              "type": "string"
-            },
-            "translate": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "yes"
-                },
-                {
-                  "type": "string",
-                  "const": "no"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "accesskey": {
+          "type": "string"
+        },
+        "autocapitalize": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "off"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "on"
+            },
+            {
+              "type": "string",
+              "const": "sentences"
+            },
+            {
+              "type": "string",
+              "const": "words"
+            },
+            {
+              "type": "string",
+              "const": "characters"
+            }
+          ]
+        },
+        "autocorrect": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "on"
+            },
+            {
+              "type": "string",
+              "const": "off"
+            }
+          ]
+        },
+        "autofocus": {
+          "type": "boolean"
+        },
+        "class": {
+          "type": "string"
+        },
+        "contenteditable": {
+          "anyOf": [
+            {
+              "$ref": "Booleanish"
+            },
+            {
+              "type": "string",
+              "const": "inherit"
+            },
+            {
+              "type": "string",
+              "const": "plaintext-only"
+            }
+          ]
+        },
+        "dir": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "ltr"
+            },
+            {
+              "type": "string",
+              "const": "rtl"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "draggable": {
+          "$ref": "Booleanish"
+        },
+        "enterkeyhint": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "enter"
+            },
+            {
+              "type": "string",
+              "const": "done"
+            },
+            {
+              "type": "string",
+              "const": "go"
+            },
+            {
+              "type": "string",
+              "const": "next"
+            },
+            {
+              "type": "string",
+              "const": "previous"
+            },
+            {
+              "type": "string",
+              "const": "search"
+            },
+            {
+              "type": "string",
+              "const": "send"
+            }
+          ]
+        },
+        "exportparts": {
+          "type": "string"
+        },
+        "hidden": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "until-found"
+            }
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "inert": {
+          "type": "boolean"
+        },
+        "inputmode": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            },
+            {
+              "type": "string",
+              "const": "tel"
+            },
+            {
+              "type": "string",
+              "const": "url"
+            },
+            {
+              "type": "string",
+              "const": "email"
+            },
+            {
+              "type": "string",
+              "const": "numeric"
+            },
+            {
+              "type": "string",
+              "const": "decimal"
+            },
+            {
+              "type": "string",
+              "const": "search"
+            }
+          ]
+        },
+        "is": {
+          "type": "string"
+        },
+        "itemid": {
+          "type": "string"
+        },
+        "itemprop": {
+          "type": "string"
+        },
+        "itemref": {
+          "type": "string"
+        },
+        "itemscope": {
+          "type": "boolean"
+        },
+        "itemtype": {
+          "type": "string"
+        },
+        "lang": {
+          "type": "string"
+        },
+        "nonce": {
+          "type": "string"
+        },
+        "part": {
+          "type": "string"
+        },
+        "popover": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": ""
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            },
+            {
+              "type": "string",
+              "const": "manual"
+            },
+            {
+              "type": "string",
+              "const": "hint"
+            }
+          ]
+        },
+        "role": {
+          "$ref": "AriaRole"
+        },
+        "slot": {
+          "type": "string"
+        },
+        "spellcheck": {
+          "$ref": "Booleanish"
+        },
+        "style": {
+          "type": "string"
+        },
+        "tabindex": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "translate": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "yes"
+            },
+            {
+              "type": "string",
+              "const": "no"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "VoidProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "GlobalAttributes"
-        },
-        {
-          "type": "object",
-          "properties": {}
         }
-      ]
+      ],
+      "properties": {},
+      "required": []
     },
     "HtmlProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "GlobalAttributes"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "children": {
-              "anyOf": [
-                {
-                  "$ref": "JsxElement"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
         }
-      ]
-    },
-    "FragmentProps": {
-      "type": "object",
+      ],
       "properties": {
         "children": {
           "anyOf": [
@@ -2379,1707 +2339,1682 @@
             }
           ]
         }
-      }
+      },
+      "required": []
+    },
+    "FragmentProps": {
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "children": {
+          "anyOf": [
+            {
+              "$ref": "JsxElement"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "AnchorProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "download": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "href": {
-              "type": "string"
-            },
-            "hreflang": {
-              "type": "string"
-            },
-            "media": {
-              "type": "string"
-            },
-            "ping": {
-              "type": "string"
-            },
-            "referrerpolicy": {
-              "$ref": "ReferrerPolicy"
-            },
-            "rel": {
-              "type": "string"
-            },
-            "target": {
-              "$ref": "Target"
-            },
-            "type": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "download": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "hreflang": {
+          "type": "string"
+        },
+        "media": {
+          "type": "string"
+        },
+        "ping": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "$ref": "ReferrerPolicy"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "Target"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "AreaProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "alt": {
-              "type": "string"
-            },
-            "coords": {
-              "type": "string"
-            },
-            "download": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "boolean"
-                }
-              ]
-            },
-            "href": {
-              "type": "string"
-            },
-            "referrerpolicy": {
-              "$ref": "ReferrerPolicy"
-            },
-            "rel": {
-              "type": "string"
-            },
-            "shape": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "rect"
-                },
-                {
-                  "type": "string",
-                  "const": "circle"
-                },
-                {
-                  "type": "string",
-                  "const": "poly"
-                },
-                {
-                  "type": "string",
-                  "const": "default"
-                }
-              ]
-            },
-            "target": {
-              "$ref": "Target"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "alt": {
+          "type": "string"
+        },
+        "coords": {
+          "type": "string"
+        },
+        "download": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "$ref": "ReferrerPolicy"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "shape": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "rect"
+            },
+            {
+              "type": "string",
+              "const": "circle"
+            },
+            {
+              "type": "string",
+              "const": "poly"
+            },
+            {
+              "type": "string",
+              "const": "default"
+            }
+          ]
+        },
+        "target": {
+          "$ref": "Target"
+        }
+      },
+      "required": []
     },
     "BaseProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "href": {
-              "type": "string"
-            },
-            "target": {
-              "$ref": "Target"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "Target"
+        }
+      },
+      "required": []
     },
     "BlockquoteProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "cite": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "ButtonProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "disabled": {
-              "type": "boolean"
-            },
-            "form": {
-              "type": "string"
-            },
-            "formaction": {
-              "type": "string"
-            },
-            "formenctype": {
-              "type": "string"
-            },
-            "formmethod": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "get"
-                },
-                {
-                  "type": "string",
-                  "const": "post"
-                },
-                {
-                  "type": "string",
-                  "const": "dialog"
-                }
-              ]
-            },
-            "formnovalidate": {
-              "type": "boolean"
-            },
-            "formtarget": {
-              "$ref": "Target"
-            },
-            "name": {
-              "type": "string"
-            },
-            "popovertarget": {
-              "type": "string"
-            },
-            "popovertargetaction": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "toggle"
-                },
-                {
-                  "type": "string",
-                  "const": "show"
-                },
-                {
-                  "type": "string",
-                  "const": "hide"
-                }
-              ]
-            },
-            "type": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "submit"
-                },
-                {
-                  "type": "string",
-                  "const": "reset"
-                },
-                {
-                  "type": "string",
-                  "const": "button"
-                }
-              ]
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "formaction": {
+          "type": "string"
+        },
+        "formenctype": {
+          "type": "string"
+        },
+        "formmethod": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "get"
+            },
+            {
+              "type": "string",
+              "const": "post"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "formnovalidate": {
+          "type": "boolean"
+        },
+        "formtarget": {
+          "$ref": "Target"
+        },
+        "name": {
+          "type": "string"
+        },
+        "popovertarget": {
+          "type": "string"
+        },
+        "popovertargetaction": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "toggle"
+            },
+            {
+              "type": "string",
+              "const": "show"
+            },
+            {
+              "type": "string",
+              "const": "hide"
+            }
+          ]
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "submit"
+            },
+            {
+              "type": "string",
+              "const": "reset"
+            },
+            {
+              "type": "string",
+              "const": "button"
+            }
+          ]
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "CanvasProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "height": {
-              "$ref": "Numeric"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "height": {
+          "$ref": "Numeric"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "ColProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "span": {
-              "type": "number"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "span": {
+          "type": "number"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "ColgroupProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "span": {
-              "type": "number"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "span": {
+          "type": "number"
+        }
+      },
+      "required": []
     },
     "DataProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "DelProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "cite": {
-              "type": "string"
-            },
-            "datetime": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "DetailsProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "open": {
-              "type": "boolean"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "open": {
+          "type": "boolean"
+        }
+      },
+      "required": []
     },
     "DialogProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "closedby": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "any"
-                },
-                {
-                  "type": "string",
-                  "const": "closerequest"
-                },
-                {
-                  "type": "string",
-                  "const": "none"
-                }
-              ]
-            },
-            "open": {
-              "type": "boolean"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "closedby": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "any"
+            },
+            {
+              "type": "string",
+              "const": "closerequest"
+            },
+            {
+              "type": "string",
+              "const": "none"
+            }
+          ]
+        },
+        "open": {
+          "type": "boolean"
+        }
+      },
+      "required": []
     },
     "EmbedProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "height": {
-              "$ref": "Numeric"
-            },
-            "src": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "height": {
+          "$ref": "Numeric"
+        },
+        "src": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "FieldsetProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "disabled": {
-              "type": "boolean"
-            },
-            "form": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "FormProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "accept-charset": {
-              "type": "string"
-            },
-            "action": {
-              "type": "string"
-            },
-            "autocomplete": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "on"
-                },
-                {
-                  "type": "string",
-                  "const": "off"
-                }
-              ]
-            },
-            "enctype": {
-              "type": "string"
-            },
-            "method": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "get"
-                },
-                {
-                  "type": "string",
-                  "const": "post"
-                },
-                {
-                  "type": "string",
-                  "const": "dialog"
-                }
-              ]
-            },
-            "name": {
-              "type": "string"
-            },
-            "novalidate": {
-              "type": "boolean"
-            },
-            "rel": {
-              "type": "string"
-            },
-            "target": {
-              "$ref": "Target"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "accept-charset": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "autocomplete": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "on"
+            },
+            {
+              "type": "string",
+              "const": "off"
+            }
+          ]
+        },
+        "enctype": {
+          "type": "string"
+        },
+        "method": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "get"
+            },
+            {
+              "type": "string",
+              "const": "post"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "novalidate": {
+          "type": "boolean"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "target": {
+          "$ref": "Target"
+        }
+      },
+      "required": []
     },
     "HtmlElementProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "manifest": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "manifest": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "IframeProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "allow": {
-              "type": "string"
-            },
-            "allowfullscreen": {
-              "type": "boolean"
-            },
-            "height": {
-              "$ref": "Numeric"
-            },
-            "loading": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "eager"
-                },
-                {
-                  "type": "string",
-                  "const": "lazy"
-                }
-              ]
-            },
-            "name": {
-              "type": "string"
-            },
-            "referrerpolicy": {
-              "$ref": "ReferrerPolicy"
-            },
-            "sandbox": {
-              "type": "string"
-            },
-            "src": {
-              "type": "string"
-            },
-            "srcdoc": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "allow": {
+          "type": "string"
+        },
+        "allowfullscreen": {
+          "type": "boolean"
+        },
+        "height": {
+          "$ref": "Numeric"
+        },
+        "loading": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "eager"
+            },
+            {
+              "type": "string",
+              "const": "lazy"
+            }
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "$ref": "ReferrerPolicy"
+        },
+        "sandbox": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srcdoc": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "ImgProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "alt": {
-              "type": "string"
-            },
-            "crossorigin": {
-              "$ref": "CrossOrigin"
-            },
-            "decoding": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "async"
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                },
-                {
-                  "type": "string",
-                  "const": "sync"
-                }
-              ]
-            },
-            "fetchpriority": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "high"
-                },
-                {
-                  "type": "string",
-                  "const": "low"
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                }
-              ]
-            },
-            "height": {
-              "$ref": "Numeric"
-            },
-            "loading": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "eager"
-                },
-                {
-                  "type": "string",
-                  "const": "lazy"
-                }
-              ]
-            },
-            "referrerpolicy": {
-              "$ref": "ReferrerPolicy"
-            },
-            "sizes": {
-              "type": "string"
-            },
-            "src": {
-              "type": "string"
-            },
-            "srcset": {
-              "type": "string"
-            },
-            "usemap": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "alt": {
+          "type": "string"
+        },
+        "crossorigin": {
+          "$ref": "CrossOrigin"
+        },
+        "decoding": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "async"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            },
+            {
+              "type": "string",
+              "const": "sync"
+            }
+          ]
+        },
+        "fetchpriority": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "high"
+            },
+            {
+              "type": "string",
+              "const": "low"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "height": {
+          "$ref": "Numeric"
+        },
+        "loading": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "eager"
+            },
+            {
+              "type": "string",
+              "const": "lazy"
+            }
+          ]
+        },
+        "referrerpolicy": {
+          "$ref": "ReferrerPolicy"
+        },
+        "sizes": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srcset": {
+          "type": "string"
+        },
+        "usemap": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "InputProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "accept": {
-              "type": "string"
-            },
-            "alt": {
-              "type": "string"
-            },
-            "autocomplete": {
-              "type": "string"
-            },
-            "capture": {
-              "anyOf": [
-                {
-                  "type": "boolean"
-                },
-                {
-                  "type": "string",
-                  "const": "user"
-                },
-                {
-                  "type": "string",
-                  "const": "environment"
-                }
-              ]
-            },
-            "checked": {
-              "type": "boolean"
-            },
-            "dirname": {
-              "type": "string"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "form": {
-              "type": "string"
-            },
-            "formaction": {
-              "type": "string"
-            },
-            "formenctype": {
-              "type": "string"
-            },
-            "formmethod": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "get"
-                },
-                {
-                  "type": "string",
-                  "const": "post"
-                },
-                {
-                  "type": "string",
-                  "const": "dialog"
-                }
-              ]
-            },
-            "formnovalidate": {
-              "type": "boolean"
-            },
-            "formtarget": {
-              "$ref": "Target"
-            },
-            "height": {
-              "$ref": "Numeric"
-            },
-            "list": {
-              "type": "string"
-            },
-            "max": {
-              "$ref": "Numeric"
-            },
-            "maxlength": {
-              "type": "number"
-            },
-            "min": {
-              "$ref": "Numeric"
-            },
-            "minlength": {
-              "type": "number"
-            },
-            "multiple": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string"
-            },
-            "pattern": {
-              "type": "string"
-            },
-            "placeholder": {
-              "type": "string"
-            },
-            "readonly": {
-              "type": "boolean"
-            },
-            "required": {
-              "type": "boolean"
-            },
-            "size": {
-              "type": "number"
-            },
-            "src": {
-              "type": "string"
-            },
-            "step": {
-              "$ref": "Numeric"
-            },
-            "type": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "button"
-                },
-                {
-                  "type": "string",
-                  "const": "checkbox"
-                },
-                {
-                  "type": "string",
-                  "const": "color"
-                },
-                {
-                  "type": "string",
-                  "const": "date"
-                },
-                {
-                  "type": "string",
-                  "const": "datetime-local"
-                },
-                {
-                  "type": "string",
-                  "const": "email"
-                },
-                {
-                  "type": "string",
-                  "const": "file"
-                },
-                {
-                  "type": "string",
-                  "const": "hidden"
-                },
-                {
-                  "type": "string",
-                  "const": "image"
-                },
-                {
-                  "type": "string",
-                  "const": "month"
-                },
-                {
-                  "type": "string",
-                  "const": "number"
-                },
-                {
-                  "type": "string",
-                  "const": "password"
-                },
-                {
-                  "type": "string",
-                  "const": "radio"
-                },
-                {
-                  "type": "string",
-                  "const": "range"
-                },
-                {
-                  "type": "string",
-                  "const": "reset"
-                },
-                {
-                  "type": "string",
-                  "const": "search"
-                },
-                {
-                  "type": "string",
-                  "const": "submit"
-                },
-                {
-                  "type": "string",
-                  "const": "tel"
-                },
-                {
-                  "type": "string",
-                  "const": "text"
-                },
-                {
-                  "type": "string",
-                  "const": "time"
-                },
-                {
-                  "type": "string",
-                  "const": "url"
-                },
-                {
-                  "type": "string",
-                  "const": "week"
-                }
-              ]
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "accept": {
+          "type": "string"
+        },
+        "alt": {
+          "type": "string"
+        },
+        "autocomplete": {
+          "type": "string"
+        },
+        "capture": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "string",
+              "const": "user"
+            },
+            {
+              "type": "string",
+              "const": "environment"
+            }
+          ]
+        },
+        "checked": {
+          "type": "boolean"
+        },
+        "dirname": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "formaction": {
+          "type": "string"
+        },
+        "formenctype": {
+          "type": "string"
+        },
+        "formmethod": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "get"
+            },
+            {
+              "type": "string",
+              "const": "post"
+            },
+            {
+              "type": "string",
+              "const": "dialog"
+            }
+          ]
+        },
+        "formnovalidate": {
+          "type": "boolean"
+        },
+        "formtarget": {
+          "$ref": "Target"
+        },
+        "height": {
+          "$ref": "Numeric"
+        },
+        "list": {
+          "type": "string"
+        },
+        "max": {
+          "$ref": "Numeric"
+        },
+        "maxlength": {
+          "type": "number"
+        },
+        "min": {
+          "$ref": "Numeric"
+        },
+        "minlength": {
+          "type": "number"
+        },
+        "multiple": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "number"
+        },
+        "src": {
+          "type": "string"
+        },
+        "step": {
+          "$ref": "Numeric"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "button"
+            },
+            {
+              "type": "string",
+              "const": "checkbox"
+            },
+            {
+              "type": "string",
+              "const": "color"
+            },
+            {
+              "type": "string",
+              "const": "date"
+            },
+            {
+              "type": "string",
+              "const": "datetime-local"
+            },
+            {
+              "type": "string",
+              "const": "email"
+            },
+            {
+              "type": "string",
+              "const": "file"
+            },
+            {
+              "type": "string",
+              "const": "hidden"
+            },
+            {
+              "type": "string",
+              "const": "image"
+            },
+            {
+              "type": "string",
+              "const": "month"
+            },
+            {
+              "type": "string",
+              "const": "number"
+            },
+            {
+              "type": "string",
+              "const": "password"
+            },
+            {
+              "type": "string",
+              "const": "radio"
+            },
+            {
+              "type": "string",
+              "const": "range"
+            },
+            {
+              "type": "string",
+              "const": "reset"
+            },
+            {
+              "type": "string",
+              "const": "search"
+            },
+            {
+              "type": "string",
+              "const": "submit"
+            },
+            {
+              "type": "string",
+              "const": "tel"
+            },
+            {
+              "type": "string",
+              "const": "text"
+            },
+            {
+              "type": "string",
+              "const": "time"
+            },
+            {
+              "type": "string",
+              "const": "url"
+            },
+            {
+              "type": "string",
+              "const": "week"
+            }
+          ]
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "InsProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "cite": {
-              "type": "string"
-            },
-            "datetime": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "LabelProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "for": {
-              "type": "string"
-            },
-            "form": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "for": {
+          "type": "string"
+        },
+        "form": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "LiProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "value": {
-              "type": "number"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": []
     },
     "LinkProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "as": {
-              "type": "string"
-            },
-            "crossorigin": {
-              "$ref": "CrossOrigin"
-            },
-            "fetchpriority": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "high"
-                },
-                {
-                  "type": "string",
-                  "const": "low"
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                }
-              ]
-            },
-            "href": {
-              "type": "string"
-            },
-            "hreflang": {
-              "type": "string"
-            },
-            "imagesizes": {
-              "type": "string"
-            },
-            "imagesrcset": {
-              "type": "string"
-            },
-            "integrity": {
-              "type": "string"
-            },
-            "media": {
-              "type": "string"
-            },
-            "referrerpolicy": {
-              "$ref": "ReferrerPolicy"
-            },
-            "rel": {
-              "type": "string"
-            },
-            "sizes": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "as": {
+          "type": "string"
+        },
+        "crossorigin": {
+          "$ref": "CrossOrigin"
+        },
+        "fetchpriority": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "high"
+            },
+            {
+              "type": "string",
+              "const": "low"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "href": {
+          "type": "string"
+        },
+        "hreflang": {
+          "type": "string"
+        },
+        "imagesizes": {
+          "type": "string"
+        },
+        "imagesrcset": {
+          "type": "string"
+        },
+        "integrity": {
+          "type": "string"
+        },
+        "media": {
+          "type": "string"
+        },
+        "referrerpolicy": {
+          "$ref": "ReferrerPolicy"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "sizes": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "MapProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "MediaProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "autoplay": {
-              "type": "boolean"
-            },
-            "controls": {
-              "type": "boolean"
-            },
-            "controlslist": {
-              "type": "string"
-            },
-            "crossorigin": {
-              "$ref": "CrossOrigin"
-            },
-            "loop": {
-              "type": "boolean"
-            },
-            "muted": {
-              "type": "boolean"
-            },
-            "preload": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "none"
-                },
-                {
-                  "type": "string",
-                  "const": "metadata"
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                },
-                {
-                  "type": "string",
-                  "const": ""
-                }
-              ]
-            },
-            "src": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "autoplay": {
+          "type": "boolean"
+        },
+        "controls": {
+          "type": "boolean"
+        },
+        "controlslist": {
+          "type": "string"
+        },
+        "crossorigin": {
+          "$ref": "CrossOrigin"
+        },
+        "loop": {
+          "type": "boolean"
+        },
+        "muted": {
+          "type": "boolean"
+        },
+        "preload": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "none"
+            },
+            {
+              "type": "string",
+              "const": "metadata"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            },
+            {
+              "type": "string",
+              "const": ""
+            }
+          ]
+        },
+        "src": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "MetaProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "charset": {
-              "type": "string"
-            },
-            "content": {
-              "type": "string"
-            },
-            "http-equiv": {
-              "type": "string"
-            },
-            "media": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "charset": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "http-equiv": {
+          "type": "string"
+        },
+        "media": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "MeterProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "form": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "properties": {
-            "form": {
+        "high": {
+          "type": "number"
+        },
+        "low": {
+          "type": "number"
+        },
+        "max": {
+          "$ref": "Numeric"
+        },
+        "min": {
+          "$ref": "Numeric"
+        },
+        "optimum": {
+          "type": "number"
+        },
+        "value": {
+          "anyOf": [
+            {
               "type": "string"
             },
-            "high": {
+            {
               "type": "number"
-            },
-            "low": {
-              "type": "number"
-            },
-            "max": {
-              "$ref": "Numeric"
-            },
-            "min": {
-              "$ref": "Numeric"
-            },
-            "optimum": {
-              "type": "number"
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
             }
-          }
+          ]
         }
-      ]
+      },
+      "required": []
     },
     "ObjectProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "data": {
-              "type": "string"
-            },
-            "form": {
-              "type": "string"
-            },
-            "height": {
-              "$ref": "Numeric"
-            },
-            "name": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "usemap": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "form": {
+          "type": "string"
+        },
+        "height": {
+          "$ref": "Numeric"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "usemap": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "OlProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "reversed": {
-              "type": "boolean"
-            },
-            "start": {
-              "type": "number"
-            },
-            "type": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "1"
-                },
-                {
-                  "type": "string",
-                  "const": "a"
-                },
-                {
-                  "type": "string",
-                  "const": "A"
-                },
-                {
-                  "type": "string",
-                  "const": "i"
-                },
-                {
-                  "type": "string",
-                  "const": "I"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "reversed": {
+          "type": "boolean"
+        },
+        "start": {
+          "type": "number"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "1"
+            },
+            {
+              "type": "string",
+              "const": "a"
+            },
+            {
+              "type": "string",
+              "const": "A"
+            },
+            {
+              "type": "string",
+              "const": "i"
+            },
+            {
+              "type": "string",
+              "const": "I"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "OptgroupProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "disabled": {
-              "type": "boolean"
-            },
-            "label": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "OptionProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
+        }
+      ],
+      "properties": {
+        "disabled": {
+          "type": "boolean"
         },
-        {
-          "type": "object",
-          "properties": {
-            "disabled": {
-              "type": "boolean"
-            },
-            "label": {
+        "label": {
+          "type": "string"
+        },
+        "selected": {
+          "type": "boolean"
+        },
+        "value": {
+          "anyOf": [
+            {
               "type": "string"
             },
-            "selected": {
-              "type": "boolean"
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
+            {
+              "type": "number"
             }
-          }
+          ]
         }
-      ]
+      },
+      "required": []
     },
     "OutputProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "for": {
-              "type": "string"
-            },
-            "form": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "for": {
+          "type": "string"
+        },
+        "form": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "ProgressProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "max": {
-              "$ref": "Numeric"
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "max": {
+          "$ref": "Numeric"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "QuoteProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "cite": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "cite": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "ScriptProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "async": {
-              "type": "boolean"
-            },
-            "crossorigin": {
-              "$ref": "CrossOrigin"
-            },
-            "defer": {
-              "type": "boolean"
-            },
-            "fetchpriority": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "high"
-                },
-                {
-                  "type": "string",
-                  "const": "low"
-                },
-                {
-                  "type": "string",
-                  "const": "auto"
-                }
-              ]
-            },
-            "integrity": {
-              "type": "string"
-            },
-            "nomodule": {
-              "type": "boolean"
-            },
-            "referrerpolicy": {
-              "$ref": "ReferrerPolicy"
-            },
-            "src": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "async": {
+          "type": "boolean"
+        },
+        "crossorigin": {
+          "$ref": "CrossOrigin"
+        },
+        "defer": {
+          "type": "boolean"
+        },
+        "fetchpriority": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "high"
+            },
+            {
+              "type": "string",
+              "const": "low"
+            },
+            {
+              "type": "string",
+              "const": "auto"
+            }
+          ]
+        },
+        "integrity": {
+          "type": "string"
+        },
+        "nomodule": {
+          "type": "boolean"
+        },
+        "referrerpolicy": {
+          "$ref": "ReferrerPolicy"
+        },
+        "src": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "SelectProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "autocomplete": {
-              "type": "string"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "form": {
-              "type": "string"
-            },
-            "multiple": {
-              "type": "boolean"
-            },
-            "name": {
-              "type": "string"
-            },
-            "required": {
-              "type": "boolean"
-            },
-            "size": {
-              "type": "number"
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "autocomplete": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "multiple": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "size": {
+          "type": "number"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "SlotProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "SourceProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "height": {
-              "$ref": "Numeric"
-            },
-            "media": {
-              "type": "string"
-            },
-            "sizes": {
-              "type": "string"
-            },
-            "src": {
-              "type": "string"
-            },
-            "srcset": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "height": {
+          "$ref": "Numeric"
+        },
+        "media": {
+          "type": "string"
+        },
+        "sizes": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srcset": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "StyleProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "media": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "media": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "TableProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "summary": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     },
     "TdProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "colspan": {
-              "type": "number"
-            },
-            "headers": {
-              "type": "string"
-            },
-            "rowspan": {
-              "type": "number"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "colspan": {
+          "type": "number"
+        },
+        "headers": {
+          "type": "string"
+        },
+        "rowspan": {
+          "type": "number"
+        }
+      },
+      "required": []
     },
     "ThProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "abbr": {
-              "type": "string"
-            },
-            "colspan": {
-              "type": "number"
-            },
-            "headers": {
-              "type": "string"
-            },
-            "rowspan": {
-              "type": "number"
-            },
-            "scope": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "row"
-                },
-                {
-                  "type": "string",
-                  "const": "col"
-                },
-                {
-                  "type": "string",
-                  "const": "rowgroup"
-                },
-                {
-                  "type": "string",
-                  "const": "colgroup"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "abbr": {
+          "type": "string"
+        },
+        "colspan": {
+          "type": "number"
+        },
+        "headers": {
+          "type": "string"
+        },
+        "rowspan": {
+          "type": "number"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "row"
+            },
+            {
+              "type": "string",
+              "const": "col"
+            },
+            {
+              "type": "string",
+              "const": "rowgroup"
+            },
+            {
+              "type": "string",
+              "const": "colgroup"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "TextareaProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "autocomplete": {
-              "type": "string"
-            },
-            "cols": {
-              "type": "number"
-            },
-            "dirname": {
-              "type": "string"
-            },
-            "disabled": {
-              "type": "boolean"
-            },
-            "form": {
-              "type": "string"
-            },
-            "maxlength": {
-              "type": "number"
-            },
-            "minlength": {
-              "type": "number"
-            },
-            "name": {
-              "type": "string"
-            },
-            "placeholder": {
-              "type": "string"
-            },
-            "readonly": {
-              "type": "boolean"
-            },
-            "required": {
-              "type": "boolean"
-            },
-            "rows": {
-              "type": "number"
-            },
-            "value": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "number"
-                }
-              ]
-            },
-            "wrap": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "hard"
-                },
-                {
-                  "type": "string",
-                  "const": "soft"
-                },
-                {
-                  "type": "string",
-                  "const": "off"
-                }
-              ]
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "autocomplete": {
+          "type": "string"
+        },
+        "cols": {
+          "type": "number"
+        },
+        "dirname": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "form": {
+          "type": "string"
+        },
+        "maxlength": {
+          "type": "number"
+        },
+        "minlength": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "placeholder": {
+          "type": "string"
+        },
+        "readonly": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "rows": {
+          "type": "number"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
+        "wrap": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "hard"
+            },
+            {
+              "type": "string",
+              "const": "soft"
+            },
+            {
+              "type": "string",
+              "const": "off"
+            }
+          ]
+        }
+      },
+      "required": []
     },
     "TimeProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "HtmlProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "datetime": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "datetime": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "TrackProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "VoidProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "default": {
-              "type": "boolean"
-            },
-            "kind": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "const": "subtitles"
-                },
-                {
-                  "type": "string",
-                  "const": "captions"
-                },
-                {
-                  "type": "string",
-                  "const": "descriptions"
-                },
-                {
-                  "type": "string",
-                  "const": "chapters"
-                },
-                {
-                  "type": "string",
-                  "const": "metadata"
-                }
-              ]
-            },
-            "label": {
-              "type": "string"
-            },
-            "src": {
-              "type": "string"
-            },
-            "srclang": {
-              "type": "string"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "default": {
+          "type": "boolean"
+        },
+        "kind": {
+          "anyOf": [
+            {
+              "type": "string",
+              "const": "subtitles"
+            },
+            {
+              "type": "string",
+              "const": "captions"
+            },
+            {
+              "type": "string",
+              "const": "descriptions"
+            },
+            {
+              "type": "string",
+              "const": "chapters"
+            },
+            {
+              "type": "string",
+              "const": "metadata"
+            }
+          ]
+        },
+        "label": {
+          "type": "string"
+        },
+        "src": {
+          "type": "string"
+        },
+        "srclang": {
+          "type": "string"
+        }
+      },
+      "required": []
     },
     "VideoProps": {
-      "allOf": [
+      "type": "interface",
+      "extends": [
         {
           "$ref": "MediaProps"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "disablepictureinpicture": {
-              "type": "boolean"
-            },
-            "disableremoteplayback": {
-              "type": "boolean"
-            },
-            "height": {
-              "$ref": "Numeric"
-            },
-            "playsinline": {
-              "type": "boolean"
-            },
-            "poster": {
-              "type": "string"
-            },
-            "width": {
-              "$ref": "Numeric"
-            }
-          }
         }
-      ]
+      ],
+      "properties": {
+        "disablepictureinpicture": {
+          "type": "boolean"
+        },
+        "disableremoteplayback": {
+          "type": "boolean"
+        },
+        "height": {
+          "$ref": "Numeric"
+        },
+        "playsinline": {
+          "type": "boolean"
+        },
+        "poster": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "Numeric"
+        }
+      },
+      "required": []
     }
   }
 }

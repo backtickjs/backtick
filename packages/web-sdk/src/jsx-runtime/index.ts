@@ -82,8 +82,7 @@ export type AriaRole =
   | "tooltip"
   | "tree"
   | "treegrid"
-  | "treeitem"
-  | (string & {});
+  | "treeitem";
 
 export type ReferrerPolicy =
   | ""
@@ -98,7 +97,7 @@ export type ReferrerPolicy =
 
 export type CrossOrigin = "anonymous" | "use-credentials" | "";
 
-export type Target = "_self" | "_blank" | "_parent" | "_top" | (string & {});
+export type Target = "_self" | "_blank" | "_parent" | "_top";
 
 export interface AriaAttributes {
   "aria-activedescendant"?: Prop<string>;

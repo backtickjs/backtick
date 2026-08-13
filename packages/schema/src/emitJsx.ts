@@ -3,7 +3,6 @@ import {
   IsBoolean,
   IsFunction,
   IsGeneric,
-  IsIntersect,
   IsLiteral,
   IsNull,
   IsNumber,
@@ -14,10 +13,10 @@ import {
   IsUnion,
   IsUnknown,
   IsVoid,
-  type TObject,
   type TParameter,
   type TSchema,
 } from "typebox";
+import { IsInterface } from "./nodes/Interface.js";
 import type { Schema, SchemaNode } from "./Schema.js";
 
 // A schema to the `jsx-runtime` an app writes against.
@@ -52,12 +51,8 @@ export function emitJsx(schema: Schema): string {
     if (IsUnion(node)) {
       return node.anyOf.map((one) => type(held(one))).join(" | ");
     }
-    // An intersection standing where a value goes is written as one. The schema
-    // says `string & {}` where it means TypeScript's open-enum idiom, so this
-    // translates rather than recognising it — there is nothing here that knows
-    // what the shape was for.
-    if (IsIntersect(node)) {
-      return `(${node.allOf.map((one) => type(held(one))).join(" & ")})`;
+    if (IsInterface(node)) {
+      throw new Error("an interface may only stand in `interfaces`");
     }
     // A function the schema did not name keeps its own signature, parameters and
     // all — the case `core`'s `onLayout(width, height)` needs.
@@ -135,34 +130,41 @@ export function emitJsx(schema: Schema): string {
     return `${node.name}${constraint}${fallback}`;
   }
 
-  /** What an interface extends, and the one object of its own. */
-  function parts(node: SchemaNode): {
-    bases: string[];
-    own: TObject | null;
-  } {
-    // An interface that extends nothing is the object itself: there is nothing
-    // for an `allOf` of one to say.
-    if (IsObject(node)) {
-      return { bases: [], own: node };
-    }
-    const members = IsIntersect(node) ? node.allOf : [];
-    return {
-      bases: members.filter(IsRef).map((one) => one.$ref),
-      own: members.find(IsObject) ?? null,
-    };
+  /** What an interface extends, which an object never does. */
+  function bases(node: SchemaNode): readonly string[] {
+    return IsInterface(node) ? node.extends.map(baseName) : [];
   }
 
-  /** The properties an object holds, and whether each was written required. */
+  /**
+   * What a base is called, whichever way it was written.
+   *
+   * A base is a name here — `extends GlobalAttributes`, never the properties
+   * spelled again — so an interface passed as itself has to be found among the
+   * ones the schema declares. Identity, not shape: two interfaces holding the
+   * same properties are still two names.
+   */
+  function baseName(base: TSchema): string {
+    if (IsRef(base)) {
+      return base.$ref;
+    }
+    const named = Object.entries(interfaces).find(([, one]) => one === base);
+    if (named === undefined) {
+      throw new Error("an interface may only extend one the schema declares");
+    }
+    return named[0];
+  }
+
+  /** The properties a node holds, and whether each was written required. */
   function members(
-    own: TObject | null,
+    node: SchemaNode,
   ): { name: string; node: SchemaNode; required: boolean }[] {
-    if (own === null) {
+    if (!IsInterface(node) && !IsObject(node)) {
       return [];
     }
-    const required = own.required ?? [];
-    return Object.entries(own.properties).map(([name, node]) => ({
+    const required = node.required ?? [];
+    return Object.entries(node.properties).map(([name, child]) => ({
       name,
-      node: held(node),
+      node: held(child),
       required: required.includes(name),
     }));
   }
@@ -198,18 +200,17 @@ export function emitJsx(schema: Schema): string {
     if (IsRef(node)) {
       return node.$ref;
     }
-    if (!IsObject(node) && !IsIntersect(node)) {
+    if (!IsObject(node) && !IsInterface(node)) {
       throw new Error(
         "an element's props are an interface it names, the properties " +
           `themselves, or both — this is a ${JSON.stringify(node).slice(0, 40)}`,
       );
     }
-    const { bases, own } = parts(node);
-    const written = members(own).map((one) =>
+    const written = members(node).map((one) =>
       property(one.name, one.node, one.required).trim(),
     );
     const inline = written.length === 0 ? "{}" : `{ ${written.join(" ")} }`;
-    return [...bases, inline].join(" & ");
+    return [...bases(node), inline].join(" & ");
   }
 
   const lines: string[] = [];
@@ -236,10 +237,11 @@ export function emitJsx(schema: Schema): string {
   }
 
   for (const [name, node] of Object.entries(interfaces)) {
-    const { bases, own } = parts(node);
-    const extend = bases.length > 0 ? ` extends ${bases.join(", ")}` : "";
+    const inherited = bases(node);
+    const extend =
+      inherited.length > 0 ? ` extends ${inherited.join(", ")}` : "";
     lines.push(`export interface ${name}${extend} {`);
-    for (const one of members(own)) {
+    for (const one of members(node)) {
       lines.push(property(one.name, one.node, one.required));
     }
     lines.push(`}`);
