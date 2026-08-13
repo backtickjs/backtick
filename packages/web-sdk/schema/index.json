@@ -405,118 +405,678 @@
     }
   },
   "elements": {
-    "a": "AnchorProps",
-    "abbr": "HtmlProps",
-    "address": "HtmlProps",
-    "area": "AreaProps",
-    "article": "HtmlProps",
-    "aside": "HtmlProps",
-    "audio": "MediaProps",
-    "b": "HtmlProps",
-    "base": "BaseProps",
-    "bdi": "HtmlProps",
-    "bdo": "HtmlProps",
-    "blockquote": "BlockquoteProps",
-    "body": "HtmlProps",
-    "br": "VoidProps",
-    "button": "ButtonProps",
-    "canvas": "CanvasProps",
-    "caption": "HtmlProps",
-    "cite": "HtmlProps",
-    "code": "HtmlProps",
-    "col": "ColProps",
-    "colgroup": "ColgroupProps",
-    "data": "DataProps",
-    "datalist": "HtmlProps",
-    "dd": "HtmlProps",
-    "del": "DelProps",
-    "details": "DetailsProps",
-    "dfn": "HtmlProps",
-    "dialog": "DialogProps",
-    "div": "HtmlProps",
-    "dl": "HtmlProps",
-    "dt": "HtmlProps",
-    "em": "HtmlProps",
-    "embed": "EmbedProps",
-    "fieldset": "FieldsetProps",
-    "figcaption": "HtmlProps",
-    "figure": "HtmlProps",
-    "footer": "HtmlProps",
-    "form": "FormProps",
-    "h1": "HtmlProps",
-    "h2": "HtmlProps",
-    "h3": "HtmlProps",
-    "h4": "HtmlProps",
-    "h5": "HtmlProps",
-    "h6": "HtmlProps",
-    "head": "HtmlProps",
-    "header": "HtmlProps",
-    "hgroup": "HtmlProps",
-    "hr": "VoidProps",
-    "html": "HtmlElementProps",
-    "i": "HtmlProps",
-    "iframe": "IframeProps",
-    "img": "ImgProps",
-    "input": "InputProps",
-    "ins": "InsProps",
-    "kbd": "HtmlProps",
-    "label": "LabelProps",
-    "legend": "HtmlProps",
-    "li": "LiProps",
-    "link": "LinkProps",
-    "main": "HtmlProps",
-    "map": "MapProps",
-    "mark": "HtmlProps",
-    "menu": "HtmlProps",
-    "meta": "MetaProps",
-    "meter": "MeterProps",
-    "nav": "HtmlProps",
-    "noscript": "HtmlProps",
-    "object": "ObjectProps",
-    "ol": "OlProps",
-    "optgroup": "OptgroupProps",
-    "option": "OptionProps",
-    "output": "OutputProps",
-    "p": "HtmlProps",
-    "picture": "HtmlProps",
-    "pre": "HtmlProps",
-    "progress": "ProgressProps",
-    "q": "QuoteProps",
-    "rp": "HtmlProps",
-    "rt": "HtmlProps",
-    "ruby": "HtmlProps",
-    "s": "HtmlProps",
-    "samp": "HtmlProps",
-    "script": "ScriptProps",
-    "search": "HtmlProps",
-    "section": "HtmlProps",
-    "select": "SelectProps",
-    "slot": "SlotProps",
-    "small": "HtmlProps",
-    "source": "SourceProps",
-    "span": "HtmlProps",
-    "strong": "HtmlProps",
-    "style": "StyleProps",
-    "sub": "HtmlProps",
-    "summary": "HtmlProps",
-    "sup": "HtmlProps",
-    "table": "TableProps",
-    "tbody": "HtmlProps",
-    "td": "TdProps",
-    "template": "HtmlProps",
-    "textarea": "TextareaProps",
-    "tfoot": "HtmlProps",
-    "th": "ThProps",
-    "thead": "HtmlProps",
-    "time": "TimeProps",
-    "title": "HtmlProps",
-    "tr": "HtmlProps",
-    "track": "TrackProps",
-    "u": "HtmlProps",
-    "ul": "HtmlProps",
-    "var": "HtmlProps",
-    "video": "VideoProps",
-    "wbr": "VoidProps"
+    "a": {
+      "type": "element",
+      "props": {
+        "$ref": "AnchorProps"
+      }
+    },
+    "abbr": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "address": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "area": {
+      "type": "element",
+      "props": {
+        "$ref": "AreaProps"
+      }
+    },
+    "article": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "aside": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "audio": {
+      "type": "element",
+      "props": {
+        "$ref": "MediaProps"
+      }
+    },
+    "b": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "base": {
+      "type": "element",
+      "props": {
+        "$ref": "BaseProps"
+      }
+    },
+    "bdi": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "bdo": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "blockquote": {
+      "type": "element",
+      "props": {
+        "$ref": "BlockquoteProps"
+      }
+    },
+    "body": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "br": {
+      "type": "element",
+      "props": {
+        "$ref": "VoidProps"
+      }
+    },
+    "button": {
+      "type": "element",
+      "props": {
+        "$ref": "ButtonProps"
+      }
+    },
+    "canvas": {
+      "type": "element",
+      "props": {
+        "$ref": "CanvasProps"
+      }
+    },
+    "caption": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "cite": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "code": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "col": {
+      "type": "element",
+      "props": {
+        "$ref": "ColProps"
+      }
+    },
+    "colgroup": {
+      "type": "element",
+      "props": {
+        "$ref": "ColgroupProps"
+      }
+    },
+    "data": {
+      "type": "element",
+      "props": {
+        "$ref": "DataProps"
+      }
+    },
+    "datalist": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "dd": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "del": {
+      "type": "element",
+      "props": {
+        "$ref": "DelProps"
+      }
+    },
+    "details": {
+      "type": "element",
+      "props": {
+        "$ref": "DetailsProps"
+      }
+    },
+    "dfn": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "dialog": {
+      "type": "element",
+      "props": {
+        "$ref": "DialogProps"
+      }
+    },
+    "div": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "dl": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "dt": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "em": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "embed": {
+      "type": "element",
+      "props": {
+        "$ref": "EmbedProps"
+      }
+    },
+    "fieldset": {
+      "type": "element",
+      "props": {
+        "$ref": "FieldsetProps"
+      }
+    },
+    "figcaption": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "figure": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "footer": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "form": {
+      "type": "element",
+      "props": {
+        "$ref": "FormProps"
+      }
+    },
+    "h1": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "h2": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "h3": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "h4": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "h5": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "h6": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "head": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "header": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "hgroup": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "hr": {
+      "type": "element",
+      "props": {
+        "$ref": "VoidProps"
+      }
+    },
+    "html": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlElementProps"
+      }
+    },
+    "i": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "iframe": {
+      "type": "element",
+      "props": {
+        "$ref": "IframeProps"
+      }
+    },
+    "img": {
+      "type": "element",
+      "props": {
+        "$ref": "ImgProps"
+      }
+    },
+    "input": {
+      "type": "element",
+      "props": {
+        "$ref": "InputProps"
+      }
+    },
+    "ins": {
+      "type": "element",
+      "props": {
+        "$ref": "InsProps"
+      }
+    },
+    "kbd": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "label": {
+      "type": "element",
+      "props": {
+        "$ref": "LabelProps"
+      }
+    },
+    "legend": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "li": {
+      "type": "element",
+      "props": {
+        "$ref": "LiProps"
+      }
+    },
+    "link": {
+      "type": "element",
+      "props": {
+        "$ref": "LinkProps"
+      }
+    },
+    "main": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "map": {
+      "type": "element",
+      "props": {
+        "$ref": "MapProps"
+      }
+    },
+    "mark": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "menu": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "meta": {
+      "type": "element",
+      "props": {
+        "$ref": "MetaProps"
+      }
+    },
+    "meter": {
+      "type": "element",
+      "props": {
+        "$ref": "MeterProps"
+      }
+    },
+    "nav": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "noscript": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "object": {
+      "type": "element",
+      "props": {
+        "$ref": "ObjectProps"
+      }
+    },
+    "ol": {
+      "type": "element",
+      "props": {
+        "$ref": "OlProps"
+      }
+    },
+    "optgroup": {
+      "type": "element",
+      "props": {
+        "$ref": "OptgroupProps"
+      }
+    },
+    "option": {
+      "type": "element",
+      "props": {
+        "$ref": "OptionProps"
+      }
+    },
+    "output": {
+      "type": "element",
+      "props": {
+        "$ref": "OutputProps"
+      }
+    },
+    "p": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "picture": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "pre": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "progress": {
+      "type": "element",
+      "props": {
+        "$ref": "ProgressProps"
+      }
+    },
+    "q": {
+      "type": "element",
+      "props": {
+        "$ref": "QuoteProps"
+      }
+    },
+    "rp": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "rt": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "ruby": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "s": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "samp": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "script": {
+      "type": "element",
+      "props": {
+        "$ref": "ScriptProps"
+      }
+    },
+    "search": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "section": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "select": {
+      "type": "element",
+      "props": {
+        "$ref": "SelectProps"
+      }
+    },
+    "slot": {
+      "type": "element",
+      "props": {
+        "$ref": "SlotProps"
+      }
+    },
+    "small": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "source": {
+      "type": "element",
+      "props": {
+        "$ref": "SourceProps"
+      }
+    },
+    "span": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "strong": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "style": {
+      "type": "element",
+      "props": {
+        "$ref": "StyleProps"
+      }
+    },
+    "sub": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "summary": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "sup": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "table": {
+      "type": "element",
+      "props": {
+        "$ref": "TableProps"
+      }
+    },
+    "tbody": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "td": {
+      "type": "element",
+      "props": {
+        "$ref": "TdProps"
+      }
+    },
+    "template": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "textarea": {
+      "type": "element",
+      "props": {
+        "$ref": "TextareaProps"
+      }
+    },
+    "tfoot": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "th": {
+      "type": "element",
+      "props": {
+        "$ref": "ThProps"
+      }
+    },
+    "thead": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "time": {
+      "type": "element",
+      "props": {
+        "$ref": "TimeProps"
+      }
+    },
+    "title": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "tr": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "track": {
+      "type": "element",
+      "props": {
+        "$ref": "TrackProps"
+      }
+    },
+    "u": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "ul": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "var": {
+      "type": "element",
+      "props": {
+        "$ref": "HtmlProps"
+      }
+    },
+    "video": {
+      "type": "element",
+      "props": {
+        "$ref": "VideoProps"
+      }
+    },
+    "wbr": {
+      "type": "element",
+      "props": {
+        "$ref": "VoidProps"
+      }
+    }
   },
   "interfaces": {
     "AriaAttributes": {

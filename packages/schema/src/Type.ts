@@ -1,4 +1,5 @@
 import { Type as TypeBox } from "typebox";
+import { Element } from "./nodes/Element.js";
 
 /**
  * How a schema is written: the nodes of `SchemaNode` and nothing else.
@@ -29,4 +30,5 @@ export const Type = {
   Rest: TypeBox.Rest,
   Generic: TypeBox.Generic,
   Parameter: TypeBox.Parameter,
+  Element,
 };

@@ -1,3 +1,4 @@
+import type { TElement } from "./nodes/Element.js";
 import type {
   TArray,
   TBoolean,
@@ -58,6 +59,6 @@ export interface Schema {
   readonly aliases: Readonly<Record<string, SchemaNode>>;
   /** Groups of properties, each an object or an `allOf` of what it extends. */
   readonly interfaces: Readonly<Record<string, SchemaNode>>;
-  /** Every tag, and the interface naming what it accepts. */
-  readonly elements: Readonly<Record<string, string>>;
+  /** Every tag, and what it accepts. */
+  readonly elements: Readonly<Record<string, TElement>>;
 }
