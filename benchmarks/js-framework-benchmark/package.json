@@ -5,16 +5,20 @@
   "type": "module",
   "description": "Implementations measured by Stefan Krause's js-framework-benchmark, in its own directory layout",
   "scripts": {
+    "build": "tsc",
     "start": "node cli.mjs start",
     "bench": "node cli.mjs bench",
     "isKeyed": "node cli.mjs isKeyed",
     "checkCSP": "node cli.mjs checkCSP",
     "results": "node cli.mjs results",
     "table": "node scripts/table.mjs",
-    "test": "node --conditions=browser --test \"test/**/*.test.mjs\"",
-    "test:update": "UPDATE_SNAPSHOTS=1 node --conditions=browser --test \"test/**/*.test.mjs\""
+    "test": "tsc && node --conditions=browser --test \"test/**/*.test.mjs\"",
+    "test:update": "tsc && UPDATE_SNAPSHOTS=1 node --conditions=browser --test \"test/**/*.test.mjs\""
   },
   "devDependencies": {
-    "@backtickjs/js-interpreter": "workspace:*"
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/js-interpreter": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*",
+    "typescript": "^6.0.3"
   }
 }

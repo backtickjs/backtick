@@ -1,5 +1,6 @@
-import { type Bundle } from "@backtickjs/core";
+import { bundler, type Bundle } from "@backtickjs/core";
 import { insert } from "@backtickjs/web-sdk";
+import { Main } from "./Main.js";
 
 const template = `<!doctype html>
 <html>
@@ -15,6 +16,6 @@ const template = `<!doctype html>
 </html>
 `;
 
-export function toHtml(bundle: Bundle): string {
-  return insert(template, "#main", bundle);
-}
+const bundle = await bundler.run(<Main />);
+
+export const html = insert(template, "#main", bundle);

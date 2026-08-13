@@ -23,9 +23,18 @@ importers:
 
   benchmarks/js-framework-benchmark:
     devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@backtickjs/js-interpreter':
         specifier: workspace:*
         version: link:../../packages/js-interpreter
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../packages/web-sdk
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
   benchmarks/js-framework-benchmark/frameworks/keyed/backtick:
     dependencies:

@@ -1,8 +1,7 @@
 import { writeFile } from "node:fs/promises";
 import { client } from "@backtickjs/web-sdk";
-import { bundle } from "./dist/bundle.js";
-import { toHtml } from "./dist/toHtml.js";
+import { html } from "./dist/html.js";
 
 const dist = new URL("./dist/", import.meta.url);
-await writeFile(new URL("index.html", dist), toHtml(bundle));
+await writeFile(new URL("index.html", dist), html);
 await writeFile(new URL("client.js", dist), client.source);

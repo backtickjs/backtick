@@ -3,13 +3,21 @@
   "extends": ["//"],
   "tasks": {
     // The app is a package of its own rather than a dependency of this one, so
-    // what the snapshots read — the bundle in its `index.html` — is named here
-    // instead.
+    // what this suite compiles against — the `Main` its `dist` holds — is named
+    // here instead of coming from `^build`.
+    //
+    // `outputs`, because a task whose outputs are undeclared is one a cache hit
+    // restores nothing of: the build is skipped and `test/bundle.js` stays as
+    // it was, or missing.
+    "build": {
+      "dependsOn": ["js-framework-benchmark-backtick#build"],
+      "outputs": ["test/bundle.js"]
+    },
     "test": {
-      "dependsOn": ["js-framework-benchmark-backtick#build"]
+      "dependsOn": ["build"]
     },
     "test:update": {
-      "dependsOn": ["js-framework-benchmark-backtick#build"],
+      "dependsOn": ["build"],
       "cache": false
     }
   }
