@@ -1,7 +1,0 @@
-{
-  "extends": "../../configs/tsconfig.schema.json",
-  "compilerOptions": {
-    "lib": ["esnext"]
-  },
-  "references": [{ "path": "../schema/tsconfig.build.json" }]
-}

@@ -1,5 +1,6 @@
 #!/usr/bin/env -S node --experimental-strip-types
-import { writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync } from "node:fs";
+import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
 import { generate, type ClientSchema } from "../dist/index.js";
@@ -31,8 +32,10 @@ if (schema === undefined) {
 /** Written formatted, so what is checked in is what `format:check` expects. */
 async function write(path: string, body: string): Promise<void> {
   const file = at(path);
+  mkdirSync(dirname(file.pathname), { recursive: true });
   writeFileSync(file, await format(body, { filepath: file.pathname }));
   console.log(`${path}: ${body.split("\n").length} lines`);
 }
 
 await write("src/jsx-runtime/index.ts", generate.jsx(schema));
+await write("src/jsx-dev-runtime/index.ts", generate.jsxDev());

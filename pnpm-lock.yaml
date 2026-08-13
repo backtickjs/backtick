@@ -465,6 +465,9 @@ importers:
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../web-client
@@ -475,9 +478,6 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

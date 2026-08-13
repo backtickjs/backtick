@@ -13,6 +13,7 @@ import { IsUnion } from "../nodes/Union.js";
 import { IsUnknown } from "../nodes/Unknown.js";
 import { IsVoid } from "../nodes/Void.js";
 import type { TParameter } from "../nodes/Parameter.js";
+import { flatten } from "../flatten.js";
 import type { ClientSchema } from "../ClientSchema.js";
 import type { TNode } from "../TNode.js";
 
@@ -29,7 +30,8 @@ import type { TNode } from "../TNode.js";
 /** The `jsx-runtime` a target ships: its tags, their props, and the namespace
  * TypeScript reads them through. */
 export function jsx(schema: ClientSchema): string {
-  const { types, elements } = schema;
+  // What this client can do is what it declares and what it inherited.
+  const { types, elements } = flatten(schema);
 
   /** What a schema node reads as, in TypeScript. */
   function type(node: TNode): string {

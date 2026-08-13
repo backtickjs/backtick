@@ -6,7 +6,14 @@
     "lib": ["esnext"]
   },
   "references": [
-    { "path": "../core/tsconfig.build.json" },
-    { "path": "../cs-runtime/tsconfig.build.json" }
+    {
+      "path": "../core/tsconfig.build.json"
+    },
+    {
+      "path": "../cs-runtime/tsconfig.build.json"
+    },
+    {
+      "path": "../schema/tsconfig.build.json"
+    }
   ]
 }

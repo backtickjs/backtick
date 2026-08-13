@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
+    "@backtickjs/schema": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
     "linkedom": "^0.18.13"
   },
@@ -35,7 +36,6 @@
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/schema": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }
