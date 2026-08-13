@@ -2,7 +2,7 @@
 import { writeFileSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { emitJson, emitJsx, type Schema } from "../dist/index.js";
+import { generate, type Schema } from "../dist/index.js";
 
 // Every target's `pnpm generate`, run from the package it generates for.
 //
@@ -30,8 +30,8 @@ async function write(path: string, body: string): Promise<void> {
 }
 
 // What an app writes against.
-await write("src/jsx-runtime/index.ts", emitJsx(schema));
+await write("src/jsx-runtime/index.ts", generate.jsx(schema));
 
 // And what everything else reads: beside the schema it came from, so a change
 // to what a target draws is a change someone can see in review.
-await write("schema/index.json", emitJson(schema));
+await write("schema/index.json", generate.json(schema));
