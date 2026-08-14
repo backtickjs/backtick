@@ -15,7 +15,8 @@ import { IsString } from "../nodes/String.js";
 import { IsUnion } from "../nodes/Union.js";
 import { IsUnknown } from "../nodes/Unknown.js";
 import { IsVoid } from "../nodes/Void.js";
-import type { TParameter } from "../nodes/Parameter.js";
+import { IsFunctionParameter } from "../nodes/FunctionParameter.js";
+import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import { flatten } from "../flatten.js";
 import type { ClientSchema } from "../ClientSchema.js";
 import type { TNode } from "../TNode.js";
@@ -67,6 +68,11 @@ export function jsx(schema: ClientSchema): string {
     if (IsRest(node)) {
       throw new Error("a rest may only stand in a parameter list");
     }
+    if (IsFunctionParameter(node)) {
+      throw new Error(
+        "a function parameter may only stand in a parameter list",
+      );
+    }
     if (IsObject(node)) {
       const members = Object.entries(node.properties).map(
         ([name, child]) => `${name}: ${type(child)}`,
@@ -114,22 +120,30 @@ export function jsx(schema: ClientSchema): string {
   }
 
   /**
-   * One entry in a parameter list, called after where it stands.
+   * One entry in a parameter list.
    *
-   * A parameter is a type and nothing else, so the name is this generator's to
-   * invent — TypeScript needs one written and the schema has none to give. A
-   * schema that comes to have something to say about a parameter says it with
-   * a node for the purpose.
+   * Named where the schema named it, and after where it stands otherwise —
+   * TypeScript needs something written, and a parameter is a type until a
+   * `FunctionParameter` gives it a name.
    */
   function parameter(node: TNode, at: number): string {
     if (IsRest(node)) {
-      return `...args: ${type(node.items)}[]`;
+      const items = node.items;
+      return IsFunctionParameter(items)
+        ? `...${items.name}: ${type(items.holds)}[]`
+        : `...args: ${type(items)}[]`;
     }
-    return `arg${at}${IsOptional(node) ? "?" : ""}: ${type(node)}`;
+    // `Optional` marks the node, and in a parameter list that is the caller's
+    // choice to leave it out rather than a property that may be absent.
+    const omittable = IsOptional(node) ? "?" : "";
+    if (IsFunctionParameter(node)) {
+      return `${node.name}${omittable}: ${type(node.holds)}`;
+    }
+    return `arg${at}${omittable}: ${type(node)}`;
   }
 
   /** One type parameter, with the constraint and default it was given. */
-  function typeParameter(node: TParameter): string {
+  function typeParameter(node: TGenericParameter): string {
     const constrained = !IsUnknown(node.extends);
     const constraint = constrained ? ` extends ${type(node.extends)}` : "";
     // `Parameter(name, extends)` fills the default in with the constraint, so a

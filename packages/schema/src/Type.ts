@@ -11,7 +11,8 @@ import { Null } from "./nodes/Null.js";
 import { Number } from "./nodes/Number.js";
 import { Object } from "./nodes/Object.js";
 import { Optional } from "./nodes/Optional.js";
-import { Parameter } from "./nodes/Parameter.js";
+import { FunctionParameter } from "./nodes/FunctionParameter.js";
+import { GenericParameter } from "./nodes/GenericParameter.js";
 import { Ref } from "./nodes/Ref.js";
 import { Rest } from "./nodes/Rest.js";
 import { String } from "./nodes/String.js";
@@ -40,7 +41,8 @@ export const Type = {
   Optional,
   Rest,
   Generic,
-  Parameter,
+  GenericParameter,
+  FunctionParameter,
   Apply,
   Element,
   Interface,

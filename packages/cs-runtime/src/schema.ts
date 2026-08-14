@@ -29,9 +29,9 @@ export const schema: ClientSchema = {
   builtins: {
     /** Storage a script may read and write, holding what it was given. */
     state: Type.Generic(
-      [Type.Parameter("T")],
+      [Type.GenericParameter("T")],
       Type.Function(
-        [Type.Ref("T")],
+        [Type.FunctionParameter("initial", Type.Ref("T"))],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
       ),
     ),
@@ -46,13 +46,34 @@ export const schema: ClientSchema = {
     // `exp`, `log`, `pow` and `atan2` are absent because two conforming
     // implementations may differ in the last place, and a format specified
     // against a reference client cannot promise "whatever JavaScript did".
-    "Math.abs": Type.Function([Type.Number()], Type.Number()),
-    "Math.sign": Type.Function([Type.Number()], Type.Number()),
-    "Math.floor": Type.Function([Type.Number()], Type.Number()),
-    "Math.ceil": Type.Function([Type.Number()], Type.Number()),
-    "Math.trunc": Type.Function([Type.Number()], Type.Number()),
-    "Math.sqrt": Type.Function([Type.Number()], Type.Number()),
-    "Math.fround": Type.Function([Type.Number()], Type.Number()),
+    "Math.abs": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
+    "Math.sign": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
+    "Math.floor": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
+    "Math.ceil": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
+    "Math.trunc": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
+    "Math.sqrt": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
+    "Math.fround": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
 
     /**
      * A number rounded to the nearest integer, ties **up**.
@@ -61,7 +82,10 @@ export const schema: ClientSchema = {
      * is `-0` and not `-1`. Written down because a host that rounded
      * half-to-even would disagree with every bundle that used this.
      */
-    "Math.round": Type.Function([Type.Number()], Type.Number()),
+    "Math.round": Type.Function(
+      [Type.FunctionParameter("x", Type.Number())],
+      Type.Number(),
+    ),
 
     /**
      * The smaller of its arguments, of which at least one is required.
@@ -71,13 +95,19 @@ export const schema: ClientSchema = {
      * should be able to produce.
      */
     "Math.min": Type.Function(
-      [Type.Number(), Type.Rest(Type.Number())],
+      [
+        Type.FunctionParameter("first", Type.Number()),
+        Type.Rest(Type.FunctionParameter("rest", Type.Number())),
+      ],
       Type.Number(),
     ),
 
     /** The larger of its arguments, of which at least one is required. */
     "Math.max": Type.Function(
-      [Type.Number(), Type.Rest(Type.Number())],
+      [
+        Type.FunctionParameter("first", Type.Number()),
+        Type.Rest(Type.FunctionParameter("rest", Type.Number())),
+      ],
       Type.Number(),
     ),
 
@@ -104,11 +134,23 @@ export const schema: ClientSchema = {
      * hand it.
      */
     "Array.from": Type.Generic(
-      [Type.Parameter("T")],
+      [Type.GenericParameter("T")],
       Type.Function(
         [
-          Type.Object({ length: Type.Number() }),
-          Type.Function([Type.Null(), Type.Number()], Type.Ref("T")),
+          Type.FunctionParameter(
+            "source",
+            Type.Object({ length: Type.Number() }),
+          ),
+          Type.FunctionParameter(
+            "map",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Null()),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Ref("T"),
+            ),
+          ),
         ],
         Type.Array(Type.Ref("T")),
       ),
