@@ -15,117 +15,432 @@ export const schema: ClientSchema = {
   extends: [],
 
   types: {
-    Math: Type.Class(
-      {
-        PI: Type.Number({
-          description:
-            "The ratio of the circumference of a circle to its diameter.",
-        }),
-        E: Type.Number({
-          description: "Euler's number, the base of the natural logarithms.",
-        }),
-        abs: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description: "Returns the absolute value of a number.",
-          },
-        ),
-        random: Type.Function([], Type.Number(), {
-          description:
-            "Returns a pseudorandom number between 0 (inclusive) and 1 (exclusive).\n\n" +
-            "The one member here that is not a function of its arguments. Two calls disagree, two hosts disagree, and two runs of the same bundle disagree \u2014 so a bundle that reaches this cannot be snapshotted, cached by its output, or compared against a previous run of itself.",
-        }),
-        sign: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns the sign of a number, indicating whether it is positive (1), negative (-1) or zero (0).",
-          },
-        ),
-        floor: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns the greatest integer less than or equal to its numeric argument.",
-          },
-        ),
-        ceil: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns the smallest integer greater than or equal to its numeric argument.",
-          },
-        ),
-        round: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns a number rounded to the nearest integer.\n\n" +
-              "Ties round **up**, towards positive infinity, which is JavaScript's rule rather than the one most languages use: `round(-0.5)` is `-0` and not `-1`, and `round(2.5)` is `3` while `round(-2.5)` is `-2`. Written down here because a host that rounds half-to-even would disagree with every bundle that used this.",
-          },
-        ),
-        trunc: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns the integer part of a number by removing any fractional digits.",
-          },
-        ),
-        min: Type.Function(
-          [
-            Type.FunctionParameter("first", Type.Number()),
-            Type.Rest(Type.FunctionParameter("rest", Type.Number())),
-          ],
-          Type.Number(),
-          {
-            description:
-              "Returns the smaller of its arguments.\n\n" +
-              "At least one is required, where the standard library takes none and answers `Infinity` \u2014 an empty answer that isn't this language's one absent value, and so not an answer it should be able to produce.",
-          },
-        ),
-        max: Type.Function(
-          [
-            Type.FunctionParameter("first", Type.Number()),
-            Type.Rest(Type.FunctionParameter("rest", Type.Number())),
-          ],
-          Type.Number(),
-          {
-            description:
-              "Returns the larger of its arguments.\n\n" +
-              "At least one is required, for the reason `min` gives.",
-          },
-        ),
-        sqrt: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns the square root of a number. Correctly rounded, which IEEE 754 requires of it and of nothing else here.",
-          },
-        ),
-        fround: Type.Function(
-          [Type.FunctionParameter("x", Type.Number())],
-          Type.Number(),
-          {
-            description:
-              "Returns the nearest single precision float representation of a number.",
-          },
-        ),
-      },
-      {
+    Math: Type.Class({
+      E: Type.Number({
         description:
-          "The client `Math` API: what a script may reach on the one global this language has. Curated from the standard library, and curated harder than the rest of it, because a bundle is read by hosts that are not JavaScript and every member here has to mean the same thing on all of them.\n\n" +
-          'What that rules out is most of `Math`. IEEE 754 fixes the result of `sqrt` and of the roundings, but says nothing about `sin`, `cos`, `tan`, `exp`, `log`, `pow` or `atan2` \u2014 two conforming implementations may differ in the last place, and V8 has changed its own answers between versions. A format specified against a reference client cannot promise "whatever JavaScript did", so those are absent rather than approximately right.\n\n' +
-          "`random` is the exception, and it is here deliberately. Every other member answers the same on every host and on every run; this one answers differently each time it is called, so a bundle that reaches it draws something new on each read and cannot be compared against itself. It is admitted because the alternative is that no script can be random at all, and a seeded generator \u2014 which would keep its seed in the bundle, and would be reproducible \u2014 is not written yet.",
-      },
-    ),
-
+          "The mathematical constant e. This is Euler's number, the base of natural logarithms.",
+      }),
+      LN10: Type.Number({
+        description: "The natural logarithm of 10.",
+      }),
+      LN2: Type.Number({
+        description: "The natural logarithm of 2.",
+      }),
+      LOG2E: Type.Number({
+        description: "The base-2 logarithm of e.",
+      }),
+      LOG10E: Type.Number({
+        description: "The base-10 logarithm of e.",
+      }),
+      PI: Type.Number({
+        description:
+          "Pi. This is the ratio of the circumference of a circle to its diameter.",
+      }),
+      SQRT1_2: Type.Number({
+        description:
+          "The square root of 0.5, or, equivalently, one divided by the square root of 2.",
+      }),
+      SQRT2: Type.Number({
+        description: "The square root of 2.",
+      }),
+      abs: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression for which the absolute value is needed.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the absolute value of a number (the value without regard to whether it is positive or negative).\nFor example, the absolute value of -5 is the same as the absolute value of 5.",
+        },
+      ),
+      acos: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the arc cosine (or inverse cosine) of a number.",
+        },
+      ),
+      asin: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the arcsine of a number." },
+      ),
+      atan: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression for which the arctangent is needed.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the arctangent of a number." },
+      ),
+      atan2: Type.Function(
+        [
+          Type.FunctionParameter("y", Type.Number(), {
+            description:
+              "A numeric expression representing the cartesian y-coordinate.",
+          }),
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression representing the cartesian x-coordinate.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the angle (in radians) between the X axis and the line going through both the origin and the given point.",
+        },
+      ),
+      ceil: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the smallest integer greater than or equal to its numeric argument.",
+        },
+      ),
+      cos: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the cosine of a number." },
+      ),
+      exp: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression representing the power of e.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns e (the base of natural logarithms) raised to a power.",
+        },
+      ),
+      floor: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the greatest integer less than or equal to its numeric argument.",
+        },
+      ),
+      log: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description: "Returns the natural logarithm (base e) of a number.",
+        },
+      ),
+      max: Type.Function(
+        [
+          Type.Rest(
+            Type.FunctionParameter("values", Type.Number(), {
+              description: "Numeric expressions to be evaluated.",
+            }),
+          ),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the larger of a set of supplied numeric expressions.\n\nCalling this with no arguments is a client error rather than an answer: the standard library takes none and answers `-Infinity`, which is not a value this language has.",
+        },
+      ),
+      min: Type.Function(
+        [
+          Type.Rest(
+            Type.FunctionParameter("values", Type.Number(), {
+              description: "Numeric expressions to be evaluated.",
+            }),
+          ),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the smaller of a set of supplied numeric expressions.\n\nCalling this with no arguments is a client error rather than an answer: the standard library takes none and answers `Infinity`, which is not a value this language has.",
+        },
+      ),
+      pow: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "The base value of the expression.",
+          }),
+          Type.FunctionParameter("y", Type.Number(), {
+            description: "The exponent value of the expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the value of a base expression taken to a specified power.",
+        },
+      ),
+      random: Type.Function([], Type.Number(), {
+        description:
+          "Returns a pseudorandom number between 0 and 1.\n\nThe one member here that is not a function of its arguments. Two calls disagree, two hosts disagree, and two runs of the same bundle disagree — so a bundle that reaches this cannot be snapshotted, cached by its output, or compared against a previous run of itself.",
+      }),
+      round: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "The value to be rounded to the nearest integer.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns a supplied numeric expression rounded to the nearest integer.",
+        },
+      ),
+      sin: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the sine of a number." },
+      ),
+      sqrt: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the square root of a number." },
+      ),
+      tan: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the tangent of a number." },
+      ),
+      clz32: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the number of leading zero bits in the 32-bit binary representation of a number.",
+        },
+      ),
+      imul: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "First number",
+          }),
+          Type.FunctionParameter("y", Type.Number(), {
+            description: "Second number",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the result of 32-bit multiplication of two numbers.",
+        },
+      ),
+      sign: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "The numeric expression to test",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the sign of the x, indicating whether x is positive, negative or zero.",
+        },
+      ),
+      log10: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the base 10 logarithm of a number." },
+      ),
+      log2: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the base 2 logarithm of a number." },
+      ),
+      log1p: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the natural logarithm of 1 + x." },
+      ),
+      expm1: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the result of (e^x - 1), which is an implementation-dependent approximation to\nsubtracting 1 from the exponential function of x (e raised to the power of x, where e\nis the base of the natural logarithms).",
+        },
+      ),
+      cosh: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the hyperbolic cosine of a number." },
+      ),
+      sinh: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the hyperbolic sine of a number." },
+      ),
+      tanh: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the hyperbolic tangent of a number." },
+      ),
+      acosh: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the inverse hyperbolic cosine of a number." },
+      ),
+      asinh: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        { description: "Returns the inverse hyperbolic sine of a number." },
+      ),
+      atanh: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description:
+              "A numeric expression that contains an angle measured in radians.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description: "Returns the inverse hyperbolic tangent of a number.",
+        },
+      ),
+      hypot: Type.Function(
+        [
+          Type.Rest(
+            Type.FunctionParameter("values", Type.Number(), {
+              description:
+                "Values to compute the square root for. If no arguments are passed, the result is +0. If there is only one argument, the result is the absolute value. If any argument is +Infinity or -Infinity, the result is +Infinity. If any argument is NaN, the result is NaN. If all arguments are either +0 or −0, the result is +0.",
+            }),
+          ),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the square root of the sum of squares of its arguments.",
+        },
+      ),
+      trunc: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the integral part of the numeric expression x, removing any fractional digits.\nIf x is already an integer, the result is x.",
+        },
+      ),
+      fround: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the nearest single precision float representation of a number.",
+        },
+      ),
+      cbrt: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "A numeric expression.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns an implementation-dependent approximation to the cube root of number.",
+        },
+      ),
+    }),
     ArrayConstructor: Type.Class(
       {
         from: Type.Generic(

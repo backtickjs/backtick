@@ -1,3 +1,1 @@
-8:39 error TS2551: Property 'sin' does not exist on type 'Math'. Did you mean 'sign'?
-10:31 error TS2339: Property 'pow' does not exist on type 'Math'.
-14:30 error TS2555: Expected at least 1 arguments, but got 0.
+9:31 error TS2550: Property 'f16round' does not exist on type 'Math'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2025' or later.

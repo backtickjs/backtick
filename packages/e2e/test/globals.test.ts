@@ -27,6 +27,33 @@ function declared(): Map<string, string[]> {
 }
 
 describe("globals", () => {
+  it("answer with a number this language has, or not at all", () => {
+    // `NaN` and `Infinity` are not values a script can write, so they are not
+    // values a client may answer with. A domain error and an overflow are the
+    // same refusal.
+    assert.throws(
+      () => globals.Math.sqrt(-1),
+      /numbers \s*are finite|are finite/,
+    );
+    assert.throws(() => globals.Math.log(0), /are finite/);
+    assert.throws(() => globals.Math.asin(2), /are finite/);
+    assert.throws(() => globals.Math.exp(710), /are finite/);
+    assert.throws(() => globals.Math.atanh(1), /are finite/);
+    assert.throws(() => globals.Math.fround(1e39), /are finite/);
+    assert.throws(() => globals.Math.pow(0, -1), /are finite/);
+    // And the ones that cannot fail, do not.
+    assert.equal(globals.Math.sqrt(9), 3);
+    assert.equal(globals.Math.log(1), 0);
+  });
+
+  it("refuse an empty `Math.min`/`Math.max`", () => {
+    // The standard library answers ±`Infinity`, which is not a value this
+    // language has. The signature admits the call, so the client is what says
+    // no — the way `Array.from` refuses a source it cannot count.
+    assert.throws(() => globals.Math.min(), /at least one number/);
+    assert.throws(() => globals.Math.max(), /at least one number/);
+  });
+
   it("the client answers for every global the schema declares", () => {
     assert.deepEqual(Object.keys(globals).sort(), [...GLOBAL_NAMES].sort());
   });
