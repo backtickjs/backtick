@@ -327,6 +327,9 @@ importers:
 
   packages/language-tools/tsc:
     dependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../../compiler
       '@backtickjs/language-plugin':
         specifier: workspace:*
         version: link:../language-plugin
