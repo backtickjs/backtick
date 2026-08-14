@@ -1,3 +1,4 @@
+import { Apply } from "./nodes/Apply.js";
 import { Array } from "./nodes/Array.js";
 import { Boolean } from "./nodes/Boolean.js";
 import { Element } from "./nodes/Element.js";
@@ -39,6 +40,7 @@ export const Type = {
   Rest,
   Generic,
   Parameter,
+  Apply,
   Element,
   Interface,
 };

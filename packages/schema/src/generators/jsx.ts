@@ -1,3 +1,4 @@
+import { IsApply } from "../nodes/Apply.js";
 import { IsArray } from "../nodes/Array.js";
 import { IsBoolean } from "../nodes/Boolean.js";
 import { IsFunction } from "../nodes/Function.js";
@@ -46,8 +47,6 @@ export function jsx(schema: ClientSchema): string {
     if (IsInterface(node)) {
       throw new Error("an interface may only stand as a declaration");
     }
-    // A function the schema did not name keeps its own signature, parameters and
-    // all — the case `core`'s `onLayout(width, height)` needs.
     if (IsFunction(node)) {
       const params = node.parameters.map((one, at) => parameter(one, at));
       return `(${params.join(", ")}) => ${type(node.returnType)}`;
@@ -55,6 +54,10 @@ export function jsx(schema: ClientSchema): string {
     if (IsGeneric(node)) {
       const declared = node.parameters.map(typeParameter);
       return `<${declared.join(", ")}>${type(node.expression)}`;
+    }
+    if (IsApply(node)) {
+      const args = node.arguments.map(type);
+      return `${type(node.target)}<${args.join(", ")}>`;
     }
     if (IsRest(node)) {
       throw new Error("a rest may only stand in a parameter list");
@@ -249,6 +252,14 @@ export function jsx(schema: ClientSchema): string {
         lines.push(property(one.name, one.node, one.required));
       }
       lines.push(`}`);
+    } else if (IsGeneric(node)) {
+      // A declaration takes its parameters beside its name — `type Box<T> = …`
+      // — where `type()` writes the form an expression takes, which is a
+      // function type and not a type alias.
+      const declared = node.parameters.map(typeParameter);
+      lines.push(
+        `export type ${name}<${declared.join(", ")}> = ${type(node.expression)};`,
+      );
     } else {
       lines.push(`export type ${name} = ${type(node)};`);
     }
