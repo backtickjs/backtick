@@ -8,4 +8,12 @@
  */
 export interface TNodeOptions {
   readonly description?: string;
+
+  /**
+   * That a holder may read this and not replace it.
+   *
+   * JSON Schema's own spelling, so it reaches the document rather than being a
+   * marker only this package can see.
+   */
+  readonly readOnly?: boolean;
 }

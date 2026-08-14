@@ -130,7 +130,8 @@ export function jsx(schema: ClientSchema): string {
     }
     if (IsObject(node)) {
       const members = Object.entries(node.properties).map(
-        ([name, child]) => `${name}: ${type(child)}`,
+        ([name, child]) =>
+          `${child.readOnly === true ? "readonly " : ""}${name}: ${type(child)}`,
       );
       return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
     }
@@ -257,12 +258,104 @@ export function jsx(schema: ClientSchema): string {
    * as the hand-written ones do, and a value it holds otherwise — `PI` is not
    * something a client answers when called.
    */
-  function member(name: string, node: TNode): string {
+  function member(name: string, node: TNode): string[] {
+    const said = documentation(node, "  ", tags(node));
+    // A method of its own — `from<T>(…)` — rather than a member holding a
+    // generic function, which is what `type()` would write.
+    if (IsGeneric(node) && IsFunction(node.expression)) {
+      const declared = node.parameters.map(typeParameter);
+      const params = node.expression.parameters.map((one, at) =>
+        parameter(one, at),
+      );
+      return [
+        ...said,
+        `  ${key(name)}<${declared.join(", ")}>(${params.join(", ")}): ${type(
+          node.expression.returnType,
+        )};`,
+      ];
+    }
     if (IsFunction(node)) {
       const params = node.parameters.map((one, at) => parameter(one, at));
-      return `  ${key(name)}(${params.join(", ")}): ${type(node.returnType)};`;
+      return [
+        ...said,
+        `  ${key(name)}(${params.join(", ")}): ${type(node.returnType)};`,
+      ];
     }
-    return `  readonly ${key(name)}: ${type(node)};`;
+    return [...said, `  readonly ${key(name)}: ${type(node)};`];
+  }
+
+  /**
+   * What a node says about itself, as the comment a reader of the generated
+   * file gets.
+   *
+   * The prose is the specification — why `Math.round` ties up, why `sin` is
+   * absent — so a generated surface that dropped it would be a worse file than
+   * the hand-written one it replaces. Paragraphs are kept, and each is wrapped
+   * to what is left of the line after the indent.
+   */
+  function documentation(
+    node: TNode,
+    indent: string,
+    after: readonly string[] = [],
+  ): string[] {
+    const said = node.description;
+    if (said === undefined && after.length === 0) {
+      return [];
+    }
+    const width = 76 - indent.length;
+    const lines: string[] = [];
+    const wrap = (text: string): void => {
+      let line = "";
+      for (const word of text.split(/\s+/).filter(Boolean)) {
+        if (line !== "" && `${line} ${word}`.length > width) {
+          lines.push(`${indent} * ${line}`);
+          line = word;
+        } else {
+          line = line === "" ? word : `${line} ${word}`;
+        }
+      }
+      if (line !== "") {
+        lines.push(`${indent} * ${line}`);
+      }
+    };
+
+    for (const paragraph of (said ?? "").split("\n\n").filter(Boolean)) {
+      if (lines.length > 0) {
+        lines.push(`${indent} *`);
+      }
+      wrap(paragraph);
+    }
+
+    // Tags run together under one break, the way a hand-written block puts
+    // them: they are a list about the signature rather than more prose.
+    if (after.length > 0) {
+      if (lines.length > 0) {
+        lines.push(`${indent} *`);
+      }
+      after.forEach(wrap);
+    }
+    return [`${indent}/**`, ...lines, `${indent} */`];
+  }
+
+  /**
+   * What a function's parameters say about themselves, as `@param` tags.
+   *
+   * A parameter carries a description like any other node, and a tag is where
+   * TypeScript puts one — beside the signature rather than inside it.
+   */
+  function tags(node: TNode): string[] {
+    const signature = IsGeneric(node) ? node.expression : node;
+    if (!IsFunction(signature)) {
+      return [];
+    }
+    const said: string[] = [];
+    for (const one of signature.parameters) {
+      const held = IsRest(one) ? one.items : one;
+      if (IsFunctionParameter(held) && held.description !== undefined) {
+        said.push(`@param ${held.name} ${held.description}`);
+      }
+    }
+    return said;
   }
 
   /** A name TypeScript can read bare, or one it needs quoted. */
@@ -337,6 +430,7 @@ export function jsx(schema: ClientSchema): string {
     if (!emitted.has(name)) {
       continue;
     }
+    lines.push(...documentation(node, ""));
     if (IsInterface(node)) {
       const inherited = bases(node);
       const extend =
@@ -349,14 +443,14 @@ export function jsx(schema: ClientSchema): string {
     } else if (IsClass(node)) {
       lines.push(`export interface ${name} {`);
       for (const [member_, held] of Object.entries(node.members)) {
-        lines.push(member(member_, held));
+        lines.push(...member(member_, held));
       }
       lines.push(`}`);
     } else if (IsGeneric(node) && IsClass(node.expression)) {
       const declared = node.parameters.map(typeParameter);
       lines.push(`export interface ${name}<${declared.join(", ")}> {`);
       for (const [member_, held] of Object.entries(node.expression.members)) {
-        lines.push(member(member_, held));
+        lines.push(...member(member_, held));
       }
       lines.push(`}`);
     } else if (IsGeneric(node)) {
