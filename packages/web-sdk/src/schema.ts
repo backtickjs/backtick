@@ -1042,5 +1042,6 @@ export const schema: ClientSchema = {
     wbr: Type.Element(Type.Ref("VoidProps")),
   },
 
+  globals: {},
   builtins: {},
 };

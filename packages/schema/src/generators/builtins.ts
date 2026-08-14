@@ -19,7 +19,7 @@ export function builtins(schema: ClientSchema): string {
   // `ArrayConstructor`, because the first name is a type already.
   const classes = [
     ...Object.entries(schema.types),
-    ...Object.entries(schema.builtins),
+    ...Object.entries(schema.globals),
   ].filter(([, node]) => IsClass(node));
 
   // Names are everything in scope, inherited included: what reads these is
@@ -64,17 +64,13 @@ export function builtins(schema: ClientSchema): string {
     lines.push("");
   }
 
-  // Two lists, because a name a script may hold and a name it may only call
-  // are different questions: `Math` is a value whose members are reached, where
-  // `state` names nothing a script can pass on.
-  const names = Object.keys(all.builtins).sort();
-  const globals = names.filter((name) => {
-    const node = all.builtins[name];
-    if (node === undefined) {
-      return false;
-    }
-    return IsClass(node) || (IsRef(node) && IsClass(all.types[node.$ref]));
-  });
+  // Two lists, because the compiler asks two questions: which names a script
+  // may write at all, and which of those stand for a value it may hold and read
+  // members of. The schema answers the second by where the name was declared —
+  // a global is the host's own, where `state` is a form and names nothing a
+  // script can pass on.
+  const globals = Object.keys(all.globals).sort();
+  const names = [...globals, ...Object.keys(all.builtins)].sort();
 
   lines.push("/** Every name a script reaches without declaring it. */");
   lines.push(`export const BUILTIN_NAMES = [`);

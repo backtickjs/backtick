@@ -180,6 +180,18 @@ export const schema: ClientSchema = {
   // It lands with the lowering that makes it true.
   elements: {},
 
+  // What `declare var Math: Math` and `declare var Array: ArrayConstructor`
+  // say in the lib: the name a script reaches, and the type it has. `Array`
+  // needs a separate name for its type because `Array` is a type already —
+  // the generic array type, which is the instance side.
+  //
+  // The lib is what declares these names; what is written here is which of
+  // their members a script may reach.
+  globals: {
+    Math: Type.Ref("Math"),
+    Array: Type.Ref("ArrayConstructor"),
+  },
+
   builtins: {
     /** Storage a script may read and write, holding what it was given. */
     state: Type.Generic(
@@ -189,12 +201,5 @@ export const schema: ClientSchema = {
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
       ),
     ),
-
-    // What `declare var Math: Math` and `declare var Array: ArrayConstructor`
-    // say in the lib: the name a script reaches, and the type it has. `Array`
-    // needs a separate name for its type because `Array` is a type already —
-    // the generic array type, which is the instance side.
-    Math: Type.Ref("Math"),
-    Array: Type.Ref("ArrayConstructor"),
   },
 };
