@@ -12,11 +12,12 @@
   },
   "scripts": {
     "build": "tsc -b",
+    "clean": "rm -rf node_modules dist .turbo",
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "test": "node --test \"test/**/*.test.ts\"",
-    "clean": "rm -rf node_modules dist .turbo"
+    "generate": "backtick-generate",
+    "test": "node --test \"test/**/*.test.ts\""
   },
   "devDependencies": {
     "prettier": "^3.6.2",

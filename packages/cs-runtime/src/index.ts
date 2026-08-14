@@ -1,7 +1,7 @@
 export type { Client } from "./Client.js";
 export type { ClientArray } from "./ClientArray.js";
-export type { ClientArrayStatics } from "./ClientArrayStatics.js";
-export type { ClientMath } from "./ClientMath.js";
+export type { ArrayConstructor, Math } from "./builtins.js";
+export { BUILTIN_GLOBALS, BUILTIN_NAMES } from "./builtins.js";
 export type { ClientBoolean } from "./ClientBoolean.js";
 export type { ClientConstructor } from "./ClientConstructor.js";
 export type { ClientNumber } from "./ClientNumber.js";

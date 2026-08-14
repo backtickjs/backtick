@@ -13,6 +13,7 @@ import { Object } from "./nodes/Object.js";
 import { Optional } from "./nodes/Optional.js";
 import { FunctionParameter } from "./nodes/FunctionParameter.js";
 import { GenericParameter } from "./nodes/GenericParameter.js";
+import { Record } from "./nodes/Record.js";
 import { Ref } from "./nodes/Ref.js";
 import { Rest } from "./nodes/Rest.js";
 import { String } from "./nodes/String.js";
@@ -33,6 +34,7 @@ export const Type = {
   Literal,
   Union,
   Object,
+  Record,
   Array,
   Function,
   Void,

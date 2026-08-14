@@ -1,7 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
-import type { ClientArrayStatics } from "./ClientArrayStatics.js";
-import type { ClientMath } from "./ClientMath.js";
+import type { ArrayConstructor, Math } from "./builtins.js";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";
@@ -69,9 +68,9 @@ export type IndexKey<R> = R extends ClientArray<any> ? number : keyof R;
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
   T extends typeof globalThis.Math
-    ? ClientMath
+    ? Math
     : T extends typeof globalThis.Array
-      ? ClientArrayStatics
+      ? ArrayConstructor
       : T extends string | number | boolean | readonly unknown[]
         ? Autoboxed<T>
         : T extends JsxElement

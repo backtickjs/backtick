@@ -9,6 +9,7 @@ import type { TInterface } from "./nodes/Interface.js";
 import type { TNull } from "./nodes/Null.js";
 import type { TNumber } from "./nodes/Number.js";
 import type { TObject } from "./nodes/Object.js";
+import type { TRecord } from "./nodes/Record.js";
 import type { TRef } from "./nodes/Ref.js";
 import type { TRest } from "./nodes/Rest.js";
 import type { TString } from "./nodes/String.js";
@@ -38,6 +39,7 @@ export type TNode =
   | TVoid
   | TNull
   | TUnknown
+  | TRecord
   | TRef
   | TRest
   | TGeneric

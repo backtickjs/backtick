@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { generate, type ClientSchema } from "../dist/index.js";
+import { flatten, generate, type ClientSchema } from "../dist/index.js";
 
 // Every project's `pnpm generate`, run from the project it generates for.
 //
@@ -37,5 +37,18 @@ async function write(path: string, body: string): Promise<void> {
   console.log(`${path}: ${body.split("\n").length} lines`);
 }
 
-await write("src/jsx-runtime/index.ts", generate.jsx(schema));
-await write("src/jsx-dev-runtime/index.ts", generate.jsxDev());
+const reachable = flatten(schema);
+
+// The surface the language offers, for a schema that has names of its own to
+// answer for. A target inheriting core's names does not re-declare them.
+if (Object.keys(reachable.builtins).length > 0) {
+  await write("src/builtins.ts", generate.builtins(schema));
+}
+
+// The runtimes an app compiles against, for a schema that has elements. One
+// with none is a base for other schemas rather than a client of its own, and a
+// `jsx-runtime` naming no tag is a file nothing can write against.
+if (Object.keys(reachable.elements).length > 0) {
+  await write("src/jsx-runtime/index.ts", generate.jsx(schema));
+  await write("src/jsx-dev-runtime/index.ts", generate.jsxDev());
+}

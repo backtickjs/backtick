@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import { SyntaxKind } from "@backtickjs/cs-runtime";
+import { BUILTIN_GLOBALS, SyntaxKind } from "@backtickjs/cs-runtime";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
@@ -214,8 +214,8 @@ export interface RewrittenNode {
   runtime: ts.Node;
 }
 
-// What a script may reach without binding it.
-const BUILTINS = new Set(["Math", "Array"]);
+// What a script may reach without binding it, as the core schema declares it.
+const BUILTINS = new Set<string>(BUILTIN_GLOBALS);
 
 // JSX text as JSX reads it, or null where it reads as nothing. Not `trim()`:
 // the rule is per line — leading whitespace goes from every line but the first,
