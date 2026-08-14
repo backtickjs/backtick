@@ -428,6 +428,14 @@
       "keyed": true,
       "dir": "71bc61f3",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "093e8ec",
+      "label": "host Array.from",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "array-from",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
