@@ -1,6 +1,7 @@
 import type { TApply } from "./nodes/Apply.js";
 import type { TArray } from "./nodes/Array.js";
 import type { TBoolean } from "./nodes/Boolean.js";
+import type { TClass } from "./nodes/Class.js";
 import type { TFunction } from "./nodes/Function.js";
 import type { TGeneric } from "./nodes/Generic.js";
 import type { TInterface } from "./nodes/Interface.js";
@@ -39,4 +40,5 @@ export type TNode =
   | TRef
   | TRest
   | TGeneric
-  | TApply;
+  | TApply
+  | TClass;

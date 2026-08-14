@@ -1,6 +1,7 @@
 import { Apply } from "./nodes/Apply.js";
 import { Array } from "./nodes/Array.js";
 import { Boolean } from "./nodes/Boolean.js";
+import { Class } from "./nodes/Class.js";
 import { Element } from "./nodes/Element.js";
 import { Function } from "./nodes/Function.js";
 import { Generic } from "./nodes/Generic.js";
@@ -43,4 +44,5 @@ export const Type = {
   Apply,
   Element,
   Interface,
+  Class,
 };

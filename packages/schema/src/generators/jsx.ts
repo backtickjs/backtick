@@ -1,12 +1,14 @@
 import { IsApply } from "../nodes/Apply.js";
 import { IsArray } from "../nodes/Array.js";
 import { IsBoolean } from "../nodes/Boolean.js";
+import { IsClass } from "../nodes/Class.js";
 import { IsFunction } from "../nodes/Function.js";
 import { IsGeneric } from "../nodes/Generic.js";
 import { IsInterface } from "../nodes/Interface.js";
 import { IsNull } from "../nodes/Null.js";
 import { IsNumber } from "../nodes/Number.js";
 import { IsObject } from "../nodes/Object.js";
+import { IsOptional } from "../nodes/Optional.js";
 import { IsRef } from "../nodes/Ref.js";
 import { IsRest } from "../nodes/Rest.js";
 import { IsString } from "../nodes/String.js";
@@ -46,6 +48,9 @@ export function jsx(schema: ClientSchema): string {
     }
     if (IsInterface(node)) {
       throw new Error("an interface may only stand as a declaration");
+    }
+    if (IsClass(node)) {
+      throw new Error("a class may only stand as a declaration");
     }
     if (IsFunction(node)) {
       const params = node.parameters.map((one, at) => parameter(one, at));
@@ -120,7 +125,7 @@ export function jsx(schema: ClientSchema): string {
     if (IsRest(node)) {
       return `...args: ${type(node.items)}[]`;
     }
-    return `arg${at}: ${type(node)}`;
+    return `arg${at}${IsOptional(node) ? "?" : ""}: ${type(node)}`;
   }
 
   /** One type parameter, with the constraint and default it was given. */
@@ -174,6 +179,21 @@ export function jsx(schema: ClientSchema): string {
       node: child,
       required: required.includes(name),
     }));
+  }
+
+  /**
+   * One member of a class, as TypeScript writes it.
+   *
+   * A method where the member holds a function, so a generated surface reads
+   * as the hand-written ones do, and a value it holds otherwise — `PI` is not
+   * something a client answers when called.
+   */
+  function member(name: string, node: TNode): string {
+    if (IsFunction(node)) {
+      const params = node.parameters.map((one, at) => parameter(one, at));
+      return `  ${key(name)}(${params.join(", ")}): ${type(node.returnType)};`;
+    }
+    return `  readonly ${key(name)}: ${type(node)};`;
   }
 
   /** A name TypeScript can read bare, or one it needs quoted. */
@@ -252,10 +272,20 @@ export function jsx(schema: ClientSchema): string {
         lines.push(property(one.name, one.node, one.required));
       }
       lines.push(`}`);
+    } else if (IsClass(node)) {
+      lines.push(`export interface ${name} {`);
+      for (const [member_, held] of Object.entries(node.members)) {
+        lines.push(member(member_, held));
+      }
+      lines.push(`}`);
+    } else if (IsGeneric(node) && IsClass(node.expression)) {
+      const declared = node.parameters.map(typeParameter);
+      lines.push(`export interface ${name}<${declared.join(", ")}> {`);
+      for (const [member_, held] of Object.entries(node.expression.members)) {
+        lines.push(member(member_, held));
+      }
+      lines.push(`}`);
     } else if (IsGeneric(node)) {
-      // A declaration takes its parameters beside its name — `type Box<T> = …`
-      // — where `type()` writes the form an expression takes, which is a
-      // function type and not a type alias.
       const declared = node.parameters.map(typeParameter);
       lines.push(
         `export type ${name}<${declared.join(", ")}> = ${type(node.expression)};`,
