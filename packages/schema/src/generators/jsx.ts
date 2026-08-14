@@ -37,6 +37,61 @@ export function jsx(schema: ClientSchema): string {
   // What this client can do is what it declares and what it inherited.
   const { types, elements } = flatten(schema);
 
+  /**
+   * The names this file declares: every one the target wrote, and the
+   * inherited ones something it writes reaches.
+   *
+   * A base is a schema of its own and its names are its own to declare — a core
+   * class a value autoboxes to belongs to the package that implements it, and
+   * writing it here would be a second declaration of a name this target does
+   * not own. What an element reaches is different: a prop typed by an inherited
+   * name needs that name in scope beside the prop.
+   *
+   * Everything the target declared is kept whether anything reaches it or not,
+   * because a target may publish a name for its own reasons — `FragmentProps`
+   * is reached by no element and is what `createFragment` is given.
+   */
+  function namesToEmit(): ReadonlySet<string> {
+    // `schema.types` before flattening is what this target wrote; anything else
+    // in `types` came from a base.
+    const names = new Set(Object.keys(schema.types));
+
+    // Tracked apart from the answer: a name already being emitted still has to
+    // be read, or a base's name reached only through one of the target's own
+    // types would be left undeclared.
+    const walked = new Set<string>();
+
+    // Every `$ref` under here is a name that has to be in scope, and what it
+    // points at may name more. Walked without a case per kind on purpose: a ref
+    // is a ref wherever it sits, and a kind added later is followed without
+    // this having to learn about it.
+    const follow = (node: unknown): void => {
+      if (typeof node !== "object" || node === null) {
+        return;
+      }
+      if (Array.isArray(node)) {
+        node.forEach(follow);
+        return;
+      }
+      if (IsRef(node)) {
+        names.add(node.$ref);
+        if (!walked.has(node.$ref)) {
+          walked.add(node.$ref);
+          follow(types[node.$ref]);
+        }
+      }
+      Object.values(node).forEach(follow);
+    };
+
+    // From what the target draws and from what it declares: both are written
+    // into this file, so both may name something that has to be.
+    Object.values(elements).forEach(follow);
+    Object.values(schema.types).forEach(follow);
+    return names;
+  }
+
+  const emitted = namesToEmit();
+
   /** What a schema node reads as, in TypeScript. */
   function type(node: TNode): string {
     // A `$ref` is a name, whether the document declares it or the boundary
@@ -277,6 +332,11 @@ export function jsx(schema: ClientSchema): string {
   // the schema declares them, which TypeScript does not mind — a type is in
   // scope wherever it is named, however late it is said.
   for (const [name, node] of Object.entries(types)) {
+    // A name this target neither declared nor reaches belongs to a base, and
+    // the package that declared it is where it is written.
+    if (!emitted.has(name)) {
+      continue;
+    }
     if (IsInterface(node)) {
       const inherited = bases(node);
       const extend =
