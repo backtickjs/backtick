@@ -21,7 +21,8 @@
     "solid-js": "^1.9.14"
   },
   "peerDependencies": {
-    "@backtickjs/core": "workspace:*"
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/cs-runtime": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/core": "workspace:*",

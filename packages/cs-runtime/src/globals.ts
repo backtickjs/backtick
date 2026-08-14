@@ -131,8 +131,11 @@ export interface ArrayConstructor {
   ): T[];
 }
 
-/** Every name a script reaches without declaring it. */
-export const BUILTIN_NAMES = ["Array", "Math", "state"] as const;
+/** What a client must answer with, for every global. */
+export interface Globals {
+  Math: Math;
+  Array: ArrayConstructor;
+}
 
-/** The ones a script may reach as a value, and read members of. */
-export const BUILTIN_GLOBALS = ["Array", "Math"] as const;
+/** Every global a script reaches without declaring it. */
+export const GLOBAL_NAMES = ["Array", "Math"] as const;

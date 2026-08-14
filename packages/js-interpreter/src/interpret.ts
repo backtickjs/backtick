@@ -10,6 +10,7 @@ import type {
   BundleStatementNode,
   FunctionLabel,
 } from "@backtickjs/core";
+import { globals } from "./globals.js";
 import { makeState } from "./makeState.js";
 import type { Instance } from "./Instance.js";
 import { compileElement, compileFor } from "./view.js";
@@ -116,6 +117,11 @@ function compileFunction(
 // evaluating yields is the only thing that differs between them — a value, a
 // statement's completion, a list's members — so that is the return type and
 // nothing else is.
+// `Globals` describes this table from the authoring end, where `Value` is the
+// same domain seen from the running end — the two representations `Value` names
+// — so it is widened once, here, to be read by name.
+const table = globals as unknown as Readonly<Record<string, Value>>;
+
 export function compile(
   instance: Instance,
   node: Source,
@@ -219,14 +225,14 @@ function buildNode(
     case 6: /* For */ {
       return compileFor(instance, node);
     }
-    // A global the format names and the host answers. This host is
-    // JavaScript, so these are JavaScript's — which is what the curation is
-    // for: every member here means the same thing everywhere.
+    // A global the format names and this interpreter answers. Not the host's
+    // own objects and not a table handed in from outside: the curated list is
+    // what keeps every member meaning the same thing everywhere.
     case 3: /* Builtin */ {
       const name = node[1];
-      const value = builtins[name];
+      const value = table[name];
       if (value === undefined) {
-        throw new Error(`unknown builtin ${name}`);
+        throw new Error(`unknown global ${name}`);
       }
       return () => value;
     }
@@ -667,54 +673,6 @@ function compileElements(
     return out;
   };
 }
-
-// The globals a script may reach, as `ClientMath` and `ClientArrayStatics` fix
-// them. Written out rather than handed the host's own objects, so what a bundle
-// can reach is a list somebody chose and a member left out stays left out —
-// which is what keeps this client, the one the format is specified against,
-// from accepting more than the format defines.
-const builtins: { [name: string]: Value } = {
-  Array: {
-    // Not the host's `Array.from`: the mapper is required where the standard
-    // library's is optional, and its first argument is `null` where the
-    // standard library passes `undefined`.
-    from: (source: Value, map: Value) => {
-      const length =
-        typeof source === "object" && source !== null && !Array.isArray(source)
-          ? (source as { length?: Value }).length
-          : null;
-      if (typeof length !== "number") {
-        throw new Error("`Array.from` builds from `{ length }`");
-      }
-      if (typeof map !== "function") {
-        throw new Error("`Array.from` needs a mapper");
-      }
-      // Grown rather than sized. `new Array(n)` hands back an array the host
-      // marks holey for the rest of its life, and everything derived from it
-      // inherits that — the rows, the children, and whoever walks them.
-      const made: Value[] = [];
-      for (let at = 0; at < length; at++) {
-        made.push(map(null, at));
-      }
-      return made;
-    },
-  },
-  Math: {
-    PI: Math.PI,
-    E: Math.E,
-    abs: (x: Value) => Math.abs(x as number),
-    ceil: (x: Value) => Math.ceil(x as number),
-    floor: (x: Value) => Math.floor(x as number),
-    fround: (x: Value) => Math.fround(x as number),
-    max: (...values: Value[]) => Math.max(...(values as number[])),
-    min: (...values: Value[]) => Math.min(...(values as number[])),
-    random: () => Math.random(),
-    round: (x: Value) => Math.round(x as number),
-    sign: (x: Value) => Math.sign(x as number),
-    sqrt: (x: Value) => Math.sqrt(x as number),
-    trunc: (x: Value) => Math.trunc(x as number),
-  },
-};
 
 // Reads a value the language guarantees is boolean: a condition, or an operand
 // of `&&`/`||`. The compiler rejects anything else — `cs.condition` exists to

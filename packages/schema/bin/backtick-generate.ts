@@ -39,10 +39,10 @@ async function write(path: string, body: string): Promise<void> {
 
 const reachable = flatten(schema);
 
-// The surface the language offers, for a schema that has names of its own to
-// answer for. A target inheriting core's names does not re-declare them.
-if (Object.keys(reachable.builtins).length > 0) {
-  await write("src/builtins.ts", generate.builtins(schema));
+// The host language's names, for the schema that declares them. A target
+// inheriting core's globals re-declares nothing, so it writes no file at all.
+if (Object.keys(schema.globals).length > 0) {
+  await write("src/globals.ts", generate.globals(schema));
 }
 
 // The runtimes an app compiles against, for a schema that has elements. One

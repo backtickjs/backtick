@@ -1,6 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
-import type { ArrayConstructor, Math } from "./builtins.js";
+import type { ArrayConstructor, Math } from "./globals.js";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
 import type { ClientConstructor } from "./ClientConstructor.js";

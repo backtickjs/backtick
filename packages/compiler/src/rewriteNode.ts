@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import { BUILTIN_GLOBALS, SyntaxKind } from "@backtickjs/cs-runtime";
+import { GLOBAL_NAMES, SyntaxKind } from "@backtickjs/cs-runtime";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
@@ -215,7 +215,7 @@ export interface RewrittenNode {
 }
 
 // What a script may reach without binding it, as the core schema declares it.
-const BUILTINS = new Set<string>(BUILTIN_GLOBALS);
+const GLOBALS = new Set<string>(GLOBAL_NAMES);
 
 // JSX text as JSX reads it, or null where it reads as nothing. Not `trim()`:
 // the rule is per line — leading whitespace goes from every line but the first,
@@ -748,7 +748,7 @@ function rewriteNodeImpl(
     // `Receiver`'s job, the same as for a string or an array, and what it
     // narrows to is `ClientMath`. So the whole of JavaScript's `Math` is what
     // the name resolves to and only the agreed part of it is reachable.
-    if (!state.bindings.has(node) && BUILTINS.has(node.text)) {
+    if (!state.bindings.has(node) && GLOBALS.has(node.text)) {
       return {
         virtual: ts.factory.createIdentifier(node.text),
         runtime: astNode(ts, SyntaxKind.Builtin, {

@@ -5,13 +5,14 @@ import { flatten } from "../flatten.js";
 import { classLines } from "./typescript.js";
 import type { ClientSchema } from "../ClientSchema.js";
 
-// A schema to the surface the language itself offers.
+// A schema to the host language's own names.
 //
-// What `jsx` is for a target's tags, this is for the names a script reaches:
-// the classes a client answers with, and the lists the compiler recognises.
+// What `jsx` is for a target's tags, this is for the globals a script reaches:
+// the classes a client answers with, and the list the compiler recognises. A
+// target's own names are a different artifact, generated where they are.
 
-/** The client surface a schema offers: its classes, and the names in scope. */
-export function builtins(schema: ClientSchema): string {
+/** The globals a schema declares: their classes, the contract, the names. */
+export function globals(schema: ClientSchema): string {
   // Classes are this schema's own — a base's are that base's to write, and a
   // second declaration is a name two packages both export. Written inline
   // where the name a script reaches is also the type's name, and named in
@@ -64,26 +65,35 @@ export function builtins(schema: ClientSchema): string {
     lines.push("");
   }
 
-  // Two lists, because the compiler asks two questions: which names a script
-  // may write at all, and which of those stand for a value it may hold and read
-  // members of. The schema answers the second by where the name was declared —
-  // a global is the host's own, where `state` is a form and names nothing a
-  // script can pass on.
-  const globals = Object.keys(all.globals).sort();
-  const names = [...globals, ...Object.keys(all.builtins)].sort();
-
-  lines.push("/** Every name a script reaches without declaring it. */");
-  lines.push(`export const BUILTIN_NAMES = [`);
-  for (const name of names) {
-    lines.push(`  ${JSON.stringify(name)},`);
-  }
-  lines.push(`] as const;`);
-  lines.push("");
-  lines.push(
-    "/** The ones a script may reach as a value, and read members of. */",
+  // What a client owes, one interface per record so each says what its name
+  // says. A target's `builtins` join as a second one where they are generated;
+  // both are looked up through the same table, because the format has one node
+  // for a name it carries.
+  //
+  // This schema's own names, not the flattened ones: a base's are answered by
+  // the client that declared them, and a target's client composes.
+  const owed = Object.entries(schema.globals).map(
+    ([name, node]) => [name, IsRef(node) ? node.$ref : name] as const,
   );
-  lines.push(`export const BUILTIN_GLOBALS = [`);
-  for (const name of globals) {
+
+  if (owed.length > 0) {
+    lines.push("/** What a client must answer with, for every global. */");
+    lines.push(`export interface Globals {`);
+    for (const [name, held] of owed) {
+      lines.push(`  ${name}: ${held};`);
+    }
+    lines.push(`}`);
+    lines.push("");
+  }
+
+  // One list: the names the compiler recognises without a binding. A builtin
+  // is not among them — `state` is matched by its call shape, and a target's is
+  // reached by splicing what this generates.
+  const globalNames = Object.keys(all.globals).sort();
+
+  lines.push("/** Every global a script reaches without declaring it. */");
+  lines.push(`export const GLOBAL_NAMES = [`);
+  for (const name of globalNames) {
     lines.push(`  ${JSON.stringify(name)},`);
   }
   lines.push(`] as const;`);

@@ -214,6 +214,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      '@backtickjs/cs-runtime':
+        specifier: workspace:*
+        version: link:../cs-runtime
       '@backtickjs/js-interpreter':
         specifier: workspace:*
         version: link:../js-interpreter
@@ -251,6 +254,9 @@ importers:
 
   packages/js-interpreter:
     dependencies:
+      '@backtickjs/cs-runtime':
+        specifier: workspace:*
+        version: link:../cs-runtime
       solid-js:
         specifier: ^1.9.14
         version: 1.9.14
