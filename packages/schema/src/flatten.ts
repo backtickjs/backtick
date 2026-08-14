@@ -16,7 +16,7 @@ import type { ClientSchema } from "./ClientSchema.js";
 export function flatten(schema: ClientSchema): ClientSchema {
   const types: Record<string, ClientSchema["types"][string]> = {};
   const elements: Record<string, ClientSchema["elements"][string]> = {};
-  const functions: Record<string, ClientSchema["functions"][string]> = {};
+  const builtins: Record<string, ClientSchema["builtins"][string]> = {};
 
   // A schema reached twice is inherited twice, which is not a collision — a
   // diamond is two paths to one declaration. Identity, since a name is only
@@ -33,7 +33,7 @@ export function flatten(schema: ClientSchema): ClientSchema {
     }
     add(types, one.types, "type");
     add(elements, one.elements, "element");
-    add(functions, one.functions, "function");
+    add(builtins, one.builtins, "builtin");
   }
 
   function add<T>(
@@ -52,5 +52,5 @@ export function flatten(schema: ClientSchema): ClientSchema {
   }
 
   take(schema);
-  return { extends: [], types, elements, functions };
+  return { extends: [], types, elements, builtins };
 }

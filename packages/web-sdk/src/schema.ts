@@ -25,8 +25,6 @@ const child = Type.Union([
 ]);
 
 export const schema: ClientSchema = {
-  // Nothing yet: the core schema every client shares is not written, and a
-  // browser has no other client beneath it.
   extends: [],
 
   types: {
@@ -1043,7 +1041,5 @@ export const schema: ClientSchema = {
     wbr: Type.Element(Type.Ref("VoidProps")),
   },
 
-  // What a browser can run, which is nothing of its own yet: `state`, `Math` and
-  // `Array` are every client's and belong to the core schema, not to this one.
-  functions: {},
+  builtins: {},
 };
