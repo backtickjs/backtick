@@ -194,6 +194,10 @@ importers:
         version: 6.0.3
 
   packages/cs-runtime:
+    dependencies:
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
     devDependencies:
       prettier:
         specifier: ^3.6.2

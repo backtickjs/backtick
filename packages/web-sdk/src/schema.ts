@@ -1,3 +1,4 @@
+import { schema as core } from "@backtickjs/cs-runtime";
 import { Type } from "@backtickjs/schema";
 import type { ClientSchema } from "@backtickjs/schema";
 
@@ -25,7 +26,7 @@ const child = Type.Union([
 ]);
 
 export const schema: ClientSchema = {
-  extends: [],
+  extends: [core],
 
   types: {
     Booleanish: Type.Union([
