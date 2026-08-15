@@ -1,5 +1,6 @@
 import type ts from "typescript";
-import { GLOBAL_BUILTINS, SyntaxKind } from "@backtickjs/cs-runtime";
+import { GLOBAL_BUILTINS } from "@backtickjs/core-schema";
+import { SyntaxKind } from "@backtickjs/cs-runtime";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";

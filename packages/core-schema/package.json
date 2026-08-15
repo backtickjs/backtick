@@ -13,6 +13,7 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
+    "generate": "backtick-generate",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"

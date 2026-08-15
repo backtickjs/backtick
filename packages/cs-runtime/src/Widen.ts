@@ -1,7 +1,7 @@
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { JsxElement } from "./JsxElement.js";
-import type { State } from "./globals.js";
+import type { State } from "@backtickjs/core-schema";
 
 // Widens a literal type: `0` becomes `number`. Inference through a
 // `ClientValue` constraint keeps the literal, so without this `let n = 0`

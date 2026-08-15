@@ -16,15 +16,13 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "generate": "backtick-generate",
     "test": "node --test \"test/**/*.test.ts\""
   },
   "devDependencies": {
-    "@backtickjs/core-schema": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@backtickjs/schema": "workspace:*"
+    "@backtickjs/core-schema": "workspace:*"
   }
 }

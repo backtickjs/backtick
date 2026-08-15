@@ -3,7 +3,7 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { Spliceable, Spliced } from "./Spliceable.js";
-import type { State } from "./globals.js";
+import type { State } from "@backtickjs/core-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 import type { Widen } from "./Widen.js";
 

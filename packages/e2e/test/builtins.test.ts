@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { schema } from "@backtickjs/core-schema";
-import { BUILTIN_MEMBERS } from "@backtickjs/cs-runtime";
+import { BUILTIN_MEMBERS, schema } from "@backtickjs/core-schema";
 import { boxes, globals } from "@backtickjs/js-interpreter";
 
 // What the reference client answers with, against what the schema says a script

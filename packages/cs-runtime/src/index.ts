@@ -1,5 +1,5 @@
 export type { Client } from "./Client.js";
-export type { ArrayConstructor, Math } from "./globals.js";
+export type { ArrayConstructor, Math } from "@backtickjs/core-schema";
 export type {
   Boxes,
   Builtins,
@@ -8,8 +8,7 @@ export type {
   Number,
   String,
   Value,
-} from "./globals.js";
-export { BUILTIN_MEMBERS, GLOBAL_BUILTINS } from "./globals.js";
+} from "@backtickjs/core-schema";
 export {
   type ClientScript,
   isClientScript,
@@ -35,7 +34,7 @@ export {
   type Spliced,
 } from "./Spliceable.js";
 export { type ClientState, isClientState } from "./ClientState.js";
-export type { ReadonlyState, State } from "./globals.js";
+export type { ReadonlyState, State } from "@backtickjs/core-schema";
 export type { Widen } from "./Widen.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";

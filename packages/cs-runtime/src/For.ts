@@ -1,7 +1,7 @@
 import type { Client } from "./Client.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { JsxElement } from "./JsxElement.js";
-import type { ReadonlyState } from "./globals.js";
+import type { ReadonlyState } from "@backtickjs/core-schema";
 
 /**
  * An array, and what to draw for one member of it.

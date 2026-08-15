@@ -5,7 +5,7 @@ import type {
   Math,
   Number,
   String,
-} from "./globals.js";
+} from "@backtickjs/core-schema";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { JsxElement } from "./JsxElement.js";
 import type { ClientValue } from "./ClientValue.js";
