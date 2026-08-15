@@ -1,1 +1,1 @@
-9:31-9:39 error TS0: `Math.f16round` isn't part of this language. What `Math` offers is written down rather than inherited from the host.
+No diagnostics.

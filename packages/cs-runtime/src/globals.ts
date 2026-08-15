@@ -630,10 +630,11 @@ export interface ArrayConstructor {
   of<T extends ClientValue>(...items: T[]): T[];
 }
 
-/** What a client must answer with, for every global. */
-export interface Globals {
+/** What a client must answer with, for every name in scope. */
+export interface Builtins {
   Math: Math;
   Array: ArrayConstructor;
+  state<T extends Value>(initial: T): State<T>;
 }
 
 /** What a client must answer with, for a member of an autoboxed value. */
@@ -644,20 +645,10 @@ export interface Boxes {
   string: String;
 }
 
-/** What a client must answer with, for every builtin. */
-export interface Builtins {
-  state<T extends Value>(initial: T): State<T>;
-}
-
-/** Every builtin a script reaches by name, and its members. */
-export const BUILTIN_MEMBERS: Members = {
-  state: {},
-};
-
-/** Every global a script reaches without declaring it, and its
- * members. A member absent here is a name this language does not
- * have, however the host spells it. */
-export const GLOBAL_MEMBERS: Members = {
+/** Every name the host's own lib declares, and what may be read
+ * off it. A script names one of these plainly, where the rest are
+ * read through `cs`. */
+export const GLOBAL_BUILTINS: Members = {
   Array: { from: true, of: true },
   Math: {
     E: true,
@@ -704,4 +695,10 @@ export const GLOBAL_MEMBERS: Members = {
     tanh: true,
     trunc: true,
   },
+  state: {},
 };
+
+/** Every name the framework provides, and what may be read off
+ * it. A member absent from both tables is a name this language
+ * does not have, however the host spells it. */
+export const BUILTIN_MEMBERS: Members = {};

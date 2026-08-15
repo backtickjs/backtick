@@ -7,10 +7,9 @@ export type {
   Boolean,
   Number,
   String,
-  Globals,
   Value,
 } from "./globals.js";
-export { BUILTIN_MEMBERS, GLOBAL_MEMBERS } from "./globals.js";
+export { BUILTIN_MEMBERS, GLOBAL_BUILTINS } from "./globals.js";
 export {
   type ClientScript,
   isClientScript,

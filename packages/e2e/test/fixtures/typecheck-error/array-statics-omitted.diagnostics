@@ -1,1 +1,1 @@
-6:32-6:39 error TS0: `Array.isArray` isn't part of this language. What `Array` offers is written down rather than inherited from the host.
+No diagnostics.
