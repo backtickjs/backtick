@@ -42,13 +42,16 @@ export function isJsxElement(value: unknown): value is JsxElement {
   );
 }
 
+// The one place a drawing is made. `Element` is nominal — its key is a symbol
+// the schema's own file declares and nothing else can write — so what makes
+// one says so here rather than every holder being asked to prove it.
 export function createJsxElement(
   type: JsxElementType,
   props: { [key: string]: unknown },
-): JsxElement {
+): Element {
   return {
     "@backtickjs": "JsxElement",
     type,
     props,
-  };
+  } as unknown as JsxElement;
 }

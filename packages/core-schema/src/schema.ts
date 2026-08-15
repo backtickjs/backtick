@@ -19,6 +19,7 @@ export const schema: Schema = {
       [],
       {},
       {
+        nominal: true,
         description:
           "What a tag evaluates to, and what a script contributes where one is drawn.\n\n" +
           "Empty because there is nothing on it to reach: a client makes these and a script only ever hands one back. What a host holds behind the name is its own — cs-runtime carries a tag and its props there, and a native client carries whatever it draws with.",
