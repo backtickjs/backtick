@@ -1,4 +1,4 @@
-import type { JsxElement } from "./JsxElement.js";
+import type { Element } from "@backtickjs/core-schema";
 
 /**
  * A component built from other components rather than naming one. It runs on
@@ -15,7 +15,7 @@ import type { JsxElement } from "./JsxElement.js";
  */
 export type ServerComponent<P extends object = object> = ((
   props: P,
-) => Promise<JsxElement | null>) & {
+) => Promise<Element | null>) & {
   // What a component is *not*. A component is an ordinary function and declares
   // no brand, so this is optional and nothing has to be wrapped to satisfy it.
   // What it rules out is a value branded as something else: `For` and

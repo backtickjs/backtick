@@ -1,7 +1,6 @@
 import type { Client } from "@backtickjs/core-schema";
 import type { ClientValue } from "@backtickjs/core-schema";
-import type { JsxElement } from "./JsxElement.js";
-import type { ReadonlyState } from "@backtickjs/core-schema";
+import type { Element, ReadonlyState } from "@backtickjs/core-schema";
 
 /**
  * An array, and what to draw for one member of it.
@@ -12,7 +11,7 @@ import type { ReadonlyState } from "@backtickjs/core-schema";
  */
 export type ForProps<T extends ClientValue> = {
   each: Client<T[]>;
-  children: Client<(member: T, index: ReadonlyState<number>) => JsxElement>;
+  children: Client<(member: T, index: ReadonlyState<number>) => Element>;
 };
 
 // Generic where an element's props are fixed: `each` decides `T`, and the child

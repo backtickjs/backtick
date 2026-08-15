@@ -1,6 +1,7 @@
 import {
   isFor,
   isFragment,
+  isJsxElement,
   type JsxElement,
   isSpliceable,
 } from "@backtickjs/cs-runtime";
@@ -81,7 +82,15 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
       type(jsx.props as never),
     );
 
+    // A component answers with a drawing, which the schema names and this host
+    // makes: narrowed rather than trusted, because the type it answers with is
+    // every client's and what is expanded here is this one's.
     if (element !== null) {
+      if (!isJsxElement(element)) {
+        throw new Error(
+          "Can't bundle this component: it is not a `JsxElement.",
+        );
+      }
       instance.child = await expandJsxElement(element);
     }
 

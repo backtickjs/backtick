@@ -2,12 +2,12 @@ import type {
   Array,
   ArrayConstructor,
   Boolean,
+  Element,
   Math,
   Number,
   String,
 } from "@backtickjs/core-schema";
 import type { ClientFunction } from "@backtickjs/core-schema";
-import type { JsxElement } from "./JsxElement.js";
 import type { ClientValue } from "@backtickjs/core-schema";
 
 // A built-in receiver autoboxes to its client type
@@ -44,7 +44,7 @@ export type IndexKey<R> = R extends Array<any> ? number : keyof R;
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
-//   JsxElement                      -> {}: opaque
+//   Element                         -> {}: opaque
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
@@ -54,7 +54,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
       ? ArrayConstructor
       : T extends string | number | boolean | readonly unknown[]
         ? Autoboxed<T>
-        : T extends JsxElement
+        : T extends Element
           ? {}
           : T extends ClientFunction
             ? T
