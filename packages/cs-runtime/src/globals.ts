@@ -3,8 +3,6 @@
 /** A name a script may write, and what may be read off it. */
 type Members = { readonly [name: string]: { readonly [member: string]: true } };
 
-import type { ClientValue } from "./ClientValue.js";
-
 export interface ArrayLike<T> {
   readonly length: number;
   readonly [n: number]: T;
@@ -554,7 +552,7 @@ export interface Array<T> {
    * method calls the callbackfn function one time for each element in the
    * array.
    */
-  map<U extends ClientValue>(callbackfn: (value: T, index: number) => U): U[];
+  map<U>(callbackfn: (value: T, index: number) => U): U[];
   /**
    * Returns the elements of an array that meet the condition specified in a
    * callback function.
@@ -618,16 +616,13 @@ export interface ArrayConstructor {
    * @param arrayLike An array-like object to convert to an array.
    * @param mapfn A mapping function to call on every element of the array.
    */
-  from<T extends ClientValue, U extends ClientValue>(
-    arrayLike: ArrayLike<T>,
-    mapfn: (v: T, k: number) => U,
-  ): U[];
+  from<T, U>(arrayLike: ArrayLike<T>, mapfn: (v: T, k: number) => U): U[];
   /**
    * Returns a new array from a set of elements.
    *
    * @param items A set of elements to include in the new array object.
    */
-  of<T extends ClientValue>(...items: T[]): T[];
+  of<T>(...items: T[]): T[];
 }
 
 /** What a client must answer with, for every name in scope. */

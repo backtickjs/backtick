@@ -110,12 +110,6 @@ export function globals(schema: ClientSchema): string {
   );
   lines.push("");
 
-  // What an unbounded type parameter reads as here, which is this generator's
-  // to know rather than the schema's to name.
-  if (JSON.stringify(classes).includes('"genericParameter"')) {
-    lines.push('import type { ClientValue } from "./ClientValue.js";', "");
-  }
-
   for (const [name, node] of reached) {
     lines.push(
       ...(IsInterface(node) || IsGeneric(node)

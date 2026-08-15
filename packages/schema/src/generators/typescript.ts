@@ -160,12 +160,6 @@ export function parameter(node: TNode, at: number): string {
 
 /** One type parameter, with the constraint and default it was given. */
 export function typeParameter(node: TGenericParameter, bound?: string): string {
-  // A parameter the schema left unbounded still cannot be anything: it holds
-  // whatever this language's values are, and which name says so depends on
-  // which end the file is written for. `ClientValue` is the authoring end —
-  // a union of constructions, one of them an indexed access for bivariance,
-  // that the schema cannot name and a target which is not TypeScript would
-  // not read. `Value` is the running end, which the schema does declare.
   const constrained = !IsUnknown(node.extends);
   const constraint = constrained
     ? ` extends ${type(node.extends)}`
@@ -348,11 +342,10 @@ export function interfaceLines(
 export function classLines(
   name: string,
   node: TNode,
-  bound = "ClientValue",
 ): string[] {
   const held = (of: { members: Record<string, TNode> }): string[] =>
     Object.entries(of.members).flatMap(([called, what]) =>
-      member(called, what, bound),
+      member(called, what),
     );
   if (IsGeneric(node) && IsClass(node.expression)) {
     const declared = node.parameters.map((one) => typeParameter(one));
