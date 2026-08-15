@@ -1,2 +1,3 @@
+6:32 error TS0: `Array.isArray` isn't part of this language. What `Array` offers is written down rather than inherited from the host.
 6:32 error TS2339: Property 'isArray' does not exist on type 'ArrayConstructor'.
 11:31 error TS2554: Expected 2 arguments, but got 1.

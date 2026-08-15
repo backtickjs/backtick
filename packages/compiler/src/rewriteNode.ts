@@ -1,7 +1,7 @@
 import type ts from "typescript";
 import {
-  BUILTIN_NAMES,
-  GLOBAL_NAMES,
+  BUILTIN_MEMBERS,
+  GLOBAL_MEMBERS,
   SyntaxKind,
 } from "@backtickjs/cs-runtime";
 import { isSupportedBinop } from "./binop.js";
@@ -218,14 +218,42 @@ export interface RewrittenNode {
   runtime: ts.Node;
 }
 
-// What a script may reach without binding it, as the core schema declares it.
-const GLOBALS = new Set<string>(GLOBAL_NAMES);
+// What a script may reach without binding it, as the core schema declares it:
+// each name, and what may be read off it.
+
+// A member of a global, which the schema names whole. `Math` is curated — what
+// every host can agree on rather than whatever this one has — so a member it
+// does not declare is refused where it is written. The typechecker would catch
+// it too, against the generated interface; this catches it in the compiler's
+// own voice, and in a script whose types are not being checked at all.
+function checkGlobalMember(
+  ts: typeof import("typescript"),
+  state: RewriteState,
+  node: ts.PropertyAccessExpression,
+): void {
+  if (!ts.isIdentifier(node.expression) || !ts.isIdentifier(node.name)) {
+    return;
+  }
+  const held = node.expression.text;
+  const members = GLOBAL_MEMBERS[held];
+  if (state.bindings.has(node.expression) || members === undefined) {
+    return;
+  }
+  if (members[node.name.text] === true) {
+    return;
+  }
+  state.errors.set(
+    node.name,
+    `\`${held}.${node.name.text}\` isn't part of this language. What ` +
+      `\`${held}\` offers is written down rather than inherited from the ` +
+      "host.",
+  );
+}
 
 // The framework's own names. Reached the same way a global is and carried the
 // same way on the wire; what differs is the virtual code, which reads them
 // through `cs` because no lib declares them and a `declare global` would put
 // them in the host's scope as well as the script's.
-const BUILTINS = new Set<string>(BUILTIN_NAMES);
 
 // JSX text as JSX reads it, or null where it reads as nothing. Not `trim()`:
 // the rule is per line — leading whitespace goes from every line but the first,
@@ -759,7 +787,7 @@ function rewriteNodeImpl(
     // `Receiver`'s job, the same as for a string or an array. So the whole of
     // JavaScript's `Math` is what the name resolves to, and only the agreed
     // part of it is reachable.
-    if (!state.bindings.has(node) && GLOBALS.has(node.text)) {
+    if (!state.bindings.has(node) && node.text in GLOBAL_MEMBERS) {
       return {
         virtual: ts.factory.createIdentifier(node.text),
         runtime: astNode(ts, SyntaxKind.Builtin, {
@@ -770,7 +798,7 @@ function rewriteNodeImpl(
     }
 
     // A builtin is read through `cs`, which is where its type is written.
-    if (!state.bindings.has(node) && BUILTINS.has(node.text)) {
+    if (!state.bindings.has(node) && node.text in BUILTIN_MEMBERS) {
       const virtual = ts.factory.createPropertyAccessExpression(
         ts.factory.createIdentifier("cs"),
         node.text,
@@ -811,6 +839,8 @@ function rewriteNodeImpl(
 
   if (ts.isPropertyAccessExpression(node) && ts.isIdentifier(node.name)) {
     const name = node.name.text;
+
+    checkGlobalMember(ts, state, node);
 
     // `?.` propagates null one step, so a plain `.` after it has no
     // meaning. Rewritten as `?.` so the one error stands alone.
@@ -1105,6 +1135,7 @@ function rewriteNodeImpl(
       ts.isIdentifier(node.expression.name)
     ) {
       const access = node.expression;
+      checkGlobalMember(ts, state, access);
       // The property branch's one-step rule, copied: this access is
       // consumed inline.
       if (ts.isOptionalChain(access) && !access.questionDotToken) {

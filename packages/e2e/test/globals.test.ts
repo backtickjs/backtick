@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { GLOBAL_NAMES, schema } from "@backtickjs/cs-runtime";
+import { GLOBAL_MEMBERS, schema } from "@backtickjs/cs-runtime";
 import { boxes, globals } from "@backtickjs/js-interpreter";
 
 // What the reference client answers with, against what the schema says a script
@@ -87,7 +87,18 @@ describe("globals", () => {
   });
 
   it("the client answers for every global the schema declares", () => {
-    assert.deepEqual(Object.keys(globals).sort(), [...GLOBAL_NAMES].sort());
+    // The same table the compiler matches against: every name, and every
+    // member it says may be read off one.
+    const held = globals as unknown as Record<string, Record<string, unknown>>;
+    for (const [name, members] of Object.entries(GLOBAL_MEMBERS)) {
+      assert.ok(name in held, `nothing answers for \`${name}\``);
+      for (const member of Object.keys(members)) {
+        assert.ok(
+          member in held[name]!,
+          `\`${name}.${member}\` is declared and not answered`,
+        );
+      }
+    }
   });
 
   it("and for every member of one", () => {

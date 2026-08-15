@@ -1,0 +1,2 @@
+7:32-7:39 error TS0: `Array.isArray` isn't part of this language. What `Array` offers is written down rather than inherited from the host.
+11:29-11:34 error TS0: `Math.SQRT3` isn't part of this language. What `Math` offers is written down rather than inherited from the host.

@@ -10,7 +10,7 @@ export type {
   Globals,
   Value,
 } from "./globals.js";
-export { BUILTIN_NAMES, GLOBAL_NAMES } from "./globals.js";
+export { BUILTIN_MEMBERS, GLOBAL_MEMBERS } from "./globals.js";
 export {
   type ClientScript,
   isClientScript,
