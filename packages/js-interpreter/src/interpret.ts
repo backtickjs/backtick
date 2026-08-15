@@ -14,7 +14,7 @@ import { builtins } from "./builtins.js";
 import { globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileElement, compileFor } from "./view.js";
-import type { Value } from "./Value.js";
+import type { Value } from "@backtickjs/cs-runtime";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`

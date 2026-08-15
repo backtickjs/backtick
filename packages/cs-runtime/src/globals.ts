@@ -2,10 +2,31 @@
 
 import type { ClientValue } from "./ClientValue.js";
 
-export interface ArrayLike<T extends ClientValue> {
+export interface ArrayLike<T> {
   readonly length: number;
   readonly [n: number]: T;
 }
+
+/**
+ * Everything evaluating a bundle can produce, and nothing else.
+ *
+ * The running end of the same domain a script is written against: what is a
+ * `JsxElement` there is the application of one here, a `State<T>` is the
+ * object of functions a client builds for it, and a spliced class is a plain
+ * function. Two representations rather than one, because collapsing them would
+ * make one side describe values it cannot hold.
+ *
+ * A host's own nodes are not in here. What a tree builds belongs to the host
+ * that built it, and nothing a script can hold is one.
+ */
+export type Value =
+  | null
+  | boolean
+  | number
+  | string
+  | readonly Value[]
+  | { readonly [key: string]: Value }
+  | ((...args: Value[]) => Value);
 
 /**
  * A cell as a script reads it.
@@ -14,7 +35,7 @@ export interface ArrayLike<T extends ClientValue> {
  * declaring happens while a component is being expanded and has to know which
  * instance is running. This is the half that reaches the client.
  */
-export interface State<T extends ClientValue> extends ReadonlyState<T> {
+export interface State<T> extends ReadonlyState<T> {
   write(value: T): void;
   update(updater: (value: T) => T): void;
 }
@@ -26,7 +47,7 @@ export interface State<T extends ClientValue> extends ReadonlyState<T> {
  * component that only displays it: the signature says which way the value
  * travels, and a `State` goes wherever one of these is wanted.
  */
-export interface ReadonlyState<T extends ClientValue> {
+export interface ReadonlyState<T> {
   read(): T;
 }
 
@@ -331,7 +352,7 @@ export interface Globals {
 
 /** What a client must answer with, for every builtin. */
 export interface Builtins {
-  state<T extends ClientValue>(initial: T): State<T>;
+  state<T extends Value>(initial: T): State<T>;
 }
 
 /** Every builtin a script reaches by name. */

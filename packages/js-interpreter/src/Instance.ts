@@ -1,5 +1,5 @@
 import type { Bundle, FunctionLabel } from "@backtickjs/core";
-import type { Value } from "./Value.js";
+import type { Value } from "@backtickjs/cs-runtime";
 import type { Renderer } from "solid-js/universal";
 
 // A bundle paired with a host: what is needed to draw one, which neither of

@@ -1,8 +1,15 @@
 import { IsClass } from "../nodes/Class.js";
 import { IsGeneric } from "../nodes/Generic.js";
+import { IsInterface } from "../nodes/Interface.js";
 import { IsRef } from "../nodes/Ref.js";
 import { flatten } from "../flatten.js";
-import { classLines, interfaceLines, member } from "./typescript.js";
+import {
+  classLines,
+  documentation,
+  interfaceLines,
+  member,
+  type,
+} from "./typescript.js";
 import type { ClientSchema } from "../ClientSchema.js";
 import type { TNode } from "../TNode.js";
 
@@ -76,7 +83,11 @@ export function globals(schema: ClientSchema): string {
   }
 
   for (const [name, node] of reached) {
-    lines.push(...interfaceLines(name, node));
+    lines.push(
+      ...(IsInterface(node) || IsGeneric(node)
+        ? interfaceLines(name, node)
+        : [...documentation(node, ""), `export type ${name} = ${type(node)};`]),
+    );
     lines.push("");
   }
 
@@ -111,25 +122,22 @@ export function globals(schema: ClientSchema): string {
   // reached by splicing what this generates.
   const globalNames = Object.keys(all.globals).sort();
 
-  // What a client owes for the framework's own names, beside `Globals`. Two
-  // interfaces because the two records are two questions, and one table
-  // because the format has one node for a name it carries.
-  const provided = Object.entries(schema.builtins);
-  if (provided.length > 0) {
-    lines.push("/** What a client must answer with, for every builtin. */");
-    lines.push(`export interface Builtins {`);
-    for (const [name, node] of provided) {
-      lines.push(...member(name, node));
-    }
-    lines.push(`}`);
-    lines.push("");
-  }
-
   // The framework's own names, which a script reaches the same way and the
   // compiler recognises the same way — but which nothing else declares, so the
   // virtual code reads them through `cs` rather than from a lib.
   const builtinNames = Object.keys(all.builtins).sort();
   if (builtinNames.length > 0) {
+    const provided = Object.entries(schema.builtins);
+    if (provided.length > 0) {
+      lines.push("/** What a client must answer with, for every builtin. */");
+      lines.push(`export interface Builtins {`);
+      for (const [name, node] of provided) {
+        lines.push(...member(name, node));
+      }
+      lines.push(`}`);
+      lines.push("");
+    }
+
     lines.push("/** Every builtin a script reaches by name. */");
     lines.push(`export const BUILTIN_NAMES = [`);
     for (const name of builtinNames) {

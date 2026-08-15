@@ -1,14 +1,17 @@
-import type { Builtins } from "@backtickjs/cs-runtime";
-import type { Value } from "./Value.js";
-import { state } from "./state.js";
+import type { Builtins, Value } from "@backtickjs/cs-runtime";
+import { createSignal } from "solid-js";
 
-// What the framework's own names answer with. Beside `globals`, which is the
-// host language's — the two are looked up through one table, because the format
-// has one node for a name it carries.
-export const builtins = {
-  // Declaring is not calling: this stands where the declaration is written, and
-  // each time that is evaluated there is another cell.
-  //
-  // The writers answer `null` because `void` is not a value this language has.
-  state: (initial: Value) => state(initial),
-} as unknown as Builtins;
+export const builtins: Builtins = {
+  state(initial) {
+    const [read, store] = createSignal(initial);
+    const write = (value: typeof initial): Value => {
+      store(() => value);
+      return null;
+    };
+    const update = (updater: (current: typeof initial) => typeof initial) => {
+      store((previous) => updater(previous));
+      return null;
+    };
+    return { read, write, update };
+  },
+};

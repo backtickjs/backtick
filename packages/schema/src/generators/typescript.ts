@@ -36,7 +36,11 @@ export function type(node: TNode): string {
     return node.$ref;
   }
   if (IsUnion(node)) {
-    return node.anyOf.map((one) => type(one)).join(" | ");
+    // A function type is parenthesized where it stands beside others: without
+    // it, `=>` swallows the arms to its right.
+    return node.anyOf
+      .map((one) => (IsFunction(one) ? `(${type(one)})` : type(one)))
+      .join(" | ");
   }
   if (IsInterface(node)) {
     throw new Error("an interface may only stand as a declaration");
@@ -49,7 +53,7 @@ export function type(node: TNode): string {
     return `(${params.join(", ")}) => ${type(node.returnType)}`;
   }
   if (IsGeneric(node)) {
-    const declared = node.parameters.map(typeParameter);
+    const declared = node.parameters.map((one) => typeParameter(one));
     return `<${declared.join(", ")}>${type(node.expression)}`;
   }
   if (IsApply(node)) {
@@ -73,14 +77,21 @@ export function type(node: TNode): string {
   // language: a key nobody wrote reads as absent. The schema says only that
   // the keys are open, and another target writes its own way of saying it.
   if (IsRecord(node)) {
-    return `{ [key: string]: ${type(node.values)} | undefined }`;
+    // `| undefined` because that is what reading a key it does not hold answers
+    // with — TypeScript's reading of an index signature, not a value the
+    // language has. A readonly record is written without it: nothing may add a
+    // key, so what a reader finds is what the schema said.
+    const written = node.readOnly === true ? "readonly " : "";
+    const absent = node.readOnly === true ? "" : " | undefined";
+    return `{ ${written}[key: string]: ${type(node.values)}${absent} }`;
   }
   if (IsArray(node)) {
     const items = node.items;
+    const immutable = node.readOnly === true ? "readonly " : "";
     const written = type(items);
     return IsUnion(items) || IsFunction(items) || IsGeneric(items)
-      ? `(${written})[]`
-      : `${written}[]`;
+      ? `${immutable}(${written})[]`
+      : `${immutable}${written}[]`;
   }
   if (IsString(node)) {
     if ("const" in node) {
@@ -142,16 +153,19 @@ export function parameter(node: TNode, at: number): string {
 }
 
 /** One type parameter, with the constraint and default it was given. */
-export function typeParameter(node: TGenericParameter): string {
-  // A parameter the schema left unbounded still cannot be anything: this
-  // language holds client values and nothing else, and `ClientValue` is how
-  // TypeScript says so. The schema does not name it — it is a union of
-  // constructions, one of them an indexed access for bivariance, that mean
-  // nothing to a target which is not TypeScript.
+export function typeParameter(node: TGenericParameter, bound?: string): string {
+  // A parameter the schema left unbounded still cannot be anything: it holds
+  // whatever this language's values are, and which name says so depends on
+  // which end the file is written for. `ClientValue` is the authoring end —
+  // a union of constructions, one of them an indexed access for bivariance,
+  // that the schema cannot name and a target which is not TypeScript would
+  // not read. `Value` is the running end, which the schema does declare.
   const constrained = !IsUnknown(node.extends);
   const constraint = constrained
     ? ` extends ${type(node.extends)}`
-    : " extends ClientValue";
+    : bound === undefined
+      ? ""
+      : ` extends ${bound}`;
   // `Parameter(name, extends)` fills the default in with the constraint, so a
   // default worth printing is one that differs from it.
   const fallback =
@@ -169,7 +183,7 @@ export function typeParameter(node: TGenericParameter): string {
  * as the hand-written ones do, and a value it holds otherwise — `PI` is not
  * something a client answers when called.
  */
-export function member(name: string, node: TNode): string[] {
+export function member(name: string, node: TNode, bound?: string): string[] {
   const said = documentation(node, "  ", tags(node));
   // Not a member with a name: what stands where a name would is the key it is
   // reached by, and the name the schema gave it says what that key means.
@@ -183,7 +197,7 @@ export function member(name: string, node: TNode): string[] {
   // A method of its own — `from<T>(…)` — rather than a member holding a
   // generic function, which is what `type()` would write.
   if (IsGeneric(node) && IsFunction(node.expression)) {
-    const declared = node.parameters.map(typeParameter);
+    const declared = node.parameters.map((one) => typeParameter(one, bound));
     const params = node.expression.parameters.map((one, at) =>
       parameter(one, at),
     );
@@ -283,11 +297,20 @@ export const key = (name: string) =>
   /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
 
 /** A named interface, as a reader of the generated file sees it. */
-export function interfaceLines(name: string, node: TNode): string[] {
+export function interfaceLines(
+  name: string,
+  node: TNode,
+  bound?: string,
+): string[] {
   const held = (of: TInterface): string[] =>
     Object.entries(of.properties).flatMap(([called, what]) =>
-      member(called, what),
+      member(called, what, bound),
     );
+  // The type's own parameters carry no bound: `State<T>` is one declaration
+  // that both ends name, and which values may reach it is said where they come
+  // in — on the member that takes one.
+  const parameters = (of: readonly TGenericParameter[]): string =>
+    of.map((one) => typeParameter(one)).join(", ");
   // What it extends, written as the names it extends them by — a base is a
   // name here, never its properties spelled again.
   const heritage = (of: TInterface): string =>
@@ -295,10 +318,9 @@ export function interfaceLines(name: string, node: TNode): string[] {
       ? ""
       : ` extends ${of.extends.map((one) => type(one)).join(", ")}`;
   if (IsGeneric(node) && IsInterface(node.expression)) {
-    const declared = node.parameters.map(typeParameter);
     return [
       ...documentation(node, ""),
-      `export interface ${name}<${declared.join(", ")}>${heritage(
+      `export interface ${name}<${parameters(node.parameters)}>${heritage(
         node.expression,
       )} {`,
       ...held(node.expression),
@@ -317,13 +339,17 @@ export function interfaceLines(name: string, node: TNode): string[] {
 }
 
 /** A class, as the interface a client implements. */
-export function classLines(name: string, node: TNode): string[] {
+export function classLines(
+  name: string,
+  node: TNode,
+  bound = "ClientValue",
+): string[] {
   const held = (of: { members: Record<string, TNode> }): string[] =>
     Object.entries(of.members).flatMap(([called, what]) =>
-      member(called, what),
+      member(called, what, bound),
     );
   if (IsGeneric(node) && IsClass(node.expression)) {
-    const declared = node.parameters.map(typeParameter);
+    const declared = node.parameters.map((one) => typeParameter(one));
     return [
       ...documentation(node, ""),
       `export interface ${name}<${declared.join(", ")}> {`,

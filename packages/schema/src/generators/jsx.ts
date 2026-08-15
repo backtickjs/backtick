@@ -206,7 +206,7 @@ export function jsx(schema: ClientSchema): string {
     } else if (IsClass(node) || (IsGeneric(node) && IsClass(node.expression))) {
       lines.push(...classLines(name, node));
     } else if (IsGeneric(node)) {
-      const declared = node.parameters.map(typeParameter);
+      const declared = node.parameters.map((one) => typeParameter(one));
       lines.push(
         `export type ${name}<${declared.join(", ")}> = ${type(node.expression)};`,
       );
