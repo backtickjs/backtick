@@ -1,14 +1,6 @@
 import type { Boxes, Value } from "@backtickjs/cs-runtime";
 
 // What a member access on a primitive answers with.
-//
-// Written out rather than handed the host's prototypes, for the reason the
-// globals are: what a bundle can reach is a list somebody chose, so a member
-// left out stays left out. `"x".padStart` is not part of this language, and a
-// client answering it would accept bundles the format does not define.
-//
-// Each member takes its value as `this`, which is what the schema's classes
-// say and what a method call already binds.
 export const boxes: Boxes = {
   string: {
     toString(this: string) {
@@ -24,29 +16,25 @@ export const boxes: Boxes = {
       return this.concat(...strings);
     },
     indexOf(this: string, searchString, position) {
-      return this.indexOf(searchString, position ?? undefined);
+      return this.indexOf(searchString, position);
     },
     lastIndexOf(this: string, searchString, position) {
-      return this.lastIndexOf(searchString, position ?? undefined);
+      return this.lastIndexOf(searchString, position);
     },
     localeCompare(this: string, that) {
       return this.localeCompare(that);
     },
     replace(this: string, searchValue, replaceValue) {
-      return typeof replaceValue === "string"
-        ? this.replace(searchValue, replaceValue)
-        : this.replace(searchValue, (substring, offset, whole) =>
-            replaceValue(substring, offset, whole),
-          );
+      return this.replace(searchValue, replaceValue as string);
     },
     slice(this: string, start, end) {
-      return this.slice(start ?? undefined, end ?? undefined);
+      return this.slice(start, end);
     },
     split(this: string, separator, limit) {
-      return this.split(separator, limit ?? undefined);
+      return this.split(separator, limit);
     },
     substring(this: string, start, end) {
-      return this.substring(start, end ?? undefined);
+      return this.substring(start, end);
     },
     toLowerCase(this: string) {
       return this.toLowerCase();
@@ -66,25 +54,22 @@ export const boxes: Boxes = {
     get length(): number {
       return (this as unknown as string).length;
     },
-    substr(this: string, from, length) {
-      return this.substr(from, length ?? undefined);
-    },
     valueOf(this: string) {
       return this;
     },
   },
   number: {
     toString(this: number, radix) {
-      return this.toString(radix ?? undefined);
+      return this.toString(radix);
     },
     toFixed(this: number, fractionDigits) {
-      return this.toFixed(fractionDigits ?? undefined);
+      return this.toFixed(fractionDigits);
     },
     toExponential(this: number, fractionDigits) {
-      return this.toExponential(fractionDigits ?? undefined);
+      return this.toExponential(fractionDigits);
     },
     toPrecision(this: number, precision) {
-      return this.toPrecision(precision ?? undefined);
+      return this.toPrecision(precision);
     },
     valueOf(this: number) {
       return this;
@@ -103,16 +88,16 @@ export const boxes: Boxes = {
       return this.concat(...items);
     },
     join(this: Value[], separator) {
-      return this.join(separator ?? undefined);
+      return this.join(separator);
     },
     slice(this: Value[], start, end) {
-      return this.slice(start ?? undefined, end ?? undefined);
+      return this.slice(start, end);
     },
     indexOf(this: Value[], searchElement, fromIndex) {
-      return this.indexOf(searchElement, fromIndex ?? undefined);
+      return this.indexOf(searchElement, fromIndex);
     },
     includes(this: Value[], searchElement, fromIndex) {
-      return this.includes(searchElement, fromIndex ?? undefined);
+      return this.includes(searchElement, fromIndex);
     },
     map(this: Value[], callbackfn) {
       return this.map((value, index) => callbackfn(value, index));

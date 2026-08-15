@@ -793,25 +793,6 @@ export const schema: ClientSchema = {
           readOnly: true,
           description: "Returns the length of a String object.",
         }),
-        substr: Type.Function(
-          [
-            Type.FunctionParameter("from", Type.Number(), {
-              description:
-                "The starting position of the desired substring. The index of the first character in the string is zero.",
-            }),
-            Type.Optional(
-              Type.FunctionParameter("length", Type.Number(), {
-                description:
-                  "The number of characters to include in the returned substring.",
-              }),
-            ),
-          ],
-          Type.String(),
-          {
-            description:
-              "Gets a substring beginning at the specified location and having the specified length.",
-          },
-        ),
         valueOf: Type.Function([], Type.String(), {
           description: "Returns the primitive value of the specified object.",
         }),

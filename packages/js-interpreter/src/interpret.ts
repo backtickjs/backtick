@@ -10,6 +10,7 @@ import type {
   BundleStatementNode,
   FunctionLabel,
 } from "@backtickjs/core";
+import { boxes } from "./boxes.js";
 import { builtins } from "./builtins.js";
 import { globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
@@ -123,6 +124,45 @@ function compileFunction(
 const table = { ...globals, ...builtins } as unknown as Readonly<
   Record<string, Value>
 >;
+
+// What a member access reads a primitive's members from. A string, a number, a
+// boolean and an array answer from the schema's classes rather than from the
+// host's prototypes: a member the schema left out stays left out, where
+// `value[member]` would hand back whatever JavaScript happens to have.
+//
+// `Reflect.get` rather than an index, so a member declared as a value — a
+// string's `length` — is read with the value as its receiver.
+const box: Readonly<Record<string, object>> = boxes as unknown as Readonly<
+  Record<string, object>
+>;
+
+function memberOf(object: Value, name: string): Value {
+  const boxed =
+    typeof object === "string" ||
+    typeof object === "number" ||
+    typeof object === "boolean"
+      ? typeof object
+      : Array.isArray(object)
+        ? "array"
+        : null;
+  if (boxed === null) {
+    // A plain object is reached by the names it holds, and one it does not
+    // hold reads as null — the language's absent value.
+    return (object as { [name: string]: Value })[name] ?? null;
+  }
+  const held = box[boxed];
+  if (held === undefined) {
+    throw new Error(`this client answers for no ${boxed}`);
+  }
+  const found = Reflect.get(held, name, object) as Value | undefined;
+  if (found === undefined) {
+    // Not absent: a value's members are the schema's to say, and an undeclared
+    // one is a name this language has no meaning for. Reading it as null would
+    // let a bundle ask for `padStart` and carry on.
+    throw new Error(`a ${boxed} has no \`${name}\` in this language`);
+  }
+  return found;
+}
 
 export function compile(
   instance: Instance,
@@ -247,7 +287,7 @@ function buildNode(
       ) {
         const receiver = compile(instance, callee[1]);
         const optionalReceiver = callee[2];
-        const member = callee[3];
+        const name = callee[3];
         return (scope) => {
           // The receiver evaluates before the arguments; an optional receiver
           // (`a?.b(…)`) short-circuits a null object to null, arguments
@@ -256,14 +296,14 @@ function buildNode(
           if (optionalReceiver && object === null) {
             return null;
           }
-          const method = object[member];
+          const method = memberOf(object, name);
           // An optional call (`a.b?.(…)`) short-circuits a null method the
           // same way, arguments unevaluated.
           if (optionalCall && method === null) {
             return null;
           }
           if (typeof method !== "function") {
-            throw new Error(`${member} is not a function`);
+            throw new Error(`${name} is not a function`);
           }
           return method.apply(object, args(scope));
         };
@@ -294,7 +334,7 @@ function buildNode(
         }
         // An absent member reads as null — the language's absent value;
         // `undefined` never arises.
-        return object[member] ?? null;
+        return memberOf(object, member);
       };
     }
     case 1016: /* ElementAccessExpression */ {
@@ -312,6 +352,16 @@ function buildNode(
             key >= 0 &&
             key < reached.length
             ? (reached[key] ?? null)
+            : null;
+        }
+        // A string is reached by whole numbers in range too, which is what
+        // its class declares an index signature for.
+        if (typeof reached === "string") {
+          return typeof key === "number" &&
+            Number.isInteger(key) &&
+            key >= 0 &&
+            key < reached.length
+            ? reached[key]
             : null;
         }
         // An object is reached by the names it holds itself: an inherited one
