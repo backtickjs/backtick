@@ -440,6 +440,45 @@ export const schema: ClientSchema = {
         },
       ),
     }),
+    ReadonlyState: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([], {
+        read: Type.Function([], Type.Ref("T")),
+      }),
+      {
+        description:
+          "Storage a script may read but not replace.\n\n" +
+          "What a position is in a list is one of these, and so is a cell handed to a component that only displays it: the signature says which way the value travels, and a `State` goes wherever one of these is wanted.",
+      },
+    ),
+
+    State: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([Type.Apply(Type.Ref("ReadonlyState"), [Type.Ref("T")])], {
+        write: Type.Function(
+          [Type.FunctionParameter("value", Type.Ref("T"))],
+          Type.Void(),
+        ),
+        update: Type.Function(
+          [
+            Type.FunctionParameter(
+              "updater",
+              Type.Function(
+                [Type.FunctionParameter("value", Type.Ref("T"))],
+                Type.Ref("T"),
+              ),
+            ),
+          ],
+          Type.Void(),
+        ),
+      }),
+      {
+        description:
+          "A cell as a script reads it.\n\n" +
+          "Declaring one is not here: `state()` is a name the compiler recognises, and declaring happens while a component is being expanded and has to know which instance is running. This is the half that reaches the client.",
+      },
+    ),
+
     ArrayLike: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([], {

@@ -288,11 +288,19 @@ export function interfaceLines(name: string, node: TNode): string[] {
     Object.entries(of.properties).flatMap(([called, what]) =>
       member(called, what),
     );
+  // What it extends, written as the names it extends them by — a base is a
+  // name here, never its properties spelled again.
+  const heritage = (of: TInterface): string =>
+    of.extends.length === 0
+      ? ""
+      : ` extends ${of.extends.map((one) => type(one)).join(", ")}`;
   if (IsGeneric(node) && IsInterface(node.expression)) {
     const declared = node.parameters.map(typeParameter);
     return [
       ...documentation(node, ""),
-      `export interface ${name}<${declared.join(", ")}> {`,
+      `export interface ${name}<${declared.join(", ")}>${heritage(
+        node.expression,
+      )} {`,
       ...held(node.expression),
       "}",
     ];
@@ -302,7 +310,7 @@ export function interfaceLines(name: string, node: TNode): string[] {
   }
   return [
     ...documentation(node, ""),
-    `export interface ${name} {`,
+    `export interface ${name}${heritage(node)} {`,
     ...held(node),
     "}",
   ];

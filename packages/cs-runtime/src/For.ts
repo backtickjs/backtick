@@ -1,7 +1,7 @@
 import type { Client } from "./Client.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { JsxElement } from "./JsxElement.js";
-import type { ReadonlyState } from "./state.js";
+import type { ReadonlyState } from "./globals.js";
 
 /**
  * An array, and what to draw for one member of it.
