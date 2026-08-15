@@ -10,20 +10,14 @@ import type { Schema } from "@backtickjs/schema";
  *
  * That the web's tags hold text and numbers as well as elements is vocabulary,
  * and says so here. A target whose elements hold only text would write
- * `Type.String()` alone. `JsxElement` — anything this framework draws — is the
- * one name no type language outside TypeScript can say, so `Unsafe` supplies
- * it: a real `Ref`, so every guard reads it as one, wrapped to carry the type
- * that name stands for.
+ * `Type.String()` alone. `Element` — what a client draws — is core's, so this
+ * names it the way it names any other inherited type.
  *
  * One child, not several: the plural is `Children<T>`, which the emitter wraps
  * around this. Local rather than a named alias, because it is not a type this
  * target publishes — it is what two of its things happen to hold.
  */
-const child = Type.Union([
-  Type.Ref("JsxElement"),
-  Type.String(),
-  Type.Number(),
-]);
+const child = Type.Union([Type.Ref("Element"), Type.String(), Type.Number()]);
 
 export const schema: Schema = {
   extends: [core],

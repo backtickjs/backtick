@@ -8,6 +8,7 @@ import { IsIndex } from "../nodes/Index.js";
 import { IsInterface } from "../nodes/Interface.js";
 import type { TInterface } from "../nodes/Interface.js";
 import { IsNull } from "../nodes/Null.js";
+import { prop } from "./declarations.js";
 import { IsNumber } from "../nodes/Number.js";
 import { IsObject } from "../nodes/Object.js";
 import { IsOptional } from "../nodes/Optional.js";
@@ -315,11 +316,17 @@ export function interfaceLines(
   name: string,
   node: TNode,
   bound?: string,
+  props = false,
 ): string[] {
   const held = (of: TInterface): string[] => [
     ...(of.nominal === true ? [`  readonly [${brandOf(name)}]: never;`] : []),
+    // An interface a tag accepts holds props, and a prop is what a script may
+    // stand in: the wrapping is JSX's rule and is applied where the members are
+    // written, so a name is declared once whichever reads it.
     ...Object.entries(of.properties).flatMap(([called, what]) =>
-      member(called, what, bound),
+      props
+        ? [prop(called, what, (of.required ?? []).includes(called))]
+        : member(called, what, bound),
     ),
   ];
   const branded = (of: TInterface): string[] =>

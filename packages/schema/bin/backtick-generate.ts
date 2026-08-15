@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { flatten, generate, type Schema } from "../dist/index.js";
+import { generate, type Schema } from "../dist/index.js";
 
 // Every project's `pnpm generate`, run from the project it generates for.
 //
@@ -41,18 +41,12 @@ async function write(path: string, body: string): Promise<void> {
   console.log(`${path}: ${body.split("\n").length} lines`);
 }
 
-const reachable = flatten(schema);
-
-// The names a script reaches, for the schema that declares them. A target
-// inheriting core's re-declares nothing, so it writes no file at all.
-if (Object.keys(schema.builtins).length > 0) {
+// Everything the schema says: its types, its tags and its contract. One that
+// declares none of them is a schema in name only, and writes no file.
+if (
+  Object.keys(schema.types).length > 0 ||
+  Object.keys(schema.elements).length > 0 ||
+  Object.keys(schema.builtins).length > 0
+) {
   await write("src/schema.generated.ts", generate.declarations(schema));
-}
-
-// The runtimes an app compiles against, for a schema that has elements. One
-// with none is a base for other schemas rather than a client of its own, and a
-// `jsx-runtime` naming no tag is a file nothing can write against.
-if (Object.keys(reachable.elements).length > 0) {
-  await write("src/jsx-runtime/index.ts", generate.jsx(schema));
-  await write("src/jsx-dev-runtime/index.ts", generate.jsxDev());
 }

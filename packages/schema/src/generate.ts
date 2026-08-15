@@ -1,7 +1,5 @@
 import { declarations } from "./generators/declarations.js";
 import { json } from "./generators/json.js";
-import { jsx } from "./generators/jsx.js";
-import { jsxDev } from "./generators/jsxDev.js";
 
 /**
  * What a schema can be turned into.
@@ -14,6 +12,4 @@ import { jsxDev } from "./generators/jsxDev.js";
 export const generate = {
   declarations,
   json,
-  jsx,
-  jsxDev,
 };
