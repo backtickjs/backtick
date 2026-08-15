@@ -16,7 +16,6 @@ import type { ClientSchema } from "./ClientSchema.js";
 export function flatten(schema: ClientSchema): ClientSchema {
   const types: Record<string, ClientSchema["types"][string]> = {};
   const elements: Record<string, ClientSchema["elements"][string]> = {};
-  const globals: Record<string, ClientSchema["globals"][string]> = {};
   const builtins: Record<string, ClientSchema["builtins"][string]> = {};
 
   // A schema reached twice is inherited twice, which is not a collision — a
@@ -34,7 +33,6 @@ export function flatten(schema: ClientSchema): ClientSchema {
     }
     add(types, one.types, "type");
     add(elements, one.elements, "element");
-    add(globals, one.globals, "global");
     add(builtins, one.builtins, "builtin");
   }
 
@@ -54,5 +52,5 @@ export function flatten(schema: ClientSchema): ClientSchema {
   }
 
   take(schema);
-  return { extends: [], types, elements, globals, builtins };
+  return { extends: [], types, elements, builtins };
 }

@@ -1,7 +1,16 @@
-import type { Globals } from "@backtickjs/cs-runtime";
+import type { Builtins, Value } from "@backtickjs/cs-runtime";
+import { createSignal } from "solid-js";
 
-// What the host language's own names answer with, for this host.
-export const globals: Globals = {
+// What this client answers for every name the framework provides — the host
+// language's own and `state` alike, because the format has one node for a name
+// it carries and a client answers them the same way.
+//
+// Written out rather than handed the host's objects, so what a bundle can reach
+// is a list somebody chose and a member left out stays left out.
+//
+// What an app provides is not here: those are its own to implement and to hand
+// over, and they join this at the lookup.
+export const globals: Builtins = {
   Array: {
     from(source, map) {
       return Array.from(source, map);
@@ -136,6 +145,19 @@ export const globals: Globals = {
     cbrt(x) {
       return finite("cbrt", Math.cbrt(x));
     },
+  },
+
+  state(initial) {
+    const [read, store] = createSignal(initial);
+    const write = (value: typeof initial): Value => {
+      store(() => value);
+      return null;
+    };
+    const update = (updater: (current: typeof initial) => typeof initial) => {
+      store((previous) => updater(previous));
+      return null;
+    };
+    return { read, write, update };
   },
 };
 

@@ -11,7 +11,6 @@ import type {
   FunctionLabel,
 } from "@backtickjs/core";
 import { boxes } from "./boxes.js";
-import { builtins } from "./builtins.js";
 import { globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileElement, compileFor } from "./view.js";
@@ -121,9 +120,7 @@ function compileFunction(
 // `Globals` describes this table from the authoring end, where `Value` is the
 // same domain seen from the running end — the two representations `Value` names
 // — so it is widened once, here, to be read by name.
-const table = { ...globals, ...builtins } as unknown as Readonly<
-  Record<string, Value>
->;
+const table = globals as unknown as Readonly<Record<string, Value>>;
 
 // What a member access reads a primitive's members from. A string, a number, a
 // boolean and an array answer from the schema's classes rather than from the

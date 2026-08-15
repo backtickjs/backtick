@@ -10,9 +10,6 @@ export interface ClientSchema {
   /** Every element the client can render. */
   readonly elements: Readonly<Record<string, TElement>>;
 
-  /** JavaScript APIs the host already has. */
-  readonly globals: Readonly<Record<string, TNode>>;
-
-  /** What the framework or a target provides */
+  /** Builtin functions a script can call. */
   readonly builtins: Readonly<Record<string, TNode>>;
 }

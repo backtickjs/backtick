@@ -1101,12 +1101,14 @@ export const schema: ClientSchema = {
   //
   // The lib is what declares these names; what is written here is which of
   // their members a script may reach.
-  globals: {
-    Math: Type.Ref("Math"),
-    Array: Type.Ref("ArrayConstructor"),
-  },
-
   builtins: {
+    // What `declare var Math: Math` and `declare var Array: ArrayConstructor`
+    // say in the lib: the name a script reaches, and the type it has. `Array`
+    // needs a separate name for its type because `Array` is a type already —
+    // the generic array type, which is the instance side.
+    Math: Type.Ref("Math", { global: true }),
+    Array: Type.Ref("ArrayConstructor", { global: true }),
+
     /** Storage a script may read and write, holding what it was given. */
     state: Type.Generic(
       // Bounded by `Value` rather than left open: a builtin is answered by a
@@ -1116,6 +1118,7 @@ export const schema: ClientSchema = {
         [Type.FunctionParameter("initial", Type.Ref("T"))],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
       ),
+      { global: true },
     ),
   },
 };
