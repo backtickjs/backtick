@@ -1,4 +1,4 @@
-export type { Client } from "./Client.js";
+export type { Client } from "@backtickjs/core-schema";
 export type { ArrayConstructor, Math } from "@backtickjs/core-schema";
 export type {
   Builtins,
@@ -19,10 +19,10 @@ export {
   type JsxElementType,
   isJsxElement,
 } from "./JsxElement.js";
-export type { Prop } from "./Prop.js";
-export type { Children } from "./Children.js";
-export type { ClientValue } from "./ClientValue.js";
-export type { ClientUnknown } from "./ClientUnknown.js";
+export type { Prop } from "@backtickjs/core-schema";
+export type { Children } from "@backtickjs/core-schema";
+export type { ClientValue } from "@backtickjs/core-schema";
+export type { ClientUnknown } from "@backtickjs/core-schema";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export {

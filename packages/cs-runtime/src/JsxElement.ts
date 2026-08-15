@@ -48,7 +48,7 @@ export function isJsxElement(value: unknown): value is JsxElement {
 export function createJsxElement(
   type: JsxElementType,
   props: { [key: string]: unknown },
-): Element {
+): JsxElement {
   return {
     "@backtickjs": "JsxElement",
     type,

@@ -1,5 +1,5 @@
-import type { Client } from "./Client.js";
-import type { ClientValue } from "./ClientValue.js";
+import type { Client } from "@backtickjs/core-schema";
+import type { ClientValue } from "@backtickjs/core-schema";
 import type { JsxElement } from "./JsxElement.js";
 import type { ReadonlyState } from "@backtickjs/core-schema";
 

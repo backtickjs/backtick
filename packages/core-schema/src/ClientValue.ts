@@ -1,9 +1,8 @@
 import type { ClientFunction } from "./ClientFunction.js";
-import type { JsxElement } from "./JsxElement.js";
-import type { ReadonlyState } from "@backtickjs/core-schema";
+import type { Element, ReadonlyState } from "./schema.generated.js";
 
 export type ClientValue =
-  | JsxElement
+  | Element
   | ReadonlyState<ClientValue>
   | null
   | number

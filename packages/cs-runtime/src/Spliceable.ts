@@ -1,7 +1,7 @@
-import type { Client } from "./Client.js";
+import type { Client } from "@backtickjs/core-schema";
 import { isClientScript } from "./ClientScript.js";
 import { type JsxElement, isJsxElement } from "./JsxElement.js";
-import type { ClientValue } from "./ClientValue.js";
+import type { ClientValue } from "@backtickjs/core-schema";
 
 export type SpliceableValue =
   | Client<ClientValue>
