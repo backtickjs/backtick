@@ -1,4 +1,4 @@
-import { globals } from "./generators/globals.js";
+import { declarations } from "./generators/declarations.js";
 import { json } from "./generators/json.js";
 import { jsx } from "./generators/jsx.js";
 import { jsxDev } from "./generators/jsxDev.js";
@@ -12,7 +12,7 @@ import { jsxDev } from "./generators/jsxDev.js";
  * spreading set of exports.
  */
 export const generate = {
-  globals,
+  declarations,
   json,
   jsx,
   jsxDev,

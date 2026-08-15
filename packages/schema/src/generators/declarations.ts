@@ -11,14 +11,15 @@ import {
 } from "./typescript.js";
 import type { Schema } from "../Schema.js";
 
-// A schema to the host language's own names.
+// A schema to the names it declares, as the host language declares them.
 //
-// What `jsx` is for a target's tags, this is for the globals a script reaches:
-// the interfaces a client answers with, and the contract it owes. A target's
-// own names are a different artifact, generated where they are.
+// What `jsx` is for a target's tags, this is for everything a script reaches
+// by name: the interfaces a client answers with, and the contract it owes. It
+// declares and nothing else — a runtime is a different artifact, and so is a
+// target's own, generated where it is.
 
-/** The globals a schema declares: their types and the contract. */
-export function globals(schema: Schema): string {
+/** What a schema declares: its types, and what a client must answer for. */
+export function declarations(schema: Schema): string {
   // Names are everything in scope, inherited included: what reads these is
   // asking what a script may reach, and a script reaches what its whole schema
   // declares.
