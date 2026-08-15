@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
-    "generate": "backtick-generate",
+    "generate": "backtick-generate src/schema.ts",
     "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",

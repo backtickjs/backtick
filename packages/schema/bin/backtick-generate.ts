@@ -11,11 +11,15 @@ import { flatten, generate, type Schema } from "../dist/index.js";
 // project's schema, which is TypeScript imported here at run time, so
 // compiling this file would not remove the need for it.
 //
-// By convention rather than by configuration: a project keeps its schema
-// beside its `package.json` and gets the same artifacts in the same places, so
-// there is one of these and not one per SDK.
+// The schema is named and the artifacts are not: a project says which file
+// declares it and gets the same files in the same places, so there is one of
+// these and not one per SDK. Both ends are read from the working directory,
+// which is the project a package manager runs this in.
 
-const SOURCE = "backtick.schema.ts";
+const source = process.argv[2];
+if (source === undefined) {
+  throw new Error("usage: backtick-generate <path to a file exporting schema>");
+}
 
 const root = pathToFileURL(`${process.cwd()}/`);
 const at = (path: string) => new URL(path, root);
@@ -23,10 +27,10 @@ const at = (path: string) => new URL(path, root);
 // One export rather than the module itself, so the annotation on it is what
 // checks the shape: the specifier here is built at run time, so nothing
 // resolves it and a missing field would otherwise reach the artifact.
-const module: { schema?: Schema } = await import(at(SOURCE).href);
+const module: { schema?: Schema } = await import(at(source).href);
 const { schema } = module;
 if (schema === undefined) {
-  throw new Error(`${SOURCE} must export a schema.`);
+  throw new Error(`${source} must export a schema.`);
 }
 
 /** Written formatted, so what is checked in is what `format:check` expects. */
