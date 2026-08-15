@@ -601,6 +601,19 @@ export interface ArrayConstructor {
   of<T>(...items: T[]): T[];
 }
 
+export interface ForProps<T> {
+  /**
+   * The array to draw one thing per member of.
+   */
+  readonly each: T[];
+  /**
+   * @param index Where the member is, as storage: a position moves without the
+   * member changing, so a drawing handed the number would hold the one it was
+   * drawn at.
+   */
+  children(member: T, index: ReadonlyState<number>): string;
+}
+
 /** What a client must answer with, for every name in scope. */
 export interface Builtins {
   Math: Math;

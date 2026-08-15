@@ -1053,12 +1053,43 @@ export const schema: Schema = {
         },
       ),
     }),
+
+    /**
+     * An array, and what to draw for one member of it.
+     *
+     * `T` is what the array holds and what the child is handed, so the two are
+     * one decision here rather than two that have to agree. What the tag does
+     * with it is the open question: an intrinsic tag binds no type parameter
+     * from a prop, so `for` pins this to something until that is answered.
+     */
+    ForProps: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([], {
+        each: Type.Array(Type.Ref("T"), {
+          description: "The array to draw one thing per member of.",
+        }),
+        children: Type.Function(
+          [
+            Type.FunctionParameter("member", Type.Ref("T")),
+            Type.FunctionParameter(
+              "index",
+              Type.Apply(Type.Ref("ReadonlyState"), [Type.Number()]),
+              {
+                description:
+                  "Where the member is, as storage: a position moves without the member changing, so a drawing handed the number would hold the one it was drawn at.",
+              },
+            ),
+          ],
+          Type.String(),
+        ),
+      }),
+    ),
   },
 
-  // `for` is not here. It is a list rather than a tag today, recognised by the
-  // value `For` and lowered to its own node kind, so declaring it as an element
-  // would make `<for each={…}>` typecheck and then draw an element named "for".
-  // It lands with the lowering that makes it true.
+  // `for` is not here yet, though `ForProps` above is what it accepts. A tag
+  // declared by a base has to reach a target's `IntrinsicElements`, and the
+  // generator writing one for this package is what makes that possible —
+  // core drawing nothing today is the reason, not a decision.
   elements: {},
 
   // What `declare var Math: Math` and `declare var Array: ArrayConstructor`

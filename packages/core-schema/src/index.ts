@@ -5,6 +5,7 @@ export type {
   ArrayLike,
   Boolean,
   Builtins,
+  ForProps,
   Math,
   Number,
   ReadonlyState,
