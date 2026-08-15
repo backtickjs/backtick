@@ -1,7 +1,8 @@
-import type { Boxes, Value } from "@backtickjs/cs-runtime";
+import type { Boxes } from "@backtickjs/cs-runtime";
+import type { Value } from "./Value.js";
 
 // What a member access on a primitive answers with.
-export const boxes: Boxes = {
+export const boxes: Boxes<Value> = {
   string: {
     toString(this: string) {
       return this;

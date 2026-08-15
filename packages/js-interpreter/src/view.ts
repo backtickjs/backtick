@@ -10,7 +10,7 @@ import type { RendererOptions } from "./RendererOptions.js";
 import type { Instance } from "./Instance.js";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Scope } from "./interpret.js";
-import type { Value } from "@backtickjs/cs-runtime";
+import type { Value } from "./Value.js";
 
 // The view half: turning a drawing function into the host's own nodes, once,
 // and

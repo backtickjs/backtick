@@ -9,27 +9,6 @@ export interface ArrayLike<T> {
 }
 
 /**
- * Everything evaluating a bundle can produce, and nothing else.
- *
- * The running end of the same domain a script is written against: what is a
- * `JsxElement` there is the application of one here, a `State<T>` is the
- * object of functions a client builds for it, and a spliced class is a plain
- * function. Two representations rather than one, because collapsing them would
- * make one side describe values it cannot hold.
- *
- * A host's own nodes are not in here. What a tree builds belongs to the host
- * that built it, and nothing a script can hold is one.
- */
-export type Value =
-  | null
-  | boolean
-  | number
-  | string
-  | readonly Value[]
-  | { readonly [key: string]: Value }
-  | ((...args: Value[]) => Value);
-
-/**
  * A cell as a script reads it.
  *
  * Declaring one is not here: `state()` is a name the compiler recognises, and
@@ -629,12 +608,12 @@ export interface ArrayConstructor {
 export interface Builtins {
   Math: Math;
   Array: ArrayConstructor;
-  state<T extends Value>(initial: T): State<T>;
+  state<T>(initial: T): State<T>;
 }
 
 /** What a client must answer with, for a member of an autoboxed value. */
-export interface Boxes {
-  array: Array<Value>;
+export interface Boxes<T> {
+  array: Array<T>;
   boolean: Boolean;
   number: Number;
   string: String;

@@ -1,4 +1,5 @@
-import type { Builtins, Value } from "@backtickjs/cs-runtime";
+import type { Builtins } from "@backtickjs/cs-runtime";
+import type { Value } from "./Value.js";
 import { createSignal } from "solid-js";
 
 // What this client answers for every name the framework provides — the host

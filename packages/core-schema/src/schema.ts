@@ -440,27 +440,6 @@ export const schema: ClientSchema = {
         },
       ),
     }),
-    Value: Type.Union(
-      [
-        Type.Null(),
-        Type.Boolean(),
-        Type.Number(),
-        Type.String(),
-        Type.Array(Type.Ref("Value"), { readOnly: true }),
-        Type.Record(Type.Ref("Value"), { readOnly: true }),
-        Type.Function(
-          [Type.Rest(Type.FunctionParameter("args", Type.Ref("Value")))],
-          Type.Ref("Value"),
-        ),
-      ],
-      {
-        description:
-          "Everything evaluating a bundle can produce, and nothing else.\n\n" +
-          "The running end of the same domain a script is written against: what is a `JsxElement` there is the application of one here, a `State<T>` is the object of functions a client builds for it, and a spliced class is a plain function. Two representations rather than one, because collapsing them would make one side describe values it cannot hold.\n\n" +
-          "A host's own nodes are not in here. What a tree builds belongs to the host that built it, and nothing a script can hold is one.",
-      },
-    ),
-
     ReadonlyState: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([], {
@@ -1111,9 +1090,10 @@ export const schema: ClientSchema = {
 
     /** Storage a script may read and write, holding what it was given. */
     state: Type.Generic(
-      // Bounded by `Value` rather than left open: a builtin is answered by a
-      // client, and what a client holds is what a bundle carries.
-      [Type.GenericParameter("T", Type.Ref("Value"))],
+      // Left open: what a client may hold is the client's own domain, and a
+      // schema that named it would be describing the running end rather than
+      // what a script reaches.
+      [Type.GenericParameter("T")],
       Type.Function(
         [Type.FunctionParameter("initial", Type.Ref("T"))],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),

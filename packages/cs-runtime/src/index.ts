@@ -7,7 +7,6 @@ export type {
   Boolean,
   Number,
   String,
-  Value,
 } from "@backtickjs/core-schema";
 export {
   type ClientScript,

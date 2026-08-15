@@ -10,8 +10,10 @@ import {
   key,
   member,
   type,
+  typeParameter,
 } from "./typescript.js";
 import type { ClientSchema } from "../ClientSchema.js";
+import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import type { TNode } from "../TNode.js";
 
 // A schema to the host language's own names.
@@ -157,18 +159,48 @@ export function globals(schema: ClientSchema): string {
       const boxes = IsClass(held) ? held.boxes : undefined;
       return boxes === undefined
         ? undefined
-        : ([boxes, IsGeneric(node) ? `${name}<Value>` : name] as const);
+        : ({
+            boxes,
+            name,
+            // What a boxed container holds is the client's own domain, so the
+            // class's own parameters are carried out to this interface and the
+            // client fills them in. Nothing here names them.
+            parameters: IsGeneric(node) ? node.parameters : [],
+          } as const);
     })
     .filter((one) => one !== undefined)
-    .sort(([a], [b]) => a.localeCompare(b));
+    .sort((a, b) => a.boxes.localeCompare(b.boxes));
+
+  // Every parameter a boxed container declares, in the order they are boxed.
+  // Two containers naming one parameter would be two things asking to be
+  // filled in by one, which is a schema to fix rather than a name to invent.
+  const holds: TGenericParameter[] = [];
+  for (const { boxes, parameters } of boxed) {
+    for (const parameter of parameters) {
+      if (holds.some((held) => held.name === parameter.name)) {
+        throw new Error(
+          `a boxed \`${boxes}\` names \`${parameter.name}\`, and so does another`,
+        );
+      }
+      holds.push(parameter);
+    }
+  }
 
   if (boxed.length > 0) {
+    const declared =
+      holds.length === 0
+        ? ""
+        : `<${holds.map((one) => typeParameter(one)).join(", ")}>`;
     lines.push(
       "/** What a client must answer with, for a member of an autoboxed value. */",
     );
-    lines.push(`export interface Boxes {`);
-    for (const [boxes, held] of boxed) {
-      lines.push(`  ${boxes}: ${held};`);
+    lines.push(`export interface Boxes${declared} {`);
+    for (const { boxes, name, parameters } of boxed) {
+      const applied =
+        parameters.length === 0
+          ? ""
+          : `<${parameters.map((one) => one.name).join(", ")}>`;
+      lines.push(`  ${boxes}: ${name}${applied};`);
     }
     lines.push(`}`);
     lines.push("");
