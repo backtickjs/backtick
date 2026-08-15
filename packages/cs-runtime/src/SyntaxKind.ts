@@ -59,10 +59,6 @@ export const SyntaxKind = {
   // it is in scope; here there is no scope to be in, so what a script may
   // reach is written down instead of inherited.
   Builtin: 1001,
-  // Storage a script declares for itself. Not a call of a builtin: calling one
-  // twice is calling it twice, where declaring twice is two storages, so what
-  // it is has to be in the node rather than in what the node names.
-  State: 1002,
 } as const;
 
 export type SyntaxKind = (typeof SyntaxKind)[keyof typeof SyntaxKind];

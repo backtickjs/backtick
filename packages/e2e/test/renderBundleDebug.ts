@@ -79,10 +79,6 @@ function renderNode(
     // A global the format names and the host answers.
     case NodeKind.Builtin:
       return node[1];
-    // Storage made where it stands, which is why it reads as a declaration
-    // rather than a call.
-    case NodeKind.State:
-      return `state(${renderNode(node[1], indent)})`;
     // Same notation as in tree position: a body applies an entry when the
     // instance it makes is named, and calls one when it isn't.
     case NodeKind.ApplyFunction: {

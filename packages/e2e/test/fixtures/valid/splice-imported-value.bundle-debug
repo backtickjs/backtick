@@ -6,7 +6,6 @@ root = #f0(() => {
   "ApplyFunction": 2,
   "Builtin": 3,
   "DataArray": 4,
-  "State": 5,
   "For": 6,
   "Identifier": 1000,
   "CallExpression": 1001,

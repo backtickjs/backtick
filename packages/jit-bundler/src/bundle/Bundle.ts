@@ -76,7 +76,6 @@ export const NodeKind = {
   // A node is an array, so an array of data needs saying apart from one. Data
   // objects need no such wrapper, which is why only this one exists.
   DataArray: 4,
-  State: 5,
   // A list draws one thing per member of an array. Its own kind rather than an
   // element the reader knows by id: it draws no node, and its child is applied
   // per member where an element's children are drawn once.
@@ -201,11 +200,6 @@ export type BundleBuiltinNode = [kind: typeof NodeKind.Builtin, name: string];
 // expression may be re-run, cached or shared freely. A kind of its own for that
 // reason — a call of a named global would say the opposite, since calling one
 // twice is calling it twice.
-export type BundleStateNode = [
-  kind: typeof NodeKind.State,
-  // Evaluated where the declaration is, once per storage it makes.
-  initial: BundleExpressionNode,
-];
 
 // A list: one drawing per member of an array.
 //
@@ -248,8 +242,7 @@ export type BundleExpressionNode =
   | BundlePrefixUnaryExpressionNode
   | BundleConditionalExpressionNode
   | BundleArrowFunctionNode
-  | BundleBuiltinNode
-  | BundleStateNode;
+  | BundleBuiltinNode;
 
 // A body node a block runs in order: control flow, bindings, or an
 // expression evaluated for its effect.

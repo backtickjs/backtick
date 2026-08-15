@@ -25,7 +25,6 @@ export type ClientScriptExpression =
   | ClientScriptElementAccessExpression
   | ClientScriptSplice
   | ClientScriptBuiltin
-  | ClientScriptState
   | ClientScriptJsxElement
   | ClientScriptStringLiteral
   | ClientScriptConditionalExpression;
@@ -283,15 +282,6 @@ export interface ClientScriptJsxElement {
 export interface ClientScriptJsxAttribute {
   readonly name: string;
   readonly initializer: ClientScriptExpression;
-}
-
-// `state(initial)`: storage the script declares, one per evaluation. The
-// initial value is an expression like any other, evaluated where the
-// declaration is.
-export interface ClientScriptState {
-  readonly kind: typeof SyntaxKind.State;
-  readonly loc: SourceLocation;
-  readonly initial: ClientScriptExpression;
 }
 
 export interface ClientScriptStringLiteral {

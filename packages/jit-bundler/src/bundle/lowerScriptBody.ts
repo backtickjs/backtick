@@ -275,8 +275,6 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         ];
       case SyntaxKind.Builtin:
         return [NodeKind.Builtin, node.name];
-      case SyntaxKind.State:
-        return [NodeKind.State, e(node.initial)];
       // An element the script wrote, which is the node a tree entry already
       // builds: `children` is a prop beside the rest, so what draws one draws
       // both and nothing downstream learns a second kind of element.
