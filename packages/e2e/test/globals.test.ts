@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { GLOBAL_NAMES, schema } from "@backtickjs/cs-runtime";
-import { globals } from "@backtickjs/js-interpreter";
+import { boxes, globals } from "@backtickjs/js-interpreter";
 
 // What the reference client answers with, against what the schema says a script
 // may reach.
@@ -25,6 +25,38 @@ function declared(): Map<string, string[]> {
   }
   return members;
 }
+
+describe("boxes", () => {
+  // What a member access on a primitive reaches. The schema says which class a
+  // value autoboxes to; this holds the client to answering every member of it,
+  // the way the globals test holds it to `Math`.
+  it("the client answers for every member a boxed class declares", () => {
+    const answered = new Map(Object.entries(boxes));
+    for (const [name, node] of Object.entries(schema.types)) {
+      const held = node.type === "generic" ? node.expression : node;
+      if (held.type !== "class" || held.boxes === undefined) {
+        continue;
+      }
+      const held_ = held as { boxes: string; members: Record<string, unknown> };
+      const table = answered.get(held_.boxes) as Record<string, unknown>;
+      assert.ok(
+        table !== undefined,
+        `nothing answers for a boxed ${held_.boxes}`,
+      );
+      for (const [member, node] of Object.entries(held_.members)) {
+        // An index signature is reached by `[]` rather than by name, so it is
+        // element access's to answer and not a member of this table.
+        if ((node as { type?: string }).type === "index") {
+          continue;
+        }
+        assert.ok(
+          member in table,
+          `\`${name}.${member}\` is declared and not answered`,
+        );
+      }
+    }
+  });
+});
 
 describe("globals", () => {
   it("answer with a number this language has, or not at all", () => {

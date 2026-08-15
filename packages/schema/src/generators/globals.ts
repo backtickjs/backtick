@@ -29,7 +29,12 @@ export function globals(schema: ClientSchema): string {
   const classes = [
     ...Object.entries(schema.types),
     ...Object.entries(schema.globals),
-  ].filter(([, node]) => IsClass(node));
+    // A generic class is a class: `ClientArray<T>` is one declaration with a
+    // parameter, and `classLines` writes either.
+  ].filter(
+    ([, node]) =>
+      IsClass(node) || (IsGeneric(node) && IsClass(node.expression)),
+  );
 
   // Names are everything in scope, inherited included: what reads these is
   // asking what a script may reach, and a script reaches what its whole schema
@@ -121,6 +126,33 @@ export function globals(schema: ClientSchema): string {
   // is not among them — `state` is matched by its call shape, and a target's is
   // reached by splicing what this generates.
   const globalNames = Object.keys(all.globals).sort();
+
+  // What a member access on a primitive reaches, by the value that autoboxes to
+  // it. A client answers these the way it answers a global: from a list the
+  // schema chose, so a member left out stays left out rather than falling
+  // through to whatever the host's own prototypes happen to hold.
+  const boxed = classes
+    .map(([name, node]) => {
+      const held = IsGeneric(node) ? node.expression : node;
+      const boxes = IsClass(held) ? held.boxes : undefined;
+      return boxes === undefined
+        ? undefined
+        : ([boxes, IsGeneric(node) ? `${name}<Value>` : name] as const);
+    })
+    .filter((one) => one !== undefined)
+    .sort(([a], [b]) => a.localeCompare(b));
+
+  if (boxed.length > 0) {
+    lines.push(
+      "/** What a client must answer with, for a member of an autoboxed value. */",
+    );
+    lines.push(`export interface Boxes {`);
+    for (const [boxes, held] of boxed) {
+      lines.push(`  ${boxes}: ${held};`);
+    }
+    lines.push(`}`);
+    lines.push("");
+  }
 
   // The framework's own names, which a script reaches the same way and the
   // compiler recognises the same way — but which nothing else declares, so the

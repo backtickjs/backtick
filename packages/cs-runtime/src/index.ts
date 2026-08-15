@@ -1,16 +1,21 @@
 export type { Client } from "./Client.js";
-export type { ClientArray } from "./ClientArray.js";
 export type { ArrayConstructor, Math } from "./globals.js";
-export type { Builtins, Globals, Value } from "./globals.js";
+export type {
+  Boxes,
+  Builtins,
+  Array,
+  Boolean,
+  Number,
+  String,
+  Globals,
+  Value,
+} from "./globals.js";
 export { BUILTIN_NAMES, GLOBAL_NAMES } from "./globals.js";
-export type { ClientBoolean } from "./ClientBoolean.js";
-export type { ClientNumber } from "./ClientNumber.js";
 export {
   type ClientScript,
   isClientScript,
   type Metadata,
 } from "./ClientScript.js";
-export type { ClientString } from "./ClientString.js";
 export { For, type ForProps, isFor } from "./For.js";
 export { createFragment, type Fragment, isFragment } from "./Fragment.js";
 export {

@@ -139,9 +139,15 @@ export function type(node: TNode): string {
 export function parameter(node: TNode, at: number): string {
   if (IsRest(node)) {
     const items = node.items;
+    // A union or a function is parenthesized before the `[]`, or the bracket
+    // binds to its last arm: `(T | readonly T[])[]`, never `T | readonly T[][]`.
+    const held = (of: TNode): string => {
+      const written = type(of);
+      return IsUnion(of) || IsFunction(of) ? `(${written})[]` : `${written}[]`;
+    };
     return IsFunctionParameter(items)
-      ? `...${items.name}: ${type(items.holds)}[]`
-      : `...args: ${type(items)}[]`;
+      ? `...${items.name}: ${held(items.holds)}`
+      : `...args: ${held(items)}`;
   }
   // `Optional` marks the node, and in a parameter list that is the caller's
   // choice to leave it out rather than a property that may be absent.

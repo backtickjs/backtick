@@ -1,3 +1,4 @@
+export { boxes } from "./boxes.js";
 export { builtins } from "./builtins.js";
 export { globals } from "./globals.js";
 export { evaluate, render } from "./view.js";

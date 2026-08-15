@@ -2,7 +2,7 @@
 // Never executed — typechecked by `tsc -b`.
 import type {
   Client,
-  ClientArray,
+  Array,
   ClientValue,
   Receiver,
   Spliceable,
@@ -42,7 +42,7 @@ receiver(point.x).toString(2) satisfies string;
 receiver(true).toString() satisfies string;
 
 // An array reads as the client array API.
-receiver([1, 2, 3]) satisfies ClientArray<number>;
+receiver([1, 2, 3]) satisfies Array<number>;
 
 // A plain object reads its own members, and an optional one reads as `null`
 // rather than as `undefined`, which this language has no value for.

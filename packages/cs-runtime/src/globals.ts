@@ -321,6 +321,299 @@ export interface Math {
   cbrt(x: number): number;
 }
 
+export interface Boolean {
+  /**
+   * Returns the primitive value of the specified object.
+   */
+  valueOf(): boolean;
+}
+
+export interface Number {
+  /**
+   * Returns a string representation of an object.
+   *
+   * @param radix Specifies a radix for converting numeric values to strings.
+   * This value is only used for numbers.
+   */
+  toString(radix?: number): string;
+  /**
+   * Returns a string representing a number in fixed-point notation.
+   *
+   * @param fractionDigits Number of digits after the decimal point. Must be in
+   * the range 0 - 20, inclusive.
+   */
+  toFixed(fractionDigits?: number): string;
+  /**
+   * Returns a string containing a number represented in exponential notation.
+   *
+   * @param fractionDigits Number of digits after the decimal point. Must be in
+   * the range 0 - 20, inclusive.
+   */
+  toExponential(fractionDigits?: number): string;
+  /**
+   * Returns a string containing a number represented either in exponential or
+   * fixed-point notation with a specified number of digits.
+   *
+   * @param precision Number of significant digits. Must be in the range 1 -
+   * 21, inclusive.
+   */
+  toPrecision(precision?: number): string;
+  /**
+   * Returns the primitive value of the specified object.
+   */
+  valueOf(): number;
+}
+
+export interface String {
+  /**
+   * Returns a string representation of a string.
+   */
+  toString(): string;
+  /**
+   * Returns the character at the specified index.
+   *
+   * @param pos The zero-based index of the desired character.
+   */
+  charAt(pos: number): string;
+  /**
+   * Returns the Unicode value of the character at the specified location.
+   *
+   * @param index The zero-based index of the desired character. If there is no
+   * character at the specified index, NaN is returned.
+   */
+  charCodeAt(index: number): number;
+  /**
+   * Returns a string that contains the concatenation of two or more strings.
+   *
+   * @param strings The strings to append to the end of the string.
+   */
+  concat(...strings: string[]): string;
+  /**
+   * Returns the position of the first occurrence of a substring, or -1 if it
+   * is not present.
+   *
+   * @param searchString The substring to search for in the string
+   * @param position The index at which to begin searching the String object.
+   * If omitted, search starts at the beginning of the string.
+   */
+  indexOf(searchString: string, position?: number): number;
+  /**
+   * Returns the last occurrence of a substring in the string, or -1 if it is
+   * not present.
+   *
+   * @param searchString The substring to search for.
+   * @param position The index at which to begin searching. If omitted, the
+   * search begins at the end of the string.
+   */
+  lastIndexOf(searchString: string, position?: number): number;
+  /**
+   * Determines whether two strings are equivalent in the current locale.
+   *
+   * @param that String to compare to target string
+   */
+  localeCompare(that: string): number;
+  /**
+   * Replaces text in a string, using a search string.
+   *
+   * @param searchValue A string to search for.
+   * @param replaceValue The text to replace it with, or a function answering
+   * with that text. Only the first match of `searchValue` is replaced.
+   */
+  replace(
+    searchValue: string,
+    replaceValue:
+      | string
+      | ((substring: string, offset: number, string: string) => string),
+  ): string;
+  /**
+   * Returns a section of a string.
+   *
+   * @param start The index to the beginning of the specified portion of
+   * stringObj.
+   * @param end The index to the end of the specified portion of stringObj. The
+   * substring includes the characters up to, but not including, the character
+   * indicated by end. If this value is not specified, the substring continues
+   * to the end of stringObj.
+   */
+  slice(start?: number, end?: number): string;
+  /**
+   * Split a string into substrings using the specified separator and return
+   * them as an array.
+   *
+   * @param separator A string that identifies character or characters to use
+   * in separating the string. If omitted, a single-element array containing
+   * the entire string is returned.
+   * @param limit A value used to limit the number of elements returned in the
+   * array.
+   */
+  split(separator: string, limit?: number): string[];
+  /**
+   * Returns the substring at the specified location within a String object.
+   *
+   * @param start The zero-based index number indicating the beginning of the
+   * substring.
+   * @param end Zero-based index number indicating the end of the substring.
+   * The substring includes the characters up to, but not including, the
+   * character indicated by end. If end is omitted, the characters from start
+   * through the end of the original string are returned.
+   */
+  substring(start: number, end?: number): string;
+  /**
+   * Converts all the alphabetic characters in a string to lowercase.
+   */
+  toLowerCase(): string;
+  /**
+   * Converts all alphabetic characters to lowercase, taking into account the
+   * host environment's current locale.
+   */
+  toLocaleLowerCase(locales?: string | string[]): string;
+  /**
+   * Converts all the alphabetic characters in a string to uppercase.
+   */
+  toUpperCase(): string;
+  /**
+   * Returns a string where all alphabetic characters have been converted to
+   * uppercase, taking into account the host environment's current locale.
+   */
+  toLocaleUpperCase(locales?: string | string[]): string;
+  /**
+   * Removes the leading and trailing white space and line terminator
+   * characters from a string.
+   */
+  trim(): string;
+  /**
+   * Returns the length of a String object.
+   */
+  readonly length: number;
+  /**
+   * Gets a substring beginning at the specified location and having the
+   * specified length.
+   *
+   * @param from The starting position of the desired substring. The index of
+   * the first character in the string is zero.
+   * @param length The number of characters to include in the returned
+   * substring.
+   */
+  substr(from: number, length?: number): string;
+  /**
+   * Returns the primitive value of the specified object.
+   */
+  valueOf(): string;
+  readonly [index: number]: string;
+}
+
+export interface Array<T> {
+  /**
+   * Gets the length of the array. This is a number one higher than the highest
+   * index in the array.
+   */
+  readonly length: number;
+  /**
+   * Combines two or more arrays. This method returns a new array without
+   * modifying any existing arrays.
+   *
+   * @param items Additional arrays and/or items to add to the end of the
+   * array.
+   */
+  concat(...items: (T | readonly T[])[]): T[];
+  /**
+   * Adds all the elements of an array into a string, separated by the
+   * specified separator string.
+   *
+   * @param separator A string used to separate one element of the array from
+   * the next in the resulting string. If omitted, the array elements are
+   * separated with a comma.
+   */
+  join(separator?: string): string;
+  /**
+   * Returns a copy of a section of an array.
+   *
+   * @param start The beginning index of the specified portion of the array. If
+   * start is undefined, then the slice begins at index 0.
+   * @param end The end index of the specified portion of the array. This is
+   * exclusive of the element at the index 'end'. If end is undefined, then the
+   * slice extends to the end of the array.
+   */
+  slice(start?: number, end?: number): T[];
+  /**
+   * Returns the index of the first occurrence of a value in an array, or -1 if
+   * it is not present.
+   *
+   * @param searchElement The value to locate in the array.
+   * @param fromIndex The array index at which to begin the search. If
+   * fromIndex is omitted, the search starts at index 0.
+   */
+  indexOf(searchElement: T, fromIndex?: number): number;
+  /**
+   * Determines whether an array includes a certain element, returning true or
+   * false as appropriate.
+   *
+   * @param searchElement The element to search for.
+   * @param fromIndex The position in this array at which to begin searching
+   * for searchElement.
+   */
+  includes(searchElement: T, fromIndex?: number): boolean;
+  /**
+   * Calls a defined callback function on each element of an array, and returns
+   * an array that contains the results.
+   *
+   * @param callbackfn A function that accepts up to two arguments. The map
+   * method calls the callbackfn function one time for each element in the
+   * array.
+   */
+  map<U extends ClientValue>(callbackfn: (value: T, index: number) => U): U[];
+  /**
+   * Returns the elements of an array that meet the condition specified in a
+   * callback function.
+   *
+   * @param predicate A function that accepts up to two arguments. The filter
+   * method calls the predicate function one time for each element in the
+   * array.
+   */
+  filter(predicate: (value: T, index: number) => boolean): T[];
+  /**
+   * Copies an array, then overwrites the value at the provided index with the
+   * given value. If the index is negative, then it replaces from the end of
+   * the array.
+   *
+   * @param index The index of the value to overwrite. If the index is
+   * negative, then it replaces from the end of the array.
+   * @param value The value to write into the copied array.
+   */
+  with(index: number, value: T): T[];
+  /**
+   * Returns a copy of an array with its elements sorted.
+   *
+   * The comparator is required, where the standard library makes it optional:
+   * sorting without one compares the elements as strings, which is a rule of
+   * JavaScript's rather than of this language, and every other host would have
+   * to reproduce it to agree. Saying how to order two elements is the same
+   * work and it ports.
+   *
+   * @param compareFn Function used to determine the order of the elements. It
+   * is expected to return a negative value if the first argument is less than
+   * the second argument, zero if they're equal, and a positive value
+   * otherwise.
+   */
+  toSorted(compareFn: (a: T, b: T) => number): T[];
+  /**
+   * Returns a copy of an array with its elements in reverse order.
+   */
+  toReversed(): T[];
+  /**
+   * Copies an array and removes elements while, if necessary, inserting new
+   * elements in their place, returning the remaining elements.
+   *
+   * @param start The zero-based location in the array from which to start
+   * removing elements.
+   * @param deleteCount The number of elements to remove.
+   * @param items Elements to insert into the copied array in place of the
+   * deleted elements.
+   */
+  toSpliced(start: number, deleteCount: number, ...items: T[]): T[];
+  readonly [index: number]: T;
+}
+
 export interface ArrayConstructor {
   /**
    * Creates an array from an array-like object.
@@ -348,6 +641,14 @@ export interface ArrayConstructor {
 export interface Globals {
   Math: Math;
   Array: ArrayConstructor;
+}
+
+/** What a client must answer with, for a member of an autoboxed value. */
+export interface Boxes {
+  array: Array<Value>;
+  boolean: Boolean;
+  number: Number;
+  string: String;
 }
 
 /** What a client must answer with, for every builtin. */

@@ -1,21 +1,24 @@
-import type { ClientArray } from "./ClientArray.js";
-import type { ArrayConstructor, Math } from "./globals.js";
+import type {
+  Array,
+  ArrayConstructor,
+  Boolean,
+  Math,
+  Number,
+  String,
+} from "./globals.js";
 import type { ClientFunction } from "./ClientFunction.js";
-import type { ClientBoolean } from "./ClientBoolean.js";
 import type { JsxElement } from "./JsxElement.js";
-import type { ClientNumber } from "./ClientNumber.js";
-import type { ClientString } from "./ClientString.js";
 import type { ClientValue } from "./ClientValue.js";
 
 // A built-in receiver autoboxes to its client type
 type Autoboxed<T> = T extends string
-  ? ClientString
+  ? String
   : T extends number
-    ? ClientNumber
+    ? Number
     : T extends boolean
-      ? ClientBoolean
+      ? Boolean
       : T extends readonly (infer E)[]
-        ? ClientArray<E>
+        ? Array<E>
         : never;
 
 // A plain object's members as a script reads them: `?` means omittable —
@@ -37,7 +40,7 @@ export type ClientGlobal = typeof globalThis.Math | typeof globalThis.Array;
 // anything else by the keys its own type names. Naming the array case rather
 // than leaving it to `keyof` keeps the answer to a bad key a clean one — the
 // key was meant to be a number — instead of the whole member list.
-export type IndexKey<R> = R extends ClientArray<any> ? number : keyof R;
+export type IndexKey<R> = R extends Array<any> ? number : keyof R;
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
