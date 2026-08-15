@@ -12,5 +12,5 @@ export type {
   State,
   String,
   Value,
-} from "./globals.js";
-export { BUILTIN_MEMBERS, GLOBAL_BUILTINS } from "./globals.js";
+} from "./schema.generated.js";
+export { BUILTIN_MEMBERS, GLOBAL_BUILTINS } from "./schema.generated.js";
