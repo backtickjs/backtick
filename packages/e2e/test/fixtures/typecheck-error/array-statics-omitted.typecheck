@@ -1,3 +1,2 @@
-5:32 error TS2550: Property 'of' does not exist on type 'ArrayConstructor'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.
-7:32 error TS2339: Property 'isArray' does not exist on type 'ArrayConstructor'.
-12:31 error TS2554: Expected 2 arguments, but got 1.
+6:32 error TS2339: Property 'isArray' does not exist on type 'ArrayConstructor'.
+11:31 error TS2554: Expected 2 arguments, but got 1.

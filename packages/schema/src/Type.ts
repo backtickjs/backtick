@@ -5,6 +5,7 @@ import { Class } from "./nodes/Class.js";
 import { Element } from "./nodes/Element.js";
 import { Function } from "./nodes/Function.js";
 import { Generic } from "./nodes/Generic.js";
+import { Index } from "./nodes/Index.js";
 import { Interface } from "./nodes/Interface.js";
 import { Literal } from "./nodes/Literal.js";
 import { Null } from "./nodes/Null.js";
@@ -47,6 +48,7 @@ export const Type = {
   FunctionParameter,
   Apply,
   Element,
+  Index,
   Interface,
   Class,
 };

@@ -5,6 +5,7 @@ import type { TClass } from "./nodes/Class.js";
 import type { TFunction } from "./nodes/Function.js";
 import type { TFunctionParameter } from "./nodes/FunctionParameter.js";
 import type { TGeneric } from "./nodes/Generic.js";
+import type { TIndex } from "./nodes/Index.js";
 import type { TInterface } from "./nodes/Interface.js";
 import type { TNull } from "./nodes/Null.js";
 import type { TNumber } from "./nodes/Number.js";
@@ -32,6 +33,7 @@ export type TNode =
   | TNumber
   | TBoolean
   | TUnion
+  | TIndex
   | TInterface
   | TObject
   | TArray

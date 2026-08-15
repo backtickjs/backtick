@@ -6,6 +6,11 @@ export const globals: Globals = {
     from(source, map) {
       return Array.from(source, map);
     },
+    of(...items) {
+      // An array literal is this. What it adds is reaching one from a spliced
+      // list of client values rather than from a written-out sequence.
+      return items;
+    },
   },
   Math: {
     E: Math.E,

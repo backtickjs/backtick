@@ -2,6 +2,11 @@
 
 import type { ClientValue } from "./ClientValue.js";
 
+export interface ArrayLike<T extends ClientValue> {
+  readonly length: number;
+  readonly [n: number]: T;
+}
+
 export interface Math {
   /**
    * The mathematical constant e. This is Euler's number, the base of natural
@@ -131,11 +136,6 @@ export interface Math {
   pow(x: number, y: number): number;
   /**
    * Returns a pseudorandom number between 0 and 1.
-   *
-   * The one member here that is not a function of its arguments. Two calls
-   * disagree, two hosts disagree, and two runs of the same bundle disagree —
-   * so a bundle that reaches this cannot be snapshotted, cached by its output,
-   * or compared against a previous run of itself.
    */
   random(): number;
   /**
@@ -277,37 +277,27 @@ export interface Math {
   cbrt(x: number): number;
 }
 
-/**
- * The client `Array` API: the static side of the global, as against
- * `ClientArray`, which is what a script reaches on an array it already has.
- *
- * One member, because there is one thing the language cannot do for itself:
- * produce a sequence of a given length. It can transform one — `map`,
- * `filter`, `slice` — but the only way to get to a thousand elements without
- * this is to double a throwaway array until it is long enough.
- *
- * `of`, `isArray` and the rest are absent: an array literal is `of`, and a
- * script's types already say what is an array.
- */
 export interface ArrayConstructor {
   /**
-   * Builds an array of `length` elements, each the result of calling `map` for
-   * its index.
+   * Creates an array from an array-like object.
    *
-   * The mapper is required, where the standard library makes it optional.
-   * Without one this answers with an array of holes, and a hole reads as
-   * `undefined` — which is the one thing this language has no value for.
+   * The mapper is required, where the standard library makes it optional:
+   * without one, a source that names only a length answers with holes, and a
+   * hole reads as `undefined` — which this language has no value for.
    *
-   * The mapper's first argument is always `null`. The standard library passes
-   * the element it found, and against a `{ length }` source there is none.
-   *
-   * @param source How many elements to build, as an object naming its length.
-   * @param map Called once per index, with `null` and that index.
+   * @param arrayLike An array-like object to convert to an array.
+   * @param mapfn A mapping function to call on every element of the array.
    */
-  from<T extends ClientValue>(
-    source: { readonly length: number },
-    map: (value: null, index: number) => T,
-  ): T[];
+  from<T extends ClientValue, U extends ClientValue>(
+    arrayLike: ArrayLike<T>,
+    mapfn: (v: T, k: number) => U,
+  ): U[];
+  /**
+   * Returns a new array from a set of elements.
+   *
+   * @param items A set of elements to include in the new array object.
+   */
+  of<T extends ClientValue>(...items: T[]): T[];
 }
 
 /** What a client must answer with, for every global. */

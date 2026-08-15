@@ -5,7 +5,9 @@ import { IsClass } from "../nodes/Class.js";
 import { IsFunction } from "../nodes/Function.js";
 import { IsFunctionParameter } from "../nodes/FunctionParameter.js";
 import { IsGeneric } from "../nodes/Generic.js";
+import { IsIndex } from "../nodes/Index.js";
 import { IsInterface } from "../nodes/Interface.js";
+import type { TInterface } from "../nodes/Interface.js";
 import { IsNull } from "../nodes/Null.js";
 import { IsNumber } from "../nodes/Number.js";
 import { IsObject } from "../nodes/Object.js";
@@ -107,6 +109,9 @@ export function type(node: TNode): string {
   if (IsUnknown(node)) {
     throw new Error("an unknown may only stand as a type parameter's bound");
   }
+  if (IsIndex(node)) {
+    throw new Error("an index signature is a member, not a type");
+  }
   // Exhaustive: a kind added to `TNode` without a case above fails
   // here, where it is read, rather than at the throw below.
   const unread: never = node;
@@ -166,6 +171,15 @@ export function typeParameter(node: TGenericParameter): string {
  */
 export function member(name: string, node: TNode): string[] {
   const said = documentation(node, "  ", tags(node));
+  // Not a member with a name: what stands where a name would is the key it is
+  // reached by, and the name the schema gave it says what that key means.
+  if (IsIndex(node)) {
+    const written = node.readOnly === true ? "readonly " : "";
+    return [
+      ...said,
+      `  ${written}[${node.name}: ${type(node.key)}]: ${type(node.value)};`,
+    ];
+  }
   // A method of its own — `from<T>(…)` — rather than a member holding a
   // generic function, which is what `type()` would write.
   if (IsGeneric(node) && IsFunction(node.expression)) {
@@ -267,6 +281,32 @@ export function tags(node: TNode): string[] {
 /** A name TypeScript can read bare, or one it needs quoted. */
 export const key = (name: string) =>
   /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
+
+/** A named interface, as a reader of the generated file sees it. */
+export function interfaceLines(name: string, node: TNode): string[] {
+  const held = (of: TInterface): string[] =>
+    Object.entries(of.properties).flatMap(([called, what]) =>
+      member(called, what),
+    );
+  if (IsGeneric(node) && IsInterface(node.expression)) {
+    const declared = node.parameters.map(typeParameter);
+    return [
+      ...documentation(node, ""),
+      `export interface ${name}<${declared.join(", ")}> {`,
+      ...held(node.expression),
+      "}",
+    ];
+  }
+  if (!IsInterface(node)) {
+    throw new Error(`${name} is not an interface`);
+  }
+  return [
+    ...documentation(node, ""),
+    `export interface ${name} {`,
+    ...held(node),
+    "}",
+  ];
+}
 
 /** A class, as the interface a client implements. */
 export function classLines(name: string, node: TNode): string[] {

@@ -205,8 +205,7 @@ export const schema: ClientSchema = {
         },
       ),
       random: Type.Function([], Type.Number(), {
-        description:
-          "Returns a pseudorandom number between 0 and 1.\n\nThe one member here that is not a function of its arguments. Two calls disagree, two hosts disagree, and two runs of the same bundle disagree — so a bundle that reaches this cannot be snapshotted, cached by its output, or compared against a previous run of itself.",
+        description: "Returns a pseudorandom number between 0 and 1.",
       }),
       round: Type.Function(
         [
@@ -441,52 +440,67 @@ export const schema: ClientSchema = {
         },
       ),
     }),
-    ArrayConstructor: Type.Class(
-      {
-        from: Type.Generic(
-          [Type.GenericParameter("T")],
-          Type.Function(
-            [
-              Type.FunctionParameter(
-                "source",
-                Type.Object({ length: Type.Number({ readOnly: true }) }),
-                {
-                  description:
-                    "How many elements to build, as an object naming its length.",
-                },
-              ),
-              Type.FunctionParameter(
-                "map",
-                Type.Function(
-                  [
-                    Type.FunctionParameter("value", Type.Null()),
-                    Type.FunctionParameter("index", Type.Number()),
-                  ],
-                  Type.Ref("T"),
-                ),
-                {
-                  description:
-                    "Called once per index, with `null` and that index.",
-                },
-              ),
-            ],
-            Type.Array(Type.Ref("T")),
-          ),
-          {
-            description:
-              "Builds an array of `length` elements, each the result of calling `map` for its index.\n\n" +
-              "The mapper is required, where the standard library makes it optional. Without one this answers with an array of holes, and a hole reads as `undefined` \u2014 which is the one thing this language has no value for.\n\n" +
-              "The mapper's first argument is always `null`. The standard library passes the element it found, and against a `{ length }` source there is none.",
-          },
-        ),
-      },
-      {
-        description:
-          "The client `Array` API: the static side of the global, as against `ClientArray`, which is what a script reaches on an array it already has.\n\n" +
-          "One member, because there is one thing the language cannot do for itself: produce a sequence of a given length. It can transform one \u2014 `map`, `filter`, `slice` \u2014 but the only way to get to a thousand elements without this is to double a throwaway array until it is long enough.\n\n" +
-          "`of`, `isArray` and the rest are absent: an array literal is `of`, and a script's types already say what is an array.",
-      },
+    ArrayLike: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([], {
+        length: Type.Number({ readOnly: true }),
+        n: Type.Index("n", Type.Number(), Type.Ref("T"), { readOnly: true }),
+      }),
     ),
+
+    ArrayConstructor: Type.Class({
+      from: Type.Generic(
+        [Type.GenericParameter("T"), Type.GenericParameter("U")],
+        Type.Function(
+          [
+            Type.FunctionParameter(
+              "arrayLike",
+              Type.Apply(Type.Ref("ArrayLike"), [Type.Ref("T")]),
+              {
+                description: "An array-like object to convert to an array.",
+              },
+            ),
+            Type.FunctionParameter(
+              "mapfn",
+              Type.Function(
+                [
+                  Type.FunctionParameter("v", Type.Ref("T")),
+                  Type.FunctionParameter("k", Type.Number()),
+                ],
+                Type.Ref("U"),
+              ),
+              {
+                description:
+                  "A mapping function to call on every element of the array.",
+              },
+            ),
+          ],
+          Type.Array(Type.Ref("U")),
+        ),
+        {
+          description:
+            "Creates an array from an array-like object.\n\n" +
+            "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
+        },
+      ),
+      of: Type.Generic(
+        [Type.GenericParameter("T")],
+        Type.Function(
+          [
+            Type.Rest(
+              Type.FunctionParameter("items", Type.Ref("T"), {
+                description:
+                  "A set of elements to include in the new array object.",
+              }),
+            ),
+          ],
+          Type.Array(Type.Ref("T")),
+        ),
+        {
+          description: "Returns a new array from a set of elements.",
+        },
+      ),
+    }),
   },
 
   // `for` is not here. It is a list rather than a tag today, recognised by the

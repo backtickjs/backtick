@@ -2,8 +2,9 @@ import { IsClass } from "../nodes/Class.js";
 import { IsGeneric } from "../nodes/Generic.js";
 import { IsRef } from "../nodes/Ref.js";
 import { flatten } from "../flatten.js";
-import { classLines } from "./typescript.js";
+import { classLines, interfaceLines } from "./typescript.js";
 import type { ClientSchema } from "../ClientSchema.js";
+import type { TNode } from "../TNode.js";
 
 // A schema to the host language's own names.
 //
@@ -32,6 +33,7 @@ export function globals(schema: ClientSchema): string {
   // file cannot import what a document does not name, and a schema that leans
   // on a type from the package it is generated into is not a document another
   // language can read.
+  const reached = new Map<string, TNode>();
   const walk = (node: unknown, bound: ReadonlySet<string>): void => {
     if (typeof node !== "object" || node === null) {
       return;
@@ -43,10 +45,20 @@ export function globals(schema: ClientSchema): string {
     const held = IsGeneric(node)
       ? new Set([...bound, ...node.parameters.map((one) => one.name)])
       : bound;
-    if (IsRef(node) && !held.has(node.$ref) && !(node.$ref in all.types)) {
-      throw new Error(
-        `the schema names \`${node.$ref}\` and does not declare it`,
-      );
+    if (IsRef(node) && !held.has(node.$ref)) {
+      const named = all.types[node.$ref];
+      if (named === undefined) {
+        throw new Error(
+          `the schema names \`${node.$ref}\` and does not declare it`,
+        );
+      }
+      // A type a class reaches is declared beside it: a generated file cannot
+      // import what the document does not name. Classes are emitted already,
+      // so what is collected here is everything else.
+      if (!IsClass(named) && !reached.has(node.$ref)) {
+        reached.set(node.$ref, named);
+        walk(named, held);
+      }
     }
     Object.values(node).forEach((one) => walk(one, held));
   };
@@ -58,6 +70,11 @@ export function globals(schema: ClientSchema): string {
   // to know rather than the schema's to name.
   if (JSON.stringify(classes).includes('"genericParameter"')) {
     lines.push('import type { ClientValue } from "./ClientValue.js";', "");
+  }
+
+  for (const [name, node] of reached) {
+    lines.push(...interfaceLines(name, node));
+    lines.push("");
   }
 
   for (const [name, node] of classes) {

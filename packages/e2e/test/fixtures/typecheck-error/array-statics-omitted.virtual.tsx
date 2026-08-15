@@ -1,9 +1,8 @@
 import { cs } from "@backtickjs/core";
 
-// `Array` is reachable, but only as `ClientArrayStatics` fixes it: one member,
-// because there is one thing the language cannot do for itself.
-export const listed = cs.lift(cs.const(cs.receiver(Array).of(1, 2)));
-
+// `Array` is reachable, but only as the schema fixes it: `from` and `of`, and
+// nothing else. `isArray` answers a question a script's types have already
+// answered, and `new Array(n)` and `Array(n)` build an array of holes.
 export const tested = cs.lift(cs.const(cs.receiver(Array).isArray([1])));
 
 // And the mapper is required, where the standard library makes it optional.
