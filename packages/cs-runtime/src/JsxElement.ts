@@ -1,3 +1,4 @@
+import type { Element } from "@backtickjs/core-schema";
 import type { For } from "./For.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
@@ -21,8 +22,12 @@ export type JsxElementType =
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it.
+ *
+ * The schema's `Element` is what a script may hand back where a drawing is
+ * wanted, and this is what the name stands for here: the tag and its props
+ * are the host's own, and nothing a script holds reaches them.
  */
-export interface JsxElement {
+export interface JsxElement extends Element {
   readonly "@backtickjs": "JsxElement";
   readonly type: JsxElementType;
   readonly props: { [key: string]: unknown };
