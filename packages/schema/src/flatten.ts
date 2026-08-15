@@ -1,4 +1,4 @@
-import type { ClientSchema } from "./ClientSchema.js";
+import type { Schema } from "./Schema.js";
 
 /**
  * One schema holding everything it and the schemas beneath it declare.
@@ -13,17 +13,17 @@ import type { ClientSchema } from "./ClientSchema.js";
  * or a function is answered by the client that declared it, and two answers
  * is a question about which one the wire meant.
  */
-export function flatten(schema: ClientSchema): ClientSchema {
-  const types: Record<string, ClientSchema["types"][string]> = {};
-  const elements: Record<string, ClientSchema["elements"][string]> = {};
-  const builtins: Record<string, ClientSchema["builtins"][string]> = {};
+export function flatten(schema: Schema): Schema {
+  const types: Record<string, Schema["types"][string]> = {};
+  const elements: Record<string, Schema["elements"][string]> = {};
+  const builtins: Record<string, Schema["builtins"][string]> = {};
 
   // A schema reached twice is inherited twice, which is not a collision — a
   // diamond is two paths to one declaration. Identity, since a name is only
   // ever declared once and the same schema is the same object.
-  const seen = new Set<ClientSchema>();
+  const seen = new Set<Schema>();
 
-  function take(one: ClientSchema): void {
+  function take(one: Schema): void {
     if (seen.has(one)) {
       return;
     }

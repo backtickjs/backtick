@@ -1,4 +1,4 @@
-import { Type, type ClientSchema } from "@backtickjs/schema";
+import { Type, type Schema } from "@backtickjs/schema";
 
 /**
  * What every client can do, whatever it draws with.
@@ -11,7 +11,7 @@ import { Type, type ClientSchema } from "@backtickjs/schema";
  * A name is written whole — `Math.floor`, not a `Math` holding a `floor` —
  * because that is how a script reaches it and how the compiler recognises it.
  */
-export const schema: ClientSchema = {
+export const schema: Schema = {
   extends: [],
 
   types: {

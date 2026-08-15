@@ -1,11 +1,11 @@
 import { isType } from "../helpers/isType.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 
-export interface TVoid extends TNodeOptions {
+export interface TVoid extends TOptions {
   readonly type: "void";
 }
 
-export function Void(options: TNodeOptions = {}): TVoid {
+export function Void(options: TOptions = {}): TVoid {
   return { ...options, type: "void" };
 }
 

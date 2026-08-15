@@ -1,11 +1,11 @@
 import { isType } from "../helpers/isType.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 
-export interface TUnknown extends TNodeOptions {
+export interface TUnknown extends TOptions {
   readonly type: "unknown";
 }
 
-export function Unknown(options: TNodeOptions = {}): TUnknown {
+export function Unknown(options: TOptions = {}): TUnknown {
   return { ...options, type: "unknown" };
 }
 

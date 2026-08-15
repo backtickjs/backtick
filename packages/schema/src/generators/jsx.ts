@@ -12,7 +12,7 @@ import {
   type,
   typeParameter,
 } from "./typescript.js";
-import type { ClientSchema } from "../ClientSchema.js";
+import type { Schema } from "../Schema.js";
 import type { TNode } from "../TNode.js";
 
 // A schema to the `jsx-runtime` an app writes against.
@@ -27,7 +27,7 @@ import type { TNode } from "../TNode.js";
 
 /** The `jsx-runtime` a target ships: its tags, their props, and the namespace
  * TypeScript reads them through. */
-export function jsx(schema: ClientSchema): string {
+export function jsx(schema: Schema): string {
   // What this client can do is what it declares and what it inherited.
   const { types, elements } = flatten(schema);
 

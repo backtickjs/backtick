@@ -1,6 +1,6 @@
 import { schema as core } from "@backtickjs/core-schema";
 import { Type } from "@backtickjs/schema";
-import type { ClientSchema } from "@backtickjs/schema";
+import type { Schema } from "@backtickjs/schema";
 
 // What a browser's elements accept, as a schema. `elements.ts` is generated
 // from this and is not written by hand — run `pnpm generate`.
@@ -25,7 +25,7 @@ const child = Type.Union([
   Type.Number(),
 ]);
 
-export const schema: ClientSchema = {
+export const schema: Schema = {
   extends: [core],
 
   types: {

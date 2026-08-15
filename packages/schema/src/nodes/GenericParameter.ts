@@ -1,14 +1,14 @@
 import { Unknown } from "./Unknown.js";
 import { isType } from "../helpers/isType.js";
 import type { TUnknown } from "./Unknown.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 import type { TNode } from "../TNode.js";
 
 export interface TGenericParameter<
   Name extends string = string,
   Extends extends TNode = TNode,
   Equals extends TNode = TNode,
-> extends TNodeOptions {
+> extends TOptions {
   readonly type: "genericParameter";
   readonly name: Name;
   readonly extends: Extends;
@@ -23,7 +23,7 @@ export function GenericParameter<
   name: Name,
   constraint?: Extends,
   fallback?: Equals,
-  options: TNodeOptions = {},
+  options: TOptions = {},
 ): TGenericParameter<Name, Extends, Equals> {
   const bound = (constraint ?? Unknown()) as Extends;
   return {

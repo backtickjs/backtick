@@ -1,13 +1,13 @@
 import { isType } from "../helpers/isType.js";
 import { requiredOf } from "./Optional.js";
 import type { TProperties } from "./Properties.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 import type { TNode } from "../TNode.js";
 
 export interface TInterface<
   Heritage extends readonly TNode[] = readonly TNode[],
   Properties extends TProperties = TProperties,
-> extends TNodeOptions {
+> extends TOptions {
   readonly type: "interface";
   readonly extends: Heritage;
   readonly properties: Properties;
@@ -20,7 +20,7 @@ export function Interface<
 >(
   heritage: [...Heritage],
   properties: Properties,
-  options: TNodeOptions = {},
+  options: TOptions = {},
 ): TInterface<Heritage, Properties> {
   return {
     ...options,

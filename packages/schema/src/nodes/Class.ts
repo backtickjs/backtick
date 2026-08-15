@@ -1,5 +1,5 @@
 import { isType } from "../helpers/isType.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 import type { TProperties } from "./Properties.js";
 
 /** A value a member access autoboxes from, which is what reaches a class. */
@@ -7,13 +7,13 @@ export type Boxed = "string" | "number" | "boolean" | "array";
 
 export interface TClass<
   Members extends TProperties = TProperties,
-> extends TNodeOptions {
+> extends TOptions {
   readonly type: "class";
   readonly members: Members;
   readonly boxes?: Boxed;
 }
 
-export interface TClassOptions extends TNodeOptions {
+export interface TClassOptions extends TOptions {
   readonly boxes?: Boxed;
 }
 

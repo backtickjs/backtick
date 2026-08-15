@@ -1,15 +1,15 @@
 import { isType } from "../helpers/isType.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 import type { TNode } from "../TNode.js";
 
-export interface TRecord<Values extends TNode = TNode> extends TNodeOptions {
+export interface TRecord<Values extends TNode = TNode> extends TOptions {
   readonly type: "record";
   readonly values: Values;
 }
 
 export function Record<Values extends TNode>(
   values: Values,
-  options: TNodeOptions = {},
+  options: TOptions = {},
 ): TRecord<Values> {
   return { ...options, type: "record", values };
 }

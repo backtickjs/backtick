@@ -1,11 +1,11 @@
 import { isType } from "../helpers/isType.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 import type { TNode } from "../TNode.js";
 
 export interface TIndex<
   Key extends TNode = TNode,
   Value extends TNode = TNode,
-> extends TNodeOptions {
+> extends TOptions {
   readonly type: "index";
   readonly name: string;
   readonly key: Key;
@@ -16,7 +16,7 @@ export function Index<Key extends TNode, Value extends TNode>(
   name: string,
   key: Key,
   value: Value,
-  options: TNodeOptions = {},
+  options: TOptions = {},
 ): TIndex<Key, Value> {
   return { ...options, type: "index", name, key, value };
 }

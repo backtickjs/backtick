@@ -1,4 +1,4 @@
-import type { ClientSchema } from "../ClientSchema.js";
+import type { Schema } from "../Schema.js";
 
 // A schema to the document every generator could read.
 //
@@ -11,7 +11,7 @@ import type { ClientSchema } from "../ClientSchema.js";
 // schema is carrying less than it should, and the thinking belongs there.
 
 /** What a target draws, as JSON. */
-export function json(schema: ClientSchema): string {
+export function json(schema: Schema): string {
   // Written in the order the schema declares them rather than sorted: the
   // source is the readable order, and a diff should read like the edit that
   // caused it.

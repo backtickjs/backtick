@@ -1,12 +1,12 @@
 import { isType } from "../helpers/isType.js";
 import type { TGenericParameter } from "./GenericParameter.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 import type { TNode } from "../TNode.js";
 
 export interface TGeneric<
   Parameters extends readonly TGenericParameter[] = TGenericParameter[],
   Expression extends TNode = TNode,
-> extends TNodeOptions {
+> extends TOptions {
   readonly type: "generic";
   readonly parameters: Parameters;
   readonly expression: Expression;
@@ -18,7 +18,7 @@ export function Generic<
 >(
   parameters: [...Parameters],
   expression: Expression,
-  options: TNodeOptions = {},
+  options: TOptions = {},
 ): TGeneric<Parameters, Expression> {
   return { ...options, type: "generic", parameters, expression };
 }

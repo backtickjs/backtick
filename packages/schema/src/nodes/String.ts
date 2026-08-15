@@ -1,12 +1,12 @@
 import { isType } from "../helpers/isType.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 
-export interface TString extends TNodeOptions {
+export interface TString extends TOptions {
   readonly type: "string";
   readonly const?: string;
 }
 
-export function String(options: TNodeOptions = {}): TString {
+export function String(options: TOptions = {}): TString {
   return { ...options, type: "string" };
 }
 

@@ -1,8 +1,8 @@
 import type { TElement } from "./nodes/Element.js";
 import type { TNode } from "./TNode.js";
 
-export interface ClientSchema {
-  readonly extends: readonly ClientSchema[];
+export interface Schema {
+  readonly extends: readonly Schema[];
 
   /** Reusable types that a `Type.Ref` can reach. */
   readonly types: Readonly<Record<string, TNode>>;

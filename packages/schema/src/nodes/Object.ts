@@ -1,11 +1,11 @@
 import { isType } from "../helpers/isType.js";
 import { requiredOf } from "./Optional.js";
 import type { TProperties } from "./Properties.js";
-import type { TNodeOptions } from "../NodeOptions.js";
+import type { TOptions } from "../TOptions.js";
 
 export interface TObject<
   Properties extends TProperties = TProperties,
-> extends TNodeOptions {
+> extends TOptions {
   readonly type: "object";
   readonly properties: Properties;
   readonly required: readonly string[];
@@ -13,7 +13,7 @@ export interface TObject<
 
 export function Object<Properties extends TProperties>(
   properties: Properties,
-  options: TNodeOptions = {},
+  options: TOptions = {},
 ): TObject<Properties> {
   return {
     ...options,

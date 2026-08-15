@@ -3,7 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { flatten, generate, type ClientSchema } from "../dist/index.js";
+import { flatten, generate, type Schema } from "../dist/index.js";
 
 // Every project's `pnpm generate`, run from the project it generates for.
 //
@@ -23,7 +23,7 @@ const at = (path: string) => new URL(path, root);
 // One export rather than the module itself, so the annotation on it is what
 // checks the shape: the specifier here is built at run time, so nothing
 // resolves it and a missing field would otherwise reach the artifact.
-const module: { schema?: ClientSchema } = await import(at(SOURCE).href);
+const module: { schema?: Schema } = await import(at(SOURCE).href);
 const { schema } = module;
 if (schema === undefined) {
   throw new Error(`${SOURCE} must export a schema.`);
