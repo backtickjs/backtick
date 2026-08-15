@@ -244,15 +244,6 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
       }
       case SyntaxKind.Identifier:
         return read(node.bindingKey);
-      case SyntaxKind.NewExpression: {
-        // Here `new` expands: a spliced class lowers to a function with one
-        // hole per constructor parameter (see `lowerSpliceable`), so a
-        // construction serializes as an ordinary call of its callee, binding
-        // the client's argument values to the holes when it runs.
-        const callee = e(node.expression);
-        const args = node.arguments.map(e);
-        return [NodeKind.CallExpression, callee, false, args];
-      }
       case SyntaxKind.NullKeyword:
         return null;
       case SyntaxKind.NumericLiteral:

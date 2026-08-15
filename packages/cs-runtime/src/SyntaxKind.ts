@@ -34,7 +34,6 @@ export const SyntaxKind = {
   PropertyAccessExpression: 212,
   ElementAccessExpression: 213,
   CallExpression: 214,
-  NewExpression: 215,
   ArrowFunction: 220,
   PrefixUnaryExpression: 225,
   BinaryExpression: 227,

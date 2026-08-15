@@ -18,7 +18,6 @@ export type ClientScriptExpression =
   | ClientScriptFalseLiteral
   | ClientScriptCallExpression
   | ClientScriptIdentifier
-  | ClientScriptNewExpression
   | ClientScriptNullLiteral
   | ClientScriptNumericLiteral
   | ClientScriptObjectLiteralExpression
@@ -199,12 +198,6 @@ export interface ClientScriptIfStatement {
 // function with one hole per constructor parameter (see `lowerSpliceable`) —
 // so the bundler expands the construction into a plain call of its callee
 // (see `lowerScriptBody`).
-export interface ClientScriptNewExpression {
-  readonly kind: typeof SyntaxKind.NewExpression;
-  readonly loc: SourceLocation;
-  readonly expression: ClientScriptExpression;
-  readonly arguments: readonly ClientScriptExpression[];
-}
 
 export interface ClientScriptNullLiteral {
   readonly kind: typeof SyntaxKind.NullKeyword;

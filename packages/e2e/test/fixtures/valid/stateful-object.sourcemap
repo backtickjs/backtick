@@ -1,0 +1,90 @@
+cs.lift(cs.const(          → cs`
+(                          → (
+__cs_initial               → initial
+: number                   → : number
+) => {\n                   → ) => {\n  
+const                      → const 
+__cs_count                 → count
+ = cs.const(               →  = 
+cs.state                   → state
+(                          → (
+__cs_initial               → initial
+)                          → )
+);                         → ;
+\n                         → \n  
+return cs.const(           → return 
+{                          → {\n    
+read                       → read
+:                          → : 
+() =>                      → () => 
+cs.receiver(               → 
+__cs_count                 → count
+)                          → 
+.                          → .
+read                       → read
+()                         → ()
+,                          → ,\n    
+add                        → add
+:                          → : 
+(                          → (
+__cs_n                     → n
+: number                   → : number
+) => {\n                   → ) => {\n      
+cs.statement(              → 
+cs.receiver(               → 
+__cs_count                 → count
+)                          → 
+.                          → .
+write                      → write
+(                          → (
+cs.receiver(               → 
+__cs_count                 → count
+)                          → 
+.                          → .
+read                       → read
+()                         → ()
+ +                         →  + 
+__cs_n                     → n
+)                          → )
+);                         → ;
+\n        }                → \n    }
+ }                         → ,\n  }
+);                         → ;
+\n}                        → \n}
+))                         → `
+cs.lift((() => {\n         → cs`{\n  
+const                      → const 
+__cs_c                     → c
+ = cs.const(               →  = 
+cs.splice(                 →  [-semantic]
+(counter)                  → $counter
+)                          →  [-semantic]
+(                          → (
+10                         → 10
+)                          → )
+);                         → ;
+\n                         → \n  
+return cs.const(           → return 
+<button onclick={cs.lift(  → (\n    <button\n      onclick={
+() => {\n                  → () => {\n        
+cs.statement(              → 
+cs.receiver(               → 
+__cs_c                     → c
+)                          → 
+.                          → .
+add                        → add
+(                          → (
+5                          → 5
+)                          → )
+);                         → ;
+\n    }                    → \n      }
+)}>{                       → }\n    >\n      {
+cs.receiver(               → 
+__cs_c                     → c
+)                          → 
+.                          → .
+read                       → read
+()                         → ()
+}</button>                 → }\n    </button>\n  )
+);                         → ;
+\n})())                    → \n}`

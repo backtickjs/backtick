@@ -1,15 +1,11 @@
-import type { Client } from "./Client.js";
 import type { ClientArray } from "./ClientArray.js";
 import type { ArrayConstructor, Math } from "./globals.js";
 import type { ClientFunction } from "./ClientFunction.js";
 import type { ClientBoolean } from "./ClientBoolean.js";
-import type { ClientConstructor } from "./ClientConstructor.js";
 import type { JsxElement } from "./JsxElement.js";
 import type { ClientNumber } from "./ClientNumber.js";
-import type { ClientObject } from "./ClientObject.js";
 import type { ClientString } from "./ClientString.js";
 import type { ClientValue } from "./ClientValue.js";
-import type { Spliceable, Spliced } from "./Spliceable.js";
 
 // A built-in receiver autoboxes to its client type
 type Autoboxed<T> = T extends string
@@ -21,23 +17,6 @@ type Autoboxed<T> = T extends string
       : T extends readonly (infer E)[]
         ? ClientArray<E>
         : never;
-
-// A `ClientObject`'s spliceable members (see `lowerClientObject`)
-type SplicedMembers<T extends ClientObject> = {
-  [K in keyof T as K extends "@backtickjs"
-    ? never
-    : T[K] extends ClientConstructor
-      ? never
-      : T[K] extends Spliceable
-        ? T[K] extends Client<infer U>
-          ? [U] extends [never]
-            ? K
-            : [U] extends [void]
-              ? never
-              : K
-          : K
-        : never]: Spliced<T[K]>;
-};
 
 // A plain object's members as a script reads them: `?` means omittable —
 // an absent member reads as `null`, so an optional member's `undefined`
@@ -63,7 +42,6 @@ export type IndexKey<R> = R extends ClientArray<any> ? number : keyof R;
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
 //   JsxElement                      -> {}: opaque
-//   ClientObject                    -> SplicedMembers<T>
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
@@ -75,10 +53,8 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
         ? Autoboxed<T>
         : T extends JsxElement
           ? {}
-          : T extends ClientObject
-            ? SplicedMembers<T>
-            : T extends ClientConstructor | ClientFunction
-              ? T
-              : T extends object
-                ? ReadMembers<T>
-                : T;
+          : T extends ClientFunction
+            ? T
+            : T extends object
+              ? ReadMembers<T>
+              : T;

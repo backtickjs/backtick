@@ -430,13 +430,6 @@ export function resolveBindings(
       for (const arg of node.arguments) {
         walkExpression(script, arg, scopes);
       }
-    } else if (ts.isNewExpression(node)) {
-      // The callee is a splice (the constructed class), which the walk below
-      // treats as host code; only the arguments are client expressions.
-      walkExpression(script, node.expression, scopes);
-      for (const arg of node.arguments ?? []) {
-        walkExpression(script, arg, scopes);
-      }
     } else if (ts.isPrefixUnaryExpression(node)) {
       walkExpression(script, node.operand, scopes);
     } else if (ts.isBinaryExpression(node)) {

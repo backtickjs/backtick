@@ -1,0 +1,22 @@
+#f0 = ($0) => {
+  const c = $0()(10);
+  return <button
+    onclick={() => {
+      c.add(5);
+    }}
+  >
+    {c.read()}
+  </button>;
+}
+
+#f1 = () => (initial) => {
+  const count = state(initial);
+  return {
+    "read": () => count.read(),
+    "add": (n) => {
+      count.write(count.read() + n);
+    }
+  };
+}
+
+root = #f0(#f1)

@@ -4,9 +4,7 @@ export type { ArrayConstructor, Math } from "./globals.js";
 export type { Builtins, Globals, Value } from "./globals.js";
 export { BUILTIN_NAMES, GLOBAL_NAMES } from "./globals.js";
 export type { ClientBoolean } from "./ClientBoolean.js";
-export type { ClientConstructor } from "./ClientConstructor.js";
 export type { ClientNumber } from "./ClientNumber.js";
-export { type ClientObject, isClientObject } from "./ClientObject.js";
 export {
   type ClientScript,
   isClientScript,

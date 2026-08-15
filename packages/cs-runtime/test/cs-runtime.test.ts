@@ -19,7 +19,6 @@ test("isSpliceable accepts primitives, clients, and containers of them", () => {
   assert.equal(isSpliceable(3), true);
   assert.equal(isSpliceable(true), true);
   assert.equal(isSpliceable("Hello World!"), true);
-  assert.equal(isSpliceable({ "@backtickjs": "ClientObject" }), true);
   assert.equal(isSpliceable([1, "two", [true, null]]), true);
   assert.equal(isSpliceable({ a: 1, b: { c: [2] } }), true);
   assert.equal(isSpliceable(Object.create(null)), true);

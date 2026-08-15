@@ -1,4 +1,0 @@
-20:3 error TS2322: Type 'Client<() => Spliced<T>>' is not assignable to type 'Client<() => T>'.
-  Type '() => Spliced<T>' is not assignable to type '() => T'.
-    Type 'Spliced<T>' is not assignable to type 'T'.
-      'T' could be instantiated with an arbitrary type which could be unrelated to 'Spliced<T>'.

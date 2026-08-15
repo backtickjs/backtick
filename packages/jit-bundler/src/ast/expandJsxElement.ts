@@ -9,7 +9,7 @@ import type { Ast, AstFor, AstInstance } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the expansion
-// instead of racing into duplicate subtrees (see `lowerClientObject`).
+// instead of racing into duplicate subtrees.
 const nodeByElement = new WeakMap<JsxElement, Promise<Ast>>();
 
 // Runs the element's component and lowers what it names. The component itself

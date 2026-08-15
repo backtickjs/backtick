@@ -200,7 +200,7 @@ function bannedTypeKeywords(
 // The initializer's first reference to the binding it declares (e.g. a
 // method closing over the object that holds it) — rejected: checked value
 // positions would force resolving the binding mid-inference (TS7022), and
-// the pattern is spelled as a host `ClientObject` class instead.
+// the pattern is spelled as an object a client function builds instead.
 function selfReference(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -1214,40 +1214,6 @@ function rewriteNodeImpl(
           ? ts.factory.createTrue()
           : ts.factory.createFalse(),
         arguments: runtimeArgs,
-      }),
-    };
-  }
-
-  if (ts.isNewExpression(node)) {
-    const rewrittenCallee = rewriteNode(ts, state, node.expression);
-
-    const rewrittenArgs = (node.arguments ?? []).map((arg) =>
-      rewriteNode(ts, state, arg),
-    );
-
-    // Lift each argument so the constructor receives `Client<…>` values;
-    // `cs.const` keeps a bare action from riding in as data.
-    const liftedArgs = rewrittenArgs.map((arg) =>
-      call(ts, "cs", "lift", [
-        call(ts, "cs", "const", [arg.virtual as ts.Expression]),
-      ]),
-    );
-
-    return {
-      virtual: ts.factory.createNewExpression(
-        ts.factory.createParenthesizedExpression(
-          rewrittenCallee.virtual as ts.Expression,
-        ),
-        undefined,
-        liftedArgs,
-      ),
-      runtime: astNode(ts, SyntaxKind.NewExpression, {
-        loc: loc(node),
-        expression: rewrittenCallee.runtime as ts.Expression,
-        arguments: ts.factory.createArrayLiteralExpression(
-          rewrittenArgs.map((arg) => arg.runtime as ts.Expression),
-          false,
-        ),
       }),
     };
   }

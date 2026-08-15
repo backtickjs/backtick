@@ -1,6 +1,4 @@
-import type { ClientConstructor } from "./ClientConstructor.js";
 import type { ClientFunction } from "./ClientFunction.js";
-import type { ClientObject } from "./ClientObject.js";
 import type { ClientValue } from "./ClientValue.js";
 import type { JsxElement } from "./JsxElement.js";
 import type { State } from "./globals.js";
@@ -14,12 +12,7 @@ export type Widen<T> = T extends number
     ? string
     : T extends boolean
       ? boolean
-      : T extends
-            | ClientObject
-            | JsxElement
-            | ClientConstructor
-            | ClientFunction
-            | State<ClientValue>
+      : T extends JsxElement | ClientFunction | State<ClientValue>
         ? T
         : T extends (infer Element)[]
           ? Widen<Element>[]

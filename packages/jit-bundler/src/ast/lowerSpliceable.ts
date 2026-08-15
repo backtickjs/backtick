@@ -1,14 +1,11 @@
 import {
-  isClientObject,
   isClientScript,
   isClientState,
   isJsxElement,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
 import type { Ast } from "./Ast.js";
-import { expandClientConstructor } from "./expandClientConstructor.js";
 import { holeName } from "./holes.js";
-import { lowerClientObject } from "./lowerClientObject.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientState } from "./lowerClientState.js";
 import { expandJsxElement } from "./expandJsxElement.js";
@@ -41,9 +38,6 @@ export async function lowerSpliceable(
   if (isClientState(value)) {
     return lowerClientState(value);
   }
-  if (isClientObject(value)) {
-    return lowerClientObject(value);
-  }
   if (value === null) {
     return { kind: "AstNull" };
   }
@@ -64,22 +58,24 @@ export async function lowerSpliceable(
       ),
     };
   }
-  // A spliced class lowers to its expansion — a function of its declared
-  // constructor parameters — wherever it appears, so a construction (or a
-  // local holding the class) just calls the slot's value.
+  // A host function has no data form. Client code is written in `cs`...`` and
+  // reaches a script as a script, so a function here is the host's own.
   if (typeof value === "function") {
-    return expandClientConstructor(value);
+    throw new Error(
+      "Can't splice a function: client code is written in `cs`...` and " +
+        "crosses as a script.",
+    );
   }
-  // Only plain objects reflect structurally. A class instance without the
-  // "@backtickjs" marker would land here and half-work — own fields reflect,
-  // getters silently vanish — so fail loudly instead.
+  // Only plain objects cross structurally. A class instance would land here
+  // and half-work — own fields reflect, getters and methods silently vanish —
+  // so fail loudly instead. An object with behaviour is built by a client
+  // function: `state` for what it holds, arrows for what may be done to it.
   const prototype = Object.getPrototypeOf(value);
   if (prototype !== Object.prototype && prototype !== null) {
     const name = value.constructor?.name ?? "an unknown class";
     throw new Error(
-      `Can't splice this \`${name}\` instance: only plain objects and classes ` +
-        'declaring the `"@backtickjs": "ClientObject"` marker can be spliced ' +
-        "into a client script.",
+      `Can't splice this \`${name}\` instance: only plain objects cross into ` +
+        "a client script. Build one with a client function instead.",
     );
   }
   const entries: { [key: string]: Ast } = Object.fromEntries(
