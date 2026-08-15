@@ -47,14 +47,22 @@ async function Rows() {
                   loc: [9, 14, 9, 33],
                   name: "label",
                   initializer: {
-                    kind: 1002,
+                    kind: 214,
                     loc: [9, 21, 9, 33],
-                    initial: {
-                      kind: 80,
-                      loc: [9, 27, 9, 32],
-                      text: "label",
-                      bindingKey: "label$8owf25be0b5d$0",
+                    expression: {
+                      kind: 1001,
+                      loc: [9, 21, 9, 26],
+                      name: "state",
                     },
+                    questionDotToken: false,
+                    arguments: [
+                      {
+                        kind: 80,
+                        loc: [9, 27, 9, 32],
+                        text: "label",
+                        bindingKey: "label$8owf25be0b5d$0",
+                      },
+                    ],
                   },
                 },
               ],

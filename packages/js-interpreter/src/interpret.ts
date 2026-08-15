@@ -10,8 +10,8 @@ import type {
   BundleStatementNode,
   FunctionLabel,
 } from "@backtickjs/core";
+import { builtins } from "./builtins.js";
 import { globals } from "./globals.js";
-import { makeState } from "./makeState.js";
 import type { Instance } from "./Instance.js";
 import { compileElement, compileFor } from "./view.js";
 import type { Value } from "./Value.js";
@@ -120,7 +120,9 @@ function compileFunction(
 // `Globals` describes this table from the authoring end, where `Value` is the
 // same domain seen from the running end — the two representations `Value` names
 // — so it is widened once, here, to be read by name.
-const table = globals as unknown as Readonly<Record<string, Value>>;
+const table = { ...globals, ...builtins } as unknown as Readonly<
+  Record<string, Value>
+>;
 
 export function compile(
   instance: Instance,
@@ -179,10 +181,6 @@ function buildNode(
     // Storage, made where this stands: evaluating it twice is two storages,
     // which is why it is a kind and not a call of a name. Never settled — the
     // whole point of a cell is that what it holds moves.
-    case 5: /* State */ {
-      const initial = compile(instance, node[1]);
-      return (scope) => makeState(initial(scope));
-    }
     case 1000: /* Identifier */ {
       const name = node[1];
       return (scope) => {
@@ -232,7 +230,7 @@ function buildNode(
       const name = node[1];
       const value = table[name];
       if (value === undefined) {
-        throw new Error(`unknown global ${name}`);
+        throw new Error(`unknown builtin ${name}`);
       }
       return () => value;
     }

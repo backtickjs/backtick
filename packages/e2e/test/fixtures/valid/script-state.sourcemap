@@ -7,7 +7,8 @@ return cs.const(   → return
 {                  → { 
 label              → label
 :                  → : 
-cs.state(          → state(
+cs.state           → state
+(                  → (
 __cs_label         → label
 )                  → )
  }                 →  }

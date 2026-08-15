@@ -1,5 +1,9 @@
 import type ts from "typescript";
-import { GLOBAL_NAMES, SyntaxKind } from "@backtickjs/cs-runtime";
+import {
+  BUILTIN_NAMES,
+  GLOBAL_NAMES,
+  SyntaxKind,
+} from "@backtickjs/cs-runtime";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
@@ -216,6 +220,12 @@ export interface RewrittenNode {
 
 // What a script may reach without binding it, as the core schema declares it.
 const GLOBALS = new Set<string>(GLOBAL_NAMES);
+
+// The framework's own names. Reached the same way a global is and carried the
+// same way on the wire; what differs is the virtual code, which reads them
+// through `cs` because no lib declares them and a `declare global` would put
+// them in the host's scope as well as the script's.
+const BUILTINS = new Set<string>(BUILTIN_NAMES);
 
 // JSX text as JSX reads it, or null where it reads as nothing. Not `trim()`:
 // the rule is per line — leading whitespace goes from every line but the first,
@@ -740,17 +750,34 @@ function rewriteNodeImpl(
     }
 
     // One exception to "there are no globals", and it is a list rather than a
-    // rule: a name here is a global this language provides itself, and what it
-    // means is written down rather than inherited from whatever the host's own
-    // happens to be.
+    // rule: a name here is one this language provides itself, and what it means
+    // is written down rather than inherited from whatever the host's own
+    // happens to be. Both kinds carry the same node — a name the client
+    // answers — and differ only in what the virtual code reads them as.
     //
-    // The virtual code names it plainly, as the lib global — narrowing it is
-    // `Receiver`'s job, the same as for a string or an array, and what it
-    // narrows to is `ClientMath`. So the whole of JavaScript's `Math` is what
-    // the name resolves to and only the agreed part of it is reachable.
+    // A global is named plainly, as the lib global it is; narrowing it is
+    // `Receiver`'s job, the same as for a string or an array. So the whole of
+    // JavaScript's `Math` is what the name resolves to, and only the agreed
+    // part of it is reachable.
     if (!state.bindings.has(node) && GLOBALS.has(node.text)) {
       return {
         virtual: ts.factory.createIdentifier(node.text),
+        runtime: astNode(ts, SyntaxKind.Builtin, {
+          loc: loc(node),
+          name: ts.factory.createStringLiteral(node.text),
+        }),
+      };
+    }
+
+    // A builtin is read through `cs`, which is where its type is written.
+    if (!state.bindings.has(node) && BUILTINS.has(node.text)) {
+      const virtual = ts.factory.createPropertyAccessExpression(
+        ts.factory.createIdentifier("cs"),
+        node.text,
+      );
+      state.mappings.set(virtual, node);
+      return {
+        virtual,
         runtime: astNode(ts, SyntaxKind.Builtin, {
           loc: loc(node),
           name: ts.factory.createStringLiteral(node.text),
@@ -1152,41 +1179,6 @@ function rewriteNodeImpl(
             ? ts.factory.createTrue()
             : ts.factory.createFalse(),
           arguments: runtimeArgs,
-        }),
-      };
-    }
-
-    // Storage the script declares, which is a node rather than a call of a
-    // name: `state` names nothing a script may hold or pass on, so there is no
-    // callee to rewrite and nothing to reach it by except writing it here.
-    if (
-      ts.isIdentifier(node.expression) &&
-      !state.bindings.has(node.expression) &&
-      node.expression.text === "state"
-    ) {
-      if (optionalCall) {
-        state.errors.set(
-          node,
-          "`state?.()` isn't a declaration: write `state(initial)`.",
-        );
-      }
-      if (node.arguments.length !== 1) {
-        state.errors.set(
-          node,
-          "`state` takes one argument, the value it starts at.",
-        );
-      }
-      const initial =
-        args[0] ?? rewriteNode(ts, state, ts.factory.createNull());
-      const virtual = call(ts, "cs", "state", [
-        initial.virtual as ts.Expression,
-      ]);
-      state.mappings.set(virtual, node);
-      return {
-        virtual,
-        runtime: astNode(ts, SyntaxKind.State, {
-          loc: loc(node),
-          initial: initial.runtime as ts.Expression,
         }),
       };
     }

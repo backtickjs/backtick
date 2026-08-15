@@ -329,5 +329,13 @@ export interface Globals {
   Array: ArrayConstructor;
 }
 
+/** What a client must answer with, for every builtin. */
+export interface Builtins {
+  state<T extends ClientValue>(initial: T): State<T>;
+}
+
+/** Every builtin a script reaches by name. */
+export const BUILTIN_NAMES = ["state"] as const;
+
 /** Every global a script reaches without declaring it. */
 export const GLOBAL_NAMES = ["Array", "Math"] as const;

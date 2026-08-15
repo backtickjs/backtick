@@ -1,8 +1,8 @@
 export type { Client } from "./Client.js";
 export type { ClientArray } from "./ClientArray.js";
 export type { ArrayConstructor, Math } from "./globals.js";
-export type { Globals } from "./globals.js";
-export { GLOBAL_NAMES } from "./globals.js";
+export type { Builtins, Globals } from "./globals.js";
+export { BUILTIN_NAMES, GLOBAL_NAMES } from "./globals.js";
 export type { ClientBoolean } from "./ClientBoolean.js";
 export type { ClientConstructor } from "./ClientConstructor.js";
 export type { ClientNumber } from "./ClientNumber.js";
