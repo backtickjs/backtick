@@ -1,4 +1,4 @@
-import { schema as core } from "@backtickjs/cs-runtime";
+import { schema as core } from "@backtickjs/core-schema";
 import { Type } from "@backtickjs/schema";
 import type { ClientSchema } from "@backtickjs/schema";
 

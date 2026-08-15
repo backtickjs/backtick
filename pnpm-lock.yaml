@@ -193,12 +193,28 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/core-schema:
+    dependencies:
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/cs-runtime:
     dependencies:
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../schema
     devDependencies:
+      '@backtickjs/core-schema':
+        specifier: workspace:*
+        version: link:../core-schema
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -214,6 +230,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      '@backtickjs/core-schema':
+        specifier: workspace:*
+        version: link:../core-schema
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
@@ -475,6 +494,9 @@ importers:
 
   packages/web-sdk:
     dependencies:
+      '@backtickjs/core-schema':
+        specifier: workspace:*
+        version: link:../core-schema
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime

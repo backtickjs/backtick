@@ -45,4 +45,3 @@ export type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
 export { SyntaxKind } from "./SyntaxKind.js";
 export { version } from "./version.js";
 export { createJsxElement } from "./JsxElement.js";
-export { schema } from "./schema.js";

@@ -1,1 +1,1 @@
-export { schema } from "./src/schema.ts";
+export { schema } from "@backtickjs/core-schema";

@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/cs-runtime",
+  "name": "@backtickjs/core-schema",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -12,15 +12,12 @@
   },
   "scripts": {
     "build": "tsc -b",
-    "clean": "rm -rf node_modules dist .turbo",
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "generate": "backtick-generate",
-    "test": "node --test \"test/**/*.test.ts\""
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "devDependencies": {
-    "@backtickjs/core-schema": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   },

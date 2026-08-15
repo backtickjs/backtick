@@ -10,6 +10,9 @@
       "path": "../core/tsconfig.build.json"
     },
     {
+      "path": "../core-schema/tsconfig.build.json"
+    },
+    {
       "path": "../cs-runtime/tsconfig.build.json"
     },
     {
