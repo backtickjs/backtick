@@ -1,7 +1,6 @@
 import { IsApply } from "../nodes/Apply.js";
 import { IsArray } from "../nodes/Array.js";
 import { IsBoolean } from "../nodes/Boolean.js";
-import { IsClass } from "../nodes/Class.js";
 import { IsFunction } from "../nodes/Function.js";
 import { IsFunctionParameter } from "../nodes/FunctionParameter.js";
 import { IsGeneric } from "../nodes/Generic.js";
@@ -44,9 +43,6 @@ export function type(node: TNode): string {
   }
   if (IsInterface(node)) {
     throw new Error("an interface may only stand as a declaration");
-  }
-  if (IsClass(node)) {
-    throw new Error("a class may only stand as a declaration");
   }
   if (IsFunction(node)) {
     const params = node.parameters.map((one, at) => parameter(one, at));
@@ -333,35 +329,6 @@ export function interfaceLines(
   return [
     ...documentation(node, ""),
     `export interface ${name}${heritage(node)} {`,
-    ...held(node),
-    "}",
-  ];
-}
-
-/** A class, as the interface a client implements. */
-export function classLines(
-  name: string,
-  node: TNode,
-): string[] {
-  const held = (of: { members: Record<string, TNode> }): string[] =>
-    Object.entries(of.members).flatMap(([called, what]) =>
-      member(called, what),
-    );
-  if (IsGeneric(node) && IsClass(node.expression)) {
-    const declared = node.parameters.map((one) => typeParameter(one));
-    return [
-      ...documentation(node, ""),
-      `export interface ${name}<${declared.join(", ")}> {`,
-      ...held(node.expression),
-      "}",
-    ];
-  }
-  if (!IsClass(node)) {
-    throw new Error(`${name} is not a class`);
-  }
-  return [
-    ...documentation(node, ""),
-    `export interface ${name} {`,
     ...held(node),
     "}",
   ];

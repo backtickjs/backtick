@@ -15,7 +15,7 @@ export const schema: Schema = {
   extends: [],
 
   types: {
-    Math: Type.Class({
+    Math: Type.Interface([], {
       E: Type.Number({
         description:
           "The mathematical constant e. This is Euler's number, the base of natural logarithms.",
@@ -479,529 +479,517 @@ export const schema: Schema = {
       },
     ),
 
-    Boolean: Type.Class(
-      {
-        valueOf: Type.Function([], Type.Boolean(), {
-          description: "Returns the primitive value of the specified object.",
-        }),
-      },
-      { boxes: "boolean" },
-    ),
+    Boolean: Type.Interface([], {
+      valueOf: Type.Function([], Type.Boolean(), {
+        description: "Returns the primitive value of the specified object.",
+      }),
+    }),
 
-    Number: Type.Class(
-      {
-        toString: Type.Function(
-          [
-            Type.Optional(
-              Type.FunctionParameter("radix", Type.Number(), {
-                description:
-                  "Specifies a radix for converting numeric values to strings. This value is only used for numbers.",
-              }),
-            ),
-          ],
-          Type.String(),
-          { description: "Returns a string representation of an object." },
-        ),
-        toFixed: Type.Function(
-          [
-            Type.Optional(
-              Type.FunctionParameter("fractionDigits", Type.Number(), {
-                description:
-                  "Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.",
-              }),
-            ),
-          ],
-          Type.String(),
-          {
-            description:
-              "Returns a string representing a number in fixed-point notation.",
-          },
-        ),
-        toExponential: Type.Function(
-          [
-            Type.Optional(
-              Type.FunctionParameter("fractionDigits", Type.Number(), {
-                description:
-                  "Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.",
-              }),
-            ),
-          ],
-          Type.String(),
-          {
-            description:
-              "Returns a string containing a number represented in exponential notation.",
-          },
-        ),
-        toPrecision: Type.Function(
-          [
-            Type.Optional(
-              Type.FunctionParameter("precision", Type.Number(), {
-                description:
-                  "Number of significant digits. Must be in the range 1 - 21, inclusive.",
-              }),
-            ),
-          ],
-          Type.String(),
-          {
-            description:
-              "Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.",
-          },
-        ),
-        valueOf: Type.Function([], Type.Number(), {
-          description: "Returns the primitive value of the specified object.",
-        }),
-      },
-      { boxes: "number" },
-    ),
-
-    String: Type.Class(
-      {
-        toString: Type.Function([], Type.String(), {
-          description: "Returns a string representation of a string.",
-        }),
-        charAt: Type.Function(
-          [
-            Type.FunctionParameter("pos", Type.Number(), {
-              description: "The zero-based index of the desired character.",
-            }),
-          ],
-          Type.String(),
-          { description: "Returns the character at the specified index." },
-        ),
-        charCodeAt: Type.Function(
-          [
-            Type.FunctionParameter("index", Type.Number(), {
+    Number: Type.Interface([], {
+      toString: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter("radix", Type.Number(), {
               description:
-                "The zero-based index of the desired character. If there is no character at the specified index, NaN is returned.",
+                "Specifies a radix for converting numeric values to strings. This value is only used for numbers.",
             }),
-          ],
-          Type.Number(),
-          {
+          ),
+        ],
+        Type.String(),
+        { description: "Returns a string representation of an object." },
+      ),
+      toFixed: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter("fractionDigits", Type.Number(), {
+              description:
+                "Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.",
+            }),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Returns a string representing a number in fixed-point notation.",
+        },
+      ),
+      toExponential: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter("fractionDigits", Type.Number(), {
+              description:
+                "Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.",
+            }),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Returns a string containing a number represented in exponential notation.",
+        },
+      ),
+      toPrecision: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter("precision", Type.Number(), {
+              description:
+                "Number of significant digits. Must be in the range 1 - 21, inclusive.",
+            }),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.",
+        },
+      ),
+      valueOf: Type.Function([], Type.Number(), {
+        description: "Returns the primitive value of the specified object.",
+      }),
+    }),
+
+    String: Type.Interface([], {
+      toString: Type.Function([], Type.String(), {
+        description: "Returns a string representation of a string.",
+      }),
+      charAt: Type.Function(
+        [
+          Type.FunctionParameter("pos", Type.Number(), {
+            description: "The zero-based index of the desired character.",
+          }),
+        ],
+        Type.String(),
+        { description: "Returns the character at the specified index." },
+      ),
+      charCodeAt: Type.Function(
+        [
+          Type.FunctionParameter("index", Type.Number(), {
             description:
-              "Returns the Unicode value of the character at the specified location.",
-          },
-        ),
+              "The zero-based index of the desired character. If there is no character at the specified index, NaN is returned.",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the Unicode value of the character at the specified location.",
+        },
+      ),
+      concat: Type.Function(
+        [
+          Type.Rest(
+            Type.FunctionParameter("strings", Type.String(), {
+              description: "The strings to append to the end of the string.",
+            }),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Returns a string that contains the concatenation of two or more strings.",
+        },
+      ),
+      indexOf: Type.Function(
+        [
+          Type.FunctionParameter("searchString", Type.String(), {
+            description: "The substring to search for in the string",
+          }),
+          Type.Optional(
+            Type.FunctionParameter("position", Type.Number(), {
+              description:
+                "The index at which to begin searching the String object. If omitted, search starts at the beginning of the string.",
+            }),
+          ),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the position of the first occurrence of a substring, or -1 if it is not present.",
+        },
+      ),
+      lastIndexOf: Type.Function(
+        [
+          Type.FunctionParameter("searchString", Type.String(), {
+            description: "The substring to search for.",
+          }),
+          Type.Optional(
+            Type.FunctionParameter("position", Type.Number(), {
+              description:
+                "The index at which to begin searching. If omitted, the search begins at the end of the string.",
+            }),
+          ),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Returns the last occurrence of a substring in the string, or -1 if it is not present.",
+        },
+      ),
+      localeCompare: Type.Function(
+        [
+          Type.FunctionParameter("that", Type.String(), {
+            description: "String to compare to target string",
+          }),
+        ],
+        Type.Number(),
+        {
+          description:
+            "Determines whether two strings are equivalent in the current locale.",
+        },
+      ),
+      replace: Type.Function(
+        [
+          Type.FunctionParameter("searchValue", Type.String(), {
+            description: "A string to search for.",
+          }),
+          Type.FunctionParameter(
+            "replaceValue",
+            Type.Union([
+              Type.String(),
+              Type.Function(
+                [
+                  Type.FunctionParameter("substring", Type.String()),
+                  Type.FunctionParameter("offset", Type.Number()),
+                  Type.FunctionParameter("string", Type.String()),
+                ],
+                Type.String(),
+              ),
+            ]),
+            {
+              description:
+                "The text to replace it with, or a function answering with that text. Only the first match of `searchValue` is replaced.",
+            },
+          ),
+        ],
+        Type.String(),
+        { description: "Replaces text in a string, using a search string." },
+      ),
+      slice: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter("start", Type.Number(), {
+              description:
+                "The index to the beginning of the specified portion of stringObj.",
+            }),
+          ),
+          Type.Optional(
+            Type.FunctionParameter("end", Type.Number(), {
+              description:
+                "The index to the end of the specified portion of stringObj. The substring includes the characters up to, but not including, the character indicated by end. If this value is not specified, the substring continues to the end of stringObj.",
+            }),
+          ),
+        ],
+        Type.String(),
+        { description: "Returns a section of a string." },
+      ),
+      split: Type.Function(
+        [
+          Type.FunctionParameter("separator", Type.String(), {
+            description:
+              "A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned.",
+          }),
+          Type.Optional(
+            Type.FunctionParameter("limit", Type.Number(), {
+              description:
+                "A value used to limit the number of elements returned in the array.",
+            }),
+          ),
+        ],
+        Type.Array(Type.String()),
+        {
+          description:
+            "Split a string into substrings using the specified separator and return them as an array.",
+        },
+      ),
+      substring: Type.Function(
+        [
+          Type.FunctionParameter("start", Type.Number(), {
+            description:
+              "The zero-based index number indicating the beginning of the substring.",
+          }),
+          Type.Optional(
+            Type.FunctionParameter("end", Type.Number(), {
+              description:
+                "Zero-based index number indicating the end of the substring. The substring includes the characters up to, but not including, the character indicated by end. If end is omitted, the characters from start through the end of the original string are returned.",
+            }),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Returns the substring at the specified location within a String object.",
+        },
+      ),
+      toLowerCase: Type.Function([], Type.String(), {
+        description:
+          "Converts all the alphabetic characters in a string to lowercase.",
+      }),
+      toLocaleLowerCase: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter(
+              "locales",
+              Type.Union([Type.String(), Type.Array(Type.String())]),
+            ),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Converts all alphabetic characters to lowercase, taking into account the host environment's current locale.",
+        },
+      ),
+      toUpperCase: Type.Function([], Type.String(), {
+        description:
+          "Converts all the alphabetic characters in a string to uppercase.",
+      }),
+      toLocaleUpperCase: Type.Function(
+        [
+          Type.Optional(
+            Type.FunctionParameter(
+              "locales",
+              Type.Union([Type.String(), Type.Array(Type.String())]),
+            ),
+          ),
+        ],
+        Type.String(),
+        {
+          description:
+            "Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale.",
+        },
+      ),
+      trim: Type.Function([], Type.String(), {
+        description:
+          "Removes the leading and trailing white space and line terminator characters from a string.",
+      }),
+      length: Type.Number({
+        readOnly: true,
+        description: "Returns the length of a String object.",
+      }),
+      valueOf: Type.Function([], Type.String(), {
+        description: "Returns the primitive value of the specified object.",
+      }),
+      index: Type.Index("index", Type.Number(), Type.String(), {
+        readOnly: true,
+      }),
+    }),
+
+    Array: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([], {
+        length: Type.Number({
+          readOnly: true,
+          description:
+            "Gets the length of the array. This is a number one higher than the highest index in the array.",
+        }),
         concat: Type.Function(
           [
             Type.Rest(
-              Type.FunctionParameter("strings", Type.String(), {
-                description: "The strings to append to the end of the string.",
+              Type.FunctionParameter(
+                "items",
+                Type.Union([
+                  Type.Ref("T"),
+                  Type.Array(Type.Ref("T"), { readOnly: true }),
+                ]),
+                {
+                  description:
+                    "Additional arrays and/or items to add to the end of the array.",
+                },
+              ),
+            ),
+          ],
+          Type.Array(Type.Ref("T")),
+          {
+            description:
+              "Combines two or more arrays. This method returns a new array without modifying any existing arrays.",
+          },
+        ),
+        join: Type.Function(
+          [
+            Type.Optional(
+              Type.FunctionParameter("separator", Type.String(), {
+                description:
+                  "A string used to separate one element of the array from the next in the resulting string. If omitted, the array elements are separated with a comma.",
               }),
             ),
           ],
           Type.String(),
           {
             description:
-              "Returns a string that contains the concatenation of two or more strings.",
+              "Adds all the elements of an array into a string, separated by the specified separator string.",
           },
-        ),
-        indexOf: Type.Function(
-          [
-            Type.FunctionParameter("searchString", Type.String(), {
-              description: "The substring to search for in the string",
-            }),
-            Type.Optional(
-              Type.FunctionParameter("position", Type.Number(), {
-                description:
-                  "The index at which to begin searching the String object. If omitted, search starts at the beginning of the string.",
-              }),
-            ),
-          ],
-          Type.Number(),
-          {
-            description:
-              "Returns the position of the first occurrence of a substring, or -1 if it is not present.",
-          },
-        ),
-        lastIndexOf: Type.Function(
-          [
-            Type.FunctionParameter("searchString", Type.String(), {
-              description: "The substring to search for.",
-            }),
-            Type.Optional(
-              Type.FunctionParameter("position", Type.Number(), {
-                description:
-                  "The index at which to begin searching. If omitted, the search begins at the end of the string.",
-              }),
-            ),
-          ],
-          Type.Number(),
-          {
-            description:
-              "Returns the last occurrence of a substring in the string, or -1 if it is not present.",
-          },
-        ),
-        localeCompare: Type.Function(
-          [
-            Type.FunctionParameter("that", Type.String(), {
-              description: "String to compare to target string",
-            }),
-          ],
-          Type.Number(),
-          {
-            description:
-              "Determines whether two strings are equivalent in the current locale.",
-          },
-        ),
-        replace: Type.Function(
-          [
-            Type.FunctionParameter("searchValue", Type.String(), {
-              description: "A string to search for.",
-            }),
-            Type.FunctionParameter(
-              "replaceValue",
-              Type.Union([
-                Type.String(),
-                Type.Function(
-                  [
-                    Type.FunctionParameter("substring", Type.String()),
-                    Type.FunctionParameter("offset", Type.Number()),
-                    Type.FunctionParameter("string", Type.String()),
-                  ],
-                  Type.String(),
-                ),
-              ]),
-              {
-                description:
-                  "The text to replace it with, or a function answering with that text. Only the first match of `searchValue` is replaced.",
-              },
-            ),
-          ],
-          Type.String(),
-          { description: "Replaces text in a string, using a search string." },
         ),
         slice: Type.Function(
           [
             Type.Optional(
               Type.FunctionParameter("start", Type.Number(), {
                 description:
-                  "The index to the beginning of the specified portion of stringObj.",
+                  "The beginning index of the specified portion of the array. If start is undefined, then the slice begins at index 0.",
               }),
             ),
             Type.Optional(
               Type.FunctionParameter("end", Type.Number(), {
                 description:
-                  "The index to the end of the specified portion of stringObj. The substring includes the characters up to, but not including, the character indicated by end. If this value is not specified, the substring continues to the end of stringObj.",
+                  "The end index of the specified portion of the array. This is exclusive of the element at the index 'end'. If end is undefined, then the slice extends to the end of the array.",
               }),
             ),
           ],
-          Type.String(),
-          { description: "Returns a section of a string." },
+          Type.Array(Type.Ref("T")),
+          { description: "Returns a copy of a section of an array." },
         ),
-        split: Type.Function(
+        indexOf: Type.Function(
           [
-            Type.FunctionParameter("separator", Type.String(), {
-              description:
-                "A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned.",
+            Type.FunctionParameter("searchElement", Type.Ref("T"), {
+              description: "The value to locate in the array.",
             }),
             Type.Optional(
-              Type.FunctionParameter("limit", Type.Number(), {
+              Type.FunctionParameter("fromIndex", Type.Number(), {
                 description:
-                  "A value used to limit the number of elements returned in the array.",
+                  "The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.",
               }),
             ),
           ],
-          Type.Array(Type.String()),
+          Type.Number(),
           {
             description:
-              "Split a string into substrings using the specified separator and return them as an array.",
+              "Returns the index of the first occurrence of a value in an array, or -1 if it is not present.",
           },
         ),
-        substring: Type.Function(
+        includes: Type.Function(
           [
-            Type.FunctionParameter("start", Type.Number(), {
-              description:
-                "The zero-based index number indicating the beginning of the substring.",
+            Type.FunctionParameter("searchElement", Type.Ref("T"), {
+              description: "The element to search for.",
             }),
             Type.Optional(
-              Type.FunctionParameter("end", Type.Number(), {
+              Type.FunctionParameter("fromIndex", Type.Number(), {
                 description:
-                  "Zero-based index number indicating the end of the substring. The substring includes the characters up to, but not including, the character indicated by end. If end is omitted, the characters from start through the end of the original string are returned.",
+                  "The position in this array at which to begin searching for searchElement.",
               }),
             ),
           ],
-          Type.String(),
+          Type.Boolean(),
           {
             description:
-              "Returns the substring at the specified location within a String object.",
+              "Determines whether an array includes a certain element, returning true or false as appropriate.",
           },
         ),
-        toLowerCase: Type.Function([], Type.String(), {
-          description:
-            "Converts all the alphabetic characters in a string to lowercase.",
-        }),
-        toLocaleLowerCase: Type.Function(
-          [
-            Type.Optional(
-              Type.FunctionParameter(
-                "locales",
-                Type.Union([Type.String(), Type.Array(Type.String())]),
-              ),
-            ),
-          ],
-          Type.String(),
-          {
-            description:
-              "Converts all alphabetic characters to lowercase, taking into account the host environment's current locale.",
-          },
-        ),
-        toUpperCase: Type.Function([], Type.String(), {
-          description:
-            "Converts all the alphabetic characters in a string to uppercase.",
-        }),
-        toLocaleUpperCase: Type.Function(
-          [
-            Type.Optional(
-              Type.FunctionParameter(
-                "locales",
-                Type.Union([Type.String(), Type.Array(Type.String())]),
-              ),
-            ),
-          ],
-          Type.String(),
-          {
-            description:
-              "Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale.",
-          },
-        ),
-        trim: Type.Function([], Type.String(), {
-          description:
-            "Removes the leading and trailing white space and line terminator characters from a string.",
-        }),
-        length: Type.Number({
-          readOnly: true,
-          description: "Returns the length of a String object.",
-        }),
-        valueOf: Type.Function([], Type.String(), {
-          description: "Returns the primitive value of the specified object.",
-        }),
-        index: Type.Index("index", Type.Number(), Type.String(), {
-          readOnly: true,
-        }),
-      },
-      { boxes: "string" },
-    ),
-
-    Array: Type.Generic(
-      [Type.GenericParameter("T")],
-      Type.Class(
-        {
-          length: Type.Number({
-            readOnly: true,
-            description:
-              "Gets the length of the array. This is a number one higher than the highest index in the array.",
-          }),
-          concat: Type.Function(
-            [
-              Type.Rest(
-                Type.FunctionParameter(
-                  "items",
-                  Type.Union([
-                    Type.Ref("T"),
-                    Type.Array(Type.Ref("T"), { readOnly: true }),
-                  ]),
-                  {
-                    description:
-                      "Additional arrays and/or items to add to the end of the array.",
-                  },
-                ),
-              ),
-            ],
-            Type.Array(Type.Ref("T")),
-            {
-              description:
-                "Combines two or more arrays. This method returns a new array without modifying any existing arrays.",
-            },
-          ),
-          join: Type.Function(
-            [
-              Type.Optional(
-                Type.FunctionParameter("separator", Type.String(), {
-                  description:
-                    "A string used to separate one element of the array from the next in the resulting string. If omitted, the array elements are separated with a comma.",
-                }),
-              ),
-            ],
-            Type.String(),
-            {
-              description:
-                "Adds all the elements of an array into a string, separated by the specified separator string.",
-            },
-          ),
-          slice: Type.Function(
-            [
-              Type.Optional(
-                Type.FunctionParameter("start", Type.Number(), {
-                  description:
-                    "The beginning index of the specified portion of the array. If start is undefined, then the slice begins at index 0.",
-                }),
-              ),
-              Type.Optional(
-                Type.FunctionParameter("end", Type.Number(), {
-                  description:
-                    "The end index of the specified portion of the array. This is exclusive of the element at the index 'end'. If end is undefined, then the slice extends to the end of the array.",
-                }),
-              ),
-            ],
-            Type.Array(Type.Ref("T")),
-            { description: "Returns a copy of a section of an array." },
-          ),
-          indexOf: Type.Function(
-            [
-              Type.FunctionParameter("searchElement", Type.Ref("T"), {
-                description: "The value to locate in the array.",
-              }),
-              Type.Optional(
-                Type.FunctionParameter("fromIndex", Type.Number(), {
-                  description:
-                    "The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.",
-                }),
-              ),
-            ],
-            Type.Number(),
-            {
-              description:
-                "Returns the index of the first occurrence of a value in an array, or -1 if it is not present.",
-            },
-          ),
-          includes: Type.Function(
-            [
-              Type.FunctionParameter("searchElement", Type.Ref("T"), {
-                description: "The element to search for.",
-              }),
-              Type.Optional(
-                Type.FunctionParameter("fromIndex", Type.Number(), {
-                  description:
-                    "The position in this array at which to begin searching for searchElement.",
-                }),
-              ),
-            ],
-            Type.Boolean(),
-            {
-              description:
-                "Determines whether an array includes a certain element, returning true or false as appropriate.",
-            },
-          ),
-          map: Type.Generic(
-            [Type.GenericParameter("U")],
-            Type.Function(
-              [
-                Type.FunctionParameter(
-                  "callbackfn",
-                  Type.Function(
-                    [
-                      Type.FunctionParameter("value", Type.Ref("T")),
-                      Type.FunctionParameter("index", Type.Number()),
-                    ],
-                    Type.Ref("U"),
-                  ),
-                  {
-                    description:
-                      "A function that accepts up to two arguments. The map method calls the callbackfn function one time for each element in the array.",
-                  },
-                ),
-              ],
-              Type.Array(Type.Ref("U")),
-            ),
-            {
-              description:
-                "Calls a defined callback function on each element of an array, and returns an array that contains the results.",
-            },
-          ),
-          filter: Type.Function(
+        map: Type.Generic(
+          [Type.GenericParameter("U")],
+          Type.Function(
             [
               Type.FunctionParameter(
-                "predicate",
+                "callbackfn",
                 Type.Function(
                   [
                     Type.FunctionParameter("value", Type.Ref("T")),
                     Type.FunctionParameter("index", Type.Number()),
                   ],
-                  Type.Boolean(),
+                  Type.Ref("U"),
                 ),
                 {
                   description:
-                    "A function that accepts up to two arguments. The filter method calls the predicate function one time for each element in the array.",
+                    "A function that accepts up to two arguments. The map method calls the callbackfn function one time for each element in the array.",
                 },
               ),
             ],
-            Type.Array(Type.Ref("T")),
-            {
-              description:
-                "Returns the elements of an array that meet the condition specified in a callback function.",
-            },
+            Type.Array(Type.Ref("U")),
           ),
-          with: Type.Function(
-            [
-              Type.FunctionParameter("index", Type.Number(), {
-                description:
-                  "The index of the value to overwrite. If the index is negative, then it replaces from the end of the array.",
-              }),
-              Type.FunctionParameter("value", Type.Ref("T"), {
-                description: "The value to write into the copied array.",
-              }),
-            ],
-            Type.Array(Type.Ref("T")),
-            {
-              description:
-                "Copies an array, then overwrites the value at the provided index with the\ngiven value. If the index is negative, then it replaces from the end\nof the array.",
-            },
-          ),
-          toSorted: Type.Function(
-            [
-              Type.FunctionParameter(
-                "compareFn",
-                Type.Function(
-                  [
-                    Type.FunctionParameter("a", Type.Ref("T")),
-                    Type.FunctionParameter("b", Type.Ref("T")),
-                  ],
-                  Type.Number(),
-                ),
-                {
-                  description:
-                    "Function used to determine the order of the elements. It is expected to return a negative value if the first argument is less than the second argument, zero if they're equal, and a positive value otherwise.",
-                },
-              ),
-            ],
-            Type.Array(Type.Ref("T")),
-            {
-              description:
-                "Returns a copy of an array with its elements sorted.\n\nThe comparator is required, where the standard library makes it optional:\nsorting without one compares the elements as strings, which is a rule of\nJavaScript's rather than of this language, and every other host would have\nto reproduce it to agree. Saying how to order two elements is the same\nwork and it ports.",
-            },
-          ),
-          toReversed: Type.Function([], Type.Array(Type.Ref("T")), {
+          {
             description:
-              "Returns a copy of an array with its elements in reverse order.",
-          }),
-          toSpliced: Type.Function(
-            [
-              Type.FunctionParameter("start", Type.Number(), {
-                description:
-                  "The zero-based location in the array from which to start removing elements.",
-              }),
-              Type.FunctionParameter("deleteCount", Type.Number(), {
-                description: "The number of elements to remove.",
-              }),
-              Type.Rest(
-                Type.FunctionParameter("items", Type.Ref("T"), {
-                  description:
-                    "Elements to insert into the copied array in place of the deleted elements.",
-                }),
+              "Calls a defined callback function on each element of an array, and returns an array that contains the results.",
+          },
+        ),
+        filter: Type.Function(
+          [
+            Type.FunctionParameter(
+              "predicate",
+              Type.Function(
+                [
+                  Type.FunctionParameter("value", Type.Ref("T")),
+                  Type.FunctionParameter("index", Type.Number()),
+                ],
+                Type.Boolean(),
               ),
-            ],
-            Type.Array(Type.Ref("T")),
-            {
+              {
+                description:
+                  "A function that accepts up to two arguments. The filter method calls the predicate function one time for each element in the array.",
+              },
+            ),
+          ],
+          Type.Array(Type.Ref("T")),
+          {
+            description:
+              "Returns the elements of an array that meet the condition specified in a callback function.",
+          },
+        ),
+        with: Type.Function(
+          [
+            Type.FunctionParameter("index", Type.Number(), {
               description:
-                "Copies an array and removes elements while, if necessary, inserting new elements in their place, returning the remaining elements.",
-            },
-          ),
-          index: Type.Index("index", Type.Number(), Type.Ref("T"), {
-            readOnly: true,
-          }),
-        },
-        { boxes: "array" },
-      ),
+                "The index of the value to overwrite. If the index is negative, then it replaces from the end of the array.",
+            }),
+            Type.FunctionParameter("value", Type.Ref("T"), {
+              description: "The value to write into the copied array.",
+            }),
+          ],
+          Type.Array(Type.Ref("T")),
+          {
+            description:
+              "Copies an array, then overwrites the value at the provided index with the\ngiven value. If the index is negative, then it replaces from the end\nof the array.",
+          },
+        ),
+        toSorted: Type.Function(
+          [
+            Type.FunctionParameter(
+              "compareFn",
+              Type.Function(
+                [
+                  Type.FunctionParameter("a", Type.Ref("T")),
+                  Type.FunctionParameter("b", Type.Ref("T")),
+                ],
+                Type.Number(),
+              ),
+              {
+                description:
+                  "Function used to determine the order of the elements. It is expected to return a negative value if the first argument is less than the second argument, zero if they're equal, and a positive value otherwise.",
+              },
+            ),
+          ],
+          Type.Array(Type.Ref("T")),
+          {
+            description:
+              "Returns a copy of an array with its elements sorted.\n\nThe comparator is required, where the standard library makes it optional:\nsorting without one compares the elements as strings, which is a rule of\nJavaScript's rather than of this language, and every other host would have\nto reproduce it to agree. Saying how to order two elements is the same\nwork and it ports.",
+          },
+        ),
+        toReversed: Type.Function([], Type.Array(Type.Ref("T")), {
+          description:
+            "Returns a copy of an array with its elements in reverse order.",
+        }),
+        toSpliced: Type.Function(
+          [
+            Type.FunctionParameter("start", Type.Number(), {
+              description:
+                "The zero-based location in the array from which to start removing elements.",
+            }),
+            Type.FunctionParameter("deleteCount", Type.Number(), {
+              description: "The number of elements to remove.",
+            }),
+            Type.Rest(
+              Type.FunctionParameter("items", Type.Ref("T"), {
+                description:
+                  "Elements to insert into the copied array in place of the deleted elements.",
+              }),
+            ),
+          ],
+          Type.Array(Type.Ref("T")),
+          {
+            description:
+              "Copies an array and removes elements while, if necessary, inserting new elements in their place, returning the remaining elements.",
+          },
+        ),
+        index: Type.Index("index", Type.Number(), Type.Ref("T"), {
+          readOnly: true,
+        }),
+      }),
     ),
 
     ArrayLike: Type.Generic(
@@ -1012,7 +1000,7 @@ export const schema: Schema = {
       }),
     ),
 
-    ArrayConstructor: Type.Class({
+    ArrayConstructor: Type.Interface([], {
       from: Type.Generic(
         [Type.GenericParameter("T"), Type.GenericParameter("U")],
         Type.Function(

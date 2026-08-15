@@ -4,7 +4,6 @@ export type {
   ArrayConstructor,
   ArrayLike,
   Boolean,
-  Boxes,
   Builtins,
   Math,
   Number,

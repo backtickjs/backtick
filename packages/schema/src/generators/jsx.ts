@@ -1,17 +1,10 @@
-import { IsClass } from "../nodes/Class.js";
 import { IsFunction } from "../nodes/Function.js";
 import { IsGeneric } from "../nodes/Generic.js";
 import { IsInterface } from "../nodes/Interface.js";
 import { IsObject } from "../nodes/Object.js";
 import { IsRef } from "../nodes/Ref.js";
 import { flatten } from "../flatten.js";
-import {
-  classLines,
-  documentation,
-  key,
-  type,
-  typeParameter,
-} from "./typescript.js";
+import { documentation, key, type, typeParameter } from "./typescript.js";
 import type { Schema } from "../Schema.js";
 import type { TNode } from "../TNode.js";
 
@@ -203,8 +196,6 @@ export function jsx(schema: Schema): string {
         lines.push(property(one.name, one.node, one.required));
       }
       lines.push(`}`);
-    } else if (IsClass(node) || (IsGeneric(node) && IsClass(node.expression))) {
-      lines.push(...classLines(name, node));
     } else if (IsGeneric(node)) {
       const declared = node.parameters.map((one) => typeParameter(one));
       lines.push(

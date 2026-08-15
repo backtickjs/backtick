@@ -1,7 +1,6 @@
 export type { Client } from "./Client.js";
 export type { ArrayConstructor, Math } from "@backtickjs/core-schema";
 export type {
-  Boxes,
   Builtins,
   Array,
   Boolean,

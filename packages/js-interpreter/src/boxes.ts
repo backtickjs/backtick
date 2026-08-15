@@ -1,8 +1,26 @@
-import type { Boxes } from "@backtickjs/cs-runtime";
+import type { Array, Boolean, Number, String } from "@backtickjs/cs-runtime";
 import type { Value } from "./Value.js";
 
+/**
+ * What this client answers with for a member access on a primitive.
+ *
+ * Written by hand and not generated: which interface a value autoboxes to is
+ * this client's to decide, and a container holds this client's own `Value`.
+ * What each interface holds is the schema's, so a member left out of one stays
+ * out of reach whatever the host's own prototypes happen to hold.
+ *
+ * A name here is the key a member access looks a value up by, so it is what the
+ * primitive is called rather than what its interface is.
+ */
+export interface Boxes {
+  array: Array<Value>;
+  boolean: Boolean;
+  number: Number;
+  string: String;
+}
+
 // What a member access on a primitive answers with.
-export const boxes: Boxes<Value> = {
+export const boxes: Boxes = {
   string: {
     toString(this: string) {
       return this;

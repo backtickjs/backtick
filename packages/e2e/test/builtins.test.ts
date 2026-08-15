@@ -8,23 +8,33 @@ import { boxes, globals } from "@backtickjs/js-interpreter";
 // declared, fails here rather than at the first bundle that reaches it.
 
 describe("boxes", () => {
-  it("the client answers for every member a boxed class declares", () => {
+  // Which interface a primitive autoboxes to is the client's own decision, so
+  // it is written here as the client writes it — the schema says what each
+  // interface holds and not what reaches one.
+  const boxed = {
+    array: "Array",
+    boolean: "Boolean",
+    number: "Number",
+    string: "String",
+  } as const;
+
+  it("the client answers for every member a boxed interface declares", () => {
     const answered = new Map(Object.entries(boxes));
-    for (const [name, node] of Object.entries(schema.types)) {
+    for (const [boxes_, name] of Object.entries(boxed)) {
+      const node = schema.types[name];
+      assert.ok(node !== undefined, `the schema declares no \`${name}\``);
       const held = (node.type === "generic" ? node.expression : node) as {
         type: string;
-        boxes?: string;
-        members: Record<string, { type?: string }>;
+        properties: Record<string, { type?: string }>;
       };
-      if (held.type !== "class" || held.boxes === undefined) {
-        continue;
-      }
-      const table = answered.get(held.boxes) as Record<string, unknown>;
-      assert.ok(
-        table !== undefined,
-        `nothing answers for a boxed ${held.boxes}`,
+      assert.equal(
+        held.type,
+        "interface",
+        `\`${name}\` is not an interface a client can answer for`,
       );
-      for (const [member, what] of Object.entries(held.members)) {
+      const table = answered.get(boxes_) as Record<string, unknown>;
+      assert.ok(table !== undefined, `nothing answers for a boxed ${boxes_}`);
+      for (const [member, what] of Object.entries(held.properties)) {
         // An index signature is reached by `[]` rather than by name, so it is
         // element access's to answer and not a member of this table.
         if (what.type === "index") {
@@ -48,18 +58,18 @@ describe("builtins", () => {
     const types = schema.types as Record<string, { type: string } | undefined>;
     for (const [name, node] of Object.entries(schema.builtins)) {
       assert.ok(name in held, `nothing answers for \`${name}\``);
-      // A builtin naming a class is reached by its members; one that is a
+      // A builtin naming an interface is reached by its members; one that is a
       // signature — `state` — is whole on its own and has none.
       const named = node.type === "ref" ? types[node.$ref] : node;
       const inner = (
         named?.type === "generic"
           ? (named as unknown as { expression: { type: string } }).expression
           : named
-      ) as { type: string; members?: Record<string, { type?: string }> };
-      if (inner?.type !== "class") {
+      ) as { type: string; properties?: Record<string, { type?: string }> };
+      if (inner?.type !== "interface") {
         continue;
       }
-      for (const [member, what] of Object.entries(inner.members ?? {})) {
+      for (const [member, what] of Object.entries(inner.properties ?? {})) {
         // Reached by `[]` rather than by name, so it is element access's to
         // answer and not a member of this table.
         if (what.type === "index") {
