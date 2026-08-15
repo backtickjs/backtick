@@ -1,5 +1,4 @@
 import type ts from "typescript";
-import { GLOBAL_BUILTINS } from "@backtickjs/core-schema";
 import { SyntaxKind } from "@backtickjs/cs-runtime";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
@@ -8,6 +7,14 @@ import { bodyKind, partialReturn } from "./bodyKind.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
+
+// Every name the language provides, written here rather than read off a
+// schema: the compiler's vocabulary is its own and closed. `Math` and `Array`
+// are the host lib's and `state` is the framework's, so this grows when the
+// language does — what a target adds arrives as a value an app splices, and
+// never as a name recognised here. What may be read off one of these is not
+// this question: `Receiver` narrows the members, from the schema.
+const globals = new Set(["Array", "Math", "state"]);
 
 export interface RewriteState {
   script: ClientScript;
@@ -749,7 +756,7 @@ function rewriteNodeImpl(
     // only the agreed part of it is reachable. `state` is read through `cs`,
     // where its type is written: nothing declares it, and a `declare global`
     // would put it in the host's own scope as well as the script's.
-    if (!state.bindings.has(node) && node.text in GLOBAL_BUILTINS) {
+    if (!state.bindings.has(node) && globals.has(node.text)) {
       const virtual =
         node.text === "state"
           ? ts.factory.createPropertyAccessExpression(

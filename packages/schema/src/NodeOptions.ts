@@ -16,14 +16,4 @@ export interface TNodeOptions {
    * marker only this package can see.
    */
   readonly readOnly?: boolean;
-
-  /**
-   * That the host language already declares this name.
-   *
-   * Only a builtin's entry carries it. What it decides is how the name is
-   * written where the typechecker reads it — plainly for one the lib resolves,
-   * through `cs` for one nothing declares — and nothing downstream: both reach
-   * a client the same way, as a name it answers for.
-   */
-  readonly global?: boolean;
 }
