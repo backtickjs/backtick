@@ -7,6 +7,8 @@ import type {
   Prop,
 } from "@backtickjs/core-schema";
 
+export type BacktickNode = BacktickElement | string | number | null;
+
 export type Booleanish = boolean | "true" | "false";
 
 export type Numeric = number | string;
@@ -299,7 +301,7 @@ export interface GlobalAttributes extends AriaAttributes, Events {
 export interface VoidProps extends GlobalAttributes {}
 
 export interface HtmlProps extends GlobalAttributes {
-  children?: Children<BacktickElement | string | number>;
+  children?: Children<BacktickNode>;
 }
 
 export interface AnchorProps extends HtmlProps {

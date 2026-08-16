@@ -2,20 +2,12 @@ import type { Client } from "./Client.js";
 import type { ClientValue } from "./ClientValue.js";
 
 /**
- * One child or several, written the same way either way in JSX — and a script
- * in place of one of them.
+ * What goes in a children position, one arm per way of writing it: one child,
+ * a script standing in for one, or several. What a child may be is `T`, which
+ * the target decides.
  *
- * A script contributes one thing, or nothing — a branch draws nothing often
- * enough. What it may not contribute is many: that is `<For />`, because a
- * client handed a finished list cannot work out which member is which.
- *
- * A sibling of {@link Prop}: both say what a prop may hold once a script may
- * stand where a value would, and neither says what an element is. Which
- * elements exist is a target's business — the portable components in
- * `@backtickjs/core`, the tags in `@backtickjs/web-sdk` — and both reach for
- * this same type to describe what goes inside one.
+ * A script stands in for one child and never for a list — a client handed a
+ * finished list cannot tell which member is which, so `<For />` is how a list
+ * is written.
  */
-export type Children<T extends ClientValue> =
-  | T
-  | Client<T | null>
-  | Children<T>[];
+export type Children<T extends ClientValue> = T | Client<T> | Children<T>[];

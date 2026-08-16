@@ -5,28 +5,17 @@ import type { Schema } from "@backtickjs/schema";
 // What a browser's elements accept, as a schema. `elements.ts` is generated
 // from this and is not written by hand — run `pnpm generate`.
 
-/**
- * What a child may be, which is this target's decision and not the framework's.
- *
- * That the web's tags hold text and numbers as well as elements is vocabulary,
- * and says so here. A target whose elements hold only text would write
- * `Type.String()` alone. `BacktickElement` — what a client draws — is core's,
- * so this names it the way it names any other inherited type.
- *
- * One child, not several: the plural is `Children<T>`, which the emitter wraps
- * around this. Local rather than a named alias, because it is not a type this
- * target publishes — it is what two of its things happen to hold.
- */
-const child = Type.Union([
-  Type.Ref("BacktickElement"),
-  Type.String(),
-  Type.Number(),
-]);
-
 export const schema: Schema = {
   extends: [core],
 
   types: {
+    BacktickNode: Type.Union([
+      Type.Ref("BacktickElement"),
+      Type.String(),
+      Type.Number(),
+      Type.Null(),
+    ]),
+
     Booleanish: Type.Union([
       Type.Boolean(),
       Type.Literal("true"),
@@ -440,7 +429,7 @@ export const schema: Schema = {
     ),
     VoidProps: Type.Interface([Type.Ref("GlobalAttributes")], {}),
     HtmlProps: Type.Interface([Type.Ref("GlobalAttributes")], {
-      children: Type.Optional(child),
+      children: Type.Optional(Type.Ref("BacktickNode")),
     }),
     AnchorProps: Type.Interface([Type.Ref("HtmlProps")], {
       download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
