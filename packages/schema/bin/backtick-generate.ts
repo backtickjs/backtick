@@ -3,7 +3,8 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
-import { generate, type Schema } from "../dist/index.js";
+import { generate } from "../dist/generate.js";
+import type { Schema } from "../dist/index.js";
 
 // Every project's `pnpm generate`, run from the project it generates for.
 //
