@@ -10,4 +10,4 @@ export type ClientValue =
   | string
   | ClientFunction
   | ClientValue[]
-  | { [key: string]: ClientValue | undefined };
+  | { [key: string]: ClientValue };
