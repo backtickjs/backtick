@@ -302,10 +302,6 @@ export interface HtmlProps extends GlobalAttributes {
   children?: Children<BacktickElement | string | number>;
 }
 
-export interface FragmentProps {
-  readonly children: BacktickElement | string | number;
-}
-
 export interface AnchorProps extends HtmlProps {
   download?: Prop<string | boolean>;
   href?: Prop<string>;

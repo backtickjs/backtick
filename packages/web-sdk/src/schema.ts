@@ -442,14 +442,6 @@ export const schema: Schema = {
     HtmlProps: Type.Interface([Type.Ref("GlobalAttributes")], {
       children: Type.Optional(child),
     }),
-    /**
-     * Children with no element of their own.
-     *
-     * What this target's fragment may hold is what its elements hold, which is
-     * why it is declared here rather than shared: another target's fragment holds
-     * that target's, and the brand they agree on is `cs-runtime`'s.
-     */
-    FragmentProps: Type.Interface([], { children: Type.Optional(child) }),
     AnchorProps: Type.Interface([Type.Ref("HtmlProps")], {
       download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
       href: Type.Optional(Type.String()),
