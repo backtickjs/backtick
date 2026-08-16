@@ -5,7 +5,7 @@ import type {
   Client,
   ClientElement,
   Prop,
-} from "@backtickjs/core-schema";
+} from "@backtickjs/ui-schema";
 
 export type {
   Array,
@@ -22,7 +22,7 @@ export type {
   ReadonlyState,
   State,
   String,
-} from "@backtickjs/core-schema";
+} from "@backtickjs/ui-schema";
 
 export type BacktickNode = ClientElement | string | number | null;
 

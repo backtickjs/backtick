@@ -1,4 +1,4 @@
-import type { ClientElement, Children } from "@backtickjs/core-schema";
+import type { ClientElement, Children } from "@backtickjs/ui-schema";
 import type { JsxElementType } from "@backtickjs/cs-runtime";
 import { createFragment, createJsxElement } from "@backtickjs/cs-runtime";
 import type { IntrinsicElements as Web } from "../schema.generated.js";

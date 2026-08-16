@@ -26,9 +26,9 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/core-schema": "workspace:*",
     "@backtickjs/cs-runtime": "workspace:*",
     "@backtickjs/schema": "workspace:*",
+    "@backtickjs/ui-schema": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
     "linkedom": "^0.18.13"
   },

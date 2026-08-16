@@ -1,4 +1,4 @@
-import { schema as core } from "@backtickjs/core-schema";
+import { schema as ui } from "@backtickjs/ui-schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 
@@ -8,7 +8,7 @@ import type { Schema } from "@backtickjs/schema";
 export const schema: Schema = {
   package: "@backtickjs/web-sdk",
 
-  extends: [core],
+  extends: [ui],
 
   types: {
     BacktickNode: Type.Union([

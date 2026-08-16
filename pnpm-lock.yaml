@@ -471,6 +471,22 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/ui-schema:
+    dependencies:
+      '@backtickjs/core-schema':
+        specifier: workspace:*
+        version: link:../core-schema
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/web-client:
     devDependencies:
       '@backtickjs/core':
@@ -491,15 +507,15 @@ importers:
 
   packages/web-sdk:
     dependencies:
-      '@backtickjs/core-schema':
-        specifier: workspace:*
-        version: link:../core-schema
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../schema
+      '@backtickjs/ui-schema':
+        specifier: workspace:*
+        version: link:../ui-schema
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../web-client

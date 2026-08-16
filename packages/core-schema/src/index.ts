@@ -6,16 +6,4 @@ export type { ClientFunction } from "./ClientFunction.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
 export type { ClientValue } from "./ClientValue.js";
 export type { Prop } from "./Prop.js";
-export type {
-  Array,
-  ArrayConstructor,
-  ArrayLike,
-  Boolean,
-  Builtins,
-  ForProps,
-  Math,
-  Number,
-  ReadonlyState,
-  State,
-  String,
-} from "./schema.generated.js";
+export type * from "./schema.generated.js";
