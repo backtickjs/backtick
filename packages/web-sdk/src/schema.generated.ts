@@ -7,6 +7,23 @@ import type {
   Prop,
 } from "@backtickjs/core-schema";
 
+export type {
+  Array,
+  ArrayConstructor,
+  ArrayLike,
+  Boolean,
+  Children,
+  Client,
+  ClientElement,
+  ForProps,
+  Math,
+  Number,
+  Prop,
+  ReadonlyState,
+  State,
+  String,
+} from "@backtickjs/core-schema";
+
 export type BacktickNode = ClientElement | string | number | null;
 
 export type Booleanish = boolean | "true" | "false";

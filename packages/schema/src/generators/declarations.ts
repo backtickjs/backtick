@@ -148,10 +148,21 @@ export function declarations(schema: Schema): string {
     lines.push("");
   }
 
-  // Where each name this file writes but does not declare comes from. A base's
-  // name belongs to the schema that wrote it, however deep that is, and the
-  // framework's own names to the schema everything extends — so an import
-  // points at the package that has it rather than at a package guessed once.
+  // What each base offers, which is everything its own chain declares — a base
+  // re-exports what it inherited, so a name is reached from the schema built on
+  // it and never from two schemas down. The first also offers the framework's
+  // own names, which no schema declares and every file writes.
+  const bases = schema.extends.map(
+    (base, at) =>
+      [
+        base.package,
+        [...Object.keys(flatten(base).types), ...(at === 0 ? FRAMEWORK : [])],
+      ] as const,
+  );
+
+  // Where each name this file writes but does not declare comes from: the base
+  // that offers it, and the framework's own names from the schema everything
+  // extends.
   const from = new Map<string, string>();
   const name = (of: string, where: string): void => {
     const held = from.get(of);
@@ -161,14 +172,18 @@ export function declarations(schema: Schema): string {
     from.set(of, where);
   };
   for (const held of [...reached].filter((one) => !(one in schema.types))) {
-    name(held, packageDeclaring(schema, held));
+    const offering = bases.find(([, names]) => names.includes(held));
+    if (offering === undefined) {
+      throw new Error(`no schema this one extends offers \`${held}\``);
+    }
+    name(held, offering[0]);
   }
-  // What a kind is called on this host, and what a prop may hold once a script
-  // may stand where a value would: names the framework declares and no schema
-  // does, so they come from the schema everything else extends.
-  for (const held of ["ClientElement", "Children", "Client", "Prop"]) {
+  // The root declares them beside itself and hands them on from there, so a
+  // schema at any depth reaches them from the one it is built on rather than
+  // from a package it may not depend on.
+  for (const held of FRAMEWORK) {
     if (lines.some((line) => new RegExp(`\\b${held}\\b`).test(line))) {
-      name(held, root(schema).package);
+      name(held, bases[0]?.[0] ?? schema.package);
     }
   }
 
@@ -198,36 +213,35 @@ export function declarations(schema: Schema): string {
     head.push("");
   }
 
+  // Everything the schemas under this one declare, handed on. A file written
+  // against this schema names one thing to reach the whole chain, and what a
+  // base adds arrives without anyone here being told about it.
+  for (const [where, names] of bases) {
+    if (names.length === 0) {
+      continue;
+    }
+    head.push(`export type {`);
+    for (const one of [...names].sort()) {
+      head.push(`  ${one},`);
+    }
+    head.push(`} from "${where}";`);
+    head.push("");
+  }
+
   return [...head, ...lines].join("\n");
 }
 
 /** The schema everything else extends, which is where the framework's own
  * names are published. */
-function root(schema: Schema): Schema {
-  return schema.extends.length === 0
-    ? schema
-    : root(schema.extends[0] as Schema);
-}
-
 /**
- * The package publishing the schema that declares a name.
+ * What a kind is called on this host, and what a prop may hold once a script
+ * may stand where a value would.
  *
- * Bases first and depth first, which is the order `flatten` composes them in,
- * so a name two schemas deep is found where it was written rather than where
- * it was reached from.
+ * No schema declares these — they are the framework's, published beside the
+ * schema everything extends — and every generated file writes at least one of
+ * them, so each schema hands them on the way it hands on a base's names.
  */
-function packageDeclaring(schema: Schema, held: string): string {
-  for (const base of schema.extends) {
-    const found =
-      base.types[held] !== undefined
-        ? base.package
-        : packageDeclaring(base, held);
-    if (found !== "") {
-      return found;
-    }
-  }
-  return "";
-}
+const FRAMEWORK = ["ClientElement", "Children", "Client", "Prop"];
 
 /**
  * What a tag accepts: the name it is given, or the properties written inline.

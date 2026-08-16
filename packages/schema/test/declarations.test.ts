@@ -51,18 +51,16 @@ const target: Schema = {
 };
 
 describe("declarations", () => {
-  it("names a type where it was declared, however deep", () => {
+  it("names a type where it is offered, not where it was written", () => {
     const written = declarations(target);
+    // `Shared` is the middle schema's and `Prop` is the framework's, two
+    // schemas up — both arrive from the one this is built on, so a target
+    // needs no dependency on a package further up the chain.
     assert.match(
       written,
-      /import type \{\n {2}Shared,\n\} from "@backtickjs\/middle";/,
-      "a middle schema's name comes from the middle schema's package",
+      /import type \{[^}]*\bProp,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
     );
-    assert.match(
-      written,
-      /import type \{[^}]*ClientElement[^}]*\} from "@backtickjs\/core";/,
-      "the framework's own names come from the schema everything extends",
-    );
+    assert.doesNotMatch(written, /from "@backtickjs\/core"/);
   });
 
   it("writes its own names beside it, and no import for them", () => {
@@ -73,6 +71,17 @@ describe("declarations", () => {
       "the package that publishes a name reaches it beside itself",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
+  });
+
+  it("hands on everything the schemas under it declare", () => {
+    // `Cell` is the root's and `Shared` the middle's, and a file written
+    // against this schema reaches both by naming one package.
+    assert.match(
+      declarations(target),
+      /export type \{\n {2}Cell,\n {2}Children,\n {2}Client,\n {2}ClientElement,\n {2}Drawn,\n {2}Prop,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
+    );
+    // a schema with nothing under it hands on nothing
+    assert.doesNotMatch(declarations(core), /^export type \{[^}]*\} from/m);
   });
 
   it("declares what it wrote and nothing it inherited", () => {
