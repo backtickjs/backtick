@@ -1,4 +1,4 @@
-declare const brand: unique symbol;
+declare const ClientElementBrand: unique symbol;
 export interface ClientElement {
-  readonly [brand]: never;
+  readonly [ClientElementBrand]: never;
 }
