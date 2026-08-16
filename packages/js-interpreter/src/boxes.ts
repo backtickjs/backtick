@@ -25,69 +25,69 @@ export const boxes: Boxes = {
     toString(this: string) {
       return this;
     },
-    charAt(this: string, pos) {
+    charAt(this, pos) {
       return this.charAt(pos);
     },
-    charCodeAt(this: string, index) {
+    charCodeAt(this, index) {
       return this.charCodeAt(index);
     },
-    concat(this: string, ...strings) {
+    concat(this, ...strings) {
       return this.concat(...strings);
     },
-    indexOf(this: string, searchString, position) {
+    indexOf(this, searchString, position) {
       return this.indexOf(searchString, position);
     },
-    lastIndexOf(this: string, searchString, position) {
+    lastIndexOf(this, searchString, position) {
       return this.lastIndexOf(searchString, position);
     },
-    localeCompare(this: string, that) {
+    localeCompare(this, that) {
       return this.localeCompare(that);
     },
-    replace(this: string, searchValue, replaceValue) {
-      return this.replace(searchValue, replaceValue as string);
+    replace(this, searchValue, replaceValue) {
+      return this.replace(searchValue, replaceValue);
     },
-    slice(this: string, start, end) {
+    slice(this, start, end) {
       return this.slice(start, end);
     },
-    split(this: string, separator, limit) {
+    split(this, separator, limit) {
       return this.split(separator, limit);
     },
-    substring(this: string, start, end) {
+    substring(this, start, end) {
       return this.substring(start, end);
     },
-    toLowerCase(this: string) {
+    toLowerCase(this) {
       return this.toLowerCase();
     },
-    toLocaleLowerCase(this: string) {
+    toLocaleLowerCase(this) {
       return this.toLocaleLowerCase();
     },
-    toUpperCase(this: string) {
+    toUpperCase(this) {
       return this.toUpperCase();
     },
-    toLocaleUpperCase(this: string) {
+    toLocaleUpperCase(this) {
       return this.toLocaleUpperCase();
     },
-    trim(this: string) {
+    trim(this) {
       return this.trim();
     },
-    get length(): number {
-      return (this as unknown as string).length;
+    get length() {
+      return this.length;
     },
     valueOf(this: string) {
       return this;
     },
   },
   number: {
-    toString(this: number, radix) {
+    toString(this, radix) {
       return this.toString(radix);
     },
-    toFixed(this: number, fractionDigits) {
+    toFixed(this, fractionDigits) {
       return this.toFixed(fractionDigits);
     },
-    toExponential(this: number, fractionDigits) {
+    toExponential(this, fractionDigits) {
       return this.toExponential(fractionDigits);
     },
-    toPrecision(this: number, precision) {
+    toPrecision(this, precision) {
       return this.toPrecision(precision);
     },
     valueOf(this: number) {
@@ -100,40 +100,40 @@ export const boxes: Boxes = {
     },
   },
   array: {
-    get length(): number {
-      return (this as unknown as Value[]).length;
+    get length() {
+      return this.length;
     },
-    concat(this: Value[], ...items) {
+    concat(this, ...items) {
       return this.concat(...items);
     },
-    join(this: Value[], separator) {
+    join(this, separator) {
       return this.join(separator);
     },
-    slice(this: Value[], start, end) {
+    slice(this, start, end) {
       return this.slice(start, end);
     },
-    indexOf(this: Value[], searchElement, fromIndex) {
+    indexOf(this, searchElement, fromIndex) {
       return this.indexOf(searchElement, fromIndex);
     },
-    includes(this: Value[], searchElement, fromIndex) {
+    includes(this, searchElement, fromIndex) {
       return this.includes(searchElement, fromIndex);
     },
-    map(this: Value[], callbackfn) {
+    map(this, callbackfn) {
       return this.map((value, index) => callbackfn(value, index));
     },
-    filter(this: Value[], predicate) {
+    filter(this, predicate) {
       return this.filter((value, index) => predicate(value, index));
     },
-    with(this: Value[], index, value) {
+    with(this, index, value) {
       return this.with(index, value);
     },
-    toSorted(this: Value[], compareFn) {
+    toSorted(this, compareFn) {
       return this.toSorted(compareFn);
     },
-    toReversed(this: Value[]) {
+    toReversed(this) {
       return this.toReversed();
     },
-    toSpliced(this: Value[], start, deleteCount, ...items) {
+    toSpliced(this, start, deleteCount, ...items) {
       return this.toSpliced(start, deleteCount, ...items);
     },
   },
