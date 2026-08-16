@@ -1,8 +1,8 @@
 import type { ClientFunction } from "./ClientFunction.js";
-import type { Element, ReadonlyState } from "./schema.generated.js";
+import type { BacktickElement, ReadonlyState } from "./schema.generated.js";
 
 export type ClientValue =
-  | Element
+  | BacktickElement
   | ReadonlyState<ClientValue>
   | null
   | number

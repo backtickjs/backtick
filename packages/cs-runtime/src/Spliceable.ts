@@ -1,10 +1,14 @@
-import type { Client, ClientValue, Element } from "@backtickjs/core-schema";
+import type {
+  BacktickElement,
+  Client,
+  ClientValue,
+} from "@backtickjs/core-schema";
 import { isClientScript } from "./ClientScript.js";
 import { isJsxElement } from "./JsxElement.js";
 
 export type SpliceableValue =
   | Client<ClientValue>
-  | Element
+  | BacktickElement
   | null
   | number
   | boolean
@@ -17,7 +21,7 @@ export type Spliceable = SpliceableValue | Client<void>;
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U
-//   Element                   -> JSX.Element
+//   BacktickElement           -> JSX.Element
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
@@ -25,7 +29,7 @@ export type Spliced<T> = [SpliceableValue] extends [T]
   ? ClientValue
   : T extends Client<infer U>
     ? U
-    : T extends Element
+    : T extends BacktickElement
       ? T
       : T extends readonly (infer Item)[]
         ? Spliced<Item>[]

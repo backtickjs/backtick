@@ -1,4 +1,4 @@
-import type { Element } from "@backtickjs/core-schema";
+import type { BacktickElement } from "@backtickjs/core-schema";
 import type { For } from "./For.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
@@ -27,7 +27,7 @@ export type JsxElementType =
  * wanted, and this is what the name stands for here: the tag and its props
  * are the host's own, and nothing a script holds reaches them.
  */
-export interface JsxElement extends Element {
+export interface JsxElement extends BacktickElement {
   readonly "@backtickjs": "JsxElement";
   readonly type: JsxElementType;
   readonly props: { [key: string]: unknown };

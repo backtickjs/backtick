@@ -1,4 +1,4 @@
-import type { Children, Element as Drawn } from "@backtickjs/core-schema";
+import type { BacktickElement, Children } from "@backtickjs/core-schema";
 import type { JsxElementType } from "@backtickjs/cs-runtime";
 import { createFragment, createJsxElement } from "@backtickjs/cs-runtime";
 import type { IntrinsicElements as Web } from "../schema.generated.js";
@@ -20,13 +20,13 @@ import type { IntrinsicElements as Web } from "../schema.generated.js";
  * of this target.
  */
 export interface FragmentProps {
-  children?: Children<Drawn | string | number>;
+  children?: Children<BacktickElement | string | number>;
 }
 
 export const Fragment = createFragment<FragmentProps>();
 
 export declare namespace JSX {
-  export interface Element extends Drawn {}
+  export interface Element extends BacktickElement {}
   export interface IntrinsicElements extends Web {}
   export type ElementType = JsxElementType;
   export interface ElementChildrenAttribute {

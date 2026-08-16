@@ -10,14 +10,18 @@ import type { Schema } from "@backtickjs/schema";
  *
  * That the web's tags hold text and numbers as well as elements is vocabulary,
  * and says so here. A target whose elements hold only text would write
- * `Type.String()` alone. `Element` — what a client draws — is core's, so this
- * names it the way it names any other inherited type.
+ * `Type.String()` alone. `BacktickElement` — what a client draws — is core's,
+ * so this names it the way it names any other inherited type.
  *
  * One child, not several: the plural is `Children<T>`, which the emitter wraps
  * around this. Local rather than a named alias, because it is not a type this
  * target publishes — it is what two of its things happen to hold.
  */
-const child = Type.Union([Type.Ref("Element"), Type.String(), Type.Number()]);
+const child = Type.Union([
+  Type.Ref("BacktickElement"),
+  Type.String(),
+  Type.Number(),
+]);
 
 export const schema: Schema = {
   extends: [core],

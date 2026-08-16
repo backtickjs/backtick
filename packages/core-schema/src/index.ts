@@ -11,7 +11,7 @@ export type {
   ArrayLike,
   Boolean,
   Builtins,
-  Element,
+  BacktickElement,
   ForProps,
   Math,
   Number,

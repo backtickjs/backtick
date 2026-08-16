@@ -2,7 +2,7 @@ import type {
   Array,
   ArrayConstructor,
   Boolean,
-  Element,
+  BacktickElement,
   Math,
   Number,
   String,
@@ -44,7 +44,7 @@ export type IndexKey<R> = R extends Array<any> ? number : keyof R;
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
-//   Element                         -> {}: opaque
+//   BacktickElement                 -> {}: opaque
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
@@ -54,7 +54,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
       ? ArrayConstructor
       : T extends string | number | boolean | readonly unknown[]
         ? Autoboxed<T>
-        : T extends Element
+        : T extends BacktickElement
           ? {}
           : T extends ClientFunction
             ? T

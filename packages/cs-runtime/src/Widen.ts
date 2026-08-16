@@ -1,6 +1,6 @@
 import type { ClientFunction } from "@backtickjs/core-schema";
 import type { ClientValue } from "@backtickjs/core-schema";
-import type { Element } from "@backtickjs/core-schema";
+import type { BacktickElement } from "@backtickjs/core-schema";
 import type { State } from "@backtickjs/core-schema";
 
 // Widens a literal type: `0` becomes `number`. Inference through a
@@ -12,7 +12,7 @@ export type Widen<T> = T extends number
     ? string
     : T extends boolean
       ? boolean
-      : T extends Element | ClientFunction | State<ClientValue>
+      : T extends BacktickElement | ClientFunction | State<ClientValue>
         ? T
         : T extends (infer Element)[]
           ? Widen<Element>[]

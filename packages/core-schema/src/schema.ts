@@ -15,7 +15,7 @@ export const schema: Schema = {
   extends: [],
 
   types: {
-    Element: Type.Interface(
+    BacktickElement: Type.Interface(
       [],
       {},
       {
@@ -1091,7 +1091,7 @@ export const schema: Schema = {
               },
             ),
           ],
-          Type.Ref("Element"),
+          Type.Ref("BacktickElement"),
         ),
       }),
     ),
