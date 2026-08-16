@@ -16,7 +16,7 @@
       "path": "../schema/tsconfig.build.json"
     },
     {
-      "path": "../ui-schema/tsconfig.build.json"
+      "path": "../schemas/ui-schema/tsconfig.build.json"
     }
   ]
 }

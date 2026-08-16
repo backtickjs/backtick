@@ -14,7 +14,12 @@ function manifests(dir) {
   const base = join(root, dir);
   if (!existsSync(base)) return [];
   return readdirSync(base, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && entry.name !== "language-tools")
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        entry.name !== "language-tools" &&
+        entry.name !== "schemas",
+    )
     .map((entry) => join(base, entry.name, "package.json"))
     .filter((file) => existsSync(file))
     .map((file) => ({ file, json: JSON.parse(readFileSync(file, "utf8")) }));
@@ -23,6 +28,7 @@ function manifests(dir) {
 const released = [
   ...manifests("packages"),
   ...manifests("packages/language-tools"),
+  ...manifests("packages/schemas"),
 ];
 // examples and benchmarks model a real consumer install, so their ranges are
 // checked but their own versions are not part of the release set.

@@ -193,24 +193,11 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/core-schema:
-    dependencies:
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/cs-runtime:
     dependencies:
       '@backtickjs/core-schema':
         specifier: workspace:*
-        version: link:../core-schema
+        version: link:../schemas/core-schema
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -229,7 +216,7 @@ importers:
         version: link:../core
       '@backtickjs/core-schema':
         specifier: workspace:*
-        version: link:../core-schema
+        version: link:../schemas/core-schema
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
@@ -452,6 +439,35 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/schemas/core-schema:
+    dependencies:
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../../schema
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/schemas/ui-schema:
+    dependencies:
+      '@backtickjs/core-schema':
+        specifier: workspace:*
+        version: link:../core-schema
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../../schema
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/tspatch-plugin:
     dependencies:
       '@backtickjs/core':
@@ -467,22 +483,6 @@ importers:
       ts-patch:
         specifier: ^4.0.1
         version: 4.0.1
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/ui-schema:
-    dependencies:
-      '@backtickjs/core-schema':
-        specifier: workspace:*
-        version: link:../core-schema
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -515,7 +515,7 @@ importers:
         version: link:../schema
       '@backtickjs/ui-schema':
         specifier: workspace:*
-        version: link:../ui-schema
+        version: link:../schemas/ui-schema
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../web-client

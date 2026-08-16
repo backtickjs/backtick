@@ -1,8 +1,0 @@
-{
-  "extends": "../../configs/tsconfig.build.json",
-  "compilerOptions": {
-    "emitDeclarationOnly": false,
-    "sourceMap": true
-  },
-  "references": [{ "path": "../schema/tsconfig.build.json" }]
-}
