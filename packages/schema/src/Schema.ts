@@ -2,6 +2,10 @@ import type { TTag } from "./nodes/Tag.js";
 import type { TNode } from "./TNode.js";
 
 export interface Schema {
+  /** Where this schema is published. */
+  readonly package: string;
+
+  /** The schemas this one builds on, whose names it reaches without writing. */
   readonly extends: readonly Schema[];
 
   /** Reusable types that a `Type.Ref` can reach. */

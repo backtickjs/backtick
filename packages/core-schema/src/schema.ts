@@ -12,6 +12,8 @@ import { Type, type Schema } from "@backtickjs/schema";
  * because that is how a script reaches it and how the compiler recognises it.
  */
 export const schema: Schema = {
+  package: "@backtickjs/core-schema",
+
   extends: [],
 
   types: {

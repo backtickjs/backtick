@@ -52,5 +52,5 @@ export function flatten(schema: Schema): Schema {
   }
 
   take(schema);
-  return { extends: [], types, tags, builtins };
+  return { package: schema.package, extends: [], types, tags, builtins };
 }
