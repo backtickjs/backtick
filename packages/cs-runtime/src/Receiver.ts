@@ -11,7 +11,7 @@ import type { ClientFunction } from "@backtickjs/core-schema";
 import type { ClientValue } from "@backtickjs/core-schema";
 
 // A built-in receiver autoboxes to its client type
-type Autoboxed<T> = T extends string
+type Autoboxed<T extends ClientValue> = T extends string
   ? String
   : T extends number
     ? Number
@@ -52,7 +52,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
     ? Math
     : T extends typeof globalThis.Array
       ? ArrayConstructor<ClientValue>
-      : T extends string | number | boolean | readonly unknown[]
+      : T extends string | number | boolean | ClientValue[]
         ? Autoboxed<T>
         : T extends ClientElement
           ? {}
