@@ -1,4 +1,4 @@
-import type { TElement } from "./nodes/Element.js";
+import type { TTag } from "./nodes/Tag.js";
 import type { TNode } from "./TNode.js";
 
 export interface Schema {
@@ -7,8 +7,8 @@ export interface Schema {
   /** Reusable types that a `Type.Ref` can reach. */
   readonly types: Readonly<Record<string, TNode>>;
 
-  /** Every element the client can render. */
-  readonly elements: Readonly<Record<string, TElement>>;
+  /** Every tag an app may write, and what each accepts. */
+  readonly tags: Readonly<Record<string, TTag>>;
 
   /** Builtin functions a script can call. */
   readonly builtins: Readonly<Record<string, TNode>>;

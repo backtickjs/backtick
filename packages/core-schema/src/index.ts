@@ -1,4 +1,5 @@
 export { schema } from "./schema.js";
+export type { ClientElement } from "./ClientElement.js";
 export type { Children } from "./Children.js";
 export type { Client } from "./Client.js";
 export type { ClientFunction } from "./ClientFunction.js";
@@ -11,7 +12,6 @@ export type {
   ArrayLike,
   Boolean,
   Builtins,
-  BacktickElement,
   ForProps,
   Math,
   Number,

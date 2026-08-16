@@ -15,17 +15,6 @@ export const schema: Schema = {
   extends: [],
 
   types: {
-    BacktickElement: Type.Interface(
-      [],
-      {},
-      {
-        nominal: true,
-        description:
-          "What a tag evaluates to, and what a script contributes where one is drawn.\n\n" +
-          "Empty because there is nothing on it to reach: a client makes these and a script only ever hands one back. What a host holds behind the name is its own — cs-runtime carries a tag and its props there, and a native client carries whatever it draws with.",
-      },
-    ),
-
     Math: Type.Interface([], {
       E: Type.Number({
         description:
@@ -1091,7 +1080,7 @@ export const schema: Schema = {
               },
             ),
           ],
-          Type.Ref("BacktickElement"),
+          Type.Element(),
         ),
       }),
     ),
@@ -1101,7 +1090,7 @@ export const schema: Schema = {
   // declared by a base has to reach a target's `IntrinsicElements`, and the
   // generator writing one for this package is what makes that possible —
   // core drawing nothing today is the reason, not a decision.
-  elements: {},
+  tags: {},
 
   // What `declare var Math: Math` and `declare var Array: ArrayConstructor`
   // say in the lib: the name a script reaches, and the type it has. `Array`

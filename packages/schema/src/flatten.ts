@@ -15,7 +15,7 @@ import type { Schema } from "./Schema.js";
  */
 export function flatten(schema: Schema): Schema {
   const types: Record<string, Schema["types"][string]> = {};
-  const elements: Record<string, Schema["elements"][string]> = {};
+  const tags: Record<string, Schema["tags"][string]> = {};
   const builtins: Record<string, Schema["builtins"][string]> = {};
 
   // A schema reached twice is inherited twice, which is not a collision — a
@@ -32,7 +32,7 @@ export function flatten(schema: Schema): Schema {
       take(base);
     }
     add(types, one.types, "type");
-    add(elements, one.elements, "element");
+    add(tags, one.tags, "tag");
     add(builtins, one.builtins, "builtin");
   }
 
@@ -52,5 +52,5 @@ export function flatten(schema: Schema): Schema {
   }
 
   take(schema);
-  return { extends: [], types, elements, builtins };
+  return { extends: [], types, tags, builtins };
 }

@@ -7,6 +7,7 @@ import { IsGeneric } from "../nodes/Generic.js";
 import { IsIndex } from "../nodes/Index.js";
 import { IsInterface } from "../nodes/Interface.js";
 import type { TInterface } from "../nodes/Interface.js";
+import { IsElement } from "../nodes/Element.js";
 import { IsNull } from "../nodes/Null.js";
 import { prop } from "./declarations.js";
 import { IsNumber } from "../nodes/Number.js";
@@ -113,6 +114,11 @@ export function type(node: TNode): string {
   }
   if (IsNull(node)) {
     return "null";
+  }
+  // What a drawing is called on this host. The kind says a client's own drawing
+  // may stand here; the name is what TypeScript holds one as.
+  if (IsElement(node)) {
+    return "ClientElement";
   }
   if (IsUnknown(node)) {
     throw new Error("an unknown may only stand as a type parameter's bound");
@@ -293,24 +299,6 @@ export function tags(node: TNode): string[] {
 export const key = (name: string) =>
   /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
 
-/**
- * The name of the symbol standing for a nominal interface.
- *
- * Its own name in lower case, which is what the hand-written ones next to it
- * are called — a declared type is capitalised, so the two never collide.
- */
-const brandOf = (name: string) =>
-  `${name[0]?.toLowerCase() ?? ""}${name.slice(1)}`;
-
-/**
- * What makes a nominal interface unforgeable: a key nothing outside this file
- * can write. Declared and never defined, so it reaches no runtime — and its
- * holder is built by a cast, at the one place that may make one.
- */
-const brandLines = (name: string): string[] => [
-  `declare const ${brandOf(name)}: unique symbol;`,
-];
-
 /** A named interface, as a reader of the generated file sees it. */
 export function interfaceLines(
   name: string,
@@ -319,7 +307,6 @@ export function interfaceLines(
   props = false,
 ): string[] {
   const held = (of: TInterface): string[] => [
-    ...(of.nominal === true ? [`  readonly [${brandOf(name)}]: never;`] : []),
     // An interface a tag accepts holds props, and a prop is what a script may
     // stand in: the wrapping is JSX's rule and is applied where the members are
     // written, so a name is declared once whichever reads it.
@@ -329,8 +316,6 @@ export function interfaceLines(
         : member(called, what, bound),
     ),
   ];
-  const branded = (of: TInterface): string[] =>
-    of.nominal === true ? brandLines(name) : [];
   // The type's own parameters carry no bound: `State<T>` is one declaration
   // that both ends name, and which values may reach it is said where they come
   // in — on the member that takes one.
@@ -344,7 +329,6 @@ export function interfaceLines(
       : ` extends ${of.extends.map((one) => type(one)).join(", ")}`;
   if (IsGeneric(node) && IsInterface(node.expression)) {
     return [
-      ...branded(node.expression),
       ...documentation(node, ""),
       `export interface ${name}<${parameters(node.parameters)}>${heritage(
         node.expression,
@@ -357,7 +341,6 @@ export function interfaceLines(
     throw new Error(`${name} is not an interface`);
   }
   return [
-    ...branded(node),
     ...documentation(node, ""),
     `export interface ${name}${heritage(node)} {`,
     ...held(node),

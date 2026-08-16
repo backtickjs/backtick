@@ -1,5 +1,5 @@
 #!/usr/bin/env -S node --experimental-strip-types
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
@@ -27,6 +27,12 @@ const at = (path: string) => new URL(path, root);
 // One export rather than the module itself, so the annotation on it is what
 // checks the shape: the specifier here is built at run time, so nothing
 // resolves it and a missing field would otherwise reach the artifact.
+// Which package this is written into, so a file naming the framework's own
+// types reaches them beside it rather than through its own package.
+const manifest: { name?: string } = JSON.parse(
+  readFileSync(at("package.json"), "utf8"),
+);
+
 const module: { schema?: Schema } = await import(at(source).href);
 const { schema } = module;
 if (schema === undefined) {
@@ -45,8 +51,11 @@ async function write(path: string, body: string): Promise<void> {
 // declares none of them is a schema in name only, and writes no file.
 if (
   Object.keys(schema.types).length > 0 ||
-  Object.keys(schema.elements).length > 0 ||
+  Object.keys(schema.tags).length > 0 ||
   Object.keys(schema.builtins).length > 0
 ) {
-  await write("src/schema.generated.ts", generate.declarations(schema));
+  await write(
+    "src/schema.generated.ts",
+    generate.declarations(schema, manifest.name),
+  );
 }

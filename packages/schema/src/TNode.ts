@@ -1,6 +1,7 @@
 import type { TApply } from "./nodes/Apply.js";
 import type { TArray } from "./nodes/Array.js";
 import type { TBoolean } from "./nodes/Boolean.js";
+import type { TElement } from "./nodes/Element.js";
 import type { TFunction } from "./nodes/Function.js";
 import type { TFunctionParameter } from "./nodes/FunctionParameter.js";
 import type { TGeneric } from "./nodes/Generic.js";
@@ -31,6 +32,7 @@ export type TNode =
   | TString
   | TNumber
   | TBoolean
+  | TElement
   | TUnion
   | TIndex
   | TInterface

@@ -1,4 +1,4 @@
-import type { BacktickElement } from "@backtickjs/core-schema";
+import type { ClientElement } from "@backtickjs/core-schema";
 
 /**
  * A component built from other components rather than naming one. It runs on
@@ -15,7 +15,7 @@ import type { BacktickElement } from "@backtickjs/core-schema";
  */
 export type ServerComponent<P extends object = object> = ((
   props: P,
-) => Promise<BacktickElement | null>) & {
+) => Promise<ClientElement | null>) & {
   // What a component is *not*. A component is an ordinary function and declares
   // no brand, so this is optional and nothing has to be wrapped to satisfy it.
   // What it rules out is a value branded as something else: `For` and

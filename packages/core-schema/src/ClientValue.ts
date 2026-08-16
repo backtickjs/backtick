@@ -1,13 +1,14 @@
 import type { ClientFunction } from "./ClientFunction.js";
-import type { BacktickElement, ReadonlyState } from "./schema.generated.js";
+import type { ClientElement } from "./ClientElement.js";
+import type { ReadonlyState } from "./schema.generated.js";
 
 export type ClientValue =
-  | BacktickElement
   | ReadonlyState<ClientValue>
   | null
   | number
   | boolean
   | string
+  | { [key: string]: ClientValue }
+  | ClientElement
   | ClientFunction
-  | ClientValue[]
-  | { [key: string]: ClientValue };
+  | ClientValue[];
