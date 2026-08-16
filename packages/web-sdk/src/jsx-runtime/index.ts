@@ -1,7 +1,7 @@
 import type { ClientElement, Children } from "@backtickjs/ui-schema";
 import type { JsxElementType } from "@backtickjs/cs-runtime";
 import { createFragment, createJsxElement } from "@backtickjs/cs-runtime";
-import type { IntrinsicElements as Web } from "../schema.generated.js";
+import type { IntrinsicElements as Web } from "@backtickjs/web-schema";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //

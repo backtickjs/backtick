@@ -17,6 +17,9 @@
     },
     {
       "path": "../schemas/ui-schema/tsconfig.build.json"
+    },
+    {
+      "path": "../schemas/web-schema/tsconfig.build.json"
     }
   ]
 }
