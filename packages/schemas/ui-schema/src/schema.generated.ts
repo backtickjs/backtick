@@ -10,6 +10,7 @@ export type {
   Children,
   Client,
   ClientElement,
+  ClientHandle,
   Math,
   Number,
   Prop,

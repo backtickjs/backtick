@@ -17,6 +17,16 @@ export const schema: Schema = {
   extends: [],
 
   types: {
+    ClientHandle: Type.Interface(
+      [],
+      {},
+      {
+        description:
+          "What a script holds and cannot write.\n\n" +
+          "A drawing and a cell are both of these: a script reaches one only where a client hands it over, or by writing JSX, which the compiler lowers. What they share is the consequence — an app can never write the value itself.",
+      },
+    ),
+
     Math: Type.Interface([], {
       E: Type.Number({
         description:
@@ -444,7 +454,7 @@ export const schema: Schema = {
     }),
     ReadonlyState: Type.Generic(
       [Type.GenericParameter("T")],
-      Type.Interface([], {
+      Type.Interface([Type.Ref("ClientHandle")], {
         read: Type.Function([], Type.Ref("T")),
       }),
       {
@@ -1011,37 +1021,37 @@ export const schema: Schema = {
             Type.GenericParameter("U", Type.Ref("TValue")),
           ],
           Type.Function(
-          [
-            Type.FunctionParameter(
-              "arrayLike",
-              Type.Apply(Type.Ref("ArrayLike"), [Type.Ref("T")]),
-              {
-                description: "An array-like object to convert to an array.",
-              },
-            ),
-            Type.FunctionParameter(
-              "mapfn",
-              Type.Function(
-                [
-                  Type.FunctionParameter("v", Type.Ref("T")),
-                  Type.FunctionParameter("k", Type.Number()),
-                ],
-                Type.Ref("U"),
+            [
+              Type.FunctionParameter(
+                "arrayLike",
+                Type.Apply(Type.Ref("ArrayLike"), [Type.Ref("T")]),
+                {
+                  description: "An array-like object to convert to an array.",
+                },
               ),
-              {
-                description:
-                  "A mapping function to call on every element of the array.",
-              },
-            ),
-          ],
-          Type.Array(Type.Ref("U")),
+              Type.FunctionParameter(
+                "mapfn",
+                Type.Function(
+                  [
+                    Type.FunctionParameter("v", Type.Ref("T")),
+                    Type.FunctionParameter("k", Type.Number()),
+                  ],
+                  Type.Ref("U"),
+                ),
+                {
+                  description:
+                    "A mapping function to call on every element of the array.",
+                },
+              ),
+            ],
+            Type.Array(Type.Ref("U")),
+          ),
+          {
+            description:
+              "Creates an array from an array-like object.\n\n" +
+              "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
+          },
         ),
-        {
-          description:
-            "Creates an array from an array-like object.\n\n" +
-            "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
-        },
-      ),
         of: Type.Generic(
           [Type.GenericParameter("T", Type.Ref("TValue"))],
           Type.Function(

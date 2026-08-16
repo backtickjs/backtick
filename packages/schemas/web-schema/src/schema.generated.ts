@@ -15,6 +15,7 @@ export type {
   Children,
   Client,
   ClientElement,
+  ClientHandle,
   ForProps,
   Math,
   Number,
