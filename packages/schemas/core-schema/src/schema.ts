@@ -1002,10 +1002,15 @@ export const schema: Schema = {
       }),
     ),
 
-    ArrayConstructor: Type.Interface([], {
-      from: Type.Generic(
-        [Type.GenericParameter("T"), Type.GenericParameter("U")],
-        Type.Function(
+    ArrayConstructor: Type.Generic(
+      [Type.GenericParameter("TValue")],
+      Type.Interface([], {
+        from: Type.Generic(
+          [
+            Type.GenericParameter("T", Type.Ref("TValue")),
+            Type.GenericParameter("U", Type.Ref("TValue")),
+          ],
+          Type.Function(
           [
             Type.FunctionParameter(
               "arrayLike",
@@ -1037,24 +1042,25 @@ export const schema: Schema = {
             "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
         },
       ),
-      of: Type.Generic(
-        [Type.GenericParameter("T")],
-        Type.Function(
-          [
-            Type.Rest(
-              Type.FunctionParameter("items", Type.Ref("T"), {
-                description:
-                  "A set of elements to include in the new array object.",
-              }),
-            ),
-          ],
-          Type.Array(Type.Ref("T")),
+        of: Type.Generic(
+          [Type.GenericParameter("T", Type.Ref("TValue"))],
+          Type.Function(
+            [
+              Type.Rest(
+                Type.FunctionParameter("items", Type.Ref("T"), {
+                  description:
+                    "A set of elements to include in the new array object.",
+                }),
+              ),
+            ],
+            Type.Array(Type.Ref("T")),
+          ),
+          {
+            description: "Returns a new array from a set of elements.",
+          },
         ),
-        {
-          description: "Returns a new array from a set of elements.",
-        },
-      ),
-    }),
+      }),
+    ),
   },
 
   // Core draws nothing: what a list or a tag accepts is a schema built on this
@@ -1062,27 +1068,14 @@ export const schema: Schema = {
   // not.
   tags: {},
 
-  // What `declare var Math: Math` and `declare var Array: ArrayConstructor`
-  // say in the lib: the name a script reaches, and the type it has. `Array`
-  // needs a separate name for its type because `Array` is a type already —
-  // the generic array type, which is the instance side.
-  //
-  // The lib is what declares these names; what is written here is which of
-  // their members a script may reach.
   builtins: {
-    // What `declare var Math: Math` and `declare var Array: ArrayConstructor`
-    // say in the lib: the name a script reaches, and the type it has. `Array`
-    // needs a separate name for its type because `Array` is a type already —
-    // the generic array type, which is the instance side.
     Math: Type.Ref("Math"),
-    Array: Type.Ref("ArrayConstructor"),
-
-    /** Storage a script may read and write, holding what it was given. */
+    Array: Type.Generic(
+      [Type.GenericParameter("TValue")],
+      Type.Apply(Type.Ref("ArrayConstructor"), [Type.Ref("TValue")]),
+    ),
     state: Type.Generic(
-      // Left open: what a client may hold is the client's own domain, and a
-      // schema that named it would be describing the running end rather than
-      // what a script reaches.
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("TValue"))],
       Type.Function(
         [Type.FunctionParameter("initial", Type.Ref("T"))],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),

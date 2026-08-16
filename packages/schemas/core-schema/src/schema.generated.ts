@@ -581,7 +581,7 @@ export interface ArrayLike<T> {
   readonly [n: number]: T;
 }
 
-export interface ArrayConstructor {
+export interface ArrayConstructor<TValue> {
   /**
    * Creates an array from an array-like object.
    *
@@ -592,18 +592,21 @@ export interface ArrayConstructor {
    * @param arrayLike An array-like object to convert to an array.
    * @param mapfn A mapping function to call on every element of the array.
    */
-  from<T, U>(arrayLike: ArrayLike<T>, mapfn: (v: T, k: number) => U): U[];
+  from<T extends TValue, U extends TValue>(
+    arrayLike: ArrayLike<T>,
+    mapfn: (v: T, k: number) => U,
+  ): U[];
   /**
    * Returns a new array from a set of elements.
    *
    * @param items A set of elements to include in the new array object.
    */
-  of<T>(...items: T[]): T[];
+  of<T extends TValue>(...items: T[]): T[];
 }
 
 /** What a client must answer with, for every name in scope. */
-export interface Builtins {
+export interface Builtins<TValue> {
   Math: Math;
-  Array: ArrayConstructor;
-  state<T>(initial: T): State<T>;
+  Array: ArrayConstructor<TValue>;
+  state<T extends TValue>(initial: T): State<T>;
 }

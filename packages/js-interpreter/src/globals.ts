@@ -11,7 +11,7 @@ import { createSignal } from "solid-js";
 //
 // What an app provides is not here: those are its own to implement and to hand
 // over, and they join this at the lookup.
-export const globals: Builtins = {
+export const globals: Builtins<Value> = {
   Array: {
     from(source, map) {
       return Array.from(source, map);

@@ -51,7 +51,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
   T extends typeof globalThis.Math
     ? Math
     : T extends typeof globalThis.Array
-      ? ArrayConstructor
+      ? ArrayConstructor<ClientValue>
       : T extends string | number | boolean | readonly unknown[]
         ? Autoboxed<T>
         : T extends ClientElement

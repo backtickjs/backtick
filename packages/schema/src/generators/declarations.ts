@@ -11,7 +11,10 @@ import {
   key,
   member,
   type,
+  typeParameter,
 } from "./typescript.js";
+import type { TGeneric } from "../nodes/Generic.js";
+import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import type { Schema } from "../Schema.js";
 import type { TNode } from "../TNode.js";
 
@@ -92,8 +95,27 @@ export function declarations(schema: Schema): string {
     }
     Object.values(node).forEach((one) => declares(one, held));
   };
+  // A builtin holding a name rather than a signature cannot carry a type
+  // parameter of its own — there is no generic property — so what it declares
+  // is carried by the interface that holds it. That is what a client says by
+  // naming `Builtins`: which values it answers with.
+  const owed = Object.entries(schema.builtins);
+  const holds = (node: TNode): node is TGeneric =>
+    IsGeneric(node) && !IsFunction(node.expression);
+  const carried = new Map<string, TGenericParameter>();
+  for (const [, node] of owed) {
+    if (holds(node)) {
+      node.parameters.forEach((one) => carried.set(one.name, one));
+    }
+  }
+
   Object.values(schema.types).forEach((node) => declares(node, new Set()));
-  Object.values(schema.builtins).forEach((node) => declares(node, new Set()));
+  // Every builtin is written inside the one interface that holds them all, so
+  // what that interface carries is a name each of them may reach — `state`
+  // bounds what it stores by the domain `Array` brought in.
+  Object.values(schema.builtins).forEach((node) =>
+    declares(node, new Set(carried.keys())),
+  );
   Object.values(schema.tags).forEach((node) => declares(node, new Set()));
 
   const lines: string[] = [];
@@ -129,19 +151,24 @@ export function declarations(schema: Schema): string {
   // same way whether the host's lib declares the name or the framework does.
   // This schema's own names, not the flattened ones — a base's are answered by
   // the client that declared them, and a target's client composes.
-  const owed = Object.entries(schema.builtins);
   if (owed.length > 0) {
     lines.push(
       "/** What a client must answer with, for every name in scope. */",
     );
-    lines.push(`export interface Builtins {`);
+    const parameters =
+      carried.size === 0
+        ? ""
+        : `<${[...carried.values()].map((one) => typeParameter(one)).join(", ")}>`;
+    lines.push(`export interface Builtins${parameters} {`);
     for (const [name, node] of owed) {
       // A name standing for a type it declares is a member holding one;
       // anything else is written as the signature it declares.
       lines.push(
         ...(IsRef(node)
           ? [`  ${key(name)}: ${node.$ref};`]
-          : member(name, node)),
+          : holds(node)
+            ? [`  ${key(name)}: ${type(node.expression)};`]
+            : member(name, node)),
       );
     }
     lines.push(`}`);
