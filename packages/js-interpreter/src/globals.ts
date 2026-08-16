@@ -1,4 +1,4 @@
-import type { Builtins } from "@backtickjs/cs-runtime";
+import type { Builtins, State } from "@backtickjs/cs-runtime";
 import type { Value } from "./Value.js";
 import { createSignal } from "solid-js";
 
@@ -158,7 +158,10 @@ export const globals: Builtins<Value> = {
       store((previous) => updater(previous));
       return null;
     };
-    return { read, write, update };
+    // The brand cannot be built by writing the members — that is what stops
+    // a script passing a record off as storage — so the client asserts it
+    // here, at the one place entitled to.
+    return { read, write, update } as unknown as State<typeof initial>;
   },
 };
 

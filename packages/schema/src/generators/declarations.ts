@@ -4,6 +4,8 @@ import { IsGeneric } from "../nodes/Generic.js";
 import { IsInterface } from "../nodes/Interface.js";
 import { IsObject } from "../nodes/Object.js";
 import { IsRef } from "../nodes/Ref.js";
+import type { TRef } from "../nodes/Ref.js";
+import type { TInterface } from "../nodes/Interface.js";
 import { flatten } from "../flatten.js";
 import {
   documentation,
@@ -66,6 +68,40 @@ export function declarations(schema: Schema): string {
   };
   const props = propsOf();
 
+  /**
+   * The types that carry a brand: `ClientHandle` and everything that reaches
+   * it through what it extends, however deep.
+   *
+   * A brand is how TypeScript says a value came from the client, since who
+   * made one is not in its shape. Each carries its own rather than only its
+   * base's — `State` and `ReadonlyState` are two types, and an interface
+   * holding just the brand it inherited would be every other one that did.
+   */
+  const brandedOf = (): ReadonlySet<string> => {
+    const face = (node: TNode): TInterface | undefined => {
+      const inner = IsGeneric(node) ? node.expression : node;
+      return IsInterface(inner) ? inner : undefined;
+    };
+    // What a heritage entry names, through the arguments it was applied to.
+    const bases = (node: TNode): string[] =>
+      (face(node)?.extends ?? [])
+        .map((one) => (IsApply(one) ? one.target : one))
+        .filter((one): one is TRef => IsRef(one))
+        .map((one) => one.$ref);
+    const names = new Set<string>([HANDLE]);
+    for (let grew = true; grew; ) {
+      grew = false;
+      for (const [name, node] of Object.entries(all.types)) {
+        if (!names.has(name) && bases(node).some((one) => names.has(one))) {
+          names.add(name);
+          grew = true;
+        }
+      }
+    }
+    return names;
+  };
+  const branded = brandedOf();
+
   // Every name a declaration reaches has to be one the schema declares. A
   // generated file cannot import what a document does not name, and a schema
   // that leans on a type from the package it is generated into is not a
@@ -126,7 +162,7 @@ export function declarations(schema: Schema): string {
   for (const [name, node] of Object.entries(schema.types)) {
     lines.push(
       ...(IsInterface(node) || IsGeneric(node)
-        ? interfaceLines(name, node, undefined, props.has(name))
+        ? interfaceLines(name, node, branded.has(name), props.has(name))
         : [...documentation(node, ""), `export type ${name} = ${type(node)};`]),
     );
     lines.push("");
@@ -269,6 +305,15 @@ export function declarations(schema: Schema): string {
  * them, so each schema hands them on the way it hands on a base's names.
  */
 const FRAMEWORK = ["ClientElement", "Children", "Client", "Prop"];
+
+/**
+ * The name a schema extends to say a client made the value.
+ *
+ * Known here rather than declared as a flag: what a schema writes is an
+ * ordinary heritage relation, and turning that into a brand is this
+ * generator's business because another language says it another way.
+ */
+const HANDLE = "ClientHandle";
 
 /**
  * What a tag accepts: the name it is given, or the properties written inline.

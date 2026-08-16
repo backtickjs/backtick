@@ -295,6 +295,9 @@ export function tags(node: TNode): string[] {
   return said;
 }
 
+/** What an interface's own brand is called, beside the name it brands. */
+const mark = (name: string) => `${name}Brand`;
+
 /** A name TypeScript can read bare, or one it needs quoted. */
 export const key = (name: string) =>
   /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
@@ -303,19 +306,28 @@ export const key = (name: string) =>
 export function interfaceLines(
   name: string,
   node: TNode,
-  bound?: string,
+  branded = false,
   props = false,
 ): string[] {
   const held = (of: TInterface): string[] => [
+    // Its own brand and not the one it extends: two interfaces carrying only a
+    // base's are the base and each other, so what a client answered with would
+    // be accepted wherever any of them is wanted.
+    ...(branded ? [`  readonly [${mark(name)}]: never;`] : []),
     // An interface a tag accepts holds props, and a prop is what a script may
     // stand in: the wrapping is JSX's rule and is applied where the members are
     // written, so a name is declared once whichever reads it.
     ...Object.entries(of.properties).flatMap(([called, what]) =>
       props
         ? [prop(called, what, (of.required ?? []).includes(called))]
-        : member(called, what, bound),
+        : member(called, what),
     ),
   ];
+  // Beside what it brands, and never exported: a key nothing can name is a key
+  // nothing can write, which is what holds the claim up outside this file.
+  const declared = branded
+    ? [`declare const ${mark(name)}: unique symbol;`]
+    : [];
   // The type's own parameters carry no bound: `State<T>` is one declaration
   // that both ends name, and which values may reach it is said where they come
   // in — on the member that takes one.
@@ -329,6 +341,7 @@ export function interfaceLines(
       : ` extends ${of.extends.map((one) => type(one)).join(", ")}`;
   if (IsGeneric(node) && IsInterface(node.expression)) {
     return [
+      ...declared,
       ...documentation(node, ""),
       `export interface ${name}<${parameters(node.parameters)}>${heritage(
         node.expression,
@@ -341,6 +354,7 @@ export function interfaceLines(
     throw new Error(`${name} is not an interface`);
   }
   return [
+    ...declared,
     ...documentation(node, ""),
     `export interface ${name}${heritage(node)} {`,
     ...held(node),
