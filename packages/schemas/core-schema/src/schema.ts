@@ -19,13 +19,36 @@ export const schema: Schema = {
   publishes: ["Client"],
 
   types: {
+    ClientFunction: Type.Function(
+      [Type.Rest(Type.FunctionParameter("args", Type.Never()))],
+      Type.Ref("ClientUnknown"),
+    ),
+
+    ClientValue: Type.Union(
+      [
+        Type.Null(),
+        Type.Number(),
+        Type.Boolean(),
+        Type.String(),
+        Type.Record(Type.Ref("ClientValue"), { readOnly: true }),
+        Type.Array(Type.Ref("ClientValue")),
+        Type.Ref("ClientFunction"),
+        Type.Ref("ClientHandle"),
+      ],
+      {
+        description:
+          "What a value is on the client: data, a function, or a handle to an object owned and managed by the client.",
+      },
+    ),
+
+    ClientUnknown: Type.Union([Type.Ref("ClientValue"), Type.Void()]),
+
     ClientHandle: Type.Interface(
       [],
       {},
       {
         description:
-          "What a script holds and cannot write.\n\n" +
-          "A drawing and a cell are both of these: a script reaches one only where a client hands it over, or by writing JSX, which the compiler lowers. What they share is the consequence — an app can never write the value itself.",
+          "Represents a handle to an object owned and managed by the client. The handle can be referenced and passed in client script.",
       },
     ),
 

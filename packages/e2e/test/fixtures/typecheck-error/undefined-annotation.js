@@ -1,10 +1,10 @@
 import { cs } from "@backtickjs/core";
 const stored = cs.create(
-  [8, 16, 11, 3],
+  [14, 16, 17, 3],
   {
     version: "0.0.0",
     filePath: "undefined-annotation.ts",
-    fileHash: "18uwl3j62c30b",
+    fileHash: "vyh7jw6xunik",
     kind: "value",
     splices: {},
     captures: [],
@@ -12,44 +12,44 @@ const stored = cs.create(
   },
   () => ({
     kind: 220,
-    loc: [8, 19, 11, 2],
+    loc: [14, 19, 17, 2],
     parameters: [
       {
         kind: 170,
-        loc: [8, 20, 8, 28],
+        loc: [14, 20, 14, 28],
         name: {
           kind: 80,
-          loc: [8, 20, 8, 21],
+          loc: [14, 20, 14, 21],
           text: "x",
-          bindingKey: "x$18uwl3j62c30b$0",
+          bindingKey: "x$vyh7jw6xunik$0",
         },
       },
     ],
     body: {
       kind: 242,
-      loc: [8, 33, 11, 2],
+      loc: [14, 33, 17, 2],
       statements: [
         {
           kind: 244,
-          loc: [9, 3, 9, 15],
+          loc: [15, 3, 15, 15],
           declarationList: {
             kind: 262,
-            loc: [9, 3, 9, 14],
+            loc: [15, 3, 15, 14],
             declarations: [
               {
                 kind: 261,
-                loc: [9, 9, 9, 14],
+                loc: [15, 9, 15, 14],
                 name: {
                   kind: 80,
-                  loc: [9, 9, 9, 10],
+                  loc: [15, 9, 15, 10],
                   text: "y",
-                  bindingKey: "y$18uwl3j62c30b$1",
+                  bindingKey: "y$vyh7jw6xunik$1",
                 },
                 initializer: {
                   kind: 80,
-                  loc: [9, 13, 9, 14],
+                  loc: [15, 13, 15, 14],
                   text: "x",
-                  bindingKey: "x$18uwl3j62c30b$0",
+                  bindingKey: "x$vyh7jw6xunik$0",
                 },
               },
             ],
@@ -58,10 +58,10 @@ const stored = cs.create(
         },
         {
           kind: 254,
-          loc: [10, 3, 10, 12],
+          loc: [16, 3, 16, 12],
           expression: {
             kind: 9,
-            loc: [10, 10, 10, 11],
+            loc: [16, 10, 16, 11],
             value: 1,
           },
         },
@@ -70,11 +70,11 @@ const stored = cs.create(
   }),
 );
 const written = cs.create(
-  [13, 17, 17, 3],
+  [19, 17, 23, 3],
   {
     version: "0.0.0",
     filePath: "undefined-annotation.ts",
-    fileHash: "18uwl3j62c30b",
+    fileHash: "vyh7jw6xunik",
     kind: "value",
     splices: {},
     captures: [],
@@ -82,42 +82,42 @@ const written = cs.create(
   },
   () => ({
     kind: 220,
-    loc: [13, 20, 17, 2],
+    loc: [19, 20, 23, 2],
     parameters: [
       {
         kind: 170,
-        loc: [13, 21, 13, 29],
+        loc: [19, 21, 19, 29],
         name: {
           kind: 80,
-          loc: [13, 21, 13, 22],
+          loc: [19, 21, 19, 22],
           text: "x",
-          bindingKey: "x$18uwl3j62c30b$2",
+          bindingKey: "x$vyh7jw6xunik$2",
         },
       },
     ],
     body: {
       kind: 242,
-      loc: [13, 34, 17, 2],
+      loc: [19, 34, 23, 2],
       statements: [
         {
           kind: 244,
-          loc: [14, 3, 14, 14],
+          loc: [20, 3, 20, 14],
           declarationList: {
             kind: 262,
-            loc: [14, 3, 14, 13],
+            loc: [20, 3, 20, 13],
             declarations: [
               {
                 kind: 261,
-                loc: [14, 7, 14, 13],
+                loc: [20, 7, 20, 13],
                 name: {
                   kind: 80,
-                  loc: [14, 7, 14, 8],
+                  loc: [20, 7, 20, 8],
                   text: "y",
-                  bindingKey: "y$18uwl3j62c30b$3",
+                  bindingKey: "y$vyh7jw6xunik$3",
                 },
                 initializer: {
                   kind: 11,
-                  loc: [14, 11, 14, 13],
+                  loc: [20, 11, 20, 13],
                   text: "",
                 },
               },
@@ -127,27 +127,27 @@ const written = cs.create(
         },
         {
           kind: 227,
-          loc: [15, 3, 15, 8],
+          loc: [21, 3, 21, 8],
           left: {
             kind: 80,
-            loc: [15, 3, 15, 4],
+            loc: [21, 3, 21, 4],
             text: "y",
-            bindingKey: "y$18uwl3j62c30b$3",
+            bindingKey: "y$vyh7jw6xunik$3",
           },
           operatorToken: "=",
           right: {
             kind: 80,
-            loc: [15, 7, 15, 8],
+            loc: [21, 7, 21, 8],
             text: "x",
-            bindingKey: "x$18uwl3j62c30b$2",
+            bindingKey: "x$vyh7jw6xunik$2",
           },
         },
         {
           kind: 254,
-          loc: [16, 3, 16, 12],
+          loc: [22, 3, 22, 12],
           expression: {
             kind: 9,
-            loc: [16, 10, 16, 11],
+            loc: [22, 10, 22, 11],
             value: 1,
           },
         },
