@@ -1,5 +1,9 @@
-import type { Bundle, FunctionLabel } from "@backtickjs/core";
-import type { Value } from "./Value.js";
+import type {
+  Bundle,
+  ClientUnknown,
+  ClientValue,
+  FunctionLabel,
+} from "@backtickjs/core";
 import type { Renderer } from "solid-js/universal";
 
 // A bundle paired with a host: what is needed to draw one, which neither of
@@ -19,5 +23,11 @@ export interface Instance {
   //
   // Keyed here rather than on the bundle because the closure holds this host —
   // the same function under a second host is a second closure.
-  readonly functions: Map<FunctionLabel, (...args: Value[]) => Value>;
+  //
+  // `ClientUnknown` rather than `ClientValue`: an entry may be an action, which
+  // answers with nothing.
+  readonly functions: Map<
+    FunctionLabel,
+    (...args: ClientValue[]) => ClientUnknown
+  >;
 }

@@ -1,5 +1,5 @@
+import type { ClientValue } from "@backtickjs/core";
 import type { Builtins, State } from "@backtickjs/cs-runtime";
-import type { Value } from "./Value.js";
 import { createSignal } from "solid-js";
 
 // What this client answers for every name the framework provides — the host
@@ -150,7 +150,7 @@ export const globals: Builtins = {
 
   state(initial) {
     const [read, store] = createSignal(initial);
-    const write = (value: typeof initial): Value => {
+    const write = (value: typeof initial): ClientValue => {
       store(() => value);
       return null;
     };

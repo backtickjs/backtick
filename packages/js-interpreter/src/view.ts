@@ -2,6 +2,7 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
+  ClientValue,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer, type Renderer } from "solid-js/universal";
@@ -9,7 +10,6 @@ import type { RendererOptions } from "./RendererOptions.js";
 import type { Instance } from "./Instance.js";
 import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Scope } from "./interpret.js";
-import type { Value } from "./Value.js";
 
 // The view half: turning a drawing function into the host's own nodes, once,
 // and
@@ -127,7 +127,7 @@ function requireReactivity(): void {
 export function compileElement(
   instance: Instance,
   element: BundleElement,
-): (scope: Scope | null) => Value {
+): (scope: Scope | null) => ClientValue {
   const id = element[1];
   // The one id whose meaning is the language's rather than this client's: it
   // draws no node, so it never reaches the renderer. Answered here, where an id
@@ -173,7 +173,7 @@ export function compileElement(
     if (draw !== null) {
       renderer.insert(node, draw(scope));
     }
-    return node as Value;
+    return node as ClientValue;
   };
 }
 
@@ -214,9 +214,7 @@ function compileChildren(
 ): (scope: Scope | null) => unknown {
   // A list of children travels as data, which is a node like any other.
   if (Array.isArray(expr) && expr[0] === 4 /* DataArray */) {
-    const members = (expr[1] as BundleArrayElement[]).map((member) =>
-      compileChildren(instance, member),
-    );
+    const members = expr[1].map((member) => compileChildren(instance, member));
     return (scope) => members.map((member) => member(scope));
   }
   const read = compile(instance, expr);
@@ -242,21 +240,19 @@ function compileChildren(
 function compileFor(
   instance: Instance,
   element: BundleElement,
-): (scope: Scope | null) => Value {
+): (scope: Scope | null) => ClientValue {
   const each = compile(instance, element[2]["each"] ?? null);
   const children = compile(instance, element[3]);
   return (scope) => {
     const members = createMemo(() => {
       const value = each(scope);
-      return Array.isArray(value) ? (value as Value[]) : [];
+      return Array.isArray(value) ? value : [];
     });
     // Made once: the member arrives as an argument.
-    const one = children(scope) as (...args: Value[]) => Value;
+    const one = children(scope) as (...args: ClientValue[]) => ClientValue;
     // The index is `mapArray`'s own signal, handed over as storage rather than
     // as the number it holds: whoever reads it is reading where the member sits
     // now.
-    return mapArray(members, (member, at) =>
-      one(member, { read: at } as Value),
-    ) as unknown as Value;
+    return mapArray(members, (member, at) => one(member, { read: at }));
   };
 }

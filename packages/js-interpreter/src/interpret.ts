@@ -4,17 +4,18 @@
 // what it needs from the format is the format, not a package.
 import type {
   BundleArrayElement,
+  BundleArrowFunctionNode,
   BundleSpreadElementNode,
   BundleBinaryOperator,
-  BundleExpressionNode,
   BundleStatementNode,
+  ClientUnknown,
+  ClientValue,
   FunctionLabel,
 } from "@backtickjs/core";
 import { boxes } from "./boxes.js";
 import { globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileElement } from "./view.js";
-import type { Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
@@ -40,7 +41,7 @@ export interface Scope {
   parent: Scope | null;
   // Own properties only, which is why every read goes through `hasOwn`: a
   // binding named `toString` must not find `Object.prototype`'s.
-  bindings: { [name: string]: Value };
+  bindings: { [name: string]: ClientValue };
 }
 
 // A frame lives as long as what closes over it — every handler a row writes
@@ -51,12 +52,27 @@ export function scopeOf(parent: Scope | null): Scope {
   return { parent, bindings: {} };
 }
 
-function bind(scope: Scope, name: string, value: Value): void {
+function bind(scope: Scope, name: string, value: ClientValue): void {
   scope.bindings[name] = value;
 }
 
-function read(scope: Scope, name: string): Value {
+function read(scope: Scope, name: string): ClientValue {
   return scope.bindings[name] ?? null;
+}
+
+// The frame a call binds its arguments in. A missing argument binds as null —
+// the language's absent value; `undefined` never arises (an omitted optional
+// parameter reads as null).
+function applied(
+  scope: Scope | null,
+  parameters: readonly string[],
+  args: readonly ClientValue[],
+): Scope {
+  const frame = scopeOf(scope);
+  for (let at = 0; at < parameters.length; at++) {
+    bind(frame, parameters[at], at < args.length ? args[at] : null);
+  }
+  return frame;
 }
 
 function lookup(scope: Scope | null, name: string): Scope | null {
@@ -73,15 +89,20 @@ function lookup(scope: Scope | null, name: string): Scope | null {
 // reference is handed the same closure — a fresh one would be a fresh identity,
 // and a prop holding it would be set again every time its position is read.
 //
-// ((scope: Scope | null) => Value) where it is first referred to rather than where it is first applied,
+// Compiled where it is first referred to rather than where it is first applied,
 // which nothing needs yet: what will is the question a reference asks about a
 // function, answered by compiling its body. One still being compiled stands in
 // the table as itself, so a body reaching back finds it rather than compiling
 // it again.
+//
+// What the table holds is the closure the entry evaluated to and not the node
+// that made it: an entry is an arrow, so what it evaluates to is a function,
+// and it closes over nothing — so it is discharged here, once, against no
+// scope.
 function compileFunction(
   instance: Instance,
   label: FunctionLabel,
-): (...args: Value[]) => Value {
+): (...args: ClientValue[]) => ClientUnknown {
   const existing = instance.functions.get(label);
   if (existing !== undefined) {
     return existing;
@@ -94,11 +115,11 @@ function compileFunction(
     throw new Error(`\`${label}\` was applied while it was compiling`);
   });
   // An arrow and nothing else, which is what `BundleFunction` declares.
-  const arrow = compile(instance, declared[0]);
+  const arrow = compileArrow(instance, declared[0]);
   // In no scope rather than an empty one: a function reaches what encloses it
   // through its own parameters, so a frame binding nothing would only be one
   // more to walk past at the end of every name it fails to find.
-  const closure = arrow(null) as (...args: Value[]) => Value;
+  const closure = arrow(null);
   instance.functions.set(label, closure);
   return closure;
 }
@@ -117,41 +138,48 @@ function compileFunction(
 // evaluating yields is the only thing that differs between them — a value, a
 // statement's completion, a list's members — so that is the return type and
 // nothing else is.
-// `Globals` describes this table from the authoring end, where `Value` is the
-// same domain seen from the running end — the two representations `Value` names
-// — so it is widened once, here, to be read by name.
-const table = globals as unknown as Readonly<Record<string, Value>>;
+// `Builtins` says what each name holds; a bundle reaches one by the name alone,
+// so the table is widened once, here, to be read that way.
+const table = globals as unknown as Readonly<Record<string, ClientValue>>;
 
-// What a member access reads a primitive's members from. A string, a number, a
-// boolean and an array answer from the schema's classes rather than from the
-// host's prototypes: a member the schema left out stays left out, where
-// `value[member]` would hand back whatever JavaScript happens to have.
+// A client function as this client applies one. `ClientFunction` says which
+// values are functions — its parameters are `never`, so that every function is
+// one — and not how to call one, so applying is this client's own knowledge.
+type Applied = (...args: ClientValue[]) => ClientValue;
+
+// A member access on a primitive reads from the schema's classes rather than
+// from the host's prototypes: a member the schema left out stays left out,
+// where `value[member]` would hand back whatever JavaScript happens to have.
+//
+// Which class a value autoboxes to is `boxes`'s own key, so the four are named
+// here as they are named there and nothing widens.
 //
 // `Reflect.get` rather than an index, so a member declared as a value — a
 // string's `length` — is read with the value as its receiver.
-const box: Readonly<Record<string, object>> = boxes as unknown as Readonly<
-  Record<string, object>
->;
-
-function memberOf(object: Value, name: string): Value {
+function memberOf(object: ClientValue, name: string): ClientValue {
   const boxed =
-    typeof object === "string" ||
-    typeof object === "number" ||
-    typeof object === "boolean"
-      ? typeof object
-      : Array.isArray(object)
-        ? "array"
-        : null;
+    typeof object === "string"
+      ? "string"
+      : typeof object === "number"
+        ? "number"
+        : typeof object === "boolean"
+          ? "boolean"
+          : Array.isArray(object)
+            ? "array"
+            : null;
   if (boxed === null) {
     // A plain object is reached by the names it holds, and one it does not
     // hold reads as null — the language's absent value.
-    return (object as { [name: string]: Value })[name] ?? null;
+    //
+    // The cast reads through a brand: a handle's type says opaque, and a cell
+    // being `{ read, write, update }` underneath is this client's knowledge.
+    return (object as { readonly [name: string]: ClientValue })[name] ?? null;
   }
-  const held = box[boxed];
-  if (held === undefined) {
-    throw new Error(`this client answers for no ${boxed}`);
-  }
-  const found = Reflect.get(held, name, object) as Value | undefined;
+  const found: ClientValue | undefined = Reflect.get(
+    boxes[boxed],
+    name,
+    object,
+  );
   if (found === undefined) {
     // Not absent: a value's members are the schema's to say, and an undeclared
     // one is a name this language has no meaning for. Reading it as null would
@@ -164,9 +192,9 @@ function memberOf(object: Value, name: string): Value {
 export function compile(
   instance: Instance,
   node: Source,
-): (scope: Scope | null) => Value {
+): (scope: Scope | null) => ClientValue {
   if (node === null || typeof node !== "object") {
-    const literal = node as Value;
+    const literal = node;
     return () => literal;
   }
   return buildNode(instance, node);
@@ -176,7 +204,7 @@ export function evaluate(
   instance: Instance,
   node: Source,
   scope: Scope | null,
-): Value {
+): ClientValue {
   return compile(instance, node)(scope);
 }
 
@@ -193,16 +221,19 @@ function compileStatement(
 // A node is an array and nothing else in a value slot is — an array of data
 // travels under a `DataArray` node — so `Array.isArray` is the whole test, here
 // and everywhere below.
+//
+// A literal carries itself and is answered by `compile`, so what reaches here
+// is what has a shape to read: an object of data, or a node.
 function buildNode(
   instance: Instance,
-  source: Source,
-): (scope: Scope | null) => Value {
+  source: Extract<Source, object>,
+): (scope: Scope | null) => ClientValue {
   if (!Array.isArray(source)) {
-    const data = source as { [key: string]: Source };
+    const data = source;
     const keys = Object.keys(data);
     const parts = keys.map((key) => compile(instance, data[key]));
     return (scope) => {
-      const object: { [key: string]: Value } = {};
+      const object: { [key: string]: ClientValue } = {};
       for (let at = 0; at < keys.length; at++) {
         object[keys[at]] = parts[at](scope);
       }
@@ -286,7 +317,7 @@ function buildNode(
           // The receiver evaluates before the arguments; an optional receiver
           // (`a?.b(…)`) short-circuits a null object to null, arguments
           // unevaluated.
-          const object = receiver(scope) as { [name: string]: Value };
+          const object = receiver(scope);
           if (optionalReceiver && object === null) {
             return null;
           }
@@ -299,7 +330,7 @@ function buildNode(
           if (typeof method !== "function") {
             throw new Error(`${name} is not a function`);
           }
-          return method.apply(object, args(scope));
+          return (method as Applied).apply(object, args(scope));
         };
       }
       const target = compile(instance, callee);
@@ -314,7 +345,7 @@ function buildNode(
         if (typeof value !== "function") {
           throw new Error("callee is not a function");
         }
-        return value(...args(scope));
+        return (value as Applied)(...args(scope));
       };
     }
     case 1002: /* PropertyAccessExpression */ {
@@ -322,7 +353,7 @@ function buildNode(
       const optional = node[2];
       const member = node[3];
       return (scope) => {
-        const object = target(scope) as { [name: string]: Value };
+        const object = target(scope);
         if (optional && object === null) {
           return null;
         }
@@ -364,7 +395,8 @@ function buildNode(
         if (reached !== null && typeof reached === "object") {
           return typeof key === "string" &&
             Object.prototype.hasOwnProperty.call(reached, key)
-            ? ((reached as { [name: string]: Value })[key] ?? null)
+            ? ((reached as { readonly [name: string]: ClientValue })[key] ??
+                null)
             : null;
         }
         return null;
@@ -420,53 +452,57 @@ function buildNode(
           : whenFalse(scope);
     }
     case 1005: /* ArrowFunction */ {
-      const parameters = node[1].map((param) => param[1]);
-      const body = node[2];
-      // A block runs its statements; anything else is an expression, which is
-      // implicitly returned.
-      const isBlock = Array.isArray(body) && body[0] === 1006; /* Block */
-      const compiled = isBlock
-        ? compileStatement(instance, body)
-        : compile(instance, body);
-      // Nothing to bind and nothing to declare: the body reads the enclosing
-      // frame, so making one of its own would be an allocation per call for a
-      // scope that holds nothing. Every splice argument is one of these.
-      if (parameters.length === 0 && !isBlock) {
-        const expression = compiled as (scope: Scope | null) => Value;
-        return (scope) => () => expression(scope);
-      }
-      return (scope) =>
-        (...args: Value[]) => {
-          const frame = scopeOf(scope);
-          // A missing argument binds as null — the language's absent value;
-          // `undefined` never arises (an omitted optional parameter reads
-          // as null).
-          for (let at = 0; at < parameters.length; at++) {
-            bind(frame, parameters[at], at < args.length ? args[at] : null);
-          }
-          if (!isBlock) {
-            return (compiled as (scope: Scope | null) => Value)(frame);
-          }
-          const completion = (compiled as (scope: Scope | null) => Completion)(
-            frame,
-          );
-          if (completion.kind === "break" || completion.kind === "continue") {
-            // The compiler rejects a jump with no loop to catch it, so one
-            // reaching here means the bundle was not written by it.
-            throw new Error(
-              `A \`${completion.kind}\` in this bundle escaped its loop.`,
-            );
-          }
-          return completion.kind === "returned" ? completion.value : null;
-        };
+      return compileArrow(instance, node);
     }
     default: {
       // Every remaining kind is a statement, which is not a value. A bundle
       // that puts one where a value is expected was not written by the
       // compiler.
-      throw new Error(`\`${node[0] as number}\` is not an expression`);
+      throw new Error(`\`${String(node[0])}\` is not an expression`);
     }
   }
+}
+
+// An arrow, which is the one node whose value is known by its kind: what it
+// evaluates to is a function, so this says so where `compile` can only say
+// `ClientValue`. A `functions` entry is one of these and nothing else, which is
+// what lets it be discharged without asking what it became.
+function compileArrow(
+  instance: Instance,
+  node: BundleArrowFunctionNode,
+): (scope: Scope | null) => Applied {
+  const parameters = node[1].map((param) => param[1]);
+  const body = node[2];
+  // A block runs its statements; anything else is an expression, which is
+  // implicitly returned. Which of the two decides what a call does with what
+  // the body answered, so it is decided here rather than per call.
+  const block =
+    Array.isArray(body) && body[0] === 1006 /* Block */ ? body : null;
+  if (block === null) {
+    const expression = compile(instance, body);
+    // Nothing to bind: the body reads the enclosing frame, so making one of its
+    // own would be an allocation per call for a scope that holds nothing. Every
+    // splice argument is one of these.
+    if (parameters.length === 0) {
+      return (scope) => () => expression(scope);
+    }
+    return (scope) =>
+      (...args) =>
+        expression(applied(scope, parameters, args));
+  }
+  const statements = compileStatement(instance, block);
+  return (scope) =>
+    (...args) => {
+      const completion = statements(applied(scope, parameters, args));
+      if (completion.kind === "break" || completion.kind === "continue") {
+        // The compiler rejects a jump with no loop to catch it, so one reaching
+        // here means the bundle was not written by it.
+        throw new Error(
+          `A \`${completion.kind}\` in this bundle escaped its loop.`,
+        );
+      }
+      return completion.kind === "returned" ? completion.value : null;
+    };
 }
 
 // The statement outcome of a block or one of its statements. `advanced` fell
@@ -475,7 +511,7 @@ function buildNode(
 // an arrow catches `returned` and answers with `value`.
 interface Completion {
   kind: "advanced" | "returned" | "break" | "continue";
-  value: Value;
+  value: ClientValue;
 }
 
 const advanced: Completion = { kind: "advanced", value: null };
@@ -509,13 +545,12 @@ function buildStatement(
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward. Which names
       // those are is a property of the block, so it is found once.
-      const declared = statements
-        .filter(
-          (statement) =>
-            Array.isArray(statement) &&
-            statement[0] === 1007 /* VariableDeclaration */,
-        )
-        .map((statement) => (statement as unknown as [number, string])[1]);
+      const declared = statements.flatMap((statement) =>
+        Array.isArray(statement) &&
+        statement[0] === 1007 /* VariableDeclaration */
+          ? [statement[1]]
+          : [],
+      );
       const body = statements.map((statement) =>
         compileStatement(instance, statement),
       );
@@ -539,8 +574,12 @@ function buildStatement(
       const initializer = compile(instance, node[2]);
       return (scope) => {
         // A declaration only ever runs inside the block that hoisted it, so
-        // there is always a frame to bind into.
-        bind(scope as Scope, name, initializer(scope));
+        // there is always a frame to bind into. Said rather than asserted: a
+        // bundle putting one anywhere else was not written by the compiler.
+        if (scope === null) {
+          throw new Error(`\`${name}\` was declared outside a block`);
+        }
+        bind(scope, name, initializer(scope));
         return advanced;
       };
     }
@@ -651,7 +690,7 @@ function buildStatement(
           // arrow parameter over its body.
           const frame = scopeOf(scope);
           if (caught !== null) {
-            bind(frame, caught, thrown as Value);
+            bind(frame, caught, thrown as ClientValue);
           }
           return handler(frame);
         }
@@ -681,24 +720,19 @@ function isSpread(
 // something is actually spread.
 function compileElements(
   instance: Instance,
-  elements: readonly (BundleArrayElement | BundleExpressionNode)[],
-): (scope: Scope | null) => Value[] {
-  if (!elements.some((element) => isSpread(element as BundleArrayElement))) {
-    const parts = elements.map((element) =>
-      compile(instance, element as Source),
-    );
+  elements: readonly BundleArrayElement[],
+): (scope: Scope | null) => ClientValue[] {
+  if (!elements.some(isSpread)) {
+    const parts = elements.map((element) => compile(instance, element));
     return (scope) => parts.map((part) => part(scope));
   }
   const parts = elements.map((element) =>
-    isSpread(element as BundleArrayElement)
-      ? {
-          spread: true,
-          read: compile(instance, (element as BundleSpreadElementNode)[1]),
-        }
-      : { spread: false, read: compile(instance, element as Source) },
+    isSpread(element)
+      ? { spread: true, read: compile(instance, element[1]) }
+      : { spread: false, read: compile(instance, element) },
   );
   return (scope) => {
-    const out: Value[] = [];
+    const out: ClientValue[] = [];
     for (const part of parts) {
       const value = part.read(scope);
       if (!part.spread) {
@@ -726,7 +760,7 @@ function compileElements(
 // is a property of what an expression evaluated to, not of the bundle's shape.
 // Checking beats borrowing JavaScript's falsiness, which would quietly accept
 // `0` and `""` and give a reference implementation the wrong rule to port.
-function condition(value: Value, what: string): boolean {
+function condition(value: ClientValue, what: string): boolean {
   if (value === true || value === false) {
     return value;
   }
@@ -740,9 +774,9 @@ function compileBinop(
   // Every operator but `=`, which assigns rather than combining two values and
   // is answered where the node is read.
   operator: Exclude<BundleBinaryOperator, "=">,
-  left: (scope: Scope | null) => Value,
-  right: (scope: Scope | null) => Value,
-): (scope: Scope | null) => Value {
+  left: (scope: Scope | null) => ClientValue,
+  right: (scope: Scope | null) => ClientValue,
+): (scope: Scope | null) => ClientValue {
   // The logical operators evaluate their right operand lazily, and both
   // operands are boolean — so `&&` and `||` yield one. Checking only the left
   // would still branch correctly and then return whatever the right side was,
@@ -811,5 +845,5 @@ function compileBinop(
   // operator to the format is a compile error here rather than a throw at
   // evaluation.
   operator satisfies never;
-  throw new Error(`unknown operator ${operator as string}`);
+  throw new Error(`unknown operator ${String(operator)}`);
 }
