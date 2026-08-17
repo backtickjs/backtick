@@ -1,12 +1,11 @@
 import {
-  isFor,
   isFragment,
   isJsxElement,
   type JsxElement,
   isSpliceable,
 } from "@backtickjs/cs-runtime";
 import { withInstance } from "../Instance.js";
-import type { Ast, AstFor, AstInstance } from "./Ast.js";
+import type { Ast, AstInstance } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the expansion
@@ -51,10 +50,6 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
 async function buildElement(jsx: JsxElement): Promise<Ast> {
   const type = jsx.type;
 
-  if (isFor(type)) {
-    return buildFor(jsx);
-  }
-
   // A fragment lowers to what it held: its children go where it stood, which is
   // what a list of them already means. Nothing of it reaches the client.
   if (isFragment(type)) {
@@ -96,19 +91,4 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
 
     return instance;
   }
-}
-
-async function buildFor(jsx: JsxElement): Promise<AstFor> {
-  const { each, children } = jsx.props;
-  if (!isSpliceable(each) || !isSpliceable(children)) {
-    throw new Error(
-      "Can't bundle this <For /> element: it needs an `each` array and a " +
-        "child to draw.",
-    );
-  }
-  return {
-    kind: "AstFor",
-    each: await lowerSpliceable(each, "ClientValue"),
-    children: await lowerSpliceable(children, "ClientValue"),
-  };
 }

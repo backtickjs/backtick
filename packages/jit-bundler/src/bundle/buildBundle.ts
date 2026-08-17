@@ -3,7 +3,6 @@ import type {
   IrArgument,
   IrElement,
   IrExpansion,
-  IrFor,
   IrScriptEntry,
   IrScriptRef,
   IrTreeRef,
@@ -18,7 +17,6 @@ import type {
   BundleFunction,
   BundleCallExpressionNode,
   BundleElement,
-  BundleFor,
   BundleGetFunction,
   BundleExpressionNode,
   BundleIdentifierNode,
@@ -184,8 +182,6 @@ export function buildBundle(
         return [cellKey(value.target)];
       case "IrElement":
         return Object.values(value.props).flatMap(freeCaps);
-      case "IrFor":
-        return [value.each, value.children].flatMap(freeCaps);
       case "IrArray":
         return value.elements.flatMap(freeCaps);
       case "IrObject":
@@ -419,8 +415,6 @@ export function buildBundle(
         return instantiation(value);
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
-      case "IrFor":
-        throw new Error("A `For` can't appear outside a tree entry.");
       // In a body the handle is already in scope: the entry was handed it with
       // its captures (see `freeCaps`), so it reads like any of them.
       case "IrStateRef":
@@ -698,16 +692,6 @@ export function buildBundle(
     return [NodeKind.Element, element.id, props, children];
   };
 
-  const renderFor = (
-    value: IrFor,
-    scope: TreeScope,
-    params: ReadonlySet<string>,
-  ): BundleFor => [
-    NodeKind.For,
-    renderExpr(value.each, scope, params),
-    renderExpr(value.children, scope, params),
-  ];
-
   // Renders an IR argument in expression position — the form used inside tree
   // entries and for the bundle root, where composition is data rather than
   // source. The mirror of `renderValue`.
@@ -730,9 +714,6 @@ export function buildBundle(
     }
     if (value.kind === "IrElement") {
       return renderElement(value, scope, params);
-    }
-    if (value.kind === "IrFor") {
-      return renderFor(value, scope, params);
     }
     // A cell in tree position resolves by name, like anything else the entry
     // bound or was handed.

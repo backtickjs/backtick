@@ -13,5 +13,5 @@ cs.splice(         →  [-semantic]
 )                  →  [-semantic]
 )                  → 
 .                  → .
-For                → For
+DataArray          → DataArray
 ))                 → `

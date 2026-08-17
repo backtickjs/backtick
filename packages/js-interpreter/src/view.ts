@@ -2,7 +2,6 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
-  BundleFor,
 } from "@backtickjs/core";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer, type Renderer } from "solid-js/universal";
@@ -130,6 +129,12 @@ export function compileElement(
   element: BundleElement,
 ): (scope: Scope | null) => Value {
   const id = element[1];
+  // The one id whose meaning is the language's rather than this client's: it
+  // draws no node, so it never reaches the renderer. Answered here, where an id
+  // is read, so a client implements it exactly where it implements its own tags.
+  if (id === "for") {
+    return compileFor(instance, element);
+  }
   // Every prop, in the order the element wrote them, because a host may care:
   // an `<input>` wants its `type` before its `value`.
   const props = Object.entries(element[2]).map(([prop, expr]) => {
@@ -224,18 +229,22 @@ function compileChildren(
 }
 
 /**
- * A list: one drawing per member of an array.
+ * A list: one drawing per member of the array its `each` prop holds.
  *
  * The client walks the array itself, so `mapArray` keeps the drawing of a
  * member that is still there, drops what a member that has gone drew, and draws
  * only what is new. Identity is the member's own — nothing here extracts a key.
+ *
+ * An element whose children are applied rather than drawn, so nothing here
+ * reaches for the renderer: what a list contributes is what its child drew per
+ * member, and the position it stands in inserts that as it would any list.
  */
-export function compileFor(
+function compileFor(
   instance: Instance,
-  node: BundleFor,
+  element: BundleElement,
 ): (scope: Scope | null) => Value {
-  const each = compile(instance, node[1]);
-  const children = compile(instance, node[2]);
+  const each = compile(instance, element[2]["each"] ?? null);
+  const children = compile(instance, element[3]);
   return (scope) => {
     const members = createMemo(() => {
       const value = each(scope);

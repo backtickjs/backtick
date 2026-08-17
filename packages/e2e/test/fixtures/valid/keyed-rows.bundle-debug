@@ -30,11 +30,11 @@
       {"drop"}
     </span>}
     {<div>
-      {<For
+      {<for
         each={#f2(() => s0)}
       >
         {#f3((id) => #f5(id))}
-      </For>}
+      </for>}
     </div>}
   </div>;
 }

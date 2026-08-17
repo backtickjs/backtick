@@ -11,8 +11,9 @@ import type { ServerComponent } from "./ServerComponent.js";
  * An element is its own name. `<div>` is the string `"div"` — the same id the
  * wire carries and the string `createElement` receives — so every element a
  * target draws is a tag it declares in `IntrinsicElements`, and nothing stands
- * between the two. What is left is a value only where it has to be: a
- * component runs, and `For` and `Fragment` are recognised rather than drawn.
+ * between the two. `For` is one of these and is written as a value only so its
+ * signature can carry `T` (see `For`). What is left is a value because it has
+ * to be: a component runs, and a fragment is recognised rather than drawn.
  */
 export type JsxElementType =
   | string /* IntrinsicElement tag */

@@ -67,19 +67,11 @@ export type FunctionLabel = string;
 // knows, so a moved value silently misparses every bundle already written.
 // `renderBundleDebug` maps a number back to its name.
 export const NodeKind = {
-  // A `get` names an entry; an `apply` runs one, which for an entry that draws
-  // means instantiating it.
   Element: 0,
   GetFunction: 1,
   ApplyFunction: 2,
   Builtin: 3,
-  // A node is an array, so an array of data needs saying apart from one. Data
-  // objects need no such wrapper, which is why only this one exists.
   DataArray: 4,
-  // A list draws one thing per member of an array. Its own kind rather than an
-  // element the reader knows by id: it draws no node, and its child is applied
-  // per member where an element's children are drawn once.
-  For: 6,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -133,6 +125,16 @@ export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
 
 // An element: structure as data, each prop evaluated in the enclosing entry's
 // scope.
+//
+// What an id means is the client's, with one exception the language names:
+// `for` draws one thing per member of the array its `each` prop holds. Its
+// children slot is applied per member rather than drawn once — to the member
+// and to the position it now sits at, which arrives as storage rather than a
+// number, because a member moves without changing. The client walks
+// the array — it keeps what a member still there drew, drops what a departed
+// one drew, and draws only what is new — so identity is the member's own and
+// nothing here extracts a key. A kind of its own once, which said the same
+// thing in a number a reader had to know instead of a name a schema declares.
 export type BundleElement = [
   kind: typeof NodeKind.Element,
   id: string,
@@ -195,27 +197,6 @@ export type BundleSpreadElementNode = [
 // What the format fixes is which members exist and what each one means.
 export type BundleBuiltinNode = [kind: typeof NodeKind.Builtin, name: string];
 
-// Storage, declared where this node stands. The one node that is not a function
-// of what it reads: evaluating it twice is two storages, where every other
-// expression may be re-run, cached or shared freely. A kind of its own for that
-// reason — a call of a named global would say the opposite, since calling one
-// twice is calling it twice.
-
-// A list: one drawing per member of an array.
-//
-// The client walks the array — it keeps what a member still there drew, drops
-// what a departed one drew, and draws only what is new — so identity is the
-// member's own and nothing here extracts a key.
-export type BundleFor = [
-  kind: typeof NodeKind.For,
-  // The array to walk.
-  each: BundleExpressionNode,
-  // Applied once per member, to the member and to the position it now sits at.
-  // The position arrives as storage rather than a number, because a member
-  // moves without changing: whoever reads it reads where the member is now.
-  children: BundleExpressionNode,
-];
-
 export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
 
 export type BundleExpressionNode =
@@ -234,7 +215,6 @@ export type BundleExpressionNode =
   | BundleApplyFunction
   // What a tree entry's body yields, and so what a `return` in one may hold.
   | BundleElement
-  | BundleFor
   | BundleCallExpressionNode
   | BundlePropertyAccessExpressionNode
   | BundleElementAccessExpressionNode

@@ -12,7 +12,6 @@ export type Ast =
   | AstArray
   | AstBoolean
   | AstElement
-  | AstFor
   | AstExpansion
   | AstHole
   | AstInstance
@@ -52,19 +51,14 @@ export interface AstBoolean {
   readonly value: boolean;
 }
 
+// A drawing named by its id, with each prop lowered. `<For />` is one of these
+// too — the id `for`, an `each` prop and a child applied per member — so what
+// draws no node of its own is still a name a client answers for rather than a
+// node kind every reader has to know.
 export interface AstElement {
   readonly kind: "AstElement";
   readonly id: string;
   readonly props: Readonly<Record<string, Ast>>;
-}
-
-// `<For />`: one drawing per member of an array. Not an element — it draws no
-// node, and its child is applied per member where an element's children are
-// drawn once — so it is its own node here as it is on the wire.
-export interface AstFor {
-  readonly kind: "AstFor";
-  readonly each: Ast;
-  readonly children: Ast;
 }
 
 // A server component's invocation, wrapping what it resolved to. One node per

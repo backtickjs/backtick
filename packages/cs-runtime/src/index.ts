@@ -12,7 +12,7 @@ export {
   isClientScript,
   type Metadata,
 } from "./ClientScript.js";
-export { For, type ForProps, isFor } from "./For.js";
+export { For, type ForProps } from "./For.js";
 export { createFragment, type Fragment, isFragment } from "./Fragment.js";
 export {
   type JsxElement,

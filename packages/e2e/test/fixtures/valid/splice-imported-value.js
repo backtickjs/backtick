@@ -14,13 +14,13 @@ import { cs, NodeKind } from "@backtickjs/core";
 // `.js` snapshot beside it carries the import, and the `.bundle` snapshot
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
-// spliced numbers themselves — `Element` is 0 and `For` is 6.
+// spliced numbers themselves — `Element` is 0 and `DataArray` is 4.
 export default cs.create(
-  [19, 16, 19, 53],
+  [19, 16, 19, 59],
   {
     version: "0.0.0",
     filePath: "splice-imported-value.tsx",
-    fileHash: "2uvwtxr1k8pga",
+    fileHash: "3gt0fiyr4ctm4",
     kind: "value",
     splices: { $NodeKind: NodeKind },
     captures: [],
@@ -28,7 +28,7 @@ export default cs.create(
   },
   () => ({
     kind: 227,
-    loc: [19, 19, 19, 52],
+    loc: [19, 19, 19, 58],
     left: {
       kind: 212,
       loc: [19, 19, 19, 36],
@@ -43,14 +43,14 @@ export default cs.create(
     operatorToken: "+",
     right: {
       kind: 212,
-      loc: [19, 39, 19, 52],
+      loc: [19, 39, 19, 58],
       expression: {
         kind: 1000,
         loc: [19, 39, 19, 48],
         key: "$NodeKind",
       },
       questionDotToken: false,
-      name: "For",
+      name: "DataArray",
     },
   }),
 );

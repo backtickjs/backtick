@@ -20,11 +20,11 @@
     >
       {"clear"}
     </span>,
-    <For
+    <for
       each={#f1(() => s0)}
     >
       {#f2((id) => #f4(id))}
-    </For>
+    </for>
   ];
 }
 

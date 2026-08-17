@@ -2,7 +2,6 @@ import type {
   Ast,
   AstElement,
   AstExpansion,
-  AstFor,
   AstInstance,
   AstScript,
   AstState,
@@ -12,7 +11,6 @@ import type {
   Ir,
   IrArgument,
   IrElement,
-  IrFor,
   IrExpansion,
   IrScriptEntry,
   IrScriptRef,
@@ -201,16 +199,6 @@ class IrBuilder {
     };
   }
 
-  // A list keeps its shape wherever it stands: it draws no node of its own, so
-  // there is nothing to hoist into the tree table.
-  private lowerFor(node: AstFor): IrFor {
-    return {
-      kind: "IrFor",
-      each: this.lower(node.each),
-      children: this.lower(node.children),
-    };
-  }
-
   // Lowers a value in tree position — inside an element's props — where an
   // element referenced only here inlines as data instead of hoisting. In value
   // position (`lower`) an element always hoists: a script body or the IR
@@ -218,9 +206,6 @@ class IrBuilder {
   private lowerInTree(node: Ast): IrArgument {
     if (node.kind === "AstInstance") {
       return this.referenceInstance(node);
-    }
-    if (node.kind === "AstFor") {
-      return this.lowerFor(node);
     }
     if (node.kind === "AstElement") {
       return this.elementRefs.get(node) === 1
@@ -255,8 +240,6 @@ class IrBuilder {
         return this.referenceTree(node);
       case "AstInstance":
         return this.referenceInstance(node);
-      case "AstFor":
-        return this.lowerFor(node);
       case "AstArray":
         return {
           kind: "IrArray",
@@ -328,11 +311,6 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
       if (node.child !== null) {
         visit(node.child);
       }
-      return;
-    }
-    if (node.kind === "AstFor") {
-      visit(node.each);
-      visit(node.children);
       return;
     }
     if (node.kind === "AstElement") {

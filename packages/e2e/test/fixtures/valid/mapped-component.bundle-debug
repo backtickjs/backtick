@@ -9,11 +9,11 @@
 </span>
 
 #f4 = () => <div>
-  {<For
+  {<for
     each={#f0(() => [1, 2, 3])}
   >
     {#f1((row) => #f3(row))}
-  </For>}
+  </for>}
 </div>
 
 root = #f4()

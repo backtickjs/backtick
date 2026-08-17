@@ -21,11 +21,11 @@
       {"rotate"}
     </span>}
     {<div>
-      {<For
+      {<for
         each={#f1(() => s0)}
       >
         {#f2((name, index) => #f4(name, index))}
-      </For>}
+      </for>}
     </div>}
   </div>;
 }

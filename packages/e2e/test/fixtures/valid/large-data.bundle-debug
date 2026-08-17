@@ -31,18 +31,18 @@
   {<span>
     {#f4(order)}
   </span>}
-  {<For
+  {<for
     each={#f5(order)}
   >
     {#f6((item) => #f9(item))}
-  </For>}
+  </for>}
   {<span>
     {#f8(order)}
   </span>}
 </div>
 
 #f11 = () => <div>
-  {<For
+  {<for
     each={#f0(() => [
       {
         "id": "ord-1000",
@@ -77,7 +77,7 @@
     ])}
   >
     {#f1((order) => #f10(order))}
-  </For>}
+  </for>}
 </div>
 
 root = #f11()

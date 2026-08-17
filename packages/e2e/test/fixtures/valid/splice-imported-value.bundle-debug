@@ -1,4 +1,4 @@
-#f0 = ($0) => $0().Element + $0().For
+#f0 = ($0) => $0().Element + $0().DataArray
 
 root = #f0(() => {
   "Element": 0,
@@ -6,7 +6,6 @@ root = #f0(() => {
   "ApplyFunction": 2,
   "Builtin": 3,
   "DataArray": 4,
-  "For": 6,
   "Identifier": 1000,
   "CallExpression": 1001,
   "PropertyAccessExpression": 1002,

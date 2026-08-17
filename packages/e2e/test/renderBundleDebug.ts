@@ -67,15 +67,10 @@ function renderNode(
       return node[1];
     case NodeKind.GetFunction:
       return fnLabel(node[1]);
-    // What a tree entry's body yields.
+    // What a tree entry's body yields, `for` included: a list is an element,
+    // so it reads as the one it is written as.
     case NodeKind.Element:
       return renderJsx(node, indent);
-    // Written as the element it used to be, so a list still reads as one.
-    case NodeKind.For:
-      return renderJsx(
-        [NodeKind.Element, "For", { each: node[1] }, node[2]],
-        indent,
-      );
     // A global the format names and the host answers.
     case NodeKind.Builtin:
       return node[1];

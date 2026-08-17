@@ -15,11 +15,13 @@ export type ForProps<T extends ClientValue> = {
 };
 
 // Generic where an element's props are fixed: `each` decides `T`, and the child
-// script's parameter is checked against it.
+// script's parameter is checked against it. That is the whole of why this is
+// callable — an intrinsic tag has nowhere to bind a type parameter from a prop,
+// so the signature stands where the tag will.
 //
-// Branded, because this is not an element: it draws no node, and it lowers to
-// `NodeKind.For` rather than to one. An element is a tag — its own name — and
-// nothing callable stands for it.
+// Branded so a component is not one: a call signature answering `never` is
+// assignable to every return type, and `ServerComponent` rules this out by the
+// brand rather than by the shape.
 export interface For {
   <T extends ClientValue>(props: ForProps<T>): never;
   readonly "@backtickjs": "For";
@@ -41,14 +43,11 @@ export interface For {
  * hold is what a target's elements are, where this holds whatever its child
  * script draws — and what a target admits as a tag is already settled by its
  * `ElementType`.
+ *
+ * The name itself, as `<div>` is the string `"div"`: a list draws no node, but
+ * it has an id on the wire, so nothing has to recognise this value — it is
+ * already what a tag is. The signature above is what it is written under, and
+ * the day an intrinsic tag can carry `T` this is spelled `<for />` and the
+ * value goes.
  */
-export const For = { "@backtickjs": "For" } as unknown as For;
-
-export function isFor(value: unknown): value is For {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "@backtickjs" in value &&
-    value["@backtickjs"] === "For"
-  );
-}
+export const For = "for" as unknown as For;

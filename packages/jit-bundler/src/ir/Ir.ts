@@ -85,14 +85,6 @@ export interface IrElement {
   readonly props: Readonly<Record<string, IrArgument>>;
 }
 
-// `<For />` carried through the IR: the array to walk, and what draws one
-// member of it.
-export interface IrFor {
-  readonly kind: "IrFor";
-  readonly each: IrArgument;
-  readonly children: IrArgument;
-}
-
 // A construction's expansion carried through the IR: an arrow over `params`
 // whose body is the expanded spliceable, with `IrHole` leaves where the
 // client arguments bind (see `AstExpansion`).
@@ -143,5 +135,4 @@ export type IrArgument =
   | IrScriptRef
   | IrTreeRef
   | IrStateRef
-  | IrElement
-  | IrFor;
+  | IrElement;

@@ -13,7 +13,7 @@ import type {
 import { boxes } from "./boxes.js";
 import { globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
-import { compileElement, compileFor } from "./view.js";
+import { compileElement } from "./view.js";
 import type { Value } from "./Value.js";
 
 // A reference client: the interpreter the bundle wire format is specified
@@ -252,13 +252,10 @@ function buildNode(
         args,
       ]);
     }
+    // Including a list, which draws no node of its own: what `for` means is
+    // answered where an id is read, not by a kind of its own.
     case 0: /* Element */ {
       return compileElement(instance, node);
-    }
-    // A list draws no node of its own, so it is a kind rather than an element
-    // a reader has to know the id of.
-    case 6: /* For */ {
-      return compileFor(instance, node);
     }
     // A global the format names and this interpreter answers. Not the host's
     // own objects and not a table handed in from outside: the curated list is

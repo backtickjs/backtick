@@ -15,5 +15,5 @@ import { cs, NodeKind } from "@backtickjs/core";
 // `.js` snapshot beside it carries the import, and the `.bundle` snapshot
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
-// spliced numbers themselves — `Element` is 0 and `For` is 6.
-export default cs`$NodeKind.Element + $NodeKind.For`;
+// spliced numbers themselves — `Element` is 0 and `DataArray` is 4.
+export default cs`$NodeKind.Element + $NodeKind.DataArray`;
