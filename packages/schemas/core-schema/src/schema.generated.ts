@@ -12,7 +12,7 @@ export type ClientValue =
   | boolean
   | string
   | { readonly [key: string]: ClientValue }
-  | ClientValue[]
+  | readonly ClientValue[]
   | ClientFunction
   | ClientHandle;
 

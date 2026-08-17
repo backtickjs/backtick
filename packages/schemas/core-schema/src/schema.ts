@@ -31,7 +31,7 @@ export const schema: Schema = {
         Type.Boolean(),
         Type.String(),
         Type.Record(Type.Ref("ClientValue"), { readOnly: true }),
-        Type.Array(Type.Ref("ClientValue")),
+        Type.Array(Type.Ref("ClientValue"), { readOnly: true }),
         Type.Ref("ClientFunction"),
         Type.Ref("ClientHandle"),
       ],
