@@ -42,11 +42,11 @@ async function write(path: string, body: string): Promise<void> {
   console.log(`${path}: ${body.split("\n").length} lines`);
 }
 
-// Everything the schema says: its types, its tags and its contract. One that
-// declares none of them is a schema in name only, and writes no file.
+// Everything the schema says: its types, its elements and its contract. One
+// that declares none of them is a schema in name only, and writes no file.
 if (
   Object.keys(schema.types).length > 0 ||
-  Object.keys(schema.tags).length > 0 ||
+  Object.keys(schema.elements).length > 0 ||
   Object.keys(schema.builtins).length > 0
 ) {
   await write("src/schema.generated.ts", generate.declarations(schema));

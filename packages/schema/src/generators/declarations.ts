@@ -22,12 +22,12 @@ import type { TNode } from "../TNode.js";
 
 // A schema to the names it declares, as the host language declares them.
 //
-// Everything a schema says, in one file: the types, the tags, and the contract
-// a client owes. It declares and nothing else — `jsx`, `jsxs` and `Fragment`
-// are a runtime, and a runtime is written by hand where a target decides what
-// it draws with.
+// Everything a schema says, in one file: the types, the elements, and the
+// contract a client owes. It declares and nothing else — `jsx`, `jsxs` and
+// `Fragment` are a runtime, and a runtime is written by hand where a target
+// decides what it draws with.
 
-/** What a schema declares: its types, its tags, and what a client answers for. */
+/** What a schema declares: its types, its elements, and what a client answers for. */
 export function declarations(schema: Schema): string {
   // Names are everything in scope, inherited included: what reads these is
   // asking what a script may reach, and a script reaches what its whole schema
@@ -35,10 +35,10 @@ export function declarations(schema: Schema): string {
   const all = flatten(schema);
 
   /**
-   * The interfaces a tag accepts, which are the ones whose members a script
-   * may stand in.
+   * The interfaces an element accepts, which are the ones whose members a
+   * script may stand in.
    *
-   * Reached from a tag and through what such an interface extends, and no
+   * Reached from an element and through what such an interface extends, and no
    * further: `ForProps` is props where the `ReadonlyState<number>` inside its
    * child's signature is not, so one is wrapped and the other is the plain
    * type a client answers with.
@@ -63,7 +63,7 @@ export function declarations(schema: Schema): string {
         (inner as { extends: readonly TNode[] }).extends.forEach(follow);
       }
     };
-    Object.values(all.tags).forEach((element) => follow(element.props));
+    Object.values(all.elements).forEach(follow);
     return names;
   };
   const props = propsOf();
@@ -152,7 +152,7 @@ export function declarations(schema: Schema): string {
   Object.values(schema.builtins).forEach((node) =>
     declares(node, new Set(carried.keys())),
   );
-  Object.values(schema.tags).forEach((node) => declares(node, new Set()));
+  Object.values(schema.elements).forEach((node) => declares(node, new Set()));
 
   const lines: string[] = [];
 
@@ -168,16 +168,18 @@ export function declarations(schema: Schema): string {
     lines.push("");
   }
 
-  // The tags an app writes bare, for this schema alone: a target's runtime
-  // extends the interfaces its bases generated, so each tag is declared by the
-  // schema that has it and by nothing else.
-  const tags = Object.entries(schema.tags);
-  if (tags.length > 0) {
-    lines.push("/** The tags this schema declares, and what each accepts. */");
+  // The elements an app writes bare, for this schema alone: a target's runtime
+  // extends the interfaces its bases generated, so each element is declared by
+  // the schema that has it and by nothing else.
+  const elements = Object.entries(schema.elements);
+  if (elements.length > 0) {
+    lines.push(
+      "/** The elements this schema declares, and what each accepts. */",
+    );
     lines.push(`export interface IntrinsicElements {`);
-    for (const [tag, element] of tags) {
-      lines.push(...documentation(element as unknown as TNode, "  "));
-      lines.push(`  ${key(tag)}: ${elementProps(element.props)};`);
+    for (const [element, props] of elements) {
+      lines.push(...documentation(props, "  "));
+      lines.push(`  ${key(element)}: ${elementProps(props)};`);
     }
     lines.push(`}`);
     lines.push("");
@@ -338,7 +340,8 @@ function published(of: Schema): string[] {
 const HANDLE = "ClientHandle";
 
 /**
- * What a tag accepts: the name it is given, or the properties written inline.
+ * What an element accepts: the name it is given, or the properties written
+ * inline.
  *
  * Inline props are wrapped like every other prop — the wrapping is JSX's rule
  * about props and not a rule about interfaces — and a named one is wrapped
@@ -366,7 +369,7 @@ function elementProps(node: TNode): string {
 /** What a property admits, which is where the boundary is drawn. */
 export function prop(name: string, node: TNode, required: boolean): string {
   const optional = required ? "" : "?";
-  // Which prop holds what is written inside a tag is JSX's own rule — the one
+  // Which prop holds what is written inside an element is JSX's own rule — the one
   // `JSX.ElementChildrenAttribute` names — so the *wrapper* is decided here and
   // what it wraps comes from the schema.
   const written =

@@ -9,13 +9,13 @@ import type { Schema } from "./Schema.js";
  * colliding means.
  *
  * Bases first and in the order they were written, so what a target added
- * reads last. Redefining an inherited name throws rather than winning: a tag
- * or a function is answered by the client that declared it, and two answers
- * is a question about which one the wire meant.
+ * reads last. Redefining an inherited name throws rather than winning: an
+ * element or a function is answered by the client that declared it, and two
+ * answers is a question about which one the wire meant.
  */
 export function flatten(schema: Schema): Schema {
   const types: Record<string, Schema["types"][string]> = {};
-  const tags: Record<string, Schema["tags"][string]> = {};
+  const elements: Record<string, Schema["elements"][string]> = {};
   const builtins: Record<string, Schema["builtins"][string]> = {};
   const publishes = new Set<string>();
 
@@ -34,7 +34,7 @@ export function flatten(schema: Schema): Schema {
     }
     one.publishes.forEach((name) => publishes.add(name));
     add(types, one.types, "type");
-    add(tags, one.tags, "tag");
+    add(elements, one.elements, "element");
     add(builtins, one.builtins, "builtin");
   }
 
@@ -59,7 +59,7 @@ export function flatten(schema: Schema): Schema {
     extends: [],
     publishes: [...publishes],
     types,
-    tags,
+    elements,
     builtins,
   };
 }

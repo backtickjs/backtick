@@ -1,4 +1,3 @@
-import type { TTag } from "./nodes/Tag.js";
 import type { TNode } from "./TNode.js";
 
 export interface Schema {
@@ -14,8 +13,8 @@ export interface Schema {
   /** Reusable types that a `Type.Ref` can reach. */
   readonly types: Readonly<Record<string, TNode>>;
 
-  /** Every tag an app may write, and what each accepts. */
-  readonly tags: Readonly<Record<string, TTag>>;
+  /** Every element an app may draw, and what each accepts. */
+  readonly elements: Readonly<Record<string, TNode>>;
 
   /** Builtin functions a script can call. */
   readonly builtins: Readonly<Record<string, TNode>>;

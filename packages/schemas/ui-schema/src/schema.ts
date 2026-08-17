@@ -43,7 +43,7 @@ export const schema: Schema = {
     ),
   },
 
-  tags: {},
+  elements: {},
 
   builtins: {},
 };

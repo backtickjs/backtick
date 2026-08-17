@@ -727,7 +727,7 @@ export interface VideoProps extends MediaProps {
   width?: Prop<Numeric>;
 }
 
-/** The tags this schema declares, and what each accepts. */
+/** The elements this schema declares, and what each accepts. */
 export interface IntrinsicElements {
   a: AnchorProps;
   abbr: HtmlProps;

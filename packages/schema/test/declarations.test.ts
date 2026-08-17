@@ -24,7 +24,7 @@ const core: Schema = {
       Type.Interface([], { read: Type.Function([], Type.Ref("T")) }),
     ),
   },
-  tags: {},
+  elements: {},
   builtins: { state: Type.Ref("Cell") },
 };
 
@@ -38,7 +38,7 @@ const middle: Schema = {
   types: {
     Shared: Type.Union([Type.String(), Type.Number()]),
   },
-  tags: {},
+  elements: {},
   builtins: {},
 };
 
@@ -53,7 +53,7 @@ const target: Schema = {
       children: Type.Optional(Type.Ref("Drawing")),
     }),
   },
-  tags: { pick: Type.Tag(Type.Ref("Props")) },
+  elements: { pick: Type.Ref("Props") },
   builtins: {},
 };
 
@@ -80,7 +80,7 @@ describe("declarations", () => {
           onpick: Type.Optional(Type.Function([], Type.Void())),
         }),
       },
-      tags: { pick: Type.Tag(Type.Ref("Props")) },
+      elements: { pick: Type.Ref("Props") },
       builtins: {},
     };
     const written = declarations(root);
@@ -110,19 +110,19 @@ describe("declarations", () => {
     assert.doesNotMatch(written, /export interface Cell/);
   });
 
-  it("wraps what a tag accepts, and only that", () => {
+  it("wraps what an element accepts, and only that", () => {
     const written = declarations(target);
     // a prop holds a value or a script standing in for one
     assert.match(written, /value\?: Prop<Shared>;/);
     // a function prop is a script and never a host function
     assert.match(written, /onpick\?: Client<\(\) => void>;/);
-    // what goes inside a tag is children
+    // what goes inside an element is children
     assert.match(written, /children\?: Children<Drawing>;/);
     // and a client's own interface is not props
     assert.doesNotMatch(declarations(core), /Prop</);
   });
 
-  it("writes the tags it declares, and what each accepts", () => {
+  it("writes the elements it declares, and what each accepts", () => {
     assert.match(
       declarations(target),
       /export interface IntrinsicElements \{\n {2}pick: Props;\n\}/,
@@ -164,7 +164,7 @@ describe("declarations", () => {
           description: "Neither a `Prop` nor `Children`, whatever it says.",
         }),
       },
-      tags: {},
+      elements: {},
       builtins: {},
     };
     const written = declarations(prose);

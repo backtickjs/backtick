@@ -1095,10 +1095,10 @@ export const schema: Schema = {
     }),
   },
 
-  // Core draws nothing: what a list or a tag accepts is a schema built on this
-  // one, and this says only what a script reaches whether anything is drawn or
-  // not.
-  tags: {},
+  // Core draws nothing: what a list or an element accepts is a schema built on
+  // this one, and this says only what a script reaches whether anything is
+  // drawn or not.
+  elements: {},
 
   builtins: {
     Math: Type.Ref("Math"),

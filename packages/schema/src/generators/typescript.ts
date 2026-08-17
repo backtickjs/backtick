@@ -312,7 +312,7 @@ export function interfaceLines(
     // base's are the base and each other, so what a client answered with would
     // be accepted wherever any of them is wanted.
     ...(branded ? [`  readonly [${mark(name)}]: never;`] : []),
-    // An interface a tag accepts holds props, and a prop is what a script may
+    // An interface an element accepts holds props, and a prop is what a script may
     // stand in: the wrapping is JSX's rule and is applied where the members are
     // written, so a name is declared once whichever reads it.
     ...Object.entries(of.properties).flatMap(([called, what]) =>
