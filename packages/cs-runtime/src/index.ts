@@ -1,5 +1,4 @@
 export type { Client } from "@backtickjs/core-schema";
-export type { ArrayConstructor, Math } from "@backtickjs/core-schema";
 export type {
   Builtins,
   Array,

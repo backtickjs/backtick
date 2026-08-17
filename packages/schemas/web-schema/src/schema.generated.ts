@@ -9,7 +9,6 @@ import type {
 
 export type {
   Array,
-  ArrayConstructor,
   ArrayLike,
   Boolean,
   Children,
@@ -20,7 +19,6 @@ export type {
   ClientUnknown,
   ClientValue,
   ForProps,
-  Math,
   Number,
   Prop,
   ReadonlyState,

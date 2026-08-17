@@ -4,7 +4,6 @@ import type { ClientHandle, ReadonlyState } from "@backtickjs/core-schema";
 
 export type {
   Array,
-  ArrayConstructor,
   ArrayLike,
   Boolean,
   Client,
@@ -12,7 +11,6 @@ export type {
   ClientHandle,
   ClientUnknown,
   ClientValue,
-  Math,
   Number,
   ReadonlyState,
   State,
