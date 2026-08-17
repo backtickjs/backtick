@@ -7,6 +7,7 @@ import { IsGeneric } from "../nodes/Generic.js";
 import { IsIndex } from "../nodes/Index.js";
 import { IsInterface } from "../nodes/Interface.js";
 import type { TInterface } from "../nodes/Interface.js";
+import { IsNever } from "../nodes/Never.js";
 import { IsNull } from "../nodes/Null.js";
 import { prop } from "./declarations.js";
 import { IsNumber } from "../nodes/Number.js";
@@ -113,6 +114,9 @@ export function type(node: TNode): string {
   }
   if (IsNull(node)) {
     return "null";
+  }
+  if (IsNever(node)) {
+    return "never";
   }
   if (IsUnknown(node)) {
     throw new Error("an unknown may only stand as a type parameter's bound");

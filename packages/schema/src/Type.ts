@@ -7,6 +7,7 @@ import { Generic } from "./nodes/Generic.js";
 import { Index } from "./nodes/Index.js";
 import { Interface } from "./nodes/Interface.js";
 import { Literal } from "./nodes/Literal.js";
+import { Never } from "./nodes/Never.js";
 import { Null } from "./nodes/Null.js";
 import { Number } from "./nodes/Number.js";
 import { Object } from "./nodes/Object.js";
@@ -38,6 +39,7 @@ export const Type = {
   Array,
   Function,
   Void,
+  Never,
   Null,
   Ref,
   Optional,
