@@ -1,4 +1,4 @@
-import type { ClientElement } from "@backtickjs/core-schema";
+import type { ClientElement } from "@backtickjs/ui-schema";
 
 /**
  * A component built from other components rather than naming one. It runs on

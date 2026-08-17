@@ -2,11 +2,11 @@ import type {
   Array,
   ArrayConstructor,
   Boolean,
-  ClientElement,
   Math,
   Number,
   String,
 } from "@backtickjs/core-schema";
+import type { ClientElement } from "@backtickjs/ui-schema";
 import type { ClientFunction } from "@backtickjs/core-schema";
 import type { ClientValue } from "@backtickjs/core-schema";
 

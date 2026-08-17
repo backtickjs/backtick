@@ -1,6 +1,6 @@
 import type { ClientFunction } from "@backtickjs/core-schema";
 import type { ClientValue } from "@backtickjs/core-schema";
-import type { ClientElement } from "@backtickjs/core-schema";
+import type { ClientElement } from "@backtickjs/ui-schema";
 import type { State } from "@backtickjs/core-schema";
 
 // Widens a literal type: `0` becomes `number`. Inference through a

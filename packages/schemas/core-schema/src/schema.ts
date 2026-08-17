@@ -16,7 +16,7 @@ export const schema: Schema = {
 
   extends: [],
 
-  publishes: ["Client", "ClientElement"],
+  publishes: ["Client"],
 
   types: {
     ClientHandle: Type.Interface(

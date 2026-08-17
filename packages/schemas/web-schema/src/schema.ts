@@ -14,7 +14,7 @@ export const schema: Schema = {
 
   types: {
     BacktickNode: Type.Union([
-      Type.Element(),
+      Type.Ref("ClientElement"),
       Type.String(),
       Type.Number(),
       Type.Null(),

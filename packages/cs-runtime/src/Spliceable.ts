@@ -1,8 +1,5 @@
-import type {
-  ClientElement,
-  Client,
-  ClientValue,
-} from "@backtickjs/core-schema";
+import type { Client, ClientValue } from "@backtickjs/core-schema";
+import type { ClientElement } from "@backtickjs/ui-schema";
 import { isClientScript } from "./ClientScript.js";
 import { isJsxElement } from "./JsxElement.js";
 

@@ -1,5 +1,4 @@
 import type { ClientFunction } from "./ClientFunction.js";
-import type { ClientElement } from "./ClientElement.js";
 import type { ClientHandle } from "./schema.generated.js";
 
 export type ClientValue =
@@ -10,5 +9,4 @@ export type ClientValue =
   | { [key: string]: ClientValue }
   | ClientValue[]
   | ClientFunction
-  | ClientElement
   | ClientHandle;

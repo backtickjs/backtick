@@ -1,4 +1,4 @@
-import type { ClientElement } from "@backtickjs/core-schema";
+import type { ClientElement } from "@backtickjs/ui-schema";
 import type { For } from "./For.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";

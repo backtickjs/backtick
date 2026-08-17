@@ -13,10 +13,12 @@ import type { Schema } from "../dist/index.js";
 const core: Schema = {
   package: "@backtickjs/core",
   extends: [],
-  publishes: ["Client", "ClientElement"],
+  publishes: ["Client"],
   types: {
-    // names a drawing, so the framework's own name is reached from here
-    Drawn: Type.Union([Type.Element(), Type.Null()]),
+    // a drawing is a declared interface, branded because it extends the root
+    Drawing: Type.Interface([], {}),
+    // names one, or nothing drawn
+    Drawn: Type.Union([Type.Ref("Drawing"), Type.Null()]),
     Cell: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([], { read: Type.Function([], Type.Ref("T")) }),
@@ -48,7 +50,7 @@ const target: Schema = {
     Props: Type.Interface([], {
       value: Type.Optional(Type.Ref("Shared")),
       onpick: Type.Optional(Type.Function([], Type.Void())),
-      children: Type.Optional(Type.Element()),
+      children: Type.Optional(Type.Ref("Drawing")),
     }),
   },
   tags: { pick: Type.Tag(Type.Ref("Props")) },
@@ -69,10 +71,22 @@ describe("declarations", () => {
   });
 
   it("writes its own names beside it, and no import for them", () => {
-    const written = declarations(core);
+    const root: Schema = {
+      package: "@backtickjs/core",
+      extends: [],
+      publishes: ["Client"],
+      types: {
+        Props: Type.Interface([], {
+          onpick: Type.Optional(Type.Function([], Type.Void())),
+        }),
+      },
+      tags: { pick: Type.Tag(Type.Ref("Props")) },
+      builtins: {},
+    };
+    const written = declarations(root);
     assert.match(
       written,
-      /import type \{ ClientElement \} from ".\/ClientElement.js";/,
+      /import type \{ Client \} from ".\/Client.js";/,
       "the package that publishes a name reaches it beside itself",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
@@ -83,7 +97,7 @@ describe("declarations", () => {
     // against this schema reaches both by naming one package.
     assert.match(
       declarations(target),
-      /export type \{\n {2}Cell,\n {2}Children,\n {2}Client,\n {2}ClientElement,\n {2}Drawn,\n {2}Prop,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
+      /export type \{\n {2}Cell,\n {2}Children,\n {2}Client,\n {2}Drawing,\n {2}Drawn,\n {2}Prop,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
     );
     // a schema with nothing under it hands on nothing
     assert.doesNotMatch(declarations(core), /^export type \{[^}]*\} from/m);
@@ -103,7 +117,7 @@ describe("declarations", () => {
     // a function prop is a script and never a host function
     assert.match(written, /onpick\?: Client<\(\) => void>;/);
     // what goes inside a tag is children
-    assert.match(written, /children\?: Children<ClientElement>;/);
+    assert.match(written, /children\?: Children<Drawing>;/);
     // and a client's own interface is not props
     assert.doesNotMatch(declarations(core), /Prop</);
   });
@@ -131,7 +145,7 @@ describe("declarations", () => {
     const written = declarations(middle);
     assert.match(
       written,
-      /export type \{\n {2}Cell,\n {2}Client,\n {2}ClientElement,\n {2}Drawn,\n\} from "@backtickjs\/core";/,
+      /export type \{\n {2}Cell,\n {2}Client,\n {2}Drawing,\n {2}Drawn,\n\} from "@backtickjs\/core";/,
     );
     assert.doesNotMatch(written, /\bProp\b/);
     assert.doesNotMatch(written, /\bChildren\b/);

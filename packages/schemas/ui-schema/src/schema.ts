@@ -10,6 +10,8 @@ export const schema: Schema = {
   publishes: ["Prop", "Children"],
 
   types: {
+    ClientElement: Type.Interface([Type.Ref("ClientHandle")], {}),
+
     Renderable: Type.Union([
       Type.Null(),
       Type.Boolean(),
@@ -35,7 +37,7 @@ export const schema: Schema = {
               },
             ),
           ],
-          Type.Element(),
+          Type.Ref("ClientElement"),
         ),
       }),
     ),

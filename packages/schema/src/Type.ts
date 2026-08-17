@@ -1,7 +1,6 @@
 import { Apply } from "./nodes/Apply.js";
 import { Array } from "./nodes/Array.js";
 import { Boolean } from "./nodes/Boolean.js";
-import { Element } from "./nodes/Element.js";
 import { Tag } from "./nodes/Tag.js";
 import { Function } from "./nodes/Function.js";
 import { Generic } from "./nodes/Generic.js";
@@ -47,7 +46,6 @@ export const Type = {
   GenericParameter,
   FunctionParameter,
   Apply,
-  Element,
   Tag,
   Index,
   Interface,
