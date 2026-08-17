@@ -25,13 +25,8 @@
                       [
                         1001,
                         [
-                          1002,
-                          [
-                            3,
-                            "Math"
-                          ],
-                          false,
-                          "round"
+                          3,
+                          "Math.round"
                         ],
                         false,
                         [
@@ -43,13 +38,8 @@
                     [
                       1001,
                       [
-                        1002,
-                        [
-                          3,
-                          "Math"
-                        ],
-                        false,
-                        "round"
+                        3,
+                        "Math.round"
                       ],
                       false,
                       [
@@ -62,13 +52,8 @@
                 [
                   1001,
                   [
-                    1002,
-                    [
-                      3,
-                      "Math"
-                    ],
-                    false,
-                    "round"
+                    3,
+                    "Math.round"
                   ],
                   false,
                   [
@@ -96,13 +81,8 @@
                       [
                         1001,
                         [
-                          1002,
-                          [
-                            3,
-                            "Math"
-                          ],
-                          false,
-                          "floor"
+                          3,
+                          "Math.floor"
                         ],
                         false,
                         [
@@ -114,13 +94,8 @@
                     [
                       1001,
                       [
-                        1002,
-                        [
-                          3,
-                          "Math"
-                        ],
-                        false,
-                        "ceil"
+                        3,
+                        "Math.ceil"
                       ],
                       false,
                       [
@@ -133,13 +108,8 @@
                 [
                   1001,
                   [
-                    1002,
-                    [
-                      3,
-                      "Math"
-                    ],
-                    false,
-                    "trunc"
+                    3,
+                    "Math.trunc"
                   ],
                   false,
                   [
@@ -167,13 +137,8 @@
                       [
                         1001,
                         [
-                          1002,
-                          [
-                            3,
-                            "Math"
-                          ],
-                          false,
-                          "min"
+                          3,
+                          "Math.min"
                         ],
                         false,
                         [
@@ -187,13 +152,8 @@
                     [
                       1001,
                       [
-                        1002,
-                        [
-                          3,
-                          "Math"
-                        ],
-                        false,
-                        "max"
+                        3,
+                        "Math.max"
                       ],
                       false,
                       [
@@ -208,13 +168,8 @@
                 [
                   1001,
                   [
-                    1002,
-                    [
-                      3,
-                      "Math"
-                    ],
-                    false,
-                    "abs"
+                    3,
+                    "Math.abs"
                   ],
                   false,
                   [
@@ -291,13 +246,8 @@
                                 [
                                   1001,
                                   [
-                                    1002,
-                                    [
-                                      3,
-                                      "Math"
-                                    ],
-                                    false,
-                                    "sqrt"
+                                    3,
+                                    "Math.sqrt"
                                   ],
                                   false,
                                   [
@@ -310,13 +260,8 @@
                             [
                               1001,
                               [
-                                1002,
-                                [
-                                  3,
-                                  "Math"
-                                ],
-                                false,
-                                "sign"
+                                3,
+                                "Math.sign"
                               ],
                               false,
                               [
@@ -329,13 +274,8 @@
                         [
                           1001,
                           [
-                            1002,
-                            [
-                              3,
-                              "Math"
-                            ],
-                            false,
-                            "fround"
+                            3,
+                            "Math.fround"
                           ],
                           false,
                           [
@@ -349,13 +289,8 @@
                       1003,
                       ">",
                       [
-                        1002,
-                        [
-                          3,
-                          "Math"
-                        ],
-                        false,
-                        "PI"
+                        3,
+                        "Math.PI"
                       ],
                       3.14
                     ]
@@ -366,13 +301,8 @@
                   1003,
                   ">",
                   [
-                    1002,
-                    [
-                      3,
-                      "Math"
-                    ],
-                    false,
-                    "E"
+                    3,
+                    "Math.E"
                   ],
                   2.71
                 ]

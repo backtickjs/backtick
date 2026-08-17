@@ -13,13 +13,8 @@
               [
                 1001,
                 [
-                  1002,
-                  [
-                    3,
-                    "Array"
-                  ],
-                  false,
-                  "from"
+                  3,
+                  "Array.from"
                 ],
                 false,
                 [
@@ -58,13 +53,8 @@
               [
                 1001,
                 [
-                  1002,
-                  [
-                    3,
-                    "Array"
-                  ],
-                  false,
-                  "from"
+                  3,
+                  "Array.from"
                 ],
                 false,
                 [
@@ -98,13 +88,8 @@
               [
                 1001,
                 [
-                  1002,
-                  [
-                    3,
-                    "Array"
-                  ],
-                  false,
-                  "from"
+                  3,
+                  "Array.from"
                 ],
                 false,
                 [
