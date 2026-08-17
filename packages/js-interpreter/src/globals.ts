@@ -15,7 +15,58 @@ import { createSignal } from "solid-js";
 // One table and one lookup: a name is whole here as it is on the wire and in the
 // schema, so nothing walks into an object to find a member. `Math` is the front
 // of a name rather than something this holds.
+//
+// A member of a value takes the value first, because that is what the schema
+// says it takes: a client with no `this` reads the same document and answers the
+// same way. `boxes` still holds the bodies a member access reaches and these are
+// written out beside them, one line each, until `memberOf` reads this table and
+// `boxes` goes.
 export const globals: Builtins = {
+  "boolean.valueOf": (self) => self,
+  "number.toString": (self, radix) => self.toString(radix),
+  "number.toFixed": (self, fractionDigits) => self.toFixed(fractionDigits),
+  "number.toExponential": (self, fractionDigits) =>
+    self.toExponential(fractionDigits),
+  "number.toPrecision": (self, precision) => self.toPrecision(precision),
+  "number.valueOf": (self) => self,
+  "string.toString": (self) => self,
+  "string.charAt": (self, pos) => self.charAt(pos),
+  "string.charCodeAt": (self, index) => self.charCodeAt(index),
+  "string.concat": (self, ...strings) => self.concat(...strings),
+  "string.indexOf": (self, searchString, position) =>
+    self.indexOf(searchString, position),
+  "string.lastIndexOf": (self, searchString, position) =>
+    self.lastIndexOf(searchString, position),
+  "string.localeCompare": (self, that) => self.localeCompare(that),
+  "string.replace": (self, searchValue, replaceValue) =>
+    self.replace(searchValue, replaceValue as string),
+  "string.slice": (self, start, end) => self.slice(start, end),
+  "string.split": (self, separator, limit) => self.split(separator, limit),
+  "string.substring": (self, start, end) => self.substring(start, end),
+  "string.toLowerCase": (self) => self.toLowerCase(),
+  "string.toLocaleLowerCase": (self) => self.toLocaleLowerCase(),
+  "string.toUpperCase": (self) => self.toUpperCase(),
+  "string.toLocaleUpperCase": (self) => self.toLocaleUpperCase(),
+  "string.trim": (self) => self.trim(),
+  "string.length": (self) => self.length,
+  "string.valueOf": (self) => self,
+  "array.length": (self) => self.length,
+  "array.concat": (self, ...items) => self.concat(...items),
+  "array.join": (self, separator) => self.join(separator),
+  "array.slice": (self, start, end) => self.slice(start, end),
+  "array.indexOf": (self, searchElement, fromIndex) =>
+    self.indexOf(searchElement, fromIndex),
+  "array.includes": (self, searchElement, fromIndex) =>
+    self.includes(searchElement, fromIndex),
+  "array.map": (self, callbackfn) =>
+    self.map((value, index) => callbackfn(value, index)),
+  "array.filter": (self, predicate) =>
+    self.filter((value, index) => predicate(value, index)),
+  "array.with": (self, index, value) => self.with(index, value),
+  "array.toSorted": (self, compareFn) => self.toSorted(compareFn),
+  "array.toReversed": (self) => self.toReversed(),
+  "array.toSpliced": (self, start, deleteCount, ...items) =>
+    self.toSpliced(start, deleteCount, ...items),
   "Math.E": Math.E,
   "Math.LN10": Math.LN10,
   "Math.LN2": Math.LN2,
