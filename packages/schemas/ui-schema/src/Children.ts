@@ -1,5 +1,4 @@
-import type { Client } from "./Client.js";
-import type { ClientValue } from "./ClientValue.js";
+import type { Client, ClientValue } from "@backtickjs/core-schema";
 
 /**
  * What goes in a children position, one arm per way of writing it: one child,

@@ -7,17 +7,17 @@ export type {
   ArrayConstructor,
   ArrayLike,
   Boolean,
-  Children,
   Client,
   ClientElement,
   ClientHandle,
   Math,
   Number,
-  Prop,
   ReadonlyState,
   State,
   String,
 } from "@backtickjs/core-schema";
+
+export type Renderable = null | boolean | number | string;
 
 export interface ForProps<T> {
   /**

@@ -19,8 +19,8 @@ export {
   type JsxElementType,
   isJsxElement,
 } from "./JsxElement.js";
-export type { Prop } from "@backtickjs/core-schema";
-export type { Children } from "@backtickjs/core-schema";
+export type { Prop } from "@backtickjs/ui-schema";
+export type { Children } from "@backtickjs/ui-schema";
 export type { ClientValue } from "@backtickjs/core-schema";
 export type { ClientUnknown } from "@backtickjs/core-schema";
 export { cs } from "./cs.js";

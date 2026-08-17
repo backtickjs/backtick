@@ -198,6 +198,9 @@ importers:
       '@backtickjs/core-schema':
         specifier: workspace:*
         version: link:../schemas/core-schema
+      '@backtickjs/ui-schema':
+        specifier: workspace:*
+        version: link:../schemas/ui-schema
     devDependencies:
       prettier:
         specifier: ^3.6.2

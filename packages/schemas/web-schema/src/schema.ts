@@ -10,6 +10,8 @@ export const schema: Schema = {
 
   extends: [ui],
 
+  publishes: [],
+
   types: {
     BacktickNode: Type.Union([
       Type.Element(),

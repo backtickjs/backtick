@@ -13,6 +13,7 @@ import type { Schema } from "../dist/index.js";
 const core: Schema = {
   package: "@backtickjs/core",
   extends: [],
+  publishes: ["Client", "ClientElement"],
   types: {
     // names a drawing, so the framework's own name is reached from here
     Drawn: Type.Union([Type.Element(), Type.Null()]),
@@ -29,6 +30,9 @@ const core: Schema = {
 const middle: Schema = {
   package: "@backtickjs/middle",
   extends: [core],
+  // Published a schema above the root, which is what a layer between them is
+  // for: what a drawn position admits belongs where drawing does.
+  publishes: ["Prop", "Children"],
   types: {
     Shared: Type.Union([Type.String(), Type.Number()]),
   },
@@ -39,6 +43,7 @@ const middle: Schema = {
 const target: Schema = {
   package: "@backtickjs/target",
   extends: [middle],
+  publishes: [],
   types: {
     Props: Type.Interface([], {
       value: Type.Optional(Type.Ref("Shared")),
@@ -53,9 +58,9 @@ const target: Schema = {
 describe("declarations", () => {
   it("names a type where it is offered, not where it was written", () => {
     const written = declarations(target);
-    // `Shared` is the middle schema's and `Prop` is the framework's, two
-    // schemas up — both arrive from the one this is built on, so a target
-    // needs no dependency on a package further up the chain.
+    // `Shared` is the middle schema's own and `Prop` is what it publishes —
+    // both arrive from the one this is built on, so a target needs no
+    // dependency on a package further up the chain.
     assert.match(
       written,
       /import type \{[^}]*\bProp,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
@@ -117,6 +122,40 @@ describe("declarations", () => {
       /export interface Builtins \{\n {2}state: Cell;\n\}/,
     );
     assert.doesNotMatch(declarations(target), /interface Builtins/);
+  });
+
+  it("hands on what its base published, and never what it published itself", () => {
+    // `middle` publishes `Prop` and `Children`; `core` does not. So nothing in
+    // middle's artifact may claim they come from core — its own package is what
+    // publishes them, and the layer above reaches them from middle.
+    const written = declarations(middle);
+    assert.match(
+      written,
+      /export type \{\n {2}Cell,\n {2}Client,\n {2}ClientElement,\n {2}Drawn,\n\} from "@backtickjs\/core";/,
+    );
+    assert.doesNotMatch(written, /\bProp\b/);
+    assert.doesNotMatch(written, /\bChildren\b/);
+  });
+
+  it("imports what a declaration writes, not what it says about itself", () => {
+    // A framework name is found by reading the file back, since no ref names
+    // one — so prose that spells one has to not count, or the artifact imports
+    // a type nothing in it reads.
+    const prose: Schema = {
+      package: "@backtickjs/core",
+      extends: [],
+      publishes: ["Prop", "Children"],
+      types: {
+        Held: Type.String({
+          description: "Neither a `Prop` nor `Children`, whatever it says.",
+        }),
+      },
+      tags: {},
+      builtins: {},
+    };
+    const written = declarations(prose);
+    assert.match(written, /Neither a `Prop` nor `Children`/);
+    assert.doesNotMatch(written, /^import/m);
   });
 
   it("refuses a name the schema does not declare", () => {

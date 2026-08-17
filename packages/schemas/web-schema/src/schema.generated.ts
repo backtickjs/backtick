@@ -21,6 +21,7 @@ export type {
   Number,
   Prop,
   ReadonlyState,
+  Renderable,
   State,
   String,
 } from "@backtickjs/ui-schema";

@@ -7,7 +7,16 @@ export const schema: Schema = {
 
   extends: [core],
 
+  publishes: ["Prop", "Children"],
+
   types: {
+    Renderable: Type.Union([
+      Type.Null(),
+      Type.Boolean(),
+      Type.Number(),
+      Type.String(),
+    ]),
+
     ForProps: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([], {

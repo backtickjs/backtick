@@ -8,6 +8,9 @@ export interface Schema {
   /** The schemas this one builds on, whose names it reaches without writing. */
   readonly extends: readonly Schema[];
 
+  /** Names this package publishes by hand. */
+  readonly publishes: readonly string[];
+
   /** Reusable types that a `Type.Ref` can reach. */
   readonly types: Readonly<Record<string, TNode>>;
 
