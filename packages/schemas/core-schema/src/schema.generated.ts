@@ -639,5 +639,292 @@ export interface ArrayConstructor {
 export interface Builtins {
   Math: Math;
   Array: ArrayConstructor;
+  /**
+   * The mathematical constant e. This is Euler's number, the base of natural
+   * logarithms.
+   */
+  readonly "Math.E": number;
+  /**
+   * The natural logarithm of 10.
+   */
+  readonly "Math.LN10": number;
+  /**
+   * The natural logarithm of 2.
+   */
+  readonly "Math.LN2": number;
+  /**
+   * The base-2 logarithm of e.
+   */
+  readonly "Math.LOG2E": number;
+  /**
+   * The base-10 logarithm of e.
+   */
+  readonly "Math.LOG10E": number;
+  /**
+   * Pi. This is the ratio of the circumference of a circle to its diameter.
+   */
+  readonly "Math.PI": number;
+  /**
+   * The square root of 0.5, or, equivalently, one divided by the square root
+   * of 2.
+   */
+  readonly "Math.SQRT1_2": number;
+  /**
+   * The square root of 2.
+   */
+  readonly "Math.SQRT2": number;
+  /**
+   * Returns the absolute value of a number (the value without regard to
+   * whether it is positive or negative). For example, the absolute value of -5
+   * is the same as the absolute value of 5.
+   *
+   * @param x A numeric expression for which the absolute value is needed.
+   */
+  "Math.abs"(x: number): number;
+  /**
+   * Returns the arc cosine (or inverse cosine) of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.acos"(x: number): number;
+  /**
+   * Returns the arcsine of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.asin"(x: number): number;
+  /**
+   * Returns the arctangent of a number.
+   *
+   * @param x A numeric expression for which the arctangent is needed.
+   */
+  "Math.atan"(x: number): number;
+  /**
+   * Returns the angle (in radians) between the X axis and the line going
+   * through both the origin and the given point.
+   *
+   * @param y A numeric expression representing the cartesian y-coordinate.
+   * @param x A numeric expression representing the cartesian x-coordinate.
+   */
+  "Math.atan2"(y: number, x: number): number;
+  /**
+   * Returns the smallest integer greater than or equal to its numeric
+   * argument.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.ceil"(x: number): number;
+  /**
+   * Returns the cosine of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.cos"(x: number): number;
+  /**
+   * Returns e (the base of natural logarithms) raised to a power.
+   *
+   * @param x A numeric expression representing the power of e.
+   */
+  "Math.exp"(x: number): number;
+  /**
+   * Returns the greatest integer less than or equal to its numeric argument.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.floor"(x: number): number;
+  /**
+   * Returns the natural logarithm (base e) of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.log"(x: number): number;
+  /**
+   * Returns the larger of a set of supplied numeric expressions.
+   *
+   * Calling this with no arguments is a client error rather than an answer:
+   * the standard library takes none and answers `-Infinity`, which is not a
+   * value this language has.
+   *
+   * @param values Numeric expressions to be evaluated.
+   */
+  "Math.max"(...values: number[]): number;
+  /**
+   * Returns the smaller of a set of supplied numeric expressions.
+   *
+   * Calling this with no arguments is a client error rather than an answer:
+   * the standard library takes none and answers `Infinity`, which is not a
+   * value this language has.
+   *
+   * @param values Numeric expressions to be evaluated.
+   */
+  "Math.min"(...values: number[]): number;
+  /**
+   * Returns the value of a base expression taken to a specified power.
+   *
+   * @param x The base value of the expression.
+   * @param y The exponent value of the expression.
+   */
+  "Math.pow"(x: number, y: number): number;
+  /**
+   * Returns a pseudorandom number between 0 and 1.
+   */
+  "Math.random"(): number;
+  /**
+   * Returns a supplied numeric expression rounded to the nearest integer.
+   *
+   * @param x The value to be rounded to the nearest integer.
+   */
+  "Math.round"(x: number): number;
+  /**
+   * Returns the sine of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.sin"(x: number): number;
+  /**
+   * Returns the square root of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.sqrt"(x: number): number;
+  /**
+   * Returns the tangent of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.tan"(x: number): number;
+  /**
+   * Returns the number of leading zero bits in the 32-bit binary
+   * representation of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.clz32"(x: number): number;
+  /**
+   * Returns the result of 32-bit multiplication of two numbers.
+   *
+   * @param x First number
+   * @param y Second number
+   */
+  "Math.imul"(x: number, y: number): number;
+  /**
+   * Returns the sign of the x, indicating whether x is positive, negative or
+   * zero.
+   *
+   * @param x The numeric expression to test
+   */
+  "Math.sign"(x: number): number;
+  /**
+   * Returns the base 10 logarithm of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.log10"(x: number): number;
+  /**
+   * Returns the base 2 logarithm of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.log2"(x: number): number;
+  /**
+   * Returns the natural logarithm of 1 + x.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.log1p"(x: number): number;
+  /**
+   * Returns the result of (e^x - 1), which is an implementation-dependent
+   * approximation to subtracting 1 from the exponential function of x (e
+   * raised to the power of x, where e is the base of the natural logarithms).
+   *
+   * @param x A numeric expression.
+   */
+  "Math.expm1"(x: number): number;
+  /**
+   * Returns the hyperbolic cosine of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.cosh"(x: number): number;
+  /**
+   * Returns the hyperbolic sine of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.sinh"(x: number): number;
+  /**
+   * Returns the hyperbolic tangent of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.tanh"(x: number): number;
+  /**
+   * Returns the inverse hyperbolic cosine of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.acosh"(x: number): number;
+  /**
+   * Returns the inverse hyperbolic sine of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.asinh"(x: number): number;
+  /**
+   * Returns the inverse hyperbolic tangent of a number.
+   *
+   * @param x A numeric expression that contains an angle measured in radians.
+   */
+  "Math.atanh"(x: number): number;
+  /**
+   * Returns the square root of the sum of squares of its arguments.
+   *
+   * @param values Values to compute the square root for. If no arguments are
+   * passed, the result is +0. If there is only one argument, the result is the
+   * absolute value. If any argument is +Infinity or -Infinity, the result is
+   * +Infinity. If any argument is NaN, the result is NaN. If all arguments are
+   * either +0 or −0, the result is +0.
+   */
+  "Math.hypot"(...values: number[]): number;
+  /**
+   * Returns the integral part of the numeric expression x, removing any
+   * fractional digits. If x is already an integer, the result is x.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.trunc"(x: number): number;
+  /**
+   * Returns the nearest single precision float representation of a number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.fround"(x: number): number;
+  /**
+   * Returns an implementation-dependent approximation to the cube root of
+   * number.
+   *
+   * @param x A numeric expression.
+   */
+  "Math.cbrt"(x: number): number;
+  /**
+   * Creates an array from an array-like object.
+   *
+   * The mapper is required, where the standard library makes it optional:
+   * without one, a source that names only a length answers with holes, and a
+   * hole reads as `undefined` — which this language has no value for.
+   *
+   * @param arrayLike An array-like object to convert to an array.
+   * @param mapfn A mapping function to call on every element of the array.
+   */
+  "Array.from"<T extends ClientValue, U extends ClientValue>(
+    arrayLike: ArrayLike<T>,
+    mapfn: (v: T, k: number) => U,
+  ): U[];
+  /**
+   * Returns a new array from a set of elements.
+   *
+   * @param items A set of elements to include in the new array object.
+   */
+  "Array.of"<T extends ClientValue>(...items: T[]): T[];
   state<T extends ClientValue>(initial: T): State<T>;
 }
