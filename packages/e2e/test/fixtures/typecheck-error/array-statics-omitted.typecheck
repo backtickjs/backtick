@@ -1,2 +1,2 @@
-6:32 error TS2339: Property 'isArray' does not exist on type 'ArrayConstructor<ClientValue>'.
+6:32 error TS2339: Property 'isArray' does not exist on type 'ArrayConstructor'.
 11:31 error TS2554: Expected 2 arguments, but got 1.

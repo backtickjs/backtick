@@ -1037,65 +1037,62 @@ export const schema: Schema = {
       }),
     ),
 
-    ArrayConstructor: Type.Generic(
-      [Type.GenericParameter("TValue")],
-      Type.Interface([], {
-        from: Type.Generic(
+    ArrayConstructor: Type.Interface([], {
+      from: Type.Generic(
+        [
+          Type.GenericParameter("T", Type.Ref("ClientValue")),
+          Type.GenericParameter("U", Type.Ref("ClientValue")),
+        ],
+        Type.Function(
           [
-            Type.GenericParameter("T", Type.Ref("TValue")),
-            Type.GenericParameter("U", Type.Ref("TValue")),
+            Type.FunctionParameter(
+              "arrayLike",
+              Type.Apply(Type.Ref("ArrayLike"), [Type.Ref("T")]),
+              {
+                description: "An array-like object to convert to an array.",
+              },
+            ),
+            Type.FunctionParameter(
+              "mapfn",
+              Type.Function(
+                [
+                  Type.FunctionParameter("v", Type.Ref("T")),
+                  Type.FunctionParameter("k", Type.Number()),
+                ],
+                Type.Ref("U"),
+              ),
+              {
+                description:
+                  "A mapping function to call on every element of the array.",
+              },
+            ),
           ],
-          Type.Function(
-            [
-              Type.FunctionParameter(
-                "arrayLike",
-                Type.Apply(Type.Ref("ArrayLike"), [Type.Ref("T")]),
-                {
-                  description: "An array-like object to convert to an array.",
-                },
-              ),
-              Type.FunctionParameter(
-                "mapfn",
-                Type.Function(
-                  [
-                    Type.FunctionParameter("v", Type.Ref("T")),
-                    Type.FunctionParameter("k", Type.Number()),
-                  ],
-                  Type.Ref("U"),
-                ),
-                {
-                  description:
-                    "A mapping function to call on every element of the array.",
-                },
-              ),
-            ],
-            Type.Array(Type.Ref("U")),
-          ),
-          {
-            description:
-              "Creates an array from an array-like object.\n\n" +
-              "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
-          },
+          Type.Array(Type.Ref("U")),
         ),
-        of: Type.Generic(
-          [Type.GenericParameter("T", Type.Ref("TValue"))],
-          Type.Function(
-            [
-              Type.Rest(
-                Type.FunctionParameter("items", Type.Ref("T"), {
-                  description:
-                    "A set of elements to include in the new array object.",
-                }),
-              ),
-            ],
-            Type.Array(Type.Ref("T")),
-          ),
-          {
-            description: "Returns a new array from a set of elements.",
-          },
+        {
+          description:
+            "Creates an array from an array-like object.\n\n" +
+            "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
+        },
+      ),
+      of: Type.Generic(
+        [Type.GenericParameter("T", Type.Ref("ClientValue"))],
+        Type.Function(
+          [
+            Type.Rest(
+              Type.FunctionParameter("items", Type.Ref("T"), {
+                description:
+                  "A set of elements to include in the new array object.",
+              }),
+            ),
+          ],
+          Type.Array(Type.Ref("T")),
         ),
-      }),
-    ),
+        {
+          description: "Returns a new array from a set of elements.",
+        },
+      ),
+    }),
   },
 
   // Core draws nothing: what a list or a tag accepts is a schema built on this
@@ -1105,12 +1102,9 @@ export const schema: Schema = {
 
   builtins: {
     Math: Type.Ref("Math"),
-    Array: Type.Generic(
-      [Type.GenericParameter("TValue")],
-      Type.Apply(Type.Ref("ArrayConstructor"), [Type.Ref("TValue")]),
-    ),
+    Array: Type.Ref("ArrayConstructor"),
     state: Type.Generic(
-      [Type.GenericParameter("T", Type.Ref("TValue"))],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Function(
         [Type.FunctionParameter("initial", Type.Ref("T"))],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
