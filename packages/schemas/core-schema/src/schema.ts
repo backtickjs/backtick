@@ -12,13 +12,14 @@ import { Type, type Schema, type TNode } from "@backtickjs/schema";
  *
  * The receiver is written down because this document is read by clients that
  * have no `this` — a member of a value is a call the value is handed to, and
- * saying so is the schema's job rather than a host's convention. A member that
- * holds a value is a call for the same reason: what `string.length` answers
- * depends on the string, so it takes one.
+ * saying so is the schema's job rather than a host's convention. A member
+ * holding a value takes nothing: `string.length` is a number, and the prefix
+ * already says which value it is read off.
  *
- * The nodes are the interface's own, so the two shapes cannot drift while both
- * are declared. An index signature stays where it is: it is reached by `[]`
- * rather than by a name, so there is no whole name to write it under.
+ * An index signature is not written under a name at all. It is reached by `[]`
+ * rather than by one, and what a client does with `[]` is the language's own
+ * rule rather than a member it looks up — so there is nothing here to declare
+ * and nothing for a client to answer.
  */
 function under(
   prefix: string,
@@ -30,30 +31,33 @@ function under(
     description: "The value the member is reached off.",
   });
   return Object.fromEntries(
-    Object.entries(members)
-      .filter(([, node]) => node.type !== "index")
-      .map(([name, node]) => {
-        // What the receiver's type says is the member's to declare once the
-        // member stands alone: `array.map` binds the `T` that `Array<T>` used
-        // to bind for it, and adds its own `U` after it.
-        const written = node.type === "generic" ? node.expression : node;
-        const own = node.type === "generic" ? node.parameters : [];
-        const signature =
-          written.type === "function"
-            ? Type.Function([self, ...written.parameters], written.returnType)
-            : Type.Function([self], written);
-        const parameters = [...carried, ...own];
-        return [
-          `${prefix}.${name}`,
-          parameters.length === 0
-            ? Type.Function(signature.parameters, signature.returnType, {
-                description: node.description,
-              })
-            : Type.Generic(parameters, signature, {
-                description: node.description,
-              }),
-        ];
-      }),
+    Object.entries(members).map(([name, node]) => {
+      // What the receiver's type says is the member's to declare once the
+      // member stands alone: `array.map` binds the `T` that `Array<T>` used
+      // to bind for it, and adds its own `U` after it.
+      const written = node.type === "generic" ? node.expression : node;
+      const own = node.type === "generic" ? node.parameters : [];
+      // A member that holds a value keeps the node it was written with:
+      // there is no receiver to write into a number.
+      if (written.type !== "function") {
+        return [`${prefix}.${name}`, node];
+      }
+      const signature = Type.Function(
+        [self, ...written.parameters],
+        written.returnType,
+      );
+      const parameters = [...carried, ...own];
+      return [
+        `${prefix}.${name}`,
+        parameters.length === 0
+          ? Type.Function(signature.parameters, signature.returnType, {
+              description: node.description,
+            })
+          : Type.Generic(parameters, signature, {
+              description: node.description,
+            }),
+      ];
+    }),
   );
 }
 
@@ -346,9 +350,6 @@ const StringMembers: Readonly<Record<string, TNode>> = {
   valueOf: Type.Function([], Type.String(), {
     description: "Returns the primitive value of the specified object.",
   }),
-  index: Type.Index("index", Type.Number(), Type.String(), {
-    readOnly: true,
-  }),
 };
 
 const ArrayMembers: Readonly<Record<string, TNode>> = {
@@ -562,9 +563,6 @@ const ArrayMembers: Readonly<Record<string, TNode>> = {
         "Copies an array and removes elements while, if necessary, inserting new elements in their place, returning the remaining elements.",
     },
   ),
-  index: Type.Index("index", Type.Number(), Type.Ref("T"), {
-    readOnly: true,
-  }),
 };
 
 /**
@@ -656,17 +654,6 @@ export const schema: Schema = {
           "A cell as a script reads it.\n\n" +
           "Declaring one is not here: `state()` is a name the compiler recognises, and declaring happens while a component is being expanded and has to know which instance is running. This is the half that reaches the client.",
       },
-    ),
-
-    Boolean: Type.Interface([], BooleanMembers),
-
-    Number: Type.Interface([], NumberMembers),
-
-    String: Type.Interface([], StringMembers),
-
-    Array: Type.Generic(
-      [Type.GenericParameter("T")],
-      Type.Interface([], ArrayMembers),
     ),
 
     ArrayLike: Type.Generic(

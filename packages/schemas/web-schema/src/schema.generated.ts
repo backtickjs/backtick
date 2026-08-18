@@ -8,9 +8,7 @@ import type {
 } from "@backtickjs/ui-schema";
 
 export type {
-  Array,
   ArrayLike,
-  Boolean,
   Children,
   Client,
   ClientElement,
@@ -19,12 +17,10 @@ export type {
   ClientUnknown,
   ClientValue,
   ForProps,
-  Number,
   Prop,
   ReadonlyState,
   Renderable,
   State,
-  String,
 } from "@backtickjs/ui-schema";
 
 export type BacktickNode = ClientElement | string | number | null;

@@ -8,43 +8,26 @@ import { boxes, globals } from "@backtickjs/js-interpreter";
 // declared, fails here rather than at the first bundle that reaches it.
 
 describe("boxes", () => {
-  // Which interface a primitive autoboxes to is the client's own decision, so
-  // it is written here as the client writes it — the schema says what each
-  // interface holds and not what reaches one.
-  const boxed = {
-    array: "Array",
-    boolean: "Boolean",
-    number: "Number",
-    string: "String",
-  } as const;
+  // Which table a primitive autoboxes to is the client's own decision, so the
+  // four are named here as the client names them. What each one holds is the
+  // schema's, read off the whole names under that prefix.
+  const boxed = ["array", "boolean", "number", "string"];
 
-  it("the client answers for every member a boxed interface declares", () => {
-    const answered = new Map(Object.entries(boxes));
-    for (const [boxes_, name] of Object.entries(boxed)) {
-      const node = schema.types[name];
-      assert.ok(node !== undefined, `the schema declares no \`${name}\``);
-      const held = (node.type === "generic" ? node.expression : node) as {
-        type: string;
-        properties: Record<string, { type?: string }>;
-      };
-      assert.equal(
-        held.type,
-        "interface",
-        `\`${name}\` is not an interface a client can answer for`,
-      );
-      const table = answered.get(boxes_) as Record<string, unknown>;
-      assert.ok(table !== undefined, `nothing answers for a boxed ${boxes_}`);
-      for (const [member, what] of Object.entries(held.properties)) {
-        // An index signature is reached by `[]` rather than by name, so it is
-        // element access's to answer and not a member of this table.
-        if (what.type === "index") {
-          continue;
-        }
-        assert.ok(
-          member in table,
-          `\`${name}.${member}\` is declared and not answered`,
-        );
+  it("the client answers for every member a boxed value declares", () => {
+    const answered = boxes as unknown as Record<
+      string,
+      Record<string, unknown>
+    >;
+    for (const name of Object.keys(schema.builtins)) {
+      const at = name.indexOf(".");
+      const prefix = name.slice(0, at);
+      if (!boxed.includes(prefix)) {
+        continue;
       }
+      assert.ok(
+        name.slice(at + 1) in answered[prefix],
+        `\`${name}\` is declared and not answered`,
+      );
     }
   });
 });

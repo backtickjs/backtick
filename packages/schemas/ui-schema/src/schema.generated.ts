@@ -3,18 +3,14 @@
 import type { ClientHandle, ReadonlyState } from "@backtickjs/core-schema";
 
 export type {
-  Array,
   ArrayLike,
-  Boolean,
   Client,
   ClientFunction,
   ClientHandle,
   ClientUnknown,
   ClientValue,
-  Number,
   ReadonlyState,
   State,
-  String,
 } from "@backtickjs/core-schema";
 
 declare const ClientElementBrand: unique symbol;

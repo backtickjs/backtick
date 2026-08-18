@@ -48,9 +48,17 @@ export const globals: Builtins = {
   "string.toUpperCase": (self) => self.toUpperCase(),
   "string.toLocaleUpperCase": (self) => self.toLocaleUpperCase(),
   "string.trim": (self) => self.trim(),
-  "string.length": (self) => self.length,
+  // A member holding a value is answered by a getter, which is how a JavaScript
+  // object says "computed from the receiver". The receiver arrives as the
+  // getter's `this`, which is why the cast: a getter cannot declare a `this`
+  // parameter, and the literal's own `this` is the table.
+  get "string.length"(): number {
+    return (this as unknown as string).length;
+  },
   "string.valueOf": (self) => self,
-  "array.length": (self) => self.length,
+  get "array.length"(): number {
+    return (this as unknown as readonly unknown[]).length;
+  },
   "array.concat": (self, ...items) => self.concat(...items),
   "array.join": (self, separator) => self.join(separator),
   "array.slice": (self, start, end) => self.slice(start, end),

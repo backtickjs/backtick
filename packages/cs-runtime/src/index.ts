@@ -1,11 +1,13 @@
 export type { Client } from "@backtickjs/core-schema";
+export type { Builtins } from "@backtickjs/core-schema";
 export type {
-  Builtins,
   Array,
+  ArrayConstructor,
   Boolean,
+  Math,
   Number,
   String,
-} from "@backtickjs/core-schema";
+} from "./receivers.generated.js";
 export {
   type ClientScript,
   isClientScript,
