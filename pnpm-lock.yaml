@@ -195,9 +195,9 @@ importers:
 
   packages/cs-runtime:
     dependencies:
-      '@backtickjs/core-schema':
+      '@backtickjs/language-schema':
         specifier: workspace:*
-        version: link:../schemas/core-schema
+        version: link:../schemas/language-schema
       '@backtickjs/ui-schema':
         specifier: workspace:*
         version: link:../schemas/ui-schema
@@ -220,15 +220,15 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/core-schema':
-        specifier: workspace:*
-        version: link:../schemas/core-schema
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
       '@backtickjs/js-interpreter':
         specifier: workspace:*
         version: link:../js-interpreter
+      '@backtickjs/language-schema':
+        specifier: workspace:*
+        version: link:../schemas/language-schema
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../prettier-plugin
@@ -445,7 +445,7 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/schemas/core-schema:
+  packages/schemas/language-schema:
     dependencies:
       '@backtickjs/schema':
         specifier: workspace:*
@@ -460,9 +460,9 @@ importers:
 
   packages/schemas/ui-schema:
     dependencies:
-      '@backtickjs/core-schema':
+      '@backtickjs/language-schema':
         specifier: workspace:*
-        version: link:../core-schema
+        version: link:../language-schema
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../../schema

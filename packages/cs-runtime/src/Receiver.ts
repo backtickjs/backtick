@@ -7,8 +7,8 @@ import type {
   String,
 } from "./receivers.generated.js";
 import type { ClientElement } from "@backtickjs/ui-schema";
-import type { ClientFunction } from "@backtickjs/core-schema";
-import type { ClientValue } from "@backtickjs/core-schema";
+import type { ClientFunction } from "@backtickjs/language-schema";
+import type { ClientValue } from "@backtickjs/language-schema";
 
 // A built-in receiver autoboxes to its client type.
 //

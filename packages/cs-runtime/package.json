@@ -25,7 +25,7 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@backtickjs/core-schema": "workspace:*",
+    "@backtickjs/language-schema": "workspace:*",
     "@backtickjs/ui-schema": "workspace:*"
   }
 }

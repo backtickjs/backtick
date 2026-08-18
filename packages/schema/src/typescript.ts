@@ -15,8 +15,9 @@ import {
  * The vocabulary the generators here write with, exported because a generator
  * that is not one of them still writes the same language: cs-runtime turns the
  * flat builtins into the interfaces a typechecker reads them through, and it
- * lives there because only core's names are read that way. A second printer
- * beside this one would be a second dialect of the same output.
+ * lives there because only the language's own names are read that way. A
+ * second printer beside this one would be a second dialect of the same
+ * output.
  */
 export const typescript = {
   documentation,

@@ -1,4 +1,4 @@
-import type { Client, ClientValue } from "@backtickjs/core-schema";
+import type { Client, ClientValue } from "@backtickjs/language-schema";
 
 /**
  * What goes in a children position, one arm per way of writing it: one child,

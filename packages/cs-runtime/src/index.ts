@@ -1,5 +1,5 @@
-export type { Client } from "@backtickjs/core-schema";
-export type { Builtins } from "@backtickjs/core-schema";
+export type { Client } from "@backtickjs/language-schema";
+export type { Builtins } from "@backtickjs/language-schema";
 export type {
   Array,
   ArrayConstructor,
@@ -22,8 +22,8 @@ export {
 } from "./JsxElement.js";
 export type { Prop } from "@backtickjs/ui-schema";
 export type { Children } from "@backtickjs/ui-schema";
-export type { ClientValue } from "@backtickjs/core-schema";
-export type { ClientUnknown } from "@backtickjs/core-schema";
+export type { ClientValue } from "@backtickjs/language-schema";
+export type { ClientUnknown } from "@backtickjs/language-schema";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export {
@@ -33,7 +33,7 @@ export {
   type Spliced,
 } from "./Spliceable.js";
 export { type ClientState, isClientState } from "./ClientState.js";
-export type { ReadonlyState, State } from "@backtickjs/core-schema";
+export type { ReadonlyState, State } from "@backtickjs/language-schema";
 export type { Widen } from "./Widen.js";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "./ServerComponent.js";

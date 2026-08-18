@@ -1,6 +1,6 @@
-import type { Client } from "@backtickjs/core-schema";
-import type { ClientValue } from "@backtickjs/core-schema";
-import type { ReadonlyState } from "@backtickjs/core-schema";
+import type { Client } from "@backtickjs/language-schema";
+import type { ClientValue } from "@backtickjs/language-schema";
+import type { ReadonlyState } from "@backtickjs/language-schema";
 import type { ClientElement } from "@backtickjs/ui-schema";
 
 /**

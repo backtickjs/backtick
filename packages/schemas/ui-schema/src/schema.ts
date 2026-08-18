@@ -1,11 +1,11 @@
-import { schema as core } from "@backtickjs/core-schema";
+import { schema as language } from "@backtickjs/language-schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 
 export const schema: Schema = {
   package: "@backtickjs/ui-schema",
 
-  extends: [core],
+  extends: [language],
 
   publishes: ["Prop", "Children"],
 

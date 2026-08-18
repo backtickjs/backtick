@@ -3,18 +3,19 @@ import { writeFileSync } from "node:fs";
 import { format } from "prettier";
 import { Type, flatten, typescript } from "@backtickjs/schema";
 import type { TNode } from "@backtickjs/schema";
-import { schema } from "@backtickjs/core-schema";
+import { schema } from "@backtickjs/language-schema";
 
-// Core's flat builtins, as the interfaces a typechecker reads them through.
+// The language's flat builtins, as the interfaces a typechecker reads them
+// through.
 //
 // The table says `string.charAt(self, pos)` and a script writes `s.charAt(0)`,
 // so something has to read the whole names back as members. It is here and not
-// beside the schema because only core's names are read this way — another
-// schema's builtins reach a script as client scripts it splices in — and
-// because which value is reached through which interface is this package's
-// own decision, already written in `Autoboxed` and `ClientGlobal`. This is the
-// third statement of that decision and the one that has to agree with the
-// schema, so it is derived from it rather than written again.
+// beside the schema because only the language's own names are read this way —
+// another schema's builtins reach a script as client scripts it splices in —
+// and because which value is reached through which interface is this
+// package's own decision, already written in `Autoboxed` and `ClientGlobal`.
+// This is the third statement of that decision and the one that has to agree
+// with the schema, so it is derived from it rather than written again.
 
 /** A type parameter, which a generic node holds and `TNode` does not name. */
 type Parameter = Extract<TNode, { type: "generic" }>["parameters"][number];
@@ -52,7 +53,7 @@ const named: Record<string, { as: string }> = {
   Array: { as: "ArrayConstructor" },
 };
 
-/** Everything in scope, inherited included, which for core is its own. */
+/** Everything in scope, inherited included — for this schema, its own. */
 const all = flatten(schema);
 
 /** Whether a node mentions a name, however deep. */
@@ -173,9 +174,9 @@ const views = [
   ]),
 ] as [string, TNode][];
 
-// A name a view reaches for and no view declares is core's, and is imported
-// rather than written again: `Array.from` takes an `ArrayLike<T>`, which is a
-// shape a signature mentions and so a type the schema keeps.
+// A name a view reaches for and no view declares is the language schema's, and
+// is imported rather than written again: `Array.from` takes an `ArrayLike<T>`,
+// which is a shape a signature mentions and so a type the schema keeps.
 const own = views.reduce(
   (found, [, node]) => bound(node, found),
   new Set(views.map(([name]) => name)),
@@ -192,7 +193,7 @@ const lines = [
   ...(wanted.length === 0
     ? []
     : [
-        `import type { ${wanted.join(", ")} } from "@backtickjs/core-schema";`,
+        `import type { ${wanted.join(", ")} } from "@backtickjs/language-schema";`,
         "",
       ]),
   ...views.flatMap(([name, node]) => [

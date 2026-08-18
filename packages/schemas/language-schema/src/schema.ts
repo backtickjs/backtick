@@ -12,7 +12,7 @@ import { Type, type Schema } from "@backtickjs/schema";
  * because that is how a script reaches it and how the compiler recognises it.
  */
 export const schema: Schema = {
-  package: "@backtickjs/core-schema",
+  package: "@backtickjs/language-schema",
 
   extends: [],
 
@@ -100,9 +100,9 @@ export const schema: Schema = {
     ),
   },
 
-  // Core draws nothing: what a list or an element accepts is a schema built on
-  // this one, and this says only what a script reaches whether anything is
-  // drawn or not.
+  // The language draws nothing: what a list or an element accepts is a schema
+  // built on this one, and this says only what a script reaches whether
+  // anything is drawn or not.
   elements: {},
 
   /**

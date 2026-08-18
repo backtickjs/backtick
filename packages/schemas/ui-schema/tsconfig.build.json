@@ -5,7 +5,7 @@
     "sourceMap": true
   },
   "references": [
-    { "path": "../core-schema/tsconfig.build.json" },
+    { "path": "../language-schema/tsconfig.build.json" },
     { "path": "../../schema/tsconfig.build.json" }
   ]
 }
