@@ -12,6 +12,12 @@ import type { Schema } from "./Schema.js";
  * reads last. Redefining an inherited name throws rather than winning: an
  * element or a function is answered by the client that declared it, and two
  * answers is a question about which one the wire meant.
+ *
+ * One namespace across the three records, for the same reason. A name is the
+ * unit two ends agree over — a capability list is written per name — so a name
+ * meaning a type here and a builtin there is a list that cannot be written
+ * without saying which record each entry came from. `Math` was both until the
+ * builtins went flat; this is what keeps it from happening again.
  */
 export function flatten(schema: Schema): Schema {
   const types: Record<string, Schema["types"][string]> = {};
@@ -23,6 +29,10 @@ export function flatten(schema: Schema): Schema {
   // diamond is two paths to one declaration. Identity, since a name is only
   // ever declared once and the same schema is the same object.
   const seen = new Set<Schema>();
+
+  // Every name taken, and what took it. One map for the three records, which is
+  // what makes them one namespace.
+  const declared = new Map<string, string>();
 
   function take(one: Schema): void {
     if (seen.has(one)) {
@@ -44,11 +54,20 @@ export function flatten(schema: Schema): Schema {
     what: string,
   ): void {
     for (const [name, node] of Object.entries(from)) {
-      if (name in into) {
+      const already = declared.get(name);
+      // A record holds a name once, so the same kind twice is two schemas; a
+      // different kind is one name meaning two things, wherever it came from.
+      if (already === what) {
         throw new Error(
           `a schema it extends already declares the ${what} \`${name}\``,
         );
       }
+      if (already !== undefined) {
+        throw new Error(
+          `\`${name}\` is declared as a ${already} and as a ${what}`,
+        );
+      }
+      declared.set(name, what);
       into[name] = node;
     }
   }
