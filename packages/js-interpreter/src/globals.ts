@@ -18,9 +18,9 @@ import { createSignal } from "solid-js";
 //
 // A member of a value takes the value first, because that is what the schema
 // says it takes: a client with no `this` reads the same document and answers the
-// same way. `boxes` still holds the bodies a member access reaches and these are
-// written out beside them, one line each, until `memberOf` reads this table and
-// `boxes` goes.
+// same way. A member access reads this table and binds the value it was reached
+// off, so these are the bodies it reaches and there is no second table beside
+// them.
 export const globals: Builtins = {
   "boolean.valueOf": (self) => self,
   "number.toString": (self, radix) => self.toString(radix),

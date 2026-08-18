@@ -1,36 +1,13 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { NodeKind, type Bundle } from "@backtickjs/core";
 import { schema } from "@backtickjs/core-schema";
-import { boxes, globals } from "@backtickjs/js-interpreter";
+import { globals } from "@backtickjs/js-interpreter";
+import { evaluate } from "./test-client/index.ts";
 
 // What the reference client answers with, against what the schema says a script
 // may reach. A name declared and not implemented, or implemented and not
 // declared, fails here rather than at the first bundle that reaches it.
-
-describe("boxes", () => {
-  // Which table a primitive autoboxes to is the client's own decision, so the
-  // four are named here as the client names them. What each one holds is the
-  // schema's, read off the whole names under that prefix.
-  const boxed = ["array", "boolean", "number", "string"];
-
-  it("the client answers for every member a boxed value declares", () => {
-    const answered = boxes as unknown as Record<
-      string,
-      Record<string, unknown>
-    >;
-    for (const name of Object.keys(schema.builtins)) {
-      const at = name.indexOf(".");
-      const prefix = name.slice(0, at);
-      if (!boxed.includes(prefix)) {
-        continue;
-      }
-      assert.ok(
-        name.slice(at + 1) in answered[prefix],
-        `\`${name}\` is declared and not answered`,
-      );
-    }
-  });
-});
 
 describe("builtins", () => {
   it("the client answers for every name in scope", () => {
@@ -57,5 +34,41 @@ describe("builtins", () => {
   it("refuse an empty `Math.min`/`Math.max`", () => {
     assert.throws(() => globals["Math.min"](), /at least one number/);
     assert.throws(() => globals["Math.max"](), /at least one number/);
+  });
+});
+
+describe("a member the schema leaves out", () => {
+  // Written by hand because nothing else can reach it: the typechecker rejects
+  // `padStart` where a fixture would declare one, so this is the bundle a
+  // bundler that had not rejected it would have written.
+  const bundle: Bundle = {
+    functions: {
+      "0": [
+        [
+          NodeKind.ArrowFunction,
+          [],
+          [
+            NodeKind.Block,
+            [
+              [
+                NodeKind.ReturnStatement,
+                [NodeKind.PropertyAccessExpression, "abc", false, "padStart"],
+              ],
+            ],
+          ],
+        ],
+      ],
+    },
+    root: [NodeKind.ApplyFunction, "0", []],
+  };
+
+  it("is a name this language has no meaning for", () => {
+    // Not absent, and not the host's: reading it as null would let a bundle ask
+    // for a member the schema left out and carry on, and the flat table holds
+    // every name a value has — so nothing answering is the whole answer.
+    assert.throws(
+      () => evaluate(bundle),
+      /a string has no `padStart` in this language/,
+    );
   });
 });

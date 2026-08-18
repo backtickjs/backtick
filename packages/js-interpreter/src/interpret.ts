@@ -12,7 +12,6 @@ import type {
   ClientValue,
   FunctionLabel,
 } from "@backtickjs/core";
-import { boxes } from "./boxes.js";
 import { globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileElement } from "./view.js";
@@ -147,12 +146,13 @@ const table = globals as unknown as Readonly<Record<string, ClientValue>>;
 // one — and not how to call one, so applying is this client's own knowledge.
 type Applied = (...args: ClientValue[]) => ClientValue;
 
-// A member access on a primitive reads from the schema's classes rather than
-// from the host's prototypes: a member the schema left out stays left out,
-// where `value[member]` would hand back whatever JavaScript happens to have.
+// A member access on a primitive reads from the one table by the whole name
+// rather than from the host's prototypes: a member the schema left out stays
+// left out, where `value[member]` would hand back whatever JavaScript happens
+// to have.
 //
-// Which class a value autoboxes to is `boxes`'s own key, so the four are named
-// here as they are named there and nothing widens.
+// Which name a value is reached under is this client's own decision, and the
+// four are named here as the schema writes them.
 //
 // `Reflect.get` rather than an index, so a member declared as a value — a
 // string's `length` — is read with the value as its receiver.
@@ -176,8 +176,8 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     return (object as { readonly [name: string]: ClientValue })[name] ?? null;
   }
   const found: ClientValue | undefined = Reflect.get(
-    boxes[boxed],
-    name,
+    table,
+    `${boxed}.${name}`,
     object,
   );
   if (found === undefined) {
@@ -186,7 +186,14 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     // let a bundle ask for `padStart` and carry on.
     throw new Error(`a ${boxed} has no \`${name}\` in this language`);
   }
-  return found;
+  // The table takes the receiver as an argument, because a client with no
+  // `this` reads the same document and answers the same way. Binding it here
+  // and not at the call is what makes one rule cover a member called now, a
+  // member called later and a member passed on — at a closure per access,
+  // which is what a receiver costs when it is not carried by the language.
+  return typeof found === "function"
+    ? (...args: ClientValue[]) => (found as Applied)(object, ...args)
+    : found;
 }
 
 export function compile(
@@ -330,7 +337,9 @@ function buildNode(
           if (typeof method !== "function") {
             throw new Error(`${name} is not a function`);
           }
-          return (method as Applied).apply(object, args(scope));
+          // The receiver is already bound: `memberOf` closed over it, so a
+          // method reached by `.` and one passed on are the same value.
+          return (method as Applied)(...args(scope));
         };
       }
       const target = compile(instance, callee);
