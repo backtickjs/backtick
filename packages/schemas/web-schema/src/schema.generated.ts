@@ -24,7 +24,7 @@ export type {
   State,
 } from "@backtickjs/ui-schema";
 
-export type BacktickNode = ClientElement | string | number | null;
+export type HtmlChild = ClientElement | string | number | null;
 
 export type Booleanish = boolean | "true" | "false";
 
@@ -318,7 +318,7 @@ export interface GlobalAttributes extends AriaAttributes, Events {
 export interface VoidProps extends GlobalAttributes {}
 
 export interface HtmlProps extends GlobalAttributes {
-  children?: Children<BacktickNode>;
+  children?: Children<HtmlChild>;
 }
 
 export interface AnchorProps extends HtmlProps {
