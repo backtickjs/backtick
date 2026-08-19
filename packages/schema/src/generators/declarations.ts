@@ -372,11 +372,15 @@ export function prop(name: string, node: TNode, required: boolean): string {
   // Which prop holds what is written inside an element is JSX's own rule — the one
   // `JSX.ElementChildrenAttribute` names — so the *wrapper* is decided here and
   // what it wraps comes from the schema.
-  const written =
-    name === "children"
+  //
+  // A function is a script wherever it stands, the children position included:
+  // `<for>` holds one that makes drawings rather than a drawing, and `Children`
+  // would admit a host function and a list of them beside it. So what the node
+  // is decides first, and where it stands only after that.
+  const written = IsFunction(node)
+    ? `Client<${type(node)}>`
+    : name === "children"
       ? `Children<${type(node)}>`
-      : IsFunction(node)
-        ? `Client<${type(node)}>`
-        : `Prop<${type(node)}>`;
+      : `Prop<${type(node)}>`;
   return `  ${key(name)}${optional}: ${written};`;
 }

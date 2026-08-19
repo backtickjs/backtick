@@ -335,7 +335,13 @@ export function interfaceLines(
     // written, so a name is declared once whichever reads it.
     ...Object.entries(of.properties).flatMap(([called, what]) =>
       props
-        ? [prop(called, what, (of.required ?? []).includes(called))]
+        ? [
+            // Beside `prop` rather than inside it: one line is all a prop is,
+            // and inline element props are built from the same call — so what
+            // a member says about itself is written where members are.
+            ...documentation(what, "  ", tags(what)),
+            prop(called, what, (of.required ?? []).includes(called)),
+          ]
         : member(called, what),
     ),
   ];

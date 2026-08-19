@@ -57,6 +57,26 @@ const target: Schema = {
   builtins: {},
 };
 
+/** An element whose children position holds a script that makes drawings. */
+const list: Schema = {
+  package: "@backtickjs/list",
+  extends: [middle],
+  publishes: [],
+  types: {
+    ListProps: Type.Interface([], {
+      each: Type.Array(Type.Ref("Shared"), {
+        description: "The array to draw one thing per member of.",
+      }),
+      children: Type.Function(
+        [Type.FunctionParameter("member", Type.Ref("Shared"))],
+        Type.Ref("Drawing"),
+      ),
+    }),
+  },
+  elements: { list: Type.Ref("ListProps") },
+  builtins: {},
+};
+
 describe("declarations", () => {
   it("names a type where it is offered, not where it was written", () => {
     const written = declarations(target);
@@ -108,6 +128,23 @@ describe("declarations", () => {
     assert.match(written, /export interface Props/);
     assert.doesNotMatch(written, /export type Shared/);
     assert.doesNotMatch(written, /export interface Cell/);
+  });
+
+  it("writes a children position holding a function as a script", () => {
+    // A script and never `Children`, which would admit a host function and a
+    // list of them beside it: what stands here makes drawings rather than
+    // being one.
+    assert.match(
+      declarations(list),
+      /children: Client<\(member: Shared\) => Drawing>;/,
+    );
+  });
+
+  it("keeps what a prop says about itself", () => {
+    assert.match(
+      declarations(list),
+      / \* The array to draw one thing per member of\.\n {3}\*\/\n {2}each: Prop<Shared\[\]>;/,
+    );
   });
 
   it("wraps what an element accepts, and only that", () => {

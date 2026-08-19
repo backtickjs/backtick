@@ -13,7 +13,7 @@ export const schema: Schema = {
     ClientElement: Type.Interface([Type.Ref("ClientHandle")], {}),
 
     ForProps: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
         each: Type.Array(Type.Ref("T"), {
           description: "The array to draw one thing per member of.",
@@ -36,7 +36,26 @@ export const schema: Schema = {
     ),
   },
 
-  elements: {},
+  // The one element declared away from the target that draws it: what a list
+  // holds is whatever its child script draws, where what a fragment or a `<div>`
+  // holds is a target's own elements. So this sits with the language of drawing
+  // rather than with any one thing drawn, and a target reaches it by extending
+  // this schema's `IntrinsicElements` beside its own.
+  elements: {
+    for: Type.Apply(Type.Ref("ForProps"), [Type.Ref("ClientValue")], {
+      description:
+        "An array, and what to draw for one member of it.\n\n" +
+        "`children` is a script whose value is a function, so the client is " +
+        "what walks the array: it draws only the members that are new, and " +
+        "moves rather than rebuilds the ones that are not. A member is named " +
+        "by its own identity — there is no key, and a value replaced is a " +
+        "member replaced.\n\n" +
+        "A member is `ClientValue` here where it is `T` on the props: an " +
+        "intrinsic tag has nowhere to bind a type parameter from a prop, so " +
+        "the child's parameter is checked against the language's whole value " +
+        "domain rather than against what `each` holds.",
+    }),
+  },
 
   builtins: {},
 };
