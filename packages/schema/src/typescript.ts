@@ -1,5 +1,6 @@
 import {
   documentation,
+  getter,
   interfaceLines,
   key,
   member,
@@ -21,6 +22,7 @@ import {
  */
 export const typescript = {
   documentation,
+  getter,
   interfaceLines,
   key,
   member,

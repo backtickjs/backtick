@@ -112,12 +112,23 @@ function members(prefix: string): [string, TNode][] {
 function unbound(node: TNode): { member: TNode; carried: Parameter[] } {
   const declared = node.type === "generic" ? node.parameters : [];
   const written = node.type === "generic" ? node.expression : node;
-  // A member holding a value has no receiver written into it: `string.length`
-  // is the number a string has, and the prefix says which value that is.
   if (written.type !== "function") {
     return { member: node, carried: [] };
   }
   const [self, ...rest] = written.parameters;
+  // A getter: what the view shows is the value it answers with, and the
+  // receiver it took to get there is the prefix's, not the member's.
+  // `string.length` is the number a string has.
+  const got = typescript.getter(node);
+  if (got !== undefined) {
+    return {
+      // What it says about itself is the member's, not the return type's: the
+      // node answering is an anonymous `number` until the two are put back
+      // together here.
+      member: { ...got, description: node.description, readOnly: true },
+      carried: declared.filter((one) => mentions(one.name, self)),
+    };
+  }
   const carried = declared.filter((one) => mentions(one.name, self));
   const own = declared.filter((one) => !carried.includes(one));
   const options = { description: node.description };

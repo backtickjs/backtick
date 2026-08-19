@@ -12,7 +12,7 @@ import type {
   ClientValue,
   FunctionLabel,
 } from "@backtickjs/core";
-import { globals } from "./globals.js";
+import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileElement } from "./view.js";
 
@@ -153,9 +153,6 @@ type Applied = (...args: ClientValue[]) => ClientValue;
 //
 // Which name a value is reached under is this client's own decision, and the
 // four are named here as the schema writes them.
-//
-// `Reflect.get` rather than an index, so a member declared as a value — a
-// string's `length` — is read with the value as its receiver.
 function memberOf(object: ClientValue, name: string): ClientValue {
   const boxed =
     typeof object === "string"
@@ -175,22 +172,25 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     // being `{ read, write, update }` underneath is this client's knowledge.
     return (object as { readonly [name: string]: ClientValue })[name] ?? null;
   }
-  const found: ClientValue | undefined = Reflect.get(
-    table,
-    `${boxed}.${name}`,
-    object,
-  );
+  const whole = `${boxed}.${name}`;
+  const found: ClientValue | undefined = table[whole];
   if (found === undefined) {
     // Not absent: a value's members are the schema's to say, and an undeclared
     // one is a name this language has no meaning for. Reading it as null would
     // let a bundle ask for `padStart` and carry on.
     throw new Error(`a ${boxed} has no \`${name}\` in this language`);
   }
-  // The table takes the receiver as an argument, because a client with no
-  // `this` reads the same document and answers the same way. Binding it here
-  // and not at the call is what makes one rule cover a member called now, a
-  // member called later and a member passed on — at a closure per access,
-  // which is what a receiver costs when it is not carried by the language.
+  // Every member takes its receiver first, because a client with no `this`
+  // reads the same document and answers the same way. A getter is applied
+  // here, where its name is read, because that is where the language puts the
+  // call a script does not write.
+  if (getters.has(whole)) {
+    return (found as Applied)(object);
+  }
+  // The rest are bound and not called: binding here rather than at the call is
+  // what makes one rule cover a member called now, a member called later and a
+  // member passed on — at a closure per access, which is what a receiver costs
+  // when it is not carried by the language.
   return typeof found === "function"
     ? (...args: ClientValue[]) => (found as Applied)(object, ...args)
     : found;

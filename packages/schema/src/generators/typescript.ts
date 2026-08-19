@@ -178,6 +178,24 @@ export function typeParameter(node: TGenericParameter, bound?: string): string {
 }
 
 /**
+ * What a getter answers with, and nothing for a member a script calls itself.
+ *
+ * For a surface a script is read against, and not for one a client answers:
+ * whether a name is written with parentheses is the language's business, where
+ * a client is owed the computation and the receiver it takes. So `member` does
+ * not consult this — the view generator does, on what it hands `member`.
+ *
+ * Read off the node rather than off a list of names, so a member that stops
+ * being read this way says so where it is declared.
+ */
+export function getter(node: TNode): TNode | undefined {
+  const written = IsGeneric(node) ? node.expression : node;
+  return IsFunction(written) && written.getter === true
+    ? written.returnType
+    : undefined;
+}
+
+/**
  * One member of a class, as TypeScript writes it.
  *
  * A method where the member holds a function, so a generated surface reads

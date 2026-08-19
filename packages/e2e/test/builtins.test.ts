@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { NodeKind, type Bundle } from "@backtickjs/core";
 import { schema } from "@backtickjs/language-schema";
-import { globals } from "@backtickjs/js-interpreter";
+import { getters, globals } from "@backtickjs/js-interpreter";
 import { evaluate } from "./test-client/index.ts";
 
 // What the reference client answers with, against what the schema says a script
@@ -22,6 +22,19 @@ describe("builtins", () => {
     for (const name of Object.keys(schema.builtins)) {
       assert.ok(name in held, `\`${name}\` is declared and not answered`);
     }
+  });
+
+  it("reads exactly the names the schema calls getters", () => {
+    // The client acts on `getter` without reading the schema — nothing in its
+    // table tells `length` from `trim` — so the two lists are held together
+    // here. A name that starts or stops being a getter fails on this line.
+    const declared = Object.entries(schema.builtins)
+      .filter(([, node]) => {
+        const written = node.type === "generic" ? node.expression : node;
+        return written.type === "function" && written.getter === true;
+      })
+      .map(([name]) => name);
+    assert.deepEqual([...getters].sort(), declared.sort());
   });
 
   it("answer with a number this language has, or not at all", () => {

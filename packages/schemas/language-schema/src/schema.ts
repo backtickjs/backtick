@@ -491,10 +491,18 @@ export const schema: Schema = {
           "Removes the leading and trailing white space and line terminator characters from a string.",
       },
     ),
-    "string.length": Type.Number({
-      readOnly: true,
-      description: "Returns the length of a String object.",
-    }),
+    "string.length": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+      ],
+      Type.Number(),
+      {
+        getter: true,
+        description: "Returns the length of a String object.",
+      },
+    ),
     "string.valueOf": Type.Function(
       [
         Type.FunctionParameter("self", Type.String(), {
@@ -504,11 +512,22 @@ export const schema: Schema = {
       Type.String(),
       { description: "Returns the primitive value of the specified object." },
     ),
-    "array.length": Type.Number({
-      readOnly: true,
-      description:
-        "Gets the length of the array. This is a number one higher than the highest index in the array.",
-    }),
+    "array.length": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+        ],
+        Type.Number(),
+        { getter: true },
+      ),
+      {
+        description:
+          "Gets the length of the array. This is a number one higher than the highest index in the array.",
+      },
+    ),
     "array.concat": Type.Generic(
       [Type.GenericParameter("T")],
       Type.Function(

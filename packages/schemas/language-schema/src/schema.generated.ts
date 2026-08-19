@@ -255,8 +255,10 @@ export interface Builtins {
   "string.trim"(self: string): string;
   /**
    * Returns the length of a String object.
+   *
+   * @param self The value the member is reached off.
    */
-  readonly "string.length": number;
+  "string.length"(self: string): number;
   /**
    * Returns the primitive value of the specified object.
    *
@@ -266,8 +268,10 @@ export interface Builtins {
   /**
    * Gets the length of the array. This is a number one higher than the highest
    * index in the array.
+   *
+   * @param self The value the member is reached off.
    */
-  readonly "array.length": number;
+  "array.length"<T>(self: T[]): number;
   /**
    * Combines two or more arrays. This method returns a new array without
    * modifying any existing arrays.

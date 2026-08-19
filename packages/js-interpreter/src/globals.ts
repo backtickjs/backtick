@@ -48,17 +48,9 @@ export const globals: Builtins = {
   "string.toUpperCase": (self) => self.toUpperCase(),
   "string.toLocaleUpperCase": (self) => self.toLocaleUpperCase(),
   "string.trim": (self) => self.trim(),
-  // A member holding a value is answered by a getter, which is how a JavaScript
-  // object says "computed from the receiver". The receiver arrives as the
-  // getter's `this`, which is why the cast: a getter cannot declare a `this`
-  // parameter, and the literal's own `this` is the table.
-  get "string.length"(): number {
-    return (this as unknown as string).length;
-  },
+  "string.length": (self) => self.length,
   "string.valueOf": (self) => self,
-  get "array.length"(): number {
-    return (this as unknown as readonly unknown[]).length;
-  },
+  "array.length": (self) => self.length,
   "array.concat": (self, ...items) => self.concat(...items),
   "array.join": (self, separator) => self.join(separator),
   "array.slice": (self, start, end) => self.slice(start, end),
@@ -241,3 +233,17 @@ function finite(member: string, answer: number): number {
   }
   return answer;
 }
+
+/**
+ * The names this client reads rather than calls.
+ *
+ * Every entry above takes its receiver and answers with a value, so nothing in
+ * the table tells `length` from `trim`. What tells them apart is the schema,
+ * which says a getter is applied where its name is read — and how a client acts
+ * on that is its own to write down. `builtins.test.ts` holds this to the
+ * schema, so a name that starts or stops being one is caught there.
+ */
+export const getters: ReadonlySet<string> = new Set([
+  "string.length",
+  "array.length",
+]);
