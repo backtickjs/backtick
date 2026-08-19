@@ -1,19 +1,5 @@
-import type { Client } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
-import type { ReadonlyState } from "@backtickjs/language-schema";
-import type { ClientElement } from "@backtickjs/ui-schema";
-
-/**
- * An array, and what to draw for one member of it.
- *
- * `children` is a script whose value is a function, so the client is what walks
- * the array: it draws only the members that are new, and moves rather than
- * rebuilds the ones that are not.
- */
-export type ForProps<T extends ClientValue> = {
-  each: Client<T[]>;
-  children: Client<(member: T, index: ReadonlyState<number>) => ClientElement>;
-};
+import type { ForProps } from "@backtickjs/ui-schema";
 
 // Generic where an element's props are fixed: `each` decides `T`, and the child
 // script's parameter is checked against it. That is the whole of why this is
