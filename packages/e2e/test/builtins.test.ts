@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { NodeKind, type Bundle } from "@backtickjs/core";
-import { schema } from "@backtickjs/language-schema";
+import { schema } from "@backtickjs/language-schema/schema";
 import { getters, globals } from "@backtickjs/js-interpreter";
 import { evaluate } from "./test-client/index.ts";
 

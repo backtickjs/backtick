@@ -3,7 +3,7 @@ import { writeFileSync } from "node:fs";
 import { format } from "prettier";
 import { Type, flatten, typescript } from "@backtickjs/schema";
 import type { TNode } from "@backtickjs/schema";
-import { schema } from "@backtickjs/language-schema";
+import { schema } from "@backtickjs/language-schema/schema";
 
 // The language's flat builtins, as the interfaces a typechecker reads them
 // through.

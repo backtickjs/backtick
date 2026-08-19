@@ -32,9 +32,9 @@ export interface ForProps<T extends ClientValue> {
    */
   each: Prop<T[]>;
   /**
-   * @param index Where the member is, as storage: a position moves without the
-   * member changing, so a drawing handed the number would hold the one it was
-   * drawn at.
+   * @param index Where the member is, as storage rather than a number: a
+   * position moves without the member changing, so a number read once would go
+   * stale.
    */
   children: Client<(member: T, index: ReadonlyState<number>) => ClientElement>;
 }
@@ -44,15 +44,14 @@ export interface Elements extends LanguageElements {
   /**
    * An array, and what to draw for one member of it.
    *
-   * `children` is a script whose value is a function, so the client is what
-   * walks the array: it draws only the members that are new, and moves rather
-   * than rebuilds the ones that are not. A member is named by its own identity
-   * — there is no key, and a value replaced is a member replaced.
+   * `children` is a script whose value is a function, so the client walks the
+   * array itself: it draws only the members that are new and moves the rest
+   * rather than rebuilding them. A member is named by its own identity — there
+   * is no key.
    *
-   * A member is `ClientValue` here where it is `T` on the props: an intrinsic
-   * tag has nowhere to bind a type parameter from a prop, so the child's
-   * parameter is checked against the language's whole value domain rather than
-   * against what `each` holds.
+   * A member is `ClientValue` here where it is `T` on the props, because a tag
+   * has nowhere to bind a type parameter. Write `<For />` to have the child
+   * checked against what `each` holds.
    */
   for: ForProps<ClientValue>;
 }

@@ -1,4 +1,4 @@
-import { schema as ui } from "@backtickjs/ui-schema";
+import { schema as ui } from "@backtickjs/ui-schema/schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 

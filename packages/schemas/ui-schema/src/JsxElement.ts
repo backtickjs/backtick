@@ -1,0 +1,51 @@
+import type { ClientElement } from "./schema.generated.js";
+import type { Fragment } from "./Fragment.js";
+import type { ServerComponent } from "./ServerComponent.js";
+
+/**
+ * What a JSX tag may name: an element to draw, a component to run while
+ * bundling, or a fragment.
+ *
+ * An element is its own name — `<div>` is the string `"div"`, the same id the
+ * wire carries — so a target's tags are the strings its schema declares in
+ * `Elements`. `<For />` needs no arm of its own: it is a component, and the
+ * `for` element it answers with is one of those strings.
+ */
+export type JsxElementType =
+  | string /* IntrinsicElement tag */
+  | ServerComponent<never>
+  | Fragment<never>;
+
+/**
+ * What a JSX tag evaluates to on the host, before bundling resolves it. The tag
+ * and its props are the host's own, and nothing a client script holds reaches
+ * them.
+ */
+export interface JsxElement extends ClientElement {
+  readonly "@backtickjs": "JsxElement";
+  readonly type: JsxElementType;
+  readonly props: { [key: string]: unknown };
+}
+
+export function isJsxElement(value: unknown): value is JsxElement {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "@backtickjs" in value &&
+    value["@backtickjs"] === "JsxElement"
+  );
+}
+
+// The one place a drawing is made: `ClientElement` is branded with a symbol
+// nothing outside the generated schema can write, so what makes one says so
+// here rather than every holder being asked to prove it.
+export function createJsxElement(
+  type: JsxElementType,
+  props: { [key: string]: unknown },
+): JsxElement {
+  return {
+    "@backtickjs": "JsxElement",
+    type,
+    props,
+  } as unknown as JsxElement;
+}
