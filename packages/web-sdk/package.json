@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
-    "@backtickjs/ui-schema": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
     "@backtickjs/web-schema": "workspace:*",
     "linkedom": "^0.18.13"

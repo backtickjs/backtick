@@ -39,8 +39,8 @@ export const schema: Schema = {
   // The one element declared away from the target that draws it: what a list
   // holds is whatever its child script draws, where what a fragment or a `<div>`
   // holds is a target's own elements. So this sits with the language of drawing
-  // rather than with any one thing drawn, and a target reaches it by extending
-  // this schema's `IntrinsicElements` beside its own.
+  // rather than with any one thing drawn, and a target reaches it through its
+  // own schema's `Elements`, which extends this one's.
   elements: {
     for: Type.Apply(Type.Ref("ForProps"), [Type.Ref("ClientValue")], {
       description:

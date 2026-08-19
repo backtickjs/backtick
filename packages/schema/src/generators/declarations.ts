@@ -135,15 +135,26 @@ export function declarations(schema: Schema): string {
   // parameter of its own — there is no generic property — so what it declares
   // is carried by the interface that holds it. That is what a client says by
   // naming `Builtins`: which values it answers with.
+  //
+  // Read through the chain, because the interface is: a layer passes what a
+  // base carries down to it, so a parameter declared once is in scope wherever
+  // the name is extended.
   const owed = Object.entries(schema.builtins);
   const holds = (node: TNode): node is TGeneric =>
     IsGeneric(node) && !IsFunction(node.expression);
-  const carried = new Map<string, TGenericParameter>();
-  for (const [, node] of owed) {
-    if (holds(node)) {
-      node.parameters.forEach((one) => carried.set(one.name, one));
+  const carriedBy = (of: Schema): Map<string, TGenericParameter> => {
+    const held = new Map<string, TGenericParameter>();
+    of.extends.forEach((base) =>
+      carriedBy(base).forEach((one, name) => held.set(name, one)),
+    );
+    for (const node of Object.values(of.builtins)) {
+      if (holds(node)) {
+        node.parameters.forEach((one) => held.set(one.name, one));
+      }
     }
-  }
+    return held;
+  };
+  const carried = carriedBy(schema);
 
   Object.values(schema.types).forEach((node) => declares(node, new Set()));
   // Every builtin is written inside the one interface that holds them all, so
@@ -153,6 +164,29 @@ export function declarations(schema: Schema): string {
     declares(node, new Set(carried.keys())),
   );
   Object.values(schema.elements).forEach((node) => declares(node, new Set()));
+
+  // What each base's two chained names are called in this file, which declares
+  // both itself: the base's package read as a word, so a heritage says where it
+  // came from at the point it is written.
+  const heritage = schema.extends.map((base) => {
+    const of = word(base.package);
+    return {
+      package: base.package,
+      elements: `${of}Elements`,
+      builtins: `${of}Builtins`,
+    };
+  });
+  const collision = schema.extends.find(
+    (base, at) =>
+      schema.extends.findIndex(
+        (held) => word(held.package) === word(base.package),
+      ) !== at,
+  );
+  if (collision !== undefined) {
+    throw new Error(
+      `two schemas this one extends read as \`${word(collision.package)}\``,
+    );
+  }
 
   const lines: string[] = [];
 
@@ -168,50 +202,67 @@ export function declarations(schema: Schema): string {
     lines.push("");
   }
 
-  // The elements an app writes bare, for this schema alone: a target's runtime
-  // extends the interfaces its bases generated, so each element is declared by
-  // the schema that has it and by nothing else.
-  const elements = Object.entries(schema.elements);
-  if (elements.length > 0) {
-    lines.push(
-      "/** The elements this schema declares, and what each accepts. */",
-    );
-    lines.push(`export interface IntrinsicElements {`);
-    for (const [element, props] of elements) {
-      lines.push(...documentation(props, "  "));
-      lines.push(`  ${key(element)}: ${elementProps(props)};`);
-    }
-    lines.push(`}`);
-    lines.push("");
-  }
+  // The elements an app writes bare, and what a client owes: two names a
+  // schema always writes, each extending what every base wrote under it.
+  //
+  // Members are this schema's own — an element is declared by the schema that
+  // has it and by nothing else — and the chain is what gathers them, so a file
+  // reaches every element and every builtin beneath it by naming one interface.
+  // Written even where a schema adds none, because a layer that skipped the
+  // name is a chain that stops there: the one above has nothing to extend, and
+  // what a base declares stops arriving without either end being told.
+  const extending = (
+    named: readonly string[],
+    args: readonly string[] = [],
+  ) => {
+    const applied = args.length === 0 ? "" : `<${args.join(", ")}>`;
+    return named.length === 0
+      ? ""
+      : ` extends ${named.map((one) => `${one}${applied}`).join(", ")}`;
+  };
 
-  // What a client owes: one interface, because a client answers for these the
-  // same way whether the host's lib declares the name or the framework does.
-  // This schema's own names, not the flattened ones — a base's are answered by
-  // the client that declared them, and a target's client composes.
-  if (owed.length > 0) {
-    lines.push(
-      "/** What a client must answer with, for every name in scope. */",
-    );
-    const parameters =
-      carried.size === 0
-        ? ""
-        : `<${[...carried.values()].map((one) => typeParameter(one)).join(", ")}>`;
-    lines.push(`export interface Builtins${parameters} {`);
-    for (const [name, node] of owed) {
-      // A name standing for a type it declares is a member holding one;
-      // anything else is written as the signature it declares.
-      lines.push(
-        ...(IsRef(node)
-          ? [`  ${key(name)}: ${node.$ref};`]
-          : holds(node)
-            ? [`  ${key(name)}: ${type(node.expression)};`]
-            : member(name, node)),
-      );
-    }
-    lines.push(`}`);
-    lines.push("");
+  lines.push(
+    "/** The elements this schema declares, and what each accepts. */",
+  );
+  lines.push(
+    `export interface Elements${extending(heritage.map((one) => one.elements))} {`,
+  );
+  for (const [element, props] of Object.entries(schema.elements)) {
+    lines.push(...documentation(props, "  "));
+    lines.push(`  ${key(element)}: ${elementProps(props)};`);
   }
+  lines.push(`}`);
+  lines.push("");
+
+  lines.push("/** What a client must answer with, for every name in scope. */");
+  const parameters =
+    carried.size === 0
+      ? ""
+      : `<${[...carried.values()].map((one) => typeParameter(one)).join(", ")}>`;
+  // A base's parameters are this schema's too — `carriedBy` read the chain — so
+  // the arguments are the names, handed straight back up.
+  const passed = [
+    ...new Set(schema.extends.flatMap((base) => [...carriedBy(base).keys()])),
+  ];
+  lines.push(
+    `export interface Builtins${parameters}${extending(
+      heritage.map((one) => one.builtins),
+      passed,
+    )} {`,
+  );
+  for (const [name, node] of owed) {
+    // A name standing for a type it declares is a member holding one; anything
+    // else is written as the signature it declares.
+    lines.push(
+      ...(IsRef(node)
+        ? [`  ${key(name)}: ${node.$ref};`]
+        : holds(node)
+          ? [`  ${key(name)}: ${type(node.expression)};`]
+          : member(name, node)),
+    );
+  }
+  lines.push(`}`);
+  lines.push("");
 
   // What each base offers, which is everything its own chain declares — a base
   // re-exports what it inherited, so a name is reached from the schema built on
@@ -277,20 +328,27 @@ export function declarations(schema: Schema): string {
   // Grouped by where they come from, and written relative where that is this
   // file's own package: on a clean tree a package has no `dist` of its own to
   // import itself through.
-  const packages = [...new Set(from.values())].sort();
+  // The two names this file extends, aliased: it declares both itself, so what
+  // a base wrote is written under the base rather than shadowed by it.
+  const aliased = new Map<string, readonly string[]>(
+    heritage.map((one) => [
+      one.package,
+      [`Builtins as ${one.builtins}`, `Elements as ${one.elements}`],
+    ]),
+  );
+  const packages = [...new Set([...from.values(), ...aliased.keys()])].sort();
   for (const held of packages) {
     const names = [...from]
       .filter(([, where]) => where === held)
-      .map(([one]) => one)
-      .sort();
+      .map(([one]) => one);
     if (held === schema.package) {
-      for (const one of names) {
+      for (const one of names.sort()) {
         head.push(`import type { ${one} } from "./${one}.js";`);
       }
       continue;
     }
     head.push(`import type {`);
-    for (const one of names) {
+    for (const one of [...names, ...(aliased.get(held) ?? [])].sort()) {
       head.push(`  ${one},`);
     }
     head.push(`} from "${held}";`);
@@ -328,6 +386,22 @@ export function declarations(schema: Schema): string {
  */
 function published(of: Schema): string[] {
   return [...of.publishes, ...of.extends.flatMap(published)];
+}
+
+/**
+ * A package read as a word, for the alias its heritage is written under.
+ *
+ * The last segment without the scope, and without the `-schema` a schema
+ * package's name ends in: the alias is for this file's own reading, and what it
+ * means is the package it came from.
+ */
+function word(of: string): string {
+  const held = of.slice(of.lastIndexOf("/") + 1);
+  return (held.replace(/-schema$/, "") || held)
+    .split(/[^A-Za-z0-9]+/)
+    .filter((one) => one.length > 0)
+    .map((one) => `${one.charAt(0).toUpperCase()}${one.slice(1)}`)
+    .join("");
 }
 
 /**

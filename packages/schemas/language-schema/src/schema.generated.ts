@@ -59,6 +59,9 @@ export interface ArrayLike<T> {
   readonly [n: number]: T;
 }
 
+/** The elements this schema declares, and what each accepts. */
+export interface Elements {}
+
 /** What a client must answer with, for every name in scope. */
 export interface Builtins {
   /**

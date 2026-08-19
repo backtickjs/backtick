@@ -1,16 +1,19 @@
-import type { ClientElement, Children } from "@backtickjs/ui-schema";
 import type { JsxElementType } from "@backtickjs/cs-runtime";
 import { createFragment, createJsxElement } from "@backtickjs/cs-runtime";
-import type { IntrinsicElements as Web } from "@backtickjs/web-schema";
+import type {
+  Children,
+  ClientElement,
+  Elements as Web,
+} from "@backtickjs/web-schema";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //
 // Written by hand where `schema.generated.ts` next door is not: what a target
 // draws with is its decision, and the tags and their props are the schema's.
-// The one rule here is that `IntrinsicElements` extends what each schema
-// declared — this target's today, and every base's as they come — so a tag a
-// base adds arrives without either knowing about the other, and a tag two of
-// them declare is a conflict TypeScript reports rather than a silent winner.
+// The one rule here is that JSX's `IntrinsicElements` is this target's schema
+// `Elements` and nothing else: that name extends every base's in turn, so a tag
+// a base adds arrives without either end being told, and a tag two of them
+// declare is a conflict TypeScript reports rather than a silent winner.
 
 /**
  * Children with no element of their own.

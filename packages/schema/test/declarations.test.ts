@@ -162,9 +162,10 @@ describe("declarations", () => {
   it("writes the elements it declares, and what each accepts", () => {
     assert.match(
       declarations(target),
-      /export interface IntrinsicElements \{\n {2}pick: Props;\n\}/,
+      /export interface Elements extends MiddleElements \{\n {2}pick: Props;\n\}/,
     );
-    assert.doesNotMatch(declarations(core), /IntrinsicElements/);
+    // its own and nothing it inherited: the chain is what gathers them
+    assert.doesNotMatch(declarations(target), /\bstate\b/);
   });
 
   it("writes what a client owes, from its own names", () => {
@@ -172,7 +173,35 @@ describe("declarations", () => {
       declarations(core),
       /export interface Builtins \{\n {2}state: Cell;\n\}/,
     );
-    assert.doesNotMatch(declarations(target), /interface Builtins/);
+    assert.doesNotMatch(declarations(target), /state: Cell;/);
+  });
+
+  it("writes both names at every layer, so a chain has no gap in it", () => {
+    // `middle` declares neither an element nor a builtin. Written anyway,
+    // because a layer that skipped one is where the chain stops: the schema
+    // above it would extend a name that is not there, and what a base declares
+    // would stop arriving.
+    const written = declarations(middle);
+    assert.match(
+      written,
+      /export interface Elements extends CoreElements \{\n\}/,
+    );
+    assert.match(
+      written,
+      /export interface Builtins extends CoreBuiltins \{\n\}/,
+    );
+    // the root declares no element and still writes the name
+    assert.match(declarations(core), /export interface Elements \{\n\}/);
+  });
+
+  it("extends each base under the name of the package it came from", () => {
+    // This file declares both names itself, so a heritage is aliased — and it
+    // is read from the base that offers it, like every other name here.
+    assert.match(
+      declarations(target),
+      /import type \{\n[^}]*  Builtins as MiddleBuiltins,\n[^}]*  Elements as MiddleElements,\n[^}]*\} from "@backtickjs\/middle";/,
+    );
+    assert.doesNotMatch(declarations(target), /from "@backtickjs\/core"/);
   });
 
   it("hands on what its base published, and never what it published itself", () => {

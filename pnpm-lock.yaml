@@ -532,9 +532,6 @@ importers:
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
-      '@backtickjs/ui-schema':
-        specifier: workspace:*
-        version: link:../schemas/ui-schema
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../web-client
