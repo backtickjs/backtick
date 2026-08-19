@@ -12,13 +12,6 @@ export const schema: Schema = {
   types: {
     ClientElement: Type.Interface([Type.Ref("ClientHandle")], {}),
 
-    Renderable: Type.Union([
-      Type.Null(),
-      Type.Boolean(),
-      Type.Number(),
-      Type.String(),
-    ]),
-
     ForProps: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([], {

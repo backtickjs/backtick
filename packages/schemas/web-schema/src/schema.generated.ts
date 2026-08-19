@@ -19,7 +19,6 @@ export type {
   ForProps,
   Prop,
   ReadonlyState,
-  Renderable,
   State,
 } from "@backtickjs/ui-schema";
 

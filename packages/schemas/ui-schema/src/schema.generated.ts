@@ -18,8 +18,6 @@ export interface ClientElement extends ClientHandle {
   readonly [ClientElementBrand]: never;
 }
 
-export type Renderable = null | boolean | number | string;
-
 export interface ForProps<T> {
   /**
    * The array to draw one thing per member of.
