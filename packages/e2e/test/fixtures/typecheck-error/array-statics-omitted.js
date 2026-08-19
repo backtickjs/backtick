@@ -17,15 +17,9 @@ export const tested = cs.create(
     kind: 214,
     loc: [6, 26, 6, 44],
     expression: {
-      kind: 212,
+      kind: 1001,
       loc: [6, 26, 6, 39],
-      expression: {
-        kind: 1001,
-        loc: [6, 26, 6, 31],
-        name: "Array",
-      },
-      questionDotToken: false,
-      name: "isArray",
+      name: "Array.isArray",
     },
     questionDotToken: false,
     arguments: [
@@ -61,15 +55,9 @@ export const holes = cs.create(
     kind: 214,
     loc: [11, 25, 11, 50],
     expression: {
-      kind: 212,
+      kind: 1001,
       loc: [11, 25, 11, 35],
-      expression: {
-        kind: 1001,
-        loc: [11, 25, 11, 30],
-        name: "Array",
-      },
-      questionDotToken: false,
-      name: "from",
+      name: "Array.from",
     },
     questionDotToken: false,
     arguments: [

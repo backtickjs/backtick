@@ -40,15 +40,9 @@ export default cs.create(
                 kind: 214,
                 loc: [10, 19, 10, 69],
                 expression: {
-                  kind: 212,
+                  kind: 1001,
                   loc: [10, 19, 10, 29],
-                  expression: {
-                    kind: 1001,
-                    loc: [10, 19, 10, 24],
-                    name: "Array",
-                  },
-                  questionDotToken: false,
-                  name: "from",
+                  name: "Array.from",
                 },
                 questionDotToken: false,
                 arguments: [
@@ -137,15 +131,9 @@ export default cs.create(
                 kind: 214,
                 loc: [11, 17, 11, 63],
                 expression: {
-                  kind: 212,
+                  kind: 1001,
                   loc: [11, 17, 11, 27],
-                  expression: {
-                    kind: 1001,
-                    loc: [11, 17, 11, 22],
-                    name: "Array",
-                  },
-                  questionDotToken: false,
-                  name: "from",
+                  name: "Array.from",
                 },
                 questionDotToken: false,
                 arguments: [
@@ -224,15 +212,9 @@ export default cs.create(
                 kind: 214,
                 loc: [12, 18, 14, 4],
                 expression: {
-                  kind: 212,
+                  kind: 1001,
                   loc: [12, 18, 12, 28],
-                  expression: {
-                    kind: 1001,
-                    loc: [12, 18, 12, 23],
-                    name: "Array",
-                  },
-                  questionDotToken: false,
-                  name: "from",
+                  name: "Array.from",
                 },
                 questionDotToken: false,
                 arguments: [

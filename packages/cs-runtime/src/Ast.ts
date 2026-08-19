@@ -238,8 +238,10 @@ export interface ClientScriptReturnStatement {
   readonly expression: ClientScriptExpression;
 }
 
-// `Math`, and nothing else yet. The name travels rather than the value, so a
-// host that is not JavaScript answers with its own and the format says which
+// A name the client answers for, whole: `Math.floor` and `state` alike. The
+// compiler builds it, so a namespace and the member read off it arrive here as
+// the one name they are on the wire. The name travels rather than the value, so
+// a host that is not JavaScript answers with its own and the format says which
 // answer is the right one.
 export interface ClientScriptBuiltin {
   readonly kind: typeof SyntaxKind.Builtin;

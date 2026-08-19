@@ -260,13 +260,6 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         return entries;
       }
       case SyntaxKind.PropertyAccessExpression: {
-        // A member of a builtin is a builtin. `Math.floor` is one name the
-        // client answers — the schema carries it whole, and there is no `Math`
-        // for a read to yield — so the head and the member travel as that name
-        // rather than as a read of something and a member of it.
-        if (node.expression.kind === SyntaxKind.Builtin) {
-          return [NodeKind.Builtin, `${node.expression.name}.${node.name}`];
-        }
         return [
           NodeKind.PropertyAccessExpression,
           e(node.expression),

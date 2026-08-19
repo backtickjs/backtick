@@ -24,15 +24,9 @@ export const counted = cs.create(
       kind: 214,
       loc: [10, 27, 10, 62],
       expression: {
-        kind: 212,
+        kind: 1001,
         loc: [10, 27, 10, 37],
-        expression: {
-          kind: 1001,
-          loc: [10, 27, 10, 32],
-          name: "Array",
-        },
-        questionDotToken: false,
-        name: "from",
+        name: "Array.from",
       },
       questionDotToken: false,
       arguments: [

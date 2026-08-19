@@ -20,15 +20,9 @@ export const halved = cs.create(
     kind: 214,
     loc: [9, 26, 9, 42],
     expression: {
-      kind: 212,
+      kind: 1001,
       loc: [9, 26, 9, 39],
-      expression: {
-        kind: 1001,
-        loc: [9, 26, 9, 30],
-        name: "Math",
-      },
-      questionDotToken: false,
-      name: "f16round",
+      name: "Math.f16round",
     },
     questionDotToken: false,
     arguments: [

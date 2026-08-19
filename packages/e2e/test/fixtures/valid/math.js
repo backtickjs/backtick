@@ -49,15 +49,9 @@ export default cs.create(
                         kind: 214,
                         loc: [8, 5, 8, 20],
                         expression: {
-                          kind: 212,
+                          kind: 1001,
                           loc: [8, 5, 8, 15],
-                          expression: {
-                            kind: 1001,
-                            loc: [8, 5, 8, 9],
-                            name: "Math",
-                          },
-                          questionDotToken: false,
-                          name: "round",
+                          name: "Math.round",
                         },
                         questionDotToken: false,
                         arguments: [
@@ -80,15 +74,9 @@ export default cs.create(
                       kind: 214,
                       loc: [8, 29, 8, 45],
                       expression: {
-                        kind: 212,
+                        kind: 1001,
                         loc: [8, 29, 8, 39],
-                        expression: {
-                          kind: 1001,
-                          loc: [8, 29, 8, 33],
-                          name: "Math",
-                        },
-                        questionDotToken: false,
-                        name: "round",
+                        name: "Math.round",
                       },
                       questionDotToken: false,
                       arguments: [
@@ -117,15 +105,9 @@ export default cs.create(
                   kind: 214,
                   loc: [8, 54, 8, 70],
                   expression: {
-                    kind: 212,
+                    kind: 1001,
                     loc: [8, 54, 8, 64],
-                    expression: {
-                      kind: 1001,
-                      loc: [8, 54, 8, 58],
-                      name: "Math",
-                    },
-                    questionDotToken: false,
-                    name: "round",
+                    name: "Math.round",
                   },
                   questionDotToken: false,
                   arguments: [
@@ -179,15 +161,9 @@ export default cs.create(
                         kind: 214,
                         loc: [10, 5, 10, 21],
                         expression: {
-                          kind: 212,
+                          kind: 1001,
                           loc: [10, 5, 10, 15],
-                          expression: {
-                            kind: 1001,
-                            loc: [10, 5, 10, 9],
-                            name: "Math",
-                          },
-                          questionDotToken: false,
-                          name: "floor",
+                          name: "Math.floor",
                         },
                         questionDotToken: false,
                         arguments: [
@@ -215,15 +191,9 @@ export default cs.create(
                       kind: 214,
                       loc: [10, 30, 10, 45],
                       expression: {
-                        kind: 212,
+                        kind: 1001,
                         loc: [10, 30, 10, 39],
-                        expression: {
-                          kind: 1001,
-                          loc: [10, 30, 10, 34],
-                          name: "Math",
-                        },
-                        questionDotToken: false,
-                        name: "ceil",
+                        name: "Math.ceil",
                       },
                       questionDotToken: false,
                       arguments: [
@@ -252,15 +222,9 @@ export default cs.create(
                   kind: 214,
                   loc: [10, 54, 10, 70],
                   expression: {
-                    kind: 212,
+                    kind: 1001,
                     loc: [10, 54, 10, 64],
-                    expression: {
-                      kind: 1001,
-                      loc: [10, 54, 10, 58],
-                      name: "Math",
-                    },
-                    questionDotToken: false,
-                    name: "trunc",
+                    name: "Math.trunc",
                   },
                   questionDotToken: false,
                   arguments: [
@@ -314,15 +278,9 @@ export default cs.create(
                         kind: 214,
                         loc: [12, 5, 12, 22],
                         expression: {
-                          kind: 212,
+                          kind: 1001,
                           loc: [12, 5, 12, 13],
-                          expression: {
-                            kind: 1001,
-                            loc: [12, 5, 12, 9],
-                            name: "Math",
-                          },
-                          questionDotToken: false,
-                          name: "min",
+                          name: "Math.min",
                         },
                         questionDotToken: false,
                         arguments: [
@@ -355,15 +313,9 @@ export default cs.create(
                       kind: 214,
                       loc: [12, 31, 12, 48],
                       expression: {
-                        kind: 212,
+                        kind: 1001,
                         loc: [12, 31, 12, 39],
-                        expression: {
-                          kind: 1001,
-                          loc: [12, 31, 12, 35],
-                          name: "Math",
-                        },
-                        questionDotToken: false,
-                        name: "max",
+                        name: "Math.max",
                       },
                       questionDotToken: false,
                       arguments: [
@@ -397,15 +349,9 @@ export default cs.create(
                   kind: 214,
                   loc: [12, 57, 12, 69],
                   expression: {
-                    kind: 212,
+                    kind: 1001,
                     loc: [12, 57, 12, 65],
-                    expression: {
-                      kind: 1001,
-                      loc: [12, 57, 12, 61],
-                      name: "Math",
-                    },
-                    questionDotToken: false,
-                    name: "abs",
+                    name: "Math.abs",
                   },
                   questionDotToken: false,
                   arguments: [
@@ -520,15 +466,9 @@ export default cs.create(
                             kind: 214,
                             loc: [20, 5, 20, 17],
                             expression: {
-                              kind: 212,
+                              kind: 1001,
                               loc: [20, 5, 20, 14],
-                              expression: {
-                                kind: 1001,
-                                loc: [20, 5, 20, 9],
-                                name: "Math",
-                              },
-                              questionDotToken: false,
-                              name: "sqrt",
+                              name: "Math.sqrt",
                             },
                             questionDotToken: false,
                             arguments: [
@@ -552,15 +492,9 @@ export default cs.create(
                         kind: 214,
                         loc: [22, 5, 22, 18],
                         expression: {
-                          kind: 212,
+                          kind: 1001,
                           loc: [22, 5, 22, 14],
-                          expression: {
-                            kind: 1001,
-                            loc: [22, 5, 22, 9],
-                            name: "Math",
-                          },
-                          questionDotToken: false,
-                          name: "sign",
+                          name: "Math.sign",
                         },
                         questionDotToken: false,
                         arguments: [
@@ -589,15 +523,9 @@ export default cs.create(
                     kind: 214,
                     loc: [24, 5, 24, 21],
                     expression: {
-                      kind: 212,
+                      kind: 1001,
                       loc: [24, 5, 24, 16],
-                      expression: {
-                        kind: 1001,
-                        loc: [24, 5, 24, 9],
-                        name: "Math",
-                      },
-                      questionDotToken: false,
-                      name: "fround",
+                      name: "Math.fround",
                     },
                     questionDotToken: false,
                     arguments: [
@@ -621,15 +549,9 @@ export default cs.create(
                 kind: 227,
                 loc: [26, 6, 26, 20],
                 left: {
-                  kind: 212,
+                  kind: 1001,
                   loc: [26, 6, 26, 13],
-                  expression: {
-                    kind: 1001,
-                    loc: [26, 6, 26, 10],
-                    name: "Math",
-                  },
-                  questionDotToken: false,
-                  name: "PI",
+                  name: "Math.PI",
                 },
                 operatorToken: ">",
                 right: {
@@ -651,15 +573,9 @@ export default cs.create(
             kind: 227,
             loc: [28, 6, 28, 19],
             left: {
-              kind: 212,
+              kind: 1001,
               loc: [28, 6, 28, 12],
-              expression: {
-                kind: 1001,
-                loc: [28, 6, 28, 10],
-                name: "Math",
-              },
-              questionDotToken: false,
-              name: "E",
+              name: "Math.E",
             },
             operatorToken: ">",
             right: {

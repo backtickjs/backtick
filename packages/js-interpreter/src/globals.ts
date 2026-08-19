@@ -60,8 +60,7 @@ export const globals: Builtins = {
     self.includes(searchElement, fromIndex),
   "array.map": (self, callbackfn) =>
     self.map((value, index) => callbackfn(value, index)),
-  "array.filter": (self, predicate) =>
-    self.filter((value, index) => predicate(value, index)),
+  "array.filter": (self, predicate) => self.filter(predicate),
   "array.with": (self, index, value) => self.with(index, value),
   "array.toSorted": (self, compareFn) => self.toSorted(compareFn),
   "array.toReversed": (self) => self.toReversed(),
