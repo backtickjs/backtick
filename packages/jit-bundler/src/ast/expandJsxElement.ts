@@ -2,6 +2,7 @@ import {
   isFragment,
   isJsxElement,
   type JsxElement,
+  type Spliceable,
 } from "@backtickjs/cs-runtime";
 import { withInstance } from "../Instance.js";
 import type { Ast, AstInstance } from "./Ast.js";
@@ -34,7 +35,10 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
       Object.entries(jsx.props).map(
         async ([key, entry]): Promise<[string, Ast]> => {
           try {
-            return [key, await lowerSpliceable(entry, "ClientValue")];
+            return [
+              key,
+              await lowerSpliceable(entry as Spliceable, "ClientValue"),
+            ];
           } catch (cause) {
             // A component runs while its props lower, so what surfaces here may
             // be the app's own failure rather than a value that cannot cross —
