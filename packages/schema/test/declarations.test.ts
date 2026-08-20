@@ -94,7 +94,7 @@ describe("declarations", () => {
     const root: Schema = {
       package: "@backtickjs/core",
       extends: [],
-      publishes: ["Client"],
+      publishes: ["Prop"],
       types: {
         Props: Type.Interface([], {
           onpick: Type.Optional(Type.Function([], Type.Void())),
@@ -106,7 +106,7 @@ describe("declarations", () => {
     const written = declarations(root);
     assert.match(
       written,
-      /import type \{ Client \} from ".\/Client.js";/,
+      /import type \{ Prop \} from ".\/Prop.js";/,
       "the package that publishes a name reaches it beside itself",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
@@ -151,8 +151,9 @@ describe("declarations", () => {
     const written = declarations(target);
     // a prop holds a value or a script standing in for one
     assert.match(written, /value\?: Prop<Shared>;/);
-    // a function prop is a script and never a host function
-    assert.match(written, /onpick\?: Client<\(\) => void>;/);
+    // a function prop is a script and never a host function: `Prop` drops its
+    // written arm where the server has no way to write one
+    assert.match(written, /onpick\?: Prop<\(\) => void>;/);
     // what goes inside an element is children
     assert.match(written, /children\?: Children<Drawing>;/);
     // and a client's own interface is not props

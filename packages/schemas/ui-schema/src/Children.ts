@@ -1,4 +1,5 @@
-import type { Client, ClientValue } from "@backtickjs/language-schema";
+import type { ClientValue } from "@backtickjs/language-schema";
+import type { Prop } from "./Prop.js";
 
 /**
  * What may stand in a children position: one child, a script standing in for
@@ -8,4 +9,4 @@ import type { Client, ClientValue } from "@backtickjs/language-schema";
  * handed a finished list cannot tell which member is which. Lists are written
  * with `<For />`.
  */
-export type Children<T extends ClientValue> = T | Client<T> | Children<T>[];
+export type Children<T extends ClientValue> = Prop<T> | Children<T>[];

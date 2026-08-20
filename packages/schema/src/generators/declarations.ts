@@ -451,10 +451,11 @@ export function prop(name: string, node: TNode, required: boolean): string {
   // `<for>` holds one that makes drawings rather than a drawing, and `Children`
   // would admit a host function and a list of them beside it. So what the node
   // is decides first, and where it stands only after that.
-  const written = IsFunction(node)
-    ? `Client<${type(node)}>`
-    : name === "children"
-      ? `Children<${type(node)}>`
+  const written =
+    name === "children"
+      ? IsFunction(node)
+        ? `Client<${type(node)}>`
+        : `Children<${type(node)}>`
       : `Prop<${type(node)}>`;
   return `  ${key(name)}${optional}: ${written};`;
 }
