@@ -20,14 +20,14 @@ export type Spliceable = SpliceableValue | Client<void>;
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
-export type Spliced<T> = [SpliceableValue] extends [T]
+export type Spliced<T extends Spliceable> = [SpliceableValue] extends [T]
   ? ClientValue
   : T extends Client<infer U>
     ? U
     : T extends ClientHandle
       ? T
-      : T extends readonly (infer Item)[]
+      : T extends readonly (infer Item extends Spliceable)[]
         ? Spliced<Item>[]
-        : T extends object
+        : T extends { readonly [key: string]: Spliceable }
           ? { -readonly [K in keyof T]: Spliced<T[K]> }
           : T;
