@@ -1,17 +1,4 @@
-import { cs, state, For, type Client, type State } from "@backtickjs/core";
-
-// A row's label is its own storage, so updating one is writing one cell rather
-// than replacing the list it sits in: `partialUpdate` leaves `data` untouched
-// and nothing re-reads the array.
-//
-// Two names for one row, because the host and a script see the cell
-// differently: `Client<…>` is how the host names a value that lives on the
-// client, and a script reads that member as the cell itself. The host never
-// builds a row — every one comes from `buildData`.
-type HostRow = {
-  readonly id: number;
-  readonly label: Client<State<string>>;
-};
+import { cs, state, For, type State } from "@backtickjs/core";
 
 type Row = {
   readonly id: number;
@@ -77,7 +64,7 @@ const NOUNS = [
 ];
 
 export async function Main() {
-  const data = state<HostRow[]>([]);
+  const data = state<Row[]>([]);
   const selected = state(0);
   const rowId = state(1);
 
