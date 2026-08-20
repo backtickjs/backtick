@@ -1,5 +1,10 @@
 import type { Client } from "./Client.js";
-import type { ClientHandle, ClientValue } from "./schema.generated.js";
+import type {
+  ClientFunction,
+  ClientHandle,
+  ClientUnknown,
+  ClientValue,
+} from "./schema.generated.js";
 
 export type SpliceableValue =
   | Client<ClientValue>
@@ -11,8 +16,31 @@ export type SpliceableValue =
   | readonly SpliceableValue[]
   | { readonly [key: string]: SpliceableValue };
 
-// Everything spliceable — a value or an action
-export type Spliceable = SpliceableValue | Client<void>;
+/**
+ * What the host may splice where the client wants a `T`: the value written out,
+ * a script standing in for it, or a container mixing the two.
+ *
+ * Unparameterised it is everything spliceable — a value or an action — which is
+ * what a value of no particular type is checked against.
+ */
+export type Spliceable<T extends ClientUnknown = ClientUnknown> =
+  | Client<T>
+  | Written<T>;
+
+// Written out rather than scripted: a container member by member, a handle and
+// a primitive as themselves, and a function not at all — client behaviour is
+// `cs`...`, so a host function has no written form, and neither has `void`.
+type Written<T> = T extends ClientFunction
+  ? never
+  : T extends readonly (infer Item extends ClientValue)[]
+    ? readonly Spliceable<Item>[]
+    : T extends ClientHandle
+      ? T
+      : T extends { readonly [key: string]: ClientValue }
+        ? { readonly [Key in keyof T]: Spliceable<T[Key]> }
+        : T extends ClientValue
+          ? T
+          : never;
 
 // What a spliceable becomes on the client:
 //   Client<U>                 -> U

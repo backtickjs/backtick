@@ -1,8 +1,8 @@
 import type {
   Client,
   ClientState,
-  SpliceableValue,
-  Spliced,
+  ClientValue,
+  Spliceable,
   State,
   Widen,
 } from "@backtickjs/cs-runtime";
@@ -15,13 +15,13 @@ import { getInstance } from "./Instance.js";
  * here rather than beside `State` in cs-runtime: the cell records the instance
  * that declared it, and only the bundler knows which one is running.
  */
-export function state<const T extends SpliceableValue>(
-  initial: T,
-): Client<State<Widen<Spliced<T>>>> {
-  const cell: ClientState<T> = {
+export function state<T extends ClientValue>(
+  initial: Spliceable<T>,
+): Client<State<Widen<T>>> {
+  const cell: ClientState<Spliceable<T>> = {
     "@backtickjs": "ClientState",
-    initial,
+    initial: initial,
     declaredIn: getInstance(),
   };
-  return cell as unknown as Client<State<Widen<Spliced<T>>>>;
+  return cell as unknown as Client<State<Widen<T>>>;
 }
