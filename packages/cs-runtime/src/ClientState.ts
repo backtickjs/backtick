@@ -1,4 +1,4 @@
-import type { SpliceableValue } from "./Spliceable.js";
+import type { SpliceableValue } from "@backtickjs/language-schema";
 
 export interface ClientState<T extends SpliceableValue> {
   readonly "@backtickjs": "ClientState";

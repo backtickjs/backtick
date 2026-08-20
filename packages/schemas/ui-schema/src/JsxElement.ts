@@ -24,6 +24,9 @@ export type JsxElementType =
 export interface JsxElement extends ClientElement {
   readonly "@backtickjs": "JsxElement";
   readonly type: JsxElementType;
+  // Unknown, because only a tag's props cross. A component runs here and keeps
+  // its own, so it may take a host function or anything else the wire cannot
+  // carry; what a tag admits is checked where a tag lowers.
   readonly props: { [key: string]: unknown };
 }
 

@@ -1,6 +1,6 @@
 import { assertVersion } from "./assertVersion.js";
 import type { SourceLocation } from "./SourceLocation.js";
-import type { Spliceable } from "./Spliceable.js";
+import type { Spliceable } from "@backtickjs/language-schema";
 import type { ClientScriptBody } from "./Ast.js";
 
 export interface Metadata {

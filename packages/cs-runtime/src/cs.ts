@@ -2,7 +2,7 @@ import type { Client } from "@backtickjs/language-schema";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
-import type { Spliceable, Spliced } from "./Spliceable.js";
+import type { Spliceable, Spliced } from "@backtickjs/language-schema";
 import type { State } from "@backtickjs/language-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 import type { Widen } from "./Widen.js";

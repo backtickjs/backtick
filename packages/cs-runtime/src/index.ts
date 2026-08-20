@@ -32,12 +32,11 @@ export type { ClientValue } from "@backtickjs/language-schema";
 export type { ClientUnknown } from "@backtickjs/language-schema";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
-export {
-  isSpliceable,
-  type Spliceable,
-  type SpliceableValue,
-  type Spliced,
-} from "./Spliceable.js";
+export type {
+  Spliceable,
+  SpliceableValue,
+  Spliced,
+} from "@backtickjs/language-schema";
 export { type ClientState, isClientState } from "./ClientState.js";
 export type { ReadonlyState, State } from "@backtickjs/language-schema";
 export type { Widen } from "./Widen.js";

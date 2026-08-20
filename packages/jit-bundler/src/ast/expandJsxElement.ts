@@ -2,7 +2,6 @@ import {
   isFragment,
   isJsxElement,
   type JsxElement,
-  isSpliceable,
 } from "@backtickjs/cs-runtime";
 import { withInstance } from "../Instance.js";
 import type { Ast, AstInstance } from "./Ast.js";
@@ -25,20 +24,26 @@ export function expandJsxElement(value: JsxElement): Promise<Ast> {
   return node;
 }
 
-// The props an element carries, lowered. The id is only ever the one it was
-// reached by, and is here for what a prop that cannot be lowered has to say.
+// The props an element carries, lowered. What a value may be is
+// `lowerSpliceable`'s to say — it refuses by dispatching on what it was handed,
+// where a check here could only predict the same answer — so this adds where a
+// failure happened and claims nothing about why.
 async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
   const props = Object.fromEntries(
     await Promise.all(
       Object.entries(jsx.props).map(
         async ([key, entry]): Promise<[string, Ast]> => {
-          if (!isSpliceable(entry)) {
-            throw new Error(
-              `Can't bundle this <${id} /> element: the \`${key}\` ` +
-                "prop isn't spliceable.",
-            );
+          try {
+            return [key, await lowerSpliceable(entry, "ClientValue")];
+          } catch (cause) {
+            // A component runs while its props lower, so what surfaces here may
+            // be the app's own failure rather than a value that cannot cross —
+            // and app code may throw anything, not only an error.
+            const said = cause instanceof Error ? cause.message : String(cause);
+            throw new Error(`In the \`${key}\` prop of <${id} />: ${said}`, {
+              cause,
+            });
           }
-          return [key, await lowerSpliceable(entry, "ClientValue")];
         },
       ),
     ),
