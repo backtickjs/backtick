@@ -19,9 +19,6 @@ export type SpliceableValue =
 /**
  * What the host may splice where the client wants a `T`: the value written out,
  * a script standing in for it, or a container mixing the two.
- *
- * Unparameterised it is everything spliceable — a value or an action — which is
- * what a value of no particular type is checked against.
  */
 export type Spliceable<T extends ClientUnknown = ClientUnknown> =
   | Client<T>

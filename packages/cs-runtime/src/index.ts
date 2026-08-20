@@ -33,6 +33,7 @@ export type { ClientUnknown } from "@backtickjs/language-schema";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
 export type {
+  Server,
   Spliceable,
   SpliceableValue,
   Spliced,

@@ -2,6 +2,7 @@ import type { Spliceable } from "./Spliceable.js";
 import type {
   ClientFunction,
   ClientHandle,
+  ClientUnknown,
   ClientValue,
 } from "./schema.generated.js";
 
@@ -18,7 +19,7 @@ import type {
  * `Spliceable` that costs either the alias in a refusal or what the
  * unparameterised name means.
  */
-export type Server<T> = T extends ClientFunction
+export type Server<T extends ClientUnknown> = T extends ClientFunction
   ? never
   : T extends readonly (infer Item extends ClientValue)[]
     ? readonly Spliceable<Item>[]
