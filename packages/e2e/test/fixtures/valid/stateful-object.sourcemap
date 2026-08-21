@@ -78,13 +78,13 @@ add                        → add
 )                          → )
 );                         → ;
 \n    }                    → \n      }
-)}>{                       → }\n    >\n      {
+)}>{cs.lift(               → }\n    >\n      {
 cs.receiver(               → 
 __cs_c                     → c
 )                          → 
 .                          → .
 read                       → read
 ()                         → ()
-}</button>                 → }\n    </button>\n  )
+)}</button>                → }\n    </button>\n  )
 );                         → ;
 \n})())                    → \n}`

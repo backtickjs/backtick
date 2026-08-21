@@ -32,7 +32,7 @@ write                                 → write
 return cs.const(                      → return 
 <div style={cs.lift(                  → (\n      <div style={
 __cs_css                              → css
-)}>                                   → }>\n        
+)}>{cs.lift(                          → }>\n        
 <span style={cs.lift(                 → <span style={
 __cs_css                              → css
 )} onclick={cs.lift(                  → } onclick={
@@ -47,7 +47,7 @@ write                                 → write
 (                                     → (
 "pressed"                             → "pressed"
 )                                     → )
-)}>{                                  → }>\n          {
+)}>{cs.lift(                          → }>\n          {
 cs.receiver(                          → 
 cs.splice(                            →  [-semantic]
 (label)                               → $label
@@ -56,16 +56,18 @@ cs.splice(                            →  [-semantic]
 .                                     → .
 read                                  → read
 ()                                    → ()
-}</span>                              → }\n        </span>
+)}</span>                             → }\n        </span>
+)}{cs.lift(                           → \n        
 <span style={cs.lift(                 → <span style=
 "font-size: 8px"                      → "font-size: 8px"
 )}>fixed</span>                       → >fixed</span>
+)}{cs.lift(                           → \n        
 <span style={cs.lift(                 → <span style={
 __cs_css                              → css
 )} onclick={cs.lift(                  → } onclick={
 __cs_press                            → press
 )}>\n          held\n        </span>  → }>\n          held\n        </span>
-</div>                                → \n      </div>\n    )
+)}</div>                              → \n      </div>\n    )
 );                                    → ;
 \n}                                   → \n  }
 ))                                    → `

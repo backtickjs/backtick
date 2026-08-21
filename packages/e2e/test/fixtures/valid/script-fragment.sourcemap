@@ -3,14 +3,15 @@ cs.lift(cs.const(                     → cs`
 __cs_name                             → name
 : string                              → : string
 ) =>                                  → ) => 
-<>                                    → (\n  <>\n    
+<>{cs.lift(                           → (\n  <>\n    
 <span>a sentence across lines</span>  → <span>a sentence across lines</span>
-<span>{                               → <span>\n      {
+)}{cs.lift(                           → \n    
+<span>{cs.lift(                       → <span>\n      {
 __cs_name                             → name
-} {                                   → } {
+)} {cs.lift(                          → } {
 __cs_name                             → name
-}</span>                              → }\n    </span>
-</>                                   → \n  </>\n)
+)}</span>                             → }\n    </span>
+)}</>                                 → \n  </>\n)
 ))                                    → `
 cs.lift(cs.const(                     → cs`
 cs.splice(                            →  [-semantic]

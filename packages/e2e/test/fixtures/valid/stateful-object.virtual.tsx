@@ -15,5 +15,5 @@ export default cs.lift((() => {
     const __cs_c = cs.const(cs.splice((counter))(10));
     return cs.const(<button onclick={cs.lift(() => {
         cs.statement(cs.receiver(__cs_c).add(5));
-    })}>{cs.receiver(__cs_c).read()}</button>);
+    })}>{cs.lift(cs.receiver(__cs_c).read())}</button>);
 })());

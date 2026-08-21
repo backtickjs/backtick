@@ -1099,14 +1099,19 @@ function rewriteNodeImpl(
           virtualChildren.push(
             ts.factory.createJsxExpression(
               undefined,
-              rewritten.virtual as ts.Expression,
+              call(ts, "cs", "lift", [rewritten.virtual as ts.Expression]),
             ),
           );
           continue;
         }
         const rewritten = rewriteNode(ts, state, child);
         children.push(rewritten.runtime as ts.Expression);
-        virtualChildren.push(rewritten.virtual as ts.JsxChild);
+        virtualChildren.push(
+          ts.factory.createJsxExpression(
+            undefined,
+            call(ts, "cs", "lift", [rewritten.virtual as ts.Expression]),
+          ),
+        );
       }
     }
 
