@@ -22,6 +22,9 @@
       "contentName": "meta.embedded.client-script.tsx",
       "patterns": [
         {
+          "include": "#script-opening-jsx"
+        },
+        {
           "include": "source.tsx#decl-block"
         },
         {
@@ -29,5 +32,20 @@
         }
       ]
     }
-  ]
+  ],
+  "repository": {
+    "script-opening-jsx": {
+      "comment": "A tag written where a script's body begins. TypeScript's own JSX rules start a tag only after one of the tokens an expression can follow — `(`, `=>`, `return`, a line start — and a body starts after a backtick, which is none of them; without this a script whose first thing is an element reads as arithmetic, `<` a less-than and the tag a variable. Every later line starts one, so the base grammar has them from there. The tag rules below are the base grammar's own, and they are ungated on purpose — `x < y` at the end of a line matches one — so what this adds is the gate: after the backtick only, where an expression cannot begin with `<` and a tag is the only thing it can be, and closed again at the `>` that ends the element. The one borrowed guard is TypeScript's, for a generic parameter list: `<T,>` and `<T extends U>` open no tag.",
+      "begin": "(?<=`)\\s*(?!<\\s*[$_[:alpha:]][$_[:alnum:]]*((\\s+extends\\s+[^=>])|,))(?=<)",
+      "end": "(?<=>)",
+      "patterns": [
+        {
+          "include": "source.tsx#jsx-tag-without-attributes"
+        },
+        {
+          "include": "source.tsx#jsx-tag"
+        }
+      ]
+    }
+  }
 }

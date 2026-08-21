@@ -1,0 +1,171 @@
+>const tag = cs`<div class="c">{x}</div>`;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#         ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#          ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#           ^ source.tsx meta.var.expr.tsx
+#            ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#              ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#               ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx entity.name.tag.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                    ^^^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx entity.other.attribute-name.tsx
+#                         ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx keyword.operator.assignment.tsx
+#                          ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx string.quoted.double.tsx punctuation.definition.string.begin.tsx
+#                           ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx string.quoted.double.tsx
+#                            ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx string.quoted.double.tsx punctuation.definition.string.end.tsx
+#                             ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                              ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx punctuation.section.embedded.begin.tsx
+#                               ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx variable.other.readwrite.tsx
+#                                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx punctuation.section.embedded.end.tsx
+#                                 ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                                   ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx entity.name.tag.tsx
+#                                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                                        ^ source.tsx punctuation.terminator.statement.tsx
+>const component = cs`<For each={xs}>{(x) => <Row of={x} />}</For>`;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^^^^^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#               ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#                ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#                 ^ source.tsx meta.var.expr.tsx
+#                  ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                      ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                         ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                          ^^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx entity.other.attribute-name.tsx
+#                              ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx keyword.operator.assignment.tsx
+#                               ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.begin.tsx
+#                                ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx meta.embedded.expression.tsx variable.other.readwrite.tsx
+#                                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.end.tsx
+#                                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx punctuation.section.embedded.begin.tsx
+#                                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.begin.tsx
+#                                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.parameters.tsx variable.parameter.tsx
+#                                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.end.tsx
+#                                        ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx
+#                                         ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx storage.type.function.arrow.tsx
+#                                           ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx
+#                                            ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                                             ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                                                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                                                 ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx entity.other.attribute-name.tsx
+#                                                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx keyword.operator.assignment.tsx
+#                                                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.begin.tsx
+#                                                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx meta.embedded.expression.tsx variable.other.readwrite.tsx
+#                                                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.end.tsx
+#                                                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                                                        ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                                          ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx meta.jsx.children.tsx punctuation.section.embedded.end.tsx
+#                                                           ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                                                             ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                                                                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                                                 ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                                                                  ^ source.tsx punctuation.terminator.statement.tsx
+>const fragment = cs`<>{x}</>`;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^^^^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#              ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#               ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#                ^ source.tsx meta.var.expr.tsx
+#                 ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx punctuation.definition.tag.begin.tsx
+#                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx punctuation.definition.tag.end.tsx
+#                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx meta.jsx.children.tsx punctuation.section.embedded.begin.tsx
+#                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx meta.jsx.children.tsx meta.embedded.expression.tsx variable.other.readwrite.tsx
+#                        ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx meta.jsx.children.tsx punctuation.section.embedded.end.tsx
+#                         ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx punctuation.definition.tag.begin.tsx
+#                           ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.tag.without-attributes.tsx punctuation.definition.tag.end.tsx
+#                            ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                             ^ source.tsx punctuation.terminator.statement.tsx
+>const later = cs`() => {
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#           ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#            ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#             ^ source.tsx meta.var.expr.tsx
+#              ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#                 ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.begin.tsx
+#                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.end.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx
+#                    ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx storage.type.function.arrow.tsx
+#                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx
+#                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx punctuation.definition.block.tsx
+>  return <For each={xs}>{(x) => <Row of={x} />}</For>;
+#^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx
+#  ^^^^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx keyword.control.flow.tsx
+#        ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx
+#         ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#          ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#             ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.tag.attributes.tsx
+#              ^^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.tag.attributes.tsx entity.other.attribute-name.tsx
+#                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.tag.attributes.tsx keyword.operator.assignment.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.begin.tsx
+#                    ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.tag.attributes.tsx meta.embedded.expression.tsx variable.other.readwrite.tsx
+#                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.end.tsx
+#                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                        ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx punctuation.section.embedded.begin.tsx
+#                         ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.begin.tsx
+#                          ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.parameters.tsx variable.parameter.tsx
+#                           ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.end.tsx
+#                            ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx
+#                             ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx storage.type.function.arrow.tsx
+#                               ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx
+#                                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                                 ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                                     ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx entity.other.attribute-name.tsx
+#                                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx keyword.operator.assignment.tsx
+#                                        ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.begin.tsx
+#                                         ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx meta.embedded.expression.tsx variable.other.readwrite.tsx
+#                                          ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx punctuation.section.embedded.end.tsx
+#                                           ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx meta.tag.attributes.tsx
+#                                            ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx meta.embedded.expression.tsx meta.arrow.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                              ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx meta.jsx.children.tsx punctuation.section.embedded.end.tsx
+#                                               ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx punctuation.definition.tag.begin.tsx
+#                                                 ^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx entity.name.tag.tsx support.class.component.tsx
+#                                                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx meta.tag.tsx punctuation.definition.tag.end.tsx
+#                                                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx punctuation.terminator.statement.tsx
+>}`;
+#^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.block.tsx punctuation.definition.block.tsx
+# ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#  ^ source.tsx punctuation.terminator.statement.tsx
+>const compared = cs`(a: number, b: number) => a < b`;
+#^^^^^ source.tsx meta.var.expr.tsx storage.type.tsx
+#     ^ source.tsx meta.var.expr.tsx
+#      ^^^^^^^^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx meta.definition.variable.tsx variable.other.constant.tsx
+#              ^ source.tsx meta.var.expr.tsx meta.var-single-variable.expr.tsx
+#               ^ source.tsx meta.var.expr.tsx keyword.operator.assignment.tsx
+#                ^ source.tsx meta.var.expr.tsx
+#                 ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx entity.name.function.tagged-template.tsx
+#                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.begin.tsx
+#                    ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.begin.tsx
+#                     ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx variable.parameter.tsx
+#                      ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx meta.type.annotation.tsx keyword.operator.type.annotation.tsx
+#                       ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx meta.type.annotation.tsx
+#                        ^^^^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx meta.type.annotation.tsx support.type.primitive.tsx
+#                              ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx punctuation.separator.parameter.tsx
+#                               ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx
+#                                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx variable.parameter.tsx
+#                                 ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx meta.type.annotation.tsx keyword.operator.type.annotation.tsx
+#                                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx meta.type.annotation.tsx
+#                                   ^^^^^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx meta.type.annotation.tsx support.type.primitive.tsx
+#                                         ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx meta.parameters.tsx punctuation.definition.parameters.end.tsx
+#                                          ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx
+#                                           ^^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx storage.type.function.arrow.tsx
+#                                             ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx meta.arrow.tsx
+#                                              ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx variable.other.readwrite.tsx
+#                                               ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx
+#                                                ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx keyword.operator.relational.tsx
+#                                                 ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx
+#                                                  ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx meta.embedded.client-script.tsx entity.name.function.tagged-template.tsx
+#                                                   ^ source.tsx meta.var.expr.tsx meta.tagged-template.client-script.tsx string.template.tsx punctuation.definition.string.template.end.tsx
+#                                                    ^ source.tsx punctuation.terminator.statement.tsx
+>

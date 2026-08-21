@@ -1,81 +1,115 @@
-cs.lift(cs.const(                     → cs`
-(                                     → (
-__cs_size                             → size
-: number                              → : number
-) => {\n                              → ) => {\n    
-const                                 → const 
-__cs_css                              → css
- = cs.const(                          →  = 
-"font-size: "                         → "font-size: "
- +                                    →  + 
-__cs_size                             → size
- +                                    →  + 
-"px"                                  → "px"
-);                                    → ;
-\n                                    → \n    
-const                                 → const 
-__cs_press                            → press
- = cs.const(                          →  = 
-() =>                                 → () => 
-cs.receiver(                          → 
-cs.splice(                            →  [-semantic]
-(label)                               → $label
-)                                     →  [-semantic]
-)                                     → 
-.                                     → .
-write                                 → write
-(                                     → (
-"held"                                → "held"
-)                                     → )
-);                                    → ;
-\n                                    → \n    
-return cs.const(                      → return 
-<div style={cs.lift(                  → (\n      <div style={
-__cs_css                              → css
-)}>{cs.lift(                          → }>\n        
-<span style={cs.lift(                 → <span style={
-__cs_css                              → css
-)} onclick={cs.lift(                  → } onclick={
-() =>                                 → () => 
-cs.receiver(                          → 
-cs.splice(                            →  [-semantic]
-(label)                               → $label
-)                                     →  [-semantic]
-)                                     → 
-.                                     → .
-write                                 → write
-(                                     → (
-"pressed"                             → "pressed"
-)                                     → )
-)}>{cs.lift(                          → }>\n          {
-cs.receiver(                          → 
-cs.splice(                            →  [-semantic]
-(label)                               → $label
-)                                     →  [-semantic]
-)                                     → 
-.                                     → .
-read                                  → read
-()                                    → ()
-)}</span>                             → }\n        </span>
-)}{cs.lift(                           → \n        
-<span style={cs.lift(                 → <span style=
-"font-size: 8px"                      → "font-size: 8px"
-)}>fixed</span>                       → >fixed</span>
-)}{cs.lift(                           → \n        
-<span style={cs.lift(                 → <span style={
-__cs_css                              → css
-)} onclick={cs.lift(                  → } onclick={
-__cs_press                            → press
-)}>\n          held\n        </span>  → }>\n          held\n        </span>
-)}</div>                              → \n      </div>\n    )
-);                                    → ;
-\n}                                   → \n  }
-))                                    → `
-cs.lift(cs.const(                     → cs`
-cs.splice(                            →  [-semantic]
-(row)                                 → $row
-)                                     →  [-semantic]
-(                                     → (
-12                                    → 12
-)                                     → )
-))                                    → `
+cs.lift(cs.const(              → cs`
+(                              → (
+__cs_size                      → size
+: number                       → : number
+) => {\n                       → ) => {\n    
+const                          → const 
+__cs_css                       → css
+ = cs.const(                   →  = 
+"font-size: "                  → "font-size: "
+ +                             →  + 
+__cs_size                      → size
+ +                             →  + 
+"px"                           → "px"
+);                             → ;
+\n                             → \n    
+const                          → const 
+__cs_press                     → press
+ = cs.const(                   →  = 
+() =>                          → () => 
+cs.receiver(                   → 
+cs.splice(                     →  [-semantic]
+(label)                        → $label
+)                              →  [-semantic]
+)                              → 
+.                              → .
+write                          → write
+(                              → (
+"held"                         → "held"
+)                              → )
+);                             → ;
+\n                             → \n    
+return cs.const(               → return 
+<                              → (\n      <
+div                            → div
+                               →  
+style                          → style
+={cs.lift(                     → ={
+__cs_css                       → css
+)}                             → }
+>{cs.lift(                     → >\n        
+<                              → <
+span                           → span
+                               →  
+style                          → style
+={cs.lift(                     → ={
+__cs_css                       → css
+)}                             → }
+                               →  
+onclick                        → onclick
+={cs.lift(                     → ={
+() =>                          → () => 
+cs.receiver(                   → 
+cs.splice(                     →  [-semantic]
+(label)                        → $label
+)                              →  [-semantic]
+)                              → 
+.                              → .
+write                          → write
+(                              → (
+"pressed"                      → "pressed"
+)                              → )
+)}                             → }
+>{cs.lift(                     → >\n          {
+cs.receiver(                   → 
+cs.splice(                     →  [-semantic]
+(label)                        → $label
+)                              →  [-semantic]
+)                              → 
+.                              → .
+read                           → read
+()                             → ()
+)}</                           → }\n        </
+span                           → span
+>                              → >
+)}{cs.lift(                    → \n        
+<                              → <
+span                           → span
+                               →  
+style                          → style
+={cs.lift(                     → =
+"font-size: 8px"               → "font-size: 8px"
+)}                             → 
+>fixed</                       → >fixed</
+span                           → span
+>                              → >
+)}{cs.lift(                    → \n        
+<                              → <
+span                           → span
+                               →  
+style                          → style
+={cs.lift(                     → ={
+__cs_css                       → css
+)}                             → }
+                               →  
+onclick                        → onclick
+={cs.lift(                     → ={
+__cs_press                     → press
+)}                             → }
+>\n          held\n        </  → >\n          held\n        </
+span                           → span
+>                              → >
+)}</                           → \n      </
+div                            → div
+>                              → >\n    )
+);                             → ;
+\n}                            → \n  }
+))                             → `
+cs.lift(cs.const(              → cs`
+cs.splice(                     →  [-semantic]
+(row)                          → $row
+)                              →  [-semantic]
+(                              → (
+12                             → 12
+)                              → )
+))                             → `

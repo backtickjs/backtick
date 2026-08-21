@@ -993,13 +993,15 @@ function rewriteNodeImpl(
     ts.isJsxFragment(node)
   ) {
     // A fragment has no tag to read and no attributes to write: it lowers to
-    // its children, so only they are rewritten.
-    const fragment = ts.isJsxFragment(node);
-    const opening: ts.JsxOpeningLikeElement | null = fragment
+    // its children, so only they are rewritten. Read as the absence of an
+    // opening tag rather than off the node, so what is written below of a tag
+    // and its attributes narrows to the one shape that has them.
+    const opening: ts.JsxOpeningLikeElement | null = ts.isJsxFragment(node)
       ? null
       : ts.isJsxElement(node)
         ? node.openingElement
         : (node as ts.JsxSelfClosingElement);
+    const fragment = opening === null;
     let tagName = "";
     let properties: readonly ts.JsxAttributeLike[] = [];
     if (opening !== null) {
@@ -1041,19 +1043,27 @@ function rewriteNodeImpl(
         return unsupported();
       }
       const value = rewriteNode(ts, state, source);
-      attributes.push({
-        // Lifted, all of them: everything written in a script is client code,
-        // and a prop admits it either as `Prop<T>`'s `Client` side or, for a
-        // structured one, as a `Client` of the whole. A handler admits nothing
-        // else — `Client<() => void>` has no plain form, which is what keeps a
-        // host function out of a place only client code can go.
-        virtual: ts.factory.createJsxAttribute(
-          ts.factory.createIdentifier(name),
-          ts.factory.createJsxExpression(
-            undefined,
-            call(ts, "cs", "lift", [value.virtual as ts.Expression]),
-          ),
+      // The name maps on its own, inside the attribute's own mapping: a prop is
+      // something an editor asks about — what it takes, where it is declared —
+      // and an answer has to come from the name rather than from wherever in
+      // the element the offset happened to land.
+      const written = ts.factory.createIdentifier(name);
+      state.mappings.set(written, attribute.name);
+      // Lifted, all of them: everything written in a script is client code,
+      // and a prop admits it either as `Prop<T>`'s `Client` side or, for a
+      // structured one, as a `Client` of the whole. A handler admits nothing
+      // else — `Client<() => void>` has no plain form, which is what keeps a
+      // host function out of a place only client code can go.
+      const attributeVirtual = ts.factory.createJsxAttribute(
+        written,
+        ts.factory.createJsxExpression(
+          undefined,
+          call(ts, "cs", "lift", [value.virtual as ts.Expression]),
         ),
+      );
+      state.mappings.set(attributeVirtual, attribute);
+      attributes.push({
+        virtual: attributeVirtual,
         runtime: ts.factory.createObjectLiteralExpression(
           [
             ts.factory.createPropertyAssignment(
@@ -1115,9 +1125,17 @@ function rewriteNodeImpl(
       }
     }
 
-    const written = ts.factory.createJsxAttributes(
+    const props = ts.factory.createJsxAttributes(
       attributes.map((attribute) => attribute.virtual),
     );
+    // A tag maps on its own, and each of the two a paired element has maps to
+    // the one it is: a tag is where an editor asks what an element is, and
+    // renaming one of a pair has to reach that one and not its partner.
+    const tag = (source: ts.JsxTagNameExpression): ts.Identifier => {
+      const written = ts.factory.createIdentifier(tagName);
+      state.mappings.set(written, source);
+      return written;
+    };
     const virtual = fragment
       ? ts.factory.createJsxFragment(
           ts.factory.createJsxOpeningFragment(),
@@ -1126,19 +1144,23 @@ function rewriteNodeImpl(
         )
       : virtualChildren.length === 0
         ? ts.factory.createJsxSelfClosingElement(
-            ts.factory.createIdentifier(tagName),
+            tag(opening.tagName),
             undefined,
-            written,
+            props,
           )
         : ts.factory.createJsxElement(
             ts.factory.createJsxOpeningElement(
-              ts.factory.createIdentifier(tagName),
+              tag(opening.tagName),
               undefined,
-              written,
+              props,
             ),
             virtualChildren,
             ts.factory.createJsxClosingElement(
-              ts.factory.createIdentifier(tagName),
+              tag(
+                ts.isJsxElement(node)
+                  ? node.closingElement.tagName
+                  : opening.tagName,
+              ),
             ),
           );
     state.mappings.set(virtual, node);
