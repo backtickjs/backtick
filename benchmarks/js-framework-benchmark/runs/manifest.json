@@ -436,6 +436,14 @@
       "keyed": true,
       "dir": "array-from",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "58966ac",
+      "label": "globals table",
+      "date": "2026-08-20",
+      "keyed": true,
+      "dir": "globals-table",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
