@@ -1,5 +1,6 @@
 import type { SourceLocation } from "@backtickjs/cs-runtime";
 import type ts from "typescript";
+import { isComponentTag } from "./isComponentTag.js";
 import type { SourceRange } from "./SourceRange.js";
 
 export interface ParsedFile {
@@ -24,7 +25,10 @@ export interface ClientScript {
 // placeholder text as an identifier — the spelling that keys the splice
 // dictionary and the runtime metadata (`key`) — and evaluate a host
 // expression (`expression`).
-export type Splice = BracedSplice | UnbracedSplice;
+//
+// A component tag is the third: `<Card />` names a host binding too, and the
+// source spelled no sigil for it.
+export type Splice = BracedSplice | UnbracedSplice | ComponentTagSplice;
 
 export interface BracedSplice {
   kind: "braced";
@@ -45,6 +49,21 @@ export interface UnbracedSplice {
   // placeholder text, which also keys the splice dictionary
   key: string;
   // a shorthand names a single binding, so it nests no scripts
+  scripts: [];
+}
+
+// The host binding a component tag names. It stands in no placeholder — a tag
+// carries no sigil — so its key is minted rather than read from the text.
+export interface ComponentTagSplice {
+  kind: "component-tag";
+  // the host binding the tag names (synthesized, e.g. `Card` for `<Card />`)
+  expression: ts.Identifier;
+  // the metadata key, `$<TagName>`: the same key `$Card` would mint, since it
+  // is the same binding. One per component however many tags name it, because
+  // a tag's props go with the call rather than with the value. A script that
+  // writes both spellings claims the key twice, which minting has to answer.
+  key: string;
+  // a tag names a single binding, so it nests no scripts
   scripts: [];
 }
 
@@ -142,10 +161,11 @@ function getDirectScripts(
 // A splice per first reference in the placeholder text, in source order: a
 // `$0splice<n>` placeholder resolves to its template span's braced splice,
 // and any other `$x` identifier mints an unbraced splice, deduplicated by
-// spelling. Property names and declaration names are not references (a
-// `$`-prefixed declaration is rejected at rewrite time), and nested scripts
-// are already placeholders in this text, so the walk scans only the
-// script's own body.
+// spelling. A component tag mints one as well, under the `$Name` key that
+// binding's shorthand would use. Property names and declaration names are not
+// references (a `$`-prefixed declaration is rejected at rewrite time), and
+// nested scripts are already placeholders in this text, so the walk scans only
+// the script's own body.
 function getDirectSplices(
   ts: typeof import("typescript"),
   taggedTemplate: ts.TaggedTemplateExpression,
@@ -178,6 +198,24 @@ function getDirectSplices(
     if (ts.isCatchClause(node)) {
       visit(node.block); // the catch binding is not a reference
       return;
+    }
+    // A component tag names a host binding, where an element of the target is
+    // its own name. Minted here rather than read, since no sigil in the text
+    // spells it, and deduplicated by key like the rest.
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      const tag = node.tagName;
+      if (ts.isIdentifier(tag) && isComponentTag(tag.text)) {
+        const key = `$${tag.text}`;
+        if (splices[key] == null) {
+          splices[key] = {
+            kind: "component-tag",
+            expression: ts.factory.createIdentifier(tag.text),
+            key,
+            scripts: [],
+          };
+        }
+      }
+      // Falls through, so the attributes are walked for references of their own.
     }
     if (
       ts.isIdentifier(node) &&

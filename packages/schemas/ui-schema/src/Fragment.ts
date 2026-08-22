@@ -15,7 +15,7 @@ export function createFragment<Props extends object>(): Fragment<Props> {
   return { "@backtickjs": "Fragment" } as unknown as Fragment<Props>;
 }
 
-export function isFragment(value: unknown): value is Fragment {
+export function isFragment(value: unknown): value is Fragment<never> {
   return (
     typeof value === "object" &&
     value !== null &&
