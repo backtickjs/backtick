@@ -12,13 +12,7 @@
   {#f3(id)}
 </span>
 
-#f5 = (s0) => <for
-  each={#f1(() => s0)}
->
-  {#f2((id) => #f4(id))}
-</for>
-
-#f6 = () => {
+#f5 = () => {
   const s0 = state([1, 2, 3]);
   return [
     <span
@@ -26,8 +20,12 @@
     >
       {"clear"}
     </span>,
-    #f5(s0)
+    <for
+      each={#f1(() => s0)}
+    >
+      {#f2((id) => #f4(id))}
+    </for>
   ];
 }
 
-root = #f6()
+root = #f5()

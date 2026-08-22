@@ -16,13 +16,7 @@
   {#f4(id)}
 </span>
 
-#f6 = (s0) => <for
-  each={#f2(() => s0)}
->
-  {#f3((id) => #f5(id))}
-</for>
-
-#f7 = () => {
+#f6 = () => {
   const s0 = state([1, 2, 3]);
   return <div>
     {<span
@@ -36,9 +30,13 @@
       {"drop"}
     </span>}
     {<div>
-      {#f6(s0)}
+      {<for
+        each={#f2(() => s0)}
+      >
+        {#f3((id) => #f5(id))}
+      </for>}
     </div>}
   </div>;
 }
 
-root = #f7()
+root = #f6()

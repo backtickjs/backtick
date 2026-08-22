@@ -1,4 +1,9 @@
 export { For } from "./For.js";
+export {
+  createElementAlias,
+  type ElementAlias,
+  isElementAlias,
+} from "./ElementAlias.js";
 export { createFragment, type Fragment, isFragment } from "./Fragment.js";
 export {
   createJsxElement,

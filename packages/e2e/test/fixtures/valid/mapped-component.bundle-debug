@@ -8,14 +8,12 @@
   {#f2(row)}
 </span>
 
-#f4 = () => <for
-  each={#f0(() => [1, 2, 3])}
->
-  {#f1((row) => #f3(row))}
-</for>
-
-#f5 = () => <div>
-  {#f4()}
+#f4 = () => <div>
+  {<for
+    each={#f0(() => [1, 2, 3])}
+  >
+    {#f1((row) => #f3(row))}
+  </for>}
 </div>
 
-root = #f5()
+root = #f4()

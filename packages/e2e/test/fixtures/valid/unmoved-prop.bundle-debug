@@ -14,13 +14,7 @@
   {#f4(id)}
 </a>
 
-#f6 = (s0) => <for
-  each={#f1()}
->
-  {#f2((id) => #f5(id, s0))}
-</for>
-
-#f7 = () => {
+#f6 = () => {
   const s0 = state(0);
   return <div>
     {<span
@@ -29,9 +23,13 @@
       {"select"}
     </span>}
     {<div>
-      {#f6(s0)}
+      {<for
+        each={#f1()}
+      >
+        {#f2((id) => #f5(id, s0))}
+      </for>}
     </div>}
   </div>;
 }
 
-root = #f7()
+root = #f6()
