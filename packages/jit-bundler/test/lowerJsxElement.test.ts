@@ -5,6 +5,7 @@ import type {
   ClientScriptExpression,
   ClientScriptJsxAttribute,
   ClientScriptJsxElement,
+  ClientScriptStringLiteral,
 } from "@backtickjs/cs-runtime";
 import { NodeKind } from "../dist/bundle/Bundle.js";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
@@ -17,7 +18,7 @@ import type { Ir, IrScriptEntry } from "../dist/ir/Ir.js";
 
 const loc = [1, 0, 1, 1] as const;
 
-const text = (value: string): ClientScriptExpression => ({
+const text = (value: string): ClientScriptStringLiteral => ({
   kind: SyntaxKind.StringLiteral,
   loc: [...loc],
   text: value,
@@ -30,8 +31,7 @@ const element = (
 ): ClientScriptJsxElement => ({
   kind: SyntaxKind.JsxElement,
   loc: [...loc],
-  // A tag is a value, so an intrinsic one is the string it is.
-  tagName: text(tag),
+  type: text(tag),
   attributes,
   children,
 });

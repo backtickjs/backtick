@@ -140,7 +140,7 @@ async function Card() {
             expression: {
               kind: 285,
               loc: [16, 7, 24, 13],
-              tagName: {
+              type: {
                 kind: 11,
                 loc: [16, 8, 16, 11],
                 text: "div",
@@ -160,7 +160,7 @@ async function Card() {
                 {
                   kind: 285,
                   loc: [17, 9, 19, 16],
-                  tagName: {
+                  type: {
                     kind: 11,
                     loc: [17, 10, 17, 14],
                     text: "span",
@@ -230,7 +230,7 @@ async function Card() {
                 {
                   kind: 285,
                   loc: [20, 9, 20, 50],
-                  tagName: {
+                  type: {
                     kind: 11,
                     loc: [20, 10, 20, 14],
                     text: "span",
@@ -256,7 +256,7 @@ async function Card() {
                 {
                   kind: 285,
                   loc: [21, 9, 23, 16],
-                  tagName: {
+                  type: {
                     kind: 11,
                     loc: [21, 10, 21, 14],
                     text: "span",

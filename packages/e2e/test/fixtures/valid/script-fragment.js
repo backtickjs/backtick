@@ -39,7 +39,7 @@ const listed = cs.create(
         {
           kind: 285,
           loc: [11, 5, 11, 41],
-          tagName: {
+          type: {
             kind: 11,
             loc: [11, 6, 11, 10],
             text: "span",
@@ -56,7 +56,7 @@ const listed = cs.create(
         {
           kind: 285,
           loc: [12, 5, 14, 12],
-          tagName: {
+          type: {
             kind: 11,
             loc: [12, 6, 12, 10],
             text: "span",

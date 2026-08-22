@@ -279,7 +279,7 @@ async function Rows() {
             body: {
               kind: 285,
               loc: [33, 13, 35, 18],
-              tagName: {
+              type: {
                 kind: 11,
                 loc: [33, 14, 33, 16],
                 text: "li",

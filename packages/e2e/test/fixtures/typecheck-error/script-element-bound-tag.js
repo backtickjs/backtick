@@ -30,7 +30,7 @@ const held = cs.create(
     body: {
       kind: 285,
       loc: [5, 34, 5, 41],
-      tagName: {
+      type: {
         kind: 11,
         loc: [5, 35, 5, 38],
         text: "Tag",

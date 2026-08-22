@@ -267,12 +267,7 @@ export interface ClientScriptSplice {
 export interface ClientScriptJsxElement {
   readonly kind: typeof SyntaxKind.JsxElement;
   readonly loc: SourceLocation;
-  // The tag as a value, which is what a tag is: `jsx(type, props)` takes one,
-  // and `ts.JsxOpeningElement.tagName` is an expression too. An intrinsic is
-  // its own string — the same string `jsx` interns into an element — and a
-  // component is the host binding, which a script reaches by splice, since a
-  // name it cannot bind is what a splice is for.
-  readonly tagName: ClientScriptExpression;
+  readonly type: ClientScriptStringLiteral | ClientScriptSplice;
   readonly attributes: readonly ClientScriptJsxAttribute[];
   readonly children: readonly ClientScriptExpression[];
 }

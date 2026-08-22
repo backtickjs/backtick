@@ -291,17 +291,13 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
             : node.children.length === 1
               ? e(node.children[0])
               : [NodeKind.DataArray, node.children.map((child) => e(child))];
-        // A tag is its own string, which is the id an element node names. Any
-        // other tag is a component to expand, and resolving one is the
-        // bundler's to do before a node can be written — which it does not do
-        // yet.
-        if (node.tagName.kind !== SyntaxKind.StringLiteral) {
+        if (node.type.kind === SyntaxKind.Splice) {
           throw new Error(
             "A client script element's tag must be a plain tag for now: a " +
               "component tag is a value the bundler has yet to resolve.",
           );
         }
-        return [NodeKind.Element, node.tagName.text, props, children];
+        return [NodeKind.Element, node.type.text, props, children];
       }
       case SyntaxKind.Splice:
         return renderSplice(node.key);

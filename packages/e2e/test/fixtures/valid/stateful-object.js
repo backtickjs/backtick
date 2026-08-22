@@ -248,7 +248,7 @@ export default cs.create(
         expression: {
           kind: 285,
           loc: [20, 5, 26, 14],
-          tagName: {
+          type: {
             kind: 11,
             loc: [20, 6, 20, 12],
             text: "button",
