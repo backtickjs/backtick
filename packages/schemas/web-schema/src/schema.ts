@@ -13,7 +13,7 @@ export const schema: Schema = {
   publishes: [],
 
   types: {
-    HtmlChild: Type.Union([
+    HtmlNode: Type.Union([
       Type.Ref("ClientElement"),
       Type.String(),
       Type.Number(),
@@ -433,7 +433,7 @@ export const schema: Schema = {
     ),
     VoidProps: Type.Interface([Type.Ref("GlobalAttributes")], {}),
     HtmlProps: Type.Interface([Type.Ref("GlobalAttributes")], {
-      children: Type.Optional(Type.Ref("HtmlChild")),
+      children: Type.Optional(Type.Ref("HtmlNode")),
     }),
     AnchorProps: Type.Interface([Type.Ref("HtmlProps")], {
       download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),

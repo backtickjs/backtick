@@ -1,3 +1,4 @@
+import type { ClientValue } from "@backtickjs/language-schema";
 import type { ClientElement } from "./schema.generated.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
@@ -10,10 +11,16 @@ import type { ServerComponent } from "./ServerComponent.js";
  * wire carries — so a target's tags are the strings its schema declares in
  * `Elements`. `<For />` needs no arm of its own: it is a component, and the
  * `for` element it answers with is one of those strings.
+ *
+ * `ClientNode` is what a component of that target may answer with, which the
+ * target binds where it declares `JSX.ElementType`. At `ClientValue` this is the
+ * top of the family — every target's is assignable to it — which is what the
+ * runtime holds below, since a value carrying only a tag has no target to
+ * answer for.
  */
-export type JsxElementType =
+export type JsxElementType<ClientNode extends ClientValue> =
   | string /* IntrinsicElement tag */
-  | ServerComponent<never>
+  | ServerComponent<never, ClientNode>
   | Fragment<never>;
 
 /**
@@ -23,7 +30,7 @@ export type JsxElementType =
  */
 export interface JsxElement extends ClientElement {
   readonly "@backtickjs": "JsxElement";
-  readonly type: JsxElementType;
+  readonly type: JsxElementType<ClientValue>;
   // Unknown, because only a tag's props cross. A component runs here and keeps
   // its own, so it may take a host function or anything else the wire cannot
   // carry; what a tag admits is checked where a tag lowers.
@@ -43,7 +50,7 @@ export function isJsxElement(value: unknown): value is JsxElement {
 // nothing outside the generated schema can write, so what makes one says so
 // here rather than every holder being asked to prove it.
 export function createJsxElement(
-  type: JsxElementType,
+  type: JsxElementType<ClientValue>,
   props: { [key: string]: unknown },
 ): JsxElement {
   return {

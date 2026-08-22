@@ -1,7 +1,5 @@
 import {
-  isClientScript,
   isFragment,
-  isJsxElement,
   type JsxElement,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
@@ -87,21 +85,7 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
       type(jsx.props as never),
     );
 
-    // A drawing or a script — the one the host made, or the one it handed back
-    // for the client to make. Narrowed rather than trusted, because the type it
-    // answers with is every client's and what is expanded here is this one's,
-    // and because what may stand as a drawing is narrower than what may cross:
-    // `lowerSpliceable` would take a number or a plain object and put one in
-    // the tree. What it lowers to is still its own to say, in value position —
-    // a script that draws answers with what it drew, where an action answers
-    // with nothing.
     if (element !== null) {
-      if (!isJsxElement(element) && !isClientScript(element)) {
-        throw new Error(
-          "Can't bundle this component: it answered with neither a drawing " +
-            "nor a `cs` script.",
-        );
-      }
       instance.child = await lowerSpliceable(element, "ClientValue");
     }
 

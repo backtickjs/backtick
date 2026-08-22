@@ -4,6 +4,7 @@ import type {
   Children,
   ClientElement,
   Elements as Web,
+  HtmlNode,
 } from "@backtickjs/web-schema";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
@@ -31,7 +32,7 @@ export const Fragment = createFragment<FragmentProps>();
 export declare namespace JSX {
   export interface Element extends ClientElement {}
   export interface IntrinsicElements extends Web {}
-  export type ElementType = JsxElementType;
+  export type ElementType = JsxElementType<HtmlNode>;
   export interface ElementChildrenAttribute {
     children: unknown;
   }

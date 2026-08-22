@@ -7,5 +7,5 @@
 49:31 error TS2322: Type 'number' is not assignable to type 'Prop<string> | undefined'.
 52:44 error TS2322: Type '{ nosuch: number; }' is not assignable to type 'FragmentProps'.
   Property 'nosuch' does not exist on type 'FragmentProps'.
-64:32 error TS2322: Type 'true' is not assignable to type 'Children<HtmlChild> | undefined'.
+64:32 error TS2322: Type 'true' is not assignable to type 'Children<HtmlNode> | undefined'.
 67:34 error TS2559: Type '{ children: string; }' has no properties in common with type 'VoidProps'.
