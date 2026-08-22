@@ -1,5 +1,6 @@
 import type { ClientValue } from "@backtickjs/language-schema";
 import type { ClientElement } from "./schema.generated.js";
+import type { ElementAlias } from "./ElementAlias.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
@@ -21,7 +22,8 @@ import type { ServerComponent } from "./ServerComponent.js";
 export type JsxElementType<ClientNode extends ClientValue> =
   | string /* IntrinsicElement tag */
   | ServerComponent<never, ClientNode>
-  | Fragment<never>;
+  | Fragment<never>
+  | ElementAlias;
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it. The tag

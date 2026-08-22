@@ -14,7 +14,7 @@ import type { ForProps } from "./schema.generated.js";
  * nothing of it costs anything — the tag is what lowers.
  */
 export interface For extends ElementAlias {
-  <T extends ClientValue>(props: ForProps<T>): never;
+  <T extends ClientValue>(props: ForProps<T>): unknown;
   readonly id: "for";
 }
 

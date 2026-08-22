@@ -6,13 +6,13 @@
  * makes its own, since what a fragment may hold is whatever that target draws,
  * and the brand is what lets one rule read them all.
  */
-export interface Fragment<P extends object = object> {
-  (props: P): never;
+export interface Fragment<Props extends object = object> {
+  (props: Props): unknown;
   readonly "@backtickjs": "Fragment";
 }
 
-export function createFragment<P extends object>(): Fragment<P> {
-  return { "@backtickjs": "Fragment" } as unknown as Fragment<P>;
+export function createFragment<Props extends object>(): Fragment<Props> {
+  return { "@backtickjs": "Fragment" } as unknown as Fragment<Props>;
 }
 
 export function isFragment(value: unknown): value is Fragment {

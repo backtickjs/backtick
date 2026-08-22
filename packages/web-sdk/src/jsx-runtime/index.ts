@@ -24,7 +24,7 @@ import type {
  * of this target.
  */
 export interface FragmentProps {
-  children?: Children<ClientElement | string | number>;
+  children?: Children<HtmlNode>;
 }
 
 export const Fragment = createFragment<FragmentProps>();

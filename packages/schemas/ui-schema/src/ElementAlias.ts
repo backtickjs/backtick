@@ -10,6 +10,7 @@
  * nothing.
  */
 export interface ElementAlias {
+  (props: never): unknown;
   readonly "@backtickjs": "ElementAlias";
   readonly id: string;
 }
