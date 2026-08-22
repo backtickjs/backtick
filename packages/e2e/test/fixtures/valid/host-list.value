@@ -1,0 +1,13 @@
+<div>
+  <ul class="rows">
+    <li onclick={[function]}>
+      {"row 1"}
+    </li>
+    <li onclick={[function]}>
+      {"row 2"}
+    </li>
+    <li onclick={[function]}>
+      {"row 3"}
+    </li>
+  </ul>
+</div>

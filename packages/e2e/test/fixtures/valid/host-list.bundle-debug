@@ -1,0 +1,34 @@
+#f0 = ($0) => $0().read()
+
+#f1 = ($0) => $0()(1)
+
+#f2 = () => (from) => {
+  return Array.from({ "length": 3 }, (_, at) => {
+    return { "id": from + at, "label": state("row " + from + at) };
+  });
+}
+
+#f3 = () => (row) => <li
+  onclick={() => row.label.write("pressed")}
+>
+  {row.label.read()}
+</li>
+
+#f4 = (s0) => <for
+  each={#f0(() => s0)}
+>
+  {#f3()}
+</for>
+
+#f5 = () => {
+  const s0 = state(#f1(#f2));
+  return <div>
+    {<ul
+      class={"rows"}
+    >
+      {#f4(s0)}
+    </ul>}
+  </div>;
+}
+
+root = #f5()
