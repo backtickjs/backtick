@@ -1,0 +1,25 @@
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_n                  → n
+ = cs.const(            →  = 
+cs.state                → state
+(                       → (
+2                       → 2
+)                       → )
+);                      → ;
+\n                      → \n    
+return cs.const(        → return 
+<                       → <
+em                      → em
+>{cs.lift(              → >{
+cs.receiver(            → 
+__cs_n                  → n
+)                       → 
+.                       → .
+read                    → read
+()                      → ()
+)}</                    → }</
+em                      → em
+>                       → >
+);                      → ;
+\n})())                 → \n  }`

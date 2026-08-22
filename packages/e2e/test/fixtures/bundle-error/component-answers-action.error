@@ -1,0 +1,1 @@
+Can't bundle an action `Client<void>` as data. Use a callback `Client<() => void>` instead.
