@@ -4,6 +4,7 @@ import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
 import { bodyKind, partialReturn } from "./bodyKind.js";
+import { isComponentTag } from "./isComponentTag.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
@@ -1187,13 +1188,19 @@ function rewriteNodeImpl(
       virtual,
       runtime: astNode(ts, SyntaxKind.JsxElement, {
         loc: loc(node),
-        // Written as its own string for now. A component tag is the host
-        // binding, which a script reaches by splice — the rewrite for that
-        // waits on the bundler being able to resolve one.
-        type: astNode(ts, SyntaxKind.StringLiteral, {
-          loc: opening === null ? loc(node) : loc(opening.tagName),
-          text: ts.factory.createStringLiteral(tagName),
-        }),
+        // An element of the target is its own name; a component tag is the
+        // host binding it names, which the script reaches by splice under the
+        // key `getDirectSplices` minted for it.
+        type:
+          opening !== null && isComponentTag(tagName)
+            ? astNode(ts, SyntaxKind.Splice, {
+                loc: loc(opening.tagName),
+                key: ts.factory.createStringLiteral(`$${tagName}`),
+              })
+            : astNode(ts, SyntaxKind.StringLiteral, {
+                loc: opening === null ? loc(node) : loc(opening.tagName),
+                text: ts.factory.createStringLiteral(tagName),
+              }),
         attributes: ts.factory.createArrayLiteralExpression(
           attributes.map((attribute) => attribute.runtime),
           false,

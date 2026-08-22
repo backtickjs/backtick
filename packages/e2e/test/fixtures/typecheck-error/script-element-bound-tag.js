@@ -31,9 +31,9 @@ const held = cs.create(
       kind: 285,
       loc: [5, 34, 5, 41],
       type: {
-        kind: 11,
+        kind: 1000,
         loc: [5, 35, 5, 38],
-        text: "Tag",
+        key: "$Tag",
       },
       attributes: [],
       children: [],
