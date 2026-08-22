@@ -1258,12 +1258,12 @@ function rewriteNodeImpl(
             optionalCall
               ? ts.factory.createToken(ts.SyntaxKind.QuestionDotToken)
               : undefined,
-            undefined,
+            node.typeArguments,
             args.map((arg) => arg.virtual as ts.Expression),
           )
         : ts.factory.createCallExpression(
             calleeAccess,
-            undefined,
+            node.typeArguments,
             args.map((arg) => arg.virtual as ts.Expression),
           );
       const virtual =
@@ -1301,12 +1301,12 @@ function rewriteNodeImpl(
       ? ts.factory.createCallChain(
           callee.virtual as ts.Expression,
           ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
-          undefined,
+          node.typeArguments,
           args.map((arg) => arg.virtual as ts.Expression),
         )
       : ts.factory.createCallExpression(
           callee.virtual as ts.Expression,
-          undefined,
+          node.typeArguments,
           args.map((arg) => arg.virtual as ts.Expression),
         );
     return {
