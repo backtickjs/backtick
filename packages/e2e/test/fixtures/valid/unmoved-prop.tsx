@@ -1,4 +1,4 @@
-import { cs, state, For } from "@backtickjs/core";
+import { cs, For } from "@backtickjs/core";
 
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row
@@ -10,22 +10,23 @@ import { cs, state, For } from "@backtickjs/core";
 // about it anyway would be setting a prop per row per selection, in a list of
 // any size, and no snapshot of the drawn markup could see it.
 async function Rows() {
-  const selected = state(0);
-  return (
-    <div>
-      <span onclick={cs`() => $selected.write(1)`}>select</span>
+  return cs`{
+    const selected = state(0);
+    return (
       <div>
-        <For each={cs`[0, 1, 2]`}>
-          {cs`(id: number) =>
-            ${(
-              <a href={cs`$selected.read() === id ? "#open" : "#closed"`}>
-                {cs`"row " + id`}
+        <span onclick={() => selected.write(1)}>select</span>
+        <div>
+          <For each={[0, 1, 2]}>
+            {(id: number) => (
+              <a href={selected.read() === id ? "#open" : "#closed"}>
+                {"row " + id}
               </a>
-            )}`}
-        </For>
+            )}
+          </For>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }`;
 }
 
 export default <Rows />;

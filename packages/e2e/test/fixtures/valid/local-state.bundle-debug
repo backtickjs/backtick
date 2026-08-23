@@ -1,17 +1,15 @@
-#f0 = ($0) => "font-size: " + $0().read() + "px"
-
-#f1 = ($0) => () => {
-  $0().write($0().read() + 1);
-}
-
-#f2 = () => {
-  const s0 = state(16);
+#f0 = () => {
+  const size = state(16);
   return <span
-    style={#f0(() => s0)}
-    onclick={#f1(() => s0)}
+    style={"font-size: " + size.read() + "px"}
+    onclick={() => {
+      size.write(size.read() + 1);
+    }}
   >
     {"press"}
   </span>;
 }
 
-root = #f2()
+#f1 = () => #f0()
+
+root = #f1()

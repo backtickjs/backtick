@@ -1,29 +1,24 @@
-#f0 = ($0) => "font-size: " + $0().read() + "px"
+#f0 = ($0) => {
+  const size = state(16);
+  return <div>
+    {$0()({ "size": () => size })}
+    {$0()({ "size": () => size })}
+  </div>;
+}
 
-#f1 = ($0) => () => {
+#f1 = ($0) => "font-size: " + $0().read() + "px"
+
+#f2 = ($0) => () => {
   $0().write($0().read() + 1);
 }
 
-#f2 = (s0) => <span
-  style={#f0(() => s0)}
-  onclick={#f1(() => s0)}
+#f3 = ($0) => <span
+  style={#f1(() => $0.size())}
+  onclick={#f2(() => $0.size())}
 >
   {"press"}
 </span>
 
-#f3 = (s0) => <span
-  style={#f0(() => s0)}
-  onclick={#f1(() => s0)}
->
-  {"press"}
-</span>
-
-#f4 = () => {
-  const s0 = state(16);
-  return <div>
-    {#f2(s0)}
-    {#f3(s0)}
-  </div>;
-}
+#f4 = () => #f0(() => ($0) => #f3($0))
 
 root = #f4()

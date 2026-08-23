@@ -1,4 +1,4 @@
-import { cs, state, For } from "@backtickjs/core";
+import { cs, For } from "@backtickjs/core";
 
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
@@ -9,24 +9,26 @@ import { cs, state, For } from "@backtickjs/core";
 // `state.test.ts` holds the nodes across a write and checks exactly that,
 // which is the half a snapshot of the drawn markup cannot see.
 async function Rows() {
-  const ids = state<number[]>([1, 2, 3]);
-  const swap = cs`() => {
-    $ids.update((held) => held.with(0, held[2]).with(2, held[0]));
-  }`;
-  const drop = cs`() => {
-    $ids.update((held) => held.filter((id) => id !== 2));
-  }`;
-  return (
-    <div>
-      <span onclick={swap}>swap</span>
-      <span onclick={drop}>drop</span>
+  return cs`{
+    const ids = state<number[]>([1, 2, 3]);
+    const swap = () => {
+      ids.update((held) => held.with(0, held[2]).with(2, held[0]));
+    };
+    const drop = () => {
+      ids.update((held) => held.filter((id) => id !== 2));
+    };
+    return (
       <div>
-        <For each={cs`$ids.read()`}>
-          {cs`(id: number) => ${(<span>{cs`"row " + id`}</span>)}`}
-        </For>
+        <span onclick={swap}>swap</span>
+        <span onclick={drop}>drop</span>
+        <div>
+          <For each={ids.read()}>
+            {(id: number) => <span>{"row " + id}</span>}
+          </For>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }`;
 }
 
 export default <Rows />;

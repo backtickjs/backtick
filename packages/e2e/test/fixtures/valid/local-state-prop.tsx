@@ -1,11 +1,10 @@
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 import type { Client, State } from "@backtickjs/core";
 
-// A cell crossing a component boundary: declared once by the parent, handed to
-// each child as a prop, so both read one storage. Ownership follows the
-// declaration rather than the readers, so `Panel`'s entry declares the cell and
-// each `Counter` receives the handle as a slot — which is what makes a write
-// through either child reach the same storage.
+// A cell crossing a component boundary: declared once by the script that draws
+// the pair, handed to each child as a prop, so both read one storage. The cell
+// is an ordinary client value — the prop takes it the way it takes any other —
+// which is what makes a write through either child reach the same storage.
 const Counter = async ({ size }: { size: Client<State<number>> }) => (
   <span
     style={cs`"font-size: " + $size.read() + "px"`}
@@ -18,13 +17,15 @@ const Counter = async ({ size }: { size: Client<State<number>> }) => (
 );
 
 async function Panel() {
-  const size = state(16);
-  return (
-    <div>
-      <Counter size={size} />
-      <Counter size={size} />
-    </div>
-  );
+  return cs`{
+    const size = state(16);
+    return (
+      <div>
+        <Counter size={size} />
+        <Counter size={size} />
+      </div>
+    );
+  }`;
 }
 
 export default <Panel />;

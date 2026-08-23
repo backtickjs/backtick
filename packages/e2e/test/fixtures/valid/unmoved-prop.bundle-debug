@@ -1,37 +1,30 @@
-#f0 = ($0) => () => $0().write(1)
-
-#f1 = () => [0, 1, 2]
-
-#f2 = ($0) => (id) => $0(id)
-
-#f3 = ($0, $1) => $0($1).read() === $1 ? "#open" : "#closed"
-
-#f4 = ($0) => "row " + $0
-
-#f5 = (id, s0) => <a
-  href={#f3((id) => s0, id)}
->
-  {#f4(id)}
-</a>
-
-#f6 = (s0) => <for
-  each={#f1()}
->
-  {#f2((id) => #f5(id, s0))}
-</for>
-
-#f7 = () => {
-  const s0 = state(0);
+#f0 = ($0) => {
+  const selected = state(0);
   return <div>
     {<span
-      onclick={#f0(() => s0)}
+      onclick={() => selected.write(1)}
     >
       {"select"}
     </span>}
     {<div>
-      {#f6(s0)}
+      {$0()({
+        "each": () => [0, 1, 2],
+        "children": () => (id) => <a
+          href={selected.read() === id ? "#open" : "#closed"}
+        >
+          {"row " + id}
+        </a>
+      })}
     </div>}
   </div>;
 }
 
-root = #f7()
+#f1 = ($0) => <for
+  each={$0.each()}
+>
+  {$0.children()}
+</for>
+
+#f2 = () => #f0(() => ($0) => #f1($0))
+
+root = #f2()

@@ -1,25 +1,21 @@
-#f0 = ($0) => () => $0().write($0().read() + 1)
-
-#f1 = ($0) => $0().read() > 0 ? "☑" : "☐"
-
-#f2 = ($0) => "pressed " + $0().read() + " times"
-
-#f3 = () => {
-  const s0 = state(0);
+#f0 = () => {
+  const count = state(0);
   return <button
     id={"row"}
     style={"display: flex; gap: 8px"}
-    onclick={#f0(() => s0)}
+    onclick={() => count.write(count.read() + 1)}
   >
     {<span
       style={"font-weight: 700"}
     >
-      {#f1(() => s0)}
+      {count.read() > 0 ? "☑" : "☐"}
     </span>}
     {<span>
-      {#f2(() => s0)}
+      {"pressed " + count.read() + " times"}
     </span>}
   </button>;
 }
 
-root = #f3()
+#f1 = () => #f0()
+
+root = #f1()

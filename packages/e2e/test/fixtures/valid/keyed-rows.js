@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, state, For } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, For } from "@backtickjs/core";
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
 // thing saying which row is which.
@@ -9,346 +9,494 @@ import { cs, state, For } from "@backtickjs/core";
 // `state.test.ts` holds the nodes across a write and checks exactly that,
 // which is the half a snapshot of the drawn markup cannot see.
 async function Rows() {
-  const ids = state([1, 2, 3]);
-  const swap = cs.create(
-    [13, 16, 15, 5],
+  return cs.create(
+    [12, 10, 31, 5],
     {
       version: "0.0.0",
       filePath: "keyed-rows.tsx",
-      fileHash: "2uqko0eabvbug",
+      fileHash: "8fvi8zcyc3un",
       kind: "value",
-      splices: { $ids: ids },
+      splices: { $For: For },
       captures: [],
-      spliceParams: { $ids: [] },
+      spliceParams: {},
     },
     () => ({
-      kind: 220,
-      loc: [13, 19, 15, 4],
-      parameters: [],
-      body: {
-        kind: 242,
-        loc: [13, 25, 15, 4],
-        statements: [
-          {
-            kind: 214,
-            loc: [14, 5, 14, 66],
-            expression: {
-              kind: 212,
-              loc: [14, 5, 14, 16],
-              expression: {
-                kind: 1000,
-                loc: [14, 5, 14, 9],
-                key: "$ids",
-              },
-              questionDotToken: false,
-              name: "update",
-            },
-            questionDotToken: false,
-            arguments: [
+      kind: 242,
+      loc: [12, 13, 31, 4],
+      statements: [
+        {
+          kind: 244,
+          loc: [13, 5, 13, 44],
+          declarationList: {
+            kind: 262,
+            loc: [13, 5, 13, 43],
+            declarations: [
               {
-                kind: 220,
-                loc: [14, 17, 14, 65],
-                parameters: [
-                  {
-                    kind: 170,
-                    loc: [14, 18, 14, 22],
-                    name: {
-                      kind: 80,
-                      loc: [14, 18, 14, 22],
-                      text: "held",
-                      bindingKey: "held$2uqko0eabvbug$0",
-                    },
-                  },
-                ],
-                body: {
-                  kind: 214,
-                  loc: [14, 27, 14, 65],
-                  expression: {
-                    kind: 212,
-                    loc: [14, 27, 14, 53],
-                    expression: {
-                      kind: 214,
-                      loc: [14, 27, 14, 48],
-                      expression: {
-                        kind: 212,
-                        loc: [14, 27, 14, 36],
-                        expression: {
-                          kind: 80,
-                          loc: [14, 27, 14, 31],
-                          text: "held",
-                          bindingKey: "held$2uqko0eabvbug$0",
-                        },
-                        questionDotToken: false,
-                        name: "with",
-                      },
-                      questionDotToken: false,
-                      arguments: [
-                        {
-                          kind: 9,
-                          loc: [14, 37, 14, 38],
-                          value: 0,
-                        },
-                        {
-                          kind: 213,
-                          loc: [14, 40, 14, 47],
-                          expression: {
-                            kind: 80,
-                            loc: [14, 40, 14, 44],
-                            text: "held",
-                            bindingKey: "held$2uqko0eabvbug$0",
-                          },
-                          argumentExpression: {
-                            kind: 9,
-                            loc: [14, 45, 14, 46],
-                            value: 2,
-                          },
-                        },
-                      ],
-                    },
-                    questionDotToken: false,
-                    name: "with",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 9,
-                      loc: [14, 54, 14, 55],
-                      value: 2,
-                    },
-                    {
-                      kind: 213,
-                      loc: [14, 57, 14, 64],
-                      expression: {
-                        kind: 80,
-                        loc: [14, 57, 14, 61],
-                        text: "held",
-                        bindingKey: "held$2uqko0eabvbug$0",
-                      },
-                      argumentExpression: {
-                        kind: 9,
-                        loc: [14, 62, 14, 63],
-                        value: 0,
-                      },
-                    },
-                  ],
+                kind: 261,
+                loc: [13, 11, 13, 43],
+                name: {
+                  kind: 80,
+                  loc: [13, 11, 13, 14],
+                  text: "ids",
+                  bindingKey: "ids$8fvi8zcyc3un$0",
                 },
-              },
-            ],
-          },
-        ],
-      },
-    }),
-  );
-  const drop = cs.create(
-    [16, 16, 18, 5],
-    {
-      version: "0.0.0",
-      filePath: "keyed-rows.tsx",
-      fileHash: "2uqko0eabvbug",
-      kind: "value",
-      splices: { $ids: ids },
-      captures: [],
-      spliceParams: { $ids: [] },
-    },
-    () => ({
-      kind: 220,
-      loc: [16, 19, 18, 4],
-      parameters: [],
-      body: {
-        kind: 242,
-        loc: [16, 25, 18, 4],
-        statements: [
-          {
-            kind: 214,
-            loc: [17, 5, 17, 57],
-            expression: {
-              kind: 212,
-              loc: [17, 5, 17, 16],
-              expression: {
-                kind: 1000,
-                loc: [17, 5, 17, 9],
-                key: "$ids",
-              },
-              questionDotToken: false,
-              name: "update",
-            },
-            questionDotToken: false,
-            arguments: [
-              {
-                kind: 220,
-                loc: [17, 17, 17, 56],
-                parameters: [
-                  {
-                    kind: 170,
-                    loc: [17, 18, 17, 22],
-                    name: {
-                      kind: 80,
-                      loc: [17, 18, 17, 22],
-                      text: "held",
-                      bindingKey: "held$2uqko0eabvbug$1",
-                    },
-                  },
-                ],
-                body: {
+                initializer: {
                   kind: 214,
-                  loc: [17, 27, 17, 56],
+                  loc: [13, 17, 13, 43],
                   expression: {
-                    kind: 212,
-                    loc: [17, 27, 17, 38],
-                    expression: {
-                      kind: 80,
-                      loc: [17, 27, 17, 31],
-                      text: "held",
-                      bindingKey: "held$2uqko0eabvbug$1",
-                    },
-                    questionDotToken: false,
-                    name: "filter",
+                    kind: 1001,
+                    loc: [13, 17, 13, 22],
+                    name: "state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
-                      kind: 220,
-                      loc: [17, 39, 17, 55],
-                      parameters: [
+                      kind: 210,
+                      loc: [13, 33, 13, 42],
+                      elements: [
                         {
-                          kind: 170,
-                          loc: [17, 40, 17, 42],
-                          name: {
-                            kind: 80,
-                            loc: [17, 40, 17, 42],
-                            text: "id",
-                            bindingKey: "id$2uqko0eabvbug$2",
-                          },
-                        },
-                      ],
-                      body: {
-                        kind: 227,
-                        loc: [17, 47, 17, 55],
-                        left: {
-                          kind: 80,
-                          loc: [17, 47, 17, 49],
-                          text: "id",
-                          bindingKey: "id$2uqko0eabvbug$2",
-                        },
-                        operatorToken: "!==",
-                        right: {
                           kind: 9,
-                          loc: [17, 54, 17, 55],
+                          loc: [13, 34, 13, 35],
+                          value: 1,
+                        },
+                        {
+                          kind: 9,
+                          loc: [13, 37, 13, 38],
                           value: 2,
                         },
-                      },
+                        {
+                          kind: 9,
+                          loc: [13, 40, 13, 41],
+                          value: 3,
+                        },
+                      ],
                     },
                   ],
                 },
               },
             ],
+            keyword: "const",
           },
-        ],
-      },
-    }),
-  );
-  return _jsxs("div", {
-    children: [
-      _jsx("span", { onclick: swap, children: "swap" }),
-      _jsx("span", { onclick: drop, children: "drop" }),
-      _jsx("div", {
-        children: _jsx(For, {
-          each: cs.create(
-            [24, 20, 24, 35],
-            {
-              version: "0.0.0",
-              filePath: "keyed-rows.tsx",
-              fileHash: "2uqko0eabvbug",
-              kind: "value",
-              splices: { $ids: ids },
-              captures: [],
-              spliceParams: { $ids: [] },
-            },
-            () => ({
-              kind: 214,
-              loc: [24, 23, 24, 34],
-              expression: {
-                kind: 212,
-                loc: [24, 23, 24, 32],
-                expression: {
-                  kind: 1000,
-                  loc: [24, 23, 24, 27],
-                  key: "$ids",
+        },
+        {
+          kind: 244,
+          loc: [14, 5, 16, 7],
+          declarationList: {
+            kind: 262,
+            loc: [14, 5, 16, 6],
+            declarations: [
+              {
+                kind: 261,
+                loc: [14, 11, 16, 6],
+                name: {
+                  kind: 80,
+                  loc: [14, 11, 14, 15],
+                  text: "swap",
+                  bindingKey: "swap$8fvi8zcyc3un$1",
                 },
-                questionDotToken: false,
-                name: "read",
-              },
-              questionDotToken: false,
-              arguments: [],
-            }),
-          ),
-          children: cs.create(
-            [25, 12, 25, 67],
-            {
-              version: "0.0.0",
-              filePath: "keyed-rows.tsx",
-              fileHash: "2uqko0eabvbug",
-              kind: "value",
-              splices: {
-                $0splice0: _jsx("span", {
-                  children: cs.create(
-                    [25, 41, 25, 56],
-                    {
-                      version: "0.0.0",
-                      filePath: "keyed-rows.tsx",
-                      fileHash: "2uqko0eabvbug",
-                      kind: "value",
-                      splices: {},
-                      captures: ["id$2uqko0eabvbug$3"],
-                      spliceParams: {},
-                    },
-                    () => ({
-                      kind: 227,
-                      loc: [25, 44, 25, 55],
-                      left: {
-                        kind: 11,
-                        loc: [25, 44, 25, 50],
-                        text: "row ",
+                initializer: {
+                  kind: 220,
+                  loc: [14, 18, 16, 6],
+                  parameters: [],
+                  body: {
+                    kind: 242,
+                    loc: [14, 24, 16, 6],
+                    statements: [
+                      {
+                        kind: 214,
+                        loc: [15, 7, 15, 67],
+                        expression: {
+                          kind: 212,
+                          loc: [15, 7, 15, 17],
+                          expression: {
+                            kind: 80,
+                            loc: [15, 7, 15, 10],
+                            text: "ids",
+                            bindingKey: "ids$8fvi8zcyc3un$0",
+                          },
+                          questionDotToken: false,
+                          name: "update",
+                        },
+                        questionDotToken: false,
+                        arguments: [
+                          {
+                            kind: 220,
+                            loc: [15, 18, 15, 66],
+                            parameters: [
+                              {
+                                kind: 170,
+                                loc: [15, 19, 15, 23],
+                                name: {
+                                  kind: 80,
+                                  loc: [15, 19, 15, 23],
+                                  text: "held",
+                                  bindingKey: "held$8fvi8zcyc3un$3",
+                                },
+                              },
+                            ],
+                            body: {
+                              kind: 214,
+                              loc: [15, 28, 15, 66],
+                              expression: {
+                                kind: 212,
+                                loc: [15, 28, 15, 54],
+                                expression: {
+                                  kind: 214,
+                                  loc: [15, 28, 15, 49],
+                                  expression: {
+                                    kind: 212,
+                                    loc: [15, 28, 15, 37],
+                                    expression: {
+                                      kind: 80,
+                                      loc: [15, 28, 15, 32],
+                                      text: "held",
+                                      bindingKey: "held$8fvi8zcyc3un$3",
+                                    },
+                                    questionDotToken: false,
+                                    name: "with",
+                                  },
+                                  questionDotToken: false,
+                                  arguments: [
+                                    {
+                                      kind: 9,
+                                      loc: [15, 38, 15, 39],
+                                      value: 0,
+                                    },
+                                    {
+                                      kind: 213,
+                                      loc: [15, 41, 15, 48],
+                                      expression: {
+                                        kind: 80,
+                                        loc: [15, 41, 15, 45],
+                                        text: "held",
+                                        bindingKey: "held$8fvi8zcyc3un$3",
+                                      },
+                                      argumentExpression: {
+                                        kind: 9,
+                                        loc: [15, 46, 15, 47],
+                                        value: 2,
+                                      },
+                                    },
+                                  ],
+                                },
+                                questionDotToken: false,
+                                name: "with",
+                              },
+                              questionDotToken: false,
+                              arguments: [
+                                {
+                                  kind: 9,
+                                  loc: [15, 55, 15, 56],
+                                  value: 2,
+                                },
+                                {
+                                  kind: 213,
+                                  loc: [15, 58, 15, 65],
+                                  expression: {
+                                    kind: 80,
+                                    loc: [15, 58, 15, 62],
+                                    text: "held",
+                                    bindingKey: "held$8fvi8zcyc3un$3",
+                                  },
+                                  argumentExpression: {
+                                    kind: 9,
+                                    loc: [15, 63, 15, 64],
+                                    value: 0,
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
                       },
-                      operatorToken: "+",
-                      right: {
-                        kind: 80,
-                        loc: [25, 53, 25, 55],
-                        text: "id",
-                        bindingKey: "id$2uqko0eabvbug$3",
-                      },
-                    }),
-                  ),
-                }),
-              },
-              captures: [],
-              spliceParams: { $0splice0: ["id$2uqko0eabvbug$3"] },
-            },
-            () => ({
-              kind: 220,
-              loc: [25, 15, 25, 66],
-              parameters: [
-                {
-                  kind: 170,
-                  loc: [25, 16, 25, 26],
-                  name: {
-                    kind: 80,
-                    loc: [25, 16, 25, 18],
-                    text: "id",
-                    bindingKey: "id$2uqko0eabvbug$3",
+                    ],
                   },
                 },
-              ],
-              body: {
-                kind: 1000,
-                loc: [25, 31, 25, 66],
-                key: "$0splice0",
               },
-            }),
-          ),
-        }),
-      }),
-    ],
-  });
+            ],
+            keyword: "const",
+          },
+        },
+        {
+          kind: 244,
+          loc: [17, 5, 19, 7],
+          declarationList: {
+            kind: 262,
+            loc: [17, 5, 19, 6],
+            declarations: [
+              {
+                kind: 261,
+                loc: [17, 11, 19, 6],
+                name: {
+                  kind: 80,
+                  loc: [17, 11, 17, 15],
+                  text: "drop",
+                  bindingKey: "drop$8fvi8zcyc3un$2",
+                },
+                initializer: {
+                  kind: 220,
+                  loc: [17, 18, 19, 6],
+                  parameters: [],
+                  body: {
+                    kind: 242,
+                    loc: [17, 24, 19, 6],
+                    statements: [
+                      {
+                        kind: 214,
+                        loc: [18, 7, 18, 58],
+                        expression: {
+                          kind: 212,
+                          loc: [18, 7, 18, 17],
+                          expression: {
+                            kind: 80,
+                            loc: [18, 7, 18, 10],
+                            text: "ids",
+                            bindingKey: "ids$8fvi8zcyc3un$0",
+                          },
+                          questionDotToken: false,
+                          name: "update",
+                        },
+                        questionDotToken: false,
+                        arguments: [
+                          {
+                            kind: 220,
+                            loc: [18, 18, 18, 57],
+                            parameters: [
+                              {
+                                kind: 170,
+                                loc: [18, 19, 18, 23],
+                                name: {
+                                  kind: 80,
+                                  loc: [18, 19, 18, 23],
+                                  text: "held",
+                                  bindingKey: "held$8fvi8zcyc3un$4",
+                                },
+                              },
+                            ],
+                            body: {
+                              kind: 214,
+                              loc: [18, 28, 18, 57],
+                              expression: {
+                                kind: 212,
+                                loc: [18, 28, 18, 39],
+                                expression: {
+                                  kind: 80,
+                                  loc: [18, 28, 18, 32],
+                                  text: "held",
+                                  bindingKey: "held$8fvi8zcyc3un$4",
+                                },
+                                questionDotToken: false,
+                                name: "filter",
+                              },
+                              questionDotToken: false,
+                              arguments: [
+                                {
+                                  kind: 220,
+                                  loc: [18, 40, 18, 56],
+                                  parameters: [
+                                    {
+                                      kind: 170,
+                                      loc: [18, 41, 18, 43],
+                                      name: {
+                                        kind: 80,
+                                        loc: [18, 41, 18, 43],
+                                        text: "id",
+                                        bindingKey: "id$8fvi8zcyc3un$5",
+                                      },
+                                    },
+                                  ],
+                                  body: {
+                                    kind: 227,
+                                    loc: [18, 48, 18, 56],
+                                    left: {
+                                      kind: 80,
+                                      loc: [18, 48, 18, 50],
+                                      text: "id",
+                                      bindingKey: "id$8fvi8zcyc3un$5",
+                                    },
+                                    operatorToken: "!==",
+                                    right: {
+                                      kind: 9,
+                                      loc: [18, 55, 18, 56],
+                                      value: 2,
+                                    },
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+            keyword: "const",
+          },
+        },
+        {
+          kind: 254,
+          loc: [20, 5, 30, 7],
+          expression: {
+            kind: 285,
+            loc: [21, 7, 29, 13],
+            type: {
+              kind: 11,
+              loc: [21, 8, 21, 11],
+              text: "div",
+            },
+            attributes: [],
+            children: [
+              {
+                kind: 285,
+                loc: [22, 9, 22, 41],
+                type: {
+                  kind: 11,
+                  loc: [22, 10, 22, 14],
+                  text: "span",
+                },
+                attributes: [
+                  {
+                    name: "onclick",
+                    initializer: {
+                      kind: 80,
+                      loc: [22, 24, 22, 28],
+                      text: "swap",
+                      bindingKey: "swap$8fvi8zcyc3un$1",
+                    },
+                  },
+                ],
+                children: [
+                  {
+                    kind: 11,
+                    loc: [22, 30, 22, 34],
+                    text: "swap",
+                  },
+                ],
+              },
+              {
+                kind: 285,
+                loc: [23, 9, 23, 41],
+                type: {
+                  kind: 11,
+                  loc: [23, 10, 23, 14],
+                  text: "span",
+                },
+                attributes: [
+                  {
+                    name: "onclick",
+                    initializer: {
+                      kind: 80,
+                      loc: [23, 24, 23, 28],
+                      text: "drop",
+                      bindingKey: "drop$8fvi8zcyc3un$2",
+                    },
+                  },
+                ],
+                children: [
+                  {
+                    kind: 11,
+                    loc: [23, 30, 23, 34],
+                    text: "drop",
+                  },
+                ],
+              },
+              {
+                kind: 285,
+                loc: [24, 9, 28, 15],
+                type: {
+                  kind: 11,
+                  loc: [24, 10, 24, 13],
+                  text: "div",
+                },
+                attributes: [],
+                children: [
+                  {
+                    kind: 285,
+                    loc: [25, 11, 27, 17],
+                    type: {
+                      kind: 1000,
+                      loc: [25, 12, 25, 15],
+                      key: "$For",
+                    },
+                    attributes: [
+                      {
+                        name: "each",
+                        initializer: {
+                          kind: 214,
+                          loc: [25, 22, 25, 32],
+                          expression: {
+                            kind: 212,
+                            loc: [25, 22, 25, 30],
+                            expression: {
+                              kind: 80,
+                              loc: [25, 22, 25, 25],
+                              text: "ids",
+                              bindingKey: "ids$8fvi8zcyc3un$0",
+                            },
+                            questionDotToken: false,
+                            name: "read",
+                          },
+                          questionDotToken: false,
+                          arguments: [],
+                        },
+                      },
+                    ],
+                    children: [
+                      {
+                        kind: 220,
+                        loc: [26, 14, 26, 56],
+                        parameters: [
+                          {
+                            kind: 170,
+                            loc: [26, 15, 26, 25],
+                            name: {
+                              kind: 80,
+                              loc: [26, 15, 26, 17],
+                              text: "id",
+                              bindingKey: "id$8fvi8zcyc3un$6",
+                            },
+                          },
+                        ],
+                        body: {
+                          kind: 285,
+                          loc: [26, 30, 26, 56],
+                          type: {
+                            kind: 11,
+                            loc: [26, 31, 26, 35],
+                            text: "span",
+                          },
+                          attributes: [],
+                          children: [
+                            {
+                              kind: 227,
+                              loc: [26, 37, 26, 48],
+                              left: {
+                                kind: 11,
+                                loc: [26, 37, 26, 43],
+                                text: "row ",
+                              },
+                              operatorToken: "+",
+                              right: {
+                                kind: 80,
+                                loc: [26, 46, 26, 48],
+                                text: "id",
+                                bindingKey: "id$8fvi8zcyc3un$6",
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  );
 }
 export default _jsx(Rows, {});

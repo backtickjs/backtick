@@ -1,4 +1,4 @@
-import { cs, state, For } from "@backtickjs/core";
+import { cs, For } from "@backtickjs/core";
 import type { ReadonlyState } from "@backtickjs/core";
 
 // A list whose drawing reads where a member sits as well as what it is.
@@ -9,20 +9,13 @@ import type { ReadonlyState } from "@backtickjs/core";
 // number at the moment the row was drawn — leaves all three stale, which is the
 // bug this pins.
 async function Rows() {
-  const names = state<string[]>(["a", "b", "c"]);
-  const rotate = cs.lift(cs.const(() => {
-    cs.statement(cs.receiver(cs.splice((names))).update(__cs_held => [cs.index(__cs_held, 2), cs.index(__cs_held, 0), cs.index(__cs_held, 1)]));
-}));
-  return (
-    <div>
-      <span onclick={rotate}>rotate</span>
-      <div>
-        <For each={cs.lift(cs.const(cs.receiver(cs.splice((names))).read()))}>
-          {cs.lift(cs.const((__cs_name: string, __cs_index: ReadonlyState<number>) => cs.splice((<span>{cs.lift(cs.const(__cs_name + " at " + cs.receiver(__cs_index).read()))}</span>))))}
-        </For>
-      </div>
-    </div>
-  );
+  return cs.lift((() => {
+    const __cs_names = cs.const(cs.state<string[]>(["a", "b", "c"]));
+    const __cs_rotate = cs.const(() => {
+        cs.statement(cs.receiver(__cs_names).update(__cs_held => [cs.index(__cs_held, 2), cs.index(__cs_held, 0), cs.index(__cs_held, 1)]));
+    });
+    return cs.const(<div>{cs.lift(<span onclick={cs.lift(__cs_rotate)}>rotate</span>)}{cs.lift(<div>{cs.lift(<For each={cs.lift(cs.receiver(__cs_names).read())}>{cs.lift((__cs_name: string, __cs_index: ReadonlyState<number>) => <span>{cs.lift(__cs_name + " at " + cs.receiver(__cs_index).read())}</span>)}</For>)}</div>)}</div>);
+})());
 }
 
 export default <Rows />;

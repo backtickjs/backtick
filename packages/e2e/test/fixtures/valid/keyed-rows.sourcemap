@@ -1,98 +1,157 @@
-cs.lift(cs.const(  → cs`
-() => {\n          → () => {\n    
-cs.statement(      → 
-cs.receiver(       → 
-cs.splice(         →  [-semantic]
-(ids)              → $ids
-)                  →  [-semantic]
-)                  → 
-.                  → .
-update             → update
-(                  → (
-__cs_held          → held
- =>                → ) => 
-cs.receiver(       → 
-cs.receiver(       → 
-__cs_held          → held
-)                  → 
-.                  → .
-with               → with
-(                  → (
-0                  → 0
-,                  → , 
-cs.index(          → 
-__cs_held          → held
-,                  → [
-2                  → 2
-)                  → ]
-)                  → )
-)                  → 
-.                  → .
-with               → with
-(                  → (
-2                  → 2
-,                  → , 
-cs.index(          → 
-__cs_held          → held
-,                  → [
-0                  → 0
-)                  → ]
-)                  → )
-)                  → )
-);                 → ;
-\n}                → \n  }
-))                 → `
-cs.lift(cs.const(  → cs`
-() => {\n          → () => {\n    
-cs.statement(      → 
-cs.receiver(       → 
-cs.splice(         →  [-semantic]
-(ids)              → $ids
-)                  →  [-semantic]
-)                  → 
-.                  → .
-update             → update
-(                  → (
-__cs_held          → held
- =>                → ) => 
-cs.receiver(       → 
-__cs_held          → held
-)                  → 
-.                  → .
-filter             → filter
-(                  → (
-__cs_id            → id
- =>                → ) => 
-__cs_id            → id
- !==               →  !== 
-2                  → 2
-)                  → )
-)                  → )
-);                 → ;
-\n}                → \n  }
-))                 → `
-cs.lift(cs.const(  → cs`
-cs.receiver(       → 
-cs.splice(         →  [-semantic]
-(ids)              → $ids
-)                  →  [-semantic]
-)                  → 
-.                  → .
-read               → read
-()                 → ()
-))                 → `
-cs.lift(cs.const(  → cs`
-(                  → (
-__cs_id            → id
-: number           → : number
-) =>               → ) => 
-cs.splice(         → ${ [-semantic]
-(<span>{           → (<span>{
-cs.lift(cs.const(  → cs`
-"row "             → "row "
- +                 →  + 
-__cs_id            → id
-))                 → `
-}</span>)          → }</span>)
-)                  → } [-semantic]
-))                 → `
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_ids                → ids
+ = cs.const(            →  = 
+cs.state                → state
+<number[]>(             → <number[]>(
+[                       → [
+1                       → 1
+,                       → , 
+2                       → 2
+,                       → , 
+3                       → 3
+]                       → ]
+)                       → )
+);                      → ;
+\n                      → \n    
+const                   → const 
+__cs_swap               → swap
+ = cs.const(            →  = 
+() => {\n               → () => {\n      
+cs.statement(           → 
+cs.receiver(            → 
+__cs_ids                → ids
+)                       → 
+.                       → .
+update                  → update
+(                       → (
+__cs_held               → held
+ =>                     → ) => 
+cs.receiver(            → 
+cs.receiver(            → 
+__cs_held               → held
+)                       → 
+.                       → .
+with                    → with
+(                       → (
+0                       → 0
+,                       → , 
+cs.index(               → 
+__cs_held               → held
+,                       → [
+2                       → 2
+)                       → ]
+)                       → )
+)                       → 
+.                       → .
+with                    → with
+(                       → (
+2                       → 2
+,                       → , 
+cs.index(               → 
+__cs_held               → held
+,                       → [
+0                       → 0
+)                       → ]
+)                       → )
+)                       → )
+);                      → ;
+\n    }                 → \n    }
+);                      → ;
+\n                      → \n    
+const                   → const 
+__cs_drop               → drop
+ = cs.const(            →  = 
+() => {\n               → () => {\n      
+cs.statement(           → 
+cs.receiver(            → 
+__cs_ids                → ids
+)                       → 
+.                       → .
+update                  → update
+(                       → (
+__cs_held               → held
+ =>                     → ) => 
+cs.receiver(            → 
+__cs_held               → held
+)                       → 
+.                       → .
+filter                  → filter
+(                       → (
+__cs_id                 → id
+ =>                     → ) => 
+__cs_id                 → id
+ !==                    →  !== 
+2                       → 2
+)                       → )
+)                       → )
+);                      → ;
+\n    }                 → \n    }
+);                      → ;
+\n                      → \n    
+return cs.const(        → return 
+<                       → (\n      <
+div                     → div
+>{cs.lift(              → >\n        
+<                       → <
+span                    → span
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+__cs_swap               → swap
+)}                      → }
+>swap</                 → >swap</
+span                    → span
+>                       → >
+)}{cs.lift(             → \n        
+<                       → <
+span                    → span
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+__cs_drop               → drop
+)}                      → }
+>drop</                 → >drop</
+span                    → span
+>                       → >
+)}{cs.lift(             → \n        
+<                       → <
+div                     → div
+>{cs.lift(              → >\n          
+<                       → <
+For                     → For
+                        →  
+each                    → each
+={cs.lift(              → ={
+cs.receiver(            → 
+__cs_ids                → ids
+)                       → 
+.                       → .
+read                    → read
+()                      → ()
+)}                      → }
+>{cs.lift(              → >\n            {
+(                       → (
+__cs_id                 → id
+: number                → : number
+) =>                    → ) => 
+<                       → <
+span                    → span
+>{cs.lift(              → >{
+"row "                  → "row "
+ +                      →  + 
+__cs_id                 → id
+)}</                    → }</
+span                    → span
+>                       → >
+)}</                    → }\n          </
+For                     → For
+>                       → >
+)}</                    → \n        </
+div                     → div
+>                       → >
+)}</                    → \n      </
+div                     → div
+>                       → >\n    )
+);                      → ;
+\n})())                 → \n  }`

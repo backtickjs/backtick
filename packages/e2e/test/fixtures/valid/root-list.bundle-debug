@@ -1,35 +1,29 @@
-#f0 = ($0) => () => {
-  $0().update(() => []);
+#f0 = ($0) => {
+  const ids = state([1, 2, 3]);
+  const clear = () => {
+    ids.update(() => []);
+  };
+  return [
+    <span
+      onclick={clear}
+    >
+      {"clear"}
+    </span>,
+    $0()({
+      "each": () => ids.read(),
+      "children": () => (id) => <span>
+        {"row " + id}
+      </span>
+    })
+  ];
 }
 
-#f1 = ($0) => $0().read()
-
-#f2 = ($0) => (id) => $0(id)
-
-#f3 = ($0) => "row " + $0
-
-#f4 = (id) => <span>
-  {#f3(id)}
-</span>
-
-#f5 = (s0) => <for
-  each={#f1(() => s0)}
+#f1 = ($0) => <for
+  each={$0.each()}
 >
-  {#f2((id) => #f4(id))}
+  {$0.children()}
 </for>
 
-#f6 = (s0) => [
-  <span
-    onclick={#f0(() => s0)}
-  >
-    {"clear"}
-  </span>,
-  #f5(s0)
-]
+#f2 = () => #f0(() => ($0) => #f1($0))
 
-#f7 = () => {
-  const s0 = state([1, 2, 3]);
-  return #f6(s0);
-}
-
-root = #f7()
+root = #f2()

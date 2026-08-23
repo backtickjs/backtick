@@ -1,35 +1,31 @@
-#f0 = ($0) => () => {
-  $0().update((held) => [held[2], held[0], held[1]]);
-}
-
-#f1 = ($0) => $0().read()
-
-#f2 = ($0) => (name, index) => $0(name, index)
-
-#f3 = ($0, $1) => $0 + " at " + $1.read()
-
-#f4 = (name, index) => <span>
-  {#f3(name, index)}
-</span>
-
-#f5 = (s0) => <for
-  each={#f1(() => s0)}
->
-  {#f2((name, index) => #f4(name, index))}
-</for>
-
-#f6 = () => {
-  const s0 = state(["a", "b", "c"]);
+#f0 = ($0) => {
+  const names = state(["a", "b", "c"]);
+  const rotate = () => {
+    names.update((held) => [held[2], held[0], held[1]]);
+  };
   return <div>
     {<span
-      onclick={#f0(() => s0)}
+      onclick={rotate}
     >
       {"rotate"}
     </span>}
     {<div>
-      {#f5(s0)}
+      {$0()({
+        "each": () => names.read(),
+        "children": () => (name, index) => <span>
+          {name + " at " + index.read()}
+        </span>
+      })}
     </div>}
   </div>;
 }
 
-root = #f6()
+#f1 = ($0) => <for
+  each={$0.each()}
+>
+  {$0.children()}
+</for>
+
+#f2 = () => #f0(() => ($0) => #f1($0))
+
+root = #f2()

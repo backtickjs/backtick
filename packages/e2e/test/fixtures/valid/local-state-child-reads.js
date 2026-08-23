@@ -1,9 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 // A child reading a cell it was handed, in all three positions at once: a prop,
-// a text child, and a branch deciding which elements exist. `Panel` owns the
-// cell and never reads it, so a write re-renders `Panel` and reaches each `Row`
-// with the arguments it already had — the same handle object, the same id.
+// a text child, and a branch deciding which elements exist. The script that
+// declares the cell never reads it, so a write reaches each `Row` with the
+// arguments it already had — the same handle object, the same id.
 //
 // Nothing a `Row` was given is different, and everything it draws is. Skipping
 // on the arguments alone leaves both rows stale, which is the bug this pins: a
@@ -18,7 +18,7 @@ const Row = async ({ id, selected }) =>
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "1xxq1a0w43eq",
+            fileHash: "16bbrkwir8tx0",
             kind: "value",
             splices: { $selected: selected, $id: id },
             captures: [],
@@ -91,7 +91,7 @@ const Row = async ({ id, selected }) =>
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "1xxq1a0w43eq",
+            fileHash: "16bbrkwir8tx0",
             kind: "value",
             splices: { $id: id, $selected: selected },
             captures: [],
@@ -151,7 +151,7 @@ const Row = async ({ id, selected }) =>
         {
           version: "0.0.0",
           filePath: "local-state-child-reads.tsx",
-          fileHash: "1xxq1a0w43eq",
+          fileHash: "16bbrkwir8tx0",
           kind: "value",
           splices: {
             $selected: selected,
@@ -205,93 +205,185 @@ const Row = async ({ id, selected }) =>
     ],
   });
 async function Panel() {
-  const selected = state(0);
-  return _jsxs("div", {
-    children: [
-      _jsx("span", {
-        onclick: cs.create(
-          [34, 22, 34, 50],
-          {
-            version: "0.0.0",
-            filePath: "local-state-child-reads.tsx",
-            fileHash: "1xxq1a0w43eq",
-            kind: "value",
-            splices: { $selected: selected },
-            captures: [],
-            spliceParams: { $selected: [] },
-          },
-          () => ({
-            kind: 220,
-            loc: [34, 25, 34, 49],
-            parameters: [],
-            body: {
-              kind: 214,
-              loc: [34, 31, 34, 49],
-              expression: {
-                kind: 212,
-                loc: [34, 31, 34, 46],
-                expression: {
-                  kind: 1000,
-                  loc: [34, 31, 34, 40],
-                  key: "$selected",
+  return cs.create(
+    [31, 10, 40, 5],
+    {
+      version: "0.0.0",
+      filePath: "local-state-child-reads.tsx",
+      fileHash: "16bbrkwir8tx0",
+      kind: "value",
+      splices: { $Row: Row },
+      captures: [],
+      spliceParams: {},
+    },
+    () => ({
+      kind: 242,
+      loc: [31, 13, 40, 4],
+      statements: [
+        {
+          kind: 244,
+          loc: [32, 5, 32, 31],
+          declarationList: {
+            kind: 262,
+            loc: [32, 5, 32, 30],
+            declarations: [
+              {
+                kind: 261,
+                loc: [32, 11, 32, 30],
+                name: {
+                  kind: 80,
+                  loc: [32, 11, 32, 19],
+                  text: "selected",
+                  bindingKey: "selected$16bbrkwir8tx0$0",
                 },
-                questionDotToken: false,
-                name: "write",
+                initializer: {
+                  kind: 214,
+                  loc: [32, 22, 32, 30],
+                  expression: {
+                    kind: 1001,
+                    loc: [32, 22, 32, 27],
+                    name: "state",
+                  },
+                  questionDotToken: false,
+                  arguments: [
+                    {
+                      kind: 9,
+                      loc: [32, 28, 32, 29],
+                      value: 0,
+                    },
+                  ],
+                },
               },
-              questionDotToken: false,
-              arguments: [
-                {
-                  kind: 9,
-                  loc: [34, 47, 34, 48],
-                  value: 1,
-                },
-              ],
+            ],
+            keyword: "const",
+          },
+        },
+        {
+          kind: 254,
+          loc: [33, 5, 39, 7],
+          expression: {
+            kind: 285,
+            loc: [34, 7, 38, 13],
+            type: {
+              kind: 11,
+              loc: [34, 8, 34, 11],
+              text: "div",
             },
-          }),
-        ),
-        children: "select",
-      }),
-      _jsx(Row, {
-        id: cs.create(
-          [35, 16, 35, 21],
-          {
-            version: "0.0.0",
-            filePath: "local-state-child-reads.tsx",
-            fileHash: "1xxq1a0w43eq",
-            kind: "value",
-            splices: {},
-            captures: [],
-            spliceParams: {},
+            attributes: [],
+            children: [
+              {
+                kind: 285,
+                loc: [35, 9, 35, 62],
+                type: {
+                  kind: 11,
+                  loc: [35, 10, 35, 14],
+                  text: "span",
+                },
+                attributes: [
+                  {
+                    name: "onclick",
+                    initializer: {
+                      kind: 220,
+                      loc: [35, 24, 35, 47],
+                      parameters: [],
+                      body: {
+                        kind: 214,
+                        loc: [35, 30, 35, 47],
+                        expression: {
+                          kind: 212,
+                          loc: [35, 30, 35, 44],
+                          expression: {
+                            kind: 80,
+                            loc: [35, 30, 35, 38],
+                            text: "selected",
+                            bindingKey: "selected$16bbrkwir8tx0$0",
+                          },
+                          questionDotToken: false,
+                          name: "write",
+                        },
+                        questionDotToken: false,
+                        arguments: [
+                          {
+                            kind: 9,
+                            loc: [35, 45, 35, 46],
+                            value: 1,
+                          },
+                        ],
+                      },
+                    },
+                  },
+                ],
+                children: [
+                  {
+                    kind: 11,
+                    loc: [35, 49, 35, 55],
+                    text: "select",
+                  },
+                ],
+              },
+              {
+                kind: 285,
+                loc: [36, 9, 36, 43],
+                type: {
+                  kind: 1000,
+                  loc: [36, 10, 36, 13],
+                  key: "$Row",
+                },
+                attributes: [
+                  {
+                    name: "id",
+                    initializer: {
+                      kind: 9,
+                      loc: [36, 18, 36, 19],
+                      value: 0,
+                    },
+                  },
+                  {
+                    name: "selected",
+                    initializer: {
+                      kind: 80,
+                      loc: [36, 31, 36, 39],
+                      text: "selected",
+                      bindingKey: "selected$16bbrkwir8tx0$0",
+                    },
+                  },
+                ],
+                children: [],
+              },
+              {
+                kind: 285,
+                loc: [37, 9, 37, 43],
+                type: {
+                  kind: 1000,
+                  loc: [37, 10, 37, 13],
+                  key: "$Row",
+                },
+                attributes: [
+                  {
+                    name: "id",
+                    initializer: {
+                      kind: 9,
+                      loc: [37, 18, 37, 19],
+                      value: 1,
+                    },
+                  },
+                  {
+                    name: "selected",
+                    initializer: {
+                      kind: 80,
+                      loc: [37, 31, 37, 39],
+                      text: "selected",
+                      bindingKey: "selected$16bbrkwir8tx0$0",
+                    },
+                  },
+                ],
+                children: [],
+              },
+            ],
           },
-          () => ({
-            kind: 9,
-            loc: [35, 19, 35, 20],
-            value: 0,
-          }),
-        ),
-        selected: selected,
-      }),
-      _jsx(Row, {
-        id: cs.create(
-          [36, 16, 36, 21],
-          {
-            version: "0.0.0",
-            filePath: "local-state-child-reads.tsx",
-            fileHash: "1xxq1a0w43eq",
-            kind: "value",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [36, 19, 36, 20],
-            value: 1,
-          }),
-        ),
-        selected: selected,
-      }),
-    ],
-  });
+        },
+      ],
+    }),
+  );
 }
 export default _jsx(Panel, {});

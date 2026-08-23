@@ -1,5 +1,5 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, state, For } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, For } from "@backtickjs/core";
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row
 // selected, and the row that no longer is. The third recomputes the href it
@@ -10,208 +10,267 @@ import { cs, state, For } from "@backtickjs/core";
 // about it anyway would be setting a prop per row per selection, in a list of
 // any size, and no snapshot of the drawn markup could see it.
 async function Rows() {
-  const selected = state(0);
-  return _jsxs("div", {
-    children: [
-      _jsx("span", {
-        onclick: cs.create(
-          [16, 22, 16, 50],
-          {
-            version: "0.0.0",
-            filePath: "unmoved-prop.tsx",
-            fileHash: "3lx9bfa62m6pl",
-            kind: "value",
-            splices: { $selected: selected },
-            captures: [],
-            spliceParams: { $selected: [] },
-          },
-          () => ({
-            kind: 220,
-            loc: [16, 25, 16, 49],
-            parameters: [],
-            body: {
-              kind: 214,
-              loc: [16, 31, 16, 49],
-              expression: {
-                kind: 212,
-                loc: [16, 31, 16, 46],
-                expression: {
-                  kind: 1000,
-                  loc: [16, 31, 16, 40],
-                  key: "$selected",
+  return cs.create(
+    [13, 10, 29, 5],
+    {
+      version: "0.0.0",
+      filePath: "unmoved-prop.tsx",
+      fileHash: "swxxmo9tuqyt",
+      kind: "value",
+      splices: { $For: For },
+      captures: [],
+      spliceParams: {},
+    },
+    () => ({
+      kind: 242,
+      loc: [13, 13, 29, 4],
+      statements: [
+        {
+          kind: 244,
+          loc: [14, 5, 14, 31],
+          declarationList: {
+            kind: 262,
+            loc: [14, 5, 14, 30],
+            declarations: [
+              {
+                kind: 261,
+                loc: [14, 11, 14, 30],
+                name: {
+                  kind: 80,
+                  loc: [14, 11, 14, 19],
+                  text: "selected",
+                  bindingKey: "selected$swxxmo9tuqyt$0",
                 },
-                questionDotToken: false,
-                name: "write",
-              },
-              questionDotToken: false,
-              arguments: [
-                {
-                  kind: 9,
-                  loc: [16, 47, 16, 48],
-                  value: 1,
-                },
-              ],
-            },
-          }),
-        ),
-        children: "select",
-      }),
-      _jsx("div", {
-        children: _jsx(For, {
-          each: cs.create(
-            [18, 20, 18, 33],
-            {
-              version: "0.0.0",
-              filePath: "unmoved-prop.tsx",
-              fileHash: "3lx9bfa62m6pl",
-              kind: "value",
-              splices: {},
-              captures: [],
-              spliceParams: {},
-            },
-            () => ({
-              kind: 210,
-              loc: [18, 23, 18, 32],
-              elements: [
-                {
-                  kind: 9,
-                  loc: [18, 24, 18, 25],
-                  value: 0,
-                },
-                {
-                  kind: 9,
-                  loc: [18, 27, 18, 28],
-                  value: 1,
-                },
-                {
-                  kind: 9,
-                  loc: [18, 30, 18, 31],
-                  value: 2,
-                },
-              ],
-            }),
-          ),
-          children: cs.create(
-            [19, 12, 24, 16],
-            {
-              version: "0.0.0",
-              filePath: "unmoved-prop.tsx",
-              fileHash: "3lx9bfa62m6pl",
-              kind: "value",
-              splices: {
-                $0splice0: _jsx("a", {
-                  href: cs.create(
-                    [21, 24, 21, 73],
+                initializer: {
+                  kind: 214,
+                  loc: [14, 22, 14, 30],
+                  expression: {
+                    kind: 1001,
+                    loc: [14, 22, 14, 27],
+                    name: "state",
+                  },
+                  questionDotToken: false,
+                  arguments: [
                     {
-                      version: "0.0.0",
-                      filePath: "unmoved-prop.tsx",
-                      fileHash: "3lx9bfa62m6pl",
-                      kind: "value",
-                      splices: { $selected: selected },
-                      captures: ["id$3lx9bfa62m6pl$0"],
-                      spliceParams: { $selected: [] },
+                      kind: 9,
+                      loc: [14, 28, 14, 29],
+                      value: 0,
                     },
-                    () => ({
-                      kind: 228,
-                      loc: [21, 27, 21, 72],
-                      condition: {
-                        kind: 227,
-                        loc: [21, 27, 21, 50],
-                        left: {
-                          kind: 214,
-                          loc: [21, 27, 21, 43],
+                  ],
+                },
+              },
+            ],
+            keyword: "const",
+          },
+        },
+        {
+          kind: 254,
+          loc: [15, 5, 28, 7],
+          expression: {
+            kind: 285,
+            loc: [16, 7, 27, 13],
+            type: {
+              kind: 11,
+              loc: [16, 8, 16, 11],
+              text: "div",
+            },
+            attributes: [],
+            children: [
+              {
+                kind: 285,
+                loc: [17, 9, 17, 62],
+                type: {
+                  kind: 11,
+                  loc: [17, 10, 17, 14],
+                  text: "span",
+                },
+                attributes: [
+                  {
+                    name: "onclick",
+                    initializer: {
+                      kind: 220,
+                      loc: [17, 24, 17, 47],
+                      parameters: [],
+                      body: {
+                        kind: 214,
+                        loc: [17, 30, 17, 47],
+                        expression: {
+                          kind: 212,
+                          loc: [17, 30, 17, 44],
                           expression: {
-                            kind: 212,
-                            loc: [21, 27, 21, 41],
-                            expression: {
-                              kind: 1000,
-                              loc: [21, 27, 21, 36],
-                              key: "$selected",
-                            },
-                            questionDotToken: false,
-                            name: "read",
+                            kind: 80,
+                            loc: [17, 30, 17, 38],
+                            text: "selected",
+                            bindingKey: "selected$swxxmo9tuqyt$0",
                           },
                           questionDotToken: false,
-                          arguments: [],
+                          name: "write",
                         },
-                        operatorToken: "===",
-                        right: {
-                          kind: 80,
-                          loc: [21, 48, 21, 50],
-                          text: "id",
-                          bindingKey: "id$3lx9bfa62m6pl$0",
-                        },
+                        questionDotToken: false,
+                        arguments: [
+                          {
+                            kind: 9,
+                            loc: [17, 45, 17, 46],
+                            value: 1,
+                          },
+                        ],
                       },
-                      whenTrue: {
-                        kind: 11,
-                        loc: [21, 53, 21, 60],
-                        text: "#open",
-                      },
-                      whenFalse: {
-                        kind: 11,
-                        loc: [21, 63, 21, 72],
-                        text: "#closed",
-                      },
-                    }),
-                  ),
-                  children: cs.create(
-                    [22, 18, 22, 33],
-                    {
-                      version: "0.0.0",
-                      filePath: "unmoved-prop.tsx",
-                      fileHash: "3lx9bfa62m6pl",
-                      kind: "value",
-                      splices: {},
-                      captures: ["id$3lx9bfa62m6pl$0"],
-                      spliceParams: {},
                     },
-                    () => ({
-                      kind: 227,
-                      loc: [22, 21, 22, 32],
-                      left: {
-                        kind: 11,
-                        loc: [22, 21, 22, 27],
-                        text: "row ",
-                      },
-                      operatorToken: "+",
-                      right: {
-                        kind: 80,
-                        loc: [22, 30, 22, 32],
-                        text: "id",
-                        bindingKey: "id$3lx9bfa62m6pl$0",
-                      },
-                    }),
-                  ),
-                }),
-              },
-              captures: [],
-              spliceParams: { $0splice0: ["id$3lx9bfa62m6pl$0"] },
-            },
-            () => ({
-              kind: 220,
-              loc: [19, 15, 24, 15],
-              parameters: [
-                {
-                  kind: 170,
-                  loc: [19, 16, 19, 26],
-                  name: {
-                    kind: 80,
-                    loc: [19, 16, 19, 18],
-                    text: "id",
-                    bindingKey: "id$3lx9bfa62m6pl$0",
                   },
-                },
-              ],
-              body: {
-                kind: 1000,
-                loc: [20, 13, 24, 15],
-                key: "$0splice0",
+                ],
+                children: [
+                  {
+                    kind: 11,
+                    loc: [17, 49, 17, 55],
+                    text: "select",
+                  },
+                ],
               },
-            }),
-          ),
-        }),
-      }),
-    ],
-  });
+              {
+                kind: 285,
+                loc: [18, 9, 26, 15],
+                type: {
+                  kind: 11,
+                  loc: [18, 10, 18, 13],
+                  text: "div",
+                },
+                attributes: [],
+                children: [
+                  {
+                    kind: 285,
+                    loc: [19, 11, 25, 17],
+                    type: {
+                      kind: 1000,
+                      loc: [19, 12, 19, 15],
+                      key: "$For",
+                    },
+                    attributes: [
+                      {
+                        name: "each",
+                        initializer: {
+                          kind: 210,
+                          loc: [19, 22, 19, 31],
+                          elements: [
+                            {
+                              kind: 9,
+                              loc: [19, 23, 19, 24],
+                              value: 0,
+                            },
+                            {
+                              kind: 9,
+                              loc: [19, 26, 19, 27],
+                              value: 1,
+                            },
+                            {
+                              kind: 9,
+                              loc: [19, 29, 19, 30],
+                              value: 2,
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                    children: [
+                      {
+                        kind: 220,
+                        loc: [20, 14, 24, 14],
+                        parameters: [
+                          {
+                            kind: 170,
+                            loc: [20, 15, 20, 25],
+                            name: {
+                              kind: 80,
+                              loc: [20, 15, 20, 17],
+                              text: "id",
+                              bindingKey: "id$swxxmo9tuqyt$1",
+                            },
+                          },
+                        ],
+                        body: {
+                          kind: 285,
+                          loc: [21, 15, 23, 19],
+                          type: {
+                            kind: 11,
+                            loc: [21, 16, 21, 17],
+                            text: "a",
+                          },
+                          attributes: [
+                            {
+                              name: "href",
+                              initializer: {
+                                kind: 228,
+                                loc: [21, 24, 21, 68],
+                                condition: {
+                                  kind: 227,
+                                  loc: [21, 24, 21, 46],
+                                  left: {
+                                    kind: 214,
+                                    loc: [21, 24, 21, 39],
+                                    expression: {
+                                      kind: 212,
+                                      loc: [21, 24, 21, 37],
+                                      expression: {
+                                        kind: 80,
+                                        loc: [21, 24, 21, 32],
+                                        text: "selected",
+                                        bindingKey: "selected$swxxmo9tuqyt$0",
+                                      },
+                                      questionDotToken: false,
+                                      name: "read",
+                                    },
+                                    questionDotToken: false,
+                                    arguments: [],
+                                  },
+                                  operatorToken: "===",
+                                  right: {
+                                    kind: 80,
+                                    loc: [21, 44, 21, 46],
+                                    text: "id",
+                                    bindingKey: "id$swxxmo9tuqyt$1",
+                                  },
+                                },
+                                whenTrue: {
+                                  kind: 11,
+                                  loc: [21, 49, 21, 56],
+                                  text: "#open",
+                                },
+                                whenFalse: {
+                                  kind: 11,
+                                  loc: [21, 59, 21, 68],
+                                  text: "#closed",
+                                },
+                              },
+                            },
+                          ],
+                          children: [
+                            {
+                              kind: 227,
+                              loc: [22, 18, 22, 29],
+                              left: {
+                                kind: 11,
+                                loc: [22, 18, 22, 24],
+                                text: "row ",
+                              },
+                              operatorToken: "+",
+                              right: {
+                                kind: 80,
+                                loc: [22, 27, 22, 29],
+                                text: "id",
+                                bindingKey: "id$swxxmo9tuqyt$1",
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  );
 }
 export default _jsx(Rows, {});

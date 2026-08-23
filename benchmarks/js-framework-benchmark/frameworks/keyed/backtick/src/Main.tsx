@@ -63,6 +63,7 @@ const NOUNS = [
   "mouse",
   "keyboard",
 ];
+
 export async function Main(): Promise<Client<JSX.Element>> {
   return cs`{
     const data = state<Row[]>([]);

@@ -1,21 +1,22 @@
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 
-// State belongs to the component that declared it. `Counter` calls `state`
-// once per invocation, so two `<Counter />` tags are two cells — and each
-// invocation is its own tree entry, so neither depends on how many places
-// reference an element.
+// State belongs to the script that declares it, and a script entry is applied
+// once per place that reaches it — so two `<Counter />` tags are two
+// applications of one entry, and each declares a cell of its own.
 async function Counter() {
-  const size = state(16);
-  return (
-    <span
-      style={cs`"font-size: " + $size.read() + "px"`}
-      onclick={cs`() => {
-        $size.write($size.read() + 1);
-      }`}
-    >
-      press
-    </span>
-  );
+  return cs`{
+    const size = state(16);
+    return (
+      <span
+        style={"font-size: " + size.read() + "px"}
+        onclick={() => {
+          size.write(size.read() + 1);
+        }}
+      >
+        press
+      </span>
+    );
+  }`;
 }
 
 export default (

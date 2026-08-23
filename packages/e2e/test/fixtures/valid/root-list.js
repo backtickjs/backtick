@@ -1,9 +1,5 @@
-import {
-  jsx as _jsx,
-  Fragment as _Fragment,
-  jsxs as _jsxs,
-} from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, state, For } from "@backtickjs/core";
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs, For } from "@backtickjs/core";
 // A list at the root, with nothing wrapping it. What that makes the root is a
 // stretch of the target rather than one node of it: emptying the list takes
 // children away from the target itself, which is the one shape where what a
@@ -12,157 +8,253 @@ import { cs, state, For } from "@backtickjs/core";
 // `render.test.ts` draws this into a target that is already holding something
 // and empties it, which a claim to the whole target would take with it.
 async function Rows() {
-  const ids = state([1, 2, 3]);
-  const clear = cs.create(
-    [12, 17, 14, 5],
+  return cs.create(
+    [11, 10, 24, 5],
     {
       version: "0.0.0",
       filePath: "root-list.tsx",
-      fileHash: "k11q2cwcm47",
+      fileHash: "1ye36utx4ty42",
       kind: "value",
-      splices: { $ids: ids },
+      splices: { $For: For },
       captures: [],
-      spliceParams: { $ids: [] },
+      spliceParams: {},
     },
     () => ({
-      kind: 220,
-      loc: [12, 20, 14, 4],
-      parameters: [],
-      body: {
-        kind: 242,
-        loc: [12, 26, 14, 4],
-        statements: [
-          {
-            kind: 214,
-            loc: [13, 5, 13, 26],
-            expression: {
-              kind: 212,
-              loc: [13, 5, 13, 16],
-              expression: {
-                kind: 1000,
-                loc: [13, 5, 13, 9],
-                key: "$ids",
-              },
-              questionDotToken: false,
-              name: "update",
-            },
-            questionDotToken: false,
-            arguments: [
+      kind: 242,
+      loc: [11, 13, 24, 4],
+      statements: [
+        {
+          kind: 244,
+          loc: [12, 5, 12, 44],
+          declarationList: {
+            kind: 262,
+            loc: [12, 5, 12, 43],
+            declarations: [
               {
-                kind: 220,
-                loc: [13, 17, 13, 25],
-                parameters: [],
-                body: {
-                  kind: 210,
-                  loc: [13, 23, 13, 25],
-                  elements: [],
-                },
-              },
-            ],
-          },
-        ],
-      },
-    }),
-  );
-  return _jsxs(_Fragment, {
-    children: [
-      _jsx("span", { onclick: clear, children: "clear" }),
-      _jsx(For, {
-        each: cs.create(
-          [18, 18, 18, 33],
-          {
-            version: "0.0.0",
-            filePath: "root-list.tsx",
-            fileHash: "k11q2cwcm47",
-            kind: "value",
-            splices: { $ids: ids },
-            captures: [],
-            spliceParams: { $ids: [] },
-          },
-          () => ({
-            kind: 214,
-            loc: [18, 21, 18, 32],
-            expression: {
-              kind: 212,
-              loc: [18, 21, 18, 30],
-              expression: {
-                kind: 1000,
-                loc: [18, 21, 18, 25],
-                key: "$ids",
-              },
-              questionDotToken: false,
-              name: "read",
-            },
-            questionDotToken: false,
-            arguments: [],
-          }),
-        ),
-        children: cs.create(
-          [19, 10, 19, 65],
-          {
-            version: "0.0.0",
-            filePath: "root-list.tsx",
-            fileHash: "k11q2cwcm47",
-            kind: "value",
-            splices: {
-              $0splice0: _jsx("span", {
-                children: cs.create(
-                  [19, 39, 19, 54],
-                  {
-                    version: "0.0.0",
-                    filePath: "root-list.tsx",
-                    fileHash: "k11q2cwcm47",
-                    kind: "value",
-                    splices: {},
-                    captures: ["id$k11q2cwcm47$0"],
-                    spliceParams: {},
-                  },
-                  () => ({
-                    kind: 227,
-                    loc: [19, 42, 19, 53],
-                    left: {
-                      kind: 11,
-                      loc: [19, 42, 19, 48],
-                      text: "row ",
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: 80,
-                      loc: [19, 51, 19, 53],
-                      text: "id",
-                      bindingKey: "id$k11q2cwcm47$0",
-                    },
-                  }),
-                ),
-              }),
-            },
-            captures: [],
-            spliceParams: { $0splice0: ["id$k11q2cwcm47$0"] },
-          },
-          () => ({
-            kind: 220,
-            loc: [19, 13, 19, 64],
-            parameters: [
-              {
-                kind: 170,
-                loc: [19, 14, 19, 24],
+                kind: 261,
+                loc: [12, 11, 12, 43],
                 name: {
                   kind: 80,
-                  loc: [19, 14, 19, 16],
-                  text: "id",
-                  bindingKey: "id$k11q2cwcm47$0",
+                  loc: [12, 11, 12, 14],
+                  text: "ids",
+                  bindingKey: "ids$1ye36utx4ty42$0",
+                },
+                initializer: {
+                  kind: 214,
+                  loc: [12, 17, 12, 43],
+                  expression: {
+                    kind: 1001,
+                    loc: [12, 17, 12, 22],
+                    name: "state",
+                  },
+                  questionDotToken: false,
+                  arguments: [
+                    {
+                      kind: 210,
+                      loc: [12, 33, 12, 42],
+                      elements: [
+                        {
+                          kind: 9,
+                          loc: [12, 34, 12, 35],
+                          value: 1,
+                        },
+                        {
+                          kind: 9,
+                          loc: [12, 37, 12, 38],
+                          value: 2,
+                        },
+                        {
+                          kind: 9,
+                          loc: [12, 40, 12, 41],
+                          value: 3,
+                        },
+                      ],
+                    },
+                  ],
                 },
               },
             ],
-            body: {
-              kind: 1000,
-              loc: [19, 29, 19, 64],
-              key: "$0splice0",
-            },
-          }),
-        ),
-      }),
-    ],
-  });
+            keyword: "const",
+          },
+        },
+        {
+          kind: 244,
+          loc: [13, 5, 15, 7],
+          declarationList: {
+            kind: 262,
+            loc: [13, 5, 15, 6],
+            declarations: [
+              {
+                kind: 261,
+                loc: [13, 11, 15, 6],
+                name: {
+                  kind: 80,
+                  loc: [13, 11, 13, 16],
+                  text: "clear",
+                  bindingKey: "clear$1ye36utx4ty42$1",
+                },
+                initializer: {
+                  kind: 220,
+                  loc: [13, 19, 15, 6],
+                  parameters: [],
+                  body: {
+                    kind: 242,
+                    loc: [13, 25, 15, 6],
+                    statements: [
+                      {
+                        kind: 214,
+                        loc: [14, 7, 14, 27],
+                        expression: {
+                          kind: 212,
+                          loc: [14, 7, 14, 17],
+                          expression: {
+                            kind: 80,
+                            loc: [14, 7, 14, 10],
+                            text: "ids",
+                            bindingKey: "ids$1ye36utx4ty42$0",
+                          },
+                          questionDotToken: false,
+                          name: "update",
+                        },
+                        questionDotToken: false,
+                        arguments: [
+                          {
+                            kind: 220,
+                            loc: [14, 18, 14, 26],
+                            parameters: [],
+                            body: {
+                              kind: 210,
+                              loc: [14, 24, 14, 26],
+                              elements: [],
+                            },
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              },
+            ],
+            keyword: "const",
+          },
+        },
+        {
+          kind: 254,
+          loc: [16, 5, 23, 7],
+          expression: {
+            kind: 210,
+            loc: [17, 7, 22, 10],
+            elements: [
+              {
+                kind: 285,
+                loc: [18, 9, 18, 43],
+                type: {
+                  kind: 11,
+                  loc: [18, 10, 18, 14],
+                  text: "span",
+                },
+                attributes: [
+                  {
+                    name: "onclick",
+                    initializer: {
+                      kind: 80,
+                      loc: [18, 24, 18, 29],
+                      text: "clear",
+                      bindingKey: "clear$1ye36utx4ty42$1",
+                    },
+                  },
+                ],
+                children: [
+                  {
+                    kind: 11,
+                    loc: [18, 31, 18, 36],
+                    text: "clear",
+                  },
+                ],
+              },
+              {
+                kind: 285,
+                loc: [19, 9, 21, 15],
+                type: {
+                  kind: 1000,
+                  loc: [19, 10, 19, 13],
+                  key: "$For",
+                },
+                attributes: [
+                  {
+                    name: "each",
+                    initializer: {
+                      kind: 214,
+                      loc: [19, 20, 19, 30],
+                      expression: {
+                        kind: 212,
+                        loc: [19, 20, 19, 28],
+                        expression: {
+                          kind: 80,
+                          loc: [19, 20, 19, 23],
+                          text: "ids",
+                          bindingKey: "ids$1ye36utx4ty42$0",
+                        },
+                        questionDotToken: false,
+                        name: "read",
+                      },
+                      questionDotToken: false,
+                      arguments: [],
+                    },
+                  },
+                ],
+                children: [
+                  {
+                    kind: 220,
+                    loc: [20, 12, 20, 54],
+                    parameters: [
+                      {
+                        kind: 170,
+                        loc: [20, 13, 20, 23],
+                        name: {
+                          kind: 80,
+                          loc: [20, 13, 20, 15],
+                          text: "id",
+                          bindingKey: "id$1ye36utx4ty42$2",
+                        },
+                      },
+                    ],
+                    body: {
+                      kind: 285,
+                      loc: [20, 28, 20, 54],
+                      type: {
+                        kind: 11,
+                        loc: [20, 29, 20, 33],
+                        text: "span",
+                      },
+                      attributes: [],
+                      children: [
+                        {
+                          kind: 227,
+                          loc: [20, 35, 20, 46],
+                          left: {
+                            kind: 11,
+                            loc: [20, 35, 20, 41],
+                            text: "row ",
+                          },
+                          operatorToken: "+",
+                          right: {
+                            kind: 80,
+                            loc: [20, 44, 20, 46],
+                            text: "id",
+                            bindingKey: "id$1ye36utx4ty42$2",
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  );
 }
 export default _jsx(Rows, {});

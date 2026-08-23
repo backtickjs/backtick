@@ -1,38 +1,37 @@
-#f0 = ($0) => $0()(12)
-
-#f1 = ($0) => (size) => {
-  const css = "font-size: " + size + "px";
-  const press = () => $0().write("held");
-  return <div
-    style={css}
-  >
-    {<span
+#f0 = () => {
+  const label = state("hi");
+  const row = (size) => {
+    const css = "font-size: " + size + "px";
+    const press = () => label.write("held");
+    return <div
       style={css}
-      onclick={() => $0().write("pressed")}
     >
-      {$0().read()}
-    </span>}
-    {<span
-      style={"font-size: 8px"}
-    >
-      {"fixed"}
-    </span>}
-    {<span
-      style={css}
-      onclick={press}
-    >
-      {"held"}
-    </span>}
-  </div>;
-}
-
-#f2 = () => {
-  const s0 = state("hi");
+      {<span
+        style={css}
+        onclick={() => label.write("pressed")}
+      >
+        {label.read()}
+      </span>}
+      {<span
+        style={"font-size: 8px"}
+      >
+        {"fixed"}
+      </span>}
+      {<span
+        style={css}
+        onclick={press}
+      >
+        {"held"}
+      </span>}
+    </div>;
+  };
   return <div
     style={"padding: 0"}
   >
-    {#f0(() => #f1(() => s0))}
+    {row(12)}
   </div>;
 }
 
-root = #f2()
+#f1 = () => #f0()
+
+root = #f1()

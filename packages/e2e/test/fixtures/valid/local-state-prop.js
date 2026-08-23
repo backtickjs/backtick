@@ -1,18 +1,17 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, state } from "@backtickjs/core";
-// A cell crossing a component boundary: declared once by the parent, handed to
-// each child as a prop, so both read one storage. Ownership follows the
-// declaration rather than the readers, so `Panel`'s entry declares the cell and
-// each `Counter` receives the handle as a slot — which is what makes a write
-// through either child reach the same storage.
+import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { cs } from "@backtickjs/core";
+// A cell crossing a component boundary: declared once by the script that draws
+// the pair, handed to each child as a prop, so both read one storage. The cell
+// is an ordinary client value — the prop takes it the way it takes any other —
+// which is what makes a write through either child reach the same storage.
 const Counter = async ({ size }) =>
   _jsx("span", {
     style: cs.create(
-      [11, 12, 11, 51],
+      [10, 12, 10, 51],
       {
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
-        fileHash: "gb10io8ydqeb",
+        fileHash: "vnmgn8fthx19",
         kind: "value",
         splices: { $size: size },
         captures: [],
@@ -20,25 +19,25 @@ const Counter = async ({ size }) =>
       },
       () => ({
         kind: 227,
-        loc: [11, 15, 11, 50],
+        loc: [10, 15, 10, 50],
         left: {
           kind: 227,
-          loc: [11, 15, 11, 43],
+          loc: [10, 15, 10, 43],
           left: {
             kind: 11,
-            loc: [11, 15, 11, 28],
+            loc: [10, 15, 10, 28],
             text: "font-size: ",
           },
           operatorToken: "+",
           right: {
             kind: 214,
-            loc: [11, 31, 11, 43],
+            loc: [10, 31, 10, 43],
             expression: {
               kind: 212,
-              loc: [11, 31, 11, 41],
+              loc: [10, 31, 10, 41],
               expression: {
                 kind: 1000,
-                loc: [11, 31, 11, 36],
+                loc: [10, 31, 10, 36],
                 key: "$size",
               },
               questionDotToken: false,
@@ -51,17 +50,17 @@ const Counter = async ({ size }) =>
         operatorToken: "+",
         right: {
           kind: 11,
-          loc: [11, 46, 11, 50],
+          loc: [10, 46, 10, 50],
           text: "px",
         },
       }),
     ),
     onclick: cs.create(
-      [12, 14, 14, 7],
+      [11, 14, 13, 7],
       {
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
-        fileHash: "gb10io8ydqeb",
+        fileHash: "vnmgn8fthx19",
         kind: "value",
         splices: { $size: size },
         captures: [],
@@ -69,21 +68,21 @@ const Counter = async ({ size }) =>
       },
       () => ({
         kind: 220,
-        loc: [12, 17, 14, 6],
+        loc: [11, 17, 13, 6],
         parameters: [],
         body: {
           kind: 242,
-          loc: [12, 23, 14, 6],
+          loc: [11, 23, 13, 6],
           statements: [
             {
               kind: 214,
-              loc: [13, 7, 13, 36],
+              loc: [12, 7, 12, 36],
               expression: {
                 kind: 212,
-                loc: [13, 7, 13, 18],
+                loc: [12, 7, 12, 18],
                 expression: {
                   kind: 1000,
-                  loc: [13, 7, 13, 12],
+                  loc: [12, 7, 12, 12],
                   key: "$size",
                 },
                 questionDotToken: false,
@@ -93,16 +92,16 @@ const Counter = async ({ size }) =>
               arguments: [
                 {
                   kind: 227,
-                  loc: [13, 19, 13, 35],
+                  loc: [12, 19, 12, 35],
                   left: {
                     kind: 214,
-                    loc: [13, 19, 13, 31],
+                    loc: [12, 19, 12, 31],
                     expression: {
                       kind: 212,
-                      loc: [13, 19, 13, 29],
+                      loc: [12, 19, 12, 29],
                       expression: {
                         kind: 1000,
-                        loc: [13, 19, 13, 24],
+                        loc: [12, 19, 12, 24],
                         key: "$size",
                       },
                       questionDotToken: false,
@@ -114,7 +113,7 @@ const Counter = async ({ size }) =>
                   operatorToken: "+",
                   right: {
                     kind: 9,
-                    loc: [13, 34, 13, 35],
+                    loc: [12, 34, 12, 35],
                     value: 1,
                   },
                 },
@@ -127,9 +126,119 @@ const Counter = async ({ size }) =>
     children: "press",
   });
 async function Panel() {
-  const size = state(16);
-  return _jsxs("div", {
-    children: [_jsx(Counter, { size: size }), _jsx(Counter, { size: size })],
-  });
+  return cs.create(
+    [20, 10, 28, 5],
+    {
+      version: "0.0.0",
+      filePath: "local-state-prop.tsx",
+      fileHash: "vnmgn8fthx19",
+      kind: "value",
+      splices: { $Counter: Counter },
+      captures: [],
+      spliceParams: {},
+    },
+    () => ({
+      kind: 242,
+      loc: [20, 13, 28, 4],
+      statements: [
+        {
+          kind: 244,
+          loc: [21, 5, 21, 28],
+          declarationList: {
+            kind: 262,
+            loc: [21, 5, 21, 27],
+            declarations: [
+              {
+                kind: 261,
+                loc: [21, 11, 21, 27],
+                name: {
+                  kind: 80,
+                  loc: [21, 11, 21, 15],
+                  text: "size",
+                  bindingKey: "size$vnmgn8fthx19$0",
+                },
+                initializer: {
+                  kind: 214,
+                  loc: [21, 18, 21, 27],
+                  expression: {
+                    kind: 1001,
+                    loc: [21, 18, 21, 23],
+                    name: "state",
+                  },
+                  questionDotToken: false,
+                  arguments: [
+                    {
+                      kind: 9,
+                      loc: [21, 24, 21, 26],
+                      value: 16,
+                    },
+                  ],
+                },
+              },
+            ],
+            keyword: "const",
+          },
+        },
+        {
+          kind: 254,
+          loc: [22, 5, 27, 7],
+          expression: {
+            kind: 285,
+            loc: [23, 7, 26, 13],
+            type: {
+              kind: 11,
+              loc: [23, 8, 23, 11],
+              text: "div",
+            },
+            attributes: [],
+            children: [
+              {
+                kind: 285,
+                loc: [24, 9, 24, 32],
+                type: {
+                  kind: 1000,
+                  loc: [24, 10, 24, 17],
+                  key: "$Counter",
+                },
+                attributes: [
+                  {
+                    name: "size",
+                    initializer: {
+                      kind: 80,
+                      loc: [24, 24, 24, 28],
+                      text: "size",
+                      bindingKey: "size$vnmgn8fthx19$0",
+                    },
+                  },
+                ],
+                children: [],
+              },
+              {
+                kind: 285,
+                loc: [25, 9, 25, 32],
+                type: {
+                  kind: 1000,
+                  loc: [25, 10, 25, 17],
+                  key: "$Counter",
+                },
+                attributes: [
+                  {
+                    name: "size",
+                    initializer: {
+                      kind: 80,
+                      loc: [25, 24, 25, 28],
+                      text: "size",
+                      bindingKey: "size$vnmgn8fthx19$0",
+                    },
+                  },
+                ],
+                children: [],
+              },
+            ],
+          },
+        },
+      ],
+    }),
+  );
 }
 export default _jsx(Panel, {});

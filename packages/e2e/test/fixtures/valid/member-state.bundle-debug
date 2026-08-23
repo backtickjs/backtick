@@ -1,0 +1,32 @@
+#f0 = ($0) => {
+  const build = (from) => {
+    return Array.from({ "length": 3 }, (_, at) => {
+      return { "id": from + at, "label": state("row " + from + at) };
+    });
+  };
+  const held = state(build(1));
+  return <div>
+    {<ul
+      class={"rows"}
+    >
+      {$0()({
+        "each": () => held.read(),
+        "children": () => (row) => <li
+          onclick={() => row.label.write("pressed")}
+        >
+          {row.label.read()}
+        </li>
+      })}
+    </ul>}
+  </div>;
+}
+
+#f1 = ($0) => <for
+  each={$0.each()}
+>
+  {$0.children()}
+</for>
+
+#f2 = () => #f0(() => ($0) => #f1($0))
+
+root = #f2()

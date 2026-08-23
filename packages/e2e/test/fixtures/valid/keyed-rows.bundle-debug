@@ -1,44 +1,39 @@
-#f0 = ($0) => () => {
-  $0().update((held) => held.with(0, held[2]).with(2, held[0]));
-}
-
-#f1 = ($0) => () => {
-  $0().update((held) => held.filter((id) => id !== 2));
-}
-
-#f2 = ($0) => $0().read()
-
-#f3 = ($0) => (id) => $0(id)
-
-#f4 = ($0) => "row " + $0
-
-#f5 = (id) => <span>
-  {#f4(id)}
-</span>
-
-#f6 = (s0) => <for
-  each={#f2(() => s0)}
->
-  {#f3((id) => #f5(id))}
-</for>
-
-#f7 = () => {
-  const s0 = state([1, 2, 3]);
+#f0 = ($0) => {
+  const ids = state([1, 2, 3]);
+  const swap = () => {
+    ids.update((held) => held.with(0, held[2]).with(2, held[0]));
+  };
+  const drop = () => {
+    ids.update((held) => held.filter((id) => id !== 2));
+  };
   return <div>
     {<span
-      onclick={#f0(() => s0)}
+      onclick={swap}
     >
       {"swap"}
     </span>}
     {<span
-      onclick={#f1(() => s0)}
+      onclick={drop}
     >
       {"drop"}
     </span>}
     {<div>
-      {#f6(s0)}
+      {$0()({
+        "each": () => ids.read(),
+        "children": () => (id) => <span>
+          {"row " + id}
+        </span>
+      })}
     </div>}
   </div>;
 }
 
-root = #f7()
+#f1 = ($0) => <for
+  each={$0.each()}
+>
+  {$0.children()}
+</for>
+
+#f2 = () => #f0(() => ($0) => #f1($0))
+
+root = #f2()

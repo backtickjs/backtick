@@ -1,26 +1,23 @@
-import { cs, state } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
 
-// A per-instance state cell. The component that declared it owns it, so that
-// component's entry carries the initial value and each instance allocates its
-// own storage. The display and the handler splice the same handle, so they
-// share one cell: `read()` is an input — a value that re-evaluates when the
+// A cell a script declares, read and written by what it draws. The script owns
+// the storage, so the display and the handler are two readers of one binding
+// and share one cell: `read()` is an input — a value that re-evaluates when the
 // cell changes — and `write` is an effect, which only an action can perform.
-//
-// A cell reaches each script as an argument, so the handler entry takes it as
-// a parameter and the tree wires it in with `cells`, exactly as a capture
-// threads through `slots`.
 async function Stepper() {
-  const size = state(16);
-  return (
-    <span
-      style={cs`"font-size: " + $size.read() + "px"`}
-      onclick={cs`() => {
-        $size.write($size.read() + 1);
-      }`}
-    >
-      press
-    </span>
-  );
+  return cs`{
+    const size = state(16);
+    return (
+      <span
+        style={"font-size: " + size.read() + "px"}
+        onclick={() => {
+          size.write(size.read() + 1);
+        }}
+      >
+        press
+      </span>
+    );
+  }`;
 }
 
 export default <Stepper />;
