@@ -66,11 +66,13 @@ export async function TodoList() {
                 onclick={() => filter.write(value)}
                 // The style is a string here, so what changes with the filter is
                 // written into it rather than set as a property.
-                style={"background: none; border: 0; padding: 0;" +
+                style={
+                  "background: none; border: 0; padding: 0;" +
                   " cursor: pointer; font-size: 15px; font-weight: " +
                   (filter.read() === value ? "700" : "400") +
                   "; color: " +
-                  (filter.read() === value ? "#18181b" : "#71717a")}
+                  (filter.read() === value ? "#18181b" : "#71717a")
+                }
               >
                 {value === "todo" ? "To do" : value === "done" ? "Done" : "All"}
               </button>

@@ -452,6 +452,14 @@
       "keyed": true,
       "dir": "script-body",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "49c4baf4",
+      "label": "no host state",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "no-host-state",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
