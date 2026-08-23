@@ -18,16 +18,18 @@
   {#f2((id) => #f4(id))}
 </for>
 
-#f6 = () => {
+#f6 = (s0) => [
+  <span
+    onclick={#f0(() => s0)}
+  >
+    {"clear"}
+  </span>,
+  #f5(s0)
+]
+
+#f7 = () => {
   const s0 = state([1, 2, 3]);
-  return [
-    <span
-      onclick={#f0(() => s0)}
-    >
-      {"clear"}
-    </span>,
-    #f5(s0)
-  ];
+  return #f6(s0);
 }
 
-root = #f6()
+root = #f7()

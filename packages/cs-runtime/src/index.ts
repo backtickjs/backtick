@@ -21,7 +21,6 @@ export {
   For,
   createFragment,
   type Fragment,
-  isFragment,
   type JsxElement,
   type JsxElementType,
   isJsxElement,

@@ -1,5 +1,4 @@
 import {
-  isFragment,
   type JsxElement,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
@@ -57,16 +56,6 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
 
 async function buildElement(jsx: JsxElement): Promise<Ast> {
   const type = jsx.type;
-
-  // A fragment lowers to what it held: its children go where it stood, which is
-  // what a list of them already means. Nothing of it reaches the client.
-  if (isFragment(type)) {
-    const children = jsx.props["children"];
-    return children === undefined
-      ? { kind: "AstNull" }
-      : lowerSpliceable(children as never, "ClientValue");
-  }
-
 
   // An element is its own name — `<div>` is `"div"`, the same string a client
   // script's element already writes.

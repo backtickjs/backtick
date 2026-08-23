@@ -1,5 +1,5 @@
 export { For } from "./For.js";
-export { createFragment, type Fragment, isFragment } from "./Fragment.js";
+export { createFragment, type Fragment } from "./Fragment.js";
 export {
   createJsxElement,
   isJsxElement,

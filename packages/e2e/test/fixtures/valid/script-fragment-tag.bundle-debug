@@ -1,0 +1,19 @@
+#f0 = ($0) => {
+  return <div>
+    {$0()({
+      "children": () => [
+        <span>
+          {"a"}
+        </span>,
+        <span>
+          {"b"}
+        </span>
+      ]
+    })}
+    {<em>
+      {"c"}
+    </em>}
+  </div>;
+}
+
+root = #f0(() => ($0) => $0.children())

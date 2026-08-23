@@ -1,25 +1,22 @@
+import type { ClientValue } from "@backtickjs/language-schema";
+import type { Children } from "./Children.js";
+
 /**
  * Children with no element of their own: what it holds goes where it stands.
  *
- * Branded because it is not an element — it draws no node, and lowers to its
- * children rather than to a tag the client would need an id for. Each target
- * makes its own, since what a fragment may hold is whatever that target draws,
- * and the brand is what lets one rule read them all.
+ * A component, and nothing but — it answers with its children, which is what
+ * "goes where it stands" means. So there is nothing to recognise it by and no
+ * rule that reads it: a tag naming one is a tag naming a component, wherever it
+ * was written.
+ *
+ * Each target still makes its own, since what a fragment may hold is whatever
+ * that target draws, and `Props` is where it says so.
  */
 export interface Fragment<Props extends object = object> {
-  (props: Props): unknown;
-  readonly "@backtickjs": "Fragment";
+  <ClientNode extends ClientValue>(props: Props): Promise<Children<ClientNode>>;
 }
 
 export function createFragment<Props extends object>(): Fragment<Props> {
-  return { "@backtickjs": "Fragment" } as unknown as Fragment<Props>;
-}
-
-export function isFragment(value: unknown): value is Fragment<never> {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "@backtickjs" in value &&
-    value["@backtickjs"] === "Fragment"
-  );
+  return (async (props: { children?: unknown }) =>
+    props.children) as unknown as Fragment<Props>;
 }
