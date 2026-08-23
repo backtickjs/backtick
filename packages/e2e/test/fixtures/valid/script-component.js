@@ -16,11 +16,11 @@ async function Badge() {
   return _jsx("span", { children: "new" });
 }
 export default cs.create(
-  [21, 16, 26, 3],
+  [21, 16, 28, 3],
   {
     version: "0.0.0",
     filePath: "script-component.tsx",
-    fileHash: "2gppm3p0jls6q",
+    fileHash: "11xubvfbwb82p",
     kind: "value",
     splices: { $Card: Card, $Badge: Badge },
     captures: [],
@@ -28,27 +28,27 @@ export default cs.create(
   },
   () => ({
     kind: 242,
-    loc: [21, 19, 26, 2],
+    loc: [21, 19, 28, 2],
     statements: [
       {
         kind: 254,
-        loc: [22, 3, 25, 10],
+        loc: [22, 3, 27, 5],
         expression: {
           kind: 285,
-          loc: [22, 10, 25, 9],
+          loc: [23, 5, 26, 11],
           type: {
             kind: 11,
-            loc: [22, 11, 22, 14],
+            loc: [23, 6, 23, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
               kind: 285,
-              loc: [23, 5, 23, 28],
+              loc: [24, 7, 24, 30],
               type: {
                 kind: 1000,
-                loc: [23, 6, 23, 10],
+                loc: [24, 8, 24, 12],
                 key: "$Card",
               },
               attributes: [
@@ -56,7 +56,7 @@ export default cs.create(
                   name: "title",
                   initializer: {
                     kind: 11,
-                    loc: [23, 17, 23, 25],
+                    loc: [24, 19, 24, 27],
                     text: "totals",
                   },
                 },
@@ -65,10 +65,10 @@ export default cs.create(
             },
             {
               kind: 285,
-              loc: [24, 5, 24, 14],
+              loc: [25, 7, 25, 16],
               type: {
                 kind: 1000,
-                loc: [24, 6, 24, 11],
+                loc: [25, 8, 25, 13],
                 key: "$Badge",
               },
               attributes: [],

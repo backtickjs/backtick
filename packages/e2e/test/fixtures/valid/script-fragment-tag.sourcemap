@@ -1,35 +1,35 @@
 cs.lift((() => {\n      → cs`{\n  
 return cs.const(        → return 
-<                       → <
+<                       → (\n    <
 div                     → div
->{cs.lift(              → >\n    {
+>{cs.lift(              → >\n      {\n        
 <                       → <
 Fragment                → Fragment
->{cs.lift(              → >\n      
+>{cs.lift(              → >\n          
 <                       → <
 span                    → span
 >a</                    → >a</
 span                    → span
 >                       → >
-)}{cs.lift(             → \n      
+)}{cs.lift(             → \n          
 <                       → <
 span                    → span
 >b</                    → >b</
 span                    → span
 >                       → >
-)}</                    → \n    </
+)}</                    → \n        </
 Fragment                → Fragment
 >                       → >
-)}{cs.lift(             → }\n    {
-<>{cs.lift(             → <>\n      
+)}{cs.lift(             → \n      }\n      {\n        
+<>{cs.lift(             → <>\n          
 <                       → <
 em                      → em
 >c</                    → >c</
 em                      → em
 >                       → >
-)}</>                   → \n    </>
-)}</                    → }\n  </
+)}</>                   → \n        </>
+)}</                    → \n      }\n    </
 div                     → div
->                       → >
+>                       → >\n  )
 );                      → ;
 \n})())                 → \n}`

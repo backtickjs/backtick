@@ -1,8 +1,8 @@
 cs.lift((() => {\n      → cs`{\n  
 return cs.const(        → return 
-<                       → <
+<                       → (\n    <
 div                     → div
->{cs.lift(              → >\n    
+>{cs.lift(              → >\n      
 <                       → <
 Card                    → Card
                         →  
@@ -11,12 +11,12 @@ title                   → title
 "totals"                → "totals"
 )}                      → 
 />                      →  />
-)}{cs.lift(             → \n    
+)}{cs.lift(             → \n      
 <                       → <
 Badge                   → Badge
  />                     →  />
-)}</                    → \n  </
+)}</                    → \n    </
 div                     → div
->                       → >
+>                       → >\n  )
 );                      → ;
 \n})())                 → \n}`
