@@ -8,13 +8,19 @@ import { Fragment } from "@backtickjs/web-sdk/jsx-runtime";
 // The shorthand is not: the compiler reads an absent opening tag as a fragment
 // and lowers it to its children, so nothing of it reaches the host at all.
 export default cs`{
-  return <div>
-    {<Fragment>
-      <span>a</span>
-      <span>b</span>
-    </Fragment>}
-    {<>
-      <em>c</em>
-    </>}
-  </div>;
+  return (
+    <div>
+      {
+        <Fragment>
+          <span>a</span>
+          <span>b</span>
+        </Fragment>
+      }
+      {
+        <>
+          <em>c</em>
+        </>
+      }
+    </div>
+  );
 }`;

@@ -444,6 +444,14 @@
       "keyed": true,
       "dir": "globals-table",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "4421a038",
+      "label": "script body",
+      "date": "2026-08-22",
+      "keyed": true,
+      "dir": "script-body",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

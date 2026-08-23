@@ -19,8 +19,10 @@ async function Badge() {
 }
 
 export default cs`{
-  return <div>
-    <Card title="totals" />
-    <Badge />
-  </div>;
+  return (
+    <div>
+      <Card title="totals" />
+      <Badge />
+    </div>
+  );
 }`;

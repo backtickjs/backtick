@@ -1,7 +1,4 @@
-import {
-  type JsxElement,
-  type Spliceable,
-} from "@backtickjs/cs-runtime";
+import { type JsxElement, type Spliceable } from "@backtickjs/cs-runtime";
 import { withInstance } from "../Instance.js";
 import type { Ast, AstInstance } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
