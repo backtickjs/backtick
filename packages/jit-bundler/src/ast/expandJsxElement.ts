@@ -1,5 +1,4 @@
 import {
-  isElementAlias,
   isFragment,
   type JsxElement,
   type Spliceable,
@@ -68,12 +67,6 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
       : lowerSpliceable(children as never, "ClientValue");
   }
 
-  // An alias is the element it stands for, under a type that element cannot
-  // state: the props were written against the alias and are the element's own,
-  // so this is the tag it names and nothing else.
-  if (isElementAlias(type)) {
-    return buildTag(jsx, type.id);
-  }
 
   // An element is its own name — `<div>` is `"div"`, the same string a client
   // script's element already writes.

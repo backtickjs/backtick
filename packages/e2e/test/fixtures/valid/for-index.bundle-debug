@@ -12,7 +12,13 @@
   {#f3(name, index)}
 </span>
 
-#f5 = () => {
+#f5 = (s0) => <for
+  each={#f1(() => s0)}
+>
+  {#f2((name, index) => #f4(name, index))}
+</for>
+
+#f6 = () => {
   const s0 = state(["a", "b", "c"]);
   return <div>
     {<span
@@ -21,13 +27,9 @@
       {"rotate"}
     </span>}
     {<div>
-      {<for
-        each={#f1(() => s0)}
-      >
-        {#f2((name, index) => #f4(name, index))}
-      </for>}
+      {#f5(s0)}
     </div>}
   </div>;
 }
 
-root = #f5()
+root = #f6()

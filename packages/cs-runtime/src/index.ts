@@ -19,9 +19,6 @@ export {
 // `@backtickjs/ui-schema/schema`, so reaching them costs an app nothing.
 export {
   For,
-  createElementAlias,
-  type ElementAlias,
-  isElementAlias,
   createFragment,
   type Fragment,
   isFragment,

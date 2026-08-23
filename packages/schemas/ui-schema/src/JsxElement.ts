@@ -1,17 +1,16 @@
 import type { ClientValue } from "@backtickjs/language-schema";
 import type { ClientElement } from "./schema.generated.js";
-import type { ElementAlias } from "./ElementAlias.js";
 import type { Fragment } from "./Fragment.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 /**
  * What a JSX tag may name: an element to draw, a component to run while
- * bundling, a fragment, or an alias for an element.
+ * bundling, or a fragment.
  *
  * An element is its own name — `<div>` is the string `"div"`, the same id the
  * wire carries — so a target's tags are the strings its schema declares in
- * `Elements`. `<For />` is the alias arm: `<for />` under the type that binds
- * `T`, which the tag itself has nowhere to do.
+ * `Elements`. `<For />` needs no arm of its own: it is a component, and the
+ * `for` element it answers with is one of those strings.
  *
  * `ClientNode` is what a component of that target may answer with, which the
  * target binds where it declares `JSX.ElementType`. At `ClientValue` this is the
@@ -22,8 +21,7 @@ import type { ServerComponent } from "./ServerComponent.js";
 export type JsxElementType<ClientNode extends ClientValue> =
   | string /* IntrinsicElement tag */
   | ServerComponent<never, ClientNode>
-  | Fragment<never>
-  | ElementAlias;
+  | Fragment<never>;
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it. The tag

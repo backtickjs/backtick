@@ -14,19 +14,21 @@
   {row.label.read()}
 </li>
 
-#f4 = () => {
+#f4 = (s0) => <for
+  each={#f0(() => s0)}
+>
+  {#f3()}
+</for>
+
+#f5 = () => {
   const s0 = state(#f1(#f2));
   return <div>
     {<ul
       class={"rows"}
     >
-      {<for
-        each={#f0(() => s0)}
-      >
-        {#f3()}
-      </for>}
+      {#f4(s0)}
     </ul>}
   </div>;
 }
 
-root = #f4()
+root = #f5()
