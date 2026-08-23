@@ -1,6 +1,5 @@
 import {
   isClientScript,
-  isClientState,
   isJsxElement,
   type Client,
   type Spliceable,
@@ -8,7 +7,6 @@ import {
 import type { Ast } from "./Ast.js";
 import { holeName } from "./holes.js";
 import { lowerClientScript } from "./lowerClientScript.js";
-import { lowerClientState } from "./lowerClientState.js";
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 
@@ -36,9 +34,6 @@ export async function lowerSpliceable(
   }
   if (isJsxElement(value)) {
     return expandJsxElement(value);
-  }
-  if (isClientState(value)) {
-    return lowerClientState(value);
   }
   if (value === null) {
     return { kind: "AstNull" };

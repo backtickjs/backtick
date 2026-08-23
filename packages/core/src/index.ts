@@ -14,7 +14,7 @@ export {
 // elements around it are, and every client answers for it. A target's own
 // vocabulary lives in that target's SDK.
 export { For } from "@backtickjs/cs-runtime";
-export { bundler, state } from "@backtickjs/jit-bundler";
+export { bundler } from "@backtickjs/jit-bundler";
 export { NodeKind } from "@backtickjs/jit-bundler";
 export type {
   Bundle,

@@ -1,14 +1,10 @@
-#f0 = () => [
-  <span>
+#f0 = () => <div>
+  {<span>
     {"a"}
-  </span>,
-  <span>
+  </span>}
+  {<span>
     {"b"}
-  </span>
-]
-
-#f1 = () => <div>
-  {#f0()}
+  </span>}
 </div>
 
-root = #f1()
+root = #f0()

@@ -1,19 +1,13 @@
-#f0 = () => <span>
-  {"alpha"}
-</span>
-
-#f1 = () => <span>
-  {"beta"}
-</span>
-
-#f2 = () => <span>
-  {"gamma"}
-</span>
-
-#f3 = () => <div>
-  {#f0()}
-  {#f1()}
-  {#f2()}
+#f0 = () => <div>
+  {<span>
+    {"alpha"}
+  </span>}
+  {<span>
+    {"beta"}
+  </span>}
+  {<span>
+    {"gamma"}
+  </span>}
 </div>
 
-root = #f3()
+root = #f0()

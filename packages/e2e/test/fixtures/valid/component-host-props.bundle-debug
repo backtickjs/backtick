@@ -1,11 +1,9 @@
-#f0 = () => <span
-  class={"danger"}
->
-  {"one"}
-</span>
-
-#f1 = () => <div>
-  {#f0()}
+#f0 = () => <div>
+  {<span
+    class={"danger"}
+  >
+    {"one"}
+  </span>}
 </div>
 
-root = #f1()
+root = #f0()

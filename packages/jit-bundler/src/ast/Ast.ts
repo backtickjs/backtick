@@ -14,22 +14,10 @@ export type Ast =
   | AstElement
   | AstExpansion
   | AstHole
-  | AstInstance
   | AstNull
   | AstNumber
   | AstObject
-  | AstState
   | AstString;
-
-// A state cell (`state(initial)`): the client owns the storage, allocated per
-// instance of the tree that declares the cell; what ships is the initial
-// value. One node per cell — identity is the cell object — so every splice of
-// one cell reaches the same storage.
-export interface AstState {
-  readonly kind: "AstState";
-  readonly initial: Ast;
-  readonly declaredIn: AstInstance;
-}
 
 export interface AstScript {
   readonly kind: "AstScript";
@@ -59,16 +47,6 @@ export interface AstElement {
   readonly kind: "AstElement";
   readonly id: string;
   readonly props: Readonly<Record<string, Ast>>;
-}
-
-// A server component's invocation, wrapping what it resolved to. One node per
-// invocation rather than per component: the node is what owns the cells its
-// component declares, so it can't depend on how often the component is named.
-export interface AstInstance {
-  readonly kind: "AstInstance";
-  // Whatever the component drew, which a fragment makes as wide as a value:
-  // `<>…</>` is its children, so an instance may hold a list of them.
-  child: Ast | null;
 }
 
 // A spliced class's bundle-time expansion: the spliceable the constructor

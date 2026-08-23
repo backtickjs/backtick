@@ -1,14 +1,10 @@
-#f0 = () => <span>
-  {"one"}
-</span>
-
-#f1 = () => <span>
-  {"two"}
-</span>
-
-#f2 = () => <div>
-  {#f0()}
-  {#f1()}
+#f0 = () => <div>
+  {<span>
+    {"one"}
+  </span>}
+  {<span>
+    {"two"}
+  </span>}
 </div>
 
-root = #f2()
+root = #f0()

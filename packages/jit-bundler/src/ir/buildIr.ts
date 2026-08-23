@@ -1,11 +1,4 @@
-import type {
-  Ast,
-  AstElement,
-  AstExpansion,
-  AstInstance,
-  AstScript,
-  AstState,
-} from "../ast/Ast.js";
+import type { Ast, AstElement, AstExpansion, AstScript } from "../ast/Ast.js";
 import { locKey } from "../locKey.js";
 import type {
   Ir,
@@ -14,7 +7,6 @@ import type {
   IrExpansion,
   IrScriptEntry,
   IrScriptRef,
-  IrStateRef,
   IrTreeEntry,
   IrTreeRef,
 } from "./Ir.js";
@@ -32,19 +24,6 @@ class IrBuilder {
   private readonly entryByLoc = new Map<string, IrScriptEntry>();
   private readonly refByScript = new Map<AstScript, IrScriptRef>();
   private readonly refByElement = new Map<AstElement, IrTreeRef>();
-  // One entry per invocation, interned by node identity so an instance reached
-  // twice is one entry instantiated twice.
-  private readonly refByInstance = new Map<AstInstance, IrTreeRef>();
-  // One reference per cell, interned by node identity — `lowerClientState`
-  // shares one node per cell — so every splice of a cell reaches the same
-  // storage.
-  private readonly refByState = new Map<AstState, IrStateRef>();
-  // Which entry each invocation became, so a cell's declaring instance resolves
-  // to the entry that holds it.
-  private readonly treeByInstance = new Map<AstInstance, IrTreeEntry>();
-  // Cells are numbered across the whole IR (see `IrStateRef`), so the counter
-  // lives here rather than on an entry.
-  private cellCount = 0;
   // A class's expansion shared across script instances (`lowerSpliceable`
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
@@ -118,7 +97,6 @@ class IrBuilder {
     const tree: IrTreeEntry = {
       kind: "IrTreeEntry",
       content,
-      state: {},
     };
     const ref: IrTreeRef = {
       kind: "IrTreeRef",
@@ -126,62 +104,6 @@ class IrBuilder {
     };
     this.trees.push(tree);
     this.refByElement.set(element, ref);
-    return ref;
-  }
-
-  // Lowers an invocation to a reference into the tree table. Unlike an element
-  // this happens however many places reference it: the entry is the instance,
-  // so what it owns can't depend on how often it is mentioned.
-  referenceInstance(instance: AstInstance): IrTreeRef {
-    const shared = this.refByInstance.get(instance);
-    if (shared) {
-      return shared;
-    }
-    // A component that rendered nothing still gets its entry — the entry is the
-    // instance, and it holds state whether or not it has content. Minted before
-    // the subtree is lowered because `state()` runs down there, and a cell has
-    // to land in the entry its component became.
-    const tree: IrTreeEntry = {
-      kind: "IrTreeEntry",
-      content: null,
-      state: {},
-    };
-    this.treeByInstance.set(instance, tree);
-    const child = instance.child;
-    tree.content = child === null ? null : this.lowerInTree(child);
-    const ref: IrTreeRef = {
-      kind: "IrTreeRef",
-      target: this.trees.length,
-    };
-    this.trees.push(tree);
-    this.refByInstance.set(instance, ref);
-    return ref;
-  }
-
-  // Lowers a state cell to a reference, putting its initial in the entry its
-  // declaring component became. The initial lowers in value position — it is
-  // data that entry carries, not a tree prop.
-  referenceState(node: AstState): IrStateRef {
-    const shared = this.refByState.get(node);
-    if (shared) {
-      return shared;
-    }
-    const owner = this.treeByInstance.get(node.declaredIn);
-    if (owner === undefined) {
-      // `state()` records the invocation it ran inside, and every invocation
-      // reached by lowering has an entry by the time its subtree lowers — so
-      // this is a cell whose component isn't in the tree its readers are.
-      throw new Error(
-        "Can't own this state cell: the component that declared it isn't " +
-          "part of the tree being bundled.",
-      );
-    }
-    const ref: IrStateRef = { kind: "IrStateRef", target: this.cellCount++ };
-    // Reserved before lowering the initial so a cell whose initial somehow
-    // reaches itself resolves to this cell rather than recursing.
-    owner.state[ref.target] = { kind: "IrValue", value: null };
-    this.refByState.set(node, ref);
-    owner.state[ref.target] = this.lower(node.initial);
     return ref;
   }
 
@@ -204,9 +126,6 @@ class IrBuilder {
   // position (`lower`) an element always hoists: a script body or the IR
   // root embeds a tree by reference, never structurally.
   private lowerInTree(node: Ast): IrArgument {
-    if (node.kind === "AstInstance") {
-      return this.referenceInstance(node);
-    }
     if (node.kind === "AstElement") {
       return this.elementRefs.get(node) === 1
         ? this.lowerElement(node)
@@ -238,8 +157,6 @@ class IrBuilder {
         return this.referenceScript(node);
       case "AstElement":
         return this.referenceTree(node);
-      case "AstInstance":
-        return this.referenceInstance(node);
       case "AstArray":
         return {
           kind: "IrArray",
@@ -273,10 +190,6 @@ class IrBuilder {
       }
       case "AstHole":
         return { kind: "IrHole", name: node.name };
-      // A cell lowers to the AST but has no IR entry yet: the state table and
-      // the tree that declares the cell come with the IR step.
-      case "AstState":
-        return this.referenceState(node);
       default: {
         const unhandled: never = node;
         throw new Error(`Cannot lower: ${JSON.stringify(unhandled)}`);
@@ -295,9 +208,6 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
   // A per-class expansion shared across script instances lowers once, so its
   // contents count once too.
   const seenExpansions = new Set<AstExpansion>();
-  // A cell is one node however many splices reach it, so its initial's contents
-  // count once.
-  const seenCells = new Set<AstState>();
   const visit = (node: Ast): void => {
     if (node.kind === "AstScript") {
       if (seenScripts.has(node)) {
@@ -307,24 +217,11 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
       Object.values(node.splices).forEach(visit);
       return;
     }
-    if (node.kind === "AstInstance") {
-      if (node.child !== null) {
-        visit(node.child);
-      }
-      return;
-    }
     if (node.kind === "AstElement") {
       const count = counts.get(node) ?? 0;
       counts.set(node, count + 1);
       if (count === 0) {
         Object.values(node.props).forEach(visit);
-      }
-      return;
-    }
-    if (node.kind === "AstState") {
-      if (!seenCells.has(node)) {
-        seenCells.add(node);
-        visit(node.initial);
       }
       return;
     }

@@ -7,18 +7,6 @@ export interface Ir {
   root: IrArgument;
 }
 
-// A cell. Every splice of one cell is the same reference, so every reader and
-// writer shares the storage.
-//
-// `target` numbers the cell across the whole IR, not within its entry: a script
-// can capture two cells at once — one its own component declared and one
-// reaching in from an enclosing component — and per-entry numbers would give
-// both the same binding key.
-export interface IrStateRef {
-  readonly kind: "IrStateRef";
-  readonly target: number;
-}
-
 export interface IrScriptEntry {
   readonly kind: "IrScriptEntry";
   readonly loc: SourceLocation;
@@ -29,28 +17,14 @@ export interface IrScriptEntry {
   readonly body: ClientScriptBody;
 }
 
-// A tree-table entry. A wrapper rather than the element itself so
-// instance-scoped additions — per-instance state declarations — can land as
-// sibling fields without reshaping the table.
-// A tree-table entry: one instance's content. Usually the element it renders;
-// a reference when the instance is a component that renders another component,
-// since that inner invocation is an instance of its own.
+// A tree-table entry: one hoisted element's content. A wrapper rather than the
+// element itself, so what an entry carries beside its content can grow without
+// reshaping the table.
 export interface IrTreeEntry {
   readonly kind: "IrTreeEntry";
-  // Null when the instance renders nothing. The entry still exists — it is what
-  // owns the instance's state and what a re-render re-evaluates — so what is
-  // absent is the content, not the entry.
-  //
-  // Written after the entry exists, like `AstInstance.child`: the entry is
-  // minted before its subtree is lowered, because a cell interned down there
-  // has to land in the entry its component became.
+  // Null when the entry draws nothing, which is what the entry existing and
+  // holding nothing says.
   content: IrArgument | null;
-  // The cells this instance declares, each under the number its references
-  // carry (`IrStateRef.target`) and holding the cell's initial value.
-  // Instantiating the entry allocates storage for each, so ownership is where a
-  // cell sits rather than something recorded on it. Empty for an element entry:
-  // only a component invocation can declare state.
-  state: Record<number, IrArgument>;
 }
 
 // How one script entry embeds another (and how the IR names its entrypoint).
@@ -134,5 +108,4 @@ export type IrArgument =
   | IrHole
   | IrScriptRef
   | IrTreeRef
-  | IrStateRef
   | IrElement;

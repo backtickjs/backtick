@@ -1,6 +1,5 @@
 import { type JsxElement, type Spliceable } from "@backtickjs/cs-runtime";
-import { withInstance } from "../Instance.js";
-import type { Ast, AstInstance } from "./Ast.js";
+import type { Ast } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the expansion
@@ -59,23 +58,11 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
   if (typeof type === "string") {
     return buildTag(jsx, type);
   } else {
-    // The node stands for the invocation, so it is built before the invocation
-    // happens: it is what the component's `state()` calls record as their
-    // owner, and only its child waits on what the component returned. Nothing
-    // reads the child in between — the run produces it.
-    const instance: AstInstance = { kind: "AstInstance", child: null };
-
     // A server component resolves to another element asynchronously: awaited
-    // here, on the host, and the element it built is what the bundle carries.
-    // Null is rendering nothing, so the child it never got stands as it is.
-    const element = await withInstance(instance, () =>
-      type(jsx.props as never),
-    );
-
-    if (element !== null) {
-      instance.child = await lowerSpliceable(element, "ClientValue");
-    }
-
-    return instance;
+    // here, on the host, and what it built is what the bundle carries. The
+    // component itself leaves nothing behind — what it drew stands where the
+    // tag stood, and drawing nothing is the language's absent value.
+    const children = await type(jsx.props as never);
+    return await lowerSpliceable(children, "ClientValue");
   }
 }

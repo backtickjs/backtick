@@ -36,4 +36,3 @@ export type {
   FunctionLabel,
 } from "./bundle/Bundle.js";
 export { bundler } from "./bundler.js";
-export { state } from "./state.js";

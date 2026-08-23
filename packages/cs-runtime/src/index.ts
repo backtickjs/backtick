@@ -37,7 +37,6 @@ export type {
   SpliceableValue,
   Spliced,
 } from "@backtickjs/language-schema";
-export { type ClientState, isClientState } from "./ClientState.js";
 export type { ReadonlyState, State } from "@backtickjs/language-schema";
 export type { Widen } from "./Widen.js";
 export type { Receiver } from "./Receiver.js";

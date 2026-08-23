@@ -1,17 +1,13 @@
-#f0 = () => "counted"
-
-#f1 = () => [
-  <em>
-    {"one"}
-  </em>,
-  <em>
-    {"two"}
-  </em>
-]
-
-#f2 = () => <div>
-  {#f0()}
-  {#f1()}
+#f0 = () => <div>
+  {"counted"}
+  {[
+    <em>
+      {"one"}
+    </em>,
+    <em>
+      {"two"}
+    </em>
+  ]}
 </div>
 
-root = #f2()
+root = #f0()

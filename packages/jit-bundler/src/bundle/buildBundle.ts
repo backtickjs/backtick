@@ -7,38 +7,34 @@ import type {
   IrScriptRef,
   IrTreeRef,
 } from "../ir/Ir.js";
-import { cellIndex, cellKey, isCellKey, sourceName } from "./bindingKey.js";
+import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
 import { NodeKind } from "./Bundle.js";
 import type {
   Bundle,
   BundleArrowFunctionNode,
-  BundleBody,
   BundleFunction,
   BundleCallExpressionNode,
   BundleElement,
   BundleGetFunction,
   BundleExpressionNode,
   BundleIdentifierNode,
-  BundleVariableDeclarationNode,
   FunctionLabel,
 } from "./Bundle.js";
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 
-// What a tree expression renders against: the entry being materialized, and
-// which keys are its parameters. The two travel together because resolving a
-// key takes both the key and whose entry it is landing in. `target` is null
-// where no entry encloses the expression — the bundle root, and a cell's
-// initial.
+// What a tree expression renders against: which keys are the parameters of the
+// entry being materialized. Named rather than passed as a bare set, because a
+// thunk's own parameters travel beside it and the two answer different
+// questions about the same key.
 interface TreeScope {
-  readonly target: number | null;
   readonly params: Set<string>;
 }
 
-// Renders in no entry: nothing is in scope, and a cell reaching here has
-// nowhere to resolve against.
-const noInstance = (): TreeScope => ({ target: null, params: new Set() });
+// Renders in no entry, which is the bundle root: nothing is in scope, so a
+// capture reaching here has nowhere to resolve against.
+const noEntry = (): TreeScope => ({ params: new Set() });
 
 // Builds the bundle `{ functions, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
@@ -94,9 +90,9 @@ export function buildBundle(
   // bindings sharing a source name can land in one chain and the inner would
   // shadow what the outer was handed (`shadowing` nests three).
   //
-  // Two scopes here, neither of them the whole bundle: a drawing entry, over the
-  // cells it declares and the thunks written in its content; and the root, which
-  // is a tree's content without the entry. A `functions` entry names inside
+  // Two scopes here, neither of them the whole bundle: a drawing entry, over its
+  // parameters and the thunks written in its content; and the root, which is a
+  // tree's content without the entry. A `functions` entry names inside
   // `lowerScriptBody`, from its own script — nothing out here reads those names,
   // because a call site hands an entry its arguments positionally, and its
   // captures arrive as numbered parameters rather than under a name.
@@ -211,14 +207,9 @@ export function buildBundle(
         return keys;
       }
       case "IrTreeRef":
-        // An entry supplies the cells it owns, so only its params thread out.
         // The key belongs to this reference rather than the entry, so it
-        // captures here, alongside them.
+        // captures here, alongside the entry's own params.
         return treeParams(value.target);
-      // A cell threads like a capture: the entry reading it takes the handle as
-      // a parameter, and its owner supplies it.
-      case "IrStateRef":
-        return [cellKey(value.target)];
       case "IrElement":
         return Object.values(value.props).flatMap(freeCaps);
       case "IrArray":
@@ -269,39 +260,20 @@ export function buildBundle(
   const contentValues = (content: IrArgument | null): IrArgument[] =>
     content === null ? [] : [content];
 
-  // Whether a cell's storage lives in this entry. A cell sits in the entry that
-  // holds it, so ownership is a lookup rather than something to infer from
-  // where the cell is read.
-  const ownsCell = (target: number, key: string): boolean =>
-    isCellKey(key) && cellIndex(key) in ir.trees[target].state;
-
-  // What an entry's wiring needs, split by where it comes from:
+  // The capture keys an entry takes from whichever scope instantiates it, in
+  // first-need order, which are the entry's parameters.
   //
-  //   params — the capture keys it takes from whichever scope instantiates it,
-  //     in first-need order, which are the entry's parameters. A cell the entry
-  //     doesn't own is one of them: it threads down from its owner like any
-  //     other value.
-  //   cells — the cells it owns, and so declares. Every instance of the entry
-  //     allocates its own storage for each.
-  //
-  // Split here rather than by filtering a combined list, so the rule is stated
-  // once and the two can't drift into overlapping or leaving a key out.
-  //
-  // An entry whose content is a reference needs whatever that inner instance
+  // An entry whose content is a reference needs whatever that inner entry
   // needs, so the walk starts from the content rather than from props.
   // Memoized; no cycle guard is needed because the entry graph is acyclic —
   // a child is always built before its parent.
-  interface TreeNeeds {
-    readonly params: string[];
-    readonly cells: string[];
-  }
-  const treeNeedsCache = new Map<number, TreeNeeds>();
-  const treeNeeds = (target: number): TreeNeeds => {
-    const cached = treeNeedsCache.get(target);
+  const treeParamsCache = new Map<number, string[]>();
+  const treeParams = (target: number): string[] => {
+    const cached = treeParamsCache.get(target);
     if (cached) {
       return cached;
     }
-    const needs: TreeNeeds = { params: [], cells: [] };
+    const params: string[] = [];
     const seen = new Set<string>();
     for (const value of contentValues(ir.trees[target].content)) {
       for (const key of freeCaps(value)) {
@@ -309,16 +281,12 @@ export function buildBundle(
           continue;
         }
         seen.add(key);
-        // Anything this entry doesn't hold is a parameter, cell or not.
-        (ownsCell(target, key) ? needs.cells : needs.params).push(key);
+        params.push(key);
       }
     }
-    treeNeedsCache.set(target, needs);
-    return needs;
+    treeParamsCache.set(target, params);
+    return params;
   };
-
-  const treeParams = (target: number): string[] => treeNeeds(target).params;
-  const treeCells = (target: number): string[] => treeNeeds(target).cells;
 
   const bodies = new Map<IrScriptEntry, BundleArrowFunctionNode>();
 
@@ -454,10 +422,6 @@ export function buildBundle(
         return instantiation(value);
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
-      // In a body the handle is already in scope: the entry was handed it with
-      // its captures (see `freeCaps`), so it reads like any of them.
-      case "IrStateRef":
-        return readKey(cellKey(value.target));
       case "IrValue":
         return value.value;
       // An expansion in value position is its `functions` entry: passed
@@ -543,66 +507,23 @@ export function buildBundle(
     withNaming(`t${target}`, () => buildTree(target));
   };
 
-  // `const s0 = state(<initial>)`: the entry allocates its own storage, and its
-  // content resolves the name.
-  const cellBinding = (
-    name: string,
-    initial: IrArgument,
-  ): BundleVariableDeclarationNode => [
-    NodeKind.VariableDeclaration,
-    name,
-    [
-      NodeKind.CallExpression,
-      [NodeKind.Builtin, "state"],
-      false,
-      [
-        // A cell's initial is data (`state-in-state-initial` rejects anything
-        // that reads), so it is an expression node wherever it renders.
-        renderExpr(initial, noInstance()) as BundleExpressionNode,
-      ],
-    ],
-    "const",
-  ];
-
-  // An entry as its arrow: the cells it declares, then what it draws. A body
-  // only where there is something to bind — otherwise the arrow is its content.
+  // An entry as its arrow: its parameters, and what it draws.
   const treeEntry = (
     params: string[],
-    bindings: BundleVariableDeclarationNode[],
     drawn: BundleExpressionNode,
-  ): BundleFunction => {
-    const body: BundleBody =
-      bindings.length === 0
-        ? (drawn as BundleExpressionNode)
-        : [
-            NodeKind.Block,
-            [
-              ...bindings,
-              [NodeKind.ReturnStatement, drawn as BundleExpressionNode],
-            ],
-          ];
-    return [[NodeKind.ArrowFunction, parameterNodes(params), body]];
-  };
+  ): BundleFunction => [
+    [NodeKind.ArrowFunction, parameterNodes(params), drawn],
+  ];
 
   const buildTree = (target: number): void => {
     const keys = treeParams(target);
-    const scope: TreeScope = { target, params: new Set(keys) };
+    const scope: TreeScope = { params: new Set(keys) };
     // Named where its expressions name them.
     const names = keys.map(displayName);
     const content = ir.trees[target].content;
-    // A cell's initial is data the entry carries, evaluated in no instance: it
-    // can't read a parameter or another cell, so it renders against nothing.
-    const bindings: BundleVariableDeclarationNode[] = [];
-    for (const key of treeCells(target)) {
-      // `treeCells` only yields keys this entry holds, so the initial is here.
-      const initial = ir.trees[target].state[cellIndex(key)];
-      if (initial !== undefined) {
-        bindings.push(cellBinding(displayName(key), initial));
-      }
-    }
-    // An instance that draws nothing: the entry stays, with nothing under it.
+    // An entry that draws nothing: it stays, with nothing under it.
     if (content === null) {
-      treeJsons.set(target, treeEntry(names, bindings, null));
+      treeJsons.set(target, treeEntry(names, null));
       return;
     }
     // Whatever it draws, rendered as any other value in tree position is: an
@@ -610,7 +531,7 @@ export function buildBundle(
     // list they are.
     treeJsons.set(
       target,
-      treeEntry(names, bindings, renderExpr(content, scope, new Set())),
+      treeEntry(names, renderExpr(content, scope, new Set())),
     );
   };
 
@@ -627,33 +548,7 @@ export function buildBundle(
     if (params.has(key)) {
       return [NodeKind.Identifier, displayName(key)];
     }
-    // Before the cell case: a cell this entry doesn't own arrives as a
-    // parameter, and only one it owns is bound here.
     if (scope.params.has(key)) {
-      return [NodeKind.Identifier, displayName(key)];
-    }
-    if (isCellKey(key)) {
-      // The one place a `cell` node is made, so the rule `Bundle.ts` states —
-      // a cell only means anything inside the entry declaring it — is enforced
-      // by this comparison rather than by rescanning the finished bundle.
-      // Reaching here off its owner means the cell threaded outward as a parameter
-      // until nothing was left to supply it.
-      if (scope.target === null) {
-        throw new Error(
-          `Can't read the state cell \`${sourceName(key)}\` here: its ` +
-            "storage belongs to a component instance, and this is evaluated " +
-            "where there is none — a cell's initial value, or the bundle's " +
-            "root. Read it from a script the component renders instead.",
-        );
-      }
-      if (!ownsCell(scope.target, key)) {
-        throw new Error(
-          `Can't read the state cell \`${sourceName(key)}\` here: a cell's ` +
-            "storage belongs to the component instance that declared it, so " +
-            "it reaches another component only by being passed down as a " +
-            "prop. Pass it down, or declare a cell where it is read.",
-        );
-      }
       return [NodeKind.Identifier, displayName(key)];
     }
     throw new Error(
@@ -754,11 +649,6 @@ export function buildBundle(
     if (value.kind === "IrElement") {
       return renderElement(value, scope, params);
     }
-    // A cell in tree position resolves by name, like anything else the entry
-    // bound or was handed.
-    if (value.kind === "IrStateRef") {
-      return capExpr(cellKey(value.target), scope, params);
-    }
     if (value.kind === "IrValue") {
       return value.value;
     }
@@ -797,8 +687,8 @@ export function buildBundle(
     return entries;
   };
 
-  // Nothing encloses the root, so it can hold no cell at all.
-  const root = renderExpr(ir.root, noInstance());
+  // Nothing encloses the root, so nothing it holds can capture.
+  const root = renderExpr(ir.root, noEntry());
   const functions: Record<FunctionLabel, BundleFunction> = {};
   // In table order, which is the order the walk first reached each script.
   for (const script of ir.scripts) {
