@@ -33,9 +33,16 @@ test("a class instance does not", async () => {
   );
 });
 
-test("nor does a host function", async () => {
-  await assert.rejects(
-    () => lowerSpliceable((() => null) as never, "ClientUnknown"),
-    /client code is written in/,
+test("a host function expands rather than crossing", async () => {
+  // It has no data form, so it is run against a hole per parameter and what it
+  // answered is what crosses. `length` is the arity, so this one takes none.
+  const expansion = await lowerSpliceable(
+    ((n: never) => n) as never,
+    "ClientUnknown",
   );
+  assert.deepEqual(expansion, {
+    kind: "AstExpansion",
+    params: ["$0"],
+    body: { kind: "AstHole", name: "$0" },
+  });
 });

@@ -2,12 +2,14 @@ import {
   isClientScript,
   isClientState,
   isJsxElement,
+  type Client,
   type Spliceable,
 } from "@backtickjs/cs-runtime";
 import type { Ast } from "./Ast.js";
 import { holeName } from "./holes.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { lowerClientState } from "./lowerClientState.js";
+import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 
 export async function lowerSpliceable(
@@ -67,13 +69,12 @@ export async function lowerSpliceable(
       ),
     };
   }
-  // A host function has no data form. Client code is written in `cs`...`` and
-  // reaches a script as a script, so a function here is the host's own.
+  // A host function has no data form — client code is written in `cs`...` and
+  // reaches a script as a script — so it is expanded rather than carried: run
+  // against a hole per parameter, and what it answered is what crosses. A
+  // component is one of these, and a tag naming it is a call.
   if (typeof value === "function") {
-    throw new Error(
-      "Can't splice a function: client code is written in `cs`...` and " +
-        "crosses as a script.",
-    );
+    return expandFunction(value as (...args: Client<never>[]) => unknown);
   }
   // Only plain objects cross structurally. A class instance would land here
   // and half-work — own fields reflect, getters and methods silently vanish —
