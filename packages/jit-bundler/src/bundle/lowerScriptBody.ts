@@ -301,17 +301,18 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
         // prop a prop: an argument is evaluated once where it is passed, and a
         // prop has to be re-read whenever what it names changes.
         if (node.type.kind === SyntaxKind.Splice) {
-          const passed: { [prop: string]: BundleExpressionNode } = {
-            ...props,
-          };
+          const passed: { [prop: string]: BundleExpressionNode } = {};
+          for (const [name, value] of Object.entries(props)) {
+            passed[name] = [NodeKind.ArrowFunction, [], value];
+          }
           if (children !== null) {
-            passed["children"] = children;
+            passed["children"] = [NodeKind.ArrowFunction, [], children];
           }
           return [
             NodeKind.CallExpression,
             renderSplice(node.type.key),
             false,
-            [[NodeKind.ArrowFunction, [], passed]],
+            [passed],
           ];
         }
         return [NodeKind.Element, node.type.text, props, children];

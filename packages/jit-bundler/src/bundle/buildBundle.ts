@@ -149,8 +149,8 @@ export function buildBundle(
   // thunk written at the tag, because a prop has to be re-read whenever what it
   // names changes, where an argument is evaluated once where it is passed.
   const holeRead = (name: string): BundleExpressionNode => {
-    const [param, ...path] = name.split(".");
-    if (path.length === 0) {
+    const [param, prop, ...path] = name.split(".");
+    if (prop === undefined) {
       return [NodeKind.Identifier, param];
     }
     // The parameter is a thunk the tag wrote, so it is called where the drawing
@@ -159,7 +159,12 @@ export function buildBundle(
     // is an ordinary value, so the whole path off it is ordinary reads.
     let read: BundleExpressionNode = [
       NodeKind.CallExpression,
-      [NodeKind.Identifier, param],
+      [
+        NodeKind.PropertyAccessExpression,
+        [NodeKind.Identifier, param],
+        false,
+        prop,
+      ],
       false,
       [],
     ];
