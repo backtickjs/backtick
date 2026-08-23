@@ -142,6 +142,40 @@ export function buildBundle(
   // arguments; an inline element whatever its props need.
   // Memoized per argument — the IR is immutable and this fans out from `need`
   // and `treeParams`.
+  // How a hole is reached. Its name is the path the function read: `$0` is the
+  // parameter itself, and `$0.title` is a field of it.
+  //
+  // A field is *called*, where the parameter is not. What binds a field is a
+  // thunk written at the tag, because a prop has to be re-read whenever what it
+  // names changes, where an argument is evaluated once where it is passed.
+  const holeRead = (name: string): BundleExpressionNode => {
+    const [param, ...path] = name.split(".");
+    if (path.length === 0) {
+      return [NodeKind.Identifier, param];
+    }
+    // The parameter is a thunk the tag wrote, so it is called where the drawing
+    // reads it: an argument is evaluated once where it is passed, and a prop has
+    // to be re-read whenever what it names changes. What the call answers with
+    // is an ordinary value, so the whole path off it is ordinary reads.
+    let read: BundleExpressionNode = [
+      NodeKind.CallExpression,
+      [NodeKind.Identifier, param],
+      false,
+      [],
+    ];
+    for (const step of path) {
+      read = [NodeKind.PropertyAccessExpression, read, false, step];
+    }
+    return read;
+  };
+
+  // The parameter a hole is reached through, which is what threads out of an
+  // entry hoisted from the expansion — one name, whatever it read off it.
+  const holeParam = (name: string): string => {
+    const dot = name.indexOf(".");
+    return dot === -1 ? name : name.slice(0, dot);
+  };
+
   const freeCapsCache = new Map<IrArgument, string[]>();
   const freeCaps = (value: IrArgument): string[] => {
     const cached = freeCapsCache.get(value);
@@ -196,7 +230,7 @@ export function buildBundle(
       // expansion's parameter binds — so a script entry hoisted out of the
       // expansion receives it as a parameter instead of escaping its scope.
       case "IrHole":
-        return [value.name];
+        return [holeParam(value.name)];
       case "IrValue":
         return [];
     }
@@ -430,7 +464,7 @@ export function buildBundle(
       // reached the same way — through the environment when the entry took it
       // as one.
       case "IrHole":
-        return readKey(value.name);
+        return holeRead(value.name);
       case "IrArray":
         // Data, and a node is an array too, so it says which it is.
         return [NodeKind.DataArray, value.elements.map(renderValue)];
@@ -723,11 +757,13 @@ export function buildBundle(
     if (value.kind === "IrValue") {
       return value.value;
     }
-    // In JSON position a parameterized `#thunk` is the arrow form: the
-    // expansion's holes become its parameters, supplied by the
-    // construction's call. The tree grammar has no entry-as-value node, so
-    // here the expansion is written inline instead of referencing its
-    // `functions` entry.
+    // In JSON position an expansion is written out as the arrow it is: its
+    // holes become the parameters, and the call the tag wrote binds them.
+    //
+    // Referencing its `functions` entry instead is possible — `GetFunction` is
+    // an entry as a value, and `forwarding` already emits one — and would need
+    // the expansion to close over nothing. Measured, it traded an inline arrow
+    // for a table entry and came out even, so it is written here.
     if (value.kind === "IrExpansion") {
       // The expansion's params extend the enclosing ones, like a nested
       // frame, so a hole threading into the body resolves by name.
@@ -738,7 +774,7 @@ export function buildBundle(
       ];
     }
     if (value.kind === "IrHole") {
-      return [NodeKind.Identifier, value.name];
+      return holeRead(value.name);
     }
     if (value.kind === "IrArray") {
       // Data, and a node is an array too, so it says which it is.

@@ -1,1 +1,0 @@
-A client script element's tag must be a plain tag for now: a component tag is a value the bundler has yet to resolve.

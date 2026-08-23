@@ -291,11 +291,28 @@ export function lowerScriptBody(script: IrScriptEntry): BundleBody {
             : node.children.length === 1
               ? e(node.children[0])
               : [NodeKind.DataArray, node.children.map((child) => e(child))];
+        // An element of the target is its own name, which is the id an element
+        // node carries. The other is a tag the script wrote, and what it
+        // splices is the expansion of what it named — an arrow over the one
+        // parameter a component takes — so the tag lowers to a call of it.
+        //
+        // The props go as one object under the names the tag wrote, behind one
+        // thunk the drawing calls where it reads them. That is what keeps a
+        // prop a prop: an argument is evaluated once where it is passed, and a
+        // prop has to be re-read whenever what it names changes.
         if (node.type.kind === SyntaxKind.Splice) {
-          throw new Error(
-            "A client script element's tag must be a plain tag for now: a " +
-              "component tag is a value the bundler has yet to resolve.",
-          );
+          const passed: { [prop: string]: BundleExpressionNode } = {
+            ...props,
+          };
+          if (children !== null) {
+            passed["children"] = children;
+          }
+          return [
+            NodeKind.CallExpression,
+            renderSplice(node.type.key),
+            false,
+            [[NodeKind.ArrowFunction, [], passed]],
+          ];
         }
         return [NodeKind.Element, node.type.text, props, children];
       }

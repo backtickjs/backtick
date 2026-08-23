@@ -1,0 +1,22 @@
+cs.lift((() => {\n      → cs`{\n  
+return cs.const(        → return 
+<                       → <
+div                     → div
+>{cs.lift(              → >\n    
+<                       → <
+Card                    → Card
+                        →  
+title                   → title
+={cs.lift(              → =
+"totals"                → "totals"
+)}                      → 
+/>                      →  />
+)}{cs.lift(             → \n    
+<                       → <
+Badge                   → Badge
+ />                     →  />
+)}</                    → \n  </
+div                     → div
+>                       → >
+);                      → ;
+\n})())                 → \n}`

@@ -1,31 +1,40 @@
 import type { Client } from "@backtickjs/cs-runtime";
 
-// The hole sentinels a spliced class's constructor is applied to in place
-// of its client arguments, which have no value until the client runs. Where
-// a sentinel surfaces in the expansion's result, serialization emits a
-// reference to the expansion's parameter of the same name (see `AstHole`),
-// recognized here by identity.
+// The hole sentinels a spliced function is applied to in place of its
+// arguments, which have no value until the client runs. Where a sentinel
+// surfaces in what the function answered, serialization emits a reference to
+// the expansion's parameter of that name (see `AstHole`), recognized here by
+// identity.
 const names = new WeakMap<object, string>();
 
 export function createHole(name: string): Client<never> {
-  // Any read or write throws: a client value is opaque on the host, so a
-  // constructor that computes or branches with one would otherwise bake the
-  // result of probing a placeholder into the bundle.
+  // Reading a member gives a hole of its own, named for the path. The value is
+  // still opaque — what comes back is another sentinel, not anything to compute
+  // with — so a function that takes one argument and reads fields off it
+  // reaches them without this knowing what a field is for.
+  //
+  // Not interned: a hole is looked up by identity, and every one made here says
+  // what it is, so reading a path twice gives two that lower the same.
   const hole = new Proxy(
     {},
     {
       get(_target, property) {
-        throw new Error(
-          `Can't read \`${String(property)}\` of a client value during ` +
-            "construction: the value only exists on the client — store " +
-            "it, don't compute with it.",
-        );
+        return createHole(`${name}.${String(property)}`);
       },
       set(_target, property) {
         throw new Error(
-          `Can't assign \`${String(property)}\` of a client value during ` +
-            "construction: the value only exists on the client — store " +
-            "it, don't compute with it.",
+          `Can't assign \`${String(property)}\` of \`${name}\`: it stands ` +
+            "for a value only the client has — store it, don't compute with " +
+            "it.",
+        );
+      },
+      // Asking which members there are is answered where the call is written,
+      // and there is nothing here to enumerate. Refused rather than answered
+      // empty, which is what the target would say and would draw nothing.
+      ownKeys() {
+        throw new Error(
+          `Can't spread \`${name}\`: it stands for a value only the client ` +
+            "has, so its members are reached by name rather than listed.",
         );
       },
     },
