@@ -24,6 +24,11 @@ class IrBuilder {
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
   private readonly expansionByNode = new Map<AstExpansion, IrExpansion>();
+  // An element reached from several places (the host bound one and used it
+  // twice) is one node, so it lowers once and the result is shared — the same
+  // reason `expansionByNode` exists. Without it a diamond re-lowers its shared
+  // arm on every path, and nested sharing fans out exponentially.
+  private readonly elementByNode = new Map<AstElement, IrElement>();
   // Lowers a client script to a reference that targets its table entry,
   // interning the entry and lowering its splices into positional arguments. A
   // script shared across several splice paths is one node (see `lowerSpliceable`), so
@@ -72,15 +77,21 @@ class IrBuilder {
   // Lowers an element's props into an IR element, keeping structure as
   // data: only a script or a shared subtree interrupts it.
   private lowerElement(element: AstElement): IrElement {
+    const shared = this.elementByNode.get(element);
+    if (shared) {
+      return shared;
+    }
     const props: Record<string, IrArgument> = {};
     for (const [key, entry] of Object.entries(element.props)) {
       props[key] = this.lower(entry);
     }
-    return {
+    const lowered: IrElement = {
       kind: "IrElement",
       id: element.id,
       props,
     };
+    this.elementByNode.set(element, lowered);
+    return lowered;
   }
 
   // Lowers a value into an IR argument: nested scripts become references,
