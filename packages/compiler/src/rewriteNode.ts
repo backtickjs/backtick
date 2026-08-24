@@ -8,6 +8,7 @@ import { isComponentTag } from "./isComponentTag.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
+import { isFragmentTag } from "./isFragmentTag.js";
 
 // Every name the language provides, written here rather than read off a
 // schema: the compiler's vocabulary is its own and closed. `Math` and `Array`
@@ -1002,7 +1003,7 @@ function rewriteNodeImpl(
       : ts.isJsxElement(node)
         ? node.openingElement
         : (node as ts.JsxSelfClosingElement);
-    const fragment = opening === null;
+
     let tagName = "";
     let properties: readonly ts.JsxAttributeLike[] = [];
     if (opening !== null) {
@@ -1016,6 +1017,9 @@ function rewriteNodeImpl(
       tagName = opening.tagName.text;
       properties = opening.attributes.properties;
     }
+
+    // `<>` and `<Fragment>` lower the same way
+    const isFragment = opening === null || isFragmentTag(tagName);
 
     // In source order, because a host may care that `type` precedes `value`.
     const attributes: { virtual: ts.JsxAttribute; runtime: ts.Expression }[] =
@@ -1137,38 +1141,39 @@ function rewriteNodeImpl(
       state.mappings.set(written, source);
       return written;
     };
-    const virtual = fragment
-      ? ts.factory.createJsxFragment(
-          ts.factory.createJsxOpeningFragment(),
-          virtualChildren,
-          ts.factory.createJsxJsxClosingFragment(),
-        )
-      : virtualChildren.length === 0
-        ? ts.factory.createJsxSelfClosingElement(
-            tag(opening.tagName),
-            undefined,
-            props,
+    const virtual =
+      opening === null
+        ? ts.factory.createJsxFragment(
+            ts.factory.createJsxOpeningFragment(),
+            virtualChildren,
+            ts.factory.createJsxJsxClosingFragment(),
           )
-        : ts.factory.createJsxElement(
-            ts.factory.createJsxOpeningElement(
+        : virtualChildren.length === 0
+          ? ts.factory.createJsxSelfClosingElement(
               tag(opening.tagName),
               undefined,
               props,
-            ),
-            virtualChildren,
-            ts.factory.createJsxClosingElement(
-              tag(
-                ts.isJsxElement(node)
-                  ? node.closingElement.tagName
-                  : opening.tagName,
+            )
+          : ts.factory.createJsxElement(
+              ts.factory.createJsxOpeningElement(
+                tag(opening.tagName),
+                undefined,
+                props,
               ),
-            ),
-          );
+              virtualChildren,
+              ts.factory.createJsxClosingElement(
+                tag(
+                  ts.isJsxElement(node)
+                    ? node.closingElement.tagName
+                    : opening.tagName,
+                ),
+              ),
+            );
     state.mappings.set(virtual, node);
 
     // A fragment is its children: they go where it stood, and a list of them
     // already says that, so nothing of it reaches the client.
-    if (fragment) {
+    if (isFragment) {
       return {
         virtual,
         runtime:

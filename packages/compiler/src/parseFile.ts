@@ -2,6 +2,7 @@ import type { SourceLocation } from "@backtickjs/cs-runtime";
 import type ts from "typescript";
 import { isComponentTag } from "./isComponentTag.js";
 import type { SourceRange } from "./SourceRange.js";
+import { isFragmentTag } from "./isFragmentTag.js";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
@@ -204,7 +205,13 @@ function getDirectSplices(
     // spells it, and deduplicated by key like the rest.
     if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
       const tag = node.tagName;
-      if (ts.isIdentifier(tag) && isComponentTag(tag.text)) {
+      // Not the fragment: it lowers to what it holds, the way `<>` does, so
+      // nothing of it reaches the host and there is nothing to splice.
+      if (
+        ts.isIdentifier(tag) &&
+        isComponentTag(tag.text) &&
+        !isFragmentTag(tag.text)
+      ) {
         const key = `$${tag.text}`;
         if (splices[key] == null) {
           splices[key] = {

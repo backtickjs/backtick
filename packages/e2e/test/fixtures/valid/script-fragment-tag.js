@@ -13,7 +13,7 @@ export default cs.create(
     filePath: "script-fragment-tag.tsx",
     fileHash: "4u66vxextvcd",
     kind: "value",
-    splices: { $Fragment: Fragment },
+    splices: {},
     captures: [],
     spliceParams: {},
   },
@@ -35,15 +35,9 @@ export default cs.create(
           attributes: [],
           children: [
             {
-              kind: 285,
+              kind: 210,
               loc: [14, 9, 17, 20],
-              type: {
-                kind: 1000,
-                loc: [14, 10, 14, 18],
-                key: "$Fragment",
-              },
-              attributes: [],
-              children: [
+              elements: [
                 {
                   kind: 285,
                   loc: [15, 11, 15, 25],
