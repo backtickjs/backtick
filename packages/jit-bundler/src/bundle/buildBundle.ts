@@ -269,7 +269,7 @@ export function buildBundle(
       label = `${scripts.size + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
-      const expansionBody = renderValue(expansion.body);
+      const expansionBody = render(expansion.body, "value");
       expansionBodies.set(label, [
         NodeKind.ArrowFunction,
         parameterNodes(params),
@@ -341,24 +341,52 @@ export function buildBundle(
   // for the unkeyed case and an apply for the keyed one, but the two carried
   // the same label and the same arguments and differed only in the node they were
   // written as.
-  // Renders an IR argument in value position — as the node for the value it
-  // evaluates to. A script reference becomes a call of its `functions` entry, a
-  // tree reference an application of its entry passing its captures by name;
-  // every other value its literal form.
-  const renderValue = (value: Ast): BundleExpressionNode => {
+  // Where a value is being written, which is the only thing the two forms
+  // disagree about. A script and an expansion each have a form per position;
+  // everything else is written the same way in both, so it is written once.
+  //
+  //   - `value` — a node in a script's own expression, where a reference is a
+  //     call and an expansion is the `functions` entry it compiles to.
+  //   - `expression` — composition as data: inside an element and at the bundle
+  //     root, where a reference is an application naming which entry and what
+  //     to hand it, and an expansion is written out as the arrow it is.
+  type Position = "value" | "expression";
+
+  const render = (
+    value: Ast,
+    position: Position,
+    params: ReadonlySet<string> = new Set(),
+  ): BundleExpressionNode => {
+    const child = (
+      node: Ast,
+      inner: ReadonlySet<string> = params,
+    ): BundleExpressionNode => render(node, position, inner);
+
     switch (value.kind) {
       case "AstScript": {
         const target = entryFor(value);
         materialize(target);
-        const args = callArgs(value);
+        if (position === "expression") {
+          return [
+            NodeKind.ApplyFunction,
+            fnLabel(target),
+            exprCallArgs(value, params),
+          ];
+        }
         const entry: BundleGetFunction = [
           NodeKind.GetFunction,
           fnLabel(target),
         ];
-        return [NodeKind.CallExpression, entry, false, args];
+        return [NodeKind.CallExpression, entry, false, callArgs(value)];
       }
+      // An element's props are composition, so they are written as data
+      // wherever the element itself stands. Nothing encloses one reached from
+      // a script's own expression, so nothing there can capture.
       case "AstElement":
-        return renderElement(value, new Set());
+        return renderElement(
+          value,
+          position === "expression" ? params : new Set(),
+        );
       case "AstBuiltin":
         return [NodeKind.Builtin, value.name];
       case "AstNumber":
@@ -367,24 +395,43 @@ export function buildBundle(
         return value.value;
       case "AstNull":
         return null;
-      // An expansion in value position is its `functions` entry: passed
-      // bare it is the function itself, which the construction's call site
-      // applies to the client arguments.
       case "AstExpansion":
-        return expansionEntry(value);
-      // A hole threads like a capture (see `freeCaps`), so in a body it is
-      // reached the same way — through the environment when the entry took it
-      // as one.
+        // In value position an expansion is its `functions` entry: passed bare
+        // it is the function itself, which the construction's call site applies
+        // to the client arguments.
+        //
+        // Written out as an arrow in expression position instead, its holes the
+        // parameters and the call the tag wrote binding them. Referencing the
+        // entry there is possible — `GetFunction` is an entry as a value, and
+        // `forwarding` already emits one — and would need the expansion to close
+        // over nothing. Measured, it traded an inline arrow for a table entry
+        // and came out even, so it is written here.
+        return position === "value"
+          ? expansionEntry(value)
+          : [
+              NodeKind.ArrowFunction,
+              parameterNodes(value.params),
+              // The expansion's params extend the enclosing ones, like a nested
+              // frame, so a hole threading into the body resolves by name.
+              child(value.body, new Set([...params, ...value.params])),
+            ];
+      // A hole threads like a capture (see `freeCaps`), so it is reached the
+      // same way — through the environment when the entry took it as one.
       case "AstHole":
         return holeRead(value.name);
       case "AstArray":
         // Data, and a node is an array too, so it says which it is.
-        return [NodeKind.DataArray, value.elements.map(renderValue)];
+        return [
+          NodeKind.DataArray,
+          value.elements.map((entry) => child(entry)),
+        ];
       case "AstObject": {
-        // A plain data object passes through, exactly as in `renderExpr`.
+        // A plain data object passes through, every key of it: a node is an
+        // array, so an object is never mistaken for one and the format reserves
+        // no key.
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
-          entries[key] = renderValue(entry);
+          entries[key] = child(entry);
         }
         return entries;
       }
@@ -408,7 +455,7 @@ export function buildBundle(
       return [
         NodeKind.ArrowFunction,
         parameterNodes(params),
-        renderValue(value),
+        render(value, "value"),
       ];
     }
     if (value.kind === "AstScript") {
@@ -424,7 +471,7 @@ export function buildBundle(
       ];
       return args.length === 0 ? entry : [NodeKind.ArrowFunction, [], call];
     }
-    return [NodeKind.ArrowFunction, [], renderValue(value)];
+    return [NodeKind.ArrowFunction, [], render(value, "value")];
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
@@ -473,7 +520,11 @@ export function buildBundle(
         return;
       }
       if (passed.length === 0) {
-        parts.push([NodeKind.ArrowFunction, [], renderExpr(arg, params)]);
+        parts.push([
+          NodeKind.ArrowFunction,
+          [],
+          render(arg, "expression", params),
+        ]);
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
@@ -481,7 +532,7 @@ export function buildBundle(
       parts.push([
         NodeKind.ArrowFunction,
         parameterNodes(passed.map(displayName)),
-        renderExpr(arg, inner),
+        render(arg, "expression", inner),
       ]);
     });
     for (const key of target.captures) {
@@ -499,7 +550,7 @@ export function buildBundle(
     const props: { [key: string]: BundleExpressionNode } = {};
     let children: BundleExpressionNode = null;
     for (const [key, entry] of Object.entries(element.props)) {
-      const rendered = renderExpr(entry, params);
+      const rendered = render(entry, "expression", params);
       if (key === "children") {
         children = rendered;
         continue;
@@ -509,72 +560,8 @@ export function buildBundle(
     return [NodeKind.Element, element.id, props, children];
   };
 
-  // Renders an IR argument in expression position — the form used inside tree
-  // entries and for the bundle root, where composition is data rather than
-  // source. The mirror of `renderValue`.
-  const renderExpr = (
-    value: Ast,
-    params: ReadonlySet<string> = new Set(),
-  ): BundleExpressionNode => {
-    if (value.kind === "AstScript") {
-      const target = entryFor(value);
-      materialize(target);
-      const args = exprCallArgs(value, params);
-      return [NodeKind.ApplyFunction, fnLabel(target), args];
-    }
-    if (value.kind === "AstElement") {
-      return renderElement(value, params);
-    }
-    if (value.kind === "AstBuiltin") {
-      return [NodeKind.Builtin, value.name];
-    }
-    if (
-      value.kind === "AstNumber" ||
-      value.kind === "AstString" ||
-      value.kind === "AstBoolean"
-    ) {
-      return value.value;
-    }
-    if (value.kind === "AstNull") {
-      return null;
-    }
-    // In JSON position an expansion is written out as the arrow it is: its
-    // holes become the parameters, and the call the tag wrote binds them.
-    //
-    // Referencing its `functions` entry instead is possible — `GetFunction` is
-    // an entry as a value, and `forwarding` already emits one — and would need
-    // the expansion to close over nothing. Measured, it traded an inline arrow
-    // for a table entry and came out even, so it is written here.
-    if (value.kind === "AstExpansion") {
-      // The expansion's params extend the enclosing ones, like a nested
-      // frame, so a hole threading into the body resolves by name.
-      return [
-        NodeKind.ArrowFunction,
-        parameterNodes(value.params),
-        renderExpr(value.body, new Set([...params, ...value.params])),
-      ];
-    }
-    if (value.kind === "AstHole") {
-      return holeRead(value.name);
-    }
-    if (value.kind === "AstArray") {
-      // Data, and a node is an array too, so it says which it is.
-      return [
-        NodeKind.DataArray,
-        value.elements.map((entry) => renderExpr(entry, params)),
-      ];
-    }
-    // A plain data object passes through, every key of it: a node is an array,
-    // so an object is never mistaken for one and the format reserves no key.
-    const entries: { [key: string]: BundleExpressionNode } = {};
-    for (const [key, entry] of Object.entries(value.entries)) {
-      entries[key] = renderExpr(entry, params);
-    }
-    return entries;
-  };
-
   // Nothing encloses the root, so nothing it holds can capture.
-  const root = renderExpr(ast);
+  const root = render(ast, "expression");
   const functions: Record<FunctionLabel, BundleFunction> = {};
   // In table order, which is the order rendering first reached each script.
   for (const script of scripts.keys()) {
