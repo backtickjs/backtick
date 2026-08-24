@@ -1,4 +1,4 @@
-import type { Ast, AstElement, AstExpansion, AstScript } from "../ast/Ast.js";
+import type { Ast, AstElement, AstScript } from "../ast/Ast.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
@@ -7,9 +7,7 @@ import type {
   Bundle,
   BundleArrowFunctionNode,
   BundleFunction,
-  BundleCallExpressionNode,
   BundleElement,
-  BundleGetFunction,
   BundleExpressionNode,
   BundleIdentifierNode,
   FunctionLabel,
@@ -76,15 +74,6 @@ export function buildBundle(
     scripts.set(entry, scripts.size);
     return entry;
   };
-  // A binding key in a call site's own expression. Never a capture read: an
-  // entry resolves its captures against its own parameters (see
-  // `lowerScriptBody`) — out here a key is a name in the expression being
-  // built.
-  const readKey = (key: string): BundleExpressionNode => [
-    NodeKind.Identifier,
-    displayName(key),
-  ];
-
   // A binding key printed under its source name, with a numeric suffix when two
   // distinct bindings would otherwise print the same.
   //
@@ -250,35 +239,6 @@ export function buildBundle(
       ? locKey(target.fileHash, target.loc)
       : String(scripts.get(target));
 
-  // A class's expansion compiles as its own `functions` entry. The entry is an
-  // arrow over the expansion's holes; a construction's call site applies it to
-  // the client arguments. Interned by node identity: `lowerSpliceable` shares
-  // one expansion per class, so it is one entry however many instances
-  // construct the class.
-  //
-  // Numbered rather than located whichever way scripts are labeled: an
-  // expansion carries no source position (see `AstExpansion`), so its label can
-  // only name where it landed, and it is not recognizable across responses the
-  // way a located script entry is. Numbered past the script table so it can't
-  // collide with an index label.
-  const expansionBodies = new Map<FunctionLabel, BundleArrowFunctionNode>();
-  const expansionLabels = new Map<AstExpansion, FunctionLabel>();
-  const expansionEntry = (expansion: AstExpansion): BundleGetFunction => {
-    let label = expansionLabels.get(expansion);
-    if (label === undefined) {
-      label = `${scripts.size + expansionLabels.size}`;
-      expansionLabels.set(expansion, label);
-      const params = [...expansion.params];
-      const expansionBody = render(expansion.body, "value");
-      expansionBodies.set(label, [
-        NodeKind.ArrowFunction,
-        parameterNodes(params),
-        expansionBody,
-      ]);
-    }
-    return [NodeKind.GetFunction, label];
-  };
-
   // Materializes an entry's arrow node into `bodies` the first time it is
   // reached. An entry takes a `$i` parameter per splice — its holes render as
   // calls `$i()` — ahead of its environment. Nothing from a call site is
@@ -296,20 +256,6 @@ export function buildBundle(
       parameterNodes(params),
       lowerScriptBody(script),
     ]);
-  };
-
-  // The arguments passed when calling an entry: one thunk per splice, bound to
-  // this reference's arguments, then the environment.
-  const callArgs = (ref: AstScript): BundleExpressionNode[] => {
-    const target = entryFor(ref);
-    const parts: BundleExpressionNode[] = [];
-    Object.values(ref.splices).forEach((arg, index) => {
-      parts.push(renderLazily(arg, target, index));
-    });
-    for (const key of target.captures) {
-      parts.push(readKey(key));
-    }
-    return parts;
   };
 
   // A fragment that is one entry whose parameters are exactly what this hole
@@ -341,52 +287,30 @@ export function buildBundle(
   // for the unkeyed case and an apply for the keyed one, but the two carried
   // the same label and the same arguments and differed only in the node they were
   // written as.
-  // Where a value is being written, which is the only thing the two forms
-  // disagree about. A script and an expansion each have a form per position;
-  // everything else is written the same way in both, so it is written once.
-  //
-  //   - `value` — a node in a script's own expression, where a reference is a
-  //     call and an expansion is the `functions` entry it compiles to.
-  //   - `expression` — composition as data: inside an element and at the bundle
-  //     root, where a reference is an application naming which entry and what
-  //     to hand it, and an expansion is written out as the arrow it is.
-  type Position = "value" | "expression";
-
+  // Writes a value as the node it becomes: composition as data, which is what
+  // a bundle is. A script reference is an application naming which entry and
+  // what to hand it; everything else is its literal form.
   const render = (
     value: Ast,
-    position: Position,
     params: ReadonlySet<string> = new Set(),
   ): BundleExpressionNode => {
     const child = (
       node: Ast,
       inner: ReadonlySet<string> = params,
-    ): BundleExpressionNode => render(node, position, inner);
+    ): BundleExpressionNode => render(node, inner);
 
     switch (value.kind) {
       case "AstScript": {
         const target = entryFor(value);
         materialize(target);
-        if (position === "expression") {
-          return [
-            NodeKind.ApplyFunction,
-            fnLabel(target),
-            exprCallArgs(value, params),
-          ];
-        }
-        const entry: BundleGetFunction = [
-          NodeKind.GetFunction,
+        return [
+          NodeKind.ApplyFunction,
           fnLabel(target),
+          exprCallArgs(value, params),
         ];
-        return [NodeKind.CallExpression, entry, false, callArgs(value)];
       }
-      // An element's props are composition, so they are written as data
-      // wherever the element itself stands. Nothing encloses one reached from
-      // a script's own expression, so nothing there can capture.
       case "AstElement":
-        return renderElement(
-          value,
-          position === "expression" ? params : new Set(),
-        );
+        return renderElement(value, params);
       case "AstBuiltin":
         return [NodeKind.Builtin, value.name];
       case "AstNumber":
@@ -395,26 +319,20 @@ export function buildBundle(
         return value.value;
       case "AstNull":
         return null;
+      // An expansion is written out as the arrow it is, its holes the
+      // parameters and the call the tag wrote binding them. Compiling it to a
+      // `functions` entry instead is possible — `GetFunction` is an entry as a
+      // value, and `forwarding` already emits one — and would need the
+      // expansion to close over nothing. Measured, it traded an inline arrow
+      // for a table entry and came out even, so it is written here.
       case "AstExpansion":
-        // In value position an expansion is its `functions` entry: passed bare
-        // it is the function itself, which the construction's call site applies
-        // to the client arguments.
-        //
-        // Written out as an arrow in expression position instead, its holes the
-        // parameters and the call the tag wrote binding them. Referencing the
-        // entry there is possible — `GetFunction` is an entry as a value, and
-        // `forwarding` already emits one — and would need the expansion to close
-        // over nothing. Measured, it traded an inline arrow for a table entry
-        // and came out even, so it is written here.
-        return position === "value"
-          ? expansionEntry(value)
-          : [
-              NodeKind.ArrowFunction,
-              parameterNodes(value.params),
-              // The expansion's params extend the enclosing ones, like a nested
-              // frame, so a hole threading into the body resolves by name.
-              child(value.body, new Set([...params, ...value.params])),
-            ];
+        return [
+          NodeKind.ArrowFunction,
+          parameterNodes(value.params),
+          // The expansion's params extend the enclosing ones, like a nested
+          // frame, so a hole threading into the body resolves by name.
+          child(value.body, new Set([...params, ...value.params])),
+        ];
       // A hole threads like a capture (see `freeCaps`), so it is reached the
       // same way — through the environment when the entry took it as one.
       case "AstHole":
@@ -436,42 +354,6 @@ export function buildBundle(
         return entries;
       }
     }
-  };
-
-  // Renders a splice argument in thunk position — as a function yielding the
-  // value — so the entry evaluates it lazily at the hole, which is what keeps a
-  // splice as lazy as it reads. When the splice captures bindings the entry
-  // declares, the arrow takes them as parameters and the hole call supplies them
-  // (see `passKeys`); the body's identifiers then resolve through its frame.
-  // Otherwise a referenced entry that takes no arguments already is one;
-  // anything else is wrapped.
-  const renderLazily = (
-    value: Ast,
-    target: ScriptEntry,
-    hole: number,
-  ): BundleExpressionNode => {
-    const params = passKeys(target, hole).map(displayName);
-    if (params.length > 0) {
-      return [
-        NodeKind.ArrowFunction,
-        parameterNodes(params),
-        render(value, "value"),
-      ];
-    }
-    if (value.kind === "AstScript") {
-      const inner = entryFor(value);
-      materialize(inner);
-      const args = callArgs(value);
-      const entry: BundleGetFunction = [NodeKind.GetFunction, fnLabel(inner)];
-      const call: BundleCallExpressionNode = [
-        NodeKind.CallExpression,
-        entry,
-        false,
-        args,
-      ];
-      return args.length === 0 ? entry : [NodeKind.ArrowFunction, [], call];
-    }
-    return [NodeKind.ArrowFunction, [], render(value, "value")];
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
@@ -520,11 +402,7 @@ export function buildBundle(
         return;
       }
       if (passed.length === 0) {
-        parts.push([
-          NodeKind.ArrowFunction,
-          [],
-          render(arg, "expression", params),
-        ]);
+        parts.push([NodeKind.ArrowFunction, [], render(arg, params)]);
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
@@ -532,7 +410,7 @@ export function buildBundle(
       parts.push([
         NodeKind.ArrowFunction,
         parameterNodes(passed.map(displayName)),
-        render(arg, "expression", inner),
+        render(arg, inner),
       ]);
     });
     for (const key of target.captures) {
@@ -550,7 +428,7 @@ export function buildBundle(
     const props: { [key: string]: BundleExpressionNode } = {};
     let children: BundleExpressionNode = null;
     for (const [key, entry] of Object.entries(element.props)) {
-      const rendered = render(entry, "expression", params);
+      const rendered = render(entry, params);
       if (key === "children") {
         children = rendered;
         continue;
@@ -561,7 +439,7 @@ export function buildBundle(
   };
 
   // Nothing encloses the root, so nothing it holds can capture.
-  const root = render(ast, "expression");
+  const root = render(ast);
   const functions: Record<FunctionLabel, BundleFunction> = {};
   // In table order, which is the order rendering first reached each script.
   for (const script of scripts.keys()) {
@@ -569,9 +447,6 @@ export function buildBundle(
     if (body !== undefined) {
       functions[fnLabel(script)] = [body];
     }
-  }
-  for (const [label, body] of expansionBodies) {
-    functions[label] = [body];
   }
   return { functions, root };
 }
