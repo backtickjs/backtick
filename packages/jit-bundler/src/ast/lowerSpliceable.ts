@@ -1,4 +1,5 @@
 import {
+  isBuiltin,
   isClientScript,
   isJsxElement,
   type Client,
@@ -34,6 +35,9 @@ export async function lowerSpliceable(
   }
   if (isJsxElement(value)) {
     return expandJsxElement(value);
+  }
+  if (isBuiltin(value)) {
+    return { kind: "AstBuiltin", name: value.name };
   }
   if (value === null) {
     return { kind: "AstNull" };

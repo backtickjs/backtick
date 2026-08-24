@@ -1,5 +1,13 @@
 export type { Client } from "@backtickjs/language-schema";
 export type { Builtins } from "@backtickjs/language-schema";
+// A name the client answers for, as a value: what makes one, what recognises
+// one, and the one the language provides.
+export {
+  type Builtin,
+  createBuiltin,
+  isBuiltin,
+  state,
+} from "@backtickjs/language-schema";
 export type {
   Array,
   ArrayConstructor,

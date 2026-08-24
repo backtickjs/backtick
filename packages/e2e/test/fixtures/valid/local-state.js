@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // A cell a script declares, read and written by what it draws. The script owns
 // the storage, so the display and the handler are two readers of one binding
 // and share one cell: `read()` is an input — a value that re-evaluates when the
@@ -10,11 +10,11 @@ async function Stepper() {
     {
       version: "0.0.0",
       filePath: "local-state.tsx",
-      fileHash: "1oqffa1c13iji",
+      fileHash: "39pqlt8105c5f",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -22,33 +22,33 @@ async function Stepper() {
       statements: [
         {
           kind: 244,
-          loc: [9, 5, 9, 28],
+          loc: [9, 5, 9, 29],
           declarationList: {
             kind: 262,
-            loc: [9, 5, 9, 27],
+            loc: [9, 5, 9, 28],
             declarations: [
               {
                 kind: 261,
-                loc: [9, 11, 9, 27],
+                loc: [9, 11, 9, 28],
                 name: {
                   kind: 80,
                   loc: [9, 11, 9, 15],
                   text: "size",
-                  bindingKey: "size$1oqffa1c13iji$0",
+                  bindingKey: "size$39pqlt8105c5f$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [9, 18, 9, 27],
+                  loc: [9, 18, 9, 28],
                   expression: {
-                    kind: 1001,
-                    loc: [9, 18, 9, 23],
-                    name: "state",
+                    kind: 1000,
+                    loc: [9, 18, 9, 24],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [9, 24, 9, 26],
+                      loc: [9, 25, 9, 27],
                       value: 16,
                     },
                   ],
@@ -94,7 +94,7 @@ async function Stepper() {
                           kind: 80,
                           loc: [12, 32, 12, 36],
                           text: "size",
-                          bindingKey: "size$1oqffa1c13iji$0",
+                          bindingKey: "size$39pqlt8105c5f$0",
                         },
                         questionDotToken: false,
                         name: "read",
@@ -131,7 +131,7 @@ async function Stepper() {
                             kind: 80,
                             loc: [14, 11, 14, 15],
                             text: "size",
-                            bindingKey: "size$1oqffa1c13iji$0",
+                            bindingKey: "size$39pqlt8105c5f$0",
                           },
                           questionDotToken: false,
                           name: "write",
@@ -151,7 +151,7 @@ async function Stepper() {
                                   kind: 80,
                                   loc: [14, 22, 14, 26],
                                   text: "size",
-                                  bindingKey: "size$1oqffa1c13iji$0",
+                                  bindingKey: "size$39pqlt8105c5f$0",
                                 },
                                 questionDotToken: false,
                                 name: "read",

@@ -1,4 +1,4 @@
-import { cs, For, type Client, type State } from "@backtickjs/core";
+import { cs, For, state, type Client, type State } from "@backtickjs/core";
 import type { JSX } from "@backtickjs/web-sdk/jsx-runtime";
 
 type Row = {
@@ -66,9 +66,9 @@ const NOUNS = [
 
 export async function Main(): Promise<Client<JSX.Element>> {
   return cs`{
-    const data = state<Row[]>([]);
-    const selected = state(0);
-    const rowId = state(1);
+    const data = $state<Row[]>([]);
+    const selected = $state(0);
+    const rowId = $state(1);
 
     const word = (list: string[]) => {
       return list[Math.round(Math.random() * 1000) % list.length];
@@ -78,7 +78,7 @@ export async function Main(): Promise<Client<JSX.Element>> {
       return Array.from({ length: count }, (_, index) => {
         return {
           id: from + index,
-          label: state(
+          label: $state(
             word($ADJECTIVES) + " " + word($COLOURS) + " " + word($NOUNS),
           ),
         };

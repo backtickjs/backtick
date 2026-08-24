@@ -11,6 +11,7 @@ export type Ast =
   | AstScript
   | AstArray
   | AstBoolean
+  | AstBuiltin
   | AstElement
   | AstExpansion
   | AstHole
@@ -37,6 +38,15 @@ export interface AstArray {
 export interface AstBoolean {
   readonly kind: "AstBoolean";
   readonly value: boolean;
+}
+
+// A name the client answers for, spliced: `state` imported and handed to a
+// script that writes `$state(0)`. The same node a script writing the name bare
+// reaches, so it goes where it stands the way an element does — see
+// `ScriptEntry.builtins` for the hole it fills.
+export interface AstBuiltin {
+  readonly kind: "AstBuiltin";
+  readonly name: string;
 }
 
 // A drawing named by its id, with each prop lowered. `<For />` is one of these

@@ -208,6 +208,8 @@ export function buildBundle(
       // expansion receives it as a parameter instead of escaping its scope.
       case "AstHole":
         return [holeParam(value.name)];
+      // A name captures nothing.
+      case "AstBuiltin":
       case "AstNumber":
       case "AstString":
       case "AstBoolean":
@@ -357,6 +359,8 @@ export function buildBundle(
       }
       case "AstElement":
         return renderElement(value, new Set());
+      case "AstBuiltin":
+        return [NodeKind.Builtin, value.name];
       case "AstNumber":
       case "AstString":
       case "AstBoolean":
@@ -520,6 +524,9 @@ export function buildBundle(
     }
     if (value.kind === "AstElement") {
       return renderElement(value, params);
+    }
+    if (value.kind === "AstBuiltin") {
+      return [NodeKind.Builtin, value.name];
     }
     if (
       value.kind === "AstNumber" ||
