@@ -2,6 +2,16 @@ import { bundler, type Bundle } from "@backtickjs/core";
 import { client, insert } from "@backtickjs/web-sdk";
 import { Counter } from "./Counter.js";
 
+const template = `<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>${client.source}</script>
+  </head>
+  <body></body>
+</html>`;
+
 const server = Bun.serve({
   port: 5174,
   routes: {
@@ -13,22 +23,12 @@ const server = Bun.serve({
       const bundle = await bundler.run(counter);
 
       // A document carrying that bundle as JSON, with the client that draws it.
-      const html = toHtml(bundle);
+      const html = insert(template, "body", bundle);
 
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });
     },
   },
 });
-
-function toHtml(bundle: Bundle): string {
-  const html =
-    `<!doctype html><html><head>` +
-    `<meta charset="utf-8">` +
-    `<meta name="viewport" content="width=device-width, initial-scale=1">` +
-    `<script>${client.source}</script>` +
-    `</head><body></body></html>`;
-  return insert(html, "body", bundle);
-}
 
 console.log(`Preview on ${server.url}`);
