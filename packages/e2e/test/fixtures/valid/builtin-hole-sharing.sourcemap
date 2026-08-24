@@ -1,0 +1,40 @@
+cs.lift((() => {\n      → cs`{\n    
+return cs.const(        → return 
+cs.receiver(            → 
+cs.splice(              →  [-semantic]
+(f)                     → $f
+)                       →  [-semantic]
+(                       → (
+1                       → 1
+)                       → )
+)                       → 
+.                       → .
+read                    → read
+()                      → ()
+);                      → ;
+\n})())                 → \n  }`
+cs.lift(cs.const(       → cs`
+(                       → (
+__cs_n                  → n
+: number                → : number
+) =>                    → ) => 
+cs.splice(              →  [-semantic]
+(state)                 → $state
+)                       →  [-semantic]
+(                       → (
+__cs_n                  → n
+ +                      →  + 
+10                      → 10
+)                       → )
+))                      → `
+cs.lift((() => {\n      → cs`{\n  
+return cs.const(        → return 
+cs.splice(              → ${ [-semantic]
+make(state)             → make(state)
+)                       → } [-semantic]
+ +                      →  + 
+cs.splice(              → ${ [-semantic]
+make(wrapped)           → make(wrapped)
+)                       → } [-semantic]
+);                      → ;
+\n})())                 → \n}`
