@@ -9,7 +9,7 @@ import type {
 } from "@backtickjs/cs-runtime";
 import { NodeKind } from "../dist/bundle/Bundle.js";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
-import type { Ir, IrScriptEntry } from "../dist/ir/Ir.js";
+import type { AstScript } from "../dist/ast/Ast.js";
 
 // An element a script writes lowers to the node a tree entry builds. Nothing
 // emits one yet — the compiler rewrites a script's JSX to unsupported syntax —
@@ -38,21 +38,17 @@ const element = (
 
 // The body of the one script in a bundle, lowered.
 const lower = (body: ClientScriptExpression) => {
-  const entry: IrScriptEntry = {
-    kind: "IrScriptEntry",
+  const script: AstScript = {
+    kind: "AstScript",
     loc: [...loc],
     fileHash: "abc",
-    splices: [],
+    splices: {},
     captures: [],
     spliceParams: {},
-    body,
-  };
-  const ir: Ir = {
-    scripts: [entry],
-    root: { kind: "IrScriptRef", target: entry, args: [] },
+    expression: body,
   };
   // An entry is an arrow under a wrapper, and this one takes no parameters.
-  return buildBundle(ir).functions["0"][0][2];
+  return buildBundle(script).functions["0"][0][2];
 };
 
 test("an element lowers to the format's own element node", () => {

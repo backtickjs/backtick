@@ -1,11 +1,5 @@
-import type {
-  Ir,
-  IrArgument,
-  IrElement,
-  IrExpansion,
-  IrScriptEntry,
-  IrScriptRef,
-} from "../ir/Ir.js";
+import type { Ast, AstElement, AstExpansion, AstScript } from "../ast/Ast.js";
+import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
 import { NodeKind } from "./Bundle.js";
@@ -52,9 +46,36 @@ import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 //     call's argument as a thunk. This threads splices exactly like captures,
 //     just positionally.
 export function buildBundle(
-  ir: Ir,
+  ast: Ast,
   features: ExperimentalFeatures = {},
 ): Bundle {
+  // The `functions` table, filled as rendering reaches each script. Two scripts
+  // written at one source location are one entry, so this is what makes a
+  // reference to a shared script a reference to the same object — the one thing
+  // the AST cannot say for itself, since it keys by node and this keys by where
+  // the node was written.
+  // Keyed by entry so a label is a lookup rather than a scan, and ordered by
+  // insertion, which is the table order the tail emits in.
+  const scripts = new Map<ScriptEntry, number>();
+  const entryByLoc = new Map<string, ScriptEntry>();
+  const entryFor = (script: AstScript): ScriptEntry => {
+    const key = locKey(script.fileHash, script.loc);
+    const existing = entryByLoc.get(key);
+    if (existing !== undefined) {
+      return existing;
+    }
+    const entry: ScriptEntry = {
+      loc: script.loc,
+      fileHash: script.fileHash,
+      splices: Object.keys(script.splices),
+      captures: script.captures,
+      spliceParams: script.spliceParams,
+      body: script.expression,
+    };
+    entryByLoc.set(key, entry);
+    scripts.set(entry, scripts.size);
+    return entry;
+  };
   // A binding key in a call site's own expression. Never a capture read: an
   // entry resolves its captures against its own parameters (see
   // `lowerScriptBody`) — out here a key is a name in the expression being
@@ -140,8 +161,8 @@ export function buildBundle(
     return dot === -1 ? name : name.slice(0, dot);
   };
 
-  const freeCapsCache = new Map<IrArgument, string[]>();
-  const freeCaps = (value: IrArgument): string[] => {
+  const freeCapsCache = new Map<Ast, string[]>();
+  const freeCaps = (value: Ast): string[] => {
     const cached = freeCapsCache.get(value);
     if (cached) {
       return cached;
@@ -151,16 +172,17 @@ export function buildBundle(
     return result;
   };
 
-  const freeCapsImpl = (value: IrArgument): string[] => {
+  const freeCapsImpl = (value: Ast): string[] => {
     switch (value.kind) {
-      case "IrScriptRef": {
-        const keys = [...value.target.captures];
-        value.args.forEach((arg, index) => {
+      case "AstScript": {
+        const target = entryFor(value);
+        const keys = [...target.captures];
+        Object.values(value.splices).forEach((arg, index) => {
           // What the hole hands its thunk is supplied there, not by the call
           // site. Asking the hole rather than the entry is the exact question:
           // a binding the entry declares but that is not in scope at *this*
           // hole is not supplied here, so it still has to thread in.
-          const supplied = new Set(passKeys(value.target, index));
+          const supplied = new Set(passKeys(target, index));
           for (const key of freeCaps(arg)) {
             if (!supplied.has(key)) {
               keys.push(key);
@@ -169,24 +191,27 @@ export function buildBundle(
         });
         return keys;
       }
-      case "IrElement":
+      case "AstElement":
         return Object.values(value.props).flatMap(freeCaps);
-      case "IrArray":
+      case "AstArray":
         return value.elements.flatMap(freeCaps);
-      case "IrObject":
+      case "AstObject":
         return Object.values(value.entries).flatMap(freeCaps);
       // An expansion's holes are bound by its own params: only what its
       // body captures beyond them threads outward.
-      case "IrExpansion":
+      case "AstExpansion":
         return freeCaps(value.body).filter(
           (key) => !value.params.includes(key),
         );
       // A hole threads like a capture — a free variable the enclosing
       // expansion's parameter binds — so a script entry hoisted out of the
       // expansion receives it as a parameter instead of escaping its scope.
-      case "IrHole":
+      case "AstHole":
         return [holeParam(value.name)];
-      case "IrValue":
+      case "AstNumber":
+      case "AstString":
+      case "AstBoolean":
+      case "AstNull":
         return [];
     }
   };
@@ -206,23 +231,22 @@ export function buildBundle(
   // the ones it does — because which fragment reaches a hole is a host
   // decision. A carried fragment arrives with its own captures already bound,
   // so the extra parameters are unused rather than wrong.
-  const passKeys = (target: IrScriptEntry, hole: number): readonly string[] => {
+  const passKeys = (target: ScriptEntry, hole: number): readonly string[] => {
     const splice = target.splices[hole];
     return splice === undefined ? [] : (target.spliceParams[splice] ?? []);
   };
 
-  const bodies = new Map<IrScriptEntry, BundleArrowFunctionNode>();
+  const bodies = new Map<ScriptEntry, BundleArrowFunctionNode>();
 
   // A script entry's label, either of the two things that name one (see
   // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
   // where it was written. Only the second is the same across responses — a
   // table position follows the order this composition reached things — so it is
   // what a client holding an entry from an earlier response can recognize.
-  const scriptIndex = new Map(ir.scripts.map((script, at) => [script, at]));
-  const fnLabel = (target: IrScriptEntry): FunctionLabel =>
+  const fnLabel = (target: ScriptEntry): FunctionLabel =>
     features.stableFunctionLabels === true
       ? locKey(target.fileHash, target.loc)
-      : `${scriptIndex.get(target)}`;
+      : String(scripts.get(target));
 
   // A class's expansion compiles as its own `functions` entry. The entry is an
   // arrow over the expansion's holes; a construction's call site applies it to
@@ -236,11 +260,11 @@ export function buildBundle(
   // way a located script entry is. Numbered past the script table so it can't
   // collide with an index label.
   const expansionBodies = new Map<FunctionLabel, BundleArrowFunctionNode>();
-  const expansionLabels = new Map<IrExpansion, FunctionLabel>();
-  const expansionEntry = (expansion: IrExpansion): BundleGetFunction => {
+  const expansionLabels = new Map<AstExpansion, FunctionLabel>();
+  const expansionEntry = (expansion: AstExpansion): BundleGetFunction => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
-      label = `${ir.scripts.length + expansionLabels.size}`;
+      label = `${scripts.size + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
@@ -257,7 +281,7 @@ export function buildBundle(
   // reached. An entry takes a `$i` parameter per splice — its holes render as
   // calls `$i()` — ahead of its environment. Nothing from a call site is
   // inlined, so the body is a function of the script's source alone.
-  const materialize = (script: IrScriptEntry): void => {
+  const materialize = (script: ScriptEntry): void => {
     if (bodies.has(script)) {
       return;
     }
@@ -274,12 +298,13 @@ export function buildBundle(
 
   // The arguments passed when calling an entry: one thunk per splice, bound to
   // this reference's arguments, then the environment.
-  const callArgs = (ref: IrScriptRef): BundleExpressionNode[] => {
+  const callArgs = (ref: AstScript): BundleExpressionNode[] => {
+    const target = entryFor(ref);
     const parts: BundleExpressionNode[] = [];
-    ref.args.forEach((arg, index) => {
-      parts.push(renderLazily(arg, ref.target, index));
+    Object.values(ref.splices).forEach((arg, index) => {
+      parts.push(renderLazily(arg, target, index));
     });
-    for (const key of ref.target.captures) {
+    for (const key of target.captures) {
       parts.push(readKey(key));
     }
     return parts;
@@ -291,21 +316,22 @@ export function buildBundle(
   // and a fragment wants what its own script needs, and those coincide often
   // but not always.
   const forwarding = (
-    value: IrArgument,
+    value: Ast,
     passed: readonly string[],
   ): BundleExpressionNode | null => {
-    if (value.kind !== "IrScriptRef" || value.args.length > 0) {
+    if (value.kind !== "AstScript" || Object.keys(value.splices).length > 0) {
       return null;
     }
-    const wanted = value.target.captures;
+    const target = entryFor(value);
+    const wanted = target.captures;
     if (
       wanted.length !== passed.length ||
       wanted.some((key, at) => key !== passed[at])
     ) {
       return null;
     }
-    materialize(value.target);
-    return [NodeKind.GetFunction, fnLabel(value.target)];
+    materialize(target);
+    return [NodeKind.GetFunction, fnLabel(target)];
   };
 
   // Instantiating a tree in value position: which entry, and what to hand
@@ -317,35 +343,40 @@ export function buildBundle(
   // evaluates to. A script reference becomes a call of its `functions` entry, a
   // tree reference an application of its entry passing its captures by name;
   // every other value its literal form.
-  const renderValue = (value: IrArgument): BundleExpressionNode => {
+  const renderValue = (value: Ast): BundleExpressionNode => {
     switch (value.kind) {
-      case "IrScriptRef": {
-        materialize(value.target);
+      case "AstScript": {
+        const target = entryFor(value);
+        materialize(target);
         const args = callArgs(value);
         const entry: BundleGetFunction = [
           NodeKind.GetFunction,
-          fnLabel(value.target),
+          fnLabel(target),
         ];
         return [NodeKind.CallExpression, entry, false, args];
       }
-      case "IrElement":
-        throw new Error("An inline element can't appear outside a tree entry.");
-      case "IrValue":
+      case "AstElement":
+        return renderElement(value, new Set());
+      case "AstNumber":
+      case "AstString":
+      case "AstBoolean":
         return value.value;
+      case "AstNull":
+        return null;
       // An expansion in value position is its `functions` entry: passed
       // bare it is the function itself, which the construction's call site
       // applies to the client arguments.
-      case "IrExpansion":
+      case "AstExpansion":
         return expansionEntry(value);
       // A hole threads like a capture (see `freeCaps`), so in a body it is
       // reached the same way — through the environment when the entry took it
       // as one.
-      case "IrHole":
+      case "AstHole":
         return holeRead(value.name);
-      case "IrArray":
+      case "AstArray":
         // Data, and a node is an array too, so it says which it is.
         return [NodeKind.DataArray, value.elements.map(renderValue)];
-      case "IrObject": {
+      case "AstObject": {
         // A plain data object passes through, exactly as in `renderExpr`.
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
@@ -364,8 +395,8 @@ export function buildBundle(
   // Otherwise a referenced entry that takes no arguments already is one;
   // anything else is wrapped.
   const renderLazily = (
-    value: IrArgument,
-    target: IrScriptEntry,
+    value: Ast,
+    target: ScriptEntry,
     hole: number,
   ): BundleExpressionNode => {
     const params = passKeys(target, hole).map(displayName);
@@ -376,13 +407,11 @@ export function buildBundle(
         renderValue(value),
       ];
     }
-    if (value.kind === "IrScriptRef") {
-      materialize(value.target);
+    if (value.kind === "AstScript") {
+      const inner = entryFor(value);
+      materialize(inner);
       const args = callArgs(value);
-      const entry: BundleGetFunction = [
-        NodeKind.GetFunction,
-        fnLabel(value.target),
-      ];
+      const entry: BundleGetFunction = [NodeKind.GetFunction, fnLabel(inner)];
       const call: BundleCallExpressionNode = [
         NodeKind.CallExpression,
         entry,
@@ -421,15 +450,16 @@ export function buildBundle(
   // The arguments of a `#call` to a function entry, mirroring `callArgs`: for
   // one `#thunk` per splice ahead of the environment.
   const exprCallArgs = (
-    ref: IrScriptRef,
+    ref: AstScript,
     params: ReadonlySet<string>,
   ): BundleExpressionNode[] => {
+    const target = entryFor(ref);
     const parts: BundleExpressionNode[] = [];
-    ref.args.forEach((arg, index) => {
+    Object.values(ref.splices).forEach((arg, index) => {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.
-      const passed = [...passKeys(ref.target, index), ...ref.target.captures];
+      const passed = [...passKeys(target, index), ...target.captures];
       // A fragment whose own parameters are exactly that list reads the hole's
       // arguments as they arrive, so it is passed as it is rather than wrapped
       // in a thunk that would only pass them along.
@@ -450,7 +480,7 @@ export function buildBundle(
         renderExpr(arg, inner),
       ]);
     });
-    for (const key of ref.target.captures) {
+    for (const key of target.captures) {
       parts.push(capExpr(key, params));
     }
     return parts;
@@ -459,7 +489,7 @@ export function buildBundle(
   // Renders an inline element: static structure carried as data, each prop a
   // bundle expression in the enclosing entry's scope.
   const renderElement = (
-    element: IrElement,
+    element: AstElement,
     params: ReadonlySet<string>,
   ): BundleElement => {
     const props: { [key: string]: BundleExpressionNode } = {};
@@ -479,19 +509,27 @@ export function buildBundle(
   // entries and for the bundle root, where composition is data rather than
   // source. The mirror of `renderValue`.
   const renderExpr = (
-    value: IrArgument,
+    value: Ast,
     params: ReadonlySet<string> = new Set(),
   ): BundleExpressionNode => {
-    if (value.kind === "IrScriptRef") {
-      materialize(value.target);
+    if (value.kind === "AstScript") {
+      const target = entryFor(value);
+      materialize(target);
       const args = exprCallArgs(value, params);
-      return [NodeKind.ApplyFunction, fnLabel(value.target), args];
+      return [NodeKind.ApplyFunction, fnLabel(target), args];
     }
-    if (value.kind === "IrElement") {
+    if (value.kind === "AstElement") {
       return renderElement(value, params);
     }
-    if (value.kind === "IrValue") {
+    if (
+      value.kind === "AstNumber" ||
+      value.kind === "AstString" ||
+      value.kind === "AstBoolean"
+    ) {
       return value.value;
+    }
+    if (value.kind === "AstNull") {
+      return null;
     }
     // In JSON position an expansion is written out as the arrow it is: its
     // holes become the parameters, and the call the tag wrote binds them.
@@ -500,7 +538,7 @@ export function buildBundle(
     // an entry as a value, and `forwarding` already emits one — and would need
     // the expansion to close over nothing. Measured, it traded an inline arrow
     // for a table entry and came out even, so it is written here.
-    if (value.kind === "IrExpansion") {
+    if (value.kind === "AstExpansion") {
       // The expansion's params extend the enclosing ones, like a nested
       // frame, so a hole threading into the body resolves by name.
       return [
@@ -509,10 +547,10 @@ export function buildBundle(
         renderExpr(value.body, new Set([...params, ...value.params])),
       ];
     }
-    if (value.kind === "IrHole") {
+    if (value.kind === "AstHole") {
       return holeRead(value.name);
     }
-    if (value.kind === "IrArray") {
+    if (value.kind === "AstArray") {
       // Data, and a node is an array too, so it says which it is.
       return [
         NodeKind.DataArray,
@@ -529,10 +567,10 @@ export function buildBundle(
   };
 
   // Nothing encloses the root, so nothing it holds can capture.
-  const root = renderExpr(ir.root);
+  const root = renderExpr(ast);
   const functions: Record<FunctionLabel, BundleFunction> = {};
-  // In table order, which is the order the walk first reached each script.
-  for (const script of ir.scripts) {
+  // In table order, which is the order rendering first reached each script.
+  for (const script of scripts.keys()) {
     const body = bodies.get(script);
     if (body !== undefined) {
       functions[fnLabel(script)] = [body];

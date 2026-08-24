@@ -7,7 +7,7 @@ import type {
   ClientScriptStatement,
   ClientScriptVariableDeclarationList,
 } from "@backtickjs/cs-runtime";
-import type { IrScriptEntry } from "../ir/Ir.js";
+import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { NodeKind } from "./Bundle.js";
 import type {
@@ -35,7 +35,7 @@ export function parameterNodes(
 // its own source. Nothing else here needs the script, which is why the builders
 // close over them instead of threading them down every branch to reach two
 // leaves.
-export function lowerScriptBody(script: IrScriptEntry): BundleBody {
+export function lowerScriptBody(script: ScriptEntry): BundleBody {
   // An entry's parameters are one numbered sequence: a thunk per splice hole
   // the script writes, then a value per binding it captures. Both lists come
   // from the script, so the arity and the order are its own.

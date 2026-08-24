@@ -3,30 +3,25 @@ import { test } from "node:test";
 import { SyntaxKind } from "@backtickjs/cs-runtime";
 import { NodeKind } from "../dist/bundle/Bundle.js";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
-import type { Ir, IrScriptEntry } from "../dist/ir/Ir.js";
+import type { AstScript } from "../dist/ast/Ast.js";
 
 // One script, `1`, written at 3:7 of a file hashing to `abc`.
-const entry: IrScriptEntry = {
-  kind: "IrScriptEntry",
+const script: AstScript = {
+  kind: "AstScript",
   loc: [3, 7, 3, 8],
   fileHash: "abc",
-  splices: [],
+  splices: {},
   captures: [],
   spliceParams: {},
-  body: { kind: SyntaxKind.NumericLiteral, loc: [3, 7, 3, 8], value: 1 },
-};
-
-const ir: Ir = {
-  scripts: [entry],
-  root: { kind: "IrScriptRef", target: entry, args: [] },
+  expression: { kind: SyntaxKind.NumericLiteral, loc: [3, 7, 3, 8], value: 1 },
 };
 
 test("labels an entry by its table position by default", () => {
-  assert.deepEqual(Object.keys(buildBundle(ir).functions), ["0"]);
+  assert.deepEqual(Object.keys(buildBundle(script).functions), ["0"]);
 });
 
 test("labels an entry by where its script was written on request", () => {
-  const located = buildBundle(ir, { stableFunctionLabels: true });
+  const located = buildBundle(script, { stableFunctionLabels: true });
   assert.deepEqual(Object.keys(located.functions), ["abc:3:7"]);
   // The reference names the same thing, so a bundle reads on its own.
   assert.deepEqual(located.root, [NodeKind.ApplyFunction, "abc:3:7", []]);

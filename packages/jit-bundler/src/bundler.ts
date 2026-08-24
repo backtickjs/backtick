@@ -1,7 +1,6 @@
 import { lowerSpliceable } from "./ast/lowerSpliceable.js";
 import type { Bundle } from "./bundle/Bundle.js";
 import { buildBundle } from "./bundle/buildBundle.js";
-import { buildIr } from "./ir/buildIr.js";
 import type { Spliceable } from "@backtickjs/cs-runtime";
 
 /**
@@ -56,7 +55,6 @@ export const bundler = {
     features: ExperimentalFeatures,
   ): Promise<Bundle> {
     const ast = await lowerSpliceable(value, "ClientUnknown");
-    const ir = buildIr(ast);
-    return buildBundle(ir, features);
+    return buildBundle(ast, features);
   },
 };
