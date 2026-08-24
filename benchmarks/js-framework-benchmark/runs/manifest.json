@@ -460,6 +460,14 @@
       "keyed": true,
       "dir": "no-host-state",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "1a14b38d",
+      "label": "spliced state",
+      "date": "2026-08-24",
+      "keyed": true,
+      "dir": "spliced-state",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
