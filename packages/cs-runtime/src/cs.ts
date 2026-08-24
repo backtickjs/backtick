@@ -5,7 +5,7 @@ import type { ClientValue } from "@backtickjs/language-schema";
 import type { Spliceable, Spliced } from "@backtickjs/language-schema";
 import type { State } from "@backtickjs/language-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
-import type { Widen } from "./Widen.js";
+import type { Widen } from "@backtickjs/language-schema";
 
 // The root of a script
 function _lift<const T extends ClientUnknown>(_: T): Client<T> {
