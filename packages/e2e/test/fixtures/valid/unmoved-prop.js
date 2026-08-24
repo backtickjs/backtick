@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row
 // selected, and the row that no longer is. The third recomputes the href it
@@ -15,11 +15,11 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "unmoved-prop.tsx",
-      fileHash: "swxxmo9tuqyt",
+      fileHash: "2qtyfiqhdw6n2",
       kind: "value",
-      splices: { $For: For },
+      splices: { $state: state, $For: For },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -27,33 +27,33 @@ async function Rows() {
       statements: [
         {
           kind: 244,
-          loc: [14, 5, 14, 31],
+          loc: [14, 5, 14, 32],
           declarationList: {
             kind: 262,
-            loc: [14, 5, 14, 30],
+            loc: [14, 5, 14, 31],
             declarations: [
               {
                 kind: 261,
-                loc: [14, 11, 14, 30],
+                loc: [14, 11, 14, 31],
                 name: {
                   kind: 80,
                   loc: [14, 11, 14, 19],
                   text: "selected",
-                  bindingKey: "selected$swxxmo9tuqyt$0",
+                  bindingKey: "selected$2qtyfiqhdw6n2$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [14, 22, 14, 30],
+                  loc: [14, 22, 14, 31],
                   expression: {
-                    kind: 1001,
-                    loc: [14, 22, 14, 27],
-                    name: "state",
+                    kind: 1000,
+                    loc: [14, 22, 14, 28],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [14, 28, 14, 29],
+                      loc: [14, 29, 14, 30],
                       value: 0,
                     },
                   ],
@@ -101,7 +101,7 @@ async function Rows() {
                             kind: 80,
                             loc: [17, 30, 17, 38],
                             text: "selected",
-                            bindingKey: "selected$swxxmo9tuqyt$0",
+                            bindingKey: "selected$2qtyfiqhdw6n2$0",
                           },
                           questionDotToken: false,
                           name: "write",
@@ -182,7 +182,7 @@ async function Rows() {
                               kind: 80,
                               loc: [20, 15, 20, 17],
                               text: "id",
-                              bindingKey: "id$swxxmo9tuqyt$1",
+                              bindingKey: "id$2qtyfiqhdw6n2$1",
                             },
                           },
                         ],
@@ -213,7 +213,7 @@ async function Rows() {
                                         kind: 80,
                                         loc: [21, 24, 21, 32],
                                         text: "selected",
-                                        bindingKey: "selected$swxxmo9tuqyt$0",
+                                        bindingKey: "selected$2qtyfiqhdw6n2$0",
                                       },
                                       questionDotToken: false,
                                       name: "read",
@@ -226,7 +226,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [21, 44, 21, 46],
                                     text: "id",
-                                    bindingKey: "id$swxxmo9tuqyt$1",
+                                    bindingKey: "id$2qtyfiqhdw6n2$1",
                                   },
                                 },
                                 whenTrue: {
@@ -256,7 +256,7 @@ async function Rows() {
                                 kind: 80,
                                 loc: [22, 27, 22, 29],
                                 text: "id",
-                                bindingKey: "id$swxxmo9tuqyt$1",
+                                bindingKey: "id$2qtyfiqhdw6n2$1",
                               },
                             },
                           ],

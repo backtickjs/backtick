@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 // A list whose drawing reads where a member sits as well as what it is.
 //
 // The index is storage, not a number, and this is the case that says why: a
@@ -13,11 +13,11 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "for-index.tsx",
-      fileHash: "24x5vxdfpswhv",
+      fileHash: "1suvpn3mvnkvg",
       kind: "value",
-      splices: { $For: For },
+      splices: { $state: state, $For: For },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -25,47 +25,47 @@ async function Rows() {
       statements: [
         {
           kind: 244,
-          loc: [13, 5, 13, 52],
+          loc: [13, 5, 13, 53],
           declarationList: {
             kind: 262,
-            loc: [13, 5, 13, 51],
+            loc: [13, 5, 13, 52],
             declarations: [
               {
                 kind: 261,
-                loc: [13, 11, 13, 51],
+                loc: [13, 11, 13, 52],
                 name: {
                   kind: 80,
                   loc: [13, 11, 13, 16],
                   text: "names",
-                  bindingKey: "names$24x5vxdfpswhv$0",
+                  bindingKey: "names$1suvpn3mvnkvg$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [13, 19, 13, 51],
+                  loc: [13, 19, 13, 52],
                   expression: {
-                    kind: 1001,
-                    loc: [13, 19, 13, 24],
-                    name: "state",
+                    kind: 1000,
+                    loc: [13, 19, 13, 25],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 210,
-                      loc: [13, 35, 13, 50],
+                      loc: [13, 36, 13, 51],
                       elements: [
                         {
                           kind: 11,
-                          loc: [13, 36, 13, 39],
+                          loc: [13, 37, 13, 40],
                           text: "a",
                         },
                         {
                           kind: 11,
-                          loc: [13, 41, 13, 44],
+                          loc: [13, 42, 13, 45],
                           text: "b",
                         },
                         {
                           kind: 11,
-                          loc: [13, 46, 13, 49],
+                          loc: [13, 47, 13, 50],
                           text: "c",
                         },
                       ],
@@ -91,7 +91,7 @@ async function Rows() {
                   kind: 80,
                   loc: [14, 11, 14, 17],
                   text: "rotate",
-                  bindingKey: "rotate$24x5vxdfpswhv$1",
+                  bindingKey: "rotate$1suvpn3mvnkvg$1",
                 },
                 initializer: {
                   kind: 220,
@@ -111,7 +111,7 @@ async function Rows() {
                             kind: 80,
                             loc: [15, 7, 15, 12],
                             text: "names",
-                            bindingKey: "names$24x5vxdfpswhv$0",
+                            bindingKey: "names$1suvpn3mvnkvg$0",
                           },
                           questionDotToken: false,
                           name: "update",
@@ -129,7 +129,7 @@ async function Rows() {
                                   kind: 80,
                                   loc: [15, 21, 15, 25],
                                   text: "held",
-                                  bindingKey: "held$24x5vxdfpswhv$2",
+                                  bindingKey: "held$1suvpn3mvnkvg$2",
                                 },
                               },
                             ],
@@ -144,7 +144,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [15, 31, 15, 35],
                                     text: "held",
-                                    bindingKey: "held$24x5vxdfpswhv$2",
+                                    bindingKey: "held$1suvpn3mvnkvg$2",
                                   },
                                   argumentExpression: {
                                     kind: 9,
@@ -159,7 +159,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [15, 40, 15, 44],
                                     text: "held",
-                                    bindingKey: "held$24x5vxdfpswhv$2",
+                                    bindingKey: "held$1suvpn3mvnkvg$2",
                                   },
                                   argumentExpression: {
                                     kind: 9,
@@ -174,7 +174,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [15, 49, 15, 53],
                                     text: "held",
-                                    bindingKey: "held$24x5vxdfpswhv$2",
+                                    bindingKey: "held$1suvpn3mvnkvg$2",
                                   },
                                   argumentExpression: {
                                     kind: 9,
@@ -223,7 +223,7 @@ async function Rows() {
                       kind: 80,
                       loc: [19, 24, 19, 30],
                       text: "rotate",
-                      bindingKey: "rotate$24x5vxdfpswhv$1",
+                      bindingKey: "rotate$1suvpn3mvnkvg$1",
                     },
                   },
                 ],
@@ -266,7 +266,7 @@ async function Rows() {
                               kind: 80,
                               loc: [21, 22, 21, 27],
                               text: "names",
-                              bindingKey: "names$24x5vxdfpswhv$0",
+                              bindingKey: "names$1suvpn3mvnkvg$0",
                             },
                             questionDotToken: false,
                             name: "read",
@@ -288,7 +288,7 @@ async function Rows() {
                               kind: 80,
                               loc: [22, 15, 22, 19],
                               text: "name",
-                              bindingKey: "name$24x5vxdfpswhv$3",
+                              bindingKey: "name$1suvpn3mvnkvg$3",
                             },
                           },
                           {
@@ -298,7 +298,7 @@ async function Rows() {
                               kind: 80,
                               loc: [22, 29, 22, 34],
                               text: "index",
-                              bindingKey: "index$24x5vxdfpswhv$4",
+                              bindingKey: "index$1suvpn3mvnkvg$4",
                             },
                           },
                         ],
@@ -322,7 +322,7 @@ async function Rows() {
                                   kind: 80,
                                   loc: [23, 22, 23, 26],
                                   text: "name",
-                                  bindingKey: "name$24x5vxdfpswhv$3",
+                                  bindingKey: "name$1suvpn3mvnkvg$3",
                                 },
                                 operatorToken: "+",
                                 right: {
@@ -342,7 +342,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [23, 38, 23, 43],
                                     text: "index",
-                                    bindingKey: "index$24x5vxdfpswhv$4",
+                                    bindingKey: "index$1suvpn3mvnkvg$4",
                                   },
                                   questionDotToken: false,
                                   name: "read",

@@ -1,5 +1,5 @@
-#f0 = ($0) => {
-  const ids = state([1, 2, 3]);
+#f0 = ($0, $1) => {
+  const ids = $0()([1, 2, 3]);
   const clear = () => {
     ids.update(() => []);
   };
@@ -9,7 +9,7 @@
     >
       {"clear"}
     </span>,
-    $0()({
+    $1()({
       "each": () => ids.read(),
       "children": () => (id) => <span>
         {"row " + id}
@@ -18,7 +18,7 @@
   ];
 }
 
-root = #f0(() => ($0) => <for
+root = #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}

@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // An element a script writes, rather than one the host wrote and the script
 // spliced in. What it lowers to is the node a tree entry builds, so the two
@@ -6,7 +6,7 @@ import { cs } from "@backtickjs/core";
 // written, not what it is.
 async function Card() {
   return cs.lift((() => {
-    const __cs_label = cs.const(cs.state("hi"));
+    const __cs_label = cs.const(cs.splice((state))("hi"));
     const __cs_row = cs.const((__cs_size: number) => {
         const __cs_css = cs.const("font-size: " + __cs_size + "px");
         const __cs_press = cs.const(() => cs.receiver(__cs_label).write("held"));

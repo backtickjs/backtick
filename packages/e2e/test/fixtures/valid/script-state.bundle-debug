@@ -5,15 +5,15 @@
   row.label.write(row.label.read() + " !!!");
 }
 
-#f2 = () => (label) => {
-  return { "label": state(label) };
+#f2 = ($0) => (label) => {
+  return { "label": $0()(label) };
 }
 
 #f3 = ($0) => $0()("one").label.read()
 
 root = <span
   style={#f0()}
-  onclick={#f1(#f2)}
+  onclick={#f1(() => #f2(() => state))}
 >
-  {#f3(#f2)}
+  {#f3(() => #f2(() => state))}
 </span>

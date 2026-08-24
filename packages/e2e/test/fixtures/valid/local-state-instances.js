@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // State belongs to the script that declares it, and a script entry is applied
 // once per place that reaches it — so two `<Counter />` tags are two
 // applications of one entry, and each declares a cell of its own.
@@ -9,11 +9,11 @@ async function Counter() {
     {
       version: "0.0.0",
       filePath: "local-state-instances.tsx",
-      fileHash: "2ckootzn106mi",
+      fileHash: "1o70jdoj6nrpb",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -21,33 +21,33 @@ async function Counter() {
       statements: [
         {
           kind: 244,
-          loc: [8, 5, 8, 28],
+          loc: [8, 5, 8, 29],
           declarationList: {
             kind: 262,
-            loc: [8, 5, 8, 27],
+            loc: [8, 5, 8, 28],
             declarations: [
               {
                 kind: 261,
-                loc: [8, 11, 8, 27],
+                loc: [8, 11, 8, 28],
                 name: {
                   kind: 80,
                   loc: [8, 11, 8, 15],
                   text: "size",
-                  bindingKey: "size$2ckootzn106mi$0",
+                  bindingKey: "size$1o70jdoj6nrpb$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [8, 18, 8, 27],
+                  loc: [8, 18, 8, 28],
                   expression: {
-                    kind: 1001,
-                    loc: [8, 18, 8, 23],
-                    name: "state",
+                    kind: 1000,
+                    loc: [8, 18, 8, 24],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [8, 24, 8, 26],
+                      loc: [8, 25, 8, 27],
                       value: 16,
                     },
                   ],
@@ -93,7 +93,7 @@ async function Counter() {
                           kind: 80,
                           loc: [11, 32, 11, 36],
                           text: "size",
-                          bindingKey: "size$2ckootzn106mi$0",
+                          bindingKey: "size$1o70jdoj6nrpb$0",
                         },
                         questionDotToken: false,
                         name: "read",
@@ -130,7 +130,7 @@ async function Counter() {
                             kind: 80,
                             loc: [13, 11, 13, 15],
                             text: "size",
-                            bindingKey: "size$2ckootzn106mi$0",
+                            bindingKey: "size$1o70jdoj6nrpb$0",
                           },
                           questionDotToken: false,
                           name: "write",
@@ -150,7 +150,7 @@ async function Counter() {
                                   kind: 80,
                                   loc: [13, 22, 13, 26],
                                   text: "size",
-                                  bindingKey: "size$2ckootzn106mi$0",
+                                  bindingKey: "size$1o70jdoj6nrpb$0",
                                 },
                                 questionDotToken: false,
                                 name: "read",

@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // A cell crossing a component boundary: declared once by the script that draws
 // the pair, handed to each child as a prop, so both read one storage. The cell
 // is an ordinary client value — the prop takes it the way it takes any other —
@@ -11,7 +11,7 @@ const Counter = async ({ size }) =>
       {
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
-        fileHash: "vnmgn8fthx19",
+        fileHash: "1azh7gya00tyi",
         kind: "value",
         splices: { $size: size },
         captures: [],
@@ -60,7 +60,7 @@ const Counter = async ({ size }) =>
       {
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
-        fileHash: "vnmgn8fthx19",
+        fileHash: "1azh7gya00tyi",
         kind: "value",
         splices: { $size: size },
         captures: [],
@@ -131,11 +131,11 @@ async function Panel() {
     {
       version: "0.0.0",
       filePath: "local-state-prop.tsx",
-      fileHash: "vnmgn8fthx19",
+      fileHash: "1azh7gya00tyi",
       kind: "value",
-      splices: { $Counter: Counter },
+      splices: { $state: state, $Counter: Counter },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -143,33 +143,33 @@ async function Panel() {
       statements: [
         {
           kind: 244,
-          loc: [21, 5, 21, 28],
+          loc: [21, 5, 21, 29],
           declarationList: {
             kind: 262,
-            loc: [21, 5, 21, 27],
+            loc: [21, 5, 21, 28],
             declarations: [
               {
                 kind: 261,
-                loc: [21, 11, 21, 27],
+                loc: [21, 11, 21, 28],
                 name: {
                   kind: 80,
                   loc: [21, 11, 21, 15],
                   text: "size",
-                  bindingKey: "size$vnmgn8fthx19$0",
+                  bindingKey: "size$1azh7gya00tyi$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [21, 18, 21, 27],
+                  loc: [21, 18, 21, 28],
                   expression: {
-                    kind: 1001,
-                    loc: [21, 18, 21, 23],
-                    name: "state",
+                    kind: 1000,
+                    loc: [21, 18, 21, 24],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [21, 24, 21, 26],
+                      loc: [21, 25, 21, 27],
                       value: 16,
                     },
                   ],
@@ -207,7 +207,7 @@ async function Panel() {
                       kind: 80,
                       loc: [24, 24, 24, 28],
                       text: "size",
-                      bindingKey: "size$vnmgn8fthx19$0",
+                      bindingKey: "size$1azh7gya00tyi$0",
                     },
                   },
                 ],
@@ -228,7 +228,7 @@ async function Panel() {
                       kind: 80,
                       loc: [25, 24, 25, 28],
                       text: "size",
-                      bindingKey: "size$vnmgn8fthx19$0",
+                      bindingKey: "size$1azh7gya00tyi$0",
                     },
                   },
                 ],

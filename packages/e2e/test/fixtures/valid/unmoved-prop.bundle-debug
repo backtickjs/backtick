@@ -1,5 +1,5 @@
-#f0 = ($0) => {
-  const selected = state(0);
+#f0 = ($0, $1) => {
+  const selected = $0()(0);
   return <div>
     {<span
       onclick={() => selected.write(1)}
@@ -7,7 +7,7 @@
       {"select"}
     </span>}
     {<div>
-      {$0()({
+      {$1()({
         "each": () => [0, 1, 2],
         "children": () => (id) => <a
           href={selected.read() === id ? "#open" : "#closed"}
@@ -19,7 +19,7 @@
   </div>;
 }
 
-root = #f0(() => ($0) => <for
+root = #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}

@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // An object with storage of its own, made by a client function: `state` holds
 // what it is, arrows are what may be done to it, and the object hands them over
 // together. Reading is a value, so it stands in a children position; writing is
@@ -8,11 +8,11 @@ const counter = cs.create(
   {
     version: "0.0.0",
     filePath: "stateful-object.tsx",
-    fileHash: "2g790jx7axwwp",
+    fileHash: "1dleixj3nmlt2",
     kind: "value",
-    splices: {},
+    splices: { $state: state },
     captures: [],
-    spliceParams: {},
+    spliceParams: { $state: [] },
   },
   () => ({
     kind: 220,
@@ -25,7 +25,7 @@ const counter = cs.create(
           kind: 80,
           loc: [7, 21, 7, 28],
           text: "initial",
-          bindingKey: "initial$2g790jx7axwwp$0",
+          bindingKey: "initial$1dleixj3nmlt2$0",
         },
       },
     ],
@@ -35,35 +35,35 @@ const counter = cs.create(
       statements: [
         {
           kind: 244,
-          loc: [8, 3, 8, 32],
+          loc: [8, 3, 8, 33],
           declarationList: {
             kind: 262,
-            loc: [8, 3, 8, 31],
+            loc: [8, 3, 8, 32],
             declarations: [
               {
                 kind: 261,
-                loc: [8, 9, 8, 31],
+                loc: [8, 9, 8, 32],
                 name: {
                   kind: 80,
                   loc: [8, 9, 8, 14],
                   text: "count",
-                  bindingKey: "count$2g790jx7axwwp$1",
+                  bindingKey: "count$1dleixj3nmlt2$1",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [8, 17, 8, 31],
+                  loc: [8, 17, 8, 32],
                   expression: {
-                    kind: 1001,
-                    loc: [8, 17, 8, 22],
-                    name: "state",
+                    kind: 1000,
+                    loc: [8, 17, 8, 23],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 80,
-                      loc: [8, 23, 8, 30],
+                      loc: [8, 24, 8, 31],
                       text: "initial",
-                      bindingKey: "initial$2g790jx7axwwp$0",
+                      bindingKey: "initial$1dleixj3nmlt2$0",
                     },
                   ],
                 },
@@ -97,7 +97,7 @@ const counter = cs.create(
                         kind: 80,
                         loc: [10, 17, 10, 22],
                         text: "count",
-                        bindingKey: "count$2g790jx7axwwp$1",
+                        bindingKey: "count$1dleixj3nmlt2$1",
                       },
                       questionDotToken: false,
                       name: "read",
@@ -122,7 +122,7 @@ const counter = cs.create(
                         kind: 80,
                         loc: [11, 11, 11, 12],
                         text: "n",
-                        bindingKey: "n$2g790jx7axwwp$2",
+                        bindingKey: "n$1dleixj3nmlt2$2",
                       },
                     },
                   ],
@@ -140,7 +140,7 @@ const counter = cs.create(
                             kind: 80,
                             loc: [12, 7, 12, 12],
                             text: "count",
-                            bindingKey: "count$2g790jx7axwwp$1",
+                            bindingKey: "count$1dleixj3nmlt2$1",
                           },
                           questionDotToken: false,
                           name: "write",
@@ -160,7 +160,7 @@ const counter = cs.create(
                                   kind: 80,
                                   loc: [12, 19, 12, 24],
                                   text: "count",
-                                  bindingKey: "count$2g790jx7axwwp$1",
+                                  bindingKey: "count$1dleixj3nmlt2$1",
                                 },
                                 questionDotToken: false,
                                 name: "read",
@@ -173,7 +173,7 @@ const counter = cs.create(
                               kind: 80,
                               loc: [12, 34, 12, 35],
                               text: "n",
-                              bindingKey: "n$2g790jx7axwwp$2",
+                              bindingKey: "n$1dleixj3nmlt2$2",
                             },
                           },
                         ],
@@ -194,7 +194,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "stateful-object.tsx",
-    fileHash: "2g790jx7axwwp",
+    fileHash: "1dleixj3nmlt2",
     kind: "value",
     splices: { $counter: counter },
     captures: [],
@@ -218,7 +218,7 @@ export default cs.create(
                 kind: 80,
                 loc: [18, 9, 18, 10],
                 text: "c",
-                bindingKey: "c$2g790jx7axwwp$3",
+                bindingKey: "c$1dleixj3nmlt2$3",
               },
               initializer: {
                 kind: 214,
@@ -274,7 +274,7 @@ export default cs.create(
                           kind: 80,
                           loc: [22, 9, 22, 10],
                           text: "c",
-                          bindingKey: "c$2g790jx7axwwp$3",
+                          bindingKey: "c$1dleixj3nmlt2$3",
                         },
                         questionDotToken: false,
                         name: "add",
@@ -304,7 +304,7 @@ export default cs.create(
                   kind: 80,
                   loc: [25, 8, 25, 9],
                   text: "c",
-                  bindingKey: "c$2g790jx7axwwp$3",
+                  bindingKey: "c$1dleixj3nmlt2$3",
                 },
                 questionDotToken: false,
                 name: "read",

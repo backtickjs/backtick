@@ -1,5 +1,5 @@
-#f0 = () => {
-  const label = state("hi");
+#f0 = ($0) => {
+  const label = $0()("hi");
   const row = (size) => {
     const css = "font-size: " + size + "px";
     const press = () => label.write("held");
@@ -32,4 +32,4 @@
   </div>;
 }
 
-root = #f0()
+root = #f0(() => state)

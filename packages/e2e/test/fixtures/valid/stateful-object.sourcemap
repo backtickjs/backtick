@@ -6,7 +6,9 @@ __cs_initial            → initial
 const                   → const 
 __cs_count              → count
  = cs.const(            →  = 
-cs.state                → state
+cs.splice(              →  [-semantic]
+(state)                 → $state
+)                       →  [-semantic]
 (                       → (
 __cs_initial            → initial
 )                       → )

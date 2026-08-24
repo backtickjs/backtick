@@ -9,8 +9,8 @@
   </button>;
 }
 
-#f1 = () => (initial) => {
-  const count = state(initial);
+#f1 = ($0) => (initial) => {
+  const count = $0()(initial);
   return {
     "read": () => count.read(),
     "add": (n) => {
@@ -19,4 +19,4 @@
   };
 }
 
-root = #f0(#f1)
+root = #f0(() => #f1(() => state))

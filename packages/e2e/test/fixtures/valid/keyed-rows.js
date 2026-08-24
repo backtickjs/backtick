@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only
 // thing saying which row is which.
@@ -14,11 +14,11 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "keyed-rows.tsx",
-      fileHash: "8fvi8zcyc3un",
+      fileHash: "1879rjsuy33z2",
       kind: "value",
-      splices: { $For: For },
+      splices: { $state: state, $For: For },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -26,47 +26,47 @@ async function Rows() {
       statements: [
         {
           kind: 244,
-          loc: [13, 5, 13, 44],
+          loc: [13, 5, 13, 45],
           declarationList: {
             kind: 262,
-            loc: [13, 5, 13, 43],
+            loc: [13, 5, 13, 44],
             declarations: [
               {
                 kind: 261,
-                loc: [13, 11, 13, 43],
+                loc: [13, 11, 13, 44],
                 name: {
                   kind: 80,
                   loc: [13, 11, 13, 14],
                   text: "ids",
-                  bindingKey: "ids$8fvi8zcyc3un$0",
+                  bindingKey: "ids$1879rjsuy33z2$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [13, 17, 13, 43],
+                  loc: [13, 17, 13, 44],
                   expression: {
-                    kind: 1001,
-                    loc: [13, 17, 13, 22],
-                    name: "state",
+                    kind: 1000,
+                    loc: [13, 17, 13, 23],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 210,
-                      loc: [13, 33, 13, 42],
+                      loc: [13, 34, 13, 43],
                       elements: [
                         {
                           kind: 9,
-                          loc: [13, 34, 13, 35],
+                          loc: [13, 35, 13, 36],
                           value: 1,
                         },
                         {
                           kind: 9,
-                          loc: [13, 37, 13, 38],
+                          loc: [13, 38, 13, 39],
                           value: 2,
                         },
                         {
                           kind: 9,
-                          loc: [13, 40, 13, 41],
+                          loc: [13, 41, 13, 42],
                           value: 3,
                         },
                       ],
@@ -92,7 +92,7 @@ async function Rows() {
                   kind: 80,
                   loc: [14, 11, 14, 15],
                   text: "swap",
-                  bindingKey: "swap$8fvi8zcyc3un$1",
+                  bindingKey: "swap$1879rjsuy33z2$1",
                 },
                 initializer: {
                   kind: 220,
@@ -112,7 +112,7 @@ async function Rows() {
                             kind: 80,
                             loc: [15, 7, 15, 10],
                             text: "ids",
-                            bindingKey: "ids$8fvi8zcyc3un$0",
+                            bindingKey: "ids$1879rjsuy33z2$0",
                           },
                           questionDotToken: false,
                           name: "update",
@@ -130,7 +130,7 @@ async function Rows() {
                                   kind: 80,
                                   loc: [15, 19, 15, 23],
                                   text: "held",
-                                  bindingKey: "held$8fvi8zcyc3un$3",
+                                  bindingKey: "held$1879rjsuy33z2$3",
                                 },
                               },
                             ],
@@ -150,7 +150,7 @@ async function Rows() {
                                       kind: 80,
                                       loc: [15, 28, 15, 32],
                                       text: "held",
-                                      bindingKey: "held$8fvi8zcyc3un$3",
+                                      bindingKey: "held$1879rjsuy33z2$3",
                                     },
                                     questionDotToken: false,
                                     name: "with",
@@ -169,7 +169,7 @@ async function Rows() {
                                         kind: 80,
                                         loc: [15, 41, 15, 45],
                                         text: "held",
-                                        bindingKey: "held$8fvi8zcyc3un$3",
+                                        bindingKey: "held$1879rjsuy33z2$3",
                                       },
                                       argumentExpression: {
                                         kind: 9,
@@ -196,7 +196,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [15, 58, 15, 62],
                                     text: "held",
-                                    bindingKey: "held$8fvi8zcyc3un$3",
+                                    bindingKey: "held$1879rjsuy33z2$3",
                                   },
                                   argumentExpression: {
                                     kind: 9,
@@ -231,7 +231,7 @@ async function Rows() {
                   kind: 80,
                   loc: [17, 11, 17, 15],
                   text: "drop",
-                  bindingKey: "drop$8fvi8zcyc3un$2",
+                  bindingKey: "drop$1879rjsuy33z2$2",
                 },
                 initializer: {
                   kind: 220,
@@ -251,7 +251,7 @@ async function Rows() {
                             kind: 80,
                             loc: [18, 7, 18, 10],
                             text: "ids",
-                            bindingKey: "ids$8fvi8zcyc3un$0",
+                            bindingKey: "ids$1879rjsuy33z2$0",
                           },
                           questionDotToken: false,
                           name: "update",
@@ -269,7 +269,7 @@ async function Rows() {
                                   kind: 80,
                                   loc: [18, 19, 18, 23],
                                   text: "held",
-                                  bindingKey: "held$8fvi8zcyc3un$4",
+                                  bindingKey: "held$1879rjsuy33z2$4",
                                 },
                               },
                             ],
@@ -283,7 +283,7 @@ async function Rows() {
                                   kind: 80,
                                   loc: [18, 28, 18, 32],
                                   text: "held",
-                                  bindingKey: "held$8fvi8zcyc3un$4",
+                                  bindingKey: "held$1879rjsuy33z2$4",
                                 },
                                 questionDotToken: false,
                                 name: "filter",
@@ -301,7 +301,7 @@ async function Rows() {
                                         kind: 80,
                                         loc: [18, 41, 18, 43],
                                         text: "id",
-                                        bindingKey: "id$8fvi8zcyc3un$5",
+                                        bindingKey: "id$1879rjsuy33z2$5",
                                       },
                                     },
                                   ],
@@ -312,7 +312,7 @@ async function Rows() {
                                       kind: 80,
                                       loc: [18, 48, 18, 50],
                                       text: "id",
-                                      bindingKey: "id$8fvi8zcyc3un$5",
+                                      bindingKey: "id$1879rjsuy33z2$5",
                                     },
                                     operatorToken: "!==",
                                     right: {
@@ -363,7 +363,7 @@ async function Rows() {
                       kind: 80,
                       loc: [22, 24, 22, 28],
                       text: "swap",
-                      bindingKey: "swap$8fvi8zcyc3un$1",
+                      bindingKey: "swap$1879rjsuy33z2$1",
                     },
                   },
                 ],
@@ -390,7 +390,7 @@ async function Rows() {
                       kind: 80,
                       loc: [23, 24, 23, 28],
                       text: "drop",
-                      bindingKey: "drop$8fvi8zcyc3un$2",
+                      bindingKey: "drop$1879rjsuy33z2$2",
                     },
                   },
                 ],
@@ -433,7 +433,7 @@ async function Rows() {
                               kind: 80,
                               loc: [25, 22, 25, 25],
                               text: "ids",
-                              bindingKey: "ids$8fvi8zcyc3un$0",
+                              bindingKey: "ids$1879rjsuy33z2$0",
                             },
                             questionDotToken: false,
                             name: "read",
@@ -455,7 +455,7 @@ async function Rows() {
                               kind: 80,
                               loc: [26, 15, 26, 17],
                               text: "id",
-                              bindingKey: "id$8fvi8zcyc3un$6",
+                              bindingKey: "id$1879rjsuy33z2$6",
                             },
                           },
                         ],
@@ -482,7 +482,7 @@ async function Rows() {
                                 kind: 80,
                                 loc: [26, 46, 26, 48],
                                 text: "id",
-                                bindingKey: "id$8fvi8zcyc3un$6",
+                                bindingKey: "id$1879rjsuy33z2$6",
                               },
                             },
                           ],

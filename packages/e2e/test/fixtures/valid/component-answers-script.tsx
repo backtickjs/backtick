@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // A component whose whole body is client code answers with the script rather
 // than a drawing the host made: it declares its own storage and draws from it,
@@ -9,7 +9,7 @@ import { cs } from "@backtickjs/core";
 // draw nothing.
 async function Panel() {
   return cs`{
-    const n = state(2);
+    const n = $state(2);
     return <em>{n.read()}</em>;
   }`;
 }

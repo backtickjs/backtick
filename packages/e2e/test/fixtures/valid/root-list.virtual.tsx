@@ -1,4 +1,4 @@
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 
 // A list at the root, with nothing wrapping it. What that makes the root is a
 // stretch of the target rather than one node of it: emptying the list takes
@@ -9,7 +9,7 @@ import { cs, For } from "@backtickjs/core";
 // and empties it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = cs.const(cs.state<number[]>([1, 2, 3]));
+    const __cs_ids = cs.const(cs.splice((state))<number[]>([1, 2, 3]));
     const __cs_clear = cs.const(() => {
         cs.statement(cs.receiver(__cs_ids).update(() => []));
     });

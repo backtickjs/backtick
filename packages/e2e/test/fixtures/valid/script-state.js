@@ -1,20 +1,20 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // Storage a script declares for itself, rather than one a component owns and
-// splices in. `state(...)` is a declaration and not a call of a name: each time
-// the declaration is evaluated there is another cell, which is what lets a
-// script build a row that carries its own.
+// splices in. `$state(...)` is an ordinary call of an imported value, and the
+// cell is what the call answers with: each time it is evaluated there is
+// another cell, which is what lets a script build a row that carries its own.
 async function Rows() {
   const build = cs.create(
     [8, 17, 10, 5],
     {
       version: "0.0.0",
       filePath: "script-state.tsx",
-      fileHash: "8owf25be0b5d",
+      fileHash: "2s2nt4oke8yg5",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 220,
@@ -27,7 +27,7 @@ async function Rows() {
             kind: 80,
             loc: [8, 21, 8, 26],
             text: "label",
-            bindingKey: "label$8owf25be0b5d$0",
+            bindingKey: "label$2s2nt4oke8yg5$0",
           },
         },
       ],
@@ -37,30 +37,30 @@ async function Rows() {
         statements: [
           {
             kind: 254,
-            loc: [9, 5, 9, 36],
+            loc: [9, 5, 9, 37],
             expression: {
               kind: 211,
-              loc: [9, 12, 9, 35],
+              loc: [9, 12, 9, 36],
               properties: [
                 {
                   kind: 304,
-                  loc: [9, 14, 9, 33],
+                  loc: [9, 14, 9, 34],
                   name: "label",
                   initializer: {
                     kind: 214,
-                    loc: [9, 21, 9, 33],
+                    loc: [9, 21, 9, 34],
                     expression: {
-                      kind: 1001,
-                      loc: [9, 21, 9, 26],
-                      name: "state",
+                      kind: 1000,
+                      loc: [9, 21, 9, 27],
+                      key: "$state",
                     },
                     questionDotToken: false,
                     arguments: [
                       {
                         kind: 80,
-                        loc: [9, 27, 9, 32],
+                        loc: [9, 28, 9, 33],
                         text: "label",
-                        bindingKey: "label$8owf25be0b5d$0",
+                        bindingKey: "label$2s2nt4oke8yg5$0",
                       },
                     ],
                   },
@@ -78,7 +78,7 @@ async function Rows() {
       {
         version: "0.0.0",
         filePath: "script-state.tsx",
-        fileHash: "8owf25be0b5d",
+        fileHash: "2s2nt4oke8yg5",
         kind: "value",
         splices: {},
         captures: [],
@@ -95,7 +95,7 @@ async function Rows() {
       {
         version: "0.0.0",
         filePath: "script-state.tsx",
-        fileHash: "8owf25be0b5d",
+        fileHash: "2s2nt4oke8yg5",
         kind: "value",
         splices: { $build: build },
         captures: [],
@@ -123,7 +123,7 @@ async function Rows() {
                       kind: 80,
                       loc: [16, 15, 16, 18],
                       text: "row",
-                      bindingKey: "row$8owf25be0b5d$1",
+                      bindingKey: "row$2s2nt4oke8yg5$1",
                     },
                     initializer: {
                       kind: 214,
@@ -160,7 +160,7 @@ async function Rows() {
                     kind: 80,
                     loc: [17, 9, 17, 12],
                     text: "row",
-                    bindingKey: "row$8owf25be0b5d$1",
+                    bindingKey: "row$2s2nt4oke8yg5$1",
                   },
                   questionDotToken: false,
                   name: "label",
@@ -186,7 +186,7 @@ async function Rows() {
                           kind: 80,
                           loc: [17, 25, 17, 28],
                           text: "row",
-                          bindingKey: "row$8owf25be0b5d$1",
+                          bindingKey: "row$2s2nt4oke8yg5$1",
                         },
                         questionDotToken: false,
                         name: "label",
@@ -215,7 +215,7 @@ async function Rows() {
       {
         version: "0.0.0",
         filePath: "script-state.tsx",
-        fileHash: "8owf25be0b5d",
+        fileHash: "2s2nt4oke8yg5",
         kind: "value",
         splices: { $build: build },
         captures: [],

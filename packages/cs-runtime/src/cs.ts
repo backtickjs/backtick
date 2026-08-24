@@ -3,7 +3,6 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
 import type { Spliceable, Spliced } from "@backtickjs/language-schema";
-import type { State } from "@backtickjs/language-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 import type { Widen } from "@backtickjs/language-schema";
 
@@ -93,16 +92,6 @@ function _index<T extends ClientValue, K extends IndexKey<Receiver<T>>>(
   );
 }
 
-// Storage a script declares for itself, read as the cell it becomes. Declaring
-// is not calling: this stands where the declaration is written, and each time
-// that is evaluated there is another cell.
-function _state<const T extends ClientValue>(_: T): State<Widen<T>> {
-  throw new Error(
-    "Don't call `cs.state` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -123,6 +112,5 @@ export const cs = Object.assign(
     statement: _statement,
     receiver: _receiver,
     index: _index,
-    state: _state,
   },
 );

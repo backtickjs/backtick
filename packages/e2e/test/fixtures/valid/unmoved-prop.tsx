@@ -1,4 +1,4 @@
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row
@@ -11,7 +11,7 @@ import { cs, For } from "@backtickjs/core";
 // any size, and no snapshot of the drawn markup could see it.
 async function Rows() {
   return cs`{
-    const selected = state(0);
+    const selected = $state(0);
     return (
       <div>
         <span onclick={() => selected.write(1)}>select</span>

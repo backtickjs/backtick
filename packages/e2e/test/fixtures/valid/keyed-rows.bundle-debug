@@ -1,5 +1,5 @@
-#f0 = ($0) => {
-  const ids = state([1, 2, 3]);
+#f0 = ($0, $1) => {
+  const ids = $0()([1, 2, 3]);
   const swap = () => {
     ids.update((held) => held.with(0, held[2]).with(2, held[0]));
   };
@@ -18,7 +18,7 @@
       {"drop"}
     </span>}
     {<div>
-      {$0()({
+      {$1()({
         "each": () => ids.read(),
         "children": () => (id) => <span>
           {"row " + id}
@@ -28,7 +28,7 @@
   </div>;
 }
 
-root = #f0(() => ($0) => <for
+root = #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}

@@ -2,7 +2,9 @@ cs.lift((() => {\n      → cs`{\n
 const                   → const 
 __cs_n                  → n
  = cs.const(            →  = 
-cs.state                → state
+cs.splice(              →  [-semantic]
+(state)                 → $state
+)                       →  [-semantic]
 (                       → (
 2                       → 2
 )                       → )

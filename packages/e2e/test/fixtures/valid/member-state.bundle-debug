@@ -1,15 +1,15 @@
-#f0 = ($0) => {
+#f0 = ($0, $1) => {
   const build = (from) => {
     return Array.from({ "length": 3 }, (_, at) => {
-      return { "id": from + at, "label": state("row " + from + at) };
+      return { "id": from + at, "label": $0()("row " + from + at) };
     });
   };
-  const held = state(build(1));
+  const held = $0()(build(1));
   return <div>
     {<ul
       class={"rows"}
     >
-      {$0()({
+      {$1()({
         "each": () => held.read(),
         "children": () => (row) => <li
           onclick={() => row.label.write("pressed")}
@@ -21,7 +21,7 @@
   </div>;
 }
 
-root = #f0(() => ($0) => <for
+root = #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}

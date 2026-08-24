@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // `update` derives the next value from the current one, so a handler needs no
 // separate read. It returns `void` like `write`, which is what keeps it out of
 // a value body: only a statement position accepts `void`.
@@ -9,11 +9,11 @@ async function Stepper() {
     {
       version: "0.0.0",
       filePath: "local-state-update.tsx",
-      fileHash: "1etb2f5z421rb",
+      fileHash: "1y4c4ou1ya2k8",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -21,33 +21,33 @@ async function Stepper() {
       statements: [
         {
           kind: 244,
-          loc: [8, 5, 8, 28],
+          loc: [8, 5, 8, 29],
           declarationList: {
             kind: 262,
-            loc: [8, 5, 8, 27],
+            loc: [8, 5, 8, 28],
             declarations: [
               {
                 kind: 261,
-                loc: [8, 11, 8, 27],
+                loc: [8, 11, 8, 28],
                 name: {
                   kind: 80,
                   loc: [8, 11, 8, 15],
                   text: "size",
-                  bindingKey: "size$1etb2f5z421rb$0",
+                  bindingKey: "size$1y4c4ou1ya2k8$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [8, 18, 8, 27],
+                  loc: [8, 18, 8, 28],
                   expression: {
-                    kind: 1001,
-                    loc: [8, 18, 8, 23],
-                    name: "state",
+                    kind: 1000,
+                    loc: [8, 18, 8, 24],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [8, 24, 8, 26],
+                      loc: [8, 25, 8, 27],
                       value: 16,
                     },
                   ],
@@ -93,7 +93,7 @@ async function Stepper() {
                           kind: 80,
                           loc: [11, 32, 11, 36],
                           text: "size",
-                          bindingKey: "size$1etb2f5z421rb$0",
+                          bindingKey: "size$1y4c4ou1ya2k8$0",
                         },
                         questionDotToken: false,
                         name: "read",
@@ -130,7 +130,7 @@ async function Stepper() {
                             kind: 80,
                             loc: [13, 11, 13, 15],
                             text: "size",
-                            bindingKey: "size$1etb2f5z421rb$0",
+                            bindingKey: "size$1y4c4ou1ya2k8$0",
                           },
                           questionDotToken: false,
                           name: "update",
@@ -148,7 +148,7 @@ async function Stepper() {
                                   kind: 80,
                                   loc: [13, 24, 13, 31],
                                   text: "current",
-                                  bindingKey: "current$1etb2f5z421rb$1",
+                                  bindingKey: "current$1y4c4ou1ya2k8$1",
                                 },
                               },
                             ],
@@ -159,7 +159,7 @@ async function Stepper() {
                                 kind: 80,
                                 loc: [13, 44, 13, 51],
                                 text: "current",
-                                bindingKey: "current$1etb2f5z421rb$1",
+                                bindingKey: "current$1y4c4ou1ya2k8$1",
                               },
                               operatorToken: "+",
                               right: {

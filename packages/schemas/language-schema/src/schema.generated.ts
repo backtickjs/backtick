@@ -44,9 +44,9 @@ declare const StateBrand: unique symbol;
 /**
  * A cell as a script reads it.
  *
- * Declaring one is not here: `state()` is a name the compiler recognises, and
- * declaring happens while a component is being expanded and has to know which
- * instance is running. This is the half that reaches the client.
+ * What makes one is not here: `state` is a client function a script imports
+ * and splices, so a cell is what calling it answers with. This is the half
+ * that reaches the client.
  */
 export interface State<T> extends ReadonlyState<T> {
   readonly [StateBrand]: never;

@@ -1,4 +1,4 @@
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 import { Task } from "./Task.js";
 
 const TASKS = [
@@ -18,8 +18,8 @@ const page =
 
 export async function TodoList() {
   return cs`{
-    const filter = state("all");
-    const tasks = state($initial);
+    const filter = $state("all");
+    const tasks = $state($initial);
 
     // A function rather than a value: what a prop holds is re-read whenever
     // what it names changes, and a value computed here would be computed once.

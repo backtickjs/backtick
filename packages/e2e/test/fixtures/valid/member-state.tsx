@@ -1,4 +1,4 @@
-import { cs, For, type State } from "@backtickjs/core";
+import { cs, For, type State, state } from "@backtickjs/core";
 
 type Row = {
   readonly id: number;
@@ -16,11 +16,11 @@ async function Rows() {
   return cs`{
     const build = (from: number) => {
       return Array.from({ length: 3 }, (_, at) => {
-        return { id: from + at, label: state("row " + (from + at)) };
+        return { id: from + at, label: $state("row " + (from + at)) };
       });
     };
 
-    const held = state(build(1));
+    const held = $state(build(1));
 
     return (
       <div>

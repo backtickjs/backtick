@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // `Pressable` is the row that responds as one thing: `View` lays children out
 // and `Text` takes a press, and this takes both — so a checkbox and a label are
 // one tap target while staying separately styled.
@@ -9,11 +9,11 @@ async function Row() {
     {
       version: "0.0.0",
       filePath: "pressable.tsx",
-      fileHash: "2gpxn9p38p3fh",
+      fileHash: "atpxodpi731m",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -21,33 +21,33 @@ async function Row() {
       statements: [
         {
           kind: 244,
-          loc: [8, 5, 8, 28],
+          loc: [8, 5, 8, 29],
           declarationList: {
             kind: 262,
-            loc: [8, 5, 8, 27],
+            loc: [8, 5, 8, 28],
             declarations: [
               {
                 kind: 261,
-                loc: [8, 11, 8, 27],
+                loc: [8, 11, 8, 28],
                 name: {
                   kind: 80,
                   loc: [8, 11, 8, 16],
                   text: "count",
-                  bindingKey: "count$2gpxn9p38p3fh$0",
+                  bindingKey: "count$atpxodpi731m$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [8, 19, 8, 27],
+                  loc: [8, 19, 8, 28],
                   expression: {
-                    kind: 1001,
-                    loc: [8, 19, 8, 24],
-                    name: "state",
+                    kind: 1000,
+                    loc: [8, 19, 8, 25],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [8, 25, 8, 26],
+                      loc: [8, 26, 8, 27],
                       value: 0,
                     },
                   ],
@@ -101,7 +101,7 @@ async function Row() {
                         kind: 80,
                         loc: [13, 24, 13, 29],
                         text: "count",
-                        bindingKey: "count$2gpxn9p38p3fh$0",
+                        bindingKey: "count$atpxodpi731m$0",
                       },
                       questionDotToken: false,
                       name: "write",
@@ -121,7 +121,7 @@ async function Row() {
                               kind: 80,
                               loc: [13, 36, 13, 41],
                               text: "count",
-                              bindingKey: "count$2gpxn9p38p3fh$0",
+                              bindingKey: "count$atpxodpi731m$0",
                             },
                             questionDotToken: false,
                             name: "read",
@@ -177,7 +177,7 @@ async function Row() {
                             kind: 80,
                             loc: [15, 41, 15, 46],
                             text: "count",
-                            bindingKey: "count$2gpxn9p38p3fh$0",
+                            bindingKey: "count$atpxodpi731m$0",
                           },
                           questionDotToken: false,
                           name: "read",
@@ -237,7 +237,7 @@ async function Row() {
                             kind: 80,
                             loc: [16, 29, 16, 34],
                             text: "count",
-                            bindingKey: "count$2gpxn9p38p3fh$0",
+                            bindingKey: "count$atpxodpi731m$0",
                           },
                           questionDotToken: false,
                           name: "read",

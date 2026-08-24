@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import type { Client, State } from "@backtickjs/core";
 
 // A child reading a cell it was handed, in all three positions at once: a prop,
@@ -29,7 +29,7 @@ const Row = async ({
 
 async function Panel() {
   return cs`{
-    const selected = state(0);
+    const selected = $state(0);
     return (
       <div>
         <span onclick={() => selected.write(1)}>select</span>

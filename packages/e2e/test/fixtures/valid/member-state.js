@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 // A list whose members carry storage of their own: `build` declares a cell per
 // row, and the cell the list reads holds those cells along with the rows. A
 // press writes into one row's cell, so only what read that cell runs again —
@@ -13,11 +13,11 @@ async function Rows() {
     {
       version: "0.0.0",
       filePath: "member-state.tsx",
-      fileHash: "ivufpeeypdun",
+      fileHash: "2rpyn3ijclm5s",
       kind: "value",
-      splices: { $For: For },
+      splices: { $state: state, $For: For },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -37,7 +37,7 @@ async function Rows() {
                   kind: 80,
                   loc: [17, 11, 17, 16],
                   text: "build",
-                  bindingKey: "build$ivufpeeypdun$0",
+                  bindingKey: "build$2rpyn3ijclm5s$0",
                 },
                 initializer: {
                   kind: 220,
@@ -50,7 +50,7 @@ async function Rows() {
                         kind: 80,
                         loc: [17, 20, 17, 24],
                         text: "from",
-                        bindingKey: "from$ivufpeeypdun$2",
+                        bindingKey: "from$2rpyn3ijclm5s$2",
                       },
                     },
                   ],
@@ -98,7 +98,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [18, 41, 18, 42],
                                     text: "_",
-                                    bindingKey: "_$ivufpeeypdun$3",
+                                    bindingKey: "_$2rpyn3ijclm5s$3",
                                   },
                                 },
                                 {
@@ -108,7 +108,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [18, 44, 18, 46],
                                     text: "at",
-                                    bindingKey: "at$ivufpeeypdun$4",
+                                    bindingKey: "at$2rpyn3ijclm5s$4",
                                   },
                                 },
                               ],
@@ -118,10 +118,10 @@ async function Rows() {
                                 statements: [
                                   {
                                     kind: 254,
-                                    loc: [19, 9, 19, 70],
+                                    loc: [19, 9, 19, 71],
                                     expression: {
                                       kind: 211,
-                                      loc: [19, 16, 19, 69],
+                                      loc: [19, 16, 19, 70],
                                       properties: [
                                         {
                                           kind: 304,
@@ -134,57 +134,58 @@ async function Rows() {
                                               kind: 80,
                                               loc: [19, 22, 19, 26],
                                               text: "from",
-                                              bindingKey: "from$ivufpeeypdun$2",
+                                              bindingKey:
+                                                "from$2rpyn3ijclm5s$2",
                                             },
                                             operatorToken: "+",
                                             right: {
                                               kind: 80,
                                               loc: [19, 29, 19, 31],
                                               text: "at",
-                                              bindingKey: "at$ivufpeeypdun$4",
+                                              bindingKey: "at$2rpyn3ijclm5s$4",
                                             },
                                           },
                                         },
                                         {
                                           kind: 304,
-                                          loc: [19, 33, 19, 67],
+                                          loc: [19, 33, 19, 68],
                                           name: "label",
                                           initializer: {
                                             kind: 214,
-                                            loc: [19, 40, 19, 67],
+                                            loc: [19, 40, 19, 68],
                                             expression: {
-                                              kind: 1001,
-                                              loc: [19, 40, 19, 45],
-                                              name: "state",
+                                              kind: 1000,
+                                              loc: [19, 40, 19, 46],
+                                              key: "$state",
                                             },
                                             questionDotToken: false,
                                             arguments: [
                                               {
                                                 kind: 227,
-                                                loc: [19, 46, 19, 66],
+                                                loc: [19, 47, 19, 67],
                                                 left: {
                                                   kind: 11,
-                                                  loc: [19, 46, 19, 52],
+                                                  loc: [19, 47, 19, 53],
                                                   text: "row ",
                                                 },
                                                 operatorToken: "+",
                                                 right: {
                                                   kind: 227,
-                                                  loc: [19, 56, 19, 65],
+                                                  loc: [19, 57, 19, 66],
                                                   left: {
                                                     kind: 80,
-                                                    loc: [19, 56, 19, 60],
+                                                    loc: [19, 57, 19, 61],
                                                     text: "from",
                                                     bindingKey:
-                                                      "from$ivufpeeypdun$2",
+                                                      "from$2rpyn3ijclm5s$2",
                                                   },
                                                   operatorToken: "+",
                                                   right: {
                                                     kind: 80,
-                                                    loc: [19, 63, 19, 65],
+                                                    loc: [19, 64, 19, 66],
                                                     text: "at",
                                                     bindingKey:
-                                                      "at$ivufpeeypdun$4",
+                                                      "at$2rpyn3ijclm5s$4",
                                                   },
                                                 },
                                               },
@@ -210,44 +211,44 @@ async function Rows() {
         },
         {
           kind: 244,
-          loc: [23, 5, 23, 34],
+          loc: [23, 5, 23, 35],
           declarationList: {
             kind: 262,
-            loc: [23, 5, 23, 33],
+            loc: [23, 5, 23, 34],
             declarations: [
               {
                 kind: 261,
-                loc: [23, 11, 23, 33],
+                loc: [23, 11, 23, 34],
                 name: {
                   kind: 80,
                   loc: [23, 11, 23, 15],
                   text: "held",
-                  bindingKey: "held$ivufpeeypdun$1",
+                  bindingKey: "held$2rpyn3ijclm5s$1",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [23, 18, 23, 33],
+                  loc: [23, 18, 23, 34],
                   expression: {
-                    kind: 1001,
-                    loc: [23, 18, 23, 23],
-                    name: "state",
+                    kind: 1000,
+                    loc: [23, 18, 23, 24],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 214,
-                      loc: [23, 24, 23, 32],
+                      loc: [23, 25, 23, 33],
                       expression: {
                         kind: 80,
-                        loc: [23, 24, 23, 29],
+                        loc: [23, 25, 23, 30],
                         text: "build",
-                        bindingKey: "build$ivufpeeypdun$0",
+                        bindingKey: "build$2rpyn3ijclm5s$0",
                       },
                       questionDotToken: false,
                       arguments: [
                         {
                           kind: 9,
-                          loc: [23, 30, 23, 31],
+                          loc: [23, 31, 23, 32],
                           value: 1,
                         },
                       ],
@@ -312,7 +313,7 @@ async function Rows() {
                               kind: 80,
                               loc: [28, 22, 28, 26],
                               text: "held",
-                              bindingKey: "held$ivufpeeypdun$1",
+                              bindingKey: "held$2rpyn3ijclm5s$1",
                             },
                             questionDotToken: false,
                             name: "read",
@@ -334,7 +335,7 @@ async function Rows() {
                               kind: 80,
                               loc: [29, 15, 29, 18],
                               text: "row",
-                              bindingKey: "row$ivufpeeypdun$5",
+                              bindingKey: "row$2rpyn3ijclm5s$5",
                             },
                           },
                         ],
@@ -366,7 +367,7 @@ async function Rows() {
                                         kind: 80,
                                         loc: [30, 34, 30, 37],
                                         text: "row",
-                                        bindingKey: "row$ivufpeeypdun$5",
+                                        bindingKey: "row$2rpyn3ijclm5s$5",
                                       },
                                       questionDotToken: false,
                                       name: "label",
@@ -400,7 +401,7 @@ async function Rows() {
                                     kind: 80,
                                     loc: [31, 18, 31, 21],
                                     text: "row",
-                                    bindingKey: "row$ivufpeeypdun$5",
+                                    bindingKey: "row$2rpyn3ijclm5s$5",
                                   },
                                   questionDotToken: false,
                                   name: "label",

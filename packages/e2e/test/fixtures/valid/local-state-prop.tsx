@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 import type { Client, State } from "@backtickjs/core";
 
 // A cell crossing a component boundary: declared once by the script that draws
@@ -18,7 +18,7 @@ const Counter = async ({ size }: { size: Client<State<number>> }) => (
 
 async function Panel() {
   return cs`{
-    const size = state(16);
+    const size = $state(16);
     return (
       <div>
         <Counter size={size} />

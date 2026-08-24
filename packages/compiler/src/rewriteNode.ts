@@ -11,19 +11,17 @@ import { mangle } from "./unmangle.js";
 import { isFragmentTag } from "./isFragmentTag.js";
 
 // Every name the language provides, written here rather than read off a
-// schema: the compiler's vocabulary is its own and closed. `Math` and `Array`
-// are the host lib's and `state` is the framework's, so this grows when the
-// language does — what a target adds arrives as a value an app splices, and
+// schema: the compiler's vocabulary is its own and closed, and it is the host
+// lib's and nothing else. What the framework or an app provides arrives as a
+// value an app splices — `$state`, imported and handed to the script — and
 // never as a name recognised here. What may be read off one of these is not
 // this question: `Receiver` narrows the members, from the schema.
 //
-// The two differ in what the name is. A namespace is only the front of one: a
-// script writes `Math.floor`, which is a single name the client answers, and
-// there is no `Math` for a read to yield — so an access folds into the whole
-// name below, and the front standing alone is an error. A value is a name on
-// its own.
+// A namespace is only the front of a name: a script writes `Math.floor`, which
+// is a single name the client answers, and there is no `Math` for a read to
+// yield — so an access folds into the whole name below, and the front standing
+// alone is an error.
 const namespaces = new Set(["Array", "Math"]);
-const values = new Set(["state"]);
 
 export interface RewriteState {
   script: ClientScript;
@@ -839,27 +837,16 @@ function rewriteNodeImpl(
     // The virtual code still names the host's lib plainly — narrowing it is
     // `Receiver`'s job, the same as for a string or an array — so the one error
     // stands alone.
-    if (
-      !state.bindings.has(node) &&
-      (namespaces.has(node.text) || values.has(node.text))
-    ) {
-      if (namespaces.has(node.text) && !isNamespaceFront(ts, node)) {
+    if (!state.bindings.has(node) && namespaces.has(node.text)) {
+      if (!isNamespaceFront(ts, node)) {
         state.errors.set(
           node,
           `\`${node.text}\` is a namespace, not a value: a client script can ` +
             "only write it followed by a member.",
         );
       }
-      // A value is read through `cs`, where its type is written: nothing
-      // declares it, and a `declare global` would put it in the host's own
-      // scope as well as the script's. A namespace is named plainly, as the
-      // lib global it is, and narrowing it is `Receiver`'s job.
-      const virtual = values.has(node.text)
-        ? ts.factory.createPropertyAccessExpression(
-            ts.factory.createIdentifier("cs"),
-            node.text,
-          )
-        : ts.factory.createIdentifier(node.text);
+      // Named plainly, as the lib global it is; narrowing it is `Receiver`'s.
+      const virtual = ts.factory.createIdentifier(node.text);
       state.mappings.set(virtual, node);
       return {
         virtual,

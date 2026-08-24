@@ -34,7 +34,9 @@ __cs_at                 → at
 ,                       → , 
 label                   → label
 :                       → : 
-cs.state                → state
+cs.splice(              →  [-semantic]
+(state)                 → $state
+)                       →  [-semantic]
 (                       → (
 "row "                  → "row "
  + (                    →  + 
@@ -54,7 +56,9 @@ __cs_at                 → at
 const                   → const 
 __cs_held               → held
  = cs.const(            →  = 
-cs.state                → state
+cs.splice(              →  [-semantic]
+(state)                 → $state
+)                       →  [-semantic]
 (                       → (
 __cs_build              → build
 (                       → (

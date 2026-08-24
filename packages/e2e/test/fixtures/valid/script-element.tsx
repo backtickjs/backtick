@@ -1,4 +1,4 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // An element a script writes, rather than one the host wrote and the script
 // spliced in. What it lowers to is the node a tree entry builds, so the two
@@ -6,7 +6,7 @@ import { cs } from "@backtickjs/core";
 // written, not what it is.
 async function Card() {
   return cs`{
-    const label = state("hi");
+    const label = $state("hi");
 
     // A handler written inline and one held under a name: both are client code,
     // and a handler prop takes a function and nothing else.

@@ -1,5 +1,5 @@
-#f0 = () => {
-  const count = state(0);
+#f0 = ($0) => {
+  const count = $0()(0);
   return <button
     id={"row"}
     style={"display: flex; gap: 8px"}
@@ -16,4 +16,4 @@
   </button>;
 }
 
-root = #f0()
+root = #f0(() => state)

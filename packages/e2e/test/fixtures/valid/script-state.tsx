@@ -1,12 +1,12 @@
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 
 // Storage a script declares for itself, rather than one a component owns and
-// splices in. `state(...)` is a declaration and not a call of a name: each time
-// the declaration is evaluated there is another cell, which is what lets a
-// script build a row that carries its own.
+// splices in. `$state(...)` is an ordinary call of an imported value, and the
+// cell is what the call answers with: each time it is evaluated there is
+// another cell, which is what lets a script build a row that carries its own.
 async function Rows() {
   const build = cs`(label: string) => {
-    return { label: state(label) };
+    return { label: $state(label) };
   }`;
 
   return (

@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // A component whose whole body is client code answers with the script rather
 // than a drawing the host made: it declares its own storage and draws from it,
 // and there is nothing left for the host to build.
@@ -13,11 +13,11 @@ async function Panel() {
     {
       version: "0.0.0",
       filePath: "component-answers-script.tsx",
-      fileHash: "1kjrs0f1hgfam",
+      fileHash: "3fv7xpc8x0efp",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -25,33 +25,33 @@ async function Panel() {
       statements: [
         {
           kind: 244,
-          loc: [12, 5, 12, 24],
+          loc: [12, 5, 12, 25],
           declarationList: {
             kind: 262,
-            loc: [12, 5, 12, 23],
+            loc: [12, 5, 12, 24],
             declarations: [
               {
                 kind: 261,
-                loc: [12, 11, 12, 23],
+                loc: [12, 11, 12, 24],
                 name: {
                   kind: 80,
                   loc: [12, 11, 12, 12],
                   text: "n",
-                  bindingKey: "n$1kjrs0f1hgfam$0",
+                  bindingKey: "n$3fv7xpc8x0efp$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [12, 15, 12, 23],
+                  loc: [12, 15, 12, 24],
                   expression: {
-                    kind: 1001,
-                    loc: [12, 15, 12, 20],
-                    name: "state",
+                    kind: 1000,
+                    loc: [12, 15, 12, 21],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [12, 21, 12, 22],
+                      loc: [12, 22, 12, 23],
                       value: 2,
                     },
                   ],
@@ -84,7 +84,7 @@ async function Panel() {
                     kind: 80,
                     loc: [13, 17, 13, 18],
                     text: "n",
-                    bindingKey: "n$1kjrs0f1hgfam$0",
+                    bindingKey: "n$3fv7xpc8x0efp$0",
                   },
                   questionDotToken: false,
                   name: "read",

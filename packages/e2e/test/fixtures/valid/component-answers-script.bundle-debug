@@ -1,10 +1,10 @@
-#f0 = () => {
-  const n = state(2);
+#f0 = ($0) => {
+  const n = $0()(2);
   return <em>
     {n.read()}
   </em>;
 }
 
 root = <div>
-  {#f0()}
+  {#f0(() => state)}
 </div>

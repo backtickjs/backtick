@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // An element a script writes, rather than one the host wrote and the script
 // spliced in. What it lowers to is the node a tree entry builds, so the two
 // spellings draw the same thing — the difference is where the element is
@@ -10,11 +10,11 @@ async function Card() {
     {
       version: "0.0.0",
       filePath: "script-element.tsx",
-      fileHash: "2sfydqr0yhl4n",
+      fileHash: "wxnogu00pnd4",
       kind: "value",
-      splices: {},
+      splices: { $state: state },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -22,33 +22,33 @@ async function Card() {
       statements: [
         {
           kind: 244,
-          loc: [9, 5, 9, 31],
+          loc: [9, 5, 9, 32],
           declarationList: {
             kind: 262,
-            loc: [9, 5, 9, 30],
+            loc: [9, 5, 9, 31],
             declarations: [
               {
                 kind: 261,
-                loc: [9, 11, 9, 30],
+                loc: [9, 11, 9, 31],
                 name: {
                   kind: 80,
                   loc: [9, 11, 9, 16],
                   text: "label",
-                  bindingKey: "label$2sfydqr0yhl4n$0",
+                  bindingKey: "label$wxnogu00pnd4$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [9, 19, 9, 30],
+                  loc: [9, 19, 9, 31],
                   expression: {
-                    kind: 1001,
-                    loc: [9, 19, 9, 24],
-                    name: "state",
+                    kind: 1000,
+                    loc: [9, 19, 9, 25],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 11,
-                      loc: [9, 25, 9, 29],
+                      loc: [9, 26, 9, 30],
                       text: "hi",
                     },
                   ],
@@ -72,7 +72,7 @@ async function Card() {
                   kind: 80,
                   loc: [13, 11, 13, 14],
                   text: "row",
-                  bindingKey: "row$2sfydqr0yhl4n$1",
+                  bindingKey: "row$wxnogu00pnd4$1",
                 },
                 initializer: {
                   kind: 220,
@@ -85,7 +85,7 @@ async function Card() {
                         kind: 80,
                         loc: [13, 18, 13, 22],
                         text: "size",
-                        bindingKey: "size$2sfydqr0yhl4n$2",
+                        bindingKey: "size$wxnogu00pnd4$2",
                       },
                     },
                   ],
@@ -107,7 +107,7 @@ async function Card() {
                                 kind: 80,
                                 loc: [14, 13, 14, 16],
                                 text: "css",
-                                bindingKey: "css$2sfydqr0yhl4n$3",
+                                bindingKey: "css$wxnogu00pnd4$3",
                               },
                               initializer: {
                                 kind: 227,
@@ -125,7 +125,7 @@ async function Card() {
                                     kind: 80,
                                     loc: [14, 35, 14, 39],
                                     text: "size",
-                                    bindingKey: "size$2sfydqr0yhl4n$2",
+                                    bindingKey: "size$wxnogu00pnd4$2",
                                   },
                                 },
                                 operatorToken: "+",
@@ -154,7 +154,7 @@ async function Card() {
                                 kind: 80,
                                 loc: [15, 13, 15, 18],
                                 text: "press",
-                                bindingKey: "press$2sfydqr0yhl4n$4",
+                                bindingKey: "press$wxnogu00pnd4$4",
                               },
                               initializer: {
                                 kind: 220,
@@ -170,7 +170,7 @@ async function Card() {
                                       kind: 80,
                                       loc: [15, 27, 15, 32],
                                       text: "label",
-                                      bindingKey: "label$2sfydqr0yhl4n$0",
+                                      bindingKey: "label$wxnogu00pnd4$0",
                                     },
                                     questionDotToken: false,
                                     name: "write",
@@ -208,7 +208,7 @@ async function Card() {
                                 kind: 80,
                                 loc: [17, 21, 17, 24],
                                 text: "css",
-                                bindingKey: "css$2sfydqr0yhl4n$3",
+                                bindingKey: "css$wxnogu00pnd4$3",
                               },
                             },
                           ],
@@ -228,7 +228,7 @@ async function Card() {
                                     kind: 80,
                                     loc: [18, 24, 18, 27],
                                     text: "css",
-                                    bindingKey: "css$2sfydqr0yhl4n$3",
+                                    bindingKey: "css$wxnogu00pnd4$3",
                                   },
                                 },
                                 {
@@ -247,7 +247,7 @@ async function Card() {
                                           kind: 80,
                                           loc: [18, 44, 18, 49],
                                           text: "label",
-                                          bindingKey: "label$2sfydqr0yhl4n$0",
+                                          bindingKey: "label$wxnogu00pnd4$0",
                                         },
                                         questionDotToken: false,
                                         name: "write",
@@ -275,7 +275,7 @@ async function Card() {
                                       kind: 80,
                                       loc: [19, 14, 19, 19],
                                       text: "label",
-                                      bindingKey: "label$2sfydqr0yhl4n$0",
+                                      bindingKey: "label$wxnogu00pnd4$0",
                                     },
                                     questionDotToken: false,
                                     name: "read",
@@ -326,7 +326,7 @@ async function Card() {
                                     kind: 80,
                                     loc: [22, 24, 22, 27],
                                     text: "css",
-                                    bindingKey: "css$2sfydqr0yhl4n$3",
+                                    bindingKey: "css$wxnogu00pnd4$3",
                                   },
                                 },
                                 {
@@ -335,7 +335,7 @@ async function Card() {
                                     kind: 80,
                                     loc: [22, 38, 22, 43],
                                     text: "press",
-                                    bindingKey: "press$2sfydqr0yhl4n$4",
+                                    bindingKey: "press$wxnogu00pnd4$4",
                                   },
                                 },
                               ],
@@ -387,7 +387,7 @@ async function Card() {
                   kind: 80,
                   loc: [29, 37, 29, 40],
                   text: "row",
-                  bindingKey: "row$2sfydqr0yhl4n$1",
+                  bindingKey: "row$wxnogu00pnd4$1",
                 },
                 questionDotToken: false,
                 arguments: [

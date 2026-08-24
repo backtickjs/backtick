@@ -1,4 +1,4 @@
-import { cs, For } from "@backtickjs/core";
+import { cs, For, state } from "@backtickjs/core";
 import type { ReadonlyState } from "@backtickjs/core";
 
 // A list whose drawing reads where a member sits as well as what it is.
@@ -10,7 +10,7 @@ import type { ReadonlyState } from "@backtickjs/core";
 // bug this pins.
 async function Rows() {
   return cs`{
-    const names = state<string[]>(["a", "b", "c"]);
+    const names = $state<string[]>(["a", "b", "c"]);
     const rotate = () => {
       names.update((held) => [held[2], held[0], held[1]]);
     };

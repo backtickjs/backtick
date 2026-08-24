@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
-import { cs } from "@backtickjs/core";
+import { cs, state } from "@backtickjs/core";
 // A child reading a cell it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. The script that
 // declares the cell never reads it, so a write reaches each `Row` with the
@@ -18,7 +18,7 @@ const Row = async ({ id, selected }) =>
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "16bbrkwir8tx0",
+            fileHash: "kiq2x3i0lhh3",
             kind: "value",
             splices: { $selected: selected, $id: id },
             captures: [],
@@ -91,7 +91,7 @@ const Row = async ({ id, selected }) =>
           {
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
-            fileHash: "16bbrkwir8tx0",
+            fileHash: "kiq2x3i0lhh3",
             kind: "value",
             splices: { $id: id, $selected: selected },
             captures: [],
@@ -151,7 +151,7 @@ const Row = async ({ id, selected }) =>
         {
           version: "0.0.0",
           filePath: "local-state-child-reads.tsx",
-          fileHash: "16bbrkwir8tx0",
+          fileHash: "kiq2x3i0lhh3",
           kind: "value",
           splices: {
             $selected: selected,
@@ -210,11 +210,11 @@ async function Panel() {
     {
       version: "0.0.0",
       filePath: "local-state-child-reads.tsx",
-      fileHash: "16bbrkwir8tx0",
+      fileHash: "kiq2x3i0lhh3",
       kind: "value",
-      splices: { $Row: Row },
+      splices: { $state: state, $Row: Row },
       captures: [],
-      spliceParams: {},
+      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,
@@ -222,33 +222,33 @@ async function Panel() {
       statements: [
         {
           kind: 244,
-          loc: [32, 5, 32, 31],
+          loc: [32, 5, 32, 32],
           declarationList: {
             kind: 262,
-            loc: [32, 5, 32, 30],
+            loc: [32, 5, 32, 31],
             declarations: [
               {
                 kind: 261,
-                loc: [32, 11, 32, 30],
+                loc: [32, 11, 32, 31],
                 name: {
                   kind: 80,
                   loc: [32, 11, 32, 19],
                   text: "selected",
-                  bindingKey: "selected$16bbrkwir8tx0$0",
+                  bindingKey: "selected$kiq2x3i0lhh3$0",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [32, 22, 32, 30],
+                  loc: [32, 22, 32, 31],
                   expression: {
-                    kind: 1001,
-                    loc: [32, 22, 32, 27],
-                    name: "state",
+                    kind: 1000,
+                    loc: [32, 22, 32, 28],
+                    key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
                       kind: 9,
-                      loc: [32, 28, 32, 29],
+                      loc: [32, 29, 32, 30],
                       value: 0,
                     },
                   ],
@@ -296,7 +296,7 @@ async function Panel() {
                             kind: 80,
                             loc: [35, 30, 35, 38],
                             text: "selected",
-                            bindingKey: "selected$16bbrkwir8tx0$0",
+                            bindingKey: "selected$kiq2x3i0lhh3$0",
                           },
                           questionDotToken: false,
                           name: "write",
@@ -344,7 +344,7 @@ async function Panel() {
                       kind: 80,
                       loc: [36, 31, 36, 39],
                       text: "selected",
-                      bindingKey: "selected$16bbrkwir8tx0$0",
+                      bindingKey: "selected$kiq2x3i0lhh3$0",
                     },
                   },
                 ],
@@ -373,7 +373,7 @@ async function Panel() {
                       kind: 80,
                       loc: [37, 31, 37, 39],
                       text: "selected",
-                      bindingKey: "selected$16bbrkwir8tx0$0",
+                      bindingKey: "selected$kiq2x3i0lhh3$0",
                     },
                   },
                 ],

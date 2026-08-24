@@ -1,13 +1,13 @@
-#f0 = ($0) => {
-  const selected = state(0);
+#f0 = ($0, $1) => {
+  const selected = $0()(0);
   return <div>
     {<span
       onclick={() => selected.write(1)}
     >
       {"select"}
     </span>}
-    {$0()({ "id": () => 0, "selected": () => selected })}
-    {$0()({ "id": () => 1, "selected": () => selected })}
+    {$1()({ "id": () => 0, "selected": () => selected })}
+    {$1()({ "id": () => 1, "selected": () => selected })}
   </div>;
 }
 
@@ -17,7 +17,7 @@
 
 #f3 = ($0, $1, $2) => $0().read() === $1() ? $2() : null
 
-root = #f0(() => ($0) => <div>
+root = #f0(() => state, () => ($0) => <div>
   {<span
     style={#f1(() => $0.selected(), () => $0.id())}
   >
