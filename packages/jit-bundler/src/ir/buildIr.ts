@@ -7,8 +7,6 @@ import type {
   IrExpansion,
   IrScriptEntry,
   IrScriptRef,
-  IrTreeEntry,
-  IrTreeRef,
 } from "./Ir.js";
 
 // Lowers an AST into flat tables: one `IrScriptEntry` per distinct client
@@ -20,10 +18,8 @@ import type {
 // `referenceTree()` path.
 class IrBuilder {
   readonly scripts: IrScriptEntry[] = [];
-  readonly trees: IrTreeEntry[] = [];
   private readonly entryByLoc = new Map<string, IrScriptEntry>();
   private readonly refByScript = new Map<AstScript, IrScriptRef>();
-  private readonly refByElement = new Map<AstElement, IrTreeRef>();
   // A class's expansion shared across script instances (`lowerSpliceable`
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
@@ -71,31 +67,6 @@ class IrBuilder {
     this.entryByLoc.set(key, entry);
     this.scripts.push(entry);
     return entry;
-  }
-
-  // Lowers a JSX element to a reference into the tree table, adding its entry
-  // on first sight. Elements are interned by node identity — `buildJSXElement`
-  // returns one node per runtime element, the analogue of a script's source
-  // location. The element graph is acyclic (children exist before their
-  // parent), so lowering the entry before caching the reference can't recurse
-  // back into this element; subtrees hoisted along the way take lower indices.
-  referenceTree(element: AstElement): IrTreeRef {
-    const shared = this.refByElement.get(element);
-    if (shared) {
-      return shared;
-    }
-    const content = this.lowerElement(element);
-    const tree: IrTreeEntry = {
-      kind: "IrTreeEntry",
-      content,
-    };
-    const ref: IrTreeRef = {
-      kind: "IrTreeRef",
-      target: this.trees.length,
-    };
-    this.trees.push(tree);
-    this.refByElement.set(element, ref);
-    return ref;
   }
 
   // Lowers an element's props into an IR element, keeping structure as
@@ -177,7 +148,6 @@ export function buildIr(ast: Ast): Ir {
   const root = builder.lower(ast);
   return {
     scripts: builder.scripts,
-    trees: builder.trees,
     root,
   };
 }

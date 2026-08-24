@@ -49,7 +49,6 @@ const lower = (body: ClientScriptExpression) => {
   };
   const ir: Ir = {
     scripts: [entry],
-    trees: [],
     root: { kind: "IrScriptRef", target: entry, args: [] },
   };
   // An entry is an arrow under a wrapper, and this one takes no parameters.

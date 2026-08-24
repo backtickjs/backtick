@@ -18,7 +18,6 @@ const entry: IrScriptEntry = {
 
 const ir: Ir = {
   scripts: [entry],
-  trees: [],
   root: { kind: "IrScriptRef", target: entry, args: [] },
 };
 

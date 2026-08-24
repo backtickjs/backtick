@@ -5,7 +5,6 @@ import type {
   IrExpansion,
   IrScriptEntry,
   IrScriptRef,
-  IrTreeRef,
 } from "../ir/Ir.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
@@ -24,27 +23,10 @@ import type {
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 
-// What a tree expression renders against: which keys are the parameters of the
-// entry being materialized. Named rather than passed as a bare set, because a
-// thunk's own parameters travel beside it and the two answer different
-// questions about the same key.
-interface TreeScope {
-  readonly params: Set<string>;
-}
-
-// Renders in no entry, which is the bundle root: nothing is in scope, so a
-// capture reaching here has nowhere to resolve against.
-const noEntry = (): TreeScope => ({ params: new Set() });
-
 // Builds the bundle `{ functions, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
 // contract — are documented on the `Bundle` types; this file documents how
 // they are derived.
-//
-// A tree entry is a function of what it was handed: instantiating it supplies
-// one value per parameter, exactly as calling a `functions` entry supplies its
-// captures. The signature is derived, not stored (see `treeParams`), and a
-// reference passes those captures by name.
 //
 // A captured variable is threaded, not resolved by name at the splice site: a
 // fragment written in one script but spliced (via host code) into another still
@@ -83,51 +65,32 @@ export function buildBundle(
   ];
 
   // A binding key printed under its source name, with a numeric suffix when two
-  // distinct bindings would otherwise print the same — within one naming scope.
+  // distinct bindings would otherwise print the same.
   //
   // Disambiguated at all because these become identifiers, and identifiers nest:
   // a hole inside a thunk puts one thunk's parameters inside another's, so two
   // bindings sharing a source name can land in one chain and the inner would
   // shadow what the outer was handed (`shadowing` nests three).
   //
-  // Two scopes here, neither of them the whole bundle: a drawing entry, over its
-  // parameters and the thunks written in its content; and the root, which is a
-  // tree's content without the entry. A `functions` entry names inside
+  // One scope, which is the bundle root: what a drawing is written into now
+  // that structure goes where it stands. A `functions` entry names inside
   // `lowerScriptBody`, from its own script — nothing out here reads those names,
   // because a call site hands an entry its arguments positionally, and its
   // captures arrive as numbered parameters rather than under a name.
-  interface Naming {
-    readonly names: Map<string, string>;
-    readonly used: Set<string>;
-  }
-  const namings = new Map<string, Naming>();
-  let naming = "root";
-  const withNaming = <T>(scope: string, build: () => T): T => {
-    const previous = naming;
-    naming = scope;
-    try {
-      return build();
-    } finally {
-      naming = previous;
-    }
-  };
+  const names = new Map<string, string>();
+  const used = new Set<string>();
   const displayName = (key: string): string => {
-    let scope = namings.get(naming);
-    if (scope === undefined) {
-      scope = { names: new Map(), used: new Set() };
-      namings.set(naming, scope);
-    }
-    const existing = scope.names.get(key);
+    const existing = names.get(key);
     if (existing !== undefined) {
       return existing;
     }
     const base = sourceName(key);
     let name = base;
-    for (let n = 2; scope.used.has(name); n++) {
+    for (let n = 2; used.has(name); n++) {
       name = `${base}${n}`;
     }
-    scope.used.add(name);
-    scope.names.set(key, name);
+    used.add(name);
+    names.set(key, name);
     return name;
   };
 
@@ -206,10 +169,6 @@ export function buildBundle(
         });
         return keys;
       }
-      case "IrTreeRef":
-        // The key belongs to this reference rather than the entry, so it
-        // captures here, alongside the entry's own params.
-        return treeParams(value.target);
       case "IrElement":
         return Object.values(value.props).flatMap(freeCaps);
       case "IrArray":
@@ -252,42 +211,6 @@ export function buildBundle(
     return splice === undefined ? [] : (target.spliceParams[splice] ?? []);
   };
 
-  // What to scan for an entry's needs: an element contributes its key and its
-  // props — a key may be a script, so it captures like any other value — and a
-  // reference contributes itself, so the inner entry's params thread through.
-  // What an entry's wiring has to reach: whatever it draws, since `freeCaps` is
-  // exhaustive over every kind that could be. Empty when it draws nothing.
-  const contentValues = (content: IrArgument | null): IrArgument[] =>
-    content === null ? [] : [content];
-
-  // The capture keys an entry takes from whichever scope instantiates it, in
-  // first-need order, which are the entry's parameters.
-  //
-  // An entry whose content is a reference needs whatever that inner entry
-  // needs, so the walk starts from the content rather than from props.
-  // Memoized; no cycle guard is needed because the entry graph is acyclic —
-  // a child is always built before its parent.
-  const treeParamsCache = new Map<number, string[]>();
-  const treeParams = (target: number): string[] => {
-    const cached = treeParamsCache.get(target);
-    if (cached) {
-      return cached;
-    }
-    const params: string[] = [];
-    const seen = new Set<string>();
-    for (const value of contentValues(ir.trees[target].content)) {
-      for (const key of freeCaps(value)) {
-        if (seen.has(key)) {
-          continue;
-        }
-        seen.add(key);
-        params.push(key);
-      }
-    }
-    treeParamsCache.set(target, params);
-    return params;
-  };
-
   const bodies = new Map<IrScriptEntry, BundleArrowFunctionNode>();
 
   // A script entry's label, either of the two things that name one (see
@@ -317,7 +240,7 @@ export function buildBundle(
   const expansionEntry = (expansion: IrExpansion): BundleGetFunction => {
     let label = expansionLabels.get(expansion);
     if (label === undefined) {
-      label = `${ir.scripts.length + ir.trees.length + expansionLabels.size}`;
+      label = `${ir.scripts.length + expansionLabels.size}`;
       expansionLabels.set(expansion, label);
       const params = [...expansion.params];
       const expansionBody = renderValue(expansion.body);
@@ -390,19 +313,6 @@ export function buildBundle(
   // for the unkeyed case and an apply for the keyed one, but the two carried
   // the same label and the same arguments and differed only in the node they were
   // written as.
-  // One table, one numbering: the scripts, then the entries that draw, then a
-  // class's expansions. Every part is known up front — a tree per `ir.trees`
-  // and an expansion interned as it is reached — so a label is decided by
-  // arithmetic rather than by the order rendering happens to reach things.
-  const treeLabel = (target: number): FunctionLabel =>
-    `${ir.scripts.length + target}`;
-
-  const instantiation = (value: IrTreeRef): BundleExpressionNode => {
-    materializeTree(value.target);
-    const args: BundleExpressionNode[] = treeParams(value.target).map(readKey);
-    return [NodeKind.ApplyFunction, treeLabel(value.target), args];
-  };
-
   // Renders an IR argument in value position — as the node for the value it
   // evaluates to. A script reference becomes a call of its `functions` entry, a
   // tree reference an application of its entry passing its captures by name;
@@ -418,8 +328,6 @@ export function buildBundle(
         ];
         return [NodeKind.CallExpression, entry, false, args];
       }
-      case "IrTreeRef":
-        return instantiation(value);
       case "IrElement":
         throw new Error("An inline element can't appear outside a tree entry.");
       case "IrValue":
@@ -483,56 +391,7 @@ export function buildBundle(
       ];
       return args.length === 0 ? entry : [NodeKind.ArrowFunction, [], call];
     }
-    if (value.kind === "IrTreeRef") {
-      // A hole calls what it is handed, so what it is handed is a body to run:
-      // the application, in an arrow. An entry taking nothing used to be passed as
-      // itself, being already a function of nothing — but that took a node kind
-      // of its own to say, and this says it with the one every other reference
-      // uses.
-      materializeTree(value.target);
-      return [NodeKind.ArrowFunction, [], instantiation(value)];
-    }
     return [NodeKind.ArrowFunction, [], renderValue(value)];
-  };
-
-  const treeJsons = new Map<number, BundleFunction>();
-
-  // Materializes a tree entry into `treeJsons` the first time it is reached:
-  // its element rendered as a bundle expression against the entry's own
-  // parameters.
-  const materializeTree = (target: number): void => {
-    if (treeJsons.has(target)) {
-      return;
-    }
-    withNaming(`t${target}`, () => buildTree(target));
-  };
-
-  // An entry as its arrow: its parameters, and what it draws.
-  const treeEntry = (
-    params: string[],
-    drawn: BundleExpressionNode,
-  ): BundleFunction => [
-    [NodeKind.ArrowFunction, parameterNodes(params), drawn],
-  ];
-
-  const buildTree = (target: number): void => {
-    const keys = treeParams(target);
-    const scope: TreeScope = { params: new Set(keys) };
-    // Named where its expressions name them.
-    const names = keys.map(displayName);
-    const content = ir.trees[target].content;
-    // An entry that draws nothing: it stays, with nothing under it.
-    if (content === null) {
-      treeJsons.set(target, treeEntry(names, null));
-      return;
-    }
-    // Whatever it draws, rendered as any other value in tree position is: an
-    // element inline, an inner instance applied, a fragment's children as the
-    // list they are.
-    treeJsons.set(
-      target,
-      treeEntry(names, renderExpr(content, scope, new Set())),
-    );
   };
 
   // Renders a capture in JSON position: a parameter of an enclosing thunk
@@ -542,13 +401,9 @@ export function buildBundle(
   // can't be threaded from anywhere.
   const capExpr = (
     key: string,
-    scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
   ): BundleIdentifierNode => {
     if (params.has(key)) {
-      return [NodeKind.Identifier, displayName(key)];
-    }
-    if (scope.params.has(key)) {
       return [NodeKind.Identifier, displayName(key)];
     }
     throw new Error(
@@ -567,7 +422,6 @@ export function buildBundle(
   // one `#thunk` per splice ahead of the environment.
   const exprCallArgs = (
     ref: IrScriptRef,
-    scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleExpressionNode[] => {
     const parts: BundleExpressionNode[] = [];
@@ -585,11 +439,7 @@ export function buildBundle(
         return;
       }
       if (passed.length === 0) {
-        parts.push([
-          NodeKind.ArrowFunction,
-          [],
-          renderExpr(arg, scope, params),
-        ]);
+        parts.push([NodeKind.ArrowFunction, [], renderExpr(arg, params)]);
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
@@ -597,11 +447,11 @@ export function buildBundle(
       parts.push([
         NodeKind.ArrowFunction,
         parameterNodes(passed.map(displayName)),
-        renderExpr(arg, scope, inner),
+        renderExpr(arg, inner),
       ]);
     });
     for (const key of ref.target.captures) {
-      parts.push(capExpr(key, scope, params));
+      parts.push(capExpr(key, params));
     }
     return parts;
   };
@@ -610,13 +460,12 @@ export function buildBundle(
   // bundle expression in the enclosing entry's scope.
   const renderElement = (
     element: IrElement,
-    scope: TreeScope,
     params: ReadonlySet<string>,
   ): BundleElement => {
     const props: { [key: string]: BundleExpressionNode } = {};
     let children: BundleExpressionNode = null;
     for (const [key, entry] of Object.entries(element.props)) {
-      const rendered = renderExpr(entry, scope, params);
+      const rendered = renderExpr(entry, params);
       if (key === "children") {
         children = rendered;
         continue;
@@ -631,23 +480,15 @@ export function buildBundle(
   // source. The mirror of `renderValue`.
   const renderExpr = (
     value: IrArgument,
-    scope: TreeScope,
     params: ReadonlySet<string> = new Set(),
   ): BundleExpressionNode => {
     if (value.kind === "IrScriptRef") {
       materialize(value.target);
-      const args = exprCallArgs(value, scope, params);
+      const args = exprCallArgs(value, params);
       return [NodeKind.ApplyFunction, fnLabel(value.target), args];
     }
-    if (value.kind === "IrTreeRef") {
-      materializeTree(value.target);
-      const args = treeParams(value.target).map((key) =>
-        capExpr(key, scope, params),
-      );
-      return [NodeKind.ApplyFunction, treeLabel(value.target), args];
-    }
     if (value.kind === "IrElement") {
-      return renderElement(value, scope, params);
+      return renderElement(value, params);
     }
     if (value.kind === "IrValue") {
       return value.value;
@@ -665,7 +506,7 @@ export function buildBundle(
       return [
         NodeKind.ArrowFunction,
         parameterNodes(value.params),
-        renderExpr(value.body, scope, new Set([...params, ...value.params])),
+        renderExpr(value.body, new Set([...params, ...value.params])),
       ];
     }
     if (value.kind === "IrHole") {
@@ -675,20 +516,20 @@ export function buildBundle(
       // Data, and a node is an array too, so it says which it is.
       return [
         NodeKind.DataArray,
-        value.elements.map((entry) => renderExpr(entry, scope, params)),
+        value.elements.map((entry) => renderExpr(entry, params)),
       ];
     }
     // A plain data object passes through, every key of it: a node is an array,
     // so an object is never mistaken for one and the format reserves no key.
     const entries: { [key: string]: BundleExpressionNode } = {};
     for (const [key, entry] of Object.entries(value.entries)) {
-      entries[key] = renderExpr(entry, scope, params);
+      entries[key] = renderExpr(entry, params);
     }
     return entries;
   };
 
   // Nothing encloses the root, so nothing it holds can capture.
-  const root = renderExpr(ir.root, noEntry());
+  const root = renderExpr(ir.root);
   const functions: Record<FunctionLabel, BundleFunction> = {};
   // In table order, which is the order the walk first reached each script.
   for (const script of ir.scripts) {
@@ -696,9 +537,6 @@ export function buildBundle(
     if (body !== undefined) {
       functions[fnLabel(script)] = [body];
     }
-  }
-  for (const [index, tree] of [...treeJsons].sort(([a], [b]) => a - b)) {
-    functions[treeLabel(index)] = tree;
   }
   for (const [label, body] of expansionBodies) {
     functions[label] = [body];
