@@ -1,3 +1,4 @@
+export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
 export type { Client } from "./Client.js";
 export type { Server } from "./Server.js";
 export type { Spliceable, SpliceableValue, Spliced } from "./Spliceable.js";
