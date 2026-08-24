@@ -10,9 +10,7 @@
   </span>;
 }
 
-#f1 = () => <div>
+root = <div>
   {#f0()}
   {#f0()}
 </div>
-
-root = #f1()

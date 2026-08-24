@@ -1,28 +1,16 @@
 {
-  "functions": {
-    "0": [
-      [
-        1005,
-        [],
-        [
-          0,
-          "div",
-          {},
-          [
-            0,
-            "span",
-            {
-              "class": "danger"
-            },
-            "one"
-          ]
-        ]
-      ]
-    ]
-  },
+  "functions": {},
   "root": [
-    2,
-    "0",
-    []
+    0,
+    "div",
+    {},
+    [
+      0,
+      "span",
+      {
+        "class": "danger"
+      },
+      "one"
+    ]
   ]
 }

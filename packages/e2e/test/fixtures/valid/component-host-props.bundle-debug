@@ -1,9 +1,7 @@
-#f0 = () => <div>
+root = <div>
   {<span
     class={"danger"}
   >
     {"one"}
   </span>}
 </div>
-
-root = #f0()

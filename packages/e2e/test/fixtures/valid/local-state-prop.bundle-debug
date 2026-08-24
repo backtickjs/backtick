@@ -12,11 +12,9 @@
   $0().write($0().read() + 1);
 }
 
-#f3 = ($0) => <span
+root = #f0(() => ($0) => <span
   style={#f1(() => $0.size())}
   onclick={#f2(() => $0.size())}
 >
   {"press"}
-</span>
-
-root = #f0(() => ($0) => #f3($0))
+</span>)

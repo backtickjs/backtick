@@ -28,15 +28,6 @@ class IrBuilder {
   // caches per class) is one node, so it lowers to one `IrExpansion` — the
   // identity `buildBundle` interns entries by.
   private readonly expansionByNode = new Map<AstExpansion, IrExpansion>();
-  // How many places reference each element node, counted up front so lowering
-  // can decide locally whether a nested element inlines into its parent's
-  // entry (one reference) or hoists into its own (shared).
-  private readonly elementRefs: Map<AstElement, number>;
-
-  constructor(elementRefs: Map<AstElement, number>) {
-    this.elementRefs = elementRefs;
-  }
-
   // Lowers a client script to a reference that targets its table entry,
   // interning the entry and lowering its splices into positional arguments. A
   // script shared across several splice paths is one node (see `lowerSpliceable`), so
@@ -112,39 +103,13 @@ class IrBuilder {
   private lowerElement(element: AstElement): IrElement {
     const props: Record<string, IrArgument> = {};
     for (const [key, entry] of Object.entries(element.props)) {
-      props[key] = this.lowerInTree(entry);
+      props[key] = this.lower(entry);
     }
     return {
       kind: "IrElement",
       id: element.id,
       props,
     };
-  }
-
-  // Lowers a value in tree position — inside an element's props — where an
-  // element referenced only here inlines as data instead of hoisting. In value
-  // position (`lower`) an element always hoists: a script body or the IR
-  // root embeds a tree by reference, never structurally.
-  private lowerInTree(node: Ast): IrArgument {
-    if (node.kind === "AstElement") {
-      return this.elementRefs.get(node) === 1
-        ? this.lowerElement(node)
-        : this.referenceTree(node);
-    }
-    if (node.kind === "AstArray") {
-      return {
-        kind: "IrArray",
-        elements: node.elements.map((n) => this.lowerInTree(n)),
-      };
-    }
-    if (node.kind === "AstObject") {
-      const entries: Record<string, IrArgument> = {};
-      for (const [key, value] of Object.entries(node.entries)) {
-        entries[key] = this.lowerInTree(value);
-      }
-      return { kind: "IrObject", entries };
-    }
-    return this.lower(node);
   }
 
   // Lowers a value into an IR argument: nested scripts become references,
@@ -156,7 +121,7 @@ class IrBuilder {
       case "AstScript":
         return this.referenceScript(node);
       case "AstElement":
-        return this.referenceTree(node);
+        return this.lowerElement(node);
       case "AstArray":
         return {
           kind: "IrArray",
@@ -198,50 +163,6 @@ class IrBuilder {
   }
 }
 
-// Counts how many places reference each element node: another element's
-// props, a script's splice arguments, or the IR root. A shared script (one
-// node, many paths) is walked once — the IR holds one entry for it — and a
-// shared element's contents likewise count once.
-function countElementReferences(root: Ast): Map<AstElement, number> {
-  const counts = new Map<AstElement, number>();
-  const seenScripts = new Set<AstScript>();
-  // A per-class expansion shared across script instances lowers once, so its
-  // contents count once too.
-  const seenExpansions = new Set<AstExpansion>();
-  const visit = (node: Ast): void => {
-    if (node.kind === "AstScript") {
-      if (seenScripts.has(node)) {
-        return;
-      }
-      seenScripts.add(node);
-      Object.values(node.splices).forEach(visit);
-      return;
-    }
-    if (node.kind === "AstElement") {
-      const count = counts.get(node) ?? 0;
-      counts.set(node, count + 1);
-      if (count === 0) {
-        Object.values(node.props).forEach(visit);
-      }
-      return;
-    }
-    if (node.kind === "AstArray") {
-      node.elements.forEach(visit);
-      return;
-    }
-    if (node.kind === "AstObject") {
-      Object.values(node.entries).forEach(visit);
-      return;
-    }
-    if (node.kind === "AstExpansion" && !seenExpansions.has(node)) {
-      seenExpansions.add(node);
-      visit(node.body);
-    }
-  };
-  visit(root);
-  return counts;
-}
-
 // Builds the IR from a client's AST: a flat script table with one entry
 // per distinct client script (deduplicated by source location), a flat tree
 // table with one entry per hoisted JSX element (deduplicated by node
@@ -252,7 +173,7 @@ function countElementReferences(root: Ast): Map<AstElement, number> {
 // spliced into a script, or shared, and inlines into its parent's entry
 // otherwise.
 export function buildIr(ast: Ast): Ir {
-  const builder = new IrBuilder(countElementReferences(ast));
+  const builder = new IrBuilder();
   const root = builder.lower(ast);
   return {
     scripts: builder.scripts,

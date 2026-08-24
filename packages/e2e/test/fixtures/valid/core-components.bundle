@@ -13,50 +13,39 @@
           ]
         ]
       ]
-    ],
-    "1": [
-      [
-        1005,
-        [],
-        [
-          0,
-          "div",
-          {
-            "style": "padding: 8px"
-          },
-          [
-            4,
-            [
-              [
-                0,
-                "span",
-                {
-                  "style": "font-size: 12px",
-                  "onclick": [
-                    2,
-                    "0",
-                    []
-                  ]
-                },
-                "hi"
-              ],
-              [
-                0,
-                "img",
-                {
-                  "src": "https://example.com/a.png"
-                },
-                null
-              ]
-            ]
-          ]
-        ]
-      ]
     ]
   },
   "root": [
-    2,
-    "1",
-    []
+    0,
+    "div",
+    {
+      "style": "padding: 8px"
+    },
+    [
+      4,
+      [
+        [
+          0,
+          "span",
+          {
+            "style": "font-size: 12px",
+            "onclick": [
+              2,
+              "0",
+              []
+            ]
+          },
+          "hi"
+        ],
+        [
+          0,
+          "img",
+          {
+            "src": "https://example.com/a.png"
+          },
+          null
+        ]
+      ]
+    ]
   ]
 }

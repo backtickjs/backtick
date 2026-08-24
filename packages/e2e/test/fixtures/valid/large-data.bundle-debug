@@ -16,32 +16,7 @@
 
 #f8 = ($0) => "$" + $0.total
 
-#f9 = (item) => <span>
-  {#f7(item)}
-</span>
-
-#f10 = (order) => <div>
-  {<img
-    src={#f2(order)}
-    alt={""}
-  />}
-  {<span>
-    {#f3(order)}
-  </span>}
-  {<span>
-    {#f4(order)}
-  </span>}
-  {<for
-    each={#f5(order)}
-  >
-    {#f6((item) => #f9(item))}
-  </for>}
-  {<span>
-    {#f8(order)}
-  </span>}
-</div>
-
-#f11 = () => <div>
+root = <div>
   {<for
     each={#f0(() => [
       {
@@ -76,8 +51,27 @@
       }
     ])}
   >
-    {#f1((order) => #f10(order))}
+    {#f1((order) => <div>
+      {<img
+        src={#f2(order)}
+        alt={""}
+      />}
+      {<span>
+        {#f3(order)}
+      </span>}
+      {<span>
+        {#f4(order)}
+      </span>}
+      {<for
+        each={#f5(order)}
+      >
+        {#f6((item) => <span>
+          {#f7(item)}
+        </span>)}
+      </for>}
+      {<span>
+        {#f8(order)}
+      </span>}
+    </div>)}
   </for>}
 </div>
-
-root = #f11()

@@ -1,4 +1,4 @@
-#f0 = () => <div>
+root = <div>
   {"counted"}
   {[
     <em>
@@ -9,5 +9,3 @@
     </em>
   ]}
 </div>
-
-root = #f0()

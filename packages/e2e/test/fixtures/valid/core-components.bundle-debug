@@ -2,7 +2,7 @@
 
 }
 
-#f1 = () => <div
+root = <div
   style={"padding: 8px"}
 >
   {<span
@@ -15,5 +15,3 @@
     src={"https://example.com/a.png"}
   />}
 </div>
-
-root = #f1()

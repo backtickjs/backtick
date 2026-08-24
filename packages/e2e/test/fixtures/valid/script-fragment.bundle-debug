@@ -11,8 +11,6 @@
   </span>
 ]
 
-#f2 = () => <div>
+root = <div>
   {#f0(#f1)}
 </div>
-
-root = #f2()

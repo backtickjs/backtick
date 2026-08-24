@@ -5,8 +5,6 @@
 
 #f1 = ($0) => () => $0
 
-#f2 = (x) => <span
+root = #f0((x) => <span
   onclick={#f1(x)}
-/>
-
-root = #f0((x) => #f2(x))
+/>)

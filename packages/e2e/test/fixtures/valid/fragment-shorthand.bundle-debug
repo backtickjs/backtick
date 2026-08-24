@@ -1,4 +1,4 @@
-#f0 = () => <div>
+root = <div>
   {<span>
     {"a"}
   </span>}
@@ -6,5 +6,3 @@
     {"b"}
   </span>}
 </div>
-
-root = #f0()

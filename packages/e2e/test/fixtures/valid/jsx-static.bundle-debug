@@ -1,7 +1,5 @@
-#f0 = () => <div>
+root = <div>
   {<span>
     {"hi"}
   </span>}
 </div>
-
-root = #f0()

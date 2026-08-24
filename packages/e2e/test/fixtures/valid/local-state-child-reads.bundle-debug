@@ -17,17 +17,13 @@
 
 #f3 = ($0, $1, $2) => $0().read() === $1() ? $2() : null
 
-#f4 = () => <span>
-  {"marker"}
-</span>
-
-#f5 = ($0) => <div>
+root = #f0(() => ($0) => <div>
   {<span
     style={#f1(() => $0.selected(), () => $0.id())}
   >
     {#f2(() => $0.id(), () => $0.selected())}
   </span>}
-  {#f3(() => $0.selected(), () => $0.id(), () => #f4())}
-</div>
-
-root = #f0(() => ($0) => #f5($0))
+  {#f3(() => $0.selected(), () => $0.id(), () => <span>
+    {"marker"}
+  </span>)}
+</div>)
