@@ -596,3 +596,11 @@ export interface NumberConstructor {
    */
   parseInt(string: string, radix?: number): number;
 }
+
+export interface StringConstructor {
+  /**
+   * Return the String value whose elements are, in order, the elements in the
+   * List elements. If length is 0, the empty string is returned.
+   */
+  fromCodePoint(...codePoints: number[]): string;
+}

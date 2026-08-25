@@ -63,6 +63,13 @@ describe("builtins", () => {
       /read this string/,
     );
   });
+
+  it("write a string from the code points it is handed", () => {
+    assert.equal(globals["String.fromCodePoint"](72, 105), "Hi");
+    // The schema says none is the empty string, where an empty `Math.min` has
+    // no answer to give.
+    assert.equal(globals["String.fromCodePoint"](), "");
+  });
 });
 
 describe("a member the schema leaves out", () => {

@@ -1,0 +1,27 @@
+cs.lift((() => {\n      → cs`{\n    
+return cs.const(        → return 
+<                       → (\n      <
+span                    → span
+>{cs.lift(              → >{
+cs.receiver(            → 
+String                  → String
+)                       → 
+.                       → .
+fromCodePoint           → fromCodePoint
+(                       → (
+72                      → 72
+,                       → , 
+105                     → 105
+)                       → )
+ +                      →  + 
+cs.receiver(            → 
+String                  → String
+)                       → 
+.                       → .
+fromCodePoint           → fromCodePoint
+()                      → ()
+)}</                    → }</
+span                    → span
+>                       → >\n    )
+);                      → ;
+\n})())                 → \n  }`

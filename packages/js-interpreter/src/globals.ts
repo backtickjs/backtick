@@ -211,6 +211,9 @@ export const globals: Builtins = {
     }
     return answer;
   },
+  "String.fromCodePoint"(...codePoints) {
+    return String.fromCodePoint(...codePoints);
+  },
 
   state(initial) {
     const [read, store] = createSignal(initial);

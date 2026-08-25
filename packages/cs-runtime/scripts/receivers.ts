@@ -52,6 +52,7 @@ const named: Record<string, { as: string }> = {
   Math: { as: "Math" },
   Array: { as: "ArrayConstructor" },
   Number: { as: "NumberConstructor" },
+  String: { as: "StringConstructor" },
 };
 
 /** Everything in scope, inherited included — for this schema, its own. */

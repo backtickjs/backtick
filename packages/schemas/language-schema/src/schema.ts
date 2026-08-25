@@ -1301,6 +1301,14 @@ export const schema: Schema = {
       Type.Number(),
       { description: "Converts A string to an integer." },
     ),
+    "String.fromCodePoint": Type.Function(
+      [Type.Rest(Type.FunctionParameter("codePoints", Type.Number()))],
+      Type.String(),
+      {
+        description:
+          "Return the String value whose elements are, in order, the elements in the List elements. If length is 0, the empty string is returned.",
+      },
+    ),
     state: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Function(

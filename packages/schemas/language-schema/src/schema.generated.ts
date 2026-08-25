@@ -701,5 +701,10 @@ export interface Builtins {
    * considered decimal.
    */
   "Number.parseInt"(string: string, radix?: number): number;
+  /**
+   * Return the String value whose elements are, in order, the elements in the
+   * List elements. If length is 0, the empty string is returned.
+   */
+  "String.fromCodePoint"(...codePoints: number[]): string;
   state<T extends ClientValue>(initial: T): State<T>;
 }

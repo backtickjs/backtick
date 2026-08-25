@@ -21,7 +21,7 @@ import { isFragmentTag } from "./isFragmentTag.js";
 // is a single name the client answers, and there is no `Math` for a read to
 // yield — so an access folds into the whole name below, and the front standing
 // alone is an error.
-const namespaces = new Set(["Array", "Math", "Number"]);
+const namespaces = new Set(["Array", "Math", "Number", "String"]);
 
 export interface RewriteState {
   script: ClientScript;

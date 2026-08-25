@@ -1,0 +1,7 @@
+#f0 = () => {
+  return <span>
+    {String.fromCodePoint(72, 105) + String.fromCodePoint()}
+  </span>;
+}
+
+root = #f0()
