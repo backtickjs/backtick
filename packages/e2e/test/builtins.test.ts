@@ -48,6 +48,21 @@ describe("builtins", () => {
     assert.throws(() => globals["Math.min"](), /at least one number/);
     assert.throws(() => globals["Math.max"](), /at least one number/);
   });
+
+  it("read a string as a number, or not at all", () => {
+    assert.equal(globals["Number.parseInt"]("42"), 42);
+    assert.equal(globals["Number.parseInt"]("42px"), 42);
+    assert.equal(globals["Number.parseInt"]("ff", 16), 255);
+    assert.equal(globals["Number.parseFloat"]("1.5"), 1.5);
+    // `NaN` is what the host answers and not a value this language has, so the
+    // name refuses rather than handing one back.
+    assert.throws(() => globals["Number.parseInt"]("abc"), /read this string/);
+    assert.throws(() => globals["Number.parseInt"](""), /read this string/);
+    assert.throws(
+      () => globals["Number.parseFloat"]("abc"),
+      /read this string/,
+    );
+  });
 });
 
 describe("a member the schema leaves out", () => {

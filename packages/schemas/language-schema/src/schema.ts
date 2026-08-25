@@ -1277,6 +1277,30 @@ export const schema: Schema = {
         description: "Returns a new array from a set of elements.",
       },
     ),
+    "Number.parseFloat": Type.Function(
+      [
+        Type.FunctionParameter("string", Type.String(), {
+          description: "A string that contains a floating-point number.",
+        }),
+      ],
+      Type.Number(),
+      { description: "Converts a string to a floating-point number." },
+    ),
+    "Number.parseInt": Type.Function(
+      [
+        Type.FunctionParameter("string", Type.String(), {
+          description: "A string to convert into a number.",
+        }),
+        Type.Optional(
+          Type.FunctionParameter("radix", Type.Number(), {
+            description:
+              "A value between 2 and 36 that specifies the base of the number in `string`. If this argument is not supplied, strings with a prefix of '0x' are considered hexadecimal. All other strings are considered decimal.",
+          }),
+        ),
+      ],
+      Type.Number(),
+      { description: "Converts A string to an integer." },
+    ),
     state: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Function(

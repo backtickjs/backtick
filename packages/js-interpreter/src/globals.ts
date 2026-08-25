@@ -197,6 +197,20 @@ export const globals: Builtins = {
     // list of client values rather than from a written-out sequence.
     return items;
   },
+  "Number.parseFloat"(string) {
+    const answer = Number.parseFloat(string);
+    if (Number.isNaN(answer)) {
+      throw new Error("`Number.parseFloat` can't read this string as a number");
+    }
+    return answer;
+  },
+  "Number.parseInt"(string, radix) {
+    const answer = Number.parseInt(string, radix);
+    if (Number.isNaN(answer)) {
+      throw new Error("`Number.parseInt` can't read this string as a number");
+    }
+    return answer;
+  },
 
   state(initial) {
     const [read, store] = createSignal(initial);

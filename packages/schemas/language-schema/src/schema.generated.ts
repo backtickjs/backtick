@@ -685,5 +685,21 @@ export interface Builtins {
    * @param items A set of elements to include in the new array object.
    */
   "Array.of"<T extends ClientValue>(...items: T[]): T[];
+  /**
+   * Converts a string to a floating-point number.
+   *
+   * @param string A string that contains a floating-point number.
+   */
+  "Number.parseFloat"(string: string): number;
+  /**
+   * Converts A string to an integer.
+   *
+   * @param string A string to convert into a number.
+   * @param radix A value between 2 and 36 that specifies the base of the
+   * number in `string`. If this argument is not supplied, strings with a
+   * prefix of '0x' are considered hexadecimal. All other strings are
+   * considered decimal.
+   */
+  "Number.parseInt"(string: string, radix?: number): number;
   state<T extends ClientValue>(initial: T): State<T>;
 }

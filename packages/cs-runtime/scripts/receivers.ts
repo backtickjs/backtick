@@ -51,6 +51,7 @@ const boxed: Record<string, { as: string; indexed?: TNode }> = {
 const named: Record<string, { as: string }> = {
   Math: { as: "Math" },
   Array: { as: "ArrayConstructor" },
+  Number: { as: "NumberConstructor" },
 };
 
 /** Everything in scope, inherited included — for this schema, its own. */
