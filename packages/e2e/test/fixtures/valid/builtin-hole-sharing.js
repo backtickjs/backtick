@@ -1,20 +1,11 @@
 import { cs, state } from "@backtickjs/core";
-// One script location, reached twice: once with a builtin filling its hole and
-// once with a script. They are two entries, because a builtin is written into
-// the body — `#f1` writes `state` and takes no parameter, where `#f2` takes the
-// thunk every other splice takes.
-//
-// Sharing one entry would be a miscompile: whichever arrived first fixes the
-// body, and the other reference then passes an argument nothing reads, or
-// passes none where one is read. `wrapped` adds ten so that shows in the value
-// as well as in the bundle — shared, `1 + 1`; separate, `1 + 11`.
 const make = (f) =>
   cs.create(
-    [14, 3, 16, 5],
+    [4, 3, 6, 5],
     {
       version: "0.0.0",
       filePath: "builtin-hole-sharing.ts",
-      fileHash: "1ynn192cxw48k",
+      fileHash: "1javurj6oomvn",
       kind: "value",
       splices: { $f: f },
       captures: [],
@@ -22,30 +13,30 @@ const make = (f) =>
     },
     () => ({
       kind: 242,
-      loc: [14, 6, 16, 4],
+      loc: [4, 6, 6, 4],
       statements: [
         {
           kind: 254,
-          loc: [15, 5, 15, 25],
+          loc: [5, 5, 5, 25],
           expression: {
             kind: 214,
-            loc: [15, 12, 15, 24],
+            loc: [5, 12, 5, 24],
             expression: {
               kind: 212,
-              loc: [15, 12, 15, 22],
+              loc: [5, 12, 5, 22],
               expression: {
                 kind: 214,
-                loc: [15, 12, 15, 17],
+                loc: [5, 12, 5, 17],
                 expression: {
                   kind: 1000,
-                  loc: [15, 12, 15, 14],
+                  loc: [5, 12, 5, 14],
                   key: "$f",
                 },
                 questionDotToken: false,
                 arguments: [
                   {
                     kind: 9,
-                    loc: [15, 15, 15, 16],
+                    loc: [5, 15, 5, 16],
                     value: 1,
                   },
                 ],
@@ -61,11 +52,11 @@ const make = (f) =>
     }),
   );
 const wrapped = cs.create(
-  [18, 17, 18, 50],
+  [8, 17, 8, 50],
   {
     version: "0.0.0",
     filePath: "builtin-hole-sharing.ts",
-    fileHash: "1ynn192cxw48k",
+    fileHash: "1javurj6oomvn",
     kind: "value",
     splices: { $state: state },
     captures: [],
@@ -73,42 +64,42 @@ const wrapped = cs.create(
   },
   () => ({
     kind: 220,
-    loc: [18, 20, 18, 49],
+    loc: [8, 20, 8, 49],
     parameters: [
       {
         kind: 170,
-        loc: [18, 21, 18, 30],
+        loc: [8, 21, 8, 30],
         name: {
           kind: 80,
-          loc: [18, 21, 18, 22],
+          loc: [8, 21, 8, 22],
           text: "n",
-          bindingKey: "n$1ynn192cxw48k$0",
+          bindingKey: "n$1javurj6oomvn$0",
         },
       },
     ],
     body: {
       kind: 214,
-      loc: [18, 35, 18, 49],
+      loc: [8, 35, 8, 49],
       expression: {
         kind: 1000,
-        loc: [18, 35, 18, 41],
+        loc: [8, 35, 8, 41],
         key: "$state",
       },
       questionDotToken: false,
       arguments: [
         {
           kind: 227,
-          loc: [18, 42, 18, 48],
+          loc: [8, 42, 8, 48],
           left: {
             kind: 80,
-            loc: [18, 42, 18, 43],
+            loc: [8, 42, 8, 43],
             text: "n",
-            bindingKey: "n$1ynn192cxw48k$0",
+            bindingKey: "n$1javurj6oomvn$0",
           },
           operatorToken: "+",
           right: {
             kind: 9,
-            loc: [18, 46, 18, 48],
+            loc: [8, 46, 8, 48],
             value: 10,
           },
         },
@@ -117,11 +108,11 @@ const wrapped = cs.create(
   }),
 );
 export default cs.create(
-  [20, 16, 22, 3],
+  [10, 16, 12, 3],
   {
     version: "0.0.0",
     filePath: "builtin-hole-sharing.ts",
-    fileHash: "1ynn192cxw48k",
+    fileHash: "1javurj6oomvn",
     kind: "value",
     splices: { $0splice0: make(state), $0splice1: make(wrapped) },
     captures: [],
@@ -129,23 +120,23 @@ export default cs.create(
   },
   () => ({
     kind: 242,
-    loc: [20, 19, 22, 2],
+    loc: [10, 19, 12, 2],
     statements: [
       {
         kind: 254,
-        loc: [21, 3, 21, 44],
+        loc: [11, 3, 11, 44],
         expression: {
           kind: 227,
-          loc: [21, 10, 21, 43],
+          loc: [11, 10, 11, 43],
           left: {
             kind: 1000,
-            loc: [21, 10, 21, 24],
+            loc: [11, 10, 11, 24],
             key: "$0splice0",
           },
           operatorToken: "+",
           right: {
             kind: 1000,
-            loc: [21, 27, 21, 43],
+            loc: [11, 27, 11, 43],
             key: "$0splice1",
           },
         },
