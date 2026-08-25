@@ -686,6 +686,26 @@ export interface Builtins {
    */
   "Array.of"<T extends ClientValue>(...items: T[]): T[];
   /**
+   * The value of Number.EPSILON is the difference between 1 and the smallest
+   * value greater than 1 that is representable as a Number value, which is
+   * approximately: 2.2204460492503130808472633361816 x 10−16.
+   */
+  readonly "Number.EPSILON": number;
+  /**
+   * Returns true if passed value is finite. Unlike the global isFinite,
+   * Number.isFinite doesn't forcibly convert the parameter to a number. Only
+   * finite values of the type number, result in true.
+   *
+   * @param number A numeric value.
+   */
+  "Number.isFinite"(number: ClientValue): boolean;
+  /**
+   * Returns true if the value passed is an integer, false otherwise.
+   *
+   * @param number A numeric value.
+   */
+  "Number.isInteger"(number: ClientValue): boolean;
+  /**
    * Converts a string to a floating-point number.
    *
    * @param string A string that contains a floating-point number.

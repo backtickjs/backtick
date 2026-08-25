@@ -1277,6 +1277,34 @@ export const schema: Schema = {
         description: "Returns a new array from a set of elements.",
       },
     ),
+    "Number.EPSILON": Type.Number({
+      description:
+        "The value of Number.EPSILON is the difference between 1 and the smallest value greater than 1 that is representable as a Number value, which is approximately: 2.2204460492503130808472633361816 x 10−16.",
+    }),
+    "Number.isFinite": Type.Function(
+      [
+        Type.FunctionParameter("number", Type.Ref("ClientValue"), {
+          description: "A numeric value.",
+        }),
+      ],
+      Type.Boolean(),
+      {
+        description:
+          "Returns true if passed value is finite. Unlike the global isFinite, Number.isFinite doesn't forcibly convert the parameter to a number. Only finite values of the type number, result in true.",
+      },
+    ),
+    "Number.isInteger": Type.Function(
+      [
+        Type.FunctionParameter("number", Type.Ref("ClientValue"), {
+          description: "A numeric value.",
+        }),
+      ],
+      Type.Boolean(),
+      {
+        description:
+          "Returns true if the value passed is an integer, false otherwise.",
+      },
+    ),
     "Number.parseFloat": Type.Function(
       [
         Type.FunctionParameter("string", Type.String(), {

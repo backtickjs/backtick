@@ -197,6 +197,13 @@ export const globals: Builtins = {
     // list of client values rather than from a written-out sequence.
     return items;
   },
+  "Number.EPSILON": Number.EPSILON,
+  "Number.isFinite"(number) {
+    return Number.isFinite(number);
+  },
+  "Number.isInteger"(number) {
+    return Number.isInteger(number);
+  },
   "Number.parseFloat"(string) {
     const answer = Number.parseFloat(string);
     if (Number.isNaN(answer)) {

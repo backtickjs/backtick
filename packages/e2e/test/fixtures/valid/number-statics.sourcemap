@@ -1,0 +1,74 @@
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_positive           → positive
+ = cs.const(            →  = 
+cs.receiver(            → 
+Number                  → Number
+)                       → 
+.                       → .
+EPSILON                 → EPSILON
+ >                      →  > 
+0                       → 0
+);                      → ;
+\n                      → \n    
+const                   → const 
+__cs_whole              → whole
+ = cs.const(            →  = 
+cs.receiver(            → 
+Number                  → Number
+)                       → 
+.                       → .
+isInteger               → isInteger
+(                       → (
+2                       → 2
+)                       → )
+);                      → ;
+\n                      → \n    
+const                   → const 
+__cs_fractional         → fractional
+ = cs.const(            →  = 
+cs.receiver(            → 
+Number                  → Number
+)                       → 
+.                       → .
+isInteger               → isInteger
+(                       → (
+2.5                     → 2.5
+)                       → )
+);                      → ;
+\n                      → \n    // Unconverted, so a string that reads as a number is still not one.\n    
+const                   → const 
+__cs_written            → written
+ = cs.const(            →  = 
+cs.receiver(            → 
+Number                  → Number
+)                       → 
+.                       → .
+isFinite                → isFinite
+(                       → (
+"2"                     → "2"
+)                       → )
+);                      → ;
+\n                      → \n    
+return cs.const(        → return 
+<                       → (\n      <
+span                    → span
+>{cs.lift(              → >{
+__cs_whole              → whole
+ +                      →  + 
+" "                     → " "
+ +                      →  + 
+__cs_fractional         → fractional
+ +                      →  + 
+" "                     → " "
+ +                      →  + 
+__cs_written            → written
+ +                      →  + 
+" "                     → " "
+ +                      →  + 
+__cs_positive           → positive
+)}</                    → }</
+span                    → span
+>                       → >\n    )
+);                      → ;
+\n})())                 → \n  }`

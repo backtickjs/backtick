@@ -64,6 +64,19 @@ describe("builtins", () => {
     );
   });
 
+  it("hold a value beside the functions of a namespace", () => {
+    assert.equal(globals["Number.EPSILON"], Number.EPSILON);
+  });
+
+  it("tell what a number is without converting to one", () => {
+    assert.equal(globals["Number.isInteger"](2), true);
+    assert.equal(globals["Number.isInteger"](2.5), false);
+    assert.equal(globals["Number.isFinite"](2), true);
+    // Unconverted, so a string that reads as a number is still not one.
+    assert.equal(globals["Number.isFinite"]("2"), false);
+    assert.equal(globals["Number.isInteger"]("2"), false);
+  });
+
   it("write a string from the code points it is handed", () => {
     assert.equal(globals["String.fromCodePoint"](72, 105), "Hi");
     // The schema says none is the empty string, where an empty `Math.min` has
