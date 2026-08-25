@@ -46,7 +46,6 @@ export type {
   Spliced,
 } from "@backtickjs/language-schema";
 export type { ReadonlyState, State } from "@backtickjs/language-schema";
-export type { Widen } from "@backtickjs/language-schema";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "@backtickjs/ui-schema";
 export * from "./Ast.js";

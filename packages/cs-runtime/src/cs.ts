@@ -4,7 +4,6 @@ import type { ClientUnknown } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
 import type { Spliceable, Spliced } from "@backtickjs/language-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
-import type { Widen } from "@backtickjs/language-schema";
 
 // The root of a script
 function _lift<const T extends ClientUnknown>(_: T): Client<T> {
@@ -48,8 +47,15 @@ function _const<T extends ClientValue>(_: T): T {
   );
 }
 
-// A value with `let` semantics
-function _let<T extends ClientValue>(_: T): Widen<T> {
+// A value with `let` semantics, so the initial widens: what `let n = 0` holds
+// is a `number` and `n = 1` is allowed. Written as overloads because inference
+// through a `ClientValue` constraint keeps the literal — `0` rather than
+// `number` — and the primitives are where that happens.
+function _let(_: number): number;
+function _let(_: string): string;
+function _let(_: boolean): boolean;
+function _let<T extends ClientValue>(_: T): T;
+function _let(_: ClientValue): ClientValue {
   throw new Error(
     "Don't call `cs.let` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
