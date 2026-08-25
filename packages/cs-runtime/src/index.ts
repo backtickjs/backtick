@@ -39,12 +39,7 @@ export type { ClientValue } from "@backtickjs/language-schema";
 export type { ClientUnknown } from "@backtickjs/language-schema";
 export { cs } from "./cs.js";
 export type { SourceLocation } from "./SourceLocation.js";
-export type {
-  Server,
-  Spliceable,
-  SpliceableValue,
-  Spliced,
-} from "@backtickjs/language-schema";
+export type { Spliceable, Spliced } from "@backtickjs/language-schema";
 export type { ReadonlyState, State } from "@backtickjs/language-schema";
 export type { Receiver } from "./Receiver.js";
 export type { ServerComponent } from "@backtickjs/ui-schema";

@@ -6,16 +6,6 @@ import type {
   ClientValue,
 } from "./schema.generated.js";
 
-export type SpliceableValue =
-  | Client<ClientValue>
-  | ClientHandle
-  | null
-  | number
-  | boolean
-  | string
-  | readonly SpliceableValue[]
-  | { readonly [key: string]: SpliceableValue };
-
 /**
  * What the host may splice where the client wants a `T`: the value written out,
  * a script standing in for it, or a container mixing the two.
@@ -30,7 +20,7 @@ export type Spliceable<T extends ClientUnknown = ClientUnknown> =
 //   T[]                       -> Spliced<T>[]
 //   { k: T }                  -> { k: Spliced<T> }
 //   primitives                -> unchanged
-export type Spliced<T extends Spliceable> = [SpliceableValue] extends [T]
+export type Spliced<T extends Spliceable> = [Spliceable] extends [T]
   ? ClientValue
   : T extends Client<infer U>
     ? U
