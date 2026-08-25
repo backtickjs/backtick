@@ -1,0 +1,52 @@
+cs.lift(cs.const(       → cs`
+(                       → (
+__cs_c                  → c
+: Color                 → : Color
+) => {\n                → ) => {\n  
+return cs.const(        → return 
+__cs_c                  → c
+ ===                    →  === 
+cs.splice(              → ${ [-semantic]
+Color.Blue              → Color.Blue
+)                       → } [-semantic]
+ ?                      →  ? 
+"blue"                  → "blue"
+ :                      →  : 
+"red"                   → "red"
+);                      → ;
+\n}                     → \n}
+))                      → `
+cs.lift((() => {\n      → cs`{\n    
+const                   → const 
+__cs_held               → held
+ = cs.const(            →  = 
+cs.splice(              →  [-semantic]
+(state)                 → $state
+)                       →  [-semantic]
+(                       → (
+cs.splice(              → ${ [-semantic]
+Color.Red               → Color.Red
+)                       → } [-semantic]
+)                       → )
+);                      → ;
+\n                      → \n    
+return cs.const(        → return 
+<                       → <
+span                    → span
+>{cs.lift(              → >{
+cs.splice(              →  [-semantic]
+(label)                 → $label
+)                       →  [-semantic]
+(                       → (
+cs.receiver(            → 
+__cs_held               → held
+)                       → 
+.                       → .
+read                    → read
+()                      → ()
+)                       → )
+)}</                    → }</
+span                    → span
+>                       → >
+);                      → ;
+\n})())                 → \n  }`

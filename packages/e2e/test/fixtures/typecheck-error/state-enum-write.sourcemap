@@ -1,37 +1,27 @@
 cs.lift((() => {\n      → cs`{\n  
 const                   → const 
-__cs_n                  → n
- = cs.const(            →  = 
-cs.splice(              →  [-semantic]
-(state)                 → $state
-)                       →  [-semantic]
-(                       → (
-2                       → 2
-)                       → )
-);                      → ;
-\n                      → \n  
-cs.statement(           → 
-cs.receiver(            → 
-__cs_n                  → n
-)                       → 
-.                       → .
-write                   → write
-(                       → (
-3                       → 3
-)                       → )
-);                      → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
 __cs_held               → held
  = cs.const(            →  = 
 cs.splice(              →  [-semantic]
 (state)                 → $state
 )                       →  [-semantic]
 (                       → (
-cs.splice(              →  [-semantic]
-(act)                   → $act
-)                       →  [-semantic]
+cs.splice(              → ${ [-semantic]
+Color.Red               → Color.Red
+)                       → } [-semantic]
+)                       → )
+);                      → ;
+\n                      → \n  
+cs.statement(           → 
+cs.receiver(            → 
+__cs_held               → held
+)                       → 
+.                       → .
+write                   → write
+(                       → (
+cs.splice(              → ${ [-semantic]
+Color.Blue              → Color.Blue
+)                       → } [-semantic]
 )                       → )
 );                      → ;
 \n                      → \n  

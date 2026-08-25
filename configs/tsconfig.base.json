@@ -16,7 +16,6 @@
     "stripInternal": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     // Emit declaration and cache files to a directory that would be ignored by tools like Git and ESLint.
     "outDir": "${configDir}/node_modules/.cache/ts_base/out",
     "types": ["node"]

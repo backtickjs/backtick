@@ -1,0 +1,12 @@
+#f0 = ($0, $1, $2) => {
+  const held = $0()($1());
+  return <span>
+    {$2()(held.read())}
+  </span>;
+}
+
+#f1 = ($0) => (c) => {
+  return c === $0() ? "blue" : "red";
+}
+
+root = #f0(() => state, () => 0, () => #f1(() => 1))
