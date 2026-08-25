@@ -1,57 +1,63 @@
 import { cs, state } from "@backtickjs/core";
-// A cell holds the enum member it was given rather than the enum, so the other
-// member is not a value it takes. `cs.splice` is why: its constraint keeps the
-// literal, where a member written in the script would widen the way a `let`
-// does.
+// Splicing the member pins the cell to it. `${Color.Red}` reaches `$state`
+// through `cs.splice`, whose constraint keeps the literal, so what the cell
+// holds is `Color.Red` and the other member is not a value it takes.
+//
+// Splice the enum and read the member inside the script instead — `$Color.Red`,
+// which `state-enum` writes — and the cell holds `Color`, which is what a write
+// wants.
 var Color;
 (function (Color) {
   Color[(Color["Red"] = 0)] = "Red";
   Color[(Color["Blue"] = 1)] = "Blue";
 })(Color || (Color = {}));
+// An action, so the write is the only thing under test: in a script that
+// returns a value it would be a side effect as well, and that error would stand
+// beside this one.
 export default cs.create(
-  [12, 16, 16, 3],
+  [18, 16, 21, 3],
   {
     version: "0.0.0",
     filePath: "state-enum-write.ts",
-    fileHash: "pmfpsbs4xhn8",
-    kind: "value",
+    fileHash: "inm6br2x0cat",
+    kind: "action",
     splices: { $state: state, $0splice0: Color.Red, $0splice1: Color.Blue },
     captures: [],
     spliceParams: { $state: [], $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 242,
-    loc: [12, 19, 16, 2],
+    loc: [18, 19, 21, 2],
     statements: [
       {
         kind: 244,
-        loc: [13, 3, 13, 37],
+        loc: [19, 3, 19, 37],
         declarationList: {
           kind: 262,
-          loc: [13, 3, 13, 36],
+          loc: [19, 3, 19, 36],
           declarations: [
             {
               kind: 261,
-              loc: [13, 9, 13, 36],
+              loc: [19, 9, 19, 36],
               name: {
                 kind: 80,
-                loc: [13, 9, 13, 13],
+                loc: [19, 9, 19, 13],
                 text: "held",
-                bindingKey: "held$pmfpsbs4xhn8$0",
+                bindingKey: "held$inm6br2x0cat$0",
               },
               initializer: {
                 kind: 214,
-                loc: [13, 16, 13, 36],
+                loc: [19, 16, 19, 36],
                 expression: {
                   kind: 1000,
-                  loc: [13, 16, 13, 22],
+                  loc: [19, 16, 19, 22],
                   key: "$state",
                 },
                 questionDotToken: false,
                 arguments: [
                   {
                     kind: 1000,
-                    loc: [13, 23, 13, 35],
+                    loc: [19, 23, 19, 35],
                     key: "$0splice0",
                   },
                 ],
@@ -63,15 +69,15 @@ export default cs.create(
       },
       {
         kind: 214,
-        loc: [14, 3, 14, 28],
+        loc: [20, 3, 20, 28],
         expression: {
           kind: 212,
-          loc: [14, 3, 14, 13],
+          loc: [20, 3, 20, 13],
           expression: {
             kind: 80,
-            loc: [14, 3, 14, 7],
+            loc: [20, 3, 20, 7],
             text: "held",
-            bindingKey: "held$pmfpsbs4xhn8$0",
+            bindingKey: "held$inm6br2x0cat$0",
           },
           questionDotToken: false,
           name: "write",
@@ -80,19 +86,10 @@ export default cs.create(
         arguments: [
           {
             kind: 1000,
-            loc: [14, 14, 14, 27],
+            loc: [20, 14, 20, 27],
             key: "$0splice1",
           },
         ],
-      },
-      {
-        kind: 254,
-        loc: [15, 3, 15, 12],
-        expression: {
-          kind: 9,
-          loc: [15, 10, 15, 11],
-          value: 1,
-        },
       },
     ],
   }),

@@ -6,9 +6,13 @@ __cs_c                  → c
 return cs.const(        → return 
 __cs_c                  → c
  ===                    →  === 
-cs.splice(              → ${ [-semantic]
-Color.Blue              → Color.Blue
-)                       → } [-semantic]
+cs.receiver(            → 
+cs.splice(              →  [-semantic]
+(Color)                 → $Color
+)                       →  [-semantic]
+)                       → 
+.                       → .
+Blue                    → Blue
  ?                      →  ? 
 "blue"                  → "blue"
  :                      →  : 
@@ -24,15 +28,38 @@ cs.splice(              →  [-semantic]
 (state)                 → $state
 )                       →  [-semantic]
 (                       → (
-cs.splice(              → ${ [-semantic]
-Color.Red               → Color.Red
-)                       → } [-semantic]
+cs.receiver(            → 
+cs.splice(              →  [-semantic]
+(Color)                 → $Color
+)                       →  [-semantic]
+)                       → 
+.                       → .
+Red                     → Red
 )                       → )
 );                      → ;
 \n                      → \n    
 return cs.const(        → return 
-<                       → <
+<                       → (\n      <
 span                    → span
+                        →  
+onclick                 → onclick
+={cs.lift(              → ={
+() =>                   → () => 
+cs.receiver(            → 
+__cs_held               → held
+)                       → 
+.                       → .
+write                   → write
+(                       → (
+cs.receiver(            → 
+cs.splice(              →  [-semantic]
+(Color)                 → $Color
+)                       →  [-semantic]
+)                       → 
+.                       → .
+Blue                    → Blue
+)                       → )
+)}                      → }
 >{cs.lift(              → >{
 cs.splice(              →  [-semantic]
 (label)                 → $label
@@ -47,6 +74,6 @@ read                    → read
 )                       → )
 )}</                    → }</
 span                    → span
->                       → >
+>                       → >\n    )
 );                      → ;
 \n})())                 → \n  }`

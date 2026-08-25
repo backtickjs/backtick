@@ -24,8 +24,4 @@ Color.Blue              → Color.Blue
 )                       → } [-semantic]
 )                       → )
 );                      → ;
-\n                      → \n  
-return cs.const(        → return 
-1                       → 1
-);                      → ;
 \n})())                 → \n}`

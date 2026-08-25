@@ -1,1 +1,1 @@
-14:3-14:29 error TS0: A script that returns a value can't have side effects; run them in an action — a block without `return`.
+No diagnostics.
