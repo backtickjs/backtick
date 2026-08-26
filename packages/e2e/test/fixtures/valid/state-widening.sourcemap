@@ -28,6 +28,20 @@ import("@backtickjs/core").ClientUnknown  → ${Tone.Warm}
 )                                         → )
 );                                        → ;
 \n                                        → \n    
+const                                     → const 
+__cs_step                                 → step
+ = cs.const(                              →  = 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(state)                                   → $state
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $state
+)<() => number>(                          → <() => number>(
+() =>                                     → () => 
+0                                         → 0
+)                                         → )
+);                                        → ;
+\n                                        → \n    
 return cs.const(                          → return 
 <                                         → (\n      <
 span                                      → span
@@ -59,6 +73,18 @@ Tone.Cool                                 → Tone.Cool
 import("@backtickjs/core").ClientUnknown  → ${Tone.Cool}
 )                                         → )
 );                                        → ;
+\n                                        → \n          
+cs.statement(                             → 
+cs.receiver(                              → 
+__cs_step                                 → step
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+() =>                                     → () => 
+1                                         → 1
+)                                         → )
+);                                        → ;
 \n    }                                   → \n        }
 )}                                        → }
 >{cs.lift(                                → \n      >\n        {
@@ -76,6 +102,16 @@ __cs_tone                                 → tone
 )                                         → 
 .                                         → .
 read                                      → read
+()                                        → ()
+ +                                        →  + 
+" "                                       → " "
+ +                                        →  + 
+cs.receiver(                              → 
+__cs_step                                 → step
+)                                         → 
+.                                         → .
+read                                      → read
+()                                        → ()
 ()                                        → ()
 )}</                                      → }\n      </
 span                                      → span
