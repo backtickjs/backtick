@@ -6,7 +6,8 @@ cs.splice(                                →  [-semantic]
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_order                                → order
-: Order                                   → : Order
+:                                         → : 
+Order                                     → Order
 ) =>                                      → ) =>\n        
 cs.splice(                                → ${ [-semantic]
 (\n          <div>\n            <img\n              src={→ (\n          <div>\n            <img\n              src={
@@ -57,7 +58,8 @@ items                                     → items
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_item                                 → item
-: Item                                    → : Item
+:                                         → : 
+Item                                      → Item
 ) =>                                      → ) =>\n                
 cs.splice(                                → ${ [-semantic]
 (<span>{                                  → (<span>{

@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_o                                    → o
-: {\n    label: string;\n    inner?: {\n        z?: number;\n    };\n}→ : { label: string; inner?: { z?: number } }
+:                                         → : 
+{\n    label: string;\n    inner?: {\n        z?: number;\n    };\n}→ { label: string; inner?: { z?: number } }
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
 [                                         → [

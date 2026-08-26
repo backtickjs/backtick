@@ -6,7 +6,8 @@ cs.splice(                                →  [-semantic]
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_row                                  → row
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) =>                                      → ) => 
 cs.splice(                                → ${ [-semantic]
 (<span>{                                  → (<span>{

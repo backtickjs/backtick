@@ -1,7 +1,9 @@
 cs.lift((() => {\n      → cs`{\n  
 let                     → let 
 __cs_last               → last
-: () => number =        → : () => number = 
+:                       → : 
+() => number            → () => number
+ =                      →  = 
 () =>                   → () => 
 0                       → 0
 ;                       → ;

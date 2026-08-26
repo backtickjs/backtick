@@ -14,7 +14,8 @@ __cs_n                                    → n
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_id                                   → id
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) => {\n                                  → ) => {\n  
 cs.statement(                             → 
 cs.splice(                                →  [-semantic]

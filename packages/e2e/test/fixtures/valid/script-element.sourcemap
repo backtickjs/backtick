@@ -16,7 +16,8 @@ __cs_row                                  → row
  = cs.const(                              →  = 
 (                                         → (
 __cs_size                                 → size
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) => {\n                                  → ) => {\n      
 const                                     → const 
 __cs_css                                  → css

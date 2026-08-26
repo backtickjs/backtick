@@ -6,7 +6,9 @@ __cs_ids                                  → ids
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
 ) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)<number[]>(                              → <number[]>(
+)<                                        → <
+number[]                                  → number[]
+>(                                        → >(
 [                                         → [
 1                                         → 1
 ,                                         → , 
@@ -136,7 +138,8 @@ read                                      → read
 >{cs.lift(                                → >\n            {
 (                                         → (
 __cs_id                                   → id
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) =>                                      → ) => 
 <                                         → <
 span                                      → span

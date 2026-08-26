@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_initial                              → initial
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) => {\n                                  → ) => {\n  
 const                                     → const 
 __cs_count                                → count
@@ -31,7 +32,8 @@ add                                       → add
 :                                         → : 
 (                                         → (
 __cs_n                                    → n
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) => {\n                                  → ) => {\n      
 cs.statement(                             → 
 cs.receiver(                              → 

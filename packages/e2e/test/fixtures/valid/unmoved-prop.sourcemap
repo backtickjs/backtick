@@ -53,7 +53,8 @@ each                                      → each
 >{cs.lift(                                → >\n            {
 (                                         → (
 __cs_id                                   → id
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) =>                                      → ) => 
 <                                         → (\n              <
 a                                         → a

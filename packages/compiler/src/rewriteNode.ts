@@ -101,6 +101,31 @@ function accessNode(
   });
 }
 
+/**
+ * A type the script wrote, carried into the virtual code as it stands.
+ *
+ * Mapped to itself, because it is its own source: the text is what the script
+ * wrote, and the virtual node is the source node. Without a mapping of its own
+ * it is swallowed by the enclosing node's, whose generated span and source span
+ * are different lengths — so no position inside it reads back, and every editor
+ * feature that answers about a position is answered about nothing. A type a
+ * script names goes uncoloured, and go-to-definition on it lands nowhere.
+ *
+ * A synthetic node is not one of these: `pos` is -1 where nothing was written,
+ * and there is no source for it to be read back to. Rewriting a type is where
+ * that arises — a banned keyword becomes `any`, which is the compiler's word
+ * and not the script's.
+ */
+function mapType<T extends ts.TypeNode | undefined>(
+  state: RewriteState,
+  type: T,
+): T {
+  if (type !== undefined && type.pos >= 0) {
+    state.mappings.set(type, type);
+  }
+  return type;
+}
+
 // Whether an access has already taken this name as its front, which is the one
 // place a namespace may be written: `Math.floor` names something and `Math`
 // alone names nothing.
@@ -473,7 +498,7 @@ function rewriteNodeImpl(
           // What the script said it was. Written by hand or not at all: a
           // script is checked as the code it looks like, and dropping this
           // would leave `let rows: Row[] = []` holding nothing it can hold.
-          declaration.type,
+          mapType(state, declaration.type),
         ),
         runtime: astNode(ts, SyntaxKind.VariableDeclarationList, {
           loc: loc(node),
@@ -1215,6 +1240,9 @@ function rewriteNodeImpl(
   }
 
   if (ts.isCallExpression(node)) {
+    // `$state<Row[]>([])` — written out where the initial would widen wrong,
+    // and carried through below as the script wrote it.
+    node.typeArguments?.forEach((one) => mapType(state, one));
     // `cb?.()` — an optional call: a null callee yields null, the
     // arguments unevaluated, mirroring an optional access.
     const optionalCall = node.questionDotToken != null;
@@ -1411,10 +1439,10 @@ function rewriteNodeImpl(
           undefined,
           param.optional && param.type
             ? ts.factory.createUnionTypeNode([
-                param.type,
+                mapType(state, param.type),
                 ts.factory.createLiteralTypeNode(ts.factory.createNull()),
               ])
-            : param.type,
+            : mapType(state, param.type),
           undefined,
         );
         state.mappings.set(declaration, param.source);

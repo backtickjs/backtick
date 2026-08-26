@@ -1,10 +1,12 @@
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_ready         → ready
-: boolean          → : boolean
+:                  → : 
+boolean            → boolean
 ,                  → , 
 __cs_count         → count
-: number           → : number
+:                  → : 
+number             → number
 ) => {\n           → ) => {\n  
 if (               → if (
 !(cs.condition(    → !

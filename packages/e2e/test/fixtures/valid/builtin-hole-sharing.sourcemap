@@ -17,7 +17,8 @@ read                                      → read
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_n                                    → n
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) =>                                      → ) => 
 (                                         → 
 cs.splice(                                →  [-semantic]

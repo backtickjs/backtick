@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_name                                 → name
-: string                                  → : string
+:                                         → : 
+string                                    → string
 ) =>                                      → ) => 
 <>{cs.lift(                               → (\n  <>\n    
 <                                         → <

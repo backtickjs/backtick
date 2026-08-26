@@ -4,10 +4,12 @@ true                                      → true
 cs.lift(cs.const(                         → cs`
 (                                         → (\n  
 __cs_text                                 → text
-: string | null                           → : string | null
+:                                         → : 
+string | null                             → string | null
 ,                                         → ,\n  
 __cs_upper                                → upper
-: boolean                                 → : boolean
+:                                         → : 
+boolean                                   → boolean
 ) => {\n                                  → ,\n) => {\n  
 if (                                      → if (
 (cs.condition(                            → 

@@ -1,17 +1,20 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (\n  
 __cs_a                                    → a
-: boolean                                 → : boolean
+:                                         → : 
+boolean                                   → boolean
 ,                                         → ,\n  
 __cs_b                                    → b
-: boolean                                 → : boolean
+:                                         → : 
+boolean                                   → boolean
 ) => {\n                                  → ,\n) => {\n  
 const                                     → const 
 __cs_keep                                 → keep
  = cs.const(                              →  = 
 (                                         → (
 __cs_on                                   → on
-: boolean                                 → : boolean
+:                                         → : 
+boolean                                   → boolean
 ) =>                                      → ) => 
 __cs_on                                   → on
 );                                        → ;

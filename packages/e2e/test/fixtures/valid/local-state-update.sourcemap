@@ -41,7 +41,8 @@ update                                    → update
 (                                         → (
 (                                         → (
 __cs_current                              → current
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) =>                                      → ) => 
 __cs_current                              → current
  +                                        →  + 

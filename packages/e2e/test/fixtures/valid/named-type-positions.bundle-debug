@@ -1,0 +1,30 @@
+#f0 = ($0, $1) => {
+  const rows = $0()([]);
+  const add = (row) => {
+    rows.write([row]);
+  };
+  const label = (row) => {
+    return row.label;
+  };
+  return <div>
+    {<span
+      onclick={() => add({ "id": 1, "label": "one" })}
+    >
+      {"add"}
+    </span>}
+    {<div>
+      {$1()({
+        "each": () => rows.read(),
+        "children": () => (row) => <span>
+          {label(row)}
+        </span>
+      })}
+    </div>}
+  </div>;
+}
+
+root = #f0(() => state, () => ($0) => <for
+  each={$0.each()}
+>
+  {$0.children()}
+</for>)

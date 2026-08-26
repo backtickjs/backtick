@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_c                                    → c
-: Color                                   → : Color
+:                                         → : 
+Color                                     → Color
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
 __cs_c                                    → c

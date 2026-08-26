@@ -1,0 +1,6 @@
+<div>
+  <span onclick={[function]}>
+    {"add"}
+  </span>
+  <div />
+</div>

@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (\n  
 __cs_value                                → value
-: string | null                           → : string | null
+:                                         → : 
+string | null                             → string | null
 ) => {\n                                  → ,\n) => {\n  
 if (                                      → if (
 __cs_value                                → value

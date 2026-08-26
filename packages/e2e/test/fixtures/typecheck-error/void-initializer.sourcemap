@@ -42,7 +42,8 @@ cs.splice(                                →  [-semantic]
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_text                                 → text
-: string                                  → : string
+:                                         → : 
+string                                    → string
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
 __cs_text                                 → text

@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_currency                             → currency
-: string                                  → : string
+:                                         → : 
+string                                    → string
 ) => {\n                                  → ) => {\n  
 const                                     → const 
 __cs_table                                → table

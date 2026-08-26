@@ -1,7 +1,8 @@
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_n             → n
-: number           → : number
+:                  → : 
+number             → number
 ) => {\n           → ) => {\n  
 let                → let 
 __cs_last          → last

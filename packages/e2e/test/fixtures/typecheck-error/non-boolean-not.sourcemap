@@ -1,7 +1,8 @@
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_count         → count
-: number           → : number
+:                  → : 
+number             → number
 ) =>               → ) => 
 !(cs.condition(    → !
 __cs_count         → count

@@ -1,7 +1,8 @@
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_Tag           → Tag
-: number           → : number
+:                  → : 
+number             → number
 ) =>               → ) => 
 <                  → <
 Tag                → Tag

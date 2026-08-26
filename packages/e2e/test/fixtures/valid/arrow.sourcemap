@@ -8,10 +8,12 @@ __cs_base               → base
 return cs.const(        → return 
 (                       → (
 __cs_one                → one
-: number                → : number
+:                       → : 
+number                  → number
 ,                       → , 
 __cs_two                → two
-: number                → : number
+:                       → : 
+number                  → number
 ) =>                    → ) => 
 __cs_one                → one
  +                      →  + 

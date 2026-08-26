@@ -4,7 +4,8 @@ __cs_build                                → build
  = cs.const(                              →  = 
 (                                         → (
 __cs_from                                 → from
-: number                                  → : number
+:                                         → : 
+number                                    → number
 ) => {\n                                  → ) => {\n      
 return cs.const(                          → return 
 cs.receiver(                              → 
@@ -96,7 +97,8 @@ read                                      → read
 >{cs.lift(                                → >\n            {
 (                                         → (
 __cs_row                                  → row
-: Row                                     → : Row
+:                                         → : 
+Row                                       → Row
 ) =>                                      → ) => 
 <                                         → (\n              <
 li                                        → li

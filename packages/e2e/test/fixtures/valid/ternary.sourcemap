@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_n                                    → n
-: number | null                           → : number | null
+:                                         → : 
+number | null                             → number | null
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
 __cs_n                                    → n

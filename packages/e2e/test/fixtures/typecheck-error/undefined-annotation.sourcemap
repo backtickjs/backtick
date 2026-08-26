@@ -1,7 +1,8 @@
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_x             → x
-: Maybe            → : Maybe
+:                  → : 
+Maybe              → Maybe
 ) => {\n           → ) => {\n  
 const              → const 
 __cs_y             → y
@@ -17,7 +18,8 @@ return cs.const(   → return
 cs.lift(cs.const(  → cs`
 (                  → (
 __cs_x             → x
-: Maybe            → : Maybe
+:                  → : 
+Maybe              → Maybe
 ) => {\n           → ) => {\n  
 let                → let 
 __cs_y             → y

@@ -1,7 +1,8 @@
 cs.lift(cs.const(                         → cs`
 (                                         → (
 __cs_flag                                 → flag
-: boolean                                 → : boolean
+:                                         → : 
+boolean                                   → boolean
 ) => {\n                                  → ) => {\n    
 if ((cs.condition(                        → if (
 __cs_flag                                 → flag
