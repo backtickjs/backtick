@@ -1241,8 +1241,8 @@ function rewriteNodeImpl(
 
   if (ts.isCallExpression(node)) {
     // `$state<Row[]>([])` — written out where the initial would widen wrong,
-    // and carried through below as the script wrote it.
-    node.typeArguments?.forEach((one) => mapType(state, one));
+    // and carried into all four calls built below as the script wrote it.
+    const typeArguments = node.typeArguments?.map((one) => mapType(state, one));
     // `cb?.()` — an optional call: a null callee yields null, the
     // arguments unevaluated, mirroring an optional access.
     const optionalCall = node.questionDotToken != null;
@@ -1297,12 +1297,12 @@ function rewriteNodeImpl(
             optionalCall
               ? ts.factory.createToken(ts.SyntaxKind.QuestionDotToken)
               : undefined,
-            node.typeArguments,
+            typeArguments,
             args.map((arg) => arg.virtual as ts.Expression),
           )
         : ts.factory.createCallExpression(
             calleeAccess,
-            node.typeArguments,
+            typeArguments,
             args.map((arg) => arg.virtual as ts.Expression),
           );
       const virtual =
@@ -1340,12 +1340,12 @@ function rewriteNodeImpl(
       ? ts.factory.createCallChain(
           callee.virtual as ts.Expression,
           ts.factory.createToken(ts.SyntaxKind.QuestionDotToken),
-          node.typeArguments,
+          typeArguments,
           args.map((arg) => arg.virtual as ts.Expression),
         )
       : ts.factory.createCallExpression(
           callee.virtual as ts.Expression,
-          node.typeArguments,
+          typeArguments,
           args.map((arg) => arg.virtual as ts.Expression),
         );
     return {
