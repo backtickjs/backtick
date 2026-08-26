@@ -1,0 +1,10 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+String             → String
+)                  → 
+.                  → .
+fromCharCode       → fromCharCode
+(                  → (
+72                 → 72
+)                  → )
+))                 → `

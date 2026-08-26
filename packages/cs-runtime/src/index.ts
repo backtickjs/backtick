@@ -14,7 +14,9 @@ export type {
   Boolean,
   Math,
   Number,
+  NumberConstructor,
   String,
+  StringConstructor,
 } from "./receivers.generated.js";
 export {
   type ClientScript,

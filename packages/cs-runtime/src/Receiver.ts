@@ -4,7 +4,9 @@ import type {
   Boolean,
   Math,
   Number,
+  NumberConstructor,
   String,
+  StringConstructor,
 } from "./receivers.generated.js";
 import type { ClientElement } from "@backtickjs/ui-schema";
 import type { ClientFunction } from "@backtickjs/language-schema";
@@ -39,7 +41,17 @@ type ReadMembers<T extends object> = {
 // them before `Receiver` narrows each to what this language admits of it. The
 // lib type is the whole of JavaScript's `Math`; the view beside it is the part
 // of it every host can agree on.
-export type ClientGlobal = typeof globalThis.Math | typeof globalThis.Array;
+//
+// The four the compiler recognises, and every one of them: a global left out
+// here is one the narrowing below never reaches, and `Number` and `String` are
+// callable, so what a script would have read them through is the host's own
+// constructor — the whole standard library, typechecking and answered by no
+// client. See `namespaces` in `rewriteNode.ts`, which is the same four.
+export type ClientGlobal =
+  | typeof globalThis.Array
+  | typeof globalThis.Math
+  | typeof globalThis.Number
+  | typeof globalThis.String;
 
 // What a client view may be indexed by: an array by number and nothing else,
 // anything else by the keys its own type names. Naming the array case rather
@@ -57,12 +69,16 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
     ? Math
     : T extends typeof globalThis.Array
       ? ArrayConstructor
-      : T extends string | number | boolean | ClientValue[]
-        ? Autoboxed<T>
-        : T extends ClientElement
-          ? {}
-          : T extends ClientFunction
-            ? T
-            : T extends object
-              ? ReadMembers<T>
-              : T;
+      : T extends typeof globalThis.Number
+        ? NumberConstructor
+        : T extends typeof globalThis.String
+          ? StringConstructor
+          : T extends string | number | boolean | ClientValue[]
+            ? Autoboxed<T>
+            : T extends ClientElement
+              ? {}
+              : T extends ClientFunction
+                ? T
+                : T extends object
+                  ? ReadMembers<T>
+                  : T;

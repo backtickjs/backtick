@@ -1,0 +1,17 @@
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Number             → Number
+)                  → 
+.                  → .
+MAX_SAFE_INTEGER   → MAX_SAFE_INTEGER
+))                 → `
+cs.lift(cs.const(  → cs`
+cs.receiver(       → 
+Number             → Number
+)                  → 
+.                  → .
+isNaN              → isNaN
+(                  → (
+1                  → 1
+)                  → )
+))                 → `
