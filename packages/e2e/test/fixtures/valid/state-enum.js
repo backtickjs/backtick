@@ -2,84 +2,76 @@ import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A cell holding an enum, handed to a function whose parameter is that enum.
 //
-// The enum is spliced by name and read inside the script — `$Color.Red`, not
-// `${Color.Red}`. Splicing the member pins the cell to that member: a spliced
-// value reaches `$state` through `cs.splice`, whose constraint keeps the
-// literal, so `Color.Red` is what the cell would hold and the other member
-// would not be a value it takes (`state-enum-write` pins that). Read off the
-// enum instead and the cell holds `Color`, which is what a write wants and what
-// a function taking one accepts.
+// The member is spliced as itself and the cell holds `Color` rather than
+// `Color.Red`, so the other member is a value it takes. What a splice hands
+// over keeps the width the host gave it: `cs.splice` reads it back unbound, and
+// the binding it lands in decides the width the way TypeScript decides every
+// other one — a member to its enum, as a `let` would.
 var Color;
 (function (Color) {
   Color[(Color["Red"] = 0)] = "Red";
   Color[(Color["Blue"] = 1)] = "Blue";
 })(Color || (Color = {}));
 const label = cs.create(
-  [17, 45, 19, 3],
+  [15, 45, 17, 3],
   {
     version: "0.0.0",
     filePath: "state-enum.tsx",
-    fileHash: "33xl6oe1r5l07",
+    fileHash: "vlvkz8vk4fw4",
     kind: "value",
-    splices: { $Color: Color },
+    splices: { $0splice0: Color.Blue },
     captures: [],
-    spliceParams: { $Color: [] },
+    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 220,
-    loc: [17, 48, 19, 2],
+    loc: [15, 48, 17, 2],
     parameters: [
       {
         kind: 170,
-        loc: [17, 49, 17, 57],
+        loc: [15, 49, 15, 57],
         name: {
           kind: 80,
-          loc: [17, 49, 17, 50],
+          loc: [15, 49, 15, 50],
           text: "c",
-          bindingKey: "c$33xl6oe1r5l07$0",
+          bindingKey: "c$vlvkz8vk4fw4$0",
         },
       },
     ],
     body: {
       kind: 242,
-      loc: [17, 62, 19, 2],
+      loc: [15, 62, 17, 2],
       statements: [
         {
           kind: 254,
-          loc: [18, 3, 18, 45],
+          loc: [16, 3, 16, 47],
           expression: {
             kind: 228,
-            loc: [18, 10, 18, 44],
+            loc: [16, 10, 16, 46],
             condition: {
               kind: 227,
-              loc: [18, 10, 18, 27],
+              loc: [16, 10, 16, 29],
               left: {
                 kind: 80,
-                loc: [18, 10, 18, 11],
+                loc: [16, 10, 16, 11],
                 text: "c",
-                bindingKey: "c$33xl6oe1r5l07$0",
+                bindingKey: "c$vlvkz8vk4fw4$0",
               },
               operatorToken: "===",
               right: {
-                kind: 212,
-                loc: [18, 16, 18, 27],
-                expression: {
-                  kind: 1000,
-                  loc: [18, 16, 18, 22],
-                  key: "$Color",
-                },
-                questionDotToken: false,
-                name: "Blue",
+                kind: 1000,
+                loc: [16, 16, 16, 29],
+                key: "$0splice0",
               },
             },
             whenTrue: {
               kind: 11,
-              loc: [18, 30, 18, 36],
+              loc: [16, 32, 16, 38],
               text: "blue",
             },
             whenFalse: {
               kind: 11,
-              loc: [18, 39, 18, 44],
+              loc: [16, 41, 16, 46],
               text: "red",
             },
           },
@@ -90,56 +82,55 @@ const label = cs.create(
 );
 async function Swatch() {
   return cs.create(
-    [22, 10, 27, 5],
+    [20, 10, 27, 5],
     {
       version: "0.0.0",
       filePath: "state-enum.tsx",
-      fileHash: "33xl6oe1r5l07",
+      fileHash: "vlvkz8vk4fw4",
       kind: "value",
-      splices: { $state: state, $Color: Color, $label: label },
+      splices: {
+        $state: state,
+        $0splice0: Color.Red,
+        $0splice1: Color.Blue,
+        $label: label,
+      },
       captures: [],
-      spliceParams: { $state: [], $Color: [], $label: [] },
+      spliceParams: { $state: [], $0splice0: [], $0splice1: [], $label: [] },
     },
     () => ({
       kind: 242,
-      loc: [22, 13, 27, 4],
+      loc: [20, 13, 27, 4],
       statements: [
         {
           kind: 244,
-          loc: [23, 5, 23, 37],
+          loc: [21, 5, 21, 39],
           declarationList: {
             kind: 262,
-            loc: [23, 5, 23, 36],
+            loc: [21, 5, 21, 38],
             declarations: [
               {
                 kind: 261,
-                loc: [23, 11, 23, 36],
+                loc: [21, 11, 21, 38],
                 name: {
                   kind: 80,
-                  loc: [23, 11, 23, 15],
+                  loc: [21, 11, 21, 15],
                   text: "held",
-                  bindingKey: "held$33xl6oe1r5l07$1",
+                  bindingKey: "held$vlvkz8vk4fw4$1",
                 },
                 initializer: {
                   kind: 214,
-                  loc: [23, 18, 23, 36],
+                  loc: [21, 18, 21, 38],
                   expression: {
                     kind: 1000,
-                    loc: [23, 18, 23, 24],
+                    loc: [21, 18, 21, 24],
                     key: "$state",
                   },
                   questionDotToken: false,
                   arguments: [
                     {
-                      kind: 212,
-                      loc: [23, 25, 23, 35],
-                      expression: {
-                        kind: 1000,
-                        loc: [23, 25, 23, 31],
-                        key: "$Color",
-                      },
-                      questionDotToken: false,
-                      name: "Red",
+                      kind: 1000,
+                      loc: [21, 25, 21, 37],
+                      key: "$0splice0",
                     },
                   ],
                 },
@@ -150,13 +141,13 @@ async function Swatch() {
         },
         {
           kind: 254,
-          loc: [24, 5, 26, 7],
+          loc: [22, 5, 26, 7],
           expression: {
             kind: 285,
-            loc: [25, 7, 25, 81],
+            loc: [23, 7, 25, 14],
             type: {
               kind: 11,
-              loc: [25, 8, 25, 12],
+              loc: [23, 8, 23, 12],
               text: "span",
             },
             attributes: [
@@ -164,19 +155,19 @@ async function Swatch() {
                 name: "onclick",
                 initializer: {
                   kind: 220,
-                  loc: [25, 22, 25, 51],
+                  loc: [23, 22, 23, 53],
                   parameters: [],
                   body: {
                     kind: 214,
-                    loc: [25, 28, 25, 51],
+                    loc: [23, 28, 23, 53],
                     expression: {
                       kind: 212,
-                      loc: [25, 28, 25, 38],
+                      loc: [23, 28, 23, 38],
                       expression: {
                         kind: 80,
-                        loc: [25, 28, 25, 32],
+                        loc: [23, 28, 23, 32],
                         text: "held",
-                        bindingKey: "held$33xl6oe1r5l07$1",
+                        bindingKey: "held$vlvkz8vk4fw4$1",
                       },
                       questionDotToken: false,
                       name: "write",
@@ -184,15 +175,9 @@ async function Swatch() {
                     questionDotToken: false,
                     arguments: [
                       {
-                        kind: 212,
-                        loc: [25, 39, 25, 50],
-                        expression: {
-                          kind: 1000,
-                          loc: [25, 39, 25, 45],
-                          key: "$Color",
-                        },
-                        questionDotToken: false,
-                        name: "Blue",
+                        kind: 1000,
+                        loc: [23, 39, 23, 52],
+                        key: "$0splice1",
                       },
                     ],
                   },
@@ -202,25 +187,25 @@ async function Swatch() {
             children: [
               {
                 kind: 214,
-                loc: [25, 54, 25, 73],
+                loc: [24, 10, 24, 29],
                 expression: {
                   kind: 1000,
-                  loc: [25, 54, 25, 60],
+                  loc: [24, 10, 24, 16],
                   key: "$label",
                 },
                 questionDotToken: false,
                 arguments: [
                   {
                     kind: 214,
-                    loc: [25, 61, 25, 72],
+                    loc: [24, 17, 24, 28],
                     expression: {
                       kind: 212,
-                      loc: [25, 61, 25, 70],
+                      loc: [24, 17, 24, 26],
                       expression: {
                         kind: 80,
-                        loc: [25, 61, 25, 65],
+                        loc: [24, 17, 24, 21],
                         text: "held",
-                        bindingKey: "held$33xl6oe1r5l07$1",
+                        bindingKey: "held$vlvkz8vk4fw4$1",
                       },
                       questionDotToken: false,
                       name: "read",

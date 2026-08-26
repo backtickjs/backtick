@@ -1,14 +1,14 @@
-#f0 = ($0, $1, $2) => {
-  const held = $0()($1().Red);
+#f0 = ($0, $1, $2, $3) => {
+  const held = $0()($1());
   return <span
-    onclick={() => held.write($1().Blue)}
+    onclick={() => held.write($2())}
   >
-    {$2()(held.read())}
+    {$3()(held.read())}
   </span>;
 }
 
 #f1 = ($0) => (c) => {
-  return c === $0().Blue ? "blue" : "red";
+  return c === $0() ? "blue" : "red";
 }
 
-root = #f0(() => state, () => { "0": "Red", "1": "Blue", "Red": 0, "Blue": 1 }, () => #f1(() => { "0": "Red", "1": "Blue", "Red": 0, "Blue": 1 }))
+root = #f0(() => state, () => 0, () => 1, () => #f1(() => 1))

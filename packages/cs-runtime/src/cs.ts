@@ -3,19 +3,18 @@ import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "@backtickjs/language-schema";
 import type { ClientFunction } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
-import type { Spliceable, Spliced } from "@backtickjs/language-schema";
+import type { Spliced } from "@backtickjs/language-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 
 // The root of a script
-function _lift<const T extends ClientUnknown>(_: T): Client<T> {
+function _lift<T extends ClientUnknown>(_: T): Client<T> {
   throw new Error(
     "Don't call `cs.lift` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
 
-// A spliced host value, read as what it becomes on the client
-function _splice<const T extends Spliceable>(_: T): Spliced<T> {
+function _splice<T>(_: T): Spliced<T> {
   throw new Error(
     "Don't call `cs.splice` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
