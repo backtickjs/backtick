@@ -21,9 +21,9 @@ __cs_x             → x
 ) => {\n           → ) => {\n  
 let                → let 
 __cs_y             → y
- = cs.let(         →  = 
+ =                 →  = 
 ""                 → ""
-);                 → ;
+;                  → ;
 \n                 → \n  
 __cs_y             → y
  = cs.const(       →  = 

@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 
 // A bare `return` exits an action early; the completion is null either way.
 export default cs.lift((() => {
-    let __cs_n = cs.let(0);
+    let __cs_n = 0;
     if (__cs_n === 0) {
         return;
     }

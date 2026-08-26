@@ -1,17 +1,16 @@
 cs.lift((() => {\n      → cs`{\n  
 let                     → let 
 __cs_last               → last
- = cs.let(              →  = 
+: () => number =        → : () => number = 
 () =>                   → () => 
 0                       → 0
-);                      → ;
+;                       → ;
 \n                      → \n  
 for (                   → for (
 let                     → let 
 __cs_i                  → i
- = cs.let(              →  = 
+ =                      →  = 
 0                       → 0
-)                       → 
 ;                       → ; 
 __cs_i                  → i
  <                      →  < 

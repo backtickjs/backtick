@@ -19,9 +19,9 @@ import("@backtickjs/core").ClientUnknown  → ${add(cs`total`, 100)}
 cs.lift((() => {\n                        → cs`{\n    
 let                                       → let 
 __cs_total                                → total
- = cs.let(                                →  = 
+ =                                        →  = 
 0                                         → 0
-);                                        → ;
+;                                         → ;
 \n                                        → \n    
 __cs_total                                → total
  = cs.const(                              →  = 

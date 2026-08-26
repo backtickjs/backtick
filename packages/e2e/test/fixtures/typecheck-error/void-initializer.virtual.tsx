@@ -3,7 +3,7 @@ import { cs } from "@backtickjs/core";
 // An action call produces no value: its `void` result can't initialize a
 // variable — in a value script or an action.
 const ping = cs.lift(cs.const(() => {
-    let __cs_n = cs.let(0);
+    let __cs_n = 0;
     __cs_n = cs.const(1);
 }));
 

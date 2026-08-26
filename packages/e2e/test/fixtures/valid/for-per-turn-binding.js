@@ -7,7 +7,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "for-per-turn-binding.ts",
-    fileHash: "21o8qjv656zb3",
+    fileHash: "1xlxq809wqp5g",
     kind: "value",
     splices: {},
     captures: [],
@@ -19,27 +19,27 @@ export default cs.create(
     statements: [
       {
         kind: 244,
-        loc: [7, 3, 7, 22],
+        loc: [7, 3, 7, 36],
         declarationList: {
           kind: 262,
-          loc: [7, 3, 7, 21],
+          loc: [7, 3, 7, 35],
           declarations: [
             {
               kind: 261,
-              loc: [7, 7, 7, 21],
+              loc: [7, 7, 7, 35],
               name: {
                 kind: 80,
                 loc: [7, 7, 7, 11],
                 text: "last",
-                bindingKey: "last$21o8qjv656zb3$0",
+                bindingKey: "last$1xlxq809wqp5g$0",
               },
               initializer: {
                 kind: 220,
-                loc: [7, 14, 7, 21],
+                loc: [7, 28, 7, 35],
                 parameters: [],
                 body: {
                   kind: 9,
-                  loc: [7, 20, 7, 21],
+                  loc: [7, 34, 7, 35],
                   value: 0,
                 },
               },
@@ -62,7 +62,7 @@ export default cs.create(
                 kind: 80,
                 loc: [8, 12, 8, 13],
                 text: "i",
-                bindingKey: "i$21o8qjv656zb3$1",
+                bindingKey: "i$1xlxq809wqp5g$1",
               },
               initializer: {
                 kind: 9,
@@ -80,7 +80,7 @@ export default cs.create(
             kind: 80,
             loc: [8, 19, 8, 20],
             text: "i",
-            bindingKey: "i$21o8qjv656zb3$1",
+            bindingKey: "i$1xlxq809wqp5g$1",
           },
           operatorToken: "<",
           right: {
@@ -96,7 +96,7 @@ export default cs.create(
             kind: 80,
             loc: [8, 26, 8, 27],
             text: "i",
-            bindingKey: "i$21o8qjv656zb3$1",
+            bindingKey: "i$1xlxq809wqp5g$1",
           },
           operatorToken: "=",
           right: {
@@ -106,7 +106,7 @@ export default cs.create(
               kind: 80,
               loc: [8, 30, 8, 31],
               text: "i",
-              bindingKey: "i$21o8qjv656zb3$1",
+              bindingKey: "i$1xlxq809wqp5g$1",
             },
             operatorToken: "+",
             right: {
@@ -127,7 +127,7 @@ export default cs.create(
                 kind: 80,
                 loc: [9, 5, 9, 9],
                 text: "last",
-                bindingKey: "last$21o8qjv656zb3$0",
+                bindingKey: "last$1xlxq809wqp5g$0",
               },
               operatorToken: "=",
               right: {
@@ -138,7 +138,7 @@ export default cs.create(
                   kind: 80,
                   loc: [9, 18, 9, 19],
                   text: "i",
-                  bindingKey: "i$21o8qjv656zb3$1",
+                  bindingKey: "i$1xlxq809wqp5g$1",
                 },
               },
             },
@@ -155,7 +155,7 @@ export default cs.create(
             kind: 80,
             loc: [11, 10, 11, 14],
             text: "last",
-            bindingKey: "last$21o8qjv656zb3$0",
+            bindingKey: "last$1xlxq809wqp5g$0",
           },
           questionDotToken: false,
           arguments: [],

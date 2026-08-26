@@ -2,7 +2,7 @@ import { cs } from "@backtickjs/core";
 
 // `for (;;)` has no condition, so `break` is the only way out.
 export default cs.lift((() => {
-    let __cs_i = cs.let(0);
+    let __cs_i = 0;
     for (;;) {
         if (__cs_i === 4) {
             break;

@@ -17,7 +17,7 @@ const stored = cs.lift(cs.const((__cs_x: Maybe) => {
 }));
 
 const written = cs.lift(cs.const((__cs_x: Maybe) => {
-    let __cs_y = cs.let("");
+    let __cs_y = "";
     __cs_y = cs.const(__cs_x);
     return cs.const(1);
 }));

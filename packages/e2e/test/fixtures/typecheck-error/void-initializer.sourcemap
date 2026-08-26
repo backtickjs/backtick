@@ -2,9 +2,9 @@ cs.lift(cs.const(                         → cs`
 () => {\n                                 → () => {\n  
 let                                       → let 
 __cs_n                                    → n
- = cs.let(                                →  = 
+ =                                        →  = 
 0                                         → 0
-);                                        → ;
+;                                         → ;
 \n                                        → \n  
 __cs_n                                    → n
  = cs.const(                              →  = 

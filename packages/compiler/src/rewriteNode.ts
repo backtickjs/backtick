@@ -481,10 +481,13 @@ function rewriteNodeImpl(
           ts,
           node.flags,
           identifier,
-          // A value position must hold a value — a call can produce
-          // `void`. The check mirrors the keyword: `cs.const` reads the
-          // exact type, `cs.let` widens, as unwrapped they would.
-          call(ts, "cs", keyword, [initializer.virtual as ts.Expression]),
+          // A value position must hold a value — a call can produce `void` —
+          // and a `const` is where that is checked. A `let` is left as it was
+          // written: an unbound wrapper checked nothing, and what the initial
+          // widens to is the declaration's to decide, as it is in TypeScript.
+          keyword === "const"
+            ? call(ts, "cs", keyword, [initializer.virtual as ts.Expression])
+            : (initializer.virtual as ts.Expression),
           // What the script said it was. Written by hand or not at all: a
           // script is checked as the code it looks like, and dropping this
           // would leave `let rows: Row[] = []` holding nothing it can hold.

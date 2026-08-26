@@ -3,7 +3,7 @@ import { cs, type Client } from "@backtickjs/core";
 // Handlers — action arrows — are values: an object carries them, and
 // storing one is not calling it.
 const beep: Client<void> = cs.lift((() => {
-    let __cs_n = cs.let(0);
+    let __cs_n = 0;
     __cs_n = cs.const(1);
 })());
 

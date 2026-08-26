@@ -7,7 +7,7 @@ export default cs.lift((() => {
 
 function add(lhs: Client<number>, rhs: number): Client<number> {
   return cs.lift((() => {
-    let __cs_total = cs.let(0);
+    let __cs_total = 0;
     __cs_total = cs.const(__cs_total + (cs.splice((lhs)) satisfies import("@backtickjs/core").ClientUnknown));
     __cs_total = cs.const(__cs_total + (cs.splice((rhs)) satisfies import("@backtickjs/core").ClientUnknown));
     return cs.const(__cs_total);

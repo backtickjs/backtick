@@ -1,7 +1,6 @@
 import type { Client } from "@backtickjs/language-schema";
 import { create } from "./ClientScript.js";
 import type { ClientUnknown } from "@backtickjs/language-schema";
-import type { ClientFunction } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
 import type { Spliced } from "@backtickjs/language-schema";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
@@ -43,23 +42,6 @@ function _number(_: number): number {
 function _const<T extends ClientValue>(_: T): T {
   throw new Error(
     "Don't call `cs.const` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
-// A value with `let` semantics, so the initial widens: what `let n = 0` holds
-// is a `number` and `n = 1` is allowed. Unbound where `_const` is bound, which
-// is the whole of the difference — a constraint holding primitives keeps the
-// literal, and without one TypeScript widens as it does for a `let`.
-//
-// A function takes a bound arm, because for one the constraint is what widens:
-// it contextually types the body, so `let last = () => 0` holds a
-// `() => number` rather than an arrow that may only ever answer `0`.
-function _let<T extends ClientFunction>(_: T): T;
-function _let<T>(_: T): T;
-function _let<T>(_: T): T {
-  throw new Error(
-    "Don't call `cs.let` directly; it's used to generate virtual " +
       "code for the typechecker. Write code using cs`...` instead.",
   );
 }
@@ -116,7 +98,6 @@ export const cs = Object.assign(
     condition: _condition,
     number: _number,
     const: _const,
-    let: _let,
     statement: _statement,
     receiver: _receiver,
     index: _index,

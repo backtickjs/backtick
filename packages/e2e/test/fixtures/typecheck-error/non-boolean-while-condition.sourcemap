@@ -5,9 +5,9 @@ __cs_n                 → n
 ) => {\n               → ) => {\n  
 let                    → let 
 __cs_left              → left
- = cs.let(             →  = 
+ =                     →  = 
 __cs_n                 → n
-);                     → ;
+;                      → ;
 \n                     → \n  
 while ((cs.condition(  → while (
 __cs_left              → left

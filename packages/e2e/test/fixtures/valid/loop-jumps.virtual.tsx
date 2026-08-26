@@ -4,8 +4,8 @@ import { cs } from "@backtickjs/core";
 // would never end — and each jump means the loop it is written in, the inner
 // one here.
 export default cs.lift((() => {
-    let __cs_out = cs.let("");
-    for (let __cs_i = cs.let(0); __cs_i < 5; __cs_i = cs.const(__cs_i + 1)) {
+    let __cs_out = "";
+    for (let __cs_i = 0; __cs_i < 5; __cs_i = cs.const(__cs_i + 1)) {
         if (__cs_i === 1) {
             continue;
         }

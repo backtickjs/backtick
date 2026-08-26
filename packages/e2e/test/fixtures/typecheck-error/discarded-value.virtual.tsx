@@ -8,7 +8,7 @@ const getValue = cs.lift(cs.const(() => {
 }));
 
 const ping = cs.lift(cs.const(() => {
-    let __cs_n = cs.let(0);
+    let __cs_n = 0;
     __cs_n = cs.const(1);
 }));
 
