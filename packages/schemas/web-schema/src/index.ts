@@ -1,1 +1,1 @@
-export type * from "./schema.generated.js";
+export type * from "./declarations.generated.js";

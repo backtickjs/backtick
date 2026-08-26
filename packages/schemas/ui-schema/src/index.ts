@@ -9,4 +9,4 @@ export {
 export type { ServerComponent } from "./ServerComponent.js";
 export type { Children } from "./Children.js";
 export type { Prop } from "./Prop.js";
-export type * from "./schema.generated.js";
+export type * from "./declarations.generated.js";

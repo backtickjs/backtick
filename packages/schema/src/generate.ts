@@ -1,3 +1,4 @@
+import { builtins } from "./generators/builtins.js";
 import { declarations } from "./generators/declarations.js";
 import { json } from "./generators/json.js";
 
@@ -10,6 +11,7 @@ import { json } from "./generators/json.js";
  * spreading set of exports.
  */
 export const generate = {
+  builtins,
   declarations,
   json,
 };

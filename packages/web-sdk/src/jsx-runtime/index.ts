@@ -9,8 +9,9 @@ import type {
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //
-// Written by hand where `schema.generated.ts` next door is not: what a target
-// draws with is its decision, and the tags and their props are the schema's.
+// Written by hand where `declarations.generated.ts` next door is not: what a
+// target draws with is its decision, and the tags and their props are the
+// schema's.
 // The one rule here is that JSX's `IntrinsicElements` is this target's schema
 // `Elements` and nothing else: that name extends every base's in turn, so a tag
 // a base adds arrives without either end being told, and a tag two of them

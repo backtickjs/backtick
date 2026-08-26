@@ -314,9 +314,12 @@ export function tags(node: TNode): string[] {
 /** What an interface's own brand is called, beside the name it brands. */
 const mark = (name: string) => `${name}Brand`;
 
+/** Whether TypeScript reads a name bare, rather than quoted. */
+export const identifier = (name: string) => /^[A-Za-z_$][\w$]*$/.test(name);
+
 /** A name TypeScript can read bare, or one it needs quoted. */
 export const key = (name: string) =>
-  /^[A-Za-z_$][\w$]*$/.test(name) ? name : JSON.stringify(name);
+  identifier(name) ? name : JSON.stringify(name);
 
 /** A named interface, as a reader of the generated file sees it. */
 export function interfaceLines(

@@ -49,5 +49,14 @@ if (
   Object.keys(schema.elements).length > 0 ||
   Object.keys(schema.builtins).length > 0
 ) {
-  await write("src/schema.generated.ts", generate.declarations(schema));
+  await write("src/declarations.generated.ts", generate.declarations(schema));
+}
+
+// The values an app imports to splice. Written only where there is one to
+// write: a schema whose builtins are all the language's own — a member of a
+// value, a member of a namespace — declares nothing a script reaches this way,
+// and an empty file is a name for an app to import from and find nothing in.
+const values = generate.builtins(schema);
+if (values !== "") {
+  await write("src/builtins.generated.ts", values);
 }

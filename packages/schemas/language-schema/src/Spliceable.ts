@@ -4,7 +4,7 @@ import type {
   ClientHandle,
   ClientUnknown,
   ClientValue,
-} from "./schema.generated.js";
+} from "./declarations.generated.js";
 
 /**
  * What the host may splice where the client wants a `T`: the value written out,

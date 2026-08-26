@@ -1,5 +1,5 @@
 import type { ClientValue } from "@backtickjs/language-schema";
-import type { ClientElement } from "./schema.generated.js";
+import type { ClientElement } from "./declarations.generated.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 /**
