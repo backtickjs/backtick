@@ -7,7 +7,7 @@ import { cs } from "@backtickjs/core";
 const rates: { [currency: string]: number } = { usd: 3, eur: 4 };
 
 export default cs.lift(cs.const((__cs_currency: string) => {
-    const __cs_table = cs.const(cs.splice((rates)));
+    const __cs_table = cs.const(cs.splice((rates)) satisfies import("@backtickjs/core").ClientUnknown);
     const __cs_asked = cs.const(cs.index(__cs_table, __cs_currency) ?? 0);
     const __cs_usd = cs.const(cs.index(__cs_table, "usd") ?? 0);
     return cs.const(__cs_asked + __cs_usd);

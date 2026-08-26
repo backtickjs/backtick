@@ -1,42 +1,48 @@
-cs.lift(cs.const(  → cs`
-() => {\n          → () => {\n  
-const              → const 
-__cs_tree          → tree
- = cs.const(       →  = 
-cs.splice(         → ${ [-semantic]
-(<div />)          → (<div />)
-)                  → } [-semantic]
-);                 → ;
-\n                 → \n  
-return cs.const(   → return 
-__cs_tree          → tree
-);                 → ;
-\n}                → \n}
-))                 → `
-cs.lift(cs.const(  → cs`
-() => {\n          → () => {\n  
-const              → const 
-__cs_tree          → tree
- = cs.const(       →  = 
-cs.splice(         → ${ [-semantic]
-(<Row />)          → (<Row />)
-)                  → } [-semantic]
-);                 → ;
-\n                 → \n  
-return cs.const(   → return 
-__cs_tree          → tree
-);                 → ;
-\n}                → \n}
-))                 → `
-cs.lift(cs.const(  → cs`
-cs.splice(         →  [-semantic]
-(held)             → $held
-)                  →  [-semantic]
-()                 → ()
-))                 → `
-cs.lift(cs.const(  → cs`
-cs.splice(         →  [-semantic]
-(heldComponent)    → $heldComponent
-)                  →  [-semantic]
-()                 → ()
-))                 → `
+cs.lift(cs.const(                         → cs`
+() => {\n                                 → () => {\n  
+const                                     → const 
+__cs_tree                                 → tree
+ = cs.const(                              →  = 
+cs.splice(                                → ${ [-semantic]
+(<div />)                                 → (<div />)
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${(<div />)}
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+__cs_tree                                 → tree
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift(cs.const(                         → cs`
+() => {\n                                 → () => {\n  
+const                                     → const 
+__cs_tree                                 → tree
+ = cs.const(                              →  = 
+cs.splice(                                → ${ [-semantic]
+(<Row />)                                 → (<Row />)
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${(<Row />)}
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+__cs_tree                                 → tree
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                →  [-semantic]
+(held)                                    → $held
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $held
+)()                                       → ()
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                →  [-semantic]
+(heldComponent)                           → $heldComponent
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $heldComponent
+)()                                       → ()
+))                                        → `

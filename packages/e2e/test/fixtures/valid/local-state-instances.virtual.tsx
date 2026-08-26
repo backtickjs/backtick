@@ -5,7 +5,7 @@ import { cs, state } from "@backtickjs/core";
 // applications of one entry, and each declares a cell of its own.
 async function Counter() {
   return cs.lift((() => {
-    const __cs_size = cs.const(cs.splice((state))(16));
+    const __cs_size = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(16));
     return cs.const(<span style={cs.lift("font-size: " + cs.receiver(__cs_size).read() + "px")} onclick={cs.lift(() => {
         cs.statement(cs.receiver(__cs_size).write(cs.receiver(__cs_size).read() + 1));
     })}>

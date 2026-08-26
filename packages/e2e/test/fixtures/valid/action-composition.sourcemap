@@ -1,21 +1,23 @@
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_x                  → x
- = cs.const(            →  = 
-1                       → 1
-);                      → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-cs.statement(           → 
-cs.splice(              →  [-semantic]
-(effects)               → $effects
-)                       →  [-semantic]
-);                      → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-cs.statement(           → 
-cs.splice(              →  [-semantic]
-(composed)              → $composed
-)                       →  [-semantic]
-);                      → ;
-\n})())                 → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+const                                     → const 
+__cs_x                                    → x
+ = cs.const(                              →  = 
+1                                         → 1
+);                                        → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+cs.statement(                             → 
+cs.splice(                                →  [-semantic]
+(effects)                                 → $effects
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $effects
+);                                        → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+cs.statement(                             → 
+cs.splice(                                →  [-semantic]
+(composed)                                → $composed
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $composed
+);                                        → ;
+\n})())                                   → \n}`

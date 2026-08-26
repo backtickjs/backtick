@@ -12,7 +12,8 @@ __cs_flag                                 → flag [-semantic -completion -navig
 return cs.const(                          → return 
 cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
-)                                         →  [-semantic]
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $fragment
 );                                        → ;
 \n    }                                   → \n    }
 \n                                        → \n    
@@ -33,19 +34,23 @@ cs.lift(cs.const(                         → cs`
 {                                         → ({\n  
 taken                                     → taken
 :                                         → : 
+(                                         → 
 cs.splice(                                → ${ [-semantic]
 guard(ok)                                 → guard(ok)
-)                                         → } [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${guard(ok)}
+)(                                        → (
 true                                      → true
 )                                         → )
 ,                                         → ,\n  
 skipped                                   → skipped
 :                                         → : 
+(                                         → 
 cs.splice(                                → ${ [-semantic]
 guard(broken)                             → guard(broken)
-)                                         → } [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${guard(broken)}
+)(                                        → (
 false                                     → false
 )                                         → )
  }                                        → ,\n})

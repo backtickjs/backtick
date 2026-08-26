@@ -1,59 +1,69 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_outer              → outer
- = cs.const(            →  = 
-cs.splice(              →  [-semantic]
-(start)                 → $start
-)                       →  [-semantic]
-);                      → ;
-\n                      → \n    
-return cs.const(        → return 
-cs.splice(              → ${ [-semantic]
-foo(                    → foo(
-cs.lift((() => {\n      → cs`{\n      
-const                   → const 
-__cs_middle             → middle
- = cs.const(            →  = 
-10                      → 10
-);                      → ;
-\n                      → \n      
-return cs.const(        → return 
-__cs_middle             → middle
- +                      →  + 
-cs.splice(              → ${ [-semantic]
-same(                   → same(
-cs.lift(cs.const(       → cs`
-__cs_outer              → outer
-))                      → `
-)                       → )
-)                       → } [-semantic]
-);                      → ;
-\n})())                 → \n    }`
-)                       → )
-)                       → } [-semantic]
-);                      → ;
-\n})())                 → \n  }`
-cs.lift(cs.const(       → cs`
-cs.splice(              →  [-semantic]
-(start)                 → $start
-)                       →  [-semantic]
- +                      →  + 
-1                       → 1
-))                      → `
-cs.lift(cs.const(       → cs`
-cs.splice(              → ${ [-semantic]
-wrap(                   → wrap(
-cs.lift(cs.const(       → cs`
-1                       → 1
-))                      → `
-)                       → )
-)                       → } [-semantic]
- +                      →  + 
-cs.splice(              → ${ [-semantic]
-wrap(                   → wrap(
-cs.lift(cs.const(       → cs`
-2                       → 2
-))                      → `
-)                       → )
-)                       → } [-semantic]
-))                      → `
+cs.lift((() => {\n                        → cs`{\n    
+const                                     → const 
+__cs_outer                                → outer
+ = cs.const(                              →  = 
+cs.splice(                                →  [-semantic]
+(start)                                   → $start
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $start
+);                                        → ;
+\n                                        → \n    
+return cs.const(                          → return 
+cs.splice(                                → ${ [-semantic]
+foo(                                      → foo(
+cs.lift((() => {\n                        → cs`{\n      
+const                                     → const 
+__cs_middle                               → middle
+ = cs.const(                              →  = 
+10                                        → 10
+);                                        → ;
+\n                                        → \n      
+return cs.const(                          → return 
+__cs_middle                               → middle
+ + (                                      →  + 
+cs.splice(                                → ${ [-semantic]
+same(                                     → same(
+cs.lift(cs.const(                         → cs`
+__cs_outer                                → outer
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${same(cs`outer`)}
+)                                         → 
+);                                        → ;
+\n})())                                   → \n    }`
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${foo(cs`{\n      const middle = 10;\n      return middle + ${same(cs`outer`)};\n    }`)}
+);                                        → ;
+\n})())                                   → \n  }`
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                →  [-semantic]
+(start)                                   → $start
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $start
+) +                                       →  + 
+1                                         → 1
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                → ${ [-semantic]
+wrap(                                     → wrap(
+cs.lift(cs.const(                         → cs`
+1                                         → 1
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${wrap(cs`1`)}
+) + (                                     →  + 
+cs.splice(                                → ${ [-semantic]
+wrap(                                     → wrap(
+cs.lift(cs.const(                         → cs`
+2                                         → 2
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${wrap(cs`2`)}
+)                                         → 
+))                                        → `

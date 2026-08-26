@@ -19,8 +19,8 @@ enum Color {
 const five = 5;
 
 export default cs.lift((() => {
-    const __cs_n = cs.const(cs.splice((state))(cs.splice((five))));
+    const __cs_n = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(cs.splice((five)) satisfies import("@backtickjs/core").ClientUnknown));
     cs.statement(cs.receiver(__cs_n).write(6));
-    const __cs_c = cs.const(cs.splice((state))(cs.splice(Color.Red)));
-    cs.statement(cs.receiver(__cs_c).write(cs.splice(Color.Blue)));
+    const __cs_c = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(cs.splice(Color.Red) satisfies import("@backtickjs/core").ClientUnknown));
+    cs.statement(cs.receiver(__cs_c).write(cs.splice(Color.Blue) satisfies import("@backtickjs/core").ClientUnknown));
 })());

@@ -1,15 +1,16 @@
-cs.lift(cs.const(   → cs`
-1                   → 1
-))                  → `
-cs.lift(cs.const(   → cs`
-(cs.condition(      → 
-cs.splice(          →  [-semantic]
-(count)             → $count
-)                   →  [-semantic]
-) &&                → 
-cs.splice((count))  → $count [-semantic -completion -navigation -verification]
-) ?                 →  ? 
-"some"              → "some"
- :                  →  : 
-"none"              → "none"
-))                  → `
+cs.lift(cs.const(                         → cs`
+1                                         → 1
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(cs.condition(                            → 
+cs.splice(                                →  [-semantic]
+(count)                                   → $count
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $count
+) &&                                      → 
+cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown→ $count [-semantic -completion -navigation -verification]
+) ?                                       →  ? 
+"some"                                    → "some"
+ :                                        →  : 
+"none"                                    → "none"
+))                                        → `

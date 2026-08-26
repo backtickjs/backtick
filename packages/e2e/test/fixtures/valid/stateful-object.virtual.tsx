@@ -5,14 +5,14 @@ import { cs, state } from "@backtickjs/core";
 // together. Reading is a value, so it stands in a children position; writing is
 // an action, so it stands in a handler.
 const counter = cs.lift(cs.const((__cs_initial: number) => {
-    const __cs_count = cs.const(cs.splice((state))(__cs_initial));
+    const __cs_count = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(__cs_initial));
     return cs.const({ read: () => cs.receiver(__cs_count).read(), add: (__cs_n: number) => {
             cs.statement(cs.receiver(__cs_count).write(cs.receiver(__cs_count).read() + __cs_n));
         } });
 }));
 
 export default cs.lift((() => {
-    const __cs_c = cs.const(cs.splice((counter))(10));
+    const __cs_c = cs.const((cs.splice((counter)) satisfies import("@backtickjs/core").ClientUnknown)(10));
     return cs.const(<button onclick={cs.lift(() => {
         cs.statement(cs.receiver(__cs_c).add(5));
     })}>{cs.lift(cs.receiver(__cs_c).read())}</button>);

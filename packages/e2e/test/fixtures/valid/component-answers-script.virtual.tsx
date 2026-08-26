@@ -9,7 +9,7 @@ import { cs, state } from "@backtickjs/core";
 // draw nothing.
 async function Panel() {
   return cs.lift((() => {
-    const __cs_n = cs.const(cs.splice((state))(2));
+    const __cs_n = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(2));
     return cs.const(<em>{cs.lift(cs.receiver(__cs_n).read())}</em>);
 })());
 }

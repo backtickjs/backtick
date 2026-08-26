@@ -1,18 +1,20 @@
-cs.lift(cs.const(  → cs`
-7                  → 7
-))                 → `
-cs.lift(cs.const(  → cs`
-{                  → ({ 
-a                  → a
-:                  → : 
-cs.splice(         →  [-semantic]
-(leaf)             → $leaf
-)                  →  [-semantic]
-,                  → , 
-b                  → b
-:                  → : 
-cs.splice(         →  [-semantic]
-(leaf)             → $leaf
-)                  →  [-semantic]
- }                 →  })
-))                 → `
+cs.lift(cs.const(                         → cs`
+7                                         → 7
+))                                        → `
+cs.lift(cs.const(                         → cs`
+{                                         → ({ 
+a                                         → a
+:                                         → : 
+cs.splice(                                →  [-semantic]
+(leaf)                                    → $leaf
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $leaf
+,                                         → , 
+b                                         → b
+:                                         → : 
+cs.splice(                                →  [-semantic]
+(leaf)                                    → $leaf
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $leaf
+ }                                        →  })
+))                                        → `

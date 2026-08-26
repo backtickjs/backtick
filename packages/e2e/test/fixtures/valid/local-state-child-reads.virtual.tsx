@@ -19,17 +19,17 @@ const Row = async ({
 }) => (
   <div>
     <span
-      style={cs.lift(cs.const("font-size: " + (cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? 20 : 16) + "px"))}
+      style={cs.lift(cs.const("font-size: " + (cs.receiver(cs.splice((selected)) satisfies import("@backtickjs/core").ClientUnknown).read() === cs.splice((id)) satisfies import("@backtickjs/core").ClientUnknown ? 20 : 16) + "px"))}
     >
-      {cs.lift(cs.const("row " + cs.splice((id)) + " of " + cs.receiver(cs.splice((selected))).read()))}
+      {cs.lift(cs.const("row " + (cs.splice((id)) satisfies import("@backtickjs/core").ClientUnknown) + " of " + cs.receiver(cs.splice((selected)) satisfies import("@backtickjs/core").ClientUnknown).read()))}
     </span>
-    {cs.lift(cs.const(cs.receiver(cs.splice((selected))).read() === cs.splice((id)) ? cs.splice((<span>marker</span>)) : null))}
+    {cs.lift(cs.const(cs.receiver(cs.splice((selected)) satisfies import("@backtickjs/core").ClientUnknown).read() === cs.splice((id)) satisfies import("@backtickjs/core").ClientUnknown ? cs.splice((<span>marker</span>)) satisfies import("@backtickjs/core").ClientUnknown : null))}
   </div>
 );
 
 async function Panel() {
   return cs.lift((() => {
-    const __cs_selected = cs.const(cs.splice((state))(0));
+    const __cs_selected = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(0));
     return cs.const(<div>{cs.lift(<span onclick={cs.lift(() => cs.receiver(__cs_selected).write(1))}>select</span>)}{cs.lift(<Row id={cs.lift(0)} selected={cs.lift(__cs_selected)}/>)}{cs.lift(<Row id={cs.lift(1)} selected={cs.lift(__cs_selected)}/>)}</div>);
 })());
 }

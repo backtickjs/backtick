@@ -13,10 +13,10 @@ import { cs, type Client } from "@backtickjs/core";
 function wrap(fragment: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_before = cs.const(1);
-    const __cs_spliced = cs.const(cs.splice((fragment)));
+    const __cs_spliced = cs.const(cs.splice((fragment)) satisfies import("@backtickjs/core").ClientUnknown);
     const __cs_after = cs.const(2);
     return cs.const(__cs_before + __cs_spliced + __cs_after);
 })());
 }
 
-export default cs.lift(cs.const(cs.splice(wrap(cs.lift(cs.const(10)))) + cs.splice(wrap(cs.lift(cs.const(20))))));
+export default cs.lift(cs.const((cs.splice(wrap(cs.lift(cs.const(10)))) satisfies import("@backtickjs/core").ClientUnknown) + (cs.splice(wrap(cs.lift(cs.const(20)))) satisfies import("@backtickjs/core").ClientUnknown)));

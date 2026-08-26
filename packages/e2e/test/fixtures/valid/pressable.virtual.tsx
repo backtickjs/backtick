@@ -5,7 +5,7 @@ import { cs, state } from "@backtickjs/core";
 // one tap target while staying separately styled.
 async function Row() {
   return cs.lift((() => {
-    const __cs_count = cs.const(cs.splice((state))(0));
+    const __cs_count = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(0));
     return cs.const(<button id={cs.lift("row")} style={cs.lift("display: flex; gap: 8px")} onclick={cs.lift(() => cs.receiver(__cs_count).write(cs.receiver(__cs_count).read() + 1))}>{cs.lift(<span style={cs.lift("font-weight: 700")}>{cs.lift(cs.receiver(__cs_count).read() > 0 ? "\u2611" : "\u2610")}</span>)}{cs.lift(<span>{cs.lift("pressed " + cs.receiver(__cs_count).read() + " times")}</span>)}</button>);
 })());
 }

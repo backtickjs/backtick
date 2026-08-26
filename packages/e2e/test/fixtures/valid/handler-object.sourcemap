@@ -1,48 +1,51 @@
-cs.lift((() => {\n      → cs`{\n  
-let                     → let 
-__cs_n                  → n
- = cs.let(              →  = 
-0                       → 0
-);                      → ;
-\n                      → \n  
-__cs_n                  → n
- = cs.const(            →  = 
-1                       → 1
-)                       → 
-;                       → ;
-\n})())                 → \n}`
-cs.lift(cs.const(       → cs`
-(                       → (
-__cs_id                 → id
-: number                → : number
-) => {\n                → ) => {\n  
-cs.statement(           → 
-cs.splice(              →  [-semantic]
-(beep)                  → $beep
-)                       →  [-semantic]
-);                      → ;
-\n}                     → \n}
-))                      → `
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_handlers           → handlers
- = cs.const(            →  = 
-{                       → {\n    
-tap                     → tap
-:                       → : 
-cs.splice(              →  [-semantic]
-(onTap)                 → $onTap
-)                       →  [-semantic]
-,                       → ,\n    
-hold                    → hold
-:                       → : 
-cs.splice(              →  [-semantic]
-(onTap)                 → $onTap
-)                       →  [-semantic]
- }                      → ,\n  }
-);                      → ;
-\n                      → \n  
-return cs.const(        → return 
-__cs_handlers           → handlers
-);                      → ;
-\n})())                 → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+let                                       → let 
+__cs_n                                    → n
+ = cs.let(                                →  = 
+0                                         → 0
+);                                        → ;
+\n                                        → \n  
+__cs_n                                    → n
+ = cs.const(                              →  = 
+1                                         → 1
+)                                         → 
+;                                         → ;
+\n})())                                   → \n}`
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_id                                   → id
+: number                                  → : number
+) => {\n                                  → ) => {\n  
+cs.statement(                             → 
+cs.splice(                                →  [-semantic]
+(beep)                                    → $beep
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $beep
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift((() => {\n                        → cs`{\n  
+const                                     → const 
+__cs_handlers                             → handlers
+ = cs.const(                              →  = 
+{                                         → {\n    
+tap                                       → tap
+:                                         → : 
+cs.splice(                                →  [-semantic]
+(onTap)                                   → $onTap
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $onTap
+,                                         → ,\n    
+hold                                      → hold
+:                                         → : 
+cs.splice(                                →  [-semantic]
+(onTap)                                   → $onTap
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $onTap
+ }                                        → ,\n  }
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+__cs_handlers                             → handlers
+);                                        → ;
+\n})())                                   → \n}`

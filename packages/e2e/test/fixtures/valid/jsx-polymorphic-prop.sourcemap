@@ -1,6 +1,7 @@
-cs.lift(cs.const(  → cs`
-() =>              → () => 
-cs.splice(         →  [-semantic]
-(n)                → $n
-)                  →  [-semantic]
-))                 → `
+cs.lift(cs.const(                         → cs`
+() =>                                     → () => 
+cs.splice(                                →  [-semantic]
+(n)                                       → $n
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $n
+))                                        → `

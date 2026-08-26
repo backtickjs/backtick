@@ -1,5 +1,6 @@
-cs.lift(cs.const(  → cs`
-cs.splice(         → ${ [-semantic]
-{ "#": "value" }   → { "#": "value" }
-)                  → } [-semantic]
-))                 → `
+cs.lift(cs.const(                         → cs`
+cs.splice(                                → ${ [-semantic]
+{ "#": "value" }                          → { "#": "value" }
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${{ "#": "value" }}
+))                                        → `

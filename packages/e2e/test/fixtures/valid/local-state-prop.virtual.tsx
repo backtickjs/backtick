@@ -7,9 +7,9 @@ import type { Client, State } from "@backtickjs/core";
 // which is what makes a write through either child reach the same storage.
 const Counter = async ({ size }: { size: Client<State<number>> }) => (
   <span
-    style={cs.lift(cs.const("font-size: " + cs.receiver(cs.splice((size))).read() + "px"))}
+    style={cs.lift(cs.const("font-size: " + cs.receiver(cs.splice((size)) satisfies import("@backtickjs/core").ClientUnknown).read() + "px"))}
     onclick={cs.lift(cs.const(() => {
-    cs.statement(cs.receiver(cs.splice((size))).write(cs.receiver(cs.splice((size))).read() + 1));
+    cs.statement(cs.receiver(cs.splice((size)) satisfies import("@backtickjs/core").ClientUnknown).write(cs.receiver(cs.splice((size)) satisfies import("@backtickjs/core").ClientUnknown).read() + 1));
 }))}
   >
     press
@@ -18,7 +18,7 @@ const Counter = async ({ size }: { size: Client<State<number>> }) => (
 
 async function Panel() {
   return cs.lift((() => {
-    const __cs_size = cs.const(cs.splice((state))(16));
+    const __cs_size = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(16));
     return cs.const(<div>{cs.lift(<Counter size={cs.lift(__cs_size)}/>)}{cs.lift(<Counter size={cs.lift(__cs_size)}/>)}</div>);
 })());
 }

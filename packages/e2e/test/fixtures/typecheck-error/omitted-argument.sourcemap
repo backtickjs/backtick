@@ -1,26 +1,28 @@
-cs.lift(cs.const(       → cs`
-(                       → (
-__cs_name               → name
-: string | null         → ?: string
-) => {\n                → ) => {\n  
-return cs.const(        → return 
-(                       → 
-cs.receiver(            → 
-__cs_name               → name
-)                       → 
-?.                      → ?.
-concat                  → concat
-(                       → (
-"!"                     → "!"
-) ?? null)              → )
-);                      → ;
-\n}                     → \n}
-))                      → `
-cs.lift((() => {\n      → cs`{\n  
-return cs.const(        → return 
-cs.splice(              →  [-semantic]
-(greet)                 → $greet
-)                       →  [-semantic]
-()                      → ()
-);                      → ;
-\n})())                 → \n}`
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_name                                 → name
+: string | null                           → ?: string
+) => {\n                                  → ) => {\n  
+return cs.const(                          → return 
+(                                         → 
+cs.receiver(                              → 
+__cs_name                                 → name
+)                                         → 
+?.                                        → ?.
+concat                                    → concat
+(                                         → (
+"!"                                       → "!"
+) ?? null)                                → )
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift((() => {\n                        → cs`{\n  
+return cs.const(                          → return 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(greet)                                   → $greet
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $greet
+)()                                       → ()
+);                                        → ;
+\n})())                                   → \n}`

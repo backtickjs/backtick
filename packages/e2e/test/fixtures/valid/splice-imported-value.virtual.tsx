@@ -16,4 +16,4 @@ import { cs, NodeKind } from "@backtickjs/core";
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
 // spliced numbers themselves — `Element` is 0 and `DataArray` is 4.
-export default cs.lift(cs.const(cs.receiver(cs.splice((NodeKind))).Element + cs.receiver(cs.splice((NodeKind))).DataArray));
+export default cs.lift(cs.const(cs.receiver(cs.splice((NodeKind)) satisfies import("@backtickjs/core").ClientUnknown).Element + cs.receiver(cs.splice((NodeKind)) satisfies import("@backtickjs/core").ClientUnknown).DataArray));

@@ -1,20 +1,22 @@
-cs.lift(cs.const(  → cs`
-cs.splice(         →  [-semantic]
-(rows)             → $rows
-)                  →  [-semantic]
-))                 → `
-cs.lift(cs.const(  → cs`
-(                  → (
-__cs_row           → row
-: number           → : number
-) =>               → ) => 
-cs.splice(         → ${ [-semantic]
-(<span>{           → (<span>{
-cs.lift(cs.const(  → cs`
-"row "             → "row "
- +                 →  + 
-__cs_row           → row
-))                 → `
-}</span>)          → }</span>)
-)                  → } [-semantic]
-))                 → `
+cs.lift(cs.const(                         → cs`
+cs.splice(                                →  [-semantic]
+(rows)                                    → $rows
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $rows
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_row                                  → row
+: number                                  → : number
+) =>                                      → ) => 
+cs.splice(                                → ${ [-semantic]
+(<span>{                                  → (<span>{
+cs.lift(cs.const(                         → cs`
+"row "                                    → "row "
+ +                                        →  + 
+__cs_row                                  → row
+))                                        → `
+}</span>)                                 → }</span>)
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${(<span>{cs`"row " + row`}</span>)}
+))                                        → `

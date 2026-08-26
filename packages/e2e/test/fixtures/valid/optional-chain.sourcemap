@@ -58,10 +58,12 @@ cs.lift(cs.const(                         → cs`
 {                                         → ({\n  
 found                                     → found
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (pick)                                    → $pick
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $pick
+)(                                        → (
 {                                         → { 
 x                                         → x
 :                                         → : 
@@ -71,19 +73,23 @@ x                                         → x
 ,                                         → ,\n  
 missing                                   → missing
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (pick)                                    → $pick
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $pick
+)(                                        → (
 null                                      → null
 )                                         → )
 ,                                         → ,\n  
 deep                                      → deep
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (deep)                                    → $deep
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $deep
+)(                                        → (
 {                                         → { 
 inner                                     → inner
 :                                         → : 
@@ -97,10 +103,12 @@ z                                         → z
 ,                                         → ,\n  
 cut                                       → cut
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (deep)                                    → $deep
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $deep
+)(                                        → (
 {                                         → { 
 inner                                     → inner
 :                                         → : 
@@ -110,28 +118,34 @@ null                                      → null
 ,                                         → ,\n  
 top                                       → top
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (deep)                                    → $deep
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $deep
+)(                                        → (
 null                                      → null
 )                                         → )
 ,                                         → ,\n  
 loud                                      → loud
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (shout)                                   → $shout
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $shout
+)(                                        → (
 "hi"                                      → "hi"
 )                                         → )
 ,                                         → ,\n  
 silent                                    → silent
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (shout)                                   → $shout
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $shout
+)(                                        → (
 null                                      → null
 )                                         → )
  }                                        → ,\n})

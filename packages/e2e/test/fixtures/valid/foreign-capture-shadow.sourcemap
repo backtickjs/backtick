@@ -1,36 +1,40 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_base               → base
- = cs.const(            →  = 
-100                     → 100
-);                      → ;
-\n                      → \n    
-return cs.const(        → return 
-cs.splice(              → ${ [-semantic]
-cs.lift(cs.const(       → cs`
-__cs_base               → base
- +                      →  + 
-cs.splice(              →  [-semantic]
-(carried)               → $carried
-)                       →  [-semantic]
-))                      → `
-)                       → } [-semantic]
-);                      → ;
-\n})())                 → \n  }`
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_base               → base
- = cs.const(            →  = 
-1                       → 1
-);                      → ;
-\n                      → \n  
-return cs.const(        → return 
-cs.splice(              → ${ [-semantic]
-inner(                  → inner(
-cs.lift(cs.const(       → cs`
-__cs_base               → base
-))                      → `
-)                       → )
-)                       → } [-semantic]
-);                      → ;
-\n})())                 → \n}`
+cs.lift((() => {\n                        → cs`{\n    
+const                                     → const 
+__cs_base                                 → base
+ = cs.const(                              →  = 
+100                                       → 100
+);                                        → ;
+\n                                        → \n    
+return cs.const(                          → return 
+cs.splice(                                → ${ [-semantic]
+cs.lift(cs.const(                         → cs`
+__cs_base                                 → base
+ + (                                      →  + 
+cs.splice(                                →  [-semantic]
+(carried)                                 → $carried
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $carried
+)                                         → 
+))                                        → `
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${cs`base + $carried`}
+);                                        → ;
+\n})())                                   → \n  }`
+cs.lift((() => {\n                        → cs`{\n  
+const                                     → const 
+__cs_base                                 → base
+ = cs.const(                              →  = 
+1                                         → 1
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+cs.splice(                                → ${ [-semantic]
+inner(                                    → inner(
+cs.lift(cs.const(                         → cs`
+__cs_base                                 → base
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${inner(cs`base`)}
+);                                        → ;
+\n})())                                   → \n}`

@@ -11,18 +11,18 @@ import { cs } from "@backtickjs/core";
 const Row = async () => <span>x</span>;
 
 const held = cs.lift(cs.const(() => {
-    const __cs_tree = cs.const(cs.splice((<div />)));
+    const __cs_tree = cs.const(cs.splice((<div />)) satisfies import("@backtickjs/core").ClientUnknown);
     return cs.const(__cs_tree);
 }));
 
 const heldComponent = cs.lift(cs.const(() => {
-    const __cs_tree = cs.const(cs.splice((<Row />)));
+    const __cs_tree = cs.const(cs.splice((<Row />)) satisfies import("@backtickjs/core").ClientUnknown);
     return cs.const(__cs_tree);
 }));
 
 export default (
   <div>
-    {cs.lift(cs.const(cs.splice((held))()))}
-    {cs.lift(cs.const(cs.splice((heldComponent))()))}
+    {cs.lift(cs.const((cs.splice((held)) satisfies import("@backtickjs/core").ClientUnknown)()))}
+    {cs.lift(cs.const((cs.splice((heldComponent)) satisfies import("@backtickjs/core").ClientUnknown)()))}
   </div>
 );

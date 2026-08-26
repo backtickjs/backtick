@@ -1,7 +1,9 @@
-cs.lift(cs.const(      → cs`
-cs.splice(             → ${ [-semantic]
-await fetchGreeting()  → await fetchGreeting()
-)                      → } [-semantic]
- +                     →  + 
-"!"                    → "!"
-))                     → `
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                → ${ [-semantic]
+await fetchGreeting()                     → await fetchGreeting()
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${await fetchGreeting()}
+) +                                       →  + 
+"!"                                       → "!"
+))                                        → `

@@ -13,6 +13,6 @@ const ping = cs.lift(cs.const(() => {
 }));
 
 const action = cs.lift((() => {
-    cs.statement(cs.splice((ping))());
-    cs.statement(cs.splice((getValue))());
+    cs.statement((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)());
+    cs.statement((cs.splice((getValue)) satisfies import("@backtickjs/core").ClientUnknown)());
 })());

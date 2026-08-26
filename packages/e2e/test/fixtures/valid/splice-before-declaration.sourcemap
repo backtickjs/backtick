@@ -1,46 +1,51 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_before             → before
- = cs.const(            →  = 
-1                       → 1
-);                      → ;
-\n                      → \n    
-const                   → const 
-__cs_spliced            → spliced
- = cs.const(            →  = 
-cs.splice(              →  [-semantic]
-(fragment)              → $fragment
-)                       →  [-semantic]
-);                      → ;
-\n                      → \n    
-const                   → const 
-__cs_after              → after
- = cs.const(            →  = 
-2                       → 2
-);                      → ;
-\n                      → \n    
-return cs.const(        → return 
-__cs_before             → before
- +                      →  + 
-__cs_spliced            → spliced
- +                      →  + 
-__cs_after              → after
-);                      → ;
-\n})())                 → \n  }`
-cs.lift(cs.const(       → cs`
-cs.splice(              → ${ [-semantic]
-wrap(                   → wrap(
-cs.lift(cs.const(       → cs`
-10                      → 10
-))                      → `
-)                       → )
-)                       → } [-semantic]
- +                      →  + 
-cs.splice(              → ${ [-semantic]
-wrap(                   → wrap(
-cs.lift(cs.const(       → cs`
-20                      → 20
-))                      → `
-)                       → )
-)                       → } [-semantic]
-))                      → `
+cs.lift((() => {\n                        → cs`{\n    
+const                                     → const 
+__cs_before                               → before
+ = cs.const(                              →  = 
+1                                         → 1
+);                                        → ;
+\n                                        → \n    
+const                                     → const 
+__cs_spliced                              → spliced
+ = cs.const(                              →  = 
+cs.splice(                                →  [-semantic]
+(fragment)                                → $fragment
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $fragment
+);                                        → ;
+\n                                        → \n    
+const                                     → const 
+__cs_after                                → after
+ = cs.const(                              →  = 
+2                                         → 2
+);                                        → ;
+\n                                        → \n    
+return cs.const(                          → return 
+__cs_before                               → before
+ +                                        →  + 
+__cs_spliced                              → spliced
+ +                                        →  + 
+__cs_after                                → after
+);                                        → ;
+\n})())                                   → \n  }`
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                → ${ [-semantic]
+wrap(                                     → wrap(
+cs.lift(cs.const(                         → cs`
+10                                        → 10
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${wrap(cs`10`)}
+) + (                                     →  + 
+cs.splice(                                → ${ [-semantic]
+wrap(                                     → wrap(
+cs.lift(cs.const(                         → cs`
+20                                        → 20
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${wrap(cs`20`)}
+)                                         → 
+))                                        → `

@@ -2,5 +2,6 @@ cs.lift(cs.const(                         → cs`
 () =>                                     → () => 
 cs.splice(                                → ${ [-semantic]
 ((n: never) => n) as unknown as Spliceable→ ((n: never) => n) as unknown as Spliceable
-)                                         → } [-semantic]
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${((n: never) => n) as unknown as Spliceable}
 ))                                        → `

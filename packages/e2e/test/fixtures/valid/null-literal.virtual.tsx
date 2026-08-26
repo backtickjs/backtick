@@ -9,4 +9,4 @@ const orDash: Client<(value: string | null) => string> = cs.lift(cs.const((__cs_
     return cs.const(__cs_value);
 }));
 
-export default cs.lift(cs.const({ missing: cs.splice((orDash))(null), present: cs.splice((orDash))("hi"), bare: null }));
+export default cs.lift(cs.const({ missing: (cs.splice((orDash)) satisfies import("@backtickjs/core").ClientUnknown)(null), present: (cs.splice((orDash)) satisfies import("@backtickjs/core").ClientUnknown)("hi"), bare: null }));

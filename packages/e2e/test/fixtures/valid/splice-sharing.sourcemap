@@ -1,40 +1,46 @@
-cs.lift(cs.const(  → cs`
-cs.splice(         →  [-semantic]
-(lhs)              → $lhs
-)                  →  [-semantic]
- +                 →  + 
-cs.splice(         →  [-semantic]
-(rhs)              → $rhs
-)                  →  [-semantic]
-))                 → `
-cs.lift(cs.const(  → cs`
-{                  → ({\n  
-x                  → x
-:                  → : 
-cs.splice(         → ${ [-semantic]
-add(               → add(
-cs.lift(cs.const(  → cs`
-1                  → 1
-))                 → `
-,                  → , 
-cs.lift(cs.const(  → cs`
-2                  → 2
-))                 → `
-)                  → )
-)                  → } [-semantic]
-,                  → ,\n  
-y                  → y
-:                  → : 
-cs.splice(         → ${ [-semantic]
-add(               → add(
-cs.lift(cs.const(  → cs`
-3                  → 3
-))                 → `
-,                  → , 
-cs.lift(cs.const(  → cs`
-4                  → 4
-))                 → `
-)                  → )
-)                  → } [-semantic]
- }                 → ,\n})
-))                 → `
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                →  [-semantic]
+(lhs)                                     → $lhs
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $lhs
+) + (                                     →  + 
+cs.splice(                                →  [-semantic]
+(rhs)                                     → $rhs
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $rhs
+)                                         → 
+))                                        → `
+cs.lift(cs.const(                         → cs`
+{                                         → ({\n  
+x                                         → x
+:                                         → : 
+cs.splice(                                → ${ [-semantic]
+add(                                      → add(
+cs.lift(cs.const(                         → cs`
+1                                         → 1
+))                                        → `
+,                                         → , 
+cs.lift(cs.const(                         → cs`
+2                                         → 2
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${add(cs`1`, cs`2`)}
+,                                         → ,\n  
+y                                         → y
+:                                         → : 
+cs.splice(                                → ${ [-semantic]
+add(                                      → add(
+cs.lift(cs.const(                         → cs`
+3                                         → 3
+))                                        → `
+,                                         → , 
+cs.lift(cs.const(                         → cs`
+4                                         → 4
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${add(cs`3`, cs`4`)}
+ }                                        → ,\n})
+))                                        → `

@@ -7,11 +7,11 @@ const action = cs.lift((() => {
 })());
 
 export const listed = cs.lift((() => {
-    const __cs_list = cs.const(cs.splice([action]));
+    const __cs_list = cs.const(cs.splice([action]) satisfies import("@backtickjs/core").ClientUnknown);
     return cs.const(1);
 })());
 
 export const keyed = cs.lift((() => {
-    const __cs_map = cs.const(cs.splice({ press: action }));
+    const __cs_map = cs.const(cs.splice({ press: action }) satisfies import("@backtickjs/core").ClientUnknown);
     return cs.const(1);
 })());

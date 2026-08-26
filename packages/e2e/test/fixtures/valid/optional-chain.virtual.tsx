@@ -21,4 +21,4 @@ const shout = cs.lift(cs.const((__cs_s: string | null) => {
     return cs.const((cs.receiver(__cs_s)?.concat("!") ?? null));
 }));
 
-export default cs.lift(cs.const({ found: cs.splice((pick))({ x: 5 }), missing: cs.splice((pick))(null), deep: cs.splice((deep))({ inner: { z: 7 } }), cut: cs.splice((deep))({ inner: null }), top: cs.splice((deep))(null), loud: cs.splice((shout))("hi"), silent: cs.splice((shout))(null) }));
+export default cs.lift(cs.const({ found: (cs.splice((pick)) satisfies import("@backtickjs/core").ClientUnknown)({ x: 5 }), missing: (cs.splice((pick)) satisfies import("@backtickjs/core").ClientUnknown)(null), deep: (cs.splice((deep)) satisfies import("@backtickjs/core").ClientUnknown)({ inner: { z: 7 } }), cut: (cs.splice((deep)) satisfies import("@backtickjs/core").ClientUnknown)({ inner: null }), top: (cs.splice((deep)) satisfies import("@backtickjs/core").ClientUnknown)(null), loud: (cs.splice((shout)) satisfies import("@backtickjs/core").ClientUnknown)("hi"), silent: (cs.splice((shout)) satisfies import("@backtickjs/core").ClientUnknown)(null) }));

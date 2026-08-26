@@ -7,9 +7,9 @@ const effects: Client<void> = cs.lift((() => {
 })());
 
 const composed: Client<void> = cs.lift((() => {
-    cs.statement(cs.splice((effects)));
+    cs.statement(cs.splice((effects)) satisfies import("@backtickjs/core").ClientUnknown);
 })());
 
 export default cs.lift((() => {
-    cs.statement(cs.splice((composed)));
+    cs.statement(cs.splice((composed)) satisfies import("@backtickjs/core").ClientUnknown);
 })());

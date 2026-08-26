@@ -4,4 +4,4 @@ import { cs } from "@backtickjs/core";
 // into a single function-table entry referenced twice.
 const leaf = cs.lift(cs.const(7));
 
-export default cs.lift(cs.const({ a: cs.splice((leaf)), b: cs.splice((leaf)) }));
+export default cs.lift(cs.const({ a: cs.splice((leaf)) satisfies import("@backtickjs/core").ClientUnknown, b: cs.splice((leaf)) satisfies import("@backtickjs/core").ClientUnknown }));

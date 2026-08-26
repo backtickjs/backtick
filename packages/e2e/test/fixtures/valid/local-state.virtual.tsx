@@ -6,7 +6,7 @@ import { cs, state } from "@backtickjs/core";
 // cell changes — and `write` is an effect, which only an action can perform.
 async function Stepper() {
   return cs.lift((() => {
-    const __cs_size = cs.const(cs.splice((state))(16));
+    const __cs_size = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(16));
     return cs.const(<span style={cs.lift("font-size: " + cs.receiver(__cs_size).read() + "px")} onclick={cs.lift(() => {
         cs.statement(cs.receiver(__cs_size).write(cs.receiver(__cs_size).read() + 1));
     })}>

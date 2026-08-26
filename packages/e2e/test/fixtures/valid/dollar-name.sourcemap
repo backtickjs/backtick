@@ -1,24 +1,27 @@
-cs.lift(cs.const(       → cs`
-cs.splice(              →  [-semantic]
-(lhs)                   → $lhs
-)                       →  [-semantic]
- +                      →  + 
-2                       → 2
-))                      → `
-cs.lift((() => {\n      → cs`{\n  
-const                   → const 
-__cs_foo$               → foo$
- = cs.const(            →  = 
-1                       → 1
-);                      → ;
-\n                      → \n  
-return cs.const(        → return 
-cs.splice(              → ${ [-semantic]
-add(                    → add(
-cs.lift(cs.const(       → cs`
-__cs_foo$               → foo$
-))                      → `
-)                       → )
-)                       → } [-semantic]
-);                      → ;
-\n})())                 → \n}`
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                →  [-semantic]
+(lhs)                                     → $lhs
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $lhs
+) +                                       →  + 
+2                                         → 2
+))                                        → `
+cs.lift((() => {\n                        → cs`{\n  
+const                                     → const 
+__cs_foo$                                 → foo$
+ = cs.const(                              →  = 
+1                                         → 1
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+cs.splice(                                → ${ [-semantic]
+add(                                      → add(
+cs.lift(cs.const(                         → cs`
+__cs_foo$                                 → foo$
+))                                        → `
+)                                         → )
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → ${add(cs`foo$`)}
+);                                        → ;
+\n})())                                   → \n}`

@@ -1,17 +1,19 @@
-cs.lift(cs.const(  → cs`
-cs.receiver(       → 
-cs.splice(         →  [-semantic]
-(NodeKind)         → $NodeKind
-)                  →  [-semantic]
-)                  → 
-.                  → .
-Element            → Element
- +                 →  + 
-cs.receiver(       → 
-cs.splice(         →  [-semantic]
-(NodeKind)         → $NodeKind
-)                  →  [-semantic]
-)                  → 
-.                  → .
-DataArray          → DataArray
-))                 → `
+cs.lift(cs.const(                         → cs`
+cs.receiver(                              → 
+cs.splice(                                →  [-semantic]
+(NodeKind)                                → $NodeKind
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $NodeKind
+)                                         → 
+.                                         → .
+Element                                   → Element
+ +                                        →  + 
+cs.receiver(                              → 
+cs.splice(                                →  [-semantic]
+(NodeKind)                                → $NodeKind
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $NodeKind
+)                                         → 
+.                                         → .
+DataArray                                 → DataArray
+))                                        → `

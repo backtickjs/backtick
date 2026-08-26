@@ -1,17 +1,18 @@
-cs.lift(cs.const(  → cs`
-1                  → 1
-))                 → `
-cs.lift(cs.const(  → cs`
-"origin"           → "origin"
-))                 → `
-cs.lift(cs.const(  → cs`
-cs.receiver(       → 
-cs.splice(         →  [-semantic]
-(point)            → $point
-)                  →  [-semantic]
-)                  → 
-.                  → .
-x                  → x
- +                 →  + 
-1                  → 1
-))                 → `
+cs.lift(cs.const(                         → cs`
+1                                         → 1
+))                                        → `
+cs.lift(cs.const(                         → cs`
+"origin"                                  → "origin"
+))                                        → `
+cs.lift(cs.const(                         → cs`
+cs.receiver(                              → 
+cs.splice(                                →  [-semantic]
+(point)                                   → $point
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $point
+)                                         → 
+.                                         → .
+x                                         → x
+ +                                        →  + 
+1                                         → 1
+))                                        → `

@@ -1,76 +1,85 @@
-cs.lift(cs.const(        → cs`
-(                        → (
-__cs_name                → name
-: string | null          → ?: string
-) => {\n                 → ) => {\n  
-return cs.const(         → return 
-(                        → 
-cs.receiver(             → 
-__cs_name                → name
-)                        → 
-?.                       → ?.
-concat                   → concat
-(                        → (
-"!"                      → "!"
-) ?? null)               → )
-);                       → ;
-\n}                      → \n}
-))                       → `
-cs.lift(cs.const(        → cs`
-() =>                    → () => 
-2                        → 2
-))                       → `
-cs.lift(cs.const(        → cs`
-(                        → (
-__cs_cb                  → cb
-: (() => number) | null  → ?: () => number
-) => {\n                 → ) => {\n  
-return cs.const(         → return 
-__cs_cb                  → cb
-?.()                     → ?.()
- ??                      →  ?? 
-0                        → 0
-);                       → ;
-\n}                      → \n}
-))                       → `
-cs.lift(cs.const(        → cs`
-{                        → ({\n  
-named                    → named
-:                        → : 
-cs.splice(               →  [-semantic]
-(greet)                  → $greet
-)                        →  [-semantic]
-(                        → (
-"hi"                     → "hi"
-)                        → )
-,                        → ,\n  
-explicit                 → explicit
-:                        → : 
-cs.splice(               →  [-semantic]
-(greet)                  → $greet
-)                        →  [-semantic]
-(                        → (
-null                     → null
-)                        → )
-,                        → ,\n  
-supplied                 → supplied
-:                        → : 
-cs.splice(               →  [-semantic]
-(call)                   → $call
-)                        →  [-semantic]
-(                        → (
-cs.splice(               →  [-semantic]
-(double)                 → $double
-)                        →  [-semantic]
-)                        → )
-,                        → ,\n  
-fallback                 → fallback
-:                        → : 
-cs.splice(               →  [-semantic]
-(call)                   → $call
-)                        →  [-semantic]
-(                        → (
-null                     → null
-)                        → )
- }                       → ,\n})
-))                       → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_name                                 → name
+: string | null                           → ?: string
+) => {\n                                  → ) => {\n  
+return cs.const(                          → return 
+(                                         → 
+cs.receiver(                              → 
+__cs_name                                 → name
+)                                         → 
+?.                                        → ?.
+concat                                    → concat
+(                                         → (
+"!"                                       → "!"
+) ?? null)                                → )
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift(cs.const(                         → cs`
+() =>                                     → () => 
+2                                         → 2
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_cb                                   → cb
+: (() => number) | null                   → ?: () => number
+) => {\n                                  → ) => {\n  
+return cs.const(                          → return 
+__cs_cb                                   → cb
+?.()                                      → ?.()
+ ??                                       →  ?? 
+0                                         → 0
+);                                        → ;
+\n}                                       → \n}
+))                                        → `
+cs.lift(cs.const(                         → cs`
+{                                         → ({\n  
+named                                     → named
+:                                         → : 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(greet)                                   → $greet
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $greet
+)(                                        → (
+"hi"                                      → "hi"
+)                                         → )
+,                                         → ,\n  
+explicit                                  → explicit
+:                                         → : 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(greet)                                   → $greet
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $greet
+)(                                        → (
+null                                      → null
+)                                         → )
+,                                         → ,\n  
+supplied                                  → supplied
+:                                         → : 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(call)                                    → $call
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $call
+)(                                        → (
+cs.splice(                                →  [-semantic]
+(double)                                  → $double
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $double
+)                                         → )
+,                                         → ,\n  
+fallback                                  → fallback
+:                                         → : 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(call)                                    → $call
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $call
+)(                                        → (
+null                                      → null
+)                                         → )
+ }                                        → ,\n})
+))                                        → `

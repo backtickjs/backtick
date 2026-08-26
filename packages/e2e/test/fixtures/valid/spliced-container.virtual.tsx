@@ -14,4 +14,4 @@ const label = cs.lift(cs.const("origin"));
 
 const point = { x, label };
 
-export default cs.lift(cs.const(cs.receiver(cs.splice((point))).x + 1));
+export default cs.lift(cs.const(cs.receiver(cs.splice((point)) satisfies import("@backtickjs/core").ClientUnknown).x + 1));

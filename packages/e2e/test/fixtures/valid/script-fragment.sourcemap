@@ -1,31 +1,33 @@
-cs.lift(cs.const(           → cs`
-(                           → (
-__cs_name                   → name
-: string                    → : string
-) =>                        → ) => 
-<>{cs.lift(                 → (\n  <>\n    
-<                           → <
-span                        → span
->a sentence across lines</  → >a sentence across lines</
-span                        → span
->                           → >
-)}{cs.lift(                 → \n    
-<                           → <
-span                        → span
->{cs.lift(                  → >\n      {
-__cs_name                   → name
-)} {cs.lift(                → } {
-__cs_name                   → name
-)}</                        → }\n    </
-span                        → span
->                           → >
-)}</>                       → \n  </>\n)
-))                          → `
-cs.lift(cs.const(           → cs`
-cs.splice(                  →  [-semantic]
-(listed)                    → $listed
-)                           →  [-semantic]
-(                           → (
-"x"                         → "x"
-)                           → )
-))                          → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_name                                 → name
+: string                                  → : string
+) =>                                      → ) => 
+<>{cs.lift(                               → (\n  <>\n    
+<                                         → <
+span                                      → span
+>a sentence across lines</                → >a sentence across lines</
+span                                      → span
+>                                         → >
+)}{cs.lift(                               → \n    
+<                                         → <
+span                                      → span
+>{cs.lift(                                → >\n      {
+__cs_name                                 → name
+)} {cs.lift(                              → } {
+__cs_name                                 → name
+)}</                                      → }\n    </
+span                                      → span
+>                                         → >
+)}</>                                     → \n  </>\n)
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → 
+cs.splice(                                →  [-semantic]
+(listed)                                  → $listed
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $listed
+)(                                        → (
+"x"                                       → "x"
+)                                         → )
+))                                        → `

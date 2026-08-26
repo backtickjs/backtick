@@ -8,12 +8,12 @@ const action = cs.lift((() => {
 })());
 
 export const stored = cs.lift((() => {
-    const __cs_captured = cs.const(cs.splice((action)));
+    const __cs_captured = cs.const(cs.splice((action)) satisfies import("@backtickjs/core").ClientUnknown);
     return cs.const(1);
 })());
 
 export const returned = cs.lift((() => {
-    return cs.const(cs.splice((action)));
+    return cs.const(cs.splice((action)) satisfies import("@backtickjs/core").ClientUnknown);
 })());
 
 export const assigned = cs.lift((() => {
@@ -21,7 +21,7 @@ export const assigned = cs.lift((() => {
         return cs.const(1);
     }
     catch (__cs_e) {
-        __cs_e = cs.const(cs.splice((action)));
+        __cs_e = cs.const(cs.splice((action)) satisfies import("@backtickjs/core").ClientUnknown);
         return cs.const(2);
     }
 })());

@@ -30,10 +30,12 @@ cs.lift(cs.const(                         → cs`
 {                                         → ({\n  
 present                                   → present
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (read)                                    → $read
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $read
+)(                                        → (
 {                                         → { 
 label                                     → label
 :                                         → : 
@@ -51,10 +53,12 @@ z                                         → z
 ,                                         → ,\n  
 partial                                   → partial
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (read)                                    → $read
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $read
+)(                                        → (
 {                                         → { 
 label                                     → label
 :                                         → : 
@@ -68,10 +72,12 @@ inner                                     → inner
 ,                                         → ,\n  
 omitted                                   → omitted
 :                                         → : 
+(                                         → 
 cs.splice(                                →  [-semantic]
 (read)                                    → $read
-)                                         →  [-semantic]
-(                                         → (
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $read
+)(                                        → (
 {                                         → { 
 label                                     → label
 :                                         → : 

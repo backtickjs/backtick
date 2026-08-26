@@ -1,47 +1,63 @@
-cs.lift(cs.const(       → cs`
-1                       → 1
-))                      → `
-cs.lift((() => {\n      → cs`{\n  
-return cs.const(        → return 
-cs.splice(              →  [-semantic]
-(d0)                    → $d0
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d0)                    → $d0
-)                       →  [-semantic]
-);                      → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-return cs.const(        → return 
-cs.splice(              →  [-semantic]
-(d1)                    → $d1
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d1)                    → $d1
-)                       →  [-semantic]
-);                      → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-return cs.const(        → return 
-cs.splice(              →  [-semantic]
-(d2)                    → $d2
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d2)                    → $d2
-)                       →  [-semantic]
-);                      → ;
-\n})())                 → \n}`
-cs.lift((() => {\n      → cs`{\n  
-return cs.const(        → return 
-cs.splice(              →  [-semantic]
-(d3)                    → $d3
-)                       →  [-semantic]
- +                      →  + 
-cs.splice(              →  [-semantic]
-(d3)                    → $d3
-)                       →  [-semantic]
-);                      → ;
-\n})())                 → \n}`
+cs.lift(cs.const(                         → cs`
+1                                         → 1
+))                                        → `
+cs.lift((() => {\n                        → cs`{\n  
+return cs.const(                          → return 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(d0)                                      → $d0
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d0
+) + (                                     →  + 
+cs.splice(                                →  [-semantic]
+(d0)                                      → $d0
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d0
+)                                         → 
+);                                        → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+return cs.const(                          → return 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(d1)                                      → $d1
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d1
+) + (                                     →  + 
+cs.splice(                                →  [-semantic]
+(d1)                                      → $d1
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d1
+)                                         → 
+);                                        → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+return cs.const(                          → return 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(d2)                                      → $d2
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d2
+) + (                                     →  + 
+cs.splice(                                →  [-semantic]
+(d2)                                      → $d2
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d2
+)                                         → 
+);                                        → ;
+\n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+return cs.const(                          → return 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(d3)                                      → $d3
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d3
+) + (                                     →  + 
+cs.splice(                                →  [-semantic]
+(d3)                                      → $d3
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $d3
+)                                         → 
+);                                        → ;
+\n})())                                   → \n}`

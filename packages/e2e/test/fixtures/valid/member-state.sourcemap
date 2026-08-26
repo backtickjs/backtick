@@ -1,142 +1,146 @@
-cs.lift((() => {\n      → cs`{\n    
-const                   → const 
-__cs_build              → build
- = cs.const(            →  = 
-(                       → (
-__cs_from               → from
-: number                → : number
-) => {\n                → ) => {\n      
-return cs.const(        → return 
-cs.receiver(            → 
-Array                   → Array
-)                       → 
-.                       → .
-from                    → from
-(                       → (
-{                       → { 
-length                  → length
-:                       → : 
-3                       → 3
- }                      →  }
-,                       → , 
-(                       → (
-__cs__                  → _
-,                       → , 
-__cs_at                 → at
-) => {\n                → ) => {\n        
-return cs.const(        → return 
-{                       → { 
-id                      → id
-:                       → : 
-__cs_from               → from
- +                      →  + 
-__cs_at                 → at
-,                       → , 
-label                   → label
-:                       → : 
-cs.splice(              →  [-semantic]
-(state)                 → $state
-)                       →  [-semantic]
-(                       → (
-"row "                  → "row "
- + (                    →  + 
-__cs_from               → from
- +                      →  + 
-__cs_at                 → at
-)                       → 
-)                       → )
- }                      →  }
-);                      → ;
-\n        }             → \n      }
-)                       → )
-);                      → ;
-\n    }                 → \n    }
-);                      → ;
-\n                      → \n\n    
-const                   → const 
-__cs_held               → held
- = cs.const(            →  = 
-cs.splice(              →  [-semantic]
-(state)                 → $state
-)                       →  [-semantic]
-(                       → (
-__cs_build              → build
-(                       → (
-1                       → 1
-)                       → )
-)                       → )
-);                      → ;
-\n                      → \n\n    
-return cs.const(        → return 
-<                       → (\n      <
-div                     → div
->{cs.lift(              → >\n        
-<                       → <
-ul                      → ul
-                        →  
-class                   → class
-={cs.lift(              → =
-"rows"                  → "rows"
-)}                      → 
->{cs.lift(              → >\n          
-<                       → <
-For                     → For
-                        →  
-each                    → each
-={cs.lift(              → ={
-cs.receiver(            → 
-__cs_held               → held
-)                       → 
-.                       → .
-read                    → read
-()                      → ()
-)}                      → }
->{cs.lift(              → >\n            {
-(                       → (
-__cs_row                → row
-: Row                   → : Row
-) =>                    → ) => 
-<                       → (\n              <
-li                      → li
-                        →  
-onclick                 → onclick
-={cs.lift(              → ={
-() =>                   → () => 
-cs.receiver(            → 
-cs.receiver(            → 
-__cs_row                → row
-)                       → 
-.                       → .
-label                   → label
-)                       → 
-.                       → .
-write                   → write
-(                       → (
-"pressed"               → "pressed"
-)                       → )
-)}                      → }
->{cs.lift(              → >\n                {
-cs.receiver(            → 
-cs.receiver(            → 
-__cs_row                → row
-)                       → 
-.                       → .
-label                   → label
-)                       → 
-.                       → .
-read                    → read
-()                      → ()
-)}</                    → }\n              </
-li                      → li
->                       → >\n            )
-)}</                    → }\n          </
-For                     → For
->                       → >
-)}</                    → \n        </
-ul                      → ul
->                       → >
-)}</                    → \n      </
-div                     → div
->                       → >\n    )
-);                      → ;
-\n})())                 → \n  }`
+cs.lift((() => {\n                        → cs`{\n    
+const                                     → const 
+__cs_build                                → build
+ = cs.const(                              →  = 
+(                                         → (
+__cs_from                                 → from
+: number                                  → : number
+) => {\n                                  → ) => {\n      
+return cs.const(                          → return 
+cs.receiver(                              → 
+Array                                     → Array
+)                                         → 
+.                                         → .
+from                                      → from
+(                                         → (
+{                                         → { 
+length                                    → length
+:                                         → : 
+3                                         → 3
+ }                                        →  }
+,                                         → , 
+(                                         → (
+__cs__                                    → _
+,                                         → , 
+__cs_at                                   → at
+) => {\n                                  → ) => {\n        
+return cs.const(                          → return 
+{                                         → { 
+id                                        → id
+:                                         → : 
+__cs_from                                 → from
+ +                                        →  + 
+__cs_at                                   → at
+,                                         → , 
+label                                     → label
+:                                         → : 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(state)                                   → $state
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $state
+)(                                        → (
+"row "                                    → "row "
+ + (                                      →  + 
+__cs_from                                 → from
+ +                                        →  + 
+__cs_at                                   → at
+)                                         → 
+)                                         → )
+ }                                        →  }
+);                                        → ;
+\n        }                               → \n      }
+)                                         → )
+);                                        → ;
+\n    }                                   → \n    }
+);                                        → ;
+\n                                        → \n\n    
+const                                     → const 
+__cs_held                                 → held
+ = cs.const(                              →  = 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(state)                                   → $state
+) satisfies                               →  [-semantic]
+import("@backtickjs/core").ClientUnknown  → $state
+)(                                        → (
+__cs_build                                → build
+(                                         → (
+1                                         → 1
+)                                         → )
+)                                         → )
+);                                        → ;
+\n                                        → \n\n    
+return cs.const(                          → return 
+<                                         → (\n      <
+div                                       → div
+>{cs.lift(                                → >\n        
+<                                         → <
+ul                                        → ul
+                                          →  
+class                                     → class
+={cs.lift(                                → =
+"rows"                                    → "rows"
+)}                                        → 
+>{cs.lift(                                → >\n          
+<                                         → <
+For                                       → For
+                                          →  
+each                                      → each
+={cs.lift(                                → ={
+cs.receiver(                              → 
+__cs_held                                 → held
+)                                         → 
+.                                         → .
+read                                      → read
+()                                        → ()
+)}                                        → }
+>{cs.lift(                                → >\n            {
+(                                         → (
+__cs_row                                  → row
+: Row                                     → : Row
+) =>                                      → ) => 
+<                                         → (\n              <
+li                                        → li
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+cs.receiver(                              → 
+cs.receiver(                              → 
+__cs_row                                  → row
+)                                         → 
+.                                         → .
+label                                     → label
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+"pressed"                                 → "pressed"
+)                                         → )
+)}                                        → }
+>{cs.lift(                                → >\n                {
+cs.receiver(                              → 
+cs.receiver(                              → 
+__cs_row                                  → row
+)                                         → 
+.                                         → .
+label                                     → label
+)                                         → 
+.                                         → .
+read                                      → read
+()                                        → ()
+)}</                                      → }\n              </
+li                                        → li
+>                                         → >\n            )
+)}</                                      → }\n          </
+For                                       → For
+>                                         → >
+)}</                                      → \n        </
+ul                                        → ul
+>                                         → >
+)}</                                      → \n      </
+div                                       → div
+>                                         → >\n    )
+);                                        → ;
+\n})())                                   → \n  }`
