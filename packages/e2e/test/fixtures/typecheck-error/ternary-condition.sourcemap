@@ -5,8 +5,7 @@ cs.lift(cs.const(                         → cs`
 (cs.condition(                            → 
 cs.splice(                                →  [-semantic]
 (count)                                   → $count
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $count
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ) &&                                      → 
 cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown→ $count [-semantic -completion -navigation -verification]
 ) ?                                       →  ? 

@@ -6,13 +6,11 @@ return cs.const(                          → return
 (                                         → 
 cs.splice(                                →  [-semantic]
 (d0)                                      → $d0
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d0
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ) + (                                     →  + 
 cs.splice(                                →  [-semantic]
 (d0)                                      → $d0
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d0
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n}`
@@ -21,13 +19,11 @@ return cs.const(                          → return
 (                                         → 
 cs.splice(                                →  [-semantic]
 (d1)                                      → $d1
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d1
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ) + (                                     →  + 
 cs.splice(                                →  [-semantic]
 (d1)                                      → $d1
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d1
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n}`
@@ -36,13 +32,11 @@ return cs.const(                          → return
 (                                         → 
 cs.splice(                                →  [-semantic]
 (d2)                                      → $d2
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d2
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ) + (                                     →  + 
 cs.splice(                                →  [-semantic]
 (d2)                                      → $d2
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d2
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n}`
@@ -51,13 +45,11 @@ return cs.const(                          → return
 (                                         → 
 cs.splice(                                →  [-semantic]
 (d3)                                      → $d3
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d3
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ) + (                                     →  + 
 cs.splice(                                →  [-semantic]
 (d3)                                      → $d3
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $d3
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n}`

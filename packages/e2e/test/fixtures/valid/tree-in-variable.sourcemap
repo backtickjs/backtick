@@ -5,8 +5,7 @@ __cs_tree                                 → tree
  = cs.const(                              →  = 
 cs.splice(                                → ${ [-semantic]
 (<div />)                                 → (<div />)
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${(<div />)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
@@ -21,8 +20,7 @@ __cs_tree                                 → tree
  = cs.const(                              →  = 
 cs.splice(                                → ${ [-semantic]
 (<Row />)                                 → (<Row />)
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${(<Row />)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
@@ -34,15 +32,13 @@ cs.lift(cs.const(                         → cs`
 (                                         → 
 cs.splice(                                →  [-semantic]
 (held)                                    → $held
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $held
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )()                                       → ()
 ))                                        → `
 cs.lift(cs.const(                         → cs`
 (                                         → 
 cs.splice(                                →  [-semantic]
 (heldComponent)                           → $heldComponent
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $heldComponent
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )()                                       → ()
 ))                                        → `

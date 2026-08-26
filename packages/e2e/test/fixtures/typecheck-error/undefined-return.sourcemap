@@ -8,8 +8,7 @@ __cs_stored                               → stored
  = cs.const(                              →  = 
 cs.splice(                                →  [-semantic]
 (lying)                                   → $lying
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $lying
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 );                                        → ;
 \n                                        → \n  
 const                                     → const 
@@ -18,8 +17,7 @@ __cs_caught                               → caught
 (                                         → 
 cs.splice(                                →  [-semantic]
 (lying)                                   → $lying
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $lying
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )()                                       → ()
 );                                        → ;
 \n                                        → \n  

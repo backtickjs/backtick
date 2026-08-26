@@ -2,8 +2,7 @@ cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (NodeKind)                                → $NodeKind
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $NodeKind
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 Element                                   → Element
@@ -11,8 +10,7 @@ Element                                   → Element
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (NodeKind)                                → $NodeKind
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $NodeKind
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 DataArray                                 → DataArray

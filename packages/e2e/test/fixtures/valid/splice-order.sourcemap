@@ -4,14 +4,12 @@ a                                         → a
 :                                         → : 
 cs.splice(                                →  [-semantic]
 (count)                                   → $count
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $count
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ,                                         → , 
 b                                         → b
 :                                         → : 
 cs.splice(                                → ${ [-semantic]
 ++count                                   → ++count
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${++count}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
  }                                        →  })
 ))                                        → `

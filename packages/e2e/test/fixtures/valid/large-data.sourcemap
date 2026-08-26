@@ -1,8 +1,7 @@
 cs.lift(cs.const(                         → cs`
 cs.splice(                                →  [-semantic]
 (orders)                                  → $orders
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $orders
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ))                                        → `
 cs.lift(cs.const(                         → cs`
 (                                         → (
@@ -78,8 +77,7 @@ __cs_item                                 → item
 qty                                       → qty
 ))                                        → `
 }</span>)                                 → }</span>)
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${(<span>{cs`item.sku + " x" + item.qty`}</span>)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ))                                        → `
 }\n            </For>\n            <span>{→ }\n            </For>\n            <span>{
 cs.lift(cs.const(                         → cs`
@@ -92,6 +90,5 @@ __cs_order                                → order
 total                                     → total
 ))                                        → `
 }</span>\n          </div>\n        )     → }</span>\n          </div>\n        )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${(\n          <div>\n            <img\n              src={cs`"https://img.example.com/" + order.id + ".png"`}\n              alt=""\n            />\n            <span>{cs`order.customer.name`}</span>\n            <span>{cs`order.customer.city`}</span>\n            <For each={cs`order.items`}>\n              {cs`(item: Item) =>\n                ${(<span>{cs`item.sku + " x" + item.qty`}</span>)}`}\n            </For>\n            <span>{cs`"$" + order.total`}</span>\n          </div>\n        )}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ))                                        → `

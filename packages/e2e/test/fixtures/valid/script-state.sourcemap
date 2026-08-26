@@ -10,8 +10,7 @@ label                                     → label
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 __cs_label                                → label
 )                                         → )
@@ -30,8 +29,7 @@ __cs_row                                  → row
 (                                         → 
 cs.splice(                                →  [-semantic]
 (build)                                   → $build
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $build
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "one"                                     → "one"
 )                                         → )
@@ -70,8 +68,7 @@ cs.receiver(                              →
 (                                         → 
 cs.splice(                                →  [-semantic]
 (build)                                   → $build
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $build
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "one"                                     → "one"
 )                                         → )

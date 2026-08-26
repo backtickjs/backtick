@@ -2,8 +2,7 @@ cs.lift(cs.const(                         → cs`
 (                                         → 
 cs.splice(                                →  [-semantic]
 (lhs)                                     → $lhs
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $lhs
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ) +                                       →  + 
 2                                         → 2
 ))                                        → `
@@ -21,7 +20,6 @@ cs.lift(cs.const(                         → cs`
 __cs_foo$                                 → foo$
 ))                                        → `
 )                                         → )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${add(cs`foo$`)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 );                                        → ;
 \n})())                                   → \n}`

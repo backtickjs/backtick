@@ -9,8 +9,7 @@ __cs_count                                → count
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 __cs_initial                              → initial
 )                                         → )
@@ -63,8 +62,7 @@ __cs_c                                    → c
 (                                         → 
 cs.splice(                                →  [-semantic]
 (counter)                                 → $counter
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $counter
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 10                                        → 10
 )                                         → )

@@ -34,8 +34,7 @@ if (                                      → if (
 (cs.condition(                            → 
 cs.splice(                                → ${ [-semantic]
 flags.strict                              → flags.strict
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${flags.strict}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ) &&                                      → 
 cs.splice(                                → ${ [-semantic -completion -navigation -verification]
 flags.strict                              → flags.strict
@@ -81,8 +80,7 @@ missing                                   → missing
 (                                         → 
 cs.splice(                                →  [-semantic]
 (label)                                   → $label
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $label
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 null                                      → null
 ,                                         → , 
@@ -94,8 +92,7 @@ loud                                      → loud
 (                                         → 
 cs.splice(                                →  [-semantic]
 (label)                                   → $label
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $label
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "!hi"                                     → "!hi"
 ,                                         → , 
@@ -107,8 +104,7 @@ quiet                                     → quiet
 (                                         → 
 cs.splice(                                →  [-semantic]
 (label)                                   → $label
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $label
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "!hi"                                     → "!hi"
 ,                                         → , 
@@ -120,8 +116,7 @@ plain                                     → plain
 (                                         → 
 cs.splice(                                →  [-semantic]
 (label)                                   → $label
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $label
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "zz"                                      → "zz"
 ,                                         → , 

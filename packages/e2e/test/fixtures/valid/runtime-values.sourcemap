@@ -4,14 +4,12 @@ list                                      → list
 :                                         → : 
 cs.splice(                                → ${ [-semantic]
 [1, "two", true, null]                    → [1, "two", true, null]
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${[1, "two", true, null]}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ,                                         → , 
 obj                                       → obj
 :                                         → : 
 cs.splice(                                → ${ [-semantic]
 { k: 3 }                                  → { k: 3 }
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${{ k: 3 }}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
  }                                        →  })
 ))                                        → `

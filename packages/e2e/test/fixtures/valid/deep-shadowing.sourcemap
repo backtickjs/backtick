@@ -12,8 +12,7 @@ cs.lift(cs.const(                         → cs`
 __cs_base                                 → base
 ))                                        → `
 )                                         → )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${outer(cs`base`)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 );                                        → ;
 \n})())                                   → \n}`
 cs.lift((() => {\n                        → cs`{\n    
@@ -28,8 +27,7 @@ __cs_base                                 → base
  + (                                      →  + 
 cs.splice(                                → ${ [-semantic]
 middle(inner)                             → middle(inner)
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${middle(inner)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n  }`
@@ -45,8 +43,7 @@ __cs_base                                 → base
  * (                                      →  * 
 cs.splice(                                →  [-semantic]
 (inner)                                   → $inner
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $inner
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n  }`

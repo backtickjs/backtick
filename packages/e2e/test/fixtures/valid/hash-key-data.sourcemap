@@ -2,6 +2,5 @@ cs.lift(cs.const(                         → cs`
 () =>                                     → () => 
 cs.splice(                                → ${ [-semantic]
 { "#call": "#f0" }                        → { "#call": "#f0" }
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${{ "#call": "#f0" }}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ))                                        → `

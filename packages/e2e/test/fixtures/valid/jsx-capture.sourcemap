@@ -14,8 +14,7 @@ cs.lift(cs.const(                         → cs`
 __cs_x                                    → x
 ))                                        → `
 } />)                                     → } />)
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${(<span onclick={cs`() => x`} />)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 );                                        → ;
 \n}                                       → \n}
 ))                                        → `

@@ -7,14 +7,12 @@ a                                         → a
 :                                         → : 
 cs.splice(                                →  [-semantic]
 (leaf)                                    → $leaf
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $leaf
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ,                                         → , 
 b                                         → b
 :                                         → : 
 cs.splice(                                →  [-semantic]
 (leaf)                                    → $leaf
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $leaf
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
  }                                        →  })
 ))                                        → `

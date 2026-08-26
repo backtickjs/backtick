@@ -17,8 +17,7 @@ __cs_total                                → total
  + (                                      →  + 
 cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $fragment
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 );                                        → ;
 \n    }                                   → \n    }
@@ -31,8 +30,7 @@ cs.lift(cs.const(                         → cs`
 10                                        → 10
 ))                                        → `
 )                                         → )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${wrap(cs`10`)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ) + (                                     →  + 
 cs.splice(                                → ${ [-semantic]
 wrap(                                     → wrap(
@@ -40,7 +38,6 @@ cs.lift(cs.const(                         → cs`
 20                                        → 20
 ))                                        → `
 )                                         → )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${wrap(cs`20`)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → 
 ))                                        → `

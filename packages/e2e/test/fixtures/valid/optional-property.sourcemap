@@ -33,8 +33,7 @@ present                                   → present
 (                                         → 
 cs.splice(                                →  [-semantic]
 (read)                                    → $read
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $read
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 {                                         → { 
 label                                     → label
@@ -56,8 +55,7 @@ partial                                   → partial
 (                                         → 
 cs.splice(                                →  [-semantic]
 (read)                                    → $read
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $read
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 {                                         → { 
 label                                     → label
@@ -75,8 +73,7 @@ omitted                                   → omitted
 (                                         → 
 cs.splice(                                →  [-semantic]
 (read)                                    → $read
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $read
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 {                                         → { 
 label                                     → label

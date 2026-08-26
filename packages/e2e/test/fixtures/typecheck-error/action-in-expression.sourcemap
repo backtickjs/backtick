@@ -11,8 +11,7 @@ __cs_captured                             → captured
  = cs.const(                              →  = 
 cs.splice(                                →  [-semantic]
 (action)                                  → $action
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $action
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
@@ -23,8 +22,7 @@ cs.lift((() => {\n                        → cs`{\n
 return cs.const(                          → return 
 cs.splice(                                →  [-semantic]
 (action)                                  → $action
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $action
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 );                                        → ;
 \n})())                                   → \n}`
 cs.lift((() => {\n                        → cs`{\n  
@@ -42,8 +40,7 @@ __cs_e                                    → e
  = cs.const(                              →  = 
 cs.splice(                                →  [-semantic]
 (action)                                  → $action
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $action
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 ;                                         → ;
 \n                                        → \n    

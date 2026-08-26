@@ -8,8 +8,7 @@ cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (point)                                   → $point
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $point
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 x                                         → x

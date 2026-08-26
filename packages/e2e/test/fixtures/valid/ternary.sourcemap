@@ -23,8 +23,7 @@ absent                                    → absent
 (                                         → 
 cs.splice(                                →  [-semantic]
 (pick)                                    → $pick
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $pick
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 null                                      → null
 )                                         → )
@@ -34,8 +33,7 @@ present                                   → present
 (                                         → 
 cs.splice(                                →  [-semantic]
 (pick)                                    → $pick
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $pick
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 4                                         → 4
 )                                         → )

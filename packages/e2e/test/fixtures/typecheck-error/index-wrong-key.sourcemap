@@ -41,8 +41,7 @@ __cs_which                                → which
 cs.index(                                 → 
 cs.splice(                                →  [-semantic]
 (point)                                   → $point
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $point
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ,                                         → [
 __cs_name                                 → name
 )                                         → ]

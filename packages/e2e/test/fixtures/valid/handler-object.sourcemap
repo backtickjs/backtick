@@ -19,8 +19,7 @@ __cs_id                                   → id
 cs.statement(                             → 
 cs.splice(                                →  [-semantic]
 (beep)                                    → $beep
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $beep
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 );                                        → ;
 \n}                                       → \n}
 ))                                        → `
@@ -33,15 +32,13 @@ tap                                       → tap
 :                                         → : 
 cs.splice(                                →  [-semantic]
 (onTap)                                   → $onTap
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $onTap
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ,                                         → ,\n    
 hold                                      → hold
 :                                         → : 
 cs.splice(                                →  [-semantic]
 (onTap)                                   → $onTap
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $onTap
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
  }                                        → ,\n  }
 );                                        → ;
 \n                                        → \n  

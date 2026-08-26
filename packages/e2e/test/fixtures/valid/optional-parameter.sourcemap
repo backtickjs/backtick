@@ -40,8 +40,7 @@ named                                     → named
 (                                         → 
 cs.splice(                                →  [-semantic]
 (greet)                                   → $greet
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $greet
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "hi"                                      → "hi"
 )                                         → )
@@ -51,8 +50,7 @@ explicit                                  → explicit
 (                                         → 
 cs.splice(                                →  [-semantic]
 (greet)                                   → $greet
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $greet
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 null                                      → null
 )                                         → )
@@ -62,13 +60,11 @@ supplied                                  → supplied
 (                                         → 
 cs.splice(                                →  [-semantic]
 (call)                                    → $call
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $call
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 cs.splice(                                →  [-semantic]
 (double)                                  → $double
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $double
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → )
 ,                                         → ,\n  
 fallback                                  → fallback
@@ -76,8 +72,7 @@ fallback                                  → fallback
 (                                         → 
 cs.splice(                                →  [-semantic]
 (call)                                    → $call
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $call
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 null                                      → null
 )                                         → )

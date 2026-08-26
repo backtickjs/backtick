@@ -15,8 +15,7 @@ __cs_missing                              → missing
 cs.index(                                 → 
 cs.splice(                                →  [-semantic]
 (table)                                   → $table
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $table
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 ,                                         → [
 "nowhere"                                 → "nowhere"
 )                                         → ]

@@ -209,11 +209,11 @@ function checkedCondition(
 
 function checked(
   ts: typeof import("typescript"),
-  state: RewriteState,
   expression: ts.Expression,
   name: string,
-  source: ts.Node,
 ): ts.SatisfiesExpression {
+  // Left unmapped: mapping it would claim source the value already claims,
+  // for a column.
   const expected = ts.factory.createImportTypeNode(
     ts.factory.createLiteralTypeNode(
       ts.factory.createStringLiteral("@backtickjs/core"),
@@ -221,7 +221,6 @@ function checked(
     undefined,
     ts.factory.createIdentifier(name),
   );
-  state.mappings.set(expected, source);
   return ts.factory.createSatisfiesExpression(expression, expected);
 }
 
@@ -827,10 +826,8 @@ function rewriteNodeImpl(
       // or nothing for `$x`): hover must not resolve through it.
       const virtual = checked(
         ts,
-        state,
         call(ts, "cs", "splice", [argument]),
         "ClientUnknown",
-        node,
       );
       state.codeInformation.set(virtual, { semantic: false });
       return {

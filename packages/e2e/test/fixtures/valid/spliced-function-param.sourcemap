@@ -20,8 +20,7 @@ cs.lift(cs.const(                         → cs`
 () =>                                     → () => 
 2                                         → 2
 ))                                        → `
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${cs`() => 2`}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → )
 );                                        → ;
 \n})())                                   → \n}`

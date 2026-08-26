@@ -4,8 +4,7 @@ cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (selected)                                → $selected
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $selected
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 read                                      → read
@@ -13,8 +12,7 @@ read                                      → read
  ===                                      →  === 
 cs.splice(                                →  [-semantic]
 (id)                                      → $id
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $id
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
  ?                                        →  ? 
 20                                        → 20
  :                                        →  : 
@@ -28,8 +26,7 @@ cs.lift(cs.const(                         → cs`
  + (                                      →  + 
 cs.splice(                                →  [-semantic]
 (id)                                      → $id
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $id
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
  +                                        →  + 
 " of "                                    → " of "
@@ -37,8 +34,7 @@ import("@backtickjs/core").ClientUnknown  → $id
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (selected)                                → $selected
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $selected
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 read                                      → read
@@ -48,8 +44,7 @@ cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (selected)                                → $selected
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $selected
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 read                                      → read
@@ -57,13 +52,11 @@ read                                      → read
  ===                                      →  === 
 cs.splice(                                →  [-semantic]
 (id)                                      → $id
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $id
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
  ?                                        →  ? 
 cs.splice(                                → ${ [-semantic]
 (<span>marker</span>)                     → (<span>marker</span>)
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${(<span>marker</span>)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
  :                                        →  : 
 null                                      → null
 ))                                        → `
@@ -74,8 +67,7 @@ __cs_selected                             → selected
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 0                                         → 0
 )                                         → )

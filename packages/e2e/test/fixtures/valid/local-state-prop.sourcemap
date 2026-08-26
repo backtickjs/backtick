@@ -4,8 +4,7 @@ cs.lift(cs.const(                         → cs`
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (size)                                    → $size
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $size
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 read                                      → read
@@ -19,8 +18,7 @@ cs.statement(                             →
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (size)                                    → $size
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $size
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 write                                     → write
@@ -28,8 +26,7 @@ write                                     → write
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (size)                                    → $size
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $size
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
 read                                      → read
@@ -47,8 +44,7 @@ __cs_size                                 → size
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 16                                        → 16
 )                                         → )

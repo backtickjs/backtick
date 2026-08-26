@@ -20,8 +20,7 @@ __cs_x                                    → x
 (                                         → 
 cs.splice(                                →  [-semantic]
 (ping)                                    → $ping
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $ping
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )()                                       → ()
 );                                        → ;
 \n                                        → \n  
@@ -36,8 +35,7 @@ __cs_x                                    → x
 (                                         → 
 cs.splice(                                →  [-semantic]
 (ping)                                    → $ping
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $ping
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )()                                       → ()
 );                                        → ;
 \n})())                                   → \n}`
@@ -58,8 +56,7 @@ __cs_x                                    → x
 (                                         → 
 cs.splice(                                →  [-semantic]
 (label)                                   → $label
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $label
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 true                                      → true
 )                                         → )

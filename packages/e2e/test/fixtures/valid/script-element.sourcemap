@@ -5,8 +5,7 @@ __cs_label                                → label
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 "hi"                                      → "hi"
 )                                         → )

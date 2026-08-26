@@ -50,8 +50,7 @@ both                                      → both
 (                                         → 
 cs.splice(                                →  [-semantic]
 (gate)                                    → $gate
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $gate
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 true                                      → true
 ,                                         → , 
@@ -63,8 +62,7 @@ one                                       → one
 (                                         → 
 cs.splice(                                →  [-semantic]
 (gate)                                    → $gate
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $gate
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 true                                      → true
 ,                                         → , 

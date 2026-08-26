@@ -2,8 +2,7 @@ cs.lift(cs.const(                         → cs`
 (                                         → 
 cs.splice(                                → ${ [-semantic]
 await fetchGreeting()                     → await fetchGreeting()
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${await fetchGreeting()}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ) +                                       →  + 
 "!"                                       → "!"
 ))                                        → `

@@ -4,8 +4,7 @@ __cs_outer                                → outer
  = cs.const(                              →  = 
 cs.splice(                                →  [-semantic]
 (start)                                   → $start
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $start
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 );                                        → ;
 \n                                        → \n    
 return cs.const(                          → return 
@@ -24,13 +23,11 @@ cs.splice(                                → ${ [-semantic]
 cs.lift(cs.const(                         → cs`
 __cs_outer                                → outer
 ))                                        → `
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${cs`outer`}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → 
 );                                        → ;
 \n})())                                   → \n    }`
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${cs`{\n      const middle = 10;\n      return middle + ${cs`outer`};\n    }`}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 );                                        → ;
 \n})())                                   → \n  }`
 cs.lift(cs.const(                         → cs`
@@ -41,8 +38,7 @@ cs.lift(cs.const(                         → cs`
 1                                         → 1
 ))                                        → `
 )                                         → )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${wrap(cs`1`)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 ) + (                                     →  + 
 cs.splice(                                → ${ [-semantic]
 wrap(                                     → wrap(
@@ -50,7 +46,6 @@ cs.lift(cs.const(                         → cs`
 2                                         → 2
 ))                                        → `
 )                                         → )
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${wrap(cs`2`)}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → 
 ))                                        → `

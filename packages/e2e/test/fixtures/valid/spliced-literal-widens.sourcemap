@@ -5,13 +5,11 @@ __cs_n                                    → n
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 cs.splice(                                →  [-semantic]
 (five)                                    → $five
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $five
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → )
 );                                        → ;
 \n                                        → \n  
@@ -32,13 +30,11 @@ __cs_c                                    → c
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )(                                        → (
 cs.splice(                                → ${ [-semantic]
 Color.Red                                 → Color.Red
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${Color.Red}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → )
 );                                        → ;
 \n                                        → \n  
@@ -51,8 +47,7 @@ write                                     → write
 (                                         → (
 cs.splice(                                → ${ [-semantic]
 Color.Blue                                → Color.Blue
-) satisfies                               →  [-semantic]
-import("@backtickjs/core").ClientUnknown  → ${Color.Blue}
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
 )                                         → )
 );                                        → ;
 \n})())                                   → \n}`
