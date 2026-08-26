@@ -7,8 +7,14 @@ import type {
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer, type Renderer } from "solid-js/universal";
 import type { RendererOptions } from "./RendererOptions.js";
+import type { ClientOptions } from "./ClientOptions.js";
 import type { Instance } from "./Instance.js";
-import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
+import {
+  builtinsOf,
+  compile,
+  evaluate as evaluateNode,
+  scopeOf,
+} from "./interpret.js";
 import type { Scope } from "./interpret.js";
 
 // The view half: turning a drawing function into the host's own nodes, once,
@@ -40,13 +46,13 @@ import type { Scope } from "./interpret.js";
  */
 export function render<N extends object>(
   bundle: Bundle,
-  options: RendererOptions<N>,
+  options: ClientOptions<N>,
   target: N,
   anchor: N,
 ): () => void {
-  const renderer = rendererOf(options);
+  const renderer = rendererOf(options.renderer);
   return createRoot((dispose) => {
-    renderer.insert(target, materialize(bundle, renderer), anchor);
+    renderer.insert(target, materialize(bundle, options, renderer), anchor);
     return dispose;
   });
 }
@@ -61,13 +67,27 @@ export function render<N extends object>(
  */
 export function evaluate<N extends object>(
   bundle: Bundle,
-  options: RendererOptions<N>,
+  options: ClientOptions<N>,
 ): unknown {
-  return createRoot(() => materialize(bundle, rendererOf(options)));
+  return createRoot(() =>
+    materialize(bundle, options, rendererOf(options.renderer)),
+  );
 }
 
-function materialize(bundle: Bundle, renderer: Renderer<object>): unknown {
-  const instance: Instance = { bundle, renderer, functions: new Map() };
+function materialize<N extends object>(
+  bundle: Bundle,
+  options: ClientOptions<N>,
+  renderer: Renderer<object>,
+): unknown {
+  const instance: Instance = {
+    bundle,
+    renderer,
+    // Once per mount, which is where a target's table meets the language's:
+    // a collision is refused here rather than at the first bundle to reach
+    // the name.
+    builtins: builtinsOf(options.builtins),
+    functions: new Map(),
+  };
   // The root is built once and never again — there is nothing above it to hand
   // it anything new — so its applications resolve where they stand, lists
   // included.

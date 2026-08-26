@@ -53,7 +53,7 @@ describe("where a render draws", () => {
     const after = node("footer");
     const parent = parentOf(before, ends, after);
 
-    render(await rootList(), testHost, parent, ends);
+    render(await rootList(), { renderer: testHost }, parent, ends);
 
     assert.deepEqual(
       parent.children.map((child) => child.id),
@@ -69,7 +69,7 @@ describe("where a render draws", () => {
     const ends = node("comment");
     const after = node("footer");
     const parent = parentOf(before, ends, after);
-    render(await rootList(), testHost, parent, ends);
+    render(await rootList(), { renderer: testHost }, parent, ends);
 
     const clear = parent.children[1];
     assert.ok(clear !== undefined);
@@ -88,7 +88,7 @@ describe("where a render draws", () => {
     // one this cannot take — an empty target holding only the anchor included.
     const ends = node("comment");
     const parent = parentOf(ends);
-    render(await rootList(), testHost, parent, ends);
+    render(await rootList(), { renderer: testHost }, parent, ends);
 
     const clear = parent.children[0];
     assert.ok(clear !== undefined);
@@ -107,8 +107,8 @@ describe("where a render draws", () => {
     const second = node("comment-2");
     const parent = parentOf(first, second);
 
-    render(await rootList(), testHost, parent, first);
-    render(await rootList(), testHost, parent, second);
+    render(await rootList(), { renderer: testHost }, parent, first);
+    render(await rootList(), { renderer: testHost }, parent, second);
 
     assert.deepEqual(
       parent.children.map((child) => child.id),

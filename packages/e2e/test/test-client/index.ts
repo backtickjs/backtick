@@ -1,4 +1,4 @@
-import type { Bundle } from "@backtickjs/core";
+import type { Bundle, ClientValue } from "@backtickjs/core";
 import { evaluate as evaluateBundle } from "@backtickjs/js-interpreter";
 import type { RendererOptions } from "solid-js/universal";
 import { testHost } from "./host.ts";
@@ -18,12 +18,14 @@ export type { TestNode, Write } from "./host.ts";
  * value has nowhere to be mounted. What comes back is what the root is — the
  * node it drew, or the data it evaluated to.
  *
- * A host of its own for a test that watches how it is spoken to rather than
+ * A table of builtins for a test about a target adding a name of its own; a
+ * host of its own for a test that watches how it is spoken to rather than
  * what it ends up holding.
  */
 export function evaluate(
   bundle: Bundle,
   host: RendererOptions<TestNode> = testHost,
+  builtins?: Readonly<Record<string, ClientValue>>,
 ): unknown {
-  return evaluateBundle(bundle, host);
+  return evaluateBundle(bundle, { renderer: host, builtins });
 }

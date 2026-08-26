@@ -16,6 +16,11 @@ import type { Renderer } from "solid-js/universal";
 export interface Instance {
   readonly bundle: Bundle;
   readonly renderer: Renderer<object>;
+  // Every name this client answers for, the language's own included, keyed
+  // whole as the wire carries it. Built once here rather than merged at each
+  // lookup: what a name means is settled before a bundle asks for it, and a
+  // target colliding with the language is refused when its client is made.
+  readonly builtins: Readonly<Record<string, ClientValue>>;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per
   // reference would be a fresh identity, and a prop holding one would be set

@@ -158,7 +158,7 @@ export function open(bundle) {
     parent: null,
     text: null,
   };
-  render(bundle, host, root);
+  render(bundle, { renderer: host }, root);
 
   // The first step is a search — there is no document to descend from, so it
   // runs over every node the host made — and each step after it is a child of

@@ -139,17 +139,58 @@ function compileFunction(
 // nothing else is.
 // `Builtins` says what each name holds; a bundle reaches one by the name alone,
 // so the table is widened once, here, to be read that way.
-const table = globals as unknown as Readonly<Record<string, ClientValue>>;
+//
+// The language's own and nothing else. What a target adds joins this at the
+// lookup below, in a table built per mount — but not here, and not for a member
+// of a value: `string.slice` is the language's, and a name read off a string is
+// read from this table alone whatever a target handed over.
+const language = globals as unknown as Readonly<Record<string, ClientValue>>;
+
+/**
+ * The names one client answers for: the language's own, and what its target
+ * handed over beside them.
+ *
+ * Built once per mount rather than read from two tables at every lookup, so
+ * what a name means is settled before a bundle asks — and so a target that
+ * collides with the language finds out when its client is made rather than at
+ * the first bundle that happens to reach the name.
+ *
+ * A collision throws rather than winning. The curated list is what keeps every
+ * member meaning the same thing everywhere, and a target quietly redefining
+ * `state` would be one client answering a bundle differently from every other.
+ * Adding is a target's to do; replacing is not.
+ */
+export function builtinsOf(
+  handed: Readonly<Record<string, ClientValue>> | undefined,
+): Readonly<Record<string, ClientValue>> {
+  if (handed === undefined) {
+    return language;
+  }
+  const table: Record<string, ClientValue> = { ...language };
+  for (const [name, value] of Object.entries(handed)) {
+    if (name in table) {
+      throw new Error(`the language already answers for \`${name}\``);
+    }
+    table[name] = value;
+  }
+  return table;
+}
 
 // A client function as this client applies one. `ClientFunction` says which
 // values are functions — its parameters are `never`, so that every function is
 // one — and not how to call one, so applying is this client's own knowledge.
 type Applied = (...args: ClientValue[]) => ClientValue;
 
-// A member access on a primitive reads from the one table by the whole name
-// rather than from the host's prototypes: a member the schema left out stays
-// left out, where `value[member]` would hand back whatever JavaScript happens
-// to have.
+// A member access on a primitive reads from the language's table by the whole
+// name rather than from the host's prototypes: a member the schema left out
+// stays left out, where `value[member]` would hand back whatever JavaScript
+// happens to have.
+//
+// The language's and not the instance's, so what a string is remains one thing
+// wherever a bundle runs. A target adds whole names a script splices; what may
+// be read off a value is the language's alone, and grouping what a target
+// offers is done by the value a name holds rather than by adding a member to a
+// kind of value.
 //
 // Which name a value is reached under is this client's own decision, and the
 // four are named here as the schema writes them.
@@ -173,7 +214,7 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     return (object as { readonly [name: string]: ClientValue })[name] ?? null;
   }
   const whole = `${boxed}.${name}`;
-  const found: ClientValue | undefined = table[whole];
+  const found: ClientValue | undefined = language[whole];
   if (found === undefined) {
     // Not absent: a value's members are the schema's to say, and an undeclared
     // one is a name this language has no meaning for. Reading it as null would
@@ -295,12 +336,18 @@ function buildNode(
     case 0: /* Element */ {
       return compileElement(instance, node);
     }
-    // A global the format names and this interpreter answers. Not the host's
-    // own objects and not a table handed in from outside: the curated list is
-    // what keeps every member meaning the same thing everywhere.
+    // A whole name the format carries and this client answers. The language's
+    // own and what this target added beside them, in one table under one
+    // lookup — because the format has one node for a name it carries, and where
+    // a name came from is not something a bundle says.
+    //
+    // Never the host's own objects, and never a name that replaced one of the
+    // language's: `builtinsOf` refused that when the table was built. A
+    // curated list is what keeps every member meaning the same thing
+    // everywhere, and a target may lengthen it but not edit it.
     case 3: /* Builtin */ {
       const name = node[1];
-      const value = table[name];
+      const value = instance.builtins[name];
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);
       }

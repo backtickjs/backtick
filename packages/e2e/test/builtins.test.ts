@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { NodeKind, type Bundle } from "@backtickjs/core";
+import { NodeKind, type Bundle, type ClientValue } from "@backtickjs/core";
 import { schema } from "@backtickjs/language-schema/schema";
 import { getters, globals } from "@backtickjs/js-interpreter";
-import { evaluate } from "./test-client/index.ts";
+import { evaluate, testHost } from "./test-client/index.ts";
 
 // What the reference client answers with, against what the schema says a script
 // may reach. A name declared and not implemented, or implemented and not
@@ -116,6 +116,135 @@ describe("a member the schema leaves out", () => {
     // every name a value has — so nothing answering is the whole answer.
     assert.throws(
       () => evaluate(bundle),
+      /a string has no `padStart` in this language/,
+    );
+  });
+});
+
+describe("a name a target answers for", () => {
+  // What an SDK or an app adds: a whole name, reached by splicing the value it
+  // is imported as, which lands on the wire as the same node `Math.floor` does.
+  // The bundle a schema's generated `createBuiltin("greet")` would be spliced
+  // into, written by hand because no schema here declares the name.
+  const bundle: Bundle = {
+    functions: {
+      "0": [
+        [
+          NodeKind.ArrowFunction,
+          [],
+          [
+            NodeKind.Block,
+            [
+              [
+                NodeKind.ReturnStatement,
+                [
+                  NodeKind.CallExpression,
+                  [NodeKind.Builtin, "greet"],
+                  false,
+                  [],
+                ],
+              ],
+            ],
+          ],
+        ],
+      ],
+    },
+    root: [NodeKind.ApplyFunction, "0", []],
+  };
+
+  it("is answered by the table its target handed over", () => {
+    assert.equal(evaluate(bundle, testHost, { greet: () => "hello" }), "hello");
+  });
+
+  it("is not answered by a client whose target added nothing", () => {
+    // The language's list is every client's floor, and a name beyond it is a
+    // name that target never offered — so a bundle built against one client
+    // says so on another rather than reading as absent.
+    assert.throws(() => evaluate(bundle), /unknown builtin greet/);
+  });
+
+  it("holds what a target handed over, whatever kind of value that is", () => {
+    // Grouping is done by the value a name holds rather than by a dot in the
+    // name: `$storage.get(…)` is a member read on a plain object this answered
+    // with, which is the same path a cell's `read` is reached by.
+    const held: Bundle = {
+      functions: {
+        "0": [
+          [
+            NodeKind.ArrowFunction,
+            [],
+            [
+              NodeKind.Block,
+              [
+                [
+                  NodeKind.ReturnStatement,
+                  [
+                    NodeKind.CallExpression,
+                    [
+                      NodeKind.PropertyAccessExpression,
+                      [NodeKind.Builtin, "storage"],
+                      false,
+                      "get",
+                    ],
+                    false,
+                    ["greeting"],
+                  ],
+                ],
+              ],
+            ],
+          ],
+        ],
+      },
+      root: [NodeKind.ApplyFunction, "0", []],
+    };
+    const storage = { greeting: "hei" } as Record<string, string>;
+    assert.equal(
+      evaluate(held, testHost, {
+        storage: { get: (key: ClientValue) => storage[key as string] ?? null },
+      }),
+      "hei",
+    );
+  });
+
+  it("may lengthen the language's list and never edit it", () => {
+    // Refused where the client is made, not at the first bundle to reach the
+    // name: a target quietly redefining `state` is one client answering a
+    // bundle differently from every other.
+    assert.throws(
+      () => evaluate(bundle, testHost, { state: () => null }),
+      /the language already answers for `state`/,
+    );
+    assert.throws(
+      () => evaluate(bundle, testHost, { "Math.floor": () => 0 }),
+      /the language already answers for `Math.floor`/,
+    );
+  });
+
+  it("may not add a member to a kind of value", () => {
+    // A member of a string is the language's, so a table naming one adds a
+    // whole name nothing reads: `"abc".padStart` still finds nothing.
+    const padded: Bundle = {
+      functions: {
+        "0": [
+          [
+            NodeKind.ArrowFunction,
+            [],
+            [
+              NodeKind.Block,
+              [
+                [
+                  NodeKind.ReturnStatement,
+                  [NodeKind.PropertyAccessExpression, "abc", false, "padStart"],
+                ],
+              ],
+            ],
+          ],
+        ],
+      },
+      root: [NodeKind.ApplyFunction, "0", []],
+    };
+    assert.throws(
+      () => evaluate(padded, testHost, { "string.padStart": (self) => self }),
       /a string has no `padStart` in this language/,
     );
   });

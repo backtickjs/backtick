@@ -31,7 +31,9 @@ customElements.define(
       const anchor = document.createComment("");
       this.replaceWith(anchor);
       bundleScript.remove();
-      render(bundle, dom, parent, anchor);
+      // No table beside the renderer yet: this target adds no name of its own,
+      // so what it answers for is the language's list and nothing more.
+      render(bundle, { renderer: dom }, parent, anchor);
     }
   },
 );
