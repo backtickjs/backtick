@@ -1,7 +1,8 @@
-import { cs, type Client } from "@backtickjs/core";
+import { cs, type Prop } from "@backtickjs/core";
 
-// One row of the week. Its temperatures arrive already converted, so the °C/°F
-// toggle above redraws these two numbers and nothing else.
+// One row of the week. Its props are `Prop<T>`, so a caller may hand each one
+// a written value or a script. The temperatures arrive already converted, and
+// the °C/°F toggle above redraws those two numbers and nothing else.
 export async function Day({
   weekday,
   symbol,
@@ -9,11 +10,11 @@ export async function Day({
   low,
   isAboveMedian,
 }: {
-  weekday: Client<string>;
-  symbol: Client<string>;
-  high: Client<number>;
-  low: Client<number>;
-  isAboveMedian: Client<boolean>;
+  weekday: Prop<string>;
+  symbol: Prop<string>;
+  high: Prop<number>;
+  low: Prop<number>;
+  isAboveMedian: Prop<boolean>;
 }) {
   return (
     <li style="display: grid; grid-template-columns: 44px 28px 1fr; align-items: center; gap: 12px; padding: 7px 0">

@@ -1,15 +1,17 @@
-import { cs, type Client } from "@backtickjs/core";
+import { cs, type Prop } from "@backtickjs/core";
 
-// One row of the list. Everything it draws is a client value, so pressing it
-// redraws this row and nothing else — the list around it never re-renders.
+// One row of the list. Its props are `Prop<T>`, so each takes what the server
+// wrote or a script standing in for it — and what this draws is whichever
+// arrived. Pressing it redraws this row and nothing else, because a script is
+// what the list hands down: the list around it never re-renders.
 export async function Task({
   label,
   isDone,
   onPress,
 }: {
-  label: Client<string>;
-  isDone: Client<boolean>;
-  onPress: Client<() => void>;
+  label: Prop<string>;
+  isDone: Prop<boolean>;
+  onPress: Prop<() => void>;
 }) {
   return (
     <li>
