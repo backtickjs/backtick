@@ -1,15 +1,13 @@
 #f0 = ($0, $1, $2) => {
   const flag = $0()(true);
   const tone = $0()($1());
-  const step = $0()(() => 0);
   return <span
     onclick={() => {
       flag.write(false);
       tone.write($2());
-      step.write(() => 1);
     }}
   >
-    {flag.read() + " " + tone.read() + " " + step.read()()}
+    {flag.read() + " " + tone.read()}
   </span>;
 }
 

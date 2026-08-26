@@ -1338,7 +1338,7 @@ export const schema: Schema = {
       },
     ),
     state: Type.Generic(
-      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
+      [Type.GenericParameter("T")],
       Type.Function(
         [Type.FunctionParameter("initial", Type.Ref("T"))],
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),

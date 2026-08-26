@@ -726,5 +726,5 @@ export interface Builtins {
    * List elements. If length is 0, the empty string is returned.
    */
   "String.fromCodePoint"(...codePoints: number[]): string;
-  state<T extends ClientValue>(initial: T): State<T>;
+  state<T>(initial: T): State<T>;
 }
