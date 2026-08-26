@@ -207,23 +207,6 @@ function checkedCondition(
   );
 }
 
-function checked(
-  ts: typeof import("typescript"),
-  expression: ts.Expression,
-  name: string,
-): ts.SatisfiesExpression {
-  // Left unmapped: mapping it would claim source the value already claims,
-  // for a column.
-  const expected = ts.factory.createImportTypeNode(
-    ts.factory.createLiteralTypeNode(
-      ts.factory.createStringLiteral("@backtickjs/core"),
-    ),
-    undefined,
-    ts.factory.createIdentifier(name),
-  );
-  return ts.factory.createSatisfiesExpression(expression, expected);
-}
-
 // The left operand of a `??` (through parens): that `??` already coalesces
 // an optional chain's `undefined`, so the auto `?? null` skips (TS2871).
 function nullCoalescedLeft(
@@ -822,12 +805,17 @@ function rewriteNodeImpl(
         );
         state.mappings.set(argument, node);
       }
-      // The wrapper's frame claims only the splice delimiters (`${`/`}`,
-      // or nothing for `$x`): hover must not resolve through it.
-      const virtual = checked(
-        ts,
+      // `satisfies` lets you type-check a value against a type without
+      // changing what TypeScript infers it to be.
+      const virtual = ts.factory.createSatisfiesExpression(
         call(ts, "cs", "splice", [argument]),
-        "ClientUnknown",
+        ts.factory.createImportTypeNode(
+          ts.factory.createLiteralTypeNode(
+            ts.factory.createStringLiteral("@backtickjs/core"),
+          ),
+          undefined,
+          ts.factory.createIdentifier("ClientUnknown"),
+        ),
       );
       state.codeInformation.set(virtual, { semantic: false });
       return {
