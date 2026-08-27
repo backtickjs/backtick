@@ -1,0 +1,28 @@
+{
+  "name": "backtickjs.com",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The website at backtickjs.com, built with Backtick",
+  "scripts": {
+    "build": "tspc --noCheck --declaration && node build.mjs",
+    "preview": "python3 -m http.server 4321 -d site",
+    "typecheck": "backtick-tsc --noEmit",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist site .turbo"
+  },
+  "dependencies": {
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/tspatch-plugin": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*"
+  },
+  "devDependencies": {
+    "@backtickjs/prettier-plugin": "workspace:*",
+    "@backtickjs/tsc": "workspace:*",
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2",
+    "ts-patch": "^4.0.1",
+    "typescript": "^6.0.3"
+  }
+}
