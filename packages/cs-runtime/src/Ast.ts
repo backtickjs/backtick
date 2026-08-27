@@ -212,7 +212,7 @@ export interface ClientScriptNumericLiteral {
 export interface ClientScriptObjectLiteralExpression {
   readonly kind: typeof SyntaxKind.ObjectLiteralExpression;
   readonly loc: SourceLocation;
-  readonly properties: readonly ClientScriptPropertyAssignment[];
+  readonly properties: readonly ClientScriptObjectMember[];
 }
 
 export interface ClientScriptPropertyAccessExpression {
@@ -315,6 +315,12 @@ export interface ClientScriptParameterDeclaration {
 
 // One `a: 4` of an object literal. A key is always a plain name here, so
 // `name` is that name rather than the `PropertyName` node TypeScript holds.
+// A pair, or a spread of another object — the two things an object literal's
+// list admits, the way an array's admits an element or a spread of one.
+export type ClientScriptObjectMember =
+  | ClientScriptPropertyAssignment
+  | ClientScriptSpreadElement;
+
 export interface ClientScriptPropertyAssignment {
   readonly kind: typeof SyntaxKind.PropertyAssignment;
   readonly loc: SourceLocation;

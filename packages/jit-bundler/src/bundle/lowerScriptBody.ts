@@ -253,8 +253,30 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         // property assignments are the source's shape, not the wire's: what
         // ships is data, which is what lets a spliced object pass through
         // untouched — every key of it, the format reserving none.
+        //
+        // Which is why a spread cannot ship that way: there is no key to write
+        // "and every key of that one" under. One reaching here makes the whole
+        // literal a node instead, where a name slot of `null` says spread. A
+        // literal without one is unchanged, so nothing already written moves.
+        if (
+          node.properties.some(
+            (property) => property.kind === SyntaxKind.SpreadElement,
+          )
+        ) {
+          return [
+            NodeKind.ObjectLiteralExpression,
+            node.properties.map((property) =>
+              property.kind === SyntaxKind.SpreadElement
+                ? [null, e(property.expression)]
+                : [property.name, e(property.initializer)],
+            ),
+          ];
+        }
         const entries: { [key: string]: BundleExpressionNode } = {};
         for (const property of node.properties) {
+          if (property.kind === SyntaxKind.SpreadElement) {
+            continue;
+          }
           entries[property.name] = e(property.initializer);
         }
         return entries;

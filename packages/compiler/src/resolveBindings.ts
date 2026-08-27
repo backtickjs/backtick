@@ -472,6 +472,10 @@ export function resolveBindings(
           walkExpression(script, property.initializer, scopes); // key isn't a variable
         } else if (ts.isShorthandPropertyAssignment(property)) {
           reference(property.name, script, scopes);
+        } else if (ts.isSpreadAssignment(property)) {
+          // What is spread is an expression like any other, and the names in it
+          // are the script's own to find.
+          walkExpression(script, property.expression, scopes);
         }
       }
     }

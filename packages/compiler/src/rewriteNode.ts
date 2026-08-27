@@ -1554,6 +1554,17 @@ function rewriteNodeImpl(
 
   if (ts.isObjectLiteralExpression(node)) {
     const properties = node.properties.map((property) => {
+      // `...rest`, which is not a property but stands where one stands and
+      // contributes however many the object it spreads has. `name` is null,
+      // which is a name no property can have.
+      if (ts.isSpreadAssignment(property)) {
+        return {
+          name: null,
+          text: null,
+          source: property,
+          value: rewriteNode(ts, state, property.expression),
+        };
+      }
       if (
         ts.isPropertyAssignment(property) &&
         (ts.isIdentifier(property.name) || ts.isStringLiteral(property.name))
@@ -1580,10 +1591,14 @@ function rewriteNodeImpl(
       return {
         virtual: ts.factory.createObjectLiteralExpression(
           properties.map((property) =>
-            ts.factory.createPropertyAssignment(
-              property.name,
-              property.value.virtual as ts.Expression,
-            ),
+            property.name === null
+              ? ts.factory.createSpreadAssignment(
+                  property.value.virtual as ts.Expression,
+                )
+              : ts.factory.createPropertyAssignment(
+                  property.name,
+                  property.value.virtual as ts.Expression,
+                ),
           ),
           false,
         ),
@@ -1591,11 +1606,16 @@ function rewriteNodeImpl(
           loc: loc(node),
           properties: ts.factory.createArrayLiteralExpression(
             properties.map((property) =>
-              astNode(ts, SyntaxKind.PropertyAssignment, {
-                loc: loc(property.source),
-                name: ts.factory.createStringLiteral(property.text),
-                initializer: property.value.runtime as ts.Expression,
-              }),
+              property.text === null
+                ? astNode(ts, SyntaxKind.SpreadElement, {
+                    loc: loc(property.source),
+                    expression: property.value.runtime as ts.Expression,
+                  })
+                : astNode(ts, SyntaxKind.PropertyAssignment, {
+                    loc: loc(property.source),
+                    name: ts.factory.createStringLiteral(property.text),
+                    initializer: property.value.runtime as ts.Expression,
+                  }),
             ),
             false,
           ),

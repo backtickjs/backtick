@@ -294,6 +294,32 @@ function buildNode(
       const members = compileElements(instance, node[1]);
       return (scope) => members(scope);
     }
+    // An object literal a spread runs through. A literal without one is data
+    // and never reaches here — this is only for the case the format has no key
+    // to say, which is "and every key of that one".
+    case 1021: /* ObjectLiteralExpression */ {
+      const entries = node[1].map(
+        ([name, value]) => [name, compile(instance, value)] as const,
+      );
+      return (scope) => {
+        const object: { [key: string]: ClientValue } = {};
+        for (const [name, part] of entries) {
+          const held = part(scope);
+          if (name !== null) {
+            object[name] = held;
+            continue;
+          }
+          // Later keys win, the way they do in the source — so the object is
+          // built in the order it was written and nothing is merged twice.
+          for (const [key, one] of Object.entries(
+            held as { [key: string]: ClientValue },
+          )) {
+            object[key] = one;
+          }
+        }
+        return object;
+      };
+    }
     // Storage, made where this stands: evaluating it twice is two storages,
     // which is why it is a kind and not a call of a name. Never settled — the
     // whole point of a cell is that what it holds moves.

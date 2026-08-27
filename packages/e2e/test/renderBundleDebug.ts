@@ -63,6 +63,16 @@ function renderNode(
     // Data, which a node kind carries only so it is not read as a node.
     case NodeKind.DataArray:
       return renderData<BundleArrayElement[]>(node[1], indent, renderNode);
+    // A literal a spread runs through. A name of `null` is the spread, which is
+    // why this reads its slots rather than the shape of what is in them.
+    case NodeKind.ObjectLiteralExpression:
+      return `{ ${node[1]
+        .map(([name, value]) =>
+          name === null
+            ? `...${renderNode(value, indent)}`
+            : `${name}: ${renderNode(value, indent)}`,
+        )
+        .join(", ")} }`;
     case NodeKind.Identifier:
       return node[1];
     case NodeKind.GetFunction:

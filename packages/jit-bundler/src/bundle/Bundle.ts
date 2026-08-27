@@ -102,6 +102,7 @@ export const NodeKind = {
   Parameter: 1018,
   PrefixUnaryExpression: 1019,
   SpreadElement: 1020,
+  ObjectLiteralExpression: 1021,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
@@ -199,6 +200,24 @@ export type BundleBuiltinNode = [kind: typeof NodeKind.Builtin, name: string];
 
 export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
 
+// An object literal a spread runs through, which cannot ship as the data an
+// object literal usually is: an object in a value slot *is* its own keys and
+// the format reserves none of them, so there is nowhere to write "and every key
+// of that one". A node says it instead — and only where a spread appears. A
+// literal without one is still plain data, so nothing already written changes.
+export type BundleObjectLiteralExpressionNode = [
+  kind: typeof NodeKind.ObjectLiteralExpression,
+  entries: BundleObjectEntry[],
+];
+
+// A pair, or a spread. `null` in the name slot is a spread of the value beside
+// it — a name no property can have — so the two are told apart by a slot rather
+// than by the shape of what is in it.
+export type BundleObjectEntry = [
+  name: string | null,
+  value: BundleExpressionNode,
+];
+
 export type BundleExpressionNode =
   | null
   | boolean
@@ -222,6 +241,7 @@ export type BundleExpressionNode =
   | BundlePrefixUnaryExpressionNode
   | BundleConditionalExpressionNode
   | BundleArrowFunctionNode
+  | BundleObjectLiteralExpressionNode
   | BundleBuiltinNode;
 
 // A body node a block runs in order: control flow, bindings, or an

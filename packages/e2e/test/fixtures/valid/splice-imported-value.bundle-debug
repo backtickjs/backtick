@@ -26,5 +26,6 @@ root = #f0(() => {
   "CatchClause": 1017,
   "Parameter": 1018,
   "PrefixUnaryExpression": 1019,
-  "SpreadElement": 1020
+  "SpreadElement": 1020,
+  "ObjectLiteralExpression": 1021
 })
