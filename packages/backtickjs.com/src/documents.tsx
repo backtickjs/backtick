@@ -9,15 +9,21 @@ import { pages } from "./routes.js";
  * nothing else — the chrome is in the bundle too, so what is static here is a
  * head and the script that reads what follows it.
  */
-export const documents = await Promise.all(
-  pages.map(async (page) => {
-    // The layout is applied here rather than inside each page, so a page
-    // is its content and the chrome is written once.
-    const bundle = await bundler.run(<Layout>{page.view}</Layout>);
-    return {
-      path: page.path,
-      html: insert(shell(page), "body", bundle),
-      bytes: Buffer.byteLength(JSON.stringify(bundle)),
-    };
-  }),
-);
+export async function buildDocuments(
+  scripts: Readonly<Record<string, string>>,
+) {
+  return await Promise.all(
+    pages.map(async (page) => {
+      // The layout is applied here rather than inside each page, so a page
+      // is its content and the chrome is written once.
+      const bundle = await bundler.run(<Layout>{page.view}</Layout>);
+      const script =
+        page.script === undefined ? undefined : scripts[page.script];
+      return {
+        path: page.path,
+        html: insert(shell({ ...page, script }), "body", bundle),
+        bytes: Buffer.byteLength(JSON.stringify(bundle)),
+      };
+    }),
+  );
+}

@@ -22,8 +22,8 @@ export async function Hero({ standfirst }: { standfirst: string }) {
       </h1>
       <p style={STANDFIRST}>{standfirst}</p>
       <div style={ACTIONS}>
-        <Button href="#how" solid>
-          How it works
+        <Button href="#try" solid>
+          Try it
         </Button>
         <Button href={REPO}>Read the source</Button>
       </div>

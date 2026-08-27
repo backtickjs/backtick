@@ -13,6 +13,7 @@
     "clean": "rm -rf node_modules dist site .turbo"
   },
   "dependencies": {
+    "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/tspatch-plugin": "workspace:*",
     "@backtickjs/web-sdk": "workspace:*"
@@ -21,6 +22,7 @@
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",
     "@types/node": "^25.9.1",
+    "esbuild": "^0.25.0",
     "prettier": "^3.6.2",
     "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"

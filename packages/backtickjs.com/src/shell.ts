@@ -15,10 +15,13 @@ export function shell({
   title,
   description,
   path,
+  script,
 }: {
   title: string;
   description: string;
   path: string;
+  /** A page's own script, asked for after the client so it draws first. */
+  script?: string;
 }): string {
   return (
     `<!doctype html><html lang="en"><head>` +
@@ -43,6 +46,9 @@ export function shell({
     `<meta property="og:description" content="${description}">` +
     `<meta property="og:url" content="https://backtickjs.com${path}">` +
     `<script defer src="${clientUrl}"></script>` +
+    // After the client, and deferred like it: deferred scripts run in order, so
+    // by the time this one looks for what the bundle drew, the bundle is drawn.
+    (script === undefined ? "" : `<script defer src="${script}"></script>`) +
     `</head><body>` +
     // Stays where it is: `insert` draws after what the body already holds, and
     // a `<noscript>` shows only when there is nothing to draw it.
