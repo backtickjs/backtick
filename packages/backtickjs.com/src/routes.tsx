@@ -10,14 +10,14 @@ export interface Page {
   readonly view: JSX.Element;
 }
 
-// Every route on the site. A tag here is not run — it is a value describing
-// what to run, which `documents.tsx` hands to the bundler one page at a time.
 export const pages: readonly Page[] = [
   {
     path: "/",
-    title: "Backtick — Deploy to production in minutes",
+    title: "Backtick — Ship today. Not next release.",
     description:
-      "Backtick is a TypeScript UI framework that compiles components to data. The client reads a bundle instead of evaluating JavaScript, so a UI change ships without a rebuild.",
+      "A server-driven UI framework: your app fetches screens and their" +
+      " behavior at runtime, so changing one costs a deploy rather than a" +
+      " release.",
     view: <Home />,
   },
 ];
