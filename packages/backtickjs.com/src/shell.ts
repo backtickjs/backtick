@@ -1,17 +1,4 @@
 import { clientUrl } from "./files.js";
-import { ink, muted, paper, sans } from "./theme.js";
-
-// `color-scheme` is what makes `light-dark()` mean anything, and it inherits —
-// so declaring it here is what lets every component pick a colour for both
-// themes from a value written at build time, where a media query cannot go.
-//
-// The rest is what a bundle cannot reach: the body is not drawn by one, so its
-// margin and the canvas behind the page have to be said here.
-const BODY =
-  `color-scheme: light dark; margin: 0;` +
-  ` background: ${paper}; color: ${ink};` +
-  ` font-family: ${sans}; font-size: 17px; line-height: 1.6;` +
-  ` -webkit-font-smoothing: antialiased`;
 
 /**
  * The document a page is drawn into: a head, and a body with nothing in it.
@@ -20,9 +7,9 @@ const BODY =
  * client has to be asked for by something, and a `<head>` is not a place a
  * bundle can draw, because the bundle is drawn by the script the head loads.
  *
- * The palette is here rather than in a stylesheet because it is the one thing
- * every component shares and nothing else on the page can declare: a custom
- * property inherits, so this is the only place it needs saying.
+ * It carries no styling at all. What `<body>` used to say — the type, the ink,
+ * the canvas — is either drawn by the bundle now or comes from `color-scheme`
+ * above, which leaves nothing here for a content policy to have to allow.
  */
 export function shell({
   title,
@@ -40,17 +27,15 @@ export function shell({
     // decoded as anything else is every string on the page quietly mangled.
     `<meta charset="utf-8">` +
     `<meta name="viewport" content="width=device-width, initial-scale=1">` +
-    // `style-src` is spelled out because the default would forbid the one
-    // thing this page is made of. `default-src` cascades to `style-src-attr`,
-    // and `'self'` there blocks a `style` attribute the parser reads — which
-    // is every style in the document below, and the palette on `<body>` that
-    // the rest of them resolve against.
-    //
-    // The client's own styles never needed it: `dom.ts` writes them through
-    // `cssText`, which no policy polices. It is the static attributes here
-    // that do.
-    `<meta http-equiv="content-security-policy" ` +
-    `content="default-src 'self'; style-src 'self' 'unsafe-inline'">` +
+    // Strict, and it can be: nothing below carries a `style` attribute for
+    // the parser to read. Every style on the page is written by the client
+    // through `cssText`, which no policy polices.
+    `<meta http-equiv="content-security-policy" content="default-src 'self'">` +
+    // What the inline `color-scheme` was for, said as markup instead. It tells
+    // the browser the page answers for both themes, so the canvas behind the
+    // document is painted to match — and it is what `light-dark()` resolves
+    // against, wherever that value ends up being written.
+    `<meta name="color-scheme" content="light dark">` +
     `<title>${title}</title>` +
     `<meta name="description" content="${description}">` +
     `<link rel="canonical" href="https://backtickjs.com${path}">` +
@@ -58,11 +43,10 @@ export function shell({
     `<meta property="og:description" content="${description}">` +
     `<meta property="og:url" content="https://backtickjs.com${path}">` +
     `<script defer src="${clientUrl}"></script>` +
-    `</head><body style="${BODY}">` +
+    `</head><body>` +
     // Stays where it is: `insert` draws after what the body already holds, and
     // a `<noscript>` shows only when there is nothing to draw it.
-    `<noscript><p style="max-width: 34em; margin: 48px auto; padding: 0 24px;` +
-    ` color: ${muted}">This page is a Backtick bundle, drawn by a script.` +
+    `<noscript><p>This page is a Backtick bundle, drawn by a script.` +
     ` With scripting off there is nothing to draw it with.</p></noscript>` +
     `</body></html>`
   );

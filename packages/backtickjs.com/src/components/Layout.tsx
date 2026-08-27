@@ -1,11 +1,18 @@
 import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
 import { REPO } from "../links.js";
 import { Logo } from "./Logo.js";
-import { ink, line, muted } from "../theme.js";
+import { ink, line, muted, sans } from "../theme.js";
 
+// The outermost thing the bundle draws, so this is where what used to sit on
+// `<body>` now lives: type and ink inherit from here to everything on the page.
+//
+// No background: `color-scheme` in the head has the browser paint the canvas
+// for the theme, which covers the body's own margin too — a background here
+// would stop 8px short of the edge and show a frame around the page.
 const SHELL =
   "max-width: 820px; margin: 0 auto; padding: 0 24px;" +
-  " box-sizing: border-box";
+  ` box-sizing: border-box; font-family: ${sans}; font-size: 17px;` +
+  ` line-height: 1.6; color: ${ink}; -webkit-font-smoothing: antialiased`;
 
 const TOP =
   "display: flex; align-items: center; justify-content: space-between;" +
