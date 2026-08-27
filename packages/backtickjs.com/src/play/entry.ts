@@ -257,8 +257,7 @@ let inFlight = 0;
 
 async function compile(): Promise<void> {
   const mine = ++inFlight;
-  status.textContent =
-    opening === undefined ? "fetching the compiler…" : "compiling…";
+  status.textContent = "compiling…";
   working(true);
   const frame = await compiler();
   if (mine !== inFlight) {
@@ -273,15 +272,26 @@ async function compile(): Promise<void> {
   if (mine !== inFlight) {
     return;
   }
+  // The answer goes up the moment it lands — a compile is about twenty
+  // milliseconds and there is no reason to sit on it.
+  show(result);
+  // The sweep still finishes the pass it started, which is a flourish
+  // completing rather than a claim that anything is still happening.
   await rest(HOLD - (performance.now() - at));
   if (mine !== inFlight) {
     return;
   }
   working(false);
-  show(result);
+  status.textContent = settled(result);
 }
 
 /** What the three columns say about one answer, whoever computed it. */
+/**
+ * The answer, put up. Says nothing about the status line: what happened is
+ * shown the moment it lands, and what is *happening* is settled when the sweep
+ * ends — otherwise "compiling…" is replaced twenty milliseconds after it
+ * appears, which reads as a flicker rather than a state.
+ */
 function show(result: Compiled): void {
   if (result.ok) {
     complaints.replaceChildren();
@@ -289,7 +299,6 @@ function show(result: Compiled): void {
     // The size rides on the tab that shows the bytes, which is where a reader
     // asks how many there are.
     tabs.wire.textContent = `WIRE \u00b7 ${size(result.bytes)}`;
-    status.textContent = "";
     draw(result.wire);
     return;
   }
@@ -297,9 +306,15 @@ function show(result: Compiled): void {
   tabs.wire.textContent = "WIRE";
   screen.replaceChildren();
   complain(result.complaints);
+}
+
+/** What the status line reads once the working state is over. */
+function settled(result: Compiled): string {
+  if (result.ok) {
+    return "";
+  }
   const count = result.complaints.length;
-  status.textContent =
-    count === 1 ? "1 complaint" : `${count.toString()} complaints`;
+  return count === 1 ? "1 complaint" : `${count.toString()} complaints`;
 }
 
 function start(): void {

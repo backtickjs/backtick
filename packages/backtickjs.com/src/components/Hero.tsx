@@ -1,6 +1,6 @@
 import { muted } from "../theme.js";
 import { Button } from "./Button.js";
-import { REPO } from "../links.js";
+import { DOCS } from "../links.js";
 
 const HERO = "padding: 40px 0";
 
@@ -25,7 +25,7 @@ export async function Hero({ standfirst }: { standfirst: string }) {
         <Button href="#try" solid>
           Try it
         </Button>
-        <Button href={REPO}>Read the source</Button>
+        <Button href={DOCS}>Read the docs</Button>
       </div>
     </div>
   );

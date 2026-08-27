@@ -1,7 +1,8 @@
 import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
-import { REPO } from "../links.js";
+import { DOCS, REPO } from "../links.js";
+import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
-import { ink, muted, sans } from "../theme.js";
+import { ink, sans } from "../theme.js";
 
 // The outermost thing the bundle draws, so this is where what used to sit on
 // `<body>` now lives: type and ink inherit from here to everything on the page.
@@ -21,7 +22,12 @@ const TOP =
   "display: flex; align-items: center; justify-content: space-between;" +
   " gap: 24px; padding: 28px 0";
 
-const NAV = `display: flex; gap: 20px; font-size: 15px; color: ${muted}`;
+// Ink, and a weight to carry it. The colour alone was not the problem: at 15px
+// under `-webkit-font-smoothing: antialiased` a regular weight thins out, and
+// beside a 700 headline it reads as switched off however black it is.
+const NAV =
+  `display: flex; align-items: center; gap: 20px; font-size: 15px;` +
+  ` font-weight: 500; color: ${ink}`;
 
 // The chrome every page is drawn in. A server component: it runs while
 // bundling and never reaches the client, so what it decides is settled in the
@@ -40,8 +46,17 @@ export async function Layout({
           <Logo />
         </a>
         <nav style={NAV}>
-          <a href={REPO} style="color: inherit">
-            GitHub
+          <a href={DOCS} style="color: inherit">
+            Docs
+          </a>
+          {/* The mark carries no text, so the link says what it is for anyone
+              not looking at it. */}
+          <a
+            href={REPO}
+            aria-label="GitHub"
+            style="display: flex; color: inherit"
+          >
+            <GitHubMark />
           </a>
         </nav>
       </header>

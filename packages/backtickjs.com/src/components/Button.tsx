@@ -17,15 +17,17 @@ export async function Button({
   solid?: boolean;
   children: NonNullable<FragmentProps["children"]>;
 }) {
+  const look =
+    solid === true
+      ? BASE + `; background: ${ink}; color: ${paper}`
+      : BASE + `; color: ${ink}`;
+
+  // Two shapes rather than an `<a>` with nothing to go to: this language has no
+  // `undefined`, so a button with no destination is a different element and not
+  // a link missing its half. A `<span>` because it is inert on purpose — a
+  // `<button>` would take focus and a press, and answer neither.
   return (
-    <a
-      href={href}
-      style={
-        solid === true
-          ? BASE + `; background: ${ink}; color: ${paper}`
-          : BASE + `; color: ${ink}`
-      }
-    >
+    <a href={href} style={look}>
       {children}
     </a>
   );
