@@ -10,7 +10,7 @@ export interface Complaint {
 }
 
 export type Compiled =
-  | { readonly ok: true; readonly wire: string; readonly bytes: number }
+  | { readonly ok: true; readonly bundle: string; readonly bytes: number }
   | { readonly ok: false; readonly complaints: readonly Complaint[] };
 
 /**
@@ -84,8 +84,12 @@ export async function compile(source: string, host: Host): Promise<Compiled> {
   });
 
   const drawing = await drawingOf(run(script));
-  const wire = JSON.stringify(await core.bundler.run(drawing));
-  return { ok: true, wire, bytes: new TextEncoder().encode(wire).length };
+  const bundle = JSON.stringify(await core.bundler.run(drawing));
+  return {
+    ok: true,
+    bundle,
+    bytes: new TextEncoder().encode(bundle).length,
+  };
 }
 
 function complaintOf(one: import("typescript").Diagnostic): Complaint {

@@ -76,12 +76,12 @@ const source = node<HTMLTextAreaElement>("play-source");
 const ink = node("play-ink");
 const status = node("play-status");
 const complaints = node("play-complaints");
-const wire = node("play-wire");
+const bundle = node("play-bundle");
 const screen = node("play-screen");
 const sweep = node("play-sweep");
 const tabs = {
   screen: node<HTMLButtonElement>("play-tab-screen"),
-  wire: node<HTMLButtonElement>("play-tab-wire"),
+  bundle: node<HTMLButtonElement>("play-tab-bundle"),
 };
 
 /**
@@ -91,11 +91,11 @@ const tabs = {
  * again with the value it was drawn with — a `<pre>` is not a grid and would
  * come back laid out as one.
  */
-function view(which: "screen" | "wire"): void {
+function view(which: "screen" | "bundle"): void {
   screen.style.display = which === "screen" ? SHOWN["screen"]! : "none";
-  wire.style.display = which === "wire" ? SHOWN["wire"]! : "none";
+  bundle.style.display = which === "bundle" ? SHOWN["bundle"]! : "none";
   tabs.screen.style.cssText = which === "screen" ? TAB_ON : TAB_OFF;
-  tabs.wire.style.cssText = which === "wire" ? TAB_ON : TAB_OFF;
+  tabs.bundle.style.cssText = which === "bundle" ? TAB_ON : TAB_OFF;
 }
 
 /** Repaints the colouring under the text, and keeps it scrolled where the text is. */
@@ -295,15 +295,15 @@ async function compile(): Promise<void> {
 function show(result: Compiled): void {
   if (result.ok) {
     complaints.replaceChildren();
-    wire.textContent = result.wire;
+    bundle.textContent = result.bundle;
     // The size rides on the tab that shows the bytes, which is where a reader
     // asks how many there are.
-    tabs.wire.textContent = `WIRE \u00b7 ${size(result.bytes)}`;
-    draw(result.wire);
+    tabs.bundle.textContent = `BUNDLE \u00b7 ${size(result.bytes)}`;
+    draw(result.bundle);
     return;
   }
-  wire.textContent = "";
-  tabs.wire.textContent = "WIRE";
+  bundle.textContent = "";
+  tabs.bundle.textContent = "BUNDLE";
   screen.replaceChildren();
   complain(result.complaints);
 }
@@ -326,7 +326,7 @@ function start(): void {
   }
   view("screen");
   tabs.screen.onclick = () => view("screen");
-  tabs.wire.onclick = () => view("wire");
+  tabs.bundle.onclick = () => view("bundle");
 
   paint();
   // The build's answer for what the bundle drew, which costs nothing to show.

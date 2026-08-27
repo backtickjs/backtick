@@ -9,7 +9,7 @@ import {
   PANEL,
   SCREEN,
   TAB_OFF,
-  WIRE,
+  BUNDLE,
 } from "../play/style.js";
 import { ink, line, mono, muted, paper } from "../theme.js";
 
@@ -69,7 +69,7 @@ export async function Playground() {
       <div style={SPLIT}>
         <div style={`${PANEL}; ${WRITING}`}>
           <div style={HEAD_ROW}>
-            <p style={HEAD}>{"01 \u00b7 WHAT YOU WRITE"}</p>
+            <p style={HEAD}>{"01 \u00b7 TRY EDITING"}</p>
             <p id="play-status" style={STATUS} />
           </div>
           <div style={WELL}>
@@ -96,20 +96,20 @@ export async function Playground() {
 
         <div style={`${PANEL}; ${DRAWING}`}>
           <div style={HEAD_ROW}>
-            <p style={HEAD}>{"02 \u00b7 WHAT THEY SEE"}</p>
+            <p style={HEAD}>{"02 \u00b7 SEE IT REDRAW"}</p>
             {/* Two views of one thing, so they share a slot and a frame. Which
                 is up is the script's to say — the drawing has no state. */}
             <div>
               <button id="play-tab-screen" style={TAB_OFF}>
                 {"SCREEN"}
               </button>
-              <button id="play-tab-wire" style={TAB_OFF}>
-                {"WIRE"}
+              <button id="play-tab-bundle" style={TAB_OFF}>
+                {"BUNDLE"}
               </button>
             </div>
           </div>
           <div id="play-screen" style={SCREEN} />
-          <pre id="play-wire" style={WIRE} />
+          <pre id="play-bundle" style={BUNDLE} />
         </div>
       </div>
     </>

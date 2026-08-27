@@ -65,7 +65,7 @@ export const HEAD =
   `margin: 0; font-family: ${mono}; font-size: 11.5px;` +
   ` letter-spacing: 0.06em; color: ${muted}`;
 
-// One frame, two fillings. The screen and the wire swap in the same slot, so
+// One frame, two fillings. The screen and the bundle swap in the same slot, so
 // every metric they share is written once: a pair that jumped by a pixel on
 // the switch would read as two places rather than two views of one thing.
 //
@@ -86,7 +86,7 @@ export const SCREEN =
   " justify-items: center; padding: 22px 11px";
 
 /** The bytes themselves, in the same frame. */
-export const WIRE =
+export const BUNDLE =
   `${FRAME}; display: block; overflow: auto; margin: 0; padding: 18px;` +
   ` font-family: ${mono}; font-size: 12px; line-height: 1.7;` +
   " word-break: break-all; white-space: pre-wrap";
@@ -94,7 +94,7 @@ export const WIRE =
 /** How each is shown again — `display` is what hides the other. */
 export const SHOWN: Readonly<Record<string, string>> = {
   screen: "grid",
-  wire: "block",
+  bundle: "block",
 };
 
 // The two views, as a control that says which one is up.
