@@ -17,9 +17,7 @@ export interface Example {
   readonly source: string;
 }
 
-export const EXAMPLE: Example = {
-  name: "A wave",
-  source: `import { cs, For, state } from "@backtickjs/core";
+const SOURCE = `import { cs, For, state } from "@backtickjs/core";
 
 export default async function Wave() {
   return cs\`{
@@ -49,5 +47,12 @@ export default async function Wave() {
     );
   }\`;
 }
-`,
+`;
+
+export const EXAMPLE: Example = {
+  name: "A wave",
+  // Trimmed, because a source file ends in a newline and a textarea should not:
+  // there it is a blank last line the caret can rest on, below the code, for
+  // nothing.
+  source: SOURCE.trimEnd(),
 };

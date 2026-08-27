@@ -2,7 +2,7 @@ import { muted } from "../theme.js";
 import { Button } from "./Button.js";
 import { REPO } from "../links.js";
 
-const HERO = "padding: 64px 0 56px";
+const HERO = "padding: 40px 0";
 
 const TYPE =
   "margin: 0; font-size: clamp(38px, 8vw, 60px); line-height: 1.05;" +

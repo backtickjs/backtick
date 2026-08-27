@@ -1,7 +1,7 @@
 import type { Answered, Asked, Ready } from "../compile/entry.js";
 import type { Compiled, Complaint } from "../compile/compile.js";
 import { highlight } from "./highlight.js";
-import { PALETTE } from "./style.js";
+import { PALETTE, SHOWN, TAB_OFF, TAB_ON } from "./style.js";
 import { line, muted } from "../theme.js";
 
 /**
@@ -15,6 +15,39 @@ import { line, muted } from "../theme.js";
 
 const FRAME = "/compile/";
 const SETTLE = 350;
+
+/**
+ * How long the working state stays up, whatever the compile took.
+ *
+ * A compile lands in about twenty milliseconds, which is faster than the eye
+ * reads a change — the sweep would flash and the figures would twitch, and the
+ * page would look like it had done nothing. So the answer is held until one
+ * pass of the sweep has finished.
+ *
+ * The reveal waits; the measurement does not. What `COMPILED IN` reports is
+ * the round trip and nothing else, so the number stays true while the state
+ * beside it is legible.
+ */
+const HOLD = 450;
+
+/**
+ * A size as a reader counts one.
+ *
+ * `KB`, never `Kb`: a lowercase `b` is a bit, and a bundle measured in those
+ * would read eight times larger than it is. Divided by a thousand rather than
+ * 1024, because that is what a browser means by the number beside a request.
+ */
+function size(count: number): string {
+  return count < 1000
+    ? `${count.toString()} B`
+    : `${(count / 1000).toFixed(1)} KB`;
+}
+
+function rest(ms: number): Promise<void> {
+  return ms <= 0
+    ? Promise.resolve()
+    : new Promise((wake) => setTimeout(wake, ms));
+}
 
 /**
  * Every example, already compiled — the build ran the same `compile` this frame
@@ -44,8 +77,26 @@ const ink = node("play-ink");
 const status = node("play-status");
 const complaints = node("play-complaints");
 const wire = node("play-wire");
-const wireHead = node("play-wire-head");
 const screen = node("play-screen");
+const sweep = node("play-sweep");
+const tabs = {
+  screen: node<HTMLButtonElement>("play-tab-screen"),
+  wire: node<HTMLButtonElement>("play-tab-wire"),
+};
+
+/**
+ * Which of the two views is up.
+ *
+ * The frame is one slot and `display` is what hides the other, so each is shown
+ * again with the value it was drawn with — a `<pre>` is not a grid and would
+ * come back laid out as one.
+ */
+function view(which: "screen" | "wire"): void {
+  screen.style.display = which === "screen" ? SHOWN["screen"]! : "none";
+  wire.style.display = which === "wire" ? SHOWN["wire"]! : "none";
+  tabs.screen.style.cssText = which === "screen" ? TAB_ON : TAB_OFF;
+  tabs.wire.style.cssText = which === "wire" ? TAB_ON : TAB_OFF;
+}
 
 /** Repaints the colouring under the text, and keeps it scrolled where the text is. */
 function paint(): void {
@@ -163,22 +214,70 @@ function lineOf(at: number): string {
   return `line ${row.toString()}`;
 }
 
+/**
+ * The only thing on the page that says work is happening.
+ *
+ * A compile is a round trip to a frame on another origin, and the first one
+ * fetches a megabyte of parser, so there is a real wait and nothing to watch
+ * through it. An indeterminate bar rather than a percentage: nothing here knows
+ * how far along a compile is.
+ *
+ * Driven from a timer rather than a keyframe, because this page ships no
+ * stylesheet and a content policy that admits no inline one.
+ */
+let sweeping: ReturnType<typeof setInterval> | undefined;
+
+// Which end the bar is at, kept across runs because the bar is.
+//
+// Held here rather than inside `working` for the reason the bug had: a run that
+// ends on the right leaves it on the right, and a fresh `false` would send it
+// to where it already is. Nothing transitions to where it already is, so the
+// bar stops moving from the second compile on. Alternating from wherever it
+// actually stands means every run travels — right to left on the next one,
+// which for a bar that knows no percentage reads the same either way.
+let far = false;
+
+function working(yes: boolean): void {
+  clearInterval(sweeping);
+  sweep.style.opacity = yes ? "1" : "0";
+  if (!yes) {
+    return;
+  }
+  const step = (): void => {
+    far = !far;
+    sweep.style.transform = far ? "translateX(257%)" : "translateX(0%)";
+  };
+  step();
+  // Only a slow compile ever reaches this — the first one, fetching the
+  // parser. A quick one is one pass and done.
+  sweeping = setInterval(step, HOLD);
+}
+
 let inFlight = 0;
 
 async function compile(): Promise<void> {
   const mine = ++inFlight;
   status.textContent =
     opening === undefined ? "fetching the compiler…" : "compiling…";
+  working(true);
   const frame = await compiler();
   if (mine !== inFlight) {
     return;
   }
   status.textContent = "compiling…";
+  // Measured around the round trip, which is what a reader is waiting on —
+  // the transform, the evaluation and the bundling all happen inside it.
+  const at = performance.now();
   const result = await ask(frame, source.value);
   // A keystroke landed while this was out. Its answer is the one that counts.
   if (mine !== inFlight) {
     return;
   }
+  await rest(HOLD - (performance.now() - at));
+  if (mine !== inFlight) {
+    return;
+  }
+  working(false);
   show(result);
 }
 
@@ -187,15 +286,15 @@ function show(result: Compiled): void {
   if (result.ok) {
     complaints.replaceChildren();
     wire.textContent = result.wire;
-    // The count lives here and only here. It is the same number the status line
-    // used to carry, and a page saying it twice is a page saying it once badly.
-    wireHead.textContent = `THE WIRE — ${result.bytes.toString()} BYTES`;
+    // The size rides on the tab that shows the bytes, which is where a reader
+    // asks how many there are.
+    tabs.wire.textContent = `WIRE \u00b7 ${size(result.bytes)}`;
     status.textContent = "";
     draw(result.wire);
     return;
   }
   wire.textContent = "";
-  wireHead.textContent = "THE WIRE";
+  tabs.wire.textContent = "WIRE";
   screen.replaceChildren();
   complain(result.complaints);
   const count = result.complaints.length;
@@ -210,8 +309,14 @@ function start(): void {
   if (source.value.trim() === "") {
     source.value = EXAMPLE.source;
   }
+  view("screen");
+  tabs.screen.onclick = () => view("screen");
+  tabs.wire.onclick = () => view("wire");
+
   paint();
   // The build's answer for what the bundle drew, which costs nothing to show.
+  // Said as "at build" rather than a number: what the build took on somebody
+  // else's machine is not what this reader is being told about.
   show(EXAMPLE.result);
 
   source.addEventListener("scroll", () => {
@@ -223,7 +328,14 @@ function start(): void {
   source.addEventListener("input", () => {
     paint();
     clearTimeout(settling);
-    settling = setTimeout(() => void compile(), SETTLE);
+    settling = setTimeout(() => {
+      // A compiler that never arrives is the one failure with nothing else to
+      // report it: the sweep would otherwise run forever.
+      compile().catch((thrown: unknown) => {
+        working(false);
+        status.textContent = String(thrown);
+      });
+    }, SETTLE);
   });
 }
 

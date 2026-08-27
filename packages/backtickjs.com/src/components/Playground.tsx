@@ -1,12 +1,14 @@
 import { EXAMPLE } from "../play/examples.js";
 import {
-  DISCLOSURE,
+  HEAD_ROW,
+  SWEEP,
+  TRACK,
   EDITOR,
   HEAD,
   INK,
   PANEL,
   SCREEN,
-  SUMMARY,
+  TAB_OFF,
   WIRE,
 } from "../play/style.js";
 import { ink, line, mono, muted, paper } from "../theme.js";
@@ -19,17 +21,23 @@ import { ink, line, mono, muted, paper } from "../theme.js";
 // less than the page until they don't, and then they wrap.
 const SPLIT = "display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch";
 
-// The editor takes what is left: 80 columns is the width the code is
-// formatted to, and the bezel only ever holds a 280px card.
-const WRITING = "flex: 1 1 420px; min-width: 0";
-const DRAWING = "flex: 0 1 360px; min-width: 0";
+// Both are capped, and the pair is centred in what is left. The code is
+// formatted to 80 columns, so an editor wider than that is empty gutter, and
+// the bezel only ever holds a 280px card.
+const WRITING = "flex: 1 1 620px; min-width: 0; max-width: 760px";
+const DRAWING = "flex: 1 1 380px; min-width: 0; max-width: 460px";
 
 // The editor is two elements in one place: a `<pre>` holding the colouring and a
 // transparent `<textarea>` over it. They share `EDITOR`, so the two can only
 // ever line up — a font or a padding written twice is a caret that drifts.
 const WELL = "display: grid; min-width: 0";
 
-const STATUS = `margin: 12px 0 0; font-family: ${mono}; font-size: 12.5px; color: ${muted}`;
+// In the editor's own header, where there was empty room and a reader is
+// already looking. It says what is happening, which is only worth reading
+// while something is.
+const STATUS =
+  `margin: 0; font-family: ${mono}; font-size: 11.5px;` +
+  ` letter-spacing: 0.04em; color: ${muted}`;
 
 const COMPLAINTS = "display: grid; gap: 6px; margin-top: 12px";
 
@@ -54,9 +62,16 @@ export async function Playground() {
 
   return (
     <>
+      <div style={TRACK}>
+        <div id="play-sweep" style={SWEEP} />
+      </div>
+
       <div style={SPLIT}>
         <div style={`${PANEL}; ${WRITING}`}>
-          <p style={HEAD}>{"01 \u00b7 WHAT YOU WROTE"}</p>
+          <div style={HEAD_ROW}>
+            <p style={HEAD}>{"01 \u00b7 WHAT YOU WRITE"}</p>
+            <p id="play-status" style={STATUS} />
+          </div>
           <div style={WELL}>
             <pre id="play-ink" style={INK} aria-hidden="true">
               <code>{first}</code>
@@ -76,25 +91,27 @@ export async function Playground() {
               {first}
             </textarea>
           </div>
-          <p id="play-status" style={STATUS} />
           <div id="play-complaints" style={COMPLAINTS} />
         </div>
 
         <div style={`${PANEL}; ${DRAWING}`}>
-          <p style={HEAD}>{"02 \u00b7 WHAT IT DRAWS"}</p>
+          <div style={HEAD_ROW}>
+            <p style={HEAD}>{"02 \u00b7 WHAT THEY SEE"}</p>
+            {/* Two views of one thing, so they share a slot and a frame. Which
+                is up is the script's to say — the drawing has no state. */}
+            <div>
+              <button id="play-tab-screen" style={TAB_OFF}>
+                {"SCREEN"}
+              </button>
+              <button id="play-tab-wire" style={TAB_OFF}>
+                {"WIRE"}
+              </button>
+            </div>
+          </div>
           <div id="play-screen" style={SCREEN} />
+          <pre id="play-wire" style={WIRE} />
         </div>
       </div>
-
-      {/* A drawing rather than something the script opens: `<details>` is in the
-          schema, so the fold works whether or not anything else on this page
-          does. */}
-      <details style={DISCLOSURE}>
-        <summary id="play-wire-head" style={SUMMARY}>
-          {"THE WIRE"}
-        </summary>
-        <pre id="play-wire" style={WIRE} />
-      </details>
     </>
   );
 }

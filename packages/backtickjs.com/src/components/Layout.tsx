@@ -13,7 +13,7 @@ import { ink, muted, sans } from "../theme.js";
 // measure of its own — `Lede`, `Note` and `Caption` each cap themselves — so
 // what grew here is the room the demo needed and nothing else.
 const SHELL =
-  "max-width: 1120px; margin: 0 auto; padding: 0 24px;" +
+  "max-width: 1200px; margin: 0 auto; padding: 0 24px;" +
   ` box-sizing: border-box; font-family: ${sans}; font-size: 17px;` +
   ` line-height: 1.6; color: ${ink}; -webkit-font-smoothing: antialiased`;
 

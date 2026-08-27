@@ -1,4 +1,4 @@
-import { ink, line, mono, muted, wash } from "../theme.js";
+import { ink, line, mono, muted, paper, wash } from "../theme.js";
 
 /**
  * What the editor and its colouring are both set in.
@@ -7,6 +7,11 @@ import { ink, line, mono, muted, wash } from "../theme.js";
  * line up only while every metric agrees, and two copies of these numbers is a
  * caret that sits half a character off the letter it is in front of.
  */
+// One corner for both panels, so the pair reads as two of the same thing. It
+// is the radius the drawn card uses, which is the most prominent one on the
+// page and the one the eye is already calibrated to.
+const RADIUS = "22px";
+
 const TYPE =
   `font-family: ${mono}; font-size: 13px; line-height: 1.7;` +
   " tab-size: 2; letter-spacing: 0";
@@ -14,7 +19,8 @@ const TYPE =
 // One height for both, and no `resize`: the two elements have to agree about
 // every metric, and a corner the reader can drag moves one of them.
 const BOX =
-  "margin: 0; padding: 16px 18px; border-radius: 10px; height: 700px;" +
+  `margin: 0; padding: 16px 18px; border-radius: ${RADIUS};` +
+  " height: 700px;" +
   " box-sizing: border-box; white-space: pre; overflow: auto;" +
   ` border: 1px solid ${line}`;
 
@@ -34,31 +40,80 @@ export const PANEL =
 
 // No rule under it: the editor and the bezel carry borders of their own, and a
 // line above each was a second edge saying the same thing.
+/** The track the sweep runs along, and the sweep. */
+/**
+ * The divider, and the only report a compile gets.
+ *
+ * At rest it is the hairline that separates the demo from what is above it. A
+ * compile runs the sweep along it, so the thing that marks the section is the
+ * thing that says work is happening — one line doing both, rather than a rule
+ * and an indicator saying it twice.
+ */
+export const TRACK =
+  `position: relative; height: 1px; overflow: hidden; margin-bottom: 30px;` +
+  ` background: ${line}`;
+
+export const SWEEP =
+  `position: absolute; inset: 0 auto 0 0; width: 28%; opacity: 0;` +
+  ` background: ${ink}; transition: transform 450ms ease-in-out,` +
+  " opacity 200ms ease";
+
+// No margin of its own: the row below owns the gap. Centring a flex item
+// centres its margin box, so a bottom margin here rides the text up and leaves
+// it sitting above the control beside it.
 export const HEAD =
-  `margin: 0 0 10px; font-family: ${mono}; font-size: 11.5px;` +
+  `margin: 0; font-family: ${mono}; font-size: 11.5px;` +
   ` letter-spacing: 0.06em; color: ${muted}`;
 
+// One frame, two fillings. The screen and the wire swap in the same slot, so
+// every metric they share is written once: a pair that jumped by a pixel on
+// the switch would read as two places rather than two views of one thing.
+//
+// A bezel, not a phone: this is drawn by the web client, and a notch would be
+// claiming a platform that has not shipped yet.
+const FRAME =
+  // No `height: 100%` beside the min: it resolved to `auto` here anyway, so
+  // the frame was always this tall — and as a percentage against a grid area
+  // inside a stretched flex item it had nothing definite to measure, which on
+  // a phone grew without stopping and took the page's scroll with it.
+  `min-height: 420px; box-sizing: border-box;` +
+  ` background: ${wash}; border: 1px solid ${line};` +
+  ` border-radius: ${RADIUS}`;
+
+/** What the bytes draw, sitting in the middle the way a screen sits in a device. */
+export const SCREEN =
+  `${FRAME}; display: grid; align-content: center;` +
+  " justify-items: center; padding: 22px 11px";
+
+/** The bytes themselves, in the same frame. */
 export const WIRE =
-  `margin: 12px 0 0; max-height: 300px; overflow: auto;` +
+  `${FRAME}; display: block; overflow: auto; margin: 0; padding: 18px;` +
   ` font-family: ${mono}; font-size: 12px; line-height: 1.7;` +
   " word-break: break-all; white-space: pre-wrap";
 
-/** The wire, folded away: it is evidence, and evidence is read once. */
-export const DISCLOSURE = `margin-top: 22px; border-top: 1px solid ${line}; padding-top: 14px`;
+/** How each is shown again — `display` is what hides the other. */
+export const SHOWN: Readonly<Record<string, string>> = {
+  screen: "grid",
+  wire: "block",
+};
 
-export const SUMMARY =
-  `cursor: pointer; font-family: ${mono}; font-size: 11.5px;` +
-  ` letter-spacing: 0.06em; color: ${muted}`;
+// The two views, as a control that says which one is up.
+const TAB =
+  `padding: 4px 11px; border: 0; border-radius: 999px; cursor: pointer;` +
+  ` font-family: ${mono}; font-size: 11px; letter-spacing: 0.06em`;
 
-// A bezel, not a phone: this is drawn by the web client, and a notch would be
-// claiming a platform that has not shipped yet.
-// No height of its own beside the editor — the row stretches them alike — and
-// the card sits in the middle of it, the way a screen sits in a device.
-export const SCREEN =
-  `display: grid; align-content: center; justify-items: center;` +
-  ` min-height: 420px; height: 100%; padding: 22px 11px;` +
-  ` box-sizing: border-box; background: ${wash}; border: 1px solid ${line};` +
-  ` border-radius: 21px`;
+export const TAB_ON = `${TAB}; background: ${ink}; color: ${paper}`;
+export const TAB_OFF = `${TAB}; background: transparent; color: ${muted}`;
+
+/**
+ * The label and the control, on one line above the frame.
+ *
+ * Both columns use it, including the one with no control: two headers built
+ * the same way are two headers that cannot drift apart.
+ */
+export const HEAD_ROW =
+  "display: flex; align-items: center; justify-content: space-between;" +
+  " gap: 12px; min-height: 26px; margin-bottom: 10px";
 
 /**
  * What the colouring paints, by what a token is.
