@@ -1,0 +1,47 @@
+cs.lift((() => {\n      → cs`{\n  
+const                   → const 
+__cs_stop               → stop
+ = cs.const(            →  = 
+cs.receiver(            → 
+clearInterval           → clearInterval
+)                       → 
+);                      → ;
+\n                      → \n  
+const                   → const 
+__cs_repeating          → repeating
+ = cs.const(            →  = 
+cs.receiver(            → 
+setInterval             → setInterval
+)                       → 
+(                       → (
+() =>                   → () => 
+0                       → 0
+,                       → , 
+1000                    → 1000
+)                       → )
+);                      → ;
+\n                      → \n  
+cs.statement(           → 
+__cs_stop               → stop
+(                       → (
+__cs_repeating          → repeating
+)                       → )
+);                      → ;
+\n                      → \n  
+cs.statement(           → 
+cs.receiver(            → 
+clearTimeout            → clearTimeout
+)                       → 
+(                       → (
+cs.receiver(            → 
+setTimeout              → setTimeout
+)                       → 
+(                       → (
+() =>                   → () => 
+0                       → 0
+,                       → , 
+1000                    → 1000
+)                       → )
+)                       → )
+);                      → ;
+\n})())                 → \n}`

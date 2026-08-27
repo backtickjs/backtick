@@ -237,7 +237,62 @@ export const globals: Builtins = {
     // here, at the one place entitled to.
     return { read, write, update } as unknown as State<typeof initial>;
   },
+
+  setTimeout(handler, timeout) {
+    const id = ++last;
+    pending.set(
+      id,
+      globalThis.setTimeout(() => {
+        // Dropped before it runs: an id that has fired is one nothing has left
+        // to cancel, and holding it would be a leak that grows by one per timer
+        // for as long as the page is open.
+        pending.delete(id);
+        handler();
+      }, timeout),
+    );
+    return id;
+  },
+  clearTimeout: cancel,
+
+  // Kept, where a timeout drops itself: a tick that fired is a tick before the
+  // next one, and the id stays good until something cancels it.
+  setInterval(handler, timeout) {
+    const id = ++last;
+    pending.set(id, globalThis.setInterval(handler, timeout));
+    return id;
+  },
+  clearInterval: cancel,
 };
+
+// The handles, kept beside the ids rather than handed out as one.
+//
+// The schema says a script is handed a number, and a host is entitled to answer
+// its own `setTimeout` with whatever it likes — Node answers with an object. So
+// the number a script sees is this table's, and what the host gave back stays
+// in here where nothing can reach it.
+const pending = new Map<
+  number,
+  ReturnType<typeof globalThis.setTimeout | typeof globalThis.setInterval>
+>();
+let last = 0;
+
+// One series of ids whichever call made them, so either `clear` cancels either
+// kind — the same as on the web, where a script that had to match the pair up
+// would be keeping a book the platform does not.
+function cancel(id: number): null {
+  const held = pending.get(id);
+  if (held === undefined) {
+    // An id that already ran, or was never one, is not an error: the platform
+    // says so, and a script that cancels twice is a script being careful.
+    return null;
+  }
+  // One operation in a browser, and this holds both kinds of handle, so the
+  // two names reach the same line.
+  globalThis.clearTimeout(held as ReturnType<typeof globalThis.setTimeout>);
+  globalThis.clearInterval(held as ReturnType<typeof globalThis.setInterval>);
+  pending.delete(id);
+  return null;
+}
 
 // Every number in this language is finite. `NaN` and `Infinity` are not values
 // a script can write — neither name is in scope — so they are not values a

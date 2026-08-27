@@ -1,0 +1,8 @@
+#f0 = () => {
+  const stop = clearInterval;
+  const repeating = setInterval(() => 0, 1000);
+  stop(repeating);
+  clearTimeout(setTimeout(() => 0, 1000));
+}
+
+root = #f0()

@@ -9,6 +9,7 @@ import type {
   StringConstructor,
 } from "./receivers.generated.js";
 import type { ClientElement } from "@backtickjs/ui-schema";
+import type { Builtins } from "@backtickjs/language-schema";
 import type { ClientFunction } from "@backtickjs/language-schema";
 import type { ClientValue } from "@backtickjs/language-schema";
 
@@ -51,7 +52,11 @@ export type ClientGlobal =
   | typeof globalThis.Array
   | typeof globalThis.Math
   | typeof globalThis.Number
-  | typeof globalThis.String;
+  | typeof globalThis.String
+  | typeof globalThis.setTimeout
+  | typeof globalThis.setInterval
+  | typeof globalThis.clearTimeout
+  | typeof globalThis.clearInterval;
 
 // What a client view may be indexed by: an array by number and nothing else,
 // anything else by the keys its own type names. Naming the array case rather
@@ -73,12 +78,20 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
         ? NumberConstructor
         : T extends typeof globalThis.String
           ? StringConstructor
-          : T extends string | number | boolean | ClientValue[]
-            ? Autoboxed<T>
-            : T extends ClientElement
-              ? {}
-              : T extends ClientFunction
-                ? T
-                : T extends object
-                  ? ReadMembers<T>
-                  : T;
+          : T extends typeof globalThis.setTimeout
+            ? Builtins["setTimeout"]
+            : T extends typeof globalThis.setInterval
+              ? Builtins["setInterval"]
+              : T extends typeof globalThis.clearTimeout
+                ? Builtins["clearTimeout"]
+                : T extends typeof globalThis.clearInterval
+                  ? Builtins["clearInterval"]
+                  : T extends string | number | boolean | ClientValue[]
+                    ? Autoboxed<T>
+                    : T extends ClientElement
+                      ? {}
+                      : T extends ClientFunction
+                        ? T
+                        : T extends object
+                          ? ReadMembers<T>
+                          : T;

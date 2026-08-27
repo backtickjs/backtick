@@ -17,11 +17,30 @@ import { isFragmentTag } from "./isFragmentTag.js";
 // never as a name recognised here. What may be read off one of these is not
 // this question: `Receiver` narrows the members, from the schema.
 //
-// A namespace is only the front of a name: a script writes `Math.floor`, which
-// is a single name the client answers, and there is no `Math` for a read to
-// yield — so an access folds into the whole name below, and the front standing
-// alone is an error.
-const namespaces = new Set(["Array", "Math", "Number", "String"]);
+// Written in the shape `schema/src/generators/builtins.ts` writes its own: a
+// trailing dot is a front, and a name without one is already whole. The two are
+// one list read for different purposes — this one says what a script may write,
+// that one says what needs a value to import — and keeping them the same shape
+// is what makes a name added to one visibly missing from the other.
+//
+// A front is only the front of a name: a script writes `Math.floor`, which is a
+// single name the client answers, and there is no `Math` for a read to yield —
+// so an access folds into the whole name below, and the front standing alone is
+// an error. A whole name has nothing to fold in and reads as a value.
+//
+// The four kinds a member is read off — `string.`, `array.` and the rest — are
+// not here: those are reached off a value rather than written, so they are
+// `receivers.ts`'s and never an identifier this resolves.
+const language = new Set([
+  "Array.",
+  "Math.",
+  "Number.",
+  "String.",
+  "clearInterval",
+  "clearTimeout",
+  "setInterval",
+  "setTimeout",
+]);
 
 export interface RewriteState {
   script: ClientScript;
@@ -50,7 +69,7 @@ function namespaceOf(
 ): string | undefined {
   return ts.isIdentifier(node) &&
     !state.bindings.has(node) &&
-    namespaces.has(node.text)
+    language.has(`${node.text}.`)
     ? node.text
     : undefined;
 }
@@ -868,13 +887,13 @@ function rewriteNodeImpl(
     // is written down rather than inherited from whatever the host's own
     // happens to be.
     //
-    // A namespace reaching here has not been taken by an access, and there is
+    // A front reaching here has not been taken by an access, and there is
     // nothing for it to be: the name the client answers is the whole of
     // `Math.floor`, so a front on its own reads no value the format can carry.
     // The virtual code still names the host's lib plainly — narrowing it is
-    // `Receiver`'s job, the same as for a string or an array — so the one error
-    // stands alone.
-    if (!state.bindings.has(node) && namespaces.has(node.text)) {
+    // `Receiver`'s job, where the access reads it — so the one error stands
+    // alone.
+    if (!state.bindings.has(node) && language.has(`${node.text}.`)) {
       if (!isNamespaceFront(ts, node)) {
         state.errors.set(
           node,
@@ -882,8 +901,28 @@ function rewriteNodeImpl(
             "only write it followed by a member.",
         );
       }
-      // Named plainly, as the lib global it is; narrowing it is `Receiver`'s.
+      // Named plainly, as the lib global it is; narrowing it is the access's.
       const virtual = ts.factory.createIdentifier(node.text);
+      state.mappings.set(virtual, node);
+      return {
+        virtual,
+        runtime: astNode(ts, SyntaxKind.Builtin, {
+          loc: loc(node),
+          name: ts.factory.createStringLiteral(node.text),
+        }),
+      };
+    }
+
+    // The same exception said for a whole name rather than a front. Nothing
+    // folds in below one, so it needs no check that something did — and it has
+    // no access to be narrowed at either, which is why this one carries
+    // `cs.receiver` itself. Without it a script typechecks against whichever
+    // timer the project's lib happens to declare, and node's answers with a
+    // `Timeout`, which is no value this format can carry.
+    if (!state.bindings.has(node) && language.has(node.text)) {
+      const named = ts.factory.createIdentifier(node.text);
+      state.mappings.set(named, node);
+      const virtual = call(ts, "cs", "receiver", [named]);
       state.mappings.set(virtual, node);
       return {
         virtual,

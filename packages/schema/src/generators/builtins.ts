@@ -23,12 +23,14 @@ import type { TNode } from "../TNode.js";
 // both run from the one command.
 
 /**
- * The front of every name the language provides itself, dot and all.
+ * Every name the host language provides, which a script writes rather than
+ * imports.
  *
- * A script reaches one by writing it — `Math.floor`, `"x".trim()` — so there is
- * no value for an app to import it through, and nothing here to write. Four
- * stand for a place statics hang off and four for a kind of value a member is
- * read off, which is the whole of what a script may write bare.
+ * A script reaches one by writing it — `Math.floor`, `"x".trim()`,
+ * `setTimeout(…)` — so there is no value for an app to import it through, and
+ * nothing here to write. Eight are fronts, dot and all: four a place statics
+ * hang off and four a kind of value a member is read off. The rest are whole
+ * names, which need no member to be one.
  *
  * Written out rather than read off the dot, because the two are not the same
  * question. A name is skipped here because the language answers for it, and a
@@ -36,10 +38,11 @@ import type { TNode } from "../TNode.js";
  * import, since there is no identifier to import it as. Inferring from the dot
  * would skip that one silently and call it a working schema.
  *
- * Kept by hand, and kept with the language: `rewriteNode.ts` names the four
- * a script writes bare and `receivers.ts` the four a member is read off, and a
- * front added to either is added here. One this misses throws below rather than
- * generating something wrong.
+ * Kept by hand, and kept with the language: `rewriteNode.ts` holds the same
+ * list in the same shape — the fronts and whole names a script writes bare —
+ * and `receivers.ts` the four a member is read off. A name added to either is
+ * added here. One this misses is written as a value to splice, for a name no
+ * script splices.
  */
 const language: readonly string[] = [
   "Array.",
@@ -50,6 +53,10 @@ const language: readonly string[] = [
   "boolean.",
   "number.",
   "string.",
+  "clearInterval",
+  "clearTimeout",
+  "setInterval",
+  "setTimeout",
 ];
 
 /** The values a script splices to reach the builtins a schema declares. */
