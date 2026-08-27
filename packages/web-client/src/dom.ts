@@ -1,16 +1,27 @@
 import type { RendererOptions } from "@backtickjs/js-interpreter";
 
+// SVG's namespace. `createElement` cannot reach it: an element made there
+// draws, and one made with the same tag in HTML's namespace is an
+// `HTMLUnknownElement` that parses, inserts, and shows nothing.
+const SVG = "http://www.w3.org/2000/svg";
+
 // The DOM, as the ten operations a host answers. Nine are the DOM's own words;
 // `setProperty` is the only decision here, because what a prop means is ours.
 export const dom: RendererOptions<Node> = {
-  createElement: (tag) => document.createElement(tag),
+  // An id carrying a namespace is this target's own vocabulary, which the
+  // format leaves to it: `svg:path` is a path in SVG's namespace, and an id
+  // with no prefix is HTML's. Nothing else in a bundle says which language a
+  // tag is from.
+  createElement: (tag) =>
+    tag.startsWith("svg:")
+      ? document.createElementNS(SVG, tag.slice(4))
+      : document.createElement(tag),
   createTextNode: (value) => document.createTextNode(value),
   replaceText: (node, value) => {
     node.nodeValue = value;
   },
   isTextNode: (node) => node.nodeType === 3,
-  setProperty: (node, name, value) =>
-    attribute(node as HTMLElement, name, value),
+  setProperty: (node, name, value) => attribute(node as Element, name, value),
   insertNode: (parent, node, anchor) => {
     parent.insertBefore(node, anchor ?? null);
   },
@@ -29,7 +40,7 @@ const listening = new WeakMap<Node, Map<string, (event: Event) => void>>();
 
 // A registration for a handler, an attribute for anything a tag can carry, and
 // nothing for an object — this target has no attribute for one.
-function attribute(node: HTMLElement, prop: string, value: unknown): void {
+function attribute(node: Element, prop: string, value: unknown): void {
   if (typeof value === "function") {
     if (!prop.startsWith("on")) {
       return;
@@ -50,7 +61,11 @@ function attribute(node: HTMLElement, prop: string, value: unknown): void {
   if (typeof value === "object" && value !== null) {
     return;
   }
-  const name = prop.toLowerCase();
+  // HTML attribute names are case-insensitive, so lowercasing is what makes a
+  // prop and an attribute the same name. SVG's are case-sensitive — `viewBox`
+  // is not `viewbox`, and `gradientTransform` is not `gradienttransform` — so
+  // in that namespace the same line is what breaks them.
+  const name = node.namespaceURI === SVG ? prop : prop.toLowerCase();
   if (value === null || value === undefined) {
     node.removeAttribute(name);
     return;
@@ -60,7 +75,7 @@ function attribute(node: HTMLElement, prop: string, value: unknown): void {
   // difference between a page that works under a content policy and one that
   // doesn't.
   if (name === "style") {
-    node.style.cssText = String(value);
+    (node as HTMLElement | SVGElement).style.cssText = String(value);
     return;
   }
   // A boolean attribute is there or it isn't — `disabled="false"` disables. ARIA

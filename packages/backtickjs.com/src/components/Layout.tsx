@@ -1,6 +1,6 @@
 import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
-import { logoUrl } from "../files.js";
 import { REPO } from "../links.js";
+import { Logo } from "./Logo.js";
 
 // The chrome every page is drawn in. A server component: it runs while
 // bundling and never reaches the client, so what it decides is settled in the
@@ -16,9 +16,7 @@ export async function Layout({
     <div class="shell">
       <header class="top">
         <a class="mark" href="/">
-          {/* Sized here as well as in CSS: the two attributes are what reserves
-              the space before the file arrives. */}
-          <img src={logoUrl} alt="Backtick" width={152} height={21} />
+          <Logo />
         </a>
         <nav class="top-nav">
           <a href={REPO}>GitHub</a>

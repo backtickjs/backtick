@@ -45,29 +45,18 @@ a {
   color: inherit;
 }
 
-/* The wordmark, as the file in \`assets/\`. A flex anchor so it is exactly the
-   image, with no line box around it to leave descender space.
-
-   The width is the size; the height follows from the file's 279x38. Whatever
-   it is set to, \`Layout.tsx\` carries the same pair as attributes, so the space
-   reserved before the file arrives is the space it takes. */
+/* The wordmark, drawn from the bundle rather than fetched. \`color\` is what
+   paints it: the art is \`currentColor\`, so the mark follows the theme's ink
+   the way text does, and dark mode needs no second file and no filter. */
 .mark {
   display: flex;
+  color: var(--ink);
 }
 
-.mark img {
+.mark-art {
   display: block;
   width: 152px;
   height: auto;
-}
-
-/* The mark is one colour on transparent, so inverting it is exact rather than
-   approximate, and one file answers both themes. A mark with any colour in it
-   would want a second file instead. */
-@media (prefers-color-scheme: dark) {
-  .mark img {
-    filter: invert(1);
-  }
 }
 
 .top {
