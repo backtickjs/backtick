@@ -1,7 +1,31 @@
 import { cs, For, state } from "@backtickjs/core";
 
+const DEMO =
+  "display: grid; gap: 20px; padding: 28px; justify-items: start;" +
+  " background: var(--wash); border: 1px solid var(--line);" +
+  " border-radius: 12px";
+
+const TALLY =
+  "margin: 0; font-size: 46px; font-weight: 700; line-height: 1;" +
+  " letter-spacing: -0.03em; font-variant-numeric: tabular-nums";
+
+const ROW = "display: flex; flex-wrap: wrap; gap: 10px; align-items: center";
+
+const KEY =
+  "padding: 8px 16px; border-radius: 8px; font-family: var(--mono);" +
+  " font-size: 14px; cursor: pointer; border: 1px solid ";
+
+// Spliced whole rather than assembled in the script: the server knows both
+// spellings, so what crosses is two strings and a choice, not the concatenation
+// that would make them.
+const KEY_OFF =
+  KEY + "var(--line); background: var(--paper); color: var(--ink)";
+const KEY_ON = KEY + "var(--ink); background: var(--ink); color: var(--paper)";
+
+const LABEL = "font-size: 14px; color: var(--muted)";
+
 // The one interactive thing on the page, and the one thing on it that ships as
-// a bundle. `start` is a server value: the script below never receives a number
+// a script. `start` is a server value: the script below never receives a number
 // to read, it is compiled with this one already in it.
 export async function Counter({ start }: { start: number }) {
   return cs`{
@@ -13,24 +37,24 @@ export async function Counter({ start }: { start: number }) {
     };
 
     return (
-      <div class="demo">
-        <p class="tally">{count.read()}</p>
+      <div style={$DEMO}>
+        <p style={$TALLY}>{count.read()}</p>
 
-        <div class="row">
-          <button class="key" onclick={() => nudge(-1)}>
+        <div style={$ROW}>
+          <button style={$KEY_OFF} onclick={() => nudge(-1)}>
             {"−"}
           </button>
-          <button class="key" onclick={() => nudge(1)}>
+          <button style={$KEY_OFF} onclick={() => nudge(1)}>
             {"+"}
           </button>
         </div>
 
-        <div class="row">
-          <span class="label">step</span>
+        <div style={$ROW}>
+          <span style={$LABEL}>step</span>
           <For each={[1, 5, 10]}>
             {(size: number) => (
               <button
-                class={step.read() === size ? "key key-on" : "key"}
+                style={step.read() === size ? $KEY_ON : $KEY_OFF}
                 onclick={() => step.write(size)}
               >
                 {size}

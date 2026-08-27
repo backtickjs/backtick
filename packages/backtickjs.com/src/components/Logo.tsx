@@ -1,8 +1,7 @@
 export async function Logo() {
   return (
     <svg:svg
-      width="279"
-      height="38"
+      style="display: block; width: 152px; height: auto"
       viewBox="0 0 279 38"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

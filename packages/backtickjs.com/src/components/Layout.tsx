@@ -2,6 +2,21 @@ import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
 import { REPO } from "../links.js";
 import { Logo } from "./Logo.js";
 
+const SHELL =
+  "max-width: 820px; margin: 0 auto; padding: 0 24px;" +
+  " box-sizing: border-box";
+
+const TOP =
+  "display: flex; align-items: center; justify-content: space-between;" +
+  " gap: 24px; padding: 28px 0";
+
+const NAV = "display: flex; gap: 20px; font-size: 15px; color: var(--muted)";
+
+const FOOT =
+  "display: flex; flex-wrap: wrap; justify-content: space-between;" +
+  " gap: 8px 20px; padding: 40px 0 64px;" +
+  " border-top: 1px solid var(--line); font-size: 14px; color: var(--muted)";
+
 // The chrome every page is drawn in. A server component: it runs while
 // bundling and never reaches the client, so what it decides is settled in the
 // bundle rather than asked again there.
@@ -13,21 +28,25 @@ export async function Layout({
   children: NonNullable<FragmentProps["children"]>;
 }) {
   return (
-    <div class="shell">
-      <header class="top">
-        <a class="mark" href="/">
+    <div style={SHELL}>
+      <header style={TOP}>
+        <a href="/" style="display: flex; color: var(--ink)">
           <Logo />
         </a>
-        <nav class="top-nav">
-          <a href={REPO}>GitHub</a>
+        <nav style={NAV}>
+          <a href={REPO} style="color: inherit">
+            GitHub
+          </a>
         </nav>
       </header>
 
       <main>{children}</main>
 
-      <footer>
+      <footer style={FOOT}>
         <span>Built with Backtick. This page is one bundle.</span>
-        <a href={REPO}>github.com/trybacktick/backtick</a>
+        <a href={REPO} style="color: inherit">
+          github.com/trybacktick/backtick
+        </a>
       </footer>
     </div>
   );
