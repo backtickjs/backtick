@@ -1,10 +1,11 @@
 import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
+import { line, muted } from "../theme.js";
 
-const RULE = "padding: 40px 0; border-top: 1px solid var(--line)";
+const RULE = `padding: 40px 0; border-top: 1px solid ${line}`;
 
 const EYEBROW =
   "margin: 0 0 8px; font-size: 13px; font-weight: 600;" +
-  " letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted)";
+  ` letter-spacing: 0.12em; text-transform: uppercase; color: ${muted}`;
 
 // A titled band with a rule above it. The title is small caps rather than a
 // heading's size, so the page reads as one column with markers down it.

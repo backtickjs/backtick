@@ -1,6 +1,7 @@
 import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
 import { REPO } from "../links.js";
 import { Logo } from "./Logo.js";
+import { ink, line, muted } from "../theme.js";
 
 const SHELL =
   "max-width: 820px; margin: 0 auto; padding: 0 24px;" +
@@ -10,12 +11,12 @@ const TOP =
   "display: flex; align-items: center; justify-content: space-between;" +
   " gap: 24px; padding: 28px 0";
 
-const NAV = "display: flex; gap: 20px; font-size: 15px; color: var(--muted)";
+const NAV = `display: flex; gap: 20px; font-size: 15px; color: ${muted}`;
 
 const FOOT =
   "display: flex; flex-wrap: wrap; justify-content: space-between;" +
   " gap: 8px 20px; padding: 40px 0 64px;" +
-  " border-top: 1px solid var(--line); font-size: 14px; color: var(--muted)";
+  ` border-top: 1px solid ${line}; font-size: 14px; color: ${muted}`;
 
 // The chrome every page is drawn in. A server component: it runs while
 // bundling and never reaches the client, so what it decides is settled in the
@@ -30,7 +31,7 @@ export async function Layout({
   return (
     <div style={SHELL}>
       <header style={TOP}>
-        <a href="/" style="display: flex; color: var(--ink)">
+        <a href="/" style={`display: flex; color: ${ink}`}>
           <Logo />
         </a>
         <nav style={NAV}>

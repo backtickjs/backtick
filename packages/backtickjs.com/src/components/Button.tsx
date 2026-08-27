@@ -1,8 +1,9 @@
 import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
+import { ink, paper } from "../theme.js";
 
 const BASE =
   "display: inline-block; padding: 11px 20px; border-radius: 999px;" +
-  " border: 1px solid var(--ink); font-size: 15px; font-weight: 500;" +
+  ` border: 1px solid ${ink}; font-size: 15px; font-weight: 500;` +
   " text-decoration: none";
 
 // Filled or outlined, which is the only thing a caller decides — a page with
@@ -21,8 +22,8 @@ export async function Button({
       href={href}
       style={
         solid === true
-          ? BASE + "; background: var(--ink); color: var(--paper)"
-          : BASE + "; color: var(--ink)"
+          ? BASE + `; background: ${ink}; color: ${paper}`
+          : BASE + `; color: ${ink}`
       }
     >
       {children}

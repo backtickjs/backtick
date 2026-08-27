@@ -1,25 +1,17 @@
 import { clientUrl } from "./files.js";
-
-const PALETTE =
-  "--ink: light-dark(#0e0e10, #fafafa);" +
-  " --paper: light-dark(#ffffff, #0e0e10);" +
-  " --muted: light-dark(#71717a, #a1a1aa);" +
-  " --line: light-dark(#e4e4e7, #27272a);" +
-  " --wash: light-dark(#fafafa, #161618);" +
-  // Single quotes inside, not double: this string is written into a
-  // `style="..."` attribute, and a double quote in it ends the attribute
-  // there. CSS reads either.
-  " --sans: 'Helvetica Neue', Helvetica, Inter, system-ui, sans-serif;" +
-  " --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace";
+import { ink, muted, paper, sans } from "./theme.js";
 
 // `color-scheme` is what makes `light-dark()` mean anything, and it inherits —
 // so declaring it here is what lets every component pick a colour for both
-// themes from an inline style, where a media query cannot go.
+// themes from a value written at build time, where a media query cannot go.
+//
+// The rest is what a bundle cannot reach: the body is not drawn by one, so its
+// margin and the canvas behind the page have to be said here.
 const BODY =
-  "color-scheme: light dark; margin: 0;" +
-  " background: var(--paper); color: var(--ink);" +
-  " font-family: var(--sans); font-size: 17px; line-height: 1.6;" +
-  " -webkit-font-smoothing: antialiased";
+  `color-scheme: light dark; margin: 0;` +
+  ` background: ${paper}; color: ${ink};` +
+  ` font-family: ${sans}; font-size: 17px; line-height: 1.6;` +
+  ` -webkit-font-smoothing: antialiased`;
 
 /**
  * The document a page is drawn into: a head, and a body with nothing in it.
@@ -66,11 +58,11 @@ export function shell({
     `<meta property="og:description" content="${description}">` +
     `<meta property="og:url" content="https://backtickjs.com${path}">` +
     `<script defer src="${clientUrl}"></script>` +
-    `</head><body style="${PALETTE}; ${BODY}">` +
+    `</head><body style="${BODY}">` +
     // Stays where it is: `insert` draws after what the body already holds, and
     // a `<noscript>` shows only when there is nothing to draw it.
     `<noscript><p style="max-width: 34em; margin: 48px auto; padding: 0 24px;` +
-    ` color: var(--muted)">This page is a Backtick bundle, drawn by a script.` +
+    ` color: ${muted}">This page is a Backtick bundle, drawn by a script.` +
     ` With scripting off there is nothing to draw it with.</p></noscript>` +
     `</body></html>`
   );

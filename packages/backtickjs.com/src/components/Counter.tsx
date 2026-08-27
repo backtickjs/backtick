@@ -1,8 +1,9 @@
 import { cs, For, state } from "@backtickjs/core";
+import { ink, line, mono, muted, paper, wash } from "../theme.js";
 
 const DEMO =
   "display: grid; gap: 20px; padding: 28px; justify-items: start;" +
-  " background: var(--wash); border: 1px solid var(--line);" +
+  ` background: ${wash}; border: 1px solid ${line};` +
   " border-radius: 12px";
 
 const TALLY =
@@ -12,17 +13,16 @@ const TALLY =
 const ROW = "display: flex; flex-wrap: wrap; gap: 10px; align-items: center";
 
 const KEY =
-  "padding: 8px 16px; border-radius: 8px; font-family: var(--mono);" +
+  `padding: 8px 16px; border-radius: 8px; font-family: ${mono};` +
   " font-size: 14px; cursor: pointer; border: 1px solid ";
 
 // Spliced whole rather than assembled in the script: the server knows both
 // spellings, so what crosses is two strings and a choice, not the concatenation
 // that would make them.
-const KEY_OFF =
-  KEY + "var(--line); background: var(--paper); color: var(--ink)";
-const KEY_ON = KEY + "var(--ink); background: var(--ink); color: var(--paper)";
+const KEY_OFF = KEY + `${line}; background: ${paper}; color: ${ink}`;
+const KEY_ON = KEY + `${ink}; background: ${ink}; color: ${paper}`;
 
-const LABEL = "font-size: 14px; color: var(--muted)";
+const LABEL = `font-size: 14px; color: ${muted}`;
 
 // The one interactive thing on the page, and the one thing on it that ships as
 // a script. `start` is a server value: the script below never receives a number

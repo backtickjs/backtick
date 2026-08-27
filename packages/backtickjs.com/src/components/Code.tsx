@@ -1,7 +1,8 @@
+import { line, mono, wash } from "../theme.js";
 const BLOCK =
   "margin: 0; padding: 18px 20px; overflow-x: auto;" +
-  " background: var(--wash); border: 1px solid var(--line);" +
-  " border-radius: 10px; font-family: var(--mono); font-size: 13.5px;" +
+  ` background: ${wash}; border: 1px solid ${line};` +
+  ` border-radius: 10px; font-family: ${mono}; font-size: 13.5px;` +
   " line-height: 1.65; tab-size: 2";
 
 // A listing. Its own component so every page spells one the same way, and

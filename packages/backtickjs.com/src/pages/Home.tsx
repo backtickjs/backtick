@@ -8,6 +8,7 @@ import { Lede } from "../components/Lede.js";
 import { Section } from "../components/Section.js";
 import { Step, Steps } from "../components/Steps.js";
 import { REPO } from "../links.js";
+import { muted } from "../theme.js";
 
 const HERO = "padding: 64px 0 56px";
 
@@ -15,8 +16,7 @@ const HEADLINE =
   "margin: 0; font-size: clamp(38px, 8vw, 60px); line-height: 1.05;" +
   " letter-spacing: -0.035em; font-weight: 700";
 
-const STANDFIRST =
-  "margin: 24px 0 0; max-width: 34em; font-size: 19px; color: var(--muted)";
+const STANDFIRST = `margin: 24px 0 0; max-width: 34em; font-size: 19px; color: ${muted}`;
 
 const ACTIONS = "display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px";
 
