@@ -1,0 +1,38 @@
+{
+  "name": "@backtickjs/playground",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "An editor beside what it draws, for any page that wants one",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./build": {
+      "default": "./build.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tspc --noCheck --declaration",
+    "typecheck": "backtick-tsc --noEmit",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtickjs/compiler": "workspace:*",
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*",
+    "esbuild": "^0.25.0",
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "@backtickjs/tsc": "workspace:*",
+    "@backtickjs/tspatch-plugin": "workspace:*",
+    "@types/node": "^25.9.1",
+    "prettier": "^3.6.2",
+    "ts-patch": "^4.0.1"
+  }
+}

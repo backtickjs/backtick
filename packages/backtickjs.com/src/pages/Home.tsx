@@ -1,5 +1,6 @@
 import { Hero } from "../components/Hero.js";
-import { Playground } from "../components/Playground.js";
+import { Playground } from "@backtickjs/playground";
+import { EXAMPLE } from "../play/examples.js";
 
 export async function Home() {
   return (
@@ -16,7 +17,7 @@ export async function Home() {
           divider and the only thing that reports a compile, so a second line
           here would be the same line drawn twice. */}
       <section id="try" style="padding: 28px 0 68px">
-        <Playground />
+        <Playground example={EXAMPLE} />
       </section>
     </>
   );

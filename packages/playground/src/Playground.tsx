@@ -1,4 +1,4 @@
-import { EXAMPLE } from "../play/examples.js";
+import type { Source } from "./Source.js";
 import {
   HEAD_ROW,
   DEVICE,
@@ -10,8 +10,8 @@ import {
   SCREEN,
   TAB_OFF,
   BUNDLE,
-} from "../play/style.js";
-import { ink, line, mono, muted, paper } from "../theme.js";
+} from "./style.js";
+import { ink, line, mono, muted, paper } from "./theme.js";
 
 // The editor beside what it draws, which is the pairing that matters: a reader
 // changes a line and looks right, not down.
@@ -57,8 +57,8 @@ const COMPLAINTS = "display: grid; gap: 6px; margin-top: 12px";
  * costs no compiler and no megabyte, and the reader decides when to spend one by
  * typing.
  */
-export async function Playground() {
-  const first = EXAMPLE.source;
+export async function Playground({ example }: { example: Source }) {
+  const first = example.source;
 
   return (
     <>

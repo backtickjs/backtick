@@ -181,6 +181,9 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      '@backtickjs/playground':
+        specifier: workspace:*
+        version: link:../playground
       '@backtickjs/tspatch-plugin':
         specifier: workspace:*
         version: link:../tspatch-plugin
@@ -482,6 +485,40 @@ importers:
       vscode-tmgrammar-test:
         specifier: ^0.1.3
         version: 0.1.3
+
+  packages/playground:
+    dependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../web-sdk
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@backtickjs/tsc':
+        specifier: workspace:*
+        version: link:../language-tools/tsc
+      '@backtickjs/tspatch-plugin':
+        specifier: workspace:*
+        version: link:../tspatch-plugin
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      ts-patch:
+        specifier: ^4.0.1
+        version: 4.0.1
 
   packages/prettier-plugin:
     devDependencies:

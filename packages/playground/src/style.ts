@@ -1,4 +1,4 @@
-import { ink, line, mono, muted, paper, wash } from "../theme.js";
+import { ink, line, mono, muted, paper, wash } from "./theme.js";
 
 /**
  * What the editor and its colouring are both set in.

@@ -1,7 +1,7 @@
 import type { Answered, Asked, Ready } from "../compile/entry.js";
 import type { Compiled, Complaint } from "../compile/compile.js";
-import { highlight } from "./highlight.js";
-import { PALETTE, SHOWN, TAB_OFF, TAB_ON } from "./style.js";
+import { highlight } from "../highlight.js";
+import { PALETTE, SHOWN, TAB_OFF, TAB_ON } from "../style.js";
 import { line, muted } from "../theme.js";
 
 /**
