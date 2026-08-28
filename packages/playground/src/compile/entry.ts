@@ -17,40 +17,27 @@ import { compile, type Compiled, type Host } from "./compile.js";
  * in this frame silently never runs.
  */
 
-// Written by the document, because the document is what knows where the build
-// put things.
-declare const BACKTICK_TYPESCRIPT_URL: string;
-
-// A megabyte, asked for on the first compile rather than on load: a reader who
-// opens the page and types nothing pays for the harness and not for the parser.
+// The parser, loaded by the document beside this script and deferred like it.
 //
-// A classic script for the reason above, and because that is what TypeScript
-// ships anyway: `lib/typescript.js` closes over a `module` shim and leaves `ts`
-// on the global. Every attempt to make it an ES module instead goes through its
-// `browser` field, which maps `os` to nothing, and it dies reading
-// `os.platform()` before it has compiled anything.
-let loading: Promise<typeof import("typescript")> | undefined;
-
-function typescript(): Promise<typeof import("typescript")> {
-  loading ??= new Promise((resolve, reject) => {
-    const tag = document.createElement("script");
-    tag.src = BACKTICK_TYPESCRIPT_URL;
-    tag.onload = () => {
-      const held = (globalThis as { ts?: typeof import("typescript") }).ts;
-      if (held === undefined) {
-        reject(new Error("the parser loaded and left no `ts` behind"));
-        return;
-      }
-      resolve(held);
-    };
-    tag.onerror = () => reject(new Error("the parser did not load"));
-    document.head.append(tag);
-  });
-  return loading;
+// A classic script because that is what TypeScript ships: `typescript.js`
+// closes over a `module` shim and leaves `ts` on the global. Every attempt to
+// make it an ES module instead goes through its `browser` field, which maps
+// `os` to nothing, and it dies reading `os.platform()` before it has compiled
+// anything.
+//
+// Deferred scripts run in the order the document writes them, so by the time
+// anything here runs the parser is already on the global — which is why this
+// reads one rather than fetching it.
+function typescript(): typeof import("typescript") {
+  const held = (globalThis as { ts?: typeof import("typescript") }).ts;
+  if (held === undefined) {
+    throw new Error("the parser did not load");
+  }
+  return held;
 }
 
-export async function host(): Promise<Host> {
-  return { typescript: await typescript() };
+export function host(): Host {
+  return { typescript: typescript() };
 }
 
 export interface Asked {
@@ -88,7 +75,7 @@ addEventListener("message", (event: MessageEvent) => {
 
 async function answer(source: string): Promise<Compiled> {
   try {
-    return await compile(source, await host());
+    return await compile(source, host());
   } catch (thrown: unknown) {
     // What the reader wrote threw while it ran, or the parser never arrived.
     // Either way it is something to say about this source rather than a broken

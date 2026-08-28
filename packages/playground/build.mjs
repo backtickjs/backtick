@@ -24,9 +24,26 @@ const PUBLIC = "/playground/";
 const FRAME = `${PUBLIC}compile/`;
 
 const here = fileURLToPath(new URL(".", import.meta.url));
-const TYPESCRIPT = createRequire(import.meta.url).resolve(
-  "typescript/lib/typescript.js",
-);
+
+/**
+ * The parser, from a CDN rather than from here.
+ *
+ * Pinned to the version this package builds against, so what compiles a
+ * reader's source is what the repository compiled its own. `.min.js` is not a
+ * file TypeScript ships — jsDelivr makes it on request — which is why it is
+ * that CDN by name and not a choice between equals: unpkg answers 404 for this
+ * path. The minified answer is 950 KB over the wire where the file in the
+ * package is 1600 KB.
+ *
+ * No `integrity`, and that is a trade rather than an oversight: the bytes are
+ * made by the CDN, so a hash for them can only be got by fetching one, and a
+ * build that reaches the network to build is worse than this. The frame that
+ * loads it is sandboxed onto an origin of its own and reaches nothing of the
+ * page's.
+ */
+const TYPESCRIPT_URL = `https://cdn.jsdelivr.net/npm/typescript@${
+  createRequire(import.meta.url)("typescript/package.json").version
+}/lib/typescript.min.js`;
 
 /** A name carrying the hash of what is at it, so nothing is ever stale. */
 function named(name, source) {
@@ -48,26 +65,9 @@ async function bundled(contents, options = {}) {
   return outputFiles[0].text;
 }
 
-// TypeScript is minified but not bundled, and loaded as a classic script.
-// Bundling it goes through its `browser` field, which maps `os` to nothing and
-// leaves the file reading `os.platform()` at load — the error is
-// `c.platform is not a function`, and it happens before anything is compiled.
-// Bundling it also saves nothing: it is one module and does not shake.
-async function parser() {
-  const { outputFiles } = await build({
-    entryPoints: [TYPESCRIPT],
-    minify: true,
-    write: false,
-    logLevel: "warning",
-  });
-  return named("typescript", outputFiles[0].text);
-}
-
 const site = new URL("./static/", import.meta.url);
 await rm(site, { recursive: true, force: true });
 await mkdir(site, { recursive: true });
-
-const typescript = await parser();
 
 // One classic script holding the compiler and everything it imports. `iife`
 // rather than `esm` because the frame is sandboxed onto an opaque origin, where
@@ -75,11 +75,7 @@ const typescript = await parser();
 // static host sends no header that would let the first one through.
 const compiler = named(
   "compiler",
-  await bundled(`import "./src/compile/entry.js";`, {
-    define: {
-      BACKTICK_TYPESCRIPT_URL: JSON.stringify(`${PUBLIC}${typescript.name}`),
-    },
-  }),
+  await bundled(`import "./src/compile/entry.js";`),
 );
 
 // The playground's own wiring, which is a script on a page rather than part of
@@ -100,10 +96,14 @@ const editor = named(
 const frame =
   `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
   `<title>backtick — compiler</title>` +
-  `<script src="${PUBLIC}${compiler.name}"></script>` +
+  // The parser first and both deferred, because deferred scripts run in the
+  // order a document writes them: the one below reads `ts` off the global and
+  // is written to assume it is already there.
+  `<script defer src="${TYPESCRIPT_URL}"></script>` +
+  `<script defer src="${PUBLIC}${compiler.name}"></script>` +
   `</head><body></body></html>`;
 
-for (const one of [typescript, compiler, editor]) {
+for (const one of [compiler, editor]) {
   await writeFile(new URL(one.name, site), one.source);
 }
 await mkdir(new URL("./compile/", site), { recursive: true });
@@ -117,6 +117,4 @@ await writeFile(
     `export const EDITOR_URL = ${JSON.stringify(`${PUBLIC}${editor.name}`)};\n`,
 );
 
-console.log(
-  `playground/static: ${typescript.name}, ${compiler.name}, ${editor.name}`,
-);
+console.log(`playground/static: ${compiler.name}, ${editor.name}`);
