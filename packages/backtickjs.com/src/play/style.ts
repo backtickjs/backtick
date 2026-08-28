@@ -65,35 +65,66 @@ export const HEAD =
   `margin: 0; font-family: ${mono}; font-size: 11.5px;` +
   ` letter-spacing: 0.06em; color: ${muted}`;
 
-// One frame, two fillings. The screen and the bundle swap in the same slot, so
-// every metric they share is written once: a pair that jumped by a pixel on
-// the switch would read as two places rather than two views of one thing.
+// One slot, two fillings. The device and the bundle swap in it, and both are
+// the editor's height exactly, so the switch moves nothing on the page — which
+// is also what fixes the width below rather than the height.
 //
-// A bezel, not a phone: this is drawn by the web client, and a notch would be
-// claiming a platform that has not shipped yet.
-const FRAME =
-  // No `height: 100%` beside the min: it resolved to `auto` here anyway, so
-  // the frame was always this tall — and as a percentage against a grid area
-  // inside a stretched flex item it had nothing definite to measure, which on
-  // a phone grew without stopping and took the page's scroll with it.
-  `min-height: 420px; box-sizing: border-box;` +
-  ` background: ${wash}; border: 1px solid ${line};` +
-  ` border-radius: ${RADIUS}`;
+// A phone, where this was a plain bezel. What draws inside it today is the web
+// client, and the shape is ahead of that on purpose: iOS and Android clients
+// are what a bundle is for, and the roadmap is what says the alpha is web only.
+// The honesty is carried there rather than by refusing to draw a notch here.
+const TALL = "height: 700px; box-sizing: border-box";
 
-/** What the bytes draw, sitting in the middle the way a screen sits in a device. */
+/**
+ * The device the screen sits in.
+ *
+ * The bezel is a padding rather than a border, so the corner outside and the
+ * corner inside are two radii that can be tuned against each other — a border
+ * would force one to be the other plus its width.
+ */
+export const DEVICE =
+  `${TALL}; justify-self: center; position: relative; width: 100%;` +
+  // 336 against the 700 above is not a round number chosen for looking right:
+  // it is what puts the screen inside on 19.5:9 exactly, once the bezel is
+  // taken off both sides. The body that falls out of it is 1:2.083, which is an
+  // iPhone 15 Pro to within a third of a percent.
+  //
+  // The radius is the screen's plus the bezel, so the two corners are
+  // concentric — any other number and the inner curve drifts inside the outer.
+  " max-width: 336px; padding: 12px; border-radius: 47px;" +
+  " background: light-dark(#18181b, #050506);" +
+  " box-shadow: inset 0 0 0 1px light-dark(#3f3f46, #27272a)," +
+  " 0 20px 44px light-dark(rgba(0,0,0,.20), rgba(0,0,0,.55))";
+
+/**
+ * The island, over the screen rather than inside it.
+ *
+ * A sibling and not a child: the script fills the screen with
+ * `replaceChildren`, and anything parked in there as chrome is wiped on the
+ * first compile.
+ */
+export const ISLAND =
+  "position: absolute; top: 26px; left: 50%; width: 84px; height: 23px;" +
+  " margin-left: -42px; border-radius: 999px; pointer-events: none;" +
+  " background: light-dark(#18181b, #050506)";
+
+/** What the bytes draw, in the middle the way a screen sits in a device. */
 export const SCREEN =
-  `${FRAME}; display: grid; align-content: center;` +
-  " justify-items: center; padding: 22px 11px";
+  `width: 100%; height: 100%; box-sizing: border-box; border-radius: 35px;` +
+  ` background: ${wash}; display: grid; align-content: center;` +
+  " justify-items: center; padding: 26px 10px; overflow: hidden";
 
-/** The bytes themselves, in the same frame. */
+/** The bytes themselves, in the same slot and at the same height. */
 export const BUNDLE =
-  `${FRAME}; display: block; overflow: auto; margin: 0; padding: 18px;` +
+  `${TALL}; display: block; overflow: auto; margin: 0; padding: 18px;` +
+  ` background: ${wash}; border: 1px solid ${line};` +
+  ` border-radius: ${RADIUS};` +
   ` font-family: ${mono}; font-size: 12px; line-height: 1.7;` +
   " word-break: break-all; white-space: pre-wrap";
 
 /** How each is shown again — `display` is what hides the other. */
 export const SHOWN: Readonly<Record<string, string>> = {
-  screen: "grid",
+  screen: "block",
   bundle: "block",
 };
 

@@ -77,6 +77,7 @@ const status = node("play-status");
 const complaints = node("play-complaints");
 const bundle = node("play-bundle");
 const screen = node("play-screen");
+const device = node("play-device");
 const tabs = {
   screen: node<HTMLButtonElement>("play-tab-screen"),
   bundle: node<HTMLButtonElement>("play-tab-bundle"),
@@ -85,12 +86,16 @@ const tabs = {
 /**
  * Which of the two views is up.
  *
- * The frame is one slot and `display` is what hides the other, so each is shown
- * again with the value it was drawn with — a `<pre>` is not a grid and would
- * come back laid out as one.
+ * The slot holds one of the two and `display` is what hides the other, so each
+ * is shown again with the value it was drawn with — a `<pre>` is not a grid and
+ * would come back laid out as one.
+ *
+ * The device is what is hidden on this side, never the screen inside it: the
+ * screen is where a drawing lands, and hiding it would leave the phone standing
+ * in the slot with nothing in it.
  */
 function view(which: "screen" | "bundle"): void {
-  screen.style.display = which === "screen" ? SHOWN["screen"]! : "none";
+  device.style.display = which === "screen" ? SHOWN["screen"]! : "none";
   bundle.style.display = which === "bundle" ? SHOWN["bundle"]! : "none";
   tabs.screen.style.cssText = which === "screen" ? TAB_ON : TAB_OFF;
   tabs.bundle.style.cssText = which === "bundle" ? TAB_ON : TAB_OFF;

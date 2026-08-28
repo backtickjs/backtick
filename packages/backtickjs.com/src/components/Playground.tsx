@@ -1,9 +1,11 @@
 import { EXAMPLE } from "../play/examples.js";
 import {
   HEAD_ROW,
+  DEVICE,
   EDITOR,
   HEAD,
   INK,
+  ISLAND,
   PANEL,
   SCREEN,
   TAB_OFF,
@@ -95,14 +97,17 @@ export async function Playground() {
                 is up is the script's to say — the drawing has no state. */}
             <div>
               <button id="play-tab-screen" style={TAB_OFF}>
-                {"SCREEN"}
+                {"PREVIEW"}
               </button>
               <button id="play-tab-bundle" style={TAB_OFF}>
                 {"BUNDLE"}
               </button>
             </div>
           </div>
-          <div id="play-screen" style={SCREEN} />
+          <div id="play-device" style={DEVICE}>
+            <div id="play-screen" style={SCREEN} />
+            <div style={ISLAND} />
+          </div>
           <pre id="play-bundle" style={BUNDLE} />
         </div>
       </div>
