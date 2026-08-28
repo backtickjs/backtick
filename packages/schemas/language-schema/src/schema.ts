@@ -678,6 +678,40 @@ export const schema: Schema = {
           "Calls a defined callback function on each element of an array, and returns an array that contains the results.",
       },
     ),
+    "array.reduce": Type.Generic(
+      [Type.GenericParameter("T"), Type.GenericParameter("U")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "callbackfn",
+            Type.Function(
+              [
+                Type.FunctionParameter("previousValue", Type.Ref("U")),
+                Type.FunctionParameter("currentValue", Type.Ref("T")),
+                Type.FunctionParameter("currentIndex", Type.Number()),
+              ],
+              Type.Ref("U"),
+            ),
+            {
+              description:
+                "A function that accepts up to three arguments. The reduce method calls the callbackfn function one time for each element in the array.",
+            },
+          ),
+          Type.FunctionParameter("initialValue", Type.Ref("U"), {
+            description:
+              "It is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.",
+          }),
+        ],
+        Type.Ref("U"),
+      ),
+      {
+        description:
+          "Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.\n\nThe initial value is required, where the standard library makes it optional: without one the first call is handed an element rather than an accumulator, and an empty array has nothing to hand it and throws. Both are rules a host would have to reproduce exactly to agree, and naming the starting value is the same work.",
+      },
+    ),
     "array.filter": Type.Generic(
       [Type.GenericParameter("T")],
       Type.Function(

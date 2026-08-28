@@ -336,6 +336,30 @@ export interface Builtins {
    */
   "array.map"<T, U>(self: T[], callbackfn: (value: T, index: number) => U): U[];
   /**
+   * Calls the specified callback function for all the elements in an array.
+   * The return value of the callback function is the accumulated result, and
+   * is provided as an argument in the next call to the callback function.
+   *
+   * The initial value is required, where the standard library makes it
+   * optional: without one the first call is handed an element rather than an
+   * accumulator, and an empty array has nothing to hand it and throws. Both
+   * are rules a host would have to reproduce exactly to agree, and naming the
+   * starting value is the same work.
+   *
+   * @param self The value the member is reached off.
+   * @param callbackfn A function that accepts up to three arguments. The
+   * reduce method calls the callbackfn function one time for each element in
+   * the array.
+   * @param initialValue It is used as the initial value to start the
+   * accumulation. The first call to the callbackfn function provides this
+   * value as an argument instead of an array value.
+   */
+  "array.reduce"<T, U>(
+    self: T[],
+    callbackfn: (previousValue: U, currentValue: T, currentIndex: number) => U,
+    initialValue: U,
+  ): U;
+  /**
    * Returns the elements of an array that meet the condition specified in a
    * callback function.
    *

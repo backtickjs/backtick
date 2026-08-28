@@ -60,6 +60,12 @@ export const globals: Builtins = {
     self.includes(searchElement, fromIndex),
   "array.map": (self, callbackfn) =>
     self.map((value, index) => callbackfn(value, index)),
+  "array.reduce": (self, callbackfn, initialValue) =>
+    self.reduce(
+      (previousValue, currentValue, currentIndex) =>
+        callbackfn(previousValue, currentValue, currentIndex),
+      initialValue,
+    ),
   "array.filter": (self, predicate) => self.filter(predicate),
   "array.with": (self, index, value) => self.with(index, value),
   "array.toSorted": (self, compareFn) => self.toSorted(compareFn),
