@@ -1,4 +1,4 @@
-import type { HtmlNode } from "@backtickjs/web-sdk/jsx-runtime";
+import type { HtmlNode } from "@backtickjs/web-sdk";
 import type { Children } from "@backtickjs/core";
 import { DOCS, REPO } from "../links.js";
 import { Badge } from "./Badge.js";

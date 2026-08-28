@@ -30,8 +30,6 @@ export interface FragmentProps {
 
 export const Fragment = createFragment<FragmentProps>();
 
-export type { HtmlNode } from "@backtickjs/web-schema";
-
 export declare namespace JSX {
   export interface Element extends ClientElement {}
   export interface IntrinsicElements extends Web {}

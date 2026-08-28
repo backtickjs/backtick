@@ -17,8 +17,11 @@ form                                      → form
                                           → \n      
 onsubmit                                  → onsubmit
 ={cs.lift(                                → ={
+(                                         → (
 __cs_event                                → event
- => {\n                                   → ) => {\n        // The three every event carries, which is what stopping one takes.\n        
+:                                         → : 
+SubmitEvent                               → SubmitEvent
+) => {\n                                  → ) => {\n        // The three every event carries, which is what stopping one takes.\n        
 cs.statement(                             → 
 cs.receiver(                              → 
 __cs_event                                → event
@@ -75,8 +78,11 @@ button                                    → button
                                           → \n        
 onclick                                   → onclick
 ={cs.lift(                                → ={
+(                                         → (
 __cs_event                                → event
- => {\n                                   → ) => {\n          
+:                                         → : 
+PointerEvent                              → PointerEvent
+) => {\n                                  → ) => {\n          
 cs.statement(                             → 
 cs.receiver(                              → 
 __cs_said                                 → said
@@ -112,8 +118,11 @@ altKey                                    → altKey
                                           → \n        
 onkeydown                                 → onkeydown
 ={cs.lift(                                → ={
+(                                         → (
 __cs_event                                → event
- => {\n                                   → ) => {\n          
+:                                         → : 
+KeyboardEvent                             → KeyboardEvent
+) => {\n                                  → ) => {\n          
 cs.statement(                             → 
 cs.receiver(                              → 
 __cs_said                                 → said
@@ -162,8 +171,11 @@ input                                     → input
                                           →  
 oninput                                   → oninput
 ={cs.lift(                                → ={
+(                                         → (
 __cs_event                                → event
- =>                                       → ) => 
+:                                         → : 
+InputEvent                                → InputEvent
+) =>                                      → ) => 
 cs.receiver(                              → 
 __cs_said                                 → said
 )                                         → 

@@ -1,5 +1,6 @@
 import { transform } from "@backtickjs/compiler";
 import * as core from "@backtickjs/core";
+import * as webSdk from "@backtickjs/web-sdk";
 import * as jsxRuntime from "@backtickjs/web-sdk/jsx-runtime";
 
 /** Where a complaint sits in what the reader wrote, and what it says. */
@@ -39,6 +40,10 @@ const FILE = "playground.tsx";
 // script and a top-level await has no format to be written in there.
 const MODULES: Readonly<Record<string, unknown>> = {
   "@backtickjs/core": core,
+  // The one a person writes, for the event types a handler's parameter is
+  // annotated with, and the one the compiler emits for JSX. A reader who
+  // imports the first should not be told the playground has never heard of it.
+  "@backtickjs/web-sdk": webSdk,
   "@backtickjs/web-sdk/jsx-runtime": jsxRuntime,
 };
 
@@ -109,7 +114,8 @@ function run(script: string): unknown {
     const held = MODULES[specifier];
     if (held === undefined) {
       throw new Error(
-        `the playground answers for \`@backtickjs/core\` and nothing else,` +
+        `the playground answers for \`@backtickjs/core\`, \`@backtickjs/web-sdk\`` +
+          ` and nothing else,` +
           ` and this asked for \`${specifier}\``,
       );
     }

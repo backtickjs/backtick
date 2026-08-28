@@ -9,7 +9,7 @@ const script = cs.create(
   {
     version: "0.0.0",
     filePath: "jsx-capture.tsx",
-    fileHash: "3av3q54x2rbzr",
+    fileHash: "1nds6mh4a70jo",
     kind: "value",
     splices: {
       $0splice0: _jsx("span", {
@@ -18,10 +18,10 @@ const script = cs.create(
           {
             version: "0.0.0",
             filePath: "jsx-capture.tsx",
-            fileHash: "3av3q54x2rbzr",
+            fileHash: "1nds6mh4a70jo",
             kind: "value",
             splices: {},
-            captures: ["x$3av3q54x2rbzr$0"],
+            captures: ["x$1nds6mh4a70jo$0"],
             spliceParams: {},
           },
           () => ({
@@ -32,14 +32,14 @@ const script = cs.create(
               kind: 80,
               loc: [11, 37, 11, 38],
               text: "x",
-              bindingKey: "x$3av3q54x2rbzr$0",
+              bindingKey: "x$1nds6mh4a70jo$0",
             },
           }),
         ),
       }),
     },
     captures: [],
-    spliceParams: { $0splice0: ["x$3av3q54x2rbzr$0"] },
+    spliceParams: { $0splice0: ["x$1nds6mh4a70jo$0"] },
   },
   () => ({
     kind: 220,
@@ -63,7 +63,7 @@ const script = cs.create(
                   kind: 80,
                   loc: [10, 9, 10, 10],
                   text: "x",
-                  bindingKey: "x$3av3q54x2rbzr$0",
+                  bindingKey: "x$1nds6mh4a70jo$0",
                 },
                 initializer: {
                   kind: 9,

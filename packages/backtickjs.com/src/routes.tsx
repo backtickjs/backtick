@@ -1,4 +1,4 @@
-import type { JSX } from "@backtickjs/web-sdk/jsx-runtime";
+import type { JSX } from "@backtickjs/web-sdk";
 import { Home } from "./pages/Home.js";
 
 export interface Page {
