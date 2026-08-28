@@ -78,7 +78,7 @@ async function playground(prepared) {
     "js",
     await bundled(`import "./src/editor/entry.js";`, {
       format: "iife",
-      define: { BACKTICK_EXAMPLE: JSON.stringify(JSON.stringify(prepared)) },
+      define: { BACKTICK_EXAMPLES: JSON.stringify(JSON.stringify(prepared)) },
     }),
   );
 }
@@ -86,11 +86,17 @@ async function playground(prepared) {
 // The example, compiled here so that reading the page costs no compiler: what
 // the reader is handed on load is bytes this build already made, and the
 // megabyte behind the editor waits for the first keystroke that needs it.
-async function prepare(example) {
-  return {
-    source: example.source,
-    result: await compile(example.source, { typescript: ts }),
-  };
+async function prepare(examples) {
+  const compiled = await Promise.all(
+    Object.entries(examples).map(async ([name, example]) => [
+      name,
+      {
+        source: example.source,
+        result: await compile(example.source, { typescript: ts }),
+      },
+    ]),
+  );
+  return Object.fromEntries(compiled);
 }
 
 // No content policy on this document, and that is a finding rather than an
@@ -110,15 +116,19 @@ function frameDocument(entry) {
 /**
  * Every file the playground publishes, and where each goes.
  *
- * A page's build calls this with what its editor should open on, and writes
- * what comes back beside its own documents: the urls are `/`-rooted and carry
- * the hash of what is at them, so nothing here needs to know the page's name.
+ * A page's build calls this with what each of its playgrounds should open on —
+ * keyed by the name the page drew that one under — and writes what comes back
+ * beside its own documents: the urls are `/`-rooted and carry the hash of what
+ * is at them, so nothing here needs to know the page's name.
+ *
+ * One script and one compiler frame however many playgrounds there are. Only
+ * the compiled examples multiply, and those are the small part.
  */
-export async function buildPlayground({ example }) {
+export async function buildPlayground({ examples }) {
   const typescriptAsset = await parser();
   const [entry, play] = await Promise.all([
     harness(typescriptAsset.url),
-    prepare(example).then(playground),
+    prepare(examples).then(playground),
   ]);
 
   return {

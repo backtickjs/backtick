@@ -2,7 +2,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { files } from "./dist/files.js";
 import { buildDocuments } from "./dist/documents.js";
 import { buildPlayground } from "@backtickjs/playground/build";
-import { EXAMPLE } from "./dist/play/examples.js";
+import { COUNTER_EXAMPLE, EXAMPLE } from "./dist/play/examples.js";
 
 // What gets published, kept apart from `dist/`, which is where `tspc` puts the
 // compiled server half. Only one of the two belongs on a web server.
@@ -14,7 +14,9 @@ await mkdir(site, { recursive: true });
 // The playground: a compiler document and the page that checks it. Built here
 // rather than beside the pages, because what it publishes is scripts and the
 // rest of this site publishes bundles.
-const compiler = await buildPlayground({ example: EXAMPLE });
+const compiler = await buildPlayground({
+  examples: { play: EXAMPLE, "play-counter": COUNTER_EXAMPLE },
+});
 const documents = await buildDocuments(compiler.scripts);
 
 for (const { path, html, bytes } of [...documents, ...compiler.documents]) {

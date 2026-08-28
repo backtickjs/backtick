@@ -57,7 +57,20 @@ const COMPLAINTS = "display: grid; gap: 6px; margin-top: 12px";
  * costs no compiler and no megabyte, and the reader decides when to spend one by
  * typing.
  */
-export async function Playground({ example }: { example: Source }) {
+export async function Playground({
+  name,
+  example,
+}: {
+  /**
+   * What this one is called, and the prefix on every id it draws.
+   *
+   * A page may hold more than one, and the script finds each by the name the
+   * build compiled it under — so the two have to agree, and this is where they
+   * do. The same name goes to `buildPlayground`.
+   */
+  name: string;
+  example: Source;
+}) {
   const first = example.source;
 
   return (
@@ -66,14 +79,14 @@ export async function Playground({ example }: { example: Source }) {
         <div style={`${PANEL}; ${WRITING}`}>
           <div style={HEAD_ROW}>
             <p style={HEAD}>{"01 \u00b7 TRY EDITING"}</p>
-            <p id="play-status" style={STATUS} />
+            <p id={`${name}-status`} style={STATUS} />
           </div>
           <div style={WELL}>
-            <pre id="play-ink" style={INK} aria-hidden="true">
+            <pre id={`${name}-ink`} style={INK} aria-hidden="true">
               <code>{first}</code>
             </pre>
             <textarea
-              id="play-source"
+              id={`${name}-source`}
               style={EDITOR}
               // The string, not the boolean: this client writes a `false`
               // boolean by removing the attribute, and a removed `spellcheck`
@@ -87,7 +100,7 @@ export async function Playground({ example }: { example: Source }) {
               {first}
             </textarea>
           </div>
-          <div id="play-complaints" style={COMPLAINTS} />
+          <div id={`${name}-complaints`} style={COMPLAINTS} />
         </div>
 
         <div style={`${PANEL}; ${DRAWING}`}>
@@ -96,19 +109,19 @@ export async function Playground({ example }: { example: Source }) {
             {/* Two views of one thing, so they share a slot and a frame. Which
                 is up is the script's to say — the drawing has no state. */}
             <div>
-              <button id="play-tab-screen" style={TAB_OFF}>
+              <button id={`${name}-tab-screen`} style={TAB_OFF}>
                 {"PREVIEW"}
               </button>
-              <button id="play-tab-bundle" style={TAB_OFF}>
+              <button id={`${name}-tab-bundle`} style={TAB_OFF}>
                 {"BUNDLE"}
               </button>
             </div>
           </div>
-          <div id="play-device" style={DEVICE}>
-            <div id="play-screen" style={SCREEN} />
+          <div id={`${name}-device`} style={DEVICE}>
+            <div id={`${name}-screen`} style={SCREEN} />
             <div style={ISLAND} />
           </div>
-          <pre id="play-bundle" style={BUNDLE} />
+          <pre id={`${name}-bundle`} style={BUNDLE} />
         </div>
       </div>
     </>

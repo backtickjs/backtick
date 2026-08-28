@@ -46,13 +46,38 @@ export default async function Wave() {
       </div>
     );
   }\`;
-}
-`;
+}`;
 
 export const EXAMPLE: Example = {
   name: "A wave",
-  // Trimmed, because a source file ends in a newline and a textarea should not:
-  // there it is a blank last line the caret can rest on, below the code, for
-  // nothing.
-  source: SOURCE.trimEnd(),
+  source: SOURCE,
+};
+
+const COUNTER = `import { cs, state } from "@backtickjs/core";
+
+const card =
+  "display: grid; gap: 14px; justify-items: center; padding: 26px;" +
+  " border-radius: 22px; background: #f4f4f5; font-family: system-ui";
+const press =
+  "padding: 10px 18px; border: 0; border-radius: 999px; cursor: pointer;" +
+  " background: #111; color: #fff; font: 600 14px system-ui";
+
+export default async function Counter() {
+  return cs\`{
+    const count = $state(0);
+    return (
+      <div style={$card}>
+        <p style="margin: 0; font-size: 34px; font-weight: 700">{count.read()}</p>
+        <button style={$press} onclick={() => count.write(count.read() + 1)}>
+          {"Press me"}
+        </button>
+      </div>
+    );
+  }\`;
+}`;
+
+/** A second one, so the page can show that a playground is a thing it holds. */
+export const COUNTER_EXAMPLE: Example = {
+  name: "A counter",
+  source: COUNTER,
 };
