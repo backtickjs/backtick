@@ -1,8 +1,6 @@
 import { EXAMPLE } from "../play/examples.js";
 import {
   HEAD_ROW,
-  SWEEP,
-  TRACK,
   EDITOR,
   HEAD,
   INK,
@@ -62,10 +60,6 @@ export async function Playground() {
 
   return (
     <>
-      <div style={TRACK}>
-        <div id="play-sweep" style={SWEEP} />
-      </div>
-
       <div style={SPLIT}>
         <div style={`${PANEL}; ${WRITING}`}>
           <div style={HEAD_ROW}>

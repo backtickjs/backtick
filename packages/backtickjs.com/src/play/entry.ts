@@ -17,16 +17,15 @@ const FRAME = "/compile/";
 const SETTLE = 350;
 
 /**
- * How long the working state stays up, whatever the compile took.
+ * How long "compiling…" stays up, whatever the compile took.
  *
  * A compile lands in about twenty milliseconds, which is faster than the eye
- * reads a change — the sweep would flash and the figures would twitch, and the
- * page would look like it had done nothing. So the answer is held until one
- * pass of the sweep has finished.
+ * reads a word: cleared on arrival it would appear and vanish inside a frame,
+ * which reads as a flicker rather than a state. The status is the only report a
+ * compile gets now, so it is the one thing worth holding.
  *
- * The reveal waits; the measurement does not. What `COMPILED IN` reports is
- * the round trip and nothing else, so the number stays true while the state
- * beside it is legible.
+ * What is held is the label, never the answer — that goes up the moment it
+ * lands.
  */
 const HOLD = 450;
 
@@ -78,7 +77,6 @@ const status = node("play-status");
 const complaints = node("play-complaints");
 const bundle = node("play-bundle");
 const screen = node("play-screen");
-const sweep = node("play-sweep");
 const tabs = {
   screen: node<HTMLButtonElement>("play-tab-screen"),
   bundle: node<HTMLButtonElement>("play-tab-bundle"),
@@ -214,51 +212,11 @@ function lineOf(at: number): string {
   return `line ${row.toString()}`;
 }
 
-/**
- * The only thing on the page that says work is happening.
- *
- * A compile is a round trip to a frame on another origin, and the first one
- * fetches a megabyte of parser, so there is a real wait and nothing to watch
- * through it. An indeterminate bar rather than a percentage: nothing here knows
- * how far along a compile is.
- *
- * Driven from a timer rather than a keyframe, because this page ships no
- * stylesheet and a content policy that admits no inline one.
- */
-let sweeping: ReturnType<typeof setInterval> | undefined;
-
-// Which end the bar is at, kept across runs because the bar is.
-//
-// Held here rather than inside `working` for the reason the bug had: a run that
-// ends on the right leaves it on the right, and a fresh `false` would send it
-// to where it already is. Nothing transitions to where it already is, so the
-// bar stops moving from the second compile on. Alternating from wherever it
-// actually stands means every run travels — right to left on the next one,
-// which for a bar that knows no percentage reads the same either way.
-let far = false;
-
-function working(yes: boolean): void {
-  clearInterval(sweeping);
-  sweep.style.opacity = yes ? "1" : "0";
-  if (!yes) {
-    return;
-  }
-  const step = (): void => {
-    far = !far;
-    sweep.style.transform = far ? "translateX(257%)" : "translateX(0%)";
-  };
-  step();
-  // Only a slow compile ever reaches this — the first one, fetching the
-  // parser. A quick one is one pass and done.
-  sweeping = setInterval(step, HOLD);
-}
-
 let inFlight = 0;
 
 async function compile(): Promise<void> {
   const mine = ++inFlight;
   status.textContent = "compiling…";
-  working(true);
   const frame = await compiler();
   if (mine !== inFlight) {
     return;
@@ -275,22 +233,20 @@ async function compile(): Promise<void> {
   // The answer goes up the moment it lands — a compile is about twenty
   // milliseconds and there is no reason to sit on it.
   show(result);
-  // The sweep still finishes the pass it started, which is a flourish
-  // completing rather than a claim that anything is still happening.
+  // Only the status waits, and only long enough to be read.
   await rest(HOLD - (performance.now() - at));
   if (mine !== inFlight) {
     return;
   }
-  working(false);
   status.textContent = settled(result);
 }
 
 /** What the three columns say about one answer, whoever computed it. */
 /**
  * The answer, put up. Says nothing about the status line: what happened is
- * shown the moment it lands, and what is *happening* is settled when the sweep
- * ends — otherwise "compiling…" is replaced twenty milliseconds after it
- * appears, which reads as a flicker rather than a state.
+ * shown the moment it lands, and what is *happening* is settled after the hold
+ * — otherwise "compiling…" is replaced twenty milliseconds after it appears,
+ * which reads as a flicker rather than a state.
  */
 function show(result: Compiled): void {
   if (result.ok) {
@@ -308,7 +264,7 @@ function show(result: Compiled): void {
   complain(result.complaints);
 }
 
-/** What the status line reads once the working state is over. */
+/** What the status line reads once the hold is over. */
 function settled(result: Compiled): string {
   if (result.ok) {
     return "";
@@ -345,9 +301,8 @@ function start(): void {
     clearTimeout(settling);
     settling = setTimeout(() => {
       // A compiler that never arrives is the one failure with nothing else to
-      // report it: the sweep would otherwise run forever.
+      // report it: the status would otherwise read "compiling…" for good.
       compile().catch((thrown: unknown) => {
-        working(false);
         status.textContent = String(thrown);
       });
     }, SETTLE);
