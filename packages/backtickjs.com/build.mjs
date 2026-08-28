@@ -1,8 +1,8 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import { files } from "./dist/files.js";
 import { buildDocuments } from "./dist/documents.js";
-import { buildPlayground } from "@backtickjs/playground/build";
-import { COUNTER_EXAMPLE, EXAMPLE } from "./dist/play/examples.js";
+import { createRequire } from "node:module";
+import { pathToFileURL } from "node:url";
 
 // What gets published, kept apart from `dist/`, which is where `tspc` puts the
 // compiled server half. Only one of the two belongs on a web server.
@@ -11,15 +11,23 @@ const site = new URL("./site/", import.meta.url);
 await rm(site, { recursive: true, force: true });
 await mkdir(site, { recursive: true });
 
-// The playground: a compiler document and the page that checks it. Built here
-// rather than beside the pages, because what it publishes is scripts and the
-// rest of this site publishes bundles.
-const compiler = await buildPlayground({
-  examples: { play: EXAMPLE, "play-counter": COUNTER_EXAMPLE },
-});
-const documents = await buildDocuments(compiler.scripts);
+const documents = await buildDocuments();
 
-for (const { path, html, bytes } of [...documents, ...compiler.documents]) {
+// The playground's own files, copied where the component says they are. It has
+// nothing to configure and nothing to be told: the component compiled its own
+// example while the bundle was built, and these are the same bytes on every
+// page that draws one.
+const playground = new URL(
+  "./static/",
+  pathToFileURL(
+    createRequire(import.meta.url).resolve(
+      "@backtickjs/playground/package.json",
+    ),
+  ),
+);
+await cp(playground, new URL("./playground/", site), { recursive: true });
+
+for (const { path, html, bytes } of documents) {
   // A route and a directory are the same name: `/docs/start/` is served from
   // `docs/start/index.html`, which is the url without a file extension in it.
   const directory = new URL(`.${path}`, site);
@@ -35,7 +43,7 @@ for (const { path, html, bytes } of [...documents, ...compiler.documents]) {
 }
 
 // A `/`-rooted url and a path in the published directory are the same name.
-for (const { url, source } of [...files, ...compiler.assets]) {
+for (const { url, source } of files) {
   await writeFile(new URL(`.${url}`, site), source);
 }
 
@@ -50,6 +58,6 @@ await writeFile(new URL("CNAME", site), "backtickjs.com\n");
 await writeFile(new URL(".nojekyll", site), "");
 
 console.log(
-  `site/: ${documents.length + compiler.documents.length} documents,` +
-    ` ${files.length + compiler.assets.length} assets`,
+  `site/: ${documents.length} documents,` +
+    ` ${files.length} assets and the playground`,
 );

@@ -17,7 +17,7 @@ export async function Home() {
           divider and the only thing that reports a compile, so a second line
           here would be the same line drawn twice. */}
       <section id="try" style="padding: 28px 0 40px">
-        <Playground name="play" example={EXAMPLE} />
+        <Playground example={EXAMPLE.source} />
       </section>
 
       {/* A second one, drawn the same way from the same package. What differs
@@ -25,7 +25,7 @@ export async function Home() {
           is the package's, which is the point of being able to see them side by
           side. */}
       <section style="padding: 0 0 68px">
-        <Playground name="play-counter" example={COUNTER_EXAMPLE} />
+        <Playground example={COUNTER_EXAMPLE.source} />
       </section>
     </>
   );

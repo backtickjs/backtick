@@ -8,9 +8,6 @@ export interface Page {
   readonly title: string;
   readonly description: string;
   readonly view: JSX.Element;
-  // A script beside the bundle, for a page that needs one. Only the playground
-  // does, and only until a script can read what a reader typed.
-  readonly script?: "play";
 }
 
 export const pages: readonly Page[] = [
@@ -22,6 +19,5 @@ export const pages: readonly Page[] = [
       " behavior at runtime, so changing one costs a deploy rather than a" +
       " release.",
     view: <Home />,
-    script: "play",
   },
 ];

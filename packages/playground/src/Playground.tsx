@@ -1,4 +1,6 @@
-import type { Source } from "./Source.js";
+import ts from "typescript";
+import { compile } from "./compile/compile.js";
+import { EDITOR_URL } from "./static.js";
 import {
   HEAD_ROW,
   DEVICE,
@@ -57,21 +59,28 @@ const COMPLAINTS = "display: grid; gap: 6px; margin-top: 12px";
  * costs no compiler and no megabyte, and the reader decides when to spend one by
  * typing.
  */
-export async function Playground({
-  name,
-  example,
-}: {
-  /**
-   * What this one is called, and the prefix on every id it draws.
-   *
-   * A page may hold more than one, and the script finds each by the name the
-   * build compiled it under — so the two have to agree, and this is where they
-   * do. The same name goes to `buildPlayground`.
-   */
-  name: string;
-  example: Source;
-}) {
-  const first = example.source;
+/**
+ * How many have been drawn, so each gets ids of its own.
+ *
+ * A counter rather than something the caller names: a page may hold two of
+ * these and neither should have to be told about the other. It counts while the
+ * bundle is built, so the same page draws the same names every time.
+ */
+let drawn = 0;
+
+export async function Playground({ example }: { example: string }) {
+  const name = `playground-${(++drawn).toString()}`;
+
+  // Compiled here, while the bundle is built, by the same `compile` the frame
+  // in the corner runs on a keystroke. It is why a reader who only reads never
+  // asks for a compiler, and why the page draws something rather than nothing
+  // before the megabyte behind the editor has been thought about.
+  const prepared = JSON.stringify({
+    source: example,
+    result: await compile(example, { typescript: ts }),
+  });
+
+  const first = example;
 
   return (
     <>
@@ -101,6 +110,13 @@ export async function Playground({
             </textarea>
           </div>
           <div id={`${name}-complaints`} style={COMPLAINTS} />
+
+          {/* What this one opens on, and what the build already made of it.
+              Read out of the page by the script below, so the script is the
+              same bytes whatever any page puts in front of it. */}
+          <script type="application/json" id={`${name}-example`}>
+            {prepared}
+          </script>
         </div>
 
         <div style={`${PANEL}; ${DRAWING}`}>
@@ -124,6 +140,11 @@ export async function Playground({
           <pre id={`${name}-bundle`} style={BUNDLE} />
         </div>
       </div>
+
+      {/* Its own, so a page holding one of these owes it nothing but the files
+          under `/playground/`. Drawn once per playground and run once per page:
+          the script marks the window and a second copy returns. */}
+      <script defer src={EDITOR_URL} />
     </>
   );
 }

@@ -13,7 +13,11 @@ import { line, muted } from "../theme.js";
  * which is the ugly half of the arrangement, and the half with a plan against it.
  */
 
-const FRAME = "/compile/";
+// Written in by the build, because where these files are served from is one
+// string this package and the page it is on both have to agree about.
+declare const BACKTICK_FRAME_URL: string;
+
+const FRAME = BACKTICK_FRAME_URL;
 const SETTLE = 350;
 
 /**
@@ -49,25 +53,17 @@ function rest(ms: number): Promise<void> {
 }
 
 /**
- * Every playground on the page, already compiled — the build ran the same
- * `compile` this frame runs, so a reader who only reads never asks for a
- * compiler. Written in by the build rather than imported, so the sources are in
- * this file once instead of once here and once in the bundle.
+ * One playground's example, already compiled, as the component drew it.
  *
- * Keyed by the name the page drew each one under, which is also the prefix on
- * every id it drew: two playgrounds on one page are two of these, and one
- * compiler frame between them.
+ * Read out of the page rather than written into this script, which is what lets
+ * the script be the same bytes on every page: the component ran the same
+ * `compile` the frame runs and left the answer beside the editor, so a reader
+ * who only reads never asks for a compiler.
  */
-declare const BACKTICK_EXAMPLES: string;
-
 interface Prepared {
   readonly source: string;
   readonly result: Compiled;
 }
-
-const EXAMPLES = JSON.parse(BACKTICK_EXAMPLES) as Readonly<
-  Record<string, Prepared>
->;
 
 /** The frame, and the promise that it is running rather than merely loaded. */
 function open(): Promise<Window> {
@@ -329,6 +325,30 @@ function wire(name: string, prepared: Prepared): void {
   });
 }
 
-for (const [name, prepared] of Object.entries(EXAMPLES)) {
-  wire(name, prepared);
+/**
+ * Every playground the page drew, wired once.
+ *
+ * A page holding two of them draws this script twice, and a second copy of the
+ * same url runs a second time — so the first run does the work and marks the
+ * window, and the second finds the mark and returns. Cheaper than asking the
+ * component to draw a script only once, which it has no way to know.
+ *
+ * On a later task rather than now: the component draws this script inside the
+ * tree it is drawing, so at the moment it runs the playground after it may not
+ * be there yet.
+ */
+const MARK = "__backtickPlaygroundWired";
+
+if (!(MARK in globalThis)) {
+  (globalThis as Record<string, unknown>)[MARK] = true;
+  setTimeout(() => {
+    for (const held of document.querySelectorAll(
+      'script[type="application/json"][id$="-example"]',
+    )) {
+      wire(
+        held.id.slice(0, -"-example".length),
+        JSON.parse(held.textContent ?? "{}") as Prepared,
+      );
+    }
+  });
 }

@@ -10,12 +10,11 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./build": {
-      "default": "./build.mjs"
-    }
+    "./package.json": "./package.json",
+    "./static/*": "./static/*"
   },
   "scripts": {
-    "build": "tspc --noCheck --declaration",
+    "build": "node build.mjs && tspc --noCheck --declaration",
     "typecheck": "backtick-tsc --noEmit",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
