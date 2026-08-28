@@ -4,6 +4,7 @@ import type {
   Builtins as UiBuiltins,
   Children,
   ClientElement,
+  ClientHandle,
   Elements as UiElements,
   Prop,
 } from "@backtickjs/ui-schema";
@@ -22,6 +23,256 @@ export type {
   ReadonlyState,
   State,
 } from "@backtickjs/ui-schema";
+
+declare const EventTargetBrand: unique symbol;
+/**
+ * What an event happened to.
+ *
+ * Opaque, as the DOM has it: reaching an element's own members through one
+ * needs a cast, and this language has none. That is the gap to close next, not
+ * a thing to paper over here.
+ */
+export interface EventTarget extends ClientHandle {
+  readonly [EventTargetBrand]: never;
+}
+
+declare const EventBrand: unique symbol;
+/**
+ * Anything that happens to an element, and what every other event here is one
+ * of.
+ */
+export interface Event extends ClientHandle {
+  readonly [EventBrand]: never;
+  readonly bubbles: boolean;
+  readonly cancelable: boolean;
+  readonly composed: boolean;
+  readonly currentTarget: EventTarget | null;
+  readonly defaultPrevented: boolean;
+  readonly eventPhase: number;
+  readonly isTrusted: boolean;
+  readonly srcElement: EventTarget | null;
+  readonly target: EventTarget | null;
+  readonly type: string;
+  readonly timeStamp: number;
+  preventDefault(): void;
+  stopPropagation(): void;
+  stopImmediatePropagation(): void;
+}
+
+declare const UIEventBrand: unique symbol;
+/**
+ * An event that came from the interface rather than from the page's own code.
+ */
+export interface UIEvent extends Event {
+  readonly [UIEventBrand]: never;
+  readonly detail: number;
+  readonly which: number;
+}
+
+declare const MouseEventBrand: unique symbol;
+/**
+ * A pointing device did something, and where it was when it did.
+ */
+export interface MouseEvent extends UIEvent {
+  readonly [MouseEventBrand]: never;
+  readonly altKey: boolean;
+  readonly button: number;
+  readonly buttons: number;
+  readonly clientX: number;
+  readonly clientY: number;
+  readonly ctrlKey: boolean;
+  readonly layerX: number;
+  readonly layerY: number;
+  readonly metaKey: boolean;
+  readonly movementX: number;
+  readonly movementY: number;
+  readonly offsetX: number;
+  readonly offsetY: number;
+  readonly pageX: number;
+  readonly pageY: number;
+  readonly relatedTarget: EventTarget | null;
+  readonly screenX: number;
+  readonly screenY: number;
+  readonly shiftKey: boolean;
+  readonly x: number;
+  readonly y: number;
+}
+
+declare const PointerEventBrand: unique symbol;
+/**
+ * A mouse, a pen or a finger — what the DOM hands a click, whichever it was.
+ */
+export interface PointerEvent extends MouseEvent {
+  readonly [PointerEventBrand]: never;
+  readonly altitudeAngle: number;
+  readonly azimuthAngle: number;
+  readonly height: number;
+  readonly isPrimary: boolean;
+  readonly persistentDeviceId: number;
+  readonly pointerId: number;
+  readonly pointerType: string;
+  readonly pressure: number;
+  readonly tangentialPressure: number;
+  readonly tiltX: number;
+  readonly tiltY: number;
+  readonly twist: number;
+  readonly width: number;
+}
+
+declare const DragEventBrand: unique symbol;
+/**
+ * Something is being dragged. What is being carried is a `DataTransfer`, which
+ * this schema does not declare.
+ */
+export interface DragEvent extends MouseEvent {
+  readonly [DragEventBrand]: never;
+}
+
+declare const WheelEventBrand: unique symbol;
+/**
+ * A wheel turned, and by how much in which units.
+ */
+export interface WheelEvent extends MouseEvent {
+  readonly [WheelEventBrand]: never;
+  readonly deltaMode: number;
+  readonly deltaX: number;
+  readonly deltaY: number;
+  readonly deltaZ: number;
+}
+
+declare const KeyboardEventBrand: unique symbol;
+/**
+ * A key went down or came up, and which key it was.
+ */
+export interface KeyboardEvent extends UIEvent {
+  readonly [KeyboardEventBrand]: never;
+  readonly altKey: boolean;
+  readonly charCode: number;
+  readonly code: string;
+  readonly ctrlKey: boolean;
+  readonly isComposing: boolean;
+  readonly key: string;
+  readonly keyCode: number;
+  readonly location: number;
+  readonly metaKey: boolean;
+  readonly repeat: boolean;
+  readonly shiftKey: boolean;
+}
+
+declare const InputEventBrand: unique symbol;
+/**
+ * The value of an editable element changed, and how.
+ */
+export interface InputEvent extends UIEvent {
+  readonly [InputEventBrand]: never;
+  readonly data: string | null;
+  readonly inputType: string;
+  readonly isComposing: boolean;
+}
+
+declare const CompositionEventBrand: unique symbol;
+/**
+ * Text is being composed — an input method is part-way through a character.
+ */
+export interface CompositionEvent extends UIEvent {
+  readonly [CompositionEventBrand]: never;
+  readonly data: string;
+}
+
+declare const FocusEventBrand: unique symbol;
+/**
+ * Focus arrived or left.
+ */
+export interface FocusEvent extends UIEvent {
+  readonly [FocusEventBrand]: never;
+  readonly relatedTarget: EventTarget | null;
+}
+
+declare const TouchEventBrand: unique symbol;
+/**
+ * Fingers on a screen. The lists of touches are `TouchList`s, which this
+ * schema does not declare.
+ */
+export interface TouchEvent extends UIEvent {
+  readonly [TouchEventBrand]: never;
+  readonly altKey: boolean;
+  readonly ctrlKey: boolean;
+  readonly metaKey: boolean;
+  readonly shiftKey: boolean;
+}
+
+declare const ClipboardEventBrand: unique symbol;
+/**
+ * A copy, cut or paste. What is on the clipboard is a `DataTransfer`, which
+ * this schema does not declare.
+ */
+export interface ClipboardEvent extends Event {
+  readonly [ClipboardEventBrand]: never;
+}
+
+declare const SubmitEventBrand: unique symbol;
+/**
+ * A form was submitted. The submitter is an `HTMLElement`, which this schema
+ * does not declare.
+ */
+export interface SubmitEvent extends Event {
+  readonly [SubmitEventBrand]: never;
+}
+
+declare const ToggleEventBrand: unique symbol;
+/**
+ * Something that opens and closes did.
+ */
+export interface ToggleEvent extends Event {
+  readonly [ToggleEventBrand]: never;
+  readonly newState: string;
+  readonly oldState: string;
+}
+
+declare const AnimationEventBrand: unique symbol;
+/**
+ * A CSS animation reached one of its edges.
+ */
+export interface AnimationEvent extends Event {
+  readonly [AnimationEventBrand]: never;
+  readonly animationName: string;
+  readonly elapsedTime: number;
+  readonly pseudoElement: string;
+}
+
+declare const TransitionEventBrand: unique symbol;
+/**
+ * A CSS transition reached one of its edges.
+ */
+export interface TransitionEvent extends Event {
+  readonly [TransitionEventBrand]: never;
+  readonly elapsedTime: number;
+  readonly propertyName: string;
+  readonly pseudoElement: string;
+}
+
+declare const ProgressEventBrand: unique symbol;
+/**
+ * Something loading said how far it had got.
+ */
+export interface ProgressEvent extends Event {
+  readonly [ProgressEventBrand]: never;
+  readonly lengthComputable: boolean;
+  readonly loaded: number;
+  readonly total: number;
+}
+
+declare const ErrorEventBrand: unique symbol;
+/**
+ * Something failed, and said where.
+ */
+export interface ErrorEvent extends Event {
+  readonly [ErrorEventBrand]: never;
+  readonly colno: number;
+  readonly filename: string;
+  readonly lineno: number;
+  readonly message: string;
+}
 
 export type HtmlNode = ClientElement | string | number | null;
 
@@ -185,93 +436,93 @@ export interface AriaAttributes {
 }
 
 export interface Events {
-  oncopy?: Prop<() => void>;
-  oncut?: Prop<() => void>;
-  onpaste?: Prop<() => void>;
-  oncompositionend?: Prop<() => void>;
-  oncompositionstart?: Prop<() => void>;
-  oncompositionupdate?: Prop<() => void>;
-  onblur?: Prop<() => void>;
-  onfocus?: Prop<() => void>;
-  onfocusin?: Prop<() => void>;
-  onfocusout?: Prop<() => void>;
-  onbeforeinput?: Prop<() => void>;
-  onchange?: Prop<() => void>;
-  oninput?: Prop<() => void>;
-  oninvalid?: Prop<() => void>;
-  onreset?: Prop<() => void>;
-  onselect?: Prop<() => void>;
-  onsubmit?: Prop<() => void>;
-  onerror?: Prop<() => void>;
-  onload?: Prop<() => void>;
-  onkeydown?: Prop<() => void>;
-  onkeypress?: Prop<() => void>;
-  onkeyup?: Prop<() => void>;
-  onabort?: Prop<() => void>;
-  oncanplay?: Prop<() => void>;
-  oncanplaythrough?: Prop<() => void>;
-  ondurationchange?: Prop<() => void>;
-  onemptied?: Prop<() => void>;
-  onended?: Prop<() => void>;
-  onloadeddata?: Prop<() => void>;
-  onloadedmetadata?: Prop<() => void>;
-  onloadstart?: Prop<() => void>;
-  onpause?: Prop<() => void>;
-  onplay?: Prop<() => void>;
-  onplaying?: Prop<() => void>;
-  onprogress?: Prop<() => void>;
-  onratechange?: Prop<() => void>;
-  onseeked?: Prop<() => void>;
-  onseeking?: Prop<() => void>;
-  onstalled?: Prop<() => void>;
-  onsuspend?: Prop<() => void>;
-  ontimeupdate?: Prop<() => void>;
-  onvolumechange?: Prop<() => void>;
-  onwaiting?: Prop<() => void>;
-  onauxclick?: Prop<() => void>;
-  onclick?: Prop<() => void>;
-  oncontextmenu?: Prop<() => void>;
-  ondblclick?: Prop<() => void>;
-  onmousedown?: Prop<() => void>;
-  onmouseenter?: Prop<() => void>;
-  onmouseleave?: Prop<() => void>;
-  onmousemove?: Prop<() => void>;
-  onmouseout?: Prop<() => void>;
-  onmouseover?: Prop<() => void>;
-  onmouseup?: Prop<() => void>;
-  ondrag?: Prop<() => void>;
-  ondragend?: Prop<() => void>;
-  ondragenter?: Prop<() => void>;
-  ondragleave?: Prop<() => void>;
-  ondragover?: Prop<() => void>;
-  ondragstart?: Prop<() => void>;
-  ondrop?: Prop<() => void>;
-  ontouchcancel?: Prop<() => void>;
-  ontouchend?: Prop<() => void>;
-  ontouchmove?: Prop<() => void>;
-  ontouchstart?: Prop<() => void>;
-  ongotpointercapture?: Prop<() => void>;
-  onlostpointercapture?: Prop<() => void>;
-  onpointercancel?: Prop<() => void>;
-  onpointerdown?: Prop<() => void>;
-  onpointerenter?: Prop<() => void>;
-  onpointerleave?: Prop<() => void>;
-  onpointermove?: Prop<() => void>;
-  onpointerout?: Prop<() => void>;
-  onpointerover?: Prop<() => void>;
-  onpointerup?: Prop<() => void>;
-  onscroll?: Prop<() => void>;
-  onscrollend?: Prop<() => void>;
-  onwheel?: Prop<() => void>;
-  onanimationend?: Prop<() => void>;
-  onanimationiteration?: Prop<() => void>;
-  onanimationstart?: Prop<() => void>;
-  ontransitioncancel?: Prop<() => void>;
-  ontransitionend?: Prop<() => void>;
-  ontransitionrun?: Prop<() => void>;
-  ontransitionstart?: Prop<() => void>;
-  onbeforetoggle?: Prop<() => void>;
-  ontoggle?: Prop<() => void>;
+  oncopy?: Prop<(event: ClipboardEvent) => void>;
+  oncut?: Prop<(event: ClipboardEvent) => void>;
+  onpaste?: Prop<(event: ClipboardEvent) => void>;
+  oncompositionend?: Prop<(event: CompositionEvent) => void>;
+  oncompositionstart?: Prop<(event: CompositionEvent) => void>;
+  oncompositionupdate?: Prop<(event: CompositionEvent) => void>;
+  onblur?: Prop<(event: FocusEvent) => void>;
+  onfocus?: Prop<(event: FocusEvent) => void>;
+  onfocusin?: Prop<(event: FocusEvent) => void>;
+  onfocusout?: Prop<(event: FocusEvent) => void>;
+  onbeforeinput?: Prop<(event: InputEvent) => void>;
+  onchange?: Prop<(event: Event) => void>;
+  oninput?: Prop<(event: InputEvent) => void>;
+  oninvalid?: Prop<(event: Event) => void>;
+  onreset?: Prop<(event: Event) => void>;
+  onselect?: Prop<(event: Event) => void>;
+  onsubmit?: Prop<(event: SubmitEvent) => void>;
+  onerror?: Prop<(event: ErrorEvent) => void>;
+  onload?: Prop<(event: Event) => void>;
+  onkeydown?: Prop<(event: KeyboardEvent) => void>;
+  onkeypress?: Prop<(event: KeyboardEvent) => void>;
+  onkeyup?: Prop<(event: KeyboardEvent) => void>;
+  onabort?: Prop<(event: UIEvent) => void>;
+  oncanplay?: Prop<(event: Event) => void>;
+  oncanplaythrough?: Prop<(event: Event) => void>;
+  ondurationchange?: Prop<(event: Event) => void>;
+  onemptied?: Prop<(event: Event) => void>;
+  onended?: Prop<(event: Event) => void>;
+  onloadeddata?: Prop<(event: Event) => void>;
+  onloadedmetadata?: Prop<(event: Event) => void>;
+  onloadstart?: Prop<(event: Event) => void>;
+  onpause?: Prop<(event: Event) => void>;
+  onplay?: Prop<(event: Event) => void>;
+  onplaying?: Prop<(event: Event) => void>;
+  onprogress?: Prop<(event: ProgressEvent) => void>;
+  onratechange?: Prop<(event: Event) => void>;
+  onseeked?: Prop<(event: Event) => void>;
+  onseeking?: Prop<(event: Event) => void>;
+  onstalled?: Prop<(event: Event) => void>;
+  onsuspend?: Prop<(event: Event) => void>;
+  ontimeupdate?: Prop<(event: Event) => void>;
+  onvolumechange?: Prop<(event: Event) => void>;
+  onwaiting?: Prop<(event: Event) => void>;
+  onauxclick?: Prop<(event: PointerEvent) => void>;
+  onclick?: Prop<(event: PointerEvent) => void>;
+  oncontextmenu?: Prop<(event: PointerEvent) => void>;
+  ondblclick?: Prop<(event: MouseEvent) => void>;
+  onmousedown?: Prop<(event: MouseEvent) => void>;
+  onmouseenter?: Prop<(event: MouseEvent) => void>;
+  onmouseleave?: Prop<(event: MouseEvent) => void>;
+  onmousemove?: Prop<(event: MouseEvent) => void>;
+  onmouseout?: Prop<(event: MouseEvent) => void>;
+  onmouseover?: Prop<(event: MouseEvent) => void>;
+  onmouseup?: Prop<(event: MouseEvent) => void>;
+  ondrag?: Prop<(event: DragEvent) => void>;
+  ondragend?: Prop<(event: DragEvent) => void>;
+  ondragenter?: Prop<(event: DragEvent) => void>;
+  ondragleave?: Prop<(event: DragEvent) => void>;
+  ondragover?: Prop<(event: DragEvent) => void>;
+  ondragstart?: Prop<(event: DragEvent) => void>;
+  ondrop?: Prop<(event: DragEvent) => void>;
+  ontouchcancel?: Prop<(event: TouchEvent) => void>;
+  ontouchend?: Prop<(event: TouchEvent) => void>;
+  ontouchmove?: Prop<(event: TouchEvent) => void>;
+  ontouchstart?: Prop<(event: TouchEvent) => void>;
+  ongotpointercapture?: Prop<(event: PointerEvent) => void>;
+  onlostpointercapture?: Prop<(event: PointerEvent) => void>;
+  onpointercancel?: Prop<(event: PointerEvent) => void>;
+  onpointerdown?: Prop<(event: PointerEvent) => void>;
+  onpointerenter?: Prop<(event: PointerEvent) => void>;
+  onpointerleave?: Prop<(event: PointerEvent) => void>;
+  onpointermove?: Prop<(event: PointerEvent) => void>;
+  onpointerout?: Prop<(event: PointerEvent) => void>;
+  onpointerover?: Prop<(event: PointerEvent) => void>;
+  onpointerup?: Prop<(event: PointerEvent) => void>;
+  onscroll?: Prop<(event: Event) => void>;
+  onscrollend?: Prop<(event: Event) => void>;
+  onwheel?: Prop<(event: WheelEvent) => void>;
+  onanimationend?: Prop<(event: AnimationEvent) => void>;
+  onanimationiteration?: Prop<(event: AnimationEvent) => void>;
+  onanimationstart?: Prop<(event: AnimationEvent) => void>;
+  ontransitioncancel?: Prop<(event: TransitionEvent) => void>;
+  ontransitionend?: Prop<(event: TransitionEvent) => void>;
+  ontransitionrun?: Prop<(event: TransitionEvent) => void>;
+  ontransitionstart?: Prop<(event: TransitionEvent) => void>;
+  onbeforetoggle?: Prop<(event: ToggleEvent) => void>;
+  ontoggle?: Prop<(event: ToggleEvent) => void>;
 }
 
 export interface GlobalAttributes extends AriaAttributes, Events {

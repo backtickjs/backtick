@@ -211,7 +211,15 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     //
     // The cast reads through a brand: a handle's type says opaque, and a cell
     // being `{ read, write, update }` underneath is this client's knowledge.
-    return (object as { readonly [name: string]: ClientValue })[name] ?? null;
+    const held =
+      (object as { readonly [name: string]: ClientValue })[name] ?? null;
+    // Bound, because some of these objects are the host's own. A cell's members
+    // are closures and do not care, but an event's are methods that read the
+    // event through `this` — and `preventDefault` reached off one and called
+    // without it throws rather than answering.
+    return typeof held === "function"
+      ? (held.bind(object) as ClientValue)
+      : held;
   }
   const whole = `${boxed}.${name}`;
   const found: ClientValue | undefined = language[whole];

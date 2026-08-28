@@ -13,6 +13,221 @@ export const schema: Schema = {
   publishes: [],
 
   types: {
+    /**
+     * What a handler is handed.
+     *
+     * The names and the shapes are the DOM's, taken from `lib.dom.d.ts` rather
+     * than chosen here: a target's schema says what that target does, and what
+     * this one does is the web. Which event a handler is handed is the DOM's
+     * decision too — `click` is a `PointerEvent` and `input` is an
+     * `InputEvent`, whatever either sounds like.
+     *
+     * A property whose type is one this schema does not declare — a
+     * `DataTransfer`, a `TouchList`, an `HTMLElement` — is left out rather than
+     * guessed at. It is absent because it is not written yet, not because the
+     * DOM does not have it.
+     */
+    EventTarget: Type.Interface([Type.Ref("ClientHandle")], {}, {
+      description:
+        "What an event happened to.\n\nOpaque, as the DOM has it: reaching an element's own members through one needs a cast, and this language has none. That is the gap to close next, not a thing to paper over here.",
+    }),
+    Event: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {
+        bubbles: Type.Boolean({ readOnly: true }),
+        cancelable: Type.Boolean({ readOnly: true }),
+        composed: Type.Boolean({ readOnly: true }),
+        currentTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+        defaultPrevented: Type.Boolean({ readOnly: true }),
+        eventPhase: Type.Number({ readOnly: true }),
+        isTrusted: Type.Boolean({ readOnly: true }),
+        srcElement: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+        target: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+        type: Type.String({ readOnly: true }),
+        timeStamp: Type.Number({ readOnly: true }),
+        preventDefault: Type.Function([], Type.Void()),
+        stopPropagation: Type.Function([], Type.Void()),
+        stopImmediatePropagation: Type.Function([], Type.Void()),
+      },
+      { description: "Anything that happens to an element, and what every other event here is one of." },
+    ),
+    UIEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+        detail: Type.Number({ readOnly: true }),
+        which: Type.Number({ readOnly: true }),
+      },
+      { description: "An event that came from the interface rather than from the page's own code." },
+    ),
+    MouseEvent: Type.Interface(
+      [Type.Ref("UIEvent")],
+      {
+        altKey: Type.Boolean({ readOnly: true }),
+        button: Type.Number({ readOnly: true }),
+        buttons: Type.Number({ readOnly: true }),
+        clientX: Type.Number({ readOnly: true }),
+        clientY: Type.Number({ readOnly: true }),
+        ctrlKey: Type.Boolean({ readOnly: true }),
+        layerX: Type.Number({ readOnly: true }),
+        layerY: Type.Number({ readOnly: true }),
+        metaKey: Type.Boolean({ readOnly: true }),
+        movementX: Type.Number({ readOnly: true }),
+        movementY: Type.Number({ readOnly: true }),
+        offsetX: Type.Number({ readOnly: true }),
+        offsetY: Type.Number({ readOnly: true }),
+        pageX: Type.Number({ readOnly: true }),
+        pageY: Type.Number({ readOnly: true }),
+        relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+        screenX: Type.Number({ readOnly: true }),
+        screenY: Type.Number({ readOnly: true }),
+        shiftKey: Type.Boolean({ readOnly: true }),
+        x: Type.Number({ readOnly: true }),
+        y: Type.Number({ readOnly: true }),
+      },
+      { description: "A pointing device did something, and where it was when it did." },
+    ),
+    PointerEvent: Type.Interface(
+      [Type.Ref("MouseEvent")],
+      {
+        altitudeAngle: Type.Number({ readOnly: true }),
+        azimuthAngle: Type.Number({ readOnly: true }),
+        height: Type.Number({ readOnly: true }),
+        isPrimary: Type.Boolean({ readOnly: true }),
+        persistentDeviceId: Type.Number({ readOnly: true }),
+        pointerId: Type.Number({ readOnly: true }),
+        pointerType: Type.String({ readOnly: true }),
+        pressure: Type.Number({ readOnly: true }),
+        tangentialPressure: Type.Number({ readOnly: true }),
+        tiltX: Type.Number({ readOnly: true }),
+        tiltY: Type.Number({ readOnly: true }),
+        twist: Type.Number({ readOnly: true }),
+        width: Type.Number({ readOnly: true }),
+      },
+      { description: "A mouse, a pen or a finger \u2014 what the DOM hands a click, whichever it was." },
+    ),
+    DragEvent: Type.Interface(
+      [Type.Ref("MouseEvent")],
+      {
+      },
+      { description: "Something is being dragged. What is being carried is a `DataTransfer`, which this schema does not declare." },
+    ),
+    WheelEvent: Type.Interface(
+      [Type.Ref("MouseEvent")],
+      {
+        deltaMode: Type.Number({ readOnly: true }),
+        deltaX: Type.Number({ readOnly: true }),
+        deltaY: Type.Number({ readOnly: true }),
+        deltaZ: Type.Number({ readOnly: true }),
+      },
+      { description: "A wheel turned, and by how much in which units." },
+    ),
+    KeyboardEvent: Type.Interface(
+      [Type.Ref("UIEvent")],
+      {
+        altKey: Type.Boolean({ readOnly: true }),
+        charCode: Type.Number({ readOnly: true }),
+        code: Type.String({ readOnly: true }),
+        ctrlKey: Type.Boolean({ readOnly: true }),
+        isComposing: Type.Boolean({ readOnly: true }),
+        key: Type.String({ readOnly: true }),
+        keyCode: Type.Number({ readOnly: true }),
+        location: Type.Number({ readOnly: true }),
+        metaKey: Type.Boolean({ readOnly: true }),
+        repeat: Type.Boolean({ readOnly: true }),
+        shiftKey: Type.Boolean({ readOnly: true }),
+      },
+      { description: "A key went down or came up, and which key it was." },
+    ),
+    InputEvent: Type.Interface(
+      [Type.Ref("UIEvent")],
+      {
+        data: Type.Union([Type.String(), Type.Null()], { readOnly: true }),
+        inputType: Type.String({ readOnly: true }),
+        isComposing: Type.Boolean({ readOnly: true }),
+      },
+      { description: "The value of an editable element changed, and how." },
+    ),
+    CompositionEvent: Type.Interface(
+      [Type.Ref("UIEvent")],
+      {
+        data: Type.String({ readOnly: true }),
+      },
+      { description: "Text is being composed \u2014 an input method is part-way through a character." },
+    ),
+    FocusEvent: Type.Interface(
+      [Type.Ref("UIEvent")],
+      {
+        relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+      },
+      { description: "Focus arrived or left." },
+    ),
+    TouchEvent: Type.Interface(
+      [Type.Ref("UIEvent")],
+      {
+        altKey: Type.Boolean({ readOnly: true }),
+        ctrlKey: Type.Boolean({ readOnly: true }),
+        metaKey: Type.Boolean({ readOnly: true }),
+        shiftKey: Type.Boolean({ readOnly: true }),
+      },
+      { description: "Fingers on a screen. The lists of touches are `TouchList`s, which this schema does not declare." },
+    ),
+    ClipboardEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+      },
+      { description: "A copy, cut or paste. What is on the clipboard is a `DataTransfer`, which this schema does not declare." },
+    ),
+    SubmitEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+      },
+      { description: "A form was submitted. The submitter is an `HTMLElement`, which this schema does not declare." },
+    ),
+    ToggleEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+        newState: Type.String({ readOnly: true }),
+        oldState: Type.String({ readOnly: true }),
+      },
+      { description: "Something that opens and closes did." },
+    ),
+    AnimationEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+        animationName: Type.String({ readOnly: true }),
+        elapsedTime: Type.Number({ readOnly: true }),
+        pseudoElement: Type.String({ readOnly: true }),
+      },
+      { description: "A CSS animation reached one of its edges." },
+    ),
+    TransitionEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+        elapsedTime: Type.Number({ readOnly: true }),
+        propertyName: Type.String({ readOnly: true }),
+        pseudoElement: Type.String({ readOnly: true }),
+      },
+      { description: "A CSS transition reached one of its edges." },
+    ),
+    ProgressEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+        lengthComputable: Type.Boolean({ readOnly: true }),
+        loaded: Type.Number({ readOnly: true }),
+        total: Type.Number({ readOnly: true }),
+      },
+      { description: "Something loading said how far it had got." },
+    ),
+    ErrorEvent: Type.Interface(
+      [Type.Ref("Event")],
+      {
+        colno: Type.Number({ readOnly: true }),
+        filename: Type.String({ readOnly: true }),
+        lineno: Type.Number({ readOnly: true }),
+        message: Type.String({ readOnly: true }),
+      },
+      { description: "Something failed, and said where." },
+    ),
     HtmlNode: Type.Union([
       Type.Ref("ClientElement"),
       Type.String(),
@@ -252,93 +467,528 @@ export const schema: Schema = {
       "aria-valuetext": Type.Optional(Type.String()),
     }),
     Events: Type.Interface([], {
-      oncopy: Type.Optional(Type.Function([], Type.Void())),
-      oncut: Type.Optional(Type.Function([], Type.Void())),
-      onpaste: Type.Optional(Type.Function([], Type.Void())),
-      oncompositionend: Type.Optional(Type.Function([], Type.Void())),
-      oncompositionstart: Type.Optional(Type.Function([], Type.Void())),
-      oncompositionupdate: Type.Optional(Type.Function([], Type.Void())),
-      onblur: Type.Optional(Type.Function([], Type.Void())),
-      onfocus: Type.Optional(Type.Function([], Type.Void())),
-      onfocusin: Type.Optional(Type.Function([], Type.Void())),
-      onfocusout: Type.Optional(Type.Function([], Type.Void())),
-      onbeforeinput: Type.Optional(Type.Function([], Type.Void())),
-      onchange: Type.Optional(Type.Function([], Type.Void())),
-      oninput: Type.Optional(Type.Function([], Type.Void())),
-      oninvalid: Type.Optional(Type.Function([], Type.Void())),
-      onreset: Type.Optional(Type.Function([], Type.Void())),
-      onselect: Type.Optional(Type.Function([], Type.Void())),
-      onsubmit: Type.Optional(Type.Function([], Type.Void())),
-      onerror: Type.Optional(Type.Function([], Type.Void())),
-      onload: Type.Optional(Type.Function([], Type.Void())),
-      onkeydown: Type.Optional(Type.Function([], Type.Void())),
-      onkeypress: Type.Optional(Type.Function([], Type.Void())),
-      onkeyup: Type.Optional(Type.Function([], Type.Void())),
-      onabort: Type.Optional(Type.Function([], Type.Void())),
-      oncanplay: Type.Optional(Type.Function([], Type.Void())),
-      oncanplaythrough: Type.Optional(Type.Function([], Type.Void())),
-      ondurationchange: Type.Optional(Type.Function([], Type.Void())),
-      onemptied: Type.Optional(Type.Function([], Type.Void())),
-      onended: Type.Optional(Type.Function([], Type.Void())),
-      onloadeddata: Type.Optional(Type.Function([], Type.Void())),
-      onloadedmetadata: Type.Optional(Type.Function([], Type.Void())),
-      onloadstart: Type.Optional(Type.Function([], Type.Void())),
-      onpause: Type.Optional(Type.Function([], Type.Void())),
-      onplay: Type.Optional(Type.Function([], Type.Void())),
-      onplaying: Type.Optional(Type.Function([], Type.Void())),
-      onprogress: Type.Optional(Type.Function([], Type.Void())),
-      onratechange: Type.Optional(Type.Function([], Type.Void())),
-      onseeked: Type.Optional(Type.Function([], Type.Void())),
-      onseeking: Type.Optional(Type.Function([], Type.Void())),
-      onstalled: Type.Optional(Type.Function([], Type.Void())),
-      onsuspend: Type.Optional(Type.Function([], Type.Void())),
-      ontimeupdate: Type.Optional(Type.Function([], Type.Void())),
-      onvolumechange: Type.Optional(Type.Function([], Type.Void())),
-      onwaiting: Type.Optional(Type.Function([], Type.Void())),
-      onauxclick: Type.Optional(Type.Function([], Type.Void())),
-      onclick: Type.Optional(Type.Function([], Type.Void())),
-      oncontextmenu: Type.Optional(Type.Function([], Type.Void())),
-      ondblclick: Type.Optional(Type.Function([], Type.Void())),
-      onmousedown: Type.Optional(Type.Function([], Type.Void())),
-      onmouseenter: Type.Optional(Type.Function([], Type.Void())),
-      onmouseleave: Type.Optional(Type.Function([], Type.Void())),
-      onmousemove: Type.Optional(Type.Function([], Type.Void())),
-      onmouseout: Type.Optional(Type.Function([], Type.Void())),
-      onmouseover: Type.Optional(Type.Function([], Type.Void())),
-      onmouseup: Type.Optional(Type.Function([], Type.Void())),
-      ondrag: Type.Optional(Type.Function([], Type.Void())),
-      ondragend: Type.Optional(Type.Function([], Type.Void())),
-      ondragenter: Type.Optional(Type.Function([], Type.Void())),
-      ondragleave: Type.Optional(Type.Function([], Type.Void())),
-      ondragover: Type.Optional(Type.Function([], Type.Void())),
-      ondragstart: Type.Optional(Type.Function([], Type.Void())),
-      ondrop: Type.Optional(Type.Function([], Type.Void())),
-      ontouchcancel: Type.Optional(Type.Function([], Type.Void())),
-      ontouchend: Type.Optional(Type.Function([], Type.Void())),
-      ontouchmove: Type.Optional(Type.Function([], Type.Void())),
-      ontouchstart: Type.Optional(Type.Function([], Type.Void())),
-      ongotpointercapture: Type.Optional(Type.Function([], Type.Void())),
-      onlostpointercapture: Type.Optional(Type.Function([], Type.Void())),
-      onpointercancel: Type.Optional(Type.Function([], Type.Void())),
-      onpointerdown: Type.Optional(Type.Function([], Type.Void())),
-      onpointerenter: Type.Optional(Type.Function([], Type.Void())),
-      onpointerleave: Type.Optional(Type.Function([], Type.Void())),
-      onpointermove: Type.Optional(Type.Function([], Type.Void())),
-      onpointerout: Type.Optional(Type.Function([], Type.Void())),
-      onpointerover: Type.Optional(Type.Function([], Type.Void())),
-      onpointerup: Type.Optional(Type.Function([], Type.Void())),
-      onscroll: Type.Optional(Type.Function([], Type.Void())),
-      onscrollend: Type.Optional(Type.Function([], Type.Void())),
-      onwheel: Type.Optional(Type.Function([], Type.Void())),
-      onanimationend: Type.Optional(Type.Function([], Type.Void())),
-      onanimationiteration: Type.Optional(Type.Function([], Type.Void())),
-      onanimationstart: Type.Optional(Type.Function([], Type.Void())),
-      ontransitioncancel: Type.Optional(Type.Function([], Type.Void())),
-      ontransitionend: Type.Optional(Type.Function([], Type.Void())),
-      ontransitionrun: Type.Optional(Type.Function([], Type.Void())),
-      ontransitionstart: Type.Optional(Type.Function([], Type.Void())),
-      onbeforetoggle: Type.Optional(Type.Function([], Type.Void())),
-      ontoggle: Type.Optional(Type.Function([], Type.Void())),
+      oncopy: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ClipboardEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oncut: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ClipboardEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpaste: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ClipboardEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oncompositionend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("CompositionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oncompositionstart: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("CompositionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oncompositionupdate: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("CompositionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onblur: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onfocus: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onfocusin: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onfocusout: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onbeforeinput: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("InputEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onchange: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      oninput: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("InputEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oninvalid: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onreset: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onselect: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onsubmit: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("SubmitEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onerror: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ErrorEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onload: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onkeydown: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("KeyboardEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onkeypress: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("KeyboardEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onkeyup: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("KeyboardEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onabort: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("UIEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oncanplay: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      oncanplaythrough: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      ondurationchange: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onemptied: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onended: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onloadeddata: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onloadedmetadata: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onloadstart: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onpause: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onplay: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onplaying: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onprogress: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ProgressEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onratechange: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onseeked: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onseeking: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onstalled: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onsuspend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      ontimeupdate: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onvolumechange: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onwaiting: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onauxclick: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onclick: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      oncontextmenu: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondblclick: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmousedown: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmouseenter: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmouseleave: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmousemove: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmouseout: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmouseover: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onmouseup: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondrag: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondragend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondragenter: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondragleave: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondragover: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondragstart: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ondrop: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontouchcancel: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontouchend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontouchmove: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontouchstart: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ongotpointercapture: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onlostpointercapture: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointercancel: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointerdown: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointerenter: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointerleave: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointermove: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointerout: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointerover: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onpointerup: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onscroll: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onscrollend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          Type.Void(),
+        ),
+      ),
+      onwheel: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("WheelEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onanimationend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("AnimationEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onanimationiteration: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("AnimationEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onanimationstart: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("AnimationEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontransitioncancel: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontransitionend: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontransitionrun: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontransitionstart: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          Type.Void(),
+        ),
+      ),
+      onbeforetoggle: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ToggleEvent"))],
+          Type.Void(),
+        ),
+      ),
+      ontoggle: Type.Optional(
+        Type.Function(
+          [Type.FunctionParameter("event", Type.Ref("ToggleEvent"))],
+          Type.Void(),
+        ),
+      ),
     }),
     GlobalAttributes: Type.Interface(
       [Type.Ref("AriaAttributes"), Type.Ref("Events")],

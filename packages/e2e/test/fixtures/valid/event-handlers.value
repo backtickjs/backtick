@@ -1,0 +1,6 @@
+<form onsubmit={[function]}>
+  <button onclick={[function]} onkeydown={[function]}>
+    {""}
+  </button>
+  <input oninput={[function]} />
+</form>

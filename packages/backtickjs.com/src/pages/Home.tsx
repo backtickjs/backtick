@@ -1,6 +1,6 @@
 import { Hero } from "../components/Hero.js";
 import { Playground } from "@backtickjs/playground";
-import { COUNTER_EXAMPLE, EXAMPLE } from "../play/examples.js";
+import { COUNTER_EXAMPLE, EXAMPLE, POINTER_EXAMPLE } from "../play/examples.js";
 
 export async function Home() {
   return (
@@ -24,8 +24,14 @@ export async function Home() {
           between them is the name and the example — everything else on the two
           is the package's, which is the point of being able to see them side by
           side. */}
-      <section style="padding: 0 0 68px">
+      <section style="padding: 0 0 40px">
         <Playground example={COUNTER_EXAMPLE.source} />
+      </section>
+
+      {/* A handler is handed the event the DOM sends it, so where a tap landed
+          and which keys were down are read off it rather than fetched. */}
+      <section style="padding: 0 0 68px">
+        <Playground example={POINTER_EXAMPLE.source} />
       </section>
     </>
   );
