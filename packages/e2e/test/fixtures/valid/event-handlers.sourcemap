@@ -17,26 +17,14 @@ form                                      → form
                                           → \n      
 onsubmit                                  → onsubmit
 ={cs.lift(                                → ={
-(                                         → (
 __cs_event                                → event
-:                                         → : 
-SubmitEvent                               → SubmitEvent
-) => {\n                                  → ) => {\n        // The three every event carries, which is what stopping one takes.\n        
+ => {\n                                   → ) => {\n        
 cs.statement(                             → 
 cs.receiver(                              → 
 __cs_event                                → event
 )                                         → 
 .                                         → .
 preventDefault                            → preventDefault
-()                                        → ()
-);                                        → ;
-\n                                        → \n        
-cs.statement(                             → 
-cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-stopPropagation                           → stopPropagation
 ()                                        → ()
 );                                        → ;
 \n                                        → \n        
@@ -60,30 +48,70 @@ __cs_event                                → event
 )                                         → 
 .                                         → .
 cancelable                                → cancelable
- +                                        →  + 
-" "                                       → " "
- +                                        →  + 
-cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-defaultPrevented                          → defaultPrevented
 )                                         → )
 );                                        → ;
 \n    }                                   → \n      }
 )}                                        → }
 >{cs.lift(                                → \n    >\n      
 <                                         → <
+textarea                                  → textarea
+                                          →  
+oninput                                   → oninput
+={cs.lift(                                → ={
+__cs_event                                → event
+ =>                                       → ) => 
+cs.receiver(                              → 
+__cs_said                                 → said
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+cs.receiver(                              → 
+cs.receiver(                              → 
+__cs_event                                → event
+)                                         → 
+.                                         → .
+currentTarget                             → currentTarget
+)                                         → 
+.                                         → .
+value                                     → value
+)                                         → )
+)}                                        → }
+/>                                        →  />
+)}{cs.lift(                               → \n      
+<                                         → <
+input                                     → input
+                                          →  
+oninput                                   → oninput
+={cs.lift(                                → ={
+__cs_event                                → event
+ =>                                       → ) => 
+cs.receiver(                              → 
+__cs_said                                 → said
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+cs.receiver(                              → 
+cs.receiver(                              → 
+__cs_event                                → event
+)                                         → 
+.                                         → .
+currentTarget                             → currentTarget
+)                                         → 
+.                                         → .
+value                                     → value
+)                                         → )
+)}                                        → }
+/>                                        →  />
+)}{cs.lift(                               → \n      
+<                                         → <
 button                                    → button
-                                          → \n        
+                                          →  
 onclick                                   → onclick
 ={cs.lift(                                → ={
-(                                         → (
 __cs_event                                → event
-:                                         → : 
-PointerEvent                              → PointerEvent
-) => {\n                                  → ) => {\n          
-cs.statement(                             → 
+ =>                                       → ) => 
 cs.receiver(                              → 
 __cs_said                                 → said
 )                                         → 
@@ -99,63 +127,17 @@ clientX                                   → clientX
 " "                                       → " "
  +                                        →  + 
 cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-pointerType                               → pointerType
- +                                        →  + 
-" "                                       → " "
- +                                        →  + 
 cs.receiver(                              → 
 __cs_event                                → event
 )                                         → 
 .                                         → .
-altKey                                    → altKey
+currentTarget                             → currentTarget
+)                                         → 
+.                                         → .
+tagName                                   → tagName
 )                                         → )
-);                                        → ;
-\n    }                                   → \n        }
 )}                                        → }
-                                          → \n        
-onkeydown                                 → onkeydown
-={cs.lift(                                → ={
-(                                         → (
-__cs_event                                → event
-:                                         → : 
-KeyboardEvent                             → KeyboardEvent
-) => {\n                                  → ) => {\n          
-cs.statement(                             → 
-cs.receiver(                              → 
-__cs_said                                 → said
-)                                         → 
-.                                         → .
-write                                     → write
-(                                         → (
-cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-key                                       → key
- +                                        →  + 
-" "                                       → " "
- +                                        →  + 
-cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-repeat                                    → repeat
- +                                        →  + 
-" "                                       → " "
- +                                        →  + 
-cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-ctrlKey                                   → ctrlKey
-)                                         → )
-);                                        → ;
-\n    }                                   → \n        }
-)}                                        → }
->{cs.lift(                                → \n      >\n        {
+>{cs.lift(                                → >\n        {
 cs.receiver(                              → 
 __cs_said                                 → said
 )                                         → 
@@ -165,31 +147,6 @@ read                                      → read
 )}</                                      → }\n      </
 button                                    → button
 >                                         → >
-)}{cs.lift(                               → \n      
-<                                         → <
-input                                     → input
-                                          →  
-oninput                                   → oninput
-={cs.lift(                                → ={
-(                                         → (
-__cs_event                                → event
-:                                         → : 
-InputEvent                                → InputEvent
-) =>                                      → ) => 
-cs.receiver(                              → 
-__cs_said                                 → said
-)                                         → 
-.                                         → .
-write                                     → write
-(                                         → (
-cs.receiver(                              → 
-__cs_event                                → event
-)                                         → 
-.                                         → .
-inputType                                 → inputType
-)                                         → )
-)}                                        → }
-/>                                        →  />
 )}</                                      → \n    </
 form                                      → form
 >                                         → >\n  )

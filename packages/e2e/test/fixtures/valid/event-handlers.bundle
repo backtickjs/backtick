@@ -70,20 +70,6 @@
                             1002,
                             [
                               1000,
-                              "event"
-                            ],
-                            false,
-                            "stopPropagation"
-                          ],
-                          false,
-                          []
-                        ],
-                        [
-                          1001,
-                          [
-                            1002,
-                            [
-                              1000,
                               "said"
                             ],
                             false,
@@ -98,31 +84,13 @@
                                 1003,
                                 "+",
                                 [
-                                  1003,
-                                  "+",
+                                  1002,
                                   [
-                                    1003,
-                                    "+",
-                                    [
-                                      1002,
-                                      [
-                                        1000,
-                                        "event"
-                                      ],
-                                      false,
-                                      "type"
-                                    ],
-                                    " "
+                                    1000,
+                                    "event"
                                   ],
-                                  [
-                                    1002,
-                                    [
-                                      1000,
-                                      "event"
-                                    ],
-                                    false,
-                                    "cancelable"
-                                  ]
+                                  false,
+                                  "type"
                                 ],
                                 " "
                               ],
@@ -133,7 +101,7 @@
                                   "event"
                                 ],
                                 false,
-                                "defaultPrevented"
+                                "cancelable"
                               ]
                             ]
                           ]
@@ -147,9 +115,9 @@
                   [
                     [
                       0,
-                      "button",
+                      "textarea",
                       {
-                        "onclick": [
+                        "oninput": [
                           1005,
                           [
                             [
@@ -158,160 +126,37 @@
                             ]
                           ],
                           [
-                            1006,
+                            1001,
+                            [
+                              1002,
+                              [
+                                1000,
+                                "said"
+                              ],
+                              false,
+                              "write"
+                            ],
+                            false,
                             [
                               [
-                                1001,
+                                1002,
                                 [
                                   1002,
                                   [
                                     1000,
-                                    "said"
+                                    "event"
                                   ],
                                   false,
-                                  "write"
+                                  "currentTarget"
                                 ],
                                 false,
-                                [
-                                  [
-                                    1003,
-                                    "+",
-                                    [
-                                      1003,
-                                      "+",
-                                      [
-                                        1003,
-                                        "+",
-                                        [
-                                          1003,
-                                          "+",
-                                          [
-                                            1002,
-                                            [
-                                              1000,
-                                              "event"
-                                            ],
-                                            false,
-                                            "clientX"
-                                          ],
-                                          " "
-                                        ],
-                                        [
-                                          1002,
-                                          [
-                                            1000,
-                                            "event"
-                                          ],
-                                          false,
-                                          "pointerType"
-                                        ]
-                                      ],
-                                      " "
-                                    ],
-                                    [
-                                      1002,
-                                      [
-                                        1000,
-                                        "event"
-                                      ],
-                                      false,
-                                      "altKey"
-                                    ]
-                                  ]
-                                ]
-                              ]
-                            ]
-                          ]
-                        ],
-                        "onkeydown": [
-                          1005,
-                          [
-                            [
-                              1018,
-                              "event"
-                            ]
-                          ],
-                          [
-                            1006,
-                            [
-                              [
-                                1001,
-                                [
-                                  1002,
-                                  [
-                                    1000,
-                                    "said"
-                                  ],
-                                  false,
-                                  "write"
-                                ],
-                                false,
-                                [
-                                  [
-                                    1003,
-                                    "+",
-                                    [
-                                      1003,
-                                      "+",
-                                      [
-                                        1003,
-                                        "+",
-                                        [
-                                          1003,
-                                          "+",
-                                          [
-                                            1002,
-                                            [
-                                              1000,
-                                              "event"
-                                            ],
-                                            false,
-                                            "key"
-                                          ],
-                                          " "
-                                        ],
-                                        [
-                                          1002,
-                                          [
-                                            1000,
-                                            "event"
-                                          ],
-                                          false,
-                                          "repeat"
-                                        ]
-                                      ],
-                                      " "
-                                    ],
-                                    [
-                                      1002,
-                                      [
-                                        1000,
-                                        "event"
-                                      ],
-                                      false,
-                                      "ctrlKey"
-                                    ]
-                                  ]
-                                ]
+                                "value"
                               ]
                             ]
                           ]
                         ]
                       },
-                      [
-                        1001,
-                        [
-                          1002,
-                          [
-                            1000,
-                            "said"
-                          ],
-                          false,
-                          "read"
-                        ],
-                        false,
-                        []
-                      ]
+                      null
                     ],
                     [
                       0,
@@ -341,17 +186,98 @@
                               [
                                 1002,
                                 [
-                                  1000,
-                                  "event"
+                                  1002,
+                                  [
+                                    1000,
+                                    "event"
+                                  ],
+                                  false,
+                                  "currentTarget"
                                 ],
                                 false,
-                                "inputType"
+                                "value"
                               ]
                             ]
                           ]
                         ]
                       },
                       null
+                    ],
+                    [
+                      0,
+                      "button",
+                      {
+                        "onclick": [
+                          1005,
+                          [
+                            [
+                              1018,
+                              "event"
+                            ]
+                          ],
+                          [
+                            1001,
+                            [
+                              1002,
+                              [
+                                1000,
+                                "said"
+                              ],
+                              false,
+                              "write"
+                            ],
+                            false,
+                            [
+                              [
+                                1003,
+                                "+",
+                                [
+                                  1003,
+                                  "+",
+                                  [
+                                    1002,
+                                    [
+                                      1000,
+                                      "event"
+                                    ],
+                                    false,
+                                    "clientX"
+                                  ],
+                                  " "
+                                ],
+                                [
+                                  1002,
+                                  [
+                                    1002,
+                                    [
+                                      1000,
+                                      "event"
+                                    ],
+                                    false,
+                                    "currentTarget"
+                                  ],
+                                  false,
+                                  "tagName"
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      },
+                      [
+                        1001,
+                        [
+                          1002,
+                          [
+                            1000,
+                            "said"
+                          ],
+                          false,
+                          "read"
+                        ],
+                        false,
+                        []
+                      ]
                     ]
                   ]
                 ]

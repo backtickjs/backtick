@@ -48,11 +48,17 @@ const COMPLAINTS = "display: grid; gap: 6px; margin-top: 12px";
  * draw.
  *
  * A bundle, like everything else on this page — it draws the chrome, the chips,
- * the columns and the editor itself. What it does not do is read what the reader
- * typed: a handler in this language is `() => void` and hands nothing over, so
- * the wiring is a script beside the bundle rather than part of it. That is the
- * one seam here, it is named in `docs/browser-playground.md`, and closing it is
- * a change to the schema rather than to this file.
+ * the columns and the editor itself. What it does not do is the wiring, which is
+ * a script beside the bundle rather than part of it.
+ *
+ * Reading what the reader typed used to be why. It is not any more: a handler is
+ * handed the event the DOM sends it, and `currentTarget` is the element it is
+ * on, so `event.currentTarget.value` is a thing a script can say. What is left
+ * is the rest of the arrangement — a sandboxed frame, a `postMessage` to it, a
+ * parser fetched into it — none of which the language declares a way to reach,
+ * and none of which it should reach by walking the host's own objects. Those
+ * want to be builtins this target hands over, which is the unfinished half of
+ * `docs/builtins.md`.
  *
  * The two right-hand columns are left for that script to fill. It has every
  * example already compiled — the build did that — so what it puts there on load

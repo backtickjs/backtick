@@ -1,18 +1,16 @@
 import { cs, state } from "@backtickjs/core";
 // A handler is handed what the DOM hands it, and which event that is comes from
-// the DOM rather than from the sound of the name: `click` is a `PointerEvent`,
-// `dblclick` a `MouseEvent`, `input` an `InputEvent`.
+// the DOM: `click` is a `PointerEvent`, `input` an `InputEvent`.
 //
-// The types are imported rather than named bare. The names are the DOM's on
-// purpose, so a bare one reaches the browser's global instead — an import is
-// what shadows it, and without one the two read as unrelated types with the
-// same name.
+// `currentTarget` is the element the handler is on rather than the DOM's opaque
+// `EventTarget`, which is what makes reading a field's value sayable — the DOM
+// expects a cast there, and this language has none.
 export default cs.create(
-  [17, 16, 42, 3],
+  [9, 16, 26, 3],
   {
     version: "0.0.0",
     filePath: "event-handlers.tsx",
-    fileHash: "qgp928dy3drl",
+    fileHash: "3amz4o8kezaww",
     kind: "value",
     splices: { $state: state },
     captures: [],
@@ -20,37 +18,37 @@ export default cs.create(
   },
   () => ({
     kind: 242,
-    loc: [17, 19, 42, 2],
+    loc: [9, 19, 26, 2],
     statements: [
       {
         kind: 244,
-        loc: [18, 3, 18, 27],
+        loc: [10, 3, 10, 27],
         declarationList: {
           kind: 262,
-          loc: [18, 3, 18, 26],
+          loc: [10, 3, 10, 26],
           declarations: [
             {
               kind: 261,
-              loc: [18, 9, 18, 26],
+              loc: [10, 9, 10, 26],
               name: {
                 kind: 80,
-                loc: [18, 9, 18, 13],
+                loc: [10, 9, 10, 13],
                 text: "said",
-                bindingKey: "said$qgp928dy3drl$0",
+                bindingKey: "said$3amz4o8kezaww$0",
               },
               initializer: {
                 kind: 214,
-                loc: [18, 16, 18, 26],
+                loc: [10, 16, 10, 26],
                 expression: {
                   kind: 1000,
-                  loc: [18, 16, 18, 22],
+                  loc: [10, 16, 10, 22],
                   key: "$state",
                 },
                 questionDotToken: false,
                 arguments: [
                   {
                     kind: 11,
-                    loc: [18, 23, 18, 25],
+                    loc: [10, 23, 10, 25],
                     text: "",
                   },
                 ],
@@ -62,13 +60,13 @@ export default cs.create(
       },
       {
         kind: 254,
-        loc: [20, 3, 41, 5],
+        loc: [12, 3, 25, 5],
         expression: {
           kind: 285,
-          loc: [21, 5, 40, 12],
+          loc: [13, 5, 24, 12],
           type: {
             kind: 11,
-            loc: [21, 6, 21, 10],
+            loc: [13, 6, 13, 10],
             text: "form",
           },
           attributes: [
@@ -76,34 +74,34 @@ export default cs.create(
               name: "onsubmit",
               initializer: {
                 kind: 220,
-                loc: [22, 17, 27, 8],
+                loc: [14, 17, 17, 8],
                 parameters: [
                   {
                     kind: 170,
-                    loc: [22, 18, 22, 36],
+                    loc: [14, 18, 14, 23],
                     name: {
                       kind: 80,
-                      loc: [22, 18, 22, 23],
+                      loc: [14, 18, 14, 23],
                       text: "event",
-                      bindingKey: "event$qgp928dy3drl$1",
+                      bindingKey: "event$3amz4o8kezaww$1",
                     },
                   },
                 ],
                 body: {
                   kind: 242,
-                  loc: [22, 41, 27, 8],
+                  loc: [14, 28, 17, 8],
                   statements: [
                     {
                       kind: 214,
-                      loc: [24, 9, 24, 31],
+                      loc: [15, 9, 15, 31],
                       expression: {
                         kind: 212,
-                        loc: [24, 9, 24, 29],
+                        loc: [15, 9, 15, 29],
                         expression: {
                           kind: 80,
-                          loc: [24, 9, 24, 14],
+                          loc: [15, 9, 15, 14],
                           text: "event",
-                          bindingKey: "event$qgp928dy3drl$1",
+                          bindingKey: "event$3amz4o8kezaww$1",
                         },
                         questionDotToken: false,
                         name: "preventDefault",
@@ -113,33 +111,15 @@ export default cs.create(
                     },
                     {
                       kind: 214,
-                      loc: [25, 9, 25, 32],
+                      loc: [16, 9, 16, 56],
                       expression: {
                         kind: 212,
-                        loc: [25, 9, 25, 30],
+                        loc: [16, 9, 16, 19],
                         expression: {
                           kind: 80,
-                          loc: [25, 9, 25, 14],
-                          text: "event",
-                          bindingKey: "event$qgp928dy3drl$1",
-                        },
-                        questionDotToken: false,
-                        name: "stopPropagation",
-                      },
-                      questionDotToken: false,
-                      arguments: [],
-                    },
-                    {
-                      kind: 214,
-                      loc: [26, 9, 26, 87],
-                      expression: {
-                        kind: 212,
-                        loc: [26, 9, 26, 19],
-                        expression: {
-                          kind: 80,
-                          loc: [26, 9, 26, 13],
+                          loc: [16, 9, 16, 13],
                           text: "said",
-                          bindingKey: "said$qgp928dy3drl$0",
+                          bindingKey: "said$3amz4o8kezaww$0",
                         },
                         questionDotToken: false,
                         name: "write",
@@ -148,68 +128,41 @@ export default cs.create(
                       arguments: [
                         {
                           kind: 227,
-                          loc: [26, 20, 26, 86],
+                          loc: [16, 20, 16, 55],
                           left: {
                             kind: 227,
-                            loc: [26, 20, 26, 61],
+                            loc: [16, 20, 16, 36],
                             left: {
-                              kind: 227,
-                              loc: [26, 20, 26, 55],
-                              left: {
-                                kind: 227,
-                                loc: [26, 20, 26, 36],
-                                left: {
-                                  kind: 212,
-                                  loc: [26, 20, 26, 30],
-                                  expression: {
-                                    kind: 80,
-                                    loc: [26, 20, 26, 25],
-                                    text: "event",
-                                    bindingKey: "event$qgp928dy3drl$1",
-                                  },
-                                  questionDotToken: false,
-                                  name: "type",
-                                },
-                                operatorToken: "+",
-                                right: {
-                                  kind: 11,
-                                  loc: [26, 33, 26, 36],
-                                  text: " ",
-                                },
+                              kind: 212,
+                              loc: [16, 20, 16, 30],
+                              expression: {
+                                kind: 80,
+                                loc: [16, 20, 16, 25],
+                                text: "event",
+                                bindingKey: "event$3amz4o8kezaww$1",
                               },
-                              operatorToken: "+",
-                              right: {
-                                kind: 212,
-                                loc: [26, 39, 26, 55],
-                                expression: {
-                                  kind: 80,
-                                  loc: [26, 39, 26, 44],
-                                  text: "event",
-                                  bindingKey: "event$qgp928dy3drl$1",
-                                },
-                                questionDotToken: false,
-                                name: "cancelable",
-                              },
+                              questionDotToken: false,
+                              name: "type",
                             },
                             operatorToken: "+",
                             right: {
                               kind: 11,
-                              loc: [26, 58, 26, 61],
+                              loc: [16, 33, 16, 36],
                               text: " ",
                             },
                           },
                           operatorToken: "+",
                           right: {
                             kind: 212,
-                            loc: [26, 64, 26, 86],
+                            loc: [16, 39, 16, 55],
                             expression: {
                               kind: 80,
-                              loc: [26, 64, 26, 69],
+                              loc: [16, 39, 16, 44],
                               text: "event",
-                              bindingKey: "event$qgp928dy3drl$1",
+                              bindingKey: "event$3amz4o8kezaww$1",
                             },
                             questionDotToken: false,
-                            name: "defaultPrevented",
+                            name: "cancelable",
                           },
                         },
                       ],
@@ -222,10 +175,146 @@ export default cs.create(
           children: [
             {
               kind: 285,
-              loc: [29, 7, 38, 16],
+              loc: [19, 7, 19, 78],
               type: {
                 kind: 11,
-                loc: [29, 8, 29, 14],
+                loc: [19, 8, 19, 16],
+                text: "textarea",
+              },
+              attributes: [
+                {
+                  name: "oninput",
+                  initializer: {
+                    kind: 220,
+                    loc: [19, 26, 19, 74],
+                    parameters: [
+                      {
+                        kind: 170,
+                        loc: [19, 27, 19, 32],
+                        name: {
+                          kind: 80,
+                          loc: [19, 27, 19, 32],
+                          text: "event",
+                          bindingKey: "event$3amz4o8kezaww$2",
+                        },
+                      },
+                    ],
+                    body: {
+                      kind: 214,
+                      loc: [19, 37, 19, 74],
+                      expression: {
+                        kind: 212,
+                        loc: [19, 37, 19, 47],
+                        expression: {
+                          kind: 80,
+                          loc: [19, 37, 19, 41],
+                          text: "said",
+                          bindingKey: "said$3amz4o8kezaww$0",
+                        },
+                        questionDotToken: false,
+                        name: "write",
+                      },
+                      questionDotToken: false,
+                      arguments: [
+                        {
+                          kind: 212,
+                          loc: [19, 48, 19, 73],
+                          expression: {
+                            kind: 212,
+                            loc: [19, 48, 19, 67],
+                            expression: {
+                              kind: 80,
+                              loc: [19, 48, 19, 53],
+                              text: "event",
+                              bindingKey: "event$3amz4o8kezaww$2",
+                            },
+                            questionDotToken: false,
+                            name: "currentTarget",
+                          },
+                          questionDotToken: false,
+                          name: "value",
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              children: [],
+            },
+            {
+              kind: 285,
+              loc: [20, 7, 20, 75],
+              type: {
+                kind: 11,
+                loc: [20, 8, 20, 13],
+                text: "input",
+              },
+              attributes: [
+                {
+                  name: "oninput",
+                  initializer: {
+                    kind: 220,
+                    loc: [20, 23, 20, 71],
+                    parameters: [
+                      {
+                        kind: 170,
+                        loc: [20, 24, 20, 29],
+                        name: {
+                          kind: 80,
+                          loc: [20, 24, 20, 29],
+                          text: "event",
+                          bindingKey: "event$3amz4o8kezaww$3",
+                        },
+                      },
+                    ],
+                    body: {
+                      kind: 214,
+                      loc: [20, 34, 20, 71],
+                      expression: {
+                        kind: 212,
+                        loc: [20, 34, 20, 44],
+                        expression: {
+                          kind: 80,
+                          loc: [20, 34, 20, 38],
+                          text: "said",
+                          bindingKey: "said$3amz4o8kezaww$0",
+                        },
+                        questionDotToken: false,
+                        name: "write",
+                      },
+                      questionDotToken: false,
+                      arguments: [
+                        {
+                          kind: 212,
+                          loc: [20, 45, 20, 70],
+                          expression: {
+                            kind: 212,
+                            loc: [20, 45, 20, 64],
+                            expression: {
+                              kind: 80,
+                              loc: [20, 45, 20, 50],
+                              text: "event",
+                              bindingKey: "event$3amz4o8kezaww$3",
+                            },
+                            questionDotToken: false,
+                            name: "currentTarget",
+                          },
+                          questionDotToken: false,
+                          name: "value",
+                        },
+                      ],
+                    },
+                  },
+                },
+              ],
+              children: [],
+            },
+            {
+              kind: 285,
+              loc: [21, 7, 23, 16],
+              type: {
+                kind: 11,
+                loc: [21, 8, 21, 14],
                 text: "button",
               },
               attributes: [
@@ -233,217 +322,80 @@ export default cs.create(
                   name: "onclick",
                   initializer: {
                     kind: 220,
-                    loc: [30, 18, 32, 10],
+                    loc: [21, 24, 21, 96],
                     parameters: [
                       {
                         kind: 170,
-                        loc: [30, 19, 30, 38],
+                        loc: [21, 25, 21, 30],
                         name: {
                           kind: 80,
-                          loc: [30, 19, 30, 24],
+                          loc: [21, 25, 21, 30],
                           text: "event",
-                          bindingKey: "event$qgp928dy3drl$2",
+                          bindingKey: "event$3amz4o8kezaww$4",
                         },
                       },
                     ],
                     body: {
-                      kind: 242,
-                      loc: [30, 43, 32, 10],
-                      statements: [
-                        {
-                          kind: 214,
-                          loc: [31, 11, 31, 83],
-                          expression: {
-                            kind: 212,
-                            loc: [31, 11, 31, 21],
-                            expression: {
-                              kind: 80,
-                              loc: [31, 11, 31, 15],
-                              text: "said",
-                              bindingKey: "said$qgp928dy3drl$0",
-                            },
-                            questionDotToken: false,
-                            name: "write",
-                          },
-                          questionDotToken: false,
-                          arguments: [
-                            {
-                              kind: 227,
-                              loc: [31, 22, 31, 82],
-                              left: {
-                                kind: 227,
-                                loc: [31, 22, 31, 67],
-                                left: {
-                                  kind: 227,
-                                  loc: [31, 22, 31, 61],
-                                  left: {
-                                    kind: 227,
-                                    loc: [31, 22, 31, 41],
-                                    left: {
-                                      kind: 212,
-                                      loc: [31, 22, 31, 35],
-                                      expression: {
-                                        kind: 80,
-                                        loc: [31, 22, 31, 27],
-                                        text: "event",
-                                        bindingKey: "event$qgp928dy3drl$2",
-                                      },
-                                      questionDotToken: false,
-                                      name: "clientX",
-                                    },
-                                    operatorToken: "+",
-                                    right: {
-                                      kind: 11,
-                                      loc: [31, 38, 31, 41],
-                                      text: " ",
-                                    },
-                                  },
-                                  operatorToken: "+",
-                                  right: {
-                                    kind: 212,
-                                    loc: [31, 44, 31, 61],
-                                    expression: {
-                                      kind: 80,
-                                      loc: [31, 44, 31, 49],
-                                      text: "event",
-                                      bindingKey: "event$qgp928dy3drl$2",
-                                    },
-                                    questionDotToken: false,
-                                    name: "pointerType",
-                                  },
-                                },
-                                operatorToken: "+",
-                                right: {
-                                  kind: 11,
-                                  loc: [31, 64, 31, 67],
-                                  text: " ",
-                                },
-                              },
-                              operatorToken: "+",
-                              right: {
-                                kind: 212,
-                                loc: [31, 70, 31, 82],
-                                expression: {
-                                  kind: 80,
-                                  loc: [31, 70, 31, 75],
-                                  text: "event",
-                                  bindingKey: "event$qgp928dy3drl$2",
-                                },
-                                questionDotToken: false,
-                                name: "altKey",
-                              },
-                            },
-                          ],
-                        },
-                      ],
-                    },
-                  },
-                },
-                {
-                  name: "onkeydown",
-                  initializer: {
-                    kind: 220,
-                    loc: [33, 20, 35, 10],
-                    parameters: [
-                      {
-                        kind: 170,
-                        loc: [33, 21, 33, 41],
-                        name: {
+                      kind: 214,
+                      loc: [21, 35, 21, 96],
+                      expression: {
+                        kind: 212,
+                        loc: [21, 35, 21, 45],
+                        expression: {
                           kind: 80,
-                          loc: [33, 21, 33, 26],
-                          text: "event",
-                          bindingKey: "event$qgp928dy3drl$3",
+                          loc: [21, 35, 21, 39],
+                          text: "said",
+                          bindingKey: "said$3amz4o8kezaww$0",
                         },
+                        questionDotToken: false,
+                        name: "write",
                       },
-                    ],
-                    body: {
-                      kind: 242,
-                      loc: [33, 46, 35, 10],
-                      statements: [
+                      questionDotToken: false,
+                      arguments: [
                         {
-                          kind: 214,
-                          loc: [34, 11, 34, 75],
-                          expression: {
+                          kind: 227,
+                          loc: [21, 46, 21, 95],
+                          left: {
+                            kind: 227,
+                            loc: [21, 46, 21, 65],
+                            left: {
+                              kind: 212,
+                              loc: [21, 46, 21, 59],
+                              expression: {
+                                kind: 80,
+                                loc: [21, 46, 21, 51],
+                                text: "event",
+                                bindingKey: "event$3amz4o8kezaww$4",
+                              },
+                              questionDotToken: false,
+                              name: "clientX",
+                            },
+                            operatorToken: "+",
+                            right: {
+                              kind: 11,
+                              loc: [21, 62, 21, 65],
+                              text: " ",
+                            },
+                          },
+                          operatorToken: "+",
+                          right: {
                             kind: 212,
-                            loc: [34, 11, 34, 21],
+                            loc: [21, 68, 21, 95],
                             expression: {
-                              kind: 80,
-                              loc: [34, 11, 34, 15],
-                              text: "said",
-                              bindingKey: "said$qgp928dy3drl$0",
+                              kind: 212,
+                              loc: [21, 68, 21, 87],
+                              expression: {
+                                kind: 80,
+                                loc: [21, 68, 21, 73],
+                                text: "event",
+                                bindingKey: "event$3amz4o8kezaww$4",
+                              },
+                              questionDotToken: false,
+                              name: "currentTarget",
                             },
                             questionDotToken: false,
-                            name: "write",
+                            name: "tagName",
                           },
-                          questionDotToken: false,
-                          arguments: [
-                            {
-                              kind: 227,
-                              loc: [34, 22, 34, 74],
-                              left: {
-                                kind: 227,
-                                loc: [34, 22, 34, 58],
-                                left: {
-                                  kind: 227,
-                                  loc: [34, 22, 34, 52],
-                                  left: {
-                                    kind: 227,
-                                    loc: [34, 22, 34, 37],
-                                    left: {
-                                      kind: 212,
-                                      loc: [34, 22, 34, 31],
-                                      expression: {
-                                        kind: 80,
-                                        loc: [34, 22, 34, 27],
-                                        text: "event",
-                                        bindingKey: "event$qgp928dy3drl$3",
-                                      },
-                                      questionDotToken: false,
-                                      name: "key",
-                                    },
-                                    operatorToken: "+",
-                                    right: {
-                                      kind: 11,
-                                      loc: [34, 34, 34, 37],
-                                      text: " ",
-                                    },
-                                  },
-                                  operatorToken: "+",
-                                  right: {
-                                    kind: 212,
-                                    loc: [34, 40, 34, 52],
-                                    expression: {
-                                      kind: 80,
-                                      loc: [34, 40, 34, 45],
-                                      text: "event",
-                                      bindingKey: "event$qgp928dy3drl$3",
-                                    },
-                                    questionDotToken: false,
-                                    name: "repeat",
-                                  },
-                                },
-                                operatorToken: "+",
-                                right: {
-                                  kind: 11,
-                                  loc: [34, 55, 34, 58],
-                                  text: " ",
-                                },
-                              },
-                              operatorToken: "+",
-                              right: {
-                                kind: 212,
-                                loc: [34, 61, 34, 74],
-                                expression: {
-                                  kind: 80,
-                                  loc: [34, 61, 34, 66],
-                                  text: "event",
-                                  bindingKey: "event$qgp928dy3drl$3",
-                                },
-                                questionDotToken: false,
-                                name: "ctrlKey",
-                              },
-                            },
-                          ],
                         },
                       ],
                     },
@@ -453,15 +405,15 @@ export default cs.create(
               children: [
                 {
                   kind: 214,
-                  loc: [37, 10, 37, 21],
+                  loc: [22, 10, 22, 21],
                   expression: {
                     kind: 212,
-                    loc: [37, 10, 37, 19],
+                    loc: [22, 10, 22, 19],
                     expression: {
                       kind: 80,
-                      loc: [37, 10, 37, 14],
+                      loc: [22, 10, 22, 14],
                       text: "said",
-                      bindingKey: "said$qgp928dy3drl$0",
+                      bindingKey: "said$3amz4o8kezaww$0",
                     },
                     questionDotToken: false,
                     name: "read",
@@ -470,68 +422,6 @@ export default cs.create(
                   arguments: [],
                 },
               ],
-            },
-            {
-              kind: 285,
-              loc: [39, 7, 39, 77],
-              type: {
-                kind: 11,
-                loc: [39, 8, 39, 13],
-                text: "input",
-              },
-              attributes: [
-                {
-                  name: "oninput",
-                  initializer: {
-                    kind: 220,
-                    loc: [39, 23, 39, 73],
-                    parameters: [
-                      {
-                        kind: 170,
-                        loc: [39, 24, 39, 41],
-                        name: {
-                          kind: 80,
-                          loc: [39, 24, 39, 29],
-                          text: "event",
-                          bindingKey: "event$qgp928dy3drl$4",
-                        },
-                      },
-                    ],
-                    body: {
-                      kind: 214,
-                      loc: [39, 46, 39, 73],
-                      expression: {
-                        kind: 212,
-                        loc: [39, 46, 39, 56],
-                        expression: {
-                          kind: 80,
-                          loc: [39, 46, 39, 50],
-                          text: "said",
-                          bindingKey: "said$qgp928dy3drl$0",
-                        },
-                        questionDotToken: false,
-                        name: "write",
-                      },
-                      questionDotToken: false,
-                      arguments: [
-                        {
-                          kind: 212,
-                          loc: [39, 57, 39, 72],
-                          expression: {
-                            kind: 80,
-                            loc: [39, 57, 39, 62],
-                            text: "event",
-                            bindingKey: "event$qgp928dy3drl$4",
-                          },
-                          questionDotToken: false,
-                          name: "inputType",
-                        },
-                      ],
-                    },
-                  },
-                },
-              ],
-              children: [],
             },
           ],
         },

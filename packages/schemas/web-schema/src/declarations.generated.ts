@@ -26,11 +26,7 @@ export type {
 
 declare const EventTargetBrand: unique symbol;
 /**
- * What an event happened to.
- *
- * Opaque, as the DOM has it: reaching an element's own members through one
- * needs a cast, and this language has none. That is the gap to close next, not
- * a thing to paper over here.
+ * What an event happened to, and what a listener is attached to.
  */
 export interface EventTarget extends ClientHandle {
   readonly [EventTargetBrand]: never;
@@ -41,12 +37,12 @@ declare const EventBrand: unique symbol;
  * Anything that happens to an element, and what every other event here is one
  * of.
  */
-export interface Event extends ClientHandle {
+export interface Event<T> extends ClientHandle {
   readonly [EventBrand]: never;
   readonly bubbles: boolean;
   readonly cancelable: boolean;
   readonly composed: boolean;
-  readonly currentTarget: EventTarget | null;
+  readonly currentTarget: T;
   readonly defaultPrevented: boolean;
   readonly eventPhase: number;
   readonly isTrusted: boolean;
@@ -63,7 +59,7 @@ declare const UIEventBrand: unique symbol;
 /**
  * An event that came from the interface rather than from the page's own code.
  */
-export interface UIEvent extends Event {
+export interface UIEvent<T> extends Event<T> {
   readonly [UIEventBrand]: never;
   readonly detail: number;
   readonly which: number;
@@ -73,7 +69,7 @@ declare const MouseEventBrand: unique symbol;
 /**
  * A pointing device did something, and where it was when it did.
  */
-export interface MouseEvent extends UIEvent {
+export interface MouseEvent<T> extends UIEvent<T> {
   readonly [MouseEventBrand]: never;
   readonly altKey: boolean;
   readonly button: number;
@@ -102,7 +98,7 @@ declare const PointerEventBrand: unique symbol;
 /**
  * A mouse, a pen or a finger — what the DOM hands a click, whichever it was.
  */
-export interface PointerEvent extends MouseEvent {
+export interface PointerEvent<T> extends MouseEvent<T> {
   readonly [PointerEventBrand]: never;
   readonly altitudeAngle: number;
   readonly azimuthAngle: number;
@@ -121,10 +117,9 @@ export interface PointerEvent extends MouseEvent {
 
 declare const DragEventBrand: unique symbol;
 /**
- * Something is being dragged. What is being carried is a `DataTransfer`, which
- * this schema does not declare.
+ * Something is being dragged.
  */
-export interface DragEvent extends MouseEvent {
+export interface DragEvent<T> extends MouseEvent<T> {
   readonly [DragEventBrand]: never;
 }
 
@@ -132,7 +127,7 @@ declare const WheelEventBrand: unique symbol;
 /**
  * A wheel turned, and by how much in which units.
  */
-export interface WheelEvent extends MouseEvent {
+export interface WheelEvent<T> extends MouseEvent<T> {
   readonly [WheelEventBrand]: never;
   readonly deltaMode: number;
   readonly deltaX: number;
@@ -144,7 +139,7 @@ declare const KeyboardEventBrand: unique symbol;
 /**
  * A key went down or came up, and which key it was.
  */
-export interface KeyboardEvent extends UIEvent {
+export interface KeyboardEvent<T> extends UIEvent<T> {
   readonly [KeyboardEventBrand]: never;
   readonly altKey: boolean;
   readonly charCode: number;
@@ -163,7 +158,7 @@ declare const InputEventBrand: unique symbol;
 /**
  * The value of an editable element changed, and how.
  */
-export interface InputEvent extends UIEvent {
+export interface InputEvent<T> extends UIEvent<T> {
   readonly [InputEventBrand]: never;
   readonly data: string | null;
   readonly inputType: string;
@@ -174,7 +169,7 @@ declare const CompositionEventBrand: unique symbol;
 /**
  * Text is being composed — an input method is part-way through a character.
  */
-export interface CompositionEvent extends UIEvent {
+export interface CompositionEvent<T> extends UIEvent<T> {
   readonly [CompositionEventBrand]: never;
   readonly data: string;
 }
@@ -183,17 +178,16 @@ declare const FocusEventBrand: unique symbol;
 /**
  * Focus arrived or left.
  */
-export interface FocusEvent extends UIEvent {
+export interface FocusEvent<T> extends UIEvent<T> {
   readonly [FocusEventBrand]: never;
   readonly relatedTarget: EventTarget | null;
 }
 
 declare const TouchEventBrand: unique symbol;
 /**
- * Fingers on a screen. The lists of touches are `TouchList`s, which this
- * schema does not declare.
+ * Fingers on a screen.
  */
-export interface TouchEvent extends UIEvent {
+export interface TouchEvent<T> extends UIEvent<T> {
   readonly [TouchEventBrand]: never;
   readonly altKey: boolean;
   readonly ctrlKey: boolean;
@@ -203,19 +197,17 @@ export interface TouchEvent extends UIEvent {
 
 declare const ClipboardEventBrand: unique symbol;
 /**
- * A copy, cut or paste. What is on the clipboard is a `DataTransfer`, which
- * this schema does not declare.
+ * A copy, cut or paste.
  */
-export interface ClipboardEvent extends Event {
+export interface ClipboardEvent<T> extends Event<T> {
   readonly [ClipboardEventBrand]: never;
 }
 
 declare const SubmitEventBrand: unique symbol;
 /**
- * A form was submitted. The submitter is an `HTMLElement`, which this schema
- * does not declare.
+ * A form was submitted.
  */
-export interface SubmitEvent extends Event {
+export interface SubmitEvent<T> extends Event<T> {
   readonly [SubmitEventBrand]: never;
 }
 
@@ -223,7 +215,7 @@ declare const ToggleEventBrand: unique symbol;
 /**
  * Something that opens and closes did.
  */
-export interface ToggleEvent extends Event {
+export interface ToggleEvent<T> extends Event<T> {
   readonly [ToggleEventBrand]: never;
   readonly newState: string;
   readonly oldState: string;
@@ -233,7 +225,7 @@ declare const AnimationEventBrand: unique symbol;
 /**
  * A CSS animation reached one of its edges.
  */
-export interface AnimationEvent extends Event {
+export interface AnimationEvent<T> extends Event<T> {
   readonly [AnimationEventBrand]: never;
   readonly animationName: string;
   readonly elapsedTime: number;
@@ -244,7 +236,7 @@ declare const TransitionEventBrand: unique symbol;
 /**
  * A CSS transition reached one of its edges.
  */
-export interface TransitionEvent extends Event {
+export interface TransitionEvent<T> extends Event<T> {
   readonly [TransitionEventBrand]: never;
   readonly elapsedTime: number;
   readonly propertyName: string;
@@ -255,7 +247,7 @@ declare const ProgressEventBrand: unique symbol;
 /**
  * Something loading said how far it had got.
  */
-export interface ProgressEvent extends Event {
+export interface ProgressEvent<T> extends Event<T> {
   readonly [ProgressEventBrand]: never;
   readonly lengthComputable: boolean;
   readonly loaded: number;
@@ -266,12 +258,783 @@ declare const ErrorEventBrand: unique symbol;
 /**
  * Something failed, and said where.
  */
-export interface ErrorEvent extends Event {
+export interface ErrorEvent<T> extends Event<T> {
   readonly [ErrorEventBrand]: never;
   readonly colno: number;
   readonly filename: string;
   readonly lineno: number;
   readonly message: string;
+}
+
+declare const NodeBrand: unique symbol;
+export interface Node extends EventTarget {
+  readonly [NodeBrand]: never;
+  readonly baseURI: string;
+  readonly isConnected: boolean;
+  readonly nodeName: string;
+  readonly nodeType: number;
+  readonly nodeValue: string | null;
+  readonly textContent: string | null;
+}
+
+declare const ElementBrand: unique symbol;
+export interface Element extends Node {
+  readonly [ElementBrand]: never;
+  readonly className: string;
+  readonly clientHeight: number;
+  readonly clientLeft: number;
+  readonly clientTop: number;
+  readonly clientWidth: number;
+  readonly currentCSSZoom: number;
+  readonly id: string;
+  readonly innerHTML: string;
+  readonly localName: string;
+  readonly namespaceURI: string | null;
+  readonly outerHTML: string;
+  readonly prefix: string | null;
+  readonly scrollHeight: number;
+  readonly scrollLeft: number;
+  readonly scrollTop: number;
+  readonly scrollWidth: number;
+  readonly slot: string;
+  readonly tagName: string;
+}
+
+declare const SVGElementBrand: unique symbol;
+export interface SVGElement extends Element {
+  readonly [SVGElementBrand]: never;
+}
+
+declare const HTMLElementBrand: unique symbol;
+export interface HTMLElement extends Element, HTMLOrSVGElement {
+  readonly [HTMLElementBrand]: never;
+  readonly accessKey: string;
+  readonly accessKeyLabel: string;
+  readonly autocapitalize: string;
+  readonly autocorrect: boolean;
+  readonly dir: string;
+  readonly draggable: boolean;
+  readonly inert: boolean;
+  readonly innerText: string;
+  readonly lang: string;
+  readonly offsetHeight: number;
+  readonly offsetLeft: number;
+  readonly offsetTop: number;
+  readonly offsetWidth: number;
+  readonly outerText: string;
+  readonly popover: string | null;
+  readonly spellcheck: boolean;
+  readonly title: string;
+  readonly translate: boolean;
+  readonly writingSuggestions: string;
+}
+
+declare const HTMLAnchorElementBrand: unique symbol;
+export interface HTMLAnchorElement
+  extends HTMLElement, HTMLHyperlinkElementUtils {
+  readonly [HTMLAnchorElementBrand]: never;
+  readonly charset: string;
+  readonly coords: string;
+  readonly download: string;
+  readonly hreflang: string;
+  readonly name: string;
+  readonly ping: string;
+  readonly referrerPolicy: string;
+  readonly rel: string;
+  readonly rev: string;
+  readonly shape: string;
+  readonly target: string;
+  readonly text: string;
+  readonly type: string;
+}
+
+declare const HTMLAreaElementBrand: unique symbol;
+export interface HTMLAreaElement
+  extends HTMLElement, HTMLHyperlinkElementUtils {
+  readonly [HTMLAreaElementBrand]: never;
+  readonly alt: string;
+  readonly coords: string;
+  readonly download: string;
+  readonly noHref: boolean;
+  readonly ping: string;
+  readonly referrerPolicy: string;
+  readonly rel: string;
+  readonly shape: string;
+  readonly target: string;
+}
+
+declare const HTMLAudioElementBrand: unique symbol;
+export interface HTMLAudioElement extends HTMLMediaElement {
+  readonly [HTMLAudioElementBrand]: never;
+}
+
+declare const HTMLBRElementBrand: unique symbol;
+export interface HTMLBRElement extends HTMLElement {
+  readonly [HTMLBRElementBrand]: never;
+  readonly clear: string;
+}
+
+declare const HTMLBaseElementBrand: unique symbol;
+export interface HTMLBaseElement extends HTMLElement {
+  readonly [HTMLBaseElementBrand]: never;
+  readonly href: string;
+  readonly target: string;
+}
+
+declare const HTMLBodyElementBrand: unique symbol;
+export interface HTMLBodyElement extends HTMLElement {
+  readonly [HTMLBodyElementBrand]: never;
+  readonly aLink: string;
+  readonly background: string;
+  readonly bgColor: string;
+  readonly link: string;
+  readonly text: string;
+  readonly vLink: string;
+}
+
+declare const HTMLButtonElementBrand: unique symbol;
+export interface HTMLButtonElement extends HTMLElement {
+  readonly [HTMLButtonElementBrand]: never;
+  readonly command: string;
+  readonly disabled: boolean;
+  readonly formAction: string;
+  readonly formEnctype: string;
+  readonly formMethod: string;
+  readonly formNoValidate: boolean;
+  readonly formTarget: string;
+  readonly name: string;
+  readonly validationMessage: string;
+  readonly value: string;
+  readonly willValidate: boolean;
+}
+
+declare const HTMLCanvasElementBrand: unique symbol;
+export interface HTMLCanvasElement extends HTMLElement {
+  readonly [HTMLCanvasElementBrand]: never;
+  readonly height: number;
+  readonly width: number;
+}
+
+declare const HTMLDListElementBrand: unique symbol;
+export interface HTMLDListElement extends HTMLElement {
+  readonly [HTMLDListElementBrand]: never;
+  readonly compact: boolean;
+}
+
+declare const HTMLDataElementBrand: unique symbol;
+export interface HTMLDataElement extends HTMLElement {
+  readonly [HTMLDataElementBrand]: never;
+  readonly value: string;
+}
+
+declare const HTMLDataListElementBrand: unique symbol;
+export interface HTMLDataListElement extends HTMLElement {
+  readonly [HTMLDataListElementBrand]: never;
+}
+
+declare const HTMLDetailsElementBrand: unique symbol;
+export interface HTMLDetailsElement extends HTMLElement {
+  readonly [HTMLDetailsElementBrand]: never;
+  readonly name: string;
+  readonly open: boolean;
+}
+
+declare const HTMLDialogElementBrand: unique symbol;
+export interface HTMLDialogElement extends HTMLElement {
+  readonly [HTMLDialogElementBrand]: never;
+  readonly closedBy: string;
+  readonly open: boolean;
+  readonly returnValue: string;
+}
+
+declare const HTMLDivElementBrand: unique symbol;
+export interface HTMLDivElement extends HTMLElement {
+  readonly [HTMLDivElementBrand]: never;
+  readonly align: string;
+}
+
+declare const HTMLEmbedElementBrand: unique symbol;
+export interface HTMLEmbedElement extends HTMLElement {
+  readonly [HTMLEmbedElementBrand]: never;
+  readonly align: string;
+  readonly height: string;
+  readonly name: string;
+  readonly src: string;
+  readonly type: string;
+  readonly width: string;
+}
+
+declare const HTMLFieldSetElementBrand: unique symbol;
+export interface HTMLFieldSetElement extends HTMLElement {
+  readonly [HTMLFieldSetElementBrand]: never;
+  readonly disabled: boolean;
+  readonly name: string;
+  readonly type: string;
+  readonly validationMessage: string;
+  readonly willValidate: boolean;
+}
+
+declare const HTMLFormElementBrand: unique symbol;
+export interface HTMLFormElement extends HTMLElement {
+  readonly [HTMLFormElementBrand]: never;
+  readonly acceptCharset: string;
+  readonly action: string;
+  readonly encoding: string;
+  readonly enctype: string;
+  readonly length: number;
+  readonly method: string;
+  readonly name: string;
+  readonly noValidate: boolean;
+  readonly rel: string;
+  readonly target: string;
+}
+
+declare const HTMLHRElementBrand: unique symbol;
+export interface HTMLHRElement extends HTMLElement {
+  readonly [HTMLHRElementBrand]: never;
+  readonly align: string;
+  readonly color: string;
+  readonly noShade: boolean;
+  readonly size: string;
+  readonly width: string;
+}
+
+declare const HTMLHeadElementBrand: unique symbol;
+export interface HTMLHeadElement extends HTMLElement {
+  readonly [HTMLHeadElementBrand]: never;
+}
+
+declare const HTMLHeadingElementBrand: unique symbol;
+export interface HTMLHeadingElement extends HTMLElement {
+  readonly [HTMLHeadingElementBrand]: never;
+  readonly align: string;
+}
+
+declare const HTMLHtmlElementBrand: unique symbol;
+export interface HTMLHtmlElement extends HTMLElement {
+  readonly [HTMLHtmlElementBrand]: never;
+  readonly version: string;
+}
+
+declare const HTMLIFrameElementBrand: unique symbol;
+export interface HTMLIFrameElement extends HTMLElement {
+  readonly [HTMLIFrameElementBrand]: never;
+  readonly align: string;
+  readonly allow: string;
+  readonly allowFullscreen: boolean;
+  readonly frameBorder: string;
+  readonly height: string;
+  readonly longDesc: string;
+  readonly marginHeight: string;
+  readonly marginWidth: string;
+  readonly name: string;
+  readonly scrolling: string;
+  readonly src: string;
+  readonly srcdoc: string;
+  readonly width: string;
+}
+
+declare const HTMLImageElementBrand: unique symbol;
+export interface HTMLImageElement extends HTMLElement {
+  readonly [HTMLImageElementBrand]: never;
+  readonly align: string;
+  readonly alt: string;
+  readonly border: string;
+  readonly complete: boolean;
+  readonly crossOrigin: string | null;
+  readonly currentSrc: string;
+  readonly height: number;
+  readonly hspace: number;
+  readonly isMap: boolean;
+  readonly longDesc: string;
+  readonly lowsrc: string;
+  readonly name: string;
+  readonly naturalHeight: number;
+  readonly naturalWidth: number;
+  readonly referrerPolicy: string;
+  readonly sizes: string;
+  readonly src: string;
+  readonly srcset: string;
+  readonly useMap: string;
+  readonly vspace: number;
+  readonly width: number;
+  readonly x: number;
+  readonly y: number;
+}
+
+declare const HTMLInputElementBrand: unique symbol;
+export interface HTMLInputElement extends HTMLElement {
+  readonly [HTMLInputElementBrand]: never;
+  readonly accept: string;
+  readonly align: string;
+  readonly alt: string;
+  readonly capture: string;
+  readonly checked: boolean;
+  readonly defaultChecked: boolean;
+  readonly defaultValue: string;
+  readonly dirName: string;
+  readonly disabled: boolean;
+  readonly formAction: string;
+  readonly formEnctype: string;
+  readonly formMethod: string;
+  readonly formNoValidate: boolean;
+  readonly formTarget: string;
+  readonly height: number;
+  readonly indeterminate: boolean;
+  readonly max: string;
+  readonly maxLength: number;
+  readonly min: string;
+  readonly minLength: number;
+  readonly multiple: boolean;
+  readonly name: string;
+  readonly pattern: string;
+  readonly placeholder: string;
+  readonly readOnly: boolean;
+  readonly required: boolean;
+  readonly size: number;
+  readonly src: string;
+  readonly step: string;
+  readonly type: string;
+  readonly useMap: string;
+  readonly validationMessage: string;
+  readonly value: string;
+  readonly valueAsNumber: number;
+  readonly webkitdirectory: boolean;
+  readonly width: number;
+  readonly willValidate: boolean;
+}
+
+declare const HTMLLIElementBrand: unique symbol;
+export interface HTMLLIElement extends HTMLElement {
+  readonly [HTMLLIElementBrand]: never;
+  readonly type: string;
+  readonly value: number;
+}
+
+declare const HTMLLabelElementBrand: unique symbol;
+export interface HTMLLabelElement extends HTMLElement {
+  readonly [HTMLLabelElementBrand]: never;
+  readonly htmlFor: string;
+}
+
+declare const HTMLLegendElementBrand: unique symbol;
+export interface HTMLLegendElement extends HTMLElement {
+  readonly [HTMLLegendElementBrand]: never;
+  readonly align: string;
+}
+
+declare const HTMLLinkElementBrand: unique symbol;
+export interface HTMLLinkElement extends HTMLElement {
+  readonly [HTMLLinkElementBrand]: never;
+  readonly as: string;
+  readonly charset: string;
+  readonly crossOrigin: string | null;
+  readonly disabled: boolean;
+  readonly href: string;
+  readonly hreflang: string;
+  readonly imageSizes: string;
+  readonly imageSrcset: string;
+  readonly integrity: string;
+  readonly media: string;
+  readonly referrerPolicy: string;
+  readonly rel: string;
+  readonly rev: string;
+  readonly target: string;
+  readonly type: string;
+}
+
+declare const HTMLMapElementBrand: unique symbol;
+export interface HTMLMapElement extends HTMLElement {
+  readonly [HTMLMapElementBrand]: never;
+  readonly name: string;
+}
+
+declare const HTMLMenuElementBrand: unique symbol;
+export interface HTMLMenuElement extends HTMLElement {
+  readonly [HTMLMenuElementBrand]: never;
+  readonly compact: boolean;
+}
+
+declare const HTMLMetaElementBrand: unique symbol;
+export interface HTMLMetaElement extends HTMLElement {
+  readonly [HTMLMetaElementBrand]: never;
+  readonly content: string;
+  readonly httpEquiv: string;
+  readonly media: string;
+  readonly name: string;
+  readonly scheme: string;
+}
+
+declare const HTMLMeterElementBrand: unique symbol;
+export interface HTMLMeterElement extends HTMLElement {
+  readonly [HTMLMeterElementBrand]: never;
+  readonly high: number;
+  readonly low: number;
+  readonly max: number;
+  readonly min: number;
+  readonly optimum: number;
+  readonly value: number;
+}
+
+declare const HTMLModElementBrand: unique symbol;
+export interface HTMLModElement extends HTMLElement {
+  readonly [HTMLModElementBrand]: never;
+  readonly cite: string;
+  readonly dateTime: string;
+}
+
+declare const HTMLOListElementBrand: unique symbol;
+export interface HTMLOListElement extends HTMLElement {
+  readonly [HTMLOListElementBrand]: never;
+  readonly compact: boolean;
+  readonly reversed: boolean;
+  readonly start: number;
+  readonly type: string;
+}
+
+declare const HTMLObjectElementBrand: unique symbol;
+export interface HTMLObjectElement extends HTMLElement {
+  readonly [HTMLObjectElementBrand]: never;
+  readonly align: string;
+  readonly archive: string;
+  readonly border: string;
+  readonly code: string;
+  readonly codeBase: string;
+  readonly codeType: string;
+  readonly data: string;
+  readonly declare: boolean;
+  readonly height: string;
+  readonly hspace: number;
+  readonly name: string;
+  readonly standby: string;
+  readonly type: string;
+  readonly useMap: string;
+  readonly validationMessage: string;
+  readonly vspace: number;
+  readonly width: string;
+  readonly willValidate: boolean;
+}
+
+declare const HTMLOptGroupElementBrand: unique symbol;
+export interface HTMLOptGroupElement extends HTMLElement {
+  readonly [HTMLOptGroupElementBrand]: never;
+  readonly disabled: boolean;
+  readonly label: string;
+}
+
+declare const HTMLOptionElementBrand: unique symbol;
+export interface HTMLOptionElement extends HTMLElement {
+  readonly [HTMLOptionElementBrand]: never;
+  readonly defaultSelected: boolean;
+  readonly disabled: boolean;
+  readonly index: number;
+  readonly label: string;
+  readonly selected: boolean;
+  readonly text: string;
+  readonly value: string;
+}
+
+declare const HTMLOutputElementBrand: unique symbol;
+export interface HTMLOutputElement extends HTMLElement {
+  readonly [HTMLOutputElementBrand]: never;
+  readonly defaultValue: string;
+  readonly name: string;
+  readonly type: string;
+  readonly validationMessage: string;
+  readonly value: string;
+  readonly willValidate: boolean;
+}
+
+declare const HTMLParagraphElementBrand: unique symbol;
+export interface HTMLParagraphElement extends HTMLElement {
+  readonly [HTMLParagraphElementBrand]: never;
+  readonly align: string;
+}
+
+declare const HTMLPictureElementBrand: unique symbol;
+export interface HTMLPictureElement extends HTMLElement {
+  readonly [HTMLPictureElementBrand]: never;
+}
+
+declare const HTMLPreElementBrand: unique symbol;
+export interface HTMLPreElement extends HTMLElement {
+  readonly [HTMLPreElementBrand]: never;
+  readonly width: number;
+}
+
+declare const HTMLProgressElementBrand: unique symbol;
+export interface HTMLProgressElement extends HTMLElement {
+  readonly [HTMLProgressElementBrand]: never;
+  readonly max: number;
+  readonly position: number;
+  readonly value: number;
+}
+
+declare const HTMLQuoteElementBrand: unique symbol;
+export interface HTMLQuoteElement extends HTMLElement {
+  readonly [HTMLQuoteElementBrand]: never;
+  readonly cite: string;
+}
+
+declare const HTMLScriptElementBrand: unique symbol;
+export interface HTMLScriptElement extends HTMLElement {
+  readonly [HTMLScriptElementBrand]: never;
+  readonly async: boolean;
+  readonly charset: string;
+  readonly crossOrigin: string | null;
+  readonly defer: boolean;
+  readonly event: string;
+  readonly htmlFor: string;
+  readonly integrity: string;
+  readonly noModule: boolean;
+  readonly referrerPolicy: string;
+  readonly src: string;
+  readonly text: string;
+  readonly type: string;
+}
+
+declare const HTMLSelectElementBrand: unique symbol;
+export interface HTMLSelectElement extends HTMLElement {
+  readonly [HTMLSelectElementBrand]: never;
+  readonly disabled: boolean;
+  readonly length: number;
+  readonly multiple: boolean;
+  readonly name: string;
+  readonly required: boolean;
+  readonly selectedIndex: number;
+  readonly size: number;
+  readonly validationMessage: string;
+  readonly value: string;
+  readonly willValidate: boolean;
+}
+
+declare const HTMLSlotElementBrand: unique symbol;
+export interface HTMLSlotElement extends HTMLElement {
+  readonly [HTMLSlotElementBrand]: never;
+  readonly name: string;
+}
+
+declare const HTMLSourceElementBrand: unique symbol;
+export interface HTMLSourceElement extends HTMLElement {
+  readonly [HTMLSourceElementBrand]: never;
+  readonly height: number;
+  readonly media: string;
+  readonly sizes: string;
+  readonly src: string;
+  readonly srcset: string;
+  readonly type: string;
+  readonly width: number;
+}
+
+declare const HTMLSpanElementBrand: unique symbol;
+export interface HTMLSpanElement extends HTMLElement {
+  readonly [HTMLSpanElementBrand]: never;
+}
+
+declare const HTMLStyleElementBrand: unique symbol;
+export interface HTMLStyleElement extends HTMLElement {
+  readonly [HTMLStyleElementBrand]: never;
+  readonly disabled: boolean;
+  readonly media: string;
+  readonly type: string;
+}
+
+declare const HTMLTableCaptionElementBrand: unique symbol;
+export interface HTMLTableCaptionElement extends HTMLElement {
+  readonly [HTMLTableCaptionElementBrand]: never;
+  readonly align: string;
+}
+
+declare const HTMLTableCellElementBrand: unique symbol;
+export interface HTMLTableCellElement extends HTMLElement {
+  readonly [HTMLTableCellElementBrand]: never;
+  readonly abbr: string;
+  readonly align: string;
+  readonly axis: string;
+  readonly bgColor: string;
+  readonly cellIndex: number;
+  readonly ch: string;
+  readonly chOff: string;
+  readonly colSpan: number;
+  readonly headers: string;
+  readonly height: string;
+  readonly noWrap: boolean;
+  readonly rowSpan: number;
+  readonly scope: string;
+  readonly vAlign: string;
+  readonly width: string;
+}
+
+declare const HTMLTableColElementBrand: unique symbol;
+export interface HTMLTableColElement extends HTMLElement {
+  readonly [HTMLTableColElementBrand]: never;
+  readonly align: string;
+  readonly ch: string;
+  readonly chOff: string;
+  readonly span: number;
+  readonly vAlign: string;
+  readonly width: string;
+}
+
+declare const HTMLTableElementBrand: unique symbol;
+export interface HTMLTableElement extends HTMLElement {
+  readonly [HTMLTableElementBrand]: never;
+  readonly align: string;
+  readonly bgColor: string;
+  readonly border: string;
+  readonly cellPadding: string;
+  readonly cellSpacing: string;
+  readonly frame: string;
+  readonly rules: string;
+  readonly summary: string;
+  readonly width: string;
+}
+
+declare const HTMLTableRowElementBrand: unique symbol;
+export interface HTMLTableRowElement extends HTMLElement {
+  readonly [HTMLTableRowElementBrand]: never;
+  readonly align: string;
+  readonly bgColor: string;
+  readonly ch: string;
+  readonly chOff: string;
+  readonly rowIndex: number;
+  readonly sectionRowIndex: number;
+  readonly vAlign: string;
+}
+
+declare const HTMLTableSectionElementBrand: unique symbol;
+export interface HTMLTableSectionElement extends HTMLElement {
+  readonly [HTMLTableSectionElementBrand]: never;
+  readonly align: string;
+  readonly ch: string;
+  readonly chOff: string;
+  readonly vAlign: string;
+}
+
+declare const HTMLTemplateElementBrand: unique symbol;
+export interface HTMLTemplateElement extends HTMLElement {
+  readonly [HTMLTemplateElementBrand]: never;
+  readonly shadowRootClonable: boolean;
+  readonly shadowRootCustomElementRegistry: string;
+  readonly shadowRootDelegatesFocus: boolean;
+  readonly shadowRootMode: string;
+  readonly shadowRootSerializable: boolean;
+}
+
+declare const HTMLTextAreaElementBrand: unique symbol;
+export interface HTMLTextAreaElement extends HTMLElement {
+  readonly [HTMLTextAreaElementBrand]: never;
+  readonly cols: number;
+  readonly defaultValue: string;
+  readonly dirName: string;
+  readonly disabled: boolean;
+  readonly maxLength: number;
+  readonly minLength: number;
+  readonly name: string;
+  readonly placeholder: string;
+  readonly readOnly: boolean;
+  readonly required: boolean;
+  readonly rows: number;
+  readonly selectionEnd: number;
+  readonly selectionStart: number;
+  readonly textLength: number;
+  readonly type: string;
+  readonly validationMessage: string;
+  readonly value: string;
+  readonly willValidate: boolean;
+  readonly wrap: string;
+}
+
+declare const HTMLTimeElementBrand: unique symbol;
+export interface HTMLTimeElement extends HTMLElement {
+  readonly [HTMLTimeElementBrand]: never;
+  readonly dateTime: string;
+}
+
+declare const HTMLTitleElementBrand: unique symbol;
+export interface HTMLTitleElement extends HTMLElement {
+  readonly [HTMLTitleElementBrand]: never;
+  readonly text: string;
+}
+
+declare const HTMLTrackElementBrand: unique symbol;
+export interface HTMLTrackElement extends HTMLElement {
+  readonly [HTMLTrackElementBrand]: never;
+  readonly default: boolean;
+  readonly kind: string;
+  readonly label: string;
+  readonly readyState: number;
+  readonly src: string;
+  readonly srclang: string;
+}
+
+declare const HTMLUListElementBrand: unique symbol;
+export interface HTMLUListElement extends HTMLElement {
+  readonly [HTMLUListElementBrand]: never;
+  readonly compact: boolean;
+  readonly type: string;
+}
+
+declare const HTMLVideoElementBrand: unique symbol;
+export interface HTMLVideoElement extends HTMLMediaElement {
+  readonly [HTMLVideoElementBrand]: never;
+  readonly disablePictureInPicture: boolean;
+  readonly height: number;
+  readonly playsInline: boolean;
+  readonly poster: string;
+  readonly videoHeight: number;
+  readonly videoWidth: number;
+  readonly width: number;
+}
+
+declare const HTMLMediaElementBrand: unique symbol;
+export interface HTMLMediaElement extends HTMLElement {
+  readonly [HTMLMediaElementBrand]: never;
+  readonly autoplay: boolean;
+  readonly controls: boolean;
+  readonly crossOrigin: string | null;
+  readonly currentSrc: string;
+  readonly currentTime: number;
+  readonly defaultMuted: boolean;
+  readonly defaultPlaybackRate: number;
+  readonly disableRemotePlayback: boolean;
+  readonly duration: number;
+  readonly ended: boolean;
+  readonly loop: boolean;
+  readonly muted: boolean;
+  readonly networkState: number;
+  readonly paused: boolean;
+  readonly playbackRate: number;
+  readonly preservesPitch: boolean;
+  readonly readyState: number;
+  readonly seeking: boolean;
+  readonly sinkId: string;
+  readonly src: string;
+  readonly volume: number;
+}
+
+declare const HTMLHyperlinkElementUtilsBrand: unique symbol;
+export interface HTMLHyperlinkElementUtils extends EventTarget {
+  readonly [HTMLHyperlinkElementUtilsBrand]: never;
+  readonly hash: string;
+  readonly host: string;
+  readonly hostname: string;
+  readonly href: string;
+  readonly origin: string;
+  readonly password: string;
+  readonly pathname: string;
+  readonly port: string;
+  readonly protocol: string;
+  readonly search: string;
+  readonly username: string;
+}
+
+declare const HTMLOrSVGElementBrand: unique symbol;
+export interface HTMLOrSVGElement extends EventTarget {
+  readonly [HTMLOrSVGElementBrand]: never;
+  readonly autofocus: boolean;
+  readonly nonce: string;
+  readonly tabIndex: number;
 }
 
 export type HtmlNode = ClientElement | string | number | null;
@@ -435,97 +1198,97 @@ export interface AriaAttributes {
   "aria-valuetext"?: Prop<string>;
 }
 
-export interface Events {
-  oncopy?: Prop<(event: ClipboardEvent) => void>;
-  oncut?: Prop<(event: ClipboardEvent) => void>;
-  onpaste?: Prop<(event: ClipboardEvent) => void>;
-  oncompositionend?: Prop<(event: CompositionEvent) => void>;
-  oncompositionstart?: Prop<(event: CompositionEvent) => void>;
-  oncompositionupdate?: Prop<(event: CompositionEvent) => void>;
-  onblur?: Prop<(event: FocusEvent) => void>;
-  onfocus?: Prop<(event: FocusEvent) => void>;
-  onfocusin?: Prop<(event: FocusEvent) => void>;
-  onfocusout?: Prop<(event: FocusEvent) => void>;
-  onbeforeinput?: Prop<(event: InputEvent) => void>;
-  onchange?: Prop<(event: Event) => void>;
-  oninput?: Prop<(event: InputEvent) => void>;
-  oninvalid?: Prop<(event: Event) => void>;
-  onreset?: Prop<(event: Event) => void>;
-  onselect?: Prop<(event: Event) => void>;
-  onsubmit?: Prop<(event: SubmitEvent) => void>;
-  onerror?: Prop<(event: ErrorEvent) => void>;
-  onload?: Prop<(event: Event) => void>;
-  onkeydown?: Prop<(event: KeyboardEvent) => void>;
-  onkeypress?: Prop<(event: KeyboardEvent) => void>;
-  onkeyup?: Prop<(event: KeyboardEvent) => void>;
-  onabort?: Prop<(event: UIEvent) => void>;
-  oncanplay?: Prop<(event: Event) => void>;
-  oncanplaythrough?: Prop<(event: Event) => void>;
-  ondurationchange?: Prop<(event: Event) => void>;
-  onemptied?: Prop<(event: Event) => void>;
-  onended?: Prop<(event: Event) => void>;
-  onloadeddata?: Prop<(event: Event) => void>;
-  onloadedmetadata?: Prop<(event: Event) => void>;
-  onloadstart?: Prop<(event: Event) => void>;
-  onpause?: Prop<(event: Event) => void>;
-  onplay?: Prop<(event: Event) => void>;
-  onplaying?: Prop<(event: Event) => void>;
-  onprogress?: Prop<(event: ProgressEvent) => void>;
-  onratechange?: Prop<(event: Event) => void>;
-  onseeked?: Prop<(event: Event) => void>;
-  onseeking?: Prop<(event: Event) => void>;
-  onstalled?: Prop<(event: Event) => void>;
-  onsuspend?: Prop<(event: Event) => void>;
-  ontimeupdate?: Prop<(event: Event) => void>;
-  onvolumechange?: Prop<(event: Event) => void>;
-  onwaiting?: Prop<(event: Event) => void>;
-  onauxclick?: Prop<(event: PointerEvent) => void>;
-  onclick?: Prop<(event: PointerEvent) => void>;
-  oncontextmenu?: Prop<(event: PointerEvent) => void>;
-  ondblclick?: Prop<(event: MouseEvent) => void>;
-  onmousedown?: Prop<(event: MouseEvent) => void>;
-  onmouseenter?: Prop<(event: MouseEvent) => void>;
-  onmouseleave?: Prop<(event: MouseEvent) => void>;
-  onmousemove?: Prop<(event: MouseEvent) => void>;
-  onmouseout?: Prop<(event: MouseEvent) => void>;
-  onmouseover?: Prop<(event: MouseEvent) => void>;
-  onmouseup?: Prop<(event: MouseEvent) => void>;
-  ondrag?: Prop<(event: DragEvent) => void>;
-  ondragend?: Prop<(event: DragEvent) => void>;
-  ondragenter?: Prop<(event: DragEvent) => void>;
-  ondragleave?: Prop<(event: DragEvent) => void>;
-  ondragover?: Prop<(event: DragEvent) => void>;
-  ondragstart?: Prop<(event: DragEvent) => void>;
-  ondrop?: Prop<(event: DragEvent) => void>;
-  ontouchcancel?: Prop<(event: TouchEvent) => void>;
-  ontouchend?: Prop<(event: TouchEvent) => void>;
-  ontouchmove?: Prop<(event: TouchEvent) => void>;
-  ontouchstart?: Prop<(event: TouchEvent) => void>;
-  ongotpointercapture?: Prop<(event: PointerEvent) => void>;
-  onlostpointercapture?: Prop<(event: PointerEvent) => void>;
-  onpointercancel?: Prop<(event: PointerEvent) => void>;
-  onpointerdown?: Prop<(event: PointerEvent) => void>;
-  onpointerenter?: Prop<(event: PointerEvent) => void>;
-  onpointerleave?: Prop<(event: PointerEvent) => void>;
-  onpointermove?: Prop<(event: PointerEvent) => void>;
-  onpointerout?: Prop<(event: PointerEvent) => void>;
-  onpointerover?: Prop<(event: PointerEvent) => void>;
-  onpointerup?: Prop<(event: PointerEvent) => void>;
-  onscroll?: Prop<(event: Event) => void>;
-  onscrollend?: Prop<(event: Event) => void>;
-  onwheel?: Prop<(event: WheelEvent) => void>;
-  onanimationend?: Prop<(event: AnimationEvent) => void>;
-  onanimationiteration?: Prop<(event: AnimationEvent) => void>;
-  onanimationstart?: Prop<(event: AnimationEvent) => void>;
-  ontransitioncancel?: Prop<(event: TransitionEvent) => void>;
-  ontransitionend?: Prop<(event: TransitionEvent) => void>;
-  ontransitionrun?: Prop<(event: TransitionEvent) => void>;
-  ontransitionstart?: Prop<(event: TransitionEvent) => void>;
-  onbeforetoggle?: Prop<(event: ToggleEvent) => void>;
-  ontoggle?: Prop<(event: ToggleEvent) => void>;
+export interface Events<T> {
+  oncopy?: Prop<(event: ClipboardEvent<T>) => void>;
+  oncut?: Prop<(event: ClipboardEvent<T>) => void>;
+  onpaste?: Prop<(event: ClipboardEvent<T>) => void>;
+  oncompositionend?: Prop<(event: CompositionEvent<T>) => void>;
+  oncompositionstart?: Prop<(event: CompositionEvent<T>) => void>;
+  oncompositionupdate?: Prop<(event: CompositionEvent<T>) => void>;
+  onblur?: Prop<(event: FocusEvent<T>) => void>;
+  onfocus?: Prop<(event: FocusEvent<T>) => void>;
+  onfocusin?: Prop<(event: FocusEvent<T>) => void>;
+  onfocusout?: Prop<(event: FocusEvent<T>) => void>;
+  onbeforeinput?: Prop<(event: InputEvent<T>) => void>;
+  onchange?: Prop<(event: Event<T>) => void>;
+  oninput?: Prop<(event: InputEvent<T>) => void>;
+  oninvalid?: Prop<(event: Event<T>) => void>;
+  onreset?: Prop<(event: Event<T>) => void>;
+  onselect?: Prop<(event: Event<T>) => void>;
+  onsubmit?: Prop<(event: SubmitEvent<T>) => void>;
+  onerror?: Prop<(event: ErrorEvent<T>) => void>;
+  onload?: Prop<(event: Event<T>) => void>;
+  onkeydown?: Prop<(event: KeyboardEvent<T>) => void>;
+  onkeypress?: Prop<(event: KeyboardEvent<T>) => void>;
+  onkeyup?: Prop<(event: KeyboardEvent<T>) => void>;
+  onabort?: Prop<(event: UIEvent<T>) => void>;
+  oncanplay?: Prop<(event: Event<T>) => void>;
+  oncanplaythrough?: Prop<(event: Event<T>) => void>;
+  ondurationchange?: Prop<(event: Event<T>) => void>;
+  onemptied?: Prop<(event: Event<T>) => void>;
+  onended?: Prop<(event: Event<T>) => void>;
+  onloadeddata?: Prop<(event: Event<T>) => void>;
+  onloadedmetadata?: Prop<(event: Event<T>) => void>;
+  onloadstart?: Prop<(event: Event<T>) => void>;
+  onpause?: Prop<(event: Event<T>) => void>;
+  onplay?: Prop<(event: Event<T>) => void>;
+  onplaying?: Prop<(event: Event<T>) => void>;
+  onprogress?: Prop<(event: ProgressEvent<T>) => void>;
+  onratechange?: Prop<(event: Event<T>) => void>;
+  onseeked?: Prop<(event: Event<T>) => void>;
+  onseeking?: Prop<(event: Event<T>) => void>;
+  onstalled?: Prop<(event: Event<T>) => void>;
+  onsuspend?: Prop<(event: Event<T>) => void>;
+  ontimeupdate?: Prop<(event: Event<T>) => void>;
+  onvolumechange?: Prop<(event: Event<T>) => void>;
+  onwaiting?: Prop<(event: Event<T>) => void>;
+  onauxclick?: Prop<(event: PointerEvent<T>) => void>;
+  onclick?: Prop<(event: PointerEvent<T>) => void>;
+  oncontextmenu?: Prop<(event: PointerEvent<T>) => void>;
+  ondblclick?: Prop<(event: MouseEvent<T>) => void>;
+  onmousedown?: Prop<(event: MouseEvent<T>) => void>;
+  onmouseenter?: Prop<(event: MouseEvent<T>) => void>;
+  onmouseleave?: Prop<(event: MouseEvent<T>) => void>;
+  onmousemove?: Prop<(event: MouseEvent<T>) => void>;
+  onmouseout?: Prop<(event: MouseEvent<T>) => void>;
+  onmouseover?: Prop<(event: MouseEvent<T>) => void>;
+  onmouseup?: Prop<(event: MouseEvent<T>) => void>;
+  ondrag?: Prop<(event: DragEvent<T>) => void>;
+  ondragend?: Prop<(event: DragEvent<T>) => void>;
+  ondragenter?: Prop<(event: DragEvent<T>) => void>;
+  ondragleave?: Prop<(event: DragEvent<T>) => void>;
+  ondragover?: Prop<(event: DragEvent<T>) => void>;
+  ondragstart?: Prop<(event: DragEvent<T>) => void>;
+  ondrop?: Prop<(event: DragEvent<T>) => void>;
+  ontouchcancel?: Prop<(event: TouchEvent<T>) => void>;
+  ontouchend?: Prop<(event: TouchEvent<T>) => void>;
+  ontouchmove?: Prop<(event: TouchEvent<T>) => void>;
+  ontouchstart?: Prop<(event: TouchEvent<T>) => void>;
+  ongotpointercapture?: Prop<(event: PointerEvent<T>) => void>;
+  onlostpointercapture?: Prop<(event: PointerEvent<T>) => void>;
+  onpointercancel?: Prop<(event: PointerEvent<T>) => void>;
+  onpointerdown?: Prop<(event: PointerEvent<T>) => void>;
+  onpointerenter?: Prop<(event: PointerEvent<T>) => void>;
+  onpointerleave?: Prop<(event: PointerEvent<T>) => void>;
+  onpointermove?: Prop<(event: PointerEvent<T>) => void>;
+  onpointerout?: Prop<(event: PointerEvent<T>) => void>;
+  onpointerover?: Prop<(event: PointerEvent<T>) => void>;
+  onpointerup?: Prop<(event: PointerEvent<T>) => void>;
+  onscroll?: Prop<(event: Event<T>) => void>;
+  onscrollend?: Prop<(event: Event<T>) => void>;
+  onwheel?: Prop<(event: WheelEvent<T>) => void>;
+  onanimationend?: Prop<(event: AnimationEvent<T>) => void>;
+  onanimationiteration?: Prop<(event: AnimationEvent<T>) => void>;
+  onanimationstart?: Prop<(event: AnimationEvent<T>) => void>;
+  ontransitioncancel?: Prop<(event: TransitionEvent<T>) => void>;
+  ontransitionend?: Prop<(event: TransitionEvent<T>) => void>;
+  ontransitionrun?: Prop<(event: TransitionEvent<T>) => void>;
+  ontransitionstart?: Prop<(event: TransitionEvent<T>) => void>;
+  onbeforetoggle?: Prop<(event: ToggleEvent<T>) => void>;
+  ontoggle?: Prop<(event: ToggleEvent<T>) => void>;
 }
 
-export interface GlobalAttributes extends AriaAttributes, Events {
+export interface GlobalAttributes<T> extends AriaAttributes, Events<T> {
   accesskey?: Prop<string>;
   autocapitalize?: Prop<
     "off" | "none" | "on" | "sentences" | "words" | "characters"
@@ -566,13 +1329,13 @@ export interface GlobalAttributes extends AriaAttributes, Events {
   translate?: Prop<"yes" | "no">;
 }
 
-export interface VoidProps extends GlobalAttributes {}
+export interface VoidProps<T> extends GlobalAttributes<T> {}
 
-export interface HtmlProps extends GlobalAttributes {
+export interface HtmlProps<T> extends GlobalAttributes<T> {
   children?: Children<HtmlNode>;
 }
 
-export interface AnchorProps extends HtmlProps {
+export interface AnchorProps extends HtmlProps<HTMLAnchorElement> {
   download?: Prop<string | boolean>;
   href?: Prop<string>;
   hreflang?: Prop<string>;
@@ -584,7 +1347,7 @@ export interface AnchorProps extends HtmlProps {
   type?: Prop<string>;
 }
 
-export interface AreaProps extends VoidProps {
+export interface AreaProps extends VoidProps<HTMLAreaElement> {
   alt?: Prop<string>;
   coords?: Prop<string>;
   download?: Prop<string | boolean>;
@@ -595,16 +1358,16 @@ export interface AreaProps extends VoidProps {
   target?: Prop<Target>;
 }
 
-export interface BaseProps extends VoidProps {
+export interface BaseProps extends VoidProps<HTMLBaseElement> {
   href?: Prop<string>;
   target?: Prop<Target>;
 }
 
-export interface BlockquoteProps extends HtmlProps {
+export interface BlockquoteProps extends HtmlProps<HTMLQuoteElement> {
   cite?: Prop<string>;
 }
 
-export interface ButtonProps extends HtmlProps {
+export interface ButtonProps extends HtmlProps<HTMLButtonElement> {
   disabled?: Prop<boolean>;
   form?: Prop<string>;
   formaction?: Prop<string>;
@@ -619,53 +1382,53 @@ export interface ButtonProps extends HtmlProps {
   value?: Prop<string | number>;
 }
 
-export interface CanvasProps extends HtmlProps {
+export interface CanvasProps extends HtmlProps<HTMLCanvasElement> {
   height?: Prop<Numeric>;
   width?: Prop<Numeric>;
 }
 
-export interface ColProps extends VoidProps {
+export interface ColProps extends VoidProps<HTMLTableColElement> {
   span?: Prop<number>;
   width?: Prop<Numeric>;
 }
 
-export interface ColgroupProps extends HtmlProps {
+export interface ColgroupProps extends HtmlProps<HTMLTableColElement> {
   span?: Prop<number>;
 }
 
-export interface DataProps extends HtmlProps {
+export interface DataProps extends HtmlProps<HTMLDataElement> {
   value?: Prop<string | number>;
 }
 
-export interface DelProps extends HtmlProps {
+export interface DelProps extends HtmlProps<HTMLModElement> {
   cite?: Prop<string>;
   datetime?: Prop<string>;
 }
 
-export interface DetailsProps extends HtmlProps {
+export interface DetailsProps extends HtmlProps<HTMLDetailsElement> {
   name?: Prop<string>;
   open?: Prop<boolean>;
 }
 
-export interface DialogProps extends HtmlProps {
+export interface DialogProps extends HtmlProps<HTMLDialogElement> {
   closedby?: Prop<"any" | "closerequest" | "none">;
   open?: Prop<boolean>;
 }
 
-export interface EmbedProps extends VoidProps {
+export interface EmbedProps extends VoidProps<HTMLEmbedElement> {
   height?: Prop<Numeric>;
   src?: Prop<string>;
   type?: Prop<string>;
   width?: Prop<Numeric>;
 }
 
-export interface FieldsetProps extends HtmlProps {
+export interface FieldsetProps extends HtmlProps<HTMLFieldSetElement> {
   disabled?: Prop<boolean>;
   form?: Prop<string>;
   name?: Prop<string>;
 }
 
-export interface FormProps extends HtmlProps {
+export interface FormProps extends HtmlProps<HTMLFormElement> {
   "accept-charset"?: Prop<string>;
   action?: Prop<string>;
   autocomplete?: Prop<"on" | "off">;
@@ -677,11 +1440,11 @@ export interface FormProps extends HtmlProps {
   target?: Prop<Target>;
 }
 
-export interface HtmlElementProps extends HtmlProps {
+export interface HtmlElementProps extends HtmlProps<HTMLHtmlElement> {
   manifest?: Prop<string>;
 }
 
-export interface IframeProps extends HtmlProps {
+export interface IframeProps extends HtmlProps<HTMLIFrameElement> {
   allow?: Prop<string>;
   allowfullscreen?: Prop<boolean>;
   height?: Prop<Numeric>;
@@ -694,7 +1457,7 @@ export interface IframeProps extends HtmlProps {
   width?: Prop<Numeric>;
 }
 
-export interface ImgProps extends VoidProps {
+export interface ImgProps extends VoidProps<HTMLImageElement> {
   alt?: Prop<string>;
   crossorigin?: Prop<CrossOrigin>;
   decoding?: Prop<"async" | "auto" | "sync">;
@@ -709,7 +1472,7 @@ export interface ImgProps extends VoidProps {
   width?: Prop<Numeric>;
 }
 
-export interface InputProps extends VoidProps {
+export interface InputProps extends VoidProps<HTMLInputElement> {
   accept?: Prop<string>;
   alt?: Prop<string>;
   autocomplete?: Prop<string>;
@@ -766,21 +1529,21 @@ export interface InputProps extends VoidProps {
   width?: Prop<Numeric>;
 }
 
-export interface InsProps extends HtmlProps {
+export interface InsProps extends HtmlProps<HTMLModElement> {
   cite?: Prop<string>;
   datetime?: Prop<string>;
 }
 
-export interface LabelProps extends HtmlProps {
+export interface LabelProps extends HtmlProps<HTMLLabelElement> {
   for?: Prop<string>;
   form?: Prop<string>;
 }
 
-export interface LiProps extends HtmlProps {
+export interface LiProps extends HtmlProps<HTMLLIElement> {
   value?: Prop<number>;
 }
 
-export interface LinkProps extends VoidProps {
+export interface LinkProps extends VoidProps<HTMLLinkElement> {
   as?: Prop<string>;
   crossorigin?: Prop<CrossOrigin>;
   fetchpriority?: Prop<"high" | "low" | "auto">;
@@ -796,11 +1559,11 @@ export interface LinkProps extends VoidProps {
   type?: Prop<string>;
 }
 
-export interface MapProps extends HtmlProps {
+export interface MapProps extends HtmlProps<HTMLMapElement> {
   name?: Prop<string>;
 }
 
-export interface MediaProps extends HtmlProps {
+export interface MediaProps extends HtmlProps<HTMLAudioElement> {
   autoplay?: Prop<boolean>;
   controls?: Prop<boolean>;
   controlslist?: Prop<string>;
@@ -811,7 +1574,7 @@ export interface MediaProps extends HtmlProps {
   src?: Prop<string>;
 }
 
-export interface MetaProps extends VoidProps {
+export interface MetaProps extends VoidProps<HTMLMetaElement> {
   charset?: Prop<string>;
   content?: Prop<string>;
   "http-equiv"?: Prop<string>;
@@ -819,7 +1582,7 @@ export interface MetaProps extends VoidProps {
   name?: Prop<string>;
 }
 
-export interface MeterProps extends HtmlProps {
+export interface MeterProps extends HtmlProps<HTMLMeterElement> {
   form?: Prop<string>;
   high?: Prop<number>;
   low?: Prop<number>;
@@ -829,7 +1592,7 @@ export interface MeterProps extends HtmlProps {
   value?: Prop<string | number>;
 }
 
-export interface ObjectProps extends HtmlProps {
+export interface ObjectProps extends HtmlProps<HTMLObjectElement> {
   data?: Prop<string>;
   form?: Prop<string>;
   height?: Prop<Numeric>;
@@ -839,40 +1602,40 @@ export interface ObjectProps extends HtmlProps {
   width?: Prop<Numeric>;
 }
 
-export interface OlProps extends HtmlProps {
+export interface OlProps extends HtmlProps<HTMLOListElement> {
   reversed?: Prop<boolean>;
   start?: Prop<number>;
   type?: Prop<"1" | "a" | "A" | "i" | "I">;
 }
 
-export interface OptgroupProps extends HtmlProps {
+export interface OptgroupProps extends HtmlProps<HTMLOptGroupElement> {
   disabled?: Prop<boolean>;
   label?: Prop<string>;
 }
 
-export interface OptionProps extends HtmlProps {
+export interface OptionProps extends HtmlProps<HTMLOptionElement> {
   disabled?: Prop<boolean>;
   label?: Prop<string>;
   selected?: Prop<boolean>;
   value?: Prop<string | number>;
 }
 
-export interface OutputProps extends HtmlProps {
+export interface OutputProps extends HtmlProps<HTMLOutputElement> {
   for?: Prop<string>;
   form?: Prop<string>;
   name?: Prop<string>;
 }
 
-export interface ProgressProps extends HtmlProps {
+export interface ProgressProps extends HtmlProps<HTMLProgressElement> {
   max?: Prop<Numeric>;
   value?: Prop<string | number>;
 }
 
-export interface QuoteProps extends HtmlProps {
+export interface QuoteProps extends HtmlProps<HTMLQuoteElement> {
   cite?: Prop<string>;
 }
 
-export interface ScriptProps extends HtmlProps {
+export interface ScriptProps extends HtmlProps<HTMLScriptElement> {
   async?: Prop<boolean>;
   crossorigin?: Prop<CrossOrigin>;
   defer?: Prop<boolean>;
@@ -884,7 +1647,7 @@ export interface ScriptProps extends HtmlProps {
   type?: Prop<string>;
 }
 
-export interface SelectProps extends HtmlProps {
+export interface SelectProps extends HtmlProps<HTMLSelectElement> {
   autocomplete?: Prop<string>;
   disabled?: Prop<boolean>;
   form?: Prop<string>;
@@ -895,11 +1658,11 @@ export interface SelectProps extends HtmlProps {
   value?: Prop<string | number>;
 }
 
-export interface SlotProps extends HtmlProps {
+export interface SlotProps extends HtmlProps<HTMLSlotElement> {
   name?: Prop<string>;
 }
 
-export interface SourceProps extends VoidProps {
+export interface SourceProps extends VoidProps<HTMLSourceElement> {
   height?: Prop<Numeric>;
   media?: Prop<string>;
   sizes?: Prop<string>;
@@ -909,23 +1672,23 @@ export interface SourceProps extends VoidProps {
   width?: Prop<Numeric>;
 }
 
-export interface StyleProps extends HtmlProps {
+export interface StyleProps extends HtmlProps<HTMLStyleElement> {
   media?: Prop<string>;
   type?: Prop<string>;
 }
 
-export interface TableProps extends HtmlProps {
+export interface TableProps extends HtmlProps<HTMLTableElement> {
   summary?: Prop<string>;
   width?: Prop<Numeric>;
 }
 
-export interface TdProps extends HtmlProps {
+export interface TdProps extends HtmlProps<HTMLTableCellElement> {
   colspan?: Prop<number>;
   headers?: Prop<string>;
   rowspan?: Prop<number>;
 }
 
-export interface ThProps extends HtmlProps {
+export interface ThProps extends HtmlProps<HTMLTableCellElement> {
   abbr?: Prop<string>;
   colspan?: Prop<number>;
   headers?: Prop<string>;
@@ -933,7 +1696,7 @@ export interface ThProps extends HtmlProps {
   scope?: Prop<"row" | "col" | "rowgroup" | "colgroup">;
 }
 
-export interface TextareaProps extends HtmlProps {
+export interface TextareaProps extends HtmlProps<HTMLTextAreaElement> {
   autocomplete?: Prop<string>;
   cols?: Prop<number>;
   dirname?: Prop<string>;
@@ -950,11 +1713,11 @@ export interface TextareaProps extends HtmlProps {
   wrap?: Prop<"hard" | "soft" | "off">;
 }
 
-export interface TimeProps extends HtmlProps {
+export interface TimeProps extends HtmlProps<HTMLTimeElement> {
   datetime?: Prop<string>;
 }
 
-export interface TrackProps extends VoidProps {
+export interface TrackProps extends VoidProps<HTMLTrackElement> {
   default?: Prop<boolean>;
   kind?: Prop<
     "subtitles" | "captions" | "descriptions" | "chapters" | "metadata"
@@ -973,7 +1736,7 @@ export interface VideoProps extends MediaProps {
   width?: Prop<Numeric>;
 }
 
-export interface SvgProps extends AriaAttributes, Events {
+export interface SvgProps extends AriaAttributes, Events<SVGElement> {
   children?: Children<HtmlNode>;
   id?: Prop<string>;
   class?: Prop<string>;
@@ -1239,117 +2002,117 @@ export interface SvgProps extends AriaAttributes, Events {
 /** The elements this schema declares, and what each accepts. */
 export interface Elements extends UiElements {
   a: AnchorProps;
-  abbr: HtmlProps;
-  address: HtmlProps;
+  abbr: HtmlProps<HTMLElement>;
+  address: HtmlProps<HTMLElement>;
   area: AreaProps;
-  article: HtmlProps;
-  aside: HtmlProps;
+  article: HtmlProps<HTMLElement>;
+  aside: HtmlProps<HTMLElement>;
   audio: MediaProps;
-  b: HtmlProps;
+  b: HtmlProps<HTMLElement>;
   base: BaseProps;
-  bdi: HtmlProps;
-  bdo: HtmlProps;
+  bdi: HtmlProps<HTMLElement>;
+  bdo: HtmlProps<HTMLElement>;
   blockquote: BlockquoteProps;
-  body: HtmlProps;
-  br: VoidProps;
+  body: HtmlProps<HTMLBodyElement>;
+  br: VoidProps<HTMLBRElement>;
   button: ButtonProps;
   canvas: CanvasProps;
-  caption: HtmlProps;
-  cite: HtmlProps;
-  code: HtmlProps;
+  caption: HtmlProps<HTMLTableCaptionElement>;
+  cite: HtmlProps<HTMLElement>;
+  code: HtmlProps<HTMLElement>;
   col: ColProps;
   colgroup: ColgroupProps;
   data: DataProps;
-  datalist: HtmlProps;
-  dd: HtmlProps;
+  datalist: HtmlProps<HTMLDataListElement>;
+  dd: HtmlProps<HTMLElement>;
   del: DelProps;
   details: DetailsProps;
-  dfn: HtmlProps;
+  dfn: HtmlProps<HTMLElement>;
   dialog: DialogProps;
-  div: HtmlProps;
-  dl: HtmlProps;
-  dt: HtmlProps;
-  em: HtmlProps;
+  div: HtmlProps<HTMLDivElement>;
+  dl: HtmlProps<HTMLDListElement>;
+  dt: HtmlProps<HTMLElement>;
+  em: HtmlProps<HTMLElement>;
   embed: EmbedProps;
   fieldset: FieldsetProps;
-  figcaption: HtmlProps;
-  figure: HtmlProps;
-  footer: HtmlProps;
+  figcaption: HtmlProps<HTMLElement>;
+  figure: HtmlProps<HTMLElement>;
+  footer: HtmlProps<HTMLElement>;
   form: FormProps;
-  h1: HtmlProps;
-  h2: HtmlProps;
-  h3: HtmlProps;
-  h4: HtmlProps;
-  h5: HtmlProps;
-  h6: HtmlProps;
-  head: HtmlProps;
-  header: HtmlProps;
-  hgroup: HtmlProps;
-  hr: VoidProps;
+  h1: HtmlProps<HTMLHeadingElement>;
+  h2: HtmlProps<HTMLHeadingElement>;
+  h3: HtmlProps<HTMLHeadingElement>;
+  h4: HtmlProps<HTMLHeadingElement>;
+  h5: HtmlProps<HTMLHeadingElement>;
+  h6: HtmlProps<HTMLHeadingElement>;
+  head: HtmlProps<HTMLHeadElement>;
+  header: HtmlProps<HTMLElement>;
+  hgroup: HtmlProps<HTMLElement>;
+  hr: VoidProps<HTMLHRElement>;
   html: HtmlElementProps;
-  i: HtmlProps;
+  i: HtmlProps<HTMLElement>;
   iframe: IframeProps;
   img: ImgProps;
   input: InputProps;
   ins: InsProps;
-  kbd: HtmlProps;
+  kbd: HtmlProps<HTMLElement>;
   label: LabelProps;
-  legend: HtmlProps;
+  legend: HtmlProps<HTMLLegendElement>;
   li: LiProps;
   link: LinkProps;
-  main: HtmlProps;
+  main: HtmlProps<HTMLElement>;
   map: MapProps;
-  mark: HtmlProps;
-  menu: HtmlProps;
+  mark: HtmlProps<HTMLElement>;
+  menu: HtmlProps<HTMLMenuElement>;
   meta: MetaProps;
   meter: MeterProps;
-  nav: HtmlProps;
-  noscript: HtmlProps;
+  nav: HtmlProps<HTMLElement>;
+  noscript: HtmlProps<HTMLElement>;
   object: ObjectProps;
   ol: OlProps;
   optgroup: OptgroupProps;
   option: OptionProps;
   output: OutputProps;
-  p: HtmlProps;
-  picture: HtmlProps;
-  pre: HtmlProps;
+  p: HtmlProps<HTMLParagraphElement>;
+  picture: HtmlProps<HTMLPictureElement>;
+  pre: HtmlProps<HTMLPreElement>;
   progress: ProgressProps;
   q: QuoteProps;
-  rp: HtmlProps;
-  rt: HtmlProps;
-  ruby: HtmlProps;
-  s: HtmlProps;
-  samp: HtmlProps;
+  rp: HtmlProps<HTMLElement>;
+  rt: HtmlProps<HTMLElement>;
+  ruby: HtmlProps<HTMLElement>;
+  s: HtmlProps<HTMLElement>;
+  samp: HtmlProps<HTMLElement>;
   script: ScriptProps;
-  search: HtmlProps;
-  section: HtmlProps;
+  search: HtmlProps<HTMLElement>;
+  section: HtmlProps<HTMLElement>;
   select: SelectProps;
   slot: SlotProps;
-  small: HtmlProps;
+  small: HtmlProps<HTMLElement>;
   source: SourceProps;
-  span: HtmlProps;
-  strong: HtmlProps;
+  span: HtmlProps<HTMLSpanElement>;
+  strong: HtmlProps<HTMLElement>;
   style: StyleProps;
-  sub: HtmlProps;
-  summary: HtmlProps;
-  sup: HtmlProps;
+  sub: HtmlProps<HTMLElement>;
+  summary: HtmlProps<HTMLElement>;
+  sup: HtmlProps<HTMLElement>;
   table: TableProps;
-  tbody: HtmlProps;
+  tbody: HtmlProps<HTMLTableSectionElement>;
   td: TdProps;
-  template: HtmlProps;
+  template: HtmlProps<HTMLTemplateElement>;
   textarea: TextareaProps;
-  tfoot: HtmlProps;
+  tfoot: HtmlProps<HTMLTableSectionElement>;
   th: ThProps;
-  thead: HtmlProps;
+  thead: HtmlProps<HTMLTableSectionElement>;
   time: TimeProps;
-  title: HtmlProps;
-  tr: HtmlProps;
+  title: HtmlProps<HTMLTitleElement>;
+  tr: HtmlProps<HTMLTableRowElement>;
   track: TrackProps;
-  u: HtmlProps;
-  ul: HtmlProps;
-  var: HtmlProps;
+  u: HtmlProps<HTMLElement>;
+  ul: HtmlProps<HTMLUListElement>;
+  var: HtmlProps<HTMLElement>;
   video: VideoProps;
-  wbr: VoidProps;
+  wbr: VoidProps<HTMLElement>;
   "svg:a": SvgProps;
   "svg:animate": SvgProps;
   "svg:animateMotion": SvgProps;

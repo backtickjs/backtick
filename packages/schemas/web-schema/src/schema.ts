@@ -14,219 +14,1056 @@ export const schema: Schema = {
 
   types: {
     /**
-     * What a handler is handed.
+     * What a handler is handed, and what it is handed it by.
      *
-     * The names and the shapes are the DOM's, taken from `lib.dom.d.ts` rather
-     * than chosen here: a target's schema says what that target does, and what
-     * this one does is the web. Which event a handler is handed is the DOM's
-     * decision too — `click` is a `PointerEvent` and `input` is an
-     * `InputEvent`, whatever either sounds like.
+     * The names, the shapes and the inheritance are the DOM's, taken from
+     * `lib.dom.d.ts` rather than chosen here: a target's schema says what that
+     * target does, and what this one does is the web. Which event a handler is
+     * handed is the DOM's decision too — `click` is a `PointerEvent` and
+     * `input` is an `InputEvent`, whatever either sounds like.
      *
-     * A property whose type is one this schema does not declare — a
-     * `DataTransfer`, a `TouchList`, an `HTMLElement` — is left out rather than
-     * guessed at. It is absent because it is not written yet, not because the
-     * DOM does not have it.
+     * An event is generic in what it happened to, so `currentTarget` is the
+     * element the handler is on rather than an opaque `EventTarget`. That is a
+     * deviation, and a deliberate one: the DOM types it opaque and expects a
+     * cast, and this language has no casts — without this, reading the value of
+     * the field a handler is attached to would be unsayable.
+     *
+     * A property whose type is one this schema does not declare is left out
+     * rather than guessed at. It is absent because it is not written yet, not
+     * because the DOM does not have it.
      */
-    EventTarget: Type.Interface([Type.Ref("ClientHandle")], {}, {
-      description:
-        "What an event happened to.\n\nOpaque, as the DOM has it: reaching an element's own members through one needs a cast, and this language has none. That is the gap to close next, not a thing to paper over here.",
-    }),
-    Event: Type.Interface(
+    EventTarget: Type.Interface(
       [Type.Ref("ClientHandle")],
+      {},
       {
-        bubbles: Type.Boolean({ readOnly: true }),
-        cancelable: Type.Boolean({ readOnly: true }),
-        composed: Type.Boolean({ readOnly: true }),
-        currentTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
-        defaultPrevented: Type.Boolean({ readOnly: true }),
-        eventPhase: Type.Number({ readOnly: true }),
-        isTrusted: Type.Boolean({ readOnly: true }),
-        srcElement: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
-        target: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
-        type: Type.String({ readOnly: true }),
-        timeStamp: Type.Number({ readOnly: true }),
-        preventDefault: Type.Function([], Type.Void()),
-        stopPropagation: Type.Function([], Type.Void()),
-        stopImmediatePropagation: Type.Function([], Type.Void()),
+        description:
+          "What an event happened to, and what a listener is attached to.",
       },
+    ),
+    Event: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Ref("ClientHandle")],
+        {
+          bubbles: Type.Boolean({ readOnly: true }),
+          cancelable: Type.Boolean({ readOnly: true }),
+          composed: Type.Boolean({ readOnly: true }),
+          currentTarget: Type.Ref("T", { readOnly: true }),
+          defaultPrevented: Type.Boolean({ readOnly: true }),
+          eventPhase: Type.Number({ readOnly: true }),
+          isTrusted: Type.Boolean({ readOnly: true }),
+          srcElement: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+          target: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+          type: Type.String({ readOnly: true }),
+          timeStamp: Type.Number({ readOnly: true }),
+          preventDefault: Type.Function([], Type.Void()),
+          stopPropagation: Type.Function([], Type.Void()),
+          stopImmediatePropagation: Type.Function([], Type.Void()),
+        },
+      ),
       { description: "Anything that happens to an element, and what every other event here is one of." },
     ),
-    UIEvent: Type.Interface(
-      [Type.Ref("Event")],
-      {
-        detail: Type.Number({ readOnly: true }),
-        which: Type.Number({ readOnly: true }),
-      },
+    UIEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+          detail: Type.Number({ readOnly: true }),
+          which: Type.Number({ readOnly: true }),
+        },
+      ),
       { description: "An event that came from the interface rather than from the page's own code." },
     ),
-    MouseEvent: Type.Interface(
-      [Type.Ref("UIEvent")],
+    MouseEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])],
+        {
+          altKey: Type.Boolean({ readOnly: true }),
+          button: Type.Number({ readOnly: true }),
+          buttons: Type.Number({ readOnly: true }),
+          clientX: Type.Number({ readOnly: true }),
+          clientY: Type.Number({ readOnly: true }),
+          ctrlKey: Type.Boolean({ readOnly: true }),
+          layerX: Type.Number({ readOnly: true }),
+          layerY: Type.Number({ readOnly: true }),
+          metaKey: Type.Boolean({ readOnly: true }),
+          movementX: Type.Number({ readOnly: true }),
+          movementY: Type.Number({ readOnly: true }),
+          offsetX: Type.Number({ readOnly: true }),
+          offsetY: Type.Number({ readOnly: true }),
+          pageX: Type.Number({ readOnly: true }),
+          pageY: Type.Number({ readOnly: true }),
+          relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+          screenX: Type.Number({ readOnly: true }),
+          screenY: Type.Number({ readOnly: true }),
+          shiftKey: Type.Boolean({ readOnly: true }),
+          x: Type.Number({ readOnly: true }),
+          y: Type.Number({ readOnly: true }),
+        },
+      ),
+      { description: "A pointing device did something, and where it was when it did." },
+    ),
+    PointerEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")])],
+        {
+          altitudeAngle: Type.Number({ readOnly: true }),
+          azimuthAngle: Type.Number({ readOnly: true }),
+          height: Type.Number({ readOnly: true }),
+          isPrimary: Type.Boolean({ readOnly: true }),
+          persistentDeviceId: Type.Number({ readOnly: true }),
+          pointerId: Type.Number({ readOnly: true }),
+          pointerType: Type.String({ readOnly: true }),
+          pressure: Type.Number({ readOnly: true }),
+          tangentialPressure: Type.Number({ readOnly: true }),
+          tiltX: Type.Number({ readOnly: true }),
+          tiltY: Type.Number({ readOnly: true }),
+          twist: Type.Number({ readOnly: true }),
+          width: Type.Number({ readOnly: true }),
+        },
+      ),
+      { description: "A mouse, a pen or a finger \u2014 what the DOM hands a click, whichever it was." },
+    ),
+    DragEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")])],
+        {
+        },
+      ),
+      { description: "Something is being dragged." },
+    ),
+    WheelEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")])],
+        {
+          deltaMode: Type.Number({ readOnly: true }),
+          deltaX: Type.Number({ readOnly: true }),
+          deltaY: Type.Number({ readOnly: true }),
+          deltaZ: Type.Number({ readOnly: true }),
+        },
+      ),
+      { description: "A wheel turned, and by how much in which units." },
+    ),
+    KeyboardEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])],
+        {
+          altKey: Type.Boolean({ readOnly: true }),
+          charCode: Type.Number({ readOnly: true }),
+          code: Type.String({ readOnly: true }),
+          ctrlKey: Type.Boolean({ readOnly: true }),
+          isComposing: Type.Boolean({ readOnly: true }),
+          key: Type.String({ readOnly: true }),
+          keyCode: Type.Number({ readOnly: true }),
+          location: Type.Number({ readOnly: true }),
+          metaKey: Type.Boolean({ readOnly: true }),
+          repeat: Type.Boolean({ readOnly: true }),
+          shiftKey: Type.Boolean({ readOnly: true }),
+        },
+      ),
+      { description: "A key went down or came up, and which key it was." },
+    ),
+    InputEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])],
+        {
+          data: Type.Union([Type.String(), Type.Null()], { readOnly: true }),
+          inputType: Type.String({ readOnly: true }),
+          isComposing: Type.Boolean({ readOnly: true }),
+        },
+      ),
+      { description: "The value of an editable element changed, and how." },
+    ),
+    CompositionEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])],
+        {
+          data: Type.String({ readOnly: true }),
+        },
+      ),
+      { description: "Text is being composed \u2014 an input method is part-way through a character." },
+    ),
+    FocusEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])],
+        {
+          relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+        },
+      ),
+      { description: "Focus arrived or left." },
+    ),
+    TouchEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])],
+        {
+          altKey: Type.Boolean({ readOnly: true }),
+          ctrlKey: Type.Boolean({ readOnly: true }),
+          metaKey: Type.Boolean({ readOnly: true }),
+          shiftKey: Type.Boolean({ readOnly: true }),
+        },
+      ),
+      { description: "Fingers on a screen." },
+    ),
+    ClipboardEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+        },
+      ),
+      { description: "A copy, cut or paste." },
+    ),
+    SubmitEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+        },
+      ),
+      { description: "A form was submitted." },
+    ),
+    ToggleEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+          newState: Type.String({ readOnly: true }),
+          oldState: Type.String({ readOnly: true }),
+        },
+      ),
+      { description: "Something that opens and closes did." },
+    ),
+    AnimationEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+          animationName: Type.String({ readOnly: true }),
+          elapsedTime: Type.Number({ readOnly: true }),
+          pseudoElement: Type.String({ readOnly: true }),
+        },
+      ),
+      { description: "A CSS animation reached one of its edges." },
+    ),
+    TransitionEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+          elapsedTime: Type.Number({ readOnly: true }),
+          propertyName: Type.String({ readOnly: true }),
+          pseudoElement: Type.String({ readOnly: true }),
+        },
+      ),
+      { description: "A CSS transition reached one of its edges." },
+    ),
+    ProgressEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+          lengthComputable: Type.Boolean({ readOnly: true }),
+          loaded: Type.Number({ readOnly: true }),
+          total: Type.Number({ readOnly: true }),
+        },
+      ),
+      { description: "Something loading said how far it had got." },
+    ),
+    ErrorEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("T")])],
+        {
+          colno: Type.Number({ readOnly: true }),
+          filename: Type.String({ readOnly: true }),
+          lineno: Type.Number({ readOnly: true }),
+          message: Type.String({ readOnly: true }),
+        },
+      ),
+      { description: "Something failed, and said where." },
+    ),
+
+    /**
+     * The elements themselves, so `currentTarget` is worth reading.
+     *
+     * Extracted from `lib.dom.d.ts` with its own inheritance: an
+     * `HTMLInputElement` is an `HTMLElement` is an `Element` is a `Node` is an
+     * `EventTarget`, and a member is declared where the DOM declares it.
+     */
+    Node: Type.Interface(
+      [Type.Ref("EventTarget")],
       {
-        altKey: Type.Boolean({ readOnly: true }),
-        button: Type.Number({ readOnly: true }),
-        buttons: Type.Number({ readOnly: true }),
-        clientX: Type.Number({ readOnly: true }),
-        clientY: Type.Number({ readOnly: true }),
-        ctrlKey: Type.Boolean({ readOnly: true }),
-        layerX: Type.Number({ readOnly: true }),
-        layerY: Type.Number({ readOnly: true }),
-        metaKey: Type.Boolean({ readOnly: true }),
-        movementX: Type.Number({ readOnly: true }),
-        movementY: Type.Number({ readOnly: true }),
-        offsetX: Type.Number({ readOnly: true }),
-        offsetY: Type.Number({ readOnly: true }),
-        pageX: Type.Number({ readOnly: true }),
-        pageY: Type.Number({ readOnly: true }),
-        relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
-        screenX: Type.Number({ readOnly: true }),
-        screenY: Type.Number({ readOnly: true }),
-        shiftKey: Type.Boolean({ readOnly: true }),
+        baseURI: Type.String({ readOnly: true }),
+        isConnected: Type.Boolean({ readOnly: true }),
+        nodeName: Type.String({ readOnly: true }),
+        nodeType: Type.Number({ readOnly: true }),
+        nodeValue: Type.Union([Type.String(), Type.Null()], {}),
+        textContent: Type.Union([Type.String(), Type.Null()], {}),
+      },
+    ),
+    Element: Type.Interface(
+      [Type.Ref("Node")],
+      {
+        className: Type.String({}),
+        clientHeight: Type.Number({ readOnly: true }),
+        clientLeft: Type.Number({ readOnly: true }),
+        clientTop: Type.Number({ readOnly: true }),
+        clientWidth: Type.Number({ readOnly: true }),
+        currentCSSZoom: Type.Number({ readOnly: true }),
+        id: Type.String({}),
+        innerHTML: Type.String({}),
+        localName: Type.String({ readOnly: true }),
+        namespaceURI: Type.Union([Type.String(), Type.Null()], { readOnly: true }),
+        outerHTML: Type.String({}),
+        prefix: Type.Union([Type.String(), Type.Null()], { readOnly: true }),
+        scrollHeight: Type.Number({ readOnly: true }),
+        scrollLeft: Type.Number({}),
+        scrollTop: Type.Number({}),
+        scrollWidth: Type.Number({ readOnly: true }),
+        slot: Type.String({}),
+        tagName: Type.String({ readOnly: true }),
+      },
+    ),
+    SVGElement: Type.Interface([Type.Ref("Element")], {}),
+
+    HTMLElement: Type.Interface(
+      [Type.Ref("Element"), Type.Ref("HTMLOrSVGElement")],
+      {
+        accessKey: Type.String({}),
+        accessKeyLabel: Type.String({ readOnly: true }),
+        autocapitalize: Type.String({}),
+        autocorrect: Type.Boolean({}),
+        dir: Type.String({}),
+        draggable: Type.Boolean({}),
+        inert: Type.Boolean({}),
+        innerText: Type.String({}),
+        lang: Type.String({}),
+        offsetHeight: Type.Number({ readOnly: true }),
+        offsetLeft: Type.Number({ readOnly: true }),
+        offsetTop: Type.Number({ readOnly: true }),
+        offsetWidth: Type.Number({ readOnly: true }),
+        outerText: Type.String({}),
+        popover: Type.Union([Type.String(), Type.Null()], {}),
+        spellcheck: Type.Boolean({}),
+        title: Type.String({}),
+        translate: Type.Boolean({}),
+        writingSuggestions: Type.String({}),
+      },
+    ),
+    HTMLAnchorElement: Type.Interface(
+      [Type.Ref("HTMLElement"), Type.Ref("HTMLHyperlinkElementUtils")],
+      {
+        charset: Type.String({}),
+        coords: Type.String({}),
+        download: Type.String({}),
+        hreflang: Type.String({}),
+        name: Type.String({}),
+        ping: Type.String({}),
+        referrerPolicy: Type.String({}),
+        rel: Type.String({}),
+        rev: Type.String({}),
+        shape: Type.String({}),
+        target: Type.String({}),
+        text: Type.String({}),
+        type: Type.String({}),
+      },
+    ),
+    HTMLAreaElement: Type.Interface(
+      [Type.Ref("HTMLElement"), Type.Ref("HTMLHyperlinkElementUtils")],
+      {
+        alt: Type.String({}),
+        coords: Type.String({}),
+        download: Type.String({}),
+        noHref: Type.Boolean({}),
+        ping: Type.String({}),
+        referrerPolicy: Type.String({}),
+        rel: Type.String({}),
+        shape: Type.String({}),
+        target: Type.String({}),
+      },
+    ),
+    HTMLAudioElement: Type.Interface(
+      [Type.Ref("HTMLMediaElement")],
+      {
+      },
+    ),
+    HTMLBRElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        clear: Type.String({}),
+      },
+    ),
+    HTMLBaseElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        href: Type.String({}),
+        target: Type.String({}),
+      },
+    ),
+    HTMLBodyElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        aLink: Type.String({}),
+        background: Type.String({}),
+        bgColor: Type.String({}),
+        link: Type.String({}),
+        text: Type.String({}),
+        vLink: Type.String({}),
+      },
+    ),
+    HTMLButtonElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        command: Type.String({}),
+        disabled: Type.Boolean({}),
+        formAction: Type.String({}),
+        formEnctype: Type.String({}),
+        formMethod: Type.String({}),
+        formNoValidate: Type.Boolean({}),
+        formTarget: Type.String({}),
+        name: Type.String({}),
+        validationMessage: Type.String({ readOnly: true }),
+        value: Type.String({}),
+        willValidate: Type.Boolean({ readOnly: true }),
+      },
+    ),
+    HTMLCanvasElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        height: Type.Number({}),
+        width: Type.Number({}),
+      },
+    ),
+    HTMLDListElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        compact: Type.Boolean({}),
+      },
+    ),
+    HTMLDataElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        value: Type.String({}),
+      },
+    ),
+    HTMLDataListElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+      },
+    ),
+    HTMLDetailsElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        name: Type.String({}),
+        open: Type.Boolean({}),
+      },
+    ),
+    HTMLDialogElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        closedBy: Type.String({}),
+        open: Type.Boolean({}),
+        returnValue: Type.String({}),
+      },
+    ),
+    HTMLDivElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+      },
+    ),
+    HTMLEmbedElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        height: Type.String({}),
+        name: Type.String({}),
+        src: Type.String({}),
+        type: Type.String({}),
+        width: Type.String({}),
+      },
+    ),
+    HTMLFieldSetElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        disabled: Type.Boolean({}),
+        name: Type.String({}),
+        type: Type.String({ readOnly: true }),
+        validationMessage: Type.String({ readOnly: true }),
+        willValidate: Type.Boolean({ readOnly: true }),
+      },
+    ),
+    HTMLFormElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        acceptCharset: Type.String({}),
+        action: Type.String({}),
+        encoding: Type.String({}),
+        enctype: Type.String({}),
+        length: Type.Number({ readOnly: true }),
+        method: Type.String({}),
+        name: Type.String({}),
+        noValidate: Type.Boolean({}),
+        rel: Type.String({}),
+        target: Type.String({}),
+      },
+    ),
+    HTMLHRElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        color: Type.String({}),
+        noShade: Type.Boolean({}),
+        size: Type.String({}),
+        width: Type.String({}),
+      },
+    ),
+    HTMLHeadElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+      },
+    ),
+    HTMLHeadingElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+      },
+    ),
+    HTMLHtmlElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        version: Type.String({}),
+      },
+    ),
+    HTMLIFrameElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        allow: Type.String({}),
+        allowFullscreen: Type.Boolean({}),
+        frameBorder: Type.String({}),
+        height: Type.String({}),
+        longDesc: Type.String({}),
+        marginHeight: Type.String({}),
+        marginWidth: Type.String({}),
+        name: Type.String({}),
+        scrolling: Type.String({}),
+        src: Type.String({}),
+        srcdoc: Type.String({}),
+        width: Type.String({}),
+      },
+    ),
+    HTMLImageElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        alt: Type.String({}),
+        border: Type.String({}),
+        complete: Type.Boolean({ readOnly: true }),
+        crossOrigin: Type.Union([Type.String(), Type.Null()], {}),
+        currentSrc: Type.String({ readOnly: true }),
+        height: Type.Number({}),
+        hspace: Type.Number({}),
+        isMap: Type.Boolean({}),
+        longDesc: Type.String({}),
+        lowsrc: Type.String({}),
+        name: Type.String({}),
+        naturalHeight: Type.Number({ readOnly: true }),
+        naturalWidth: Type.Number({ readOnly: true }),
+        referrerPolicy: Type.String({}),
+        sizes: Type.String({}),
+        src: Type.String({}),
+        srcset: Type.String({}),
+        useMap: Type.String({}),
+        vspace: Type.Number({}),
+        width: Type.Number({}),
         x: Type.Number({ readOnly: true }),
         y: Type.Number({ readOnly: true }),
       },
-      { description: "A pointing device did something, and where it was when it did." },
     ),
-    PointerEvent: Type.Interface(
-      [Type.Ref("MouseEvent")],
+    HTMLInputElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        altitudeAngle: Type.Number({ readOnly: true }),
-        azimuthAngle: Type.Number({ readOnly: true }),
-        height: Type.Number({ readOnly: true }),
-        isPrimary: Type.Boolean({ readOnly: true }),
-        persistentDeviceId: Type.Number({ readOnly: true }),
-        pointerId: Type.Number({ readOnly: true }),
-        pointerType: Type.String({ readOnly: true }),
-        pressure: Type.Number({ readOnly: true }),
-        tangentialPressure: Type.Number({ readOnly: true }),
-        tiltX: Type.Number({ readOnly: true }),
-        tiltY: Type.Number({ readOnly: true }),
-        twist: Type.Number({ readOnly: true }),
-        width: Type.Number({ readOnly: true }),
+        accept: Type.String({}),
+        align: Type.String({}),
+        alt: Type.String({}),
+        capture: Type.String({}),
+        checked: Type.Boolean({}),
+        defaultChecked: Type.Boolean({}),
+        defaultValue: Type.String({}),
+        dirName: Type.String({}),
+        disabled: Type.Boolean({}),
+        formAction: Type.String({}),
+        formEnctype: Type.String({}),
+        formMethod: Type.String({}),
+        formNoValidate: Type.Boolean({}),
+        formTarget: Type.String({}),
+        height: Type.Number({}),
+        indeterminate: Type.Boolean({}),
+        max: Type.String({}),
+        maxLength: Type.Number({}),
+        min: Type.String({}),
+        minLength: Type.Number({}),
+        multiple: Type.Boolean({}),
+        name: Type.String({}),
+        pattern: Type.String({}),
+        placeholder: Type.String({}),
+        readOnly: Type.Boolean({}),
+        required: Type.Boolean({}),
+        size: Type.Number({}),
+        src: Type.String({}),
+        step: Type.String({}),
+        type: Type.String({}),
+        useMap: Type.String({}),
+        validationMessage: Type.String({ readOnly: true }),
+        value: Type.String({}),
+        valueAsNumber: Type.Number({}),
+        webkitdirectory: Type.Boolean({}),
+        width: Type.Number({}),
+        willValidate: Type.Boolean({ readOnly: true }),
       },
-      { description: "A mouse, a pen or a finger \u2014 what the DOM hands a click, whichever it was." },
     ),
-    DragEvent: Type.Interface(
-      [Type.Ref("MouseEvent")],
+    HTMLLIElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
+        type: Type.String({}),
+        value: Type.Number({}),
       },
-      { description: "Something is being dragged. What is being carried is a `DataTransfer`, which this schema does not declare." },
     ),
-    WheelEvent: Type.Interface(
-      [Type.Ref("MouseEvent")],
+    HTMLLabelElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        deltaMode: Type.Number({ readOnly: true }),
-        deltaX: Type.Number({ readOnly: true }),
-        deltaY: Type.Number({ readOnly: true }),
-        deltaZ: Type.Number({ readOnly: true }),
+        htmlFor: Type.String({}),
       },
-      { description: "A wheel turned, and by how much in which units." },
     ),
-    KeyboardEvent: Type.Interface(
-      [Type.Ref("UIEvent")],
+    HTMLLegendElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        altKey: Type.Boolean({ readOnly: true }),
-        charCode: Type.Number({ readOnly: true }),
-        code: Type.String({ readOnly: true }),
-        ctrlKey: Type.Boolean({ readOnly: true }),
-        isComposing: Type.Boolean({ readOnly: true }),
-        key: Type.String({ readOnly: true }),
-        keyCode: Type.Number({ readOnly: true }),
-        location: Type.Number({ readOnly: true }),
-        metaKey: Type.Boolean({ readOnly: true }),
-        repeat: Type.Boolean({ readOnly: true }),
-        shiftKey: Type.Boolean({ readOnly: true }),
+        align: Type.String({}),
       },
-      { description: "A key went down or came up, and which key it was." },
     ),
-    InputEvent: Type.Interface(
-      [Type.Ref("UIEvent")],
+    HTMLLinkElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        data: Type.Union([Type.String(), Type.Null()], { readOnly: true }),
-        inputType: Type.String({ readOnly: true }),
-        isComposing: Type.Boolean({ readOnly: true }),
+        as: Type.String({}),
+        charset: Type.String({}),
+        crossOrigin: Type.Union([Type.String(), Type.Null()], {}),
+        disabled: Type.Boolean({}),
+        href: Type.String({}),
+        hreflang: Type.String({}),
+        imageSizes: Type.String({}),
+        imageSrcset: Type.String({}),
+        integrity: Type.String({}),
+        media: Type.String({}),
+        referrerPolicy: Type.String({}),
+        rel: Type.String({}),
+        rev: Type.String({}),
+        target: Type.String({}),
+        type: Type.String({}),
       },
-      { description: "The value of an editable element changed, and how." },
     ),
-    CompositionEvent: Type.Interface(
-      [Type.Ref("UIEvent")],
+    HTMLMapElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        data: Type.String({ readOnly: true }),
+        name: Type.String({}),
       },
-      { description: "Text is being composed \u2014 an input method is part-way through a character." },
     ),
-    FocusEvent: Type.Interface(
-      [Type.Ref("UIEvent")],
+    HTMLMenuElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], { readOnly: true }),
+        compact: Type.Boolean({}),
       },
-      { description: "Focus arrived or left." },
     ),
-    TouchEvent: Type.Interface(
-      [Type.Ref("UIEvent")],
+    HTMLMetaElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        altKey: Type.Boolean({ readOnly: true }),
-        ctrlKey: Type.Boolean({ readOnly: true }),
-        metaKey: Type.Boolean({ readOnly: true }),
-        shiftKey: Type.Boolean({ readOnly: true }),
+        content: Type.String({}),
+        httpEquiv: Type.String({}),
+        media: Type.String({}),
+        name: Type.String({}),
+        scheme: Type.String({}),
       },
-      { description: "Fingers on a screen. The lists of touches are `TouchList`s, which this schema does not declare." },
     ),
-    ClipboardEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLMeterElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
+        high: Type.Number({}),
+        low: Type.Number({}),
+        max: Type.Number({}),
+        min: Type.Number({}),
+        optimum: Type.Number({}),
+        value: Type.Number({}),
       },
-      { description: "A copy, cut or paste. What is on the clipboard is a `DataTransfer`, which this schema does not declare." },
     ),
-    SubmitEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLModElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
+        cite: Type.String({}),
+        dateTime: Type.String({}),
       },
-      { description: "A form was submitted. The submitter is an `HTMLElement`, which this schema does not declare." },
     ),
-    ToggleEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLOListElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        newState: Type.String({ readOnly: true }),
-        oldState: Type.String({ readOnly: true }),
+        compact: Type.Boolean({}),
+        reversed: Type.Boolean({}),
+        start: Type.Number({}),
+        type: Type.String({}),
       },
-      { description: "Something that opens and closes did." },
     ),
-    AnimationEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLObjectElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        animationName: Type.String({ readOnly: true }),
-        elapsedTime: Type.Number({ readOnly: true }),
-        pseudoElement: Type.String({ readOnly: true }),
+        align: Type.String({}),
+        archive: Type.String({}),
+        border: Type.String({}),
+        code: Type.String({}),
+        codeBase: Type.String({}),
+        codeType: Type.String({}),
+        data: Type.String({}),
+        declare: Type.Boolean({}),
+        height: Type.String({}),
+        hspace: Type.Number({}),
+        name: Type.String({}),
+        standby: Type.String({}),
+        type: Type.String({}),
+        useMap: Type.String({}),
+        validationMessage: Type.String({ readOnly: true }),
+        vspace: Type.Number({}),
+        width: Type.String({}),
+        willValidate: Type.Boolean({ readOnly: true }),
       },
-      { description: "A CSS animation reached one of its edges." },
     ),
-    TransitionEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLOptGroupElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        elapsedTime: Type.Number({ readOnly: true }),
-        propertyName: Type.String({ readOnly: true }),
-        pseudoElement: Type.String({ readOnly: true }),
+        disabled: Type.Boolean({}),
+        label: Type.String({}),
       },
-      { description: "A CSS transition reached one of its edges." },
     ),
-    ProgressEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLOptionElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        lengthComputable: Type.Boolean({ readOnly: true }),
-        loaded: Type.Number({ readOnly: true }),
-        total: Type.Number({ readOnly: true }),
+        defaultSelected: Type.Boolean({}),
+        disabled: Type.Boolean({}),
+        index: Type.Number({ readOnly: true }),
+        label: Type.String({}),
+        selected: Type.Boolean({}),
+        text: Type.String({}),
+        value: Type.String({}),
       },
-      { description: "Something loading said how far it had got." },
     ),
-    ErrorEvent: Type.Interface(
-      [Type.Ref("Event")],
+    HTMLOutputElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
       {
-        colno: Type.Number({ readOnly: true }),
-        filename: Type.String({ readOnly: true }),
-        lineno: Type.Number({ readOnly: true }),
-        message: Type.String({ readOnly: true }),
+        defaultValue: Type.String({}),
+        name: Type.String({}),
+        type: Type.String({ readOnly: true }),
+        validationMessage: Type.String({ readOnly: true }),
+        value: Type.String({}),
+        willValidate: Type.Boolean({ readOnly: true }),
       },
-      { description: "Something failed, and said where." },
+    ),
+    HTMLParagraphElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+      },
+    ),
+    HTMLPictureElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+      },
+    ),
+    HTMLPreElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        width: Type.Number({}),
+      },
+    ),
+    HTMLProgressElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        max: Type.Number({}),
+        position: Type.Number({ readOnly: true }),
+        value: Type.Number({}),
+      },
+    ),
+    HTMLQuoteElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        cite: Type.String({}),
+      },
+    ),
+    HTMLScriptElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        async: Type.Boolean({}),
+        charset: Type.String({}),
+        crossOrigin: Type.Union([Type.String(), Type.Null()], {}),
+        defer: Type.Boolean({}),
+        event: Type.String({}),
+        htmlFor: Type.String({}),
+        integrity: Type.String({}),
+        noModule: Type.Boolean({}),
+        referrerPolicy: Type.String({}),
+        src: Type.String({}),
+        text: Type.String({}),
+        type: Type.String({}),
+      },
+    ),
+    HTMLSelectElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        disabled: Type.Boolean({}),
+        length: Type.Number({}),
+        multiple: Type.Boolean({}),
+        name: Type.String({}),
+        required: Type.Boolean({}),
+        selectedIndex: Type.Number({}),
+        size: Type.Number({}),
+        validationMessage: Type.String({ readOnly: true }),
+        value: Type.String({}),
+        willValidate: Type.Boolean({ readOnly: true }),
+      },
+    ),
+    HTMLSlotElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        name: Type.String({}),
+      },
+    ),
+    HTMLSourceElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        height: Type.Number({}),
+        media: Type.String({}),
+        sizes: Type.String({}),
+        src: Type.String({}),
+        srcset: Type.String({}),
+        type: Type.String({}),
+        width: Type.Number({}),
+      },
+    ),
+    HTMLSpanElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+      },
+    ),
+    HTMLStyleElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        disabled: Type.Boolean({}),
+        media: Type.String({}),
+        type: Type.String({}),
+      },
+    ),
+    HTMLTableCaptionElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+      },
+    ),
+    HTMLTableCellElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        abbr: Type.String({}),
+        align: Type.String({}),
+        axis: Type.String({}),
+        bgColor: Type.String({}),
+        cellIndex: Type.Number({ readOnly: true }),
+        ch: Type.String({}),
+        chOff: Type.String({}),
+        colSpan: Type.Number({}),
+        headers: Type.String({}),
+        height: Type.String({}),
+        noWrap: Type.Boolean({}),
+        rowSpan: Type.Number({}),
+        scope: Type.String({}),
+        vAlign: Type.String({}),
+        width: Type.String({}),
+      },
+    ),
+    HTMLTableColElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        ch: Type.String({}),
+        chOff: Type.String({}),
+        span: Type.Number({}),
+        vAlign: Type.String({}),
+        width: Type.String({}),
+      },
+    ),
+    HTMLTableElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        bgColor: Type.String({}),
+        border: Type.String({}),
+        cellPadding: Type.String({}),
+        cellSpacing: Type.String({}),
+        frame: Type.String({}),
+        rules: Type.String({}),
+        summary: Type.String({}),
+        width: Type.String({}),
+      },
+    ),
+    HTMLTableRowElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        bgColor: Type.String({}),
+        ch: Type.String({}),
+        chOff: Type.String({}),
+        rowIndex: Type.Number({ readOnly: true }),
+        sectionRowIndex: Type.Number({ readOnly: true }),
+        vAlign: Type.String({}),
+      },
+    ),
+    HTMLTableSectionElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        align: Type.String({}),
+        ch: Type.String({}),
+        chOff: Type.String({}),
+        vAlign: Type.String({}),
+      },
+    ),
+    HTMLTemplateElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        shadowRootClonable: Type.Boolean({}),
+        shadowRootCustomElementRegistry: Type.String({}),
+        shadowRootDelegatesFocus: Type.Boolean({}),
+        shadowRootMode: Type.String({}),
+        shadowRootSerializable: Type.Boolean({}),
+      },
+    ),
+    HTMLTextAreaElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        cols: Type.Number({}),
+        defaultValue: Type.String({}),
+        dirName: Type.String({}),
+        disabled: Type.Boolean({}),
+        maxLength: Type.Number({}),
+        minLength: Type.Number({}),
+        name: Type.String({}),
+        placeholder: Type.String({}),
+        readOnly: Type.Boolean({}),
+        required: Type.Boolean({}),
+        rows: Type.Number({}),
+        selectionEnd: Type.Number({}),
+        selectionStart: Type.Number({}),
+        textLength: Type.Number({ readOnly: true }),
+        type: Type.String({ readOnly: true }),
+        validationMessage: Type.String({ readOnly: true }),
+        value: Type.String({}),
+        willValidate: Type.Boolean({ readOnly: true }),
+        wrap: Type.String({}),
+      },
+    ),
+    HTMLTimeElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        dateTime: Type.String({}),
+      },
+    ),
+    HTMLTitleElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        text: Type.String({}),
+      },
+    ),
+    HTMLTrackElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        default: Type.Boolean({}),
+        kind: Type.String({}),
+        label: Type.String({}),
+        readyState: Type.Number({ readOnly: true }),
+        src: Type.String({}),
+        srclang: Type.String({}),
+      },
+    ),
+    HTMLUListElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        compact: Type.Boolean({}),
+        type: Type.String({}),
+      },
+    ),
+    HTMLVideoElement: Type.Interface(
+      [Type.Ref("HTMLMediaElement")],
+      {
+        disablePictureInPicture: Type.Boolean({}),
+        height: Type.Number({}),
+        playsInline: Type.Boolean({}),
+        poster: Type.String({}),
+        videoHeight: Type.Number({ readOnly: true }),
+        videoWidth: Type.Number({ readOnly: true }),
+        width: Type.Number({}),
+      },
+    ),
+    HTMLMediaElement: Type.Interface(
+      [Type.Ref("HTMLElement")],
+      {
+        autoplay: Type.Boolean({}),
+        controls: Type.Boolean({}),
+        crossOrigin: Type.Union([Type.String(), Type.Null()], {}),
+        currentSrc: Type.String({ readOnly: true }),
+        currentTime: Type.Number({}),
+        defaultMuted: Type.Boolean({}),
+        defaultPlaybackRate: Type.Number({}),
+        disableRemotePlayback: Type.Boolean({}),
+        duration: Type.Number({ readOnly: true }),
+        ended: Type.Boolean({ readOnly: true }),
+        loop: Type.Boolean({}),
+        muted: Type.Boolean({}),
+        networkState: Type.Number({ readOnly: true }),
+        paused: Type.Boolean({ readOnly: true }),
+        playbackRate: Type.Number({}),
+        preservesPitch: Type.Boolean({}),
+        readyState: Type.Number({ readOnly: true }),
+        seeking: Type.Boolean({ readOnly: true }),
+        sinkId: Type.String({ readOnly: true }),
+        src: Type.String({}),
+        volume: Type.Number({}),
+      },
+    ),
+    HTMLHyperlinkElementUtils: Type.Interface(
+      [Type.Ref("EventTarget")],
+      {
+        hash: Type.String({}),
+        host: Type.String({}),
+        hostname: Type.String({}),
+        href: Type.String({}),
+        origin: Type.String({ readOnly: true }),
+        password: Type.String({}),
+        pathname: Type.String({}),
+        port: Type.String({}),
+        protocol: Type.String({}),
+        search: Type.String({}),
+        username: Type.String({}),
+      },
+    ),
+    HTMLOrSVGElement: Type.Interface(
+      [Type.Ref("EventTarget")],
+      {
+        autofocus: Type.Boolean({}),
+        nonce: Type.String({}),
+        tabIndex: Type.Number({}),
+      },
     ),
     HtmlNode: Type.Union([
       Type.Ref("ClientElement"),
@@ -466,532 +1303,975 @@ export const schema: Schema = {
       "aria-valuenow": Type.Optional(Type.Number()),
       "aria-valuetext": Type.Optional(Type.String()),
     }),
-    Events: Type.Interface([], {
+    Events: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([], {
       oncopy: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ClipboardEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ClipboardEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncut: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ClipboardEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ClipboardEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpaste: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ClipboardEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ClipboardEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncompositionend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("CompositionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("CompositionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncompositionstart: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("CompositionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("CompositionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncompositionupdate: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("CompositionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("CompositionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onblur: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("FocusEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onfocus: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("FocusEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onfocusin: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("FocusEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onfocusout: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("FocusEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("FocusEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onbeforeinput: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("InputEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("InputEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onchange: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oninput: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("InputEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("InputEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oninvalid: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onreset: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onselect: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onsubmit: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("SubmitEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("SubmitEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onerror: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ErrorEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ErrorEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onload: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onkeydown: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("KeyboardEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("KeyboardEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onkeypress: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("KeyboardEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("KeyboardEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onkeyup: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("KeyboardEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("KeyboardEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onabort: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("UIEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncanplay: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncanplaythrough: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondurationchange: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onemptied: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onended: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onloadeddata: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onloadedmetadata: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onloadstart: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpause: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onplay: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onplaying: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onprogress: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ProgressEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ProgressEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onratechange: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onseeked: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onseeking: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onstalled: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onsuspend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontimeupdate: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onvolumechange: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onwaiting: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onauxclick: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onclick: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       oncontextmenu: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondblclick: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmousedown: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmouseenter: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmouseleave: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmousemove: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmouseout: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmouseover: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onmouseup: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("MouseEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondrag: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondragend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondragenter: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondragleave: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondragover: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondragstart: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ondrop: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("DragEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("DragEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontouchcancel: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TouchEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontouchend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TouchEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontouchmove: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TouchEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontouchstart: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TouchEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TouchEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ongotpointercapture: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onlostpointercapture: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointercancel: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointerdown: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointerenter: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointerleave: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointermove: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointerout: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointerover: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onpointerup: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("PointerEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("PointerEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onscroll: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onscrollend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("Event"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onwheel: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("WheelEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("WheelEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onanimationend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("AnimationEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("AnimationEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onanimationiteration: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("AnimationEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("AnimationEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onanimationstart: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("AnimationEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("AnimationEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontransitioncancel: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TransitionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontransitionend: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TransitionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontransitionrun: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TransitionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontransitionstart: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("TransitionEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("TransitionEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       onbeforetoggle: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ToggleEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ToggleEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
       ontoggle: Type.Optional(
         Type.Function(
-          [Type.FunctionParameter("event", Type.Ref("ToggleEvent"))],
+          [
+            Type.FunctionParameter(
+              "event",
+              Type.Apply(Type.Ref("ToggleEvent"), [Type.Ref("T")]),
+            ),
+          ],
           Type.Void(),
         ),
       ),
-    }),
-    GlobalAttributes: Type.Interface(
-      [Type.Ref("AriaAttributes"), Type.Ref("Events")],
+      }),
+    ),
+    GlobalAttributes: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [
+          Type.Ref("AriaAttributes"),
+          Type.Apply(Type.Ref("Events"), [Type.Ref("T")]),
+        ],
       {
         accesskey: Type.Optional(Type.String()),
         autocapitalize: Type.Optional(
@@ -1082,12 +2362,23 @@ export const schema: Schema = {
           Type.Union([Type.Literal("yes"), Type.Literal("no")]),
         ),
       },
+      ),
     ),
-    VoidProps: Type.Interface([Type.Ref("GlobalAttributes")], {}),
-    HtmlProps: Type.Interface([Type.Ref("GlobalAttributes")], {
-      children: Type.Optional(Type.Ref("HtmlNode")),
-    }),
-    AnchorProps: Type.Interface([Type.Ref("HtmlProps")], {
+    VoidProps: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("GlobalAttributes"), [Type.Ref("T")])],
+        {},
+      ),
+    ),
+    HtmlProps: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface([Type.Apply(Type.Ref("GlobalAttributes"), [Type.Ref("T")])], {
+        children: Type.Optional(Type.Ref("HtmlNode")),
+      }),
+    ),
+    AnchorProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLAnchorElement")])], {
       download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
       href: Type.Optional(Type.String()),
       hreflang: Type.Optional(Type.String()),
@@ -1098,7 +2389,8 @@ export const schema: Schema = {
       target: Type.Optional(Type.Ref("Target")),
       type: Type.Optional(Type.String()),
     }),
-    AreaProps: Type.Interface([Type.Ref("VoidProps")], {
+    AreaProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLAreaElement")])], {
       alt: Type.Optional(Type.String()),
       coords: Type.Optional(Type.String()),
       download: Type.Optional(Type.Union([Type.String(), Type.Boolean()])),
@@ -1115,14 +2407,17 @@ export const schema: Schema = {
       ),
       target: Type.Optional(Type.Ref("Target")),
     }),
-    BaseProps: Type.Interface([Type.Ref("VoidProps")], {
+    BaseProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLBaseElement")])], {
       href: Type.Optional(Type.String()),
       target: Type.Optional(Type.Ref("Target")),
     }),
-    BlockquoteProps: Type.Interface([Type.Ref("HtmlProps")], {
+    BlockquoteProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLQuoteElement")])], {
       cite: Type.Optional(Type.String()),
     }),
-    ButtonProps: Type.Interface([Type.Ref("HtmlProps")], {
+    ButtonProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLButtonElement")])], {
       disabled: Type.Optional(Type.Boolean()),
       form: Type.Optional(Type.String()),
       formaction: Type.Optional(Type.String()),
@@ -1154,29 +2449,36 @@ export const schema: Schema = {
       ),
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
     }),
-    CanvasProps: Type.Interface([Type.Ref("HtmlProps")], {
+    CanvasProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLCanvasElement")])], {
       height: Type.Optional(Type.Ref("Numeric")),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    ColProps: Type.Interface([Type.Ref("VoidProps")], {
+    ColProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLTableColElement")])], {
       span: Type.Optional(Type.Number()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    ColgroupProps: Type.Interface([Type.Ref("HtmlProps")], {
+    ColgroupProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableColElement")])], {
       span: Type.Optional(Type.Number()),
     }),
-    DataProps: Type.Interface([Type.Ref("HtmlProps")], {
+    DataProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLDataElement")])], {
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
     }),
-    DelProps: Type.Interface([Type.Ref("HtmlProps")], {
+    DelProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLModElement")])], {
       cite: Type.Optional(Type.String()),
       datetime: Type.Optional(Type.String()),
     }),
-    DetailsProps: Type.Interface([Type.Ref("HtmlProps")], {
+    DetailsProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLDetailsElement")])], {
       name: Type.Optional(Type.String()),
       open: Type.Optional(Type.Boolean()),
     }),
-    DialogProps: Type.Interface([Type.Ref("HtmlProps")], {
+    DialogProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLDialogElement")])], {
       closedby: Type.Optional(
         Type.Union([
           Type.Literal("any"),
@@ -1186,18 +2488,21 @@ export const schema: Schema = {
       ),
       open: Type.Optional(Type.Boolean()),
     }),
-    EmbedProps: Type.Interface([Type.Ref("VoidProps")], {
+    EmbedProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLEmbedElement")])], {
       height: Type.Optional(Type.Ref("Numeric")),
       src: Type.Optional(Type.String()),
       type: Type.Optional(Type.String()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    FieldsetProps: Type.Interface([Type.Ref("HtmlProps")], {
+    FieldsetProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLFieldSetElement")])], {
       disabled: Type.Optional(Type.Boolean()),
       form: Type.Optional(Type.String()),
       name: Type.Optional(Type.String()),
     }),
-    FormProps: Type.Interface([Type.Ref("HtmlProps")], {
+    FormProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLFormElement")])], {
       "accept-charset": Type.Optional(Type.String()),
       action: Type.Optional(Type.String()),
       autocomplete: Type.Optional(
@@ -1216,10 +2521,12 @@ export const schema: Schema = {
       rel: Type.Optional(Type.String()),
       target: Type.Optional(Type.Ref("Target")),
     }),
-    HtmlElementProps: Type.Interface([Type.Ref("HtmlProps")], {
+    HtmlElementProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHtmlElement")])], {
       manifest: Type.Optional(Type.String()),
     }),
-    IframeProps: Type.Interface([Type.Ref("HtmlProps")], {
+    IframeProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLIFrameElement")])], {
       allow: Type.Optional(Type.String()),
       allowfullscreen: Type.Optional(Type.Boolean()),
       height: Type.Optional(Type.Ref("Numeric")),
@@ -1233,7 +2540,8 @@ export const schema: Schema = {
       srcdoc: Type.Optional(Type.String()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    ImgProps: Type.Interface([Type.Ref("VoidProps")], {
+    ImgProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLImageElement")])], {
       alt: Type.Optional(Type.String()),
       crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
       decoding: Type.Optional(
@@ -1261,7 +2569,8 @@ export const schema: Schema = {
       usemap: Type.Optional(Type.String()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    InputProps: Type.Interface([Type.Ref("VoidProps")], {
+    InputProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLInputElement")])], {
       accept: Type.Optional(Type.String()),
       alt: Type.Optional(Type.String()),
       autocomplete: Type.Optional(Type.String()),
@@ -1331,18 +2640,22 @@ export const schema: Schema = {
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    InsProps: Type.Interface([Type.Ref("HtmlProps")], {
+    InsProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLModElement")])], {
       cite: Type.Optional(Type.String()),
       datetime: Type.Optional(Type.String()),
     }),
-    LabelProps: Type.Interface([Type.Ref("HtmlProps")], {
+    LabelProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLLabelElement")])], {
       for: Type.Optional(Type.String()),
       form: Type.Optional(Type.String()),
     }),
-    LiProps: Type.Interface([Type.Ref("HtmlProps")], {
+    LiProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLLIElement")])], {
       value: Type.Optional(Type.Number()),
     }),
-    LinkProps: Type.Interface([Type.Ref("VoidProps")], {
+    LinkProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLLinkElement")])], {
       as: Type.Optional(Type.String()),
       crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
       fetchpriority: Type.Optional(
@@ -1363,10 +2676,12 @@ export const schema: Schema = {
       sizes: Type.Optional(Type.String()),
       type: Type.Optional(Type.String()),
     }),
-    MapProps: Type.Interface([Type.Ref("HtmlProps")], {
+    MapProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLMapElement")])], {
       name: Type.Optional(Type.String()),
     }),
-    MediaProps: Type.Interface([Type.Ref("HtmlProps")], {
+    MediaProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLAudioElement")])], {
       autoplay: Type.Optional(Type.Boolean()),
       controls: Type.Optional(Type.Boolean()),
       controlslist: Type.Optional(Type.String()),
@@ -1383,14 +2698,16 @@ export const schema: Schema = {
       ),
       src: Type.Optional(Type.String()),
     }),
-    MetaProps: Type.Interface([Type.Ref("VoidProps")], {
+    MetaProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLMetaElement")])], {
       charset: Type.Optional(Type.String()),
       content: Type.Optional(Type.String()),
       "http-equiv": Type.Optional(Type.String()),
       media: Type.Optional(Type.String()),
       name: Type.Optional(Type.String()),
     }),
-    MeterProps: Type.Interface([Type.Ref("HtmlProps")], {
+    MeterProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLMeterElement")])], {
       form: Type.Optional(Type.String()),
       high: Type.Optional(Type.Number()),
       low: Type.Optional(Type.Number()),
@@ -1399,7 +2716,8 @@ export const schema: Schema = {
       optimum: Type.Optional(Type.Number()),
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
     }),
-    ObjectProps: Type.Interface([Type.Ref("HtmlProps")], {
+    ObjectProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLObjectElement")])], {
       data: Type.Optional(Type.String()),
       form: Type.Optional(Type.String()),
       height: Type.Optional(Type.Ref("Numeric")),
@@ -1408,7 +2726,8 @@ export const schema: Schema = {
       usemap: Type.Optional(Type.String()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    OlProps: Type.Interface([Type.Ref("HtmlProps")], {
+    OlProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLOListElement")])], {
       reversed: Type.Optional(Type.Boolean()),
       start: Type.Optional(Type.Number()),
       type: Type.Optional(
@@ -1421,29 +2740,35 @@ export const schema: Schema = {
         ]),
       ),
     }),
-    OptgroupProps: Type.Interface([Type.Ref("HtmlProps")], {
+    OptgroupProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLOptGroupElement")])], {
       disabled: Type.Optional(Type.Boolean()),
       label: Type.Optional(Type.String()),
     }),
-    OptionProps: Type.Interface([Type.Ref("HtmlProps")], {
+    OptionProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLOptionElement")])], {
       disabled: Type.Optional(Type.Boolean()),
       label: Type.Optional(Type.String()),
       selected: Type.Optional(Type.Boolean()),
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
     }),
-    OutputProps: Type.Interface([Type.Ref("HtmlProps")], {
+    OutputProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLOutputElement")])], {
       for: Type.Optional(Type.String()),
       form: Type.Optional(Type.String()),
       name: Type.Optional(Type.String()),
     }),
-    ProgressProps: Type.Interface([Type.Ref("HtmlProps")], {
+    ProgressProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLProgressElement")])], {
       max: Type.Optional(Type.Ref("Numeric")),
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
     }),
-    QuoteProps: Type.Interface([Type.Ref("HtmlProps")], {
+    QuoteProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLQuoteElement")])], {
       cite: Type.Optional(Type.String()),
     }),
-    ScriptProps: Type.Interface([Type.Ref("HtmlProps")], {
+    ScriptProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLScriptElement")])], {
       async: Type.Optional(Type.Boolean()),
       crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
       defer: Type.Optional(Type.Boolean()),
@@ -1460,7 +2785,8 @@ export const schema: Schema = {
       src: Type.Optional(Type.String()),
       type: Type.Optional(Type.String()),
     }),
-    SelectProps: Type.Interface([Type.Ref("HtmlProps")], {
+    SelectProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLSelectElement")])], {
       autocomplete: Type.Optional(Type.String()),
       disabled: Type.Optional(Type.Boolean()),
       form: Type.Optional(Type.String()),
@@ -1470,10 +2796,12 @@ export const schema: Schema = {
       size: Type.Optional(Type.Number()),
       value: Type.Optional(Type.Union([Type.String(), Type.Number()])),
     }),
-    SlotProps: Type.Interface([Type.Ref("HtmlProps")], {
+    SlotProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLSlotElement")])], {
       name: Type.Optional(Type.String()),
     }),
-    SourceProps: Type.Interface([Type.Ref("VoidProps")], {
+    SourceProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLSourceElement")])], {
       height: Type.Optional(Type.Ref("Numeric")),
       media: Type.Optional(Type.String()),
       sizes: Type.Optional(Type.String()),
@@ -1482,20 +2810,24 @@ export const schema: Schema = {
       type: Type.Optional(Type.String()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    StyleProps: Type.Interface([Type.Ref("HtmlProps")], {
+    StyleProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLStyleElement")])], {
       media: Type.Optional(Type.String()),
       type: Type.Optional(Type.String()),
     }),
-    TableProps: Type.Interface([Type.Ref("HtmlProps")], {
+    TableProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableElement")])], {
       summary: Type.Optional(Type.String()),
       width: Type.Optional(Type.Ref("Numeric")),
     }),
-    TdProps: Type.Interface([Type.Ref("HtmlProps")], {
+    TdProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableCellElement")])], {
       colspan: Type.Optional(Type.Number()),
       headers: Type.Optional(Type.String()),
       rowspan: Type.Optional(Type.Number()),
     }),
-    ThProps: Type.Interface([Type.Ref("HtmlProps")], {
+    ThProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableCellElement")])], {
       abbr: Type.Optional(Type.String()),
       colspan: Type.Optional(Type.Number()),
       headers: Type.Optional(Type.String()),
@@ -1509,7 +2841,8 @@ export const schema: Schema = {
         ]),
       ),
     }),
-    TextareaProps: Type.Interface([Type.Ref("HtmlProps")], {
+    TextareaProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTextAreaElement")])], {
       autocomplete: Type.Optional(Type.String()),
       cols: Type.Optional(Type.Number()),
       dirname: Type.Optional(Type.String()),
@@ -1531,10 +2864,12 @@ export const schema: Schema = {
         ]),
       ),
     }),
-    TimeProps: Type.Interface([Type.Ref("HtmlProps")], {
+    TimeProps: Type.Interface(
+      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTimeElement")])], {
       datetime: Type.Optional(Type.String()),
     }),
-    TrackProps: Type.Interface([Type.Ref("VoidProps")], {
+    TrackProps: Type.Interface(
+      [Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLTrackElement")])], {
       default: Type.Optional(Type.Boolean()),
       kind: Type.Optional(
         Type.Union([
@@ -1590,7 +2925,12 @@ export const schema: Schema = {
      * The cost is React's spelling: a component written against its types says
      * `strokeWidth` and has to be edited. An `.svg` file — which is what
      * anything drawing this actually starts from — pastes in unchanged. */
-    SvgProps: Type.Interface([Type.Ref("AriaAttributes"), Type.Ref("Events")], {
+    SvgProps: Type.Interface(
+      [
+        Type.Ref("AriaAttributes"),
+        Type.Apply(Type.Ref("Events"), [Type.Ref("SVGElement")]),
+      ],
+      {
       children: Type.Optional(Type.Ref("HtmlNode")),
       // The web schema's own, not a second spelling of them: SVG elements take
       // `class` and `onclick` because every element this target draws does.
@@ -1863,117 +3203,117 @@ export const schema: Schema = {
   // map onto interfaces rather than 175 declarations.
   elements: {
     a: Type.Ref("AnchorProps"),
-    abbr: Type.Ref("HtmlProps"),
-    address: Type.Ref("HtmlProps"),
+    abbr: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    address: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     area: Type.Ref("AreaProps"),
-    article: Type.Ref("HtmlProps"),
-    aside: Type.Ref("HtmlProps"),
+    article: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    aside: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     audio: Type.Ref("MediaProps"),
-    b: Type.Ref("HtmlProps"),
+    b: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     base: Type.Ref("BaseProps"),
-    bdi: Type.Ref("HtmlProps"),
-    bdo: Type.Ref("HtmlProps"),
+    bdi: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    bdo: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     blockquote: Type.Ref("BlockquoteProps"),
-    body: Type.Ref("HtmlProps"),
-    br: Type.Ref("VoidProps"),
+    body: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLBodyElement")]),
+    br: Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLBRElement")]),
     button: Type.Ref("ButtonProps"),
     canvas: Type.Ref("CanvasProps"),
-    caption: Type.Ref("HtmlProps"),
-    cite: Type.Ref("HtmlProps"),
-    code: Type.Ref("HtmlProps"),
+    caption: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableCaptionElement")]),
+    cite: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    code: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     col: Type.Ref("ColProps"),
     colgroup: Type.Ref("ColgroupProps"),
     data: Type.Ref("DataProps"),
-    datalist: Type.Ref("HtmlProps"),
-    dd: Type.Ref("HtmlProps"),
+    datalist: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLDataListElement")]),
+    dd: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     del: Type.Ref("DelProps"),
     details: Type.Ref("DetailsProps"),
-    dfn: Type.Ref("HtmlProps"),
+    dfn: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     dialog: Type.Ref("DialogProps"),
-    div: Type.Ref("HtmlProps"),
-    dl: Type.Ref("HtmlProps"),
-    dt: Type.Ref("HtmlProps"),
-    em: Type.Ref("HtmlProps"),
+    div: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLDivElement")]),
+    dl: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLDListElement")]),
+    dt: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    em: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     embed: Type.Ref("EmbedProps"),
     fieldset: Type.Ref("FieldsetProps"),
-    figcaption: Type.Ref("HtmlProps"),
-    figure: Type.Ref("HtmlProps"),
-    footer: Type.Ref("HtmlProps"),
+    figcaption: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    figure: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    footer: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     form: Type.Ref("FormProps"),
-    h1: Type.Ref("HtmlProps"),
-    h2: Type.Ref("HtmlProps"),
-    h3: Type.Ref("HtmlProps"),
-    h4: Type.Ref("HtmlProps"),
-    h5: Type.Ref("HtmlProps"),
-    h6: Type.Ref("HtmlProps"),
-    head: Type.Ref("HtmlProps"),
-    header: Type.Ref("HtmlProps"),
-    hgroup: Type.Ref("HtmlProps"),
-    hr: Type.Ref("VoidProps"),
+    h1: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadingElement")]),
+    h2: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadingElement")]),
+    h3: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadingElement")]),
+    h4: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadingElement")]),
+    h5: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadingElement")]),
+    h6: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadingElement")]),
+    head: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLHeadElement")]),
+    header: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    hgroup: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    hr: Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLHRElement")]),
     html: Type.Ref("HtmlElementProps"),
-    i: Type.Ref("HtmlProps"),
+    i: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     iframe: Type.Ref("IframeProps"),
     img: Type.Ref("ImgProps"),
     input: Type.Ref("InputProps"),
     ins: Type.Ref("InsProps"),
-    kbd: Type.Ref("HtmlProps"),
+    kbd: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     label: Type.Ref("LabelProps"),
-    legend: Type.Ref("HtmlProps"),
+    legend: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLLegendElement")]),
     li: Type.Ref("LiProps"),
     link: Type.Ref("LinkProps"),
-    main: Type.Ref("HtmlProps"),
+    main: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     map: Type.Ref("MapProps"),
-    mark: Type.Ref("HtmlProps"),
-    menu: Type.Ref("HtmlProps"),
+    mark: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    menu: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLMenuElement")]),
     meta: Type.Ref("MetaProps"),
     meter: Type.Ref("MeterProps"),
-    nav: Type.Ref("HtmlProps"),
-    noscript: Type.Ref("HtmlProps"),
+    nav: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    noscript: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     object: Type.Ref("ObjectProps"),
     ol: Type.Ref("OlProps"),
     optgroup: Type.Ref("OptgroupProps"),
     option: Type.Ref("OptionProps"),
     output: Type.Ref("OutputProps"),
-    p: Type.Ref("HtmlProps"),
-    picture: Type.Ref("HtmlProps"),
-    pre: Type.Ref("HtmlProps"),
+    p: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLParagraphElement")]),
+    picture: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLPictureElement")]),
+    pre: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLPreElement")]),
     progress: Type.Ref("ProgressProps"),
     q: Type.Ref("QuoteProps"),
-    rp: Type.Ref("HtmlProps"),
-    rt: Type.Ref("HtmlProps"),
-    ruby: Type.Ref("HtmlProps"),
-    s: Type.Ref("HtmlProps"),
-    samp: Type.Ref("HtmlProps"),
+    rp: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    rt: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    ruby: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    s: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    samp: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     script: Type.Ref("ScriptProps"),
-    search: Type.Ref("HtmlProps"),
-    section: Type.Ref("HtmlProps"),
+    search: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    section: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     select: Type.Ref("SelectProps"),
     slot: Type.Ref("SlotProps"),
-    small: Type.Ref("HtmlProps"),
+    small: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     source: Type.Ref("SourceProps"),
-    span: Type.Ref("HtmlProps"),
-    strong: Type.Ref("HtmlProps"),
+    span: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLSpanElement")]),
+    strong: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     style: Type.Ref("StyleProps"),
-    sub: Type.Ref("HtmlProps"),
-    summary: Type.Ref("HtmlProps"),
-    sup: Type.Ref("HtmlProps"),
+    sub: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    summary: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    sup: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     table: Type.Ref("TableProps"),
-    tbody: Type.Ref("HtmlProps"),
+    tbody: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableSectionElement")]),
     td: Type.Ref("TdProps"),
-    template: Type.Ref("HtmlProps"),
+    template: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTemplateElement")]),
     textarea: Type.Ref("TextareaProps"),
-    tfoot: Type.Ref("HtmlProps"),
+    tfoot: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableSectionElement")]),
     th: Type.Ref("ThProps"),
-    thead: Type.Ref("HtmlProps"),
+    thead: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableSectionElement")]),
     time: Type.Ref("TimeProps"),
-    title: Type.Ref("HtmlProps"),
-    tr: Type.Ref("HtmlProps"),
+    title: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTitleElement")]),
+    tr: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLTableRowElement")]),
     track: Type.Ref("TrackProps"),
-    u: Type.Ref("HtmlProps"),
-    ul: Type.Ref("HtmlProps"),
-    var: Type.Ref("HtmlProps"),
+    u: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
+    ul: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLUListElement")]),
+    var: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     video: Type.Ref("VideoProps"),
-    wbr: Type.Ref("VoidProps"),
+    wbr: Type.Apply(Type.Ref("VoidProps"), [Type.Ref("HTMLElement")]),
 
     // SVG, prefixed. A client reads the prefix and puts the element in the SVG
     // namespace; without it `document.createElement("path")` is an unknown

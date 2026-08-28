@@ -3,23 +3,20 @@
   return <form
     onsubmit={(event) => {
       event.preventDefault();
-      event.stopPropagation();
-      said.write(event.type + " " + event.cancelable + " " + event.defaultPrevented);
+      said.write(event.type + " " + event.cancelable);
     }}
   >
+    {<textarea
+      oninput={(event) => said.write(event.currentTarget.value)}
+    />}
+    {<input
+      oninput={(event) => said.write(event.currentTarget.value)}
+    />}
     {<button
-      onclick={(event) => {
-        said.write(event.clientX + " " + event.pointerType + " " + event.altKey);
-      }}
-      onkeydown={(event) => {
-        said.write(event.key + " " + event.repeat + " " + event.ctrlKey);
-      }}
+      onclick={(event) => said.write(event.clientX + " " + event.currentTarget.tagName)}
     >
       {said.read()}
     </button>}
-    {<input
-      oninput={(event) => said.write(event.inputType)}
-    />}
   </form>;
 }
 
