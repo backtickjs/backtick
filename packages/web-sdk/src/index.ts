@@ -2,6 +2,20 @@ export * as client from "@backtickjs/web-client";
 export { insert } from "./insert.js";
 
 /**
+ * What this target answers for, beside the language's own.
+ *
+ * Values rather than types: a script splices one the way it splices `state`,
+ * and the client hands over what it stands for. The schema names them and
+ * `web-client` is what answers.
+ */
+export {
+  addEventListener,
+  console,
+  performance,
+  removeEventListener,
+} from "@backtickjs/web-schema";
+
+/**
  * What this target draws with, and what it hands a handler.
  *
  * Here rather than beside the JSX runtime next door: `jsx-runtime` is a name

@@ -107,11 +107,11 @@ value                                     → value
 )}{cs.lift(                               → \n      
 <                                         → <
 button                                    → button
-                                          →  
+                                          → \n        
 onclick                                   → onclick
 ={cs.lift(                                → ={
 __cs_event                                → event
- =>                                       → ) => 
+ =>                                       → ) =>\n          
 cs.receiver(                              → 
 __cs_said                                 → said
 )                                         → 
@@ -136,8 +136,8 @@ currentTarget                             → currentTarget
 .                                         → .
 tagName                                   → tagName
 )                                         → )
-)}                                        → }
->{cs.lift(                                → >\n        {
+)}                                        → \n        }
+>{cs.lift(                                → \n      >\n        {
 cs.receiver(                              → 
 __cs_said                                 → said
 )                                         → 

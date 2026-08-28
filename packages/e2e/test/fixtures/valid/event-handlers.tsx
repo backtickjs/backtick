@@ -18,7 +18,11 @@ export default cs`{
     >
       <textarea oninput={(event) => said.write(event.currentTarget.value)} />
       <input oninput={(event) => said.write(event.currentTarget.value)} />
-      <button onclick={(event) => said.write(event.clientX + " " + event.currentTarget.tagName)}>
+      <button
+        onclick={(event) =>
+          said.write(event.clientX + " " + event.currentTarget.tagName)
+        }
+      >
         {said.read()}
       </button>
     </form>

@@ -619,6 +619,9 @@ importers:
       '@backtickjs/js-interpreter':
         specifier: workspace:*
         version: link:../js-interpreter
+      '@backtickjs/web-schema':
+        specifier: workspace:*
+        version: link:../schemas/web-schema
       esbuild:
         specifier: 0.28.0
         version: 0.28.0

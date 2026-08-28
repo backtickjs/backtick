@@ -5,6 +5,7 @@ import type {
   Children,
   ClientElement,
   ClientHandle,
+  ClientValue,
   Elements as UiElements,
   Prop,
 } from "@backtickjs/ui-schema";
@@ -298,6 +299,29 @@ export interface Element extends Node {
   readonly scrollWidth: number;
   readonly slot: string;
   readonly tagName: string;
+}
+
+declare const PerformanceBrand: unique symbol;
+/**
+ * A clock that only measures. Milliseconds since the page began, as a fraction
+ * — what it is for is the difference between two of them, not the time of day.
+ */
+export interface Performance extends ClientHandle {
+  readonly [PerformanceBrand]: never;
+  now(): number;
+}
+
+declare const ConsoleBrand: unique symbol;
+/**
+ * Somewhere to say something while writing a script. What a host does with it
+ * is the host's own business — a client with no console answers for these and
+ * drops them.
+ */
+export interface Console extends ClientHandle {
+  readonly [ConsoleBrand]: never;
+  log(...values: ClientValue[]): void;
+  warn(...values: ClientValue[]): void;
+  error(...values: ClientValue[]): void;
 }
 
 declare const SVGElementBrand: unique symbol;
@@ -2179,4 +2203,29 @@ export interface Elements extends UiElements {
 }
 
 /** What a client must answer with, for every name in scope. */
-export interface Builtins extends UiBuiltins {}
+export interface Builtins extends UiBuiltins {
+  performance: Performance;
+  console: Console;
+  /**
+   * Listens for an event nothing drawn here is the target of — a key pressed
+   * anywhere, a message arriving. What an element's own events are is a prop
+   * on that element, and this is the rest.
+   *
+   * @param type Which event to listen for, named as the DOM names it.
+   */
+  addEventListener(
+    type: string,
+    listener: (event: Event<EventTarget>) => void,
+  ): void;
+  /**
+   * Stops listening. The listener has to be the same one that was handed to
+   * `addEventListener` — the DOM matches by identity, so a second closure that
+   * does the same thing removes nothing.
+   *
+   * @param type Which event to listen for, named as the DOM names it.
+   */
+  removeEventListener(
+    type: string,
+    listener: (event: Event<EventTarget>) => void,
+  ): void;
+}

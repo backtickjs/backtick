@@ -1,5 +1,6 @@
 import type { Bundle } from "@backtickjs/core";
 import { render } from "@backtickjs/js-interpreter";
+import { builtins } from "./builtins.js";
 import { dom } from "./dom.js";
 
 // The client, as `scripts/build.mjs` bundles it. Self-starting and exporting
@@ -31,9 +32,20 @@ customElements.define(
       const anchor = document.createComment("");
       this.replaceWith(anchor);
       bundleScript.remove();
-      // No table beside the renderer yet: this target adds no name of its own,
-      // so what it answers for is the language's list and nothing more.
-      render(bundle, { renderer: dom }, parent, anchor);
+      // The table beside the renderer is this target's own: `builtinsOf`
+      // merges it with the language's and throws if a name here shadows one of
+      // those, so a bundle means the same thing wherever it is drawn.
+      render(
+        bundle,
+        // Cast for the same reason the language's own table is: what the schema
+        // names is a shape, and what a lookup wants is a table of values.
+        {
+          renderer: dom,
+          builtins: builtins,
+        },
+        parent,
+        anchor,
+      );
     }
   },
 );

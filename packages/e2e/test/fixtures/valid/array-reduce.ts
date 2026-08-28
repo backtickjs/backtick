@@ -10,5 +10,11 @@ export default cs`{
   const names = ["a", "b", "c"];
   const joined = names.reduce((all, one, index) => all + index + one, "");
   const empty: number[] = [];
-  return total.toFixed(2) + "|" + joined + "|" + empty.reduce((sum, one) => sum + one, 0);
+  return (
+    total.toFixed(2) +
+    "|" +
+    joined +
+    "|" +
+    empty.reduce((sum, one) => sum + one, 0)
+  );
 }`;

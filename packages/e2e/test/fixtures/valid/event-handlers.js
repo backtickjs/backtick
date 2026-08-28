@@ -6,11 +6,11 @@ import { cs, state } from "@backtickjs/core";
 // `EventTarget`, which is what makes reading a field's value sayable — the DOM
 // expects a cast there, and this language has none.
 export default cs.create(
-  [9, 16, 26, 3],
+  [9, 16, 30, 3],
   {
     version: "0.0.0",
     filePath: "event-handlers.tsx",
-    fileHash: "3amz4o8kezaww",
+    fileHash: "2v9vui9jwi662",
     kind: "value",
     splices: { $state: state },
     captures: [],
@@ -18,7 +18,7 @@ export default cs.create(
   },
   () => ({
     kind: 242,
-    loc: [9, 19, 26, 2],
+    loc: [9, 19, 30, 2],
     statements: [
       {
         kind: 244,
@@ -34,7 +34,7 @@ export default cs.create(
                 kind: 80,
                 loc: [10, 9, 10, 13],
                 text: "said",
-                bindingKey: "said$3amz4o8kezaww$0",
+                bindingKey: "said$2v9vui9jwi662$0",
               },
               initializer: {
                 kind: 214,
@@ -60,10 +60,10 @@ export default cs.create(
       },
       {
         kind: 254,
-        loc: [12, 3, 25, 5],
+        loc: [12, 3, 29, 5],
         expression: {
           kind: 285,
-          loc: [13, 5, 24, 12],
+          loc: [13, 5, 28, 12],
           type: {
             kind: 11,
             loc: [13, 6, 13, 10],
@@ -83,7 +83,7 @@ export default cs.create(
                       kind: 80,
                       loc: [14, 18, 14, 23],
                       text: "event",
-                      bindingKey: "event$3amz4o8kezaww$1",
+                      bindingKey: "event$2v9vui9jwi662$1",
                     },
                   },
                 ],
@@ -101,7 +101,7 @@ export default cs.create(
                           kind: 80,
                           loc: [15, 9, 15, 14],
                           text: "event",
-                          bindingKey: "event$3amz4o8kezaww$1",
+                          bindingKey: "event$2v9vui9jwi662$1",
                         },
                         questionDotToken: false,
                         name: "preventDefault",
@@ -119,7 +119,7 @@ export default cs.create(
                           kind: 80,
                           loc: [16, 9, 16, 13],
                           text: "said",
-                          bindingKey: "said$3amz4o8kezaww$0",
+                          bindingKey: "said$2v9vui9jwi662$0",
                         },
                         questionDotToken: false,
                         name: "write",
@@ -139,7 +139,7 @@ export default cs.create(
                                 kind: 80,
                                 loc: [16, 20, 16, 25],
                                 text: "event",
-                                bindingKey: "event$3amz4o8kezaww$1",
+                                bindingKey: "event$2v9vui9jwi662$1",
                               },
                               questionDotToken: false,
                               name: "type",
@@ -159,7 +159,7 @@ export default cs.create(
                               kind: 80,
                               loc: [16, 39, 16, 44],
                               text: "event",
-                              bindingKey: "event$3amz4o8kezaww$1",
+                              bindingKey: "event$2v9vui9jwi662$1",
                             },
                             questionDotToken: false,
                             name: "cancelable",
@@ -195,7 +195,7 @@ export default cs.create(
                           kind: 80,
                           loc: [19, 27, 19, 32],
                           text: "event",
-                          bindingKey: "event$3amz4o8kezaww$2",
+                          bindingKey: "event$2v9vui9jwi662$2",
                         },
                       },
                     ],
@@ -209,7 +209,7 @@ export default cs.create(
                           kind: 80,
                           loc: [19, 37, 19, 41],
                           text: "said",
-                          bindingKey: "said$3amz4o8kezaww$0",
+                          bindingKey: "said$2v9vui9jwi662$0",
                         },
                         questionDotToken: false,
                         name: "write",
@@ -226,7 +226,7 @@ export default cs.create(
                               kind: 80,
                               loc: [19, 48, 19, 53],
                               text: "event",
-                              bindingKey: "event$3amz4o8kezaww$2",
+                              bindingKey: "event$2v9vui9jwi662$2",
                             },
                             questionDotToken: false,
                             name: "currentTarget",
@@ -263,7 +263,7 @@ export default cs.create(
                           kind: 80,
                           loc: [20, 24, 20, 29],
                           text: "event",
-                          bindingKey: "event$3amz4o8kezaww$3",
+                          bindingKey: "event$2v9vui9jwi662$3",
                         },
                       },
                     ],
@@ -277,7 +277,7 @@ export default cs.create(
                           kind: 80,
                           loc: [20, 34, 20, 38],
                           text: "said",
-                          bindingKey: "said$3amz4o8kezaww$0",
+                          bindingKey: "said$2v9vui9jwi662$0",
                         },
                         questionDotToken: false,
                         name: "write",
@@ -294,7 +294,7 @@ export default cs.create(
                               kind: 80,
                               loc: [20, 45, 20, 50],
                               text: "event",
-                              bindingKey: "event$3amz4o8kezaww$3",
+                              bindingKey: "event$2v9vui9jwi662$3",
                             },
                             questionDotToken: false,
                             name: "currentTarget",
@@ -311,7 +311,7 @@ export default cs.create(
             },
             {
               kind: 285,
-              loc: [21, 7, 23, 16],
+              loc: [21, 7, 27, 16],
               type: {
                 kind: 11,
                 loc: [21, 8, 21, 14],
@@ -322,30 +322,30 @@ export default cs.create(
                   name: "onclick",
                   initializer: {
                     kind: 220,
-                    loc: [21, 24, 21, 96],
+                    loc: [22, 18, 23, 72],
                     parameters: [
                       {
                         kind: 170,
-                        loc: [21, 25, 21, 30],
+                        loc: [22, 19, 22, 24],
                         name: {
                           kind: 80,
-                          loc: [21, 25, 21, 30],
+                          loc: [22, 19, 22, 24],
                           text: "event",
-                          bindingKey: "event$3amz4o8kezaww$4",
+                          bindingKey: "event$2v9vui9jwi662$4",
                         },
                       },
                     ],
                     body: {
                       kind: 214,
-                      loc: [21, 35, 21, 96],
+                      loc: [23, 11, 23, 72],
                       expression: {
                         kind: 212,
-                        loc: [21, 35, 21, 45],
+                        loc: [23, 11, 23, 21],
                         expression: {
                           kind: 80,
-                          loc: [21, 35, 21, 39],
+                          loc: [23, 11, 23, 15],
                           text: "said",
-                          bindingKey: "said$3amz4o8kezaww$0",
+                          bindingKey: "said$2v9vui9jwi662$0",
                         },
                         questionDotToken: false,
                         name: "write",
@@ -354,18 +354,18 @@ export default cs.create(
                       arguments: [
                         {
                           kind: 227,
-                          loc: [21, 46, 21, 95],
+                          loc: [23, 22, 23, 71],
                           left: {
                             kind: 227,
-                            loc: [21, 46, 21, 65],
+                            loc: [23, 22, 23, 41],
                             left: {
                               kind: 212,
-                              loc: [21, 46, 21, 59],
+                              loc: [23, 22, 23, 35],
                               expression: {
                                 kind: 80,
-                                loc: [21, 46, 21, 51],
+                                loc: [23, 22, 23, 27],
                                 text: "event",
-                                bindingKey: "event$3amz4o8kezaww$4",
+                                bindingKey: "event$2v9vui9jwi662$4",
                               },
                               questionDotToken: false,
                               name: "clientX",
@@ -373,22 +373,22 @@ export default cs.create(
                             operatorToken: "+",
                             right: {
                               kind: 11,
-                              loc: [21, 62, 21, 65],
+                              loc: [23, 38, 23, 41],
                               text: " ",
                             },
                           },
                           operatorToken: "+",
                           right: {
                             kind: 212,
-                            loc: [21, 68, 21, 95],
+                            loc: [23, 44, 23, 71],
                             expression: {
                               kind: 212,
-                              loc: [21, 68, 21, 87],
+                              loc: [23, 44, 23, 63],
                               expression: {
                                 kind: 80,
-                                loc: [21, 68, 21, 73],
+                                loc: [23, 44, 23, 49],
                                 text: "event",
-                                bindingKey: "event$3amz4o8kezaww$4",
+                                bindingKey: "event$2v9vui9jwi662$4",
                               },
                               questionDotToken: false,
                               name: "currentTarget",
@@ -405,15 +405,15 @@ export default cs.create(
               children: [
                 {
                   kind: 214,
-                  loc: [22, 10, 22, 21],
+                  loc: [26, 10, 26, 21],
                   expression: {
                     kind: 212,
-                    loc: [22, 10, 22, 19],
+                    loc: [26, 10, 26, 19],
                     expression: {
                       kind: 80,
-                      loc: [22, 10, 22, 14],
+                      loc: [26, 10, 26, 14],
                       text: "said",
-                      bindingKey: "said$3amz4o8kezaww$0",
+                      bindingKey: "said$2v9vui9jwi662$0",
                     },
                     questionDotToken: false,
                     name: "read",
