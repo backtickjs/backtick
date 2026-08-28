@@ -40,7 +40,7 @@ export interface ForProps<T extends ClientValue> {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface Elements extends LanguageElements {
+export interface UiElements {
   /**
    * An array, and what to draw for one member of it.
    *
@@ -56,5 +56,11 @@ export interface Elements extends LanguageElements {
   for: ForProps<ClientValue>;
 }
 
+/** Every element in scope, this schema's own and its bases'. */
+export interface Elements extends LanguageElements, UiElements {}
+
+/** What this schema declares, which is what its own client answers for. */
+export interface UiBuiltins {}
+
 /** What a client must answer with, for every name in scope. */
-export interface Builtins extends LanguageBuiltins {}
+export interface Builtins extends LanguageBuiltins, UiBuiltins {}

@@ -5,6 +5,8 @@ import type { Schema } from "@backtickjs/schema";
 export const schema: Schema = {
   package: "@backtickjs/ui-schema",
 
+  namespace: "Ui",
+
   extends: [language],
 
   publishes: ["Prop", "Children"],

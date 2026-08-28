@@ -60,10 +60,13 @@ export interface ArrayLike<T> {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface Elements {}
+export interface LanguageElements {}
 
-/** What a client must answer with, for every name in scope. */
-export interface Builtins {
+/** Every element in scope, this schema's own and its bases'. */
+export interface Elements extends LanguageElements {}
+
+/** What this schema declares, which is what its own client answers for. */
+export interface LanguageBuiltins {
   /**
    * Returns the primitive value of the specified object.
    *
@@ -788,3 +791,6 @@ export interface Builtins {
    */
   clearInterval(id: number): void;
 }
+
+/** What a client must answer with, for every name in scope. */
+export interface Builtins extends LanguageBuiltins {}

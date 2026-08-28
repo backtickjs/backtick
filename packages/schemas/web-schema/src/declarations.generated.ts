@@ -2024,7 +2024,7 @@ export interface SvgProps extends AriaAttributes, Events<SVGElement> {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface Elements extends UiElements {
+export interface WebElements {
   a: AnchorProps;
   abbr: HtmlProps<HTMLElement>;
   address: HtmlProps<HTMLElement>;
@@ -2202,8 +2202,11 @@ export interface Elements extends UiElements {
   "svg:view": SvgProps;
 }
 
-/** What a client must answer with, for every name in scope. */
-export interface Builtins extends UiBuiltins {
+/** Every element in scope, this schema's own and its bases'. */
+export interface Elements extends UiElements, WebElements {}
+
+/** What this schema declares, which is what its own client answers for. */
+export interface WebBuiltins {
   performance: Performance;
   console: Console;
   /**
@@ -2229,3 +2232,6 @@ export interface Builtins extends UiBuiltins {
     listener: (event: Event<EventTarget>) => void,
   ): void;
 }
+
+/** What a client must answer with, for every name in scope. */
+export interface Builtins extends UiBuiltins, WebBuiltins {}

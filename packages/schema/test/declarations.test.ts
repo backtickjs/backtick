@@ -12,6 +12,7 @@ import type { Schema } from "../dist/index.js";
 
 const core: Schema = {
   package: "@backtickjs/core",
+  namespace: "Core",
   extends: [],
   publishes: ["Client"],
   types: {
@@ -31,6 +32,7 @@ const core: Schema = {
 /** A schema between the root and a target, which is what an import has to find. */
 const middle: Schema = {
   package: "@backtickjs/middle",
+  namespace: "Middle",
   extends: [core],
   // Published a schema above the root, which is what a layer between them is
   // for: what a drawn position admits belongs where drawing does.
@@ -44,6 +46,7 @@ const middle: Schema = {
 
 const target: Schema = {
   package: "@backtickjs/target",
+  namespace: "Target",
   extends: [middle],
   publishes: [],
   types: {
@@ -60,6 +63,7 @@ const target: Schema = {
 /** An element whose children position holds a script that makes drawings. */
 const list: Schema = {
   package: "@backtickjs/list",
+  namespace: "List",
   extends: [middle],
   publishes: [],
   types: {
@@ -93,6 +97,7 @@ describe("declarations", () => {
   it("writes its own names beside it, and no import for them", () => {
     const root: Schema = {
       package: "@backtickjs/core",
+      namespace: "Core",
       extends: [],
       publishes: ["Prop"],
       types: {
@@ -161,18 +166,32 @@ describe("declarations", () => {
   });
 
   it("writes the elements it declares, and what each accepts", () => {
+    // Its own under its namespace, and the chain gathered separately: a target
+    // answering for its own tags reads the first, and a tag written in a
+    // document is checked against the second.
     assert.match(
       declarations(target),
-      /export interface Elements extends MiddleElements \{\n {2}pick: Props;\n\}/,
+      /export interface TargetElements \{\n {2}pick: Props;\n\}/,
+    );
+    assert.match(
+      declarations(target),
+      /export interface Elements extends MiddleElements, TargetElements \{\}/,
     );
     // its own and nothing it inherited: the chain is what gathers them
     assert.doesNotMatch(declarations(target), /\bstate\b/);
   });
 
   it("writes what a client owes, from its own names", () => {
+    // Two interfaces, because two questions are asked of this: a client for one
+    // layer answers for that layer's names, and a script reaches every name in
+    // scope. The first is the layer's own, under its namespace.
     assert.match(
       declarations(core),
-      /export interface Builtins \{\n {2}state: Cell;\n\}/,
+      /export interface CoreBuiltins \{\n {2}state: Cell;\n\}/,
+    );
+    assert.match(
+      declarations(core),
+      /export interface Builtins extends CoreBuiltins \{\}/,
     );
     assert.doesNotMatch(declarations(target), /state: Cell;/);
   });
@@ -183,16 +202,24 @@ describe("declarations", () => {
     // above it would extend a name that is not there, and what a base declares
     // would stop arriving.
     const written = declarations(middle);
+    assert.match(written, /export interface MiddleElements \{\n\}/);
     assert.match(
       written,
-      /export interface Elements extends CoreElements \{\n\}/,
+      /export interface Elements extends CoreElements, MiddleElements \{\}/,
     );
+    // Its own is empty and still written: a layer that skipped it is a name the
+    // layer above extends and cannot find.
+    assert.match(written, /export interface MiddleBuiltins \{\n\}/);
     assert.match(
       written,
-      /export interface Builtins extends CoreBuiltins \{\n\}/,
+      /export interface Builtins extends CoreBuiltins, MiddleBuiltins \{\}/,
     );
-    // the root declares no element and still writes the name
-    assert.match(declarations(core), /export interface Elements \{\n\}/);
+    // the root declares no element and still writes both names
+    assert.match(declarations(core), /export interface CoreElements \{\n\}/);
+    assert.match(
+      declarations(core),
+      /export interface Elements extends CoreElements \{\}/,
+    );
   });
 
   it("extends each base under the name of the package it came from", () => {
@@ -224,6 +251,7 @@ describe("declarations", () => {
     // a type nothing in it reads.
     const prose: Schema = {
       package: "@backtickjs/core",
+      namespace: "Core",
       extends: [],
       publishes: ["Prop", "Children"],
       types: {

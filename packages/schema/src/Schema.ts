@@ -4,6 +4,9 @@ export interface Schema {
   /** Where this schema is published. */
   readonly package: string;
 
+  /** What this schema's own names are prefixed with. */
+  readonly namespace: string;
+
   /** The schemas this one builds on, whose names it reaches without writing. */
   readonly extends: readonly Schema[];
 

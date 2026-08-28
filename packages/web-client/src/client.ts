@@ -1,4 +1,4 @@
-import type { Bundle } from "@backtickjs/core";
+import type { Bundle, ClientValue } from "@backtickjs/core";
 import { render } from "@backtickjs/js-interpreter";
 import { builtins } from "./builtins.js";
 import { dom } from "./dom.js";
@@ -37,11 +37,14 @@ customElements.define(
       // those, so a bundle means the same thing wherever it is drawn.
       render(
         bundle,
-        // Cast for the same reason the language's own table is: what the schema
-        // names is a shape, and what a lookup wants is a table of values.
+        // Cast the way the language's own table is, a few lines into
+        // `interpret.ts`: what a schema names is an interface, and an interface
+        // has no index signature, where a lookup by name wants one.
         {
           renderer: dom,
-          builtins: builtins,
+          builtins: builtins as unknown as Readonly<
+            Record<string, ClientValue>
+          >,
         },
         parent,
         anchor,

@@ -14,6 +14,8 @@ import { Type, type Schema } from "@backtickjs/schema";
 export const schema: Schema = {
   package: "@backtickjs/language-schema",
 
+  namespace: "Language",
+
   extends: [],
 
   publishes: ["Client"],

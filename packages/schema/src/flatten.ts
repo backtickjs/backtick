@@ -75,6 +75,7 @@ export function flatten(schema: Schema): Schema {
   take(schema);
   return {
     package: schema.package,
+    namespace: schema.namespace,
     extends: [],
     publishes: [...publishes],
     types,
