@@ -1,4 +1,5 @@
-import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
+import type { HtmlNode } from "@backtickjs/web-sdk/jsx-runtime";
+import type { Children } from "@backtickjs/core";
 import { ink, paper } from "../theme.js";
 
 const BASE =
@@ -15,7 +16,7 @@ export async function Button({
 }: {
   href: string;
   solid?: boolean;
-  children: NonNullable<FragmentProps["children"]>;
+  children: Children<HtmlNode>;
 }) {
   const look =
     solid === true

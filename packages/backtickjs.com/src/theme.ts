@@ -14,3 +14,21 @@ export const wash = "light-dark(#fafafa, #161618)";
 
 export const sans = "'Helvetica Neue', Helvetica, Inter, system-ui, sans-serif";
 export const mono = "ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace";
+
+// The one colour on the page, and the same family as the wave the playground
+// opens on — the chrome and the demo agreeing is the point of having it.
+//
+// The text needs `light-dark()`: the wave's own violet is unreadable on a dark
+// canvas, so which end is legible is a thing only the theme knows.
+export const accent = "light-dark(#7c3aed, #a78bfa)";
+
+// The fill and its edge do not, and that is the whole reason they are alphas
+// rather than the two mixed hexes each would otherwise need. A translucent
+// violet composites to a pale tint over white and a dim one over near-black on
+// its own, so one value is right in both themes and there is no second value
+// to drift away from it.
+//
+// The hue sits between the two ends of `accent`, so neither theme is the one
+// paying for it.
+export const accentFill = "rgba(139, 92, 246, 0.11)";
+export const accentEdge = "rgba(139, 92, 246, 0.26)";

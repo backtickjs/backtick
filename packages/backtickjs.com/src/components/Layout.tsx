@@ -1,5 +1,7 @@
-import type { FragmentProps } from "@backtickjs/web-sdk/jsx-runtime";
+import type { HtmlNode } from "@backtickjs/web-sdk/jsx-runtime";
+import type { Children } from "@backtickjs/core";
 import { DOCS, REPO } from "../links.js";
+import { Badge } from "./Badge.js";
 import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
 import { ink, sans } from "../theme.js";
@@ -22,6 +24,10 @@ const TOP =
   "display: flex; align-items: center; justify-content: space-between;" +
   " gap: 24px; padding: 28px 0";
 
+// The mark and what qualifies it, kept together so the pair moves as one
+// against the nav on the other side of the header.
+const BRAND = "display: flex; align-items: center; gap: 10px";
+
 // Ink, and a weight to carry it. The colour alone was not the problem: at 15px
 // under `-webkit-font-smoothing: antialiased` a regular weight thins out, and
 // beside a 700 headline it reads as switched off however black it is.
@@ -35,16 +41,20 @@ const NAV =
 export async function Layout({
   children,
 }: {
-  // Required, not optional: every page has a body, and `FragmentProps` says
-  // `children?` because a fragment may hold nothing.
-  children: NonNullable<FragmentProps["children"]>;
+  // Required, not optional: every page has a body.
+  children: Children<HtmlNode>;
 }) {
   return (
     <div style={SHELL}>
       <header style={TOP}>
-        <a href="/" style={`display: flex; color: ${ink}`}>
-          <Logo />
-        </a>
+        {/* The badge sits beside the link rather than inside it: it says
+            what the project is, not where the mark goes. */}
+        <div style={BRAND}>
+          <a href="/" style={`display: flex; color: ${ink}`}>
+            <Logo />
+          </a>
+          <Badge>{"ALPHA"}</Badge>
+        </div>
         <nav style={NAV}>
           <a href={DOCS} style="color: inherit">
             Docs
