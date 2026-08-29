@@ -75,7 +75,7 @@ const harness = named(
 const compiler = named(
   "compiler",
   await bundled(
-    `import * as compiler from "@backtickjs/browser-compiler";` +
+    `import * as compiler from "./src/browserTranspile.js";` +
       ` globalThis.${COMPILER} = compiler;`,
   ),
 );

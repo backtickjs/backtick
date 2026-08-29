@@ -17,6 +17,10 @@
     "./bundleOf": {
       "types": "./dist/bundleOf.d.ts",
       "default": "./dist/bundleOf.js"
+    },
+    "./browserTranspile": {
+      "types": "./dist/browserTranspile.d.ts",
+      "default": "./dist/browserTranspile.js"
     }
   },
   "scripts": {
@@ -27,10 +31,11 @@
   },
   "dependencies": {
     "@backtickjs.com/schema": "workspace:*",
-    "@backtickjs/browser-compiler": "workspace:*",
+    "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/web-client": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*"
+    "@backtickjs/web-sdk": "workspace:*",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

@@ -15,7 +15,6 @@
   "dependencies": {
     "@backtickjs.com/client": "workspace:*",
     "@backtickjs.com/schema": "workspace:*",
-    "@backtickjs/browser-compiler": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/tspatch-plugin": "workspace:*",

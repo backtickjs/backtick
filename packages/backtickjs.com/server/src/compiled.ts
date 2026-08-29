@@ -1,4 +1,4 @@
-import { browserTranspile } from "@backtickjs/browser-compiler";
+import { browserTranspile } from "@backtickjs.com/client/browserTranspile";
 import { built } from "@backtickjs.com/client/bundleOf";
 
 /**

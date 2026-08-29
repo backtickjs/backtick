@@ -1,7 +1,7 @@
 import * as core from "@backtickjs/core";
 import * as webSdk from "@backtickjs/web-sdk";
 import * as jsxRuntime from "@backtickjs/web-sdk/jsx-runtime";
-import type { browserTranspile } from "@backtickjs/browser-compiler";
+import type { browserTranspile } from "./browserTranspile.js";
 import type ts from "typescript";
 
 // The name an example is compiled under. It reaches a reader twice — in a

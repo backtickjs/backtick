@@ -20,7 +20,7 @@ import { built, type Diagnostic } from "../bundleOf.js";
 // The compiler, which is the other script this document loads. Named by the
 // build rather than imported, because it is bundled separately: it carries a
 // parser, and importing it here would put a second copy of one in this bundle.
-declare const BACKTICK_COMPILER: typeof import("@backtickjs/browser-compiler");
+declare const BACKTICK_COMPILER: typeof import("../browserTranspile.js");
 
 export type Asked = {
   readonly id: number;
