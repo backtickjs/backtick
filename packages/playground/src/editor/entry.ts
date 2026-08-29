@@ -190,13 +190,13 @@ function wire(name: string, prepared: Prepared): void {
     ink.scrollLeft = source.scrollLeft;
   }
 
-  // The bundle, drawn by the client this page was drawn by. A fresh element each
-  // time: `connectedCallback` is what draws, so what redraws is a new one.
+  // The bundle, drawn by the client this page was drawn by. The same element
+  // throughout: the bundle is a prop, so telling it a new one is what redraws.
   function draw(bundle: string): void {
-    const held = document.createElement("script");
-    held.type = "application/json";
-    held.textContent = bundle.replaceAll("<", "\\u003c");
-    screen.replaceChildren(held, document.createElement("backtick-bundle"));
+    const held =
+      screen.firstElementChild ??
+      screen.appendChild(document.createElement("backtick-renderer"));
+    held.setAttribute("bundle", bundle);
   }
 
   function complain(all: readonly Complaint[]): void {

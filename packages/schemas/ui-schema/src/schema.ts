@@ -14,6 +14,19 @@ export const schema: Schema = {
   types: {
     ClientElement: Type.Interface([Type.Ref("ClientHandle")], {}),
 
+    BacktickRendererProps: Type.Interface(
+      [],
+      {
+        bundle: Type.Optional(Type.String()),
+      },
+      {
+        description:
+          "What `backtick-renderer` is drawn with: a bundle, as the string a" +
+          " compiler answered. A prop rather than something the element goes" +
+          " looking for, so a new one redraws what is there.",
+      },
+    ),
+
     ForProps: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
@@ -38,11 +51,20 @@ export const schema: Schema = {
     ),
   },
 
-  // The one element declared away from the target that draws it, because a list
-  // holds whatever its child script draws where a `<div>` holds a target's own
-  // elements. A target reaches it through its own schema's `Elements`, which
-  // extends this one's.
+  // The two elements declared away from the target that draws them, because
+  // what they hold is not a target's own: a list holds whatever its child
+  // script draws, and a renderer holds whatever the bundle it was given says,
+  // where a `<div>` holds a target's own elements. A target reaches them
+  // through its own schema's `Elements`, which extends this one's.
   elements: {
+    "backtick-renderer": Type.Ref("BacktickRendererProps", {
+      description:
+        "A drawing inside a drawing. What the client answers for it is an" +
+        " interpreter, so what stands here is whatever the bundle says —" +
+        " written as an element because that is what it is to whoever draws" +
+        " one.",
+    }),
+
     for: Type.Apply(Type.Ref("ForProps"), [Type.Ref("ClientValue")], {
       description:
         "An array, and what to draw for one member of it.\n\n" +

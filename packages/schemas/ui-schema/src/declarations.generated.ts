@@ -26,6 +26,15 @@ export interface ClientElement extends ClientHandle {
   readonly [ClientElementBrand]: never;
 }
 
+/**
+ * What `backtick-renderer` is drawn with: a bundle, as the string a compiler
+ * answered. A prop rather than something the element goes looking for, so a
+ * new one redraws what is there.
+ */
+export interface BacktickRendererProps {
+  bundle?: Prop<string>;
+}
+
 export interface ForProps<T extends ClientValue> {
   /**
    * The array to draw one thing per member of.
@@ -41,6 +50,12 @@ export interface ForProps<T extends ClientValue> {
 
 /** The elements this schema declares, and what each accepts. */
 export interface UiElements {
+  /**
+   * A drawing inside a drawing. What the client answers for it is an
+   * interpreter, so what stands here is whatever the bundle says — written as
+   * an element because that is what it is to whoever draws one.
+   */
+  "backtick-renderer": BacktickRendererProps;
   /**
    * An array, and what to draw for one member of it.
    *

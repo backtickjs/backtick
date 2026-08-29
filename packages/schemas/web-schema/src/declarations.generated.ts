@@ -12,6 +12,7 @@ import type {
 
 export type {
   ArrayLike,
+  BacktickRendererProps,
   Children,
   Client,
   ClientElement,

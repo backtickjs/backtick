@@ -29,13 +29,10 @@ export function insert(html: string, selector: string, bundle: Bundle): string {
       `backtick: nothing in the document matches \`${selector}\``,
     );
   }
-  // `</script` ends the element wherever it stands. Only strings can hold a `<`,
-  // and `<` is an escape JSON reads back itself.
-  const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
-  target.insertAdjacentHTML(
-    "beforeend",
-    `<script type="application/json">${escaped}</script>` +
-      `<backtick-bundle></backtick-bundle>`,
-  );
+  // Set rather than spelled into markup: serialization escapes an attribute's
+  // value, so nothing here has to know which characters would end it.
+  const element = document.createElement("backtick-renderer");
+  element.setAttribute("bundle", JSON.stringify(bundle));
+  target.append(element);
   return document.toString();
 }
