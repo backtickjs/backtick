@@ -5,6 +5,21 @@ import { builtins as webBuiltins } from "./builtins.js";
 import { dom } from "./dom.js";
 
 /**
+ * A target's own vocabulary: names a script may call, and tags a bundle may
+ * draw.
+ *
+ * Two tables because a schema declares two things. `builtins` are merged with
+ * the language's by `builtinsOf`, which throws where a name is taken — adding is
+ * a target's to do and replacing is not. `elements` are consulted before the
+ * document is asked, so a target may name a tag the browser has never heard of,
+ * which is the latitude `createElement` already takes for `svg:`.
+ */
+export interface Vocabulary {
+  readonly builtins?: Readonly<Record<string, ClientValue>>;
+  readonly elements?: Readonly<Record<string, () => Node>>;
+}
+
+/**
  * The client, registered.
  *
  * An element, so the browser reports each drawing and upgrades the ones already
@@ -21,10 +36,7 @@ import { dom } from "./dom.js";
 export function defineClient({
   builtins = {},
   elements = {},
-}: {
-  readonly builtins?: Readonly<Record<string, ClientValue>>;
-  readonly elements?: Readonly<Record<string, () => Node>>;
-}): void {
+}: Vocabulary = {}): void {
   const renderer: RendererOptions<Node> = {
     ...dom,
     createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
