@@ -44,11 +44,6 @@ export type Answered = {
   readonly complaints: string[];
 };
 
-/** Said once, so a page that gets no answer can tell why it got none. */
-export interface Ready {
-  readonly backtick: "ready";
-}
-
 // One question, one answer carrying the id of what it answers. The frame keeps
 // nothing between two of them, so there is no protocol here beyond that.
 addEventListener("message", (event: MessageEvent) => {
@@ -97,8 +92,3 @@ function lineOf(source: string, at: number): number {
 function answer(source: string): Promise<Built> {
   return built(BACKTICK_COMPILER.browserTranspile, source);
 }
-
-// Nothing asks for this and it is not part of the protocol — it is here so that
-// "the frame never answered" and "the frame never ran" are different sentences
-// on the page next door.
-parent.postMessage({ backtick: "ready" } satisfies Ready, "*");
