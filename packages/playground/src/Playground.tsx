@@ -18,8 +18,23 @@ import {
   TAB_ON,
   TAB_OFF,
   BUNDLE,
+  PALETTE,
 } from "./style.js";
 import { line, mono, muted } from "./theme.js";
+
+// One name per colour the scanner reaches for. Spliced rather than looked up:
+// a palette read by a key computed at run time is an index expression, and a
+// name is a value.
+const plainColour = PALETTE["plain"]!;
+const comment = PALETTE["comment"]!;
+const stringColour = PALETTE["string"]!;
+const keyword = PALETTE["keyword"]!;
+const type = PALETTE["type"]!;
+const number = PALETTE["number"]!;
+const splice = PALETTE["splice"]!;
+const tag = PALETTE["tag"]!;
+const attribute = PALETTE["attribute"]!;
+const tagged = PALETTE["tagged"]!;
 
 // The editor beside what it draws, which is the pairing that matters: a reader
 // changes a line and looks right, not down.
@@ -58,6 +73,72 @@ const COMPLAINT =
 // The frame is a corner of the page rather than a thing to look at: it holds
 // the compiler and answers questions, and nothing it draws is ever seen.
 const CORNER = "width: 0; height: 0; border: 0; position: absolute";
+
+// The words the scanner colours, kept here rather than in the script: a
+// list is a value to splice, and forty-eight of them written inline would be
+// forty-eight lines of a template that is already long.
+const KEYWORDS: string[] = [
+  "as",
+  "async",
+  "await",
+  "break",
+  "case",
+  "catch",
+  "class",
+  "const",
+  "continue",
+  "default",
+  "delete",
+  "do",
+  "else",
+  "enum",
+  "export",
+  "extends",
+  "false",
+  "finally",
+  "for",
+  "from",
+  "function",
+  "if",
+  "implements",
+  "import",
+  "in",
+  "instanceof",
+  "interface",
+  "keyof",
+  "let",
+  "new",
+  "null",
+  "of",
+  "readonly",
+  "return",
+  "satisfies",
+  "static",
+  "switch",
+  "this",
+  "throw",
+  "true",
+  "try",
+  "type",
+  "typeof",
+  "undefined",
+  "var",
+  "void",
+  "while",
+  "yield",
+];
+
+const TYPES: string[] = [
+  "any",
+  "bigint",
+  "boolean",
+  "never",
+  "number",
+  "object",
+  "string",
+  "symbol",
+  "unknown",
+];
 
 // Long enough that a reader who is still typing is not compiling on every key,
 // short enough that stopping feels like it answered.
@@ -117,6 +198,171 @@ export async function Playground({
     // should never pay for.
     const wanted = $state(false);
 
+    // The colouring, ported from the scanner that used to run beside the bundle.
+    // Two things had to change and both are the language being what it is: there
+    // are no regexes, so a word is a comparison; and an array cannot be pushed
+    // to, so a token list is one that was concatenated onto.
+    //
+    // Approximate by design, as the one it came from said of itself: a compiler's
+    // opinion reaches a reader as a complaint with an exact span, and this only
+    // has to make code look like code while they type. Where that one kept a
+    // stack per nested template, this keeps a count — a script inside a splice
+    // inside a script ends its colouring early, and nothing else notices.
+    const word = (c: string) =>
+      (c >= "a" && c <= "z") ||
+      (c >= "A" && c <= "Z") ||
+      (c >= "0" && c <= "9") ||
+      c === "_" ||
+      c === "$";
+
+    const digit = (c: string) => c >= "0" && c <= "9";
+
+    const ends = (src: string, from: number, quote: string) => {
+      let end = from + 1;
+      while (end < src.length) {
+        const c = src.charAt(end);
+        if (c === "\\") {
+          end = end + 2;
+        } else if (c === quote || (quote !== "\u0060" && c === "\n")) {
+          return end + 1;
+        } else {
+          end = end + 1;
+        }
+      }
+      return src.length;
+    };
+
+    const runOf = (src: string, from: number, dotted: boolean) => {
+      let end = from;
+      while (
+        end < src.length &&
+        (word(src.charAt(end)) || (dotted && src.charAt(end) === "."))
+      ) {
+        end = end + 1;
+      }
+      return end;
+    };
+
+    const tokensOf = (src: string) => {
+      let out: { text: string; colour: string }[] = [];
+      let at = 0;
+      let plain = 0;
+      // Below zero outside a cs template; otherwise how deep the splices go.
+      let script = 0 - 1;
+      let tags = 0;
+      let braces = 0;
+
+      while (at < src.length) {
+        const c = src.charAt(at);
+        const next = src.charAt(at + 1);
+        const before = at === 0 ? "" : src.charAt(at - 1);
+        let to = 0 - 1;
+        let colour = "";
+
+        if (c === "/" && next === "/") {
+          const stop = src.indexOf("\n", at);
+          to = stop === 0 - 1 ? src.length : stop;
+          colour = $comment;
+        } else if (c === "/" && next === "*") {
+          const stop = src.indexOf("*/", at + 2);
+          to = stop === 0 - 1 ? src.length : stop + 2;
+          colour = $comment;
+        } else if (c === '"' || c === "'") {
+          to = ends(src, at, c);
+          colour = $stringColour;
+        } else if (
+          c === "c" &&
+          next === "s" &&
+          src.charAt(at + 2) === "\u0060" &&
+          !word(before)
+        ) {
+          to = at + 3;
+          colour = $tagged;
+          script = 0;
+        } else if (c === "\u0060") {
+          if (script === 0) {
+            to = at + 1;
+            colour = $tagged;
+            script = 0 - 1;
+          } else {
+            to = ends(src, at, "\u0060");
+            colour = $stringColour;
+          }
+        } else if (script >= 0 && c === "$" && next === "{") {
+          to = at + 2;
+          colour = $splice;
+          script = script + 1;
+        } else if (script >= 0 && c === "$" && word(next) && !word(before)) {
+          to = runOf(src, at + 1, false);
+          colour = $splice;
+        } else if (c === "<" && next === "/" && word(src.charAt(at + 2))) {
+          to = runOf(src, at + 2, true);
+          colour = $tag;
+          tags = tags + 1;
+        } else if (c === "<" && word(next)) {
+          to = runOf(src, at + 1, true);
+          colour = $tag;
+          tags = tags + 1;
+        } else if (tags > 0 && braces === 0 && (c === ">" || (c === "/" && next === ">"))) {
+          to = c === ">" ? at + 1 : at + 2;
+          colour = $tag;
+          tags = tags - 1;
+        } else if (tags > 0 && braces === 0 && word(c) && !word(before) && !digit(c)) {
+          to = runOf(src, at, false);
+          colour = $attribute;
+        } else if (c === "{" && tags > 0) {
+          braces = braces + 1;
+          at = at + 1;
+        } else if (c === "}" && tags > 0 && braces > 0) {
+          braces = braces - 1;
+          at = at + 1;
+        } else if (c === "}" && script > 0) {
+          to = at + 1;
+          colour = $splice;
+          script = script - 1;
+        } else if (digit(c) && !word(before)) {
+          let end = at;
+          while (end < src.length && "0123456789._exXbo".indexOf(src.charAt(end)) >= 0) {
+            end = end + 1;
+          }
+          to = end;
+          colour = $number;
+        } else if (word(c) && !word(before)) {
+          const end = runOf(src, at, false);
+          const said = src.slice(at, end);
+          if ($KEYWORDS.indexOf(said) >= 0) {
+            to = end;
+            colour = $keyword;
+          } else if ($TYPES.indexOf(said) >= 0) {
+            to = end;
+            colour = $type;
+          } else {
+            at = end;
+          }
+        } else {
+          at = at + 1;
+        }
+
+        if (to >= 0) {
+          if (at > plain) {
+            out = out.concat([
+              { text: src.slice(plain, at), colour: $plainColour },
+            ]);
+          }
+          out = out.concat([{ text: src.slice(at, to), colour: colour }]);
+          at = to;
+          plain = to;
+        }
+      }
+
+      if (src.length > plain) {
+        out = out.concat([
+          { text: src.slice(plain, src.length), colour: $plainColour },
+        ]);
+      }
+      return out;
+    };
+
     return (
       <div style={$SPLIT}>
         <div style={$PANEL + "; " + $WRITING}>
@@ -139,7 +385,14 @@ export async function Playground({
               }
               aria-hidden="true"
             >
-              <code>{source.read() + "\n"}</code>
+              <code>
+                <For each={tokensOf(source.read())}>
+                  {(t: { text: string; colour: string }) => (
+                    <span style={"color: " + t.colour}>{t.text}</span>
+                  )}
+                </For>
+                {"\n"}
+              </code>
             </pre>
 
             <textarea

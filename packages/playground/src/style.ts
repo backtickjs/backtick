@@ -29,9 +29,17 @@ export const INK =
   `${BOX}; ${TYPE}; grid-area: 1 / 1; background: ${wash};` +
   ` color: ${ink}; pointer-events: none`;
 
-/** The text, over it and invisible — only the caret and the selection show. */
+/**
+ * The text, over it and invisible — only the caret and the selection show.
+ *
+ * Positioned, and that is load-bearing: the colouring under this is moved with
+ * a transform, which makes a stacking context of it, and a transformed sibling
+ * paints over an unpositioned one however the two are written. Without this the
+ * caret is behind the colouring and a reader cannot see where they are.
+ */
 export const EDITOR =
   `${BOX}; ${TYPE}; grid-area: 1 / 1; background: transparent;` +
+  " position: relative; z-index: 1;" +
   ` color: transparent; caret-color: ${ink}; resize: none;` +
   " border-color: transparent; outline: none";
 
