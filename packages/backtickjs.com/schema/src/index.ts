@@ -1,8 +1,8 @@
 /**
  * What this site's own client answers for.
  *
- * Nothing yet, so there is nothing here to pass along: a schema that declares
- * no types, no elements and no builtins writes no generated file, and this
- * re-exports those the moment it declares one.
+ * The two generated halves: the declarations a script is checked against, and
+ * the value a server component splices to reach the name behind them.
  */
-export {};
+export * from "./builtins.generated.js";
+export type * from "./declarations.generated.js";
