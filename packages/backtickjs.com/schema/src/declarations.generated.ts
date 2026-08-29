@@ -3,6 +3,7 @@
 import type {
   Builtins as WebBuiltins,
   Elements as WebElements,
+  Prop,
 } from "@backtickjs/web-schema";
 
 export type {
@@ -173,6 +174,19 @@ export type {
 } from "@backtickjs/web-schema";
 
 /**
+ * What a `backtick` is drawn with: a bundle, as the string a compiler
+ * answered. A prop rather than something the element goes looking for, so a
+ * new one redraws what is there.
+ *
+ * Required, because having nothing to draw is a state a page is in rather than
+ * a thing to draw: a page between two bundles draws no `backtick` at all, and
+ * this is spared answering for a case that is not its own.
+ */
+export interface BacktickProps {
+  bundle: Prop<string>;
+}
+
+/**
  * Something the compiler had to say about what was written, and where in it.
  * The word the rest of this repository uses.
  */
@@ -183,7 +197,9 @@ export interface Diagnostic {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface SiteElements {}
+export interface SiteElements {
+  backtick: BacktickProps;
+}
 
 /** Every element in scope, this schema's own and its bases'. */
 export interface Elements extends WebElements, SiteElements {}

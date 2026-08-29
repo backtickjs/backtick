@@ -31,6 +31,23 @@ export const schema: Schema = {
   publishes: [],
 
   types: {
+    BacktickProps: Type.Interface(
+      [],
+      {
+        bundle: Type.String(),
+      },
+      {
+        description:
+          "What a `backtick` is drawn with: a bundle, as the string a compiler" +
+          " answered. A prop rather than something the element goes looking" +
+          " for, so a new one redraws what is there.\n\n" +
+          "Required, because having nothing to draw is a state a page is in" +
+          " rather than a thing to draw: a page between two bundles draws no" +
+          " `backtick` at all, and this is spared answering for a case that is" +
+          " not its own.",
+      },
+    ),
+
     Diagnostic: Type.Interface(
       [],
       {
@@ -49,7 +66,13 @@ export const schema: Schema = {
     ),
   },
 
-  elements: {},
+  elements: {
+    // A drawing inside a drawing, declared here rather than where every target
+    // would see it: what this holds is a bundle, and a bundle is a thing an
+    // ordinary app never touches. This site is the exception, because bundles
+    // are what it is about.
+    backtick: Type.Ref("BacktickProps"),
+  },
 
   builtins: {
     compile: Type.Function(
