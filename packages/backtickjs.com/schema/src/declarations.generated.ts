@@ -13,7 +13,6 @@ export type {
   AriaAttributes,
   AriaRole,
   ArrayLike,
-  BacktickRendererProps,
   BaseProps,
   BlockquoteProps,
   Booleanish,

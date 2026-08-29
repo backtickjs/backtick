@@ -13,6 +13,10 @@
     "./schema": {
       "types": "./dist/schema.d.ts",
       "default": "./dist/schema.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime/index.d.ts",
+      "default": "./dist/jsx-runtime/index.js"
     }
   },
   "scripts": {
@@ -23,6 +27,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
+    "@backtickjs/cs-runtime": "workspace:*",
     "@backtickjs/schema": "workspace:*",
     "@backtickjs/web-schema": "workspace:*"
   },

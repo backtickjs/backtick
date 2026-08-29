@@ -540,7 +540,7 @@ export async function Playground({
             }
           >
             <div style={$SCREEN}>
-              <backtick-renderer bundle={bundle.read()} />
+              <backtick bundle={bundle.read()} />
             </div>
             <div style={$ISLAND} />
           </div>

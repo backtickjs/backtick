@@ -203,6 +203,9 @@ importers:
 
   packages/backtickjs.com/schema:
     dependencies:
+      '@backtickjs/cs-runtime':
+        specifier: workspace:*
+        version: link:../../cs-runtime
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../../schema

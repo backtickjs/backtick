@@ -1,5 +1,6 @@
 import type { Bundle, ClientValue } from "@backtickjs/core";
 import { render } from "@backtickjs/js-interpreter";
+import type { RendererOptions } from "@backtickjs/js-interpreter";
 import { builtins as webBuiltins } from "./builtins.js";
 import { dom } from "./dom.js";
 
@@ -17,9 +18,17 @@ import { dom } from "./dom.js";
  * target may add and may not replace — which is why this takes a table rather
  * than letting one be handed in whole.
  */
-export function defineClient(
-  builtins: Readonly<Record<string, ClientValue>> = {},
-): void {
+export function defineClient({
+  builtins = {},
+  elements = {},
+}: {
+  readonly builtins?: Readonly<Record<string, ClientValue>>;
+  readonly elements?: Readonly<Record<string, () => Node>>;
+}): void {
+  const renderer: RendererOptions<Node> = {
+    ...dom,
+    createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
+  };
   const allBuiltins = {
     ...(webBuiltins as unknown as Record<string, ClientValue>),
     ...builtins,
@@ -80,7 +89,12 @@ export function defineClient(
         if (bundle === null || bundle === "") {
           return;
         }
-        this.#drop = draw(JSON.parse(bundle) as Bundle, this, allBuiltins);
+        this.#drop = draw(
+          JSON.parse(bundle) as Bundle,
+          this,
+          allBuiltins,
+          renderer,
+        );
       }
     },
   );
@@ -94,6 +108,7 @@ function draw(
   bundle: Bundle,
   target: Element,
   builtins: Readonly<Record<string, ClientValue>>,
+  renderer: RendererOptions<Node>,
 ): () => void {
-  return render(bundle, { renderer: dom, builtins }, target);
+  return render(bundle, { renderer, builtins }, target);
 }
