@@ -1,9 +1,9 @@
 {
-  "name": "@backtickjs/playground",
+  "name": "@backtickjs/browser-compiler",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "An editor beside what it draws, for any page that wants one",
+  "description": "Backtick's compiler, whole, in a browser",
   "main": "./dist/index.js",
   "exports": {
     ".": {
@@ -14,22 +14,21 @@
     "./static/*": "./static/*"
   },
   "scripts": {
-    "build": "node build.mjs && tspc --noCheck --declaration",
-    "typecheck": "backtick-tsc --noEmit",
+    "build": "tsc -b && node build.mjs",
+    "typecheck": "tsc -b",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo"
+    "clean": "rm -rf node_modules dist static .turbo"
   },
   "dependencies": {
-    "@backtickjs/browser-compiler": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*"
+    "@backtickjs/compiler": "workspace:*",
+    "@backtickjs/core": "workspace:*",
+    "@backtickjs/web-sdk": "workspace:*",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/tsc": "workspace:*",
-    "@backtickjs/tspatch-plugin": "workspace:*",
     "@types/node": "^25.9.1",
     "esbuild": "^0.25.0",
-    "prettier": "^3.6.2",
-    "ts-patch": "^4.0.1"
+    "prettier": "^3.6.2"
   }
 }

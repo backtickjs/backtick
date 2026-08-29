@@ -213,6 +213,31 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/browser-compiler:
+    dependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../web-sdk
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      '@types/node':
+        specifier: ^25.9.1
+        version: 25.9.1
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+
   packages/bun-plugin:
     dependencies:
       '@backtickjs/core':
@@ -488,21 +513,12 @@ importers:
 
   packages/playground:
     dependencies:
-      '@backtickjs/compiler':
+      '@backtickjs/browser-compiler':
         specifier: workspace:*
-        version: link:../compiler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
+        version: link:../browser-compiler
       '@backtickjs/web-sdk':
         specifier: workspace:*
         version: link:../web-sdk
-      esbuild:
-        specifier: ^0.25.0
-        version: 0.25.12
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
     devDependencies:
       '@backtickjs/tsc':
         specifier: workspace:*
@@ -513,6 +529,9 @@ importers:
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
       prettier:
         specifier: ^3.6.2
         version: 3.8.4

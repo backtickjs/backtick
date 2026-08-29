@@ -1,5 +1,4 @@
-import ts from "typescript";
-import { compile } from "./compile/compile.js";
+import { compile, host } from "@backtickjs/browser-compiler";
 import { EDITOR_URL } from "./static.js";
 import {
   HEAD_ROW,
@@ -83,7 +82,7 @@ export async function Playground({ example }: { example: string }) {
   // before the megabyte behind the editor has been thought about.
   const prepared = JSON.stringify({
     source: example,
-    result: await compile(example, { typescript: ts }),
+    result: await compile(example, host()),
   });
 
   const first = example;

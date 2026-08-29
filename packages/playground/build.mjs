@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { build } from "esbuild";
 
 /**
@@ -24,26 +24,6 @@ const PUBLIC = "/playground/";
 const FRAME = `${PUBLIC}compile/`;
 
 const here = fileURLToPath(new URL(".", import.meta.url));
-
-/**
- * The parser, from a CDN rather than from here.
- *
- * Pinned to the version this package builds against, so what compiles a
- * reader's source is what the repository compiled its own. `.min.js` is not a
- * file TypeScript ships — jsDelivr makes it on request — which is why it is
- * that CDN by name and not a choice between equals: unpkg answers 404 for this
- * path. The minified answer is 950 KB over the wire where the file in the
- * package is 1600 KB.
- *
- * No `integrity`, and that is a trade rather than an oversight: the bytes are
- * made by the CDN, so a hash for them can only be got by fetching one, and a
- * build that reaches the network to build is worse than this. The frame that
- * loads it is sandboxed onto an origin of its own and reaches nothing of the
- * page's.
- */
-const TYPESCRIPT_URL = `https://cdn.jsdelivr.net/npm/typescript@${
-  createRequire(import.meta.url)("typescript/package.json").version
-}/lib/typescript.min.js`;
 
 /** A name carrying the hash of what is at it, so nothing is ever stale. */
 function named(name, source) {
@@ -69,15 +49,6 @@ const site = new URL("./static/", import.meta.url);
 await rm(site, { recursive: true, force: true });
 await mkdir(site, { recursive: true });
 
-// One classic script holding the compiler and everything it imports. `iife`
-// rather than `esm` because the frame is sandboxed onto an opaque origin, where
-// a module script is a cross-origin fetch and a classic script is not — and a
-// static host sends no header that would let the first one through.
-const compiler = named(
-  "compiler",
-  await bundled(`import "./src/compile/entry.js";`),
-);
-
 // The playground's own wiring, which is a script on a page rather than part of
 // its bundle — see `src/editor/entry.ts` for why, and the repository's
 // `docs/browser-playground.md` for what closes it.
@@ -87,27 +58,21 @@ const editor = named(
     define: { BACKTICK_FRAME_URL: JSON.stringify(FRAME) },
   }),
 );
+await writeFile(new URL(editor.name, site), editor.source);
 
-// No content policy on this document, and that is a finding rather than an
-// oversight: a frame carrying `sandbox` without `allow-same-origin` runs on an
-// opaque origin, where `'self'` matches nothing — a `default-src 'self'` here
-// would refuse this document its own scripts. The sandbox is the boundary. The
-// page that embeds it keeps its own policy, and never evaluates anything.
-const frame =
-  `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
-  `<title>backtick — compiler</title>` +
-  // The parser first and both deferred, because deferred scripts run in the
-  // order a document writes them: the one below reads `ts` off the global and
-  // is written to assume it is already there.
-  `<script defer src="${TYPESCRIPT_URL}"></script>` +
-  `<script defer src="${PUBLIC}${compiler.name}"></script>` +
-  `</head><body></body></html>`;
-
-for (const one of [compiler, editor]) {
-  await writeFile(new URL(one.name, site), one.source);
-}
-await mkdir(new URL("./compile/", site), { recursive: true });
-await writeFile(new URL("./compile/index.html", site), frame);
+// The compiler, copied rather than built. It is a package of its own because
+// the parser it carries is a dependency rather than a download — what arrives
+// here is one document and the one script it names, both already hashed, and
+// this build has no opinion about either beyond where they go.
+const compiler = new URL(
+  "./static/",
+  pathToFileURL(
+    createRequire(import.meta.url).resolve(
+      "@backtickjs/browser-compiler/package.json",
+    ),
+  ),
+);
+await cp(compiler, new URL("./compile/", site), { recursive: true });
 
 // What the component asks for, written where the component can import it.
 await writeFile(
@@ -117,4 +82,4 @@ await writeFile(
     `export const EDITOR_URL = ${JSON.stringify(`${PUBLIC}${editor.name}`)};\n`,
 );
 
-console.log(`playground/static: ${compiler.name}, ${editor.name}`);
+console.log(`playground/static: ${editor.name}, compile/`);

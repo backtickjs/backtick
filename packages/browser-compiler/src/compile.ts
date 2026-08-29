@@ -3,6 +3,18 @@ import * as core from "@backtickjs/core";
 import * as webSdk from "@backtickjs/web-sdk";
 import * as jsxRuntime from "@backtickjs/web-sdk/jsx-runtime";
 
+/**
+ * One file handed to the compiler, and what is in it.
+ *
+ * A name as well as the text, because a complaint has to say which file it is
+ * about — and because a compiler that only ever took one file could not compile
+ * a component that uses the one beside it.
+ */
+export interface Source {
+  readonly name: string;
+  readonly source: string;
+}
+
 /** Where a complaint sits in what the reader wrote, and what it says. */
 export interface Complaint {
   readonly message: string;

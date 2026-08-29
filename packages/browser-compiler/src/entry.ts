@@ -1,4 +1,5 @@
-import { compile, type Compiled, type Host } from "./compile.js";
+import { compile, type Compiled } from "./compile.js";
+import { host } from "./host.js";
 
 /**
  * The compiler, as a document that answers questions.
@@ -16,29 +17,6 @@ import { compile, type Compiled, type Host } from "./compile.js";
  * that sets no headers, which is every static host, a `<script type="module">`
  * in this frame silently never runs.
  */
-
-// The parser, loaded by the document beside this script and deferred like it.
-//
-// A classic script because that is what TypeScript ships: `typescript.js`
-// closes over a `module` shim and leaves `ts` on the global. Every attempt to
-// make it an ES module instead goes through its `browser` field, which maps
-// `os` to nothing, and it dies reading `os.platform()` before it has compiled
-// anything.
-//
-// Deferred scripts run in the order the document writes them, so by the time
-// anything here runs the parser is already on the global — which is why this
-// reads one rather than fetching it.
-function typescript(): typeof import("typescript") {
-  const held = (globalThis as { ts?: typeof import("typescript") }).ts;
-  if (held === undefined) {
-    throw new Error("the parser did not load");
-  }
-  return held;
-}
-
-export function host(): Host {
-  return { typescript: typescript() };
-}
 
 export interface Asked {
   readonly id: number;
