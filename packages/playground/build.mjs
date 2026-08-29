@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
-import { cp, mkdir, rm, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { mkdir, rm, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
 
 /**
@@ -21,6 +20,11 @@ import { build } from "esbuild";
 // match it, and two places agreeing on one string is what makes a component
 // that needs no wiring possible at all.
 const PUBLIC = "/playground/";
+
+// The name the compiler answers to once a browser has run it. Chosen here
+// rather than by that package, because it is this build that writes both the
+// script defining it and the script reading it.
+const COMPILER = "backtickCompiler";
 const FRAME = `${PUBLIC}compile/`;
 
 const here = fileURLToPath(new URL(".", import.meta.url));
@@ -60,19 +64,50 @@ const editor = named(
 );
 await writeFile(new URL(editor.name, site), editor.source);
 
-// The compiler, copied rather than built. It is a package of its own because
-// the parser it carries is a dependency rather than a download — what arrives
-// here is one document and the one script it names, both already hashed, and
-// this build has no opinion about either beyond where they go.
-const compiler = new URL(
-  "./static/",
-  pathToFileURL(
-    createRequire(import.meta.url).resolve(
-      "@backtickjs/browser-compiler/package.json",
-    ),
+// The frame's own script: the protocol, and what running a compiled example
+// takes. Small, because the parser is not in it — that is the other script.
+const harness = named(
+  "frame",
+  await bundled(`import "./src/frame/entry.js";`, {
+    define: { BACKTICK_COMPILER: COMPILER },
+  }),
+);
+
+// The compiler, bundled here from the package that is only its source. It is a
+// package of its own because the parser it carries is a dependency rather than a
+// download, and because it compiles and stops there — running what it returns is
+// the harness above, which is why the two are separate scripts rather than one.
+// It has no build of its own: what a browser needs from it is a bundle, and a
+// bundle is this script's job for everything else it serves too.
+const compiler = named(
+  "compiler",
+  await bundled(
+    `import * as compiler from "@backtickjs/browser-compiler";` +
+      ` globalThis.${COMPILER} = compiler;`,
   ),
 );
-await cp(compiler, new URL("./compile/", site), { recursive: true });
+
+// No content policy on this document, and that is forced rather than chosen: it
+// is loaded in a frame sandboxed without `allow-same-origin`, which puts it on
+// an opaque origin, and `'self'` matches nothing there — a policy naming
+// `'self'` would refuse this document its own scripts. The sandbox is the
+// boundary instead, and it is the stronger one: the page around it keeps
+// `default-src 'self'`, never evaluates anything, and cannot be reached in here.
+//
+// Both are asked for by relative names, and the compiler goes first: the
+// harness reads a global the compiler defines.
+const document =
+  `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
+  `<title>backtick — compiler</title>` +
+  `<script defer src="./${compiler.name}"></script>` +
+  `<script defer src="./${harness.name}"></script>` +
+  `</head><body></body></html>`;
+
+const frame = new URL("./compile/", site);
+await mkdir(frame, { recursive: true });
+await writeFile(new URL(compiler.name, frame), compiler.source);
+await writeFile(new URL(harness.name, frame), harness.source);
+await writeFile(new URL("index.html", frame), document);
 
 // What the component asks for, written where the component can import it.
 await writeFile(
@@ -82,4 +117,6 @@ await writeFile(
     `export const EDITOR_URL = ${JSON.stringify(`${PUBLIC}${editor.name}`)};\n`,
 );
 
-console.log(`playground/static: ${editor.name}, compile/`);
+console.log(
+  `playground/static: ${editor.name}, compile/{${compiler.name}, ${harness.name}}`,
+);

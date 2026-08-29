@@ -218,12 +218,6 @@ importers:
       '@backtickjs/compiler':
         specifier: workspace:*
         version: link:../compiler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../web-sdk
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -231,9 +225,6 @@ importers:
       '@types/node':
         specifier: ^25.9.1
         version: 25.9.1
-      esbuild:
-        specifier: ^0.25.0
-        version: 0.25.12
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -516,6 +507,9 @@ importers:
       '@backtickjs/browser-compiler':
         specifier: workspace:*
         version: link:../browser-compiler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../core
       '@backtickjs/web-sdk':
         specifier: workspace:*
         version: link:../web-sdk
@@ -538,6 +532,9 @@ importers:
       ts-patch:
         specifier: ^4.0.1
         version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
 
   packages/prettier-plugin:
     devDependencies:

@@ -7,9 +7,5 @@
  * compiler and the already-compiled example are.
  */
 export { Playground } from "./Playground.js";
-export type {
-  Compiled,
-  Complaint,
-  Source,
-} from "@backtickjs/browser-compiler";
+export type { Built, Complaint } from "./frame/bundle.js";
 export * as theme from "./theme.js";

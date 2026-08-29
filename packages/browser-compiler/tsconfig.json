@@ -4,9 +4,12 @@
     "rootDir": "src",
     "outDir": "dist",
     "emitDeclarationOnly": false,
+    // A browser's globals, and nothing else's: what is here is bundled into a
+    // page, so reaching for `node:fs` is a mistake the types catch.
     "moduleResolution": "bundler",
     "module": "esnext",
-    "types": ["node"]
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": []
   },
   "include": ["src"]
 }

@@ -1,8 +1,7 @@
-import { compile, type Compiled } from "./compile.js";
-import { host } from "./host.js";
+import { built, type Built } from "./bundle.js";
 
 /**
- * The compiler, as a document that answers questions.
+ * The frame, as a document that answers questions.
  *
  * It is the one document on this site that runs what somebody else wrote, which
  * is why it is a document and not a module: a frame carrying `sandbox` without
@@ -18,6 +17,12 @@ import { host } from "./host.js";
  * in this frame silently never runs.
  */
 
+// The compiler, which is the other script this document loads. Named by the
+// build rather than imported, because it is bundled separately: it carries a
+// parser, and importing it here would put a second copy of one in this bundle.
+// What it resolves to is the name that package puts itself on.
+declare const BACKTICK_COMPILER: typeof import("@backtickjs/browser-compiler");
+
 export interface Asked {
   readonly id: number;
   readonly source: string;
@@ -25,7 +30,7 @@ export interface Asked {
 
 export interface Answered {
   readonly id: number;
-  readonly result: Compiled;
+  readonly result: Built;
 }
 
 /** Said once, so a page that gets no answer can tell why it got none. */
@@ -51,18 +56,8 @@ addEventListener("message", (event: MessageEvent) => {
     });
 });
 
-async function answer(source: string): Promise<Compiled> {
-  try {
-    return await compile(source, host());
-  } catch (thrown: unknown) {
-    // What the reader wrote threw while it ran, or the parser never arrived.
-    // Either way it is something to say about this source rather than a broken
-    // frame, so it goes back the way a compiler's complaint does.
-    return {
-      ok: false,
-      complaints: [{ message: String(thrown), start: 0, length: 0 }],
-    };
-  }
+function answer(source: string): Promise<Built> {
+  return built(BACKTICK_COMPILER.browserTranspile, source);
 }
 
 // Nothing asks for this and it is not part of the protocol — it is here so that

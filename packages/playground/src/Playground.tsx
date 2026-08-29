@@ -1,4 +1,5 @@
-import { compile, host } from "@backtickjs/browser-compiler";
+import { browserTranspile } from "@backtickjs/browser-compiler";
+import { built } from "./frame/bundle.js";
 import { EDITOR_URL } from "./static.js";
 import {
   HEAD_ROW,
@@ -82,7 +83,7 @@ export async function Playground({ example }: { example: string }) {
   // before the megabyte behind the editor has been thought about.
   const prepared = JSON.stringify({
     source: example,
-    result: await compile(example, host()),
+    result: await built(browserTranspile, example),
   });
 
   const first = example;

@@ -1,10 +1,5 @@
-import type {
-  Answered,
-  Asked,
-  Compiled,
-  Complaint,
-  Ready,
-} from "@backtickjs/browser-compiler";
+import type { Built, Complaint } from "../frame/bundle.js";
+import type { Answered, Asked, Ready } from "../frame/entry.js";
 import { highlight } from "../highlight.js";
 import { PALETTE, SHOWN, TAB_OFF, TAB_ON } from "../style.js";
 import { line, muted } from "../theme.js";
@@ -67,7 +62,7 @@ function rest(ms: number): Promise<void> {
  */
 interface Prepared {
   readonly source: string;
-  readonly result: Compiled;
+  readonly result: Built;
 }
 
 /** The frame, and the promise that it is running rather than merely loaded. */
@@ -270,7 +265,7 @@ function wire(name: string, prepared: Prepared): void {
    * — otherwise "compiling…" is replaced twenty milliseconds after it appears,
    * which reads as a flicker rather than a state.
    */
-  function show(result: Compiled): void {
+  function show(result: Built): void {
     if (result.ok) {
       complaints.replaceChildren();
       bundle.textContent = result.bundle;
@@ -287,7 +282,7 @@ function wire(name: string, prepared: Prepared): void {
   }
 
   /** What the status line reads once the hold is over. */
-  function settled(result: Compiled): string {
+  function settled(result: Built): string {
     if (result.ok) {
       return "";
     }

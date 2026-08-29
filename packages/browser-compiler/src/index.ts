@@ -1,17 +1,18 @@
 /**
  * Backtick's compiler, whole, in a browser.
  *
- * The parser is a dependency of this package rather than a file somebody
- * publishes beside it: what `build.mjs` emits is one script holding TypeScript,
- * the transform and the pipeline, so a page that wants a compiler copies a
- * directory and points a frame at it.
+ * Two passes and a parser. The first is `@backtickjs/compiler`'s, so an example
+ * compiled here is compiled exactly as an e2e fixture is; the second is what
+ * this package adds, and it is only needed where there is no module loader to
+ * hand the first pass to.
  *
- * It has to be a frame, or something else with a policy of its own. Running a
- * compiled module is `new Function`, which a page saying `default-src 'self'`
- * may not do — and a content policy is per-document, so a document is the unit
- * that can be allowed to evaluate while the page around it is not.
+ * The parser is a dependency rather than a file somebody publishes beside this,
+ * so bundling it for a browser carries it along and the result needs nothing
+ * from the network. There is no build here that makes that bundle: it is made
+ * by whoever serves one, which is also who names it.
+ *
+ * What comes back is text. Nothing here evaluates it, so nothing here needs a
+ * policy, a frame or an origin — that is the caller's half, and the caller is
+ * also who decides what its imports resolve to.
  */
-export { compile } from "./compile.js";
-export { host } from "./host.js";
-export type { Compiled, Complaint, Host, Source } from "./compile.js";
-export type { Answered, Asked, Ready } from "./entry.js";
+export { browserTranspile } from "./browserTranspile.js";
