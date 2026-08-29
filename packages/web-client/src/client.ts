@@ -24,13 +24,7 @@ customElements.define(
     #drop: (() => void) | undefined;
 
     connectedCallback(): void {
-      const bundle = this.getAttribute("bundle");
-      if (bundle === null) {
-        throw new Error(
-          "backtick: a `backtick-renderer` with no `bundle` to draw",
-        );
-      }
-      this.#draw(bundle);
+      this.#draw(this.getAttribute("bundle"));
     }
 
     attributeChangedCallback(
@@ -40,7 +34,7 @@ customElements.define(
     ): void {
       // Set before this was put anywhere: there is nothing to draw into yet,
       // and `connectedCallback` reads the prop when there is.
-      if (!this.isConnected || value === null) {
+      if (!this.isConnected) {
         return;
       }
       this.#draw(value);
@@ -59,12 +53,20 @@ customElements.define(
     //
     // `display: contents` so standing here costs no box: what was drawn lays
     // out against whatever holds this element, as it would have without it.
-    #draw(bundle: string): void {
+    #draw(bundle: string | null): void {
       this.#drop?.();
+      this.#drop = undefined;
       this.style.display = "contents";
       // Nothing else is in here, so there is nothing to draw in front of: what
       // is drawn goes into the back of an element that was just emptied.
       this.replaceChildren();
+      // The prop is optional, and this is what that means: a page between two
+      // bundles has none, and says so by leaving it off or leaving it empty.
+      // Either way this stands here holding nothing, which is a state a page is
+      // in rather than a mistake it made.
+      if (bundle === null || bundle === "") {
+        return;
+      }
       this.#drop = draw(JSON.parse(bundle) as Bundle, this);
     }
   },

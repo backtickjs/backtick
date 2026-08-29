@@ -22,6 +22,19 @@ export interface Complaint {
   readonly length: number;
 }
 
+/**
+ * What a size reads as beside the word `BUNDLE`.
+ *
+ * Here rather than in whoever draws it, because two of them draw it: the build
+ * writes the first one and the frame answers with every one after, and a reader
+ * who types a character should not watch the units change.
+ */
+export function sizeOf(bytes: number): string {
+  return bytes < 1024
+    ? ` \u00b7 ${bytes.toString()} B`
+    : ` \u00b7 ${(bytes / 1024).toFixed(1)} KB`;
+}
+
 /** A bundle, or the reasons there is none. */
 export type Built =
   | { readonly ok: true; readonly bundle: string; readonly bytes: number }

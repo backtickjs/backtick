@@ -1,3 +1,3 @@
-// Written by `build.mjs`. The name carries the hash of what is in it, so a
-// rebuilt playground is a name no cache has an old answer for.
-export const EDITOR_URL = "/playground/editor-7701b59fe035f66f.js";
+// Written by `build.mjs`. Where the frame that holds the compiler is
+// served from, which this and the page it is on both have to agree about.
+export const FRAME_URL = "/playground/compile/";

@@ -49,16 +49,6 @@ async function bundled(contents, options = {}) {
   return outputFiles[0].text;
 }
 
-// The playground's own wiring, which is a script on a page rather than part of
-// its bundle — see `src/editor/entry.ts` for why, and the repository's
-// `docs/browser-playground.md` for what closes it.
-const editor = named(
-  "editor",
-  await bundled(`import "./src/editor/entry.js";`, {
-    define: { BACKTICK_FRAME_URL: JSON.stringify(FRAME) },
-  }),
-);
-
 // The frame's own script: the protocol, and what running a compiled example
 // takes. Small, because the parser is not in it — that is the other script.
 const harness = named(
@@ -105,7 +95,6 @@ const document =
 // tree. A page already writes a list like this for the client, so the playground
 // joins that list rather than needing a step of its own.
 const assets = [
-  { url: `${PUBLIC}${editor.name}`, source: editor.source },
   { url: `${FRAME}${compiler.name}`, source: compiler.source },
   { url: `${FRAME}${harness.name}`, source: harness.source },
   { url: `${FRAME}index.html`, source: document },
@@ -124,12 +113,13 @@ await writeFile(
     `}[];\n`,
 );
 
-// The one of those the component itself has to know, because it draws it.
+// The one of those the component has to know, because it draws the frame
+// that serves it.
 await writeFile(
   new URL("./src/static.ts", import.meta.url),
-  `// Written by \`build.mjs\`. The name carries the hash of what is in it, so a\n` +
-    `// rebuilt playground is a name no cache has an old answer for.\n` +
-    `export const EDITOR_URL = ${JSON.stringify(`${PUBLIC}${editor.name}`)};\n`,
+  `// Written by \`build.mjs\`. Where the frame that holds the compiler is\n` +
+    `// served from, which this and the page it is on both have to agree about.\n` +
+    `export const FRAME_URL = ${JSON.stringify(FRAME)};\n`,
 );
 
 console.log(

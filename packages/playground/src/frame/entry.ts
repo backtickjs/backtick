@@ -1,4 +1,4 @@
-import { built, type Built } from "./bundle.js";
+import { built, sizeOf, type Built } from "./bundle.js";
 
 /**
  * The frame, as a document that answers questions.
@@ -28,10 +28,21 @@ export interface Asked {
   readonly source: string;
 }
 
-export interface Answered {
+/**
+ * One answer, flat.
+ *
+ * Flat because the page that reads it is a bundle: narrowing a union is a thing
+ * the language would rather not do, and every field here is a value a script can
+ * read without asking which shape it got. `ok` says which of them mean anything.
+ */
+export type Answered = {
   readonly id: number;
-  readonly result: Built;
-}
+  readonly ok: boolean;
+  readonly bundle: string;
+  readonly size: string;
+  // Formatted here, where the source that gives a position its line number is.
+  readonly complaints: string[];
+};
 
 /** Said once, so a page that gets no answer can tell why it got none. */
 export interface Ready {
@@ -47,7 +58,7 @@ addEventListener("message", (event: MessageEvent) => {
   }
   const { id, source } = asked;
   void answer(source)
-    .then((result): Answered => ({ id, result }))
+    .then((result): Answered => said(id, source, result))
     .then((reply) => {
       // A sandboxed frame has no origin to name and the asker is on one this
       // frame cannot name either, so `*` is the only target there is. It carries
@@ -55,6 +66,33 @@ addEventListener("message", (event: MessageEvent) => {
       (event.source as WindowProxy | null)?.postMessage(reply, "*");
     });
 });
+
+/** What crosses, out of what `bundleOf` came back with. */
+function said(id: number, source: string, result: Built): Answered {
+  if (result.ok) {
+    return {
+      id,
+      ok: true,
+      bundle: result.bundle,
+      size: sizeOf(result.bytes),
+      complaints: [],
+    };
+  }
+  return {
+    id,
+    ok: false,
+    bundle: "",
+    size: "",
+    complaints: result.complaints.map(
+      (one) => `line ${lineOf(source, one.start)}  ${one.message}`,
+    ),
+  };
+}
+
+/** Which line a position is on, counted the way an editor counts. */
+function lineOf(source: string, at: number): number {
+  return source.slice(0, at).split("\n").length;
+}
 
 function answer(source: string): Promise<Built> {
   return built(BACKTICK_COMPILER.browserTranspile, source);

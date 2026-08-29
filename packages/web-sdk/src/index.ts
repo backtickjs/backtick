@@ -39,6 +39,7 @@ export type {
   HtmlNode,
   InputEvent,
   KeyboardEvent,
+  MessageEvent,
   MouseEvent,
   PointerEvent,
   ProgressEvent,
@@ -48,4 +49,5 @@ export type {
   TransitionEvent,
   UIEvent,
   WheelEvent,
+  Window,
 } from "@backtickjs/web-schema";
