@@ -1,4 +1,4 @@
-import { transform } from "@backtickjs/compiler";
+import { transpile } from "@backtickjs/compiler";
 // Prettier by the path rather than the name. This suite runs under
 // `--conditions=browser`, which is what makes Solid resolve to its reactive
 // build rather than the inert server one (see `js-interpreter/view.ts`), and
@@ -8,27 +8,13 @@ import { transform } from "@backtickjs/compiler";
 import prettier from "prettier/index.mjs";
 import ts from "typescript";
 
-// The one set of options every suite compiles fixtures with, so the `*.js`
-// snapshots the compiler suite writes are byte-for-byte the modules the
-// bundle suite executes.
-const COMPILER_OPTIONS: ts.CompilerOptions = {
-  target: ts.ScriptTarget.ESNext,
-  module: ts.ModuleKind.ESNext,
-  jsx: ts.JsxEmit.ReactJSX,
-  jsxImportSource: "@backtickjs/web-sdk",
-  sourceMap: false,
-  verbatimModuleSyntax: true,
-};
-
 export async function transpileFixture(
   fileName: string,
   sourceText: string,
 ): Promise<string> {
-  const { outputText } = ts.transpileModule(sourceText, {
-    fileName,
-    compilerOptions: COMPILER_OPTIONS,
-    transformers: { before: [transform(ts)] },
-  });
+  // The options live in the compiler, so what the bundle suite executes is what
+  // a playground example compiles to rather than merely what it looks like.
+  const outputText = transpile(ts, fileName, sourceText);
   // Every script's metadata carries the toolchain version, which would rewrite
   // all of these snapshots on each release. Pinned to one value so a version
   // bump doesn't bury the diff that release actually made. Matched on a semver

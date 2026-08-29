@@ -6,6 +6,7 @@ export type { ClientScript, ParsedFile, Splice } from "./parseFile.js";
 export { parseSourceFile, parseSourceText } from "./parseFile.js";
 export { resolveBindings } from "./resolveBindings.js";
 export { transform } from "./transform.js";
+export { transpile } from "./transpile.js";
 export { mangle, unmangle } from "./unmangle.js";
 export type { Virtualized } from "./virtualize.js";
 export { virtualize } from "./virtualize.js";
