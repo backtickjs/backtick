@@ -6,21 +6,156 @@ import type {
   compile,
   evalAndBundle,
 } from "@backtickjs.com/schema";
-import {
-  HEAD_ROW,
-  DEVICE,
-  EDITOR,
-  HEAD,
-  INK,
-  ISLAND,
-  PANEL,
-  SCREEN,
-  TAB_ON,
-  TAB_OFF,
-  BUNDLE,
-  PALETTE,
-} from "./style.js";
-import { line, mono, muted } from "../theme.js";
+import { ink, line, mono, muted, paper, wash } from "../theme.js";
+
+// One corner for both panels, so the pair reads as two of the same thing. It
+// is the radius the drawn card uses, which is the most prominent one on the
+// page and the one the eye is already calibrated to.
+const RADIUS = "22px";
+
+/**
+ * What the editor and its colouring are both set in.
+ *
+ * One string, used twice on purpose: a `<textarea>` and the `<pre>` behind it
+ * line up only while every metric agrees, and two copies of these numbers is a
+ * caret that sits half a character off the letter it is in front of.
+ */
+const TYPE =
+  `font-family: ${mono}; font-size: 13px; line-height: 1.7;` +
+  " tab-size: 2; letter-spacing: 0";
+
+// One height for both, and no `resize`: the two elements have to agree about
+// every metric, and a corner the reader can drag moves one of them.
+const BOX =
+  `margin: 0; padding: 16px 18px; border-radius: ${RADIUS};` +
+  " height: 700px;" +
+  " box-sizing: border-box; white-space: pre; overflow: auto;" +
+  ` border: 1px solid ${line}`;
+
+/** The colouring, behind the text and reading as it. */
+const INK =
+  `${BOX}; ${TYPE}; grid-area: 1 / 1; background: ${wash};` +
+  ` color: ${ink}; pointer-events: none`;
+
+/**
+ * The text, over it and invisible — only the caret and the selection show.
+ *
+ * Positioned, and that is load-bearing: the colouring under this is moved with
+ * a transform, which makes a stacking context of it, and a transformed sibling
+ * paints over an unpositioned one however the two are written. Without this the
+ * caret is behind the colouring and a reader cannot see where they are.
+ */
+const EDITOR =
+  `${BOX}; ${TYPE}; grid-area: 1 / 1; background: transparent;` +
+  " position: relative; z-index: 1;" +
+  ` color: transparent; caret-color: ${ink}; resize: none;` +
+  " border-color: transparent; outline: none";
+
+const PANEL = "display: grid; gap: 12px; align-content: start; min-width: 0";
+
+// No margin of its own: the row below owns the gap. Centring a flex item
+// centres its margin box, so a bottom margin here rides the text up and leaves
+// it sitting above the control beside it.
+const HEAD =
+  `margin: 0; font-family: ${mono}; font-size: 11.5px;` +
+  ` letter-spacing: 0.06em; color: ${muted}`;
+
+// One slot, two fillings. The device and the bundle swap in it, and both are
+// the editor's height exactly, so the switch moves nothing on the page — which
+// is also what fixes the width below rather than the height.
+//
+// A phone, where this was a plain bezel. What draws inside it today is the web
+// client, and the shape is ahead of that on purpose: iOS and Android clients
+// are what a bundle is for, and the roadmap is what says the alpha is web only.
+// The honesty is carried there rather than by refusing to draw a notch here.
+const TALL = "height: 700px; box-sizing: border-box";
+
+/**
+ * The device the screen sits in.
+ *
+ * The bezel is a padding rather than a border, so the corner outside and the
+ * corner inside are two radii that can be tuned against each other — a border
+ * would force one to be the other plus its width.
+ */
+const DEVICE =
+  `${TALL}; justify-self: center; position: relative; width: 100%;` +
+  // 336 against the 700 above is not a round number chosen for looking right:
+  // it is what puts the screen inside on 19.5:9 exactly, once the bezel is
+  // taken off both sides. The body that falls out of it is 1:2.083, which is an
+  // iPhone 15 Pro to within a third of a percent.
+  //
+  // The radius is the screen's plus the bezel, so the two corners are
+  // concentric — any other number and the inner curve drifts inside the outer.
+  " max-width: 336px; padding: 12px; border-radius: 47px;" +
+  " background: light-dark(#18181b, #050506);" +
+  " box-shadow: inset 0 0 0 1px light-dark(#3f3f46, #27272a)," +
+  " 0 20px 44px light-dark(rgba(0,0,0,.20), rgba(0,0,0,.55))";
+
+/**
+ * The island, over the screen rather than inside it.
+ *
+ * A sibling and not a child: the script fills the screen with
+ * `replaceChildren`, and anything parked in there as chrome is wiped on the
+ * first compile.
+ */
+const ISLAND =
+  "position: absolute; top: 26px; left: 50%; width: 84px; height: 23px;" +
+  " margin-left: -42px; border-radius: 999px; pointer-events: none;" +
+  " background: light-dark(#18181b, #050506)";
+
+/** What the bytes draw, in the middle the way a screen sits in a device. */
+const SCREEN =
+  `width: 100%; height: 100%; box-sizing: border-box; border-radius: 35px;` +
+  ` background: ${wash}; display: grid; align-content: center;` +
+  " justify-items: center; padding: 26px 10px; overflow: hidden";
+
+/** The bytes themselves, in the same slot and at the same height. */
+const BUNDLE =
+  `${TALL}; display: block; overflow: auto; margin: 0; padding: 18px;` +
+  ` background: ${wash}; border: 1px solid ${line};` +
+  ` border-radius: ${RADIUS};` +
+  ` font-family: ${mono}; font-size: 12px; line-height: 1.7;` +
+  " word-break: break-all; white-space: pre-wrap";
+
+// The two views, as a control that says which one is up.
+const TAB =
+  `padding: 4px 11px; border: 0; border-radius: 999px; cursor: pointer;` +
+  ` font-family: ${mono}; font-size: 11px; letter-spacing: 0.06em`;
+
+const TAB_ON = `${TAB}; background: ${ink}; color: ${paper}`;
+const TAB_OFF = `${TAB}; background: transparent; color: ${muted}`;
+
+/**
+ * The label and the control, on one line above the frame.
+ *
+ * Both columns use it, including the one with no control: two headers built
+ * the same way are two headers that cannot drift apart.
+ */
+const HEAD_ROW =
+  "display: flex; align-items: center; justify-content: space-between;" +
+  " gap: 12px; min-height: 26px; margin-bottom: 10px";
+
+/**
+ * What the colouring paints, by what a token is.
+ *
+ * Colour and nothing else. A tint behind the half that ships was here and is
+ * gone: a background on a run of spans paints the words and not the leading
+ * whitespace between them, so what it drew was a ragged column of blocks down
+ * the indent rather than a region. `cs` and its backticks carry the boundary
+ * instead, which is one mark in one colour and reads as the marker it is.
+ */
+const PALETTE: Readonly<Record<string, string>> = {
+  plain: ink,
+  comment: muted,
+  string: "light-dark(#0a7c4a, #4ade80)",
+  keyword: "light-dark(#7c3aed, #c4b5fd)",
+  type: "light-dark(#0e7490, #67e8f9)",
+  number: "light-dark(#b45309, #fbbf24)",
+  splice: "light-dark(#b91c1c, #f87171)",
+  tag: "light-dark(#1d4ed8, #93c5fd)",
+  attribute: "light-dark(#0e7490, #67e8f9)",
+  tagged: "light-dark(#8a6100, #dbb774)",
+};
 
 // One name per colour the scanner reaches for. Spliced rather than looked up:
 // a palette read by a key computed at run time is an index expression, and a
@@ -93,10 +228,6 @@ const COMPLAINT =
   ` padding: 10px 12px; border-radius: 8px; border: 1px solid ${line};` +
   " background: transparent; color: inherit; font: inherit;" +
   " font-size: 13.5px; line-height: 1.5";
-
-// The frame is a corner of the page rather than a thing to look at: it holds
-// the compiler and answers questions, and nothing it draws is ever seen.
-const CORNER = "width: 0; height: 0; border: 0; position: absolute";
 
 // The words the scanner colours, kept here rather than in the script: a
 // list is a value to splice, and forty-eight of them written inline would be

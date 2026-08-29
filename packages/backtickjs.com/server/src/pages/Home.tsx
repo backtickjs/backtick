@@ -1,5 +1,5 @@
 import { Hero } from "../components/Hero.js";
-import { Playground } from "../playground/Playground.js";
+import { Playground } from "../components/Playground.js";
 import { compile, evalAndBundle } from "@backtickjs.com/schema";
 import { bundleFor } from "../compiled.js";
 import { COUNTER_EXAMPLE, EXAMPLE, POINTER_EXAMPLE } from "../play/examples.js";

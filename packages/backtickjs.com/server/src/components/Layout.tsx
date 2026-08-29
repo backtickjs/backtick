@@ -1,6 +1,5 @@
 import type { HtmlNode } from "@backtickjs/web-sdk";
 import type { Children } from "@backtickjs/core";
-import { DOCS, REPO } from "../links.js";
 import { Badge } from "./Badge.js";
 import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
@@ -56,13 +55,13 @@ export async function Layout({
           <Badge>{"ALPHA"}</Badge>
         </div>
         <nav style={NAV}>
-          <a href={DOCS} style="color: inherit">
+          <a href="/docs" style="color: inherit">
             Docs
           </a>
           {/* The mark carries no text, so the link says what it is for anyone
               not looking at it. */}
           <a
-            href={REPO}
+            href="https://github.com/trybacktick/backtick"
             aria-label="GitHub"
             style="display: flex; color: inherit"
           >

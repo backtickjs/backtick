@@ -112,11 +112,10 @@ export default async function Pointer() {
       </div>
     );
   }\`;
-}
-`;
+}`;
 
 /** A third, showing what a handler is now handed. */
 export const POINTER_EXAMPLE: Example = {
   name: "A pointer",
-  source: POINTER.trimEnd(),
+  source: POINTER,
 };
