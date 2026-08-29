@@ -1,6 +1,6 @@
 import { Hero } from "../components/Hero.js";
 import { Playground } from "../playground/Playground.js";
-import { compile } from "@backtickjs.com/schema";
+import { compile, evalAndBundle } from "@backtickjs.com/schema";
 import { bundleFor } from "../compiled.js";
 import { COUNTER_EXAMPLE, EXAMPLE, POINTER_EXAMPLE } from "../play/examples.js";
 
@@ -21,8 +21,9 @@ export async function Home() {
       <section id="try" style="padding: 28px 0 40px">
         <Playground
           example={EXAMPLE.source}
-          bundle={await bundleFor(EXAMPLE.source)}
+          drawn={await bundleFor(EXAMPLE.source)}
           compile={compile}
+          evalAndBundle={evalAndBundle}
         />
       </section>
 
@@ -33,8 +34,9 @@ export async function Home() {
       <section style="padding: 0 0 40px">
         <Playground
           example={COUNTER_EXAMPLE.source}
-          bundle={await bundleFor(COUNTER_EXAMPLE.source)}
+          drawn={await bundleFor(COUNTER_EXAMPLE.source)}
           compile={compile}
+          evalAndBundle={evalAndBundle}
         />
       </section>
 
@@ -43,8 +45,9 @@ export async function Home() {
       <section style="padding: 0 0 68px">
         <Playground
           example={POINTER_EXAMPLE.source}
-          bundle={await bundleFor(POINTER_EXAMPLE.source)}
+          drawn={await bundleFor(POINTER_EXAMPLE.source)}
           compile={compile}
+          evalAndBundle={evalAndBundle}
         />
       </section>
     </>

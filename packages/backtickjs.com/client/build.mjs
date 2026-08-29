@@ -1,9 +1,5 @@
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
-import { fileURLToPath, pathToFileURL } from "node:url";
-import { readFile } from "node:fs/promises";
-import { readdir } from "node:fs/promises";
 import { build } from "esbuild";
 
 /**
@@ -23,13 +19,12 @@ import { build } from "esbuild";
 // agreeing on one string is what makes a client that needs no wiring possible.
 const PUBLIC = "/client/";
 
-// The name the compiler answers to once a browser has run it. Chosen here
-// rather than by that package, because it is this build that writes both the
-// script defining it and the script reading it.
+// The name the compiler answers to once a browser has run it. `globalName` is
+// why nothing writes it by hand: what a browser gets is exactly the module's own
+// surface, rather than a second one assembled beside it. Chosen here because
+// this build writes both the script defining it and the script reading it.
 const COMPILER = "backtickCompiler";
 const FRAME = `${PUBLIC}compile/`;
-
-const here = fileURLToPath(new URL(".", import.meta.url));
 
 /** A name carrying the hash of what is at it, so nothing is ever stale. */
 function named(name, source, extension = "js") {
@@ -37,9 +32,9 @@ function named(name, source, extension = "js") {
   return { name: `${name}-${hash.slice(0, 16)}.${extension}`, source };
 }
 
-async function bundled(contents, options = {}) {
+async function bundled(entry, options = {}) {
   const { outputFiles } = await build({
-    stdin: { contents, resolveDir: here, loader: "js" },
+    entryPoints: [entry],
     bundle: true,
     format: "iife",
     platform: "browser",
@@ -55,7 +50,7 @@ async function bundled(contents, options = {}) {
 // because reaching the frame is how it answers.
 const client = named(
   "client",
-  await bundled(`import "./src/index.js";`, {
+  await bundled("src/index.ts", {
     define: { BACKTICK_FRAME_URL: JSON.stringify(FRAME) },
   }),
 );
@@ -64,7 +59,7 @@ const client = named(
 // takes. Small, because the parser is not in it — that is the other script.
 const harness = named(
   "frame",
-  await bundled(`import "./src/frame/entry.js";`, {
+  await bundled("src/frame/entry.ts", {
     define: { BACKTICK_COMPILER: COMPILER },
   }),
 );
@@ -74,10 +69,7 @@ const harness = named(
 // the harness: one of these is three and a half megabytes and the other is not.
 const compiler = named(
   "compiler",
-  await bundled(
-    `import * as compiler from "./src/browserTranspile.js";` +
-      ` globalThis.${COMPILER} = compiler;`,
-  ),
+  await bundled("src/browserTranspile.ts", { globalName: COMPILER }),
 );
 
 // No content policy on this document, and that is forced rather than chosen: it

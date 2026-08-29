@@ -1,6 +1,11 @@
 import { For, cs, state } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
 import type { HtmlNode } from "@backtickjs/web-sdk";
+import type {
+  Diagnostic,
+  compile,
+  evalAndBundle,
+} from "@backtickjs.com/schema";
 import {
   HEAD_ROW,
   DEVICE,
@@ -32,25 +37,28 @@ const attribute = PALETTE["attribute"]!;
 const tagged = PALETTE["tagged"]!;
 
 /**
- * What a page hands this to compile with, and what comes back.
+ * What a page hands this to compile with.
  *
- * Declared here rather than imported, because the client that answers for it is
- * the page's: this package draws an editor and asks somebody else to compile
- * what is in it. A page with no compiler has no business drawing one of these.
+ * The schema's own, rather than the same shapes written again here: what a
+ * client answers for is generated from one declaration, and a second copy of it
+ * is a second thing to keep true.
+ *
+ * These are the types of the values a page splices, which is why they are read
+ * off the imports rather than spelled: `compile` is a `Client<…>` and a prop
+ * holding one has to say so.
  */
-export type Diagnostic = {
-  readonly message: string;
-  readonly start: number | null;
-  readonly length: number | null;
-};
+export type Compile = typeof compile;
+export type EvalAndBundle = typeof evalAndBundle;
 
-export type Compile = Client<
-  (
-    source: string,
-    onBundle: (bundle: string) => void,
-    onDiagnostics: (diagnostics: Diagnostic[]) => void,
-  ) => void
->;
+/**
+ * The schema's `Diagnostic`, mapped.
+ *
+ * The shape is still the schema's — this restates only that it is an object.
+ * The generator writes an interface, and an interface has no implicit index
+ * signature where a `ClientValue` wants one, so the interface itself cannot be
+ * held in state or spliced.
+ */
+type Said = { [K in keyof Diagnostic]: Diagnostic[K] };
 
 // The editor beside what it draws, which is the pairing that matters: a reader
 // changes a line and looks right, not down.
@@ -181,22 +189,30 @@ const SETTLE = 250;
 // one a consumer cannot resolve. `core` is the surface, so it says `core`.
 export async function Playground({
   example,
-  bundle: first,
+  drawn,
   compile,
+  // Bound to another name because the script below keeps a `bundle` of its own:
+  // the one it is showing. This is what makes the next one.
+  evalAndBundle: fold,
 }: {
   example: string;
-  // What the build made of the example, so a page draws something before
-  // anybody has typed. Compiled by whoever draws this, with the same client
-  // that answers `compile` — this package has no compiler of its own.
-  bundle: string;
+  // What the build already drew, so a page shows something before anybody has
+  // typed. Made by whoever draws this, with the same client that answers the
+  // two names below — this file has no compiler of its own.
+  drawn: string;
   // The page's own, spliced into the script below. It is the one thing this
   // cannot do for itself: a parser, somewhere to run what it emits, and a
   // bundler to fold what that draws.
   compile: Compile;
+  // The other half, named for the running rather than only the folding: this is
+  // where what a reader typed executes. Two names because the two fail in
+  // different ways — a half-written line is the compiler speaking, and code
+  // that throws while it runs is not.
+  evalAndBundle: EvalAndBundle;
 }): Promise<Client<HtmlNode>> {
   return cs`{
     const source = $state($example);
-    const bundle = $state($first);
+    const bundle = $state($drawn);
     const diagnostics = $state($noDiagnostics);
     const status = $state("");
     const showing = $state("screen");
@@ -444,23 +460,35 @@ export async function Playground({
                     const id = asked.read() + 1;
                     asked.write(id);
                     status.write("compiling\u2026");
+                    const said = (diagnostic: Said[]) => {
+                      if (id === asked.read()) {
+                        status.write("");
+                        bundle.write("");
+                        diagnostics.write(diagnostic);
+                      }
+                    };
                     $compile(
                       source.read(),
-                      (drawn) => {
-                        // Late, and something newer was asked for since.
-                        if (id === asked.read()) {
-                          status.write("");
-                          diagnostics.write($noDiagnostics);
-                          bundle.write(drawn);
+                      (javascript) => {
+                        // Compiled. Whether it draws anything is the next
+                        // question, and a later keystroke may have made this
+                        // answer stale before it is asked.
+                        if (id !== asked.read()) {
+                          return;
                         }
+                        $fold(
+                          javascript,
+                          (drawn) => {
+                            if (id === asked.read()) {
+                              status.write("");
+                              diagnostics.write($noDiagnostics);
+                              bundle.write(drawn);
+                            }
+                          },
+                          said,
+                        );
                       },
-                      (said) => {
-                        if (id === asked.read()) {
-                          status.write("");
-                          bundle.write("");
-                          diagnostics.write(said);
-                        }
-                      },
+                      said,
                     );
                   }, $SETTLE),
                 );
@@ -477,11 +505,7 @@ export async function Playground({
 
           <div style={$COMPLAINTS}>
             <For each={diagnostics.read()}>
-              {(said: {
-                message: string;
-                start: number | null;
-                length: number | null;
-              }) => <p style={$COMPLAINT}>{said.message}</p>}
+              {(said: Said) => <p style={$COMPLAINT}>{said.message}</p>}
             </For>
           </div>
         </div>
@@ -538,4 +562,4 @@ export async function Playground({
 
 // Spliced rather than written, because an empty one of each still has to have a
 // type the script can read a member off.
-const noDiagnostics: Diagnostic[] = [];
+const noDiagnostics: Said[] = [];

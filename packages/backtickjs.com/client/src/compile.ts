@@ -46,14 +46,15 @@ function frame(): Promise<Window> {
 // One frame for the page, however many things ask: a second would be a second
 // three and a half megabytes for the same answers. It arrives on the first
 // question and not before, so a reader who asks nothing pays nothing.
-let asked = 0;
+let questions = 0;
 
-export function compile(
-  source: string,
-  onBundle: (bundle: string) => void,
+/** One question to the frame, and the one answer to it. */
+function ask(
+  asked: Omit<Asked, "id">,
+  onAnswer: (answer: string) => void,
   onDiagnostics: (diagnostics: Diagnostic[]) => void,
 ): void {
-  const id = ++asked;
+  const id = ++questions;
   void frame().then((window) => {
     const listen = (event: MessageEvent): void => {
       const answered = event.data as Partial<Answered> | null;
@@ -65,9 +66,25 @@ export function compile(
         onDiagnostics(answered.diagnostics);
         return;
       }
-      onBundle(answered.bundle ?? "");
+      onAnswer(answered.answer ?? "");
     };
     addEventListener("message", listen);
-    window.postMessage({ id, source } satisfies Asked, "*");
+    window.postMessage({ id, ...asked } satisfies Asked, "*");
   });
+}
+
+export function compile(
+  source: string,
+  onJavascript: (javascript: string) => void,
+  onDiagnostics: (diagnostics: Diagnostic[]) => void,
+): void {
+  ask({ source }, onJavascript, onDiagnostics);
+}
+
+export function evalAndBundle(
+  javascript: string,
+  onBundle: (bundle: string) => void,
+  onDiagnostics: (diagnostics: Diagnostic[]) => void,
+): void {
+  ask({ javascript }, onBundle, onDiagnostics);
 }

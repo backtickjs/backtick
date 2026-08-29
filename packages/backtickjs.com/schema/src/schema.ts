@@ -5,20 +5,11 @@ import type { Schema } from "@backtickjs/schema";
 /**
  * What this site's own client answers for, beside what the web does.
  *
- * One name. Compiling is the thing a bundle cannot do for itself: it wants a
- * parser, somewhere to run what the parser emitted, and a bundler to fold what
- * that drew — and of those four steps only the two ends are values a script can
- * hold. Source is a string and a bundle is a string; a module's exports and a
- * drawing are neither. So the seam falls where the values are data, and what
- * crosses it is one call.
+ * Only strings cross: a module's exports and a drawing are not values a script
+ * can hold, so the pipeline is reachable at its ends and nowhere in between.
  *
- * `builtinsOf` is where this arrives: it merges what a target answers for with
- * what the language already does, and throws if the two collide. Adding is a
- * target's to do, and this is a target adding one.
- *
- * Nothing here says how. A client may answer with a frame on an origin of its
- * own, a worker, or a round trip to a server, and neither this nor the pages
- * written against it would change.
+ * Nothing here says how. A frame, a worker, a server — a client picks, and
+ * neither this nor the pages written against it would change.
  */
 export const schema: Schema = {
   package: "@backtickjs.com/schema",
@@ -38,13 +29,10 @@ export const schema: Schema = {
       },
       {
         description:
-          "What a `backtick` is drawn with: a bundle, as the string a compiler" +
-          " answered. A prop rather than something the element goes looking" +
-          " for, so a new one redraws what is there.\n\n" +
-          "Required, because having nothing to draw is a state a page is in" +
-          " rather than a thing to draw: a page between two bundles draws no" +
-          " `backtick` at all, and this is spared answering for a case that is" +
-          " not its own.",
+          "What a `backtick` is drawn with. A prop, so a new one redraws what" +
+          " is there.\n\n" +
+          "Required: a page between two bundles draws no `backtick` at all," +
+          " rather than one holding nothing.",
       },
     ),
 
@@ -52,25 +40,22 @@ export const schema: Schema = {
       [],
       {
         message: Type.String({ readOnly: true }),
-        // Where it is, when it is somewhere. Code that failed while it ran
-        // rather than while it compiled has no span to point at, and says so by
-        // leaving these out instead of pointing at the first character.
+        // Null where there is nowhere to point: code that failed while it ran
+        // did not fail at a place in the text.
         start: Type.Union([Type.Number(), Type.Null()], { readOnly: true }),
         length: Type.Union([Type.Number(), Type.Null()], { readOnly: true }),
       },
       {
         description:
-          "Something the compiler had to say about what was written, and" +
-          " where in it. The word the rest of this repository uses.",
+          "Something the compiler had to say, and where in the source.",
       },
     ),
   },
 
   elements: {
-    // A drawing inside a drawing, declared here rather than where every target
-    // would see it: what this holds is a bundle, and a bundle is a thing an
-    // ordinary app never touches. This site is the exception, because bundles
-    // are what it is about.
+    // A drawing inside a drawing. Declared here rather than for every target,
+    // because a bundle is a thing an ordinary app never touches — and this site
+    // is about bundles.
     backtick: Type.Ref("BacktickProps"),
   },
 
@@ -81,15 +66,15 @@ export const schema: Schema = {
           description: "What somebody wrote.",
         }),
         Type.FunctionParameter(
-          "onBundle",
+          "onJavascript",
           Type.Function(
-            [Type.FunctionParameter("bundle", Type.String())],
+            [Type.FunctionParameter("javascript", Type.String())],
             Type.Void(),
           ),
           {
             description:
-              "Called with the bundle, when there is one. Measuring it is the" +
-              " caller's: a string knows its own length.",
+              "Called with the javascript, in `require`/`exports` form." +
+              " Nothing has run it yet.",
           },
         ),
         Type.FunctionParameter(
@@ -105,18 +90,63 @@ export const schema: Schema = {
           ),
           {
             description:
-              "Called instead, with what the compiler had to say. Not an" +
-              " error: a half-written line answers this way, and the call did" +
-              " what it was asked.",
+              "Called instead. Not an error: a half-written line answers this" +
+              " way, and the call did what it was asked.",
           },
         ),
       ],
       Type.Void(),
       {
         description:
-          "Compiles Backtick source to a bundle. One of the two callbacks is" +
-          " called, once. Callbacks rather than something to wait on, because" +
-          " waiting is not a thing this language does.",
+          "Backtick source, compiled to javascript. One callback is called," +
+          " once — callbacks because waiting is not a thing this language does.",
+      },
+    ),
+
+    evalAndBundle: Type.Function(
+      [
+        Type.FunctionParameter("javascript", Type.String(), {
+          description: "What `compile` answered with.",
+        }),
+        Type.FunctionParameter(
+          "onBundle",
+          Type.Function(
+            [Type.FunctionParameter("bundle", Type.String())],
+            Type.Void(),
+          ),
+          {
+            description:
+              "Called with the bundle. Measuring it is the caller's.",
+          },
+        ),
+        Type.FunctionParameter(
+          "onDiagnostics",
+          Type.Function(
+            [
+              Type.FunctionParameter(
+                "diagnostics",
+                Type.Array(Type.Ref("Diagnostic")),
+              ),
+            ],
+            Type.Void(),
+          ),
+          {
+            description:
+              "Called instead, when what was written threw while it ran or" +
+              " drew nothing. Spans are null here — it failed afterwards.",
+          },
+        ),
+      ],
+      Type.Void(),
+      {
+        description:
+          "Javascript, run for the drawing it makes, and that drawing folded" +
+          " into a bundle.\n\n" +
+          "The name says `eval` because this is where somebody else's code" +
+          " executes, and a caller should have to see that.\n\n" +
+          "Apart from `compile` because the two fail differently: a" +
+          " half-written line is the compiler speaking, and code that throws" +
+          " while it runs is not.",
       },
     ),
   },

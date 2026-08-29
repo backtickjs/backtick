@@ -1,4 +1,4 @@
-import { built, type Diagnostic } from "../bundleOf.js";
+import { bundled, compiled, type Diagnostic } from "../bundleOf.js";
 
 /**
  * The frame, as a document that answers questions.
@@ -22,9 +22,17 @@ import { built, type Diagnostic } from "../bundleOf.js";
 // parser, and importing it here would put a second copy of one in this bundle.
 declare const BACKTICK_COMPILER: typeof import("../browserTranspile.js");
 
+/**
+ * One question. `source` asks for javascript; `javascript` asks for a bundle.
+ *
+ * Two questions rather than one because they answer different things and fail
+ * in different ways — and what passes between them is a string, so the frame
+ * holds nothing between two of them.
+ */
 export type Asked = {
   readonly id: number;
-  readonly source: string;
+  readonly source?: string;
+  readonly javascript?: string;
 };
 
 /**
@@ -32,29 +40,46 @@ export type Asked = {
  *
  * Flat because the page that reads it is a bundle: narrowing a union is a thing
  * the language would rather not do, and every field here is a value a script can
- * read without asking which shape it got. An empty `diagnostics` is a bundle.
+ * read without asking which shape it got. An empty `diagnostics` means the
+ * `answer` is the one that was asked for.
  */
 export type Answered = {
   readonly id: number;
-  readonly bundle: string;
+  readonly answer: string;
   readonly diagnostics: Diagnostic[];
 };
 
-// One question, one answer carrying the id of what it answers. The frame keeps
-// nothing between two of them, so there is no protocol here beyond that.
+// The frame keeps nothing between two questions, so there is no protocol here
+// beyond an id and which field was filled in.
 addEventListener("message", (event: MessageEvent) => {
   const asked = event.data as Partial<Asked> | null;
-  if (typeof asked?.id !== "number" || typeof asked.source !== "string") {
+  if (typeof asked?.id !== "number") {
     return;
   }
-  const { id, source } = asked;
-  void built(BACKTICK_COMPILER.browserTranspile, source).then((result) => {
-    const reply: Answered = result.ok
-      ? { id, bundle: result.bundle, diagnostics: [] }
-      : { id, bundle: "", diagnostics: [...result.diagnostics] };
+  const { id } = asked;
+  const reply = (answered: Answered): void => {
     // A sandboxed frame has no origin to name and the asker is on one this
     // frame cannot name either, so `*` is the only target there is. It carries
     // nothing the asker did not ask for.
-    (event.source as WindowProxy | null)?.postMessage(reply, "*");
-  });
+    (event.source as WindowProxy | null)?.postMessage(answered, "*");
+  };
+
+  if (typeof asked.source === "string") {
+    const result = compiled(BACKTICK_COMPILER.browserTranspile, asked.source);
+    reply(
+      result.ok
+        ? { id, answer: result.javascript, diagnostics: [] }
+        : { id, answer: "", diagnostics: [...result.diagnostics] },
+    );
+    return;
+  }
+  if (typeof asked.javascript === "string") {
+    void bundled(asked.javascript).then((result) => {
+      reply(
+        result.ok
+          ? { id, answer: result.bundle, diagnostics: [] }
+          : { id, answer: "", diagnostics: [...result.diagnostics] },
+      );
+    });
+  }
 });

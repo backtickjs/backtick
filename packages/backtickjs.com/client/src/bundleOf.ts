@@ -23,6 +23,11 @@ export interface Diagnostic {
 }
 
 /** A bundle, or the reasons there is none. */
+/** Javascript, or the reasons there is none. */
+export type Compiled =
+  | { readonly ok: true; readonly javascript: string }
+  | { readonly ok: false; readonly diagnostics: readonly Diagnostic[] };
+
 /** A bundle, or the reasons there is none. */
 export type Built =
   | { readonly ok: true; readonly bundle: string }
@@ -52,14 +57,20 @@ const MODULES: Readonly<Record<string, unknown>> = {
  * `new Function`, which is why it is here rather than in a package a page might
  * want to load without giving anything permission to evaluate.
  */
-export async function built(
+/**
+ * Backtick source, compiled to javascript.
+ *
+ * Nothing has run yet when this answers: what comes back is text in
+ * `require`/`exports` form, and running it is the other half.
+ */
+export function compiled(
   transpile: typeof browserTranspile,
   source: string,
-): Promise<Built> {
+): Compiled {
   const diagnostics: ts.Diagnostic[] = [];
-  let js: string;
+  let javascript: string;
   try {
-    js = transpile(EXAMPLE, source, (diagnostic) =>
+    javascript = transpile(EXAMPLE, source, (diagnostic) =>
       diagnostics.push(diagnostic),
     );
   } catch (thrown: unknown) {
@@ -67,19 +78,33 @@ export async function built(
     // diagnostic is, because to whoever asked it is the same thing.
     return { ok: false, diagnostics: [thrownAs(thrown)] };
   }
-  // A file the compiler had something to say about is not compiled, whatever came
-  // back: the emitted text for one is a guess about what was meant.
+  // A file the compiler had something to say about is not compiled, whatever
+  // came back: the emitted text for one is a guess about what was meant.
   if (diagnostics.length > 0) {
     return { ok: false, diagnostics: diagnostics.map(flattened) };
   }
+  return { ok: true, javascript };
+}
+
+/**
+ * Compiled javascript, run for the drawing it makes, and that drawing folded.
+ *
+ * Running is the half the compiler does not do. It is also the half that needs
+ * `new Function`, which is why it is here rather than in a package a page might
+ * want to load without giving anything permission to evaluate.
+ */
+export async function bundled(javascript: string): Promise<Built> {
   try {
-    const drawing = await drawingOf(run(js));
-    const bundle = JSON.stringify(await core.bundler.run(drawing));
-    return { ok: true, bundle };
+    const drawing = await drawingOf(run(javascript));
+    return {
+      ok: true,
+      bundle: JSON.stringify(await core.bundler.run(drawing)),
+    };
   } catch (thrown: unknown) {
-    // What the reader wrote threw while it ran. That is something to say about
-    // this source rather than a broken page, so it goes back the way the
-    // compiler's own diagnostics do.
+    // What was written threw while it ran, or drew nothing to fold. That is
+    // something to say about this source rather than a broken page, so it goes
+    // back the way the compiler's own diagnostics do — pointing nowhere,
+    // because nothing failed at a place in the text.
     return { ok: false, diagnostics: [thrownAs(thrown)] };
   }
 }

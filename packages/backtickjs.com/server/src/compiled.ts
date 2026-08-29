@@ -1,5 +1,5 @@
 import { browserTranspile } from "@backtickjs.com/client/browserTranspile";
-import { built } from "@backtickjs.com/client/bundleOf";
+import { bundled, compiled } from "@backtickjs.com/client/bundleOf";
 
 /**
  * An example, compiled while the page is built.
@@ -13,10 +13,18 @@ import { built } from "@backtickjs.com/client/bundleOf";
  * answer for, so this throws rather than drawing an empty one.
  */
 export async function bundleFor(source: string): Promise<string> {
-  const result = await built(browserTranspile, source);
+  const javascript = compiled(browserTranspile, source);
+  if (!javascript.ok) {
+    throw new Error(
+      `backtick: an example does not compile — ${javascript.diagnostics
+        .map((one) => one.message)
+        .join("; ")}`,
+    );
+  }
+  const result = await bundled(javascript.javascript);
   if (!result.ok) {
     throw new Error(
-      `backtick: an example does not compile — ${result.diagnostics
+      `backtick: an example does not draw — ${result.diagnostics
         .map((one) => one.message)
         .join("; ")}`,
     );

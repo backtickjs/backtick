@@ -6,6 +6,6 @@
  * have; what differs is what the table answers for.
  */
 import { defineClient } from "@backtickjs/web-client";
-import { compile } from "./compile.js";
+import { compile, evalAndBundle } from "./compile.js";
 
-defineClient({ compile } as never);
+defineClient({ compile, evalAndBundle } as never);

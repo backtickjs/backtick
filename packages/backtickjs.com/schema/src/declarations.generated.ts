@@ -174,21 +174,17 @@ export type {
 } from "@backtickjs/web-schema";
 
 /**
- * What a `backtick` is drawn with: a bundle, as the string a compiler
- * answered. A prop rather than something the element goes looking for, so a
- * new one redraws what is there.
+ * What a `backtick` is drawn with. A prop, so a new one redraws what is there.
  *
- * Required, because having nothing to draw is a state a page is in rather than
- * a thing to draw: a page between two bundles draws no `backtick` at all, and
- * this is spared answering for a case that is not its own.
+ * Required: a page between two bundles draws no `backtick` at all, rather than
+ * one holding nothing.
  */
 export interface BacktickProps {
   bundle: Prop<string>;
 }
 
 /**
- * Something the compiler had to say about what was written, and where in it.
- * The word the rest of this repository uses.
+ * Something the compiler had to say, and where in the source.
  */
 export interface Diagnostic {
   readonly message: string;
@@ -207,19 +203,37 @@ export interface Elements extends WebElements, SiteElements {}
 /** What this schema declares, which is what its own client answers for. */
 export interface SiteBuiltins {
   /**
-   * Compiles Backtick source to a bundle. One of the two callbacks is called,
-   * once. Callbacks rather than something to wait on, because waiting is not a
-   * thing this language does.
+   * Backtick source, compiled to javascript. One callback is called, once —
+   * callbacks because waiting is not a thing this language does.
    *
    * @param source What somebody wrote.
-   * @param onBundle Called with the bundle, when there is one. Measuring it is
-   * the caller's: a string knows its own length.
-   * @param onDiagnostics Called instead, with what the compiler had to say.
-   * Not an error: a half-written line answers this way, and the call did what
-   * it was asked.
+   * @param onJavascript Called with the javascript, in `require`/`exports`
+   * form. Nothing has run it yet.
+   * @param onDiagnostics Called instead. Not an error: a half-written line
+   * answers this way, and the call did what it was asked.
    */
   compile(
     source: string,
+    onJavascript: (javascript: string) => void,
+    onDiagnostics: (diagnostics: Diagnostic[]) => void,
+  ): void;
+  /**
+   * Javascript, run for the drawing it makes, and that drawing folded into a
+   * bundle.
+   *
+   * The name says `eval` because this is where somebody else's code executes,
+   * and a caller should have to see that.
+   *
+   * Apart from `compile` because the two fail differently: a half-written line
+   * is the compiler speaking, and code that throws while it runs is not.
+   *
+   * @param javascript What `compile` answered with.
+   * @param onBundle Called with the bundle. Measuring it is the caller's.
+   * @param onDiagnostics Called instead, when what was written threw while it
+   * ran or drew nothing. Spans are null here — it failed afterwards.
+   */
+  evalAndBundle(
+    javascript: string,
     onBundle: (bundle: string) => void,
     onDiagnostics: (diagnostics: Diagnostic[]) => void,
   ): void;
