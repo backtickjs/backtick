@@ -1,9 +1,9 @@
 {
-  "name": "backtickjs.com",
+  "name": "@backtickjs.com/server",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "The website at backtickjs.com, built with Backtick",
+  "description": "The half of backtickjs.com that runs above the backtick: the pages, and the build that writes them",
   "scripts": {
     "build": "tspc --noCheck --declaration && node build.mjs",
     "preview": "python3 -m http.server 4321 -d site",
