@@ -50,7 +50,7 @@ export const schema: Schema = {
         }),
         console: Type.Ref("Console", {
           description: "Somewhere to say something while writing a script.",
-        }),
+        }), 
         addEventListener: Type.Generic(
           [
             Type.GenericParameter(
@@ -389,6 +389,18 @@ export const schema: Schema = {
     }),
     Element: Type.Interface([Type.Ref("Node")], {
       className: Type.String({}),
+      scrollTo: Type.Function(
+        [
+          Type.FunctionParameter("x", Type.Number(), {
+            description: "How far along, counted in pixels.",
+          }),
+          Type.FunctionParameter("y", Type.Number(), {
+            description: "How far down.",
+          }),
+        ],
+        Type.Void(),
+        { description: "Scrolls to a position, rather than by an amount." },
+      ),
       clientHeight: Type.Number({ readOnly: true }),
       clientLeft: Type.Number({ readOnly: true }),
       clientTop: Type.Number({ readOnly: true }),
@@ -649,6 +661,24 @@ export const schema: Schema = {
       y: Type.Number({ readOnly: true }),
     }),
     HTMLInputElement: Type.Interface([Type.Ref("HTMLElement")], {
+      setSelectionRange: Type.Function(
+        [
+          Type.FunctionParameter("start", Type.Number(), {
+            description: "Where the selection begins, counted in characters.",
+          }),
+          Type.FunctionParameter("end", Type.Number(), {
+            description: "Where it ends.",
+          }),
+        ],
+        Type.Void(),
+        {
+          description:
+            "Selects part of what is typed here, and puts the caret at the end of it.",
+        },
+      ),
+      select: Type.Function([], Type.Void(), {
+        description: "Selects all of it.",
+      }),
       accept: Type.String({}),
       align: Type.String({}),
       alt: Type.String({}),
@@ -907,6 +937,24 @@ export const schema: Schema = {
       shadowRootSerializable: Type.Boolean({}),
     }),
     HTMLTextAreaElement: Type.Interface([Type.Ref("HTMLElement")], {
+      setSelectionRange: Type.Function(
+        [
+          Type.FunctionParameter("start", Type.Number(), {
+            description: "Where the selection begins, counted in characters.",
+          }),
+          Type.FunctionParameter("end", Type.Number(), {
+            description: "Where it ends.",
+          }),
+        ],
+        Type.Void(),
+        {
+          description:
+            "Selects part of what is typed here, and puts the caret at the end of it.",
+        },
+      ),
+      select: Type.Function([], Type.Void(), {
+        description: "Selects all of it.",
+      }),
       cols: Type.Number({}),
       defaultValue: Type.String({}),
       dirName: Type.String({}),
@@ -992,6 +1040,13 @@ export const schema: Schema = {
     }),
     HTMLOrSVGElement: Type.Interface([Type.Ref("EventTarget")], {
       autofocus: Type.Boolean({}),
+      focus: Type.Function([], Type.Void(), {
+        description:
+          "Gives this the keyboard, as clicking it would. What was focused before loses it.",
+      }),
+      blur: Type.Function([], Type.Void(), {
+        description: "Takes the keyboard away from this.",
+      }),
       nonce: Type.String({}),
       tabIndex: Type.Number({}),
     }),

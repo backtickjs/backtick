@@ -342,6 +342,13 @@ declare const ElementBrand: unique symbol;
 export interface Element extends Node {
   readonly [ElementBrand]: never;
   readonly className: string;
+  /**
+   * Scrolls to a position, rather than by an amount.
+   *
+   * @param x How far along, counted in pixels.
+   * @param y How far down.
+   */
+  scrollTo(x: number, y: number): void;
   readonly clientHeight: number;
   readonly clientLeft: number;
   readonly clientTop: number;
@@ -650,6 +657,17 @@ export interface HTMLImageElement extends HTMLElement {
 declare const HTMLInputElementBrand: unique symbol;
 export interface HTMLInputElement extends HTMLElement {
   readonly [HTMLInputElementBrand]: never;
+  /**
+   * Selects part of what is typed here, and puts the caret at the end of it.
+   *
+   * @param start Where the selection begins, counted in characters.
+   * @param end Where it ends.
+   */
+  setSelectionRange(start: number, end: number): void;
+  /**
+   * Selects all of it.
+   */
+  select(): void;
   readonly accept: string;
   readonly align: string;
   readonly alt: string;
@@ -1009,6 +1027,17 @@ export interface HTMLTemplateElement extends HTMLElement {
 declare const HTMLTextAreaElementBrand: unique symbol;
 export interface HTMLTextAreaElement extends HTMLElement {
   readonly [HTMLTextAreaElementBrand]: never;
+  /**
+   * Selects part of what is typed here, and puts the caret at the end of it.
+   *
+   * @param start Where the selection begins, counted in characters.
+   * @param end Where it ends.
+   */
+  setSelectionRange(start: number, end: number): void;
+  /**
+   * Selects all of it.
+   */
+  select(): void;
   readonly cols: number;
   readonly defaultValue: string;
   readonly dirName: string;
@@ -1118,6 +1147,15 @@ declare const HTMLOrSVGElementBrand: unique symbol;
 export interface HTMLOrSVGElement extends EventTarget {
   readonly [HTMLOrSVGElementBrand]: never;
   readonly autofocus: boolean;
+  /**
+   * Gives this the keyboard, as clicking it would. What was focused before
+   * loses it.
+   */
+  focus(): void;
+  /**
+   * Takes the keyboard away from this.
+   */
+  blur(): void;
   readonly nonce: string;
   readonly tabIndex: number;
 }
