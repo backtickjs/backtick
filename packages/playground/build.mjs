@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
 
@@ -49,10 +49,6 @@ async function bundled(contents, options = {}) {
   return outputFiles[0].text;
 }
 
-const site = new URL("./static/", import.meta.url);
-await rm(site, { recursive: true, force: true });
-await mkdir(site, { recursive: true });
-
 // The playground's own wiring, which is a script on a page rather than part of
 // its bundle — see `src/editor/entry.ts` for why, and the repository's
 // `docs/browser-playground.md` for what closes it.
@@ -62,7 +58,6 @@ const editor = named(
     define: { BACKTICK_FRAME_URL: JSON.stringify(FRAME) },
   }),
 );
-await writeFile(new URL(editor.name, site), editor.source);
 
 // The frame's own script: the protocol, and what running a compiled example
 // takes. Small, because the parser is not in it — that is the other script.
@@ -103,20 +98,42 @@ const document =
   `<script defer src="./${harness.name}"></script>` +
   `</head><body></body></html>`;
 
-const frame = new URL("./compile/", site);
-await mkdir(frame, { recursive: true });
-await writeFile(new URL(compiler.name, frame), compiler.source);
-await writeFile(new URL(harness.name, frame), harness.source);
-await writeFile(new URL("index.html", frame), document);
+// What a page owes this component, and the only thing it owes it: four names
+// and what is at them. Handed over rather than written to a directory, the way
+// `web-client` hands over the client — a package that writes its own files makes
+// every consumer discover where it put them, and this one would make them copy a
+// tree. A page already writes a list like this for the client, so the playground
+// joins that list rather than needing a step of its own.
+const assets = [
+  { url: `${PUBLIC}${editor.name}`, source: editor.source },
+  { url: `${FRAME}${compiler.name}`, source: compiler.source },
+  { url: `${FRAME}${harness.name}`, source: harness.source },
+  { url: `${FRAME}index.html`, source: document },
+];
 
-// What the component asks for, written where the component can import it.
+await mkdir(new URL("./dist/", import.meta.url), { recursive: true });
+await writeFile(
+  new URL("./dist/assets.js", import.meta.url),
+  `export const assets = ${JSON.stringify(assets, null, 2)};\n`,
+);
+await writeFile(
+  new URL("./dist/assets.d.ts", import.meta.url),
+  `export declare const assets: readonly {\n` +
+    `  readonly url: string;\n` +
+    `  readonly source: string;\n` +
+    `}[];\n`,
+);
+
+// The one of those the component itself has to know, because it draws it.
 await writeFile(
   new URL("./src/static.ts", import.meta.url),
-  `// Written by \`build.mjs\`. The names carry the hash of what is in them, so\n` +
-    `// a rebuilt playground is a name no cache has an old answer for.\n` +
+  `// Written by \`build.mjs\`. The name carries the hash of what is in it, so a\n` +
+    `// rebuilt playground is a name no cache has an old answer for.\n` +
     `export const EDITOR_URL = ${JSON.stringify(`${PUBLIC}${editor.name}`)};\n`,
 );
 
 console.log(
-  `playground/static: ${editor.name}, compile/{${compiler.name}, ${harness.name}}`,
+  `playground: ${assets.length} assets, ${Math.round(
+    assets.reduce((all, one) => all + one.source.length, 0) / 1024,
+  )} KB`,
 );

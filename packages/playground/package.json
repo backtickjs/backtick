@@ -10,8 +10,11 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./package.json": "./package.json",
-    "./static/*": "./static/*"
+    "./assets": {
+      "types": "./dist/assets.d.ts",
+      "default": "./dist/assets.js"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
     "build": "node build.mjs && tspc --noCheck --declaration",

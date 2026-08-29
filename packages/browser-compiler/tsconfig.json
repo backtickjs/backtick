@@ -1,8 +1,6 @@
 {
-  "extends": "../../configs/tsconfig.base.json",
+  "extends": "../../configs/tsconfig.build.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
     "emitDeclarationOnly": false,
     // A browser's globals, and nothing else's: what is here is bundled into a
     // page, so reaching for `node:fs` is a mistake the types catch.
@@ -10,6 +8,5 @@
     "module": "esnext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": []
-  },
-  "include": ["src"]
+  }
 }
