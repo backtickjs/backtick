@@ -1,4 +1,4 @@
-export * as client from "@backtickjs/web-client";
+export * as client from "@backtickjs/web-client/bundle";
 export { insert } from "./insert.js";
 
 /**

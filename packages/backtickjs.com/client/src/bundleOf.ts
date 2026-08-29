@@ -16,29 +16,17 @@ export const EXAMPLE = "example.tsx";
  * structured clone carries data and the real one is a graph with a source file
  * hanging off it.
  */
-export interface Complaint {
+export interface Diagnostic {
   readonly message: string;
-  readonly start: number;
-  readonly length: number;
-}
-
-/**
- * What a size reads as beside the word `BUNDLE`.
- *
- * Here rather than in whoever draws it, because two of them draw it: the build
- * writes the first one and the frame answers with every one after, and a reader
- * who types a character should not watch the units change.
- */
-export function sizeOf(bytes: number): string {
-  return bytes < 1024
-    ? ` \u00b7 ${bytes.toString()} B`
-    : ` \u00b7 ${(bytes / 1024).toFixed(1)} KB`;
+  readonly start: number | null;
+  readonly length: number | null;
 }
 
 /** A bundle, or the reasons there is none. */
+/** A bundle, or the reasons there is none. */
 export type Built =
-  | { readonly ok: true; readonly bundle: string; readonly bytes: number }
-  | { readonly ok: false; readonly complaints: readonly Complaint[] };
+  | { readonly ok: true; readonly bundle: string }
+  | { readonly ok: false; readonly diagnostics: readonly Diagnostic[] };
 
 // What a reader's imports may reach. Held rather than resolved, so what their
 // code imports is the module this file imported: two copies of `cs-runtime` on
@@ -76,32 +64,32 @@ export async function built(
     );
   } catch (thrown: unknown) {
     // The parser never arrived, or threw on its way in. Said the same way a
-    // complaint is, because from the page next door it is the same thing.
-    return { ok: false, complaints: [complaintOf(thrown)] };
+    // diagnostic is, because to whoever asked it is the same thing.
+    return { ok: false, diagnostics: [thrownAs(thrown)] };
   }
-  // A file the compiler complained about is not compiled, whatever else came
+  // A file the compiler had something to say about is not compiled, whatever came
   // back: the emitted text for one is a guess about what was meant.
   if (diagnostics.length > 0) {
-    return { ok: false, complaints: diagnostics.map(flattened) };
+    return { ok: false, diagnostics: diagnostics.map(flattened) };
   }
   try {
     const drawing = await drawingOf(run(js));
     const bundle = JSON.stringify(await core.bundler.run(drawing));
-    return { ok: true, bundle, bytes: new TextEncoder().encode(bundle).length };
+    return { ok: true, bundle };
   } catch (thrown: unknown) {
     // What the reader wrote threw while it ran. That is something to say about
-    // this source rather than a broken playground, so it goes back the way a
-    // compiler's complaint does.
-    return { ok: false, complaints: [complaintOf(thrown)] };
+    // this source rather than a broken page, so it goes back the way the
+    // compiler's own diagnostics do.
+    return { ok: false, diagnostics: [thrownAs(thrown)] };
   }
 }
 
-/** Anything thrown, said the way a complaint is. */
-function complaintOf(thrown: unknown): Complaint {
-  return { message: String(thrown), start: 0, length: 0 };
+/** Anything thrown, said the way a diagnostic is, pointing nowhere. */
+function thrownAs(thrown: unknown): Diagnostic {
+  return { message: String(thrown), start: null, length: null };
 }
 
-function flattened(one: ts.Diagnostic): Complaint {
+function flattened(one: ts.Diagnostic): Diagnostic {
   return {
     message:
       typeof one.messageText === "string"
@@ -118,7 +106,7 @@ function run(js: string): unknown {
     const held = MODULES[specifier];
     if (held === undefined) {
       throw new Error(
-        `the playground answers for \`@backtickjs/core\` and` +
+        `this client answers for \`@backtickjs/core\` and` +
           ` \`@backtickjs/web-sdk\` and nothing else,` +
           ` and this asked for \`${specifier}\``,
       );
@@ -140,7 +128,7 @@ async function drawingOf(module: unknown): Promise<never> {
   const held = (module as { default?: unknown }).default;
   if (held === undefined) {
     throw new Error(
-      "nothing to draw: the playground draws what a file `export default`s",
+      "nothing to draw: what is drawn is what a file `export default`s",
     );
   }
   const drawing = typeof held === "function" ? await held({}) : held;

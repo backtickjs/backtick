@@ -173,6 +173,34 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/backtickjs.com/client:
+    dependencies:
+      '@backtickjs.com/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@backtickjs/browser-compiler':
+        specifier: workspace:*
+        version: link:../../browser-compiler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@backtickjs/web-client':
+        specifier: workspace:*
+        version: link:../../web-client
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../web-sdk
+    devDependencies:
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/backtickjs.com/schema:
     dependencies:
       '@backtickjs/schema':
@@ -191,15 +219,21 @@ importers:
 
   packages/backtickjs.com/server:
     dependencies:
+      '@backtickjs.com/client':
+        specifier: workspace:*
+        version: link:../client
+      '@backtickjs.com/schema':
+        specifier: workspace:*
+        version: link:../schema
+      '@backtickjs/browser-compiler':
+        specifier: workspace:*
+        version: link:../../browser-compiler
       '@backtickjs/compiler':
         specifier: workspace:*
         version: link:../../compiler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../core
-      '@backtickjs/playground':
-        specifier: workspace:*
-        version: link:../../playground
       '@backtickjs/tspatch-plugin':
         specifier: workspace:*
         version: link:../../tspatch-plugin
@@ -517,40 +551,6 @@ importers:
       vscode-tmgrammar-test:
         specifier: ^0.1.3
         version: 0.1.3
-
-  packages/playground:
-    dependencies:
-      '@backtickjs/browser-compiler':
-        specifier: workspace:*
-        version: link:../browser-compiler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@backtickjs/web-sdk':
-        specifier: workspace:*
-        version: link:../web-sdk
-    devDependencies:
-      '@backtickjs/tsc':
-        specifier: workspace:*
-        version: link:../language-tools/tsc
-      '@backtickjs/tspatch-plugin':
-        specifier: workspace:*
-        version: link:../tspatch-plugin
-      '@types/node':
-        specifier: ^25.9.1
-        version: 25.9.1
-      esbuild:
-        specifier: ^0.25.0
-        version: 0.25.12
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      ts-patch:
-        specifier: ^4.0.1
-        version: 4.0.1
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
 
   packages/prettier-plugin:
     devDependencies:

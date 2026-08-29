@@ -1,4 +1,4 @@
-import { built, sizeOf, type Built } from "./bundle.js";
+import { built, type Diagnostic } from "../bundleOf.js";
 
 /**
  * The frame, as a document that answers questions.
@@ -20,28 +20,24 @@ import { built, sizeOf, type Built } from "./bundle.js";
 // The compiler, which is the other script this document loads. Named by the
 // build rather than imported, because it is bundled separately: it carries a
 // parser, and importing it here would put a second copy of one in this bundle.
-// What it resolves to is the name that package puts itself on.
 declare const BACKTICK_COMPILER: typeof import("@backtickjs/browser-compiler");
 
-export interface Asked {
+export type Asked = {
   readonly id: number;
   readonly source: string;
-}
+};
 
 /**
  * One answer, flat.
  *
  * Flat because the page that reads it is a bundle: narrowing a union is a thing
  * the language would rather not do, and every field here is a value a script can
- * read without asking which shape it got. `ok` says which of them mean anything.
+ * read without asking which shape it got. An empty `diagnostics` is a bundle.
  */
 export type Answered = {
   readonly id: number;
-  readonly ok: boolean;
   readonly bundle: string;
-  readonly size: string;
-  // Formatted here, where the source that gives a position its line number is.
-  readonly complaints: string[];
+  readonly diagnostics: Diagnostic[];
 };
 
 // One question, one answer carrying the id of what it answers. The frame keeps
@@ -52,43 +48,13 @@ addEventListener("message", (event: MessageEvent) => {
     return;
   }
   const { id, source } = asked;
-  void answer(source)
-    .then((result): Answered => said(id, source, result))
-    .then((reply) => {
-      // A sandboxed frame has no origin to name and the asker is on one this
-      // frame cannot name either, so `*` is the only target there is. It carries
-      // nothing the asker did not ask for.
-      (event.source as WindowProxy | null)?.postMessage(reply, "*");
-    });
+  void built(BACKTICK_COMPILER.browserTranspile, source).then((result) => {
+    const reply: Answered = result.ok
+      ? { id, bundle: result.bundle, diagnostics: [] }
+      : { id, bundle: "", diagnostics: [...result.diagnostics] };
+    // A sandboxed frame has no origin to name and the asker is on one this
+    // frame cannot name either, so `*` is the only target there is. It carries
+    // nothing the asker did not ask for.
+    (event.source as WindowProxy | null)?.postMessage(reply, "*");
+  });
 });
-
-/** What crosses, out of what `bundleOf` came back with. */
-function said(id: number, source: string, result: Built): Answered {
-  if (result.ok) {
-    return {
-      id,
-      ok: true,
-      bundle: result.bundle,
-      size: sizeOf(result.bytes),
-      complaints: [],
-    };
-  }
-  return {
-    id,
-    ok: false,
-    bundle: "",
-    size: "",
-    complaints: result.complaints.map(
-      (one) => `line ${lineOf(source, one.start)}  ${one.message}`,
-    ),
-  };
-}
-
-/** Which line a position is on, counted the way an editor counts. */
-function lineOf(source: string, at: number): number {
-  return source.slice(0, at).split("\n").length;
-}
-
-function answer(source: string): Promise<Built> {
-  return built(BACKTICK_COMPILER.browserTranspile, source);
-}

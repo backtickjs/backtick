@@ -17,20 +17,23 @@ const { outputFiles } = await build({
 const [{ text }] = outputFiles;
 const sha256 = createHash("sha256").update(text, "utf8").digest("hex");
 
-// What this package is: the client as text, and what it holds. A module rather
-// than a file, so a server imports it instead of reading it back — what to call
-// it and how long it may be cached are the app's, together.
+// The client as text, and what it holds. A module rather than a file, so a
+// server imports it instead of reading it back — what to call it and how long
+// it may be cached are the app's, together.
+//
+// Beside `dist/index.js` rather than instead of it: `.` is what this package is
+// made of, and this is what it makes.
 //
 // Written here rather than compiled: `tsc` has no source for this, because
 // `src` is what it is compiled *from*.
 mkdirSync("dist", { recursive: true });
 writeFileSync(
-  "dist/index.js",
+  "dist/bundle.js",
   `export const source = ${JSON.stringify(text)};\n` +
     `export const sha256 = ${JSON.stringify(sha256)};\n`,
 );
 writeFileSync(
-  "dist/index.d.ts",
+  "dist/bundle.d.ts",
   `export declare const source: string;\n` +
     `export declare const sha256: string;\n`,
 );

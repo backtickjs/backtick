@@ -1,11 +1,6 @@
-import { browserTranspile } from "@backtickjs/browser-compiler";
 import { For, cs, state } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
-import { window as win } from "@backtickjs/web-sdk";
-import type { HtmlNode, MessageEvent, Window } from "@backtickjs/web-sdk";
-import type { Answered } from "./frame/entry.js";
-import { built, sizeOf } from "./frame/bundle.js";
-import { FRAME_URL } from "./static.js";
+import type { HtmlNode } from "@backtickjs/web-sdk";
 import {
   HEAD_ROW,
   DEVICE,
@@ -20,7 +15,7 @@ import {
   BUNDLE,
   PALETTE,
 } from "./style.js";
-import { line, mono, muted } from "./theme.js";
+import { line, mono, muted } from "../theme.js";
 
 // One name per colour the scanner reaches for. Spliced rather than looked up:
 // a palette read by a key computed at run time is an index expression, and a
@@ -35,6 +30,27 @@ const splice = PALETTE["splice"]!;
 const tag = PALETTE["tag"]!;
 const attribute = PALETTE["attribute"]!;
 const tagged = PALETTE["tagged"]!;
+
+/**
+ * What a page hands this to compile with, and what comes back.
+ *
+ * Declared here rather than imported, because the client that answers for it is
+ * the page's: this package draws an editor and asks somebody else to compile
+ * what is in it. A page with no compiler has no business drawing one of these.
+ */
+export type Diagnostic = {
+  readonly message: string;
+  readonly start: number | null;
+  readonly length: number | null;
+};
+
+export type Compile = Client<
+  (
+    source: string,
+    onBundle: (bundle: string) => void,
+    onDiagnostics: (diagnostics: Diagnostic[]) => void,
+  ) => void
+>;
 
 // The editor beside what it draws, which is the pairing that matters: a reader
 // changes a line and looks right, not down.
@@ -165,38 +181,39 @@ const SETTLE = 250;
 // one a consumer cannot resolve. `core` is the surface, so it says `core`.
 export async function Playground({
   example,
+  bundle: first,
+  compile,
 }: {
   example: string;
+  // What the build made of the example, so a page draws something before
+  // anybody has typed. Compiled by whoever draws this, with the same client
+  // that answers `compile` — this package has no compiler of its own.
+  bundle: string;
+  // The page's own, spliced into the script below. It is the one thing this
+  // cannot do for itself: a parser, somewhere to run what it emits, and a
+  // bundler to fold what that draws.
+  compile: Compile;
 }): Promise<Client<HtmlNode>> {
-  // Compiled while the bundle is built, by the same transpiler the frame in the
-  // corner runs on a keystroke. It is why a reader who only reads never asks for
-  // a compiler, and why the page draws something rather than nothing before the
-  // megabyte behind the editor has been thought about.
-  const prepared = await built(browserTranspile, example);
-  const firstBundle = prepared.ok ? prepared.bundle : "";
-  const firstSize = prepared.ok ? sizeOf(prepared.bytes) : "";
-
   return cs`{
     const source = $state($example);
-    const bundle = $state($firstBundle);
-    const sized = $state($firstSize);
-    const complaints = $state($noComplaints);
+    const bundle = $state($first);
+    const diagnostics = $state($noDiagnostics);
     const status = $state("");
     const showing = $state("screen");
     const down = $state(0);
     const across = $state(0);
 
-    // The frame's window, once it has one. Held rather than looked up: the load
-    // handler is given the element it fired on, and this is what it kept.
-    const frame = $state($noWindow);
+    // Which request is the live one. A keystroke that lands while an answer is
+    // out bumps this, so the answer that comes back late is dropped.
     const asked = $state(0);
     const settling = $state(0);
 
-    // Whether a compiler has been asked for at all. False until a reader types,
-    // because everything before that is bytes the build already computed — and
-    // the compiler is three and a half megabytes that a reader who only reads
-    // should never pay for.
-    const wanted = $state(false);
+    // What the tab says beside the word. A string knows its own length, so the
+    // page works this out rather than being told it.
+    const sized = (n: number) =>
+      n < 1024
+        ? " \u00b7 " + n.toString() + " B"
+        : " \u00b7 " + (n / 1024).toFixed(1) + " KB";
 
     // The colouring, ported from the scanner that used to run beside the bundle.
     // Two things had to change and both are the language being what it is: there
@@ -303,11 +320,21 @@ export async function Playground({
           to = runOf(src, at + 1, true);
           colour = $tag;
           tags = tags + 1;
-        } else if (tags > 0 && braces === 0 && (c === ">" || (c === "/" && next === ">"))) {
+        } else if (
+          tags > 0 &&
+          braces === 0 &&
+          (c === ">" || (c === "/" && next === ">"))
+        ) {
           to = c === ">" ? at + 1 : at + 2;
           colour = $tag;
           tags = tags - 1;
-        } else if (tags > 0 && braces === 0 && word(c) && !word(before) && !digit(c)) {
+        } else if (
+          tags > 0 &&
+          braces === 0 &&
+          word(c) &&
+          !word(before) &&
+          !digit(c)
+        ) {
           to = runOf(src, at, false);
           colour = $attribute;
         } else if (c === "{" && tags > 0) {
@@ -322,7 +349,10 @@ export async function Playground({
           script = script - 1;
         } else if (digit(c) && !word(before)) {
           let end = at;
-          while (end < src.length && "0123456789._exXbo".indexOf(src.charAt(end)) >= 0) {
+          while (
+            end < src.length &&
+            "0123456789._exXbo".indexOf(src.charAt(end)) >= 0
+          ) {
             end = end + 1;
           }
           to = end;
@@ -408,20 +438,30 @@ export async function Playground({
               }}
               oninput={(e) => {
                 source.write(e.currentTarget.value);
-                wanted.write(true);
                 clearTimeout(settling.read());
                 settling.write(
                   setTimeout(() => {
-                    const held = frame.read();
-                    if (held !== null) {
-                      const id = asked.read() + 1;
-                      asked.write(id);
-                      status.write("compiling…");
-                      held.postMessage(
-                        { id: id, source: source.read() },
-                        "*",
-                      );
-                    }
+                    const id = asked.read() + 1;
+                    asked.write(id);
+                    status.write("compiling\u2026");
+                    $compile(
+                      source.read(),
+                      (drawn) => {
+                        // Late, and something newer was asked for since.
+                        if (id === asked.read()) {
+                          status.write("");
+                          diagnostics.write($noDiagnostics);
+                          bundle.write(drawn);
+                        }
+                      },
+                      (said) => {
+                        if (id === asked.read()) {
+                          status.write("");
+                          bundle.write("");
+                          diagnostics.write(said);
+                        }
+                      },
+                    );
                   }, $SETTLE),
                 );
               }}
@@ -436,8 +476,12 @@ export async function Playground({
           </div>
 
           <div style={$COMPLAINTS}>
-            <For each={complaints.read()}>
-              {(said: string) => <p style={$COMPLAINT}>{said}</p>}
+            <For each={diagnostics.read()}>
+              {(said: {
+                message: string;
+                start: number | null;
+                length: number | null;
+              }) => <p style={$COMPLAINT}>{said.message}</p>}
             </For>
           </div>
         </div>
@@ -458,7 +502,8 @@ export async function Playground({
                 style={showing.read() === "bundle" ? $TAB_ON : $TAB_OFF}
                 onclick={() => showing.write("bundle")}
               >
-                {"BUNDLE" + sized.read()}
+                {"BUNDLE" +
+                  (bundle.read() === "" ? "" : sized(bundle.read().length))}
               </button>
             </div>
           </div>
@@ -486,37 +531,6 @@ export async function Playground({
             {bundle.read()}
           </pre>
         </div>
-
-        {/* The compiler, in the corner, once somebody has typed. It says it is
-            ready and then answers what it is asked; the listener goes up when it
-            loads, because a script that returns a value may not do that on its
-            own. Whatever was typed while it was arriving is asked for there
-            too, since the keystroke that summoned it came and went first. */}
-        {wanted.read() ? (
-            <iframe
-            style={$CORNER}
-            sandbox="allow-scripts"
-            src={$FRAME_URL}
-            onload={(e) => {
-              const held = e.currentTarget.contentWindow;
-              frame.write(held);
-              $win.addEventListener("message", (m: MessageEvent<Answered>) => {
-                if (m.data.id === asked.read()) {
-                  status.write("");
-                  sized.write(m.data.size);
-                  bundle.write(m.data.bundle);
-                  complaints.write(m.data.complaints);
-                }
-              });
-              if (held !== null) {
-                const id = asked.read() + 1;
-                asked.write(id);
-                status.write("compiling\u2026");
-                held.postMessage({ id: id, source: source.read() }, "*");
-              }
-            }}
-          />
-        ) : null}
       </div>
     );
   }`;
@@ -524,5 +538,4 @@ export async function Playground({
 
 // Spliced rather than written, because an empty one of each still has to have a
 // type the script can read a member off.
-const noComplaints: string[] = [];
-const noWindow: Window | null = null;
+const noDiagnostics: Diagnostic[] = [];

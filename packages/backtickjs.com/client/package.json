@@ -1,9 +1,9 @@
 {
-  "name": "@backtickjs/playground",
+  "name": "@backtickjs.com/client",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "An editor beside what it draws, for any page that wants one",
+  "description": "This site's client: the web one, plus the `compile` its own schema declares",
   "main": "./dist/index.js",
   "exports": {
     ".": {
@@ -14,27 +14,27 @@
       "types": "./dist/assets.d.ts",
       "default": "./dist/assets.js"
     },
-    "./package.json": "./package.json"
+    "./bundleOf": {
+      "types": "./dist/bundleOf.d.ts",
+      "default": "./dist/bundleOf.js"
+    }
   },
   "scripts": {
-    "build": "node build.mjs && tspc --noCheck --declaration",
-    "typecheck": "backtick-tsc --noEmit",
+    "build": "tsc -b && node build.mjs",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
+    "@backtickjs.com/schema": "workspace:*",
     "@backtickjs/browser-compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
+    "@backtickjs/web-client": "workspace:*",
     "@backtickjs/web-sdk": "workspace:*"
   },
   "devDependencies": {
-    "@backtickjs/tsc": "workspace:*",
-    "@backtickjs/tspatch-plugin": "workspace:*",
-    "@types/node": "^25.9.1",
     "esbuild": "^0.25.0",
     "prettier": "^3.6.2",
-    "ts-patch": "^4.0.1",
     "typescript": "^6.0.3"
   }
 }

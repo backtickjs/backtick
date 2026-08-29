@@ -14,7 +14,6 @@
   },
   "scripts": {
     "build": "tsc -b",
-    "typecheck": "tsc -b",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"

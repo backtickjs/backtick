@@ -1,25 +1,27 @@
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
+import { createRequire } from "node:module";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { readFile } from "node:fs/promises";
+import { readdir } from "node:fs/promises";
 import { build } from "esbuild";
 
 /**
- * The playground's own files, built once when this package is built.
+ * This site's client, and the frame it answers `compile` from.
  *
- * They do not depend on what any example says, so there is nothing here for a
- * page to configure and nothing for it to call: a page copies `static/` and
- * draws the component, and the component knows these names because this wrote
- * them next door in `static.ts`.
+ * Four files: the client a page loads, the compiler, the harness that runs it,
+ * and the document those two live in. Handed over as a list rather than written
+ * to a directory a page has to come and find — the same arrangement
+ * `web-client` has with the client it publishes.
  *
  * Plain ESM outside `src`, the way `web-client`'s build script is — `src` is
  * what it bundles.
  */
 
-// Where a page serves these from. Fixed rather than configurable: the
-// component writes this url into the page and the page copies `static/` to
-// match it, and two places agreeing on one string is what makes a component
-// that needs no wiring possible at all.
-const PUBLIC = "/playground/";
+// Where the page serves these from. Fixed rather than configurable: the client
+// carries this url and the page copies the files to match it, and two places
+// agreeing on one string is what makes a client that needs no wiring possible.
+const PUBLIC = "/client/";
 
 // The name the compiler answers to once a browser has run it. Chosen here
 // rather than by that package, because it is this build that writes both the
@@ -30,9 +32,9 @@ const FRAME = `${PUBLIC}compile/`;
 const here = fileURLToPath(new URL(".", import.meta.url));
 
 /** A name carrying the hash of what is at it, so nothing is ever stale. */
-function named(name, source) {
+function named(name, source, extension = "js") {
   const hash = createHash("sha256").update(source, "utf8").digest("hex");
-  return { name: `${name}-${hash.slice(0, 16)}.js`, source };
+  return { name: `${name}-${hash.slice(0, 16)}.${extension}`, source };
 }
 
 async function bundled(contents, options = {}) {
@@ -49,6 +51,15 @@ async function bundled(contents, options = {}) {
   return outputFiles[0].text;
 }
 
+// The client, which is the web one plus `compile`. It holds the frame's url,
+// because reaching the frame is how it answers.
+const client = named(
+  "client",
+  await bundled(`import "./src/index.js";`, {
+    define: { BACKTICK_FRAME_URL: JSON.stringify(FRAME) },
+  }),
+);
+
 // The frame's own script: the protocol, and what running a compiled example
 // takes. Small, because the parser is not in it — that is the other script.
 const harness = named(
@@ -58,12 +69,9 @@ const harness = named(
   }),
 );
 
-// The compiler, bundled here from the package that is only its source. It is a
-// package of its own because the parser it carries is a dependency rather than a
-// download, and because it compiles and stops there — running what it returns is
-// the harness above, which is why the two are separate scripts rather than one.
-// It has no build of its own: what a browser needs from it is a bundle, and a
-// bundle is this script's job for everything else it serves too.
+// The compiler, bundled here from the package that is only its source. It
+// carries a parser, which is why it is a script of its own rather than part of
+// the harness: one of these is three and a half megabytes and the other is not.
 const compiler = named(
   "compiler",
   await bundled(
@@ -81,49 +89,41 @@ const compiler = named(
 //
 // Both are asked for by relative names, and the compiler goes first: the
 // harness reads a global the compiler defines.
-const document =
+const document = named(
+  "index",
   `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
-  `<title>backtick — compiler</title>` +
-  `<script defer src="./${compiler.name}"></script>` +
-  `<script defer src="./${harness.name}"></script>` +
-  `</head><body></body></html>`;
+    `<title>backtick — compiler</title>` +
+    `<script defer src="./${compiler.name}"></script>` +
+    `<script defer src="./${harness.name}"></script>` +
+    `</head><body></body></html>`,
+  "html",
+);
 
-// What a page owes this component, and the only thing it owes it: four names
-// and what is at them. Handed over rather than written to a directory, the way
-// `web-client` hands over the client — a package that writes its own files makes
-// every consumer discover where it put them, and this one would make them copy a
-// tree. A page already writes a list like this for the client, so the playground
-// joins that list rather than needing a step of its own.
 const assets = [
+  { url: `${PUBLIC}${client.name}`, source: client.source },
   { url: `${FRAME}${compiler.name}`, source: compiler.source },
   { url: `${FRAME}${harness.name}`, source: harness.source },
-  { url: `${FRAME}index.html`, source: document },
+  { url: `${FRAME}index.html`, source: document.source },
 ];
 
 await mkdir(new URL("./dist/", import.meta.url), { recursive: true });
 await writeFile(
   new URL("./dist/assets.js", import.meta.url),
-  `export const assets = ${JSON.stringify(assets, null, 2)};\n`,
+  `export const assets = ${JSON.stringify(assets, null, 2)};\n` +
+    `export const clientUrl = ${JSON.stringify(`${PUBLIC}${client.name}`)};\n`,
 );
 await writeFile(
   new URL("./dist/assets.d.ts", import.meta.url),
   `export declare const assets: readonly {\n` +
     `  readonly url: string;\n` +
     `  readonly source: string;\n` +
-    `}[];\n`,
-);
-
-// The one of those the component has to know, because it draws the frame
-// that serves it.
-await writeFile(
-  new URL("./src/static.ts", import.meta.url),
-  `// Written by \`build.mjs\`. Where the frame that holds the compiler is\n` +
-    `// served from, which this and the page it is on both have to agree about.\n` +
-    `export const FRAME_URL = ${JSON.stringify(FRAME)};\n`,
+    `}[];\n` +
+    `/** Where the page asks for the client, which is what the shell writes. */\n` +
+    `export declare const clientUrl: string;\n`,
 );
 
 console.log(
-  `playground: ${assets.length} assets, ${Math.round(
+  `client: ${assets.length} assets, ${Math.round(
     assets.reduce((all, one) => all + one.source.length, 0) / 1024,
   )} KB`,
 );
