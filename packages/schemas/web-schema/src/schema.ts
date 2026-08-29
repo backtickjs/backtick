@@ -42,6 +42,98 @@ export const schema: Schema = {
           "What an event happened to, and what a listener is attached to.",
       },
     ),
+    Window: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {
+        performance: Type.Ref("Performance", {
+          description: "The clock, for measuring how long something took.",
+        }),
+        console: Type.Ref("Console", {
+          description: "Somewhere to say something while writing a script.",
+        }),
+        addEventListener: Type.Generic(
+          [
+            Type.GenericParameter(
+              "E",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")]),
+              Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")]),
+            ),
+          ],
+          Type.Function(
+            [
+              Type.FunctionParameter("type", Type.String(), {
+                description:
+                  "Which event to listen for, named as the DOM names it.",
+              }),
+              Type.FunctionParameter(
+                "listener",
+                Type.Function(
+                  [Type.FunctionParameter("event", Type.Ref("E"))],
+                  Type.Void(),
+                ),
+              ),
+            ],
+            Type.Void(),
+          ),
+          {
+            description:
+              "Listens for an event nothing drawn here is the target of — a key pressed anywhere, a message arriving. What an element's own events are is a prop on that element, and this is the rest.",
+          },
+        ),
+        removeEventListener: Type.Generic(
+          [
+            Type.GenericParameter(
+              "E",
+              Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")]),
+              Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")]),
+            ),
+          ],
+          Type.Function(
+            [
+              Type.FunctionParameter("type", Type.String(), {
+                description:
+                  "Which event to listen for, named as the DOM names it.",
+              }),
+              Type.FunctionParameter(
+                "listener",
+                Type.Function(
+                  [Type.FunctionParameter("event", Type.Ref("E"))],
+                  Type.Void(),
+                ),
+              ),
+            ],
+            Type.Void(),
+          ),
+          {
+            description:
+              "Stops listening. The listener has to be the same one that was handed to `addEventListener` — the DOM matches by identity, so a second closure that does the same thing removes nothing.",
+          },
+        ),
+        postMessage: Type.Generic(
+          [Type.GenericParameter("T")],
+          Type.Function(
+            [
+              Type.FunctionParameter("message", Type.Ref("T"), {
+                description: "What to send. It is copied, not shared.",
+              }),
+              Type.FunctionParameter("targetOrigin", Type.String(), {
+                description:
+                  "Which origin may receive it, or `*` for any. A frame" +
+                  " sandboxed without `allow-same-origin` has an origin no" +
+                  " sender can name, so `*` is the only thing there is to say.",
+              }),
+            ],
+            Type.Void(),
+          ),
+        ),
+      },
+      {
+        description:
+          "A window — this one, or the one inside a frame. What a script may" +
+          " reach that is not an element's own is here, because that is where" +
+          " the DOM keeps it.",
+      },
+    ),
     Event: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([Type.Ref("ClientHandle")], {
@@ -248,6 +340,26 @@ export const schema: Schema = {
         total: Type.Number({ readOnly: true }),
       }),
       { description: "Something loading said how far it had got." },
+    ),
+    MessageEvent: Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Interface(
+        [Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")])],
+        {
+          data: Type.Ref("T", { readOnly: true }),
+          lastEventId: Type.String({ readOnly: true }),
+          origin: Type.String({ readOnly: true }),
+          source: Type.Union([Type.Ref("Window"), Type.Null()], {
+            readOnly: true,
+          }),
+        },
+      ),
+      {
+        description:
+          "Something another window posted. The parameter is what was posted," +
+          " rather than what the event happened to: a message is always the" +
+          " window's, so there is nothing else to say about its target.",
+      },
     ),
     ErrorEvent: Type.Generic(
       [Type.GenericParameter("T")],
@@ -495,6 +607,9 @@ export const schema: Schema = {
     }),
     HTMLIFrameElement: Type.Interface([Type.Ref("HTMLElement")], {
       align: Type.String({}),
+      contentWindow: Type.Union([Type.Ref("Window"), Type.Null()], {
+        readOnly: true,
+      }),
       allow: Type.String({}),
       allowFullscreen: Type.Boolean({}),
       frameBorder: Type.String({}),
@@ -3326,59 +3441,11 @@ export const schema: Schema = {
    * every other.
    */
   builtins: {
-    performance: Type.Ref("Performance", {
-      description: "The clock, for measuring how long something took.",
+    window: Type.Ref("Window", {
+      description:
+        "The window a script is drawn in. Imported and spliced — `$window` —" +
+        " rather than written as a bare name: a target's vocabulary is a value" +
+        " it hands over, not a word the compiler knows.",
     }),
-    console: Type.Ref("Console", {
-      description: "Somewhere to say something while writing a script.",
-    }),
-    addEventListener: Type.Function(
-      [
-        Type.FunctionParameter("type", Type.String(), {
-          description: "Which event to listen for, named as the DOM names it.",
-        }),
-        Type.FunctionParameter(
-          "listener",
-          Type.Function(
-            [
-              Type.FunctionParameter(
-                "event",
-                Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")]),
-              ),
-            ],
-            Type.Void(),
-          ),
-        ),
-      ],
-      Type.Void(),
-      {
-        description:
-          "Listens for an event nothing drawn here is the target of — a key pressed anywhere, a message arriving. What an element's own events are is a prop on that element, and this is the rest.",
-      },
-    ),
-    removeEventListener: Type.Function(
-      [
-        Type.FunctionParameter("type", Type.String(), {
-          description: "Which event to listen for, named as the DOM names it.",
-        }),
-        Type.FunctionParameter(
-          "listener",
-          Type.Function(
-            [
-              Type.FunctionParameter(
-                "event",
-                Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")]),
-              ),
-            ],
-            Type.Void(),
-          ),
-        ),
-      ],
-      Type.Void(),
-      {
-        description:
-          "Stops listening. The listener has to be the same one that was handed to `addEventListener` — the DOM matches by identity, so a second closure that does the same thing removes nothing.",
-      },
-    ),
   },
 };

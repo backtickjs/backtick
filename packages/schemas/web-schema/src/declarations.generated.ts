@@ -33,6 +33,52 @@ export interface EventTarget extends ClientHandle {
   readonly [EventTargetBrand]: never;
 }
 
+declare const WindowBrand: unique symbol;
+/**
+ * A window — this one, or the one inside a frame. What a script may reach that
+ * is not an element's own is here, because that is where the DOM keeps it.
+ */
+export interface Window extends ClientHandle {
+  readonly [WindowBrand]: never;
+  /**
+   * The clock, for measuring how long something took.
+   */
+  readonly performance: Performance;
+  /**
+   * Somewhere to say something while writing a script.
+   */
+  readonly console: Console;
+  /**
+   * Listens for an event nothing drawn here is the target of — a key pressed
+   * anywhere, a message arriving. What an element's own events are is a prop
+   * on that element, and this is the rest.
+   *
+   * @param type Which event to listen for, named as the DOM names it.
+   */
+  addEventListener<E extends Event<EventTarget>>(
+    type: string,
+    listener: (event: E) => void,
+  ): void;
+  /**
+   * Stops listening. The listener has to be the same one that was handed to
+   * `addEventListener` — the DOM matches by identity, so a second closure that
+   * does the same thing removes nothing.
+   *
+   * @param type Which event to listen for, named as the DOM names it.
+   */
+  removeEventListener<E extends Event<EventTarget>>(
+    type: string,
+    listener: (event: E) => void,
+  ): void;
+  /**
+   * @param message What to send. It is copied, not shared.
+   * @param targetOrigin Which origin may receive it, or `*` for any. A frame
+   * sandboxed without `allow-same-origin` has an origin no sender can name, so
+   * `*` is the only thing there is to say.
+   */
+  postMessage<T>(message: T, targetOrigin: string): void;
+}
+
 declare const EventBrand: unique symbol;
 /**
  * Anything that happens to an element, and what every other event here is one
@@ -253,6 +299,20 @@ export interface ProgressEvent<T> extends Event<T> {
   readonly lengthComputable: boolean;
   readonly loaded: number;
   readonly total: number;
+}
+
+declare const MessageEventBrand: unique symbol;
+/**
+ * Something another window posted. The parameter is what was posted, rather
+ * than what the event happened to: a message is always the window's, so there
+ * is nothing else to say about its target.
+ */
+export interface MessageEvent<T> extends Event<EventTarget> {
+  readonly [MessageEventBrand]: never;
+  readonly data: T;
+  readonly lastEventId: string;
+  readonly origin: string;
+  readonly source: Window | null;
 }
 
 declare const ErrorEventBrand: unique symbol;
@@ -544,6 +604,7 @@ declare const HTMLIFrameElementBrand: unique symbol;
 export interface HTMLIFrameElement extends HTMLElement {
   readonly [HTMLIFrameElementBrand]: never;
   readonly align: string;
+  readonly contentWindow: Window | null;
   readonly allow: string;
   readonly allowFullscreen: boolean;
   readonly frameBorder: string;
@@ -2207,30 +2268,7 @@ export interface Elements extends UiElements, WebElements {}
 
 /** What this schema declares, which is what its own client answers for. */
 export interface WebBuiltins {
-  performance: Performance;
-  console: Console;
-  /**
-   * Listens for an event nothing drawn here is the target of — a key pressed
-   * anywhere, a message arriving. What an element's own events are is a prop
-   * on that element, and this is the rest.
-   *
-   * @param type Which event to listen for, named as the DOM names it.
-   */
-  addEventListener(
-    type: string,
-    listener: (event: Event<EventTarget>) => void,
-  ): void;
-  /**
-   * Stops listening. The listener has to be the same one that was handed to
-   * `addEventListener` — the DOM matches by identity, so a second closure that
-   * does the same thing removes nothing.
-   *
-   * @param type Which event to listen for, named as the DOM names it.
-   */
-  removeEventListener(
-    type: string,
-    listener: (event: Event<EventTarget>) => void,
-  ): void;
+  window: Window;
 }
 
 /** What a client must answer with, for every name in scope. */

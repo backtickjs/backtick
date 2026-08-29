@@ -9,10 +9,7 @@ export { insert } from "./insert.js";
  * `web-client` is what answers.
  */
 export {
-  addEventListener,
-  console,
-  performance,
-  removeEventListener,
+  window,
 } from "@backtickjs/web-schema";
 
 /**
