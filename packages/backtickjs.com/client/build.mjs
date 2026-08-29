@@ -18,12 +18,6 @@ import { build } from "esbuild";
 // carries this url and the page copies the files to match it, and two places
 // agreeing on one string is what makes a client that needs no wiring possible.
 const PUBLIC = "/client/";
-
-// The name the compiler answers to once a browser has run it. `globalName` is
-// why nothing writes it by hand: what a browser gets is exactly the module's own
-// surface, rather than a second one assembled beside it. Chosen here because
-// this build writes both the script defining it and the script reading it.
-const COMPILER = "backtickCompiler";
 const FRAME = `${PUBLIC}compile/`;
 
 /** A name carrying the hash of what is at it, so nothing is ever stale. */
@@ -48,55 +42,9 @@ async function bundled(entry, options = {}) {
 
 // The client, which is the web one plus `compile`. It holds the frame's url,
 // because reaching the frame is how it answers.
-const client = named(
-  "client",
-  await bundled("src/index.ts", {
-    define: { BACKTICK_FRAME_URL: JSON.stringify(FRAME) },
-  }),
-);
+const client = named("client", await bundled("src/index.ts", {}));
 
-// The frame's own script: the protocol, and what running a compiled example
-// takes. Small, because the parser is not in it — that is the other script.
-const harness = named(
-  "frame",
-  await bundled("src/frame/entry.ts", {
-    define: { BACKTICK_COMPILER: COMPILER },
-  }),
-);
-
-// The compiler, bundled here from the package that is only its source. It
-// carries a parser, which is why it is a script of its own rather than part of
-// the harness: one of these is three and a half megabytes and the other is not.
-const compiler = named(
-  "compiler",
-  await bundled("src/browserTranspile.ts", { globalName: COMPILER }),
-);
-
-// No content policy on this document, and that is forced rather than chosen: it
-// is loaded in a frame sandboxed without `allow-same-origin`, which puts it on
-// an opaque origin, and `'self'` matches nothing there — a policy naming
-// `'self'` would refuse this document its own scripts. The sandbox is the
-// boundary instead, and it is the stronger one: the page around it keeps
-// `default-src 'self'`, never evaluates anything, and cannot be reached in here.
-//
-// Both are asked for by relative names, and the compiler goes first: the
-// harness reads a global the compiler defines.
-const document = named(
-  "index",
-  `<!doctype html><html lang="en"><head><meta charset="utf-8">` +
-    `<title>backtick — compiler</title>` +
-    `<script defer src="./${compiler.name}"></script>` +
-    `<script defer src="./${harness.name}"></script>` +
-    `</head><body></body></html>`,
-  "html",
-);
-
-const assets = [
-  { url: `${PUBLIC}${client.name}`, source: client.source },
-  { url: `${FRAME}${compiler.name}`, source: compiler.source },
-  { url: `${FRAME}${harness.name}`, source: harness.source },
-  { url: `${FRAME}index.html`, source: document.source },
-];
+const assets = [{ url: `${PUBLIC}${client.name}`, source: client.source }];
 
 await mkdir(new URL("./dist/", import.meta.url), { recursive: true });
 await writeFile(
