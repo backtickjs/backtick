@@ -468,6 +468,14 @@
       "keyed": true,
       "dir": "spliced-state",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "98dd5dd6",
+      "label": "bundle as a prop",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "renderer-prop",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

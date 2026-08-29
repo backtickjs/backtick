@@ -46,6 +46,5 @@ await writeFile(new URL("CNAME", site), "backtickjs.com\n");
 await writeFile(new URL(".nojekyll", site), "");
 
 console.log(
-  `site/: ${documents.length} documents,` +
-    ` ${files.length} assets`,
+  `site/: ${documents.length} documents,` + ` ${files.length} assets`,
 );

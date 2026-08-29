@@ -37,18 +37,19 @@ import type { Scope } from "./interpret.js";
  *
  * Drawn into the back of the target, and only what was drawn is ever moved: a
  * target the host is already holding something in keeps what it held, and this
- * goes after it.
+ * goes after it. A target that holds nothing else needs nothing more than that.
  *
  * An anchor says where to end instead: one of the target's children, drawn in
  * front of and kept in front of, so what the host holds after it stays after
  * what is drawn. It has to stay where it is for as long as the drawing does —
- * it is what says where the drawing ends.
+ * it is what says where the drawing ends. Left out where the target holds only
+ * this, which is every case with nothing to stay after.
  */
 export function render<N extends object>(
   bundle: Bundle,
   options: ClientOptions<N>,
   target: N,
-  anchor: N,
+  anchor?: N,
 ): () => void {
   const renderer = rendererOf(options.renderer);
   return createRoot((dispose) => {

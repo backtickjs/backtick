@@ -50,7 +50,7 @@ export const schema: Schema = {
         }),
         console: Type.Ref("Console", {
           description: "Somewhere to say something while writing a script.",
-        }), 
+        }),
         addEventListener: Type.Generic(
           [
             Type.GenericParameter(

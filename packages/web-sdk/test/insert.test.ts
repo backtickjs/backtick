@@ -82,7 +82,10 @@ describe("insert", () => {
     // the element sits decides what it draws, so a second bundle is a second
     // value rather than a second element.
     const html = insert(held, "#cart", bundle);
-    assert.match(html, /<backtick-renderer bundle="[\s\S]*?"><\/backtick-renderer>/);
+    assert.match(
+      html,
+      /<backtick-renderer bundle="[\s\S]*?"><\/backtick-renderer>/,
+    );
   });
 
   it("reads back exactly the bundle it was given", () => {

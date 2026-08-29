@@ -26,7 +26,9 @@ customElements.define(
     connectedCallback(): void {
       const bundle = this.getAttribute("bundle");
       if (bundle === null) {
-        throw new Error("backtick: a `backtick-renderer` with no `bundle` to draw");
+        throw new Error(
+          "backtick: a `backtick-renderer` with no `bundle` to draw",
+        );
       }
       this.#draw(bundle);
     }
@@ -60,9 +62,10 @@ customElements.define(
     #draw(bundle: string): void {
       this.#drop?.();
       this.style.display = "contents";
-      const anchor = document.createComment("");
-      this.replaceChildren(anchor);
-      this.#drop = draw(JSON.parse(bundle) as Bundle, anchor);
+      // Nothing else is in here, so there is nothing to draw in front of: what
+      // is drawn goes into the back of an element that was just emptied.
+      this.replaceChildren();
+      this.#drop = draw(JSON.parse(bundle) as Bundle, this);
     }
   },
 );
@@ -70,7 +73,7 @@ customElements.define(
 // The table beside the renderer is this target's own: `builtinsOf` merges it
 // with the language's and throws if a name here shadows one of those, so a
 // bundle means the same thing wherever it is drawn.
-function draw(bundle: Bundle, anchor: ChildNode): () => void {
+function draw(bundle: Bundle, target: Element): () => void {
   return render(
     bundle,
     // Cast the way the language's own table is, a few lines into
@@ -80,7 +83,6 @@ function draw(bundle: Bundle, anchor: ChildNode): () => void {
       renderer: dom,
       builtins: builtins as unknown as Readonly<Record<string, ClientValue>>,
     },
-    anchor.parentElement!,
-    anchor,
+    target,
   );
 }

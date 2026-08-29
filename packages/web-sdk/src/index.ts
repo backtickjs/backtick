@@ -8,9 +8,7 @@ export { insert } from "./insert.js";
  * and the client hands over what it stands for. The schema names them and
  * `web-client` is what answers.
  */
-export {
-  window,
-} from "@backtickjs/web-schema";
+export { window } from "@backtickjs/web-schema";
 
 /**
  * What this target draws with, and what it hands a handler.
