@@ -1,8 +1,11 @@
-import { bundler } from "@backtickjs/core";
+import { bundler, type Spliceable } from "@backtickjs/core";
 import { insert } from "@backtickjs/web-sdk";
-import { Layout } from "../components/Layout.js";
-import { Home } from "../pages/Home.js";
-import { client } from "./client.js";
+import { sha256 } from "@backtickjs.com/client/bundle";
+
+// What the client is called where it is served. The hash of what is in it
+// is in the name, so a reader never holds a stale one and the file may be
+// cached for as long as anything is willing to.
+export const client = `client-${sha256.slice(0, 16)}.js`;
 
 // What a search result and a shared link say. Here rather than beside the page,
 // because they describe the document and the page describes itself.
@@ -45,7 +48,7 @@ const template =
   `<meta property="og:title" content="${TITLE}">` +
   `<meta property="og:description" content="${DESCRIPTION}">` +
   `<meta property="og:url" content="${URL}">` +
-  `<script defer src="/${client.name}"></script>` +
+  `<script defer src="/${client}"></script>` +
   `</head><body>` +
   // Stays where it is: `insert` draws after what the body already holds, and
   // a `<noscript>` shows only when there is nothing to draw it.
@@ -53,15 +56,13 @@ const template =
   ` With scripting off there is nothing to draw it with.</p></noscript>` +
   `</body></html>`;
 
-// An element saying what to draw. The components have not run yet. The layout
-// is applied here rather than inside the page, so the page is its content and
-// the chrome is written once — and if a second page ever arrives, this is the
-// thing that grows a list.
-const page = <Layout>{await Home()}</Layout>;
-
-// Runs them, here while the site is built. What comes back is a bundle: data,
-// not HTML.
-const bundle = await bundler.run(page);
-
-/** The document, carrying that bundle as JSON. */
-export const html = insert(template, "body", bundle);
+/**
+ * A page, drawn and put in the document.
+ *
+ * The two halves of writing one, which are always these two and always in this
+ * order: what a page is, is a bundle, and a bundle is carried by a document
+ * that knows how to draw it.
+ */
+export async function htmlOf(page: Spliceable): Promise<string> {
+  return insert(template, "body", await bundler.run(page));
+}

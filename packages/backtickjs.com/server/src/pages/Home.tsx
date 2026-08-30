@@ -1,4 +1,5 @@
 import { Hero } from "../components/Hero.js";
+import { Layout } from "../components/Layout.js";
 import { Playground } from "../components/Playground.js";
 import { COUNTER } from "../examples/counter/index.js";
 import { POINTER } from "../examples/pointer/index.js";
@@ -6,7 +7,7 @@ import { WAVE } from "../examples/wave/index.js";
 
 export async function Home() {
   return (
-    <>
+    <Layout>
       <Hero
         standfirst={
           "Backtick is a server-driven UI framework: your app fetches screens" +
@@ -35,6 +36,6 @@ export async function Home() {
       <section style="padding: 0 0 68px">
         <Playground example={POINTER} />
       </section>
-    </>
+    </Layout>
   );
 }
