@@ -1,109 +1,69 @@
 import type { Diagnostic, SiteBuiltins } from "@backtickjs.com/schema";
-import type { browserTranspile } from "@backtickjs.com/compiler";
 import type ts from "typescript";
 
-// Where the page said the parser is. Read while the client is running, which is
-// the only moment a script can ask which one it is.
-const at = (document.currentScript as HTMLScriptElement | null)?.dataset[
-  "compiler"
-];
+const self = document.currentScript as HTMLScriptElement;
+const compilerUrl = self.dataset["compiler"] as string;
 
-type Transpile = typeof browserTranspile;
+type Compile = (
+  fileName: string,
+  sourceText: string,
+  addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
+) => string;
 
-let asked: Promise<Transpile> | undefined;
+// What the parser leaves on the window, which is how a classic script hands
+// anything over. Not there until it has loaded — reading it early is a
+// `ReferenceError`, which is the right thing to say about a page that asked for
+// a compiler and got something else.
+declare const BACKTICK_COMPILER: { browserTranspile: Compile };
+
+let compile: Promise<Compile> | undefined;
 
 /**
- * The parser, fetched the first time somebody types and held after that.
- *
  * A script tag rather than an import: it is three and a half megabytes, and a
  * page that is only read should never pay for it. Same origin, so the policy
  * that already allows the client allows this too.
  */
-function parser(): Promise<Transpile> {
-  asked ??= new Promise((resolve, reject) => {
-    if (at === undefined) {
-      reject(
-        new Error("backtick: this page did not say where the compiler is"),
-      );
-      return;
-    }
+function fetchCompile(): Promise<Compile> {
+  compile ??= new Promise<void>((resolve, reject) => {
     const tag = document.createElement("script");
-    tag.src = at;
-    tag.addEventListener("load", () => {
-      const held = (
-        window as unknown as {
-          BACKTICK_COMPILER?: { browserTranspile: Transpile };
-        }
-      ).BACKTICK_COMPILER;
-      if (held === undefined) {
-        reject(new Error(`backtick: ${at} left no compiler behind`));
-        return;
-      }
-      resolve(held.browserTranspile);
-    });
+    tag.src = compilerUrl;
+    tag.addEventListener("load", () => resolve());
     tag.addEventListener("error", () =>
-      reject(new Error(`backtick: no compiler at ${at}`)),
+      reject(new Error(`backtick: error loading the compiler`)),
     );
     document.head.append(tag);
-  });
-  return asked;
+  }).then(() => BACKTICK_COMPILER.browserTranspile);
+  return compile;
 }
 
-/** Anything thrown, said the way a diagnostic is, pointing nowhere. */
-function thrownAs(thrown: unknown): Diagnostic {
-  return { message: String(thrown), start: null, length: null };
+function normalizeDiagnostic(diagnostic: ts.Diagnostic): Diagnostic {
+  return {
+    message:
+      typeof diagnostic.messageText === "string"
+        ? diagnostic.messageText
+        : diagnostic.messageText.messageText,
+    start: diagnostic.start ?? 0,
+    length: diagnostic.length ?? 0,
+  };
 }
 
-/**
- * What this site answers for, beside what the web does.
- *
- * `compile` is text in and text out, and nothing about it needs `eval` — which
- * is why it is the half that can be answered from the page itself.
- *
- * `evalAndBundle` is the half that cannot: running what somebody wrote is
- * `new Function`, and a content policy is per-document, so a document of its
- * own is what makes it possible at all.
- *
- * `SiteBuiltins` and not `Builtins`, which is every name in scope: a name added
- * to this site's schema stops this file compiling until it is answered.
- */
 export const builtins: SiteBuiltins = {
   compile: (fileName, sourceText, onJavascript, onDiagnostics) => {
-    void parser().then(
-      (transpile) => {
+    void fetchCompile().then(
+      (compile) => {
         const diagnostics: ts.Diagnostic[] = [];
-        let javascript: string;
-        try {
-          javascript = transpile(fileName, sourceText, (one) =>
-            diagnostics.push(one),
-          );
-        } catch (thrown: unknown) {
-          // The parser threw on its way in. Said the way a diagnostic is,
-          // because to whoever asked it is the same thing.
-          onDiagnostics([thrownAs(thrown)]);
-          return;
-        }
-        // A file the compiler had something to say about is not compiled,
-        // whatever came back: the emitted text for one is a guess at what was
-        // meant.
+        const javascript = compile(fileName, sourceText, (one) =>
+          diagnostics.push(one),
+        );
         if (diagnostics.length > 0) {
-          // Flattened on the way out: what crosses is data, and a
-          // `ts.Diagnostic` is a graph with a source file hanging off it.
-          onDiagnostics(
-            diagnostics.map((one) => ({
-              message:
-                typeof one.messageText === "string"
-                  ? one.messageText
-                  : one.messageText.messageText,
-              start: one.start ?? 0,
-              length: one.length ?? 0,
-            })),
-          );
+          onDiagnostics(diagnostics.map(normalizeDiagnostic));
           return;
         }
         onJavascript(javascript);
       },
-      (thrown: unknown) => onDiagnostics([thrownAs(thrown)]),
+      (error: unknown) => {
+        onDiagnostics([{ message: String(error), start: null, length: null }]);
+      },
     );
   },
   evalAndBundle: () => {
