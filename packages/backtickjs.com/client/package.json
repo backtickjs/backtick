@@ -10,9 +10,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./assets": {
-      "types": "./dist/assets.d.ts",
-      "default": "./dist/assets.js"
+    "./bundle": {
+      "types": "./dist/bundle.d.ts",
+      "default": "./dist/bundle.js"
     }
   },
   "scripts": {

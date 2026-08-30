@@ -1,11 +1,17 @@
-import { assets, clientUrl } from "@backtickjs.com/client/assets";
+import { sha256, source } from "@backtickjs.com/client/bundle";
 
-// Where the page asks for the client. Its own client rather than the web's: it
-// answers for `compile`, which is a name this site's schema declares and the
-// web one has never heard of.
-export { clientUrl };
+// What the client is called where it is served. The hash of the text is in the
+// name, so a reader never holds a stale one and the file may be cached for as
+// long as anything is willing to. The package that made it has no say in this:
+// it hands over the text, and where text goes is a site's question.
+const fileName = `client-${sha256.slice(0, 16)}.js`;
 
-// What `build.mjs` writes beside the documents: the client, the compiler it
-// answers with, and the frame the two live in. Named by the package that made
-// them, so nothing here has to know what they are called.
-export const files: readonly { url: string; source: string }[] = assets;
+// Where the page asks for it, which is what the template writes. Its own client
+// rather than the web's: it answers for `compile`, which is a name this site's
+// schema declares and the web one has never heard of.
+export const clientUrl = `/${fileName}`;
+
+/** What gets written beside the documents. */
+export const files: readonly { url: string; source: string }[] = [
+  { url: clientUrl, source },
+];
