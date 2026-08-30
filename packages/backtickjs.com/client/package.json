@@ -13,14 +13,6 @@
     "./assets": {
       "types": "./dist/assets.d.ts",
       "default": "./dist/assets.js"
-    },
-    "./bundleOf": {
-      "types": "./dist/bundleOf.d.ts",
-      "default": "./dist/bundleOf.js"
-    },
-    "./browserTranspile": {
-      "types": "./dist/browserTranspile.d.ts",
-      "default": "./dist/browserTranspile.js"
     }
   },
   "scripts": {

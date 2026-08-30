@@ -1,8 +1,9 @@
 import { For, cs, state } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
 import type { HtmlNode } from "@backtickjs/web-sdk";
-import type {
-  Diagnostic,
+import type { Example } from "../examples/Example.js";
+import {
+  type Diagnostic,
   compile,
   evalAndBundle,
 } from "@backtickjs.com/schema";
@@ -172,20 +173,6 @@ const attribute = PALETTE["attribute"]!;
 const tagged = PALETTE["tagged"]!;
 
 /**
- * What a page hands this to compile with.
- *
- * The schema's own, rather than the same shapes written again here: what a
- * client answers for is generated from one declaration, and a second copy of it
- * is a second thing to keep true.
- *
- * These are the types of the values a page splices, which is why they are read
- * off the imports rather than spelled: `compile` is a `Client<…>` and a prop
- * holding one has to say so.
- */
-export type Compile = typeof compile;
-export type EvalAndBundle = typeof evalAndBundle;
-
-/**
  * The schema's `Diagnostic`, mapped.
  *
  * The shape is still the schema's — this restates only that it is an object.
@@ -312,40 +299,26 @@ const SETTLE = 250;
  *
  * Compiling is the one thing that cannot be state, because running what
  * somebody wrote needs an origin this page will not give it. So it is not done
- * here at all: it arrives as the two names below, and where they run is the
- * client's business rather than this file's.
+ * here at all: `compile` and `evalAndBundle` are the site's own builtins, and
+ * where a client runs them is that client's business rather than this file's.
  */
 // The return type written out rather than inferred: what `cs` answers is named
 // in a schema this package does not depend on, and a declaration naming it is
 // one a consumer cannot resolve. `core` is the surface, so it says `core`.
 export async function Playground({
-  // Bound to another name because the script below keeps a `source` of its own:
-  // what the reader has typed. This is only what that starts as.
-  source: opening,
-  drawn,
-  compile,
-  // Bound to another name because the script below keeps a `bundle` of its own:
-  // the one it is showing. This is what makes the next one.
-  evalAndBundle: fold,
+  // Whole, rather than the text of it: what the editor opens on is one file of
+  // an example, and which one that is, is the example's to say. It is the only
+  // thing a page decides — everything else here is the same on every one.
+  example,
 }: {
-  source: string;
-  // What the build already drew, so a page shows something before anybody has
-  // typed. Made by whoever draws this, with the same client that answers the
-  // two names below — this file has no compiler of its own.
-  drawn: string;
-  // The page's own, spliced into the script below. It is the one thing this
-  // cannot do for itself: a parser, somewhere to run what it emits, and a
-  // bundler to fold what that draws.
-  compile: Compile;
-  // The other half, named for the running rather than only the folding: this is
-  // where what a reader typed executes. Two names because the two fail in
-  // different ways — a half-written line is the compiler speaking, and code
-  // that throws while it runs is not.
-  evalAndBundle: EvalAndBundle;
+  example: Example;
 }): Promise<Client<HtmlNode>> {
   return cs`{
-    const source = $state($opening);
-    const bundle = $state($drawn);
+    // What the reader has typed, and what the build already drew — both read off
+    // the example itself, which crosses whole. The drawing is of the text beside
+    // it by construction, rather than by two props agreeing.
+    const source = $state($example.files[0].sourceText);
+    const bundle = $state($example.bundle);
     const diagnostics = $state($noDiagnostics);
     const status = $state("");
     const showing = $state("screen");
@@ -609,7 +582,7 @@ export async function Playground({
                         if (id !== asked.read()) {
                           return;
                         }
-                        $fold(
+                        $evalAndBundle(
                           javascript,
                           (drawn) => {
                             if (id === asked.read()) {
@@ -632,7 +605,7 @@ export async function Playground({
                   typing into on every keystroke, and the caret goes wherever the
                   browser puts it after that. What they type is theirs; the state
                   follows it rather than the other way round. */}
-              {$opening}
+              {$example.files[0].sourceText}
             </textarea>
           </div>
 
