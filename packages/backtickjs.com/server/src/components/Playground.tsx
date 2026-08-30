@@ -574,6 +574,7 @@ export async function Playground({
                       }
                     };
                     $compile(
+                      $example.files[0].fileName,
                       source.read(),
                       (javascript) => {
                         // Compiled. Whether it draws anything is the next

@@ -175,12 +175,12 @@ importers:
 
   packages/backtickjs.com/client:
     dependencies:
+      '@backtickjs.com/compiler':
+        specifier: workspace:*
+        version: link:../compiler
       '@backtickjs.com/schema':
         specifier: workspace:*
         version: link:../schema
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../../compiler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../core
@@ -190,6 +190,22 @@ importers:
       '@backtickjs/web-sdk':
         specifier: workspace:*
         version: link:../../web-sdk
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+    devDependencies:
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+
+  packages/backtickjs.com/compiler:
+    dependencies:
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../../compiler
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -225,6 +241,9 @@ importers:
       '@backtickjs.com/client':
         specifier: workspace:*
         version: link:../client
+      '@backtickjs.com/compiler':
+        specifier: workspace:*
+        version: link:../compiler
       '@backtickjs.com/schema':
         specifier: workspace:*
         version: link:../schema

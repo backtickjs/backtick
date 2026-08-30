@@ -7,7 +7,9 @@ import type { Client, Diagnostic } from "./declarations.generated.js";
  * Backtick source, compiled to javascript. One callback is called, once —
  * callbacks because waiting is not a thing this language does.
  *
- * @param source What somebody wrote.
+ * @param fileName What to call it. It reaches a reader in a complaint, and it
+ * is what decides whether the text is read as `.ts` or `.tsx`.
+ * @param sourceText What somebody wrote.
  * @param onJavascript Called with the javascript, in `require`/`exports` form.
  * Nothing has run it yet.
  * @param onDiagnostics Called instead. Not an error: a half-written line
@@ -15,7 +17,8 @@ import type { Client, Diagnostic } from "./declarations.generated.js";
  */
 export const compile: Client<
   (
-    source: string,
+    fileName: string,
+    sourceText: string,
     onJavascript: (javascript: string) => void,
     onDiagnostics: (diagnostics: Diagnostic[]) => void,
   ) => void

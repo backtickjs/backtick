@@ -1,9 +1,9 @@
 {
-  "name": "@backtickjs.com/client",
+  "name": "@backtickjs.com/compiler",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "This site's client: the web one, plus the `compile` its own schema declares",
+  "description": "The parser this site compiles with, as a script a page fetches when somebody types",
   "main": "./dist/index.js",
   "exports": {
     ".": {
@@ -22,11 +22,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs.com/compiler": "workspace:*",
-    "@backtickjs.com/schema": "workspace:*",
-    "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-client": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*",
+    "@backtickjs/compiler": "workspace:*",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

@@ -62,7 +62,12 @@ export const schema: Schema = {
   builtins: {
     compile: Type.Function(
       [
-        Type.FunctionParameter("source", Type.String(), {
+        Type.FunctionParameter("fileName", Type.String(), {
+          description:
+            "What to call it. It reaches a reader in a complaint, and it is" +
+            " what decides whether the text is read as `.ts` or `.tsx`.",
+        }),
+        Type.FunctionParameter("sourceText", Type.String(), {
           description: "What somebody wrote.",
         }),
         Type.FunctionParameter(
