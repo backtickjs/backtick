@@ -1,28 +1,31 @@
-import { source } from "@backtickjs.com/client/bundle";
-import { client, htmlOf } from "./html.js";
+import { sha256, source } from "@backtickjs.com/client/bundle";
 import { Home } from "./pages/Home.js";
+import { bundler } from "@backtickjs/core";
+import { insert } from "@backtickjs/web-sdk";
 
-/**
- * What is served, and where.
- *
- * A path to what is at it, the way a server takes them. This site has no
- * server: the build asks for every one of these once and writes the answer to
- * a file. Nothing here says which — a route is a route whether it is answered
- * on a request or ahead of all of them.
- */
-export const routes: Readonly<Record<string, () => Promise<string>>> =
-  {
-    "/": async () => htmlOf(<Home />),
-    
-    [`/${client}`]: async () => source,
+export const client = `client-${sha256.slice(0, 16)}.js`;
 
-    // The domain, read by GitHub from what is published — here rather than
-    // committed at the root of the repository, where it would also be the
-    // domain of anything else served from it.
-    "/CNAME": async () => "backtickjs.com\n",
+const template = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-security-policy" content="default-src 'self'">
+    <meta name="color-scheme" content="light dark">
+    <script defer src="/${client}"></script>
+  </head>
+  <body></body>
+</html>`;
 
-    // What stops Jekyll dropping files it does not recognise. The workflow
-    // uploads a directory, where this changes nothing; it is here for the day
-    // someone publishes from a branch instead.
-    "/.nojekyll": async () => "",
-  };
+export const routes: Readonly<Record<string, () => Promise<string>>> = {
+  "/": async () => {
+    const bundle = await bundler.run(<Home />);
+    return insert(template, "body", bundle);
+  },
+
+  [`/${client}`]: async () => source,
+
+  "/CNAME": async () => "backtickjs.com\n",
+
+  "/.nojekyll": async () => "",
+};

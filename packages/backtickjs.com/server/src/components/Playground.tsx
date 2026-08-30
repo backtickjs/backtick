@@ -7,7 +7,7 @@ import {
   compile,
   evalAndBundle,
 } from "@backtickjs.com/schema";
-import { ink, line, mono, muted, paper, wash } from "../theme.js";
+import { ink, line, mono, muted, paper, wash } from "./theme.js";
 
 // One corner for both panels, so the pair reads as two of the same thing. It
 // is the radius the drawn card uses, which is the most prominent one on the

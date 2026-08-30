@@ -3,7 +3,7 @@ import type { Children } from "@backtickjs/core";
 import { Badge } from "./Badge.js";
 import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
-import { ink, sans } from "../theme.js";
+import { ink, sans } from "./theme.js";
 
 // The outermost thing the bundle draws, so this is where what used to sit on
 // `<body>` now lives: type and ink inherit from here to everything on the page.

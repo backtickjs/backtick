@@ -1,4 +1,4 @@
-import { muted } from "../theme.js";
+import { muted } from "./theme.js";
 import { Button } from "./Button.js";
 
 const HERO = "padding: 40px 0";

@@ -1,6 +1,6 @@
 import type { HtmlNode } from "@backtickjs/web-sdk";
 import type { Children } from "@backtickjs/core";
-import { accent, accentEdge, accentFill, mono } from "../theme.js";
+import { accent, accentEdge, accentFill, mono } from "./theme.js";
 
 // Tinted rather than filled: the colour says which family this belongs to
 // without the pill becoming the brightest thing in the header, where the two

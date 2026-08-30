@@ -1,6 +1,6 @@
 import type { HtmlNode } from "@backtickjs/web-sdk";
 import type { Children } from "@backtickjs/core";
-import { ink, paper } from "../theme.js";
+import { ink, paper } from "./theme.js";
 
 const BASE =
   "display: inline-block; padding: 11px 20px; border-radius: 999px;" +
