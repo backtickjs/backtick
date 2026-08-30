@@ -15,6 +15,7 @@
   "dependencies": {
     "@backtickjs.com/client": "workspace:*",
     "@backtickjs.com/compiler": "workspace:*",
+    "@backtickjs.com/sandbox": "workspace:*",
     "@backtickjs.com/schema": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",

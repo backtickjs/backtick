@@ -217,6 +217,25 @@ importers:
         specifier: ^3.6.2
         version: 3.8.4
 
+  packages/backtickjs.com/sandbox:
+    dependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@backtickjs/web-sdk':
+        specifier: workspace:*
+        version: link:../../web-sdk
+    devDependencies:
+      esbuild:
+        specifier: ^0.25.0
+        version: 0.25.12
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/backtickjs.com/schema:
     dependencies:
       '@backtickjs/cs-runtime':
@@ -244,6 +263,9 @@ importers:
       '@backtickjs.com/compiler':
         specifier: workspace:*
         version: link:../compiler
+      '@backtickjs.com/sandbox':
+        specifier: workspace:*
+        version: link:../sandbox
       '@backtickjs.com/schema':
         specifier: workspace:*
         version: link:../schema

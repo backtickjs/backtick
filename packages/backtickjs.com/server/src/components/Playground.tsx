@@ -2,11 +2,7 @@ import { For, cs, state } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
 import type { HtmlNode } from "@backtickjs/web-sdk";
 import type { Example } from "../examples/Example.js";
-import {
-  type Diagnostic,
-  compile,
-  evalAndBundle,
-} from "@backtickjs.com/schema";
+import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
 import { ink, line, mono, muted, paper, wash } from "./theme.js";
 
 // One corner for both panels, so the pair reads as two of the same thing. It
@@ -299,7 +295,7 @@ const SETTLE = 250;
  *
  * Compiling is the one thing that cannot be state, because running what
  * somebody wrote needs an origin this page will not give it. So it is not done
- * here at all: `compile` and `evalAndBundle` are the site's own builtins, and
+ * here at all: `compile` and `bundle` are the site's own builtins, and
  * where a client runs them is that client's business rather than this file's.
  */
 // The return type written out rather than inferred: what `cs` answers is named
@@ -583,7 +579,7 @@ export async function Playground({
                         if (id !== asked.read()) {
                           return;
                         }
-                        $evalAndBundle(
+                        $bundle(
                           javascript,
                           (drawn) => {
                             if (id === asked.read()) {

@@ -108,7 +108,7 @@ export const schema: Schema = {
       },
     ),
 
-    evalAndBundle: Type.Function(
+    bundle: Type.Function(
       [
         Type.FunctionParameter("javascript", Type.String(), {
           description: "What `compile` answered with.",
@@ -147,8 +147,9 @@ export const schema: Schema = {
         description:
           "Javascript, run for the drawing it makes, and that drawing folded" +
           " into a bundle.\n\n" +
-          "The name says `eval` because this is where somebody else's code" +
-          " executes, and a caller should have to see that.\n\n" +
+          "Running it is `eval`, which a page saying `default-src 'self'`" +
+          " cannot do — so where this happens is somewhere the page is not," +
+          " and that is a client's to arrange.\n\n" +
           "Apart from `compile` because the two fail differently: a" +
           " half-written line is the compiler speaking, and code that throws" +
           " while it runs is not.",

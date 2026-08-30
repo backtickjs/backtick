@@ -223,8 +223,9 @@ export interface SiteBuiltins {
    * Javascript, run for the drawing it makes, and that drawing folded into a
    * bundle.
    *
-   * The name says `eval` because this is where somebody else's code executes,
-   * and a caller should have to see that.
+   * Running it is `eval`, which a page saying `default-src 'self'` cannot do —
+   * so where this happens is somewhere the page is not, and that is a client's
+   * to arrange.
    *
    * Apart from `compile` because the two fail differently: a half-written line
    * is the compiler speaking, and code that throws while it runs is not.
@@ -234,7 +235,7 @@ export interface SiteBuiltins {
    * @param onDiagnostics Called instead, when what was written threw while it
    * ran or drew nothing. Spans are null here — it failed afterwards.
    */
-  evalAndBundle(
+  bundle(
     javascript: string,
     onBundle: (bundle: string) => void,
     onDiagnostics: (diagnostics: Diagnostic[]) => void,

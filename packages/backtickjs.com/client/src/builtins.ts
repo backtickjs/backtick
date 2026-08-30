@@ -1,8 +1,9 @@
 import type { Diagnostic, SiteBuiltins } from "@backtickjs.com/schema";
 import type ts from "typescript";
 
-const self = document.currentScript as HTMLScriptElement;
-const compilerUrl = self.dataset["compiler"] as string;
+const currentScript = document.currentScript as HTMLScriptElement;
+const compilerUrl = currentScript.dataset["compiler"] as string;
+const sandboxUrl = currentScript.dataset["sandbox"] as string;
 
 type Compile = (
   fileName: string,
@@ -36,6 +37,66 @@ function fetchCompile(): Promise<Compile> {
   return compile;
 }
 
+let sandbox: Promise<Window> | undefined;
+let inside: Window | null = null;
+
+/**
+ * A document of its own, because a content policy is per-document and the one
+ * here forbids `eval`. Sandboxed without `allow-same-origin`, so what runs in
+ * there has an origin of its own and a message is the only way across.
+ */
+function fetchSandbox(): Promise<Window> {
+  sandbox ??= new Promise<Window>((resolve, reject) => {
+    const tag = document.createElement("iframe");
+    tag.setAttribute("sandbox", "allow-scripts");
+    tag.setAttribute("aria-hidden", "true");
+    tag.style.cssText = "position: absolute; width: 0; height: 0; border: 0";
+    tag.addEventListener("load", () => {
+      inside = tag.contentWindow;
+      resolve(inside as Window);
+    });
+    tag.addEventListener("error", () =>
+      reject(new Error(`backtick: error loading the sandbox`)),
+    );
+    tag.src = sandboxUrl;
+    document.body.append(tag);
+  });
+  return sandbox;
+}
+
+let asked = 0;
+const waiting = new Map<
+  number,
+  {
+    onBundle: (bundle: string) => void;
+    onDiagnostics: (diagnostics: Diagnostic[]) => void;
+  }
+>();
+
+// Only what the sandbox says: a message from anywhere else is somebody else's.
+window.addEventListener("message", (event: MessageEvent) => {
+  if (event.source !== inside) {
+    return;
+  }
+  const answer = event.data as {
+    id: number;
+    bundle?: string;
+    message?: string;
+  };
+  const back = waiting.get(answer.id);
+  if (back === undefined) {
+    return;
+  }
+  waiting.delete(answer.id);
+  if (typeof answer.bundle === "string") {
+    back.onBundle(answer.bundle);
+    return;
+  }
+  back.onDiagnostics([
+    { message: String(answer.message), start: null, length: null },
+  ]);
+});
+
 function normalizeDiagnostic(diagnostic: ts.Diagnostic): Diagnostic {
   return {
     message:
@@ -66,7 +127,16 @@ export const builtins: SiteBuiltins = {
       },
     );
   },
-  evalAndBundle: () => {
-    throw new Error("backtick: nothing here runs what was compiled yet");
+  bundle: (javascript, onBundle, onDiagnostics) => {
+    const id = ++asked;
+    waiting.set(id, { onBundle, onDiagnostics });
+    void fetchSandbox().then(
+      // `*` because the sandbox has an origin of its own and no name to give.
+      (into) => into.postMessage({ id, javascript }, "*"),
+      (error: unknown) => {
+        waiting.delete(id);
+        onDiagnostics([{ message: String(error), start: null, length: null }]);
+      },
+    );
   },
 };
