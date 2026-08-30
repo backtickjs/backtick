@@ -12,8 +12,8 @@ import { bundled, compiled } from "@backtickjs.com/client/bundleOf";
  * A page that cannot compile its own example has drawn an editor it cannot
  * answer for, so this throws rather than drawing an empty one.
  */
-export async function bundleFor(source: string): Promise<string> {
-  const javascript = compiled(browserTranspile, source);
+export async function bundleFor(sourceText: string): Promise<string> {
+  const javascript = compiled(browserTranspile, sourceText);
   if (!javascript.ok) {
     throw new Error(
       `backtick: an example does not compile — ${javascript.diagnostics

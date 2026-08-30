@@ -310,23 +310,25 @@ const SETTLE = 250;
  * that reaches into what was drawn: a handler is handed its own element, and
  * everything else it needs it already holds.
  *
- * The compiler is a frame in the corner. It is the one thing that cannot be
- * state, because running what somebody wrote needs an origin this page will not
- * give it — so it is drawn like anything else, told what to compile with
- * `postMessage`, and answers the same way.
+ * Compiling is the one thing that cannot be state, because running what
+ * somebody wrote needs an origin this page will not give it. So it is not done
+ * here at all: it arrives as the two names below, and where they run is the
+ * client's business rather than this file's.
  */
 // The return type written out rather than inferred: what `cs` answers is named
 // in a schema this package does not depend on, and a declaration naming it is
 // one a consumer cannot resolve. `core` is the surface, so it says `core`.
 export async function Playground({
-  example,
+  // Bound to another name because the script below keeps a `source` of its own:
+  // what the reader has typed. This is only what that starts as.
+  source: opening,
   drawn,
   compile,
   // Bound to another name because the script below keeps a `bundle` of its own:
   // the one it is showing. This is what makes the next one.
   evalAndBundle: fold,
 }: {
-  example: string;
+  source: string;
   // What the build already drew, so a page shows something before anybody has
   // typed. Made by whoever draws this, with the same client that answers the
   // two names below — this file has no compiler of its own.
@@ -342,7 +344,7 @@ export async function Playground({
   evalAndBundle: EvalAndBundle;
 }): Promise<Client<HtmlNode>> {
   return cs`{
-    const source = $state($example);
+    const source = $state($opening);
     const bundle = $state($drawn);
     const diagnostics = $state($noDiagnostics);
     const status = $state("");
@@ -630,7 +632,7 @@ export async function Playground({
                   typing into on every keystroke, and the caret goes wherever the
                   browser puts it after that. What they type is theirs; the state
                   follows it rather than the other way round. */}
-              {$example}
+              {$opening}
             </textarea>
           </div>
 
