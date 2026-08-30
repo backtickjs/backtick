@@ -42,8 +42,8 @@ function normalizeDiagnostic(diagnostic: ts.Diagnostic): Diagnostic {
       typeof diagnostic.messageText === "string"
         ? diagnostic.messageText
         : diagnostic.messageText.messageText,
-    start: diagnostic.start ?? 0,
-    length: diagnostic.length ?? 0,
+    start: diagnostic.start ?? null,
+    length: diagnostic.length ?? null,
   };
 }
 
