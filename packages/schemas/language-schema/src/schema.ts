@@ -837,6 +837,30 @@ export const schema: Schema = {
           "Copies an array and removes elements while, if necessary, inserting new elements in their place, returning the remaining elements.",
       },
     ),
+    "JSON.parse": Type.Function(
+      [
+        Type.FunctionParameter("text", Type.String(), {
+          description: "A valid JSON string.",
+        }),
+      ],
+      Type.Ref("ClientValue"),
+      {
+        description:
+          "Converts a JSON string into the value it describes. Throws if the" +
+          " text is not JSON.",
+      },
+    ),
+    "JSON.stringify": Type.Function(
+      [
+        Type.FunctionParameter("value", Type.Ref("ClientValue"), {
+          description: "A value to convert.",
+        }),
+      ],
+      Type.String(),
+      {
+        description: "Converts a value to the JSON string that describes it.",
+      },
+    ),
     "Math.E": Type.Number({
       description:
         "The mathematical constant e. This is Euler's number, the base of natural logarithms.",

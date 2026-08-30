@@ -426,6 +426,19 @@ export interface LanguageBuiltins {
     ...items: T[]
   ): T[];
   /**
+   * Converts a JSON string into the value it describes. Throws if the text is
+   * not JSON.
+   *
+   * @param text A valid JSON string.
+   */
+  "JSON.parse"(text: string): ClientValue;
+  /**
+   * Converts a value to the JSON string that describes it.
+   *
+   * @param value A value to convert.
+   */
+  "JSON.stringify"(value: ClientValue): string;
+  /**
    * The mathematical constant e. This is Euler's number, the base of natural
    * logarithms.
    */

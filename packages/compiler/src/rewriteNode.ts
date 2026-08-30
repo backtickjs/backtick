@@ -33,6 +33,7 @@ import { isFragmentTag } from "./isFragmentTag.js";
 // `receivers.ts`'s and never an identifier this resolves.
 const language = new Set([
   "Array.",
+  "JSON.",
   "Math.",
   "Number.",
   "String.",

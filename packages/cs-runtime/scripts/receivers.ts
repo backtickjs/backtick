@@ -49,6 +49,7 @@ const boxed: Record<string, { as: string; indexed?: TNode }> = {
  * two prefixes with two views, which is the pun one namespace ended.
  */
 const named: Record<string, { as: string }> = {
+  JSON: { as: "JSON" },
   Math: { as: "Math" },
   Array: { as: "ArrayConstructor" },
   Number: { as: "NumberConstructor" },

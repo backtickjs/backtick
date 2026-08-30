@@ -46,6 +46,7 @@ import type { TNode } from "../TNode.js";
  */
 const language: readonly string[] = [
   "Array.",
+  "JSON.",
   "Math.",
   "Number.",
   "String.",

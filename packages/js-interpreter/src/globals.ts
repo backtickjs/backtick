@@ -72,6 +72,8 @@ export const globals: Builtins = {
   "array.toReversed": (self) => self.toReversed(),
   "array.toSpliced": (self, start, deleteCount, ...items) =>
     self.toSpliced(start, deleteCount, ...items),
+  "JSON.parse": (text) => JSON.parse(text) as ClientValue,
+  "JSON.stringify": (value) => JSON.stringify(value),
   "Math.E": Math.E,
   "Math.LN10": Math.LN10,
   "Math.LN2": Math.LN2,

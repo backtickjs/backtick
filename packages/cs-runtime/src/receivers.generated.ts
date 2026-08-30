@@ -307,6 +307,22 @@ export interface Array<T> {
   readonly [index: number]: T;
 }
 
+export interface JSON {
+  /**
+   * Converts a JSON string into the value it describes. Throws if the text is
+   * not JSON.
+   *
+   * @param text A valid JSON string.
+   */
+  parse(text: string): ClientValue;
+  /**
+   * Converts a value to the JSON string that describes it.
+   *
+   * @param value A value to convert.
+   */
+  stringify(value: ClientValue): string;
+}
+
 export interface Math {
   /**
    * The mathematical constant e. This is Euler's number, the base of natural

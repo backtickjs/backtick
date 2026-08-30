@@ -1,4 +1,4 @@
 7:16-7:23 error TS0: Cannot find name 'Boolean'. A client script can only reference its own variables; splice host values with `${...}`.
-9:19-9:23 error TS0: Cannot find name 'JSON'. A client script can only reference its own variables; splice host values with `${...}`.
+9:19-9:23 error TS0: Cannot find name 'Date'. A client script can only reference its own variables; splice host values with `${...}`.
 14:10-14:19 error TS0: Cannot find name 'hostValue'. A client script can only reference its own variables; splice host values with `${...}`.
 18:3-18:8 error TS0: Cannot find name 'count'. A client script can only reference its own variables; splice host values with `${...}`.

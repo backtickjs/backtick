@@ -2,6 +2,7 @@ import type {
   Array,
   ArrayConstructor,
   Boolean,
+  JSON,
   Math,
   Number,
   NumberConstructor,
@@ -43,13 +44,14 @@ type ReadMembers<T extends object> = {
 // lib type is the whole of JavaScript's `Math`; the view beside it is the part
 // of it every host can agree on.
 //
-// The four the compiler recognises, and every one of them: a global left out
+// The ones the compiler recognises, and every one of them: a global left out
 // here is one the narrowing below never reaches, and `Number` and `String` are
 // callable, so what a script would have read them through is the host's own
 // constructor — the whole standard library, typechecking and answered by no
-// client. See `namespaces` in `rewriteNode.ts`, which is the same four.
+// client. See `namespaces` in `rewriteNode.ts`, which is the same list.
 export type ClientGlobal =
   | typeof globalThis.Array
+  | typeof globalThis.JSON
   | typeof globalThis.Math
   | typeof globalThis.Number
   | typeof globalThis.String
@@ -70,28 +72,30 @@ export type IndexKey<R> = R extends Array<any> ? number : keyof R;
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
-  T extends typeof globalThis.Math
-    ? Math
-    : T extends typeof globalThis.Array
-      ? ArrayConstructor
-      : T extends typeof globalThis.Number
-        ? NumberConstructor
-        : T extends typeof globalThis.String
-          ? StringConstructor
-          : T extends typeof globalThis.setTimeout
-            ? Builtins["setTimeout"]
-            : T extends typeof globalThis.setInterval
-              ? Builtins["setInterval"]
-              : T extends typeof globalThis.clearTimeout
-                ? Builtins["clearTimeout"]
-                : T extends typeof globalThis.clearInterval
-                  ? Builtins["clearInterval"]
-                  : T extends string | number | boolean | ClientValue[]
-                    ? Autoboxed<T>
-                    : T extends ClientElement
-                      ? {}
-                      : T extends ClientFunction
-                        ? T
-                        : T extends object
-                          ? ReadMembers<T>
-                          : T;
+  T extends typeof globalThis.JSON
+    ? JSON
+    : T extends typeof globalThis.Math
+      ? Math
+      : T extends typeof globalThis.Array
+        ? ArrayConstructor
+        : T extends typeof globalThis.Number
+          ? NumberConstructor
+          : T extends typeof globalThis.String
+            ? StringConstructor
+            : T extends typeof globalThis.setTimeout
+              ? Builtins["setTimeout"]
+              : T extends typeof globalThis.setInterval
+                ? Builtins["setInterval"]
+                : T extends typeof globalThis.clearTimeout
+                  ? Builtins["clearTimeout"]
+                  : T extends typeof globalThis.clearInterval
+                    ? Builtins["clearInterval"]
+                    : T extends string | number | boolean | ClientValue[]
+                      ? Autoboxed<T>
+                      : T extends ClientElement
+                        ? {}
+                        : T extends ClientFunction
+                          ? T
+                          : T extends object
+                            ? ReadMembers<T>
+                            : T;
