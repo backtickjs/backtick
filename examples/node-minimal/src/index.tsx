@@ -2,7 +2,7 @@ import { createServer } from "node:http";
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import * as client from "@backtickjs/web-client/bundle";
-import { insert } from "@backtickjs/web-server";
+import { embed } from "@backtickjs/html-embed";
 import { Counter } from "./Counter.js";
 
 const template = `<!doctype html>
@@ -23,7 +23,7 @@ const server = createServer(async (incoming, outgoing) => {
   const bundle = await bundler.run(counter);
 
   // A document carrying that bundle as JSON, with the client that draws it.
-  const html = insert(template, "body", bundle);
+  const html = embed(template, "body", bundle);
 
   // Ordinary HTTP from here
   outgoing.writeHead(200, { "content-type": "text/html" });

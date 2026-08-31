@@ -5,7 +5,7 @@ import { parseHTML } from "linkedom";
  * A document somebody else wrote, with a bundle drawn into it — a template from
  * another framework, a file on disk, a CMS's output.
  *
- *     insert(await readFile("index.html", "utf8"), "#cart", bundle);
+ *     embed(await readFile("index.html", "utf8"), "#cart", bundle);
  *
  * What is drawn goes inside what the selector names, after what it already holds,
  * and draws in that place — so what follows it in the markup stays after what it
@@ -21,7 +21,7 @@ import { parseHTML } from "linkedom";
  * The document is parsed and written out again, so what comes back is the same
  * HTML but not the same bytes.
  */
-export function insert(html: string, selector: string, bundle: Bundle): string {
+export function embed(html: string, selector: string, bundle: Bundle): string {
   const { document } = parseHTML(html);
   const target = document.querySelector(selector);
   if (target === null) {

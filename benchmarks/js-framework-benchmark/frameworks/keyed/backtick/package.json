@@ -31,7 +31,7 @@
     "@backtickjs/tspatch-plugin": "^0.1.0",
     "@backtickjs/web-client": "workspace:*",
     "@backtickjs/web-schema": "workspace:*",
-    "@backtickjs/web-server": "workspace:*"
+    "@backtickjs/html-embed": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "^0.1.0",

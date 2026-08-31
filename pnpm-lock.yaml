@@ -29,15 +29,15 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../packages/html-embed
       '@backtickjs/js-interpreter':
         specifier: workspace:*
         version: link:../../packages/js-interpreter
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../packages/web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../packages/web-server
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -50,6 +50,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../../../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../../../../packages/html-embed
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../../../../packages/tspatch-plugin
@@ -59,9 +62,6 @@ importers:
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../../../../packages/web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../../../../packages/web-server
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -87,15 +87,15 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../packages/html-embed
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../../packages/web-client
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../packages/web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../packages/web-server
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -121,6 +121,9 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../packages/html-embed
       '@backtickjs/tspatch-plugin':
         specifier: ^0.1.0
         version: link:../../packages/tspatch-plugin
@@ -130,9 +133,6 @@ importers:
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../packages/web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../packages/web-server
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -161,15 +161,15 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../packages/html-embed
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../../packages/web-client
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../packages/web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../packages/web-server
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -198,15 +198,15 @@ importers:
       '@backtickjs/core':
         specifier: ^0.1.0
         version: link:../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../packages/html-embed
       '@backtickjs/web-client':
         specifier: workspace:*
         version: link:../../packages/web-client
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../packages/web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../packages/web-server
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: ^0.1.0
@@ -338,15 +338,15 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../html-embed
       '@backtickjs/tspatch-plugin':
         specifier: workspace:*
         version: link:../../tspatch-plugin
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../web-schema
-      '@backtickjs/web-server':
-        specifier: workspace:*
-        version: link:../../web-server
     devDependencies:
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
@@ -509,6 +509,22 @@ importers:
       solid-js:
         specifier: ^1.9.14
         version: 1.9.14
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/html-embed:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../bundler
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -795,22 +811,6 @@ importers:
       '@backtickjs/ui-schema':
         specifier: workspace:*
         version: link:../ui-schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/web-server:
-    dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
-      linkedom:
-        specifier: ^0.18.13
-        version: 0.18.13
     devDependencies:
       prettier:
         specifier: ^3.6.2

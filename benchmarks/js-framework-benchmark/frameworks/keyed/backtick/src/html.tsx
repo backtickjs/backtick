@@ -1,6 +1,6 @@
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
-import { insert } from "@backtickjs/web-server";
+import { embed } from "@backtickjs/html-embed";
 import { Main } from "./Main.js";
 
 const template = `<!doctype html>
@@ -19,4 +19,4 @@ const template = `<!doctype html>
 
 const bundle = await bundler.run(<Main />);
 
-export const html = insert(template, "#main", bundle);
+export const html = embed(template, "#main", bundle);

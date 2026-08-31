@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import * as client from "@backtickjs/web-client/bundle";
-import { insert } from "@backtickjs/web-server";
+import { embed } from "@backtickjs/html-embed";
 import { WeatherCard } from "./WeatherCard.js";
 
 // The client is asked for at a name that says what it holds, so a rebuilt client
@@ -26,7 +26,7 @@ const server = Bun.serve({
   port: 5176,
   routes: {
     "/": async () => {
-      const page = insert(html, "body", await bundler.run(<WeatherCard />));
+      const page = embed(html, "body", await bundler.run(<WeatherCard />));
       return new Response(page, {
         headers: {
           "content-type": "text/html",

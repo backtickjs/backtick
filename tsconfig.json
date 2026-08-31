@@ -18,6 +18,6 @@
     { "path": "packages/prettier-plugin" },
     { "path": "packages/tspatch-plugin" },
     { "path": "packages/web-schema" },
-    { "path": "packages/web-server" }
+    { "path": "packages/html-embed" }
   ]
 }

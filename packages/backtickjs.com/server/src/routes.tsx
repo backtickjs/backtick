@@ -3,7 +3,7 @@ import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
 import { bundler } from "@backtickjs/bundler";
-import { insert } from "@backtickjs/web-server";
+import { embed } from "@backtickjs/html-embed";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;
 const compilerUrl = `/compiler-${compiler.sha256.slice(0, 16)}.js`;
@@ -39,7 +39,7 @@ const template = `<!doctype html>
 export const routes: Readonly<Record<string, () => Promise<string>>> = {
   "/": async () => {
     const bundle = await bundler.run(<Home />);
-    return insert(template, "body", bundle);
+    return embed(template, "body", bundle);
   },
 
   [clientUrl]: async () => client.source,

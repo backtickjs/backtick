@@ -6,4 +6,4 @@
  * component reaches for none of it, and neither does anything running in a
  * browser.
  */
-export { insert } from "./insert.js";
+export { embed } from "./embed.js";

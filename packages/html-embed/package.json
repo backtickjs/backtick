@@ -1,9 +1,9 @@
 {
-  "name": "@backtickjs/web-server",
+  "name": "@backtickjs/html-embed",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "The half of the web target that runs above the backtick: putting a bundle into a document",
+  "description": "Putting a bundle into a document somebody else wrote, as the element a web client draws it from",
   "main": "./dist/index.js",
   "exports": {
     ".": {

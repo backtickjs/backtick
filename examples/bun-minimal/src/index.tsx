@@ -1,7 +1,7 @@
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import * as client from "@backtickjs/web-client/bundle";
-import { insert } from "@backtickjs/web-server";
+import { embed } from "@backtickjs/html-embed";
 import { Counter } from "./Counter.js";
 
 const template = `<!doctype html>
@@ -25,7 +25,7 @@ const server = Bun.serve({
       const bundle = await bundler.run(counter);
 
       // A document carrying that bundle as JSON, with the client that draws it.
-      const html = insert(template, "body", bundle);
+      const html = embed(template, "body", bundle);
 
       // Ordinary HTTP from here
       return new Response(html, { headers: { "content-type": "text/html" } });

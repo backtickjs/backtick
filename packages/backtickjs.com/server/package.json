@@ -22,7 +22,7 @@
     "@backtickjs/core": "workspace:*",
     "@backtickjs/tspatch-plugin": "workspace:*",
     "@backtickjs/web-schema": "workspace:*",
-    "@backtickjs/web-server": "workspace:*"
+    "@backtickjs/html-embed": "workspace:*"
   },
   "devDependencies": {
     "@backtickjs/prettier-plugin": "workspace:*",
