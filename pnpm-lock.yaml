@@ -392,10 +392,10 @@ importers:
     dependencies:
       '@backtickjs/language-schema':
         specifier: workspace:*
-        version: link:../schemas/language-schema
+        version: link:../language-schema
       '@backtickjs/ui-schema':
         specifier: workspace:*
-        version: link:../schemas/ui-schema
+        version: link:../ui-schema
     devDependencies:
       '@backtickjs/schema':
         specifier: workspace:*
@@ -423,7 +423,7 @@ importers:
         version: link:../js-interpreter
       '@backtickjs/language-schema':
         specifier: workspace:*
-        version: link:../schemas/language-schema
+        version: link:../language-schema
       '@backtickjs/prettier-plugin':
         specifier: workspace:*
         version: link:../prettier-plugin
@@ -468,6 +468,19 @@ importers:
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/language-schema:
+    dependencies:
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -640,35 +653,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/schemas/language-schema:
-    dependencies:
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../../schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/schemas/ui-schema:
-    dependencies:
-      '@backtickjs/language-schema':
-        specifier: workspace:*
-        version: link:../language-schema
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../../schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/targets/web/client:
     devDependencies:
       '@backtickjs/core':
@@ -700,7 +684,7 @@ importers:
         version: link:../../../schema
       '@backtickjs/ui-schema':
         specifier: workspace:*
-        version: link:../../../schemas/ui-schema
+        version: link:../../../ui-schema
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -740,6 +724,22 @@ importers:
       ts-patch:
         specifier: ^4.0.1
         version: 4.0.1
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  packages/ui-schema:
+    dependencies:
+      '@backtickjs/language-schema':
+        specifier: workspace:*
+        version: link:../language-schema
+      '@backtickjs/schema':
+        specifier: workspace:*
+        version: link:../schema
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
