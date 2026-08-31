@@ -1,4 +1,4 @@
-import type { Client } from "@backtickjs/cs-runtime";
+import type { Client } from "@backtickjs/boundary";
 
 // The hole sentinels a spliced function is applied to in place of its
 // arguments, which have no value until the client runs. Where a sentinel

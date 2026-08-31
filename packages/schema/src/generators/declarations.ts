@@ -18,6 +18,7 @@ import {
 import type { TGeneric } from "../nodes/Generic.js";
 import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import type { Schema } from "../Schema.js";
+import { format } from "./format.js";
 import type { TNode } from "../TNode.js";
 
 // A schema to the names it declares, as the host language declares them.
@@ -122,7 +123,7 @@ export function declarations(schema: Schema): string {
       ? new Set([...bound, ...node.parameters.map((one) => one.name)])
       : bound;
     if (IsRef(node) && !held.has(node.$ref)) {
-      if (all.types[node.$ref] === undefined) {
+      if (all.types[node.$ref] === undefined && !format.has(node.$ref)) {
         throw new Error(
           `the schema names \`${node.$ref}\` and does not declare it`,
         );
@@ -327,6 +328,10 @@ export function declarations(schema: Schema): string {
     from.set(of, where);
   };
   for (const held of [...reached].filter((one) => !(one in schema.types))) {
+    if (format.has(held)) {
+      name(held, "@backtickjs/boundary");
+      continue;
+    }
     const offering = bases.find(([, names]) => names.includes(held));
     if (offering === undefined) {
       throw new Error(`no schema this one extends offers \`${held}\``);
@@ -344,6 +349,8 @@ export function declarations(schema: Schema): string {
   for (const held of [
     ...schema.publishes,
     ...schema.extends.flatMap(published),
+    // The format's own are written the same way and belong to nobody's layer.
+    ...format,
   ]) {
     if (!written.some((line) => new RegExp(`\\b${held}\\b`).test(line))) {
       continue;
@@ -353,9 +360,11 @@ export function declarations(schema: Schema): string {
     // up, so a target reaches it without depending on where it was written.
     name(
       held,
-      schema.publishes.includes(held)
-        ? schema.package
-        : (bases[0]?.[0] ?? schema.package),
+      format.has(held)
+        ? "@backtickjs/boundary"
+        : schema.publishes.includes(held)
+          ? schema.package
+          : (bases[0]?.[0] ?? schema.package),
     );
   }
 

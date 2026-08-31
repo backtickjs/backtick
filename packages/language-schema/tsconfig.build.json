@@ -4,5 +4,6 @@
     "emitDeclarationOnly": false,
     "sourceMap": true
   },
-  "references": [{ "path": "../schema/tsconfig.build.json" }]
+  "references": [
+    { "path": "../boundary/tsconfig.build.json" },{ "path": "../schema/tsconfig.build.json" }]
 }

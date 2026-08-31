@@ -1,4 +1,4 @@
-import type { ClientValue } from "@backtickjs/language-schema";
+import type { ClientValue } from "./ClientValue.js";
 import type { Prop } from "./Prop.js";
 
 /**

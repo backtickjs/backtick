@@ -7,7 +7,7 @@ import { bundler } from "@backtickjs/bundler";
  *
  * Written as an alias rather than an interface, which is what lets a script
  * hold it: only a type literal gets the index signature a `ClientValue` wants,
- * so an interface here is a value the seam will not take.
+ * so an interface here is a value the boundary will not take.
  */
 export type ExampleFile = {
   readonly fileName: string;

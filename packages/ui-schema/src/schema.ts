@@ -9,10 +9,9 @@ export const schema: Schema = {
 
   extends: [language],
 
-  publishes: ["Prop", "Children"],
+  publishes: [],
 
   types: {
-    ClientElement: Type.Interface([Type.Ref("ClientHandle")], {}),
 
     ForProps: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],

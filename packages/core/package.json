@@ -18,7 +18,10 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/cs-runtime": "workspace:*"
+    "@backtickjs/cs-runtime": "workspace:*",
+    "@backtickjs/boundary": "workspace:*",
+    "@backtickjs/language-schema": "workspace:*",
+    "@backtickjs/ui-schema": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

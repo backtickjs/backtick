@@ -1,4 +1,4 @@
-import type { Client, Spliceable } from "@backtickjs/cs-runtime";
+import type { Client, Spliceable } from "@backtickjs/boundary";
 import type { Ast, AstExpansion } from "./Ast.js";
 import { createHole } from "./holes.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";

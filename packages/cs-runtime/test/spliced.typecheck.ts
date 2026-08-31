@@ -1,13 +1,12 @@
 // Type-level assertions for `Spliced` and the member-access view.
 // Never executed — typechecked by `tsc -b`.
+import type { Array, Receiver } from "@backtickjs/cs-runtime";
 import type {
   Client,
-  Array,
   ClientValue,
-  Receiver,
   Spliceable,
   Spliced,
-} from "@backtickjs/cs-runtime";
+} from "@backtickjs/boundary";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare function receiver<T extends ClientValue>(value: T): Receiver<T>;

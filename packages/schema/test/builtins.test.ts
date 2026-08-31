@@ -123,30 +123,23 @@ describe("builtins", () => {
     assert.doesNotMatch(written, /\bstate\b/);
   });
 
-  it("reads the two names it writes with beside it, at the root", () => {
-    // The root declares its types and publishes `Client` by hand, so both are
-    // read from the files that hold them rather than through an artifact.
-    const written = builtins(core);
-    assert.match(written, /import \{ createBuiltin \} from "\.\/Builtin\.js";/);
-    assert.match(written, /import type \{ Client \} from "\.\/Client\.js";/);
+  it("reads what may cross the boundary from `boundary`, at every layer", () => {
+    // `createBuiltin` and `Client` are the boundary's, not a layer's, so the root
+    // and a target above it read them the same way. What a layer declares is
+    // still read through that layer's own artifact.
+    for (const schema of [core, target]) {
+      assert.match(
+        builtins(schema),
+        /import \{ createBuiltin, type Client \} from "@backtickjs\/boundary";/,
+      );
+    }
     assert.match(
-      written,
+      builtins(core),
       /import type \{\n {2}Cell,\n {2}Store,\n\} from "\.\/declarations\.generated\.js";/,
     );
-  });
-
-  it("reads a base's value from the base, and every type through its own artifact", () => {
-    // `declarations.generated.ts` re-exports what a base declared, so one
-    // import covers the signatures and `Client` alike. `createBuiltin` is a
-    // value and no artifact carries one, so it is the base's to hand on.
-    const written = builtins(target);
     assert.match(
-      written,
-      /import \{ createBuiltin \} from "@backtickjs\/core";/,
-    );
-    assert.match(
-      written,
-      /import type \{\n {2}Client,\n {2}Clip,\n\} from "\.\/declarations\.generated\.js";/,
+      builtins(target),
+      /import type \{\n {2}Clip,\n\} from "\.\/declarations\.generated\.js";/,
     );
   });
 
@@ -156,10 +149,12 @@ describe("builtins", () => {
     assert.doesNotMatch(builtins(core), /^ {2}T,$/m);
   });
 
-  it("refuses a root that does not publish the name a value reads as", () => {
-    assert.throws(
-      () => builtins({ ...core, publishes: [] }),
-      /publishes `Client`/,
+  it("takes a root that publishes nothing: those names are not a layer's", () => {
+    // What a value reads as comes from `@backtickjs/boundary` now, so a root that
+    // publishes nothing is an ordinary root rather than a broken one.
+    assert.match(
+      builtins({ ...core, publishes: [] }),
+      /import \{ createBuiltin, type Client \} from "@backtickjs\/boundary";/,
     );
   });
 });

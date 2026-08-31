@@ -32,7 +32,9 @@
   },
   "dependencies": {
     "@backtickjs/cs-runtime": "workspace:*",
+    "@backtickjs/boundary": "workspace:*",
     "@backtickjs/schema": "workspace:*",
+    "@backtickjs/ui-schema": "workspace:*",
     "@backtickjs/web-schema": "workspace:*"
   },
   "devDependencies": {

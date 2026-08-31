@@ -8,6 +8,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./format": {
+      "types": "./dist/generators/format.d.ts",
+      "default": "./dist/generators/format.js"
     }
   },
   "bin": {

@@ -4,7 +4,7 @@ import type {
   ClientHandle,
   ClientUnknown,
   ClientValue,
-} from "./declarations.generated.js";
+} from "./ClientValue.js";
 
 /**
  * What the server may write for a client value of type `T`: the pair to

@@ -84,22 +84,28 @@ const list: Schema = {
 describe("declarations", () => {
   it("names a type where it is offered, not where it was written", () => {
     const written = declarations(target);
-    // `Shared` is the middle schema's own and `Prop` is what it publishes —
-    // both arrive from the one this is built on, so a target needs no
-    // dependency on a package further up the chain.
+    // `Shared` and `Drawing` are the middle schema's own, and they arrive from
+    // the one this is built on, so a target needs no dependency on a package
+    // further up the chain.
     assert.match(
       written,
-      /import type \{[^}]*\bProp,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
+      /import type \{[^}]*\bDrawing,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
+    // `Prop` is the boundary's, wherever it is named, so it comes from one place
+    // every layer rather than being handed up like the rest.
+    assert.match(
+      written,
+      /import type \{\n {2}Children,\n {2}Prop,\n\} from "@backtickjs\/boundary";/,
+    );
   });
 
-  it("writes its own names beside it, and no import for them", () => {
+  it("reaches the boundary's own names in one hop, at the root", () => {
     const root: Schema = {
       package: "@backtickjs/core",
       namespace: "Core",
       extends: [],
-      publishes: ["Prop"],
+      publishes: [],
       types: {
         Props: Type.Interface([], {
           onpick: Type.Optional(Type.Function([], Type.Void())),
@@ -111,8 +117,8 @@ describe("declarations", () => {
     const written = declarations(root);
     assert.match(
       written,
-      /import type \{ Prop \} from ".\/Prop.js";/,
-      "the package that publishes a name reaches it beside itself",
+      /import type \{\n {2}Prop,\n\} from "@backtickjs\/boundary";/,
+      "a root reaches the boundary's names the same way every layer above does",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
   });

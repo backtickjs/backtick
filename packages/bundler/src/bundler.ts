@@ -1,7 +1,7 @@
 import { lowerSpliceable } from "./ast/lowerSpliceable.js";
 import type { Bundle } from "./bundle/Bundle.js";
 import { buildBundle } from "./bundle/buildBundle.js";
-import type { Spliceable } from "@backtickjs/cs-runtime";
+import type { Spliceable } from "@backtickjs/boundary";
 
 /**
  * What is being tried rather than offered: a feature here is one whose premise

@@ -1,6 +1,6 @@
-import type { ClientValue } from "@backtickjs/language-schema";
-import { createJsxElement } from "./JsxElement.js";
-import type { ClientElement, ForProps } from "./declarations.generated.js";
+import { createJsxElement, type ClientValue } from "@backtickjs/boundary";
+import type { ClientElement } from "@backtickjs/boundary";
+import type { ForProps } from "./declarations.generated.js";
 
 /**
  * The only way a list is written: a script stands in for one child and never a

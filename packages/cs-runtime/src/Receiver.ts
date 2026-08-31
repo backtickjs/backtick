@@ -9,10 +9,10 @@ import type {
   String,
   StringConstructor,
 } from "./receivers.generated.js";
-import type { ClientElement } from "@backtickjs/ui-schema";
+import type { ClientElement } from "@backtickjs/boundary";
 import type { Builtins } from "@backtickjs/language-schema";
-import type { ClientFunction } from "@backtickjs/language-schema";
-import type { ClientValue } from "@backtickjs/language-schema";
+import type { ClientFunction } from "@backtickjs/boundary";
+import type { ClientValue } from "@backtickjs/boundary";
 
 // A built-in receiver autoboxes to its client type.
 //

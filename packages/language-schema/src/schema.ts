@@ -18,41 +18,12 @@ export const schema: Schema = {
 
   extends: [],
 
-  publishes: ["Client"],
+  publishes: [],
 
   types: {
-    ClientFunction: Type.Function(
-      [Type.Rest(Type.FunctionParameter("args", Type.Never()))],
-      Type.Ref("ClientUnknown"),
-    ),
 
-    ClientValue: Type.Union(
-      [
-        Type.Null(),
-        Type.Number(),
-        Type.Boolean(),
-        Type.String(),
-        Type.Record(Type.Ref("ClientValue"), { readOnly: true }),
-        Type.Array(Type.Ref("ClientValue"), { readOnly: true }),
-        Type.Ref("ClientFunction"),
-        Type.Ref("ClientHandle"),
-      ],
-      {
-        description:
-          "What a value is on the client: data, a function, or a handle to an object owned and managed by the client.",
-      },
-    ),
 
-    ClientUnknown: Type.Union([Type.Ref("ClientValue"), Type.Void()]),
 
-    ClientHandle: Type.Interface(
-      [],
-      {},
-      {
-        description:
-          "Represents a handle to an object owned and managed by the client. The handle can be referenced and passed in client script.",
-      },
-    ),
 
     ReadonlyState: Type.Generic(
       [Type.GenericParameter("T")],

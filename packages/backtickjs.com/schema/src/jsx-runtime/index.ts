@@ -1,6 +1,7 @@
-import type { JsxElementType } from "@backtickjs/cs-runtime";
-import { createFragment, createJsxElement } from "@backtickjs/cs-runtime";
-import type { Children, ClientElement, HtmlNode } from "@backtickjs/web-schema";
+import type { JsxElementType } from "@backtickjs/boundary";
+import { createFragment, createJsxElement } from "@backtickjs/boundary";
+import type { HtmlNode } from "@backtickjs/web-schema";
+import type { Children, ClientElement } from "@backtickjs/boundary";
 import type { Elements as Site } from "../declarations.generated.js";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.

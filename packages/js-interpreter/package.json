@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@backtickjs/bundler": "workspace:*",
+    "@backtickjs/language-schema": "workspace:*",
     "solid-js": "^1.9.14"
   },
   "peerDependencies": {

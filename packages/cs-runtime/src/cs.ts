@@ -1,8 +1,8 @@
-import type { Client } from "@backtickjs/language-schema";
+import type { Client } from "@backtickjs/boundary";
 import { create } from "./ClientScript.js";
-import type { ClientUnknown } from "@backtickjs/language-schema";
-import type { ClientValue } from "@backtickjs/language-schema";
-import type { Spliced } from "@backtickjs/language-schema";
+import type { ClientUnknown } from "@backtickjs/boundary";
+import type { ClientValue } from "@backtickjs/boundary";
+import type { Spliced } from "@backtickjs/boundary";
 import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
 
 // The root of a script
