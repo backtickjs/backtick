@@ -5,5 +5,6 @@
     "sourceMap": true
   },
   "references": [
-    { "path": "../boundary/tsconfig.build.json" },{ "path": "../cs-runtime/tsconfig.build.json" }]
+    { "path": "../boundary/tsconfig.build.json" }
+  ]
 }

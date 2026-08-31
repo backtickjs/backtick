@@ -1,4 +1,4 @@
-import { isClientScript } from "@backtickjs/cs-runtime";
+import { isClientScript } from "@backtickjs/boundary";
 import { isJsxElement } from "@backtickjs/boundary";
 import { isBuiltin, type Client, type Spliceable } from "@backtickjs/boundary";
 import type { Ast } from "./Ast.js";

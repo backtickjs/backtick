@@ -1,4 +1,4 @@
-import { SyntaxKind } from "@backtickjs/cs-runtime";
+import { SyntaxKind } from "@backtickjs/boundary";
 import type {
   ClientScriptArrayElement,
   ClientScriptBlock,
@@ -6,7 +6,7 @@ import type {
   ClientScriptExpression,
   ClientScriptStatement,
   ClientScriptVariableDeclarationList,
-} from "@backtickjs/cs-runtime";
+} from "@backtickjs/boundary";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { NodeKind } from "./Bundle.js";

@@ -24,7 +24,6 @@
     { "path": "../compiler/tsconfig.build.json" },
     { "path": "../core/tsconfig.build.json" },
     { "path": "../language-schema/tsconfig.build.json" },
-    { "path": "../cs-runtime/tsconfig.build.json" },
     { "path": "../js-interpreter/tsconfig.build.json" },
     { "path": "../web-schema/tsconfig.build.json" }
   ]

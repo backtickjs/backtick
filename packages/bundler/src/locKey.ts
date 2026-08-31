@@ -1,4 +1,4 @@
-import type { SourceLocation } from "@backtickjs/cs-runtime";
+import type { SourceLocation } from "@backtickjs/boundary";
 
 // A stable string key for a script's source location, used to deduplicate
 // client scripts by where they were written. Two scripts parsed from the same

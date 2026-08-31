@@ -1,6 +1,6 @@
 // Type-level assertions for `Spliced` and the member-access view.
 // Never executed — typechecked by `tsc -b`.
-import type { Array, Receiver } from "@backtickjs/cs-runtime";
+import type { Array, Receiver } from "../src/index.js";
 import type {
   Client,
   ClientValue,

@@ -4,5 +4,15 @@
     "emitDeclarationOnly": false,
     "sourceMap": true
   },
-  "references": [{ "path": "../cs-runtime/tsconfig.build.json" }]
+  "references": [
+    {
+      "path": "../boundary/tsconfig.build.json"
+    },
+    {
+      "path": "../language-schema/tsconfig.build.json"
+    },
+    {
+      "path": "../ui-schema/tsconfig.build.json"
+    }
+  ]
 }

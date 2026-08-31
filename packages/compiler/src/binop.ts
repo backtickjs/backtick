@@ -1,4 +1,4 @@
-import type { BinaryOperator } from "@backtickjs/cs-runtime";
+import type { BinaryOperator } from "@backtickjs/boundary";
 
 export function isSupportedBinop(operator: string): operator is BinaryOperator {
   const candidate = operator as BinaryOperator;

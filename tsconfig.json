@@ -5,7 +5,6 @@
     { "path": "packages/bun-plugin" },
     { "path": "packages/compiler" },
     { "path": "packages/core" },
-    { "path": "packages/cs-runtime" },
     { "path": "packages/boundary" },
     { "path": "packages/e2e" },
     { "path": "packages/bundler" },

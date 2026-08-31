@@ -1,4 +1,4 @@
-import type { SourceLocation } from "@backtickjs/cs-runtime";
+import type { SourceLocation } from "@backtickjs/boundary";
 import type ts from "typescript";
 import { isComponentTag } from "./isComponentTag.js";
 import type { SourceRange } from "./SourceRange.js";

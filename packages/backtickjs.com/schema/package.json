@@ -31,7 +31,6 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/cs-runtime": "workspace:*",
     "@backtickjs/boundary": "workspace:*",
     "@backtickjs/schema": "workspace:*",
     "@backtickjs/ui-schema": "workspace:*",

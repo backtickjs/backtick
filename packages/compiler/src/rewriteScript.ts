@@ -1,4 +1,4 @@
-import { type SourceLocation, version } from "@backtickjs/cs-runtime";
+import { type SourceLocation, version } from "@backtickjs/boundary";
 import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";

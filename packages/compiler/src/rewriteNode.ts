@@ -1,5 +1,5 @@
 import type ts from "typescript";
-import { SyntaxKind } from "@backtickjs/cs-runtime";
+import { SyntaxKind } from "@backtickjs/boundary";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";

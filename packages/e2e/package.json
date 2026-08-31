@@ -16,7 +16,6 @@
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/cs-runtime": "workspace:*",
     "@backtickjs/boundary": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
     "@backtickjs/language-schema": "workspace:*",

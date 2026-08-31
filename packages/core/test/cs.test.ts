@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { cs } from "@backtickjs/cs-runtime";
+import { cs } from "@backtickjs/core";
 
 test("cs`...` throws when used without the compiler", () => {
   assert.throws(() => cs`"Hello World!"`, /was not compiled/);

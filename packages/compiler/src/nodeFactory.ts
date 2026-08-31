@@ -1,4 +1,4 @@
-import type { SourceLocation, SyntaxKind } from "@backtickjs/cs-runtime";
+import type { SourceLocation, SyntaxKind } from "@backtickjs/boundary";
 import type ts from "typescript";
 
 /** An AST node as the emitted code spells it: `{ kind: 246, … }`.

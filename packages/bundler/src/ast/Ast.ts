@@ -1,7 +1,7 @@
-import type { ClientScriptBody, SourceLocation } from "@backtickjs/cs-runtime";
+import type { ClientScriptBody, SourceLocation } from "@backtickjs/boundary";
 
 // The value grammar: what a splice becomes. A script's own syntax is the other
-// half of this AST and lives in `cs-runtime`, since that is where the compiler's
+// half of this AST and lives in `boundary`, since that is where the compiler's
 // output has to be able to name it — the compiler emits those nodes directly.
 
 // A node built from a value spliced into a client script. Splice values are

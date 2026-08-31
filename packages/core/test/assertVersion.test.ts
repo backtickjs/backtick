@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { cs, SyntaxKind, type ClientScriptBody } from "@backtickjs/cs-runtime";
+import { cs } from "@backtickjs/core";
+import { SyntaxKind, type ClientScriptBody } from "@backtickjs/boundary";
 
 // the body is never read here; only `create`'s version check is under test
 const noBody = (): ClientScriptBody => ({

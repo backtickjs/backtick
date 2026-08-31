@@ -1,5 +1,5 @@
 import type { Client } from "@backtickjs/boundary";
-import { create } from "./ClientScript.js";
+import { create } from "@backtickjs/boundary";
 import type { ClientUnknown } from "@backtickjs/boundary";
 import type { ClientValue } from "@backtickjs/boundary";
 import type { Spliced } from "@backtickjs/boundary";

@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { SyntaxKind } from "@backtickjs/cs-runtime";
+import { SyntaxKind } from "@backtickjs/boundary";
 import type {
   ClientScriptExpression,
   ClientScriptJsxAttribute,
   ClientScriptJsxElement,
   ClientScriptStringLiteral,
-} from "@backtickjs/cs-runtime";
+} from "@backtickjs/boundary";
 import { NodeKind } from "../dist/bundle/Bundle.js";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
 import type { AstScript } from "../dist/ast/Ast.js";

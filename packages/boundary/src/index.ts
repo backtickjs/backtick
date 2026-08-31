@@ -30,3 +30,19 @@ export {
   type JsxElementType,
 } from "./JsxElement.js";
 export { createFragment, type Fragment } from "./Fragment.js";
+
+// A script is what crosses too: the compiler writes one, the bundler reads it,
+// and a client runs it. The shape both ends agree on lives here for the same
+// reason the values do — neither end owns it.
+export {
+  create,
+  type ClientScript,
+  isClientScript,
+  type Metadata,
+} from "./ClientScript.js";
+export * from "./Ast.js";
+export { SyntaxKind } from "./SyntaxKind.js";
+export type { BinaryOperator } from "./BinaryOperator.js";
+export type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
+export type { SourceLocation } from "./SourceLocation.js";
+export { version } from "./version.js";

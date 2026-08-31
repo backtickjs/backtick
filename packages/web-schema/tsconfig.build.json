@@ -11,9 +11,6 @@
     },
     {
       "path": "../schema/tsconfig.build.json"
-    },
-    {
-      "path": "../cs-runtime/tsconfig.build.json"
     }
   ]
 }
