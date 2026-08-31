@@ -1,6 +1,7 @@
 {
   "name": "@backtickjs/boundary",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "description": "The host/client boundary: what a client may hold, what a host may write for one, and what a drawing is",
   "main": "./dist/index.js",

@@ -808,9 +808,6 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
       linkedom:
         specifier: ^0.18.13
         version: 0.18.13

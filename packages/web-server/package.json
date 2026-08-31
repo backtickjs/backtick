@@ -1,6 +1,7 @@
 {
   "name": "@backtickjs/web-server",
   "version": "0.1.0",
+  "private": true,
   "type": "module",
   "description": "The half of the web target that runs above the backtick: putting a bundle into a document",
   "main": "./dist/index.js",
@@ -20,11 +21,9 @@
   },
   "dependencies": {
     "@backtickjs/bundler": "workspace:*",
-    "@backtickjs/core": "workspace:*",
     "linkedom": "^0.18.13"
   },
   "devDependencies": {
-    "@backtickjs/core": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }
