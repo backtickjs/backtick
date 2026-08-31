@@ -13,7 +13,6 @@ export type {
   ClientValue,
 } from "./ClientValue.js";
 export type { Client } from "./Client.js";
-export type { Server } from "./Server.js";
 export type { Spliceable, Spliced } from "./Spliceable.js";
 export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
 
