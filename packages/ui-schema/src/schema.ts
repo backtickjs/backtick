@@ -9,10 +9,7 @@ export const schema: Schema = {
 
   extends: [language],
 
-  publishes: [],
-
   types: {
-
     ForProps: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {

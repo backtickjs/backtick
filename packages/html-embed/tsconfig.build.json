@@ -5,7 +5,5 @@
     "sourceMap": true,
     "lib": ["esnext"]
   },
-  "references": [
-    { "path": "../bundler/tsconfig.build.json" }
-  ]
+  "references": [{ "path": "../bundler/tsconfig.build.json" }]
 }

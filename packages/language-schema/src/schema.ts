@@ -18,13 +18,7 @@ export const schema: Schema = {
 
   extends: [],
 
-  publishes: [],
-
   types: {
-
-
-
-
     ReadonlyState: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Interface([Type.Ref("ClientHandle")], {

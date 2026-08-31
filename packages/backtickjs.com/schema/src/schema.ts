@@ -19,7 +19,6 @@ export const schema: Schema = {
   extends: [web],
 
   // Nothing: what this adds is a name to call, not a type to write.
-  publishes: [],
 
   types: {
     BacktickProps: Type.Interface(

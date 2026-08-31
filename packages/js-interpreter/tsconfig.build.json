@@ -7,7 +7,5 @@
     // nothing here may reach for a DOM, a UIView, or a file system.
     "types": []
   },
-  "references": [
-    { "path": "../core/tsconfig.build.json" }
-  ]
+  "references": [{ "path": "../core/tsconfig.build.json" }]
 }

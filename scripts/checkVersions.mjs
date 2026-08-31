@@ -14,10 +14,7 @@ function manifests(dir) {
   const base = join(root, dir);
   if (!existsSync(base)) return [];
   return readdirSync(base, { withFileTypes: true })
-    .filter(
-      (entry) =>
-        entry.isDirectory() && entry.name !== "language-tools",
-    )
+    .filter((entry) => entry.isDirectory() && entry.name !== "language-tools")
     .map((entry) => join(base, entry.name, "package.json"))
     .filter((file) => existsSync(file))
     .map((file) => ({ file, json: JSON.parse(readFileSync(file, "utf8")) }));

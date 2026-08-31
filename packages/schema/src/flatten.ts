@@ -23,7 +23,6 @@ export function flatten(schema: Schema): Schema {
   const types: Record<string, Schema["types"][string]> = {};
   const elements: Record<string, Schema["elements"][string]> = {};
   const builtins: Record<string, Schema["builtins"][string]> = {};
-  const publishes = new Set<string>();
 
   // A schema reached twice is inherited twice, which is not a collision — a
   // diamond is two paths to one declaration. Identity, since a name is only
@@ -42,7 +41,6 @@ export function flatten(schema: Schema): Schema {
     for (const base of one.extends) {
       take(base);
     }
-    one.publishes.forEach((name) => publishes.add(name));
     add(types, one.types, "type");
     add(elements, one.elements, "element");
     add(builtins, one.builtins, "builtin");
@@ -77,7 +75,6 @@ export function flatten(schema: Schema): Schema {
     package: schema.package,
     namespace: schema.namespace,
     extends: [],
-    publishes: [...publishes],
     types,
     elements,
     builtins,

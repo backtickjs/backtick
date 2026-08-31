@@ -12,8 +12,6 @@ export const schema: Schema = {
 
   extends: [ui],
 
-  publishes: [],
-
   types: {
     /**
      * What a handler is handed, and what it is handed it by.

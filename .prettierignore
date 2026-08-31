@@ -1,5 +1,6 @@
 packages/
 examples/
+tests/
 pnpm-lock.yaml
 
 # Third-party, kept byte-for-byte as published so the benchmark compares
