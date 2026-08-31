@@ -3,7 +3,7 @@ import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
 import { bundler } from "@backtickjs/core";
-import { insert } from "@backtickjs/web-sdk";
+import { insert } from "@backtickjs/web-server";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;
 const compilerUrl = `/compiler-${compiler.sha256.slice(0, 16)}.js`;

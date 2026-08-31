@@ -1,5 +1,6 @@
 import { bundler } from "@backtickjs/core";
-import { client, insert } from "@backtickjs/web-sdk";
+import * as client from "@backtickjs/web-client/bundle";
+import { insert } from "@backtickjs/web-server";
 import { TodoList } from "./TodoList.js";
 
 // The client is asked for at a name that says what it holds, so a rebuilt client

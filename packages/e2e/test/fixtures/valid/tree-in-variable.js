@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-schema/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A tree spliced into a body and bound to a name before it is used. Nothing
 // applies it at the hole and nothing draws it there — it is a value, held and

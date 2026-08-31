@@ -55,7 +55,7 @@ function runBacktickTsc(): string {
     "--jsx",
     "react-jsx",
     "--jsxImportSource",
-    "@backtickjs/web-sdk",
+    "@backtickjs/web-schema",
     "--strict",
     "--skipLibCheck",
     ...[...fixturesByDir].flatMap(([dirName, files]) =>

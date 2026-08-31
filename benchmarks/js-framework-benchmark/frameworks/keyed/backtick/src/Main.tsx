@@ -1,5 +1,5 @@
 import { cs, For, state, type Client, type State } from "@backtickjs/core";
-import type { JSX } from "@backtickjs/web-sdk";
+import type { JSX } from "@backtickjs/web-schema";
 
 type Row = {
   readonly id: number;

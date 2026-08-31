@@ -1,5 +1,5 @@
 import { bundler, type Bundle } from "@backtickjs/core";
-import { insert } from "@backtickjs/web-sdk";
+import { insert } from "@backtickjs/web-server";
 import { Main } from "./Main.js";
 
 const template = `<!doctype html>

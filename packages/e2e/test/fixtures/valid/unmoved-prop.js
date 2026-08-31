@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 // A list whose every row reads the cell the selection is held in. A write
 // re-runs the `href` of all three rows and moves it on two of them — the row

@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A namespace holding a value beside its functions: `Number.EPSILON` is read
 // where `Number.isInteger` is called, and both are whole names the client

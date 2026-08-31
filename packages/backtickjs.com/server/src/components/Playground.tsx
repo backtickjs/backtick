@@ -1,6 +1,6 @@
 import { For, cs, state } from "@backtickjs/core";
 import type { Client } from "@backtickjs/core";
-import type { HtmlNode } from "@backtickjs/web-sdk";
+import type { HtmlNode } from "@backtickjs/web-schema";
 import type { Example } from "../examples/Example.js";
 import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
 import { ink, line, mono, muted, paper, wash } from "./theme.js";

@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 async function Rows() {
   return cs.create(

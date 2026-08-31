@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*"
+    "@backtickjs/web-schema": "workspace:*"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

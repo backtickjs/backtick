@@ -33,7 +33,7 @@ export function transpile(
       target: ts.ScriptTarget.ESNext,
       module: ts.ModuleKind.ESNext,
       jsx: ts.JsxEmit.ReactJSX,
-      jsxImportSource: "@backtickjs/web-sdk",
+      jsxImportSource: "@backtickjs/web-schema",
       sourceMap: false,
       verbatimModuleSyntax: true,
     },

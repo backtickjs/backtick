@@ -1,4 +1,4 @@
-import type { HtmlNode } from "@backtickjs/web-sdk";
+import type { HtmlNode } from "@backtickjs/web-schema";
 import type { Children } from "@backtickjs/core";
 import { Badge } from "./Badge.js";
 import { GitHubMark } from "./GitHubMark.js";

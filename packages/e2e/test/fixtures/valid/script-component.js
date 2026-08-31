@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A component tag written inside a client script. `Card` is a name no scope in
 // the script binds, so it splices as the host binding, and what a splice holds

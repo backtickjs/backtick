@@ -1,4 +1,4 @@
-import type { HtmlNode } from "@backtickjs/web-sdk";
+import type { HtmlNode } from "@backtickjs/web-schema";
 import type { Children } from "@backtickjs/core";
 import { accent, accentEdge, accentFill, mono } from "./theme.js";
 

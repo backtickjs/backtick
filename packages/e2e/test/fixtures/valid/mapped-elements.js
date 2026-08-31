@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 const items = ["alpha", "beta", "gamma"];
 // A list mapped on the host. The array is host data, so the map runs while
 // bundling and each item becomes its own element — the list's length is fixed

@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // `update` derives the next value from the current one, so a handler needs no
 // separate read. It returns `void` like `write`, which is what keeps it out of

@@ -1,33 +1,30 @@
 {
-  "name": "@backtickjs/web-schema",
+  "name": "@backtickjs/web-server",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
+  "description": "The half of the web target that runs above the backtick: putting a bundle into a document",
   "main": "./dist/index.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./schema": {
-      "types": "./dist/schema.d.ts",
-      "default": "./dist/schema.js"
     }
   },
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
-    "generate": "backtick-generate src/schema.ts",
+    "test": "node --conditions=browser --test \"test/**/*.test.ts\"",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
+  "dependencies": {
+    "@backtickjs/core": "workspace:*",
+    "linkedom": "^0.18.13"
+  },
   "devDependencies": {
+    "@backtickjs/core": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
-  },
-  "dependencies": {
-    "@backtickjs/schema": "workspace:*",
-    "@backtickjs/ui-schema": "workspace:*"
   }
 }

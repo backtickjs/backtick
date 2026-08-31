@@ -16,6 +16,7 @@
     { "path": "packages/language-tools/vscode-extension" },
     { "path": "packages/prettier-plugin" },
     { "path": "packages/tspatch-plugin" },
-    { "path": "packages/web-sdk" }
+    { "path": "packages/targets/web/schema" },
+    { "path": "packages/targets/web/server" }
   ]
 }

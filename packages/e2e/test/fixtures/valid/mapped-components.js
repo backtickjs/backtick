@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 const items = ["alpha", "beta", "gamma"];
 async function Row({ label }) {
   return _jsx("span", { children: label });

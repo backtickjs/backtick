@@ -18,7 +18,8 @@
   "devDependencies": {
     "@backtickjs/core": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
-    "@backtickjs/web-sdk": "workspace:*",
+    "@backtickjs/web-schema": "workspace:*",
+    "@backtickjs/web-server": "workspace:*",
     "typescript": "^6.0.3"
   }
 }

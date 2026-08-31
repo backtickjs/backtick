@@ -1,0 +1,18 @@
+{
+  "extends": "../../../../configs/tsconfig.build.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "sourceMap": true
+  },
+  "references": [
+    {
+      "path": "../../../schemas/ui-schema/tsconfig.build.json"
+    },
+    {
+      "path": "../../../schema/tsconfig.build.json"
+    },
+    {
+      "path": "../../../cs-runtime/tsconfig.build.json"
+    }
+  ]
+}

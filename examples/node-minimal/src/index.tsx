@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { bundler, type Bundle } from "@backtickjs/core";
-import { client, insert } from "@backtickjs/web-sdk";
+import * as client from "@backtickjs/web-client/bundle";
+import { insert } from "@backtickjs/web-server";
 import { Counter } from "./Counter.js";
 
 const template = `<!doctype html>

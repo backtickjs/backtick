@@ -1,5 +1,5 @@
 {
-  "extends": "../../configs/tsconfig.test.json",
+  "extends": "../../../../configs/tsconfig.test.json",
   "compilerOptions": {
     "lib": ["esnext", "dom", "dom.iterable"],
     "types": ["node"]

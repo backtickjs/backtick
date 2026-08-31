@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-sdk/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-schema/jsx-runtime";
 // A server component's invocation is an instance boundary, so it hoists into a
 // tree entry of its own even though each `<Label />` is referenced once and
 // would otherwise inline into the `View`. The entry is what a per-instance cell
