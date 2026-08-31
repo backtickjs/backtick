@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readdirSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderBundleDebug } from "./renderBundleDebug.ts";
@@ -22,7 +22,7 @@ import { evaluate } from "./test-client/index.ts";
 // with UPDATE_SNAPSHOTS=1 to (re)generate the snapshots.
 //
 const bundleErrorDir = join(fixturesRoot, "bundle-error");
-const importFixture = createFixtureLoader("jit-bundler");
+const importFixture = createFixtureLoader("bundler");
 
 function listFixtures(dir: string): string[] {
   return readdirSync(dir)

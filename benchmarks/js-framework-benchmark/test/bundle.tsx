@@ -1,4 +1,4 @@
-import { bundler } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 import { Main } from "../frameworks/keyed/backtick/dist/Main.js";
 
 // The app's `Main`, bundled here rather than in the app: what is submitted to

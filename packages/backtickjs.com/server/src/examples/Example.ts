@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
-import { bundler, type Spliceable } from "@backtickjs/core";
+import type { Spliceable } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 
 /**
  * One file of one, named the way the compiler will be told to name it.

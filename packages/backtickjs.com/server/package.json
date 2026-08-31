@@ -17,6 +17,7 @@
     "@backtickjs.com/compiler": "workspace:*",
     "@backtickjs.com/sandbox": "workspace:*",
     "@backtickjs.com/schema": "workspace:*",
+    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/tspatch-plugin": "workspace:*",

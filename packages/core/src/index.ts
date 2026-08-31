@@ -15,8 +15,7 @@ export {
 // elements around it are, and every client answers for it. A target's own
 // vocabulary lives in that target's SDK.
 export { For } from "@backtickjs/cs-runtime";
-export { bundler } from "@backtickjs/jit-bundler";
-export { NodeKind } from "@backtickjs/jit-bundler";
+export { NodeKind } from "@backtickjs/bundler";
 export type {
   Bundle,
   BundleArrowFunctionNode,
@@ -51,4 +50,4 @@ export type {
   BundleTryStatementNode,
   BundleWhileStatementNode,
   FunctionLabel,
-} from "@backtickjs/jit-bundler";
+} from "@backtickjs/bundler";

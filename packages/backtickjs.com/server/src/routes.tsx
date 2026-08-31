@@ -2,7 +2,7 @@ import * as client from "@backtickjs.com/client/bundle";
 import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
-import { bundler } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 import { insert } from "@backtickjs/web-server";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;

@@ -22,6 +22,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
+    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/web-schema": "workspace:*"
   },

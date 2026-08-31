@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/jit-bundler",
+  "name": "@backtickjs/bundler",
   "version": "0.1.0",
   "private": true,
   "type": "module",

@@ -1,4 +1,4 @@
-import { bundler } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 import * as client from "@backtickjs/web-client/bundle";
 import { insert } from "@backtickjs/web-server";
 import { WeatherCard } from "./WeatherCard.js";

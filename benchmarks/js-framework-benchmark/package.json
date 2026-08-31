@@ -16,6 +16,7 @@
     "test:update": "tsc && UPDATE_SNAPSHOTS=1 node --conditions=browser --test \"test/**/*.test.mjs\""
   },
   "devDependencies": {
+    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
     "@backtickjs/web-schema": "workspace:*",

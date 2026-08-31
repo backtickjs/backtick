@@ -9,7 +9,7 @@ import { renderDiagnostics } from "./renderDiagnostics.ts";
 import { renderMappings } from "./renderMappings.ts";
 import { transpileFixture } from "./transpileFixture.ts";
 
-// The fixture corpus is shared with the jit-bundler suite: this suite
+// The fixture corpus is shared with the bundler suite: this suite
 // snapshots the compiler artifacts (diagnostics, virtual code, source map,
 // emitted JS), while `test/bundle.test.ts` snapshots the bundled payload of
 // the same sources. The `*.js` snapshot is emitted with the shared

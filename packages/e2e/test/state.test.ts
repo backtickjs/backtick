@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
-import { bundler } from "@backtickjs/core";
+import { bundler } from "@backtickjs/bundler";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { evaluate, isTestNode, recordingHost } from "./test-client/index.ts";
 import type { TestNode } from "./test-client/index.ts";

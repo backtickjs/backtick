@@ -12,6 +12,7 @@
     "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
+    "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/tspatch-plugin": "^0.1.0",
     "@backtickjs/web-client": "workspace:*",

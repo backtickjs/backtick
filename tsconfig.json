@@ -7,7 +7,7 @@
     { "path": "packages/core" },
     { "path": "packages/cs-runtime" },
     { "path": "packages/e2e" },
-    { "path": "packages/jit-bundler" },
+    { "path": "packages/bundler" },
     { "path": "packages/language-tools/language-plugin" },
     { "path": "packages/language-tools/language-server" },
     { "path": "packages/language-tools/language-service" },

@@ -17,7 +17,7 @@ import type { Instance } from "./Instance.js";
 import { compileElement } from "./view.js";
 
 // A reference client: the interpreter the bundle wire format is specified
-// against (see `jit-bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
+// against (see `bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
 // against its `functions` table and yields the resulting
 // JavaScript value, so a host can draw it and tests can observe runtime
 // behavior rather than only snapshotting shape.

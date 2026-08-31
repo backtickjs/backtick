@@ -6,6 +6,6 @@
   },
   "references": [
     { "path": "../cs-runtime/tsconfig.build.json" },
-    { "path": "../jit-bundler/tsconfig.build.json" }
+    { "path": "../bundler/tsconfig.build.json" }
   ]
 }
