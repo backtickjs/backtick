@@ -446,45 +446,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/e2e:
-    devDependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../boundary
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../compiler
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
-      '@backtickjs/js-interpreter':
-        specifier: workspace:*
-        version: link:../js-interpreter
-      '@backtickjs/language-schema':
-        specifier: workspace:*
-        version: link:../language-schema
-      '@backtickjs/prettier-plugin':
-        specifier: workspace:*
-        version: link:../prettier-plugin
-      '@backtickjs/tsc':
-        specifier: workspace:*
-        version: link:../language-tools/tsc
-      '@backtickjs/web-schema':
-        specifier: workspace:*
-        version: link:../web-schema
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/html-embed:
     dependencies:
       '@backtickjs/bundler':
@@ -781,6 +742,45 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  tests:
+    devDependencies:
+      '@backtickjs/boundary':
+        specifier: workspace:*
+        version: link:../packages/boundary
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../packages/bundler
+      '@backtickjs/compiler':
+        specifier: workspace:*
+        version: link:../packages/compiler
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../packages/core
+      '@backtickjs/js-interpreter':
+        specifier: workspace:*
+        version: link:../packages/js-interpreter
+      '@backtickjs/language-schema':
+        specifier: workspace:*
+        version: link:../packages/language-schema
+      '@backtickjs/prettier-plugin':
+        specifier: workspace:*
+        version: link:../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: workspace:*
+        version: link:../packages/language-tools/tsc
+      '@backtickjs/web-schema':
+        specifier: workspace:*
+        version: link:../packages/web-schema
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      solid-js:
+        specifier: ^1.9.14
+        version: 1.9.14
       typescript:
         specifier: ^6.0.3
         version: 6.0.3

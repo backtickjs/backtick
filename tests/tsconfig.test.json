@@ -1,5 +1,5 @@
 {
-  "extends": "../../configs/tsconfig.test.json",
+  "extends": "../configs/tsconfig.test.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "@backtickjs/web-schema"
@@ -21,10 +21,10 @@
     "test/fixtures/typecheck-error/*.virtual.tsx"
   ],
   "references": [
-    { "path": "../compiler/tsconfig.build.json" },
-    { "path": "../core/tsconfig.build.json" },
-    { "path": "../language-schema/tsconfig.build.json" },
-    { "path": "../js-interpreter/tsconfig.build.json" },
-    { "path": "../web-schema/tsconfig.build.json" }
+    { "path": "../packages/compiler/tsconfig.build.json" },
+    { "path": "../packages/core/tsconfig.build.json" },
+    { "path": "../packages/language-schema/tsconfig.build.json" },
+    { "path": "../packages/js-interpreter/tsconfig.build.json" },
+    { "path": "../packages/web-schema/tsconfig.build.json" }
   ]
 }

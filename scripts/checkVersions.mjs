@@ -16,9 +16,7 @@ function manifests(dir) {
   return readdirSync(base, { withFileTypes: true })
     .filter(
       (entry) =>
-        entry.isDirectory() &&
-        entry.name !== "language-tools" &&
-        entry.name !== "schemas",
+        entry.isDirectory() && entry.name !== "language-tools",
     )
     .map((entry) => join(base, entry.name, "package.json"))
     .filter((file) => existsSync(file))
@@ -28,7 +26,6 @@ function manifests(dir) {
 const released = [
   ...manifests("packages"),
   ...manifests("packages/language-tools"),
-  ...manifests("packages/schemas"),
 ];
 // examples and benchmarks model a real consumer install, so their ranges are
 // checked but their own versions are not part of the release set.
@@ -96,10 +93,10 @@ for (const { file, json } of [...released, ...consuming]) {
   }
 }
 
-// The compiler stamps this constant into every script it emits and cs-runtime
+// The compiler stamps this constant into every script it emits and a client
 // compares scripts against it, so a value that drifts from the manifests would
 // misreport every mismatch — in either direction.
-const constantFile = "packages/cs-runtime/src/version.ts";
+const constantFile = "packages/boundary/src/version.ts";
 const declared = readFileSync(join(root, constantFile), "utf8").match(
   /export const version = "([^"]*)"/,
 )?.[1];

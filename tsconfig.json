@@ -6,7 +6,7 @@
     { "path": "packages/compiler" },
     { "path": "packages/core" },
     { "path": "packages/boundary" },
-    { "path": "packages/e2e" },
+    { "path": "tests" },
     { "path": "packages/bundler" },
     { "path": "packages/language-tools/language-plugin" },
     { "path": "packages/language-tools/language-server" },

@@ -1,5 +1,6 @@
 packages:
   - "packages/**/*"
+  - "tests"
   - "examples/*"
   - "benchmarks/*"
   - "benchmarks/js-framework-benchmark/frameworks/keyed/backtick"
