@@ -1,9 +1,5 @@
-import type {
-  Bundle,
-  ClientUnknown,
-  ClientValue,
-  FunctionLabel,
-} from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
+import type { Bundle, FunctionLabel } from "@backtickjs/bundler";
 import type { Renderer } from "solid-js/universal";
 
 // A bundle paired with a host: what is needed to draw one, which neither of

@@ -1,9 +1,9 @@
+import type { ClientValue } from "@backtickjs/core";
 import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
-  ClientValue,
-} from "@backtickjs/core";
+} from "@backtickjs/bundler";
 import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
 import { createRenderer, type Renderer } from "solid-js/universal";
 import type { RendererOptions } from "./RendererOptions.js";

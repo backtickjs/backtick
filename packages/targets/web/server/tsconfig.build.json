@@ -3,11 +3,10 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "sourceMap": true,
-    "lib": [
-      "esnext"
-    ]
+    "lib": ["esnext"]
   },
   "references": [
+    { "path": "../../../bundler/tsconfig.build.json" },
     {
       "path": "../../../core/tsconfig.build.json"
     }

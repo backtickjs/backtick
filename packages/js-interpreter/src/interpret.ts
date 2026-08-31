@@ -2,16 +2,15 @@
 // the number the format fixes it to, the way a client that never saw this
 // repository would have to write it. That is the point of a reference client —
 // what it needs from the format is the format, not a package.
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
   BundleArrayElement,
   BundleArrowFunctionNode,
   BundleSpreadElementNode,
   BundleBinaryOperator,
   BundleStatementNode,
-  ClientUnknown,
-  ClientValue,
   FunctionLabel,
-} from "@backtickjs/core";
+} from "@backtickjs/bundler";
 import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileElement } from "./view.js";

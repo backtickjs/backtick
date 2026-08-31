@@ -8,6 +8,7 @@
     "emitDeclarationOnly": false
   },
   "references": [
+    { "path": "../../../bundler/tsconfig.build.json" },
     { "path": "../../../core/tsconfig.build.json" },
     { "path": "../../../js-interpreter/tsconfig.build.json" }
   ]

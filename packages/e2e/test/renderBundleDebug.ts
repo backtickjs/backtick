@@ -1,4 +1,4 @@
-import { NodeKind } from "@backtickjs/core";
+import { NodeKind } from "@backtickjs/bundler";
 import type {
   Bundle,
   BundleArrayElement,
@@ -7,7 +7,7 @@ import type {
   BundleExpressionNode,
   BundleSpreadElementNode,
   BundleStatementNode,
-} from "@backtickjs/core";
+} from "@backtickjs/bundler";
 
 // Renders a bundle as a human-readable debug view: each `functions` entry as
 // pseudo-JS, each `trees` entry as pseudo-JSX, and the root as the

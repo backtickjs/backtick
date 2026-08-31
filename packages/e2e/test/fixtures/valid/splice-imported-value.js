@@ -1,4 +1,5 @@
-import { cs, NodeKind } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { NodeKind } from "@backtickjs/bundler";
 // A host value that is imported and never mentioned outside a script.
 //
 // `NodeKind` appears once, as the `$NodeKind` splice below. That reference is
@@ -16,11 +17,11 @@ import { cs, NodeKind } from "@backtickjs/core";
 // A value rather than a function, so the `.value` snapshot beside this is the
 // spliced numbers themselves — `Element` is 0 and `DataArray` is 4.
 export default cs.create(
-  [19, 16, 19, 59],
+  [20, 16, 20, 59],
   {
     version: "0.0.0",
     filePath: "splice-imported-value.tsx",
-    fileHash: "3gt0fiyr4ctm4",
+    fileHash: "dp7ak8bmio24",
     kind: "value",
     splices: { $NodeKind: NodeKind },
     captures: [],
@@ -28,13 +29,13 @@ export default cs.create(
   },
   () => ({
     kind: 227,
-    loc: [19, 19, 19, 58],
+    loc: [20, 19, 20, 58],
     left: {
       kind: 212,
-      loc: [19, 19, 19, 36],
+      loc: [20, 19, 20, 36],
       expression: {
         kind: 1000,
-        loc: [19, 19, 19, 28],
+        loc: [20, 19, 20, 28],
         key: "$NodeKind",
       },
       questionDotToken: false,
@@ -43,10 +44,10 @@ export default cs.create(
     operatorToken: "+",
     right: {
       kind: 212,
-      loc: [19, 39, 19, 58],
+      loc: [20, 39, 20, 58],
       expression: {
         kind: 1000,
-        loc: [19, 39, 19, 48],
+        loc: [20, 39, 20, 48],
         key: "$NodeKind",
       },
       questionDotToken: false,

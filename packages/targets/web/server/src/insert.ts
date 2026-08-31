@@ -1,4 +1,4 @@
-import type { Bundle } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/bundler";
 import { parseHTML } from "linkedom";
 
 /**

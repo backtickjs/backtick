@@ -411,9 +411,6 @@ importers:
 
   packages/core:
     dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
@@ -485,6 +482,9 @@ importers:
 
   packages/js-interpreter:
     dependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../bundler
       '@backtickjs/cs-runtime':
         specifier: workspace:*
         version: link:../cs-runtime
@@ -682,6 +682,9 @@ importers:
 
   packages/targets/web/client:
     devDependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../../../bundler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../../core
@@ -722,6 +725,9 @@ importers:
 
   packages/targets/web/server:
     dependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../../../bundler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../../core

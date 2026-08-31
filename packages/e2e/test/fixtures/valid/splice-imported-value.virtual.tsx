@@ -1,4 +1,5 @@
-import { cs, NodeKind } from "@backtickjs/core";
+import { cs } from "@backtickjs/core";
+import { NodeKind } from "@backtickjs/bundler";
 
 // A host value that is imported and never mentioned outside a script.
 //

@@ -1,4 +1,4 @@
-import type { Bundle } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import { insert } from "@backtickjs/web-server";
 import { Main } from "./Main.js";

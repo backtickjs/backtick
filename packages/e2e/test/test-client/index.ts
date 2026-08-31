@@ -1,4 +1,5 @@
-import type { Bundle, ClientValue } from "@backtickjs/core";
+import type { ClientValue } from "@backtickjs/core";
+import type { Bundle } from "@backtickjs/bundler";
 import { evaluate as evaluateBundle } from "@backtickjs/js-interpreter";
 import type { RendererOptions } from "solid-js/universal";
 import { testHost } from "./host.ts";
