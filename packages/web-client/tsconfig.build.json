@@ -1,5 +1,5 @@
 {
-  "extends": "../../../../configs/tsconfig.build.json",
+  "extends": "../../configs/tsconfig.build.json",
   "compilerOptions": {
     // A browser's globals, and nothing else's: what is here runs in a page, so
     // reaching for `node:http` is a mistake the types catch.
@@ -8,8 +8,8 @@
     "emitDeclarationOnly": false
   },
   "references": [
-    { "path": "../../../bundler/tsconfig.build.json" },
-    { "path": "../../../core/tsconfig.build.json" },
-    { "path": "../../../js-interpreter/tsconfig.build.json" }
+    { "path": "../bundler/tsconfig.build.json" },
+    { "path": "../core/tsconfig.build.json" },
+    { "path": "../js-interpreter/tsconfig.build.json" }
   ]
 }

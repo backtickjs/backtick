@@ -1,0 +1,14 @@
+{
+  "extends": "../../configs/tsconfig.build.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "sourceMap": true,
+    "lib": ["esnext"]
+  },
+  "references": [
+    { "path": "../bundler/tsconfig.build.json" },
+    {
+      "path": "../core/tsconfig.build.json"
+    }
+  ]
+}
