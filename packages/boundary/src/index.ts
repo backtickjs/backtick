@@ -28,12 +28,13 @@ export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
 export type { Prop } from "./Prop.js";
 export type { BacktickNode } from "./BacktickNode.js";
 export type { ServerComponent } from "./ServerComponent.js";
+export type { BacktickElement } from "./BacktickElement.js";
 export {
-  createElement,
-  isElement,
-  type BacktickElement,
-  type BacktickElementType,
-} from "./BacktickElement.js";
+  createJsxElement,
+  isJsxElement,
+  type JsxElement,
+  type JsxElementType,
+} from "./JsxElement.js";
 export { createFragment, type Fragment } from "./Fragment.js";
 
 // A script is what crosses too: the compiler writes one, the bundler reads it,

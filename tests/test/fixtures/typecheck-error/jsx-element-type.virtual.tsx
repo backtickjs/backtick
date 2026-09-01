@@ -3,7 +3,7 @@ import { Fragment } from "@backtickjs/web-schema";
 
 // What the JSX namespace admits, and what it refuses.
 //
-// `JSX.ElementType` is `BacktickElementType`, which admits any `string`. What
+// `JSX.ElementType` is `JsxElementType`, which admits any `string`. What
 // that does *not* cost is the whole of this fixture: a lowercase name is still
 // looked up in `IntrinsicElements`, and props are still checked against the
 // type of the tag rather than against what `ElementType` allows. The lines that

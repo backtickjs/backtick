@@ -1,5 +1,5 @@
-import type { BacktickElementType } from "@backtickjs/boundary";
-import { createElement, createFragment } from "@backtickjs/boundary";
+import type { JsxElementType } from "@backtickjs/boundary";
+import { createFragment, createJsxElement } from "@backtickjs/boundary";
 import type { BacktickElement, BacktickNode } from "@backtickjs/boundary";
 import type { Elements as Site } from "../declarations.generated.js";
 
@@ -33,7 +33,7 @@ export const Fragment = createFragment<FragmentProps>();
 export declare namespace JSX {
   export interface Element extends BacktickElement {}
   export interface IntrinsicElements extends Site {}
-  export type ElementType = BacktickElementType;
+  export type ElementType = JsxElementType;
   export interface ElementChildrenAttribute {
     children: unknown;
   }
@@ -43,7 +43,7 @@ export function jsx(
   type: JSX.ElementType,
   props: { [key: string]: unknown },
 ): JSX.Element {
-  return createElement(type, props);
+  return createJsxElement(type, props);
 }
 
 export const jsxs = jsx;
