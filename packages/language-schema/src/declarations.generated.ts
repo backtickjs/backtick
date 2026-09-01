@@ -29,7 +29,7 @@ export interface State<T> extends ReadonlyState<T> {
   update(updater: (value: T) => T): void;
 }
 
-export interface ArrayLike<T> {
+export interface ArrayLike<T extends ClientValue> {
   readonly length: number;
   readonly [n: number]: T;
 }

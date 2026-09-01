@@ -59,7 +59,7 @@ export const schema: Schema = {
     ),
 
     ArrayLike: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
         length: Type.Number({ readOnly: true }),
         n: Type.Index("n", Type.Number(), Type.Ref("T"), { readOnly: true }),

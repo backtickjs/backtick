@@ -108,7 +108,7 @@ export const schema: Schema = {
           },
         ),
         postMessage: Type.Generic(
-          [Type.GenericParameter("T")],
+          [Type.GenericParameter("T", Type.Ref("ClientValue"))],
           Type.Function(
             [
               Type.FunctionParameter("message", Type.Ref("T"), {
@@ -133,7 +133,7 @@ export const schema: Schema = {
       },
     ),
     Event: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Ref("ClientHandle")], {
         bubbles: Type.Boolean({ readOnly: true }),
         cancelable: Type.Boolean({ readOnly: true }),
@@ -160,7 +160,7 @@ export const schema: Schema = {
       },
     ),
     UIEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {
         detail: Type.Number({ readOnly: true }),
         which: Type.Number({ readOnly: true }),
@@ -171,7 +171,7 @@ export const schema: Schema = {
       },
     ),
     MouseEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])], {
         altKey: Type.Boolean({ readOnly: true }),
         button: Type.Number({ readOnly: true }),
@@ -203,7 +203,7 @@ export const schema: Schema = {
       },
     ),
     PointerEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")])], {
         altitudeAngle: Type.Number({ readOnly: true }),
         azimuthAngle: Type.Number({ readOnly: true }),
@@ -225,12 +225,12 @@ export const schema: Schema = {
       },
     ),
     DragEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")])], {}),
       { description: "Something is being dragged." },
     ),
     WheelEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("MouseEvent"), [Type.Ref("T")])], {
         deltaMode: Type.Number({ readOnly: true }),
         deltaX: Type.Number({ readOnly: true }),
@@ -240,7 +240,7 @@ export const schema: Schema = {
       { description: "A wheel turned, and by how much in which units." },
     ),
     KeyboardEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])], {
         altKey: Type.Boolean({ readOnly: true }),
         charCode: Type.Number({ readOnly: true }),
@@ -257,7 +257,7 @@ export const schema: Schema = {
       { description: "A key went down or came up, and which key it was." },
     ),
     InputEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])], {
         data: Type.Union([Type.String(), Type.Null()], { readOnly: true }),
         inputType: Type.String({ readOnly: true }),
@@ -266,7 +266,7 @@ export const schema: Schema = {
       { description: "The value of an editable element changed, and how." },
     ),
     CompositionEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])], {
         data: Type.String({ readOnly: true }),
       }),
@@ -276,7 +276,7 @@ export const schema: Schema = {
       },
     ),
     FocusEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])], {
         relatedTarget: Type.Union([Type.Ref("EventTarget"), Type.Null()], {
           readOnly: true,
@@ -285,7 +285,7 @@ export const schema: Schema = {
       { description: "Focus arrived or left." },
     ),
     TouchEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("UIEvent"), [Type.Ref("T")])], {
         altKey: Type.Boolean({ readOnly: true }),
         ctrlKey: Type.Boolean({ readOnly: true }),
@@ -295,17 +295,17 @@ export const schema: Schema = {
       { description: "Fingers on a screen." },
     ),
     ClipboardEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {}),
       { description: "A copy, cut or paste." },
     ),
     SubmitEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {}),
       { description: "A form was submitted." },
     ),
     ToggleEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {
         newState: Type.String({ readOnly: true }),
         oldState: Type.String({ readOnly: true }),
@@ -313,7 +313,7 @@ export const schema: Schema = {
       { description: "Something that opens and closes did." },
     ),
     AnimationEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {
         animationName: Type.String({ readOnly: true }),
         elapsedTime: Type.Number({ readOnly: true }),
@@ -322,7 +322,7 @@ export const schema: Schema = {
       { description: "A CSS animation reached one of its edges." },
     ),
     TransitionEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {
         elapsedTime: Type.Number({ readOnly: true }),
         propertyName: Type.String({ readOnly: true }),
@@ -331,7 +331,7 @@ export const schema: Schema = {
       { description: "A CSS transition reached one of its edges." },
     ),
     ProgressEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {
         lengthComputable: Type.Boolean({ readOnly: true }),
         loaded: Type.Number({ readOnly: true }),
@@ -340,7 +340,7 @@ export const schema: Schema = {
       { description: "Something loading said how far it had got." },
     ),
     MessageEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface(
         [Type.Apply(Type.Ref("Event"), [Type.Ref("EventTarget")])],
         {
@@ -360,7 +360,7 @@ export const schema: Schema = {
       },
     ),
     ErrorEvent: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([Type.Apply(Type.Ref("Event"), [Type.Ref("T")])], {
         colno: Type.Number({ readOnly: true }),
         filename: Type.String({ readOnly: true }),
@@ -1280,7 +1280,7 @@ export const schema: Schema = {
       "aria-valuetext": Type.Optional(Type.String()),
     }),
     Events: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
         oncopy: Type.Optional(
           Type.Function(
@@ -2242,7 +2242,7 @@ export const schema: Schema = {
       }),
     ),
     GlobalAttributes: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface(
         [
           Type.Ref("AriaAttributes"),
@@ -2341,14 +2341,14 @@ export const schema: Schema = {
       ),
     ),
     VoidProps: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface(
         [Type.Apply(Type.Ref("GlobalAttributes"), [Type.Ref("T")])],
         {},
       ),
     ),
     HtmlProps: Type.Generic(
-      [Type.GenericParameter("T")],
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface(
         [Type.Apply(Type.Ref("GlobalAttributes"), [Type.Ref("T")])],
         {

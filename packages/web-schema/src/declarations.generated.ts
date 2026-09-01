@@ -69,7 +69,7 @@ export interface Window extends ClientHandle {
    * sandboxed without `allow-same-origin` has an origin no sender can name, so
    * `*` is the only thing there is to say.
    */
-  postMessage<T>(message: T, targetOrigin: string): void;
+  postMessage<T extends ClientValue>(message: T, targetOrigin: string): void;
 }
 
 declare const EventBrand: unique symbol;
@@ -77,7 +77,7 @@ declare const EventBrand: unique symbol;
  * Anything that happens to an element, and what every other event here is one
  * of.
  */
-export interface Event<T> extends ClientHandle {
+export interface Event<T extends ClientValue> extends ClientHandle {
   readonly [EventBrand]: never;
   readonly bubbles: boolean;
   readonly cancelable: boolean;
@@ -99,7 +99,7 @@ declare const UIEventBrand: unique symbol;
 /**
  * An event that came from the interface rather than from the page's own code.
  */
-export interface UIEvent<T> extends Event<T> {
+export interface UIEvent<T extends ClientValue> extends Event<T> {
   readonly [UIEventBrand]: never;
   readonly detail: number;
   readonly which: number;
@@ -109,7 +109,7 @@ declare const MouseEventBrand: unique symbol;
 /**
  * A pointing device did something, and where it was when it did.
  */
-export interface MouseEvent<T> extends UIEvent<T> {
+export interface MouseEvent<T extends ClientValue> extends UIEvent<T> {
   readonly [MouseEventBrand]: never;
   readonly altKey: boolean;
   readonly button: number;
@@ -138,7 +138,7 @@ declare const PointerEventBrand: unique symbol;
 /**
  * A mouse, a pen or a finger — what the DOM hands a click, whichever it was.
  */
-export interface PointerEvent<T> extends MouseEvent<T> {
+export interface PointerEvent<T extends ClientValue> extends MouseEvent<T> {
   readonly [PointerEventBrand]: never;
   readonly altitudeAngle: number;
   readonly azimuthAngle: number;
@@ -159,7 +159,7 @@ declare const DragEventBrand: unique symbol;
 /**
  * Something is being dragged.
  */
-export interface DragEvent<T> extends MouseEvent<T> {
+export interface DragEvent<T extends ClientValue> extends MouseEvent<T> {
   readonly [DragEventBrand]: never;
 }
 
@@ -167,7 +167,7 @@ declare const WheelEventBrand: unique symbol;
 /**
  * A wheel turned, and by how much in which units.
  */
-export interface WheelEvent<T> extends MouseEvent<T> {
+export interface WheelEvent<T extends ClientValue> extends MouseEvent<T> {
   readonly [WheelEventBrand]: never;
   readonly deltaMode: number;
   readonly deltaX: number;
@@ -179,7 +179,7 @@ declare const KeyboardEventBrand: unique symbol;
 /**
  * A key went down or came up, and which key it was.
  */
-export interface KeyboardEvent<T> extends UIEvent<T> {
+export interface KeyboardEvent<T extends ClientValue> extends UIEvent<T> {
   readonly [KeyboardEventBrand]: never;
   readonly altKey: boolean;
   readonly charCode: number;
@@ -198,7 +198,7 @@ declare const InputEventBrand: unique symbol;
 /**
  * The value of an editable element changed, and how.
  */
-export interface InputEvent<T> extends UIEvent<T> {
+export interface InputEvent<T extends ClientValue> extends UIEvent<T> {
   readonly [InputEventBrand]: never;
   readonly data: string | null;
   readonly inputType: string;
@@ -209,7 +209,7 @@ declare const CompositionEventBrand: unique symbol;
 /**
  * Text is being composed — an input method is part-way through a character.
  */
-export interface CompositionEvent<T> extends UIEvent<T> {
+export interface CompositionEvent<T extends ClientValue> extends UIEvent<T> {
   readonly [CompositionEventBrand]: never;
   readonly data: string;
 }
@@ -218,7 +218,7 @@ declare const FocusEventBrand: unique symbol;
 /**
  * Focus arrived or left.
  */
-export interface FocusEvent<T> extends UIEvent<T> {
+export interface FocusEvent<T extends ClientValue> extends UIEvent<T> {
   readonly [FocusEventBrand]: never;
   readonly relatedTarget: EventTarget | null;
 }
@@ -227,7 +227,7 @@ declare const TouchEventBrand: unique symbol;
 /**
  * Fingers on a screen.
  */
-export interface TouchEvent<T> extends UIEvent<T> {
+export interface TouchEvent<T extends ClientValue> extends UIEvent<T> {
   readonly [TouchEventBrand]: never;
   readonly altKey: boolean;
   readonly ctrlKey: boolean;
@@ -239,7 +239,7 @@ declare const ClipboardEventBrand: unique symbol;
 /**
  * A copy, cut or paste.
  */
-export interface ClipboardEvent<T> extends Event<T> {
+export interface ClipboardEvent<T extends ClientValue> extends Event<T> {
   readonly [ClipboardEventBrand]: never;
 }
 
@@ -247,7 +247,7 @@ declare const SubmitEventBrand: unique symbol;
 /**
  * A form was submitted.
  */
-export interface SubmitEvent<T> extends Event<T> {
+export interface SubmitEvent<T extends ClientValue> extends Event<T> {
   readonly [SubmitEventBrand]: never;
 }
 
@@ -255,7 +255,7 @@ declare const ToggleEventBrand: unique symbol;
 /**
  * Something that opens and closes did.
  */
-export interface ToggleEvent<T> extends Event<T> {
+export interface ToggleEvent<T extends ClientValue> extends Event<T> {
   readonly [ToggleEventBrand]: never;
   readonly newState: string;
   readonly oldState: string;
@@ -265,7 +265,7 @@ declare const AnimationEventBrand: unique symbol;
 /**
  * A CSS animation reached one of its edges.
  */
-export interface AnimationEvent<T> extends Event<T> {
+export interface AnimationEvent<T extends ClientValue> extends Event<T> {
   readonly [AnimationEventBrand]: never;
   readonly animationName: string;
   readonly elapsedTime: number;
@@ -276,7 +276,7 @@ declare const TransitionEventBrand: unique symbol;
 /**
  * A CSS transition reached one of its edges.
  */
-export interface TransitionEvent<T> extends Event<T> {
+export interface TransitionEvent<T extends ClientValue> extends Event<T> {
   readonly [TransitionEventBrand]: never;
   readonly elapsedTime: number;
   readonly propertyName: string;
@@ -287,7 +287,7 @@ declare const ProgressEventBrand: unique symbol;
 /**
  * Something loading said how far it had got.
  */
-export interface ProgressEvent<T> extends Event<T> {
+export interface ProgressEvent<T extends ClientValue> extends Event<T> {
   readonly [ProgressEventBrand]: never;
   readonly lengthComputable: boolean;
   readonly loaded: number;
@@ -300,7 +300,9 @@ declare const MessageEventBrand: unique symbol;
  * than what the event happened to: a message is always the window's, so there
  * is nothing else to say about its target.
  */
-export interface MessageEvent<T> extends Event<EventTarget> {
+export interface MessageEvent<
+  T extends ClientValue,
+> extends Event<EventTarget> {
   readonly [MessageEventBrand]: never;
   readonly data: T;
   readonly lastEventId: string;
@@ -312,7 +314,7 @@ declare const ErrorEventBrand: unique symbol;
 /**
  * Something failed, and said where.
  */
-export interface ErrorEvent<T> extends Event<T> {
+export interface ErrorEvent<T extends ClientValue> extends Event<T> {
   readonly [ErrorEventBrand]: never;
   readonly colno: number;
   readonly filename: string;
@@ -1312,7 +1314,7 @@ export interface AriaAttributes {
   "aria-valuetext"?: Prop<string>;
 }
 
-export interface Events<T> {
+export interface Events<T extends ClientValue> {
   oncopy?: Prop<(event: ClipboardEvent<T>) => void>;
   oncut?: Prop<(event: ClipboardEvent<T>) => void>;
   onpaste?: Prop<(event: ClipboardEvent<T>) => void>;
@@ -1402,7 +1404,8 @@ export interface Events<T> {
   ontoggle?: Prop<(event: ToggleEvent<T>) => void>;
 }
 
-export interface GlobalAttributes<T> extends AriaAttributes, Events<T> {
+export interface GlobalAttributes<T extends ClientValue>
+  extends AriaAttributes, Events<T> {
   accesskey?: Prop<string>;
   autocapitalize?: Prop<
     "off" | "none" | "on" | "sentences" | "words" | "characters"
@@ -1443,9 +1446,9 @@ export interface GlobalAttributes<T> extends AriaAttributes, Events<T> {
   translate?: Prop<"yes" | "no">;
 }
 
-export interface VoidProps<T> extends GlobalAttributes<T> {}
+export interface VoidProps<T extends ClientValue> extends GlobalAttributes<T> {}
 
-export interface HtmlProps<T> extends GlobalAttributes<T> {
+export interface HtmlProps<T extends ClientValue> extends GlobalAttributes<T> {
   children?: BacktickNode;
 }
 
