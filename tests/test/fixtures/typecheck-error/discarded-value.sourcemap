@@ -37,3 +37,24 @@ cs.splice(                                →  [-semantic]
 )()                                       → ()
 );                                        → ;
 \n})())                                   → \n}`
+cs.lift((() => {\n                        → cs`{\n  
+cs.statement(                             → 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(ping)                                    → $ping
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)()                                       → ()
+);                                        → ;
+\n                                        → \n  
+cs.statement(                             → 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(getValue)                                → $getValue
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)()                                       → ()
+);                                        → ;
+\n                                        → \n  
+return cs.const(                          → return 
+1                                         → 1
+);                                        → ;
+\n})())                                   → \n}`

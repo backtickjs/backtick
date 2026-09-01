@@ -74,7 +74,9 @@ export async function Main(): Promise<Client<JSX.Element>> {
       return list[Math.round(Math.random() * 1000) % list.length];
     };
 
-    const buildData = (count: number, from: number) => {
+    const buildData = (count: number) => {
+      const from = rowId.read();
+      rowId.write(from + count);
       return Array.from({ length: count }, (_, index) => {
         return {
           id: from + index,
@@ -86,21 +88,15 @@ export async function Main(): Promise<Client<JSX.Element>> {
     };
 
     const run = () => {
-      const from = rowId.read();
-      data.write(buildData(1000, from));
-      rowId.write(from + 1000);
+      data.write(buildData(1000));
     };
 
     const runLots = () => {
-      const from = rowId.read();
-      data.write(buildData(10000, from));
-      rowId.write(from + 10000);
+      data.write(buildData(10000));
     };
 
     const add = () => {
-      const from = rowId.read();
-      data.write([...data.read(), ...buildData(1000, from)]);
-      rowId.write(from + 1000);
+      data.write([...data.read(), ...buildData(1000)]);
     };
 
     const partialUpdate = () => {

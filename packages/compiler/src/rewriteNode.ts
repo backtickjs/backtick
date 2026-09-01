@@ -667,16 +667,6 @@ function rewriteNodeImpl(
     const assignment =
       ts.isBinaryExpression(inner) &&
       inner.operatorToken.kind === ts.SyntaxKind.EqualsToken;
-    // An expression statement is a side effect (or dead code). It still
-    // rewrites so its splices don't dangle into "Cannot find name"
-    // cascades.
-    if (state.bodyKind === "value" && !assignment) {
-      state.errors.set(
-        node,
-        "A script that returns a value can't have side effects; run them " +
-          "in an action — a block without `return`.",
-      );
-    }
     const expression = rewriteNode(ts, state, node.expression);
     // A statement discards its expression, which is only silent for
     // `void`. Assignments are language statements.

@@ -16,3 +16,11 @@ const action = cs`{
   $ping();
   $getValue();
 }`;
+
+// The same rule in a script that returns: the position is what decides, so a
+// discarded value fails here too while the action beside it stands.
+const valued = cs`{
+  $ping();
+  $getValue();
+  return 1;
+}`;

@@ -7,7 +7,7 @@ const getValue = cs.create(
   {
     version: "0.0.0",
     filePath: "discarded-value.ts",
-    fileHash: "1y1jdbv3pfwln",
+    fileHash: "2at3b932vh0hl",
     kind: "value",
     splices: {},
     captures: [],
@@ -39,7 +39,7 @@ const ping = cs.create(
   {
     version: "0.0.0",
     filePath: "discarded-value.ts",
-    fileHash: "1y1jdbv3pfwln",
+    fileHash: "2at3b932vh0hl",
     kind: "value",
     splices: {},
     captures: [],
@@ -67,7 +67,7 @@ const ping = cs.create(
                   kind: 80,
                   loc: [11, 7, 11, 8],
                   text: "n",
-                  bindingKey: "n$1y1jdbv3pfwln$0",
+                  bindingKey: "n$2at3b932vh0hl$0",
                 },
                 initializer: {
                   kind: 9,
@@ -86,7 +86,7 @@ const ping = cs.create(
             kind: 80,
             loc: [12, 3, 12, 4],
             text: "n",
-            bindingKey: "n$1y1jdbv3pfwln$0",
+            bindingKey: "n$2at3b932vh0hl$0",
           },
           operatorToken: "=",
           right: {
@@ -104,7 +104,7 @@ const action = cs.create(
   {
     version: "0.0.0",
     filePath: "discarded-value.ts",
-    fileHash: "1y1jdbv3pfwln",
+    fileHash: "2at3b932vh0hl",
     kind: "action",
     splices: { $ping: ping, $getValue: getValue },
     captures: [],
@@ -135,6 +135,57 @@ const action = cs.create(
         },
         questionDotToken: false,
         arguments: [],
+      },
+    ],
+  }),
+);
+// The same rule in a script that returns: the position is what decides, so a
+// discarded value fails here too while the action beside it stands.
+const valued = cs.create(
+  [22, 16, 26, 3],
+  {
+    version: "0.0.0",
+    filePath: "discarded-value.ts",
+    fileHash: "2at3b932vh0hl",
+    kind: "value",
+    splices: { $ping: ping, $getValue: getValue },
+    captures: [],
+    spliceParams: { $ping: [], $getValue: [] },
+  },
+  () => ({
+    kind: 242,
+    loc: [22, 19, 26, 2],
+    statements: [
+      {
+        kind: 214,
+        loc: [23, 3, 23, 10],
+        expression: {
+          kind: 1000,
+          loc: [23, 3, 23, 8],
+          key: "$ping",
+        },
+        questionDotToken: false,
+        arguments: [],
+      },
+      {
+        kind: 214,
+        loc: [24, 3, 24, 14],
+        expression: {
+          kind: 1000,
+          loc: [24, 3, 24, 12],
+          key: "$getValue",
+        },
+        questionDotToken: false,
+        arguments: [],
+      },
+      {
+        kind: 254,
+        loc: [25, 3, 25, 12],
+        expression: {
+          kind: 9,
+          loc: [25, 10, 25, 11],
+          value: 1,
+        },
       },
     ],
   }),
