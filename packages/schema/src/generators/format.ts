@@ -6,6 +6,7 @@
  * has to publish and every layer above has to hand on.
  */
 export const format: ReadonlySet<string> = new Set([
+  "BacktickElement",
   "Children",
   "Client",
   "ClientElement",
@@ -13,7 +14,6 @@ export const format: ReadonlySet<string> = new Set([
   "ClientHandle",
   "ClientUnknown",
   "ClientValue",
-  "JsxElement",
   "Prop",
   "ServerComponent",
 ]);

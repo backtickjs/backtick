@@ -6,7 +6,7 @@ export type {
 } from "@backtickjs/boundary";
 export type { ReadonlyState, State } from "@backtickjs/language-schema";
 export { state } from "@backtickjs/language-schema";
-export type { Children, JsxElement, Prop } from "@backtickjs/boundary";
+export type { BacktickElement, Children, Prop } from "@backtickjs/boundary";
 
 // The boundary itself, which is the one thing here that is nobody else's.
 export { cs } from "./cs.js";

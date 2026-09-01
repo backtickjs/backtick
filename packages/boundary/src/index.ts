@@ -24,11 +24,11 @@ export type { Prop } from "./Prop.js";
 export type { Children } from "./Children.js";
 export type { ServerComponent } from "./ServerComponent.js";
 export {
-  createJsxElement,
-  isJsxElement,
-  type JsxElement,
-  type JsxElementType,
-} from "./JsxElement.js";
+  createElement,
+  isElement,
+  type BacktickElement,
+  type BacktickElementType,
+} from "./BacktickElement.js";
 export { createFragment, type Fragment } from "./Fragment.js";
 
 // A script is what crosses too: the compiler writes one, the bundler reads it,

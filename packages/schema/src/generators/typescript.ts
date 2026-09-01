@@ -32,7 +32,8 @@ import type { TNode } from "../TNode.js";
 /** What a schema node reads as, in TypeScript. */
 export function type(node: TNode): string {
   // A `$ref` is a name, whether the document declares it or the boundary
-  // supplies it — `JsxElement` is the second kind, and reads no differently.
+  // supplies it — `BacktickElement` is the second kind, and reads no
+  // differently.
   if (IsRef(node)) {
     return node.$ref;
   }

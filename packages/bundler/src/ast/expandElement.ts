@@ -1,16 +1,16 @@
 import { type Spliceable } from "@backtickjs/boundary";
-import { type JsxElement } from "@backtickjs/boundary";
+import { type BacktickElement } from "@backtickjs/boundary";
 import type { Ast } from "./Ast.js";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The in-flight promise, so two references to one element share the expansion
 // instead of racing into duplicate subtrees.
-const nodeByElement = new WeakMap<JsxElement, Promise<Ast>>();
+const nodeByElement = new WeakMap<BacktickElement, Promise<Ast>>();
 
 // Runs the element's component and lowers what it names. The component itself
 // never leaves the host: a server component expands away here, and only the
 // client component it bottoms out in reaches the bundle.
-export function expandJsxElement(value: JsxElement): Promise<Ast> {
+export function expandElement(value: BacktickElement): Promise<Ast> {
   const shared = nodeByElement.get(value);
   if (shared) {
     return shared;
@@ -24,7 +24,7 @@ export function expandJsxElement(value: JsxElement): Promise<Ast> {
 // `lowerSpliceable`'s to say — it refuses by dispatching on what it was handed,
 // where a check here could only predict the same answer — so this adds where a
 // failure happened and claims nothing about why.
-async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
+async function buildTag(jsx: BacktickElement, id: string): Promise<Ast> {
   const props = Object.fromEntries(
     await Promise.all(
       Object.entries(jsx.props).map(
@@ -51,7 +51,7 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
   return { kind: "AstElement", id, props };
 }
 
-async function buildElement(jsx: JsxElement): Promise<Ast> {
+async function buildElement(jsx: BacktickElement): Promise<Ast> {
   const type = jsx.type;
 
   // An element is its own name — `<div>` is `"div"`, the same string a client

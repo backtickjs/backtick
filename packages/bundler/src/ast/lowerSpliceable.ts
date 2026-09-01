@@ -1,11 +1,11 @@
 import { isClientScript } from "@backtickjs/boundary";
-import { isJsxElement } from "@backtickjs/boundary";
+import { isElement } from "@backtickjs/boundary";
 import { isBuiltin, type Client, type Spliceable } from "@backtickjs/boundary";
 import type { Ast } from "./Ast.js";
 import { holeName } from "./holes.js";
 import { lowerClientScript } from "./lowerClientScript.js";
 import { expandFunction } from "./expandFunction.js";
-import { expandJsxElement } from "./expandJsxElement.js";
+import { expandElement } from "./expandElement.js";
 
 export async function lowerSpliceable(
   value: Spliceable,
@@ -29,8 +29,8 @@ export async function lowerSpliceable(
     }
     return lowerClientScript(value);
   }
-  if (isJsxElement(value)) {
-    return expandJsxElement(value);
+  if (isElement(value)) {
+    return expandElement(value);
   }
   if (isBuiltin(value)) {
     return { kind: "AstBuiltin", name: value.name };
