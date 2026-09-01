@@ -9,7 +9,6 @@ export const format: ReadonlySet<string> = new Set([
   "BacktickElement",
   "Children",
   "Client",
-  "ClientElement",
   "ClientFunction",
   "ClientHandle",
   "ClientUnknown",

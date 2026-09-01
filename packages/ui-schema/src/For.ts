@@ -1,5 +1,5 @@
 import { createElement, type ClientValue } from "@backtickjs/boundary";
-import type { ClientElement } from "@backtickjs/boundary";
+import type { BacktickElement } from "@backtickjs/boundary";
 import type { ForProps } from "./declarations.generated.js";
 
 /**
@@ -10,7 +10,7 @@ import type { ForProps } from "./declarations.generated.js";
  */
 export async function For<T extends ClientValue>(
   props: ForProps<T>,
-): Promise<ClientElement> {
+): Promise<BacktickElement> {
   return createElement("for", {
     each: props.each,
     children: props.children,

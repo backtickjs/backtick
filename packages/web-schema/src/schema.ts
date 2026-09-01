@@ -1049,7 +1049,7 @@ export const schema: Schema = {
       tabIndex: Type.Number({}),
     }),
     HtmlNode: Type.Union([
-      Type.Ref("ClientElement"),
+      Type.Ref("BacktickElement"),
       Type.String(),
       Type.Number(),
       Type.Null(),

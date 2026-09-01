@@ -28,7 +28,7 @@ export const schema: Schema = {
               },
             ),
           ],
-          Type.Ref("ClientElement"),
+          Type.Ref("BacktickElement"),
         ),
       }),
     ),

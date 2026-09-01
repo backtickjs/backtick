@@ -1,5 +1,4 @@
-import type { ClientValue } from "./ClientValue.js";
-import type { ClientElement } from "./ClientElement.js";
+import type { ClientHandle, ClientValue } from "./ClientValue.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 declare const BacktickElementBrand: unique symbol;
@@ -13,7 +12,7 @@ export type BacktickElementType<ClientNode extends ClientValue> =
  * and its props are the host's own, and nothing a client script holds reaches
  * them.
  */
-export interface BacktickElement extends ClientElement {
+export interface BacktickElement extends ClientHandle {
   readonly [BacktickElementBrand]: never;
   readonly "@backtickjs": "BacktickElement";
   readonly type: BacktickElementType<ClientValue>;
@@ -29,9 +28,9 @@ export function isElement(value: unknown): value is BacktickElement {
   );
 }
 
-// The one place a drawing is made: `ClientElement` is branded with a symbol
-// nothing outside the generated schema can write, so what makes one says so
-// here rather than every holder being asked to prove it.
+// The one place a drawing is made: the brand is a symbol nothing outside this
+// file can write, so what makes one says so here rather than every holder
+// being asked to prove it.
 export function createElement(
   type: BacktickElementType<ClientValue>,
   props: { [key: string]: unknown },

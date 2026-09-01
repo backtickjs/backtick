@@ -9,7 +9,7 @@ import type {
   String,
   StringConstructor,
 } from "./receivers.generated.js";
-import type { ClientElement } from "@backtickjs/boundary";
+import type { BacktickElement } from "@backtickjs/boundary";
 import type { Builtins } from "@backtickjs/language-schema";
 import type { ClientFunction } from "@backtickjs/boundary";
 import type { ClientValue } from "@backtickjs/boundary";
@@ -68,7 +68,7 @@ export type IndexKey<R> = R extends Array<any> ? number : keyof R;
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
-//   ClientElement                 -> {}: opaque
+//   BacktickElement                 -> {}: opaque
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
@@ -92,7 +92,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
                     ? Builtins["clearInterval"]
                     : T extends string | number | boolean | ClientValue[]
                       ? Autoboxed<T>
-                      : T extends ClientElement
+                      : T extends BacktickElement
                         ? {}
                         : T extends ClientFunction
                           ? T
