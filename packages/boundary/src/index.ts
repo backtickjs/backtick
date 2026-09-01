@@ -10,11 +10,12 @@ export type { BacktickRecord } from "./BacktickRecord.js";
 export type { BacktickValue } from "./BacktickValue.js";
 export type { ClientRecord } from "./ClientRecord.js";
 export type { ServerRecord } from "./ServerRecord.js";
+export type { ServerUnknown } from "./ServerUnknown.js";
 export type { ServerValue } from "./ServerValue.js";
+export type { ClientUnknown } from "./ClientUnknown.js";
 export type {
   ClientFunction,
   ClientHandle,
-  ClientUnknown,
   ClientValue,
 } from "./ClientValue.js";
 export type { Client } from "./Client.js";

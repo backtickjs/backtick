@@ -1,4 +1,5 @@
 import type { Client } from "./Client.js";
+import type { BacktickElement } from "./BacktickElement.js";
 import type { ClientHandle, ClientValue } from "./ClientValue.js";
 import type { ServerRecord } from "./ServerRecord.js";
 
@@ -10,4 +11,5 @@ export type ServerValue =
   | string
   | ServerRecord
   | readonly ServerValue[]
-  | ClientHandle;
+  | ClientHandle
+  | BacktickElement;

@@ -1,4 +1,5 @@
 import type { BacktickElement } from "./BacktickElement.js";
+import type { ClientUnknown } from "./ClientUnknown.js";
 
 /**
  * What may cross the host/client boundary, and nothing about what a script
@@ -37,4 +38,3 @@ export type ClientValue =
   | ClientFunction
   | ClientHandle;
 
-export type ClientUnknown = ClientValue | void;

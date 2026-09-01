@@ -1,8 +1,8 @@
 import type { Client } from "./Client.js";
+import type { ClientUnknown } from "./ClientUnknown.js";
 import type {
   ClientFunction,
   ClientHandle,
-  ClientUnknown,
   ClientValue,
 } from "./ClientValue.js";
 
