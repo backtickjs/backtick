@@ -6,12 +6,6 @@
  * runtime, and a client all name these without any of them reaching for the
  * generator that wrote their declarations.
  */
-export type { BacktickRecord } from "./BacktickRecord.js";
-export type { BacktickValue } from "./BacktickValue.js";
-export type { ClientRecord } from "./ClientRecord.js";
-export type { ServerRecord } from "./ServerRecord.js";
-export type { ServerUnknown } from "./ServerUnknown.js";
-export type { ServerValue } from "./ServerValue.js";
 export type { ClientUnknown } from "./ClientUnknown.js";
 export type {
   ClientFunction,
