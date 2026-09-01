@@ -1,12 +1,22 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-schema/jsx-runtime";
+import {
+  Fragment as _Fragment,
+  jsx as _jsx,
+  jsxs as _jsxs,
+} from "@backtickjs/web-schema/jsx-runtime";
 // A component stands exactly where its tag did, so what it may answer with is
-// what may stand in a children position: `Children<D>`, where `D` is what the
-// target draws with. A browser draws a bare string or a number there, and a
-// list of children is a children position too.
+// what may stand there: one drawing, or nothing at all. Text and a list are
+// neither — a component with several children to give, or a bare string, wraps
+// them in a fragment, which is the one drawing that holds them and draws no
+// node of its own.
 async function Label() {
-  return "counted";
+  return _jsx(_Fragment, { children: "counted" });
 }
 async function Pair() {
-  return [_jsx("em", { children: "one" }), _jsx("em", { children: "two" })];
+  return _jsxs(_Fragment, {
+    children: [
+      _jsx("em", { children: "one" }),
+      _jsx("em", { children: "two" }),
+    ],
+  });
 }
 export default _jsxs("div", { children: [_jsx(Label, {}), _jsx(Pair, {})] });

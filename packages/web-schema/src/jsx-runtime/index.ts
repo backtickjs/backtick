@@ -29,7 +29,7 @@ export const Fragment = createFragment<FragmentProps>();
 export declare namespace JSX {
   export interface Element extends BacktickElement {}
   export interface IntrinsicElements extends Web {}
-  export type ElementType = BacktickElementType<HtmlNode>;
+  export type ElementType = BacktickElementType;
   export interface ElementChildrenAttribute {
     children: unknown;
   }

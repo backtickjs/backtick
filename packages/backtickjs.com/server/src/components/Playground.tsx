@@ -1,6 +1,5 @@
 import { For, cs, state } from "@backtickjs/core";
-import type { Client } from "@backtickjs/core";
-import type { HtmlNode } from "@backtickjs/web-schema";
+import type { BacktickElement, Client } from "@backtickjs/core";
 import type { Example } from "../examples/Example.js";
 import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
 import { ink, line, mono, muted, paper, wash } from "./theme.js";
@@ -308,7 +307,7 @@ export async function Playground({
   example,
 }: {
   example: Example;
-}): Promise<Client<HtmlNode>> {
+}): Promise<Client<BacktickElement>> {
   return cs`{
     // What the reader has typed, and what the build already drew — both read off
     // the example itself, which crosses whole. The drawing is of the text beside

@@ -1,13 +1,19 @@
 // A component stands exactly where its tag did, so what it may answer with is
-// what may stand in a children position: `Children<D>`, where `D` is what the
-// target draws with. A browser draws a bare string or a number there, and a
-// list of children is a children position too.
+// what may stand there: one drawing, or nothing at all. Text and a list are
+// neither — a component with several children to give, or a bare string, wraps
+// them in a fragment, which is the one drawing that holds them and draws no
+// node of its own.
 async function Label() {
-  return "counted";
+  return <>counted</>;
 }
 
 async function Pair() {
-  return [<em>one</em>, <em>two</em>];
+  return (
+    <>
+      <em>one</em>
+      <em>two</em>
+    </>
+  );
 }
 
 export default (

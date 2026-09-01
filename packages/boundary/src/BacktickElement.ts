@@ -1,11 +1,11 @@
-import type { ClientHandle, ClientValue } from "./ClientValue.js";
+import type { ClientHandle } from "./ClientValue.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 declare const BacktickElementBrand: unique symbol;
 
-export type BacktickElementType<ClientNode extends ClientValue> =
+export type BacktickElementType =
   | string /* IntrinsicElement tag */
-  | ServerComponent<never, ClientNode>;
+  | ServerComponent<never>;
 
 /**
  * What a JSX tag evaluates to on the host, before bundling resolves it. The tag
@@ -15,7 +15,7 @@ export type BacktickElementType<ClientNode extends ClientValue> =
 export interface BacktickElement extends ClientHandle {
   readonly [BacktickElementBrand]: never;
   readonly "@backtickjs": "BacktickElement";
-  readonly type: BacktickElementType<ClientValue>;
+  readonly type: BacktickElementType;
   readonly props: { [key: string]: unknown };
 }
 
@@ -32,7 +32,7 @@ export function isElement(value: unknown): value is BacktickElement {
 // file can write, so what makes one says so here rather than every holder
 // being asked to prove it.
 export function createElement(
-  type: BacktickElementType<ClientValue>,
+  type: BacktickElementType,
   props: { [key: string]: unknown },
 ): BacktickElement {
   return {

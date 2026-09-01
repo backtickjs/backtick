@@ -1,12 +1,11 @@
-import type { ClientValue } from "./ClientValue.js";
-import type { Children } from "./Children.js";
+import type { BacktickElement } from "./BacktickElement.js";
+import type { Prop } from "./Prop.js";
 
 /**
  * A component built from other components. It runs on the host while bundling,
  * so it may await, and never reaches the client: the payload carries only what
  * it resolved to.
  */
-export type ServerComponent<
-  Props extends object,
-  ClientNode extends ClientValue,
-> = (props: Props) => Promise<Children<ClientNode>>;
+export type ServerComponent<Props extends object> = (
+  props: Props,
+) => Promise<Prop<BacktickElement | null>>;
