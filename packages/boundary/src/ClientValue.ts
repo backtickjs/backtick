@@ -1,3 +1,5 @@
+import type { BacktickElement } from "./BacktickElement.js";
+
 /**
  * What may cross the host/client boundary, and nothing about what a script
  * may say.
@@ -31,6 +33,7 @@ export type ClientValue =
   | string
   | { readonly [key: string]: ClientValue }
   | readonly ClientValue[]
+  | BacktickElement
   | ClientFunction
   | ClientHandle;
 

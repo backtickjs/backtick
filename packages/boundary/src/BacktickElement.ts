@@ -1,4 +1,3 @@
-import type { ClientHandle } from "./ClientValue.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 declare const BacktickElementBrand: unique symbol;
@@ -12,7 +11,7 @@ export type BacktickElementType =
  * and its props are the host's own, and nothing a client script holds reaches
  * them.
  */
-export interface BacktickElement extends ClientHandle {
+export interface BacktickElement {
   readonly [BacktickElementBrand]: never;
   readonly "@backtickjs": "BacktickElement";
   readonly type: BacktickElementType;
