@@ -6,6 +6,7 @@
  * runtime, and a client all name these without any of them reaching for the
  * generator that wrote their declarations.
  */
+export type { ServerValue } from "./ServerValue.js";
 export type {
   ClientFunction,
   ClientHandle,
