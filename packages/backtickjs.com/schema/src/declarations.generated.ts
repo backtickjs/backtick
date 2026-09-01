@@ -107,7 +107,6 @@ export type {
   HTMLUListElement,
   HTMLVideoElement,
   HtmlElementProps,
-  HtmlNode,
   HtmlProps,
   IframeProps,
   ImgProps,

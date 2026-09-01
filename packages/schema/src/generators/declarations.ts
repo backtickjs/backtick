@@ -334,7 +334,7 @@ export function declarations(schema: Schema): string {
   // it, and the wrapping is the generator's own.
   //
   // What a declaration writes, and not what it says about itself: a description
-  // naming `Children` is prose, and an import written because a comment spelled
+  // naming `BacktickNode` is prose, and an import written because a comment spelled
   // a name is an import nothing reads.
   const written = lines.filter((line) => !/^\s*(\/\*|\*)/.test(line));
   for (const held of format) {
@@ -449,14 +449,18 @@ export function prop(name: string, node: TNode, required: boolean): string {
   // what it wraps comes from the schema.
   //
   // A function is a script wherever it stands, the children position included:
-  // `<for>` holds one that makes drawings rather than a drawing, and `Children`
-  // would admit a host function and a list of them beside it. So what the node
-  // is decides first, and where it stands only after that.
+  // `<for>` holds one that makes drawings rather than a drawing, and a bare
+  // node type would admit a host function and a list of them beside it. So what
+  // the node is decides first, and where it stands only after that.
+  //
+  // Nothing wraps the rest: what may stand inside an element is already a whole
+  // children position — `BacktickNode` is one or several or none — so a wrapper
+  // here would be saying it twice.
   const written =
     name === "children"
       ? IsFunction(node)
         ? `Client<${type(node)}>`
-        : `Children<${type(node)}>`
+        : type(node)
       : `Prop<${type(node)}>`;
   return `  ${key(name)}${optional}: ${written};`;
 }

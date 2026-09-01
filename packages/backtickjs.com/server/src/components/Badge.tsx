@@ -1,5 +1,4 @@
-import type { HtmlNode } from "@backtickjs/web-schema";
-import type { Children } from "@backtickjs/core";
+import type { BacktickNode } from "@backtickjs/core";
 import { accent, accentEdge, accentFill, mono } from "./theme.js";
 
 // Tinted rather than filled: the colour says which family this belongs to
@@ -19,6 +18,6 @@ const BADGE =
 // A label next to the mark. The wordmark fills its own box top to bottom and
 // has no descenders, so centring against that box is also centring against its
 // caps, and the pill needs no optical nudge of its own.
-export async function Badge({ children }: { children: Children<HtmlNode> }) {
+export async function Badge({ children }: { children: BacktickNode }) {
   return <span style={BADGE}>{children}</span>;
 }

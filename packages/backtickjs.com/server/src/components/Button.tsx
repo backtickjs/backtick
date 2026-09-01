@@ -1,5 +1,4 @@
-import type { HtmlNode } from "@backtickjs/web-schema";
-import type { Children } from "@backtickjs/core";
+import type { BacktickNode } from "@backtickjs/core";
 import { ink, paper } from "./theme.js";
 
 const BASE =
@@ -16,7 +15,7 @@ export async function Button({
 }: {
   href: string;
   solid?: boolean;
-  children: Children<HtmlNode>;
+  children: BacktickNode;
 }) {
   const look =
     solid === true

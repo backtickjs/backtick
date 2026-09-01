@@ -1,5 +1,4 @@
-import type { HtmlNode } from "@backtickjs/web-schema";
-import type { Children } from "@backtickjs/core";
+import type { BacktickNode } from "@backtickjs/core";
 import { Badge } from "./Badge.js";
 import { GitHubMark } from "./GitHubMark.js";
 import { Logo } from "./Logo.js";
@@ -41,7 +40,7 @@ export async function Layout({
   children,
 }: {
   // Required, not optional: every page has a body.
-  children: Children<HtmlNode>;
+  children: BacktickNode;
 }) {
   return (
     <div style={SHELL}>

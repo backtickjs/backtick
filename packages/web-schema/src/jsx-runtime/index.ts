@@ -1,7 +1,7 @@
 import type { BacktickElementType } from "@backtickjs/boundary";
 import { createElement, createFragment } from "@backtickjs/boundary";
-import type { Elements as Web, HtmlNode } from "@backtickjs/web-schema";
-import type { BacktickElement, Children } from "@backtickjs/boundary";
+import type { Elements as Web } from "@backtickjs/web-schema";
+import type { BacktickElement, BacktickNode } from "@backtickjs/boundary";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //
@@ -21,7 +21,7 @@ import type { BacktickElement, Children } from "@backtickjs/boundary";
  * of this target.
  */
 export interface FragmentProps {
-  children?: Children<HtmlNode>;
+  children?: BacktickNode;
 }
 
 export const Fragment = createFragment<FragmentProps>();

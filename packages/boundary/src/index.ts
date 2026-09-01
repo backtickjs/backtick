@@ -20,7 +20,7 @@ export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
 // under the name a drawing gives it, so these belong with the boundary rather
 // with the layer that happens to declare elements.
 export type { Prop } from "./Prop.js";
-export type { Children } from "./Children.js";
+export type { BacktickNode } from "./BacktickNode.js";
 export type { ServerComponent } from "./ServerComponent.js";
 export {
   createElement,

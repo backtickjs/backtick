@@ -1048,13 +1048,6 @@ export const schema: Schema = {
       nonce: Type.String({}),
       tabIndex: Type.Number({}),
     }),
-    HtmlNode: Type.Union([
-      Type.Ref("BacktickElement"),
-      Type.String(),
-      Type.Number(),
-      Type.Null(),
-    ]),
-
     Booleanish: Type.Union([
       Type.Boolean(),
       Type.Literal("true"),
@@ -2359,7 +2352,7 @@ export const schema: Schema = {
       Type.Interface(
         [Type.Apply(Type.Ref("GlobalAttributes"), [Type.Ref("T")])],
         {
-          children: Type.Optional(Type.Ref("HtmlNode")),
+          children: Type.Optional(Type.Ref("BacktickNode")),
         },
       ),
     ),
@@ -3007,7 +3000,7 @@ export const schema: Schema = {
         Type.Apply(Type.Ref("Events"), [Type.Ref("SVGElement")]),
       ],
       {
-        children: Type.Optional(Type.Ref("HtmlNode")),
+        children: Type.Optional(Type.Ref("BacktickNode")),
         // The web schema's own, not a second spelling of them: SVG elements take
         // `class` and `onclick` because every element this target draws does.
         id: Type.Optional(Type.String()),

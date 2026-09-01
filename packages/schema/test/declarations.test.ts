@@ -14,7 +14,6 @@ const core: Schema = {
   package: "@backtickjs/core",
   namespace: "Core",
   extends: [],
-  publishes: ["Client"],
   types: {
     // a drawing is a declared interface, branded because it extends the root
     Drawing: Type.Interface([], {}),
@@ -34,9 +33,6 @@ const middle: Schema = {
   package: "@backtickjs/middle",
   namespace: "Middle",
   extends: [core],
-  // Published a schema above the root, which is what a layer between them is
-  // for: what a drawn position admits belongs where drawing does.
-  publishes: ["Prop", "Children"],
   types: {
     Shared: Type.Union([Type.String(), Type.Number()]),
   },
@@ -48,7 +44,6 @@ const target: Schema = {
   package: "@backtickjs/target",
   namespace: "Target",
   extends: [middle],
-  publishes: [],
   types: {
     Props: Type.Interface([], {
       value: Type.Optional(Type.Ref("Shared")),
@@ -65,7 +60,6 @@ const list: Schema = {
   package: "@backtickjs/list",
   namespace: "List",
   extends: [middle],
-  publishes: [],
   types: {
     ListProps: Type.Interface([], {
       each: Type.Array(Type.Ref("Shared"), {
@@ -96,7 +90,7 @@ describe("declarations", () => {
     // every layer rather than being handed up like the rest.
     assert.match(
       written,
-      /import type \{\n {2}Children,\n {2}Prop,\n\} from "@backtickjs\/boundary";/,
+      /import type \{\n {2}Prop,\n\} from "@backtickjs\/boundary";/,
     );
   });
 
@@ -105,7 +99,6 @@ describe("declarations", () => {
       package: "@backtickjs/core",
       namespace: "Core",
       extends: [],
-      publishes: [],
       types: {
         Props: Type.Interface([], {
           onpick: Type.Optional(Type.Function([], Type.Void())),
@@ -128,7 +121,7 @@ describe("declarations", () => {
     // against this schema reaches both by naming one package.
     assert.match(
       declarations(target),
-      /export type \{\n {2}Cell,\n {2}Children,\n {2}Client,\n {2}Drawing,\n {2}Drawn,\n {2}Prop,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
+      /export type \{\n {2}BacktickNode,\n {2}Cell,\n {2}Client,\n {2}Drawing,\n {2}Drawn,\n {2}Prop,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
     );
     // a schema with nothing under it hands on nothing
     assert.doesNotMatch(declarations(core), /^export type \{[^}]*\} from/m);
@@ -142,9 +135,9 @@ describe("declarations", () => {
   });
 
   it("writes a children position holding a function as a script", () => {
-    // A script and never `Children`, which would admit a host function and a
-    // list of them beside it: what stands here makes drawings rather than
-    // being one.
+    // A script and never the node type itself, which would admit a host
+    // function and a list of them beside it: what stands here makes drawings
+    // rather than being one.
     assert.match(
       declarations(list),
       /children: Client<\(member: Shared\) => Drawing>;/,
@@ -166,7 +159,7 @@ describe("declarations", () => {
     // written arm where the server has no way to write one
     assert.match(written, /onpick\?: Prop<\(\) => void>;/);
     // what goes inside an element is children
-    assert.match(written, /children\?: Children<Drawing>;/);
+    assert.match(written, /children\?: Drawing;/);
     // and a client's own interface is not props
     assert.doesNotMatch(declarations(core), /Prop</);
   });
@@ -239,9 +232,6 @@ describe("declarations", () => {
   });
 
   it("hands on what its base published, and never what it published itself", () => {
-    // `middle` publishes `Prop` and `Children`; `core` does not. So nothing in
-    // middle's artifact may claim they come from core — its own package is what
-    // publishes them, and the layer above reaches them from middle.
     const written = declarations(middle);
     assert.match(
       written,
@@ -259,17 +249,17 @@ describe("declarations", () => {
       package: "@backtickjs/core",
       namespace: "Core",
       extends: [],
-      publishes: ["Prop", "Children"],
+      publishes: ["Prop", "BacktickNode"],
       types: {
         Held: Type.String({
-          description: "Neither a `Prop` nor `Children`, whatever it says.",
+          description: "Neither a `Prop` nor `BacktickNode`, whatever it says.",
         }),
       },
       elements: {},
       builtins: {},
     };
     const written = declarations(prose);
-    assert.match(written, /Neither a `Prop` nor `Children`/);
+    assert.match(written, /Neither a `Prop` nor `BacktickNode`/);
     assert.doesNotMatch(written, /^import/m);
   });
 
