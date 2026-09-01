@@ -121,7 +121,7 @@ describe("declarations", () => {
     // against this schema reaches both by naming one package.
     assert.match(
       declarations(target),
-      /export type \{\n {2}BacktickNode,\n {2}Cell,\n {2}Client,\n {2}Drawing,\n {2}Drawn,\n {2}Prop,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
+      /export type \{\n {2}Cell,\n {2}Drawing,\n {2}Drawn,\n {2}Shared,\n\} from "@backtickjs\/middle";/,
     );
     // a schema with nothing under it hands on nothing
     assert.doesNotMatch(declarations(core), /^export type \{[^}]*\} from/m);
@@ -231,14 +231,16 @@ describe("declarations", () => {
     assert.doesNotMatch(declarations(target), /from "@backtickjs\/core"/);
   });
 
-  it("hands on what its base published, and never what it published itself", () => {
+  it("hands on what its base declares, and none of the boundary's own", () => {
     const written = declarations(middle);
     assert.match(
       written,
-      /export type \{\n {2}Cell,\n {2}Client,\n {2}Drawing,\n {2}Drawn,\n\} from "@backtickjs\/core";/,
+      /export type \{\n {2}Cell,\n {2}Drawing,\n {2}Drawn,\n\} from "@backtickjs\/core";/,
     );
+    // A boundary name is reached from the boundary at every layer, so a base
+    // hands on none of them — not even one a declaration under it wrote.
     assert.doesNotMatch(written, /\bProp\b/);
-    assert.doesNotMatch(written, /\bChildren\b/);
+    assert.doesNotMatch(written, /\bBacktickNode\b/);
   });
 
   it("imports what a declaration writes, not what it says about itself", () => {
@@ -249,7 +251,6 @@ describe("declarations", () => {
       package: "@backtickjs/core",
       namespace: "Core",
       extends: [],
-      publishes: ["Prop", "BacktickNode"],
       types: {
         Held: Type.String({
           description: "Neither a `Prop` nor `BacktickNode`, whatever it says.",
