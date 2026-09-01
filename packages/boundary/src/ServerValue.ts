@@ -1,5 +1,6 @@
 import type { Client } from "./Client.js";
 import type { ClientHandle, ClientValue } from "./ClientValue.js";
+import type { ServerRecord } from "./ServerRecord.js";
 
 export type ServerValue =
   | Client<ClientValue>
@@ -7,6 +8,6 @@ export type ServerValue =
   | number
   | boolean
   | string
-  | { readonly [key: string]: ServerValue }
+  | ServerRecord
   | readonly ServerValue[]
   | ClientHandle;
