@@ -10,7 +10,6 @@ async function Checked() {
       version: "0.0.0",
       filePath: "number-statics.tsx",
       fileHash: "beg9oh2wragn",
-      kind: "value",
       splices: {},
       captures: [],
       spliceParams: {},

@@ -7,7 +7,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "comments.ts",
     fileHash: "rbes3su3s43l",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

@@ -11,7 +11,6 @@ export const halved = cs.create(
     version: "0.0.0",
     filePath: "math-omitted-members.ts",
     fileHash: "3i88rbbd8nxvb",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

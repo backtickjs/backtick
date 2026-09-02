@@ -42,7 +42,7 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
     await Promise.all(
       Object.entries(client.metadata.splices).map(async ([key, splice]) => [
         key,
-        await lowerSpliceable(splice, "ClientUnknown"),
+        await lowerSpliceable(splice),
       ]),
     ),
   );

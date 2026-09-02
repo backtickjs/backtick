@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "for-nested-shadowing.ts",
     fileHash: "2qq4wmxi2b090",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

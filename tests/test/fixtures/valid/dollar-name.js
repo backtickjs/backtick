@@ -10,7 +10,6 @@ function add(lhs) {
       version: "0.0.0",
       filePath: "dollar-name.ts",
       fileHash: "3r8prbdxxrtje",
-      kind: "value",
       splices: { $lhs: lhs },
       captures: [],
       spliceParams: { $lhs: [] },
@@ -38,7 +37,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "dollar-name.ts",
     fileHash: "3r8prbdxxrtje",
-    kind: "value",
     splices: {
       $0splice0: add(
         cs.create(
@@ -47,7 +45,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "dollar-name.ts",
             fileHash: "3r8prbdxxrtje",
-            kind: "value",
             splices: {},
             captures: ["foo$$3r8prbdxxrtje$0"],
             spliceParams: {},

@@ -7,7 +7,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "non-boolean-while-condition.ts",
     fileHash: "22k8zyijhbub1",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

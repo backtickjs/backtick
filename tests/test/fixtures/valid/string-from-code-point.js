@@ -11,7 +11,6 @@ async function Written() {
       version: "0.0.0",
       filePath: "string-from-code-point.tsx",
       fileHash: "3d857e9xlnmut",
-      kind: "value",
       splices: {},
       captures: [],
       spliceParams: {},

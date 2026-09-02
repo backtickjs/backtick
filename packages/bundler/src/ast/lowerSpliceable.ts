@@ -7,11 +7,7 @@ import { lowerClientScript } from "./lowerClientScript.js";
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 
-export async function lowerSpliceable(
-  value: Spliceable,
-  // The kind of position being lowered
-  position: "ClientUnknown" | "ClientValue",
-): Promise<Ast> {
+export async function lowerSpliceable(value: Spliceable): Promise<Ast> {
   // A hole sentinel a constructor stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.
@@ -20,13 +16,6 @@ export async function lowerSpliceable(
     return { kind: "AstHole", name: hole };
   }
   if (isClientScript(value)) {
-    // Backstop for untyped callers
-    if (position === "ClientValue" && value.metadata.kind === "action") {
-      throw new Error(
-        "Can't bundle an action `Client<void>` as data. " +
-          "Use a callback `Client<() => void>` instead.",
-      );
-    }
     return lowerClientScript(value);
   }
   if (isJsxElement(value)) {
@@ -60,7 +49,7 @@ export async function lowerSpliceable(
     return {
       kind: "AstArray",
       elements: await Promise.all(
-        value.map((element) => lowerSpliceable(element, "ClientValue")),
+        value.map((element) => lowerSpliceable(element)),
       ),
     };
   }
@@ -87,7 +76,7 @@ export async function lowerSpliceable(
     await Promise.all(
       Object.entries(value).map(async ([key, entry]) => [
         key,
-        await lowerSpliceable(entry, "ClientValue"),
+        await lowerSpliceable(entry),
       ]),
     ),
   );

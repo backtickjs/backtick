@@ -10,7 +10,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "index-wrong-key.ts",
     fileHash: "2h9vfj6qbexsg",
-    kind: "value",
     splices: { $point: point },
     captures: [],
     spliceParams: { $point: [] },

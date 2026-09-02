@@ -18,7 +18,6 @@ function create(version: string) {
         version,
         filePath: "test.ts",
         fileHash: "hash",
-        kind: "value" as const,
         splices: {},
         captures: [],
         spliceParams: {},

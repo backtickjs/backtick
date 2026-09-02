@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "loop-jumps.ts",
     fileHash: "owiuoxfingdr",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

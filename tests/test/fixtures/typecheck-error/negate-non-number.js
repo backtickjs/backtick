@@ -7,7 +7,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "negate-non-number.ts",
     fileHash: "vzc9wv11z8g7",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

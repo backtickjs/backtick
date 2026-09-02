@@ -16,7 +16,6 @@ function wrap(fragment) {
       version: "0.0.0",
       filePath: "splice-before-declaration.ts",
       fileHash: "2r40h7jqt1118",
-      kind: "value",
       splices: { $fragment: fragment },
       captures: [],
       spliceParams: { $fragment: [] },
@@ -145,7 +144,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "splice-before-declaration.ts",
     fileHash: "2r40h7jqt1118",
-    kind: "value",
     splices: {
       $0splice0: wrap(
         cs.create(
@@ -154,7 +152,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "splice-before-declaration.ts",
             fileHash: "2r40h7jqt1118",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -173,7 +170,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "splice-before-declaration.ts",
             fileHash: "2r40h7jqt1118",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},

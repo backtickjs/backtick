@@ -10,7 +10,6 @@ async function Row() {
       version: "0.0.0",
       filePath: "pressable.tsx",
       fileHash: "atpxodpi731m",
-      kind: "value",
       splices: { $state: state },
       captures: [],
       spliceParams: { $state: [] },

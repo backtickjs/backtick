@@ -11,7 +11,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "event-handlers.tsx",
     fileHash: "2v9vui9jwi662",
-    kind: "value",
     splices: { $state: state },
     captures: [],
     spliceParams: { $state: [] },

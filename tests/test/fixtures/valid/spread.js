@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "spread.ts",
     fileHash: "30rj5a18hyrfq",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

@@ -6,7 +6,6 @@ function add(lhs, rhs) {
       version: "0.0.0",
       filePath: "splice-sharing.ts",
       fileHash: "2veya8r3aoo5f",
-      kind: "value",
       splices: { $lhs: lhs, $rhs: rhs },
       captures: [],
       spliceParams: { $lhs: [], $rhs: [] },
@@ -34,7 +33,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "splice-sharing.ts",
     fileHash: "2veya8r3aoo5f",
-    kind: "value",
     splices: {
       $0splice0: add(
         cs.create(
@@ -43,7 +41,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "splice-sharing.ts",
             fileHash: "2veya8r3aoo5f",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -60,7 +57,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "splice-sharing.ts",
             fileHash: "2veya8r3aoo5f",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -79,7 +75,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "splice-sharing.ts",
             fileHash: "2veya8r3aoo5f",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -96,7 +91,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "splice-sharing.ts",
             fileHash: "2veya8r3aoo5f",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},

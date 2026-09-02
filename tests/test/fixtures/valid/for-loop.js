@@ -6,7 +6,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "for-loop.ts",
     fileHash: "zkms5nlgp0g3",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

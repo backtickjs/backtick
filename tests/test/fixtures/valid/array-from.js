@@ -11,7 +11,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "array-from.ts",
     fileHash: "115m6ij244xfw",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

@@ -9,7 +9,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "spliced-function-param.ts",
     fileHash: "22dvza3e0b85b",
-    kind: "value",
     splices: {
       $0splice0: cs.create(
         [9, 18, 9, 29],
@@ -17,7 +16,6 @@ export default cs.create(
           version: "0.0.0",
           filePath: "spliced-function-param.ts",
           fileHash: "22dvza3e0b85b",
-          kind: "value",
           splices: {},
           captures: [],
           spliceParams: {},

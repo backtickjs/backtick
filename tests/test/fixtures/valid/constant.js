@@ -5,7 +5,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "constant.ts",
     fileHash: "dfd7g26y294j",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

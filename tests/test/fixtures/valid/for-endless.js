@@ -6,7 +6,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "for-endless.ts",
     fileHash: "3o3sdrk94c5tr",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

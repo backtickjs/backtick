@@ -39,6 +39,6 @@ async function buildExpansion(
   const holes = params.map(createHole);
   const returned = value(...holes) as Spliceable | Promise<Spliceable>;
   const answered = returned instanceof Promise ? await returned : returned;
-  const body: Ast = await lowerSpliceable(answered, "ClientValue");
+  const body: Ast = await lowerSpliceable(answered);
   return { kind: "AstExpansion", params, body };
 }

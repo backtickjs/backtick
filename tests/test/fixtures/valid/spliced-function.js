@@ -15,7 +15,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "spliced-function.tsx",
     fileHash: "g4po9i26hpjc",
-    kind: "value",
     splices: { $0splice0: (n) => n },
     captures: [],
     spliceParams: { $0splice0: [] },

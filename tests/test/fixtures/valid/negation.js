@@ -10,7 +10,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "negation.ts",
     fileHash: "1rsyfqwde2e62",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

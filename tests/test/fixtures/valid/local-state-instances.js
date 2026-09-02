@@ -10,7 +10,6 @@ async function Counter() {
       version: "0.0.0",
       filePath: "local-state-instances.tsx",
       fileHash: "1o70jdoj6nrpb",
-      kind: "value",
       splices: { $state: state },
       captures: [],
       spliceParams: { $state: [] },

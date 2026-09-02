@@ -5,7 +5,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "shadowing.ts",
     fileHash: "wjl0rp4901n3",
-    kind: "value",
     splices: {
       $0splice0: add(
         cs.create(
@@ -14,7 +13,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "shadowing.ts",
             fileHash: "wjl0rp4901n3",
-            kind: "value",
             splices: {},
             captures: ["total$wjl0rp4901n3$0"],
             spliceParams: {},
@@ -81,7 +79,6 @@ function add(lhs, rhs) {
       version: "0.0.0",
       filePath: "shadowing.ts",
       fileHash: "wjl0rp4901n3",
-      kind: "value",
       splices: { $lhs: lhs, $rhs: rhs },
       captures: [],
       spliceParams: { $lhs: [], $rhs: [] },

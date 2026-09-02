@@ -9,7 +9,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "index-past-end.ts",
     fileHash: "2hkx7916f6ioy",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

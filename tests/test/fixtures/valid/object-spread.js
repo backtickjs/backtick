@@ -12,7 +12,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "object-spread.ts",
     fileHash: "1c48itx0y147v",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

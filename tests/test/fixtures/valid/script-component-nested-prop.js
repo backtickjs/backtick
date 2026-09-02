@@ -20,7 +20,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "script-component-nested-prop.tsx",
     fileHash: "2tvhju2xcvczc",
-    kind: "value",
     splices: { $Greeting: Greeting },
     captures: [],
     spliceParams: {},

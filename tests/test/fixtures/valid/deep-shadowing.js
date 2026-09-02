@@ -9,7 +9,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "deep-shadowing.ts",
     fileHash: "1q50brt6ov79t",
-    kind: "value",
     splices: {
       $0splice0: outer(
         cs.create(
@@ -18,7 +17,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "deep-shadowing.ts",
             fileHash: "1q50brt6ov79t",
-            kind: "value",
             splices: {},
             captures: ["base$1q50brt6ov79t$0"],
             spliceParams: {},
@@ -84,7 +82,6 @@ function outer(inner) {
       version: "0.0.0",
       filePath: "deep-shadowing.ts",
       fileHash: "1q50brt6ov79t",
-      kind: "value",
       splices: { $0splice0: middle(inner) },
       captures: [],
       spliceParams: { $0splice0: [] },
@@ -150,7 +147,6 @@ function middle(inner) {
       version: "0.0.0",
       filePath: "deep-shadowing.ts",
       fileHash: "1q50brt6ov79t",
-      kind: "value",
       splices: { $inner: inner },
       captures: [],
       spliceParams: { $inner: [] },

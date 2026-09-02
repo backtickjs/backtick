@@ -6,7 +6,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "early-return.ts",
     fileHash: "3slc08eszz0br",
-    kind: "action",
     splices: {},
     captures: [],
     spliceParams: {},

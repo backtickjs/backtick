@@ -54,7 +54,7 @@ export const bundler = {
     value: Spliceable,
     features: ExperimentalFeatures,
   ): Promise<Bundle> {
-    const ast = await lowerSpliceable(value, "ClientUnknown");
+    const ast = await lowerSpliceable(value);
     return buildBundle(ast, features);
   },
 };

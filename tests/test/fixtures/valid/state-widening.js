@@ -24,7 +24,6 @@ async function Widened() {
       version: "0.0.0",
       filePath: "state-widening.tsx",
       fileHash: "3g3dpqgwvflk3",
-      kind: "value",
       splices: { $state: state, $0splice0: Tone.Warm, $0splice1: Tone.Cool },
       captures: [],
       spliceParams: { $state: [], $0splice0: [], $0splice1: [] },

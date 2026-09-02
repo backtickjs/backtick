@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "array-copying-members.ts",
     fileHash: "1a4hzwemnca39",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

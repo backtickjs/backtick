@@ -10,9 +10,6 @@ export interface Metadata {
   filePath: string;
   // distinguishes same-named files across codebases (see `locKey`)
   fileHash: string;
-  // the compiler's classification: a value script returns on every path;
-  // an action completes without returning
-  kind: "value" | "action";
   // spliced host values, under the keys the body uses (see `ClientScriptSplice`)
   splices: { [key: string]: Spliceable };
   // binding keys the script captures from an enclosing scope

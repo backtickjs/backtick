@@ -10,7 +10,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "object-index.ts",
     fileHash: "1cte50r1xtec2",
-    kind: "value",
     splices: { $rates: rates },
     captures: [],
     spliceParams: { $rates: [] },

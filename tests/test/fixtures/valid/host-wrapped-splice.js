@@ -16,7 +16,6 @@ function wrap(start) {
       version: "0.0.0",
       filePath: "host-wrapped-splice.ts",
       fileHash: "xrqzjp57nqfg",
-      kind: "value",
       splices: {
         $start: start,
         $0splice0: foo(
@@ -26,7 +25,6 @@ function wrap(start) {
               version: "0.0.0",
               filePath: "host-wrapped-splice.ts",
               fileHash: "xrqzjp57nqfg",
-              kind: "value",
               splices: {
                 $0splice0: same(
                   cs.create(
@@ -35,7 +33,6 @@ function wrap(start) {
                       version: "0.0.0",
                       filePath: "host-wrapped-splice.ts",
                       fileHash: "xrqzjp57nqfg",
-                      kind: "value",
                       splices: {},
                       captures: ["outer$xrqzjp57nqfg$0"],
                       spliceParams: {},
@@ -160,7 +157,6 @@ function foo(start) {
       version: "0.0.0",
       filePath: "host-wrapped-splice.ts",
       fileHash: "xrqzjp57nqfg",
-      kind: "value",
       splices: { $start: start },
       captures: [],
       spliceParams: { $start: [] },
@@ -191,7 +187,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "host-wrapped-splice.ts",
     fileHash: "xrqzjp57nqfg",
-    kind: "value",
     splices: {
       $0splice0: wrap(
         cs.create(
@@ -200,7 +195,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "host-wrapped-splice.ts",
             fileHash: "xrqzjp57nqfg",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -219,7 +213,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "host-wrapped-splice.ts",
             fileHash: "xrqzjp57nqfg",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},

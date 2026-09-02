@@ -14,7 +14,6 @@ async function Rows() {
       version: "0.0.0",
       filePath: "root-list.tsx",
       fileHash: "3u9vjn40mllyh",
-      kind: "value",
       splices: { $state: state, $For: For },
       captures: [],
       spliceParams: { $state: [] },

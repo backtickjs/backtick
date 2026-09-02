@@ -12,7 +12,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "nested-non-boolean-operand.ts",
     fileHash: "1yqqpc9g2l4nh",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

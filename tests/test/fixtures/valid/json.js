@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "json.ts",
     fileHash: "39hmn3sz8gacq",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

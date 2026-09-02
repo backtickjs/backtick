@@ -7,7 +7,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "captured-counter.ts",
     fileHash: "31t2pc3vo9x5y",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

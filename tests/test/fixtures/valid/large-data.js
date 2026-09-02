@@ -24,7 +24,6 @@ export default _jsx("div", {
         version: "0.0.0",
         filePath: "large-data.tsx",
         fileHash: "2yx6cd1u55xly",
-        kind: "value",
         splices: { $orders: orders },
         captures: [],
         spliceParams: { $orders: [] },
@@ -41,7 +40,6 @@ export default _jsx("div", {
         version: "0.0.0",
         filePath: "large-data.tsx",
         fileHash: "2yx6cd1u55xly",
-        kind: "value",
         splices: {
           $0splice0: _jsxs("div", {
             children: [
@@ -52,7 +50,6 @@ export default _jsx("div", {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
                     fileHash: "2yx6cd1u55xly",
-                    kind: "value",
                     splices: {},
                     captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
@@ -99,7 +96,6 @@ export default _jsx("div", {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
                     fileHash: "2yx6cd1u55xly",
-                    kind: "value",
                     splices: {},
                     captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
@@ -131,7 +127,6 @@ export default _jsx("div", {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
                     fileHash: "2yx6cd1u55xly",
-                    kind: "value",
                     splices: {},
                     captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
@@ -163,7 +158,6 @@ export default _jsx("div", {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
                     fileHash: "2yx6cd1u55xly",
-                    kind: "value",
                     splices: {},
                     captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},
@@ -187,7 +181,6 @@ export default _jsx("div", {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
                     fileHash: "2yx6cd1u55xly",
-                    kind: "value",
                     splices: {
                       $0splice0: _jsx("span", {
                         children: cs.create(
@@ -196,7 +189,6 @@ export default _jsx("div", {
                             version: "0.0.0",
                             filePath: "large-data.tsx",
                             fileHash: "2yx6cd1u55xly",
-                            kind: "value",
                             splices: {},
                             captures: ["item$2yx6cd1u55xly$1"],
                             spliceParams: {},
@@ -276,7 +268,6 @@ export default _jsx("div", {
                     version: "0.0.0",
                     filePath: "large-data.tsx",
                     fileHash: "2yx6cd1u55xly",
-                    kind: "value",
                     splices: {},
                     captures: ["order$2yx6cd1u55xly$0"],
                     spliceParams: {},

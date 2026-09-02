@@ -7,7 +7,6 @@ async function Rows() {
       version: "0.0.0",
       filePath: "named-type-positions.tsx",
       fileHash: "2tgsecr7whml2",
-      kind: "value",
       splices: { $state: state, $For: For },
       captures: [],
       spliceParams: { $state: [] },

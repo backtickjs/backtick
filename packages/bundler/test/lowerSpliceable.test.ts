@@ -4,7 +4,7 @@ import { lowerSpliceable } from "../dist/ast/lowerSpliceable.js";
 
 test("a plain object crosses member by member", async () => {
   assert.deepEqual(
-    await lowerSpliceable({ label: "row", count: 3 }, "ClientUnknown"),
+    await lowerSpliceable({ label: "row", count: 3 }),
     {
       kind: "AstObject",
       entries: {
@@ -28,7 +28,7 @@ test("a class instance does not", async () => {
   }
 
   await assert.rejects(
-    () => lowerSpliceable(new Point() as never, "ClientUnknown"),
+    () => lowerSpliceable(new Point() as never),
     /only plain objects cross into a client script/,
   );
 });
@@ -36,10 +36,7 @@ test("a class instance does not", async () => {
 test("a host function expands rather than crossing", async () => {
   // It has no data form, so it is run against a hole per parameter and what it
   // answered is what crosses. `length` is the arity, so this one takes none.
-  const expansion = await lowerSpliceable(
-    ((n: never) => n) as never,
-    "ClientUnknown",
-  );
+  const expansion = await lowerSpliceable(((n: never) => n) as never);
   assert.deepEqual(expansion, {
     kind: "AstExpansion",
     params: ["$0"],

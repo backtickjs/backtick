@@ -10,7 +10,6 @@ const script = cs.create(
     version: "0.0.0",
     filePath: "jsx-capture.tsx",
     fileHash: "1u36t3611yobt",
-    kind: "value",
     splices: {
       $0splice0: _jsx("span", {
         onclick: cs.create(
@@ -19,7 +18,6 @@ const script = cs.create(
             version: "0.0.0",
             filePath: "jsx-capture.tsx",
             fileHash: "1u36t3611yobt",
-            kind: "value",
             splices: {},
             captures: ["x$1u36t3611yobt$0"],
             spliceParams: {},

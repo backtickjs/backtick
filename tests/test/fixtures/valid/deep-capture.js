@@ -17,7 +17,6 @@ function wrap(start) {
       version: "0.0.0",
       filePath: "deep-capture.ts",
       fileHash: "1mlv4ugew6yjv",
-      kind: "value",
       splices: {
         $start: start,
         $0splice0: cs.create(
@@ -26,7 +25,6 @@ function wrap(start) {
             version: "0.0.0",
             filePath: "deep-capture.ts",
             fileHash: "1mlv4ugew6yjv",
-            kind: "value",
             splices: {
               $0splice0: cs.create(
                 [19, 25, 19, 34],
@@ -34,7 +32,6 @@ function wrap(start) {
                   version: "0.0.0",
                   filePath: "deep-capture.ts",
                   fileHash: "1mlv4ugew6yjv",
-                  kind: "value",
                   splices: {},
                   captures: ["outer$1mlv4ugew6yjv$0"],
                   spliceParams: {},
@@ -156,7 +153,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "deep-capture.ts",
     fileHash: "1mlv4ugew6yjv",
-    kind: "value",
     splices: {
       $0splice0: wrap(
         cs.create(
@@ -165,7 +161,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "deep-capture.ts",
             fileHash: "1mlv4ugew6yjv",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -184,7 +179,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "deep-capture.ts",
             fileHash: "1mlv4ugew6yjv",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},

@@ -7,7 +7,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "array-index.ts",
     fileHash: "2287xz8ecscg5",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

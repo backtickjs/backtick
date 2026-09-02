@@ -11,7 +11,6 @@ async function Stepper() {
       version: "0.0.0",
       filePath: "local-state.tsx",
       fileHash: "39pqlt8105c5f",
-      kind: "value",
       splices: { $state: state },
       captures: [],
       spliceParams: { $state: [] },

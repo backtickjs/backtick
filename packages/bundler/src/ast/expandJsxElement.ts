@@ -32,7 +32,7 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
           try {
             return [
               key,
-              await lowerSpliceable(entry as Spliceable, "ClientValue"),
+              await lowerSpliceable(entry as Spliceable),
             ];
           } catch (cause) {
             // A component runs while its props lower, so what surfaces here may
@@ -64,6 +64,6 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
     // component itself leaves nothing behind — what it drew stands where the
     // tag stood, and drawing nothing is the language's absent value.
     const children = await type(jsx.props as never);
-    return await lowerSpliceable(children, "ClientValue");
+    return await lowerSpliceable(children);
   }
 }

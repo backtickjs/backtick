@@ -7,7 +7,6 @@ export const written = cs.create(
     version: "0.0.0",
     filePath: "string-statics-omitted.ts",
     fileHash: "2tpsdsl2b0c00",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

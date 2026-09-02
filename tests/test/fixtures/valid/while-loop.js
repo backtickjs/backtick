@@ -5,7 +5,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "while-loop.ts",
     fileHash: "2c5ohtv8baju6",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

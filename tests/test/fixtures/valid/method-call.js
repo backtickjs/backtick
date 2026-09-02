@@ -5,7 +5,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "method-call.ts",
     fileHash: "190iczdl07b3h",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

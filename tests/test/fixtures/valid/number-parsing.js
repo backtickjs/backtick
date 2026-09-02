@@ -10,7 +10,6 @@ async function Parsed() {
       version: "0.0.0",
       filePath: "number-parsing.tsx",
       fileHash: "2ae90j4efmz9h",
-      kind: "value",
       splices: {},
       captures: [],
       spliceParams: {},

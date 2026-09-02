@@ -12,7 +12,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "builtin-as-value.ts",
     fileHash: "326ky9he8cldj",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

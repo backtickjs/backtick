@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "math.ts",
     fileHash: "2jpa3l1icbr78",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

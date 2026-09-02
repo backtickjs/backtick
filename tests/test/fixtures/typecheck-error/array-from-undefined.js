@@ -12,7 +12,6 @@ export const counted = cs.create(
     version: "0.0.0",
     filePath: "array-from-undefined.ts",
     fileHash: "1kakqhyj595y2",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

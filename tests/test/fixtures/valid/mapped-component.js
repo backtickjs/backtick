@@ -23,7 +23,6 @@ export default _jsx("div", {
         version: "0.0.0",
         filePath: "mapped-component.tsx",
         fileHash: "thyrht8e58qr",
-        kind: "value",
         splices: { $rows: rows },
         captures: [],
         spliceParams: { $rows: [] },
@@ -40,7 +39,6 @@ export default _jsx("div", {
         version: "0.0.0",
         filePath: "mapped-component.tsx",
         fileHash: "thyrht8e58qr",
-        kind: "value",
         splices: {
           $0splice0: _jsx("span", {
             children: cs.create(
@@ -49,7 +47,6 @@ export default _jsx("div", {
                 version: "0.0.0",
                 filePath: "mapped-component.tsx",
                 fileHash: "thyrht8e58qr",
-                kind: "value",
                 splices: {},
                 captures: ["row$thyrht8e58qr$0"],
                 spliceParams: {},

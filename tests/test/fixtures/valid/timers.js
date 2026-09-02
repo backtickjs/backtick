@@ -19,7 +19,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "timers.ts",
     fileHash: "2rhi7uq99hpbq",
-    kind: "action",
     splices: {},
     captures: [],
     spliceParams: {},

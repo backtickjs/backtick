@@ -22,7 +22,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "spliced-literal-widens.ts",
     fileHash: "19qhn3op6tbxe",
-    kind: "action",
     splices: {
       $state: state,
       $five: five,

@@ -11,7 +11,6 @@ export default _jsxs("div", {
           version: "0.0.0",
           filePath: "core-components.tsx",
           fileHash: "2xc7nbwjyckin",
-          kind: "value",
           splices: {},
           captures: [],
           spliceParams: {},

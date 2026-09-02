@@ -102,10 +102,6 @@ export function rewriteScript(
         ts.factory.createStringLiteral(fileHash),
       ),
       ts.factory.createPropertyAssignment(
-        "kind",
-        ts.factory.createStringLiteral(state.bodyKind),
-      ),
-      ts.factory.createPropertyAssignment(
         "splices",
         ts.factory.createObjectLiteralExpression(
           splices.map((splice: Splice) =>

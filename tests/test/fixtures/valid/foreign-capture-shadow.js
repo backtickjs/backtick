@@ -17,7 +17,6 @@ function inner(carried) {
       version: "0.0.0",
       filePath: "foreign-capture-shadow.ts",
       fileHash: "2dzpugititb9o",
-      kind: "value",
       splices: {
         $0splice0: cs.create(
           [17, 14, 17, 33],
@@ -25,7 +24,6 @@ function inner(carried) {
             version: "0.0.0",
             filePath: "foreign-capture-shadow.ts",
             fileHash: "2dzpugititb9o",
-            kind: "value",
             splices: { $carried: carried },
             captures: ["base$2dzpugititb9o$0"],
             spliceParams: { $carried: [] },
@@ -100,7 +98,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "foreign-capture-shadow.ts",
     fileHash: "2dzpugititb9o",
-    kind: "value",
     splices: {
       $0splice0: inner(
         cs.create(
@@ -109,7 +106,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "foreign-capture-shadow.ts",
             fileHash: "2dzpugititb9o",
-            kind: "value",
             splices: {},
             captures: ["base$2dzpugititb9o$1"],
             spliceParams: {},

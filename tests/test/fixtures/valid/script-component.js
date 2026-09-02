@@ -21,7 +21,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "script-component.tsx",
     fileHash: "11xubvfbwb82p",
-    kind: "value",
     splices: { $Card: Card, $Badge: Badge },
     captures: [],
     spliceParams: {},

@@ -9,7 +9,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "array-reduce.ts",
     fileHash: "3lzby6qavzyep",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

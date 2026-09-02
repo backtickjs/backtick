@@ -12,7 +12,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "script-fragment-tag.tsx",
     fileHash: "1kjbg1lf78b9h",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},

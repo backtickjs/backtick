@@ -14,7 +14,6 @@ function wrap(fragment) {
       version: "0.0.0",
       filePath: "shadowed-hole.ts",
       fileHash: "3h9ra1625ja2t",
-      kind: "value",
       splices: { $fragment: fragment },
       captures: [],
       spliceParams: { $fragment: [] },
@@ -111,7 +110,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "shadowed-hole.ts",
     fileHash: "3h9ra1625ja2t",
-    kind: "value",
     splices: {
       $0splice0: wrap(
         cs.create(
@@ -120,7 +118,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "shadowed-hole.ts",
             fileHash: "3h9ra1625ja2t",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},
@@ -139,7 +136,6 @@ export default cs.create(
             version: "0.0.0",
             filePath: "shadowed-hole.ts",
             fileHash: "3h9ra1625ja2t",
-            kind: "value",
             splices: {},
             captures: [],
             spliceParams: {},

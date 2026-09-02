@@ -8,7 +8,6 @@ export default cs.create(
     version: "0.0.0",
     filePath: "for-per-turn-binding.ts",
     fileHash: "1xlxq809wqp5g",
-    kind: "value",
     splices: {},
     captures: [],
     spliceParams: {},
