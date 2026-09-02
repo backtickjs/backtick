@@ -2,14 +2,11 @@
  * This site's client, which is the web one with what this site's schema adds.
  *
  * Self-starting and exporting nothing, so a page declares no global and nothing
- * on it calls in. Two tables, because the schema declares two things: names a
- * script may call, and a tag a bundle may draw.
+ * on it calls in. One table, because the only thing this site's schema adds
+ * that a client must answer for is names a script may call: its one tag is
+ * named as the browser registers it, so the document builds that one itself.
  */
 import { defineClient } from "@backtickjs/web-client";
 import { builtins } from "./builtins.js";
-import { elements } from "./elements.js";
 
-defineClient({
-  builtins: builtins as never,
-  elements,
-});
+defineClient({ builtins: builtins as never });

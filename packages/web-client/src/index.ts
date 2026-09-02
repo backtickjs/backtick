@@ -10,6 +10,7 @@
  * ask for over the network.
  */
 export { defineClient } from "./defineClient.js";
-export type { Vocabulary } from "./defineClient.js";
+export type { Draw, Vocabulary } from "./defineClient.js";
+export type { Bundle } from "@backtickjs/bundler";
 export { builtins } from "./builtins.js";
 export { dom } from "./dom.js";

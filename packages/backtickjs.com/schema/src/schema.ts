@@ -21,20 +21,6 @@ export const schema: Schema = {
   // Nothing: what this adds is a name to call, not a type to write.
 
   types: {
-    BacktickProps: Type.Interface(
-      [],
-      {
-        bundle: Type.String(),
-      },
-      {
-        description:
-          "What a `backtick` is drawn with. A prop, so a new one redraws what" +
-          " is there.\n\n" +
-          "Required: a page between two bundles draws no `backtick` at all," +
-          " rather than one holding nothing.",
-      },
-    ),
-
     Diagnostic: Type.Interface(
       [],
       {
@@ -52,10 +38,11 @@ export const schema: Schema = {
   },
 
   elements: {
-    // A drawing inside a drawing. Declared here rather than for every target,
-    // because a bundle is a thing an ordinary app never touches — and this site
-    // is about bundles.
-    backtick: Type.Ref("BacktickProps"),
+    // A drawing inside a drawing, declared here because a bundle is a thing an
+    // ordinary app never touches. Named as the browser registers it, so the
+    // document builds it without a target mapping the name. No props: what it
+    // draws is the script in front of it, as on a page.
+    "backtick-bundle": Type.Interface([], {}),
   },
 
   builtins: {
