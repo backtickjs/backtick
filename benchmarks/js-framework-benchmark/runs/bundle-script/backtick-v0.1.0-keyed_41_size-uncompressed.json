@@ -1,0 +1,16 @@
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "41_size-uncompressed",
+  "type": "size",
+  "values": {
+    "DEFAULT": {
+      "min": 32.7,
+      "max": 32.7,
+      "median": 32.7,
+      "mean": 32.7,
+      "stddev": null,
+      "values": [32.7]
+    }
+  }
+}

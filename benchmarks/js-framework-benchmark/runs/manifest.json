@@ -476,6 +476,14 @@
       "keyed": true,
       "dir": "renderer-prop",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "b159b1ae",
+      "label": "bundle in a script",
+      "date": "uncommitted",
+      "keyed": true,
+      "dir": "bundle-script",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
