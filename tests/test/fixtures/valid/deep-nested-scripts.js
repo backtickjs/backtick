@@ -6,9 +6,11 @@ function add(lhs, rhs) {
       version: "0.0.0",
       filePath: "deep-nested-scripts.ts",
       fileHash: "jmxp905pbgk8",
-      splices: { $lhs: lhs, $rhs: rhs },
+      splices: {
+        $lhs: { value: lhs, params: [] },
+        $rhs: { value: rhs, params: [] },
+      },
       captures: [],
-      spliceParams: { $lhs: [], $rhs: [] },
     },
     () => ({
       kind: 227,
@@ -34,43 +36,43 @@ export default cs.create(
     filePath: "deep-nested-scripts.ts",
     fileHash: "jmxp905pbgk8",
     splices: {
-      $0splice0: add(
-        cs.create(
-          [7, 25, 7, 30],
-          {
-            version: "0.0.0",
-            filePath: "deep-nested-scripts.ts",
-            fileHash: "jmxp905pbgk8",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [7, 28, 7, 29],
-            value: 1,
-          }),
+      $0splice0: {
+        value: add(
+          cs.create(
+            [7, 25, 7, 30],
+            {
+              version: "0.0.0",
+              filePath: "deep-nested-scripts.ts",
+              fileHash: "jmxp905pbgk8",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [7, 28, 7, 29],
+              value: 1,
+            }),
+          ),
+          cs.create(
+            [7, 32, 7, 37],
+            {
+              version: "0.0.0",
+              filePath: "deep-nested-scripts.ts",
+              fileHash: "jmxp905pbgk8",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [7, 35, 7, 36],
+              value: 2,
+            }),
+          ),
         ),
-        cs.create(
-          [7, 32, 7, 37],
-          {
-            version: "0.0.0",
-            filePath: "deep-nested-scripts.ts",
-            fileHash: "jmxp905pbgk8",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [7, 35, 7, 36],
-            value: 2,
-          }),
-        ),
-      ),
+        params: [],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 1000,

@@ -7,9 +7,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "reserved-key-splice.ts",
     fileHash: "1uzd46c3lqufn",
-    splices: { $0splice0: { "#": "value" } },
+    splices: { $0splice0: { value: { "#": "value" }, params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 1000,

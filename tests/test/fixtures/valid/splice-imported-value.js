@@ -22,9 +22,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "splice-imported-value.tsx",
     fileHash: "dp7ak8bmio24",
-    splices: { $NodeKind: NodeKind },
+    splices: { $NodeKind: { value: NodeKind, params: [] } },
     captures: [],
-    spliceParams: { $NodeKind: [] },
   },
   () => ({
     kind: 227,

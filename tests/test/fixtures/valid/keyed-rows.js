@@ -15,9 +15,11 @@ async function Rows() {
       version: "0.0.0",
       filePath: "keyed-rows.tsx",
       fileHash: "1879rjsuy33z2",
-      splices: { $state: state, $For: For },
+      splices: {
+        $state: { value: state, params: [] },
+        $For: { value: For, params: [] },
+      },
       captures: [],
-      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,

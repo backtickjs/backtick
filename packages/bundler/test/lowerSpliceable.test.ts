@@ -3,16 +3,13 @@ import { test } from "node:test";
 import { lowerSpliceable } from "../dist/ast/lowerSpliceable.js";
 
 test("a plain object crosses member by member", async () => {
-  assert.deepEqual(
-    await lowerSpliceable({ label: "row", count: 3 }),
-    {
-      kind: "AstObject",
-      entries: {
-        label: { kind: "AstString", value: "row" },
-        count: { kind: "AstNumber", value: 3 },
-      },
+  assert.deepEqual(await lowerSpliceable({ label: "row", count: 3 }), {
+    kind: "AstObject",
+    entries: {
+      label: { kind: "AstString", value: "row" },
+      count: { kind: "AstNumber", value: 3 },
     },
-  );
+  });
 });
 
 test("a class instance does not", async () => {

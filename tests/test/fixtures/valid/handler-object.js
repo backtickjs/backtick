@@ -9,7 +9,6 @@ const beep = cs.create(
     fileHash: "gyja921xjk87",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -66,9 +65,8 @@ const onTap = cs.create(
     version: "0.0.0",
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
-    splices: { $beep: beep },
+    splices: { $beep: { value: beep, params: [] } },
     captures: [],
-    spliceParams: { $beep: [] },
   },
   () => ({
     kind: 220,
@@ -104,9 +102,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "handler-object.ts",
     fileHash: "gyja921xjk87",
-    splices: { $onTap: onTap },
+    splices: { $onTap: { value: onTap, params: [] } },
     captures: [],
-    spliceParams: { $onTap: [] },
   },
   () => ({
     kind: 242,

@@ -10,9 +10,8 @@ function make(n) {
       version: "0.0.0",
       filePath: "jsx-polymorphic-prop.tsx",
       fileHash: "29qub6x9fptt4",
-      splices: { $n: n },
+      splices: { $n: { value: n, params: [] } },
       captures: [],
-      spliceParams: { $n: [] },
     },
     () => ({
       kind: 220,

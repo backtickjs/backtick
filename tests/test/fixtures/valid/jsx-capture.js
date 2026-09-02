@@ -11,33 +11,34 @@ const script = cs.create(
     filePath: "jsx-capture.tsx",
     fileHash: "1u36t3611yobt",
     splices: {
-      $0splice0: _jsx("span", {
-        onclick: cs.create(
-          [11, 28, 11, 39],
-          {
-            version: "0.0.0",
-            filePath: "jsx-capture.tsx",
-            fileHash: "1u36t3611yobt",
-            splices: {},
-            captures: ["x$1u36t3611yobt$0"],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 220,
-            loc: [11, 31, 11, 38],
-            parameters: [],
-            body: {
-              kind: 80,
-              loc: [11, 37, 11, 38],
-              text: "x",
-              bindingKey: "x$1u36t3611yobt$0",
+      $0splice0: {
+        value: _jsx("span", {
+          onclick: cs.create(
+            [11, 28, 11, 39],
+            {
+              version: "0.0.0",
+              filePath: "jsx-capture.tsx",
+              fileHash: "1u36t3611yobt",
+              splices: {},
+              captures: ["x$1u36t3611yobt$0"],
             },
-          }),
-        ),
-      }),
+            () => ({
+              kind: 220,
+              loc: [11, 31, 11, 38],
+              parameters: [],
+              body: {
+                kind: 80,
+                loc: [11, 37, 11, 38],
+                text: "x",
+                bindingKey: "x$1u36t3611yobt$0",
+              },
+            }),
+          ),
+        }),
+        params: ["x$1u36t3611yobt$0"],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: ["x$1u36t3611yobt$0"] },
   },
   () => ({
     kind: 220,

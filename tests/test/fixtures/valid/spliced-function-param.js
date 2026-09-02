@@ -10,30 +10,31 @@ export default cs.create(
     filePath: "spliced-function-param.ts",
     fileHash: "22dvza3e0b85b",
     splices: {
-      $0splice0: cs.create(
-        [9, 18, 9, 29],
-        {
-          version: "0.0.0",
-          filePath: "spliced-function-param.ts",
-          fileHash: "22dvza3e0b85b",
-          splices: {},
-          captures: [],
-          spliceParams: {},
-        },
-        () => ({
-          kind: 220,
-          loc: [9, 21, 9, 28],
-          parameters: [],
-          body: {
-            kind: 9,
-            loc: [9, 27, 9, 28],
-            value: 2,
+      $0splice0: {
+        value: cs.create(
+          [9, 18, 9, 29],
+          {
+            version: "0.0.0",
+            filePath: "spliced-function-param.ts",
+            fileHash: "22dvza3e0b85b",
+            splices: {},
+            captures: [],
           },
-        }),
-      ),
+          () => ({
+            kind: 220,
+            loc: [9, 21, 9, 28],
+            parameters: [],
+            body: {
+              kind: 9,
+              loc: [9, 27, 9, 28],
+              value: 2,
+            },
+          }),
+        ),
+        params: [],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 242,

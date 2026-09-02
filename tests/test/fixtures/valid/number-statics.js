@@ -12,7 +12,6 @@ async function Checked() {
       fileHash: "beg9oh2wragn",
       splices: {},
       captures: [],
-      spliceParams: {},
     },
     () => ({
       kind: 242,

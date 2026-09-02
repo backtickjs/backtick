@@ -10,7 +10,6 @@ export const largest = cs.create(
     fileHash: "2d029pqxveh70",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 1001,
@@ -26,7 +25,6 @@ export const notANumber = cs.create(
     fileHash: "2d029pqxveh70",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 214,

@@ -8,7 +8,6 @@ const count = cs.create(
     fileHash: "29t6y9s27ti4b",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 9,
@@ -22,9 +21,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "ternary-condition.ts",
     fileHash: "29t6y9s27ti4b",
-    splices: { $count: count },
+    splices: { $count: { value: count, params: [] } },
     captures: [],
-    spliceParams: { $count: [] },
   },
   () => ({
     kind: 228,

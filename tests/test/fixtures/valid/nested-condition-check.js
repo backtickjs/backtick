@@ -13,7 +13,6 @@ const gate = cs.create(
     fileHash: "2nymys98gllff",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -156,9 +155,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "nested-condition-check.ts",
     fileHash: "2nymys98gllff",
-    splices: { $gate: gate },
+    splices: { $gate: { value: gate, params: [] } },
     captures: [],
-    spliceParams: { $gate: [] },
   },
   () => ({
     kind: 211,

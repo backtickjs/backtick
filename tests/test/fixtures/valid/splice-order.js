@@ -9,9 +9,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "splice-order.ts",
     fileHash: "6o3erh5ve8um",
-    splices: { $count: count, $0splice0: ++count },
+    splices: {
+      $count: { value: count, params: [] },
+      $0splice0: { value: ++count, params: [] },
+    },
     captures: [],
-    spliceParams: { $count: [], $0splice0: [] },
   },
   () => ({
     kind: 211,

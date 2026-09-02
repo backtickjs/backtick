@@ -10,7 +10,6 @@ const action = cs.create(
     fileHash: "8tx5qho0had8",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -51,9 +50,8 @@ export const stored = cs.create(
     version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
-    splices: { $action: action },
+    splices: { $action: { value: action, params: [] } },
     captures: [],
-    spliceParams: { $action: [] },
   },
   () => ({
     kind: 242,
@@ -103,9 +101,8 @@ export const returned = cs.create(
     version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
-    splices: { $action: action },
+    splices: { $action: { value: action, params: [] } },
     captures: [],
-    spliceParams: { $action: [] },
   },
   () => ({
     kind: 242,
@@ -129,9 +126,8 @@ export const assigned = cs.create(
     version: "0.0.0",
     filePath: "action-in-expression.ts",
     fileHash: "8tx5qho0had8",
-    splices: { $action: action },
+    splices: { $action: { value: action, params: [] } },
     captures: [],
-    spliceParams: { $action: [] },
   },
   () => ({
     kind: 242,

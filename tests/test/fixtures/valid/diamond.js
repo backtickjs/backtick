@@ -11,7 +11,6 @@ const d0 = cs.create(
     fileHash: "1ukdw57m42wun",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 9,
@@ -25,9 +24,8 @@ const d1 = cs.create(
     version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
-    splices: { $d0: d0 },
+    splices: { $d0: { value: d0, params: [] } },
     captures: [],
-    spliceParams: { $d0: [] },
   },
   () => ({
     kind: 242,
@@ -61,9 +59,8 @@ const d2 = cs.create(
     version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
-    splices: { $d1: d1 },
+    splices: { $d1: { value: d1, params: [] } },
     captures: [],
-    spliceParams: { $d1: [] },
   },
   () => ({
     kind: 242,
@@ -97,9 +94,8 @@ const d3 = cs.create(
     version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
-    splices: { $d2: d2 },
+    splices: { $d2: { value: d2, params: [] } },
     captures: [],
-    spliceParams: { $d2: [] },
   },
   () => ({
     kind: 242,
@@ -133,9 +129,8 @@ const d4 = cs.create(
     version: "0.0.0",
     filePath: "diamond.ts",
     fileHash: "1ukdw57m42wun",
-    splices: { $d3: d3 },
+    splices: { $d3: { value: d3, params: [] } },
     captures: [],
-    spliceParams: { $d3: [] },
   },
   () => ({
     kind: 242,

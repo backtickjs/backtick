@@ -18,36 +18,37 @@ function inner(carried) {
       filePath: "foreign-capture-shadow.ts",
       fileHash: "2dzpugititb9o",
       splices: {
-        $0splice0: cs.create(
-          [17, 14, 17, 33],
-          {
-            version: "0.0.0",
-            filePath: "foreign-capture-shadow.ts",
-            fileHash: "2dzpugititb9o",
-            splices: { $carried: carried },
-            captures: ["base$2dzpugititb9o$0"],
-            spliceParams: { $carried: [] },
-          },
-          () => ({
-            kind: 227,
-            loc: [17, 17, 17, 32],
-            left: {
-              kind: 80,
-              loc: [17, 17, 17, 21],
-              text: "base",
-              bindingKey: "base$2dzpugititb9o$0",
+        $0splice0: {
+          value: cs.create(
+            [17, 14, 17, 33],
+            {
+              version: "0.0.0",
+              filePath: "foreign-capture-shadow.ts",
+              fileHash: "2dzpugititb9o",
+              splices: { $carried: { value: carried, params: [] } },
+              captures: ["base$2dzpugititb9o$0"],
             },
-            operatorToken: "+",
-            right: {
-              kind: 1000,
-              loc: [17, 24, 17, 32],
-              key: "$carried",
-            },
-          }),
-        ),
+            () => ({
+              kind: 227,
+              loc: [17, 17, 17, 32],
+              left: {
+                kind: 80,
+                loc: [17, 17, 17, 21],
+                text: "base",
+                bindingKey: "base$2dzpugititb9o$0",
+              },
+              operatorToken: "+",
+              right: {
+                kind: 1000,
+                loc: [17, 24, 17, 32],
+                key: "$carried",
+              },
+            }),
+          ),
+          params: ["base$2dzpugititb9o$0"],
+        },
       },
       captures: [],
-      spliceParams: { $0splice0: ["base$2dzpugititb9o$0"] },
     },
     () => ({
       kind: 242,
@@ -99,28 +100,29 @@ export default cs.create(
     filePath: "foreign-capture-shadow.ts",
     fileHash: "2dzpugititb9o",
     splices: {
-      $0splice0: inner(
-        cs.create(
-          [23, 18, 23, 26],
-          {
-            version: "0.0.0",
-            filePath: "foreign-capture-shadow.ts",
-            fileHash: "2dzpugititb9o",
-            splices: {},
-            captures: ["base$2dzpugititb9o$1"],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 80,
-            loc: [23, 21, 23, 25],
-            text: "base",
-            bindingKey: "base$2dzpugititb9o$1",
-          }),
+      $0splice0: {
+        value: inner(
+          cs.create(
+            [23, 18, 23, 26],
+            {
+              version: "0.0.0",
+              filePath: "foreign-capture-shadow.ts",
+              fileHash: "2dzpugititb9o",
+              splices: {},
+              captures: ["base$2dzpugititb9o$1"],
+            },
+            () => ({
+              kind: 80,
+              loc: [23, 21, 23, 25],
+              text: "base",
+              bindingKey: "base$2dzpugititb9o$1",
+            }),
+          ),
         ),
-      ),
+        params: ["base$2dzpugititb9o$1"],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: ["base$2dzpugititb9o$1"] },
   },
   () => ({
     kind: 242,

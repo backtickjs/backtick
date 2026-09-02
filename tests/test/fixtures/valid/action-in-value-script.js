@@ -14,7 +14,6 @@ const effects = cs.create(
     fileHash: "7giyz7fx5ljm",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -57,7 +56,6 @@ const ping = cs.create(
     fileHash: "7giyz7fx5ljm",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -119,9 +117,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "action-in-value-script.ts",
     fileHash: "7giyz7fx5ljm",
-    splices: { $effects: effects, $ping: ping },
+    splices: {
+      $effects: { value: effects, params: [] },
+      $ping: { value: ping, params: [] },
+    },
     captures: [],
-    spliceParams: { $effects: [], $ping: [] },
   },
   () => ({
     kind: 220,

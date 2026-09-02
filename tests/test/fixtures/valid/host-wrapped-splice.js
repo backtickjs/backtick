@@ -17,95 +17,98 @@ function wrap(start) {
       filePath: "host-wrapped-splice.ts",
       fileHash: "xrqzjp57nqfg",
       splices: {
-        $start: start,
-        $0splice0: foo(
-          cs.create(
-            [16, 18, 19, 7],
-            {
-              version: "0.0.0",
-              filePath: "host-wrapped-splice.ts",
-              fileHash: "xrqzjp57nqfg",
-              splices: {
-                $0splice0: same(
-                  cs.create(
-                    [18, 30, 18, 39],
-                    {
-                      version: "0.0.0",
-                      filePath: "host-wrapped-splice.ts",
-                      fileHash: "xrqzjp57nqfg",
-                      splices: {},
-                      captures: ["outer$xrqzjp57nqfg$0"],
-                      spliceParams: {},
-                    },
-                    () => ({
-                      kind: 80,
-                      loc: [18, 33, 18, 38],
-                      text: "outer",
-                      bindingKey: "outer$xrqzjp57nqfg$0",
-                    }),
-                  ),
-                ),
-              },
-              captures: ["outer$xrqzjp57nqfg$0"],
-              spliceParams: { $0splice0: [] },
-            },
-            () => ({
-              kind: 242,
-              loc: [16, 21, 19, 6],
-              statements: [
-                {
-                  kind: 244,
-                  loc: [17, 7, 17, 25],
-                  declarationList: {
-                    kind: 262,
-                    loc: [17, 7, 17, 24],
-                    declarations: [
-                      {
-                        kind: 261,
-                        loc: [17, 13, 17, 24],
-                        name: {
+        $start: { value: start, params: [] },
+        $0splice0: {
+          value: foo(
+            cs.create(
+              [16, 18, 19, 7],
+              {
+                version: "0.0.0",
+                filePath: "host-wrapped-splice.ts",
+                fileHash: "xrqzjp57nqfg",
+                splices: {
+                  $0splice0: {
+                    value: same(
+                      cs.create(
+                        [18, 30, 18, 39],
+                        {
+                          version: "0.0.0",
+                          filePath: "host-wrapped-splice.ts",
+                          fileHash: "xrqzjp57nqfg",
+                          splices: {},
+                          captures: ["outer$xrqzjp57nqfg$0"],
+                        },
+                        () => ({
                           kind: 80,
-                          loc: [17, 13, 17, 19],
-                          text: "middle",
-                          bindingKey: "middle$xrqzjp57nqfg$1",
+                          loc: [18, 33, 18, 38],
+                          text: "outer",
+                          bindingKey: "outer$xrqzjp57nqfg$0",
+                        }),
+                      ),
+                    ),
+                    params: [],
+                  },
+                },
+                captures: ["outer$xrqzjp57nqfg$0"],
+              },
+              () => ({
+                kind: 242,
+                loc: [16, 21, 19, 6],
+                statements: [
+                  {
+                    kind: 244,
+                    loc: [17, 7, 17, 25],
+                    declarationList: {
+                      kind: 262,
+                      loc: [17, 7, 17, 24],
+                      declarations: [
+                        {
+                          kind: 261,
+                          loc: [17, 13, 17, 24],
+                          name: {
+                            kind: 80,
+                            loc: [17, 13, 17, 19],
+                            text: "middle",
+                            bindingKey: "middle$xrqzjp57nqfg$1",
+                          },
+                          initializer: {
+                            kind: 9,
+                            loc: [17, 22, 17, 24],
+                            value: 10,
+                          },
                         },
-                        initializer: {
-                          kind: 9,
-                          loc: [17, 22, 17, 24],
-                          value: 10,
-                        },
+                      ],
+                      keyword: "const",
+                    },
+                  },
+                  {
+                    kind: 254,
+                    loc: [18, 7, 18, 42],
+                    expression: {
+                      kind: 227,
+                      loc: [18, 14, 18, 41],
+                      left: {
+                        kind: 80,
+                        loc: [18, 14, 18, 20],
+                        text: "middle",
+                        bindingKey: "middle$xrqzjp57nqfg$1",
                       },
-                    ],
-                    keyword: "const",
-                  },
-                },
-                {
-                  kind: 254,
-                  loc: [18, 7, 18, 42],
-                  expression: {
-                    kind: 227,
-                    loc: [18, 14, 18, 41],
-                    left: {
-                      kind: 80,
-                      loc: [18, 14, 18, 20],
-                      text: "middle",
-                      bindingKey: "middle$xrqzjp57nqfg$1",
-                    },
-                    operatorToken: "+",
-                    right: {
-                      kind: 1000,
-                      loc: [18, 23, 18, 41],
-                      key: "$0splice0",
+                      operatorToken: "+",
+                      right: {
+                        kind: 1000,
+                        loc: [18, 23, 18, 41],
+                        key: "$0splice0",
+                      },
                     },
                   },
-                },
-              ],
-            }),
+                ],
+              }),
+            ),
           ),
-        ),
+          params: ["outer$xrqzjp57nqfg$0"],
+        },
       },
       captures: [],
-      spliceParams: { $start: [], $0splice0: ["outer$xrqzjp57nqfg$0"] },
     },
     () => ({
       kind: 242,
@@ -157,9 +160,8 @@ function foo(start) {
       version: "0.0.0",
       filePath: "host-wrapped-splice.ts",
       fileHash: "xrqzjp57nqfg",
-      splices: { $start: start },
+      splices: { $start: { value: start, params: [] } },
       captures: [],
-      spliceParams: { $start: [] },
     },
     () => ({
       kind: 227,
@@ -188,45 +190,48 @@ export default cs.create(
     filePath: "host-wrapped-splice.ts",
     fileHash: "xrqzjp57nqfg",
     splices: {
-      $0splice0: wrap(
-        cs.create(
-          [31, 26, 31, 31],
-          {
-            version: "0.0.0",
-            filePath: "host-wrapped-splice.ts",
-            fileHash: "xrqzjp57nqfg",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [31, 29, 31, 30],
-            value: 1,
-          }),
+      $0splice0: {
+        value: wrap(
+          cs.create(
+            [31, 26, 31, 31],
+            {
+              version: "0.0.0",
+              filePath: "host-wrapped-splice.ts",
+              fileHash: "xrqzjp57nqfg",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [31, 29, 31, 30],
+              value: 1,
+            }),
+          ),
         ),
-      ),
-      $0splice1: wrap(
-        cs.create(
-          [31, 43, 31, 48],
-          {
-            version: "0.0.0",
-            filePath: "host-wrapped-splice.ts",
-            fileHash: "xrqzjp57nqfg",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [31, 46, 31, 47],
-            value: 2,
-          }),
+        params: [],
+      },
+      $0splice1: {
+        value: wrap(
+          cs.create(
+            [31, 43, 31, 48],
+            {
+              version: "0.0.0",
+              filePath: "host-wrapped-splice.ts",
+              fileHash: "xrqzjp57nqfg",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [31, 46, 31, 47],
+              value: 2,
+            }),
+          ),
         ),
-      ),
+        params: [],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 227,

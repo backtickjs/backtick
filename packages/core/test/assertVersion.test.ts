@@ -20,7 +20,6 @@ function create(version: string) {
         fileHash: "hash",
         splices: {},
         captures: [],
-        spliceParams: {},
       },
       noBody,
     );

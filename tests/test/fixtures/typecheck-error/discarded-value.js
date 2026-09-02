@@ -10,7 +10,6 @@ const getValue = cs.create(
     fileHash: "2at3b932vh0hl",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -41,7 +40,6 @@ const ping = cs.create(
     fileHash: "2at3b932vh0hl",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -103,9 +101,11 @@ const action = cs.create(
     version: "0.0.0",
     filePath: "discarded-value.ts",
     fileHash: "2at3b932vh0hl",
-    splices: { $ping: ping, $getValue: getValue },
+    splices: {
+      $ping: { value: ping, params: [] },
+      $getValue: { value: getValue, params: [] },
+    },
     captures: [],
-    spliceParams: { $ping: [], $getValue: [] },
   },
   () => ({
     kind: 242,
@@ -144,9 +144,11 @@ const valued = cs.create(
     version: "0.0.0",
     filePath: "discarded-value.ts",
     fileHash: "2at3b932vh0hl",
-    splices: { $ping: ping, $getValue: getValue },
+    splices: {
+      $ping: { value: ping, params: [] },
+      $getValue: { value: getValue, params: [] },
+    },
     captures: [],
-    spliceParams: { $ping: [], $getValue: [] },
   },
   () => ({
     kind: 242,

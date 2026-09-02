@@ -12,9 +12,8 @@ const Counter = async ({ size }) =>
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
         fileHash: "1azh7gya00tyi",
-        splices: { $size: size },
+        splices: { $size: { value: size, params: [] } },
         captures: [],
-        spliceParams: { $size: [] },
       },
       () => ({
         kind: 227,
@@ -60,9 +59,8 @@ const Counter = async ({ size }) =>
         version: "0.0.0",
         filePath: "local-state-prop.tsx",
         fileHash: "1azh7gya00tyi",
-        splices: { $size: size },
+        splices: { $size: { value: size, params: [] } },
         captures: [],
-        spliceParams: { $size: [] },
       },
       () => ({
         kind: 220,
@@ -130,9 +128,11 @@ async function Panel() {
       version: "0.0.0",
       filePath: "local-state-prop.tsx",
       fileHash: "1azh7gya00tyi",
-      splices: { $state: state, $Counter: Counter },
+      splices: {
+        $state: { value: state, params: [] },
+        $Counter: { value: Counter, params: [] },
+      },
       captures: [],
-      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,

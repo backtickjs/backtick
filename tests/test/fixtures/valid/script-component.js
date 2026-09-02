@@ -21,9 +21,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "script-component.tsx",
     fileHash: "11xubvfbwb82p",
-    splices: { $Card: Card, $Badge: Badge },
+    splices: {
+      $Card: { value: Card, params: [] },
+      $Badge: { value: Badge, params: [] },
+    },
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,

@@ -18,91 +18,94 @@ function wrap(start) {
       filePath: "deep-capture.ts",
       fileHash: "1mlv4ugew6yjv",
       splices: {
-        $start: start,
-        $0splice0: cs.create(
-          [17, 14, 20, 7],
-          {
-            version: "0.0.0",
-            filePath: "deep-capture.ts",
-            fileHash: "1mlv4ugew6yjv",
-            splices: {
-              $0splice0: cs.create(
-                [19, 25, 19, 34],
-                {
-                  version: "0.0.0",
-                  filePath: "deep-capture.ts",
-                  fileHash: "1mlv4ugew6yjv",
-                  splices: {},
-                  captures: ["outer$1mlv4ugew6yjv$0"],
-                  spliceParams: {},
-                },
-                () => ({
-                  kind: 80,
-                  loc: [19, 28, 19, 33],
-                  text: "outer",
-                  bindingKey: "outer$1mlv4ugew6yjv$0",
-                }),
-              ),
-            },
-            captures: ["outer$1mlv4ugew6yjv$0"],
-            spliceParams: { $0splice0: [] },
-          },
-          () => ({
-            kind: 242,
-            loc: [17, 17, 20, 6],
-            statements: [
-              {
-                kind: 244,
-                loc: [18, 7, 18, 25],
-                declarationList: {
-                  kind: 262,
-                  loc: [18, 7, 18, 24],
-                  declarations: [
+        $start: { value: start, params: [] },
+        $0splice0: {
+          value: cs.create(
+            [17, 14, 20, 7],
+            {
+              version: "0.0.0",
+              filePath: "deep-capture.ts",
+              fileHash: "1mlv4ugew6yjv",
+              splices: {
+                $0splice0: {
+                  value: cs.create(
+                    [19, 25, 19, 34],
                     {
-                      kind: 261,
-                      loc: [18, 13, 18, 24],
-                      name: {
-                        kind: 80,
-                        loc: [18, 13, 18, 19],
-                        text: "middle",
-                        bindingKey: "middle$1mlv4ugew6yjv$1",
-                      },
-                      initializer: {
-                        kind: 9,
-                        loc: [18, 22, 18, 24],
-                        value: 10,
-                      },
+                      version: "0.0.0",
+                      filePath: "deep-capture.ts",
+                      fileHash: "1mlv4ugew6yjv",
+                      splices: {},
+                      captures: ["outer$1mlv4ugew6yjv$0"],
                     },
-                  ],
-                  keyword: "const",
+                    () => ({
+                      kind: 80,
+                      loc: [19, 28, 19, 33],
+                      text: "outer",
+                      bindingKey: "outer$1mlv4ugew6yjv$0",
+                    }),
+                  ),
+                  params: [],
                 },
               },
-              {
-                kind: 254,
-                loc: [19, 7, 19, 36],
-                expression: {
-                  kind: 227,
-                  loc: [19, 14, 19, 35],
-                  left: {
-                    kind: 80,
-                    loc: [19, 14, 19, 20],
-                    text: "middle",
-                    bindingKey: "middle$1mlv4ugew6yjv$1",
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: 1000,
-                    loc: [19, 23, 19, 35],
-                    key: "$0splice0",
+              captures: ["outer$1mlv4ugew6yjv$0"],
+            },
+            () => ({
+              kind: 242,
+              loc: [17, 17, 20, 6],
+              statements: [
+                {
+                  kind: 244,
+                  loc: [18, 7, 18, 25],
+                  declarationList: {
+                    kind: 262,
+                    loc: [18, 7, 18, 24],
+                    declarations: [
+                      {
+                        kind: 261,
+                        loc: [18, 13, 18, 24],
+                        name: {
+                          kind: 80,
+                          loc: [18, 13, 18, 19],
+                          text: "middle",
+                          bindingKey: "middle$1mlv4ugew6yjv$1",
+                        },
+                        initializer: {
+                          kind: 9,
+                          loc: [18, 22, 18, 24],
+                          value: 10,
+                        },
+                      },
+                    ],
+                    keyword: "const",
                   },
                 },
-              },
-            ],
-          }),
-        ),
+                {
+                  kind: 254,
+                  loc: [19, 7, 19, 36],
+                  expression: {
+                    kind: 227,
+                    loc: [19, 14, 19, 35],
+                    left: {
+                      kind: 80,
+                      loc: [19, 14, 19, 20],
+                      text: "middle",
+                      bindingKey: "middle$1mlv4ugew6yjv$1",
+                    },
+                    operatorToken: "+",
+                    right: {
+                      kind: 1000,
+                      loc: [19, 23, 19, 35],
+                      key: "$0splice0",
+                    },
+                  },
+                },
+              ],
+            }),
+          ),
+          params: ["outer$1mlv4ugew6yjv$0"],
+        },
       },
       captures: [],
-      spliceParams: { $start: [], $0splice0: ["outer$1mlv4ugew6yjv$0"] },
     },
     () => ({
       kind: 242,
@@ -154,45 +157,48 @@ export default cs.create(
     filePath: "deep-capture.ts",
     fileHash: "1mlv4ugew6yjv",
     splices: {
-      $0splice0: wrap(
-        cs.create(
-          [24, 26, 24, 31],
-          {
-            version: "0.0.0",
-            filePath: "deep-capture.ts",
-            fileHash: "1mlv4ugew6yjv",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [24, 29, 24, 30],
-            value: 1,
-          }),
+      $0splice0: {
+        value: wrap(
+          cs.create(
+            [24, 26, 24, 31],
+            {
+              version: "0.0.0",
+              filePath: "deep-capture.ts",
+              fileHash: "1mlv4ugew6yjv",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [24, 29, 24, 30],
+              value: 1,
+            }),
+          ),
         ),
-      ),
-      $0splice1: wrap(
-        cs.create(
-          [24, 43, 24, 48],
-          {
-            version: "0.0.0",
-            filePath: "deep-capture.ts",
-            fileHash: "1mlv4ugew6yjv",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [24, 46, 24, 47],
-            value: 2,
-          }),
+        params: [],
+      },
+      $0splice1: {
+        value: wrap(
+          cs.create(
+            [24, 43, 24, 48],
+            {
+              version: "0.0.0",
+              filePath: "deep-capture.ts",
+              fileHash: "1mlv4ugew6yjv",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [24, 46, 24, 47],
+              value: 2,
+            }),
+          ),
         ),
-      ),
+        params: [],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 227,

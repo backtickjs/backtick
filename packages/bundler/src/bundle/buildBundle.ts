@@ -65,9 +65,11 @@ export function buildBundle(
     const entry: ScriptEntry = {
       loc: script.loc,
       fileHash: script.fileHash,
-      splices: Object.keys(script.splices),
+      splices: Object.entries(script.splices).map(([key, splice]) => ({
+        key,
+        params: splice.params,
+      })),
       captures: script.captures,
-      spliceParams: script.spliceParams,
       body: script.expression,
     };
     entryByLoc.set(key, entry);
@@ -166,7 +168,7 @@ export function buildBundle(
       case "AstScript": {
         const target = entryFor(value);
         const keys = [...target.captures];
-        Object.values(value.splices).forEach((arg, index) => {
+        Object.values(value.splices).forEach(({ value: arg }, index) => {
           // What the hole hands its thunk is supplied there, not by the call
           // site. Asking the hole rather than the entry is the exact question:
           // a binding the entry declares but that is not in scope at *this*
@@ -222,10 +224,8 @@ export function buildBundle(
   // the ones it does — because which fragment reaches a hole is a host
   // decision. A carried fragment arrives with its own captures already bound,
   // so the extra parameters are unused rather than wrong.
-  const passKeys = (target: ScriptEntry, hole: number): readonly string[] => {
-    const splice = target.splices[hole];
-    return splice === undefined ? [] : (target.spliceParams[splice] ?? []);
-  };
+  const passKeys = (target: ScriptEntry, hole: number): readonly string[] =>
+    target.splices[hole]?.params ?? [];
 
   const bodies = new Map<ScriptEntry, BundleArrowFunctionNode>();
 
@@ -248,9 +248,10 @@ export function buildBundle(
       return;
     }
     // One numbered sequence: a thunk per splice hole, then a value per capture.
-    const params = [...script.splices, ...script.captures].map(
-      (_, index) => `$${index}`,
-    );
+    const params = [
+      ...script.splices.map((splice) => splice.key),
+      ...script.captures,
+    ].map((_, index) => `$${index}`);
     bodies.set(script, [
       NodeKind.ArrowFunction,
       parameterNodes(params),
@@ -388,7 +389,7 @@ export function buildBundle(
   ): BundleExpressionNode[] => {
     const target = entryFor(ref);
     const parts: BundleExpressionNode[] = [];
-    Object.values(ref.splices).forEach((arg, index) => {
+    Object.values(ref.splices).forEach(({ value: arg }, index) => {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
       // nested inside it.

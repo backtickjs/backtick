@@ -13,9 +13,8 @@ function guard(fragment) {
       version: "0.0.0",
       filePath: "splice-laziness.ts",
       fileHash: "23k9adtpaouck",
-      splices: { $fragment: fragment },
+      splices: { $fragment: { value: fragment, params: [] } },
       captures: [],
-      spliceParams: { $fragment: [] },
     },
     () => ({
       kind: 220,
@@ -84,7 +83,6 @@ const ok = cs.create(
     fileHash: "23k9adtpaouck",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 11,
@@ -100,7 +98,6 @@ const broken = cs.create(
     fileHash: "23k9adtpaouck",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -124,9 +121,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "splice-laziness.ts",
     fileHash: "23k9adtpaouck",
-    splices: { $0splice0: guard(ok), $0splice1: guard(broken) },
+    splices: {
+      $0splice0: { value: guard(ok), params: [] },
+      $0splice1: { value: guard(broken), params: [] },
+    },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 211,

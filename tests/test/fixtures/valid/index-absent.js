@@ -9,9 +9,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "index-absent.ts",
     fileHash: "2bxuydarg0iof",
-    splices: { $table: table },
+    splices: { $table: { value: table, params: [] } },
     captures: [],
-    spliceParams: { $table: [] },
   },
   () => ({
     kind: 242,

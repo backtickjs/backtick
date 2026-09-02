@@ -9,7 +9,6 @@ const orDash = cs.create(
     fileHash: "2albtvza6nmmn",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -85,9 +84,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "null-literal.ts",
     fileHash: "2albtvza6nmmn",
-    splices: { $orDash: orDash },
+    splices: { $orDash: { value: orDash, params: [] } },
     captures: [],
-    spliceParams: { $orDash: [] },
   },
   () => ({
     kind: 211,

@@ -14,7 +14,6 @@ export const counted = cs.create(
     fileHash: "1kakqhyj595y2",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 212,

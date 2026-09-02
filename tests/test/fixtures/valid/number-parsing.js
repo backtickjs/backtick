@@ -12,7 +12,6 @@ async function Parsed() {
       fileHash: "2ae90j4efmz9h",
       splices: {},
       captures: [],
-      spliceParams: {},
     },
     () => ({
       kind: 242,

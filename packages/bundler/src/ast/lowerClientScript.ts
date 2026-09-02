@@ -1,6 +1,6 @@
 import type { ClientScript } from "@backtickjs/boundary";
 import { locKey } from "../locKey.js";
-import type { Ast, AstScript } from "./Ast.js";
+import type { AstScript, AstSplice } from "./Ast.js";
 import type { ClientScriptBody } from "@backtickjs/boundary";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
@@ -38,11 +38,11 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
     parsedByLoc.set(key, body);
   }
 
-  const splices: { [key: string]: Ast } = Object.fromEntries(
+  const splices: { [key: string]: AstSplice } = Object.fromEntries(
     await Promise.all(
       Object.entries(client.metadata.splices).map(async ([key, splice]) => [
         key,
-        await lowerSpliceable(splice),
+        { value: await lowerSpliceable(splice.value), params: splice.params },
       ]),
     ),
   );
@@ -53,7 +53,6 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
     fileHash: client.metadata.fileHash,
     splices,
     captures: client.metadata.captures,
-    spliceParams: client.metadata.spliceParams,
     expression: body,
   };
   return node;

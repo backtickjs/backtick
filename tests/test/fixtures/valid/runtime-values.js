@@ -5,9 +5,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "runtime-values.ts",
     fileHash: "1rjo8fz06u9rg",
-    splices: { $0splice0: [1, "two", true, null], $0splice1: { k: 3 } },
+    splices: {
+      $0splice0: { value: [1, "two", true, null], params: [] },
+      $0splice1: { value: { k: 3 }, params: [] },
+    },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 211,

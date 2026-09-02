@@ -30,10 +30,7 @@ async function buildTag(jsx: JsxElement, id: string): Promise<Ast> {
       Object.entries(jsx.props).map(
         async ([key, entry]): Promise<[string, Ast]> => {
           try {
-            return [
-              key,
-              await lowerSpliceable(entry as Spliceable),
-            ];
+            return [key, await lowerSpliceable(entry as Spliceable)];
           } catch (cause) {
             // A component runs while its props lower, so what surfaces here may
             // be the app's own failure rather than a value that cannot cross —

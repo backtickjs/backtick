@@ -14,7 +14,6 @@ const listed = cs.create(
     fileHash: "eweogd4x2tuk",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -92,9 +91,8 @@ export default _jsx("div", {
       version: "0.0.0",
       filePath: "script-fragment.tsx",
       fileHash: "eweogd4x2tuk",
-      splices: { $listed: listed },
+      splices: { $listed: { value: listed, params: [] } },
       captures: [],
-      spliceParams: { $listed: [] },
     },
     () => ({
       kind: 214,

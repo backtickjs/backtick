@@ -7,7 +7,6 @@ const stored = cs.create(
     fileHash: "vyh7jw6xunik",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -76,7 +75,6 @@ const written = cs.create(
     fileHash: "vyh7jw6xunik",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,

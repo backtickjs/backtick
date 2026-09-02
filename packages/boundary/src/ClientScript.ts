@@ -3,6 +3,12 @@ import type { SourceLocation } from "./SourceLocation.js";
 import type { Spliceable } from "./Spliceable.js";
 import type { ClientScriptBody } from "./Ast.js";
 
+// A hole: what is spliced there, and what it hands whatever lands in it.
+export interface MetadataSplice {
+  value: Spliceable;
+  params: string[];
+}
+
 export interface Metadata {
   // the version of the toolchain that emitted this script
   version: string;
@@ -11,13 +17,9 @@ export interface Metadata {
   // distinguishes same-named files across codebases (see `locKey`)
   fileHash: string;
   // spliced host values, under the keys the body uses (see `ClientScriptSplice`)
-  splices: { [key: string]: Spliceable };
+  splices: { [key: string]: MetadataSplice };
   // binding keys the script captures from an enclosing scope
   captures: string[];
-  // for each splice, this script's own bindings a fragment landing at that hole
-  // can reach: bound above the hole, and wanted by something. What the hole
-  // hands whatever arrives there.
-  spliceParams: { [splice: string]: string[] };
 }
 
 export interface ClientScript {

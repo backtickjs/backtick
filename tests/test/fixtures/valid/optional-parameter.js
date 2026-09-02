@@ -9,7 +9,6 @@ const greet = cs.create(
     fileHash: "hlti23avj5mo",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -71,7 +70,6 @@ const double = cs.create(
     fileHash: "hlti23avj5mo",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -92,7 +90,6 @@ const call = cs.create(
     fileHash: "hlti23avj5mo",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -149,9 +146,12 @@ export default cs.create(
     version: "0.0.0",
     filePath: "optional-parameter.ts",
     fileHash: "hlti23avj5mo",
-    splices: { $greet: greet, $call: call, $double: double },
+    splices: {
+      $greet: { value: greet, params: [] },
+      $call: { value: call, params: [] },
+      $double: { value: double, params: [] },
+    },
     captures: [],
-    spliceParams: { $greet: [], $call: [], $double: [] },
   },
   () => ({
     kind: 211,

@@ -16,7 +16,6 @@ const x = cs.create(
     fileHash: "3tlfkx843ni71",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 9,
@@ -32,7 +31,6 @@ const label = cs.create(
     fileHash: "3tlfkx843ni71",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 11,
@@ -47,9 +45,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "spliced-container.ts",
     fileHash: "3tlfkx843ni71",
-    splices: { $point: point },
+    splices: { $point: { value: point, params: [] } },
     captures: [],
-    spliceParams: { $point: [] },
   },
   () => ({
     kind: 227,

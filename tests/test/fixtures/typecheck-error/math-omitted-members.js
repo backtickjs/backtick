@@ -13,7 +13,6 @@ export const halved = cs.create(
     fileHash: "3i88rbbd8nxvb",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 214,

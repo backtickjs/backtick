@@ -10,28 +10,29 @@ export default cs.create(
     filePath: "deep-shadowing.ts",
     fileHash: "1q50brt6ov79t",
     splices: {
-      $0splice0: outer(
-        cs.create(
-          [9, 18, 9, 26],
-          {
-            version: "0.0.0",
-            filePath: "deep-shadowing.ts",
-            fileHash: "1q50brt6ov79t",
-            splices: {},
-            captures: ["base$1q50brt6ov79t$0"],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 80,
-            loc: [9, 21, 9, 25],
-            text: "base",
-            bindingKey: "base$1q50brt6ov79t$0",
-          }),
+      $0splice0: {
+        value: outer(
+          cs.create(
+            [9, 18, 9, 26],
+            {
+              version: "0.0.0",
+              filePath: "deep-shadowing.ts",
+              fileHash: "1q50brt6ov79t",
+              splices: {},
+              captures: ["base$1q50brt6ov79t$0"],
+            },
+            () => ({
+              kind: 80,
+              loc: [9, 21, 9, 25],
+              text: "base",
+              bindingKey: "base$1q50brt6ov79t$0",
+            }),
+          ),
         ),
-      ),
+        params: ["base$1q50brt6ov79t$0"],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: ["base$1q50brt6ov79t$0"] },
   },
   () => ({
     kind: 242,
@@ -82,9 +83,8 @@ function outer(inner) {
       version: "0.0.0",
       filePath: "deep-shadowing.ts",
       fileHash: "1q50brt6ov79t",
-      splices: { $0splice0: middle(inner) },
+      splices: { $0splice0: { value: middle(inner), params: [] } },
       captures: [],
-      spliceParams: { $0splice0: [] },
     },
     () => ({
       kind: 242,
@@ -147,9 +147,8 @@ function middle(inner) {
       version: "0.0.0",
       filePath: "deep-shadowing.ts",
       fileHash: "1q50brt6ov79t",
-      splices: { $inner: inner },
+      splices: { $inner: { value: inner, params: [] } },
       captures: [],
-      spliceParams: { $inner: [] },
     },
     () => ({
       kind: 242,

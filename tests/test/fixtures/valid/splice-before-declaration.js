@@ -16,9 +16,8 @@ function wrap(fragment) {
       version: "0.0.0",
       filePath: "splice-before-declaration.ts",
       fileHash: "2r40h7jqt1118",
-      splices: { $fragment: fragment },
+      splices: { $fragment: { value: fragment, params: [] } },
       captures: [],
-      spliceParams: { $fragment: [] },
     },
     () => ({
       kind: 242,
@@ -145,45 +144,48 @@ export default cs.create(
     filePath: "splice-before-declaration.ts",
     fileHash: "2r40h7jqt1118",
     splices: {
-      $0splice0: wrap(
-        cs.create(
-          [22, 26, 22, 32],
-          {
-            version: "0.0.0",
-            filePath: "splice-before-declaration.ts",
-            fileHash: "2r40h7jqt1118",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [22, 29, 22, 31],
-            value: 10,
-          }),
+      $0splice0: {
+        value: wrap(
+          cs.create(
+            [22, 26, 22, 32],
+            {
+              version: "0.0.0",
+              filePath: "splice-before-declaration.ts",
+              fileHash: "2r40h7jqt1118",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [22, 29, 22, 31],
+              value: 10,
+            }),
+          ),
         ),
-      ),
-      $0splice1: wrap(
-        cs.create(
-          [22, 44, 22, 50],
-          {
-            version: "0.0.0",
-            filePath: "splice-before-declaration.ts",
-            fileHash: "2r40h7jqt1118",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [22, 47, 22, 49],
-            value: 20,
-          }),
+        params: [],
+      },
+      $0splice1: {
+        value: wrap(
+          cs.create(
+            [22, 44, 22, 50],
+            {
+              version: "0.0.0",
+              filePath: "splice-before-declaration.ts",
+              fileHash: "2r40h7jqt1118",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [22, 47, 22, 49],
+              value: 20,
+            }),
+          ),
         ),
-      ),
+        params: [],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 227,

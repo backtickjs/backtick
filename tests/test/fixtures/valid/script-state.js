@@ -11,9 +11,8 @@ async function Rows() {
       version: "0.0.0",
       filePath: "script-state.tsx",
       fileHash: "2s2nt4oke8yg5",
-      splices: { $state: state },
+      splices: { $state: { value: state, params: [] } },
       captures: [],
-      spliceParams: { $state: [] },
     },
     () => ({
       kind: 220,
@@ -80,7 +79,6 @@ async function Rows() {
         fileHash: "2s2nt4oke8yg5",
         splices: {},
         captures: [],
-        spliceParams: {},
       },
       () => ({
         kind: 11,
@@ -94,9 +92,8 @@ async function Rows() {
         version: "0.0.0",
         filePath: "script-state.tsx",
         fileHash: "2s2nt4oke8yg5",
-        splices: { $build: build },
+        splices: { $build: { value: build, params: [] } },
         captures: [],
-        spliceParams: { $build: [] },
       },
       () => ({
         kind: 220,
@@ -213,9 +210,8 @@ async function Rows() {
         version: "0.0.0",
         filePath: "script-state.tsx",
         fileHash: "2s2nt4oke8yg5",
-        splices: { $build: build },
+        splices: { $build: { value: build, params: [] } },
         captures: [],
-        spliceParams: { $build: [] },
       },
       () => ({
         kind: 214,

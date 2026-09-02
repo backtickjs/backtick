@@ -9,7 +9,6 @@ const script = cs.create(
     fileHash: "3m6roaxdg127n",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -116,7 +115,6 @@ const action = cs.create(
     fileHash: "3m6roaxdg127n",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,

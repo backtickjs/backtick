@@ -13,7 +13,6 @@ async function Written() {
       fileHash: "3d857e9xlnmut",
       splices: {},
       captures: [],
-      spliceParams: {},
     },
     () => ({
       kind: 242,

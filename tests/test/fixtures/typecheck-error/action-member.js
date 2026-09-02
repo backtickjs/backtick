@@ -9,7 +9,6 @@ const action = cs.create(
     fileHash: "1wli9dj2vweno",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -50,9 +49,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "action-member.ts",
     fileHash: "1wli9dj2vweno",
-    splices: { $0splice0: [action] },
+    splices: { $0splice0: { value: [action], params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 242,

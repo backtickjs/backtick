@@ -14,7 +14,6 @@ export default cs.create(
     fileHash: "1yqqpc9g2l4nh",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,

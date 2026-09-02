@@ -13,7 +13,6 @@ export default _jsxs("div", {
           fileHash: "2xc7nbwjyckin",
           splices: {},
           captures: [],
-          spliceParams: {},
         },
         () => ({
           kind: 220,

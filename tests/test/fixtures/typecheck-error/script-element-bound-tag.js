@@ -7,9 +7,8 @@ const held = cs.create(
     version: "0.0.0",
     filePath: "script-element-bound-tag.tsx",
     fileHash: "3fbb3ihku5tcs",
-    splices: { $Tag: Tag },
+    splices: { $Tag: { value: Tag, params: [] } },
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,

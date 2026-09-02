@@ -44,7 +44,6 @@ const lower = (body: ClientScriptExpression) => {
     fileHash: "abc",
     splices: {},
     captures: [],
-    spliceParams: {},
     expression: body,
   };
   // An entry is an arrow under a wrapper, and this one takes no parameters.

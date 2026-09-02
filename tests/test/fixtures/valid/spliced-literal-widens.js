@@ -23,13 +23,12 @@ export default cs.create(
     filePath: "spliced-literal-widens.ts",
     fileHash: "19qhn3op6tbxe",
     splices: {
-      $state: state,
-      $five: five,
-      $0splice0: Color.Red,
-      $0splice1: Color.Blue,
+      $state: { value: state, params: [] },
+      $five: { value: five, params: [] },
+      $0splice0: { value: Color.Red, params: [] },
+      $0splice1: { value: Color.Blue, params: [] },
     },
     captures: [],
-    spliceParams: { $state: [], $five: [], $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 242,

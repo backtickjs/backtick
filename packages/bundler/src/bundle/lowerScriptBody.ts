@@ -58,7 +58,12 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
   // thunk the bindings bound where it sits (see `spliceParams`), since a
   // fragment landing there can only reference what was in scope where it was
   // written.
-  const holes = new Map(script.splices.map((key, index) => [key, index]));
+  const holes = new Map(
+    script.splices.map((splice, index) => [splice.key, index] as const),
+  );
+  const paramsOf = new Map(
+    script.splices.map((splice) => [splice.key, splice.params] as const),
+  );
   const renderSplice = (key: string): BundleExpressionNode => {
     const index = holes.get(key);
     if (index === undefined) {
@@ -69,7 +74,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
     // already covers what a fragment nested here needs. Positional, in an order
     // the script fixes, so a call site reading the same metadata can line its
     // thunk up without either side knowing the other.
-    const args = [...(script.spliceParams[key] ?? []), ...script.captures].map(
+    const args = [...(paramsOf.get(key) ?? []), ...script.captures].map(
       (bound) => read(bound),
     );
     return [

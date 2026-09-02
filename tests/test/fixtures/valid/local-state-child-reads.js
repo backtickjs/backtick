@@ -19,9 +19,11 @@ const Row = async ({ id, selected }) =>
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
             fileHash: "kiq2x3i0lhh3",
-            splices: { $selected: selected, $id: id },
+            splices: {
+              $selected: { value: selected, params: [] },
+              $id: { value: id, params: [] },
+            },
             captures: [],
-            spliceParams: { $selected: [], $id: [] },
           },
           () => ({
             kind: 227,
@@ -91,9 +93,11 @@ const Row = async ({ id, selected }) =>
             version: "0.0.0",
             filePath: "local-state-child-reads.tsx",
             fileHash: "kiq2x3i0lhh3",
-            splices: { $id: id, $selected: selected },
+            splices: {
+              $id: { value: id, params: [] },
+              $selected: { value: selected, params: [] },
+            },
             captures: [],
-            spliceParams: { $id: [], $selected: [] },
           },
           () => ({
             kind: 227,
@@ -151,12 +155,14 @@ const Row = async ({ id, selected }) =>
           filePath: "local-state-child-reads.tsx",
           fileHash: "kiq2x3i0lhh3",
           splices: {
-            $selected: selected,
-            $id: id,
-            $0splice0: _jsx("span", { children: "marker" }),
+            $selected: { value: selected, params: [] },
+            $id: { value: id, params: [] },
+            $0splice0: {
+              value: _jsx("span", { children: "marker" }),
+              params: [],
+            },
           },
           captures: [],
-          spliceParams: { $selected: [], $id: [], $0splice0: [] },
         },
         () => ({
           kind: 228,
@@ -208,9 +214,11 @@ async function Panel() {
       version: "0.0.0",
       filePath: "local-state-child-reads.tsx",
       fileHash: "kiq2x3i0lhh3",
-      splices: { $state: state, $Row: Row },
+      splices: {
+        $state: { value: state, params: [] },
+        $Row: { value: Row, params: [] },
+      },
       captures: [],
-      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,

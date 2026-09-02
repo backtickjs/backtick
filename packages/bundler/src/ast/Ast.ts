@@ -20,13 +20,18 @@ export type Ast =
   | AstObject
   | AstString;
 
+// `Metadata`'s splice, lowered.
+export interface AstSplice {
+  readonly value: Ast;
+  readonly params: readonly string[];
+}
+
 export interface AstScript {
   readonly kind: "AstScript";
   readonly loc: SourceLocation;
   readonly fileHash: string;
-  readonly splices: Readonly<Record<string, Ast>>;
+  readonly splices: Readonly<Record<string, AstSplice>>;
   readonly captures: readonly string[];
-  readonly spliceParams: Readonly<Record<string, readonly string[]>>;
   readonly expression: ClientScriptBody;
 }
 

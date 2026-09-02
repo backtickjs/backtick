@@ -15,9 +15,8 @@ const held = cs.create(
     version: "0.0.0",
     filePath: "tree-in-variable.tsx",
     fileHash: "3ravx23kvqohc",
-    splices: { $0splice0: _jsx("div", {}) },
+    splices: { $0splice0: { value: _jsx("div", {}), params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 220,
@@ -73,9 +72,8 @@ const heldComponent = cs.create(
     version: "0.0.0",
     filePath: "tree-in-variable.tsx",
     fileHash: "3ravx23kvqohc",
-    splices: { $0splice0: _jsx(Row, {}) },
+    splices: { $0splice0: { value: _jsx(Row, {}), params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 220,
@@ -133,9 +131,8 @@ export default _jsxs("div", {
         version: "0.0.0",
         filePath: "tree-in-variable.tsx",
         fileHash: "3ravx23kvqohc",
-        splices: { $held: held },
+        splices: { $held: { value: held, params: [] } },
         captures: [],
-        spliceParams: { $held: [] },
       },
       () => ({
         kind: 214,
@@ -155,9 +152,8 @@ export default _jsxs("div", {
         version: "0.0.0",
         filePath: "tree-in-variable.tsx",
         fileHash: "3ravx23kvqohc",
-        splices: { $heldComponent: heldComponent },
+        splices: { $heldComponent: { value: heldComponent, params: [] } },
         captures: [],
-        spliceParams: { $heldComponent: [] },
       },
       () => ({
         kind: 214,

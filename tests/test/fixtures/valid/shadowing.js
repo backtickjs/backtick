@@ -6,29 +6,30 @@ export default cs.create(
     filePath: "shadowing.ts",
     fileHash: "wjl0rp4901n3",
     splices: {
-      $0splice0: add(
-        cs.create(
-          [5, 16, 5, 25],
-          {
-            version: "0.0.0",
-            filePath: "shadowing.ts",
-            fileHash: "wjl0rp4901n3",
-            splices: {},
-            captures: ["total$wjl0rp4901n3$0"],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 80,
-            loc: [5, 19, 5, 24],
-            text: "total",
-            bindingKey: "total$wjl0rp4901n3$0",
-          }),
+      $0splice0: {
+        value: add(
+          cs.create(
+            [5, 16, 5, 25],
+            {
+              version: "0.0.0",
+              filePath: "shadowing.ts",
+              fileHash: "wjl0rp4901n3",
+              splices: {},
+              captures: ["total$wjl0rp4901n3$0"],
+            },
+            () => ({
+              kind: 80,
+              loc: [5, 19, 5, 24],
+              text: "total",
+              bindingKey: "total$wjl0rp4901n3$0",
+            }),
+          ),
+          100,
         ),
-        100,
-      ),
+        params: ["total$wjl0rp4901n3$0"],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: ["total$wjl0rp4901n3$0"] },
   },
   () => ({
     kind: 242,
@@ -79,9 +80,11 @@ function add(lhs, rhs) {
       version: "0.0.0",
       filePath: "shadowing.ts",
       fileHash: "wjl0rp4901n3",
-      splices: { $lhs: lhs, $rhs: rhs },
+      splices: {
+        $lhs: { value: lhs, params: [] },
+        $rhs: { value: rhs, params: [] },
+      },
       captures: [],
-      spliceParams: { $lhs: [], $rhs: [] },
     },
     () => ({
       kind: 242,

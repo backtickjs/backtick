@@ -7,9 +7,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "hash-key-data.tsx",
     fileHash: "wkikypinu026",
-    splices: { $0splice0: { "#call": "#f0" } },
+    splices: { $0splice0: { value: { "#call": "#f0" }, params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 220,

@@ -7,7 +7,6 @@ const lying = cs.create(
     fileHash: "19ws50ksjspoc",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -26,9 +25,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "undefined-return.ts",
     fileHash: "19ws50ksjspoc",
-    splices: { $lying: lying },
+    splices: { $lying: { value: lying, params: [] } },
     captures: [],
-    spliceParams: { $lying: [] },
   },
   () => ({
     kind: 242,

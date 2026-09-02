@@ -6,26 +6,27 @@ export default cs.create(
     filePath: "nested-scripts.ts",
     fileHash: "3d1j5mxf94bs6",
     splices: {
-      $0splice0: cs.create(
-        [5, 12, 5, 17],
-        {
-          version: "0.0.0",
-          filePath: "nested-scripts.ts",
-          fileHash: "3d1j5mxf94bs6",
-          splices: {},
-          captures: ["x$3d1j5mxf94bs6$0"],
-          spliceParams: {},
-        },
-        () => ({
-          kind: 80,
-          loc: [5, 15, 5, 16],
-          text: "x",
-          bindingKey: "x$3d1j5mxf94bs6$0",
-        }),
-      ),
+      $0splice0: {
+        value: cs.create(
+          [5, 12, 5, 17],
+          {
+            version: "0.0.0",
+            filePath: "nested-scripts.ts",
+            fileHash: "3d1j5mxf94bs6",
+            splices: {},
+            captures: ["x$3d1j5mxf94bs6$0"],
+          },
+          () => ({
+            kind: 80,
+            loc: [5, 15, 5, 16],
+            text: "x",
+            bindingKey: "x$3d1j5mxf94bs6$0",
+          }),
+        ),
+        params: ["x$3d1j5mxf94bs6$0"],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: ["x$3d1j5mxf94bs6$0"] },
   },
   () => ({
     kind: 242,

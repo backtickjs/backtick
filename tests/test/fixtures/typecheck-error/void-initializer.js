@@ -9,7 +9,6 @@ const ping = cs.create(
     fileHash: "3hyzmfxyz75s4",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -71,9 +70,8 @@ const script = cs.create(
     version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
-    splices: { $ping: ping },
+    splices: { $ping: { value: ping, params: [] } },
     captures: [],
-    spliceParams: { $ping: [] },
   },
   () => ({
     kind: 242,
@@ -129,9 +127,8 @@ const action = cs.create(
     version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
-    splices: { $ping: ping },
+    splices: { $ping: { value: ping, params: [] } },
     captures: [],
-    spliceParams: { $ping: [] },
   },
   () => ({
     kind: 242,
@@ -182,7 +179,6 @@ const label = cs.create(
     fileHash: "3hyzmfxyz75s4",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -223,9 +219,8 @@ const wrongArgument = cs.create(
     version: "0.0.0",
     filePath: "void-initializer.ts",
     fileHash: "3hyzmfxyz75s4",
-    splices: { $label: label },
+    splices: { $label: { value: label, params: [] } },
     captures: [],
-    spliceParams: { $label: [] },
   },
   () => ({
     kind: 242,

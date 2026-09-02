@@ -9,7 +9,6 @@ export const written = cs.create(
     fileHash: "2tpsdsl2b0c00",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 214,

@@ -9,7 +9,6 @@ const count = cs.create(
     fileHash: "2xzewragy8kyn",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 9,
@@ -23,9 +22,8 @@ export const script = cs.create(
     version: "0.0.0",
     filePath: "value-splice-statement.ts",
     fileHash: "2xzewragy8kyn",
-    splices: { $count: count },
+    splices: { $count: { value: count, params: [] } },
     captures: [],
-    spliceParams: { $count: [] },
   },
   () => ({
     kind: 242,

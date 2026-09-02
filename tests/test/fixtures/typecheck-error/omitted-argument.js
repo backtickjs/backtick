@@ -9,7 +9,6 @@ const greet = cs.create(
     fileHash: "1gqqin78x7yev",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -68,9 +67,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "omitted-argument.ts",
     fileHash: "1gqqin78x7yev",
-    splices: { $greet: greet },
+    splices: { $greet: { value: greet, params: [] } },
     captures: [],
-    spliceParams: { $greet: [] },
   },
   () => ({
     kind: 242,

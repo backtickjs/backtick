@@ -14,9 +14,8 @@ async function Panel() {
       version: "0.0.0",
       filePath: "component-answers-script.tsx",
       fileHash: "3fv7xpc8x0efp",
-      splices: { $state: state },
+      splices: { $state: { value: state, params: [] } },
       captures: [],
-      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,

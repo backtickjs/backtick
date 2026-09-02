@@ -10,7 +10,6 @@ const read = cs.create(
     fileHash: "10vcjd80vhoob",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -91,9 +90,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "optional-property.ts",
     fileHash: "10vcjd80vhoob",
-    splices: { $read: read },
+    splices: { $read: { value: read, params: [] } },
     captures: [],
-    spliceParams: { $read: [] },
   },
   () => ({
     kind: 211,

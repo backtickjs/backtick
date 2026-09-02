@@ -9,7 +9,6 @@ const pick = cs.create(
     fileHash: "2bgu1tn5wjo9o",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 220,
@@ -84,9 +83,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "ternary.ts",
     fileHash: "2bgu1tn5wjo9o",
-    splices: { $pick: pick },
+    splices: { $pick: { value: pick, params: [] } },
     captures: [],
-    spliceParams: { $pick: [] },
   },
   () => ({
     kind: 211,

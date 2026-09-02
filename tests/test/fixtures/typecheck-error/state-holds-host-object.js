@@ -17,9 +17,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "state-holds-host-object.ts",
     fileHash: "2bsdl419q8da8",
-    splices: { $state: state, $host: host },
+    splices: {
+      $state: { value: state, params: [] },
+      $host: { value: host, params: [] },
+    },
     captures: [],
-    spliceParams: { $state: [], $host: [] },
   },
   () => ({
     kind: 242,

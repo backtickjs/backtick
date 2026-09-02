@@ -18,9 +18,8 @@ const label = cs.create(
     version: "0.0.0",
     filePath: "state-enum.tsx",
     fileHash: "vlvkz8vk4fw4",
-    splices: { $0splice0: Color.Blue },
+    splices: { $0splice0: { value: Color.Blue, params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 220,
@@ -87,13 +86,12 @@ async function Swatch() {
       filePath: "state-enum.tsx",
       fileHash: "vlvkz8vk4fw4",
       splices: {
-        $state: state,
-        $0splice0: Color.Red,
-        $0splice1: Color.Blue,
-        $label: label,
+        $state: { value: state, params: [] },
+        $0splice0: { value: Color.Red, params: [] },
+        $0splice1: { value: Color.Blue, params: [] },
+        $label: { value: label, params: [] },
       },
       captures: [],
-      spliceParams: { $state: [], $0splice0: [], $0splice1: [], $label: [] },
     },
     () => ({
       kind: 242,

@@ -9,7 +9,6 @@ const leaf = cs.create(
     fileHash: "xr1ijhq5mxaf",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 9,
@@ -23,9 +22,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "deduplicated-scripts.ts",
     fileHash: "xr1ijhq5mxaf",
-    splices: { $leaf: leaf },
+    splices: { $leaf: { value: leaf, params: [] } },
     captures: [],
-    spliceParams: { $leaf: [] },
   },
   () => ({
     kind: 211,

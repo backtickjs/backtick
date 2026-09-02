@@ -9,7 +9,6 @@ const action = cs.create(
     fileHash: "1937kl3l6y7n7",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -50,9 +49,8 @@ export const listed = cs.create(
     version: "0.0.0",
     filePath: "action-in-data.ts",
     fileHash: "1937kl3l6y7n7",
-    splices: { $0splice0: [action] },
+    splices: { $0splice0: { value: [action], params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 242,
@@ -102,9 +100,8 @@ export const keyed = cs.create(
     version: "0.0.0",
     filePath: "action-in-data.ts",
     fileHash: "1937kl3l6y7n7",
-    splices: { $0splice0: { press: action } },
+    splices: { $0splice0: { value: { press: action }, params: [] } },
     captures: [],
-    spliceParams: { $0splice0: [] },
   },
   () => ({
     kind: 242,

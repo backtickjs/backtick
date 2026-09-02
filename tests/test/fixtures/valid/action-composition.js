@@ -9,7 +9,6 @@ const effects = cs.create(
     fileHash: "agkxao2hual4",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 242,
@@ -50,9 +49,8 @@ const composed = cs.create(
     version: "0.0.0",
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
-    splices: { $effects: effects },
+    splices: { $effects: { value: effects, params: [] } },
     captures: [],
-    spliceParams: { $effects: [] },
   },
   () => ({
     kind: 242,
@@ -72,9 +70,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "action-composition.ts",
     fileHash: "agkxao2hual4",
-    splices: { $composed: composed },
+    splices: { $composed: { value: composed, params: [] } },
     captures: [],
-    spliceParams: { $composed: [] },
   },
   () => ({
     kind: 242,

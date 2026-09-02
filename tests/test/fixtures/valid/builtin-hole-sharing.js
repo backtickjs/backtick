@@ -6,9 +6,8 @@ const make = (f) =>
       version: "0.0.0",
       filePath: "builtin-hole-sharing.ts",
       fileHash: "1javurj6oomvn",
-      splices: { $f: f },
+      splices: { $f: { value: f, params: [] } },
       captures: [],
-      spliceParams: { $f: [] },
     },
     () => ({
       kind: 242,
@@ -56,9 +55,8 @@ const wrapped = cs.create(
     version: "0.0.0",
     filePath: "builtin-hole-sharing.ts",
     fileHash: "1javurj6oomvn",
-    splices: { $state: state },
+    splices: { $state: { value: state, params: [] } },
     captures: [],
-    spliceParams: { $state: [] },
   },
   () => ({
     kind: 220,
@@ -111,9 +109,11 @@ export default cs.create(
     version: "0.0.0",
     filePath: "builtin-hole-sharing.ts",
     fileHash: "1javurj6oomvn",
-    splices: { $0splice0: make(state), $0splice1: make(wrapped) },
+    splices: {
+      $0splice0: { value: make(state), params: [] },
+      $0splice1: { value: make(wrapped), params: [] },
+    },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 242,

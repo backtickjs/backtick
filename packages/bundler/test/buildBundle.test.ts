@@ -12,7 +12,6 @@ const script: AstScript = {
   fileHash: "abc",
   splices: {},
   captures: [],
-  spliceParams: {},
   expression: { kind: SyntaxKind.NumericLiteral, loc: [3, 7, 3, 8], value: 1 },
 };
 

@@ -14,11 +14,16 @@ import type { ClientScriptBody, SourceLocation } from "@backtickjs/boundary";
  * `splices` is the hole order, so the entry's parameters and a reference's
  * arguments line up positionally without either side reading the other.
  */
+/** One hole, named rather than valued: the entry holds the order, not the arguments. */
+export interface EntrySplice {
+  readonly key: string;
+  readonly params: readonly string[];
+}
+
 export interface ScriptEntry {
   readonly loc: SourceLocation;
   readonly fileHash: string;
-  readonly splices: readonly string[];
+  readonly splices: readonly EntrySplice[];
   readonly captures: readonly string[];
-  readonly spliceParams: Readonly<Record<string, readonly string[]>>;
   readonly body: ClientScriptBody;
 }

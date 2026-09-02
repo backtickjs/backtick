@@ -10,9 +10,8 @@ function add(lhs) {
       version: "0.0.0",
       filePath: "dollar-name.ts",
       fileHash: "3r8prbdxxrtje",
-      splices: { $lhs: lhs },
+      splices: { $lhs: { value: lhs, params: [] } },
       captures: [],
-      spliceParams: { $lhs: [] },
     },
     () => ({
       kind: 227,
@@ -38,28 +37,29 @@ export default cs.create(
     filePath: "dollar-name.ts",
     fileHash: "3r8prbdxxrtje",
     splices: {
-      $0splice0: add(
-        cs.create(
-          [13, 16, 13, 24],
-          {
-            version: "0.0.0",
-            filePath: "dollar-name.ts",
-            fileHash: "3r8prbdxxrtje",
-            splices: {},
-            captures: ["foo$$3r8prbdxxrtje$0"],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 80,
-            loc: [13, 19, 13, 23],
-            text: "foo$",
-            bindingKey: "foo$$3r8prbdxxrtje$0",
-          }),
+      $0splice0: {
+        value: add(
+          cs.create(
+            [13, 16, 13, 24],
+            {
+              version: "0.0.0",
+              filePath: "dollar-name.ts",
+              fileHash: "3r8prbdxxrtje",
+              splices: {},
+              captures: ["foo$$3r8prbdxxrtje$0"],
+            },
+            () => ({
+              kind: 80,
+              loc: [13, 19, 13, 23],
+              text: "foo$",
+              bindingKey: "foo$$3r8prbdxxrtje$0",
+            }),
+          ),
         ),
-      ),
+        params: ["foo$$3r8prbdxxrtje$0"],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: ["foo$$3r8prbdxxrtje$0"] },
   },
   () => ({
     kind: 242,

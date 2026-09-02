@@ -14,9 +14,8 @@ function wrap(fragment) {
       version: "0.0.0",
       filePath: "shadowed-hole.ts",
       fileHash: "3h9ra1625ja2t",
-      splices: { $fragment: fragment },
+      splices: { $fragment: { value: fragment, params: [] } },
       captures: [],
-      spliceParams: { $fragment: [] },
     },
     () => ({
       kind: 242,
@@ -111,45 +110,48 @@ export default cs.create(
     filePath: "shadowed-hole.ts",
     fileHash: "3h9ra1625ja2t",
     splices: {
-      $0splice0: wrap(
-        cs.create(
-          [21, 26, 21, 32],
-          {
-            version: "0.0.0",
-            filePath: "shadowed-hole.ts",
-            fileHash: "3h9ra1625ja2t",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [21, 29, 21, 31],
-            value: 10,
-          }),
+      $0splice0: {
+        value: wrap(
+          cs.create(
+            [21, 26, 21, 32],
+            {
+              version: "0.0.0",
+              filePath: "shadowed-hole.ts",
+              fileHash: "3h9ra1625ja2t",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [21, 29, 21, 31],
+              value: 10,
+            }),
+          ),
         ),
-      ),
-      $0splice1: wrap(
-        cs.create(
-          [21, 44, 21, 50],
-          {
-            version: "0.0.0",
-            filePath: "shadowed-hole.ts",
-            fileHash: "3h9ra1625ja2t",
-            splices: {},
-            captures: [],
-            spliceParams: {},
-          },
-          () => ({
-            kind: 9,
-            loc: [21, 47, 21, 49],
-            value: 20,
-          }),
+        params: [],
+      },
+      $0splice1: {
+        value: wrap(
+          cs.create(
+            [21, 44, 21, 50],
+            {
+              version: "0.0.0",
+              filePath: "shadowed-hole.ts",
+              fileHash: "3h9ra1625ja2t",
+              splices: {},
+              captures: [],
+            },
+            () => ({
+              kind: 9,
+              loc: [21, 47, 21, 49],
+              value: 20,
+            }),
+          ),
         ),
-      ),
+        params: [],
+      },
     },
     captures: [],
-    spliceParams: { $0splice0: [], $0splice1: [] },
   },
   () => ({
     kind: 227,

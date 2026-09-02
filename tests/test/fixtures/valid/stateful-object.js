@@ -9,9 +9,8 @@ const counter = cs.create(
     version: "0.0.0",
     filePath: "stateful-object.tsx",
     fileHash: "1dleixj3nmlt2",
-    splices: { $state: state },
+    splices: { $state: { value: state, params: [] } },
     captures: [],
-    spliceParams: { $state: [] },
   },
   () => ({
     kind: 220,
@@ -194,9 +193,8 @@ export default cs.create(
     version: "0.0.0",
     filePath: "stateful-object.tsx",
     fileHash: "1dleixj3nmlt2",
-    splices: { $counter: counter },
+    splices: { $counter: { value: counter, params: [] } },
     captures: [],
-    spliceParams: { $counter: [] },
   },
   () => ({
     kind: 242,

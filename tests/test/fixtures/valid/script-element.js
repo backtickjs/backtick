@@ -11,9 +11,8 @@ async function Card() {
       version: "0.0.0",
       filePath: "script-element.tsx",
       fileHash: "wxnogu00pnd4",
-      splices: { $state: state },
+      splices: { $state: { value: state, params: [] } },
       captures: [],
-      spliceParams: { $state: [] },
     },
     () => ({
       kind: 242,

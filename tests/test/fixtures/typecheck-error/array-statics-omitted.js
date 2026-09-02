@@ -10,7 +10,6 @@ export const tested = cs.create(
     fileHash: "1qrydkqzmuq91",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 214,
@@ -47,7 +46,6 @@ export const holes = cs.create(
     fileHash: "1qrydkqzmuq91",
     splices: {},
     captures: [],
-    spliceParams: {},
   },
   () => ({
     kind: 214,

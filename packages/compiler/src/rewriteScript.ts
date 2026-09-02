@@ -105,7 +105,27 @@ export function rewriteScript(
         "splices",
         ts.factory.createObjectLiteralExpression(
           splices.map((splice: Splice) =>
-            ts.factory.createPropertyAssignment(splice.key, splice.expression),
+            ts.factory.createPropertyAssignment(
+              splice.key,
+              ts.factory.createObjectLiteralExpression(
+                [
+                  ts.factory.createPropertyAssignment(
+                    "value",
+                    splice.expression,
+                  ),
+                  ts.factory.createPropertyAssignment(
+                    "params",
+                    ts.factory.createArrayLiteralExpression(
+                      (spliceParams[splice.key] ?? []).map((name) =>
+                        ts.factory.createStringLiteral(name),
+                      ),
+                      false,
+                    ),
+                  ),
+                ],
+                false,
+              ),
+            ),
           ),
           false,
         ),
@@ -114,21 +134,6 @@ export function rewriteScript(
         "captures",
         ts.factory.createArrayLiteralExpression(
           captures.map((name) => ts.factory.createStringLiteral(name)),
-          false,
-        ),
-      ),
-      ts.factory.createPropertyAssignment(
-        "spliceParams",
-        ts.factory.createObjectLiteralExpression(
-          Object.entries(spliceParams).map(([splice, keys]) =>
-            ts.factory.createPropertyAssignment(
-              ts.factory.createStringLiteral(splice),
-              ts.factory.createArrayLiteralExpression(
-                keys.map((name) => ts.factory.createStringLiteral(name)),
-                false,
-              ),
-            ),
-          ),
           false,
         ),
       ),

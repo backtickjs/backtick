@@ -23,9 +23,8 @@ export default _jsx("div", {
         version: "0.0.0",
         filePath: "mapped-component.tsx",
         fileHash: "thyrht8e58qr",
-        splices: { $rows: rows },
+        splices: { $rows: { value: rows, params: [] } },
         captures: [],
-        spliceParams: { $rows: [] },
       },
       () => ({
         kind: 1000,
@@ -40,38 +39,39 @@ export default _jsx("div", {
         filePath: "mapped-component.tsx",
         fileHash: "thyrht8e58qr",
         splices: {
-          $0splice0: _jsx("span", {
-            children: cs.create(
-              [22, 38, 22, 54],
-              {
-                version: "0.0.0",
-                filePath: "mapped-component.tsx",
-                fileHash: "thyrht8e58qr",
-                splices: {},
-                captures: ["row$thyrht8e58qr$0"],
-                spliceParams: {},
-              },
-              () => ({
-                kind: 227,
-                loc: [22, 41, 22, 53],
-                left: {
-                  kind: 11,
-                  loc: [22, 41, 22, 47],
-                  text: "row ",
+          $0splice0: {
+            value: _jsx("span", {
+              children: cs.create(
+                [22, 38, 22, 54],
+                {
+                  version: "0.0.0",
+                  filePath: "mapped-component.tsx",
+                  fileHash: "thyrht8e58qr",
+                  splices: {},
+                  captures: ["row$thyrht8e58qr$0"],
                 },
-                operatorToken: "+",
-                right: {
-                  kind: 80,
-                  loc: [22, 50, 22, 53],
-                  text: "row",
-                  bindingKey: "row$thyrht8e58qr$0",
-                },
-              }),
-            ),
-          }),
+                () => ({
+                  kind: 227,
+                  loc: [22, 41, 22, 53],
+                  left: {
+                    kind: 11,
+                    loc: [22, 41, 22, 47],
+                    text: "row ",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: 80,
+                    loc: [22, 50, 22, 53],
+                    text: "row",
+                    bindingKey: "row$thyrht8e58qr$0",
+                  },
+                }),
+              ),
+            }),
+            params: ["row$thyrht8e58qr$0"],
+          },
         },
         captures: [],
-        spliceParams: { $0splice0: ["row$thyrht8e58qr$0"] },
       },
       () => ({
         kind: 220,
