@@ -3,6 +3,9 @@ packages:
   - "tests"
   - "examples/*"
   - "benchmarks/*"
+  # The Cardputer app, so authoring one uses the repo's toolchain. The client
+  # beside it is C++ and keeps its own, which is why only this is a member.
+  - "clients/cardputer/app"
   - "benchmarks/js-framework-benchmark/frameworks/keyed/backtick"
 
 linkWorkspacePackages: true

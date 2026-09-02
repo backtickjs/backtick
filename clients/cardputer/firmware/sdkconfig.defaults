@@ -1,0 +1,5 @@
+CONFIG_IDF_TARGET="esp32s3"
+# Exceptions, because the interpreter carries what a bundle threw out through
+# one. Off by default on a device, and the cost is worth what it buys here.
+CONFIG_COMPILER_CXX_EXCEPTIONS=y
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192

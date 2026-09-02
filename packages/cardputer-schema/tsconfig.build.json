@@ -1,0 +1,13 @@
+{
+  "extends": "../../configs/tsconfig.build.json",
+  "compilerOptions": {
+    "emitDeclarationOnly": false,
+    "sourceMap": true
+  },
+  "references": [
+    { "path": "../boundary/tsconfig.build.json" },
+    { "path": "../language-schema/tsconfig.build.json" },
+    { "path": "../schema/tsconfig.build.json" },
+    { "path": "../ui-schema/tsconfig.build.json" }
+  ]
+}
