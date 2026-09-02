@@ -277,10 +277,6 @@ const TYPES: string[] = [
   "unknown",
 ];
 
-// Long enough that a reader who is still typing is not compiling on every key,
-// short enough that stopping feels like it answered.
-const SETTLE = 250;
-
 /**
  * The playground: an editor, the bytes it makes, and the screen those bytes
  * draw.
@@ -323,7 +319,6 @@ export async function Playground({
     // Which request is the live one. A keystroke that lands while an answer is
     // out bumps this, so the answer that comes back late is dropped.
     const asked = $state(0);
-    const settling = $state(0);
 
     // What the tab says beside the word. A string knows its own length, so the
     // page works this out rather than being told it.
@@ -555,44 +550,39 @@ export async function Playground({
               }}
               oninput={(e) => {
                 source.write(e.currentTarget.value);
-                clearTimeout(settling.read());
-                settling.write(
-                  setTimeout(() => {
-                    const id = asked.read() + 1;
-                    asked.write(id);
-                    status.write("compiling\u2026");
-                    const said = (diagnostic: Said[]) => {
-                      if (id === asked.read()) {
-                        status.write("");
-                        bundle.write("");
-                        diagnostics.write(diagnostic);
-                      }
-                    };
-                    $compile(
-                      $example.files[0].fileName,
-                      source.read(),
-                      (javascript) => {
-                        // Compiled. Whether it draws anything is the next
-                        // question, and a later keystroke may have made this
-                        // answer stale before it is asked.
-                        if (id !== asked.read()) {
-                          return;
+                const id = asked.read() + 1;
+                asked.write(id);
+                status.write("compiling\u2026");
+                const said = (diagnostic: Said[]) => {
+                  if (id === asked.read()) {
+                    status.write("");
+                    bundle.write("");
+                    diagnostics.write(diagnostic);
+                  }
+                };
+                $compile(
+                  $example.files[0].fileName,
+                  source.read(),
+                  (javascript) => {
+                    // Compiled. Whether it draws anything is the next question,
+                    // and a later keystroke may have made this answer stale
+                    // before it is asked.
+                    if (id !== asked.read()) {
+                      return;
+                    }
+                    $bundle(
+                      javascript,
+                      (drawn) => {
+                        if (id === asked.read()) {
+                          status.write("");
+                          diagnostics.write($noDiagnostics);
+                          bundle.write(drawn);
                         }
-                        $bundle(
-                          javascript,
-                          (drawn) => {
-                            if (id === asked.read()) {
-                              status.write("");
-                              diagnostics.write($noDiagnostics);
-                              bundle.write(drawn);
-                            }
-                          },
-                          said,
-                        );
                       },
                       said,
                     );
-                  }, $SETTLE),
+                  },
+                  said,
                 );
               }}
             >
