@@ -32,7 +32,6 @@ export type {
   BundleArrayLiteralExpressionNode,
   BundleForStatementNode,
   BundleExpressionNode,
-  BundleFunction,
   BundleArrayElement,
   BundleSpreadElementNode,
   BundleGetFunction,

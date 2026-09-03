@@ -1,121 +1,113 @@
 {
   "functions": {
     "0": [
+      "=>",
       [
-        "=>",
         [
+          "param",
+          "$0"
+        ],
+        [
+          "param",
+          "$1"
+        ]
+      ],
+      {
+        "taken": [
+          "()",
           [
-            "param",
-            "$0"
+            "()",
+            [
+              "id",
+              "$0"
+            ],
+            []
           ],
           [
-            "param",
-            "$1"
+            true
           ]
         ],
-        {
-          "taken": [
+        "skipped": [
+          "()",
+          [
             "()",
             [
-              "()",
-              [
-                "id",
-                "$0"
-              ],
-              []
+              "id",
+              "$1"
             ],
-            [
-              true
-            ]
+            []
           ],
-          "skipped": [
-            "()",
-            [
-              "()",
-              [
-                "id",
-                "$1"
-              ],
-              []
-            ],
-            [
-              false
-            ]
+          [
+            false
           ]
-        }
-      ]
+        ]
+      }
     ],
     "1": [
+      "=>",
+      [
+        [
+          "param",
+          "$0"
+        ]
+      ],
       [
         "=>",
         [
           [
             "param",
-            "$0"
+            "flag"
           ]
         ],
         [
-          "=>",
+          "{}",
           [
             [
-              "param",
-              "flag"
-            ]
-          ],
-          [
-            "{}",
-            [
+              "if",
               [
-                "if",
-                [
-                  "id",
-                  "flag"
-                ],
-                [
-                  "{}",
-                  [
-                    [
-                      "return",
-                      [
-                        "()",
-                        [
-                          "id",
-                          "$0"
-                        ],
-                        []
-                      ]
-                    ]
-                  ]
-                ],
-                null
+                "id",
+                "flag"
               ],
               [
-                "return",
-                "skipped"
-              ]
+                "{}",
+                [
+                  [
+                    "return",
+                    [
+                      "()",
+                      [
+                        "id",
+                        "$0"
+                      ],
+                      []
+                    ]
+                  ]
+                ]
+              ],
+              null
+            ],
+            [
+              "return",
+              "skipped"
             ]
           ]
         ]
       ]
     ],
     "2": [
-      [
-        "=>",
-        [],
-        "evaluated"
-      ]
+      "=>",
+      [],
+      "evaluated"
     ],
     "3": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
-            [
-              "throw",
-              "the guarded fragment must never evaluate"
-            ]
+            "throw",
+            "the guarded fragment must never evaluate"
           ]
         ]
       ]

@@ -1,33 +1,31 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "try",
             [
-              "try",
+              "{}",
+              [
+                [
+                  "throw",
+                  "boom"
+                ]
+              ]
+            ],
+            [
+              "catch",
+              null,
               [
                 "{}",
                 [
                   [
-                    "throw",
-                    "boom"
-                  ]
-                ]
-              ],
-              [
-                "catch",
-                null,
-                [
-                  "{}",
-                  [
-                    [
-                      "return",
-                      "caught"
-                    ]
+                    "return",
+                    "caught"
                   ]
                 ]
               ]

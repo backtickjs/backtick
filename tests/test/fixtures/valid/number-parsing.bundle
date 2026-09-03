@@ -1,83 +1,81 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "whole",
             [
-              "const",
-              "whole",
+              "()",
               [
-                "()",
-                [
-                  "bltn",
-                  "Number.parseInt"
-                ],
-                [
-                  "42px"
-                ]
+                "bltn",
+                "Number.parseInt"
+              ],
+              [
+                "42px"
               ]
-            ],
+            ]
+          ],
+          [
+            "const",
+            "based",
             [
-              "const",
-              "based",
+              "()",
               [
-                "()",
-                [
-                  "bltn",
-                  "Number.parseInt"
-                ],
-                [
-                  "ff",
-                  16
-                ]
+                "bltn",
+                "Number.parseInt"
+              ],
+              [
+                "ff",
+                16
               ]
-            ],
+            ]
+          ],
+          [
+            "const",
+            "fractional",
             [
-              "const",
-              "fractional",
+              "()",
               [
-                "()",
-                [
-                  "bltn",
-                  "Number.parseFloat"
-                ],
-                [
-                  "1.5"
-                ]
+                "bltn",
+                "Number.parseFloat"
+              ],
+              [
+                "1.5"
               ]
-            ],
+            ]
+          ],
+          [
+            "return",
             [
-              "return",
+              "el",
+              "span",
+              {},
               [
-                "el",
-                "span",
-                {},
+                "+",
                 [
                   "+",
                   [
                     "+",
                     [
-                      "+",
-                      [
-                        "id",
-                        "whole"
-                      ],
-                      [
-                        "id",
-                        "based"
-                      ]
+                      "id",
+                      "whole"
                     ],
                     [
                       "id",
-                      "fractional"
+                      "based"
                     ]
                   ],
-                  ""
-                ]
+                  [
+                    "id",
+                    "fractional"
+                  ]
+                ],
+                ""
               ]
             ]
           ]

@@ -111,8 +111,7 @@ function compileFunction(
   instance.functions.set(label, () => {
     throw new Error(`\`${label}\` was applied while it was compiling`);
   });
-  // An arrow and nothing else, which is what `BundleFunction` declares.
-  const arrow = compileArrow(instance, declared[0]);
+  const arrow = compileArrow(instance, declared);
   // In no scope rather than an empty one: a function reaches what encloses it
   // through its own parameters, so a frame binding nothing would only be one
   // more to walk past at the end of every name it fails to find.
@@ -953,4 +952,3 @@ function condition(value: ClientValue, what: string): boolean {
       `and this bundle produced ${JSON.stringify(value) ?? typeof value}.`,
   );
 }
-

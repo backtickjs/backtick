@@ -1,129 +1,130 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "doubled",
             [
-              "const",
-              "doubled",
+              "()",
               [
-                "()",
+                "bltn",
+                "Array.from"
+              ],
+              [
+                {
+                  "length": 4
+                },
                 [
-                  "bltn",
-                  "Array.from"
-                ],
-                [
-                  {
-                    "length": 4
-                  },
+                  "=>",
                   [
-                    "=>",
                     [
-                      [
-                        "param",
-                        "_"
-                      ],
-                      [
-                        "param",
-                        "index"
-                      ]
+                      "param",
+                      "_"
                     ],
                     [
-                      "*",
-                      [
-                        "id",
-                        "index"
-                      ],
-                      2
+                      "param",
+                      "index"
                     ]
+                  ],
+                  [
+                    "*",
+                    [
+                      "id",
+                      "index"
+                    ],
+                    2
                   ]
                 ]
               ]
-            ],
+            ]
+          ],
+          [
+            "const",
+            "empty",
             [
-              "const",
-              "empty",
+              "()",
               [
-                "()",
+                "bltn",
+                "Array.from"
+              ],
+              [
+                {
+                  "length": 0
+                },
                 [
-                  "bltn",
-                  "Array.from"
-                ],
-                [
-                  {
-                    "length": 0
-                  },
+                  "=>",
                   [
-                    "=>",
                     [
+                      "param",
+                      "_"
+                    ],
+                    [
+                      "param",
+                      "index"
+                    ]
+                  ],
+                  [
+                    "id",
+                    "index"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "const",
+            "absent",
+            [
+              "()",
+              [
+                "bltn",
+                "Array.from"
+              ],
+              [
+                {
+                  "length": 2
+                },
+                [
+                  "=>",
+                  [
+                    [
+                      "param",
+                      "value"
+                    ],
+                    [
+                      "param",
+                      "index"
+                    ]
+                  ],
+                  [
+                    "?:",
+                    [
+                      "===",
                       [
-                        "param",
-                        "_"
+                        "id",
+                        "value"
                       ],
-                      [
-                        "param",
-                        "index"
-                      ]
+                      null
                     ],
                     [
                       "id",
                       "index"
-                    ]
-                  ]
-                ]
-              ]
-            ],
-            [
-              "const",
-              "absent",
-              [
-                "()",
-                [
-                  "bltn",
-                  "Array.from"
-                ],
-                [
-                  {
-                    "length": 2
-                  },
-                  [
-                    "=>",
-                    [
-                      [
-                        "param",
-                        "value"
-                      ],
-                      [
-                        "param",
-                        "index"
-                      ]
                     ],
-                    [
-                      "?:",
-                      [
-                        "===",
-                        [
-                          "id",
-                          "value"
-                        ],
-                        null
-                      ],
-                      [
-                        "id",
-                        "index"
-                      ],
-                      -1
-                    ]
+                    -1
                   ]
                 ]
               ]
-            ],
+            ]
+          ],
+          [
+            "return",
             [
-              "return",
+              "+",
               [
                 "+",
                 [
@@ -131,47 +132,44 @@
                   [
                     "+",
                     [
-                      "+",
+                      "()",
                       [
-                        "()",
+                        ".",
                         [
-                          ".",
-                          [
-                            "id",
-                            "doubled"
-                          ],
-                          "join"
+                          "id",
+                          "doubled"
                         ],
-                        [
-                          ","
-                        ]
+                        "join"
                       ],
-                      "|"
-                    ],
-                    [
-                      ".",
                       [
-                        "id",
-                        "empty"
-                      ],
-                      "length"
-                    ]
+                        ","
+                      ]
+                    ],
+                    "|"
                   ],
-                  "|"
-                ],
-                [
-                  "()",
                   [
                     ".",
                     [
                       "id",
-                      "absent"
+                      "empty"
                     ],
-                    "join"
-                  ],
-                  [
-                    ","
+                    "length"
                   ]
+                ],
+                "|"
+              ],
+              [
+                "()",
+                [
+                  ".",
+                  [
+                    "id",
+                    "absent"
+                  ],
+                  "join"
+                ],
+                [
+                  ","
                 ]
               ]
             ]

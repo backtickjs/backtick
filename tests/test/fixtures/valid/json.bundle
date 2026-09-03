@@ -1,97 +1,98 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "numbers",
             [
-              "const",
-              "numbers",
+              "()",
               [
-                "()",
+                "bltn",
+                "JSON.stringify"
+              ],
+              [
                 [
-                  "bltn",
-                  "JSON.stringify"
-                ],
-                [
+                  "arr",
                   [
-                    "arr",
-                    [
-                      1,
-                      2,
-                      3
-                    ]
+                    1,
+                    2,
+                    3
                   ]
                 ]
               ]
-            ],
+            ]
+          ],
+          [
+            "const",
+            "text",
             [
-              "const",
-              "text",
+              "()",
               [
-                "()",
+                "bltn",
+                "JSON.stringify"
+              ],
+              [
+                "hi"
+              ]
+            ]
+          ],
+          [
+            "const",
+            "flag",
+            [
+              "()",
+              [
+                "bltn",
+                "JSON.stringify"
+              ],
+              [
+                true
+              ]
+            ]
+          ],
+          [
+            "const",
+            "held",
+            [
+              "()",
+              [
+                "bltn",
+                "JSON.stringify"
+              ],
+              [
+                {
+                  "a": 1,
+                  "b": "two"
+                }
+              ]
+            ]
+          ],
+          [
+            "const",
+            "back",
+            [
+              "()",
+              [
+                "bltn",
+                "JSON.parse"
+              ],
+              [
                 [
-                  "bltn",
-                  "JSON.stringify"
-                ],
-                [
-                  "hi"
+                  "id",
+                  "numbers"
                 ]
               ]
-            ],
+            ]
+          ],
+          [
+            "return",
             [
-              "const",
-              "flag",
-              [
-                "()",
-                [
-                  "bltn",
-                  "JSON.stringify"
-                ],
-                [
-                  true
-                ]
-              ]
-            ],
-            [
-              "const",
-              "held",
-              [
-                "()",
-                [
-                  "bltn",
-                  "JSON.stringify"
-                ],
-                [
-                  {
-                    "a": 1,
-                    "b": "two"
-                  }
-                ]
-              ]
-            ],
-            [
-              "const",
-              "back",
-              [
-                "()",
-                [
-                  "bltn",
-                  "JSON.parse"
-                ],
-                [
-                  [
-                    "id",
-                    "numbers"
-                  ]
-                ]
-              ]
-            ],
-            [
-              "return",
+              "+",
               [
                 "+",
                 [
@@ -111,68 +112,65 @@
                               [
                                 "+",
                                 [
-                                  "+",
-                                  [
-                                    "id",
-                                    "numbers"
-                                  ],
-                                  "|"
-                                ],
-                                [
                                   "id",
-                                  "text"
-                                ]
+                                  "numbers"
+                                ],
+                                "|"
                               ],
-                              "|"
+                              [
+                                "id",
+                                "text"
+                              ]
                             ],
-                            [
-                              "id",
-                              "flag"
-                            ]
+                            "|"
                           ],
-                          "|"
+                          [
+                            "id",
+                            "flag"
+                          ]
                         ],
-                        [
-                          "id",
-                          "held"
-                        ]
+                        "|"
                       ],
-                      "|"
+                      [
+                        "id",
+                        "held"
+                      ]
+                    ],
+                    "|"
+                  ],
+                  [
+                    "()",
+                    [
+                      "bltn",
+                      "JSON.stringify"
                     ],
                     [
-                      "()",
                       [
-                        "bltn",
-                        "JSON.stringify"
-                      ],
-                      [
-                        [
-                          "id",
-                          "back"
-                        ]
+                        "id",
+                        "back"
                       ]
                     ]
-                  ],
-                  "|"
+                  ]
+                ],
+                "|"
+              ],
+              [
+                "()",
+                [
+                  "bltn",
+                  "JSON.stringify"
                 ],
                 [
-                  "()",
                   [
-                    "bltn",
-                    "JSON.stringify"
-                  ],
-                  [
+                    "()",
                     [
-                      "()",
+                      "bltn",
+                      "JSON.parse"
+                    ],
+                    [
                       [
-                        "bltn",
-                        "JSON.parse"
-                      ],
-                      [
-                        [
-                          "id",
-                          "held"
-                        ]
+                        "id",
+                        "held"
                       ]
                     ]
                   ]

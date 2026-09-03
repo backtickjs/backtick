@@ -44,8 +44,8 @@ const lower = (body: ClientScriptExpression) => {
     captures: [],
     expression: body,
   };
-  // An entry is an arrow under a wrapper, and this one takes no parameters.
-  return buildBundle(script).functions["0"][0][2];
+  // An entry is an arrow, and this one takes no parameters.
+  return buildBundle(script).functions["0"][2];
 };
 
 test("an element lowers to the format's own element node", () => {

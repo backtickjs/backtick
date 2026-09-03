@@ -1,77 +1,75 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "floor",
             [
-              "const",
-              "floor",
-              [
-                "bltn",
-                "Math.floor"
-              ]
-            ],
+              "bltn",
+              "Math.floor"
+            ]
+          ],
+          [
+            "const",
+            "apply",
             [
-              "const",
-              "apply",
+              "=>",
               [
-                "=>",
                 [
-                  [
-                    "param",
-                    "f"
-                  ],
-                  [
-                    "param",
-                    "n"
-                  ]
+                  "param",
+                  "f"
                 ],
                 [
-                  "()",
+                  "param",
+                  "n"
+                ]
+              ],
+              [
+                "()",
+                [
+                  "id",
+                  "f"
+                ],
+                [
                   [
                     "id",
-                    "f"
-                  ],
-                  [
-                    [
-                      "id",
-                      "n"
-                    ]
+                    "n"
                   ]
                 ]
               ]
-            ],
+            ]
+          ],
+          [
+            "return",
             [
-              "return",
+              "+",
               [
-                "+",
+                "()",
                 [
-                  "()",
-                  [
-                    "id",
-                    "floor"
-                  ],
-                  [
-                    3.5
-                  ]
+                  "id",
+                  "floor"
                 ],
                 [
-                  "()",
+                  3.5
+                ]
+              ],
+              [
+                "()",
+                [
+                  "id",
+                  "apply"
+                ],
+                [
                   [
-                    "id",
-                    "apply"
+                    "bltn",
+                    "Math.ceil"
                   ],
-                  [
-                    [
-                      "bltn",
-                      "Math.ceil"
-                    ],
-                    3.5
-                  ]
+                  3.5
                 ]
               ]
             ]

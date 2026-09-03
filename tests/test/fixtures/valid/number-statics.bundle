@@ -1,72 +1,73 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "positive",
             [
-              "const",
-              "positive",
+              ">",
               [
-                ">",
-                [
-                  "bltn",
-                  "Number.EPSILON"
-                ],
-                0
+                "bltn",
+                "Number.EPSILON"
+              ],
+              0
+            ]
+          ],
+          [
+            "const",
+            "whole",
+            [
+              "()",
+              [
+                "bltn",
+                "Number.isInteger"
+              ],
+              [
+                2
               ]
-            ],
+            ]
+          ],
+          [
+            "const",
+            "fractional",
             [
-              "const",
-              "whole",
+              "()",
               [
-                "()",
-                [
-                  "bltn",
-                  "Number.isInteger"
-                ],
-                [
-                  2
-                ]
+                "bltn",
+                "Number.isInteger"
+              ],
+              [
+                2.5
               ]
-            ],
+            ]
+          ],
+          [
+            "const",
+            "written",
             [
-              "const",
-              "fractional",
+              "()",
               [
-                "()",
-                [
-                  "bltn",
-                  "Number.isInteger"
-                ],
-                [
-                  2.5
-                ]
+                "bltn",
+                "Number.isFinite"
+              ],
+              [
+                "2"
               ]
-            ],
+            ]
+          ],
+          [
+            "return",
             [
-              "const",
-              "written",
+              "el",
+              "span",
+              {},
               [
-                "()",
-                [
-                  "bltn",
-                  "Number.isFinite"
-                ],
-                [
-                  "2"
-                ]
-              ]
-            ],
-            [
-              "return",
-              [
-                "el",
-                "span",
-                {},
+                "+",
                 [
                   "+",
                   [
@@ -78,31 +79,28 @@
                         [
                           "+",
                           [
-                            "+",
-                            [
-                              "id",
-                              "whole"
-                            ],
-                            " "
-                          ],
-                          [
                             "id",
-                            "fractional"
-                          ]
+                            "whole"
+                          ],
+                          " "
                         ],
-                        " "
+                        [
+                          "id",
+                          "fractional"
+                        ]
                       ],
-                      [
-                        "id",
-                        "written"
-                      ]
+                      " "
                     ],
-                    " "
+                    [
+                      "id",
+                      "written"
+                    ]
                   ],
-                  [
-                    "id",
-                    "positive"
-                  ]
+                  " "
+                ],
+                [
+                  "id",
+                  "positive"
                 ]
               ]
             ]

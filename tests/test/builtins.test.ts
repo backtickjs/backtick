@@ -92,7 +92,7 @@ describe("a member the schema leaves out", () => {
   // bundler that had not rejected it would have written.
   const bundle: Bundle = {
     functions: {
-      "0": [["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]]],
+      "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
     },
     root: ["fn()", "0", []],
   };
@@ -115,7 +115,7 @@ describe("a name a target answers for", () => {
   // into, written by hand because no schema here declares the name.
   const bundle: Bundle = {
     functions: {
-      "0": [["=>", [], ["{}", [["return", ["()", ["bltn", "greet"], []]]]]]],
+      "0": ["=>", [], ["{}", [["return", ["()", ["bltn", "greet"], []]]]]],
     },
     root: ["fn()", "0", []],
   };
@@ -138,16 +138,14 @@ describe("a name a target answers for", () => {
     const held: Bundle = {
       functions: {
         "0": [
+          "=>",
+          [],
           [
-            "=>",
-            [],
+            "{}",
             [
-              "{}",
               [
-                [
-                  "return",
-                  ["()", [".", ["bltn", "storage"], "get"], ["greeting"]],
-                ],
+                "return",
+                ["()", [".", ["bltn", "storage"], "get"], ["greeting"]],
               ],
             ],
           ],
@@ -183,7 +181,7 @@ describe("a name a target answers for", () => {
     // whole name nothing reads: `"abc".padStart` still finds nothing.
     const padded: Bundle = {
       functions: {
-        "0": [["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]]],
+        "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
       },
       root: ["fn()", "0", []],
     };

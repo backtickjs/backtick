@@ -5,7 +5,6 @@ import { locKey } from "../locKey.js";
 import type {
   Bundle,
   BundleArrowFunctionNode,
-  BundleFunction,
   BundleElement,
   BundleExpressionNode,
   BundleIdentifierNode,
@@ -419,12 +418,12 @@ export function buildBundle(
 
   // Nothing encloses the root, so nothing it holds can capture.
   const root = render(ast);
-  const functions: Record<FunctionLabel, BundleFunction> = {};
+  const functions: Record<FunctionLabel, BundleArrowFunctionNode> = {};
   // In table order, which is the order rendering first reached each script.
   for (const script of scripts.keys()) {
     const body = bodies.get(script);
     if (body !== undefined) {
-      functions[fnLabel(script)] = [body];
+      functions[fnLabel(script)] = body;
     }
   }
   return { functions, root };

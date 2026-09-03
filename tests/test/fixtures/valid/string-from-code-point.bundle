@@ -1,39 +1,37 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "return",
             [
-              "return",
+              "el",
+              "span",
+              {},
               [
-                "el",
-                "span",
-                {},
+                "+",
                 [
-                  "+",
+                  "()",
                   [
-                    "()",
-                    [
-                      "bltn",
-                      "String.fromCodePoint"
-                    ],
-                    [
-                      72,
-                      105
-                    ]
+                    "bltn",
+                    "String.fromCodePoint"
                   ],
                   [
-                    "()",
-                    [
-                      "bltn",
-                      "String.fromCodePoint"
-                    ],
-                    []
+                    72,
+                    105
                   ]
+                ],
+                [
+                  "()",
+                  [
+                    "bltn",
+                    "String.fromCodePoint"
+                  ],
+                  []
                 ]
               ]
             ]

@@ -1,53 +1,51 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
         "=>",
-        [],
         [
-          "=>",
+          [
+            "param",
+            "count"
+          ]
+        ],
+        [
+          "{}",
           [
             [
-              "param",
-              "count"
-            ]
-          ],
-          [
-            "{}",
+              "const",
+              "floor",
+              -1
+            ],
             [
+              "const",
+              "step",
               [
-                "const",
-                "floor",
-                -1
-              ],
-              [
-                "const",
-                "step",
+                "-x",
                 [
-                  "-x",
-                  [
-                    "id",
-                    "count"
-                  ]
+                  "id",
+                  "count"
                 ]
-              ],
+              ]
+            ],
+            [
+              "return",
               [
-                "return",
+                "+",
                 [
                   "+",
                   [
-                    "+",
-                    [
-                      "id",
-                      "floor"
-                    ],
-                    [
-                      "id",
-                      "step"
-                    ]
+                    "id",
+                    "floor"
                   ],
-                  -2
-                ]
+                  [
+                    "id",
+                    "step"
+                  ]
+                ],
+                -2
               ]
             ]
           ]

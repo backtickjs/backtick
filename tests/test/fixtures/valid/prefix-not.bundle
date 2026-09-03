@@ -1,62 +1,60 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
         "=>",
-        [],
         [
-          "=>",
           [
-            [
-              "param",
-              "ready"
-            ],
-            [
-              "param",
-              "count"
-            ]
+            "param",
+            "ready"
           ],
           [
-            "{}",
+            "param",
+            "count"
+          ]
+        ],
+        [
+          "{}",
+          [
             [
+              "if",
               [
-                "if",
+                "!",
+                [
+                  "id",
+                  "ready"
+                ]
+              ],
+              [
+                "{}",
+                [
+                  [
+                    "return",
+                    "waiting"
+                  ]
+                ]
+              ],
+              null
+            ],
+            [
+              "return",
+              [
+                "?:",
                 [
                   "!",
                   [
-                    "id",
-                    "ready"
+                    ">",
+                    [
+                      "id",
+                      "count"
+                    ],
+                    3
                   ]
                 ],
-                [
-                  "{}",
-                  [
-                    [
-                      "return",
-                      "waiting"
-                    ]
-                  ]
-                ],
-                null
-              ],
-              [
-                "return",
-                [
-                  "?:",
-                  [
-                    "!",
-                    [
-                      ">",
-                      [
-                        "id",
-                        "count"
-                      ],
-                      3
-                    ]
-                  ],
-                  "room left",
-                  "full"
-                ]
+                "room left",
+                "full"
               ]
             ]
           ]

@@ -1,164 +1,162 @@
 {
   "functions": {
     "0": [
+      "=>",
       [
-        "=>",
+        [
+          "param",
+          "$0"
+        ]
+      ],
+      [
+        "{}",
         [
           [
-            "param",
-            "$0"
-          ]
-        ],
-        [
-          "{}",
-          [
+            "const",
+            "label",
             [
-              "const",
-              "label",
+              "()",
               [
                 "()",
                 [
-                  "()",
-                  [
-                    "id",
-                    "$0"
-                  ],
-                  []
+                  "id",
+                  "$0"
                 ],
-                [
-                  "hi"
-                ]
-              ]
-            ],
-            [
-              "const",
-              "row",
+                []
+              ],
               [
-                "=>",
+                "hi"
+              ]
+            ]
+          ],
+          [
+            "const",
+            "row",
+            [
+              "=>",
+              [
+                [
+                  "param",
+                  "size"
+                ]
+              ],
+              [
+                "{}",
                 [
                   [
-                    "param",
-                    "size"
-                  ]
-                ],
-                [
-                  "{}",
-                  [
+                    "const",
+                    "css",
                     [
-                      "const",
-                      "css",
+                      "+",
                       [
                         "+",
+                        "font-size: ",
                         [
-                          "+",
-                          "font-size: ",
+                          "id",
+                          "size"
+                        ]
+                      ],
+                      "px"
+                    ]
+                  ],
+                  [
+                    "const",
+                    "press",
+                    [
+                      "=>",
+                      [],
+                      [
+                        "()",
+                        [
+                          ".",
                           [
                             "id",
-                            "size"
-                          ]
-                        ],
-                        "px"
-                      ]
-                    ],
-                    [
-                      "const",
-                      "press",
-                      [
-                        "=>",
-                        [],
-                        [
-                          "()",
-                          [
-                            ".",
-                            [
-                              "id",
-                              "label"
-                            ],
-                            "write"
+                            "label"
                           ],
-                          [
-                            "held"
-                          ]
+                          "write"
+                        ],
+                        [
+                          "held"
                         ]
                       ]
-                    ],
+                    ]
+                  ],
+                  [
+                    "return",
                     [
-                      "return",
+                      "el",
+                      "div",
+                      {
+                        "style": [
+                          "id",
+                          "css"
+                        ]
+                      },
                       [
-                        "el",
-                        "div",
-                        {
-                          "style": [
-                            "id",
-                            "css"
-                          ]
-                        },
+                        "arr",
                         [
-                          "arr",
                           [
-                            [
-                              "el",
-                              "span",
-                              {
-                                "style": [
-                                  "id",
-                                  "css"
-                                ],
-                                "onclick": [
-                                  "=>",
-                                  [],
+                            "el",
+                            "span",
+                            {
+                              "style": [
+                                "id",
+                                "css"
+                              ],
+                              "onclick": [
+                                "=>",
+                                [],
+                                [
+                                  "()",
                                   [
-                                    "()",
+                                    ".",
                                     [
-                                      ".",
-                                      [
-                                        "id",
-                                        "label"
-                                      ],
-                                      "write"
+                                      "id",
+                                      "label"
                                     ],
-                                    [
-                                      "pressed"
-                                    ]
+                                    "write"
+                                  ],
+                                  [
+                                    "pressed"
                                   ]
                                 ]
-                              },
-                              [
-                                "()",
-                                [
-                                  ".",
-                                  [
-                                    "id",
-                                    "label"
-                                  ],
-                                  "read"
-                                ],
-                                []
                               ]
-                            ],
+                            },
                             [
-                              "el",
-                              "span",
-                              {
-                                "style": "font-size: 8px"
-                              },
-                              "fixed"
-                            ],
-                            [
-                              "el",
-                              "span",
-                              {
-                                "style": [
+                              "()",
+                              [
+                                ".",
+                                [
                                   "id",
-                                  "css"
+                                  "label"
                                 ],
-                                "onclick": [
-                                  "id",
-                                  "press"
-                                ]
-                              },
-                              "held"
+                                "read"
+                              ],
+                              []
                             ]
+                          ],
+                          [
+                            "el",
+                            "span",
+                            {
+                              "style": "font-size: 8px"
+                            },
+                            "fixed"
+                          ],
+                          [
+                            "el",
+                            "span",
+                            {
+                              "style": [
+                                "id",
+                                "css"
+                              ],
+                              "onclick": [
+                                "id",
+                                "press"
+                              ]
+                            },
+                            "held"
                           ]
                         ]
                       ]
@@ -166,24 +164,24 @@
                   ]
                 ]
               ]
-            ],
+            ]
+          ],
+          [
+            "return",
             [
-              "return",
+              "el",
+              "div",
+              {
+                "style": "padding: 0"
+              },
               [
-                "el",
-                "div",
-                {
-                  "style": "padding: 0"
-                },
+                "()",
                 [
-                  "()",
-                  [
-                    "id",
-                    "row"
-                  ],
-                  [
-                    12
-                  ]
+                  "id",
+                  "row"
+                ],
+                [
+                  12
                 ]
               ]
             ]

@@ -84,8 +84,7 @@ const JsonValue& Interpreter::entry(const std::string& label) {
   const Json& json = *json_;
   for (unsigned int i = 0; i < functions_->count; i++) {
     if (json.key(*functions_, i) == label) {
-      // An entry is an arrow under a wrapper: `[[1005, params, body]]`.
-      return json.item(json.item(*functions_, i), 0);
+      return json.item(*functions_, i);
     }
   }
   throw std::runtime_error("no function `" + label + "` in this bundle");

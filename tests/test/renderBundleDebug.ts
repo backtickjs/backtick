@@ -15,7 +15,7 @@ import type {
 export function renderBundleDebug(bundle: Bundle): string {
   const sections: string[] = [];
   for (const [label, entry] of Object.entries(bundle.functions)) {
-    sections.push(`${fnLabel(label)} = ${renderNode(entry[0], "")}`);
+    sections.push(`${fnLabel(label)} = ${renderNode(entry, "")}`);
   }
   sections.push(`root = ${renderNode(bundle.root, "")}`);
   return `${sections.join("\n\n")}\n`;

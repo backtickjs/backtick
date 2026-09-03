@@ -1,42 +1,40 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "greeting",
+            "Hello"
+          ],
+          [
+            "return",
             [
-              "const",
-              "greeting",
-              "Hello"
-            ],
-            [
-              "return",
+              "()",
               [
-                "()",
+                ".",
                 [
-                  ".",
+                  "()",
                   [
-                    "()",
+                    ".",
                     [
-                      ".",
-                      [
-                        "id",
-                        "greeting"
-                      ],
-                      "concat"
+                      "id",
+                      "greeting"
                     ],
-                    [
-                      ", ",
-                      "World"
-                    ]
+                    "concat"
                   ],
-                  "toUpperCase"
+                  [
+                    ", ",
+                    "World"
+                  ]
                 ],
-                []
-              ]
+                "toUpperCase"
+              ],
+              []
             ]
           ]
         ]

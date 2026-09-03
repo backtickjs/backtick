@@ -1,28 +1,63 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "stop",
             [
-              "const",
-              "stop",
+              "bltn",
+              "clearInterval"
+            ]
+          ],
+          [
+            "const",
+            "repeating",
+            [
+              "()",
               [
                 "bltn",
-                "clearInterval"
+                "setInterval"
+              ],
+              [
+                [
+                  "=>",
+                  [],
+                  0
+                ],
+                1000
               ]
+            ]
+          ],
+          [
+            "()",
+            [
+              "id",
+              "stop"
             ],
             [
-              "const",
-              "repeating",
+              [
+                "id",
+                "repeating"
+              ]
+            ]
+          ],
+          [
+            "()",
+            [
+              "bltn",
+              "clearTimeout"
+            ],
+            [
               [
                 "()",
                 [
                   "bltn",
-                  "setInterval"
+                  "setTimeout"
                 ],
                 [
                   [
@@ -31,43 +66,6 @@
                     0
                   ],
                   1000
-                ]
-              ]
-            ],
-            [
-              "()",
-              [
-                "id",
-                "stop"
-              ],
-              [
-                [
-                  "id",
-                  "repeating"
-                ]
-              ]
-            ],
-            [
-              "()",
-              [
-                "bltn",
-                "clearTimeout"
-              ],
-              [
-                [
-                  "()",
-                  [
-                    "bltn",
-                    "setTimeout"
-                  ],
-                  [
-                    [
-                      "=>",
-                      [],
-                      0
-                    ],
-                    1000
-                  ]
                 ]
               ]
             ]

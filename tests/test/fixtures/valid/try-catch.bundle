@@ -1,65 +1,63 @@
 {
   "functions": {
     "0": [
+      "=>",
+      [],
       [
-        "=>",
-        [],
+        "{}",
         [
-          "{}",
           [
+            "const",
+            "message",
+            "boom"
+          ],
+          [
+            "try",
             [
-              "const",
-              "message",
-              "boom"
+              "{}",
+              [
+                [
+                  "throw",
+                  [
+                    "id",
+                    "message"
+                  ]
+                ]
+              ]
             ],
             [
-              "try",
+              "catch",
+              "error",
               [
                 "{}",
                 [
                   [
-                    "throw",
+                    "if",
                     [
-                      "id",
-                      "message"
-                    ]
-                  ]
-                ]
-              ],
-              [
-                "catch",
-                "error",
-                [
-                  "{}",
-                  [
-                    [
-                      "if",
+                      "===",
                       [
-                        "===",
-                        [
-                          "id",
-                          "error"
-                        ],
-                        [
-                          "id",
-                          "message"
-                        ]
+                        "id",
+                        "error"
                       ],
                       [
-                        "{}",
-                        [
-                          [
-                            "return",
-                            "caught boom"
-                          ]
-                        ]
-                      ],
-                      null
+                        "id",
+                        "message"
+                      ]
                     ],
                     [
-                      "return",
-                      "caught something else"
-                    ]
+                      "{}",
+                      [
+                        [
+                          "return",
+                          "caught boom"
+                        ]
+                      ]
+                    ],
+                    null
+                  ],
+                  [
+                    "return",
+                    "caught something else"
                   ]
                 ]
               ]
