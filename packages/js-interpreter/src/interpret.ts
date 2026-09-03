@@ -5,9 +5,9 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
   BundleArrayElement,
-  BundleArrowFunctionNode,
-  BundleSpreadElementNode,
-  BundleStatementNode,
+  BundleArrowFunction,
+  BundleSpreadElement,
+  BundleStatement,
   FunctionLabel,
 } from "@backtickjs/bundler";
 import { getters, globals } from "./globals.js";
@@ -29,7 +29,7 @@ import { compileElement } from "./view.js";
 // functions, the tree end adds applications and elements, and the
 // body end adds the statements and operators a script is written in. Compiling
 // them together is what makes the middle exist once.
-type Source = BundleArrayElement | BundleStatementNode;
+type Source = BundleArrayElement | BundleStatement;
 
 // One frame per arrow application or block. Names are pre-resolved by the
 // bundler and there are no globals: a name no frame binds is a malformed
@@ -263,7 +263,7 @@ export function evaluate(
 
 function compileStatement(
   instance: Instance,
-  node: BundleStatementNode,
+  node: BundleStatement,
 ): (scope: Scope | null) => Completion {
   if (node === null || typeof node !== "object") {
     return () => advanced;
@@ -652,7 +652,7 @@ function buildNode(
 // what lets it be discharged without asking what it became.
 function compileArrow(
   instance: Instance,
-  node: BundleArrowFunctionNode,
+  node: BundleArrowFunction,
 ): (scope: Scope | null) => Applied {
   const parameters = node[1].map((param) => param[1]);
   const body = node[2];
@@ -710,7 +710,7 @@ function guardTurns(turns: number, keyword: string): void {
 
 function buildStatement(
   instance: Instance,
-  node: BundleStatementNode,
+  node: BundleStatement,
 ): (scope: Scope | null) => Completion {
   if (!Array.isArray(node)) {
     // Plain JSON in statement position is an expression evaluated for its
@@ -891,9 +891,7 @@ function buildStatement(
 }
 
 // Whether a list member is `...xs` rather than a value of its own.
-function isSpread(
-  element: BundleArrayElement,
-): element is BundleSpreadElementNode {
+function isSpread(element: BundleArrayElement): element is BundleSpreadElement {
   return Array.isArray(element) && element[0] === "...";
 }
 

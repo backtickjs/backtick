@@ -4,10 +4,10 @@ import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
 import type {
   Bundle,
-  BundleArrowFunctionNode,
+  BundleArrowFunction,
   BundleElement,
-  BundleExpressionNode,
-  BundleIdentifierNode,
+  BundleExpression,
+  BundleIdentifier,
   FunctionLabel,
 } from "./Bundle.js";
 import type { ExperimentalFeatures } from "../bundler.js";
@@ -117,7 +117,7 @@ export function buildBundle(
   // A field is *called*, where the parameter is not. What binds a field is a
   // thunk written at the tag, because a prop has to be re-read whenever what it
   // names changes, where an argument is evaluated once where it is passed.
-  const holeRead = (name: string): BundleExpressionNode => {
+  const holeRead = (name: string): BundleExpression => {
     const [param, prop, ...path] = name.split(".");
     if (prop === undefined) {
       return ["id", param];
@@ -126,7 +126,7 @@ export function buildBundle(
     // reads it: an argument is evaluated once where it is passed, and a prop has
     // to be re-read whenever what it names changes. What the call answers with
     // is an ordinary value, so the whole path off it is ordinary reads.
-    let read: BundleExpressionNode = ["()", [".", ["id", param], prop], []];
+    let read: BundleExpression = ["()", [".", ["id", param], prop], []];
     for (const step of path) {
       read = [".", read, step];
     }
@@ -215,7 +215,7 @@ export function buildBundle(
   const passKeys = (target: ScriptEntry, hole: number): readonly string[] =>
     target.splices[hole]?.params ?? [];
 
-  const bodies = new Map<ScriptEntry, BundleArrowFunctionNode>();
+  const bodies = new Map<ScriptEntry, BundleArrowFunction>();
 
   // A script entry's label, either of the two things that name one (see
   // `ExperimentalFeatures.stableFunctionLabels`): where it landed in the table, or
@@ -251,7 +251,7 @@ export function buildBundle(
   const forwarding = (
     value: Ast,
     passed: readonly string[],
-  ): BundleExpressionNode | null => {
+  ): BundleExpression | null => {
     if (value.kind !== "AstScript" || Object.keys(value.splices).length > 0) {
       return null;
     }
@@ -278,11 +278,11 @@ export function buildBundle(
   const render = (
     value: Ast,
     params: ReadonlySet<string> = new Set(),
-  ): BundleExpressionNode => {
+  ): BundleExpression => {
     const child = (
       node: Ast,
       inner: ReadonlySet<string> = params,
-    ): BundleExpressionNode => render(node, inner);
+    ): BundleExpression => render(node, inner);
 
     switch (value.kind) {
       case "AstScript": {
@@ -325,7 +325,7 @@ export function buildBundle(
         // A plain data object passes through, every key of it: a node is an
         // array, so an object is never mistaken for one and the format reserves
         // no key.
-        const entries: { [key: string]: BundleExpressionNode } = {};
+        const entries: { [key: string]: BundleExpression } = {};
         for (const [key, entry] of Object.entries(value.entries)) {
           entries[key] = child(entry);
         }
@@ -342,7 +342,7 @@ export function buildBundle(
   const capExpr = (
     key: string,
     params: ReadonlySet<string> = new Set(),
-  ): BundleIdentifierNode => {
+  ): BundleIdentifier => {
     if (params.has(key)) {
       return ["id", displayName(key)];
     }
@@ -363,9 +363,9 @@ export function buildBundle(
   const exprCallArgs = (
     ref: AstScript,
     params: ReadonlySet<string>,
-  ): BundleExpressionNode[] => {
+  ): BundleExpression[] => {
     const target = entryFor(ref);
-    const parts: BundleExpressionNode[] = [];
+    const parts: BundleExpression[] = [];
     Object.values(ref.splices).forEach(({ value: arg }, index) => {
       // What the hole hands over, in the order the entry fixes: the bindings
       // bound there, then the captures it forwards on behalf of whatever is
@@ -403,8 +403,8 @@ export function buildBundle(
     element: AstElement,
     params: ReadonlySet<string>,
   ): BundleElement => {
-    const props: { [key: string]: BundleExpressionNode } = {};
-    let children: BundleExpressionNode = null;
+    const props: { [key: string]: BundleExpression } = {};
+    let children: BundleExpression = null;
     for (const [key, entry] of Object.entries(element.props)) {
       const rendered = render(entry, params);
       if (key === "children") {
@@ -418,7 +418,7 @@ export function buildBundle(
 
   // Nothing encloses the root, so nothing it holds can capture.
   const root = render(ast);
-  const functions: Record<FunctionLabel, BundleArrowFunctionNode> = {};
+  const functions: Record<FunctionLabel, BundleArrowFunction> = {};
   // In table order, which is the order rendering first reached each script.
   for (const script of scripts.keys()) {
     const body = bodies.get(script);

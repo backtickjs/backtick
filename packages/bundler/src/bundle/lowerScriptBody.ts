@@ -10,21 +10,19 @@ import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import type {
   BundleArrayElement,
-  BundleConstDeclarationNode,
-  BundleLetDeclarationNode,
-  BundleBinaryNode,
-  BundleBlockNode,
+  BundleConstDeclaration,
+  BundleLetDeclaration,
+  BundleBinary,
+  BundleBlock,
   BundleBody,
-  BundleExpressionNode,
-  BundleParameterNode,
-  BundleStatementNode,
+  BundleExpression,
+  BundleParameter,
+  BundleStatement,
 } from "./Bundle.js";
 
 // A parameter list as the wire carries it: one node per name. Shared with
 // `buildBundle`, which builds entries and thunks the same way.
-export function parameterNodes(
-  names: readonly string[],
-): BundleParameterNode[] {
+export function parameterNodes(names: readonly string[]): BundleParameter[] {
   return names.map((name) => ["param", name]);
 }
 
@@ -49,7 +47,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
   const captureIndex = new Map(
     script.captures.map((key, at) => [key, script.splices.length + at]),
   );
-  const read = (key: string): BundleExpressionNode => {
+  const read = (key: string): BundleExpression => {
     const at = captureIndex.get(key);
     return ["id", at === undefined ? sourceName(key) : `$${at}`];
   };
@@ -65,7 +63,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
   const paramsOf = new Map(
     script.splices.map((splice) => [splice.key, splice.params] as const),
   );
-  const renderSplice = (key: string): BundleExpressionNode => {
+  const renderSplice = (key: string): BundleExpression => {
     const index = holes.get(key);
     if (index === undefined) {
       throw new Error(`This script has no \`${key}\` splice.`);
@@ -84,7 +82,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
   const buildBody = (node: ClientScriptBody): BundleBody =>
     node.kind === "{}" ? buildBlock(node) : buildExpression(node);
 
-  function buildBlock(node: ClientScriptBlock): BundleBlockNode {
+  function buildBlock(node: ClientScriptBlock): BundleBlock {
     const statements = node.statements.map((statement) =>
       buildStatement(statement),
     );
@@ -96,7 +94,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
   // language has a second case for.
   function buildDeclaration(
     node: ClientScriptDeclaration,
-  ): BundleConstDeclarationNode | BundleLetDeclarationNode {
+  ): BundleConstDeclaration | BundleLetDeclaration {
     // Built per branch rather than with the kind chosen inside one tuple: a
     // node's kind is what says which node it is, so widening it loses that.
     const name = sourceName(node.name.bindingKey);
@@ -106,7 +104,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
       : ["let", name, initializer];
   }
 
-  function buildStatement(node: ClientScriptStatement): BundleStatementNode {
+  function buildStatement(node: ClientScriptStatement): BundleStatement {
     switch (node.kind) {
       case "{}":
         return buildBlock(node);
@@ -170,8 +168,8 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
     }
   }
 
-  function buildExpression(node: ClientScriptExpression): BundleExpressionNode {
-    const e = (child: ClientScriptExpression): BundleExpressionNode =>
+  function buildExpression(node: ClientScriptExpression): BundleExpression {
+    const e = (child: ClientScriptExpression): BundleExpression =>
       buildExpression(child);
     // Where a list admits `...xs` as well as a value.
     const element = (child: ClientScriptArrayElement): BundleArrayElement =>
@@ -204,7 +202,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           node.operatorToken,
           e(node.left),
           e(node.right),
-        ] as BundleBinaryNode;
+        ] as BundleBinary;
       }
       case "unop":
         // A negative literal carries itself, like every other literal here: the
@@ -258,7 +256,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
             ),
           ];
         }
-        const entries: { [key: string]: BundleExpressionNode } = {};
+        const entries: { [key: string]: BundleExpression } = {};
         for (const property of node.properties) {
           if (property.kind === "...") {
             continue;
@@ -282,13 +280,13 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
       // builds: `children` is a prop beside the rest, so what draws one draws
       // both and nothing downstream learns a second kind of element.
       case "jsx": {
-        const props: { [prop: string]: BundleExpressionNode } = {};
+        const props: { [prop: string]: BundleExpression } = {};
         for (const attribute of node.attributes) {
           props[attribute.name] = e(attribute.initializer);
         }
         // One child stands on its own; several travel under a `ArrayLiteralExpression`,
         // which is how an array of data says it is not a node. None is `null`.
-        const children: BundleExpressionNode =
+        const children: BundleExpression =
           node.children.length === 0
             ? null
             : node.children.length === 1
@@ -304,7 +302,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         // prop a prop: an argument is evaluated once where it is passed, and a
         // prop has to be re-read whenever what it names changes.
         if (node.type.kind === "splice") {
-          const passed: { [prop: string]: BundleExpressionNode } = {};
+          const passed: { [prop: string]: BundleExpression } = {};
           for (const [name, value] of Object.entries(props)) {
             passed[name] = ["=>", [], value];
           }

@@ -3,9 +3,9 @@ import type {
   BundleArrayElement,
   BundleBody,
   BundleElement,
-  BundleExpressionNode,
-  BundleSpreadElementNode,
-  BundleStatementNode,
+  BundleExpression,
+  BundleSpreadElement,
+  BundleStatement,
 } from "@backtickjs/bundler";
 
 // Renders a bundle as a human-readable debug view: each `functions` entry as
@@ -30,8 +30,8 @@ const fnLabel = (label: string): string => `#f${label}`;
 // A node, as opposed to plain JSON carrying itself: every node is an array,
 // and an array of data travels as one too (`ArrayLiteralExpression`).
 function isNode(
-  node: BundleStatementNode | BundleExpressionNode,
-): node is Extract<BundleStatementNode | BundleExpressionNode, unknown[]> {
+  node: BundleStatement | BundleExpression,
+): node is Extract<BundleStatement | BundleExpression, unknown[]> {
   return Array.isArray(node);
 }
 
@@ -60,13 +60,13 @@ const isBinary = (kind: unknown): boolean =>
 // `...xs`, which stands where an element or an argument stands rather than
 // where a statement does — so it is read before the statement kinds are.
 function isSpread(
-  node: BundleStatementNode | BundleSpreadElementNode,
-): node is BundleSpreadElementNode {
+  node: BundleStatement | BundleSpreadElement,
+): node is BundleSpreadElement {
   return Array.isArray(node) && node[0] === "...";
 }
 
 function renderNode(
-  node: BundleStatementNode | BundleSpreadElementNode,
+  node: BundleStatement | BundleSpreadElement,
   indent: string,
 ): string {
   if (isSpread(node)) {
@@ -220,7 +220,7 @@ function renderNode(
 
 // A body statement reads as pseudo-JS with a terminating `;` unless it ends
 // with a block of its own.
-function renderStatement(node: BundleStatementNode, indent: string): string {
+function renderStatement(node: BundleStatement, indent: string): string {
   const text = renderNode(node, indent);
   return isNode(node) &&
     (node[0] === "{}" ||
@@ -237,7 +237,7 @@ function renderBody(body: BundleBody, indent: string): string {
   if (isNode(body) && body[0] === "{}") {
     return renderNode(body, indent);
   }
-  return renderNode(body as BundleExpressionNode, indent);
+  return renderNode(body as BundleExpression, indent);
 }
 
 // A JSX-like view of an element: props as attributes — each on its own

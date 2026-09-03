@@ -27,14 +27,8 @@ export interface Bundle {
   //
   // Nothing a call site supplies is inlined, so an entry's shape is a function
   // of its source: the same script compiles to the same entry in every bundle.
-  functions: Record<FunctionLabel, BundleArrowFunctionNode>;
-  root: BundleExpressionNode;
-}
-
-// Plain JSON carrying itself. A node is an array, so the format reserves no
-// key at all and every key a host object holds passes through.
-export interface BundleData {
-  readonly [key: string]: BundleExpressionNode;
+  functions: Record<FunctionLabel, BundleArrowFunction>;
+  root: BundleExpression;
 }
 
 export type FunctionLabel = string;
@@ -72,13 +66,13 @@ export type FunctionLabel = string;
 export type BundleElement = [
   kind: "el",
   id: string,
-  props: { [prop: string]: BundleExpressionNode },
+  props: { [prop: string]: BundleExpression },
   // A slot rather than a reserved `children` prop, so a reader takes children
   // by position and every other reader walks the props untouched.
   //
   // `null` is no children, which a child evaluating to `null` also draws —
   // nothing either way, so the two need not be told apart.
-  children: BundleExpressionNode,
+  children: BundleExpression,
 ];
 
 // Applies an entry, named by label. Shorthand, exactly, for a `call` of a `get`
@@ -90,105 +84,94 @@ export type BundleApplyFunction = [
   label: FunctionLabel,
   // Mirrors the entry's parameters — for a script, an arrow per splice hole
   // first, then one value per capture.
-  args: BundleExpressionNode[],
+  args: BundleExpression[],
 ];
 
 // An array of data, which is a node only so that it is not read as one: a
 // spliced `[1, 2, 3]` and a node are both arrays. An array in a slot the kind
 // declares as a list needs no wrapper, since nothing is deciding there.
-export type BundleArrayLiteralExpressionNode = [
-  kind: "arr",
-  members: BundleArrayElement[],
-];
+export type BundleArrayLiteral = [kind: "arr", members: BundleArrayElement[]];
 
-// `...xs` where an element or an argument goes. Not a `BundleExpressionNode`:
+// `...xs` where an element or an argument goes. Not a `BundleExpression`:
 // it has no value of its own, it contributes the members of one — so the two
 // lists that admit it say so, and nothing else has to consider it.
-export type BundleSpreadElementNode = [
-  kind: "...",
-  expression: BundleExpressionNode,
-];
+export type BundleSpreadElement = [kind: "...", expression: BundleExpression];
 
 // A global reached by name. What `Math` is, is the host's to answer — a bundle
 // that carried JavaScript's would be carrying JavaScript. What the format
 // fixes is which members exist and what each one means.
-export type BundleBuiltinNode = [kind: "bltn", name: string];
+export type BundleBuiltin = [kind: "bltn", name: string];
 
-export type BundleArrayElement = BundleExpressionNode | BundleSpreadElementNode;
+export type BundleArrayElement = BundleExpression | BundleSpreadElement;
 
 // An object literal a spread runs through, which cannot ship as the data an
 // object literal usually is: an object in a value slot *is* its own keys and
 // the format reserves none of them, so there is nowhere to write "and every key
 // of that one". A node says it instead — and only where a spread appears. A
 // literal without one is still plain data.
-export type BundleObjectLiteralExpressionNode = [
-  kind: "obj",
-  entries: BundleObjectEntry[],
-];
+export type BundleObjectLiteral = [kind: "obj", entries: BundleObjectEntry[]];
 
 // One key and what it holds. A node like any other, so the name sits behind
 // the kind rather than in it: `...` is a name a property may have, and a name
 // that had to be told from a spread by not being one would make `{ "...": 2 }`
 // beside a spread mean the spread.
-export type BundlePropertyAssignmentNode = [
+export type BundlePropertyAssignment = [
   kind: ":",
   name: string,
-  value: BundleExpressionNode,
+  value: BundleExpression,
 ];
 
 // The spread is the same node an array holds, so "and every key of that one"
 // is written the one way it is written everywhere.
-export type BundleObjectEntry =
-  | BundlePropertyAssignmentNode
-  | BundleSpreadElementNode;
+export type BundleObjectEntry = BundlePropertyAssignment | BundleSpreadElement;
 
-export type BundleExpressionNode =
+export type BundleExpression =
   | null
   | boolean
   | number
   | string
-  | BundleData
-  | BundleArrayLiteralExpressionNode
-  | BundleIdentifierNode
+  | { readonly [key: string]: BundleExpression }
+  | BundleArrayLiteral
+  | BundleIdentifier
   | BundleGetFunction
   | BundleApplyFunction
   | BundleElement
-  | BundleCallExpressionNode
-  | BundleOptionalCallExpressionNode
-  | BundlePropertyAccessExpressionNode
-  | BundleOptionalPropertyAccessExpressionNode
-  | BundleElementAccessExpressionNode
-  | BundleBinaryNode
-  | BundleLogicalNotNode
-  | BundleNegationNode
-  | BundleConditionalExpressionNode
-  | BundleArrowFunctionNode
-  | BundleObjectLiteralExpressionNode
-  | BundleBuiltinNode;
+  | BundleCall
+  | BundleOptionalCall
+  | BundlePropertyAccess
+  | BundleOptionalPropertyAccess
+  | BundleElementAccess
+  | BundleBinary
+  | BundleLogicalNot
+  | BundleNegation
+  | BundleConditional
+  | BundleArrowFunction
+  | BundleObjectLiteral
+  | BundleBuiltin;
 
-export type BundleStatementNode =
-  | BundleExpressionNode
-  | BundleBlockNode
-  | BundleConstDeclarationNode
-  | BundleLetDeclarationNode
-  | BundleIfStatementNode
-  | BundleWhileStatementNode
-  | BundleForStatementNode
-  | BundleBreakStatementNode
-  | BundleContinueStatementNode
-  | BundleReturnStatementNode
-  | BundleThrowStatementNode
-  | BundleTryStatementNode;
+export type BundleStatement =
+  | BundleExpression
+  | BundleBlock
+  | BundleConstDeclaration
+  | BundleLetDeclaration
+  | BundleIf
+  | BundleWhile
+  | BundleFor
+  | BundleBreak
+  | BundleContinue
+  | BundleReturn
+  | BundleThrow
+  | BundleTry;
 
 // The body of an arrow: a block, or an expression whose value is implicitly
 // returned.
-export type BundleBody = BundleExpressionNode | BundleBlockNode;
+export type BundleBody = BundleExpression | BundleBlock;
 
 // Scoping is lexical and names are pre-resolved: an identifier refers to a
 // parameter of an enclosing arrow (including the entry itself) or a local
 // declared in an enclosing block. There are no globals — every name is bound,
 // and an unresolved name is a malformed bundle.
-export type BundleIdentifierNode = [kind: "id", text: string];
+export type BundleIdentifier = [kind: "id", text: string];
 
 // An entry as a value, not applied: the function it evaluates to. Only a
 // `functions` entry can be named this way.
@@ -197,30 +180,30 @@ export type BundleGetFunction = [kind: "fn", label: FunctionLabel];
 // `?.()` is the same call that short-circuits: a null callee yields null and
 // the arguments are not evaluated. Two kinds rather than one with a flag, so
 // what a node does is what it is.
-export type BundleCallExpressionNode = [
+export type BundleCall = [
   kind: "()",
-  expression: BundleExpressionNode,
+  expression: BundleExpression,
   args: BundleArrayElement[],
 ];
 
-export type BundleOptionalCallExpressionNode = [
+export type BundleOptionalCall = [
   kind: "?.()",
-  expression: BundleExpressionNode,
+  expression: BundleExpression,
   args: BundleArrayElement[],
 ];
 
 // Reading an absent member yields null, the same family as a missing argument
 // binding null. `?.` short-circuits instead of reading; as a call's callee it
 // short-circuits the call too.
-export type BundlePropertyAccessExpressionNode = [
+export type BundlePropertyAccess = [
   kind: ".",
-  expression: BundleExpressionNode,
+  expression: BundleExpression,
   name: string,
 ];
 
-export type BundleOptionalPropertyAccessExpressionNode = [
+export type BundleOptionalPropertyAccess = [
   kind: "?.",
-  expression: BundleExpressionNode,
+  expression: BundleExpression,
   name: string,
 ];
 
@@ -234,10 +217,10 @@ export type BundleOptionalPropertyAccessExpressionNode = [
 // The typechecker is stricter than that, naming the element type for an
 // in-range read the way TypeScript itself does, so the null is a runtime floor
 // rather than something every read has to answer for.
-export type BundleElementAccessExpressionNode = [
+export type BundleElementAccess = [
   kind: "[]",
-  expression: BundleExpressionNode,
-  argumentExpression: BundleExpressionNode,
+  expression: BundleExpression,
+  argumentExpression: BundleExpression,
 ];
 
 // One node per operator, and the operator is the kind: a `+` node adds, which
@@ -246,168 +229,168 @@ export type BundleElementAccessExpressionNode = [
 // `=` binds its left rather than evaluating it — evaluating first would read a
 // variable where a name was meant. An identifier is the only assignable thing
 // in this language.
-export type BundleAssignmentNode = [
+export type BundleAssignment = [
   kind: "=",
-  target: BundleIdentifierNode,
-  value: BundleExpressionNode,
+  target: BundleIdentifier,
+  value: BundleExpression,
 ];
 
 // Short-circuiting. `&&` and `||` take booleans and yield one — there is no
 // truthiness to reduce. `??` asks whether a value is absent, so either side
 // may be anything.
-export type BundleLogicalAndNode = [
+export type BundleLogicalAnd = [
   kind: "&&",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleLogicalOrNode = [
+export type BundleLogicalOr = [
   kind: "||",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleNullishCoalescingNode = [
+export type BundleNullishCoalescing = [
   kind: "??",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
 // `+` adds two numbers or concatenates where either side is a string; the rest
 // take numbers.
-export type BundleAdditionNode = [
+export type BundleAddition = [
   kind: "+",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleSubtractionNode = [
+export type BundleSubtraction = [
   kind: "-",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleMultiplicationNode = [
+export type BundleMultiplication = [
   kind: "*",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleDivisionNode = [
+export type BundleDivision = [
   kind: "/",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleRemainderNode = [
+export type BundleRemainder = [
   kind: "%",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
 // Identity: the same primitive or the same object, never a deep walk and
 // never a coercion.
-export type BundleStrictEqualityNode = [
+export type BundleStrictEquality = [
   kind: "===",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleStrictInequalityNode = [
+export type BundleStrictInequality = [
   kind: "!==",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
 // Two strings compare as text, two numbers as numbers, and nothing orders
 // against `NaN`.
-export type BundleLessThanNode = [
+export type BundleLessThan = [
   kind: "<",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleLessThanOrEqualNode = [
+export type BundleLessThanOrEqual = [
   kind: "<=",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleGreaterThanNode = [
+export type BundleGreaterThan = [
   kind: ">",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleGreaterThanOrEqualNode = [
+export type BundleGreaterThanOrEqual = [
   kind: ">=",
-  left: BundleExpressionNode,
-  right: BundleExpressionNode,
+  left: BundleExpression,
+  right: BundleExpression,
 ];
 
-export type BundleBinaryNode =
-  | BundleAssignmentNode
-  | BundleLogicalAndNode
-  | BundleLogicalOrNode
-  | BundleNullishCoalescingNode
-  | BundleAdditionNode
-  | BundleSubtractionNode
-  | BundleMultiplicationNode
-  | BundleDivisionNode
-  | BundleRemainderNode
-  | BundleStrictEqualityNode
-  | BundleStrictInequalityNode
-  | BundleLessThanNode
-  | BundleLessThanOrEqualNode
-  | BundleGreaterThanNode
-  | BundleGreaterThanOrEqualNode;
+export type BundleBinary =
+  | BundleAssignment
+  | BundleLogicalAnd
+  | BundleLogicalOr
+  | BundleNullishCoalescing
+  | BundleAddition
+  | BundleSubtraction
+  | BundleMultiplication
+  | BundleDivision
+  | BundleRemainder
+  | BundleStrictEquality
+  | BundleStrictInequality
+  | BundleLessThan
+  | BundleLessThanOrEqual
+  | BundleGreaterThan
+  | BundleGreaterThanOrEqual;
 
-export type BundleLogicalNotNode = [kind: "!", operand: BundleExpressionNode];
+export type BundleLogicalNot = [kind: "!", operand: BundleExpression];
 
-export type BundleNegationNode = [kind: "-x", operand: BundleExpressionNode];
+export type BundleNegation = [kind: "-x", operand: BundleExpression];
 
-export type BundleConditionalExpressionNode = [
+export type BundleConditional = [
   kind: "?:",
-  condition: BundleExpressionNode,
-  whenTrue: BundleExpressionNode,
-  whenFalse: BundleExpressionNode,
+  condition: BundleExpression,
+  whenTrue: BundleExpression,
+  whenFalse: BundleExpression,
 ];
 
-export type BundleArrowFunctionNode = [
+export type BundleArrowFunction = [
   kind: "=>",
-  parameters: BundleParameterNode[],
+  parameters: BundleParameter[],
   body: BundleBody,
 ];
 
 // Declarations are hoisted to the block, matching the compiler's scoping (a
 // use before its declaration resolves to the local).
-export type BundleBlockNode = [kind: "{}", statements: BundleStatementNode[]];
+export type BundleBlock = [kind: "{}", statements: BundleStatement[]];
 
-export type BundleConstDeclarationNode = [
+export type BundleConstDeclaration = [
   kind: "const",
   name: string,
-  initializer: BundleExpressionNode,
+  initializer: BundleExpression,
 ];
 
-export type BundleLetDeclarationNode = [
+export type BundleLetDeclaration = [
   kind: "let",
   name: string,
-  initializer: BundleExpressionNode,
+  initializer: BundleExpression,
 ];
 
 // `elseStatement` is null when there is no else branch. The condition is
 // boolean, so a client tests it directly, without truthiness rules.
-export type BundleIfStatementNode = [
+export type BundleIf = [
   kind: "if",
-  expression: BundleExpressionNode,
-  thenStatement: BundleStatementNode,
-  elseStatement: BundleStatementNode | null,
+  expression: BundleExpression,
+  thenStatement: BundleStatement,
+  elseStatement: BundleStatement | null,
 ];
 
-export type BundleWhileStatementNode = [
+export type BundleWhile = [
   kind: "while",
-  expression: BundleExpressionNode,
-  statement: BundleStatementNode,
+  expression: BundleExpression,
+  statement: BundleStatement,
 ];
 
 // Each header part is null when the source omitted it, and an absent condition
@@ -418,54 +401,48 @@ export type BundleWhileStatementNode = [
 // once the loop is; and each turn gets its own copy of that scope, made from
 // the last turn's values before the update runs — so an arrow built in one turn
 // keeps that turn's numbers rather than the value the loop stopped at.
-export type BundleForStatementNode = [
+export type BundleFor = [
   kind: "for",
   initializer:
-    | BundleConstDeclarationNode
-    | BundleLetDeclarationNode
-    | BundleExpressionNode
+    | BundleConstDeclaration
+    | BundleLetDeclaration
+    | BundleExpression
     | null,
-  condition: BundleExpressionNode | null,
-  incrementor: BundleExpressionNode | null,
-  statement: BundleStatementNode,
+  condition: BundleExpression | null,
+  incrementor: BundleExpression | null,
+  statement: BundleStatement,
 ];
 
 // The nearest enclosing loop catches both: one ends it, the other starts its
 // next turn — after a `for`'s update, never skipping it. Neither takes a label.
-export type BundleBreakStatementNode = [kind: "break"];
+export type BundleBreak = [kind: "break"];
 
-export type BundleContinueStatementNode = [kind: "continue"];
+export type BundleContinue = [kind: "continue"];
 
-export type BundleReturnStatementNode = [
-  kind: "return",
-  expression: BundleExpressionNode,
-];
+export type BundleReturn = [kind: "return", expression: BundleExpression];
 
 // JavaScript `throw` semantics: the value is thrown as-is (`throw "message"`
 // throws the string itself).
-export type BundleThrowStatementNode = [
-  kind: "throw",
-  expression: BundleExpressionNode,
-];
+export type BundleThrow = [kind: "throw", expression: BundleExpression];
 
 // There is no `finallyBlock` — the compiler rejects `finally` — and the clause
 // is never absent, since a `try` with nothing to catch it would be the
 // statement it wraps.
-export type BundleTryStatementNode = [
+export type BundleTry = [
   kind: "try",
-  tryBlock: BundleBlockNode,
-  catchClause: BundleCatchClauseNode,
+  tryBlock: BundleBlock,
+  catchClause: BundleCatchClause,
 ];
 
 // The binding scopes over `block` alone. `variableDeclaration` is the name it
 // binds, or null for a bindingless `catch` — TypeScript holds a declaration
 // node there, where the name is all this format needs.
-export type BundleCatchClauseNode = [
+export type BundleCatchClause = [
   kind: "catch",
   variableDeclaration: string | null,
-  block: BundleBlockNode,
+  block: BundleBlock,
 ];
 
 // It carries the name it binds and nothing else: a default, a type, a rest
 // token and modifiers are each rejected by the compiler.
-export type BundleParameterNode = [kind: "param", name: string];
+export type BundleParameter = [kind: "param", name: string];
