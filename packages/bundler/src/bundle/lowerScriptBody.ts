@@ -251,8 +251,8 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
             "obj",
             node.properties.map((property) =>
               property.kind === "..."
-                ? [null, e(property.expression)]
-                : [property.name, e(property.initializer)],
+                ? ["...", e(property.expression)]
+                : [":", property.name, e(property.initializer)],
             ),
           ];
         }

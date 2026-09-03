@@ -84,10 +84,10 @@ function renderNode(
     // why this reads its slots rather than the shape of what is in them.
     case "obj":
       return `{ ${node[1]
-        .map(([name, value]) =>
-          name === null
-            ? `...${renderNode(value, indent)}`
-            : `${name}: ${renderNode(value, indent)}`,
+        .map((entry) =>
+          entry[0] === ":"
+            ? `${entry[1]}: ${renderNode(entry[2], indent)}`
+            : `...${renderNode(entry[1], indent)}`,
         )
         .join(", ")} }`;
     case "id":

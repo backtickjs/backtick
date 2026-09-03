@@ -165,10 +165,22 @@ export type BundleObjectLiteralExpressionNode = [
 // A pair, or a spread. `null` in the name slot is a spread of the value beside
 // it — a name no property can have — so the two are told apart by a slot rather
 // than by the shape of what is in it.
-export type BundleObjectEntry = [
-  name: string | null,
+// One key and what it holds. A node like any other, so the name sits behind
+// the kind rather than in it: `...` is a name a property may have, and a name
+// that had to be told from a spread by not being one would make `{ "...": 2 }`
+// beside a spread mean the spread.
+export type BundlePropertyAssignmentNode = [
+  kind: ":",
+  name: string,
   value: BundleExpressionNode,
 ];
+
+// What an object literal holds: a key, or a spread contributing however many
+// keys the value it names has. The spread is the same node an array holds, so
+// "and every key of that one" is written the one way it is written everywhere.
+export type BundleObjectEntry =
+  | BundlePropertyAssignmentNode
+  | BundleSpreadElementNode;
 
 export type BundleExpressionNode =
   | null

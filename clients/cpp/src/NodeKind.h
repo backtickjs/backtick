@@ -50,6 +50,7 @@ inline constexpr std::string_view LogicalNot                       = "!";
 inline constexpr std::string_view Negation                         = "-x";
 inline constexpr std::string_view SpreadElement                    = "...";
 inline constexpr std::string_view ObjectLiteralExpression          = "obj";
+inline constexpr std::string_view PropertyAssignment               = ":";
 inline constexpr std::string_view ArrayLiteralExpression           = "arr";
 }  // namespace NodeKind
 

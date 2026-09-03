@@ -44,6 +44,7 @@ export const NodeKind = {
   Negation: "-x",
   SpreadElement: "...",
   ObjectLiteralExpression: "obj",
+  PropertyAssignment: ":",
   ArrayLiteralExpression: "arr",
 } as const;
 

@@ -304,12 +304,15 @@ function buildNode(
     // and never reaches here — this is only for the case the format has no key
     // to say, which is "and every key of that one".
     case "obj": {
-      const entries = node[1].map(
-        ([name, value]) => [name, compile(instance, value)] as const,
+      // A spread carries only what to merge; a property carries its name too.
+      const entries = node[1].map((entry) =>
+        entry[0] === ":"
+          ? { name: entry[1], part: compile(instance, entry[2]) }
+          : { name: null, part: compile(instance, entry[1]) },
       );
       return (scope) => {
         const object: { [key: string]: ClientValue } = {};
-        for (const [name, part] of entries) {
+        for (const { name, part } of entries) {
           const held = part(scope);
           if (name !== null) {
             object[name] = held;

@@ -1,0 +1,6 @@
+#f0 = () => {
+  const base = { "a": 1 };
+  return { ...base, ...: 2 };
+}
+
+root = #f0()
