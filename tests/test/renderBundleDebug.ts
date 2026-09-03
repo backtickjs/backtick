@@ -37,8 +37,21 @@ function isNode(
 
 // The fifteen operator kinds, which bind looser than a prefix `!` or `-`.
 const binary = new Set<string>([
-  "=", "&&", "||", "??", "+", "-", "*", "/", "%",
-  "===", "!==", "<", "<=", ">", ">=",
+  "=",
+  "&&",
+  "||",
+  "??",
+  "+",
+  "-",
+  "*",
+  "/",
+  "%",
+  "===",
+  "!==",
+  "<",
+  "<=",
+  ">",
+  ">=",
 ]);
 const isBinary = (kind: unknown): boolean =>
   typeof kind === "string" && binary.has(kind);
@@ -102,9 +115,7 @@ function renderNode(
       // An arrow callee (an expansion applied to its arguments) binds
       // looser than the call — parenthesize so the text reads as it runs.
       const target =
-        isNode(calleeNode) && calleeNode[0] === "=>"
-          ? `(${callee})`
-          : callee;
+        isNode(calleeNode) && calleeNode[0] === "=>" ? `(${callee})` : callee;
       const optional = node[0] === "?.()";
       return `${target}${optional ? "?." : ""}(${args.join(", ")})`;
     }

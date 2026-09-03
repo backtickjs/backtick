@@ -222,20 +222,14 @@ export type BundleBody = BundleExpressionNode | BundleBlockNode;
 
 // A variable reference: resolves `name` in the enclosing scope. Every name
 // is bound; an unresolved name is a malformed bundle.
-export type BundleIdentifierNode = [
-  kind: "id",
-  text: string,
-];
+export type BundleIdentifierNode = [kind: "id", text: string];
 
 // An entry as a value, not applied: the function it evaluates to. Calling that
 // applies the entry; passed bare it is already a nullary thunk.
 //
 // Only a `functions` entry can be named this way. A tree is applied, which an
 // `ApplyTree` says on its own, so there is nothing for a tree to be named as.
-export type BundleGetFunction = [
-  kind: "fn",
-  label: FunctionLabel,
-];
+export type BundleGetFunction = [kind: "fn", label: FunctionLabel];
 
 // A call: evaluates the callee to a function and applies it. When the callee
 // is an `entry` node targeting a function, `args` mirrors that entry's
@@ -464,10 +458,7 @@ export type BundleBinaryNode =
 // literal is not written either way: it carries itself, like every other
 // literal on the wire, so this node means an operator applied to something
 // computed.
-export type BundleLogicalNotNode = [
-  kind: "!",
-  operand: BundleExpressionNode,
-];
+export type BundleLogicalNotNode = [kind: "!", operand: BundleExpressionNode];
 
 export type BundleNegationNode = [kind: "-x", operand: BundleExpressionNode];
 
@@ -499,10 +490,7 @@ export type BundleArrowFunctionNode = [
 // enclosing arrow's result. Declarations are hoisted to the block, matching
 // the compiler's scoping (a use before its declaration resolves to the
 // local).
-export type BundleBlockNode = [
-  kind: "{}",
-  statements: BundleStatementNode[],
-];
+export type BundleBlockNode = [kind: "{}", statements: BundleStatementNode[]];
 
 // A variable declaration: binds `name` in the enclosing block.
 export type BundleConstDeclarationNode = [
@@ -561,9 +549,7 @@ export type BundleForStatementNode = [
 // it. Neither takes a label, so neither can name a loop further out.
 export type BundleBreakStatementNode = [kind: "break"];
 
-export type BundleContinueStatementNode = [
-  kind: "continue",
-];
+export type BundleContinueStatementNode = [kind: "continue"];
 
 // Returns the expression's value from the enclosing arrow.
 export type BundleReturnStatementNode = [
@@ -603,7 +589,4 @@ export type BundleCatchClauseNode = [
 // `Parameter`. It carries the name it binds and nothing else: a default, a
 // type, a rest token and modifiers are each rejected by the compiler, so there
 // is nothing left for the node to say.
-export type BundleParameterNode = [
-  kind: "param",
-  name: string,
-];
+export type BundleParameterNode = [kind: "param", name: string];

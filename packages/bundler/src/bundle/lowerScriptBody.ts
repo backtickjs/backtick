@@ -104,7 +104,6 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
       : ["let", name, initializer];
   }
 
-
   function buildStatement(node: ClientScriptStatement): BundleStatementNode {
     switch (node.kind) {
       case "{}":
@@ -185,11 +184,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         const params = node.parameters.map((param) =>
           sourceName(param.name.bindingKey),
         );
-        return [
-          "=>",
-          parameterNodes(params),
-          buildBody(node.body),
-        ];
+        return ["=>", parameterNodes(params), buildBody(node.body)];
       }
       case "binop": {
         if (node.operatorToken === "=") {
@@ -212,22 +207,14 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
       case "unop":
         // A negative literal carries itself, like every other literal here: the
         // node is TypeScript's way of writing one, not something to evaluate.
-        if (
-          node.operator === "-" &&
-          node.operand.kind === "number"
-        ) {
+        if (node.operator === "-" && node.operand.kind === "number") {
           return -node.operand.value;
         }
         return node.operator === "!"
           ? ["!", e(node.operand)]
           : ["-x", e(node.operand)];
       case "?:":
-        return [
-          "?:",
-          e(node.condition),
-          e(node.whenTrue),
-          e(node.whenFalse),
-        ];
+        return ["?:", e(node.condition), e(node.whenTrue), e(node.whenFalse)];
       case "true":
         return true;
       case "false":
@@ -259,11 +246,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         // "and every key of that one" under. One reaching here makes the whole
         // literal a node instead, where a name slot of `null` says spread. A
         // literal without one is unchanged, so nothing already written moves.
-        if (
-          node.properties.some(
-            (property) => property.kind === "...",
-          )
-        ) {
+        if (node.properties.some((property) => property.kind === "...")) {
           return [
             "obj",
             node.properties.map((property) =>
@@ -290,11 +273,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           : ["?.", expression, node.name];
       }
       case "[]":
-        return [
-          "[]",
-          e(node.expression),
-          e(node.argumentExpression),
-        ];
+        return ["[]", e(node.expression), e(node.argumentExpression)];
       case "bltn":
         return ["bltn", node.name];
       // An element the script wrote, which is the node a tree entry already
@@ -312,10 +291,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
             ? null
             : node.children.length === 1
               ? e(node.children[0])
-              : [
-                  "arr",
-                  node.children.map((child) => e(child)),
-                ];
+              : ["arr", node.children.map((child) => e(child))];
         // An element of the target is its own name, which is the id an element
         // node carries. The other is a tag the script wrote, and what it
         // splices is the expansion of what it named — an arrow over the one
@@ -333,11 +309,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           if (children !== null) {
             passed["children"] = ["=>", [], children];
           }
-          return [
-            "()",
-            renderSplice(node.type.key),
-            [passed],
-          ];
+          return ["()", renderSplice(node.type.key), [passed]];
         }
         return ["el", node.type.text, props, children];
       }

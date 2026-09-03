@@ -484,6 +484,14 @@
       "keyed": true,
       "dir": "bundle-script",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "81359405",
+      "label": "string kinds",
+      "date": "2026-09-03",
+      "keyed": true,
+      "dir": "81359405",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

@@ -127,11 +127,7 @@ export function buildBundle(
     // reads it: an argument is evaluated once where it is passed, and a prop has
     // to be re-read whenever what it names changes. What the call answers with
     // is an ordinary value, so the whole path off it is ordinary reads.
-    let read: BundleExpressionNode = [
-      "()",
-      [".", ["id", param], prop],
-      [],
-    ];
+    let read: BundleExpressionNode = ["()", [".", ["id", param], prop], []];
     for (const step of path) {
       read = [".", read, step];
     }
@@ -245,11 +241,7 @@ export function buildBundle(
       ...script.splices.map((splice) => splice.key),
       ...script.captures,
     ].map((_, index) => `$${index}`);
-    bodies.set(script, [
-      "=>",
-      parameterNodes(params),
-      lowerScriptBody(script),
-    ]);
+    bodies.set(script, ["=>", parameterNodes(params), lowerScriptBody(script)]);
   };
 
   // A fragment that is one entry whose parameters are exactly what this hole
@@ -297,11 +289,7 @@ export function buildBundle(
       case "AstScript": {
         const target = entryFor(value);
         materialize(target);
-        return [
-          "fn()",
-          fnLabel(target),
-          exprCallArgs(value, params),
-        ];
+        return ["fn()", fnLabel(target), exprCallArgs(value, params)];
       }
       case "AstElement":
         return renderElement(value, params);
@@ -333,10 +321,7 @@ export function buildBundle(
         return holeRead(value.name);
       case "AstArray":
         // Data, and a node is an array too, so it says which it is.
-        return [
-          "arr",
-          value.elements.map((entry) => child(entry)),
-        ];
+        return ["arr", value.elements.map((entry) => child(entry))];
       case "AstObject": {
         // A plain data object passes through, every key of it: a node is an
         // array, so an object is never mistaken for one and the format reserves

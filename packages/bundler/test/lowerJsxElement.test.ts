@@ -49,12 +49,7 @@ const lower = (body: ClientScriptExpression) => {
 };
 
 test("an element lowers to the format's own element node", () => {
-  assert.deepEqual(lower(element("br", [], [])), [
-    "el",
-    "br",
-    {},
-    null,
-  ]);
+  assert.deepEqual(lower(element("br", [], [])), ["el", "br", {}, null]);
 });
 
 test("an attribute lowers to a prop under its own name", () => {

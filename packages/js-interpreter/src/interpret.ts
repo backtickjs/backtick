@@ -389,10 +389,7 @@ function buildNode(
       const callee = node[1];
       const optionalCall = node[0] === "?.()";
       const args = compileElements(instance, node[2]);
-      if (
-        Array.isArray(callee) &&
-        (callee[0] === "." || callee[0] === "?.")
-      ) {
+      if (Array.isArray(callee) && (callee[0] === "." || callee[0] === "?.")) {
         const receiver = compile(instance, callee[1]);
         const optionalReceiver = callee[0] === "?.";
         const name = callee[2];
@@ -577,8 +574,7 @@ function compileArrow(
   // A block runs its statements; anything else is an expression, which is
   // implicitly returned. Which of the two decides what a call does with what
   // the body answered, so it is decided here rather than per call.
-  const block =
-    Array.isArray(body) && body[0] === "{}" ? body : null;
+  const block = Array.isArray(body) && body[0] === "{}" ? body : null;
   if (block === null) {
     const expression = compile(instance, body);
     // Nothing to bind: the body reads the enclosing frame, so making one of its

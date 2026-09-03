@@ -635,13 +635,9 @@ function rewriteNodeImpl(
       virtual: ts.isBreakStatement(node)
         ? ts.factory.createBreakStatement()
         : ts.factory.createContinueStatement(),
-      runtime: astNode(
-        ts,
-        ts.isBreakStatement(node)
-          ? "break"
-          : "continue",
-        { loc: loc(node) },
-      ),
+      runtime: astNode(ts, ts.isBreakStatement(node) ? "break" : "continue", {
+        loc: loc(node),
+      }),
     };
   }
 

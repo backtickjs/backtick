@@ -104,10 +104,7 @@ export interface ClientScriptForStatement {
   readonly kind: "for";
   readonly loc: SourceLocation;
   // The list, not the statement — `ts.ForInitializer` is the same union.
-  readonly initializer:
-    | ClientScriptDeclaration
-    | ClientScriptExpression
-    | null;
+  readonly initializer: ClientScriptDeclaration | ClientScriptExpression | null;
   readonly condition: ClientScriptExpression | null;
   readonly incrementor: ClientScriptStatement | null;
   readonly statement: ClientScriptStatement;
