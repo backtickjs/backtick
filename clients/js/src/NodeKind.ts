@@ -4,7 +4,6 @@ export const NodeKind = {
   GetFunction: 1,
   ApplyFunction: 2,
   Builtin: 3,
-  ArrayLiteralExpression: 4,
   Identifier: 1000,
   CallExpression: 1001,
   PropertyAccessExpression: 1002,
@@ -27,6 +26,7 @@ export const NodeKind = {
   PrefixUnaryExpression: 1019,
   SpreadElement: 1020,
   ObjectLiteralExpression: 1021,
+  ArrayLiteralExpression: 1022,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];

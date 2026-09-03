@@ -297,7 +297,7 @@ function buildNode(
   }
   const node = source;
   switch (node[0]) {
-    case 4: /* ArrayLiteralExpression */ {
+    case 1022: /* ArrayLiteralExpression */ {
       const members = compileElements(instance, node[1]);
       return (scope) => members(scope);
     }

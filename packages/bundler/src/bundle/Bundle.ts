@@ -71,7 +71,6 @@ export const NodeKind = {
   GetFunction: 1,
   ApplyFunction: 2,
   Builtin: 3,
-  ArrayLiteralExpression: 4,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -103,6 +102,7 @@ export const NodeKind = {
   PrefixUnaryExpression: 1019,
   SpreadElement: 1020,
   ObjectLiteralExpression: 1021,
+  ArrayLiteralExpression: 1022,
 } as const;
 
 export type NodeKind = (typeof NodeKind)[keyof typeof NodeKind];
