@@ -36,7 +36,7 @@ Interpreter machine;
 // What was pressed, waiting for the app to ask. Held for exactly one drawing:
 // an app reads it while working out what to draw, and the next drawing sees
 // nothing pressed unless something else was.
-std::string pending;
+Press pending;
 
 #ifndef BACKTICK_HEADLESS
 M5Canvas frame(&M5.Display);
@@ -96,7 +96,7 @@ extern "C" void app_main(void) {
   // a key reaches the app and what it holds survives into the next one.
   const char* const presses[] = {"", ";", ";"};
   for (const char* press : presses) {
-    pending = press;
+    pending.name = press;
     machine.restart();
     try {
       printf("backtick: key %-3s -> %s\n", press[0] == 0 ? "-" : press,
@@ -115,9 +115,11 @@ extern "C" void app_main(void) {
   unsigned long drawn = static_cast<unsigned long>(-1);
   while (true) {
     M5.update();
-    const std::string key = pollKey();
-    if (!key.empty()) {
-      pending = key;
+    const Press press = pollKey();
+    // A key the table has no name for still counts: it has a number, and an
+    // app showing that is how the table gets one.
+    if (press.code != 0) {
+      pending = press;
       // A key is a reason to draw again: what an app makes of one it makes
       // while working out its next drawing.
       machine.generation++;
@@ -127,7 +129,7 @@ extern "C" void app_main(void) {
     if (machine.generation != drawn) {
       drawn = machine.generation;
       drawOnce();
-      pending.clear();
+      pending = Press{};
     }
     vTaskDelay(pdMS_TO_TICKS(16));
   }

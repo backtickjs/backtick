@@ -23,7 +23,7 @@ Value native(const char* name, Native of) {
 
 }  // namespace
 
-void installCardputerBuiltins(Interpreter& into, std::string& pending) {
+void installCardputerBuiltins(Interpreter& into, Press& pressed) {
 #ifdef BACKTICK_HEADLESS
   into.builtins["screenWidth"] = native("screenWidth", [](std::vector<Value>&) {
     return Value::number(240);
@@ -66,12 +66,17 @@ void installCardputerBuiltins(Interpreter& into, std::string& pending) {
     return Value::number(static_cast<double>(M5.Display.textWidth(text.c_str())));
   });
 #endif
-  into.builtins["key"] = native("key", [&pending](std::vector<Value>&) {
+  into.builtins["key"] = native("key", [&pressed](std::vector<Value>&) {
     // Read once. An app asking twice in one drawing gets the key and then
     // nothing, which is what "since you last asked" means.
-    std::string held = pending;
-    pending.clear();
+    std::string held = pressed.name;
+    pressed.name.clear();
     return Value::string(held);
+  });
+  into.builtins["keyCode"] = native("keyCode", [&pressed](std::vector<Value>&) {
+    // Not read once: it stands for the key this drawing was given, whether or
+    // not the app has asked what that key says.
+    return Value::number(static_cast<double>(pressed.code));
   });
 }
 

@@ -49,6 +49,10 @@ int main(int argc, char** argv) {
   stub("millis", Value::number(0));
   stub("battery", Value::number(100));
   stub("key", Value::string(argc > 2 ? argv[2] : ""));
+  // A preview is given a key by name, so there is no number under it to
+  // report — 1 stands for "something was pressed", which is what an app
+  // reading this branches on.
+  stub("keyCode", Value::number(argc > 2 && argv[2][0] != '\0' ? 1 : 0));
   {
     auto held = std::make_shared<Closure>();
     held->name = "textWidth";

@@ -10,7 +10,7 @@ FIXTURES ?= ../../tests/test/fixtures/valid
 SOURCES := src/Json.cpp src/Value.cpp src/Interpreter.cpp src/Builtins.cpp
 TESTS := test/main.cpp test/render.cpp
 
-.PHONY: test build preview flash headless clean
+.PHONY: test build preview flash keys headless clean
 
 test: build
 	@build/fixtures $(FIXTURES)
@@ -38,6 +38,12 @@ clean:
 # telling which one.
 flash:
 	@./flash.sh $(PORT)
+
+# The keyboard, said back — what the scanner reported and what the client made
+# of it, on the screen. `make keys PORT=...` when a key does not do what the
+# app it is in says it should.
+keys:
+	@BACKTICK_APP=keys ./flash.sh $(PORT)
 
 # The same client on an emulated chip, with the drawing printed rather than
 # painted. What QEMU can run: it has no panel, no I2C and no ADC, so the build

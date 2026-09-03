@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "Cardputer.h"
 
 namespace backtick {
 
@@ -13,8 +13,8 @@ namespace backtick {
 // it reports.
 void beginKeyboard();
 
-// What was pressed since this was last asked, or an empty string. A printable
-// key is itself; the rest are named.
-std::string pollKey();
+// What was pressed since this was last asked, or a press holding nothing. A
+// printable key is itself; the rest are named.
+Press pollKey();
 
 }  // namespace backtick

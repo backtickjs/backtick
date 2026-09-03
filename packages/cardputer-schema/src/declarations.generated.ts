@@ -156,6 +156,15 @@ export interface CardputerBuiltins {
    */
   key(): string;
   /**
+   * Where the key `key` answered with sits, as the scanner numbers the
+   * keyboard — 1 upwards, or 0 where nothing was pressed.
+   *
+   * The number under a key rather than what it says, for an app that wants to
+   * know which key rather than which letter. Unlike `key` this is not spent by
+   * reading it: both stand for the one press this drawing was given.
+   */
+  keyCode(): number;
+  /**
    * How long the device has been awake, in milliseconds. What an app animating
    * something reads, since a frame is drawn when a value moves.
    */

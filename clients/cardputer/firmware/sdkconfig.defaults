@@ -2,4 +2,13 @@ CONFIG_IDF_TARGET="esp32s3"
 # Exceptions, because the interpreter carries what a bundle threw out through
 # one. Off by default on a device, and the cost is worth what it buys here.
 CONFIG_COMPILER_CXX_EXCEPTIONS=y
-CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+# The interpreter walks the bundle by recursing, and a nested expression costs
+# about 1.5K a level — `evaluate` calling `binary` calling `evaluate` down the
+# spine of one. Eight thousand bytes is five levels, which a line of string
+# joins passes without trying, and passing it is a panic rather than an error.
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=32768
+
+# The console on the USB-C socket, which is the only wire this device has. The
+# default is UART0, whose pins go nowhere on a Cardputer — so a panic prints
+# into the air and a crash looks like a reboot with no reason given.
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y

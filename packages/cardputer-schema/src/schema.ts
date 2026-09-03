@@ -202,6 +202,16 @@ export const schema: Schema = {
         "`right`, `tab`, `escape`.",
     }),
 
+    keyCode: Type.Function([], Type.Number(), {
+      description:
+        "Where the key `key` answered with sits, as the scanner numbers the " +
+        "keyboard — 1 upwards, or 0 where nothing was pressed.\n\n" +
+        "The number under a key rather than what it says, for an app that " +
+        "wants to know which key rather than which letter. Unlike `key` this " +
+        "is not spent by reading it: both stand for the one press this " +
+        "drawing was given.",
+    }),
+
     millis: Type.Function([], Type.Number(), {
       description:
         "How long the device has been awake, in milliseconds. What an app " +

@@ -9,7 +9,7 @@ namespace {
 // The scanner, as the board wires it.
 constexpr uint8_t kAddress = 0x34;
 constexpr uint8_t kRegisterConfig = 0x01;
-constexpr uint8_t kRegisterStatus = 0x02;
+constexpr uint8_t kRegisterCount = 0x03;
 constexpr uint8_t kRegisterEvent = 0x04;
 constexpr uint8_t kRegisterRows = 0x1D;
 constexpr uint8_t kRegisterColumnsLow = 0x1E;
@@ -25,53 +25,63 @@ bool read(uint8_t at, uint8_t& into) {
   return M5.In_I2C.readRegister(kAddress, at, &into, 1, 400000);
 }
 
-// Where a key sits in the matrix, to what it says. Four rows of fourteen, and
-// only what an app is likely to want: the rest read as an empty string, which
-// an app treats the same as nothing pressed.
-const char* named(uint8_t row, uint8_t column) {
-  static const char* const rows[4][14] = {
+// Where a key sits, to what it says. The keyboard is four rows of fourteen and
+// the scanner is seven lines of eight, which is the same 56 keys wired the
+// other way up: a line carries two keyboard columns, its first four keys one
+// column top to bottom and its next four the column beside it.
+const char* named(uint8_t number) {
+  static const char* const keys[4][14] = {
       {"`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
        "backspace"},
       {"tab", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"},
-      {"shift", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'", "enter",
-       ""},
+      {"fn", "shift", "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'",
+       "enter"},
       {"ctrl", "opt", "alt", "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
        " "},
   };
-  if (row >= 4 || column >= 14) {
+  // Numbered from one, ten to a line whatever the line has wired to it — so
+  // the eight that are leave a gap of two this never sees a key in.
+  const uint8_t at = static_cast<uint8_t>(number - 1);
+  const uint8_t line = static_cast<uint8_t>(at / 10);
+  const uint8_t along = static_cast<uint8_t>(at % 10);
+  if (number == 0 || line >= 7 || along >= 8) {
     return "";
   }
-  return rows[row][column];
+  return keys[along % 4][line * 2 + along / 4];
 }
 
 }  // namespace
 
 void beginKeyboard() {
-  // Rows 0–3 and columns 0–13 into the matrix, then the scanner on.
-  ready = write(kRegisterRows, 0x0F) &&
+  // Seven lines with eight keys along each, which is the whole keyboard, and
+  // then the key interrupt — what fills the queue this reads.
+  ready = write(kRegisterRows, 0x7F) &&
           write(kRegisterColumnsLow, 0xFF) &&
-          write(kRegisterColumnsHigh, 0x3F) &&
+          write(kRegisterColumnsHigh, 0x00) &&
           write(kRegisterConfig, 0x01);
 }
 
-std::string pollKey() {
+Press pollKey() {
   if (!ready) {
-    return "";
+    return {};
   }
-  uint8_t status = 0;
-  if (!read(kRegisterStatus, status) || (status & 0x1F) == 0) {
-    return "";
+  uint8_t queued = 0;
+  // How many events are waiting, rather than whether one ever arrived: the
+  // interrupt flag latches until it is written back, and a poll trusting that
+  // would read an empty queue for ever after the first key.
+  if (!read(kRegisterCount, queued) || (queued & 0x0F) == 0) {
+    return {};
   }
   uint8_t event = 0;
   if (!read(kRegisterEvent, event)) {
-    return "";
+    return {};
   }
   // The top bit is press against release; only a press is a key.
   if ((event & 0x80) == 0) {
-    return "";
+    return {};
   }
-  const uint8_t at = static_cast<uint8_t>((event & 0x7F) - 1);
-  return named(static_cast<uint8_t>(at / 10), static_cast<uint8_t>(at % 10));
+  const uint8_t number = static_cast<uint8_t>(event & 0x7F);
+  return {named(number), number};
 }
 
 }  // namespace backtick
