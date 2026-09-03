@@ -11,51 +11,40 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 17, 8, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [5, 23, 8, 2],
       statements: [
         {
-          kind: 244,
+          kind: "let",
           loc: [6, 3, 6, 13],
-          declarationList: {
-            kind: 262,
-            loc: [6, 3, 6, 12],
-            declarations: [
-              {
-                kind: 261,
-                loc: [6, 7, 6, 12],
-                name: {
-                  kind: 80,
-                  loc: [6, 7, 6, 8],
-                  text: "n",
-                  bindingKey: "n$3hyzmfxyz75s4$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [6, 11, 6, 12],
-                  value: 0,
-                },
-              },
-            ],
-            keyword: "let",
+          name: {
+            kind: "id",
+            loc: [6, 7, 6, 8],
+            text: "n",
+            bindingKey: "n$3hyzmfxyz75s4$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [6, 11, 6, 12],
+            value: 0,
           },
         },
         {
-          kind: 227,
+          kind: "binop",
           loc: [7, 3, 7, 8],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [7, 3, 7, 4],
             text: "n",
             bindingKey: "n$3hyzmfxyz75s4$0",
           },
           operatorToken: "=",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [7, 7, 7, 8],
             value: 1,
           },
@@ -74,46 +63,34 @@ const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [10, 19, 13, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [11, 3, 11, 21],
-        declarationList: {
-          kind: 262,
-          loc: [11, 3, 11, 20],
-          declarations: [
-            {
-              kind: 261,
-              loc: [11, 9, 11, 20],
-              name: {
-                kind: 80,
-                loc: [11, 9, 11, 10],
-                text: "x",
-                bindingKey: "x$3hyzmfxyz75s4$1",
-              },
-              initializer: {
-                kind: 214,
-                loc: [11, 13, 11, 20],
-                expression: {
-                  kind: 1000,
-                  loc: [11, 13, 11, 18],
-                  key: "$ping",
-                },
-                questionDotToken: false,
-                arguments: [],
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [11, 9, 11, 10],
+          text: "x",
+          bindingKey: "x$3hyzmfxyz75s4$1",
+        },
+        initializer: {
+          kind: "()",
+          loc: [11, 13, 11, 20],
+          expression: {
+            kind: "splice",
+            loc: [11, 13, 11, 18],
+            key: "$ping",
+          },
+          arguments: [],
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [12, 3, 12, 12],
         expression: {
-          kind: 9,
+          kind: "number",
           loc: [12, 10, 12, 11],
           value: 1,
         },
@@ -131,39 +108,27 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [15, 19, 17, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [16, 3, 16, 21],
-        declarationList: {
-          kind: 262,
-          loc: [16, 3, 16, 20],
-          declarations: [
-            {
-              kind: 261,
-              loc: [16, 9, 16, 20],
-              name: {
-                kind: 80,
-                loc: [16, 9, 16, 10],
-                text: "x",
-                bindingKey: "x$3hyzmfxyz75s4$2",
-              },
-              initializer: {
-                kind: 214,
-                loc: [16, 13, 16, 20],
-                expression: {
-                  kind: 1000,
-                  loc: [16, 13, 16, 18],
-                  key: "$ping",
-                },
-                questionDotToken: false,
-                arguments: [],
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [16, 9, 16, 10],
+          text: "x",
+          bindingKey: "x$3hyzmfxyz75s4$2",
+        },
+        initializer: {
+          kind: "()",
+          loc: [16, 13, 16, 20],
+          expression: {
+            kind: "splice",
+            loc: [16, 13, 16, 18],
+            key: "$ping",
+          },
+          arguments: [],
         },
       },
     ],
@@ -181,14 +146,14 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [21, 18, 23, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [21, 19, 21, 31],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [21, 19, 21, 23],
           text: "text",
           bindingKey: "text$3hyzmfxyz75s4$3",
@@ -196,14 +161,14 @@ const label = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [21, 36, 23, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [22, 3, 22, 15],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [22, 10, 22, 14],
             text: "text",
             bindingKey: "text$3hyzmfxyz75s4$3",
@@ -223,51 +188,39 @@ const wrongArgument = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [25, 26, 28, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [26, 3, 26, 26],
-        declarationList: {
-          kind: 262,
-          loc: [26, 3, 26, 25],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [26, 9, 26, 10],
+          text: "x",
+          bindingKey: "x$3hyzmfxyz75s4$4",
+        },
+        initializer: {
+          kind: "()",
+          loc: [26, 13, 26, 25],
+          expression: {
+            kind: "splice",
+            loc: [26, 13, 26, 19],
+            key: "$label",
+          },
+          arguments: [
             {
-              kind: 261,
-              loc: [26, 9, 26, 25],
-              name: {
-                kind: 80,
-                loc: [26, 9, 26, 10],
-                text: "x",
-                bindingKey: "x$3hyzmfxyz75s4$4",
-              },
-              initializer: {
-                kind: 214,
-                loc: [26, 13, 26, 25],
-                expression: {
-                  kind: 1000,
-                  loc: [26, 13, 26, 19],
-                  key: "$label",
-                },
-                questionDotToken: false,
-                arguments: [
-                  {
-                    kind: 112,
-                    loc: [26, 20, 26, 24],
-                  },
-                ],
-              },
+              kind: "true",
+              loc: [26, 20, 26, 24],
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [27, 3, 27, 12],
         expression: {
-          kind: 9,
+          kind: "number",
           loc: [27, 10, 27, 11],
           value: 1,
         },

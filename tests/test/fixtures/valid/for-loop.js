@@ -10,129 +10,111 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [4, 19, 10, 2],
     statements: [
       {
-        kind: 244,
+        kind: "let",
         loc: [5, 3, 5, 17],
-        declarationList: {
-          kind: 262,
-          loc: [5, 3, 5, 16],
-          declarations: [
-            {
-              kind: 261,
-              loc: [5, 7, 5, 16],
-              name: {
-                kind: 80,
-                loc: [5, 7, 5, 12],
-                text: "total",
-                bindingKey: "total$zkms5nlgp0g3$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [5, 15, 5, 16],
-                value: 0,
-              },
-            },
-          ],
-          keyword: "let",
+        name: {
+          kind: "id",
+          loc: [5, 7, 5, 12],
+          text: "total",
+          bindingKey: "total$zkms5nlgp0g3$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [5, 15, 5, 16],
+          value: 0,
         },
       },
       {
-        kind: 249,
+        kind: "for",
         loc: [6, 3, 8, 4],
         initializer: {
-          kind: 262,
+          kind: "let",
           loc: [6, 8, 6, 17],
-          declarations: [
-            {
-              kind: 261,
-              loc: [6, 12, 6, 17],
-              name: {
-                kind: 80,
-                loc: [6, 12, 6, 13],
-                text: "i",
-                bindingKey: "i$zkms5nlgp0g3$1",
-              },
-              initializer: {
-                kind: 9,
-                loc: [6, 16, 6, 17],
-                value: 0,
-              },
-            },
-          ],
-          keyword: "let",
+          name: {
+            kind: "id",
+            loc: [6, 12, 6, 13],
+            text: "i",
+            bindingKey: "i$zkms5nlgp0g3$1",
+          },
+          initializer: {
+            kind: "number",
+            loc: [6, 16, 6, 17],
+            value: 0,
+          },
         },
         condition: {
-          kind: 227,
+          kind: "binop",
           loc: [6, 19, 6, 24],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [6, 19, 6, 20],
             text: "i",
             bindingKey: "i$zkms5nlgp0g3$1",
           },
           operatorToken: "<",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [6, 23, 6, 24],
             value: 5,
           },
         },
         incrementor: {
-          kind: 227,
+          kind: "binop",
           loc: [6, 26, 6, 35],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [6, 26, 6, 27],
             text: "i",
             bindingKey: "i$zkms5nlgp0g3$1",
           },
           operatorToken: "=",
           right: {
-            kind: 227,
+            kind: "binop",
             loc: [6, 30, 6, 35],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [6, 30, 6, 31],
               text: "i",
               bindingKey: "i$zkms5nlgp0g3$1",
             },
             operatorToken: "+",
             right: {
-              kind: 9,
+              kind: "number",
               loc: [6, 34, 6, 35],
               value: 1,
             },
           },
         },
         statement: {
-          kind: 242,
+          kind: "{}",
           loc: [6, 37, 8, 4],
           statements: [
             {
-              kind: 227,
+              kind: "binop",
               loc: [7, 5, 7, 22],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [7, 5, 7, 10],
                 text: "total",
                 bindingKey: "total$zkms5nlgp0g3$0",
               },
               operatorToken: "=",
               right: {
-                kind: 227,
+                kind: "binop",
                 loc: [7, 13, 7, 22],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [7, 13, 7, 18],
                   text: "total",
                   bindingKey: "total$zkms5nlgp0g3$0",
                 },
                 operatorToken: "+",
                 right: {
-                  kind: 80,
+                  kind: "id",
                   loc: [7, 21, 7, 22],
                   text: "i",
                   bindingKey: "i$zkms5nlgp0g3$1",
@@ -143,10 +125,10 @@ export default cs.create(
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [9, 3, 9, 16],
         expression: {
-          kind: 80,
+          kind: "id",
           loc: [9, 10, 9, 15],
           text: "total",
           bindingKey: "total$zkms5nlgp0g3$0",

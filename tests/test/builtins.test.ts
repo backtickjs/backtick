@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { type ClientValue } from "@backtickjs/core";
-import { NodeKind, type Bundle } from "@backtickjs/bundler";
+import { type Bundle } from "@backtickjs/bundler";
 import { schema } from "@backtickjs/language-schema/schema";
 import { getters, globals } from "@backtickjs/js-interpreter";
 import { evaluate, testHost } from "./test-client/index.ts";
@@ -94,21 +94,21 @@ describe("a member the schema leaves out", () => {
     functions: {
       "0": [
         [
-          NodeKind.ArrowFunction,
+          "=>",
           [],
           [
-            NodeKind.Block,
+            "{}",
             [
               [
-                NodeKind.ReturnStatement,
-                [NodeKind.PropertyAccessExpression, "abc", false, "padStart"],
+                "return",
+                [".", "abc", "padStart"],
               ],
             ],
           ],
         ],
       ],
     },
-    root: [NodeKind.ApplyFunction, "0", []],
+    root: ["fn()", "0", []],
   };
 
   it("is a name this language has no meaning for", () => {
@@ -131,17 +131,16 @@ describe("a name a target answers for", () => {
     functions: {
       "0": [
         [
-          NodeKind.ArrowFunction,
+          "=>",
           [],
           [
-            NodeKind.Block,
+            "{}",
             [
               [
-                NodeKind.ReturnStatement,
+                "return",
                 [
-                  NodeKind.CallExpression,
-                  [NodeKind.Builtin, "greet"],
-                  false,
+                  "()",
+                  ["bltn", "greet"],
                   [],
                 ],
               ],
@@ -150,7 +149,7 @@ describe("a name a target answers for", () => {
         ],
       ],
     },
-    root: [NodeKind.ApplyFunction, "0", []],
+    root: ["fn()", "0", []],
   };
 
   it("is answered by the table its target handed over", () => {
@@ -172,22 +171,20 @@ describe("a name a target answers for", () => {
       functions: {
         "0": [
           [
-            NodeKind.ArrowFunction,
+            "=>",
             [],
             [
-              NodeKind.Block,
+              "{}",
               [
                 [
-                  NodeKind.ReturnStatement,
+                  "return",
                   [
-                    NodeKind.CallExpression,
+                    "()",
                     [
-                      NodeKind.PropertyAccessExpression,
-                      [NodeKind.Builtin, "storage"],
-                      false,
+                      ".",
+                      ["bltn", "storage"],
                       "get",
                     ],
-                    false,
                     ["greeting"],
                   ],
                 ],
@@ -196,7 +193,7 @@ describe("a name a target answers for", () => {
           ],
         ],
       },
-      root: [NodeKind.ApplyFunction, "0", []],
+      root: ["fn()", "0", []],
     };
     const storage = { greeting: "hei" } as Record<string, string>;
     assert.equal(
@@ -228,21 +225,21 @@ describe("a name a target answers for", () => {
       functions: {
         "0": [
           [
-            NodeKind.ArrowFunction,
+            "=>",
             [],
             [
-              NodeKind.Block,
+              "{}",
               [
                 [
-                  NodeKind.ReturnStatement,
-                  [NodeKind.PropertyAccessExpression, "abc", false, "padStart"],
+                  "return",
+                  [".", "abc", "padStart"],
                 ],
               ],
             ],
           ],
         ],
       },
-      root: [NodeKind.ApplyFunction, "0", []],
+      root: ["fn()", "0", []],
     };
     assert.throws(
       () => evaluate(padded, testHost, { "string.padStart": (self) => self }),

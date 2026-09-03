@@ -1,13 +1,13 @@
 import { cs } from "@backtickjs/core";
-import { NodeKind } from "@backtickjs/bundler";
+import { version } from "@backtickjs/boundary";
 // A host value that is imported and never mentioned outside a script.
 //
-// `NodeKind` appears once, as the `$NodeKind` splice below. That reference is
+// `version` appears once, as the `$version` splice below. That reference is
 // written by the transform, and TypeScript decides whether an import is used
 // before any transform runs — from the source it was handed, where the only
 // mention is inside a template literal. So the import is a candidate for
 // elision, and if it is elided the emitted module throws
-// `NodeKind is not defined` the moment the script is bundled.
+// `version is not defined` the moment the script is bundled.
 //
 // What keeps it is `verbatimModuleSyntax`, which every tsconfig in this repo
 // sets (`configs/tsconfig.base.json`, and each example's own). This fixture is
@@ -15,41 +15,19 @@ import { NodeKind } from "@backtickjs/bundler";
 // `.js` snapshot beside it carries the import, and the `.bundle` snapshot
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
-// spliced numbers themselves — `Element` is 0 and `ArrayLiteralExpression` is 4.
+// spliced value itself.
 export default cs.create(
-  [20, 16, 20, 72],
+  [20, 16, 20, 28],
   {
     version: "0.0.0",
     filePath: "splice-imported-value.tsx",
-    fileHash: "3dq5ahavbd0tu",
-    splices: { $NodeKind: { value: NodeKind, params: [] } },
+    fileHash: "2fejzm14n96gs",
+    splices: { $version: { value: version, params: [] } },
     captures: [],
   },
   () => ({
-    kind: 227,
-    loc: [20, 19, 20, 71],
-    left: {
-      kind: 212,
-      loc: [20, 19, 20, 36],
-      expression: {
-        kind: 1000,
-        loc: [20, 19, 20, 28],
-        key: "$NodeKind",
-      },
-      questionDotToken: false,
-      name: "Element",
-    },
-    operatorToken: "+",
-    right: {
-      kind: 212,
-      loc: [20, 39, 20, 71],
-      expression: {
-        kind: 1000,
-        loc: [20, 39, 20, 48],
-        key: "$NodeKind",
-      },
-      questionDotToken: false,
-      name: "ArrayLiteralExpression",
-    },
+    kind: "splice",
+    loc: [20, 19, 20, 27],
+    key: "$version",
   }),
 );

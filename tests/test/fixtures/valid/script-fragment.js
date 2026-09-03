@@ -16,14 +16,14 @@ const listed = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [9, 19, 16, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [9, 20, 9, 32],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [9, 20, 9, 24],
           text: "name",
           bindingKey: "name$eweogd4x2tuk$0",
@@ -31,49 +31,49 @@ const listed = cs.create(
       },
     ],
     body: {
-      kind: 210,
+      kind: "arr",
       loc: [10, 3, 15, 6],
       elements: [
         {
-          kind: 285,
+          kind: "jsx",
           loc: [11, 5, 11, 41],
           type: {
-            kind: 11,
+            kind: "string",
             loc: [11, 6, 11, 10],
             text: "span",
           },
           attributes: [],
           children: [
             {
-              kind: 11,
+              kind: "string",
               loc: [11, 11, 11, 34],
               text: "a sentence across lines",
             },
           ],
         },
         {
-          kind: 285,
+          kind: "jsx",
           loc: [12, 5, 14, 12],
           type: {
-            kind: 11,
+            kind: "string",
             loc: [12, 6, 12, 10],
             text: "span",
           },
           attributes: [],
           children: [
             {
-              kind: 80,
+              kind: "id",
               loc: [13, 8, 13, 12],
               text: "name",
               bindingKey: "name$eweogd4x2tuk$0",
             },
             {
-              kind: 11,
+              kind: "string",
               loc: [13, 14, 13, 14],
               text: " ",
             },
             {
-              kind: 80,
+              kind: "id",
               loc: [13, 15, 13, 19],
               text: "name",
               bindingKey: "name$eweogd4x2tuk$0",
@@ -95,17 +95,16 @@ export default _jsx("div", {
       captures: [],
     },
     () => ({
-      kind: 214,
+      kind: "()",
       loc: [18, 25, 18, 37],
       expression: {
-        kind: 1000,
+        kind: "splice",
         loc: [18, 25, 18, 32],
         key: "$listed",
       },
-      questionDotToken: false,
       arguments: [
         {
-          kind: 11,
+          kind: "string",
           loc: [18, 33, 18, 36],
           text: "x",
         },

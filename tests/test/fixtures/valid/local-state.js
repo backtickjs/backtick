@@ -15,55 +15,43 @@ async function Stepper() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [8, 13, 20, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [9, 5, 9, 29],
-          declarationList: {
-            kind: 262,
-            loc: [9, 5, 9, 28],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [9, 11, 9, 15],
+            text: "size",
+            bindingKey: "size$39pqlt8105c5f$0",
+          },
+          initializer: {
+            kind: "()",
+            loc: [9, 18, 9, 28],
+            expression: {
+              kind: "splice",
+              loc: [9, 18, 9, 24],
+              key: "$state",
+            },
+            arguments: [
               {
-                kind: 261,
-                loc: [9, 11, 9, 28],
-                name: {
-                  kind: 80,
-                  loc: [9, 11, 9, 15],
-                  text: "size",
-                  bindingKey: "size$39pqlt8105c5f$0",
-                },
-                initializer: {
-                  kind: 214,
-                  loc: [9, 18, 9, 28],
-                  expression: {
-                    kind: 1000,
-                    loc: [9, 18, 9, 24],
-                    key: "$state",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 9,
-                      loc: [9, 25, 9, 27],
-                      value: 16,
-                    },
-                  ],
-                },
+                kind: "number",
+                loc: [9, 25, 9, 27],
+                value: 16,
               },
             ],
-            keyword: "const",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [10, 5, 19, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [11, 7, 18, 14],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [11, 8, 11, 12],
               text: "span",
             },
@@ -71,39 +59,37 @@ async function Stepper() {
               {
                 name: "style",
                 initializer: {
-                  kind: 227,
+                  kind: "binop",
                   loc: [12, 16, 12, 50],
                   left: {
-                    kind: 227,
+                    kind: "binop",
                     loc: [12, 16, 12, 43],
                     left: {
-                      kind: 11,
+                      kind: "string",
                       loc: [12, 16, 12, 29],
                       text: "font-size: ",
                     },
                     operatorToken: "+",
                     right: {
-                      kind: 214,
+                      kind: "()",
                       loc: [12, 32, 12, 43],
                       expression: {
-                        kind: 212,
+                        kind: ".",
                         loc: [12, 32, 12, 41],
                         expression: {
-                          kind: 80,
+                          kind: "id",
                           loc: [12, 32, 12, 36],
                           text: "size",
                           bindingKey: "size$39pqlt8105c5f$0",
                         },
-                        questionDotToken: false,
                         name: "read",
                       },
-                      questionDotToken: false,
                       arguments: [],
                     },
                   },
                   operatorToken: "+",
                   right: {
-                    kind: 11,
+                    kind: "string",
                     loc: [12, 46, 12, 50],
                     text: "px",
                   },
@@ -112,54 +98,50 @@ async function Stepper() {
               {
                 name: "onclick",
                 initializer: {
-                  kind: 220,
+                  kind: "=>",
                   loc: [13, 18, 15, 10],
                   parameters: [],
                   body: {
-                    kind: 242,
+                    kind: "{}",
                     loc: [13, 24, 15, 10],
                     statements: [
                       {
-                        kind: 214,
+                        kind: "()",
                         loc: [14, 11, 14, 38],
                         expression: {
-                          kind: 212,
+                          kind: ".",
                           loc: [14, 11, 14, 21],
                           expression: {
-                            kind: 80,
+                            kind: "id",
                             loc: [14, 11, 14, 15],
                             text: "size",
                             bindingKey: "size$39pqlt8105c5f$0",
                           },
-                          questionDotToken: false,
                           name: "write",
                         },
-                        questionDotToken: false,
                         arguments: [
                           {
-                            kind: 227,
+                            kind: "binop",
                             loc: [14, 22, 14, 37],
                             left: {
-                              kind: 214,
+                              kind: "()",
                               loc: [14, 22, 14, 33],
                               expression: {
-                                kind: 212,
+                                kind: ".",
                                 loc: [14, 22, 14, 31],
                                 expression: {
-                                  kind: 80,
+                                  kind: "id",
                                   loc: [14, 22, 14, 26],
                                   text: "size",
                                   bindingKey: "size$39pqlt8105c5f$0",
                                 },
-                                questionDotToken: false,
                                 name: "read",
                               },
-                              questionDotToken: false,
                               arguments: [],
                             },
                             operatorToken: "+",
                             right: {
-                              kind: 9,
+                              kind: "number",
                               loc: [14, 36, 14, 37],
                               value: 1,
                             },
@@ -173,7 +155,7 @@ async function Stepper() {
             ],
             children: [
               {
-                kind: 11,
+                kind: "string",
                 loc: [17, 9, 18, 7],
                 text: "press",
               },

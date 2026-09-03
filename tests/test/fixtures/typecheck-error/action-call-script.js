@@ -12,37 +12,26 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [6, 17, 8, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [6, 23, 8, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [7, 3, 7, 15],
-          declarationList: {
-            kind: 262,
-            loc: [7, 3, 7, 14],
-            declarations: [
-              {
-                kind: 261,
-                loc: [7, 9, 7, 14],
-                name: {
-                  kind: 80,
-                  loc: [7, 9, 7, 10],
-                  text: "x",
-                  bindingKey: "x$17wdcvct95tpn$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [7, 13, 7, 14],
-                  value: 1,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [7, 9, 7, 10],
+            text: "x",
+            bindingKey: "x$17wdcvct95tpn$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [7, 13, 7, 14],
+            value: 1,
           },
         },
       ],
@@ -59,14 +48,13 @@ export const called = cs.create(
     captures: [],
   },
   () => ({
-    kind: 214,
+    kind: "()",
     loc: [10, 26, 10, 33],
     expression: {
-      kind: 1000,
+      kind: "splice",
       loc: [10, 26, 10, 31],
       key: "$ping",
     },
-    questionDotToken: false,
     arguments: [],
   }),
 );
@@ -80,33 +68,22 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [12, 19, 14, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [13, 3, 13, 15],
-        declarationList: {
-          kind: 262,
-          loc: [13, 3, 13, 14],
-          declarations: [
-            {
-              kind: 261,
-              loc: [13, 9, 13, 14],
-              name: {
-                kind: 80,
-                loc: [13, 9, 13, 10],
-                text: "x",
-                bindingKey: "x$17wdcvct95tpn$1",
-              },
-              initializer: {
-                kind: 9,
-                loc: [13, 13, 13, 14],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [13, 9, 13, 10],
+          text: "x",
+          bindingKey: "x$17wdcvct95tpn$1",
+        },
+        initializer: {
+          kind: "number",
+          loc: [13, 13, 13, 14],
+          value: 1,
         },
       },
     ],
@@ -122,7 +99,7 @@ export const spliced = cs.create(
     captures: [],
   },
   () => ({
-    kind: 1000,
+    kind: "splice",
     loc: [16, 27, 16, 34],
     key: "$action",
   }),

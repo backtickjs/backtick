@@ -12,18 +12,18 @@ const getValue = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [6, 21, 8, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [6, 27, 8, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [7, 3, 7, 12],
           expression: {
-            kind: 9,
+            kind: "number",
             loc: [7, 10, 7, 11],
             value: 1,
           },
@@ -42,51 +42,40 @@ const ping = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [10, 17, 13, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [10, 23, 13, 2],
       statements: [
         {
-          kind: 244,
+          kind: "let",
           loc: [11, 3, 11, 13],
-          declarationList: {
-            kind: 262,
-            loc: [11, 3, 11, 12],
-            declarations: [
-              {
-                kind: 261,
-                loc: [11, 7, 11, 12],
-                name: {
-                  kind: 80,
-                  loc: [11, 7, 11, 8],
-                  text: "n",
-                  bindingKey: "n$2at3b932vh0hl$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [11, 11, 11, 12],
-                  value: 0,
-                },
-              },
-            ],
-            keyword: "let",
+          name: {
+            kind: "id",
+            loc: [11, 7, 11, 8],
+            text: "n",
+            bindingKey: "n$2at3b932vh0hl$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [11, 11, 11, 12],
+            value: 0,
           },
         },
         {
-          kind: 227,
+          kind: "binop",
           loc: [12, 3, 12, 8],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [12, 3, 12, 4],
             text: "n",
             bindingKey: "n$2at3b932vh0hl$0",
           },
           operatorToken: "=",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [12, 7, 12, 8],
             value: 1,
           },
@@ -108,29 +97,27 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [15, 19, 18, 2],
     statements: [
       {
-        kind: 214,
+        kind: "()",
         loc: [16, 3, 16, 10],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [16, 3, 16, 8],
           key: "$ping",
         },
-        questionDotToken: false,
         arguments: [],
       },
       {
-        kind: 214,
+        kind: "()",
         loc: [17, 3, 17, 14],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [17, 3, 17, 12],
           key: "$getValue",
         },
-        questionDotToken: false,
         arguments: [],
       },
     ],
@@ -151,36 +138,34 @@ const valued = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [22, 19, 26, 2],
     statements: [
       {
-        kind: 214,
+        kind: "()",
         loc: [23, 3, 23, 10],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [23, 3, 23, 8],
           key: "$ping",
         },
-        questionDotToken: false,
         arguments: [],
       },
       {
-        kind: 214,
+        kind: "()",
         loc: [24, 3, 24, 14],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [24, 3, 24, 12],
           key: "$getValue",
         },
-        questionDotToken: false,
         arguments: [],
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [25, 3, 25, 12],
         expression: {
-          kind: 9,
+          kind: "number",
           loc: [25, 10, 25, 11],
           value: 1,
         },

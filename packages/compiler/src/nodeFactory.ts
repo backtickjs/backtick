@@ -1,23 +1,23 @@
-import type { SourceLocation, SyntaxKind } from "@backtickjs/boundary";
+import type { ClientScriptKind, SourceLocation } from "@backtickjs/boundary";
 import type ts from "typescript";
 
-/** An AST node as the emitted code spells it: `{ kind: 246, … }`.
+/** An AST node as the emitted code spells it: `{ kind: "if", … }`.
  *
  * The compiler writes the bundler's AST directly, so the fields are named
  * rather than positional — a node gaining one is additive, where an argument
  * list gaining one shifts everything after it in code already compiled. The
- * kind goes as its number, which is TypeScript's own: `ts.SyntaxKind[246]`
- * reads back `IfStatement`. */
+ * kind goes as the word for it, which reads back without a table to look it
+ * up in. */
 export function astNode(
   ts: typeof import("typescript"),
-  kind: SyntaxKind,
+  kind: ClientScriptKind,
   fields: { [name: string]: ts.Expression },
 ): ts.ObjectLiteralExpression {
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
         "kind",
-        ts.factory.createNumericLiteral(kind),
+        ts.factory.createStringLiteral(kind),
       ),
       ...Object.entries(fields).map(([name, value]) =>
         ts.factory.createPropertyAssignment(name, value),

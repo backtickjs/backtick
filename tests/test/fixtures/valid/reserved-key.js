@@ -11,11 +11,11 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 19, 5, 44],
     parameters: [],
     body: {
-      kind: 1000,
+      kind: "splice",
       loc: [5, 25, 5, 44],
       key: "$0splice0",
     },

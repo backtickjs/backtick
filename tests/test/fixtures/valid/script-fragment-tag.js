@@ -16,55 +16,55 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [10, 19, 26, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [11, 3, 25, 5],
         expression: {
-          kind: 285,
+          kind: "jsx",
           loc: [12, 5, 24, 11],
           type: {
-            kind: 11,
+            kind: "string",
             loc: [12, 6, 12, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
-              kind: 210,
+              kind: "arr",
               loc: [14, 9, 17, 20],
               elements: [
                 {
-                  kind: 285,
+                  kind: "jsx",
                   loc: [15, 11, 15, 25],
                   type: {
-                    kind: 11,
+                    kind: "string",
                     loc: [15, 12, 15, 16],
                     text: "span",
                   },
                   attributes: [],
                   children: [
                     {
-                      kind: 11,
+                      kind: "string",
                       loc: [15, 17, 15, 18],
                       text: "a",
                     },
                   ],
                 },
                 {
-                  kind: 285,
+                  kind: "jsx",
                   loc: [16, 11, 16, 25],
                   type: {
-                    kind: 11,
+                    kind: "string",
                     loc: [16, 12, 16, 16],
                     text: "span",
                   },
                   attributes: [],
                   children: [
                     {
-                      kind: 11,
+                      kind: "string",
                       loc: [16, 17, 16, 18],
                       text: "b",
                     },
@@ -73,17 +73,17 @@ export default cs.create(
               ],
             },
             {
-              kind: 285,
+              kind: "jsx",
               loc: [21, 11, 21, 21],
               type: {
-                kind: 11,
+                kind: "string",
                 loc: [21, 12, 21, 14],
                 text: "em",
               },
               attributes: [],
               children: [
                 {
-                  kind: 11,
+                  kind: "string",
                   loc: [21, 15, 21, 16],
                   text: "c",
                 },

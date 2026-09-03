@@ -2,13 +2,13 @@
   "functions": {
     "0": [
       [
-        1005,
+        "=>",
         [],
         [
-          1005,
+          "=>",
           [],
           [
-            1006,
+            "{}",
             []
           ]
         ]
@@ -16,21 +16,21 @@
     ]
   },
   "root": [
-    0,
+    "el",
     "div",
     {
       "style": "padding: 8px"
     },
     [
-      1022,
+      "arr",
       [
         [
-          0,
+          "el",
           "span",
           {
             "style": "font-size: 12px",
             "onclick": [
-              2,
+              "fn()",
               "0",
               []
             ]
@@ -38,7 +38,7 @@
           "hi"
         ],
         [
-          0,
+          "el",
           "img",
           {
             "src": "https://example.com/a.png"

@@ -17,7 +17,7 @@ const flags = {
       captures: [],
     },
     () => ({
-      kind: 112,
+      kind: "true",
       loc: [10, 28, 10, 32],
     }),
   ),
@@ -32,24 +32,24 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [12, 75, 23, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [13, 3, 13, 22],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [13, 3, 13, 7],
           text: "text",
           bindingKey: "text$3ciy5yb38f51h$0",
         },
       },
       {
-        kind: 170,
+        kind: "param",
         loc: [14, 3, 14, 17],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [14, 3, 14, 8],
           text: "upper",
           bindingKey: "upper$3ciy5yb38f51h$1",
@@ -57,61 +57,59 @@ const label = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [15, 6, 23, 2],
       statements: [
         {
-          kind: 246,
+          kind: "if",
           loc: [16, 3, 18, 4],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [16, 7, 16, 29],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [16, 7, 16, 12],
               text: "upper",
               bindingKey: "upper$3ciy5yb38f51h$1",
             },
             operatorToken: "&&",
             right: {
-              kind: 227,
+              kind: "binop",
               loc: [16, 16, 16, 29],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [16, 16, 16, 20],
                 text: "text",
                 bindingKey: "text$3ciy5yb38f51h$0",
               },
               operatorToken: "!==",
               right: {
-                kind: 106,
+                kind: "null",
                 loc: [16, 25, 16, 29],
               },
             },
           },
           thenStatement: {
-            kind: 242,
+            kind: "{}",
             loc: [16, 31, 18, 4],
             statements: [
               {
-                kind: 254,
+                kind: "return",
                 loc: [17, 5, 17, 31],
                 expression: {
-                  kind: 214,
+                  kind: "()",
                   loc: [17, 12, 17, 30],
                   expression: {
-                    kind: 212,
+                    kind: ".",
                     loc: [17, 12, 17, 28],
                     expression: {
-                      kind: 80,
+                      kind: "id",
                       loc: [17, 12, 17, 16],
                       text: "text",
                       bindingKey: "text$3ciy5yb38f51h$0",
                     },
-                    questionDotToken: false,
                     name: "toUpperCase",
                   },
-                  questionDotToken: false,
                   arguments: [],
                 },
               },
@@ -120,59 +118,57 @@ const label = cs.create(
           elseStatement: null,
         },
         {
-          kind: 246,
+          kind: "if",
           loc: [19, 3, 21, 4],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [19, 7, 19, 65],
             left: {
-              kind: 227,
+              kind: "binop",
               loc: [19, 7, 19, 39],
               left: {
-                kind: 1000,
+                kind: "splice",
                 loc: [19, 7, 19, 22],
                 key: "$0splice0",
               },
               operatorToken: "&&",
               right: {
-                kind: 227,
+                kind: "binop",
                 loc: [19, 26, 19, 39],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [19, 26, 19, 30],
                   text: "text",
                   bindingKey: "text$3ciy5yb38f51h$0",
                 },
                 operatorToken: "!==",
                 right: {
-                  kind: 106,
+                  kind: "null",
                   loc: [19, 35, 19, 39],
                 },
               },
             },
             operatorToken: "&&",
             right: {
-              kind: 227,
+              kind: "binop",
               loc: [19, 43, 19, 65],
               left: {
-                kind: 214,
+                kind: "()",
                 loc: [19, 43, 19, 57],
                 expression: {
-                  kind: 212,
+                  kind: ".",
                   loc: [19, 43, 19, 54],
                   expression: {
-                    kind: 80,
+                    kind: "id",
                     loc: [19, 43, 19, 47],
                     text: "text",
                     bindingKey: "text$3ciy5yb38f51h$0",
                   },
-                  questionDotToken: false,
                   name: "charAt",
                 },
-                questionDotToken: false,
                 arguments: [
                   {
-                    kind: 9,
+                    kind: "number",
                     loc: [19, 55, 19, 56],
                     value: 0,
                   },
@@ -180,38 +176,36 @@ const label = cs.create(
               },
               operatorToken: "===",
               right: {
-                kind: 11,
+                kind: "string",
                 loc: [19, 62, 19, 65],
                 text: "!",
               },
             },
           },
           thenStatement: {
-            kind: 242,
+            kind: "{}",
             loc: [19, 67, 21, 4],
             statements: [
               {
-                kind: 254,
+                kind: "return",
                 loc: [20, 5, 20, 29],
                 expression: {
-                  kind: 214,
+                  kind: "()",
                   loc: [20, 12, 20, 28],
                   expression: {
-                    kind: 212,
+                    kind: ".",
                     loc: [20, 12, 20, 23],
                     expression: {
-                      kind: 80,
+                      kind: "id",
                       loc: [20, 12, 20, 16],
                       text: "text",
                       bindingKey: "text$3ciy5yb38f51h$0",
                     },
-                    questionDotToken: false,
                     name: "concat",
                   },
-                  questionDotToken: false,
                   arguments: [
                     {
-                      kind: 11,
+                      kind: "string",
                       loc: [20, 24, 20, 27],
                       text: "?",
                     },
@@ -223,10 +217,10 @@ const label = cs.create(
           elseStatement: null,
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [22, 3, 22, 17],
           expression: {
-            kind: 11,
+            kind: "string",
             loc: [22, 10, 22, 16],
             text: "none",
           },
@@ -245,107 +239,103 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [25, 20, 30, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [26, 3, 26, 30],
         name: "missing",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [26, 12, 26, 30],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [26, 12, 26, 18],
             key: "$label",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 106,
+              kind: "null",
               loc: [26, 19, 26, 23],
             },
             {
-              kind: 112,
+              kind: "true",
               loc: [26, 25, 26, 29],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [27, 3, 27, 28],
         name: "loud",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [27, 9, 27, 28],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [27, 9, 27, 15],
             key: "$label",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 11,
+              kind: "string",
               loc: [27, 16, 27, 21],
               text: "!hi",
             },
             {
-              kind: 112,
+              kind: "true",
               loc: [27, 23, 27, 27],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [28, 3, 28, 30],
         name: "quiet",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [28, 10, 28, 30],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [28, 10, 28, 16],
             key: "$label",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 11,
+              kind: "string",
               loc: [28, 17, 28, 22],
               text: "!hi",
             },
             {
-              kind: 97,
+              kind: "false",
               loc: [28, 24, 28, 29],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [29, 3, 29, 29],
         name: "plain",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [29, 10, 29, 29],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [29, 10, 29, 16],
             key: "$label",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 11,
+              kind: "string",
               loc: [29, 17, 29, 21],
               text: "zz",
             },
             {
-              kind: 97,
+              kind: "false",
               loc: [29, 23, 29, 28],
             },
           ],

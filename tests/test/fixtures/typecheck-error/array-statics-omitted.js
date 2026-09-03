@@ -12,21 +12,20 @@ export const tested = cs.create(
     captures: [],
   },
   () => ({
-    kind: 214,
+    kind: "()",
     loc: [6, 26, 6, 44],
     expression: {
-      kind: 1001,
+      kind: "bltn",
       loc: [6, 26, 6, 39],
       name: "Array.isArray",
     },
-    questionDotToken: false,
     arguments: [
       {
-        kind: 210,
+        kind: "arr",
         loc: [6, 40, 6, 43],
         elements: [
           {
-            kind: 9,
+            kind: "number",
             loc: [6, 41, 6, 42],
             value: 1,
           },
@@ -48,25 +47,24 @@ export const holes = cs.create(
     captures: [],
   },
   () => ({
-    kind: 214,
+    kind: "()",
     loc: [11, 25, 11, 50],
     expression: {
-      kind: 1001,
+      kind: "bltn",
       loc: [11, 25, 11, 35],
       name: "Array.from",
     },
-    questionDotToken: false,
     arguments: [
       {
-        kind: 211,
+        kind: "obj",
         loc: [11, 36, 11, 49],
         properties: [
           {
-            kind: 304,
+            kind: ":",
             loc: [11, 38, 11, 47],
             name: "length",
             initializer: {
-              kind: 9,
+              kind: "number",
               loc: [11, 46, 11, 47],
               value: 3,
             },

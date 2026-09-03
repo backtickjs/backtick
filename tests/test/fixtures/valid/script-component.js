@@ -28,27 +28,27 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [21, 19, 28, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [22, 3, 27, 5],
         expression: {
-          kind: 285,
+          kind: "jsx",
           loc: [23, 5, 26, 11],
           type: {
-            kind: 11,
+            kind: "string",
             loc: [23, 6, 23, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
-              kind: 285,
+              kind: "jsx",
               loc: [24, 7, 24, 30],
               type: {
-                kind: 1000,
+                kind: "splice",
                 loc: [24, 8, 24, 12],
                 key: "$Card",
               },
@@ -56,7 +56,7 @@ export default cs.create(
                 {
                   name: "title",
                   initializer: {
-                    kind: 11,
+                    kind: "string",
                     loc: [24, 19, 24, 27],
                     text: "totals",
                   },
@@ -65,10 +65,10 @@ export default cs.create(
               children: [],
             },
             {
-              kind: 285,
+              kind: "jsx",
               loc: [25, 7, 25, 16],
               type: {
-                kind: 1000,
+                kind: "splice",
                 loc: [25, 8, 25, 13],
                 key: "$Badge",
               },

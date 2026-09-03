@@ -20,105 +20,72 @@ function wrap(fragment) {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [14, 13, 19, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [15, 5, 15, 22],
-          declarationList: {
-            kind: 262,
-            loc: [15, 5, 15, 21],
-            declarations: [
-              {
-                kind: 261,
-                loc: [15, 11, 15, 21],
-                name: {
-                  kind: 80,
-                  loc: [15, 11, 15, 17],
-                  text: "before",
-                  bindingKey: "before$2r40h7jqt1118$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [15, 20, 15, 21],
-                  value: 1,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [15, 11, 15, 17],
+            text: "before",
+            bindingKey: "before$2r40h7jqt1118$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [15, 20, 15, 21],
+            value: 1,
           },
         },
         {
-          kind: 244,
+          kind: "const",
           loc: [16, 5, 16, 31],
-          declarationList: {
-            kind: 262,
-            loc: [16, 5, 16, 30],
-            declarations: [
-              {
-                kind: 261,
-                loc: [16, 11, 16, 30],
-                name: {
-                  kind: 80,
-                  loc: [16, 11, 16, 18],
-                  text: "spliced",
-                  bindingKey: "spliced$2r40h7jqt1118$1",
-                },
-                initializer: {
-                  kind: 1000,
-                  loc: [16, 21, 16, 30],
-                  key: "$fragment",
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [16, 11, 16, 18],
+            text: "spliced",
+            bindingKey: "spliced$2r40h7jqt1118$1",
+          },
+          initializer: {
+            kind: "splice",
+            loc: [16, 21, 16, 30],
+            key: "$fragment",
           },
         },
         {
-          kind: 244,
+          kind: "const",
           loc: [17, 5, 17, 21],
-          declarationList: {
-            kind: 262,
-            loc: [17, 5, 17, 20],
-            declarations: [
-              {
-                kind: 261,
-                loc: [17, 11, 17, 20],
-                name: {
-                  kind: 80,
-                  loc: [17, 11, 17, 16],
-                  text: "after",
-                  bindingKey: "after$2r40h7jqt1118$2",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [17, 19, 17, 20],
-                  value: 2,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [17, 11, 17, 16],
+            text: "after",
+            bindingKey: "after$2r40h7jqt1118$2",
+          },
+          initializer: {
+            kind: "number",
+            loc: [17, 19, 17, 20],
+            value: 2,
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [18, 5, 18, 37],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [18, 12, 18, 36],
             left: {
-              kind: 227,
+              kind: "binop",
               loc: [18, 12, 18, 28],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [18, 12, 18, 18],
                 text: "before",
                 bindingKey: "before$2r40h7jqt1118$0",
               },
               operatorToken: "+",
               right: {
-                kind: 80,
+                kind: "id",
                 loc: [18, 21, 18, 28],
                 text: "spliced",
                 bindingKey: "spliced$2r40h7jqt1118$1",
@@ -126,7 +93,7 @@ function wrap(fragment) {
             },
             operatorToken: "+",
             right: {
-              kind: 80,
+              kind: "id",
               loc: [18, 31, 18, 36],
               text: "after",
               bindingKey: "after$2r40h7jqt1118$2",
@@ -156,7 +123,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [22, 29, 22, 31],
               value: 10,
             }),
@@ -176,7 +143,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [22, 47, 22, 49],
               value: 20,
             }),
@@ -188,16 +155,16 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 227,
+    kind: "binop",
     loc: [22, 19, 22, 52],
     left: {
-      kind: 1000,
+      kind: "splice",
       loc: [22, 19, 22, 34],
       key: "$0splice0",
     },
     operatorToken: "+",
     right: {
-      kind: 1000,
+      kind: "splice",
       loc: [22, 37, 22, 52],
       key: "$0splice1",
     },

@@ -11,95 +11,71 @@ const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [5, 19, 9, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [6, 3, 6, 27],
-        declarationList: {
-          kind: 262,
-          loc: [6, 3, 6, 26],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [6, 9, 6, 14],
+          text: "coins",
+          bindingKey: "coins$3m6roaxdg127n$0",
+        },
+        initializer: {
+          kind: "arr",
+          loc: [6, 17, 6, 26],
+          elements: [
             {
-              kind: 261,
-              loc: [6, 9, 6, 26],
-              name: {
-                kind: 80,
-                loc: [6, 9, 6, 14],
-                text: "coins",
-                bindingKey: "coins$3m6roaxdg127n$0",
-              },
-              initializer: {
-                kind: 210,
-                loc: [6, 17, 6, 26],
-                elements: [
-                  {
-                    kind: 9,
-                    loc: [6, 18, 6, 19],
-                    value: 1,
-                  },
-                  {
-                    kind: 9,
-                    loc: [6, 21, 6, 22],
-                    value: 2,
-                  },
-                  {
-                    kind: 9,
-                    loc: [6, 24, 6, 25],
-                    value: 3,
-                  },
-                ],
-              },
+              kind: "number",
+              loc: [6, 18, 6, 19],
+              value: 1,
+            },
+            {
+              kind: "number",
+              loc: [6, 21, 6, 22],
+              value: 2,
+            },
+            {
+              kind: "number",
+              loc: [6, 24, 6, 25],
+              value: 3,
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 244,
+        kind: "const",
         loc: [7, 3, 7, 28],
-        declarationList: {
-          kind: 262,
-          loc: [7, 3, 7, 27],
-          declarations: [
-            {
-              kind: 261,
-              loc: [7, 9, 7, 27],
-              name: {
-                kind: 80,
-                loc: [7, 9, 7, 13],
-                text: "last",
-                bindingKey: "last$3m6roaxdg127n$1",
-              },
-              initializer: {
-                kind: 214,
-                loc: [7, 16, 7, 27],
-                expression: {
-                  kind: 212,
-                  loc: [7, 16, 7, 25],
-                  expression: {
-                    kind: 80,
-                    loc: [7, 16, 7, 21],
-                    text: "coins",
-                    bindingKey: "coins$3m6roaxdg127n$0",
-                  },
-                  questionDotToken: false,
-                  name: "pop",
-                },
-                questionDotToken: false,
-                arguments: [],
-              },
+        name: {
+          kind: "id",
+          loc: [7, 9, 7, 13],
+          text: "last",
+          bindingKey: "last$3m6roaxdg127n$1",
+        },
+        initializer: {
+          kind: "()",
+          loc: [7, 16, 7, 27],
+          expression: {
+            kind: ".",
+            loc: [7, 16, 7, 25],
+            expression: {
+              kind: "id",
+              loc: [7, 16, 7, 21],
+              text: "coins",
+              bindingKey: "coins$3m6roaxdg127n$0",
             },
-          ],
-          keyword: "const",
+            name: "pop",
+          },
+          arguments: [],
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [8, 3, 8, 12],
         expression: {
-          kind: 9,
+          kind: "number",
           loc: [8, 10, 8, 11],
           value: 1,
         },
@@ -117,65 +93,52 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [11, 19, 14, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [12, 3, 12, 24],
-        declarationList: {
-          kind: 262,
-          loc: [12, 3, 12, 23],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [12, 9, 12, 14],
+          text: "coins",
+          bindingKey: "coins$3m6roaxdg127n$2",
+        },
+        initializer: {
+          kind: "arr",
+          loc: [12, 17, 12, 23],
+          elements: [
             {
-              kind: 261,
-              loc: [12, 9, 12, 23],
-              name: {
-                kind: 80,
-                loc: [12, 9, 12, 14],
-                text: "coins",
-                bindingKey: "coins$3m6roaxdg127n$2",
-              },
-              initializer: {
-                kind: 210,
-                loc: [12, 17, 12, 23],
-                elements: [
-                  {
-                    kind: 9,
-                    loc: [12, 18, 12, 19],
-                    value: 1,
-                  },
-                  {
-                    kind: 9,
-                    loc: [12, 21, 12, 22],
-                    value: 2,
-                  },
-                ],
-              },
+              kind: "number",
+              loc: [12, 18, 12, 19],
+              value: 1,
+            },
+            {
+              kind: "number",
+              loc: [12, 21, 12, 22],
+              value: 2,
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 214,
+        kind: "()",
         loc: [13, 3, 13, 16],
         expression: {
-          kind: 212,
+          kind: ".",
           loc: [13, 3, 13, 13],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [13, 3, 13, 8],
             text: "coins",
             bindingKey: "coins$3m6roaxdg127n$2",
           },
-          questionDotToken: false,
           name: "push",
         },
-        questionDotToken: false,
         arguments: [
           {
-            kind: 9,
+            kind: "number",
             loc: [13, 14, 13, 15],
             value: 3,
           },

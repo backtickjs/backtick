@@ -13,16 +13,16 @@ function add(lhs, rhs) {
       captures: [],
     },
     () => ({
-      kind: 227,
+      kind: "binop",
       loc: [4, 13, 4, 24],
       left: {
-        kind: 1000,
+        kind: "splice",
         loc: [4, 13, 4, 17],
         key: "$lhs",
       },
       operatorToken: "+",
       right: {
-        kind: 1000,
+        kind: "splice",
         loc: [4, 20, 4, 24],
         key: "$rhs",
       },
@@ -48,7 +48,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [8, 15, 8, 16],
               value: 1,
             }),
@@ -63,7 +63,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [8, 22, 8, 23],
               value: 2,
             }),
@@ -83,7 +83,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [9, 15, 9, 16],
               value: 3,
             }),
@@ -98,7 +98,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [9, 22, 9, 23],
               value: 4,
             }),
@@ -110,25 +110,25 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [7, 20, 10, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [8, 3, 8, 26],
         name: "x",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [8, 6, 8, 26],
           key: "$0splice0",
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [9, 3, 9, 26],
         name: "y",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [9, 6, 9, 26],
           key: "$0splice1",
         },

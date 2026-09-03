@@ -11,21 +11,21 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [5, 19, 11, 2],
     statements: [
       {
-        kind: 259,
+        kind: "try",
         loc: [6, 3, 10, 4],
         tryBlock: {
-          kind: 242,
+          kind: "{}",
           loc: [6, 7, 8, 4],
           statements: [
             {
-              kind: 258,
+              kind: "throw",
               loc: [7, 5, 7, 18],
               expression: {
-                kind: 11,
+                kind: "string",
                 loc: [7, 11, 7, 17],
                 text: "boom",
               },
@@ -33,18 +33,18 @@ export default cs.create(
           ],
         },
         catchClause: {
-          kind: 300,
+          kind: "catch",
           loc: [8, 5, 10, 4],
           variableDeclaration: null,
           block: {
-            kind: 242,
+            kind: "{}",
             loc: [8, 11, 10, 4],
             statements: [
               {
-                kind: 254,
+                kind: "return",
                 loc: [9, 5, 9, 21],
                 expression: {
-                  kind: 11,
+                  kind: "string",
                   loc: [9, 12, 9, 20],
                   text: "caught",
                 },

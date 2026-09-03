@@ -16,14 +16,14 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [10, 19, 16, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [10, 20, 10, 33],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [10, 20, 10, 25],
           text: "count",
           bindingKey: "count$1yqqpc9g2l4nh$0",
@@ -31,88 +31,76 @@ export default cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [10, 38, 16, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [11, 3, 11, 36],
-          declarationList: {
-            kind: 262,
-            loc: [11, 3, 11, 35],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [11, 9, 11, 13],
+            text: "keep",
+            bindingKey: "keep$1yqqpc9g2l4nh$1",
+          },
+          initializer: {
+            kind: "=>",
+            loc: [11, 16, 11, 35],
+            parameters: [
               {
-                kind: 261,
-                loc: [11, 9, 11, 35],
+                kind: "param",
+                loc: [11, 17, 11, 28],
                 name: {
-                  kind: 80,
-                  loc: [11, 9, 11, 13],
-                  text: "keep",
-                  bindingKey: "keep$1yqqpc9g2l4nh$1",
-                },
-                initializer: {
-                  kind: 220,
-                  loc: [11, 16, 11, 35],
-                  parameters: [
-                    {
-                      kind: 170,
-                      loc: [11, 17, 11, 28],
-                      name: {
-                        kind: 80,
-                        loc: [11, 17, 11, 19],
-                        text: "on",
-                        bindingKey: "on$1yqqpc9g2l4nh$2",
-                      },
-                    },
-                  ],
-                  body: {
-                    kind: 80,
-                    loc: [11, 33, 11, 35],
-                    text: "on",
-                    bindingKey: "on$1yqqpc9g2l4nh$2",
-                  },
+                  kind: "id",
+                  loc: [11, 17, 11, 19],
+                  text: "on",
+                  bindingKey: "on$1yqqpc9g2l4nh$2",
                 },
               },
             ],
-            keyword: "const",
+            body: {
+              kind: "id",
+              loc: [11, 33, 11, 35],
+              text: "on",
+              bindingKey: "on$1yqqpc9g2l4nh$2",
+            },
           },
         },
         {
-          kind: 246,
+          kind: "if",
           loc: [12, 3, 14, 4],
           expression: {
-            kind: 214,
+            kind: "()",
             loc: [12, 7, 12, 31],
             expression: {
-              kind: 80,
+              kind: "id",
               loc: [12, 7, 12, 11],
               text: "keep",
               bindingKey: "keep$1yqqpc9g2l4nh$1",
             },
-            questionDotToken: false,
             arguments: [
               {
-                kind: 227,
+                kind: "binop",
                 loc: [12, 12, 12, 30],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [12, 12, 12, 17],
                   text: "count",
                   bindingKey: "count$1yqqpc9g2l4nh$0",
                 },
                 operatorToken: "&&",
                 right: {
-                  kind: 227,
+                  kind: "binop",
                   loc: [12, 21, 12, 30],
                   left: {
-                    kind: 80,
+                    kind: "id",
                     loc: [12, 21, 12, 26],
                     text: "count",
                     bindingKey: "count$1yqqpc9g2l4nh$0",
                   },
                   operatorToken: ">",
                   right: {
-                    kind: 9,
+                    kind: "number",
                     loc: [12, 29, 12, 30],
                     value: 0,
                   },
@@ -121,14 +109,14 @@ export default cs.create(
             ],
           },
           thenStatement: {
-            kind: 242,
+            kind: "{}",
             loc: [12, 33, 14, 4],
             statements: [
               {
-                kind: 254,
+                kind: "return",
                 loc: [13, 5, 13, 19],
                 expression: {
-                  kind: 11,
+                  kind: "string",
                   loc: [13, 12, 13, 18],
                   text: "kept",
                 },
@@ -138,10 +126,10 @@ export default cs.create(
           elseStatement: null,
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [15, 3, 15, 20],
           expression: {
-            kind: 11,
+            kind: "string",
             loc: [15, 10, 15, 19],
             text: "dropped",
           },

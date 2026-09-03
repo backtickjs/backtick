@@ -16,38 +16,36 @@ const Counter = async ({ size }) =>
         captures: [],
       },
       () => ({
-        kind: 227,
+        kind: "binop",
         loc: [10, 15, 10, 50],
         left: {
-          kind: 227,
+          kind: "binop",
           loc: [10, 15, 10, 43],
           left: {
-            kind: 11,
+            kind: "string",
             loc: [10, 15, 10, 28],
             text: "font-size: ",
           },
           operatorToken: "+",
           right: {
-            kind: 214,
+            kind: "()",
             loc: [10, 31, 10, 43],
             expression: {
-              kind: 212,
+              kind: ".",
               loc: [10, 31, 10, 41],
               expression: {
-                kind: 1000,
+                kind: "splice",
                 loc: [10, 31, 10, 36],
                 key: "$size",
               },
-              questionDotToken: false,
               name: "read",
             },
-            questionDotToken: false,
             arguments: [],
           },
         },
         operatorToken: "+",
         right: {
-          kind: 11,
+          kind: "string",
           loc: [10, 46, 10, 50],
           text: "px",
         },
@@ -63,52 +61,48 @@ const Counter = async ({ size }) =>
         captures: [],
       },
       () => ({
-        kind: 220,
+        kind: "=>",
         loc: [11, 17, 13, 6],
         parameters: [],
         body: {
-          kind: 242,
+          kind: "{}",
           loc: [11, 23, 13, 6],
           statements: [
             {
-              kind: 214,
+              kind: "()",
               loc: [12, 7, 12, 36],
               expression: {
-                kind: 212,
+                kind: ".",
                 loc: [12, 7, 12, 18],
                 expression: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [12, 7, 12, 12],
                   key: "$size",
                 },
-                questionDotToken: false,
                 name: "write",
               },
-              questionDotToken: false,
               arguments: [
                 {
-                  kind: 227,
+                  kind: "binop",
                   loc: [12, 19, 12, 35],
                   left: {
-                    kind: 214,
+                    kind: "()",
                     loc: [12, 19, 12, 31],
                     expression: {
-                      kind: 212,
+                      kind: ".",
                       loc: [12, 19, 12, 29],
                       expression: {
-                        kind: 1000,
+                        kind: "splice",
                         loc: [12, 19, 12, 24],
                         key: "$size",
                       },
-                      questionDotToken: false,
                       name: "read",
                     },
-                    questionDotToken: false,
                     arguments: [],
                   },
                   operatorToken: "+",
                   right: {
-                    kind: 9,
+                    kind: "number",
                     loc: [12, 34, 12, 35],
                     value: 1,
                   },
@@ -135,65 +129,53 @@ async function Panel() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [20, 13, 28, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [21, 5, 21, 29],
-          declarationList: {
-            kind: 262,
-            loc: [21, 5, 21, 28],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [21, 11, 21, 15],
+            text: "size",
+            bindingKey: "size$1azh7gya00tyi$0",
+          },
+          initializer: {
+            kind: "()",
+            loc: [21, 18, 21, 28],
+            expression: {
+              kind: "splice",
+              loc: [21, 18, 21, 24],
+              key: "$state",
+            },
+            arguments: [
               {
-                kind: 261,
-                loc: [21, 11, 21, 28],
-                name: {
-                  kind: 80,
-                  loc: [21, 11, 21, 15],
-                  text: "size",
-                  bindingKey: "size$1azh7gya00tyi$0",
-                },
-                initializer: {
-                  kind: 214,
-                  loc: [21, 18, 21, 28],
-                  expression: {
-                    kind: 1000,
-                    loc: [21, 18, 21, 24],
-                    key: "$state",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 9,
-                      loc: [21, 25, 21, 27],
-                      value: 16,
-                    },
-                  ],
-                },
+                kind: "number",
+                loc: [21, 25, 21, 27],
+                value: 16,
               },
             ],
-            keyword: "const",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [22, 5, 27, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [23, 7, 26, 13],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [23, 8, 23, 11],
               text: "div",
             },
             attributes: [],
             children: [
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [24, 9, 24, 32],
                 type: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [24, 10, 24, 17],
                   key: "$Counter",
                 },
@@ -201,7 +183,7 @@ async function Panel() {
                   {
                     name: "size",
                     initializer: {
-                      kind: 80,
+                      kind: "id",
                       loc: [24, 24, 24, 28],
                       text: "size",
                       bindingKey: "size$1azh7gya00tyi$0",
@@ -211,10 +193,10 @@ async function Panel() {
                 children: [],
               },
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [25, 9, 25, 32],
                 type: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [25, 10, 25, 17],
                   key: "$Counter",
                 },
@@ -222,7 +204,7 @@ async function Panel() {
                   {
                     name: "size",
                     initializer: {
-                      kind: 80,
+                      kind: "id",
                       loc: [25, 24, 25, 28],
                       text: "size",
                       bindingKey: "size$1azh7gya00tyi$0",

@@ -11,14 +11,14 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 19, 11, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [5, 20, 5, 29],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [5, 20, 5, 21],
           text: "n",
           bindingKey: "n$22k8zyijhbub1$0",
@@ -26,71 +26,60 @@ export default cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [5, 34, 11, 2],
       statements: [
         {
-          kind: 244,
+          kind: "let",
           loc: [6, 3, 6, 16],
-          declarationList: {
-            kind: 262,
-            loc: [6, 3, 6, 15],
-            declarations: [
-              {
-                kind: 261,
-                loc: [6, 7, 6, 15],
-                name: {
-                  kind: 80,
-                  loc: [6, 7, 6, 11],
-                  text: "left",
-                  bindingKey: "left$22k8zyijhbub1$1",
-                },
-                initializer: {
-                  kind: 80,
-                  loc: [6, 14, 6, 15],
-                  text: "n",
-                  bindingKey: "n$22k8zyijhbub1$0",
-                },
-              },
-            ],
-            keyword: "let",
+          name: {
+            kind: "id",
+            loc: [6, 7, 6, 11],
+            text: "left",
+            bindingKey: "left$22k8zyijhbub1$1",
+          },
+          initializer: {
+            kind: "id",
+            loc: [6, 14, 6, 15],
+            text: "n",
+            bindingKey: "n$22k8zyijhbub1$0",
           },
         },
         {
-          kind: 248,
+          kind: "while",
           loc: [7, 3, 9, 4],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [7, 10, 7, 14],
             text: "left",
             bindingKey: "left$22k8zyijhbub1$1",
           },
           statement: {
-            kind: 242,
+            kind: "{}",
             loc: [7, 16, 9, 4],
             statements: [
               {
-                kind: 227,
+                kind: "binop",
                 loc: [8, 5, 8, 20],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [8, 5, 8, 9],
                   text: "left",
                   bindingKey: "left$22k8zyijhbub1$1",
                 },
                 operatorToken: "=",
                 right: {
-                  kind: 227,
+                  kind: "binop",
                   loc: [8, 12, 8, 20],
                   left: {
-                    kind: 80,
+                    kind: "id",
                     loc: [8, 12, 8, 16],
                     text: "left",
                     bindingKey: "left$22k8zyijhbub1$1",
                   },
                   operatorToken: "-",
                   right: {
-                    kind: 9,
+                    kind: "number",
                     loc: [8, 19, 8, 20],
                     value: 1,
                   },
@@ -100,10 +89,10 @@ export default cs.create(
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [10, 3, 10, 15],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [10, 10, 10, 14],
             text: "left",
             bindingKey: "left$22k8zyijhbub1$1",

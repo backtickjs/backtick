@@ -12,7 +12,7 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 1000,
+    kind: "splice",
     loc: [7, 19, 7, 25],
     key: "$value",
   }),

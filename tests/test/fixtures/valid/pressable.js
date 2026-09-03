@@ -14,55 +14,43 @@ async function Row() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [7, 13, 19, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [8, 5, 8, 29],
-          declarationList: {
-            kind: 262,
-            loc: [8, 5, 8, 28],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [8, 11, 8, 16],
+            text: "count",
+            bindingKey: "count$atpxodpi731m$0",
+          },
+          initializer: {
+            kind: "()",
+            loc: [8, 19, 8, 28],
+            expression: {
+              kind: "splice",
+              loc: [8, 19, 8, 25],
+              key: "$state",
+            },
+            arguments: [
               {
-                kind: 261,
-                loc: [8, 11, 8, 28],
-                name: {
-                  kind: 80,
-                  loc: [8, 11, 8, 16],
-                  text: "count",
-                  bindingKey: "count$atpxodpi731m$0",
-                },
-                initializer: {
-                  kind: 214,
-                  loc: [8, 19, 8, 28],
-                  expression: {
-                    kind: 1000,
-                    loc: [8, 19, 8, 25],
-                    key: "$state",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 9,
-                      loc: [8, 26, 8, 27],
-                      value: 0,
-                    },
-                  ],
-                },
+                kind: "number",
+                loc: [8, 26, 8, 27],
+                value: 0,
               },
             ],
-            keyword: "const",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [9, 5, 18, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [10, 7, 17, 16],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [10, 8, 10, 14],
               text: "button",
             },
@@ -70,7 +58,7 @@ async function Row() {
               {
                 name: "id",
                 initializer: {
-                  kind: 11,
+                  kind: "string",
                   loc: [11, 12, 11, 17],
                   text: "row",
                 },
@@ -78,7 +66,7 @@ async function Row() {
               {
                 name: "style",
                 initializer: {
-                  kind: 11,
+                  kind: "string",
                   loc: [12, 15, 12, 40],
                   text: "display: flex; gap: 8px",
                 },
@@ -86,50 +74,46 @@ async function Row() {
               {
                 name: "onclick",
                 initializer: {
-                  kind: 220,
+                  kind: "=>",
                   loc: [13, 18, 13, 53],
                   parameters: [],
                   body: {
-                    kind: 214,
+                    kind: "()",
                     loc: [13, 24, 13, 53],
                     expression: {
-                      kind: 212,
+                      kind: ".",
                       loc: [13, 24, 13, 35],
                       expression: {
-                        kind: 80,
+                        kind: "id",
                         loc: [13, 24, 13, 29],
                         text: "count",
                         bindingKey: "count$atpxodpi731m$0",
                       },
-                      questionDotToken: false,
                       name: "write",
                     },
-                    questionDotToken: false,
                     arguments: [
                       {
-                        kind: 227,
+                        kind: "binop",
                         loc: [13, 36, 13, 52],
                         left: {
-                          kind: 214,
+                          kind: "()",
                           loc: [13, 36, 13, 48],
                           expression: {
-                            kind: 212,
+                            kind: ".",
                             loc: [13, 36, 13, 46],
                             expression: {
-                              kind: 80,
+                              kind: "id",
                               loc: [13, 36, 13, 41],
                               text: "count",
                               bindingKey: "count$atpxodpi731m$0",
                             },
-                            questionDotToken: false,
                             name: "read",
                           },
-                          questionDotToken: false,
                           arguments: [],
                         },
                         operatorToken: "+",
                         right: {
-                          kind: 9,
+                          kind: "number",
                           loc: [13, 51, 13, 52],
                           value: 1,
                         },
@@ -141,10 +125,10 @@ async function Row() {
             ],
             children: [
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [15, 9, 15, 77],
                 type: {
-                  kind: 11,
+                  kind: "string",
                   loc: [15, 10, 15, 14],
                   text: "span",
                 },
@@ -152,7 +136,7 @@ async function Row() {
                   {
                     name: "style",
                     initializer: {
-                      kind: 11,
+                      kind: "string",
                       loc: [15, 21, 15, 39],
                       text: "font-weight: 700",
                     },
@@ -160,43 +144,41 @@ async function Row() {
                 ],
                 children: [
                   {
-                    kind: 228,
+                    kind: "?:",
                     loc: [15, 41, 15, 69],
                     condition: {
-                      kind: 227,
+                      kind: "binop",
                       loc: [15, 41, 15, 57],
                       left: {
-                        kind: 214,
+                        kind: "()",
                         loc: [15, 41, 15, 53],
                         expression: {
-                          kind: 212,
+                          kind: ".",
                           loc: [15, 41, 15, 51],
                           expression: {
-                            kind: 80,
+                            kind: "id",
                             loc: [15, 41, 15, 46],
                             text: "count",
                             bindingKey: "count$atpxodpi731m$0",
                           },
-                          questionDotToken: false,
                           name: "read",
                         },
-                        questionDotToken: false,
                         arguments: [],
                       },
                       operatorToken: ">",
                       right: {
-                        kind: 9,
+                        kind: "number",
                         loc: [15, 56, 15, 57],
                         value: 0,
                       },
                     },
                     whenTrue: {
-                      kind: 11,
+                      kind: "string",
                       loc: [15, 60, 15, 63],
                       text: "\u2611",
                     },
                     whenFalse: {
-                      kind: 11,
+                      kind: "string",
                       loc: [15, 66, 15, 69],
                       text: "\u2610",
                     },
@@ -204,49 +186,47 @@ async function Row() {
                 ],
               },
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [16, 9, 16, 60],
                 type: {
-                  kind: 11,
+                  kind: "string",
                   loc: [16, 10, 16, 14],
                   text: "span",
                 },
                 attributes: [],
                 children: [
                   {
-                    kind: 227,
+                    kind: "binop",
                     loc: [16, 16, 16, 52],
                     left: {
-                      kind: 227,
+                      kind: "binop",
                       loc: [16, 16, 16, 41],
                       left: {
-                        kind: 11,
+                        kind: "string",
                         loc: [16, 16, 16, 26],
                         text: "pressed ",
                       },
                       operatorToken: "+",
                       right: {
-                        kind: 214,
+                        kind: "()",
                         loc: [16, 29, 16, 41],
                         expression: {
-                          kind: 212,
+                          kind: ".",
                           loc: [16, 29, 16, 39],
                           expression: {
-                            kind: 80,
+                            kind: "id",
                             loc: [16, 29, 16, 34],
                             text: "count",
                             bindingKey: "count$atpxodpi731m$0",
                           },
-                          questionDotToken: false,
                           name: "read",
                         },
-                        questionDotToken: false,
                         arguments: [],
                       },
                     },
                     operatorToken: "+",
                     right: {
-                      kind: 11,
+                      kind: "string",
                       loc: [16, 44, 16, 52],
                       text: " times",
                     },

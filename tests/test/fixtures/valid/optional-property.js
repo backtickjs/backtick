@@ -12,14 +12,14 @@ const read = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [6, 17, 8, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [6, 18, 6, 62],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [6, 18, 6, 19],
           text: "o",
           bindingKey: "o$10vcjd80vhoob$0",
@@ -27,52 +27,49 @@ const read = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [6, 67, 8, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [7, 3, 7, 37],
           expression: {
-            kind: 210,
+            kind: "arr",
             loc: [7, 10, 7, 36],
             elements: [
               {
-                kind: 212,
+                kind: ".",
                 loc: [7, 11, 7, 18],
                 expression: {
-                  kind: 80,
+                  kind: "id",
                   loc: [7, 11, 7, 12],
                   text: "o",
                   bindingKey: "o$10vcjd80vhoob$0",
                 },
-                questionDotToken: false,
                 name: "label",
               },
               {
-                kind: 227,
+                kind: "binop",
                 loc: [7, 20, 7, 35],
                 left: {
-                  kind: 212,
+                  kind: "?.",
                   loc: [7, 20, 7, 30],
                   expression: {
-                    kind: 212,
+                    kind: ".",
                     loc: [7, 20, 7, 27],
                     expression: {
-                      kind: 80,
+                      kind: "id",
                       loc: [7, 20, 7, 21],
                       text: "o",
                       bindingKey: "o$10vcjd80vhoob$0",
                     },
-                    questionDotToken: false,
                     name: "inner",
                   },
-                  questionDotToken: true,
                   name: "z",
                 },
                 operatorToken: "??",
                 right: {
-                  kind: 9,
+                  kind: "number",
                   loc: [7, 34, 7, 35],
                   value: 0,
                 },
@@ -94,51 +91,50 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [10, 20, 14, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [11, 3, 11, 50],
         name: "present",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [11, 12, 11, 50],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [11, 12, 11, 17],
             key: "$read",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 211,
+              kind: "obj",
               loc: [11, 18, 11, 49],
               properties: [
                 {
-                  kind: 304,
+                  kind: ":",
                   loc: [11, 20, 11, 30],
                   name: "label",
                   initializer: {
-                    kind: 11,
+                    kind: "string",
                     loc: [11, 27, 11, 30],
                     text: "a",
                   },
                 },
                 {
-                  kind: 304,
+                  kind: ":",
                   loc: [11, 32, 11, 47],
                   name: "inner",
                   initializer: {
-                    kind: 211,
+                    kind: "obj",
                     loc: [11, 39, 11, 47],
                     properties: [
                       {
-                        kind: 304,
+                        kind: ":",
                         loc: [11, 41, 11, 45],
                         name: "z",
                         initializer: {
-                          kind: 9,
+                          kind: "number",
                           loc: [11, 44, 11, 45],
                           value: 3,
                         },
@@ -152,39 +148,38 @@ export default cs.create(
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [12, 3, 12, 44],
         name: "partial",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [12, 12, 12, 44],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [12, 12, 12, 17],
             key: "$read",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 211,
+              kind: "obj",
               loc: [12, 18, 12, 43],
               properties: [
                 {
-                  kind: 304,
+                  kind: ":",
                   loc: [12, 20, 12, 30],
                   name: "label",
                   initializer: {
-                    kind: 11,
+                    kind: "string",
                     loc: [12, 27, 12, 30],
                     text: "b",
                   },
                 },
                 {
-                  kind: 304,
+                  kind: ":",
                   loc: [12, 32, 12, 41],
                   name: "inner",
                   initializer: {
-                    kind: 211,
+                    kind: "obj",
                     loc: [12, 39, 12, 41],
                     properties: [],
                   },
@@ -195,29 +190,28 @@ export default cs.create(
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [13, 3, 13, 33],
         name: "omitted",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [13, 12, 13, 33],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [13, 12, 13, 17],
             key: "$read",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 211,
+              kind: "obj",
               loc: [13, 18, 13, 32],
               properties: [
                 {
-                  kind: 304,
+                  kind: ":",
                   loc: [13, 20, 13, 30],
                   name: "label",
                   initializer: {
-                    kind: 11,
+                    kind: "string",
                     loc: [13, 27, 13, 30],
                     text: "c",
                   },

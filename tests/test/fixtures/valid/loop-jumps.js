@@ -12,132 +12,114 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [6, 19, 21, 2],
     statements: [
       {
-        kind: 244,
+        kind: "let",
         loc: [7, 3, 7, 16],
-        declarationList: {
-          kind: 262,
-          loc: [7, 3, 7, 15],
-          declarations: [
-            {
-              kind: 261,
-              loc: [7, 7, 7, 15],
-              name: {
-                kind: 80,
-                loc: [7, 7, 7, 10],
-                text: "out",
-                bindingKey: "out$owiuoxfingdr$0",
-              },
-              initializer: {
-                kind: 11,
-                loc: [7, 13, 7, 15],
-                text: "",
-              },
-            },
-          ],
-          keyword: "let",
+        name: {
+          kind: "id",
+          loc: [7, 7, 7, 10],
+          text: "out",
+          bindingKey: "out$owiuoxfingdr$0",
+        },
+        initializer: {
+          kind: "string",
+          loc: [7, 13, 7, 15],
+          text: "",
         },
       },
       {
-        kind: 249,
+        kind: "for",
         loc: [8, 3, 19, 4],
         initializer: {
-          kind: 262,
+          kind: "let",
           loc: [8, 8, 8, 17],
-          declarations: [
-            {
-              kind: 261,
-              loc: [8, 12, 8, 17],
-              name: {
-                kind: 80,
-                loc: [8, 12, 8, 13],
-                text: "i",
-                bindingKey: "i$owiuoxfingdr$1",
-              },
-              initializer: {
-                kind: 9,
-                loc: [8, 16, 8, 17],
-                value: 0,
-              },
-            },
-          ],
-          keyword: "let",
+          name: {
+            kind: "id",
+            loc: [8, 12, 8, 13],
+            text: "i",
+            bindingKey: "i$owiuoxfingdr$1",
+          },
+          initializer: {
+            kind: "number",
+            loc: [8, 16, 8, 17],
+            value: 0,
+          },
         },
         condition: {
-          kind: 227,
+          kind: "binop",
           loc: [8, 19, 8, 24],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [8, 19, 8, 20],
             text: "i",
             bindingKey: "i$owiuoxfingdr$1",
           },
           operatorToken: "<",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [8, 23, 8, 24],
             value: 5,
           },
         },
         incrementor: {
-          kind: 227,
+          kind: "binop",
           loc: [8, 26, 8, 35],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [8, 26, 8, 27],
             text: "i",
             bindingKey: "i$owiuoxfingdr$1",
           },
           operatorToken: "=",
           right: {
-            kind: 227,
+            kind: "binop",
             loc: [8, 30, 8, 35],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [8, 30, 8, 31],
               text: "i",
               bindingKey: "i$owiuoxfingdr$1",
             },
             operatorToken: "+",
             right: {
-              kind: 9,
+              kind: "number",
               loc: [8, 34, 8, 35],
               value: 1,
             },
           },
         },
         statement: {
-          kind: 242,
+          kind: "{}",
           loc: [8, 37, 19, 4],
           statements: [
             {
-              kind: 246,
+              kind: "if",
               loc: [9, 5, 11, 6],
               expression: {
-                kind: 227,
+                kind: "binop",
                 loc: [9, 9, 9, 16],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [9, 9, 9, 10],
                   text: "i",
                   bindingKey: "i$owiuoxfingdr$1",
                 },
                 operatorToken: "===",
                 right: {
-                  kind: 9,
+                  kind: "number",
                   loc: [9, 15, 9, 16],
                   value: 1,
                 },
               },
               thenStatement: {
-                kind: 242,
+                kind: "{}",
                 loc: [9, 18, 11, 6],
                 statements: [
                   {
-                    kind: 252,
+                    kind: "continue",
                     loc: [10, 7, 10, 16],
                   },
                 ],
@@ -145,38 +127,38 @@ export default cs.create(
               elseStatement: null,
             },
             {
-              kind: 248,
+              kind: "while",
               loc: [12, 5, 15, 6],
               expression: {
-                kind: 112,
+                kind: "true",
                 loc: [12, 12, 12, 16],
               },
               statement: {
-                kind: 242,
+                kind: "{}",
                 loc: [12, 18, 15, 6],
                 statements: [
                   {
-                    kind: 227,
+                    kind: "binop",
                     loc: [13, 7, 13, 20],
                     left: {
-                      kind: 80,
+                      kind: "id",
                       loc: [13, 7, 13, 10],
                       text: "out",
                       bindingKey: "out$owiuoxfingdr$0",
                     },
                     operatorToken: "=",
                     right: {
-                      kind: 227,
+                      kind: "binop",
                       loc: [13, 13, 13, 20],
                       left: {
-                        kind: 80,
+                        kind: "id",
                         loc: [13, 13, 13, 16],
                         text: "out",
                         bindingKey: "out$owiuoxfingdr$0",
                       },
                       operatorToken: "+",
                       right: {
-                        kind: 80,
+                        kind: "id",
                         loc: [13, 19, 13, 20],
                         text: "i",
                         bindingKey: "i$owiuoxfingdr$1",
@@ -184,37 +166,37 @@ export default cs.create(
                     },
                   },
                   {
-                    kind: 253,
+                    kind: "break",
                     loc: [14, 7, 14, 13],
                   },
                 ],
               },
             },
             {
-              kind: 246,
+              kind: "if",
               loc: [16, 5, 18, 6],
               expression: {
-                kind: 227,
+                kind: "binop",
                 loc: [16, 9, 16, 16],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [16, 9, 16, 10],
                   text: "i",
                   bindingKey: "i$owiuoxfingdr$1",
                 },
                 operatorToken: "===",
                 right: {
-                  kind: 9,
+                  kind: "number",
                   loc: [16, 15, 16, 16],
                   value: 3,
                 },
               },
               thenStatement: {
-                kind: 242,
+                kind: "{}",
                 loc: [16, 18, 18, 6],
                 statements: [
                   {
-                    kind: 253,
+                    kind: "break",
                     loc: [17, 7, 17, 13],
                   },
                 ],
@@ -225,10 +207,10 @@ export default cs.create(
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [20, 3, 20, 14],
         expression: {
-          kind: 80,
+          kind: "id",
           loc: [20, 10, 20, 13],
           text: "out",
           bindingKey: "out$owiuoxfingdr$0",

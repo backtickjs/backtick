@@ -9,14 +9,14 @@ const stored = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [14, 19, 17, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [14, 20, 14, 28],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [14, 20, 14, 21],
           text: "x",
           bindingKey: "x$vyh7jw6xunik$0",
@@ -24,41 +24,30 @@ const stored = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [14, 33, 17, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [15, 3, 15, 15],
-          declarationList: {
-            kind: 262,
-            loc: [15, 3, 15, 14],
-            declarations: [
-              {
-                kind: 261,
-                loc: [15, 9, 15, 14],
-                name: {
-                  kind: 80,
-                  loc: [15, 9, 15, 10],
-                  text: "y",
-                  bindingKey: "y$vyh7jw6xunik$1",
-                },
-                initializer: {
-                  kind: 80,
-                  loc: [15, 13, 15, 14],
-                  text: "x",
-                  bindingKey: "x$vyh7jw6xunik$0",
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [15, 9, 15, 10],
+            text: "y",
+            bindingKey: "y$vyh7jw6xunik$1",
+          },
+          initializer: {
+            kind: "id",
+            loc: [15, 13, 15, 14],
+            text: "x",
+            bindingKey: "x$vyh7jw6xunik$0",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [16, 3, 16, 12],
           expression: {
-            kind: 9,
+            kind: "number",
             loc: [16, 10, 16, 11],
             value: 1,
           },
@@ -77,14 +66,14 @@ const written = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [19, 20, 23, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [19, 21, 19, 29],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [19, 21, 19, 22],
           text: "x",
           bindingKey: "x$vyh7jw6xunik$2",
@@ -92,57 +81,46 @@ const written = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [19, 34, 23, 2],
       statements: [
         {
-          kind: 244,
+          kind: "let",
           loc: [20, 3, 20, 14],
-          declarationList: {
-            kind: 262,
-            loc: [20, 3, 20, 13],
-            declarations: [
-              {
-                kind: 261,
-                loc: [20, 7, 20, 13],
-                name: {
-                  kind: 80,
-                  loc: [20, 7, 20, 8],
-                  text: "y",
-                  bindingKey: "y$vyh7jw6xunik$3",
-                },
-                initializer: {
-                  kind: 11,
-                  loc: [20, 11, 20, 13],
-                  text: "",
-                },
-              },
-            ],
-            keyword: "let",
+          name: {
+            kind: "id",
+            loc: [20, 7, 20, 8],
+            text: "y",
+            bindingKey: "y$vyh7jw6xunik$3",
+          },
+          initializer: {
+            kind: "string",
+            loc: [20, 11, 20, 13],
+            text: "",
           },
         },
         {
-          kind: 227,
+          kind: "binop",
           loc: [21, 3, 21, 8],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [21, 3, 21, 4],
             text: "y",
             bindingKey: "y$vyh7jw6xunik$3",
           },
           operatorToken: "=",
           right: {
-            kind: 80,
+            kind: "id",
             loc: [21, 7, 21, 8],
             text: "x",
             bindingKey: "x$vyh7jw6xunik$2",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [22, 3, 22, 12],
           expression: {
-            kind: 9,
+            kind: "number",
             loc: [22, 10, 22, 11],
             value: 1,
           },

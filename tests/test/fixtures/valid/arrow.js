@@ -9,57 +9,46 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [3, 19, 6, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [4, 3, 4, 19],
-        declarationList: {
-          kind: 262,
-          loc: [4, 3, 4, 18],
-          declarations: [
-            {
-              kind: 261,
-              loc: [4, 9, 4, 18],
-              name: {
-                kind: 80,
-                loc: [4, 9, 4, 13],
-                text: "base",
-                bindingKey: "base$357jk2g9zktff$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [4, 16, 4, 18],
-                value: 10,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [4, 9, 4, 13],
+          text: "base",
+          bindingKey: "base$357jk2g9zktff$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [4, 16, 4, 18],
+          value: 10,
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [5, 3, 5, 57],
         expression: {
-          kind: 220,
+          kind: "=>",
           loc: [5, 10, 5, 56],
           parameters: [
             {
-              kind: 170,
+              kind: "param",
               loc: [5, 11, 5, 22],
               name: {
-                kind: 80,
+                kind: "id",
                 loc: [5, 11, 5, 14],
                 text: "one",
                 bindingKey: "one$357jk2g9zktff$1",
               },
             },
             {
-              kind: 170,
+              kind: "param",
               loc: [5, 24, 5, 35],
               name: {
-                kind: 80,
+                kind: "id",
                 loc: [5, 24, 5, 27],
                 text: "two",
                 bindingKey: "two$357jk2g9zktff$2",
@@ -67,20 +56,20 @@ export default cs.create(
             },
           ],
           body: {
-            kind: 227,
+            kind: "binop",
             loc: [5, 40, 5, 56],
             left: {
-              kind: 227,
+              kind: "binop",
               loc: [5, 40, 5, 49],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [5, 40, 5, 43],
                 text: "one",
                 bindingKey: "one$357jk2g9zktff$1",
               },
               operatorToken: "+",
               right: {
-                kind: 80,
+                kind: "id",
                 loc: [5, 46, 5, 49],
                 text: "two",
                 bindingKey: "two$357jk2g9zktff$2",
@@ -88,7 +77,7 @@ export default cs.create(
             },
             operatorToken: "+",
             right: {
-              kind: 80,
+              kind: "id",
               loc: [5, 52, 5, 56],
               text: "base",
               bindingKey: "base$357jk2g9zktff$0",

@@ -11,33 +11,22 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [5, 19, 7, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [6, 3, 6, 15],
-        declarationList: {
-          kind: 262,
-          loc: [6, 3, 6, 14],
-          declarations: [
-            {
-              kind: 261,
-              loc: [6, 9, 6, 14],
-              name: {
-                kind: 80,
-                loc: [6, 9, 6, 10],
-                text: "x",
-                bindingKey: "x$1wli9dj2vweno$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [6, 13, 6, 14],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [6, 9, 6, 10],
+          text: "x",
+          bindingKey: "x$1wli9dj2vweno$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [6, 13, 6, 14],
+          value: 1,
         },
       },
     ],
@@ -53,40 +42,29 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [9, 19, 12, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [10, 3, 10, 28],
-        declarationList: {
-          kind: 262,
-          loc: [10, 3, 10, 27],
-          declarations: [
-            {
-              kind: 261,
-              loc: [10, 9, 10, 27],
-              name: {
-                kind: 80,
-                loc: [10, 9, 10, 13],
-                text: "list",
-                bindingKey: "list$1wli9dj2vweno$1",
-              },
-              initializer: {
-                kind: 1000,
-                loc: [10, 16, 10, 27],
-                key: "$0splice0",
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [10, 9, 10, 13],
+          text: "list",
+          bindingKey: "list$1wli9dj2vweno$1",
+        },
+        initializer: {
+          kind: "splice",
+          loc: [10, 16, 10, 27],
+          key: "$0splice0",
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [11, 3, 11, 12],
         expression: {
-          kind: 9,
+          kind: "number",
           loc: [11, 10, 11, 11],
           value: 1,
         },

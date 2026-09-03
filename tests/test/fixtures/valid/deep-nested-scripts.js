@@ -13,16 +13,16 @@ function add(lhs, rhs) {
       captures: [],
     },
     () => ({
-      kind: 227,
+      kind: "binop",
       loc: [4, 13, 4, 24],
       left: {
-        kind: 1000,
+        kind: "splice",
         loc: [4, 13, 4, 17],
         key: "$lhs",
       },
       operatorToken: "+",
       right: {
-        kind: 1000,
+        kind: "splice",
         loc: [4, 20, 4, 24],
         key: "$rhs",
       },
@@ -48,7 +48,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [7, 28, 7, 29],
               value: 1,
             }),
@@ -63,7 +63,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [7, 35, 7, 36],
               value: 2,
             }),
@@ -75,7 +75,7 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 1000,
+    kind: "splice",
     loc: [7, 19, 7, 39],
     key: "$0splice0",
   }),

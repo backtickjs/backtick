@@ -13,60 +13,49 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [8, 3, 8, 33],
-        declarationList: {
-          kind: 262,
-          loc: [8, 3, 8, 32],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [8, 9, 8, 14],
+          text: "names",
+          bindingKey: "names$2hkx7916f6ioy$0",
+        },
+        initializer: {
+          kind: "arr",
+          loc: [8, 17, 8, 32],
+          elements: [
             {
-              kind: 261,
-              loc: [8, 9, 8, 32],
-              name: {
-                kind: 80,
-                loc: [8, 9, 8, 14],
-                text: "names",
-                bindingKey: "names$2hkx7916f6ioy$0",
-              },
-              initializer: {
-                kind: 210,
-                loc: [8, 17, 8, 32],
-                elements: [
-                  {
-                    kind: 11,
-                    loc: [8, 18, 8, 24],
-                    text: "zero",
-                  },
-                  {
-                    kind: 11,
-                    loc: [8, 26, 8, 31],
-                    text: "one",
-                  },
-                ],
-              },
+              kind: "string",
+              loc: [8, 18, 8, 24],
+              text: "zero",
+            },
+            {
+              kind: "string",
+              loc: [8, 26, 8, 31],
+              text: "one",
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [9, 3, 9, 19],
         expression: {
-          kind: 213,
+          kind: "[]",
           loc: [9, 10, 9, 18],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [9, 10, 9, 15],
             text: "names",
             bindingKey: "names$2hkx7916f6ioy$0",
           },
           argumentExpression: {
-            kind: 9,
+            kind: "number",
             loc: [9, 16, 9, 17],
             value: 9,
           },

@@ -23,11 +23,11 @@ const script = cs.create(
               captures: ["x$1u36t3611yobt$0"],
             },
             () => ({
-              kind: 220,
+              kind: "=>",
               loc: [11, 31, 11, 38],
               parameters: [],
               body: {
-                kind: 80,
+                kind: "id",
                 loc: [11, 37, 11, 38],
                 text: "x",
                 bindingKey: "x$1u36t3611yobt$0",
@@ -41,44 +41,33 @@ const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [9, 46, 12, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [9, 52, 12, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [10, 3, 10, 15],
-          declarationList: {
-            kind: 262,
-            loc: [10, 3, 10, 14],
-            declarations: [
-              {
-                kind: 261,
-                loc: [10, 9, 10, 14],
-                name: {
-                  kind: 80,
-                  loc: [10, 9, 10, 10],
-                  text: "x",
-                  bindingKey: "x$1u36t3611yobt$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [10, 13, 10, 14],
-                  value: 1,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [10, 9, 10, 10],
+            text: "x",
+            bindingKey: "x$1u36t3611yobt$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [10, 13, 10, 14],
+            value: 1,
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [11, 3, 11, 46],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [11, 10, 11, 45],
             key: "$0splice0",
           },

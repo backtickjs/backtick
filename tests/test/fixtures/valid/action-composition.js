@@ -11,33 +11,22 @@ const effects = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [5, 34, 7, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [6, 3, 6, 15],
-        declarationList: {
-          kind: 262,
-          loc: [6, 3, 6, 14],
-          declarations: [
-            {
-              kind: 261,
-              loc: [6, 9, 6, 14],
-              name: {
-                kind: 80,
-                loc: [6, 9, 6, 10],
-                text: "x",
-                bindingKey: "x$agkxao2hual4$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [6, 13, 6, 14],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [6, 9, 6, 10],
+          text: "x",
+          bindingKey: "x$agkxao2hual4$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [6, 13, 6, 14],
+          value: 1,
         },
       },
     ],
@@ -53,11 +42,11 @@ const composed = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [9, 35, 11, 2],
     statements: [
       {
-        kind: 1000,
+        kind: "splice",
         loc: [10, 3, 10, 11],
         key: "$effects",
       },
@@ -74,11 +63,11 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [13, 19, 15, 2],
     statements: [
       {
-        kind: 1000,
+        kind: "splice",
         loc: [14, 3, 14, 12],
         key: "$composed",
       },

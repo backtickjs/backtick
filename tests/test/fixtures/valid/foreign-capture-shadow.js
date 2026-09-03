@@ -29,17 +29,17 @@ function inner(carried) {
               captures: ["base$2dzpugititb9o$0"],
             },
             () => ({
-              kind: 227,
+              kind: "binop",
               loc: [17, 17, 17, 32],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [17, 17, 17, 21],
                 text: "base",
                 bindingKey: "base$2dzpugititb9o$0",
               },
               operatorToken: "+",
               right: {
-                kind: 1000,
+                kind: "splice",
                 loc: [17, 24, 17, 32],
                 key: "$carried",
               },
@@ -51,40 +51,29 @@ function inner(carried) {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [15, 13, 18, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [16, 5, 16, 22],
-          declarationList: {
-            kind: 262,
-            loc: [16, 5, 16, 21],
-            declarations: [
-              {
-                kind: 261,
-                loc: [16, 11, 16, 21],
-                name: {
-                  kind: 80,
-                  loc: [16, 11, 16, 15],
-                  text: "base",
-                  bindingKey: "base$2dzpugititb9o$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [16, 18, 16, 21],
-                  value: 100,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [16, 11, 16, 15],
+            text: "base",
+            bindingKey: "base$2dzpugititb9o$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [16, 18, 16, 21],
+            value: 100,
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [17, 5, 17, 35],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [17, 12, 17, 34],
             key: "$0splice0",
           },
@@ -112,7 +101,7 @@ export default cs.create(
               captures: ["base$2dzpugititb9o$1"],
             },
             () => ({
-              kind: 80,
+              kind: "id",
               loc: [23, 21, 23, 25],
               text: "base",
               bindingKey: "base$2dzpugititb9o$1",
@@ -125,40 +114,29 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [21, 19, 24, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [22, 3, 22, 18],
-        declarationList: {
-          kind: 262,
-          loc: [22, 3, 22, 17],
-          declarations: [
-            {
-              kind: 261,
-              loc: [22, 9, 22, 17],
-              name: {
-                kind: 80,
-                loc: [22, 9, 22, 13],
-                text: "base",
-                bindingKey: "base$2dzpugititb9o$1",
-              },
-              initializer: {
-                kind: 9,
-                loc: [22, 16, 22, 17],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [22, 9, 22, 13],
+          text: "base",
+          bindingKey: "base$2dzpugititb9o$1",
+        },
+        initializer: {
+          kind: "number",
+          loc: [22, 16, 22, 17],
+          value: 1,
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [23, 3, 23, 29],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [23, 10, 23, 28],
           key: "$0splice0",
         },

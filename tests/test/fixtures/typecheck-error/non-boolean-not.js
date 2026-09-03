@@ -11,14 +11,14 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 19, 5, 44],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [5, 20, 5, 33],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [5, 20, 5, 25],
           text: "count",
           bindingKey: "count$2891cfe99vhux$0",
@@ -26,11 +26,11 @@ export default cs.create(
       },
     ],
     body: {
-      kind: 225,
+      kind: "unop",
       loc: [5, 38, 5, 44],
       operator: "!",
       operand: {
-        kind: 80,
+        kind: "id",
         loc: [5, 39, 5, 44],
         text: "count",
         bindingKey: "count$2891cfe99vhux$0",

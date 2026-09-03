@@ -22,14 +22,14 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [15, 48, 17, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [15, 49, 15, 57],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [15, 49, 15, 50],
           text: "c",
           bindingKey: "c$vlvkz8vk4fw4$0",
@@ -37,38 +37,38 @@ const label = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [15, 62, 17, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [16, 3, 16, 47],
           expression: {
-            kind: 228,
+            kind: "?:",
             loc: [16, 10, 16, 46],
             condition: {
-              kind: 227,
+              kind: "binop",
               loc: [16, 10, 16, 29],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [16, 10, 16, 11],
                 text: "c",
                 bindingKey: "c$vlvkz8vk4fw4$0",
               },
               operatorToken: "===",
               right: {
-                kind: 1000,
+                kind: "splice",
                 loc: [16, 16, 16, 29],
                 key: "$0splice0",
               },
             },
             whenTrue: {
-              kind: 11,
+              kind: "string",
               loc: [16, 32, 16, 38],
               text: "blue",
             },
             whenFalse: {
-              kind: 11,
+              kind: "string",
               loc: [16, 41, 16, 46],
               text: "red",
             },
@@ -94,55 +94,43 @@ async function Swatch() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [20, 13, 27, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [21, 5, 21, 39],
-          declarationList: {
-            kind: 262,
-            loc: [21, 5, 21, 38],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [21, 11, 21, 15],
+            text: "held",
+            bindingKey: "held$vlvkz8vk4fw4$1",
+          },
+          initializer: {
+            kind: "()",
+            loc: [21, 18, 21, 38],
+            expression: {
+              kind: "splice",
+              loc: [21, 18, 21, 24],
+              key: "$state",
+            },
+            arguments: [
               {
-                kind: 261,
-                loc: [21, 11, 21, 38],
-                name: {
-                  kind: 80,
-                  loc: [21, 11, 21, 15],
-                  text: "held",
-                  bindingKey: "held$vlvkz8vk4fw4$1",
-                },
-                initializer: {
-                  kind: 214,
-                  loc: [21, 18, 21, 38],
-                  expression: {
-                    kind: 1000,
-                    loc: [21, 18, 21, 24],
-                    key: "$state",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 1000,
-                      loc: [21, 25, 21, 37],
-                      key: "$0splice0",
-                    },
-                  ],
-                },
+                kind: "splice",
+                loc: [21, 25, 21, 37],
+                key: "$0splice0",
               },
             ],
-            keyword: "const",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [22, 5, 26, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [23, 7, 25, 14],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [23, 8, 23, 12],
               text: "span",
             },
@@ -150,28 +138,26 @@ async function Swatch() {
               {
                 name: "onclick",
                 initializer: {
-                  kind: 220,
+                  kind: "=>",
                   loc: [23, 22, 23, 53],
                   parameters: [],
                   body: {
-                    kind: 214,
+                    kind: "()",
                     loc: [23, 28, 23, 53],
                     expression: {
-                      kind: 212,
+                      kind: ".",
                       loc: [23, 28, 23, 38],
                       expression: {
-                        kind: 80,
+                        kind: "id",
                         loc: [23, 28, 23, 32],
                         text: "held",
                         bindingKey: "held$vlvkz8vk4fw4$1",
                       },
-                      questionDotToken: false,
                       name: "write",
                     },
-                    questionDotToken: false,
                     arguments: [
                       {
-                        kind: 1000,
+                        kind: "splice",
                         loc: [23, 39, 23, 52],
                         key: "$0splice1",
                       },
@@ -182,31 +168,28 @@ async function Swatch() {
             ],
             children: [
               {
-                kind: 214,
+                kind: "()",
                 loc: [24, 10, 24, 29],
                 expression: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [24, 10, 24, 16],
                   key: "$label",
                 },
-                questionDotToken: false,
                 arguments: [
                   {
-                    kind: 214,
+                    kind: "()",
                     loc: [24, 17, 24, 28],
                     expression: {
-                      kind: 212,
+                      kind: ".",
                       loc: [24, 17, 24, 26],
                       expression: {
-                        kind: 80,
+                        kind: "id",
                         loc: [24, 17, 24, 21],
                         text: "held",
                         bindingKey: "held$vlvkz8vk4fw4$1",
                       },
-                      questionDotToken: false,
                       name: "read",
                     },
-                    questionDotToken: false,
                     arguments: [],
                   },
                 ],

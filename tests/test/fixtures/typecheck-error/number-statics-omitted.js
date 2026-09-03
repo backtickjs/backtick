@@ -12,7 +12,7 @@ export const largest = cs.create(
     captures: [],
   },
   () => ({
-    kind: 1001,
+    kind: "bltn",
     loc: [6, 27, 6, 50],
     name: "Number.MAX_SAFE_INTEGER",
   }),
@@ -27,17 +27,16 @@ export const notANumber = cs.create(
     captures: [],
   },
   () => ({
-    kind: 214,
+    kind: "()",
     loc: [8, 30, 8, 45],
     expression: {
-      kind: 1001,
+      kind: "bltn",
       loc: [8, 30, 8, 42],
       name: "Number.isNaN",
     },
-    questionDotToken: false,
     arguments: [
       {
-        kind: 9,
+        kind: "number",
         loc: [8, 43, 8, 44],
         value: 1,
       },

@@ -16,126 +16,104 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [10, 19, 18, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [11, 3, 11, 31],
-        declarationList: {
-          kind: 262,
-          loc: [11, 3, 11, 30],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [11, 9, 11, 13],
+          text: "base",
+          bindingKey: "base$1c48itx0y147v$0",
+        },
+        initializer: {
+          kind: "obj",
+          loc: [11, 16, 11, 30],
+          properties: [
             {
-              kind: 261,
-              loc: [11, 9, 11, 30],
-              name: {
-                kind: 80,
-                loc: [11, 9, 11, 13],
-                text: "base",
-                bindingKey: "base$1c48itx0y147v$0",
-              },
+              kind: ":",
+              loc: [11, 18, 11, 22],
+              name: "a",
               initializer: {
-                kind: 211,
-                loc: [11, 16, 11, 30],
-                properties: [
-                  {
-                    kind: 304,
-                    loc: [11, 18, 11, 22],
-                    name: "a",
-                    initializer: {
-                      kind: 9,
-                      loc: [11, 21, 11, 22],
-                      value: 1,
-                    },
-                  },
-                  {
-                    kind: 304,
-                    loc: [11, 24, 11, 28],
-                    name: "b",
-                    initializer: {
-                      kind: 9,
-                      loc: [11, 27, 11, 28],
-                      value: 2,
-                    },
-                  },
-                ],
+                kind: "number",
+                loc: [11, 21, 11, 22],
+                value: 1,
+              },
+            },
+            {
+              kind: ":",
+              loc: [11, 24, 11, 28],
+              name: "b",
+              initializer: {
+                kind: "number",
+                loc: [11, 27, 11, 28],
+                value: 2,
               },
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 244,
+        kind: "const",
         loc: [12, 3, 12, 25],
-        declarationList: {
-          kind: 262,
-          loc: [12, 3, 12, 24],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [12, 9, 12, 13],
+          text: "over",
+          bindingKey: "over$1c48itx0y147v$1",
+        },
+        initializer: {
+          kind: "obj",
+          loc: [12, 16, 12, 24],
+          properties: [
             {
-              kind: 261,
-              loc: [12, 9, 12, 24],
-              name: {
-                kind: 80,
-                loc: [12, 9, 12, 13],
-                text: "over",
-                bindingKey: "over$1c48itx0y147v$1",
-              },
+              kind: ":",
+              loc: [12, 18, 12, 22],
+              name: "b",
               initializer: {
-                kind: 211,
-                loc: [12, 16, 12, 24],
-                properties: [
-                  {
-                    kind: 304,
-                    loc: [12, 18, 12, 22],
-                    name: "b",
-                    initializer: {
-                      kind: 9,
-                      loc: [12, 21, 12, 22],
-                      value: 9,
-                    },
-                  },
-                ],
+                kind: "number",
+                loc: [12, 21, 12, 22],
+                value: 9,
               },
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [13, 3, 17, 5],
         expression: {
-          kind: 211,
+          kind: "obj",
           loc: [13, 10, 17, 4],
           properties: [
             {
-              kind: 231,
+              kind: "...",
               loc: [14, 5, 14, 12],
               expression: {
-                kind: 80,
+                kind: "id",
                 loc: [14, 8, 14, 12],
                 text: "base",
                 bindingKey: "base$1c48itx0y147v$0",
               },
             },
             {
-              kind: 231,
+              kind: "...",
               loc: [15, 5, 15, 12],
               expression: {
-                kind: 80,
+                kind: "id",
                 loc: [15, 8, 15, 12],
                 text: "over",
                 bindingKey: "over$1c48itx0y147v$1",
               },
             },
             {
-              kind: 304,
+              kind: ":",
               loc: [16, 5, 16, 9],
               name: "c",
               initializer: {
-                kind: 9,
+                kind: "number",
                 loc: [16, 8, 16, 9],
                 value: 3,
               },

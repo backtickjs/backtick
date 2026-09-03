@@ -2,86 +2,77 @@
   "functions": {
     "0": [
       [
-        1005,
+        "=>",
         [],
         [
-          1006,
+          "{}",
           [
             [
-              1007,
+              "const",
               "whole",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "Number.parseInt"
                 ],
-                false,
                 [
                   "42px"
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1007,
+              "const",
               "based",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "Number.parseInt"
                 ],
-                false,
                 [
                   "ff",
                   16
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1007,
+              "const",
               "fractional",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "Number.parseFloat"
                 ],
-                false,
                 [
                   "1.5"
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1009,
+              "return",
               [
-                0,
+                "el",
                 "span",
                 {},
                 [
-                  1003,
                   "+",
                   [
-                    1003,
                     "+",
                     [
-                      1003,
                       "+",
                       [
-                        1000,
+                        "id",
                         "whole"
                       ],
                       [
-                        1000,
+                        "id",
                         "based"
                       ]
                     ],
                     [
-                      1000,
+                      "id",
                       "fractional"
                     ]
                   ],
@@ -95,7 +86,7 @@
     ]
   },
   "root": [
-    2,
+    "fn()",
     "0",
     []
   ]

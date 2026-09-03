@@ -11,7 +11,7 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 1000,
+    kind: "splice",
     loc: [5, 19, 5, 38],
     key: "$0splice0",
   }),

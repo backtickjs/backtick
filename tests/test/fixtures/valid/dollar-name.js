@@ -14,16 +14,16 @@ function add(lhs) {
       captures: [],
     },
     () => ({
-      kind: 227,
+      kind: "binop",
       loc: [8, 13, 8, 21],
       left: {
-        kind: 1000,
+        kind: "splice",
         loc: [8, 13, 8, 17],
         key: "$lhs",
       },
       operatorToken: "+",
       right: {
-        kind: 9,
+        kind: "number",
         loc: [8, 20, 8, 21],
         value: 2,
       },
@@ -49,7 +49,7 @@ export default cs.create(
               captures: ["foo$$3r8prbdxxrtje$0"],
             },
             () => ({
-              kind: 80,
+              kind: "id",
               loc: [13, 19, 13, 23],
               text: "foo$",
               bindingKey: "foo$$3r8prbdxxrtje$0",
@@ -62,40 +62,29 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [11, 19, 14, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [12, 3, 12, 18],
-        declarationList: {
-          kind: 262,
-          loc: [12, 3, 12, 17],
-          declarations: [
-            {
-              kind: 261,
-              loc: [12, 9, 12, 17],
-              name: {
-                kind: 80,
-                loc: [12, 9, 12, 13],
-                text: "foo$",
-                bindingKey: "foo$$3r8prbdxxrtje$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [12, 16, 12, 17],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [12, 9, 12, 13],
+          text: "foo$",
+          bindingKey: "foo$$3r8prbdxxrtje$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [12, 16, 12, 17],
+          value: 1,
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [13, 3, 13, 27],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [13, 10, 13, 26],
           key: "$0splice0",
         },

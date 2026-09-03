@@ -26,54 +26,52 @@ const Row = async ({ id, selected }) =>
             captures: [],
           },
           () => ({
-            kind: 227,
+            kind: "binop",
             loc: [22, 17, 22, 76],
             left: {
-              kind: 227,
+              kind: "binop",
               loc: [22, 17, 22, 69],
               left: {
-                kind: 11,
+                kind: "string",
                 loc: [22, 17, 22, 30],
                 text: "font-size: ",
               },
               operatorToken: "+",
               right: {
-                kind: 228,
+                kind: "?:",
                 loc: [22, 34, 22, 68],
                 condition: {
-                  kind: 227,
+                  kind: "binop",
                   loc: [22, 34, 22, 58],
                   left: {
-                    kind: 214,
+                    kind: "()",
                     loc: [22, 34, 22, 50],
                     expression: {
-                      kind: 212,
+                      kind: ".",
                       loc: [22, 34, 22, 48],
                       expression: {
-                        kind: 1000,
+                        kind: "splice",
                         loc: [22, 34, 22, 43],
                         key: "$selected",
                       },
-                      questionDotToken: false,
                       name: "read",
                     },
-                    questionDotToken: false,
                     arguments: [],
                   },
                   operatorToken: "===",
                   right: {
-                    kind: 1000,
+                    kind: "splice",
                     loc: [22, 55, 22, 58],
                     key: "$id",
                   },
                 },
                 whenTrue: {
-                  kind: 9,
+                  kind: "number",
                   loc: [22, 61, 22, 63],
                   value: 20,
                 },
                 whenFalse: {
-                  kind: 9,
+                  kind: "number",
                   loc: [22, 66, 22, 68],
                   value: 16,
                 },
@@ -81,7 +79,7 @@ const Row = async ({ id, selected }) =>
             },
             operatorToken: "+",
             right: {
-              kind: 11,
+              kind: "string",
               loc: [22, 72, 22, 76],
               text: "px",
             },
@@ -100,49 +98,47 @@ const Row = async ({ id, selected }) =>
             captures: [],
           },
           () => ({
-            kind: 227,
+            kind: "binop",
             loc: [24, 11, 24, 51],
             left: {
-              kind: 227,
+              kind: "binop",
               loc: [24, 11, 24, 32],
               left: {
-                kind: 227,
+                kind: "binop",
                 loc: [24, 11, 24, 23],
                 left: {
-                  kind: 11,
+                  kind: "string",
                   loc: [24, 11, 24, 17],
                   text: "row ",
                 },
                 operatorToken: "+",
                 right: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [24, 20, 24, 23],
                   key: "$id",
                 },
               },
               operatorToken: "+",
               right: {
-                kind: 11,
+                kind: "string",
                 loc: [24, 26, 24, 32],
                 text: " of ",
               },
             },
             operatorToken: "+",
             right: {
-              kind: 214,
+              kind: "()",
               loc: [24, 35, 24, 51],
               expression: {
-                kind: 212,
+                kind: ".",
                 loc: [24, 35, 24, 49],
                 expression: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [24, 35, 24, 44],
                   key: "$selected",
                 },
-                questionDotToken: false,
                 name: "read",
               },
-              questionDotToken: false,
               arguments: [],
             },
           }),
@@ -165,42 +161,40 @@ const Row = async ({ id, selected }) =>
           captures: [],
         },
         () => ({
-          kind: 228,
+          kind: "?:",
           loc: [26, 9, 26, 67],
           condition: {
-            kind: 227,
+            kind: "binop",
             loc: [26, 9, 26, 33],
             left: {
-              kind: 214,
+              kind: "()",
               loc: [26, 9, 26, 25],
               expression: {
-                kind: 212,
+                kind: ".",
                 loc: [26, 9, 26, 23],
                 expression: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [26, 9, 26, 18],
                   key: "$selected",
                 },
-                questionDotToken: false,
                 name: "read",
               },
-              questionDotToken: false,
               arguments: [],
             },
             operatorToken: "===",
             right: {
-              kind: 1000,
+              kind: "splice",
               loc: [26, 30, 26, 33],
               key: "$id",
             },
           },
           whenTrue: {
-            kind: 1000,
+            kind: "splice",
             loc: [26, 36, 26, 60],
             key: "$0splice0",
           },
           whenFalse: {
-            kind: 106,
+            kind: "null",
             loc: [26, 63, 26, 67],
           },
         }),
@@ -221,65 +215,53 @@ async function Panel() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [31, 13, 40, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [32, 5, 32, 32],
-          declarationList: {
-            kind: 262,
-            loc: [32, 5, 32, 31],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [32, 11, 32, 19],
+            text: "selected",
+            bindingKey: "selected$kiq2x3i0lhh3$0",
+          },
+          initializer: {
+            kind: "()",
+            loc: [32, 22, 32, 31],
+            expression: {
+              kind: "splice",
+              loc: [32, 22, 32, 28],
+              key: "$state",
+            },
+            arguments: [
               {
-                kind: 261,
-                loc: [32, 11, 32, 31],
-                name: {
-                  kind: 80,
-                  loc: [32, 11, 32, 19],
-                  text: "selected",
-                  bindingKey: "selected$kiq2x3i0lhh3$0",
-                },
-                initializer: {
-                  kind: 214,
-                  loc: [32, 22, 32, 31],
-                  expression: {
-                    kind: 1000,
-                    loc: [32, 22, 32, 28],
-                    key: "$state",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 9,
-                      loc: [32, 29, 32, 30],
-                      value: 0,
-                    },
-                  ],
-                },
+                kind: "number",
+                loc: [32, 29, 32, 30],
+                value: 0,
               },
             ],
-            keyword: "const",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [33, 5, 39, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [34, 7, 38, 13],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [34, 8, 34, 11],
               text: "div",
             },
             attributes: [],
             children: [
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [35, 9, 35, 62],
                 type: {
-                  kind: 11,
+                  kind: "string",
                   loc: [35, 10, 35, 14],
                   text: "span",
                 },
@@ -287,28 +269,26 @@ async function Panel() {
                   {
                     name: "onclick",
                     initializer: {
-                      kind: 220,
+                      kind: "=>",
                       loc: [35, 24, 35, 47],
                       parameters: [],
                       body: {
-                        kind: 214,
+                        kind: "()",
                         loc: [35, 30, 35, 47],
                         expression: {
-                          kind: 212,
+                          kind: ".",
                           loc: [35, 30, 35, 44],
                           expression: {
-                            kind: 80,
+                            kind: "id",
                             loc: [35, 30, 35, 38],
                             text: "selected",
                             bindingKey: "selected$kiq2x3i0lhh3$0",
                           },
-                          questionDotToken: false,
                           name: "write",
                         },
-                        questionDotToken: false,
                         arguments: [
                           {
-                            kind: 9,
+                            kind: "number",
                             loc: [35, 45, 35, 46],
                             value: 1,
                           },
@@ -319,17 +299,17 @@ async function Panel() {
                 ],
                 children: [
                   {
-                    kind: 11,
+                    kind: "string",
                     loc: [35, 49, 35, 55],
                     text: "select",
                   },
                 ],
               },
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [36, 9, 36, 43],
                 type: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [36, 10, 36, 13],
                   key: "$Row",
                 },
@@ -337,7 +317,7 @@ async function Panel() {
                   {
                     name: "id",
                     initializer: {
-                      kind: 9,
+                      kind: "number",
                       loc: [36, 18, 36, 19],
                       value: 0,
                     },
@@ -345,7 +325,7 @@ async function Panel() {
                   {
                     name: "selected",
                     initializer: {
-                      kind: 80,
+                      kind: "id",
                       loc: [36, 31, 36, 39],
                       text: "selected",
                       bindingKey: "selected$kiq2x3i0lhh3$0",
@@ -355,10 +335,10 @@ async function Panel() {
                 children: [],
               },
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [37, 9, 37, 43],
                 type: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [37, 10, 37, 13],
                   key: "$Row",
                 },
@@ -366,7 +346,7 @@ async function Panel() {
                   {
                     name: "id",
                     initializer: {
-                      kind: 9,
+                      kind: "number",
                       loc: [37, 18, 37, 19],
                       value: 1,
                     },
@@ -374,7 +354,7 @@ async function Panel() {
                   {
                     name: "selected",
                     initializer: {
-                      kind: 80,
+                      kind: "id",
                       loc: [37, 31, 37, 39],
                       text: "selected",
                       bindingKey: "selected$kiq2x3i0lhh3$0",

@@ -1,5 +1,4 @@
 import type ts from "typescript";
-import { SyntaxKind } from "@backtickjs/boundary";
 import { isSupportedBinop } from "./binop.js";
 import type { CodeInformation } from "./CodeInformation.js";
 import { astNode, call, sourceLoc, varDeclList } from "./nodeFactory.js";
@@ -98,12 +97,9 @@ function accessNode(
   const at = sourceLoc(ts, state.script.toSourceLocation(access));
   const namespace = namespaceOf(ts, state, access.expression);
   if (namespace === undefined) {
-    return astNode(ts, SyntaxKind.PropertyAccessExpression, {
+    return astNode(ts, optional ? "?." : ".", {
       loc: at,
       expression: receiver,
-      questionDotToken: optional
-        ? ts.factory.createTrue()
-        : ts.factory.createFalse(),
       name: ts.factory.createStringLiteral(name),
     });
   }
@@ -115,7 +111,7 @@ function accessNode(
         "here; use a plain `.`.",
     );
   }
-  return astNode(ts, SyntaxKind.Builtin, {
+  return astNode(ts, "bltn", {
     loc: at,
     name: ts.factory.createStringLiteral(`${namespace}.${name}`),
   });
@@ -392,7 +388,7 @@ function rewriteNodeImpl(
 ): RewrittenNode {
   const unsupported = (): RewrittenNode => ({
     virtual: node,
-    runtime: astNode(ts, SyntaxKind.NullKeyword, {
+    runtime: astNode(ts, "null", {
       loc: loc(node),
     }),
   });
@@ -415,7 +411,7 @@ function rewriteNodeImpl(
         statements.map((statement) => statement.virtual as ts.Statement),
         true,
       ),
-      runtime: astNode(ts, SyntaxKind.Block, {
+      runtime: astNode(ts, "{}", {
         loc: loc(node),
         statements: ts.factory.createArrayLiteralExpression(
           statements.map((statement) => statement.runtime as ts.Expression),
@@ -436,10 +432,9 @@ function rewriteNodeImpl(
       virtual: ts.isVariableDeclarationList(declarations.virtual)
         ? ts.factory.createVariableStatement(undefined, declarations.virtual)
         : declarations.virtual,
-      runtime: astNode(ts, SyntaxKind.VariableStatement, {
-        loc: loc(node),
-        declarationList: declarations.runtime as ts.Expression,
-      }),
+      // The declaration is the whole of it: a statement adds a semicolon,
+      // which is not a thing to evaluate.
+      runtime: declarations.runtime,
     };
   }
 
@@ -520,25 +515,16 @@ function rewriteNodeImpl(
           // would leave `let rows: Row[] = []` holding nothing it can hold.
           mapType(state, declaration.type),
         ),
-        runtime: astNode(ts, SyntaxKind.VariableDeclarationList, {
-          loc: loc(node),
-          declarations: ts.factory.createArrayLiteralExpression(
-            [
-              astNode(ts, SyntaxKind.VariableDeclaration, {
-                loc: loc(declaration),
-                name: astNode(ts, SyntaxKind.Identifier, {
-                  loc: loc(declaration.name),
-                  text: ts.factory.createStringLiteral(name.text),
-                  bindingKey: ts.factory.createStringLiteral(
-                    bindingKey(state, name),
-                  ),
-                }),
-                initializer: initializer.runtime as ts.Expression,
-              }),
-            ],
-            false,
-          ),
-          keyword: ts.factory.createStringLiteral(keyword),
+        // The keyword is the kind, and `at` is the span a reader sees: the
+        // whole statement where there is one, the list alone in a `for`.
+        runtime: astNode(ts, keyword, {
+          loc: loc(at),
+          name: astNode(ts, "id", {
+            loc: loc(declaration.name),
+            text: ts.factory.createStringLiteral(name.text),
+            bindingKey: ts.factory.createStringLiteral(bindingKey(state, name)),
+          }),
+          initializer: initializer.runtime as ts.Expression,
         }),
       };
     }
@@ -561,7 +547,7 @@ function rewriteNodeImpl(
         consequent.virtual as ts.Statement,
         alternate ? (alternate.virtual as ts.Statement) : undefined,
       ),
-      runtime: astNode(ts, SyntaxKind.IfStatement, {
+      runtime: astNode(ts, "if", {
         loc: loc(node),
         expression: condition.runtime as ts.Expression,
         thenStatement: consequent.runtime as ts.Expression,
@@ -585,7 +571,7 @@ function rewriteNodeImpl(
         ),
         body.virtual as ts.Statement,
       ),
-      runtime: astNode(ts, SyntaxKind.WhileStatement, {
+      runtime: astNode(ts, "while", {
         loc: loc(node),
         expression: condition.runtime as ts.Expression,
         statement: body.runtime as ts.Expression,
@@ -624,7 +610,7 @@ function rewriteNodeImpl(
         update ? (update.virtual as ts.Expression) : undefined,
         body.virtual as ts.Statement,
       ),
-      runtime: astNode(ts, SyntaxKind.ForStatement, {
+      runtime: astNode(ts, "for", {
         loc: loc(node),
         initializer: runtimeOr(initializer),
         condition: runtimeOr(condition),
@@ -652,8 +638,8 @@ function rewriteNodeImpl(
       runtime: astNode(
         ts,
         ts.isBreakStatement(node)
-          ? SyntaxKind.BreakStatement
-          : SyntaxKind.ContinueStatement,
+          ? "break"
+          : "continue",
         { loc: loc(node) },
       ),
     };
@@ -698,9 +684,9 @@ function rewriteNodeImpl(
         state.bodyKind === "value"
           ? ts.factory.createReturnStatement(ts.factory.createNull())
           : ts.factory.createReturnStatement(),
-      runtime: astNode(ts, SyntaxKind.ReturnStatement, {
+      runtime: astNode(ts, "return", {
         loc: loc(node),
-        expression: astNode(ts, SyntaxKind.NullKeyword, {
+        expression: astNode(ts, "null", {
           loc: loc(node),
         }),
       }),
@@ -715,7 +701,7 @@ function rewriteNodeImpl(
           ? call(ts, "cs", "const", [expression.virtual as ts.Expression])
           : (expression.virtual as ts.Expression),
       ),
-      runtime: astNode(ts, SyntaxKind.ReturnStatement, {
+      runtime: astNode(ts, "return", {
         loc: loc(node),
         expression: expression.runtime as ts.Expression,
       }),
@@ -728,7 +714,7 @@ function rewriteNodeImpl(
       virtual: ts.factory.createThrowStatement(
         expression.virtual as ts.Expression,
       ),
-      runtime: astNode(ts, SyntaxKind.ThrowStatement, {
+      runtime: astNode(ts, "throw", {
         loc: loc(node),
         expression: expression.runtime as ts.Expression,
       }),
@@ -771,7 +757,7 @@ function rewriteNodeImpl(
       state.mappings.set(identifier, name);
       param = {
         virtual: identifier,
-        runtime: astNode(ts, SyntaxKind.Identifier, {
+        runtime: astNode(ts, "id", {
           loc: loc(name),
           text: ts.factory.createStringLiteral(name.text),
           bindingKey: ts.factory.createStringLiteral(bindingKey(state, name)),
@@ -788,11 +774,11 @@ function rewriteNodeImpl(
         ),
         undefined,
       ),
-      runtime: astNode(ts, SyntaxKind.TryStatement, {
+      runtime: astNode(ts, "try", {
         loc: loc(node),
         tryBlock: block.runtime as ts.Expression,
         // The clause is its own node, as it is in TypeScript.
-        catchClause: astNode(ts, SyntaxKind.CatchClause, {
+        catchClause: astNode(ts, "catch", {
           loc: loc(clause),
           variableDeclaration: param ? param.runtime : ts.factory.createNull(),
           block: handler.runtime as ts.Expression,
@@ -855,7 +841,7 @@ function rewriteNodeImpl(
       state.codeInformation.set(virtual, { semantic: false });
       return {
         virtual,
-        runtime: astNode(ts, SyntaxKind.Splice, {
+        runtime: astNode(ts, "splice", {
           loc: loc(node),
           key: ts.factory.createStringLiteral(splice.key),
         }),
@@ -867,7 +853,7 @@ function rewriteNodeImpl(
     if (bannedUndefined(state, node, "value")) {
       return {
         virtual: ts.factory.createNull(),
-        runtime: astNode(ts, SyntaxKind.NullKeyword, {
+        runtime: astNode(ts, "null", {
           loc: loc(node),
         }),
       };
@@ -897,7 +883,7 @@ function rewriteNodeImpl(
       state.mappings.set(virtual, node);
       return {
         virtual,
-        runtime: astNode(ts, SyntaxKind.Builtin, {
+        runtime: astNode(ts, "bltn", {
           loc: loc(node),
           name: ts.factory.createStringLiteral(node.text),
         }),
@@ -917,7 +903,7 @@ function rewriteNodeImpl(
       state.mappings.set(virtual, node);
       return {
         virtual,
-        runtime: astNode(ts, SyntaxKind.Builtin, {
+        runtime: astNode(ts, "bltn", {
           loc: loc(node),
           name: ts.factory.createStringLiteral(node.text),
         }),
@@ -940,7 +926,7 @@ function rewriteNodeImpl(
       virtual: ts.factory.createIdentifier(
         state.bindings.has(node) ? mangle(node.text) : node.text,
       ),
-      runtime: astNode(ts, SyntaxKind.Identifier, {
+      runtime: astNode(ts, "id", {
         loc: loc(node),
         text: ts.factory.createStringLiteral(node.text),
         bindingKey: ts.factory.createStringLiteral(bindingKey(state, node)),
@@ -1035,7 +1021,7 @@ function rewriteNodeImpl(
         expression.virtual as ts.Expression,
         key.virtual as ts.Expression,
       ]),
-      runtime: astNode(ts, SyntaxKind.ElementAccessExpression, {
+      runtime: astNode(ts, "[]", {
         loc: loc(node),
         expression: expression.runtime as ts.Expression,
         argumentExpression: key.runtime as ts.Expression,
@@ -1151,7 +1137,7 @@ function rewriteNodeImpl(
             continue;
           }
           children.push(
-            astNode(ts, SyntaxKind.StringLiteral, {
+            astNode(ts, "string", {
               loc: loc(child),
               text: ts.factory.createStringLiteral(text),
             }),
@@ -1233,7 +1219,7 @@ function rewriteNodeImpl(
         runtime:
           children.length === 1
             ? children[0]
-            : astNode(ts, SyntaxKind.ArrayLiteralExpression, {
+            : astNode(ts, "arr", {
                 loc: loc(node),
                 elements: ts.factory.createArrayLiteralExpression(
                   children,
@@ -1245,18 +1231,18 @@ function rewriteNodeImpl(
 
     return {
       virtual,
-      runtime: astNode(ts, SyntaxKind.JsxElement, {
+      runtime: astNode(ts, "jsx", {
         loc: loc(node),
         // An element of the target is its own name; a component tag is the
         // host binding it names, which the script reaches by splice under the
         // key `getDirectSplices` minted for it.
         type:
           opening !== null && isComponentTag(tagName)
-            ? astNode(ts, SyntaxKind.Splice, {
+            ? astNode(ts, "splice", {
                 loc: loc(opening.tagName),
                 key: ts.factory.createStringLiteral(`$${tagName}`),
               })
-            : astNode(ts, SyntaxKind.StringLiteral, {
+            : astNode(ts, "string", {
                 loc: opening === null ? loc(node) : loc(opening.tagName),
                 text: ts.factory.createStringLiteral(tagName),
               }),
@@ -1347,7 +1333,7 @@ function rewriteNodeImpl(
           : virtualCall;
       return {
         virtual,
-        runtime: astNode(ts, SyntaxKind.CallExpression, {
+        runtime: astNode(ts, optionalCall ? "?.()" : "()", {
           loc: loc(node),
           expression: accessNode(
             ts,
@@ -1357,9 +1343,6 @@ function rewriteNodeImpl(
             receiver.runtime as ts.Expression,
             optional,
           ),
-          questionDotToken: optionalCall
-            ? ts.factory.createTrue()
-            : ts.factory.createFalse(),
           arguments: runtimeArgs,
         }),
       };
@@ -1389,12 +1372,9 @@ function rewriteNodeImpl(
               ),
             )
           : virtualCall,
-      runtime: astNode(ts, SyntaxKind.CallExpression, {
+      runtime: astNode(ts, optionalCall ? "?.()" : "()", {
         loc: loc(node),
         expression: callee.runtime as ts.Expression,
-        questionDotToken: optionalCall
-          ? ts.factory.createTrue()
-          : ts.factory.createFalse(),
         arguments: runtimeArgs,
       }),
     };
@@ -1488,13 +1468,13 @@ function rewriteNodeImpl(
           ts.factory.createToken(ts.SyntaxKind.EqualsGreaterThanToken),
           body.virtual as ts.ConciseBody,
         ),
-        runtime: astNode(ts, SyntaxKind.ArrowFunction, {
+        runtime: astNode(ts, "=>", {
           loc: loc(node),
           parameters: ts.factory.createArrayLiteralExpression(
             params.map((param) =>
-              astNode(ts, SyntaxKind.Parameter, {
+              astNode(ts, "param", {
                 loc: loc(param.source),
-                name: astNode(ts, SyntaxKind.Identifier, {
+                name: astNode(ts, "id", {
                   loc: loc(param.name),
                   text: ts.factory.createStringLiteral(param.name.text),
                   bindingKey: ts.factory.createStringLiteral(
@@ -1517,7 +1497,7 @@ function rewriteNodeImpl(
     const spread = rewriteNode(ts, state, node.expression);
     return {
       virtual: ts.factory.createSpreadElement(spread.virtual as ts.Expression),
-      runtime: astNode(ts, SyntaxKind.SpreadElement, {
+      runtime: astNode(ts, "...", {
         loc: loc(node),
         expression: spread.runtime as ts.Expression,
       }),
@@ -1533,7 +1513,7 @@ function rewriteNodeImpl(
         elements.map((element) => element.virtual as ts.Expression),
         false,
       ),
-      runtime: astNode(ts, SyntaxKind.ArrayLiteralExpression, {
+      runtime: astNode(ts, "arr", {
         loc: loc(node),
         elements: ts.factory.createArrayLiteralExpression(
           elements.map((element) => element.runtime as ts.Expression),
@@ -1593,16 +1573,16 @@ function rewriteNodeImpl(
           ),
           false,
         ),
-        runtime: astNode(ts, SyntaxKind.ObjectLiteralExpression, {
+        runtime: astNode(ts, "obj", {
           loc: loc(node),
           properties: ts.factory.createArrayLiteralExpression(
             properties.map((property) =>
               property.text === null
-                ? astNode(ts, SyntaxKind.SpreadElement, {
+                ? astNode(ts, "...", {
                     loc: loc(property.source),
                     expression: property.value.runtime as ts.Expression,
                   })
-                : astNode(ts, SyntaxKind.PropertyAssignment, {
+                : astNode(ts, ":", {
                     loc: loc(property.source),
                     name: ts.factory.createStringLiteral(property.text),
                     initializer: property.value.runtime as ts.Expression,
@@ -1634,7 +1614,7 @@ function rewriteNodeImpl(
         ts.factory.createToken(ts.SyntaxKind.ColonToken),
         alternate.virtual as ts.Expression,
       ),
-      runtime: astNode(ts, SyntaxKind.ConditionalExpression, {
+      runtime: astNode(ts, "?:", {
         loc: loc(node),
         condition: condition.runtime as ts.Expression,
         whenTrue: consequent.runtime as ts.Expression,
@@ -1669,7 +1649,7 @@ function rewriteNodeImpl(
               operand.virtual as ts.Expression,
             ),
       ),
-      runtime: astNode(ts, SyntaxKind.PrefixUnaryExpression, {
+      runtime: astNode(ts, "unop", {
         loc: loc(node),
         operator: ts.factory.createStringLiteral(negation ? "-" : "!"),
         operand: operand.runtime as ts.Expression,
@@ -1710,7 +1690,7 @@ function rewriteNodeImpl(
           ts.SyntaxKind.EqualsToken,
           call(ts, "cs", "const", [rhs.virtual as ts.Expression]),
         ),
-        runtime: astNode(ts, SyntaxKind.BinaryExpression, {
+        runtime: astNode(ts, "binop", {
           loc: loc(node),
           left: lhs.runtime as ts.Expression,
           operatorToken: ts.factory.createStringLiteral("="),
@@ -1733,7 +1713,7 @@ function rewriteNodeImpl(
           node.operatorToken.kind,
           virtualRight,
         ),
-        runtime: astNode(ts, SyntaxKind.BinaryExpression, {
+        runtime: astNode(ts, "binop", {
           loc: loc(node),
           left: lhs.runtime as ts.Expression,
           operatorToken: ts.factory.createStringLiteral(operator),
@@ -1751,7 +1731,7 @@ function rewriteNodeImpl(
   if (node.kind === ts.SyntaxKind.NullKeyword) {
     return {
       virtual: ts.factory.createNull(),
-      runtime: astNode(ts, SyntaxKind.NullKeyword, {
+      runtime: astNode(ts, "null", {
         loc: loc(node),
       }),
     };
@@ -1760,7 +1740,7 @@ function rewriteNodeImpl(
   if (ts.isNumericLiteral(node)) {
     return {
       virtual: ts.factory.createNumericLiteral(node.text),
-      runtime: astNode(ts, SyntaxKind.NumericLiteral, {
+      runtime: astNode(ts, "number", {
         loc: loc(node),
         value: ts.factory.createNumericLiteral(node.text),
       }),
@@ -1770,7 +1750,7 @@ function rewriteNodeImpl(
   if (ts.isStringLiteral(node)) {
     return {
       virtual: ts.factory.createStringLiteral(node.text),
-      runtime: astNode(ts, SyntaxKind.StringLiteral, {
+      runtime: astNode(ts, "string", {
         loc: loc(node),
         text: ts.factory.createStringLiteral(node.text),
       }),
@@ -1780,7 +1760,7 @@ function rewriteNodeImpl(
   if (node.kind === ts.SyntaxKind.TrueKeyword) {
     return {
       virtual: ts.factory.createTrue(),
-      runtime: astNode(ts, SyntaxKind.TrueKeyword, {
+      runtime: astNode(ts, "true", {
         loc: loc(node),
       }),
     };
@@ -1789,7 +1769,7 @@ function rewriteNodeImpl(
   if (node.kind === ts.SyntaxKind.FalseKeyword) {
     return {
       virtual: ts.factory.createFalse(),
-      runtime: astNode(ts, SyntaxKind.FalseKeyword, {
+      runtime: astNode(ts, "false", {
         loc: loc(node),
       }),
     };

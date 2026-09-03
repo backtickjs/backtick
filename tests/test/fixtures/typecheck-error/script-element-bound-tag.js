@@ -11,14 +11,14 @@ const held = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 17, 5, 41],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [5, 18, 5, 29],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [5, 18, 5, 21],
           text: "Tag",
           bindingKey: "Tag$3fbb3ihku5tcs$0",
@@ -26,10 +26,10 @@ const held = cs.create(
       },
     ],
     body: {
-      kind: 285,
+      kind: "jsx",
       loc: [5, 34, 5, 41],
       type: {
-        kind: 1000,
+        kind: "splice",
         loc: [5, 35, 5, 38],
         key: "$Tag",
       },

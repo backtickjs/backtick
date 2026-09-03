@@ -9,47 +9,36 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [3, 19, 13, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [4, 3, 4, 26],
-        declarationList: {
-          kind: 262,
-          loc: [4, 3, 4, 25],
-          declarations: [
-            {
-              kind: 261,
-              loc: [4, 9, 4, 25],
-              name: {
-                kind: 80,
-                loc: [4, 9, 4, 16],
-                text: "message",
-                bindingKey: "message$2osmwga78xnj6$0",
-              },
-              initializer: {
-                kind: 11,
-                loc: [4, 19, 4, 25],
-                text: "boom",
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [4, 9, 4, 16],
+          text: "message",
+          bindingKey: "message$2osmwga78xnj6$0",
+        },
+        initializer: {
+          kind: "string",
+          loc: [4, 19, 4, 25],
+          text: "boom",
         },
       },
       {
-        kind: 259,
+        kind: "try",
         loc: [5, 3, 12, 4],
         tryBlock: {
-          kind: 242,
+          kind: "{}",
           loc: [5, 7, 7, 4],
           statements: [
             {
-              kind: 258,
+              kind: "throw",
               loc: [6, 5, 6, 19],
               expression: {
-                kind: 80,
+                kind: "id",
                 loc: [6, 11, 6, 18],
                 text: "message",
                 bindingKey: "message$2osmwga78xnj6$0",
@@ -58,47 +47,47 @@ export default cs.create(
           ],
         },
         catchClause: {
-          kind: 300,
+          kind: "catch",
           loc: [7, 5, 12, 4],
           variableDeclaration: {
-            kind: 80,
+            kind: "id",
             loc: [7, 12, 7, 17],
             text: "error",
             bindingKey: "error$2osmwga78xnj6$1",
           },
           block: {
-            kind: 242,
+            kind: "{}",
             loc: [7, 19, 12, 4],
             statements: [
               {
-                kind: 246,
+                kind: "if",
                 loc: [8, 5, 10, 6],
                 expression: {
-                  kind: 227,
+                  kind: "binop",
                   loc: [8, 9, 8, 26],
                   left: {
-                    kind: 80,
+                    kind: "id",
                     loc: [8, 9, 8, 14],
                     text: "error",
                     bindingKey: "error$2osmwga78xnj6$1",
                   },
                   operatorToken: "===",
                   right: {
-                    kind: 80,
+                    kind: "id",
                     loc: [8, 19, 8, 26],
                     text: "message",
                     bindingKey: "message$2osmwga78xnj6$0",
                   },
                 },
                 thenStatement: {
-                  kind: 242,
+                  kind: "{}",
                   loc: [8, 28, 10, 6],
                   statements: [
                     {
-                      kind: 254,
+                      kind: "return",
                       loc: [9, 7, 9, 28],
                       expression: {
-                        kind: 11,
+                        kind: "string",
                         loc: [9, 14, 9, 27],
                         text: "caught boom",
                       },
@@ -108,10 +97,10 @@ export default cs.create(
                 elseStatement: null,
               },
               {
-                kind: 254,
+                kind: "return",
                 loc: [11, 5, 11, 36],
                 expression: {
-                  kind: 11,
+                  kind: "string",
                   loc: [11, 12, 11, 35],
                   text: "caught something else",
                 },

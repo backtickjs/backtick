@@ -11,7 +11,7 @@ const count = cs.create(
     captures: [],
   },
   () => ({
-    kind: 9,
+    kind: "number",
     loc: [5, 18, 5, 19],
     value: 1,
   }),
@@ -26,11 +26,11 @@ export const script = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [7, 26, 9, 2],
     statements: [
       {
-        kind: 1000,
+        kind: "splice",
         loc: [8, 3, 8, 9],
         key: "$count",
       },

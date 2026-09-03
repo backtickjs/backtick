@@ -11,63 +11,52 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [5, 19, 17, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [7, 3, 7, 19],
-        declarationList: {
-          kind: 262,
-          loc: [7, 3, 7, 18],
-          declarations: [
-            {
-              kind: 261,
-              loc: [7, 9, 7, 18],
-              name: {
-                kind: 80,
-                loc: [7, 9, 7, 14],
-                text: "count",
-                bindingKey: "count$rbes3su3s43l$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [7, 17, 7, 18],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [7, 9, 7, 14],
+          text: "count",
+          bindingKey: "count$rbes3su3s43l$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [7, 17, 7, 18],
+          value: 1,
         },
       },
       {
-        kind: 246,
+        kind: "if",
         loc: [9, 3, 12, 4],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [9, 7, 9, 18],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [9, 7, 9, 12],
             text: "count",
             bindingKey: "count$rbes3su3s43l$0",
           },
           operatorToken: "===",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [9, 17, 9, 18],
             value: 1,
           },
         },
         thenStatement: {
-          kind: 242,
+          kind: "{}",
           loc: [9, 20, 12, 4],
           statements: [
             {
-              kind: 254,
+              kind: "return",
               loc: [11, 5, 11, 18],
               expression: {
-                kind: 11,
+                kind: "string",
                 loc: [11, 12, 11, 17],
                 text: "one",
               },
@@ -77,10 +66,10 @@ export default cs.create(
         elseStatement: null,
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [16, 3, 16, 17],
         expression: {
-          kind: 11,
+          kind: "string",
           loc: [16, 10, 16, 16],
           text: "many",
         },

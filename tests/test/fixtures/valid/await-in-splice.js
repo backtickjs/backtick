@@ -15,16 +15,16 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 227,
+    kind: "binop",
     loc: [10, 19, 10, 49],
     left: {
-      kind: 1000,
+      kind: "splice",
       loc: [10, 19, 10, 43],
       key: "$0splice0",
     },
     operatorToken: "+",
     right: {
-      kind: 11,
+      kind: "string",
       loc: [10, 46, 10, 49],
       text: "!",
     },

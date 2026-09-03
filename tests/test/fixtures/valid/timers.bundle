@@ -2,73 +2,67 @@
   "functions": {
     "0": [
       [
-        1005,
+        "=>",
         [],
         [
-          1006,
+          "{}",
           [
             [
-              1007,
+              "const",
               "stop",
               [
-                3,
+                "bltn",
                 "clearInterval"
-              ],
-              "const"
+              ]
             ],
             [
-              1007,
+              "const",
               "repeating",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "setInterval"
                 ],
-                false,
                 [
                   [
-                    1005,
+                    "=>",
                     [],
                     0
                   ],
                   1000
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1001,
+              "()",
               [
-                1000,
+                "id",
                 "stop"
               ],
-              false,
               [
                 [
-                  1000,
+                  "id",
                   "repeating"
                 ]
               ]
             ],
             [
-              1001,
+              "()",
               [
-                3,
+                "bltn",
                 "clearTimeout"
               ],
-              false,
               [
                 [
-                  1001,
+                  "()",
                   [
-                    3,
+                    "bltn",
                     "setTimeout"
                   ],
-                  false,
                   [
                     [
-                      1005,
+                      "=>",
                       [],
                       0
                     ],
@@ -83,7 +77,7 @@
     ]
   },
   "root": [
-    2,
+    "fn()",
     "0",
     []
   ]

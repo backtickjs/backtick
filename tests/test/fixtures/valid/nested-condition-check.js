@@ -15,24 +15,24 @@ const gate = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [9, 61, 18, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [10, 3, 10, 13],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [10, 3, 10, 4],
           text: "a",
           bindingKey: "a$2nymys98gllff$0",
         },
       },
       {
-        kind: 170,
+        kind: "param",
         loc: [11, 3, 11, 13],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [11, 3, 11, 4],
           text: "b",
           bindingKey: "b$2nymys98gllff$1",
@@ -40,78 +40,66 @@ const gate = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [12, 6, 18, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [13, 3, 13, 36],
-          declarationList: {
-            kind: 262,
-            loc: [13, 3, 13, 35],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [13, 9, 13, 13],
+            text: "keep",
+            bindingKey: "keep$2nymys98gllff$2",
+          },
+          initializer: {
+            kind: "=>",
+            loc: [13, 16, 13, 35],
+            parameters: [
               {
-                kind: 261,
-                loc: [13, 9, 13, 35],
+                kind: "param",
+                loc: [13, 17, 13, 28],
                 name: {
-                  kind: 80,
-                  loc: [13, 9, 13, 13],
-                  text: "keep",
-                  bindingKey: "keep$2nymys98gllff$2",
-                },
-                initializer: {
-                  kind: 220,
-                  loc: [13, 16, 13, 35],
-                  parameters: [
-                    {
-                      kind: 170,
-                      loc: [13, 17, 13, 28],
-                      name: {
-                        kind: 80,
-                        loc: [13, 17, 13, 19],
-                        text: "on",
-                        bindingKey: "on$2nymys98gllff$3",
-                      },
-                    },
-                  ],
-                  body: {
-                    kind: 80,
-                    loc: [13, 33, 13, 35],
-                    text: "on",
-                    bindingKey: "on$2nymys98gllff$3",
-                  },
+                  kind: "id",
+                  loc: [13, 17, 13, 19],
+                  text: "on",
+                  bindingKey: "on$2nymys98gllff$3",
                 },
               },
             ],
-            keyword: "const",
+            body: {
+              kind: "id",
+              loc: [13, 33, 13, 35],
+              text: "on",
+              bindingKey: "on$2nymys98gllff$3",
+            },
           },
         },
         {
-          kind: 246,
+          kind: "if",
           loc: [14, 3, 16, 4],
           expression: {
-            kind: 214,
+            kind: "()",
             loc: [14, 7, 14, 19],
             expression: {
-              kind: 80,
+              kind: "id",
               loc: [14, 7, 14, 11],
               text: "keep",
               bindingKey: "keep$2nymys98gllff$2",
             },
-            questionDotToken: false,
             arguments: [
               {
-                kind: 227,
+                kind: "binop",
                 loc: [14, 12, 14, 18],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [14, 12, 14, 13],
                   text: "a",
                   bindingKey: "a$2nymys98gllff$0",
                 },
                 operatorToken: "&&",
                 right: {
-                  kind: 80,
+                  kind: "id",
                   loc: [14, 17, 14, 18],
                   text: "b",
                   bindingKey: "b$2nymys98gllff$1",
@@ -120,14 +108,14 @@ const gate = cs.create(
             ],
           },
           thenStatement: {
-            kind: 242,
+            kind: "{}",
             loc: [14, 21, 16, 4],
             statements: [
               {
-                kind: 254,
+                kind: "return",
                 loc: [15, 5, 15, 19],
                 expression: {
-                  kind: 11,
+                  kind: "string",
                   loc: [15, 12, 15, 18],
                   text: "kept",
                 },
@@ -137,10 +125,10 @@ const gate = cs.create(
           elseStatement: null,
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [17, 3, 17, 20],
           expression: {
-            kind: 11,
+            kind: "string",
             loc: [17, 10, 17, 19],
             text: "dropped",
           },
@@ -159,54 +147,52 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [20, 20, 23, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [21, 3, 21, 26],
         name: "both",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [21, 9, 21, 26],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [21, 9, 21, 14],
             key: "$gate",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 112,
+              kind: "true",
               loc: [21, 15, 21, 19],
             },
             {
-              kind: 112,
+              kind: "true",
               loc: [21, 21, 21, 25],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [22, 3, 22, 26],
         name: "one",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [22, 8, 22, 26],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [22, 8, 22, 13],
             key: "$gate",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 112,
+              kind: "true",
               loc: [22, 14, 22, 18],
             },
             {
-              kind: 97,
+              kind: "false",
               loc: [22, 20, 22, 25],
             },
           ],

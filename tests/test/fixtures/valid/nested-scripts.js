@@ -17,7 +17,7 @@ export default cs.create(
             captures: ["x$3d1j5mxf94bs6$0"],
           },
           () => ({
-            kind: 80,
+            kind: "id",
             loc: [5, 15, 5, 16],
             text: "x",
             bindingKey: "x$3d1j5mxf94bs6$0",
@@ -29,40 +29,29 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [3, 19, 6, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [4, 3, 4, 15],
-        declarationList: {
-          kind: 262,
-          loc: [4, 3, 4, 14],
-          declarations: [
-            {
-              kind: 261,
-              loc: [4, 9, 4, 14],
-              name: {
-                kind: 80,
-                loc: [4, 9, 4, 10],
-                text: "x",
-                bindingKey: "x$3d1j5mxf94bs6$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [4, 13, 4, 14],
-                value: 0,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [4, 9, 4, 10],
+          text: "x",
+          bindingKey: "x$3d1j5mxf94bs6$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [4, 13, 4, 14],
+          value: 0,
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [5, 3, 5, 19],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [5, 10, 5, 18],
           key: "$0splice0",
         },

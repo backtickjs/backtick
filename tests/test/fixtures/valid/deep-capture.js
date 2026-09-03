@@ -38,7 +38,7 @@ function wrap(start) {
                       captures: ["outer$1mlv4ugew6yjv$0"],
                     },
                     () => ({
-                      kind: 80,
+                      kind: "id",
                       loc: [19, 28, 19, 33],
                       text: "outer",
                       bindingKey: "outer$1mlv4ugew6yjv$0",
@@ -50,50 +50,39 @@ function wrap(start) {
               captures: ["outer$1mlv4ugew6yjv$0"],
             },
             () => ({
-              kind: 242,
+              kind: "{}",
               loc: [17, 17, 20, 6],
               statements: [
                 {
-                  kind: 244,
+                  kind: "const",
                   loc: [18, 7, 18, 25],
-                  declarationList: {
-                    kind: 262,
-                    loc: [18, 7, 18, 24],
-                    declarations: [
-                      {
-                        kind: 261,
-                        loc: [18, 13, 18, 24],
-                        name: {
-                          kind: 80,
-                          loc: [18, 13, 18, 19],
-                          text: "middle",
-                          bindingKey: "middle$1mlv4ugew6yjv$1",
-                        },
-                        initializer: {
-                          kind: 9,
-                          loc: [18, 22, 18, 24],
-                          value: 10,
-                        },
-                      },
-                    ],
-                    keyword: "const",
+                  name: {
+                    kind: "id",
+                    loc: [18, 13, 18, 19],
+                    text: "middle",
+                    bindingKey: "middle$1mlv4ugew6yjv$1",
+                  },
+                  initializer: {
+                    kind: "number",
+                    loc: [18, 22, 18, 24],
+                    value: 10,
                   },
                 },
                 {
-                  kind: 254,
+                  kind: "return",
                   loc: [19, 7, 19, 36],
                   expression: {
-                    kind: 227,
+                    kind: "binop",
                     loc: [19, 14, 19, 35],
                     left: {
-                      kind: 80,
+                      kind: "id",
                       loc: [19, 14, 19, 20],
                       text: "middle",
                       bindingKey: "middle$1mlv4ugew6yjv$1",
                     },
                     operatorToken: "+",
                     right: {
-                      kind: 1000,
+                      kind: "splice",
                       loc: [19, 23, 19, 35],
                       key: "$0splice0",
                     },
@@ -108,40 +97,29 @@ function wrap(start) {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [15, 13, 21, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [16, 5, 16, 26],
-          declarationList: {
-            kind: 262,
-            loc: [16, 5, 16, 25],
-            declarations: [
-              {
-                kind: 261,
-                loc: [16, 11, 16, 25],
-                name: {
-                  kind: 80,
-                  loc: [16, 11, 16, 16],
-                  text: "outer",
-                  bindingKey: "outer$1mlv4ugew6yjv$0",
-                },
-                initializer: {
-                  kind: 1000,
-                  loc: [16, 19, 16, 25],
-                  key: "$start",
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [16, 11, 16, 16],
+            text: "outer",
+            bindingKey: "outer$1mlv4ugew6yjv$0",
+          },
+          initializer: {
+            kind: "splice",
+            loc: [16, 19, 16, 25],
+            key: "$start",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [17, 5, 20, 9],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [17, 12, 20, 8],
             key: "$0splice0",
           },
@@ -169,7 +147,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [24, 29, 24, 30],
               value: 1,
             }),
@@ -189,7 +167,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [24, 46, 24, 47],
               value: 2,
             }),
@@ -201,16 +179,16 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 227,
+    kind: "binop",
     loc: [24, 19, 24, 50],
     left: {
-      kind: 1000,
+      kind: "splice",
       loc: [24, 19, 24, 33],
       key: "$0splice0",
     },
     operatorToken: "+",
     right: {
-      kind: 1000,
+      kind: "splice",
       loc: [24, 36, 24, 50],
       key: "$0splice1",
     },

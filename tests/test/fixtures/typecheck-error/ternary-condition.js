@@ -10,7 +10,7 @@ const count = cs.create(
     captures: [],
   },
   () => ({
-    kind: 9,
+    kind: "number",
     loc: [4, 18, 4, 19],
     value: 1,
   }),
@@ -25,20 +25,20 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 228,
+    kind: "?:",
     loc: [6, 19, 6, 43],
     condition: {
-      kind: 1000,
+      kind: "splice",
       loc: [6, 19, 6, 25],
       key: "$count",
     },
     whenTrue: {
-      kind: 11,
+      kind: "string",
       loc: [6, 28, 6, 34],
       text: "some",
     },
     whenFalse: {
-      kind: 11,
+      kind: "string",
       loc: [6, 37, 6, 43],
       text: "none",
     },

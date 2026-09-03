@@ -10,39 +10,36 @@ const make = (f) =>
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [4, 6, 6, 4],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [5, 5, 5, 25],
           expression: {
-            kind: 214,
+            kind: "()",
             loc: [5, 12, 5, 24],
             expression: {
-              kind: 212,
+              kind: ".",
               loc: [5, 12, 5, 22],
               expression: {
-                kind: 214,
+                kind: "()",
                 loc: [5, 12, 5, 17],
                 expression: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [5, 12, 5, 14],
                   key: "$f",
                 },
-                questionDotToken: false,
                 arguments: [
                   {
-                    kind: 9,
+                    kind: "number",
                     loc: [5, 15, 5, 16],
                     value: 1,
                   },
                 ],
               },
-              questionDotToken: false,
               name: "read",
             },
-            questionDotToken: false,
             arguments: [],
           },
         },
@@ -59,14 +56,14 @@ const wrapped = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [8, 20, 8, 49],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [8, 21, 8, 30],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [8, 21, 8, 22],
           text: "n",
           bindingKey: "n$1javurj6oomvn$0",
@@ -74,27 +71,26 @@ const wrapped = cs.create(
       },
     ],
     body: {
-      kind: 214,
+      kind: "()",
       loc: [8, 35, 8, 49],
       expression: {
-        kind: 1000,
+        kind: "splice",
         loc: [8, 35, 8, 41],
         key: "$state",
       },
-      questionDotToken: false,
       arguments: [
         {
-          kind: 227,
+          kind: "binop",
           loc: [8, 42, 8, 48],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [8, 42, 8, 43],
             text: "n",
             bindingKey: "n$1javurj6oomvn$0",
           },
           operatorToken: "+",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [8, 46, 8, 48],
             value: 10,
           },
@@ -116,23 +112,23 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [10, 19, 12, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [11, 3, 11, 44],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [11, 10, 11, 43],
           left: {
-            kind: 1000,
+            kind: "splice",
             loc: [11, 10, 11, 24],
             key: "$0splice0",
           },
           operatorToken: "+",
           right: {
-            kind: 1000,
+            kind: "splice",
             loc: [11, 27, 11, 43],
             key: "$0splice1",
           },

@@ -1,13 +1,11 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { SyntaxKind } from "@backtickjs/boundary";
 import type {
   ClientScriptExpression,
   ClientScriptJsxAttribute,
   ClientScriptJsxElement,
   ClientScriptStringLiteral,
 } from "@backtickjs/boundary";
-import { NodeKind } from "../dist/bundle/Bundle.js";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
 import type { AstScript } from "../dist/ast/Ast.js";
 
@@ -19,7 +17,7 @@ import type { AstScript } from "../dist/ast/Ast.js";
 const loc = [1, 0, 1, 1] as const;
 
 const text = (value: string): ClientScriptStringLiteral => ({
-  kind: SyntaxKind.StringLiteral,
+  kind: "string",
   loc: [...loc],
   text: value,
 });
@@ -29,7 +27,7 @@ const element = (
   attributes: readonly ClientScriptJsxAttribute[],
   children: readonly ClientScriptExpression[],
 ): ClientScriptJsxElement => ({
-  kind: SyntaxKind.JsxElement,
+  kind: "jsx",
   loc: [...loc],
   type: text(tag),
   attributes,
@@ -52,7 +50,7 @@ const lower = (body: ClientScriptExpression) => {
 
 test("an element lowers to the format's own element node", () => {
   assert.deepEqual(lower(element("br", [], [])), [
-    NodeKind.Element,
+    "el",
     "br",
     {},
     null,
@@ -62,13 +60,13 @@ test("an element lowers to the format's own element node", () => {
 test("an attribute lowers to a prop under its own name", () => {
   assert.deepEqual(
     lower(element("td", [{ name: "class", initializer: text("col") }], [])),
-    [NodeKind.Element, "td", { class: "col" }, null],
+    ["el", "td", { class: "col" }, null],
   );
 });
 
 test("one child stands in the children slot itself", () => {
   assert.deepEqual(lower(element("td", [], [text("one")])), [
-    NodeKind.Element,
+    "el",
     "td",
     {},
     "one",
@@ -77,18 +75,18 @@ test("one child stands in the children slot itself", () => {
 
 test("several children travel under a `ArrayLiteralExpression`", () => {
   assert.deepEqual(lower(element("tr", [], [text("one"), text("two")])), [
-    NodeKind.Element,
+    "el",
     "tr",
     {},
-    [NodeKind.ArrayLiteralExpression, ["one", "two"]],
+    ["arr", ["one", "two"]],
   ]);
 });
 
 test("an element holds an element, as a child is an expression", () => {
   assert.deepEqual(lower(element("tr", [], [element("td", [], [])])), [
-    NodeKind.Element,
+    "el",
     "tr",
     {},
-    [NodeKind.Element, "td", {}, null],
+    ["el", "td", {}, null],
   ]);
 });

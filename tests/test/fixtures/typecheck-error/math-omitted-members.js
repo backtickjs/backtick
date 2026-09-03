@@ -15,17 +15,16 @@ export const halved = cs.create(
     captures: [],
   },
   () => ({
-    kind: 214,
+    kind: "()",
     loc: [9, 26, 9, 42],
     expression: {
-      kind: 1001,
+      kind: "bltn",
       loc: [9, 26, 9, 39],
       name: "Math.f16round",
     },
-    questionDotToken: false,
     arguments: [
       {
-        kind: 9,
+        kind: "number",
         loc: [9, 40, 9, 41],
         value: 1,
       },

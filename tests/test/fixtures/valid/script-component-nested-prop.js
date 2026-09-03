@@ -24,10 +24,10 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 285,
+    kind: "jsx",
     loc: [21, 19, 21, 61],
     type: {
-      kind: 1000,
+      kind: "splice",
       loc: [21, 20, 21, 28],
       key: "$Greeting",
     },
@@ -35,15 +35,15 @@ export default cs.create(
       {
         name: "person",
         initializer: {
-          kind: 211,
+          kind: "obj",
           loc: [21, 37, 21, 57],
           properties: [
             {
-              kind: 304,
+              kind: ":",
               loc: [21, 39, 21, 55],
               name: "firstName",
               initializer: {
-                kind: 11,
+                kind: "string",
                 loc: [21, 50, 21, 55],
                 text: "ada",
               },

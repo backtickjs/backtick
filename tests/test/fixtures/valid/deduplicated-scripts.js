@@ -11,7 +11,7 @@ const leaf = cs.create(
     captures: [],
   },
   () => ({
-    kind: 9,
+    kind: "number",
     loc: [5, 17, 5, 18],
     value: 7,
   }),
@@ -26,25 +26,25 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [7, 20, 7, 42],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [7, 22, 7, 30],
         name: "a",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [7, 25, 7, 30],
           key: "$leaf",
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [7, 32, 7, 40],
         name: "b",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [7, 35, 7, 40],
           key: "$leaf",
         },

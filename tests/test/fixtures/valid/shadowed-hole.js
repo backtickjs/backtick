@@ -18,80 +18,58 @@ function wrap(fragment) {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [12, 13, 18, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [13, 5, 13, 21],
-          declarationList: {
-            kind: 262,
-            loc: [13, 5, 13, 20],
-            declarations: [
-              {
-                kind: 261,
-                loc: [13, 11, 13, 20],
-                name: {
-                  kind: 80,
-                  loc: [13, 11, 13, 16],
-                  text: "total",
-                  bindingKey: "total$3h9ra1625ja2t$0",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [13, 19, 13, 20],
-                  value: 1,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [13, 11, 13, 16],
+            text: "total",
+            bindingKey: "total$3h9ra1625ja2t$0",
+          },
+          initializer: {
+            kind: "number",
+            loc: [13, 19, 13, 20],
+            value: 1,
           },
         },
         {
-          kind: 242,
+          kind: "{}",
           loc: [14, 5, 17, 6],
           statements: [
             {
-              kind: 244,
+              kind: "const",
               loc: [15, 7, 15, 23],
-              declarationList: {
-                kind: 262,
-                loc: [15, 7, 15, 22],
-                declarations: [
-                  {
-                    kind: 261,
-                    loc: [15, 13, 15, 22],
-                    name: {
-                      kind: 80,
-                      loc: [15, 13, 15, 18],
-                      text: "total",
-                      bindingKey: "total$3h9ra1625ja2t$1",
-                    },
-                    initializer: {
-                      kind: 9,
-                      loc: [15, 21, 15, 22],
-                      value: 2,
-                    },
-                  },
-                ],
-                keyword: "const",
+              name: {
+                kind: "id",
+                loc: [15, 13, 15, 18],
+                text: "total",
+                bindingKey: "total$3h9ra1625ja2t$1",
+              },
+              initializer: {
+                kind: "number",
+                loc: [15, 21, 15, 22],
+                value: 2,
               },
             },
             {
-              kind: 254,
+              kind: "return",
               loc: [16, 7, 16, 32],
               expression: {
-                kind: 227,
+                kind: "binop",
                 loc: [16, 14, 16, 31],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [16, 14, 16, 19],
                   text: "total",
                   bindingKey: "total$3h9ra1625ja2t$1",
                 },
                 operatorToken: "+",
                 right: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [16, 22, 16, 31],
                   key: "$fragment",
                 },
@@ -122,7 +100,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [21, 29, 21, 31],
               value: 10,
             }),
@@ -142,7 +120,7 @@ export default cs.create(
               captures: [],
             },
             () => ({
-              kind: 9,
+              kind: "number",
               loc: [21, 47, 21, 49],
               value: 20,
             }),
@@ -154,16 +132,16 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 227,
+    kind: "binop",
     loc: [21, 19, 21, 52],
     left: {
-      kind: 1000,
+      kind: "splice",
       loc: [21, 19, 21, 34],
       key: "$0splice0",
     },
     operatorToken: "+",
     right: {
-      kind: 1000,
+      kind: "splice",
       loc: [21, 37, 21, 52],
       key: "$0splice1",
     },

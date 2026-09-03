@@ -2,7 +2,6 @@ import type { Ast, AstElement, AstScript } from "../ast/Ast.js";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import { locKey } from "../locKey.js";
-import { NodeKind } from "./Bundle.js";
 import type {
   Bundle,
   BundleArrowFunctionNode,
@@ -122,25 +121,19 @@ export function buildBundle(
   const holeRead = (name: string): BundleExpressionNode => {
     const [param, prop, ...path] = name.split(".");
     if (prop === undefined) {
-      return [NodeKind.Identifier, param];
+      return ["id", param];
     }
     // The parameter is a thunk the tag wrote, so it is called where the drawing
     // reads it: an argument is evaluated once where it is passed, and a prop has
     // to be re-read whenever what it names changes. What the call answers with
     // is an ordinary value, so the whole path off it is ordinary reads.
     let read: BundleExpressionNode = [
-      NodeKind.CallExpression,
-      [
-        NodeKind.PropertyAccessExpression,
-        [NodeKind.Identifier, param],
-        false,
-        prop,
-      ],
-      false,
+      "()",
+      [".", ["id", param], prop],
       [],
     ];
     for (const step of path) {
-      read = [NodeKind.PropertyAccessExpression, read, false, step];
+      read = [".", read, step];
     }
     return read;
   };
@@ -253,7 +246,7 @@ export function buildBundle(
       ...script.captures,
     ].map((_, index) => `$${index}`);
     bodies.set(script, [
-      NodeKind.ArrowFunction,
+      "=>",
       parameterNodes(params),
       lowerScriptBody(script),
     ]);
@@ -280,7 +273,7 @@ export function buildBundle(
       return null;
     }
     materialize(target);
-    return [NodeKind.GetFunction, fnLabel(target)];
+    return ["fn", fnLabel(target)];
   };
 
   // Instantiating a tree in value position: which entry, and what to hand
@@ -305,7 +298,7 @@ export function buildBundle(
         const target = entryFor(value);
         materialize(target);
         return [
-          NodeKind.ApplyFunction,
+          "fn()",
           fnLabel(target),
           exprCallArgs(value, params),
         ];
@@ -313,7 +306,7 @@ export function buildBundle(
       case "AstElement":
         return renderElement(value, params);
       case "AstBuiltin":
-        return [NodeKind.Builtin, value.name];
+        return ["bltn", value.name];
       case "AstNumber":
       case "AstString":
       case "AstBoolean":
@@ -328,7 +321,7 @@ export function buildBundle(
       // for a table entry and came out even, so it is written here.
       case "AstExpansion":
         return [
-          NodeKind.ArrowFunction,
+          "=>",
           parameterNodes(value.params),
           // The expansion's params extend the enclosing ones, like a nested
           // frame, so a hole threading into the body resolves by name.
@@ -341,7 +334,7 @@ export function buildBundle(
       case "AstArray":
         // Data, and a node is an array too, so it says which it is.
         return [
-          NodeKind.ArrayLiteralExpression,
+          "arr",
           value.elements.map((entry) => child(entry)),
         ];
       case "AstObject": {
@@ -367,7 +360,7 @@ export function buildBundle(
     params: ReadonlySet<string> = new Set(),
   ): BundleIdentifierNode => {
     if (params.has(key)) {
-      return [NodeKind.Identifier, displayName(key)];
+      return ["id", displayName(key)];
     }
     throw new Error(
       `Can't thread the capture \`${sourceName(key)}\`: nothing encloses ` +
@@ -403,13 +396,13 @@ export function buildBundle(
         return;
       }
       if (passed.length === 0) {
-        parts.push([NodeKind.ArrowFunction, [], render(arg, params)]);
+        parts.push(["=>", [], render(arg, params)]);
         return;
       }
       // Otherwise a thunk names them and calls the fragment with what it wants.
       const inner = new Set([...params, ...passed]);
       parts.push([
-        NodeKind.ArrowFunction,
+        "=>",
         parameterNodes(passed.map(displayName)),
         render(arg, inner),
       ]);
@@ -436,7 +429,7 @@ export function buildBundle(
       }
       props[key] = rendered;
     }
-    return [NodeKind.Element, element.id, props, children];
+    return ["el", element.id, props, children];
   };
 
   // Nothing encloses the root, so nothing it holds can capture.

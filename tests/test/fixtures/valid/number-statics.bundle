@@ -2,119 +2,105 @@
   "functions": {
     "0": [
       [
-        1005,
+        "=>",
         [],
         [
-          1006,
+          "{}",
           [
             [
-              1007,
+              "const",
               "positive",
               [
-                1003,
                 ">",
                 [
-                  3,
+                  "bltn",
                   "Number.EPSILON"
                 ],
                 0
-              ],
-              "const"
+              ]
             ],
             [
-              1007,
+              "const",
               "whole",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "Number.isInteger"
                 ],
-                false,
                 [
                   2
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1007,
+              "const",
               "fractional",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "Number.isInteger"
                 ],
-                false,
                 [
                   2.5
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1007,
+              "const",
               "written",
               [
-                1001,
+                "()",
                 [
-                  3,
+                  "bltn",
                   "Number.isFinite"
                 ],
-                false,
                 [
                   "2"
                 ]
-              ],
-              "const"
+              ]
             ],
             [
-              1009,
+              "return",
               [
-                0,
+                "el",
                 "span",
                 {},
                 [
-                  1003,
                   "+",
                   [
-                    1003,
                     "+",
                     [
-                      1003,
                       "+",
                       [
-                        1003,
                         "+",
                         [
-                          1003,
                           "+",
                           [
-                            1003,
                             "+",
                             [
-                              1000,
+                              "id",
                               "whole"
                             ],
                             " "
                           ],
                           [
-                            1000,
+                            "id",
                             "fractional"
                           ]
                         ],
                         " "
                       ],
                       [
-                        1000,
+                        "id",
                         "written"
                       ]
                     ],
                     " "
                   ],
                   [
-                    1000,
+                    "id",
                     "positive"
                   ]
                 ]
@@ -126,7 +112,7 @@
     ]
   },
   "root": [
-    2,
+    "fn()",
     "0",
     []
   ]

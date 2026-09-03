@@ -11,14 +11,14 @@ const greet = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 18, 7, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [5, 19, 5, 32],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [5, 19, 5, 23],
           text: "name",
           bindingKey: "name$hlti23avj5mo$0",
@@ -26,31 +26,29 @@ const greet = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [5, 37, 7, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [6, 3, 6, 28],
           expression: {
-            kind: 214,
+            kind: "()",
             loc: [6, 10, 6, 27],
             expression: {
-              kind: 212,
+              kind: "?.",
               loc: [6, 10, 6, 22],
               expression: {
-                kind: 80,
+                kind: "id",
                 loc: [6, 10, 6, 14],
                 text: "name",
                 bindingKey: "name$hlti23avj5mo$0",
               },
-              questionDotToken: true,
               name: "concat",
             },
-            questionDotToken: false,
             arguments: [
               {
-                kind: 11,
+                kind: "string",
                 loc: [6, 23, 6, 26],
                 text: "!",
               },
@@ -72,11 +70,11 @@ const double = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [10, 19, 10, 26],
     parameters: [],
     body: {
-      kind: 9,
+      kind: "number",
       loc: [10, 25, 10, 26],
       value: 2,
     },
@@ -92,14 +90,14 @@ const call = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [12, 17, 14, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [12, 18, 12, 35],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [12, 18, 12, 20],
           text: "cb",
           bindingKey: "cb$hlti23avj5mo$1",
@@ -107,30 +105,29 @@ const call = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [12, 40, 14, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [13, 3, 13, 22],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [13, 10, 13, 21],
             left: {
-              kind: 214,
+              kind: "?.()",
               loc: [13, 10, 13, 16],
               expression: {
-                kind: 80,
+                kind: "id",
                 loc: [13, 10, 13, 12],
                 text: "cb",
                 bindingKey: "cb$hlti23avj5mo$1",
               },
-              questionDotToken: true,
               arguments: [],
             },
             operatorToken: "??",
             right: {
-              kind: 9,
+              kind: "number",
               loc: [13, 20, 13, 21],
               value: 0,
             },
@@ -154,25 +151,24 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [16, 20, 21, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [17, 3, 17, 22],
         name: "named",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [17, 10, 17, 22],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [17, 10, 17, 16],
             key: "$greet",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 11,
+              kind: "string",
               loc: [17, 17, 17, 21],
               text: "hi",
             },
@@ -180,42 +176,40 @@ export default cs.create(
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [18, 3, 18, 25],
         name: "explicit",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [18, 13, 18, 25],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [18, 13, 18, 19],
             key: "$greet",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 106,
+              kind: "null",
               loc: [18, 20, 18, 24],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [19, 3, 19, 27],
         name: "supplied",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [19, 13, 19, 27],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [19, 13, 19, 18],
             key: "$call",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 1000,
+              kind: "splice",
               loc: [19, 19, 19, 26],
               key: "$double",
             },
@@ -223,21 +217,20 @@ export default cs.create(
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [20, 3, 20, 24],
         name: "fallback",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [20, 13, 20, 24],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [20, 13, 20, 18],
             key: "$call",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 106,
+              kind: "null",
               loc: [20, 19, 20, 23],
             },
           ],

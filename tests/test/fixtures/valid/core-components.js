@@ -15,11 +15,11 @@ export default _jsxs("div", {
           captures: [],
         },
         () => ({
-          kind: 220,
+          kind: "=>",
           loc: [5, 47, 5, 55],
           parameters: [],
           body: {
-            kind: 242,
+            kind: "{}",
             loc: [5, 53, 5, 55],
             statements: [],
           },

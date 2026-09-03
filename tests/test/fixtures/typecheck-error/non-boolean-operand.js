@@ -12,24 +12,24 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [6, 19, 8, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [6, 20, 6, 33],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [6, 20, 6, 25],
           text: "count",
           bindingKey: "count$3kpojr67liy8x$0",
         },
       },
       {
-        kind: 170,
+        kind: "param",
         loc: [6, 35, 6, 48],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [6, 35, 6, 39],
           text: "flag",
           bindingKey: "flag$3kpojr67liy8x$1",
@@ -37,27 +37,27 @@ export default cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [6, 53, 8, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [7, 3, 7, 36],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [7, 10, 7, 35],
             left: {
-              kind: 227,
+              kind: "binop",
               loc: [7, 11, 7, 24],
               left: {
-                kind: 80,
+                kind: "id",
                 loc: [7, 11, 7, 16],
                 text: "count",
                 bindingKey: "count$3kpojr67liy8x$0",
               },
               operatorToken: "&&",
               right: {
-                kind: 80,
+                kind: "id",
                 loc: [7, 20, 7, 24],
                 text: "flag",
                 bindingKey: "flag$3kpojr67liy8x$1",
@@ -65,7 +65,7 @@ export default cs.create(
             },
             operatorToken: "||",
             right: {
-              kind: 11,
+              kind: "string",
               loc: [7, 29, 7, 35],
               text: "none",
             },

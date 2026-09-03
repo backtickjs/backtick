@@ -297,14 +297,14 @@ function buildNode(
   }
   const node = source;
   switch (node[0]) {
-    case 1022: /* ArrayLiteralExpression */ {
+    case "arr": {
       const members = compileElements(instance, node[1]);
       return (scope) => members(scope);
     }
     // An object literal a spread runs through. A literal without one is data
     // and never reaches here — this is only for the case the format has no key
     // to say, which is "and every key of that one".
-    case 1021: /* ObjectLiteralExpression */ {
+    case "obj": {
       const entries = node[1].map(
         ([name, value]) => [name, compile(instance, value)] as const,
       );
@@ -330,7 +330,7 @@ function buildNode(
     // Storage, made where this stands: evaluating it twice is two storages,
     // which is why it is a kind and not a call of a name. Never settled — the
     // whole point of a cell is that what it holds moves.
-    case 1000: /* Identifier */ {
+    case "id": {
       const name = node[1];
       return (scope) => {
         const frame = lookup(scope, name);
@@ -342,7 +342,7 @@ function buildNode(
     }
     // A function named rather than applied: what it evaluates to, which is what
     // a hole handing over nothing would have called.
-    case 1: /* GetFunction */ {
+    case "fn": {
       const label = node[1];
       // Looked up once, here: the table holds one closure per label, and every
       // reference is handed that one.
@@ -355,18 +355,13 @@ function buildNode(
     // is expanded into exactly that and compiled as a call. Running a function
     // has one path here, so there is one place to answer what it costs and no
     // second place for that answer to drift.
-    case 2: /* ApplyFunction */ {
+    case "fn()": {
       const [, label, args] = node;
-      return compile(instance, [
-        1001 /* CallExpression */,
-        [1 /* GetFunction */, label],
-        false,
-        args,
-      ]);
+      return compile(instance, ["()", ["fn", label], args]);
     }
     // Including a list, which draws no node of its own: what `for` means is
     // answered where an id is read, not by a kind of its own.
-    case 0: /* Element */ {
+    case "el": {
       return compileElement(instance, node);
     }
     // A whole name the format carries and this client answers. The language's
@@ -378,7 +373,7 @@ function buildNode(
     // language's: `builtinsOf` refused that when the table was built. A
     // curated list is what keeps every member meaning the same thing
     // everywhere, and a target may lengthen it but not edit it.
-    case 3: /* Builtin */ {
+    case "bltn": {
       const name = node[1];
       const value = instance.builtins[name];
       if (value === undefined) {
@@ -386,20 +381,21 @@ function buildNode(
       }
       return () => value;
     }
-    case 1001: /* CallExpression */ {
+    case "()":
+    case "?.()": {
       // A method call binds its receiver, so `s.concat(y)` sees `this === s`.
       // Which of the two this is, is a property of the callee, so it is
       // decided here rather than on every call.
       const callee = node[1];
-      const optionalCall = node[2];
-      const args = compileElements(instance, node[3]);
+      const optionalCall = node[0] === "?.()";
+      const args = compileElements(instance, node[2]);
       if (
         Array.isArray(callee) &&
-        callee[0] === 1002 /* PropertyAccessExpression */
+        (callee[0] === "." || callee[0] === "?.")
       ) {
         const receiver = compile(instance, callee[1]);
-        const optionalReceiver = callee[2];
-        const name = callee[3];
+        const optionalReceiver = callee[0] === "?.";
+        const name = callee[2];
         return (scope) => {
           // The receiver evaluates before the arguments; an optional receiver
           // (`a?.b(…)`) short-circuits a null object to null, arguments
@@ -437,10 +433,11 @@ function buildNode(
         return (value as Applied)(...args(scope));
       };
     }
-    case 1002: /* PropertyAccessExpression */ {
+    case ".":
+    case "?.": {
       const target = compile(instance, node[1]);
-      const optional = node[2];
-      const member = node[3];
+      const optional = node[0] === "?.";
+      const member = node[2];
       return (scope) => {
         const object = target(scope);
         if (optional && object === null) {
@@ -451,7 +448,7 @@ function buildNode(
         return memberOf(object, member);
       };
     }
-    case 1016: /* ElementAccessExpression */ {
+    case "[]": {
       const target = compile(instance, node[1]);
       const argument = compile(instance, node[2]);
       return (scope) => {
@@ -491,46 +488,61 @@ function buildNode(
         return null;
       };
     }
-    case 1003: /* BinaryExpression */ {
-      if (node[1] === "=") {
-        // An assignment, which is a binary expression here as it is in
-        // TypeScript. The left is a name to bind, never a value to read, so it
-        // is the one operand that isn't evaluated.
-        const target = node[2];
-        // Only a variable can be assigned to, which the compiler enforces; a
-        // bundle saying otherwise was not written by it.
-        if (!Array.isArray(target) || target[0] !== 1000 /* Identifier */) {
-          throw new Error("an assignment target must be an identifier");
+    // Assignment binds its left rather than evaluating it, which is why it is
+    // the one operator answered here instead of in `compileBinop`.
+    case "=": {
+      const target = node[1];
+      // Only a variable can be assigned to, which the compiler enforces; a
+      // bundle saying otherwise was not written by it.
+      if (!Array.isArray(target) || target[0] !== "id") {
+        throw new Error("an assignment target must be an identifier");
+      }
+      const name = target[1];
+      const right = compile(instance, node[2]);
+      return (scope) => {
+        const value = right(scope);
+        const frame = lookup(scope, name);
+        if (frame === null) {
+          throw new Error(`unknown assignment target ${name}`);
         }
-        const name = target[1];
-        const right = compile(instance, node[3]);
-        return (scope) => {
-          const value = right(scope);
-          const frame = lookup(scope, name);
-          if (frame === null) {
-            throw new Error(`unknown assignment target ${name}`);
-          }
-          bind(frame, name, value);
-          // An assignment evaluates to the value assigned, as in JavaScript; in
-          // statement position nothing reads it.
-          return value;
-        };
-      }
-      const left = compile(instance, node[2]);
-      const right = compile(instance, node[3]);
-      return compileBinop(node[1], left, right);
+        bind(frame, name, value);
+        // An assignment evaluates to the value assigned, as in JavaScript; in
+        // statement position nothing reads it.
+        return value;
+      };
     }
-    case 1019: /* PrefixUnaryExpression */ {
-      const operand = compile(instance, node[2]);
-      // A `!` operand is boolean, as a tested position always is, so this
-      // negates rather than deciding what counts as true. A `-` operand is a
-      // number, checked by the compiler as arithmetic everywhere else is.
-      if (node[1] === "-") {
-        return (scope) => -(operand(scope) as number);
-      }
+    // The other fourteen combine two values, and the kind says which way.
+    case "&&":
+    case "||":
+    case "??":
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+    case "%":
+    case "===":
+    case "!==":
+    case "<":
+    case "<=":
+    case ">":
+    case ">=": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return compileBinop(node[0], left, right);
+    }
+    // A `!` operand is boolean, as a tested position always is, so this negates
+    // rather than deciding what counts as true.
+    case "!": {
+      const operand = compile(instance, node[1]);
       return (scope) => !condition(operand(scope), "the operand of `!`");
     }
-    case 1004: /* ConditionalExpression */ {
+    // A `-x` operand is a number, checked by the compiler as arithmetic
+    // everywhere else is.
+    case "-x": {
+      const operand = compile(instance, node[1]);
+      return (scope) => -(operand(scope) as number);
+    }
+    case "?:": {
       const test = compile(instance, node[1]);
       const whenTrue = compile(instance, node[2]);
       const whenFalse = compile(instance, node[3]);
@@ -540,7 +552,7 @@ function buildNode(
           ? whenTrue(scope)
           : whenFalse(scope);
     }
-    case 1005: /* ArrowFunction */ {
+    case "=>": {
       return compileArrow(instance, node);
     }
     default: {
@@ -566,7 +578,7 @@ function compileArrow(
   // implicitly returned. Which of the two decides what a call does with what
   // the body answered, so it is decided here rather than per call.
   const block =
-    Array.isArray(body) && body[0] === 1006 /* Block */ ? body : null;
+    Array.isArray(body) && body[0] === "{}" ? body : null;
   if (block === null) {
     const expression = compile(instance, body);
     // Nothing to bind: the body reads the enclosing frame, so making one of its
@@ -629,14 +641,14 @@ function buildStatement(
     };
   }
   switch (node[0]) {
-    case 1006: /* Block */ {
+    case "{}": {
       const statements = node[1];
       // Declarations hoist to the block: a use before its declaration
       // resolves to the local (with value `null`), never outward. Which names
       // those are is a property of the block, so it is found once.
       const declared = statements.flatMap((statement) =>
         Array.isArray(statement) &&
-        statement[0] === 1007 /* VariableDeclaration */
+        (statement[0] === "const" || statement[0] === "let")
           ? [statement[1]]
           : [],
       );
@@ -658,7 +670,8 @@ function buildStatement(
         return advanced;
       };
     }
-    case 1007: /* VariableDeclaration */ {
+    case "const":
+    case "let": {
       const name = node[1];
       const initializer = compile(instance, node[2]);
       return (scope) => {
@@ -672,7 +685,7 @@ function buildStatement(
         return advanced;
       };
     }
-    case 1008: /* IfStatement */ {
+    case "if": {
       const test = compile(instance, node[1]);
       const then = compileStatement(instance, node[2]);
       const branch = node[3];
@@ -685,7 +698,7 @@ function buildStatement(
         return otherwise === null ? advanced : otherwise(scope);
       };
     }
-    case 1012: /* WhileStatement */ {
+    case "while": {
       const test = compile(instance, node[1]);
       const body = compileStatement(instance, node[2]);
       return (scope) => {
@@ -704,7 +717,7 @@ function buildStatement(
         return advanced;
       };
     }
-    case 1013: /* ForStatement */ {
+    case "for": {
       const initializer = node[1];
       const condition_ = node[2];
       const incrementor = node[3];
@@ -750,23 +763,23 @@ function buildStatement(
         }
       };
     }
-    case 1014: /* BreakStatement */ {
+    case "break": {
       return () => broke;
     }
-    case 1015: /* ContinueStatement */ {
+    case "continue": {
       return () => continued;
     }
-    case 1009: /* ReturnStatement */ {
+    case "return": {
       const value = compile(instance, node[1]);
       return (scope) => ({ kind: "returned", value: value(scope) });
     }
-    case 1010: /* ThrowStatement */ {
+    case "throw": {
       const thrown = compile(instance, node[1]);
       return (scope) => {
         throw thrown(scope);
       };
     }
-    case 1011: /* TryStatement */ {
+    case "try": {
       const attempted = compileStatement(instance, node[1]);
       const clause = node[2];
       const caught = clause[1];
@@ -800,7 +813,7 @@ function buildStatement(
 function isSpread(
   element: BundleArrayElement,
 ): element is BundleSpreadElementNode {
-  return Array.isArray(element) && element[0] === 1020 /* SpreadElement */;
+  return Array.isArray(element) && element[0] === "...";
 }
 
 // A list that may hold `...xs`: each member answers with one value or with the

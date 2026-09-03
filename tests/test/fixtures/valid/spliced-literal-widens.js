@@ -31,128 +31,100 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [21, 19, 26, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [22, 3, 22, 27],
-        declarationList: {
-          kind: 262,
-          loc: [22, 3, 22, 26],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [22, 9, 22, 10],
+          text: "n",
+          bindingKey: "n$19qhn3op6tbxe$0",
+        },
+        initializer: {
+          kind: "()",
+          loc: [22, 13, 22, 26],
+          expression: {
+            kind: "splice",
+            loc: [22, 13, 22, 19],
+            key: "$state",
+          },
+          arguments: [
             {
-              kind: 261,
-              loc: [22, 9, 22, 26],
-              name: {
-                kind: 80,
-                loc: [22, 9, 22, 10],
-                text: "n",
-                bindingKey: "n$19qhn3op6tbxe$0",
-              },
-              initializer: {
-                kind: 214,
-                loc: [22, 13, 22, 26],
-                expression: {
-                  kind: 1000,
-                  loc: [22, 13, 22, 19],
-                  key: "$state",
-                },
-                questionDotToken: false,
-                arguments: [
-                  {
-                    kind: 1000,
-                    loc: [22, 20, 22, 25],
-                    key: "$five",
-                  },
-                ],
-              },
+              kind: "splice",
+              loc: [22, 20, 22, 25],
+              key: "$five",
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 214,
+        kind: "()",
         loc: [23, 3, 23, 13],
         expression: {
-          kind: 212,
+          kind: ".",
           loc: [23, 3, 23, 10],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [23, 3, 23, 4],
             text: "n",
             bindingKey: "n$19qhn3op6tbxe$0",
           },
-          questionDotToken: false,
           name: "write",
         },
-        questionDotToken: false,
         arguments: [
           {
-            kind: 9,
+            kind: "number",
             loc: [23, 11, 23, 12],
             value: 6,
           },
         ],
       },
       {
-        kind: 244,
+        kind: "const",
         loc: [24, 3, 24, 34],
-        declarationList: {
-          kind: 262,
-          loc: [24, 3, 24, 33],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [24, 9, 24, 10],
+          text: "c",
+          bindingKey: "c$19qhn3op6tbxe$1",
+        },
+        initializer: {
+          kind: "()",
+          loc: [24, 13, 24, 33],
+          expression: {
+            kind: "splice",
+            loc: [24, 13, 24, 19],
+            key: "$state",
+          },
+          arguments: [
             {
-              kind: 261,
-              loc: [24, 9, 24, 33],
-              name: {
-                kind: 80,
-                loc: [24, 9, 24, 10],
-                text: "c",
-                bindingKey: "c$19qhn3op6tbxe$1",
-              },
-              initializer: {
-                kind: 214,
-                loc: [24, 13, 24, 33],
-                expression: {
-                  kind: 1000,
-                  loc: [24, 13, 24, 19],
-                  key: "$state",
-                },
-                questionDotToken: false,
-                arguments: [
-                  {
-                    kind: 1000,
-                    loc: [24, 20, 24, 32],
-                    key: "$0splice0",
-                  },
-                ],
-              },
+              kind: "splice",
+              loc: [24, 20, 24, 32],
+              key: "$0splice0",
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 214,
+        kind: "()",
         loc: [25, 3, 25, 25],
         expression: {
-          kind: 212,
+          kind: ".",
           loc: [25, 3, 25, 10],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [25, 3, 25, 4],
             text: "c",
             bindingKey: "c$19qhn3op6tbxe$1",
           },
-          questionDotToken: false,
           name: "write",
         },
-        questionDotToken: false,
         arguments: [
           {
-            kind: 1000,
+            kind: "splice",
             loc: [25, 11, 25, 24],
             key: "$0splice1",
           },

@@ -10,63 +10,52 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [4, 19, 10, 2],
     statements: [
       {
-        kind: 244,
+        kind: "let",
         loc: [5, 3, 5, 13],
-        declarationList: {
-          kind: 262,
-          loc: [5, 3, 5, 12],
-          declarations: [
-            {
-              kind: 261,
-              loc: [5, 7, 5, 12],
-              name: {
-                kind: 80,
-                loc: [5, 7, 5, 8],
-                text: "n",
-                bindingKey: "n$3slc08eszz0br$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [5, 11, 5, 12],
-                value: 0,
-              },
-            },
-          ],
-          keyword: "let",
+        name: {
+          kind: "id",
+          loc: [5, 7, 5, 8],
+          text: "n",
+          bindingKey: "n$3slc08eszz0br$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [5, 11, 5, 12],
+          value: 0,
         },
       },
       {
-        kind: 246,
+        kind: "if",
         loc: [6, 3, 8, 4],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [6, 7, 6, 14],
           left: {
-            kind: 80,
+            kind: "id",
             loc: [6, 7, 6, 8],
             text: "n",
             bindingKey: "n$3slc08eszz0br$0",
           },
           operatorToken: "===",
           right: {
-            kind: 9,
+            kind: "number",
             loc: [6, 13, 6, 14],
             value: 0,
           },
         },
         thenStatement: {
-          kind: 242,
+          kind: "{}",
           loc: [6, 16, 8, 4],
           statements: [
             {
-              kind: 254,
+              kind: "return",
               loc: [7, 5, 7, 12],
               expression: {
-                kind: 106,
+                kind: "null",
                 loc: [7, 5, 7, 12],
               },
             },
@@ -75,17 +64,17 @@ export default cs.create(
         elseStatement: null,
       },
       {
-        kind: 227,
+        kind: "binop",
         loc: [9, 3, 9, 8],
         left: {
-          kind: 80,
+          kind: "id",
           loc: [9, 3, 9, 4],
           text: "n",
           bindingKey: "n$3slc08eszz0br$0",
         },
         operatorToken: "=",
         right: {
-          kind: 9,
+          kind: "number",
           loc: [9, 7, 9, 8],
           value: 1,
         },

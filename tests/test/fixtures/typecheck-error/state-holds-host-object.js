@@ -24,66 +24,52 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [16, 19, 19, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [17, 3, 17, 30],
-        declarationList: {
-          kind: 262,
-          loc: [17, 3, 17, 29],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [17, 9, 17, 13],
+          text: "held",
+          bindingKey: "held$2bsdl419q8da8$0",
+        },
+        initializer: {
+          kind: "()",
+          loc: [17, 16, 17, 29],
+          expression: {
+            kind: "splice",
+            loc: [17, 16, 17, 22],
+            key: "$state",
+          },
+          arguments: [
             {
-              kind: 261,
-              loc: [17, 9, 17, 29],
-              name: {
-                kind: 80,
-                loc: [17, 9, 17, 13],
-                text: "held",
-                bindingKey: "held$2bsdl419q8da8$0",
-              },
-              initializer: {
-                kind: 214,
-                loc: [17, 16, 17, 29],
-                expression: {
-                  kind: 1000,
-                  loc: [17, 16, 17, 22],
-                  key: "$state",
-                },
-                questionDotToken: false,
-                arguments: [
-                  {
-                    kind: 1000,
-                    loc: [17, 23, 17, 28],
-                    key: "$host",
-                  },
-                ],
-              },
+              kind: "splice",
+              loc: [17, 23, 17, 28],
+              key: "$host",
             },
           ],
-          keyword: "const",
         },
       },
       {
-        kind: 214,
+        kind: "()",
         loc: [18, 3, 18, 20],
         expression: {
-          kind: 212,
+          kind: ".",
           loc: [18, 3, 18, 13],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [18, 3, 18, 7],
             text: "held",
             bindingKey: "held$2bsdl419q8da8$0",
           },
-          questionDotToken: false,
           name: "write",
         },
-        questionDotToken: false,
         arguments: [
           {
-            kind: 1000,
+            kind: "splice",
             loc: [18, 14, 18, 19],
             key: "$host",
           },

@@ -14,11 +14,11 @@ function make(n) {
       captures: [],
     },
     () => ({
-      kind: 220,
+      kind: "=>",
       loc: [7, 13, 7, 21],
       parameters: [],
       body: {
-        kind: 1000,
+        kind: "splice",
         loc: [7, 19, 7, 21],
         key: "$n",
       },

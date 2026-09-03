@@ -16,25 +16,25 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [8, 20, 8, 48],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [8, 22, 8, 31],
         name: "a",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [8, 25, 8, 31],
           key: "$count",
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [8, 33, 8, 46],
         name: "b",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [8, 36, 8, 46],
           key: "$0splice0",
         },

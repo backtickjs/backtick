@@ -9,7 +9,7 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 1000,
+    kind: "splice",
     loc: [3, 19, 3, 23],
     key: "$0splice0",
   }),

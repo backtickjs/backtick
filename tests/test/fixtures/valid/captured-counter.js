@@ -11,133 +11,109 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [5, 19, 12, 2],
     statements: [
       {
-        kind: 244,
+        kind: "let",
         loc: [6, 3, 6, 17],
-        declarationList: {
-          kind: 262,
-          loc: [6, 3, 6, 16],
-          declarations: [
-            {
-              kind: 261,
-              loc: [6, 7, 6, 16],
-              name: {
-                kind: 80,
-                loc: [6, 7, 6, 12],
-                text: "count",
-                bindingKey: "count$31t2pc3vo9x5y$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [6, 15, 6, 16],
-                value: 0,
-              },
-            },
-          ],
-          keyword: "let",
+        name: {
+          kind: "id",
+          loc: [6, 7, 6, 12],
+          text: "count",
+          bindingKey: "count$31t2pc3vo9x5y$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [6, 15, 6, 16],
+          value: 0,
         },
       },
       {
-        kind: 244,
+        kind: "const",
         loc: [7, 3, 10, 5],
-        declarationList: {
-          kind: 262,
-          loc: [7, 3, 10, 4],
-          declarations: [
-            {
-              kind: 261,
-              loc: [7, 9, 10, 4],
-              name: {
-                kind: 80,
-                loc: [7, 9, 7, 13],
-                text: "bump",
-                bindingKey: "bump$31t2pc3vo9x5y$1",
-              },
-              initializer: {
-                kind: 220,
-                loc: [7, 16, 10, 4],
-                parameters: [],
-                body: {
-                  kind: 242,
-                  loc: [7, 22, 10, 4],
-                  statements: [
-                    {
-                      kind: 227,
-                      loc: [8, 5, 8, 22],
-                      left: {
-                        kind: 80,
-                        loc: [8, 5, 8, 10],
-                        text: "count",
-                        bindingKey: "count$31t2pc3vo9x5y$0",
-                      },
-                      operatorToken: "=",
-                      right: {
-                        kind: 227,
-                        loc: [8, 13, 8, 22],
-                        left: {
-                          kind: 80,
-                          loc: [8, 13, 8, 18],
-                          text: "count",
-                          bindingKey: "count$31t2pc3vo9x5y$0",
-                        },
-                        operatorToken: "+",
-                        right: {
-                          kind: 9,
-                          loc: [8, 21, 8, 22],
-                          value: 1,
-                        },
-                      },
-                    },
-                    {
-                      kind: 254,
-                      loc: [9, 5, 9, 18],
-                      expression: {
-                        kind: 80,
-                        loc: [9, 12, 9, 17],
-                        text: "count",
-                        bindingKey: "count$31t2pc3vo9x5y$0",
-                      },
-                    },
-                  ],
+        name: {
+          kind: "id",
+          loc: [7, 9, 7, 13],
+          text: "bump",
+          bindingKey: "bump$31t2pc3vo9x5y$1",
+        },
+        initializer: {
+          kind: "=>",
+          loc: [7, 16, 10, 4],
+          parameters: [],
+          body: {
+            kind: "{}",
+            loc: [7, 22, 10, 4],
+            statements: [
+              {
+                kind: "binop",
+                loc: [8, 5, 8, 22],
+                left: {
+                  kind: "id",
+                  loc: [8, 5, 8, 10],
+                  text: "count",
+                  bindingKey: "count$31t2pc3vo9x5y$0",
+                },
+                operatorToken: "=",
+                right: {
+                  kind: "binop",
+                  loc: [8, 13, 8, 22],
+                  left: {
+                    kind: "id",
+                    loc: [8, 13, 8, 18],
+                    text: "count",
+                    bindingKey: "count$31t2pc3vo9x5y$0",
+                  },
+                  operatorToken: "+",
+                  right: {
+                    kind: "number",
+                    loc: [8, 21, 8, 22],
+                    value: 1,
+                  },
                 },
               },
-            },
-          ],
-          keyword: "const",
+              {
+                kind: "return",
+                loc: [9, 5, 9, 18],
+                expression: {
+                  kind: "id",
+                  loc: [9, 12, 9, 17],
+                  text: "count",
+                  bindingKey: "count$31t2pc3vo9x5y$0",
+                },
+              },
+            ],
+          },
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [11, 3, 11, 26],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [11, 10, 11, 25],
           left: {
-            kind: 214,
+            kind: "()",
             loc: [11, 10, 11, 16],
             expression: {
-              kind: 80,
+              kind: "id",
               loc: [11, 10, 11, 14],
               text: "bump",
               bindingKey: "bump$31t2pc3vo9x5y$1",
             },
-            questionDotToken: false,
             arguments: [],
           },
           operatorToken: "+",
           right: {
-            kind: 214,
+            kind: "()",
             loc: [11, 19, 11, 25],
             expression: {
-              kind: 80,
+              kind: "id",
               loc: [11, 19, 11, 23],
               text: "bump",
               bindingKey: "bump$31t2pc3vo9x5y$1",
             },
-            questionDotToken: false,
             arguments: [],
           },
         },

@@ -18,7 +18,7 @@ const x = cs.create(
     captures: [],
   },
   () => ({
-    kind: 9,
+    kind: "number",
     loc: [12, 14, 12, 15],
     value: 1,
   }),
@@ -33,7 +33,7 @@ const label = cs.create(
     captures: [],
   },
   () => ({
-    kind: 11,
+    kind: "string",
     loc: [13, 18, 13, 26],
     text: "origin",
   }),
@@ -49,22 +49,21 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 227,
+    kind: "binop",
     loc: [17, 19, 17, 31],
     left: {
-      kind: 212,
+      kind: ".",
       loc: [17, 19, 17, 27],
       expression: {
-        kind: 1000,
+        kind: "splice",
         loc: [17, 19, 17, 25],
         key: "$point",
       },
-      questionDotToken: false,
       name: "x",
     },
     operatorToken: "+",
     right: {
-      kind: 9,
+      kind: "number",
       loc: [17, 30, 17, 31],
       value: 1,
     },

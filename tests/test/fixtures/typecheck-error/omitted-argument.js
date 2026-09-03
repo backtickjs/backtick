@@ -11,14 +11,14 @@ const greet = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 18, 7, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [5, 19, 5, 32],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [5, 19, 5, 23],
           text: "name",
           bindingKey: "name$1gqqin78x7yev$0",
@@ -26,31 +26,29 @@ const greet = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [5, 37, 7, 2],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [6, 3, 6, 28],
           expression: {
-            kind: 214,
+            kind: "()",
             loc: [6, 10, 6, 27],
             expression: {
-              kind: 212,
+              kind: "?.",
               loc: [6, 10, 6, 22],
               expression: {
-                kind: 80,
+                kind: "id",
                 loc: [6, 10, 6, 14],
                 text: "name",
                 bindingKey: "name$1gqqin78x7yev$0",
               },
-              questionDotToken: true,
               name: "concat",
             },
-            questionDotToken: false,
             arguments: [
               {
-                kind: 11,
+                kind: "string",
                 loc: [6, 23, 6, 26],
                 text: "!",
               },
@@ -71,21 +69,20 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [9, 19, 11, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [10, 3, 10, 19],
         expression: {
-          kind: 214,
+          kind: "()",
           loc: [10, 10, 10, 18],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [10, 10, 10, 16],
             key: "$greet",
           },
-          questionDotToken: false,
           arguments: [],
         },
       },

@@ -9,7 +9,7 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 9,
+    kind: "number",
     loc: [3, 19, 3, 20],
     value: 1,
   }),

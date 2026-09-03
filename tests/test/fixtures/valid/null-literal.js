@@ -11,14 +11,14 @@ const orDash = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [5, 61, 12, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [6, 3, 6, 23],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [6, 3, 6, 8],
           text: "value",
           bindingKey: "value$2albtvza6nmmn$0",
@@ -26,36 +26,36 @@ const orDash = cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [7, 6, 12, 2],
       statements: [
         {
-          kind: 246,
+          kind: "if",
           loc: [8, 3, 10, 4],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [8, 7, 8, 21],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [8, 7, 8, 12],
               text: "value",
               bindingKey: "value$2albtvza6nmmn$0",
             },
             operatorToken: "===",
             right: {
-              kind: 106,
+              kind: "null",
               loc: [8, 17, 8, 21],
             },
           },
           thenStatement: {
-            kind: 242,
+            kind: "{}",
             loc: [8, 23, 10, 4],
             statements: [
               {
-                kind: 254,
+                kind: "return",
                 loc: [9, 5, 9, 16],
                 expression: {
-                  kind: 11,
+                  kind: "string",
                   loc: [9, 12, 9, 15],
                   text: "-",
                 },
@@ -65,10 +65,10 @@ const orDash = cs.create(
           elseStatement: null,
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [11, 3, 11, 16],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [11, 10, 11, 15],
             text: "value",
             bindingKey: "value$2albtvza6nmmn$0",
@@ -88,46 +88,44 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [14, 20, 18, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [15, 3, 15, 25],
         name: "missing",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [15, 12, 15, 25],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [15, 12, 15, 19],
             key: "$orDash",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 106,
+              kind: "null",
               loc: [15, 20, 15, 24],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [16, 3, 16, 25],
         name: "present",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [16, 12, 16, 25],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [16, 12, 16, 19],
             key: "$orDash",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 11,
+              kind: "string",
               loc: [16, 20, 16, 24],
               text: "hi",
             },
@@ -135,11 +133,11 @@ export default cs.create(
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [17, 3, 17, 13],
         name: "bare",
         initializer: {
-          kind: 106,
+          kind: "null",
           loc: [17, 9, 17, 13],
         },
       },

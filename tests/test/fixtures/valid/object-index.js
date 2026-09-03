@@ -14,14 +14,14 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [9, 19, 14, 2],
     parameters: [
       {
-        kind: 170,
+        kind: "param",
         loc: [9, 20, 9, 36],
         name: {
-          kind: 80,
+          kind: "id",
           loc: [9, 20, 9, 28],
           text: "currency",
           bindingKey: "currency$1cte50r1xtec2$0",
@@ -29,143 +29,110 @@ export default cs.create(
       },
     ],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [9, 41, 14, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [10, 3, 10, 24],
-          declarationList: {
-            kind: 262,
-            loc: [10, 3, 10, 23],
-            declarations: [
-              {
-                kind: 261,
-                loc: [10, 9, 10, 23],
-                name: {
-                  kind: 80,
-                  loc: [10, 9, 10, 14],
-                  text: "table",
-                  bindingKey: "table$1cte50r1xtec2$1",
-                },
-                initializer: {
-                  kind: 1000,
-                  loc: [10, 17, 10, 23],
-                  key: "$rates",
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [10, 9, 10, 14],
+            text: "table",
+            bindingKey: "table$1cte50r1xtec2$1",
+          },
+          initializer: {
+            kind: "splice",
+            loc: [10, 17, 10, 23],
+            key: "$rates",
           },
         },
         {
-          kind: 244,
+          kind: "const",
           loc: [11, 3, 11, 38],
-          declarationList: {
-            kind: 262,
-            loc: [11, 3, 11, 37],
-            declarations: [
-              {
-                kind: 261,
-                loc: [11, 9, 11, 37],
-                name: {
-                  kind: 80,
-                  loc: [11, 9, 11, 14],
-                  text: "asked",
-                  bindingKey: "asked$1cte50r1xtec2$2",
-                },
-                initializer: {
-                  kind: 227,
-                  loc: [11, 17, 11, 37],
-                  left: {
-                    kind: 213,
-                    loc: [11, 17, 11, 32],
-                    expression: {
-                      kind: 80,
-                      loc: [11, 17, 11, 22],
-                      text: "table",
-                      bindingKey: "table$1cte50r1xtec2$1",
-                    },
-                    argumentExpression: {
-                      kind: 80,
-                      loc: [11, 23, 11, 31],
-                      text: "currency",
-                      bindingKey: "currency$1cte50r1xtec2$0",
-                    },
-                  },
-                  operatorToken: "??",
-                  right: {
-                    kind: 9,
-                    loc: [11, 36, 11, 37],
-                    value: 0,
-                  },
-                },
+          name: {
+            kind: "id",
+            loc: [11, 9, 11, 14],
+            text: "asked",
+            bindingKey: "asked$1cte50r1xtec2$2",
+          },
+          initializer: {
+            kind: "binop",
+            loc: [11, 17, 11, 37],
+            left: {
+              kind: "[]",
+              loc: [11, 17, 11, 32],
+              expression: {
+                kind: "id",
+                loc: [11, 17, 11, 22],
+                text: "table",
+                bindingKey: "table$1cte50r1xtec2$1",
               },
-            ],
-            keyword: "const",
+              argumentExpression: {
+                kind: "id",
+                loc: [11, 23, 11, 31],
+                text: "currency",
+                bindingKey: "currency$1cte50r1xtec2$0",
+              },
+            },
+            operatorToken: "??",
+            right: {
+              kind: "number",
+              loc: [11, 36, 11, 37],
+              value: 0,
+            },
           },
         },
         {
-          kind: 244,
+          kind: "const",
           loc: [12, 3, 12, 33],
-          declarationList: {
-            kind: 262,
-            loc: [12, 3, 12, 32],
-            declarations: [
-              {
-                kind: 261,
-                loc: [12, 9, 12, 32],
-                name: {
-                  kind: 80,
-                  loc: [12, 9, 12, 12],
-                  text: "usd",
-                  bindingKey: "usd$1cte50r1xtec2$3",
-                },
-                initializer: {
-                  kind: 227,
-                  loc: [12, 15, 12, 32],
-                  left: {
-                    kind: 213,
-                    loc: [12, 15, 12, 27],
-                    expression: {
-                      kind: 80,
-                      loc: [12, 15, 12, 20],
-                      text: "table",
-                      bindingKey: "table$1cte50r1xtec2$1",
-                    },
-                    argumentExpression: {
-                      kind: 11,
-                      loc: [12, 21, 12, 26],
-                      text: "usd",
-                    },
-                  },
-                  operatorToken: "??",
-                  right: {
-                    kind: 9,
-                    loc: [12, 31, 12, 32],
-                    value: 0,
-                  },
-                },
+          name: {
+            kind: "id",
+            loc: [12, 9, 12, 12],
+            text: "usd",
+            bindingKey: "usd$1cte50r1xtec2$3",
+          },
+          initializer: {
+            kind: "binop",
+            loc: [12, 15, 12, 32],
+            left: {
+              kind: "[]",
+              loc: [12, 15, 12, 27],
+              expression: {
+                kind: "id",
+                loc: [12, 15, 12, 20],
+                text: "table",
+                bindingKey: "table$1cte50r1xtec2$1",
               },
-            ],
-            keyword: "const",
+              argumentExpression: {
+                kind: "string",
+                loc: [12, 21, 12, 26],
+                text: "usd",
+              },
+            },
+            operatorToken: "??",
+            right: {
+              kind: "number",
+              loc: [12, 31, 12, 32],
+              value: 0,
+            },
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [13, 3, 13, 22],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [13, 10, 13, 21],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [13, 10, 13, 15],
               text: "asked",
               bindingKey: "asked$1cte50r1xtec2$2",
             },
             operatorToken: "+",
             right: {
-              kind: 80,
+              kind: "id",
               loc: [13, 18, 13, 21],
               text: "usd",
               bindingKey: "usd$1cte50r1xtec2$3",

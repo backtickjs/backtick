@@ -2,44 +2,39 @@
   "functions": {
     "0": [
       [
-        1005,
+        "=>",
         [],
         [
-          1006,
+          "{}",
           [
             [
-              1007,
+              "const",
               "greeting",
-              "Hello",
-              "const"
+              "Hello"
             ],
             [
-              1009,
+              "return",
               [
-                1001,
+                "()",
                 [
-                  1002,
+                  ".",
                   [
-                    1001,
+                    "()",
                     [
-                      1002,
+                      ".",
                       [
-                        1000,
+                        "id",
                         "greeting"
                       ],
-                      false,
                       "concat"
                     ],
-                    false,
                     [
                       ", ",
                       "World"
                     ]
                   ],
-                  false,
                   "toUpperCase"
                 ],
-                false,
                 []
               ]
             ]
@@ -49,7 +44,7 @@
     ]
   },
   "root": [
-    2,
+    "fn()",
     "0",
     []
   ]

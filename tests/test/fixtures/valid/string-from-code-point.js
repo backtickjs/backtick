@@ -15,42 +15,41 @@ async function Written() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [8, 13, 12, 4],
       statements: [
         {
-          kind: 254,
+          kind: "return",
           loc: [9, 5, 11, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [10, 7, 10, 76],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [10, 8, 10, 12],
               text: "span",
             },
             attributes: [],
             children: [
               {
-                kind: 227,
+                kind: "binop",
                 loc: [10, 14, 10, 68],
                 left: {
-                  kind: 214,
+                  kind: "()",
                   loc: [10, 14, 10, 43],
                   expression: {
-                    kind: 1001,
+                    kind: "bltn",
                     loc: [10, 14, 10, 34],
                     name: "String.fromCodePoint",
                   },
-                  questionDotToken: false,
                   arguments: [
                     {
-                      kind: 9,
+                      kind: "number",
                       loc: [10, 35, 10, 37],
                       value: 72,
                     },
                     {
-                      kind: 9,
+                      kind: "number",
                       loc: [10, 39, 10, 42],
                       value: 105,
                     },
@@ -58,14 +57,13 @@ async function Written() {
                 },
                 operatorToken: "+",
                 right: {
-                  kind: 214,
+                  kind: "()",
                   loc: [10, 46, 10, 68],
                   expression: {
-                    kind: 1001,
+                    kind: "bltn",
                     loc: [10, 46, 10, 66],
                     name: "String.fromCodePoint",
                   },
-                  questionDotToken: false,
                   arguments: [],
                 },
               },

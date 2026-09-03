@@ -22,7 +22,7 @@ export default cs.create(
               captures: ["base$1q50brt6ov79t$0"],
             },
             () => ({
-              kind: 80,
+              kind: "id",
               loc: [9, 21, 9, 25],
               text: "base",
               bindingKey: "base$1q50brt6ov79t$0",
@@ -35,40 +35,29 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [8, 3, 8, 19],
-        declarationList: {
-          kind: 262,
-          loc: [8, 3, 8, 18],
-          declarations: [
-            {
-              kind: 261,
-              loc: [8, 9, 8, 18],
-              name: {
-                kind: 80,
-                loc: [8, 9, 8, 13],
-                text: "base",
-                bindingKey: "base$1q50brt6ov79t$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [8, 16, 8, 18],
-                value: 10,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [8, 9, 8, 13],
+          text: "base",
+          bindingKey: "base$1q50brt6ov79t$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [8, 16, 8, 18],
+          value: 10,
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [9, 3, 9, 29],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [9, 10, 9, 28],
           key: "$0splice0",
         },
@@ -87,50 +76,39 @@ function outer(inner) {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [13, 13, 16, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [14, 5, 14, 20],
-          declarationList: {
-            kind: 262,
-            loc: [14, 5, 14, 19],
-            declarations: [
-              {
-                kind: 261,
-                loc: [14, 11, 14, 19],
-                name: {
-                  kind: 80,
-                  loc: [14, 11, 14, 15],
-                  text: "base",
-                  bindingKey: "base$1q50brt6ov79t$1",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [14, 18, 14, 19],
-                  value: 1,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [14, 11, 14, 15],
+            text: "base",
+            bindingKey: "base$1q50brt6ov79t$1",
+          },
+          initializer: {
+            kind: "number",
+            loc: [14, 18, 14, 19],
+            value: 1,
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [15, 5, 15, 36],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [15, 12, 15, 35],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [15, 12, 15, 16],
               text: "base",
               bindingKey: "base$1q50brt6ov79t$1",
             },
             operatorToken: "+",
             right: {
-              kind: 1000,
+              kind: "splice",
               loc: [15, 19, 15, 35],
               key: "$0splice0",
             },
@@ -151,50 +129,39 @@ function middle(inner) {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [20, 13, 23, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [21, 5, 21, 20],
-          declarationList: {
-            kind: 262,
-            loc: [21, 5, 21, 19],
-            declarations: [
-              {
-                kind: 261,
-                loc: [21, 11, 21, 19],
-                name: {
-                  kind: 80,
-                  loc: [21, 11, 21, 15],
-                  text: "base",
-                  bindingKey: "base$1q50brt6ov79t$2",
-                },
-                initializer: {
-                  kind: 9,
-                  loc: [21, 18, 21, 19],
-                  value: 2,
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [21, 11, 21, 15],
+            text: "base",
+            bindingKey: "base$1q50brt6ov79t$2",
+          },
+          initializer: {
+            kind: "number",
+            loc: [21, 18, 21, 19],
+            value: 2,
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [22, 5, 22, 26],
           expression: {
-            kind: 227,
+            kind: "binop",
             loc: [22, 12, 22, 25],
             left: {
-              kind: 80,
+              kind: "id",
               loc: [22, 12, 22, 16],
               text: "base",
               bindingKey: "base$1q50brt6ov79t$2",
             },
             operatorToken: "*",
             right: {
-              kind: 1000,
+              kind: "splice",
               loc: [22, 19, 22, 25],
               key: "$inner",
             },

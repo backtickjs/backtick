@@ -1,4 +1,3 @@
-import { NodeKind } from "@backtickjs/bundler";
 import type {
   Bundle,
   BundleArrayElement,
@@ -32,12 +31,17 @@ const fnLabel = (label: string): string => `#f${label}`;
 // and an array of data travels as one too (`ArrayLiteralExpression`).
 function isNode(
   node: BundleStatementNode | BundleExpressionNode,
-): node is Extract<
-  BundleStatementNode | BundleExpressionNode,
-  { 0: NodeKind }
-> {
+): node is Extract<BundleStatementNode | BundleExpressionNode, unknown[]> {
   return Array.isArray(node);
 }
+
+// The fifteen operator kinds, which bind looser than a prefix `!` or `-`.
+const binary = new Set<string>([
+  "=", "&&", "||", "??", "+", "-", "*", "/", "%",
+  "===", "!==", "<", "<=", ">", ">=",
+]);
+const isBinary = (kind: unknown): boolean =>
+  typeof kind === "string" && binary.has(kind);
 
 // Body grammar, as pseudo-JS.
 // `...xs`, which stands where an element or an argument stands rather than
@@ -45,7 +49,7 @@ function isNode(
 function isSpread(
   node: BundleStatementNode | BundleSpreadElementNode,
 ): node is BundleSpreadElementNode {
-  return Array.isArray(node) && node[0] === NodeKind.SpreadElement;
+  return Array.isArray(node) && node[0] === "...";
 }
 
 function renderNode(
@@ -61,11 +65,11 @@ function renderNode(
   const inner = `${indent}  `;
   switch (node[0]) {
     // Data, which a node kind carries only so it is not read as a node.
-    case NodeKind.ArrayLiteralExpression:
+    case "arr":
       return renderData<BundleArrayElement[]>(node[1], indent, renderNode);
     // A literal a spread runs through. A name of `null` is the spread, which is
     // why this reads its slots rather than the shape of what is in them.
-    case NodeKind.ObjectLiteralExpression:
+    case "obj":
       return `{ ${node[1]
         .map(([name, value]) =>
           name === null
@@ -73,85 +77,103 @@ function renderNode(
             : `${name}: ${renderNode(value, indent)}`,
         )
         .join(", ")} }`;
-    case NodeKind.Identifier:
+    case "id":
       return node[1];
-    case NodeKind.GetFunction:
+    case "fn":
       return fnLabel(node[1]);
     // What a tree entry's body yields, `for` included: a list is an element,
     // so it reads as the one it is written as.
-    case NodeKind.Element:
+    case "el":
       return renderJsx(node, indent);
     // A global the format names and the host answers.
-    case NodeKind.Builtin:
+    case "bltn":
       return node[1];
     // Same notation as in tree position: a body applies an entry when the
     // instance it makes is named, and calls one when it isn't.
-    case NodeKind.ApplyFunction: {
+    case "fn()": {
       const args = node[2].map((arg) => renderNode(arg, indent));
       return `${fnLabel(node[1])}(${args.join(", ")})`;
     }
-    case NodeKind.CallExpression: {
-      const args = node[3].map((arg) => renderNode(arg, indent));
+    case "()":
+    case "?.()": {
+      const args = node[2].map((arg) => renderNode(arg, indent));
       const calleeNode = node[1];
       const callee = renderNode(calleeNode, indent);
       // An arrow callee (an expansion applied to its arguments) binds
       // looser than the call — parenthesize so the text reads as it runs.
       const target =
-        isNode(calleeNode) && calleeNode[0] === NodeKind.ArrowFunction
+        isNode(calleeNode) && calleeNode[0] === "=>"
           ? `(${callee})`
           : callee;
-      return `${target}${node[2] ? "?." : ""}(${args.join(", ")})`;
+      const optional = node[0] === "?.()";
+      return `${target}${optional ? "?." : ""}(${args.join(", ")})`;
     }
-    case NodeKind.PropertyAccessExpression:
-      return `${renderNode(node[1], indent)}${node[2] ? "?." : "."}${node[3]}`;
-    case NodeKind.ElementAccessExpression:
+    case ".":
+      return `${renderNode(node[1], indent)}.${node[2]}`;
+    case "?.":
+      return `${renderNode(node[1], indent)}?.${node[2]}`;
+    case "[]":
       return `${renderNode(node[1], indent)}[${renderNode(node[2], indent)}]`;
-    case NodeKind.BinaryExpression:
-      return `${renderNode(node[2], indent)} ${node[1]} ${renderNode(
-        node[3],
+    case "=":
+    case "&&":
+    case "||":
+    case "??":
+    case "+":
+    case "-":
+    case "*":
+    case "/":
+    case "%":
+    case "===":
+    case "!==":
+    case "<":
+    case "<=":
+    case ">":
+    case ">=":
+      return `${renderNode(node[1], indent)} ${node[0]} ${renderNode(
+        node[2],
         indent,
       )}`;
-    case NodeKind.PrefixUnaryExpression: {
-      // `!` binds tighter than any binary operator, so an operand that is one
-      // reads as the wrong tree without parentheses.
-      const operand = node[2];
+    case "!":
+    case "-x": {
+      // A prefix operator binds tighter than any binary one, so an operand
+      // that is one reads as the wrong tree without parentheses.
+      const operand = node[1];
       const text = renderNode(operand, indent);
       const looser =
-        isNode(operand) &&
-        (operand[0] === NodeKind.BinaryExpression ||
-          operand[0] === NodeKind.ConditionalExpression);
-      return `${node[1]}${looser ? `(${text})` : text}`;
+        isNode(operand) && (isBinary(operand[0]) || operand[0] === "?:");
+      return `${node[0] === "!" ? "!" : "-"}${looser ? `(${text})` : text}`;
     }
-    case NodeKind.ConditionalExpression:
+    case "?:":
       return `${renderNode(node[1], indent)} ? ${renderNode(
         node[2],
         indent,
       )} : ${renderNode(node[3], indent)}`;
-    case NodeKind.ArrowFunction:
+    case "=>":
       return `(${node[1]
         .map((param) => param[1])
         .join(", ")}) => ${renderBody(node[2], indent)}`;
-    case NodeKind.Block: {
+    case "{}": {
       const statements = node[1].map(
         (statement) => `${inner}${renderStatement(statement, inner)}`,
       );
       return `{\n${statements.join("\n")}\n${indent}}`;
     }
-    case NodeKind.VariableDeclaration:
-      return `${node[3]} ${node[1]} = ${renderNode(node[2], indent)}`;
-    case NodeKind.IfStatement: {
+    case "const":
+    case "let":
+      return `${node[0]} ${node[1]} = ${renderNode(node[2], indent)}`;
+    case "if": {
       const consequent = renderStatement(node[2], indent);
       const branch = node[3];
       const alternate =
         branch === null ? "" : ` else ${renderStatement(branch, indent)}`;
       return `if (${renderNode(node[1], indent)}) ${consequent}${alternate}`;
     }
-    case NodeKind.WhileStatement:
+    case "while":
       return `while (${renderNode(node[1], indent)}) ${renderStatement(
         node[2],
         indent,
       )}`;
-    case NodeKind.ForStatement: {
+    case "for": {
       const init = node[1];
       const condition = node[2];
       const update = node[3];
@@ -165,15 +187,15 @@ function renderNode(
         : parts.join("; ");
       return `for (${header}) ${renderStatement(node[4], indent)}`;
     }
-    case NodeKind.BreakStatement:
+    case "break":
       return "break";
-    case NodeKind.ContinueStatement:
+    case "continue":
       return "continue";
-    case NodeKind.ReturnStatement:
+    case "return":
       return `return ${renderNode(node[1], indent)}`;
-    case NodeKind.ThrowStatement:
+    case "throw":
       return `throw ${renderNode(node[1], indent)}`;
-    case NodeKind.TryStatement: {
+    case "try": {
       const clause = node[2];
       const bound = clause[1];
       const param = bound === null ? "" : ` (${bound})`;
@@ -190,18 +212,18 @@ function renderNode(
 function renderStatement(node: BundleStatementNode, indent: string): string {
   const text = renderNode(node, indent);
   return isNode(node) &&
-    (node[0] === NodeKind.Block ||
-      node[0] === NodeKind.IfStatement ||
-      node[0] === NodeKind.WhileStatement ||
-      node[0] === NodeKind.ForStatement ||
-      node[0] === NodeKind.TryStatement)
+    (node[0] === "{}" ||
+      node[0] === "if" ||
+      node[0] === "while" ||
+      node[0] === "for" ||
+      node[0] === "try")
     ? text
     : `${text};`;
 }
 
 // An arrow body: a block, or an expression implicitly returned.
 function renderBody(body: BundleBody, indent: string): string {
-  if (isNode(body) && body[0] === NodeKind.Block) {
+  if (isNode(body) && body[0] === "{}") {
     return renderNode(body, indent);
   }
   return renderNode(body as BundleExpressionNode, indent);
@@ -219,7 +241,7 @@ function renderJsx(element: BundleElement, indent: string): string {
   const children: BundleArrayElement[] =
     held === null
       ? []
-      : Array.isArray(held) && held[0] === NodeKind.ArrayLiteralExpression
+      : Array.isArray(held) && held[0] === "arr"
         ? (held[1] as BundleArrayElement[])
         : [held];
   const opening =

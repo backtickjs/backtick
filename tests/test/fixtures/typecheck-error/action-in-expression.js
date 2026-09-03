@@ -12,33 +12,22 @@ const action = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [6, 19, 8, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [7, 3, 7, 15],
-        declarationList: {
-          kind: 262,
-          loc: [7, 3, 7, 14],
-          declarations: [
-            {
-              kind: 261,
-              loc: [7, 9, 7, 14],
-              name: {
-                kind: 80,
-                loc: [7, 9, 7, 10],
-                text: "x",
-                bindingKey: "x$8tx5qho0had8$0",
-              },
-              initializer: {
-                kind: 9,
-                loc: [7, 13, 7, 14],
-                value: 1,
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [7, 9, 7, 10],
+          text: "x",
+          bindingKey: "x$8tx5qho0had8$0",
+        },
+        initializer: {
+          kind: "number",
+          loc: [7, 13, 7, 14],
+          value: 1,
         },
       },
     ],
@@ -54,40 +43,29 @@ export const stored = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [10, 26, 13, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [11, 3, 11, 28],
-        declarationList: {
-          kind: 262,
-          loc: [11, 3, 11, 27],
-          declarations: [
-            {
-              kind: 261,
-              loc: [11, 9, 11, 27],
-              name: {
-                kind: 80,
-                loc: [11, 9, 11, 17],
-                text: "captured",
-                bindingKey: "captured$8tx5qho0had8$1",
-              },
-              initializer: {
-                kind: 1000,
-                loc: [11, 20, 11, 27],
-                key: "$action",
-              },
-            },
-          ],
-          keyword: "const",
+        name: {
+          kind: "id",
+          loc: [11, 9, 11, 17],
+          text: "captured",
+          bindingKey: "captured$8tx5qho0had8$1",
+        },
+        initializer: {
+          kind: "splice",
+          loc: [11, 20, 11, 27],
+          key: "$action",
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [12, 3, 12, 12],
         expression: {
-          kind: 9,
+          kind: "number",
           loc: [12, 10, 12, 11],
           value: 1,
         },
@@ -105,14 +83,14 @@ export const returned = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [15, 28, 17, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [16, 3, 16, 18],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [16, 10, 16, 17],
           key: "$action",
         },
@@ -130,21 +108,21 @@ export const assigned = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [19, 28, 26, 2],
     statements: [
       {
-        kind: 259,
+        kind: "try",
         loc: [20, 3, 25, 4],
         tryBlock: {
-          kind: 242,
+          kind: "{}",
           loc: [20, 7, 22, 4],
           statements: [
             {
-              kind: 254,
+              kind: "return",
               loc: [21, 5, 21, 14],
               expression: {
-                kind: 9,
+                kind: "number",
                 loc: [21, 12, 21, 13],
                 value: 1,
               },
@@ -152,39 +130,39 @@ export const assigned = cs.create(
           ],
         },
         catchClause: {
-          kind: 300,
+          kind: "catch",
           loc: [22, 5, 25, 4],
           variableDeclaration: {
-            kind: 80,
+            kind: "id",
             loc: [22, 12, 22, 13],
             text: "e",
             bindingKey: "e$8tx5qho0had8$2",
           },
           block: {
-            kind: 242,
+            kind: "{}",
             loc: [22, 15, 25, 4],
             statements: [
               {
-                kind: 227,
+                kind: "binop",
                 loc: [23, 5, 23, 16],
                 left: {
-                  kind: 80,
+                  kind: "id",
                   loc: [23, 5, 23, 6],
                   text: "e",
                   bindingKey: "e$8tx5qho0had8$2",
                 },
                 operatorToken: "=",
                 right: {
-                  kind: 1000,
+                  kind: "splice",
                   loc: [23, 9, 23, 16],
                   key: "$action",
                 },
               },
               {
-                kind: 254,
+                kind: "return",
                 loc: [24, 5, 24, 14],
                 expression: {
-                  kind: 9,
+                  kind: "number",
                   loc: [24, 12, 24, 13],
                   value: 2,
                 },

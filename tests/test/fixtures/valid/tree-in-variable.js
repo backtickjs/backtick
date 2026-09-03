@@ -19,44 +19,33 @@ const held = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [13, 17, 16, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [13, 23, 16, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [14, 3, 14, 29],
-          declarationList: {
-            kind: 262,
-            loc: [14, 3, 14, 28],
-            declarations: [
-              {
-                kind: 261,
-                loc: [14, 9, 14, 28],
-                name: {
-                  kind: 80,
-                  loc: [14, 9, 14, 13],
-                  text: "tree",
-                  bindingKey: "tree$3ravx23kvqohc$0",
-                },
-                initializer: {
-                  kind: 1000,
-                  loc: [14, 16, 14, 28],
-                  key: "$0splice0",
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [14, 9, 14, 13],
+            text: "tree",
+            bindingKey: "tree$3ravx23kvqohc$0",
+          },
+          initializer: {
+            kind: "splice",
+            loc: [14, 16, 14, 28],
+            key: "$0splice0",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [15, 3, 15, 15],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [15, 10, 15, 14],
             text: "tree",
             bindingKey: "tree$3ravx23kvqohc$0",
@@ -76,44 +65,33 @@ const heldComponent = cs.create(
     captures: [],
   },
   () => ({
-    kind: 220,
+    kind: "=>",
     loc: [18, 26, 21, 2],
     parameters: [],
     body: {
-      kind: 242,
+      kind: "{}",
       loc: [18, 32, 21, 2],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [19, 3, 19, 29],
-          declarationList: {
-            kind: 262,
-            loc: [19, 3, 19, 28],
-            declarations: [
-              {
-                kind: 261,
-                loc: [19, 9, 19, 28],
-                name: {
-                  kind: 80,
-                  loc: [19, 9, 19, 13],
-                  text: "tree",
-                  bindingKey: "tree$3ravx23kvqohc$1",
-                },
-                initializer: {
-                  kind: 1000,
-                  loc: [19, 16, 19, 28],
-                  key: "$0splice0",
-                },
-              },
-            ],
-            keyword: "const",
+          name: {
+            kind: "id",
+            loc: [19, 9, 19, 13],
+            text: "tree",
+            bindingKey: "tree$3ravx23kvqohc$1",
+          },
+          initializer: {
+            kind: "splice",
+            loc: [19, 16, 19, 28],
+            key: "$0splice0",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [20, 3, 20, 15],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [20, 10, 20, 14],
             text: "tree",
             bindingKey: "tree$3ravx23kvqohc$1",
@@ -135,14 +113,13 @@ export default _jsxs("div", {
         captures: [],
       },
       () => ({
-        kind: 214,
+        kind: "()",
         loc: [25, 9, 25, 16],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [25, 9, 25, 14],
           key: "$held",
         },
-        questionDotToken: false,
         arguments: [],
       }),
     ),
@@ -156,14 +133,13 @@ export default _jsxs("div", {
         captures: [],
       },
       () => ({
-        kind: 214,
+        kind: "()",
         loc: [26, 9, 26, 25],
         expression: {
-          kind: 1000,
+          kind: "splice",
           loc: [26, 9, 26, 23],
           key: "$heldComponent",
         },
-        questionDotToken: false,
         arguments: [],
       }),
     ),

@@ -21,11 +21,11 @@ export default cs.create(
             captures: [],
           },
           () => ({
-            kind: 220,
+            kind: "=>",
             loc: [9, 21, 9, 28],
             parameters: [],
             body: {
-              kind: 9,
+              kind: "number",
               loc: [9, 27, 9, 28],
               value: 2,
             },
@@ -37,84 +37,71 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [7, 19, 10, 2],
     statements: [
       {
-        kind: 244,
+        kind: "const",
         loc: [8, 3, 8, 46],
-        declarationList: {
-          kind: 262,
-          loc: [8, 3, 8, 45],
-          declarations: [
+        name: {
+          kind: "id",
+          loc: [8, 9, 8, 14],
+          text: "apply",
+          bindingKey: "apply$22dvza3e0b85b$0",
+        },
+        initializer: {
+          kind: "=>",
+          loc: [8, 17, 8, 45],
+          parameters: [
             {
-              kind: 261,
-              loc: [8, 9, 8, 45],
+              kind: "param",
+              loc: [8, 18, 8, 33],
               name: {
-                kind: 80,
-                loc: [8, 9, 8, 14],
-                text: "apply",
-                bindingKey: "apply$22dvza3e0b85b$0",
-              },
-              initializer: {
-                kind: 220,
-                loc: [8, 17, 8, 45],
-                parameters: [
-                  {
-                    kind: 170,
-                    loc: [8, 18, 8, 33],
-                    name: {
-                      kind: 80,
-                      loc: [8, 18, 8, 19],
-                      text: "f",
-                      bindingKey: "f$22dvza3e0b85b$1",
-                    },
-                  },
-                ],
-                body: {
-                  kind: 227,
-                  loc: [8, 38, 8, 45],
-                  left: {
-                    kind: 214,
-                    loc: [8, 38, 8, 41],
-                    expression: {
-                      kind: 80,
-                      loc: [8, 38, 8, 39],
-                      text: "f",
-                      bindingKey: "f$22dvza3e0b85b$1",
-                    },
-                    questionDotToken: false,
-                    arguments: [],
-                  },
-                  operatorToken: "+",
-                  right: {
-                    kind: 9,
-                    loc: [8, 44, 8, 45],
-                    value: 1,
-                  },
-                },
+                kind: "id",
+                loc: [8, 18, 8, 19],
+                text: "f",
+                bindingKey: "f$22dvza3e0b85b$1",
               },
             },
           ],
-          keyword: "const",
+          body: {
+            kind: "binop",
+            loc: [8, 38, 8, 45],
+            left: {
+              kind: "()",
+              loc: [8, 38, 8, 41],
+              expression: {
+                kind: "id",
+                loc: [8, 38, 8, 39],
+                text: "f",
+                bindingKey: "f$22dvza3e0b85b$1",
+              },
+              arguments: [],
+            },
+            operatorToken: "+",
+            right: {
+              kind: "number",
+              loc: [8, 44, 8, 45],
+              value: 1,
+            },
+          },
         },
       },
       {
-        kind: 254,
+        kind: "return",
         loc: [9, 3, 9, 32],
         expression: {
-          kind: 214,
+          kind: "()",
           loc: [9, 10, 9, 31],
           expression: {
-            kind: 80,
+            kind: "id",
             loc: [9, 10, 9, 15],
             text: "apply",
             bindingKey: "apply$22dvza3e0b85b$0",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 1000,
+              kind: "splice",
               loc: [9, 16, 9, 30],
               key: "$0splice0",
             },

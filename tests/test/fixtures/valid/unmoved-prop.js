@@ -23,65 +23,53 @@ async function Rows() {
       captures: [],
     },
     () => ({
-      kind: 242,
+      kind: "{}",
       loc: [13, 13, 29, 4],
       statements: [
         {
-          kind: 244,
+          kind: "const",
           loc: [14, 5, 14, 32],
-          declarationList: {
-            kind: 262,
-            loc: [14, 5, 14, 31],
-            declarations: [
+          name: {
+            kind: "id",
+            loc: [14, 11, 14, 19],
+            text: "selected",
+            bindingKey: "selected$2qtyfiqhdw6n2$0",
+          },
+          initializer: {
+            kind: "()",
+            loc: [14, 22, 14, 31],
+            expression: {
+              kind: "splice",
+              loc: [14, 22, 14, 28],
+              key: "$state",
+            },
+            arguments: [
               {
-                kind: 261,
-                loc: [14, 11, 14, 31],
-                name: {
-                  kind: 80,
-                  loc: [14, 11, 14, 19],
-                  text: "selected",
-                  bindingKey: "selected$2qtyfiqhdw6n2$0",
-                },
-                initializer: {
-                  kind: 214,
-                  loc: [14, 22, 14, 31],
-                  expression: {
-                    kind: 1000,
-                    loc: [14, 22, 14, 28],
-                    key: "$state",
-                  },
-                  questionDotToken: false,
-                  arguments: [
-                    {
-                      kind: 9,
-                      loc: [14, 29, 14, 30],
-                      value: 0,
-                    },
-                  ],
-                },
+                kind: "number",
+                loc: [14, 29, 14, 30],
+                value: 0,
               },
             ],
-            keyword: "const",
           },
         },
         {
-          kind: 254,
+          kind: "return",
           loc: [15, 5, 28, 7],
           expression: {
-            kind: 285,
+            kind: "jsx",
             loc: [16, 7, 27, 13],
             type: {
-              kind: 11,
+              kind: "string",
               loc: [16, 8, 16, 11],
               text: "div",
             },
             attributes: [],
             children: [
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [17, 9, 17, 62],
                 type: {
-                  kind: 11,
+                  kind: "string",
                   loc: [17, 10, 17, 14],
                   text: "span",
                 },
@@ -89,28 +77,26 @@ async function Rows() {
                   {
                     name: "onclick",
                     initializer: {
-                      kind: 220,
+                      kind: "=>",
                       loc: [17, 24, 17, 47],
                       parameters: [],
                       body: {
-                        kind: 214,
+                        kind: "()",
                         loc: [17, 30, 17, 47],
                         expression: {
-                          kind: 212,
+                          kind: ".",
                           loc: [17, 30, 17, 44],
                           expression: {
-                            kind: 80,
+                            kind: "id",
                             loc: [17, 30, 17, 38],
                             text: "selected",
                             bindingKey: "selected$2qtyfiqhdw6n2$0",
                           },
-                          questionDotToken: false,
                           name: "write",
                         },
-                        questionDotToken: false,
                         arguments: [
                           {
-                            kind: 9,
+                            kind: "number",
                             loc: [17, 45, 17, 46],
                             value: 1,
                           },
@@ -121,27 +107,27 @@ async function Rows() {
                 ],
                 children: [
                   {
-                    kind: 11,
+                    kind: "string",
                     loc: [17, 49, 17, 55],
                     text: "select",
                   },
                 ],
               },
               {
-                kind: 285,
+                kind: "jsx",
                 loc: [18, 9, 26, 15],
                 type: {
-                  kind: 11,
+                  kind: "string",
                   loc: [18, 10, 18, 13],
                   text: "div",
                 },
                 attributes: [],
                 children: [
                   {
-                    kind: 285,
+                    kind: "jsx",
                     loc: [19, 11, 25, 17],
                     type: {
-                      kind: 1000,
+                      kind: "splice",
                       loc: [19, 12, 19, 15],
                       key: "$For",
                     },
@@ -149,21 +135,21 @@ async function Rows() {
                       {
                         name: "each",
                         initializer: {
-                          kind: 210,
+                          kind: "arr",
                           loc: [19, 22, 19, 31],
                           elements: [
                             {
-                              kind: 9,
+                              kind: "number",
                               loc: [19, 23, 19, 24],
                               value: 0,
                             },
                             {
-                              kind: 9,
+                              kind: "number",
                               loc: [19, 26, 19, 27],
                               value: 1,
                             },
                             {
-                              kind: 9,
+                              kind: "number",
                               loc: [19, 29, 19, 30],
                               value: 2,
                             },
@@ -173,14 +159,14 @@ async function Rows() {
                     ],
                     children: [
                       {
-                        kind: 220,
+                        kind: "=>",
                         loc: [20, 14, 24, 14],
                         parameters: [
                           {
-                            kind: 170,
+                            kind: "param",
                             loc: [20, 15, 20, 25],
                             name: {
-                              kind: 80,
+                              kind: "id",
                               loc: [20, 15, 20, 17],
                               text: "id",
                               bindingKey: "id$2qtyfiqhdw6n2$1",
@@ -188,10 +174,10 @@ async function Rows() {
                           },
                         ],
                         body: {
-                          kind: 285,
+                          kind: "jsx",
                           loc: [21, 15, 23, 19],
                           type: {
-                            kind: 11,
+                            kind: "string",
                             loc: [21, 16, 21, 17],
                             text: "a",
                           },
@@ -199,44 +185,42 @@ async function Rows() {
                             {
                               name: "href",
                               initializer: {
-                                kind: 228,
+                                kind: "?:",
                                 loc: [21, 24, 21, 68],
                                 condition: {
-                                  kind: 227,
+                                  kind: "binop",
                                   loc: [21, 24, 21, 46],
                                   left: {
-                                    kind: 214,
+                                    kind: "()",
                                     loc: [21, 24, 21, 39],
                                     expression: {
-                                      kind: 212,
+                                      kind: ".",
                                       loc: [21, 24, 21, 37],
                                       expression: {
-                                        kind: 80,
+                                        kind: "id",
                                         loc: [21, 24, 21, 32],
                                         text: "selected",
                                         bindingKey: "selected$2qtyfiqhdw6n2$0",
                                       },
-                                      questionDotToken: false,
                                       name: "read",
                                     },
-                                    questionDotToken: false,
                                     arguments: [],
                                   },
                                   operatorToken: "===",
                                   right: {
-                                    kind: 80,
+                                    kind: "id",
                                     loc: [21, 44, 21, 46],
                                     text: "id",
                                     bindingKey: "id$2qtyfiqhdw6n2$1",
                                   },
                                 },
                                 whenTrue: {
-                                  kind: 11,
+                                  kind: "string",
                                   loc: [21, 49, 21, 56],
                                   text: "#open",
                                 },
                                 whenFalse: {
-                                  kind: 11,
+                                  kind: "string",
                                   loc: [21, 59, 21, 68],
                                   text: "#closed",
                                 },
@@ -245,16 +229,16 @@ async function Rows() {
                           ],
                           children: [
                             {
-                              kind: 227,
+                              kind: "binop",
                               loc: [22, 18, 22, 29],
                               left: {
-                                kind: 11,
+                                kind: "string",
                                 loc: [22, 18, 22, 24],
                                 text: "row ",
                               },
                               operatorToken: "+",
                               right: {
-                                kind: 80,
+                                kind: "id",
                                 loc: [22, 27, 22, 29],
                                 text: "id",
                                 bindingKey: "id$2qtyfiqhdw6n2$1",

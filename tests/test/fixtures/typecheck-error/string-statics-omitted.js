@@ -11,17 +11,16 @@ export const written = cs.create(
     captures: [],
   },
   () => ({
-    kind: 214,
+    kind: "()",
     loc: [5, 27, 5, 50],
     expression: {
-      kind: 1001,
+      kind: "bltn",
       loc: [5, 27, 5, 46],
       name: "String.fromCharCode",
     },
-    questionDotToken: false,
     arguments: [
       {
-        kind: 9,
+        kind: "number",
         loc: [5, 47, 5, 49],
         value: 72,
       },

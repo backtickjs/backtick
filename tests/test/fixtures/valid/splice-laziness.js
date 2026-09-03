@@ -17,14 +17,14 @@ function guard(fragment) {
       captures: [],
     },
     () => ({
-      kind: 220,
+      kind: "=>",
       loc: [11, 13, 16, 4],
       parameters: [
         {
-          kind: 170,
+          kind: "param",
           loc: [11, 14, 11, 27],
           name: {
-            kind: 80,
+            kind: "id",
             loc: [11, 14, 11, 18],
             text: "flag",
             bindingKey: "flag$23k9adtpaouck$0",
@@ -32,27 +32,27 @@ function guard(fragment) {
         },
       ],
       body: {
-        kind: 242,
+        kind: "{}",
         loc: [11, 32, 16, 4],
         statements: [
           {
-            kind: 246,
+            kind: "if",
             loc: [12, 5, 14, 6],
             expression: {
-              kind: 80,
+              kind: "id",
               loc: [12, 9, 12, 13],
               text: "flag",
               bindingKey: "flag$23k9adtpaouck$0",
             },
             thenStatement: {
-              kind: 242,
+              kind: "{}",
               loc: [12, 15, 14, 6],
               statements: [
                 {
-                  kind: 254,
+                  kind: "return",
                   loc: [13, 7, 13, 24],
                   expression: {
-                    kind: 1000,
+                    kind: "splice",
                     loc: [13, 14, 13, 23],
                     key: "$fragment",
                   },
@@ -62,10 +62,10 @@ function guard(fragment) {
             elseStatement: null,
           },
           {
-            kind: 254,
+            kind: "return",
             loc: [15, 5, 15, 22],
             expression: {
-              kind: 11,
+              kind: "string",
               loc: [15, 12, 15, 21],
               text: "skipped",
             },
@@ -85,7 +85,7 @@ const ok = cs.create(
     captures: [],
   },
   () => ({
-    kind: 11,
+    kind: "string",
     loc: [19, 15, 19, 26],
     text: "evaluated",
   }),
@@ -100,14 +100,14 @@ const broken = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [20, 19, 22, 2],
     statements: [
       {
-        kind: 258,
+        kind: "throw",
         loc: [21, 3, 21, 52],
         expression: {
-          kind: 11,
+          kind: "string",
           loc: [21, 9, 21, 51],
           text: "the guarded fragment must never evaluate",
         },
@@ -128,46 +128,44 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [24, 20, 27, 2],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [25, 3, 25, 28],
         name: "taken",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [25, 10, 25, 28],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [25, 10, 25, 22],
             key: "$0splice0",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 112,
+              kind: "true",
               loc: [25, 23, 25, 27],
             },
           ],
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [26, 3, 26, 35],
         name: "skipped",
         initializer: {
-          kind: 214,
+          kind: "()",
           loc: [26, 12, 26, 35],
           expression: {
-            kind: 1000,
+            kind: "splice",
             loc: [26, 12, 26, 28],
             key: "$0splice1",
           },
-          questionDotToken: false,
           arguments: [
             {
-              kind: 97,
+              kind: "false",
               loc: [26, 29, 26, 34],
             },
           ],

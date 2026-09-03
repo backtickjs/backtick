@@ -16,28 +16,27 @@ export const counted = cs.create(
     captures: [],
   },
   () => ({
-    kind: 212,
+    kind: ".",
     loc: [10, 27, 10, 69],
     expression: {
-      kind: 214,
+      kind: "()",
       loc: [10, 27, 10, 62],
       expression: {
-        kind: 1001,
+        kind: "bltn",
         loc: [10, 27, 10, 37],
         name: "Array.from",
       },
-      questionDotToken: false,
       arguments: [
         {
-          kind: 211,
+          kind: "obj",
           loc: [10, 38, 10, 51],
           properties: [
             {
-              kind: 304,
+              kind: ":",
               loc: [10, 40, 10, 49],
               name: "length",
               initializer: {
-                kind: 9,
+                kind: "number",
                 loc: [10, 48, 10, 49],
                 value: 3,
               },
@@ -45,18 +44,17 @@ export const counted = cs.create(
           ],
         },
         {
-          kind: 220,
+          kind: "=>",
           loc: [10, 53, 10, 61],
           parameters: [],
           body: {
-            kind: 242,
+            kind: "{}",
             loc: [10, 59, 10, 61],
             statements: [],
           },
         },
       ],
     },
-    questionDotToken: false,
     name: "length",
   }),
 );

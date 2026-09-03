@@ -213,10 +213,10 @@ function isFixed(expr: BundleArrayElement): boolean {
     }
     return Object.values(expr).every((member) => isFixed(member));
   }
-  if (expr[0] === 1022 /* ArrayLiteralExpression */) {
+  if (expr[0] === "arr") {
     return expr[1].every((member) => isFixed(member));
   }
-  return expr[0] === 1005 /* ArrowFunction */ || expr[0] === 0 /* Element */;
+  return expr[0] === "=>" || expr[0] === "el";
 }
 
 // A children position, compiled member by member.
@@ -234,7 +234,7 @@ function compileChildren(
   expr: BundleArrayElement,
 ): (scope: Scope | null) => unknown {
   // A list of children travels as data, which is a node like any other.
-  if (Array.isArray(expr) && expr[0] === 1022 /* ArrayLiteralExpression */) {
+  if (Array.isArray(expr) && expr[0] === "arr") {
     const members = expr[1].map((member) => compileChildren(instance, member));
     return (scope) => members.map((member) => member(scope));
   }

@@ -41,7 +41,6 @@ export {
   type Metadata,
 } from "./ClientScript.js";
 export * from "./Ast.js";
-export { SyntaxKind } from "./SyntaxKind.js";
 export type { BinaryOperator } from "./BinaryOperator.js";
 export type { PrefixUnaryOperator } from "./PrefixUnaryOperator.js";
 export type { SourceLocation } from "./SourceLocation.js";

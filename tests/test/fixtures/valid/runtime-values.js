@@ -12,25 +12,25 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [3, 20, 3, 73],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [3, 22, 3, 53],
         name: "list",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [3, 28, 3, 53],
           key: "$0splice0",
         },
       },
       {
-        kind: 304,
+        kind: ":",
         loc: [3, 55, 3, 71],
         name: "obj",
         initializer: {
-          kind: 1000,
+          kind: "splice",
           loc: [3, 60, 3, 71],
           key: "$0splice1",
         },

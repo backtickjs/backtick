@@ -11,15 +11,15 @@ export default cs.create(
     captures: [],
   },
   () => ({
-    kind: 211,
+    kind: "obj",
     loc: [5, 20, 5, 36],
     properties: [
       {
-        kind: 304,
+        kind: ":",
         loc: [5, 22, 5, 34],
         name: "#",
         initializer: {
-          kind: 11,
+          kind: "string",
           loc: [5, 27, 5, 34],
           text: "value",
         },

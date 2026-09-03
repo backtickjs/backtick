@@ -13,7 +13,7 @@ const d0 = cs.create(
     captures: [],
   },
   () => ({
-    kind: 9,
+    kind: "number",
     loc: [7, 15, 7, 16],
     value: 1,
   }),
@@ -28,23 +28,23 @@ const d1 = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [8, 15, 10, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [9, 3, 9, 20],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [9, 10, 9, 19],
           left: {
-            kind: 1000,
+            kind: "splice",
             loc: [9, 10, 9, 13],
             key: "$d0",
           },
           operatorToken: "+",
           right: {
-            kind: 1000,
+            kind: "splice",
             loc: [9, 16, 9, 19],
             key: "$d0",
           },
@@ -63,23 +63,23 @@ const d2 = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [11, 15, 13, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [12, 3, 12, 20],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [12, 10, 12, 19],
           left: {
-            kind: 1000,
+            kind: "splice",
             loc: [12, 10, 12, 13],
             key: "$d1",
           },
           operatorToken: "+",
           right: {
-            kind: 1000,
+            kind: "splice",
             loc: [12, 16, 12, 19],
             key: "$d1",
           },
@@ -98,23 +98,23 @@ const d3 = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [14, 15, 16, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [15, 3, 15, 20],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [15, 10, 15, 19],
           left: {
-            kind: 1000,
+            kind: "splice",
             loc: [15, 10, 15, 13],
             key: "$d2",
           },
           operatorToken: "+",
           right: {
-            kind: 1000,
+            kind: "splice",
             loc: [15, 16, 15, 19],
             key: "$d2",
           },
@@ -133,23 +133,23 @@ const d4 = cs.create(
     captures: [],
   },
   () => ({
-    kind: 242,
+    kind: "{}",
     loc: [17, 15, 19, 2],
     statements: [
       {
-        kind: 254,
+        kind: "return",
         loc: [18, 3, 18, 20],
         expression: {
-          kind: 227,
+          kind: "binop",
           loc: [18, 10, 18, 19],
           left: {
-            kind: 1000,
+            kind: "splice",
             loc: [18, 10, 18, 13],
             key: "$d3",
           },
           operatorToken: "+",
           right: {
-            kind: 1000,
+            kind: "splice",
             loc: [18, 16, 18, 19],
             key: "$d3",
           },

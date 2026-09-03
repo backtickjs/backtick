@@ -27,7 +27,7 @@ export default _jsx("div", {
         captures: [],
       },
       () => ({
-        kind: 1000,
+        kind: "splice",
         loc: [21, 19, 21, 24],
         key: "$rows",
       }),
@@ -51,16 +51,16 @@ export default _jsx("div", {
                   captures: ["row$thyrht8e58qr$0"],
                 },
                 () => ({
-                  kind: 227,
+                  kind: "binop",
                   loc: [22, 41, 22, 53],
                   left: {
-                    kind: 11,
+                    kind: "string",
                     loc: [22, 41, 22, 47],
                     text: "row ",
                   },
                   operatorToken: "+",
                   right: {
-                    kind: 80,
+                    kind: "id",
                     loc: [22, 50, 22, 53],
                     text: "row",
                     bindingKey: "row$thyrht8e58qr$0",
@@ -74,14 +74,14 @@ export default _jsx("div", {
         captures: [],
       },
       () => ({
-        kind: 220,
+        kind: "=>",
         loc: [22, 11, 22, 64],
         parameters: [
           {
-            kind: 170,
+            kind: "param",
             loc: [22, 12, 22, 23],
             name: {
-              kind: 80,
+              kind: "id",
               loc: [22, 12, 22, 15],
               text: "row",
               bindingKey: "row$thyrht8e58qr$0",
@@ -89,7 +89,7 @@ export default _jsx("div", {
           },
         ],
         body: {
-          kind: 1000,
+          kind: "splice",
           loc: [22, 28, 22, 64],
           key: "$0splice0",
         },
