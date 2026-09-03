@@ -10,13 +10,16 @@
 CXX ?= c++
 CXXFLAGS ?= -std=c++17 -Wall -Wextra -Wpedantic
 
-HEADERS := $(wildcard src/*.h)
+SOURCES := $(wildcard src/*.cpp)
+OBJECTS := $(SOURCES:src/%.cpp=build/%.o)
 
 .PHONY: build clean
 
-build:
-	@for header in $(HEADERS); do echo "#include \"$$header\""; done \
-	  | $(CXX) $(CXXFLAGS) -fsyntax-only -x c++ -I. -
+build: $(OBJECTS)
+
+build/%.o: src/%.cpp $(wildcard src/*.h)
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
 	rm -rf build

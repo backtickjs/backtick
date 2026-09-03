@@ -31,6 +31,21 @@ Beyond reading alike, agreeing is the contract:
 client produced, and a case answered differently here is a bug here whatever
 the reasoning behind it.
 
+## What it does not write itself
+
+Simplicity, reliability and robustness over cleverness. Where a mature library
+does a job, this uses it — reading JSON above all, which is a job with decided
+answers and a long tail of escapes, encodings and malformed input that a
+hand-rolled reader gets wrong quietly.
+
+`clients/cardputer/src/Json.cpp` is what not to do, and it is instructive: its
+header says it parses "into one flat vector rather than a tree of
+allocations", and it does — but it takes 381 heap allocations to read a 2 KB
+bundle, because it builds a scratch vector per container on the way there. It
+also recurses without a depth limit, on a device whose stack has already been
+overflowed once by a recursive walk. Both are the ordinary cost of writing one
+of these rather than taking one.
+
 ## What this is not
 
 `clients/cardputer` is a spike — an end-to-end proof that backtick runs on an
