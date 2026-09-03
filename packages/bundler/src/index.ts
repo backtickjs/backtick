@@ -1,7 +1,6 @@
 export type {
   Bundle,
   BundleArrowFunctionNode,
-  BundleBinaryOperator,
   BundleAssignmentNode,
   BundleLogicalAndNode,
   BundleLogicalOrNode,

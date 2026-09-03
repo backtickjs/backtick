@@ -7,7 +7,6 @@ import type {
   BundleArrayElement,
   BundleArrowFunctionNode,
   BundleSpreadElementNode,
-  BundleBinaryOperator,
   BundleStatementNode,
   FunctionLabel,
 } from "@backtickjs/bundler";
@@ -486,7 +485,7 @@ function buildNode(
       };
     }
     // Assignment binds its left rather than evaluating it, which is why it is
-    // the one operator answered here instead of in `compileBinop`.
+    // the one whose left operand is not compiled.
     case "=": {
       const target = node[1];
       // Only a variable can be assigned to, which the compiler enforces; a
@@ -508,24 +507,108 @@ function buildNode(
         return value;
       };
     }
-    // The other fourteen combine two values, and the kind says which way.
-    case "&&":
-    case "||":
-    case "??":
-    case "+":
-    case "-":
-    case "*":
-    case "/":
-    case "%":
-    case "===":
-    case "!==":
-    case "<":
-    case "<=":
-    case ">":
+    case "&&": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) =>
+        condition(left(scope), "the left operand of `&&`")
+          ? condition(right(scope), "the right operand of `&&`")
+          : false;
+    }
+    case "||": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) =>
+        condition(left(scope), "the left operand of `||`")
+          ? true
+          : condition(right(scope), "the right operand of `||`");
+    }
+    // `??` asks whether a value is absent, not whether it is false, so either
+    // side may be any value.
+    case "??": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => {
+        const value = left(scope);
+        return value !== null ? value : right(scope);
+      };
+    }
+    // Two numbers add; a string on either side concatenates. Written out
+    // because the cast the other arithmetic uses would be a lie here: it
+    // erases, and JavaScript's `+` then does whichever the operands imply. A
+    // client not written in JavaScript has to make the same choice, so the
+    // choice belongs in the open.
+    case "+": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => {
+        const a = left(scope);
+        const b = right(scope);
+        if (typeof a === "number" && typeof b === "number") {
+          return a + b;
+        }
+        if (typeof a === "string" || typeof b === "string") {
+          return `${a as string | number}${b as string | number}`;
+        }
+        throw new Error(
+          "`+` adds two numbers or concatenates with a string; this bundle " +
+            `produced ${typeof a} + ${typeof b}.`,
+        );
+      };
+    }
+    case "-": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) - (right(scope) as number);
+    }
+    case "*": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) * (right(scope) as number);
+    }
+    case "/": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) / (right(scope) as number);
+    }
+    case "%": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) % (right(scope) as number);
+    }
+    // Identity: the same primitive or the same object, never a deep walk.
+    case "===": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => left(scope) === right(scope);
+    }
+    case "!==": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => left(scope) !== right(scope);
+    }
+    // The four comparisons cast to number and then do not act on the cast:
+    // TypeScript erases it, so two strings compare as text, which is what a
+    // client with types at runtime has to be told in as many words.
+    case "<": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) < (right(scope) as number);
+    }
+    case "<=": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) <= (right(scope) as number);
+    }
+    case ">": {
+      const left = compile(instance, node[1]);
+      const right = compile(instance, node[2]);
+      return (scope) => (left(scope) as number) > (right(scope) as number);
+    }
     case ">=": {
       const left = compile(instance, node[1]);
       const right = compile(instance, node[2]);
-      return compileBinop(node[0], left, right);
+      return (scope) => (left(scope) as number) >= (right(scope) as number);
     }
     // A `!` operand is boolean, as a tested position always is, so this negates
     // rather than deciding what counts as true.
@@ -868,80 +951,3 @@ function condition(value: ClientValue, what: string): boolean {
   );
 }
 
-function compileBinop(
-  // Every operator but `=`, which assigns rather than combining two values and
-  // is answered where the node is read.
-  operator: Exclude<BundleBinaryOperator, "=">,
-  left: (scope: Scope | null) => ClientValue,
-  right: (scope: Scope | null) => ClientValue,
-): (scope: Scope | null) => ClientValue {
-  // The logical operators evaluate their right operand lazily, and both
-  // operands are boolean — so `&&` and `||` yield one. Checking only the left
-  // would still branch correctly and then return whatever the right side was,
-  // letting a non-boolean leak out as the result.
-  //
-  // `??` is the exception at both ends: it asks whether a value is absent, not
-  // whether it is false, so either side may be any value.
-  switch (operator) {
-    case "&&":
-      return (scope) =>
-        condition(left(scope), "the left operand of `&&`")
-          ? condition(right(scope), "the right operand of `&&`")
-          : false;
-    case "||":
-      return (scope) =>
-        condition(left(scope), "the left operand of `||`")
-          ? true
-          : condition(right(scope), "the right operand of `||`");
-    case "??":
-      return (scope) => {
-        const value = left(scope);
-        return value !== null ? value : right(scope);
-      };
-    case "+":
-      // Two numbers add; a string on either side concatenates. Written out
-      // because the cast the other arithmetic uses would be a lie here: it
-      // erases, and JavaScript's `+` then does whichever the operands imply.
-      // A client not written in JavaScript has to make the same choice, so the
-      // choice belongs in the open.
-      return (scope) => {
-        const a = left(scope);
-        const b = right(scope);
-        if (typeof a === "number" && typeof b === "number") {
-          return a + b;
-        }
-        if (typeof a === "string" || typeof b === "string") {
-          return `${a as string | number}${b as string | number}`;
-        }
-        throw new Error(
-          "`+` adds two numbers or concatenates with a string; this bundle " +
-            `produced ${typeof a} + ${typeof b}.`,
-        );
-      };
-    case "-":
-      return (scope) => (left(scope) as number) - (right(scope) as number);
-    case "*":
-      return (scope) => (left(scope) as number) * (right(scope) as number);
-    case "/":
-      return (scope) => (left(scope) as number) / (right(scope) as number);
-    case "%":
-      return (scope) => (left(scope) as number) % (right(scope) as number);
-    case "===":
-      return (scope) => left(scope) === right(scope);
-    case "!==":
-      return (scope) => left(scope) !== right(scope);
-    case "<":
-      return (scope) => (left(scope) as number) < (right(scope) as number);
-    case "<=":
-      return (scope) => (left(scope) as number) <= (right(scope) as number);
-    case ">":
-      return (scope) => (left(scope) as number) > (right(scope) as number);
-    case ">=":
-      return (scope) => (left(scope) as number) >= (right(scope) as number);
-  }
-  // No `default`: the switch covers `BundleBinaryOperator`, so adding an
-  // operator to the format is a compile error here rather than a throw at
-  // evaluation.
-  operator satisfies never;
-  throw new Error(`unknown operator ${String(operator)}`);
-}

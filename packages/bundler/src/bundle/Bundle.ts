@@ -16,11 +16,6 @@
 //   - a capture is a value, never a variable: a nested script reads its
 //     captures but can't assign them.
 //
-// Every node carries every field it declares: `args`, `params`, `statements`
-// and `props` are spelled empty rather than left out, and an absent `?.` is
-// `false`. A node's arity is its kind's, so a reader takes a slot by position
-// without first asking whether it is there.
-//
 // Evaluation is deterministic, and effect-free but for storage: applying an
 // entry that draws allocates the storage its body binds, and a `state` node
 // allocates one where it stands — so either, evaluated twice, is two. Every
@@ -293,34 +288,6 @@ export type BundleElementAccessExpressionNode = [
   expression: BundleExpressionNode,
   argumentExpression: BundleExpressionNode,
 ];
-
-// The closed set of binary operators, part of the wire contract: a client
-// implements exactly these, with JavaScript semantics. The language has no
-// truthiness: the typechecker requires both operands of `&&`/`||` to be
-// boolean, so they always yield a boolean and a client tests the left
-// operand directly — short-circuiting (skipping the right operand's
-// effects) without ToBoolean rules. `??` short-circuits on null/undefined.
-// The compiler rejects any other operator in a script.
-//
-// `=` is here because an assignment is a binary expression, as it is in
-// TypeScript — see `BundleAssignmentNode`, which is the one of the fifteen
-// whose left is a name to bind rather than a value to read.
-export type BundleBinaryOperator =
-  | "="
-  | "&&"
-  | "||"
-  | "??"
-  | "+"
-  | "-"
-  | "*"
-  | "/"
-  | "%"
-  | "==="
-  | "!=="
-  | "<"
-  | "<="
-  | ">"
-  | ">=";
 
 // One node per operator, and the operator is the kind: a `+` node adds, which
 // is a thing to know from position 0 alone rather than from a slot after it.
