@@ -1,0 +1,2 @@
+# The host build. `make` makes it and `make clean` removes it.
+build/
