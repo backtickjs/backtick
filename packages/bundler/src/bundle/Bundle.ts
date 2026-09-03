@@ -71,7 +71,7 @@ export const NodeKind = {
   GetFunction: 1,
   ApplyFunction: 2,
   Builtin: 3,
-  DataArray: 4,
+  ArrayLiteralExpression: 4,
 
   // Mirrors of JavaScript, with two differences: no truthiness — a condition
   // and the operands of `&&`/`||` are boolean — and `null` as the only absent
@@ -171,8 +171,8 @@ export type BundleApplyFunction = [
 // wrapper carries. An array in a slot the kind declares as a list — a call's
 // arguments, a block's statements — needs no wrapper, since nothing is deciding
 // there.
-export type BundleDataArrayNode = [
-  kind: typeof NodeKind.DataArray,
+export type BundleArrayLiteralExpressionNode = [
+  kind: typeof NodeKind.ArrayLiteralExpression,
   members: BundleArrayElement[],
 ];
 
@@ -224,7 +224,7 @@ export type BundleExpressionNode =
   | number
   | string
   | BundleData
-  | BundleDataArrayNode
+  | BundleArrayLiteralExpressionNode
   | BundleIdentifierNode
   | BundleGetFunction
   // A body instantiates a tree by calling a `getTree`, which says nothing about

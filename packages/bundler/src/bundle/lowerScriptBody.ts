@@ -186,7 +186,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
     switch (node.kind) {
       case SyntaxKind.ArrayLiteralExpression:
         // Data, and a node is an array too, so it says which it is.
-        return [NodeKind.DataArray, node.elements.map(element)];
+        return [NodeKind.ArrayLiteralExpression, node.elements.map(element)];
       case SyntaxKind.ArrowFunction: {
         const params = node.parameters.map((param) =>
           sourceName(param.name.bindingKey),
@@ -310,14 +310,17 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         for (const attribute of node.attributes) {
           props[attribute.name] = e(attribute.initializer);
         }
-        // One child stands on its own; several travel under a `DataArray`,
+        // One child stands on its own; several travel under a `ArrayLiteralExpression`,
         // which is how an array of data says it is not a node. None is `null`.
         const children: BundleExpressionNode =
           node.children.length === 0
             ? null
             : node.children.length === 1
               ? e(node.children[0])
-              : [NodeKind.DataArray, node.children.map((child) => e(child))];
+              : [
+                  NodeKind.ArrayLiteralExpression,
+                  node.children.map((child) => e(child)),
+                ];
         // An element of the target is its own name, which is the id an element
         // node carries. The other is a tag the script wrote, and what it
         // splices is the expansion of what it named — an arrow over the one

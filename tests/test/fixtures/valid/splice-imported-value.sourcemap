@@ -13,5 +13,5 @@ cs.splice(                                →  [-semantic]
 ) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
 .                                         → .
-DataArray                                 → DataArray
+ArrayLiteralExpression                    → ArrayLiteralExpression
 ))                                        → `

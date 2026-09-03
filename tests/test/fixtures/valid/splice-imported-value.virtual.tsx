@@ -16,5 +16,5 @@ import { NodeKind } from "@backtickjs/bundler";
 // `.js` snapshot beside it carries the import, and the `.bundle` snapshot
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
-// spliced numbers themselves — `Element` is 0 and `DataArray` is 4.
-export default cs.lift(cs.const(cs.receiver(cs.splice((NodeKind)) satisfies import("@backtickjs/core").ClientUnknown).Element + cs.receiver(cs.splice((NodeKind)) satisfies import("@backtickjs/core").ClientUnknown).DataArray));
+// spliced numbers themselves — `Element` is 0 and `ArrayLiteralExpression` is 4.
+export default cs.lift(cs.const(cs.receiver(cs.splice((NodeKind)) satisfies import("@backtickjs/core").ClientUnknown).Element + cs.receiver(cs.splice((NodeKind)) satisfies import("@backtickjs/core").ClientUnknown).ArrayLiteralExpression));

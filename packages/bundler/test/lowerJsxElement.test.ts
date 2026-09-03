@@ -75,12 +75,12 @@ test("one child stands in the children slot itself", () => {
   ]);
 });
 
-test("several children travel under a `DataArray`", () => {
+test("several children travel under a `ArrayLiteralExpression`", () => {
   assert.deepEqual(lower(element("tr", [], [text("one"), text("two")])), [
     NodeKind.Element,
     "tr",
     {},
-    [NodeKind.DataArray, ["one", "two"]],
+    [NodeKind.ArrayLiteralExpression, ["one", "two"]],
   ]);
 });
 

@@ -274,7 +274,7 @@ function compileStatement(
 }
 
 // A node is an array and nothing else in a value slot is — an array of data
-// travels under a `DataArray` node — so `Array.isArray` is the whole test, here
+// travels under a `ArrayLiteralExpression` node — so `Array.isArray` is the whole test, here
 // and everywhere below.
 //
 // A literal carries itself and is answered by `compile`, so what reaches here
@@ -297,7 +297,7 @@ function buildNode(
   }
   const node = source;
   switch (node[0]) {
-    case 4: /* DataArray */ {
+    case 4: /* ArrayLiteralExpression */ {
       const members = compileElements(instance, node[1]);
       return (scope) => members(scope);
     }

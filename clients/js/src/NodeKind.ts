@@ -4,7 +4,7 @@ export const NodeKind = {
   GetFunction: 1,
   ApplyFunction: 2,
   Builtin: 3,
-  DataArray: 4,
+  ArrayLiteralExpression: 4,
   Identifier: 1000,
   CallExpression: 1001,
   PropertyAccessExpression: 1002,

@@ -1,11 +1,11 @@
-#f0 = ($0) => $0().Element + $0().DataArray
+#f0 = ($0) => $0().Element + $0().ArrayLiteralExpression
 
 root = #f0(() => {
   "Element": 0,
   "GetFunction": 1,
   "ApplyFunction": 2,
   "Builtin": 3,
-  "DataArray": 4,
+  "ArrayLiteralExpression": 4,
   "Identifier": 1000,
   "CallExpression": 1001,
   "PropertyAccessExpression": 1002,

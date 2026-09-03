@@ -15,19 +15,19 @@ import { NodeKind } from "@backtickjs/bundler";
 // `.js` snapshot beside it carries the import, and the `.bundle` snapshot
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
-// spliced numbers themselves — `Element` is 0 and `DataArray` is 4.
+// spliced numbers themselves — `Element` is 0 and `ArrayLiteralExpression` is 4.
 export default cs.create(
-  [20, 16, 20, 59],
+  [20, 16, 20, 72],
   {
     version: "0.0.0",
     filePath: "splice-imported-value.tsx",
-    fileHash: "dp7ak8bmio24",
+    fileHash: "3dq5ahavbd0tu",
     splices: { $NodeKind: { value: NodeKind, params: [] } },
     captures: [],
   },
   () => ({
     kind: 227,
-    loc: [20, 19, 20, 58],
+    loc: [20, 19, 20, 71],
     left: {
       kind: 212,
       loc: [20, 19, 20, 36],
@@ -42,14 +42,14 @@ export default cs.create(
     operatorToken: "+",
     right: {
       kind: 212,
-      loc: [20, 39, 20, 58],
+      loc: [20, 39, 20, 71],
       expression: {
         kind: 1000,
         loc: [20, 39, 20, 48],
         key: "$NodeKind",
       },
       questionDotToken: false,
-      name: "DataArray",
+      name: "ArrayLiteralExpression",
     },
   }),
 );

@@ -341,7 +341,7 @@ export function buildBundle(
       case "AstArray":
         // Data, and a node is an array too, so it says which it is.
         return [
-          NodeKind.DataArray,
+          NodeKind.ArrayLiteralExpression,
           value.elements.map((entry) => child(entry)),
         ];
       case "AstObject": {

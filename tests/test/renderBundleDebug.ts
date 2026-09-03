@@ -29,7 +29,7 @@ export function renderBundleDebug(bundle: Bundle): string {
 const fnLabel = (label: string): string => `#f${label}`;
 
 // A node, as opposed to plain JSON carrying itself: every node is an array,
-// and an array of data travels as one too (`DataArray`).
+// and an array of data travels as one too (`ArrayLiteralExpression`).
 function isNode(
   node: BundleStatementNode | BundleExpressionNode,
 ): node is Extract<
@@ -61,7 +61,7 @@ function renderNode(
   const inner = `${indent}  `;
   switch (node[0]) {
     // Data, which a node kind carries only so it is not read as a node.
-    case NodeKind.DataArray:
+    case NodeKind.ArrayLiteralExpression:
       return renderData<BundleArrayElement[]>(node[1], indent, renderNode);
     // A literal a spread runs through. A name of `null` is the spread, which is
     // why this reads its slots rather than the shape of what is in them.
@@ -219,7 +219,7 @@ function renderJsx(element: BundleElement, indent: string): string {
   const children: BundleArrayElement[] =
     held === null
       ? []
-      : Array.isArray(held) && held[0] === NodeKind.DataArray
+      : Array.isArray(held) && held[0] === NodeKind.ArrayLiteralExpression
         ? (held[1] as BundleArrayElement[])
         : [held];
   const opening =
