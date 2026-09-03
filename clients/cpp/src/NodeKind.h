@@ -1,0 +1,36 @@
+#pragma once
+
+namespace backtick {
+
+// What a node is, as position 0 carries it; never renumbered.
+enum class NodeKind : int {
+  Element                  = 0,
+  GetFunction              = 1,
+  ApplyFunction            = 2,
+  Builtin                  = 3,
+  DataArray                = 4,
+  Identifier               = 1000,
+  CallExpression           = 1001,
+  PropertyAccessExpression = 1002,
+  BinaryExpression         = 1003,
+  ConditionalExpression    = 1004,
+  ArrowFunction            = 1005,
+  Block                    = 1006,
+  VariableDeclaration      = 1007,
+  IfStatement              = 1008,
+  ReturnStatement          = 1009,
+  ThrowStatement           = 1010,
+  TryStatement             = 1011,
+  WhileStatement           = 1012,
+  ForStatement             = 1013,
+  BreakStatement           = 1014,
+  ContinueStatement        = 1015,
+  ElementAccessExpression  = 1016,
+  CatchClause              = 1017,
+  Parameter                = 1018,
+  PrefixUnaryExpression    = 1019,
+  SpreadElement            = 1020,
+  ObjectLiteralExpression  = 1021,
+};
+
+}  // namespace backtick

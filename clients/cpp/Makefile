@@ -11,11 +11,17 @@ CXX ?= c++
 CXXFLAGS ?= -std=c++17 -Wall -Wextra -Wpedantic
 
 SOURCES := $(wildcard src/*.cpp)
+HEADERS := $(wildcard src/*.h)
 OBJECTS := $(SOURCES:src/%.cpp=build/%.o)
 
-.PHONY: build clean
+.PHONY: build headers clean
 
-build: $(OBJECTS)
+build: headers $(OBJECTS)
+
+# A generated header nothing includes yet is still a header that has to compile.
+headers:
+	@for header in $(HEADERS); do echo "#include \"$$header\""; done \
+	  | $(CXX) $(CXXFLAGS) -fsyntax-only -x c++ -I. -
 
 build/%.o: src/%.cpp $(wildcard src/*.h)
 	@mkdir -p build
