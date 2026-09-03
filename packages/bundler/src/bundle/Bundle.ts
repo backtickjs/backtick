@@ -101,12 +101,6 @@ export type BundleArrayLiteralExpressionNode = [
   members: BundleArrayElement[],
 ];
 
-// Scoping is lexical and names are pre-resolved: identifiers refer to
-// parameters of an enclosing arrow (including the entry itself) or locals
-// declared in an enclosing block. There are no globals — every name is bound,
-// and an unresolved name is a malformed bundle.
-export type BundleNode = BundleStatementNode;
-
 // `...xs` where an element or an argument goes. Not a `BundleExpressionNode`:
 // it has no value of its own, it contributes the members of one — so the two
 // lists that admit it say so, and nothing else has to consider it.
@@ -159,11 +153,14 @@ export type BundleExpressionNode =
   | BundleGetFunction
   | BundleApplyFunction
   | BundleElement
-  | BundleCallNode
-  | BundlePropertyAccessNode
+  | BundleCallExpressionNode
+  | BundleOptionalCallExpressionNode
+  | BundlePropertyAccessExpressionNode
+  | BundleOptionalPropertyAccessExpressionNode
   | BundleElementAccessExpressionNode
   | BundleBinaryNode
-  | BundleUnaryNode
+  | BundleLogicalNotNode
+  | BundleNegationNode
   | BundleConditionalExpressionNode
   | BundleArrowFunctionNode
   | BundleObjectLiteralExpressionNode
@@ -172,7 +169,8 @@ export type BundleExpressionNode =
 export type BundleStatementNode =
   | BundleExpressionNode
   | BundleBlockNode
-  | BundleDeclarationNode
+  | BundleConstDeclarationNode
+  | BundleLetDeclarationNode
   | BundleIfStatementNode
   | BundleWhileStatementNode
   | BundleForStatementNode
@@ -186,6 +184,10 @@ export type BundleStatementNode =
 // returned.
 export type BundleBody = BundleExpressionNode | BundleBlockNode;
 
+// Scoping is lexical and names are pre-resolved: an identifier refers to a
+// parameter of an enclosing arrow (including the entry itself) or a local
+// declared in an enclosing block. There are no globals — every name is bound,
+// and an unresolved name is a malformed bundle.
 export type BundleIdentifierNode = [kind: "id", text: string];
 
 // An entry as a value, not applied: the function it evaluates to. Only a
@@ -207,10 +209,6 @@ export type BundleOptionalCallExpressionNode = [
   args: BundleArrayElement[],
 ];
 
-export type BundleCallNode =
-  | BundleCallExpressionNode
-  | BundleOptionalCallExpressionNode;
-
 // Reading an absent member yields null, the same family as a missing argument
 // binding null. `?.` short-circuits instead of reading; as a call's callee it
 // short-circuits the call too.
@@ -225,10 +223,6 @@ export type BundleOptionalPropertyAccessExpressionNode = [
   expression: BundleExpressionNode,
   name: string,
 ];
-
-export type BundlePropertyAccessNode =
-  | BundlePropertyAccessExpressionNode
-  | BundleOptionalPropertyAccessExpressionNode;
 
 // `object[key]`. Reading is total, so a reader never faults: an array takes a
 // whole number in range and yields that element; an object takes a string and
@@ -372,8 +366,6 @@ export type BundleLogicalNotNode = [kind: "!", operand: BundleExpressionNode];
 
 export type BundleNegationNode = [kind: "-x", operand: BundleExpressionNode];
 
-export type BundleUnaryNode = BundleLogicalNotNode | BundleNegationNode;
-
 export type BundleConditionalExpressionNode = [
   kind: "?:",
   condition: BundleExpressionNode,
@@ -402,10 +394,6 @@ export type BundleLetDeclarationNode = [
   name: string,
   initializer: BundleExpressionNode,
 ];
-
-export type BundleDeclarationNode =
-  | BundleConstDeclarationNode
-  | BundleLetDeclarationNode;
 
 // `elseStatement` is null when there is no else branch. The condition is
 // boolean, so a client tests it directly, without truthiness rules.
