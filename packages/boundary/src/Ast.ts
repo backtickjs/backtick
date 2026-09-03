@@ -98,15 +98,13 @@ export interface ClientScriptWhileStatement {
   readonly statement: ClientScriptStatement;
 }
 
-// The incrementor is an assignment, which is a statement's worth of syntax
-// here even though TypeScript reads it as an expression.
 export interface ClientScriptForStatement {
   readonly kind: "for";
   readonly loc: SourceLocation;
   // The list, not the statement — `ts.ForInitializer` is the same union.
   readonly initializer: ClientScriptDeclaration | ClientScriptExpression | null;
   readonly condition: ClientScriptExpression | null;
-  readonly incrementor: ClientScriptStatement | null;
+  readonly incrementor: ClientScriptExpression | null;
   readonly statement: ClientScriptStatement;
 }
 

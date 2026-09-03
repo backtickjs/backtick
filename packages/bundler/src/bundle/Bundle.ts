@@ -420,9 +420,13 @@ export type BundleWhileStatementNode = [
 // keeps that turn's numbers rather than the value the loop stopped at.
 export type BundleForStatementNode = [
   kind: "for",
-  initializer: BundleStatementNode | null,
+  initializer:
+    | BundleConstDeclarationNode
+    | BundleLetDeclarationNode
+    | BundleExpressionNode
+    | null,
   condition: BundleExpressionNode | null,
-  incrementor: BundleStatementNode | null,
+  incrementor: BundleExpressionNode | null,
   statement: BundleStatementNode,
 ];
 

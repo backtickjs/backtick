@@ -10,6 +10,8 @@ import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import type {
   BundleArrayElement,
+  BundleConstDeclarationNode,
+  BundleLetDeclarationNode,
   BundleBinaryNode,
   BundleBlockNode,
   BundleBody,
@@ -94,7 +96,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
   // language has a second case for.
   function buildDeclaration(
     node: ClientScriptDeclaration,
-  ): BundleStatementNode {
+  ): BundleConstDeclarationNode | BundleLetDeclarationNode {
     // Built per branch rather than with the kind chosen inside one tuple: a
     // node's kind is what says which node it is, so widening it loses that.
     const name = sourceName(node.name.bindingKey);
@@ -132,9 +134,9 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
             : node.initializer.kind === "const" ||
                 node.initializer.kind === "let"
               ? buildDeclaration(node.initializer)
-              : buildStatement(node.initializer),
+              : buildExpression(node.initializer),
           node.condition === null ? null : buildExpression(node.condition),
-          node.incrementor === null ? null : buildStatement(node.incrementor),
+          node.incrementor === null ? null : buildExpression(node.incrementor),
           buildStatement(node.statement),
         ];
       case "break":
