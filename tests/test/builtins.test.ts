@@ -94,7 +94,7 @@ describe("a member the schema leaves out", () => {
     functions: {
       "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
     },
-    root: ["fn()", "0", []],
+    root: ["()", ["fn", "0"], []],
   };
 
   it("is a name this language has no meaning for", () => {
@@ -117,7 +117,7 @@ describe("a name a target answers for", () => {
     functions: {
       "0": ["=>", [], ["{}", [["return", ["()", ["bltn", "greet"], []]]]]],
     },
-    root: ["fn()", "0", []],
+    root: ["()", ["fn", "0"], []],
   };
 
   it("is answered by the table its target handed over", () => {
@@ -151,7 +151,7 @@ describe("a name a target answers for", () => {
           ],
         ],
       },
-      root: ["fn()", "0", []],
+      root: ["()", ["fn", "0"], []],
     };
     const storage = { greeting: "hei" } as Record<string, string>;
     assert.equal(
@@ -183,7 +183,7 @@ describe("a name a target answers for", () => {
       functions: {
         "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
       },
-      root: ["fn()", "0", []],
+      root: ["()", ["fn", "0"], []],
     };
     assert.throws(
       () => evaluate(padded, testHost, { "string.padStart": (self) => self }),

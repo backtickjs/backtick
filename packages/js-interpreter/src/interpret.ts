@@ -350,16 +350,6 @@ function buildNode(
       const named = compileFunction(instance, label);
       return () => named;
     }
-    // A function applied. The format spells this as one node because applying
-    // is most of what a bundle does (see `BundleApplyFunction`), but it is
-    // shorthand for a call of a `get` and must stay equivalent to one — so it
-    // is expanded into exactly that and compiled as a call. Running a function
-    // has one path here, so there is one place to answer what it costs and no
-    // second place for that answer to drift.
-    case "fn()": {
-      const [, label, args] = node;
-      return compile(instance, ["()", ["fn", label], args]);
-    }
     // Including a list, which draws no node of its own: what `for` means is
     // answered where an id is read, not by a kind of its own.
     case "el": {

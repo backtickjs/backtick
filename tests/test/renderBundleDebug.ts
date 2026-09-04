@@ -101,12 +101,6 @@ function renderNode(
     // A global the format names and the host answers.
     case "bltn":
       return node[1];
-    // Same notation as in tree position: a body applies an entry when the
-    // instance it makes is named, and calls one when it isn't.
-    case "fn()": {
-      const args = node[2].map((arg) => renderNode(arg, indent));
-      return `${fnLabel(node[1])}(${args.join(", ")})`;
-    }
     case "()":
     case "?.()": {
       const args = node[2].map((arg) => renderNode(arg, indent));

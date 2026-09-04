@@ -288,7 +288,7 @@ export function buildBundle(
       case "AstScript": {
         const target = entryFor(value);
         materialize(target);
-        return ["fn()", fnLabel(target), exprCallArgs(value, params)];
+        return ["()", ["fn", fnLabel(target)], exprCallArgs(value, params)];
       }
       case "AstElement":
         return renderElement(value, params);

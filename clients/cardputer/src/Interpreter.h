@@ -15,7 +15,6 @@ namespace backtick {
 namespace NodeKind {
 constexpr int Element = 0;
 constexpr int GetFunction = 1;
-constexpr int ApplyFunction = 2;
 constexpr int Builtin = 3;
 constexpr int DataArray = 4;
 constexpr int Identifier = 1000;

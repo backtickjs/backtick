@@ -34,8 +34,8 @@ export interface Bundle {
 export type FunctionLabel = string;
 
 // A node's kind is the word at position 0. The words are `Ast.ts`'s, so a kind
-// means the same thing on both sides of lowering. Four are the bundler's own:
-// `el`, `fn`, `fn()`, and `bltn`.
+// means the same thing on both sides of lowering. Three are the bundler's own:
+// `el`, `fn`, and `bltn`.
 //
 // Never respell one. A reader implements the words it knows, so a changed
 // spelling silently misparses every bundle already written.
@@ -73,18 +73,6 @@ export type BundleElement = [
   // `null` is no children, which a child evaluating to `null` also draws —
   // nothing either way, so the two need not be told apart.
   children: BundleExpression,
-];
-
-// Applies an entry, named by label. Shorthand, exactly, for a `call` of a `get`
-// of this label, and it must stay equivalent to one. Spelled as a single node
-// because applying is most of what a bundle does: written the long way, the
-// fixtures measure ~5% larger.
-export type BundleApplyFunction = [
-  kind: "fn()",
-  label: FunctionLabel,
-  // Mirrors the entry's parameters — for a script, an arrow per splice hole
-  // first, then one value per capture.
-  args: BundleExpression[],
 ];
 
 // An array of data, which is a node only so that it is not read as one: a
@@ -134,7 +122,6 @@ export type BundleExpression =
   | BundleArrayLiteral
   | BundleIdentifier
   | BundleGetFunction
-  | BundleApplyFunction
   | BundleElement
   | BundleCall
   | BundleOptionalCall
@@ -174,7 +161,9 @@ export type BundleBody = BundleExpression | BundleBlock;
 export type BundleIdentifier = [kind: "id", text: string];
 
 // An entry as a value, not applied: the function it evaluates to. Only a
-// `functions` entry can be named this way.
+// `functions` entry can be named this way, and applying one is a `call` of it
+// — the arguments mirror the entry's parameters, which for a script is an
+// arrow per splice hole first and then one value per capture.
 export type BundleGetFunction = [kind: "fn", label: FunctionLabel];
 
 // `?.()` is the same call that short-circuits: a null callee yields null and

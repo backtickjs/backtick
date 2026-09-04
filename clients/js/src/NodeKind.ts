@@ -2,7 +2,6 @@
 export const NodeKind = {
   Element: "el",
   GetFunction: "fn",
-  ApplyFunction: "fn()",
   Builtin: "bltn",
   Identifier: "id",
   CallExpression: "()",

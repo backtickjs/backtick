@@ -437,21 +437,6 @@ Value Interpreter::evaluate(const JsonValue& node,
       return Value::function(held);
     }
 
-    case NodeKind::ApplyFunction: {
-      std::string label(json.text(json.item(node, 1)));
-      const JsonValue& arrow = entry(label);
-      Closure held;
-      held.parameters = &json.item(arrow, 1);
-      held.body = &json.item(arrow, 2);
-      held.scope = nullptr;
-      std::vector<Value> args;
-      const JsonValue& given = json.item(node, 2);
-      for (unsigned int i = 0; i < given.count; i++) {
-        args.push_back(evaluate(json.item(given, i), scope));
-      }
-      return call(Value::function(std::make_shared<Closure>(held)), args);
-    }
-
     case NodeKind::CallExpression: {
       const JsonValue& target = json.item(node, 1);
       const bool optional = json.item(node, 2).kind == JsonKind::True;
