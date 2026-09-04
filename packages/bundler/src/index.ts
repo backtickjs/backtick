@@ -32,7 +32,7 @@ export type {
   BundleExpression,
   BundleArrayElement,
   BundleSpreadElement,
-  BundleGetFunction,
+  BundleFunctionReference,
   BundleIdentifier,
   BundleIf,
   BundleElementAccess,

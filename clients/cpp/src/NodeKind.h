@@ -7,7 +7,7 @@ namespace backtick {
 // What a node is, as position 0 carries it; never respelled.
 namespace NodeKind {
 inline constexpr std::string_view Element                          = "el";
-inline constexpr std::string_view GetFunction                      = "fn";
+inline constexpr std::string_view FunctionReference                = "fn";
 inline constexpr std::string_view Builtin                          = "bltn";
 inline constexpr std::string_view Identifier                       = "id";
 inline constexpr std::string_view CallExpression                   = "()";

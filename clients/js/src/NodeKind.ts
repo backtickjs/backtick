@@ -1,7 +1,7 @@
 // What a node is, as position 0 carries it; never respelled.
 export const NodeKind = {
   Element: "el",
-  GetFunction: "fn",
+  FunctionReference: "fn",
   Builtin: "bltn",
   Identifier: "id",
   CallExpression: "()",

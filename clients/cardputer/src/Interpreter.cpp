@@ -425,7 +425,7 @@ Value Interpreter::evaluate(const JsonValue& node,
       return Value::function(held);
     }
 
-    case NodeKind::GetFunction: {
+    case NodeKind::FunctionReference: {
       std::string label(json.text(json.item(node, 1)));
       const JsonValue& arrow = entry(label);
       auto held = std::make_shared<Closure>();

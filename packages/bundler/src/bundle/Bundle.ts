@@ -121,7 +121,7 @@ export type BundleExpression =
   | { readonly [key: string]: BundleExpression }
   | BundleArrayLiteral
   | BundleIdentifier
-  | BundleGetFunction
+  | BundleFunctionReference
   | BundleElement
   | BundleCall
   | BundleOptionalCall
@@ -164,7 +164,7 @@ export type BundleIdentifier = [kind: "id", text: string];
 // `functions` entry can be named this way, and applying one is a `call` of it
 // — the arguments mirror the entry's parameters, which for a script is an
 // arrow per splice hole first and then one value per capture.
-export type BundleGetFunction = [kind: "fn", label: FunctionLabel];
+export type BundleFunctionReference = [kind: "fn", label: FunctionLabel];
 
 // `?.()` is the same call that short-circuits: a null callee yields null and
 // the arguments are not evaluated. Two kinds rather than one with a flag, so

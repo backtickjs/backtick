@@ -302,7 +302,7 @@ export function buildBundle(
         return null;
       // An expansion is written out as the arrow it is, its holes the
       // parameters and the call the tag wrote binding them. Compiling it to a
-      // `functions` entry instead is possible — `GetFunction` is an entry as a
+      // `functions` entry instead is possible — `FunctionReference` is an entry as a
       // value, and `forwarding` already emits one — and would need the
       // expansion to close over nothing. Measured, it traded an inline arrow
       // for a table entry and came out even, so it is written here.

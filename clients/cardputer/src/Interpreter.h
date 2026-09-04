@@ -14,7 +14,7 @@ namespace backtick {
 // reordered, because a renumbered kind misreads every bundle already written.
 namespace NodeKind {
 constexpr int Element = 0;
-constexpr int GetFunction = 1;
+constexpr int FunctionReference = 1;
 constexpr int Builtin = 3;
 constexpr int DataArray = 4;
 constexpr int Identifier = 1000;
