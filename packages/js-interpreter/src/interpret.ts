@@ -54,12 +54,11 @@ function bind(scope: Scope, name: string, value: ClientValue): void {
 }
 
 function read(scope: Scope, name: string): ClientValue {
-  return scope.bindings[name] ?? null;
+  return scope.bindings[name];
 }
 
-// The frame a call binds its arguments in. A missing argument binds as null —
-// the language's absent value; `undefined` never arises (an omitted optional
-// parameter reads as null).
+// The frame a call binds its arguments in. A missing argument binds as
+// `undefined`, which is what an omitted optional parameter reads as.
 function applied(
   scope: Scope | null,
   parameters: readonly string[],
@@ -67,7 +66,7 @@ function applied(
 ): Scope {
   const frame = scopeOf(scope);
   for (let at = 0; at < parameters.length; at++) {
-    bind(frame, parameters[at], at < args.length ? args[at] : null);
+    bind(frame, parameters[at], at < args.length ? args[at] : undefined);
   }
   return frame;
 }
@@ -204,12 +203,11 @@ function memberOf(object: ClientValue, name: string): ClientValue {
             : null;
   if (boxed === null) {
     // A plain object is reached by the names it holds, and one it does not
-    // hold reads as null — the language's absent value.
+    // hold reads as `undefined`.
     //
     // The cast reads through a brand: a handle's type says opaque, and a cell
     // being `{ read, write, update }` underneath is this client's knowledge.
-    const held =
-      (object as { readonly [name: string]: ClientValue })[name] ?? null;
+    const held = (object as { readonly [name: string]: ClientValue })[name];
     // Bound, because some of these objects are the host's own. A cell's members
     // are closures and do not care, but an event's are methods that read the
     // event through `this` — and `preventDefault` reached off one and called
@@ -331,6 +329,11 @@ function buildNode(
     // Storage, made where this stands: evaluating it twice is two storages,
     // which is why it is a kind and not a call of a name. Never settled — the
     // whole point of a cell is that what it holds moves.
+    // The absent value. A node because JSON has no form for it — every other
+    // literal in this format is answered by `compile` as the value it is.
+    case "undef": {
+      return () => undefined;
+    }
     case "id": {
       const name = node[1];
       return (scope) => {
@@ -386,17 +389,17 @@ function buildNode(
         const name = callee[2];
         return (scope) => {
           // The receiver evaluates before the arguments; an optional receiver
-          // (`a?.b(…)`) short-circuits a null object to null, arguments
-          // unevaluated.
+          // (`a?.b(…)`) short-circuits a nullish object to `undefined`,
+          // arguments unevaluated.
           const object = receiver(scope);
-          if (optionalReceiver && object === null) {
-            return null;
+          if (optionalReceiver && object == null) {
+            return undefined;
           }
           const method = memberOf(object, name);
-          // An optional call (`a.b?.(…)`) short-circuits a null method the
+          // An optional call (`a.b?.(…)`) short-circuits a nullish method the
           // same way, arguments unevaluated.
-          if (optionalCall && method === null) {
-            return null;
+          if (optionalCall && method == null) {
+            return undefined;
           }
           if (typeof method !== "function") {
             throw new Error(`${name} is not a function`);
@@ -409,11 +412,11 @@ function buildNode(
       const target = compile(instance, callee);
       return (scope) => {
         // The callee evaluates before the arguments; an optional call
-        // (`cb?.(…)`) short-circuits a null callee to null, arguments
-        // unevaluated.
+        // (`cb?.(…)`) short-circuits a nullish callee to `undefined`,
+        // arguments unevaluated.
         const value = target(scope);
-        if (optionalCall && value === null) {
-          return null;
+        if (optionalCall && value == null) {
+          return undefined;
         }
         if (typeof value !== "function") {
           throw new Error("callee is not a function");
@@ -428,11 +431,10 @@ function buildNode(
       const member = node[2];
       return (scope) => {
         const object = target(scope);
-        if (optional && object === null) {
-          return null;
+        if (optional && object == null) {
+          return undefined;
         }
-        // An absent member reads as null — the language's absent value;
-        // `undefined` never arises.
+        // An absent member reads as `undefined`.
         return memberOf(object, member);
       };
     }
@@ -445,13 +447,13 @@ function buildNode(
         if (Array.isArray(reached)) {
           // An array is reached by whole numbers in range; everything else
           // about it — a fractional key, a string one, one past either end —
-          // is a place the array has nothing, which reads as null.
+          // is a place the array has nothing, which reads as `undefined`.
           return typeof key === "number" &&
             Number.isInteger(key) &&
             key >= 0 &&
             key < reached.length
-            ? (reached[key] ?? null)
-            : null;
+            ? reached[key]
+            : undefined;
         }
         // A string is reached by whole numbers in range too, which is what
         // its class declares an index signature for.
@@ -461,7 +463,7 @@ function buildNode(
             key >= 0 &&
             key < reached.length
             ? reached[key]
-            : null;
+            : undefined;
         }
         // An object is reached by the names it holds itself: an inherited one
         // (`toString`) is not a member of the value, so it reads as absent
@@ -469,11 +471,10 @@ function buildNode(
         if (reached !== null && typeof reached === "object") {
           return typeof key === "string" &&
             Object.prototype.hasOwnProperty.call(reached, key)
-            ? ((reached as { readonly [name: string]: ClientValue })[key] ??
-                null)
-            : null;
+            ? (reached as { readonly [name: string]: ClientValue })[key]
+            : undefined;
         }
-        return null;
+        return undefined;
       };
     }
     // Assignment binds its left rather than evaluating it, which is why it is
@@ -522,7 +523,7 @@ function buildNode(
       const right = compile(instance, node[2]);
       return (scope) => {
         const value = left(scope);
-        return value !== null ? value : right(scope);
+        return value != null ? value : right(scope);
       };
     }
     // Two numbers add; a string on either side concatenates. Written out
@@ -673,7 +674,7 @@ function compileArrow(
           `A \`${completion.kind}\` in this bundle escaped its loop.`,
         );
       }
-      return completion.kind === "returned" ? completion.value : null;
+      return completion.kind === "returned" ? completion.value : undefined;
     };
 }
 

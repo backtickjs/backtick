@@ -1,6 +1,6 @@
 {
   "named": "hi!",
-  "explicit": null,
+  "explicit": undefined,
   "supplied": 2,
   "fallback": 0
 }

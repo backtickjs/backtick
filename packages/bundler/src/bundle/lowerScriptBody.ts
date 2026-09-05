@@ -234,6 +234,9 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         return read(node.bindingKey);
       case "null":
         return null;
+      // A node rather than the literal: JSON has no form for `undefined`.
+      case "undefined":
+        return ["undef"];
       case "number":
         return node.value;
       case "obj": {

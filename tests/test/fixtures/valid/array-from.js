@@ -3,50 +3,51 @@ import { cs } from "@backtickjs/core";
 // given length. Everything else about an array is a transformation of one that
 // already exists.
 //
-// The mapper's first argument is always `null` — the standard library passes
-// the element it found, and against a `{ length }` source there is none.
+// The mapper's first argument is always `undefined` — the standard library
+// passes the element it found, and against a `{ length }` source there is
+// none. `null` would mean the source held one and it was null.
 export default cs.create(
-  [9, 16, 16, 3],
+  [10, 16, 17, 3],
   {
     version: "0.0.0",
     filePath: "array-from.ts",
-    fileHash: "115m6ij244xfw",
+    fileHash: "2y6lrvu7oez0s",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "{}",
-    loc: [9, 19, 16, 2],
+    loc: [10, 19, 17, 2],
     statements: [
       {
         kind: "const",
-        loc: [10, 3, 10, 70],
+        loc: [11, 3, 11, 70],
         name: {
           kind: "id",
-          loc: [10, 9, 10, 16],
+          loc: [11, 9, 11, 16],
           text: "doubled",
-          bindingKey: "doubled$115m6ij244xfw$0",
+          bindingKey: "doubled$2y6lrvu7oez0s$0",
         },
         initializer: {
           kind: "()",
-          loc: [10, 19, 10, 69],
+          loc: [11, 19, 11, 69],
           expression: {
             kind: "bltn",
-            loc: [10, 19, 10, 29],
+            loc: [11, 19, 11, 29],
             name: "Array.from",
           },
           arguments: [
             {
               kind: "obj",
-              loc: [10, 30, 10, 43],
+              loc: [11, 30, 11, 43],
               properties: [
                 {
                   kind: ":",
-                  loc: [10, 32, 10, 41],
+                  loc: [11, 32, 11, 41],
                   name: "length",
                   initializer: {
                     kind: "number",
-                    loc: [10, 40, 10, 41],
+                    loc: [11, 40, 11, 41],
                     value: 4,
                   },
                 },
@@ -54,42 +55,42 @@ export default cs.create(
             },
             {
               kind: "=>",
-              loc: [10, 45, 10, 68],
+              loc: [11, 45, 11, 68],
               parameters: [
                 {
                   kind: "param",
-                  loc: [10, 46, 10, 47],
+                  loc: [11, 46, 11, 47],
                   name: {
                     kind: "id",
-                    loc: [10, 46, 10, 47],
+                    loc: [11, 46, 11, 47],
                     text: "_",
-                    bindingKey: "_$115m6ij244xfw$3",
+                    bindingKey: "_$2y6lrvu7oez0s$3",
                   },
                 },
                 {
                   kind: "param",
-                  loc: [10, 49, 10, 54],
+                  loc: [11, 49, 11, 54],
                   name: {
                     kind: "id",
-                    loc: [10, 49, 10, 54],
+                    loc: [11, 49, 11, 54],
                     text: "index",
-                    bindingKey: "index$115m6ij244xfw$4",
+                    bindingKey: "index$2y6lrvu7oez0s$4",
                   },
                 },
               ],
               body: {
                 kind: "binop",
-                loc: [10, 59, 10, 68],
+                loc: [11, 59, 11, 68],
                 left: {
                   kind: "id",
-                  loc: [10, 59, 10, 64],
+                  loc: [11, 59, 11, 64],
                   text: "index",
-                  bindingKey: "index$115m6ij244xfw$4",
+                  bindingKey: "index$2y6lrvu7oez0s$4",
                 },
                 operatorToken: "*",
                 right: {
                   kind: "number",
-                  loc: [10, 67, 10, 68],
+                  loc: [11, 67, 11, 68],
                   value: 2,
                 },
               },
@@ -99,33 +100,33 @@ export default cs.create(
       },
       {
         kind: "const",
-        loc: [11, 3, 11, 64],
+        loc: [12, 3, 12, 64],
         name: {
           kind: "id",
-          loc: [11, 9, 11, 14],
+          loc: [12, 9, 12, 14],
           text: "empty",
-          bindingKey: "empty$115m6ij244xfw$1",
+          bindingKey: "empty$2y6lrvu7oez0s$1",
         },
         initializer: {
           kind: "()",
-          loc: [11, 17, 11, 63],
+          loc: [12, 17, 12, 63],
           expression: {
             kind: "bltn",
-            loc: [11, 17, 11, 27],
+            loc: [12, 17, 12, 27],
             name: "Array.from",
           },
           arguments: [
             {
               kind: "obj",
-              loc: [11, 28, 11, 41],
+              loc: [12, 28, 12, 41],
               properties: [
                 {
                   kind: ":",
-                  loc: [11, 30, 11, 39],
+                  loc: [12, 30, 12, 39],
                   name: "length",
                   initializer: {
                     kind: "number",
-                    loc: [11, 38, 11, 39],
+                    loc: [12, 38, 12, 39],
                     value: 0,
                   },
                 },
@@ -133,34 +134,34 @@ export default cs.create(
             },
             {
               kind: "=>",
-              loc: [11, 43, 11, 62],
+              loc: [12, 43, 12, 62],
               parameters: [
                 {
                   kind: "param",
-                  loc: [11, 44, 11, 45],
+                  loc: [12, 44, 12, 45],
                   name: {
                     kind: "id",
-                    loc: [11, 44, 11, 45],
+                    loc: [12, 44, 12, 45],
                     text: "_",
-                    bindingKey: "_$115m6ij244xfw$5",
+                    bindingKey: "_$2y6lrvu7oez0s$5",
                   },
                 },
                 {
                   kind: "param",
-                  loc: [11, 47, 11, 52],
+                  loc: [12, 47, 12, 52],
                   name: {
                     kind: "id",
-                    loc: [11, 47, 11, 52],
+                    loc: [12, 47, 12, 52],
                     text: "index",
-                    bindingKey: "index$115m6ij244xfw$6",
+                    bindingKey: "index$2y6lrvu7oez0s$6",
                   },
                 },
               ],
               body: {
                 kind: "id",
-                loc: [11, 57, 11, 62],
+                loc: [12, 57, 12, 62],
                 text: "index",
-                bindingKey: "index$115m6ij244xfw$6",
+                bindingKey: "index$2y6lrvu7oez0s$6",
               },
             },
           ],
@@ -168,33 +169,33 @@ export default cs.create(
       },
       {
         kind: "const",
-        loc: [12, 3, 14, 5],
+        loc: [13, 3, 15, 5],
         name: {
           kind: "id",
-          loc: [12, 9, 12, 15],
+          loc: [13, 9, 13, 15],
           text: "absent",
-          bindingKey: "absent$115m6ij244xfw$2",
+          bindingKey: "absent$2y6lrvu7oez0s$2",
         },
         initializer: {
           kind: "()",
-          loc: [12, 18, 14, 4],
+          loc: [13, 18, 15, 4],
           expression: {
             kind: "bltn",
-            loc: [12, 18, 12, 28],
+            loc: [13, 18, 13, 28],
             name: "Array.from",
           },
           arguments: [
             {
               kind: "obj",
-              loc: [12, 29, 12, 42],
+              loc: [13, 29, 13, 42],
               properties: [
                 {
                   kind: ":",
-                  loc: [12, 31, 12, 40],
+                  loc: [13, 31, 13, 40],
                   name: "length",
                   initializer: {
                     kind: "number",
-                    loc: [12, 39, 12, 40],
+                    loc: [13, 39, 13, 40],
                     value: 2,
                   },
                 },
@@ -202,60 +203,60 @@ export default cs.create(
             },
             {
               kind: "=>",
-              loc: [12, 44, 13, 32],
+              loc: [13, 44, 14, 37],
               parameters: [
                 {
                   kind: "param",
-                  loc: [12, 45, 12, 50],
+                  loc: [13, 45, 13, 50],
                   name: {
                     kind: "id",
-                    loc: [12, 45, 12, 50],
+                    loc: [13, 45, 13, 50],
                     text: "value",
-                    bindingKey: "value$115m6ij244xfw$7",
+                    bindingKey: "value$2y6lrvu7oez0s$7",
                   },
                 },
                 {
                   kind: "param",
-                  loc: [12, 52, 12, 57],
+                  loc: [13, 52, 13, 57],
                   name: {
                     kind: "id",
-                    loc: [12, 52, 12, 57],
+                    loc: [13, 52, 13, 57],
                     text: "index",
-                    bindingKey: "index$115m6ij244xfw$8",
+                    bindingKey: "index$2y6lrvu7oez0s$8",
                   },
                 },
               ],
               body: {
                 kind: "?:",
-                loc: [13, 5, 13, 32],
+                loc: [14, 5, 14, 37],
                 condition: {
                   kind: "binop",
-                  loc: [13, 5, 13, 19],
+                  loc: [14, 5, 14, 24],
                   left: {
                     kind: "id",
-                    loc: [13, 5, 13, 10],
+                    loc: [14, 5, 14, 10],
                     text: "value",
-                    bindingKey: "value$115m6ij244xfw$7",
+                    bindingKey: "value$2y6lrvu7oez0s$7",
                   },
                   operatorToken: "===",
                   right: {
-                    kind: "null",
-                    loc: [13, 15, 13, 19],
+                    kind: "undefined",
+                    loc: [14, 15, 14, 24],
                   },
                 },
                 whenTrue: {
                   kind: "id",
-                  loc: [13, 22, 13, 27],
+                  loc: [14, 27, 14, 32],
                   text: "index",
-                  bindingKey: "index$115m6ij244xfw$8",
+                  bindingKey: "index$2y6lrvu7oez0s$8",
                 },
                 whenFalse: {
                   kind: "unop",
-                  loc: [13, 30, 13, 32],
+                  loc: [14, 35, 14, 37],
                   operator: "-",
                   operand: {
                     kind: "number",
-                    loc: [13, 31, 13, 32],
+                    loc: [14, 36, 14, 37],
                     value: 1,
                   },
                 },
@@ -266,37 +267,37 @@ export default cs.create(
       },
       {
         kind: "return",
-        loc: [15, 3, 15, 74],
+        loc: [16, 3, 16, 74],
         expression: {
           kind: "binop",
-          loc: [15, 10, 15, 73],
+          loc: [16, 10, 16, 73],
           left: {
             kind: "binop",
-            loc: [15, 10, 15, 54],
+            loc: [16, 10, 16, 54],
             left: {
               kind: "binop",
-              loc: [15, 10, 15, 48],
+              loc: [16, 10, 16, 48],
               left: {
                 kind: "binop",
-                loc: [15, 10, 15, 33],
+                loc: [16, 10, 16, 33],
                 left: {
                   kind: "()",
-                  loc: [15, 10, 15, 27],
+                  loc: [16, 10, 16, 27],
                   expression: {
                     kind: ".",
-                    loc: [15, 10, 15, 22],
+                    loc: [16, 10, 16, 22],
                     expression: {
                       kind: "id",
-                      loc: [15, 10, 15, 17],
+                      loc: [16, 10, 16, 17],
                       text: "doubled",
-                      bindingKey: "doubled$115m6ij244xfw$0",
+                      bindingKey: "doubled$2y6lrvu7oez0s$0",
                     },
                     name: "join",
                   },
                   arguments: [
                     {
                       kind: "string",
-                      loc: [15, 23, 15, 26],
+                      loc: [16, 23, 16, 26],
                       text: ",",
                     },
                   ],
@@ -304,19 +305,19 @@ export default cs.create(
                 operatorToken: "+",
                 right: {
                   kind: "string",
-                  loc: [15, 30, 15, 33],
+                  loc: [16, 30, 16, 33],
                   text: "|",
                 },
               },
               operatorToken: "+",
               right: {
                 kind: ".",
-                loc: [15, 36, 15, 48],
+                loc: [16, 36, 16, 48],
                 expression: {
                   kind: "id",
-                  loc: [15, 36, 15, 41],
+                  loc: [16, 36, 16, 41],
                   text: "empty",
-                  bindingKey: "empty$115m6ij244xfw$1",
+                  bindingKey: "empty$2y6lrvu7oez0s$1",
                 },
                 name: "length",
               },
@@ -324,29 +325,29 @@ export default cs.create(
             operatorToken: "+",
             right: {
               kind: "string",
-              loc: [15, 51, 15, 54],
+              loc: [16, 51, 16, 54],
               text: "|",
             },
           },
           operatorToken: "+",
           right: {
             kind: "()",
-            loc: [15, 57, 15, 73],
+            loc: [16, 57, 16, 73],
             expression: {
               kind: ".",
-              loc: [15, 57, 15, 68],
+              loc: [16, 57, 16, 68],
               expression: {
                 kind: "id",
-                loc: [15, 57, 15, 63],
+                loc: [16, 57, 16, 63],
                 text: "absent",
-                bindingKey: "absent$115m6ij244xfw$2",
+                bindingKey: "absent$2y6lrvu7oez0s$2",
               },
               name: "join",
             },
             arguments: [
               {
                 kind: "string",
-                loc: [15, 69, 15, 72],
+                loc: [16, 69, 16, 72],
                 text: ",",
               },
             ],

@@ -1,3 +1,1 @@
-4:34-4:43 error TS0: `undefined` isn't supported in a `cs` client script; use `null` instead.
-8:23-8:27 error TS0: `void` isn't supported in a `cs` client script.
-12:37-12:46 error TS0: `undefined` isn't supported in a `cs` client script; use `null` instead.
+9:23-9:27 error TS0: `void` isn't supported in a `cs` client script.

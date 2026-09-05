@@ -3,6 +3,7 @@ export const NodeKind = {
   Element: "el",
   FunctionReference: "fn",
   Builtin: "bltn",
+  Undefined: "undef",
   Identifier: "id",
   CallExpression: "()",
   OptionalCallExpression: "?.()",

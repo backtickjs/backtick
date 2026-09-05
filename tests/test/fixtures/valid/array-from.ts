@@ -4,13 +4,14 @@ import { cs } from "@backtickjs/core";
 // given length. Everything else about an array is a transformation of one that
 // already exists.
 //
-// The mapper's first argument is always `null` — the standard library passes
-// the element it found, and against a `{ length }` source there is none.
+// The mapper's first argument is always `undefined` — the standard library
+// passes the element it found, and against a `{ length }` source there is
+// none. `null` would mean the source held one and it was null.
 export default cs`{
   const doubled = Array.from({ length: 4 }, (_, index) => index * 2);
   const empty = Array.from({ length: 0 }, (_, index) => index);
   const absent = Array.from({ length: 2 }, (value, index) =>
-    value === null ? index : -1,
+    value === undefined ? index : -1,
   );
   return doubled.join(",") + "|" + empty.length + "|" + absent.join(",");
 }`;

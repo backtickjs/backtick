@@ -380,6 +380,9 @@ Value Interpreter::evaluate(const JsonValue& node,
       throw std::runtime_error("`" + name + "` is not bound");
     }
 
+    case NodeKind::Undefined:
+      return Value::undefined();
+
     case NodeKind::Builtin: {
       std::string name(json.text(json.item(node, 1)));
       auto held = builtins.find(name);

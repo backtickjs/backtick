@@ -29,6 +29,7 @@ export type ClientFunction = (...args: never[]) => ClientUnknown;
  */
 export type ClientValue =
   | null
+  | undefined
   | number
   | boolean
   | string

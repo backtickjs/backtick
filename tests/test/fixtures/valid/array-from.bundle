@@ -109,7 +109,9 @@
                         "id",
                         "value"
                       ],
-                      null
+                      [
+                        "undef"
+                      ]
                     ],
                     [
                       "id",

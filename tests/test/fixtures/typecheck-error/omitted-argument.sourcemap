@@ -3,10 +3,9 @@ cs.lift(cs.const(                         → cs`
 __cs_name                                 → name
 :                                         → ?: 
 string                                    → string
- | null                                   → 
+ | undefined                              → 
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
-(                                         → 
 cs.receiver(                              → 
 __cs_name                                 → name
 )                                         → 
@@ -14,7 +13,7 @@ __cs_name                                 → name
 concat                                    → concat
 (                                         → (
 "!"                                       → "!"
-) ?? null)                                → )
+)                                         → )
 );                                        → ;
 \n}                                       → \n}
 ))                                        → `

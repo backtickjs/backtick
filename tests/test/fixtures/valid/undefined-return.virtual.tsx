@@ -1,11 +1,9 @@
 import { cs, type Client } from "@backtickjs/core";
 
-// The recorded residual `undefined` door (PLAN.md Step 0): a host
-// ascription smuggles `undefined` into a function's *return*, riding
-// `undefined ≤ void` through the function arm's `ClientUnknown` return —
-// so storing the function draws no error. The door admits the lying type,
-// never a value: no script expression can construct `undefined`, and
-// every position where the result could land still checks.
+// A host ascription putting `undefined` in a function's return, which is
+// ordinary now that `undefined` is a value: the function stores, it calls, and
+// what a call answers with is `string | undefined` on both sides of the
+// boundary.
 type Maybe = string | undefined;
 
 const lying: Client<() => Maybe> = cs.lift(cs.const(() => "hi"));

@@ -1,12 +1,13 @@
 import { cs } from "@backtickjs/core";
 
-// `?` marks a nullable parameter — sugar for `T | null`, not an optional
-// argument: callers pass `null` explicitly, and `undefined` never arises.
+// `?` marks an optional parameter — sugar for `T | undefined`. A caller may
+// pass `undefined` where the argument is not supplied; `null` is a value of
+// its own and not accepted here.
 const greet = cs`(name?: string) => {
   return name?.concat("!");
 }`;
 
-// A function-typed annotation unions parenthesized: `(() => number) | null`.
+// A function-typed annotation unions parenthesized: `(() => number) | undefined`.
 const double = cs`() => 2`;
 
 const call = cs`(cb?: () => number) => {
@@ -15,7 +16,7 @@ const call = cs`(cb?: () => number) => {
 
 export default cs`({
   named: $greet("hi"),
-  explicit: $greet(null),
+  explicit: $greet(undefined),
   supplied: $call($double),
-  fallback: $call(null),
+  fallback: $call(undefined),
 })`;

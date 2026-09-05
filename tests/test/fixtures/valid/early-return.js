@@ -55,7 +55,7 @@ export default cs.create(
               kind: "return",
               loc: [7, 5, 7, 12],
               expression: {
-                kind: "null",
+                kind: "undefined",
                 loc: [7, 5, 7, 12],
               },
             },

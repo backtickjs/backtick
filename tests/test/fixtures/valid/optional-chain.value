@@ -1,9 +1,9 @@
 {
   "found": 5,
-  "missing": null,
+  "missing": undefined,
   "deep": 7,
-  "cut": null,
-  "top": null,
+  "cut": undefined,
+  "top": undefined,
   "loud": "hi!",
-  "silent": null
+  "silent": undefined
 }

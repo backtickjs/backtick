@@ -18,6 +18,7 @@ export type ClientScriptExpression =
   | ClientScriptCall
   | ClientScriptIdentifier
   | ClientScriptNullLiteral
+  | ClientScriptUndefinedLiteral
   | ClientScriptNumericLiteral
   | ClientScriptObjectLiteralExpression
   | ClientScriptPropertyAccess
@@ -204,6 +205,13 @@ export interface ClientScriptIfStatement {
 
 export interface ClientScriptNullLiteral {
   readonly kind: "null";
+  readonly loc: SourceLocation;
+}
+
+// What an absent value is. `null` is written; this is what a `?.` that
+// short-circuits, a missing argument and a bodiless `return` all produce.
+export interface ClientScriptUndefinedLiteral {
+  readonly kind: "undefined";
   readonly loc: SourceLocation;
 }
 

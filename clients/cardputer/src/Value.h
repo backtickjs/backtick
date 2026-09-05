@@ -22,6 +22,8 @@ struct Drawing;
 // what it means is the client's.
 enum class Kind : unsigned char {
   Null,
+  // What an absent value reads as, told apart from the `null` a script wrote.
+  Undefined,
   Boolean,
   Number,
   String,
@@ -42,6 +44,11 @@ class Value {
  public:
   Value() = default;
   static Value null() { return Value(); }
+  static Value undefined() {
+    Value held;
+    held.kind_ = Kind::Undefined;
+    return held;
+  }
   static Value boolean(bool of);
   static Value number(double of);
   static Value string(std::string of);

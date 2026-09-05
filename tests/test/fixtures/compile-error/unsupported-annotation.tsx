@@ -1,6 +1,7 @@
 import { cs } from "@backtickjs/core";
 
-// `undefined` and `void` name no client value; `null` is the absent value.
+// `void` names no client value — an action answers with nothing, which is the
+// boundary's word and not a script's. `undefined` is a value and annotates.
 const explicit = cs`(x: string | undefined) => {
   return 1;
 }`;

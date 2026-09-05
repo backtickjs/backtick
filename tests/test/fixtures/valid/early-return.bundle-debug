@@ -1,7 +1,7 @@
 #f0 = () => {
   let n = 0;
   if (n === 0) {
-    return null;
+    return undefined;
   }
   n = 1;
 }

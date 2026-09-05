@@ -16,6 +16,7 @@ namespace NodeKind {
 constexpr int Element = 0;
 constexpr int FunctionReference = 1;
 constexpr int Builtin = 3;
+constexpr int Undefined = 5;
 constexpr int DataArray = 4;
 constexpr int Identifier = 1000;
 constexpr int CallExpression = 1001;

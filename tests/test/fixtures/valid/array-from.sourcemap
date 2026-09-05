@@ -71,7 +71,7 @@ __cs_index              → index
 ) =>                    → ) =>\n    
 __cs_value              → value
  ===                    →  === 
-null                    → null
+undefined               → undefined
  ?                      →  ? 
 __cs_index              → index
  :                      →  : 

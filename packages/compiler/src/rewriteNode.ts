@@ -248,78 +248,46 @@ function checkedCondition(
   );
 }
 
-// The left operand of a `??` (through parens): that `??` already coalesces
-// an optional chain's `undefined`, so the auto `?? null` skips (TS2871).
-function nullCoalescedLeft(
-  ts: typeof import("typescript"),
-  node: ts.Node,
-): boolean {
-  let child: ts.Node = node;
-  let parent: ts.Node | undefined = node.parent;
-  while (parent != null && ts.isParenthesizedExpression(parent)) {
-    child = parent;
-    parent = parent.parent;
-  }
-  return (
-    parent != null &&
-    ts.isBinaryExpression(parent) &&
-    parent.operatorToken.kind === ts.SyntaxKind.QuestionQuestionToken &&
-    parent.left === child
-  );
-}
-
 // The globally unique binding key the resolver assigned this identifier. An
 // unbound name (a "Cannot find name" error) keeps its original text.
 function bindingKey(state: RewriteState, identifier: ts.Identifier): string {
   return state.bindings.get(identifier) ?? identifier.text;
 }
 
-// `undefined` doesn't exist in the language — `null` is the absent value.
-// A value use hints the fix; a name use gets TypeScript's own
-// not-allowed-as-a-name wording.
+// `undefined` is a value, but not a name to bind: shadowing it would leave the
+// literal unreachable in that scope.
 function bannedUndefined(
   state: RewriteState,
   name: ts.Identifier,
-  position: "value" | "declaration" | "parameter",
+  position: "declaration" | "parameter",
 ): boolean {
   if (name.text !== "undefined") {
     return false;
   }
   state.errors.set(
     name,
-    position === "value"
-      ? "`undefined` isn't supported in a `cs` client script; use `null` " +
-          "instead."
-      : `\`undefined\` is not allowed as a ${
-          position === "declaration" ? "variable declaration" : "parameter"
-        } name.`,
+    `\`undefined\` is not allowed as a ${
+      position === "declaration" ? "variable declaration" : "parameter"
+    } name.`,
   );
   return true;
 }
 
-// `undefined`/`void` name no client value — `null` is the absent value.
-// Keyword check with a precise span; a host alias can still smuggle them.
-function bannedTypeKeywords(
+// `void` names no client value — an action answers with nothing, which is what
+// `Client<void>` says at the boundary rather than something a script may write.
+// Keyword check with a precise span; a host alias can still smuggle it.
+function bannedVoid(
   ts: typeof import("typescript"),
   state: RewriteState,
   type: ts.Node,
 ): boolean {
-  if (
-    type.kind === ts.SyntaxKind.UndefinedKeyword ||
-    type.kind === ts.SyntaxKind.VoidKeyword
-  ) {
-    state.errors.set(
-      type,
-      type.kind === ts.SyntaxKind.UndefinedKeyword
-        ? "`undefined` isn't supported in a `cs` client script; use `null` " +
-            "instead."
-        : "`void` isn't supported in a `cs` client script.",
-    );
+  if (type.kind === ts.SyntaxKind.VoidKeyword) {
+    state.errors.set(type, "`void` isn't supported in a `cs` client script.");
     return true;
   }
   let found = false;
   ts.forEachChild(type, (child) => {
-    found = bannedTypeKeywords(ts, state, child) || found;
+    found = bannedVoid(ts, state, child) || found;
   });
   return found;
 }
@@ -668,7 +636,8 @@ function rewriteNodeImpl(
   if (ts.isReturnStatement(node) && !node.expression) {
     // A bare `return` exits an action early. In a value script it returns
     // nothing where a value is due — rewritten as `return null`, the
-    // suggested fix, so the one error stands alone.
+    // suggested fix, so the one error stands alone. What it completes with is
+    // `undefined` either way.
     if (state.bodyKind === "value") {
       state.errors.set(
         node,
@@ -682,7 +651,7 @@ function rewriteNodeImpl(
           : ts.factory.createReturnStatement(),
       runtime: astNode(ts, "return", {
         loc: loc(node),
-        expression: astNode(ts, "null", {
+        expression: astNode(ts, "undefined", {
           loc: loc(node),
         }),
       }),
@@ -844,12 +813,12 @@ function rewriteNodeImpl(
       };
     }
 
-    // Rewritten as `null` — the suggested fix — so the one error stands
-    // alone, with no `undefined` type cascading into the value checks.
-    if (bannedUndefined(state, node, "value")) {
+    // The global, which no binding may shadow — so an `undefined` reaching
+    // here is always the literal.
+    if (node.text === "undefined" && !state.bindings.has(node)) {
       return {
-        virtual: ts.factory.createNull(),
-        runtime: astNode(ts, "null", {
+        virtual: ts.factory.createIdentifier("undefined"),
+        runtime: astNode(ts, "undefined", {
           loc: loc(node),
         }),
       };
@@ -954,8 +923,6 @@ function rewriteNodeImpl(
       expression.virtual as ts.Expression,
     ]);
     state.mappings.set(virtualReceiver, node.expression);
-    // `a?.b` reads as null for a null `a` — never `undefined` — so the
-    // access carries `?? null` unless a user `??` already coalesces it.
     const access = optional
       ? ts.factory.createPropertyAccessChain(
           virtualReceiver,
@@ -966,18 +933,8 @@ function rewriteNodeImpl(
           virtualReceiver,
           propertyName,
         );
-    const virtual =
-      optional && !nullCoalescedLeft(ts, node)
-        ? ts.factory.createParenthesizedExpression(
-            ts.factory.createBinaryExpression(
-              access,
-              ts.SyntaxKind.QuestionQuestionToken,
-              ts.factory.createNull(),
-            ),
-          )
-        : access;
     return {
-      virtual,
+      virtual: access,
       // Only the runtime node folds: the virtual code still writes the access
       // out, which is what keeps hover, rename and completion on the member
       // working and leaves `Receiver` to narrow what may be read off the name.
@@ -1317,18 +1274,8 @@ function rewriteNodeImpl(
             typeArguments,
             args.map((arg) => arg.virtual as ts.Expression),
           );
-      const virtual =
-        inChain && !nullCoalescedLeft(ts, node)
-          ? ts.factory.createParenthesizedExpression(
-              ts.factory.createBinaryExpression(
-                virtualCall,
-                ts.SyntaxKind.QuestionQuestionToken,
-                ts.factory.createNull(),
-              ),
-            )
-          : virtualCall;
       return {
-        virtual,
+        virtual: virtualCall,
         runtime: astNode(ts, optionalCall ? "?.()" : "()", {
           loc: loc(node),
           expression: accessNode(
@@ -1358,16 +1305,7 @@ function rewriteNodeImpl(
           args.map((arg) => arg.virtual as ts.Expression),
         );
     return {
-      virtual:
-        optionalCall && !nullCoalescedLeft(ts, node)
-          ? ts.factory.createParenthesizedExpression(
-              ts.factory.createBinaryExpression(
-                virtualCall,
-                ts.SyntaxKind.QuestionQuestionToken,
-                ts.factory.createNull(),
-              ),
-            )
-          : virtualCall,
+      virtual: virtualCall,
       runtime: astNode(ts, optionalCall ? "?.()" : "()", {
         loc: loc(node),
         expression: callee.runtime as ts.Expression,
@@ -1409,7 +1347,7 @@ function rewriteNodeImpl(
         let type = param.type;
         // Rewritten as `any` — the keyword error stands alone; the
         // `ClientValue` boundary check would otherwise repeat it coarsely.
-        if (type && bannedTypeKeywords(ts, state, type)) {
+        if (type && bannedVoid(ts, state, type)) {
           type = ts.factory.createKeywordTypeNode(ts.SyntaxKind.AnyKeyword);
         }
         return {
@@ -1436,8 +1374,8 @@ function rewriteNodeImpl(
       const virtualParams = params.map((param) => {
         const identifier = ts.factory.createIdentifier(mangle(param.name.text));
         state.mappings.set(identifier, param.name);
-        // `?` marks a nullable parameter — sugar for `T | null`, not an
-        // optional argument: the virtual parameter stays required
+        // `?` marks an optional parameter — sugar for `T | undefined`, which
+        // is what a call site omitting it binds
         const declaration = ts.factory.createParameterDeclaration(
           undefined,
           undefined,
@@ -1446,7 +1384,9 @@ function rewriteNodeImpl(
           param.optional && param.type
             ? ts.factory.createUnionTypeNode([
                 mapType(state, param.type),
-                ts.factory.createLiteralTypeNode(ts.factory.createNull()),
+                ts.factory.createKeywordTypeNode(
+                  ts.SyntaxKind.UndefinedKeyword,
+                ),
               ])
             : mapType(state, param.type),
           undefined,

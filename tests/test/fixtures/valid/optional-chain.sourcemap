@@ -5,13 +5,11 @@ __cs_p                                    → p
 {\n    x: number;\n} | null               → { x: number } | null
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
-(                                         → 
 cs.receiver(                              → 
 __cs_p                                    → p
 )                                         → 
 ?.                                        → ?.
 x                                         → x
- ?? null)                                 → 
 );                                        → ;
 \n}                                       → \n}
 ))                                        → `
@@ -22,19 +20,15 @@ __cs_o                                    → o
 {\n    inner: {\n        z: number;\n    } | null;\n} | null→ { inner: { z: number } | null } | null
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
-(                                         → 
 cs.receiver(                              → 
-(                                         → 
 cs.receiver(                              → 
 __cs_o                                    → o
 )                                         → 
 ?.                                        → ?.
 inner                                     → inner
- ?? null)                                 → 
 )                                         → 
 ?.                                        → ?.
 z                                         → z
- ?? null)                                 → 
 );                                        → ;
 \n}                                       → \n}
 ))                                        → `
@@ -45,7 +39,6 @@ __cs_s                                    → s
 string | null                             → string | null
 ) => {\n                                  → ) => {\n  
 return cs.const(                          → return 
-(                                         → 
 cs.receiver(                              → 
 __cs_s                                    → s
 )                                         → 
@@ -53,7 +46,7 @@ __cs_s                                    → s
 concat                                    → concat
 (                                         → (
 "!"                                       → "!"
-) ?? null)                                → )
+)                                         → )
 );                                        → ;
 \n}                                       → \n}
 ))                                        → `

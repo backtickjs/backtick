@@ -1,6 +1,7 @@
 export type {
   Bundle,
   BundleArrowFunction,
+  BundleUndefined,
   BundleAssignment,
   BundleLogicalAnd,
   BundleLogicalOr,

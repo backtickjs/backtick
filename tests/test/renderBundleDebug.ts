@@ -101,6 +101,8 @@ function renderNode(
     // A global the format names and the host answers.
     case "bltn":
       return node[1];
+    case "undef":
+      return "undefined";
     case "()":
     case "?.()": {
       const args = node[2].map((arg) => renderNode(arg, indent));

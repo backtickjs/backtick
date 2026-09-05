@@ -1,55 +1,56 @@
 import { cs } from "@backtickjs/core";
-// `?` marks a nullable parameter — sugar for `T | null`, not an optional
-// argument: callers pass `null` explicitly, and `undefined` never arises.
+// `?` marks an optional parameter — sugar for `T | undefined`. A caller may
+// pass `undefined` where the argument is not supplied; `null` is a value of
+// its own and not accepted here.
 const greet = cs.create(
-  [5, 15, 7, 3],
+  [6, 15, 8, 3],
   {
     version: "0.0.0",
     filePath: "optional-parameter.ts",
-    fileHash: "hlti23avj5mo",
+    fileHash: "s4cewloqhuul",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "=>",
-    loc: [5, 18, 7, 2],
+    loc: [6, 18, 8, 2],
     parameters: [
       {
         kind: "param",
-        loc: [5, 19, 5, 32],
+        loc: [6, 19, 6, 32],
         name: {
           kind: "id",
-          loc: [5, 19, 5, 23],
+          loc: [6, 19, 6, 23],
           text: "name",
-          bindingKey: "name$hlti23avj5mo$0",
+          bindingKey: "name$s4cewloqhuul$0",
         },
       },
     ],
     body: {
       kind: "{}",
-      loc: [5, 37, 7, 2],
+      loc: [6, 37, 8, 2],
       statements: [
         {
           kind: "return",
-          loc: [6, 3, 6, 28],
+          loc: [7, 3, 7, 28],
           expression: {
             kind: "()",
-            loc: [6, 10, 6, 27],
+            loc: [7, 10, 7, 27],
             expression: {
               kind: "?.",
-              loc: [6, 10, 6, 22],
+              loc: [7, 10, 7, 22],
               expression: {
                 kind: "id",
-                loc: [6, 10, 6, 14],
+                loc: [7, 10, 7, 14],
                 text: "name",
-                bindingKey: "name$hlti23avj5mo$0",
+                bindingKey: "name$s4cewloqhuul$0",
               },
               name: "concat",
             },
             arguments: [
               {
                 kind: "string",
-                loc: [6, 23, 6, 26],
+                loc: [7, 23, 7, 26],
                 text: "!",
               },
             ],
@@ -59,76 +60,76 @@ const greet = cs.create(
     },
   }),
 );
-// A function-typed annotation unions parenthesized: `(() => number) | null`.
+// A function-typed annotation unions parenthesized: `(() => number) | undefined`.
 const double = cs.create(
-  [10, 16, 10, 27],
+  [11, 16, 11, 27],
   {
     version: "0.0.0",
     filePath: "optional-parameter.ts",
-    fileHash: "hlti23avj5mo",
+    fileHash: "s4cewloqhuul",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "=>",
-    loc: [10, 19, 10, 26],
+    loc: [11, 19, 11, 26],
     parameters: [],
     body: {
       kind: "number",
-      loc: [10, 25, 10, 26],
+      loc: [11, 25, 11, 26],
       value: 2,
     },
   }),
 );
 const call = cs.create(
-  [12, 14, 14, 3],
+  [13, 14, 15, 3],
   {
     version: "0.0.0",
     filePath: "optional-parameter.ts",
-    fileHash: "hlti23avj5mo",
+    fileHash: "s4cewloqhuul",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "=>",
-    loc: [12, 17, 14, 2],
+    loc: [13, 17, 15, 2],
     parameters: [
       {
         kind: "param",
-        loc: [12, 18, 12, 35],
+        loc: [13, 18, 13, 35],
         name: {
           kind: "id",
-          loc: [12, 18, 12, 20],
+          loc: [13, 18, 13, 20],
           text: "cb",
-          bindingKey: "cb$hlti23avj5mo$1",
+          bindingKey: "cb$s4cewloqhuul$1",
         },
       },
     ],
     body: {
       kind: "{}",
-      loc: [12, 40, 14, 2],
+      loc: [13, 40, 15, 2],
       statements: [
         {
           kind: "return",
-          loc: [13, 3, 13, 22],
+          loc: [14, 3, 14, 22],
           expression: {
             kind: "binop",
-            loc: [13, 10, 13, 21],
+            loc: [14, 10, 14, 21],
             left: {
               kind: "?.()",
-              loc: [13, 10, 13, 16],
+              loc: [14, 10, 14, 16],
               expression: {
                 kind: "id",
-                loc: [13, 10, 13, 12],
+                loc: [14, 10, 14, 12],
                 text: "cb",
-                bindingKey: "cb$hlti23avj5mo$1",
+                bindingKey: "cb$s4cewloqhuul$1",
               },
               arguments: [],
             },
             operatorToken: "??",
             right: {
               kind: "number",
-              loc: [13, 20, 13, 21],
+              loc: [14, 20, 14, 21],
               value: 0,
             },
           },
@@ -138,11 +139,11 @@ const call = cs.create(
   }),
 );
 export default cs.create(
-  [16, 16, 21, 4],
+  [17, 16, 22, 4],
   {
     version: "0.0.0",
     filePath: "optional-parameter.ts",
-    fileHash: "hlti23avj5mo",
+    fileHash: "s4cewloqhuul",
     splices: {
       $greet: { value: greet, params: [] },
       $call: { value: call, params: [] },
@@ -152,24 +153,24 @@ export default cs.create(
   },
   () => ({
     kind: "obj",
-    loc: [16, 20, 21, 2],
+    loc: [17, 20, 22, 2],
     properties: [
       {
         kind: ":",
-        loc: [17, 3, 17, 22],
+        loc: [18, 3, 18, 22],
         name: "named",
         initializer: {
           kind: "()",
-          loc: [17, 10, 17, 22],
+          loc: [18, 10, 18, 22],
           expression: {
             kind: "splice",
-            loc: [17, 10, 17, 16],
+            loc: [18, 10, 18, 16],
             key: "$greet",
           },
           arguments: [
             {
               kind: "string",
-              loc: [17, 17, 17, 21],
+              loc: [18, 17, 18, 21],
               text: "hi",
             },
           ],
@@ -177,52 +178,31 @@ export default cs.create(
       },
       {
         kind: ":",
-        loc: [18, 3, 18, 25],
+        loc: [19, 3, 19, 30],
         name: "explicit",
         initializer: {
           kind: "()",
-          loc: [18, 13, 18, 25],
+          loc: [19, 13, 19, 30],
           expression: {
             kind: "splice",
-            loc: [18, 13, 18, 19],
+            loc: [19, 13, 19, 19],
             key: "$greet",
           },
           arguments: [
             {
-              kind: "null",
-              loc: [18, 20, 18, 24],
+              kind: "undefined",
+              loc: [19, 20, 19, 29],
             },
           ],
         },
       },
       {
         kind: ":",
-        loc: [19, 3, 19, 27],
+        loc: [20, 3, 20, 27],
         name: "supplied",
         initializer: {
           kind: "()",
-          loc: [19, 13, 19, 27],
-          expression: {
-            kind: "splice",
-            loc: [19, 13, 19, 18],
-            key: "$call",
-          },
-          arguments: [
-            {
-              kind: "splice",
-              loc: [19, 19, 19, 26],
-              key: "$double",
-            },
-          ],
-        },
-      },
-      {
-        kind: ":",
-        loc: [20, 3, 20, 24],
-        name: "fallback",
-        initializer: {
-          kind: "()",
-          loc: [20, 13, 20, 24],
+          loc: [20, 13, 20, 27],
           expression: {
             kind: "splice",
             loc: [20, 13, 20, 18],
@@ -230,8 +210,29 @@ export default cs.create(
           },
           arguments: [
             {
-              kind: "null",
-              loc: [20, 19, 20, 23],
+              kind: "splice",
+              loc: [20, 19, 20, 26],
+              key: "$double",
+            },
+          ],
+        },
+      },
+      {
+        kind: ":",
+        loc: [21, 3, 21, 29],
+        name: "fallback",
+        initializer: {
+          kind: "()",
+          loc: [21, 13, 21, 29],
+          expression: {
+            kind: "splice",
+            loc: [21, 13, 21, 18],
+            key: "$call",
+          },
+          arguments: [
+            {
+              kind: "undefined",
+              loc: [21, 19, 21, 28],
             },
           ],
         },
