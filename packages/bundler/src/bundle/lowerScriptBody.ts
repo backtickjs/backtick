@@ -12,7 +12,6 @@ import type {
   BundleArrayElement,
   BundleConstDeclaration,
   BundleLetDeclaration,
-  BundleBinary,
   BundleBlock,
   BundleBody,
   BundleExpression,
@@ -202,7 +201,7 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           node.operatorToken,
           e(node.left),
           e(node.right),
-        ] as BundleBinary;
+        ] as BundleExpression;
       }
       case "unop":
         // A negative literal carries itself, like every other literal here: the

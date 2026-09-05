@@ -17,7 +17,6 @@ export type {
   BundleLessThanOrEqual,
   BundleGreaterThan,
   BundleGreaterThanOrEqual,
-  BundleBinary,
   BundleBlock,
   BundleCatchClause,
   BundleBody,

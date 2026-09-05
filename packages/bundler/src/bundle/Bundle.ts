@@ -53,7 +53,21 @@ export type BundleExpression =
   | BundlePropertyAccess
   | BundleOptionalPropertyAccess
   | BundleElementAccess
-  | BundleBinary
+  | BundleAssignment
+  | BundleLogicalAnd
+  | BundleLogicalOr
+  | BundleNullishCoalescing
+  | BundleAddition
+  | BundleSubtraction
+  | BundleMultiplication
+  | BundleDivision
+  | BundleRemainder
+  | BundleStrictEquality
+  | BundleStrictInequality
+  | BundleLessThan
+  | BundleLessThanOrEqual
+  | BundleGreaterThan
+  | BundleGreaterThanOrEqual
   | BundleLogicalNot
   | BundleNegation
   | BundleConditional
@@ -200,23 +214,6 @@ export type BundleGreaterThanOrEqual = [
   left: BundleExpression,
   right: BundleExpression,
 ];
-
-export type BundleBinary =
-  | BundleAssignment
-  | BundleLogicalAnd
-  | BundleLogicalOr
-  | BundleNullishCoalescing
-  | BundleAddition
-  | BundleSubtraction
-  | BundleMultiplication
-  | BundleDivision
-  | BundleRemainder
-  | BundleStrictEquality
-  | BundleStrictInequality
-  | BundleLessThan
-  | BundleLessThanOrEqual
-  | BundleGreaterThan
-  | BundleGreaterThanOrEqual;
 
 export type BundleLogicalNot = [kind: "!", operand: BundleExpression];
 
