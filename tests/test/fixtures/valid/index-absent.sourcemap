@@ -12,23 +12,25 @@ __cs_names                                → names
 const                                     → const 
 __cs_missing                              → missing
  = cs.const(                              →  = 
-cs.index(                                 → 
+cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (table)                                   → $table
 ) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-,                                         → [
+)                                         → 
+[                                         → [
 "nowhere"                                 → "nowhere"
-)                                         → ]
+]                                         → ]
  ??                                       →  ?? 
 "gone"                                    → "gone"
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_names                                → names
-,                                         → [
+)                                         → 
+[                                         → [
 1                                         → 1
-)                                         → ]
+]                                         → ]
  +                                        →  + 
 "/"                                       → "/"
  +                                        →  + 

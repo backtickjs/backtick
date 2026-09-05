@@ -33,23 +33,26 @@ update                                    → update
 __cs_held                                 → held
  =>                                       → ) => 
 [                                         → [
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_held                                 → held
-,                                         → [
+)                                         → 
+[                                         → [
 2                                         → 2
-)                                         → ]
+]                                         → ]
 ,                                         → , 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_held                                 → held
-,                                         → [
+)                                         → 
+[                                         → [
 0                                         → 0
-)                                         → ]
+]                                         → ]
 ,                                         → , 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_held                                 → held
-,                                         → [
+)                                         → 
+[                                         → [
 1                                         → 1
-)                                         → ]
+]                                         → ]
 ]                                         → ]
 )                                         → )
 );                                        → ;

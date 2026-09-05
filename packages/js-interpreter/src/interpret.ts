@@ -444,24 +444,33 @@ function buildNode(
       return (scope) => {
         const reached = target(scope);
         const key = argument(scope);
+        // A key of the wrong type is not a place the value has nothing — it
+        // is a read this language has no meaning for, so it stops here rather
+        // than answering. JavaScript would coerce `["0"]` to `[0]`; nothing
+        // does that here, which is why saying so out loud matters.
         if (Array.isArray(reached)) {
-          // An array is reached by whole numbers in range; everything else
-          // about it — a fractional key, a string one, one past either end —
-          // is a place the array has nothing, which reads as `undefined`.
-          return typeof key === "number" &&
-            Number.isInteger(key) &&
-            key >= 0 &&
-            key < reached.length
+          if (typeof key !== "number") {
+            throw new Error(
+              "an array is read by a number: this bundle produced " +
+                `${JSON.stringify(key) ?? typeof key}.`,
+            );
+          }
+          // In range or not is the data's business, and a place the array has
+          // nothing reads as `undefined`.
+          return Number.isInteger(key) && key >= 0 && key < reached.length
             ? reached[key]
             : undefined;
         }
-        // A string is reached by whole numbers in range too, which is what
-        // its class declares an index signature for.
+        // A string is read by whole numbers too, which is what its class
+        // declares an index signature for.
         if (typeof reached === "string") {
-          return typeof key === "number" &&
-            Number.isInteger(key) &&
-            key >= 0 &&
-            key < reached.length
+          if (typeof key !== "number") {
+            throw new Error(
+              "a string is read by a number: this bundle produced " +
+                `${JSON.stringify(key) ?? typeof key}.`,
+            );
+          }
+          return Number.isInteger(key) && key >= 0 && key < reached.length
             ? reached[key]
             : undefined;
         }
@@ -469,12 +478,20 @@ function buildNode(
         // (`toString`) is not a member of the value, so it reads as absent
         // rather than handing back something from the host's prototypes.
         if (reached !== null && typeof reached === "object") {
-          return typeof key === "string" &&
-            Object.prototype.hasOwnProperty.call(reached, key)
+          if (typeof key !== "string") {
+            throw new Error(
+              "an object is read by a string: this bundle produced " +
+                `${JSON.stringify(key) ?? typeof key}.`,
+            );
+          }
+          return Object.prototype.hasOwnProperty.call(reached, key)
             ? (reached as { readonly [name: string]: ClientValue })[key]
             : undefined;
         }
-        return undefined;
+        throw new Error(
+          "only an array, a string or an object can be read by key: this " +
+            `bundle produced ${JSON.stringify(reached) ?? typeof reached}.`,
+        );
       };
     }
     // Assignment binds its left rather than evaluating it, which is why it is

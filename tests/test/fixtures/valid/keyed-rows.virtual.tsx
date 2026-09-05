@@ -12,7 +12,7 @@ async function Rows() {
   return cs.lift((() => {
     const __cs_ids = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<number[]>([1, 2, 3]));
     const __cs_swap = cs.const(() => {
-        cs.statement(cs.receiver(__cs_ids).update(__cs_held => cs.receiver(cs.receiver(__cs_held).with(0, cs.index(__cs_held, 2))).with(2, cs.index(__cs_held, 0))));
+        cs.statement(cs.receiver(__cs_ids).update(__cs_held => cs.receiver(cs.receiver(__cs_held).with(0, cs.receiver(__cs_held)[2])).with(2, cs.receiver(__cs_held)[0])));
     });
     const __cs_drop = cs.const(() => {
         cs.statement(cs.receiver(__cs_ids).update(__cs_held => cs.receiver(__cs_held).filter(__cs_id => __cs_id !== 2)));

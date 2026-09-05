@@ -41,11 +41,12 @@ with                                      → with
 (                                         → (
 0                                         → 0
 ,                                         → , 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_held                                 → held
-,                                         → [
+)                                         → 
+[                                         → [
 2                                         → 2
-)                                         → ]
+]                                         → ]
 )                                         → )
 )                                         → 
 .                                         → .
@@ -53,11 +54,12 @@ with                                      → with
 (                                         → (
 2                                         → 2
 ,                                         → , 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_held                                 → held
-,                                         → [
+)                                         → 
+[                                         → [
 0                                         → 0
-)                                         → ]
+]                                         → ]
 )                                         → )
 )                                         → )
 );                                        → ;

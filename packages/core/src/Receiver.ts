@@ -60,12 +60,6 @@ export type ClientGlobal =
   | typeof globalThis.clearTimeout
   | typeof globalThis.clearInterval;
 
-// What a client view may be indexed by: an array by number and nothing else,
-// anything else by the keys its own type names. Naming the array case rather
-// than leaving it to `keyof` keeps the answer to a bad key a clean one — the
-// key was meant to be a number — instead of the whole member list.
-export type IndexKey<R> = R extends Array<any> ? number : keyof R;
-
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
 //   BacktickElement                 -> {}: opaque

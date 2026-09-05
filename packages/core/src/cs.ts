@@ -3,7 +3,7 @@ import { create } from "@backtickjs/boundary";
 import type { ClientUnknown } from "@backtickjs/boundary";
 import type { ClientValue } from "@backtickjs/boundary";
 import type { Spliced } from "@backtickjs/boundary";
-import type { ClientGlobal, IndexKey, Receiver } from "./Receiver.js";
+import type { ClientGlobal, Receiver } from "./Receiver.js";
 
 // The root of a script
 function _lift<T extends ClientUnknown>(_: T): Client<T> {
@@ -62,26 +62,6 @@ function _receiver<T extends ClientValue | ClientGlobal>(_: T): Receiver<T> {
   );
 }
 
-// An element or member reached by an expression rather than a name. The
-// receiver reads as its client-side view, exactly as it does for `.`, and the
-// key has to be one that view names — a number for an array, whatever the type
-// says for an object.
-//
-// A call rather than a real `a[i]`, for one reason: TypeScript reads a numeric
-// string literal as a numeric index, so `coins["0"]` would pass against an
-// array while the runtime, which indexes an array by number and an object by
-// string, reads null. As an argument the key is checked by plain assignability,
-// where `"0"` is not a number.
-function _index<T extends ClientValue, K extends IndexKey<Receiver<T>>>(
-  _: T,
-  _key: K,
-): Receiver<T>[K & keyof Receiver<T>] {
-  throw new Error(
-    "Don't call `cs.index` directly; it's used to generate virtual " +
-      "code for the typechecker. Write code using cs`...` instead.",
-  );
-}
-
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -100,6 +80,5 @@ export const cs = Object.assign(
     const: _const,
     statement: _statement,
     receiver: _receiver,
-    index: _index,
   },
 );

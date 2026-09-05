@@ -963,17 +963,18 @@ function rewriteNodeImpl(
     }
     const expression = rewriteNode(ts, state, node.expression);
     const key = rewriteNode(ts, state, node.argumentExpression);
+    // The receiver reads as its client-side view (`Receiver<T>`), while the
+    // access stays a real `a[i]` so the key is checked by TypeScript's own
+    // indexing rule and hover and rename keep working.
+    const indexReceiver = call(ts, "cs", "receiver", [
+      expression.virtual as ts.Expression,
+    ]);
+    state.mappings.set(indexReceiver, node.expression);
     return {
-      // `cs.index` reads the receiver as its client-side view and checks the
-      // key against what that view names, which a real `a[i]` would not: to
-      // TypeScript a numeric string literal is a numeric index, so `a["0"]`
-      // would pass there and read null here. An in-range read is the element
-      // type — TypeScript's own rule, the one the language follows wherever
-      // TypeScript has one.
-      virtual: call(ts, "cs", "index", [
-        expression.virtual as ts.Expression,
+      virtual: ts.factory.createElementAccessExpression(
+        indexReceiver,
         key.virtual as ts.Expression,
-      ]),
+      ),
       runtime: astNode(ts, "[]", {
         loc: loc(node),
         expression: expression.runtime as ts.Expression,

@@ -1,9 +1,13 @@
 import { cs } from "@backtickjs/core";
 
 // The client view decides what may index a value, exactly as it decides what
-// may be read off it with `.`: an array takes a number — `"0"` is a string, and
-// no amount of it looking like a number changes that — and a plain object takes
-// only a key its type names.
+// may be read off it with `.`: an array takes a number, and a plain object
+// takes only a key its type names.
+//
+// `coins["0"]` is the one TypeScript lets through — it reads a numeric string
+// literal as a numeric index — and the runtime, which takes only a number,
+// answers `undefined`. Left here beside the two that are caught so the gap is
+// visible where it lives.
 const point = { x: 1, y: 2 };
 
 export default cs`(name: string) => {

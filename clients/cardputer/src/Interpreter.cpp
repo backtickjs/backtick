@@ -525,7 +525,17 @@ Value Interpreter::evaluate(const JsonValue& node,
       if (of.kind() == Kind::Record && key.kind() == Kind::String) {
         return member(of, key.string());
       }
-      return Value::null();
+      // A key of the wrong type is a read this language has no meaning for,
+      // not a place the value has nothing — the reference client stops here
+      // too. In range or not stays the data's business, above.
+      if (of.kind() == Kind::Array || of.kind() == Kind::String) {
+        throw std::runtime_error("this is read by a number");
+      }
+      if (of.kind() == Kind::Record) {
+        throw std::runtime_error("this is read by a string");
+      }
+      throw std::runtime_error(
+          "only an array, a string or a record can be read by key");
     }
 
     case NodeKind::BinaryExpression:

@@ -19,33 +19,36 @@ __cs_coins                                → coins
 const                                     → const 
 __cs_first                                → first
  = cs.const(                              →  = 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_coins                                → coins
-,                                         → [
+)                                         → 
+[                                         → [
 "0"                                       → "0"
-)                                         → ]
+]                                         → ]
 );                                        → ;
 \n                                        → \n  
 const                                     → const 
 __cs_wrong                                → wrong
  = cs.const(                              →  = 
-cs.index(                                 → 
+cs.receiver(                              → 
 __cs_coins                                → coins
-,                                         → [
+)                                         → 
+[                                         → [
 __cs_name                                 → name
-)                                         → ]
+]                                         → ]
 );                                        → ;
 \n                                        → \n  
 const                                     → const 
 __cs_which                                → which
  = cs.const(                              →  = 
-cs.index(                                 → 
+cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (point)                                   → $point
 ) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-,                                         → [
+)                                         → 
+[                                         → [
 __cs_name                                 → name
-)                                         → ]
+]                                         → ]
 );                                        → ;
 \n                                        → \n  
 return cs.const(                          → return 
