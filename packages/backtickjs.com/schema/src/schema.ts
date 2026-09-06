@@ -42,7 +42,11 @@ export const schema: Schema = {
     // ordinary app never touches. Named as the browser registers it, so the
     // document builds it without a target mapping the name. No props: what it
     // draws is the script in front of it, as on a page.
-    "backtick-bundle": Type.Interface([], {}),
+    "backtick-island": Type.Interface([], {
+      bundle: Type.String({
+        description: "The bundle to draw, as the text it is on the wire.",
+      }),
+    }),
   },
 
   builtins: {

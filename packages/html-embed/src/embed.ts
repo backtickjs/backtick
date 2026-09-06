@@ -29,13 +29,28 @@ export function embed(html: string, selector: string, bundle: Bundle): string {
       `backtick: nothing in the document matches \`${selector}\``,
     );
   }
-  // `</script` ends the element wherever it stands. Only strings can hold a `<`,
-  // and `<` is an escape JSON reads back itself.
-  const escaped = JSON.stringify(bundle).replaceAll("<", "\\u003c");
-  target.insertAdjacentHTML(
-    "beforeend",
-    `<script type="application/json">${escaped}</script>` +
-      `<backtick-bundle></backtick-bundle>`,
+  // The bundle rides on the island itself, in an attribute written with single
+  // quotes. A bundle is mostly `"`, and an attribute in double quotes has to
+  // write every one of them as `&quot;` — 63% longer, measured on this site's
+  // own page. In single quotes only `'` and `&` are escaped, which JSON holds
+  // almost none of, so the cost is about one percent.
+  //
+  // Which is why the island is written without its bundle and given one after:
+  // the serializer quotes attributes its own way and would put the `&quot;`
+  // back. An island with no bundle is a shape that exists only between these
+  // two lines — every one this has finished with carries the attribute — so
+  // there is exactly one to find.
+  const empty = "<backtick-island></backtick-island>";
+  target.insertAdjacentHTML("beforeend", empty);
+  const written = document.toString();
+  if (written.indexOf(empty) !== written.lastIndexOf(empty)) {
+    throw new Error("backtick: a document already held an island with no bundle");
+  }
+  const held = JSON.stringify(bundle)
+    .replaceAll("&", "&amp;")
+    .replaceAll("'", "&#39;");
+  return written.replace(
+    empty,
+    `<backtick-island bundle='${held}'></backtick-island>`,
   );
-  return document.toString();
 }

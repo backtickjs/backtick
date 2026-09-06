@@ -67,31 +67,33 @@ export function defineClient({
     render(bundle, { renderer, builtins: allBuiltins }, target);
 
   customElements.define(
-    "backtick-bundle",
+    "backtick-island",
     class extends HTMLElement {
       // What takes the drawing down. Held because dropping it is what ends the
       // reactivity — the nodes go when this does, the graph would not.
       #drop: (() => void) | undefined;
 
       connectedCallback(): void {
-        // The bundle is the element in front, which the parser finished before
-        // it reached this one — and which whatever drew this put there first.
-        const held = this.previousElementSibling;
-        if (!(held instanceof HTMLScriptElement)) {
+        // The bundle is the island's own, in an attribute. On itself rather
+        // than in a script in front of it: a node that moves does not take its
+        // siblings with it, so an island that read what stood before it drew
+        // once and then found nothing the moment anything reordered it.
+        const held = this.getAttribute("bundle");
+        if (held === null) {
           throw new Error(
-            "backtick: no bundle in front of a `backtick-bundle` to draw",
+            "backtick: a `backtick-island` was given no bundle to draw",
           );
         }
         // Drawn inside this rather than in place of it, and nothing around it
-        // is touched. A page could spare both — it wrote them and is done with
-        // them — but a drawing may have written them too, and moving what
-        // another drawing holds is how the two lose track of each other.
+        // is touched. A page could spare it — it wrote it and is done with it —
+        // but a drawing may have written it too, and moving what another
+        // drawing holds is how the two lose track of each other.
         //
         // `display: contents` so standing here costs no box: what was drawn
         // lays out against whatever holds this element, and what the page wrote
-        // after the bundle stays after what it draws.
+        // after the island stays after what it draws.
         this.style.display = "contents";
-        this.#drop = draw(JSON.parse(held.textContent!) as Bundle, this);
+        this.#drop = draw(JSON.parse(held) as Bundle, this);
       }
 
       disconnectedCallback(): void {
