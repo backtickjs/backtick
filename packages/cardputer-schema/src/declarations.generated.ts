@@ -8,6 +8,7 @@ import type {
 
 export type {
   ArrayLike,
+  BacktickProps,
   Bytes,
   ForProps,
   ReadonlyState,

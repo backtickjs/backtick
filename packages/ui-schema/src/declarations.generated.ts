@@ -36,6 +36,14 @@ export interface ForProps<T extends ClientValue> {
   >;
 }
 
+export interface BacktickProps {
+  /**
+   * The bundle to draw, as the text it is on the wire — what `response.text`
+   * answers with, and what a document carries.
+   */
+  bundle: Prop<string>;
+}
+
 /** The elements this schema declares, and what each accepts. */
 export interface UiElements {
   /**
@@ -51,6 +59,15 @@ export interface UiElements {
    * checked against what `each` holds.
    */
   for: ForProps<ClientValue>;
+  /**
+   * A bundle, drawn here.
+   *
+   * One a script was handed rather than one the page was built with — fetched,
+   * stored, passed in. Every client evaluates bundles already, which is why
+   * this is the language's and not a target's: what draws it is the same
+   * client that drew the one it stands in.
+   */
+  backtick: BacktickProps;
 }
 
 /** Every element in scope, this schema's own and its bases'. */

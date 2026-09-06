@@ -32,9 +32,16 @@ export const schema: Schema = {
         ),
       }),
     ),
+
+    BacktickProps: Type.Interface([], {
+      bundle: Type.String({
+        description:
+          "The bundle to draw, as the text it is on the wire — what `response.text` answers with, and what a document carries.",
+      }),
+    }),
   },
 
-  // The one element declared away from the target that draws it, because a list
+  // The elements declared away from the target that draws them, because a list
   // holds whatever its child script draws where a `<div>` holds a target's own
   // elements. A target reaches it through its own schema's `Elements`, which
   // extends this one's.
@@ -49,6 +56,12 @@ export const schema: Schema = {
         "A member is `ClientValue` here where it is `T` on the props, because " +
         "a tag has nowhere to bind a type parameter. Write `<For />` to have " +
         "the child checked against what `each` holds.",
+    }),
+
+    backtick: Type.Ref("BacktickProps", {
+      description:
+        "A bundle, drawn here.\n\n" +
+        "One a script was handed rather than one the page was built with — fetched, stored, passed in. Every client evaluates bundles already, which is why this is the language's and not a target's: what draws it is the same client that drew the one it stands in.",
     }),
   },
 

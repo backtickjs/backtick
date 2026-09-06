@@ -632,9 +632,7 @@ export async function Playground({
             }
           >
             <div style={$SCREEN}>
-              <For each={[bundle.read()]}>
-                {(drawn: string) => <backtick-island bundle={drawn} />}
-              </For>
+              <backtick bundle={bundle.read()} />
             </div>
             <div style={$ISLAND} />
           </div>

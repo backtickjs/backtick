@@ -1,0 +1,12 @@
+cs.lift(cs.const(                         → cs`
+<                                         → <
+backtick                                  → backtick
+                                          →  
+bundle                                    → bundle
+={cs.lift(                                → ={
+cs.splice(                                →  [-semantic]
+(held)                                    → $held
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)}                                        → }
+/>                                        →  />
+))                                        → `

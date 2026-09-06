@@ -37,17 +37,7 @@ export const schema: Schema = {
     ),
   },
 
-  elements: {
-    // A drawing inside a drawing, declared here because a bundle is a thing an
-    // ordinary app never touches. Named as the browser registers it, so the
-    // document builds it without a target mapping the name. No props: what it
-    // draws is the script in front of it, as on a page.
-    "backtick-island": Type.Interface([], {
-      bundle: Type.String({
-        description: "The bundle to draw, as the text it is on the wire.",
-      }),
-    }),
-  },
+  elements: {},
 
   builtins: {
     compile: Type.Function(
