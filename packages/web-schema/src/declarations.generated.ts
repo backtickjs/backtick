@@ -13,8 +13,11 @@ import type {
 
 export type {
   ArrayLike,
+  Bytes,
   ForProps,
   ReadonlyState,
+  RequestInit,
+  Response,
   State,
 } from "@backtickjs/ui-schema";
 

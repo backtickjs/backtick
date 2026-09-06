@@ -1,5 +1,5 @@
 import type { ClientValue } from "@backtickjs/core";
-import type { Builtins, State } from "@backtickjs/language-schema";
+import type { Builtins, Response, State } from "@backtickjs/language-schema";
 import { createSignal } from "solid-js";
 
 // What this client answers for every name the framework provides — the host
@@ -245,7 +245,41 @@ export const globals: Builtins = {
     // here, at the one place entitled to.
     return { read, write, update } as unknown as State<typeof initial>;
   },
-
+  fetch(input, onResponse, onFailure, init) {
+    void globalThis
+      .fetch(input, init as globalThis.RequestInit | undefined)
+      .then(
+        (response) =>
+          onResponse({
+            ok: response.ok,
+            status: response.status,
+            statusText: response.statusText,
+            text: (
+              onText: (text: string) => void,
+              onTextFailure: (reason: string) => void,
+            ) => {
+              void response.text().then(onText, (error: unknown) => {
+                onTextFailure(
+                  error instanceof Error ? error.message : String(error),
+                );
+              });
+            },
+            bytes: (
+              onBytes: (bytes: Blob) => void,
+              onBytesFailure: (reason: string) => void,
+            ) => {
+              void response.blob().then(onBytes, (error: unknown) => {
+                onBytesFailure(
+                  error instanceof Error ? error.message : String(error),
+                );
+              });
+            },
+          } as unknown as Response),
+        (error: unknown) => {
+          onFailure(error instanceof Error ? error.message : String(error));
+        },
+      );
+  },
   setTimeout(handler, timeout) {
     const id = ++last;
     pending.set(

@@ -14,7 +14,10 @@ import type {
 
 export type {
   ArrayLike,
+  Bytes,
   ReadonlyState,
+  RequestInit,
+  Response,
   State,
 } from "@backtickjs/language-schema";
 

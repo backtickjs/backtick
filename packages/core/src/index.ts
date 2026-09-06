@@ -4,8 +4,13 @@ export type {
   ClientValue,
   Spliceable,
 } from "@backtickjs/boundary";
-export type { ReadonlyState, State } from "@backtickjs/language-schema";
-export { state } from "@backtickjs/language-schema";
+export type {
+  ReadonlyState,
+  RequestInit,
+  Response,
+  State,
+} from "@backtickjs/language-schema";
+export { fetch, state } from "@backtickjs/language-schema";
 export type { BacktickElement, BacktickNode, Prop } from "@backtickjs/boundary";
 
 // The boundary itself, which is the one thing here that is nobody else's.

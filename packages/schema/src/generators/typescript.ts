@@ -66,9 +66,15 @@ export function type(node: TNode): string {
     throw new Error("a function parameter may only stand in a parameter list");
   }
   if (IsObject(node)) {
+    // What `required` left out is written `?`, the same as it is on an
+    // interface: a schema that says a key may be absent is saying it wherever
+    // the type is written.
+    const required = node.required ?? [];
     const members = Object.entries(node.properties).map(
       ([name, child]) =>
-        `${child.readOnly === true ? "readonly " : ""}${name}: ${type(child)}`,
+        `${child.readOnly === true ? "readonly " : ""}${name}${
+          required.includes(name) ? "" : "?"
+        }: ${type(child)}`,
     );
     return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
   }
@@ -203,8 +209,17 @@ export function getter(node: TNode): TNode | undefined {
  * as the hand-written ones do, and a value it holds otherwise — `PI` is not
  * something a client answers when called.
  */
-export function member(name: string, node: TNode, bound?: string): string[] {
+export function member(
+  name: string,
+  node: TNode,
+  bound?: string,
+  optional = false,
+): string[] {
   const said = documentation(node, "  ", tags(node));
+  // A member the interface's `required` left out. An index signature is the one
+  // shape this cannot mark — a key that may be absent is what an index already
+  // says — so it is written the same either way.
+  const may = optional ? "?" : "";
   // Not a member with a name: what stands where a name would is the key it is
   // reached by, and the name the schema gave it says what that key means.
   if (IsIndex(node)) {
@@ -223,7 +238,7 @@ export function member(name: string, node: TNode, bound?: string): string[] {
     );
     return [
       ...said,
-      `  ${key(name)}<${declared.join(", ")}>(${params.join(", ")}): ${type(
+      `  ${key(name)}${may}<${declared.join(", ")}>(${params.join(", ")}): ${type(
         node.expression.returnType,
       )};`,
     ];
@@ -232,10 +247,10 @@ export function member(name: string, node: TNode, bound?: string): string[] {
     const params = node.parameters.map((one, at) => parameter(one, at));
     return [
       ...said,
-      `  ${key(name)}(${params.join(", ")}): ${type(node.returnType)};`,
+      `  ${key(name)}${may}(${params.join(", ")}): ${type(node.returnType)};`,
     ];
   }
-  return [...said, `  readonly ${key(name)}: ${type(node)};`];
+  return [...said, `  readonly ${key(name)}${may}: ${type(node)};`];
 }
 
 /**
@@ -346,7 +361,7 @@ export function interfaceLines(
             ...documentation(what, "  ", tags(what)),
             prop(called, what, (of.required ?? []).includes(called)),
           ]
-        : member(called, what),
+        : member(called, what, undefined, !(of.required ?? []).includes(called)),
     ),
   ];
   // Beside what it brands, and never exported: a key nothing can name is a key

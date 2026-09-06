@@ -1,0 +1,19 @@
+#f0 = ($0, $1) => () => {
+  const held = $0()("waiting");
+  $1()("/cases/built-ins/Math/trunc/Math.trunc_Success", (response) => {
+    if (!response.ok) {
+      held.write("answered " + response.status);
+    } else {
+      response.text((text) => {
+        held.write(text);
+      }, (reason) => {
+        held.write("the body stopped — " + reason);
+      });
+    }
+  }, (reason) => {
+    held.write("nothing answered — " + reason);
+  }, { "method": "GET" });
+  return held.read();
+}
+
+root = #f0(() => state, () => fetch)

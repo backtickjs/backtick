@@ -6,3 +6,11 @@ pnpm-lock.yaml
 # Third-party, kept byte-for-byte as published so the benchmark compares
 # against the reference rather than against a reformatting of it.
 benchmarks/js-framework-benchmark/frameworks/
+
+# TC39's, at the paths TC39 wrote, unchanged — which is the whole claim
+# `conformance/` makes: a case reads against upstream without a lookup, and
+# re-copies from a newer tag without a merge. `pnpm format` reformatting 4882
+# of them is not a diff anybody wants to read. The runner and the blocklist
+# beside them are this repository's, and are formatted.
+conformance/cases/
+conformance/harness/
