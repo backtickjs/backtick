@@ -2,17 +2,17 @@ import { createServer } from "node:http";
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
 import * as client from "@backtickjs/web-client/bundle";
-import { embed } from "@backtickjs/html-embed";
+import { island } from "@backtickjs/html-embed";
 import { Counter } from "./Counter.js";
 
-const template = `<!doctype html>
+const page = (island: string) => `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>${client.source}</script>
   </head>
-  <body></body>
+  <body>${island}</body>
 </html>`;
 
 const server = createServer(async (incoming, outgoing) => {
@@ -23,7 +23,7 @@ const server = createServer(async (incoming, outgoing) => {
   const bundle = await bundler.run(counter);
 
   // A document carrying that bundle as JSON, with the client that draws it.
-  const html = embed(template, "body", bundle);
+  const html = page(island(bundle));
 
   // Ordinary HTTP from here
   outgoing.writeHead(200, { "content-type": "text/html" });

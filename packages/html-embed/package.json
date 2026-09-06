@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Putting a bundle into a document somebody else wrote, as the element a web client draws it from",
+  "description": "A bundle as the element a web client draws it from, for a page to put where it likes",
   "main": "./dist/index.js",
   "exports": {
     ".": {
@@ -20,8 +20,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/bundler": "workspace:*",
-    "linkedom": "^0.18.13"
+    "@backtickjs/bundler": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
