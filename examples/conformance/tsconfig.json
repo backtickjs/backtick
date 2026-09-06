@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "types": [
+      "bun"
+    ],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@backtickjs/web-schema"
+  },
+  "include": [
+    "src"
+  ]
+}

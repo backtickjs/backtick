@@ -155,6 +155,43 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  examples/conformance:
+    dependencies:
+      '@backtickjs/bun-plugin':
+        specifier: ^0.1.0
+        version: link:../../packages/bun-plugin
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../../packages/bundler
+      '@backtickjs/core':
+        specifier: ^0.1.0
+        version: link:../../packages/core
+      '@backtickjs/html-embed':
+        specifier: workspace:*
+        version: link:../../packages/html-embed
+      '@backtickjs/web-client':
+        specifier: workspace:*
+        version: link:../../packages/web-client
+      '@backtickjs/web-schema':
+        specifier: workspace:*
+        version: link:../../packages/web-schema
+    devDependencies:
+      '@backtickjs/prettier-plugin':
+        specifier: ^0.1.0
+        version: link:../../packages/prettier-plugin
+      '@backtickjs/tsc':
+        specifier: ^0.1.0
+        version: link:../../packages/language-tools/tsc
+      '@types/bun':
+        specifier: ^1.3.14
+        version: 1.3.14
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   examples/node-minimal:
     dependencies:
       '@backtickjs/bundler':
