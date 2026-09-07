@@ -48,12 +48,12 @@ import type { Scope } from "./interpret.js";
 export function render<N extends object>(
   bundle: Bundle,
   options: ClientOptions<N>,
-  target: N,
+  parent: N,
   anchor?: N,
 ): () => void {
   const renderer = rendererOf(options.renderer);
   return createRoot((dispose) => {
-    renderer.insert(target, materialize(bundle, options, renderer), anchor);
+    renderer.insert(parent, materialize(bundle, options, renderer), anchor);
     return dispose;
   });
 }

@@ -3,7 +3,7 @@ import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
 import { bundler } from "@backtickjs/bundler";
-import { island } from "@backtickjs/html-embed";
+import { embed } from "@backtickjs/html-embed";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;
 const compilerUrl = `/compiler-${compiler.sha256.slice(0, 16)}.js`;
@@ -19,7 +19,7 @@ const sandboxDocument = `<!doctype html>
   <body></body>
 </html>`;
 
-const page = (island: string) => `<!doctype html>
+const template = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -33,13 +33,13 @@ const page = (island: string) => `<!doctype html>
       data-sandbox="${sandboxUrl}">
     </script>
   </head>
-  <body>${island}</body>
+  <body></body>
 </html>`;
 
 export const routes: Readonly<Record<string, () => Promise<string>>> = {
   "/": async () => {
     const bundle = await bundler.run(<Home />);
-    return page(island(bundle));
+    return embed(template, "body", bundle);
   },
 
   [clientUrl]: async () => client.source,

@@ -34,10 +34,6 @@ export type Draw = (
   anchor?: Node,
 ) => () => void;
 
-// The element this target draws a bundle with. Hyphenated because a custom
-// element's name has to be.
-const ISLAND = "backtick-island";
-
 /**
  * The client, registered.
  *
@@ -67,42 +63,45 @@ export function defineClient({
     ...(webBuiltins as unknown as Record<string, ClientValue>),
     ...builtins,
   };
-  const draw = (bundle: Bundle, target: Element): (() => void) =>
-    render(bundle, { renderer, builtins: allBuiltins }, target);
-
-  customElements.define(
-    ISLAND,
-    class extends HTMLElement {
-      // What takes the drawing down. Held because dropping it is what ends the
-      // reactivity — the nodes go when this does, the graph would not.
-      #drop: (() => void) | undefined;
-
-      connectedCallback(): void {
-        // The bundle is the island's own, in an attribute a document wrote.
-        // Nothing changes it afterwards: a drawing that holds a bundle draws it
-        // with `<backtick>`, which reaches no element at all.
-        const bundle = this.getAttribute("bundle");
-        if (bundle === null) {
-          throw new Error(
-            "backtick: a `backtick-island` was given no bundle to draw",
-          );
-        }
-        // `display: contents` so standing here costs no box: what was drawn
-        // lays out against whatever holds this element, and what the page wrote
-        // after the island stays after what it draws.
-        this.style.display = "contents";
-        this.#drop = draw(JSON.parse(bundle) as Bundle, this);
+  // Every bundle the document carried, drawn where its script stands.
+  //
+  // Found here rather than announced from the page: a document that carried a
+  // line of its own to start this would need that line allowed by its
+  // `script-src`, and a bundle is data. So the client does the finding, and a
+  // page carrying one carries no code.
+  const drawEach = (): void => {
+    for (const data of document.querySelectorAll("script[data-backtick]")) {
+      const parent = data.parentNode;
+      if (parent === null) {
+        continue;
       }
+      // In front of the script, which stays: a drawing goes on inserting after
+      // it is first made and needs something that holds still to insert in
+      // front of. The script is that, and shows nothing.
+      render(
+        JSON.parse(data.textContent ?? "") as Bundle,
+        { renderer, builtins: allBuiltins },
+        parent as Element,
+        data,
+      );
+    }
+  };
 
-      disconnectedCallback(): void {
-        this.#down();
-      }
+  // The client runs after the document is parsed, because what it reads is the
+  // document: a script that ran during parsing would find the islands the
+  // parser had reached and no others. Every way of asking for a script does
+  // this already except one — `defer` is ignored on an inline script, where
+  // `type="module"` is what defers it.
+  //
+  // Said rather than waited for. Waiting would work, and would let a page load
+  // this the one way that costs it: a plain inline script blocks the parser it
+  // is about to read.
+  if (document.readyState === "loading") {
+    throw new Error(
+      "backtick: the client has to run after the document is parsed — load " +
+        'it with `defer`, or inline it as `type="module"`.',
+    );
+  }
 
-      #down(): void {
-        this.#drop?.();
-        this.#drop = undefined;
-        this.replaceChildren();
-      }
-    },
-  );
+  drawEach();
 }

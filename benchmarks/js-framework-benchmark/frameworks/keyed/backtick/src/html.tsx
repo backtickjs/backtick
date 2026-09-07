@@ -1,9 +1,9 @@
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
-import { island } from "@backtickjs/html-embed";
+import { embed } from "@backtickjs/html-embed";
 import { Main } from "./Main.js";
 
-const page = (island: string) => `<!doctype html>
+const template = `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -12,11 +12,11 @@ const page = (island: string) => `<!doctype html>
     <script defer src="./client.js"></script>
   </head>
   <body>
-    <div id="main" class="container">${island}</div>
+    <div id="main" class="container"></div>
   </body>
 </html>
 `;
 
 const bundle = await bundler.run(<Main />);
 
-export const html = page(island(bundle));
+export const html = embed(template, "#main", bundle);
