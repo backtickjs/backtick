@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-schema/schema";
-import { DRAWABLE, dom } from "../src/dom.ts";
+import { dom } from "../src/dom.ts";
 
 // The two ways a bundle could run what wrote it, each held to not happening.
 //
@@ -43,10 +43,10 @@ function documented(): { asked: string[] } {
   return { asked };
 }
 
-describe("a tag outside the vocabulary", () => {
-  // Both languages have a `script` and both execute it.
-  it("refuses the two that would execute", () => {
-    for (const tag of ["script", "svg:script"]) {
+describe("a tag that would execute", () => {
+  // HTML folds a tag name, so every spelling of it is the element.
+  it("is refused in either language, and in HTML whatever its case", () => {
+    for (const tag of ["script", "SCRIPT", "Script", "svg:script"]) {
       const { asked } = documented();
       assert.throws(
         () => dom.createElement(tag),
@@ -57,22 +57,14 @@ describe("a tag outside the vocabulary", () => {
     }
   });
 
-  // What an allowlist buys over a list of refusals: a name nobody weighed is a
-  // name that draws nothing, spelling included.
-  it("refuses a name it was never given", () => {
-    for (const tag of ["SCRIPT", "Script", "svg:SCRIPT", "marquee", "DIV"]) {
-      const { asked } = documented();
-      assert.throws(() => dom.createElement(tag), `\`${tag}\` was drawn`);
-      assert.deepEqual(asked, [], `\`${tag}\` reached the document`);
-    }
-  });
-
-  it("draws what the schema does declare", () => {
+  // SVG does not fold, so `svg:SCRIPT` is an unknown element rather than the
+  // one that runs. Verified in Chrome rather than read off the spec.
+  it("does not stop a tag that only looks like one", () => {
     const { asked } = documented();
-    for (const tag of ["div", "img", "svg:path", "svg:animateMotion"]) {
+    for (const tag of ["svg:SCRIPT", "script-viewer", "marquee"]) {
       dom.createElement(tag);
     }
-    assert.deepEqual(asked, ["div", "img", "svg:path", "svg:animateMotion"]);
+    assert.deepEqual(asked, ["svg:SCRIPT", "script-viewer", "marquee"]);
   });
 });
 
@@ -139,23 +131,20 @@ describe("a handler that is not a function", () => {
   });
 });
 
-// The list is written out rather than read off the schema, so this is what keeps
-// the two level: a tag added to the schema and not here would be declared and
-// undrawable, and one left here after the schema dropped it would be drawable and
-// undeclared — which is how `script` would come back.
+// The rule is one name, so what can go wrong is the schema growing it back:
+// declared and refused is a tag a drawing may write and no client will draw.
 describe("the vocabulary and the schema", () => {
-  it("draws every tag the schema declares", () => {
-    for (const tag of Object.keys(schema.elements)) {
-      assert.ok(DRAWABLE.has(tag), `\`${tag}\` is declared and not drawable`);
+  it("declares no tag that would be refused", () => {
+    const declared = Object.keys(schema.elements);
+    const { asked } = documented();
+    for (const tag of declared) {
+      dom.createElement(tag);
     }
+    assert.equal(asked.length, declared.length);
   });
 
-  it("declares every tag it draws", () => {
-    for (const tag of DRAWABLE) {
-      assert.ok(
-        tag in schema.elements,
-        `\`${tag}\` is drawable and not declared`,
-      );
-    }
+  it("declares neither spelling of the one that executes", () => {
+    assert.ok(!("script" in schema.elements));
+    assert.ok(!("svg:script" in schema.elements));
   });
 });
