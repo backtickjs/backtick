@@ -2814,26 +2814,6 @@ export const schema: Schema = {
         cite: Type.Optional(Type.String()),
       },
     ),
-    ScriptProps: Type.Interface(
-      [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLScriptElement")])],
-      {
-        async: Type.Optional(Type.Boolean()),
-        crossorigin: Type.Optional(Type.Ref("CrossOrigin")),
-        defer: Type.Optional(Type.Boolean()),
-        fetchpriority: Type.Optional(
-          Type.Union([
-            Type.Literal("high"),
-            Type.Literal("low"),
-            Type.Literal("auto"),
-          ]),
-        ),
-        integrity: Type.Optional(Type.String()),
-        nomodule: Type.Optional(Type.Boolean()),
-        referrerpolicy: Type.Optional(Type.Ref("ReferrerPolicy")),
-        src: Type.Optional(Type.String()),
-        type: Type.Optional(Type.String()),
-      },
-    ),
     SelectProps: Type.Interface(
       [Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLSelectElement")])],
       {
@@ -3360,7 +3340,6 @@ export const schema: Schema = {
     ruby: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     s: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     samp: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
-    script: Type.Ref("ScriptProps"),
     search: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     section: Type.Apply(Type.Ref("HtmlProps"), [Type.Ref("HTMLElement")]),
     select: Type.Ref("SelectProps"),
@@ -3462,7 +3441,6 @@ export const schema: Schema = {
     "svg:polyline": Type.Ref("SvgProps"),
     "svg:radialGradient": Type.Ref("SvgProps"),
     "svg:rect": Type.Ref("SvgProps"),
-    "svg:script": Type.Ref("SvgProps"),
     "svg:set": Type.Ref("SvgProps"),
     "svg:stop": Type.Ref("SvgProps"),
     "svg:style": Type.Ref("SvgProps"),

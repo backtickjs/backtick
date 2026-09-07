@@ -141,7 +141,6 @@ export type {
   RequestInit,
   Response,
   SVGElement,
-  ScriptProps,
   SelectProps,
   SlotProps,
   SourceProps,

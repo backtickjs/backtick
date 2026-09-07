@@ -1756,18 +1756,6 @@ export interface QuoteProps extends HtmlProps<HTMLQuoteElement> {
   cite?: Prop<string>;
 }
 
-export interface ScriptProps extends HtmlProps<HTMLScriptElement> {
-  async?: Prop<boolean>;
-  crossorigin?: Prop<CrossOrigin>;
-  defer?: Prop<boolean>;
-  fetchpriority?: Prop<"high" | "low" | "auto">;
-  integrity?: Prop<string>;
-  nomodule?: Prop<boolean>;
-  referrerpolicy?: Prop<ReferrerPolicy>;
-  src?: Prop<string>;
-  type?: Prop<string>;
-}
-
 export interface SelectProps extends HtmlProps<HTMLSelectElement> {
   autocomplete?: Prop<string>;
   disabled?: Prop<boolean>;
@@ -2204,7 +2192,6 @@ export interface WebElements {
   ruby: HtmlProps<HTMLElement>;
   s: HtmlProps<HTMLElement>;
   samp: HtmlProps<HTMLElement>;
-  script: ScriptProps;
   search: HtmlProps<HTMLElement>;
   section: HtmlProps<HTMLElement>;
   select: SelectProps;
@@ -2284,7 +2271,6 @@ export interface WebElements {
   "svg:polyline": SvgProps;
   "svg:radialGradient": SvgProps;
   "svg:rect": SvgProps;
-  "svg:script": SvgProps;
   "svg:set": SvgProps;
   "svg:stop": SvgProps;
   "svg:style": SvgProps;
