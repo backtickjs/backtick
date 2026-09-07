@@ -18,7 +18,9 @@ export function embed(html: string, selector: string, bundle: Bundle): string {
   const { document } = parseHTML(html);
   const target = document.querySelector(selector);
   if (target === null) {
-    throw new Error(`backtick: nothing in the document matches \`${selector}\``);
+    throw new Error(
+      `backtick: nothing in the document matches \`${selector}\``,
+    );
   }
   // Data and nothing else: a page carrying a bundle carries no code, so it
   // needs nothing of its `script-src` beyond the client it already asks for.

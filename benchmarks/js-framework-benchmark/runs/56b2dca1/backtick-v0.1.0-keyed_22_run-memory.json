@@ -1,0 +1,16 @@
+{
+  "framework": "backtick-v0.1.0-keyed",
+  "keyed": true,
+  "benchmark": "22_run-memory",
+  "type": "memory",
+  "values": {
+    "DEFAULT": {
+      "min": 3.7703495025634766,
+      "max": 3.7703495025634766,
+      "median": 3.7703495025634766,
+      "mean": 3.7703495025634766,
+      "stddev": null,
+      "values": [3.7703495025634766]
+    }
+  }
+}

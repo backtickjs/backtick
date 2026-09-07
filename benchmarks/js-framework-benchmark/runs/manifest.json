@@ -500,6 +500,14 @@
       "keyed": true,
       "dir": "dd266041",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "56b2dca1",
+      "label": "no custom element",
+      "date": "2026-09-06",
+      "keyed": true,
+      "dir": "56b2dca1",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }

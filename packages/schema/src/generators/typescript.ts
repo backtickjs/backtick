@@ -361,7 +361,12 @@ export function interfaceLines(
             ...documentation(what, "  ", tags(what)),
             prop(called, what, (of.required ?? []).includes(called)),
           ]
-        : member(called, what, undefined, !(of.required ?? []).includes(called)),
+        : member(
+            called,
+            what,
+            undefined,
+            !(of.required ?? []).includes(called),
+          ),
     ),
   ];
   // Beside what it brands, and never exported: a key nothing can name is a key

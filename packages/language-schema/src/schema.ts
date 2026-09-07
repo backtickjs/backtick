@@ -58,18 +58,20 @@ export const schema: Schema = {
       },
     ),
 
-    Bytes: Type.Interface([Type.Ref("ClientHandle")], {}, {
-      description:
-        "Bytes the client is holding. Opaque: this language has no way to look inside one, only to hold it and hand it back.",
-    }),
+    Bytes: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {},
+      {
+        description:
+          "Bytes the client is holding. Opaque: this language has no way to look inside one, only to hold it and hand it back.",
+      },
+    ),
 
     RequestInit: Type.Object(
       {
         method: Type.Optional(Type.String()),
         headers: Type.Optional(Type.Record(Type.String())),
-        body: Type.Optional(
-          Type.Union([Type.String(), Type.Ref("Bytes")]),
-        ),
+        body: Type.Optional(Type.Union([Type.String(), Type.Ref("Bytes")])),
       },
       {
         description:
@@ -1454,9 +1456,7 @@ export const schema: Schema = {
           ),
           { description: "Called where nothing answered at all." },
         ),
-        Type.Optional(
-          Type.FunctionParameter("init", Type.Ref("RequestInit")),
-        ),
+        Type.Optional(Type.FunctionParameter("init", Type.Ref("RequestInit"))),
       ],
       Type.Void(),
       {

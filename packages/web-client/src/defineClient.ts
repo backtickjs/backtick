@@ -87,15 +87,6 @@ export function defineClient({
     }
   };
 
-  // The client runs after the document is parsed, because what it reads is the
-  // document: a script that ran during parsing would find the islands the
-  // parser had reached and no others. Every way of asking for a script does
-  // this already except one — `defer` is ignored on an inline script, where
-  // `type="module"` is what defers it.
-  //
-  // Said rather than waited for. Waiting would work, and would let a page load
-  // this the one way that costs it: a plain inline script blocks the parser it
-  // is about to read.
   if (document.readyState === "loading") {
     throw new Error(
       "backtick: the client has to run after the document is parsed — load " +
