@@ -80,19 +80,29 @@ function materialize<N extends object>(
   options: ClientOptions<N>,
   renderer: Renderer<object>,
 ): unknown {
-  const instance: Instance = {
-    bundle,
-    renderer,
-    // Once per mount, which is where a target's table meets the language's:
-    // a collision is refused here rather than at the first bundle to reach
-    // the name.
-    builtins: builtinsOf(options.builtins),
-    functions: new Map(),
-  };
-  // The root is built once and never again — there is nothing above it to hand
-  // it anything new — so its applications resolve where they stand, lists
-  // included.
-  return evaluateNode(instance, bundle.root, scopeOf(null));
+  // Merged once per mount, because merging is what refuses a name a target
+  // took twice. A bundle drawn inside this one is handed the result rather
+  // than merging again.
+  return evaluated(bundle, renderer, builtinsOf(options.builtins));
+}
+
+/**
+ * A bundle, drawn with a renderer and a table of names.
+ *
+ * A `functions` table per bundle, because the labels are per bundle: two
+ * bundles both holding a `0` mean two different functions.
+ */
+function evaluated(
+  bundle: Bundle,
+  renderer: Renderer<object>,
+  builtins: Instance["builtins"],
+): unknown {
+  // Built once: nothing above the root can hand it anything new later.
+  return evaluateNode(
+    { bundle, renderer, builtins, functions: new Map() },
+    bundle.root,
+    scopeOf(null),
+  );
 }
 
 // A renderer per set of target operations. The cast is the one place the
@@ -150,11 +160,15 @@ export function compileElement(
   element: BundleElement,
 ): (scope: Scope | null) => ClientValue {
   const id = element[1];
-  // The one id whose meaning is the language's rather than this client's: it
-  // draws no node, so it never reaches the renderer. Answered here, where an id
-  // is read, so a client implements it exactly where it implements its own tags.
+  // The two ids whose meaning is the language's rather than this client's: they
+  // draw no node, so neither reaches the renderer. Answered here, where an id
+  // is read, so a client implements them exactly where it implements its own
+  // tags.
   if (id === "for") {
     return compileFor(instance, element);
+  }
+  if (id === "backtick") {
+    return compileBacktick(instance, element);
   }
   // Every prop, in the order the element wrote them, because a host may care:
   // an `<input>` wants its `type` before its `value`.
@@ -245,6 +259,41 @@ function compileChildren(
     return (scope) => read(scope);
   }
   return (scope) => () => read(scope);
+}
+
+/**
+ * A bundle drawn inside a drawing.
+ *
+ * Answers with the drawing itself, not a node wrapping it, so the tag leaves
+ * nothing in the target — the same as a list.
+ *
+ * A computation and not a value: an element is built once, so a bundle read
+ * here would be the first one and no other. A children position calls what it
+ * is given, which is how a new bundle gets drawn.
+ */
+function compileBacktick(
+  instance: Instance,
+  element: BundleElement,
+): (scope: Scope | null) => ClientValue {
+  const read = compile(instance, element[2]["bundle"] ?? null);
+  return (scope) =>
+    createMemo(() => {
+      const held = read(scope);
+      // No bundle yet: a compile still running, a request not yet answered.
+      if (held === null || held === undefined) {
+        return null;
+      }
+      if (typeof held !== "string") {
+        throw new Error("backtick: a `backtick` was given no bundle to draw");
+      }
+      return evaluated(
+        JSON.parse(held) as Bundle,
+        instance.renderer,
+        // The mount's names, so a bundle drawn here reaches what its
+        // surroundings reach.
+        instance.builtins,
+      );
+    }) as ClientValue;
 }
 
 /**

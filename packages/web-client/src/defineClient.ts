@@ -58,14 +58,7 @@ export function defineClient({
 }: Vocabulary = {}): void {
   const renderer: RendererOptions<Node> = {
     ...dom,
-    // `backtick` is the language's tag for a bundle drawn inside a drawing, and
-    // this target already has the element that draws one. A custom element's
-    // name must carry a hyphen and the language's does not, so the tag is built
-    // as the one that can — the same latitude `svg:` takes.
-    createElement: (tag) =>
-      tag === "backtick"
-        ? document.createElement(ISLAND)
-        : (elements[tag]?.() ?? dom.createElement(tag)),
+    createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
   };
   // The table beside the renderer is this target's own: `builtinsOf` merges it
   // with the language's and throws if a name here shadows one of those, so a
@@ -84,40 +77,16 @@ export function defineClient({
       // reactivity — the nodes go when this does, the graph would not.
       #drop: (() => void) | undefined;
 
-      // The bundle is a prop, so a change to it is a change to what is drawn.
-      // Without this an island drew once and never again: a second bundle was
-      // ignored and a cleared one left the first still standing.
-      static observedAttributes = ["bundle"];
-
       connectedCallback(): void {
-        this.#again();
-      }
-
-      attributeChangedCallback(): void {
-        this.#again();
-      }
-
-      #again(): void {
-        // Down first, and unconditionally: what was drawn is what this element
-        // is, so a new bundle replaces it rather than joining it.
-        this.#down();
-        if (!this.isConnected) {
-          return;
-        }
-        // The bundle is the island's own, in an attribute. On itself rather
-        // than in a script in front of it: a node that moves does not take its
-        // siblings with it, so an island that read what stood before it drew
-        // once and then found nothing the moment anything reordered it.
+        // The bundle is the island's own, in an attribute a document wrote.
+        // Nothing changes it afterwards: a drawing that holds a bundle draws it
+        // with `<backtick>`, which reaches no element at all.
         const bundle = this.getAttribute("bundle");
         if (bundle === null) {
-          // A bundle taken away is a drawing taken away, which is done.
-          return;
+          throw new Error(
+            "backtick: a `backtick-island` was given no bundle to draw",
+          );
         }
-        // Drawn inside this rather than in place of it, and nothing around it
-        // is touched. A page could spare it — it wrote it and is done with it —
-        // but a drawing may have written it too, and moving what another
-        // drawing holds is how the two lose track of each other.
-        //
         // `display: contents` so standing here costs no box: what was drawn
         // lays out against whatever holds this element, and what the page wrote
         // after the island stays after what it draws.

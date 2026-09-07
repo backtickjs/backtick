@@ -10,18 +10,48 @@
       ],
       [
         "el",
-        "backtick",
-        {
-          "bundle": [
-            "()",
+        "div",
+        {},
+        [
+          "arr",
+          [
             [
-              "id",
-              "$0"
+              "el",
+              "span",
+              {},
+              "before"
             ],
-            []
+            [
+              "el",
+              "backtick",
+              {
+                "bundle": [
+                  "()",
+                  [
+                    "id",
+                    "$0"
+                  ],
+                  []
+                ]
+              },
+              null
+            ],
+            [
+              "el",
+              "backtick",
+              {
+                "bundle": null
+              },
+              null
+            ],
+            [
+              "el",
+              "span",
+              {},
+              "after"
+            ]
           ]
-        },
-        null
+        ]
       ]
     ]
   },

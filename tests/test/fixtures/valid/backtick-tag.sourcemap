@@ -1,4 +1,13 @@
-cs.lift(cs.const(                         → cs`
+cs.lift(cs.const(                         → cs`\n  
+<                                         → <
+div                                       → div
+>{cs.lift(                                → >\n    
+<                                         → <
+span                                      → span
+>before</                                 → >before</
+span                                      → span
+>                                         → >
+)}{cs.lift(                               → \n    
 <                                         → <
 backtick                                  → backtick
                                           →  
@@ -9,4 +18,22 @@ cs.splice(                                →  [-semantic]
 ) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )}                                        → }
 />                                        →  />
-))                                        → `
+)}{cs.lift(                               → \n    
+<                                         → <
+backtick                                  → backtick
+                                          →  
+bundle                                    → bundle
+={cs.lift(                                → ={
+null                                      → null
+)}                                        → }
+/>                                        →  />
+)}{cs.lift(                               → \n    
+<                                         → <
+span                                      → span
+>after</                                  → >after</
+span                                      → span
+>                                         → >
+)}</                                      → \n  </
+div                                       → div
+>                                         → >
+))                                        → \n`

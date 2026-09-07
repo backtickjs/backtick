@@ -1,5 +1,16 @@
-#f0 = ($0) => <backtick
-  bundle={$0()}
-/>
+#f0 = ($0) => <div>
+  {<span>
+    {"before"}
+  </span>}
+  {<backtick
+    bundle={$0()}
+  />}
+  {<backtick
+    bundle={null}
+  />}
+  {<span>
+    {"after"}
+  </span>}
+</div>
 
 root = #f0(() => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},\"from another bundle\"]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")
