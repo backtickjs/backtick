@@ -1,0 +1,12 @@
+#f0 = ($0) => {
+  const held = $0()(null);
+  return <div>
+    {held.read() === null ? <span>
+      {"loading…"}
+    </span> : <backtick
+      bundle={held.read()}
+    />}
+  </div>;
+}
+
+root = #f0(() => state)

@@ -40,8 +40,17 @@ export interface BacktickProps {
   /**
    * The bundle to draw, as the text it is on the wire — what `response.text`
    * answers with, and what a document carries.
+   *
+   * Null draws nothing, which is what a page with no bundle yet has to say. It
+   * is admitted here because a cell that is sometimes empty cannot be narrowed
+   * on its way in: a script reads a cell where it stands, and a read moved out
+   * to a `const` to be narrowed is a read that happens once and never again.
+   * So a page that wants something in the meantime writes the condition it
+   * already has — `held.read() === null ? … : <backtick bundle={held.read()}
+   * />` — and a page that wants nothing writes the tag and lets the null
+   * through.
    */
-  bundle: Prop<string>;
+  bundle: Prop<string | null>;
 }
 
 /** The elements this schema declares, and what each accepts. */

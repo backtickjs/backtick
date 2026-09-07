@@ -108,8 +108,8 @@ export function defineClient({
         // than in a script in front of it: a node that moves does not take its
         // siblings with it, so an island that read what stood before it drew
         // once and then found nothing the moment anything reordered it.
-        const held = this.getAttribute("bundle");
-        if (held === null) {
+        const bundle = this.getAttribute("bundle");
+        if (bundle === null) {
           // A bundle taken away is a drawing taken away, which is done.
           return;
         }
@@ -122,7 +122,7 @@ export function defineClient({
         // lays out against whatever holds this element, and what the page wrote
         // after the island stays after what it draws.
         this.style.display = "contents";
-        this.#drop = draw(JSON.parse(held) as Bundle, this);
+        this.#drop = draw(JSON.parse(bundle) as Bundle, this);
       }
 
       disconnectedCallback(): void {
