@@ -1,4 +1,4 @@
-import type { ClientValue } from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/bundler";
 import { render } from "@backtickjs/js-interpreter";
 import type { RendererOptions } from "@backtickjs/js-interpreter";
@@ -29,7 +29,7 @@ export interface Vocabulary {
  * two drift.
  */
 export type Draw = (
-  bundle: Bundle,
+  bundle: Bundle<ClientUnknown>,
   target: Element,
   anchor?: Node,
 ) => () => void;
@@ -79,7 +79,7 @@ export function defineClient({
       // it is first made and needs something that holds still to insert in
       // front of. The script is that, and shows nothing.
       render(
-        JSON.parse(data.textContent ?? "") as Bundle,
+        JSON.parse(data.textContent ?? "") as Bundle<ClientUnknown>,
         { renderer, builtins: allBuiltins },
         parent as Element,
         data,

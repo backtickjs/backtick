@@ -1,4 +1,4 @@
-import { isClientScript } from "@backtickjs/boundary";
+import { isClientScript, type ClientUnknown } from "@backtickjs/boundary";
 import { isJsxElement } from "@backtickjs/boundary";
 import { isBuiltin, type Client, type Spliceable } from "@backtickjs/boundary";
 import type { Ast } from "./Ast.js";
@@ -7,7 +7,9 @@ import { lowerClientScript } from "./lowerClientScript.js";
 import { expandFunction } from "./expandFunction.js";
 import { expandJsxElement } from "./expandJsxElement.js";
 
-export async function lowerSpliceable(value: Spliceable): Promise<Ast> {
+export async function lowerSpliceable<T extends ClientUnknown>(
+  value: Spliceable<T>,
+): Promise<Ast> {
   // A hole sentinel a constructor stored somewhere in its result: the
   // client argument it stands for has no value until the client runs, so it
   // serializes as a reference to the enclosing expansion's parameter.

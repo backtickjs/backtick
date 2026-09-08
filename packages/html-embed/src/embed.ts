@@ -1,3 +1,4 @@
+import type { ClientUnknown } from "@backtickjs/boundary";
 import type { Bundle } from "@backtickjs/bundler";
 import { parseHTML } from "linkedom";
 
@@ -14,7 +15,11 @@ import { parseHTML } from "linkedom";
  * Parsed and written out again, so what comes back is the same HTML and not the
  * same bytes.
  */
-export function embed(html: string, selector: string, bundle: Bundle): string {
+export function embed(
+  html: string,
+  selector: string,
+  bundle: Bundle<ClientUnknown>,
+): string {
   const { document } = parseHTML(html);
   const target = document.querySelector(selector);
   if (target === null) {

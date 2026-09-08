@@ -1,7 +1,7 @@
 import { lowerSpliceable } from "./ast/lowerSpliceable.js";
 import type { Bundle } from "./bundle/Bundle.js";
 import { buildBundle } from "./bundle/buildBundle.js";
-import type { Spliceable } from "@backtickjs/boundary";
+import type { ClientUnknown, Spliceable } from "@backtickjs/boundary";
 
 /**
  * What is being tried rather than offered: a feature here is one whose premise
@@ -36,7 +36,7 @@ export interface ExperimentalFeatures {
  * `JSON.stringify`.
  */
 export const bundler = {
-  async run(value: Spliceable): Promise<Bundle> {
+  async run<T extends ClientUnknown>(value: Spliceable<T>): Promise<Bundle<T>> {
     return await bundler.runWithExperimentalFeatures(value, {});
   },
 
@@ -50,11 +50,11 @@ export const bundler = {
    * Named at length on purpose: what it admits may change or go, and a call
    * site is where that is worth reading. Everything settled is `run`.
    */
-  async runWithExperimentalFeatures(
-    value: Spliceable,
+  async runWithExperimentalFeatures<T extends ClientUnknown>(
+    value: Spliceable<T>,
     features: ExperimentalFeatures,
-  ): Promise<Bundle> {
+  ): Promise<Bundle<T>> {
     const ast = await lowerSpliceable(value);
-    return buildBundle(ast, features);
+    return buildBundle(ast, features) as Bundle<T>;
   },
 };

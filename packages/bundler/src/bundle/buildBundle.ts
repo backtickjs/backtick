@@ -12,6 +12,7 @@ import type {
 } from "./Bundle.js";
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
+import type { ClientUnknown } from "@backtickjs/boundary";
 
 // Builds the bundle `{ functions, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation
@@ -44,7 +45,7 @@ import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 export function buildBundle(
   ast: Ast,
   features: ExperimentalFeatures = {},
-): Bundle {
+): Bundle<ClientUnknown> {
   // The `functions` table, filled as rendering reaches each script. Two scripts
   // written at one source location are one entry, so this is what makes a
   // reference to a shared script a reference to the same object — the one thing

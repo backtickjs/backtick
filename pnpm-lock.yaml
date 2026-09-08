@@ -549,6 +549,9 @@ importers:
 
   packages/html-embed:
     dependencies:
+      '@backtickjs/boundary':
+        specifier: workspace:*
+        version: link:../boundary
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler

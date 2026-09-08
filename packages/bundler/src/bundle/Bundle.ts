@@ -1,9 +1,14 @@
+import type { ClientUnknown } from "@backtickjs/boundary";
+
 // The bundle: the JIT bundler's wire format, as plain data — what ships is
 // exactly `JSON.stringify` of this. These types are the contract an
 // interpreter implements: evaluate `root` against the `functions` table.
 // Computation ships as ASTs, so nothing here needs a JavaScript parser.
 
-export interface Bundle {
+declare const BundleSignature: unique symbol;
+
+export interface Bundle<T extends ClientUnknown> {
+  readonly [BundleSignature]?: T;
   functions: Record<FunctionLabel, BundleArrowFunction>;
   root: BundleExpression;
 }
