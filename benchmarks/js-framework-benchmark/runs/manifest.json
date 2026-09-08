@@ -508,6 +508,14 @@
       "keyed": true,
       "dir": "56b2dca1",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "c8b29e2d",
+      "label": "a memo per child",
+      "date": "2026-09-08",
+      "keyed": true,
+      "dir": "c8b29e2d",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
