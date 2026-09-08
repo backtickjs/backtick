@@ -1,6 +1,7 @@
 // Type-level assertions for `Spliced` and the member-access view.
 // Never executed — typechecked by `tsc -b`.
-import type { Array, Receiver } from "../src/index.js";
+import type { Array } from "../src/receivers.generated.js";
+import type { Receiver } from "../src/Receiver.js";
 import type {
   Client,
   ClientValue,

@@ -1,0 +1,8 @@
+{
+  "extends": "../../configs/tsconfig.test.json",
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "types": ["node"]
+  },
+  "references": [{ "path": "./tsconfig.build.json" }]
+}

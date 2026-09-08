@@ -11,8 +11,8 @@ import type { Schema } from "../dist/index.js";
 
 const core: Schema = {
   package: "@backtickjs/core",
+  namespace: "Core",
   extends: [],
-  publishes: ["Client"],
   types: {
     Cell: Type.Generic(
       [Type.GenericParameter("T")],
@@ -53,8 +53,8 @@ const core: Schema = {
 /** A target built on the root, which is what an import has to find. */
 const target: Schema = {
   package: "@backtickjs/target",
+  namespace: "Target",
   extends: [core],
-  publishes: [],
   types: {
     Clip: Type.Interface([], { read: Type.Function([], Type.String()) }),
   },
@@ -149,11 +149,11 @@ describe("builtins", () => {
     assert.doesNotMatch(builtins(core), /^ {2}T,$/m);
   });
 
-  it("takes a root that publishes nothing: those names are not a layer's", () => {
-    // What a value reads as comes from `@backtickjs/boundary` now, so a root that
-    // publishes nothing is an ordinary root rather than a broken one.
+  it("reaches for what a value reads as, which is the boundary's", () => {
+    // Not a layer's to publish: `Client` comes from `@backtickjs/boundary`
+    // wherever it is written, so a root has nothing of its own to hand on.
     assert.match(
-      builtins({ ...core, publishes: [] }),
+      builtins(core),
       /import \{ createBuiltin, type Client \} from "@backtickjs\/boundary";/,
     );
   });

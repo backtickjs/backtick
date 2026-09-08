@@ -12,8 +12,8 @@ import type { Schema } from "../dist/index.js";
 function schema(of: Partial<Schema>): Schema {
   return {
     package: "@backtickjs/test",
+    namespace: "Test",
     extends: [],
-    publishes: [],
     types: {},
     elements: {},
     builtins: {},

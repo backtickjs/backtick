@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { parseHTML } from "linkedom";
+import type { ClientUnknown } from "@backtickjs/boundary";
 import type { Bundle } from "@backtickjs/bundler";
 import { embed } from "../src/embed.ts";
 
@@ -13,13 +14,13 @@ const template =
 
 // A bundle holding every character an HTML serializer is tempted to rewrite,
 // and the one sequence that would end the script it rides in.
-const bundle = (mark: string): Bundle =>
+const bundle = (mark: string): Bundle<ClientUnknown> =>
   ({
     functions: {
       "0": ["=>", [], ["el", "em", {}, `& < > " ' </script> ${mark}`]],
     },
     root: ["()", ["fn", "0"], []],
-  }) as unknown as Bundle;
+  }) as unknown as Bundle<ClientUnknown>;
 
 const scripts = (html: string): string[] =>
   [...parseHTML(html).document.querySelectorAll("script[data-backtick]")].map(
