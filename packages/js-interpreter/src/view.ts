@@ -265,7 +265,10 @@ function compileChildren(
   if (isFixed(expr)) {
     return (scope) => read(scope);
   }
-  return (scope) => () => read(scope);
+  // A computation of its own, so `insert` watches the drawing rather than the
+  // expression that made it. Without one, a drawing that changed would run that
+  // expression again — and where it is a component, that is a second component.
+  return (scope) => createMemo(() => read(scope));
 }
 
 // What a drawing hands a bundle: the record it wrote, with every member read

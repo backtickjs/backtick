@@ -8,11 +8,14 @@ import type { TestNode } from "./test-client/index.ts";
 
 // A component is built once, however what it drew changes afterwards.
 //
-// The one that catches this is a component drawing a bundle it is still waiting
-// for: `insert` reads what it was given inside the computation it makes, so a
-// drawing that watches itself used to tie the two together — the answer
-// arriving ran the expression that made the drawing, which was the component
-// again, with new cells and the wait started over.
+// `insert` reads what it was given inside the computation it makes, so a member
+// that answers with a way of asking used to tie the two together: what it drew
+// changing ran the expression that made it, which was the component again —
+// with new cells, and whatever it did on the way in done over.
+//
+// Two of them answer that way, and both are here: a bundle drawn where it
+// stands, and a list. The list is the one that says where the fault was — a
+// drawn bundle is not special, so neither is the fix.
 //
 // Driven rather than snapshotted, because what is wrong is not what was drawn
 // but how many times it was: a drawing that settles and one that never does
@@ -37,6 +40,13 @@ function text(node: TestNode | undefined): unknown {
   return node?.children[0]?.text;
 }
 
+function count(node: TestNode, id: string): number {
+  return (
+    (node.id === id ? 1 : 0) +
+    node.children.reduce((seen, child) => seen + count(child, id), 0)
+  );
+}
+
 describe("a component that draws a bundle", () => {
   it("is built once, and draws what arrives", async () => {
     const script = await importFixture(validDir, "backtick-builds-once.tsx");
@@ -52,6 +62,27 @@ describe("a component that draws a bundle", () => {
     await new Promise((settle) => setTimeout(settle, 100));
 
     assert.equal(text(find(drawn, "em")), "answered");
+    assert.equal(
+      text(find(drawn, "span")),
+      "asked 1",
+      "the component was built again for what it drew",
+    );
+  });
+});
+
+describe("a component that draws a list", () => {
+  // The same claim with no bundle in it: `<For />` answers with a way of asking
+  // too, so a fault in what draws a bundle would leave this alone.
+  it("is built once, and draws what arrives", async () => {
+    const script = await importFixture(validDir, "for-builds-once.tsx");
+    const drawn = evaluate(await bundler.run(script));
+    assert.ok(isTestNode(drawn), "expected a rendered node");
+
+    assert.equal(text(find(drawn, "span")), "asked 0");
+
+    await new Promise((settle) => setTimeout(settle, 100));
+
+    assert.equal(count(drawn, "em"), 2);
     assert.equal(
       text(find(drawn, "span")),
       "asked 1",
