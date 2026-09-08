@@ -1,0 +1,93 @@
+cs.lift((() => {\n                        → cs`{\n  
+const                                     → const 
+__cs_count                                → count
+ = cs.const(                              →  = 
+(                                         → 
+cs.splice(                                →  [-semantic]
+(state)                                   → $state
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)(                                        → (
+0                                         → 0
+)                                         → )
+);                                        → ;
+\n                                        → \n\n  
+return cs.const(                          → return 
+<                                         → (\n    <
+div                                       → div
+>{cs.lift(                                → >\n      
+<                                         → <
+backtick                                  → backtick
+                                          →  
+bundle                                    → bundle
+={cs.lift(                                → ={
+cs.splice(                                →  [-semantic]
+(greets)                                  → $greets
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)}                                        → }
+                                          →  
+props                                     → props
+={cs.lift(                                → ={
+{                                         → { 
+who                                       → who
+:                                         → : 
+"world"                                   → "world"
+ }                                        →  }
+)}                                        → }
+/>                                        →  />
+)}{cs.lift(                               → \n      
+<                                         → <
+backtick                                  → backtick
+                                          →  
+bundle                                    → bundle
+={cs.lift(                                → ={
+cs.splice(                                →  [-semantic]
+(counts)                                  → $counts
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)}                                        → }
+                                          →  
+props                                     → props
+={cs.lift(                                → ={
+{                                         → { 
+count                                     → count
+:                                         → : 
+() =>                                     → () => 
+cs.receiver(                              → 
+__cs_count                                → count
+)                                         → 
+.                                         → .
+read                                      → read
+()                                        → ()
+ }                                        →  }
+)}                                        → }
+/>                                        →  />
+)}{cs.lift(                               → \n      
+<                                         → <
+button                                    → button
+                                          →  
+onclick                                   → onclick
+={cs.lift(                                → ={
+() =>                                     → () => 
+cs.receiver(                              → 
+__cs_count                                → count
+)                                         → 
+.                                         → .
+write                                     → write
+(                                         → (
+cs.receiver(                              → 
+__cs_count                                → count
+)                                         → 
+.                                         → .
+read                                      → read
+()                                        → ()
+ +                                        →  + 
+1                                         → 1
+)                                         → )
+)}                                        → }
+>more</                                   → >more</
+button                                    → button
+>                                         → >
+)}</                                      → \n    </
+div                                       → div
+>                                         → >\n  )
+);                                        → ;
+\n})())                                   → \n}`

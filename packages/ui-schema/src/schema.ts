@@ -34,6 +34,14 @@ export const schema: Schema = {
     ),
 
     BacktickProps: Type.Interface([], {
+      props: Type.Optional(
+        Type.Record(Type.Ref("ClientValue"), {
+          description:
+            "What the bundle is handed, under the name `props`.\n\n" +
+            "A bundle written elsewhere reads it the way any script reads a name it did not write. A live value stays live: reading a splice is calling it, so a drawing handed a cell redraws when the cell changes rather than being built again.\n\n" +
+            "Unchecked here where `<Backtick />` checks it against what the bundle takes, for the reason `<For />` exists: a tag has nowhere to bind a type parameter.",
+        }),
+      ),
       bundle: Type.Union([Type.String(), Type.Null()], {
         description:
           "The bundle to draw, as the text it is on the wire — what `response.text` answers with, and what a document carries.\n\n" +

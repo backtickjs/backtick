@@ -1,0 +1,20 @@
+#f0 = ($0, $1, $2) => {
+  const count = $0()(0);
+  return <div>
+    {<backtick
+      bundle={$1()}
+      props={{ "who": "world" }}
+    />}
+    {<backtick
+      bundle={$2()}
+      props={{ "count": () => count.read() }}
+    />}
+    {<button
+      onclick={() => count.write(count.read() + 1)}
+    >
+      {"more"}
+    </button>}
+  </div>;
+}
+
+root = #f0(() => state, () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},[\"+\",\"hello \",[\".\",[\"bltn\",\"props\"],\"who\"]]]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}", () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"b\",{},[\"+\",\"count \",[\"()\",[\".\",[\"bltn\",\"props\"],\"count\"],[]]]]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")

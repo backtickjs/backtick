@@ -1,3 +1,4 @@
+import type { ClientUnknown } from "@backtickjs/core";
 import type {
   Bundle,
   BundleArrayElement,
@@ -12,7 +13,7 @@ import type {
 // pseudo-JS, each `trees` entry as pseudo-JSX, and the root as the
 // expression that evaluates it. This is a reading aid for the `*.bundle`
 // snapshots, not a wire format — nothing parses it back.
-export function renderBundleDebug(bundle: Bundle): string {
+export function renderBundleDebug(bundle: Bundle<ClientUnknown>): string {
   const sections: string[] = [];
   for (const [label, entry] of Object.entries(bundle.functions)) {
     sections.push(`${fnLabel(label)} = ${renderNode(entry, "")}`);

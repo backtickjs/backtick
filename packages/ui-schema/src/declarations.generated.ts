@@ -38,6 +38,19 @@ export interface ForProps<T extends ClientValue> {
 
 export interface BacktickProps {
   /**
+   * What the bundle is handed, under the name `props`.
+   *
+   * A bundle written elsewhere reads it the way any script reads a name it did
+   * not write. A live value stays live: reading a splice is calling it, so a
+   * drawing handed a cell redraws when the cell changes rather than being
+   * built again.
+   *
+   * Unchecked here where `<Backtick />` checks it against what the bundle
+   * takes, for the reason `<For />` exists: a tag has nowhere to bind a type
+   * parameter.
+   */
+  props?: Prop<{ [key: string]: ClientValue | undefined }>;
+  /**
    * The bundle to draw, as the text it is on the wire — what `response.text`
    * answers with, and what a document carries.
    *

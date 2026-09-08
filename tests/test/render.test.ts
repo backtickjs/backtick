@@ -1,3 +1,4 @@
+import type { ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { join } from "node:path";
 import { describe, it } from "node:test";
@@ -36,7 +37,7 @@ function parentOf(...held: TestNode[]): TestNode {
 }
 
 // A list at the root, so a write moves children of the target itself.
-async function rootList(): Promise<Bundle> {
+async function rootList(): Promise<Bundle<ClientUnknown>> {
   return bundler.run(await importFixture(validDir, "root-list.tsx"));
 }
 

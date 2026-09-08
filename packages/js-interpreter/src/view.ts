@@ -1,4 +1,4 @@
-import type { ClientValue } from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
   Bundle,
   BundleArrayElement,
@@ -46,7 +46,7 @@ import type { Scope } from "./interpret.js";
  * this, which is every case with nothing to stay after.
  */
 export function render<N extends object>(
-  bundle: Bundle,
+  bundle: Bundle<ClientUnknown>,
   options: ClientOptions<N>,
   parent: N,
   anchor?: N,
@@ -67,7 +67,7 @@ export function render<N extends object>(
  * this to be the other half of.
  */
 export function evaluate<N extends object>(
-  bundle: Bundle,
+  bundle: Bundle<ClientUnknown>,
   options: ClientOptions<N>,
 ): unknown {
   return createRoot(() =>
@@ -76,7 +76,7 @@ export function evaluate<N extends object>(
 }
 
 function materialize<N extends object>(
-  bundle: Bundle,
+  bundle: Bundle<ClientUnknown>,
   options: ClientOptions<N>,
   renderer: Renderer<object>,
 ): unknown {
@@ -93,7 +93,7 @@ function materialize<N extends object>(
  * bundles both holding a `0` mean two different functions.
  */
 function evaluated(
-  bundle: Bundle,
+  bundle: Bundle<ClientUnknown>,
   renderer: Renderer<object>,
   builtins: Instance["builtins"],
 ): unknown {
@@ -276,8 +276,16 @@ function compileBacktick(
   element: BundleElement,
 ): (scope: Scope | null) => ClientValue {
   const read = compile(instance, element[2]["bundle"] ?? null);
-  return (scope) =>
-    createMemo(() => {
+  const readProps =
+    element[2]["props"] === undefined
+      ? null
+      : compile(instance, element[2]["props"]);
+  return (scope) => {
+    // Outside the memo: a record that reads a cell would otherwise rebuild the
+    // drawing it was handed to. What is in it stays live either way, because
+    // reading a splice is calling it.
+    const props = readProps === null ? null : readProps(scope);
+    return createMemo(() => {
       const held = read(scope);
       // No bundle yet: a compile still running, a request not yet answered.
       if (held === null || held === undefined) {
@@ -287,13 +295,17 @@ function compileBacktick(
         throw new Error("backtick: a `backtick` was given no bundle to draw");
       }
       return evaluated(
-        JSON.parse(held) as Bundle,
+        JSON.parse(held) as Bundle<ClientUnknown>,
         instance.renderer,
         // The mount's names, so a bundle drawn here reaches what its
-        // surroundings reach.
-        instance.builtins,
+        // surroundings reach — and `props`, the name it reads what it was
+        // handed under.
+        props === null || props === undefined
+          ? instance.builtins
+          : { ...instance.builtins, props },
       );
     }) as ClientValue;
+  };
 }
 
 /**

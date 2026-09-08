@@ -10,7 +10,7 @@ import type { Renderer } from "solid-js/universal";
 // One per mount rather than one per instantiation — a function's cells are
 // bindings in its call, so nothing here differs between two of them.
 export interface Instance {
-  readonly bundle: Bundle;
+  readonly bundle: Bundle<ClientUnknown>;
   readonly renderer: Renderer<object>;
   // Every name this client answers for, the language's own included, keyed
   // whole as the wire carries it. Built once here rather than merged at each

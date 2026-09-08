@@ -1,3 +1,4 @@
+import type { ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { type ClientValue } from "@backtickjs/core";
@@ -90,7 +91,7 @@ describe("a member the schema leaves out", () => {
   // Written by hand because nothing else can reach it: the typechecker rejects
   // `padStart` where a fixture would declare one, so this is the bundle a
   // bundler that had not rejected it would have written.
-  const bundle: Bundle = {
+  const bundle: Bundle<ClientUnknown> = {
     functions: {
       "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
     },
@@ -113,7 +114,7 @@ describe("a name a target answers for", () => {
   // is imported as, which lands on the wire as the same node `Math.floor` does.
   // The bundle a schema's generated `createBuiltin("greet")` would be spliced
   // into, written by hand because no schema here declares the name.
-  const bundle: Bundle = {
+  const bundle: Bundle<ClientUnknown> = {
     functions: {
       "0": ["=>", [], ["{}", [["return", ["()", ["bltn", "greet"], []]]]]],
     },
@@ -135,7 +136,7 @@ describe("a name a target answers for", () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object this answered
     // with, which is the same path a cell's `read` is reached by.
-    const held: Bundle = {
+    const held: Bundle<ClientUnknown> = {
       functions: {
         "0": [
           "=>",
@@ -179,7 +180,7 @@ describe("a name a target answers for", () => {
   it("may not add a member to a kind of value", () => {
     // A member of a string is the language's, so a table naming one adds a
     // whole name nothing reads: `"abc".padStart` still finds nothing.
-    const padded: Bundle = {
+    const padded: Bundle<ClientUnknown> = {
       functions: {
         "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
       },

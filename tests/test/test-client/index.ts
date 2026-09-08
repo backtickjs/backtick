@@ -1,4 +1,4 @@
-import type { ClientValue } from "@backtickjs/core";
+import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/bundler";
 import { evaluate as evaluateBundle } from "@backtickjs/js-interpreter";
 import type { RendererOptions } from "solid-js/universal";
@@ -24,7 +24,7 @@ export type { TestNode, Write } from "./host.ts";
  * what it ends up holding.
  */
 export function evaluate(
-  bundle: Bundle,
+  bundle: Bundle<ClientUnknown>,
   host: RendererOptions<TestNode> = testHost,
   builtins?: Readonly<Record<string, ClientValue>>,
 ): unknown {

@@ -1,3 +1,4 @@
+import type { ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { type Bundle } from "@backtickjs/bundler";
@@ -13,7 +14,7 @@ import { evaluate } from "./test-client/index.ts";
 // A key that is not a place the value has anything is the other case, and it
 // stays `undefined`: `index-past-end` and `index-absent` in `valid/` pin that,
 // and the two must not be told apart by the same rule.
-const reads = (target: unknown, key: unknown): Bundle => ({
+const reads = (target: unknown, key: unknown): Bundle<ClientUnknown> => ({
   functions: {
     "0": [
       "=>",
