@@ -1,40 +1,36 @@
 import { cs, state } from "@backtickjs/core";
-// Two bundles written elsewhere, each reading `props` — the way any script
-// reads a name it did not write.
+// Two bundles written elsewhere, each a function of what it is handed — which
+// is what a bundle that takes props is, and drawing one is calling it.
 //
-// The second is handed a cell as a splice, so it stays right after a write
-// without being built again: reading a splice is calling it.
+// Both read a member plainly, and both stay right after a write: a member is
+// read where the drawing reads it, the same as a prop on a component. Nothing
+// here is written as a thunk, and the second is handed a cell's read.
 const greets = JSON.stringify({
   functions: {
     "0": [
       "=>",
-      [],
-      ["el", "em", {}, ["+", "hello ", [".", ["bltn", "props"], "who"]]],
+      [["param", "props"]],
+      ["el", "em", {}, ["+", "hello ", [".", ["id", "props"], "who"]]],
     ],
   },
-  root: ["()", ["fn", "0"], []],
+  root: ["fn", "0"],
 });
 const counts = JSON.stringify({
   functions: {
     "0": [
       "=>",
-      [],
-      [
-        "el",
-        "b",
-        {},
-        ["+", "count ", ["()", [".", ["bltn", "props"], "count"], []]],
-      ],
+      [["param", "props"]],
+      ["el", "b", {}, ["+", "count ", [".", ["id", "props"], "count"]]],
     ],
   },
-  root: ["()", ["fn", "0"], []],
+  root: ["fn", "0"],
 });
 export default cs.create(
-  [35, 16, 45, 3],
+  [31, 16, 41, 3],
   {
     version: "0.0.0",
     filePath: "backtick-props.tsx",
-    fileHash: "1ecentabg3wcr",
+    fileHash: "3sd4m4eg1u82u",
     splices: {
       $state: { value: state, params: [] },
       $greets: { value: greets, params: [] },
@@ -44,29 +40,29 @@ export default cs.create(
   },
   () => ({
     kind: "{}",
-    loc: [35, 19, 45, 2],
+    loc: [31, 19, 41, 2],
     statements: [
       {
         kind: "const",
-        loc: [36, 3, 36, 27],
+        loc: [32, 3, 32, 27],
         name: {
           kind: "id",
-          loc: [36, 9, 36, 14],
+          loc: [32, 9, 32, 14],
           text: "count",
-          bindingKey: "count$1ecentabg3wcr$0",
+          bindingKey: "count$3sd4m4eg1u82u$0",
         },
         initializer: {
           kind: "()",
-          loc: [36, 17, 36, 26],
+          loc: [32, 17, 32, 26],
           expression: {
             kind: "splice",
-            loc: [36, 17, 36, 23],
+            loc: [32, 17, 32, 23],
             key: "$state",
           },
           arguments: [
             {
               kind: "number",
-              loc: [36, 24, 36, 25],
+              loc: [32, 24, 32, 25],
               value: 0,
             },
           ],
@@ -74,23 +70,23 @@ export default cs.create(
       },
       {
         kind: "return",
-        loc: [38, 3, 44, 5],
+        loc: [34, 3, 40, 5],
         expression: {
           kind: "jsx",
-          loc: [39, 5, 43, 11],
+          loc: [35, 5, 39, 11],
           type: {
             kind: "string",
-            loc: [39, 6, 39, 9],
+            loc: [35, 6, 35, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
               kind: "jsx",
-              loc: [40, 7, 40, 61],
+              loc: [36, 7, 36, 61],
               type: {
                 kind: "string",
-                loc: [40, 8, 40, 16],
+                loc: [36, 8, 36, 16],
                 text: "backtick",
               },
               attributes: [
@@ -98,7 +94,7 @@ export default cs.create(
                   name: "bundle",
                   initializer: {
                     kind: "splice",
-                    loc: [40, 25, 40, 32],
+                    loc: [36, 25, 36, 32],
                     key: "$greets",
                   },
                 },
@@ -106,15 +102,15 @@ export default cs.create(
                   name: "props",
                   initializer: {
                     kind: "obj",
-                    loc: [40, 41, 40, 57],
+                    loc: [36, 41, 36, 57],
                     properties: [
                       {
                         kind: ":",
-                        loc: [40, 43, 40, 55],
+                        loc: [36, 43, 36, 55],
                         name: "who",
                         initializer: {
                           kind: "string",
-                          loc: [40, 48, 40, 55],
+                          loc: [36, 48, 36, 55],
                           text: "world",
                         },
                       },
@@ -126,10 +122,10 @@ export default cs.create(
             },
             {
               kind: "jsx",
-              loc: [41, 7, 41, 74],
+              loc: [37, 7, 37, 68],
               type: {
                 kind: "string",
-                loc: [41, 8, 41, 16],
+                loc: [37, 8, 37, 16],
                 text: "backtick",
               },
               attributes: [
@@ -137,7 +133,7 @@ export default cs.create(
                   name: "bundle",
                   initializer: {
                     kind: "splice",
-                    loc: [41, 25, 41, 32],
+                    loc: [37, 25, 37, 32],
                     key: "$counts",
                   },
                 },
@@ -145,32 +141,27 @@ export default cs.create(
                   name: "props",
                   initializer: {
                     kind: "obj",
-                    loc: [41, 41, 41, 70],
+                    loc: [37, 41, 37, 64],
                     properties: [
                       {
                         kind: ":",
-                        loc: [41, 43, 41, 68],
+                        loc: [37, 43, 37, 62],
                         name: "count",
                         initializer: {
-                          kind: "=>",
-                          loc: [41, 50, 41, 68],
-                          parameters: [],
-                          body: {
-                            kind: "()",
-                            loc: [41, 56, 41, 68],
+                          kind: "()",
+                          loc: [37, 50, 37, 62],
+                          expression: {
+                            kind: ".",
+                            loc: [37, 50, 37, 60],
                             expression: {
-                              kind: ".",
-                              loc: [41, 56, 41, 66],
-                              expression: {
-                                kind: "id",
-                                loc: [41, 56, 41, 61],
-                                text: "count",
-                                bindingKey: "count$1ecentabg3wcr$0",
-                              },
-                              name: "read",
+                              kind: "id",
+                              loc: [37, 50, 37, 55],
+                              text: "count",
+                              bindingKey: "count$3sd4m4eg1u82u$0",
                             },
-                            arguments: [],
+                            name: "read",
                           },
+                          arguments: [],
                         },
                       },
                     ],
@@ -181,10 +172,10 @@ export default cs.create(
             },
             {
               kind: "jsx",
-              loc: [42, 7, 42, 74],
+              loc: [38, 7, 38, 74],
               type: {
                 kind: "string",
-                loc: [42, 8, 42, 14],
+                loc: [38, 8, 38, 14],
                 text: "button",
               },
               attributes: [
@@ -192,37 +183,37 @@ export default cs.create(
                   name: "onclick",
                   initializer: {
                     kind: "=>",
-                    loc: [42, 24, 42, 59],
+                    loc: [38, 24, 38, 59],
                     parameters: [],
                     body: {
                       kind: "()",
-                      loc: [42, 30, 42, 59],
+                      loc: [38, 30, 38, 59],
                       expression: {
                         kind: ".",
-                        loc: [42, 30, 42, 41],
+                        loc: [38, 30, 38, 41],
                         expression: {
                           kind: "id",
-                          loc: [42, 30, 42, 35],
+                          loc: [38, 30, 38, 35],
                           text: "count",
-                          bindingKey: "count$1ecentabg3wcr$0",
+                          bindingKey: "count$3sd4m4eg1u82u$0",
                         },
                         name: "write",
                       },
                       arguments: [
                         {
                           kind: "binop",
-                          loc: [42, 42, 42, 58],
+                          loc: [38, 42, 38, 58],
                           left: {
                             kind: "()",
-                            loc: [42, 42, 42, 54],
+                            loc: [38, 42, 38, 54],
                             expression: {
                               kind: ".",
-                              loc: [42, 42, 42, 52],
+                              loc: [38, 42, 38, 52],
                               expression: {
                                 kind: "id",
-                                loc: [42, 42, 42, 47],
+                                loc: [38, 42, 38, 47],
                                 text: "count",
-                                bindingKey: "count$1ecentabg3wcr$0",
+                                bindingKey: "count$3sd4m4eg1u82u$0",
                               },
                               name: "read",
                             },
@@ -231,7 +222,7 @@ export default cs.create(
                           operatorToken: "+",
                           right: {
                             kind: "number",
-                            loc: [42, 57, 42, 58],
+                            loc: [38, 57, 38, 58],
                             value: 1,
                           },
                         },
@@ -243,7 +234,7 @@ export default cs.create(
               children: [
                 {
                   kind: "string",
-                  loc: [42, 61, 42, 65],
+                  loc: [38, 61, 38, 65],
                   text: "more",
                 },
               ],

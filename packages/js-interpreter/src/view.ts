@@ -3,8 +3,15 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
+  BundleExpression,
 } from "@backtickjs/bundler";
-import { createMemo, createRoot, createSignal, mapArray } from "solid-js";
+import {
+  createMemo,
+  createRoot,
+  createSignal,
+  mapArray,
+  untrack,
+} from "solid-js";
 import { createRenderer, type Renderer } from "solid-js/universal";
 import type { RendererOptions } from "./RendererOptions.js";
 import type { ClientOptions } from "./ClientOptions.js";
@@ -261,6 +268,39 @@ function compileChildren(
   return (scope) => () => read(scope);
 }
 
+// What a drawing hands a bundle: the record it wrote, with every member read
+// again where the drawn bundle reads it rather than once where it was written.
+//
+// That is the deferral the compiler already writes at a component's call site,
+// so a prop behaves the same wherever it came from — `count.read()` is live
+// written plainly, and nothing has to be wrapped by hand.
+//
+// Nothing where the tag was written without props, which is a bundle that takes
+// none.
+function compileProps(
+  instance: Instance,
+  node: BundleExpression,
+): (scope: Scope | null) => ClientValue {
+  const read = compile(instance, node);
+  return (scope) => {
+    // The names are read once and untracked: what they hold is read again per
+    // access, and tracking it here would tie the whole drawing to it — a write
+    // would rebuild the bundle instead of updating what read the member.
+    const written = untrack(() => read(scope));
+    if (written === null || written === undefined) {
+      return null;
+    }
+    const props: { [key: string]: ClientValue } = {};
+    for (const name of Object.keys(written as { [key: string]: ClientValue })) {
+      Object.defineProperty(props, name, {
+        get: () => (read(scope) as { [key: string]: ClientValue })[name],
+        enumerable: true,
+      });
+    }
+    return props;
+  };
+}
+
 /**
  * A bundle drawn inside a drawing.
  *
@@ -276,16 +316,9 @@ function compileBacktick(
   element: BundleElement,
 ): (scope: Scope | null) => ClientValue {
   const read = compile(instance, element[2]["bundle"] ?? null);
-  const readProps =
-    element[2]["props"] === undefined
-      ? null
-      : compile(instance, element[2]["props"]);
-  return (scope) => {
-    // Outside the memo: a record that reads a cell would otherwise rebuild the
-    // drawing it was handed to. What is in it stays live either way, because
-    // reading a splice is calling it.
-    const props = readProps === null ? null : readProps(scope);
-    return createMemo(() => {
+  const readProps = compileProps(instance, element[2]["props"] ?? null);
+  return (scope) =>
+    createMemo(() => {
       const held = read(scope);
       // No bundle yet: a compile still running, a request not yet answered.
       if (held === null || held === undefined) {
@@ -294,18 +327,33 @@ function compileBacktick(
       if (typeof held !== "string") {
         throw new Error("backtick: a `backtick` was given no bundle to draw");
       }
-      return evaluated(
+      const drawn = evaluated(
         JSON.parse(held) as Bundle<ClientUnknown>,
         instance.renderer,
         // The mount's names, so a bundle drawn here reaches what its
-        // surroundings reach — and `props`, the name it reads what it was
-        // handed under.
-        props === null || props === undefined
-          ? instance.builtins
-          : { ...instance.builtins, props },
+        // surroundings reach.
+        instance.builtins,
       );
+      // A bundle that takes props is a function, and drawing it is calling it —
+      // the same call a component is invoked with, one record of what it needs.
+      // `<Backtick />` checks the two agree; a bundle that came from somewhere
+      // else is checked here, where the mismatch is.
+      const props = readProps(scope);
+      if (props === null) {
+        if (typeof drawn === "function") {
+          throw new Error(
+            "backtick: this bundle takes props, and none were given",
+          );
+        }
+        return drawn as ClientValue;
+      }
+      if (typeof drawn !== "function") {
+        throw new Error(
+          "backtick: this bundle takes no props, and some were given",
+        );
+      }
+      return (drawn as (props: ClientValue) => ClientValue)(props);
     }) as ClientValue;
-  };
 }
 
 /**

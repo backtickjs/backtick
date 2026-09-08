@@ -50,7 +50,6 @@ props                                     → props
 {                                         → { 
 count                                     → count
 :                                         → : 
-() =>                                     → () => 
 cs.receiver(                              → 
 __cs_count                                → count
 )                                         → 

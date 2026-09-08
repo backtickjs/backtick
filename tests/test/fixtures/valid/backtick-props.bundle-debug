@@ -7,7 +7,7 @@
     />}
     {<backtick
       bundle={$2()}
-      props={{ "count": () => count.read() }}
+      props={{ "count": count.read() }}
     />}
     {<button
       onclick={() => count.write(count.read() + 1)}
@@ -17,4 +17,4 @@
   </div>;
 }
 
-root = #f0(() => state, () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},[\"+\",\"hello \",[\".\",[\"bltn\",\"props\"],\"who\"]]]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}", () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"b\",{},[\"+\",\"count \",[\"()\",[\".\",[\"bltn\",\"props\"],\"count\"],[]]]]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")
+root = #f0(() => state, () => "{\"functions\":{\"0\":[\"=>\",[[\"param\",\"props\"]],[\"el\",\"em\",{},[\"+\",\"hello \",[\".\",[\"id\",\"props\"],\"who\"]]]]},\"root\":[\"fn\",\"0\"]}", () => "{\"functions\":{\"0\":[\"=>\",[[\"param\",\"props\"]],[\"el\",\"b\",{},[\"+\",\"count \",[\".\",[\"id\",\"props\"],\"count\"]]]]},\"root\":[\"fn\",\"0\"]}")
