@@ -240,34 +240,38 @@ function isFixed(expr: BundleArrayElement): boolean {
   return expr[0] === "=>" || expr[0] === "el";
 }
 
-// A children position, compiled member by member.
+// A children position, member by member: what cannot change is a node handed
+// over once, and only the rest costs a computation.
 //
-// One member being computed says nothing about the others: a card whose middle
-// child is a list still has a picture and three labels that the bundle spelled
-// out, and those are built once and never looked at again. So an array is
-// compiled as an array — what `insert` reconciles is the members that can
-// change, in place, and the rest are nodes sitting between them.
-//
-// What comes back is what `insert` takes: a node, a value, an accessor for a
-// member that moves, or an array of those.
+// What comes back is what `insert` takes: a node, a value, an accessor, or an
+// array of those.
 function compileChildren(
   instance: Instance,
   expr: BundleArrayElement,
+  inArray = false,
 ): (scope: Scope | null) => unknown {
   // A list of children travels as data, which is a node like any other.
   if (Array.isArray(expr) && expr[0] === "arr") {
-    const members = expr[1].map((member) => compileChildren(instance, member));
+    const members = expr[1].map((member) =>
+      compileChildren(instance, member, true),
+    );
     return (scope) => members.map((member) => member(scope));
   }
   const read = compile(instance, expr);
-  // A value where it cannot change, so `insert` makes no computation to watch
-  // it; a way of asking, where it might.
+  // Nothing that can change, so nothing to watch.
   if (isFixed(expr)) {
     return (scope) => read(scope);
   }
-  // A computation of its own, so `insert` watches the drawing rather than the
-  // expression that made it. Without one, a drawing that changed would run that
-  // expression again — and where it is a component, that is a second component.
+  // An accessor, so `insert` watches it. Alone in the position, `insert` reads
+  // what it answered with in a second computation, so a `<for />` or a drawn
+  // bundle changing re-runs that one and not this.
+  if (!inArray) {
+    return (scope) => () => read(scope);
+  }
+  // In an array, `insert` reads the member and what it answered with in the one
+  // computation, so that change would run this again — and where this is a
+  // component, that is a second component with fresh state. The memo answers
+  // with the same drawing rather than building another.
   return (scope) => createMemo(() => read(scope));
 }
 
