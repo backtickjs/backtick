@@ -321,7 +321,10 @@ function compileBacktick(
     createMemo(() => {
       const held = read(scope);
       // No bundle yet: a compile still running, a request not yet answered.
-      if (held === null || held === undefined) {
+      // Empty text says the same thing, because a cell that starts empty is
+      // written `""` as readily as `null` — and `JSON.parse("")` is a syntax
+      // error rather than a drawing that is not there.
+      if (held === null || held === undefined || held === "") {
         return null;
       }
       if (typeof held !== "string") {
