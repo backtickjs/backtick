@@ -96,7 +96,14 @@ export const schema: Schema = {
         Type.FunctionParameter(
           "onBundle",
           Type.Function(
-            [Type.FunctionParameter("bundle", Type.String())],
+            [
+              Type.FunctionParameter(
+                "bundle",
+                Type.Apply(Type.Ref("SerializedBundle"), [
+                  Type.Ref("BacktickElement"),
+                ]),
+              ),
+            ],
             Type.Void(),
           ),
           {

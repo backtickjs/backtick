@@ -6,25 +6,22 @@ import type {
 } from "@backtickjs/boundary";
 
 /**
- * A bundle, drawn here, checked against what it takes.
+ * A bundle, drawn here.
  *
- * `T` comes from the bundle, which carries what it takes as part of its type —
- * see `SerializedBundle`. Nobody writes it: the claim was made where the text
- * was, at the boundary where the bytes were already trusted.
+ * For a bundle that is a drawing — one that takes nothing, which is what
+ * `bundler.run` gives back for a component that was already applied. A bundle
+ * that takes props is drawn with `<BacktickWithProps />`, because a component
+ * reads the props it names and cannot ask whether one was written.
  *
- * One argument, because props reach a bundle as one record, and always written:
- * a bundle that takes nothing is handed `{}`. A component and not a tag,
- * because a tag has nowhere to hold `T` — the reason `<For />` exists.
- * `<backtick />` still draws a bundle, and checks nothing.
+ * Null draws nothing, which is what a page between bundles has to say — one
+ * being compiled, one not yet fetched.
+ *
+ * A component and not a tag, because a tag has nowhere to hold a type — the
+ * reason `<For />` exists. `<backtick />` still draws a bundle, and checks
+ * nothing.
  */
-export async function Backtick<
-  T extends (props: never) => BacktickElement,
->(props: {
-  bundle: Prop<SerializedBundle<T>>;
-  props: Parameters<T> extends [] ? Record<string, never> : Parameters<T>[0];
+export async function Backtick(props: {
+  bundle: Prop<SerializedBundle<BacktickElement> | null>;
 }): Promise<BacktickElement> {
-  return createJsxElement("backtick", {
-    bundle: props.bundle,
-    props: props.props,
-  });
+  return createJsxElement("backtick", { bundle: props.bundle });
 }

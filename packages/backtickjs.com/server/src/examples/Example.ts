@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import type { Spliceable } from "@backtickjs/core";
 import { bundler } from "@backtickjs/bundler";
+import type { BacktickElement, SerializedBundle } from "@backtickjs/core";
 
 /**
  * One file of one, named the way the compiler will be told to name it.
@@ -36,7 +37,7 @@ export type Example = {
   // by whoever shows the example, so the drawing on the page is always of the
   // text beside it — the two cannot be given out separately and so cannot
   // disagree.
-  readonly bundle: string;
+  readonly bundle: SerializedBundle<BacktickElement>;
 };
 
 // `tspc` emits `dist` and copies nothing else, so an example's text is only ever
@@ -126,6 +127,11 @@ export async function exampleOf(
       await fileOf(directory, entry),
       ...(await Promise.all(rest.map((name) => fileOf(directory, name)))),
     ],
-    bundle: JSON.stringify(await bundler.run(root)),
+    // The claim about what the text is, made here because here is where the
+    // text is: an example draws and takes nothing, and a script has no `as` to
+    // say so later.
+    bundle: JSON.stringify(
+      await bundler.run(root),
+    ) as SerializedBundle<BacktickElement>,
   };
 }

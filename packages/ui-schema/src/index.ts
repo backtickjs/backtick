@@ -5,3 +5,4 @@ export type * from "./declarations.generated.js";
 // The tags stay writable on their own, unchecked.
 export { For } from "./For.js";
 export { Backtick } from "./Backtick.js";
+export { BacktickWithProps } from "./BacktickWithProps.js";

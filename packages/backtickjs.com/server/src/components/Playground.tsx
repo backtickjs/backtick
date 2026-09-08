@@ -1,5 +1,9 @@
-import { For, cs, state } from "@backtickjs/core";
-import type { BacktickElement, Client } from "@backtickjs/core";
+import { Backtick, For, cs, state } from "@backtickjs/core";
+import type {
+  BacktickElement,
+  Client,
+  SerializedBundle,
+} from "@backtickjs/core";
 import type { Example } from "../examples/Example.js";
 import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
 import { ink, line, mono, muted, paper, wash } from "./theme.js";
@@ -309,7 +313,9 @@ export async function Playground({
     // the example itself, which crosses whole. The drawing is of the text beside
     // it by construction, rather than by two props agreeing.
     const source = $state($example.files[0].sourceText);
-    const bundle = $state($example.bundle);
+    const bundle = $state<SerializedBundle<BacktickElement> | null>(
+      $example.bundle,
+    );
     const diagnostics = $state($noDiagnostics);
     const status = $state("");
     const showing = $state("screen");
@@ -323,9 +329,11 @@ export async function Playground({
     // What the tab says beside the word. A string knows its own length, so the
     // page works this out rather than being told it.
     const sized = (n: number) =>
-      n < 1024
-        ? " \u00b7 " + n.toString() + " B"
-        : " \u00b7 " + (n / 1024).toFixed(1) + " KB";
+      n === 0
+        ? ""
+        : n < 1024
+          ? " \u00b7 " + n.toString() + " B"
+          : " \u00b7 " + (n / 1024).toFixed(1) + " KB";
 
     // The colouring, ported from the scanner that used to run beside the bundle.
     // Two things had to change and both are the language being what it is: there
@@ -556,7 +564,7 @@ export async function Playground({
                 const said = (diagnostic: Said[]) => {
                   if (id === asked.read()) {
                     status.write("");
-                    bundle.write("");
+                    bundle.write(null);
                     diagnostics.write(diagnostic);
                   }
                 };
@@ -618,8 +626,7 @@ export async function Playground({
                 style={showing.read() === "bundle" ? $TAB_ON : $TAB_OFF}
                 onclick={() => showing.write("bundle")}
               >
-                {"BUNDLE" +
-                  (bundle.read() === "" ? "" : sized(bundle.read().length))}
+                {"BUNDLE" + sized((bundle.read() ?? "").length)}
               </button>
             </div>
           </div>
@@ -632,7 +639,7 @@ export async function Playground({
             }
           >
             <div style={$SCREEN}>
-              <backtick bundle={bundle.read()} />
+              <Backtick bundle={bundle.read()} />
             </div>
             <div style={$ISLAND} />
           </div>

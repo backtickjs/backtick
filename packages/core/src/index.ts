@@ -23,4 +23,4 @@ export { cs } from "./cs.js";
 // `For` is the language's, not a target's: what it draws is whatever the
 // elements around it are, and every client answers for it. A target's own
 // vocabulary lives in that target's SDK.
-export { Backtick, For } from "@backtickjs/ui-schema";
+export { Backtick, BacktickWithProps, For } from "@backtickjs/ui-schema";

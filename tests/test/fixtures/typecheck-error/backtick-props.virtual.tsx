@@ -1,12 +1,12 @@
-import { Backtick, cs } from "@backtickjs/core";
+import { Backtick, BacktickWithProps, cs } from "@backtickjs/core";
 import type { BacktickElement, SerializedBundle } from "@backtickjs/core";
 
 // What `<Backtick />` checks, and the one thing it does not.
 //
 // The type travels with the text: a `SerializedBundle<T>` says what the bundle
-// takes and what it draws, so nothing here writes a type argument.
+// evaluates to — a drawing, or a function of what it takes — so nothing here
+// writes a type argument.
 type Rows = (props: { count: number }) => BacktickElement;
-type Empty = () => BacktickElement;
 
 const rows = JSON.stringify({
   functions: { "0": ["=>", [], ["el", "em", {}, "rows"]] },
@@ -16,22 +16,28 @@ const rows = JSON.stringify({
 const empty = JSON.stringify({
   functions: { "0": ["=>", [], ["el", "em", {}, "nothing to hand it"]] },
   root: ["()", ["fn", "0"], []],
-}) as SerializedBundle<Empty>;
+}) as SerializedBundle<BacktickElement>;
 
-// Right: what the bundle takes, and what it takes nothing of.
-export const drawn = <Backtick bundle={rows} props={{ count: 1 }} />;
-export const bare = <Backtick bundle={empty} props={{}} />;
+// Right: what the bundle takes, and a drawing, which takes nothing.
+export const drawn = <BacktickWithProps bundle={rows} props={{ count: 1 }} />;
+export const bare = <Backtick bundle={empty} />;
 
 // Wrong: the wrong type, a name it hasn't got, and none at all.
-export const wrongType = <Backtick bundle={rows} props={{ count: "one" }} />;
-export const wrongName = <Backtick bundle={rows} props={{ nope: 1 }} />;
-export const missing = <Backtick bundle={rows} />;
+export const wrongType = (
+  <BacktickWithProps bundle={rows} props={{ count: "one" }} />
+);
+export const wrongName = <BacktickWithProps bundle={rows} props={{ nope: 1 }} />;
+export const missing = <BacktickWithProps bundle={rows} />;
 
-// A plain string is not a claim about anything, so it is not a bundle.
-export const text = <Backtick bundle={JSON.stringify({})} props={{}} />;
+// Null draws nothing, and a plain string is not a claim, so it is not a bundle.
+export const nothing = <Backtick bundle={null} />;
 
-// A bundle that takes nothing, handed something anyway. The empty case is a
-// record whose values are `never`, so `{}` goes in and nothing else does.
-export const handedAnyway = <Backtick bundle={empty} props={{ count: 1 }} />;
+export const text = <Backtick bundle={JSON.stringify({})} />;
+
+// A drawing, handed props anyway. A drawing is finished — there is no call for
+// arguments to reach, so the component that takes them does not take it.
+export const handedAnyway = (
+  <BacktickWithProps bundle={empty} props={{ count: 1 }} />
+);
 
 export default cs.lift(cs.const(1));

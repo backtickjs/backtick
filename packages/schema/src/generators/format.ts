@@ -14,5 +14,6 @@ export const format: ReadonlySet<string> = new Set([
   "ClientUnknown",
   "ClientValue",
   "Prop",
+  "SerializedBundle",
   "ServerComponent",
 ]);
