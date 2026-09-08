@@ -1,3 +1,67 @@
+cs.lift(cs.const(                         → cs`
+<                                         → <
+em                                        → em
+>{cs.lift(                                → >{
+"hello "                                  → "hello "
+ + (                                      →  + 
+cs.splice(                                →  [-semantic]
+(who)                                     → $who
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)                                         → 
+)}</                                      → }</
+em                                        → em
+>                                         → >
+))                                        → `
+cs.lift(cs.const(                         → cs`
+<                                         → <
+b                                         → b
+>{cs.lift(                                → >{
+"count "                                  → "count "
+ + (                                      →  + 
+cs.splice(                                →  [-semantic]
+(count)                                   → $count
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+)                                         → 
+)}</                                      → }</
+b                                         → b
+>                                         → >
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_props                                → props
+:                                         → : 
+{\n    who: string;\n}                    → { who: string }
+) =>                                      → ) => 
+cs.splice(                                → ${ [-semantic]
+(\n    <Greets who={                      → (\n    <Greets who={
+cs.lift(cs.const(                         → cs`
+cs.receiver(                              → 
+__cs_props                                → props
+)                                         → 
+.                                         → .
+who                                       → who
+))                                        → `
+} />\n  )                                 → } />\n  )
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
+))                                        → `
+cs.lift(cs.const(                         → cs`
+(                                         → (
+__cs_props                                → props
+:                                         → : 
+{\n    count: number;\n}                  → { count: number }
+) =>                                      → ) => 
+cs.splice(                                → ${ [-semantic]
+(\n    <Counts count={                    → (\n    <Counts count={
+cs.lift(cs.const(                         → cs`
+cs.receiver(                              → 
+__cs_props                                → props
+)                                         → 
+.                                         → .
+count                                     → count
+))                                        → `
+} />\n  )                                 → } />\n  )
+) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
+))                                        → `
 cs.lift((() => {\n                        → cs`{\n  
 const                                     → const 
 __cs_count                                → count

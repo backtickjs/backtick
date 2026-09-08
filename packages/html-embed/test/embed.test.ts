@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { parseHTML } from "linkedom";
-import type { ClientUnknown } from "@backtickjs/boundary";
-import type { Bundle } from "@backtickjs/bundler";
+import { bundler } from "@backtickjs/bundler";
 import { embed } from "../src/embed.ts";
 
 const template =
@@ -14,13 +13,17 @@ const template =
 
 // A bundle holding every character an HTML serializer is tempted to rewrite,
 // and the one sequence that would end the script it rides in.
-const bundle = (mark: string): Bundle<ClientUnknown> =>
-  ({
-    functions: {
-      "0": ["=>", [], ["el", "em", {}, `& < > " ' </script> ${mark}`]],
-    },
-    root: ["()", ["fn", "0"], []],
-  }) as unknown as Bundle<ClientUnknown>;
+//
+// Built rather than written out: what a bundle looks like is the bundler's, and
+// a test that spelled one would be a test of the format rather than of this.
+const made = async (mark: string) =>
+  await bundler.run(`& < > " ' </script> ${mark}`);
+
+const [one, two, three] = await Promise.all([
+  made("one"),
+  made("two"),
+  made("three"),
+]);
 
 const scripts = (html: string): string[] =>
   [...parseHTML(html).document.querySelectorAll("script[data-backtick]")].map(
@@ -29,22 +32,22 @@ const scripts = (html: string): string[] =>
 
 describe("more than one bundle in a document", () => {
   it("carries each one back whole", () => {
-    let html = embed(template, "#a", bundle("one"));
-    html = embed(html, "#a", bundle("two"));
-    html = embed(html, "#b", bundle("three"));
+    let html = embed(template, "#a", one);
+    html = embed(html, "#a", two);
+    html = embed(html, "#b", three);
 
     // Each call parses back what the last one wrote, so a bundle embedded first
     // is serialized once more for every one that follows it.
     assert.deepEqual(
       scripts(html).map((held) => JSON.parse(held)),
-      [bundle("one"), bundle("two"), bundle("three")],
+      [one, two, three],
     );
   });
 
   it("puts each one where its selector said", () => {
-    let html = embed(template, "#a", bundle("one"));
-    html = embed(html, "#a", bundle("two"));
-    html = embed(html, "#b", bundle("three"));
+    let html = embed(template, "#a", one);
+    html = embed(html, "#a", two);
+    html = embed(html, "#b", three);
     const { document } = parseHTML(html);
     const held = (id: string): string[] =>
       [...document.querySelector(`#${id}`)!.children].map((node) =>
@@ -60,7 +63,7 @@ describe("more than one bundle in a document", () => {
 
   it("throws where a selector matches nothing", () => {
     assert.throws(
-      () => embed(template, "#nowhere", bundle("one")),
+      () => embed(template, "#nowhere", one),
       /nothing in the document matches/,
     );
   });

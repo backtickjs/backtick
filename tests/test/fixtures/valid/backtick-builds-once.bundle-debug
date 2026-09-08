@@ -1,0 +1,24 @@
+#f0 = ($0, $1, $2) => {
+  const asked = $0()(0);
+  return <div>
+    {<span>
+      {"asked " + asked.read()}
+    </span>}
+    {$1()({
+      "ask": () => () => {
+        asked.write(asked.read() + 1);
+        return asked.read() > 4 ? "" : $2();
+      }
+    })}
+  </div>;
+}
+
+#f1 = ($0, $1) => {
+  const drawn = $0()("");
+  const started = setTimeout(() => drawn.write($1()()), 0);
+  return <backtick
+    bundle={drawn.read()}
+  />;
+}
+
+root = #f0(() => state, () => ($0) => #f1(() => state, () => $0.ask()), () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},\"answered\"]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")

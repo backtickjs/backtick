@@ -1,5 +1,10 @@
+import { bundler } from "@backtickjs/bundler";
 import { Backtick, BacktickWithProps, cs } from "@backtickjs/core";
-import type { BacktickElement, SerializedBundle } from "@backtickjs/core";
+import type {
+  BacktickElement,
+  Prop,
+  SerializedBundle,
+} from "@backtickjs/core";
 
 // What `<Backtick />` checks, and the one thing it does not.
 //
@@ -8,15 +13,26 @@ import type { BacktickElement, SerializedBundle } from "@backtickjs/core";
 // writes a type argument.
 type Rows = (props: { count: number }) => BacktickElement;
 
-const rows = JSON.stringify({
-  functions: { "0": ["=>", [], ["el", "em", {}, "rows"]] },
-  root: ["()", ["fn", "0"], []],
-}) as SerializedBundle<Rows>;
+// Built rather than written out: what a bundle looks like is the bundler's, and
+// a fixture that spelled one would pin the format twice. The claim about what
+// each takes is still written, because that is what is under test.
+async function Row({ count }: { count: Prop<number> }) {
+  return cs`<em>{"rows " + $count}</em>`;
+}
 
-const empty = JSON.stringify({
-  functions: { "0": ["=>", [], ["el", "em", {}, "nothing to hand it"]] },
-  root: ["()", ["fn", "0"], []],
-}) as SerializedBundle<BacktickElement>;
+async function Nothing() {
+  return cs`<em>{"nothing to hand it"}</em>`;
+}
+
+const rows = JSON.stringify(
+  await bundler.run(cs`(props: { count: number }) => ${(
+    <Row count={cs`props.count`} />
+  )}`),
+) as SerializedBundle<Rows>;
+
+const empty = JSON.stringify(
+  await bundler.run(<Nothing />),
+) as SerializedBundle<BacktickElement>;
 
 // Right: what the bundle takes, and a drawing, which takes nothing.
 export const drawn = <BacktickWithProps bundle={rows} props={{ count: 1 }} />;

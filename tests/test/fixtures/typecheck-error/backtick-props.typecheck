@@ -1,8 +1,8 @@
-27:45 error TS2322: Type 'string' is not assignable to type 'Spliceable<number>'.
-29:68 error TS2353: Object literal may only specify known properties, and 'nope' does not exist in type 'Prop<{ count: number; }>'.
-30:25 error TS2741: Property 'props' is missing in type '{ bundle: SerializedBundle<Rows>; }' but required in type '{ bundle: Prop<SerializedBundle<(props: { count: number; }) => BacktickElement> | null>; props: Prop<{ count: number; }>; }'.
-35:31 error TS2322: Type 'string' is not assignable to type 'Prop<SerializedBundle<BacktickElement> | null>'.
-40:22 error TS2322: Type 'SerializedBundle<BacktickElement>' is not assignable to type 'Prop<SerializedBundle<(props: { count: number; }) => BacktickElement> | null>'.
+43:45 error TS2322: Type 'string' is not assignable to type 'Spliceable<number>'.
+45:68 error TS2353: Object literal may only specify known properties, and 'nope' does not exist in type 'Prop<{ count: number; }>'.
+46:25 error TS2741: Property 'props' is missing in type '{ bundle: SerializedBundle<Rows>; }' but required in type '{ bundle: Prop<SerializedBundle<(props: { count: number; }) => BacktickElement> | null>; props: Prop<{ count: number; }>; }'.
+51:31 error TS2322: Type 'string' is not assignable to type 'Prop<SerializedBundle<BacktickElement> | null>'.
+56:22 error TS2322: Type 'SerializedBundle<BacktickElement>' is not assignable to type 'Prop<SerializedBundle<(props: { count: number; }) => BacktickElement> | null>'.
   Type 'SerializedBundle<BacktickElement>' is not assignable to type 'SerializedBundle<(props: { count: number; }) => BacktickElement>'.
     Type 'SerializedBundle<BacktickElement>' is not assignable to type '{ readonly [SerializedBundleBrand]: (props: { count: number; }) => BacktickElement; }'.
       Types of property '[SerializedBundleBrand]' are incompatible.

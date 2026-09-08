@@ -1,3 +1,12 @@
+cs.lift(cs.const(                         → cs`
+<                                         → <
+em                                        → em
+>{cs.lift(                                → >{
+"from another bundle"                     → "from another bundle"
+)}</                                      → }</
+em                                        → em
+>                                         → >
+))                                        → `
 cs.lift(cs.const(                         → cs`\n  
 <                                         → <
 div                                       → div
