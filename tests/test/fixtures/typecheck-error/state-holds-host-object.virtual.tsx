@@ -14,6 +14,6 @@ import { cs, state } from "@backtickjs/core";
 const host = new Date();
 
 export default cs.lift((() => {
-    const __cs_held = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(cs.splice((host)) satisfies import("@backtickjs/core").ClientUnknown));
-    cs.statement(cs.receiver(__cs_held).write(cs.splice((host)) satisfies import("@backtickjs/core").ClientUnknown));
+    const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(cs.splice((host)) satisfies typeof cs.ClientUnknown));
+    cs.statement(cs.receiver(__cs_held).write(cs.splice((host)) satisfies typeof cs.ClientUnknown));
 })());

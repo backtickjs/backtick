@@ -1,44 +1,44 @@
-cs.lift(cs.const(                         → cs`
-() => {\n                                 → () => {\n  
-const                                     → const 
-__cs_tree                                 → tree
- = cs.const(                              →  = 
-cs.splice(                                → ${ [-semantic]
-(<div />)                                 → (<div />)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-__cs_tree                                 → tree
-);                                        → ;
-\n}                                       → \n}
-))                                        → `
-cs.lift(cs.const(                         → cs`
-() => {\n                                 → () => {\n  
-const                                     → const 
-__cs_tree                                 → tree
- = cs.const(                              →  = 
-cs.splice(                                → ${ [-semantic]
-(<Row />)                                 → (<Row />)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-__cs_tree                                 → tree
-);                                        → ;
-\n}                                       → \n}
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → 
-cs.splice(                                →  [-semantic]
-(held)                                    → $held
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)()                                       → ()
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → 
-cs.splice(                                →  [-semantic]
-(heldComponent)                           → $heldComponent
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)()                                       → ()
-))                                        → `
+cs.lift(cs.const(                    → cs`
+() => {\n                            → () => {\n  
+const                                → const 
+__cs_tree                            → tree
+ = cs.const(                         →  = 
+cs.splice(                           → ${ [-semantic]
+(<div />)                            → (<div />)
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+__cs_tree                            → tree
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+() => {\n                            → () => {\n  
+const                                → const 
+__cs_tree                            → tree
+ = cs.const(                         →  = 
+cs.splice(                           → ${ [-semantic]
+(<Row />)                            → (<Row />)
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+__cs_tree                            → tree
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → 
+cs.splice(                           →  [-semantic]
+(held)                               → $held
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)()                                  → ()
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → 
+cs.splice(                           →  [-semantic]
+(heldComponent)                      → $heldComponent
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)()                                  → ()
+))                                   → `

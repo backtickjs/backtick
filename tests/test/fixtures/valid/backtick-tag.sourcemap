@@ -1,48 +1,48 @@
-cs.lift(cs.const(                         → cs`
-<                                         → <
-em                                        → em
->{cs.lift(                                → >{
-"from another bundle"                     → "from another bundle"
-)}</                                      → }</
-em                                        → em
->                                         → >
-))                                        → `
-cs.lift(cs.const(                         → cs`\n  
-<                                         → <
-div                                       → div
->{cs.lift(                                → >\n    
-<                                         → <
-span                                      → span
->before</                                 → >before</
-span                                      → span
->                                         → >
-)}{cs.lift(                               → \n    
-<                                         → <
-backtick                                  → backtick
-                                          →  
-bundle                                    → bundle
-={cs.lift(                                → ={
-cs.splice(                                →  [-semantic]
-(held)                                    → $held
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)}                                        → }
-/>                                        →  />
-)}{cs.lift(                               → \n    
-<                                         → <
-backtick                                  → backtick
-                                          →  
-bundle                                    → bundle
-={cs.lift(                                → ={
-null                                      → null
-)}                                        → }
-/>                                        →  />
-)}{cs.lift(                               → \n    
-<                                         → <
-span                                      → span
->after</                                  → >after</
-span                                      → span
->                                         → >
-)}</                                      → \n  </
-div                                       → div
->                                         → >
-))                                        → \n`
+cs.lift(cs.const(                    → cs`
+<                                    → <
+em                                   → em
+>{cs.lift(                           → >{
+"from another bundle"                → "from another bundle"
+)}</                                 → }</
+em                                   → em
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`\n  
+<                                    → <
+div                                  → div
+>{cs.lift(                           → >\n    
+<                                    → <
+span                                 → span
+>before</                            → >before</
+span                                 → span
+>                                    → >
+)}{cs.lift(                          → \n    
+<                                    → <
+backtick                             → backtick
+                                     →  
+bundle                               → bundle
+={cs.lift(                           → ={
+cs.splice(                           →  [-semantic]
+(held)                               → $held
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)}                                   → }
+/>                                   →  />
+)}{cs.lift(                          → \n    
+<                                    → <
+backtick                             → backtick
+                                     →  
+bundle                               → bundle
+={cs.lift(                           → ={
+null                                 → null
+)}                                   → }
+/>                                   →  />
+)}{cs.lift(                          → \n    
+<                                    → <
+span                                 → span
+>after</                             → >after</
+span                                 → span
+>                                    → >
+)}</                                 → \n  </
+div                                  → div
+>                                    → >
+))                                   → \n`

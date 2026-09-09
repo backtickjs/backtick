@@ -9,7 +9,7 @@ import { cs, For, state } from "@backtickjs/core";
 // and empties it, which a claim to the whole target would take with it.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_ids = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<number[]>([1, 2, 3]));
+    const __cs_ids = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<number[]>([1, 2, 3]));
     const __cs_clear = cs.const(() => {
         cs.statement(cs.receiver(__cs_ids).update(() => []));
     });

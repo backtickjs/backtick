@@ -14,7 +14,7 @@ type Row = { id: number; label: string };
 
 async function Rows() {
   return cs.lift((() => {
-    const __cs_rows = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<Row[]>([]));
+    const __cs_rows = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<Row[]>([]));
     const __cs_add = cs.const((__cs_row: Row) => {
         cs.statement(cs.receiver(__cs_rows).write([__cs_row]));
     });

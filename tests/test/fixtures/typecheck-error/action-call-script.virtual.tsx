@@ -7,10 +7,10 @@ const ping = cs.lift(cs.const(() => {
     const __cs_x = cs.const(1);
 }));
 
-export const called = cs.lift(cs.const((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)()));
+export const called = cs.lift(cs.const((cs.splice((ping)) satisfies typeof cs.ClientUnknown)()));
 
 const action = cs.lift((() => {
     const __cs_x = cs.const(1);
 })());
 
-export const spliced = cs.lift(cs.const(cs.splice((action)) satisfies import("@backtickjs/core").ClientUnknown));
+export const spliced = cs.lift(cs.const(cs.splice((action)) satisfies typeof cs.ClientUnknown));

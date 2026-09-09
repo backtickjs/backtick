@@ -8,4 +8,4 @@ import { cs } from "@backtickjs/core";
 // expressions survives, where trimming would take it.
 const listed = cs.lift(cs.const((__cs_name: string) => <>{cs.lift(<span>a sentence across lines</span>)}{cs.lift(<span>{cs.lift(__cs_name)} {cs.lift(__cs_name)}</span>)}</>));
 
-export default <div>{cs.lift(cs.const((cs.splice((listed)) satisfies import("@backtickjs/core").ClientUnknown)("x")))}</div>;
+export default <div>{cs.lift(cs.const((cs.splice((listed)) satisfies typeof cs.ClientUnknown)("x")))}</div>;

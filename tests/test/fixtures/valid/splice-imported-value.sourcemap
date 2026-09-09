@@ -1,5 +1,5 @@
-cs.lift(cs.const(                         → cs`
-cs.splice(                                →  [-semantic]
-(version)                                 → $version
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-))                                        → `
+cs.lift(cs.const(                    → cs`
+cs.splice(                           →  [-semantic]
+(version)                            → $version
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+))                                   → `

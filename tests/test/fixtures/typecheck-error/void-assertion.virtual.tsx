@@ -8,6 +8,6 @@ const one = 1;
 // nothing can hold a value of is worth. Only a parameter needs saying earlier,
 // because an annotation is not a value and reaches no boundary at all.
 const asserted = cs.lift((() => {
-    const __cs_a = cs.const(cs.splice((one)) satisfies import("@backtickjs/core").ClientUnknown as void);
+    const __cs_a = cs.const(cs.splice((one)) satisfies typeof cs.ClientUnknown as void);
     return cs.const("" + __cs_a);
 })());

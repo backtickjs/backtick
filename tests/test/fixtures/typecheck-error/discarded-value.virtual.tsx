@@ -13,14 +13,14 @@ const ping = cs.lift(cs.const(() => {
 }));
 
 const action = cs.lift((() => {
-    cs.statement((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)());
-    cs.statement((cs.splice((getValue)) satisfies import("@backtickjs/core").ClientUnknown)());
+    cs.statement((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
+    cs.statement((cs.splice((getValue)) satisfies typeof cs.ClientUnknown)());
 })());
 
 // The same rule in a script that returns: the position is what decides, so a
 // discarded value fails here too while the action beside it stands.
 const valued = cs.lift((() => {
-    cs.statement((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)());
-    cs.statement((cs.splice((getValue)) satisfies import("@backtickjs/core").ClientUnknown)());
+    cs.statement((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
+    cs.statement((cs.splice((getValue)) satisfies typeof cs.ClientUnknown)());
     return cs.const(1);
 })());

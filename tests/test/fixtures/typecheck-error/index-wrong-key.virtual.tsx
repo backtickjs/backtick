@@ -14,6 +14,6 @@ export default cs.lift(cs.const((__cs_name: string) => {
     const __cs_coins = cs.const([5, 31, 7]);
     const __cs_first = cs.const(cs.receiver(__cs_coins)["0"]);
     const __cs_wrong = cs.const(cs.receiver(__cs_coins)[__cs_name]);
-    const __cs_which = cs.const(cs.receiver(cs.splice((point)) satisfies import("@backtickjs/core").ClientUnknown)[__cs_name]);
+    const __cs_which = cs.const(cs.receiver(cs.splice((point)) satisfies typeof cs.ClientUnknown)[__cs_name]);
     return cs.const(__cs_first + __cs_wrong + __cs_which);
 }));

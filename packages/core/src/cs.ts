@@ -62,6 +62,21 @@ function _receiver<T extends ClientValue | ClientGlobal>(_: T): Receiver<T> {
   );
 }
 
+// What hangs off the tag.
+const members = {
+  create,
+  lift: _lift,
+  splice: _splice,
+  condition: _condition,
+  number: _number,
+  const: _const,
+  statement: _statement,
+  receiver: _receiver,
+};
+
+// `ClientUnknown`, for the `satisfies` the transform writes beside a splice.
+// In the type and not in the object: nothing reads it, and there is nothing to
+// read — `typeof cs.ClientUnknown` is the whole of what it is for.
 export const cs = Object.assign(
   (
     _strings: TemplateStringsArray,
@@ -71,14 +86,5 @@ export const cs = Object.assign(
       "`cs` was not compiled. Is @backtickjs set up for this project?",
     );
   },
-  {
-    create,
-    lift: _lift,
-    splice: _splice,
-    condition: _condition,
-    number: _number,
-    const: _const,
-    statement: _statement,
-    receiver: _receiver,
-  },
+  members as typeof members & { readonly ClientUnknown: ClientUnknown },
 );

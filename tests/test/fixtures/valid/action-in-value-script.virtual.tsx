@@ -18,9 +18,9 @@ const ping: Client<() => void> = cs.lift(cs.const(() => {
 
 export default cs.lift(cs.const((__cs_b: boolean) => {
     let __cs_n = 0;
-    cs.statement(cs.splice((effects)) satisfies import("@backtickjs/core").ClientUnknown);
+    cs.statement(cs.splice((effects)) satisfies typeof cs.ClientUnknown);
     if ((cs.condition(__cs_b) && __cs_b)) {
-        cs.statement((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)());
+        cs.statement((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
         __cs_n = cs.const(1);
     }
     return cs.const(__cs_n);

@@ -1,15 +1,15 @@
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_x                                    → x
- = cs.const(                              →  = 
-0                                         → 0
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-cs.splice(                                → ${ [-semantic]
-cs.lift(cs.const(                         → cs`
-__cs_x                                    → x
-))                                        → `
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_x                               → x
+ = cs.const(                         →  = 
+0                                    → 0
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+cs.splice(                           → ${ [-semantic]
+cs.lift(cs.const(                    → cs`
+__cs_x                               → x
+))                                   → `
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+);                                   → ;
+\n})())                              → \n}`

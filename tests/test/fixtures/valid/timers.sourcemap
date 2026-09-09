@@ -1,63 +1,63 @@
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_stop                                 → stop
- = cs.const(                              →  = 
-cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-.                                         → .
-clearInterval                             → clearInterval
-);                                        → ;
-\n                                        → \n  
-const                                     → const 
-__cs_repeating                            → repeating
- = cs.const(                              →  = 
-cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-.                                         → .
-setInterval                               → setInterval
-(                                         → (
-() =>                                     → () => 
-0                                         → 0
-,                                         → , 
-1000                                      → 1000
-)                                         → )
-);                                        → ;
-\n                                        → \n  
-cs.statement(                             → 
-__cs_stop                                 → stop
-(                                         → (
-__cs_repeating                            → repeating
-)                                         → )
-);                                        → ;
-\n                                        → \n  
-cs.statement(                             → 
-cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-.                                         → .
-clearTimeout                              → clearTimeout
-(                                         → (
-cs.receiver(                              → 
-cs.splice(                                →  [-semantic]
-(window)                                  → $window
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-.                                         → .
-setTimeout                                → setTimeout
-(                                         → (
-() =>                                     → () => 
-0                                         → 0
-,                                         → , 
-1000                                      → 1000
-)                                         → )
-)                                         → )
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_stop                            → stop
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(window)                             → $window
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+clearInterval                        → clearInterval
+);                                   → ;
+\n                                   → \n  
+const                                → const 
+__cs_repeating                       → repeating
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(window)                             → $window
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+setInterval                          → setInterval
+(                                    → (
+() =>                                → () => 
+0                                    → 0
+,                                    → , 
+1000                                 → 1000
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+cs.statement(                        → 
+__cs_stop                            → stop
+(                                    → (
+__cs_repeating                       → repeating
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+cs.statement(                        → 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(window)                             → $window
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+clearTimeout                         → clearTimeout
+(                                    → (
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(window)                             → $window
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+setTimeout                           → setTimeout
+(                                    → (
+() =>                                → () => 
+0                                    → 0
+,                                    → , 
+1000                                 → 1000
+)                                    → )
+)                                    → )
+);                                   → ;
+\n})())                              → \n}`

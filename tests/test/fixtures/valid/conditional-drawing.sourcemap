@@ -5,7 +5,7 @@ __cs_shown                                → shown
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )(                                        → (
 false                                     → false
 )                                         → )
@@ -17,7 +17,7 @@ __cs_started                              → started
 cs.receiver(                              → 
 cs.splice(                                →  [-semantic]
 (window)                                  → $window
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )                                         → 
 .                                         → .
 setTimeout                                → setTimeout
@@ -27,10 +27,10 @@ if ((cs.condition(                        → if (
 (                                         → 
 cs.splice(                                →  [-semantic]
 (again)                                   → $again
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )()                                       → ()
 ) &&                                      → 
-(cs.splice((again)) satisfies import("@backtickjs/core").ClientUnknown)()→ $again() [-semantic -completion -navigation -verification]
+(cs.splice((again)) satisfies typeof cs.ClientUnknown)()→ $again() [-semantic -completion -navigation -verification]
 ))                                        → ) 
 {\n                                       → {\n        
 cs.statement(                             → 
@@ -83,7 +83,7 @@ __cs_builds                               → builds
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )(                                        → (
 0                                         → 0
 )                                         → )

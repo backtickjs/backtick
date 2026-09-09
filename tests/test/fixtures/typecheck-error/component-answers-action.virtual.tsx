@@ -5,7 +5,7 @@ import { cs, state } from "@backtickjs/core";
 // without returning, has nothing to draw.
 async function Panel() {
   return cs.lift((() => {
-    const __cs_n = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(2));
+    const __cs_n = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(2));
     cs.statement(cs.receiver(__cs_n).write(3));
 })());
 }

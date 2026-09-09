@@ -11,4 +11,4 @@ import type { Spliceable } from "@backtickjs/core";
 // The cast is because `Spliceable` does not admit a function yet: the rule is
 // the bundler's, and the type has still to catch up — until it does, a script
 // cannot call one by name either.
-export default cs.lift(cs.const(() => cs.splice(((n: never) => n) as unknown as Spliceable) satisfies import("@backtickjs/core").ClientUnknown));
+export default cs.lift(cs.const(() => cs.splice(((n: never) => n) as unknown as Spliceable) satisfies typeof cs.ClientUnknown));

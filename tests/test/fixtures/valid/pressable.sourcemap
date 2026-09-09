@@ -1,92 +1,92 @@
-cs.lift((() => {\n                        → cs`{\n    
-const                                     → const 
-__cs_count                                → count
- = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(state)                                   → $state
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)(                                        → (
-0                                         → 0
-)                                         → )
-);                                        → ;
-\n                                        → \n    
-return cs.const(                          → return 
-<                                         → (\n      <
-button                                    → button
-                                          → \n        
-id                                        → id
-={cs.lift(                                → =
-"row"                                     → "row"
-)}                                        → 
-                                          → \n        
-style                                     → style
-={cs.lift(                                → =
-"display: flex; gap: 8px"                 → "display: flex; gap: 8px"
-)}                                        → 
-                                          → \n        
-onclick                                   → onclick
-={cs.lift(                                → ={
-() =>                                     → () => 
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-write                                     → write
-(                                         → (
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-)                                         → )
-)}                                        → }
->{cs.lift(                                → \n      >\n        
-<                                         → <
-span                                      → span
-                                          →  
-style                                     → style
-={cs.lift(                                → =
-"font-weight: 700"                        → "font-weight: 700"
-)}                                        → 
->{cs.lift(                                → >{
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
- >                                        →  > 
-0                                         → 0
- ?                                        →  ? 
-"\\u2611"                                 → "☑"
- :                                        →  : 
-"\\u2610"                                 → "☐"
-)}</                                      → }</
-span                                      → span
->                                         → >
-)}{cs.lift(                               → \n        
-<                                         → <
-span                                      → span
->{cs.lift(                                → >{
-"pressed "                                → "pressed "
- +                                        →  + 
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
- +                                        →  + 
-" times"                                  → " times"
-)}</                                      → }</
-span                                      → span
->                                         → >
-)}</                                      → \n      </
-button                                    → button
->                                         → >\n    )
-);                                        → ;
-\n})())                                   → \n  }`
+cs.lift((() => {\n                   → cs`{\n    
+const                                → const 
+__cs_count                           → count
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+0                                    → 0
+)                                    → )
+);                                   → ;
+\n                                   → \n    
+return cs.const(                     → return 
+<                                    → (\n      <
+button                               → button
+                                     → \n        
+id                                   → id
+={cs.lift(                           → =
+"row"                                → "row"
+)}                                   → 
+                                     → \n        
+style                                → style
+={cs.lift(                           → =
+"display: flex; gap: 8px"            → "display: flex; gap: 8px"
+)}                                   → 
+                                     → \n        
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+)                                    → )
+)}                                   → }
+>{cs.lift(                           → \n      >\n        
+<                                    → <
+span                                 → span
+                                     →  
+style                                → style
+={cs.lift(                           → =
+"font-weight: 700"                   → "font-weight: 700"
+)}                                   → 
+>{cs.lift(                           → >{
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ >                                   →  > 
+0                                    → 0
+ ?                                   →  ? 
+"\\u2611"                            → "☑"
+ :                                   →  : 
+"\\u2610"                            → "☐"
+)}</                                 → }</
+span                                 → span
+>                                    → >
+)}{cs.lift(                          → \n        
+<                                    → <
+span                                 → span
+>{cs.lift(                           → >{
+"pressed "                           → "pressed "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+" times"                             → " times"
+)}</                                 → }</
+span                                 → span
+>                                    → >
+)}</                                 → \n      </
+button                               → button
+>                                    → >\n    )
+);                                   → ;
+\n})())                              → \n  }`

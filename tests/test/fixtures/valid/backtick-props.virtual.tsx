@@ -12,11 +12,11 @@ import type { Prop } from "@backtickjs/core";
 // Built rather than written out: what a bundle looks like is the bundler's, and
 // a fixture that spelled one would pin the format twice.
 async function Greets({ who }: { who: Prop<string> }) {
-  return cs.lift(cs.const(<em>{cs.lift("hello " + (cs.splice((who)) satisfies import("@backtickjs/core").ClientUnknown))}</em>));
+  return cs.lift(cs.const(<em>{cs.lift("hello " + (cs.splice((who)) satisfies typeof cs.ClientUnknown))}</em>));
 }
 
 async function Counts({ count }: { count: Prop<number> }) {
-  return cs.lift(cs.const(<b>{cs.lift("count " + (cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown))}</b>));
+  return cs.lift(cs.const(<b>{cs.lift("count " + (cs.splice((count)) satisfies typeof cs.ClientUnknown))}</b>));
 }
 
 const greets = JSON.stringify(
@@ -24,7 +24,7 @@ const greets = JSON.stringify(
     who: string;
 }) => cs.splice((
     <Greets who={cs.lift(cs.const(cs.receiver(__cs_props).who))} />
-  )) satisfies import("@backtickjs/core").ClientUnknown))),
+  )) satisfies typeof cs.ClientUnknown))),
 );
 
 const counts = JSON.stringify(
@@ -32,10 +32,10 @@ const counts = JSON.stringify(
     count: number;
 }) => cs.splice((
     <Counts count={cs.lift(cs.const(cs.receiver(__cs_props).count))} />
-  )) satisfies import("@backtickjs/core").ClientUnknown))),
+  )) satisfies typeof cs.ClientUnknown))),
 );
 
 export default cs.lift((() => {
-    const __cs_count = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(0));
-    return cs.const(<div>{cs.lift(<backtick bundle={cs.lift(cs.splice((greets)) satisfies import("@backtickjs/core").ClientUnknown)} props={cs.lift({ who: "world" })}/>)}{cs.lift(<backtick bundle={cs.lift(cs.splice((counts)) satisfies import("@backtickjs/core").ClientUnknown)} props={cs.lift({ count: cs.receiver(__cs_count).read() })}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).write(cs.receiver(__cs_count).read() + 1))}>more</button>)}</div>);
+    const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
+    return cs.const(<div>{cs.lift(<backtick bundle={cs.lift(cs.splice((greets)) satisfies typeof cs.ClientUnknown)} props={cs.lift({ who: "world" })}/>)}{cs.lift(<backtick bundle={cs.lift(cs.splice((counts)) satisfies typeof cs.ClientUnknown)} props={cs.lift({ count: cs.receiver(__cs_count).read() })}/>)}{cs.lift(<button onclick={cs.lift(() => cs.receiver(__cs_count).write(cs.receiver(__cs_count).read() + 1))}>more</button>)}</div>);
 })());

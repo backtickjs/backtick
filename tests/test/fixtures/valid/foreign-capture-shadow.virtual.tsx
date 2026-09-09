@@ -14,11 +14,11 @@ import { cs, type Client } from "@backtickjs/core";
 function inner(carried: Client<number>): Client<number> {
   return cs.lift((() => {
     const __cs_base = cs.const(100);
-    return cs.const(cs.splice(cs.lift(cs.const(__cs_base + (cs.splice((carried)) satisfies import("@backtickjs/core").ClientUnknown)))) satisfies import("@backtickjs/core").ClientUnknown);
+    return cs.const(cs.splice(cs.lift(cs.const(__cs_base + (cs.splice((carried)) satisfies typeof cs.ClientUnknown)))) satisfies typeof cs.ClientUnknown);
 })());
 }
 
 export default cs.lift((() => {
     const __cs_base = cs.const(1);
-    return cs.const(cs.splice(inner(cs.lift(cs.const(__cs_base)))) satisfies import("@backtickjs/core").ClientUnknown);
+    return cs.const(cs.splice(inner(cs.lift(cs.const(__cs_base)))) satisfies typeof cs.ClientUnknown);
 })());

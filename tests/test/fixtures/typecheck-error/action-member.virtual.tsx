@@ -7,6 +7,6 @@ const action = cs.lift((() => {
 })());
 
 export default cs.lift((() => {
-    const __cs_list = cs.const(cs.splice([action]) satisfies import("@backtickjs/core").ClientUnknown);
+    const __cs_list = cs.const(cs.splice([action]) satisfies typeof cs.ClientUnknown);
     return cs.const(1);
 })());

@@ -18,9 +18,9 @@ import { window } from "@backtickjs/web-schema";
 // again. Without that, this fixture does not stop.
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_shown = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(false));
-    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => {
-        if ((cs.condition((cs.splice((again)) satisfies import("@backtickjs/core").ClientUnknown)()) && (cs.splice((again)) satisfies import("@backtickjs/core").ClientUnknown)())) {
+    const __cs_shown = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(false));
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
+        if ((cs.condition((cs.splice((again)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((again)) satisfies typeof cs.ClientUnknown)())) {
             cs.statement(cs.receiver(__cs_shown).write(true));
         }
     }, 0));
@@ -29,7 +29,7 @@ async function Held({ again }: { again: Prop<() => boolean> }) {
 }
 
 export default cs.lift((() => {
-    const __cs_builds = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(0));
+    const __cs_builds = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     return cs.const(<div>{cs.lift(<span>{cs.lift("builds " + cs.receiver(__cs_builds).read())}</span>)}{cs.lift(<section>{cs.lift(<Held again={cs.lift(() => {
         cs.statement(cs.receiver(__cs_builds).write(cs.receiver(__cs_builds).read() + 1));
         return cs.const(cs.receiver(__cs_builds).read() < 5);

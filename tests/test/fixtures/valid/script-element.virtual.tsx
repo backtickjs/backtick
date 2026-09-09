@@ -6,7 +6,7 @@ import { cs, state } from "@backtickjs/core";
 // written, not what it is.
 async function Card() {
   return cs.lift((() => {
-    const __cs_label = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)("hi"));
+    const __cs_label = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("hi"));
     const __cs_row = cs.const((__cs_size: number) => {
         const __cs_css = cs.const("font-size: " + __cs_size + "px");
         const __cs_press = cs.const(() => cs.receiver(__cs_label).write("held"));

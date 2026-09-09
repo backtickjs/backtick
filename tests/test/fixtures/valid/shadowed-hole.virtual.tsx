@@ -13,9 +13,9 @@ function wrap(fragment: Client<number>): Client<number> {
     const __cs_total = cs.const(1);
     {
         const __cs_total = cs.const(2);
-        return cs.const(__cs_total + (cs.splice((fragment)) satisfies import("@backtickjs/core").ClientUnknown));
+        return cs.const(__cs_total + (cs.splice((fragment)) satisfies typeof cs.ClientUnknown));
     }
 })());
 }
 
-export default cs.lift(cs.const((cs.splice(wrap(cs.lift(cs.const(10)))) satisfies import("@backtickjs/core").ClientUnknown) + (cs.splice(wrap(cs.lift(cs.const(20)))) satisfies import("@backtickjs/core").ClientUnknown)));
+export default cs.lift(cs.const((cs.splice(wrap(cs.lift(cs.const(10)))) satisfies typeof cs.ClientUnknown) + (cs.splice(wrap(cs.lift(cs.const(20)))) satisfies typeof cs.ClientUnknown)));

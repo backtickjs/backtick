@@ -5,5 +5,5 @@ import { cs } from "@backtickjs/core";
 const count = cs.lift(cs.const(1));
 
 export const script = cs.lift((() => {
-    cs.statement(cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown);
+    cs.statement(cs.splice((count)) satisfies typeof cs.ClientUnknown);
 })());

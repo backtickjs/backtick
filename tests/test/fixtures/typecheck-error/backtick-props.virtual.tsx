@@ -17,7 +17,7 @@ type Rows = (props: { count: number }) => BacktickElement;
 // a fixture that spelled one would pin the format twice. The claim about what
 // each takes is still written, because that is what is under test.
 async function Row({ count }: { count: Prop<number> }) {
-  return cs.lift(cs.const(<em>{cs.lift("rows " + (cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown))}</em>));
+  return cs.lift(cs.const(<em>{cs.lift("rows " + (cs.splice((count)) satisfies typeof cs.ClientUnknown))}</em>));
 }
 
 async function Nothing() {
@@ -29,7 +29,7 @@ const rows = JSON.stringify(
     count: number;
 }) => cs.splice((
     <Row count={cs.lift(cs.const(cs.receiver(__cs_props).count))} />
-  )) satisfies import("@backtickjs/core").ClientUnknown))),
+  )) satisfies typeof cs.ClientUnknown))),
 ) as SerializedBundle<Rows>;
 
 const empty = JSON.stringify(

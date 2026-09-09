@@ -1,83 +1,83 @@
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_label                                → label
-:                                         → : 
-string                                    → string
-) => {\n                                  → ) => {\n    
-return cs.const(                          → return 
-{                                         → { 
-label                                     → label
-:                                         → : 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(state)                                   → $state
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)(                                        → (
-__cs_label                                → label
-)                                         → )
- }                                        →  }
-);                                        → ;
-\n}                                       → \n  }
-))                                        → `
-cs.lift(cs.const(                         → cs`
-"font-size: 16px"                         → "font-size: 16px"
-))                                        → `
-cs.lift(cs.const(                         → cs`
-() => {\n                                 → () => {\n        
-const                                     → const 
-__cs_row                                  → row
- = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(build)                                   → $build
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)(                                        → (
-"one"                                     → "one"
-)                                         → )
-);                                        → ;
-\n                                        → \n        
-cs.statement(                             → 
-cs.receiver(                              → 
-cs.receiver(                              → 
-__cs_row                                  → row
-)                                         → 
-.                                         → .
-label                                     → label
-)                                         → 
-.                                         → .
-write                                     → write
-(                                         → (
-cs.receiver(                              → 
-cs.receiver(                              → 
-__cs_row                                  → row
-)                                         → 
-.                                         → .
-label                                     → label
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
- +                                        →  + 
-" !!!"                                    → " !!!"
-)                                         → )
-);                                        → ;
-\n}                                       → \n      }
-))                                        → `
-cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-cs.receiver(                              → 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(build)                                   → $build
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)(                                        → (
-"one"                                     → "one"
-)                                         → )
-)                                         → 
-.                                         → .
-label                                     → label
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
-))                                        → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_label                           → label
+:                                    → : 
+string                               → string
+) => {\n                             → ) => {\n    
+return cs.const(                     → return 
+{                                    → { 
+label                                → label
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+__cs_label                           → label
+)                                    → )
+ }                                   →  }
+);                                   → ;
+\n}                                  → \n  }
+))                                   → `
+cs.lift(cs.const(                    → cs`
+"font-size: 16px"                    → "font-size: 16px"
+))                                   → `
+cs.lift(cs.const(                    → cs`
+() => {\n                            → () => {\n        
+const                                → const 
+__cs_row                             → row
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(build)                              → $build
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+"one"                                → "one"
+)                                    → )
+);                                   → ;
+\n                                   → \n        
+cs.statement(                        → 
+cs.receiver(                         → 
+cs.receiver(                         → 
+__cs_row                             → row
+)                                    → 
+.                                    → .
+label                                → label
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.receiver(                         → 
+cs.receiver(                         → 
+__cs_row                             → row
+)                                    → 
+.                                    → .
+label                                → label
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+" !!!"                               → " !!!"
+)                                    → )
+);                                   → ;
+\n}                                  → \n      }
+))                                   → `
+cs.lift(cs.const(                    → cs`
+cs.receiver(                         → 
+cs.receiver(                         → 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(build)                              → $build
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+"one"                                → "one"
+)                                    → )
+)                                    → 
+.                                    → .
+label                                → label
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+))                                   → `

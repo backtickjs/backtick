@@ -10,7 +10,7 @@ parse                                     → parse
 (                                         → (
 cs.splice(                                →  [-semantic]
 (answered)                                → $answered
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )                                         → )
  as                                       →  as 
 {\n        rows: string[];\n        count: number;\n    }→ { rows: string[]; count: number }

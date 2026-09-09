@@ -17,4 +17,4 @@ import { version } from "@backtickjs/boundary";
 // carries the spliced value.
 // A value rather than a function, so the `.value` snapshot beside this is the
 // spliced value itself.
-export default cs.lift(cs.const(cs.splice((version)) satisfies import("@backtickjs/core").ClientUnknown));
+export default cs.lift(cs.const(cs.splice((version)) satisfies typeof cs.ClientUnknown));

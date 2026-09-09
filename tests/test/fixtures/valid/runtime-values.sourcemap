@@ -1,15 +1,15 @@
-cs.lift(cs.const(                         → cs`
-{                                         → ({ 
-list                                      → list
-:                                         → : 
-cs.splice(                                → ${ [-semantic]
-[1, "two", true, null]                    → [1, "two", true, null]
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-,                                         → , 
-obj                                       → obj
-:                                         → : 
-cs.splice(                                → ${ [-semantic]
-{ k: 3 }                                  → { k: 3 }
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
- }                                        →  })
-))                                        → `
+cs.lift(cs.const(                    → cs`
+{                                    → ({ 
+list                                 → list
+:                                    → : 
+cs.splice(                           → ${ [-semantic]
+[1, "two", true, null]               → [1, "two", true, null]
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+,                                    → , 
+obj                                  → obj
+:                                    → : 
+cs.splice(                           → ${ [-semantic]
+{ k: 3 }                             → { k: 3 }
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+ }                                   →  })
+))                                   → `

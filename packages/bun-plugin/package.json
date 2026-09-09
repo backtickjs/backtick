@@ -19,7 +19,6 @@
   },
   "peerDependencies": {
     "@backtickjs/compiler": "workspace:*",
-    "@backtickjs/core": "workspace:^",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

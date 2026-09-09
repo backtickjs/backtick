@@ -6,7 +6,7 @@ __cs_held                                 → held
 (                                         → 
 cs.splice(                                →  [-semantic]
 (state)                                   → $state
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )(                                        → (
 "waiting"                                 → "waiting"
 )                                         → )
@@ -16,7 +16,7 @@ cs.statement(                             →
 (                                         → 
 cs.splice(                                →  [-semantic]
 (fetch)                                   → $fetch
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 )(                                        → (\n    
 "/cases/built-ins/Math/trunc/Math.trunc_Success"→ "/cases/built-ins/Math/trunc/Math.trunc_Success"
 ,                                         → ,\n    

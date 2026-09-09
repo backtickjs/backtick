@@ -8,10 +8,10 @@ const beep: Client<void> = cs.lift((() => {
 })());
 
 const onTap: Client<(id: number) => void> = cs.lift(cs.const((__cs_id: number) => {
-    cs.statement(cs.splice((beep)) satisfies import("@backtickjs/core").ClientUnknown);
+    cs.statement(cs.splice((beep)) satisfies typeof cs.ClientUnknown);
 }));
 
 export default cs.lift((() => {
-    const __cs_handlers = cs.const({ tap: cs.splice((onTap)) satisfies import("@backtickjs/core").ClientUnknown, hold: cs.splice((onTap)) satisfies import("@backtickjs/core").ClientUnknown });
+    const __cs_handlers = cs.const({ tap: cs.splice((onTap)) satisfies typeof cs.ClientUnknown, hold: cs.splice((onTap)) satisfies typeof cs.ClientUnknown });
     return cs.const(__cs_handlers);
 })());

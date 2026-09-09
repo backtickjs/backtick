@@ -10,7 +10,7 @@ import type { ReadonlyState } from "@backtickjs/core";
 // bug this pins.
 async function Rows() {
   return cs.lift((() => {
-    const __cs_names = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<string[]>(["a", "b", "c"]));
+    const __cs_names = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>(["a", "b", "c"]));
     const __cs_rotate = cs.const(() => {
         cs.statement(cs.receiver(__cs_names).update(__cs_held => [cs.receiver(__cs_held)[2], cs.receiver(__cs_held)[0], cs.receiver(__cs_held)[1]]));
     });

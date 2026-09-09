@@ -3,4 +3,4 @@ import { cs } from "@backtickjs/core";
 // No truthiness: a ternary's condition must be boolean, like an `if`'s.
 const count = cs.lift(cs.const(1));
 
-export default cs.lift(cs.const((cs.condition(cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown) && cs.splice((count)) satisfies import("@backtickjs/core").ClientUnknown) ? "some" : "none"));
+export default cs.lift(cs.const((cs.condition(cs.splice((count)) satisfies typeof cs.ClientUnknown) && cs.splice((count)) satisfies typeof cs.ClientUnknown) ? "some" : "none"));

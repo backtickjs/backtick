@@ -7,4 +7,4 @@ async function Other() {
 
 const held = JSON.stringify(await bundler.run(<Other />));
 
-export default cs.lift(cs.const(<div>{cs.lift(<span>before</span>)}{cs.lift(<backtick bundle={cs.lift(cs.splice((held)) satisfies import("@backtickjs/core").ClientUnknown)}/>)}{cs.lift(<backtick bundle={cs.lift(null)}/>)}{cs.lift(<span>after</span>)}</div>));
+export default cs.lift(cs.const(<div>{cs.lift(<span>before</span>)}{cs.lift(<backtick bundle={cs.lift(cs.splice((held)) satisfies typeof cs.ClientUnknown)}/>)}{cs.lift(<backtick bundle={cs.lift(null)}/>)}{cs.lift(<span>after</span>)}</div>));

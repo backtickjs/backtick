@@ -8,12 +8,12 @@ const ping = cs.lift(cs.const(() => {
 }));
 
 const script = cs.lift((() => {
-    const __cs_x = cs.const((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)());
+    const __cs_x = cs.const((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
     return cs.const(1);
 })());
 
 const action = cs.lift((() => {
-    const __cs_x = cs.const((cs.splice((ping)) satisfies import("@backtickjs/core").ClientUnknown)());
+    const __cs_x = cs.const((cs.splice((ping)) satisfies typeof cs.ClientUnknown)());
 })());
 
 // An error inside a checked initializer reports once: the duplicate copy
@@ -23,6 +23,6 @@ const label = cs.lift(cs.const((__cs_text: string) => {
 }));
 
 const wrongArgument = cs.lift((() => {
-    const __cs_x = cs.const((cs.splice((label)) satisfies import("@backtickjs/core").ClientUnknown)(true));
+    const __cs_x = cs.const((cs.splice((label)) satisfies typeof cs.ClientUnknown)(true));
     return cs.const(1);
 })());

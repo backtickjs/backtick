@@ -1,21 +1,21 @@
-cs.lift(cs.const(                         → cs`
-cs.splice(                                →  [-semantic]
-(rows)                                    → $rows
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_row                                  → row
-:                                         → : 
-number                                    → number
-) =>                                      → ) => 
-cs.splice(                                → ${ [-semantic]
-(<span>{                                  → (<span>{
-cs.lift(cs.const(                         → cs`
-"row "                                    → "row "
- +                                        →  + 
-__cs_row                                  → row
-))                                        → `
-}</span>)                                 → }</span>)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-))                                        → `
+cs.lift(cs.const(                    → cs`
+cs.splice(                           →  [-semantic]
+(rows)                               → $rows
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_row                             → row
+:                                    → : 
+number                               → number
+) =>                                 → ) => 
+cs.splice(                           → ${ [-semantic]
+(<span>{                             → (<span>{
+cs.lift(cs.const(                    → cs`
+"row "                               → "row "
+ +                                   →  + 
+__cs_row                             → row
+))                                   → `
+}</span>)                            → }</span>)
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+))                                   → `

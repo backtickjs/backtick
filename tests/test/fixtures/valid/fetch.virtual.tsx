@@ -6,8 +6,8 @@ import { cs, fetch, state, type Response } from "@backtickjs/core";
 // An arrow rather than a call, so what this pins is the bundling and the
 // typechecking: nothing is asked of a network to snapshot a value.
 export default cs.lift(cs.const(() => {
-    const __cs_held = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)("waiting"));
-    cs.statement((cs.splice((fetch)) satisfies import("@backtickjs/core").ClientUnknown)("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: Response) => {
+    const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)("waiting"));
+    cs.statement((cs.splice((fetch)) satisfies typeof cs.ClientUnknown)("/cases/built-ins/Math/trunc/Math.trunc_Success", (__cs_response: Response) => {
         if (!(cs.condition(cs.receiver(__cs_response).ok) && cs.receiver(__cs_response).ok)) {
             cs.statement(cs.receiver(__cs_held).write("answered " + cs.receiver(__cs_response).status));
         }

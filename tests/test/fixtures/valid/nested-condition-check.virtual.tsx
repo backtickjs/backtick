@@ -14,4 +14,4 @@ const gate: Client<(a: boolean, b: boolean) => string> = cs.lift(cs.const((__cs_
     return cs.const("dropped");
 }));
 
-export default cs.lift(cs.const({ both: (cs.splice((gate)) satisfies import("@backtickjs/core").ClientUnknown)(true, true), one: (cs.splice((gate)) satisfies import("@backtickjs/core").ClientUnknown)(true, false) }));
+export default cs.lift(cs.const({ both: (cs.splice((gate)) satisfies typeof cs.ClientUnknown)(true, true), one: (cs.splice((gate)) satisfies typeof cs.ClientUnknown)(true, false) }));

@@ -8,6 +8,6 @@ import type { JSX } from "@backtickjs/web-schema";
 // handler with `#slot`.
 const script: Client<() => JSX.Element> = cs.lift(cs.const(() => {
     const __cs_x = cs.const(1);
-    return cs.const(cs.splice((<span onclick={cs.lift(cs.const(() => __cs_x))} />)) satisfies import("@backtickjs/core").ClientUnknown);
+    return cs.const(cs.splice((<span onclick={cs.lift(cs.const(() => __cs_x))} />)) satisfies typeof cs.ClientUnknown);
 }));
 export default script;

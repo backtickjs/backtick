@@ -1,25 +1,25 @@
-cs.lift(cs.const(                         → cs`
-(                                         → 
-cs.splice(                                →  [-semantic]
-(lhs)                                     → $lhs
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-) +                                       →  + 
-2                                         → 2
-))                                        → `
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_foo$                                 → foo$
- = cs.const(                              →  = 
-1                                         → 1
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-cs.splice(                                → ${ [-semantic]
-add(                                      → add(
-cs.lift(cs.const(                         → cs`
-__cs_foo$                                 → foo$
-))                                        → `
-)                                         → )
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift(cs.const(                    → cs`
+(                                    → 
+cs.splice(                           →  [-semantic]
+(lhs)                                → $lhs
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+) +                                  →  + 
+2                                    → 2
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_foo$                            → foo$
+ = cs.const(                         →  = 
+1                                    → 1
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+cs.splice(                           → ${ [-semantic]
+add(                                 → add(
+cs.lift(cs.const(                    → cs`
+__cs_foo$                            → foo$
+))                                   → `
+)                                    → )
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+);                                   → ;
+\n})())                              → \n}`

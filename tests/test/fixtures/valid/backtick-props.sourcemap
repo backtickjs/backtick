@@ -1,156 +1,156 @@
-cs.lift(cs.const(                         → cs`
-<                                         → <
-em                                        → em
->{cs.lift(                                → >{
-"hello "                                  → "hello "
- + (                                      →  + 
-cs.splice(                                →  [-semantic]
-(who)                                     → $who
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-)}</                                      → }</
-em                                        → em
->                                         → >
-))                                        → `
-cs.lift(cs.const(                         → cs`
-<                                         → <
-b                                         → b
->{cs.lift(                                → >{
-"count "                                  → "count "
- + (                                      →  + 
-cs.splice(                                →  [-semantic]
-(count)                                   → $count
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-)}</                                      → }</
-b                                         → b
->                                         → >
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n    who: string;\n}                    → { who: string }
-) =>                                      → ) => 
-cs.splice(                                → ${ [-semantic]
-(\n    <Greets who={                      → (\n    <Greets who={
-cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-__cs_props                                → props
-)                                         → 
-.                                         → .
-who                                       → who
-))                                        → `
-} />\n  )                                 → } />\n  )
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n    count: number;\n}                  → { count: number }
-) =>                                      → ) => 
-cs.splice(                                → ${ [-semantic]
-(\n    <Counts count={                    → (\n    <Counts count={
-cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-__cs_props                                → props
-)                                         → 
-.                                         → .
-count                                     → count
-))                                        → `
-} />\n  )                                 → } />\n  )
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-))                                        → `
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_count                                → count
- = cs.const(                              →  = 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(state)                                   → $state
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)(                                        → (
-0                                         → 0
-)                                         → )
-);                                        → ;
-\n                                        → \n\n  
-return cs.const(                          → return 
-<                                         → (\n    <
-div                                       → div
->{cs.lift(                                → >\n      
-<                                         → <
-backtick                                  → backtick
-                                          →  
-bundle                                    → bundle
-={cs.lift(                                → ={
-cs.splice(                                →  [-semantic]
-(greets)                                  → $greets
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)}                                        → }
-                                          →  
-props                                     → props
-={cs.lift(                                → ={
-{                                         → { 
-who                                       → who
-:                                         → : 
-"world"                                   → "world"
- }                                        →  }
-)}                                        → }
-/>                                        →  />
-)}{cs.lift(                               → \n      
-<                                         → <
-backtick                                  → backtick
-                                          →  
-bundle                                    → bundle
-={cs.lift(                                → ={
-cs.splice(                                →  [-semantic]
-(counts)                                  → $counts
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)}                                        → }
-                                          →  
-props                                     → props
-={cs.lift(                                → ={
-{                                         → { 
-count                                     → count
-:                                         → : 
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
- }                                        →  }
-)}                                        → }
-/>                                        →  />
-)}{cs.lift(                               → \n      
-<                                         → <
-button                                    → button
-                                          →  
-onclick                                   → onclick
-={cs.lift(                                → ={
-() =>                                     → () => 
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-write                                     → write
-(                                         → (
-cs.receiver(                              → 
-__cs_count                                → count
-)                                         → 
-.                                         → .
-read                                      → read
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-)                                         → )
-)}                                        → }
->more</                                   → >more</
-button                                    → button
->                                         → >
-)}</                                      → \n    </
-div                                       → div
->                                         → >\n  )
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift(cs.const(                    → cs`
+<                                    → <
+em                                   → em
+>{cs.lift(                           → >{
+"hello "                             → "hello "
+ + (                                 →  + 
+cs.splice(                           →  [-semantic]
+(who)                                → $who
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+)}</                                 → }</
+em                                   → em
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+<                                    → <
+b                                    → b
+>{cs.lift(                           → >{
+"count "                             → "count "
+ + (                                 →  + 
+cs.splice(                           →  [-semantic]
+(count)                              → $count
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+)}</                                 → }</
+b                                    → b
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n    who: string;\n}               → { who: string }
+) =>                                 → ) => 
+cs.splice(                           → ${ [-semantic]
+(\n    <Greets who={                 → (\n    <Greets who={
+cs.lift(cs.const(                    → cs`
+cs.receiver(                         → 
+__cs_props                           → props
+)                                    → 
+.                                    → .
+who                                  → who
+))                                   → `
+} />\n  )                            → } />\n  )
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n    count: number;\n}             → { count: number }
+) =>                                 → ) => 
+cs.splice(                           → ${ [-semantic]
+(\n    <Counts count={               → (\n    <Counts count={
+cs.lift(cs.const(                    → cs`
+cs.receiver(                         → 
+__cs_props                           → props
+)                                    → 
+.                                    → .
+count                                → count
+))                                   → `
+} />\n  )                            → } />\n  )
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_count                           → count
+ = cs.const(                         →  = 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(state)                              → $state
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+0                                    → 0
+)                                    → )
+);                                   → ;
+\n                                   → \n\n  
+return cs.const(                     → return 
+<                                    → (\n    <
+div                                  → div
+>{cs.lift(                           → >\n      
+<                                    → <
+backtick                             → backtick
+                                     →  
+bundle                               → bundle
+={cs.lift(                           → ={
+cs.splice(                           →  [-semantic]
+(greets)                             → $greets
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)}                                   → }
+                                     →  
+props                                → props
+={cs.lift(                           → ={
+{                                    → { 
+who                                  → who
+:                                    → : 
+"world"                              → "world"
+ }                                   →  }
+)}                                   → }
+/>                                   →  />
+)}{cs.lift(                          → \n      
+<                                    → <
+backtick                             → backtick
+                                     →  
+bundle                               → bundle
+={cs.lift(                           → ={
+cs.splice(                           →  [-semantic]
+(counts)                             → $counts
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)}                                   → }
+                                     →  
+props                                → props
+={cs.lift(                           → ={
+{                                    → { 
+count                                → count
+:                                    → : 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ }                                   →  }
+)}                                   → }
+/>                                   →  />
+)}{cs.lift(                          → \n      
+<                                    → <
+button                               → button
+                                     →  
+onclick                              → onclick
+={cs.lift(                           → ={
+() =>                                → () => 
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+write                                → write
+(                                    → (
+cs.receiver(                         → 
+__cs_count                           → count
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+)                                    → )
+)}                                   → }
+>more</                              → >more</
+button                               → button
+>                                    → >
+)}</                                 → \n    </
+div                                  → div
+>                                    → >\n  )
+);                                   → ;
+\n})())                              → \n}`

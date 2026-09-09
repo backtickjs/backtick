@@ -7,7 +7,7 @@ import { cs, state } from "@backtickjs/core";
 // `EventTarget`, which is what makes reading a field's value sayable — the DOM
 // expects a cast there, and this language has none.
 export default cs.lift((() => {
-    const __cs_said = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(""));
+    const __cs_said = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(""));
     return cs.const(<form onsubmit={cs.lift(__cs_event => {
         cs.statement(cs.receiver(__cs_event).preventDefault());
         cs.statement(cs.receiver(__cs_said).write(cs.receiver(__cs_event).type + " " + cs.receiver(__cs_event).cancelable));

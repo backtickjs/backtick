@@ -1,44 +1,44 @@
-cs.lift(cs.const(                         → cs`
-<                                         → <
-em                                        → em
->{cs.lift(                                → >{
-"rows "                                   → "rows "
- + (                                      →  + 
-cs.splice(                                →  [-semantic]
-(count)                                   → $count
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
-)                                         → 
-)}</                                      → }</
-em                                        → em
->                                         → >
-))                                        → `
-cs.lift(cs.const(                         → cs`
-<                                         → <
-em                                        → em
->{cs.lift(                                → >{
-"nothing to hand it"                      → "nothing to hand it"
-)}</                                      → }</
-em                                        → em
->                                         → >
-))                                        → `
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_props                                → props
-:                                         → : 
-{\n    count: number;\n}                  → { count: number }
-) =>                                      → ) => 
-cs.splice(                                → ${ [-semantic]
-(\n    <Row count={                       → (\n    <Row count={
-cs.lift(cs.const(                         → cs`
-cs.receiver(                              → 
-__cs_props                                → props
-)                                         → 
-.                                         → .
-count                                     → count
-))                                        → `
-} />\n  )                                 → } />\n  )
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-))                                        → `
-cs.lift(cs.const(                         → cs`
-1                                         → 1
-))                                        → `
+cs.lift(cs.const(                    → cs`
+<                                    → <
+em                                   → em
+>{cs.lift(                           → >{
+"rows "                              → "rows "
+ + (                                 →  + 
+cs.splice(                           →  [-semantic]
+(count)                              → $count
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+)}</                                 → }</
+em                                   → em
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+<                                    → <
+em                                   → em
+>{cs.lift(                           → >{
+"nothing to hand it"                 → "nothing to hand it"
+)}</                                 → }</
+em                                   → em
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n    count: number;\n}             → { count: number }
+) =>                                 → ) => 
+cs.splice(                           → ${ [-semantic]
+(\n    <Row count={                  → (\n    <Row count={
+cs.lift(cs.const(                    → cs`
+cs.receiver(                         → 
+__cs_props                           → props
+)                                    → 
+.                                    → .
+count                                → count
+))                                   → `
+} />\n  )                            → } />\n  )
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+))                                   → `
+cs.lift(cs.const(                    → cs`
+1                                    → 1
+))                                   → `

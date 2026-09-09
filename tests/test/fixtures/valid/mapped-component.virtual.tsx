@@ -18,8 +18,8 @@ const rows = [1, 2, 3];
 
 export default (
   <div>
-    <For each={cs.lift(cs.const(cs.splice((rows)) satisfies import("@backtickjs/core").ClientUnknown))}>
-      {cs.lift(cs.const((__cs_row: number) => cs.splice((<span>{cs.lift(cs.const("row " + __cs_row))}</span>)) satisfies import("@backtickjs/core").ClientUnknown))}
+    <For each={cs.lift(cs.const(cs.splice((rows)) satisfies typeof cs.ClientUnknown))}>
+      {cs.lift(cs.const((__cs_row: number) => cs.splice((<span>{cs.lift(cs.const("row " + __cs_row))}</span>)) satisfies typeof cs.ClientUnknown))}
     </For>
   </div>
 );

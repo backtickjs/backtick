@@ -14,4 +14,4 @@ const call = cs.lift(cs.const((__cs_cb: (() => number) | undefined) => {
     return cs.const(__cs_cb?.() ?? 0);
 }));
 
-export default cs.lift(cs.const({ named: (cs.splice((greet)) satisfies import("@backtickjs/core").ClientUnknown)("hi"), explicit: (cs.splice((greet)) satisfies import("@backtickjs/core").ClientUnknown)(undefined), supplied: (cs.splice((call)) satisfies import("@backtickjs/core").ClientUnknown)(cs.splice((double)) satisfies import("@backtickjs/core").ClientUnknown), fallback: (cs.splice((call)) satisfies import("@backtickjs/core").ClientUnknown)(undefined) }));
+export default cs.lift(cs.const({ named: (cs.splice((greet)) satisfies typeof cs.ClientUnknown)("hi"), explicit: (cs.splice((greet)) satisfies typeof cs.ClientUnknown)(undefined), supplied: (cs.splice((call)) satisfies typeof cs.ClientUnknown)(cs.splice((double)) satisfies typeof cs.ClientUnknown), fallback: (cs.splice((call)) satisfies typeof cs.ClientUnknown)(undefined) }));

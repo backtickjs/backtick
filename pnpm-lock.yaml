@@ -456,10 +456,6 @@ importers:
         version: 6.0.3
 
   packages/bun-plugin:
-    dependencies:
-      '@backtickjs/core':
-        specifier: workspace:^
-        version: link:../core
     devDependencies:
       '@backtickjs/compiler':
         specifier: workspace:*
@@ -770,10 +766,6 @@ importers:
         version: 6.0.3
 
   packages/tspatch-plugin:
-    dependencies:
-      '@backtickjs/core':
-        specifier: workspace:^
-        version: link:../core
     devDependencies:
       '@backtickjs/compiler':
         specifier: workspace:*

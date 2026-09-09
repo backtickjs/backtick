@@ -13,12 +13,12 @@ import { cs, type Client } from "@backtickjs/core";
 // a wrong answer would show up.
 function wrap(start: Client<number>): Client<number> {
   return cs.lift((() => {
-    const __cs_outer = cs.const(cs.splice((start)) satisfies import("@backtickjs/core").ClientUnknown);
+    const __cs_outer = cs.const(cs.splice((start)) satisfies typeof cs.ClientUnknown);
     return cs.const(cs.splice(cs.lift((() => {
     const __cs_middle = cs.const(10);
-    return cs.const(__cs_middle + (cs.splice(cs.lift(cs.const(__cs_outer))) satisfies import("@backtickjs/core").ClientUnknown));
-})())) satisfies import("@backtickjs/core").ClientUnknown);
+    return cs.const(__cs_middle + (cs.splice(cs.lift(cs.const(__cs_outer))) satisfies typeof cs.ClientUnknown));
+})())) satisfies typeof cs.ClientUnknown);
 })());
 }
 
-export default cs.lift(cs.const((cs.splice(wrap(cs.lift(cs.const(1)))) satisfies import("@backtickjs/core").ClientUnknown) + (cs.splice(wrap(cs.lift(cs.const(2)))) satisfies import("@backtickjs/core").ClientUnknown)));
+export default cs.lift(cs.const((cs.splice(wrap(cs.lift(cs.const(1)))) satisfies typeof cs.ClientUnknown) + (cs.splice(wrap(cs.lift(cs.const(2)))) satisfies typeof cs.ClientUnknown)));

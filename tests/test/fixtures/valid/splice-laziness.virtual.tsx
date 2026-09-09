@@ -10,7 +10,7 @@ import { cs, type Client } from "@backtickjs/core";
 function guard(fragment: Client<string>): Client<(flag: boolean) => string> {
   return cs.lift(cs.const((__cs_flag: boolean) => {
     if ((cs.condition(__cs_flag) && __cs_flag)) {
-        return cs.const(cs.splice((fragment)) satisfies import("@backtickjs/core").ClientUnknown);
+        return cs.const(cs.splice((fragment)) satisfies typeof cs.ClientUnknown);
     }
     return cs.const("skipped");
 }));
@@ -21,4 +21,4 @@ const broken = cs.lift((() => {
     throw "the guarded fragment must never evaluate";
 })());
 
-export default cs.lift(cs.const({ taken: (cs.splice(guard(ok)) satisfies import("@backtickjs/core").ClientUnknown)(true), skipped: (cs.splice(guard(broken)) satisfies import("@backtickjs/core").ClientUnknown)(false) }));
+export default cs.lift(cs.const({ taken: (cs.splice(guard(ok)) satisfies typeof cs.ClientUnknown)(true), skipped: (cs.splice(guard(broken)) satisfies typeof cs.ClientUnknown)(false) }));

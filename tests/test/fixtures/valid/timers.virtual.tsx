@@ -17,8 +17,8 @@ import { window } from "@backtickjs/web-schema";
 // either clear cancels either kind, which is why one of them is reached through
 // the other's id.
 export default cs.lift((() => {
-    const __cs_stop = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).clearInterval);
-    const __cs_repeating = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setInterval(() => 0, 1000));
+    const __cs_stop = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).clearInterval);
+    const __cs_repeating = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setInterval(() => 0, 1000));
     cs.statement(__cs_stop(__cs_repeating));
-    cs.statement(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).clearTimeout(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => 0, 1000)));
+    cs.statement(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).clearTimeout(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => 0, 1000)));
 })());

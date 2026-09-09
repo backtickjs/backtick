@@ -1,17 +1,17 @@
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_a                                    → a
- = cs.const(                              →  = 
-cs.splice(                                →  [-semantic]
-(one)                                     → $one
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
- as                                       →  as 
-void                                      → void
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-""                                        → ""
- +                                        →  + 
-__cs_a                                    → a
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_a                               → a
+ = cs.const(                         →  = 
+cs.splice(                           →  [-semantic]
+(one)                                → $one
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+ as                                  →  as 
+void                                 → void
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+""                                   → ""
+ +                                   →  + 
+__cs_a                               → a
+);                                   → ;
+\n})())                              → \n}`

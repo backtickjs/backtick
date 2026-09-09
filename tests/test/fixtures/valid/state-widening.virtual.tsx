@@ -19,12 +19,12 @@ enum Tone {
 
 async function Widened() {
   return cs.lift((() => {
-    const __cs_flag = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(true));
-    const __cs_tone = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(cs.splice(Tone.Warm) satisfies import("@backtickjs/core").ClientUnknown));
-    const __cs_step = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<() => number>(() => 0));
+    const __cs_flag = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(true));
+    const __cs_tone = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(cs.splice(Tone.Warm) satisfies typeof cs.ClientUnknown));
+    const __cs_step = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<() => number>(() => 0));
     return cs.const(<span onclick={cs.lift(() => {
         cs.statement(cs.receiver(__cs_flag).write(false));
-        cs.statement(cs.receiver(__cs_tone).write(cs.splice(Tone.Cool) satisfies import("@backtickjs/core").ClientUnknown));
+        cs.statement(cs.receiver(__cs_tone).write(cs.splice(Tone.Cool) satisfies typeof cs.ClientUnknown));
         cs.statement(cs.receiver(__cs_step).write(() => 1));
     })}>{cs.lift(cs.receiver(__cs_flag).read() + " " + cs.receiver(__cs_tone).read() + " " + cs.receiver(__cs_step).read()())}</span>);
 })());

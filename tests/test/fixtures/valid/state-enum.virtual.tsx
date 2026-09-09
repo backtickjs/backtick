@@ -13,13 +13,13 @@ enum Color {
 }
 
 const label: Client<(c: Color) => string> = cs.lift(cs.const((__cs_c: Color) => {
-    return cs.const(__cs_c === cs.splice(Color.Blue) satisfies import("@backtickjs/core").ClientUnknown ? "blue" : "red");
+    return cs.const(__cs_c === cs.splice(Color.Blue) satisfies typeof cs.ClientUnknown ? "blue" : "red");
 }));
 
 async function Swatch() {
   return cs.lift((() => {
-    const __cs_held = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(cs.splice(Color.Red) satisfies import("@backtickjs/core").ClientUnknown));
-    return cs.const(<span onclick={cs.lift(() => cs.receiver(__cs_held).write(cs.splice(Color.Blue) satisfies import("@backtickjs/core").ClientUnknown))}>{cs.lift((cs.splice((label)) satisfies import("@backtickjs/core").ClientUnknown)(cs.receiver(__cs_held).read()))}</span>);
+    const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(cs.splice(Color.Red) satisfies typeof cs.ClientUnknown));
+    return cs.const(<span onclick={cs.lift(() => cs.receiver(__cs_held).write(cs.splice(Color.Blue) satisfies typeof cs.ClientUnknown))}>{cs.lift((cs.splice((label)) satisfies typeof cs.ClientUnknown)(cs.receiver(__cs_held).read()))}</span>);
 })());
 }
 

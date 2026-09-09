@@ -1,7 +1,7 @@
 cs.lift(cs.const(                         → cs`
 cs.splice(                                →  [-semantic]
 (orders)                                  → $orders
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 ))                                        → `
 cs.lift(cs.const(                         → cs`
 (                                         → (
@@ -79,7 +79,7 @@ __cs_item                                 → item
 qty                                       → qty
 ))                                        → `
 }</span>)                                 → }</span>)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
+) satisfies typeof cs.ClientUnknown       → } [-semantic]
 ))                                        → `
 }\n            </For>\n            <span>{→ }\n            </For>\n            <span>{
 cs.lift(cs.const(                         → cs`
@@ -92,5 +92,5 @@ __cs_order                                → order
 total                                     → total
 ))                                        → `
 }</span>\n          </div>\n        )     → }</span>\n          </div>\n        )
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
+) satisfies typeof cs.ClientUnknown       → } [-semantic]
 ))                                        → `

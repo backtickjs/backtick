@@ -7,5 +7,5 @@ const greet = cs.lift(cs.const((__cs_name: string | undefined) => {
 }));
 
 export default cs.lift((() => {
-    return cs.const((cs.splice((greet)) satisfies import("@backtickjs/core").ClientUnknown)());
+    return cs.const((cs.splice((greet)) satisfies typeof cs.ClientUnknown)());
 })());

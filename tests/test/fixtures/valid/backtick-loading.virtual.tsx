@@ -7,6 +7,6 @@ import { cs, state } from "@backtickjs/core";
 // type and freeze the drawing — the script body runs once, so the loading state
 // would never resolve.
 export default cs.lift((() => {
-    const __cs_held = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<string | null>(null));
+    const __cs_held = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string | null>(null));
     return cs.const(<div>{cs.lift(cs.receiver(__cs_held).read() === null ? <span>loading…</span> : <backtick bundle={cs.lift(cs.receiver(__cs_held).read())}/>)}</div>);
 })());

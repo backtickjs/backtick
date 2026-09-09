@@ -22,16 +22,16 @@ const answer = JSON.stringify(await bundler.run(<Answer />));
 
 async function Waiting({ ask }: { ask: Prop<() => string> }) {
   return cs.lift((() => {
-    const __cs_drawn = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(""));
-    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => cs.receiver(__cs_drawn).write((cs.splice((ask)) satisfies import("@backtickjs/core").ClientUnknown)()), 0));
+    const __cs_drawn = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(""));
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => cs.receiver(__cs_drawn).write((cs.splice((ask)) satisfies typeof cs.ClientUnknown)()), 0));
     return cs.const(<backtick bundle={cs.lift(cs.receiver(__cs_drawn).read())}/>);
 })());
 }
 
 export default cs.lift((() => {
-    const __cs_asked = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(0));
+    const __cs_asked = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     return cs.const(<div>{cs.lift(<span>{cs.lift("asked " + cs.receiver(__cs_asked).read())}</span>)}{cs.lift(<Waiting ask={cs.lift(() => {
         cs.statement(cs.receiver(__cs_asked).write(cs.receiver(__cs_asked).read() + 1));
-        return cs.const(cs.receiver(__cs_asked).read() > 4 ? "" : cs.splice((answer)) satisfies import("@backtickjs/core").ClientUnknown);
+        return cs.const(cs.receiver(__cs_asked).read() > 4 ? "" : cs.splice((answer)) satisfies typeof cs.ClientUnknown);
     })}/>)}</div>);
 })());

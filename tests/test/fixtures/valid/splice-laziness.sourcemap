@@ -13,7 +13,7 @@ __cs_flag                                 → flag [-semantic -completion -navig
 return cs.const(                          → return 
 cs.splice(                                →  [-semantic]
 (fragment)                                → $fragment
-) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
+) satisfies typeof cs.ClientUnknown       →  [-semantic]
 );                                        → ;
 \n    }                                   → \n    }
 \n                                        → \n    
@@ -37,7 +37,7 @@ taken                                     → taken
 (                                         → 
 cs.splice(                                → ${ [-semantic]
 guard(ok)                                 → guard(ok)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
+) satisfies typeof cs.ClientUnknown       → } [-semantic]
 )(                                        → (
 true                                      → true
 )                                         → )
@@ -47,7 +47,7 @@ skipped                                   → skipped
 (                                         → 
 cs.splice(                                → ${ [-semantic]
 guard(broken)                             → guard(broken)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
+) satisfies typeof cs.ClientUnknown       → } [-semantic]
 )(                                        → (
 false                                     → false
 )                                         → )

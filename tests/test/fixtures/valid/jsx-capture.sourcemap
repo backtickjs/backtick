@@ -1,20 +1,20 @@
-cs.lift(cs.const(                         → cs`
-() => {\n                                 → () => {\n  
-const                                     → const 
-__cs_x                                    → x
- = cs.const(                              →  = 
-1                                         → 1
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-cs.splice(                                → ${ [-semantic]
-(<span onclick={                          → (<span onclick={
-cs.lift(cs.const(                         → cs`
-() =>                                     → () => 
-__cs_x                                    → x
-))                                        → `
-} />)                                     → } />)
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-);                                        → ;
-\n}                                       → \n}
-))                                        → `
+cs.lift(cs.const(                    → cs`
+() => {\n                            → () => {\n  
+const                                → const 
+__cs_x                               → x
+ = cs.const(                         →  = 
+1                                    → 1
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+cs.splice(                           → ${ [-semantic]
+(<span onclick={                     → (<span onclick={
+cs.lift(cs.const(                    → cs`
+() =>                                → () => 
+__cs_x                               → x
+))                                   → `
+} />)                                → } />)
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+);                                   → ;
+\n}                                  → \n}
+))                                   → `

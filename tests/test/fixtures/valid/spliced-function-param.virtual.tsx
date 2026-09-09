@@ -6,5 +6,5 @@ import { cs } from "@backtickjs/core";
 // currency, and passes through the annotation untouched.
 export default cs.lift((() => {
     const __cs_apply = cs.const((__cs_f: () => number) => __cs_f() + 1);
-    return cs.const(__cs_apply(cs.splice(cs.lift(cs.const(() => 2))) satisfies import("@backtickjs/core").ClientUnknown));
+    return cs.const(__cs_apply(cs.splice(cs.lift(cs.const(() => 2))) satisfies typeof cs.ClientUnknown));
 })());

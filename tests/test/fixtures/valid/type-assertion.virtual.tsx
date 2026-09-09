@@ -11,7 +11,7 @@ const answered = '{"rows":["one","two"],"count":2}';
 // means to read `.rows` off what came back has no other way to say what it is
 // looking at.
 export default cs.lift((() => {
-    const __cs_page = cs.const(cs.receiver(JSON).parse(cs.splice((answered)) satisfies import("@backtickjs/core").ClientUnknown) as {
+    const __cs_page = cs.const(cs.receiver(JSON).parse(cs.splice((answered)) satisfies typeof cs.ClientUnknown) as {
         rows: string[];
         count: number;
     });

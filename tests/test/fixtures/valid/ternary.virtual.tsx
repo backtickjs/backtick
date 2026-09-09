@@ -6,4 +6,4 @@ const pick = cs.lift(cs.const((__cs_n: number | null) => {
     return cs.const(__cs_n === null ? 0 : __cs_n + 1);
 }));
 
-export default cs.lift(cs.const({ absent: (cs.splice((pick)) satisfies import("@backtickjs/core").ClientUnknown)(null), present: (cs.splice((pick)) satisfies import("@backtickjs/core").ClientUnknown)(4) }));
+export default cs.lift(cs.const({ absent: (cs.splice((pick)) satisfies typeof cs.ClientUnknown)(null), present: (cs.splice((pick)) satisfies typeof cs.ClientUnknown)(4) }));

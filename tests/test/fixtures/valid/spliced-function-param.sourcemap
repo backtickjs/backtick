@@ -1,27 +1,27 @@
-cs.lift((() => {\n                        → cs`{\n  
-const                                     → const 
-__cs_apply                                → apply
- = cs.const(                              →  = 
-(                                         → (
-__cs_f                                    → f
-:                                         → : 
-() => number                              → () => number
-) =>                                      → ) => 
-__cs_f                                    → f
-()                                        → ()
- +                                        →  + 
-1                                         → 1
-);                                        → ;
-\n                                        → \n  
-return cs.const(                          → return 
-__cs_apply                                → apply
-(                                         → (
-cs.splice(                                → ${ [-semantic]
-cs.lift(cs.const(                         → cs`
-() =>                                     → () => 
-2                                         → 2
-))                                        → `
-) satisfies import("@backtickjs/core").ClientUnknown→ } [-semantic]
-)                                         → )
-);                                        → ;
-\n})())                                   → \n}`
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_apply                           → apply
+ = cs.const(                         →  = 
+(                                    → (
+__cs_f                               → f
+:                                    → : 
+() => number                         → () => number
+) =>                                 → ) => 
+__cs_f                               → f
+()                                   → ()
+ +                                   →  + 
+1                                    → 1
+);                                   → ;
+\n                                   → \n  
+return cs.const(                     → return 
+__cs_apply                           → apply
+(                                    → (
+cs.splice(                           → ${ [-semantic]
+cs.lift(cs.const(                    → cs`
+() =>                                → () => 
+2                                    → 2
+))                                   → `
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+)                                    → )
+);                                   → ;
+\n})())                              → \n}`

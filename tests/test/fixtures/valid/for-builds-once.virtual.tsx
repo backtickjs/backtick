@@ -14,10 +14,10 @@ const answer = ["one", "two"];
 
 async function Waiting({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
-    const __cs_items = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<string[]>([]));
-    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => {
-        if ((cs.condition((cs.splice((more)) satisfies import("@backtickjs/core").ClientUnknown)()) && (cs.splice((more)) satisfies import("@backtickjs/core").ClientUnknown)())) {
-            cs.statement(cs.receiver(__cs_items).write(cs.splice((answer)) satisfies import("@backtickjs/core").ClientUnknown));
+    const __cs_items = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)<string[]>([]));
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies typeof cs.ClientUnknown).setTimeout(() => {
+        if ((cs.condition((cs.splice((more)) satisfies typeof cs.ClientUnknown)()) && (cs.splice((more)) satisfies typeof cs.ClientUnknown)())) {
+            cs.statement(cs.receiver(__cs_items).write(cs.splice((answer)) satisfies typeof cs.ClientUnknown));
         }
     }, 0));
     return cs.const(<For each={cs.lift(cs.receiver(__cs_items).read())}>{cs.lift((__cs_item: string) => <em>{cs.lift(__cs_item)}</em>)}</For>);
@@ -25,7 +25,7 @@ async function Waiting({ more }: { more: Prop<() => boolean> }) {
 }
 
 export default cs.lift((() => {
-    const __cs_asked = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(0));
+    const __cs_asked = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
     return cs.const(<div>{cs.lift(<span>{cs.lift("asked " + cs.receiver(__cs_asked).read())}</span>)}{cs.lift(<Waiting more={cs.lift(() => {
         cs.statement(cs.receiver(__cs_asked).write(cs.receiver(__cs_asked).read() + 1));
         return cs.const(cs.receiver(__cs_asked).read() < 5);

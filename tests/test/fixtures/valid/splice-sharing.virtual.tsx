@@ -1,7 +1,7 @@
 import { cs, type Client } from "@backtickjs/core";
 
 function add(lhs: Client<number>, rhs: Client<number>): Client<number> {
-  return cs.lift(cs.const((cs.splice((lhs)) satisfies import("@backtickjs/core").ClientUnknown) + (cs.splice((rhs)) satisfies import("@backtickjs/core").ClientUnknown)));
+  return cs.lift(cs.const((cs.splice((lhs)) satisfies typeof cs.ClientUnknown) + (cs.splice((rhs)) satisfies typeof cs.ClientUnknown)));
 }
 
-export default cs.lift(cs.const({ x: cs.splice(add(cs.lift(cs.const(1)), cs.lift(cs.const(2)))) satisfies import("@backtickjs/core").ClientUnknown, y: cs.splice(add(cs.lift(cs.const(3)), cs.lift(cs.const(4)))) satisfies import("@backtickjs/core").ClientUnknown }));
+export default cs.lift(cs.const({ x: cs.splice(add(cs.lift(cs.const(1)), cs.lift(cs.const(2)))) satisfies typeof cs.ClientUnknown, y: cs.splice(add(cs.lift(cs.const(3)), cs.lift(cs.const(4)))) satisfies typeof cs.ClientUnknown }));

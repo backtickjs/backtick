@@ -7,6 +7,6 @@ const table: { [key: string]: string } = { here: "yes" };
 
 export default cs.lift((() => {
     const __cs_names = cs.const(["zero", "one"]);
-    const __cs_missing = cs.const(cs.receiver(cs.splice((table)) satisfies import("@backtickjs/core").ClientUnknown)["nowhere"] ?? "gone");
+    const __cs_missing = cs.const(cs.receiver(cs.splice((table)) satisfies typeof cs.ClientUnknown)["nowhere"] ?? "gone");
     return cs.const(cs.receiver(__cs_names)[1] + "/" + __cs_missing);
 })());

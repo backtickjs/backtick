@@ -27,7 +27,7 @@ const orders = Array.from({ length: 5 }, (_, i) => ({
 // copies. The root View stays static; only its children map on the client.
 export default (
   <div>
-    <For each={cs.lift(cs.const(cs.splice((orders)) satisfies import("@backtickjs/core").ClientUnknown))}>
+    <For each={cs.lift(cs.const(cs.splice((orders)) satisfies typeof cs.ClientUnknown))}>
       {cs.lift(cs.const((__cs_order: Order) => cs.splice((
           <div>
             <img
@@ -37,11 +37,11 @@ export default (
             <span>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).name))}</span>
             <span>{cs.lift(cs.const(cs.receiver(cs.receiver(__cs_order).customer).city))}</span>
             <For each={cs.lift(cs.const(cs.receiver(__cs_order).items))}>
-              {cs.lift(cs.const((__cs_item: Item) => cs.splice((<span>{cs.lift(cs.const(cs.receiver(__cs_item).sku + " x" + cs.receiver(__cs_item).qty))}</span>)) satisfies import("@backtickjs/core").ClientUnknown))}
+              {cs.lift(cs.const((__cs_item: Item) => cs.splice((<span>{cs.lift(cs.const(cs.receiver(__cs_item).sku + " x" + cs.receiver(__cs_item).qty))}</span>)) satisfies typeof cs.ClientUnknown))}
             </For>
             <span>{cs.lift(cs.const("$" + cs.receiver(__cs_order).total))}</span>
           </div>
-        )) satisfies import("@backtickjs/core").ClientUnknown))}
+        )) satisfies typeof cs.ClientUnknown))}
     </For>
   </div>
 );

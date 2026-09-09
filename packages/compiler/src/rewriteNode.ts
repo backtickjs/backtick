@@ -794,16 +794,19 @@ function rewriteNodeImpl(
         );
         state.mappings.set(argument, node);
       }
-      // `satisfies` lets you type-check a value against a type without
-      // changing what TypeScript infers it to be.
+      // `satisfies` rather than a constraint on `cs.splice`: one admitting
+      // primitives would keep a literal a literal instead of widening it.
+      //
+      // `typeof cs.ClientUnknown` rather than a module, because this has to resolve
+      // in the file the template was written in — and naming a package would
+      // put that package in front of every user of the transform.
       const virtual = ts.factory.createSatisfiesExpression(
         call(ts, "cs", "splice", [argument]),
-        ts.factory.createImportTypeNode(
-          ts.factory.createLiteralTypeNode(
-            ts.factory.createStringLiteral("@backtickjs/core"),
+        ts.factory.createTypeQueryNode(
+          ts.factory.createQualifiedName(
+            ts.factory.createIdentifier("cs"),
+            ts.factory.createIdentifier("ClientUnknown"),
           ),
-          undefined,
-          ts.factory.createIdentifier("ClientUnknown"),
         ),
       );
       state.codeInformation.set(virtual, { semantic: false });
