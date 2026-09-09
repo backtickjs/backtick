@@ -4,11 +4,11 @@ import type {
   BacktickElement,
   BacktickNode,
   Client,
-  ClientValue,
   Prop,
 } from "@backtickjs/boundary";
 import type {
   Builtins as LanguageBuiltins,
+  ClientValue,
   Elements as LanguageElements,
   ReadonlyState,
 } from "@backtickjs/language-schema";
@@ -16,6 +16,9 @@ import type {
 export type {
   ArrayLike,
   Bytes,
+  ClientFunction,
+  ClientUnknown,
+  ClientValue,
   ReadonlyState,
   RequestInit,
   Response,

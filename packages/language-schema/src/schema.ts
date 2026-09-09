@@ -58,6 +58,39 @@ export const schema: Schema = {
       },
     ),
 
+    ClientFunction: Type.Function(
+      [Type.Rest(Type.FunctionParameter("args", Type.Never()))],
+      Type.Ref("ClientUnknown"),
+      {
+        description:
+          "A function a client holds. What it takes is nothing this format describes — a client hands one what it was given — and what it answers with is a client value, or nothing.",
+      },
+    ),
+
+    ClientUnknown: Type.Union([Type.Ref("ClientValue"), Type.Void()], {
+      description:
+        "A client value, or nothing. What an action answers with, where every other position takes a value.",
+    }),
+
+    ClientValue: Type.Union(
+      [
+        Type.Null(),
+        Type.Undefined(),
+        Type.Number(),
+        Type.Boolean(),
+        Type.String(),
+        Type.Record(Type.Ref("ClientValue"), { readOnly: true }),
+        Type.Array(Type.Ref("ClientValue"), { readOnly: true }),
+        Type.Ref("BacktickElement"),
+        Type.Ref("ClientFunction"),
+        Type.Ref("ClientHandle"),
+      ],
+      {
+        description:
+          "What may cross between a host and a client: data, a function, a drawing, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
+      },
+    ),
+
     Bytes: Type.Interface(
       [Type.Ref("ClientHandle")],
       {},

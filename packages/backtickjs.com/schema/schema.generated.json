@@ -121,6 +121,88 @@
         "required": ["write", "update"]
       }
     },
+    "ClientFunction": {
+      "description": "A function a client holds. What it takes is nothing this format describes — a client hands one what it was given — and what it answers with is a client value, or nothing.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "rest",
+          "items": {
+            "type": "functionParameter",
+            "name": "args",
+            "holds": {
+              "type": "never"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "ref",
+        "$ref": "ClientUnknown"
+      }
+    },
+    "ClientUnknown": {
+      "description": "A client value, or nothing. What an action answers with, where every other position takes a value.",
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "ref",
+          "$ref": "ClientValue"
+        },
+        {
+          "type": "void"
+        }
+      ]
+    },
+    "ClientValue": {
+      "description": "What may cross between a host and a client: data, a function, a drawing, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "undefined"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "readOnly": true,
+          "type": "record",
+          "values": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        },
+        {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        },
+        {
+          "type": "ref",
+          "$ref": "BacktickElement"
+        },
+        {
+          "type": "ref",
+          "$ref": "ClientFunction"
+        },
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ]
+    },
     "Bytes": {
       "description": "Bytes the client is holding. Opaque: this language has no way to look inside one, only to hold it and hand it back.",
       "type": "interface",
