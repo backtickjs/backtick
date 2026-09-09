@@ -17,37 +17,37 @@ export const builtins: WebBuiltins = {
     // Only `now`. What ports is the difference between two readings, not the
     // time of day.
     performance: {
-      now: () => performance.now(),
+      now: () => window.performance.now(),
     },
 
     // Bound to the host's, so the browser reports the line a call came from
     // rather than this file.
     console: {
       log: (...values: unknown[]) => {
-        console.log(...values);
+        window.console.log(...values);
       },
       warn: (...values: unknown[]) => {
-        console.warn(...values);
+        window.console.warn(...values);
       },
       error: (...values: unknown[]) => {
-        console.error(...values);
+        window.console.error(...values);
       },
     },
 
     // On the window, which is what is left once an element's own events are
     // props on that element.
     addEventListener: (type: string, listener: unknown) => {
-      globalThis.addEventListener(type, listener as EventListener);
+      window.addEventListener(type, listener as EventListener);
     },
 
     // Matched by identity, as in a browser: a closure held in a name and passed
     // twice removes what it added, and the same arrow written twice does not.
     removeEventListener: (type: string, listener: unknown) => {
-      globalThis.removeEventListener(type, listener as EventListener);
+      window.removeEventListener(type, listener as EventListener);
     },
 
     postMessage: (message: unknown, targetOrigin: string) => {
-      globalThis.postMessage(message, targetOrigin);
+      window.postMessage(message, targetOrigin);
     },
 
     // A clock is the host's rather than the language's, so the timers are here
@@ -57,7 +57,7 @@ export const builtins: WebBuiltins = {
       const id = ++last;
       pending.set(
         id,
-        globalThis.setTimeout(() => {
+        window.setTimeout(() => {
           // Dropped before it runs: an id that has fired is one nothing has
           // left to cancel, and holding it would be a leak that grows by one
           // per timer for as long as the page is open.
@@ -73,7 +73,7 @@ export const builtins: WebBuiltins = {
     // the next one, and the id stays good until something cancels it.
     setInterval: (handler: () => void, timeout?: number) => {
       const id = ++last;
-      pending.set(id, globalThis.setInterval(handler, timeout));
+      pending.set(id, window.setInterval(handler, timeout));
       return id;
     },
     clearInterval: cancel,
@@ -83,13 +83,12 @@ export const builtins: WebBuiltins = {
 
 // The handles, kept beside the ids rather than handed out as one.
 //
-// The schema says a script is handed a number, and a host is entitled to answer
-// its own `setTimeout` with whatever it likes — Node answers with an object. So
-// the number a script sees is this table's, and what the host gave back stays
-// in here where nothing can reach it.
+// The number a script sees is this table's rather than the page's, so an id it
+// was never given cancels nothing: a script clears what a script started, and a
+// timer the app set around it is not something a bundle can reach.
 const pending = new Map<
   number,
-  ReturnType<typeof globalThis.setTimeout | typeof globalThis.setInterval>
+  ReturnType<typeof window.setTimeout | typeof window.setInterval>
 >();
 let last = 0;
 
@@ -105,8 +104,8 @@ function cancel(id: number): null {
   }
   // One operation in a browser, and this holds both kinds of handle, so the
   // two names reach the same line.
-  globalThis.clearTimeout(held as ReturnType<typeof globalThis.setTimeout>);
-  globalThis.clearInterval(held as ReturnType<typeof globalThis.setInterval>);
+  window.clearTimeout(held as ReturnType<typeof window.setTimeout>);
+  window.clearInterval(held as ReturnType<typeof window.setInterval>);
   pending.delete(id);
   return null;
 }
