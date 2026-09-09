@@ -344,7 +344,7 @@ export function resolveBindings(
     node: ts.Expression,
     scopes: Scope[],
   ): void => {
-    if (ts.isParenthesizedExpression(node)) {
+    if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node)) {
       walkExpression(script, node.expression, scopes);
     } else if (ts.isIdentifier(node)) {
       const splice = script.splices[node.text];

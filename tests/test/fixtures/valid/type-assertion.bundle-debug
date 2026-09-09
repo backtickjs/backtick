@@ -1,0 +1,6 @@
+#f0 = ($0) => {
+  const page = JSON.parse($0());
+  return page.rows[0] + " of " + page.count;
+}
+
+root = #f0(() => "{\"rows\":[\"one\",\"two\"],\"count\":2}")

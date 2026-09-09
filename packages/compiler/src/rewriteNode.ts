@@ -267,7 +267,6 @@ function bannedUndefined(
 
 // `void` names no client value — an action answers with nothing, which is what
 // `Client<void>` says at the boundary rather than something a script may write.
-// Keyword check with a precise span; a host alias can still smuggle it.
 function bannedVoid(
   ts: typeof import("typescript"),
   state: RewriteState,
@@ -623,6 +622,18 @@ function rewriteNodeImpl(
 
   if (ts.isParenthesizedExpression(node)) {
     return rewriteNode(ts, state, node.expression);
+  }
+
+  if (ts.isAsExpression(node)) {
+    const type = mapType(state, node.type);
+    const asserted = rewriteNode(ts, state, node.expression);
+    return {
+      virtual: ts.factory.createAsExpression(
+        asserted.virtual as ts.Expression,
+        type,
+      ),
+      runtime: asserted.runtime,
+    };
   }
 
   if (ts.isReturnStatement(node) && !node.expression) {
