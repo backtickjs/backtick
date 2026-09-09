@@ -1,7 +1,16 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { schema } from "@backtickjs/web-schema/schema";
-import { builtins } from "../src/builtins.ts";
+
+// A window for a suite that runs under Node. This client reaches the page's
+// window by name — `window.setTimeout`, not `globalThis.setTimeout` — because
+// it is the window that hands these over, so a process without one has to put
+// something there before anything here can be called through. Node's own
+// globals are enough: what is exercised below is that a name is answered, not
+// what a browser does with it.
+globalThis.window = globalThis as unknown as Window & typeof globalThis;
+
+const { builtins } = await import("../src/builtins.ts");
 
 // What this client answers with, against what this target's schema says a
 // script may reach. A name declared and not implemented, or implemented and not
@@ -36,6 +45,10 @@ describe("what this target adds", () => {
       "addEventListener",
       "removeEventListener",
       "postMessage",
+      "setTimeout",
+      "clearTimeout",
+      "setInterval",
+      "clearInterval",
     ]) {
       assert.equal(typeof held.window[name], "function", name);
     }

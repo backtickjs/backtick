@@ -7,8 +7,10 @@ import type { ClientValue } from "@backtickjs/core";
 // to hand it one. `packages/web-client/src/builtins.ts` is the real target's,
 // and carries the reasoning; what is here is the part a fixture uses.
 //
-// Ids are this table's rather than the host's: the schema says a script is
-// handed a number, and Node answers its own `setTimeout` with an object.
+// Ids are this table's rather than the host's, which is what the web client
+// does not have to do: a browser's `setTimeout` answers with the number the
+// schema promises, and Node's answers with an object. So the number a fixture
+// sees is minted here, and the handle it stands for stays in the map.
 const pending = new Map<number, ReturnType<typeof globalThis.setTimeout>>();
 let last = 0;
 
