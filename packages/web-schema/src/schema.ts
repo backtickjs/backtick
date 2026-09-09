@@ -49,6 +49,10 @@ export const schema: Schema = {
         console: Type.Ref("Console", {
           description: "Somewhere to say something while writing a script.",
         }),
+        location: Type.Ref("Location", {
+          description:
+            "Where the document came from, and how to go somewhere else.",
+        }),
         setTimeout: Type.Function(
           [
             Type.FunctionParameter("handler", Type.Function([], Type.Void()), {
@@ -522,6 +526,50 @@ export const schema: Schema = {
       {
         description:
           "Somewhere to say something while writing a script. What a host does with it is the host's own business — a client with no console answers for these and drops them.",
+      },
+    ),
+
+    Location: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {
+        href: Type.String({ readOnly: true }),
+        origin: Type.String({ readOnly: true }),
+        protocol: Type.String({ readOnly: true }),
+        host: Type.String({ readOnly: true }),
+        hostname: Type.String({ readOnly: true }),
+        port: Type.String({ readOnly: true }),
+        pathname: Type.String({ readOnly: true }),
+        search: Type.String({ readOnly: true }),
+        hash: Type.String({ readOnly: true }),
+        assign: Type.Function(
+          [
+            Type.FunctionParameter("url", Type.String(), {
+              description:
+                "Where to go. Resolved against this one, so `/feed` and `?page=2` are both things to say.",
+            }),
+          ],
+          Type.Void(),
+          {
+            description:
+              "Goes somewhere, leaving this behind in the history. Back comes here.",
+          },
+        ),
+        replace: Type.Function(
+          [Type.FunctionParameter("url", Type.String())],
+          Type.Void(),
+          {
+            description:
+              "Goes somewhere in this one's place. Back skips it, which is what a redirect wants.",
+          },
+        ),
+        reload: Type.Function([], Type.Void(), {
+          description: "Asks for this one again.",
+        }),
+      },
+      {
+        description:
+          "Where the document came from, and how to go somewhere else.\n\n" +
+          "Every part is read-only, and going somewhere is a call. The DOM lets a write to `href` — or to `pathname`, or to `hash` — navigate, which is nine names for one act and an assignment that does not assign; a client with no DOM would have to answer for each of them separately. `assign` says it once.",
       },
     ),
 

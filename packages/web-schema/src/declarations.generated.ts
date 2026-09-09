@@ -47,6 +47,10 @@ export interface Window extends ClientHandle {
    */
   readonly console: Console;
   /**
+   * Where the document came from, and how to go somewhere else.
+   */
+  readonly location: Location;
+  /**
    * Runs something once, later, and answers with a number to cancel it by.
    *
    * Nothing cancels it for you. A timer outlives the drawing that made one, so
@@ -425,6 +429,44 @@ export interface Console extends ClientHandle {
   log(...values: ClientValue[]): void;
   warn(...values: ClientValue[]): void;
   error(...values: ClientValue[]): void;
+}
+
+declare const LocationBrand: unique symbol;
+/**
+ * Where the document came from, and how to go somewhere else.
+ *
+ * Every part is read-only, and going somewhere is a call. The DOM lets a write
+ * to `href` — or to `pathname`, or to `hash` — navigate, which is nine names
+ * for one act and an assignment that does not assign; a client with no DOM
+ * would have to answer for each of them separately. `assign` says it once.
+ */
+export interface Location extends ClientHandle {
+  readonly [LocationBrand]: never;
+  readonly href: string;
+  readonly origin: string;
+  readonly protocol: string;
+  readonly host: string;
+  readonly hostname: string;
+  readonly port: string;
+  readonly pathname: string;
+  readonly search: string;
+  readonly hash: string;
+  /**
+   * Goes somewhere, leaving this behind in the history. Back comes here.
+   *
+   * @param url Where to go. Resolved against this one, so `/feed` and
+   * `?page=2` are both things to say.
+   */
+  assign(url: string): void;
+  /**
+   * Goes somewhere in this one's place. Back skips it, which is what a
+   * redirect wants.
+   */
+  replace(url: string): void;
+  /**
+   * Asks for this one again.
+   */
+  reload(): void;
 }
 
 declare const SVGElementBrand: unique symbol;

@@ -120,6 +120,7 @@ export type {
   LabelProps,
   LiProps,
   LinkProps,
+  Location,
   MapProps,
   MediaProps,
   MessageEvent,

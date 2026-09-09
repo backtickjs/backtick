@@ -50,6 +50,49 @@ export const builtins: WebBuiltins = {
       window.postMessage(message, targetOrigin);
     },
 
+    // Read through, so what a script reads is where the document is now rather
+    // than where it was when this table was built. Going somewhere is a call —
+    // the schema leaves every field read-only, so there is no write here to
+    // answer for.
+    location: {
+      get href() {
+        return window.location.href;
+      },
+      get origin() {
+        return window.location.origin;
+      },
+      get protocol() {
+        return window.location.protocol;
+      },
+      get host() {
+        return window.location.host;
+      },
+      get hostname() {
+        return window.location.hostname;
+      },
+      get port() {
+        return window.location.port;
+      },
+      get pathname() {
+        return window.location.pathname;
+      },
+      get search() {
+        return window.location.search;
+      },
+      get hash() {
+        return window.location.hash;
+      },
+      assign: (url: string) => {
+        window.location.assign(url);
+      },
+      replace: (url: string) => {
+        window.location.replace(url);
+      },
+      reload: () => {
+        window.location.reload();
+      },
+    },
+
     // A clock is the host's rather than the language's, so the timers are here
     // beside the rest of what a window holds. A script reaches one by splicing
     // the window — `$window.setTimeout(…)` — and never as a bare name.
