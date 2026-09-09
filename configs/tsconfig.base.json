@@ -1,3 +1,7 @@
+// No project here references another. Turbo orders the graph from
+// `package.json`, and what a reference adds beyond that is resolving imports to
+// another package's sources — which would mean compiling them with this
+// package's compiler.
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {

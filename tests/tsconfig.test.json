@@ -19,12 +19,5 @@
     // snapshots; the build skips their sources and virtual code.
     "test/fixtures/typecheck-error/*.ts",
     "test/fixtures/typecheck-error/*.virtual.tsx"
-  ],
-  "references": [
-    { "path": "../packages/compiler/tsconfig.build.json" },
-    { "path": "../packages/core/tsconfig.build.json" },
-    { "path": "../packages/language-schema/tsconfig.build.json" },
-    { "path": "../packages/js-interpreter/tsconfig.build.json" },
-    { "path": "../packages/web-schema/tsconfig.build.json" }
   ]
 }

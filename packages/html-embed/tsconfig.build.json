@@ -4,6 +4,5 @@
     "emitDeclarationOnly": false,
     "sourceMap": true,
     "lib": ["esnext"]
-  },
-  "references": [{ "path": "../bundler/tsconfig.build.json" }]
+  }
 }

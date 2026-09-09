@@ -3,6 +3,5 @@
   "compilerOptions": {
     "emitDeclarationOnly": false,
     "sourceMap": true
-  },
-  "references": [{ "path": "../compiler/tsconfig.build.json" }]
+  }
 }
