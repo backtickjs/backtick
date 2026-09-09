@@ -69,90 +69,95 @@
           [
             "return",
             [
-              "arr",
+              "el",
+              "Fragment",
+              {},
               [
+                "arr",
                 [
-                  "el",
-                  "rect",
-                  {
-                    "x": 0,
-                    "y": 0,
-                    "width": ["id", "width"],
-                    "height": ["id", "height"],
-                    "colour": 1052696
-                  },
-                  null
-                ],
-                [
-                  "el",
-                  "string",
-                  {
-                    "x": ["/", ["id", "width"], 2],
-                    "y": 16,
-                    "size": 2,
-                    "datum": "middle-centre",
-                    "colour": 6737151
-                  },
-                  "backtick"
-                ],
-                [
-                  "el",
-                  "string",
-                  {
-                    "x": ["/", ["id", "width"], 2],
-                    "y": 52,
-                    "size": 4,
-                    "datum": "middle-centre"
-                  },
-                  ["()", [".", ["id", "count"], "read"], []]
-                ],
-                [
-                  "el",
-                  "rect",
-                  {
-                    "x": 20,
-                    "y": 78,
-                    "width": ["id", "bar"],
-                    "height": 10,
-                    "colour": 4513160
-                  },
-                  null
-                ],
-                [
-                  "el",
-                  "rect",
-                  {
-                    "x": 20,
-                    "y": 78,
-                    "width": ["-", ["id", "width"], 40],
-                    "height": 10,
-                    "fill": false,
-                    "colour": 3355460
-                  },
-                  null
-                ],
-                [
-                  "el",
-                  "string",
-                  {
-                    "x": ["/", ["id", "width"], 2],
-                    "y": 110,
-                    "size": 1,
-                    "datum": "middle-centre",
-                    "colour": 8947882
-                  },
-                  "; up   . down   enter zero"
-                ],
-                [
-                  "el",
-                  "circle",
-                  {
-                    "x": ["-", ["id", "width"], 14],
-                    "y": ["-", ["id", "height"], 14],
-                    "radius": 4,
-                    "colour": 16737928
-                  },
-                  null
+                  [
+                    "el",
+                    "rect",
+                    {
+                      "x": 0,
+                      "y": 0,
+                      "width": ["id", "width"],
+                      "height": ["id", "height"],
+                      "colour": 1052696
+                    },
+                    null
+                  ],
+                  [
+                    "el",
+                    "string",
+                    {
+                      "x": ["/", ["id", "width"], 2],
+                      "y": 16,
+                      "size": 2,
+                      "datum": "middle-centre",
+                      "colour": 6737151
+                    },
+                    "backtick"
+                  ],
+                  [
+                    "el",
+                    "string",
+                    {
+                      "x": ["/", ["id", "width"], 2],
+                      "y": 52,
+                      "size": 4,
+                      "datum": "middle-centre"
+                    },
+                    ["()", [".", ["id", "count"], "read"], []]
+                  ],
+                  [
+                    "el",
+                    "rect",
+                    {
+                      "x": 20,
+                      "y": 78,
+                      "width": ["id", "bar"],
+                      "height": 10,
+                      "colour": 4513160
+                    },
+                    null
+                  ],
+                  [
+                    "el",
+                    "rect",
+                    {
+                      "x": 20,
+                      "y": 78,
+                      "width": ["-", ["id", "width"], 40],
+                      "height": 10,
+                      "fill": false,
+                      "colour": 3355460
+                    },
+                    null
+                  ],
+                  [
+                    "el",
+                    "string",
+                    {
+                      "x": ["/", ["id", "width"], 2],
+                      "y": 110,
+                      "size": 1,
+                      "datum": "middle-centre",
+                      "colour": 8947882
+                    },
+                    "; up   . down   enter zero"
+                  ],
+                  [
+                    "el",
+                    "circle",
+                    {
+                      "x": ["-", ["id", "width"], 14],
+                      "y": ["-", ["id", "height"], 14],
+                      "radius": 4,
+                      "colour": 16737928
+                    },
+                    null
+                  ]
                 ]
               ]
             ]

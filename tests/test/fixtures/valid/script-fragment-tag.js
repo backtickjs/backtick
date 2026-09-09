@@ -33,9 +33,15 @@ export default cs.create(
           attributes: [],
           children: [
             {
-              kind: "arr",
+              kind: "jsx",
               loc: [14, 9, 17, 20],
-              elements: [
+              type: {
+                kind: "string",
+                loc: [14, 10, 14, 18],
+                text: "Fragment",
+              },
+              attributes: [],
+              children: [
                 {
                   kind: "jsx",
                   loc: [15, 11, 15, 25],
@@ -74,18 +80,30 @@ export default cs.create(
             },
             {
               kind: "jsx",
-              loc: [21, 11, 21, 21],
+              loc: [20, 9, 22, 12],
               type: {
                 kind: "string",
-                loc: [21, 12, 21, 14],
-                text: "em",
+                loc: [20, 9, 22, 12],
+                text: "Fragment",
               },
               attributes: [],
               children: [
                 {
-                  kind: "string",
-                  loc: [21, 15, 21, 16],
-                  text: "c",
+                  kind: "jsx",
+                  loc: [21, 11, 21, 21],
+                  type: {
+                    kind: "string",
+                    loc: [21, 12, 21, 14],
+                    text: "em",
+                  },
+                  attributes: [],
+                  children: [
+                    {
+                      kind: "string",
+                      loc: [21, 15, 21, 16],
+                      text: "c",
+                    },
+                  ],
                 },
               ],
             },

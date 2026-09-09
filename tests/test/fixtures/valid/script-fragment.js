@@ -31,9 +31,15 @@ const listed = cs.create(
       },
     ],
     body: {
-      kind: "arr",
+      kind: "jsx",
       loc: [10, 3, 15, 6],
-      elements: [
+      type: {
+        kind: "string",
+        loc: [10, 3, 15, 6],
+        text: "Fragment",
+      },
+      attributes: [],
+      children: [
         {
           kind: "jsx",
           loc: [11, 5, 11, 41],

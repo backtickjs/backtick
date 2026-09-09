@@ -1,8 +1,10 @@
 root = <div>
-  {<span>
-    {"a"}
-  </span>}
-  {<span>
-    {"b"}
-  </span>}
+  {<Fragment>
+    {<span>
+      {"a"}
+    </span>}
+    {<span>
+      {"b"}
+    </span>}
+  </Fragment>}
 </div>

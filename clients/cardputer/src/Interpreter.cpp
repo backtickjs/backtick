@@ -604,6 +604,19 @@ Value Interpreter::evaluate(const JsonValue& node,
         };
         return Value::function(run);
       }
+      // `Fragment` is the other: children with no element of their own, which
+      // go where it stood. It exists so a drawing always answers with an
+      // element — a conditional standing at a block's root has nowhere to be
+      // watched — and here, where nothing watches anything, it is its children.
+      if (held->id == "Fragment") {
+        auto drawn = std::make_shared<Array>();
+        std::vector<Value> members;
+        flatten(evaluate(json.item(node, 3), scope), members);
+        for (const Value& one : members) {
+          drawn->push_back(one);
+        }
+        return Value::array(drawn);
+      }
       flatten(evaluate(json.item(node, 3), scope), held->children);
       return Value::element(held);
     }

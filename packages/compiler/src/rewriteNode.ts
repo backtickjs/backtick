@@ -7,7 +7,7 @@ import { isComponentTag } from "./isComponentTag.js";
 import type { ClientScript } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { mangle } from "./unmangle.js";
-import { isFragmentTag } from "./isFragmentTag.js";
+import { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 
 // Every name the language provides, written here rather than read off a
 // schema: the compiler's vocabulary is its own and closed, and it is the host
@@ -1165,24 +1165,6 @@ function rewriteNodeImpl(
             );
     state.mappings.set(virtual, node);
 
-    // A fragment is its children: they go where it stood, and a list of them
-    // already says that, so nothing of it reaches the client.
-    if (isFragment) {
-      return {
-        virtual,
-        runtime:
-          children.length === 1
-            ? children[0]
-            : astNode(ts, "arr", {
-                loc: loc(node),
-                elements: ts.factory.createArrayLiteralExpression(
-                  children,
-                  false,
-                ),
-              }),
-      };
-    }
-
     return {
       virtual,
       runtime: astNode(ts, "jsx", {
@@ -1190,15 +1172,21 @@ function rewriteNodeImpl(
         // An element of the target is its own name; a component tag is the
         // host binding it names, which the script reaches by splice under the
         // key `getDirectSplices` minted for it.
+        //
+        // A fragment is an element under its own name, which `<>` is written
+        // as too. It draws no node, and what it is for is the position: a
+        // drawing that is not an element has nowhere to be watched.
         type:
-          opening !== null && isComponentTag(tagName)
+          opening !== null && !isFragment && isComponentTag(tagName)
             ? astNode(ts, "splice", {
                 loc: loc(opening.tagName),
                 key: ts.factory.createStringLiteral(`$${tagName}`),
               })
             : astNode(ts, "string", {
                 loc: opening === null ? loc(node) : loc(opening.tagName),
-                text: ts.factory.createStringLiteral(tagName),
+                text: ts.factory.createStringLiteral(
+                  isFragment ? FRAGMENT_TAG : tagName,
+                ),
               }),
         attributes: ts.factory.createArrayLiteralExpression(
           attributes.map((attribute) => attribute.runtime),

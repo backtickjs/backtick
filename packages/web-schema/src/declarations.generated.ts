@@ -16,6 +16,7 @@ export type {
   BacktickProps,
   Bytes,
   ForProps,
+  FragmentProps,
   ReadonlyState,
   RequestInit,
   Response,

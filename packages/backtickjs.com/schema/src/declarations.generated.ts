@@ -41,6 +41,7 @@ export type {
   FocusEvent,
   ForProps,
   FormProps,
+  FragmentProps,
   GlobalAttributes,
   HTMLAnchorElement,
   HTMLAreaElement,

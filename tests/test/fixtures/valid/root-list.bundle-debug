@@ -3,19 +3,19 @@
   const clear = () => {
     ids.update(() => []);
   };
-  return [
-    <span
+  return <Fragment>
+    {<span
       onclick={clear}
     >
       {"clear"}
-    </span>,
-    $1()({
+    </span>}
+    {$1()({
       "each": () => ids.read(),
       "children": () => (id) => <span>
         {"row " + id}
       </span>
-    })
-  ];
+    })}
+  </Fragment>;
 }
 
 root = #f0(() => state, () => ($0) => <for

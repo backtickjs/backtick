@@ -19,4 +19,4 @@ export type * from "./declarations.generated.js";
  * parameter and being told two types with one name are unrelated.
  */
 export { Fragment } from "./jsx-runtime/index.js";
-export type { FragmentProps, JSX } from "./jsx-runtime/index.js";
+export type { JSX } from "./jsx-runtime/index.js";

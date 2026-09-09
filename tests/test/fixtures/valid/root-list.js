@@ -118,9 +118,15 @@ async function Rows() {
           kind: "return",
           loc: [16, 5, 23, 7],
           expression: {
-            kind: "arr",
+            kind: "jsx",
             loc: [17, 7, 22, 10],
-            elements: [
+            type: {
+              kind: "string",
+              loc: [17, 7, 22, 10],
+              text: "Fragment",
+            },
+            attributes: [],
+            children: [
               {
                 kind: "jsx",
                 loc: [18, 9, 18, 43],

@@ -1,15 +1,15 @@
 #f0 = ($0) => $0()("x")
 
-#f1 = () => (name) => [
-  <span>
+#f1 = () => (name) => <Fragment>
+  {<span>
     {"a sentence across lines"}
-  </span>,
-  <span>
+  </span>}
+  {<span>
     {name}
     {" "}
     {name}
-  </span>
-]
+  </span>}
+</Fragment>
 
 root = <div>
   {#f0(#f1)}

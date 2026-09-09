@@ -1,7 +1,7 @@
 import type { JsxElementType } from "@backtickjs/boundary";
 import { createFragment, createJsxElement } from "@backtickjs/boundary";
-import type { Elements as Web } from "@backtickjs/web-schema";
-import type { BacktickElement, BacktickNode } from "@backtickjs/boundary";
+import type { Elements as Web, FragmentProps } from "@backtickjs/web-schema";
+import type { BacktickElement } from "@backtickjs/boundary";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //
@@ -13,17 +13,9 @@ import type { BacktickElement, BacktickNode } from "@backtickjs/boundary";
 // a base adds arrives without either end being told, and a tag two of them
 // declare is a conflict TypeScript reports rather than a silent winner.
 
-/**
- * Children with no element of their own.
- *
- * The schema does not declare a fragment: it draws no node and has no tag, so
- * what it holds is this runtime's to say, and it says the same as any element
- * of this target.
- */
-export interface FragmentProps {
-  children?: BacktickNode;
-}
-
+// The fragment is the schema's, like every other element the language owns —
+// what it holds is `FragmentProps` there. What is this runtime's is the binding
+// TypeScript resolves `<>` to, which is what this is.
 export const Fragment = createFragment<FragmentProps>();
 
 export declare namespace JSX {

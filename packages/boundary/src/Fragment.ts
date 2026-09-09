@@ -1,14 +1,19 @@
+import { createJsxElement } from "./JsxElement.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 /**
- * Children with no element of their own: what it holds goes where it stands.
+ * Children with no element of their own, as the element the language owns.
  *
- * A component, and nothing but — it answers with its children, which is what
- * "goes where it stands" means. So there is nothing to recognise it by and no
- * rule that reads it: a tag naming one is a tag naming a component, wherever it
- * was written. The name is here rather than the `ServerComponent` it aliases
- * because a target exports one, and a reader of that export is owed what it is
- * for.
+ * `Fragment` is the name a script writes it under, and `<>` resolves to it, so
+ * the element carries that name too. Capitalized, which is what keeps it out of
+ * the elements a target declares.
+ *
+ * It draws no node — what it holds goes where it stands — and what it is for is
+ * the position. A drawing that is not an element has nowhere to be watched, so
+ * a conditional standing at a block's root is read inside whatever computation
+ * asked for it, and the write that answers the conditional runs the block
+ * again. Under a fragment the conditional is a child, and a child position owns
+ * a computation of its own.
  *
  * Each target still makes its own, since what a fragment may hold is whatever
  * that target draws, and `Props` is where it says so.
@@ -17,5 +22,5 @@ export type Fragment<Props extends object = object> = ServerComponent<Props>;
 
 export function createFragment<Props extends object>(): Fragment<Props> {
   return (async (props: { children?: unknown }) =>
-    props.children) as unknown as Fragment<Props>;
+    createJsxElement("Fragment", props)) as unknown as Fragment<Props>;
 }

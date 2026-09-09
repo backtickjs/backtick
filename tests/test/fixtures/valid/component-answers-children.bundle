@@ -7,21 +7,31 @@
     [
       "arr",
       [
-        "counted",
         [
-          "arr",
+          "el",
+          "Fragment",
+          {},
+          "counted"
+        ],
+        [
+          "el",
+          "Fragment",
+          {},
           [
+            "arr",
             [
-              "el",
-              "em",
-              {},
-              "one"
-            ],
-            [
-              "el",
-              "em",
-              {},
-              "two"
+              [
+                "el",
+                "em",
+                {},
+                "one"
+              ],
+              [
+                "el",
+                "em",
+                {},
+                "two"
+              ]
             ]
           ]
         ]

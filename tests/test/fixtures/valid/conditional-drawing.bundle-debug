@@ -1,0 +1,34 @@
+#f0 = ($0, $1) => {
+  const builds = $0()(0);
+  return <div>
+    {<span>
+      {"builds " + builds.read()}
+    </span>}
+    {<section>
+      {$1()({
+        "again": () => () => {
+          builds.write(builds.read() + 1);
+          return builds.read() < 5;
+        }
+      })}
+    </section>}
+  </div>;
+}
+
+#f1 = ($0, $1) => {
+  const shown = $0()(false);
+  const started = setTimeout(() => {
+    if ($1()()) {
+      shown.write(true);
+    }
+  }, 0);
+  return <Fragment>
+    {shown.read() ? <em>
+      {"shown"}
+    </em> : <i>
+      {"waiting"}
+    </i>}
+  </Fragment>;
+}
+
+root = #f0(() => state, () => ($0) => #f1(() => state, () => $0.again()))

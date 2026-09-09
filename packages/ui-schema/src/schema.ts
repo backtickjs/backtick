@@ -33,6 +33,10 @@ export const schema: Schema = {
       }),
     ),
 
+    FragmentProps: Type.Interface([], {
+      children: Type.Optional(Type.Ref("BacktickNode")),
+    }),
+
     BacktickProps: Type.Interface([], {
       props: Type.Optional(
         Type.Record(Type.Ref("ClientValue"), {
@@ -65,6 +69,13 @@ export const schema: Schema = {
         "A member is `ClientValue` here where it is `T` on the props, because " +
         "a tag has nowhere to bind a type parameter. Write `<For />` to have " +
         "the child checked against what `each` holds.",
+    }),
+
+    Fragment: Type.Ref("FragmentProps", {
+      description:
+        "Children with no element of their own: what it holds goes where it stands.\n\n" +
+        "What it is for is the position. A drawing that is not an element has nowhere to be watched — a conditional standing at a block's root is read inside whatever computation asked for it, and the write that answers the conditional runs the block again. Under a fragment the conditional is a child, and a child position is watched on its own.\n\n" +
+        "Written `<>`, which TypeScript resolves to this name. Capitalized where the other two are not, because a lowercase first letter is what makes a tag a target's own — so no target can declare an element named this.",
     }),
 
     backtick: Type.Ref("BacktickProps", {

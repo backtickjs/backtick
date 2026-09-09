@@ -1,16 +1,18 @@
 #f0 = () => {
   return <div>
-    {[
-      <span>
+    {<Fragment>
+      {<span>
         {"a"}
-      </span>,
-      <span>
+      </span>}
+      {<span>
         {"b"}
-      </span>
-    ]}
-    {<em>
-      {"c"}
-    </em>}
+      </span>}
+    </Fragment>}
+    {<Fragment>
+      {<em>
+        {"c"}
+      </em>}
+    </Fragment>}
   </div>;
 }
 

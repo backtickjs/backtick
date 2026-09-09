@@ -35,29 +35,34 @@
           ]
         ],
         [
-          "arr",
+          "el",
+          "Fragment",
+          {},
           [
+            "arr",
             [
-              "el",
-              "span",
-              {},
-              "a sentence across lines"
-            ],
-            [
-              "el",
-              "span",
-              {},
               [
-                "arr",
+                "el",
+                "span",
+                {},
+                "a sentence across lines"
+              ],
+              [
+                "el",
+                "span",
+                {},
                 [
+                  "arr",
                   [
-                    "id",
-                    "name"
-                  ],
-                  " ",
-                  [
-                    "id",
-                    "name"
+                    [
+                      "id",
+                      "name"
+                    ],
+                    " ",
+                    [
+                      "id",
+                      "name"
+                    ]
                   ]
                 ]
               ]

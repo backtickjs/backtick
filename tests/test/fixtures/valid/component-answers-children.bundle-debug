@@ -1,11 +1,13 @@
 root = <div>
-  {"counted"}
-  {[
-    <em>
+  {<Fragment>
+    {"counted"}
+  </Fragment>}
+  {<Fragment>
+    {<em>
       {"one"}
-    </em>,
-    <em>
+    </em>}
+    {<em>
       {"two"}
-    </em>
-  ]}
+    </em>}
+  </Fragment>}
 </div>

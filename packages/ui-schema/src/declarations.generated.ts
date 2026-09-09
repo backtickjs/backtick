@@ -2,6 +2,7 @@
 
 import type {
   BacktickElement,
+  BacktickNode,
   Client,
   ClientValue,
   Prop,
@@ -34,6 +35,10 @@ export interface ForProps<T extends ClientValue> {
   children: Client<
     (member: T, index: ReadonlyState<number>) => BacktickElement
   >;
+}
+
+export interface FragmentProps {
+  children?: BacktickNode;
 }
 
 export interface BacktickProps {
@@ -81,6 +86,20 @@ export interface UiElements {
    * checked against what `each` holds.
    */
   for: ForProps<ClientValue>;
+  /**
+   * Children with no element of their own: what it holds goes where it stands.
+   *
+   * What it is for is the position. A drawing that is not an element has
+   * nowhere to be watched — a conditional standing at a block's root is read
+   * inside whatever computation asked for it, and the write that answers the
+   * conditional runs the block again. Under a fragment the conditional is a
+   * child, and a child position is watched on its own.
+   *
+   * Written `<>`, which TypeScript resolves to this name. Capitalized where
+   * the other two are not, because a lowercase first letter is what makes a
+   * tag a target's own — so no target can declare an element named this.
+   */
+  Fragment: FragmentProps;
   /**
    * A bundle, drawn here.
    *

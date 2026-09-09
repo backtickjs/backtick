@@ -177,6 +177,9 @@ export function compileElement(
   if (id === "backtick") {
     return compileBacktick(instance, element);
   }
+  if (id === "Fragment") {
+    return compileFragment(instance, element);
+  }
   // Every prop, in the order the element wrote them, because a host may care:
   // an `<input>` wants its `type` before its `value`.
   const props = Object.entries(element[2]).map(([prop, expr]) => {
@@ -273,6 +276,24 @@ function compileChildren(
   // component, that is a second component with fresh state. The memo answers
   // with the same drawing rather than building another.
   return (scope) => createMemo(() => read(scope));
+}
+
+// Children with no element of their own.
+//
+// The position a drawing needs where what it draws is not an element: its
+// members are compiled as an array's are, so each owns a computation. What
+// stands here is watched, and the block that answered with it is not run again
+// when it changes.
+function compileFragment(
+  instance: Instance,
+  element: BundleElement,
+): (scope: Scope | null) => ClientValue {
+  const children = element[3];
+  if (children === null) {
+    return () => null;
+  }
+  const draw = compileChildren(instance, children, true);
+  return (scope) => draw(scope) as ClientValue;
 }
 
 // What a drawing hands a bundle: the record it wrote, with every member read
