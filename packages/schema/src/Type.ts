@@ -8,6 +8,7 @@ import { Interface } from "./nodes/Interface.js";
 import { Literal } from "./nodes/Literal.js";
 import { Never } from "./nodes/Never.js";
 import { Null } from "./nodes/Null.js";
+import { Undefined } from "./nodes/Undefined.js";
 import { Number } from "./nodes/Number.js";
 import { Object } from "./nodes/Object.js";
 import { Optional } from "./nodes/Optional.js";
@@ -40,6 +41,7 @@ export const Type = {
   Void,
   Never,
   Null,
+  Undefined,
   Ref,
   Optional,
   Rest,

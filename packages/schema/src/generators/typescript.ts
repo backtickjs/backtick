@@ -9,6 +9,7 @@ import { IsInterface } from "../nodes/Interface.js";
 import type { TInterface } from "../nodes/Interface.js";
 import { IsNever } from "../nodes/Never.js";
 import { IsNull } from "../nodes/Null.js";
+import { IsUndefined } from "../nodes/Undefined.js";
 import { prop } from "./declarations.js";
 import { IsNumber } from "../nodes/Number.js";
 import { IsObject } from "../nodes/Object.js";
@@ -118,6 +119,9 @@ export function type(node: TNode): string {
   }
   if (IsVoid(node)) {
     return "void";
+  }
+  if (IsUndefined(node)) {
+    return "undefined";
   }
   if (IsNull(node)) {
     return "null";
