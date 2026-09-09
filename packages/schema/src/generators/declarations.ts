@@ -19,6 +19,12 @@ import type { TGeneric } from "../nodes/Generic.js";
 import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import type { Schema } from "../Schema.js";
 import { format } from "./format.js";
+
+// What this generator writes around a declaration of its own accord: a prop
+// takes a value or a script standing in for one, and saying so is the
+// generator's job rather than something a schema asks for. No `$ref` names
+// either, so neither is a hole in the document a schema produces.
+const wrapping: ReadonlySet<string> = new Set(["Client", "Prop"]);
 import type { TNode } from "../TNode.js";
 
 // A schema to the names it declares, as the host language declares them.
@@ -331,13 +337,17 @@ export function declarations(schema: Schema): string {
   }
   // The boundary's own are found by reading this file back, because no `$ref`
   // names one: what a schema says about `Prop` is that it wrapped something in
-  // it, and the wrapping is the generator's own.
+  // it, and the wrapping is the generator's own — which is why `wrapping` is
+  // here rather than in `format.ts`, where every name is one a schema wrote.
+  //
+  // `format` is read here too, because a name a schema refs is written into the
+  // file as well, and one import is one import however it got there.
   //
   // What a declaration writes, and not what it says about itself: a description
   // naming `BacktickNode` is prose, and an import written because a comment spelled
   // a name is an import nothing reads.
   const written = lines.filter((line) => !/^\s*(\/\*|\*)/.test(line));
-  for (const held of format) {
+  for (const held of [...wrapping, ...format]) {
     if (written.some((line) => new RegExp(`\\b${held}\\b`).test(line))) {
       name(held, "@backtickjs/boundary");
     }
