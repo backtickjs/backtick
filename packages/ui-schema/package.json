@@ -12,6 +12,14 @@
     "./schema": {
       "types": "./dist/schema.d.ts",
       "default": "./dist/schema.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime/index.d.ts",
+      "default": "./dist/jsx-runtime/index.js"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./dist/jsx-dev-runtime/index.d.ts",
+      "default": "./dist/jsx-dev-runtime/index.js"
     }
   },
   "scripts": {
