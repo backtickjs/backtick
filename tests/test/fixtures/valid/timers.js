@@ -1,9 +1,11 @@
 import { cs } from "@backtickjs/core";
-// A clock, and the shape of a name that is not a front.
+import { window } from "@backtickjs/web-schema";
+// A clock, which is the target's rather than the language's: a script reaches
+// one by splicing the window, the same as anything else a target hands over.
 //
-// `Math.floor` is a namespace and a member folded into one name the client
-// answers; these arrive whole, so they read as a value where a front cannot —
-// bound to a variable and handed on, the same as any builtin function.
+// And the shape of a member read off a handle. `$window.clearInterval` is read
+// as a value and handed on, which is what a name has to survive being — the
+// call site below reaches it through a variable, not through the window.
 //
 // An action rather than a value, and not by preference: starting a timer is a
 // side effect, and a script that returns one cannot have those. Which is where
@@ -11,67 +13,77 @@ import { cs } from "@backtickjs/core";
 //
 // Started and stopped in the one body, so nothing is left ticking after this is
 // evaluated: what it pins is the lowering and the names, not the waiting. And
-// either `clear` cancels either kind, which is why one of them is reached
-// through the other's id.
+// either clear cancels either kind, which is why one of them is reached through
+// the other's id.
 export default cs.create(
-  [17, 16, 22, 3],
+  [19, 16, 24, 3],
   {
     version: "0.0.0",
     filePath: "timers.ts",
-    fileHash: "2rhi7uq99hpbq",
-    splices: {},
+    fileHash: "2a1dmu3pxvhzt",
+    splices: { $window: { value: window, params: [] } },
     captures: [],
   },
   () => ({
     kind: "{}",
-    loc: [17, 19, 22, 2],
+    loc: [19, 19, 24, 2],
     statements: [
       {
         kind: "const",
-        loc: [18, 3, 18, 30],
+        loc: [20, 3, 20, 38],
         name: {
           kind: "id",
-          loc: [18, 9, 18, 13],
+          loc: [20, 9, 20, 13],
           text: "stop",
-          bindingKey: "stop$2rhi7uq99hpbq$0",
+          bindingKey: "stop$2a1dmu3pxvhzt$0",
         },
         initializer: {
-          kind: "bltn",
-          loc: [18, 16, 18, 29],
+          kind: ".",
+          loc: [20, 16, 20, 37],
+          expression: {
+            kind: "splice",
+            loc: [20, 16, 20, 23],
+            key: "$window",
+          },
           name: "clearInterval",
         },
       },
       {
         kind: "const",
-        loc: [19, 3, 19, 48],
+        loc: [21, 3, 21, 56],
         name: {
           kind: "id",
-          loc: [19, 9, 19, 18],
+          loc: [21, 9, 21, 18],
           text: "repeating",
-          bindingKey: "repeating$2rhi7uq99hpbq$1",
+          bindingKey: "repeating$2a1dmu3pxvhzt$1",
         },
         initializer: {
           kind: "()",
-          loc: [19, 21, 19, 47],
+          loc: [21, 21, 21, 55],
           expression: {
-            kind: "bltn",
-            loc: [19, 21, 19, 32],
+            kind: ".",
+            loc: [21, 21, 21, 40],
+            expression: {
+              kind: "splice",
+              loc: [21, 21, 21, 28],
+              key: "$window",
+            },
             name: "setInterval",
           },
           arguments: [
             {
               kind: "=>",
-              loc: [19, 33, 19, 40],
+              loc: [21, 41, 21, 48],
               parameters: [],
               body: {
                 kind: "number",
-                loc: [19, 39, 19, 40],
+                loc: [21, 47, 21, 48],
                 value: 0,
               },
             },
             {
               kind: "number",
-              loc: [19, 42, 19, 46],
+              loc: [21, 50, 21, 54],
               value: 1000,
             },
           ],
@@ -79,53 +91,63 @@ export default cs.create(
       },
       {
         kind: "()",
-        loc: [20, 3, 20, 18],
+        loc: [22, 3, 22, 18],
         expression: {
           kind: "id",
-          loc: [20, 3, 20, 7],
+          loc: [22, 3, 22, 7],
           text: "stop",
-          bindingKey: "stop$2rhi7uq99hpbq$0",
+          bindingKey: "stop$2a1dmu3pxvhzt$0",
         },
         arguments: [
           {
             kind: "id",
-            loc: [20, 8, 20, 17],
+            loc: [22, 8, 22, 17],
             text: "repeating",
-            bindingKey: "repeating$2rhi7uq99hpbq$1",
+            bindingKey: "repeating$2a1dmu3pxvhzt$1",
           },
         ],
       },
       {
         kind: "()",
-        loc: [21, 3, 21, 42],
+        loc: [23, 3, 23, 58],
         expression: {
-          kind: "bltn",
-          loc: [21, 3, 21, 15],
+          kind: ".",
+          loc: [23, 3, 23, 23],
+          expression: {
+            kind: "splice",
+            loc: [23, 3, 23, 10],
+            key: "$window",
+          },
           name: "clearTimeout",
         },
         arguments: [
           {
             kind: "()",
-            loc: [21, 16, 21, 41],
+            loc: [23, 24, 23, 57],
             expression: {
-              kind: "bltn",
-              loc: [21, 16, 21, 26],
+              kind: ".",
+              loc: [23, 24, 23, 42],
+              expression: {
+                kind: "splice",
+                loc: [23, 24, 23, 31],
+                key: "$window",
+              },
               name: "setTimeout",
             },
             arguments: [
               {
                 kind: "=>",
-                loc: [21, 27, 21, 34],
+                loc: [23, 43, 23, 50],
                 parameters: [],
                 body: {
                   kind: "number",
-                  loc: [21, 33, 21, 34],
+                  loc: [23, 49, 23, 50],
                   value: 0,
                 },
               },
               {
                 kind: "number",
-                loc: [21, 36, 21, 40],
+                loc: [23, 52, 23, 56],
                 value: 1000,
               },
             ],

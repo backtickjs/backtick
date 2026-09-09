@@ -481,15 +481,9 @@ void installLanguageBuiltins(Interpreter& machine) {
     return Value::record(held);
   };
 
-  // ---- timers ----
-  //
-  // Registered rather than run: what fires them is whoever owns the loop — the
-  // device's, and on the host nothing, which is why a script that only sets one
-  // completes with nothing having happened.
-  one(into, "setTimeout", [](std::vector<Value>&) { return Value::number(0); });
-  one(into, "setInterval", [](std::vector<Value>&) { return Value::number(0); });
-  one(into, "clearTimeout", [](std::vector<Value>&) { return Value::null(); });
-  one(into, "clearInterval", [](std::vector<Value>&) { return Value::null(); });
+  // No timers here. A clock is the target's rather than the language's, so a
+  // script reaches one off whatever its target hands over — `$window` on the
+  // web — and this target hands over none.
 
   // ---- JSON ----
   one(into, "JSON.stringify", [](std::vector<Value>& a) {

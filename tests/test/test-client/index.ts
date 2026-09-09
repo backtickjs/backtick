@@ -3,6 +3,7 @@ import type { Bundle } from "@backtickjs/bundler";
 import { evaluate as evaluateBundle } from "@backtickjs/js-interpreter";
 import type { RendererOptions } from "solid-js/universal";
 import { testHost } from "./host.ts";
+import { window } from "./window.ts";
 import type { TestNode } from "./host.ts";
 
 export { isTestNode, isText, recordingHost, testHost } from "./host.ts";
@@ -28,5 +29,11 @@ export function evaluate(
   host: RendererOptions<TestNode> = testHost,
   builtins?: Readonly<Record<string, ClientValue>>,
 ): unknown {
-  return evaluateBundle(bundle, { renderer: host, builtins });
+  // A window under every fixture, because a timer is the target's rather than
+  // the language's and a fixture that waits splices one. A test naming its own
+  // wins, the way an app's table wins over the framework's.
+  return evaluateBundle(bundle, {
+    renderer: host,
+    builtins: { window, ...builtins },
+  });
 }

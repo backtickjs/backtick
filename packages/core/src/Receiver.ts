@@ -10,7 +10,6 @@ import type {
   StringConstructor,
 } from "./receivers.generated.js";
 import type { BacktickElement } from "@backtickjs/boundary";
-import type { Builtins } from "@backtickjs/language-schema";
 import type { ClientFunction } from "@backtickjs/boundary";
 import type { ClientValue } from "@backtickjs/boundary";
 
@@ -54,11 +53,7 @@ export type ClientGlobal =
   | typeof globalThis.JSON
   | typeof globalThis.Math
   | typeof globalThis.Number
-  | typeof globalThis.String
-  | typeof globalThis.setTimeout
-  | typeof globalThis.setInterval
-  | typeof globalThis.clearTimeout
-  | typeof globalThis.clearInterval;
+  | typeof globalThis.String;
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
@@ -76,20 +71,12 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
           ? NumberConstructor
           : T extends typeof globalThis.String
             ? StringConstructor
-            : T extends typeof globalThis.setTimeout
-              ? Builtins["setTimeout"]
-              : T extends typeof globalThis.setInterval
-                ? Builtins["setInterval"]
-                : T extends typeof globalThis.clearTimeout
-                  ? Builtins["clearTimeout"]
-                  : T extends typeof globalThis.clearInterval
-                    ? Builtins["clearInterval"]
-                    : T extends string | number | boolean | ClientValue[]
-                      ? Autoboxed<T>
-                      : T extends BacktickElement
-                        ? {}
-                        : T extends ClientFunction
-                          ? T
-                          : T extends object
-                            ? ReadMembers<T>
-                            : T;
+            : T extends string | number | boolean | ClientValue[]
+              ? Autoboxed<T>
+              : T extends BacktickElement
+                ? {}
+                : T extends ClientFunction
+                  ? T
+                  : T extends object
+                    ? ReadMembers<T>
+                    : T;

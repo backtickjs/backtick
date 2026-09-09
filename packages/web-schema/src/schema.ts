@@ -49,6 +49,67 @@ export const schema: Schema = {
         console: Type.Ref("Console", {
           description: "Somewhere to say something while writing a script.",
         }),
+        setTimeout: Type.Function(
+          [
+            Type.FunctionParameter("handler", Type.Function([], Type.Void()), {
+              description: "What to run once the delay has passed.",
+            }),
+            Type.Optional(
+              Type.FunctionParameter("timeout", Type.Number(), {
+                description:
+                  "How long to wait, in milliseconds. Left out is the same as zero: the soonest turn that is not this one.",
+              }),
+            ),
+          ],
+          Type.Number(),
+          {
+            description:
+              "Runs something once, later, and answers with a number to cancel it by.\n\n" +
+              "Nothing cancels it for you. A timer outlives the drawing that made one, so a script that may go away first keeps its id and clears it.",
+          },
+        ),
+        clearTimeout: Type.Function(
+          [
+            Type.FunctionParameter("id", Type.Number(), {
+              description: "What `setTimeout` answered with.",
+            }),
+          ],
+          Type.Void(),
+          {
+            description:
+              "Cancels a timer that has not run yet. An id that has already run, or was never one, is not an error.",
+          },
+        ),
+        setInterval: Type.Function(
+          [
+            Type.FunctionParameter("handler", Type.Function([], Type.Void()), {
+              description: "What to run on every tick.",
+            }),
+            Type.Optional(
+              Type.FunctionParameter("timeout", Type.Number(), {
+                description: "How long between ticks, in milliseconds.",
+              }),
+            ),
+          ],
+          Type.Number(),
+          {
+            description:
+              "Runs something over and over, and answers with a number to cancel it by.\n\n" +
+              "This is what makes a loop, and not `setTimeout` calling itself: a variable cannot be named in its own initializer, so a handler that reschedules itself is not something a script can write.",
+          },
+        ),
+        clearInterval: Type.Function(
+          [
+            Type.FunctionParameter("id", Type.Number(), {
+              description: "What `setInterval` answered with.",
+            }),
+          ],
+          Type.Void(),
+          {
+            description:
+              "Stops a repeating timer. Ids are one series whichever call made them, so either `clear` cancels either kind.",
+          },
+        ),
         addEventListener: Type.Generic(
           [
             Type.GenericParameter(

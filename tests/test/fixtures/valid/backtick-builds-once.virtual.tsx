@@ -1,6 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs, state } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/core";
+import { window } from "@backtickjs/web-schema";
 
 // A component that draws a bundle it is still waiting for.
 //
@@ -22,7 +23,7 @@ const answer = JSON.stringify(await bundler.run(<Answer />));
 async function Waiting({ ask }: { ask: Prop<() => string> }) {
   return cs.lift((() => {
     const __cs_drawn = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(""));
-    const __cs_started = cs.const(cs.receiver(setTimeout)(() => cs.receiver(__cs_drawn).write((cs.splice((ask)) satisfies import("@backtickjs/core").ClientUnknown)()), 0));
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => cs.receiver(__cs_drawn).write((cs.splice((ask)) satisfies import("@backtickjs/core").ClientUnknown)()), 0));
     return cs.const(<backtick bundle={cs.lift(cs.receiver(__cs_drawn).read())}/>);
 })());
 }

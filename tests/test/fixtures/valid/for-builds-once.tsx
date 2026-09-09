@@ -1,5 +1,6 @@
 import { For, cs, state } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/core";
+import { window } from "@backtickjs/web-schema";
 
 // The same claim as `backtick-builds-once`, with no bundle in it.
 //
@@ -15,7 +16,7 @@ async function Waiting({ more }: { more: Prop<() => boolean> }) {
   return cs`{
     const items = $state<string[]>([]);
 
-    const started = setTimeout(() => {
+    const started = $window.setTimeout(() => {
       if ($more()) {
         items.write($answer);
       }

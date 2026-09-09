@@ -1,5 +1,6 @@
 import { cs, state } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/core";
+import { window } from "@backtickjs/web-schema";
 
 // A component whose whole drawing is a conditional on a cell of its own, which
 // something writes once from outside the block.
@@ -18,7 +19,7 @@ import type { Prop } from "@backtickjs/core";
 async function Held({ again }: { again: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_shown = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)(false));
-    const __cs_started = cs.const(cs.receiver(setTimeout)(() => {
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => {
         if ((cs.condition((cs.splice((again)) satisfies import("@backtickjs/core").ClientUnknown)()) && (cs.splice((again)) satisfies import("@backtickjs/core").ClientUnknown)())) {
             cs.statement(cs.receiver(__cs_shown).write(true));
         }

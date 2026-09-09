@@ -13,12 +13,12 @@
   </div>;
 }
 
-#f1 = ($0, $1) => {
+#f1 = ($0, $1, $2) => {
   const drawn = $0()("");
-  const started = setTimeout(() => drawn.write($1()()), 0);
+  const started = $1().setTimeout(() => drawn.write($2()()), 0);
   return <backtick
     bundle={drawn.read()}
   />;
 }
 
-root = #f0(() => state, () => ($0) => #f1(() => state, () => $0.ask()), () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},\"answered\"]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")
+root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.ask()), () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},\"answered\"]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")

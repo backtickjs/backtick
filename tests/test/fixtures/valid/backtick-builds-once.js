@@ -1,6 +1,7 @@
 import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
 import { cs, state } from "@backtickjs/core";
+import { window } from "@backtickjs/web-schema";
 // A component that draws a bundle it is still waiting for.
 //
 // What this pins is that it is built once. `insert` reads what it was given
@@ -14,27 +15,27 @@ import { cs, state } from "@backtickjs/core";
 // nothing runs again — a loop that would otherwise have no end.
 async function Answer() {
   return cs.create(
-    [17, 10, 17, 35],
+    [18, 10, 18, 35],
     {
       version: "0.0.0",
       filePath: "backtick-builds-once.tsx",
-      fileHash: "327jptyn68h34",
+      fileHash: "7221ffvhxi8e",
       splices: {},
       captures: [],
     },
     () => ({
       kind: "jsx",
-      loc: [17, 13, 17, 34],
+      loc: [18, 13, 18, 34],
       type: {
         kind: "string",
-        loc: [17, 14, 17, 16],
+        loc: [18, 14, 18, 16],
         text: "em",
       },
       attributes: [],
       children: [
         {
           kind: "string",
-          loc: [17, 18, 17, 28],
+          loc: [18, 18, 18, 28],
           text: "answered",
         },
       ],
@@ -44,42 +45,43 @@ async function Answer() {
 const answer = JSON.stringify(await bundler.run(_jsx(Answer, {})));
 async function Waiting({ ask }) {
   return cs.create(
-    [23, 10, 27, 5],
+    [24, 10, 28, 5],
     {
       version: "0.0.0",
       filePath: "backtick-builds-once.tsx",
-      fileHash: "327jptyn68h34",
+      fileHash: "7221ffvhxi8e",
       splices: {
         $state: { value: state, params: [] },
+        $window: { value: window, params: [] },
         $ask: { value: ask, params: [] },
       },
       captures: [],
     },
     () => ({
       kind: "{}",
-      loc: [23, 13, 27, 4],
+      loc: [24, 13, 28, 4],
       statements: [
         {
           kind: "const",
-          loc: [24, 5, 24, 30],
+          loc: [25, 5, 25, 30],
           name: {
             kind: "id",
-            loc: [24, 11, 24, 16],
+            loc: [25, 11, 25, 16],
             text: "drawn",
-            bindingKey: "drawn$327jptyn68h34$0",
+            bindingKey: "drawn$7221ffvhxi8e$0",
           },
           initializer: {
             kind: "()",
-            loc: [24, 19, 24, 29],
+            loc: [25, 19, 25, 29],
             expression: {
               kind: "splice",
-              loc: [24, 19, 24, 25],
+              loc: [25, 19, 25, 25],
               key: "$state",
             },
             arguments: [
               {
                 kind: "string",
-                loc: [24, 26, 24, 28],
+                loc: [25, 26, 25, 28],
                 text: "",
               },
             ],
@@ -87,47 +89,52 @@ async function Waiting({ ask }) {
         },
         {
           kind: "const",
-          loc: [25, 5, 25, 62],
+          loc: [26, 5, 26, 70],
           name: {
             kind: "id",
-            loc: [25, 11, 25, 18],
+            loc: [26, 11, 26, 18],
             text: "started",
-            bindingKey: "started$327jptyn68h34$1",
+            bindingKey: "started$7221ffvhxi8e$1",
           },
           initializer: {
             kind: "()",
-            loc: [25, 21, 25, 61],
+            loc: [26, 21, 26, 69],
             expression: {
-              kind: "bltn",
-              loc: [25, 21, 25, 31],
+              kind: ".",
+              loc: [26, 21, 26, 39],
+              expression: {
+                kind: "splice",
+                loc: [26, 21, 26, 28],
+                key: "$window",
+              },
               name: "setTimeout",
             },
             arguments: [
               {
                 kind: "=>",
-                loc: [25, 32, 25, 57],
+                loc: [26, 40, 26, 65],
                 parameters: [],
                 body: {
                   kind: "()",
-                  loc: [25, 38, 25, 57],
+                  loc: [26, 46, 26, 65],
                   expression: {
                     kind: ".",
-                    loc: [25, 38, 25, 49],
+                    loc: [26, 46, 26, 57],
                     expression: {
                       kind: "id",
-                      loc: [25, 38, 25, 43],
+                      loc: [26, 46, 26, 51],
                       text: "drawn",
-                      bindingKey: "drawn$327jptyn68h34$0",
+                      bindingKey: "drawn$7221ffvhxi8e$0",
                     },
                     name: "write",
                   },
                   arguments: [
                     {
                       kind: "()",
-                      loc: [25, 50, 25, 56],
+                      loc: [26, 58, 26, 64],
                       expression: {
                         kind: "splice",
-                        loc: [25, 50, 25, 54],
+                        loc: [26, 58, 26, 62],
                         key: "$ask",
                       },
                       arguments: [],
@@ -137,7 +144,7 @@ async function Waiting({ ask }) {
               },
               {
                 kind: "number",
-                loc: [25, 59, 25, 60],
+                loc: [26, 67, 26, 68],
                 value: 0,
               },
             ],
@@ -145,13 +152,13 @@ async function Waiting({ ask }) {
         },
         {
           kind: "return",
-          loc: [26, 5, 26, 47],
+          loc: [27, 5, 27, 47],
           expression: {
             kind: "jsx",
-            loc: [26, 12, 26, 46],
+            loc: [27, 12, 27, 46],
             type: {
               kind: "string",
-              loc: [26, 13, 26, 21],
+              loc: [27, 13, 27, 21],
               text: "backtick",
             },
             attributes: [
@@ -159,15 +166,15 @@ async function Waiting({ ask }) {
                 name: "bundle",
                 initializer: {
                   kind: "()",
-                  loc: [26, 30, 26, 42],
+                  loc: [27, 30, 27, 42],
                   expression: {
                     kind: ".",
-                    loc: [26, 30, 26, 40],
+                    loc: [27, 30, 27, 40],
                     expression: {
                       kind: "id",
-                      loc: [26, 30, 26, 35],
+                      loc: [27, 30, 27, 35],
                       text: "drawn",
-                      bindingKey: "drawn$327jptyn68h34$0",
+                      bindingKey: "drawn$7221ffvhxi8e$0",
                     },
                     name: "read",
                   },
@@ -183,11 +190,11 @@ async function Waiting({ ask }) {
   );
 }
 export default cs.create(
-  [30, 16, 44, 3],
+  [31, 16, 45, 3],
   {
     version: "0.0.0",
     filePath: "backtick-builds-once.tsx",
-    fileHash: "327jptyn68h34",
+    fileHash: "7221ffvhxi8e",
     splices: {
       $state: { value: state, params: [] },
       $Waiting: { value: Waiting, params: [] },
@@ -197,29 +204,29 @@ export default cs.create(
   },
   () => ({
     kind: "{}",
-    loc: [30, 19, 44, 2],
+    loc: [31, 19, 45, 2],
     statements: [
       {
         kind: "const",
-        loc: [31, 3, 31, 27],
+        loc: [32, 3, 32, 27],
         name: {
           kind: "id",
-          loc: [31, 9, 31, 14],
+          loc: [32, 9, 32, 14],
           text: "asked",
-          bindingKey: "asked$327jptyn68h34$2",
+          bindingKey: "asked$7221ffvhxi8e$2",
         },
         initializer: {
           kind: "()",
-          loc: [31, 17, 31, 26],
+          loc: [32, 17, 32, 26],
           expression: {
             kind: "splice",
-            loc: [31, 17, 31, 23],
+            loc: [32, 17, 32, 23],
             key: "$state",
           },
           arguments: [
             {
               kind: "number",
-              loc: [31, 24, 31, 25],
+              loc: [32, 24, 32, 25],
               value: 0,
             },
           ],
@@ -227,47 +234,47 @@ export default cs.create(
       },
       {
         kind: "return",
-        loc: [33, 3, 43, 5],
+        loc: [34, 3, 44, 5],
         expression: {
           kind: "jsx",
-          loc: [34, 5, 42, 11],
+          loc: [35, 5, 43, 11],
           type: {
             kind: "string",
-            loc: [34, 6, 34, 9],
+            loc: [35, 6, 35, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
               kind: "jsx",
-              loc: [35, 7, 35, 45],
+              loc: [36, 7, 36, 45],
               type: {
                 kind: "string",
-                loc: [35, 8, 35, 12],
+                loc: [36, 8, 36, 12],
                 text: "span",
               },
               attributes: [],
               children: [
                 {
                   kind: "binop",
-                  loc: [35, 14, 35, 37],
+                  loc: [36, 14, 36, 37],
                   left: {
                     kind: "string",
-                    loc: [35, 14, 35, 22],
+                    loc: [36, 14, 36, 22],
                     text: "asked ",
                   },
                   operatorToken: "+",
                   right: {
                     kind: "()",
-                    loc: [35, 25, 35, 37],
+                    loc: [36, 25, 36, 37],
                     expression: {
                       kind: ".",
-                      loc: [35, 25, 35, 35],
+                      loc: [36, 25, 36, 35],
                       expression: {
                         kind: "id",
-                        loc: [35, 25, 35, 30],
+                        loc: [36, 25, 36, 30],
                         text: "asked",
-                        bindingKey: "asked$327jptyn68h34$2",
+                        bindingKey: "asked$7221ffvhxi8e$2",
                       },
                       name: "read",
                     },
@@ -278,10 +285,10 @@ export default cs.create(
             },
             {
               kind: "jsx",
-              loc: [36, 7, 41, 9],
+              loc: [37, 7, 42, 9],
               type: {
                 kind: "splice",
-                loc: [36, 8, 36, 15],
+                loc: [37, 8, 37, 15],
                 key: "$Waiting",
               },
               attributes: [
@@ -289,41 +296,41 @@ export default cs.create(
                   name: "ask",
                   initializer: {
                     kind: "=>",
-                    loc: [37, 14, 40, 10],
+                    loc: [38, 14, 41, 10],
                     parameters: [],
                     body: {
                       kind: "{}",
-                      loc: [37, 20, 40, 10],
+                      loc: [38, 20, 41, 10],
                       statements: [
                         {
                           kind: "()",
-                          loc: [38, 11, 38, 40],
+                          loc: [39, 11, 39, 40],
                           expression: {
                             kind: ".",
-                            loc: [38, 11, 38, 22],
+                            loc: [39, 11, 39, 22],
                             expression: {
                               kind: "id",
-                              loc: [38, 11, 38, 16],
+                              loc: [39, 11, 39, 16],
                               text: "asked",
-                              bindingKey: "asked$327jptyn68h34$2",
+                              bindingKey: "asked$7221ffvhxi8e$2",
                             },
                             name: "write",
                           },
                           arguments: [
                             {
                               kind: "binop",
-                              loc: [38, 23, 38, 39],
+                              loc: [39, 23, 39, 39],
                               left: {
                                 kind: "()",
-                                loc: [38, 23, 38, 35],
+                                loc: [39, 23, 39, 35],
                                 expression: {
                                   kind: ".",
-                                  loc: [38, 23, 38, 33],
+                                  loc: [39, 23, 39, 33],
                                   expression: {
                                     kind: "id",
-                                    loc: [38, 23, 38, 28],
+                                    loc: [39, 23, 39, 28],
                                     text: "asked",
-                                    bindingKey: "asked$327jptyn68h34$2",
+                                    bindingKey: "asked$7221ffvhxi8e$2",
                                   },
                                   name: "read",
                                 },
@@ -332,7 +339,7 @@ export default cs.create(
                               operatorToken: "+",
                               right: {
                                 kind: "number",
-                                loc: [38, 38, 38, 39],
+                                loc: [39, 38, 39, 39],
                                 value: 1,
                               },
                             },
@@ -340,24 +347,24 @@ export default cs.create(
                         },
                         {
                           kind: "return",
-                          loc: [39, 11, 39, 50],
+                          loc: [40, 11, 40, 50],
                           expression: {
                             kind: "?:",
-                            loc: [39, 18, 39, 49],
+                            loc: [40, 18, 40, 49],
                             condition: {
                               kind: "binop",
-                              loc: [39, 18, 39, 34],
+                              loc: [40, 18, 40, 34],
                               left: {
                                 kind: "()",
-                                loc: [39, 18, 39, 30],
+                                loc: [40, 18, 40, 30],
                                 expression: {
                                   kind: ".",
-                                  loc: [39, 18, 39, 28],
+                                  loc: [40, 18, 40, 28],
                                   expression: {
                                     kind: "id",
-                                    loc: [39, 18, 39, 23],
+                                    loc: [40, 18, 40, 23],
                                     text: "asked",
-                                    bindingKey: "asked$327jptyn68h34$2",
+                                    bindingKey: "asked$7221ffvhxi8e$2",
                                   },
                                   name: "read",
                                 },
@@ -366,18 +373,18 @@ export default cs.create(
                               operatorToken: ">",
                               right: {
                                 kind: "number",
-                                loc: [39, 33, 39, 34],
+                                loc: [40, 33, 40, 34],
                                 value: 4,
                               },
                             },
                             whenTrue: {
                               kind: "string",
-                              loc: [39, 37, 39, 39],
+                              loc: [40, 37, 40, 39],
                               text: "",
                             },
                             whenFalse: {
                               kind: "splice",
-                              loc: [39, 42, 39, 49],
+                              loc: [40, 42, 40, 49],
                               key: "$answer",
                             },
                           },

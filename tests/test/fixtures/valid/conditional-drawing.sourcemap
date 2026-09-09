@@ -15,8 +15,12 @@ const                                     → const
 __cs_started                              → started
  = cs.const(                              →  = 
 cs.receiver(                              → 
-setTimeout                                → setTimeout
+cs.splice(                                →  [-semantic]
+(window)                                  → $window
+) satisfies import("@backtickjs/core").ClientUnknown→  [-semantic]
 )                                         → 
+.                                         → .
+setTimeout                                → setTimeout
 (                                         → (
 () => {\n                                 → () => {\n      
 if ((cs.condition(                        → if (

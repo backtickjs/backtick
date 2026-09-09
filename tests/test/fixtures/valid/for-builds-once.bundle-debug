@@ -13,14 +13,14 @@
   </div>;
 }
 
-#f1 = ($0, $1, $2, $3) => {
+#f1 = ($0, $1, $2, $3, $4) => {
   const items = $0()([]);
-  const started = setTimeout(() => {
-    if ($1()()) {
-      items.write($2());
+  const started = $1().setTimeout(() => {
+    if ($2()()) {
+      items.write($3());
     }
   }, 0);
-  return $3()({
+  return $4()({
     "each": () => items.read(),
     "children": () => (item) => <em>
       {item}
@@ -28,7 +28,7 @@
   });
 }
 
-root = #f0(() => state, () => ($0) => #f1(() => state, () => $0.more(), () => ["one", "two"], () => ($0) => <for
+root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.more(), () => ["one", "two"], () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}

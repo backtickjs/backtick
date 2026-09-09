@@ -807,42 +807,6 @@ export interface LanguageBuiltins {
     init?: RequestInit,
   ): void;
   state<T>(initial: T): State<T>;
-  /**
-   * Runs something once, later, and answers with a number to cancel it by.
-   *
-   * Nothing cancels it for you. A timer outlives the drawing that made one, so
-   * a script that may go away first keeps its id and clears it.
-   *
-   * @param handler What to run once the delay has passed.
-   * @param timeout How long to wait, in milliseconds. Left out is the same as
-   * zero: the soonest turn that is not this one.
-   */
-  setTimeout(handler: () => void, timeout?: number): number;
-  /**
-   * Cancels a timer that has not run yet. An id that has already run, or was
-   * never one, is not an error.
-   *
-   * @param id What `setTimeout` answered with.
-   */
-  clearTimeout(id: number): void;
-  /**
-   * Runs something over and over, and answers with a number to cancel it by.
-   *
-   * This is what makes a loop, and not `setTimeout` calling itself: a variable
-   * cannot be named in its own initializer, so a handler that reschedules
-   * itself is not something a script can write.
-   *
-   * @param handler What to run on every tick.
-   * @param timeout How long between ticks, in milliseconds.
-   */
-  setInterval(handler: () => void, timeout?: number): number;
-  /**
-   * Stops a repeating timer. Ids are one series whichever call made them, so
-   * either `clear` cancels either kind.
-   *
-   * @param id What `setInterval` answered with.
-   */
-  clearInterval(id: number): void;
 }
 
 /** What a client must answer with, for every name in scope. */

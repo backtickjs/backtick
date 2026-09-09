@@ -1,5 +1,6 @@
 import { For, cs, state } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/core";
+import { window } from "@backtickjs/web-schema";
 
 // The same claim as `backtick-builds-once`, with no bundle in it.
 //
@@ -14,7 +15,7 @@ const answer = ["one", "two"];
 async function Waiting({ more }: { more: Prop<() => boolean> }) {
   return cs.lift((() => {
     const __cs_items = cs.const((cs.splice((state)) satisfies import("@backtickjs/core").ClientUnknown)<string[]>([]));
-    const __cs_started = cs.const(cs.receiver(setTimeout)(() => {
+    const __cs_started = cs.const(cs.receiver(cs.splice((window)) satisfies import("@backtickjs/core").ClientUnknown).setTimeout(() => {
         if ((cs.condition((cs.splice((more)) satisfies import("@backtickjs/core").ClientUnknown)()) && (cs.splice((more)) satisfies import("@backtickjs/core").ClientUnknown)())) {
             cs.statement(cs.receiver(__cs_items).write(cs.splice((answer)) satisfies import("@backtickjs/core").ClientUnknown));
         }

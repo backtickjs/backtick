@@ -27,11 +27,11 @@ import type { TNode } from "../TNode.js";
  * Every name the host language provides, which a script writes rather than
  * imports.
  *
- * A script reaches one by writing it — `Math.floor`, `"x".trim()`,
- * `setTimeout(…)` — so there is no value for an app to import it through, and
- * nothing here to write. Eight are fronts, dot and all: four a place statics
- * hang off and four a kind of value a member is read off. The rest are whole
- * names, which need no member to be one.
+ * A script reaches one by writing it — `Math.floor`, `"x".trim()` — so there is
+ * no value for an app to import it through, and nothing here to write. All nine
+ * are fronts, dot and all: five a place statics hang off and four a kind of
+ * value a member is read off. Nothing the language provides is a whole name a
+ * script calls bare; a target's own arrives as a value, `$window` and the rest.
  *
  * Written out rather than read off the dot, because the two are not the same
  * question. A name is skipped here because the language answers for it, and a
@@ -55,10 +55,6 @@ const language: readonly string[] = [
   "boolean.",
   "number.",
   "string.",
-  "clearInterval",
-  "clearTimeout",
-  "setInterval",
-  "setTimeout",
 ];
 
 /** The values a script splices to reach the builtins a schema declares. */

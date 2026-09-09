@@ -24,23 +24,15 @@ import { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 //
 // A front is only the front of a name: a script writes `Math.floor`, which is a
 // single name the client answers, and there is no `Math` for a read to yield —
-// so an access folds into the whole name below, and the front standing alone is
-// an error. A whole name has nothing to fold in and reads as a value.
+// so an access folds into the whole name, and the front standing alone is an
+// error. Every name here is one, which is what the language turned out to be:
+// the statics, and nothing a script calls bare. A timer is the target's —
+// `$window.setTimeout` — because a clock is the host's and not the language's.
 //
 // The four kinds a member is read off — `string.`, `array.` and the rest — are
 // not here: those are reached off a value rather than written, so they are
 // `receivers.ts`'s and never an identifier this resolves.
-const language = new Set([
-  "Array.",
-  "JSON.",
-  "Math.",
-  "Number.",
-  "String.",
-  "clearInterval",
-  "clearTimeout",
-  "setInterval",
-  "setTimeout",
-]);
+const language = new Set(["Array.", "JSON.", "Math.", "Number.", "String."]);
 
 export interface RewriteState {
   script: ClientScript;

@@ -15,10 +15,10 @@
   </div>;
 }
 
-#f1 = ($0, $1) => {
+#f1 = ($0, $1, $2) => {
   const shown = $0()(false);
-  const started = setTimeout(() => {
-    if ($1()()) {
+  const started = $1().setTimeout(() => {
+    if ($2()()) {
       shown.write(true);
     }
   }, 0);
@@ -31,4 +31,4 @@
   </Fragment>;
 }
 
-root = #f0(() => state, () => ($0) => #f1(() => state, () => $0.again()))
+root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.again()))

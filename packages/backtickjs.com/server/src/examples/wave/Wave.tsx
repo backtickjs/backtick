@@ -1,4 +1,5 @@
 import { cs, For, state } from "@backtickjs/core";
+import { window } from "@backtickjs/web-schema";
 
 export default async function Wave() {
   return cs`{
@@ -14,8 +15,8 @@ export default async function Wave() {
     const id = $state(0);
     const tick = () => t.update((v) => v + 1);
     const run = () => {
-      clearInterval(id.read());
-      id.write(id.read() === 0 ? setInterval(tick, 90) : 0);
+      $window.clearInterval(id.read());
+      id.write(id.read() === 0 ? $window.setInterval(tick, 90) : 0);
     };
     return (
       <div style={card} onclick={run}>
