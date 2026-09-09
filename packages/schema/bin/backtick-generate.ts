@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
 import { format } from "prettier";
+import { flatten } from "../dist/flatten.js";
 import { generate } from "../dist/generate.js";
 import type { Schema } from "../dist/index.js";
 
@@ -60,3 +61,14 @@ const values = generate.builtins(schema);
 if (values !== "") {
   await write("src/builtins.generated.ts", values);
 }
+
+// The same schema for a reader that is not this process: a native client, a
+// generator written in something else, a diff in review.
+//
+// Flattened, because a document naming a package it does not contain is one a
+// reader cannot finish — what a target draws is everything it and its bases
+// declare, and `extends` is this repository's business rather than theirs.
+//
+// Checked in, so a change to what a client must answer for is a change someone
+// can see.
+await write("schema.generated.json", generate.json(flatten(schema)));

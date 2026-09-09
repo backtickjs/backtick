@@ -1,0 +1,3222 @@
+{
+  "package": "@backtickjs/cardputer-schema",
+  "namespace": "Cardputer",
+  "extends": [],
+  "types": {
+    "ReadonlyState": {
+      "description": "Storage a script may read but not replace.\n\nWhat a position is in a list is one of these, and so is a cell handed to a component that only displays it: the signature says which way the value travels, and a `State` goes wherever one of these is wanted.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [
+          {
+            "type": "ref",
+            "$ref": "ClientHandle"
+          }
+        ],
+        "properties": {
+          "read": {
+            "type": "function",
+            "parameters": [],
+            "returnType": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          }
+        },
+        "required": ["read"]
+      }
+    },
+    "State": {
+      "description": "A cell as a script reads it.\n\nWhat makes one is not here: `state` is a client function a script imports and splices, so a cell is what calling it answers with. This is the half that reaches the client.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [
+          {
+            "type": "apply",
+            "target": {
+              "type": "ref",
+              "$ref": "ReadonlyState"
+            },
+            "arguments": [
+              {
+                "type": "ref",
+                "$ref": "T"
+              }
+            ]
+          }
+        ],
+        "properties": {
+          "write": {
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "value",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              }
+            ],
+            "returnType": {
+              "type": "void"
+            }
+          },
+          "update": {
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "updater",
+                "holds": {
+                  "type": "function",
+                  "parameters": [
+                    {
+                      "type": "functionParameter",
+                      "name": "value",
+                      "holds": {
+                        "type": "ref",
+                        "$ref": "T"
+                      }
+                    }
+                  ],
+                  "returnType": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                }
+              }
+            ],
+            "returnType": {
+              "type": "void"
+            }
+          }
+        },
+        "required": ["write", "update"]
+      }
+    },
+    "Bytes": {
+      "description": "Bytes the client is holding. Opaque: this language has no way to look inside one, only to hold it and hand it back.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {},
+      "required": []
+    },
+    "RequestInit": {
+      "description": "The web's `RequestInit`, less what a script has no way to hold.",
+      "type": "object",
+      "properties": {
+        "method": {
+          "type": "string"
+        },
+        "headers": {
+          "type": "record",
+          "values": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "ref",
+              "$ref": "Bytes"
+            }
+          ]
+        }
+      },
+      "required": []
+    },
+    "Response": {
+      "description": "What answered. A 404 is an answer.\n\nThe body is not here: reading it is a second turn, the way it is on the web, so it is asked for and arrives later. Once — a body read twice fails the second time.\n\nThere is no `json`: `JSON.parse` is a name already, and a parse that fails belongs in the script's own `try` rather than in a third handler here.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {
+        "ok": {
+          "readOnly": true,
+          "type": "boolean"
+        },
+        "status": {
+          "readOnly": true,
+          "type": "number"
+        },
+        "statusText": {
+          "readOnly": true,
+          "type": "string"
+        },
+        "text": {
+          "description": "Reads the body as text.",
+          "type": "function",
+          "parameters": [
+            {
+              "type": "functionParameter",
+              "name": "onText",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "text",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "onFailure",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "reason",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            }
+          ],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "bytes": {
+          "description": "Reads the body as bytes.",
+          "type": "function",
+          "parameters": [
+            {
+              "type": "functionParameter",
+              "name": "onBytes",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "bytes",
+                    "holds": {
+                      "type": "ref",
+                      "$ref": "Bytes"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "onFailure",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "reason",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            }
+          ],
+          "returnType": {
+            "type": "void"
+          }
+        }
+      },
+      "required": ["ok", "status", "statusText", "text", "bytes"]
+    },
+    "ArrayLike": {
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [],
+        "properties": {
+          "length": {
+            "readOnly": true,
+            "type": "number"
+          },
+          "n": {
+            "readOnly": true,
+            "type": "index",
+            "name": "n",
+            "key": {
+              "type": "number"
+            },
+            "value": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          }
+        },
+        "required": ["length", "n"]
+      }
+    },
+    "ForProps": {
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [],
+        "properties": {
+          "each": {
+            "description": "The array to draw one thing per member of.",
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          },
+          "children": {
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "member",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              },
+              {
+                "description": "Where the member is, as storage rather than a number: a position moves without the member changing, so a number read once would go stale.",
+                "type": "functionParameter",
+                "name": "index",
+                "holds": {
+                  "type": "apply",
+                  "target": {
+                    "type": "ref",
+                    "$ref": "ReadonlyState"
+                  },
+                  "arguments": [
+                    {
+                      "type": "number"
+                    }
+                  ]
+                }
+              }
+            ],
+            "returnType": {
+              "type": "ref",
+              "$ref": "BacktickElement"
+            }
+          }
+        },
+        "required": ["each", "children"]
+      }
+    },
+    "FragmentProps": {
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "children": {
+          "type": "ref",
+          "$ref": "BacktickNode"
+        }
+      },
+      "required": []
+    },
+    "BacktickProps": {
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "props": {
+          "description": "What the bundle is handed, under the name `props`.\n\nA bundle written elsewhere reads it the way any script reads a name it did not write. A live value stays live: reading a splice is calling it, so a drawing handed a cell redraws when the cell changes rather than being built again.\n\nUnchecked here where `<Backtick />` checks it against what the bundle takes, for the reason `<For />` exists: a tag has nowhere to bind a type parameter.",
+          "type": "record",
+          "values": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        },
+        "bundle": {
+          "description": "The bundle to draw, as the text it is on the wire — what `response.text` answers with, and what a document carries.\n\nNull draws nothing, which is what a page with no bundle yet has to say. It is admitted here because a cell that is sometimes empty cannot be narrowed on its way in: a script reads a cell where it stands, and a read moved out to a `const` to be narrowed is a read that happens once and never again. So a page that wants something in the meantime writes the condition it already has — `held.read() === null ? … : <backtick bundle={held.read()} />` — and a page that wants nothing writes the tag and lets the null through.",
+          "type": "union",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": ["bundle"]
+    },
+    "StringProps": {
+      "description": "Text, as `drawString` draws it.\n\n`children` is what it says. A number is written as the language writes one, so a count needs no formatting to be drawn.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "size": {
+          "type": "number"
+        },
+        "datum": {
+          "type": "string"
+        },
+        "children": {
+          "type": "ref",
+          "$ref": "BacktickNode"
+        }
+      },
+      "required": ["x", "y"]
+    },
+    "RectProps": {
+      "description": "A rectangle, as `fillRect` and `drawRect` draw one.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "fill": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "radius": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y", "width", "height"]
+    },
+    "CircleProps": {
+      "description": "A circle, as `fillCircle` and `drawCircle` draw one.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "fill": {
+          "type": "boolean"
+        },
+        "radius": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y", "radius"]
+    },
+    "EllipseProps": {
+      "description": "An ellipse, as `fillEllipse` and `drawEllipse` draw one.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "fill": {
+          "type": "boolean"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y", "width", "height"]
+    },
+    "LineProps": {
+      "description": "A line from one point to another, as `drawLine` draws it.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "toX": {
+          "type": "number"
+        },
+        "toY": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y", "toX", "toY"]
+    },
+    "TriangleProps": {
+      "description": "A triangle, as `fillTriangle` and `drawTriangle` draw one. `x` and `y` are its first corner and the other two are named.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "fill": {
+          "type": "boolean"
+        },
+        "x2": {
+          "type": "number"
+        },
+        "y2": {
+          "type": "number"
+        },
+        "x3": {
+          "type": "number"
+        },
+        "y3": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y", "x2", "y2", "x3", "y3"]
+    },
+    "PixelProps": {
+      "description": "One pixel, as `drawPixel` draws it.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y"]
+    },
+    "ArcProps": {
+      "description": "An arc between two angles in degrees, as `fillArc` and `drawArc` draw one.",
+      "type": "interface",
+      "extends": [],
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "colour": {
+          "type": "number"
+        },
+        "fill": {
+          "type": "boolean"
+        },
+        "radius": {
+          "type": "number"
+        },
+        "innerRadius": {
+          "type": "number"
+        },
+        "start": {
+          "type": "number"
+        },
+        "end": {
+          "type": "number"
+        }
+      },
+      "required": ["x", "y", "radius", "innerRadius", "start", "end"]
+    }
+  },
+  "elements": {
+    "for": {
+      "description": "An array, and what to draw for one member of it.\n\n`children` is a script whose value is a function, so the client walks the array itself: it draws only the members that are new and moves the rest rather than rebuilding them. A member is named by its own identity — there is no key.\n\nA member is `ClientValue` here where it is `T` on the props, because a tag has nowhere to bind a type parameter. Write `<For />` to have the child checked against what `each` holds.",
+      "type": "apply",
+      "target": {
+        "type": "ref",
+        "$ref": "ForProps"
+      },
+      "arguments": [
+        {
+          "type": "ref",
+          "$ref": "ClientValue"
+        }
+      ]
+    },
+    "Fragment": {
+      "description": "Children with no element of their own: what it holds goes where it stands.\n\nWhat it is for is the position. A drawing that is not an element has nowhere to be watched — a conditional standing at a block's root is read inside whatever computation asked for it, and the write that answers the conditional runs the block again. Under a fragment the conditional is a child, and a child position is watched on its own.\n\nWritten `<>`, which TypeScript resolves to this name. Capitalized where the other two are not, because a lowercase first letter is what makes a tag a target's own — so no target can declare an element named this.",
+      "type": "ref",
+      "$ref": "FragmentProps"
+    },
+    "backtick": {
+      "description": "A bundle, drawn here.\n\nOne a script was handed rather than one the page was built with — fetched, stored, passed in. Every client evaluates bundles already, which is why this is the language's and not a target's: what draws it is the same client that drew the one it stands in.",
+      "type": "ref",
+      "$ref": "BacktickProps"
+    },
+    "string": {
+      "type": "ref",
+      "$ref": "StringProps"
+    },
+    "rect": {
+      "type": "ref",
+      "$ref": "RectProps"
+    },
+    "circle": {
+      "type": "ref",
+      "$ref": "CircleProps"
+    },
+    "ellipse": {
+      "type": "ref",
+      "$ref": "EllipseProps"
+    },
+    "line": {
+      "type": "ref",
+      "$ref": "LineProps"
+    },
+    "triangle": {
+      "type": "ref",
+      "$ref": "TriangleProps"
+    },
+    "pixel": {
+      "type": "ref",
+      "$ref": "PixelProps"
+    },
+    "arc": {
+      "type": "ref",
+      "$ref": "ArcProps"
+    }
+  },
+  "builtins": {
+    "boolean.valueOf": {
+      "description": "Returns the primitive value of the specified object.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "boolean"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
+    "number.toString": {
+      "description": "Returns a string representation of an object.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "Specifies a radix for converting numeric values to strings. This value is only used for numbers.",
+          "type": "functionParameter",
+          "name": "radix",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "number.toFixed": {
+      "description": "Returns a string representing a number in fixed-point notation.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.",
+          "type": "functionParameter",
+          "name": "fractionDigits",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "number.toExponential": {
+      "description": "Returns a string containing a number represented in exponential notation.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "Number of digits after the decimal point. Must be in the range 0 - 20, inclusive.",
+          "type": "functionParameter",
+          "name": "fractionDigits",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "number.toPrecision": {
+      "description": "Returns a string containing a number represented either in exponential or fixed-point notation with a specified number of digits.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "Number of significant digits. Must be in the range 1 - 21, inclusive.",
+          "type": "functionParameter",
+          "name": "precision",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "number.valueOf": {
+      "description": "Returns the primitive value of the specified object.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "string.toString": {
+      "description": "Returns a string representation of a string.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.charAt": {
+      "description": "Returns the character at the specified index.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The zero-based index of the desired character.",
+          "type": "functionParameter",
+          "name": "pos",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.charCodeAt": {
+      "description": "Returns the Unicode value of the character at the specified location.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The zero-based index of the desired character. If there is no character at the specified index, NaN is returned.",
+          "type": "functionParameter",
+          "name": "index",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "string.concat": {
+      "description": "Returns a string that contains the concatenation of two or more strings.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "rest",
+          "items": {
+            "description": "The strings to append to the end of the string.",
+            "type": "functionParameter",
+            "name": "strings",
+            "holds": {
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.indexOf": {
+      "description": "Returns the position of the first occurrence of a substring, or -1 if it is not present.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The substring to search for in the string",
+          "type": "functionParameter",
+          "name": "searchString",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The index at which to begin searching the String object. If omitted, search starts at the beginning of the string.",
+          "type": "functionParameter",
+          "name": "position",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "string.lastIndexOf": {
+      "description": "Returns the last occurrence of a substring in the string, or -1 if it is not present.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The substring to search for.",
+          "type": "functionParameter",
+          "name": "searchString",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The index at which to begin searching. If omitted, the search begins at the end of the string.",
+          "type": "functionParameter",
+          "name": "position",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "string.localeCompare": {
+      "description": "Determines whether two strings are equivalent in the current locale.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "String to compare to target string",
+          "type": "functionParameter",
+          "name": "that",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "string.replace": {
+      "description": "Replaces text in a string, using a search string.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "A string to search for.",
+          "type": "functionParameter",
+          "name": "searchValue",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The text to replace it with, or a function answering with that text. Only the first match of `searchValue` is replaced.",
+          "type": "functionParameter",
+          "name": "replaceValue",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "substring",
+                    "holds": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "functionParameter",
+                    "name": "offset",
+                    "holds": {
+                      "type": "number"
+                    }
+                  },
+                  {
+                    "type": "functionParameter",
+                    "name": "string",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.slice": {
+      "description": "Returns a section of a string.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The index to the beginning of the specified portion of stringObj.",
+          "type": "functionParameter",
+          "name": "start",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "The index to the end of the specified portion of stringObj. The substring includes the characters up to, but not including, the character indicated by end. If this value is not specified, the substring continues to the end of stringObj.",
+          "type": "functionParameter",
+          "name": "end",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.split": {
+      "description": "Split a string into substrings using the specified separator and return them as an array.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned.",
+          "type": "functionParameter",
+          "name": "separator",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "A value used to limit the number of elements returned in the array.",
+          "type": "functionParameter",
+          "name": "limit",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "string.substring": {
+      "description": "Returns the substring at the specified location within a String object.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The zero-based index number indicating the beginning of the substring.",
+          "type": "functionParameter",
+          "name": "start",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "Zero-based index number indicating the end of the substring. The substring includes the characters up to, but not including, the character indicated by end. If end is omitted, the characters from start through the end of the original string are returned.",
+          "type": "functionParameter",
+          "name": "end",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.toLowerCase": {
+      "description": "Converts all the alphabetic characters in a string to lowercase.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.toLocaleLowerCase": {
+      "description": "Converts all alphabetic characters to lowercase, taking into account the host environment's current locale.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "locales",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.toUpperCase": {
+      "description": "Converts all the alphabetic characters in a string to uppercase.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.toLocaleUpperCase": {
+      "description": "Returns a string where all alphabetic characters have been converted to uppercase, taking into account the host environment's current locale.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "locales",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.trim": {
+      "description": "Removes the leading and trailing white space and line terminator characters from a string.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "string.length": {
+      "getter": true,
+      "description": "Returns the length of a String object.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "string.valueOf": {
+      "description": "Returns the primitive value of the specified object.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value the member is reached off.",
+          "type": "functionParameter",
+          "name": "self",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "array.length": {
+      "description": "Gets the length of the array. This is a number one higher than the highest index in the array.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "getter": true,
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "number"
+        }
+      }
+    },
+    "array.concat": {
+      "description": "Combines two or more arrays. This method returns a new array without modifying any existing arrays.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "type": "rest",
+            "items": {
+              "description": "Additional arrays and/or items to add to the end of the array.",
+              "type": "functionParameter",
+              "name": "items",
+              "holds": {
+                "type": "union",
+                "anyOf": [
+                  {
+                    "type": "ref",
+                    "$ref": "T"
+                  },
+                  {
+                    "readOnly": true,
+                    "type": "array",
+                    "items": {
+                      "type": "ref",
+                      "$ref": "T"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "array.join": {
+      "description": "Adds all the elements of an array into a string, separated by the specified separator string.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "A string used to separate one element of the array from the next in the resulting string. If omitted, the array elements are separated with a comma.",
+            "type": "functionParameter",
+            "name": "separator",
+            "holds": {
+              "type": "string"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "string"
+        }
+      }
+    },
+    "array.slice": {
+      "description": "Returns a copy of a section of an array.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The beginning index of the specified portion of the array. If start is undefined, then the slice begins at index 0.",
+            "type": "functionParameter",
+            "name": "start",
+            "holds": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "The end index of the specified portion of the array. This is exclusive of the element at the index 'end'. If end is undefined, then the slice extends to the end of the array.",
+            "type": "functionParameter",
+            "name": "end",
+            "holds": {
+              "type": "number"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "array.indexOf": {
+      "description": "Returns the index of the first occurrence of a value in an array, or -1 if it is not present.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The value to locate in the array.",
+            "type": "functionParameter",
+            "name": "searchElement",
+            "holds": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          },
+          {
+            "description": "The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.",
+            "type": "functionParameter",
+            "name": "fromIndex",
+            "holds": {
+              "type": "number"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "number"
+        }
+      }
+    },
+    "array.includes": {
+      "description": "Determines whether an array includes a certain element, returning true or false as appropriate.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The element to search for.",
+            "type": "functionParameter",
+            "name": "searchElement",
+            "holds": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          },
+          {
+            "description": "The position in this array at which to begin searching for searchElement.",
+            "type": "functionParameter",
+            "name": "fromIndex",
+            "holds": {
+              "type": "number"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "boolean"
+        }
+      }
+    },
+    "array.map": {
+      "description": "Calls a defined callback function on each element of an array, and returns an array that contains the results.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        },
+        {
+          "type": "genericParameter",
+          "name": "U",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "A function that accepts up to two arguments. The map method calls the callbackfn function one time for each element in the array.",
+            "type": "functionParameter",
+            "name": "callbackfn",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "ref",
+                "$ref": "U"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "U"
+          }
+        }
+      }
+    },
+    "array.reduce": {
+      "description": "Calls the specified callback function for all the elements in an array. The return value of the callback function is the accumulated result, and is provided as an argument in the next call to the callback function.\n\nThe initial value is required, where the standard library makes it optional: without one the first call is handed an element rather than an accumulator, and an empty array has nothing to hand it and throws. Both are rules a host would have to reproduce exactly to agree, and naming the starting value is the same work.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        },
+        {
+          "type": "genericParameter",
+          "name": "U",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "A function that accepts up to three arguments. The reduce method calls the callbackfn function one time for each element in the array.",
+            "type": "functionParameter",
+            "name": "callbackfn",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "previousValue",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "U"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "currentValue",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "currentIndex",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "ref",
+                "$ref": "U"
+              }
+            }
+          },
+          {
+            "description": "It is used as the initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.",
+            "type": "functionParameter",
+            "name": "initialValue",
+            "holds": {
+              "type": "ref",
+              "$ref": "U"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "ref",
+          "$ref": "U"
+        }
+      }
+    },
+    "array.filter": {
+      "description": "Returns the elements of an array that meet the condition specified in a callback function.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "A function that accepts up to two arguments. The filter method calls the predicate function one time for each element in the array.",
+            "type": "functionParameter",
+            "name": "predicate",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "value",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "index",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "boolean"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "array.with": {
+      "description": "Copies an array, then overwrites the value at the provided index with the\ngiven value. If the index is negative, then it replaces from the end\nof the array.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The index of the value to overwrite. If the index is negative, then it replaces from the end of the array.",
+            "type": "functionParameter",
+            "name": "index",
+            "holds": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "The value to write into the copied array.",
+            "type": "functionParameter",
+            "name": "value",
+            "holds": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "array.toSorted": {
+      "description": "Returns a copy of an array with its elements sorted.\n\nThe comparator is required, where the standard library makes it optional:\nsorting without one compares the elements as strings, which is a rule of\nJavaScript's rather than of this language, and every other host would have\nto reproduce it to agree. Saying how to order two elements is the same\nwork and it ports.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "Function used to determine the order of the elements. It is expected to return a negative value if the first argument is less than the second argument, zero if they're equal, and a positive value otherwise.",
+            "type": "functionParameter",
+            "name": "compareFn",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "a",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "b",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "number"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "array.toReversed": {
+      "description": "Returns a copy of an array with its elements in reverse order.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "array.toSpliced": {
+      "description": "Copies an array and removes elements while, if necessary, inserting new elements in their place, returning the remaining elements.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "The value the member is reached off.",
+            "type": "functionParameter",
+            "name": "self",
+            "holds": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          },
+          {
+            "description": "The zero-based location in the array from which to start removing elements.",
+            "type": "functionParameter",
+            "name": "start",
+            "holds": {
+              "type": "number"
+            }
+          },
+          {
+            "description": "The number of elements to remove.",
+            "type": "functionParameter",
+            "name": "deleteCount",
+            "holds": {
+              "type": "number"
+            }
+          },
+          {
+            "type": "rest",
+            "items": {
+              "description": "Elements to insert into the copied array in place of the deleted elements.",
+              "type": "functionParameter",
+              "name": "items",
+              "holds": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "JSON.parse": {
+      "description": "Converts a JSON string into the value it describes. Throws if the text is not JSON.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A valid JSON string.",
+          "type": "functionParameter",
+          "name": "text",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "ref",
+        "$ref": "ClientValue"
+      }
+    },
+    "JSON.stringify": {
+      "description": "Converts a value to the JSON string that describes it.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A value to convert.",
+          "type": "functionParameter",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "Math.E": {
+      "description": "The mathematical constant e. This is Euler's number, the base of natural logarithms.",
+      "type": "number"
+    },
+    "Math.LN10": {
+      "description": "The natural logarithm of 10.",
+      "type": "number"
+    },
+    "Math.LN2": {
+      "description": "The natural logarithm of 2.",
+      "type": "number"
+    },
+    "Math.LOG2E": {
+      "description": "The base-2 logarithm of e.",
+      "type": "number"
+    },
+    "Math.LOG10E": {
+      "description": "The base-10 logarithm of e.",
+      "type": "number"
+    },
+    "Math.PI": {
+      "description": "Pi. This is the ratio of the circumference of a circle to its diameter.",
+      "type": "number"
+    },
+    "Math.SQRT1_2": {
+      "description": "The square root of 0.5, or, equivalently, one divided by the square root of 2.",
+      "type": "number"
+    },
+    "Math.SQRT2": {
+      "description": "The square root of 2.",
+      "type": "number"
+    },
+    "Math.abs": {
+      "description": "Returns the absolute value of a number (the value without regard to whether it is positive or negative).\nFor example, the absolute value of -5 is the same as the absolute value of 5.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression for which the absolute value is needed.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.acos": {
+      "description": "Returns the arc cosine (or inverse cosine) of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.asin": {
+      "description": "Returns the arcsine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.atan": {
+      "description": "Returns the arctangent of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression for which the arctangent is needed.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.atan2": {
+      "description": "Returns the angle (in radians) between the X axis and the line going through both the origin and the given point.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression representing the cartesian y-coordinate.",
+          "type": "functionParameter",
+          "name": "y",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "A numeric expression representing the cartesian x-coordinate.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.ceil": {
+      "description": "Returns the smallest integer greater than or equal to its numeric argument.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.cos": {
+      "description": "Returns the cosine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.exp": {
+      "description": "Returns e (the base of natural logarithms) raised to a power.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression representing the power of e.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.floor": {
+      "description": "Returns the greatest integer less than or equal to its numeric argument.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.log": {
+      "description": "Returns the natural logarithm (base e) of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.max": {
+      "description": "Returns the larger of a set of supplied numeric expressions.\n\nCalling this with no arguments is a client error rather than an answer: the standard library takes none and answers `-Infinity`, which is not a value this language has.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "rest",
+          "items": {
+            "description": "Numeric expressions to be evaluated.",
+            "type": "functionParameter",
+            "name": "values",
+            "holds": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.min": {
+      "description": "Returns the smaller of a set of supplied numeric expressions.\n\nCalling this with no arguments is a client error rather than an answer: the standard library takes none and answers `Infinity`, which is not a value this language has.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "rest",
+          "items": {
+            "description": "Numeric expressions to be evaluated.",
+            "type": "functionParameter",
+            "name": "values",
+            "holds": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.pow": {
+      "description": "Returns the value of a base expression taken to a specified power.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The base value of the expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "The exponent value of the expression.",
+          "type": "functionParameter",
+          "name": "y",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.random": {
+      "description": "Returns a pseudorandom number between 0 and 1.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.round": {
+      "description": "Returns a supplied numeric expression rounded to the nearest integer.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The value to be rounded to the nearest integer.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.sin": {
+      "description": "Returns the sine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.sqrt": {
+      "description": "Returns the square root of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.tan": {
+      "description": "Returns the tangent of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.clz32": {
+      "description": "Returns the number of leading zero bits in the 32-bit binary representation of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.imul": {
+      "description": "Returns the result of 32-bit multiplication of two numbers.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "First number",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        },
+        {
+          "description": "Second number",
+          "type": "functionParameter",
+          "name": "y",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.sign": {
+      "description": "Returns the sign of the x, indicating whether x is positive, negative or zero.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "The numeric expression to test",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.log10": {
+      "description": "Returns the base 10 logarithm of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.log2": {
+      "description": "Returns the base 2 logarithm of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.log1p": {
+      "description": "Returns the natural logarithm of 1 + x.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.expm1": {
+      "description": "Returns the result of (e^x - 1), which is an implementation-dependent approximation to\nsubtracting 1 from the exponential function of x (e raised to the power of x, where e\nis the base of the natural logarithms).",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.cosh": {
+      "description": "Returns the hyperbolic cosine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.sinh": {
+      "description": "Returns the hyperbolic sine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.tanh": {
+      "description": "Returns the hyperbolic tangent of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.acosh": {
+      "description": "Returns the inverse hyperbolic cosine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.asinh": {
+      "description": "Returns the inverse hyperbolic sine of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.atanh": {
+      "description": "Returns the inverse hyperbolic tangent of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression that contains an angle measured in radians.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.hypot": {
+      "description": "Returns the square root of the sum of squares of its arguments.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "rest",
+          "items": {
+            "description": "Values to compute the square root for. If no arguments are passed, the result is +0. If there is only one argument, the result is the absolute value. If any argument is +Infinity or -Infinity, the result is +Infinity. If any argument is NaN, the result is NaN. If all arguments are either +0 or −0, the result is +0.",
+            "type": "functionParameter",
+            "name": "values",
+            "holds": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.trunc": {
+      "description": "Returns the integral part of the numeric expression x, removing any fractional digits.\nIf x is already an integer, the result is x.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.fround": {
+      "description": "Returns the nearest single precision float representation of a number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Math.cbrt": {
+      "description": "Returns an implementation-dependent approximation to the cube root of number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric expression.",
+          "type": "functionParameter",
+          "name": "x",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Array.from": {
+      "description": "Creates an array from an array-like object.\n\nThe mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` — which this language has no value for.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        },
+        {
+          "type": "genericParameter",
+          "name": "U",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "An array-like object to convert to an array.",
+            "type": "functionParameter",
+            "name": "arrayLike",
+            "holds": {
+              "type": "apply",
+              "target": {
+                "type": "ref",
+                "$ref": "ArrayLike"
+              },
+              "arguments": [
+                {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              ]
+            }
+          },
+          {
+            "description": "A mapping function to call on every element of the array.",
+            "type": "functionParameter",
+            "name": "mapfn",
+            "holds": {
+              "type": "function",
+              "parameters": [
+                {
+                  "type": "functionParameter",
+                  "name": "v",
+                  "holds": {
+                    "type": "ref",
+                    "$ref": "T"
+                  }
+                },
+                {
+                  "type": "functionParameter",
+                  "name": "k",
+                  "holds": {
+                    "type": "number"
+                  }
+                }
+              ],
+              "returnType": {
+                "type": "ref",
+                "$ref": "U"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "U"
+          }
+        }
+      }
+    },
+    "Array.of": {
+      "description": "Returns a new array from a set of elements.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "type": "rest",
+            "items": {
+              "description": "A set of elements to include in the new array object.",
+              "type": "functionParameter",
+              "name": "items",
+              "holds": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
+    "Number.EPSILON": {
+      "description": "The value of Number.EPSILON is the difference between 1 and the smallest value greater than 1 that is representable as a Number value, which is approximately: 2.2204460492503130808472633361816 x 10−16.",
+      "type": "number"
+    },
+    "Number.isFinite": {
+      "description": "Returns true if passed value is finite. Unlike the global isFinite, Number.isFinite doesn't forcibly convert the parameter to a number. Only finite values of the type number, result in true.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric value.",
+          "type": "functionParameter",
+          "name": "number",
+          "holds": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
+    "Number.isInteger": {
+      "description": "Returns true if the value passed is an integer, false otherwise.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A numeric value.",
+          "type": "functionParameter",
+          "name": "number",
+          "holds": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "boolean"
+      }
+    },
+    "Number.parseFloat": {
+      "description": "Converts a string to a floating-point number.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A string that contains a floating-point number.",
+          "type": "functionParameter",
+          "name": "string",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "Number.parseInt": {
+      "description": "Converts A string to an integer.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "A string to convert into a number.",
+          "type": "functionParameter",
+          "name": "string",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "A value between 2 and 36 that specifies the base of the number in `string`. If this argument is not supplied, strings with a prefix of '0x' are considered hexadecimal. All other strings are considered decimal.",
+          "type": "functionParameter",
+          "name": "radix",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "String.fromCodePoint": {
+      "description": "Return the String value whose elements are, in order, the elements in the List elements. If length is 0, the empty string is returned.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "rest",
+          "items": {
+            "type": "functionParameter",
+            "name": "codePoints",
+            "holds": {
+              "type": "number"
+            }
+          }
+        }
+      ],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "fetch": {
+      "description": "The web's `fetch`, answering through handlers because a script has no `await`.\n\nExactly one handler is called, once. `init` is last so the optional argument stays last.",
+      "type": "function",
+      "parameters": [
+        {
+          "type": "functionParameter",
+          "name": "input",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "onResponse",
+          "holds": {
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "response",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "Response"
+                }
+              }
+            ],
+            "returnType": {
+              "type": "void"
+            }
+          }
+        },
+        {
+          "description": "Called where nothing answered at all.",
+          "type": "functionParameter",
+          "name": "onFailure",
+          "holds": {
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "reason",
+                "holds": {
+                  "type": "string"
+                }
+              }
+            ],
+            "returnType": {
+              "type": "void"
+            }
+          }
+        },
+        {
+          "type": "functionParameter",
+          "name": "init",
+          "holds": {
+            "type": "ref",
+            "$ref": "RequestInit"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "void"
+      }
+    },
+    "state": {
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "unknown"
+          },
+          "equals": {
+            "type": "unknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "type": "functionParameter",
+            "name": "initial",
+            "holds": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          }
+        ],
+        "returnType": {
+          "type": "apply",
+          "target": {
+            "type": "ref",
+            "$ref": "State"
+          },
+          "arguments": [
+            {
+              "type": "ref",
+              "$ref": "T"
+            }
+          ]
+        }
+      }
+    },
+    "screenWidth": {
+      "description": "How wide the display is, in pixels. 240 on this device.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "screenHeight": {
+      "description": "How tall the display is, in pixels. 135 on this device.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "textWidth": {
+      "description": "How wide text would be, as `textWidth` measures it — for an app placing something beside it.",
+      "type": "function",
+      "parameters": [
+        {
+          "description": "What would be drawn.",
+          "type": "functionParameter",
+          "name": "text",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "description": "The size it would be drawn at. 1 where left out.",
+          "type": "functionParameter",
+          "name": "size",
+          "holds": {
+            "type": "number"
+          }
+        }
+      ],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "key": {
+      "description": "The key pressed since this was last asked, or an empty string.\n\nAsked rather than delivered: a script that wants to know reads it, and one that does not is not interrupted. A printable key is itself; the rest are named — `enter`, `backspace`, `up`, `down`, `left`, `right`, `tab`, `escape`.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "string"
+      }
+    },
+    "keyCode": {
+      "description": "Where the key `key` answered with sits, as the scanner numbers the keyboard — 1 upwards, or 0 where nothing was pressed.\n\nThe number under a key rather than what it says, for an app that wants to know which key rather than which letter. Unlike `key` this is not spent by reading it: both stand for the one press this drawing was given.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "millis": {
+      "description": "How long the device has been awake, in milliseconds. What an app animating something reads, since a frame is drawn when a value moves.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "number"
+      }
+    },
+    "battery": {
+      "description": "What the battery holds, 0 to 100.",
+      "type": "function",
+      "parameters": [],
+      "returnType": {
+        "type": "number"
+      }
+    }
+  }
+}
