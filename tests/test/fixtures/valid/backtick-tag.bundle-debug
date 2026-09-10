@@ -13,4 +13,7 @@
   </span>}
 </div>
 
-root = #f0(() => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},\"from another bundle\"]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")
+root = #f0(() => {
+  "functions": { "0": ["=>", [], ["el", "em", {}, "from another bundle"]] },
+  "root": ["()", ["fn", "0"], []]
+})

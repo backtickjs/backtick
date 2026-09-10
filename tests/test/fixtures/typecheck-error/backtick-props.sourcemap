@@ -28,7 +28,7 @@ __cs_props                           → props
 {\n    count: number;\n}             → { count: number }
 ) =>                                 → ) => 
 cs.splice(                           → ${ [-semantic]
-(\n    <Row count={                  → (\n    <Row count={
+(\n  <Row count={                    → (\n  <Row count={
 cs.lift(cs.const(                    → cs`
 cs.receiver(                         → 
 __cs_props                           → props
@@ -36,7 +36,7 @@ __cs_props                           → props
 .                                    → .
 count                                → count
 ))                                   → `
-} />\n  )                            → } />\n  )
+} />\n)                              → } />\n)
 ) satisfies typeof cs.ClientUnknown  → } [-semantic]
 ))                                   → `
 cs.lift(cs.const(                    → cs`

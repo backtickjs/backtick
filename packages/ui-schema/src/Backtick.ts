@@ -1,9 +1,6 @@
 import { createJsxElement } from "@backtickjs/boundary";
-import type {
-  BacktickElement,
-  Prop,
-  SerializedBundle,
-} from "@backtickjs/boundary";
+import type { Bundle } from "@backtickjs/language";
+import type { BacktickElement, Prop } from "@backtickjs/boundary";
 
 /**
  * A bundle, drawn here.
@@ -21,7 +18,7 @@ import type {
  * nothing.
  */
 export async function Backtick(props: {
-  bundle: Prop<SerializedBundle<BacktickElement> | null>;
+  bundle: Prop<Bundle<BacktickElement> | null>;
 }): Promise<BacktickElement> {
   return createJsxElement("backtick", { bundle: props.bundle });
 }

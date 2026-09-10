@@ -46,11 +46,17 @@ export const schema: Schema = {
             "Unchecked here where `<Backtick />` checks it against what the bundle takes, for the reason `<For />` exists: a tag has nowhere to bind a type parameter.",
         }),
       ),
-      bundle: Type.Union([Type.String(), Type.Null()], {
-        description:
-          "The bundle to draw, as the text it is on the wire — what `response.text` answers with, and what a document carries.\n\n" +
-          "Null draws nothing, which is what a page with no bundle yet has to say. It is admitted here because a cell that is sometimes empty cannot be narrowed on its way in: a script reads a cell where it stands, and a read moved out to a `const` to be narrowed is a read that happens once and never again. So a page that wants something in the meantime writes the condition it already has — `held.read() === null ? … : <backtick bundle={held.read()} />` — and a page that wants nothing writes the tag and lets the null through.",
-      }),
+      bundle: Type.Union(
+        [
+          Type.Apply(Type.Ref("Bundle"), [Type.Ref("ClientUnknown")]),
+          Type.Null(),
+        ],
+        {
+          description:
+            "The bundle to draw. Opaque, so nothing here says whether a client keeps the text that came over the wire or a document it parsed — a script holds one and hands it back either way. A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.\n\n" +
+            "Null draws nothing, which is what a page with no bundle yet has to say. It is admitted here because a cell that is sometimes empty cannot be narrowed on its way in: a script reads a cell where it stands, and a read moved out to a `const` to be narrowed is a read that happens once and never again. So a page that wants something in the meantime writes the condition it already has — `held.read() === null ? … : <backtick bundle={held.read()} />` — and a page that wants nothing writes the tag and lets the null through.",
+        },
+      ),
     }),
   },
 

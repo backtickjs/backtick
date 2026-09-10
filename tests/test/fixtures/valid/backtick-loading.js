@@ -6,73 +6,73 @@ import { cs, state } from "@backtickjs/core";
 // type and freeze the drawing — the script body runs once, so the loading state
 // would never resolve.
 export default cs.create(
-  [9, 16, 21, 3],
+  [10, 16, 22, 3],
   {
     version: "0.0.0",
     filePath: "backtick-loading.tsx",
-    fileHash: "g9k8a6x7uznn",
+    fileHash: "2m7uau18bs02p",
     splices: { $state: { value: state, params: [] } },
     captures: [],
   },
   () => ({
     kind: "{}",
-    loc: [9, 19, 21, 2],
+    loc: [10, 19, 22, 2],
     statements: [
       {
         kind: "const",
-        loc: [10, 3, 10, 44],
+        loc: [11, 3, 11, 61],
         name: {
           kind: "id",
-          loc: [10, 9, 10, 13],
+          loc: [11, 9, 11, 13],
           text: "held",
-          bindingKey: "held$g9k8a6x7uznn$0",
+          bindingKey: "held$2m7uau18bs02p$0",
         },
         initializer: {
           kind: "()",
-          loc: [10, 16, 10, 43],
+          loc: [11, 16, 11, 60],
           expression: {
             kind: "splice",
-            loc: [10, 16, 10, 22],
+            loc: [11, 16, 11, 22],
             key: "$state",
           },
           arguments: [
             {
               kind: "null",
-              loc: [10, 38, 10, 42],
+              loc: [11, 55, 11, 59],
             },
           ],
         },
       },
       {
         kind: "return",
-        loc: [12, 3, 20, 5],
+        loc: [13, 3, 21, 5],
         expression: {
           kind: "jsx",
-          loc: [13, 5, 19, 11],
+          loc: [14, 5, 20, 11],
           type: {
             kind: "string",
-            loc: [13, 6, 13, 9],
+            loc: [14, 6, 14, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
               kind: "?:",
-              loc: [14, 8, 18, 8],
+              loc: [15, 8, 19, 8],
               condition: {
                 kind: "binop",
-                loc: [14, 8, 14, 28],
+                loc: [15, 8, 15, 28],
                 left: {
                   kind: "()",
-                  loc: [14, 8, 14, 19],
+                  loc: [15, 8, 15, 19],
                   expression: {
                     kind: ".",
-                    loc: [14, 8, 14, 17],
+                    loc: [15, 8, 15, 17],
                     expression: {
                       kind: "id",
-                      loc: [14, 8, 14, 12],
+                      loc: [15, 8, 15, 12],
                       text: "held",
-                      bindingKey: "held$g9k8a6x7uznn$0",
+                      bindingKey: "held$2m7uau18bs02p$0",
                     },
                     name: "read",
                   },
@@ -81,32 +81,32 @@ export default cs.create(
                 operatorToken: "===",
                 right: {
                   kind: "null",
-                  loc: [14, 24, 14, 28],
+                  loc: [15, 24, 15, 28],
                 },
               },
               whenTrue: {
                 kind: "jsx",
-                loc: [15, 9, 15, 30],
+                loc: [16, 9, 16, 30],
                 type: {
                   kind: "string",
-                  loc: [15, 10, 15, 14],
+                  loc: [16, 10, 16, 14],
                   text: "span",
                 },
                 attributes: [],
                 children: [
                   {
                     kind: "string",
-                    loc: [15, 15, 15, 23],
+                    loc: [16, 15, 16, 23],
                     text: "loading\u2026",
                   },
                 ],
               },
               whenFalse: {
                 kind: "jsx",
-                loc: [17, 9, 17, 42],
+                loc: [18, 9, 18, 42],
                 type: {
                   kind: "string",
-                  loc: [17, 10, 17, 18],
+                  loc: [18, 10, 18, 18],
                   text: "backtick",
                 },
                 attributes: [
@@ -114,15 +114,15 @@ export default cs.create(
                     name: "bundle",
                     initializer: {
                       kind: "()",
-                      loc: [17, 27, 17, 38],
+                      loc: [18, 27, 18, 38],
                       expression: {
                         kind: ".",
-                        loc: [17, 27, 17, 36],
+                        loc: [18, 27, 18, 36],
                         expression: {
                           kind: "id",
-                          loc: [17, 27, 17, 31],
+                          loc: [18, 27, 18, 31],
                           text: "held",
-                          bindingKey: "held$g9k8a6x7uznn$0",
+                          bindingKey: "held$2m7uau18bs02p$0",
                         },
                         name: "read",
                       },

@@ -91,12 +91,12 @@ describe("a member the schema leaves out", () => {
   // Written by hand because nothing else can reach it: the typechecker rejects
   // `padStart` where a fixture would declare one, so this is the bundle a
   // bundler that had not rejected it would have written.
-  const bundle: Bundle<ClientUnknown> = {
+  const bundle = {
     functions: {
       "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
     },
     root: ["()", ["fn", "0"], []],
-  };
+  } as unknown as Bundle<ClientUnknown>;
 
   it("is a name this language has no meaning for", () => {
     // Not absent, and not the host's: reading it as null would let a bundle ask
@@ -114,12 +114,12 @@ describe("a name a target answers for", () => {
   // is imported as, which lands on the wire as the same node `Math.floor` does.
   // The bundle a schema's generated `createBuiltin("greet")` would be spliced
   // into, written by hand because no schema here declares the name.
-  const bundle: Bundle<ClientUnknown> = {
+  const bundle = {
     functions: {
       "0": ["=>", [], ["{}", [["return", ["()", ["bltn", "greet"], []]]]]],
     },
     root: ["()", ["fn", "0"], []],
-  };
+  } as unknown as Bundle<ClientUnknown>;
 
   it("is answered by the table its target handed over", () => {
     assert.equal(evaluate(bundle, testHost, { greet: () => "hello" }), "hello");
@@ -136,7 +136,7 @@ describe("a name a target answers for", () => {
     // Grouping is done by the value a name holds rather than by a dot in the
     // name: `$storage.get(…)` is a member read on a plain object this answered
     // with, which is the same path a cell's `read` is reached by.
-    const held: Bundle<ClientUnknown> = {
+    const held = {
       functions: {
         "0": [
           "=>",
@@ -153,7 +153,7 @@ describe("a name a target answers for", () => {
         ],
       },
       root: ["()", ["fn", "0"], []],
-    };
+    } as unknown as Bundle<ClientUnknown>;
     const storage = { greeting: "hei" } as Record<string, string>;
     assert.equal(
       evaluate(held, testHost, {
@@ -180,12 +180,12 @@ describe("a name a target answers for", () => {
   it("may not add a member to a kind of value", () => {
     // A member of a string is the language's, so a table naming one adds a
     // whole name nothing reads: `"abc".padStart` still finds nothing.
-    const padded: Bundle<ClientUnknown> = {
+    const padded = {
       functions: {
         "0": ["=>", [], ["{}", [["return", [".", "abc", "padStart"]]]]],
       },
       root: ["()", ["fn", "0"], []],
-    };
+    } as unknown as Bundle<ClientUnknown>;
     assert.throws(
       () => evaluate(padded, testHost, { "string.padStart": (self) => self }),
       /a string has no `padStart` in this language/,

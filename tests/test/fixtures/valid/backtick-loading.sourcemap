@@ -7,7 +7,7 @@ cs.splice(                           →  [-semantic]
 (state)                              → $state
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )<                                   → <
-string | null                        → string | null
+Bundle<BacktickElement> | null       → Bundle<BacktickElement> | null
 >(                                   → >(
 null                                 → null
 )                                    → )

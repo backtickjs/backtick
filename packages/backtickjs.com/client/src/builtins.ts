@@ -1,5 +1,5 @@
 import type { Diagnostic, SiteBuiltins } from "@backtickjs.com/schema";
-import type { BacktickElement, SerializedBundle } from "@backtickjs/core";
+import type { BacktickElement, Bundle } from "@backtickjs/core";
 import type ts from "typescript";
 
 const currentScript = document.currentScript as HTMLScriptElement;
@@ -69,7 +69,7 @@ let asked = 0;
 const waiting = new Map<
   number,
   {
-    onBundle: (bundle: SerializedBundle<BacktickElement>) => void;
+    onBundle: (bundle: Bundle<BacktickElement>) => void;
     onDiagnostics: (diagnostics: Diagnostic[]) => void;
   }
 >();
@@ -90,7 +90,7 @@ window.addEventListener("message", (event: MessageEvent) => {
   }
   waiting.delete(answer.id);
   if (typeof answer.bundle === "string") {
-    back.onBundle(answer.bundle as SerializedBundle<BacktickElement>);
+    back.onBundle(JSON.parse(answer.bundle));
     return;
   }
   back.onDiagnostics([

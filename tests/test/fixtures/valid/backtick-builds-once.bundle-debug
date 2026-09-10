@@ -7,18 +7,21 @@
     {$1()({
       "ask": () => () => {
         asked.write(asked.read() + 1);
-        return asked.read() > 4 ? "" : $2();
+        return asked.read() > 4 ? null : $2();
       }
     })}
   </div>;
 }
 
 #f1 = ($0, $1, $2) => {
-  const drawn = $0()("");
+  const drawn = $0()(null);
   const started = $1().setTimeout(() => drawn.write($2()()), 0);
   return <backtick
     bundle={drawn.read()}
   />;
 }
 
-root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.ask()), () => "{\"functions\":{\"0\":[\"=>\",[],[\"el\",\"em\",{},\"answered\"]]},\"root\":[\"()\",[\"fn\",\"0\"],[]]}")
+root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.ask()), () => {
+  "functions": { "0": ["=>", [], ["el", "em", {}, "answered"]] },
+  "root": ["()", ["fn", "0"], []]
+})

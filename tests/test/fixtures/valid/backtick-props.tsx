@@ -19,17 +19,13 @@ async function Counts({ count }: { count: Prop<number> }) {
   return cs`<b>{"count " + $count}</b>`;
 }
 
-const greets = JSON.stringify(
-  await bundler.run(cs`(props: { who: string }) => ${(
+const greets = await bundler.run(cs`(props: { who: string }) => ${(
     <Greets who={cs`props.who`} />
-  )}`),
-);
+  )}`);
 
-const counts = JSON.stringify(
-  await bundler.run(cs`(props: { count: number }) => ${(
+const counts = await bundler.run(cs`(props: { count: number }) => ${(
     <Counts count={cs`props.count`} />
-  )}`),
-);
+  )}`);
 
 export default cs`{
   const count = $state(0);

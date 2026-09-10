@@ -23,7 +23,6 @@ export type { Prop } from "./Prop.js";
 export type { BacktickNode } from "./BacktickNode.js";
 export type { ServerComponent } from "./ServerComponent.js";
 export type { BacktickElement } from "./BacktickElement.js";
-export type { SerializedBundle } from "./SerializedBundle.js";
 export {
   createJsxElement,
   isJsxElement,

@@ -1,10 +1,6 @@
 import { createJsxElement } from "@backtickjs/boundary";
-import type {
-  BacktickElement,
-  ClientValue,
-  Prop,
-  SerializedBundle,
-} from "@backtickjs/boundary";
+import type { Bundle } from "@backtickjs/language";
+import type { BacktickElement, ClientValue, Prop } from "@backtickjs/boundary";
 
 /**
  * A bundle applied to what it takes, and the result drawn.
@@ -22,7 +18,7 @@ import type {
  * that takes something are drawn by two components.
  */
 export async function BacktickWithProps<P extends ClientValue>(props: {
-  bundle: Prop<SerializedBundle<(props: P) => BacktickElement> | null>;
+  bundle: Prop<Bundle<(props: P) => BacktickElement> | null>;
   props: Prop<P>;
 }): Promise<BacktickElement> {
   return createJsxElement("backtick", {

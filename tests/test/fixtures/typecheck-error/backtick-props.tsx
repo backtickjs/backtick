@@ -1,16 +1,12 @@
 import { bundler } from "@backtickjs/bundler";
 import { Backtick, BacktickWithProps, cs } from "@backtickjs/core";
-import type {
-  BacktickElement,
-  Prop,
-  SerializedBundle,
-} from "@backtickjs/core";
+import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
 
 // What `<Backtick />` checks, and the one thing it does not.
 //
-// The type travels with the text: a `SerializedBundle<T>` says what the bundle
-// evaluates to — a drawing, or a function of what it takes — so nothing here
-// writes a type argument.
+// The type travels with the bundle: a `Bundle<T>` says what it evaluates to —
+// a drawing, or a function of what it takes — so nothing here writes a type
+// argument.
 type Rows = (props: { count: number }) => BacktickElement;
 
 // Built rather than written out: what a bundle looks like is the bundler's, and
@@ -24,15 +20,13 @@ async function Nothing() {
   return cs`<em>{"nothing to hand it"}</em>`;
 }
 
-const rows = JSON.stringify(
-  await bundler.run(cs`(props: { count: number }) => ${(
-    <Row count={cs`props.count`} />
-  )}`),
-) as SerializedBundle<Rows>;
+const rows = (await bundler.run(cs`(props: { count: number }) => ${(
+  <Row count={cs`props.count`} />
+)}`)) as Bundle<Rows>;
 
-const empty = JSON.stringify(
-  await bundler.run(<Nothing />),
-) as SerializedBundle<BacktickElement>;
+const empty = (await bundler.run(
+  <Nothing />,
+)) as Bundle<BacktickElement>;
 
 // Right: what the bundle takes, and a drawing, which takes nothing.
 export const drawn = <BacktickWithProps bundle={rows} props={{ count: 1 }} />;

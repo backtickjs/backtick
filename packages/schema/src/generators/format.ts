@@ -21,5 +21,4 @@ export const format: ReadonlySet<string> = new Set([
   "BacktickElement",
   "BacktickNode",
   "ClientHandle",
-  "SerializedBundle",
 ]);

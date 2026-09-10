@@ -347,19 +347,13 @@ function compileBacktick(
   const readProps = compileProps(instance, element[2]["props"] ?? null);
   return (scope) =>
     createMemo(() => {
-      const held = read(scope);
+      const bundle = read(scope);
       // No bundle yet: a compile still running, a request not yet answered.
-      // Empty text says the same thing, because a cell that starts empty is
-      // written `""` as readily as `null` — and `JSON.parse("")` is a syntax
-      // error rather than a drawing that is not there.
-      if (held === null || held === undefined || held === "") {
+      if (bundle === null || bundle === undefined) {
         return null;
       }
-      if (typeof held !== "string") {
-        throw new Error("backtick: a `backtick` was given no bundle to draw");
-      }
       const drawn = evaluated(
-        JSON.parse(held) as Bundle<ClientUnknown>,
+        bundle as Bundle<ClientUnknown>,
         instance.renderer,
         // The mount's names, so a bundle drawn here reaches what its
         // surroundings reach.

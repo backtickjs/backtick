@@ -8,6 +8,8 @@ import type {
 } from "@backtickjs/boundary";
 import type {
   Builtins as LanguageBuiltins,
+  Bundle,
+  ClientUnknown,
   ClientValue,
   Elements as LanguageElements,
   ReadonlyState,
@@ -112,8 +114,11 @@ export interface BacktickProps {
    */
   props?: Prop<{ [key: string]: ClientValue }>;
   /**
-   * The bundle to draw, as the text it is on the wire — what `response.text`
-   * answers with, and what a document carries.
+   * The bundle to draw. Opaque, so nothing here says whether a client keeps
+   * the text that came over the wire or a document it parsed — a script holds
+   * one and hands it back either way. A script that fetched the text writes
+   * `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion
+   * is for.
    *
    * Null draws nothing, which is what a page with no bundle yet has to say. It
    * is admitted here because a cell that is sometimes empty cannot be narrowed
@@ -124,7 +129,7 @@ export interface BacktickProps {
    * />` — and a page that wants nothing writes the tag and lets the null
    * through.
    */
-  bundle: Prop<string | null>;
+  bundle: Prop<Bundle<ClientUnknown> | null>;
 }
 
 /** The elements this schema declares, and what each accepts. */

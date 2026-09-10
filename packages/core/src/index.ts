@@ -11,12 +11,8 @@ export type {
   State,
 } from "@backtickjs/language";
 export { fetch, state } from "@backtickjs/language";
-export type {
-  BacktickElement,
-  BacktickNode,
-  Prop,
-  SerializedBundle,
-} from "@backtickjs/boundary";
+export type { BacktickElement, BacktickNode, Prop } from "@backtickjs/boundary";
+export type { Bundle } from "@backtickjs/language";
 
 // The boundary itself, which is the one thing here that is nobody else's.
 export { cs } from "./cs.js";

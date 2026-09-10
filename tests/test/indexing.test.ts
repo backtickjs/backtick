@@ -14,16 +14,17 @@ import { evaluate } from "./test-client/index.ts";
 // A key that is not a place the value has anything is the other case, and it
 // stays `undefined`: `index-past-end` and `index-absent` in `valid/` pin that,
 // and the two must not be told apart by the same rule.
-const reads = (target: unknown, key: unknown): Bundle<ClientUnknown> => ({
-  functions: {
-    "0": [
-      "=>",
-      [],
-      ["{}", [["return", ["[]", target as never, key as never]]]],
-    ],
-  },
-  root: ["()", ["fn", "0"], []],
-});
+const reads = (target: unknown, key: unknown) =>
+  ({
+    functions: {
+      "0": [
+        "=>",
+        [],
+        ["{}", [["return", ["[]", target as never, key as never]]]],
+      ],
+    },
+    root: ["()", ["fn", "0"], []],
+  }) as unknown as Bundle<ClientUnknown>;
 
 describe("a read by key", () => {
   it("refuses a string where an array takes a number", () => {

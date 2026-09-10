@@ -7,7 +7,7 @@ async function Other() {
     {
       version: "0.0.0",
       filePath: "backtick-tag.tsx",
-      fileHash: "2ionmajbrdq3r",
+      fileHash: "4mv5pfbwzd9z",
       splices: {},
       captures: [],
     },
@@ -30,13 +30,13 @@ async function Other() {
     }),
   );
 }
-const held = JSON.stringify(await bundler.run(_jsx(Other, {})));
+const held = await bundler.run(_jsx(Other, {}));
 export default cs.create(
   [10, 16, 17, 2],
   {
     version: "0.0.0",
     filePath: "backtick-tag.tsx",
-    fileHash: "2ionmajbrdq3r",
+    fileHash: "4mv5pfbwzd9z",
     splices: { $held: { value: held, params: [] } },
     captures: [],
   },

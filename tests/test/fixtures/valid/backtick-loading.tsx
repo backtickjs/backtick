@@ -1,4 +1,5 @@
 import { cs, state } from "@backtickjs/core";
+import type { BacktickElement, Bundle } from "@backtickjs/core";
 
 // A bundle a page does not have yet, and what stands in until it does.
 //
@@ -7,7 +8,7 @@ import { cs, state } from "@backtickjs/core";
 // type and freeze the drawing — the script body runs once, so the loading state
 // would never resolve.
 export default cs`{
-  const held = $state<string | null>(null);
+  const held = $state<Bundle<BacktickElement> | null>(null);
 
   return (
     <div>

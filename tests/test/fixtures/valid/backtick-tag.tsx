@@ -5,7 +5,7 @@ async function Other() {
   return cs`<em>{"from another bundle"}</em>`;
 }
 
-const held = JSON.stringify(await bundler.run(<Other />));
+const held = await bundler.run(<Other />);
 
 export default cs`
   <div>

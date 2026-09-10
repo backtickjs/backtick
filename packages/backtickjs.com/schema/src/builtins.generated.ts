@@ -4,9 +4,8 @@ import {
   createBuiltin,
   type Client,
   type BacktickElement,
-  type SerializedBundle,
 } from "@backtickjs/boundary";
-import type { Diagnostic } from "./declarations.generated.js";
+import type { Bundle, Diagnostic } from "./declarations.generated.js";
 
 /**
  * Backtick source, compiled to javascript. One callback is called, once —
@@ -48,7 +47,7 @@ export const compile: Client<
 export const bundle: Client<
   (
     javascript: string,
-    onBundle: (bundle: SerializedBundle<BacktickElement>) => void,
+    onBundle: (bundle: Bundle<BacktickElement>) => void,
     onDiagnostics: (diagnostics: Diagnostic[]) => void,
   ) => void
 > = createBuiltin("bundle");

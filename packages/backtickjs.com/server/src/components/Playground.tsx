@@ -1,9 +1,5 @@
 import { Backtick, For, cs, state } from "@backtickjs/core";
-import type {
-  BacktickElement,
-  Client,
-  SerializedBundle,
-} from "@backtickjs/core";
+import type { BacktickElement, Client, Bundle } from "@backtickjs/core";
 import type { Example } from "../examples/Example.js";
 import { type Diagnostic, compile, bundle } from "@backtickjs.com/schema";
 import { ink, line, mono, muted, paper, wash } from "./theme.js";
@@ -313,9 +309,7 @@ export async function Playground({
     // the example itself, which crosses whole. The drawing is of the text beside
     // it by construction, rather than by two props agreeing.
     const source = $state($example.files[0].sourceText);
-    const bundle = $state<SerializedBundle<BacktickElement> | null>(
-      $example.bundle,
-    );
+    const bundle = $state<Bundle<BacktickElement> | null>($example.bundle);
     const diagnostics = $state($noDiagnostics);
     const status = $state("");
     const showing = $state("screen");
@@ -626,7 +620,12 @@ export async function Playground({
                 style={showing.read() === "bundle" ? $TAB_ON : $TAB_OFF}
                 onclick={() => showing.write("bundle")}
               >
-                {"BUNDLE" + sized((bundle.read() ?? "").length)}
+                {"BUNDLE" +
+                  sized(
+                    bundle.read() === null
+                      ? 0
+                      : JSON.stringify(bundle.read()).length,
+                  )}
               </button>
             </div>
           </div>
@@ -651,7 +650,7 @@ export async function Playground({
               (showing.read() === "bundle" ? "block" : "none")
             }
           >
-            {bundle.read()}
+            {bundle.read() === null ? "" : JSON.stringify(bundle.read())}
           </pre>
         </div>
       </div>

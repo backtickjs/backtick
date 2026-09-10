@@ -19,21 +19,17 @@ async function Counts({ count }: { count: Prop<number> }) {
   return cs.lift(cs.const(<b>{cs.lift("count " + (cs.splice((count)) satisfies typeof cs.ClientUnknown))}</b>));
 }
 
-const greets = JSON.stringify(
-  await bundler.run(cs.lift(cs.const((__cs_props: {
+const greets = await bundler.run(cs.lift(cs.const((__cs_props: {
     who: string;
 }) => cs.splice((
     <Greets who={cs.lift(cs.const(cs.receiver(__cs_props).who))} />
-  )) satisfies typeof cs.ClientUnknown))),
-);
+  )) satisfies typeof cs.ClientUnknown)));
 
-const counts = JSON.stringify(
-  await bundler.run(cs.lift(cs.const((__cs_props: {
+const counts = await bundler.run(cs.lift(cs.const((__cs_props: {
     count: number;
 }) => cs.splice((
     <Counts count={cs.lift(cs.const(cs.receiver(__cs_props).count))} />
-  )) satisfies typeof cs.ClientUnknown))),
-);
+  )) satisfies typeof cs.ClientUnknown)));
 
 export default cs.lift((() => {
     const __cs_count = cs.const((cs.splice((state)) satisfies typeof cs.ClientUnknown)(0));
