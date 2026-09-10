@@ -475,6 +475,9 @@ importers:
       '@backtickjs/boundary':
         specifier: workspace:*
         version: link:../boundary
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../language
       '@backtickjs/ui-schema':
         specifier: workspace:*
         version: link:../ui-schema

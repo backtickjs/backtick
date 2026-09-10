@@ -110,7 +110,7 @@ export interface BacktickProps {
    * takes, for the reason `<For />` exists: a tag has nowhere to bind a type
    * parameter.
    */
-  props?: Prop<{ [key: string]: ClientValue | undefined }>;
+  props?: Prop<{ [key: string]: ClientValue }>;
   /**
    * The bundle to draw, as the text it is on the wire — what `response.text`
    * answers with, and what a document carries.

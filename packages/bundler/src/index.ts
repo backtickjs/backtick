@@ -48,5 +48,5 @@ export type {
   BundleTry,
   BundleWhile,
   BundleFunctionLabel,
-} from "./bundle/Bundle.js";
+} from "@backtickjs/language";
 export { bundler } from "./bundler.js";

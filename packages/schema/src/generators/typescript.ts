@@ -82,17 +82,12 @@ export function type(node: TNode): string {
     );
     return members.length === 0 ? "{}" : `{ ${members.join("; ")} }`;
   }
-  // `| undefined` because that is what an index signature means in this
-  // language: a key nobody wrote reads as absent. The schema says only that
-  // the keys are open, and another target writes its own way of saying it.
+  // An index signature and not `Record<K, V>`, which is a mapped type:
+  // TypeScript resolves one eagerly, so a record naming the alias that holds it
+  // — `ClientValue` does — is `TS2456: circularly references itself`.
   if (IsRecord(node)) {
-    // `| undefined` because that is what reading a key it does not hold answers
-    // with — TypeScript's reading of an index signature, not a value the
-    // language has. A readonly record is written without it: nothing may add a
-    // key, so what a reader finds is what the schema said.
     const written = node.readOnly === true ? "readonly " : "";
-    const absent = node.readOnly === true ? "" : " | undefined";
-    return `{ ${written}[key: ${type(node.keys)}]: ${type(node.values)}${absent} }`;
+    return `{ ${written}[key: ${type(node.keys)}]: ${type(node.values)} }`;
   }
   if (IsArray(node)) {
     const items = node.items;

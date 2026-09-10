@@ -17,7 +17,7 @@ import type {
   BundleExpression,
   BundleParameter,
   BundleStatement,
-} from "./Bundle.js";
+} from "@backtickjs/language";
 
 // A parameter list as the wire carries it: one node per name. Shared with
 // `buildBundle`, which builds entries and thunks the same way.

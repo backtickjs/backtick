@@ -1,5 +1,5 @@
 import { lowerSpliceable } from "./ast/lowerSpliceable.js";
-import type { Bundle } from "./bundle/Bundle.js";
+import type { Bundle } from "@backtickjs/language";
 import { buildBundle } from "./bundle/buildBundle.js";
 import type { ClientUnknown, Spliceable } from "@backtickjs/boundary";
 

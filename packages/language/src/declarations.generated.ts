@@ -88,9 +88,7 @@ declare const BundleBrand: unique symbol;
  */
 export interface Bundle<T extends ClientUnknown> extends ClientHandle {
   readonly [BundleBrand]: T;
-  readonly functions: {
-    [key: BundleFunctionLabel]: BundleArrowFunction | undefined;
-  };
+  readonly functions: { [key: BundleFunctionLabel]: BundleArrowFunction };
   readonly root: BundleExpression;
 }
 
@@ -99,7 +97,7 @@ export type BundleFunctionLabel = string;
 export type BundleElement = [
   kind: "el",
   id: string,
-  props: { [key: string]: BundleExpression | undefined },
+  props: { [key: string]: BundleExpression },
   children: BundleExpression,
 ];
 
@@ -384,7 +382,7 @@ export type BundleParameter = [kind: "param", name: string];
  */
 export type RequestInit = {
   method?: string;
-  headers?: { [key: string]: string | undefined };
+  headers?: { [key: string]: string };
   body?: string | Bytes;
 };
 

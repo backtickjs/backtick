@@ -9,7 +9,7 @@ import type {
   BundleExpression,
   BundleIdentifier,
   BundleFunctionLabel,
-} from "./Bundle.js";
+} from "@backtickjs/language";
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
 import type { ClientUnknown } from "@backtickjs/boundary";
@@ -427,5 +427,8 @@ export function buildBundle(
       functions[fnLabel(script)] = body;
     }
   }
-  return { functions, root };
+  // Minted here, which is the one place it can be. A bundle is a handle the
+  // client owns and its brands are keys nothing can write — so what makes one
+  // says so, the way a client says it when it hands a script `Bytes`.
+  return { functions, root } as Bundle<ClientUnknown>;
 }
