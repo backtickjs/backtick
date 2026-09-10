@@ -161,7 +161,7 @@ export interface BacktickProps {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface UiElements {
+interface UiElements {
   /**
    * An array, and what to draw for one member of it.
    *
@@ -204,7 +204,7 @@ export interface UiElements {
 export interface Elements extends LanguageElements, UiElements {}
 
 /** What this schema declares, which is what its own client answers for. */
-export interface UiBuiltins {}
+interface UiBuiltins {}
 
 /** What a client must answer with, for every name in scope. */
 export interface Builtins extends LanguageBuiltins, UiBuiltins {}

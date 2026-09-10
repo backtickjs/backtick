@@ -434,13 +434,13 @@ export interface ArrayLike<T extends ClientValue> {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface LanguageElements {}
+interface LanguageElements {}
 
 /** Every element in scope, this schema's own and its bases'. */
 export interface Elements extends LanguageElements {}
 
 /** What this schema declares, which is what its own client answers for. */
-export interface LanguageBuiltins {
+interface LanguageBuiltins {
   /**
    * Returns the primitive value of the specified object.
    *

@@ -2245,7 +2245,7 @@ export interface SvgProps extends AriaAttributes, Events<SVGElement> {
 }
 
 /** The elements this schema declares, and what each accepts. */
-export interface WebElements {
+interface WebElements {
   a: AnchorProps;
   abbr: HtmlProps<HTMLElement>;
   address: HtmlProps<HTMLElement>;
@@ -2425,7 +2425,7 @@ export interface WebElements {
 export interface Elements extends UiElements, WebElements {}
 
 /** What this schema declares, which is what its own client answers for. */
-export interface WebBuiltins {
+interface WebBuiltins {
   window: Window;
 }
 

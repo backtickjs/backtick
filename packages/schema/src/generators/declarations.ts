@@ -242,7 +242,7 @@ export function declarations(schema: Schema): string {
   lines.push(
     "/** The elements this schema declares, and what each accepts. */",
   );
-  lines.push(`export interface ${ownElements} {`);
+  lines.push(`interface ${ownElements} {`);
   for (const [element, props] of Object.entries(schema.elements)) {
     lines.push(...documentation(props, "  "));
     lines.push(`  ${key(element)}: ${elementProps(props)};`);
@@ -288,7 +288,7 @@ export function declarations(schema: Schema): string {
   lines.push(
     "/** What this schema declares, which is what its own client answers for. */",
   );
-  lines.push(`export interface ${own}${parameters} {`);
+  lines.push(`interface ${own}${parameters} {`);
   for (const [name, node] of owed) {
     // A name standing for a type it declares is a member holding one; anything
     // else is written as the signature it declares.
