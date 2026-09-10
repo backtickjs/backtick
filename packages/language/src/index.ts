@@ -12,10 +12,10 @@ export type * from "./declarations.generated.js";
 export * from "./builtins.generated.js";
 export type * from "./receivers.generated.js";
 
-// Written by hand, because a schema never says them: `Client` and `Prop` are
-// how a host language spells "a value, or a script standing in for it", which
-// a client has no version of.
+// Written by hand, because a schema never says it: `Client` is how a host
+// language spells "a script standing in for a value", which a client has no
+// version of. `Prop` is the same idea in a drawing's position, and lives with
+// drawings — see `@backtickjs/ui`.
 export type { Client } from "./Client.js";
 export type { Spliceable, Spliced } from "./Spliceable.js";
-export type { Prop } from "./Prop.js";
 export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";

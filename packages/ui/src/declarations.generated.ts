@@ -8,9 +8,9 @@ import type {
   ClientUnknown,
   ClientValue,
   Elements as LanguageElements,
-  Prop,
   ReadonlyState,
 } from "@backtickjs/language";
+import type { Prop } from "./Prop.js";
 
 export type {
   ArrayLike,

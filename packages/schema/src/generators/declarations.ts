@@ -19,19 +19,22 @@ import type { TGeneric } from "../nodes/Generic.js";
 import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import type { Schema } from "../Schema.js";
 
-// What this generator writes around a declaration of its own accord: a prop
-// takes a value or a script standing in for one, and saying so is the
-// generator's job rather than something a schema asks for. No `$ref` names
-// either, so neither is a hole in the document a schema produces.
-const wrapping: ReadonlySet<string> = new Set(["Client", "Prop"]);
+// What this generator writes around a declaration of its own accord, and where
+// each is written. A prop takes a value or a script standing in for one, and
+// saying so is the generator's job rather than something a schema asks for. No
+// `$ref` names either, so neither is a hole in the document a schema produces.
+//
+// Two packages, because they are two ideas. `Client` is a script standing in
+// for a value, which is a thing about the language. `Prop` is that idea in a
+// drawing's position — JSX's rule about props — so it lives with drawings. A
+// schema generated into either package writes the name relative instead — see
+// `schema.package` below.
+const wrapping: ReadonlyMap<string, string> = new Map([
+  ["Client", "@backtickjs/language"],
+  ["Prop", "@backtickjs/ui"],
+]);
 
-/**
- * Where the two names above are written.
- *
- * The language package, because what a host may write where a client wants a
- * value is a thing about this language. A schema generated into that package
- * writes them relative instead — see `schema.package` below.
- */
+/** Where a builtin's `Client` and `createBuiltin` come from. */
 export const holder = "@backtickjs/language";
 import type { TNode } from "../TNode.js";
 
@@ -347,9 +350,9 @@ export function declarations(schema: Schema): string {
   // naming `BacktickNode` is prose, and an import written because a comment
   // spelled a name is an import nothing reads.
   const written = lines.filter((line) => !/^\s*(\/\*|\*)/.test(line));
-  for (const held of wrapping) {
+  for (const [held, where] of wrapping) {
     if (written.some((line) => new RegExp(`\\b${held}\\b`).test(line))) {
-      name(held, holder);
+      name(held, where);
     }
   }
 

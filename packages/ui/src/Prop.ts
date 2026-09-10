@@ -1,5 +1,4 @@
-import type { ClientValue } from "./declarations.generated.js";
-import type { Spliceable } from "./Spliceable.js";
+import type { ClientValue, Spliceable } from "@backtickjs/language";
 
 /**
  * What a prop admits: what the server wrote, or a script standing in for it.

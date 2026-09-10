@@ -1,6 +1,7 @@
 import { createJsxElement } from "@backtickjs/ui";
 import type { Bundle } from "@backtickjs/language";
-import type { ClientValue, Prop } from "@backtickjs/language";
+import type { ClientValue } from "@backtickjs/language";
+import type { Prop } from "./Prop.js";
 import type { BacktickElement } from "@backtickjs/ui";
 
 /**

@@ -11,7 +11,7 @@ export type {
   State,
 } from "@backtickjs/language";
 export { fetch, state } from "@backtickjs/language";
-export type { Prop } from "@backtickjs/language";
+export type { Prop } from "@backtickjs/ui";
 export type { BacktickElement, BacktickNode } from "@backtickjs/ui";
 export type { Bundle } from "@backtickjs/language";
 
