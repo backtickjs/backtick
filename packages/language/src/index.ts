@@ -72,6 +72,8 @@ export type {
   Http,
   HttpConfig,
   HttpResponse,
+  LanguageBuiltins,
+  LanguageElements,
   ReadonlyState,
   State,
 } from "./declarations.generated.js";

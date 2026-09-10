@@ -69,6 +69,8 @@ export type {
   HttpResponse,
   ReadonlyState,
   State,
+  UiBuiltins,
+  UiElements,
 } from "./declarations.generated.js";
 
 // Components, because a tag has nowhere to bind a type parameter: these check a

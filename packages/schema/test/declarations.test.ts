@@ -174,7 +174,7 @@ describe("declarations", () => {
     // document is checked against the second.
     assert.match(
       declarations(target),
-      /^interface TargetElements \{\n {2}pick: Props;\n\}/m,
+      /export interface TargetElements \{\n {2}pick: Props;\n\}/,
     );
     assert.match(
       declarations(target),
@@ -190,7 +190,7 @@ describe("declarations", () => {
     // scope. The first is the layer's own, under its namespace.
     assert.match(
       declarations(core),
-      /^interface CoreBuiltins \{\n {2}state: Cell;\n\}/m,
+      /export interface CoreBuiltins \{\n {2}state: Cell;\n\}/,
     );
     assert.match(
       declarations(core),
@@ -205,20 +205,20 @@ describe("declarations", () => {
     // above it would extend a name that is not there, and what a base declares
     // would stop arriving.
     const written = declarations(middle);
-    assert.match(written, /^interface MiddleElements \{\n\}/m);
+    assert.match(written, /export interface MiddleElements \{\n\}/);
     assert.match(
       written,
       /export interface Elements extends CoreElements, MiddleElements \{\}/,
     );
     // Its own is empty and still written: a layer that skipped it is a name the
     // layer above extends and cannot find.
-    assert.match(written, /^interface MiddleBuiltins \{\n\}/m);
+    assert.match(written, /export interface MiddleBuiltins \{\n\}/);
     assert.match(
       written,
       /export interface Builtins extends CoreBuiltins, MiddleBuiltins \{\}/,
     );
     // the root declares no element and still writes both names
-    assert.match(declarations(core), /^interface CoreElements \{\n\}/m);
+    assert.match(declarations(core), /export interface CoreElements \{\n\}/);
     assert.match(
       declarations(core),
       /export interface Elements extends CoreElements \{\}/,

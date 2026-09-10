@@ -238,13 +238,13 @@ export interface Diagnostic {
 }
 
 /** The elements this schema declares, and what each accepts. */
-interface SiteElements {}
+export interface SiteElements {}
 
 /** Every element in scope, this schema's own and its bases'. */
 export interface Elements extends WebElements, SiteElements {}
 
 /** What this schema declares, which is what its own client answers for. */
-interface SiteBuiltins {
+export interface SiteBuiltins {
   /**
    * Backtick source, compiled to javascript. One callback is called, once —
    * callbacks because waiting is not a thing this language does.

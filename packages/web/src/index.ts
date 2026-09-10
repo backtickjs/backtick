@@ -220,6 +220,8 @@ export type {
   UIEvent,
   VideoProps,
   VoidProps,
+  WebBuiltins,
+  WebElements,
   WheelEvent,
   Window,
 } from "./declarations.generated.js";

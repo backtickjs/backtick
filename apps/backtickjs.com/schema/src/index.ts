@@ -206,6 +206,8 @@ export type {
   ReferrerPolicy,
   SVGElement,
   SelectProps,
+  SiteBuiltins,
+  SiteElements,
   SlotProps,
   SourceProps,
   State,
