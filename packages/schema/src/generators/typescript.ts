@@ -18,6 +18,8 @@ import { IsRecord } from "../nodes/Record.js";
 import { IsRef } from "../nodes/Ref.js";
 import { IsRest } from "../nodes/Rest.js";
 import { IsString } from "../nodes/String.js";
+import { IsTuple } from "../nodes/Tuple.js";
+import { IsTupleElement } from "../nodes/TupleElement.js";
 import { IsUnion } from "../nodes/Union.js";
 import { IsUnknown } from "../nodes/Unknown.js";
 import { IsVoid } from "../nodes/Void.js";
@@ -98,6 +100,17 @@ export function type(node: TNode): string {
     return IsUnion(items) || IsFunction(items) || IsGeneric(items)
       ? `${immutable}(${written})[]`
       : `${immutable}${written}[]`;
+  }
+  // Every position named, because TypeScript takes labels all or none and the
+  // schema has no way to write one without a name. `readonly` where the schema
+  // says so, the same as an array.
+  if (IsTuple(node)) {
+    const immutable = node.readOnly === true ? "readonly " : "";
+    const items = node.items.map((one) => `${one.name}: ${type(one.holds)}`);
+    return `${immutable}[${items.join(", ")}]`;
+  }
+  if (IsTupleElement(node)) {
+    throw new Error("a tuple element is a position, not a type");
   }
   if (IsString(node)) {
     if ("const" in node) {

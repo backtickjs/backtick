@@ -272,3 +272,84 @@ describe("declarations", () => {
     );
   });
 });
+
+// A tuple is how the bundle format says every one of its nodes: a word naming
+// the kind, then what that kind holds. What is checked here is what a reader
+// outside TypeScript needs — that the positions keep their names and their
+// order.
+describe("a tuple", () => {
+  const written = (types: Schema["types"]): string =>
+    declarations({ ...core, types: { ...core.types, ...types } });
+
+  it("names every position, in the order the schema wrote them", () => {
+    assert.match(
+      written({
+        Call: Type.Tuple({
+          kind: Type.Literal("()"),
+          expression: Type.Ref("Drawn"),
+          args: Type.Array(Type.Ref("Drawn")),
+        }),
+      }),
+      /export type Call = \[kind: "\(\)", expression: Drawn, args: Drawn\[\]\];/,
+    );
+  });
+
+  it("holds a ref back to what holds it", () => {
+    // The bundle's shape: an expression is a union of tuples, and a tuple holds
+    // expressions. Nothing new is needed to say it — the ref does the work.
+    const out = written({
+      Expression: Type.Union([Type.Number(), Type.Ref("Negation")]),
+      Negation: Type.Tuple({
+        kind: Type.Literal("-x"),
+        operand: Type.Ref("Expression"),
+      }),
+    });
+    assert.match(out, /export type Expression = number \| Negation;/);
+    assert.match(
+      out,
+      /export type Negation = \[kind: "-x", operand: Expression\];/,
+    );
+  });
+
+  it("is written `readonly` where the schema says so", () => {
+    assert.match(
+      written({
+        Pair: Type.Tuple(
+          { a: Type.Number(), b: Type.Number() },
+          { readOnly: true },
+        ),
+      }),
+      /export type Pair = readonly \[a: number, b: number\];/,
+    );
+  });
+
+  it("carries an empty run", () => {
+    assert.match(
+      written({ Break: Type.Tuple({ kind: Type.Literal("break") }) }),
+      /export type Break = \[kind: "break"\];/,
+    );
+  });
+
+  it("is walked for the names it reaches", () => {
+    // A ref inside a position is a ref: a tuple the validator did not read into
+    // would let an unresolvable name through, which is the one thing a closed
+    // document may not have.
+    assert.throws(
+      () =>
+        written({
+          Held: Type.Tuple({
+            kind: Type.Literal("k"),
+            held: Type.Ref("Missing"),
+          }),
+        }),
+      /names `Missing` and does not declare it/,
+    );
+  });
+
+  it("refuses a position standing on its own as a type", () => {
+    assert.throws(
+      () => written({ Stray: Type.Tuple({ a: Type.Number() }).items[0]! }),
+      /a tuple element is a position, not a type/,
+    );
+  });
+});

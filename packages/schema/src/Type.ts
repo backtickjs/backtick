@@ -18,6 +18,7 @@ import { Record } from "./nodes/Record.js";
 import { Ref } from "./nodes/Ref.js";
 import { Rest } from "./nodes/Rest.js";
 import { String } from "./nodes/String.js";
+import { Tuple } from "./nodes/Tuple.js";
 import { Union } from "./nodes/Union.js";
 import { Void } from "./nodes/Void.js";
 
@@ -37,6 +38,7 @@ export const Type = {
   Object,
   Record,
   Array,
+  Tuple,
   Function,
   Void,
   Never,

@@ -15,6 +15,8 @@ import type { TRecord } from "./nodes/Record.js";
 import type { TRef } from "./nodes/Ref.js";
 import type { TRest } from "./nodes/Rest.js";
 import type { TString } from "./nodes/String.js";
+import type { TTuple } from "./nodes/Tuple.js";
+import type { TTupleElement } from "./nodes/TupleElement.js";
 import type { TUnion } from "./nodes/Union.js";
 import type { TUnknown } from "./nodes/Unknown.js";
 import type { TVoid } from "./nodes/Void.js";
@@ -38,6 +40,8 @@ export type TNode =
   | TInterface
   | TObject
   | TArray
+  | TTuple
+  | TTupleElement
   | TFunction
   | TVoid
   | TNever
