@@ -20,11 +20,16 @@ import { transform } from "./transform.js";
  * transform writes references to them that TypeScript has not seen and so
  * cannot rewrite. A caller that needs something runnable without a module
  * loader transpiles this again, to `require`/`exports`, in a second pass.
+ *
+ * `jsxImportSource` is the caller's, and the only one that is: which target a
+ * file draws with is not something a compiler knows, and a default here would
+ * be this package naming one target's package for every file it ever sees.
  */
 export function transpile(
   ts: typeof import("typescript"),
   fileName: string,
   sourceText: string,
+  jsxImportSource: string,
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
 ): string {
   const { outputText } = ts.transpileModule(sourceText, {
@@ -33,7 +38,7 @@ export function transpile(
       target: ts.ScriptTarget.ESNext,
       module: ts.ModuleKind.ESNext,
       jsx: ts.JsxEmit.ReactJSX,
-      jsxImportSource: "@backtickjs/web",
+      jsxImportSource,
       sourceMap: false,
       verbatimModuleSyntax: true,
     },

@@ -20,7 +20,15 @@ export function browserTranspile(
   sourceText: string,
   addDiagnostic?: (diagnostic: ts.Diagnostic) => void,
 ): string {
-  const firstPass = transpile(ts, fileName, sourceText, addDiagnostic);
+  // The playground draws in a page, so the web target is what an example here
+  // is written against.
+  const firstPass = transpile(
+    ts,
+    fileName,
+    sourceText,
+    "@backtickjs/web",
+    addDiagnostic,
+  );
 
   const { outputText: secondPass } = ts.transpileModule(firstPass, {
     fileName,
