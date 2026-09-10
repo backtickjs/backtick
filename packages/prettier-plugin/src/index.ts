@@ -2,7 +2,7 @@ import {
   type ClientScript,
   flattenScripts,
   parseSourceText,
-} from "@backtickjs/compiler";
+} from "@backtickjs-internal/compiler";
 import type { Expression, Node } from "estree";
 import {
   type AstPath,

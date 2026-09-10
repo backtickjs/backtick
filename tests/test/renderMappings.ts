@@ -1,5 +1,5 @@
-import type { SourceMapping } from "@backtickjs/compiler";
-import { parseSourceText } from "@backtickjs/compiler";
+import type { SourceMapping } from "@backtickjs-internal/compiler";
+import { parseSourceText } from "@backtickjs-internal/compiler";
 import ts from "typescript";
 
 // The source spans covered by top-level `cs` templates (which enclose any

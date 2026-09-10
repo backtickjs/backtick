@@ -1,4 +1,4 @@
-import { transpile } from "@backtickjs/compiler";
+import { transpile } from "@backtickjs-internal/compiler";
 import ts from "typescript";
 
 /**

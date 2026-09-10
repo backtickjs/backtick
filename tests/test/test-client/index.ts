@@ -1,6 +1,6 @@
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type { Bundle } from "@backtickjs/bundler";
-import { evaluate as evaluateBundle } from "@backtickjs/js-interpreter";
+import { evaluate as evaluateBundle } from "@backtickjs-internal/js-interpreter";
 import type { RendererOptions } from "solid-js/universal";
 import { testHost } from "./host.ts";
 import { window } from "./window.ts";
@@ -9,7 +9,7 @@ import type { TestNode } from "./host.ts";
 export { isTestNode, isText, recordingHost, testHost } from "./host.ts";
 export type { TestNode, Write } from "./host.ts";
 
-// The interpreter itself lives in `@backtickjs/js-interpreter` — one
+// The interpreter itself lives in `@backtickjs-internal/js-interpreter` — one
 // implementation, so what this suite exercises is what every host runs. What
 // stays here is the test-only half: a host of plain objects to build in.
 

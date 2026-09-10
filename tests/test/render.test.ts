@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { describe, it } from "node:test";
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
-import { render } from "@backtickjs/js-interpreter";
+import { render } from "@backtickjs-internal/js-interpreter";
 import { createFixtureLoader, fixturesRoot } from "./importFixture.ts";
 import { testHost } from "./test-client/index.ts";
 import type { TestNode } from "./test-client/index.ts";

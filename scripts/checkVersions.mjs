@@ -1,6 +1,11 @@
-// Enforces lockstep versioning: every `@backtickjs/*` package under
-// `packages/` shares one version, and every range pointing at one of them
-// either uses the workspace protocol or pins that same version.
+// Enforces lockstep versioning: every published package — `@backtickjs/*` under
+// `packages/` and `@backtickjs-internal/*` under `internal/` — shares one
+// version, and every range pointing at one of them either uses the workspace
+// protocol or pins that same version.
+//
+// The internal ones are in the set because they are published: a public package
+// depends on them, so npm resolves them whether or not anyone imports one by
+// name. A version that drifts there breaks an install the same way.
 //
 // The plugins are published separately from core but are only ever compatible
 // with the core they were built against, so a version that drifts is a bug
@@ -23,6 +28,7 @@ function manifests(dir) {
 const released = [
   ...manifests("packages"),
   ...manifests("packages/language-tools"),
+  ...manifests("internal"),
 ];
 // examples and benchmarks model a real consumer install, so their ranges are
 // checked but their own versions are not part of the release set.
@@ -79,7 +85,8 @@ const dependencyFields = [
 for (const { file, json } of [...released, ...consuming]) {
   for (const field of dependencyFields) {
     for (const [name, range] of Object.entries(json[field] ?? {})) {
-      if (!name.startsWith("@backtickjs/")) continue;
+      if (!name.startsWith("@backtickjs/") && !name.startsWith("@backtickjs-internal/"))
+        continue;
       if (range.startsWith("workspace:")) continue;
       if (range === `^${expected}`) continue;
       errors.push(
@@ -93,7 +100,7 @@ for (const { file, json } of [...released, ...consuming]) {
 // The compiler stamps this constant into every script it emits and a client
 // compares scripts against it, so a value that drifts from the manifests would
 // misreport every mismatch — in either direction.
-const constantFile = "packages/client-script/src/version.ts";
+const constantFile = "internal/client-script/src/version.ts";
 const declared = readFileSync(join(root, constantFile), "utf8").match(
   /export const version = "([^"]*)"/,
 )?.[1];

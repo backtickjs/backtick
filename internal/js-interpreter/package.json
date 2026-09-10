@@ -1,0 +1,33 @@
+{
+  "name": "@backtickjs-internal/js-interpreter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtickjs/bundler": "workspace:*",
+    "@backtickjs/language": "workspace:*",
+    "solid-js": "^1.9.14"
+  },
+  "peerDependencies": {
+    "@backtickjs/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@backtickjs/core": "workspace:*",
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3"
+  }
+}

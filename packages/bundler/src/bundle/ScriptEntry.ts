@@ -1,7 +1,7 @@
 import type {
   ClientScriptBody,
   SourceLocation,
-} from "@backtickjs/client-script";
+} from "@backtickjs-internal/client-script";
 
 /**
  * One `functions` entry: a client script's body, compiled once for every place

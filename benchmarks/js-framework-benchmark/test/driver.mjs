@@ -1,4 +1,4 @@
-import { render } from "@backtickjs/js-interpreter";
+import { render } from "@backtickjs-internal/js-interpreter";
 
 // The driver, as the benchmark's own driver would be if there were no browser:
 // it opens the app, finds elements by selector, and clicks them. What it drives

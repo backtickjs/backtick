@@ -1,4 +1,4 @@
-import type { Diagnostic } from "@backtickjs/compiler";
+import type { Diagnostic } from "@backtickjs-internal/compiler";
 import ts from "typescript";
 
 // Render each diagnostic as `<line>:<col>-<line>:<col> <category> <code>: <message>`,

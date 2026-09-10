@@ -24,7 +24,7 @@
   "devDependencies": {
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/js-interpreter": "workspace:*",
+    "@backtickjs-internal/js-interpreter": "workspace:*",
     "@backtickjs/web-schema": "workspace:*",
     "esbuild": "0.28.0",
     "prettier": "^3.6.2",

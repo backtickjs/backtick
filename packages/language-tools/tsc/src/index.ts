@@ -1,10 +1,10 @@
 import { createRequire } from "node:module";
-import { unmangle } from "@backtickjs/compiler";
-import { getBacktickLanguagePlugin } from "@backtickjs/language-plugin";
+import { unmangle } from "@backtickjs-internal/compiler";
+import { getBacktickLanguagePlugin } from "@backtickjs-internal/language-plugin";
 import {
   getBacktickDiagnostics,
   unmangleDiagnostic,
-} from "@backtickjs/language-service";
+} from "@backtickjs-internal/language-service";
 import { fillSourceFileText } from "@volar/typescript/lib/node/transform.js";
 import { runTsc } from "@volar/typescript/lib/quickstart/runTsc.js";
 import type ts from "typescript";

@@ -2,7 +2,7 @@ import assert from "node:assert";
 import { readdirSync, readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { describe, it } from "node:test";
-import { virtualize } from "@backtickjs/compiler";
+import { virtualize } from "@backtickjs-internal/compiler";
 import ts from "typescript";
 import { matchFileSnapshot } from "./matchFileSnapshot.ts";
 import { renderDiagnostics } from "./renderDiagnostics.ts";

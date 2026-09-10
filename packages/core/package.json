@@ -18,7 +18,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/client-script": "workspace:*",
+    "@backtickjs-internal/client-script": "workspace:*",
     "@backtickjs/language": "workspace:*",
     "@backtickjs/ui-schema": "workspace:*"
   },

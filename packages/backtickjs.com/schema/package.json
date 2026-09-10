@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@backtickjs/language": "workspace:*",
-    "@backtickjs/client-script": "workspace:*",
     "@backtickjs/schema": "workspace:*",
     "@backtickjs/ui-schema": "workspace:*",
     "@backtickjs/web-schema": "workspace:*"

@@ -22,7 +22,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/compiler": "workspace:*",
+    "@backtickjs-internal/compiler": "workspace:*",
     "typescript": "^6.0.3"
   },
   "devDependencies": {

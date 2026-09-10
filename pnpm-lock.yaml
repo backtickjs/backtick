@@ -23,6 +23,9 @@ importers:
 
   benchmarks/js-framework-benchmark:
     devDependencies:
+      '@backtickjs-internal/js-interpreter':
+        specifier: workspace:*
+        version: link:../../internal/js-interpreter
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../../packages/bundler
@@ -32,9 +35,6 @@ importers:
       '@backtickjs/html-embed':
         specifier: workspace:*
         version: link:../../packages/html-embed
-      '@backtickjs/js-interpreter':
-        specifier: workspace:*
-        version: link:../../packages/js-interpreter
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../../packages/web-schema
@@ -303,6 +303,136 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  internal/client-script:
+    dependencies:
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../../packages/language
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  internal/compiler:
+    dependencies:
+      '@backtickjs-internal/client-script':
+        specifier: workspace:*
+        version: link:../client-script
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  internal/js-interpreter:
+    dependencies:
+      '@backtickjs/bundler':
+        specifier: workspace:*
+        version: link:../../packages/bundler
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../../packages/language
+      solid-js:
+        specifier: ^1.9.14
+        version: 1.9.14
+    devDependencies:
+      '@backtickjs/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  internal/language-plugin:
+    dependencies:
+      '@backtickjs-internal/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+      '@volar/language-core':
+        specifier: ^2.4.28
+        version: 2.4.28
+      vscode-uri:
+        specifier: ^3.0.8
+        version: 3.1.0
+    devDependencies:
+      '@volar/language-server':
+        specifier: ^2.4.28
+        version: 2.4.28
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  internal/language-server:
+    dependencies:
+      '@backtickjs-internal/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/language-server':
+        specifier: ^2.4.28
+        version: 2.4.28
+      vscode-uri:
+        specifier: ^3.0.8
+        version: 3.1.0
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+
+  internal/language-service:
+    dependencies:
+      '@backtickjs-internal/compiler':
+        specifier: workspace:*
+        version: link:../compiler
+      '@backtickjs-internal/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@volar/language-core':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
+  internal/typescript-plugin:
+    dependencies:
+      '@backtickjs-internal/language-plugin':
+        specifier: workspace:*
+        version: link:../language-plugin
+      '@backtickjs-internal/language-service':
+        specifier: workspace:*
+        version: link:../language-service
+      '@volar/language-core':
+        specifier: ^2.4.28
+        version: 2.4.28
+      '@volar/typescript':
+        specifier: ^2.4.28
+        version: 2.4.28
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/backtickjs.com/client:
     dependencies:
       '@backtickjs.com/compiler':
@@ -333,9 +463,9 @@ importers:
 
   packages/backtickjs.com/compiler:
     dependencies:
-      '@backtickjs/compiler':
+      '@backtickjs-internal/compiler':
         specifier: workspace:*
-        version: link:../../compiler
+        version: link:../../../internal/compiler
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -371,9 +501,6 @@ importers:
 
   packages/backtickjs.com/schema:
     dependencies:
-      '@backtickjs/client-script':
-        specifier: workspace:*
-        version: link:../../client-script
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../../language
@@ -396,6 +523,9 @@ importers:
 
   packages/backtickjs.com/server:
     dependencies:
+      '@backtickjs-internal/compiler':
+        specifier: workspace:*
+        version: link:../../../internal/compiler
       '@backtickjs.com/client':
         specifier: workspace:*
         version: link:../client
@@ -411,9 +541,6 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../../bundler
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../../compiler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../../core
@@ -451,9 +578,9 @@ importers:
 
   packages/bun-plugin:
     devDependencies:
-      '@backtickjs/compiler':
+      '@backtickjs-internal/compiler':
         specifier: workspace:*
-        version: link:../compiler
+        version: link:../../internal/compiler
       '@types/bun':
         specifier: ^1.3.14
         version: 1.3.14
@@ -466,9 +593,9 @@ importers:
 
   packages/bundler:
     dependencies:
-      '@backtickjs/client-script':
+      '@backtickjs-internal/client-script':
         specifier: workspace:*
-        version: link:../client-script
+        version: link:../../internal/client-script
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -502,37 +629,11 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/client-script:
-    dependencies:
-      '@backtickjs/language':
-        specifier: workspace:*
-        version: link:../language
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/compiler:
-    dependencies:
-      '@backtickjs/client-script':
-        specifier: workspace:*
-        version: link:../client-script
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/core:
     dependencies:
-      '@backtickjs/client-script':
+      '@backtickjs-internal/client-script':
         specifier: workspace:*
-        version: link:../client-script
+        version: link:../../internal/client-script
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -559,28 +660,6 @@ importers:
         specifier: ^0.18.13
         version: 0.18.13
     devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/js-interpreter:
-    dependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../bundler
-      '@backtickjs/language':
-        specifier: workspace:*
-        version: link:../language
-      solid-js:
-        specifier: ^1.9.14
-        version: 1.9.14
-    devDependencies:
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../core
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -617,99 +696,17 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/language-tools/language-plugin:
-    dependencies:
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../../compiler
-      '@volar/language-core':
-        specifier: ^2.4.28
-        version: 2.4.28
-      vscode-uri:
-        specifier: ^3.0.8
-        version: 3.1.0
-    devDependencies:
-      '@volar/language-server':
-        specifier: ^2.4.28
-        version: 2.4.28
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language-tools/language-server:
-    dependencies:
-      '@backtickjs/language-plugin':
-        specifier: workspace:*
-        version: link:../language-plugin
-      '@volar/language-server':
-        specifier: ^2.4.28
-        version: 2.4.28
-      vscode-uri:
-        specifier: ^3.0.8
-        version: 3.1.0
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-
-  packages/language-tools/language-service:
-    dependencies:
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../../compiler
-      '@backtickjs/language-plugin':
-        specifier: workspace:*
-        version: link:../language-plugin
-      '@volar/language-core':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/language-tools/tsc:
     dependencies:
-      '@backtickjs/compiler':
+      '@backtickjs-internal/compiler':
         specifier: workspace:*
-        version: link:../../compiler
-      '@backtickjs/language-plugin':
+        version: link:../../../internal/compiler
+      '@backtickjs-internal/language-plugin':
         specifier: workspace:*
-        version: link:../language-plugin
-      '@backtickjs/language-service':
+        version: link:../../../internal/language-plugin
+      '@backtickjs-internal/language-service':
         specifier: workspace:*
-        version: link:../language-service
-      '@volar/typescript':
-        specifier: ^2.4.28
-        version: 2.4.28
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/language-tools/typescript-plugin:
-    dependencies:
-      '@backtickjs/language-plugin':
-        specifier: workspace:*
-        version: link:../language-plugin
-      '@backtickjs/language-service':
-        specifier: workspace:*
-        version: link:../language-service
-      '@volar/language-core':
-        specifier: ^2.4.28
-        version: 2.4.28
+        version: link:../../../internal/language-service
       '@volar/typescript':
         specifier: ^2.4.28
         version: 2.4.28
@@ -723,13 +720,13 @@ importers:
 
   packages/language-tools/vscode-extension:
     dependencies:
-      '@backtickjs/typescript-plugin':
+      '@backtickjs-internal/typescript-plugin':
         specifier: workspace:*
-        version: link:../typescript-plugin
+        version: link:../../../internal/typescript-plugin
     devDependencies:
-      '@backtickjs/language-server':
+      '@backtickjs-internal/language-server':
         specifier: workspace:*
-        version: link:../language-server
+        version: link:../../../internal/language-server
       '@types/vscode':
         specifier: ^1.120.0
         version: 1.125.0
@@ -757,9 +754,9 @@ importers:
 
   packages/prettier-plugin:
     devDependencies:
-      '@backtickjs/compiler':
+      '@backtickjs-internal/compiler':
         specifier: workspace:*
-        version: link:../compiler
+        version: link:../../internal/compiler
       '@types/estree':
         specifier: ^1.0.9
         version: 1.0.9
@@ -784,9 +781,9 @@ importers:
 
   packages/tspatch-plugin:
     devDependencies:
-      '@backtickjs/compiler':
+      '@backtickjs-internal/compiler':
         specifier: workspace:*
-        version: link:../compiler
+        version: link:../../internal/compiler
       prettier:
         specifier: ^3.6.2
         version: 3.8.4
@@ -818,15 +815,15 @@ importers:
 
   packages/web-client:
     devDependencies:
+      '@backtickjs-internal/js-interpreter':
+        specifier: workspace:*
+        version: link:../../internal/js-interpreter
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../core
-      '@backtickjs/js-interpreter':
-        specifier: workspace:*
-        version: link:../js-interpreter
       '@backtickjs/web-schema':
         specifier: workspace:*
         version: link:../web-schema
@@ -861,21 +858,21 @@ importers:
 
   tests:
     devDependencies:
+      '@backtickjs-internal/client-script':
+        specifier: workspace:*
+        version: link:../internal/client-script
+      '@backtickjs-internal/compiler':
+        specifier: workspace:*
+        version: link:../internal/compiler
+      '@backtickjs-internal/js-interpreter':
+        specifier: workspace:*
+        version: link:../internal/js-interpreter
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../packages/bundler
-      '@backtickjs/client-script':
-        specifier: workspace:*
-        version: link:../packages/client-script
-      '@backtickjs/compiler':
-        specifier: workspace:*
-        version: link:../packages/compiler
       '@backtickjs/core':
         specifier: workspace:*
         version: link:../packages/core
-      '@backtickjs/js-interpreter':
-        specifier: workspace:*
-        version: link:../packages/js-interpreter
       '@backtickjs/language-schema':
         specifier: workspace:*
         version: link:../packages/language-schema

@@ -1,4 +1,4 @@
-import { transpile } from "@backtickjs/compiler";
+import { transpile } from "@backtickjs-internal/compiler";
 // Prettier by the path rather than the name. This suite runs under
 // `--conditions=browser`, which is what makes Solid resolve to its reactive
 // build rather than the inert server one (see `js-interpreter/view.ts`), and
