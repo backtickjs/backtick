@@ -429,6 +429,6 @@ export function buildBundle(
   }
   // Minted here, which is the one place it can be. A bundle is a handle the
   // client owns and its brands are keys nothing can write — so what makes one
-  // says so, the way a client says it when it hands a script `Bytes`.
+  // says so, the way a client says it when it hands a script a `State`.
   return { functions, root } as Bundle<ClientUnknown>;
 }

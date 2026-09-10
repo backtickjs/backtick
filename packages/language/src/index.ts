@@ -64,7 +64,6 @@ export type {
   BundleTry,
   BundleUndefined,
   BundleWhile,
-  Bytes,
   ClientFunction,
   ClientHandle,
   ClientUnknown,
@@ -74,11 +73,9 @@ export type {
   HttpConfig,
   HttpResponse,
   ReadonlyState,
-  RequestInit,
-  Response,
   State,
 } from "./declarations.generated.js";
-export { fetch, http, state } from "./builtins.generated.js";
+export { http, state } from "./builtins.generated.js";
 export type {
   Array,
   ArrayConstructor,

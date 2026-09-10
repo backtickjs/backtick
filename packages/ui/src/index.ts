@@ -57,7 +57,6 @@ export type {
   BundleTry,
   BundleUndefined,
   BundleWhile,
-  Bytes,
   ClientFunction,
   ClientHandle,
   ClientUnknown,
@@ -69,8 +68,6 @@ export type {
   HttpConfig,
   HttpResponse,
   ReadonlyState,
-  RequestInit,
-  Response,
   State,
 } from "./declarations.generated.js";
 

@@ -2,30 +2,7 @@
 
 import { createBuiltin } from "./Builtin.js";
 import type { Client } from "./Client.js";
-import type {
-  Http,
-  RequestInit,
-  Response,
-  State,
-} from "./declarations.generated.js";
-
-/**
- * The web's `fetch`, answering through handlers because a script has no
- * `await`.
- *
- * Exactly one handler is called, once. `init` is last so the optional argument
- * stays last.
- *
- * @param onFailure Called where nothing answered at all.
- */
-export const fetch: Client<
-  (
-    input: string,
-    onResponse: (response: Response) => void,
-    onFailure: (reason: string) => void,
-    init?: RequestInit,
-  ) => void
-> = createBuiltin("fetch");
+import type { Http, State } from "./declarations.generated.js";
 
 export const http: Client<Http> = createBuiltin("http");
 

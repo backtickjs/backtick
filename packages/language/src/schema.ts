@@ -67,7 +67,7 @@ export const schema: Schema = {
       {},
       {
         description:
-          "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `Bytes` and `State` are handles, and so is anything a client answers with that this format does not describe.",
+          "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `State` is a handle, and so is anything a client answers with that this format does not describe.",
       },
     ),
 
@@ -100,15 +100,6 @@ export const schema: Schema = {
       {
         description:
           "What may cross between a host and a client: data, a function, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
-      },
-    ),
-
-    Bytes: Type.Interface(
-      [Type.Ref("ClientHandle")],
-      {},
-      {
-        description:
-          "Bytes the client is holding. Opaque: this language has no way to look inside one, only to hold it and hand it back.",
       },
     ),
 
@@ -416,73 +407,6 @@ export const schema: Schema = {
       kind: Type.Literal("param"),
       name: Type.String(),
     }),
-
-    RequestInit: Type.Object(
-      {
-        method: Type.Optional(Type.String()),
-        headers: Type.Optional(Type.Record(Type.String(), Type.String())),
-        body: Type.Optional(Type.Union([Type.String(), Type.Ref("Bytes")])),
-      },
-      {
-        description:
-          "The web's `RequestInit`, less what a script has no way to hold.",
-      },
-    ),
-
-    Response: Type.Interface(
-      [Type.Ref("ClientHandle")],
-      {
-        ok: Type.Boolean({ readOnly: true }),
-        status: Type.Number({ readOnly: true }),
-        statusText: Type.String({ readOnly: true }),
-        text: Type.Function(
-          [
-            Type.FunctionParameter(
-              "onText",
-              Type.Function(
-                [Type.FunctionParameter("text", Type.String())],
-                Type.Void(),
-              ),
-            ),
-            Type.FunctionParameter(
-              "onFailure",
-              Type.Function(
-                [Type.FunctionParameter("reason", Type.String())],
-                Type.Void(),
-              ),
-            ),
-          ],
-          Type.Void(),
-          { description: "Reads the body as text." },
-        ),
-        bytes: Type.Function(
-          [
-            Type.FunctionParameter(
-              "onBytes",
-              Type.Function(
-                [Type.FunctionParameter("bytes", Type.Ref("Bytes"))],
-                Type.Void(),
-              ),
-            ),
-            Type.FunctionParameter(
-              "onFailure",
-              Type.Function(
-                [Type.FunctionParameter("reason", Type.String())],
-                Type.Void(),
-              ),
-            ),
-          ],
-          Type.Void(),
-          { description: "Reads the body as bytes." },
-        ),
-      },
-      {
-        description:
-          "What answered. A 404 is an answer.\n\n" +
-          "The body is not here: reading it is a second turn, the way it is on the web, so it is asked for and arrives later. Once — a body read twice fails the second time.\n\n" +
-          "There is no `json`: `JSON.parse` is a name already, and a parse that fails belongs in the script's own `try` rather than in a third handler here.",
-      },
-    ),
 
     HttpConfig: Type.Object(
       {
@@ -1883,33 +1807,6 @@ export const schema: Schema = {
       {
         description:
           "Return the String value whose elements are, in order, the elements in the List elements. If length is 0, the empty string is returned.",
-      },
-    ),
-    fetch: Type.Function(
-      [
-        Type.FunctionParameter("input", Type.String()),
-        Type.FunctionParameter(
-          "onResponse",
-          Type.Function(
-            [Type.FunctionParameter("response", Type.Ref("Response"))],
-            Type.Void(),
-          ),
-        ),
-        Type.FunctionParameter(
-          "onFailure",
-          Type.Function(
-            [Type.FunctionParameter("reason", Type.String())],
-            Type.Void(),
-          ),
-          { description: "Called where nothing answered at all." },
-        ),
-        Type.Optional(Type.FunctionParameter("init", Type.Ref("RequestInit"))),
-      ],
-      Type.Void(),
-      {
-        description:
-          "The web's `fetch`, answering through handlers because a script has no `await`.\n\n" +
-          "Exactly one handler is called, once. `init` is last so the optional argument stays last.",
       },
     ),
     http: Type.Ref("Http"),

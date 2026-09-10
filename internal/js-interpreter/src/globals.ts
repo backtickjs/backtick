@@ -4,7 +4,6 @@ import type {
   Http,
   HttpConfig,
   HttpResponse,
-  Response,
   State,
 } from "@backtickjs/language";
 import { createSignal } from "solid-js";
@@ -251,41 +250,6 @@ export const globals: Builtins = {
     // a script passing a record off as storage — so the client asserts it
     // here, at the one place entitled to.
     return { read, write, update } as unknown as State<typeof initial>;
-  },
-  fetch(input, onResponse, onFailure, init) {
-    void globalThis
-      .fetch(input, init as globalThis.RequestInit | undefined)
-      .then(
-        (response) =>
-          onResponse({
-            ok: response.ok,
-            status: response.status,
-            statusText: response.statusText,
-            text: (
-              onText: (text: string) => void,
-              onTextFailure: (reason: string) => void,
-            ) => {
-              void response.text().then(onText, (error: unknown) => {
-                onTextFailure(
-                  error instanceof Error ? error.message : String(error),
-                );
-              });
-            },
-            bytes: (
-              onBytes: (bytes: Blob) => void,
-              onBytesFailure: (reason: string) => void,
-            ) => {
-              void response.blob().then(onBytes, (error: unknown) => {
-                onBytesFailure(
-                  error instanceof Error ? error.message : String(error),
-                );
-              });
-            },
-          } as unknown as Response),
-        (error: unknown) => {
-          onFailure(error instanceof Error ? error.message : String(error));
-        },
-      );
   },
   http: {
     get: ((url, onResponse, onFailure, config) => {

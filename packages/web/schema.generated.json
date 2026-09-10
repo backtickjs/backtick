@@ -122,7 +122,7 @@
       }
     },
     "ClientHandle": {
-      "description": "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `Bytes` and `State` are handles, and so is anything a client answers with that this format does not describe.",
+      "description": "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `State` is a handle, and so is anything a client answers with that this format does not describe.",
       "type": "interface",
       "extends": [],
       "properties": {},
@@ -208,18 +208,6 @@
           "$ref": "ClientHandle"
         }
       ]
-    },
-    "Bytes": {
-      "description": "Bytes the client is holding. Opaque: this language has no way to look inside one, only to hold it and hand it back.",
-      "type": "interface",
-      "extends": [
-        {
-          "type": "ref",
-          "$ref": "ClientHandle"
-        }
-      ],
-      "properties": {},
-      "required": []
     },
     "Bundle": {
       "description": "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `<backtick>`, which draws it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
@@ -1804,157 +1792,6 @@
           }
         }
       ]
-    },
-    "RequestInit": {
-      "description": "The web's `RequestInit`, less what a script has no way to hold.",
-      "type": "object",
-      "properties": {
-        "method": {
-          "type": "string"
-        },
-        "headers": {
-          "type": "record",
-          "keys": {
-            "type": "string"
-          },
-          "values": {
-            "type": "string"
-          }
-        },
-        "body": {
-          "type": "union",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "ref",
-              "$ref": "Bytes"
-            }
-          ]
-        }
-      },
-      "required": []
-    },
-    "Response": {
-      "description": "What answered. A 404 is an answer.\n\nThe body is not here: reading it is a second turn, the way it is on the web, so it is asked for and arrives later. Once — a body read twice fails the second time.\n\nThere is no `json`: `JSON.parse` is a name already, and a parse that fails belongs in the script's own `try` rather than in a third handler here.",
-      "type": "interface",
-      "extends": [
-        {
-          "type": "ref",
-          "$ref": "ClientHandle"
-        }
-      ],
-      "properties": {
-        "ok": {
-          "readOnly": true,
-          "type": "boolean"
-        },
-        "status": {
-          "readOnly": true,
-          "type": "number"
-        },
-        "statusText": {
-          "readOnly": true,
-          "type": "string"
-        },
-        "text": {
-          "description": "Reads the body as text.",
-          "type": "function",
-          "parameters": [
-            {
-              "type": "functionParameter",
-              "name": "onText",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "text",
-                    "holds": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            },
-            {
-              "type": "functionParameter",
-              "name": "onFailure",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "reason",
-                    "holds": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            }
-          ],
-          "returnType": {
-            "type": "void"
-          }
-        },
-        "bytes": {
-          "description": "Reads the body as bytes.",
-          "type": "function",
-          "parameters": [
-            {
-              "type": "functionParameter",
-              "name": "onBytes",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "bytes",
-                    "holds": {
-                      "type": "ref",
-                      "$ref": "Bytes"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            },
-            {
-              "type": "functionParameter",
-              "name": "onFailure",
-              "holds": {
-                "type": "function",
-                "parameters": [
-                  {
-                    "type": "functionParameter",
-                    "name": "reason",
-                    "holds": {
-                      "type": "string"
-                    }
-                  }
-                ],
-                "returnType": {
-                  "type": "void"
-                }
-              }
-            }
-          ],
-          "returnType": {
-            "type": "void"
-          }
-        }
-      },
-      "required": ["ok", "status", "statusText", "text", "bytes"]
     },
     "HttpConfig": {
       "description": "How to make an `http` request.",
@@ -16937,70 +16774,6 @@
       ],
       "returnType": {
         "type": "string"
-      }
-    },
-    "fetch": {
-      "description": "The web's `fetch`, answering through handlers because a script has no `await`.\n\nExactly one handler is called, once. `init` is last so the optional argument stays last.",
-      "type": "function",
-      "parameters": [
-        {
-          "type": "functionParameter",
-          "name": "input",
-          "holds": {
-            "type": "string"
-          }
-        },
-        {
-          "type": "functionParameter",
-          "name": "onResponse",
-          "holds": {
-            "type": "function",
-            "parameters": [
-              {
-                "type": "functionParameter",
-                "name": "response",
-                "holds": {
-                  "type": "ref",
-                  "$ref": "Response"
-                }
-              }
-            ],
-            "returnType": {
-              "type": "void"
-            }
-          }
-        },
-        {
-          "description": "Called where nothing answered at all.",
-          "type": "functionParameter",
-          "name": "onFailure",
-          "holds": {
-            "type": "function",
-            "parameters": [
-              {
-                "type": "functionParameter",
-                "name": "reason",
-                "holds": {
-                  "type": "string"
-                }
-              }
-            ],
-            "returnType": {
-              "type": "void"
-            }
-          }
-        },
-        {
-          "type": "functionParameter",
-          "name": "init",
-          "holds": {
-            "type": "ref",
-            "$ref": "RequestInit"
-          }
-        }
-      ],
-      "returnType": {
-        "type": "void"
       }
     },
     "http": {

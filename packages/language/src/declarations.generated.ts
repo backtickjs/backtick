@@ -33,8 +33,8 @@ declare const ClientHandleBrand: unique symbol;
  *
  * A script may hold one and hand it back and nothing else: what it is made of
  * is the client's, and two clients need not agree on that to agree on this.
- * Every opaque type is one — `Bytes` and `State` are handles, and so is
- * anything a client answers with that this format does not describe.
+ * Every opaque type is one — `State` is a handle, and so is anything a client
+ * answers with that this format does not describe.
  */
 export interface ClientHandle {
   readonly [ClientHandleBrand]: never;
@@ -71,15 +71,6 @@ export type ClientValue =
   | readonly ClientValue[]
   | ClientFunction
   | ClientHandle;
-
-declare const BytesBrand: unique symbol;
-/**
- * Bytes the client is holding. Opaque: this language has no way to look inside
- * one, only to hold it and hand it back.
- */
-export interface Bytes extends ClientHandle {
-  readonly [BytesBrand]: never;
-}
 
 declare const BundleBrand: unique symbol;
 /**
@@ -386,47 +377,6 @@ export type BundleCatchClause = [
 ];
 
 export type BundleParameter = [kind: "param", name: string];
-
-/**
- * The web's `RequestInit`, less what a script has no way to hold.
- */
-export type RequestInit = {
-  method?: string;
-  headers?: { [key: string]: string };
-  body?: string | Bytes;
-};
-
-declare const ResponseBrand: unique symbol;
-/**
- * What answered. A 404 is an answer.
- *
- * The body is not here: reading it is a second turn, the way it is on the web,
- * so it is asked for and arrives later. Once — a body read twice fails the
- * second time.
- *
- * There is no `json`: `JSON.parse` is a name already, and a parse that fails
- * belongs in the script's own `try` rather than in a third handler here.
- */
-export interface Response extends ClientHandle {
-  readonly [ResponseBrand]: never;
-  readonly ok: boolean;
-  readonly status: number;
-  readonly statusText: string;
-  /**
-   * Reads the body as text.
-   */
-  text(
-    onText: (text: string) => void,
-    onFailure: (reason: string) => void,
-  ): void;
-  /**
-   * Reads the body as bytes.
-   */
-  bytes(
-    onBytes: (bytes: Bytes) => void,
-    onFailure: (reason: string) => void,
-  ): void;
-}
 
 /**
  * How to make an `http` request.
@@ -1197,21 +1147,6 @@ interface LanguageBuiltins {
    * List elements. If length is 0, the empty string is returned.
    */
   "String.fromCodePoint"(...codePoints: number[]): string;
-  /**
-   * The web's `fetch`, answering through handlers because a script has no
-   * `await`.
-   *
-   * Exactly one handler is called, once. `init` is last so the optional
-   * argument stays last.
-   *
-   * @param onFailure Called where nothing answered at all.
-   */
-  fetch(
-    input: string,
-    onResponse: (response: Response) => void,
-    onFailure: (reason: string) => void,
-    init?: RequestInit,
-  ): void;
   http: Http;
   state<T>(initial: T): State<T>;
 }
