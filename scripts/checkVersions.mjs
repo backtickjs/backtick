@@ -93,7 +93,7 @@ for (const { file, json } of [...released, ...consuming]) {
 // The compiler stamps this constant into every script it emits and a client
 // compares scripts against it, so a value that drifts from the manifests would
 // misreport every mismatch — in either direction.
-const constantFile = "packages/boundary/src/version.ts";
+const constantFile = "packages/client-script/src/version.ts";
 const declared = readFileSync(join(root, constantFile), "utf8").match(
   /export const version = "([^"]*)"/,
 )?.[1];
