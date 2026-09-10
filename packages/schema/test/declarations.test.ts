@@ -78,19 +78,22 @@ const list: Schema = {
 describe("declarations", () => {
   it("names a type where it is offered, not where it was written", () => {
     const written = declarations(target);
-    // `Shared` and `Drawing` are the middle schema's own, and they arrive from
-    // the one this is built on, so a target needs no dependency on a package
-    // further up the chain.
+    // `Shared` is the middle schema's own and arrives from the one this is
+    // built on, so a target needs no dependency on a package further up.
     assert.match(
       written,
-      /import type \{[^}]*\bDrawing,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
+      /import type \{[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
     );
+    // `Drawing` is this schema's children type and nothing else, and the
+    // children position takes `Children` rather than what a schema declared
+    // for it — so no line here says `Drawing`, and an import would read nothing.
+    assert.doesNotMatch(written, /import type \{[^}]*\bDrawing\b[^}]*\}/);
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
     // `Prop` is the ui schema's, wherever it is named, so it comes from one place
     // every layer rather than being handed up like the rest.
     assert.match(
       written,
-      /import type \{\n {2}Prop,\n\} from "@backtickjs\/ui";/,
+      /import type \{[^}]*\bProp,[^}]*\} from "@backtickjs\/ui";/,
     );
   });
 
@@ -110,7 +113,7 @@ describe("declarations", () => {
     const written = declarations(root);
     assert.match(
       written,
-      /import type \{\n {2}Prop,\n\} from "@backtickjs\/ui";/,
+      /import type \{[^}]*\bProp,[^}]*\} from "@backtickjs\/ui";/,
       "a root reaches the wrapping's names the same way every layer above does",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
@@ -158,9 +161,9 @@ describe("declarations", () => {
     // a function prop is a script and never a host function: `Prop` drops its
     // written arm where the server has no way to write one
     assert.match(written, /onpick\?: Prop<\(\) => void>;/);
-    // what goes inside an element is children, wrapped like every other prop:
-    // the schema says what a client sees and the wrapper is the host language's
-    assert.match(written, /children\?: Prop<Drawing>;/);
+    // what goes inside an element takes its own type: `Prop` over the arms that
+    // are one thing and a plain array over the rest, which no wrapper says
+    assert.match(written, /children\?: Children;/);
     // and a client's own interface is not props
     assert.doesNotMatch(declarations(core), /Prop</);
   });

@@ -93,3 +93,4 @@ export { createFragment, type Fragment } from "./Fragment.js";
 // What a prop admits. Here rather than with the language, because a prop is a
 // position in a drawing: the wrapper is JSX's rule, and JSX is what this is.
 export type { Prop } from "./Prop.js";
+export type { Children } from "./Children.js";

@@ -32,6 +32,7 @@ import type { Schema } from "../Schema.js";
 const wrapping: ReadonlyMap<string, string> = new Map([
   ["Client", "@backtickjs/language"],
   ["Prop", "@backtickjs/ui"],
+  ["Children", "@backtickjs/ui"],
 ]);
 
 /** Where a builtin's `Client` and `createBuiltin` come from. */
@@ -207,6 +208,14 @@ export function declarations(schema: Schema): string {
   // for decides how it is written: an interface where the node is one, and a
   // named type everywhere else.
   for (const [name, node] of Object.entries(schema.types)) {
+    // Declared by the schema and written by hand. What a document owes a reader
+    // is a definition — the JSON carries this one either way. What a TypeScript
+    // file owes one is a single identity, and for the children position the
+    // host's version is not the document's: it has an arm for a script standing
+    // in where a value is written, which no client ever meets.
+    if (wrapping.has(name)) {
+      continue;
+    }
     lines.push(
       ...(IsInterface(node) || IsGeneric(node)
         ? interfaceLines(name, node, branded.has(name), props.has(name))
@@ -350,9 +359,19 @@ export function declarations(schema: Schema): string {
   // naming `BacktickNode` is prose, and an import written because a comment
   // spelled a name is an import nothing reads.
   const written = lines.filter((line) => !/^\s*(\/\*|\*)/.test(line));
+  const says = (held: string): boolean =>
+    written.some((line) => new RegExp(`\\b${held}\\b`).test(line));
   for (const [held, where] of wrapping) {
-    if (written.some((line) => new RegExp(`\\b${held}\\b`).test(line))) {
+    if (says(held)) {
       name(held, where);
+    }
+  }
+  // An import is for a name this file writes. A `$ref` is usually written where
+  // it is reached, but not always — the children position takes its own type,
+  // and what a schema declared for it is a name no line here says.
+  for (const held of [...from.keys()]) {
+    if (!wrapping.has(held) && !says(held)) {
+      from.delete(held);
     }
   }
 
@@ -473,6 +492,8 @@ export function prop(name: string, node: TNode, required: boolean): string {
   const written =
     name === "children" && IsFunction(node)
       ? `Client<${type(node)}>`
-      : `Prop<${type(node)}>`;
+      : name === "children"
+        ? `Children`
+        : `Prop<${type(node)}>`;
   return `  ${key(name)}${optional}: ${written};`;
 }

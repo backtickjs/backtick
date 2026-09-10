@@ -10,6 +10,7 @@ import type {
   Elements as LanguageElements,
   ReadonlyState,
 } from "@backtickjs/language";
+import type { Children } from "./Children.js";
 import type { Prop } from "./Prop.js";
 
 export type {
@@ -124,7 +125,7 @@ export interface ForProps<T extends ClientValue> {
 }
 
 export interface FragmentProps {
-  children?: Prop<BacktickNode>;
+  children?: Children;
 }
 
 export interface BacktickProps {
