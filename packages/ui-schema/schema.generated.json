@@ -128,18 +128,6 @@
       "properties": {},
       "required": []
     },
-    "BacktickElement": {
-      "description": "A drawing, as either side names one.\n\nOpaque, and that is the whole of it: what a drawing is made of belongs to whichever side made it. A server builds one from a tag and props, and a script evaluates to one — neither reads into the other's.",
-      "type": "interface",
-      "extends": [
-        {
-          "type": "ref",
-          "$ref": "ClientHandle"
-        }
-      ],
-      "properties": {},
-      "required": []
-    },
     "ClientFunction": {
       "description": "A function a client holds. What it takes is nothing this format describes — a client hands one what it was given — and what it answers with is a client value, or nothing.",
       "type": "function",
@@ -174,7 +162,7 @@
       ]
     },
     "ClientValue": {
-      "description": "What may cross between a host and a client: data, a function, a drawing, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
+      "description": "What may cross between a host and a client: data, a function, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
       "type": "union",
       "anyOf": [
         {
@@ -210,10 +198,6 @@
             "type": "ref",
             "$ref": "ClientValue"
           }
-        },
-        {
-          "type": "ref",
-          "$ref": "BacktickElement"
         },
         {
           "type": "ref",
@@ -2011,6 +1995,45 @@
         },
         "required": ["length", "n"]
       }
+    },
+    "BacktickElement": {
+      "description": "A drawing, as either side names one.\n\nOpaque, and that is the whole of it: what a drawing is made of belongs to whichever side made it. A server builds one from a tag and props, and a script evaluates to one — neither reads into the other's.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {},
+      "required": []
+    },
+    "BacktickNode": {
+      "description": "What may stand where a drawing does: one drawing, several, or nothing.\n\nText and numbers stand for themselves and `null` for nothing, so a client draws these in order and skips the nothings. Nested because a drawing's children may be gathered before they are handed over.\n\nThat a host may write a script in any of these positions is the host language's and is not said here: what a client meets is a drawing, some text, or several of those.",
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "ref",
+          "$ref": "BacktickElement"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "ref",
+            "$ref": "BacktickNode"
+          }
+        }
+      ]
     },
     "ForProps": {
       "type": "generic",

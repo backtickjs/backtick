@@ -70,15 +70,6 @@ export const schema: Schema = {
       },
     ),
 
-    BacktickElement: Type.Interface(
-      [Type.Ref("ClientHandle")],
-      {},
-      {
-        description:
-          "A drawing, as either side names one.\n\nOpaque, and that is the whole of it: what a drawing is made of belongs to whichever side made it. A server builds one from a tag and props, and a script evaluates to one — neither reads into the other's.",
-      },
-    ),
-
     ClientFunction: Type.Function(
       [Type.Rest(Type.FunctionParameter("args", Type.Never()))],
       Type.Ref("ClientUnknown"),
@@ -102,13 +93,12 @@ export const schema: Schema = {
         Type.String(),
         Type.Record(Type.String(), Type.Ref("ClientValue"), { readOnly: true }),
         Type.Array(Type.Ref("ClientValue"), { readOnly: true }),
-        Type.Ref("BacktickElement"),
         Type.Ref("ClientFunction"),
         Type.Ref("ClientHandle"),
       ],
       {
         description:
-          "What may cross between a host and a client: data, a function, a drawing, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
+          "What may cross between a host and a client: data, a function, or a handle to something the client owns.\n\n`null` is what a script writes for nothing and `undefined` is what a total read answers with where there is none — an index past the end, a member a value does not hold. Neither can be spliced: `null` is what crosses.",
       },
     ),
 

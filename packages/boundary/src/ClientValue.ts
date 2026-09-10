@@ -1,4 +1,3 @@
-import type { BacktickElement } from "./BacktickElement.js";
 import type { ClientUnknown } from "./ClientUnknown.js";
 
 /**
@@ -35,6 +34,5 @@ export type ClientValue =
   | string
   | { readonly [key: string]: ClientValue }
   | readonly ClientValue[]
-  | BacktickElement
   | ClientFunction
   | ClientHandle;

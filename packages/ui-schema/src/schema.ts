@@ -10,6 +10,29 @@ export const schema: Schema = {
   extends: [language],
 
   types: {
+    BacktickElement: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {},
+      {
+        description:
+          "A drawing, as either side names one.\n\nOpaque, and that is the whole of it: what a drawing is made of belongs to whichever side made it. A server builds one from a tag and props, and a script evaluates to one — neither reads into the other's.",
+      },
+    ),
+
+    BacktickNode: Type.Union(
+      [
+        Type.Ref("BacktickElement"),
+        Type.String(),
+        Type.Number(),
+        Type.Null(),
+        Type.Array(Type.Ref("BacktickNode"), { readOnly: true }),
+      ],
+      {
+        description:
+          "What may stand where a drawing does: one drawing, several, or nothing.\n\nText and numbers stand for themselves and `null` for nothing, so a client draws these in order and skips the nothings. Nested because a drawing's children may be gathered before they are handed over.\n\nThat a host may write a script in any of these positions is the host language's and is not said here: what a client meets is a drawing, some text, or several of those.",
+      },
+    ),
+
     ForProps: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {

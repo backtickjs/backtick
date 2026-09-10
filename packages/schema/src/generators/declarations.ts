@@ -163,7 +163,13 @@ export function declarations(schema: Schema): string {
   };
   const carried = carriedBy(schema);
 
-  Object.values(schema.types).forEach((node) => declares(node, new Set()));
+  // What a declaration reaches, less what the declarations this file skips
+  // reach. A `format` name is validated and then written by the boundary, so a
+  // ref only it makes is a ref no line of this file holds — and an import for
+  // one is an import nothing reads.
+  Object.entries(schema.types)
+    .filter(([name]) => !format.has(name))
+    .forEach(([, node]) => declares(node, new Set()));
   // Every builtin is written inside the one interface that holds them all, so
   // what that interface carries is a name each of them may reach — `state`
   // bounds what it stores by the domain `Array` brought in.

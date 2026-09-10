@@ -1,3 +1,5 @@
+import type { ClientHandle } from "./ClientValue.js";
+
 declare const BacktickElementBrand: unique symbol;
 
 /**
@@ -7,6 +9,6 @@ declare const BacktickElementBrand: unique symbol;
  * whichever side made it. The server builds one from a tag and props, and a
  * script evaluates to one — neither reads into the other's.
  */
-export interface BacktickElement {
+export interface BacktickElement extends ClientHandle {
   readonly [BacktickElementBrand]: never;
 }
