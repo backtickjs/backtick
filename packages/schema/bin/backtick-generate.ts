@@ -20,8 +20,17 @@ import type { Schema } from "../dist/index.js";
 
 const source = process.argv[2];
 if (source === undefined) {
-  throw new Error("usage: backtick-generate <path to a file exporting schema>");
+  throw new Error(
+    "usage: backtick-generate <path to a file exporting schema> [artifact…]",
+  );
 }
+
+// Which artifacts to write, or all of them where none is named. What a project
+// wants is not always all three: a schema's document belongs beside the schema,
+// where what it comes to names the boundary and belongs above it.
+const asked = new Set(process.argv.slice(3));
+const wants = (artifact: string): boolean =>
+  asked.size === 0 || asked.has(artifact);
 
 const root = pathToFileURL(`${process.cwd()}/`);
 const at = (path: string) => new URL(path, root);
@@ -46,9 +55,10 @@ async function write(path: string, body: string): Promise<void> {
 // Everything the schema says: its types, its elements and its contract. One
 // that declares none of them is a schema in name only, and writes no file.
 if (
-  Object.keys(schema.types).length > 0 ||
-  Object.keys(schema.elements).length > 0 ||
-  Object.keys(schema.builtins).length > 0
+  wants("declarations") &&
+  (Object.keys(schema.types).length > 0 ||
+    Object.keys(schema.elements).length > 0 ||
+    Object.keys(schema.builtins).length > 0)
 ) {
   await write("src/declarations.generated.ts", generate.declarations(schema));
 }
@@ -57,9 +67,11 @@ if (
 // write: a schema whose builtins are all the language's own — a member of a
 // value, a member of a namespace — declares nothing a script reaches this way,
 // and an empty file is a name for an app to import from and find nothing in.
-const values = generate.builtins(schema);
-if (values !== "") {
-  await write("src/builtins.generated.ts", values);
+if (wants("builtins")) {
+  const builtins = generate.builtins(schema);
+  if (builtins !== "") {
+    await write("src/builtins.generated.ts", builtins);
+  }
 }
 
 // The same schema for a reader that is not this process: a native client, a
@@ -71,4 +83,6 @@ if (values !== "") {
 //
 // Checked in, so a change to what a client must answer for is a change someone
 // can see.
-await write("schema.generated.json", generate.json(flatten(schema)));
+if (wants("json")) {
+  await write("schema.generated.json", generate.json(flatten(schema)));
+}

@@ -9,8 +9,8 @@ export type {
   RequestInit,
   Response,
   State,
-} from "@backtickjs/language-schema";
-export { fetch, state } from "@backtickjs/language-schema";
+} from "@backtickjs/language";
+export { fetch, state } from "@backtickjs/language";
 export type {
   BacktickElement,
   BacktickNode,

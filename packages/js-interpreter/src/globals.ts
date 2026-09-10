@@ -1,5 +1,5 @@
 import type { ClientValue } from "@backtickjs/core";
-import type { Builtins, Response, State } from "@backtickjs/language-schema";
+import type { Builtins, Response, State } from "@backtickjs/language";
 import { createSignal } from "solid-js";
 
 // What this client answers for every name the framework provides — the host

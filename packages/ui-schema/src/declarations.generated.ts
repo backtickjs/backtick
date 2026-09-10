@@ -11,7 +11,7 @@ import type {
   ClientValue,
   Elements as LanguageElements,
   ReadonlyState,
-} from "@backtickjs/language-schema";
+} from "@backtickjs/language";
 
 export type {
   ArrayLike,
@@ -23,7 +23,7 @@ export type {
   RequestInit,
   Response,
   State,
-} from "@backtickjs/language-schema";
+} from "@backtickjs/language";
 
 export interface ForProps<T extends ClientValue> {
   /**

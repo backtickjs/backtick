@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/js-interpreter",
+  "name": "@backtickjs/language",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -13,20 +13,17 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
+    "generate": "backtick-generate ../language-schema/src/schema.ts declarations builtins && node --experimental-strip-types scripts/receivers.ts",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/bundler": "workspace:*",
-    "@backtickjs/language": "workspace:*",
-    "solid-js": "^1.9.14"
-  },
-  "peerDependencies": {
-    "@backtickjs/core": "workspace:*"
+    "@backtickjs/boundary": "workspace:*",
+    "@backtickjs/language-schema": "workspace:*"
   },
   "devDependencies": {
-    "@backtickjs/core": "workspace:*",
+    "@backtickjs/schema": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

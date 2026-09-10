@@ -15,19 +15,17 @@
     "dev": "tsc -b --watch",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
-    "clean": "rm -rf node_modules dist .turbo",
-    "generate": "node --experimental-strip-types scripts/receivers.ts"
+    "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
     "@backtickjs/boundary": "workspace:*",
-    "@backtickjs/language-schema": "workspace:*",
+    "@backtickjs/language": "workspace:*",
     "@backtickjs/ui-schema": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@backtickjs/schema": "workspace:*",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
   }

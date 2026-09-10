@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@backtickjs/boundary": "workspace:*",
+    "@backtickjs/language": "workspace:*",
     "@backtickjs/language-schema": "workspace:*",
     "@backtickjs/schema": "workspace:*"
   }

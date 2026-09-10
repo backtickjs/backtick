@@ -8,7 +8,7 @@ import type {
   NumberConstructor,
   String,
   StringConstructor,
-} from "./receivers.generated.js";
+} from "@backtickjs/language";
 import type { BacktickElement } from "@backtickjs/boundary";
 import type { ClientFunction } from "@backtickjs/boundary";
 import type { ClientValue } from "@backtickjs/boundary";

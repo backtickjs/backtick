@@ -12,7 +12,10 @@ import { Type, type Schema } from "@backtickjs/schema";
  * because that is how a script reaches it and how the compiler recognises it.
  */
 export const schema: Schema = {
-  package: "@backtickjs/language-schema",
+  // Where what this comes to is published, which is not where this is: a
+  // schema is a declaration and needs nothing, where the declarations it
+  // generates name the boundary's types. See `@backtickjs/language`.
+  package: "@backtickjs/language",
 
   namespace: "Language",
 
@@ -55,6 +58,24 @@ export const schema: Schema = {
         description:
           "A cell as a script reads it.\n\n" +
           "What makes one is not here: `state` is a client function a script imports and splices, so a cell is what calling it answers with. This is the half that reaches the client.",
+      },
+    ),
+
+    ClientHandle: Type.Interface(
+      [],
+      {},
+      {
+        description:
+          "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `Bytes` and `State` are handles, and so is anything a client answers with that this format does not describe.",
+      },
+    ),
+
+    BacktickElement: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {},
+      {
+        description:
+          "A drawing, as either side names one.\n\nOpaque, and that is the whole of it: what a drawing is made of belongs to whichever side made it. A server builds one from a tag and props, and a script evaluates to one — neither reads into the other's.",
       },
     ),
 

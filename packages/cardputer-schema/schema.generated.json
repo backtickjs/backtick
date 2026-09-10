@@ -121,6 +121,25 @@
         "required": ["write", "update"]
       }
     },
+    "ClientHandle": {
+      "description": "Something the client owns, and that nothing here reads into.\n\nA script may hold one and hand it back and nothing else: what it is made of is the client's, and two clients need not agree on that to agree on this. Every opaque type is one — `Bytes` and `State` are handles, and so is anything a client answers with that this format does not describe.",
+      "type": "interface",
+      "extends": [],
+      "properties": {},
+      "required": []
+    },
+    "BacktickElement": {
+      "description": "A drawing, as either side names one.\n\nOpaque, and that is the whole of it: what a drawing is made of belongs to whichever side made it. A server builds one from a tag and props, and a script evaluates to one — neither reads into the other's.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {},
+      "required": []
+    },
     "ClientFunction": {
       "description": "A function a client holds. What it takes is nothing this format describes — a client hands one what it was given — and what it answers with is a client value, or nothing.",
       "type": "function",

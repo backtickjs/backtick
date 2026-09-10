@@ -217,7 +217,7 @@ const lines = [
           : []),
         ...(wanted.some((one) => !owned.has(one))
           ? [
-              `import type { ${wanted.filter((one) => !owned.has(one)).join(", ")} } from "@backtickjs/language-schema";`,
+              `import type { ${wanted.filter((one) => !owned.has(one)).join(", ")} } from "@backtickjs/language";`,
             ]
           : []),
         "",

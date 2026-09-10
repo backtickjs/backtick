@@ -196,6 +196,14 @@ export function declarations(schema: Schema): string {
   // for decides how it is written: an interface where the node is one, and a
   // named type everywhere else.
   for (const [name, node] of Object.entries(schema.types)) {
+    // Declared by the schema and written by the boundary. What a document owes
+    // a reader is a definition — so the schema declares these and the JSON
+    // carries them. What a TypeScript file owes one is a single identity, and
+    // the boundary is where these are written: a second declaration is a second
+    // `unique symbol` and a type nothing else recognises.
+    if (format.has(name)) {
+      continue;
+    }
     lines.push(
       ...(IsInterface(node) || IsGeneric(node)
         ? interfaceLines(name, node, branded.has(name), props.has(name))
@@ -309,8 +317,15 @@ export function declarations(schema: Schema): string {
   // What each base offers, which is everything its own chain declares — a base
   // re-exports what it inherited, so a name is reached from the schema built on
   // it and never from two schemas down.
+  //
+  // Less what no package emits: a name in `format` is declared for a reader of
+  // the document and written by the boundary, so no base has one to hand on.
   const bases = schema.extends.map(
-    (base) => [base.package, Object.keys(flatten(base).types)] as const,
+    (base) =>
+      [
+        base.package,
+        Object.keys(flatten(base).types).filter((one) => !format.has(one)),
+      ] as const,
   );
 
   // Where each name this file writes but does not declare comes from: the base

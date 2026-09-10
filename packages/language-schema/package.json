@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",
-    "generate": "backtick-generate src/schema.ts",
+    "generate": "backtick-generate src/schema.ts json",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
@@ -27,7 +27,6 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@backtickjs/boundary": "workspace:*",
     "@backtickjs/schema": "workspace:*"
   }
 }

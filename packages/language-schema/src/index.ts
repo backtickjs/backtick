@@ -1,5 +1,9 @@
-// Every name this schema declares that a script splices, as the value it is
-// imported as. Written from the schema rather than beside it, so a name added
-// there is a name an app can reach without anything being told about it twice.
-export * from "./builtins.generated.js";
-export type * from "./declarations.generated.js";
+/**
+ * The schema, and nothing generated from it.
+ *
+ * What comes out — the declarations a host writes against, the values it
+ * splices — is `@backtickjs/language`, which may depend on the boundary where
+ * this may not: a declaration of what the language is should not need the
+ * types one host happens to write it in.
+ */
+export { schema } from "./schema.js";
