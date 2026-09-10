@@ -1,9 +1,4 @@
-export type {
-  Client,
-  ClientUnknown,
-  ClientValue,
-  Spliceable,
-} from "@backtickjs/boundary";
+export type { Client, ClientUnknown, ClientValue, Spliceable } from "@backtickjs/language";
 export type {
   ReadonlyState,
   RequestInit,
@@ -11,7 +6,8 @@ export type {
   State,
 } from "@backtickjs/language";
 export { fetch, state } from "@backtickjs/language";
-export type { BacktickElement, BacktickNode, Prop } from "@backtickjs/boundary";
+export type { Prop } from "@backtickjs/language";
+export type { BacktickElement, BacktickNode } from "@backtickjs/ui-schema";
 export type { Bundle } from "@backtickjs/language";
 
 // The boundary itself, which is the one thing here that is nobody else's.

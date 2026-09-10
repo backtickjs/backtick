@@ -86,15 +86,15 @@ describe("declarations", () => {
       /import type \{[^}]*\bDrawing,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
-    // `Prop` is the boundary's, wherever it is named, so it comes from one place
+    // `Prop` is the language's, wherever it is named, so it comes from one place
     // every layer rather than being handed up like the rest.
     assert.match(
       written,
-      /import type \{\n {2}Prop,\n\} from "@backtickjs\/boundary";/,
+      /import type \{\n {2}Prop,\n\} from "@backtickjs\/language";/,
     );
   });
 
-  it("reaches the boundary's own names in one hop, at the root", () => {
+  it("reaches the language's own names in one hop, at the root", () => {
     const root: Schema = {
       package: "@backtickjs/core",
       namespace: "Core",
@@ -110,8 +110,8 @@ describe("declarations", () => {
     const written = declarations(root);
     assert.match(
       written,
-      /import type \{\n {2}Prop,\n\} from "@backtickjs\/boundary";/,
-      "a root reaches the boundary's names the same way every layer above does",
+      /import type \{\n {2}Prop,\n\} from "@backtickjs\/language";/,
+      "a root reaches the language's names the same way every layer above does",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
   });
@@ -158,8 +158,9 @@ describe("declarations", () => {
     // a function prop is a script and never a host function: `Prop` drops its
     // written arm where the server has no way to write one
     assert.match(written, /onpick\?: Prop<\(\) => void>;/);
-    // what goes inside an element is children
-    assert.match(written, /children\?: Drawing;/);
+    // what goes inside an element is children, wrapped like every other prop:
+    // the schema says what a client sees and the wrapper is the host language's
+    assert.match(written, /children\?: Prop<Drawing>;/);
     // and a client's own interface is not props
     assert.doesNotMatch(declarations(core), /Prop</);
   });
@@ -357,8 +358,17 @@ describe("a tuple", () => {
 // An opaque type with parameters and nothing to read: the parameters have
 // nowhere to appear but the brand, which is what `Bundle<T>` is.
 describe("a brand", () => {
+  // Declared here, because a schema may no longer name what it does not
+  // declare: the root of every opaque type is a type like any other.
   const written = (types: Schema["types"]): string =>
-    declarations({ ...core, types: { ...core.types, ...types } });
+    declarations({
+      ...core,
+      types: {
+        ...core.types,
+        ClientHandle: Type.Interface([], {}),
+        ...types,
+      },
+    });
 
   it("carries the parameters of an opaque type that has no members", () => {
     assert.match(

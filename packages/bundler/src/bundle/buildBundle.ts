@@ -12,7 +12,7 @@ import type {
 } from "@backtickjs/language";
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
-import type { ClientUnknown } from "@backtickjs/boundary";
+import type { ClientUnknown } from "@backtickjs/language";
 
 // Builds the bundle `{ functions, root }` as plain data. The output
 // shapes — the tables, the tagged expression forms, and their evaluation

@@ -374,6 +374,9 @@ importers:
       '@backtickjs/boundary':
         specifier: workspace:*
         version: link:../../boundary
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../../language
       '@backtickjs/schema':
         specifier: workspace:*
         version: link:../../schema
@@ -551,6 +554,9 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../language
       linkedom:
         specifier: ^0.18.13
         version: 0.18.13
@@ -586,9 +592,6 @@ importers:
 
   packages/language:
     dependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../boundary
       '@backtickjs/language-schema':
         specifier: workspace:*
         version: link:../language-schema

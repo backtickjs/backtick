@@ -1,6 +1,6 @@
-import type { JsxElementType } from "@backtickjs/boundary";
-import { createFragment, createJsxElement } from "@backtickjs/boundary";
-import type { BacktickElement, BacktickNode } from "@backtickjs/boundary";
+import type { JsxElementType } from "@backtickjs/ui-schema";
+import { createFragment, createJsxElement } from "@backtickjs/ui-schema";
+import type { BacktickElement, BacktickNode } from "@backtickjs/ui-schema";
 import type { Elements as Site } from "../declarations.generated.js";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.

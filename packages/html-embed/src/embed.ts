@@ -1,4 +1,4 @@
-import type { ClientUnknown } from "@backtickjs/boundary";
+import type { ClientUnknown } from "@backtickjs/language";
 import type { Bundle } from "@backtickjs/bundler";
 import { parseHTML } from "linkedom";
 

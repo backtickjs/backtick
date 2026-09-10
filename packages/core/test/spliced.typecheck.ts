@@ -2,12 +2,7 @@
 // Never executed — typechecked by `tsc -b`.
 import type { Array } from "@backtickjs/language";
 import type { Receiver } from "../src/Receiver.js";
-import type {
-  Client,
-  ClientValue,
-  Spliceable,
-  Spliced,
-} from "@backtickjs/boundary";
+import type { Client, ClientValue, Spliceable, Spliced } from "@backtickjs/language";
 
 declare function spliced<T extends Spliceable>(value: T): Spliced<T>;
 declare function receiver<T extends ClientValue>(value: T): Receiver<T>;

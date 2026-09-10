@@ -1,5 +1,5 @@
 import type { Client } from "./Client.js";
-import type { ClientValue } from "./ClientValue.js";
+import type { ClientValue } from "./declarations.generated.js";
 
 /**
  * A name the client answers for, held as a value.

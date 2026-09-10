@@ -1,11 +1,14 @@
 import { assertVersion } from "./assertVersion.js";
 import type { SourceLocation } from "./SourceLocation.js";
-import type { Spliceable } from "./Spliceable.js";
 import type { ClientScriptBody } from "./Ast.js";
 
 // A hole: what is spliced there, and what it hands whatever lands in it.
+//
+// `unknown`, and not the `Spliceable` it is: what may be spliced is the
+// language's to say, and the language is generated from a schema built on top
+// of this. The bundler, which knows both ends, is where it is read as one.
 export interface MetadataSplice {
-  value: Spliceable;
+  value: unknown;
   params: string[];
 }
 

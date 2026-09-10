@@ -19,7 +19,6 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/boundary": "workspace:*",
     "@backtickjs/language-schema": "workspace:*"
   },
   "devDependencies": {

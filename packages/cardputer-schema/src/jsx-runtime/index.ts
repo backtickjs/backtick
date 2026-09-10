@@ -1,10 +1,10 @@
-import type { JsxElementType } from "@backtickjs/boundary";
-import { createFragment, createJsxElement } from "@backtickjs/boundary";
+import type { JsxElementType } from "@backtickjs/ui-schema";
+import { createFragment, createJsxElement } from "@backtickjs/ui-schema";
 import type {
   Elements as Cardputer,
   FragmentProps,
 } from "@backtickjs/cardputer-schema";
-import type { BacktickElement } from "@backtickjs/boundary";
+import type { BacktickElement } from "@backtickjs/ui-schema";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
 //

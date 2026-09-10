@@ -1,4 +1,4 @@
-import type { ClientValue } from "./ClientValue.js";
+import type { ClientValue } from "./declarations.generated.js";
 import type { Spliceable } from "./Spliceable.js";
 
 /**

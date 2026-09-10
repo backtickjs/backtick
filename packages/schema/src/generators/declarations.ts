@@ -18,13 +18,21 @@ import {
 import type { TGeneric } from "../nodes/Generic.js";
 import type { TGenericParameter } from "../nodes/GenericParameter.js";
 import type { Schema } from "../Schema.js";
-import { format } from "./format.js";
 
 // What this generator writes around a declaration of its own accord: a prop
 // takes a value or a script standing in for one, and saying so is the
 // generator's job rather than something a schema asks for. No `$ref` names
 // either, so neither is a hole in the document a schema produces.
 const wrapping: ReadonlySet<string> = new Set(["Client", "Prop"]);
+
+/**
+ * Where the two names above are written.
+ *
+ * The language package, because what a host may write where a client wants a
+ * value is a thing about this language. A schema generated into that package
+ * writes them relative instead — see `schema.package` below.
+ */
+export const holder = "@backtickjs/language";
 import type { TNode } from "../TNode.js";
 
 // A schema to the names it declares, as the host language declares them.
@@ -129,7 +137,7 @@ export function declarations(schema: Schema): string {
       ? new Set([...bound, ...node.parameters.map((one) => one.name)])
       : bound;
     if (IsRef(node) && !held.has(node.$ref)) {
-      if (all.types[node.$ref] === undefined && !format.has(node.$ref)) {
+      if (all.types[node.$ref] === undefined) {
         throw new Error(
           `the schema names \`${node.$ref}\` and does not declare it`,
         );
@@ -163,13 +171,7 @@ export function declarations(schema: Schema): string {
   };
   const carried = carriedBy(schema);
 
-  // What a declaration reaches, less what the declarations this file skips
-  // reach. A `format` name is validated and then written by the boundary, so a
-  // ref only it makes is a ref no line of this file holds — and an import for
-  // one is an import nothing reads.
-  Object.entries(schema.types)
-    .filter(([name]) => !format.has(name))
-    .forEach(([, node]) => declares(node, new Set()));
+  Object.values(schema.types).forEach((node) => declares(node, new Set()));
   // Every builtin is written inside the one interface that holds them all, so
   // what that interface carries is a name each of them may reach — `state`
   // bounds what it stores by the domain `Array` brought in.
@@ -202,14 +204,6 @@ export function declarations(schema: Schema): string {
   // for decides how it is written: an interface where the node is one, and a
   // named type everywhere else.
   for (const [name, node] of Object.entries(schema.types)) {
-    // Declared by the schema and written by the boundary. What a document owes
-    // a reader is a definition — so the schema declares these and the JSON
-    // carries them. What a TypeScript file owes one is a single identity, and
-    // the boundary is where these are written: a second declaration is a second
-    // `unique symbol` and a type nothing else recognises.
-    if (format.has(name)) {
-      continue;
-    }
     lines.push(
       ...(IsInterface(node) || IsGeneric(node)
         ? interfaceLines(name, node, branded.has(name), props.has(name))
@@ -323,15 +317,8 @@ export function declarations(schema: Schema): string {
   // What each base offers, which is everything its own chain declares — a base
   // re-exports what it inherited, so a name is reached from the schema built on
   // it and never from two schemas down.
-  //
-  // Less what no package emits: a name in `format` is declared for a reader of
-  // the document and written by the boundary, so no base has one to hand on.
   const bases = schema.extends.map(
-    (base) =>
-      [
-        base.package,
-        Object.keys(flatten(base).types).filter((one) => !format.has(one)),
-      ] as const,
+    (base) => [base.package, Object.keys(flatten(base).types)] as const,
   );
 
   // Where each name this file writes but does not declare comes from: the base
@@ -346,31 +333,23 @@ export function declarations(schema: Schema): string {
     from.set(of, where);
   };
   for (const held of [...reached].filter((one) => !(one in schema.types))) {
-    if (format.has(held)) {
-      name(held, "@backtickjs/boundary");
-      continue;
-    }
     const offering = bases.find(([, names]) => names.includes(held));
     if (offering === undefined) {
       throw new Error(`no schema this one extends offers \`${held}\``);
     }
     name(held, offering[0]);
   }
-  // The boundary's own are found by reading this file back, because no `$ref`
-  // names one: what a schema says about `Prop` is that it wrapped something in
-  // it, and the wrapping is the generator's own — which is why `wrapping` is
-  // here rather than in `format.ts`, where every name is one a schema wrote.
-  //
-  // `format` is read here too, because a name a schema refs is written into the
-  // file as well, and one import is one import however it got there.
+  // The wrapping is found by reading this file back, because no `$ref` names
+  // one: what a schema says about `Prop` is that it wrapped something in it,
+  // and the wrapping is the generator's own.
   //
   // What a declaration writes, and not what it says about itself: a description
-  // naming `BacktickNode` is prose, and an import written because a comment spelled
-  // a name is an import nothing reads.
+  // naming `BacktickNode` is prose, and an import written because a comment
+  // spelled a name is an import nothing reads.
   const written = lines.filter((line) => !/^\s*(\/\*|\*)/.test(line));
-  for (const held of [...wrapping, ...format]) {
+  for (const held of wrapping) {
     if (written.some((line) => new RegExp(`\\b${held}\\b`).test(line))) {
-      name(held, "@backtickjs/boundary");
+      name(held, holder);
     }
   }
 
@@ -480,18 +459,17 @@ export function prop(name: string, node: TNode, required: boolean): string {
   // what it wraps comes from the schema.
   //
   // A function is a script wherever it stands, the children position included:
-  // `<for>` holds one that makes drawings rather than a drawing, and a bare
-  // node type would admit a host function and a list of them beside it. So what
-  // the node is decides first, and where it stands only after that.
+  // `<for>` holds one that makes drawings rather than a drawing, and a `Prop`
+  // would admit a host function and a list of them beside it. So what the node
+  // is decides first, and where it stands only after that.
   //
-  // Nothing wraps the rest: what may stand inside an element is already a whole
-  // children position — `BacktickNode` is one or several or none — so a wrapper
-  // here would be saying it twice.
+  // Everything else is wrapped the same, children included. A schema says what
+  // a client sees — `BacktickNode` is a drawing, some text, or several of those
+  // — and that a host may write a script instead is the host language's, which
+  // is this wrapper and nothing the document has to carry.
   const written =
-    name === "children"
-      ? IsFunction(node)
-        ? `Client<${type(node)}>`
-        : type(node)
+    name === "children" && IsFunction(node)
+      ? `Client<${type(node)}>`
       : `Prop<${type(node)}>`;
   return `  ${key(name)}${optional}: ${written};`;
 }

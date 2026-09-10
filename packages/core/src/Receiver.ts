@@ -9,9 +9,9 @@ import type {
   String,
   StringConstructor,
 } from "@backtickjs/language";
-import type { BacktickElement } from "@backtickjs/boundary";
-import type { ClientFunction } from "@backtickjs/boundary";
-import type { ClientValue } from "@backtickjs/boundary";
+import type { BacktickElement } from "@backtickjs/ui-schema";
+import type { ClientFunction } from "@backtickjs/language";
+import type { ClientValue } from "@backtickjs/language";
 
 // A built-in receiver autoboxes to its client type.
 //

@@ -2,9 +2,9 @@ import type {
   ClientScriptArrayElement,
   ClientScriptBlock,
   ClientScriptBody,
+  ClientScriptDeclaration,
   ClientScriptExpression,
   ClientScriptStatement,
-  ClientScriptDeclaration,
 } from "@backtickjs/boundary";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";

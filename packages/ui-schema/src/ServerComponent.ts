@@ -1,5 +1,5 @@
-import type { BacktickElement } from "./BacktickElement.js";
-import type { Prop } from "./Prop.js";
+import type { BacktickElement } from "./declarations.generated.js";
+import type { Prop } from "@backtickjs/language";
 
 /**
  * A component built from other components. It runs on the host while bundling,

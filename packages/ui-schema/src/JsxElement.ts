@@ -1,4 +1,4 @@
-import type { BacktickElement } from "./BacktickElement.js";
+import type { BacktickElement } from "./declarations.generated.js";
 import type { ServerComponent } from "./ServerComponent.js";
 
 /**

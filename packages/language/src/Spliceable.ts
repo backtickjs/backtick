@@ -1,10 +1,10 @@
 import type { Client } from "./Client.js";
-import type { ClientUnknown } from "./ClientUnknown.js";
 import type {
   ClientFunction,
   ClientHandle,
+  ClientUnknown,
   ClientValue,
-} from "./ClientValue.js";
+} from "./declarations.generated.js";
 
 /**
  * What a host value of type `T` splices to: the pair to `Client<T>`, which is

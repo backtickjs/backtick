@@ -1,44 +1,21 @@
 /**
- * What may cross the host/client boundary, and nothing that reads or writes
- * it.
+ * What the compiler writes and the bundler reads, and nothing that says what a
+ * value is.
  *
- * Types and one factory, with no dependency of its own — so a schema, a
- * runtime, and a client all name these without any of them reaching for the
- * generator that wrote their declarations.
+ * Syntax, source locations, and the version both ends agree on — with no
+ * dependency of its own, so the compiler names these without reaching for the
+ * schema toolchain that generates the language it compiles against.
+ *
+ * The format's vocabulary is not here. What may cross a boundary is
+ * `@backtickjs/language` and what a drawing is made of is `@backtickjs/ui-schema`,
+ * both generated from a schema, and a schema is built on top of this.
  */
-export type { ClientUnknown } from "./ClientUnknown.js";
-export type {
-  ClientFunction,
-  ClientHandle,
-  ClientValue,
-} from "./ClientValue.js";
-export type { Client } from "./Client.js";
-export type { Spliceable, Spliced } from "./Spliceable.js";
-export { createBuiltin, isBuiltin, type Builtin } from "./Builtin.js";
-
-// What a drawing is, and what may stand in one. A `Prop` is a `Spliceable`
-// under the name a drawing gives it, so these belong with the boundary rather
-// with the layer that happens to declare elements.
-export type { Prop } from "./Prop.js";
-export type { BacktickNode } from "./BacktickNode.js";
-export type { ServerComponent } from "./ServerComponent.js";
-export type { BacktickElement } from "./BacktickElement.js";
-export {
-  createJsxElement,
-  isJsxElement,
-  type JsxElement,
-  type JsxElementType,
-} from "./JsxElement.js";
-export { createFragment, type Fragment } from "./Fragment.js";
-
-// A script is what crosses too: the compiler writes one, the bundler reads it,
-// and a client runs it. The shape both ends agree on lives here for the same
-// reason the values do — neither end owns it.
 export {
   create,
   type ClientScript,
   isClientScript,
   type Metadata,
+  type MetadataSplice,
 } from "./ClientScript.js";
 export * from "./Ast.js";
 export type { BinaryOperator } from "./BinaryOperator.js";
