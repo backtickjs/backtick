@@ -371,9 +371,9 @@ importers:
 
   packages/backtickjs.com/schema:
     dependencies:
-      '@backtickjs/boundary':
+      '@backtickjs/client-script':
         specifier: workspace:*
-        version: link:../../boundary
+        version: link:../../client-script
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../../language
@@ -449,19 +449,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/boundary:
-    dependencies:
-      '@backtickjs/language':
-        specifier: workspace:*
-        version: link:../language
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   packages/bun-plugin:
     devDependencies:
       '@backtickjs/compiler':
@@ -479,9 +466,9 @@ importers:
 
   packages/bundler:
     dependencies:
-      '@backtickjs/boundary':
+      '@backtickjs/client-script':
         specifier: workspace:*
-        version: link:../boundary
+        version: link:../client-script
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -515,11 +502,24 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
+  packages/client-script:
+    dependencies:
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../language
+    devDependencies:
+      prettier:
+        specifier: ^3.6.2
+        version: 3.8.4
+      typescript:
+        specifier: ^6.0.3
+        version: 6.0.3
+
   packages/compiler:
     dependencies:
-      '@backtickjs/boundary':
+      '@backtickjs/client-script':
         specifier: workspace:*
-        version: link:../boundary
+        version: link:../client-script
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -530,9 +530,9 @@ importers:
 
   packages/core:
     dependencies:
-      '@backtickjs/boundary':
+      '@backtickjs/client-script':
         specifier: workspace:*
-        version: link:../boundary
+        version: link:../client-script
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -861,12 +861,12 @@ importers:
 
   tests:
     devDependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../packages/boundary
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../packages/bundler
+      '@backtickjs/client-script':
+        specifier: workspace:*
+        version: link:../packages/client-script
       '@backtickjs/compiler':
         specifier: workspace:*
         version: link:../packages/compiler

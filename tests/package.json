@@ -16,7 +16,7 @@
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs/boundary": "workspace:*",
+    "@backtickjs/client-script": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
     "@backtickjs/language-schema": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",

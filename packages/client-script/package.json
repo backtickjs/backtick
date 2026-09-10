@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/boundary",
+  "name": "@backtickjs/client-script",
   "version": "0.1.0",
   "private": true,
   "type": "module",

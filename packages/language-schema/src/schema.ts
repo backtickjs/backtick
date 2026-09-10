@@ -14,7 +14,8 @@ import { Type, type Schema } from "@backtickjs/schema";
 export const schema: Schema = {
   // Where what this comes to is published, which is not where this is: a
   // schema is a declaration and needs nothing, where the declarations it
-  // generates name the boundary's types. See `@backtickjs/language`.
+  // generates are written beside `Client` and `Prop`, which no schema says.
+  // See `@backtickjs/language`.
   package: "@backtickjs/language",
 
   namespace: "Language",

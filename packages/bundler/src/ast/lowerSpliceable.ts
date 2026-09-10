@@ -1,4 +1,4 @@
-import { isClientScript } from "@backtickjs/boundary";
+import { isClientScript } from "@backtickjs/client-script";
 import { type ClientUnknown } from "@backtickjs/language";
 import { isJsxElement } from "@backtickjs/ui-schema";
 import { isBuiltin, type Client, type Spliceable } from "@backtickjs/language";

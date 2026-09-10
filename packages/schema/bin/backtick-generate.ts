@@ -27,7 +27,7 @@ if (source === undefined) {
 
 // Which artifacts to write, or all of them where none is named. What a project
 // wants is not always all three: a schema's document belongs beside the schema,
-// where what it comes to names the boundary and belongs above it.
+// where what it comes to names the language and belongs above it.
 const asked = new Set(process.argv.slice(3));
 const wants = (artifact: string): boolean =>
   asked.size === 0 || asked.has(artifact);

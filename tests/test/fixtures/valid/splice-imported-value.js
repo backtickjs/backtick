@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { version } from "@backtickjs/boundary";
+import { version } from "@backtickjs/client-script";
 // A host value that is imported and never mentioned outside a script.
 //
 // `version` appears once, as the `$version` splice below. That reference is
@@ -21,7 +21,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "splice-imported-value.tsx",
-    fileHash: "2fejzm14n96gs",
+    fileHash: "3vlntjixrsupx",
     splices: { $version: { value: version, params: [] } },
     captures: [],
   },

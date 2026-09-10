@@ -232,13 +232,13 @@ describe("declarations", () => {
     assert.doesNotMatch(declarations(target), /from "@backtickjs\/core"/);
   });
 
-  it("hands on what its base declares, and none of the boundary's own", () => {
+  it("hands on what its base declares, and none of the language's own", () => {
     const written = declarations(middle);
     assert.match(
       written,
       /export type \{\n {2}Cell,\n {2}Drawing,\n {2}Drawn,\n\} from "@backtickjs\/core";/,
     );
-    // A boundary name is reached from the boundary at every layer, so a base
+    // A language name is reached from the language at every layer, so a base
     // hands on none of them — not even one a declaration under it wrote.
     assert.doesNotMatch(written, /\bProp\b/);
     assert.doesNotMatch(written, /\bBacktickNode\b/);

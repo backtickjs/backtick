@@ -1,7 +1,7 @@
-import type { ClientScript } from "@backtickjs/boundary";
+import type { ClientScript } from "@backtickjs/client-script";
 import { locKey } from "../locKey.js";
 import type { AstScript, AstSplice } from "./Ast.js";
-import type { ClientScriptBody } from "@backtickjs/boundary";
+import type { ClientScriptBody } from "@backtickjs/client-script";
 import { lowerSpliceable } from "./lowerSpliceable.js";
 
 // The parsed body for each distinct source location. Two client objects at

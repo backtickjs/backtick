@@ -1,4 +1,9 @@
-export type { Client, ClientUnknown, ClientValue, Spliceable } from "@backtickjs/language";
+export type {
+  Client,
+  ClientUnknown,
+  ClientValue,
+  Spliceable,
+} from "@backtickjs/language";
 export type {
   ReadonlyState,
   RequestInit,
@@ -10,7 +15,7 @@ export type { Prop } from "@backtickjs/language";
 export type { BacktickElement, BacktickNode } from "@backtickjs/ui-schema";
 export type { Bundle } from "@backtickjs/language";
 
-// The boundary itself, which is the one thing here that is nobody else's.
+// The tag itself, which is the one thing here that is nobody else's.
 export { cs } from "./cs.js";
 // `For` is the language's, not a target's: what it draws is whatever the
 // elements around it are, and every client answers for it. A target's own

@@ -5,7 +5,7 @@ import type {
   ClientScriptDeclaration,
   ClientScriptExpression,
   ClientScriptStatement,
-} from "@backtickjs/boundary";
+} from "@backtickjs/client-script";
 import type { ScriptEntry } from "./ScriptEntry.js";
 import { sourceName } from "./bindingKey.js";
 import type {

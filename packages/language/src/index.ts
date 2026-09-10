@@ -2,9 +2,10 @@
  * What the language schema comes to, for a host writing against it.
  *
  * Apart from the schema that declares it because of what it needs: a
- * declaration names `ClientValue` and a builtin is a `Client<…>`, and both of
- * those are the boundary's. A schema should not need them to say what a
- * language is, so it does not — and this, which is what came out, may.
+ * builtin is a `Client<…>`, and `Client` is how a host language spells "a
+ * script standing in for a value", which no schema says. A schema should not
+ * need one to say what a language is, so it does not — and this, which is
+ * what came out, holds both.
  */
 export type * from "./declarations.generated.js";
 export * from "./builtins.generated.js";

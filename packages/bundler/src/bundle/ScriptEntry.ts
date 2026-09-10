@@ -1,4 +1,7 @@
-import type { ClientScriptBody, SourceLocation } from "@backtickjs/boundary";
+import type {
+  ClientScriptBody,
+  SourceLocation,
+} from "@backtickjs/client-script";
 
 /**
  * One `functions` entry: a client script's body, compiled once for every place

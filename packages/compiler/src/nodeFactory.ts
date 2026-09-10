@@ -1,4 +1,4 @@
-import type { ClientScriptKind, SourceLocation } from "@backtickjs/boundary";
+import type { ClientScriptKind, SourceLocation } from "@backtickjs/client-script";
 import type ts from "typescript";
 
 /** An AST node as the emitted code spells it: `{ kind: "if", … }`.
