@@ -1956,6 +1956,191 @@
       },
       "required": ["ok", "status", "statusText", "text", "bytes"]
     },
+    "HttpConfig": {
+      "description": "How to make an `http` request.",
+      "type": "object",
+      "properties": {
+        "headers": {
+          "type": "record",
+          "keys": {
+            "type": "string"
+          },
+          "values": {
+            "type": "string"
+          }
+        },
+        "timeout": {
+          "description": "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits.",
+          "type": "number"
+        }
+      },
+      "required": []
+    },
+    "HttpResponse": {
+      "description": "What answered, body and all.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "number"
+        },
+        "data": {
+          "readOnly": true,
+          "description": "The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte order mark is dropped. A script reads JSON with `JSON.parse`.",
+          "type": "string"
+        }
+      },
+      "required": ["status", "data"]
+    },
+    "Http": {
+      "description": "Requests the way axios makes them, answering through handlers because a script has no `await`.\n\n`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\nRedirects are followed, and the body is read before either handler is called.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {
+        "get": {
+          "description": "Asks for what is at `url`.",
+          "type": "function",
+          "parameters": [
+            {
+              "type": "functionParameter",
+              "name": "url",
+              "holds": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "onResponse",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "response",
+                    "holds": {
+                      "type": "ref",
+                      "$ref": "HttpResponse"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "description": "Called with why nothing answered, or with the string `onResponse` threw.",
+              "type": "functionParameter",
+              "name": "onFailure",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "message",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "config",
+              "holds": {
+                "type": "ref",
+                "$ref": "HttpConfig"
+              }
+            }
+          ],
+          "returnType": {
+            "type": "void"
+          }
+        },
+        "post": {
+          "description": "Sends `data` to `url`.",
+          "type": "function",
+          "parameters": [
+            {
+              "type": "functionParameter",
+              "name": "url",
+              "holds": {
+                "type": "string"
+              }
+            },
+            {
+              "description": "Sent as it is, encoded as UTF-8. A script sends JSON with `JSON.stringify` and a `content-type` header.",
+              "type": "functionParameter",
+              "name": "data",
+              "holds": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "onResponse",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "response",
+                    "holds": {
+                      "type": "ref",
+                      "$ref": "HttpResponse"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "description": "Called with why nothing answered, or with the string `onResponse` threw.",
+              "type": "functionParameter",
+              "name": "onFailure",
+              "holds": {
+                "type": "function",
+                "parameters": [
+                  {
+                    "type": "functionParameter",
+                    "name": "message",
+                    "holds": {
+                      "type": "string"
+                    }
+                  }
+                ],
+                "returnType": {
+                  "type": "void"
+                }
+              }
+            },
+            {
+              "type": "functionParameter",
+              "name": "config",
+              "holds": {
+                "type": "ref",
+                "$ref": "HttpConfig"
+              }
+            }
+          ],
+          "returnType": {
+            "type": "void"
+          }
+        }
+      },
+      "required": ["get", "post"]
+    },
     "ArrayLike": {
       "type": "generic",
       "parameters": [
@@ -15850,8 +16035,7 @@
         }
       ],
       "returnType": {
-        "type": "ref",
-        "$ref": "ClientValue"
+        "type": "any"
       }
     },
     "JSON.stringify": {
@@ -16818,6 +17002,10 @@
       "returnType": {
         "type": "void"
       }
+    },
+    "http": {
+      "type": "ref",
+      "$ref": "Http"
     },
     "state": {
       "type": "generic",

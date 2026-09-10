@@ -1,5 +1,12 @@
 import type { ClientValue } from "@backtickjs/core";
-import type { Builtins, Response, State } from "@backtickjs/language";
+import type {
+  Builtins,
+  Http,
+  HttpConfig,
+  HttpResponse,
+  Response,
+  State,
+} from "@backtickjs/language";
 import { createSignal } from "solid-js";
 
 // What this client answers for every name the framework provides — the host
@@ -280,7 +287,33 @@ export const globals: Builtins = {
         },
       );
   },
+  http: {
+    get: ((url, onResponse, onFailure, config) => {
+      void send("GET", url, undefined, onResponse, onFailure, config);
+    }) satisfies Http["get"],
+    post: ((url, data, onResponse, onFailure, config) => {
+      void send("POST", url, data, onResponse, onFailure, config);
+    }) satisfies Http["post"],
+  } as unknown as Http,
 };
+
+// Inside the `try`, so a throw from `onResponse` reaches `onFailure`.
+async function send(
+  method: string,
+  url: string,
+  body: string | undefined,
+  onResponse: (response: HttpResponse) => void,
+  onFailure: (message: string) => void,
+  { headers, timeout }: HttpConfig = {},
+): Promise<void> {
+  try {
+    const signal = timeout === undefined ? null : AbortSignal.timeout(timeout);
+    const response = await fetch(url, { method, headers, body, signal });
+    onResponse({ status: response.status, data: await response.text() });
+  } catch (error) {
+    onFailure(error instanceof Error ? error.message : String(error));
+  }
+}
 
 // Every number in this language is finite. `NaN` and `Infinity` are not values
 // a script can write — neither name is in scope — so they are not values a

@@ -1,3 +1,4 @@
+import { IsAny } from "../nodes/Any.js";
 import { IsApply } from "../nodes/Apply.js";
 import { IsArray } from "../nodes/Array.js";
 import { IsBoolean } from "../nodes/Boolean.js";
@@ -136,6 +137,9 @@ export function type(node: TNode): string {
   }
   if (IsNever(node)) {
     return "never";
+  }
+  if (IsAny(node)) {
+    return "any";
   }
   if (IsUnknown(node)) {
     throw new Error("an unknown may only stand as a type parameter's bound");

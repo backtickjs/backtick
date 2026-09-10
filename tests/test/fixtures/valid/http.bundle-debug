@@ -1,0 +1,19 @@
+#f0 = ($0, $1) => () => {
+  const held = $0()("waiting");
+  $1().get("/cases/built-ins/Math/trunc/Math.trunc_Success", (response) => {
+    if (response.status !== 200) {
+      throw "answered " + response.status;
+    }
+    held.write(JSON.parse(response.data) === null ? "null" : "a value");
+  }, (message) => {
+    held.write("failed — " + message);
+  }, { "timeout": 3000 });
+  $1().post("/cases", JSON.stringify({ "name": "Math.trunc", "passed": true }), (response) => {
+    held.write(response.data);
+  }, (message) => {
+    held.write(message);
+  }, { "headers": { "content-type": "application/json" } });
+  return held.read();
+}
+
+root = #f0(() => state, () => http)

@@ -1,3 +1,4 @@
+import type { TAny } from "./nodes/Any.js";
 import type { TApply } from "./nodes/Apply.js";
 import type { TArray } from "./nodes/Array.js";
 import type { TBoolean } from "./nodes/Boolean.js";
@@ -48,6 +49,7 @@ export type TNode =
   | TNull
   | TUndefined
   | TUnknown
+  | TAny
   | TRecord
   | TRef
   | TRest

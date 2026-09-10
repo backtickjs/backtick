@@ -428,6 +428,63 @@ export interface Response extends ClientHandle {
   ): void;
 }
 
+/**
+ * How to make an `http` request.
+ */
+export type HttpConfig = {
+  headers?: { [key: string]: string };
+  timeout?: number;
+};
+
+/**
+ * What answered, body and all.
+ */
+export type HttpResponse = { readonly status: number; readonly data: string };
+
+declare const HttpBrand: unique symbol;
+/**
+ * Requests the way axios makes them, answering through handlers because a
+ * script has no `await`.
+ *
+ * `onResponse` is called with every answer, whatever its status, and a throw
+ * from it is handed to `onFailure` — so a script fails on a status by
+ * throwing. `onFailure` is also called where nothing answered. Neither is
+ * called before the call returns, or more than once.
+ *
+ * Redirects are followed, and the body is read before either handler is
+ * called.
+ */
+export interface Http extends ClientHandle {
+  readonly [HttpBrand]: never;
+  /**
+   * Asks for what is at `url`.
+   *
+   * @param onFailure Called with why nothing answered, or with the string
+   * `onResponse` threw.
+   */
+  get(
+    url: string,
+    onResponse: (response: HttpResponse) => void,
+    onFailure: (message: string) => void,
+    config?: HttpConfig,
+  ): void;
+  /**
+   * Sends `data` to `url`.
+   *
+   * @param data Sent as it is, encoded as UTF-8. A script sends JSON with
+   * `JSON.stringify` and a `content-type` header.
+   * @param onFailure Called with why nothing answered, or with the string
+   * `onResponse` threw.
+   */
+  post(
+    url: string,
+    data: string,
+    onResponse: (response: HttpResponse) => void,
+    onFailure: (message: string) => void,
+    config?: HttpConfig,
+  ): void;
+}
+
 export interface ArrayLike<T extends ClientValue> {
   readonly length: number;
   readonly [n: number]: T;
@@ -805,7 +862,7 @@ interface LanguageBuiltins {
    *
    * @param text A valid JSON string.
    */
-  "JSON.parse"(text: string): ClientValue;
+  "JSON.parse"(text: string): any;
   /**
    * Converts a value to the JSON string that describes it.
    *
@@ -1155,6 +1212,7 @@ interface LanguageBuiltins {
     onFailure: (reason: string) => void,
     init?: RequestInit,
   ): void;
+  http: Http;
   state<T>(initial: T): State<T>;
 }
 

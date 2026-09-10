@@ -192,3 +192,30 @@ describe("a name a target answers for", () => {
     );
   });
 });
+
+describe("http", () => {
+  const get = (url: string, onResponse: (response: unknown) => void) =>
+    new Promise<string>((resolve) => {
+      globals.http.get(url, onResponse, resolve);
+    });
+
+  it("answers with the status and the body as text", async () => {
+    let answered: unknown = null;
+    await get('data:application/json,{"a":1}', (response) => {
+      answered = response;
+      throw "done";
+    });
+    assert.deepEqual(answered, { status: 200, data: '{"a":1}' });
+  });
+
+  it("hands a throw from onResponse to onFailure", async () => {
+    const message = await get("data:,hello", () => {
+      throw "not what was wanted";
+    });
+    assert.equal(message, "not what was wanted");
+  });
+
+  it("fails where nothing answered", async () => {
+    assert.ok((await get("not a url", () => {})).length > 0);
+  });
+});

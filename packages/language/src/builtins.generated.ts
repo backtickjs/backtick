@@ -2,7 +2,12 @@
 
 import { createBuiltin } from "./Builtin.js";
 import type { Client } from "./Client.js";
-import type { RequestInit, Response, State } from "./declarations.generated.js";
+import type {
+  Http,
+  RequestInit,
+  Response,
+  State,
+} from "./declarations.generated.js";
 
 /**
  * The web's `fetch`, answering through handlers because a script has no
@@ -21,6 +26,8 @@ export const fetch: Client<
     init?: RequestInit,
   ) => void
 > = createBuiltin("fetch");
+
+export const http: Client<Http> = createBuiltin("http");
 
 export const state: Client<<T>(initial: T) => State<T>> =
   createBuiltin("state");

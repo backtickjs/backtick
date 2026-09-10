@@ -1,6 +1,9 @@
 import assert from "node:assert";
 import { describe, it } from "node:test";
-import { parseSourceText, resolveBindings } from "@backtickjs-internal/compiler";
+import {
+  parseSourceText,
+  resolveBindings,
+} from "@backtickjs-internal/compiler";
 import ts from "typescript";
 
 // Captures of the top-level script in `body`. A top-level script has no

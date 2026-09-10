@@ -1,3 +1,4 @@
+import { Any } from "./nodes/Any.js";
 import { Apply } from "./nodes/Apply.js";
 import { Array } from "./nodes/Array.js";
 import { Boolean } from "./nodes/Boolean.js";
@@ -42,6 +43,7 @@ export const Type = {
   Function,
   Void,
   Never,
+  Any,
   Null,
   Undefined,
   Ref,

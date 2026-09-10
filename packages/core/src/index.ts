@@ -5,12 +5,13 @@ export type {
   Spliceable,
 } from "@backtickjs/language";
 export type {
+  HttpResponse,
   ReadonlyState,
   RequestInit,
   Response,
   State,
 } from "@backtickjs/language";
-export { fetch, state } from "@backtickjs/language";
+export { fetch, http, state } from "@backtickjs/language";
 export type { Prop } from "@backtickjs/ui";
 export type { BacktickElement, BacktickNode } from "@backtickjs/ui";
 export type { Bundle } from "@backtickjs/language";

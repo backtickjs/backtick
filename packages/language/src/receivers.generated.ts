@@ -314,7 +314,7 @@ export interface JSON {
    *
    * @param text A valid JSON string.
    */
-  parse(text: string): ClientValue;
+  parse(text: string): any;
   /**
    * Converts a value to the JSON string that describes it.
    *

@@ -484,6 +484,103 @@ export const schema: Schema = {
       },
     ),
 
+    HttpConfig: Type.Object(
+      {
+        headers: Type.Optional(Type.Record(Type.String(), Type.String())),
+        timeout: Type.Optional(
+          Type.Number({
+            description:
+              "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits.",
+          }),
+        ),
+      },
+      { description: "How to make an `http` request." },
+    ),
+
+    HttpResponse: Type.Object(
+      {
+        status: Type.Number({ readOnly: true }),
+        data: Type.String({
+          readOnly: true,
+          description:
+            "The body, decoded as UTF-8: invalid bytes become U+FFFD and a leading byte order mark is dropped. A script reads JSON with `JSON.parse`.",
+        }),
+      },
+      { description: "What answered, body and all." },
+    ),
+
+    Http: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {
+        get: Type.Function(
+          [
+            Type.FunctionParameter("url", Type.String()),
+            Type.FunctionParameter(
+              "onResponse",
+              Type.Function(
+                [Type.FunctionParameter("response", Type.Ref("HttpResponse"))],
+                Type.Void(),
+              ),
+            ),
+            Type.FunctionParameter(
+              "onFailure",
+              Type.Function(
+                [Type.FunctionParameter("message", Type.String())],
+                Type.Void(),
+              ),
+              {
+                description:
+                  "Called with why nothing answered, or with the string `onResponse` threw.",
+              },
+            ),
+            Type.Optional(
+              Type.FunctionParameter("config", Type.Ref("HttpConfig")),
+            ),
+          ],
+          Type.Void(),
+          { description: "Asks for what is at `url`." },
+        ),
+        post: Type.Function(
+          [
+            Type.FunctionParameter("url", Type.String()),
+            Type.FunctionParameter("data", Type.String(), {
+              description:
+                "Sent as it is, encoded as UTF-8. A script sends JSON with `JSON.stringify` and a `content-type` header.",
+            }),
+            Type.FunctionParameter(
+              "onResponse",
+              Type.Function(
+                [Type.FunctionParameter("response", Type.Ref("HttpResponse"))],
+                Type.Void(),
+              ),
+            ),
+            Type.FunctionParameter(
+              "onFailure",
+              Type.Function(
+                [Type.FunctionParameter("message", Type.String())],
+                Type.Void(),
+              ),
+              {
+                description:
+                  "Called with why nothing answered, or with the string `onResponse` threw.",
+              },
+            ),
+            Type.Optional(
+              Type.FunctionParameter("config", Type.Ref("HttpConfig")),
+            ),
+          ],
+          Type.Void(),
+          { description: "Sends `data` to `url`." },
+        ),
+      },
+      {
+        description:
+          "Requests the way axios makes them, answering through handlers because a script has no `await`.\n\n" +
+          "`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\n" +
+          "Redirects are followed, and the body is read before either handler is called.",
+      },
+    ),
+
     ArrayLike: Type.Generic(
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
@@ -1234,7 +1331,7 @@ export const schema: Schema = {
           description: "A valid JSON string.",
         }),
       ],
-      Type.Ref("ClientValue"),
+      Type.Any(),
       {
         description:
           "Converts a JSON string into the value it describes. Throws if the" +
@@ -1815,6 +1912,7 @@ export const schema: Schema = {
           "Exactly one handler is called, once. `init` is last so the optional argument stays last.",
       },
     ),
+    http: Type.Ref("Http"),
     state: Type.Generic(
       [Type.GenericParameter("T")],
       Type.Function(

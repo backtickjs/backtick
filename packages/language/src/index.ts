@@ -70,12 +70,15 @@ export type {
   ClientUnknown,
   ClientValue,
   Elements,
+  Http,
+  HttpConfig,
+  HttpResponse,
   ReadonlyState,
   RequestInit,
   Response,
   State,
 } from "./declarations.generated.js";
-export { fetch, state } from "./builtins.generated.js";
+export { fetch, http, state } from "./builtins.generated.js";
 export type {
   Array,
   ArrayConstructor,
