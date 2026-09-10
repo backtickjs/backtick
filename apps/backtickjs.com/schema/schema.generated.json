@@ -1806,6 +1806,16 @@
             "type": "string"
           }
         },
+        "params": {
+          "description": "Added to the URL's query, in order. Each key and value is percent-encoded as UTF-8, everything but `A-Z a-z 0-9 - _ . ! ~ * ' ( )`.",
+          "type": "record",
+          "keys": {
+            "type": "string"
+          },
+          "values": {
+            "type": "string"
+          }
+        },
         "timeout": {
           "description": "How long to wait before failing, in milliseconds. Where omitted, as long as the client waits.",
           "type": "number"

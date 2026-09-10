@@ -411,6 +411,12 @@ export const schema: Schema = {
     HttpConfig: Type.Object(
       {
         headers: Type.Optional(Type.Record(Type.String(), Type.String())),
+        params: Type.Optional(
+          Type.Record(Type.String(), Type.String(), {
+            description:
+              "Added to the URL's query, in order. Each key and value is percent-encoded as UTF-8, everything but `A-Z a-z 0-9 - _ . ! ~ * ' ( )`.",
+          }),
+        ),
         timeout: Type.Optional(
           Type.Number({
             description:

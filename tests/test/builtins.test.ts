@@ -1,5 +1,7 @@
 import type { ClientUnknown } from "@backtickjs/core";
 import assert from "node:assert/strict";
+import { createServer } from "node:http";
+import type { AddressInfo } from "node:net";
 import { describe, it } from "node:test";
 import { type ClientValue } from "@backtickjs/core";
 import { type Bundle } from "@backtickjs/bundler";
@@ -217,5 +219,23 @@ describe("http", () => {
 
   it("fails where nothing answered", async () => {
     assert.ok((await get("not a url", () => {})).length > 0);
+  });
+
+  it("adds params to the query, percent-encoded", async () => {
+    const server = createServer((request, response) => {
+      response.end(request.url);
+    });
+    await new Promise<void>((resolve) => server.listen(0, resolve));
+    const { port } = server.address() as AddressInfo;
+    const asked = await new Promise<string>((resolve, reject) => {
+      globals.http.get(
+        `http://localhost:${port}/at`,
+        (response) => resolve(response.data),
+        reject,
+        { params: { q: "a b+c&d#e%", "k=": "é" } },
+      );
+    });
+    server.close();
+    assert.equal(asked, "/at?q=a%20b%2Bc%26d%23e%25&k%3D=%C3%A9");
   });
 });

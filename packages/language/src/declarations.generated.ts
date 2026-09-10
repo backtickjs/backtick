@@ -383,6 +383,7 @@ export type BundleParameter = [kind: "param", name: string];
  */
 export type HttpConfig = {
   headers?: { [key: string]: string };
+  params?: { [key: string]: string };
   timeout?: number;
 };
 

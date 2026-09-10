@@ -268,15 +268,31 @@ async function send(
   body: string | undefined,
   onResponse: (response: HttpResponse) => void,
   onFailure: (message: string) => void,
-  { headers, timeout }: HttpConfig = {},
+  { headers, params, timeout }: HttpConfig = {},
 ): Promise<void> {
   try {
     const signal = timeout === undefined ? null : AbortSignal.timeout(timeout);
-    const response = await fetch(url, { method, headers, body, signal });
+    const response = await fetch(url + query(url, params), {
+      method,
+      headers,
+      body,
+      signal,
+    });
     onResponse({ status: response.status, data: await response.text() });
   } catch (error) {
     onFailure(error instanceof Error ? error.message : String(error));
   }
+}
+
+// `encodeURIComponent` and not `URLSearchParams`, which writes a space as `+`.
+function query(url: string, params: HttpConfig["params"]): string {
+  const pairs = Object.entries(params ?? {}).map(
+    ([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
+  );
+  if (pairs.length === 0) {
+    return "";
+  }
+  return (url.includes("?") ? "&" : "?") + pairs.join("&");
 }
 
 // Every number in this language is finite. `NaN` and `Infinity` are not values
