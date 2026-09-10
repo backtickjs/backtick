@@ -35,7 +35,6 @@
     "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@backtickjs/boundary": "workspace:*",
     "@backtickjs/language": "workspace:*",
     "@backtickjs/schema": "workspace:*",
     "@backtickjs/ui-schema": "workspace:*"

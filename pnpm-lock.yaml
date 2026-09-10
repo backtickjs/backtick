@@ -450,6 +450,10 @@ importers:
         version: 6.0.3
 
   packages/boundary:
+    dependencies:
+      '@backtickjs/language':
+        specifier: workspace:*
+        version: link:../language
     devDependencies:
       prettier:
         specifier: ^3.6.2
@@ -494,9 +498,6 @@ importers:
 
   packages/cardputer-schema:
     dependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../boundary
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -548,9 +549,6 @@ importers:
 
   packages/html-embed:
     dependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../boundary
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler
@@ -801,9 +799,6 @@ importers:
 
   packages/ui-schema:
     dependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../boundary
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
@@ -847,9 +842,6 @@ importers:
 
   packages/web-schema:
     dependencies:
-      '@backtickjs/boundary':
-        specifier: workspace:*
-        version: link:../boundary
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language

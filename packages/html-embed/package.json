@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@backtickjs/language": "workspace:*",
-    "@backtickjs/boundary": "workspace:*",
     "@backtickjs/bundler": "workspace:*",
     "linkedom": "^0.18.13"
   },

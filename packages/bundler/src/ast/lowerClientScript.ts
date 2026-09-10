@@ -1,5 +1,4 @@
 import type { ClientScript } from "@backtickjs/boundary";
-import type { Spliceable } from "@backtickjs/language";
 import { locKey } from "../locKey.js";
 import type { AstScript, AstSplice } from "./Ast.js";
 import type { ClientScriptBody } from "@backtickjs/boundary";
@@ -43,13 +42,7 @@ async function buildScript(client: ClientScript): Promise<AstScript> {
     await Promise.all(
       Object.entries(client.metadata.splices).map(async ([key, splice]) => [
         key,
-        {
-          // `unknown` where the script carries it: the boundary that defines a
-          // script is below the language and cannot name what may be spliced.
-          // Here both ends are in scope, and the compiler wrote the hole.
-          value: await lowerSpliceable(splice.value as Spliceable),
-          params: splice.params,
-        },
+        { value: await lowerSpliceable(splice.value), params: splice.params },
       ]),
     ),
   );
