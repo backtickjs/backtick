@@ -84,6 +84,7 @@ export type {
   Math,
   Number,
   NumberConstructor,
+  ObjectConstructor,
   String,
   StringConstructor,
 } from "./receivers.generated.js";

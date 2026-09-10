@@ -1148,6 +1148,24 @@ interface LanguageBuiltins {
    * List elements. If length is 0, the empty string is returned.
    */
   "String.fromCodePoint"(...codePoints: number[]): string;
+  /**
+   * Returns an array of an object's members, each as a key and its value, in
+   * the order `JSON.stringify` writes them.
+   *
+   * @param o An object whose members to list.
+   */
+  "Object.entries"<T extends ClientValue>(o: {
+    readonly [key: string]: T;
+  }): [key: string, value: T][];
+  /**
+   * Returns an object holding each key with its value. A key written twice
+   * holds the later value.
+   *
+   * @param entries Keys and their values.
+   */
+  "Object.fromEntries"<T extends ClientValue>(
+    entries: readonly [key: string, value: T][],
+  ): { [key: string]: T };
   http: Http;
   state<T>(initial: T): State<T>;
 }

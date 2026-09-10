@@ -1815,6 +1815,43 @@ export const schema: Schema = {
           "Return the String value whose elements are, in order, the elements in the List elements. If length is 0, the empty string is returned.",
       },
     ),
+    "Object.entries": Type.Generic(
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
+      Type.Function(
+        [
+          Type.FunctionParameter(
+            "o",
+            Type.Record(Type.String(), Type.Ref("T"), { readOnly: true }),
+            { description: "An object whose members to list." },
+          ),
+        ],
+        Type.Array(Type.Tuple({ key: Type.String(), value: Type.Ref("T") })),
+      ),
+      {
+        description:
+          "Returns an array of an object's members, each as a key and its value, in the order `JSON.stringify` writes them.",
+      },
+    ),
+    "Object.fromEntries": Type.Generic(
+      [Type.GenericParameter("T", Type.Ref("ClientValue"))],
+      Type.Function(
+        [
+          Type.FunctionParameter(
+            "entries",
+            Type.Array(
+              Type.Tuple({ key: Type.String(), value: Type.Ref("T") }),
+              { readOnly: true },
+            ),
+            { description: "Keys and their values." },
+          ),
+        ],
+        Type.Record(Type.String(), Type.Ref("T")),
+      ),
+      {
+        description:
+          "Returns an object holding each key with its value. A key written twice holds the later value.",
+      },
+    ),
     http: Type.Ref("Http"),
     state: Type.Generic(
       [Type.GenericParameter("T")],

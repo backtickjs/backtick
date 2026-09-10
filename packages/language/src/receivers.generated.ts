@@ -655,6 +655,27 @@ export interface NumberConstructor {
   parseInt(string: string, radix?: number): number;
 }
 
+export interface ObjectConstructor {
+  /**
+   * Returns an array of an object's members, each as a key and its value, in
+   * the order `JSON.stringify` writes them.
+   *
+   * @param o An object whose members to list.
+   */
+  entries<T extends ClientValue>(o: {
+    readonly [key: string]: T;
+  }): [key: string, value: T][];
+  /**
+   * Returns an object holding each key with its value. A key written twice
+   * holds the later value.
+   *
+   * @param entries Keys and their values.
+   */
+  fromEntries<T extends ClientValue>(
+    entries: readonly [key: string, value: T][],
+  ): { [key: string]: T };
+}
+
 export interface StringConstructor {
   /**
    * Return the String value whose elements are, in order, the elements in the

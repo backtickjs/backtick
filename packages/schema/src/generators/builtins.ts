@@ -28,8 +28,8 @@ import type { TNode } from "../TNode.js";
  * imports.
  *
  * A script reaches one by writing it — `Math.floor`, `"x".trim()` — so there is
- * no value for an app to import it through, and nothing here to write. All nine
- * are fronts, dot and all: five a place statics hang off and four a kind of
+ * no value for an app to import it through, and nothing here to write. All ten
+ * are fronts, dot and all: six a place statics hang off and four a kind of
  * value a member is read off. Nothing the language provides is a whole name a
  * script calls bare; a target's own arrives as a value, `$window` and the rest.
  *
@@ -50,6 +50,7 @@ const language: readonly string[] = [
   "JSON.",
   "Math.",
   "Number.",
+  "Object.",
   "String.",
   "array.",
   "boolean.",

@@ -53,6 +53,7 @@ const named: Record<string, { as: string }> = {
   Math: { as: "Math" },
   Array: { as: "ArrayConstructor" },
   Number: { as: "NumberConstructor" },
+  Object: { as: "ObjectConstructor" },
   String: { as: "StringConstructor" },
 };
 

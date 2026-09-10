@@ -32,7 +32,14 @@ import { FRAGMENT_TAG, isFragmentTag } from "./isFragmentTag.js";
 // The four kinds a member is read off — `string.`, `array.` and the rest — are
 // not here: those are reached off a value rather than written, so they are
 // `receivers.ts`'s and never an identifier this resolves.
-const language = new Set(["Array.", "JSON.", "Math.", "Number.", "String."]);
+const language = new Set([
+  "Array.",
+  "JSON.",
+  "Math.",
+  "Number.",
+  "Object.",
+  "String.",
+]);
 
 export interface RewriteState {
   script: ClientScript;

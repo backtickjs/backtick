@@ -4376,6 +4376,130 @@
         "type": "string"
       }
     },
+    "Object.entries": {
+      "description": "Returns an array of an object's members, each as a key and its value, in the order `JSON.stringify` writes them.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "An object whose members to list.",
+            "type": "functionParameter",
+            "name": "o",
+            "holds": {
+              "readOnly": true,
+              "type": "record",
+              "keys": {
+                "type": "string"
+              },
+              "values": {
+                "type": "ref",
+                "$ref": "T"
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "array",
+          "items": {
+            "type": "tuple",
+            "items": [
+              {
+                "type": "tupleElement",
+                "name": "key",
+                "holds": {
+                  "type": "string"
+                }
+              },
+              {
+                "type": "tupleElement",
+                "name": "value",
+                "holds": {
+                  "type": "ref",
+                  "$ref": "T"
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Object.fromEntries": {
+      "description": "Returns an object holding each key with its value. A key written twice holds the later value.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientValue"
+          }
+        }
+      ],
+      "expression": {
+        "type": "function",
+        "parameters": [
+          {
+            "description": "Keys and their values.",
+            "type": "functionParameter",
+            "name": "entries",
+            "holds": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "type": "tuple",
+                "items": [
+                  {
+                    "type": "tupleElement",
+                    "name": "key",
+                    "holds": {
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "type": "tupleElement",
+                    "name": "value",
+                    "holds": {
+                      "type": "ref",
+                      "$ref": "T"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "returnType": {
+          "type": "record",
+          "keys": {
+            "type": "string"
+          },
+          "values": {
+            "type": "ref",
+            "$ref": "T"
+          }
+        }
+      }
+    },
     "http": {
       "type": "ref",
       "$ref": "Http"

@@ -232,6 +232,8 @@ export const globals: Builtins = {
     }
     return answer;
   },
+  "Object.entries": (o) => Object.entries(o),
+  "Object.fromEntries": (entries) => Object.fromEntries(entries),
   "String.fromCodePoint"(...codePoints) {
     return String.fromCodePoint(...codePoints);
   },

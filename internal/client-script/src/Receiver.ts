@@ -6,6 +6,7 @@ import type {
   Math,
   Number,
   NumberConstructor,
+  ObjectConstructor,
   String,
   StringConstructor,
 } from "@backtickjs/language";
@@ -25,8 +26,14 @@ type Autoboxed<T extends ClientValue> = T extends string
     : T extends boolean
       ? Boolean
       : T extends readonly (infer E)[]
-        ? Array<E>
+        ? Array<E> & Positions<T>
         : never;
+
+// A tuple's positions keep their own types: `pair[0]` of `[string, number]` is
+// a string, where the array view alone would read every position as either.
+type Positions<T extends readonly unknown[]> = number extends T["length"]
+  ? unknown
+  : { readonly [K in keyof T as K extends `${number}` ? K : never]: T[K] };
 
 // A plain object's members as a script reads them: `?` means omittable —
 // an absent member reads as `null`, so an optional member's `undefined`
@@ -52,6 +59,7 @@ export type ClientGlobal =
   | typeof globalThis.JSON
   | typeof globalThis.Math
   | typeof globalThis.Number
+  | typeof globalThis.Object
   | typeof globalThis.String;
 
 // What a member-access receiver reads as:
@@ -67,12 +75,14 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
         ? ArrayConstructor
         : T extends typeof globalThis.Number
           ? NumberConstructor
-          : T extends typeof globalThis.String
-            ? StringConstructor
-            : T extends string | number | boolean | ClientValue[]
-              ? Autoboxed<T>
-              : T extends ClientFunction
-                ? T
-                : T extends object
-                  ? ReadMembers<T>
-                  : T;
+          : T extends typeof globalThis.Object
+            ? ObjectConstructor
+            : T extends typeof globalThis.String
+              ? StringConstructor
+              : T extends string | number | boolean | ClientValue[]
+                ? Autoboxed<T>
+                : T extends ClientFunction
+                  ? T
+                  : T extends object
+                    ? ReadMembers<T>
+                    : T;
