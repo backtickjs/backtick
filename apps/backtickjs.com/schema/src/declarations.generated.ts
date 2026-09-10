@@ -5,7 +5,7 @@ import type {
   Builtins as WebBuiltins,
   Bundle,
   Elements as WebElements,
-} from "@backtickjs/web-schema";
+} from "@backtickjs/web";
 
 export type {
   AnchorProps,
@@ -226,7 +226,7 @@ export type {
   VoidProps,
   WheelEvent,
   Window,
-} from "@backtickjs/web-schema";
+} from "@backtickjs/web";
 
 /**
  * Something the compiler had to say, and where in the source.

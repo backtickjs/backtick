@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A component whose whole body is client code answers with the script rather
 // than a drawing the host made: it declares its own storage and draws from it,

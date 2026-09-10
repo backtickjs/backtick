@@ -1,5 +1,5 @@
 {
-  "package": "@backtickjs/web-schema",
+  "package": "@backtickjs/web",
   "namespace": "Web",
   "extends": [],
   "types": {

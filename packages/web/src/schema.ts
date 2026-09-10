@@ -1,4 +1,4 @@
-import { schema as ui } from "@backtickjs/ui-schema/schema";
+import { schema as ui } from "@backtickjs/ui/schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 
@@ -6,7 +6,7 @@ import type { Schema } from "@backtickjs/schema";
 // from this and is not written by hand — run `pnpm generate`.
 
 export const schema: Schema = {
-  package: "@backtickjs/web-schema",
+  package: "@backtickjs/web",
 
   namespace: "Web",
 

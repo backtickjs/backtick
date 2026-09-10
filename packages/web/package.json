@@ -1,5 +1,5 @@
 {
-  "name": "@backtickjs/ui-schema",
+  "name": "@backtickjs/web",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@backtickjs/language": "workspace:*",
-    "@backtickjs/language-schema": "workspace:*",
-    "@backtickjs/schema": "workspace:*"
+    "@backtickjs/schema": "workspace:*",
+    "@backtickjs/ui": "workspace:*"
   }
 }

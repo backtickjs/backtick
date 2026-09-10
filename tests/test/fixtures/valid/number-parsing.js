@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A namespace static, reached the way `Math.floor` and `Array.from` are: the
 // whole of `Number.parseInt` is one name the client answers, so `Number` is a

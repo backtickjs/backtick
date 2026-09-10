@@ -1,6 +1,6 @@
 import { cs, state } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/core";
-import { window } from "@backtickjs/web-schema";
+import { window } from "@backtickjs/web";
 
 // A component whose whole drawing is a conditional on a cell of its own, which
 // something writes once from outside the block.

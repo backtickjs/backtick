@@ -1,7 +1,7 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
 import { cs, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web-schema";
+import { window } from "@backtickjs/web";
 // A component that draws a bundle it is still waiting for.
 //
 // What this pins is that it is built once. `insert` reads what it was given
@@ -19,7 +19,7 @@ async function Answer() {
     {
       version: "0.0.0",
       filePath: "backtick-builds-once.tsx",
-      fileHash: "1hz4qqlrmszec",
+      fileHash: "2x8k8srxyyhq0",
       splices: {},
       captures: [],
     },
@@ -49,7 +49,7 @@ async function Waiting({ ask }) {
     {
       version: "0.0.0",
       filePath: "backtick-builds-once.tsx",
-      fileHash: "1hz4qqlrmszec",
+      fileHash: "2x8k8srxyyhq0",
       splices: {
         $state: { value: state, params: [] },
         $window: { value: window, params: [] },
@@ -68,7 +68,7 @@ async function Waiting({ ask }) {
             kind: "id",
             loc: [29, 11, 29, 16],
             text: "drawn",
-            bindingKey: "drawn$1hz4qqlrmszec$0",
+            bindingKey: "drawn$2x8k8srxyyhq0$0",
           },
           initializer: {
             kind: "()",
@@ -93,7 +93,7 @@ async function Waiting({ ask }) {
             kind: "id",
             loc: [30, 11, 30, 18],
             text: "started",
-            bindingKey: "started$1hz4qqlrmszec$1",
+            bindingKey: "started$2x8k8srxyyhq0$1",
           },
           initializer: {
             kind: "()",
@@ -123,7 +123,7 @@ async function Waiting({ ask }) {
                       kind: "id",
                       loc: [30, 46, 30, 51],
                       text: "drawn",
-                      bindingKey: "drawn$1hz4qqlrmszec$0",
+                      bindingKey: "drawn$2x8k8srxyyhq0$0",
                     },
                     name: "write",
                   },
@@ -173,7 +173,7 @@ async function Waiting({ ask }) {
                       kind: "id",
                       loc: [31, 30, 31, 35],
                       text: "drawn",
-                      bindingKey: "drawn$1hz4qqlrmszec$0",
+                      bindingKey: "drawn$2x8k8srxyyhq0$0",
                     },
                     name: "read",
                   },
@@ -193,7 +193,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "backtick-builds-once.tsx",
-    fileHash: "1hz4qqlrmszec",
+    fileHash: "2x8k8srxyyhq0",
     splices: {
       $state: { value: state, params: [] },
       $Waiting: { value: Waiting, params: [] },
@@ -212,7 +212,7 @@ export default cs.create(
           kind: "id",
           loc: [36, 9, 36, 14],
           text: "asked",
-          bindingKey: "asked$1hz4qqlrmszec$2",
+          bindingKey: "asked$2x8k8srxyyhq0$2",
         },
         initializer: {
           kind: "()",
@@ -273,7 +273,7 @@ export default cs.create(
                         kind: "id",
                         loc: [40, 25, 40, 30],
                         text: "asked",
-                        bindingKey: "asked$1hz4qqlrmszec$2",
+                        bindingKey: "asked$2x8k8srxyyhq0$2",
                       },
                       name: "read",
                     },
@@ -311,7 +311,7 @@ export default cs.create(
                               kind: "id",
                               loc: [43, 11, 43, 16],
                               text: "asked",
-                              bindingKey: "asked$1hz4qqlrmszec$2",
+                              bindingKey: "asked$2x8k8srxyyhq0$2",
                             },
                             name: "write",
                           },
@@ -329,7 +329,7 @@ export default cs.create(
                                     kind: "id",
                                     loc: [43, 23, 43, 28],
                                     text: "asked",
-                                    bindingKey: "asked$1hz4qqlrmszec$2",
+                                    bindingKey: "asked$2x8k8srxyyhq0$2",
                                   },
                                   name: "read",
                                 },
@@ -363,7 +363,7 @@ export default cs.create(
                                     kind: "id",
                                     loc: [44, 18, 44, 23],
                                     text: "asked",
-                                    bindingKey: "asked$1hz4qqlrmszec$2",
+                                    bindingKey: "asked$2x8k8srxyyhq0$2",
                                   },
                                   name: "read",
                                 },

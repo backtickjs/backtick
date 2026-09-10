@@ -1,7 +1,7 @@
 import { bundler } from "@backtickjs/bundler";
 import { cs, state } from "@backtickjs/core";
 import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
-import { window } from "@backtickjs/web-schema";
+import { window } from "@backtickjs/web";
 
 // A component that draws a bundle it is still waiting for.
 //

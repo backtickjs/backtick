@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
 import { cs } from "@backtickjs/core";
 async function Other() {

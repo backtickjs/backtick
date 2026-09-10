@@ -20,7 +20,7 @@
   "dependencies": {
     "@backtickjs-internal/client-script": "workspace:*",
     "@backtickjs/language": "workspace:*",
-    "@backtickjs/ui-schema": "workspace:*"
+    "@backtickjs/ui": "workspace:*"
   },
   "peerDependencies": {
     "typescript": "^6.0.3"

@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { window } from "@backtickjs/web-schema";
+import { window } from "@backtickjs/web";
 // A clock, which is the target's rather than the language's: a script reaches
 // one by splicing the window, the same as anything else a target hands over.
 //
@@ -20,7 +20,7 @@ export default cs.create(
   {
     version: "0.0.0",
     filePath: "timers.ts",
-    fileHash: "2a1dmu3pxvhzt",
+    fileHash: "38bsffk6tgzjz",
     splices: { $window: { value: window, params: [] } },
     captures: [],
   },
@@ -35,7 +35,7 @@ export default cs.create(
           kind: "id",
           loc: [20, 9, 20, 13],
           text: "stop",
-          bindingKey: "stop$2a1dmu3pxvhzt$0",
+          bindingKey: "stop$38bsffk6tgzjz$0",
         },
         initializer: {
           kind: ".",
@@ -55,7 +55,7 @@ export default cs.create(
           kind: "id",
           loc: [21, 9, 21, 18],
           text: "repeating",
-          bindingKey: "repeating$2a1dmu3pxvhzt$1",
+          bindingKey: "repeating$38bsffk6tgzjz$1",
         },
         initializer: {
           kind: "()",
@@ -96,14 +96,14 @@ export default cs.create(
           kind: "id",
           loc: [22, 3, 22, 7],
           text: "stop",
-          bindingKey: "stop$2a1dmu3pxvhzt$0",
+          bindingKey: "stop$38bsffk6tgzjz$0",
         },
         arguments: [
           {
             kind: "id",
             loc: [22, 8, 22, 17],
             text: "repeating",
-            bindingKey: "repeating$2a1dmu3pxvhzt$1",
+            bindingKey: "repeating$38bsffk6tgzjz$1",
           },
         ],
       },

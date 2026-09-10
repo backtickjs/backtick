@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { schema } from "@backtickjs/web-schema/schema";
+import { schema } from "@backtickjs/web/schema";
 import { dom } from "../src/dom.ts";
 
 // The two ways a bundle could run what wrote it, each held to not happening.

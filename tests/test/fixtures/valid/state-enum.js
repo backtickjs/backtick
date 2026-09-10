@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A cell holding an enum, handed to a function whose parameter is that enum.
 //

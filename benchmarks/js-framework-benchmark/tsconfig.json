@@ -5,7 +5,7 @@
     "target": "ESNext",
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/web-schema"
+    "jsxImportSource": "@backtickjs/web"
   },
   "include": ["test/bundle.tsx"]
 }

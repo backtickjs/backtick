@@ -7,7 +7,7 @@ import type {
   ClientHandle,
   ClientValue,
   Elements as UiElements,
-} from "@backtickjs/ui-schema";
+} from "@backtickjs/ui";
 
 export type {
   ArrayLike,
@@ -78,7 +78,7 @@ export type {
   RequestInit,
   Response,
   State,
-} from "@backtickjs/ui-schema";
+} from "@backtickjs/ui";
 
 declare const EventTargetBrand: unique symbol;
 /**

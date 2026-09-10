@@ -15,7 +15,7 @@
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "^0.1.0",
     "@backtickjs/web-client": "workspace:*",
-    "@backtickjs/web-schema": "workspace:*",
+    "@backtickjs/web": "workspace:*",
     "@backtickjs/html-embed": "workspace:*"
   },
   "devDependencies": {

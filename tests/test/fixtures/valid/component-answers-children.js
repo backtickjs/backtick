@@ -2,7 +2,7 @@ import {
   Fragment as _Fragment,
   jsx as _jsx,
   jsxs as _jsxs,
-} from "@backtickjs/web-schema/jsx-runtime";
+} from "@backtickjs/web/jsx-runtime";
 // A component stands exactly where its tag did, so what it may answer with is
 // what may stand there: one drawing, or nothing at all. Text and a list are
 // neither — a component with several children to give, or a bare string, wraps

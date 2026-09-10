@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs } from "@backtickjs/web/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A child reading a cell it was handed, in all three positions at once: a prop,
 // a text child, and a branch deciding which elements exist. The script that

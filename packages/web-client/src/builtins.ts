@@ -1,4 +1,4 @@
-import type { WebBuiltins, Window } from "@backtickjs/web-schema";
+import type { WebBuiltins, Window } from "@backtickjs/web";
 
 /**
  * What this target answers for, beside the language's own.

@@ -18,10 +18,10 @@
     "@backtickjs/core": "workspace:*",
     "@backtickjs-internal/client-script": "workspace:*",
     "@backtickjs-internal/js-interpreter": "workspace:*",
-    "@backtickjs/language-schema": "workspace:*",
+    "@backtickjs/language": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",
-    "@backtickjs/web-schema": "workspace:*",
+    "@backtickjs/web": "workspace:*",
     "prettier": "^3.6.2",
     "solid-js": "^1.9.14",
     "typescript": "^6.0.3"

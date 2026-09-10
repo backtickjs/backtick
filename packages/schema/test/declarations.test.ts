@@ -86,7 +86,7 @@ describe("declarations", () => {
       /import type \{[^}]*\bDrawing,[^}]*\bShared,[^}]*\} from "@backtickjs\/middle";/,
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
-    // `Prop` is the language's, wherever it is named, so it comes from one place
+    // `Prop` is the language schema's, wherever it is named, so it comes from one place
     // every layer rather than being handed up like the rest.
     assert.match(
       written,
@@ -94,7 +94,7 @@ describe("declarations", () => {
     );
   });
 
-  it("reaches the language's own names in one hop, at the root", () => {
+  it("reaches the language schema's own names in one hop, at the root", () => {
     const root: Schema = {
       package: "@backtickjs/core",
       namespace: "Core",
@@ -111,7 +111,7 @@ describe("declarations", () => {
     assert.match(
       written,
       /import type \{\n {2}Prop,\n\} from "@backtickjs\/language";/,
-      "a root reaches the language's names the same way every layer above does",
+      "a root reaches the language schema's names the same way every layer above does",
     );
     assert.doesNotMatch(written, /from "@backtickjs\/core"/);
   });

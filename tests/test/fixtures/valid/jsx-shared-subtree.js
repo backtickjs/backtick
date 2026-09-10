@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 const shared = _jsx("span", { children: "hi" });
 // The same element instance referenced twice hoists into its own tree entry;
 // each occurrence becomes a `#call` instead of inlining twice.

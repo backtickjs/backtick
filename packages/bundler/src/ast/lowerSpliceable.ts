@@ -1,6 +1,6 @@
 import { isClientScript } from "@backtickjs-internal/client-script";
 import { type ClientUnknown } from "@backtickjs/language";
-import { isJsxElement } from "@backtickjs/ui-schema";
+import { isJsxElement } from "@backtickjs/ui";
 import { isBuiltin, type Client, type Spliceable } from "@backtickjs/language";
 import type { Ast } from "./Ast.js";
 import { holeName } from "./holes.js";

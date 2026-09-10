@@ -124,7 +124,7 @@ describe("builtins", () => {
   });
 
   it("reads what may cross the boundary from `language`, at every layer", () => {
-    // `createBuiltin` and `Client` are the language's, not a layer's, so the root
+    // `createBuiltin` and `Client` are the language schema's, not a layer's, so the root
     // and a target above it read them the same way. What a layer declares is
     // still read through that layer's own artifact.
     for (const schema of [core, target]) {
@@ -149,7 +149,7 @@ describe("builtins", () => {
     assert.doesNotMatch(builtins(core), /^ {2}T,$/m);
   });
 
-  it("reaches for what a value reads as, which is the language's", () => {
+  it("reaches for what a value reads as, which is the language schema's", () => {
     // Not a layer's to publish: `Client` comes from `@backtickjs/language`
     // wherever it is written, so a root has nothing of its own to hand on.
     assert.match(

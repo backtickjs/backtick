@@ -21,7 +21,7 @@
   "dependencies": {
     "@backtickjs-internal/client-script": "workspace:*",
     "@backtickjs/language": "workspace:*",
-    "@backtickjs/ui-schema": "workspace:*"
+    "@backtickjs/ui": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

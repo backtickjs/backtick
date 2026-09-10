@@ -1,7 +1,7 @@
-import { createJsxElement } from "@backtickjs/ui-schema";
+import { createJsxElement } from "@backtickjs/ui";
 import type { Bundle } from "@backtickjs/language";
 import type { Prop } from "@backtickjs/language";
-import type { BacktickElement } from "@backtickjs/ui-schema";
+import type { BacktickElement } from "@backtickjs/ui";
 
 /**
  * A bundle, drawn here.

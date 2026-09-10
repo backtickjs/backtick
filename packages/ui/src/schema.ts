@@ -1,9 +1,9 @@
-import { schema as language } from "@backtickjs/language-schema/schema";
+import { schema as language } from "@backtickjs/language/schema";
 import { Type } from "@backtickjs/schema";
 import type { Schema } from "@backtickjs/schema";
 
 export const schema: Schema = {
-  package: "@backtickjs/ui-schema",
+  package: "@backtickjs/ui",
 
   namespace: "Ui",
 

@@ -1,11 +1,12 @@
 /**
- * What the language schema comes to, for a host writing against it.
+ * What every client answers for: the declaration, and what it comes to.
  *
- * Apart from the schema that declares it because of what it needs: a
- * builtin is a `Client<…>`, and `Client` is how a host language spells "a
- * script standing in for a value", which no schema says. A schema should not
- * need one to say what a language is, so it does not — and this, which is
- * what came out, holds both.
+ * The schema is the document — `./schema` reaches it, and
+ * `schema.generated.json` beside this is what a reader outside TypeScript
+ * gets. This is the rest: the types generated from it, and the few a schema
+ * never says. A builtin is a `Client<…>`, and `Client` is how a host language
+ * spells "a script standing in for a value" — nothing a client has a version
+ * of, so nothing a document declares.
  */
 export type * from "./declarations.generated.js";
 export * from "./builtins.generated.js";

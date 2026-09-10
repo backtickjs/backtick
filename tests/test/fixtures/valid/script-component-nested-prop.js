@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web-schema/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A component reading two levels deep. The hole is named for the path the
 // component read, so `props.person.firstName` is `$0.person.firstName` — and

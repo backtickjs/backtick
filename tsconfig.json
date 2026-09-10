@@ -12,7 +12,7 @@
     { "path": "packages/prettier-plugin" },
     { "path": "packages/tsc" },
     { "path": "packages/tspatch-plugin" },
-    { "path": "packages/web-schema" },
+    { "path": "packages/web" },
     { "path": "internal/client-script" },
     { "path": "internal/compiler" },
     { "path": "internal/language-plugin" },
