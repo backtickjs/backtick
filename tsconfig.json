@@ -1,22 +1,25 @@
 {
   "extends": "./configs/tsconfig.base.json",
   "files": [],
+  // The solution an editor opens the repo through. Every package builds itself
+  // under turbo, so this list is not what orders a build — it is what makes one
+  // `tsc -b` at the root cover the tree.
   "references": [
-    { "path": "packages/bun-plugin" },
-    { "path": "packages/compiler" },
-    { "path": "packages/core" },
-    { "path": "packages/boundary" },
-    { "path": "tests" },
     { "path": "packages/bundler" },
-    { "path": "packages/language-tools/language-plugin" },
-    { "path": "packages/language-tools/language-server" },
-    { "path": "packages/language-tools/language-service" },
-    { "path": "packages/language-tools/typescript-plugin" },
-    { "path": "packages/language-tools/tsc" },
-    { "path": "packages/language-tools/vscode-extension" },
+    { "path": "packages/bun-plugin" },
+    { "path": "packages/core" },
+    { "path": "packages/html-embed" },
     { "path": "packages/prettier-plugin" },
+    { "path": "packages/tsc" },
     { "path": "packages/tspatch-plugin" },
     { "path": "packages/web-schema" },
-    { "path": "packages/html-embed" }
+    { "path": "internal/client-script" },
+    { "path": "internal/compiler" },
+    { "path": "internal/language-plugin" },
+    { "path": "internal/language-server" },
+    { "path": "internal/language-service" },
+    { "path": "internal/typescript-plugin" },
+    { "path": "apps/vscode-extension" },
+    { "path": "tests" }
   ]
 }

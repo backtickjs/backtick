@@ -3,7 +3,9 @@
   "packageManager": "pnpm@11.5.1",
   "workspaces": [
     "packages/*",
-    "packages/language-tools/*"
+    "internal/*",
+    "apps/*",
+    "apps/backtickjs.com/*"
   ],
   "scripts": {
     "build": "turbo run build",

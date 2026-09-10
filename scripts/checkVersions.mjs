@@ -19,17 +19,13 @@ function manifests(dir) {
   const base = join(root, dir);
   if (!existsSync(base)) return [];
   return readdirSync(base, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && entry.name !== "language-tools")
+    .filter((entry) => entry.isDirectory())
     .map((entry) => join(base, entry.name, "package.json"))
     .filter((file) => existsSync(file))
     .map((file) => ({ file, json: JSON.parse(readFileSync(file, "utf8")) }));
 }
 
-const released = [
-  ...manifests("packages"),
-  ...manifests("packages/language-tools"),
-  ...manifests("internal"),
-];
+const released = [...manifests("packages"), ...manifests("internal")];
 // examples and benchmarks model a real consumer install, so their ranges are
 // checked but their own versions are not part of the release set.
 //
@@ -52,7 +48,11 @@ function consumers(dir) {
   return found;
 }
 
-const consuming = [...consumers("examples"), ...consumers("benchmarks")];
+const consuming = [
+  ...consumers("examples"),
+  ...consumers("benchmarks"),
+  ...consumers("apps"),
+];
 
 const errors = [];
 

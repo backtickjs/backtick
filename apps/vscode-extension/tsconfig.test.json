@@ -1,5 +1,5 @@
 {
-  "extends": "../../../configs/tsconfig.test.json",
+  "extends": "../../configs/tsconfig.test.json",
   "include": [
     "test/**/*.mts",
     "test/**/*.mjs",

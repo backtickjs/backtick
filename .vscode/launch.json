@@ -8,7 +8,7 @@
       "runtimeExecutable": "${execPath}",
       "args": [
         "${workspaceRoot}/tests",
-        "--extensionDevelopmentPath=${workspaceRoot}/packages/language-tools/vscode-extension"
+        "--extensionDevelopmentPath=${workspaceRoot}/apps/vscode-extension"
       ],
       "outFiles": ["${workspaceRoot}/*/*/dist/**/*.js"]
     },
