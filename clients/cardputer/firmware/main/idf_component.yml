@@ -1,7 +1,0 @@
-dependencies:
-  # M5Stack's own driver for this board. Used rather than a panel driver
-  # written here: what the display, the keyboard and the power circuit want is
-  # the vendor's to know, and the part of this that could only be tested on the
-  # device is the part not to invent.
-  m5stack/m5unified: "^0.2.0"
-  idf: ">=5.0"

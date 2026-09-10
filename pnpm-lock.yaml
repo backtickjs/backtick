@@ -253,42 +253,6 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  clients/cardputer/app:
-    devDependencies:
-      '@backtickjs/bundler':
-        specifier: workspace:*
-        version: link:../../../packages/bundler
-      '@backtickjs/cardputer-schema':
-        specifier: workspace:*
-        version: link:../../../packages/cardputer-schema
-      '@backtickjs/core':
-        specifier: workspace:*
-        version: link:../../../packages/core
-      '@backtickjs/tsc':
-        specifier: workspace:*
-        version: link:../../../packages/tsc
-      '@backtickjs/tspatch-plugin':
-        specifier: workspace:*
-        version: link:../../../packages/tspatch-plugin
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      ts-patch:
-        specifier: ^4.0.1
-        version: 4.0.1
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  clients/js:
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
   conformance:
     devDependencies:
       typescript:
@@ -633,25 +597,6 @@ importers:
       '@backtickjs/language':
         specifier: workspace:*
         version: link:../language
-      '@backtickjs/ui-schema':
-        specifier: workspace:*
-        version: link:../ui-schema
-    devDependencies:
-      prettier:
-        specifier: ^3.6.2
-        version: 3.8.4
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-
-  packages/cardputer-schema:
-    dependencies:
-      '@backtickjs/language':
-        specifier: workspace:*
-        version: link:../language
-      '@backtickjs/schema':
-        specifier: workspace:*
-        version: link:../schema
       '@backtickjs/ui-schema':
         specifier: workspace:*
         version: link:../ui-schema

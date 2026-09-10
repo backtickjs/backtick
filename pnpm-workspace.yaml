@@ -9,12 +9,7 @@ packages:
   - "tests"
   - "examples/*"
   - "benchmarks/*"
-  # The reference client, and the Cardputer app so authoring one uses the
-  # repo's toolchain. `clients/cpp` is not a member: native code keeps its own
-  # toolchain, which is the whole reason it is a directory and not a package.
-  - "clients/js"
   - "conformance"
-  - "clients/cardputer/app"
   - "benchmarks/js-framework-benchmark/frameworks/keyed/backtick"
 
 linkWorkspacePackages: true
