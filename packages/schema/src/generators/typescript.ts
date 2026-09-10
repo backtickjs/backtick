@@ -16,6 +16,7 @@ import { IsObject } from "../nodes/Object.js";
 import { IsOptional } from "../nodes/Optional.js";
 import { IsRecord } from "../nodes/Record.js";
 import { IsRef } from "../nodes/Ref.js";
+import type { TRef } from "../nodes/Ref.js";
 import { IsRest } from "../nodes/Rest.js";
 import { IsString } from "../nodes/String.js";
 import { IsTuple } from "../nodes/Tuple.js";
@@ -91,7 +92,7 @@ export function type(node: TNode): string {
     // key, so what a reader finds is what the schema said.
     const written = node.readOnly === true ? "readonly " : "";
     const absent = node.readOnly === true ? "" : " | undefined";
-    return `{ ${written}[key: string]: ${type(node.values)}${absent} }`;
+    return `{ ${written}[key: ${type(node.keys)}]: ${type(node.values)}${absent} }`;
   }
   if (IsArray(node)) {
     const items = node.items;
@@ -361,11 +362,50 @@ export function interfaceLines(
   branded = false,
   props = false,
 ): string[] {
-  const held = (of: TInterface): string[] => [
+  // What a brand carries. `never` for the ordinary opaque type: nothing may be
+  // written there, which is the whole claim.
+  //
+  // A parameter no member names is the exception. It has nowhere else to appear,
+  // and a `Bundle<A>` that is also a `Bundle<B>` is carrying nothing — so the
+  // brand carries it. `State<T>` reads and writes one, so its parameter is held
+  // up by what the type says and the brand stays `never`.
+  const carried = (
+    of: TInterface,
+    parameters: readonly TGenericParameter[],
+  ): string => {
+    const named = new Set<string>();
+    const reaches = (node: unknown): void => {
+      if (typeof node !== "object" || node === null) {
+        return;
+      }
+      if (Array.isArray(node)) {
+        node.forEach(reaches);
+        return;
+      }
+      if (IsRef(node as TNode)) {
+        named.add((node as TRef).$ref);
+      }
+      Object.values(node).forEach(reaches);
+    };
+    Object.values(of.properties).forEach(reaches);
+    const phantom = parameters
+      .filter((one) => !named.has(one.name))
+      .map((one) => one.name);
+    if (phantom.length === 0) {
+      return "never";
+    }
+    return phantom.length === 1 ? phantom[0]! : `[${phantom.join(", ")}]`;
+  };
+  const held = (
+    of: TInterface,
+    parameters: readonly TGenericParameter[] = [],
+  ): string[] => [
     // Its own brand and not the one it extends: two interfaces carrying only a
     // base's are the base and each other, so what a client answered with would
     // be accepted wherever any of them is wanted.
-    ...(branded ? [`  readonly [${mark(name)}]: never;`] : []),
+    ...(branded
+      ? [`  readonly [${mark(name)}]: ${carried(of, parameters)};`]
+      : []),
     // An interface an element accepts holds props, and a prop is what a script may
     // stand in: the wrapping is JSX's rule and is applied where the members are
     // written, so a name is declared once whichever reads it.
@@ -409,7 +449,7 @@ export function interfaceLines(
       `export interface ${name}<${parameters(node.parameters)}>${heritage(
         node.expression,
       )} {`,
-      ...held(node.expression),
+      ...held(node.expression, node.parameters),
       "}",
     ];
   }

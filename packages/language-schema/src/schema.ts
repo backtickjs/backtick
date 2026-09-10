@@ -100,7 +100,7 @@ export const schema: Schema = {
         Type.Number(),
         Type.Boolean(),
         Type.String(),
-        Type.Record(Type.Ref("ClientValue"), { readOnly: true }),
+        Type.Record(Type.String(), Type.Ref("ClientValue"), { readOnly: true }),
         Type.Array(Type.Ref("ClientValue"), { readOnly: true }),
         Type.Ref("BacktickElement"),
         Type.Ref("ClientFunction"),
@@ -121,10 +121,315 @@ export const schema: Schema = {
       },
     ),
 
+    Bundle: Type.Generic(
+      [Type.GenericParameter("T", Type.Ref("ClientUnknown"))],
+      Type.Interface([Type.Ref("ClientHandle")], {
+        functions: Type.Record(
+          Type.Ref("BundleFunctionLabel"),
+          Type.Ref("BundleArrowFunction"),
+        ),
+        root: Type.Ref("BundleExpression"),
+      }),
+      {
+        description:
+          "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `<backtick>`, which draws it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
+      },
+    ),
+
+    BundleFunctionLabel: Type.String(),
+    BundleElement: Type.Tuple({
+      kind: Type.Literal("el"),
+      id: Type.String(),
+      props: Type.Record(Type.String(), Type.Ref("BundleExpression")),
+      children: Type.Ref("BundleExpression"),
+    }),
+    BundleArrayLiteral: Type.Tuple({
+      kind: Type.Literal("arr"),
+      members: Type.Array(Type.Ref("BundleArrayElement")),
+    }),
+    BundleSpreadElement: Type.Tuple({
+      kind: Type.Literal("..."),
+      expression: Type.Ref("BundleExpression"),
+    }),
+    BundleUndefined: Type.Tuple({
+      kind: Type.Literal("undef"),
+    }),
+    BundleBuiltin: Type.Tuple({
+      kind: Type.Literal("bltn"),
+      name: Type.String(),
+    }),
+    BundleArrayElement: Type.Union([
+      Type.Ref("BundleExpression"),
+      Type.Ref("BundleSpreadElement"),
+    ]),
+    BundleObjectLiteral: Type.Tuple({
+      kind: Type.Literal("obj"),
+      entries: Type.Array(Type.Ref("BundleObjectEntry")),
+    }),
+    BundlePropertyAssignment: Type.Tuple({
+      kind: Type.Literal(":"),
+      name: Type.String(),
+      value: Type.Ref("BundleExpression"),
+    }),
+    BundleObjectEntry: Type.Union([
+      Type.Ref("BundlePropertyAssignment"),
+      Type.Ref("BundleSpreadElement"),
+    ]),
+    BundleExpression: Type.Union([
+      Type.Null(),
+      Type.Boolean(),
+      Type.Number(),
+      Type.String(),
+      Type.Record(Type.String(), Type.Ref("BundleExpression"), {
+        readOnly: true,
+      }),
+      Type.Ref("BundleUndefined"),
+      Type.Ref("BundleArrayLiteral"),
+      Type.Ref("BundleIdentifier"),
+      Type.Ref("BundleFunctionReference"),
+      Type.Ref("BundleElement"),
+      Type.Ref("BundleCall"),
+      Type.Ref("BundleOptionalCall"),
+      Type.Ref("BundlePropertyAccess"),
+      Type.Ref("BundleOptionalPropertyAccess"),
+      Type.Ref("BundleElementAccess"),
+      Type.Ref("BundleAssignment"),
+      Type.Ref("BundleLogicalAnd"),
+      Type.Ref("BundleLogicalOr"),
+      Type.Ref("BundleNullishCoalescing"),
+      Type.Ref("BundleAddition"),
+      Type.Ref("BundleSubtraction"),
+      Type.Ref("BundleMultiplication"),
+      Type.Ref("BundleDivision"),
+      Type.Ref("BundleRemainder"),
+      Type.Ref("BundleStrictEquality"),
+      Type.Ref("BundleStrictInequality"),
+      Type.Ref("BundleLessThan"),
+      Type.Ref("BundleLessThanOrEqual"),
+      Type.Ref("BundleGreaterThan"),
+      Type.Ref("BundleGreaterThanOrEqual"),
+      Type.Ref("BundleLogicalNot"),
+      Type.Ref("BundleNegation"),
+      Type.Ref("BundleConditional"),
+      Type.Ref("BundleArrowFunction"),
+      Type.Ref("BundleObjectLiteral"),
+      Type.Ref("BundleBuiltin"),
+    ]),
+    BundleStatement: Type.Union([
+      Type.Ref("BundleExpression"),
+      Type.Ref("BundleBlock"),
+      Type.Ref("BundleConstDeclaration"),
+      Type.Ref("BundleLetDeclaration"),
+      Type.Ref("BundleIf"),
+      Type.Ref("BundleWhile"),
+      Type.Ref("BundleFor"),
+      Type.Ref("BundleBreak"),
+      Type.Ref("BundleContinue"),
+      Type.Ref("BundleReturn"),
+      Type.Ref("BundleThrow"),
+      Type.Ref("BundleTry"),
+    ]),
+    BundleBody: Type.Union([
+      Type.Ref("BundleExpression"),
+      Type.Ref("BundleBlock"),
+    ]),
+    BundleIdentifier: Type.Tuple({
+      kind: Type.Literal("id"),
+      text: Type.String(),
+    }),
+    BundleFunctionReference: Type.Tuple({
+      kind: Type.Literal("fn"),
+      label: Type.Ref("BundleFunctionLabel"),
+    }),
+    BundleCall: Type.Tuple({
+      kind: Type.Literal("()"),
+      expression: Type.Ref("BundleExpression"),
+      args: Type.Array(Type.Ref("BundleArrayElement")),
+    }),
+    BundleOptionalCall: Type.Tuple({
+      kind: Type.Literal("?.()"),
+      expression: Type.Ref("BundleExpression"),
+      args: Type.Array(Type.Ref("BundleArrayElement")),
+    }),
+    BundlePropertyAccess: Type.Tuple({
+      kind: Type.Literal("."),
+      expression: Type.Ref("BundleExpression"),
+      name: Type.String(),
+    }),
+    BundleOptionalPropertyAccess: Type.Tuple({
+      kind: Type.Literal("?."),
+      expression: Type.Ref("BundleExpression"),
+      name: Type.String(),
+    }),
+    BundleElementAccess: Type.Tuple({
+      kind: Type.Literal("[]"),
+      expression: Type.Ref("BundleExpression"),
+      argumentExpression: Type.Ref("BundleExpression"),
+    }),
+    BundleAssignment: Type.Tuple({
+      kind: Type.Literal("="),
+      target: Type.Ref("BundleIdentifier"),
+      value: Type.Ref("BundleExpression"),
+    }),
+    BundleLogicalAnd: Type.Tuple({
+      kind: Type.Literal("&&"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleLogicalOr: Type.Tuple({
+      kind: Type.Literal("||"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleNullishCoalescing: Type.Tuple({
+      kind: Type.Literal("??"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleAddition: Type.Tuple({
+      kind: Type.Literal("+"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleSubtraction: Type.Tuple({
+      kind: Type.Literal("-"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleMultiplication: Type.Tuple({
+      kind: Type.Literal("*"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleDivision: Type.Tuple({
+      kind: Type.Literal("/"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleRemainder: Type.Tuple({
+      kind: Type.Literal("%"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleStrictEquality: Type.Tuple({
+      kind: Type.Literal("==="),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleStrictInequality: Type.Tuple({
+      kind: Type.Literal("!=="),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleLessThan: Type.Tuple({
+      kind: Type.Literal("<"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleLessThanOrEqual: Type.Tuple({
+      kind: Type.Literal("<="),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleGreaterThan: Type.Tuple({
+      kind: Type.Literal(">"),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleGreaterThanOrEqual: Type.Tuple({
+      kind: Type.Literal(">="),
+      left: Type.Ref("BundleExpression"),
+      right: Type.Ref("BundleExpression"),
+    }),
+    BundleLogicalNot: Type.Tuple({
+      kind: Type.Literal("!"),
+      operand: Type.Ref("BundleExpression"),
+    }),
+    BundleNegation: Type.Tuple({
+      kind: Type.Literal("-x"),
+      operand: Type.Ref("BundleExpression"),
+    }),
+    BundleConditional: Type.Tuple({
+      kind: Type.Literal("?:"),
+      condition: Type.Ref("BundleExpression"),
+      whenTrue: Type.Ref("BundleExpression"),
+      whenFalse: Type.Ref("BundleExpression"),
+    }),
+    BundleArrowFunction: Type.Tuple({
+      kind: Type.Literal("=>"),
+      parameters: Type.Array(Type.Ref("BundleParameter")),
+      body: Type.Ref("BundleBody"),
+    }),
+    BundleBlock: Type.Tuple({
+      kind: Type.Literal("{}"),
+      statements: Type.Array(Type.Ref("BundleStatement")),
+    }),
+    BundleConstDeclaration: Type.Tuple({
+      kind: Type.Literal("const"),
+      name: Type.String(),
+      initializer: Type.Ref("BundleExpression"),
+    }),
+    BundleLetDeclaration: Type.Tuple({
+      kind: Type.Literal("let"),
+      name: Type.String(),
+      initializer: Type.Ref("BundleExpression"),
+    }),
+    BundleIf: Type.Tuple({
+      kind: Type.Literal("if"),
+      expression: Type.Ref("BundleExpression"),
+      thenStatement: Type.Ref("BundleStatement"),
+      elseStatement: Type.Union([Type.Ref("BundleStatement"), Type.Null()]),
+    }),
+    BundleWhile: Type.Tuple({
+      kind: Type.Literal("while"),
+      expression: Type.Ref("BundleExpression"),
+      statement: Type.Ref("BundleStatement"),
+    }),
+    BundleFor: Type.Tuple({
+      kind: Type.Literal("for"),
+      initializer: Type.Union([
+        Type.Ref("BundleConstDeclaration"),
+        Type.Ref("BundleLetDeclaration"),
+        Type.Ref("BundleExpression"),
+        Type.Null(),
+      ]),
+      condition: Type.Union([Type.Ref("BundleExpression"), Type.Null()]),
+      incrementor: Type.Union([Type.Ref("BundleExpression"), Type.Null()]),
+      statement: Type.Ref("BundleStatement"),
+    }),
+    BundleBreak: Type.Tuple({
+      kind: Type.Literal("break"),
+    }),
+    BundleContinue: Type.Tuple({
+      kind: Type.Literal("continue"),
+    }),
+    BundleReturn: Type.Tuple({
+      kind: Type.Literal("return"),
+      expression: Type.Ref("BundleExpression"),
+    }),
+    BundleThrow: Type.Tuple({
+      kind: Type.Literal("throw"),
+      expression: Type.Ref("BundleExpression"),
+    }),
+    BundleTry: Type.Tuple({
+      kind: Type.Literal("try"),
+      tryBlock: Type.Ref("BundleBlock"),
+      catchClause: Type.Ref("BundleCatchClause"),
+    }),
+    BundleCatchClause: Type.Tuple({
+      kind: Type.Literal("catch"),
+      variableDeclaration: Type.Union([Type.String(), Type.Null()]),
+      block: Type.Ref("BundleBlock"),
+    }),
+    BundleParameter: Type.Tuple({
+      kind: Type.Literal("param"),
+      name: Type.String(),
+    }),
+
     RequestInit: Type.Object(
       {
         method: Type.Optional(Type.String()),
-        headers: Type.Optional(Type.Record(Type.String())),
+        headers: Type.Optional(Type.Record(Type.String(), Type.String())),
         body: Type.Optional(Type.Union([Type.String(), Type.Ref("Bytes")])),
       },
       {
@@ -1412,7 +1717,7 @@ export const schema: Schema = {
       {
         description:
           "Creates an array from an array-like object.\n\n" +
-          "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` \u2014 which this language has no value for.",
+          "The mapper is required, where the standard library makes it optional: without one, a source that names only a length answers with holes, and a hole reads as `undefined` — which this language has no value for.",
       },
     ),
     "Array.of": Type.Generic(

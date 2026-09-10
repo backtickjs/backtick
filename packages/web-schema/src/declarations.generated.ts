@@ -10,6 +10,59 @@ import type {
 export type {
   ArrayLike,
   BacktickProps,
+  Bundle,
+  BundleAddition,
+  BundleArrayElement,
+  BundleArrayLiteral,
+  BundleArrowFunction,
+  BundleAssignment,
+  BundleBlock,
+  BundleBody,
+  BundleBreak,
+  BundleBuiltin,
+  BundleCall,
+  BundleCatchClause,
+  BundleConditional,
+  BundleConstDeclaration,
+  BundleContinue,
+  BundleDivision,
+  BundleElement,
+  BundleElementAccess,
+  BundleExpression,
+  BundleFor,
+  BundleFunctionLabel,
+  BundleFunctionReference,
+  BundleGreaterThan,
+  BundleGreaterThanOrEqual,
+  BundleIdentifier,
+  BundleIf,
+  BundleLessThan,
+  BundleLessThanOrEqual,
+  BundleLetDeclaration,
+  BundleLogicalAnd,
+  BundleLogicalNot,
+  BundleLogicalOr,
+  BundleMultiplication,
+  BundleNegation,
+  BundleNullishCoalescing,
+  BundleObjectEntry,
+  BundleObjectLiteral,
+  BundleOptionalCall,
+  BundleOptionalPropertyAccess,
+  BundleParameter,
+  BundlePropertyAccess,
+  BundlePropertyAssignment,
+  BundleRemainder,
+  BundleReturn,
+  BundleSpreadElement,
+  BundleStatement,
+  BundleStrictEquality,
+  BundleStrictInequality,
+  BundleSubtraction,
+  BundleThrow,
+  BundleTry,
+  BundleUndefined,
+  BundleWhile,
   Bytes,
   ClientFunction,
   ClientUnknown,
@@ -144,7 +197,7 @@ declare const UIEventBrand: unique symbol;
  * An event that came from the interface rather than from the page's own code.
  */
 export interface UIEvent<T extends ClientValue> extends Event<T> {
-  readonly [UIEventBrand]: never;
+  readonly [UIEventBrand]: T;
   readonly detail: number;
   readonly which: number;
 }
@@ -154,7 +207,7 @@ declare const MouseEventBrand: unique symbol;
  * A pointing device did something, and where it was when it did.
  */
 export interface MouseEvent<T extends ClientValue> extends UIEvent<T> {
-  readonly [MouseEventBrand]: never;
+  readonly [MouseEventBrand]: T;
   readonly altKey: boolean;
   readonly button: number;
   readonly buttons: number;
@@ -183,7 +236,7 @@ declare const PointerEventBrand: unique symbol;
  * A mouse, a pen or a finger — what the DOM hands a click, whichever it was.
  */
 export interface PointerEvent<T extends ClientValue> extends MouseEvent<T> {
-  readonly [PointerEventBrand]: never;
+  readonly [PointerEventBrand]: T;
   readonly altitudeAngle: number;
   readonly azimuthAngle: number;
   readonly height: number;
@@ -204,7 +257,7 @@ declare const DragEventBrand: unique symbol;
  * Something is being dragged.
  */
 export interface DragEvent<T extends ClientValue> extends MouseEvent<T> {
-  readonly [DragEventBrand]: never;
+  readonly [DragEventBrand]: T;
 }
 
 declare const WheelEventBrand: unique symbol;
@@ -212,7 +265,7 @@ declare const WheelEventBrand: unique symbol;
  * A wheel turned, and by how much in which units.
  */
 export interface WheelEvent<T extends ClientValue> extends MouseEvent<T> {
-  readonly [WheelEventBrand]: never;
+  readonly [WheelEventBrand]: T;
   readonly deltaMode: number;
   readonly deltaX: number;
   readonly deltaY: number;
@@ -224,7 +277,7 @@ declare const KeyboardEventBrand: unique symbol;
  * A key went down or came up, and which key it was.
  */
 export interface KeyboardEvent<T extends ClientValue> extends UIEvent<T> {
-  readonly [KeyboardEventBrand]: never;
+  readonly [KeyboardEventBrand]: T;
   readonly altKey: boolean;
   readonly charCode: number;
   readonly code: string;
@@ -243,7 +296,7 @@ declare const InputEventBrand: unique symbol;
  * The value of an editable element changed, and how.
  */
 export interface InputEvent<T extends ClientValue> extends UIEvent<T> {
-  readonly [InputEventBrand]: never;
+  readonly [InputEventBrand]: T;
   readonly data: string | null;
   readonly inputType: string;
   readonly isComposing: boolean;
@@ -254,7 +307,7 @@ declare const CompositionEventBrand: unique symbol;
  * Text is being composed — an input method is part-way through a character.
  */
 export interface CompositionEvent<T extends ClientValue> extends UIEvent<T> {
-  readonly [CompositionEventBrand]: never;
+  readonly [CompositionEventBrand]: T;
   readonly data: string;
 }
 
@@ -263,7 +316,7 @@ declare const FocusEventBrand: unique symbol;
  * Focus arrived or left.
  */
 export interface FocusEvent<T extends ClientValue> extends UIEvent<T> {
-  readonly [FocusEventBrand]: never;
+  readonly [FocusEventBrand]: T;
   readonly relatedTarget: EventTarget | null;
 }
 
@@ -272,7 +325,7 @@ declare const TouchEventBrand: unique symbol;
  * Fingers on a screen.
  */
 export interface TouchEvent<T extends ClientValue> extends UIEvent<T> {
-  readonly [TouchEventBrand]: never;
+  readonly [TouchEventBrand]: T;
   readonly altKey: boolean;
   readonly ctrlKey: boolean;
   readonly metaKey: boolean;
@@ -284,7 +337,7 @@ declare const ClipboardEventBrand: unique symbol;
  * A copy, cut or paste.
  */
 export interface ClipboardEvent<T extends ClientValue> extends Event<T> {
-  readonly [ClipboardEventBrand]: never;
+  readonly [ClipboardEventBrand]: T;
 }
 
 declare const SubmitEventBrand: unique symbol;
@@ -292,7 +345,7 @@ declare const SubmitEventBrand: unique symbol;
  * A form was submitted.
  */
 export interface SubmitEvent<T extends ClientValue> extends Event<T> {
-  readonly [SubmitEventBrand]: never;
+  readonly [SubmitEventBrand]: T;
 }
 
 declare const ToggleEventBrand: unique symbol;
@@ -300,7 +353,7 @@ declare const ToggleEventBrand: unique symbol;
  * Something that opens and closes did.
  */
 export interface ToggleEvent<T extends ClientValue> extends Event<T> {
-  readonly [ToggleEventBrand]: never;
+  readonly [ToggleEventBrand]: T;
   readonly newState: string;
   readonly oldState: string;
 }
@@ -310,7 +363,7 @@ declare const AnimationEventBrand: unique symbol;
  * A CSS animation reached one of its edges.
  */
 export interface AnimationEvent<T extends ClientValue> extends Event<T> {
-  readonly [AnimationEventBrand]: never;
+  readonly [AnimationEventBrand]: T;
   readonly animationName: string;
   readonly elapsedTime: number;
   readonly pseudoElement: string;
@@ -321,7 +374,7 @@ declare const TransitionEventBrand: unique symbol;
  * A CSS transition reached one of its edges.
  */
 export interface TransitionEvent<T extends ClientValue> extends Event<T> {
-  readonly [TransitionEventBrand]: never;
+  readonly [TransitionEventBrand]: T;
   readonly elapsedTime: number;
   readonly propertyName: string;
   readonly pseudoElement: string;
@@ -332,7 +385,7 @@ declare const ProgressEventBrand: unique symbol;
  * Something loading said how far it had got.
  */
 export interface ProgressEvent<T extends ClientValue> extends Event<T> {
-  readonly [ProgressEventBrand]: never;
+  readonly [ProgressEventBrand]: T;
   readonly lengthComputable: boolean;
   readonly loaded: number;
   readonly total: number;
@@ -359,7 +412,7 @@ declare const ErrorEventBrand: unique symbol;
  * Something failed, and said where.
  */
 export interface ErrorEvent<T extends ClientValue> extends Event<T> {
-  readonly [ErrorEventBrand]: never;
+  readonly [ErrorEventBrand]: T;
   readonly colno: number;
   readonly filename: string;
   readonly lineno: number;

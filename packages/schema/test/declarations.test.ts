@@ -353,3 +353,57 @@ describe("a tuple", () => {
     );
   });
 });
+
+// An opaque type with parameters and nothing to read: the parameters have
+// nowhere to appear but the brand, which is what `Bundle<T>` is.
+describe("a brand", () => {
+  const written = (types: Schema["types"]): string =>
+    declarations({ ...core, types: { ...core.types, ...types } });
+
+  it("carries the parameters of an opaque type that has no members", () => {
+    assert.match(
+      written({
+        Held: Type.Generic(
+          [Type.GenericParameter("T")],
+          Type.Interface([Type.Ref("ClientHandle")], {}),
+        ),
+      }),
+      /export interface Held<T> extends ClientHandle \{\n {2}readonly \[HeldBrand\]: T;\n\}/,
+    );
+  });
+
+  it("carries several as a run of them", () => {
+    assert.match(
+      written({
+        Pair: Type.Generic(
+          [Type.GenericParameter("T"), Type.GenericParameter("U")],
+          Type.Interface([Type.Ref("ClientHandle")], {}),
+        ),
+      }),
+      /readonly \[PairBrand\]: \[T, U\];/,
+    );
+  });
+
+  it("stays `never` where a member already names the parameter", () => {
+    // `State<T>` reads and writes one, so the parameter is carried by what the
+    // type says rather than by what holds two of them apart.
+    assert.match(
+      written({
+        Cellish: Type.Generic(
+          [Type.GenericParameter("T")],
+          Type.Interface([Type.Ref("ClientHandle")], {
+            read: Type.Function([], Type.Ref("T")),
+          }),
+        ),
+      }),
+      /readonly \[CellishBrand\]: never;/,
+    );
+  });
+
+  it("stays `never` where there are no parameters", () => {
+    assert.match(
+      written({ Opaque: Type.Interface([Type.Ref("ClientHandle")], {}) }),
+      /readonly \[OpaqueBrand\]: never;/,
+    );
+  });
+});

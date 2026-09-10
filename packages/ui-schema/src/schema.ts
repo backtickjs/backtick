@@ -39,7 +39,7 @@ export const schema: Schema = {
 
     BacktickProps: Type.Interface([], {
       props: Type.Optional(
-        Type.Record(Type.Ref("ClientValue"), {
+        Type.Record(Type.String(), Type.Ref("ClientValue"), {
           description:
             "What the bundle is handed, under the name `props`.\n\n" +
             "A bundle written elsewhere reads it the way any script reads a name it did not write. A live value stays live: reading a splice is calling it, so a drawing handed a cell redraws when the cell changes rather than being built again.\n\n" +

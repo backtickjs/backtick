@@ -8,7 +8,7 @@ import type {
   BundleElement,
   BundleExpression,
   BundleIdentifier,
-  FunctionLabel,
+  BundleFunctionLabel,
 } from "./Bundle.js";
 import type { ExperimentalFeatures } from "../bundler.js";
 import { lowerScriptBody, parameterNodes } from "./lowerScriptBody.js";
@@ -223,7 +223,7 @@ export function buildBundle(
   // where it was written. Only the second is the same across responses — a
   // table position follows the order this composition reached things — so it is
   // what a client holding an entry from an earlier response can recognize.
-  const fnLabel = (target: ScriptEntry): FunctionLabel =>
+  const fnLabel = (target: ScriptEntry): BundleFunctionLabel =>
     features.stableFunctionLabels === true
       ? locKey(target.fileHash, target.loc)
       : String(scripts.get(target));
@@ -419,7 +419,7 @@ export function buildBundle(
 
   // Nothing encloses the root, so nothing it holds can capture.
   const root = render(ast);
-  const functions: Record<FunctionLabel, BundleArrowFunction> = {};
+  const functions: Record<BundleFunctionLabel, BundleArrowFunction> = {};
   // In table order, which is the order rendering first reached each script.
   for (const script of scripts.keys()) {
     const body = bodies.get(script);

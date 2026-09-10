@@ -8,7 +8,7 @@ import type {
   BundleArrowFunction,
   BundleSpreadElement,
   BundleStatement,
-  FunctionLabel,
+  BundleFunctionLabel,
 } from "@backtickjs/bundler";
 import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
@@ -97,7 +97,7 @@ function lookup(scope: Scope | null, name: string): Scope | null {
 // scope.
 function compileFunction(
   instance: Instance,
-  label: FunctionLabel,
+  label: BundleFunctionLabel,
 ): (...args: ClientValue[]) => ClientUnknown {
   const existing = instance.functions.get(label);
   if (existing !== undefined) {

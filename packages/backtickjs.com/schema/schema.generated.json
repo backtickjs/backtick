@@ -195,6 +195,9 @@
         {
           "readOnly": true,
           "type": "record",
+          "keys": {
+            "type": "string"
+          },
           "values": {
             "type": "ref",
             "$ref": "ClientValue"
@@ -234,6 +237,1590 @@
       "properties": {},
       "required": []
     },
+    "Bundle": {
+      "description": "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `<backtick>`, which draws it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
+      "type": "generic",
+      "parameters": [
+        {
+          "type": "genericParameter",
+          "name": "T",
+          "extends": {
+            "type": "ref",
+            "$ref": "ClientUnknown"
+          },
+          "equals": {
+            "type": "ref",
+            "$ref": "ClientUnknown"
+          }
+        }
+      ],
+      "expression": {
+        "type": "interface",
+        "extends": [
+          {
+            "type": "ref",
+            "$ref": "ClientHandle"
+          }
+        ],
+        "properties": {
+          "functions": {
+            "type": "record",
+            "keys": {
+              "type": "ref",
+              "$ref": "BundleFunctionLabel"
+            },
+            "values": {
+              "type": "ref",
+              "$ref": "BundleArrowFunction"
+            }
+          },
+          "root": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        "required": ["functions", "root"]
+      }
+    },
+    "BundleFunctionLabel": {
+      "type": "string"
+    },
+    "BundleElement": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "el"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "id",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "props",
+          "holds": {
+            "type": "record",
+            "keys": {
+              "type": "string"
+            },
+            "values": {
+              "type": "ref",
+              "$ref": "BundleExpression"
+            }
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "children",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleArrayLiteral": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "arr"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "members",
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "BundleArrayElement"
+            }
+          }
+        }
+      ]
+    },
+    "BundleSpreadElement": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "..."
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleUndefined": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "undef"
+          }
+        }
+      ]
+    },
+    "BundleBuiltin": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "bltn"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "BundleArrayElement": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "ref",
+          "$ref": "BundleExpression"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleSpreadElement"
+        }
+      ]
+    },
+    "BundleObjectLiteral": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "obj"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "entries",
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "BundleObjectEntry"
+            }
+          }
+        }
+      ]
+    },
+    "BundlePropertyAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": ":"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleObjectEntry": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "ref",
+          "$ref": "BundlePropertyAssignment"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleSpreadElement"
+        }
+      ]
+    },
+    "BundleExpression": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "readOnly": true,
+          "type": "record",
+          "keys": {
+            "type": "string"
+          },
+          "values": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleUndefined"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleArrayLiteral"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleIdentifier"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleFunctionReference"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleElement"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleCall"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleOptionalCall"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundlePropertyAccess"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleOptionalPropertyAccess"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleElementAccess"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleAssignment"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleLogicalAnd"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleLogicalOr"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleNullishCoalescing"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleAddition"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleSubtraction"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleMultiplication"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleDivision"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleRemainder"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleStrictEquality"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleStrictInequality"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleLessThan"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleLessThanOrEqual"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleGreaterThan"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleGreaterThanOrEqual"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleLogicalNot"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleNegation"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleConditional"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleArrowFunction"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleObjectLiteral"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleBuiltin"
+        }
+      ]
+    },
+    "BundleStatement": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "ref",
+          "$ref": "BundleExpression"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleBlock"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleConstDeclaration"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleLetDeclaration"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleIf"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleWhile"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleFor"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleBreak"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleContinue"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleReturn"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleThrow"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleTry"
+        }
+      ]
+    },
+    "BundleBody": {
+      "type": "union",
+      "anyOf": [
+        {
+          "type": "ref",
+          "$ref": "BundleExpression"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleBlock"
+        }
+      ]
+    },
+    "BundleIdentifier": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "id"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "text",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "BundleFunctionReference": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "fn"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "label",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleFunctionLabel"
+          }
+        }
+      ]
+    },
+    "BundleCall": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "()"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "args",
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "BundleArrayElement"
+            }
+          }
+        }
+      ]
+    },
+    "BundleOptionalCall": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "?.()"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "args",
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "BundleArrayElement"
+            }
+          }
+        }
+      ]
+    },
+    "BundlePropertyAccess": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "."
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "BundleOptionalPropertyAccess": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "?."
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "BundleElementAccess": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "[]"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "argumentExpression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleAssignment": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "target",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleIdentifier"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "value",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleLogicalAnd": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "&&"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleLogicalOr": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "||"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleNullishCoalescing": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "??"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleAddition": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "+"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleSubtraction": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "-"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleMultiplication": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "*"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleDivision": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "/"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleRemainder": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "%"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleStrictEquality": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "==="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleStrictInequality": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "!=="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleLessThan": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "<"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleLessThanOrEqual": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "<="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleGreaterThan": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": ">"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleGreaterThanOrEqual": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": ">="
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "left",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "right",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleLogicalNot": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "!"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "operand",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleNegation": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "-x"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "operand",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleConditional": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "?:"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "condition",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "whenTrue",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "whenFalse",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleArrowFunction": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "=>"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "parameters",
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "BundleParameter"
+            }
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "body",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleBody"
+          }
+        }
+      ]
+    },
+    "BundleBlock": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "{}"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "statements",
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "ref",
+              "$ref": "BundleStatement"
+            }
+          }
+        }
+      ]
+    },
+    "BundleConstDeclaration": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "const"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "initializer",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleLetDeclaration": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "let"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "initializer",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleIf": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "if"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "thenStatement",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleStatement"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "elseStatement",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "ref",
+                "$ref": "BundleStatement"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "BundleWhile": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "while"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "statement",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleStatement"
+          }
+        }
+      ]
+    },
+    "BundleFor": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "for"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "initializer",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "ref",
+                "$ref": "BundleConstDeclaration"
+              },
+              {
+                "type": "ref",
+                "$ref": "BundleLetDeclaration"
+              },
+              {
+                "type": "ref",
+                "$ref": "BundleExpression"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "condition",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "ref",
+                "$ref": "BundleExpression"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "incrementor",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "ref",
+                "$ref": "BundleExpression"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "statement",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleStatement"
+          }
+        }
+      ]
+    },
+    "BundleBreak": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "break"
+          }
+        }
+      ]
+    },
+    "BundleContinue": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "continue"
+          }
+        }
+      ]
+    },
+    "BundleReturn": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "return"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleThrow": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "throw"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "expression",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
+    "BundleTry": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "try"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "tryBlock",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleBlock"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "catchClause",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleCatchClause"
+          }
+        }
+      ]
+    },
+    "BundleCatchClause": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "catch"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "variableDeclaration",
+          "holds": {
+            "type": "union",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "block",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleBlock"
+          }
+        }
+      ]
+    },
+    "BundleParameter": {
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "param"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "name",
+          "holds": {
+            "type": "string"
+          }
+        }
+      ]
+    },
     "RequestInit": {
       "description": "The web's `RequestInit`, less what a script has no way to hold.",
       "type": "object",
@@ -243,6 +1830,9 @@
         },
         "headers": {
           "type": "record",
+          "keys": {
+            "type": "string"
+          },
           "values": {
             "type": "string"
           }
@@ -506,6 +2096,9 @@
         "props": {
           "description": "What the bundle is handed, under the name `props`.\n\nA bundle written elsewhere reads it the way any script reads a name it did not write. A live value stays live: reading a splice is calling it, so a drawing handed a cell redraws when the cell changes rather than being built again.\n\nUnchecked here where `<Backtick />` checks it against what the bundle takes, for the reason `<For />` exists: a tag has nowhere to bind a type parameter.",
           "type": "record",
+          "keys": {
+            "type": "string"
+          },
           "values": {
             "type": "ref",
             "$ref": "ClientValue"

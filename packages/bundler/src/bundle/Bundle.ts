@@ -9,11 +9,11 @@ declare const BundleSignature: unique symbol;
 
 export interface Bundle<T extends ClientUnknown> {
   readonly [BundleSignature]?: T;
-  functions: Record<FunctionLabel, BundleArrowFunction>;
+  functions: Record<BundleFunctionLabel, BundleArrowFunction>;
   root: BundleExpression;
 }
 
-export type FunctionLabel = string;
+export type BundleFunctionLabel = string;
 
 export type BundleElement = [
   kind: "el",
@@ -98,7 +98,7 @@ export type BundleBody = BundleExpression | BundleBlock;
 
 export type BundleIdentifier = [kind: "id", text: string];
 
-export type BundleFunctionReference = [kind: "fn", label: FunctionLabel];
+export type BundleFunctionReference = [kind: "fn", label: BundleFunctionLabel];
 
 export type BundleCall = [
   kind: "()",

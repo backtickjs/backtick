@@ -47,6 +47,6 @@ export type {
   BundleThrow,
   BundleTry,
   BundleWhile,
-  FunctionLabel,
+  BundleFunctionLabel,
 } from "./bundle/Bundle.js";
 export { bundler } from "./bundler.js";
