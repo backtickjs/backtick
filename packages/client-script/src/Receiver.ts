@@ -9,7 +9,6 @@ import type {
   String,
   StringConstructor,
 } from "@backtickjs/language";
-import type { BacktickElement } from "@backtickjs/ui-schema";
 import type { ClientFunction } from "@backtickjs/language";
 import type { ClientValue } from "@backtickjs/language";
 
@@ -57,7 +56,6 @@ export type ClientGlobal =
 
 // What a member-access receiver reads as:
 //   string | number | boolean | E[] -> Autoboxed<T>, the client API
-//   BacktickElement                 -> {}: opaque
 //   plain object                    -> ReadMembers<T>
 //   anything else                   -> unchanged
 export type Receiver<T extends ClientValue | ClientGlobal> =
@@ -73,10 +71,8 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
             ? StringConstructor
             : T extends string | number | boolean | ClientValue[]
               ? Autoboxed<T>
-              : T extends BacktickElement
-                ? {}
-                : T extends ClientFunction
-                  ? T
-                  : T extends object
-                    ? ReadMembers<T>
-                    : T;
+              : T extends ClientFunction
+                ? T
+                : T extends object
+                  ? ReadMembers<T>
+                  : T;

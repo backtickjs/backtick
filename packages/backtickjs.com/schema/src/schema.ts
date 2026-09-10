@@ -99,9 +99,7 @@ export const schema: Schema = {
             [
               Type.FunctionParameter(
                 "bundle",
-                Type.Apply(Type.Ref("Bundle"), [
-                  Type.Ref("BacktickElement"),
-                ]),
+                Type.Apply(Type.Ref("Bundle"), [Type.Ref("BacktickElement")]),
               ),
             ],
             Type.Void(),
