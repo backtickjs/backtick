@@ -524,6 +524,14 @@
       "keyed": true,
       "dir": "95902e4f",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "55d0be15",
+      "label": "untracked component calls",
+      "date": "2026-09-11",
+      "keyed": true,
+      "dir": "55d0be15",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
