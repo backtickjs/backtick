@@ -1,13 +1,13 @@
 {
   // Editor-only project, never built: gives tsserver the same options the
-  // typecheck suite's in-memory program uses, so fixtures opened in the
-  // extension development host resolve JSX through @backtickjs/core.
+  // typecheck suite passes `backtick-tsc`, so fixtures opened in the extension
+  // development host resolve JSX through @backtickjs/web, as the suite does.
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/core",
+    "jsxImportSource": "@backtickjs/web",
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
