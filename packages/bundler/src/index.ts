@@ -27,6 +27,7 @@ export type {
   BundleConstDeclaration,
   BundleLetDeclaration,
   BundleElement,
+  BundleComponentCall,
   BundleArrayLiteral,
   BundleFor,
   BundleExpression,

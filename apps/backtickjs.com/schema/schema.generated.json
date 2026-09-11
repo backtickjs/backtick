@@ -299,6 +299,50 @@
         }
       ]
     },
+    "BundleComponentCall": {
+      "description": "A call of a component a script holds: the function called with one record of its props, each member evaluated when it is read, and `children` among them where the tag holds any. What a component's props are, for a function the bundler never saw.",
+      "type": "tuple",
+      "items": [
+        {
+          "type": "tupleElement",
+          "name": "kind",
+          "holds": {
+            "type": "string",
+            "const": "comp"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "callee",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "props",
+          "holds": {
+            "type": "record",
+            "keys": {
+              "type": "string"
+            },
+            "values": {
+              "type": "ref",
+              "$ref": "BundleExpression"
+            }
+          }
+        },
+        {
+          "type": "tupleElement",
+          "name": "children",
+          "holds": {
+            "type": "ref",
+            "$ref": "BundleExpression"
+          }
+        }
+      ]
+    },
     "BundleArrayLiteral": {
       "type": "tuple",
       "items": [
@@ -500,6 +544,10 @@
         {
           "type": "ref",
           "$ref": "BundleElement"
+        },
+        {
+          "type": "ref",
+          "$ref": "BundleComponentCall"
         },
         {
           "type": "ref",

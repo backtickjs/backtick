@@ -23,6 +23,7 @@ export type {
   BundleBuiltin,
   BundleCall,
   BundleCatchClause,
+  BundleComponentCall,
   BundleConditional,
   BundleConstDeclaration,
   BundleContinue,

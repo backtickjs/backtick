@@ -313,6 +313,9 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
           }
           return ["()", renderSplice(node.type.key), [passed]];
         }
+        if (node.type.kind === "id") {
+          return ["comp", e(node.type), props, children];
+        }
         return ["el", node.type.text, props, children];
       }
       case "splice":

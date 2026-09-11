@@ -283,7 +283,10 @@ export interface ClientScriptSplice {
 export interface ClientScriptJsxElement {
   readonly kind: "jsx";
   readonly loc: SourceLocation;
-  readonly type: ClientScriptStringLiteral | ClientScriptSplice;
+  readonly type:
+    | ClientScriptStringLiteral
+    | ClientScriptSplice
+    | ClientScriptIdentifier;
   readonly attributes: readonly ClientScriptJsxAttribute[];
   readonly children: readonly ClientScriptExpression[];
 }

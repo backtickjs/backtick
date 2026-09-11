@@ -125,6 +125,18 @@ export const schema: Schema = {
       props: Type.Record(Type.String(), Type.Ref("BundleExpression")),
       children: Type.Ref("BundleExpression"),
     }),
+    BundleComponentCall: Type.Tuple(
+      {
+        kind: Type.Literal("comp"),
+        callee: Type.Ref("BundleExpression"),
+        props: Type.Record(Type.String(), Type.Ref("BundleExpression")),
+        children: Type.Ref("BundleExpression"),
+      },
+      {
+        description:
+          "A call of a component a script holds: the function called with one record of its props, each member evaluated when it is read, and `children` among them where the tag holds any. What a component's props are, for a function the bundler never saw.",
+      },
+    ),
     BundleArrayLiteral: Type.Tuple({
       kind: Type.Literal("arr"),
       members: Type.Array(Type.Ref("BundleArrayElement")),
@@ -170,6 +182,7 @@ export const schema: Schema = {
       Type.Ref("BundleIdentifier"),
       Type.Ref("BundleFunctionReference"),
       Type.Ref("BundleElement"),
+      Type.Ref("BundleComponentCall"),
       Type.Ref("BundleCall"),
       Type.Ref("BundleOptionalCall"),
       Type.Ref("BundlePropertyAccess"),

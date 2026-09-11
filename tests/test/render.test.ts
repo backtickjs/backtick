@@ -181,3 +181,93 @@ describe("a bundle a script runs with vm.eval", () => {
     );
   });
 });
+
+describe("a component call node", () => {
+  // Written by hand, as `builtins.test.ts` writes bundles: nothing compiles one
+  // yet. A function the script holds, drawn as `<Badge count={count.read()} />`,
+  // and a button that bumps the count.
+  const bundle = {
+    functions: {
+      "0": [
+        "=>",
+        [],
+        [
+          "{}",
+          [
+            ["const", "count", ["()", ["bltn", "state"], [0]]],
+            [
+              "const",
+              "Badge",
+              [
+                "=>",
+                [["param", "props"]],
+                [
+                  "el",
+                  "b",
+                  {},
+                  ["+", "count ", [".", ["id", "props"], "count"]],
+                ],
+              ],
+            ],
+            [
+              "return",
+              [
+                "el",
+                "div",
+                {},
+                [
+                  "arr",
+                  [
+                    [
+                      "comp",
+                      ["id", "Badge"],
+                      { count: ["()", [".", ["id", "count"], "read"], []] },
+                      null,
+                    ],
+                    [
+                      "el",
+                      "button",
+                      {
+                        onclick: [
+                          "=>",
+                          [],
+                          [
+                            "()",
+                            [".", ["id", "count"], "write"],
+                            [
+                              [
+                                "+",
+                                ["()", [".", ["id", "count"], "read"], []],
+                                1,
+                              ],
+                            ],
+                          ],
+                        ],
+                      },
+                      "more",
+                    ],
+                  ],
+                ],
+              ],
+            ],
+          ],
+        ],
+      ],
+    },
+    root: ["()", ["fn", "0"], []],
+  } as unknown as Bundle<ClientUnknown>;
+
+  it("calls the function once, and keeps its props live", () => {
+    const parent = node("main");
+    render(bundle, { renderer: testHost }, parent);
+
+    const [badge, button] = parent.children[0]!.children;
+    assert.ok(badge !== undefined && button !== undefined);
+    assert.equal(badge.children[0]?.text, "count 0");
+
+    handler(button)();
+
+    assert.equal(parent.children[0]!.children[0], badge, "the same <b>");
+    assert.equal(badge.children[0]?.text, "count 1");
+  });
+});

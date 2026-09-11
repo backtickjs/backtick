@@ -99,6 +99,12 @@ function renderNode(
     // so it reads as the one it is written as.
     case "el":
       return renderJsx(node, indent);
+    // A function the script holds, drawn as the tag it was written as.
+    case "comp":
+      return renderJsx(
+        ["el", renderNode(node[1], indent), node[2], node[3]],
+        indent,
+      );
     // A global the format names and the host answers.
     case "bltn":
       return node[1];

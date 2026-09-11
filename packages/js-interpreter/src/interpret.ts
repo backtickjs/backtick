@@ -13,7 +13,7 @@ import type {
 } from "@backtickjs/bundler";
 import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
-import { compileElement, evaluated } from "./view.js";
+import { compileComponentCall, compileElement, evaluated } from "./view.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
@@ -358,6 +358,9 @@ function buildNode(
     // answered where an id is read, not by a kind of its own.
     case "el": {
       return compileElement(instance, node);
+    }
+    case "comp": {
+      return compileComponentCall(instance, node);
     }
     // A whole name the format carries and this client answers. The language's
     // own and what this target added beside them, in one table under one

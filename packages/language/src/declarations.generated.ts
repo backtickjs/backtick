@@ -102,6 +102,19 @@ export type BundleElement = [
   children: BundleExpression,
 ];
 
+/**
+ * A call of a component a script holds: the function called with one record of
+ * its props, each member evaluated when it is read, and `children` among them
+ * where the tag holds any. What a component's props are, for a function the
+ * bundler never saw.
+ */
+export type BundleComponentCall = [
+  kind: "comp",
+  callee: BundleExpression,
+  props: { [key: string]: BundleExpression },
+  children: BundleExpression,
+];
+
 export type BundleArrayLiteral = [kind: "arr", members: BundleArrayElement[]];
 
 export type BundleSpreadElement = [kind: "...", expression: BundleExpression];
@@ -133,6 +146,7 @@ export type BundleExpression =
   | BundleIdentifier
   | BundleFunctionReference
   | BundleElement
+  | BundleComponentCall
   | BundleCall
   | BundleOptionalCall
   | BundlePropertyAccess
