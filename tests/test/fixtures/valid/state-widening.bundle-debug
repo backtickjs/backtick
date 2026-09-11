@@ -13,4 +13,4 @@
   </span>;
 }
 
-root = #f0(() => state, () => "warm", () => "cool")
+root = <() => #f0(() => state, () => "warm", () => "cool") />

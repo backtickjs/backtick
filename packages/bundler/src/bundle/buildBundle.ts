@@ -171,6 +171,8 @@ export function buildBundle(
         });
         return keys;
       }
+      case "AstComponent":
+        return freeCaps(value.body);
       case "AstElement":
         return Object.values(value.props).flatMap(freeCaps);
       case "AstArray":
@@ -291,6 +293,10 @@ export function buildBundle(
         materialize(target);
         return ["()", ["fn", fnLabel(target)], exprCallArgs(value, params)];
       }
+      // An arrow over nothing, called with no props: `comp` is what calls a
+      // drawing untracked.
+      case "AstComponent":
+        return ["comp", ["=>", [], child(value.body)], {}, null];
       case "AstElement":
         return renderElement(value, params);
       case "AstBuiltin":

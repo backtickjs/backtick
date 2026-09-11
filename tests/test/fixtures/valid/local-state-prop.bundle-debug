@@ -1,8 +1,12 @@
 #f0 = ($0, $1) => {
   const size = $0()(16);
   return <div>
-    {$1()({ "size": () => size })}
-    {$1()({ "size": () => size })}
+    {<$1()
+      size={() => size}
+    />}
+    {<$1()
+      size={() => size}
+    />}
   </div>;
 }
 
@@ -12,9 +16,9 @@
   $0().write($0().read() + 1);
 }
 
-root = #f0(() => state, () => ($0) => <span
+root = <() => #f0(() => state, () => ($0) => <span
   style={#f1(() => $0.size())}
   onclick={#f2(() => $0.size())}
 >
   {"press"}
-</span>)
+</span>) />

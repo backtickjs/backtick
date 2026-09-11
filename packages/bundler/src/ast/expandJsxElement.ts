@@ -61,6 +61,11 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
     // component itself leaves nothing behind — what it drew stands where the
     // tag stood, and drawing nothing is the language's absent value.
     const children = await type(jsx.props as never);
-    return await lowerSpliceable(children);
+    const drawn = await lowerSpliceable(children);
+    // A script is what runs on the client; an element it drew instead has no
+    // setup of its own to guard.
+    return drawn.kind === "AstScript"
+      ? { kind: "AstComponent", body: drawn }
+      : drawn;
   }
 }

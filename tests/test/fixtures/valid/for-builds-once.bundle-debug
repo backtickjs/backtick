@@ -4,12 +4,12 @@
     {<span>
       {"asked " + asked.read()}
     </span>}
-    {$1()({
-      "more": () => () => {
+    {<$1()
+      more={() => () => {
         asked.write(asked.read() + 1);
         return asked.read() < 5;
-      }
-    })}
+      }}
+    />}
   </div>;
 }
 
@@ -20,12 +20,13 @@
       items.write($3());
     }
   }, 0);
-  return $4()({
-    "each": () => items.read(),
-    "children": () => (item) => <em>
+  return <$4()
+    each={() => items.read()}
+  >
+    {() => (item) => <em>
       {item}
-    </em>
-  });
+    </em>}
+  </$4()>;
 }
 
 root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.more(), () => ["one", "two"], () => ($0) => <for

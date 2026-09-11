@@ -4,12 +4,12 @@
     {<span>
       {"asked " + asked.read()}
     </span>}
-    {$1()({
-      "ask": () => () => {
+    {<$1()
+      ask={() => () => {
         asked.write(asked.read() + 1);
         return asked.read() > 4 ? null : $2();
-      }
-    })}
+      }}
+    />}
   </div>;
 }
 
@@ -23,5 +23,5 @@
 
 root = #f0(() => state, () => ($0) => #f1(() => state, () => window, () => $0.ask()), () => {
   "functions": { "0": ["=>", [], ["el", "em", {}, "answered"]] },
-  "root": ["()", ["fn", "0"], []]
+  "root": ["comp", ["=>", [], ["()", ["fn", "0"], []]], {}, null]
 })

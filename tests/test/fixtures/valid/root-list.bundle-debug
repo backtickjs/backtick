@@ -9,17 +9,18 @@
     >
       {"clear"}
     </span>}
-    {$1()({
-      "each": () => ids.read(),
-      "children": () => (id) => <span>
+    {<$1()
+      each={() => ids.read()}
+    >
+      {() => (id) => <span>
         {"row " + id}
-      </span>
-    })}
+      </span>}
+    </$1()>}
   </Fragment>;
 }
 
-root = #f0(() => state, () => ($0) => <for
+root = <() => #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}
-</for>)
+</for>) />

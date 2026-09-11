@@ -15,6 +15,7 @@ export type Ast =
   | AstArray
   | AstBoolean
   | AstBuiltin
+  | AstComponent
   | AstElement
   | AstExpansion
   | AstHole
@@ -55,6 +56,15 @@ export interface AstBoolean {
 export interface AstBuiltin {
   readonly kind: "AstBuiltin";
   readonly name: string;
+}
+
+// The script a host component drew, where its tag stood. Called as a component
+// is, untracked, so what the script reads while setting up is read once rather
+// than running the setup again — the tag is gone, and this is what is left of
+// it on the client.
+export interface AstComponent {
+  readonly kind: "AstComponent";
+  readonly body: AstScript;
 }
 
 // A drawing named by its id, with each prop lowered. `<For />` is one of these

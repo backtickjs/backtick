@@ -303,15 +303,21 @@ export function lowerScriptBody(script: ScriptEntry): BundleBody {
         // thunk the drawing calls where it reads them. That is what keeps a
         // prop a prop: an argument is evaluated once where it is passed, and a
         // prop has to be re-read whenever what it names changes.
+        //
+        // Called as a component, untracked: what its script reads while
+        // setting up is read once, rather than running the setup again when
+        // it changes.
         if (node.type.kind === "splice") {
           const passed: { [prop: string]: BundleExpression } = {};
           for (const [name, value] of Object.entries(props)) {
             passed[name] = ["=>", [], value];
           }
-          if (children !== null) {
-            passed["children"] = ["=>", [], children];
-          }
-          return ["()", renderSplice(node.type.key), [passed]];
+          return [
+            "comp",
+            renderSplice(node.type.key),
+            passed,
+            children === null ? null : ["=>", [], children],
+          ];
         }
         if (node.type.kind === "id") {
           return ["comp", e(node.type), props, children];

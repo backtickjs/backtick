@@ -5,12 +5,12 @@
       {"builds " + builds.read()}
     </span>}
     {<section>
-      {$1()({
-        "again": () => () => {
+      {<$1()
+        again={() => () => {
           builds.write(builds.read() + 1);
           return builds.read() < 5;
-        }
-      })}
+        }}
+      />}
     </section>}
   </div>;
 }
