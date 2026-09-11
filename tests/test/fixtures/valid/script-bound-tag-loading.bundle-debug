@@ -1,0 +1,40 @@
+#f0 = ($0, $1, $2) => {
+  const count = $0()(0);
+  const drawn = $0()(null);
+  const Badge = (props) => {
+    const held = drawn.read();
+    return held === null ? null : $1().eval(held)(props);
+  };
+  return <div>
+    {drawn.read() === null ? <i>
+      {"loading"}
+    </i> : <Badge
+      count={count.read()}
+    />}
+    {<button
+      onclick={() => drawn.write($2())}
+    >
+      {"load"}
+    </button>}
+    {<button
+      onclick={() => count.write(count.read() + 1)}
+    >
+      {"more"}
+    </button>}
+  </div>;
+}
+
+root = #f0(() => state, () => vm, () => {
+  "functions": {
+    "0": [
+      "=>",
+      [],
+      [
+        "=>",
+        [["param", "props"]],
+        ["el", "b", {}, ["+", "count ", [".", ["id", "props"], "count"]]]
+      ]
+    ]
+  },
+  "root": ["()", ["fn", "0"], []]
+})

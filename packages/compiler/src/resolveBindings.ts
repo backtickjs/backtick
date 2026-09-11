@@ -1,5 +1,7 @@
 import type ts from "typescript";
 import type { ClientScript } from "./parseFile.js";
+import { isComponentTag } from "./isComponentTag.js";
+import { isFragmentTag } from "./isFragmentTag.js";
 
 /**
  * A single lexical-scope pass over every client script in a file. It produces
@@ -57,6 +59,9 @@ export interface ResolvedScopes {
   bindings: BindingResolution;
   captures: Map<ClientScript, string[]>;
   spliceParams: Map<ClientScript, { [splice: string]: string[] }>;
+  // Per script, the component tags no scope binds: host components, the only
+  // tags whose splice a script needs.
+  hostTags: Map<ClientScript, Set<string>>;
 }
 
 // A scope's in-scope names mapped to the binding key of their declaration.
@@ -86,6 +91,7 @@ export function resolveBindings(
   // What each splice hole can hand out, recorded as the walk reaches it and
   // narrowed once the walk is done.
   const spliceParams = new Map<ClientScript, { [splice: string]: string[] }>();
+  const hostTags = new Map<ClientScript, Set<string>>();
 
   // Every binding some nested script captures, whatever hole it was written at.
   // Narrows the scopes above at the end: a hole only has to hand over bindings
@@ -214,6 +220,7 @@ export function resolveBindings(
       seenCaptures.set(script, new Set());
       declarations.set(script, []);
       spliceParams.set(script, {});
+      hostTags.set(script, new Set());
     }
     const root = scriptRoot(ts, script);
     if (!root) {
@@ -392,15 +399,35 @@ export function resolveBindings(
       ts.isJsxSelfClosingElement(node) ||
       ts.isJsxFragment(node)
     ) {
-      // The tag names what the host's JSX namespace answers for, which no scope
-      // here binds. Everything written inside is ordinary client code, so an
-      // attribute's expression and an expression child resolve like any other.
-      // A fragment has no tag and no attributes, and its children are the same.
+      // A tag names what the host's JSX namespace answers for — unless a
+      // component tag names a binding in scope, which makes it a reference to a
+      // function the script holds. Everything written inside is ordinary client
+      // code, so an attribute's expression and an expression child resolve like
+      // any other. A fragment has no tag and no attributes.
       const opening = ts.isJsxFragment(node)
         ? null
         : ts.isJsxElement(node)
           ? node.openingElement
           : node;
+      const tags =
+        opening === null
+          ? []
+          : ts.isJsxElement(node)
+            ? [opening.tagName, node.closingElement.tagName]
+            : [opening.tagName];
+      for (const tag of tags) {
+        if (
+          ts.isIdentifier(tag) &&
+          isComponentTag(tag.text) &&
+          !isFragmentTag(tag.text)
+        ) {
+          if (resolve(tag.text, scopes) === null) {
+            hostTags.get(script)?.add(tag.text);
+          } else {
+            reference(tag, script, scopes);
+          }
+        }
+      }
       for (const attribute of opening?.attributes.properties ?? []) {
         if (!ts.isJsxAttribute(attribute)) {
           continue;
@@ -494,7 +521,7 @@ export function resolveBindings(
     }
   }
 
-  return { bindings, captures, spliceParams };
+  return { bindings, captures, spliceParams, hostTags };
 }
 
 function scriptRoot(

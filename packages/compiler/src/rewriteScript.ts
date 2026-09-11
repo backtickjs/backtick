@@ -3,7 +3,7 @@ import type ts from "typescript";
 import type { CodeInformation } from "./CodeInformation.js";
 import type { Diagnostic } from "./diagnostics.js";
 import { arrow, call, iife, sourceLoc } from "./nodeFactory.js";
-import type { ClientScript, Splice } from "./parseFile.js";
+import type { ClientScript, ComponentTagSplice, Splice } from "./parseFile.js";
 import type { BindingResolution } from "./resolveBindings.js";
 import { bodyKind } from "./bodyKind.js";
 import { type RewriteState, rewriteNode } from "./rewriteNode.js";
@@ -25,6 +25,7 @@ export function rewriteScript(
   bindings: BindingResolution,
   captures: string[] = [],
   spliceParams: { [splice: string]: string[] } = {},
+  hostTags: ReadonlySet<string> = new Set(),
 ): RewrittenScript {
   const { sourceFile, sourceNode, fileWithPlaceholders } = clientScript;
 
@@ -72,7 +73,18 @@ export function rewriteScript(
     });
   }
 
-  const splices = Object.values(clientScript.splices);
+  // The text's own splices, then one per host component a tag names: minted
+  // here because only scope resolution can say which tags those are. Under the
+  // key `$Card` would use, so a script writing both spellings claims it once.
+  const tagSplices: ComponentTagSplice[] = [...hostTags]
+    .filter((name) => clientScript.splices[`$${name}`] === undefined)
+    .map((name) => ({
+      kind: "component-tag",
+      expression: ts.factory.createIdentifier(name),
+      key: `$${name}`,
+      scripts: [],
+    }));
+  const splices = [...Object.values(clientScript.splices), ...tagSplices];
 
   const scriptRange: SourceRange = {
     start: sourceNode.getStart(sourceFile),

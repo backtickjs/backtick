@@ -1,13 +1,13 @@
 import { cs } from "@backtickjs/core";
-// A tag names what the host's JSX namespace answers for, never a binding the
-// script holds: `Tag` here is a parameter, and the element is not named by it.
+// A component tag naming a binding the script holds calls it, so what the
+// binding holds has to be a function: `Tag` here is a number.
 const held = cs.create(
   [5, 14, 5, 42],
   {
     version: "0.0.0",
     filePath: "script-element-bound-tag.tsx",
-    fileHash: "3fbb3ihku5tcs",
-    splices: { $Tag: { value: Tag, params: [] } },
+    fileHash: "25t65ua6o2t2f",
+    splices: {},
     captures: [],
   },
   () => ({
@@ -21,7 +21,7 @@ const held = cs.create(
           kind: "id",
           loc: [5, 18, 5, 21],
           text: "Tag",
-          bindingKey: "Tag$3fbb3ihku5tcs$0",
+          bindingKey: "Tag$25t65ua6o2t2f$0",
         },
       },
     ],
@@ -29,9 +29,10 @@ const held = cs.create(
       kind: "jsx",
       loc: [5, 34, 5, 41],
       type: {
-        kind: "splice",
+        kind: "id",
         loc: [5, 35, 5, 38],
-        key: "$Tag",
+        text: "Tag",
+        bindingKey: "Tag$25t65ua6o2t2f$0",
       },
       attributes: [],
       children: [],

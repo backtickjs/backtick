@@ -182,82 +182,11 @@ describe("a bundle a script runs with vm.eval", () => {
   });
 });
 
-describe("a component call node", () => {
-  // Written by hand, as `builtins.test.ts` writes bundles: nothing compiles one
-  // yet. A function the script holds, drawn as `<Badge count={count.read()} />`,
-  // and a button that bumps the count.
-  const bundle = {
-    functions: {
-      "0": [
-        "=>",
-        [],
-        [
-          "{}",
-          [
-            ["const", "count", ["()", ["bltn", "state"], [0]]],
-            [
-              "const",
-              "Badge",
-              [
-                "=>",
-                [["param", "props"]],
-                [
-                  "el",
-                  "b",
-                  {},
-                  ["+", "count ", [".", ["id", "props"], "count"]],
-                ],
-              ],
-            ],
-            [
-              "return",
-              [
-                "el",
-                "div",
-                {},
-                [
-                  "arr",
-                  [
-                    [
-                      "comp",
-                      ["id", "Badge"],
-                      { count: ["()", [".", ["id", "count"], "read"], []] },
-                      null,
-                    ],
-                    [
-                      "el",
-                      "button",
-                      {
-                        onclick: [
-                          "=>",
-                          [],
-                          [
-                            "()",
-                            [".", ["id", "count"], "write"],
-                            [
-                              [
-                                "+",
-                                ["()", [".", ["id", "count"], "read"], []],
-                                1,
-                              ],
-                            ],
-                          ],
-                        ],
-                      },
-                      "more",
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-        ],
-      ],
-    },
-    root: ["()", ["fn", "0"], []],
-  } as unknown as Bundle<ClientUnknown>;
-
-  it("calls the function once, and keeps its props live", () => {
+describe("a tag naming a function the script holds", () => {
+  it("keeps a prop live without drawing the function again", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "script-bound-tag.tsx"),
+    );
     const parent = node("main");
     render(bundle, { renderer: testHost }, parent);
 
@@ -267,7 +196,69 @@ describe("a component call node", () => {
 
     handler(button)();
 
-    assert.equal(parent.children[0]!.children[0], badge, "the same <b>");
+    const [after] = parent.children[0]!.children;
+    assert.equal(after, badge, "the same <b>, updated rather than drawn again");
     assert.equal(badge.children[0]?.text, "count 1");
   });
+  it("draws one that arrives later, and keeps its prop live", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "script-bound-tag-loading.tsx"),
+    );
+    const parent = node("main");
+    render(bundle, { renderer: testHost }, parent);
+    const div = parent.children[0]!;
+    assert.equal(div.children[0]?.id, "i");
+
+    handler(div.children[1]!)(); // load
+    const badge = div.children[0]!;
+    assert.equal(badge.id, "b");
+    assert.equal(badge.children[0]?.text, "count 0");
+
+    handler(div.children[2]!)(); // more
+    assert.equal(div.children[0], badge, "the same <b>, updated in place");
+    assert.equal(badge.children[0]?.text, "count 1");
+  });
+
+  it("calls one an enclosing script holds, however the call is nested", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "script-bound-tag-capture.tsx"),
+    );
+    const parent = node("main");
+    render(bundle, { renderer: testHost }, parent);
+    const badges = findAll(parent, "b");
+    const texts = () => findAll(parent, "b").map((b) => b.children[0]?.text);
+    assert.deepEqual(texts(), ["n 0", "n 100", "n 1000", "n 0", "n 0"]);
+
+    handler(findAll(parent, "button")[0]!)();
+
+    assert.deepEqual(texts(), ["n 1", "n 101", "n 1001", "n 1", "n 2"]);
+    assert.deepEqual(findAll(parent, "b"), badges, "the same <b>s");
+  });
+
+  it("calls the one it was written under, drawn where another is in scope", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "script-bound-tag-carried.tsx"),
+    );
+    const parent = node("main");
+    render(bundle, { renderer: testHost }, parent);
+    const [panel] = findAll(parent, "i");
+    const [badge] = findAll(parent, "b");
+    assert.equal(panel?.children[0]?.text, "panel 0");
+    assert.equal(badge?.children[0]?.text, "outer 0");
+
+    handler(findAll(parent, "button")[0]!)();
+
+    assert.equal(findAll(parent, "b")[0], badge, "the same <b>");
+    assert.equal(badge?.children[0]?.text, "outer 1");
+    assert.equal(findAll(parent, "u")[0]?.children[0]?.text, "kid 1");
+    assert.equal(findAll(parent, "i")[0], panel, "the panel's own, untouched");
+  });
 });
+
+// Every node under `from` with this id, in document order.
+function findAll(from: TestNode, id: string): TestNode[] {
+  return [
+    ...(from.id === id ? [from] : []),
+    ...from.children.flatMap((child) => findAll(child, id)),
+  ];
+}

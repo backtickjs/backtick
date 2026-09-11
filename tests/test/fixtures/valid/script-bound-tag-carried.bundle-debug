@@ -1,0 +1,39 @@
+#f0 = ($0, $1, $2) => {
+  const count = $0()(0);
+  const Badge = (p) => <b>
+    {"outer " + p.n}
+    {p.children}
+  </b>;
+  return <div>
+    {<{$2()}
+      body={() => $1(count, Badge)}
+    />}
+    {<button
+      onclick={() => count.write(count.read() + 1)}
+    >
+      {"more"}
+    </button>}
+  </div>;
+}
+
+#f1 = ($0, $1) => <$0
+  n={$1.read()}
+>
+  {<u>
+    {"kid " + $1.read()}
+  </u>}
+</$0>
+
+#f2 = ($0) => {
+  const Badge = (p) => <i>
+    {"panel " + p.n}
+  </i>;
+  return <section>
+    {<Badge
+      n={0}
+    />}
+    {$0().body}
+  </section>;
+}
+
+root = #f0(() => state, (count, Badge) => #f1(Badge, count), () => ($0) => #f2(() => $0))

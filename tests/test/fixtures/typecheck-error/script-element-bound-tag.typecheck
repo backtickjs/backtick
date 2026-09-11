@@ -1,1 +1,3 @@
-5:35 error TS2304: Cannot find name 'Tag'.
+5:35 error TS2604: JSX element type 'Tag' does not have any construct or call signatures.
+5:35 error TS2786: 'Tag' cannot be used as a JSX component.
+  Its type 'number' is not a valid JSX element type.

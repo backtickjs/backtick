@@ -1,0 +1,8 @@
+<div>
+  <b>
+    {"count 0"}
+  </b>
+  <button onclick={[function]}>
+    {"more"}
+  </button>
+</div>

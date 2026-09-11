@@ -196,8 +196,8 @@ export default cs.create(
     fileHash: "2x8k8srxyyhq0",
     splices: {
       $state: { value: state, params: [] },
-      $Waiting: { value: Waiting, params: [] },
       $answer: { value: answer, params: [] },
+      $Waiting: { value: Waiting, params: [] },
     },
     captures: [],
   },

@@ -1038,6 +1038,16 @@ function rewriteNodeImpl(
 
     // `<>` and `<Fragment>` lower the same way
     const isFragment = opening === null || isFragmentTag(tagName);
+    // A component tag naming a binding: a function the script holds, called
+    // with its props. Its attributes are client values of the props it takes,
+    // so they are written as they are rather than lifted.
+    const held =
+      opening !== null &&
+      !isFragment &&
+      isComponentTag(tagName) &&
+      state.bindings.has(opening.tagName as ts.Identifier);
+    const lift = (expression: ts.Expression): ts.Expression =>
+      held ? expression : call(ts, "cs", "lift", [expression]);
 
     // In source order, because a host may care that `type` precedes `value`.
     const attributes: { virtual: ts.JsxAttribute; runtime: ts.Expression }[] =
@@ -1081,7 +1091,7 @@ function rewriteNodeImpl(
         written,
         ts.factory.createJsxExpression(
           undefined,
-          call(ts, "cs", "lift", [value.virtual as ts.Expression]),
+          lift(value.virtual as ts.Expression),
         ),
       );
       state.mappings.set(attributeVirtual, attribute);
@@ -1132,7 +1142,7 @@ function rewriteNodeImpl(
           virtualChildren.push(
             ts.factory.createJsxExpression(
               undefined,
-              call(ts, "cs", "lift", [rewritten.virtual as ts.Expression]),
+              lift(rewritten.virtual as ts.Expression),
             ),
           );
           continue;
@@ -1142,7 +1152,7 @@ function rewriteNodeImpl(
         virtualChildren.push(
           ts.factory.createJsxExpression(
             undefined,
-            call(ts, "cs", "lift", [rewritten.virtual as ts.Expression]),
+            lift(rewritten.virtual as ts.Expression),
           ),
         );
       }
@@ -1155,7 +1165,9 @@ function rewriteNodeImpl(
     // the one it is: a tag is where an editor asks what an element is, and
     // renaming one of a pair has to reach that one and not its partner.
     const tag = (source: ts.JsxTagNameExpression): ts.Identifier => {
-      const written = ts.factory.createIdentifier(tagName);
+      const written = ts.factory.createIdentifier(
+        held ? mangle(tagName) : tagName,
+      );
       state.mappings.set(written, source);
       return written;
     };
@@ -1200,8 +1212,15 @@ function rewriteNodeImpl(
         // A fragment is an element under its own name, which `<>` is written
         // as too. It draws no node, and what it is for is the position: a
         // drawing that is not an element has nowhere to be watched.
-        type:
-          opening !== null && !isFragment && isComponentTag(tagName)
+        type: held
+          ? astNode(ts, "id", {
+              loc: loc(opening.tagName),
+              text: ts.factory.createStringLiteral(tagName),
+              bindingKey: ts.factory.createStringLiteral(
+                bindingKey(state, opening.tagName as ts.Identifier),
+              ),
+            })
+          : opening !== null && !isFragment && isComponentTag(tagName)
             ? astNode(ts, "splice", {
                 loc: loc(opening.tagName),
                 key: ts.factory.createStringLiteral(`$${tagName}`),

@@ -1,0 +1,11 @@
+<div>
+  <i>
+    {"loading"}
+  </i>
+  <button onclick={[function]}>
+    {"load"}
+  </button>
+  <button onclick={[function]}>
+    {"more"}
+  </button>
+</div>

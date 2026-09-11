@@ -1,0 +1,16 @@
+<div>
+  <section>
+    <i>
+      {"panel 0"}
+    </i>
+    <b>
+      {"outer 0"}
+      <u>
+        {"kid 0"}
+      </u>
+    </b>
+  </section>
+  <button onclick={[function]}>
+    {"more"}
+  </button>
+</div>

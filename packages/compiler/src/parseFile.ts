@@ -1,8 +1,6 @@
 import type { SourceLocation } from "@backtickjs/client-script";
 import type ts from "typescript";
-import { isComponentTag } from "./isComponentTag.js";
 import type { SourceRange } from "./SourceRange.js";
-import { isFragmentTag } from "./isFragmentTag.js";
 
 export interface ParsedFile {
   sourceFile: ts.SourceFile;
@@ -28,7 +26,9 @@ export interface ClientScript {
 // expression (`expression`).
 //
 // A component tag is the third: `<Card />` names a host binding too, and the
-// source spelled no sigil for it.
+// source spelled no sigil for it. Which tags do is scope resolution's to say —
+// a tag naming a binding in scope is a function the script holds — so these are
+// not minted here but by the rewrite, once `resolveBindings` has answered.
 export type Splice = BracedSplice | UnbracedSplice | ComponentTagSplice;
 
 export interface BracedSplice {
@@ -54,7 +54,8 @@ export interface UnbracedSplice {
 }
 
 // The host binding a component tag names. It stands in no placeholder — a tag
-// carries no sigil — so its key is minted rather than read from the text.
+// carries no sigil — so its key is minted rather than read from the text, and
+// only for a tag no scope binds.
 export interface ComponentTagSplice {
   kind: "component-tag";
   // the host binding the tag names (synthesized, e.g. `Card` for `<Card />`)
@@ -199,30 +200,6 @@ function getDirectSplices(
     if (ts.isCatchClause(node)) {
       visit(node.block); // the catch binding is not a reference
       return;
-    }
-    // A component tag names a host binding, where an element of the target is
-    // its own name. Minted here rather than read, since no sigil in the text
-    // spells it, and deduplicated by key like the rest.
-    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
-      const tag = node.tagName;
-      // Not the fragment: it lowers to what it holds, the way `<>` does, so
-      // nothing of it reaches the host and there is nothing to splice.
-      if (
-        ts.isIdentifier(tag) &&
-        isComponentTag(tag.text) &&
-        !isFragmentTag(tag.text)
-      ) {
-        const key = `$${tag.text}`;
-        if (splices[key] == null) {
-          splices[key] = {
-            kind: "component-tag",
-            expression: ts.factory.createIdentifier(tag.text),
-            key,
-            scripts: [],
-          };
-        }
-      }
-      // Falls through, so the attributes are walked for references of their own.
     }
     if (
       ts.isIdentifier(node) &&
