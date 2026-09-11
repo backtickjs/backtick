@@ -1,6 +1,6 @@
 import type { JsxElementType } from "@backtickjs/ui";
 import { createFragment, createJsxElement } from "@backtickjs/ui";
-import type { Elements as Web, FragmentProps } from "@backtickjs/web";
+import type { Elements as Web } from "@backtickjs/web";
 import type { BacktickElement } from "@backtickjs/ui";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
@@ -16,7 +16,7 @@ import type { BacktickElement } from "@backtickjs/ui";
 // The fragment is the schema's, like every other element the language owns —
 // what it holds is `FragmentProps` there. What is this runtime's is the binding
 // TypeScript resolves `<>` to, which is what this is.
-export const Fragment = createFragment<FragmentProps>();
+export const Fragment = createFragment();
 
 export declare namespace JSX {
   export interface Element extends BacktickElement {}

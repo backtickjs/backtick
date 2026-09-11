@@ -1,6 +1,6 @@
 import type { JsxElementType } from "@backtickjs/ui";
 import { createFragment, createJsxElement } from "@backtickjs/ui";
-import type { Elements as Ui, FragmentProps } from "@backtickjs/ui";
+import type { Elements as Ui } from "@backtickjs/ui";
 import type { BacktickElement } from "@backtickjs/ui";
 
 // What the JSX transform reaches for, for the language's own elements and no
@@ -16,7 +16,7 @@ import type { BacktickElement } from "@backtickjs/ui";
 // A target's runtime is not this one with more in it. `Elements` extends every
 // base's in turn, so a target that wants these already has them through its
 // own, and nothing here is what a target reaches for.
-export const Fragment = createFragment<FragmentProps>();
+export const Fragment = createFragment();
 
 export declare namespace JSX {
   export interface Element extends BacktickElement {}

@@ -1,5 +1,8 @@
 import { createJsxElement } from "./JsxElement.js";
-import type { BacktickElement } from "./declarations.generated.js";
+import type {
+  BacktickElement,
+  FragmentProps,
+} from "./declarations.generated.js";
 import type { Prop } from "./Prop.js";
 
 /**
@@ -16,14 +19,10 @@ import type { Prop } from "./Prop.js";
  * again. Under a fragment the conditional is a child, and a child position owns
  * a computation of its own.
  *
- * Each target still makes its own, since what a fragment may hold is whatever
- * that target draws, and `Props` is where it says so.
+ * What it holds is the schema's `FragmentProps`, which every target inherits.
  */
-export type Fragment<Props extends object = object> = (
-  props: Props,
-) => Prop<BacktickElement | null>;
+export type Fragment = (props: FragmentProps) => Prop<BacktickElement | null>;
 
-export function createFragment<Props extends object>(): Fragment<Props> {
-  return ((props: { children?: unknown }) =>
-    createJsxElement("Fragment", props)) as unknown as Fragment<Props>;
+export function createFragment(): Fragment {
+  return (props: { children?: unknown }) => createJsxElement("Fragment", props);
 }

@@ -1,6 +1,6 @@
 import type { JsxElementType } from "@backtickjs/ui";
 import { createFragment, createJsxElement } from "@backtickjs/ui";
-import type { BacktickElement, BacktickNode } from "@backtickjs/ui";
+import type { BacktickElement } from "@backtickjs/ui";
 import type { Elements as Site } from "../declarations.generated.js";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.
@@ -17,18 +17,7 @@ import type { Elements as Site } from "../declarations.generated.js";
 // a base adds arrives without either end being told, and a tag two of them
 // declare is a conflict TypeScript reports rather than a silent winner.
 
-/**
- * Children with no element of their own.
- *
- * The schema does not declare a fragment: it draws no node and has no tag, so
- * what it holds is this runtime's to say, and it says the same as any element
- * of this target.
- */
-export interface FragmentProps {
-  children?: BacktickNode;
-}
-
-export const Fragment = createFragment<FragmentProps>();
+export const Fragment = createFragment();
 
 export declare namespace JSX {
   export interface Element extends BacktickElement {}
