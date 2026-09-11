@@ -15,7 +15,7 @@ export type Ast =
   | AstArray
   | AstBoolean
   | AstBuiltin
-  | AstComponent
+  | AstComponentCall
   | AstElement
   | AstExpansion
   | AstHole
@@ -62,8 +62,8 @@ export interface AstBuiltin {
 // is, untracked, so what the script reads while setting up is read once rather
 // than running the setup again — the tag is gone, and this is what is left of
 // it on the client.
-export interface AstComponent {
-  readonly kind: "AstComponent";
+export interface AstComponentCall {
+  readonly kind: "AstComponentCall";
   readonly body: AstScript;
 }
 

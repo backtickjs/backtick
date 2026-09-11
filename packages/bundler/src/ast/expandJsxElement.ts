@@ -65,7 +65,7 @@ async function buildElement(jsx: JsxElement): Promise<Ast> {
     // A script is what runs on the client; an element it drew instead has no
     // setup of its own to guard.
     return drawn.kind === "AstScript"
-      ? { kind: "AstComponent", body: drawn }
+      ? { kind: "AstComponentCall", body: drawn }
       : drawn;
   }
 }
