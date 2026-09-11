@@ -37,6 +37,7 @@ export const schema: Schema = {
       [Type.GenericParameter("T", Type.Ref("ClientValue"))],
       Type.Interface([], {
         each: Type.Array(Type.Ref("T"), {
+          readOnly: true,
           description: "The array to draw one thing per member of.",
         }),
         children: Type.Function(

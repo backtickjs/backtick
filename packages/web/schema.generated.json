@@ -2194,6 +2194,7 @@
         "extends": [],
         "properties": {
           "each": {
+            "readOnly": true,
             "description": "The array to draw one thing per member of.",
             "type": "array",
             "items": {

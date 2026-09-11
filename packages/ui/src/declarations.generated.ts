@@ -113,7 +113,7 @@ export interface ForProps<T extends ClientValue> {
   /**
    * The array to draw one thing per member of.
    */
-  each: Prop<T[]>;
+  each: Prop<readonly T[]>;
   /**
    * @param index Where the member is, as storage rather than a number: a
    * position moves without the member changing, so a number read once would go

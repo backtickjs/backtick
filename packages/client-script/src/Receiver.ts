@@ -79,7 +79,7 @@ export type Receiver<T extends ClientValue | ClientGlobal> =
             ? ObjectConstructor
             : T extends typeof globalThis.String
               ? StringConstructor
-              : T extends string | number | boolean | ClientValue[]
+              : T extends string | number | boolean | readonly ClientValue[]
                 ? Autoboxed<T>
                 : T extends ClientFunction
                   ? T
