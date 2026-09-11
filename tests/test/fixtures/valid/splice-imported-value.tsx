@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { version } from "@backtickjs-internal/client-script";
+import { version } from "@backtickjs/client-script";
 
 // A host value that is imported and never mentioned outside a script.
 //

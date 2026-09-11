@@ -1,7 +1,7 @@
 import type {
   ClientScriptBody,
   SourceLocation,
-} from "@backtickjs-internal/client-script";
+} from "@backtickjs/client-script";
 
 // The value grammar: what a splice becomes. A script's own syntax is the other
 // half of this AST and lives in `client-script`, since that is where the compiler's

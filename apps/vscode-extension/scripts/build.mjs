@@ -18,7 +18,7 @@ export default async function build() {
     entryPoints: {
       "dist/node/client": "./src/client.ts",
       "dist/node/server":
-        "./node_modules/@backtickjs-internal/language-server/bin/nodeServer.js",
+        "./node_modules/@backtickjs/language-server/bin/nodeServer.js",
     },
     bundle: true,
     metafile: metaFile,

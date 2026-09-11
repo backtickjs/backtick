@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { transform } from "@backtickjs-internal/compiler";
+import { transform } from "@backtickjs/compiler";
 import { plugin } from "bun";
 import ts from "typescript";
 

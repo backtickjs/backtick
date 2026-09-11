@@ -15,7 +15,7 @@
   "contributes": {
     "typescriptServerPlugins": [
       {
-        "name": "@backtickjs-internal/typescript-plugin",
+        "name": "@backtickjs/typescript-plugin",
         "enableForWorkspaceTypeScriptVersions": true
       }
     ],
@@ -59,10 +59,10 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs-internal/typescript-plugin": "workspace:*"
+    "@backtickjs/typescript-plugin": "workspace:*"
   },
   "devDependencies": {
-    "@backtickjs-internal/language-server": "workspace:*",
+    "@backtickjs/language-server": "workspace:*",
     "@types/vscode": "^1.120.0",
     "@volar/language-server": "^2.4.28",
     "@volar/vscode": "^2.4.28",

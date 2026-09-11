@@ -21,10 +21,12 @@
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
+  "dependencies": {
+    "@backtickjs/js-interpreter": "workspace:*"
+  },
   "devDependencies": {
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs-internal/js-interpreter": "workspace:*",
     "@backtickjs/web": "workspace:*",
     "esbuild": "0.28.0",
     "prettier": "^3.6.2",

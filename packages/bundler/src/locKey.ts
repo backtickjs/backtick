@@ -1,4 +1,4 @@
-import type { SourceLocation } from "@backtickjs-internal/client-script";
+import type { SourceLocation } from "@backtickjs/client-script";
 
 // A stable string key for a script's source location, used to deduplicate
 // client scripts by where they were written. Two scripts parsed from the same

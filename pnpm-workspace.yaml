@@ -1,8 +1,6 @@
 packages:
-  # What is published: `packages/` is the surface a user installs or extends,
-  # `internal/` is published only because something in `packages/` resolves it.
+  # What is published.
   - "packages/*"
-  - "internal/*"
   # Built here and never published to npm: a website and an editor extension.
   - "apps/*"
   - "apps/backtickjs.com/*"

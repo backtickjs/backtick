@@ -5,7 +5,7 @@ import type {
   ClientScriptJsxAttribute,
   ClientScriptJsxElement,
   ClientScriptStringLiteral,
-} from "@backtickjs-internal/client-script";
+} from "@backtickjs/client-script";
 import { buildBundle } from "../dist/bundle/buildBundle.js";
 import type { AstScript } from "../dist/ast/Ast.js";
 

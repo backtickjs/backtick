@@ -14,10 +14,10 @@
   },
   "devDependencies": {
     "@backtickjs/bundler": "workspace:*",
-    "@backtickjs-internal/compiler": "workspace:*",
+    "@backtickjs/compiler": "workspace:*",
     "@backtickjs/core": "workspace:*",
-    "@backtickjs-internal/client-script": "workspace:*",
-    "@backtickjs-internal/js-interpreter": "workspace:*",
+    "@backtickjs/client-script": "workspace:*",
+    "@backtickjs/js-interpreter": "workspace:*",
     "@backtickjs/language": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",

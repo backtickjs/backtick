@@ -3,7 +3,6 @@
   "packageManager": "pnpm@11.5.1",
   "workspaces": [
     "packages/*",
-    "internal/*",
     "apps/*",
     "apps/backtickjs.com/*"
   ],

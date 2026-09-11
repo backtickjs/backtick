@@ -1,0 +1,32 @@
+{
+  "name": "@backtickjs/compiler",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Internal: used by `@backtickjs/tsc` and the build plugins. Compiles `cs` scripts: the transform, transpiling and the virtual code an editor checks",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check --ignore-unknown .",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "clean": "rm -rf node_modules dist .turbo"
+  },
+  "dependencies": {
+    "@backtickjs/client-script": "workspace:*"
+  },
+  "peerDependencies": {
+    "typescript": "^6.0.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^6.0.3"
+  }
+}
