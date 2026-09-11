@@ -114,7 +114,7 @@ export const schema: Schema = {
       }),
       {
         description:
-          "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `<backtick>`, which draws it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
+          "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `vm.eval`, which evaluates it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
       },
     ),
 
@@ -462,6 +462,10 @@ export const schema: Schema = {
               Type.FunctionParameter(
                 "bundle",
                 Type.Apply(Type.Ref("Bundle"), [Type.Ref("T")]),
+                {
+                  description:
+                    "A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.",
+                },
               ),
             ],
             Type.Ref("T"),
@@ -469,7 +473,7 @@ export const schema: Schema = {
           {
             description:
               "What a bundle holds: its `root` evaluated against its `functions`, here.\n\n" +
-              "Each call evaluates it again, so two calls are two drawings with cells of their own.",
+              "Each call evaluates it again, so two calls are two drawings with cells of their own. Evaluated untracked, as a component is run: what the bundle reads while its root is evaluated is read once, so a write to it evaluates nothing again. A caller that reads a cell to choose the bundle still follows that cell.",
           },
         ),
       },

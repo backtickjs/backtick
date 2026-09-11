@@ -49,7 +49,7 @@ function count(node: TestNode, id: string): number {
 
 describe("a component that draws a bundle", () => {
   it("is built once, and draws what arrives", async () => {
-    const script = await importFixture(validDir, "backtick-builds-once.tsx");
+    const script = await importFixture(validDir, "vm-eval-builds-once.tsx");
     const drawn = evaluate(await bundler.run(script));
     assert.ok(isTestNode(drawn), "expected a rendered node");
 

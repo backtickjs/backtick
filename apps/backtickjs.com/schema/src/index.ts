@@ -14,7 +14,6 @@ export type {
   ArrayLike,
   BacktickElement,
   BacktickNode,
-  BacktickProps,
   BaseProps,
   BlockquoteProps,
   Booleanish,

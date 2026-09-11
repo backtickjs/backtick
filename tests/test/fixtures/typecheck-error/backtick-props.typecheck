@@ -1,8 +1,0 @@
-37:45 error TS2322: Type 'string' is not assignable to type 'Spliceable<number>'.
-39:68 error TS2353: Object literal may only specify known properties, and 'nope' does not exist in type 'Prop<{ count: number; }>'.
-40:25 error TS2741: Property 'props' is missing in type '{ bundle: Bundle<Rows>; }' but required in type '{ bundle: Prop<Bundle<(props: { count: number; }) => BacktickElement> | null>; props: Prop<{ count: number; }>; }'.
-45:31 error TS2322: Type 'string' is not assignable to type 'Prop<Bundle<BacktickElement> | null>'.
-50:22 error TS2322: Type 'Bundle<BacktickElement>' is not assignable to type 'Prop<Bundle<(props: { count: number; }) => BacktickElement> | null>'.
-  Type 'Bundle<BacktickElement>' is not assignable to type 'Bundle<(props: { count: number; }) => BacktickElement>'.
-    Type 'BacktickElement' is not assignable to type '(props: { count: number; }) => BacktickElement'.
-      Type 'BacktickElement' provides no match for the signature '(props: { count: number; }): BacktickElement'.

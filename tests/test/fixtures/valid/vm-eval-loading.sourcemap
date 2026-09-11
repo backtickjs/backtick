@@ -37,19 +37,26 @@ span                                 → span
 span                                 → span
 >                                    → >\n      )
  :                                   →  : 
-<                                    → (\n        <
-backtick                             → backtick
-                                     →  
-bundle                               → bundle
-={cs.lift(                           → ={
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
 cs.receiver(                         → 
 __cs_held                            → held
 )                                    → 
 .                                    → .
 read                                 → read
 ()                                   → ()
-)}                                   → }
-/>                                   →  />\n      )
+ as                                  →  as 
+Bundle                               → Bundle
+<                                    → <
+BacktickElement                      → BacktickElement
+>                                    → >
+)                                    → )\n      )
 )}</                                 → }\n    </
 div                                  → div
 >                                    → >\n  )

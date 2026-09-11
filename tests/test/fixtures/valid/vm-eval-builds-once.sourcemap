@@ -57,19 +57,39 @@ cs.splice(                           →  [-semantic]
 );                                   → ;
 \n                                   → \n    
 return cs.const(                     → return 
-<                                    → <
-backtick                             → backtick
-                                     →  
-bundle                               → bundle
-={cs.lift(                           → ={
+<>{cs.lift(                          → (\n      <>\n        {
 cs.receiver(                         → 
 __cs_drawn                           → drawn
 )                                    → 
 .                                    → .
 read                                 → read
 ()                                   → ()
-)}                                   → }
-/>                                   →  />
+ ===                                 →  === 
+null                                 → null
+ ?                                   → \n          ? 
+null                                 → null
+ :                                   → \n          : 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+cs.receiver(                         → 
+__cs_drawn                           → drawn
+)                                    → 
+.                                    → .
+read                                 → read
+()                                   → ()
+ as                                  →  as 
+Bundle                               → Bundle
+<                                    → <
+BacktickElement                      → BacktickElement
+>                                    → >
+)                                    → )
+)}</>                                → }\n      </>\n    )
 );                                   → ;
 \n})())                              → \n  }`
 cs.lift((() => {\n                   → cs`{\n  

@@ -146,25 +146,6 @@ describe("where a render draws", () => {
   });
 });
 
-describe("a bundle drawn by <backtick />", () => {
-  it("draws one whose root is a <For />", async () => {
-    // A list evaluates to its accessor, a function — which is also what a bundle
-    // taking props evaluates to. This one takes none.
-    const bundle = await bundler.run(
-      await importFixture(validDir, "backtick-for-root.tsx"),
-    );
-    const parent = node("main");
-    render(bundle, { renderer: testHost }, parent);
-
-    const div = parent.children[0];
-    assert.ok(div !== undefined);
-    assert.deepEqual(
-      div.children.map((span) => span.children[0]?.text),
-      ["item 1", "item 2", "item 3"],
-    );
-  });
-});
-
 describe("a bundle a script runs with vm.eval", () => {
   it("draws one whose root is a <For />, and answers one that is a value", async () => {
     const bundle = await bundler.run(

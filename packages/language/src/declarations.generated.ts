@@ -80,8 +80,8 @@ declare const BundleBrand: unique symbol;
  * here needs a JavaScript parser.
  *
  * Opaque to a script, which is a different question from what it is made of: a
- * script may hold one and hand it back — to `<backtick>`, which draws it — and
- * never read into it. What a client keeps behind one is the client's.
+ * script may hold one and hand it back — to `vm.eval`, which evaluates it —
+ * and never read into it. What a client keeps behind one is the client's.
  *
  * What it comes to is carried and never read. A client has nothing to check it
  * against; it is what a host writes down so that what a bundle answers with is
@@ -417,7 +417,13 @@ export interface Vm extends ClientHandle {
    * What a bundle holds: its `root` evaluated against its `functions`, here.
    *
    * Each call evaluates it again, so two calls are two drawings with cells of
-   * their own.
+   * their own. Evaluated untracked, as a component is run: what the bundle
+   * reads while its root is evaluated is read once, so a write to it evaluates
+   * nothing again. A caller that reads a cell to choose the bundle still
+   * follows that cell.
+   *
+   * @param bundle A script that fetched the text writes `JSON.parse(text) as
+   * Bundle<BacktickElement>`, which is what an assertion is for.
    */
   eval<T extends ClientUnknown>(bundle: Bundle<T>): T;
 }

@@ -59,28 +59,6 @@ export const schema: Schema = {
     FragmentProps: Type.Interface([], {
       children: Type.Optional(Type.Ref("BacktickNode")),
     }),
-
-    BacktickProps: Type.Interface([], {
-      props: Type.Optional(
-        Type.Record(Type.String(), Type.Ref("ClientValue"), {
-          description:
-            "What the bundle is handed, under the name `props`.\n\n" +
-            "A bundle written elsewhere reads it the way any script reads a name it did not write. A live value stays live: reading a splice is calling it, so a drawing handed a cell redraws when the cell changes rather than being built again.\n\n" +
-            "Unchecked here where `<Backtick />` checks it against what the bundle takes, for the reason `<For />` exists: a tag has nowhere to bind a type parameter.",
-        }),
-      ),
-      bundle: Type.Union(
-        [
-          Type.Apply(Type.Ref("Bundle"), [Type.Ref("ClientUnknown")]),
-          Type.Null(),
-        ],
-        {
-          description:
-            "The bundle to draw. Opaque, so nothing here says whether a client keeps the text that came over the wire or a document it parsed — a script holds one and hands it back either way. A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.\n\n" +
-            "Null draws nothing, which is what a page with no bundle yet has to say. It is admitted here because a cell that is sometimes empty cannot be narrowed on its way in: a script reads a cell where it stands, and a read moved out to a `const` to be narrowed is a read that happens once and never again. So a page that wants something in the meantime writes the condition it already has — `held.read() === null ? … : <backtick bundle={held.read()} />` — and a page that wants nothing writes the tag and lets the null through.",
-        },
-      ),
-    }),
   },
 
   // The elements declared away from the target that draws them, because a list
@@ -104,13 +82,7 @@ export const schema: Schema = {
       description:
         "Children with no element of their own: what it holds goes where it stands.\n\n" +
         "What it is for is the position. A drawing that is not an element has nowhere to be watched — a conditional standing at a block's root is read inside whatever computation asked for it, and the write that answers the conditional runs the block again. Under a fragment the conditional is a child, and a child position is watched on its own.\n\n" +
-        "Written `<>`, which TypeScript resolves to this name. Capitalized where the other two are not, because a lowercase first letter is what makes a tag a target's own — so no target can declare an element named this.",
-    }),
-
-    backtick: Type.Ref("BacktickProps", {
-      description:
-        "A bundle, drawn here.\n\n" +
-        "One a script was handed rather than one the page was built with — fetched, stored, passed in. Every client evaluates bundles already, which is why this is the language's and not a target's: what draws it is the same client that drew the one it stands in.",
+        "Written `<>`, which TypeScript resolves to this name. Capitalized where `for` is not, because a lowercase first letter is what makes a tag a target's own — so no target can declare an element named this.",
     }),
   },
 

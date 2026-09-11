@@ -1,5 +1,5 @@
 import { bundler } from "@backtickjs/bundler";
-import { cs, state } from "@backtickjs/core";
+import { cs, state, vm } from "@backtickjs/core";
 import type { BacktickElement, Bundle, Prop } from "@backtickjs/core";
 import { window } from "@backtickjs/web";
 
@@ -10,6 +10,9 @@ import { window } from "@backtickjs/web";
 // the two together: the answer arriving changed the drawing, which ran the
 // expression that made it, which was this component again — new cells, and the
 // wait started over.
+//
+// The condition stands under `<>`, where a child position watches it: at the
+// block's root it would be read once, when the block ran.
 //
 // `asked` is the page's, so it survives a rebuild and counts them. It also ends
 // one: once it stops answering, a write of `null` over `null` changes nothing
@@ -28,7 +31,13 @@ async function Waiting({
   return cs`{
     const drawn = $state<Bundle<BacktickElement> | null>(null);
     const started = $window.setTimeout(() => drawn.write($ask()), 0);
-    return <backtick bundle={drawn.read()} />;
+    return (
+      <>
+        {drawn.read() === null
+          ? null
+          : $vm.eval(drawn.read() as Bundle<BacktickElement>)}
+      </>
+    );
   }`;
 }
 

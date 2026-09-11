@@ -2,7 +2,6 @@ export type {
   ArrayLike,
   BacktickElement,
   BacktickNode,
-  BacktickProps,
   Builtins,
   Bundle,
   BundleAddition,
@@ -75,12 +74,9 @@ export type {
   Vm,
 } from "./declarations.generated.js";
 
-// Components, because a tag has nowhere to bind a type parameter: these check a
-// list's child against its array, and a bundle's props against what it takes.
-// The tags stay writable on their own, unchecked.
+// A component, because a tag has nowhere to bind a type parameter: it checks a
+// list's child against its array. The tag stays writable on its own, unchecked.
 export { For } from "./For.js";
-export { Backtick } from "./Backtick.js";
-export { BacktickWithProps } from "./BacktickWithProps.js";
 
 // A drawing as a host builds one: the runtime a target's JSX compiles to, and
 // what a component is. Here rather than below, because what these are made of

@@ -1,0 +1,160 @@
+cs.lift(cs.const(                    → cs`
+<                                    → <
+em                                   → em
+>{cs.lift(                           → >{
+"rows "                              → "rows "
+ + (                                 →  + 
+cs.splice(                           →  [-semantic]
+(count)                              → $count
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+)}</                                 → }</
+em                                   → em
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+<                                    → <
+em                                   → em
+>{cs.lift(                           → >{
+"nothing to hand it"                 → "nothing to hand it"
+)}</                                 → }</
+em                                   → em
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n                                  → { 
+count                                → count
+:                                    → : 
+number                               → number
+;                                    → 
+\n}                                  →  }
+) =>                                 → ) => 
+cs.splice(                           → ${ [-semantic]
+(\n  <Row count={                    → (\n  <Row count={
+cs.lift(cs.const(                    → cs`
+cs.receiver(                         → 
+__cs_props                           → props
+)                                    → 
+.                                    → .
+count                                → count
+))                                   → `
+} />\n)                              → } />\n)
+) satisfies typeof cs.ClientUnknown  → } [-semantic]
+))                                   → `
+cs.lift((() => {\n                   → cs`{\n  
+const                                → const 
+__cs_Rows                            → Rows
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+cs.splice(                           →  [-semantic]
+(rows)                               → $rows
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → )
+);                                   → ;
+\n                                   → \n  
+const                                → const 
+__cs_Empty                           → Empty
+ = cs.const(                         →  = 
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+cs.splice(                           →  [-semantic]
+(empty)                              → $empty
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → )
+);                                   → ;
+\n                                   → \n\n  
+return cs.const(                     → return 
+<                                    → (\n    <
+div                                  → div
+>{cs.lift(                           → >\n      {/* Right: what the bundle takes, and a drawing, placed as one. */}\n      
+<                                    → <
+__cs_Rows                            → Rows
+                                     →  
+count                                → count
+={                                   → ={
+1                                    → 1
+}                                    → }
+/>                                   →  />
+)}{cs.lift(                          → \n      {
+__cs_Empty                           → Empty
+)}{cs.lift(                          → }\n\n      {/* Wrong: the wrong type, a name it hasn't got, and none at all. */}\n      
+<                                    → <
+__cs_Rows                            → Rows
+                                     →  
+count                                → count
+={                                   → ={
+"one"                                → "one"
+}                                    → }
+/>                                   →  />
+)}{cs.lift(                          → \n      
+<                                    → <
+__cs_Rows                            → Rows
+                                     →  
+nope                                 → nope
+={                                   → ={
+1                                    → 1
+}                                    → }
+/>                                   →  />
+)}{cs.lift(                          → \n      
+<                                    → <
+__cs_Rows                            → Rows
+ />                                  →  />
+)}{cs.lift(                          → \n\n      {/* A drawing is finished: there is no call for props to reach. */}\n      
+<                                    → <
+__cs_Empty                           → Empty
+                                     →  
+count                                → count
+={                                   → ={
+1                                    → 1
+}                                    → }
+/>                                   →  />
+)}{cs.lift(                          → \n\n      {/* Only a bundle: not nothing, and not the text one came as. */}\n      {
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+null                                 → null
+)                                    → )
+)}{cs.lift(                          → }\n      {
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+cs.receiver(                         → 
+JSON                                 → JSON
+)                                    → 
+.                                    → .
+stringify                            → stringify
+(                                    → (
+{}                                   → {}
+)                                    → )
+)                                    → )
+)}</                                 → }\n    </
+div                                  → div
+>                                    → >\n  )
+);                                   → ;
+\n})())                              → \n}`

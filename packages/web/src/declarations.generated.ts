@@ -13,7 +13,6 @@ export type {
   ArrayLike,
   BacktickElement,
   BacktickNode,
-  BacktickProps,
   Bundle,
   BundleAddition,
   BundleArrayElement,

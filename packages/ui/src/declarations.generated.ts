@@ -2,10 +2,8 @@
 
 import type {
   Builtins as LanguageBuiltins,
-  Bundle,
   Client,
   ClientHandle,
-  ClientUnknown,
   ClientValue,
   Elements as LanguageElements,
   ReadonlyState,
@@ -130,39 +128,6 @@ export interface FragmentProps {
   children?: Children;
 }
 
-export interface BacktickProps {
-  /**
-   * What the bundle is handed, under the name `props`.
-   *
-   * A bundle written elsewhere reads it the way any script reads a name it did
-   * not write. A live value stays live: reading a splice is calling it, so a
-   * drawing handed a cell redraws when the cell changes rather than being
-   * built again.
-   *
-   * Unchecked here where `<Backtick />` checks it against what the bundle
-   * takes, for the reason `<For />` exists: a tag has nowhere to bind a type
-   * parameter.
-   */
-  props?: Prop<{ [key: string]: ClientValue }>;
-  /**
-   * The bundle to draw. Opaque, so nothing here says whether a client keeps
-   * the text that came over the wire or a document it parsed — a script holds
-   * one and hands it back either way. A script that fetched the text writes
-   * `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion
-   * is for.
-   *
-   * Null draws nothing, which is what a page with no bundle yet has to say. It
-   * is admitted here because a cell that is sometimes empty cannot be narrowed
-   * on its way in: a script reads a cell where it stands, and a read moved out
-   * to a `const` to be narrowed is a read that happens once and never again.
-   * So a page that wants something in the meantime writes the condition it
-   * already has — `held.read() === null ? … : <backtick bundle={held.read()}
-   * />` — and a page that wants nothing writes the tag and lets the null
-   * through.
-   */
-  bundle: Prop<Bundle<ClientUnknown> | null>;
-}
-
 /** The elements this schema declares, and what each accepts. */
 export interface UiElements {
   /**
@@ -188,19 +153,10 @@ export interface UiElements {
    * child, and a child position is watched on its own.
    *
    * Written `<>`, which TypeScript resolves to this name. Capitalized where
-   * the other two are not, because a lowercase first letter is what makes a
-   * tag a target's own — so no target can declare an element named this.
+   * `for` is not, because a lowercase first letter is what makes a tag a
+   * target's own — so no target can declare an element named this.
    */
   Fragment: FragmentProps;
-  /**
-   * A bundle, drawn here.
-   *
-   * One a script was handed rather than one the page was built with — fetched,
-   * stored, passed in. Every client evaluates bundles already, which is why
-   * this is the language's and not a target's: what draws it is the same
-   * client that drew the one it stands in.
-   */
-  backtick: BacktickProps;
 }
 
 /** Every element in scope, this schema's own and its bases'. */

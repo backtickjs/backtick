@@ -13,15 +13,15 @@
   </div>;
 }
 
-#f1 = ($0, $1, $2) => {
+#f1 = ($0, $1, $2, $3) => {
   const drawn = $0()(null);
   const started = $1().setTimeout(() => drawn.write($2()()), 0);
-  return <backtick
-    bundle={drawn.read()}
-  />;
+  return <Fragment>
+    {drawn.read() === null ? null : $3().eval(drawn.read())}
+  </Fragment>;
 }
 
 root = #f0(() => state, () => {
   "functions": { "0": ["=>", [], ["el", "em", {}, "answered"]] },
   "root": ["comp", ["=>", [], ["()", ["fn", "0"], []]], {}, null]
-}, () => ($0) => #f1(() => state, () => window, () => $0.ask()))
+}, () => ($0) => #f1(() => state, () => window, () => $0.ask(), () => vm))

@@ -16,27 +16,20 @@ span                                 → span
 >before</                            → >before</
 span                                 → span
 >                                    → >
-)}{cs.lift(                          → \n    
-<                                    → <
-backtick                             → backtick
-                                     →  
-bundle                               → bundle
-={cs.lift(                           → ={
+)}{cs.lift(                          → \n    {
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
 cs.splice(                           →  [-semantic]
 (held)                               → $held
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
-)}                                   → }
-/>                                   →  />
-)}{cs.lift(                          → \n    
-<                                    → <
-backtick                             → backtick
-                                     →  
-bundle                               → bundle
-={cs.lift(                           → ={
-null                                 → null
-)}                                   → }
-/>                                   →  />
-)}{cs.lift(                          → \n    
+)                                    → )
+)}{cs.lift(                          → }\n    
 <                                    → <
 span                                 → span
 >after</                             → >after</

@@ -210,7 +210,7 @@
       ]
     },
     "Bundle": {
-      "description": "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `<backtick>`, which draws it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
+      "description": "The bundler's wire format, as plain data — what ships is exactly the JSON of one of these. This is the contract an interpreter implements: evaluate `root` against the `functions` table. Computation ships as ASTs, so nothing here needs a JavaScript parser.\n\nOpaque to a script, which is a different question from what it is made of: a script may hold one and hand it back — to `vm.eval`, which evaluates it — and never read into it. What a client keeps behind one is the client's.\n\nWhat it comes to is carried and never read. A client has nothing to check it against; it is what a host writes down so that what a bundle answers with is known where the bundle is handed over.",
       "type": "generic",
       "parameters": [
         {
@@ -1898,7 +1898,7 @@
       ],
       "properties": {
         "eval": {
-          "description": "What a bundle holds: its `root` evaluated against its `functions`, here.\n\nEach call evaluates it again, so two calls are two drawings with cells of their own.",
+          "description": "What a bundle holds: its `root` evaluated against its `functions`, here.\n\nEach call evaluates it again, so two calls are two drawings with cells of their own. Evaluated untracked, as a component is run: what the bundle reads while its root is evaluated is read once, so a write to it evaluates nothing again. A caller that reads a cell to choose the bundle still follows that cell.",
           "type": "generic",
           "parameters": [
             {
@@ -1918,6 +1918,7 @@
             "type": "function",
             "parameters": [
               {
+                "description": "A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.",
                 "type": "functionParameter",
                 "name": "bundle",
                 "holds": {
@@ -2248,46 +2249,6 @@
         }
       },
       "required": []
-    },
-    "BacktickProps": {
-      "type": "interface",
-      "extends": [],
-      "properties": {
-        "props": {
-          "description": "What the bundle is handed, under the name `props`.\n\nA bundle written elsewhere reads it the way any script reads a name it did not write. A live value stays live: reading a splice is calling it, so a drawing handed a cell redraws when the cell changes rather than being built again.\n\nUnchecked here where `<Backtick />` checks it against what the bundle takes, for the reason `<For />` exists: a tag has nowhere to bind a type parameter.",
-          "type": "record",
-          "keys": {
-            "type": "string"
-          },
-          "values": {
-            "type": "ref",
-            "$ref": "ClientValue"
-          }
-        },
-        "bundle": {
-          "description": "The bundle to draw. Opaque, so nothing here says whether a client keeps the text that came over the wire or a document it parsed — a script holds one and hands it back either way. A script that fetched the text writes `JSON.parse(text) as Bundle<BacktickElement>`, which is what an assertion is for.\n\nNull draws nothing, which is what a page with no bundle yet has to say. It is admitted here because a cell that is sometimes empty cannot be narrowed on its way in: a script reads a cell where it stands, and a read moved out to a `const` to be narrowed is a read that happens once and never again. So a page that wants something in the meantime writes the condition it already has — `held.read() === null ? … : <backtick bundle={held.read()} />` — and a page that wants nothing writes the tag and lets the null through.",
-          "type": "union",
-          "anyOf": [
-            {
-              "type": "apply",
-              "target": {
-                "type": "ref",
-                "$ref": "Bundle"
-              },
-              "arguments": [
-                {
-                  "type": "ref",
-                  "$ref": "ClientUnknown"
-                }
-              ]
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": ["bundle"]
     },
     "EventTarget": {
       "description": "What an event happened to, and what a listener is attached to.",
@@ -13249,14 +13210,9 @@
       ]
     },
     "Fragment": {
-      "description": "Children with no element of their own: what it holds goes where it stands.\n\nWhat it is for is the position. A drawing that is not an element has nowhere to be watched — a conditional standing at a block's root is read inside whatever computation asked for it, and the write that answers the conditional runs the block again. Under a fragment the conditional is a child, and a child position is watched on its own.\n\nWritten `<>`, which TypeScript resolves to this name. Capitalized where the other two are not, because a lowercase first letter is what makes a tag a target's own — so no target can declare an element named this.",
+      "description": "Children with no element of their own: what it holds goes where it stands.\n\nWhat it is for is the position. A drawing that is not an element has nowhere to be watched — a conditional standing at a block's root is read inside whatever computation asked for it, and the write that answers the conditional runs the block again. Under a fragment the conditional is a child, and a child position is watched on its own.\n\nWritten `<>`, which TypeScript resolves to this name. Capitalized where `for` is not, because a lowercase first letter is what makes a tag a target's own — so no target can declare an element named this.",
       "type": "ref",
       "$ref": "FragmentProps"
-    },
-    "backtick": {
-      "description": "A bundle, drawn here.\n\nOne a script was handed rather than one the page was built with — fetched, stored, passed in. Every client evaluates bundles already, which is why this is the language's and not a target's: what draws it is the same client that drew the one it stands in.",
-      "type": "ref",
-      "$ref": "BacktickProps"
     },
     "a": {
       "type": "ref",

@@ -11,6 +11,7 @@ import type {
   BundleStatement,
   BundleFunctionLabel,
 } from "@backtickjs/bundler";
+import { untrack } from "solid-js";
 import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
 import { compileComponentCall, compileElement, evaluated } from "./view.js";
@@ -374,11 +375,15 @@ function buildNode(
     case "bltn": {
       const name = node[1];
       // The one name that needs the instance: a bundle drawn with this one's
-      // renderer, and reaching the names this one does.
+      // renderer, and reaching the names this one does. Untracked, as Solid
+      // runs a component: what the bundle reads while its root is evaluated is
+      // its own setup, and a write to it runs nothing of the caller's again.
       if (name === "vm") {
         const vm = {
           eval: (bundle: Bundle<ClientUnknown>) =>
-            evaluated(bundle, instance.renderer, instance.builtins),
+            untrack(() =>
+              evaluated(bundle, instance.renderer, instance.builtins),
+            ),
         } as unknown as ClientValue;
         return () => vm;
       }

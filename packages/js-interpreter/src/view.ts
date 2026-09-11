@@ -3,7 +3,6 @@ import type {
   Bundle,
   BundleArrayElement,
   BundleElement,
-  BundleExpression,
   BundleComponentCall,
 } from "@backtickjs/bundler";
 import {
@@ -175,9 +174,6 @@ export function compileElement(
   if (id === "for") {
     return compileFor(instance, element);
   }
-  if (id === "backtick") {
-    return compileBacktick(instance, element);
-  }
   if (id === "Fragment") {
     return compileFragment(instance, element);
   }
@@ -297,39 +293,6 @@ function compileFragment(
   return (scope) => draw(scope) as ClientValue;
 }
 
-// What a drawing hands a bundle: the record it wrote, with every member read
-// again where the drawn bundle reads it rather than once where it was written.
-//
-// That is the deferral the compiler already writes at a component's call site,
-// so a prop behaves the same wherever it came from — `count.read()` is live
-// written plainly, and nothing has to be wrapped by hand.
-//
-// Nothing where the tag was written without props, which is a bundle that takes
-// none.
-function compileProps(
-  instance: Instance,
-  node: BundleExpression,
-): (scope: Scope | null) => ClientValue {
-  const read = compile(instance, node);
-  return (scope) => {
-    // The names are read once and untracked: what they hold is read again per
-    // access, and tracking it here would tie the whole drawing to it — a write
-    // would rebuild the bundle instead of updating what read the member.
-    const written = untrack(() => read(scope));
-    if (written === null || written === undefined) {
-      return null;
-    }
-    const props: { [key: string]: ClientValue } = {};
-    for (const name of Object.keys(written as { [key: string]: ClientValue })) {
-      Object.defineProperty(props, name, {
-        get: () => (read(scope) as { [key: string]: ClientValue })[name],
-        enumerable: true,
-      });
-    }
-    return props;
-  };
-}
-
 /**
  * A call of a component a script holds: called once, untracked, with its
  * props as a record whose members are read again on every access — what keeps
@@ -362,58 +325,6 @@ export function compileComponentCall(
       (called as (props: ClientValue) => ClientValue)(record),
     );
   };
-}
-
-/**
- * A bundle drawn inside a drawing.
- *
- * Answers with the drawing itself, not a node wrapping it, so the tag leaves
- * nothing in the target — the same as a list.
- *
- * A computation and not a value: an element is built once, so a bundle read
- * here would be the first one and no other. A children position calls what it
- * is given, which is how a new bundle gets drawn.
- */
-function compileBacktick(
-  instance: Instance,
-  element: BundleElement,
-): (scope: Scope | null) => ClientValue {
-  const read = compile(instance, element[2]["bundle"] ?? null);
-  const readProps = compileProps(instance, element[2]["props"] ?? null);
-  return (scope) =>
-    createMemo(() => {
-      const bundle = read(scope);
-      // No bundle yet: a compile still running, a request not yet answered.
-      if (bundle === null || bundle === undefined) {
-        return null;
-      }
-      const drawn = evaluated(
-        bundle as Bundle<ClientUnknown>,
-        instance.renderer,
-        // The mount's names, so a bundle drawn here reaches what its
-        // surroundings reach.
-        instance.builtins,
-      );
-      // A bundle that takes props is a function, and drawing it is calling it —
-      // the same call a component is invoked with, one record of what it needs.
-      // `<Backtick />` checks the two agree; a bundle that came from somewhere
-      // else is checked here, where the mismatch is.
-      const props = readProps(scope);
-      if (props === null) {
-        if (typeof drawn === "function") {
-          throw new Error(
-            "backtick: this bundle takes props, and none were given",
-          );
-        }
-        return drawn as ClientValue;
-      }
-      if (typeof drawn !== "function") {
-        throw new Error(
-          "backtick: this bundle takes no props, and some were given",
-        );
-      }
-      return (drawn as (props: ClientValue) => ClientValue)(props);
-    }) as ClientValue;
 }
 
 /**

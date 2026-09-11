@@ -1,78 +1,82 @@
-import { cs, state } from "@backtickjs/core";
+import { cs, state, vm } from "@backtickjs/core";
 // A bundle a page does not have yet, and what stands in until it does.
 //
 // Both reads are where they stand, inside the drawing: that is what makes the
 // condition follow the cell. Reading it once into a `const` would narrow the
 // type and freeze the drawing — the script body runs once, so the loading state
-// would never resolve.
+// would never resolve. So the second read is asserted instead, which the
+// condition beside it is what makes true.
 export default cs.create(
-  [10, 16, 22, 3],
+  [11, 16, 23, 3],
   {
     version: "0.0.0",
-    filePath: "backtick-loading.tsx",
-    fileHash: "2m7uau18bs02p",
-    splices: { $state: { value: state, params: [] } },
+    filePath: "vm-eval-loading.tsx",
+    fileHash: "sadgbrepsq3h",
+    splices: {
+      $state: { value: state, params: [] },
+      $vm: { value: vm, params: [] },
+    },
     captures: [],
   },
   () => ({
     kind: "{}",
-    loc: [10, 19, 22, 2],
+    loc: [11, 19, 23, 2],
     statements: [
       {
         kind: "const",
-        loc: [11, 3, 11, 61],
+        loc: [12, 3, 12, 61],
         name: {
           kind: "id",
-          loc: [11, 9, 11, 13],
+          loc: [12, 9, 12, 13],
           text: "held",
-          bindingKey: "held$2m7uau18bs02p$0",
+          bindingKey: "held$sadgbrepsq3h$0",
         },
         initializer: {
           kind: "()",
-          loc: [11, 16, 11, 60],
+          loc: [12, 16, 12, 60],
           expression: {
             kind: "splice",
-            loc: [11, 16, 11, 22],
+            loc: [12, 16, 12, 22],
             key: "$state",
           },
           arguments: [
             {
               kind: "null",
-              loc: [11, 55, 11, 59],
+              loc: [12, 55, 12, 59],
             },
           ],
         },
       },
       {
         kind: "return",
-        loc: [13, 3, 21, 5],
+        loc: [14, 3, 22, 5],
         expression: {
           kind: "jsx",
-          loc: [14, 5, 20, 11],
+          loc: [15, 5, 21, 11],
           type: {
             kind: "string",
-            loc: [14, 6, 14, 9],
+            loc: [15, 6, 15, 9],
             text: "div",
           },
           attributes: [],
           children: [
             {
               kind: "?:",
-              loc: [15, 8, 19, 8],
+              loc: [16, 8, 20, 8],
               condition: {
                 kind: "binop",
-                loc: [15, 8, 15, 28],
+                loc: [16, 8, 16, 28],
                 left: {
                   kind: "()",
-                  loc: [15, 8, 15, 19],
+                  loc: [16, 8, 16, 19],
                   expression: {
                     kind: ".",
-                    loc: [15, 8, 15, 17],
+                    loc: [16, 8, 16, 17],
                     expression: {
                       kind: "id",
-                      loc: [15, 8, 15, 12],
+                      loc: [16, 8, 16, 12],
                       text: "held",
-                      bindingKey: "held$2m7uau18bs02p$0",
+                      bindingKey: "held$sadgbrepsq3h$0",
                     },
                     name: "read",
                   },
@@ -81,56 +85,57 @@ export default cs.create(
                 operatorToken: "===",
                 right: {
                   kind: "null",
-                  loc: [15, 24, 15, 28],
+                  loc: [16, 24, 16, 28],
                 },
               },
               whenTrue: {
                 kind: "jsx",
-                loc: [16, 9, 16, 30],
+                loc: [17, 9, 17, 30],
                 type: {
                   kind: "string",
-                  loc: [16, 10, 16, 14],
+                  loc: [17, 10, 17, 14],
                   text: "span",
                 },
                 attributes: [],
                 children: [
                   {
                     kind: "string",
-                    loc: [16, 15, 16, 23],
+                    loc: [17, 15, 17, 23],
                     text: "loading\u2026",
                   },
                 ],
               },
               whenFalse: {
-                kind: "jsx",
-                loc: [18, 9, 18, 42],
-                type: {
-                  kind: "string",
-                  loc: [18, 10, 18, 18],
-                  text: "backtick",
+                kind: "()",
+                loc: [19, 9, 19, 57],
+                expression: {
+                  kind: ".",
+                  loc: [19, 9, 19, 17],
+                  expression: {
+                    kind: "splice",
+                    loc: [19, 9, 19, 12],
+                    key: "$vm",
+                  },
+                  name: "eval",
                 },
-                attributes: [
+                arguments: [
                   {
-                    name: "bundle",
-                    initializer: {
-                      kind: "()",
-                      loc: [18, 27, 18, 38],
+                    kind: "()",
+                    loc: [19, 18, 19, 29],
+                    expression: {
+                      kind: ".",
+                      loc: [19, 18, 19, 27],
                       expression: {
-                        kind: ".",
-                        loc: [18, 27, 18, 36],
-                        expression: {
-                          kind: "id",
-                          loc: [18, 27, 18, 31],
-                          text: "held",
-                          bindingKey: "held$2m7uau18bs02p$0",
-                        },
-                        name: "read",
+                        kind: "id",
+                        loc: [19, 18, 19, 22],
+                        text: "held",
+                        bindingKey: "held$sadgbrepsq3h$0",
                       },
-                      arguments: [],
+                      name: "read",
                     },
+                    arguments: [],
                   },
                 ],
-                children: [],
               },
             },
           ],
