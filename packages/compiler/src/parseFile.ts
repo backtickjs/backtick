@@ -25,11 +25,10 @@ export interface ClientScript {
 // dictionary and the runtime metadata (`key`) — and evaluate a host
 // expression (`expression`).
 //
-// A component tag is the third: `<Card />` names a host binding too, and the
-// source spelled no sigil for it. Which tags do is scope resolution's to say —
-// a tag naming a binding in scope is a function the script holds — so these are
-// not minted here but by the rewrite, once `resolveBindings` has answered.
-export type Splice = BracedSplice | UnbracedSplice | ComponentTagSplice;
+// What the text spells, and only that. A component tag names a host binding
+// too, but no sigil says so — which tags do is scope resolution's to answer —
+// so the rewrite hands those to the script itself (see `rewriteScript`).
+export type Splice = BracedSplice | UnbracedSplice;
 
 export interface BracedSplice {
   kind: "braced";
@@ -50,22 +49,6 @@ export interface UnbracedSplice {
   // placeholder text, which also keys the splice dictionary
   key: string;
   // a shorthand names a single binding, so it nests no scripts
-  scripts: [];
-}
-
-// The host binding a component tag names. It stands in no placeholder — a tag
-// carries no sigil — so its key is minted rather than read from the text, and
-// only for a tag no scope binds.
-export interface ComponentTagSplice {
-  kind: "component-tag";
-  // the host binding the tag names (synthesized, e.g. `Card` for `<Card />`)
-  expression: ts.Identifier;
-  // the metadata key, `$<TagName>`: the same key `$Card` would mint, since it
-  // is the same binding. One per component however many tags name it, because
-  // a tag's props go with the call rather than with the value. A script that
-  // writes both spellings claims the key twice, which minting has to answer.
-  key: string;
-  // a tag names a single binding, so it nests no scripts
   scripts: [];
 }
 
