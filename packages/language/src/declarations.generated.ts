@@ -392,6 +392,22 @@ export type HttpConfig = {
  */
 export type HttpResponse = { readonly status: number; readonly data: string };
 
+declare const VmBrand: unique symbol;
+/**
+ * The machine a client runs bundles on. A bundle is data — a program for this
+ * — and nothing here reads JavaScript.
+ */
+export interface Vm extends ClientHandle {
+  readonly [VmBrand]: never;
+  /**
+   * What a bundle holds: its `root` evaluated against its `functions`, here.
+   *
+   * Each call evaluates it again, so two calls are two drawings with cells of
+   * their own.
+   */
+  eval<T extends ClientUnknown>(bundle: Bundle<T>): T;
+}
+
 declare const HttpBrand: unique symbol;
 /**
  * Requests the way axios makes them, answering through handlers because a
@@ -1168,6 +1184,7 @@ export interface LanguageBuiltins {
   ): { [key: string]: T };
   http: Http;
   state<T>(initial: T): State<T>;
+  vm: Vm;
 }
 
 /** What a client must answer with, for every name in scope. */

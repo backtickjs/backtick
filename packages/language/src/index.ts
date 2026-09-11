@@ -76,8 +76,9 @@ export type {
   LanguageElements,
   ReadonlyState,
   State,
+  Vm,
 } from "./declarations.generated.js";
-export { http, state } from "./builtins.generated.js";
+export { http, state, vm } from "./builtins.generated.js";
 export type {
   Array,
   ArrayConstructor,

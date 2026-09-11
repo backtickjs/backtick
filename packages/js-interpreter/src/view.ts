@@ -99,7 +99,7 @@ function materialize<N extends object>(
  * A `functions` table per bundle, because the labels are per bundle: two
  * bundles both holding a `0` mean two different functions.
  */
-function evaluated(
+export function evaluated(
   bundle: Bundle<ClientUnknown>,
   renderer: Renderer<object>,
   builtins: Instance["builtins"],

@@ -219,6 +219,7 @@ export type {
   TransitionEvent,
   UIEvent,
   VideoProps,
+  Vm,
   VoidProps,
   WebBuiltins,
   WebElements,

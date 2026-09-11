@@ -2,9 +2,11 @@
 
 import { createBuiltin } from "./Builtin.js";
 import type { Client } from "./Client.js";
-import type { Http, State } from "./declarations.generated.js";
+import type { Http, State, Vm } from "./declarations.generated.js";
 
 export const http: Client<Http> = createBuiltin("http");
 
 export const state: Client<<T>(initial: T) => State<T>> =
   createBuiltin("state");
+
+export const vm: Client<Vm> = createBuiltin("vm");

@@ -439,6 +439,33 @@ export const schema: Schema = {
       { description: "What answered, body and all." },
     ),
 
+    Vm: Type.Interface(
+      [Type.Ref("ClientHandle")],
+      {
+        eval: Type.Generic(
+          [Type.GenericParameter("T", Type.Ref("ClientUnknown"))],
+          Type.Function(
+            [
+              Type.FunctionParameter(
+                "bundle",
+                Type.Apply(Type.Ref("Bundle"), [Type.Ref("T")]),
+              ),
+            ],
+            Type.Ref("T"),
+          ),
+          {
+            description:
+              "What a bundle holds: its `root` evaluated against its `functions`, here.\n\n" +
+              "Each call evaluates it again, so two calls are two drawings with cells of their own.",
+          },
+        ),
+      },
+      {
+        description:
+          "The machine a client runs bundles on. A bundle is data — a program for this — and nothing here reads JavaScript.",
+      },
+    ),
+
     Http: Type.Interface(
       [Type.Ref("ClientHandle")],
       {
@@ -1860,5 +1887,6 @@ export const schema: Schema = {
         Type.Apply(Type.Ref("State"), [Type.Ref("T")]),
       ),
     ),
+    vm: Type.Ref("Vm"),
   },
 };

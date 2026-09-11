@@ -164,3 +164,20 @@ describe("a bundle drawn by <backtick />", () => {
     );
   });
 });
+
+describe("a bundle a script runs with vm.eval", () => {
+  it("draws one whose root is a <For />, and answers one that is a value", async () => {
+    const bundle = await bundler.run(
+      await importFixture(validDir, "vm-eval.tsx"),
+    );
+    const parent = node("main");
+    render(bundle, { renderer: testHost }, parent);
+
+    const div = parent.children[0];
+    assert.ok(div !== undefined);
+    assert.deepEqual(
+      div.children.map((child) => child.children[0]?.text),
+      ["item 1", "item 2", "item 3", "42"],
+    );
+  });
+});

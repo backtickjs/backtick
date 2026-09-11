@@ -1,0 +1,79 @@
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_name                            → name
+:                                    → : 
+string                               → string
+) =>                                 → ) => 
+"hello "                             → "hello "
+ +                                   →  + 
+__cs_name                            → name
+))                                   → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_props                           → props
+:                                    → : 
+{\n    count: number;\n}             → { count: number }
+) =>                                 → ) => 
+<                                    → <
+b                                    → b
+>{cs.lift(                           → >{
+"count "                             → "count "
+ +                                   →  + 
+cs.receiver(                         → 
+__cs_props                           → props
+)                                    → 
+.                                    → .
+count                                → count
+)}</                                 → }</
+b                                    → b
+>                                    → >
+))                                   → `
+cs.lift(cs.const(                    → cs`
+<                                    → <
+div                                  → div
+>{cs.lift(                           → >\n  
+<                                    → <
+span                                 → span
+>{cs.lift(                           → >{
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+cs.splice(                           →  [-semantic]
+(greet)                              → $greet
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → )
+(                                    → (
+"ada"                                → "ada"
+)                                    → )
+)}</                                 → }</
+span                                 → span
+>                                    → >
+)}{cs.lift(                          → \n  {
+cs.receiver(                         → 
+cs.splice(                           →  [-semantic]
+(vm)                                 → $vm
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → 
+.                                    → .
+eval                                 → eval
+(                                    → (
+cs.splice(                           →  [-semantic]
+(badge)                              → $badge
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)                                    → )
+(                                    → (
+{                                    → { 
+count                                → count
+:                                    → : 
+3                                    → 3
+ }                                   →  }
+)                                    → )
+)}</                                 → }\n</
+div                                  → div
+>                                    → >
+))                                   → `

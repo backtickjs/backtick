@@ -78,6 +78,7 @@ export type {
   HttpResponse,
   ReadonlyState,
   State,
+  Vm,
 } from "@backtickjs/ui";
 
 declare const EventTargetBrand: unique symbol;

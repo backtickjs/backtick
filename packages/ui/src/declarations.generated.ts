@@ -77,6 +77,7 @@ export type {
   HttpResponse,
   ReadonlyState,
   State,
+  Vm,
 } from "@backtickjs/language";
 
 declare const BacktickElementBrand: unique symbol;

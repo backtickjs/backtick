@@ -1839,6 +1839,63 @@
       },
       "required": ["status", "data"]
     },
+    "Vm": {
+      "description": "The machine a client runs bundles on. A bundle is data — a program for this — and nothing here reads JavaScript.",
+      "type": "interface",
+      "extends": [
+        {
+          "type": "ref",
+          "$ref": "ClientHandle"
+        }
+      ],
+      "properties": {
+        "eval": {
+          "description": "What a bundle holds: its `root` evaluated against its `functions`, here.\n\nEach call evaluates it again, so two calls are two drawings with cells of their own.",
+          "type": "generic",
+          "parameters": [
+            {
+              "type": "genericParameter",
+              "name": "T",
+              "extends": {
+                "type": "ref",
+                "$ref": "ClientUnknown"
+              },
+              "equals": {
+                "type": "ref",
+                "$ref": "ClientUnknown"
+              }
+            }
+          ],
+          "expression": {
+            "type": "function",
+            "parameters": [
+              {
+                "type": "functionParameter",
+                "name": "bundle",
+                "holds": {
+                  "type": "apply",
+                  "target": {
+                    "type": "ref",
+                    "$ref": "Bundle"
+                  },
+                  "arguments": [
+                    {
+                      "type": "ref",
+                      "$ref": "T"
+                    }
+                  ]
+                }
+              }
+            ],
+            "returnType": {
+              "type": "ref",
+              "$ref": "T"
+            }
+          }
+        }
+      },
+      "required": ["eval"]
+    },
     "Http": {
       "description": "Requests the way axios makes them, answering through handlers because a script has no `await`.\n\n`onResponse` is called with every answer, whatever its status, and a throw from it is handed to `onFailure` — so a script fails on a status by throwing. `onFailure` is also called where nothing answered. Neither is called before the call returns, or more than once.\n\nRedirects are followed, and the body is read before either handler is called.",
       "type": "interface",
@@ -4725,6 +4782,10 @@
           ]
         }
       }
+    },
+    "vm": {
+      "type": "ref",
+      "$ref": "Vm"
     }
   }
 }

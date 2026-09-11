@@ -4,6 +4,7 @@
 // what it needs from the format is the format, not a package.
 import type { ClientUnknown, ClientValue } from "@backtickjs/core";
 import type {
+  Bundle,
   BundleArrayElement,
   BundleArrowFunction,
   BundleSpreadElement,
@@ -12,7 +13,7 @@ import type {
 } from "@backtickjs/bundler";
 import { getters, globals } from "./globals.js";
 import type { Instance } from "./Instance.js";
-import { compileElement } from "./view.js";
+import { compileElement, evaluated } from "./view.js";
 
 // A reference client: the interpreter the bundle wire format is specified
 // against (see `bundler/bundle/Bundle.ts`). It evaluates a bundle's `root`
@@ -369,6 +370,15 @@ function buildNode(
     // everywhere, and a target may lengthen it but not edit it.
     case "bltn": {
       const name = node[1];
+      // The one name that needs the instance: a bundle drawn with this one's
+      // renderer, and reaching the names this one does.
+      if (name === "vm") {
+        const vm = {
+          eval: (bundle: Bundle<ClientUnknown>) =>
+            evaluated(bundle, instance.renderer, instance.builtins),
+        } as unknown as ClientValue;
+        return () => vm;
+      }
       const value = instance.builtins[name];
       if (value === undefined) {
         throw new Error(`unknown builtin ${name}`);

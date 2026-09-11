@@ -5,6 +5,7 @@ import type {
   HttpConfig,
   HttpResponse,
   State,
+  Vm,
 } from "@backtickjs/language";
 import { createSignal } from "solid-js";
 
@@ -261,6 +262,13 @@ export const globals: Builtins = {
       void send("POST", url, data, onResponse, onFailure, config);
     }) satisfies Http["post"],
   } as unknown as Http,
+  // Answered by each instance, which holds the renderer and names a bundle is
+  // evaluated with; see the `bltn` case in `interpret.ts`.
+  vm: {
+    eval() {
+      throw new Error("`vm` is answered by the instance evaluating a bundle");
+    },
+  } as unknown as Vm,
 };
 
 // Inside the `try`, so a throw from `onResponse` reaches `onFailure`.
