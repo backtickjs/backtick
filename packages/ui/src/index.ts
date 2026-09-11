@@ -85,7 +85,6 @@ export { BacktickWithProps } from "./BacktickWithProps.js";
 // A drawing as a host builds one: the runtime a target's JSX compiles to, and
 // what a component is. Here rather than below, because what these are made of
 // is what this schema declares.
-export type { ServerComponent } from "./ServerComponent.js";
 export {
   createJsxElement,
   isJsxElement,

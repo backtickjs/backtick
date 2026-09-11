@@ -1,5 +1,5 @@
 import type { BacktickElement } from "./declarations.generated.js";
-import type { ServerComponent } from "./ServerComponent.js";
+import type { Prop } from "./Prop.js";
 
 /**
  * What a JSX tag may name: an element to draw, or a component to run while
@@ -7,7 +7,8 @@ import type { ServerComponent } from "./ServerComponent.js";
  */
 export type JsxElementType =
   | string /* IntrinsicElement tag */
-  | ServerComponent<never>;
+  | ((props: never) => Prop<BacktickElement | null>)
+  | ((props: never) => Promise<Prop<BacktickElement | null>>);
 
 /**
  * What a JSX tag evaluates to on the server, before bundling resolves it.

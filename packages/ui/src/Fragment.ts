@@ -1,5 +1,6 @@
 import { createJsxElement } from "./JsxElement.js";
-import type { ServerComponent } from "./ServerComponent.js";
+import type { BacktickElement } from "./declarations.generated.js";
+import type { Prop } from "./Prop.js";
 
 /**
  * Children with no element of their own, as the element the language owns.
@@ -18,9 +19,11 @@ import type { ServerComponent } from "./ServerComponent.js";
  * Each target still makes its own, since what a fragment may hold is whatever
  * that target draws, and `Props` is where it says so.
  */
-export type Fragment<Props extends object = object> = ServerComponent<Props>;
+export type Fragment<Props extends object = object> = (
+  props: Props,
+) => Prop<BacktickElement | null>;
 
 export function createFragment<Props extends object>(): Fragment<Props> {
-  return (async (props: { children?: unknown }) =>
+  return ((props: { children?: unknown }) =>
     createJsxElement("Fragment", props)) as unknown as Fragment<Props>;
 }

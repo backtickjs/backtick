@@ -1,7 +1,4 @@
 13:17 error TS2786: 'Panel' cannot be used as a JSX component.
   Its type '() => Promise<Client<void>>' is not a valid JSX element type.
-    Type '() => Promise<Client<void>>' is not assignable to type 'ServerComponent<never>'.
-      Type 'Promise<Client<void>>' is not assignable to type 'Promise<Prop<BacktickElement | null>>'.
-        Type 'Client<void>' is not assignable to type 'Prop<BacktickElement | null>'.
-          Type 'Client<void>' is not assignable to type 'Client<BacktickElement | null>'.
-            Type 'void' is not assignable to type 'BacktickElement | null'.
+    Type '() => Promise<Client<void>>' is not assignable to type '(props: never) => Prop<BacktickElement | null>'.
+      Type 'Promise<Client<void>>' is not assignable to type 'Prop<BacktickElement | null>'.
