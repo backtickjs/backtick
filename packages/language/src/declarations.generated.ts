@@ -552,6 +552,17 @@ export interface LanguageBuiltins {
    */
   "string.charCodeAt"(self: string, index: number): number;
   /**
+   * Returns a nonnegative integer Number less than 1114112 (0x110000) that is
+   * the code point value of the UTF-16 encoded code point starting at the
+   * string element at position pos. If there is no element at that position,
+   * the result is undefined. If a valid UTF-16 surrogate pair does not begin
+   * at pos, the result is the code unit at pos.
+   *
+   * @param self The value the member is reached off.
+   * @param pos The index of the element to read the code point at.
+   */
+  "string.codePointAt"(self: string, pos: number): number | undefined;
+  /**
    * Returns a string that contains the concatenation of two or more strings.
    *
    * @param self The value the member is reached off.
@@ -587,6 +598,45 @@ export interface LanguageBuiltins {
     position?: number,
   ): number;
   /**
+   * Returns true if searchString appears as a substring of this string, at one
+   * or more positions that are greater than or equal to position; otherwise,
+   * returns false.
+   *
+   * @param self The value the member is reached off.
+   * @param searchString search string
+   * @param position If position is undefined, 0 is assumed, so as to search
+   * all of the String.
+   */
+  "string.includes"(
+    self: string,
+    searchString: string,
+    position?: number,
+  ): boolean;
+  /**
+   * Returns true if the sequence of elements of searchString is the same as
+   * the corresponding elements of this string starting at position. Otherwise
+   * returns false.
+   *
+   * @param self The value the member is reached off.
+   */
+  "string.startsWith"(
+    self: string,
+    searchString: string,
+    position?: number,
+  ): boolean;
+  /**
+   * Returns true if the sequence of elements of searchString is the same as
+   * the corresponding elements of this string starting at endPosition –
+   * length(this). Otherwise returns false.
+   *
+   * @param self The value the member is reached off.
+   */
+  "string.endsWith"(
+    self: string,
+    searchString: string,
+    endPosition?: number,
+  ): boolean;
+  /**
    * Determines whether two strings are equivalent in the current locale.
    *
    * @param self The value the member is reached off.
@@ -608,6 +658,14 @@ export interface LanguageBuiltins {
       | string
       | ((substring: string, offset: number, string: string) => string),
   ): string;
+  /**
+   * Returns a String value that is made from count copies appended together.
+   * If count is 0, the empty string is returned.
+   *
+   * @param self The value the member is reached off.
+   * @param count number of copies to append
+   */
+  "string.repeat"(self: string, count: number): string;
   /**
    * Returns a section of a string.
    *
@@ -746,6 +804,32 @@ export interface LanguageBuiltins {
    * for searchElement.
    */
   "array.includes"<T>(self: T[], searchElement: T, fromIndex?: number): boolean;
+  /**
+   * Returns the value of the first element in the array where predicate is
+   * true, and undefined otherwise.
+   *
+   * @param self The value the member is reached off.
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns true. If such an element is found, find
+   * immediately returns that element value.
+   */
+  "array.find"<T>(
+    self: T[],
+    predicate: (value: T, index: number) => boolean,
+  ): T | undefined;
+  /**
+   * Returns the index of the first element in the array where predicate is
+   * true, and -1 otherwise.
+   *
+   * @param self The value the member is reached off.
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns true. If such an element is found, findIndex
+   * immediately returns that element index.
+   */
+  "array.findIndex"<T>(
+    self: T[],
+    predicate: (value: T, index: number) => boolean,
+  ): number;
   /**
    * Calls a defined callback function on each element of an array, and returns
    * an array that contains the results.
@@ -1202,6 +1286,13 @@ export interface LanguageBuiltins {
   "Object.fromEntries"<T extends ClientValue>(
     entries: readonly [key: string, value: T][],
   ): { [key: string]: T };
+  /**
+   * Returns the names of an object's members, in the order `JSON.stringify`
+   * writes them.
+   *
+   * @param o An object whose keys to list.
+   */
+  "Object.keys"(o: { readonly [key: string]: ClientValue }): string[];
   http: Http;
   state<T>(initial: T): State<T>;
   vm: Vm;

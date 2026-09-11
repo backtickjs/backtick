@@ -1,0 +1,15 @@
+{
+  "found": 8,
+  "missing": true,
+  "at": 1,
+  "nowhere": -1,
+  "includes": true,
+  "startsWith": true,
+  "endsWith": false,
+  "repeated": "ababab",
+  "codePoint": 128512,
+  "keys": [
+    "a",
+    "b"
+  ]
+}

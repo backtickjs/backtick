@@ -64,6 +64,16 @@ export interface String {
    */
   charCodeAt(index: number): number;
   /**
+   * Returns a nonnegative integer Number less than 1114112 (0x110000) that is
+   * the code point value of the UTF-16 encoded code point starting at the
+   * string element at position pos. If there is no element at that position,
+   * the result is undefined. If a valid UTF-16 surrogate pair does not begin
+   * at pos, the result is the code unit at pos.
+   *
+   * @param pos The index of the element to read the code point at.
+   */
+  codePointAt(pos: number): number | undefined;
+  /**
    * Returns a string that contains the concatenation of two or more strings.
    *
    * @param strings The strings to append to the end of the string.
@@ -88,6 +98,28 @@ export interface String {
    */
   lastIndexOf(searchString: string, position?: number): number;
   /**
+   * Returns true if searchString appears as a substring of this string, at one
+   * or more positions that are greater than or equal to position; otherwise,
+   * returns false.
+   *
+   * @param searchString search string
+   * @param position If position is undefined, 0 is assumed, so as to search
+   * all of the String.
+   */
+  includes(searchString: string, position?: number): boolean;
+  /**
+   * Returns true if the sequence of elements of searchString is the same as
+   * the corresponding elements of this string starting at position. Otherwise
+   * returns false.
+   */
+  startsWith(searchString: string, position?: number): boolean;
+  /**
+   * Returns true if the sequence of elements of searchString is the same as
+   * the corresponding elements of this string starting at endPosition –
+   * length(this). Otherwise returns false.
+   */
+  endsWith(searchString: string, endPosition?: number): boolean;
+  /**
    * Determines whether two strings are equivalent in the current locale.
    *
    * @param that String to compare to target string
@@ -106,6 +138,13 @@ export interface String {
       | string
       | ((substring: string, offset: number, string: string) => string),
   ): string;
+  /**
+   * Returns a String value that is made from count copies appended together.
+   * If count is 0, the empty string is returned.
+   *
+   * @param count number of copies to append
+   */
+  repeat(count: number): string;
   /**
    * Returns a section of a string.
    *
@@ -224,6 +263,24 @@ export interface Array<T> {
    * for searchElement.
    */
   includes(searchElement: T, fromIndex?: number): boolean;
+  /**
+   * Returns the value of the first element in the array where predicate is
+   * true, and undefined otherwise.
+   *
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns true. If such an element is found, find
+   * immediately returns that element value.
+   */
+  find(predicate: (value: T, index: number) => boolean): T | undefined;
+  /**
+   * Returns the index of the first element in the array where predicate is
+   * true, and -1 otherwise.
+   *
+   * @param predicate Called once for each element of the array, in ascending
+   * order, until it returns true. If such an element is found, findIndex
+   * immediately returns that element index.
+   */
+  findIndex(predicate: (value: T, index: number) => boolean): number;
   /**
    * Calls a defined callback function on each element of an array, and returns
    * an array that contains the results.
@@ -674,6 +731,13 @@ export interface ObjectConstructor {
   fromEntries<T extends ClientValue>(
     entries: readonly [key: string, value: T][],
   ): { [key: string]: T };
+  /**
+   * Returns the names of an object's members, in the order `JSON.stringify`
+   * writes them.
+   *
+   * @param o An object whose keys to list.
+   */
+  keys(o: { readonly [key: string]: ClientValue }): string[];
 }
 
 export interface StringConstructor {

@@ -39,14 +39,22 @@ export const globals: Builtins = {
   "string.toString": (self) => self,
   "string.charAt": (self, pos) => self.charAt(pos),
   "string.charCodeAt": (self, index) => self.charCodeAt(index),
+  "string.codePointAt": (self, pos) => self.codePointAt(pos),
   "string.concat": (self, ...strings) => self.concat(...strings),
   "string.indexOf": (self, searchString, position) =>
     self.indexOf(searchString, position),
   "string.lastIndexOf": (self, searchString, position) =>
     self.lastIndexOf(searchString, position),
+  "string.includes": (self, searchString, position) =>
+    self.includes(searchString, position),
+  "string.startsWith": (self, searchString, position) =>
+    self.startsWith(searchString, position),
+  "string.endsWith": (self, searchString, endPosition) =>
+    self.endsWith(searchString, endPosition),
   "string.localeCompare": (self, that) => self.localeCompare(that),
   "string.replace": (self, searchValue, replaceValue) =>
     self.replace(searchValue, replaceValue as string),
+  "string.repeat": (self, count) => self.repeat(count),
   "string.slice": (self, start, end) => self.slice(start, end),
   "string.split": (self, separator, limit) => self.split(separator, limit),
   "string.substring": (self, start, end) => self.substring(start, end),
@@ -65,6 +73,10 @@ export const globals: Builtins = {
     self.indexOf(searchElement, fromIndex),
   "array.includes": (self, searchElement, fromIndex) =>
     self.includes(searchElement, fromIndex),
+  "array.find": (self, predicate) =>
+    self.find((value, index) => predicate(value, index)),
+  "array.findIndex": (self, predicate) =>
+    self.findIndex((value, index) => predicate(value, index)),
   "array.map": (self, callbackfn) =>
     self.map((value, index) => callbackfn(value, index)),
   "array.reduce": (self, callbackfn, initialValue) =>
@@ -235,6 +247,7 @@ export const globals: Builtins = {
   },
   "Object.entries": (o) => Object.entries(o),
   "Object.fromEntries": (entries) => Object.fromEntries(entries),
+  "Object.keys": (o) => Object.keys(o),
   "String.fromCodePoint"(...codePoints) {
     return String.fromCodePoint(...codePoints);
   },

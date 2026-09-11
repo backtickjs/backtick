@@ -714,6 +714,21 @@ export const schema: Schema = {
           "Returns the Unicode value of the character at the specified location.",
       },
     ),
+    "string.codePointAt": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("pos", Type.Number(), {
+          description: "The index of the element to read the code point at.",
+        }),
+      ],
+      Type.Union([Type.Number(), Type.Undefined()]),
+      {
+        description:
+          "Returns a nonnegative integer Number less than 1114112 (0x110000) that is the code point value of the UTF-16 encoded code point starting at the string element at position pos. If there is no element at that position, the result is undefined. If a valid UTF-16 surrogate pair does not begin at pos, the result is the code unit at pos.",
+      },
+    ),
     "string.concat": Type.Function(
       [
         Type.FunctionParameter("self", Type.String(), {
@@ -773,6 +788,55 @@ export const schema: Schema = {
           "Returns the last occurrence of a substring in the string, or -1 if it is not present.",
       },
     ),
+    "string.includes": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("searchString", Type.String(), {
+          description: "search string",
+        }),
+        Type.Optional(
+          Type.FunctionParameter("position", Type.Number(), {
+            description:
+              "If position is undefined, 0 is assumed, so as to search all of the String.",
+          }),
+        ),
+      ],
+      Type.Boolean(),
+      {
+        description:
+          "Returns true if searchString appears as a substring of this string, at one or more positions that are greater than or equal to position; otherwise, returns false.",
+      },
+    ),
+    "string.startsWith": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("searchString", Type.String()),
+        Type.Optional(Type.FunctionParameter("position", Type.Number())),
+      ],
+      Type.Boolean(),
+      {
+        description:
+          "Returns true if the sequence of elements of searchString is the same as the corresponding elements of this string starting at position. Otherwise returns false.",
+      },
+    ),
+    "string.endsWith": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("searchString", Type.String()),
+        Type.Optional(Type.FunctionParameter("endPosition", Type.Number())),
+      ],
+      Type.Boolean(),
+      {
+        description:
+          "Returns true if the sequence of elements of searchString is the same as the corresponding elements of this string starting at endPosition – length(this). Otherwise returns false.",
+      },
+    ),
     "string.localeCompare": Type.Function(
       [
         Type.FunctionParameter("self", Type.String(), {
@@ -817,6 +881,21 @@ export const schema: Schema = {
       ],
       Type.String(),
       { description: "Replaces text in a string, using a search string." },
+    ),
+    "string.repeat": Type.Function(
+      [
+        Type.FunctionParameter("self", Type.String(), {
+          description: "The value the member is reached off.",
+        }),
+        Type.FunctionParameter("count", Type.Number(), {
+          description: "number of copies to append",
+        }),
+      ],
+      Type.String(),
+      {
+        description:
+          "Returns a String value that is made from count copies appended together. If count is 0, the empty string is returned.",
+      },
     ),
     "string.slice": Type.Function(
       [
@@ -1111,6 +1190,64 @@ export const schema: Schema = {
       {
         description:
           "Determines whether an array includes a certain element, returning true or false as appropriate.",
+      },
+    ),
+    "array.find": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "predicate",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Boolean(),
+            ),
+            {
+              description:
+                "Called once for each element of the array, in ascending order, until it returns true. If such an element is found, find immediately returns that element value.",
+            },
+          ),
+        ],
+        Type.Union([Type.Ref("T"), Type.Undefined()]),
+      ),
+      {
+        description:
+          "Returns the value of the first element in the array where predicate is true, and undefined otherwise.",
+      },
+    ),
+    "array.findIndex": Type.Generic(
+      [Type.GenericParameter("T")],
+      Type.Function(
+        [
+          Type.FunctionParameter("self", Type.Array(Type.Ref("T")), {
+            description: "The value the member is reached off.",
+          }),
+          Type.FunctionParameter(
+            "predicate",
+            Type.Function(
+              [
+                Type.FunctionParameter("value", Type.Ref("T")),
+                Type.FunctionParameter("index", Type.Number()),
+              ],
+              Type.Boolean(),
+            ),
+            {
+              description:
+                "Called once for each element of the array, in ascending order, until it returns true. If such an element is found, findIndex immediately returns that element index.",
+            },
+          ),
+        ],
+        Type.Number(),
+      ),
+      {
+        description:
+          "Returns the index of the first element in the array where predicate is true, and -1 otherwise.",
       },
     ),
     "array.map": Type.Generic(
@@ -1894,6 +2031,22 @@ export const schema: Schema = {
       {
         description:
           "Returns an object holding each key with its value. A key written twice holds the later value.",
+      },
+    ),
+    "Object.keys": Type.Function(
+      [
+        Type.FunctionParameter(
+          "o",
+          Type.Record(Type.String(), Type.Ref("ClientValue"), {
+            readOnly: true,
+          }),
+          { description: "An object whose keys to list." },
+        ),
+      ],
+      Type.Array(Type.String()),
+      {
+        description:
+          "Returns the names of an object's members, in the order `JSON.stringify` writes them.",
       },
     ),
     http: Type.Ref("Http"),

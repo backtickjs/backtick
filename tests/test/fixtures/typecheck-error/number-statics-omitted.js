@@ -1,43 +1,44 @@
 import { cs } from "@backtickjs/core";
 // `Number` is reachable only as the schema fixes it: `EPSILON`, `isFinite`,
 // `isInteger`, `parseFloat` and `parseInt`. Everything else the standard
-// library hangs off it is a name no client answers for.
+// library hangs off it is a name no client answers for — `isNaN` among them,
+// since this language has no `NaN` for it to find.
 export const largest = cs.create(
-  [6, 24, 6, 51],
+  [7, 24, 7, 51],
   {
     version: "0.0.0",
     filePath: "number-statics-omitted.ts",
-    fileHash: "2d029pqxveh70",
+    fileHash: "20q00g0639qvh",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "bltn",
-    loc: [6, 27, 6, 50],
+    loc: [7, 27, 7, 50],
     name: "Number.MAX_SAFE_INTEGER",
   }),
 );
 export const notANumber = cs.create(
-  [8, 27, 8, 46],
+  [9, 27, 9, 46],
   {
     version: "0.0.0",
     filePath: "number-statics-omitted.ts",
-    fileHash: "2d029pqxveh70",
+    fileHash: "20q00g0639qvh",
     splices: {},
     captures: [],
   },
   () => ({
     kind: "()",
-    loc: [8, 30, 8, 45],
+    loc: [9, 30, 9, 45],
     expression: {
       kind: "bltn",
-      loc: [8, 30, 8, 42],
+      loc: [9, 30, 9, 42],
       name: "Number.isNaN",
     },
     arguments: [
       {
         kind: "number",
-        loc: [8, 43, 8, 44],
+        loc: [9, 43, 9, 44],
         value: 1,
       },
     ],
