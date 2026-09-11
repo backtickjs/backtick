@@ -30,7 +30,12 @@ cs.lift(cs.const(                    → cs`
 (                                    → (
 __cs_props                           → props
 :                                    → : 
-{\n    who: string;\n}               → { who: string }
+{\n                                  → { 
+who                                  → who
+:                                    → : 
+string                               → string
+;                                    → 
+\n}                                  →  }
 ) =>                                 → ) => 
 cs.splice(                           → ${ [-semantic]
 (\n    <Greets who={                 → (\n    <Greets who={
@@ -48,7 +53,12 @@ cs.lift(cs.const(                    → cs`
 (                                    → (
 __cs_props                           → props
 :                                    → : 
-{\n    count: number;\n}             → { count: number }
+{\n                                  → { 
+count                                → count
+:                                    → : 
+number                               → number
+;                                    → 
+\n}                                  →  }
 ) =>                                 → ) => 
 cs.splice(                           → ${ [-semantic]
 (\n    <Counts count={               → (\n    <Counts count={

@@ -126,6 +126,11 @@ function accessNode(
  * feature that answers about a position is answered about nothing. A type a
  * script names goes uncoloured, and go-to-definition on it lands nowhere.
  *
+ * Every node inside it too: the printer does not keep a type's layout —
+ * `{ count: number }` prints across three lines — so a mapping of the whole
+ * reads a position inside it back at an offset into text of another length.
+ * Each name mapped on its own reads back where it was written.
+ *
  * A synthetic node is not one of these: `pos` is -1 where nothing was written,
  * and there is no source for it to be read back to. Rewriting a type is where
  * that arises — a banned keyword becomes `any`, which is the compiler's word
@@ -135,8 +140,14 @@ function mapType<T extends ts.TypeNode | undefined>(
   state: RewriteState,
   type: T,
 ): T {
-  if (type !== undefined && type.pos >= 0) {
-    state.mappings.set(type, type);
+  const map = (node: ts.Node): void => {
+    if (node.pos >= 0) {
+      state.mappings.set(node, node);
+    }
+    node.forEachChild(map);
+  };
+  if (type !== undefined) {
+    map(type);
   }
   return type;
 }

@@ -33,7 +33,8 @@ cs.splice(                           →  [-semantic]
 (state)                              → $state
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )<                                   → <
-() => number                         → () => number
+() =>                                → () => 
+number                               → number
 >(                                   → >(
 () =>                                → () => 
 0                                    → 0

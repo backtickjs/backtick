@@ -16,7 +16,12 @@ cs.splice(                           →  [-semantic]
 (state)                              → $state
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )<                                   → <
-Bundle<BacktickElement> | null       → Bundle<BacktickElement> | null
+Bundle                               → Bundle
+<                                    → <
+BacktickElement                      → BacktickElement
+>                                    → >
+ |                                   →  | 
+null                                 → null
 >(                                   → >(
 null                                 → null
 )                                    → )

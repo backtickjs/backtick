@@ -5,7 +5,9 @@ cs.lift(cs.const(                    → cs`
 (                                    → (\n  
 __cs_text                            → text
 :                                    → : 
-string | null                        → string | null
+string                               → string
+ |                                   →  | 
+null                                 → null
 ,                                    → ,\n  
 __cs_upper                           → upper
 :                                    → : 

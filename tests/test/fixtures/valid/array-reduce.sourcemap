@@ -74,7 +74,8 @@ __cs_one                → one
 const                   → const 
 __cs_empty              → empty
 :                       → : 
-number[]                → number[]
+number                  → number
+[]                      → []
  = cs.const(            →  = 
 []                      → []
 );                      → ;

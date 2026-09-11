@@ -15,7 +15,12 @@ __cs_apply              → apply
 (                       → (
 __cs_f                  → f
 :                       → : 
-(n: number) => number   → (n: number) => number
+(                       → (
+n                       → n
+:                       → : 
+number                  → number
+) =>                    → ) => 
+number                  → number
 ,                       → , 
 __cs_n                  → n
 :                       → : 

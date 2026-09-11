@@ -7,7 +7,8 @@ cs.splice(                           →  [-semantic]
 (state)                              → $state
 ) satisfies typeof cs.ClientUnknown  →  [-semantic]
 )<                                   → <
-Row[]                                → Row[]
+Row                                  → Row
+[]                                   → []
 >(                                   → >(
 []                                   → []
 )                                    → )

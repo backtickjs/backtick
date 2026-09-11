@@ -25,7 +25,12 @@ cs.lift(cs.const(                    → cs`
 (                                    → (
 __cs_props                           → props
 :                                    → : 
-{\n    count: number;\n}             → { count: number }
+{\n                                  → { 
+count                                → count
+:                                    → : 
+number                               → number
+;                                    → 
+\n}                                  →  }
 ) =>                                 → ) => 
 cs.splice(                           → ${ [-semantic]
 (\n  <Row count={                    → (\n  <Row count={

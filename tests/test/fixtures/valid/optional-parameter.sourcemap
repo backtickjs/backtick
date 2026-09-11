@@ -25,7 +25,8 @@ cs.lift(cs.const(                    → cs`
 (                                    → (
 __cs_cb                              → cb
 : (                                  → ?: 
-() => number                         → () => number
+() =>                                → () => 
+number                               → number
 ) | undefined                        → 
 ) => {\n                             → ) => {\n  
 return cs.const(                     → return 

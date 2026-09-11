@@ -1,86 +1,103 @@
-cs.lift(cs.const(                         → cs`
-(                                         → (
-__cs_o                                    → o
-:                                         → : 
-{\n    label: string;\n    inner?: {\n        z?: number;\n    };\n}→ { label: string; inner?: { z?: number } }
-) => {\n                                  → ) => {\n  
-return cs.const(                          → return 
-[                                         → [
-cs.receiver(                              → 
-__cs_o                                    → o
-)                                         → 
-.                                         → .
-label                                     → label
-,                                         → , 
-cs.receiver(                              → 
-cs.receiver(                              → 
-__cs_o                                    → o
-)                                         → 
-.                                         → .
-inner                                     → inner
-)                                         → 
-?.                                        → ?.
-z                                         → z
- ??                                       →  ?? 
-0                                         → 0
-]                                         → ]
-);                                        → ;
-\n}                                       → \n}
-))                                        → `
-cs.lift(cs.const(                         → cs`
-{                                         → ({\n  
-present                                   → present
-:                                         → : 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(read)                                    → $read
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
-{                                         → { 
-label                                     → label
-:                                         → : 
-"a"                                       → "a"
-,                                         → , 
-inner                                     → inner
-:                                         → : 
-{                                         → { 
-z                                         → z
-:                                         → : 
-3                                         → 3
- }                                        →  }
- }                                        →  }
-)                                         → )
-,                                         → ,\n  
-partial                                   → partial
-:                                         → : 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(read)                                    → $read
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
-{                                         → { 
-label                                     → label
-:                                         → : 
-"b"                                       → "b"
-,                                         → , 
-inner                                     → inner
-:                                         → : 
-{}                                        → {}
- }                                        →  }
-)                                         → )
-,                                         → ,\n  
-omitted                                   → omitted
-:                                         → : 
-(                                         → 
-cs.splice(                                →  [-semantic]
-(read)                                    → $read
-) satisfies typeof cs.ClientUnknown       →  [-semantic]
-)(                                        → (
-{                                         → { 
-label                                     → label
-:                                         → : 
-"c"                                       → "c"
- }                                        →  }
-)                                         → )
- }                                        → ,\n})
-))                                        → `
+cs.lift(cs.const(                    → cs`
+(                                    → (
+__cs_o                               → o
+:                                    → : 
+{\n                                  → { 
+label                                → label
+:                                    → : 
+string                               → string
+;                                    → ;
+\n                                   →  
+inner                                → inner
+?                                    → ?
+:                                    → : 
+{\n                                  → { 
+z                                    → z
+?                                    → ?
+:                                    → : 
+number                               → number
+;                                    → 
+\n    }                              →  }
+;                                    → 
+\n}                                  →  }
+) => {\n                             → ) => {\n  
+return cs.const(                     → return 
+[                                    → [
+cs.receiver(                         → 
+__cs_o                               → o
+)                                    → 
+.                                    → .
+label                                → label
+,                                    → , 
+cs.receiver(                         → 
+cs.receiver(                         → 
+__cs_o                               → o
+)                                    → 
+.                                    → .
+inner                                → inner
+)                                    → 
+?.                                   → ?.
+z                                    → z
+ ??                                  →  ?? 
+0                                    → 0
+]                                    → ]
+);                                   → ;
+\n}                                  → \n}
+))                                   → `
+cs.lift(cs.const(                    → cs`
+{                                    → ({\n  
+present                              → present
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(read)                               → $read
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+{                                    → { 
+label                                → label
+:                                    → : 
+"a"                                  → "a"
+,                                    → , 
+inner                                → inner
+:                                    → : 
+{                                    → { 
+z                                    → z
+:                                    → : 
+3                                    → 3
+ }                                   →  }
+ }                                   →  }
+)                                    → )
+,                                    → ,\n  
+partial                              → partial
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(read)                               → $read
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+{                                    → { 
+label                                → label
+:                                    → : 
+"b"                                  → "b"
+,                                    → , 
+inner                                → inner
+:                                    → : 
+{}                                   → {}
+ }                                   →  }
+)                                    → )
+,                                    → ,\n  
+omitted                              → omitted
+:                                    → : 
+(                                    → 
+cs.splice(                           →  [-semantic]
+(read)                               → $read
+) satisfies typeof cs.ClientUnknown  →  [-semantic]
+)(                                   → (
+{                                    → { 
+label                                → label
+:                                    → : 
+"c"                                  → "c"
+ }                                   →  }
+)                                    → )
+ }                                   → ,\n})
+))                                   → `
