@@ -1,5 +1,5 @@
-import type { ClientUnknown } from "@backtickjs/language";
 import type { Bundle } from "@backtickjs/bundler";
+import type { BacktickElement } from "@backtickjs/ui";
 import { parseHTML } from "linkedom";
 
 /**
@@ -18,7 +18,7 @@ import { parseHTML } from "linkedom";
 export function embed(
   html: string,
   selector: string,
-  bundle: Bundle<ClientUnknown>,
+  bundle: Bundle<BacktickElement>,
 ): string {
   const { document } = parseHTML(html);
   const target = document.querySelector(selector);

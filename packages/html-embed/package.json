@@ -20,8 +20,8 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "dependencies": {
-    "@backtickjs/language": "workspace:*",
     "@backtickjs/bundler": "workspace:*",
+    "@backtickjs/ui": "workspace:*",
     "linkedom": "^0.18.13"
   },
   "devDependencies": {

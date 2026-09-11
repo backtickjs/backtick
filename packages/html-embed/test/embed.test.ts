@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { parseHTML } from "linkedom";
 import { bundler } from "@backtickjs/bundler";
+import { createJsxElement } from "@backtickjs/ui";
 import { embed } from "../src/embed.ts";
 
 const template =
@@ -11,13 +12,15 @@ const template =
   `<div id="b"></div>` +
   `</body></html>`;
 
-// A bundle holding every character an HTML serializer is tempted to rewrite,
+// A drawing holding every character an HTML serializer is tempted to rewrite,
 // and the one sequence that would end the script it rides in.
 //
 // Built rather than written out: what a bundle looks like is the bundler's, and
 // a test that spelled one would be a test of the format rather than of this.
 const made = async (mark: string) =>
-  await bundler.run(`& < > " ' </script> ${mark}`);
+  await bundler.run(
+    createJsxElement("p", { children: `& < > " ' </script> ${mark}` }),
+  );
 
 const [one, two, three] = await Promise.all([
   made("one"),

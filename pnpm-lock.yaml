@@ -529,9 +529,9 @@ importers:
       '@backtickjs/bundler':
         specifier: workspace:*
         version: link:../bundler
-      '@backtickjs/language':
+      '@backtickjs/ui':
         specifier: workspace:*
-        version: link:../language
+        version: link:../ui
       linkedom:
         specifier: ^0.18.13
         version: 0.18.13
