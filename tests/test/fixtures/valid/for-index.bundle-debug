@@ -10,19 +10,19 @@
       {"rotate"}
     </span>}
     {<div>
-      {<$1()
+      {<{$1()}
         each={() => names.read()}
       >
         {() => (name, index) => <span>
           {name + " at " + index.read()}
         </span>}
-      </$1()>}
+      </{$1()}>}
     </div>}
   </div>;
 }
 
-root = <() => #f0(() => state, () => ($0) => <for
+root = <{() => #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}
-</for>) />
+</for>)} />

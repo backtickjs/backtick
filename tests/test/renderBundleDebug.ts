@@ -99,12 +99,16 @@ function renderNode(
     // so it reads as the one it is written as.
     case "el":
       return renderJsx(node, indent);
-    // A function the script holds, drawn as the tag it was written as.
-    case "comp":
-      return renderJsx(
-        ["el", renderNode(node[1], indent), node[2], node[3]],
-        indent,
-      );
+    // A component call, as the tag JSX would call it with: a name as itself,
+    // and any other callee braced, since it is an expression and not a name.
+    case "comp": {
+      const callee = node[1];
+      const tag =
+        isNode(callee) && callee[0] === "id"
+          ? callee[1]
+          : `{${renderNode(callee, indent)}}`;
+      return renderJsx(["el", tag, node[2], node[3]], indent);
+    }
     // A global the format names and the host answers.
     case "bltn":
       return node[1];

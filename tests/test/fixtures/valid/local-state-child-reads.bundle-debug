@@ -6,11 +6,11 @@
     >
       {"select"}
     </span>}
-    {<$1()
+    {<{$1()}
       id={() => 0}
       selected={() => selected}
     />}
-    {<$1()
+    {<{$1()}
       id={() => 1}
       selected={() => selected}
     />}
@@ -23,7 +23,7 @@
 
 #f3 = ($0, $1, $2) => $0().read() === $1() ? $2() : null
 
-root = <() => #f0(() => state, () => ($0) => <div>
+root = <{() => #f0(() => state, () => ($0) => <div>
   {<span
     style={#f1(() => $0.selected(), () => $0.id())}
   >
@@ -32,4 +32,4 @@ root = <() => #f0(() => state, () => ($0) => <div>
   {#f3(() => $0.selected(), () => $0.id(), () => <span>
     {"marker"}
   </span>)}
-</div>) />
+</div>)} />

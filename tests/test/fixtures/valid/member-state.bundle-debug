@@ -9,7 +9,7 @@
     {<ul
       class={"rows"}
     >
-      {<$1()
+      {<{$1()}
         each={() => held.read()}
       >
         {() => (row) => <li
@@ -17,13 +17,13 @@
         >
           {row.label.read()}
         </li>}
-      </$1()>}
+      </{$1()}>}
     </ul>}
   </div>;
 }
 
-root = <() => #f0(() => state, () => ($0) => <for
+root = <{() => #f0(() => state, () => ($0) => <for
   each={$0.each()}
 >
   {$0.children()}
-</for>) />
+</for>)} />

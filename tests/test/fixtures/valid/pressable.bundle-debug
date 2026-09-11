@@ -16,4 +16,4 @@
   </button>;
 }
 
-root = <() => #f0(() => state) />
+root = <{() => #f0(() => state)} />

@@ -4,7 +4,7 @@
     {<span>
       {"asked " + asked.read()}
     </span>}
-    {<$1()
+    {<{$1()}
       ask={() => () => {
         asked.write(asked.read() + 1);
         return asked.read() > 4 ? null : $2();
