@@ -209,7 +209,21 @@ function memberOf(object: ClientValue, name: string): ClientValue {
     //
     // The cast reads through a brand: a handle's type says opaque, and a cell
     // being `{ read, write, update }` underneath is this client's knowledge.
-    const held = (object as { readonly [name: string]: ClientValue })[name];
+    //
+    // Except the ambient machinery: `constructor`, `__proto__`, `toString` and
+    // the rest live on `Object.prototype` and `Function.prototype`, and none of
+    // it is the language's. It is also the way out — `({}).constructor` is
+    // `Object`, whose `.constructor` is `Function`, which runs arbitrary code —
+    // so a member inherited from either prototype reads as absent. What a host
+    // puts on its own prototypes (a DOM event's `preventDefault`) is not on
+    // these two and is read as before; an own member always wins, so a data
+    // object whose own key happens to be `constructor` still answers with it.
+    const machinery =
+      !Object.hasOwn(object as object, name) &&
+      (name in Object.prototype || name in Function.prototype);
+    const held = machinery
+      ? undefined
+      : (object as { readonly [name: string]: ClientValue })[name];
     // Bound, because some of these objects are the host's own. A cell's members
     // are closures and do not care, but an event's are methods that read the
     // event through `this` — and `preventDefault` reached off one and called
