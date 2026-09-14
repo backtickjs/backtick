@@ -1,4 +1,5 @@
 packages/
+apps/
 examples/
 tests/
 pnpm-lock.yaml
