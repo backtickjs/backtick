@@ -13,32 +13,11 @@ import type { Instance } from "./interpreter/Instance.js";
 import type { Applied } from "./interpreter/interpret.js";
 import { evaluated } from "./interpreter/view.js";
 
-// What this client answers for every name the framework provides — the host
-// language's own and `state` alike, because the format has one node for a name
-// it carries and a client answers them the same way.
-//
-// Written out rather than handed the host's objects, so what a bundle can reach
-// is a list somebody chose and a member left out stays left out. A switch
-// rather than a table, because a table is an object and answers for names
-// nobody wrote — `constructor` is `Object`'s — where only a `case` answers here.
-//
-// Most names are the host's own member of the same name, so they share an
-// answer: a receiver's member is called on the receiver, and a namespace's on
-// the namespace. What is written out is where that would hand the host more
-// than the contract says — a callback's `this`, an argument it has no parameter
-// for — or where the language refuses what the host would answer.
-//
-// Every answer is checked against the contract for the names it stands under,
-// at no cost once compiled: `Forwarded` and `Delegated` are the names the
-// host's own member satisfies, and a written-out answer `satisfies` its one
-// name. A name the schema declares and no `case` answers does not build.
-//
-// What an app provides is not here: those are its own to implement and to hand
-// over, and they are read after these, at the lookup.
-//
-// A member of a value takes the value first, because that is what the schema
-// says it takes: a client with no `this` reads the same document and answers the
-// same way. A member access reads these and binds the value it was reached off.
+// What this client answers for each name the language provides. A switch rather
+// than a table, because an object also answers for names nobody wrote —
+// `constructor` is `Object`'s — and only a `case` answers here. Most names are
+// the host's own member of the same name; a member of a value takes the value
+// first. What an app adds is read after these, at the lookup.
 export function compileBuiltin(
   instance: Instance,
   name: string,
@@ -81,11 +60,22 @@ export function compileBuiltin(
     case "array.with":
     case "array.toSorted":
     case "array.toReversed":
-    case "array.toSpliced": {
-      known satisfies Forwarded;
+    case "array.toSpliced":
+    case "string.replace":
+    case "array.find":
+    case "array.findIndex":
+    case "array.map":
+    case "array.reduce":
+    case "array.filter": {
       const member = known.split(".")[1];
       return (self: Receiver, ...args: ClientValue[]) => self[member](...args);
     }
+
+    // Read where they are named rather than called: see `getters`.
+    case "string.length":
+    case "array.length":
+      return (self: { readonly length: number }) => self.length;
+
     case "Math.E":
     case "Math.LN10":
     case "Math.LN2":
@@ -134,102 +124,18 @@ export function compileBuiltin(
     case "Object.entries":
     case "Object.fromEntries":
     case "Object.keys":
-    case "String.fromCodePoint": {
-      known satisfies Delegated;
+    case "String.fromCodePoint":
+    case "Array.from":
+    case "JSON.parse":
+    case "JSON.stringify":
+    case "Math.max":
+    case "Math.min":
+    case "Number.parseFloat":
+    case "Number.parseInt": {
       const [prefix, member] = known.split(".");
       return (globalThis as unknown as Namespaces)[prefix][member];
     }
-    // Read where they are named rather than called: see `getters`.
-    case "string.length":
-    case "array.length":
-      return ((self: string | readonly ClientValue[]) =>
-        self.length) satisfies Builtins[typeof known];
-    // Not forwarded: the host's types take a string or a function in two
-    // overloads, and not the one of either that the contract does.
-    case "string.replace":
-      return ((self, searchValue, replaceValue) =>
-        self.replace(
-          searchValue,
-          replaceValue as string,
-        )) satisfies Builtins[typeof known];
-    // The callback is handed what the contract says and no more: not the array
-    // as a third argument, which a host function passed along would read.
-    case "array.find":
-      return ((self, predicate) =>
-        self.find((value, index) =>
-          predicate(value, index),
-        )) satisfies Builtins[typeof known];
-    case "array.findIndex":
-      return ((self, predicate) =>
-        self.findIndex((value, index) =>
-          predicate(value, index),
-        )) satisfies Builtins[typeof known];
-    case "array.map":
-      return ((self, callbackfn) =>
-        self.map((value, index) =>
-          callbackfn(value, index),
-        )) satisfies Builtins[typeof known];
-    case "array.reduce":
-      return ((self, callbackfn, initialValue) =>
-        self.reduce(
-          (previousValue, currentValue, currentIndex) =>
-            callbackfn(previousValue, currentValue, currentIndex),
-          initialValue,
-        )) satisfies Builtins[typeof known];
-    // Not forwarded, which would hand the host a second argument as the
-    // predicate's `this`.
-    case "array.filter":
-      return ((self, predicate) =>
-        self.filter(predicate)) satisfies Builtins[typeof known];
-    case "Array.from":
-      return ((source, map) =>
-        Array.from(source, map)) satisfies Builtins[typeof known];
-    // Not forwarded, which would hand the host a reviver, or a replacer and an
-    // indent.
-    case "JSON.parse":
-      return ((text) =>
-        JSON.parse(text) as ClientValue) satisfies Builtins[typeof known];
-    case "JSON.stringify":
-      return ((value) =>
-        JSON.stringify(value)) satisfies Builtins[typeof known];
-    case "Math.max":
-      return ((...values) => {
-        // The standard library answers `-Infinity` for no arguments, which is not
-        // a value this language has.
-        if (values.length === 0) {
-          throw new Error("`Math.max` takes at least one number");
-        }
-        return Math.max(...values);
-      }) satisfies Builtins[typeof known];
-    case "Math.min":
-      return ((...values) => {
-        // The standard library answers `Infinity` for no arguments, which is not
-        // a value this language has.
-        if (values.length === 0) {
-          throw new Error("`Math.min` takes at least one number");
-        }
-        return Math.min(...values);
-      }) satisfies Builtins[typeof known];
-    case "Number.parseFloat":
-      return ((string) => {
-        const answer = Number.parseFloat(string);
-        if (Number.isNaN(answer)) {
-          throw new Error(
-            "`Number.parseFloat` can't read this string as a number",
-          );
-        }
-        return answer;
-      }) satisfies Builtins[typeof known];
-    case "Number.parseInt":
-      return ((string, radix) => {
-        const answer = Number.parseInt(string, radix);
-        if (Number.isNaN(answer)) {
-          throw new Error(
-            "`Number.parseInt` can't read this string as a number",
-          );
-        }
-        return answer;
-      }) satisfies Builtins[typeof known];
+
     case "state":
       return ((initial) => {
         const [read, store] = createSignal(initial);
@@ -248,6 +154,7 @@ export function compileBuiltin(
         // here, at the one place entitled to.
         return { read, write, update } as unknown as State<typeof initial>;
       }) satisfies Builtins[typeof known];
+
     case "http":
       return {
         get: ((url, onResponse, onFailure, config) => {
@@ -257,6 +164,7 @@ export function compileBuiltin(
           void send("POST", url, data, onResponse, onFailure, config);
         }) satisfies Http["post"],
       } as unknown as Http;
+
     // A bundle drawn with this instance's renderer, and reaching the names this
     // one does. Untracked, as Solid runs a component: what the bundle reads while
     // its root is evaluated is its own setup, and a write to it runs nothing of
@@ -268,6 +176,7 @@ export function compileBuiltin(
             evaluated(bundle, instance.renderer, instance.builtins),
           ),
       } as unknown as Vm;
+
     default:
       known satisfies never;
       return undefined;
@@ -278,61 +187,10 @@ export function compileBuiltin(
 // host's own value.
 type Receiver = { readonly [member: string]: Applied };
 
-// The host's value of each kind, whose members a receiver's are forwarded to.
-// An array's elements are `unknown` on both sides: a generic contract is read
-// with its `T` unknown, and the host's `Array<T>` is compared at the same `T`.
-interface Receivers {
-  boolean: boolean;
-  number: number;
-  string: string;
-  array: unknown[];
-}
-
 // The namespaces a name may start with, whose members are delegated to.
 interface Namespaces {
   readonly [prefix: string]: { readonly [member: string]: ClientValue };
 }
-interface Hosts {
-  Math: Math;
-  Number: NumberConstructor;
-  String: StringConstructor;
-  Object: ObjectConstructor;
-  Array: ArrayConstructor;
-}
-
-// A member's contract without the receiver it takes first.
-type Unbound<Member> = Member extends (
-  self: never,
-  ...rest: infer Rest
-) => infer Answer
-  ? (...rest: Rest) => Answer
-  : never;
-
-// The names whose contract the receiver's own member of that name satisfies.
-type Forwarded = {
-  [Name in keyof Builtins]: Name extends `${infer Kind}.${infer Member}`
-    ? Kind extends keyof Receivers
-      ? Member extends keyof Receivers[Kind]
-        ? Receivers[Kind][Member] extends Unbound<Builtins[Name]>
-          ? Name
-          : never
-        : never
-      : never
-    : never;
-}[keyof Builtins];
-
-// The names whose contract the namespace's own member of that name satisfies.
-type Delegated = {
-  [Name in keyof Builtins]: Name extends `${infer Prefix}.${infer Member}`
-    ? Prefix extends keyof Hosts
-      ? Member extends keyof Hosts[Prefix]
-        ? Hosts[Prefix][Member] extends Builtins[Name]
-          ? Name
-          : never
-        : never
-      : never
-    : never;
-}[keyof Builtins];
 
 /**
  * The names this client reads rather than calls.

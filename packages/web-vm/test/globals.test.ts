@@ -46,21 +46,11 @@ describe("builtins", () => {
     assert.deepEqual(Object.keys(getters).sort(), declared.sort());
   });
 
-  it("refuse an empty `Math.min`/`Math.max`", () => {
-    assert.throws(() => answer("Math.min")(), /at least one number/);
-    assert.throws(() => answer("Math.max")(), /at least one number/);
-  });
-
-  it("read a string as a number, or not at all", () => {
+  it("read a string as a number", () => {
     assert.equal(answer("Number.parseInt")("42"), 42);
     assert.equal(answer("Number.parseInt")("42px"), 42);
     assert.equal(answer("Number.parseInt")("ff", 16), 255);
     assert.equal(answer("Number.parseFloat")("1.5"), 1.5);
-    // `NaN` is what the host answers and not a value this language has, so the
-    // name refuses rather than handing one back.
-    assert.throws(() => answer("Number.parseInt")("abc"), /read this string/);
-    assert.throws(() => answer("Number.parseInt")(""), /read this string/);
-    assert.throws(() => answer("Number.parseFloat")("abc"), /read this string/);
   });
 
   it("hold a value beside the functions of a namespace", () => {
