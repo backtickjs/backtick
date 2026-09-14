@@ -28,10 +28,9 @@ export interface ClientOptions<
    * `window` wherever it is drawn. A target whose schema extends the web's hands
    * over its own generated contract as it is.
    *
-   * A name the language already answers for is refused rather than replaced:
-   * what `state` means is not a target's to redecide, and a client where it
-   * meant something else is a bundle that means something else everywhere it
-   * runs.
+   * A name the language already answers for is never reached here: what
+   * `state` means is not a target's to redecide, and a client where it meant
+   * something else is a bundle that means something else everywhere it runs.
    */
   readonly builtins: Builtins;
 }

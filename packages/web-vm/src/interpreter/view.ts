@@ -17,12 +17,7 @@ import { createRenderer, type Renderer } from "solid-js/universal";
 import type { RendererOptions } from "./RendererOptions.js";
 import type { ClientOptions } from "./ClientOptions.js";
 import type { Instance } from "./Instance.js";
-import {
-  refuseCollisions,
-  compile,
-  evaluate as evaluateNode,
-  scopeOf,
-} from "./interpret.js";
+import { compile, evaluate as evaluateNode, scopeOf } from "./interpret.js";
 import type { Scope } from "./interpret.js";
 
 // The view half: turning a drawing function into the host's own nodes, once,
@@ -88,11 +83,7 @@ function materialize<NodeType extends object>(
   options: ClientOptions<NodeType>,
   renderer: Renderer<NodeType>,
 ): unknown {
-  const instance = instanceOf(bundle, renderer, options.builtins);
-  // Checked once per mount. A bundle drawn inside this one is handed the same
-  // table, which was checked here already.
-  refuseCollisions(instance);
-  return evaluateNode(instance, bundle.root, scopeOf(null));
+  return evaluated(bundle, renderer, options.builtins);
 }
 
 /**
@@ -106,20 +97,12 @@ export function evaluated(
   renderer: Renderer<object>,
   builtins: Instance["builtins"],
 ): unknown {
+  // Built once: nothing above the root can hand it anything new later.
   return evaluateNode(
-    instanceOf(bundle, renderer, builtins),
+    { bundle, renderer, builtins, functions: new Map() },
     bundle.root,
     scopeOf(null),
   );
-}
-
-// Built once: nothing above the root can hand it anything new later.
-function instanceOf(
-  bundle: Bundle<ClientUnknown>,
-  renderer: Renderer<object>,
-  builtins: Instance["builtins"],
-): Instance {
-  return { bundle, renderer, builtins, functions: new Map() };
 }
 
 // A renderer per set of target operations.

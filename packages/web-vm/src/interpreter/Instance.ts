@@ -17,8 +17,7 @@ export interface Instance {
   // target's business throughout.
   readonly renderer: Renderer<object>;
   // What the target handed over, beside the language's own names. Read only
-  // after those have not answered, and never replacing them: a target naming
-  // one is refused when its client is made.
+  // after those have not answered, so a target naming one is never reached.
   readonly builtins: WebBuiltins;
   // What each `functions` label evaluated to, for this host. A function is
   // evaluated once per mount, not once per reference: a fresh closure per

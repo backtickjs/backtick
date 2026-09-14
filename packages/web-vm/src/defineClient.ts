@@ -9,8 +9,8 @@ import { dom } from "./dom.js";
  * A target's own vocabulary: names a script may call, and tags a bundle may
  * draw.
  *
- * Two tables because a schema declares two things. `builtins` are merged with
- * the language's by `builtinsOf`, which throws where a name is taken — adding is
+ * Two tables because a schema declares two things. `builtins` are read after
+ * the language's, so a name the language answers is never reached — adding is
  * a target's to do and replacing is not. `elements` are consulted before the
  * document is asked, so a target may name a tag the browser has never heard of,
  * which is the latitude `createElement` already takes for `svg:`.
@@ -43,10 +43,9 @@ export type Draw = (
  * Defined unguarded: two clients on one page is a mistake, and the registry
  * throwing is how anyone finds out.
  *
- * `builtins` is what a target adds to the web's own table. `builtinsOf` merges
- * both with the language's and throws where a name is already taken, so a
- * target may add and may not replace — which is why this takes a table rather
- * than letting one be handed in whole.
+ * `builtins` is what a target adds to the web's own table, read after the
+ * language's names, so a target may add and may not replace — which is why this
+ * takes a table rather than letting one be handed in whole.
  */
 export function defineClient({
   builtins = {},
@@ -56,9 +55,8 @@ export function defineClient({
     ...dom,
     createElement: (tag) => elements[tag]?.() ?? dom.createElement(tag),
   };
-  // The table beside the renderer is this target's own: `builtinsOf` merges it
-  // with the language's and throws if a name here shadows one of those, so a
-  // bundle means the same thing wherever it is drawn.
+  // The table beside the renderer is this target's own, read after the
+  // language's names, so a bundle means the same thing wherever it is drawn.
   const allBuiltins = { ...webBuiltins, ...builtins };
   // Every bundle the document carried, drawn where its script stands.
   //

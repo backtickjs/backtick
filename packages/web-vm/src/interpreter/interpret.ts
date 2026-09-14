@@ -142,22 +142,6 @@ function handedOver(instance: Instance, name: string): ClientValue | undefined {
     : undefined;
 }
 
-/**
- * Refuses a target that names what the language already answers for.
- *
- * The language's names are read first, so such a name would never be reached —
- * but a target that thinks it redefined `state` is wrong about what its client
- * does, and finds out when its client is made rather than never. Adding is a
- * target's to do; replacing is not.
- */
-export function refuseCollisions(instance: Instance): void {
-  for (const name of Object.keys(instance.builtins)) {
-    if (compileBuiltin(instance, name) !== undefined) {
-      throw new Error(`the language already answers for \`${name}\``);
-    }
-  }
-}
-
 // A client function as this client applies one. `ClientFunction` says which
 // values are functions — its parameters are `never`, so that every function is
 // one — and not how to call one, so applying is this client's own knowledge.
@@ -379,9 +363,9 @@ function buildNode(
     // has one node for a name it carries, and where a name came from is not
     // something a bundle says.
     //
-    // Never the host's own objects, and never a name that replaced one of the
-    // language's: `refuseCollisions` refused that when the client was made. A
-    // curated list is what keeps every member meaning the same thing
+    // Never the host's own objects, and never a target's answer for a name the
+    // language answers: those are read first, so a target naming one is never
+    // reached. A curated list is what keeps every member meaning the same thing
     // everywhere, and a target may lengthen it but not edit it.
     case "bltn": {
       const name = node[1];

@@ -90,17 +90,14 @@ describe("a name a target answers for", () => {
   });
 
   it("may lengthen the language's list and never edit it", () => {
-    // Refused where the client is made, not at the first bundle to reach the
-    // name: a target quietly redefining `state` is one client answering a
-    // bundle differently from every other.
-    assert.throws(
-      () => evaluate(bundle, { builtins: { state: () => null } }),
-      /the language already answers for `state`/,
-    );
-    assert.throws(
-      () => evaluate(bundle, { builtins: { "Math.floor": () => 0 } }),
-      /the language already answers for `Math.floor`/,
-    );
+    // The language's names are read first, so a target naming one is never
+    // reached: redefining `Math.floor` would be one client answering a bundle
+    // differently from every other.
+    const floored = {
+      functions: {},
+      root: ["()", ["bltn", "Math.floor"], [2.7]],
+    } as unknown as Bundle<ClientUnknown>;
+    assert.equal(evaluate(floored, { builtins: { "Math.floor": () => 0 } }), 2);
   });
 
   it("may not add a member to a kind of value", () => {
