@@ -3,7 +3,7 @@ import * as compiler from "@backtickjs.com/compiler/bundle";
 import * as sandbox from "@backtickjs.com/sandbox/bundle";
 import { Home } from "./pages/Home.js";
 import { bundler } from "@backtickjs/bundler";
-import { embed } from "@backtickjs/html-embed";
+import type { BacktickElement } from "@backtickjs/core";
 
 const clientUrl = `/client-${client.sha256.slice(0, 16)}.js`;
 const compilerUrl = `/compiler-${compiler.sha256.slice(0, 16)}.js`;
@@ -19,7 +19,11 @@ const sandboxDocument = `<!doctype html>
   <body></body>
 </html>`;
 
-const template = `<!doctype html>
+// Runs an element here on the server. What comes back is a bundle: data, not
+// HTML, which the client draws in front of the script that carries it.
+async function toHtml(element: BacktickElement): Promise<string> {
+  const json = bundler.stringify(await bundler.run(element));
+  return `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -33,14 +37,14 @@ const template = `<!doctype html>
       data-sandbox="${sandboxUrl}">
     </script>
   </head>
-  <body></body>
+  <body>
+    <script type="application/json" data-backtick>${json}</script>
+  </body>
 </html>`;
+}
 
 export const routes: Readonly<Record<string, () => Promise<string>>> = {
-  "/": async () => {
-    const bundle = await bundler.run(<Home />);
-    return embed(template, "body", bundle);
-  },
+  "/": () => toHtml(<Home />),
 
   [clientUrl]: async () => client.source,
 

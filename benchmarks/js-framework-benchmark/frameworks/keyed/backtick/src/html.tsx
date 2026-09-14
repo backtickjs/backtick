@@ -1,9 +1,13 @@
 import type { Bundle } from "@backtickjs/bundler";
 import { bundler } from "@backtickjs/bundler";
-import { embed } from "@backtickjs/html-embed";
+import type { BacktickElement } from "@backtickjs/core";
 import { Main } from "./Main.js";
 
-const template = `<!doctype html>
+// Runs an element here on the server. What comes back is a bundle: data, not
+// HTML, which the client draws in front of the script that carries it.
+async function toHtml(element: BacktickElement): Promise<string> {
+  const json = bundler.stringify(await bundler.run(element));
+  return `<!doctype html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -12,11 +16,12 @@ const template = `<!doctype html>
     <script defer src="./client.js"></script>
   </head>
   <body>
-    <div id="main" class="container"></div>
+    <div id="main" class="container">
+      <script type="application/json" data-backtick>${json}</script>
+    </div>
   </body>
 </html>
 `;
+}
 
-const bundle = await bundler.run(<Main />);
-
-export const html = embed(template, "#main", bundle);
+export const html = await toHtml(<Main />);

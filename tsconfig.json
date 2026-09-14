@@ -10,7 +10,6 @@
     { "path": "packages/client-script" },
     { "path": "packages/compiler" },
     { "path": "packages/core" },
-    { "path": "packages/html-embed" },
     { "path": "packages/language-plugin" },
     { "path": "packages/language-server" },
     { "path": "packages/language-service" },

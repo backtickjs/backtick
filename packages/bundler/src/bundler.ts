@@ -33,11 +33,24 @@ export interface ExperimentalFeatures {
  *
  * A namespace rather than a bare function, so `bundle` stays a name a caller
  * can give what comes back. The bundle is plain data; serialize it with
- * `JSON.stringify`.
+ * {@link bundler.stringify}.
  */
 export const bundler = {
   async run<T extends ClientUnknown>(value: Spliceable<T>): Promise<Bundle<T>> {
     return await bundler.runWithExperimentalFeatures(value, {});
+  },
+
+  /**
+   * A bundle as JSON, safe to put inside a `<script>`.
+   *
+   *     `<script type="application/json" data-backtick>${bundler.stringify(bundle)}</script>`
+   *
+   * `JSON.stringify`, with every `<` written as `<`: a string holding
+   * `</script>` would otherwise end the element it rides in. JSON reads the
+   * escape back as `<`, so every client parses the same bundle.
+   */
+  stringify<T extends ClientUnknown>(bundle: Bundle<T>): string {
+    return JSON.stringify(bundle).replaceAll("<", "\\u003c");
   },
 
   /**
