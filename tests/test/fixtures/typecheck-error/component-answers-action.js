@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A component may answer with a script, but the answer stands where a drawing
 // would — so it is expanded in value position, and an action, which completes

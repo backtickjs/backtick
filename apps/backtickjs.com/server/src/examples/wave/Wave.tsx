@@ -1,5 +1,5 @@
 import { cs, For, state } from "@backtickjs/core";
-import { window } from "@backtickjs/web";
+import { window } from "@backtickjs/web-client";
 
 export default async function Wave() {
   return cs`{

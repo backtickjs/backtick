@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 // A list whose members carry storage of their own: `build` declares a cell per
 // row, and the cell the list reads holds those cells along with the rows. A

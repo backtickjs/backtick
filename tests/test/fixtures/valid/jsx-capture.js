@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A binding declared in an enclosing script and captured by a script inside a
 // spliced tree threads through the tree's slot signature: the outer body
@@ -9,7 +9,7 @@ const script = cs.create(
   {
     version: "0.0.0",
     filePath: "jsx-capture.tsx",
-    fileHash: "1wqi7pyvywaad",
+    fileHash: "1saq0k0s3hlgh",
     splices: {
       $0splice0: {
         value: _jsx("span", {
@@ -18,9 +18,9 @@ const script = cs.create(
             {
               version: "0.0.0",
               filePath: "jsx-capture.tsx",
-              fileHash: "1wqi7pyvywaad",
+              fileHash: "1saq0k0s3hlgh",
               splices: {},
-              captures: ["x$1wqi7pyvywaad$0"],
+              captures: ["x$1saq0k0s3hlgh$0"],
             },
             () => ({
               kind: "=>",
@@ -30,12 +30,12 @@ const script = cs.create(
                 kind: "id",
                 loc: [11, 37, 11, 38],
                 text: "x",
-                bindingKey: "x$1wqi7pyvywaad$0",
+                bindingKey: "x$1saq0k0s3hlgh$0",
               },
             }),
           ),
         }),
-        params: ["x$1wqi7pyvywaad$0"],
+        params: ["x$1saq0k0s3hlgh$0"],
       },
     },
     captures: [],
@@ -55,7 +55,7 @@ const script = cs.create(
             kind: "id",
             loc: [10, 9, 10, 10],
             text: "x",
-            bindingKey: "x$1wqi7pyvywaad$0",
+            bindingKey: "x$1saq0k0s3hlgh$0",
           },
           initializer: {
             kind: "number",

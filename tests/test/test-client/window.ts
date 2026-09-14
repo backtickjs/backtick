@@ -4,7 +4,7 @@ import type { ClientValue } from "@backtickjs/core";
 //
 // The language answers for no clock — a timer is the target's, and a script
 // reaches one by splicing the window — so a fixture that waits needs a target
-// to hand it one. `packages/web-client/src/builtins.ts` is the real target's,
+// to hand it one. `packages/web-vm/src/builtins.ts` is the real target's,
 // and carries the reasoning; what is here is the part a fixture uses.
 //
 // Ids are this table's rather than the host's, which is what the web client

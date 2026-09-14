@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 // A component's props are the host's own. It runs while bundling and consumes
 // them there, so they never cross and need not be able to: a class instance and
 // a host function are both fine here, where either would be refused in a

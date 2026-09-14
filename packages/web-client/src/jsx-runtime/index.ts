@@ -1,6 +1,6 @@
 import type { JsxElementType } from "@backtickjs/ui";
 import { createFragment, createJsxElement } from "@backtickjs/ui";
-import type { Elements as Web } from "@backtickjs/web";
+import type { Elements as Web } from "@backtickjs/web-client";
 import type { BacktickElement } from "@backtickjs/ui";
 
 // What the JSX transform reaches for, and what TypeScript reads a tag through.

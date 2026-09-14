@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // A cell a script declares, read and written by what it draws. The script owns
 // the storage, so the display and the handler are two readers of one binding

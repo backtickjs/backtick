@@ -1,5 +1,5 @@
 {
-  "package": "@backtickjs/web",
+  "package": "@backtickjs/web-client",
   "namespace": "Web",
   "extends": [],
   "types": {

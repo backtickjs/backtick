@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 // A keyed list driven by a cell. Every write hands back a new array of new
 // rows, so nothing about the list is the object it was — the keys are the only

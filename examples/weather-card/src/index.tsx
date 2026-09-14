@@ -1,6 +1,6 @@
 import { bundler } from "@backtickjs/bundler";
 import type { BacktickElement } from "@backtickjs/core";
-import * as client from "@backtickjs/web-client/bundle";
+import * as client from "@backtickjs/web-vm/bundle";
 import { WeatherCard } from "./WeatherCard.js";
 
 // The client is asked for at a name that says what it holds, so a rebuilt client

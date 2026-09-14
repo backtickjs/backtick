@@ -1,6 +1,6 @@
 import { For, cs, state } from "@backtickjs/core";
 import type { Prop } from "@backtickjs/core";
-import { window } from "@backtickjs/web";
+import { window } from "@backtickjs/web-client";
 
 // The same claim as `backtick-builds-once`, with no bundle in it.
 //

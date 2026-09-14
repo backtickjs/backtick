@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { schema } from "@backtickjs/web/schema";
+import { schema } from "@backtickjs/web-client/schema";
 
 // A window for a suite that runs under Node. This client reaches the page's
 // window by name — `window.setTimeout`, not `globalThis.setTimeout` — because

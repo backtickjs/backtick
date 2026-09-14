@@ -17,7 +17,7 @@
     { "path": "packages/tsc" },
     { "path": "packages/tspatch-plugin" },
     { "path": "packages/typescript-plugin" },
-    { "path": "packages/web" },
+    { "path": "packages/web-client" },
     { "path": "apps/vscode-extension" },
     { "path": "tests" }
   ]

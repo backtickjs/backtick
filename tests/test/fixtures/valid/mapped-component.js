@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, For } from "@backtickjs/core";
 // One element template, expanded once per row on the client: the splice hole
 // sits inside a `.map` callback, so it is reached once per iteration and each

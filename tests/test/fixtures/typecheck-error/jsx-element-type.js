@@ -1,9 +1,9 @@
 import {
   jsx as _jsx,
   Fragment as _Fragment,
-} from "@backtickjs/web/jsx-runtime";
+} from "@backtickjs/web-client/jsx-runtime";
 import { For } from "@backtickjs/core";
-import { Fragment } from "@backtickjs/web";
+import { Fragment } from "@backtickjs/web-client";
 // What the JSX namespace admits, and what it refuses.
 //
 // `JSX.ElementType` is `JsxElementType`, which admits any `string`. What

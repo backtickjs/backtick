@@ -8,7 +8,7 @@
     "outDir": "dist",
     "sourceMap": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/web",
+    "jsxImportSource": "@backtickjs/web-client",
     "types": ["node"],
     "plugins": [
       // Build with `tspc`, not `tsc`.

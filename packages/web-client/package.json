@@ -9,27 +9,34 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./bundle": {
-      "types": "./dist/bundle.d.ts",
-      "default": "./dist/bundle.js"
+    "./schema": {
+      "types": "./dist/schema.d.ts",
+      "default": "./dist/schema.js"
+    },
+    "./jsx-runtime": {
+      "types": "./dist/jsx-runtime/index.d.ts",
+      "default": "./dist/jsx-runtime/index.js"
+    },
+    "./jsx-dev-runtime": {
+      "types": "./dist/jsx-dev-runtime/index.d.ts",
+      "default": "./dist/jsx-dev-runtime/index.js"
     }
   },
   "scripts": {
-    "build": "tsc -b && node scripts/build.mjs",
-    "test": "node --test \"test/**/*.test.ts\"",
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "generate": "backtick-generate src/schema.ts",
     "format": "prettier --write --ignore-unknown .",
     "format:check": "prettier --check --ignore-unknown .",
     "clean": "rm -rf node_modules dist .turbo"
   },
-  "dependencies": {
-    "@backtickjs/js-interpreter": "workspace:*"
-  },
   "devDependencies": {
-    "@backtickjs/bundler": "workspace:*",
-    "@backtickjs/core": "workspace:*",
-    "@backtickjs/web": "workspace:*",
-    "esbuild": "0.28.0",
     "prettier": "^3.6.2",
     "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@backtickjs/language": "workspace:*",
+    "@backtickjs/schema": "workspace:*",
+    "@backtickjs/ui": "workspace:*"
   }
 }

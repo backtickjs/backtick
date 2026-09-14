@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A fragment a script writes: its children where it stands, and no node of its
 // own — the same `Fragment` element the tree path writes for `<>`.

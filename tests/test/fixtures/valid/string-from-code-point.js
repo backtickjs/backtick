@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs } from "@backtickjs/core";
 // A namespace static taking a rest parameter, so the whole of the call crosses
 // as one name and a list of arguments — `String` is the front of the name and

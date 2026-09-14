@@ -15,7 +15,12 @@ export async function transpileFixture(
   // The options live in the compiler, so what the bundle suite executes is what
   // a playground example compiles to rather than merely what it looks like.
   // Which target, though, is this suite's: the fixtures draw with the web one.
-  const outputText = transpile(ts, fileName, sourceText, "@backtickjs/web");
+  const outputText = transpile(
+    ts,
+    fileName,
+    sourceText,
+    "@backtickjs/web-client",
+  );
   // Every script's metadata carries the toolchain version, which would rewrite
   // all of these snapshots on each release. Pinned to one value so a version
   // bump doesn't bury the diff that release actually made. Matched on a semver

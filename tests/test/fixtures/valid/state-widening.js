@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // What a cell holds is the initial widened, so a second value of the same kind
 // goes in after it. Each write is the assertion — every one is an error the

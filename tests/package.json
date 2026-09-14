@@ -21,7 +21,7 @@
     "@backtickjs/language": "workspace:*",
     "@backtickjs/prettier-plugin": "workspace:*",
     "@backtickjs/tsc": "workspace:*",
-    "@backtickjs/web": "workspace:*",
+    "@backtickjs/web-client": "workspace:*",
     "prettier": "^3.6.2",
     "solid-js": "^1.9.14",
     "typescript": "^6.0.3"

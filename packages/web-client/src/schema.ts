@@ -6,7 +6,7 @@ import type { Schema } from "@backtickjs/schema";
 // from this and is not written by hand — run `pnpm generate`.
 
 export const schema: Schema = {
-  package: "@backtickjs/web",
+  package: "@backtickjs/web-client",
 
   namespace: "Web",
 

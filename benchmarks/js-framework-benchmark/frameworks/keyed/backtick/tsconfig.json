@@ -8,7 +8,7 @@
     "outDir": "dist",
     "sourceMap": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "@backtickjs/web",
+    "jsxImportSource": "@backtickjs/web-client",
     "plugins": [
       { "transform": "@backtickjs/tspatch-plugin" }
     ]

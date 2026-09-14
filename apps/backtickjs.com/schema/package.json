@@ -34,7 +34,7 @@
     "@backtickjs/language": "workspace:*",
     "@backtickjs/schema": "workspace:*",
     "@backtickjs/ui": "workspace:*",
-    "@backtickjs/web": "workspace:*"
+    "@backtickjs/web-client": "workspace:*"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

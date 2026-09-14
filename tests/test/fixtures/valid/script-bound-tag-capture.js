@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, For, state } from "@backtickjs/core";
 // A tag naming a function an enclosing script holds. The nested script captures
 // it the way it captures any binding, and calls it as a component: once, with

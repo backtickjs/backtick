@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { bundler } from "@backtickjs/bundler";
 import { cs, vm } from "@backtickjs/core";
 // Built rather than written out: what a bundle looks like is the bundler's, and

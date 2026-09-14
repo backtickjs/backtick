@@ -19,7 +19,7 @@
     "@backtickjs/bundler": "workspace:*",
     "@backtickjs/core": "workspace:*",
     "@backtickjs/js-interpreter": "workspace:*",
-    "@backtickjs/web": "workspace:*",
+    "@backtickjs/web-client": "workspace:*",
     "typescript": "^6.0.3"
   }
 }

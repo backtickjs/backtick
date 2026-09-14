@@ -1,5 +1,5 @@
 import { writeFile } from "node:fs/promises";
-import * as client from "@backtickjs/web-client/bundle";
+import * as client from "@backtickjs/web-vm/bundle";
 import { html } from "./dist/html.js";
 
 const dist = new URL("./dist/", import.meta.url);

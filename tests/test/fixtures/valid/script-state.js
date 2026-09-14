@@ -1,4 +1,4 @@
-import { jsx as _jsx } from "@backtickjs/web/jsx-runtime";
+import { jsx as _jsx } from "@backtickjs/web-client/jsx-runtime";
 import { cs, state } from "@backtickjs/core";
 // Storage a script declares for itself, rather than one a component owns and
 // splices in. `$state(...)` is an ordinary call of an imported value, and the

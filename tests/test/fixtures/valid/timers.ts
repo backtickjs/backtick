@@ -1,5 +1,5 @@
 import { cs } from "@backtickjs/core";
-import { window } from "@backtickjs/web";
+import { window } from "@backtickjs/web-client";
 
 // A clock, which is the target's rather than the language's: a script reaches
 // one by splicing the window, the same as anything else a target hands over.
