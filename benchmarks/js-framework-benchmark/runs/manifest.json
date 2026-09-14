@@ -540,6 +540,14 @@
       "keyed": true,
       "dir": "759871d0",
       "file": "backtick-v0.1.0-keyed"
+    },
+    {
+      "commit": "3ca45e6d",
+      "label": "builtins as a switch",
+      "date": "2026-09-14",
+      "keyed": true,
+      "dir": "3ca45e6d",
+      "file": "backtick-v0.1.0-keyed"
     }
   ]
 }
