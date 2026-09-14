@@ -1,0 +1,1 @@
+{"framework":"backtick-v0.1.0-keyed","keyed":true,"benchmark":"25_run-clear-memory","type":"memory","values":{"DEFAULT":{"min":1.2701082229614258,"max":1.2701082229614258,"median":1.2701082229614258,"mean":1.2701082229614258,"stddev":null,"values":[1.2701082229614258]}}}
